@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <!-- need to define the normalization or lack thereof in keys especially in regard to whitespace -->
+  <!-- ==================================================== date or dateTime -->
+  <xs:simpleType name="date.or.dateTime">
+    <xs:union memberTypes="xs:date xs:dateTime"/>
+  </xs:simpleType>
+  <!-- ============================================================== refid -->
+  <xs:attributeGroup name="refid">
+    <xs:attribute name="ref" use="required"/>
+  </xs:attributeGroup>
+  <!-- ======================================================== form-content -->
+  <xs:complexType name="form-content">
+    <xs:complexContent>
+      <xs:extension base="form-no-lang-content">
+        <xs:attribute name="lang" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="form-no-lang-content">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element ref="text"/>
+      <xs:element ref="annotation"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:element name="text" type="span-content"/>
+  <xs:element name="annotation" type="annotation-content"/>
+  <!-- ======================================================== span-content -->
+  <xs:complexType name="span-content" mixed="true">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="span"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="span" type="inner-span-content"/>
+  <!-- ================================================== inner-span-content -->
+  <xs:complexType name="inner-span-content">
+    <xs:complexContent>
+      <xs:extension base="span-content">
+        <xs:attribute name="lang"/>
+        <xs:attribute name="href" type="xs:anyURI"/>
+        <xs:attribute name="class"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- =================================================== multitext-content -->
+  <xs:group name="multitext-content">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="form"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:element name="form" type="form-content"/>
+  <!-- ====================================================== URLRef-content -->
+  <xs:complexType name="URLRef-content">
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="label"/>
+    </xs:sequence>
+    <xs:attribute name="href" use="required" type="xs:anyURI"/>
+  </xs:complexType>
+  <xs:element name="label">
+    <xs:complexType>
+      <xs:group ref="multitext-content"/>
+    </xs:complexType>
+  </xs:element>
+  <!-- ======================================================= field-content -->
+  <xs:complexType name="field-content">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:group ref="multitext-content"/>
+      <xs:group ref="extensible-without-field-content"/>
+    </xs:choice>
+    <xs:attributeGroup ref="extensible-without-field-content"/>
+    <xs:attribute name="type" use="required"/>
+  </xs:complexType>
+  <!-- ========================================================= trait-content -->
+  <xs:complexType name="trait-content">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="annotation"/>
+    </xs:sequence>
+    <xs:attribute name="name" use="required"/>
+    <xs:attribute name="value" use="required"/>
+  </xs:complexType>
+  <!-- ================================================== annotation-content -->
+  <xs:complexType name="annotation-content">
+    <xs:group ref="multitext-content"/>
+    <xs:attribute name="name" use="required"/>
+    <xs:attribute name="value"/>
+    <xs:attribute name="who"/>
+    <xs:attribute name="when" type="date.or.dateTime"/>
+  </xs:complexType>
+  <!-- ===================================== extensible-without-field-content -->
+  <xs:group name="extensible-without-field-content">
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="annotation"/>
+        <xs:element ref="trait"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:group>
+  <xs:element name="trait" type="trait-content"/>
+  <xs:attributeGroup name="extensible-without-field-content">
+    <xs:attribute name="dateCreated" type="date.or.dateTime"/>
+    <xs:attribute name="dateModified" type="date.or.dateTime"/>
+  </xs:attributeGroup>
+  <!-- ================================================== extensible-content -->
+  <xs:group name="extensible-content">
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="extensible-without-field-content"/>
+        <xs:element name="field" type="field-content"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:group>
+  <xs:attributeGroup name="extensible-content">
+    <xs:attributeGroup ref="extensible-without-field-content"/>
+  </xs:attributeGroup>
+  <!-- ======================================================== note-content -->
+  <xs:complexType name="note-content">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:group ref="multitext-content"/>
+      <xs:group ref="extensible-content"/>
+    </xs:choice>
+    <xs:attribute name="type"/>
+    <xs:attributeGroup ref="extensible-content"/>
+  </xs:complexType>
+  <!-- =============================================== pronunciation-content -->
+  <xs:complexType name="pronunciation-content">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:group ref="multitext-content"/>
+      <xs:group ref="extensible-content"/>
+      <xs:element ref="media"/>
+    </xs:choice>
+    <xs:attributeGroup ref="extensible-content"/>
+  </xs:complexType>
+  <xs:element name="media" type="URLRef-content"/>
+  <!-- =================================================== etymology-content -->
+  <xs:complexType name="etymology-content">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:group ref="extensible-content"/>
+      <xs:element ref="form"/>
+      <xs:element ref="gloss"/>
+    </xs:choice>
+    <xs:attribute name="type" use="required"/>
+    <xs:attribute name="source" use="required"/>
+    <xs:attributeGroup ref="extensible-content"/>
+  </xs:complexType>
+  <xs:element name="gloss" type="form-content"/>
+  <!-- ============================================ grammatical-info-content -->
+  <xs:complexType name="grammatical-info-content">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="trait"/>
+    </xs:sequence>
+    <xs:attribute name="value" use="required"/>
+  </xs:complexType>
+  <!-- ==================================================== reversal-content -->
+  <xs:complexType name="reversal-content">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:group ref="multitext-content"/>
+      <xs:element ref="main"/>
+      <xs:element ref="grammatical-info"/>
+    </xs:choice>
+    <xs:attribute name="type"/>
+  </xs:complexType>
+  <xs:element name="grammatical-info" type="grammatical-info-content"/>
+  <!-- ======================================================= reversal-main -->
+  <xs:element name="main">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="multitext-content"/>
+        <xs:element ref="main"/>
+        <xs:element ref="grammatical-info"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <!-- ================================================= translation-content -->
+  <xs:complexType name="translation-content">
+    <xs:group ref="multitext-content"/>
+    <xs:attribute name="type"/>
+  </xs:complexType>
+  <!-- ===================================================== example-content -->
+  <xs:complexType name="example-content">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:group ref="multitext-content"/>
+      <xs:group ref="extensible-content"/>
+      <xs:element ref="translation"/>
+      <xs:element ref="note"/>
+    </xs:choice>
+    <xs:attribute name="source"/>
+    <xs:attributeGroup ref="extensible-content"/>
+  </xs:complexType>
+  <xs:element name="translation" type="translation-content"/>
+  <xs:element name="note" type="note-content"/>
+  <!-- ==================================================== relation-content -->
+  <xs:complexType name="relation-content">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:group ref="extensible-content"/>
+      <xs:element ref="usage"/>
+    </xs:choice>
+    <xs:attribute name="type" use="required"/>
+    <xs:attributeGroup ref="refid"/>
+    <xs:attribute name="order" type="xs:integer"/>
+    <xs:attributeGroup ref="extensible-content"/>
+  </xs:complexType>
+  <xs:element name="usage">
+    <xs:complexType>
+      <xs:group ref="multitext-content"/>
+    </xs:complexType>
+  </xs:element>
+  <!-- ===================================================== variant-content -->
+  <xs:complexType name="variant-content">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:group ref="extensible-content"/>
+      <xs:group ref="multitext-content"/>
+      <xs:element ref="pronunciation"/>
+      <xs:element ref="relation"/>
+    </xs:choice>
+    <xs:attribute name="ref"/>
+    <xs:attributeGroup ref="extensible-content"/>
+  </xs:complexType>
+  <xs:element name="pronunciation" type="pronunciation-content"/>
+  <xs:element name="relation" type="relation-content"/>
+  <!-- ======================================================= sense-content -->
+  <xs:complexType name="sense-content">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:group ref="extensible-content"/>
+      <xs:element ref="grammatical-info"/>
+      <xs:element ref="gloss"/>
+      <xs:element ref="definition"/>
+      <xs:element ref="relation"/>
+      <xs:element ref="note"/>
+      <xs:element ref="example"/>
+      <xs:element ref="reversal"/>
+      <xs:element ref="illustration"/>
+      <xs:element ref="subsense"/>
+    </xs:choice>
+    <xs:attribute name="id"/>
+    <xs:attribute name="order" type="xs:integer"/>
+    <xs:attributeGroup ref="extensible-content"/>
+  </xs:complexType>
+  <xs:element name="definition">
+    <xs:complexType>
+      <xs:group ref="multitext-content"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="example" type="example-content"/>
+  <xs:element name="reversal" type="reversal-content"/>
+  <xs:element name="illustration" type="URLRef-content"/>
+  <xs:element name="subsense" type="sense-content"/>
+  <!-- ======================================================= entry-content -->
+  <xs:complexType name="entry-content">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:group ref="extensible-content"/>
+      <xs:element ref="lexical-unit"/>
+      <xs:element ref="citation"/>
+      <xs:element ref="pronunciation"/>
+      <xs:element ref="variant"/>
+      <xs:element ref="sense"/>
+      <xs:element ref="note"/>
+      <xs:element ref="relation"/>
+      <xs:element ref="etymology"/>
+    </xs:choice>
+    <xs:attribute name="id"/>
+    <xs:attribute name="guid"/>
+    <xs:attribute name="order" type="xs:integer"/>
+    <xs:attribute name="dateDeleted" type="date.or.dateTime"/>
+    <xs:attributeGroup ref="extensible-content"/>
+  </xs:complexType>
+  <xs:element name="lexical-unit">
+    <xs:complexType>
+      <xs:group ref="multitext-content"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="citation">
+    <xs:complexType>
+      <xs:group ref="multitext-content"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="variant" type="variant-content"/>
+  <xs:element name="sense" type="sense-content"/>
+  <xs:element name="etymology" type="etymology-content"/>
+  <!-- ================================================== field-defn-content -->
+  <xs:complexType name="field-defn-content">
+    <xs:group ref="multitext-content"/>
+    <xs:attribute name="tag" use="required"/>
+  </xs:complexType>
+  <!-- ================================================= field-defns-content -->
+  <xs:complexType name="field-defns-content">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="field" type="field-defn-content"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- =================================================== range-element-content -->
+  <xs:complexType name="range-element-content">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element ref="description"/>
+      <xs:element ref="label"/>
+      <xs:element ref="abbrev"/>
+    </xs:choice>
+    <xs:attribute name="id" use="required"/>
+    <xs:attribute name="parent"/>
+    <xs:attribute name="guid"/>
+  </xs:complexType>
+  <xs:element name="description">
+    <xs:complexType>
+      <xs:group ref="multitext-content"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="abbrev">
+    <xs:complexType>
+      <xs:group ref="multitext-content"/>
+    </xs:complexType>
+  </xs:element>
+  <!-- =================================================== range-content -->
+  <xs:complexType name="range-content">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element ref="description"/>
+      <xs:element ref="label"/>
+      <xs:element ref="abbrev"/>
+      <xs:element ref="range-element"/>
+    </xs:choice>
+    <xs:attribute name="id" use="required"/>
+    <xs:attribute name="href" type="xs:anyURI"/>
+    <xs:attribute name="guid"/>
+  </xs:complexType>
+  <xs:element name="range-element" type="range-element-content"/>
+  <!-- ====================================================== ranges-content -->
+  <xs:complexType name="ranges-content">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="range"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="range" type="range-content"/>
+  <!-- ====================================================== header-content -->
+  <xs:complexType name="header-content">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element ref="description"/>
+      <xs:element ref="ranges"/>
+      <xs:element ref="fields"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:element name="ranges" type="ranges-content"/>
+  <xs:element name="fields" type="field-defns-content"/>
+  <!-- ======================================================== lift-content -->
+  <xs:complexType name="lift-content">
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="header"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="entry"/>
+    </xs:sequence>
+    <xs:attribute name="version" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="0.13"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="producer"/>
+  </xs:complexType>
+  <xs:element name="header" type="header-content"/>
+  <xs:element name="entry" type="entry-content"/>
+  <!-- ================================== start ============================ -->
+  <xs:element name="lift" type="lift-content"/>
+</xs:schema>

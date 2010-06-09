@@ -1,0 +1,25 @@
+.letData {
+    column-count: 1;
+    column-gap: 12pt;
+    column-fill: auto;
+    column-rule: solid 1pt #aa0000;
+}
+.entry1 {
+    font-family: Arial;
+    font-size: 40pt;		
+
+    text-align: left;
+letter-spacing:55pt;
+word-spacing:55pt;
+ border: solid 1pt #00aa00;
+}
+.entry2 {
+    font-family: Arial;
+    font-size: 60pt;		
+	
+    text-align: left;
+letter-spacing:40pt;
+word-spacing:40pt;
+
+}
+

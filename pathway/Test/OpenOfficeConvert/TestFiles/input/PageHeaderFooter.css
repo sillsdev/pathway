@@ -1,0 +1,79 @@
+.entry
+{
+   page-break-before: always;
+}
+
+
+
+
+
+@page  {
+	margin: .5in .5in .5in .5in;
+	background-color:#ff0000;
+	size: 7in 10in;
+	border: solid .25in #0000ff;
+
+
+@bottom-left { 
+ content: 'all top left';
+font-size: 20pt;
+ font-family: "Times new roman";
+        font-weight: bold;
+color: RED;
+ }
+
+    @bottom-center { 
+background-color:#0000ff;
+font-size: 20pt;
+ font-family: Arial;
+        font-weight: bold;
+color: GREEN;
+
+ }
+
+    @top-right { 
+ content: 'all top Right';
+font-size: 10pt;
+ font-family: Georgia;
+        font-weight: bold;
+color: ORANGE;
+ }
+}
+
+@page:first  
+{
+	margin: .5in .5in .5in .5in;
+	background-color:#00ff00;
+	size: 7in 10in;
+	border: solid .25in #ff0000;
+
+
+@top-left { 
+ content: 'first bottom Left';
+font-size: 10pt;
+ font-family: "Times new roman";
+        font-weight: bold;
+color: GREEN;
+ }
+
+    @top-center { 
+background-color:#00ff00;
+font-size: 20pt;
+ font-family: Arial;
+        font-weight: bold;
+color: RED;
+
+ }
+
+    @bottom-right { 
+ content: 'first bottom Right';
+font-size: 10pt;
+ font-family: Georgia;
+        font-weight: bold;
+color: GREEN;
+ }
+}
+
+
+
+

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../ScriptPaths.xsl"?>
+
+  <!-- DE - Create a new DictionaryExpress project -->
+<accil on-fail="assert">
+
+   <bug id="TBD" desc="TBD"/>
+
+   <!--sound frequency="400" duration="500"/-->
+
+   <on-application run="ok" title="Publishing Solutions 1.0">
+
+      <include from="testPath.xml"/>
+
+      <!-- Open a Dictionary file and verify that the dialog indicates dictionary -->
+      <click select="toolbar/new"/>
+
+      <on-dialog name="NewProject" title="New Project" path="9:NewProject/">
+         <click path="9:txtXHTML/42:txtXHTML"/>
+         <insert>$testPath;\Input\Buang\main.xhtml</insert>
+         <insert>{tab}Buang</insert>
+         <insert>{tab}$testPath;\Output%o</insert>
+      </on-dialog>
+
+      <var id="formName" set="Converter"/>
+      <var id="labelName" set="lblProjectType"/>
+      <var id="titleValue" set="rexp#Dictionary\d"/>
+      <model select="new-project[@role='view']" log="all">
+         <glimpse id="NewIt3" select="titlename" expect="$titleValue" on-fail="assert"/>
+         <glimpse id="NewIt4" select="titletype" expect="$titleValue" on-fail="assert"/>
+      </model>
+
+      <click select="menubar/format/publication-task"/>
+      <on-dialog name="StylePick" title="Choose Publication Task" path="9:PublicationTask/">
+         <click path="9:CbTask/46:CbTask/9:CbTask/42:CbTask"/>
+         <insert>{up 4}{down}{enter}</insert>
+      </on-dialog>
+
+      <click select="menubar/file/export"/>
+      <on-dialog wait="1000" title="Export" name="ExportDlg" path="9:ExportDlg/">
+         <click name="cmbExportType" path="9:cmbExportType/41:cmbExportType"/>
+         <insert>o{enter 2}</insert>
+         <!--  Choose Open Office -->
+      </on-dialog>
+
+      <on-dialog wait="1000" title="PublishingSolution" name="PublishingSolution"
+         path="9:PublishingSolution/">
+         <insert>{enter}</insert>
+      </on-dialog>
+
+      <on-dialog id="OOstable" wait="1100" title="OpenOffice.org - Security Warning"
+         path="9:OpenOffice.org - Security Warning/" on-fail="skip">
+         <insert>%e</insert>
+         <!--  Enable macros  -->
+      </on-dialog>
+      <if>
+         <condition of="$OOstable.found" is="False"/>
+         <then>
+            <on-dialog title="OOo-dev - Security Warning" path="9:OOo-dev - Security Warning/">
+               <insert>%e</insert>
+               <!--  Enable macros  -->
+            </on-dialog>
+         </then>
+      </if>
+
+      <on-dialog wait="1000" title="Guide Word Reminder" name="Guide Word Reminder"
+         path="9:Guide Word Reminder/">
+         <insert>{enter}</insert>
+         <!--  Acknowledge informational message -->
+      </on-dialog>
+
+      <insert>%h{right}{enter 2}</insert>
+      <!--  start macro to update page header -->
+
+      <if>
+         <condition of="$OOstable.found" is="False"/>
+         <then>
+            <insert wait="12000">^s</insert>
+            <!-- save -->
+         </then>
+         <else>
+            <insert wait="5000">^s</insert>
+            <!-- save -->
+         </else>
+      </if>
+
+      <insert wait="5000">^q</insert>
+      <!-- quit -->
+
+      <!-- Close the Dictionary file. -->
+      <click select="menubar/file/exit"/>
+
+   </on-application>
+
+   <!--sound frequency="400" duration="500"/-->
+
+</accil>

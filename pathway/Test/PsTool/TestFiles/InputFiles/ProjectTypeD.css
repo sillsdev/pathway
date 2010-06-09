@@ -1,0 +1,14 @@
+﻿.entry {
+       padding-bottom: 2pt;
+       padding-top: 1pt;
+       padding-left: 0pt;
+       margin-left: 1pc;
+       text-indent: -1pc;
+}
+.example {
+       font-weight: bold;
+}
+.headword {
+       font-weight: bold;
+       string-set: guideword content();
+}

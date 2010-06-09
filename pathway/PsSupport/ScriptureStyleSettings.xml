@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="3">
+    <settings>
+        <property name="InputPath" value="%(AppData)s/SIL/Pathway"/>
+        <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Scripture"/>
+        <property name="UserSheetPath" value="%(AppData)s/SIL/Pathway/Scripture"/>
+        <property name="PublicationLocation"
+            value="$(Documents)s/$(Base)s/$(CurrentProject)s/Scripture/$(StyleSheet)s_$(DateTime)s"/>
+        <property name="MasterSheetPath" value="Styles/Scripture"/>
+        <property name="IconPath" value="Icons"/>
+        <property name="SamplePath" value="Samples/Scripture"/>
+        <property name="BaseStyles" value="Scripture.css"/>
+        <property name="DefaultIcon" value="Graphic/book.png"/>
+        <property name="CurrentInput" value="Samples/Scripture/Bughotu-1pe.xhtml"/>
+        <property name="InputType" value="Scripture"/>
+        <property name="LastTask" value="Quick print"/>
+        <property name="PreviewType" value="Prince"/>
+        <property name="CssEditor" value="C:/Windows/Notepad.exe"/>
+        <property name="SelectedIcon" value="Graphic/arrow.png"/>
+        <property name="MissingIcon" value="Graphic/missing.png"/>
+        <property name="Help" value="PsDoc.chm"/>
+        <property name="PrintVia" value="OpenOffice"/>
+        <property name="LayoutSelected" value="GPS12L10"/>
+        <property name="ExtraProcessing" value="True"/>
+        <property name="Media" value="paper"/>
+    </settings>
+    <defaultSettings>
+        <property name="PrintVia" value="OpenOffice"/>
+        <property name="LayoutSelected" value="GPS12L10"/>
+        <property name="ExtraProcessing" value="True"/>
+        <property name="PublicationLocation" value="$(Documents)s/$(Base)s/$(CurrentProject)s/Scripture/$(StyleSheet)s_$(DateTime)s" />
+        <property name="Media" value="paper" />
+    </defaultSettings>
+    <features>
+        <!--feature name="Booklet">
+            <option name="Yes" file=""/>
+            <option name="No" file=""/>
+        </feature-->
+        <feature name="Justified">
+            <option name="Yes" file="Justified_Yes.css"/>
+            <option name="No" file="Justified_No.css"/>
+        </feature>
+    <feature name="VerticalJustify">
+      <option name="Top" file="VerticalJustify_Top.css" />
+      <option name="Center" file="VerticalJustify_Center.css" />
+      <option name="Bottom" file="VerticalJustify_Bottom.css" />
+    </feature>
+        <feature name="Page Size">
+            <option name="A4" file="Page_size_A4.css"/>
+            <option name="A5" file="Page_size_A5.css"/>
+            <option name="C5" file="Page_size_C5.css"/>
+            <option name="A6" file="Page_size_A6.css"/>
+            <option name="Letter" file="Page_size_Letter.css"/>
+            <option name="Half letter" file="Page_size_Half_Letter.css"/>
+            <option name="6in x 9in" file="Page_size_6inx9in.css"/>
+            <option name="5.25in x 8.25in" file="Page_size_GPS1.css"/>
+            <option name="5.8in x 8.7in" file="Page_size_GPS2.css"/>
+        </feature>
+        <feature name="Columns">
+            <option name="1" file="Columns_1.css" icon="column1.png"/>
+            <option name="2" file="Columns_2.css" icon="column2b.png"/>
+        </feature>
+        <feature name="Font">
+            <option name="Charis SIL" file="base_font_charis.css"/>
+            <option name="Doulos SIL" file="base_font_doulos.css"/>
+            <option name="Sophia SIL" file="base_font_sophia.css"/>
+            <option name="Charis SIL Compact" file="base_font_charis_compact.css"/>
+            <option name="No Change" file="base_font_nc.css"/>
+        </feature>
+        <feature name="Font Size">
+            <option name="9" file="font_size_9_11.css"/>
+            <option name="10" file="font_size_10_12.css"/>
+            <option name="11" file="font_size_11_13.css"/>
+            <option name="No Change" file="font_size_nc.css"/>
+        </feature>
+        <feature name="Font Size / Leading">
+            <option name="9 / 11" file="font_size_9_11.css"/>
+            <option name="10 / 12" file="font_size_10_12.css"/>
+            <option name="11 / 13" file="font_size_11_13.css"/>
+            <option name="No Change" file="font_size_nc.css"/>
+        </feature>
+        <feature name="Leading">
+            <option name="11" file="Leading_11.css"/>
+            <option name="12" file="Leading_12.css"/>
+            <option name="13" file="Leading_13.css"/>
+            <option name="24" file="Leading_24.css"/>
+            <option name="26" file="Leading_26.css"/>
+            <option name="No Change" file="Leading_nc.css"/>
+        </feature>
+        <!-- feature name="Footnotes / Cross References">
+            <option name="Bottom of page" file=""/>
+            <option name="End of book" file=""/>
+        </feature -->
+        <feature name="Pictures">
+            <option name="Yes" file="Pictures_Yes.css"/>
+            <option name="No" file="Pictures_No.css"/>
+        </feature>
+        <feature name="Running Head">
+            <option name="Genesis 1:1" file="Running_Head_Mirrored_Verse.css"/>  
+            <option name="Genesis 1:1-2:1" file="Running_Head_Paged_Verse.css"/> 
+            <option name="Genesis 1" file="Running_Head_Mirrored_Chapter.css"/>  
+            <option name="Genesis 1-2" file="Running_Head_Paged_Chapter.css"/>
+        </feature>
+ 	<feature name="Rules">
+            <option name="Yes" file="Rules_Yes.css"/>
+            <option name="No" file="Rules_No.css"/>
+        </feature>
+<feature name="FileProduced">
+      <option name="One" file="Rules_Yes.css" />
+      <option name="OneperBook" file="Rules_Yes.css" />
+    </feature>
+    <feature name="RedLetter">
+      <option name="Yes" file="Rules_Yes.css" />
+      <option name="No" file="Rules_Yes.css" />
+    </feature>
+    </features>
+    <categories>
+        <category name="Publisher" select="Wycliffe">
+            <item name="Wycliffe"/>
+            <item name="UBS"/>
+        </category>
+        <category name="Media" select="Paper">
+            <item name="Paper"/>
+            <item name="Mobile"/>
+            <item name="Web"/>
+            <item name="Others"/>
+        </category>
+        <category name="Location" select="Cameroon">
+            <item name="Cameroon"/>
+            <item name="Africa"/>
+            <item name="Indonesia"/>
+            <item name="Philippines"/>
+        </category>
+    </categories>
+    <styles>
+        <paper>
+            <style name="GPS11J11" file="GPS11J11.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 1 Col - Justified - Charis 11 on 13 p2.jpg">
+                <description>5.25x8.25in - 1 Col - Justified - Charis 11 on 13</description>
+            </style>
+            <style name="GPS11L11" file="GPS11L11.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p2.jpg" >
+                <description>5.25x8.25in - 1 Col - Left - Charis 11 on 13</description>
+            </style>
+            <style name="GPS12J10" file="GPS12J10.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Justified - Charis 10 on 12 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Justified - Charis 10 on 12 p2.jpg">
+                <description>5.25x8.25in - 2 Col - Justified - Charis 10 on 12</description>
+            </style>
+            <style name="GPS12J11" file="GPS12J11.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Justified - Charis 11 on 13 p2.jpg">
+                <description>5.25x8.25in - 2 Col - Justified - Charis 11 on 13</description>
+            </style>
+            <style name="GPS12J9" file="GPS12J9.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Justified - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Justified - Charis 9 on 11 p2.jpg">
+                <description>5.25x8.25in - 2 Col - Justified - Charis 9 on 11</description>
+            </style>
+            <style name="GPS12L10" file="GPS12L10.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Left - Charis 10 on 12 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Left - Charis 10 on 12 p2.jpg">
+                <description>5.25x8.25in - 2 Col - Left - Charis 10 on 12</description>
+            </style>
+            <style name="GPS12L11" file="GPS12L11.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Left - Charis 11 on 13 p2.jpg">
+                <description>5.25x8.25in - 2 Col - Left - Charis 11 on 13</description>
+            </style>
+            <style name="GPS12L9" file="GPS12L9.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Left - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Left - Charis 9 on 11 p2.jpg">
+                <description>5.25x8.25in - 2 Col - Left - Charis 9 on 11</description>
+            </style>
+            <style name="GPS21J11" file="GPS21J11.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg">
+                <description>5.8x8.7in - 1 Col - Justified - Charis 11 on 13</description>
+            </style>
+            <style name="GPS21L11" file="GPS21L11.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Left - Charis 11 on 13 p2.jpg">
+                <description>5.8x8.7in - 1 Col - Left - Charis 11 on 13</description>
+            </style>
+            <style name="GPS22J10" file="GPS22J10.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Justified - Charis 10 on 12 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Justified - Charis 10 on 12 p2.jpg">
+                <description>5.8x8.7in - 2 Col - Justified - Charis 10 on 12</description>
+            </style>
+            <style name="GPS22J11" file="GPS22J11.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Justified - Charis 11 on 13 p2.jpg">
+                <description>5.8x8.7in - 2 Col - Justified - Charis 11 on 13</description>
+            </style>
+            <style name="GPS22J9" file="GPS22J9.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Justified - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Justified - Charis 9 on 11 p2.jpg">
+                <description>5.8x8.7in - 2 Col - Justified - Charis 9 on 11</description>
+            </style>
+            <style name="GPS22L10" file="GPS22L10.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 10 on 12 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 10 on 12 p2.jpg">
+                <description>5.8x8.7in - 2 Col - Left - Charis 10 on 12</description>
+            </style>
+            <style name="GPS22L11" file="GPS22L11.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 11 on 13 p2.jpg">
+                <description>5.8x8.7in - 2 Col - Left - Charis 11 on 13</description>
+            </style>
+            <style name="GPS22L9" file="GPS22L9.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p2.jpg">
+                <description>5.8x8.7in - 2 Col - Left - Charis 9 on 11</description>
+            </style>
+            <style name="Trial" file="Layout_02.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p2.jpg">
+                <description> Two column draft 11pt A4 with drop capital. </description>
+            </style>
+            <style name="FieldworksStyles" file="Layout_12.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p2.jpg">
+                <description> Two column C5 with Translation Editor formatting. </description>
+            </style>
+            <style name="Draft" file="Layout_01.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p2.jpg">
+                <description> Single column draft 11pt A4 with drop capital </description>
+            </style>
+        <!-- style name="Trial2" file="Layout_03.css">
+            <description> Single column draft 11pt A4 with chapter header. </description>
+        </style>
+        <style name="Web" file="Layout_04.css">
+            <description> Double column draft 11pt A4 with chapter header </description>
+        </style>
+        <style name="Cell" file="Layout_05.css">
+            <description> Single column draft 13pt A4 with drop cap chapter </description>
+        </style>
+        <style name="TestD1" file="Layout_06.css">
+            <description> Single column draft 13pt A4 with chapter header </description>
+        </style>
+        <style name="TestD2" file="Layout_07.css">
+            <description> Single column draft 13pt A4 with chapter header </description>
+        </style>
+        <style name="TestD3" file="Layout_08.css">
+            <description> Double column draft 13pt A4 with chapter header </description>
+        </style>
+        <style name="TestF1" file="Layout_09.css">
+            <description> Single column final 11pt A5 with drop capital </description>
+        </style>
+        <style name="Final" file="Layout_10.css">
+            <description> Two column final 11pt A5 with drop capital. </description>
+        </style>
+        <style name="Quick" file="Layout_11.css">
+            <description> Two column A5 with TE font and size choices. </description>
+        </style>
+        <style name="QuickLet" file="Layout_13.css">
+            <description> Two column Letter with TE font and size choices. </description>
+        </style -->
+        </paper>
+        <mobile>
+            <style name="GPS11J11" file="GPS11J11.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg" >
+                <description>5.25x8.25in - 1 Col - Justified - Charis 11 on 13</description>
+            </style>
+        </mobile>
+        <web>
+            <style name="GPS11J11" file="GPS11J11.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg">
+                <description>5.25x8.25in - 1 Col - Justified - Charis 11 on 13</description>
+            </style>
+        </web>
+        <others>
+            <style name="GPS11J11" file="GPS11J11.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg">
+                <description>5.25x8.25in - 1 Col - Justified - Charis 11 on 13</description>
+            </style>
+        </others>
+    </styles>
+    <tasks>
+        <task name="Quick print" style="FieldworksStyles" icon="Graphic/quick.png"/>
+        <task name="Village check" style="Draft" icon="Graphic/draft.png"/>
+        <task name="Trial print" style="Trial" icon="Graphic/trialPrint.png"/>
+        <task name="Final print" style="GPS12L10" icon="Graphic/final.png"/>
+        <task name="Web publish" style="GPS11J11" icon="Graphic/web.png"/>
+        <task name="Cell publish" style="GPS11J11" icon="Graphic/cell.png"/>
+    </tasks>
+    <column-width>
+        <column name="0" width="85"/>
+        <column name="1" width="318"/>
+        <column name="2" width="91"/>
+        <column name="3" width="52"/>
+        <column name="4" width="46"/>
+    </column-width>
+ <mobileProperty>
+    <mobilefeature name="FileProduced" select="One" />
+    <mobilefeature name="RedLetter" select="No" />
+    <mobilefeature name="Information" select="Bible text exported from FieldWorks Translation Editor." />
+    <mobilefeature name="Copyright" select="© " />
+    <mobilefeature name="Icon" select="C:\Documents and Settings\All Users\Application Data\SIL\Pathway\Scripture\trialPrint.png" />
+  </mobileProperty>
+</stylePick>

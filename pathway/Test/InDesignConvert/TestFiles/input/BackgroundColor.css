@@ -1,0 +1,8 @@
+.letter[class~='current'] {
+    background-color:#aaff00;
+    color: RED;
+}
+.main {
+    background-color:#ff0000;
+    color: BLUE;
+}

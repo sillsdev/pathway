@@ -1,0 +1,8 @@
+.a {
+       visibility: hidden;
+       color:red;
+}
+
+.b {
+    visibility:visible;
+}

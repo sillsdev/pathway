@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<idPkg:MasterSpread xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="6.0">
+  <MasterSpread Self="MasterSpread_Right" ItemTransform="1 0 0 1 0 0" Name="R-RightPage" NamePrefix="R" BaseName="RightPage" ShowMasterItems="true" PageCount="1" OverriddenPageItemProps="">
+    <Page Self="page1" Name="F" AppliedTrapPreset="TrapPreset/$ID/kDefaultTrapStyleName" AppliedMaster="n" OverrideList="" TabOrder="" GridStartingPoint="TopOutside" UseMasterGrid="true">
+      <MarginPreference ColumnCount="1" ColumnGutter="12" Top="36" Bottom="36" Left="36" Right="36" ColumnDirection="Horizontal" ColumnsPositions="0 378" />
+      <GridDataInformation FontStyle="Regular" PointSize="12" CharacterAki="0" LineAki="9" HorizontalScale="100" VerticalScale="100" LineAlignment="LeftOrTopLineJustify" GridAlignment="AlignEmCenter" CharacterAlignment="AlignEmCenter">
+        <Properties>
+          <AppliedFont type="string">Times New Roman</AppliedFont>
+        </Properties>
+      </GridDataInformation>
+    </Page>
+    <TextFrame Self="MainFrame" ParentStory="u19c" PreviousTextFrame="u104" NextTextFrame="n" ContentType="TextType" AllowOverrides="true" StrokeWeight="1" GradientFillStart="0 0" GradientFillLength="0" GradientFillAngle="0" GradientStrokeStart="0 0" GradientStrokeLength="0" GradientStrokeAngle="0" ItemLayer="ub6" Locked="false" LocalDisplaySetting="Default" GradientFillHiliteLength="0" GradientFillHiliteAngle="0" GradientStrokeHiliteLength="0" GradientStrokeHiliteAngle="0" AppliedObjectStyle="ObjectStyle/$ID/[None]" ItemTransform="1 0 0 1 0 0">
+      <Properties>
+        <PathGeometry>
+          <GeometryPathType PathOpen="false">
+            <PathPointArray>
+              <PathPointType Anchor="-189 -279" LeftDirection="-189 -279" RightDirection="-189 -279" />
+              <PathPointType Anchor="-189 279" LeftDirection="-189 279" RightDirection="-189 279" />
+              <PathPointType Anchor="189 279" LeftDirection="189 279" RightDirection="189 279" />
+              <PathPointType Anchor="189 -279" LeftDirection="189 -279" RightDirection="189 -279" />
+            </PathPointArray>
+          </GeometryPathType>
+        </PathGeometry>
+      </Properties>
+      <TextFramePreference TextColumnFixedWidth="378" />
+      <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="BothSides" TextWrapMode="None">
+        <Properties>
+          <TextWrapOffset Top="36" Left="72" Bottom="36" Right="72" />
+        </Properties>
+      </TextWrapPreference>
+    </TextFrame>
+    <TextFrame Self="topleft" ParentStory="u19c" PreviousTextFrame="u104" NextTextFrame="n" ContentType="TextType" AllowOverrides="true" StrokeWeight="1" GradientFillStart="0 0" GradientFillLength="0" GradientFillAngle="0" GradientStrokeStart="0 0" GradientStrokeLength="0" GradientStrokeAngle="0" ItemLayer="ub6" Locked="false" LocalDisplaySetting="Default" GradientFillHiliteLength="0" GradientFillHiliteAngle="0" GradientStrokeHiliteLength="0" GradientStrokeHiliteAngle="0" AppliedObjectStyle="ObjectStyle/$ID/[None]" ItemTransform="1 0 0 1 0 0">
+      <Properties>
+        <PathGeometry>
+          <GeometryPathType PathOpen="false">
+            <PathPointArray>
+              <PathPointType Anchor="-189 -297" LeftDirection="-189 -297" RightDirection="-189 -297" />
+              <PathPointType Anchor="-189 -312" LeftDirection="-189 -312" RightDirection="-189 -312" />
+              <PathPointType Anchor="-63 -312" LeftDirection="-63 -312" RightDirection="-63 -312" />
+              <PathPointType Anchor="-63 -297" LeftDirection="-63 -297" RightDirection="-63 -297" />
+            </PathPointArray>
+          </GeometryPathType>
+        </PathGeometry>
+        <Label>
+          <KeyValuePair Key="Label" Value="Master" />
+        </Label>
+      </Properties>
+      <TextFramePreference TextColumnFixedWidth="126" VerticalJustification="CenterAlign" />
+      <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="BothSides" TextWrapMode="None">
+        <Properties>
+          <TextWrapOffset Top="36" Left="72" Bottom="36" Right="72" />
+        </Properties>
+      </TextWrapPreference>
+    </TextFrame>
+    <TextFrame Self="topcenter" ParentStory="utcr" PreviousTextFrame="u104" NextTextFrame="n" ContentType="TextType" AllowOverrides="true" StrokeWeight="1" GradientFillStart="0 0" GradientFillLength="0" GradientFillAngle="0" GradientStrokeStart="0 0" GradientStrokeLength="0" GradientStrokeAngle="0" ItemLayer="ub6" Locked="false" LocalDisplaySetting="Default" GradientFillHiliteLength="0" GradientFillHiliteAngle="0" GradientStrokeHiliteLength="0" GradientStrokeHiliteAngle="0" AppliedObjectStyle="ObjectStyle/$ID/[None]" ItemTransform="1 0 0 1 0 0">
+      <Properties>
+        <PathGeometry>
+          <GeometryPathType PathOpen="false">
+            <PathPointArray>
+              <PathPointType Anchor="-63 -297" LeftDirection="-63 -297" RightDirection="-63 -297" />
+              <PathPointType Anchor="-63 -312" LeftDirection="-63 -312" RightDirection="-63 -312" />
+              <PathPointType Anchor="63 -312" LeftDirection="63 -312" RightDirection="63 -312" />
+              <PathPointType Anchor="63 -297" LeftDirection="63 -297" RightDirection="63 -297" />
+            </PathPointArray>
+          </GeometryPathType>
+        </PathGeometry>
+        <Label>
+          <KeyValuePair Key="Label" Value="Master" />
+        </Label>
+      </Properties>
+      <TextFramePreference TextColumnFixedWidth="126" VerticalJustification="CenterAlign" />
+      <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="BothSides" TextWrapMode="None">
+        <Properties>
+          <TextWrapOffset Top="36" Left="72" Bottom="36" Right="72" />
+        </Properties>
+      </TextWrapPreference>
+    </TextFrame>
+    <TextFrame Self="topright" ParentStory="utrr" PreviousTextFrame="u104" NextTextFrame="n" ContentType="TextType" AllowOverrides="true" StrokeWeight="1" GradientFillStart="0 0" GradientFillLength="0" GradientFillAngle="0" GradientStrokeStart="0 0" GradientStrokeLength="0" GradientStrokeAngle="0" ItemLayer="ub6" Locked="false" LocalDisplaySetting="Default" GradientFillHiliteLength="0" GradientFillHiliteAngle="0" GradientStrokeHiliteLength="0" GradientStrokeHiliteAngle="0" AppliedObjectStyle="ObjectStyle/$ID/[None]" ItemTransform="1 0 0 1 0 0">
+      <Properties>
+        <PathGeometry>
+          <GeometryPathType PathOpen="false">
+            <PathPointArray>
+              <PathPointType Anchor="63 -297" LeftDirection="63 -297" RightDirection="63 -297" />
+              <PathPointType Anchor="63 -312" LeftDirection="63 -312" RightDirection="63 -312" />
+              <PathPointType Anchor="189 -312" LeftDirection="189 -312" RightDirection="189 -312" />
+              <PathPointType Anchor="189 -297" LeftDirection="189 -297" RightDirection="189 -297" />
+            </PathPointArray>
+          </GeometryPathType>
+        </PathGeometry>
+        <Label>
+          <KeyValuePair Key="Label" Value="Master" />
+        </Label>
+      </Properties>
+      <TextFramePreference TextColumnFixedWidth="126" VerticalJustification="CenterAlign" />
+      <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="BothSides" TextWrapMode="None">
+        <Properties>
+          <TextWrapOffset Top="36" Left="72" Bottom="36" Right="72" />
+        </Properties>
+      </TextWrapPreference>
+    </TextFrame>
+    <TextFrame Self="bottomleft" ParentStory="u19c" PreviousTextFrame="u104" NextTextFrame="n" ContentType="TextType" AllowOverrides="true" StrokeWeight="1" GradientFillStart="0 0" GradientFillLength="0" GradientFillAngle="0" GradientStrokeStart="0 0" GradientStrokeLength="0" GradientStrokeAngle="0" ItemLayer="ub6" Locked="false" LocalDisplaySetting="Default" GradientFillHiliteLength="0" GradientFillHiliteAngle="0" GradientStrokeHiliteLength="0" GradientStrokeHiliteAngle="0" AppliedObjectStyle="ObjectStyle/$ID/[None]" ItemTransform="1 0 0 1 0 0">
+      <Properties>
+        <PathGeometry>
+          <GeometryPathType PathOpen="false">
+            <PathPointArray>
+              <PathPointType Anchor="-189 297" LeftDirection="-189 297" RightDirection="-189 297" />
+              <PathPointType Anchor="-189 312" LeftDirection="-189 312" RightDirection="-189 312" />
+              <PathPointType Anchor="-63 312" LeftDirection="-63 312" RightDirection="-63 312" />
+              <PathPointType Anchor="-63 297" LeftDirection="-63 297" RightDirection="-63 297" />
+            </PathPointArray>
+          </GeometryPathType>
+        </PathGeometry>
+        <Label>
+          <KeyValuePair Key="Label" Value="Master" />
+        </Label>
+      </Properties>
+      <TextFramePreference TextColumnFixedWidth="126" VerticalJustification="CenterAlign" />
+      <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="BothSides" TextWrapMode="None">
+        <Properties>
+          <TextWrapOffset Top="36" Left="72" Bottom="36" Right="72" />
+        </Properties>
+      </TextWrapPreference>
+    </TextFrame>
+    <TextFrame Self="bottomcenter" ParentStory="u19c" PreviousTextFrame="u104" NextTextFrame="n" ContentType="TextType" AllowOverrides="true" StrokeWeight="1" GradientFillStart="0 0" GradientFillLength="0" GradientFillAngle="0" GradientStrokeStart="0 0" GradientStrokeLength="0" GradientStrokeAngle="0" ItemLayer="ub6" Locked="false" LocalDisplaySetting="Default" GradientFillHiliteLength="0" GradientFillHiliteAngle="0" GradientStrokeHiliteLength="0" GradientStrokeHiliteAngle="0" AppliedObjectStyle="ObjectStyle/$ID/[None]" ItemTransform="1 0 0 1 0 0">
+      <Properties>
+        <PathGeometry>
+          <GeometryPathType PathOpen="false">
+            <PathPointArray>
+              <PathPointType Anchor="63 297" LeftDirection="63 297" RightDirection="63 297" />
+              <PathPointType Anchor="63 312" LeftDirection="63 312" RightDirection="63 312" />
+              <PathPointType Anchor="-63 312" LeftDirection="-63 312" RightDirection="-63 312" />
+              <PathPointType Anchor="-63 297" LeftDirection="-63 297" RightDirection="-63 297" />
+            </PathPointArray>
+          </GeometryPathType>
+        </PathGeometry>
+        <Label>
+          <KeyValuePair Key="Label" Value="Master" />
+        </Label>
+      </Properties>
+      <TextFramePreference TextColumnFixedWidth="126" VerticalJustification="CenterAlign" />
+      <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="BothSides" TextWrapMode="None">
+        <Properties>
+          <TextWrapOffset Top="36" Left="72" Bottom="36" Right="72" />
+        </Properties>
+      </TextWrapPreference>
+    </TextFrame>
+    <TextFrame Self="bottomright" ParentStory="u19c" PreviousTextFrame="u104" NextTextFrame="n" ContentType="TextType" AllowOverrides="true" StrokeWeight="1" GradientFillStart="0 0" GradientFillLength="0" GradientFillAngle="0" GradientStrokeStart="0 0" GradientStrokeLength="0" GradientStrokeAngle="0" ItemLayer="ub6" Locked="false" LocalDisplaySetting="Default" GradientFillHiliteLength="0" GradientFillHiliteAngle="0" GradientStrokeHiliteLength="0" GradientStrokeHiliteAngle="0" AppliedObjectStyle="ObjectStyle/$ID/[None]" ItemTransform="1 0 0 1 0 0">
+      <Properties>
+        <PathGeometry>
+          <GeometryPathType PathOpen="false">
+            <PathPointArray>
+              <PathPointType Anchor="63 297" LeftDirection="63 297" RightDirection="63 297" />
+              <PathPointType Anchor="63 312" LeftDirection="63 312" RightDirection="63 312" />
+              <PathPointType Anchor="189 312" LeftDirection="189 312" RightDirection="189 312" />
+              <PathPointType Anchor="189 297" LeftDirection="189 297" RightDirection="189 297" />
+            </PathPointArray>
+          </GeometryPathType>
+        </PathGeometry>
+        <Label>
+          <KeyValuePair Key="Label" Value="Master" />
+        </Label>
+      </Properties>
+      <TextFramePreference TextColumnFixedWidth="126" VerticalJustification="CenterAlign" />
+      <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="BothSides" TextWrapMode="None">
+        <Properties>
+          <TextWrapOffset Top="36" Left="72" Bottom="36" Right="72" />
+        </Properties>
+      </TextWrapPreference>
+    </TextFrame>
+  </MasterSpread>
+</idPkg:MasterSpread>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--To store the Project files-->
+<Project Type="Dictionary" Version="1.0.21.814" ShowError="False">
+  <SolutionExplorer>
+    <File Name="main.xhtml" Type="File" Visible="True" Default="False" />
+    <File Name="main.css" Type="File" Visible="True" Default="False" />
+    <File Name="Pictures" Type="Folder" Visible="True" Default="" />
+  </SolutionExplorer>
+  <DocumentSettings>
+    <Sections>
+      <Section No="1" Name="Cover" Value="none" />
+      <Section No="2" Name="Title" Value="none" />
+      <Section No="3" Name="Rights" Value="none" />
+      <Section No="4" Name="Introduction" Value="none" />
+      <Section No="5" Name="List" Value="none" />
+      <Section No="6" Name="Orthography" Value="none" />
+      <Section No="7" Name="Phonology" Value="none" />
+      <Section No="8" Name="Grammar" Value="none" />
+      <Section No="9" Name="Main" Value="main.xhtml" />
+      <Section No="10" Name="Index" Value="none" />
+      <Section No="11" Name="Reversal" Value="none" />
+      <Section No="12" Name="Bibliography" Value="none" />
+    </Sections>
+  </DocumentSettings>
+  <PropertyGroup>
+    <Creation>
+      <CreatedOn>30-May-2009 18:43:14</CreatedOn>
+      <CreatedBy>Trihus</CreatedBy>
+    </Creation>
+    <Modification>
+      <ModifiedOn>30-May-2009 18:43:14</ModifiedOn>
+      <ModifiedBy>Trihus</ModifiedBy>
+    </Modification>
+  </PropertyGroup>
+</Project>

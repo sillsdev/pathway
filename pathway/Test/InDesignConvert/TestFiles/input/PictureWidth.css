@@ -1,0 +1,32 @@
+.picture {
+
+}
+.pictureRight {
+    float:right;
+    padding: 2pt;
+    text-align: center;
+}
+.dicBody {
+}
+.letHead {
+    column-count: 1;
+    clear: both;
+}
+.letter {
+    text-align: center;
+    font-weight: bold;
+    font-size: 24pt;
+}
+.letData {
+    column-count: 2; 
+    text-align: left;
+}
+.entry {
+    font-size: 11pt;	/* inherited */
+    font-weight: normal;	/* inherited */
+    font-style: normal;	/* inherited */
+ }
+.headword {
+    font-size: 10pt;	/* cascaded environment */
+    font-weight: bold;
+}

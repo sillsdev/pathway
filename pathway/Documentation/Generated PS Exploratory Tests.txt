@@ -1,0 +1,20 @@
+Lex: ACompletedEntry -> PublishingSolution -> FieldworksStyles -> XeTeX
+Lex:Yi-graphite -> FW: Flex / TE -> OneColumn -> XeTeX
+Lex: Buang-Test -> PublishingSolution -> OneColumn -> Prince
+Lex: ACompletedEntry -> FW: Flex / TE -> Draft -> GoBible
+Scr: Sena -> FW: Flex / TE -> FieldworksStyles -> XeTeX
+Lex: Sena -> PublishingSolution -> OneColumn -> Prince
+Lex:Yi-graphite -> FW: Flex / TE -> Custom -> InDesign
+Scr: Sena -> PublishingSolution -> Custom -> XeTeX
+Scr: Sena -> FW: Flex / TE -> FieldworksStyles -> GoBible
+Lex:Yi-graphite -> PublishingSolution -> OneColumn -> InDesign
+Scr: Bughotu-pic -> PublishingSolution -> TwoColumn -> InDesign
+Lex: Sena -> PublishingSolution -> FieldWorksArabaic -> InDesign
+Lex: Sena -> FW: Flex / TE -> Draft -> Open Office (macro)
+Lex: TestABSGraphite -> FW: Flex / TE -> FieldworksStyles -> InDesign
+Lex:Yi-graphite -> PublishingSolution -> LikeBuangPNG -> Prince
+Scr: Bughotu-pic -> FW: Flex / TE -> Custom -> Open Office (macro)
+Scr: Sena -> PublishingSolution -> FieldWorksArabaic -> GoBible
+Scr: Bughotu-pic -> PublishingSolution -> Draft -> GoBible
+Scr: Bughotu-pic -> PublishingSolution -> OneColumn -> XeTeX
+Scr: Sena -> PublishingSolution -> TwoColumn -> Prince

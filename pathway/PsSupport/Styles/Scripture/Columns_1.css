@@ -1,0 +1,6 @@
+/* The following formats the scripture text into 1 column */
+
+.columns {
+	column-count: 1; -moz-column-count: 1;
+}
+

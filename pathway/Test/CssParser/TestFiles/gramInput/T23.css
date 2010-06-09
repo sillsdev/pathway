@@ -1,0 +1,25 @@
+@media print {
+@page 
+{
+	margin: 2cm 2cm 2cm 2cm;
+	counter-increment: page;
+    @top-left 
+    {
+		content: string(guideword, first); 
+		font-family:sans-serif;
+		font-weight:bold;
+		font-size:12pt;
+    }
+    @top-center
+    {
+		content: counter(page); 
+	}
+    @top-right
+    {
+		content: string(guideword, last); 
+		font-family:sans-serif;
+		font-weight:bold;
+		font-size:12pt;
+	}
+}
+}

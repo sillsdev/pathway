@@ -1,0 +1,14 @@
+/* left align (not justified) */
+
+.Intro_Section_Head {
+    text-align: left;
+}
+.Line1 {
+    text-align: left;
+}
+.scrIntroSection {
+    text-align: left;
+}
+.scrSection {
+    text-align: left;
+}

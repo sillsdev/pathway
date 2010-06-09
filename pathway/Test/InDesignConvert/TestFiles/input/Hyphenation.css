@@ -1,0 +1,43 @@
+.letHead {
+    column-count: 1;
+    clear: both;
+    border-bottom: .5pt solid #a00;
+    text-align: center;
+}
+
+.letData {
+    column-count: 2; -moz-column-count: 2;
+    column-gap: 12pt; -moz-column-gap: 12pt;
+    column-fill: auto;
+    column-rule: solid 1pt #aa0000;
+}
+.entry {
+    font-family: Arial;
+    font-size: 15pt;		
+    font-weight: normal;	
+    font-style: normal;		
+    text-align: left;
+}
+
+.headword
+{
+  color:black;
+  font-weight: bold;
+}
+.withhyphen
+{
+  hyphens: auto ;
+  hyphenate-before: 2;
+  hyphenate-after: 3; 
+  hyphenate-lines: 1; 
+    color:red;
+}
+
+.withouthyphen
+{
+  hyphens: none ;
+  hyphenate-before: 2;
+  hyphenate-after: 3; 
+  hyphenate-lines: 1; 
+  color:blue;
+}

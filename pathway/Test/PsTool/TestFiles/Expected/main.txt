@@ -1,0 +1,1470 @@
+﻿\Bdict
+        \Bletter D d\Eletter
+                \Bentry
+                \Bhw \vernac -d\Ehw\marking[guidewords]{-d}
+                \Bpr ⁿd\Epr
+                \Bsn 1) \Esn
+                \Bps N(inal)\Eps
+                \Bde \langone first person plural inclusive possessive suffix--this is the form used with the major class of inalienable possession nouns.\Ede
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac da\Ehw\marking[guidewords]{da}
+                \Bpr ⁿda\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone Sunday morning church service. / \langtwo lotu.\Ede
+                \Bex \vernac Ya dëlë da dub ayo.\Eex
+                \Btr \langone They went to the service in the church.\Etr
+                \Bsn 2) \Esn
+                \Bps N\Eps
+                \Bde \langone week. / \langtwo wik.\Ede
+                \Bex \vernac Venë ya nedo Moresby da ti.\Eex
+                \Btr \langone His wife went and stayed a week in Moresby.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac daba\Ehw\marking[guidewords]{daba}
+                \Bpr ˈⁿda.ᵐba\Epr
+                \Bsn 1) \Esn
+                \Bps N(inal)\Eps
+                \Bde \langone forehead. / \langtwo poret.\Ede
+                \Bex \vernac He ġebë he Anutu yi ḳanaḳ jaḳ yi hur lo dabaj namuġin rë.\Eex
+                \Btr \langone We will put the mark of our God on his servants foreheads first.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dabanġ\Ehw\marking[guidewords]{dabanġ}
+                \Bpr ⁿda.ˈᵐbaɴ\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone catapult, shanghai, slingshot. / \langtwo katapel.\Ede
+                \Bex \vernac Hur mahen dëvanëh soḳ raḳ dabanġ.\Eex
+                \Btr \langone Children shoot birds with their shanghais.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dabeenġ\Ehw\marking[guidewords]{dabeenġ}
+                \Bpr ⁿda.ˈᵐbɛːɴ\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone type of bird-probably the Greenwinged King Parrot, or the Papuan King. / \langtwo wanpela kain pisin.\Ede
+                \Bex \vernac Dejom dabeenġ nalu medevet.\Eex
+                \Btr \langone They captured a young\Etr
+                \Blr :\Elr \Bsx \vernac dabudenġ\Bhn{1}\Ehn , \vernac daġed, \vernac daġöl, \vernac dehud, \vernac duvöön, \vernac danġed\Bhn{2}\Ehn \Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dabi\Ehw\marking[guidewords]{dabi}
+                \Bpr ˈⁿda.ᵐbi\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone fourth daughter, the fourth female issue of a woman. / \langtwo namba poa pikinini meri.\Ede
+                \Bex \vernac Ḳo nalu dabi.\Eex
+                \Btr \langone She bore her fourth daughter.\Etr
+                \Blr :\Elr \Bsx \vernac dabi\Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac Dabudenġ\Ehw\marking[guidewords]{Dabudenġ}
+                \Bpr ⁿda.ˈᵐbuⁿd.əɴ\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone a demon or evil spirit, it deceives dogs and people and freezes them fast to it so they can't draw away. / \langtwo bus tewel.\Ede
+                \Bex \vernac Dabudenġ og yiḳ memö ti menejom mehönon los anöö lu nġaa ahon bemedo dëdiiḳ.\Eex
+                \Btr \langone Dabudenġ\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dabudenġ\Bhn{1}\Ehn \Ehw\marking[guidewords]{dabudenġ}
+                \Bpr ⁿda.ˈᵐbuⁿd.əɴ\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone type of bird-probably the Red-capped Streaked Lory. / \langtwo wanpela kain pisin.\Ede
+                \Bex \vernac Soḳ dabudenġ niviis nimewis ḳöḳ los nisanġ nebë soḳ ḳangwii.\Eex
+                \Btr \langone The\Etr
+                \Blr :\Elr \Bsx \vernac dabeenġ\Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dabudenġ\Bhn{2}\Ehn \Ehw\marking[guidewords]{dabudenġ}
+                \Bpr ⁿda.ˈᵐbuⁿd.əɴ\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone variety of tree the bark of which is used for tying, especially for tying the grass onto the roof. / \langone wanpela kain skin rop / \langtwo diwai.\Ede
+                \Bex \vernac Ngap dabudenġ menaduu sapu jaḳ.\Eex
+                \Btr \langone He will cut a\Etr
+                \Blr :\Elr \Bsx \vernac dadah-nevu, \vernac daġölahë\Bhn{2}\Ehn , \vernac dagwem\Bhn{2}\Ehn , \vernac dahaam, \vernac dalibeng, \vernac daröö, \vernac datëv, \vernac dedonġ, \vernac deggédek, \vernac dod, \vernac dönġ-hus, \vernac döleng\Bsn  1\Esn
+                \Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dabun\Ehw\marking[guidewords]{dabun}
+                \Bpr ⁿda.ˈᵐbun\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone cluster, heap, bundle, group. / \langtwo wantaim.\Ede
+                \Bex \vernac Deya dabun.\Eex
+                \Btr \langone They all went together.\Etr
+                \Bex \vernac Rengö abuhek dabun luu.\Eex
+                \Btr \langone She put two bundles of pitpit into the bamboo.\Etr
+                \Bsn 2) \Esn
+                \Bps N\Eps
+                \Bde \langone clump. / \langtwo mekpas.\Ede
+                \Bex \vernac Beggob dabun ti lo yam nyë taḳut dus raḳ sa.\Eex
+                \Btr \langone A small clump of cloud came with a blunt end near to me.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dadah-nevu\Ehw\marking[guidewords]{dadah-nevu}
+                \Bpr ⁿda.ˈⁿdaʁ nə.ˈβu\Epr
+                \Bsn 1) \Esn
+                \Bps Nc\Eps
+                \Bde \langone variety of tree which grows in high places, on top of cliffs etc. It is used as a shade tree, and is good for fences. / \langtwo wanpela kain pikus i save kamap antap long ston.\Ede
+                \Bex \vernac Dadah-nevu kip raḳ peḳë yu.\Eex
+                \Btr \langone The\Etr
+                \Blr :\Elr \Bsx \vernac daġölahë\Bhn{2}\Ehn \Esx
+                \Blr :\Elr \Bsx \vernac dabudenġ\Bhn{2}\Ehn \Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dadah-reek\Ehw\marking[guidewords]{dadah-reek}
+                \Bpr ⁿda.ˈⁿdaʁ ɾɛːk\Epr
+                \Bsn 1) \Esn
+                \Bps Nc\Eps
+                \Bde \langone a huge flat stone, a layer or slab of stone. / \langtwo ston nating.\Ede
+                \Bex \vernac Dadah-reek og ġelönġ böp sën neggëp ya dob ġebinë.\Eex
+                \Btr \langone Dadah-reek\Etr
+                \Blr :\Elr \Bsx \vernac daġoreḳ, \vernac duh\Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dadëk\Ehw\marking[guidewords]{dadëk}
+                \Bpr ⁿda.ˈⁿdek\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone pains in the throat and chest. People drink pig blood and salt to cure it; some people eat raw sweetpotato and drink cold water. / \langtwo wanpela kain sik, lewa pen.\Ede
+                \Bex \vernac Dadëk negga newa.\Eex
+                \Btr \langone He has chest pains.\Etr
+                \Blr :\Elr \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dadii\Ehw\marking[guidewords]{dadii}
+                \Bpr ⁿda.ˈⁿdiː\Epr
+                \Bsn 1) \Esn
+                \Bps V1\Eps
+                \Bde \langone pull. / \langtwo pulim.\Ede
+                \Bex \vernac Sëḳ dadii honġ jaḳ nam vavunë.\Eex
+                \Btr \langone I will pull you up on top.\Etr
+                \Bex \vernac Jom loḳ nema medadii.\Eex
+                \Btr \langone He grasped his hand and pulled.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dadov\Ehw\marking[guidewords]{dadov}
+                \Bpr ⁿda.ˈⁿdoβ\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone Job's tears. The seeds are used for decoration, making necklaces etc; they were once used as a sign of grief or mourning. / \langtwo kain gras pikinini bilong em i wait, yelo, na blakpela.\Ede
+                \Bex \vernac Jur dadov anon in naduu mebanuh.\Eex
+                \Btr \langone She will collect Job's tears to make into a necklace and wear round her neck.\Etr
+                \Blr :\Elr \Blr :\Elr \Bsx \vernac daduġ\Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac daduġ\Ehw\marking[guidewords]{daduġ}
+                \Bpr ⁿda.ˈⁿduᵑɢ\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone a kind of strong vine or bush with tiny leaves which are as dance decorations--the leaves are poked into the armbands. / \langtwo wanpela kain liklik diwai lip bilong en i bilong bilas.\Ede
+                \Bex \vernac Alam denevuneḳ vu sir raḳ daduġ in sengii.\Eex
+                \Btr \langone People decorate themselves with\Etr
+                \Blr :\Elr \Bsx \vernac daġölahë\Bhn{1}\Ehn , \vernac dadov, \vernac daröd\Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dagul-ggoo\Ehw\marking[guidewords]{dagul-ggoo}
+                \Bpr ⁿda.ˈᵑɡul̪.ɣoː\Epr
+                \Bsn 1) \Esn
+                \Bps Nc\Eps
+                \Bde \langone variety of yam. / \langtwo wanpela kain yam.\Ede
+                \Bex \vernac Alam dënër mehö sagu bë dagul-ggoo degwa in yö nevaroh go dagul-ggoo nġahiseḳë.\Eex
+                \Btr \langone People call that man over there is a specialist in\Etr
+                \Blr :\Elr \Eentry
+                    
+                \Bentry
+                \Bhw \vernac daġaheng\Ehw\marking[guidewords]{daġaheng}
+                \Bpr ⁿda.ˈᵑɡaʁ.əŋ\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone kind of vine, the leaves were used to wrap tobacco leaves for smoking. / \langtwo wanpela kain rop.\Ede
+                \Bex \vernac Alam böp dëbom aru loḳ daġaheng ris medëvë.\Eex
+                \Btr \langone People used to wrap tobacco in\Etr
+                \Blr :\Elr \Bsx \vernac dedöggin\Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac daġed\Ehw\marking[guidewords]{daġed}
+                \Bpr ⁿda.ˈᵑɢɛⁿd\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone willie wagtail. / \langtwo wanpela kain liklik pisin.\Ede
+                \Bex \vernac Soḳ daġed to nesesipeḳ raḳ dob.\Eex
+                \Btr \langone The\Etr
+                \Blr :\Elr \Bsx \vernac dabeenġ\Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac daġi\Ehw\marking[guidewords]{daġi}
+                \Bpr ˈⁿda.ᵑɢi\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone variety of yam. / \langtwo wanpela kain yam.\Ede
+                \Bex \vernac Daġi yiḳ go ti arë, ris veroo nebë nabon ganon ading.\Eex
+                \Btr \langone Daġi\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac daġijébeng\Ehw\marking[guidewords]{daġijébeng}
+                \Bpr ⁿda.ᵑɡi.ˈⁿd͡ʒɛᵐb.əŋ\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone kind of fern. / \langtwo wanpela kain susa.\Ede
+                \Bex \vernac Daġijebeng nekip loḳ huk yoh vu nyëġ.\Eex
+                \Btr \langone Daġijebeng\Etr
+                \Blr :\Elr \Eentry
+                    
+                \Bentry
+                \Bhw \vernac daġo\Ehw\marking[guidewords]{daġo}
+                \Bpr ˈⁿda.ᵑɢo\Epr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac daġoo\Ehw\marking[guidewords]{daġoo}
+                \Bpr ⁿda.ˈᵑɢoː\Epr
+                \Bsn 1) \Esn
+                \Bps V1\Eps
+                \Bde \langone immerse, dip, dye . / \langtwo putim long wara.\Ede
+                \Bex \vernac Daġoo aggis luḳ bël ḳöḳ.\Eex
+                \Btr \langone She dipped the string in the red dye.\Etr
+                \Bex \vernac Ya nedaġoo luḳ nyëġ ruḳ.\Eex
+                \Btr \langone He dipped it in the moisture (from the leaves).\Etr
+                \Bex \vernac SDA dedaġoo hir alam luḳ ya bël in degeḳo arëj mewis medenatu Anutu yi alam.\Eex
+                \Btr \langone The SDA's push their people under the water to give them a new name so that they become God's people.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac Daġoraa\Ehw\marking[guidewords]{Daġoraa}
+                \Bpr ⁿda.ᵑɢo.ˈɾaː\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone a village close to the Watut near Mumeng which figures in one of the Buang's main legends. / \langtwo wanpela ples klostu long Mumeng.\Ede
+                \Bex \vernac Pariiḳ atov ya maluh Dagoraa.\Eex
+                \Btr \langone Pariik married a man from Dagoraa.\Etr
+                \Bsn 2) \Esn
+                \Bps N\Eps
+                \Bde \langone variety of Saccharum Edule-probably originally from the village of the same name. / \langtwo wanpela kain pitpit.\Ede
+                \Bex \vernac Sëḳ besi abuhek daġoraa.\Eex
+                \Btr \langone I'm going to roast some\Etr
+                \Blr :\Elr \Eentry
+                    
+                \Bentry
+                \Bhw \vernac daġoreḳ\Ehw\marking[guidewords]{daġoreḳ}
+                \Bpr ⁿda.ˈᵑɢoɾ.əq\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone limestone. The white stones known as / \vernac go kenu / \langone , or yam spirits, which were planted at the head of yam holes, were usually of this kind. / \langtwo waitpela ston.\Ede
+                \Bex \vernac Daġoreḳ veroo menedo bël ayo.\Eex
+                \Btr \langone Limestone is white and is found near the river.\Etr
+                \Bex \vernac Ketul daġoreḳ raḳ ḳoov yu mepuvin.\Eex
+                \Btr \langone He pounded the limestone with the head of his axe and crushed it.\Etr
+                \Blr :\Elr \Bsx \vernac dadah-reek\Esx
+                \Eentry
+                    
+                \colimage{Pictures/Dagöl2}{daġöl}\Bentry
+                \Bhw \vernac daġöl\Ehw\marking[guidewords]{daġöl}
+                \Bpr ⁿda.ˈᵑɢɔl̪\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone hornbill. / \langtwo kokomo.\Ede
+                \Bex \vernac Nġaa ti nenġeeḳ nebë soḳ daġöl.\Eex
+                \Btr \langone Something was calling out like a hornbill does.\Etr
+                \Blr :\Elr \Bsx \vernac dabeenġ\Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac daġölahë\Bhn{1}\Ehn \Ehw\marking[guidewords]{daġölahë}
+                \Bpr ⁿda.ˈᵑɢɔl̪\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone type of bush growing about head height with sharp seeds that stick to clothes etc. It comes up in new gardens. / \langone wanpela kain / \langtwo gras bilong garden.\Ede
+                \Bex \vernac Daġölahë vetii tob rot om nerur ya.\Eex
+                \Btr \langone The\Etr
+                \Blr :\Elr \Bsx \vernac daduġ\Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac daġölahë\Bhn{2}\Ehn \Ehw\marking[guidewords]{daġölahë}
+                \Bpr ⁿda.ᵑɢɔl̪.ˈa.ʁe\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone kind of tree-usually planted in the villages in association with the / \vernac map / \langone tree. The two grow together and make fine shade trees. Probably one of the Ficus species. / \langtwo wanpela kain diwai pikus.\Ede
+                \Bex \vernac Daġolahë yiḳ ḳele böp ti besoḳ dëgga anon.\Eex
+                \Btr \langone Daġolahë\Etr
+                \Blr :\Elr \Bsx \vernac dadah-nevu\Esx
+                \Blr :\Elr \Bsx \vernac dabudenġ\Bhn{2}\Ehn \Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac daggen\Ehw\marking[guidewords]{daggen}
+                \Bpr ⁿda.ˈɣɛn\Epr
+                \Bsn 1) \Esn
+                \Bps N(inal)\Eps
+                \Bde \langone tongue. / \langtwo tang.\Ede
+                \Bex \vernac Tep mamireng raḳ daggen in nengën.\Eex
+                \Btr \langone He tasted the salt with his tongue because it was sweet.\Etr
+                \Bex \vernac Röp daggen.\Eex
+                \Btr \langone She stuck her tongue out.\Etr
+                \Bsn 2) \Esn
+                \Bps N(inal)\Eps
+                \Bde \langone flame. / \langtwo lait bilong paia.\Ede
+                \Bex \vernac Nengwah tum daggen.\Eex
+                \Btr \langone The fire burned brightly/ flamed up.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dagwem\Bhn{1}\Ehn \Ehw\marking[guidewords]{dagwem}
+                \Bpr ⁿda.ˈᵑɡʷɛm\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone variety of yam. / \langtwo wanpela kain yam.\Ede
+                \Bex \vernac Go ti arë nebë dagwem, go soġek.\Eex
+                \Btr \langone There is a yam called\Etr
+                \Blr :\Elr \Bsx \vernac danġed\Bhn{1}\Ehn \Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dagwem\Bhn{2}\Ehn \Ehw\marking[guidewords]{dagwem}
+                \Bpr ⁿda.ˈᵑɡʷɛm\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone Variety of tree with hairs which irritate the skin. The sap is used as birdlime for catching birds. The sap is collected in a length of bamboo and is then heated over a fire. When it is boiling a stick is dipped in and twisted and the sap adhering to it is chewed to make it soft and then wrapped in cordyline leaves. The sap is then spread on a suitable tree branch so that when birds come to eat the fruit of that tree they are caught. / \langtwo wanpela kain mosong diwai.\Ede
+                \Bex \vernac Nesap dagwem in jegwi soḳ.\Eex
+                \Btr \langone He cut the\Etr
+                \Blr :\Elr \Bsx \vernac dabudenġ\Bhn{2}\Ehn \Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dah\Ehw\marking[guidewords]{dah}
+                \Bpr ⁿdaʁ\Epr
+                \Bsn 1) \Esn
+                \Bps V2\Eps
+                \Bde \langone eat raw. / \langtwo kaikaim kaikai i no tan o i no kuk.\Ede
+                \Bex \vernac Busip nedah mun yoh vu buk.\Eex
+                \Btr \langone Cats eat rats raw all the time.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dahaam\Ehw\marking[guidewords]{dahaam}
+                \Bpr ⁿda.ˈʁaːm\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone tree the bark of which is used for making stringbags. / \langtwo wanpela kain diwai-ol i yusim skin bilong en long wokim bilum.\Ede
+                \Bex \vernac Ġenanil dahaam in vahek yi.\Eex
+                \Btr \langone Peel the bark off the\Etr
+                \Blr :\Elr \Bsx \vernac dabudenġ\Bhn{2}\Ehn \Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dahah\Ehw\marking[guidewords]{dahah}
+                \Bpr ⁿda.ˈʁaʁ\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone the generic name for an edible green of which a number of different varieties are grown, edible plants of the Hibiscus family. / \langtwo aibika.\Ede
+                \Bex \vernac Dahah sagaḳ jojeng nivesa rot.\Eex
+                \Btr \langone That\Etr
+                \Blr :\Elr \Bsx \vernac dahah-belon\Esx
+                \Blr :\Elr \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dahah-belon\Ehw\marking[guidewords]{dahah-belon}
+                \Bpr ⁿda.ˈʁaʁ ᵐbə.ˈl̪on\Epr
+                \Bsn 1) \Esn
+                \Bps Nc\Eps
+                \Bde \langone a large-leafed edible green vegetable; a variety of / \vernac dahah / \langone . / \langtwo wanpela kain aibika.\Ede
+                \Bex \vernac Dahah belon yiḳ jojeng ti.\Eex
+                \Btr \langone Dahah belon\Etr
+                \Blr :\Elr \Bsx \vernac dahah\Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac Dahahu\Ehw\marking[guidewords]{Dahahu}
+                \Bpr ⁿda.ˈʁa.ʁu\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone one of the clans or / \vernac degwa / \langone from Mapos 2 village. / \langtwo wanpela lain bilong Mapos 2.\Ede
+                \Bex \vernac Mapos 2 degwaj ti yam vu Dahahu.\Eex
+                \Btr \langone One of the Mapos 2\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dahid\Ehw\marking[guidewords]{dahid}
+                \Bpr ⁿda.ˈʁiⁿd\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone variety of yam. / \langtwo wanpela kain yam.\Ede
+                \Bex \vernac Dëvun go dahid.\Eex
+                \Btr \langone They are planting\Etr
+                \Blr :\Elr \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dahis\Ehw\marking[guidewords]{dahis}
+                \Bpr ˈⁿda.ʁit͡ʃ\Epr
+                \Bsn 1) \Esn
+                \Bps Adj\Eps
+                \Bde \langone closed, complete. / \langtwo pas, i no gat hul.\Ede
+                \Bex \vernac Vonġ metu dahis ggökin.\Eex
+                \Btr \langone She closed it off again.\Etr
+                \Bsn 2) \Esn
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dahis ti\Ehw\marking[guidewords]{dahis ti}
+                \Bpr \Epr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dahisoong\Ehw\marking[guidewords]{dahisoong}
+                \Bpr ⁿda.ʁi.t͡ʃoːŋ\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone eighth son, the eighth male issue of a woman-this is very rarely heard, for obvious reasons. / \langtwo namba et pikinini man.\Ede
+                \Bex \vernac Avëh nġahiseḳë su dëḳo naluj medetöḳ ya dahisoong rë.\Eex
+                \Btr \langone There aren't many women who bear eight sons.\Etr
+                \Blr :\Elr \Bsx \vernac dahisoong\Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dahoov\Ehw\marking[guidewords]{dahoov}
+                \Bpr ⁿda.ˈʁoːβ\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone woody tuber-a variety of / \vernac ḳevileḳ, / \langone which is like yam but woody. / \langtwo mami.\Ede
+                \Bex \vernac Sevun dahoov loḳ damun.\Eex
+                \Btr \langone I planted the\Etr
+                \Blr :\Elr \Blr :\Elr \Bsx \vernac dahuk, \vernac danġaat\Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dahuk\Ehw\marking[guidewords]{dahuk}
+                \Bpr ⁿda.ˈʁuk\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone variety of taro yellow in colour. / \langtwo wanpela kain taro.\Ede
+                \Bex \vernac Alam böp wirek hir bik ti arë nebë dahuk, mala nisanġsanġ.\Eex
+                \Btr \langone People before had a taro whose name was\Etr
+                \Blr :\Elr \Bsx \vernac dahoov\Esx
+                \Blr :\Elr \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dahun\Ehw\marking[guidewords]{dahun}
+                \Bpr ⁿda.ˈʁun\Epr
+                \Bsn 1) \Esn
+                \Bps V1\Eps
+                \Bde \langone cover,fill in. / \langtwo karamapim long graun.\Ede
+                \Bex \vernac Sa nedahun yah in go.\Eex
+                \Btr \langone I covered the yam over again.\Etr
+                \Bsn 2) \Esn
+                \Bps V1\Eps
+                \Bde \langone hide. / \langtwo haitim.\Ede
+                \Bex \vernac Delah ġaġek vun.\Eex
+                \Btr \langone They kept the matter secret.\Etr
+                \Bsn 3) \Esn
+                \Bps V1\Eps
+                \Bde \langone forgive. / \langtwo daunim.\Ede
+                \Bex \vernac Hil dahun mehönon hir nġaa nipaya na.\Eex
+                \Btr \langone We should forgive people's sins.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dali\Ehw\marking[guidewords]{dali}
+                \Bpr ˈⁿda.l̪i\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone forbidden. / \langtwo tambuim.\Ede
+                \Bex \vernac Dali ggërin om su rëḳ nam gelë hil rë.\Eex
+                \Btr \langone A vow prevents him so he won't come to see us.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dalibeng\Ehw\marking[guidewords]{dalibeng}
+                \Bpr ⁿda.ˈl̪iᵐb.əŋ\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone Variety of tree the bark of which was chewed by women along with / \vernac monmon / \langone bark. This made their mouths red and was used to make them attractive to men. It was the women's equivalent of the / \vernac naböö / \langone used by men to attract women. / \langtwo wanpela kain diwai.\Ede
+                \Bex \vernac Avëh dëëgga dalibeng los monmon nebë bebumeng.\Eex
+                \Btr \langone Women chew\Etr
+                \Blr :\Elr \Bsx \vernac dabudenġ\Bhn{2}\Ehn \Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dalödin\Ehw\marking[guidewords]{dalödin}
+                \Bpr ⁿda.ˈl̪ɔⁿd.in\Epr
+                \Bsn 1) \Esn
+                \Bps V1\Eps
+                \Bde \langone bounce around, sway about-as the end of a long slender object being carried over the shoulder. / \langtwo i longpela na i no strong.\Ede
+                \Bex \vernac Kerë löv rëḳ ading om nedalödin.\Eex
+                \Btr \langone He carried a stick of sugarcane, but it was long and swayed about (as he walked).\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac damun\Ehw\marking[guidewords]{damun}
+                \Bpr ⁿda.ˈmun\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone a variety of ants which build anthills. / \langtwo wanpela kain anis.\Ede
+                \Bex \vernac Damun ruḳ loḳ heek babu.\Eex
+                \Btr \langone The ants built their mound up at the front of the fence.\Etr
+                \Bsn 2) \Esn
+                \Bps N\Eps
+                \Bde \langone anthill-the mounds made by ants. / \langtwo haus maunten bilong anis.\Ede
+                \Bex \vernac Yoo ḳo nalu loḳ damun.\Eex
+                \Btr \langone The python laid its eggs in the anthill..\Etr
+                \Bex \vernac Lev damun gehuk amego loḳ.\Eex
+                \Btr \langone She dug into the ant's nest and planted the tapioca in it.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac danaad\Ehw\marking[guidewords]{danaad}
+                \Bpr ⁿda.ˈnaːⁿd\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone axe. / \langtwo akis.\Ede
+                \Bex \vernac Alam böp la wirek denër ḳoov bë danaad.\Eex
+                \Btr \langone Some people used to call axes\Etr
+                \Eentry
+                    
+                \colimage{Pictures/Danidek}{danidek}\Bentry
+                \Bhw \vernac danidek\Ehw\marking[guidewords]{danidek}
+                \Bpr ⁿda.ˈniⁿd.ək\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone wasp. / \langtwo ninik.\Ede
+                \Bex \vernac Ketul ġelönġ raḳ danidek.\Eex
+                \Btr \langone He crushed the stone onto the wasp.\Etr
+                \Blr :\Elr \Bsx \vernac deġödahë\Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac danġaat\Ehw\marking[guidewords]{danġaat}
+                \Bpr ⁿda.ˈɴaːt\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone a wild inedible variety of banana similar to ted which grows in the grasslands. / \langtwo wanpela kain wail banana bilong ples kunai.\Ede
+                \Bex \vernac Ketöv danġaat metunġ loḳ ya numeng.\Eex
+                \Btr \langone He cut the\Etr
+                \Blr :\Elr \Bsx \vernac dahoov\Esx
+                \Blr :\Elr \Bsx \vernac duv\Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac danġadanġ\Ehw\marking[guidewords]{danġadanġ}
+                \Bpr ˈⁿdaɴ.a.ⁿdaɴ\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone A breastplate made of shell and worn around the neck as decoration while dancing; it consists of several large milk-white cowrie shells fixed in a circle around a woven centrepiece and is decorated with parrot feathers. / \langtwo girigiri.\Ede
+                \Bex \vernac Nevanuh danġadanġ loḳ newa.\Eex
+                \Btr \langone He was wearing a\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac danġed\Bhn{1}\Ehn \Ehw\marking[guidewords]{danġed}
+                \Bpr ⁿda.ˈɴɛⁿd\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone variety of yam. / \langtwo wanpela kain yam.\Ede
+                \Bex \vernac Danġed og go niwëëk rot.\Eex
+                \Btr \langone The\Etr
+                \Blr :\Elr \Bsx \vernac dagwem\Bhn{1}\Ehn \Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac danġed\Bhn{2}\Ehn \Ehw\marking[guidewords]{danġed}
+                \Bpr ⁿda.ˈɴɛⁿd\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone small dove-like bird, these are caught using bird nets and are a small variety of / \vernac ḳuuḳ / \langone . / \langtwo wanpela kain pisin.\Ede
+                \Bex \vernac Hurmahen devanëh danġed raḳ tepum.\Eex
+                \Btr \langone The children shot the\Etr
+                \Blr :\Elr \Bsx \vernac dabeenġ\Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac danġödenġ\Ehw\marking[guidewords]{danġödenġ}
+                \Bpr ⁿda.ˈɴɔⁿd.əɴ\Epr
+                \Bsn 1) \Esn
+                \Bps V1\Eps
+                \Bde \langone groan, moan, grunt. / \langtwo krai bilong manmeri i karim pen.\Ede
+                \Bex \vernac Ggëp nedanġödenġ in niraḳ.\Eex
+                \Btr \langone He lay moaning because he was sick.\Etr
+                \Bex \vernac Danġödenġ nebë bööḳ.\Eex
+                \Btr \langone He grunted like a pig.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac daröd\Ehw\marking[guidewords]{daröd}
+                \Bpr ⁿda.ˈɾɔⁿd\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone a bush which has orange berries. / \langtwo wanpela kain liklik bus gras i gat yelopela pikinini bilong en.\Ede
+                \Bex \vernac Vepul daröd meḳo meya begganġnë.\Eex
+                \Btr \langone She pulled out the\Etr
+                \Blr :\Elr \Bsx \vernac daduġ\Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac daröö\Ehw\marking[guidewords]{daröö}
+                \Bpr ⁿda.ˈɾɔː\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone variety of tree used for yam stakes. / \langtwo wanpela kain diwai.\Ede
+                \Bex \vernac Ġebuv daröö in yiḳ riing.\Eex
+                \Btr \langone Cut the\Etr
+                \Blr :\Elr \Bsx \vernac dabudenġ\Bhn{2}\Ehn \Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac Datëëk\Ehw\marking[guidewords]{Datëëk}
+                \Bpr ⁿda.ˈteːk\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone spirit, bush spirit, a variety of small bush spirit said to live in cloud in the bush. It, or they, have been seen by a number of different people, and their appearance described. / \langtwo bus tewel.\Ede
+                \Bex \vernac Datëëk neya loḳ beggob.\Eex
+                \Btr \langone The\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac datëv\Ehw\marking[guidewords]{datëv}
+                \Bpr ⁿda.ˈteβ\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone A variety of tree with white flowers used for firewood and yamstakes. Children play with the fruit because it explodes when struck. They are struck in a pea-shooter like gadget. / \langtwo wanpela kain diwai.\Ede
+                \Bex \vernac Datëv kweḳ anon veroo.\Eex
+                \Btr \langone The\Etr
+                \Blr :\Elr \Bsx \vernac dabudenġ\Bhn{2}\Ehn \Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac davës\Ehw\marking[guidewords]{davës}
+                \Bpr ⁿda.ˈβet͡ʃ\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone lightning. / \langtwo laitning.\Ede
+                \Bex \vernac Beggob böp vonġ medavës vër.\Eex
+                \Btr \langone The big clouds caused the lightning to flash.\Etr
+                \Bex \vernac Yesu duḳ nom og niḳapiik rëḳ bër jaḳ nyëġ nabë davës.\Eex
+                \Btr \langone When Jesus returns, his glory will be seen everywhere like lightning.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac david\Ehw\marking[guidewords]{david}
+                \Bpr ⁿda.ˈβiⁿd\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone pole, fishing rod, a bamboo pole used as a fishing rod, or as the support to which the bird nets are fastened. / \langtwo mambu bilong pulim pis na hangimapim umben bilong kisim pisin.\Ede
+                \Bex \vernac Yiḳ david sën dëseyu gwaaḳ raḳ medëdadii ġël raḳ ga dëvarah leḳ soḳ yi raḳ.\Eex
+                \Btr \langone They tie hooks onto\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac de-\Ehw\marking[guidewords]{de-}
+                \Bpr ⁿdə\Epr
+                \Bsn 1) \Esn
+                \Bps V\Eps
+                \Bde \langone they, third person plural pronoun as prefixed to verbs. / \langtwo ol.\Ede
+                \Bex \vernac Deḳo ḳupeḳ pin medeyah medeya bej.\Eex
+                \Btr \langone They took all the cargo and went back to their homes.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac debu\Bhn{1}\Ehn \Ehw\marking[guidewords]{debu}
+                \Bpr ⁿdə.ˈᵐbu\Epr
+                \Bsn 1) \Esn
+                \Bps V1\Eps
+                \Bde \langone break, crumble-usually of food in order to share it with someone else. / \langtwo brukim kaikai bilong givim long narapela man.\Ede
+                \Bex \vernac Sëḳ debu rabönġ vahi vu honġ.\Eex
+                \Btr \langone I'll break the sweetpotato and give you a bit.\Etr
+                \Bex \vernac Raḳ nedo semen lom debu.\Eex
+                \Btr \langone He sat on the cement and it crumbled.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac debu\Bhn{2}\Ehn \Ehw\marking[guidewords]{debu}
+                \Bpr ⁿdə.ˈᵐbu\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone the grass used for thatching a house. / \langtwo kunai bilong wokim haus.\Ede
+                \Bex \vernac Dënër sëh sën hil nariv begganġ raḳ lo arë ngwë nebë debu.\Eex
+                \Btr \langone They grass we thatch houses with is also known by another name,\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac debulin\Ehw\marking[guidewords]{debulin}
+                \Bpr ⁿdə.ˈᵐbul̪.in\Epr
+                \Bsn 1) \Esn
+                \Bps V1\Eps
+                \Bde \langone repair, sew up, tie together as of a torn stringbag, or a tear. / \langtwo stretim, samapim bilum i bruk.\Ede
+                \Bex \vernac Debulin vahek yah in mun lov.\Eex
+                \Btr \langone She pulled the loose ends of the stringbag together where the rats had chewed it and tied them.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dedod\Ehw\marking[guidewords]{dedod}
+                \Bpr ⁿdə.ˈⁿdoⁿd\Epr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dedonġ\Ehw\marking[guidewords]{dedonġ}
+                \Bpr ⁿdə.ˈⁿdoɴ\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone kind of tree. / \langtwo wanpela kain diwai.\Ede
+                \Bex \vernac Devuv dedonġ ya in neggök nos.\Eex
+                \Btr \langone They cut the\Etr
+                \Blr :\Elr \Bsx \vernac dabudenġ\Bhn{2}\Ehn \Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dedödin\Ehw\marking[guidewords]{dedödin}
+                \Bpr ⁿdə.ˈⁿdɔⁿd.in\Epr
+                \Bsn 1) \Esn
+                \Bps V1\Eps
+                \Bde \langone riddled with holes-as of food eaten by grubs. / \langtwo binatang wokim planti hul long kaikai.\Ede
+                \Bex \vernac Pabup dedödin loḳ go.\Eex
+                \Btr \langone The\Etr
+                \Bex \vernac Nġaa dedödin loḳ sa nġaa benipaya raḳ.\Eex
+                \Btr \langone Something has chewed holes in my things and ruined them.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dedöggin\Ehw\marking[guidewords]{dedöggin}
+                \Bpr ⁿdə.ˈⁿdɔɣ.in\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone type of thorny vine-it is used to delimit the hearth or fireplace. / \langtwo wanpela kain rop i kain olsem diwai.\Ede
+                \Bex \vernac Dedöggin kip loḳ aperek degwa.\Eex
+                \Btr \langone The\Etr
+                \Blr :\Elr \Bsx \vernac daġaheng\Esx
+                \Blr :\Elr \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dedul\Ehw\marking[guidewords]{dedul}
+                \Bpr ⁿdə.ˈⁿdul̪\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone a white, yellowish or reddish scum which appears on water in muddy areas, and is said to cause itching and sores if walked in. / \langtwo ros wara.\Ede
+                \Bex \vernac Devahu ġelönġ luḳ dedul in nedo loḳ aggata.\Eex
+                \Btr \langone They have placed (stepping) stones in the scummy water because it is right on the path.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dedum\Ehw\marking[guidewords]{dedum}
+                \Bpr ⁿdə.ˈⁿdum\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone large black spider. / \langtwo wanpela kain spaida.\Ede
+                \Bex \vernac Sesis dedum raḳ ḳoov yu.\Eex
+                \Btr \langone I killed the spider with the head of the axe.\Etr
+                \Blr :\Elr \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dedun\Ehw\marking[guidewords]{dedun}
+                \Bpr ⁿdə.ˈⁿdun\Epr
+                \Bsn 1) \Esn
+                \Bps N(inal)\Eps
+                \Bde \langone noise, drone, sound. / \langtwo nois.\Ede
+                \Bex \vernac Dedun ḳo nyëġ.\Eex
+                \Btr \langone The noise was heard throughout the whole place.\Etr
+                \Bex \vernac Ġevonġ dedum rot om ġena dob.\Eex
+                \Btr \langone You are making a lot of noise, so go outside.\Etr
+                \Bex \vernac Barus vonġ dedun meneyam.\Eex
+                \Btr \langone The aeroplane is droning as it comes.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dee\Ehw\marking[guidewords]{dee}
+                \Bpr ⁿdɛː\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone variety of reed. / \langtwo wel pitpit.\Ede
+                \Bex \vernac Keyëh dee metaggi buk.\Eex
+                \Btr \langone She broke some\Etr
+                \Bex \vernac Keping begganġ raḳ dee.\Eex
+                \Btr \langone He covered the walls of the house with\Etr
+                \Blr :\Elr \Eentry
+                    
+                \Bentry
+                \Bhw \vernac deek\Ehw\marking[guidewords]{deek}
+                \Bpr ⁿdɛːk\Epr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac degën\Ehw\marking[guidewords]{degën}
+                \Bpr ⁿdə.ˈᵑɡen\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone sideways, on edge. / \langtwo long sait.\Ede
+                \Bex \vernac Neggëp raḳ nenga degën.\Eex
+                \Btr \langone It was lying on edge.\Etr
+                \Bex \vernac Neya degën degën lom vës.\Eex
+                \Btr \langone He walked sideways and fell over.\Etr
+                \Bex \vernac Debë meneggëp degën.\Eex
+                \Btr \langone They laid it down on its edge.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac degi\Ehw\marking[guidewords]{degi}
+                \Bpr ⁿdə.ˈᵑɡi\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone purlin. / \langtwo bros bilong haus.\Ede
+                \Bex \vernac Degi ma in begganġ babu om su niwëëk rë.\Eex
+                \Btr \langone There was no purlin in the frame of the house, so it wasn't strong.\Etr
+                \Blr :\Elr \Eentry
+                    
+                \Bentry
+                \Bhw \vernac degu\Ehw\marking[guidewords]{degu}
+                \Bpr ⁿdə.ˈᵑɡu\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone variety of yam. / \langtwo wanpela kain yam.\Ede
+                \Bex \vernac Nevesi degu raḳ nengwah mu.\Eex
+                \Btr \langone He only roasted the\Etr
+                \Blr :\Elr \Eentry
+                    
+                \Bentry
+                \Bhw \vernac deġinengin\Ehw\marking[guidewords]{deġinengin}
+                \Bpr ⁿdə.ˈᵑɢin.əŋ.in\Epr
+                \Bsn 1) \Esn
+                \Bps V1\Eps
+                \Bde \langone press down, press together, hold down, crush. / \langone daunim / \langtwo strong.\Ede
+                \Bex \vernac Deġinengin bahë pesuv.\Eex
+                \Btr \langone It crushed him and his insides spurted out.\Etr
+                \Bex \vernac Begganġ tamanġ bedeġinengin bööḳ.\Eex
+                \Btr \langone The house collapsed and squashed the pig.\Etr
+                \Bsn 2) \Esn
+                \Bps V1\Eps
+                \Bde \langone oppress, burden, persecute. / \langtwo givim hevi long\Ede
+                \Bex \vernac Su rëḳ dedeġinengin nġaa maggin jaḳ sa rë\Eex
+                \Btr \langone They won't persecute me\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac deġo\Ehw\marking[guidewords]{deġo}
+                \Bpr ⁿdə.ˈᵑɢo\Epr
+                \Bsn 1) \Esn
+                \Bps V1\Eps
+                \Bde \langone split, break in two, for example, to break a small piece of food in two to share with someone else. / \langtwo brukim hap hap.\Ede
+                \Bex \vernac Deġo nema.\Eex
+                \Btr \langone It was too big for him to grasp.\Etr
+                \Bex \vernac Sa deġo go raḳ luu.\Eex
+                \Btr \langone I broke the yam in two.\Etr
+                \Bsn 2) \Esn
+                \Bps V1\Eps
+                \Bde \langone to have a headache. / \langtwo het pen\Ede
+                \Bex \vernac Sa yuġ deġo\Eex
+                \Btr \langone My head is splitting (I have a bad headache)\Etr
+                \Eentry
+                    
+                \colimage{Pictures/degödahë}{deġödahë}\Bentry
+                \Bhw \vernac deġödahë\Ehw\marking[guidewords]{deġödahë}
+                \Bpr ⁿdə.ˈᵑɢɔⁿd.a.ʁe\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone praying mantis. / \langtwo wanpela kain binatang.\Ede
+                \Bex \vernac Negga deġödahë in nivesa.\Eex
+                \Btr \langone He was eating praying mantis because it tasted good.\Etr
+                \Blr :\Elr \Bsx \vernac danidek\Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac deggédek\Ehw\marking[guidewords]{deggédek}
+                \Bpr ⁿdə.ˈɣɛⁿd.ək\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone a strong hard quick-growing tree useful for posts and firewood. The leaves used to be used to wrap corpses. / \langtwo wanpela strongpela diwai.\Ede
+                \Bex \vernac Deggedek keyëh in ḳeḳul loḳ.\Eex
+                \Btr \langone The\Etr
+                \Blr :\Elr \Bsx \vernac dabudenġ\Bhn{2}\Ehn \Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac deggideng\Ehw\marking[guidewords]{deggideng}
+                \Bpr ⁿdə.ˈɣiⁿd.əŋ\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone sprouts, suckers, new shoots from the stump of a tree which has been cut down. / \langtwo planti kru i kamap.\Ede
+                \Bex \vernac Deggideng raḳ in bo doḳ nah.\Eex
+                \Btr \langone Sprouts appeared to indicate that (the tree) would grow again.\Etr
+                \Bsn 2) \Esn
+                \Bps N\Eps
+                \Bde \langone gooseflesh, goose bumps. / \langtwo skin gras i sanap.\Ede
+                \Bex \vernac Seha mori lemon lob vong besa niġ deggideng.\Eex
+                \Btr \langone I ate a lemon and it made my flesh come up in goose bumps.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac deggis\Ehw\marking[guidewords]{deggis}
+                \Bpr ⁿdə.ˈɣit͡ʃ\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone digits, fingers. The fingers each have names. / \langtwo pinga bilong han.\Ede
+                \Bex \vernac Tetev raḳ nema deggis.\Eex
+                \Btr \langone He poked it with his finger.\Etr
+                \Blr :\Elr \Bsn 2) \Esn
+                \Bps N\Eps
+                \Bde \langone toes--usually in combination with / \vernac vaha / \langone 'leg/foot' to distinguish it from fingers. / \langtwo pinga bilong lek.\Ede
+                \Bex \vernac Mehönon los reggu pin vahaj deggis neggëp yoh vu sir.\Eex
+                \Btr \langone People and all animals have toes.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac deggun\Ehw\marking[guidewords]{deggun}
+                \Bpr ⁿdə.ˈɣun\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone variety of sugar. / \langtwo wanpela kain suga.\Ede
+                \Bex \vernac Avëh ti nehuk deggun.\Eex
+                \Btr \langone A woman was planting\Etr
+                \Blr :\Elr \Eentry
+                    
+                \Bentry
+                \Bhw \vernac degwa\Ehw\marking[guidewords]{degwa}
+                \Bpr ⁿdə.ˈᵑɡʷa\Epr
+                \Bsn 1) \Esn
+                \Bps N(inal)\Eps
+                \Bde \langone base, bottom, root. / \langtwo as, aninit.\Ede
+                \Bex \vernac Tunġ keröng loḳ ḳele degwa.\Eex
+                \Btr \langone He put the box at the foot of the tree.\Etr
+                \Bsn 2) \Esn
+                \Bps N(inal)\Eps
+                \Bde \langone the cause or significance of something, the reason for or behind something, or the source of something. / \langtwo as.\Ede
+                \Bex \vernac Degwa neggëp vu honġ.\Eex
+                \Btr \langone The responsibility lies with you.\Etr
+                \Bex \vernac Tateḳin ġaġek degwa vu sir.\Eex
+                \Btr \langone He explained the significance of what was said to them.\Etr
+                \Bsn 3) \Esn
+                \Bps N(inal)\Eps
+                \Bde \langone clan . / \langtwo lain.\Ede
+                \Bex \vernac Nabë alam degwa ti debasuh sir na yu luu bedengis sir, og alam degwa ti saga su rëḳ demedo rë.\Eex
+                \Btr \langone If a clan is divided and fighting among themselves, then that clan will not remain.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac degwaseḳë\Ehw\marking[guidewords]{degwaseḳë}
+                \Bpr \Epr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac degwata\Ehw\marking[guidewords]{degwata}
+                \Bpr \Epr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac degwata los degwata\Ehw\marking[guidewords]{degwata los degwata}
+                \Bpr \Epr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dehud\Ehw\marking[guidewords]{dehud}
+                \Bpr ⁿdə.ˈʁuⁿd\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone type of bird-probably the Orange-fronted hanging Lorilet. / \langtwo wanpela kain liklik pisin.\Ede
+                \Bex \vernac Dehud negga lul anon.\Eex
+                \Btr \langone The\Etr
+                \Blr :\Elr \Bsx \vernac dabeenġ\Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dob\Ehw\marking[guidewords]{dob}
+                \Bpr ⁿdoᵐb\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone ground, earth, dirt. / \langtwo graun.\Ede
+                \Bex \vernac Dob loḳ sa malaġ.\Eex
+                \Btr \langone I got a bit of dirt in my eye.\Etr
+                \Bex \vernac To nedo raḳ dob.\Eex
+                \Btr \langone He sat on the ground.\Etr
+                \Bsn 2) \Esn
+                \Bps N\Eps
+                \Bde \langone country, or an area of ground belonging to some particular people or group. / \langtwo graun.\Ede
+                \Bex \vernac Gweḳo hurmahen luho ata jaḳ meġenah Israel hir dob.\Eex
+                \Btr \langone Take the child and his mother and go back to Israel.\Etr
+                \Bsn 3) \Esn
+                \Bps N\Eps
+                \Bde \langone the Earth. / \langtwo graun.\Ede
+                \Bex \vernac Ham nebë dob sënë yi ranġah.\Eex
+                \Btr \langone You are like the light of this world.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dob ahë\Ehw\marking[guidewords]{dob ahë}
+                \Bpr \Epr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dob-ḳenu\Ehw\marking[guidewords]{dob-ḳenu}
+                \Bpr \Epr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dobahë\Ehw\marking[guidewords]{dobahë}
+                \Bpr \Epr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac doblu\Ehw\marking[guidewords]{doblu}
+                \Bpr ˈⁿdoᵐb.l̪u\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone cricket-commonly known as the mole cricket. / \langtwo wanpela kain binatang.\Ede
+                \Bex \vernac Doblu nesu in nyëġ vanġ nivesa.\Eex
+                \Btr \langone The cricket was singing because the weather was so good.\Etr
+                \Blr :\Elr \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dobnë\Ehw\marking[guidewords]{dobnë}
+                \Bpr \Epr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dod\Ehw\marking[guidewords]{dod}
+                \Bpr ⁿdoⁿd\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone A tree the leaves of which irritate the kin. The sting recurs each time one washes. There are at least two varieties of / \vernac dod, / \langone one is a big tree, the other is a smaller variety. / \langtwo wanpela kain diwai salat.\Ede
+                \Bex \vernac Dod gga sa vahaġ.\Eex
+                \Btr \langone The\Etr
+                \Blr :\Elr \Bsx \vernac dabudenġ\Bhn{2}\Ehn \Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dokta\Ehw\marking[guidewords]{dokta}
+                \Bpr ˈⁿdok.ta\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone doctor. / \langtwo dokta.\Ede
+                \Bex \vernac Dokta teta pegges.\Eex
+                \Btr \langone The doctor bandaged the sore.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac domeng\Ehw\marking[guidewords]{domeng}
+                \Bpr ˈⁿdom.əŋ\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone leech. / \langtwo liklik snek i save pulim blut bilong man.\Ede
+                \Bex \vernac Domeng gga tatovaha vaha.\Eex
+                \Btr \langone The leech fastened itself to the teacher's leg.\Etr
+                \Blr :\Elr \Eentry
+                    
+                \Bentry
+                \Bhw \vernac döleng\Ehw\marking[guidewords]{döleng}
+                \Bpr ˈⁿdɔl̪.əŋ\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone kind of tree with edible nuts. / \langtwo diwai siis.\Ede
+                \Bex \vernac Ḳele döleng og dëgga anon gedërekö seḳë loḳ soḳ.\Eex
+                \Btr \langone They eat the nuts of the tree and hang the shells on their headdresses.\Etr
+                \Blr :\Elr \Bsx \vernac dabudenġ\Bhn{2}\Ehn \Esx
+                \Bsn 2) \Esn
+                \Bps N\Eps
+                \Bde \langone Nuts of a particular variety of tree which are fastened to the headdress used in dancing. They make a rattling noise as the dancers move. The fruit of the nuts is eaten. The nuts are put in water to soak where they develop a strong smell. Then they are cooked in bamboo with greens. / \langtwo pikinini diwai siis.\Ede
+                \Bex \vernac Negga döleng anon los dii ris.\Eex
+                \Btr \langone He ate the\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dönġ\Ehw\marking[guidewords]{dönġ}
+                \Bpr ⁿdɔɴ\Epr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dönġ-hus\Ehw\marking[guidewords]{dönġ-hus}
+                \Bpr ⁿdɔɴ ʁut͡ʃ\Epr
+                \Bsn 1) \Esn
+                \Bps Nc\Eps
+                \Bde \langone variety of tree-this tree is not burned because it would attract the bush spirits who would be angry and attack one. / \langtwo wanpela kain diwai.\Ede
+                \Bex \vernac Sevuv dönġ-hus in jeyanġ go jaḳ.\Eex
+                \Btr \langone I cut a\Etr
+                \Blr :\Elr \Bsx \vernac dabudenġ\Bhn{2}\Ehn \Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac döök döök\Ehw\marking[guidewords]{döök döök}
+                \Bpr \Epr
+                \Eentry
+                    
+                \colimage{Pictures/AvëhDuVahek2}{Avëh du vahek}\Bentry
+                \Bhw \vernac du\Bhn{1}\Ehn \Ehw\marking[guidewords]{du}
+                \Bpr ⁿdu\Epr
+                \Bsn 1) \Esn
+                \Bps V2\Eps
+                \Bde \langone to carry on the head hanging down the back-usually of a stringbag, but also of a raincoat or even an umbrella. / \langtwo hangimapim long het na karim.\Ede
+                \Bex \vernac Du vahek raḳ yu.\Eex
+                \Btr \langone She carried the stringbag on her head.\Etr
+                \Bsn 2) \Esn
+                \Bps V2\Eps
+                \Bde \langone to press down, be loaded down, carried away, push. / \langtwo pusim.\Ede
+                \Bex \vernac Du raḳ kweben beya mevës.\Eex
+                \Btr \langone He hit him with his thigh and knocked him over.\Etr
+                \Bex \vernac Rot ngwë ya lob du.\Eex
+                \Btr \langone He pushed another over and carried him with him.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac du\Bhn{2}\Ehn \Ehw\marking[guidewords]{du}
+                \Bpr ⁿdu\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone a lagoon of brackish water close to the sea. / \langtwo raunwara i stap klostu long nambis.\Ede
+                \Bex \vernac Nġaggee sën nedo loonë bemala ḳöḳ lo arë nebë du.\Eex
+                \Btr \langone A lagoon close to the sea and reddish coloured is called a\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac du raḳ beġö\Ehw\marking[guidewords]{du raḳ beġö}
+                \Bpr \Epr
+                \Bhn{1}\Ehn \Eentry
+                    
+                \colimage{Pictures/Dub-}{dub}\Bentry
+                \Bhw \vernac dub\Ehw\marking[guidewords]{dub}
+                \Bpr ⁿduᵐb\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone men's house. / \langtwo haus man.\Ede
+                \Bex \vernac Delev dub in maluh degëp jaḳ.\Eex
+                \Btr \langone They built a men's house for the men to sleep in.\Etr
+                \Blr :\Elr \Bsx \vernac dub-ḳapiya, \vernac dub-soda-yi\Esx
+                \Bsn 2) \Esn
+                \Bps N\Eps
+                \Bde \langone school. / \langtwo skul.\Ede
+                \Bex \vernac Hurmahen dëluk dub.\Eex
+                \Btr \langone Children go to school.\Etr
+                \Bsn  1\Esn
+                \Bsn  1\Esn
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dub-agga\Ehw\marking[guidewords]{dub-agga}
+                \Bpr \Epr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dub-ḳapiya\Ehw\marking[guidewords]{dub-ḳapiya}
+                \Bpr \Epr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dub-soda-yi\Ehw\marking[guidewords]{dub-soda-yi}
+                \Bpr \Epr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dub-supinsën-yi\Ehw\marking[guidewords]{dub-supinsën-yi}
+                \Bpr \Epr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dub-vabuung\Ehw\marking[guidewords]{dub-vabuung}
+                \Bpr \Epr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dub-vabuung-böp\Ehw\marking[guidewords]{dub-vabuung-böp}
+                \Bpr \Epr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dubdub\Ehw\marking[guidewords]{dubdub}
+                \Bpr ⁿduᵐb.ⁿduᵐb\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone mirror. / \langtwo glas bilong lukim pes.\Ede
+                \Bex \vernac Saga nebë mehöti nelë mala loḳ dubdub loḳ pevis bekwa virekin ggökin.\Eex
+                \Btr \langone That's like a person who sees his face in a mirror but quickly forgets it again.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dudeḳ\Ehw\marking[guidewords]{dudeḳ}
+                \Bpr ˈⁿduⁿd.əq\Epr
+                \Bsn 1) \Esn
+                \Bps V1\Eps
+                \Bde \langone bow, bend down, to sit with bowed head, to bow the head from shame, to bow to ginger or to spirit places. / \langtwo daunim het.\Ede
+                \Bex \vernac Vonġ aye raḳ lom dudeḳ menedo.\Eex
+                \Btr \langone He shouted at him and he bowed his head.\Etr
+                \Bex \vernac Dudeḳ menedo loḳ ḳele degwa.\Eex
+                \Btr \langone He was sitting at the foot of the tree with his head bowed.\Etr
+                \Bex \vernac Maḳ nejom raḳ om sën dudeḳ.\Eex
+                \Btr \langone She must be praying and that's why her head is bowed.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac duġ\Ehw\marking[guidewords]{duġ}
+                \Bpr ⁿduᵑɢ\Epr
+                \Bsn 1) \Esn
+                \Bps V\Eps
+                \Bde \langone ignorant, to be ignorant, to not know something. / \langtwo no save.\Ede
+                \Bex \vernac Duġ om maḳ su lë rë.\Eex
+                \Btr \langone She doesn't know, so she can't have seen it.\Etr
+                \Bex \vernac Nër bë yi duġ in yö nedo begganġnë.\Eex
+                \Btr \langone She said she didn't know because she was in the village.\Etr
+                \Bex \vernac Saḳ duġ!\Eex
+                \Btr \langone I don't know!\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac duġin\Ehw\marking[guidewords]{duġin}
+                \Bpr \Epr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac duh\Ehw\marking[guidewords]{duh}
+                \Bpr ⁿduʁ\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone a very hard stone used for cutting, carving spears, tools,etc. / \langtwo sap ston.\Ede
+                \Bex \vernac Veröp duh in gerah raro jaḳ ggagenġ.\Eex
+                \Btr \langone He broke off (a piece of)\Etr
+                \Bex \vernac Kër senöġ raḳ duh.\Eex
+                \Btr \langone He shaved his whiskers with (a piece of)\Etr
+                \Blr :\Elr \Bsx \vernac dadah-reek\Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dum\Ehw\marking[guidewords]{dum}
+                \Bpr ⁿdum\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone to make or follow a way through the bush in order to ambush someone or to catch an animal, a small track like an animal run used for this purpose. / \langtwo liklik rot ol i wokim aninit long bus olsem rot bilong pik bilong was long paitim na kilim man.\Ede
+                \Bex \vernac Devo dum ggevek vos ġebinë.\Eex
+                \Btr \langone They made a track through underneath the bush (to set an ambush).\Etr
+                \Bsn 2) \Esn
+                \Bps N\Eps
+                \Bde \langone ambush. / \langtwo sambai long.\Ede
+                \Bex \vernac Alam Mapos detunġ dum in bë dengis Ḳahil ti sagu in verup ya go vë Humeḳ.\Eex
+                \Btr \langone The Mapos people set an ambush for that Manga man because he went to Humek to get seed yams.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dun\Ehw\marking[guidewords]{dun}
+                \Bpr ⁿdun\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone shoot, sucker-of bananas, sugarcane, etc. / \langtwo kru bilong banana, suga, samting.\Ede
+                \Bex \vernac Dun om su niwëëk rë.\Eex
+                \Btr \langone It's just a shoot and therefore not strong.\Etr
+                \Bex \vernac Ngur löv dun rëḳ ni ngat.\Eex
+                \Btr \langone He chewed a sugarcane shoot, but it was tasteless.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dus\Ehw\marking[guidewords]{dus}
+                \Bpr ⁿdut͡ʃ\Epr
+                \Bsn 1) \Esn
+                \Bps Adj\Eps
+                \Bde \langone short. / \langtwo sotpela.\Ede
+                \Bex \vernac Të ya dus teka mu.\Eex
+                \Btr \langone He threw it only a short way away.\Etr
+                \Bex \vernac Ketöv apel dus.\Eex
+                \Btr \langone She cut off a short length of bamboo.\Etr
+                \Bsn 2) \Esn
+                \Bps Adv\Eps
+                \Bde \langone near, nearby, close. / \langtwo klostu.\Ede
+                \Bex \vernac Dus raḳ in hil ana.\Eex
+                \Btr \langone It is close to the time we should go.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac dus dus\Ehw\marking[guidewords]{dus dus}
+                \Bpr \Epr
+                \Eentry
+                    
+                \colimage{Pictures/duu}{avëh duu tob}\Bentry
+                \Bhw \vernac duu\Bhn{1}\Ehn \Ehw\marking[guidewords]{duu}
+                \Bpr ⁿduː\Epr
+                \Bsn 1) \Esn
+                \Bps V1\Eps
+                \Bde \langone sew, fasten, tie. / \langtwo samapim, pasim.\Ede
+                \Bex \vernac Duu ahon.\Eex
+                \Btr \langone He tied it tightly.\Etr
+                \Bex \vernac Bebuum duu buġ vetii bengö agga.\Eex
+                \Btr \langone The whiteman tied my grandfather to the trunk of a victory palm.\Etr
+                \Bsn 2) \Esn
+                \Bps V1\Eps
+                \Bde \langone inject, prick with a needle, to thrust with an instrument held with the point coming from the fingers and thumb like a dart. / \langtwo givim sut.\Ede
+                \Bex \vernac Dokta duu sa raḳ rureḳ.\Eex
+                \Btr \langone The doctor gave me an injection with a needle.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac duu\Bhn{2}\Ehn \Ehw\marking[guidewords]{duu}
+                \Bpr ⁿduː\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone day after tomorrow. / \langtwo hap tumora.\Ede
+                \Bex \vernac Duu rëḳ sena Rae.\Eex
+                \Btr \langone The day after tomorrow I'm going to Lae.\Etr
+                \Blr :\Elr \Bsx \vernac duu\Bhn{2}\Ehn \Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac duum\Ehw\marking[guidewords]{duum}
+                \Bpr ⁿduːm\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone illegitimate child, a child whose father is not known, a bastard. / \langtwo bastet.\Ede
+                \Bex \vernac Ḳo nalu duum.\Eex
+                \Btr \langone She bore an illegitimate child.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac duung\Ehw\marking[guidewords]{duung}
+                \Bpr ⁿduːm\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone A special kind of stringbag usually made by a widow and worn on her head but covered with a cloth as a sign of mourning after the death of a husband or child. The bags varied in size according to the prestige of the man concerned and could sometimes be huge. Sometimes the widow also carried some of her husband's effects in a stringbag around her neck. / \langtwo karamap bilong meri man i dai.\Ede
+                \Bex \vernac Yeh duung in regga diiḳ.\Eex
+                \Btr \langone She's covered her head with a big stringbag because her husband died.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac duv\Ehw\marking[guidewords]{duv}
+                \Bpr ⁿduβ\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone variety of banana-Musa sp. / \langtwo wanpela kain banana.\Ede
+                \Bex \vernac Vud duv anon ading.\Eex
+                \Btr \langone The\Etr
+                \Blr :\Elr \Bsx \vernac danġaat\Esx
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac duvöön\Ehw\marking[guidewords]{duvöön}
+                \Bpr ⁿdu.ˈβɔːn\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \langone large variety of cassowary. / \langtwo bikpela muruk.\Ede
+                \Bex \vernac Gwib böp arë nebë duvöön.\Eex
+                \Btr \langone There is a large variety of cassowary which is called the\Etr
+                \Blr :\Elr \Blr :\Elr \Bsx \vernac dabeenġ\Esx
+                \Eentry
+                    
+                \Bletter E e\Eletter
+                \Bentry
+                \Bhw \vernac =e\Ehw\marking[guidewords]{=e}
+                \Bpr ɛ\Epr
+                \Bsn 1) \Esn
+                \Bde \langone vocative. / \langtwo o.\Ede
+                \Bex \vernac Arig lo-e!\Eex
+                \Btr \langone My brothers!\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac -e\Ehw\marking[guidewords]{-e}
+                \Bpr ɛ\Epr
+                \Bsn 1) \Esn
+                \Bps Call\Eps
+                \Bde \langone eh; exclamation denoting surprise. / \langtwo e.\Ede
+                \Bex \vernac Ham-e! Ham yam-a?\Eex
+                \Btr \langone It's you eh! You've arrived?\Etr
+                \Bex \vernac Yam-e!\Eex
+                \Btr \langone He's come (and he shouldn't have!)\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac e!\Ehw\marking[guidewords]{e!}
+                \Bpr ɛ\Epr
+                \Bsn 1) \Esn
+                \Bps Interj\Eps
+                \Bde \langone ah!-exclamation denoting disgust or disagreement. / \langtwo sakim tok.\Ede
+                \Bex \vernac E! Saḳ nado gesesu rëḳ nök rë.\Eex
+                \Btr \langone Ah! I'm not going, I'm going to stay here.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac ee\Ehw\marking[guidewords]{ee}
+                \Bpr ɛː\Epr
+                \Bsn 1) \Esn
+                \Bps Interj\Eps
+                \Bde \langone hey!; aha! exclamation of discovery. / \langtwo em!\Ede
+                \Bex \vernac Ee. Ya verup agu.\Eex
+                \Btr \langone Look! He's come up over there.\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac eeḳ\Ehw\marking[guidewords]{eeḳ}
+                \Bpr ɛːq\Epr
+                \Bsn 1) \Esn
+                \Bps Interj\Eps
+                \Bde \langone yuk!; exclamation of disgust, aversion. / \langtwo makim traut.\Ede
+                \Bex \vernac Eeḳ! tato nabë hil namuteḳ in nġaa nivë.\Eex
+                \Btr \langone Eeḳ\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac ekë\Ehw\marking[guidewords]{ekë}
+                \Bpr ɛ.ˈke\Epr
+                \Bsn 1) \Esn
+                \Bps Interj\Eps
+                \Bde \langone Yes!, True!. / \langtwo yes!, tru!\Ede
+                \Bex \vernac Ekë! Nedo loḳ agi!\Eex
+                \Btr \langone Oh yes! Here it is!\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac =eḳ\Ehw\marking[guidewords]{=eḳ}
+                \Bpr \Epr
+                \Eentry
+                    
+                \Bletter Ë ë\Eletter
+                \Bentry
+                \Bhw \vernac -ë\Ehw\marking[guidewords]{-ë}
+                \Bpr e\Epr
+                \Bsn 1) \Esn
+                \Bps Loc\Eps
+                \Bde \langone this, here; a deictic indicating this, or the one spoken about. / \langtwo ia.\Ede
+                \Bex \vernac Yam-ë!\Eex
+                \Btr \langone Come here to me!\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac ë-\Ehw\marking[guidewords]{ë-}
+                \Bpr \Epr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac ë'ë\Ehw\marking[guidewords]{ë'ë}
+                \Bpr ˈeʔ.e\Epr
+                \Bsn 1) \Esn
+                \Bps Interj\Eps
+                \Bde \langone Here!. / \langtwo hia!\Ede
+                \Bex \vernac Ë'ë! Höm-ë!\Eex
+                \Btr \langone Here! Here's yours!\Etr
+                \Eentry
+                    
+                \Bentry
+                \Bhw \vernac ëë\Ehw\marking[guidewords]{ëë}
+                \Bpr eː\Epr
+                \Bsn 1) \Esn
+                \Bps Interj\Eps
+                \Bde \langone yes; agreement with the speaker. / \langtwo yes.\Ede
+                \Bex \vernac Ëë! Ġenam!\Eex
+                \Btr \langone Yes! Come!\Etr
+                \Bex \vernac Ëë-ë! Verup deya.\Eex
+                \Btr \langone Yes! They have come up and gone.\Etr
+                \Eentry
+                    
+                \Edict
+        

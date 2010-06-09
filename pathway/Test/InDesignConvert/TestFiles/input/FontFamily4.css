@@ -1,0 +1,18 @@
+.t1
+{
+	font-size: 20pt;
+	color: red;
+}
+.t2
+{
+    font-family: "Arial";
+    font-size: 16pt;
+    color: blue;
+}
+.a
+{
+    font: 200% "Times New Roman", serif;
+    color: green;
+}
+
+

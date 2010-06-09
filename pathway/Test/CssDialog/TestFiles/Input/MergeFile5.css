@@ -1,0 +1,13 @@
+@import "MergeFile4.css";
+@import "MergeFile6.css";
+
+.locator
+{
+    display:block;
+    text-align: center;
+    flow:static(locator);
+}
+
+
+
+	

@@ -1,0 +1,27 @@
+
+
+.letHead {
+    display: block;
+    column-count: 1;
+    clear: both;
+    border-bottom: .5pt solid #a00;
+    text-align: center;
+    margin: 18pt 9pt;
+    margin-left: .75in;
+    margin-right: .75in;
+    padding-bottom: 10pt;
+    margin-bottom: 20pt;
+}
+.letter {
+    display: inline;
+    font-weight: bold;
+    font-size: 24pt;
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    direction: ltr;
+}
+.letData {
+    column-count: 2; -moz-column-count: 2;
+/*    column-gap: 1.5em; -moz-column-gap: 1.5em; */
+    column-fill: auto;
+    column-rule: solid 1pt #aa0000;
+}

@@ -1,0 +1,1 @@
+(RULE (CLASS image) (PROPERTY float right) (PROPERTY width 50 %) (PROPERTY padding .5 em) (PROPERTY padding .5 em .5 em) (PROPERTY padding .5 em .5 em .5 em) (PROPERTY padding .5 em .5 em .5 em .5 em))

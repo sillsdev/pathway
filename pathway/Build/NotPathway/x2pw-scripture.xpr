@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <meta>
+        <filters directoryPatterns="" filePatterns=""
+            positiveFilePatterns="" showHiddenFiles="false"/>
+        <options/>
+    </meta>
+    <projectTree name="x2pw-scripture.xpr">
+        <file name="../Test/PsTool/TestFiles/InputFiles/GPS12L10.xhtml"/>
+        <file name="xhtml2xpw-scripture-tpl.xsl"/>
+        <file name="xhtml2xpw-scripture.xsl"/>
+        <file
+            name="../Test/PsTool/TestFiles/InputFiles/xhtml2xpw-scripture1.xsl"
+        />
+    </projectTree>
+</project>

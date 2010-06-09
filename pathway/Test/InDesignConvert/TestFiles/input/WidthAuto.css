@@ -1,0 +1,37 @@
+.letHead {
+    text-align: center;
+}
+
+.letter {
+    font-weight: bold;
+    font-size: 24pt;
+    font-family: "Times New Roman";
+}
+.letData {
+    column-count: 2;
+    text-align: left;
+}
+.entry {
+    font-family: serif;
+    font-size: 10pt;
+    font-weight: normal;
+text-align: left;
+}
+.pictureRight {
+    float: right;
+    padding: 2pt;
+    text-align: right;
+}
+.picture1 {
+    height:3.0in;
+    width: 2.0in;
+}
+.picture2 {
+    height:2.0in;
+}
+.picture3 {
+    width: auto;
+}
+.pictureCaption {
+color:blue;
+}

@@ -1,0 +1,16 @@
+.letter {
+    text-align: center;
+    width: 100%;
+    margin-top: 18pt;
+}
+
+.etymology-gloss:after,
+.definition_L2:after,
+.xitem > .sense + .sense:before{
+display: inline;
+}
+
+
+oxes, oxesText, chapter, section, title{
+  display: block;
+}

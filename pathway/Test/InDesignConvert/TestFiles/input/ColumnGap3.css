@@ -1,0 +1,8 @@
+.t1{
+     column-count: 2;   
+     column-gap: 1.5em; 
+    border:solid 1pt blue;
+    text-align: left;
+   color:blue;
+   line-height: 1em;
+}

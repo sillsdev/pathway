@@ -1,0 +1,4 @@
+.variant-inflection[class~='last-of-type']::after
+{
+	content: ') ';
+}

@@ -1,0 +1,21 @@
+span{
+	font-size:8pt;
+color: red;
+    }
+
+span[lang='en']{
+	font-size:14pt;
+color: orange;
+    }
+
+
+span.header{
+	font-size:20pt;
+color: blue;
+    }
+
+span.header[lang='en']{
+	font-size:26pt;
+color: green;
+    }
+

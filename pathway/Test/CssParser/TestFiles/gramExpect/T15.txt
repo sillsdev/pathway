@@ -1,0 +1,1 @@
+(PAGE section (PSEUDO first) (REGION top-left (PROPERTY content '') (PROPERTY border-bottom-style none)) (REGION top-center (PROPERTY content '') (PROPERTY border-bottom-style none)) (REGION top-right (PROPERTY content '') (PROPERTY border-bottom-style none)))

@@ -1,0 +1,15 @@
+.letHead {
+    color:green;
+    font-size:25pt;
+}
+.letHead:after {
+    content: "###";
+    color:orange;
+    font-size:18pt;
+}
+
+.letHead + .letHead:after {
+    content: "***";
+    color:orange;
+    font-size:25pt;
+}

@@ -1,0 +1,7 @@
+/* single column dictionary */
+.letData {
+       column-count: 1; -moz-column-count: 1;
+}
+.revData {
+       column-count: 1; -moz-column-count: 1;
+}

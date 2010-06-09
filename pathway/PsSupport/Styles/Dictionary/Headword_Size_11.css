@@ -1,0 +1,19 @@
+﻿.headword               { font-size: 11pt; }
+.headword :after        { font-size: 11pt; }
+.headword > .xitem + .xitem :before { font-size: 11pt; }
+.headwordminor          { font-size: 11pt; }
+.headwordminor :after   { font-size: 11pt; }
+.headwordminor > .xitem + .xitem :before { font-size: 11pt; }
+.headword-minor          { font-size: 11pt; }
+.headword-minor :after   { font-size: 11pt; }
+.headword-minor > .xitem + .xitem :before { font-size: 11pt; }
+.headword-sub          { font-size: 11pt; }
+.headword-sub :after   { font-size: 11pt; }
+.headword-sub > .xitem + .xitem :before { font-size: 11pt; }
+.LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub          { font-size: 11pt; }
+.LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub :after   { font-size: 11pt; }
+.LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub > .xitem + .xitem :before { font-size: 11pt; }
+.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub          { font-size: 11pt; }
+.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub :after   { font-size: 11pt; }
+.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub > .xitem + .xitem :before { font-size: 11pt; }
+

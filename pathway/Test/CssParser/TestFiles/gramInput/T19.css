@@ -1,0 +1,4 @@
+.letter .headword 
+{
+	string-set: guideword content();  /* just added this line to the css */
+}

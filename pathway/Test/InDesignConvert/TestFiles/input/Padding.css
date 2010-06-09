@@ -1,0 +1,32 @@
+.dicBody {
+}
+.letHead {
+}
+.entryLeft {
+    font-size: 12pt;
+    padding-left: 25pt;
+    color:brown;
+    }
+
+.entryRight {
+    font-size: 12pt;
+    padding-right: 25pt;
+    color:Green;
+    }
+    
+.entryTop {
+    font-size: 12pt;
+    padding-top: 25pt;
+    color:blue;
+    }
+    
+
+.entryBottom {
+    font-size: 12pt;
+    padding-bottom: 25pt;
+    color:red;
+
+    }
+
+    
+

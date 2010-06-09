@@ -1,0 +1,21 @@
+
+.letter 
+{
+    display: outline;
+    font-size: 24pt;
+    font-family: "Garamond", serif;	/* default Serif font */
+    direction: ltr;
+}
+	
+	
+.slot-name
+{
+	font-size: 90%;
+	font-family:Sans-Serif;
+	letter-spacing: 0.05em;
+}
+
+.headword 
+{
+	string-set: word content();
+}

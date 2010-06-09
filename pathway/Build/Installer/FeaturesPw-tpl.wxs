@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2003/01/wi">
+	<Fragment Id="FeaturesFragment">
+		<Feature Id="Application" Title="Pathway Configuration Tool" Description="Allow the project manager to select (or create) the appropriate style sheet and destination." Display="expand" Level="3" AllowAdvertise="no">
+			<ComponentRef Id="DeskShortcutApp"/>
+			<ComponentRef Id="ShortcutApp"/>
+			<ComponentRef Id="ReadMeShortcutApp"/>
+			<ComponentRef Id="TutorialShortcutApp"/>
+			<ComponentRef Id="LicenseShortcutApp"/>
+			%(ConfigurationToolFeatures)s
+		</Feature>
+		<Feature Id="PwPlugIn" Title="Fieldworks Pathway Plug-in" Description="Adds Pathway Print Via... dialog to utility menu in Language Explorer and the Export menu in the Translation Editor" Display="expand" Level="3" AllowAdvertise="no">
+			%(PsDllFeatures)s
+			%(SupportFeatures)s
+		</Feature>
+	</Fragment>
+</Wix>

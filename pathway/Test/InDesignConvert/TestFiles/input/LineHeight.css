@@ -1,0 +1,11 @@
+.letData 
+{
+    font-size: 14pt;	/* inherited */
+}
+
+.entry1 { line-height: 2; font-size: 14pt }     /* number */
+.entry2 { line-height: 1em; font-size: 14pt }   /* length */
+.entry3 { line-height: 200%; font-size: 14pt }    /* percentage */
+.entry4 { line-height: 24pt; font-size: 14pt }    /* percentage */
+.entry5 { line-height: 200%;} /*inherit*/
+.entry6 { line-height: normal;} /*inherit*/

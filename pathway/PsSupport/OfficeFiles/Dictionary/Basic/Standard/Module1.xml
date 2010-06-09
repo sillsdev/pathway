@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
+&apos;Constant ReferenceFormat for User Desire
+Const ReferenceFormat = &quot;&quot;
+Const AutoMacro = &quot;false&quot;
+&apos;Constant ReferenceFormat for User Desire
+Const ReferenceFormat = &quot;string(guidewordfirst)counter(page)string(guidewordlast)&quot;
+&apos;Changed For TD-1141(PrintVia Extra processing)
+
+&apos;Define the values to Constant Variables for First Guide word, Last Guide word ,Headword Style
+Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
+Const LASTGUIDESTYLE =  &quot;GuideR&quot;
+Const HEADWORDSTYLE = &quot;headword&quot;
+Const HEADWORD_MINOR_STYLE = &quot;headwordminor&quot;
+Const ENTRYPARASTYLE =  &quot;entry_letData&quot;
+Const TITLEPARASTYLE = &quot;letter&quot;
+Const HOMOGRAPHNUMBER =   &quot;homographnumber&quot;
+Const CONTINUATION_CHARACTER = &quot;...&quot;
+Dim LastParagraph(0) As String
+
+&apos;The main procedure to show the First and Last Guide words on Header
+Sub SetGuides()
+On Error GoTo MyError:
+
+	Dim PageCount as Integer
+
+	mytime = now
+	RemoveOldGuides()
+	KeepNextParagraph()
+	PageCount = TotalPages
+	Redim LastParagraph(PageCount) As String	
+	GetLastParagraph()
+	keep = &quot;Keepnext&quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
+	mytime = now
+	
+	keep = keep &amp; chr(10) &amp; &quot;RemoveOld&quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
+	mytime = now
+	&apos;PageCount = TotalPages
+	LastPara(PageCount)
+	keep = keep &amp; chr(10) &amp; &quot;Search&quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
+	mytime = now
+	keep = keep &amp; chr(10) &amp; &quot;Insert&quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
+	ReSetTabs()
+	
+	&apos;msgbox keep
+	&apos;&apos;msgbox mytime &amp; chr(10) &amp; now
+Exit Sub
+MyError:
+	Msgbox &quot;Sorry! Could not update the Guide Words.&quot; , 0 + 64,  &quot;Update Guide Words&quot;
+End Sub  
+
+&apos;This procedure set the dialgue to correct Update Guide Words 
+Sub StartDontForget
+	&apos;Msgbox &quot;Please NOTE: Use the Update Guide Words menu item or tool bar item to correct the guide words before printing.&quot; , 0 + 64,  &quot;Guide Word Reminder&quot;
+	If LCase(AutoMacro) = &quot;true&quot; Then
+		SetGuides
+	Else
+		dim clicked as byte
+		clicked = msgbox (&quot;Headers are updated to contain the first and last word with the &quot; + &quot;&quot;&quot;&quot; + &quot;Update Guide Words&quot; + &quot;&quot;&quot;&quot; + &quot; tool bar item or Macro menu item.&quot; &amp; chr(10) &amp; &quot;Would you like to update the headers now?&quot;, 4 + 32 + 256 , &quot;Guide Word Reminder&quot;)
+		If clicked = 6 Then &apos;If Yes clicked
+			SetGuides
+		End If
+	End If		
+End Sub
+
+&apos;This procedure set the dialgue to confirm user to correction of Update Guide Words while Printing
+Sub IsGuidewordsCorrected
+	dim clicked as byte
+	clicked = msgbox ( &quot;If you have not corrected the guide words yet, you can correct them now.&quot; &amp; chr(10) &amp; &quot;Would you like to correct the guide words?&quot;, 4 + 32 + 256 , &quot;Guide Word Reminder&quot;)
+	If clicked = 6 Then &apos;If Yes clicked
+		SetGuides
+	End If
+End Sub
+
+&apos;This function gives the Total Pages of the current file
+Function TotalPages()
+	Dim cont
+	cont = ThisComponent.getCurrentController()
+	TotalPages = cont.PageCount
+End Function
+
+&apos;This function gives the guidewords from the given paragraph
+Function GuideWord(oCursor)
+  oParaEnume = oCursor.createEnumeration() 
+  While oParaEnume.hasMoreElements() 
+    oPara = oParaEnume.nextElement() 
+  &apos; enumeration for portions in the paragraph 
+    oPortionEnume = oPara.createEnumeration() 
+    While oPortionEnume.hasMoreElements() 
+      	TextPortion = oPortionEnume.nextElement() &apos;reversalform-after
+		&apos;If (GetStyleName(TextPortion.CharStyleName) = &quot;reversalform&quot; AND Len(Trim(GuideWord)) = 0) OR GetStyleName(TextPortion.CharStyleName) = HEADWORDSTYLE OR GetStyleName(TextPortion.CharStyleName) = HEADWORD_MINOR_STYLE OR  InStr(GetStyleName(TextPortion.CharStyleName), HOMOGRAPHNUMBER) &gt; 0  THEN
+     	If (GetStyleName(TextPortion.CharStyleName) = &quot;reversalform&quot; AND Len(Trim(GuideWord)) = 0) OR GetStyleName(TextPortion.CharStyleName) = HEADWORDSTYLE OR GetStyleName(TextPortion.CharStyleName) = HEADWORD_MINOR_STYLE THEN
+      		GuideWord = GuideWord &amp; Trim(TextPortion.String) &amp; &quot; &quot;
+		ElseIf Len(Trim(TextPortion.String)) &gt; 0 Then
+      		Exit Function
+      	End If&apos;reversalform
+    WEnd 
+  WEnd
+End Function
+
+&apos;This procedure push the letter style content (A a, B b), if letter found in last paragraph of the current page.
+Sub KeepNextParagraph 
+	ThisComponent.currentController.getViewCursor().jumpToPage(2)
+oDoc = ThisComponent 
+oVC = oDoc.CurrentController.getViewCursor 
+oVC.gotoStart(false) 
+Do 
+	page = oVC.getPage
+	oVC.jumpToEndOfPage 
+	Last = oDoc.Text.createTextCursorByRange(oVC) 
+	Last.gotoStartOfParagraph(false)
+	Last.gotoEndOfParagraph(true) 
+	&apos;LastParagraph(page) = Last.String
+	If Len(Trim(Last.String)) &gt; 0 Then
+		If GetStyleName(Last.ParaStyleName) =  TITLEPARASTYLE Then
+			Call PushToNextPage
+			&apos;PageCount = TotalPages
+			&apos;Redim Preserve LastParagraph(PageCount) As String			
+			&apos;LastParagraph(page) = &quot;&quot;
+			ThisComponent.currentController.getViewCursor().jumpToPage(page)
+		End If
+	End If	
+Loop While oVC.jumpToNextPage 	 
+End Sub
+
+&apos;This procedure gets the last paragraph of every page
+Sub GetLastParagraph 
+	ThisComponent.currentController.getViewCursor().jumpToPage(2)
+oDoc = ThisComponent 
+oVC = oDoc.CurrentController.getViewCursor 
+oVC.gotoStart(false) 
+Do 
+	page = oVC.getPage
+	oVC.jumpToEndOfPage 
+	Last = oDoc.Text.createTextCursorByRange(oVC) 
+	Last.gotoStartOfParagraph(false)
+	Last.gotoEndOfParagraph(true) 
+	LastParagraph(page) = Last.String
+Loop While oVC.jumpToNextPage 	 
+End Sub
+
+
+&apos;This procedure find the first paragraph of every page
+Sub InsertGuidewords(HiddenParagraph,PageCount) 
+dim PrevPageNo
+	ThisComponent.currentController.getViewCursor().jumpToPage(2)
+oDoc = ThisComponent 
+oVC = oDoc.CurrentController.getViewCursor 
+oVC.gotoStart(false) 
+PageCount = TotalPages
+Do 
+	page = oVC.getPage
+	
+	if PrevPageNo &gt;= page Then
+		page = PrevPageNo + 1
+		ThisComponent.currentController.getViewCursor().jumpToPage(page)
+	end if
+	
+	if PageCount = page then
+		Exit Do
+	End If	
+	oVC.jumpToEndOfPage
+
+		paraTextPageNo = split(HiddenParagraph(page,0),&quot;`~&quot;)
+        If UBound(paraTextPageNo) = 1 Then
+			&apos;For Last Guide Word
+	    	paraPos = val(paraTextPageNo(0)) 
+			paraText = Trim(paraTextPageNo(1))
+			paraStyle = LASTGUIDESTYLE
+			&apos;InsertGuide(paraText,paraPos,paraStyle)
+	        	
+			&apos;For First Guide Word
+			paraTextPageNo = split(HiddenParagraph(page,1),&quot;`~&quot;)
+			paraPos1 = val(paraTextPageNo(0)) 
+			paraText1 = Trim(paraTextPageNo(1))
+			paraStyle1 = FIRSTGUIDESTYLE
+			&apos;InsertGuide(paraText1,paraPos1,paraStyle1)
+			
+			If LastParagraph(page -1) = LastParagraph(page) Then
+				InsertGuide(paraText1,paraPos1,paraStyle1)
+				InsertGuide(paraText,paraPos,paraStyle)
+			Else
+				InsertGuide(paraText,0,paraStyle)
+				Currpage = oVC.getPage
+				If Currpage &lt;&gt; page Then
+					ThisComponent.currentController.getViewCursor().jumpToPage(page)
+					oVC.jumpToEndOfPage	
+				End If				
+				InsertGuide(paraText1,0,paraStyle1)
+			End If
+				
+			&apos;&apos;InsertGuide(paraText1,paraPos1,paraStyle1)
+		End If
+		Currpage = oVC.getPage
+		If Currpage &lt;&gt; page Then
+			ThisComponent.currentController.getViewCursor().jumpToPage(page)	
+		End If
+		PrevPageNo = page
+Loop While oVC.jumpToNextPage 	 
+End Sub
+
+&apos;This function finds whether guideword exists in given pragraph
+Function IsGuide(oCursor)
+  IsGuide = False
+  oParaEnume = oCursor.createEnumeration() 
+  While oParaEnume.hasMoreElements() 
+    oPara = oParaEnume.nextElement() 
+  &apos; enumeration for portions in the paragraph 
+    oPortionEnume = oPara.createEnumeration() 
+    While oPortionEnume.hasMoreElements() 
+      oPortion = oPortionEnume.nextElement() 
+      &apos;msgbox &quot;String: &quot; &amp; oPortion.getString() &amp; &quot;CharStyleName: &quot; &amp; oPortion.CharStyleName &apos;HOMOGRAPHNUMBER 
+      &apos;If oPortion.ParaStyleName = ENTRYPARASTYLE AND GetStyleName(oPortion.CharStyleName) = &quot;reversalform&quot; OR GetStyleName(oPortion.CharStyleName) = HEADWORDSTYLE OR GetStyleName(oPortion.CharStyleName) = HEADWORD_MINOR_STYLE OR InStr(GetStyleName(oPortion.CharStyleName), HOMOGRAPHNUMBER) &gt; 0 THEN
+      If oPortion.ParaStyleName = ENTRYPARASTYLE AND GetStyleName(oPortion.CharStyleName) = &quot;reversalform&quot; OR GetStyleName(oPortion.CharStyleName) = HEADWORDSTYLE OR GetStyleName(oPortion.CharStyleName) = HEADWORD_MINOR_STYLE THEN
+      		IsGuide = True
+      End If
+      Exit Function
+    WEnd 
+  WEnd
+End Function
+
+&apos;This procedure finds first and last guidewords in everypage.
+Sub LastPara(PageCount) 
+
+Dim HiddenParagraph(PageCount,1) As String
+
+	ThisComponent.currentController.getViewCursor().jumpToPage(2)
+
+oDoc = ThisComponent 
+oVC = oDoc.CurrentController.getViewCursor 
+oVC.gotoStart(false) 
+Do
+    page = oVC.getPage 
+If page &gt; 1 Then
+
+    LastParaString = LastParagraph(page)
+ 	First = oDoc.Text.createTextCursorByRange(oVC) 
+ 	IsFirstPara = True
+ 	IsEmptyPage = False
+ 	IsEmptyGuidewordPage = False
+
+	If LastParagraph(page -1) = LastParagraph(page) And Len(Trim(LastParaString)) &gt; 0 Then
+		First = PrevLast
+		Last = PrevLast
+	Else
+	  
+		Do
+		
+		  First.gotoEndOfParagraph(true) 
+	
+		  If IsFirstPara Then
+		  	FirstParaString = First.String
+		  	IsFirstPara = False
+		  End If
+		  If First.String =  LastParaString Then
+		  	  	If	First.String = &quot;&quot; And LastParaString = &quot;&quot; Then
+		  	  		IsEmptyPage = True
+		  	  	ElseIf page &gt; 2 Then
+		  	  		If First.String = PrevLast.String Then
+		  	  			First = PrevLast
+		  	  			IsEmptyGuidewordPage = True
+		  	  		End If
+		  	  	End If
+		  	  	Exit Do
+		  Else
+			  If IsGuide(First) Then
+			    &apos;MsgBox(page &amp; &quot; Left &quot; &amp; First.String)
+			    Exit Do 
+			  End If	
+		  End IF	
+		Loop While First.gotoNextParagraph(false) 
+	    
+		oVC.jumpToEndOfPage
+	
+	 	Last = oDoc.Text.createTextCursorByRange(oVC) 
+		Do 
+		&apos;Last = oDoc.Text.createTextCursorByRange(oVC) 
+		Last.gotoStartOfParagraph(false)
+		Last.gotoEndOfParagraph(true) 
+	
+		  If IsEmptyPage Then
+		  	Exit Do
+		  ElseIf IsEmptyGuidewordPage Then	   	  
+		  	Last = PrevLast
+		  	Exit Do
+		  Else	  
+			  If IsGuide(Last) Then
+			    &apos;MsgBox((page &amp; &quot; Right &quot; &amp; Last.String) 
+			    Exit Do
+			  End If
+		  End If	
+		Loop While Last.gotoPreviousParagraph(false) 
+	
+	End If
+	
+    if page = PageCount Then
+    	&apos;msgbox &quot;First : &quot; &amp; First.String &amp; Chr(13) &amp; &quot;Last : &quot; &amp; Last.String
+    	If Last.String = &quot;&quot; Then
+    		HiddenParagraph(page-1,0) = page-1 &amp; &quot;`~&quot; &amp; GuideWord(PrevLast)
+    		HiddenParagraph(page-1,1) = page-1 &amp; &quot;`~&quot; &amp; GuideWord(PrevLast)   
+		Else
+	    	HiddenParagraph(page-1,0) = page-1 &amp; &quot;`~&quot; &amp; GuideWord(Last)
+	    	HiddenParagraph(page-1,1) = page-1 &amp; &quot;`~&quot; &amp; GuideWord(First)   
+		End IF
+	else 
+    	HiddenParagraph(page-1,0) = page-1 &amp; &quot;`~&quot; &amp; GuideWord(Last)
+    	HiddenParagraph(page-1,1) = page-1 &amp; &quot;`~&quot; &amp; GuideWord(First)   
+	end if   
+	
+    PrevFirst = First
+    PrevLast = Last	 	
+End If	
+Loop While oVC.jumpToNextPage 
+
+	&apos;mytime = now
+InsertGuidewords(HiddenParagraph,PageCount)
+&apos;InsertHiddenParagraph(HiddenParagraph)
+	&apos;keep = &quot;Insert&quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
+	&apos;msgbox keep
+End Sub
+
+&apos;This procedure called from KeepNextParagraph
+&apos;This procedure push the letter style content (A a, B b), if letter found in last paragraph of the current page.
+Sub PushToNextPage
+	document   = ThisComponent.CurrentController.Frame
+	dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;)
+
+	&apos;dispatcher.executeDispatch(document, &quot;.uno:GoToPrevPara&quot;, &quot;&quot;, 0, Array())
+	dispatcher.executeDispatch(document, &quot;.uno:GotoStartOfPara&quot;, &quot;&quot;, 0, Array())
+	dispatcher.executeDispatch(document, &quot;.uno:InsertPara&quot;, &quot;&quot;, 0, Array())
+End Sub
+
+&apos;This function returns first styleName from the StylesTree (entry~letData)
+Function GetStyleName(StylesTree)
+	Dim arrStyles
+	arrStyles = split(StylesTree,&quot;_&quot;)
+	If(Ubound(arrStyles) &gt; 0) Then
+		GetStyleName = arrStyles(0)
+	Else
+		GetStyleName = &quot;&quot;
+	End If
+End Function
+
+&apos;Insert the first or last guide word in given Position (Page)
+Sub InsertGuide(par,pos,style)
+	Dim guide as String
+
+	If(Len(Trim(par)) &gt; 19) Then
+		guide =  Left(par,16) &amp; CONTINUATION_CHARACTER 
+	Else
+		guide =  par		
+	End If
+
+	move(pos,style)
+
+   	InsertPara(guide, style)
+End Sub        
+
+&apos;This procedure creates empty paragraphs to print the guidewords
+Sub move(pos,style)
+	dim document   as object
+	dim dispatcher as object
+	document = ThisComponent.CurrentController.Frame 
+	dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;) 
+	If pos = 0 Then
+	    dispatcher.executeDispatch(document, &quot;.uno:GotoStartOfPara&quot;, &quot;&quot;, 0, Array())
+		&apos;dispatcher.executeDispatch(document, &quot;.uno:GoUp&quot;, &quot;&quot;, 0, Array())     
+		dispatcher.executeDispatch(document, &quot;.uno:GoUp&quot;, &quot;&quot;, 0, Array())     
+	    dispatcher.executeDispatch(document, &quot;.uno:GotoEndOfPara&quot;, &quot;&quot;, 0, Array()) 
+		dispatcher.executeDispatch(document, &quot;.uno:InsertPara&quot;, &quot;&quot;, 0, Array())
+	Else &apos;If Page had no new paragraphs, this code will be executed
+		If style = &quot;GuideL&quot; Then
+			ThisComponent.currentController.getViewCursor().jumpToPage(pos)
+			dispatcher.executeDispatch(document, &quot;.uno:GoDown&quot;, &quot;&quot;, 0, Array()) 
+			dispatcher.executeDispatch(document, &quot;.uno:InsertPara&quot;, &quot;&quot;, 0, Array())
+			dispatcher.executeDispatch(document, &quot;.uno:InsertPara&quot;, &quot;&quot;, 0, Array())
+
+			dim args1(0) as new com.sun.star.beans.PropertyValue
+			args1(0).Name = &quot;Text&quot;
+			args1(0).Value = CHR$(9)
+			dispatcher.executeDispatch(document, &quot;.uno:InsertText&quot;, &quot;&quot;, 0, args1())			
+		Else
+			dispatcher.executeDispatch(document, &quot;.uno:GoToStartOfLine&quot;, &quot;&quot;, 0, Array())
+			dispatcher.executeDispatch(document, &quot;.uno:InsertPara&quot;, &quot;&quot;, 0, Array())
+		End If
+		
+		dispatcher.executeDispatch(document, &quot;.uno:GoUp&quot;, &quot;&quot;, 0, Array()) 
+
+	End If
+End Sub
+
+&apos;Insert the first or last guide word
+Sub InsertPara(guide, style)
+	dim document   as object
+	dim dispatcher as object
+	document   = ThisComponent.CurrentController.Frame
+	dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;)
+
+	dim args1(0) as new com.sun.star.beans.PropertyValue
+	args1(0).Name = &quot;Text&quot;
+	args1(0).Value = guide 
+	dispatcher.executeDispatch(document, &quot;.uno:InsertText&quot;, &quot;&quot;, 0, args1())
+
+	dim args2(1) as new com.sun.star.beans.PropertyValue
+	args2(0).Name = &quot;Template&quot;
+	args2(0).Value = style&apos; &amp; &quot;D&quot;
+	args2(1).Name = &quot;Family&quot; 
+	args2(1).Value = 2 
+	dispatcher.executeDispatch(document, &quot;.uno:StyleApply&quot;, &quot;&quot;, 0, args2())
+End Sub
+
+
+&apos;This procedure removes existing hidden guide words
+Sub RemoveOldGuides
+	Dim oParEnum           &apos;Paragraph enumerator 
+	Dim oPar               &apos;Current paragraph 
+	oParEnum = ThisComponent.Text.createEnumeration() 
+	Do While oParEnum.hasMoreElements() 
+		oPar = oParEnum.nextElement() 
+		If oPar.supportsService(&quot;com.sun.star.text.Paragraph&quot;) Then 
+			If InStr(oPar.ParaStyleName, &quot;Guide&quot;) &gt; 0 Then 
+			    oPar.Anchor.ParaStyleName = ENTRYPARASTYLE
+				ThisComponent.Text.removeTextContent(oPar) 
+			End If 
+		End If 
+	Loop
+End Sub
+
+&apos;This function returns Page Number of given Paragraph
+Function pageNo(par)
+	Dim cont, vc, st
+	st = par.getStart()
+	cont = ThisComponent.getCurrentController()
+	cont.select(st)
+	pageNo = cont.getViewCursor.getPage()
+End Function
+
+&apos;This procedure reset the Header/Footer&apos;s tabs based on the PageSize
+Sub ReSetTabs
+
+dim oStyle, oPageStyles, center, right
+dim document   as object
+dim dispatcher as object
+
+document   = ThisComponent.CurrentController.Frame
+dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;)
+oDoc = ThisComponent 
+
+  oVC = oDoc.getCurrentController().getViewCursor()
+  sPageStyleName = oVC.PageStyleName
+
+  oPageStyles = oDoc.StyleFamilies.getByName(&quot;PageStyles&quot;)
+  oStyle = oPageStyles.getByName(sPageStyleName)
+  center =  cint((oStyle.Width / 2) - oStyle.LeftMargin)
+  right = oStyle.Width - oStyle.RightMargin
+
+oVC = oDoc.CurrentController.getViewCursor 
+&apos;-------------------------------------------- FOR HEADER ---------------------------
+If oStyle.HeaderIsOn Then
+	oVC.JumpToPage(2)  
+	dispatcher.executeDispatch(document, &quot;.uno:JumpToHeader&quot;, &quot;&quot;, 0, Array())
+	dim args4(0) as new com.sun.star.beans.PropertyValue
+	args4(0).Name = &quot;Tabstops.TabStops&quot;
+	args4(0).Value = Array(Array(center,com.sun.star.style.TabAlign.CENTER,&quot;,&quot;,&quot; &quot;),Array(right,com.sun.star.style.TabAlign.RIGHT,&quot;,&quot;,&quot; &quot;))
+	dispatcher.executeDispatch(document, &quot;.uno:Tabstops&quot;, &quot;&quot;, 0, args4())
+	
+	If oStyle.PageStyleLayout = 3 Then
+		oVC.JumpToPage(3)
+		dispatcher.executeDispatch(document, &quot;.uno:JumpToHeader&quot;, &quot;&quot;, 0, Array())
+		dim args8(0) as new com.sun.star.beans.PropertyValue
+		args8(0).Name = &quot;Tabstops.TabStops&quot;
+		args8(0).Value = Array(Array(center,com.sun.star.style.TabAlign.CENTER,&quot;,&quot;,&quot; &quot;),Array(right,com.sun.star.style.TabAlign.RIGHT,&quot;,&quot;,&quot; &quot;))
+		dispatcher.executeDispatch(document, &quot;.uno:Tabstops&quot;, &quot;&quot;, 0, args8())
+	End If
+End If
+&apos;-------------------------------------------- FOR FOOTER ---------------------------
+If oStyle.FooterIsOn Then
+	oVC.JumpToPage(2)  
+	dispatcher.executeDispatch(document, &quot;.uno:JumpToFooter&quot;, &quot;&quot;, 0, Array())
+	dim args5(0) as new com.sun.star.beans.PropertyValue
+	args5(0).Name = &quot;Tabstops.TabStops&quot;
+	args5(0).Value = Array(Array(center,com.sun.star.style.TabAlign.CENTER,&quot;,&quot;,&quot; &quot;),Array(right,com.sun.star.style.TabAlign.RIGHT,&quot;,&quot;,&quot; &quot;))
+	dispatcher.executeDispatch(document, &quot;.uno:Tabstops&quot;, &quot;&quot;, 0, args5())
+
+	If oStyle.PageStyleLayout = 3 Then	
+		oVC.JumpToPage(3)
+		dispatcher.executeDispatch(document, &quot;.uno:JumpToFooter&quot;, &quot;&quot;, 0, Array())
+		dim args6(0) as new com.sun.star.beans.PropertyValue
+		args6(0).Name = &quot;Tabstops.TabStops&quot;
+		args6(0).Value = Array(Array(center,com.sun.star.style.TabAlign.CENTER,&quot;,&quot;,&quot; &quot;),Array(right,com.sun.star.style.TabAlign.RIGHT,&quot;,&quot;,&quot; &quot;))
+		dispatcher.executeDispatch(document, &quot;.uno:Tabstops&quot;, &quot;&quot;, 0, args6())
+	End If
+End If
+
+end sub
+
+</script:module>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!--?xml-stylesheet type="text/xsl" href="Possibilities.xsl"?-->
+
+<symbol-map role="dialog" title="SymbolMap" root="yes" >
+	<font-label name="Font:" path="9:$name;/41:$name" role="statictext" />
+	<datagrid name="DataGridView" path="9:$name;/24:$name;/" role="table" >
+		<row1-cell1 name="Row 0" path="28:$name;/29: $name" role="cell" />
+		<row1-cell2 name="Row 0" path="28:$name;/29: $name;[2]" role="cell" />
+		<row2-cell1 name="Row 1" path="28:$name;/29: $name" role="cell" />
+		<row2-cell2 name="Row 1" path="28:$name;/29: $name;[2]" role="cell" />
+	</datagrid >
+	<close-button name="Close" path="9:$name;/43:$name" role="pushbutton" />
+</symbol-map >
+
+
+

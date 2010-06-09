@@ -1,0 +1,21 @@
+.b
+{
+color:red;
+}
+
+.a
+{ 
+color: blue;
+font-size:18pt;
+}
+
+.a[class~='c']
+{ 
+color: orange;
+}
+
+.a[class~='b'][class~='c']
+{ 
+font-size:24pt;
+}
+

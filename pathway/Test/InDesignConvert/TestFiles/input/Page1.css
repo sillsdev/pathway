@@ -1,0 +1,72 @@
+@page 
+{
+        size: 8.5in 11in;
+	margin: 1.27cm 1.27cm 1.27cm 1.27cm;
+	counter-increment: page;
+    @top-left 
+    {
+		content: string(guideword, first);
+		font-family:sans-serif;
+		font-weight:bold;
+		font-size:12pt;
+		color: #aa0000;
+		margin-top: 1em;
+		 border-bottom: dashed .5pt #aa0000;
+		 margin-bottom: 1em;
+		 vertical-align: bottom;
+    }
+    @top-center
+    {
+		content: counter(page); 
+		margin-top: 1em;
+		 border-bottom: dashed .5pt #aa0000;
+		 margin-bottom: 1em;
+		 vertical-align: bottom;
+	}
+    @top-right
+    {
+		content: string(guideword, last); 
+		font-family:sans-serif;
+		font-weight:bold;
+		font-size:12pt;
+		color: #aa0000;
+		margin-top: 1em;
+		 border-bottom: dashed .5pt #aa0000;
+		 margin-bottom: 1em;
+		 vertical-align: bottom;
+	}
+}
+
+@page:first {
+    margin: 1.0in 1.0in 1.0in 1.0in;
+    background-color:yellow;
+    size: 8.5in 11.0in;
+    border: solid .25in green;
+    @top-left {
+    content: string(guideword, first);
+    font-size: 10pt;
+    font-family: "Times new roman";
+    font-weight: bold;
+    color: RED;
+}
+
+
+
+
+
+.headword 
+{
+	string-set: guideword content();  /* just added this line to the css */
+}
+
+.dictionary 
+{
+	counter-reset: page 1632;
+	column-count: 2; -moz-column-count: 2;
+	column-gap: 2em; -moz-column-gap: 2em;
+	column-fill: auto;
+	text-align: justify;
+	font-size: 10pt;
+}
+
+

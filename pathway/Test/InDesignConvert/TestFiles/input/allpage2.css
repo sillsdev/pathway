@@ -1,0 +1,307 @@
+@page {
+    counter-increment: page;
+    size: 6.25in 8.75in;
+    margin: .5in .5in .5in .5in;
+    @top-left      { content: ''; }
+    @top-center {
+    content: string(bookname, first) " "  string(chapter, first) ":" string(verse, first)  " - "  string(chapter, last) ":" string(verse, last);
+    }    
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: counter(page); }
+    @bottom-right  { content: ''; }
+
+}
+
+@page :first {
+    @top-left      { content: ''; }
+    @top-center    { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: counter(page); }
+    @bottom-right  { content: ''; }
+}
+
+.border {
+    border-top: .5pt solid #000;
+    text-align: center;
+    margin-left: 1in;
+    margin-right: 1in;
+    margin-top: 9pt;
+    margin-bottom: 18pt;
+    content: "\00A0";
+}
+
+.columns {
+    column-count: 2;
+    column-gap: .5cm;
+    column-fill: balance;
+}
+
+.Chapter_Head {
+    font-size:14pt;
+    line-height:15pt;
+    padding-top:21pt;
+    padding-bottom:21pt;
+}
+
+.Chapter_Number {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: 190%;
+    font-weight: bolder;
+    vertical-align: top;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    float: left;
+    string-set: chapter content();
+}
+
+.crossHYPHENReference::footnote-call {
+    font-style:Italic;
+}
+
+
+.Emphasis {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-style: italic;	/* cascaded environment */
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.Intro_List_Item1 {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 9pt;	/* cascaded environment */
+    line-height: 10pt;
+    -ps-fixed-line-height: 10pt;
+    text-indent: -18pt;
+    margin-left: 36pt;
+}
+.Intro_Paragraph {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 9pt;	/* cascaded environment */
+    line-height: 10pt;
+    -ps-fixed-line-height: 10pt;
+    text-indent: .2in;
+    margin-left: 0pt;
+}
+.Intro_Section_Head {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 9pt;
+    line-height: 10pt;
+    -ps-fixed-line-height: 10pt;
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: left;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    margin-top: 3pt;
+    margin-bottom: 3pt;
+}
+.Line1 {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 11pt;	/* cascaded environment */
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+    /*text-align: leading;*/
+    text-align: left;
+    text-indent: -18pt;
+    margin-left: 18pt;
+    padding-left: 0pt;
+}
+.Note_CrossHYPHENReference_Paragraph {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 8pt;	/* cascaded environment */
+    line-height: 8pt;
+    -ps-fixed-line-height: 8pt;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    display: inline;
+    display: footnote;
+    display: prince-footnote;
+    position: footnote;
+    list-style-position: inside;
+}
+.Note_CrossHYPHENReference_Paragraph::footnote-call {
+    color: purple;
+    content: attr(title);
+    font-size: 6pt;
+    vertical-align: super;
+    line-height: none;
+}
+.Note_CrossHYPHENReference_Paragraph::footnote-marker {
+    font-size: 8pt;
+    font-weight: bold;
+    content: string(chapter) ':' string(verse) ' = ';
+    /* content: string(footnoteMarker); font-size: 6pt; vertical-align: super; color: purple; */
+    text-align: left;
+}
+.Note_General_Paragraph {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 8pt;	/* cascaded environment */
+    text-indent: 0pt;
+    margin-left: 0pt;
+    line-height: 8pt;
+    -ps-fixed-line-height: 8pt;
+    display: inline;
+    display: footnote;
+    display: prince-footnote;
+    position: footnote;
+    list-style-position: inside;
+}
+.Note_General_Paragraph::footnote-call {
+    color: purple;
+    content: attr(title);
+    font-size: 6pt;
+    vertical-align: super;
+    line-height: none;
+}
+.Note_General_Paragraph::footnote-marker {
+    font-size: 8pt;
+    font-weight: bold;
+    content: string(chapter) ':' string(verse) ' = ';
+    /* content: string(footnoteMarker); font-size: 6pt; vertical-align: super; color: purple; */
+    text-align: left;
+}
+.Paragraph {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 11pt;	/* cascaded environment */
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+    text-indent: 12pt;
+    margin-left: 0pt;
+}
+.Paragraph_Continuation {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 11pt;	/* cascaded environment */
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+
+.parallel_passage_reference {
+    font-size:10pt;
+    font-style:Italic;
+}
+
+.pictureRight {
+    float: right;
+    width: 99px;
+    margin: 0px 0px 5px 5px;
+    //padding: 3px;
+    //border: 1px solid black;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.pictureLeft {
+    float: left;
+    position: relative;
+    left: -2pc;
+    width: 99px;
+    margin: 0px 5px 5px 0px;
+    //padding: 3px;
+    //border: 1px solid black;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.pictureCenter {
+    float: bottom;
+    clear: both;
+    width: 4.75in;
+    margin: 0px 5px 5px 0px;
+    //padding: 3px;
+    //border: 1px solid black;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.pictureRight > .picture {
+    width: 95px;
+    height: 84px;
+}
+div.pictureLeft > img.picture {
+    width: 95px;
+    height: 84px;
+}
+.pictureCaption {
+    display: block;
+    text-align: center;
+    text-transform:capitalize;
+}
+
+.scrBody {
+}
+.scrBook {
+    column-count: 1;
+    clear: both;
+}
+.scrBookName {
+    string-set: bookname content();
+    display: none;
+}
+.scrFootnoteMarker {
+}
+.scrIntroSection {
+    text-align: left;
+}
+.scrSection {
+    text-align: left;
+}
+.Section_Head {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 10pt;
+    line-height: 11pt;
+    -ps-fixed-line-height: 11pt;
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    //padding-bottom: 4pt;
+    //padding-top: 8pt;
+    margin-top: 12pt;
+    margin-bottom:6pt;
+}
+.Section_Head_Major {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 10pt;
+    line-height: 11pt;
+    -ps-fixed-line-height: 11pt;
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    margin-top: 8pt;
+}
+
+span {
+    prince-text-replace: "<<" "\201C" ">>" "\201D" "<" "\2018" ">" "\2019";
+}
+
+.Title_Main {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 20pt;	/* cascaded environment */
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    line-height: 24pt;
+    -ps-fixed-line-height: 24pt;
+    padding-bottom: 12pt;
+    padding-top: 36pt;
+}
+.Verse_Number {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: 6pt;
+    vertical-align: super;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    string-set: verse content();
+}
+
+
+
+

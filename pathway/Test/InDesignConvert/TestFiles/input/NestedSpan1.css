@@ -1,0 +1,16 @@
+.t1 {
+    font-size: 32pt;
+    text-align: left;
+   color:red;
+}
+
+.t2 {
+    font-size: 50%;
+    text-align: left;
+   color:blue;
+   line-height: 1em;
+}
+.t3 {
+   color:green;
+	font-size: 50%;
+}

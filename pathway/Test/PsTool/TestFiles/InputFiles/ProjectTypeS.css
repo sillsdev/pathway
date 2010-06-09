@@ -1,0 +1,27 @@
+.Chapter_Number {
+    font-family: "Charis SIL", serif;	/* default Serif font */
+    font-size: 12pt;
+    font-weight: bolder;
+    vertical-align: top;
+    float: left;
+    string-set: chapterx content();
+    color:red;
+}
+
+.Paragraph {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 10pt;	/* cascaded environment */
+    text-indent: 12pt;
+}
+
+
+.Verse_Number {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: 10pt;
+    vertical-align: super;	/* cascaded environment */
+    string-set: versex content();
+}
+.Verse_Number_Alternate {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    vertical-align: super;	/* cascaded environment */
+}

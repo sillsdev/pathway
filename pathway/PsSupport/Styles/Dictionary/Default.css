@@ -1,0 +1,15 @@
+﻿@page {
+    size: 612pt  792pt;
+    margin: .5in;
+}
+
+.letData {
+       column-count: 2; -moz-column-count: 2;
+       column-gap: 12pt; -moz-column-gap: 12pt;
+       column-fill: balance;
+}
+.revData {
+       column-count: 2; -moz-column-count: 2;
+       column-gap: 12pt; -moz-column-gap: 12pt;
+       column-fill: balance;
+}

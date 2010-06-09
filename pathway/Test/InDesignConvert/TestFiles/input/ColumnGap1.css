@@ -1,0 +1,13 @@
+.t1 {
+    font-size: 12pt;
+    text-align: left;
+    color:red;
+    //background-color: blue;
+}
+
+.t2 {
+    text-align: left;
+   color:blue;
+   column-count: 2;   
+   column-gap: 50pt; 
+}

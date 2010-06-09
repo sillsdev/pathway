@@ -1,0 +1,18 @@
+.letData {
+       column-rule: solid 1pt #808080;
+}
+.letHead {
+       border-bottom: .5pt solid #808080;
+       margin: 18pt 9pt;
+       /* padding-bottom: 36pt; */
+       /* padding-top: 36pt; */
+}
+.revData {
+       column-rule: solid 1pt #808080;
+}
+.revHeader {
+       border-bottom: .5pt solid #808080;
+       margin: 18pt 9pt;
+       /* padding-bottom: 36pt; */
+       /* padding-top: 36pt; */
+}

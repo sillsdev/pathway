@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ldml>
+	<identity>
+		<version number="" />
+		<generation date="0001-01-01T00:00:00" />
+		<language type="x-cam" />
+	</identity>
+	<collations>
+		<collation>
+			<base>
+				<alias source="af-ZA" />
+			</base>
+			<special xmlns:palaso="urn://palaso.org/ldmlExtensions/v1">
+				<palaso:sortRulesType value="OtherLanguage" />
+			</special>
+		</collation>
+	</collations>
+	<special xmlns:palaso="urn://palaso.org/ldmlExtensions/v1">
+		<palaso:abbreviation value="Cam" />
+		<palaso:defaultFontFamily value="Cam Cam SILDoulosL" />
+		<palaso:defaultFontSize value="12" />
+		<palaso:defaultKeyboard value="Cameroon" />
+		<palaso:languageName value="Cameroon" />
+	</special>
+</ldml>

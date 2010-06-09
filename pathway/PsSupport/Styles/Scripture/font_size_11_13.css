@@ -1,0 +1,152 @@
+.columns {
+    font-size: 11pt;	/* cascaded environment */
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Chapter_Head {
+    font-size:18pt;
+    line-height:26pt;
+}
+
+.Chapter_Number {
+    font-size: 250%;
+    line-height: 26pt;
+    -ps-fixed-line-height: 26pt;
+}
+
+.Inscription {
+    font-size: 10pt;
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Inscription_Paragraph {
+    font-size: 10pt;	/* cascaded environment */
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Intro_List_Item1 {
+    font-size: 10pt;	/* cascaded environment */
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Intro_Paragraph {
+    font-size: 10pt;	/* cascaded environment */
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Intro_Section_Head {
+    font-size: 10pt;
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Citation_Line1, .Line1 {
+    font-size: 11pt;	/* cascaded environment */
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Citation_Line2, .Line2 {
+    font-size: 11pt;	/* cascaded environment */
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Note_CrossHYPHENReference_Paragraph {
+    font-size: 9pt;	/* cascaded environment */
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Note_CrossHYPHENReference_Paragraph::footnote-call {
+    font-size: 6pt;
+    vertical-align: super;
+    line-height: none;
+}
+
+.Note_CrossHYPHENReference_Paragraph::footnote-marker {
+    font-size: 6pt;
+}
+
+.Note_General_Paragraph {
+    font-size: 9pt;	/* cascaded environment */
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Note_General_Paragraph::footnote-call {
+    font-size: 6pt;
+    vertical-align: super;
+    line-height: none;
+}
+
+.Note_General_Paragraph::footnote-marker {
+    font-size: 6pt;
+}
+
+.Paragraph {
+    font-size: 11pt;	/* cascaded environment */
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Paragraph_Continuation {
+    font-size: 11pt;	/* cascaded environment */
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Paragraph1 {
+    font-size: 11pt;	/* cascaded environment */
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.parallel_passage_reference {
+    font-size:11pt;
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Section_Head {
+    font-size: 10pt;
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Section_Head_Major {
+    font-size: 11pt;
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Section_Head_Minor {
+    font-size: 11pt;
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Stanza_Break {
+    font-size: 11pt;	/* cascaded environment */
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Title_Main {
+    font-size: 22pt;	/* cascaded environment */
+    line-height: 26pt;
+    -ps-fixed-line-height: 26pt;
+}
+
+.Verse_Number {
+    font-size: 6pt;
+}
+
+.Verse_Number_In_Note {
+    font-size: 6pt;
+}

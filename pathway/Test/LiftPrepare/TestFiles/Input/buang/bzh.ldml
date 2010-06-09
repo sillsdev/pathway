@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ldml>
+	<identity>
+		<version number="" />
+		<generation date="0001-01-01T00:00:00" />
+		<language type="bzh" />
+	</identity>
+	<collations>
+		<collation>
+			<rules>
+				<reset>e</reset>
+				<p>ë</p>
+				<t>Ë</t>
+				<reset>g</reset>
+				<p>ġ</p>
+				<t>Ġ</t>
+				<reset>ġ</reset>
+				<p>gg</p>
+				<t>Gg</t>
+				<t>GG</t>
+				<reset>gg</reset>
+				<p>gw</p>
+				<t>Gw</t>
+				<t>GW</t>
+				<reset>k</reset>
+				<p>ḳ</p>
+				<t>Ḳ</t>
+				<reset>ḳ</reset>
+				<p>kw</p>
+				<t>Kw</t>
+				<t>KW</t>
+				<reset>n</reset>
+				<p>ng</p>
+				<t>Ng</t>
+				<t>NG</t>
+				<reset>ng</reset>
+				<p>nġ</p>
+				<t>Nġ</t>
+				<t>NĠ</t>
+				<reset>nġ</reset>
+				<p>ngw</p>
+				<t>Ngw</t>
+				<t>NGW</t>
+				<reset>ngw</reset>
+				<p>ny</p>
+				<t>Ny</t>
+				<t>NY</t>
+				<reset>o</reset>
+				<p>ö</p>
+				<t>Ö</t>
+			</rules>
+			<special xmlns:palaso="urn://palaso.org/ldmlExtensions/v1">
+				<palaso:sortRulesType value="CustomICU" />
+			</special>
+		</collation>
+	</collations>
+	<special xmlns:palaso="urn://palaso.org/ldmlExtensions/v1">
+		<palaso:abbreviation value="Bua" />
+		<palaso:defaultFontFamily value="Charis SIL" />
+		<palaso:defaultFontSize value="12" />
+		<palaso:defaultKeyboard value="Buang" />
+		<palaso:languageName value="Buang, Mapos" />
+	</special>
+</ldml>

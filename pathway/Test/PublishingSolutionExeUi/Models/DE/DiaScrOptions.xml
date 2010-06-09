@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!--?xml-stylesheet type="text/xsl" href="Possibilities.xsl"?-->
+
+<scripture-options role="dialog" title="$newcss" root="yes">
+	<titlebar name="NAMELESS" path="1:NAMELESS" title="$name" />
+	<opclose name="Close" path="43:Close" title="$name" />
+
+	<source-css name="Source CSS" path="9:Source CSS/41:Source CSS" role="text" />
+	<source-css-value name="Source CSS" path="9:Source CSS[2]/46:Source CSS" role="combobox" />
+	<show-property name="ShowProperty" path="9:ShowProperty/41:ShowProperty" role="text" />
+	<show-property-value name="NAMELESS" path="9:NAMELESS/41:NAMELESS" role="statictext" />
+
+	<previous name="Previous" path="9:$name;/43:$name" title="$name" role="pushbutton" />
+	<next name="Next" path="9:$name;/43:$name" title="$name" role="pushbutton" />
+	<save name="Save" path="9:$name;/43:$name" title="$name" role="pushbutton" />
+	<done name="Done" path="9:$name;/43:$name" title="$name" role="pushbutton" />
+
+    <set-mod name="Set modified file as default CSS" path="9:$name;/44:$name" title="$name" role="checkbutton" />
+	
+	<!-- Document Tab in Scripture options dialog -->
+	<document role="tab" name="Document" >
+		<tab path="9:ShowProperty[2]/37:Document"/>
+		<var id="doc" set="9:ShowProperty[2]/60:ShowProperty/9:Document/" />
+		<sections name="Sections" title="$name" role="label" path="$doc;9:Sections/41:Sections" />
+		<section-list path="$doc;9:Sections[2]/33:Sections/34:" role="list" />
+		<steps name="Steps" title="$name" role="label" path="$doc;9:$name;/41:$name" />
+		<steps-list path="$doc;9:NAMELESS/33:NAMELESS[2]/34:" role="list" />
+		<sectool-new name="NAMELESS" title="$name" role="pushbutton" path="$doc;9:New/22:New/43:" />
+		<sectool-add name="Add" title="$name" role="pushbutton" path="$doc;9:New/22:New/43:$name" />
+		<sectool-delete name="Delete" title="$name" role="pushbutton" path="$doc;9:New/22:New/43:$name" />
+		<sectool-up name="Up" title="$name" role="pushbutton" path="$doc;9:New/22:New/43:$name" />
+		<sectool-down name="NAMELESS" title="$name" role="pushbutton" path="$doc;9:New/22:New/43:" />
+		<steptool-new name="NAMELESS" title="$name" role="pushbutton" path="$doc;9:New[2]/22:New/43:" />
+		<steptool-add name="Add" title="$name" role="pushbutton" path="$doc;9:New[2]/22:New/43:$name" />
+		<steptool-delete name="Delete" title="$name" role="pushbutton" path="$doc;9:New[2]/22:New/43:$name" />
+		<steptool-up name="Up" title="$name" role="pushbutton" path="$doc;9:New[2]/22:New/43:$name" />
+		<steptool-down name="NAMELESS" title="$name" role="pushbutton" path="$doc;9:New[2]/22:New/43:" />
+    </document>
+
+	<!-- Basics Tab in Scripture options dialog -->
+	<basics role="tab" name="Basics" >
+		<tab path="9:ShowProperty[2]/37:Basics"/>
+		<var id="bpath" set="9:ShowProperty[2]/60:ShowProperty/9:Basics/" />
+
+		<font-name name="ddlBasicsFontName" title="$name" role="label" path="$bpath;9:$name;/41:$name;" />
+		<font-style name="ddlBasicsFontStyle" title="$name" role="label" path="$bpath;9:$name;/41:$name;" />
+		<font-size-value name="txtBasicsFontSize" title="$name" role="text" path="$bpath;9:$name;/42:$name" />
+		<line-space-value name="txtBasicsLineSpacing" title="$name" role="text" path="$bpath;9:$name;/42:$name" />
+		<justify-para name="chkBasicsJustifyParagraphs" title="$name" role="checkbox" path="$bpath;9:$name;/44:$name" />
+		<page-size name="ddlBasicsPageSize" title="$name" role="label" path="$bpath;9:$name;/41:$name" />
+		<height-value name="txtBasicsHeight" title="$name" role="text" path="$bpath;9:$name;/42:$name" />
+		<width-value name="txtBasicsWidth" title="$name" role="text" path="$bpath;9:$name;/42:$name" />
+		<paper-size name="ddlBasicsPaperSize" title="$name" role="label" path="$bpath;9:$name;/41:$name" />
+		<crop-marks name="chkBasicsCropMark" title="$name" role="checkbox" path="$bpath;9:$name;/44:$name" />
+		<width-value name="txtBasicsWidth" title="$name" role="text" path="$bpath;9:$name;/42:$name" />
+		<outside-value name="txtBasicsOutside" title="$name" role="text" path="$bpath;9:$name;/42:$name" />
+		<inside-value name="txtBasicsInside" title="$name" role="text" path="$bpath;9:$name;/42:$name" />
+		<top-value name="txtBasicsTop" title="$name" role="text" path="$bpath;9:$name;/42:$name" />
+		<bottom-value name="txtBasicsBottom" title="$name" role="text" path="$bpath;9:$name;/42:$name" />
+		<column-value name="ddlBasicsColumns" title="$name" role="label" path="$bpath;9:$name;/41:$name" />
+		<gutter-width-value name="txtBasicsGutterWidth" title="$name" role="text" path="$bpath;9:$name;/42:$name" />
+		<vertical-rule name="chkBasicsVerticalRule" title="$name" role="checkbox" path="$bpath;9:$name;/44:$name" />
+	</basics>	
+	
+	<!-- Chapter/Verse Tab in Scripture options dialog -->
+	<chapter-verse role="tab" name="Chapter // Verse" >
+		<tab path="9:ShowProperty[2]/37:Chapter // Verse"/>
+		<var id="cpath" set="9:ShowProperty[2]/60:ShowProperty/9:Chapter // Verse/" />
+
+		<chapter-numbers name="Chapter Numbers" title="$name" role="label" path="$cpath;9:$name;/41:$name" />
+		<gutter-width name="Gutter Width" path="$cpath;9:$name;/42:$name" role="text"/>
+		<position-chapter-numbers name="Position Chapter Numbers" title="$name" role="label" path="$cpath;9:$name;/41:$name" />
+		<pos-numbers>
+			<var id="LST" set="$cpath;$NL"/>		<!-- 46:NAMELESS -->
+			<value path="$LST;41:NAMELESS" role="statictext"/>
+			<open path="$LST;43:Open" role="pushbutton"/>
+			<list-item path="$LST;33:NAMELESS/34:"/>
+			<!-- path="Margin" -->
+		</pos-numbers>
+		<chapter-string name="Chapter String" title="$name" role="label" path="$cpath;9:$name;/41:$name" />
+		<chapter-string-value name="NAMELESS" path="$cpath;$nl;[2]/42:$name" role="text"/>
+		<position-string name="Position String" title="$name" role="label" path="$cpath;9:$name;/41:$name" />
+		<position-string-value name="NAMELESS" path="$cpath;$nl;[3]/42:$name" role="text"/>
+
+		<verse-number-format name="Verse Number Format" title="$name" role="label" path="$cpath;9:$name;/41:$name" />
+		<position-chapter-numbers name="Position Chapter Numbers" title="$name" role="label" path="$cpath;9:$name;/41:$name" />
+		<bold name="Bold       " title="$name" role="checkbutton" path="$cpath;9:$name;/44:$name" />'
+		<raised name="Raised       " title="$name" role="checkbutton" path="$cpath;9:$name;/44:$name" />
+		<include-verse-number-1 name="Include Verse Number 1  " title="$name" role="checkbutton" path="$cpath;9:$name;/44:$name" />
+	</chapter-verse>
+	
+	<!-- Headings Tab in Scripture options dialog -->
+	<headings role="tab" name="Headings">
+		<tab path="9:ShowProperty[2]/37:Headings"/>
+		<var id="hpath" set="9:ShowProperty[2]/60:ShowProperty/9:Headings/" />
+
+		<main-title-font-size name="Main Title Font Size" title="$name" role="statictext" path="$hpath;9:$name;/41:$name" />
+		<verse-number-format name="Verse Number Format" title="$name" role="text" path="$hpath;9:$name;/42:$name" />
+		<section-headings-s-s1 name="Section Headings (\\s \\s1)" title="$name" role="statictext" path="$hpath;9:$name;/41:$name" />
+		<font-style name="Font Style" title="$name" role="statictext" path="$hpath;9:$name;/41:$name" />
+		<font-style-value>
+			<var id="LST" set="$hpath;$NL"/>			<!-- 46:NAMELESS -->
+			<value path="$LST;41:NAMELESS" role="statictext"/>
+			<open path="$LST;43:Open" role="pushbutton"/>
+			<list-item path="$LST;33:NAMELESS/34:"/>	<!-- path="Regular" -->
+		</font-style-value>
+		<centered name="Centered" title="$name" role="statictext" path="$hpath;9:$name;/41:$name" />
+		<centered-value name="NAMELESS" path="$hpath;$nl;[18]/44:NAMELESS" role="checkbutton" />
+		<font-size name="Font Size" title="$name" role="statictext" path="$hpath;9:$name;/41:$name" />
+		<font-size-value name="NAMELESS" path="$hpath;$nl;[2]/42:NAMELESS" role="text" />
+		<line-spacing-leading name="Line Spacing (Leading)" title="$name" role="statictext" path="$hpath;9:$name;/41:$name" />
+		<line-spacing-leading-value name="NAMELESS" path="$hpath;$nl;[3]/42:NAMELESS" role="text" />
+		<space-before name="Space Before" title="$name" role="statictext" path="$hpath;9:$name;/41:$name" />
+		<space-before-value name="NAMELESS" path="$hpath;$nl;[4]/42:NAMELESS" role="text" />
+		<space-after name="Space After" title="$name" role="statictext" path="$hpath;9:$name;/41:$name" />
+		<space-after-value name="NAMELESS" path="$hpath;$nl;[5]/42:NAMELESS" role="text" />
+
+		<section-headings-ms-ms1 name="Section Headings (\\ms \\ms1)" title="$name" role="statictext" path="$hpath;9:$name;/41:$name" />
+		<font-style2 name="Font Style" title="$name" role="statictext" path="$hpath;9:$name;[2]/41:$name" />
+		<font-style-value2>
+			<var id="LST" set="$hpath;$nl;[6]/"/>		<!-- 46:NAMELESS -->
+			<value path="$LST;41:NAMELESS" role="statictext"/>
+			<open path="$LST;43:Open" role="pushbutton"/>
+			<list-item path="$LST;33:NAMELESS/34:"/>	<!-- path="Regular" -->
+		</font-style-value2>
+		<centered2 name="Centered" title="$name" role="statictext" path="$hpath;9:$name;[2]/41:$name" />
+		<space-after4 name="Space After" path="$hpath;9:$name;[4]/44:$name" role="checkbutton" />
+		<font-size2 name="Font Size" title="$name" role="statictext" path="$hpath;9:$name;[2]/41:$name" />
+		<font-size-value2 name="NAMELESS" path="$hpath;$nl;[7]/42:NAMELESS" role="text" />
+		<line-spacing-leading2 name="Line Spacing (Leading)" title="$name" role="statictext" path="$hpath;9:$name;[2]/41:$name" />
+		<line-spacing-leading-value2 name="NAMELESS" path="$hpath;$nl;[8]/42:NAMELESS" role="text" />
+		<space-before2 name="Space Before" title="$name" role="statictext" path="$hpath;9:$name;[2]/41:$name" />
+		<space-before-value2 name="NAMELESS" path="$hpath;$nl;[9]/42:NAMELESS" role="text" />
+		<space-after2 name="Space After" title="$name" role="statictext" path="$hpath;9:$name;[2]/41:$name" />
+		<space-after-value2 name="NAMELESS" path="$hpath;$nl;[10]/42:NAMELESS" role="text" />
+		<reference name="Reference" title="$name" role="statictext" path="$hpath;9:$name;/41:$name" />
+		<font-style4 name="Font Style" title="$name" role="statictext" path="$hpath;9:$name;[3]/41:$name" />
+		<font-style-value4>
+			<var id="LST" set="$hpath;$nl;[11]/"/>		<!-- 46:NAMELESS -->
+			<value path="$LST;41:NAMELESS" role="statictext"/>
+			<open path="$LST;43:Open" role="pushbutton"/>
+			<list-item path="$LST;33:NAMELESS/34:"/>	<!-- path="Regular" -->
+		</font-style-value4>
+		<font-size4 name="Font Size" title="$name" role="statictext" path="$hpath;9:$name;[3]/41:$name" />
+		<font-size-value4 name="NAMELESS" path="$hpath;$nl;[12]/42:NAMELESS" role="text" />
+
+		<section-headings-s1 name="Section Headings (s1)" title="$name" role="statictext" path="$hpath;9:$name;/41:$name" />
+		<font-style3 name="Font Style" title="$name" role="statictext" path="$hpath;9:$name;[4]/41:$name" />
+		<font-style-value3>
+			<var id="LST" set="$hpath;$nl;[13]/"/>		<!-- 46:NAMELESS -->
+			<value path="$LST;41:NAMELESS" role="statictext"/>
+			<open path="$LST;43:Open" role="pushbutton"/>
+			<list-item path="$LST;33:NAMELESS/34:"/>	<!-- path="Regular" -->
+		</font-style-value3>
+		<centered3 name="Centered" title="$name" role="statictext" path="$hpath;9:$name;[3]/41:$name" />
+		<centered-value3 name="NAMELESS" path="$hpath;$nl;[19]/44:NAMELESS" role="checkbutton" />
+		<font-size3 name="Font Size" title="$name" role="statictext" path="$hpath;9:$name;[4]/41:$name" />
+		<font-size-value3 name="NAMELESS" path="$hpath;$nl;[14]/42:NAMELESS" role="text" />
+		<line-spacing-leading3 name="Line Spacing (Leading)" title="$name" role="statictext" path="$hpath;9:$name;[3]/41:$name" />
+		<line-spacing-leading-value3 name="NAMELESS" path="$hpath;$nl;[15]/42:NAMELESS" role="text" />
+		<space-before3 name="Space Before" title="$name" role="statictext" path="$hpath;9:$name;[3]/41:$name" />
+		<space-before-value3 name="NAMELESS" path="$hpath;$nl;[16]/42:NAMELESS" role="text" />
+		<space-after3 name="Space After" title="$name" role="statictext" path="$hpath;9:$name;[3]/41:$name" />
+		<space-after-value3 name="NAMELESS" path="$hpath;$nl;[17]/42:NAMELESS" role="text" />
+	</headings>
+		
+	<!-- Footnotes Tab in Scripture options dialog -->
+	<footnotes role="tab" name="Footnotes">
+		<tab path="9:ShowProperty[2]/37:Footnotes"/>
+		<var id="fpath" set="9:ShowProperty[2]/60:ShowProperty/9:Footnotes/" />
+
+		<font-size-for-notes name="Font Size for Notes" title="$name" role="statictext" path="$fpath;9:$name;/41:$name" />
+		<space-after name="Space After" path="$fpath;9:$name;/42:$name" role="text"/>
+		<line-spacing-for-notes name="Line Spacing (Leading) for Notes" title="$name" role="statictext" path="$fpath;9:$name;/41:$name" />
+		<space-after-value name="NAMELESS" path="$fpath;9:$name;/42:$name" role="text"/>
+		<footnote-caller-fs name="Footnote Caller Font Style" title="$name" role="statictext" path="$fpath;9:$name;/41:$name" />
+		<footnote-caller-fs-value>
+			<var id="LST" set="$fpath;$nl;[2]/"/>		<!-- 46:NAMELESS -->
+			<value path="$LST;41:NAMELESS" role="statictext"/>
+			<open path="$LST;43:Open" role="pushbutton"/>
+			<list-item path="$LST;33:NAMELESS/34:"/>	<!-- path="Regular" -->
+		</footnote-caller-fs-value>
+		<cross-ref-caller-fs name="Cross Reference Caller Font Style" title="$name" role="statictext" path="$fpath;9:$name;/41:$name" />
+		<cross-ref-caller-fs-value>
+			<var id="LST" set="$fpath;$nl;[3]/"/>		<!-- 46:NAMELESS -->
+			<value path="$LST;41:NAMELESS" role="statictext"/>
+			<open path="$LST;43:Open" role="pushbutton"/>
+			<list-item path="$LST;33:NAMELESS/34:"/>	<!-- path="Regular" -->
+		</cross-ref-caller-fs-value>
+		<reference-in-footnote name="Reference in Footnote" title="$name" role="label" path="$fpath;9:$name;/41:$name" />
+		<inside name="Inside?" title="$name" path="$fpath;9:$name;/41:$name" role="statictext" />
+		<inside-value>
+			<var id="LST" set="$fpath;$nl;[4]/"/>		<!-- 46:NAMELESS -->
+			<value path="$LST;41:NAMELESS" role="statictext"/>
+			<open path="$LST;43:Open" role="pushbutton"/>
+			<list-item path="$LST;33:NAMELESS/34:"/>	<!-- path="Yes" -->
+		</inside-value>
+		<font-style name="Font Style" title="$name" path="$fpath;9:$name;/41:$name" role="statictext" />
+		<font-style-value>
+			<var id="LST" set="$fpath;$nl;[5]/"/>		<!-- 46:NAMELESS -->
+			<value path="$LST;41:NAMELESS" role="statictext"/>
+			<open path="$LST;43:Open" role="pushbutton"/>
+			<list-item path="$LST;33:NAMELESS/34:"/>	<!-- path="Yes" -->
+		</font-style-value>
+		<rule-checkbox name="Rule Between Body and Notes         " path="$fpath;9:Font Style[2]/9:$name;/44:$name" role="checkbutton" />
+		<footnote-newline-checkbox name ="Start Each Footnote on a New Line   " path="$fpath;9:Font Style[2]/9:$name;/44:$name" role="checkbutton" />
+		<footnote-frame name="Footnote Frame" path="$fpath;9:NAMELESS[6]/9:$name;/41:$name" role="statictext" />
+		<style name="Style" path="9$fpath;9:NAMELESS[6]/9:$name;/41:$name" role="statictext" />
+		<style-value>
+			<var id="LST" set="$fpath;$nl;[6]/$NL"/>		<!-- 46:NAMELESS -->
+			<value path="$LST;41:NAMELESS" role="statictext"/>
+			<open path="$LST;43:Open" role="pushbutton"/>
+			<list-item path="$LST;33:NAMELESS/34:"/>	<!-- path="Yes" -->
+		</style-value>
+		<gutter-rule name="Gutter Rule      " path="$fpath;9:NAMELESS[6]/9:$name;/44:$name" role="checkbutton" />
+
+	</footnotes>
+	
+	<!-- Text Spacing Tab in Scripture options dialog -->
+	<text-spacing role="tab">
+		<tab path="9:ShowProperty[2]/37:Text Spacing" />
+		<var id="tpath" set="9:ShowProperty[2]/60:ShowProperty/9:Text Spacing/" />
+
+		<between-words name="Between Words" title="$name" role="statictext" path="$tpath;9:$name;/41:$name" />
+		<desired-optimal-pct name="Desired (Optimal) %" title="$name" role="statictext" path="$tpath;9:$name;[2]/41:$name" />
+		<style name="Style" path="$tpath;9:$name;/42:$name" role="text"/>
+		<word-min-pct name="Minimum %" path="$tpath;9:Desired (Optimal) %[3]/9:$name;/41:$name" role="statictext" />
+		<word-min-pct-val name="Desired (Optimal) %" path="$tpath;9:$name;[3]/9:$name;/42:$name" role="text" />
+		<word-max-pct name="Maximum %" path="$tpath;9:Desired (Optimal) %[3]/9:$name;/41:$name" role="statictext" />
+		<word-max-pct-val name="NAMELESS" path="$tpath;9:Desired (Optimal) %[3]/9:$name;/42:$name" role="text" />
+		
+		<between-letters name="Between Letters" title="$name" role="statictext" path="$tpath;9:$name;/41:$name" />
+		<desired-optimal-pct2 name="Desired (Optimal) %" title="$name" role="statictext" path="$tpath;9:$name;/41:$name" />
+		<desired-opt-val name="NAMELESS" path="$tpath;9:$name;/42:$name" role="text" />
+		<letter-min-pct name="Minimum %" title="$name" role="statictext" path="$tpath;9:Maximum %/9:$name;/41:$name" />
+		<letter-min-pct-val name="Maximum %" title="$name" role="text" path="$tpath;9:$name;/9:$name;/42:$name" />
+		<letter-max-pct name="Maximum %" title="$name" role="statictext" path="$tpath;9:Maximum %/9:$name;[2]/41:$name" />
+		<letter-max-pct-val name="NAMELESS" path="$fpath;9:Maximum %/9:$name;/42:$name" role="text" />
+
+		<kerning name="Kerning" title="$name" role="statictext" path="$tpath;9:Maximum %[2]/9:$name;/41:$name" />
+		<automatic-vertical-justification name="Automatic Vertical Justification?" path="$tpath;9:Maximum %[2]/9:$name;/44:$name" role="checkbutton" />
+		<automatic-value name="Maximum %" path="$tpath;9:$name;[2]/9:$name;/41:$name" role="statictext" />
+		<hyphenation-language name="Hyphenation Language" title="$name" role="statictext" path="$tpath;9:Maximum %[2]/9:$name;/41:$name" />
+		<hyphenation-language-value name="NAMELESS" path="$tpath;9:Maximum %[2]/9:$name;/41:$name" role="statictext" />
+	</text-spacing>
+	
+	<!-- Other Tab in Scripture options dialog -->
+	<other role="tab">
+		<tab path="9:ShowProperty[2]/37:Other" />
+		<var id="opath" set="9:ShowProperty[2]/60:ShowProperty/9:Other/" />
+
+		<table-columns name="Table Columns" title="$name" role="statictext" path="$opath;9:$name;/41:$name" />
+		<table-headers-font-style name="Table Headers Font Style" title="$name" role="statictext" path="$opath;9:$name;/41:$name" />
+		<table-header-font-style>
+			<var id="LST" set="$opath;9:Hyphenation Language/"/>		<!-- 46: -->
+			<value path="$LST;41:Hyphenation Language" role="statictext"/>
+			<open path="$LST;43:Open" role="pushbutton"/>
+			<list-item path="$LST;33:Hyphenation Language/34:"/>			<!-- path="Regular" -->
+		</table-header-font-style>
+
+		<running-head-foot name="Running Head // Foot" title="$name" role="statictext" path="$opath;9:$name;/41:$name" />
+		<reference-location name="Reference Location" title="$name" role="statictext" path="$opath;9:$name;/41:$name" />
+		<ref-loc-val>
+			<var id="LST" set="$opath;$nl;/"/>			<!-- 46:NAMELESS -->
+			<value path="$LST;41:NAMELESS" role="statictext"/>
+			<open path="$LST;43:Open" role="pushbutton"/>
+			<list-item path="$LST;33:NAMELESS/34:"/>		<!-- path="top-center" -->
+		</ref-loc-val>
+		<page-number-location name="Page Number Location" title="$name" role="statictext" path="$opath;9:$name;/41:$name" />
+		<page-num-val>
+			<var id="LST" set="$opath;$nl;[2]/"/>		<!-- 46:NAMELESS -->
+			<value path="$LST;41:NAMELESS" role="statictext"/>
+			<open path="$LST;43:Open" role="pushbutton"/>
+			<list-item path="$LST;33:NAMELESS/34:"/>		<!-- path="top-center" -->
+		</page-num-val>
+		<font-size name="Font Size" title="$name" role="statictext" path="$opath;9:$name;/41:$name" />
+		<font-size-val name="NAMELESS" path="$opath;9:$name;[3]/42:$name" role="text" />
+		<chapter-verse-separator name="Chapter Verse Separator" title="$name" role="statictext" path="$opath;9:$name;/41:$name" />
+		<cvs-value name="NAMELESS" path="$opath;9:$name;[4]/42:$name" role="text" />
+		<consecutive-ref-separator name="Consecutive Reference Separator" title="$name" role="statictext" path="$opath;9:$name;/41:$name" />
+		<conseq-ref-seq-sep-value name="NAMELESS" path="$opath;9:$name;[5]/42:$name" role="text" />
+		<non-conseq-ref-separator name="Non-consecutive Reference Sep" title="$name" role="statictext" path="$opath;9:$name;/41:$name" />
+		<non-conseq-ref-sep-value name="NAMELESS" path="$opath;9:$name;[6]/42:$name" role="text" />
+		<ref-format>
+			<var id="LST" set="$opath;9:Launch Ultra XML/"/>		<!-- 46: -->
+			<value path="$LST;46:Launch Ultra XML" role="editabletext"/>
+			<open path="$LST;43:Open" role="pushbutton"/>
+			<list-item path="$LST;33:Launch Ultra XML/34:"/>			<!-- path="Regular" -->
+		</ref-format>
+		
+		<typeface-names name="Typeface Names" title="$name" role="statictext" path="$opath;9:Non-consecutive Reference Sep[2]/9:$name;/41:$name" />
+		<italic name="Italic" title="$name" role="statictext" path="$opath;9:Non-consecutive Reference Sep[2]/9:$name;/41:$name" />
+		<italic-value1 name="Non-consecutive Reference Sep" title="$name" role="statictext" path="$opath;9:Non-consecutive Reference Sep[2]/9:$name;/41:$name" />
+		<italic-value2 name="NAMELESS" title="$name" role="statictext" path="$opath;9:Non-consecutive Reference Sep[2]/9:$name;/41:$name" />
+		<bold name="Bold" title="$name" role="statictext" path="$opath;9:Non-consecutive Reference Sep[2]/9:$name;/41:$name" />
+		<bold-value1 name="NAMELESS" title="$name" role="statictext" path="$opath;9:Non-consecutive Reference Sep[2]/9:$name;[2]/41:$name" />
+		<bold-value2 name="NAMELESS" title="$name" role="statictext" path="$opath;9:Non-consecutive Reference Sep[2]/9:$name;[3]/41:$name" />
+		<bold-italic name="Bold Italic" title="$name" role="statictext" path="$opath;9:Non-consecutive Reference Sep[2]/9:$name;/41:$name" />
+		<bold-italic-value1 name="NAMELESS" title="$name" role="statictext" path="$opath;9:Non-consecutive Reference Sep[2]/9:$name;[4]/41:$name" />
+		<bold-italic-value2 name="NAMELESS" title="$name" role="statictext" path="$opath;9:Non-consecutive Reference Sep[2]/9:$name;[5]/41:$name" />
+
+		<import-illustrations name="Import Illustrations?" path="$opath;9:Bold Italic/9:$name;/41:$name" role="statictext" />
+		<import-illustrations-value name="Bold Italic" path="$opath;9:Bold Italic/9:$name;/44:$name" role="checkbutton" />
+		<use-arabic-indic-numbers name="Use Arabic-Indic Numbers " path="$opath;9:Bold Italic/9:$name;/41:$name" role="statictext" />
+		<use-arabic-indic-numbers-value name="NAMELESS" path="$opath;9:Bold Italic/9:$name;/44:$name" role="checkbutton" />
+		<reverse-chapter-gpos name="Reverse Chapter GPOS?" path="$opath;9:Bold Italic/9:$name;/41:$name" role="statictext" />
+		<reverse-chapter-gpos-value name="NAMELESS" path="$opath;9:Bold Italic/9:$name;[2]/44:$name" role="checkbutton" />
+		<reverse-diacritic-gpos name="Reverse Diacritic GPOS?" path="$opath;9:Bold Italic/9:$name;/41:$name" role="statictext" />
+		<reverse-diacritic-gpos-value name="NAMELESS" path="$opath;9:Bold Italic/9:$name;[3]/44:$name" role="checkbutton" />
+		<add-stylesheet-comments name="Add Stylesheet comments?" path="$opath;9:Bold Italic/9:$name;/41:$name" role="statictext" />
+		<add-stylesheet-comments-value name="NAMELESS" path="$opath;9:Bold Italic/9:$name;[4]/44:$name" role="checkbutton" />
+		<launch-ultra-xml name="Launch Ultra XML" path="$opath;9:Bold Italic/9:$name;/41:$name" role="statictext" />
+		<launch-ultra-xml-value name="NAMELESS" path="$opath;9:Bold Italic/9:$name;[5]/44:$name" role="checkbutton" />
+	</other>
+</scripture-options>
+
+

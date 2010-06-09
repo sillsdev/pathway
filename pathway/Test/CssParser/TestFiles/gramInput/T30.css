@@ -1,0 +1,19 @@
+﻿@page {
+  marks: crop cross ;
+  size: 5in 8in portrait;
+  font: 10pt Gentium, Georgia, serif;
+  line-height: 13;
+  
+@top-center {
+    margin: 13pt 24pt 0 18pt;
+    content: string(bookx, start) " "  string(chapterx, start) ":" string(versex, start)  " — "  string(chapterx, last) ":" string(versex, last);
+}
+
+@footnotes {
+  border-top: thin solid black;
+  padding: 0.3em 0;
+  margin-top: 0.6em;
+  margin-left; 2pi;
+}
+}
+

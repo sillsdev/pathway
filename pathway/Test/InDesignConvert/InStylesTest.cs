@@ -1,0 +1,716 @@
+﻿// --------------------------------------------------------------------------------------------
+// <copyright file="InStylesTest.cs" from='2009' to='2009' company='SIL International'>
+//      Copyright © 2009, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// Test Cases for InDesign StylesTest
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Xml;
+using System.Xml.XPath;
+using NUnit.Framework;
+using SIL.PublishingSolution;
+using SIL.Tool;
+
+namespace Test.InDesignConvert
+{
+    [TestFixture]
+    public class InStylesTest : ValidateXMLFile 
+    {
+        #region Private Variables
+        private string _input;
+        private string _output;
+        private Dictionary<string, string> _expected = new Dictionary<string, string>();
+        private string _className = "a";
+        private string _testFolderPath = string.Empty;
+        private InStyles _stylesXML;
+        private string _outputStory;
+        private InStory _storyXML;
+        private string _outputPath;
+        private string _outputStyles;
+        private string _fileNameWithPath;
+        private Dictionary<string, Dictionary<string, string>> _idAllClass = new Dictionary<string, Dictionary<string, string>>();
+        #endregion
+
+        #region Public Variables
+        public XPathNodeIterator NodeIter;
+        private Dictionary<string, Dictionary<string, string>> _cssProperty;
+        private CSSTree _cssTree;
+        #endregion
+
+        #region Setup
+        [TestFixtureSetUp]
+        protected void SetUp()
+        {
+            _stylesXML = new InStyles();
+            _storyXML = new InStory();
+            _testFolderPath = PathPart.Bin(Environment.CurrentDirectory, "/InDesignConvert/TestFiles");
+            ClassProperty = _expected;  //Note: All Reference address initialized here
+            _output = Common.PathCombine(_testFolderPath, "Output");
+            _outputPath = Common.PathCombine(_testFolderPath, "Output");
+            _outputStyles = Common.PathCombine(_outputPath, "Resources");
+            _outputStory = Common.PathCombine(_outputPath, "Stories");
+
+            _cssProperty = new Dictionary<string, Dictionary<string, string>>();
+            _cssTree = new CSSTree();
+        }
+        #endregion Setup
+
+        #region Public Functions
+
+        private void NodeTest(bool checkAttribute)
+        {
+            _cssProperty = _cssTree.CreateCssProperty(_input, true);
+            _stylesXML.CreateIDStyles(_output, _cssProperty);
+            FileNameWithPath = Common.PathCombine(_output, "Styles.xml");
+            if (checkAttribute)
+            {
+                Assert.IsTrue(ValidateNodeAttribute(), _input + " test Failed");
+            }
+            else
+            {
+                Assert.IsTrue(ValidateNodeValue(), _input + " test Failed");
+            }
+        }
+
+        #region FontSize
+        [Test]
+        public void FontSize1()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/FontSize1.css");
+            _expected.Add("PointSize", "24");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+
+
+        [Test]
+        public void FontSize2()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/FontSize2.css");
+            _expected.Add("PointSize", "56.69291");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+
+        [Test]
+        public void FontSize3()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/FontSize3.css");
+            _expected.Add("PointSize", "6.6");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+
+        #endregion
+
+        #region FontFamily
+        [Test]
+        public void FontFamily1()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/FontFamily1.css");
+            _expected.Add("AppliedFont", "Times New Roman");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]/Properties/AppliedFont";
+            NodeTest(false);
+        }
+
+        [Test]
+        public void FontFamily2()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/FontFamily2.css");
+            _expected.Add("AppliedFont", "Gentium");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]/Properties/AppliedFont";
+            NodeTest(false);
+        }
+
+        [Test]
+        public void FontFamily3()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/FontFamily3.css");
+            _expected.Add("AppliedFont", "Arial Unicode MS");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]/Properties/AppliedFont";
+            NodeTest(false);
+        }
+
+        #endregion FontFamily
+
+        #region FontWeight
+        [Test]
+        public void FontWeight1()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/FontWeight1.css");
+            _expected.Add("FontStyle", "Bold");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+
+        [Test]
+        public void FontWeight2()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/FontWeight2.css");
+            _expected.Add("FontStyle", "Italic");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+
+        [Test]
+        public void FontWeight3()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/FontWeight3.css");
+            _expected.Add("FontStyle", "Bold Italic");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+
+        [Test]
+        public void FontWeight4()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/FontWeight4.css");
+            _expected.Add("FontStyle", "Regular");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+
+        [Test]
+        public void FontWeight5()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/FontWeight5.css");
+            _expected.Add("FontStyle", "Regular");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+
+        [Test]
+        public void FontWeight6()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/FontWeight6.css");
+            _expected.Add("FontStyle", "Regular");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+
+        [Test]
+        public void FontWeight7()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/FontWeight7.css");
+            _expected.Add("FontStyle", "Bold");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+
+        [Test]
+        public void FontWeight8()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/FontWeight8.css");
+            _expected.Add("FontStyle", "Regular");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+
+        [Test]
+        public void FontWeight9()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/FontWeight9.css");
+            _expected.Add("FontStyle", "Bold");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+        #endregion
+
+        #region TextAlign
+        [Test]
+        public void TextAlign1()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/TextAlign1.css");
+            _expected.Add("Justification", "CenterAlign");
+            _className = "a";
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+
+        [Test]
+        public void TextAlign2()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/TextAlign2.css");
+            _expected.Add("Justification", "FullyJustified");
+            _className = "a";
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+
+        [Test]
+        public void TextAlign3()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/TextAlign3.css");
+            _expected.Add("Justification", "RightAlign");
+            _className = "a";
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+        #endregion
+
+        #region FontVariant
+        [Test]
+        public void FontVariant1()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/FontVariant1.css");
+            _expected.Add("Capitalization", "SmallCaps");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+
+        [Test]
+        public void FontVariant2()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/FontVariant2.css");
+            _expected.Add("Capitalization", "Normal");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+
+        #endregion
+
+        #region MarginLeft
+        [Test]
+        public void MarginLeft1()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/MarginLeft1.css");
+            _expected.Add("Margin-Left", "-36");
+            _className = "a";
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+
+        [Test]
+        public void MarginLeft2()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/Margin.css");
+            _expected.Add("Margin-Left", "30");
+            _className = "a";
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+        #endregion
+
+        #region MarginRight
+        [Test]
+        public void MarginRight()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/Margin.css");
+            _expected.Add("Margin-Right", "40");
+            _className = "a";
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+        #endregion 
+
+        #region MarginTop
+        [Test]
+        public void MarginTop()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/Margin.css");
+            _expected.Add("Margin-Top", "50");
+            _className = "a";
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+        #endregion 
+
+        #region MarginBottom
+        [Test]
+        public void MarginBottom()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/Margin.css");
+            _expected.Add("Margin-Bottom", "60");
+            _className = "a";
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+        #endregion 
+
+        #region Padding
+
+
+        [Test]
+        public void Padding1()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/Padding1.css");
+            _cssProperty = _cssTree.CreateCssProperty(_input, true);
+            _stylesXML.CreateIDStyles(_output, _cssProperty);
+            FileNameWithPath = Common.PathCombine(_output, "Styles.xml");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            _expected.Add("SpaceBefore", "40");
+            Assert.IsTrue(ValidateNodeAttribute(), " failed for Padding_Top");
+
+            _expected.Add("RightIndent", "60");
+            Assert.IsTrue(ValidateNodeAttribute(), " failed for Padding_Right");
+
+            _expected.Add("SpaceAfter", "36");
+            Assert.IsTrue(ValidateNodeAttribute(), " failed for Padding_Bottom");
+
+            _expected.Add("LeftIndent", "50");
+            Assert.IsTrue(ValidateNodeAttribute(), " failed for Padding_Left");
+        }
+
+        [Test]
+        public void Padding2()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/Padding2.css");
+            _cssProperty = _cssTree.CreateCssProperty(_input, true);
+            _stylesXML.CreateIDStyles(_output, _cssProperty);
+            FileNameWithPath = Common.PathCombine(_output, "Styles.xml");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            _expected.Add("SpaceBefore", "11");
+            Assert.IsTrue(ValidateNodeAttribute(), " failed for Padding_Top");
+
+            _expected.Add("RightIndent", "0");
+            Assert.IsTrue(ValidateNodeAttribute(), " failed for Padding_Right");
+
+            _expected.Add("SpaceAfter", "13");
+            Assert.IsTrue(ValidateNodeAttribute(), " failed for Padding_Bottom");
+
+            _expected.Add("LeftIndent", "14");
+            Assert.IsTrue(ValidateNodeAttribute(), " failed for Padding_Left");
+        }
+        #endregion 
+
+        #region TextIndent
+        [Test]
+        public void TextIndent()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/TextIndent1.css");
+            _expected.Add("FirstLineIndent", "-36");
+            _className = "a";
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+        #endregion 
+
+        #region TextDecoration
+        [Test]
+        public void TextDecoration()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/TextDecoration1.css");
+            _expected.Add("Underline", "true");
+            _className = "a";
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+        #endregion 
+        
+        #region Color
+        [Test]
+        public void Color()
+        {
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/Color1.css");
+            _expected.Add("FillColor", "Color/#ff0000");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            NodeTest(true);
+        }
+        #endregion
+
+        #region Visibility
+        [Test]
+        public void Visibility()
+        {
+            string _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/Visibility.xhtml");
+            string _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/Visibility.css");
+            _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
+            _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
+            _storyXML.CreateStory(_outputStory, _inputXHTML, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
+            const string classname = "a_1";
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + classname + "\"]";
+            string fileNameWithPath = Common.PathCombine(_outputStyles, "styles.xml");
+            XmlNodeList nodesList = Common.GetXmlNodeListInDesignNamespace(fileNameWithPath, XPath);
+            XmlNode node = nodesList[0];
+            XmlAttributeCollection attrb = node.Attributes;
+            string result = attrb["FillColor"].Value;
+            Assert.AreEqual("Color/Paper", result, classname + " test Failed");
+        }
+        #endregion
+
+        #region Tagged Text
+        [Test]
+        public void TaggedText1()
+        {
+            string className = "div.header";
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/TaggedText.css");
+            _expected.Add("PointSize", "24");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + className + "\"]";
+            NodeTest(true);
+        }
+        [Test]
+        public void TaggedText2()
+        {
+            string className = "div";
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/TaggedText.css");
+            _expected.Add("FillColor", "Color/#ff0000");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + className + "\"]";
+            NodeTest(true);
+        }
+        [Test]
+        public void TaggedText3()
+        {
+            string className = "span.header";
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/TaggedText.css");
+            _expected.Add("PointSize", "18");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + className + "\"]";
+            NodeTest(true);
+        }
+        [Test]
+        public void TaggedText4()
+        {
+            string className = "span";
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/TaggedText.css");
+            _expected.Add("FillColor", "Color/#0000ff");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + className + "\"]";
+            NodeTest(true);
+        }
+        #endregion
+
+        #region VerticalAlign
+        [Test]
+        public void VerticalAlign1()
+        {
+            const string classname = "baseline";
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/VerticalAlign.css");
+            _expected.Add("Position", "Normal");
+            XPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[3][@Name = \"" + classname + "\"]";
+            NodeTest(true);
+        }
+        [Test]
+        public void VerticalAlign2()
+        {
+            const string classname = "sub";
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/VerticalAlign.css");
+            _expected.Add("Position", "Subscript");
+            XPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[4][@Name = \"" + classname + "\"]";
+            NodeTest(true);
+        }
+        [Test]
+        public void VerticalAlign3()
+        {
+            const string classname = "super";
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/VerticalAlign.css");
+            _expected.Add("Position", "Superscript");
+            XPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[5][@Name = \"" + classname + "\"]";
+            NodeTest(true);
+        }
+        [Test]
+        public void VerticalAlign4()
+        {
+            const string classname = "top";
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/VerticalAlign.css");
+            _expected.Add("BaselineShift", "50%");
+            XPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[7][@Name = \"" + classname + "\"]";
+            NodeTest(true);
+        }
+        [Test]
+        public void VerticalAlign5()
+        {
+            const string classname = "bottom";
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/VerticalAlign.css");
+            _expected.Add("BaselineShift", "-50%");
+            XPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[8][@Name = \"" + classname + "\"]";
+            NodeTest(true);
+        }
+        [Test]
+        public void VerticalAlign6()
+        {
+            const string classname = "percent";
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/VerticalAlign.css");
+            _expected.Add("BaselineShift", "75%");
+            XPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[9][@Name = \"" + classname + "\"]";
+            NodeTest(true);
+        }
+        [Test]
+        public void VerticalAlign7()
+        {
+            const string classname = "percent1";
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/VerticalAlign.css");
+            _expected.Add("BaselineShift", "25%");
+            XPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[10][@Name = \"" + classname + "\"]";
+            NodeTest(true);
+        }
+        [Test]
+        public void VerticalAlign8()
+        {
+            const string classname = "point";
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/VerticalAlign.css");
+            _expected.Add("BaselineShift", "7");
+            XPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[11][@Name = \"" + classname + "\"]";
+            NodeTest(true);
+        }
+        #endregion
+
+        #region BackgroundColor
+
+        [Test]
+        public void BackgroundColor1()
+        {
+            const string classname = "main";
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/BackgroundColor.css");
+            _expected.Add("StrokeWeight", "1");
+            _expected.Add("StrokeColor", "Color/#ff0000");
+            _expected.Add("EndJoin", "BevelEndJoin");
+            XPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[4][@Name = \"" + classname + "\"]";
+            NodeTest(true);
+        }
+        [Test]
+        public void BackgroundColor2()
+        {
+            const string classname = "letter.-current";
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/BackgroundColor.css");
+            _expected.Add("StrokeWeight", "1");
+            _expected.Add("StrokeColor", "Color/#aaff00");
+            _expected.Add("EndJoin", "BevelEndJoin");
+            XPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[3][@Name = \"" + classname + "\"]";
+            NodeTest(true);
+        } 
+        #endregion
+
+        #region LineHeight
+        [Test]
+        public void LineHeight1()
+        {
+            string _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/LineHeight.xhtml");
+            string _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/LineHeight.css");
+            _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
+            _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
+            _storyXML.CreateStory(_outputStory, _inputXHTML, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
+
+            string classname = "entry1_1";
+            string _xPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[@Name = \"" + classname + "\"]/Properties[1]/Leading[1]";
+            _fileNameWithPath = Common.PathCombine(_outputStyles, "Styles.xml");
+            XmlNode node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
+            string result = node.InnerText;
+            Assert.AreEqual(result, "28", classname + "test failed");
+
+            classname = "entry2_1";
+            _xPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[@Name = \"" + classname + "\"]/Properties[1]/Leading[1]";
+            _fileNameWithPath = Common.PathCombine(_outputStyles, "Styles.xml");
+            node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
+            result = node.InnerText;
+            Assert.AreEqual(result, "14", classname + "test failed");
+
+            classname = "entry3_1";
+            _xPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[@Name = \"" + classname + "\"]/Properties[1]/Leading[1]";
+            _fileNameWithPath = Common.PathCombine(_outputStyles, "Styles.xml");
+            node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
+            result = node.InnerText;
+            Assert.AreEqual(result, "28", classname + "test failed");
+
+            classname = "entry4_1";
+            _xPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[@Name = \"" + classname + "\"]/Properties[1]/Leading[1]";
+            _fileNameWithPath = Common.PathCombine(_outputStyles, "Styles.xml");
+            node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
+            result = node.InnerText;
+            Assert.AreEqual(result, "24", classname + "test failed");
+
+            classname = "entry5_1";
+            _xPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[@Name = \"" + classname + "\"]/Properties[1]/Leading[1]";
+            _fileNameWithPath = Common.PathCombine(_outputStyles, "Styles.xml");
+            node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
+            result = node.InnerText;
+            Assert.AreEqual(result, "28", classname + "test failed");
+        }
+
+        [Test]
+        public void LineHeight2()
+        {
+            string _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/LineHeight.xhtml");
+            string _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/LineHeight.css");
+            _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
+            _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
+            _storyXML.CreateStory(_outputStory, _inputXHTML, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
+
+            string classname = "entry6_1";
+            string _xPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[@Name = \"" + classname + "\"]/Properties[1]/Leading[1]";
+            _fileNameWithPath = Common.PathCombine(_outputStyles, "Styles.xml");
+            XmlNode node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
+            string result = node.Attributes["type"].Value;
+            result = result + "_" + node.InnerText;
+            Assert.AreEqual(result, "enumeration_Auto", classname + "test failed");
+        } 
+        #endregion
+
+        #region Hyphenation
+        [Test]
+        public void Hyphenation1()
+        {
+            const string classname = "withhyphen";
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/Hyphenation.css");
+            _expected.Add("Hyphenation", "true");
+            _expected.Add("HyphenateBeforeLast", "2");
+            _expected.Add("HyphenateAfterFirst", "3");
+            _expected.Add("HyphenateLadderLimit", "1");
+            XPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[7][@Name = \"" + classname + "\"]";
+            NodeTest(true);
+        }
+
+        [Test]
+        public void Hyphenation2()
+        {
+            const string classname = "withouthyphen";
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/Hyphenation.css");
+            _expected.Add("Hyphenation", "false");
+            _expected.Add("HyphenateBeforeLast", "2");
+            _expected.Add("HyphenateAfterFirst", "3");
+            _expected.Add("HyphenateLadderLimit", "1");
+            XPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[8][@Name = \"" + classname + "\"]";
+            NodeTest(true);
+        } 
+        #endregion
+
+        #region Position
+        [Test]
+        public void Position()
+        {
+            _className = "positionLeft";
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/Position.css");
+            _cssProperty = _cssTree.CreateCssProperty(_input, true);
+            _stylesXML.CreateIDStyles(_output, _cssProperty);
+            FileNameWithPath = Common.PathCombine(_output, "Styles.xml");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+
+            _expected.Add("LeftIndent", "30");
+            Assert.IsTrue(ValidateNodeAttribute(), " failed for postionLeft");
+
+            _className = "positionRight";
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+            _expected.Add("RightIndent", "50");
+            Assert.IsTrue(ValidateNodeAttribute(), " failed for postionRight");
+
+        } 
+        #endregion
+
+        #region IncreaseFontSizeForSuper
+        [Test]
+        public void IncreaseFontSizeForSuper()
+        {
+            _className = "VerseNumber";
+            _input = Common.DirectoryPathReplace(_testFolderPath + "/input/IncreaseFontSizeForSuper.css");
+            _cssProperty = _cssTree.CreateCssProperty(_input, true);
+            _stylesXML.CreateIDStyles(_output, _cssProperty);
+            FileNameWithPath = Common.PathCombine(_output, "Styles.xml");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
+
+            _expected.Add("PointSize", "15");
+            Assert.IsTrue(ValidateNodeAttribute(), " failed for IncreaseFontSizeForSuper");
+        }
+        #endregion
+
+        #endregion
+    }
+}

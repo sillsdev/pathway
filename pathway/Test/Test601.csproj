@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{222CBAAB-B338-4670-A553-B6154E582FC8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Test</RootNamespace>
+    <AssemblyName>Test</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkSubset>
+    </TargetFrameworkSubset>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>UiTests, ScenarioTests</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release BTE|AnyCPU' ">
+    <OutputPath>bin\Release BTE\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseBTE|AnyCPU' ">
+    <OutputPath>bin\ReleaseBTE\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseSE|AnyCPU' ">
+    <OutputPath>bin\ReleaseSE\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=0.3.0.37313, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="BasicUtils, Version=6.0.4.16100, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PsExport\Dlls601\BasicUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="FwUtils, Version=6.0.4.16380, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PsExport\Dlls\FwUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="GuiTestDriver, Version=5.5.3391.27786, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\GuiTestDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="NMock2, Version=2.0.0.44, Culture=neutral, PublicKeyToken=37d3be0adc87c2b7">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\NMock2.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.4.7.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Security" />
+    <Reference Include="XmlDiffPatch, Version=1.0.8.28, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\xmldiffpatch.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConfigurationTool\ConfigurationToolTest.cs" />
+    <Compile Include="CssDialog\ContentsTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CssParser\ClassInfoTest.cs" />
+    <Compile Include="CssParser\CSSTreeTest.cs" />
+    <Compile Include="FileUtilsTest.cs" />
+    <Compile Include="GoBibleConvert\CheckCV_XHTMLTest.cs" />
+    <Compile Include="GoBibleConvert\GoBibleTest.cs" />
+    <Compile Include="InDesignConvert\InDesignMapTest.cs" />
+    <Compile Include="InDesignConvert\InGraphicTest.cs" />
+    <Compile Include="InDesignConvert\InInsertMacroTest.cs" />
+    <Compile Include="InDesignConvert\InMapPropertyTest.cs" />
+    <Compile Include="InDesignConvert\InMasterSpreadTest.cs" />
+    <Compile Include="InDesignConvert\InPreferencesTest.cs" />
+    <Compile Include="InDesignConvert\InSpreadTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="InDesignConvert\InStoryTest.cs" />
+    <Compile Include="InDesignConvert\InStylesTest.cs" />
+    <Compile Include="LiftPrepare\LiftFilters.cs" />
+    <Compile Include="LiftPrepare\FilterTests\LiftEntryAndSenseFilterLoadingTester.cs" />
+    <Compile Include="LiftPrepare\FilterTests\LiftFilterTester.cs" />
+    <Compile Include="LiftPrepare\FilterTests\LiftLanguageFilterLoadingTest.cs" />
+    <Compile Include="LiftPrepare\FullTests\FullAkooseTest.cs" />
+    <Compile Include="LiftPrepare\LiftDocumentTester.cs" />
+    <Compile Include="LiftPrepare\LiftEntryTester.cs" />
+    <Compile Include="LiftPrepare\LiftPreparerTester.cs" />
+    <Compile Include="LiftPrepare\LiftPrepareTester.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LiftPrepare\LiftPrepareTester.Designer.cs">
+      <DependentUpon>LiftPrepareTester.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LiftPrepare\LiftReaderTester.cs" />
+    <Compile Include="LiftPrepare\LiftWriterTester.cs" />
+    <Compile Include="LiftPrepare\SortTests\LiftEntrySortLoadTester.cs" />
+    <Compile Include="LiftPrepare\SortTests\LiftLangSortLoadTester.cs" />
+    <Compile Include="LiftPrepare\SortTests\LiftSortTester.cs" />
+    <Compile Include="LiftPrepare\TestEnvironment.cs" />
+    <Compile Include="LiftPrepare\TransformTests\TransformTester.cs" />
+    <Compile Include="LiftPrepare\WritingSystemSorterTester.cs" />
+    <Compile Include="OdtTest.cs" />
+    <Compile Include="CssDialog\CommonTestMethod.cs" />
+    <Compile Include="CssDialog\FeatureSheetTest.cs" />
+    <Compile Include="CssDialog\MergeCssTest.cs" />
+    <Compile Include="CssDialog\ParamTest.cs" />
+    <Compile Include="CssDialog\PdfTest.cs" />
+    <Compile Include="CssDialog\PreviewTest.cs" />
+    <Compile Include="CssDialog\SettingBlTest.cs" />
+    <Compile Include="CssParser\ClassAttributeTest.cs" />
+    <Compile Include="CssParser\StyleAttributeTest.cs" />
+    <Compile Include="OpenOfficeConvert\ContentXMLTest.cs" />
+    <Compile Include="CssParser\CssParserTest.cs" />
+    <Compile Include="CssParser\GramTest.cs" />
+    <Compile Include="CssParser\MakePropertyTest.cs" />
+    <Compile Include="OpenOfficeConvert\MapOfficeAttributeTest.cs" />
+    <Compile Include="OpenOfficeConvert\UtilityTest.cs" />
+    <Compile Include="PathPart.cs" />
+    <Compile Include="PsExport\PsExportTest.cs" />
+    <Compile Include="OpenOfficeConvert\StylesXMLTest.cs" />
+    <Compile Include="PsTool\CommonCssTest.cs" />
+    <Compile Include="PsTool\CommonTest.cs" />
+    <Compile Include="PsTool\CommonXmlTest.cs" />
+    <Compile Include="PsTool\FolderTreeTest.cs" />
+    <Compile Include="PsTool\FontInternalsTest.cs" />
+    <Compile Include="PsTool\PreExportProcessTest.cs" />
+    <Compile Include="PsTool\ProjectInformationTest.cs" />
+    <Compile Include="PsTool\SubProcessTest.cs" />
+    <Compile Include="PsTool\FileDataTest.cs" />
+    <Compile Include="PsTool\ZipFolderTest.cs" />
+    <Compile Include="PublishingSolutionExeUi\BuangScenarioTests.cs" />
+    <Compile Include="PublishingSolutionExeUi\PsUiScenarioTests.cs" />
+    <Compile Include="PublishingSolutionExeUi\PsUiTests.cs" />
+    <Compile Include="ValidateXMLFile.cs" />
+    <Compile Include="XeTeXConvert\ExportXeTeXTest.cs" />
+    <Compile Include="XeTeXConvert\PostscriptLanguageTest.cs" />
+    <Compile Include="XmlAssert.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ConfigurationTool\ConfigurationTool601.csproj">
+      <Project>{C1ED7E03-C92E-4223-909B-E9C35A4D98E2}</Project>
+      <Name>ConfigurationTool601</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CssDialog\CssDialog601.csproj">
+      <Project>{1A58ECC5-75FE-4FE2-B133-8605B382B7C0}</Project>
+      <Name>CssDialog601</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GoBibleConvert\GoBibleConvert.csproj">
+      <Project>{C7A3F4E5-1F86-4D22-AB4F-5BEA0D923DDD}</Project>
+      <Name>GoBibleConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InDesignConvert\InDesignConvert.csproj">
+      <Project>{8D0D307D-3785-4561-A923-FF3DDF6C2F14}</Project>
+      <Name>InDesignConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LiftPrepare\LiftPrepare.csproj">
+      <Project>{D38235F3-5B02-4835-B380-40E0BDCD5495}</Project>
+      <Name>LiftPrepare</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenOfficeConvert\OpenOfficeConvert.csproj">
+      <Project>{E225E5AF-B603-41D1-BB58-E3AAE05C59FD}</Project>
+      <Name>OpenOfficeConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PsExport\PsExport601.csproj">
+      <Project>{DCD48287-7F36-4DBB-94CF-4FF617BF1F78}</Project>
+      <Name>PsExport601</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PsTool\PsTool.csproj">
+      <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
+      <Name>PsTool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PublishingSolutionExe\PublishingSolutionEXE.csproj">
+      <Project>{C37AD0DF-7C87-4666-8335-35FDABFEAA45}</Project>
+      <Name>PublishingSolutionEXE</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XeTeXConvert\XeTeXConvert.csproj">
+      <Project>{310E4B50-F423-46B1-AD72-740CC859E4C3}</Project>
+      <Name>XeTeXConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CssParser\CSSParser.csproj">
+      <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
+      <Name>CSSParser</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="GoBibleConvert\TestFiles\Expected\1pe_simplified.xhtml" />
+    <None Include="GoBibleConvert\TestFiles\InputFiles\1pe.xhtml" />
+    <None Include="PsTool\TestFiles\Expected\DefaultCss.xhtml" />
+    <None Include="PsTool\TestFiles\Expected\FileInsert.xhtml" />
+    <None Include="PsTool\TestFiles\Expected\FlexRev.xhtml" />
+    <None Include="PsTool\TestFiles\Expected\ImagePreProcess.xhtml" />
+    <None Include="PsTool\TestFiles\Expected\Language.xhtml" />
+    <None Include="PsTool\TestFiles\Expected\ParaChapBorder.xhtml" />
+    <None Include="PsTool\TestFiles\InputFiles\DefaultCSS.xhtml" />
+    <None Include="PsTool\TestFiles\InputFiles\Dictionary1.de" />
+    <None Include="PsTool\TestFiles\InputFiles\FileInsert.xhtml" />
+    <None Include="PsTool\TestFiles\InputFiles\FlexRev" />
+    <None Include="PsTool\TestFiles\InputFiles\FlexRev.xhtml" />
+    <None Include="PsTool\TestFiles\InputFiles\ImagePreProcess.xhtml" />
+    <None Include="PsTool\TestFiles\InputFiles\ParaChapBorder.xhtml" />
+    <None Include="PsTool\TestFiles\InputFiles\PictureWidth.xhtml" />
+    <None Include="PsTool\TestFiles\InputFiles\Preview.xhtml" />
+    <None Include="PsTool\TestFiles\InputFiles\ProgressBar.xhtml" />
+    <None Include="PsTool\TestFiles\InputFiles\Test.xhtml" />
+    <None Include="PsTool\TestFiles\InputFiles\XmlOperations.de" />
+    <None Include="PsTool\TestFiles\output\Copy of ImagePreProcess.xhtml" />
+    <None Include="PsTool\TestFiles\output\DefaultCss.xhtml" />
+    <None Include="PsTool\TestFiles\output\FileInsert.xhtml" />
+    <None Include="PsTool\TestFiles\output\ImagePreProcess.xhtml" />
+    <None Include="PsTool\TestFiles\output\ParaChapBorder.xhtml" />
+    <None Include="PsTool\TestFiles\output\Preview.xhtml" />
+    <None Include="PsTool\TestFiles\output\test.xhtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PsTool\TestFiles\Expected\MergedCss.css" />
+    <Content Include="PsTool\TestFiles\Expected\MergedLayout_02.css" />
+    <Content Include="PsTool\TestFiles\Expected\Preview.html" />
+    <Content Include="PsTool\TestFiles\InputFiles\Columns_1.css" />
+    <Content Include="PsTool\TestFiles\InputFiles\Dictionary.css" />
+    <Content Include="PsTool\TestFiles\InputFiles\FlexRev.xml" />
+    <Content Include="PsTool\TestFiles\InputFiles\FlexRev.xsl" />
+    <Content Include="PsTool\TestFiles\InputFiles\GenericFont.xml" />
+    <Content Include="PsTool\TestFiles\InputFiles\Layout_02.css" />
+    <Content Include="PsTool\TestFiles\InputFiles\Merge_Columns_1.css" />
+    <Content Include="PsTool\TestFiles\InputFiles\Merge_Dictionary.css" />
+    <Content Include="PsTool\TestFiles\InputFiles\Merge_Font_Size_12.css" />
+    <Content Include="PsTool\TestFiles\InputFiles\Merge_KeyFile.css" />
+    <Content Include="PsTool\TestFiles\InputFiles\Pictures\Ax1.jpg" />
+    <Content Include="PsTool\TestFiles\InputFiles\Pictures\Flea1.jpg" />
+    <Content Include="PsTool\TestFiles\InputFiles\Pictures\LeftIndexMacro1.jpg" />
+    <Content Include="PsTool\TestFiles\InputFiles\Pictures\Thomsons-gazelle1.jpg" />
+    <Content Include="PsTool\TestFiles\InputFiles\Preview.css" />
+    <Content Include="PsTool\TestFiles\InputFiles\ProjectTypeD.css" />
+    <Content Include="PsTool\TestFiles\InputFiles\ProjectTypeS.css" />
+    <Content Include="PsTool\TestFiles\output\Copy of MergedCss.css" />
+    <Content Include="PsTool\TestFiles\output\MergedCss.css" />
+    <Content Include="PsTool\TestFiles\output\MergedLayout_02.css" />
+    <Content Include="PsTool\TestFiles\output\Preview.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="LiftPrepare\LiftPrepareTester.resx">
+      <DependentUpon>LiftPrepareTester.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GoBibleConvert\TestFiles\Output\" />
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>%25comspec%25 /c ..\..\PostTestBuild.bat</PostBuildEvent>
+  </PropertyGroup>
+</Project>

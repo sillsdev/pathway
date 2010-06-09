@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../ScriptPaths.xsl"?>
+
+<accil on-fail="assert">
+
+  <bug id="TBD" desc="TBD"/>
+
+  <!--sound frequency="400" duration="500"/ -->
+
+  <on-application run="ok" title="Publishing Solutions 1.0">
+    <include from="testPath.xml"/>
+
+    <click select="menubar/help/int-flex"/>
+    <on-dialog wait="2000" title="Publishing Solutions 1.0" path="9:Publishing Solutions 1.0/">
+      <insert>%{F4}</insert>
+    </on-dialog>
+    
+    <click select="menubar/file/exit"/>
+
+  </on-application>
+
+  <!-- sound frequency="400" duration="500"/ -->
+
+</accil>

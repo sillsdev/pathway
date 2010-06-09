@@ -1,0 +1,23 @@
+.entry {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: 12pt;	/* inherited */
+    color: rgb(0,0,0);	/* inherited */
+    background-color: rgb(255,255,255);	/* inherited */
+    text-indent: -36pt;
+    margin-left: 36pt;
+    padding-left: 9pt;
+    padding-bottom: 2pt;
+    padding-top: 1pt;
+}
+
+.positionLeft {
+position:relative;
+left:50pt;
+}
+
+.positionRight {
+position:relative;
+right:20pt;
+}
+
+

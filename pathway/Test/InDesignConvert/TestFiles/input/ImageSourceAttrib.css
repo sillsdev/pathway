@@ -1,0 +1,13 @@
+
+img[src='Thomsons-gazelle1.jpg'] {
+    width: 2in;
+    height:4in;
+float:right;
+}
+
+img[src='Flea1.jpg'] {
+    width: 4in;
+    height:2in;
+float:left;
+}
+

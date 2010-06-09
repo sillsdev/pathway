@@ -1,0 +1,13 @@
+.Focused {
+    text-decoration:underline;
+}
+span[lang='mcb'] {
+    font-weight:bold;
+}
+span{
+    color:red;
+}
+
+span[lang='es'] {
+    color:green;
+}

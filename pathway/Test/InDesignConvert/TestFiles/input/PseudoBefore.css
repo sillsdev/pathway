@@ -1,0 +1,8 @@
+.letData:before 
+{ 
+content: ": ";
+ }
+.letHead:before 
+{ 
+content: "\2666";
+ }

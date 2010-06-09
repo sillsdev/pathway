@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
+&apos;Constant ReferenceFormat for User Desire
+Const ReferenceFormat = &quot;Genesis 1:1 Genesis 1:15&quot;
+Const AutoMacro = &quot;True&quot;
+
+&apos;Changed For TD-1250 (Label of Extra processing in TE should refer to Scripture Reference not Dictionary headword)
+&apos; Changed message content from &quot;word&quot; to &quot;book, chapter and / or verse&quot;
+&apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
+Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
+Const LASTGUIDESTYLE =  &quot;GuideR&quot;
+&apos;Const ENTRYPARASTYLE =  &quot;Paragraph_scrSection_scrBook&quot; &apos;&quot;first_section_scriptureText&quot; &apos;&quot;entry_letData&quot;
+Const ENTRYPARASTYLE =  &quot;scrBook&quot; &apos; &quot;Paragraph_scrSection_scrBook&quot;
+&apos;Declaration of Reference Variables
+Dim LastParagraph(0) As String
+Dim strStartBook, strEndBook
+Dim strStartChapter As String
+Dim strPrevStartChapter As String
+Dim strEndChapter As String
+Dim strStartVerse As String
+Dim strEndVerse As String
+Dim strFirstParagraph
+Dim VerseNumber As String
+&apos;The main procedure to show the Reference (Ex. Mark 1:1 - 2:26)
+Sub SetReference()
+
+On Error GoTo MyError:
+
+Dim PageCount as Integer
+Dim VerseCharStyle, ChapterCharStyle, BookCharStyle
+Dim isEndChapterFoundAlready As Boolean
+PageCount = TotalPages
+Redim LastParagraph(PageCount+2) As String
+Dim HiddenParagraph(PageCount,1) As String
+
+If Instr(ReferenceFormat,&quot;:&quot;) &gt; 0 Then
+	VerseNumber = &quot;True&quot;
+Else
+	VerseNumber = &quot;False&quot;
+End If
+
+mytime = now
+
+RemoveOldGuides()
+
+GetLastParagraph
+
+keep = chr(10) &amp; &quot;After General &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
+mytime = now
+
+strStartBook = &quot;&quot;
+strEndBook = &quot;&quot;
+strStartChapter = 1
+strPrevStartChapter = 1
+strEndChapter = 0
+strStartVerse = 1
+strEndVerse = 1
+&apos;Assign the possible style Names to References (Book, Chapter, Verse)
+&apos;VerseCharStyle = &quot;VerseNumber_ParagraphContinuation_scrSection_scrBook,VerseNumber_Line1_scrSection_scrBook,VerseNumber_Line2_scrSection_scrBook,VerseNumber_EmbeddedTextLine1_scrSection_scrBook,VerseNumber_Paragraph_scrSection_scrBook,VerseNumberAlternate_Paragraph_scrSection_scrBook,verseNumber_div_section_scriptureText,verseNumber_first_section_scriptureText,verseNumber_li_ul_section_scriptureText,VerseNumber_\f*_scrSection_columns_scrBook,VerseNumber_Paragraph_scrSection_columns_scrBook,VerseNumber_.bgt_Paragraph_scrSection_columns_scrBook,VerseNumber_.bgt_ParagraphContinuation_scrSection_columns_scrBook,VerseNumber_.x-kal_Paragraph_scrSection_columns_scrBook,VerseNumber_.x-kal_Paragraph1_scrSection_columns_scrBook,VerseNumber1_.x-kal_Paragraph1_scrSection_columns_scrBook&quot;
+&apos;ChapterCharStyle = &quot;ChapterNumber_Paragraph_scrSection_scrBook,chapterNumber_first_section_scriptureText,ChapterNumber_Paragraph_scrSection_columns_scrBook,ChapterNumber_Paragraph1_scrSection_columns_scrBook&quot;
+																										 
+&apos;BookCharStyle = &quot;span_TitleMain_scrBook,scrBookName_scrBook,book_,span_.x-kal_TitleMain_scrBook&quot;
+
+ThisComponent.currentController.getViewCursor().jumpToPage(2)
+oDoc = ThisComponent 
+oVC = oDoc.CurrentController.getViewCursor 
+oVC.gotoStart(false) 
+&apos; ( -00012 )
+&apos;This loop read the file Page by Page
+Do
+    page = oVC.getPage 
+
+	If page &gt; 1 Then
+		oVC.jumpToStartOfPage
+	
+	If VerseNumber = &quot;True&quot; Or ReferenceFormat = &quot;Genesis 1, 2&quot; Or ReferenceFormat = &quot;Genesis 1&quot; Then
+		First = oDoc.Text.createTextCursorByRange(oVC)
+		strFirstParagraph = First
+		&apos;Assign Start Verse Number
+		GetReferenceASC(First,page,strStartVerse,&quot;V&quot;)
+	End If
+	
+	oVC.jumpToStartOfPage
+	First = oDoc.Text.createTextCursorByRange(oVC)	
+	&apos;Assign Start Chapter Number
+	GetReferenceASC(First,page,strStartChapter,&quot;C&quot;)
+	&apos;If there is no chapter number in a page, we assign previous page&apos;s last chapter number to current page&apos;s Start and End Chapter Number
+	If Val(strStartChapter) = 0 Then
+		If Val(strEndChapter) = 0 Then
+			strEndChapter = 1
+		End If
+		strStartChapter = strEndChapter
+		isEndChapterFoundAlready = True
+		IsBookChanged = &quot;No&quot;
+	Else
+		If Val(strEndChapter) &gt;= Val(strStartChapter) Then
+			IsBookChanged = &quot;Yes&quot;
+		End If 
+	End If	
+	
+	&apos;We need to find New Book name when it changes
+	&apos;Val(strEndChapter) &gt; Val(strStartChapter) --&gt; When Book changes
+	&apos;strBook = &quot;&quot; --&gt; For First book find
+	&apos;If Val(strEndChapter) &gt; Val(strStartChapter) Or strStartBook = &quot;&quot; Or (Val(strEndChapter) = 1 And Val(strStartChapter) = 1 And val(strStartVerse) &lt; val(strEndVerse)) Then 
+     If IsBookChanged = &quot;Yes&quot; Or strStartBook = &quot;&quot; Then 
+		&apos;oVC.jumpToStartOfPage
+		First = oDoc.Text.createTextCursorByRange(oVC)
+		&apos;Assign Book Name
+		GetReferenceASC(First,page,strStartBook,&quot;B&quot;)
+		If Val(strStartVerse) &lt;&gt; 1 Then 
+			strStartChapter = strEndChapter
+			strTemp = strStartBook
+			strStartBook = strEndBook
+			strEndBook = strTemp		
+		Else
+			strEndBook = strStartBook
+		End If	
+	End If	
+	
+	If VerseNumber = &quot;True&quot; Then
+		oVC.jumpToEndOfPage
+		Last = oDoc.Text.createTextCursorByRange(oVC)
+		&apos;Assign End Verse Number
+		GetReferenceDESC(Last,page,strEndVerse,&quot;V&quot;)
+	End If
+	
+	&apos;Assign End Chapter Number
+	If Not isEndChapterFoundAlready Then
+		oVC.jumpToEndOfPage
+		Last = oDoc.Text.createTextCursorByRange(oVC)	
+		GetReferenceDESC(Last,page,strEndChapter,&quot;C&quot;)	
+		&apos;If Val(strEndChapter) = 0 Then
+			&apos;strEndChapter = strStartChapter
+		&apos;End If	
+	End If
+	isEndChapterFoundAlready = False
+	
+	If strStartChapter = strEndChapter And Val(strStartChapter) &gt; Val(strPrevStartChapter) And Val(strStartChapter) &lt;&gt; 1 And Val(strStartVerse) &lt;&gt; 1 Then
+		strStartChapter = strPrevStartChapter
+	End If
+	
+	If VerseNumber = &quot;True&quot; Then
+        If ReferenceFormat = &quot;Genesis 1:1-15&quot; Then
+			strFirstReference = strStartBook &amp; &quot; &quot; &amp; strStartChapter &amp; &quot; : &quot; &amp; strStartVerse
+			strLastReference = &quot;-&quot; &amp; strEndVerse
+        ElseIf ReferenceFormat = &quot;Genesis 1:1 1:15&quot; Then
+			strFirstReference = strStartBook &amp; &quot; &quot; &amp; strStartChapter &amp; &quot; : &quot; &amp; strStartVerse
+			strLastReference = &quot; &quot; &amp; strEndChapter &amp; &quot; : &quot; &amp; strEndVerse
+		Else &apos;Genesis 1:1 Genesis 1:15
+			strFirstReference = strStartBook &amp; &quot; &quot; &amp; strStartChapter &amp; &quot; : &quot; &amp; strStartVerse
+			strLastReference = &quot; &quot; &amp; strEndBook &amp; &quot; &quot; &amp; strEndChapter &amp; &quot; : &quot; &amp; strEndVerse
+		End If
+	Else
+        If ReferenceFormat = &quot;Genesis 1, 2&quot; Or ReferenceFormat = &quot;Genesis 1&quot; Then
+        	If strStartBook = strEndBook Then
+				strFirstReference = strStartBook &amp; &quot; &quot;
+				If strPrevStartChapter &lt;&gt; strStartChapter Then
+					If strStartVerse &lt;&gt; 1 Then
+						strFirstReference = strFirstReference &amp; strPrevStartChapter &amp; &quot;, &quot;
+					End If
+				End If
+				strFirstReference = strFirstReference &amp; strStartChapter
+					
+				If strStartChapter &lt;&gt; strEndChapter Then
+					strFirstReference = strFirstReference &amp; &quot;, &quot; &amp; strEndChapter
+				End If	
+			Else
+				strFirstReference = strStartBook &amp; &quot; &quot;
+				If strPrevStartChapter &lt;&gt; strStartChapter And strPrevStartChapter &lt; strStartChapter  Then
+					strFirstReference = strFirstReference &amp; strPrevStartChapter &amp; &quot;, &quot;
+				ElseIf strPrevStartChapter &lt;&gt; strStartChapter And strPrevStartChapter &gt;= strStartChapter  Then
+					strFirstReference = strFirstReference &amp; strPrevStartChapter
+				End If
+				
+				If  strPrevStartChapter &lt; strStartChapter Then
+					strFirstReference = strFirstReference &amp; strStartChapter
+				End If
+				
+				strLastReference = strEndBook &amp; &quot; ,&quot; &amp; 	strEndChapter
+	
+			End If
+		End If
+		
+	End If
+	&apos;Msgbox strReference
+	
+	&apos;HiddenParagraph(page-1) = page-1 &amp; &quot;`~&quot; &amp; strReference
+
+	HiddenParagraph(page-1,0) = page-1 &amp; &quot;`~&quot; &amp; strLastReference
+	HiddenParagraph(page-1,1) = page-1 &amp; &quot;`~&quot; &amp; strFirstReference
+    				
+	strPrevStartChapter = strEndChapter
+	strStartBook = strEndBook
+	Else
+		FirstPageBook(strStartBook)
+		strEndBook = strStartBook
+	End If	
+Loop While oVC.jumpToNextPage 
+    keep = keep &amp; chr(10) &amp; &quot;After Main &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
+    mytime= now
+    InsertReference(HiddenParagraph,PageCount)
+    keep = keep &amp; chr(10) &amp; &quot;After Print &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
+    &apos;msgbox keep
+
+Exit Sub
+MyError:
+	Msgbox &quot;Sorry! Could not update the References.&quot; , 0 + 64,  &quot;Update References&quot;
+
+End Sub
+
+&apos;This function returns Page Number of given Paragraph
+Function pageNo(par)
+	Dim cont, vc, st
+	st = par.getStart()
+	cont = ThisComponent.getCurrentController()
+	cont.select(st)
+	vc = cont.getViewCursor()
+	pageNo = vc.getPage()
+End Function
+
+&apos;This procedure finds and assigns the Book Name If Book Name is available in First Page
+Sub FirstPageBook(strStartBook)
+	oTextElementEnum = ThisComponent.getText().createEnumeration() 
+ 	While oTextElementEnum.hasMoreElements() 
+ 		oTextElement = oTextElementEnum.nextElement
+ 		CurPageNo = pageNo(oTextElement)
+ 		If CurPageNo &gt; 1 Then
+ 			Exit Sub
+ 		End If
+    	If oTextElement.supportsService(&quot;com.sun.star.text.Paragraph&quot;) then
+    		If LCase(Trim(oTextElement.ParaStyleName)) = &quot;scrbook&quot; Then
+    			strStartBook = oTextElement.String
+    			Exit Sub
+    		End If
+    	End If
+    Wend	
+End Sub
+
+&apos;This procedure Insert Reference as Hidden Paragraph
+Sub InsertReference(HiddenParagraph,PageCount) 
+ThisComponent.currentController.getViewCursor().jumpToPage(2)
+oDoc = ThisComponent 
+oVC = oDoc.CurrentController.getViewCursor 
+oVC.gotoStart(false) 
+PageCount = TotalPages
+
+Do 
+	page = oVC.getPage
+	if PageCount = page then
+		Exit Do
+	End If	
+	oVC.jumpToEndOfPage
+
+		paraTextPageNo = split(HiddenParagraph(page,0),&quot;`~&quot;)
+        If UBound(paraTextPageNo) = 1 Then
+			&apos;For Last Reference
+	    	paraPos = val(paraTextPageNo(0)) 
+			paraText = paraTextPageNo(1)
+			paraStyle = LASTGUIDESTYLE
+			&apos;InsertGuide(paraText,paraPos,paraStyle)
+	        	
+			&apos;For First Reference
+			paraTextPageNo = split(HiddenParagraph(page,1),&quot;`~&quot;)
+			paraPos1 = val(paraTextPageNo(0)) 
+			paraText1 = paraTextPageNo(1)
+			paraStyle1 = FIRSTGUIDESTYLE
+			&apos;InsertGuide(paraText1,paraPos1,paraStyle1)
+			
+			If LastParagraph(page -1) = LastParagraph(page) Then
+				InsertGuide(paraText1,paraPos1,paraStyle1)
+				InsertGuide(paraText,paraPos,paraStyle)
+			Else
+				InsertGuide(paraText,0,paraStyle)
+				Currpage = oVC.getPage
+				If Currpage &lt;&gt; page Then
+					ThisComponent.currentController.getViewCursor().jumpToPage(page)
+					oVC.jumpToEndOfPage	
+				End If				
+				InsertGuide(paraText1,0,paraStyle1)
+			End If
+		End If
+		
+		Currpage = oVC.getPage
+		If Currpage &lt;&gt; page Then
+			ThisComponent.currentController.getViewCursor().jumpToPage(page)	
+		End If
+Loop While oVC.jumpToNextPage 	 
+End Sub
+
+&apos;This Procedure loops the page in ASC order and get the First Chapter/Verse by using ReturnReferenceVerse/ReturnReferenceChapter
+Sub GetReferenceASC(MyParagraph,PageNo,RefVariable,Source)
+		Do
+		  	MyParagraph.gotoEndOfParagraph(true) 
+		  	If Source = &quot;V&quot; Then
+			  	RefVariable = ReturnReferenceVerse(MyParagraph,&quot;ASC&quot;)
+		  	ElseIf Source = &quot;C&quot; Then
+			  	RefVariable = ReturnReferenceChapter(MyParagraph)
+			ElseIf Source = &quot;B&quot; Then
+				RefVariable = ReturnReferenceBook(MyParagraph)
+		  	End If
+		  	If Len(Trim(RefVariable)) &gt; 0 Then
+		  		Exit Do
+		  	End If
+		  	If Left(MyParagraph.String,16) = Left(LastParagraph(PageNo),16) Then
+				Exit Do
+		  	End If
+		Loop While MyParagraph.gotoNextParagraph(false)
+End Sub
+
+&apos;This Procedure loops the page in DESC order and get the Last Chapter/Verse by using ReturnReferenceVerse/ReturnReferenceChapter
+Sub GetReferenceDESC(ByVal MyParagraph,PageNo,RefVariable,Source)
+		Do
+			MyParagraph.gotoStartOfParagraph(true)
+		  	If Source = &quot;V&quot; Then
+			  	RefVariable = ReturnReferenceVerse(MyParagraph,&quot;DESC&quot;)
+		  	ElseIf Source = &quot;C&quot; Then
+			  	RefVariable = ReturnReferenceChapter(MyParagraph)
+		  	End If
+		  	If Len(Trim(RefVariable)) &gt; 0 Then
+		  		Exit Do
+		  	End If
+		  	&apos;If MyParagraph.String = strFirstParagraph.String Then
+				&apos;Exit Do
+		  	&apos;End If
+
+		Loop While MyParagraph.gotoPreviousParagraph(true)	  	
+End Sub
+
+&apos;This Procedure loops the given Paragraph and find the Verse
+Function ReturnReferenceVerse(MyParagraph,Direction)
+	oParaEnume = MyParagraph.createEnumeration() 
+	While oParaEnume.hasMoreElements() 
+	 	oPara = oParaEnume.nextElement() 
+		&apos;enumeration for portions in the paragraph 
+	  	oPortionEnume = oPara.createEnumeration() 
+	  	While oPortionEnume.hasMoreElements() 
+	    	oPortion = oPortionEnume.nextElement() 
+	    	If Len(Trim(oPortion.CharStyleName)) &gt; 10 And Len(Trim(oPortion.String)) &gt; 0 Then
+		    	&apos;If InStr(Trim(RefStyleName),oPortion.CharStyleName) &gt; 0 Then
+		    	&apos;If Len(Trim(oPortion.CharStyleName)) &gt; 10 Then
+			    	If Mid(Lcase(Trim(oPortion.CharStyleName)),1,11) = &quot;versenumber&quot; Then
+			    		ReturnReferenceVerse = oPortion.String
+			    		If Direction = &quot;ASC&quot; Then
+				    		Exit Function
+			    		End If
+			    	End If
+		    	&apos;End If
+		    End If	
+	  	WEnd 
+	WEnd	
+End Function
+
+&apos;This Procedure loops the given Paragraph and find the Chapter
+Function ReturnReferenceChapter(MyParagraph)
+	oParaEnume = MyParagraph.createEnumeration() 
+	While oParaEnume.hasMoreElements() 
+	 	oPara = oParaEnume.nextElement() 
+		&apos;enumeration for portions in the paragraph 
+	  	oPortionEnume = oPara.createEnumeration() 
+	  	While oPortionEnume.hasMoreElements() 
+	    	oPortion = oPortionEnume.nextElement() 
+	    	&apos;If Len(Trim(oPortion.CharStyleName)) &gt; 0 And Len(Trim(oPortion.String)) &gt; 0 Then
+	    	If Len(Trim(oPortion.CharStyleName)) &gt; 12 And Len(Trim(oPortion.String)) &gt; 0 Then
+		    	If Mid(Lcase(Trim(oPortion.CharStyleName)),1,13) = &quot;chapternumber&quot; Then
+			    	&apos;If InStr(Trim(RefStyleName),oPortion.CharStyleName) &gt; 0 Then
+			    		ReturnReferenceChapter = oPortion.String
+			    	&apos;End If
+			    	Exit Function
+			    End If
+		    End If	
+	  	WEnd 
+	WEnd	
+End Function
+
+&apos;This Procedure loops the given Paragraph and find the Book
+Function ReturnReferenceBook(MyParagraph)
+	oParaEnume = MyParagraph.createEnumeration() 
+	While oParaEnume.hasMoreElements() 
+	 	oPara = oParaEnume.nextElement() 
+		&apos;enumeration for portions in the paragraph 
+	  	oPortionEnume = oPara.createEnumeration() 
+	  	While oPortionEnume.hasMoreElements() 
+	    	oPortion = oPortionEnume.nextElement() 
+	    	If InStr(Lcase(oPortion.CharStyleName) , &quot;titlemain_scrbook&quot;) &gt; 0 Then
+	    		ReturnReferenceBook = oPortion.String
+	    		Exit Function
+	    	End If
+	  	WEnd 
+	WEnd	
+End Function
+
+
+&apos;This Procedure loops the page and store the last paragraph in Array
+Sub GetLastParagraph
+&apos;Picture
+	dim document   as object
+	dim dispatcher as object
+	document = ThisComponent.CurrentController.Frame 
+	dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;) 
+	
+	ThisComponent.currentController.getViewCursor().jumpToPage(2)
+oDoc = ThisComponent 
+oVC = oDoc.CurrentController.getViewCursor 
+oVC.gotoStart(false) 
+Do 
+	page = oVC.getPage
+
+	oVC.jumpToEndOfPage 
+	Last = oDoc.Text.createTextCursorByRange(oVC) 
+	
+	Last.gotoStartOfParagraph(true)
+	&apos;Last.gotoEndOfParagraph(false)
+
+	differ=oVC.getPage 
+
+  	if differ &gt; page Then
+	  	dispatcher.executeDispatch(document, &quot;.uno:GoToPrevPara&quot;, &quot;&quot;, 0, Array()) 
+	  	dispatcher.executeDispatch(document, &quot;.uno:InsertPara&quot;, &quot;&quot;, 0, Array()) 	  	
+	  	dispatcher.executeDispatch(document, &quot;.uno:GoToPrevPara&quot;, &quot;&quot;, 0, Array()) 
+		Last = oDoc.Text.createTextCursorByRange(oVC)
+		Last.gotoStartOfParagraph(false)
+		Last.gotoEndOfParagraph(true)
+	end if
+	LastParagraph(page) = Last.String
+Loop While oVC.jumpToNextPage 	 
+End Sub
+
+
+&apos;This procedure sets the dialgue to correct Update Reference 
+Sub StartDontForget
+	&apos;Msgbox &quot;Please NOTE: Use the Update References menu item or tool bar item to correct the references before printing.&quot; , 0 + 64,  &quot;Reference Reminder&quot;
+	if LCase(AutoMacro) = &quot;true&quot; Then
+		SetReference
+	else
+		dim clicked as byte
+		clicked = msgbox (&quot;Headers are updated to contain the first and last book, chapter and / or verse with the &quot; + &quot;&quot;&quot;&quot; + &quot;Update References&quot; + &quot;&quot;&quot;&quot; + &quot; tool bar item or Macro menu item.&quot; &amp; chr(10) &amp; &quot;Would you like to update the headers now?&quot;, 4 + 32 + 256 , &quot;Reference Reminder&quot;)
+		If clicked = 6 Then &apos;If Yes clicked
+			SetReference
+		End If
+	End If
+End Sub
+
+&apos;This procedure sets the dialgue to confirm user to correction of Update Reference while Printing
+Sub IsReferenceCorrected
+	dim clicked as byte
+	clicked = msgbox ( &quot;If you have not corrected the references yet, you can correct them now.&quot; &amp; chr(10) &amp; &quot;Would you like to correct the references?&quot;, 4 + 32 + 256 , &quot;Reference Reminder&quot;)
+	If clicked = 6 Then &apos;If Yes clicked
+		SetReference
+	End If
+End Sub
+
+&apos;This function gives the Total Pages of the current file
+Function TotalPages()
+	Dim cont
+	cont = ThisComponent.getCurrentController()
+	TotalPages = cont.PageCount
+End Function
+
+&apos;Insert the first or last Reference in given Position by using move and InsertPara Procedures.
+Sub InsertGuide(par,pos,style)
+	Dim guide as String
+	guide =  par
+	move(pos,style)
+   	InsertPara(guide, style)
+End Sub        
+
+&apos;This procedure creats the empty paragraph to insert hidden paragraphs(References)
+Sub move(pos,style)
+	dim document   as object
+	dim dispatcher as object
+	document = ThisComponent.CurrentController.Frame 
+	dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;) 
+	If pos = 0 Then
+	    dispatcher.executeDispatch(document, &quot;.uno:GotoStartOfPara&quot;, &quot;&quot;, 0, Array())
+		&apos;dispatcher.executeDispatch(document, &quot;.uno:GoUp&quot;, &quot;&quot;, 0, Array())     
+		dispatcher.executeDispatch(document, &quot;.uno:GoUp&quot;, &quot;&quot;, 0, Array())     
+	    dispatcher.executeDispatch(document, &quot;.uno:GotoEndOfPara&quot;, &quot;&quot;, 0, Array()) 
+		dispatcher.executeDispatch(document, &quot;.uno:InsertPara&quot;, &quot;&quot;, 0, Array())
+	Else &apos;If Page had no new paragraphs, this code will be executed
+		If style = &quot;GuideL&quot; Then
+			ThisComponent.currentController.getViewCursor().jumpToPage(pos)
+			dispatcher.executeDispatch(document, &quot;.uno:GoDown&quot;, &quot;&quot;, 0, Array()) 
+			dispatcher.executeDispatch(document, &quot;.uno:InsertPara&quot;, &quot;&quot;, 0, Array())
+			dispatcher.executeDispatch(document, &quot;.uno:InsertPara&quot;, &quot;&quot;, 0, Array())
+
+			dim args1(0) as new com.sun.star.beans.PropertyValue
+			args1(0).Name = &quot;Text&quot;
+			args1(0).Value = CHR$(9)
+			dispatcher.executeDispatch(document, &quot;.uno:InsertText&quot;, &quot;&quot;, 0, args1())			
+		Else
+			dispatcher.executeDispatch(document, &quot;.uno:GoToStartOfLine&quot;, &quot;&quot;, 0, Array())
+			dispatcher.executeDispatch(document, &quot;.uno:InsertPara&quot;, &quot;&quot;, 0, Array())
+		End If
+		
+		dispatcher.executeDispatch(document, &quot;.uno:GoUp&quot;, &quot;&quot;, 0, Array()) 
+
+	End If
+End Sub
+
+&apos;This procedure inserts the first or last Reference
+Sub InsertPara(guide, style)
+	dim document   as object
+	dim dispatcher as object
+	document   = ThisComponent.CurrentController.Frame
+	dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;)
+
+	dim args1(0) as new com.sun.star.beans.PropertyValue
+	args1(0).Name = &quot;Text&quot;
+	args1(0).Value = guide 
+	dispatcher.executeDispatch(document, &quot;.uno:InsertText&quot;, &quot;&quot;, 0, args1())
+
+	dim args2(1) as new com.sun.star.beans.PropertyValue
+	args2(0).Name = &quot;Template&quot;
+	args2(0).Value = style&apos; &amp; &quot;D&quot;
+	args2(1).Name = &quot;Family&quot; 
+	args2(1).Value = 2 
+	dispatcher.executeDispatch(document, &quot;.uno:StyleApply&quot;, &quot;&quot;, 0, args2())
+End Sub
+
+
+&apos;This procedure removes existing hidden References
+Sub RemoveOldGuides
+	Dim oParEnum           &apos;Paragraph enumerator 
+	Dim oPar               &apos;Current paragraph 
+	oParEnum = ThisComponent.Text.createEnumeration() 
+	Do While oParEnum.hasMoreElements() 
+		oPar = oParEnum.nextElement() 
+		If oPar.supportsService(&quot;com.sun.star.text.Paragraph&quot;) Then 
+			If InStr(oPar.ParaStyleName, &quot;Guide&quot;) &gt; 0 Then 
+			    oPar.Anchor.ParaStyleName = ENTRYPARASTYLE
+				ThisComponent.Text.removeTextContent(oPar) 
+			End If 
+		End If 
+	Loop
+End Sub
+
+
+
+
+</script:module>

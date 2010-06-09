@@ -1,0 +1,59 @@
+/* Running Head Every Page.css */
+@page :left {
+    @top-left {
+           content: string( guideword, first);
+           direction: ltr;
+           font-family: "Charis SIL" sans-serif;
+           font-weight: bold;
+           font-size: 12pt;
+           margin-top: 1cm;
+    }
+    @top-center {
+           content: counter( page);
+           margin-top: 1cm;
+    }
+    @top-right {
+           content: string( guideword, last);
+           direction: ltr;
+           font-family: "Charis SIL" sans-serif;
+           font-weight: bold;
+           font-size: 12pt;
+           margin-top: 1cm;
+    }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :right {
+    @top-left {
+           content: string( guideword, first);
+           direction: ltr;
+           font-family: "Charis SIL" sans-serif;
+           font-weight: bold;
+           font-size: 12pt;
+           margin-top: 1cm;
+    }
+    @top-center {
+           content: counter( page);
+           margin-top: 1cm;
+    }
+    @top-right {
+           content: string( guideword, last);
+           direction: ltr;
+           font-family: "Charis SIL" sans-serif;
+           font-weight: bold;
+           font-size: 12pt;
+           margin-top: 1cm;
+    }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :first {
+    @top-left      { content: ''; }
+    @top-center    { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}

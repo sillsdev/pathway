@@ -1,0 +1,64 @@
+.dicBody {
+}
+.letHead {
+    display: block;
+    column-count: 1;
+    clear: both;
+    border-bottom: .5pt solid #a00;
+    text-align: center;
+    margin: 18pt 9pt;
+    margin-left: .75in;
+    margin-right: .75in;
+    padding-bottom: 9pt;
+}
+.letter {
+    font-weight: bold;
+    font-size: 24pt;
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    direction: ltr;
+}
+.letData {
+}
+.entry {
+    font-family: Arial;
+    font-size: 13pt;		/* inherited */
+    font-weight: normal;	/* inherited */
+    font-style: normal;		/* inherited */
+    text-align: justify;
+    text-decoration: none;	/* inherited */
+    text-indent: -36pt;
+    margin-left: 36pt;
+    padding-left: 9pt;
+    padding-bottom: 2pt;
+    padding-top: 1pt;
+    /* clear: both; */
+}
+.grammatical-info {
+    /* explicit FieldWorks style = 'Dictionary-Contrasting' */
+    font-family: "Times New Roman", serif;	/* cascaded environment */
+    font-size: 12pt;
+    font-weight: 700;
+    font-style: italic;
+    text-decoration: none;	/* cascaded environment */
+}
+.slot-name
+{
+	font-size: 90%;
+	font-family:"Times New Roman";
+	letter-spacing: 1pt;
+}
+.xitem[lang='en']
+{
+	color:rgb(255,0,255);
+}
+.xlanguagetag {
+    font-size: 8pt;
+    color: rgb(47,96,255);
+    font-variant: small-caps;
+}
+.xsensenumber_L2 {
+    text-decoration: underline;
+}
+.definition_L2 {
+    word-spacing: 1pt;
+}

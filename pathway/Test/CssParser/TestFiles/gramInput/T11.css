@@ -1,0 +1,4 @@
+.variant-inflection + .variant-inflection::before
+{
+	content: ', ';
+}

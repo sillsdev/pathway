@@ -1,0 +1,7 @@
+The build order is set up by using the depencies and build events.
+
+SetVersion depends on PsTools so the goal is for it to build just after this project. When it builds, it updates the version numbers in all the AssemblyInfo.cs files. Then when the other projects compile, they have the new version number. So once SetVersion is compiled and built as a project, it is executed using the BuildEvent. It is passed the Configuration name as a command line parameter. If the Configuration name is not Release, it exits immediately.
+
+The Builder project should build after both PsExport and PublishingSolutionExe projects. It will take the results of these two projects and the PsSupport folder (and a few files from the Installer folder) and create a Setup file. So once Builder is compiled and built as a project, it is executed using the BuildEvent. It is passed the Configuration name as a command line parameter. If the Configuration name is not Release, it exits immediately.
+
+The installer will have the version number and date as part of it's name. It will be an .msi file in the Installer folder. Over time the number of installers in this folder may become large and some of the older ones will need to be deleted. This file is then uploaded to http://code.google.com/p/typeset-dictionary/ as a featured download.

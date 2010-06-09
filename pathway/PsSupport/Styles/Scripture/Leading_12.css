@@ -1,0 +1,73 @@
+.Chapter_Head {
+    line-height:15pt;
+}
+
+.Chapter_Number {
+    line-height: 24pt;
+    -ps-fixed-line-height: 24pt;
+}
+
+.Intro_List_Item1 {
+    line-height: 10pt;
+    -ps-fixed-line-height: 10pt;
+}
+
+.Intro_Paragraph {
+    line-height: 10pt;
+    -ps-fixed-line-height: 10pt;
+}
+
+.Intro_Section_Head {
+    line-height: 10pt;
+    -ps-fixed-line-height: 10pt;
+}
+
+.Line1 {
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+}
+
+.Note_CrossHYPHENReference_Paragraph {
+    line-height: 8pt;
+    -ps-fixed-line-height: 8pt;
+}
+
+.Note_General_Paragraph {
+    line-height: 8pt;
+    -ps-fixed-line-height: 8pt;
+}
+
+.Paragraph {
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+}
+
+.Paragraph_Continuation {
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+}
+
+.Paragraph1 {
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+}
+
+.parallel_passage_reference {
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+}
+
+.Section_Head {
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+}
+
+.Section_Head_Major {
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+}
+
+.Title_Main {
+    line-height: 24pt;
+    -ps-fixed-line-height: 24pt;
+}

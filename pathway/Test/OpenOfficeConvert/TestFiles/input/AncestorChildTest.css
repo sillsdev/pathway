@@ -1,0 +1,42 @@
+.headword 
+{
+	
+}
+
+.dictionary 
+{
+	//text-align: justify;
+	font-size: 10pt;
+}
+
+.locator
+{
+	text-align: center;
+	font-size: 25pt;
+        color:ORANGE;
+}
+
+.xitem
+{
+	font-size: 30pt;
+        color:GREEN;
+}
+
+
+.locator .letter
+{
+	font-weight:bold;	
+	font-size:20pt;   
+	color:BlUE;
+}
+
+
+.letter[class~='current']
+{
+	background-color:#aaff00;
+        color: RED;
+}
+
+
+
+

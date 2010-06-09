@@ -1,0 +1,27 @@
+/* Sense_Bullet.css */
+.sense {
+       display: block;
+       line-height: 12pt;
+       -ps-fixed-line-height: 12pt;
+       margin-left: 10pt;
+       padding-bottom: 1pt;
+       text-indent: -10pt;
+       padding-left: 10pt;
+}
+.revSense {
+       display: block;
+       line-height: 12pt;
+       -ps-fixed-line-height: 12pt;
+       margin-left: 10pt;
+       padding-bottom: 1pt;
+       text-indent: -10pt;
+}
+.xsensenumber {
+       font-size: 1pt;
+       visibility: hidden;
+}
+.xsensenumber:before {
+       content: "\2023";
+       font-size: 11pt;
+       visibility: visible;
+}

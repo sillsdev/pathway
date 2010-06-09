@@ -1,0 +1,5 @@
+.pronunciation + .pronunciation[lang=en_US]::before
+{
+        position: static;
+}
+

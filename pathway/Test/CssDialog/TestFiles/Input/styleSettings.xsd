@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="1">
+  <xs:element name="stylePick">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="settings"/>
+        <xs:element ref="defaultSettings"/>
+        <xs:element ref="features"/>
+        <xs:element ref="categories" minOccurs="0"/>
+        <xs:element ref="roles" minOccurs="0"/>
+        <xs:element ref="styles"/>
+        <xs:element ref="tasks" minOccurs="0"/>
+        <xs:element ref="column-width" minOccurs="0"/>
+        <xs:element ref="customize" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="version" use="required"/>
+    </xs:complexType>
+    </xs:element>
+  <xs:element name="settings">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="property"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="defaultSettings">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="property"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="features">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="feature"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="feature">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="option"/>
+      </xs:sequence>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="option">
+    <xs:complexType>
+      <xs:attribute name="file" use="required" type="xs:NCName"/>
+      <xs:attribute name="icon" type="xs:NCName"/>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="categories">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="category"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="category">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="item"/>
+      </xs:sequence>
+      <xs:attribute name="name" use="required" type="xs:NCName"/>
+      <xs:attribute name="select" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="item">
+    <xs:complexType>
+      <xs:attribute name="name" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="roles">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="role"/>
+      </xs:sequence>
+      <xs:attribute name="select" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="role">
+    <xs:complexType>
+      <xs:attribute name="icon" use="required"/>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="styles">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="paper"/>
+        <xs:element maxOccurs="unbounded" ref="mobile"/>
+        <xs:element maxOccurs="unbounded" ref="web"/>
+        <xs:element maxOccurs="unbounded" ref="others"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="paper">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="style"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="mobile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="style"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="web">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="style"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="others">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="style"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="style">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="description"/>
+        <xs:element minOccurs="0" ref="comment"/>
+      </xs:sequence>
+      <xs:attribute name="approvedBy" type="xs:string"/>
+      <xs:attribute name="shown" type="xs:NCName"/>
+      <xs:attribute name="type" type="xs:NCName"/>
+      <!--<xs:attribute name="file" use="required" type="xs:NCName"/>
+      <xs:attribute name="name" use="required" type="xs:NCName"/>-->
+      <xs:attribute name="file" use="required"/>
+      <xs:attribute name="name" use="required"/>
+      <xs:attribute name="previewfile1" type="xs:string"/>
+      <xs:attribute name="previewfile2" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>  <xs:element name="description" type="xs:string"/>
+  <xs:element name="comment" type="xs:string"/>
+  <xs:element name="criteria">
+    <xs:complexType>
+      <xs:attribute name="action" use="required" type="xs:NCName"/>
+      <xs:attribute name="category" use="required" type="xs:NCName"/>
+      <xs:attribute name="option" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="tasks">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="task"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="task">
+    <xs:complexType>
+      <xs:attribute name="icon" use="required"/>
+      <xs:attribute name="name" use="required"/>
+      <xs:attribute name="style" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="column-width">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="column"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="column">
+    <xs:complexType>
+      <xs:attribute name="name" use="required" type="xs:string"/>
+      <xs:attribute name="width" use="required"  type="xs:string"/>
+    </xs:complexType>
+  </xs:element>  
+  <xs:element name="customize">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="font"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="font">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+      <xs:attribute name="size" use="required" type="xs:float"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="property">
+    <xs:complexType>
+      <xs:attribute name="name" use="required" type="xs:NCName"/>
+      <xs:attribute name="value" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

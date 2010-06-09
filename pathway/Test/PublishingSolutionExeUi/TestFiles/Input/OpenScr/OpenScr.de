@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--To store the Project files-->
+<Project Type="Scripture" Version="1.0.21.814" ShowError="True">
+  <SolutionExplorer>
+    <File Name="TeTest.xhtml" Type="File" Visible="True" Default="False" />
+    <File Name="TeTest.css" Type="File" Visible="True" Default="True" />
+    <File Name="Pictures" Type="Folder" Visible="True" Default="">
+      <File Name="panda.JPG" Type="File" Visible="True" Default="False" />
+    </File>
+  </SolutionExplorer>
+  <DocumentSettings />
+  <PropertyGroup>
+    <Creation>
+      <CreatedOn>08-Apr-2009 13:34:07</CreatedOn>
+      <CreatedBy>Trihus</CreatedBy>
+    </Creation>
+    <Modification>
+      <ModifiedOn>14-May-2009 15:07:46</ModifiedOn>
+      <ModifiedBy>James</ModifiedBy>
+    </Modification>
+  </PropertyGroup>
+</Project>

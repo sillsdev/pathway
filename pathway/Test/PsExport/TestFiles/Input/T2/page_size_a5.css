@@ -1,0 +1,36 @@
+﻿@page {
+    size: 14.8cm 21cm;
+    marks: crop cross;
+    counter-increment: page;
+    margin: 1.15cm 1.5cm;
+}
+@page :first {
+    @top-left      { content: ''; }
+    @top-center    { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: counter(page); }
+    @bottom-right  { content: ''; }
+}
+@page :left {
+    @top-left {
+        content: string(bookname, first) " "  string(chapter, first) string(verse, first);
+        font-weight: bold;
+    }
+    @top-center { content: counter(page); }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :right {
+    @top-left { content: ''; }
+    @top-center { content: counter(page); }
+    @top-right     {
+        content: string(bookname, last) " "  string(chapter, last) string(verse, last);
+        font-weight: bold;
+    }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ldml>
+	<identity>
+		<version number="" />
+		<generation date="0001-01-01T00:00:00" />
+		<language type="cmn" />
+	</identity>
+	<collations>
+		<collation>
+			<base>
+				<alias source="zh-CN" />
+			</base>
+			<special xmlns:palaso="urn://palaso.org/ldmlExtensions/v1">
+				<palaso:sortRulesType value="OtherLanguage" />
+			</special>
+		</collation>
+	</collations>
+	<special xmlns:palaso="urn://palaso.org/ldmlExtensions/v1">
+		<palaso:abbreviation value="Chn" />
+		<palaso:defaultFontFamily value="NSimSun-18030" />
+		<palaso:defaultFontSize value="12" />
+		<palaso:languageName value="Chinese, Mandarin" />
+	</special>
+</ldml>

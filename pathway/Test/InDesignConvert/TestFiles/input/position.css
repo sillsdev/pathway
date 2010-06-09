@@ -1,0 +1,29 @@
+.entry1 {
+    font-size: 12pt;	/* inherited */
+    color: red;	/* inherited */
+border: 2pt solid red;
+padding-left:30pt;
+}
+
+.positionLeft {
+position:relative;
+padding-left:10pt;
+left:20pt;
+border: 2pt solid green;
+}
+
+.entry2 {
+    font-size: 12pt;	/* inherited */
+    color: blue;	/* inherited */
+border: 2pt solid aqua;
+padding-right:50pt;
+//margin-right:50pt;
+}
+.positionRight {
+position:relative;
+padding-right:20pt;
+right:30pt;
+border: 2pt solid blue;
+}
+
+

@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<idPkg:Story xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="6.0">
+  <Story Self="3" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
+    <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
+    <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/ChapterHead_scrSection_scrBook_scrBody">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_ChapterHead_scrSection_scrBook_scrBody">
+        <Content>Jisas i kamap long graun</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHead_scrSection_scrBook_scrBody">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_SectionHead_scrSection_scrBook_scrBody">
+        <Content>Nem bilong ol lain tumbuna bilong Jisas Krais</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/ChapterNumber1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ChapterNumber_Paragraph_scrSection_scrBook_scrBody">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_Paragraph_scrSection_scrBook_scrBody">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_Paragraph_scrSection_scrBook_scrBody">
+        <Content>Dispela †  em i tok long ol lain tumbuna bilong Jisas Krais. Jisas em i bilong lain bilong Devit na Devit em i bilong lain bilong Abraham. replace text here</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_scrSection_scrBook_scrBody">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_Paragraph_scrSection_scrBook_scrBody">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_Paragraph_scrSection_scrBook_scrBody">
+        <Content>Abraham em i papa bilong Aisak</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody">
+        <HyperlinkTextSource Self="Hyperlink_F7BE51147-AA97-40A2-BA86-4DF84849E9F9" Name="Hyperlink F7BE51147-AA97-40A2-BA86-4DF84849E9F9" Hidden="false" AppliedCharacterStyle="n">
+          <Content>a</Content>
+        </HyperlinkTextSource>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_Paragraph_scrSection_scrBook_scrBody">
+        <Content>. Na Aisak em i papa bilong Jekop. Na Jekop em i papa bilong Juda wantaim ol brata bilong en. ‡</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_Paragraph_scrSection_scrBook_scrBody">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_Paragraph_scrSection_scrBook_scrBody">
+        <Content>Juda †  em i papa bilong Peres wantaim Sera. Mama bilong tupela em Tamar. Na Peres em i papa bilong Hesron. Na Hesron em i papa bilong Ram.</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_Paragraph_scrSection_scrBook_scrBody">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_Paragraph_scrSection_scrBook_scrBody">
+        <Content>Na Ram em i papa bilong Aminadap. Na Aminadap em i papa bilong Nason. Na Nason em i papa bilong Salmon.</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_Paragraph_scrSection_scrBook_scrBody">
+        <Content>5</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_Paragraph_scrSection_scrBook_scrBody">
+        <Content>Na Salmon em i papa bilong Boas. Mama bilong en em Rahap. Na Boas em i papa bilong Obet. Mama bilong en em Rut. Na Obet em i papa bilong Jesi.</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_Paragraph_scrSection_scrBook_scrBody">
+        <Content>6</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_Paragraph_scrSection_scrBook_scrBody">
+        <Content>Na †  Jesi em i papa bilong King Devit</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody">
+        <HyperlinkTextSource Self="Hyperlink_FA94A4499-63D2-4B83-A49E-56F8CF6F92C9" Name="Hyperlink FA94A4499-63D2-4B83-A49E-56F8CF6F92C9" Hidden="false" AppliedCharacterStyle="n">
+          <Content>b</Content>
+        </HyperlinkTextSource>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_Paragraph_scrSection_scrBook_scrBody">
+        <Content>.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+  </Story>
+</idPkg:Story>

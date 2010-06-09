@@ -1,0 +1,27 @@
+﻿\Bdict
+        \Bletter \fonta D d\Eletter
+                \Bentry
+                \Bhw \fonta -d\Ehw\marking[guidewords]{\fonta -d}
+                \Bpr ⁿd\Epr
+                \Bsn 1) \Esn
+                \Bps N(inal): Possessive\Eps
+                \Bde \fonta first person plural inclusive possessive suffix--this is the form used with the major class of inalienable possession nouns.\Ede
+                \Eentry
+                    
+                \Bentry
+                \Bhw \fonta da\Ehw\marking[guidewords]{\fonta da}
+                \Bpr ⁿda\Epr
+                \Bsn 1) \Esn
+                \Bps N\Eps
+                \Bde \fonta Sunday morning church service. / \fontb lotu.\Ede
+                \Bex \fonta Ya dëlë da dub ayo.\Eex
+                \Btr \fonta They went to the service in the church.\Etr
+                \Bsn 2) \Esn
+                \Bps N\Eps
+                \Bde \fonta week. / \fontb wik.\Ede
+                \Bex \fonta Venë ya nedo Moresby da ti.\Eex
+                \Btr \fonta His wife went and stayed a week in Moresby.\Etr
+                \Eentry
+                    
+                \Edict
+        

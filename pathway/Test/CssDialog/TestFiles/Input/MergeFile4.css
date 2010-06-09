@@ -1,0 +1,27 @@
+@import "MergeFile2.css";
+@import "MergeFile3.css";
+
+.entry 	
+{
+   font-weight: normal;	/* inherited */
+   font-style: normal;	/* inherited */
+   color: rgb(0,0,0);	/* inherited */
+}
+	
+.grammatical-info 
+{
+   font-family: serif;	/* cascaded environment */
+   font-size: 0.8em;
+   font-weight: 700;
+}
+
+.locator
+{
+    display:block;
+    text-align: center;
+    flow:static(locator);
+}
+
+
+
+	

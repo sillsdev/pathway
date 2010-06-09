@@ -1,0 +1,16 @@
+.xsensenumber {
+       font-size: 10pt;
+       visibility: hidden;
+color:red;
+}
+
+.subsenses > .sense > .xsensenumber {
+    font-size:10pt;
+    visibility:visible;
+    //color:green;
+}
+
+.subsenses
+{
+color:blue;
+}

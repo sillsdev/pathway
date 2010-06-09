@@ -1,0 +1,39 @@
+﻿.complexentryform    { font-size: 12pt; }
+.crossreftype           { font-size: 12pt; }
+.crossreftype :after    { font-size: 12pt; }
+.crossref               { font-size: 12pt; }
+.crossref > .xitem + .xitem :before { font-size: 12pt; }
+.entry                  { font-size: 12pt; }
+.example :before        { font-size: 12pt; }
+.example                { font-size: 12pt; }
+.example :after         { font-size: 12pt; }
+.example > .xitem + .xitem :before { font-size: 12pt; }
+.grammaticalinfo        { font-size: 12pt; }
+.grammaticalinfo :after { font-size: 12pt; }
+.letter                 { font-size: 18pt; }
+.LexEntrypublishStemParaHomographNumber { font-size: 8pt; }
+.LexEntrypublishStemParaHomographNumber :after { font-size: 8pt; }
+.lexreftype             { font-size: 12pt; }
+.lexreftype :after      { font-size: 12pt; }
+.mainentryref           { font-size: 12pt; }
+.mainentryref > .xitem + .xitem :before { font-size: 12pt; }
+.mainentryrefminor      { font-size: 12pt; }
+.mainentryrefminor > .xitem + .xitem :before { font-size: 12pt; }
+.pronunciation          { font-size: 12pt; }
+.pronunciationminor     { font-size: 12pt; }
+.pronunciationminor > .xitem + .xitem :before { font-size: 12pt; }
+.revHeader              { font-size: 18pt; }
+.sense                  { font-size: 12pt; }
+.senses > .sense + .sense :before { font-size: 10pt; }
+.sensecomplexentryform  { font-size: 12pt; }
+.sensecrossref          { font-size: 12pt; }
+.sensecrossref > .xitem + .xitem :before { font-size: 12pt; }
+.sensemainentryref      { font-size: 12pt; }
+.sensemainentryref > .xitem + .xitem :before { font-size: 12pt; }
+.translation            { font-size: 12pt; }
+.translation :after     { font-size: 12pt; }
+.translation > .xitem + .xitem :before { font-size: 12pt; }
+.variantrefform         { font-size: 12pt; }
+.xhomographnumber       { font-size: 55%; }
+.xlanguagetag { }
+.xsensenumber { }

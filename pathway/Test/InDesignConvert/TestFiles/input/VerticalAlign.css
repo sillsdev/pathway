@@ -1,0 +1,26 @@
+
+.baseline {
+    font-weight: bold;
+    color:blue;
+    vertical-align:baseline;
+}
+.sub {vertical-align:sub;
+color:blue;}
+.super {vertical-align:super;color:blue;}
+.test
+{
+color:green;
+}
+.top {vertical-align:top;color:blue;
+}
+.bottom {vertical-align:bottom;color:blue;
+}
+
+.percent {vertical-align:75%;color:blue;
+}
+
+.percent1{vertical-align:25%;color:blue;
+}
+
+.point{vertical-align:7pt;color:blue;
+}

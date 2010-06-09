@@ -1,0 +1,17 @@
+.letData {
+       column-rule: solid 0pt #aa0000;
+}
+.letHead {
+       border-bottom: 0pt solid #a00;
+       margin: 18pt 9pt;
+       /* padding-bottom: 36pt; */
+       /* padding-top: 36pt; */
+}
+.revData {       column-rule: solid 0pt #aa0000;
+}
+.revHeader {
+       border-bottom: 0pt solid #a00;
+       margin: 18pt 9pt;
+       /* padding-bottom: 36pt; */
+       /* padding-top: 36pt; */
+}

@@ -1,0 +1,17 @@
+.slots 
+{
+
+}
+
+.slots:before { content: ": " }
+
+.slots>.xitem + .xitem:before { content: ", " }
+
+.xitem[lang='en'] {
+    font-size: 10pt;	/* cascaded environment */
+    text-decoration: none;	/* cascaded environment */
+}
+
+
+
+	

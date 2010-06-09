@@ -1,0 +1,3 @@
+.sense + .sense:before {
+content: 'before';
+}

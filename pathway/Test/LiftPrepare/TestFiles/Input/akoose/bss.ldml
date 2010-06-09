@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ldml>
+	<identity>
+		<version number="" />
+		<generation date="0001-01-01T00:00:00" />
+		<language type="bss" />
+	</identity>
+	<collations />
+	<special xmlns:palaso="urn://palaso.org/ldmlExtensions/v1">
+		<palaso:abbreviation value="Ako" />
+		<palaso:defaultFontFamily value="Charis SIL" />
+		<palaso:defaultFontSize value="12" />
+		<palaso:defaultKeyboard value="Cameroon Unicode" />
+		<palaso:languageName value="Akoose" />
+	</special>
+</ldml>

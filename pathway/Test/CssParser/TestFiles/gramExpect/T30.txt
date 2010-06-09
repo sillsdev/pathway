@@ -1,0 +1,1 @@
+(PAGE (PROPERTY marks crop cross) (PROPERTY size 5 in 8 in portrait) (PROPERTY font 10 pt Gentium Georgia serif) (PROPERTY line-height 13) (REGION top-center (PROPERTY margin 13 pt 24 pt 0 18 pt) (PROPERTY content string ( bookx start ) " " string ( chapterx start ) ":" string ( versex start ) " — " string ( chapterx last ) ":" string ( versex last ))))

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE image:imagecontainer PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "image.dtd">
+<image:imagescontainer xmlns:image="http://openoffice.org/2001/image" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <image:images xlink:type="simple" xlink:href="Bitmaps/sc_userimages.png" image:maskcolor="#0" image:maskmode="maskcolor">
+  <image:entry image:bitmap-index="0" image:command="vnd.sun.star.script:Standard.Module1.SetGuides?language=Basic&amp;location=document"/>
+ </image:images>
+</image:imagescontainer>

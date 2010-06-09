@@ -1,0 +1,10 @@
+﻿/* Example callout */
+.example :before {
+       content: "\2022";
+}
+.example-sub :before {
+       content: "\2022";
+}
+.example-minor :before {
+       content: "\2022";
+}

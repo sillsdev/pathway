@@ -1,0 +1,151 @@
+@page {
+    counter-increment: page;
+    height: 11in;
+    width: 8.5in;
+    margin: 72pt 72pt 72pt 72pt;
+    @top-left { content: ''; }
+    @top-center {
+        content: string(bookname, last) ' ' string(chapter, last) ':' string(verse, last) ;
+        direction: ltr;
+        font-family: "Arial", sans-serif;   /* default Sans-Serif font */
+    }
+    @top-right {
+        content: counter(page) ;
+        direction: ltr;
+        font-family: "Arial", sans-serif;   /* default Sans-Serif font */
+    }
+    @bottom-left { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right { content: ''; }
+    @footnotes {
+        border-top: thin solid black;
+        padding: 0.3em 0;
+        margin-top: 0.6em;
+        margin-left: 2pi;
+    }
+    @footnote {
+        border-top: thin solid black;
+        padding: 0.3em 0;
+        margin-top: 0.6em;
+        margin-left: 2pi;
+    }
+}
+
+.Alternate_Reading {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-weight: bold;	/* cascaded environment */
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.Chapter_Number {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: 200%;
+    font-weight: bolder;
+    vertical-align: top;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    float: left;
+    string-set: chapter content();
+}
+.Intro_Paragraph {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 9pt;	/* cascaded environment */
+    text-indent: 0pt;
+    margin-left: 0pt;
+    line-height: 11pt;
+}
+.Intro_Section_Head {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 8pt;	/* cascaded environment */
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    /*text-align: leading;*/
+    text-align: left;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    line-height: 11pt;
+}
+
+.Name_Of_God {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-weight: bold;	/* cascaded environment */
+    font-style: italic;	/* cascaded environment */
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.Note_General_Paragraph {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 8pt;	/* cascaded environment */
+    text-indent: 0pt;
+    margin-left: 0pt;
+    line-height: normal;
+    display: inline;
+    display: footnote;
+    display: prince-footnote;
+    position: footnote;
+    list-style-position: inside;
+}
+.Note_General_Paragraph::footnote-call {
+    color: purple;
+    content: attr(title);
+    font-size: 6pt;
+    vertical-align: super;
+    line-height: none;
+}
+.Note_General_Paragraph::footnote-marker {
+    font-size: 10pt;
+    font-weight: bold;
+    content: string(chapter) ':' string(verse) ' = ';
+    /* content: string(footnoteMarker); font-size: 6pt; vertical-align: super; color: purple; */
+    text-align: left;
+}
+.Paragraph {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 10pt;	/* cascaded environment */
+    text-indent: 12pt;
+    margin-left: 0pt;
+}
+.scrBody {
+}
+.scrBook {
+    column-count: 1;
+    clear: both;
+}
+.scrBookName {
+    string-set: bookname content();
+    display: none;
+}
+.scrSection {
+    text-align: left;
+}
+.Section_Head {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 9pt;	/* cascaded environment */
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    padding-bottom: 4pt;
+    padding-top: 8pt;
+}
+.Title_Main {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 20pt;	/* cascaded environment */
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    line-height: 24pt;
+    padding-bottom: 12pt;
+    padding-top: 36pt;
+}
+.Verse_Number {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: smaller;
+    vertical-align: super;	/* cascaded environment */
+    text-indent: 0pt;
+    margin-left: 0pt;
+    string-set: verse content();
+}

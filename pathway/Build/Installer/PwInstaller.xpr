@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <meta>
+        <filters directoryPatterns="" filePatterns=""
+            positiveFilePatterns="" showHiddenFiles="false"/>
+        <options/>
+    </meta>
+    <projectTree name="PwInstaller.xpr">
+        <file name="BuildInstallerBTE.bat"/>
+        <file name="BuildInstallerSE.bat"/>
+        <file name="Features.wxs"/>
+        <file name="FeaturesPw-tpl.wxs"/>
+        <file name="FileLibrary.xml"/>
+        <file name="Files.wxs"/>
+        <file name="FilesPw-tpl.wxs"/>
+        <file name="GenerateFilesSourcePw.js"/>
+        <file name="License.rtf"/>
+        <file name="pathwayBTE.wxs"/>
+        <file name="pathwaySE.wxs"/>
+        <file name="pathwayUI-tpl.wxs"/>
+        <file name="pathwayUI.wxs"/>
+        <file name="Partial%20PsDll.wxs"/>
+        <file name="Partial%20ConfigurationTool.wxs"/>
+        <file name="Partial%20Support.wxs"/>
+        <file name="ReadMePw.rtf"/>
+        <file name="UtilityCatalogIncludePathway.xml"/>
+    </projectTree>
+</project>

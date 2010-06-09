@@ -1,0 +1,83 @@
+@page {
+    margin: 2cm 2cm 2cm 2cm;
+}
+
+@page :left {
+
+    @top-right{
+ content: counter(page);
+    }   
+}
+@page :right {
+margin: 1.15cm 1.5cm;
+    @top-left{
+      content: counter(page);
+    }
+}
+
+
+.dicBody {
+}
+.letHead {
+    display: block;
+    column-count: 1;
+    clear: both;
+    border-bottom: .5pt solid #a00;
+    text-align: center;
+    margin: 18pt 9pt;
+    margin-left: .75in;
+    margin-right: .75in;
+    padding-bottom: 9pt;
+}
+.letter {
+    display: inline;
+    font-weight: bold;
+    font-size: 24pt;
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    direction: ltr;
+}
+.letData {
+    column-count: 2; -moz-column-count: 2;
+    column-gap: 1.5em; -moz-column-gap: 1.5em;
+    column-fill: auto;
+    column-rule: solid 1pt #aa0000;
+}
+.entry {
+    font-family: Gentium;
+    font-size: 13pt;		/* inherited */
+    font-weight: normal;	/* inherited */
+    font-style: normal;		/* inherited */
+    text-align: justify;
+    text-decoration: none;	/* inherited */
+    text-indent: -36pt;
+    margin-left: 36pt;
+    padding-left: 9pt;
+    padding-bottom: 2pt;
+    padding-top: 1pt;
+    /* clear: both; */
+}
+.grammatical-info {
+    /* explicit FieldWorks style = 'Dictionary-Contrasting' */
+    font-family: "<default serif>", serif;	/* cascaded environment */
+    font-size: 0.8em;
+    font-weight: 700;
+    font-style: italic;
+    text-decoration: none;	/* cascaded environment */
+}
+.slot-name
+{
+	font-size: 90%;
+	font-family:Sans-Serif;
+	letter-spacing: 0.05em;
+}
+.xlanguagetag {
+    font-size: 8pt;
+    color: rgb(47,96,255);
+    font-variant: small-caps;
+}
+.xsensenumber_L2 {
+    text-decoration: underline;
+}
+.definition_L2 {
+    word-spacing: 0.5em;
+}

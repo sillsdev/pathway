@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lift xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="../lift.xsd"
+ version="0.13">
+    <!--unknown language, latin script-->
+    <entry id="abat" dateModified="1990-02-26" order="3">
+        <lexical-unit>
+            <form lang="und-Latn">
+                <text>abat</text>
+            </form>
+        </lexical-unit>
+        <variant>
+            <!--This is a paradigm-->
+            <trait name="paradigm" value="sing"/>
+            <form lang="und-Latn">
+                <text>abatke</text>
+            </form>
+        </variant>
+        <sense>
+            <grammatical-info value="n"/>
+            <gloss lang="en">
+                <text>grove</text>
+            </gloss>
+            <gloss lang="id">
+                <text>dusun</text>
+            </gloss>
+            <example source="d2.077.03">
+                <form lang="und-Latn">
+                    <text>Kbwai abatke to ksweruk nurare.</text>
+                </form>
+                <translation>
+                    <form lang="en">
+                        <text> I went to the coconut groves to clear the grass. </text>
+                    </form>
+                    <form lang="id">
+                        <text> Saya pergi menyiangi dusun kelapa. </text>
+                    </form>
+                </translation>
+            </example>
+            <example source="d4.079.16">
+                <form lang="und-Latn">
+                    <text>Kbwa ti ktwan nurke o abatke.</text>
+                </form>
+                <translation>
+                    <form lang="en">
+                        <text> I'm going to plant coconut trees in the grove. </text>
+                    </form>
+                    <form lang="id">
+                        <text> Saya pergi tanam kelapa di dusun. </text>
+                    </form>
+                </translation>
+            </example>
+            <note type="encyclopedic">
+                <form lang="en">
+                    <text> This is <span class="underline">not</span> limited to coconut groves but
+                        is used for mangoes, etc. </text>
+                </form>
+            </note>
+        </sense>
+    </entry>
+    <entry id="srapa" dateModified="1991-08-27">
+        <lexical-unit>
+            <form lang="und-Latn">
+                <text>srapa</text>
+            </form>
+        </lexical-unit>
+        <trait name="morph-type" value="prefix"></trait>
+        <sense id="srapa_">
+            <!--id can't be the same as entry id-->
+            <grammatical-info value="vt"/>
+            <gloss lang="en">
+                <text>slap</text>
+            </gloss>
+            <definition>
+                <!--or here-->
+                <form lang="en">
+                    <text>slap with open hand</text>
+                </form>
+            </definition>
+        </sense>
+    </entry>
+    <entry id="brush">
+        <lexical-unit>
+            <form lang="en">
+                <text>brush</text>
+            </form>
+        </lexical-unit>
+        <sense id="brush_">
+            <grammatical-info value="n"/>
+            <gloss lang="en">
+                <text>bristly instrument</text>
+            </gloss>
+            <definition>
+                <form lang="en">
+                    <text> bristly instrument used for cleaning, arranging or applying a liquid to
+                        something </text>
+                </form>
+            </definition>
+            <relation type="subentry" ref="hairbrush"/>
+            <relation type="subentry" ref="paintbrush"/>
+        </sense>
+    </entry>
+    <entry id="hairbrush">
+        <lexical-unit>
+            <form lang="en">
+                <text>hairbrush</text>
+            </form>
+        </lexical-unit>
+        <sense id="hairbrush_">
+            <grammatical-info value="n"/>
+            <definition>
+                <form lang="en">
+                    <text> kind of brush typically with stiff one inch long bristles loosely spaced
+                        arranged perpendicularly to the handle for rearranging hair </text>
+                </form>
+            </definition>
+        </sense>
+    </entry>
+    <entry id="paintbrush">
+        <lexical-unit>
+            <form lang="en">
+                <text>paintbrush</text>
+            </form>
+        </lexical-unit>
+        <sense id="paintbrush_">
+            <grammatical-info value="n"/>
+            <definition>
+                <form lang="en">
+                    <text> kind of brush of varying sizes and varying lengths and textures of
+                        bristles arranged as an extension of the handle used to apply paint and
+                        similar materials </text>
+                </form>
+            </definition>
+        </sense>
+    </entry>
+    <entry id="utan" order="1">
+        <lexical-unit>
+            <form lang="und-Latn">
+                <text>utan</text>
+            </form>
+        </lexical-unit>
+        <trait name="morph-type" value="inclefixor"></trait>
+        <sense>
+            <grammatical-info value="n"/>
+            <trait name="semantic-domain" value="Nplant"/>
+            <gloss lang="en">
+                <text>veg</text>
+            </gloss>
+            <gloss lang="id">
+                <text>sayur</text>
+            </gloss>
+            <gloss lang="id">
+                <text>jamu</text>
+            </gloss>
+            <reversal>
+                <form lang="en">
+                    <text>vegetable</text>
+                </form>
+            </reversal>
+            <reversal>
+                <form lang="en">
+                    <text>mushroom</text>
+                </form>
+            </reversal>
+            <definition>
+                <form lang="en">
+                    <text> non-bulbous edible leafy and stalky plant and fungi </text>
+                </form>
+            </definition>
+        </sense>
+    </entry>
+    <entry id="hete">
+        <lexical-unit>
+            <form lang="und-Latn">
+                <text>hete</text>
+            </form>
+        </lexical-unit>
+        <sense id="hete_">
+            <grammatical-info value="vt"/>
+            <gloss lang="en">
+                <text>cut</text>
+            </gloss>
+            <definition>
+                <form lang="en">
+                    <text> cut into sectios for use </text>
+                </form>
+            </definition>
+        </sense>
+        <variant>
+            <form lang="und-Latn">
+                <text>hetek</text>
+            </form>
+        </variant>
+        <!--no idea what kind of paradigm, so really a free variant-->
+    </entry>
+    <entry id="apu">
+        <lexical-unit>
+            <form lang="und-Latn">
+                <text>apu</text>
+            </form>
+        </lexical-unit>
+        <sense id="apu_">
+            <grammatical-info value="n"/>
+            <gloss lang="en">
+                <text>lime</text>
+            </gloss>
+            <reversal>
+                <form lang="en">
+                    <text>lime</text>
+                </form>
+            </reversal>
+            <definition>
+                <form lang="en">
+                    <text> lime slaked from burning seashells and used as an ingredient in chewing
+                        betelnut </text>
+                </form>
+            </definition>
+        </sense>
+    </entry>
+    <entry id="opon">
+        <lexical-unit>
+            <form lang="und-Latn">
+                <text>opon</text>
+            </form>
+        </lexical-unit>
+        <sense id="opon_1a" order="1">
+            <grammatical-info value="n"/>
+            <gloss lang="en">
+                <text>grand kin</text>
+            </gloss>
+            <definition>
+                <form lang="en">
+                    <text> grandparent, grandchild; reciprocal term of plus or minus two generations
+                    </text>
+                </form>
+            </definition>
+        </sense>
+        <sense id="opon_1b">
+            <grammatical-info value="n"/>
+            <gloss lang="en">
+                <text>ancestor</text>
+            </gloss>
+            <definition>
+                <form lang="en">
+                    <text>ancestor, descendent</text>
+                </form>
+            </definition>
+        </sense>
+        <sense id="opon_2" order="2">
+            <grammatical-info value="n"/>
+            <gloss lang="en">
+                <text>master</text>
+            </gloss>
+            <definition>
+                <form lang="en">
+                    <text> master, lord, owner; the one with the say over someone or something
+                    </text>
+                </form>
+            </definition>
+        </sense>
+    </entry>
+    <entry id="jɔ̃dẽ̀">
+        <lexical-unit>
+            <form lang="und-fonipa"><text>jɔ̃de</text></form>
+            <form lang="und-Thai"><text>ยองเด่ง</text></form>
+        </lexical-unit>
+        <variant>
+            <trait name="dialects" value="Ratburi"/>
+            <form lang="und-fonipa"><text>jə̀ŋɗɐ̃̀ʲ</text></form>
+        </variant>
+        <sense id="jɔ̃dẽ̀_" dateCreated="2003-02-21">
+            <grammatical-info value="N"/>
+            <gloss lang="th"><text>เอว</text></gloss>
+            <gloss lang="en"><text>waist</text></gloss>
+            <note type="source"><form lang="en"><text>
+                lang1.42.6
+            </text></form></note>
+            <trait name="semantic-domain" value="body"/>
+        </sense>
+    </entry>
+</lift>

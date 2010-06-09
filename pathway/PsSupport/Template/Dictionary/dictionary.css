@@ -1,0 +1,589 @@
+﻿@page {
+       size: 16.2cm 22.9cm;
+       margin: 2cm 2cm 2cm 2cm;
+       counter-increment: page;
+       showerror: yes;
+       marks: none;
+       -ps-paper-size: A4;
+    @top-left {
+           content: string( guideword, first);
+           direction: ltr;
+           font-family: "Charis SIL" sans-serif;
+           font-weight: bold;
+           font-size: 12pt;
+           margin-top: 1cm;
+    }
+    @top-center {
+           content: counter( page);
+           margin-top: 1cm;
+    }
+    @top-right {
+           content: string( guideword, last);
+           direction: ltr;
+           font-family: "Charis SIL" sans-serif;
+           font-weight: bold;
+           font-size: 12pt;
+           margin-top: 1cm;
+    }
+}
+@page :first {
+    @top-left {
+           content: '';
+    }
+    @top-center {
+           content: '';
+    }
+    @top-right {
+           content: '';
+    }
+}
+.complexformrefs { }
+.complexformrefs :after {
+       content: " ";
+}
+.complexformrefs > .xitem + .xitem :before {
+       content: " ";
+}
+.complexentrytype { }
+.complexentrytype :after {
+       content: " ";
+}
+.complexentryform {
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+}
+.crossrefs { }
+.crossrefs :after {
+       content: ". ";
+}
+.crossrefs > .xitem + .xitem :before {
+       content: "; ";
+}
+.crossreftype {
+       font-family: "Times New Roman" serif;
+       font-size: 12pt;
+       font-style: italic;
+       font-weight: bold;
+}
+.crossreftype :after {
+       content: ": ";
+       font-family: "Times New Roman" serif;
+       font-size: 12pt;
+       font-style: italic;
+       font-weight: bold;
+}
+.crossreftargets { }
+.crossreftargets > .xitem + .xitem :before {
+       content: ", ";
+}
+.crossref {
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+}
+.crossref > .xitem + .xitem :before {
+       content: " ";
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+}
+.definition { }
+.definition :after {
+       content: " ";
+}
+.definition > .xitem + .xitem :before {
+       content: " ";
+}
+.dicBody { }
+.entry {
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       line-height: 13pt;
+       margin-left: 12pt;
+       padding-bottom: 2pt;
+       padding-left: 9pt;
+       padding-top: 1pt;
+       text-indent: -12pt;
+}
+.entryreftype { }
+.entryreftype :after {
+       content: " ";
+}
+.entryreftype > .xitem + .xitem :before {
+       content: ", ";
+}
+.entrytypeabbr { }
+.entrytypeabbr :after {
+       content: " ";
+}
+.entrytypeabbrminor { }
+.entrytypeabbrminor :after {
+       content: " ";
+}
+.examples { }
+.examples :after {
+       content: " ";
+}
+.examples > .xitem + .xitem :before {
+       content: "  ";
+}
+.example :before {
+       content: "▪";
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+}
+.example {
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+}
+.example :after {
+       content: " ";
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+}
+.example > .xitem + .xitem :before {
+       content: " ";
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+}
+.grammaticalinfo {
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-style: italic;
+}
+.grammaticalinfo :after {
+       content: " ";
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-style: italic;
+}
+.headword {
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+       string-set: guideword content();
+}
+.headword :after {
+       content: "  ";
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+       string-set: guideword content();
+}
+.headword > .xitem + .xitem :before {
+       content: " ";
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+       string-set: guideword content();
+}
+.headwordminor {
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+}
+.headwordminor :after {
+       content: "  ";
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+}
+.headwordminor > .xitem + .xitem :before {
+       content: " ";
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+}
+.letData {
+       column-count: 2;
+       column-fill: balance;
+       column-gap: 1.5em;
+       column-rule: solid 1pt #aa0000;
+       text-align: left;
+}
+.letHead {
+       border-bottom: .5pt solid #a00;
+       clear: both;
+       column-count: 1;
+       font-family: "Charis SIL" serif;
+       font-style: Regular;
+       font-weight: bold;
+       line-height: 26pt;
+       margin: 18pt 9pt;
+       margin-left: .75in;
+       margin-right: .75in;
+       padding-bottom: 36pt;
+       padding-top: 36pt;
+       text-align: center;
+}
+.letter {
+       direction: ltr;
+       font-family: Charis SIL serif;
+       font-size: 24pt;
+       font-weight: bold;
+       margin-bottom: 18pt;
+       margin-top: 18pt;
+       text-align: center;
+       width: 100%;
+}
+.LexEntrypublishStemParaHomographNumber {
+       font-family: "Charis SIL" serif;
+       font-size: 8pt;
+       vertical-align: 3pt;
+}
+.LexEntrypublishStemParaHomographNumber :after {
+       content: " ";
+       font-family: "Charis SIL" serif;
+       font-size: 8pt;
+       vertical-align: 3pt;
+}
+.LexEntryTypepublishStemEntryTypeAbbreviationPub { }
+.LexEntryTypepublishStemEntryTypeAbbreviationPub :after {
+       content: " ";
+}
+.lexreftype {
+       font-family: "Times New Roman" serif;
+       font-size: 12pt;
+       font-style: italic;
+       font-weight: bold;
+}
+.lexreftype :after {
+       content: ": ";
+       font-family: "Times New Roman" serif;
+       font-size: 12pt;
+       font-style: italic;
+       font-weight: bold;
+}
+.lexreftargets { }
+.lexreftargets > .xitem + .xitem :before {
+       content: ", ";
+}
+.mainentryref {
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+}
+.mainentryref > .xitem + .xitem :before {
+       content: " ";
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+}
+.mainentryrefminor {
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+}
+.mainentryrefminor > .xitem + .xitem :before {
+       content: " ";
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+}
+.minorentrycondition { }
+.minorentrycondition :after {
+       content: " ";
+}
+.partofspeech { }
+.partofspeech :after {
+       content: " ";
+}
+.picture {
+       height: 1.0in;
+}
+.pictureCaption { }
+.pictureLabel { }
+.pictureRight {
+       float: right;
+       margin: 0pt 0pt 4pt 4pt;
+       padding: 2pt;
+       text-align: center;
+       text-indent: 0pt;
+}
+.pictureSense { }
+.pictureSense :after {
+       content: " ";
+}
+.primaryrefs { }
+.primaryrefs :before {
+       content: "(";
+}
+.primaryrefs :after {
+       content: ") ";
+}
+.primaryrefs > .xitem + .xitem :before {
+       content: ", ";
+}
+.primaryrefsminor { }
+.primaryrefsminor :after {
+       content: " ";
+}
+.primaryrefsminor > .xitem + .xitem :before {
+       content: ", ";
+}
+.pronunciations { }
+.pronunciations :after {
+       content: " ";
+}
+.pronunciations > .xitem + .xitem :before {
+       content: ", ";
+}
+.pronunciation {
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+}
+.pronunciation :before {
+       content: "[";
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+}
+.pronunciation :after {
+       content: "]";
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+}
+.pronunciation > .xitem + .xitem :before {
+       content: " ";
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+}
+.pronunciationsminor { }
+.pronunciationsminor :after {
+       content: " ";
+}
+.pronunciationsminor > .xitem + .xitem :before {
+       content: ", ";
+}
+.pronunciationminor {
+       font-family: "Doulos SIL" serif;
+       font-size: 12pt;
+}
+.pronunciationminor :before {
+       content: "[";
+       font-family: "Doulos SIL" serif;
+       font-size: 12pt;
+}
+.pronunciationminor :after {
+       content: "]";
+       font-family: "Doulos SIL" serif;
+       font-size: 12pt;
+}
+.pronunciationminor > .xitem + .xitem :before {
+       content: " ";
+       font-family: "Doulos SIL" serif;
+       font-size: 12pt;
+}
+.relations { }
+.relations :after {
+       content: ". ";
+}
+.relations > .xitem + .xitem :before {
+       content: "; ";
+}
+
+.revAppendix { }
+.revData {
+       column-count: 1;
+       column-fill: balance;
+       column-gap: 1.5em;
+       column-rule: none;
+       text-align: left;
+}
+.revEntry {
+       font-family: "Charis SIL" serif;
+       font-size: 10pt;
+       line-height: 13pt;
+       margin-left: 2pc;
+       text-indent: -2pc;
+}
+.revHeader {
+       font-family: "Charis SIL" serif;
+       font-size: 18pt;
+       font-weight: bold;
+       text-align: center;
+}
+.revSense { }
+.revhomographnumber {
+       vertical-align: sub;
+}
+.revsensenumber { }
+.xsensenumber :after {
+       content: none;
+       font-size: 2pt;
+       visibility: hidden;
+}
+
+.scientificname { }
+.scientificname :after {
+       content: " ";
+}
+.semanticdomains { }
+.semanticdomains :before {
+       content: "(sem. domains: ";
+}
+.semanticdomains :after {
+       content: ".) ";
+}
+.semanticdomains > .xitem + .xitem :before {
+       content: ", ";
+}
+.semanticdomainabbr { }
+.semanticdomainabbr :after {
+       content: " - ";
+}
+.semanticdomainname { }
+.sense {
+       display: inline;
+       font-size: 10pt;
+       font-weight: normal;
+       line-height: 12pt;
+       margin-left: 10pt;
+       padding-bottom: 1pt;
+       text-indent: -10pt;
+}
+.senses > .sense + .sense :before {
+       content: "  ";
+       display: inline;
+       font-size: 10pt;
+       font-weight: normal;
+       line-height: 12pt;
+       margin-left: 10pt;
+       padding-bottom: 1pt;
+       text-indent: -10pt;
+}
+.sensecomplexformrefs { }
+.sensecomplexformrefs :after {
+       content: " ";
+}
+.sensecomplexformrefs > .xitem + .xitem :before {
+       content: " ";
+}
+.sensecomplexentrytype { }
+.sensecomplexentrytype :after {
+       content: " ";
+}
+.sensecomplexentryform {
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+}
+.sensecrossref {
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+}
+.sensecrossref > .xitem + .xitem :before {
+       content: " ";
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+}
+.sensemainentryref {
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+}
+.sensemainentryref > .xitem + .xitem :before {
+       content: " ";
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+}
+.slots { }
+.slots :before {
+       content: ": ";
+}
+.slots > .xitem + .xitem :before {
+       content: ", ";
+}
+.slotname { }
+.translations { }
+.translation {
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-style: italic;
+}
+.translation :after {
+       content: " ";
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-style: italic;
+}
+.translation > .xitem + .xitem :before {
+       content: " ";
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-style: italic;
+}
+.variantrefcondition { }
+.variantrefcondition :after {
+       content: " ";
+}
+.variantrefs { }
+.variantrefs :before {
+       content: "(";
+}
+.variantrefs :after {
+       content: ") ";
+}
+.variantrefs > .xitem + .xitem :before {
+       content: "; ";
+}
+.variantrefentrytype { }
+.variantrefentrytype :after {
+       content: " ";
+}
+.variantrefform {
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+}
+.xhomographnumber {
+       font-size: 55%;
+       font-weight: bold;
+       vertical-align: sub;
+}
+.xitem [lang='tpi'] {
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-style: italic;
+}
+.xitem [lang='bzh-fonipa'] {
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+}
+.xitem [lang="en"] + .xitem [lang="tpi"] :before {
+       content: " / ";
+}
+.xlanguagetag {
+       display: none;
+}
+.xsensenumber {
+       font-size: 2pt;
+       visibility: hidden;
+}
+.xsensenumber :before {
+       content: "R";
+       font-family: "Wingdings";
+       font-size: 8pt;
+       visibility: visible;
+}
+
+
+
+span [lang='bzh'] {
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-weight: bold;
+}
+span [lang='tpi'] {
+       font-family: "Charis SIL" serif;
+       font-size: 12pt;
+       font-style: italic;
+}
+

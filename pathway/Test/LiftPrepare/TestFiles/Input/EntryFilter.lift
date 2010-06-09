@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!--See http://code.google.com/p/lift-standard for more information on the format used here.-->
+<lift producer="SIL.FLEx 2.5.0.39988" version="0.13">
+    
+    <entry dateCreated="1997-05-09T19:54:57Z" dateModified="2008-08-11T14:32:04Z"
+        guid="1f1422e1-4c42-4f14-b143-d566fb81261e" id="abel_1f1422e1-4c42-4f14-b143-d566fb81261e">
+        <lexical-unit>
+            <form lang="bzh">
+                <text>student </text>
+            </form>
+        </lexical-unit>
+        <trait name="morph-type" value="root"/>
+        <pronunciation>
+            <form lang="bzh-fonipa">
+                <text>student pronunce </text>
+            </form>
+        </pronunciation>
+        <sense id="row_b3ea1e6b-f009-4100-a120-aa81b951745c" order="1">
+            <definition>
+                <form lang="en">
+                    <text>boy english </text>
+                </form>
+                <form lang="tpi">
+                    <text>boy tpi</text>
+                </form>
+            </definition>
+        </sense>
+        <sense id="pole _1241d68d-4e9a-43b4-8abf-3a92ece68509" order="2">
+            <definition>
+                <form lang="en">
+                    <text>girl</text>
+                </form>
+                </definition>
+        </sense>
+    </entry>    
+    <entry dateCreated="1997-05-09T19:54:57Z" dateModified="2008-08-11T14:32:04Z"
+        guid="1f1422e1-4c42-4f14-b143-d566fb81261e" id="abel_1f1422e1-4c42-4f14-b143-d566fb81261e">
+        <lexical-unit>
+            <form lang="bzh">
+                <text>fruit</text>
+            </form>
+        </lexical-unit>
+        <trait name="morph-type" value="root"/>
+        <pronunciation>
+            <form lang="bzh-fonipa">
+                <text>to eat </text>
+            </form>
+        </pronunciation>
+        <sense id="row_b3ea1e6b-f009-4100-a120-aa81b951745c" order="1">
+            <definition>
+                <form lang="en">
+                    <text>banana english</text>
+                </form>
+                <form lang="tpi">
+                    <text>banana tpi</text>
+                </form>
+            </definition>
+        </sense>
+        <sense id="pole _1241d68d-4e9a-43b4-8abf-3a92ece68509" order="2">
+            <definition>
+                <form lang="en">
+                    <text>grape</text>
+                </form>
+            </definition>
+        </sense>
+    </entry>
+</lift>

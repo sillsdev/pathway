@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<idPkg:Story xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="6.0">
+  <Story Self="utla" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
+    <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
+    <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/@page-top-left" Justification="LeftAlign">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/@page-top-left" PageNumberType="TextVariable">
+        <TextVariableInstance Self="uf1" Name="FirstGuideword" ResultText="&amp;lt;First&amp;gt;" AssociatedTextVariable="dTextVariablenFirst" />
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber_headword_entry_letData_dicBody" PageNumberType="TextVariable">
+        <TextVariableInstance Self="u678" Name="HomoGraphNumberF" ResultText="&amp;lt;HomoGraph&amp;gt;" AssociatedTextVariable="dTextVariablenHomoGraphF" />
+      </CharacterStyleRange>
+    </ParagraphStyleRange>
+  </Story>
+</idPkg:Story>

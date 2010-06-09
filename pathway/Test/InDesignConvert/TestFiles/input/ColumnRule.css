@@ -1,0 +1,7 @@
+.letData 
+{
+    column-count: 2;   -moz-column-count: 2;
+    column-gap: 1.5em; -moz-column-gap: 1.5em;
+    column-fill: balance;
+    column-rule: solid 1pt #aa0000;
+}

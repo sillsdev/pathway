@@ -1,0 +1,112 @@
+.Chapter_Head {
+    font-size:14pt;
+    line-height:16pt;
+}
+
+.Chapter_Number {
+    font-size: 250%;
+    line-height: 26pt;
+    -ps-fixed-line-height: 26pt;
+}
+
+.Intro_List_Item1 {
+    font-size: 10pt;	/* cascaded environment */
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+}
+
+.Intro_Paragraph {
+    font-size: 10pt;	/* cascaded environment */
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+}
+
+.Intro_Section_Head {
+    font-size: 10pt;
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+}
+
+.Line1 {
+    font-size: 11pt;	/* cascaded environment */
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Note_CrossHYPHENReference_Paragraph {
+    font-size: 9pt;	/* cascaded environment */
+    line-height: 9pt;
+    -ps-fixed-line-height: 9pt;
+}
+
+.Note_CrossHYPHENReference_Paragraph::footnote-call {
+    font-size: 6pt;
+    vertical-align: super;
+    line-height: none;
+}
+
+.Note_CrossHYPHENReference_Paragraph::footnote-marker {
+    font-size: 6pt;
+}
+
+.Note_General_Paragraph {
+    font-size: 9pt;	/* cascaded environment */
+    line-height: 9pt;
+    -ps-fixed-line-height: 9pt;
+}
+
+.Note_General_Paragraph::footnote-call {
+    font-size: 6pt;
+    vertical-align: super;
+    line-height: none;
+}
+
+.Note_General_Paragraph::footnote-marker {
+    font-size: 6pt;
+}
+
+.Paragraph {
+    font-size: 11pt;	/* cascaded environment */
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Paragraph_Continuation {
+    font-size: 11pt;	/* cascaded environment */
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Paragraph1 {
+    font-size: 11pt;	/* cascaded environment */
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.parallel_passage_reference {
+    font-size:11pt;
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Section_Head {
+    font-size: 10pt;
+    line-height: 12pt;
+    -ps-fixed-line-height: 12pt;
+}
+
+.Section_Head_Major {
+    font-size: 11pt;
+    line-height: 13pt;
+    -ps-fixed-line-height: 13pt;
+}
+
+.Title_Main {
+    font-size: 20pt;	/* cascaded environment */
+    line-height: 24pt;
+    -ps-fixed-line-height: 24pt;
+}
+
+.Verse_Number {
+    font-size: 6pt;
+}

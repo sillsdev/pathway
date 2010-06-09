@@ -1,0 +1,15 @@
+.entry {
+       text-align: justify;
+       margin-left: 12pt;
+       text-indent: -12pt;
+}
+.revEntry {
+       text-align: justify;
+       margin-left: 12pt;
+       text-indent: -12pt;
+}
+.subentry {
+       text-align: justify;
+       margin-left: 18pt;
+       text-indent: -12pt;
+}

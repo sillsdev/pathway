@@ -1,0 +1,82 @@
+.dicBody {
+}
+.letHead {
+    column-count: 1;   
+    border-bottom: .5pt solid #a00;
+    text-align: center;
+    margin: 18pt 9pt;
+    margin-left: .75in;
+    margin-right: .75in;
+    padding-bottom: 9pt;
+}
+
+.letData {
+    column-count: 2; -moz-column-count: 2;
+    column-rule: solid 1pt #aa0000;
+    text-align: left;
+}
+.entry {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: 12pt;	/* inherited */
+    color: rgb(0,0,0);	/* inherited */    
+}
+.xhomographnumber {
+    font-weight: bold;
+    font-size: 55%;
+    vertical-align: sub;
+}
+.sense {
+    display: block;
+    font-weight: normal;
+}
+.xsensenumber:before {
+    visibility: visible;
+    font-size: 8pt;
+    content: "\25ba";
+    /* font-weight: bold; */
+}
+.xsensenumber {
+    visibility: hidden;
+    font-size: 2pt;
+}
+.xlanguagetag {
+    display: none;
+}
+.xitem {
+    /* placeholder for adding list separators */
+}
+.xitem[lang='tpi'] {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-style: italic;
+    font-size: 12pt;	/* cascaded environment */
+    color: rgb(0,0,0);	/* cascaded environment */
+    background-color: rgb(255,255,255);	/* cascaded environment */
+}
+.xitem[lang='bzh-fonipa'] {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: 12pt;	/* cascaded environment */
+    color: rgb(0,0,0);	/* cascaded environment */
+    background-color: rgb(255,255,255);	/* cascaded environment */
+}
+
+.headword {
+    font-size: 12pt;	/* cascaded environment */
+    font-weight: bold;
+    color: rgb(0,0,0);	/* cascaded environment */
+    background-color: rgb(255,255,255);	/* cascaded environment */
+}
+.headword:after { content: "  " }
+.headword>.xitem + .xitem:before { content: " " }
+.pronunciations {
+}
+.pronunciations:after { content: " " }
+.pronunciations>.xitem + .xitem:before { content: ", " }
+.pronunciation {
+    font-size: 12pt;	/* cascaded environment */
+    color: rgb(0,0,0);	/* cascaded environment */
+    background-color: rgb(255,255,255);	/* cascaded environment */
+}
+.pronunciation:before { content: "[" }
+.pronunciation:after { content: "]" }
+.pronunciation>.xitem + .xitem:before { content: " " }
+

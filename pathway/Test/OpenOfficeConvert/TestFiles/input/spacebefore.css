@@ -1,0 +1,4 @@
+.revSense + .revSense:before
+{
+content:"; ";
+}

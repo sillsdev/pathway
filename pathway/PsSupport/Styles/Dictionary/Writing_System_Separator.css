@@ -1,0 +1,4 @@
+/* Writing system separator */
+.xitem [lang="en"] + .xitem [lang="tpi"] :before {
+       content: " / ";
+}

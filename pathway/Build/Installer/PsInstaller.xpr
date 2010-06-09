@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <meta>
+        <filters directoryPatterns="" filePatterns=""
+            positiveFilePatterns="" showHiddenFiles="false"/>
+        <options/>
+    </meta>
+    <projectTree name="PsInstaller.xpr">
+        <file name="Features-tpl.wxs"/>
+        <file name="Features.wxs"/>
+        <file name="FileLibrary.xml"/>
+        <file name="Files-tpl.wxs"/>
+        <file name="Files.wxs"/>
+        <file name="License.rtf"/>
+        <file name="OOS.wxs"/>
+        <file name="OosUI-tpl.wxs"/>
+        <file name="OosUI.wxs"/>
+        <file name="Partial%20Common.wxs"/>
+        <file name="Partial%20Flex.wxs"/>
+        <file name="Partial%20PublishingSolutions.wxs"/>
+        <file name="Partial%20Support.wxs"/>
+        <file name="Partial%20Te.wxs"/>
+        <file name="ReadMe.rtf"/>
+    </projectTree>
+</project>

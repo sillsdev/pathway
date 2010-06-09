@@ -1,0 +1,1 @@
+(RULE (CLASS pronunciation) (PSEUDO lang ( en_UK )) (PROPERTY content "/\a3"))

@@ -1,0 +1,7 @@
+Info: Sena 3 © 2010 SIL
+Phone-Icon-Filepath: C:\ProgramData\SIL\Pathway\Scripture\Icon.png
+RedLettering: true
+Source-Text: 1pe_cv.xhtml
+Source-Format: xhtml_te
+Collection: 1pe
+Book: 1 Pita

@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?aid style="50" type="document" readerVersion="6.0" featureSet="257" product="6.0(352)" ?>
+<Document xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="6.0" Self="d" StoryList="uc9 u9b" ZeroPoint="0 0" ActiveLayer="ub6" CMYKProfile="U.S. Web Coated (SWOP) v2" RGBProfile="sRGB IEC61966-2.1" SolidColorIntent="UseColorSettings" AfterBlendingIntent="UseColorSettings" DefaultImageIntent="UseColorSettings" RGBPolicy="PreserveEmbeddedProfiles" CMYKPolicy="CombinationOfPreserveAndSafeCmyk" AccurateLABSpots="false">
+	<Language Self="Language/$ID/[No Language]" Name="$ID/[No Language]" SingleQuotes="&apos;&apos;" DoubleQuotes="&quot;&quot;" PrimaryLanguageName="$ID/[No Language]" SublanguageName="$ID/[No Language]" Id="0" HyphenationVendor="$ID/" SpellingVendor="$ID/"/>
+	<Language Self="Language/$ID/English%3a USA" Name="$ID/English: USA" SingleQuotes="‘’" DoubleQuotes="“”" PrimaryLanguageName="$ID/English" SublanguageName="$ID/USA" Id="269" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/English%3a USA Medical" Name="$ID/English: USA Medical" SingleQuotes="‘’" DoubleQuotes="“”" PrimaryLanguageName="$ID/English" SublanguageName="$ID/USA Medical" Id="269" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/English%3a USA Legal" Name="$ID/English: USA Legal" SingleQuotes="‘’" DoubleQuotes="“”" PrimaryLanguageName="$ID/English" SublanguageName="$ID/USA Legal" Id="269" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/French" Name="$ID/French" SingleQuotes="‘’" DoubleQuotes="«»" PrimaryLanguageName="$ID/French" SublanguageName="$ID/" Id="274" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/Spanish%3a Castilian" Name="$ID/Spanish: Castilian" SingleQuotes="‘’" DoubleQuotes="“”" PrimaryLanguageName="$ID/Spanish" SublanguageName="$ID/Castilian" Id="294" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/Italian" Name="$ID/Italian" SingleQuotes="‘’" DoubleQuotes="“”" PrimaryLanguageName="$ID/Italian" SublanguageName="$ID/" Id="281" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/English%3a UK" Name="$ID/English: UK" SingleQuotes="‘’" DoubleQuotes="“”" PrimaryLanguageName="$ID/English" SublanguageName="$ID/UK" Id="525" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/Swedish" Name="$ID/Swedish" SingleQuotes="’’" DoubleQuotes="””" PrimaryLanguageName="$ID/Swedish" SublanguageName="$ID/" Id="295" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/Danish" Name="$ID/Danish" SingleQuotes="’’" DoubleQuotes="””" PrimaryLanguageName="$ID/Danish" SublanguageName="$ID/" Id="267" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/Norwegian%3a Bokmal" Name="$ID/Norwegian: Bokmal" SingleQuotes="’’" DoubleQuotes="””" PrimaryLanguageName="$ID/Norwegian" SublanguageName="$ID/Bokmal" Id="286" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/Portuguese" Name="$ID/Portuguese" SingleQuotes="‘’" DoubleQuotes="“”" PrimaryLanguageName="$ID/Portuguese" SublanguageName="$ID/" Id="288" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/Portuguese%3a Brazilian" Name="$ID/Portuguese: Brazilian" SingleQuotes="‘’" DoubleQuotes="“”" PrimaryLanguageName="$ID/Portuguese" SublanguageName="$ID/Brazilian" Id="544" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/French%3a Canadian" Name="$ID/French: Canadian" SingleQuotes="‘’" DoubleQuotes="«»" PrimaryLanguageName="$ID/French" SublanguageName="$ID/Canadian" Id="786" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/Norwegian%3a Nynorsk" Name="$ID/Norwegian: Nynorsk" SingleQuotes="’’" DoubleQuotes="””" PrimaryLanguageName="$ID/Norwegian" SublanguageName="$ID/Nynorsk" Id="542" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/Finnish" Name="$ID/Finnish" SingleQuotes="’’" DoubleQuotes="””" PrimaryLanguageName="$ID/Finnish" SublanguageName="$ID/" Id="273" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/Catalan" Name="$ID/Catalan" SingleQuotes="‘’" DoubleQuotes="“”" PrimaryLanguageName="$ID/Catalan" SublanguageName="$ID/" Id="263" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/Russian" Name="$ID/Russian" SingleQuotes="&apos;&apos;" DoubleQuotes="«»" PrimaryLanguageName="$ID/Russian" SublanguageName="$ID/" Id="290" HyphenationVendor="WinSoft" SpellingVendor="WinSoft"/>
+	<Language Self="Language/$ID/Bulgarian" Name="$ID/Bulgarian" SingleQuotes="‚‘" DoubleQuotes="„“" PrimaryLanguageName="$ID/Bulgarian" SublanguageName="$ID/" Id="261" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/Czech" Name="$ID/Czech" SingleQuotes="‚‘" DoubleQuotes="„“" PrimaryLanguageName="$ID/Czech" SublanguageName="$ID/" Id="266" HyphenationVendor="WinSoft" SpellingVendor="WinSoft"/>
+	<Language Self="Language/$ID/Polish" Name="$ID/Polish" SingleQuotes="‚’" DoubleQuotes="„”" PrimaryLanguageName="$ID/Polish" SublanguageName="$ID/" Id="287" HyphenationVendor="WinSoft" SpellingVendor="WinSoft"/>
+	<Language Self="Language/$ID/Romanian" Name="$ID/Romanian" SingleQuotes="‚’" DoubleQuotes="„”" PrimaryLanguageName="$ID/Romanian" SublanguageName="$ID/" Id="289" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/Greek" Name="$ID/Greek" SingleQuotes="‘’" DoubleQuotes="«»" PrimaryLanguageName="$ID/Greek" SublanguageName="$ID/" Id="276" HyphenationVendor="WinSoft" SpellingVendor="WinSoft"/>
+	<Language Self="Language/$ID/Turkish" Name="$ID/Turkish" SingleQuotes="‘’" DoubleQuotes="“”" PrimaryLanguageName="$ID/Turkish" SublanguageName="$ID/" Id="297" HyphenationVendor="WinSoft" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/Hungarian" Name="$ID/Hungarian" SingleQuotes="‚’" DoubleQuotes="„”" PrimaryLanguageName="$ID/Hungarian" SublanguageName="$ID/" Id="278" HyphenationVendor="WinSoft" SpellingVendor="WinSoft"/>
+	<Language Self="Language/$ID/English%3a Canadian" Name="$ID/English: Canadian" SingleQuotes="‘’" DoubleQuotes="“”" PrimaryLanguageName="$ID/English" SublanguageName="$ID/Canadian" Id="1037" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/Slovak" Name="$ID/Slovak" SingleQuotes="‚‘" DoubleQuotes="„“" PrimaryLanguageName="$ID/Slovak" SublanguageName="$ID/" Id="291" HyphenationVendor="WinSoft" SpellingVendor="WinSoft"/>
+	<Language Self="Language/$ID/Croatian" Name="$ID/Croatian" SingleQuotes="‘’" DoubleQuotes="“”" PrimaryLanguageName="$ID/Croatian" SublanguageName="$ID/" Id="265" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/Estonian" Name="$ID/Estonian" SingleQuotes="‘’" DoubleQuotes="“”" PrimaryLanguageName="$ID/Estonian" SublanguageName="$ID/" Id="270" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/Latvian" Name="$ID/Latvian" SingleQuotes="‘’" DoubleQuotes="“”" PrimaryLanguageName="$ID/Latvian" SublanguageName="$ID/" Id="284" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/Lithuanian" Name="$ID/Lithuanian" SingleQuotes="‘’" DoubleQuotes="“”" PrimaryLanguageName="$ID/Lithuanian" SublanguageName="$ID/" Id="285" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/Slovenian" Name="$ID/Slovenian" SingleQuotes="&apos;&apos;" DoubleQuotes="»«" PrimaryLanguageName="$ID/Slovenian" SublanguageName="$ID/" Id="292" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/German%3a Traditional" Name="$ID/German: Traditional" SingleQuotes="‚‘" DoubleQuotes="„“" PrimaryLanguageName="$ID/German" SublanguageName="$ID/Traditional" Id="275" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/German%3a Reformed" Name="$ID/German: Reformed" SingleQuotes="‚‘" DoubleQuotes="„“" PrimaryLanguageName="$ID/German" SublanguageName="$ID/Reformed" Id="275" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/de_DE_2006" Name="$ID/de_DE_2006" SingleQuotes="‚‘" DoubleQuotes="„“" PrimaryLanguageName="$ID/de_DE_2006" SublanguageName="$ID/" Id="275" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/Dutch" Name="$ID/Dutch" SingleQuotes="‘’" DoubleQuotes="“”" PrimaryLanguageName="$ID/Dutch" SublanguageName="$ID/" Id="268" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/nl_NL_2005" Name="$ID/nl_NL_2005" SingleQuotes="‘’" DoubleQuotes="“”" PrimaryLanguageName="$ID/nl_NL_2005" SublanguageName="$ID/" Id="268" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/German%3a Swiss" Name="$ID/German: Swiss" SingleQuotes="‹›" DoubleQuotes="«»" PrimaryLanguageName="$ID/German" SublanguageName="$ID/Swiss" Id="531" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/de_CH_2006" Name="$ID/de_CH_2006" SingleQuotes="‹›" DoubleQuotes="«»" PrimaryLanguageName="$ID/de_CH_2006" SublanguageName="$ID/" Id="531" HyphenationVendor="Proximity" SpellingVendor="Proximity"/>
+	<Language Self="Language/$ID/Ukrainian" Name="$ID/Ukrainian" SingleQuotes="‘’" DoubleQuotes="“”" PrimaryLanguageName="$ID/Ukrainian" SublanguageName="$ID/" Id="298" HyphenationVendor="WinSoft" SpellingVendor="$ID/"/>
+	<idPkg:Graphic src="Resources/Graphic.xml"/>
+	<idPkg:Fonts src="Resources/Fonts.xml"/>
+	<idPkg:Styles src="Resources/Styles.xml"/>
+	<NumberingList Self="NumberingList/$ID/[Default]" Name="$ID/[Default]" ContinueNumbersAcrossStories="false" ContinueNumbersAcrossDocuments="false"/>
+	<NamedGrid Self="NamedGrid/$ID/[Page Grid]" Name="$ID/[Page Grid]">
+		<GridDataInformation FontStyle="Regular" PointSize="12" CharacterAki="0" LineAki="9" HorizontalScale="100" VerticalScale="100" LineAlignment="LeftOrTopLineJustify" GridAlignment="AlignEmCenter" CharacterAlignment="AlignEmCenter">
+			<Properties>
+				<AppliedFont type="string">Times New Roman</AppliedFont>
+			</Properties>
+		</GridDataInformation>
+	</NamedGrid>
+	<idPkg:Preferences src="Resources/Preferences.xml"/>
+	<MetadataPacketPreference>
+		<Properties>
+			<Contents><![CDATA[<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 4.2.2-c063 53.352624, 2008/07/30-18:12:18        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:dc="http://purl.org/dc/elements/1.1/">
+         <dc:format>application/x-indesign</dc:format>
+      </rdf:Description>
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:xmpGImg="http://ns.adobe.com/xap/1.0/g/img/">
+         <xmp:CreateDate>2009-08-05T16:02:21+05:30</xmp:CreateDate>
+         <xmp:MetadataDate>2009-08-05T16:02:43+05:30</xmp:MetadataDate>
+         <xmp:ModifyDate>2009-08-05T16:02:43+05:30</xmp:ModifyDate>
+         <xmp:CreatorTool>Adobe InDesign 6.0</xmp:CreatorTool>
+         <xmp:Thumbnails>
+            <rdf:Alt>
+               <rdf:li rdf:parseType="Resource">
+                  <xmpGImg:format>JPEG</xmpGImg:format>
+                  <xmpGImg:width>256</xmpGImg:width>
+                  <xmpGImg:height>256</xmpGImg:height>
+                  <xmpGImg:image>/9j/4AAQSkZJRgABAgEASABIAAD/7QAsUGhvdG9zaG9wIDMuMAA4QklNA+0AAAAAABAASAAAAAEA&#xA;AQBIAAAAAQAB/+4AE0Fkb2JlAGSAAAAAAQUAArFD/9sAhAAKBwcHBwcKBwcKDgkJCQ4RDAsLDBEU&#xA;EBAQEBAUEQ8RERERDxERFxoaGhcRHyEhISEfKy0tLSsyMjIyMjIyMjIyAQsJCQ4MDh8XFx8rIh0i&#xA;KzIrKysrMjIyMjIyMjIyMjIyMjIyMjI+Pj4+PjJAQEBAQEBAQEBAQEBAQEBAQEBAQED/wAARCAEA&#xA;AMYDAREAAhEBAxEB/8QBogAAAAcBAQEBAQAAAAAAAAAABAUDAgYBAAcICQoLAQACAgMBAQEBAQAA&#xA;AAAAAAABAAIDBAUGBwgJCgsQAAIBAwMCBAIGBwMEAgYCcwECAxEEAAUhEjFBUQYTYSJxgRQykaEH&#xA;FbFCI8FS0eEzFmLwJHKC8SVDNFOSorJjc8I1RCeTo7M2F1RkdMPS4ggmgwkKGBmElEVGpLRW01Uo&#xA;GvLj88TU5PRldYWVpbXF1eX1ZnaGlqa2xtbm9jdHV2d3h5ent8fX5/c4SFhoeIiYqLjI2Oj4KTlJ&#xA;WWl5iZmpucnZ6fkqOkpaanqKmqq6ytrq+hEAAgIBAgMFBQQFBgQIAwNtAQACEQMEIRIxQQVRE2Ei&#xA;BnGBkTKhsfAUwdHhI0IVUmJy8TMkNEOCFpJTJaJjssIHc9I14kSDF1STCAkKGBkmNkUaJ2R0VTfy&#xA;o7PDKCnT4/OElKS0xNTk9GV1hZWltcXV5fVGVmZ2hpamtsbW5vZHV2d3h5ent8fX5/c4SFhoeIiY&#xA;qLjI2Oj4OUlZaXmJmam5ydnp+So6SlpqeoqaqrrK2ur6/9oADAMBAAIRAxEAPwCbeU/KflW58q6L&#xA;cXGi6fNNNp9rJJJJaws7u0MbMzM0ZJJJ3OKpt/gzyf8A9WHTf+kOD/qnirv8GeT/APqw6b/0hwf9&#xA;U8Vd/gzyf/1YdN/6Q4P+qeKu/wAGeT/+rDpv/SHB/wBU8Vd/gzyf/wBWHTf+kOD/AKp4q7/Bnk//&#xA;AKsOm/8ASHB/1TxV3+DPJ/8A1YdN/wCkOD/qnirv8GeT/wDqw6b/ANIcH/VPFXf4M8n/APVh03/p&#xA;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</xmpGImg:image>
+               </rdf:li>
+            </rdf:Alt>
+         </xmp:Thumbnails>
+      </rdf:Description>
+      <rdf:Description rdf:about=""
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:stEvt="http://ns.adobe.com/xap/1.0/sType/ResourceEvent#">
+         <xmpMM:InstanceID>xmp.iid:A8552024A881DE11AA31D360B44B7BF1</xmpMM:InstanceID>
+         <xmpMM:DocumentID>xmp.did:A6552024A881DE11AA31D360B44B7BF1</xmpMM:DocumentID>
+         <xmpMM:OriginalDocumentID>xmp.did:A6552024A881DE11AA31D360B44B7BF1</xmpMM:OriginalDocumentID>
+         <xmpMM:History>
+            <rdf:Seq>
+               <rdf:li rdf:parseType="Resource">
+                  <stEvt:action>created</stEvt:action>
+                  <stEvt:instanceID>xmp.iid:A6552024A881DE11AA31D360B44B7BF1</stEvt:instanceID>
+                  <stEvt:when>2009-08-05T16:02:21+05:30</stEvt:when>
+                  <stEvt:softwareAgent>Adobe InDesign 6.0</stEvt:softwareAgent>
+               </rdf:li>
+               <rdf:li rdf:parseType="Resource">
+                  <stEvt:action>saved</stEvt:action>
+                  <stEvt:instanceID>xmp.iid:A7552024A881DE11AA31D360B44B7BF1</stEvt:instanceID>
+                  <stEvt:when>2009-08-05T16:02:43+05:30</stEvt:when>
+                  <stEvt:softwareAgent>Adobe InDesign 6.0</stEvt:softwareAgent>
+                  <stEvt:changed>/</stEvt:changed>
+               </rdf:li>
+               <rdf:li rdf:parseType="Resource">
+                  <stEvt:action>saved</stEvt:action>
+                  <stEvt:instanceID>xmp.iid:A8552024A881DE11AA31D360B44B7BF1</stEvt:instanceID>
+                  <stEvt:when>2009-08-05T16:02:43+05:30</stEvt:when>
+                  <stEvt:softwareAgent>Adobe InDesign 6.0</stEvt:softwareAgent>
+                  <stEvt:changed>/metadata</stEvt:changed>
+               </rdf:li>
+            </rdf:Seq>
+         </xmpMM:History>
+         <xmpMM:RenditionClass>default</xmpMM:RenditionClass>
+      </rdf:Description>
+      <rdf:Description rdf:about=""
+            xmlns:idPriv="http://ns.adobe.com/xmp/InDesign/private">
+         <idPriv:DocChangeCount>4</idPriv:DocChangeCount>
+      </rdf:Description>
+      <rdf:Description rdf:about=""
+            xmlns:xmpTPg="http://ns.adobe.com/xap/1.0/t/pg/"
+            xmlns:xmpG="http://ns.adobe.com/xap/1.0/g/"
+            xmlns:stFnt="http://ns.adobe.com/xap/1.0/sType/Font#">
+         <xmpTPg:Colorants>
+            <rdf:Seq>
+               <rdf:li rdf:parseType="Resource">
+                  <xmpG:swatchName>Black</xmpG:swatchName>
+                  <xmpG:mode>CMYK</xmpG:mode>
+                  <xmpG:type>Process</xmpG:type>
+                  <xmpG:cyan>0</xmpG:cyan>
+                  <xmpG:magenta>0</xmpG:magenta>
+                  <xmpG:yellow>0</xmpG:yellow>
+                  <xmpG:black>100</xmpG:black>
+               </rdf:li>
+               <rdf:li rdf:parseType="Resource">
+                  <xmpG:swatchName>Paper</xmpG:swatchName>
+                  <xmpG:mode>CMYK</xmpG:mode>
+                  <xmpG:type>Process</xmpG:type>
+                  <xmpG:cyan>0</xmpG:cyan>
+                  <xmpG:magenta>0</xmpG:magenta>
+                  <xmpG:yellow>0</xmpG:yellow>
+                  <xmpG:black>0</xmpG:black>
+               </rdf:li>
+               <rdf:li rdf:parseType="Resource">
+                  <xmpG:swatchName>Registration</xmpG:swatchName>
+                  <xmpG:mode>CMYK</xmpG:mode>
+                  <xmpG:type>Process</xmpG:type>
+                  <xmpG:cyan>100</xmpG:cyan>
+                  <xmpG:magenta>100</xmpG:magenta>
+                  <xmpG:yellow>100</xmpG:yellow>
+                  <xmpG:black>100</xmpG:black>
+               </rdf:li>
+            </rdf:Seq>
+         </xmpTPg:Colorants>
+         <xmpTPg:Fonts>
+            <rdf:Bag>
+               <rdf:li rdf:parseType="Resource">
+                  <stFnt:fontName>TimesNewRomanPSMT</stFnt:fontName>
+                  <stFnt:fontFamily>Times New Roman</stFnt:fontFamily>
+                  <stFnt:fontFace>Regular</stFnt:fontFace>
+                  <stFnt:fontType>OpenTypeTT</stFnt:fontType>
+                  <stFnt:versionString>TimesNewRomanPSMTVersion 3.00</stFnt:versionString>
+                  <stFnt:composite>false</stFnt:composite>
+                  <stFnt:fontFileName>TIMES.TTF</stFnt:fontFileName>
+               </rdf:li>
+               <rdf:li rdf:parseType="Resource">
+                  <stFnt:fontName>TimesNewRomanPS-ItalicMT</stFnt:fontName>
+                  <stFnt:fontFamily>Times New Roman</stFnt:fontFamily>
+                  <stFnt:fontFace>Italic</stFnt:fontFace>
+                  <stFnt:fontType>OpenTypeTT</stFnt:fontType>
+                  <stFnt:versionString>TimesNewRomanPS-ItalicMTVersion 2.90</stFnt:versionString>
+                  <stFnt:composite>false</stFnt:composite>
+                  <stFnt:fontFileName>TIMESI.TTF</stFnt:fontFileName>
+               </rdf:li>
+               <rdf:li rdf:parseType="Resource">
+                  <stFnt:fontName>TimesNewRomanPS-BoldMT</stFnt:fontName>
+                  <stFnt:fontFamily>Times New Roman</stFnt:fontFamily>
+                  <stFnt:fontFace>Bold</stFnt:fontFace>
+                  <stFnt:fontType>OpenTypeTT</stFnt:fontType>
+                  <stFnt:versionString>TimesNewRomanPS-BoldMTVersion 3.00</stFnt:versionString>
+                  <stFnt:composite>false</stFnt:composite>
+                  <stFnt:fontFileName>TIMESBD.TTF</stFnt:fontFileName>
+               </rdf:li>
+               <rdf:li rdf:parseType="Resource">
+                  <stFnt:fontName>TimesNewRomanPS-BoldItalicMT</stFnt:fontName>
+                  <stFnt:fontFamily>Times New Roman</stFnt:fontFamily>
+                  <stFnt:fontFace>Bold Italic</stFnt:fontFace>
+                  <stFnt:fontType>OpenTypeTT</stFnt:fontType>
+                  <stFnt:versionString>TimesNewRomanPS-BoldItalicMTVersion 2.90</stFnt:versionString>
+                  <stFnt:composite>false</stFnt:composite>
+                  <stFnt:fontFileName>TIMESBI.TTF</stFnt:fontFileName>
+               </rdf:li>
+            </rdf:Bag>
+         </xmpTPg:Fonts>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+<?xpacket end="r"?>]]></Contents>
+		</Properties>
+	</MetadataPacketPreference>
+	<ConditionalTextPreference ShowConditionIndicators="ShowIndicators" ActiveConditionSet="n"/>
+	<TextVariable Self="dTextVariablen&lt;?AID 001b?&gt;TV XRefChapterNumber" Name="&lt;?AID 001b?&gt;TV XRefChapterNumber" VariableType="XrefChapterNumberType"/>
+	<TextVariable Self="dTextVariablen&lt;?AID 001b?&gt;TV XRefPageNumber" Name="&lt;?AID 001b?&gt;TV XRefPageNumber" VariableType="XrefPageNumberType"/>
+	<TextVariable Self="dTextVariablenChapter Number" Name="Chapter Number" VariableType="ChapterNumberType">
+		<ChapterNumberVariablePreference TextBefore="" Format="Current" TextAfter=""/>
+	</TextVariable>
+	<TextVariable Self="dTextVariablenCreation Date" Name="Creation Date" VariableType="CreationDateType">
+		<DateVariablePreference TextBefore="" Format="MM/dd/yy" TextAfter=""/>
+	</TextVariable>
+	<TextVariable Self="dTextVariablenFile Name" Name="File Name" VariableType="FileNameType">
+		<FileNameVariablePreference TextBefore="" IncludePath="false" IncludeExtension="false" TextAfter=""/>
+	</TextVariable>
+	<TextVariable Self="dTextVariablenLast Page Number" Name="Last Page Number" VariableType="LastPageNumberType">
+		<PageNumberVariablePreference TextBefore="" Format="Current" TextAfter="" Scope="SectionScope"/>
+	</TextVariable>
+	<TextVariable Self="dTextVariablenModification Date" Name="Modification Date" VariableType="ModificationDateType">
+		<DateVariablePreference TextBefore="" Format="MMMM d, yyyy h:mm aa" TextAfter=""/>
+	</TextVariable>
+	<TextVariable Self="dTextVariablenOutput Date" Name="Output Date" VariableType="OutputDateType">
+		<DateVariablePreference TextBefore="" Format="MM/dd/yy" TextAfter=""/>
+	</TextVariable>
+	<TextVariable Self="dTextVariablenRunning Header" Name="Running Header" VariableType="MatchParagraphStyleType">
+		<MatchParagraphStylePreference TextBefore="" TextAfter="" AppliedParagraphStyle="ParagraphStyle/$ID/NormalParagraphStyle" SearchStrategy="FirstOnPage" ChangeCase="None" DeleteEndPunctuation="false"/>
+	</TextVariable>
+	<idPkg:Tags src="XML/Tags.xml"/>
+	<Layer Self="ub6" Name="Layer 1" Visible="true" Locked="false" IgnoreWrap="false" ShowGuides="true" LockGuides="false" UI="true" Expendable="true" Printable="true">
+		<Properties>
+			<LayerColor type="enumeration">LightBlue</LayerColor>
+		</Properties>
+	</Layer>
+	<idPkg:MasterSpread src="MasterSpreads/MasterSpread_uc0.xml"/>
+	<idPkg:Spread src="Spreads/Spread_ub9.xml"/>
+	<Section Self="ubf" Length="1" Name="" PageNumberStyle="Arabic" ContinueNumbering="true" IncludeSectionPrefix="false" Marker="" PageStart="ube" SectionPrefix=""/>
+	<DocumentUser Self="dDocumentUser0" UserName="$ID/Unknown User Name">
+		<Properties>
+			<UserColor type="enumeration">Gold</UserColor>
+		</Properties>
+	</DocumentUser>
+	<CrossReferenceFormat Self="u89" Name="Full Paragraph &amp; Page Number" AppliedCharacterStyle="n">
+		<BuildingBlock Self="u89BuildingBlock0" BlockType="CustomStringBuildingBlock" AppliedCharacterStyle="n" CustomText="&quot;" AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+		<BuildingBlock Self="u89BuildingBlock1" BlockType="FullParagraphBuildingBlock" AppliedCharacterStyle="n" CustomText="$ID/" AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+		<BuildingBlock Self="u89BuildingBlock2" BlockType="CustomStringBuildingBlock" AppliedCharacterStyle="n" CustomText="&quot; on page " AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+		<BuildingBlock Self="u89BuildingBlock3" BlockType="PageNumberBuildingBlock" AppliedCharacterStyle="n" CustomText="$ID/" AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+	</CrossReferenceFormat>
+	<CrossReferenceFormat Self="u8a" Name="Full Paragraph" AppliedCharacterStyle="n">
+		<BuildingBlock Self="u8aBuildingBlock0" BlockType="CustomStringBuildingBlock" AppliedCharacterStyle="n" CustomText="&quot;" AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+		<BuildingBlock Self="u8aBuildingBlock1" BlockType="FullParagraphBuildingBlock" AppliedCharacterStyle="n" CustomText="$ID/" AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+		<BuildingBlock Self="u8aBuildingBlock2" BlockType="CustomStringBuildingBlock" AppliedCharacterStyle="n" CustomText="&quot;" AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+	</CrossReferenceFormat>
+	<CrossReferenceFormat Self="u8b" Name="Paragraph Text &amp; Page Number" AppliedCharacterStyle="n">
+		<BuildingBlock Self="u8bBuildingBlock0" BlockType="CustomStringBuildingBlock" AppliedCharacterStyle="n" CustomText="&quot;" AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+		<BuildingBlock Self="u8bBuildingBlock1" BlockType="ParagraphTextBuildingBlock" AppliedCharacterStyle="n" CustomText="$ID/" AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+		<BuildingBlock Self="u8bBuildingBlock2" BlockType="CustomStringBuildingBlock" AppliedCharacterStyle="n" CustomText="&quot; on page " AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+		<BuildingBlock Self="u8bBuildingBlock3" BlockType="PageNumberBuildingBlock" AppliedCharacterStyle="n" CustomText="$ID/" AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+	</CrossReferenceFormat>
+	<CrossReferenceFormat Self="u8c" Name="Paragraph Text" AppliedCharacterStyle="n">
+		<BuildingBlock Self="u8cBuildingBlock0" BlockType="CustomStringBuildingBlock" AppliedCharacterStyle="n" CustomText="&quot;" AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+		<BuildingBlock Self="u8cBuildingBlock1" BlockType="ParagraphTextBuildingBlock" AppliedCharacterStyle="n" CustomText="$ID/" AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+		<BuildingBlock Self="u8cBuildingBlock2" BlockType="CustomStringBuildingBlock" AppliedCharacterStyle="n" CustomText="&quot;" AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+	</CrossReferenceFormat>
+	<CrossReferenceFormat Self="u8d" Name="Paragraph Number &amp; Page Number" AppliedCharacterStyle="n">
+		<BuildingBlock Self="u8dBuildingBlock0" BlockType="ParagraphNumberBuildingBlock" AppliedCharacterStyle="n" CustomText="$ID/" AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+		<BuildingBlock Self="u8dBuildingBlock1" BlockType="CustomStringBuildingBlock" AppliedCharacterStyle="n" CustomText=" on page " AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+		<BuildingBlock Self="u8dBuildingBlock2" BlockType="PageNumberBuildingBlock" AppliedCharacterStyle="n" CustomText="$ID/" AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+	</CrossReferenceFormat>
+	<CrossReferenceFormat Self="u8e" Name="Paragraph Number" AppliedCharacterStyle="n">
+		<BuildingBlock Self="u8eBuildingBlock0" BlockType="ParagraphNumberBuildingBlock" AppliedCharacterStyle="n" CustomText="$ID/" AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+	</CrossReferenceFormat>
+	<CrossReferenceFormat Self="u8f" Name="Text Anchor Name &amp; Page Number" AppliedCharacterStyle="n">
+		<BuildingBlock Self="u8fBuildingBlock0" BlockType="CustomStringBuildingBlock" AppliedCharacterStyle="n" CustomText="&quot;" AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+		<BuildingBlock Self="u8fBuildingBlock1" BlockType="BookmarkNameBuildingBlock" AppliedCharacterStyle="n" CustomText="$ID/" AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+		<BuildingBlock Self="u8fBuildingBlock2" BlockType="CustomStringBuildingBlock" AppliedCharacterStyle="n" CustomText="&quot; on page " AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+		<BuildingBlock Self="u8fBuildingBlock3" BlockType="PageNumberBuildingBlock" AppliedCharacterStyle="n" CustomText="$ID/" AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+	</CrossReferenceFormat>
+	<CrossReferenceFormat Self="u90" Name="Text Anchor Name" AppliedCharacterStyle="n">
+		<BuildingBlock Self="u90BuildingBlock0" BlockType="CustomStringBuildingBlock" AppliedCharacterStyle="n" CustomText="&quot;" AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+		<BuildingBlock Self="u90BuildingBlock1" BlockType="BookmarkNameBuildingBlock" AppliedCharacterStyle="n" CustomText="$ID/" AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+		<BuildingBlock Self="u90BuildingBlock2" BlockType="CustomStringBuildingBlock" AppliedCharacterStyle="n" CustomText="&quot;" AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+	</CrossReferenceFormat>
+	<CrossReferenceFormat Self="u91" Name="Page Number" AppliedCharacterStyle="n">
+		<BuildingBlock Self="u91BuildingBlock0" BlockType="CustomStringBuildingBlock" AppliedCharacterStyle="n" CustomText="page " AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+		<BuildingBlock Self="u91BuildingBlock1" BlockType="PageNumberBuildingBlock" AppliedCharacterStyle="n" CustomText="$ID/" AppliedDelimiter="$ID/" IncludeDelimiter="false"/>
+	</CrossReferenceFormat>
+	<idPkg:BackingStory src="XML/BackingStory.xml"/>
+	<idPkg:Story src="Stories/Story_uc9.xml"/>
+	<IndexingSortOption Self="dIndexingSortOptionnkIndexGroup_Symbol" Name="$ID/kIndexGroup_Symbol" Include="true" Priority="0" HeaderType="Nothing"/>
+	<IndexingSortOption Self="dIndexingSortOptionnkIndexGroup_Alphabet" Name="$ID/kIndexGroup_Alphabet" Include="true" Priority="1" HeaderType="BasicLatin"/>
+	<IndexingSortOption Self="dIndexingSortOptionnkIndexGroup_Numeric" Name="$ID/kIndexGroup_Numeric" Include="false" Priority="2" HeaderType="Nothing"/>
+	<IndexingSortOption Self="dIndexingSortOptionnkWRIndexGroup_GreekAlphabet" Name="$ID/kWRIndexGroup_GreekAlphabet" Include="false" Priority="3" HeaderType="Nothing"/>
+	<IndexingSortOption Self="dIndexingSortOptionnkWRIndexGroup_CyrillicAlphabet" Name="$ID/kWRIndexGroup_CyrillicAlphabet" Include="false" Priority="4" HeaderType="Russian"/>
+	<IndexingSortOption Self="dIndexingSortOptionnkIndexGroup_Kana" Name="$ID/kIndexGroup_Kana" Include="false" Priority="5" HeaderType="HiraganaAll"/>
+	<IndexingSortOption Self="dIndexingSortOptionnkIndexGroup_Chinese" Name="$ID/kIndexGroup_Chinese" Include="false" Priority="6" HeaderType="ChinesePinyin"/>
+	<IndexingSortOption Self="dIndexingSortOptionnkIndexGroup_Korean" Name="$ID/kIndexGroup_Korean" Include="false" Priority="7" HeaderType="KoreanConsonant"/>
+	<ABullet Self="dABullet0" CharacterType="UnicodeOnly" CharacterValue="8226">
+		<Properties>
+			<BulletsFont type="string">$ID/</BulletsFont>
+			<BulletsFontStyle type="string">$ID/</BulletsFontStyle>
+		</Properties>
+	</ABullet>
+	<ABullet Self="dABullet1" CharacterType="UnicodeOnly" CharacterValue="42">
+		<Properties>
+			<BulletsFont type="string">$ID/</BulletsFont>
+			<BulletsFontStyle type="string">$ID/</BulletsFontStyle>
+		</Properties>
+	</ABullet>
+	<ABullet Self="dABullet2" CharacterType="UnicodeOnly" CharacterValue="9674">
+		<Properties>
+			<BulletsFont type="string">$ID/</BulletsFont>
+			<BulletsFontStyle type="string">$ID/</BulletsFontStyle>
+		</Properties>
+	</ABullet>
+	<ABullet Self="dABullet3" CharacterType="UnicodeWithFont" CharacterValue="187">
+		<Properties>
+			<BulletsFont type="string">Myriad Pro</BulletsFont>
+			<BulletsFontStyle type="string">$ID/Regular</BulletsFontStyle>
+		</Properties>
+	</ABullet>
+	<ABullet Self="dABullet4" CharacterType="GlyphWithFont" CharacterValue="503">
+		<Properties>
+			<BulletsFont type="string">Minion Pro</BulletsFont>
+			<BulletsFontStyle type="string">$ID/Regular</BulletsFontStyle>
+		</Properties>
+	</ABullet>
+	<Assignment Self="uc7" Name="$ID/UnassignedInCopy" UserName="$ID/" ExportOptions="AssignedSpreads" IncludeLinksWhenPackage="true" FilePath="$ID/">
+		<Properties>
+			<FrameColor type="enumeration">Nothing</FrameColor>
+		</Properties>
+	</Assignment>
+</Document>

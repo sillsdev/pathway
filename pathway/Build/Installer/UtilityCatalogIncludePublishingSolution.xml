@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<utilityCatalog>
+	<utility assemblyPath="FlexDePlugin.dll" class="SIL.PublishingSolution.FlexDePlugin"/>
+</utilityCatalog>

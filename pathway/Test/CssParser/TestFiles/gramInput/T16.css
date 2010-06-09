@@ -1,0 +1,38 @@
+@page 
+{
+	margin: 2cm 2cm 2cm 2cm;
+	counter-increment: page;
+    @top-left 
+    {
+		content: string(guideword, first);
+		font-family:sans-serif;
+		font-weight:bold;
+		font-size:12pt;
+		color: #aa0000;
+		margin-top: 1em;
+		 border-bottom: dashed .5pt #aa0000;
+		 margin-bottom: 1em;
+		 vertical-align: bottom;
+    }
+    @top-center
+    {
+		content: counter(page); 
+		margin-top: 1em;
+		 border-bottom: dashed .5pt #aa0000;
+		 margin-bottom: 1em;
+		 vertical-align: bottom;
+	}
+    @top-right
+    {
+		content: string(guideword, last); 
+		font-family:sans-serif;
+		font-weight:bold;
+		font-size:12pt;
+		color: #aa0000;
+		margin-top: 1em;
+		 border-bottom: dashed .5pt #aa0000;
+		 margin-bottom: 1em;
+		 vertical-align: bottom;
+	}
+}
+

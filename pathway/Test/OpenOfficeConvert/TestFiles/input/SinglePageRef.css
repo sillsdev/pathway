@@ -1,0 +1,264 @@
+@page {
+    size: 14.8cm 21cm;
+    marks: crop cross;
+    counter-increment: page;
+    margin: 1.15cm 1.5cm;
+    @top-left {
+        content: string(bookname, start) " "  string(chapterx, start) ":" string(versex, start);
+        //content: 'Chapter';
+        font-weight: bold;
+    }
+    @top-center {
+        content: counter(page);
+    }    
+    @top-right {
+        content: string(bookname, start) " "  string(chapterx, last) ":" string(versex, last);
+        //content: 'Chapter';
+        font-weight: bold;
+    }
+}
+@page :first {
+
+    @top-left {
+        content: ''; 
+    }
+    @top-center {
+        content: '';
+    }
+    @top-right {
+        content: '';
+    }
+}
+
+.Chapter_Number {
+    font-family: "Charis SIL", serif;	/* default Serif font */
+    font-size: 12pt;
+    font-weight: bolder;
+    vertical-align: top;
+    float: left;
+    string-set: chapterx content();
+    color:red;
+}
+/* The following formats the scripture text into 2 columns */
+
+.scrSection {
+	column-count: 2; -moz-column-count: 2;
+	column-gap: 1.5em; -moz-column-gap: 1.5em;
+	column-fill: balance;
+	text-align: left;
+}
+
+/* Font Style 1 */
+
+
+.Paragraph {
+    font-size: 11pt;	/* cascaded environment */
+    color:green;
+}
+.Paragraph[lang='en'] {
+    font-size: 11pt;	/* cascaded environment */
+}
+.Paragraph_Continuation {
+    font-size: 11pt;	/* cascaded environment */
+}
+
+
+
+.Chapter_Head {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 20pt;	/* cascaded environment */
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+}
+.Citation_Line1 {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 10pt;	/* cascaded environment */
+    text-indent: -24pt;
+    margin-left: 24pt;
+    padding-left: 12pt;
+}
+.Citation_Line2 {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 10pt;	/* cascaded environment */
+    text-indent: -24pt;
+    margin-left: 24pt;
+    padding-left: 24pt;
+}
+.Embedded_Text_Line1 {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 10pt;	/* cascaded environment */
+    /*text-align: leading;*/
+    text-indent: -36pt;
+    margin-left: 36pt;
+}
+.Intro_Paragraph {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 9pt;	/* cascaded environment */
+    line-height: 11pt
+}
+.Intro_Section_Head {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 8pt;	/* cascaded environment */
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    /*text-align: leading;*/
+    line-height: 11pt
+}
+.Intro_Section_Head[lang='en'] {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 8pt;	/* cascaded environment */
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    /*text-align: leading;*/
+    line-height: 11pt
+}
+.Line1 {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 10pt;	/* cascaded environment */
+    /*text-align: leading;*/
+    text-indent: -36pt;
+    margin-left: 36pt;
+    padding-left: 0pt;
+}
+.Line2 {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 10pt;	/* cascaded environment */
+    text-indent: -24pt;
+    margin-left: 24pt;
+    padding-left: 12pt;
+}
+.List_Item1 {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 10pt;	/* cascaded environment */
+    text-indent: -24pt;
+    margin-left: 24pt;
+    padding-left: 12pt;
+}
+.List_Item2 {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 10pt;	/* cascaded environment */
+    padding-left: 24pt;
+}
+.Note_General_Paragraph {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 8pt;	/* cascaded environment */
+    line-height: normal;
+}
+.Paragraph {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 10pt;	/* cascaded environment */
+    text-indent: 12pt;
+}
+.Paragraph[lang='en'] {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 10pt;	/* cascaded environment */
+    text-indent: 12pt;
+}
+.Paragraph_Continuation {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 10pt;	/* cascaded environment */
+    text-indent: 0pt;
+}
+.Parallel_Passage_Reference {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 9pt;	/* cascaded environment */
+    font-weight: normal;	/* cascaded environment */
+    font-style: italic;	/* cascaded environment */
+    padding-bottom: 4pt;
+    padding-top: -4pt;
+}
+.picture {
+    height: 1.0in;
+}
+.pictureCaption {
+}
+.pictureCenter {
+    clear:both;
+    margin: 0pt 0pt 4pt 4pt;
+    padding: 2pt;
+    text-indent: 0pt;
+    text-align: center;
+}
+.Quoted_Text {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-weight: bold;	/* cascaded environment */
+    font-style: italic;	/* cascaded environment */
+}
+.scrBody {
+}
+.scrBook {
+    //column-count: 1;
+    clear: both;
+}
+.scrBookName {
+    string-set: bookname content();
+    display: none;
+}
+.scrFootnoteMarker {
+    font-size: smaller;
+    font-weight: bolder;
+    vertical-align: super;
+}
+.Section_Head {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 9pt;	/* cascaded environment */
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    padding-bottom: 4pt;
+    padding-top: 8pt;
+}
+.Section_Head[lang='en'] {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 9pt;	/* cascaded environment */
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    padding-bottom: 4pt;
+    padding-top: 8pt;
+}
+.Section_Head_Minor {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 9pt;	/* cascaded environment */
+    font-weight: normal;	/* cascaded environment */
+    font-style: italic;	/* cascaded environment */
+}
+.scrFootnoteMarker {
+    font-size: smaller;
+    font-weight: bolder;
+    vertical-align: super;
+}
+.scrIntroSection {
+    text-align: left;
+}
+.Title_Main {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 20pt;	/* cascaded environment */
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    line-height: 24pt;
+    padding-bottom: 12pt;
+    padding-top: 3pt;
+}
+.Title_Secondary {
+    display: block;
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: 14pt;	/* cascaded environment */
+}
+.Verse_Number {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: 10pt;
+    vertical-align: super;	/* cascaded environment */
+    string-set: versex content();
+}
+.Verse_Number_Alternate {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    vertical-align: super;	/* cascaded environment */
+}
+.Words_Of_Christ {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    color: rgb(255,0,0);	/* cascaded environment */
+}
+/* Status Final */

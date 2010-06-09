@@ -1,0 +1,390 @@
+// --------------------------------------------------------------------------------------------
+// <copyright file="PsExport.cs" from='2009' to='2009' company='SIL International'>
+//      Copyright © 2009, SIL International. All Rights Reserved.   
+//    
+//      Distributable under the terms of either the Common Public License or the
+//      GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// Implements Fieldworks Utility Interface for DictionaryExpress
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
+using System.Windows.Forms;
+using System.Diagnostics;
+using System.IO;
+using JWTools;
+using SIL.Tool;
+using SIL.FieldWorks.Common.FwUtils;
+using SIL.Tool.Localization;
+
+namespace SIL.PublishingSolution
+{
+    /// <summary>
+    /// Implements Publishing Solutins for Translation Editor
+    /// </summary>
+    public class PsExport: IExporter
+    {
+        private const bool _Wait = true;
+
+        #region Properties
+        /// <summary>Gets or sets Output format (ODT, PDF, INX, TeX, HTM, PDB, etc.)</summary>
+        public string Destination
+        {
+            get
+            {
+                return Param.Value[Param.PrintVia];
+            }
+            set
+            {
+                Param.SetValue(Param.PrintVia, value);
+            } 
+        }
+
+        /// <summary>Gets or sets data type (Scripture, Dictionary)</summary>
+        public string DataType { get; set; }
+
+        /// <summary>Gets or sets data type (Scripture, Dictionary)</summary>
+        public ProgressBar ProgressBar { get; set; }
+        #endregion Properties
+
+        private string _projectFile;
+
+        #region Export
+        /// <summary>
+        /// Have the utility do what it does.
+        /// </summary>
+        public void Export(string outFullName)
+        {
+            Debug.Assert(DataType == "Scripture" || DataType == "Dictionary", "DataType must be Scripture or Dictionary");
+            Debug.Assert(outFullName.IndexOf(Path.DirectorySeparatorChar) >= 0, "full path for output must be given");
+            try
+            {
+                string supportPath = GetSupportPath();
+                Backend.Load(Common.PathCombine(supportPath, "Backends"));
+                LoadProgramSettings(supportPath);
+                LocalizationSetup();
+                LoadDataTypeSettings();
+                var outDir = Path.GetDirectoryName(outFullName);
+                DefaultProjectFileSetup(outDir);
+                SubProcess.BeforeProcess(outFullName);
+
+                var mainXhtml = Path.GetFileNameWithoutExtension(outFullName) + ".xhtml";
+                var mainFullName = Common.PathCombine(outDir, mainXhtml);
+                Debug.Assert(mainFullName.IndexOf(Path.DirectorySeparatorChar) >= 0, "Path for input file missing");
+                if (string.IsNullOrEmpty(mainFullName) || !File.Exists(mainFullName))
+                {
+                    var msg = new[] { "Input File(main.xhtml) is not Found" };
+                    LocDB.Message("errFnFound", "Input File(main.xhtml) is not Found.", msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
+                    return;
+                }
+                string cssFullName = GetCssFullName(outDir, mainFullName);
+                if (cssFullName == null) return;
+                string fluffedCssFullName = GetFluffedCssFullName(outFullName, outDir, cssFullName);
+
+                DestinationSetup();
+                if (DataType == "Scripture")
+                    SeExport(mainXhtml, Path.GetFileName(fluffedCssFullName), outDir);
+                else if (DataType == "Dictionary")
+                {
+                    string revFullName = GetRevFullName(outDir);
+                    string gramFullName = MakeXhtml(outDir, "sketch.xml", "XLingPap.xsl", supportPath);
+                    DeExport(outFullName, revFullName, gramFullName, fluffedCssFullName);
+                }
+            }
+            catch (InvalidStyleSettingsException err)
+            {
+                MessageBox.Show(string.Format(err.ToString(), err.FullFilePath), "Pathway Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //var msg = new[] { err.FullFilePath };
+                //LocDB.Message("errNotValidXml", err.ToString(), msg, LocDB.MessageTypes.Warning, LocDB.MessageDefault.First);
+                return;
+            }
+            catch (UnauthorizedAccessException err)
+            {
+                var msg = new[] { "Sorry! You might not have permission to use this resource." };
+                LocDB.Message("errUnauthorized", err.ToString(), msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
+                return;
+            }
+            catch (Exception ex)
+            {
+                var msg = new[] { ex.ToString() };
+                LocDB.Message("defErrMsg", ex.ToString(), msg, LocDB.MessageTypes.Warning, LocDB.MessageDefault.First);
+                return;
+            }
+        }
+
+        /// <summary>
+        /// Returns reversal name with path (empty string if file doesn't exist)
+        /// </summary>
+        /// <param name="outDir">Folder which contains reversal file if it exists</param>
+        /// <returns>Reversal name with path</returns>
+        protected static string GetRevFullName(string outDir)
+        {
+            string revFullName = Common.PathCombine(outDir, "FlexRev.xhtml");
+            if (!File.Exists(revFullName))
+                revFullName = "";
+            return revFullName;
+        }
+
+        /// <summary>
+        /// Combines all css files into one and adds expected css to beginning
+        /// </summary>
+        /// <param name="outputFullName">Name used to caluculatte default css name</param>
+        /// <param name="outDir">where results will be stored</param>
+        /// <param name="cssFullName">name and path of css file</param>
+        /// <returns></returns>
+        public string GetFluffedCssFullName(string outputFullName, string outDir, string cssFullName)
+        {
+            var mc = new MergeCss();
+            string myCss = Common.PathCombine(outDir, Path.GetFileName(cssFullName));
+            if (cssFullName != myCss)
+                File.Copy(cssFullName, myCss, true);
+            var expCss = Path.GetFileNameWithoutExtension(outputFullName) + ".css";
+            string expCssLine = "@import \"" + expCss + "\";";
+            Common.FileInsertText(myCss, expCssLine);
+            var tmpCss = mc.Make(myCss);
+            var fluffedCssFullName = Common.PathCombine(outDir, Path.GetFileName(tmpCss));
+            File.Copy(tmpCss, fluffedCssFullName, true);
+            File.Delete(tmpCss);
+            return fluffedCssFullName;
+        }
+
+        /// <summary>
+        /// Return full css name
+        /// </summary>
+        /// <param name="outDir">where to find css name</param>
+        /// <param name="mainFullName">export name used to calculate css name</param>
+        /// <returns>name and path of css</returns>
+        protected string GetCssFullName(string outDir, string mainFullName)
+        {
+            var cssFullName = Param.StylePath(Param.Value[Param.LayoutSelected]);
+            if (string.IsNullOrEmpty(cssFullName))
+            {
+                var stylePick = new PublicationTask { InputPath = outDir, CurrentInput = mainFullName, InputType = DataType };
+                if (!Common.Testing)
+                    stylePick.ShowDialog();
+                else
+                {
+                    stylePick.DoLoad();
+                    stylePick.DoAccept();
+                }
+                cssFullName = stylePick.cssFile;
+            }
+            return cssFullName;
+        }
+
+        /// <summary>
+        /// Determines destination back end.
+        /// </summary>
+        protected void DestinationSetup()
+        {
+            if (string.IsNullOrEmpty(Destination))
+            {
+                var edlg = new ExportDlg { ExportType = DataType };
+                edlg.ShowDialog();
+                Destination = edlg.ExportType;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="outDir"></param>
+        protected void DefaultProjectFileSetup(string outDir)
+        {
+            _projectFile = Common.PathCombine(outDir, DataType + ".de");
+            if (!File.Exists(_projectFile))
+                File.Copy(Param.FromProg(Common.PathCombine(Param.Value[Param.SamplePath], Path.GetFileName(_projectFile))), _projectFile);
+        }
+
+        protected void LoadDataTypeSettings()
+        {
+            Param.Value[Param.InputType] = DataType;
+            Param.LoadSettings();
+        }
+
+        protected static void LocalizationSetup()
+        {
+            JW_Registry.RootKey = @"SOFTWARE\The Seed Company\Dictionary Express!";
+            LocDB.SetAppTitle();
+            LocDB.BaseName = "PsLocalization.xml";
+            var folderPath = Param.Value[Param.OutputPath];
+            var localizationPath = Common.PathCombine(folderPath, "Loc");
+            if (!Directory.Exists(localizationPath))
+            {
+                Directory.CreateDirectory(localizationPath);
+                File.Copy(Param.FromProg(@"Loc/" + LocDB.BaseName), Common.PathCombine(localizationPath, LocDB.BaseName));
+            }
+            LocDB.Initialize(folderPath);
+        }
+
+        protected static void LoadProgramSettings(string supportPath)
+        {
+            Param.ProgBase = supportPath;
+            Param.LoadSettings();
+        }
+
+        protected static string GetSupportPath()
+        {
+            Common.SupportFolder = "PathwaySupport";
+            return Common.GetPSApplicationPath();
+        }
+
+        #endregion Export
+
+        #region Protected Function
+        #region MakeXhtml
+        /// <summary>
+        /// If XML file exists, transform it to XHTML
+        /// </summary>
+        /// <param name="outPath">path to XML</param>
+        /// <param name="xmlName">XML file name</param>
+        /// <param name="transform">Name of transform</param>
+        /// <param name="dicPath">If dtds required for Xsl, it is a path, otherwise null</param>
+        /// <returns>xhtmlFile full name or empty string if no XML file available</returns>
+        protected static string MakeXhtml(string outPath, string xmlName, string transform, string dicPath)
+        {
+            string xhtmlFile = "";
+            string xmlPath = Common.PathCombine(outPath, xmlName);
+            if (File.Exists(xmlPath))
+            {
+                if (dicPath != null)
+                    CopyDtds(dicPath, outPath);
+                xhtmlFile = Common.XsltProcess(xmlPath, transform, ".xhtml");
+                if (!Path.IsPathRooted(xhtmlFile))
+                {
+                    var msg = new[] { xhtmlFile };
+                    LocDB.Message("defErrMsg", xhtmlFile, msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
+                }
+                if (dicPath != null)
+                    RemoveDtds(dicPath, outPath);
+            }
+            return xhtmlFile;
+        }
+
+        #region CopyDtds
+        /// <summary>
+        /// Copy all DTDs from DictionaryExpress folder to Temp folder
+        /// </summary>
+        /// <param name="dicPath">DictionaryExpress Folder name</param>
+        /// <param name="outPath">Output path</param>
+        protected static void CopyDtds(string dicPath, string outPath)
+        {
+            var dir = new DirectoryInfo(dicPath);
+            FileInfo[] dtdFiles = dir.GetFiles("*.dtd");
+            foreach (FileInfo fl in dtdFiles)
+            {
+                string outFile = Common.PathCombine(outPath, fl.Name);
+                if (!File.Exists(outFile))
+                    File.Copy(Common.PathCombine(dicPath, fl.Name), outFile);
+            }
+        }
+        #endregion CopyDtds
+
+        #region RemoveDtds
+        /// <summary>
+        /// Remove all DTDs from Temp folder that exist in DictionaryExpress folder
+        /// </summary>
+        /// <param name="dicPath">DictionaryExpress Folder name</param>
+        /// <param name="outPath">Output path</param>
+        protected static void RemoveDtds(string dicPath, string outPath)
+        {
+            var dir = new DirectoryInfo(dicPath);
+            FileInfo[] dtdFiles = dir.GetFiles("*.dtd");
+            foreach (FileInfo fl in dtdFiles)
+            {
+                string outFile = Common.PathCombine(outPath, fl.Name);
+                if (File.Exists(outFile))
+                    File.Delete(outFile);
+            }
+        }
+        #endregion RemoveDtds
+        #endregion MakeXhtml
+
+        #region DeExport
+        /// <summary>
+        /// Exports the input files to the chosen destination
+        /// </summary>
+        /// <param name="lexiconFull">main dictionary content</param>
+        /// <param name="revFull">reversal content</param>
+        /// <param name="gramFull">grammar content</param>
+        /// <param name="jobFileName">css file with style info</param>
+        public void DeExport(string lexiconFull, string revFull, string gramFull, string jobFileName)
+        {
+            var projInfo = new PublicationInformation();
+
+            if (ProgressBar == null)
+                ProgressBar = new ProgressBar();
+            projInfo.ProgressBar = ProgressBar;
+            projInfo.ProjectFileWithPath = _projectFile;
+            projInfo.IsLexiconSectionExist = File.Exists(lexiconFull);
+            projInfo.IsReversalExist = File.Exists(revFull);
+            projInfo.SwapHeadword = false;
+            projInfo.FromPlugin = true;
+            projInfo.DefaultCssFileWithPath = jobFileName;
+            projInfo.DefaultXhtmlFileWithPath = lexiconFull;
+            projInfo.ProjectInputType = "Dictionary";
+            projInfo.DictionaryPath = Path.GetDirectoryName(lexiconFull);
+
+            //if (lexiconFull == revFull || lexiconFull == gramFull)
+            //    projInfo.IsLexiconSectionExist = false;
+
+            string lexiconFileName = Path.GetFileName(lexiconFull);
+            string revFileName = Path.GetFileName(revFull);
+            string gramFileName = Path.GetFileName(gramFull);
+            if (lexiconFileName == revFileName || lexiconFileName == gramFileName)
+                projInfo.IsLexiconSectionExist = false;
+            if (projInfo.IsLexiconSectionExist && !projInfo.IsReversalExist)
+            {
+                projInfo.ProjectName = Path.GetFileNameWithoutExtension(lexiconFull);
+            }
+            else if (!projInfo.IsLexiconSectionExist && projInfo.IsReversalExist)
+            {
+                projInfo.ProjectName = Path.GetFileNameWithoutExtension(revFull);
+            }
+
+            Backend.Launch(Destination, projInfo);
+        }
+        #endregion DeExport
+
+        #region SeExport
+        /// <summary>
+        /// Exports the input files to the chosen destination
+        /// </summary>
+        /// <param name="mainXhtml">main dictionary content</param>
+        /// <param name="jobFileName">css file with style info</param>
+        /// <param name="outPath">destination path</param>
+        public void SeExport(string mainXhtml, string jobFileName, string outPath)
+        {
+            Debug.Assert(mainXhtml.IndexOf(Path.DirectorySeparatorChar) < 0, mainXhtml + " should be just name");
+            Debug.Assert(jobFileName.IndexOf(Path.DirectorySeparatorChar) < 0, jobFileName + " should be just name");
+            var pb = new ProgressBar();
+            Common.ShowMessage = !Common.Testing;
+
+            var projInfo = new PublicationInformation();
+            var mainSection = File.Exists(Common.PathCombine(outPath, mainXhtml));
+            projInfo.DefaultCssFileWithPath = Common.PathCombine(outPath, jobFileName);
+            projInfo.ProjectInputType = "Scripture";
+            projInfo.FromPlugin = true;
+            projInfo.DictionaryPath = outPath;
+            if (mainSection)
+            {
+                projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outPath, mainXhtml);
+                string DictionaryName = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath));
+                projInfo.DictionaryOutputName = DictionaryName;
+                projInfo.ProgressBar = pb;
+                projInfo.IsOpenOutput = !Common.Testing;
+                projInfo.ProjectName = Path.GetFileNameWithoutExtension(mainXhtml);
+                Backend.Launch(Destination, projInfo);
+            }
+        }
+        #endregion SeExport
+        #endregion Protected Function
+
+    }
+}

@@ -1,0 +1,5 @@
+Info: Bible text exported from FieldWorks Translation Editor.
+Source-Text: 1pe_cv.xhtml
+Source-Format: xhtml_te
+Collection: 1 Pita
+Book: 1 Pita

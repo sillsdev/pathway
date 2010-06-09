@@ -1,0 +1,31 @@
+.xitem[lang='en'][level='1'][level2='2']{
+    color: green;
+}
+
+.xitem[lang='en'][level='1']{
+    color: orange;
+}
+
+.xitem[lang='en'][level2='2']{
+    color: aqua;
+}
+
+.xitem[level="1"][level2='2']{
+    color: yellow;
+}
+
+.xitem[lang='en']{
+    color: brown;
+}
+
+.xitem[level2="2"] {
+    color: red;
+}
+
+.xitem[level='1'] {
+    color: blue;
+}
+
+.xitem{
+    color: violet;
+}

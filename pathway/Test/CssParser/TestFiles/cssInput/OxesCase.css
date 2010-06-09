@@ -1,0 +1,26 @@
+h1, h2, h3, h4{
+  line-height: 13pt;
+  font-weight: bold;
+  padding: 0;   
+  text-align: left;
+}
+
+
+h1.cover{
+  page: cover_page;
+  line-height: 1em;
+  text-align: center;
+}
+
+
+h3.section:contains('Lamatua Yesus peka,roti'){
+  font-size: 9pt;
+  string-set: h3;
+}
+
+div.section{
+}
+
+
+
+*[size='4lines']{  height:   52pt;}

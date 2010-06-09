@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ReversalIndex>
+<ReversalIndexEntry id="hvo46321">
+
+    <ReversalIndexEntry_ReversalForm><AUni ws="en">accurate</AUni></ReversalIndexEntry_ReversalForm>
+    <ReversalIndexEntry_RelatedForm />
+    
+    
+    <ReversalIndexEntry_ReferringSenses>
+        <Link><Alt ws="bzh" sense="ḳapum" /></Link>
+        
+        <Link><Alt ws="bzh" sense="nema anon" /></Link>
+        
+        <Link><Alt ws="bzh" sense="nema baġareḳ" /></Link>
+        
+        <Link><Alt ws="bzh" sense="nema ḳapum" /></Link>
+        
+        <Link><Alt ws="bzh" sense="niröp 2" /></Link>
+        
+        <Link><Alt ws="bzh" sense="nema nġeri" /></Link>
+    </ReversalIndexEntry_ReferringSenses>
+
+    <ReversalIndexEntry_Subentries>
+    </ReversalIndexEntry_Subentries>
+</ReversalIndexEntry>
+</ReversalIndex>

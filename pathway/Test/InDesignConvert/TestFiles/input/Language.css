@@ -1,0 +1,57 @@
+
+.letData {
+    column-count: 2; -moz-column-count: 2;
+    column-gap: 0.5em; -moz-column-gap: 1.5em;
+    column-fill: balance;
+    text-align: left;
+}
+.entry {
+    font-family: "<default serif>", serif;	/* inherited */
+    font-size: 11pt;	/* inherited */
+    font-weight: normal;	/* inherited */
+    font-style: normal;	/* inherited */
+    color: rgb(0,0,0);	/* inherited */
+    background-color: rgb(255,255,255);	/* inherited */
+    text-decoration: none;	/* inherited */
+    text-indent: -36pt;
+    margin-left: 36pt;
+    padding-left: 9pt;
+    padding-bottom: 2pt;
+    padding-top: 1pt;
+    /* clear: both; */
+ }
+
+h1
+{
+color: rgb(0,0,255);	/* inherited */
+}
+
+.partofspeech {
+    font-size: 25pt;
+    color: rgb(155,127,255);	
+}
+
+/*
+.partofPOR {
+    font-size: 15pt;
+    color: rgb(255,67,255);	
+}
+.partofspeech{
+    font-size: 15pt;
+    color: rgb(255,12,55);	
+}
+
+.partofspeech[lang='es'] {
+    font-size: 15pt;
+    color: rgb(255,67,255);	
+}
+
+.partofspeech[lang='pt'] {
+    font-size: 20pt;
+    color: rgb(155,127,55);	
+}
+.partofspeech[lang='bg'] {
+    font-size: 20pt;
+    color: rgb(155,12,155);	
+}
+*/

@@ -1,0 +1,41 @@
+.pictureRight {
+    float: right;
+    width: 99px;
+    margin: 0px 0px 5px 5px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.pictureLeft {
+    float: left;
+    position: relative;
+    left: -2pc;
+    width: 99px;
+    margin: 0px 5px 5px 0px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.pictureCenter {
+    float: top;
+    clear: both;
+    width: 4.75in;
+    margin: 0px 5px 5px 0px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.pictureRight > .picture {
+    width: 95px;
+    height: 84px;
+}
+div.pictureLeft > img.picture {
+    width: 95px;
+    height: 84px;
+}
+.pictureCaption {
+    display: block;
+    text-align: center;
+    text-transform:capitalize;
+}
+

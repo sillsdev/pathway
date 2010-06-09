@@ -1,0 +1,143 @@
+﻿// --------------------------------------------------------------------------------------------
+#region // Copyright Â© 2009, SIL International. All Rights Reserved.
+// <copyright file="ParamTest.cs" from='2009' to='2009' company='SIL International'>
+//		Copyright Â© 2009, SIL International. All Rights Reserved.   
+//    
+//		Distributable under the terms of either the Common Public License or the
+//		GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright> 
+#endregion
+// <author>Greg Trihus</author>
+// <email>greg_trihus@sil.org</email>
+// Last reviewed: 
+// 
+// <remarks>
+// </remarks>
+// --------------------------------------------------------------------------------------------
+
+using System;
+using SIL.PublishingSolution;
+using NUnit.Framework;
+using System.Windows.Forms;
+using System.IO;
+using System.Collections.Generic;
+using SIL.Tool;
+
+namespace Test.CssDialog
+{
+    
+    
+    /// <summary>
+    ///This is a test class for MergeCssTest and is intended
+    ///to contain all MergeCssTest Unit Tests
+    ///</summary>
+    [TestFixture]
+    public class MergeCssTest
+    {
+        /// <summary>holds path to input folder for all tests</summary>
+        string _inputBasePath = string.Empty;
+        /// <summary>holds path to expect folder for all tests</summary>
+        string _expectBasePath = string.Empty;
+        /// <summary>path to all users output</summary>
+        string _publishingSolutionsData = string.Empty;
+        const string _StyleSettings = "StyleSettings.xml";
+
+        [TestFixtureSetUp]
+        protected void SetUp()
+        {
+            CommonTestMethod.DisableDebugAsserts();
+            string currentFolder = Common.PathCombine(Environment.CurrentDirectory, "../../CssDialog/TestFiles");
+            _inputBasePath = Common.PathCombine(currentFolder, "Input");
+            _expectBasePath = Common.PathCombine(currentFolder, "Expected");
+            var allUsersDataDir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            _publishingSolutionsData = Common.PathCombine(allUsersDataDir, Common.PathCombine("SIL", "Pathway"));
+        }
+
+        #region Additional test attributes
+        // 
+        //You can use the following additional attributes as you write your tests:
+        //
+        //Use ClassInitialize to run code before running the first test in the class
+        //[ClassInitialize()]
+        //public static void MyClassInitialize(TestContext testContext)
+        //{
+        //}
+        //
+        //Use ClassCleanup to run code after all tests in a class have run
+        //[ClassCleanup()]
+        //public static void MyClassCleanup()
+        //{
+        //}
+        //
+        //Use TestInitialize to run code before running each test
+        //[TestInitialize()]
+        //public void MyTestInitialize()
+        //{
+        //}
+        //
+        //Use TestCleanup to run code after each test has run
+        //[TestCleanup()]
+        //public void MyTestCleanup()
+        //{
+        //}
+        //
+        #endregion
+
+
+        /// <summary>
+        ///A test for OutputLocation
+        ///</summary>
+        [Test]
+        public void OutputLocationTest()
+        {
+            MergeCss target = new MergeCss(); // TODO: Initialize to an appropriate value
+            string expected = string.Empty; // TODO: Initialize to an appropriate value
+            string actual;
+            target.OutputLocation = expected;
+            actual = target.OutputLocation;
+            Assert.AreEqual(expected, actual, "OutputLocationTest failed");
+        }
+
+        /// <summary>
+        ///A test for Make function
+        ///</summary>
+        [Test]
+        public void MakeTest1()
+        {
+            MergeCss target = new MergeCss(); // TODO: Initialize to an appropriate value
+            string css = Common.PathCombine(_inputBasePath, "MergeFile4.css"); // TODO: Initialize to an appropriate value
+            string actual = target.Make(css);
+            string expected = Common.PathCombine(_expectBasePath, "MergeFile.css"); ; // TODO: Initialize to an appropriate value
+            FileAssert.AreEqual(expected, actual, "Make Funtion test failed");
+        }
+
+        /// <summary>
+        ///A test for Make function when one of the imported file not exist
+        ///</summary>
+        [Test]
+        public void MakeTest2()
+        {
+            MergeCss target = new MergeCss(); // TODO: Initialize to an appropriate value
+            string css = Common.PathCombine(_inputBasePath, "MergeFile5.css"); // TODO: Initialize to an appropriate value
+            string actual = target.Make(css);
+            string expected = Common.PathCombine(_expectBasePath, "MergeMissingFile.css"); ; // TODO: Initialize to an appropriate value
+            FileAssert.AreEqual(expected, actual, "Make Funtion missing file test failed");
+        }
+
+        /// <summary>
+        ///A test for Make function with non-existant preprocessing folder
+        ///</summary>
+        [Test]
+        public void MakeTest3()
+        {
+            MergeCss target = new MergeCss { OutputLocation = "Preprocess" };
+            var workDir = Path.Combine(Path.GetTempPath(), "Preprocess");
+            if (Directory.Exists(workDir))
+                Directory.Delete(workDir,true);
+            string css = Common.PathCombine(_inputBasePath, "MergeFile4.css"); // TODO: Initialize to an appropriate value
+            string actual = target.Make(css);
+            string expected = Common.PathCombine(_expectBasePath, "MergeFile.css"); ; // TODO: Initialize to an appropriate value
+            FileAssert.AreEqual(expected, actual, "Make Funtion test failed");
+        }
+    }
+}

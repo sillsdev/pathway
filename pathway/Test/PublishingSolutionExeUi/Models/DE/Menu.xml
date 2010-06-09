@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!--?xml-stylesheet type="text/xsl" href="name2node.xsl"?-->
+
+<menubar name="MenuBar" root="yes" path="9:menuMain/2:menuMain/">
+
+  <file role="menu" name="File" hk="f" path="12:menu$name;/">
+    <new role="menu" name="New" path="12:menu$name">
+      <dialog name="NewProject" path="9:NewProject/"/>
+    </new>
+    <open-project role="menu" name="Open" path="12:menu$name">
+      <dialog title="Open"/>
+    </open-project>
+
+    <export role="menu" name="Export" path="12:menu$name">
+      <dialog name="ExportDlg" path="9:$name;/" />
+    </export>
+    <close role="menu" name="Close" path="12:menu$name"/>
+    <exit role="menu" name="Exit" path="12:menu$name"/>
+  </file>
+  <edit role="menu" name="Edit" hk="e" path="12:editToolStripMenuItem/">
+    <edit-css role="menu" name="Edit" path="12:menu$name"/>
+    <save-css role="menu" name="Save" path="12:menu$name"/>
+  </edit>
+  <format role="menu" name="Format" hk="o" path="12:menu$name;/">
+    <publication-task role="menu" name="PublicationTask" path="12:menu$name;/">
+      <dialog name="PublicationTask" title="Choose Publication Task" path="9:PublicationTask/" />
+    </publication-task>
+    <apply-template role="menu" name="ApplyStyle" path="12:menu$name">
+        <dialog name="Template" path="9:Template/" />
+    </apply-template>
+    <preview role="menu" name="Preview" path="12:menu$name"/>
+  </format>
+  <tools role="menu" name="Tools" hk="t" path="12:menu$name;/">
+    <loc-tool role="menu" name="Localization" path="12:menu$name"/>
+    <loc-setup role="menu" name="LocalizationSetup" hk="s" path="12:menu$name">
+      <dialog name="LocalizationSetup" path="9:LocalizationSetup/" />
+    </loc-setup>
+    <backup role="menu" name="Backup" path="12:menu$name">
+      <dialog name="Backup" path="9:BackUp/" />
+    </backup>
+    <show-error role="menu" name="showErrorLog" path="12:menu$name"/>
+  </tools>
+  <window role="menu" name="Window" hk="w" path="12:menu$name;/">
+    <cascade role="menu" name="Cascade" path="12:menu$name"/>
+    <tile-vertical role="menu" name="TileVertical" path="12:menu$name"/>
+    <tile-horizontal role="menu" name="TileHorizontal" path="12:menu$name"/>
+  </window>
+  <help role="menu" name="Help" hk="h" path="12:menu$name;/">
+    <contents role="menu" name="Contents" path="12:menu$name"/>
+    <license role="menu" name="License" path="12:menu$name"/>
+    <release role="menu" name="ReleaseNotes" path="12:menu$name"/>
+    <readme role="menu" name="ReadMe" path="12:menu$name"/>
+    <int-flex role="menu" name="InterfaceFlex" path="12:menu$name"/>
+    <feedback role="menu" name="FeedBack" path="12:menu$name"/>
+    <large-files role="menu" name="LargeFiles" path="12:menu$name"/>
+    <about role="menu" name="About" path="12:menu$name">
+      <dialog name="About PublishingSolution" path="9:AboutPs/" />
+    </about>
+  </help>
+  <close role="menu" name="Close" path="12:$name"/>
+</menubar>

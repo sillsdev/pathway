@@ -1,0 +1,4 @@
+/* Cascading Style Sheet to set background color to Transparent */
+.entry, .subentry, .xitem[lang='tpi'], .crossref, .crossref-type, .example, .example-sub, .grammatical-info, .grammatical-info-sub, .headword, .headword-minor, .headword-sub, .LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub, .lexref-type, .lexref-type-sub, .pronunciation, .pronunciation-minor, .pronunciation-sub, .sense-crossref, .sense-crossref-sub, .subentries {
+    background-color: transparent;
+}

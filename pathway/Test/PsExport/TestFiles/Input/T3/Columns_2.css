@@ -1,0 +1,8 @@
+/* The following formats the scripture text into 2 columns */
+
+.columns {
+	column-count: 2; -moz-column-count: 2;
+	column-gap: 1.5em; -moz-column-gap: 1.5em;
+	column-fill: balance;
+}
+

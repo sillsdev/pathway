@@ -1,0 +1,70 @@
+@page
+{
+@footnotes {
+  border-top: thin solid black;
+  padding: 0.3em 0;
+  margin-top: 0.6em;
+  margin-left: 2pi;
+}
+}
+
+div.scriptureText{
+  //columns:2;
+  //column-gap:6pt;
+  //column-fill: balance;
+  prince-hyphenate-patterns: url ("../hyph_en_US.dic") ;
+  hyphens: auto ;
+  hyphenate-before: 2;
+  hyphenate-after: 3; 
+  hyphenate-lines: 1; 
+  widows:2;
+  ophans:2;
+}
+
+ p {
+    font-size: 10pt; 
+    text-indent: 2em;
+    padding: 0;
+    margin:0;
+    text-align: justify; text-justify: newspaper;
+    line-height: 13pt;
+}
+ p.first { 
+    text-indent: 0em;
+    padding: 0;
+    margin:0;
+}
+
+.footnote {
+  //display: none;
+  display: footnote;
+  display: prince-footnote;
+  position: footnote;
+  list-style-position: inside;
+  font-size: 9pt;
+  line-height: none;
+  font-family: arial, helvetica, sans-serif;
+  color: black;
+  text-align:left;
+  text-indent: 0;
+  margin-left: 2em; 
+  font-weight: normal;
+}
+
+/* marker in the body text indicating a footnote*/
+.footnote::footnote-call {
+  color:purple;
+  content: '\2021' ' ';
+  font-size: 6pt;
+  vertical-align: super;
+  line-height: none;
+}
+
+/* marker in footnote in front of the text */
+.footnote::footnote-marker {
+    font-size: 10pt;
+    font-weight: bold;
+    content: '\2021'  /* ' ' string(chapterx) ":" string(versex) ' =?  '*/ ;
+    text-align: left;
+}
+

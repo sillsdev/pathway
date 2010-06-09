@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--To store the Project files-->
+<Project Type="Dictionary" Version="1.0.21.814" ShowError="True">
+  <SolutionExplorer>
+    <File Name="main.xhtml" Type="File" Visible="True" Default="True" />
+    <File Name="main.css" Type="File" Visible="True" Default="True" />
+    <File Name="Desktop" Type="Folder" Visible="True" Default="" />
+  </SolutionExplorer>
+  <DocumentSettings />
+  <PropertyGroup>
+    <Creation>
+      <CreatedOn>08-Apr-2009 13:34:13</CreatedOn>
+      <CreatedBy>Trihus</CreatedBy>
+    </Creation>
+    <Modification>
+      <ModifiedOn>20-Oct-2009 21:37:02</ModifiedOn>
+      <ModifiedBy>gtrihus</ModifiedBy>
+    </Modification>
+  </PropertyGroup>
+</Project>

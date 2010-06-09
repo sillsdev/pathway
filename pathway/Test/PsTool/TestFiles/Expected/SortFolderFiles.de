@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--To store the Project files-->
+<Project Type="Dictionary" Version="1.0.21.814" ShowError="True">
+  <SolutionExplorer>
+    <File Name="Pictures" Type="Folder" Visible="True" Default="" />
+    <File Name="Folder1" Type="Folder" Visible="True" Default="" />
+    <File Name="main.xhtml" Type="File" Visible="True" Default="True" />
+    <File Name="Final-job1.css" Type="File" Visible="True" Default="True" />
+    <File Name="Final-job2.css" Type="File" Visible="True" Default="False" />
+  </SolutionExplorer>
+  <DocumentSettings>
+    <Sections>
+      <Section No="1" Name="Cover" Value="none" />
+      <Section No="2" Name="Title" Value="none" />
+      <Section No="3" Name="Rights" Value="none" />
+      <Section No="4" Name="Introduction" Value="none" />
+      <Section No="5" Name="List" Value="none" />
+      <Section No="6" Name="Orthography" Value="none" />
+      <Section No="7" Name="Phonology" Value="none" />
+      <Section No="8" Name="Grammar" Value="none" />
+      <Section No="9" Name="Main" Value="main.xhtml" />
+      <Section No="10" Name="Index" Value="none" />
+      <Section No="11" Name="Reversal" Value="none" />
+      <Section No="12" Name="Bibliography" Value="none" />
+    </Sections>
+  </DocumentSettings>
+  <PropertyGroup>
+    <Creation>
+      <CreatedOn>30-Jun-2009 10:49:03</CreatedOn>
+      <CreatedBy>James</CreatedBy>
+    </Creation>
+    <Modification>
+      <ModifiedOn>06-Aug-2009 19:19:54</ModifiedOn>
+      <ModifiedBy>James</ModifiedBy>
+    </Modification>
+  </PropertyGroup>
+</Project>

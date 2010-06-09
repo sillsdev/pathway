@@ -1,0 +1,28 @@
+.letter {
+    font-size: 14pt;
+    border-style: solid;
+    border-color: #00ff00;
+    border-width: 0 13pt;
+}
+
+.sample
+{
+   border-top: .5pt solid;
+}
+
+.headword
+{
+   border-style: solid;
+}
+
+.entry {
+    border-top: .5pt solid #a00;
+    border-bottom: .6pt solid #a00;
+    border-left: .7pt solid #a00;
+    border-right: .8pt solid #a00; 
+}
+
+.sense
+{
+border: .5pt solid;
+}

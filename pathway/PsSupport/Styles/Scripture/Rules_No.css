@@ -1,0 +1,19 @@
+/* no ruling lines */
+
+@page {
+    @footnotes {
+        border-style: none;
+        margin-top: 3pt;
+   }
+    @footnote {
+        border-style: none;
+        margin-top: 3pt;
+    }
+}
+.border {
+    display: none;
+}
+
+.columns {
+    border-style: none;
+}

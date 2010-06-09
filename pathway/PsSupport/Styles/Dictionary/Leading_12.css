@@ -1,0 +1,20 @@
+.letData, .revData {
+       line-height: 12pt;
+       -ps-fixed-line-height: 12pt;
+}
+.entry {
+       line-height: 12pt;
+       -ps-fixed-line-height: 12pt;
+}
+.revEntry {
+       line-height: 12pt;
+       -ps-fixed-line-height: 12pt;
+}
+.letHead {
+       line-height: 24pt;
+       -ps-fixed-line-height: 24pt;
+}
+.revHeader {
+       line-height: 24pt;
+       -ps-fixed-line-height: 24pt;
+}

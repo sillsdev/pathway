@@ -1,0 +1,27 @@
+/*----------------------------------------------------------------------------
+ * Name:        sena3.css
+ * Purpose:     Sample css file for formatting XHTML file with FireFox or
+ *               PrinceXML. Sample input for Open Office process.
+ *
+ * Author:      Greg Trihus <greg_trihus@sil.org>
+ *
+ * Created:     2008/03/05
+ * RCS-ID:      $Id: sena3.css $
+ * Copyright:   (c) 2008 SIL
+ * Licence:     <LPGL>
+ *--------------------------------------------------------------------------*/
+.letter {
+    text-align: center;
+    width: 100%;
+    margin-top: 18pt;
+    margin-bottom: 18pt;
+    font-size: 24pt;
+}
+/* main entry */
+.entry {
+    display: block; /* paragraph */
+    margin-top: 0cm;
+    margin-bottom: 0cm;
+    margin-left: 2pc;
+    text-indent: -2pc;
+    }
