@@ -65,24 +65,13 @@
     <Compile Include="ClassAttribute.cs" />
     <Compile Include="CssParser.cs" />
     <Compile Include="CssParserDuplicateClass.cs" />
-    <Compile Include="csst3Lexer.cs">
-      <DependentUpon>csst3.g</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="csst3Parser.cs">
-      <DependentUpon>csst3.g</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
+    <Compile Include="csst3Lexer.cs" />
+    <Compile Include="csst3Parser.cs" />
     <Compile Include="CssTree.cs" />
     <Compile Include="CssTreeParser.cs" />
     <Compile Include="MakeProperty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StyleAttribute.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="csst3.g" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
