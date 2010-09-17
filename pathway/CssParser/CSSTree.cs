@@ -9,9 +9,10 @@ using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
-    public class CSSTree
+    public class CssTree
     {
         private Dictionary<string, Dictionary<string, string>> _cssClass = new Dictionary<string, Dictionary<string, string>>();
+        //private Dictionary<string, string> _cssProperty = new Dictionary<string, string>();
         private Dictionary<string, string> _cssProperty;
         private ClassInfo _classInfo;
         private VerboseClass _verboseWriter = VerboseClass.GetInstance();
@@ -25,7 +26,7 @@ namespace SIL.PublishingSolution
 
         public Dictionary<string, Dictionary<string, string>> CreateCssProperty(string cssSourceFile, bool setDefaultPageValue)
         {
-            var cssTree = new CSSParserDuplicateClass();
+            var cssTree = new CssParserDuplicateClass();
             TreeNode node = cssTree.BuildTree(cssSourceFile);
             //To show errors to user to edit and save the CSS file.
             //node = CssErrorHandler(cssTree, cssSourceFile, node);  // Error Handling.
@@ -114,8 +115,6 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
-
-
         }
 
         
@@ -179,6 +178,7 @@ namespace SIL.PublishingSolution
                 _cssProperty["margin-top"] = "56.7";
                 _cssProperty["margin-bottom"] = "56.7";
                 _cssProperty["mirror"] = "false";
+                _cssProperty["-ps-fileproduce"] = "One";
             }
 
             if (_setDefaultPageValue && !_cssClass.ContainsKey(page))
@@ -475,10 +475,36 @@ namespace SIL.PublishingSolution
             }
             //else
             //{
+            //CreateFullyQualifiedName(_attributeInfo);
+            CreateFullyQualifiedClassName(_attributeInfo);
+
             AddProperty(_attributeInfo);
             //}
         }
 
+        private void CreateFullyQualifiedName(StyleAttribute _attributeInfo)
+        {
+            if (_attributeInfo.ClassName == "@page")
+            {
+                if (_attributeInfo.Name == "margin-left" || _attributeInfo.Name == "margin-right" ||
+                    _attributeInfo.Name == "margin-top" || _attributeInfo.Name == "margin-bottom" || _attributeInfo.Name == "margin")
+                {
+                    _attributeInfo.Name = "page-" + _attributeInfo.Name;
+                }
+            }
+        }
+
+        static private void CreateFullyQualifiedClassName(StyleAttribute _attributeInfo)
+        {
+            if (_attributeInfo.ClassName.IndexOf("@page") == -1)
+            {
+                if (_attributeInfo.Name == "margin-left" || _attributeInfo.Name == "margin-right" ||
+                    _attributeInfo.Name == "margin-top" || _attributeInfo.Name == "margin-bottom" || _attributeInfo.Name == "margin")
+                {
+                    _attributeInfo.Name = "class-" + _attributeInfo.Name;
+                }
+            }
+        }
         private string ReplaceCountertoPipeLine(string value)
         {
             string result = value;
@@ -592,7 +618,7 @@ namespace SIL.PublishingSolution
 
                 foreach (var prop in getProperty)
                 {
-                    _cssProperty[prop.Key] = prop.Value;
+                    _cssProperty[prop.Key] = prop.Value.Replace("\"","");
                 }
             }
             catch (Exception ex)

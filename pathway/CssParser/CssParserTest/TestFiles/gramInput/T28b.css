@@ -1,0 +1,15 @@
+.headword 
+{
+	display: inline;
+	position: inherit;
+	top: 2%;
+	bottom: 6pc;
+	left: 1in;
+	float: right;
+	clear: right;
+	direction: rtl;
+	unicode-bidi: embed;
+	overflow: visible;
+	clip: rect(5px, 40px, 45px, 5px);
+}
+

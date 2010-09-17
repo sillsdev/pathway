@@ -1,0 +1,1 @@
+(RULE (CLASS pronunciation) PRECEDES (CLASS pronunciation (ATTRIB lang BEGINSWITH 'en')) (PSEUDO before) (PROPERTY content ', $'))

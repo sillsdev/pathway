@@ -1,0 +1,20 @@
+@import "twolevelsample4.css"
+	
+.entry {
+    		font-family: "<default serif>", serif;	/* inherited */
+    		font-weight: normal;	/* inherited */
+    		color: rgb(12,24,0);	/* inherited */
+    		background-color: rgb(255,255,255);	/* inherited */
+
+}
+
+.letData {
+    column-fill: auto;
+    column-rule: solid 1pt #aa0000;
+}
+
+
+
+
+
+	

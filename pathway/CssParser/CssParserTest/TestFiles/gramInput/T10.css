@@ -1,0 +1,4 @@
+.headword::after 
+{
+	content: " ";
+}

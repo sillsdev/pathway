@@ -29,7 +29,7 @@ using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
-    public class CSSParser
+    public class CssParser
     {
         #region Properties
         public string ErrorText { get; private set; }
@@ -138,19 +138,40 @@ namespace SIL.PublishingSolution
             }
             CommonTree r = ctp.Root;
             _nodeTemp.Nodes.Clear();
-            if (r.Text != "nil")
+
+            if (r.Text != "nil" && r.Text != null)
             {
-                _nodeTemp.Nodes.Add("nil");
+                _nodeTemp.Text = "nil";
                 AddSubTree(_nodeTemp, r, ctp);
             }
             else
             {
-                _nodeTemp.Text = r.Text;
+                string rootNode = r.Text ?? "nil";
+                _nodeTemp.Text = rootNode;
                 foreach (CommonTree child in ctp.Children(r))
                 {
                     AddSubTree(_nodeTemp, child, ctp);
                 }
             }
+
+            ////if (r.Text != "nil")
+            ////{
+            ////    _nodeTemp.Nodes.Add("nil");
+            ////    AddSubTree(_nodeTemp, r, ctp);
+            ////}
+            ////else
+            ////{
+            //if (r.Text != "nil")
+            //{
+            //    _nodeTemp.Text = "nil";
+            //}
+            //_nodeTemp.Text = r.Text;
+            //foreach (CommonTree child in ctp.Children(r))
+            //{
+            //    AddSubTree(_nodeTemp, child, ctp);
+            //}
+            ////}
+
             // To validate the nodes in nodeTemp has copied to nodeFine
             if (_isReCycle == false)
             {
@@ -769,14 +790,14 @@ namespace SIL.PublishingSolution
                                 break;
                             }
                         }
-                        else
-                        {
-                            if (!_checkRuleNode.Contains(newRuleNode.ClassName))
-                            {
-                                _checkRuleNode.Add(newRuleNode.ClassName);
-                                nodeFine.Nodes.Add((TreeNode)node.Clone());
-                            }
-                        }
+                        //else
+                        //{
+                        //    if (!_checkRuleNode.Contains(newRuleNode.ClassName))
+                        //    {
+                        //        _checkRuleNode.Add(newRuleNode.ClassName);
+                        //        nodeFine.Nodes.Add((TreeNode)node.Clone());
+                        //    }
+                        //}
                     }
                     else
                     {
@@ -860,6 +881,7 @@ namespace SIL.PublishingSolution
                     if (dir == 'u')
                     {
                         repProperty = GetPropertyList(RuleNode);
+                        InsertInfoNode(repNode, repProperty);
                         foreach (TreeNode childNode in repNode.Nodes)
                         {
                             //if (childNode.Text == "PROPERTY")
@@ -885,6 +907,7 @@ namespace SIL.PublishingSolution
                     else
                     {
                         repProperty = GetPropertyList(repNode);
+                        InsertInfoNode(repNode, repProperty);
                         foreach (TreeNode childNode in RuleNode.Nodes)
                         {
                             if (childNode.Text == "PROPERTY")
@@ -897,6 +920,24 @@ namespace SIL.PublishingSolution
                         }
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// To insert the information node for the Pseudo class which has only content file but it's classname has styles
+        /// for example .definition{color:red; font-size:12pt;} .definition:before{content:'';}
+        /// </summary>
+        /// <param name="repNode"></param>
+        /// <param name="repProperty"></param>
+        private static void InsertInfoNode(TreeNode repNode, ArrayList repProperty)
+        {
+            if (repProperty.Count == 1 && repProperty.Contains("content"))
+            {
+                var node = new TreeNode();
+                node.Nodes.Add("PROPERTY");
+                node.Nodes[0].Nodes.Add("pathway");
+                node.Nodes[0].Nodes.Add("emptyPsuedo");
+                repNode.Nodes.Add(node.FirstNode);
             }
         }
 
@@ -1207,13 +1248,23 @@ namespace SIL.PublishingSolution
                     {
                         string unicode = string.Empty;
                         count++;
+                        int value = parameter[count];
+
+                        //if condition added to check any escape character precede with slash
+                        if (!((value > 47 && value < 58) || (value > 64 && value < 71) || (value > 96 && value < 103)))
+                        {
+                            result += parameter[count];
+                            count++;
+                            continue;
+                        }
+
                         if (parameter[count] == 'u')
                         {
                             count++;
                         }
                         while (count < strlen)
                         {
-                            int value = parameter[count];
+                            value = parameter[count];
                             if ((value > 47 && value < 58) || (value > 64 && value < 71) || (value > 96 && value < 103))
                             {
                                 unicode += parameter[count];
@@ -1374,12 +1425,10 @@ namespace SIL.PublishingSolution
                         {
                             getRuleInfo.IsClassContent = true;
                         }
-                        for (int i = 0; i < childNode.Nodes.Count; i++)
+                        for (int i = 1; i < childNode.Nodes.Count; i++)
                         {
-                            if (childNode.Nodes[i].Text.IndexOf("'") >= 0 || childNode.Nodes[i].Text.IndexOf("\"") >= 0)
+                            if ((!_isReCycle) && (childNode.Nodes[i].Text.IndexOf("'") >= 0 || childNode.Nodes[i].Text.IndexOf("\"") >= 0))
                             {
-                                childNode.Nodes[i].Text = childNode.Nodes[i].Text.Replace("'", "").Replace(
-                                    "\"", "");
                                 childNode.Nodes[i].Text = UnicodeConversion(childNode.Nodes[i].Text);
                             }
                         }

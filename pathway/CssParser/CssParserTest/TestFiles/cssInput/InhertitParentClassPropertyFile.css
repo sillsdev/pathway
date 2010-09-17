@@ -1,0 +1,19 @@
+.letter
+{
+	text-align: center;
+	font-style: italic;
+}
+
+
+.letter[class~='current']
+{
+	text-align:left;
+        color: blue;
+}
+
+.locator .letter
+{
+	background-color:#00ff00;
+        color: red;
+}
+

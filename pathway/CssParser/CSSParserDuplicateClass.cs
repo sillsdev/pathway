@@ -29,7 +29,7 @@ using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
-    public class CSSParserDuplicateClass
+    public class CssParserDuplicateClass
     {
         #region Properties
         public string ErrorText { get; private set; }
@@ -138,19 +138,40 @@ namespace SIL.PublishingSolution
             }
             CommonTree r = ctp.Root;
             _nodeTemp.Nodes.Clear();
-            if (r.Text != "nil")
+
+            if (r.Text != "nil" && r.Text != null)
             {
-                _nodeTemp.Nodes.Add("nil");
+                _nodeTemp.Text = "nil";
                 AddSubTree(_nodeTemp, r, ctp);
             }
             else
             {
-                _nodeTemp.Text = r.Text;
+                string rootNode = r.Text ?? "nil";
+                _nodeTemp.Text = rootNode;
                 foreach (CommonTree child in ctp.Children(r))
                 {
                     AddSubTree(_nodeTemp, child, ctp);
                 }
             }
+
+            ////if (r.Text != "nil")
+            ////{
+            ////    _nodeTemp.Nodes.Add("nil");
+            ////    AddSubTree(_nodeTemp, r, ctp);
+            ////}
+            ////else
+            ////{
+            //if (r.Text != "nil")
+            //{
+            //    _nodeTemp.Text = "nil";
+            //}
+            //_nodeTemp.Text = r.Text;
+            //foreach (CommonTree child in ctp.Children(r))
+            //{
+            //    AddSubTree(_nodeTemp, child, ctp);
+            //}
+            ////}
+
             // To validate the nodes in nodeTemp has copied to nodeFine
             if (_isReCycle == false)
             {
@@ -769,14 +790,14 @@ namespace SIL.PublishingSolution
                                 break;
                             }
                         }
-                        else
-                        {
-                            if (!_checkRuleNode.Contains(newRuleNode.ClassName))
-                            {
-                                _checkRuleNode.Add(newRuleNode.ClassName);
-                                nodeFine.Nodes.Add((TreeNode)node.Clone());
-                            }
-                        }
+                        //else
+                        //{
+                        //    if (!_checkRuleNode.Contains(newRuleNode.ClassName))
+                        //    {
+                        //        _checkRuleNode.Add(newRuleNode.ClassName);
+                        //        nodeFine.Nodes.Add((TreeNode)node.Clone());
+                        //    }
+                        //}
                     }
                     else
                     {

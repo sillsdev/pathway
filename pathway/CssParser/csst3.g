@@ -2,7 +2,7 @@ grammar csst3;
 options {
 	output=AST;
 	ASTLabelType=CommonTree;
-	language=CSharp;
+        language=CSharp;
 	k=4;}
 
 tokens {
@@ -140,8 +140,12 @@ IDENT
 
 // string literals
 STRING
-	:	'"' ( ~( '"' | '\n' | '\r' ) )* '"'
-	|	'\'' ( ~( '\'' | '\n' | '\r' ) )* '\''
+	:	'"' ( ('\\' ~('\n'))
+	            |  ~( '"' | '\n' | '\r' | '\\' ) 
+	            )* '"'
+	|	'\'' ( ('\\' ~('\n'))
+	             | ~( '\'' | '\n' | '\r' | '\\' ) 
+	             )* '\''
 	;
 
 NUM

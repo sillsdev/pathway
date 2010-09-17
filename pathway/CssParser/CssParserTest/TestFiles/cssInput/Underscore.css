@@ -1,0 +1,10 @@
+.article_L1 > .pronunciation_L2 + .pronunciation_L3::before
+{
+	content: '1 ';
+
+}
+
+.entry_L2
+{
+color: red;
+}

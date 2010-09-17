@@ -1,0 +1,30 @@
+.locator
+{
+	text-align: center;
+        font-size: 10pt;
+}
+
+.locator .letter
+{
+	font-weight:bold;	
+	font-size:20pt;   
+	color:BLUE;
+}
+
+.subentry .letter
+{
+	font-weight:bold;	
+	font-size:20pt;   
+	color:GREEN;	
+}
+
+
+
+
+
+
+
+
+
+
+

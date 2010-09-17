@@ -244,6 +244,7 @@ namespace SIL.PublishingSolution
             {
                 case "padding":
                 case "margin":
+                case "class-margin":
                     Margin(styleAttributeInfo);
                     break;
                 case "color":
@@ -601,6 +602,7 @@ namespace SIL.PublishingSolution
                 case "content":
                 case "position":
                 case "-ps-vertical-justification":
+                case "-ps-fileproduce":
                     _cssProperty[styleAttributeInfo.Name] = value;
                     break;
 
@@ -610,6 +612,10 @@ namespace SIL.PublishingSolution
                 case "margin-right":
                 case "margin-bottom":
                 case "margin-left":
+                case "class-margin-top":
+                case "class-margin-right":
+                case "class-margin-bottom":
+                case "class-margin-left":
                 case "padding-top":
                 case "padding-bottom":
                 case "padding-right":
@@ -625,6 +631,10 @@ namespace SIL.PublishingSolution
                 case "width":
                     value = styleAttributeInfo.StringValue.ToLower() == "auto" ? "72" : Common.UnitConverter(value);
                     _cssProperty[styleAttributeInfo.Name] = value;
+                    break;
+                case "-ps-fixed-line-height":
+                case "string-set":
+                case "unicode-bidi":
                     break;
                 default:
                     throw new Exception("Not a valid CSS Command");

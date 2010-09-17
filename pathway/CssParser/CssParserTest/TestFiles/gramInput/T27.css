@@ -1,0 +1,15 @@
+@page 
+{
+    @top-left 
+    {
+		content: string(guideword, first);
+		margin-top: 1em;
+		 border-bottom: dashed .5pt #aa0000;
+		 border: .5pt;
+		 border: .5pt .5pt;
+		 border: .5pt .5pt .5pt;
+		 border: .5pt .5pt .5pt .5pt;
+		 margin-bottom: 1em;
+		 vertical-align: bottom;
+    }
+}
