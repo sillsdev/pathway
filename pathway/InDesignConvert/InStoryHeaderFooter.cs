@@ -40,7 +40,7 @@ namespace SIL.PublishingSolution
             first,last
         }
 
-        public string CreateStoryforHeaderFooter(string projectPath, string storyName, string contentType, string className)
+        public string CreateStoryforHeaderFooter(string projectPath, string storyName, string contentType, string className, ArrayList headwordStyle)
         {
             string fileName = "Story_" + storyName + ".xml";
             _contentType = contentType;
@@ -82,7 +82,8 @@ namespace SIL.PublishingSolution
             }
             else if (_contentType == "GF" || _contentType == "GL")
             {
-                WriteGuidewordVariable(className);
+                //WriteGuidewordVariable(className);
+                WriteGuidewordVariable(headwordStyle, className);
             }
             else if (_contentType == "BL CL:VL" || _contentType == "BF CF:VF")
             {
@@ -212,58 +213,92 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
         }
 
-        private void WriteGuidewordVariable(string styleName)
+        //private void WriteGuidewordVariable(string styleName)
+        private void WriteGuidewordVariable(ArrayList GuideWordStyle, string PageStyleName)
         {
-            // Note: GuideWord Character Start Element
-            _writer.WriteStartElement("CharacterStyleRange");
-            _writer.WriteAttributeString("AppliedCharacterStyle", "CharacterStyle/" + styleName);
-            if (_contentType == "GF")
+            int i = 1;
+            bool isHomographExist = FindHomographNumber(GuideWordStyle);
+            foreach (string sName in GuideWordStyle)
             {
-                _writer.WriteAttributeString("PageNumberType", "TextVariable");
-                _writer.WriteStartElement("TextVariableInstance");
-                _writer.WriteAttributeString("Self", "uf1");
-                _writer.WriteAttributeString("Name", "FirstGuideword");
-                _writer.WriteAttributeString("ResultText", "&lt;First&gt;");
-                _writer.WriteAttributeString("AssociatedTextVariable", "dTextVariablenFirst");
-                _writer.WriteEndElement();
+                if (GuideWordStyle.Count > 2 && sName.IndexOf("headword") >= 0) continue;
+                if (sName.IndexOf("Guideword") == 0)
+                {
+                    string styleName = Common.RightString(sName, "_");
+                    styleName = "CharacterStyle/" + styleName;
+                    // Note: GuideWord Character Start Element
+                    _writer.WriteStartElement("CharacterStyleRange");
+                    //_writer.WriteAttributeString("AppliedCharacterStyle", styleName);
+                    _writer.WriteAttributeString("AppliedCharacterStyle", PageStyleName);
+                    if (_contentType == "GF")
+                    {
+                        _writer.WriteAttributeString("PageNumberType", "TextVariable");
+                        _writer.WriteStartElement("TextVariableInstance");
+                        _writer.WriteAttributeString("Self", "uf1");
+                        _writer.WriteAttributeString("Name", "FG_" + i);
+                        _writer.WriteAttributeString("ResultText", "&lt;First&gt;");
+                        _writer.WriteAttributeString("AssociatedTextVariable", "dTextVariablenFirst" + i);
+                        _writer.WriteEndElement();
+                    }
+                    if (_contentType == "GL")
+                    {
+                        _writer.WriteAttributeString("PageNumberType", "TextVariable");
+                        _writer.WriteStartElement("TextVariableInstance");
+                        _writer.WriteAttributeString("Self", "ul1");
+                        _writer.WriteAttributeString("Name", "LG_" + i);
+                        _writer.WriteAttributeString("ResultText", "&lt;Last&gt;");
+                        _writer.WriteAttributeString("AssociatedTextVariable", "dTextVariablenLast" + i);
+                        _writer.WriteEndElement();
+                    }
+                    _writer.WriteEndElement();
+                    // Note: GuideWord Character End Element
+                    // Note: HomoGraphNumber Character Start Element
+                    if (isHomographExist)
+                    {
+                        _writer.WriteStartElement("CharacterStyleRange");
+                        _writer.WriteAttributeString("AppliedCharacterStyle",
+                                                     "CharacterStyle/xhomographnumber_headword_entry_letData_dicBody");
+                        //_writer.WriteAttributeString("AppliedCharacterStyle",
+                        //                            homoStyleName);
+                        if (_contentType == "GF")
+                        {
+                            _writer.WriteAttributeString("PageNumberType", "TextVariable");
+                            _writer.WriteStartElement("TextVariableInstance");
+                            _writer.WriteAttributeString("Self", "u678");
+                            _writer.WriteAttributeString("Name", "HGF");
+                            _writer.WriteAttributeString("ResultText", "&lt;HomoGraph&gt;");
+                            _writer.WriteAttributeString("AssociatedTextVariable", "dTextVariablenHomoGraphF");
+                            _writer.WriteEndElement();
+                        }
+                        if (_contentType == "GL")
+                        {
+                            _writer.WriteAttributeString("PageNumberType", "TextVariable");
+                            _writer.WriteStartElement("TextVariableInstance");
+                            _writer.WriteAttributeString("Self", "u678");
+                            _writer.WriteAttributeString("Name", "HGL");
+                            _writer.WriteAttributeString("ResultText", "&lt;HomoGraph&gt;");
+                            _writer.WriteAttributeString("AssociatedTextVariable", "dTextVariablenHomoGraphL");
+                            _writer.WriteEndElement();
+                        }
+                        _writer.WriteEndElement();
+                    }
+                    // Note: HomoGraphNumber Character End Element
+                }
+                i = i + 1;
             }
-            if (_contentType == "GL")
+        }
+
+        private static bool FindHomographNumber(ArrayList styles)
+        {
+            bool result = false;
+            foreach (string styleName in styles)
             {
-                _writer.WriteAttributeString("PageNumberType", "TextVariable");
-                _writer.WriteStartElement("TextVariableInstance");
-                _writer.WriteAttributeString("Self", "ul1");
-                _writer.WriteAttributeString("Name", "LastGuideword");
-                _writer.WriteAttributeString("ResultText", "&lt;Last&gt;");
-                _writer.WriteAttributeString("AssociatedTextVariable", "dTextVariablenLast");
-                _writer.WriteEndElement();
+                if(styleName.IndexOf("HomoGraphNumber_") == 0)
+                {
+                    result = true;
+                    break;
+                }
             }
-            _writer.WriteEndElement();
-            // Note: GuideWord Character End Element
-            // Note: HomoGraphNumber Character Start Element
-            _writer.WriteStartElement("CharacterStyleRange");
-            _writer.WriteAttributeString("AppliedCharacterStyle", "CharacterStyle/xhomographnumber_headword_entry_letData_dicBody");
-            if (_contentType == "GF")
-            {
-                _writer.WriteAttributeString("PageNumberType", "TextVariable");
-                _writer.WriteStartElement("TextVariableInstance");
-                _writer.WriteAttributeString("Self", "u678");
-                _writer.WriteAttributeString("Name", "HomoGraphNumberF");
-                _writer.WriteAttributeString("ResultText", "&lt;HomoGraph&gt;");
-                _writer.WriteAttributeString("AssociatedTextVariable", "dTextVariablenHomoGraphF");
-                _writer.WriteEndElement();
-            }
-            if (_contentType == "GL")
-            {
-                _writer.WriteAttributeString("PageNumberType", "TextVariable");
-                _writer.WriteStartElement("TextVariableInstance");
-                _writer.WriteAttributeString("Self", "u678");
-                _writer.WriteAttributeString("Name", "HomoGraphNumberL");
-                _writer.WriteAttributeString("ResultText", "&lt;HomoGraph&gt;");
-                _writer.WriteAttributeString("AssociatedTextVariable", "dTextVariablenHomoGraphL");
-                _writer.WriteEndElement();
-            }
-            _writer.WriteEndElement();
-            // Note: HomoGraphNumber Character End Element
+            return result;
         }
 
         private void WriteChapterVariable(string styleName, string position)

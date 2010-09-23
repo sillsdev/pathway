@@ -20,14 +20,16 @@ namespace SIL.PublishingSolution
         private string _xPath;
         private XmlElement _nameElement;
         private string _tagName;
+        private bool _isHeadword;
         private ArrayList _textVariables = new ArrayList();
         Dictionary<string, string> _languageStyleName = new Dictionary<string, string>();
         Dictionary<string, Dictionary<string, string>> _childStyle = new Dictionary<string, Dictionary<string, string>>();
 
-        public ArrayList ModifyStylesXML(string projectPath, Dictionary<string, Dictionary<string, string>> childStyle, List<string> usedStyleName, Dictionary<string, string> languageStyleName, string baseStyle)
+        public ArrayList ModifyStylesXML(string projectPath, Dictionary<string, Dictionary<string, string>> childStyle, List<string> usedStyleName, Dictionary<string, string> languageStyleName, string baseStyle, bool isHeadword)
         {
             _childStyle = childStyle;
             _projectPath = projectPath;
+            _isHeadword = isHeadword;
             _languageStyleName = languageStyleName;
             string styleFilePath = OpenIDStyles();
 
@@ -96,14 +98,14 @@ namespace SIL.PublishingSolution
             {
                 _textVariables.Add("hideVerseNumber_" + className);
             }
-            else if (className.IndexOf("headword") == 0)
-            {
-                _textVariables.Add("Guideword_" + className);
-            }
-            else if (className.IndexOf("xhomographnumber_") == 0)
-            {
-                _textVariables.Add("HomoGraphNumber_" + className);
-            }
+            //else if (className.IndexOf("headword") == 0)
+            //{
+            //    _textVariables.Add("Guideword_" + className);
+            //}
+            //else if (className.IndexOf("xhomographnumber") == 0)
+            //{
+            //    _textVariables.Add("HomoGraphNumber_" + className);
+            //}
         }
 
         private void InsertNode(KeyValuePair<string, Dictionary<string, string>> className)

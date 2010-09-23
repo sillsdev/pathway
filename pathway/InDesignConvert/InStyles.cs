@@ -68,7 +68,13 @@ namespace SIL.PublishingSolution
         /// <param name="isIncrease">to increase font-size even the property is not super/sub script</param>
         private void SuperscriptSubscriptIncreaseFontSize(bool isIncrease)
         {
-            if (_IDProperty.ContainsKey("Position") || isIncrease) // increase font-size for superscipt & subscript
+            bool isSuperSub = false;
+            if (_IDProperty.ContainsKey("Position") && (_IDProperty["Position"] == "Subscript" || _IDProperty["Position"] == "Superscript"))
+            {
+                isSuperSub  = true;
+            }
+
+            if (isSuperSub || isIncrease) // increase font-size for superscipt & subscript
             {
                 string newValue = "100%";
                 if (_IDProperty.ContainsKey("PointSize"))

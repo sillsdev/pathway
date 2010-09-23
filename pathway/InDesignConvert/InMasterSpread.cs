@@ -33,14 +33,16 @@ namespace SIL.PublishingSolution
         private string _projectPath = string.Empty;
         readonly ArrayList pageNames = new ArrayList { "@page:first", "@page", "@page:left", "@page:right" };
         Dictionary<string, Dictionary<string, string>> _cssProperty = new Dictionary<string, Dictionary<string, string>>();
+        ArrayList _headwordStyles = new ArrayList();
         #endregion
 
-        public ArrayList CreateIDMasterSpread(string projectPath, Dictionary<string, Dictionary<string, string>> cssProperty)
+        public ArrayList CreateIDMasterSpread(string projectPath, Dictionary<string, Dictionary<string, string>> cssProperty, ArrayList headwordStyles)
         {
             try
             {
                 _cssProperty = cssProperty;
                 _projectPath = projectPath;
+                _headwordStyles = headwordStyles;
                 for (int i = 0; i < pageNames.Count; i++)
                 {
                     string masterFileName = string.Empty;
@@ -160,12 +162,12 @@ namespace SIL.PublishingSolution
 
                         if (property.IndexOf("counter") >= 0)
                         {
-                            newStory = inStoryHeaderFooter.CreateStoryforHeaderFooter(folderPath, storyName, "PageCount", className);
+                            newStory = inStoryHeaderFooter.CreateStoryforHeaderFooter(folderPath, storyName, "PageCount", className, _headwordStyles);
                         }
                         else if (format == "BF CF:VF-CL:VL" || format == "BF CF-CL" || format == "BF CF"
                             || format == "BL CL" || format == "BF CF:VF" || format == "BL CL:VL" || format == "GF" || format == "GL")
                         {
-                            newStory = inStoryHeaderFooter.CreateStoryforHeaderFooter(folderPath, storyName, format, className);
+                            newStory = inStoryHeaderFooter.CreateStoryforHeaderFooter(folderPath, storyName, format, className, _headwordStyles);
                         }
                         if (newStory.Length > 0)
                         {

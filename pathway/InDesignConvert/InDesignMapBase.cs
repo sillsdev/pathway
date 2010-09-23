@@ -19,6 +19,7 @@ using System.IO;
 using System.Xml;
 using System.Collections.Generic;
 using System.Collections;
+using SIL.Tool;
 
 
 namespace SIL.PublishingSolution
@@ -344,61 +345,10 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
-            _writer.WriteStartElement("TextVariable");
-            _writer.WriteAttributeString("Self", "dTextVariablenFirst");
-            _writer.WriteAttributeString("Name", "FirstGuideword");
-            _writer.WriteAttributeString("VariableType", "MatchCharacterStyleType");
-            _writer.WriteStartElement("MatchCharacterStylePreference");
-            _writer.WriteAttributeString("TextBefore", "");
-            _writer.WriteAttributeString("TextAfter", "");
-            _writer.WriteAttributeString("AppliedCharacterStyle", GetStyleNameforVariable("Guideword"));
-            _writer.WriteAttributeString("SearchStrategy", "FirstOnPage");
-            _writer.WriteAttributeString("ChangeCase", "None");
-            _writer.WriteAttributeString("DeleteEndPunctuation", "false");
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-
-            _writer.WriteStartElement("TextVariable");
-            _writer.WriteAttributeString("Self", "dTextVariablenLast");
-            _writer.WriteAttributeString("Name", "LastGuideword");
-            _writer.WriteAttributeString("VariableType", "MatchCharacterStyleType");
-            _writer.WriteStartElement("MatchCharacterStylePreference");
-            _writer.WriteAttributeString("TextBefore", "");
-            _writer.WriteAttributeString("TextAfter", "");
-            _writer.WriteAttributeString("AppliedCharacterStyle", GetStyleNameforVariable("Guideword"));
-            _writer.WriteAttributeString("SearchStrategy", "LastOnPage");
-            _writer.WriteAttributeString("ChangeCase", "None");
-            _writer.WriteAttributeString("DeleteEndPunctuation", "false");
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-
-            _writer.WriteStartElement("TextVariable");
-            _writer.WriteAttributeString("Self", "dTextVariablenHomoGraphF");
-            _writer.WriteAttributeString("Name", "HomoGraphNumberF");
-            _writer.WriteAttributeString("VariableType", "MatchCharacterStyleType");
-            _writer.WriteStartElement("MatchCharacterStylePreference");
-            _writer.WriteAttributeString("TextBefore", "");
-            _writer.WriteAttributeString("TextAfter", "");
-            _writer.WriteAttributeString("AppliedCharacterStyle", GetStyleNameforVariable("HomoGraphNumber"));
-            _writer.WriteAttributeString("SearchStrategy", "FirstOnPage");
-            _writer.WriteAttributeString("ChangeCase", "None");
-            _writer.WriteAttributeString("DeleteEndPunctuation", "false");
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-
-            _writer.WriteStartElement("TextVariable");
-            _writer.WriteAttributeString("Self", "dTextVariablenHomoGraphL");
-            _writer.WriteAttributeString("Name", "HomoGraphNumberL");
-            _writer.WriteAttributeString("VariableType", "MatchCharacterStyleType");
-            _writer.WriteStartElement("MatchCharacterStylePreference");
-            _writer.WriteAttributeString("TextBefore", "");
-            _writer.WriteAttributeString("TextAfter", "");
-            _writer.WriteAttributeString("AppliedCharacterStyle", GetStyleNameforVariable("HomoGraphNumber"));
-            _writer.WriteAttributeString("SearchStrategy", "LastOnPage");
-            _writer.WriteAttributeString("ChangeCase", "None");
-            _writer.WriteAttributeString("DeleteEndPunctuation", "false");
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
+            CreateGuideWord("FG_", "dTextVariablenFirst", "FirstOnPage");
+            CreateGuideWord("LG_", "dTextVariablenLast", "LastOnPage");
+            CreateHomoGraphNumber("HGF", "dTextVariablenHomoGraphF", "FirstOnPage");
+            CreateHomoGraphNumber("HGL", "dTextVariablenHomoGraphL", "LastOnPage");
 
             _writer.WriteStartElement("TextVariable");
             _writer.WriteAttributeString("Self", "dTextVariablenFirstBookName");
@@ -485,6 +435,62 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
         }
 
+        private void CreateGuideWord(string name, string selfName, string position)
+        {
+            int i = 1;
+            foreach (string sName in _textVariables)
+            {
+                if (_textVariables.Count > 2 && sName.IndexOf("headword") >= 0) continue;
+                if (sName.IndexOf("Guideword") == 0)
+                {
+                    string styleName = Common.RightString(sName, "_");
+                    styleName = "CharacterStyle/" + styleName;
+                    _writer.WriteStartElement("TextVariable");
+                    _writer.WriteAttributeString("Self", selfName + i);
+                    _writer.WriteAttributeString("Name", name + i);
+                    _writer.WriteAttributeString("VariableType", "MatchCharacterStyleType");
+                    _writer.WriteStartElement("MatchCharacterStylePreference");
+                    _writer.WriteAttributeString("TextBefore", "");
+                    _writer.WriteAttributeString("TextAfter", "");
+                    _writer.WriteAttributeString("AppliedCharacterStyle", styleName);
+                    _writer.WriteAttributeString("SearchStrategy", position);
+                    _writer.WriteAttributeString("ChangeCase", "None");
+                    _writer.WriteAttributeString("DeleteEndPunctuation", "false");
+                    _writer.WriteEndElement();
+                    _writer.WriteEndElement();
+                }
+                i = i + 1;
+            }
+        }
+
+        private void CreateHomoGraphNumber(string name, string selfName, string position)
+        {
+            int i = 1;
+            foreach (string sName in _textVariables)
+            {
+                if (_textVariables.Count > 2 && sName.IndexOf("headword") >= 0) continue;
+                if (sName.IndexOf("HomoGraphNumber") == 0)
+                {
+                    string styleName = Common.RightString(sName, "_");
+                    styleName = "CharacterStyle/" + styleName;
+                    _writer.WriteStartElement("TextVariable");
+                    _writer.WriteAttributeString("Self", selfName);
+                    _writer.WriteAttributeString("Name", name);
+                    _writer.WriteAttributeString("VariableType", "MatchCharacterStyleType");
+                    _writer.WriteStartElement("MatchCharacterStylePreference");
+                    _writer.WriteAttributeString("TextBefore", "");
+                    _writer.WriteAttributeString("TextAfter", "");
+                    _writer.WriteAttributeString("AppliedCharacterStyle", styleName);
+                    _writer.WriteAttributeString("SearchStrategy", position);
+                    _writer.WriteAttributeString("ChangeCase", "None");
+                    _writer.WriteAttributeString("DeleteEndPunctuation", "false");
+                    _writer.WriteEndElement();
+                    _writer.WriteEndElement();
+                }
+                i = i + 1;
+            }
+        }
+
         private string GetStyleNameforVariable(string name)
         {
             string styleName = name;
@@ -493,7 +499,8 @@ namespace SIL.PublishingSolution
             {
                 if (sName.IndexOf(name) == 0)
                 {
-                    styleName = sName.Substring((name.Length) + 1, (sName.Length - ((name.Length) + 1)));
+                    styleName = Common.RightString(sName, "_");
+                    //styleName = sName.Substring((name.Length) + 1, (sName.Length - ((name.Length) + 1)));
                     styleName = "CharacterStyle/" + styleName;
                     break;
                 }

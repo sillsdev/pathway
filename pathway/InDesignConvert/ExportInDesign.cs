@@ -60,15 +60,17 @@ namespace SIL.PublishingSolution
             preProcessor.GetTempFolderPath();
             preProcessor.PreserveSpace();
             preProcessor.ImagePreprocess();
+            preProcessor.ReplaceInvalidTagtoSpan();
             preProcessor.InsertHiddenChapterNumber();
             preProcessor.InsertHiddenVerseNumber();
             preProcessor.GetDefinitionLanguage();
 
+            string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
             projInfo.DefaultCssFileWithPath = preProcessor.ProcessedCss;
 
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
-            CSSTree cssTree = new CSSTree();
+            CssTree cssTree = new CssTree();
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
             //return false;
             preProcessor.InsertEmptyXHomographNumber(cssClass);
@@ -88,7 +90,7 @@ namespace SIL.PublishingSolution
             Dictionary<string, ArrayList> StyleName = inStory.CreateStory(Common.PathCombine(projInfo.TempOutputFolder, "Stories"), projInfo.DefaultXhtmlFileWithPath, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
             InMasterSpread inMasterSpread = new InMasterSpread();
-            ArrayList masterPageNames = inMasterSpread.CreateIDMasterSpread(Common.PathCombine(projInfo.TempOutputFolder, "MasterSpreads"), idAllClass);
+            ArrayList masterPageNames = inMasterSpread.CreateIDMasterSpread(Common.PathCombine(projInfo.TempOutputFolder, "MasterSpreads"), idAllClass, StyleName["TextVariables"]);
             
             InSpread inSpread = new InSpread();
             inSpread.CreateIDSpread(Common.PathCombine(projInfo.TempOutputFolder, "Spreads"), idAllClass, StyleName["ColumnClass"]);
@@ -101,18 +103,18 @@ namespace SIL.PublishingSolution
 
             SubProcess.AfterProcess(projInfo.ProjectFileWithPath);
 
-            Compress(projInfo.TempOutputFolder, projInfo.DefaultXhtmlFileWithPath);
+            Compress(projInfo.TempOutputFolder, Common.PathCombine(projInfo.ProjectPath, fileName));
 
             return true;
         }
 
         
 
-        private void Compress(string sourceFolder, string DefaultXhtmlFileWithPath)
+        private void Compress(string sourceFolder, string outputPath)
         {
             var mODT = new ZipFolder();
-
-            string outputPathWithFileName = DefaultXhtmlFileWithPath.Replace(".xhtml", ".idml");
+            string outputPathWithFileName = outputPath + ".idml";
+            //string outputPathWithFileName = DefaultXhtmlFileWithPath.Replace(".xhtml", ".idml");
             mODT.CreateZip(sourceFolder, outputPathWithFileName, 0);
             try
             {

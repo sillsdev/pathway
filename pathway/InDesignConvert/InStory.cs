@@ -67,6 +67,8 @@ namespace SIL.PublishingSolution
         private bool _verserNoStart;
         private string _chapterNo;
         private string _verseNo;
+
+        private bool _IsHeadword = false;
         #endregion
 
         public Dictionary<string, ArrayList> CreateStory(string projectPath, string xhtmlFileWithPath, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
@@ -81,6 +83,8 @@ namespace SIL.PublishingSolution
             _styleName["ColumnClass"] = _textFrameClass;
             _styleName["TextVariables"] = _textVariables;
             _styleName["CrossRef"] = _crossRef;
+            if (_headwordStyleName.Count > 0)
+                _styleName["TextVariables"].AddRange(_headwordStyleName);
             return _styleName;
         }
 
@@ -880,7 +884,8 @@ namespace SIL.PublishingSolution
 
         private void StartElement()
         {
-            StartElementBase();
+            SetHeadwordTrue();
+            StartElementBase(_IsHeadword);
             SetClassCounter();
             Psuedo();
             DropCaps();
@@ -909,6 +914,15 @@ namespace SIL.PublishingSolution
                     _textFrameClass.Add(_childName);
                     _columnClass.Add(_childName);
                 }
+            }
+        }
+
+        private void SetHeadwordTrue()
+        {
+            if(_reader.GetAttribute("class") != null &&_reader.GetAttribute("class").ToLower() == "headword")
+            {
+                _IsHeadword = true;
+                _headwordStyles = true;
             }
         }
 
@@ -1035,8 +1049,9 @@ namespace SIL.PublishingSolution
         private void EndElement()
         {
             _characterName = null;
-            WriteEmptyHomographStyle();
+            //WriteEmptyHomographStyle();
             _closeChildName = StackPop(_allStyle);
+            SetHeadwordFalse();
             ClosefooterNote();
             EndElementForImage();
 
@@ -1062,6 +1077,15 @@ namespace SIL.PublishingSolution
             }
             _classNameWithLang = StackPeek(_allStyle);
             _classNameWithLang = Common.LeftString(_classNameWithLang, "_");
+        }
+
+        private void SetHeadwordFalse()
+        {
+            if (_closeChildName.ToLower() == "headword")
+            {
+                _IsHeadword = false;
+                _headwordStyles = false;
+            }
         }
 
         /// <summary>
@@ -1223,7 +1247,7 @@ namespace SIL.PublishingSolution
         private void UpdateRelativeInStylesXML()
         {
             ModifyIDStyles modifyIDStyles = new ModifyIDStyles();
-            _textVariables = modifyIDStyles.ModifyStylesXML(_projectPath, _newProperty, _usedStyleName,_languageStyleName,  "");
+            _textVariables = modifyIDStyles.ModifyStylesXML(_projectPath, _newProperty, _usedStyleName,_languageStyleName,  "", _IsHeadword);
         }
 
         private void CloseFile()

@@ -62,15 +62,19 @@ namespace SIL.PublishingSolution
                         Mirror(property.Value);
                         break;
                     case "padding-left":
+                    case "class-margin-left":
                         PaddingLeft(property.Value);
                         break;
                     case "padding-right":
+                    case "class-margin-right":
                         PaddingRight(property.Value);
                         break;
                     case "padding-top":
+                    case "class-margin-top":
                         PaddingTop(property.Value);
                         break;
                     case "padding-bottom":
+                    case "class-margin-bottom":
                         PaddingBottom(property.Value);
                         break;
                     case "padding":

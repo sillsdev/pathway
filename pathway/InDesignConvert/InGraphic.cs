@@ -27,7 +27,7 @@ namespace SIL.PublishingSolution
     {
         #region Private Variables
         XmlTextWriter _writer;
-        CSSTree _cssTree = new CSSTree();
+        CssTree _cssTree = new CssTree();
         InMapProperty mapProperty = new InMapProperty();
         Dictionary<string, Dictionary<string, string>> _cssProperty = new Dictionary<string, Dictionary<string, string>>();
         ArrayList _cssBorderColor = new ArrayList();

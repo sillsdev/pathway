@@ -55,8 +55,8 @@ namespace SIL.PublishingSolution
             if (projInfo.ProjectInputType == null)
                 projInfo.ProjectInputType = "Dictionary"; //TODO
             _cssClass = cssClass;
-            if (projInfo.FromPlugin)
-                Common.SupportFolder = "PathwaySupport";
+            //if (projInfo.FromPlugin)
+            //    Common.SupportFolder = "PathwaySupport";
 
             //string path = Common.GetApplicationDataPath();
             supportFileFolder = Common.PathCombine(Common.GetPSApplicationPath(), "InDesignFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
@@ -311,7 +311,7 @@ namespace SIL.PublishingSolution
 
         private void GetMarginValue(string className, IList list, string dimension)
         {
-            string styleName = "margin-" + dimension ;
+            string styleName = "class-margin-" + dimension ;
             string margin = _cssClass[className].ContainsKey(styleName) ? _cssClass[className][styleName] : "0";
 
             if (margin != "0" )
@@ -344,6 +344,8 @@ namespace SIL.PublishingSolution
         private static string GetVersionFolderName(string ScriptsFolderWithPath)
         {
             var dirInfo = new DirectoryInfo(ScriptsFolderWithPath);
+            if (!dirInfo.Exists)
+                dirInfo.Create();   // InDesign is not installed.
             DirectoryInfo[] subDirInfo = dirInfo.GetDirectories();
             string version = "Version 6.0";
             foreach (var info in subDirInfo)
