@@ -21,6 +21,7 @@ namespace SIL.Tool
         /// <param name="sourcefile">Source XML File</param>
         public static void SetProgressBarValue(ProgressBar pb, string sourcefile)
         {
+            if (pb == null) return;
             int setValue = 0;
             if (File.Exists(sourcefile))
             {
@@ -489,6 +490,34 @@ namespace SIL.Tool
         }
         #endregion
 
+        #region GetXmlNodes
+        /// <summary>
+        /// Returns XmlNodeList 
+        /// </summary>
+        /// <param name="xmlFileNameWithPath">File Name</param>
+        /// <param name="xPath">Xpath for the XML Node</param>
+        /// <returns>Returns XmlNodeList</returns>
+        public static XmlNodeList GetXmlNodes(string xmlFileNameWithPath, string xPath)
+        {
+            XmlNodeList resultNode = GetXmlNode(xmlFileNameWithPath, xPath).ChildNodes;
+            return resultNode;
+        }
+        #endregion
+
+        #region CreateXMLFile
+        /// <summary>
+        /// Returns XmlTextWriter 
+        /// </summary>
+        /// <param name="xmlFileNameWithPath">File Name</param>
+        /// <returns>Returns XmlTextWriter</returns>
+        public static XmlTextWriter CreateXMLFile(string xmlFileNameWithPath)
+        {
+            XmlTextWriter writer = new XmlTextWriter(xmlFileNameWithPath, null)
+            { Formatting = Formatting.Indented };
+            return writer;
+        }
+        #endregion
+
         #region GetXmlNode
         /// <summary>
         /// Returns ArrayList Example: Apple, Ball
@@ -556,7 +585,8 @@ namespace SIL.Tool
                 namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
                 namespaceManager.AddNamespace("fn", "http://www.w3.org/2005/xpath-functions");
                 var xslt = new XslCompiledTransform();
-                xslt.Load(xsltReader, null, null);
+                var xsltTransformSettings = new XsltSettings {EnableDocumentFunction = true};
+                xslt.Load(xsltReader, xsltTransformSettings, null);
                 xsltReader.Close();
 
                 //Create an XsltArgumentList.
@@ -676,7 +706,7 @@ namespace SIL.Tool
             if (!string.IsNullOrEmpty(cssPath) && File.Exists(cssPath))
             {
                 string fstr = ReadFiletoEnd(cssPath);
-                if (fstr.Contains(".chapter_number") || fstr.Contains(".chapternumber") || fstr.Contains(".verse_number") || fstr.Contains(".versenumber"))
+                if (fstr.Contains(".footnote") || fstr.Contains(".chapter_number") || fstr.Contains(".chapternumber") || fstr.Contains(".verse_number") || fstr.Contains(".versenumber"))
                 {
                     projectType = "Scripture";
                 }
@@ -769,10 +799,21 @@ namespace SIL.Tool
                 if (langCoun.Length == 1)
                 {
                     string path = PathCombine(GetFiledWorksPath(), "Languages");
-                    path = PathCombine(path, language + ".xml");
+                    string f7Path = GetAllUserAppPath() + @"/SIL/FieldWorks 7";
+                    string xPath = "//SpellCheckDictionary24/Uni";
+                    if (Directory.Exists(f7Path))
+                    {
+                        path = PathCombine(f7Path, "Projects\\" + databaseName + "\\WritingSystemStore");
+                        path = PathCombine(path, language + ".ldml");
+                        xPath = "/ldml/special[1]/*[namespace-uri()='urn://palaso.org/ldmlExtensions/v1' and local-name()='spellCheckingId'][1]/@value";
+                    }
+                    else
+                    {
+                        path = PathCombine(path, language + ".xml");
+                    }
                     if (File.Exists(path))
                     {
-                        XmlNode node = GetXmlNode(path, "//SpellCheckDictionary24/Uni");
+                        XmlNode node = GetXmlNode(path, xPath);
                         if (node != null)
                         {
                             country = node.InnerText;
@@ -808,8 +849,9 @@ namespace SIL.Tool
         /// </summary>
         /// <param name="xhtmlFileWithPath">The input Xhtml File </param>
         /// <param name="bookSplitterClass">The class name to split the class</param>
+        /// <param name = "adjacentClass"></param>
         /// <returns>The entire path of the splitted files are retured as List</returns>
-        public static List<string> SplitXhtmlFile(string xhtmlFileWithPath, string bookSplitterClass)
+        public static List<string> SplitXhtmlFile(string xhtmlFileWithPath, string bookSplitterClass,bool adjacentClass)
         {
             List<string> books = new List<string>();
             XmlTextReader _reader;
@@ -857,7 +899,8 @@ namespace SIL.Tool
 
             try
             {
-                SplitXhtmlFile(_reader, writers, bookSplitterClass);
+
+                SplitXhtmlFileAdjacent(_reader, writers, bookSplitterClass, adjacentClass);
 
                 XmlWriter writerClose;
                 foreach (KeyValuePair<string, XmlWriter> pair in writers)
@@ -865,7 +908,6 @@ namespace SIL.Tool
                     writerClose = pair.Value;
                     writerClose.Flush();
                     writerClose.Close();
-
                 }
                 //MessageBox.Show("Completed");
             }
@@ -884,7 +926,7 @@ namespace SIL.Tool
         /// <param name="reader"></param>
         /// <param name="writers"></param>
         /// <param name="bookSplitterClass"></param>
-        static void SplitXhtmlFile(XmlReader reader, Dictionary<string, XmlWriter> writers, string bookSplitterClass)
+        static void SplitXhtmlFileAdjacent(XmlReader reader, Dictionary<string, XmlWriter> writers, string bookSplitterClass,bool adjacentClass)
         {
 
             int srcCount = 0;
@@ -913,7 +955,14 @@ namespace SIL.Tool
                         if (className.ToLower() == bookSplitterClass)
                         {
                             srcCount++;
-                            string f1 = reader.ReadOuterXml();
+                            string f1 = reader.ReadOuterXml();  // current node - Ex: LetHead
+
+                            string f2 = string.Empty;
+                            if (adjacentClass)
+                            {
+                                f2 = reader.ReadOuterXml();  // Adjacent node - Ex: LetData
+                                f1 += f2;
+                            }
 
                             int writerCount = 1;
                             foreach (KeyValuePair<string, XmlWriter> pair in writers)

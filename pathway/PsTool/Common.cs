@@ -26,6 +26,8 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Xml;
+using SIL.PublishingSolution;
+using SIL.Tool.Localization;
 
 #endregion Using
 
@@ -58,9 +60,16 @@ namespace SIL.Tool
         public static string SepPseudo = "..";
         public static string Space = " ";
 
+        static readonly ArrayList _units = new ArrayList();
+        public static ErrorProvider _errProvider = new ErrorProvider();
+
         public static HelpProvider HelpProv = new HelpProvider();
         public static Font UIFont;
         public static OdtType OdType;
+        public static double ColumnWidth = 0.0;
+        public static string errorMessage = string.Empty;
+        public static string databaseName = string.Empty;
+
         public enum FileType
         {
             Directory, DirectoryExcluded, File, FileExcluded, Project
@@ -475,7 +484,7 @@ namespace SIL.Tool
             return result;
         }
         #endregion
- 
+
         #region ConvertToInch(string attribute)
 
         /// <summary>
@@ -672,6 +681,114 @@ namespace SIL.Tool
             }
             catch { }
             return attributeValue;
+        }
+
+        #region AssignValuePageUnit
+        public static bool AssignValuePageUnit(object sender, EventArgs e)
+        {
+            try
+            {
+                //to Validate Units
+                _units.Add("pt");
+                _units.Add("pc");
+                _units.Add("cm");
+                _units.Add("in");
+
+                var ctrl = ((Control)sender);
+                string textValue = ConcateUnit(ctrl);
+                ctrl.Text = textValue;
+                // Page Tab
+                if (ctrl.Name == "txtPageInside")
+                {
+                    errorMessage = RangeValidate(ctrl.Text, ".25in", "1.575in");
+                }
+                else if (ctrl.Name == "txtPageOutside")
+                {
+                    errorMessage = RangeValidate(ctrl.Text, ".25in", "1.575in");
+                }
+                else if (ctrl.Name == "txtPageTop")
+                {
+                    errorMessage = RangeValidate(ctrl.Text, ".25in", "1.575in");
+                }
+                else if (ctrl.Name == "txtPageBottom")
+                {
+                    errorMessage = RangeValidate(ctrl.Text, ".25in", "1.575in");
+                }
+                else if (ctrl.Name == "txtPageGutterWidth")
+                {
+                    errorMessage = RangeValidate(ctrl.Text, "6pt", "1in");
+                }
+
+                if (errorMessage.Trim().Length != 0)
+                {
+                    _errProvider.SetError(ctrl, errorMessage);
+                    return true;
+                }
+                _errProvider.SetError(ctrl, "");
+                return false;
+            }
+            catch (Exception ex)
+            {
+                var msg = new[] { ex.Message };
+                LocDB.Message("errInstlFile", ex.Message, msg, LocDB.MessageTypes.Error,
+                              LocDB.MessageDefault.First);
+                //MessageBox.Show(ex.Message, "Dictionary Setting: AssignValueUnit", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return false;
+        }
+        #endregion AssignValuePageUnit
+
+        /// <summary>
+        /// To add unit value if the field only contains digits.
+        /// </summary>
+        /// <param name="ctrl">Control name</param>
+        /// <returns>value with unit</returns>
+        public static string ConcateUnit(Control ctrl)
+        {
+            string textValue = ctrl.Text.Trim();
+            if (ctrl is TextBox && Common.ValidateNumber(textValue))
+            {
+                const string unit = "pt";
+                int unitExist = textValue.IndexOf(unit);
+                if (unitExist < 1)
+                {
+                    textValue = textValue + unit;
+                }
+            }
+            return textValue;
+        }
+
+        /// <summary>
+        /// Function to validate Minimum and Maximum values
+        /// </summary>
+        /// <param name="controlValue">Control value</param>
+        /// <param name="minValue">Minimum value</param>
+        /// <param name="maxValue">Maximum value</param>
+        /// <returns>string which contains error message</returns>
+        public static string RangeValidate(string controlValue, string minValue, string maxValue)
+        {
+            string message = string.Empty;
+            if (controlValue.Length >= 3)
+            {
+                string userUnit = controlValue.Substring(controlValue.Length - 2);
+                if (userUnit == "in" || userUnit == "pt" || userUnit == "cm" || userUnit == "pc")
+                {
+                    float userValue = float.Parse(controlValue.Substring(0, controlValue.Length - 2));
+                    float convertedMinValue = UnitConverterOO(minValue, userUnit);
+                    float convertedMaxValue = UnitConverterOO(maxValue, userUnit);
+                    if (userValue < convertedMinValue || userValue > convertedMaxValue)
+                    {
+                        message = "Enter a value between " + convertedMinValue + userUnit + " to " + convertedMaxValue + userUnit + " inclusive.";
+                        return message;
+                    }
+                }
+                else
+                {
+                    message = "Please enter the valid Input";
+                    return message;
+                }
+            }
+            return message;
         }
 
         public static string UnitConverter(string inputValue)
@@ -983,16 +1100,17 @@ namespace SIL.Tool
         {
             try
             {
-                string fieldworksVersionPath = GetFieldworksVersionPath();
-                string[] fieldworksVersions = FileData.Get(fieldworksVersionPath).Split(new[] { '\n' });
-                foreach (string fieldworksVersion in fieldworksVersions)
+                foreach (string[] element in VersionElements())
                 {
-                    if (fieldworksVersion == "") break;
-                    string[] element = fieldworksVersion.Trim().Split(new[] { ',' });
                     string fileName = element[0];
                     string version = element[1];
                     string fullName = PathCombine(GetApplicationPath(), fileName);
+                    if (!File.Exists(fullName))
+                        continue;
                     FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(fullName);
+                    if (int.Parse(fileVersionInfo.FileVersion.Substring(0, 1)) > 6 || (fileVersionInfo.FileVersion.StartsWith("6.1")))
+                        if (float.Parse(version.Substring(0, 3)) > 6.0)
+                            continue; // latest version uses reflection and no longer requires precise version agreement
                     if (fileVersionInfo.FileVersion != version)
                         return false;
                 }
@@ -1004,28 +1122,45 @@ namespace SIL.Tool
             }
         }
 
-        public static void SaveFieldworksVersions(string dlls)
+        /// <summary>
+        /// Enumerates the file and its version from the list of required compatible items
+        /// </summary>
+        public static IEnumerable VersionElements()
         {
-            try
+            string fieldworksVersionPath = GetFieldworksVersionPath();
+            string[] fieldworksVersions = FileData.Get(fieldworksVersionPath).Split(new[] { '\n' });
+            foreach (string fieldworksVersion in fieldworksVersions)
             {
-                string fieldworksVersionPath = GetFieldworksVersionPath();
-                var writer = new StreamWriter(fieldworksVersionPath);
-                var di = new DirectoryInfo(dlls);
-                foreach (FileInfo fileInfo in di.GetFiles())
-                {
-                    FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(fileInfo.FullName);
-                    writer.WriteLine(string.Format("{0},{1}", fileInfo.Name, fileVersionInfo.FileVersion));
-                }
-                writer.Close();
-            }
-            catch (Exception)
-            {
+                if (fieldworksVersion == "") break;
+                string[] element = fieldworksVersion.Trim().Split(new[] { ',' });
+                yield return element;
             }
         }
 
+        /// <summary>
+        /// Creates a text file with names and version numbers
+        /// </summary>
+        /// <param name="dlls">path to assemblies to be included for compatibility testing</param>
+        public static void SaveFieldworksVersions(string dlls)
+        {
+            string fieldworksVersionPath = GetFieldworksVersionPath();
+            var writer = new StreamWriter(fieldworksVersionPath);
+            var di = new DirectoryInfo(dlls);
+            foreach (FileInfo fileInfo in di.GetFiles())
+            {
+                FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(fileInfo.FullName);
+                writer.WriteLine(string.Format("{0},{1}", fileInfo.Name, fileVersionInfo.FileVersion));
+            }
+            writer.Close();
+        }
+
+        /// <summary>
+        /// Full name of text file containing dlls and versions in the repository
+        /// </summary>
         public static string GetFieldworksVersionPath()
         {
-            return PathCombine(GetPSApplicationPath(), "FieldworksVersions.txt");
+            return PathCombine(Environment.CurrentDirectory, "../../../../PsSupport/FieldworksVersions.txt");
+            //return PathCombine(GetPSApplicationPath(), "FieldworksVersions.txt");
         }
         #endregion isRightFieldworksVersion()
 
@@ -1109,7 +1244,46 @@ namespace SIL.Tool
         #region GetApplicationPath
         public static string GetApplicationPath()
         {
-            return Path.GetDirectoryName(Application.ExecutablePath);
+            string pathwayDir = PathwayPath.GetPathwayDir();
+            if (string.IsNullOrEmpty(pathwayDir))
+                return Path.GetDirectoryName(Application.ExecutablePath);
+            return pathwayDir;
+        }
+
+        public static string ProgBase = string.Empty;
+        /// <summary>
+        /// Calculates the path to the file based on the program directory set in the registry.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <returns>full path to the file</returns>
+        public static string FromRegistry(string file)
+        {
+            if (Path.IsPathRooted(file))
+                return file;
+            if (string.IsNullOrEmpty(ProgBase))
+            {
+                ProgBase = PathwayPath.GetPathwayDir();
+                if (string.IsNullOrEmpty(ProgBase))
+                {
+                    Debug.Fail(@"Pathway directory is not specified in the registry (HKEY_LOCAL_MACHINE/SOFTWARE/SIL/PATHWAY/PathwayDir)");
+                    return FromProg(file);
+                }
+            }
+            return Path.Combine(ProgBase, file);
+        }
+
+        /// <summary>
+        /// Calculates the path to the file based on where the program is installed
+        /// </summary>
+        /// <param name="s">path to file potentially relative to where program was installed</param>
+        /// <returns>full path to file reference by s</returns>
+        public static string FromProg(string s)
+        {
+            if (Path.IsPathRooted(s))
+                return s;
+            if (string.IsNullOrEmpty(ProgBase))
+                ProgBase = Path.GetDirectoryName(Application.ExecutablePath);
+            return Common.PathCombine(ProgBase, s);
         }
         #endregion
 
@@ -1168,6 +1342,16 @@ namespace SIL.Tool
         {
             string allUserPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
             allUserPath += "/SIL/Pathway";
+            return DirectoryPathReplace(allUserPath);
+        }
+
+        /// <summary>
+        /// Get all user AppPath Alone
+        /// </summary>
+        /// <returns></returns>
+        public static string GetAllUserAppPath()
+        {
+            string allUserPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
             return DirectoryPathReplace(allUserPath);
         }
 
@@ -1404,6 +1588,7 @@ namespace SIL.Tool
         public static string CalcDimension(string fromPath, string imgDimension, char Type)
         {
             double retValue = 0.0;
+            bool result;
             try
             {
                 if (File.Exists(fromPath))
@@ -1412,9 +1597,14 @@ namespace SIL.Tool
                     double height = fullimage.Height;
                     double width = fullimage.Width;
                     fullimage.Dispose();
+
                     if (Type == 'W')
                     {
                         retValue = width / height * double.Parse(imgDimension);
+                        if (ColumnWidth > 0 && retValue > ColumnWidth)
+                        {
+                            retValue = ColumnWidth * .9;
+                        }
                     }
                     else if (Type == 'H')
                     {

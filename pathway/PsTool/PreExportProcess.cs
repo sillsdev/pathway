@@ -72,6 +72,7 @@ namespace SIL.Tool
         }
 
         string tempFolder = Common.PathCombine(Path.GetTempPath(), "Preprocess12");
+
         #region XHTML PreProcessor
         /// <summary>
         /// To swap the headword and reversal-form when main.xhtml and FlexRev.xhtml included
@@ -209,14 +210,43 @@ namespace SIL.Tool
             if (cssClass.ContainsKey("xhomographnumber"))
             {
                 string OutputFile = OpenFile();
-                const string pattern = "<span class=\"headword\" ([^>]+)>[^<]*</[^>]+>";
+                string pattern = "<span class=\"headword\" ([^>]+)>[^<]*</[^>]+>";
                 MatchCollection matchs = Regex.Matches(_fileContent.ToString(), pattern);
+                if(matchs.Count == 0)
+                {
+                    pattern = "{<span class=\"headword\" ([^>]+)><span class=\"xitem\" ([^>]+)>[^<]*</[^>]+><span class=\"xitem\" ([^>]+)>[^<]*</[^>]+><span class=\"xitem\" ([^>]+)>[^<]*</[^>]+>[^>]+>}|{<span class=\"headword\" ([^>]+)>[^<].+[^>]+>[^<].+[^>]+>[^<].+[^>]+>}";
+                    matchs = Regex.Matches(_fileContent.ToString(), pattern);
+                    if(matchs.Count > 0)
+                    {
+                        foreach (Match match in matchs)
+                        {
+                            if (match.Value.IndexOf("xhomographnumber") != -1)
+                                continue;
+                            pattern = "<span class=\"xitem\" ([^>]+)>[^<]*</[^>]+>";
+                            MatchCollection matchs1 = Regex.Matches(match.Value, pattern);
+                            if (matchs1.Count > 0)
+                            {
+                                foreach (Match match1 in matchs1)
+                                {
+                                    string matchText = match1.Value;
+                                    const string replace = "<span class=\"xhomographnumber\"> </span>";
+                                    string replaceText = match1.Value.Replace("</span>", "") + replace + "</span>";
+                                    _fileContent.Replace(matchText, replaceText);
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+                else
+                {
                 foreach (Match match in matchs)
                 {
                     string matchText = match.Value;
                     const string replace = "<span class=\"xhomographnumber\"> </span>";
                     string replaceText = match.Value.Replace("</span>", "") + replace + "</span>";
                     _fileContent.Replace(matchText, replaceText);
+                    }
                 }
                 var writer = new StreamWriter(OutputFile);
                 writer.Write(_fileContent);
@@ -226,18 +256,40 @@ namespace SIL.Tool
             return _xhtmlFileNameWithPath;
         }
 
+        public string ReplaceInvalidTagtoSpan()
+        {
+                string OutputFile = OpenFile();
+                const string pattern = "_AllComplexFormEntryBackRefs|LexEntryRef_PrimaryLexemes";
+                MatchCollection matchs = Regex.Matches(_fileContent.ToString(), pattern);
+                foreach (Match match in matchs)
+                {
+                    string matchText = match.Value;
+                    const string replaceText = "span";
+                    //const string replaceText = "";
+                    _fileContent.Replace(matchText, replaceText);
+                }
+                var writer = new StreamWriter(OutputFile);
+                writer.Write(_fileContent);
+                writer.Close();
+                _xhtmlFileNameWithPath = OutputFile;
+
+            return _xhtmlFileNameWithPath;
+        }
+
         private string OpenFile()
         {
-                string tempFolder = Common.PathCombine(Path.GetTempPath(), "IDPreprocess");
-                if (Directory.Exists(tempFolder))
-                {
-                    Directory.Delete(tempFolder, true);
-                }
-                Directory.CreateDirectory(tempFolder);
+            //string tempFolder = Common.PathCombine(Path.GetTempPath(), "IDPreprocess");
+            //if (Directory.Exists(tempFolder))
+            //{
+            //    Directory.Delete(tempFolder, true);
+            //}
+            //Directory.CreateDirectory(tempFolder);
 
-            string OutputFile = Common.PathCombine(tempFolder, Path.GetFileName(_xhtmlFileNameWithPath));
-            File.Copy(Common.DirectoryPathReplace(_xhtmlFileNameWithPath), OutputFile, true);
+            //string OutputFile = Common.PathCombine(tempFolder, Path.GetFileName(_xhtmlFileNameWithPath));
+            ////string OutputFile = _xhtmlFileNameWithPath;
+            //File.Copy(Common.DirectoryPathReplace(_xhtmlFileNameWithPath), OutputFile, true);
 
+            string OutputFile = _xhtmlFileNameWithPath;
             var reader = new StreamReader(OutputFile, Encoding.UTF8);
             _fileContent.Append(reader.ReadToEnd());
                 reader.Close();

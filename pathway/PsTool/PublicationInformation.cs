@@ -53,6 +53,9 @@ namespace SIL.Tool
         private string _DefaultXhtmlFileWithPath;
         private XmlDocument _DeXml = new XmlDocument();
         private bool _fromPlugin = false;
+        public string FinalOutput;
+        public string FileToProduce = string.Empty;
+        public bool MoveStyleToContent = false;
 
 
 
@@ -236,7 +239,14 @@ namespace SIL.Tool
         /// <returns>Returns the Matched Node</returns>
         public XmlNode SearchNode(string xPath)
         {
-            XmlNode returnNode = GetRootNode().SelectSingleNode(xPath);
+            XmlNode returnNode = null;
+            try
+            {
+                returnNode = GetRootNode().SelectSingleNode(xPath);
+            }
+            catch
+            {
+            } 
             return returnNode;
         }
 
@@ -811,6 +821,7 @@ namespace SIL.Tool
         {
             XmlNode newNode;
             XmlElement root = GetRootNode();
+            if (root == null) return false;
             XmlAttribute xmlAttrib;
             XmlNode searchNode = GetSolutionExplorerNode();
             // Force to add in Root Node
@@ -854,7 +865,7 @@ namespace SIL.Tool
                         {
                             ext = new[] { ".xhtml", ".lift" };
                             _DefaultXhtmlFileWithPath = Common.PathCombine(_dictionaryPath, fileName);
-                            DESetAttribute("/Project/DocumentSettings/Sections/Section[@Name='Main']", "Value", fileName);
+                            DESetAttribute("//Project/DocumentSettings/Sections/Section[@Name='Main']", "Value", fileName);
                         }
                         
                         DicExplorerRemoveDefault(root.FirstChild, ext);  // Remove the Default Css
@@ -1085,13 +1096,13 @@ namespace SIL.Tool
         /// <summary>
         /// Set Attribute value in DE.XML
         /// </summary>
-        /// <param name="nodeName">xpath node</param>
+        /// <param name="xPath">xpath node</param>
         /// <param name="attributeName">Attribute Name</param>
         /// <param name="attributeValue">Attribute Value</param>
-        public void DESetAttribute(string nodeName, string attributeName, string attributeValue)
+        public void DESetAttribute(string xPath, string attributeName, string attributeValue)
         {
-            string xPath = "//" + nodeName;
-            xPath = xPath.Replace("///", "//");
+            //string xPath = "//" + nodeName;
+            //xPath = xPath.Replace("///", "//");
             XmlNode returnNode = GetRootNode().SelectSingleNode(xPath);
             if (returnNode == null) return;
             var nameElement = (XmlElement)returnNode;

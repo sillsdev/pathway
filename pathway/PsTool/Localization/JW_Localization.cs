@@ -8,19 +8,12 @@
  *********************************************************************************************/
 #region Using
 using System;
-using System.Collections;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Globalization;
 using System.Reflection;
 using System.Text;
-using System.Threading;
 using System.Windows.Forms;
 using System.IO;
 using JWTools;
-using Microsoft.Win32;
 #endregion
 
 namespace SIL.Tool.Localization

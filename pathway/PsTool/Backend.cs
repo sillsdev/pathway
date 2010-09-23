@@ -31,7 +31,7 @@ namespace SIL.PublishingSolution
     {
         private static List<IExportProcess> _backend = new List<IExportProcess>();
         private static ArrayList _exportType = new ArrayList();
-
+        private static VerboseClass verboseClass;
         public static void Load(string path)
         {
             if (!Directory.Exists(path))
@@ -41,7 +41,7 @@ namespace SIL.PublishingSolution
 
             _backend.Clear();
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
-            foreach (FileInfo fileInfo in directoryInfo.GetFiles("*.dll"))
+            foreach (FileInfo fileInfo in directoryInfo.GetFiles("*Convert.dll"))
             {
                 //IExportProcess exportProcess =
                 //    CreateObject(fileInfo.FullName, "SIL.PublisingSoltuion." + Path.GetFileNameWithoutExtension(fileInfo.Name)) as
@@ -68,7 +68,14 @@ namespace SIL.PublishingSolution
             foreach (IExportProcess process in _backend)
             {
                 if (process.Handle(inputDataType))
+                {
+                    if (process.ExportType.ToLower() == "openoffice")
+                    {
+                        _exportType.Add("Word (Using OpenOffice)");
+                        _exportType.Add("Pdf (Using OpenOffice) ");
+                    }
                     _exportType.Add(process.ExportType);
+                }
             }
             return _exportType;
         }
@@ -76,20 +83,63 @@ namespace SIL.PublishingSolution
         public static bool Launch(string type, PublicationInformation publicationInformation)
         {
             string xhtmlFile = publicationInformation.DefaultXhtmlFileWithPath;
+            CreateVerbose(publicationInformation);
             try
             {
                 foreach (IExportProcess process in _backend)
                 {
+                    if (process.ExportType.ToLower() == "openoffice")
+                        type = OpenOfficeClassifier(publicationInformation, type); // Cross checking for OpenOffice
+
                     if (process.ExportType.ToLower() == type.ToLower())
                         return process.Export(publicationInformation);
                 }
-
             }
             finally
             {
                 publicationInformation.DefaultXhtmlFileWithPath = xhtmlFile;
+                ShowVerbose(publicationInformation);
             } 
             return false;
+        }
+
+        private static void ShowVerbose(PublicationInformation publicationInformation)
+        {
+            if (verboseClass.ErrorCount > 0)
+            {
+                verboseClass.Close();
+                string errFileName = Path.GetFileNameWithoutExtension(publicationInformation.DefaultXhtmlFileWithPath) + "_err.html";
+                Common.OpenOutput(errFileName);
+            }
+        }
+
+        private static void CreateVerbose(PublicationInformation publicationInformation)
+        {
+            verboseClass = VerboseClass.GetInstance();
+            verboseClass.ErrorCount = 0; // reset to zero for every launch
+            if (!File.Exists(publicationInformation.DefaultCssFileWithPath))
+            {
+                verboseClass.ErrorFileName = Path.GetFileNameWithoutExtension(publicationInformation.DefaultXhtmlFileWithPath) + "_err.html";
+                verboseClass.WriteError("", "", publicationInformation.DefaultCssFileWithPath + "  Css file is missing", "");
+            }
+        }
+
+        private static string OpenOfficeClassifier(PublicationInformation publicationInformation, string type)
+        {
+            if (type.ToLower().IndexOf("openoffice") >= 0)
+            {
+                publicationInformation.FinalOutput = "odt";
+                if(type.ToLower().IndexOf("word") >= 0)
+                {
+                    publicationInformation.FinalOutput = "doc";
+                }
+                if (type.ToLower().IndexOf("pdf") >= 0)
+                {
+                    publicationInformation.FinalOutput = "pdf";
+                }
+                type = "openoffice";
+            }
+            return type;
         }
 
         /// <summary>
@@ -158,13 +208,13 @@ namespace SIL.PublishingSolution
                     message += "\r\nInner exception message = " + inner.Message;
                     inner = inner.InnerException;
                 }
-                throw new ConfigurationException(message);
+                throw new ConfigurationErrorsException(message);
             }
             if (thing == null)
             {
                 // Bizarrely, CreateInstance is not specified to throw an exception if it can't
                 // find the specified class. But we want one.
-                throw new ConfigurationException(CouldNotCreateObjectMsg(assemblyPath, className));
+                throw new ConfigurationErrorsException(CouldNotCreateObjectMsg(assemblyPath, className));
             }
             return thing;
         }

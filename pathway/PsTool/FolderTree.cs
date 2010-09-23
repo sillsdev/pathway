@@ -31,9 +31,12 @@ namespace SIL.Tool
             if (!Directory.Exists(dst))
                 Directory.CreateDirectory(dst);
             var di = new DirectoryInfo(src);
-            foreach (var fileInfo in di.GetFiles())
+            foreach (FileInfo fileInfo in di.GetFiles())
             {
                 string dstFullName = Common.PathCombine(dst, fileInfo.Name);
+                FileInfo dstInfo = new FileInfo(dstFullName);
+                if (dstInfo.Exists && dstInfo.IsReadOnly)
+                    dstInfo.Attributes = dstInfo.Attributes & ~FileAttributes.ReadOnly;
                 File.Copy(fileInfo.FullName, dstFullName, true);
                 File.SetAttributes(dstFullName, File.GetAttributes(fileInfo.FullName));
             }

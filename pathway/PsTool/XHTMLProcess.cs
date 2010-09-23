@@ -88,6 +88,9 @@ namespace SIL.PublishingSolution
         protected string _imageClass;
         protected string _imageSrcClass;
 
+        protected ArrayList _headwordStyleName = new ArrayList();
+        protected bool _headwordStyles = false;
+
         #endregion
 
         #region Constructor
@@ -120,15 +123,16 @@ namespace SIL.PublishingSolution
             return result;
         }
 
-
-        protected void StartElementBase()
+        protected void StartElementBase(bool isHeadword)
         {
+
             ClassInfo classInfo = new ClassInfo();
             _classNameWithLang = GetTagInfo();
             _xhtmlClassAttrib.SetClassAttrib(_className, _xhtmlAttribute);
             classInfo.CoreClass = _xhtmlClassAttrib;
             classInfo.Precede = _precedeClassAttrib;
             _childName = FindStyleName();
+            GetHeadwordStyles(isHeadword);
             _allStyleInfo.Push(classInfo);
 
             BlockInline();
@@ -171,6 +175,31 @@ namespace SIL.PublishingSolution
             }
             if (_tagType != "img")
                 _allStyle.Push(_childName);
+        }
+
+        /// <summary>
+        /// To get the headwords styles for header
+        /// </summary>
+        /// <param name="isHeadword">true/false to get only headword styles</param>
+        private void GetHeadwordStyles(bool isHeadword)
+        {
+            if (isHeadword)
+            {
+                string styleName;
+                string headwordStyle = _childName;
+                if (headwordStyle.IndexOf("xhomographnumber") >= 0)
+                {
+                    styleName = "HomoGraphNumber_" + headwordStyle;
+                    if (!_headwordStyleName.Contains(styleName))
+                        _headwordStyleName.Add(styleName);
+                }
+                else
+                {
+                    styleName = "Guideword_" + headwordStyle;
+                    if (!_headwordStyleName.Contains(styleName))
+                        _headwordStyleName.Add(styleName);
+                }
+            }
         }
 
         private void BlockInline()
@@ -443,6 +472,8 @@ namespace SIL.PublishingSolution
         private string GetStyleNumber(string styleName)
         {
             if(styleName == "headword") return styleName;
+            if (styleName == "xhomographnumber") return styleName;
+            if (_headwordStyles) return styleName;
             int suffix = 1;
             string newname;
             while(true)
@@ -574,7 +605,7 @@ namespace SIL.PublishingSolution
             {
                 foreach (KeyValuePair<string, string> property in IdAllClass[parentStyle])
                 {
-                    if (_tempStyle.ContainsKey(property.Key)) continue;
+                    if (_tempStyle.ContainsKey(property.Key) || property.Key == "TextColumnCount") continue;
                     _tempStyle[property.Key] = property.Value;
                 }
             }
