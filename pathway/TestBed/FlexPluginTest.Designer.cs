@@ -44,12 +44,15 @@
             this.txtInputPath = new System.Windows.Forms.TextBox();
             this.Btn_InputPath = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chkIncrease = new System.Windows.Forms.CheckBox();
             this.btnFileSizeZero = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.chkIncrease = new System.Windows.Forms.CheckBox();
+            this.button6 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -210,6 +213,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button5);
+            this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.panel2);
             this.groupBox1.Controls.Add(this.InDesign);
@@ -219,6 +224,28 @@
             this.groupBox1.TabIndex = 51;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "InDesign Export";
+            // 
+            // button5
+            // 
+            this.button5.AccessibleName = "BtnFlexTest";
+            this.button5.Location = new System.Drawing.Point(188, 136);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(118, 28);
+            this.button5.TabIndex = 53;
+            this.button5.Text = "&Builder";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button4
+            // 
+            this.button4.AccessibleName = "BtnFlexTest";
+            this.button4.Location = new System.Drawing.Point(41, 136);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(129, 28);
+            this.button4.TabIndex = 52;
+            this.button4.Text = "&OpenOffice NEW CSS PARSER";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button1
             // 
@@ -246,6 +273,16 @@
             this.groupBox2.TabIndex = 52;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Flex and TE Test";
+            // 
+            // chkIncrease
+            // 
+            this.chkIncrease.AutoSize = true;
+            this.chkIncrease.Location = new System.Drawing.Point(408, 213);
+            this.chkIncrease.Name = "chkIncrease";
+            this.chkIncrease.Size = new System.Drawing.Size(109, 17);
+            this.chkIncrease.TabIndex = 54;
+            this.chkIncrease.Text = "Increase File Size";
+            this.chkIncrease.UseVisualStyleBackColor = true;
             // 
             // btnFileSizeZero
             // 
@@ -279,15 +316,15 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // chkIncrease
+            // button6
             // 
-            this.chkIncrease.AutoSize = true;
-            this.chkIncrease.Location = new System.Drawing.Point(408, 213);
-            this.chkIncrease.Name = "chkIncrease";
-            this.chkIncrease.Size = new System.Drawing.Size(109, 17);
-            this.chkIncrease.TabIndex = 54;
-            this.chkIncrease.Text = "Increase File Size";
-            this.chkIncrease.UseVisualStyleBackColor = true;
+            this.button6.Location = new System.Drawing.Point(26, 421);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 53;
+            this.button6.Text = "button6";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // FlexPluginTest
             // 
@@ -295,6 +332,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(646, 443);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
@@ -336,5 +374,8 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button btnFileSizeZero;
         private System.Windows.Forms.CheckBox chkIncrease;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
     }
 }

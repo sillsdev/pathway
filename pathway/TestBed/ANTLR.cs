@@ -43,19 +43,39 @@ namespace TestBed
                 }
                 CommonTree r = ctp.Root;
                 _nodeTemp.Nodes.Clear();
-                if (r.Text != "nil")
+                if (r.Text != "nil" && r.Text != null)
                 {
-                    _nodeTemp.Nodes.Add("nil");
+                    _nodeTemp.Text = "nil";
                     AddSubTree(_nodeTemp, r, ctp);
                 }
                 else
                 {
-                    _nodeTemp.Text = r.Text;
+                    string rootNode = r.Text ?? "nil";
+                    _nodeTemp.Text = rootNode;
                     foreach (CommonTree child in ctp.Children(r))
                     {
                         AddSubTree(_nodeTemp, child, ctp);
                     }
                 }
+
+
+                ////if (r.Text != "nil")
+                ////{
+                ////    _nodeTemp.Nodes.Add("nil");
+                ////    AddSubTree(_nodeTemp, r, ctp);
+                ////}
+                ////else
+                ////{
+                //_nodeTemp.Text = r.Text;
+                //if (r.Text != "nil" || r.Text == "")
+                //{
+                //    _nodeTemp.Text = "nil";
+                //}
+                //foreach (CommonTree child in ctp.Children(r))
+                //{
+                //    AddSubTree(_nodeTemp, child, ctp);
+                //}
+                ////}
             }
             treeView1.Nodes.Clear();
             treeView1.Nodes.Add((TreeNode)_nodeTemp.Clone());

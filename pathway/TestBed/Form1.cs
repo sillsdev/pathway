@@ -53,7 +53,7 @@ namespace TestBed
             dlg.Filter = "Cascading Style Sheet (*.css)|*.css";
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                var clsBL = new CSSParser();
+                var clsBL = new CssParser();
                 TreeNode node = clsBL.BuildTree(dlg.FileName);
                 treeView1.Nodes.Clear();
                 treeView1.Nodes.Add((TreeNode)node.Clone());

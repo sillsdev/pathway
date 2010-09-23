@@ -26,40 +26,38 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CorporateBTE|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Corporate7BTE\</OutputPath>
+    <OutputPath>bin\CorporateBTE\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CorporateSE|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Corporate7SE\</OutputPath>
+    <OutputPath>bin\CorporateSE\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwCtx|AnyCPU' ">
-    <OutputPath>bin\PwCtx\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ConTeXt|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\ConTeXt\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr3.Runtime, Version=0.3.0.37313, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="Antlr3.Runtime, Version=3.1.3.42154, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\CssParser\bin\Debug\Antlr3.Runtime.dll</HintPath>
+      <HintPath>..\ThirdParty\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="CssDialog, Version=0.5.11.2111, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="FwUtils, Version=6.0.1.21083, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\CssDialog\bin\Debug\CssDialog.dll</HintPath>
-    </Reference>
-    <Reference Include="FwUtils, Version=6.0.4.16380, Culture=neutral, PublicKeyToken=null">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\PsExport\Dlls\FwUtils.dll</HintPath>
+      <HintPath>..\PsExport\Dlls601\FwUtils.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -86,17 +84,10 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="GoBibleExport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GoBibleExport.Designer.cs">
-      <DependentUpon>GoBibleExport.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ANTLR.resx">
       <DependentUpon>ANTLR.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FlexPluginTest.resx">
       <DependentUpon>FlexPluginTest.cs</DependentUpon>
@@ -104,11 +95,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GoBibleExport.resx">
-      <DependentUpon>GoBibleExport.cs</DependentUpon>
-      <SubType>Designer</SubType>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -126,37 +112,37 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\InDesignConvert\InDesignConvert.csproj">
+    <ProjectReference Include="..\CssDialog\CssDialog60.csproj">
+      <Project>{1A58ECC5-75FE-4FE2-B133-8605B382B7C0}</Project>
+      <Name>CssDialog60</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CssParser\CssParser60.csproj">
+      <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
+      <Name>CssParser60</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InDesignConvert\InDesignConvert60.csproj">
       <Project>{8D0D307D-3785-4561-A923-FF3DDF6C2F14}</Project>
-      <Name>InDesignConvert</Name>
+      <Name>InDesignConvert60</Name>
     </ProjectReference>
     <ProjectReference Include="..\LiftPrepare\LiftPrepare.csproj">
       <Project>{D38235F3-5B02-4835-B380-40E0BDCD5495}</Project>
       <Name>LiftPrepare</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OdtConvert\OdtConvert.csproj">
-      <Project>{21F7EE2E-B691-4E3D-B734-BC94B4AA891F}</Project>
-      <Name>OdtConvert</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenOfficeConvert\OpenOfficeConvert.csproj">
+    <ProjectReference Include="..\OpenOfficeConvert\OpenOfficeConvert60.csproj">
       <Project>{E225E5AF-B603-41D1-BB58-E3AAE05C59FD}</Project>
-      <Name>OpenOfficeConvert</Name>
+      <Name>OpenOfficeConvert60</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenOfficeWriter\OpenOfficeWriter.csproj">
+    <ProjectReference Include="..\OpenOfficeWriter\OpenOfficeWriter60.csproj">
       <Project>{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}</Project>
-      <Name>OpenOfficeWriter</Name>
+      <Name>OpenOfficeWriter60</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PsExport\PsExport.csproj">
+    <ProjectReference Include="..\PsExport\PsExport60.csproj">
       <Project>{DCD48287-7F36-4DBB-94CF-4FF617BF1F78}</Project>
-      <Name>PsExport</Name>
+      <Name>PsExport60</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PsTool\PsTool.csproj">
+    <ProjectReference Include="..\PsTool\PsTool60.csproj">
       <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
-      <Name>PsTool</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CssParser\CssParser.csproj">
-      <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
-      <Name>CssParser</Name>
+      <Name>PsTool60</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -168,7 +154,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>%25COMSPEC%25 /c ..\..\InDesignPostBuild.bat $(ConfigurationName)</PostBuildEvent>
   </PropertyGroup>
 </Project>

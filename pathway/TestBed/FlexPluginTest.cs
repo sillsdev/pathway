@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
+using System.Xml;
 using SIL.PublishingSolution;
 using SIL.PublishingSolution.Sort;
 using SIL.Tool;
@@ -27,7 +28,10 @@ namespace TestBed
     public partial class FlexPluginTest : Form
     {
         private static string designerPath = "c:/AccessName/";
-        private List<string> fileNames = new List<string>();
+        private static List<string> fileNames = new List<string>();
+        private static string sourceFolder = "c:\\temp";
+
+
         public FlexPluginTest()
         {
             InitializeComponent();
@@ -228,19 +232,27 @@ namespace TestBed
             plugin.Export(outputpath);
 
         }
-
+      
         private void BtnFlexTest_Click(object sender, EventArgs e)
         {
+            //var rule = new string[1] { @"&B < b < A < a" };
+            //string path = "c:\\lifttest\\buangverysmall.lift";
+            //string outputPath = "c:\\lifttest\\output.lift";
+            //LiftEntrySorter ls = new LiftEntrySorter();
+            //ls.addRules(rule);
+            //LiftWriter lw = new LiftWriter(outputPath);
+            //LiftReader lr = new LiftReader(path);
+            //ls.sort(lr,lw);
+            //return;
+
             //MessageBox.Show(Common.ValidateStartsWithAlphabet(txtInputPath.Text).ToString());
             //return;
-            var rule = new string[1] { @"&B < b < A < a" };
-            string path = "c:\\lifttest\\buangverysmall.lift";
-            string outputPath = "c:\\lifttest\\output.lift";
-            LiftEntrySorter ls = new LiftEntrySorter();
-            ls.addRules(rule);
-            LiftWriter lw = new LiftWriter(outputPath);
-            LiftReader lr = new LiftReader(path);
-            ls.sort(lr,lw);
+
+            //string outputpath = "c:\\file1.xhtml";
+            //string splitclass = "scrbook";
+            //List<string> files = Common.SplitXhtmlFile(outputpath, splitclass);
+            //return;
+
         }
 
         private void InDesign_Click(object sender, EventArgs e)
@@ -304,7 +316,7 @@ namespace TestBed
                 MessageBox.Show("Please enter the valid CSS path");
                 return;
             }
-
+            
             ExportOpenOffice exportOdt = new ExportOpenOffice() ;
            // ExportOdt exportOdt = new ExportOdt();
             PublicationInformation projInfo = new PublicationInformation();
@@ -387,6 +399,104 @@ namespace TestBed
                 // Call recursively.
                 IncreaseFileSizeFromZeroBites(destinationDir);
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(txtInputPath.Text))
+            {
+                MessageBox.Show("Please enter the valid XHTML path");
+                return;
+            }
+
+            if (!File.Exists(txtCSSInput.Text))
+            {
+                MessageBox.Show("Please enter the valid CSS path");
+                return;
+            }
+
+            OOExportOpenOffice exportOdt = new OOExportOpenOffice();
+            // ExportOdt exportOdt = new ExportOdt();
+            PublicationInformation projInfo = new PublicationInformation();
+
+            projInfo.ProjectInputType = "Dictionary";
+            projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
+            projInfo.DictionaryPath = Path.GetDirectoryName(txtInputPath.Text);
+            projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
+            projInfo.DefaultCssFileWithPath = txtCSSInput.Text;
+            projInfo.ProgressBar = new ProgressBar();
+            projInfo.DictionaryOutputName = "test";
+            exportOdt.Export(projInfo);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            fileNames.Clear();
+            sourceFolder = "c:\\temp";
+            GetFilesFromFolder(sourceFolder);
+
+            // Get files from Xml
+            List<string> fileNamesXml = new List<string>();
+            XmlNode returnValue = null;
+            XmlDocument LoadedDoc = new XmlDocument();
+            LoadedDoc.Load("c:\\FileLibrary.xml");
+            string XPath = "//FileLibrary";
+            XmlElement root = LoadedDoc.DocumentElement;
+            if (root != null)
+            {
+                returnValue = root.SelectSingleNode(XPath);
+                foreach (XmlNode xmlNode in returnValue.ChildNodes)
+                {
+                    string path = xmlNode.Attributes.GetNamedItem("Path").Value;
+                    fileNamesXml.Add(path);
+                }
+            }
+
+            //Find missing files in xml 
+            foreach (string file in fileNames)
+            {
+                if (!fileNamesXml.Contains(file))
+                {
+                    string newGuid = Guid.NewGuid().ToString();
+                    //Add a File Node
+                    XmlNode newNode = LoadedDoc.CreateNode("element", "File", "");
+                    XmlAttribute xmlAttrib = LoadedDoc.CreateAttribute("Path");
+                    xmlAttrib.Value = file;
+                    newNode.Attributes.Append(xmlAttrib);
+
+                    xmlAttrib = LoadedDoc.CreateAttribute("ComponentGuid");
+                    xmlAttrib.Value = newGuid;
+                    newNode.Attributes.Append(xmlAttrib);
+                    root.LastChild.AppendChild(newNode);
+                }
+            }
+            LoadedDoc.Save("c:\\FileLibrary.xml");
+        }
+
+        public static void GetFilesFromFolder(string srcfolder)
+        {
+
+            var dir = new DirectoryInfo(srcfolder);
+            foreach (FileInfo fileInfo in dir.GetFiles())
+            {
+                string dstFullName = Common.PathCombine(srcfolder, fileInfo.Name);
+                FileInfo dstInfo = new FileInfo(dstFullName);
+                string fileName = dstInfo.FullName.Replace(sourceFolder, "Files");
+                fileNames.Add(fileName);
+            }
+            foreach (var directoryInfo in dir.GetDirectories())
+            {
+                if (directoryInfo.Name.Substring(0, 1) == ".svn")
+                    continue;
+                GetFilesFromFolder(directoryInfo.FullName);
+            }
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            PdftoJpg pd = new PdftoJpg();
+            pd.ConvertPdftoJpg(); 
         }
     }
     
