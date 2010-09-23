@@ -27,6 +27,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml;
 using SIL.Tool;
+using System.Threading;
 
 namespace SIL.PublishingSolution
 {
@@ -131,7 +132,7 @@ namespace SIL.PublishingSolution
             // The path for the default XHTML file is "$(Desktop)\\Scripture".
             string cvFileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) + "_cv";
             const string xsltName = "TE_XHTML-to-Phone_XHTML.xslt";
-            string xsltFullName = Param.FromProg(xsltName);
+			string xsltFullName = Common.FromRegistry(xsltName);
             processFolder = Path.GetDirectoryName(processedXhtmlFile);
 
             // Transform the given XHTML file into a restructured version. Copy the results into
@@ -147,6 +148,8 @@ namespace SIL.PublishingSolution
 
         protected static int Chapters(string name)
         {
+            if (!File.Exists(name))
+                Thread.Sleep(300);
             XmlDocument xmlDocument = new XmlDocument {XmlResolver = null};
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
@@ -184,7 +187,7 @@ namespace SIL.PublishingSolution
             // Set Default Collection Parameters
             var red = "false";
             var info = "Bible text exported from FieldWorks Translation Editor.";
-            var iconPath = Param.FromProg(Common.PathCombine("GoBible/GoBibleCore/Icon", "Icon.png"));
+			var iconPath = Common.FromRegistry(Common.PathCombine("GoBible/GoBibleCore/Icon", "Icon.png"));
 
             // Load User Interface Collection Parameters
             Param.LoadSettings();
@@ -220,7 +223,7 @@ namespace SIL.PublishingSolution
             const string Creator = "GoBibleCreator.jar";
             const string prog = "java.exe";
             var creatorPath = Common.PathCombine("GoBible", Creator);
-            var creatorFullPath = Param.FromProg(creatorPath);
+			var creatorFullPath = Common.FromRegistry(creatorPath);
             var progFolder = SubProcess.GetLocation(prog);
             var progFullName = Common.PathCombine(progFolder, prog);
             var args = string.Format(@"-Xmx128m -jar ""{0}"" ""{1}""", creatorFullPath, collectionFullName);
