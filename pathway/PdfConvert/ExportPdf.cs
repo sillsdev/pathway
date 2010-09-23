@@ -25,11 +25,14 @@ namespace SIL.PublishingSolution
 {
     public class ExportPdf : IExportProcess 
     {
+        private static string _fullPrincePath;
+        private static string _processedXhtml;
+
         public string ExportType
         {
             get
             {
-                return "Pdf";
+                return "Pdf (using Prince)";
             }
         }
 
@@ -63,6 +66,8 @@ namespace SIL.PublishingSolution
                 try
                 {
                     regPrinceKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL\Prince_is1");
+                    if (regPrinceKey == null)
+                        regPrinceKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL\Prince_is1");
                 }
                 catch (Exception)
                 {
@@ -91,9 +96,11 @@ namespace SIL.PublishingSolution
                     string defaultCSS = Path.GetFileName(mergedCSS);
                     Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCSS);
                     Object princePath = regPrinceKey.GetValue("InstallLocation");
-                    var myPrince = new Prince(princePath + "Engine/Bin/Prince.exe");
+                    _fullPrincePath = Common.PathCombine((string) princePath, "Engine/Bin/Prince.exe");
+                    var myPrince = new Prince(_fullPrincePath);
                     myPrince.AddStyleSheet(defaultCSS);
-                    myPrince.Convert(preProcessor.ProcessedXhtml, xhtmlFileName + ".pdf");
+                    _processedXhtml = preProcessor.ProcessedXhtml;
+                    myPrince.Convert(_processedXhtml, xhtmlFileName + ".pdf");
                     if (!Common.Testing)
                         Process.Start(xhtmlFileName + ".pdf");
                     Environment.CurrentDirectory = curdir;
