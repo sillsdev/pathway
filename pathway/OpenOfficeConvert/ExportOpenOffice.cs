@@ -68,6 +68,15 @@ namespace SIL.PublishingSolution
 
             Dictionary<string, string> dictSecName = new Dictionary<string, string>();
 
+            Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
+            CssTree cssTree = new CssTree();
+            cssClass = cssTree.CreateCssProperty(publicationInformation.DefaultCssFileWithPath, true);
+
+            if(cssClass.ContainsKey("@page") && cssClass["@page"].ContainsKey("-ps-fileproduce"))
+            {
+                    publicationInformation.FileToProduce = cssClass["@page"]["-ps-fileproduce"];
+            }
+
             if (publicationInformation.FromPlugin)
             {
                 dictSecName = CreatePageDictionary(publicationInformation);
@@ -76,6 +85,9 @@ namespace SIL.PublishingSolution
             {
                 dictSecName = GetPageSectionSteps();
             }
+
+            dictSecName = SplitXhtmlAsMultiplePart(publicationInformation, dictSecName);
+
 
             if (dictSecName.Count > 0)
             {
@@ -87,6 +99,31 @@ namespace SIL.PublishingSolution
                 ExportOneSection(publicationInfo);
             }
             return true;
+        }
+
+        private Dictionary<string, string> SplitXhtmlAsMultiplePart(PublicationInformation publicationInformation, Dictionary<string, string> dictSecName)
+        {
+            if (publicationInformation.FileToProduce.ToLower() != "one")
+            {
+                List<string> fileNameWithPath = new List<string>();
+                if(publicationInformation.FileToProduce.ToLower() == "one per book")
+                {
+                    fileNameWithPath = Common.SplitXhtmlFile(publicationInfo.DefaultXhtmlFileWithPath,
+                                                             "scrbook", false);
+                }
+                else if(publicationInformation.FileToProduce.ToLower() == "one per letter")
+                {
+                    fileNameWithPath = Common.SplitXhtmlFile(publicationInfo.DefaultXhtmlFileWithPath,
+                                                             "letHead", true);
+                }
+                 
+                if (fileNameWithPath.Count > 0)
+                {
+                    dictSecName = CreateJoiningForSplited(fileNameWithPath);
+                    publicationInformation.DictionaryOutputName = null;
+                }
+            }
+            return dictSecName;
         }
 
         public void SetPublication(PublicationInformation pubInfo)
@@ -343,6 +380,29 @@ namespace SIL.PublishingSolution
             return dictSecName;
         }
 
+        private Dictionary<string, string> CreateJoiningForSplited(List<string> fileNames)
+        {
+            Dictionary<string, string> dictSecName = new Dictionary<string, string>();
+              if (fileNames.Count> 0)
+            
+            {
+                bool mainAdded = false;
+                int fileCount = 1;
+                //_dictSorderSection.Clear();
+                foreach (string s in fileNames)
+                {
+                    if (!mainAdded)
+                    {
+                        dictSecName["Main"] = s;
+                        mainAdded = true;
+                    }
+                    else
+                    { dictSecName["Main" + fileCount++] = s; }
+                }
+                _dictSorderSection[1] = dictSecName;
+            }
+            return dictSecName;
+        }
         /// <summary>
         /// Get the Document Sections 
         /// </summary>
@@ -570,7 +630,6 @@ namespace SIL.PublishingSolution
             string outputFileName;
             string outputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             VerboseClass verboseClass = VerboseClass.GetInstance();
-            verboseClass.ErrorCount = 0;
             if (projInfo.FileSequence != null && projInfo.FileSequence.Count > 1)
             {
                 projInfo.OutputExtension = "odm";  // Master Document
@@ -593,13 +652,21 @@ namespace SIL.PublishingSolution
                 }
             }
 
+            //Include FlexRev.css when XHTML is FlexRev.xhtml
+            string FlexRev = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+            if (FlexRev.ToLower() == "flexrev")
+            {
+                string revCSS = Path.Combine(Path.GetDirectoryName(projInfo.DefaultCssFileWithPath), "FlexRev.css");
+                if (File.Exists(revCSS))
+                    projInfo.DefaultCssFileWithPath = revCSS;
+            }
+
             // BEGIN Generate Styles.Xml File
             var sXML = new StylesXML();
             Styles styleName = sXML.CreateStyles(projInfo.DefaultCssFileWithPath, strStylePath, projInfo.DefaultXhtmlFileWithPath,
                                                  false);
             //To set Constent variables for User Desire
-            IncludeTextinMacro(strMacroPath, styleName.ReferenceFormat);
-
+            IncludeTextinMacro(strMacroPath, styleName.ReferenceFormat, Common.PathCombine(projInfo.DictionaryPath, Path.GetFileNameWithoutExtension(projInfo.DictionaryPath)), projInfo.FinalOutput);
 
             // BEGIN Generate Meta.Xml File
             var metaXML = new MetaXML();
@@ -625,15 +692,13 @@ namespace SIL.PublishingSolution
                 var ul = new Utility();
                 ul.CreateMasterContents(strContentPath, projInfo.FileSequence);
             }
+            
+            if (projInfo.MoveStyleToContent) 
+                MoveStylesToContent(strStylePath, strContentPath);
+
             var mODT = new ZipFolder();
             string fileNameNoPath = outputFileName + "." + projInfo.OutputExtension;
             mODT.CreateZip(projInfo.TempOutputFolder, fileNameNoPath, verboseClass.ErrorCount);
-
-            if (verboseClass.ErrorCount > 0)
-            {
-                string errFileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) + "_err.html";
-                Common.OpenOutput(errFileName);
-            }
 
             try
             {
@@ -667,7 +732,83 @@ namespace SIL.PublishingSolution
             return returnValue;
         }
 
-        private static void IncludeTextinMacro(string strMacroPath, string ReferenceFormat)
+        private static void MoveStylesToContent(string strStylePath, string strContentPath)
+        {
+            string[] s =  {
+             "GuideL",
+             "GuideR",
+             "headword",
+             "headwordminor",
+              "entry_letData",
+             "letter",
+             "homographnumber"
+            };
+
+            List<string> macroList = new List<string>();
+            macroList.AddRange(s);
+
+            var doc = new XmlDocument();
+            doc.Load(strStylePath);
+            var nsmgr = new XmlNamespaceManager(doc.NameTable);
+            nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+            nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+            nsmgr.AddNamespace("of", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
+
+            // if new stylename exists
+            XmlElement root1 = doc.DocumentElement;
+            string officeNode = "//of:styles";
+            string allStyles = string.Empty;
+            //string style = "//st:style[@st:name='" + makeClassName + "']";
+
+            XmlNode node = root1.SelectSingleNode(officeNode, nsmgr); // work
+
+            if (node != null)
+            {
+                int nodeCount = node.ChildNodes.Count;
+                for (int i = 0; i < nodeCount; i++)
+                {
+
+                    XmlNode name = node.ChildNodes[i].Attributes.GetNamedItem("name", nsmgr.LookupNamespace("st"));
+                    if (name != null)
+                    {
+                        if (name.Value.ToLower() != "entry_letdata" && name.Value.ToLower() != "Text_20_body")
+                        {
+                            allStyles += node.ChildNodes[i].OuterXml;
+                            node.ChildNodes[i].ParentNode.RemoveChild(node.ChildNodes[i]);
+
+                            i--;
+                            nodeCount--;
+                        }
+                    }
+                }
+            }
+            doc.Save(strStylePath);
+
+            /////
+
+            var docContent = new XmlDocument();
+            docContent.Load(strContentPath);
+            var nsmgr1 = new XmlNamespaceManager(docContent.NameTable);
+            nsmgr1.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+            nsmgr1.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+            nsmgr1.AddNamespace("of", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
+
+
+            // if new stylename exists
+            XmlElement root2 = docContent.DocumentElement;
+            string officeNode1 = "//of:automatic-styles";
+            if (root2 != null)
+            {
+                XmlNode node1 = root2.SelectSingleNode(officeNode1, nsmgr); 
+                if (node1 != null)
+                {
+                    node1.InnerXml = node1.InnerXml + allStyles;
+               }
+                docContent.Save(strContentPath);
+            }
+        }
+
+        private static void IncludeTextinMacro(string strMacroPath, string ReferenceFormat, string saveAsPath, string finalOutput)
         {
             var xmldoc = new XmlDocument { XmlResolver = null };
             xmldoc.Load(strMacroPath);
@@ -681,7 +822,13 @@ namespace SIL.PublishingSolution
                 }
                 if (ele != null)
                 {
-                    ele.InnerText = "\n'Constant ReferenceFormat for User Desire\nConst ReferenceFormat = \"" + ReferenceFormat + "\"" + "\nConst AutoMacro = \"" + autoMacro + "\"" + ele.InnerText;
+                    string seperator = "\n";
+                    string line1 = "\n'Constant ReferenceFormat for User Desire\nConst ReferenceFormat = \"" +
+                                   ReferenceFormat + "\"" + "\nConst AutoMacro = \"" + autoMacro + "\"";
+                    string line2 = "\nConst OutputFormat = \"" + finalOutput + "\"" + "\nConst FilePath = \"" + saveAsPath + "\"" ;
+                    string combined = line1 + line2 + seperator;
+
+                    ele.InnerText = combined + ele.InnerText;
                 }
             }
             xmldoc.Save(strMacroPath);

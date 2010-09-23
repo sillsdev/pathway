@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -34,18 +34,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release BTE|AnyCPU' ">
-    <OutputPath>bin\Release BTE\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseBTE|AnyCPU' ">
     <OutputPath>bin\ReleaseBTE\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -54,24 +46,41 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseSE|AnyCPU' ">
     <OutputPath>bin\ReleaseSE\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|AnyCPU' ">
+    <OutputPath>bin\Release7BTE\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|AnyCPU' ">
+    <OutputPath>bin\Release7SE\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|AnyCPU' ">
+    <OutputPath>bin\Corporate7BTE\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|AnyCPU' ">
+    <OutputPath>bin\Corporate7SE\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwCtx|AnyCPU' ">
+    <OutputPath>bin\PwCtx\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ConTeXt|AnyCPU' ">
+    <OutputPath>bin\ConTeXt\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="icu.net, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdParty\icu.net.dll</HintPath>
     </Reference>
-    <Reference Include="Prince, Version=1.0.3342.25084, Culture=neutral, PublicKeyToken=null">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdParty\Prince.dll</HintPath>
-    </Reference>
+    <Reference Include="Prince, Version=1.0.3835.23744, Culture=neutral, PublicKeyToken=8d9b0a8b53aaa3c7" />
     <Reference Include="System" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -108,6 +117,10 @@
       <Project>{1A58ECC5-75FE-4FE2-B133-8605B382B7C0}</Project>
       <Name>CssDialog</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CssParser\CssParser.csproj">
+      <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
+      <Name>CssParser</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LiftPrepare\LiftPrepare.csproj">
       <Project>{D38235F3-5B02-4835-B380-40E0BDCD5495}</Project>
       <Name>LiftPrepare</Name>
@@ -115,10 +128,6 @@
     <ProjectReference Include="..\PsTool\PsTool.csproj">
       <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
       <Name>PsTool</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CssParser\CSSParser.csproj">
-      <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
-      <Name>CSSParser</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

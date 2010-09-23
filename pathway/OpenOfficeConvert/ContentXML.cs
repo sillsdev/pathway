@@ -47,6 +47,7 @@ namespace SIL.PublishingSolution
         //Dictionary<string, string> dictColumnGap = new Dictionary<string, string>();
 
         bool isHiddenText = false;
+        bool _isDisplayNone = false;
         readonly Utility _util = new Utility();
         readonly StyleAttribute _attributeInfo = new StyleAttribute();
         readonly StyleAttribute _fontsizeAttributeInfo = new StyleAttribute();
@@ -124,6 +125,8 @@ namespace SIL.PublishingSolution
         private int _imageZindexCounter;
         private bool _imagePreviousFinished = false;
 
+        private List<string> _unUsedParagraphStyle = new List<string>();
+
         #endregion
 
         #region Public Methods
@@ -181,7 +184,7 @@ namespace SIL.PublishingSolution
             Console.WriteLine(Common.OdType.ToString());
             if (Common.OdType != Common.OdtType.OdtMaster)
                 ProcessXHTML(projInfo.ProgressBar, projInfo.DefaultXhtmlFileWithPath, projInfo.TempOutputFolder);
-            
+
             CloseFile(projInfo.TempOutputFolder, structStyles.ColumnGapEm);
             AlterFrameWithoutCaption(projInfo.TempOutputFolder);
             CleanUp();
@@ -202,6 +205,8 @@ namespace SIL.PublishingSolution
             {
                 File.Delete(_tempFile);
             }
+
+            _util.RemoveUnUsedStyle(_styleFilePath, _unUsedParagraphStyle);
         }
 
         /// <summary>
@@ -315,9 +320,9 @@ namespace SIL.PublishingSolution
             if (structStyles.ClassContainsSelector.Count > 0)
             {
                 FileOpen(sourceFile);
-                
+
                 //<h2 class = "section">Sample</h2>
-                
+
                 foreach (string classKey in structStyles.ClassContainsSelector.Keys)
                 {
                     XmlNodeList nodeList;
@@ -393,7 +398,7 @@ namespace SIL.PublishingSolution
 
         private void ProcessXHTML(ProgressBar pb, string Sourcefile, string targetPath)
         {
-            if (pb.Maximum == 0)
+            if (pb != null && pb.Maximum == 0)
             {
                 progressBarError = true;
             }
@@ -455,8 +460,11 @@ namespace SIL.PublishingSolution
             }
             finally
             {
-                pb.Value = pb.Maximum;
-                pb.Visible = false;
+                if (pb != null)
+                {
+                    pb.Value = pb.Maximum;
+                    pb.Visible = false;
+                }
             }
         }
 
@@ -793,7 +801,10 @@ namespace SIL.PublishingSolution
             {
                 _isDropCap = true;
             }
-
+            if (_structStyles.DisplayNone.Contains(_class))
+            {
+                _isDisplayNone = true;
+            }
             string spaceSplitClass = _class;
             if (_class.IndexOf(' ') >= 0)
             {
@@ -935,6 +946,7 @@ namespace SIL.PublishingSolution
                     {
                         _util.CreateStyle(_styleFilePath, _readerValue, _util.ChildName, _util.ParentName, _familyType, _structStyles.BackgroundColor, false);
                     }
+                    //_unUsedParagraphStyle.Add(_util.ChildName);
                 }
                 //if (FootCal != null && FootNoteStyleName == null)
                 _existingStyleName.Add(_parentStyleName, _util.ChildName);
@@ -1056,7 +1068,8 @@ namespace SIL.PublishingSolution
             }
 
             //pb.Value = _pbCounter++; // used to set the value for Progress Bar.
-            pb.Value = _pbCounter; // used to set the value for Progress Bar.
+            if (pb != null)
+                pb.Value = _pbCounter; // used to set the value for Progress Bar.
             if (_prevLangStack.Count > 0)
             {
                 if (_prevLangStack.Peek() != null)
@@ -1075,7 +1088,7 @@ namespace SIL.PublishingSolution
                 {
                     _classAfter = _styleStack.Pop().ToString();
                     _allDiv = _allDivStack.Pop().ToString();
-                    InsertPseudoAfter(_classAfter, _structStyles.PseudoClassAfter);
+                    InsertPseudoAfter(_classAfter, _structStyles.PseudoClassAfter, _structStyles.PseudoWithoutStyles);
                 }
                 if (_divOpen) // Avoid consecutive </fullString:p>
                 {
@@ -1112,7 +1125,7 @@ namespace SIL.PublishingSolution
             else if (_closeTagType == 'T') // Handling nested span
             {
                 _classAfter = _styleStack.Pop().ToString();
-                InsertPseudoAfter(_classAfter, _structStyles.PseudoClassAfter);
+                InsertPseudoAfter(_classAfter, _structStyles.PseudoClassAfter, _structStyles.PseudoWithoutStyles);
                 _temp = _allSpanStack.Pop().ToString();
                 _familyType = "";
                 if (_usedSpanStack.Count > 0)
@@ -1121,6 +1134,7 @@ namespace SIL.PublishingSolution
                     {
                         _temp = _usedSpanStack.Pop().ToString();
                         _writer.WriteEndElement();
+                        _writer.WriteString(" "); //TD-1513
                     }
                 }
             }
@@ -1164,6 +1178,7 @@ namespace SIL.PublishingSolution
 
         private void WriteText(string currClass)
         {
+
             if (_imagePreviousFinished)
                 _imagePreviousFinished = false;
 
@@ -1209,9 +1224,20 @@ namespace SIL.PublishingSolution
             {
                 _imageTextAvailable = true;
             }
+
+            if (!_isDisplayNone && _pseudoBuilder.Length > 0) // Pseudo writer
+            {
+                _writer.WriteRaw(_pseudoBuilder.ToString());
+                _pseudoBuilder.Remove(0, _pseudoBuilder.Length);
+            }
+            else
+            {
+                _isDisplayNone = false;
+            }
+
             if (_familyType == "text")
             {
-                if (_imageStart && !_forcedPara && !_imageDiv)
+                if (_imageStart && !_forcedPara && !_imageDiv) // images
                 {
                     _writer.WriteStartElement("text:p");
                     _writer.WriteAttributeString("text:style-name", "ForcedDiv");
@@ -1221,6 +1247,8 @@ namespace SIL.PublishingSolution
                 _usedSpanStack.Push(_util.ChildName);
                 _writer.WriteStartElement("text:span");
                 _writer.WriteAttributeString("text:style-name", _util.ChildName);
+                //_unUsedParagraphStyle.Remove(_util.ChildName); // NOte remove all predicate check
+                //_unUsedParagraphStyle.Add(_util.ChildName);
             }
             else if (_usedSpanStack.Count == 0)
             {
@@ -1272,11 +1300,15 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                if (_pseudoBuilder.Length > 0)
-                {
-                    _writer.WriteRaw(_pseudoBuilder.ToString());
-                    _pseudoBuilder.Remove(0, _pseudoBuilder.Length);
-                }
+                //if (!_isDisplayNone && _pseudoBuilder.Length > 0)
+                //{
+                //    _writer.WriteRaw(_pseudoBuilder.ToString());
+                //    _pseudoBuilder.Remove(0, _pseudoBuilder.Length);
+                //}
+                //else
+                //{
+                //    _isDisplayNone = false;
+                //}
                 if (!string.IsNullOrEmpty(_footCal))
                 {
                     _formatFootnote += _reader.Value;
@@ -1334,9 +1366,14 @@ namespace SIL.PublishingSolution
                     _verseNumber = _reader.Value;
                 }
             }
-            last:
+        last:
+            if (_familyType == "text")
+            {
+                _unUsedParagraphStyle.Add(_util.ChildName);
+            }
             _familyType = "";
             _isNewLine = false;
+
         }
         #endregion
 
@@ -1515,11 +1552,32 @@ namespace SIL.PublishingSolution
                         writingContent = ConcatContent;
                     }
                 }
-                if (writingContent != "") // No need to write empty spaces
+                //if (writingContent != "") // No need to write empty spaces
+                //{
+                //    string styleName = currentClass + "-" + "before";
+                //    // The stylename without styles will be ignored for Pseudo.
+                //    if (dictContents.PseudoWithoutStyles.Contains(styleName))
+                //    {
+                //        _pseudoBuilder.Append(writingContent);
+                //    }
+                //    else
+                //    {
+                //        _pseudoBuilder.Append("<text:span ");
+                //        _pseudoBuilder.Append("text:style-name=\"" + styleName + "\">" + writingContent);
+                //        _pseudoBuilder.Append("</text:span>");
+                //    }
+                //}
+                if (writingContent.Length > 0) // No need to write empty spaces
                 {
                     string styleName = currentClass + "-" + "before";
-                    _pseudoBuilder.Append("<text:span ");
-                    _pseudoBuilder.Append("text:style-name=\"" + styleName + "\">" + writingContent);
+                    // The stylename without styles will be ignored for Pseudo.
+                    _pseudoBuilder.Append("<text:span");
+                    if (!dictContents.PseudoWithoutStyles.Contains(styleName))
+                    {
+                        _pseudoBuilder.Append(" text:style-name=\"" + styleName + "\"");
+                    }
+                    _pseudoBuilder.Append(">");
+                    _pseudoBuilder.Append(writingContent);
                     _pseudoBuilder.Append("</text:span>");
                 }
                 return true;
@@ -1618,7 +1676,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void InsertPseudoAfter(string classAfter, IDictionary<string, string> dictPseudoAfter)
+        private void InsertPseudoAfter(string classAfter, IDictionary<string, string> dictPseudoAfter, List<string> pseudoWithOutStyle)
         {
             string writingContent = string.Empty;
             string firstName = classAfter;
@@ -1636,13 +1694,39 @@ namespace SIL.PublishingSolution
                 writingContent = dictPseudoAfter[firstName];
             }
 
-            if (writingContent != "")
+            //if (writingContent != "")
+            //{
+            //    _styleName = firstName + "-" + "after";
+            //    // The stylename without styles will be ignored for Pseudo.
+            //    if (pseudoWithOutStyle.Contains(_styleName))
+            //    {
+            //        _writer.WriteString(writingContent);
+            //    }
+            //    else
+            //    {
+            //    _writer.WriteStartElement("text:span");
+            //    _writer.WriteAttributeString("text:style-name", _styleName);
+            //    _writer.WriteString(writingContent);
+            //    _writer.WriteEndElement();
+            //}
+            if (writingContent.Length > 0)
             {
                 _styleName = firstName + "-" + "after";
+                // The stylename without styles will be ignored for Pseudo.
+                //if(!_divOpen)
+                //    _writer.WriteStartElement("text:p"); //Note - Forced para
+
                 _writer.WriteStartElement("text:span");
-                _writer.WriteAttributeString("text:style-name", _styleName);
-                _writer.WriteString(writingContent);
+                if (!pseudoWithOutStyle.Contains(_styleName))
+                {
+                    _writer.WriteAttributeString("text:style-name", _styleName);
+                }
+                //_writer.WriteString(writingContent);
+                _writer.WriteRaw(writingContent);
                 _writer.WriteEndElement();
+
+                //if(!_divOpen)
+                //    _writer.WriteEndElement(); //Note - Forced para End
             }
         }
 
@@ -1850,10 +1934,36 @@ namespace SIL.PublishingSolution
                         writingContent = ConcatContent;
                     }
                 }
-                _styleName = ClassName + "-" + "before";
-                _pseudoBuilder.Append("<text:span ");
-                _pseudoBuilder.Append("text:style-name=\"" + _styleName + "\">" + writingContent);
-                _pseudoBuilder.Append("</text:span>");
+
+                //_styleName = ClassName + "-" + "before";
+                //    _pseudoBuilder.Append("<text:span ");
+                //    _pseudoBuilder.Append("text:style-name=\"" + _styleName + "\">" + writingContent);
+                //    _pseudoBuilder.Append("</text:span>");
+
+                //// The stylename without styles will be ignored for Pseudo.
+                //if (dictContents.PseudoWithoutStyles.Contains(_styleName))
+                //{
+                //    _pseudoBuilder.Append(writingContent);
+                //}
+                //else
+                //{
+                //    _pseudoBuilder.Append("<text:span ");
+                //    _pseudoBuilder.Append("text:style-name=\"" + _styleName + "\">" + writingContent);
+                //    _pseudoBuilder.Append("</text:span>");
+                //}
+                if (writingContent.Length > 0) // No need to write empty spaces
+                {
+                    _styleName = ClassName + "-" + "before";
+                    // The stylename without styles will be ignored for Pseudo.
+                    _pseudoBuilder.Append("<text:span");
+                    if (!dictContents.PseudoWithoutStyles.Contains(_styleName))
+                    {
+                        _pseudoBuilder.Append(" text:style-name=\"" + _styleName + "\"");
+                    }
+                    _pseudoBuilder.Append(">");
+                    _pseudoBuilder.Append(writingContent);
+                    _pseudoBuilder.Append("</text:span>");
+                }
             }
         }
 
@@ -2327,6 +2437,7 @@ namespace SIL.PublishingSolution
 
         private void ImageBuild(string styleFilePath, string targetFile, string src, string altText, string classPicture, string pos, string side, string readerValue)
         {
+            Common.ColumnWidth = _structStyles.ColumnWidth;
             _writer.Formatting = Formatting.None;
             string imgHeight = "0";
             string imgWidth = "0";
@@ -2411,6 +2522,7 @@ namespace SIL.PublishingSolution
                 imgHeight = "1";
                 imgWidth = "1";
             }
+
             string strFrameCount = "Graphics" + _frameCount;
             _imageGraphicsName = strFrameCount;
             if (!_divOpen)  // Forcing a Paragraph Style, if it is not exist
@@ -2480,7 +2592,7 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("draw:style-name", strFrameCount);
             _writer.WriteAttributeString("draw:name", strFrameCount);
             _writer.WriteAttributeString("text:anchor-type", "paragraph");
-           // _writer.WriteAttributeString("text:anchor-type", anchorType);
+            // _writer.WriteAttributeString("text:anchor-type", anchorType);
             _writer.WriteAttributeString("svg:width", imgWidth + imgWUnit);
             _writer.WriteAttributeString("svg:height", imgHeight + imgWUnit);
 

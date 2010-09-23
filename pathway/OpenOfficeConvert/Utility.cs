@@ -388,6 +388,12 @@ namespace SIL.PublishingSolution
                 style = "//st:style[@st:name='" + className + "']";
                 node = root.SelectSingleNode(style, nsmgr); // work
 
+                if (node == null)
+                {
+                    style = "//st:style[@st:name='Empty']";
+                    node = root.SelectSingleNode(style, nsmgr); // work
+                }
+
                 XmlDocumentFragment styleNode = doc.CreateDocumentFragment();
                 if (_missingLang) // set language to the Node when lang style missing
                 {
@@ -649,6 +655,54 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Remove the paragraph style if the character style has the same name.
+        /// </summary>
+        /// <param name="styleFilePath">styles xml file path</param>
+        /// <param name="unUsedParagraphStyle">List of unused paragraph style</param>
+        public void RemoveUnUsedStyle(string styleFilePath, List<string> unUsedParagraphStyle)
+        {
+            if(unUsedParagraphStyle.Count == 0)
+                return;
+
+            var doc = new XmlDocument();
+            doc.Load(styleFilePath);
+            var nsmgr = new XmlNamespaceManager(doc.NameTable);
+            nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+            nsmgr.AddNamespace("of", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
+
+
+            // if new stylename exists
+            XmlElement root = doc.DocumentElement;
+            string style = "//st:style[@st:family='paragraph']";
+            if (root != null)
+            {
+                XmlNodeList node = root.SelectNodes(style, nsmgr); 
+                if (node != null)
+                {
+                    int nodeCount = node.Count;
+                    for (int i = 0; i < nodeCount; i++)
+                    {
+                        XmlNode name = node[i].Attributes.GetNamedItem("name", nsmgr.LookupNamespace("st"));
+                        if (name != null && unUsedParagraphStyle.Contains(name.Value))
+                        {
+                            node[i].ParentNode.RemoveChild(node[i]);
+
+                            string style1 = "//st:style[@st:name='" + name.Value +"'] | st:style[@st:family='text']";
+                            XmlNode nodeText = root.SelectSingleNode(style1, nsmgr); 
+                            if(nodeText != null)
+                            {
+                                if(nodeText.ChildNodes.Count > 1)
+                                    nodeText.RemoveChild(nodeText.FirstChild);
+                            }
+                            nodeCount--;
+                        }
+                    }
+                }
+            }
+            doc.Save(styleFilePath);
         }
 
         /// <summary>

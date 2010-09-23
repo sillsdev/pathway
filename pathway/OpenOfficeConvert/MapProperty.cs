@@ -525,6 +525,12 @@ namespace SIL.PublishingSolution
                             attributeInfo.StringValue = attributeInfo.StringValue == "none" ? "true" : "false";
                             break;
                         }
+                    case "pathway":
+                        {
+                            attributeInfo.Name = "pathway";
+                            attributeInfo.StringValue = attributeInfo.StringValue;
+                            break;
+                        }
                     case "vertical-align":
                         {
                             if (attributeInfo.StringValue == "super" || attributeInfo.StringValue == "sub")
@@ -653,7 +659,7 @@ namespace SIL.PublishingSolution
                                     }
                                     break;
 
-                                //TO DO - for error handling
+                                //TODO - for error handling
                                case "counter-increment":
 
                                 case "letter-spacing":
