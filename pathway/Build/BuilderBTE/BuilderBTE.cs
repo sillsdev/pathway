@@ -35,7 +35,7 @@ namespace BuilderBTE
         }
         #endregion Constructor
 
-        private const string RELEASE = "ReleaseBTE";
+        private const string CORPORATE = "CorporateBTE";
 
         #region Load
         /// <summary>
@@ -44,7 +44,7 @@ namespace BuilderBTE
         private void BuilderBTE_Load(object sender, EventArgs e)
         {
             var args = Environment.GetCommandLineArgs();
-            if (args.Length < 2 || args[1] != RELEASE)
+            if (args.Length < 2 || (args[1] != "ReleaseBTE" && args[1] != CORPORATE))
             {
                 Close();
                 Environment.Exit(0);
@@ -52,7 +52,7 @@ namespace BuilderBTE
             var instPath = Common.DirectoryPathReplace(Environment.CurrentDirectory + @"/../../../Installer/");
             var sub = new Substitution { TargetPath = instPath };
 
-            //Update OOSUI
+            //Update PathwayUI
             var map = new Dictionary<string, string>();
             const string Readme = "ReadMePw.rtf";
             const string License = "License.rtf";
@@ -66,27 +66,40 @@ namespace BuilderBTE
 
             //Calculate Files & Features
             BuilderBL.RemoveSubFolders(instPath + "../Files");
-            BuilderBL.CopyRelaseFiles(instPath, "ConfigurationTool", "ConfigurationTool", RELEASE);
+            BuilderBL.DoBatch(instPath, "ConfigurationTool", "postBuild.bat", args[1]);
+            BuilderBL.DoBatch(instPath, "PublishingSolutionExe", "postBuild.bat", args[1]);
+            BuilderBL.CopyRelaseFiles(instPath, "ConfigurationTool", "ConfigurationTool", args[1]);
             BuilderBL.CopyFile(instPath, Readme, "../Files/ConfigurationTool");
             BuilderBL.CopyFile(instPath, Tutorial, "../Files/ConfigurationTool");
             BuilderBL.CopyFile(instPath, License, "../Files/ConfigurationTool");
             Directory.Delete(instPath + "../Files/ConfigurationTool/Help", true);
             BuilderBL.CopyFile(instPath, HelpFile, "../Files/ConfigurationTool/Help");
-            BuilderBL.CopyRelaseFiles(instPath, "PsExport", "PsDll", RELEASE);
+            BuilderBL.CopyRelaseFiles(instPath, "PsExport", "PsDll", args[1]);
             BuilderBL.CopyFile(instPath, Catalog, "../Files/PsDll/Language Explorer/Configuration");
             BuilderBL.RemoveFiles(instPath, "../../PsExport/Dlls", "PsDll");
             BuilderBL.CopyTree(instPath, "../../PsSupport", "PathwaySupport");
-            BuilderBL.CopyTree(instPath, "../../ConfigurationTool/Bin/ReleaseBTE/Backends", "PathwaySupport/Backends");
-            //Directory.Delete(instPath + "../Files/PathwaySupport/DEXCTX", true);
-            //Directory.Delete(instPath + "../Files/PathwaySupport/xetexPathway", true);
             Directory.Delete(instPath + "../Files/PathwaySupport/Template", true);
             Directory.Delete(instPath + "../Files/PathwaySupport/Help", true);
             BuilderBL.CopyFile(instPath , HelpFile, "../Files/PathwaySupport/Help");
             BuilderBL.RemoveFiles(instPath, "../NotPathway", "PathwaySupport");
+            if (args[1] == CORPORATE)
+            {
+                Directory.Delete(instPath + "../Files/PathwaySupport/xetexPathway", true);
+                Directory.Delete(instPath + "../Files/PathwaySupport/Wordpress", true);
+                BuilderBL.RemoveFiles(instPath, "../NotCorporate", "PsDll");
+                BuilderBL.RemoveFiles(instPath, "../NotCorporate", "ConfigurationTool");
+                //Directory.CreateDirectory(Common.PathCombine(instPath, "../Files/PwCtw"));
+            }
+            //else
+            //{
+            //    BuilderBL.CopyTree(instPath, "../../PwCtx", "PwCtx");
+            //}
+
             SubProcess.Run(instPath, "GenerateFilesSourcePw.js");
             BuilderBL.SetFilesNFeatures("ConfigurationTool", instPath, sub, map);
             BuilderBL.SetFilesNFeatures("PsDll", instPath, sub, map);
             BuilderBL.SetFilesNFeatures("Support", instPath, sub, map);
+            //BuilderBL.SetFilesNFeatures("PwCtx", instPath, sub, map);
             sub.FileSubstitute("FilesPw-tpl.wxs", map, "Files.wxs");
             sub.FileSubstitute("FeaturesPw-tpl.wxs", map, "Features.wxs");
 
@@ -106,7 +119,8 @@ namespace BuilderBTE
                 DateTime now = DateTime.Now;
                 var curDate = now.ToString("yyyy-MM-d");
                 string version = BuilderBL.GetCurrentVersion("ConfigurationTool");
-                var target = string.Format("{0}SetupPwBTE-{1}-{2}.msi", instPath, version, curDate);
+                string test = (args[1].Substring(0, 1) == "R") ? "Test" : "";
+                var target = string.Format("{0}SetupPwBTE{1}-{2}-{3}-Fw{4}.msi", instPath, test, version, curDate, BuilderBL.PublicFieldWorksVersion());
                 if (File.Exists(target))
                     File.Delete(target);
                 File.Move(instPath + "SetupPwBTE.msi", target);

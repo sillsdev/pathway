@@ -9,12 +9,12 @@
 					</Directory>
 				</Directory>
 			</Directory>
-			<Directory Id="FWDIR" Name="FIELDW~1" LongName="FieldWorks">
+			<!-- Directory Id="FWDIR" Name="FIELDW~1" LongName="FieldWorks">
 				%(PsDllFiles)s
 				<Directory Id="PsSupport" Name="PUBLIS~1" LongName="PublishingSolutionSupport">
 					%(SupportFiles)s
 				</Directory>
-			</Directory>
+			</Directory -->
 		</Directory>
 	</Fragment>
 </Wix>

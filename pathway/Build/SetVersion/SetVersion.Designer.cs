@@ -37,6 +37,9 @@
             this.chAuthor = new System.Windows.Forms.ColumnHeader();
             this.chDescription = new System.Windows.Forms.ColumnHeader();
             this.BtAccept = new System.Windows.Forms.Button();
+            this.OldVersion = new System.Windows.Forms.Button();
+            this.Dlls = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Version
@@ -57,7 +60,7 @@
             // 
             // Notes
             // 
-            this.Notes.Location = new System.Drawing.Point(15, 98);
+            this.Notes.Location = new System.Drawing.Point(15, 64);
             this.Notes.Name = "Notes";
             this.Notes.Size = new System.Drawing.Size(88, 23);
             this.Notes.TabIndex = 2;
@@ -68,7 +71,7 @@
             // LbHistory
             // 
             this.LbHistory.AutoSize = true;
-            this.LbHistory.Location = new System.Drawing.Point(125, 15);
+            this.LbHistory.Location = new System.Drawing.Point(136, 15);
             this.LbHistory.Name = "LbHistory";
             this.LbHistory.Size = new System.Drawing.Size(42, 13);
             this.LbHistory.TabIndex = 3;
@@ -80,7 +83,7 @@
             this.clRevision,
             this.chAuthor,
             this.chDescription});
-            this.LvHistory.Location = new System.Drawing.Point(128, 38);
+            this.LvHistory.Location = new System.Drawing.Point(139, 38);
             this.LvHistory.Name = "LvHistory";
             this.LvHistory.Size = new System.Drawing.Size(544, 149);
             this.LvHistory.TabIndex = 4;
@@ -103,7 +106,7 @@
             // 
             // BtAccept
             // 
-            this.BtAccept.Location = new System.Drawing.Point(28, 138);
+            this.BtAccept.Location = new System.Drawing.Point(28, 93);
             this.BtAccept.Name = "BtAccept";
             this.BtAccept.Size = new System.Drawing.Size(75, 23);
             this.BtAccept.TabIndex = 5;
@@ -111,12 +114,42 @@
             this.BtAccept.UseVisualStyleBackColor = true;
             this.BtAccept.Click += new System.EventHandler(this.BtAccept_Click);
             // 
+            // OldVersion
+            // 
+            this.OldVersion.Location = new System.Drawing.Point(28, 122);
+            this.OldVersion.Name = "OldVersion";
+            this.OldVersion.Size = new System.Drawing.Size(75, 23);
+            this.OldVersion.TabIndex = 7;
+            this.OldVersion.Text = "Old Version";
+            this.OldVersion.UseVisualStyleBackColor = true;
+            this.OldVersion.Click += new System.EventHandler(this.OldVersion_Click);
+            // 
+            // Dlls
+            // 
+            this.Dlls.FormattingEnabled = true;
+            this.Dlls.Location = new System.Drawing.Point(12, 166);
+            this.Dlls.Name = "Dlls";
+            this.Dlls.Size = new System.Drawing.Size(121, 21);
+            this.Dlls.TabIndex = 8;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 150);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "FieldWorks Dlls";
+            // 
             // SetVersion
             // 
             this.AccessibleName = "SetVersion";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(699, 206);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.Dlls);
+            this.Controls.Add(this.OldVersion);
             this.Controls.Add(this.BtAccept);
             this.Controls.Add(this.LvHistory);
             this.Controls.Add(this.LbHistory);
@@ -144,6 +177,9 @@
         private System.Windows.Forms.ColumnHeader chAuthor;
         private System.Windows.Forms.ColumnHeader chDescription;
         private System.Windows.Forms.Button BtAccept;
+        private System.Windows.Forms.Button OldVersion;
+        private System.Windows.Forms.ComboBox Dlls;
+        private System.Windows.Forms.Label label1;
     }
 }
 

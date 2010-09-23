@@ -20,7 +20,7 @@ var ScriptPath = WScript.ScriptFullName.slice(0, iLastBackslash);
 var RootPath = ScriptPath.slice(0, ScriptPath.lastIndexOf("\\"));
 
 // Set up File Library to record component GUIDs:
-var xmlFileLibrary = new ActiveXObject("Msxml2.DOMDocument.4.0");
+var xmlFileLibrary = new ActiveXObject("Msxml2.DOMDocument.6.0");
 xmlFileLibrary.async = false;
 xmlFileLibrary.load("FileLibrary.xml");
 if (xmlFileLibrary.parseError.errorCode != 0)

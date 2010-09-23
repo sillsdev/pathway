@@ -91,14 +91,43 @@ namespace Builder
         /// <summary>
         /// Inserts the latest version number into the installer description
         /// </summary>
-        public static void UpdateInstallerDescription(string instPath, string instName, string version)
+        public static void UpdateInstallerDescription(string instPath, string instName, string version, string fwVer, string prodName)
         {
-            var lastDot = CurrentVersion.LastIndexOf(".");
-            var pattern1 = "(" + CurrentVersion.Substring(0, lastDot) + ")";
-            var sub = new Substitution { InputFile = instName, OutputFile = instName, TargetPath = instPath };
-            sub.UpdateGroup1(pattern1, version.Substring(0, lastDot));
+            var sub = new Substitution { TargetPath = instPath };
+            var map = new Dictionary<string, string>();
+            map["PwVer"] = PublishedVersion(version);
+            if (!string.IsNullOrEmpty(fwVer))
+                map["FwVer"] = PublishedVersion(fwVer);
+            map["Product"] = prodName;
+            sub.FileSubstitute(instName, map);
         }
         #endregion UpdateInstallerDescription
+
+        #region PublishedVersion
+        /// <summary>
+        /// Return all but last section of version
+        /// </summary>
+        public static string PublishedVersion(string version)
+        {
+            return version.Substring(0, version.LastIndexOf('.'));
+        }
+        #endregion PublishedVersion
+
+        #region PublicFieldWorksVersion
+        /// <summary>
+        /// Return all but last section of version
+        /// </summary>
+        public static string PublicFieldWorksVersion()
+        {
+            string[] fwVer = new string[2];
+            foreach (string [] element in Common.VersionElements())
+            {
+                fwVer = element;
+                break;
+            }
+            return PublishedVersion(fwVer[1]);
+        }
+        #endregion PublicFieldWorksVersion
 
         #region UpdateReadme
         /// <summary>
@@ -116,6 +145,20 @@ namespace Builder
             SubProcess.Run(instPath, myNotes);
         }
         #endregion UpdateReadme
+
+        #region SelectDlls
+        /// <summary>
+        /// Copy Dlls from folder selected by user to folder used for build
+        /// </summary>
+        public static string SelectDlls(string basePath, string dlls)
+        {
+            var values = dlls.Split(new [] {" - "}, StringSplitOptions.None);
+            if (values[0] == "Dlls601" || values[1].Substring(0,3) != "6.0")
+                return "";
+            FolderTree.Copy(Common.PathCombine(basePath, values[0]), Common.PathCombine(basePath, "Dlls601"));
+            return values[1];
+        }
+        #endregion SelectDlls
 
         #region RemoveSubFolders
         /// <summary>
@@ -143,9 +186,8 @@ namespace Builder
         public static void CopyRelaseFiles(string instPath, string source, string dest, string release)
         {
             var filesInfo = new DirectoryInfo(instPath + string.Format(@"../Files/{0}", dest));
-            if (filesInfo.Exists)
-                filesInfo.Delete(true);
-            filesInfo.Create();
+            if (!filesInfo.Exists)
+                filesInfo.Create();
             string sourceFullName = string.Format("{0}../../{1}/Bin/{2}", instPath, source, release);
             FolderTree.Copy(sourceFullName, filesInfo.FullName);
             //var srcInfo = new DirectoryInfo(instPath + @"..\" + source + @"/Bin/Release");
@@ -161,9 +203,8 @@ namespace Builder
         public static void CopyTree(string instPath, string source, string dest)
         {
             var filesInfo = new DirectoryInfo(instPath + string.Format(@"../Files/{0}", dest));
-            if (filesInfo.Exists)
-                filesInfo.Delete(true);
-            filesInfo.Create();
+            if (!filesInfo.Exists)
+                filesInfo.Create();
             FolderTree.Copy(instPath + source, filesInfo.FullName);
         }
         #endregion CopyTree
@@ -250,5 +291,12 @@ namespace Builder
             return currentVersion.Substring(0, lastDot);
         }
         #endregion GetCurrentVersion
+
+        public static void DoBatch(string instPath, string project, string process, string config)
+        {
+            string folder = Common.PathCombine(instPath, "../../" + project + "/bin/" + config);
+            //MessageBox.Show(folder);
+            SubProcess.Run(folder, Common.PathCombine(folder, "../../" + process), config, true);
+        }
     }
 }

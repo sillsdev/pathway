@@ -55,7 +55,7 @@ namespace Builder
             var map = new Dictionary<string, string>();
             const string Readme = "ReadMe.rtf";
             const string License = "License.rtf";
-            const string Catalog = "UtilityCatalogIncludePublishingSolution.xml";
+            //const string Catalog = "UtilityCatalogIncludePublishingSolution.xml";
             //const string DeToolTransform = "xhtml2dex.xsl";
             map[Readme] = FileData.Get(instPath + Readme);
             map[License] = FileData.Get(instPath + License);
@@ -66,16 +66,16 @@ namespace Builder
             BuilderBL.CopyRelaseFiles(instPath, "PublishingSolutionExe", "PublishingSolution", RELEASE);
             BuilderBL.CopyFile(instPath, Readme, @"../Files/PublishingSolution");
             BuilderBL.CopyFile(instPath, License, @"../Files/PublishingSolution");
-            BuilderBL.CopyRelaseFiles(instPath, "PsExport", "PsDll", RELEASE);
-            BuilderBL.CopyFile(instPath, Catalog, @"../Files/PsDll/Language Explorer/Configuration");
-            BuilderBL.RemoveFiles(instPath, @"../../PsExport/Dlls", "PsDll");
+            //BuilderBL.CopyRelaseFiles(instPath, "PsExport", "PsDll", RELEASE);
+            //BuilderBL.CopyFile(instPath, Catalog, @"../Files/PsDll/Language Explorer/Configuration");
+            //BuilderBL.RemoveFiles(instPath, @"../../PsExport/Dlls", "PsDll");
             BuilderBL.CopyTree(instPath, @"../../PsSupport", "PathwaySupport");
-            BuilderBL.CopyTree(instPath, "../../PublishingSolutionExe/Bin/Release/Backends", "PathwaySupport/Backends");
+            //BuilderBL.CopyTree(instPath, "../../PublishingSolutionExe/Bin/Release/Backends", "PathwaySupport/Backends");
             //CopyTree(instPath, "../../../XeTeX/DEXCTX", "PathwaySupport/DEXCTX");
             //File.Copy(Common.PathCombine(instPath + "../../../XeTeX", DeToolTransform), Common.PathCombine(instPath + "../Files/PathwaySupport", DeToolTransform), true);
             SubProcess.Run(instPath, "GenerateFilesSource.js");
             BuilderBL.SetFilesNFeatures("PublishingSolution", instPath, sub, map);
-            BuilderBL.SetFilesNFeatures("PsDll", instPath, sub, map);
+            //BuilderBL.SetFilesNFeatures("PsDll", instPath, sub, map);
             BuilderBL.SetFilesNFeatures("Support", instPath, sub, map);
             sub.FileSubstitute("Files-tpl.wxs", map, "Files.wxs");
             sub.FileSubstitute("Features-tpl.wxs", map, "Features.wxs");
@@ -96,7 +96,7 @@ namespace Builder
                 DateTime now = DateTime.Now;
                 var curDate = now.ToString("yyyy-MM-d");
                 string version = BuilderBL.GetCurrentVersion("PublishingSolutionExe");
-                var target = string.Format("{0}SetupPs-{1}-{2}.msi", instPath, version, curDate);
+                var target = string.Format("{0}SetupPs-{1}-{2}-Fw{3}.msi", instPath, version, curDate, BuilderBL.PublicFieldWorksVersion());
                 if (File.Exists(target))
                     File.Delete(target);
                 File.Move(instPath + "SetupOos.msi", target);

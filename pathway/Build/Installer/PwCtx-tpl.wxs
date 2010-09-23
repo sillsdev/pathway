@@ -1,0 +1,32 @@
+<?xml version='1.0'?>
+<Wix xmlns='http://schemas.microsoft.com/wix/2003/01/wi'>
+	<Product UpgradeCode="EE8D63F1-4F9D-4962-A208-E53C16DD8168" Id="6A68A11C-20CA-4aa7-B918-C6BB9B8699FE"
+		Name='Pathway ConTeXt %(PwVer)s' Language='1033' Version='%(PwVer)s' Manufacturer='SIL International'>
+		<Package Id='????????-????-????-????-????????????' Manufacturer='SIL International' InstallerVersion='200' Compressed='yes' />
+		<Condition Message="You need to be an administrator to install this product.">Privileged</Condition>
+		<Condition Message="[ProductName] will only run on Windows 2000 or better. You cannot intall it on this machine.">
+			<![CDATA[(NOT Version9X) OR (NOT VersionNT OR (VersionNT >= 500))]]>
+		</Condition>
+
+		<Media Id='1' Cabinet='PwCtx.cab' EmbedCab='yes' CompressionLevel='high'/>
+
+		<FragmentRef Id='PwCtxUI'/>
+		<FragmentRef Id='FilesFragment'/>
+		<FragmentRef Id='FeaturesFragment'/>
+
+		<DirectoryRef Id="TARGETDIR">
+			<Directory Id="StartMenuFolder" SourceName="StartMen" LongSource="Start Menu">
+				<Directory Id="ProgramMenuFolder" SourceName="Programs">
+					<Directory Id="PwCtxMenu" Name="PwCtx">
+						<Component Id="ReadMeShortcutApp" Guid="2A5B16DB-EA68-4f13-83DB-ADED5AC0E742">
+							<Shortcut Id="ReadMeShortcutApp" Directory="PwCtxMenu" Name="ReadMe" LongName="ReadMe" Target="[#ReadMePw.rtf]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="INSTALLDIR" />
+						</Component>
+						<Component Id="LicenseShortcutApp" Guid="17EE333C-BE79-4293-9739-FC7C201B5DC4">
+							<Shortcut Id="LicenseShortcutApp" Directory="PwCtxMenu" Name="License" LongName="License" Target="[#License.rtf]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="INSTALLDIR" />
+						</Component>
+					</Directory>
+				</Directory>
+			</Directory>
+		</DirectoryRef>
+	</Product>
+</Wix>

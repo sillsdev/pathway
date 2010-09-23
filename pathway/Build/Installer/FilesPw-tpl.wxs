@@ -4,7 +4,7 @@
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="ProgramFilesFolder" SourceName="ProgramF" LongSource="Program Files">
 				<Directory Id="PFSIL" Name="SIL">
-					<Directory Id="INSTALLDIR" Name="Pathway" LongName="Pathway">
+					<Directory Id="INSTALLDIR" Name="Pathway">
 						%(ConfigurationToolFiles)s
 					</Directory>
 				</Directory>
@@ -13,6 +13,11 @@
 				%(PsDllFiles)s
 				<Directory Id="PsSupport" Name="PATHWA~1" LongName="PathwaySupport">
 					%(SupportFiles)s
+				</Directory>
+			</Directory>
+			<Directory Id="CTXTARGETDIR">
+				<Directory Id="PwCtxFolder" Name="PwCtx">
+					%(PwCtxFiles)s
 				</Directory>
 			</Directory>
 		</Directory>

@@ -8,9 +8,9 @@
 			<ComponentRef Id="LicenseShortcutApp"/>
 			%(PublishingSolutionFeatures)s
 		</Feature>
-		<Feature Id="PsPlugIn" Title="Fieldworks PublishingSolution Plug-in" Description="Adds PublishingSolution to utility menu to export data " Display="expand" Level="3" AllowAdvertise="no">
+		<!-- Feature Id="PsPlugIn" Title="Fieldworks PublishingSolution Plug-in" Description="Adds PublishingSolution to utility menu to export data " Display="expand" Level="3" AllowAdvertise="no">
 			%(PsDllFeatures)s
 			%(SupportFeatures)s
-		</Feature>
+		</Feature -->
 	</Fragment>
 </Wix>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2003/01/wi">
+	<Fragment Id="FeaturesFragment">
+		<Feature Id="Application" Title="Pathway mini-ConTeXt" Description="TeX version minimized for use with Pathway" Display="expand" Level="3" AllowAdvertise="no">
+			<ComponentRef Id="ReadMeShortcutApp"/>
+			<ComponentRef Id="LicenseShortcutApp"/>
+			%(PwCtxFeatures)s
+		</Feature>
+	</Fragment>
+</Wix>
