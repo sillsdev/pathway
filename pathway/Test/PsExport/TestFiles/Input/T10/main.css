@@ -1,0 +1,10 @@
+.letData{
+column-gap:18pt;
+}
+@page{
+margin-top:36pt;
+margin-right:36pt;
+margin-bottom:36pt;
+margin-left:36pt;
+-ps-fileproduce:"One Per Letter";
+}

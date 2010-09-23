@@ -54,14 +54,20 @@ namespace Test.PsExport
             _outputBasePath = Common.PathCombine(testPath, "Output");
             if (Directory.Exists(_outputBasePath))
                 Directory.Delete(_outputBasePath, true);
+            Directory.CreateDirectory(_outputBasePath);
             // Set application base for test
-            string supportSource = Common.DirectoryPathReplace(testPath + "/../../../PsSupport");
-            string supportDest = Common.PathCombine(_outputBasePath, "PathwaySupport");
-            FolderTree.Copy(supportSource, supportDest);
-            string backendSource = Common.DirectoryPathReplace(testPath + "/../../../PublishingSolutionExe/bin/Debug/Backends");
-            string backendDest = Common.PathCombine(supportDest, "BackEnds");
-            FolderTree.Copy(backendSource, backendDest);
-            Backend.Load(backendDest);
+            Common.ProgInstall = Common.DirectoryPathReplace(testPath + "/../../../ConfigurationTool/Bin/Debug");
+            FolderTree.Copy(Common.PathCombine(testPath, "../../../PsSupport/OfficeFiles"),Path.Combine(Common.ProgInstall,"OfficeFiles"));
+            Backend.Load(Common.ProgInstall);
+        }
+
+        /// <summary>
+        /// pretend we don't know the type of input after each test
+        /// </summary>
+        [TearDown]
+        protected void TearDown()
+        {
+            Param.Value[Param.InputType] = "";
         }
         #endregion Setup
 
@@ -107,26 +113,17 @@ namespace Test.PsExport
         /// <param name="msg">message identifying test if mismatch (failure).</param>
         protected void AcquireUserSettingsTest(string testName, string mainName, string cssName, string msg)
         {
-            Common.PublishingSolutionsEnvironmentReset();
-            TestPathSetup(testName);
-
-            Common.SupportFolder = "";
-            Common.ProgInstall = Common.DirectoryPathReplace(Environment.CurrentDirectory + "/../../../PsSupport");
-            Param.ProgBase = Common.ProgInstall;
-            Param.LoadSettings();
+            CommonOutputSetup(testName);
             Param.SetValue(Param.InputType, "Dictionary");
             Param.LoadSettings();
-            var di = new DirectoryInfo(_outputTestPath);
-            if (di.Exists)
-                di.Delete(true);
-            di.Create();
+
             File.Copy(FileInput(mainName), FileOutput(mainName));
             JobCopy(cssName);
 
             var tpe = new SIL.PublishingSolution.PsExport() { DataType = "Scripture" };
             var mainFullName = FileOutput(mainName);
             string job = tpe.GetFluffedCssFullName(mainFullName, _outputTestPath, FileOutput(cssName));
-            FileAssert.AreEqual(FileExpect(Path.GetFileName(job)), job, msg);
+            TextFileAssert.AreEqual(FileExpect(Path.GetFileName(job)), job, msg);
         }
 
         #endregion AcquireUserSettings Common
@@ -142,9 +139,7 @@ namespace Test.PsExport
         /// <param name="msg">message to identify test if error occurs</param>
         protected void SeExportTest(string testName, string mainXhtml, string jobFileName, string target, string msg)
         {
-            Common.PublishingSolutionsEnvironmentReset();
-            TestPathSetup(testName);
-            CommonOutputSetup();
+            CommonOutputSetup(testName);
             File.Copy(FileInput(mainXhtml), FileOutput(mainXhtml), true);
             string cssPath = Path.GetFileNameWithoutExtension(mainXhtml);
             File.Copy(FileInput(cssPath) + ".css", FileOutput(cssPath) +".css", true);
@@ -158,7 +153,7 @@ namespace Test.PsExport
                 case "OpenOffice":
                     OdtTest.AreEqual(_expectTestPath, _outputTestPath, msg);
                     break;
-                case "Pdf":
+                case "Pdf (using Prince)":
                     var outName = Path.GetFileNameWithoutExtension(mainXhtml) + ".pdf";
                     FileAssert.AreEqual(FileExpect(outName), FileOutput(outName), msg);
                     break;
@@ -179,15 +174,14 @@ namespace Test.PsExport
         /// <param name="msg">message to identify test if error occurs</param>
         protected void ExportTest(string testName, string mainXhtml, string dataType, string target, string msg)
         {
-            Common.PublishingSolutionsEnvironmentReset();
-            TestPathSetup(testName);
-            CommonOutputSetup();
+            CommonOutputSetup(testName);
             CopyExistingFile(mainXhtml);
             var cssName = Path.GetFileNameWithoutExtension(mainXhtml) + ".css";
             CopyExistingFile(cssName);
             if (Directory.Exists(FileInput("Pictures")))
                 FolderTree.Copy(FileInput("Pictures"), FileOutput("Pictures"));
             CopyExistingFile("FlexRev.xhtml");
+            //CopyExistingFile("FlexRev.css");
 
             var tpe = new SIL.PublishingSolution.PsExport { Destination = target, DataType = dataType};
             tpe.Export(FileOutput(mainXhtml));
@@ -211,16 +205,18 @@ namespace Test.PsExport
         /// <summary>
         /// erase previous output, load localization files
         /// </summary>
-        private static void CommonOutputSetup()
+        private static void CommonOutputSetup(string testName)
         {
+            Common.PublishingSolutionsEnvironmentReset();
+            TestPathSetup(testName);
+
             var di = new DirectoryInfo(_outputTestPath);
             if (di.Exists)
                 di.Delete(true);
             di.Create();
 
-            Common.ProgInstall = _outputBasePath;
-            Common.SupportFolder = "PathwaySupport";
-            Param.ProgBase = Common.GetPSApplicationPath();
+            Common.SupportFolder = "";
+			Common.ProgBase = Common.GetPSApplicationPath();
             Param.LoadSettings();
         }
         
@@ -290,9 +286,10 @@ namespace Test.PsExport
         /// Test PDF export
         /// </summary>
         [Test]
+        [Ignore]
         public void SeExportT3()
         {
-            SeExportTest("T3", "1pe.xhtml", "Layout_02.css", "Pdf", "T3: PDF Export Test");
+            SeExportTest("T3", "1pe.xhtml", "Layout_02.css", "Pdf (using Prince)", "T3: PDF Export Test");
         }
         #endregion T3
 
@@ -345,6 +342,32 @@ namespace Test.PsExport
         {
             ExportTest("T8", "main.xhtml", "Dictionary", "OpenOffice", "T8: Flex ODT Export Test");
         }
+
+        #region T9
+        /// <summary>
+        /// Test Flex Export test
+        /// </summary>
+        [Test]
+        public void PsExportT9()
+        {
+            //OnePerBook.xhtml
+            ExportTest("T9", "main.xhtml", "Scripture", "OpenOffice", "T9: Flex ODT Export Test");
+        }
+        #endregion T9
+
+        #region T10
+        /// <summary>
+        /// Test Flex Export test
+        /// </summary>
+        [Test]
+        public void PsExportT10()
+        {
+            //OnePerLetter.xhtml
+            ExportTest("T10", "main.xhtml", "Dictionary", "OpenOffice", "T10: Flex ODT Export Test");
+        }
+        #endregion T9
+
+
         #region T6
 #if OutOfDateTests
     /// <summary>
