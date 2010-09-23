@@ -77,8 +77,8 @@ namespace Test.LiftPrepare
         public void liftPrepareApplyFilters()
         {
             liftPreparer.applyFilters();
-            FileAssert.AreEqual(TestingDirectory + "afterFilter0.lift", TestingDirectory + "afterFilter0.lift");
-            FileAssert.AreEqual(TestingDirectory + "afterFilter1.lift", TestingDirectory + "afterFilter1.lift");
+            TextFileAssert.AreEqual(TestingDirectory + "afterFilter0.lift", TestingDirectory + "afterFilter0.lift");
+            TextFileAssert.AreEqual(TestingDirectory + "afterFilter1.lift", TestingDirectory + "afterFilter1.lift");
         }
 
         [Test]

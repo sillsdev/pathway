@@ -54,8 +54,8 @@ namespace Test.LiftPrepare
             var filterURIs = new string[] { entryAndSenseFilter, langFilter };
             liftPreparer.loadFilters(filterURIs);
             liftPreparer.applyFilters();
-            FileAssert.AreEqual(ActualOutputDirectory + @"akoose\afterFilter0.lift", ExpectedOutputDirectory + @"akoose\afterFilter0.lift");
-            FileAssert.AreEqual(ActualOutputDirectory + @"akoose\afterFilter1.lift", ExpectedOutputDirectory + @"akoose\afterFilter1.lift");
+            TextFileAssert.AreEqual(ActualOutputDirectory + @"akoose\afterFilter0.lift", ExpectedOutputDirectory + @"akoose\afterFilter0.lift");
+            TextFileAssert.AreEqual(ActualOutputDirectory + @"akoose\afterFilter1.lift", ExpectedOutputDirectory + @"akoose\afterFilter1.lift");
         }
 
         [Test]
@@ -68,8 +68,8 @@ namespace Test.LiftPrepare
             var filterURIs = new string[] { entryAndSenseFilter, langFilter };
             liftPreparer.loadFilters(filterURIs);
             liftPreparer.applyFilters();
-            FileAssert.AreEqual(ActualOutputDirectory + @"buang\afterFilter0.lift", ExpectedOutputDirectory + @"buang\afterFilter0.lift");
-            FileAssert.AreEqual(ActualOutputDirectory + @"buang\afterFilter1.lift", ExpectedOutputDirectory + @"buang\afterFilter1.lift");
+            TextFileAssert.AreEqual(ActualOutputDirectory + @"buang\afterFilter0.lift", ExpectedOutputDirectory + @"buang\afterFilter0.lift");
+            TextFileAssert.AreEqual(ActualOutputDirectory + @"buang\afterFilter1.lift", ExpectedOutputDirectory + @"buang\afterFilter1.lift");
         }
 
         [Test]
@@ -82,8 +82,8 @@ namespace Test.LiftPrepare
             var filterURIs = new string[] { entryAndSenseFilter, langFilter };
             liftPreparer.loadFilters(filterURIs);
             liftPreparer.applyFilters();
-            FileAssert.AreEqual(ActualOutputDirectory + @"yi\afterFilter0.lift", ExpectedOutputDirectory + @"yi\afterFilter0.lift");
-            FileAssert.AreEqual(ActualOutputDirectory + @"yi\afterFilter1.lift", ExpectedOutputDirectory + @"yi\afterFilter1.lift");
+            TextFileAssert.AreEqual(ActualOutputDirectory + @"yi\afterFilter0.lift", ExpectedOutputDirectory + @"yi\afterFilter0.lift");
+            TextFileAssert.AreEqual(ActualOutputDirectory + @"yi\afterFilter1.lift", ExpectedOutputDirectory + @"yi\afterFilter1.lift");
         }
 
         [Test]
@@ -96,8 +96,8 @@ namespace Test.LiftPrepare
             var filterURIs = new string[] { entryAndSenseFilter, langFilter };
             liftPreparer.loadFilters(filterURIs);
             liftPreparer.applyFilters();
-            FileAssert.AreEqual(ActualOutputDirectory + @"sena2\afterFilter0.lift", ExpectedOutputDirectory + @"sena2\afterFilter0.lift");
-            FileAssert.AreEqual(ActualOutputDirectory + @"sena2\afterFilter1.lift", ExpectedOutputDirectory + @"sena2\afterFilter1.lift");
+            TextFileAssert.AreEqual(ActualOutputDirectory + @"sena2\afterFilter0.lift", ExpectedOutputDirectory + @"sena2\afterFilter0.lift");
+            TextFileAssert.AreEqual(ActualOutputDirectory + @"sena2\afterFilter1.lift", ExpectedOutputDirectory + @"sena2\afterFilter1.lift");
         }
 
         [Test]
@@ -106,7 +106,7 @@ namespace Test.LiftPrepare
             liftPreparer = new LiftPreparer(ActualOutputDirectory + @"akoose\");
             liftPreparer.loadLift(ActualOutputDirectory + @"akoose\afterFilter1.lift");
             liftPreparer.applySort();
-            FileAssert.AreEqual(ActualOutputDirectory + @"akoose\afterSorter2.lift", ExpectedOutputDirectory + @"akoose\afterSorter2.lift");
+            TextFileAssert.AreEqual(ActualOutputDirectory + @"akoose\afterSorter2.lift", ExpectedOutputDirectory + @"akoose\afterSorter2.lift");
 
         }
 

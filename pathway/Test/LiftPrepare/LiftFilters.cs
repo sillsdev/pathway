@@ -329,7 +329,7 @@ namespace Test.LiftPrepare
             File.Copy(input, output, true);
 
             exportOpenOffice.LiftSortWritingSys(input,output);
-            FileAssert.AreEqual(expected, output, "Sense Filter1 Failed");
+            TextFileAssert.AreEqual(expected, output, "Sense Filter1 Failed");
         }
 
         [Test]
@@ -345,7 +345,7 @@ namespace Test.LiftPrepare
             LiftPreparer liftPreparer = new LiftPreparer();
             liftPreparer.loadLift(output);
             liftPreparer.applySort();
-            FileAssert.AreEqual(expected, output);
+            TextFileAssert.AreEqual(expected, output);
 
         }
 
