@@ -6,7 +6,7 @@ using System.Text;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 
-namespace Test.CssParser
+namespace Test.CssParserTest
 {
     [TestFixture]
     public class ClassInfoTest : ClassInfo

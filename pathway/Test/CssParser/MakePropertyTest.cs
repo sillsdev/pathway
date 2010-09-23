@@ -27,7 +27,7 @@ using SIL.Tool;
 
 #endregion Using
 
-namespace Test.CssParser
+namespace Test.CssParserTest
 {
     [TestFixture]
     public class MakePropertyTest

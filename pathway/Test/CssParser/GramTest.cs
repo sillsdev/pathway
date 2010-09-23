@@ -21,7 +21,7 @@ using Antlr.Runtime.Tree;
 using NUnit.Framework;
 using SIL.Tool;
 
-namespace Test.CssParser
+namespace Test.CssParserTest
 {
     /// <summary>
     /// Test grammar with suite of input to exercise all common valid css constructions
@@ -521,19 +521,34 @@ namespace Test.CssParser
         /// CSS throws error
         /// </summary>
         [Test]
+        [ExpectedException(typeof(RewriteEarlyExitException))]
         public void CssThrowsErrorT30b()
         {
-            try
-            {
-                OneTest("T30b", "CSS throws error");
-                Assert.Fail("RewriteEarlyExitException not generated");
-            }
-            catch (Exception e)
-            {
-                var expected = new RewriteEarlyExitException();
-                Assert.AreEqual(e.GetType(), expected.GetType());
-            }
+            OneTest("T30b", "CSS throws error");
+            Assert.Fail("RewriteEarlyExitException not generated");
         }
         #endregion T30b
+
+        #region T31
+        /// <summary>
+        /// quoted double quote
+        /// </summary>
+        [Test]
+        public void CssQuotedDoubleQuoteT31()
+        {
+            OneTest("T31", "CSS Quoted Double Quote");
+        }
+        #endregion T31
+
+        #region T31b
+        /// <summary>
+        /// CSS quoted single quote
+        /// </summary>
+        [Test]
+        public void CssQuotedSingleQuoteT31b()
+        {
+            OneTest("T31b", "CSS quoted single quote");
+        }
+        #endregion T31b
     }
 }

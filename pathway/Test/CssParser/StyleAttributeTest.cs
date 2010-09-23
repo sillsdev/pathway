@@ -1,6 +1,6 @@
 ﻿using SIL.PublishingSolution;
 using NUnit.Framework;
-namespace Test.CssParser
+namespace Test.CssParserTest
 {
    
     /// <summary>
