@@ -57,7 +57,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber" Name="VerseNumber" Imported="false" NextStyle="ParagraphStyle/VerseNumber" KeyboardShortcut="0 0" PointSize="15" Position="Superscript" FirstLineIndent="0" Margin-Left="0">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber" Name="VerseNumber" Imported="false" NextStyle="ParagraphStyle/VerseNumber" KeyboardShortcut="0 0" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>

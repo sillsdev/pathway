@@ -19,10 +19,11 @@ namespace Test.InDesignConvert
         private string _outputStyles;
         private string _outputMasterSpreads;
         private string _testFolderPath = string.Empty;
-        private CSSTree _cssTree;
+        private CssTree _cssTree;
         private InStyles _stylesXML;
         private InDesignMap _designmapXML;
         private ArrayList _expectedList;
+        private readonly ArrayList headwordStyles = new ArrayList();
         private Dictionary<string, Dictionary<string, string>> _idAllClass;
         private Dictionary<string, Dictionary<string, string>> _cssProperty;
         private readonly Dictionary<string, string> _expected = new Dictionary<string, string>();
@@ -46,7 +47,7 @@ namespace Test.InDesignConvert
             _outputStyles = Common.PathCombine(_outputPath, "Resources");
             _outputMasterSpreads = Common.PathCombine(_outputPath, "MasterSpreads");
             _cssProperty = new Dictionary<string, Dictionary<string, string>>();
-            _cssTree = new CSSTree();
+            _cssTree = new CssTree();
         }
         #endregion Setup
 
@@ -137,7 +138,7 @@ namespace Test.InDesignConvert
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
             var inMasterSpread = new InMasterSpread();
-            var masterPageNames = inMasterSpread.CreateIDMasterSpread(_outputMasterSpreads, _idAllClass);
+            var masterPageNames = inMasterSpread.CreateIDMasterSpread(_outputMasterSpreads, _idAllClass, headwordStyles);
             ArrayList test = new ArrayList();
             _designmapXML.CreateIDDesignMap(_outputPath, 4, masterPageNames, test, new ArrayList());
             FileNameWithPath = Common.PathCombine(_outputPath, "designmap.xml");
@@ -157,7 +158,7 @@ namespace Test.InDesignConvert
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
             var inMasterSpread = new InMasterSpread();
-            var masterPageNames = inMasterSpread.CreateIDMasterSpread(_outputMasterSpreads, _idAllClass);
+            var masterPageNames = inMasterSpread.CreateIDMasterSpread(_outputMasterSpreads, _idAllClass, headwordStyles);
             ArrayList test = new ArrayList();
             _designmapXML.CreateIDDesignMap(_outputPath, 4, masterPageNames, test, new ArrayList());
             FileNameWithPath = Common.PathCombine(_outputPath, "designmap.xml");

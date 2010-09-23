@@ -37,7 +37,7 @@
           </GeometryPathType>
         </PathGeometry>
       </Properties>
-      <TextFramePreference TextColumnCount="1" TextColumnFixedWidth="495">
+      <TextFramePreference TextColumnFixedWidth="495">
         <Properties>
           <InsetSpacing type="list">
             <ListItem type="unit">0</ListItem>

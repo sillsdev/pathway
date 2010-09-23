@@ -20,7 +20,7 @@ namespace Test.InDesignConvert
         private string _xPath;
         private string _currentDir;
         private string _path;
-        private CSSTree _cssTree;
+        private CssTree _cssTree;
         private InStyles _stylesXML;
         private Dictionary<string, Dictionary<string, string>> _cssProperty;
         private Dictionary<string, Dictionary<string, string>> _idAllClass = new Dictionary<string, Dictionary<string, string>>();
@@ -30,7 +30,7 @@ namespace Test.InDesignConvert
         [TestFixtureSetUp]
         protected void SetUp()
         {
-            _cssTree = new CSSTree();
+            _cssTree = new CssTree();
             _stylesXML = new InStyles();
             _cssProperty = new Dictionary<string, Dictionary<string, string>>();
             _testFolderPath = PathPart.Bin(Environment.CurrentDirectory, "/InDesignConvert/TestFiles");

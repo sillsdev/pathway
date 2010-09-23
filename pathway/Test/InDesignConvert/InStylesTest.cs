@@ -46,7 +46,7 @@ namespace Test.InDesignConvert
         #region Public Variables
         public XPathNodeIterator NodeIter;
         private Dictionary<string, Dictionary<string, string>> _cssProperty;
-        private CSSTree _cssTree;
+        private CssTree _cssTree;
         #endregion
 
         #region Setup
@@ -63,7 +63,7 @@ namespace Test.InDesignConvert
             _outputStory = Common.PathCombine(_outputPath, "Stories");
 
             _cssProperty = new Dictionary<string, Dictionary<string, string>>();
-            _cssTree = new CSSTree();
+            _cssTree = new CssTree();
         }
         #endregion Setup
 
@@ -286,7 +286,7 @@ namespace Test.InDesignConvert
         public void MarginLeft1()
         {
             _input = Common.DirectoryPathReplace(_testFolderPath + "/input/MarginLeft1.css");
-            _expected.Add("Margin-Left", "-36");
+            _expected.Add("LeftIndent", "-36");
             _className = "a";
             XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
             NodeTest(true);
@@ -296,7 +296,7 @@ namespace Test.InDesignConvert
         public void MarginLeft2()
         {
             _input = Common.DirectoryPathReplace(_testFolderPath + "/input/Margin.css");
-            _expected.Add("Margin-Left", "30");
+            _expected.Add("LeftIndent", "30");
             _className = "a";
             XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
             NodeTest(true);
@@ -308,7 +308,7 @@ namespace Test.InDesignConvert
         public void MarginRight()
         {
             _input = Common.DirectoryPathReplace(_testFolderPath + "/input/Margin.css");
-            _expected.Add("Margin-Right", "40");
+            _expected.Add("RightIndent", "40");
             _className = "a";
             XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
             NodeTest(true);
@@ -320,7 +320,7 @@ namespace Test.InDesignConvert
         public void MarginTop()
         {
             _input = Common.DirectoryPathReplace(_testFolderPath + "/input/Margin.css");
-            _expected.Add("Margin-Top", "50");
+            _expected.Add("SpaceBefore", "50");
             _className = "a";
             XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
             NodeTest(true);
@@ -332,7 +332,7 @@ namespace Test.InDesignConvert
         public void MarginBottom()
         {
             _input = Common.DirectoryPathReplace(_testFolderPath + "/input/Margin.css");
-            _expected.Add("Margin-Bottom", "60");
+            _expected.Add("SpaceAfter", "60");
             _className = "a";
             XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
             NodeTest(true);
@@ -580,71 +580,6 @@ namespace Test.InDesignConvert
         } 
         #endregion
 
-        #region LineHeight
-        [Test]
-        public void LineHeight1()
-        {
-            string _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/LineHeight.xhtml");
-            string _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/LineHeight.css");
-            _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
-            _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
-            _storyXML.CreateStory(_outputStory, _inputXHTML, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
-
-            string classname = "entry1_1";
-            string _xPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[@Name = \"" + classname + "\"]/Properties[1]/Leading[1]";
-            _fileNameWithPath = Common.PathCombine(_outputStyles, "Styles.xml");
-            XmlNode node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
-            string result = node.InnerText;
-            Assert.AreEqual(result, "28", classname + "test failed");
-
-            classname = "entry2_1";
-            _xPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[@Name = \"" + classname + "\"]/Properties[1]/Leading[1]";
-            _fileNameWithPath = Common.PathCombine(_outputStyles, "Styles.xml");
-            node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
-            result = node.InnerText;
-            Assert.AreEqual(result, "14", classname + "test failed");
-
-            classname = "entry3_1";
-            _xPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[@Name = \"" + classname + "\"]/Properties[1]/Leading[1]";
-            _fileNameWithPath = Common.PathCombine(_outputStyles, "Styles.xml");
-            node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
-            result = node.InnerText;
-            Assert.AreEqual(result, "28", classname + "test failed");
-
-            classname = "entry4_1";
-            _xPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[@Name = \"" + classname + "\"]/Properties[1]/Leading[1]";
-            _fileNameWithPath = Common.PathCombine(_outputStyles, "Styles.xml");
-            node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
-            result = node.InnerText;
-            Assert.AreEqual(result, "24", classname + "test failed");
-
-            classname = "entry5_1";
-            _xPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[@Name = \"" + classname + "\"]/Properties[1]/Leading[1]";
-            _fileNameWithPath = Common.PathCombine(_outputStyles, "Styles.xml");
-            node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
-            result = node.InnerText;
-            Assert.AreEqual(result, "28", classname + "test failed");
-        }
-
-        [Test]
-        public void LineHeight2()
-        {
-            string _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/LineHeight.xhtml");
-            string _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/LineHeight.css");
-            _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
-            _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
-            _storyXML.CreateStory(_outputStory, _inputXHTML, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
-
-            string classname = "entry6_1";
-            string _xPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[@Name = \"" + classname + "\"]/Properties[1]/Leading[1]";
-            _fileNameWithPath = Common.PathCombine(_outputStyles, "Styles.xml");
-            XmlNode node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
-            string result = node.Attributes["type"].Value;
-            result = result + "_" + node.InnerText;
-            Assert.AreEqual(result, "enumeration_Auto", classname + "test failed");
-        } 
-        #endregion
-
         #region Hyphenation
         [Test]
         public void Hyphenation1()
@@ -708,6 +643,71 @@ namespace Test.InDesignConvert
 
             _expected.Add("PointSize", "15");
             Assert.IsTrue(ValidateNodeAttribute(), " failed for IncreaseFontSizeForSuper");
+        }
+        #endregion
+
+        #region LineHeight
+        [Test]
+        public void LineHeight1()
+        {
+            string _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/LineHeight.xhtml");
+            string _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/LineHeight.css");
+            _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
+            _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
+            _storyXML.CreateStory(_outputStory, _inputXHTML, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
+
+            string classname = "entry1_1";
+            string _xPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[@Name = \"" + classname + "\"]/Properties[1]/Leading[1]";
+            _fileNameWithPath = Common.PathCombine(_outputStyles, "Styles.xml");
+            XmlNode node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
+            string result = node.InnerText;
+            Assert.AreEqual(result, "28", classname + "test failed");
+
+            classname = "entry2_1";
+            _xPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[@Name = \"" + classname + "\"]/Properties[1]/Leading[1]";
+            _fileNameWithPath = Common.PathCombine(_outputStyles, "Styles.xml");
+            node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
+            result = node.InnerText;
+            Assert.AreEqual(result, "14", classname + "test failed");
+
+            classname = "entry3_1";
+            _xPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[@Name = \"" + classname + "\"]/Properties[1]/Leading[1]";
+            _fileNameWithPath = Common.PathCombine(_outputStyles, "Styles.xml");
+            node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
+            result = node.InnerText;
+            Assert.AreEqual(result, "28", classname + "test failed");
+
+            classname = "entry4_1";
+            _xPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[@Name = \"" + classname + "\"]/Properties[1]/Leading[1]";
+            _fileNameWithPath = Common.PathCombine(_outputStyles, "Styles.xml");
+            node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
+            result = node.InnerText;
+            Assert.AreEqual(result, "24", classname + "test failed");
+
+            classname = "entry5_1";
+            _xPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[@Name = \"" + classname + "\"]/Properties[1]/Leading[1]";
+            _fileNameWithPath = Common.PathCombine(_outputStyles, "Styles.xml");
+            node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
+            result = node.InnerText;
+            Assert.AreEqual(result, "28", classname + "test failed");
+        }
+
+        [Test]
+        public void LineHeight2()
+        {
+            string _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/LineHeight.xhtml");
+            string _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/LineHeight.css");
+            _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
+            _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
+            _storyXML.CreateStory(_outputStory, _inputXHTML, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
+
+            string classname = "entry6_1";
+            string _xPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[@Name = \"" + classname + "\"]/Properties[1]/Leading[1]";
+            _fileNameWithPath = Common.PathCombine(_outputStyles, "Styles.xml");
+            XmlNode node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
+            string result = node.Attributes["type"].Value;
+            result = result + "_" + node.InnerText;
+            Assert.AreEqual(result, "enumeration_Auto", classname + "test failed");
         }
         #endregion
 

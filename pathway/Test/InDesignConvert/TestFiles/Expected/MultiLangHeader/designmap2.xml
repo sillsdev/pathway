@@ -174,6 +174,9 @@
     <BuildingBlock Self="u91BuildingBlock1" BlockType="PageNumberBuildingBlock" AppliedCharacterStyle="n" CustomText="$ID/" AppliedDelimiter="$ID/" IncludeDelimiter="false" />
   </CrossReferenceFormat>
   <idPkg:BackingStory src="XML/BackingStory.xml" />
+  <idPkg:Story src="Stories/Story_utla.xml" />
+  <idPkg:Story src="Stories/Story_utca.xml" />
+  <idPkg:Story src="Stories/Story_utra.xml" />
   <idPkg:Story src="Stories/Story_1.xml" />
   <idPkg:Story src="Stories/Story_2.xml" />
   <IndexingSortOption Self="dIndexingSortOptionnkIndexGroup_Symbol" Name="$ID/kIndexGroup_Symbol" Include="true" Priority="0" HeaderType="Nothing" />

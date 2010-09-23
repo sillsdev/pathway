@@ -41,7 +41,7 @@ namespace Test.InDesignConvert
         #region Public Variables
         public XPathNodeIterator NodeIter;
         private Dictionary<string, Dictionary<string, string>> _cssProperty;
-        private CSSTree _cssTree;
+        private CssTree _cssTree;
         #endregion
 
         #region Setup
@@ -55,7 +55,7 @@ namespace Test.InDesignConvert
             _output = Common.PathCombine(_testFolderPath, "Output");
 
             _cssProperty = new Dictionary<string, Dictionary<string, string>>();
-            _cssTree = new CSSTree();
+            _cssTree = new CssTree();
         }
         #endregion Setup
 

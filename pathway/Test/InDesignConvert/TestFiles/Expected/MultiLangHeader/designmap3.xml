@@ -1,5 +1,5 @@
 <?xml version="1.0"?><?aid style="50" type="document" readerVersion="6.0" featureSet="257" product="6.0(352)" ?>
-<Document xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="6.0" Self="d" StoryList="1 2 " ZeroPoint="0 0" ActiveLayer="ub6" CMYKProfile="U.S. Web Coated (SWOP) v2" RGBProfile="sRGB IEC61966-2.1" SolidColorIntent="UseColorSettings" AfterBlendingIntent="UseColorSettings" DefaultImageIntent="UseColorSettings" RGBPolicy="PreserveEmbeddedProfiles" CMYKPolicy="CombinationOfPreserveAndSafeCmyk" AccurateLABSpots="false">
+<Document xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="6.0" Self="d" StoryList="1 2 3 4 5 6 7 8 9 10 11 12 " ZeroPoint="0 0" ActiveLayer="ub6" CMYKProfile="U.S. Web Coated (SWOP) v2" RGBProfile="sRGB IEC61966-2.1" SolidColorIntent="UseColorSettings" AfterBlendingIntent="UseColorSettings" DefaultImageIntent="UseColorSettings" RGBPolicy="PreserveEmbeddedProfiles" CMYKPolicy="CombinationOfPreserveAndSafeCmyk" AccurateLABSpots="false">
   <Language Self="Language/$ID/[No Language]" Name="$ID/[No Language]" SingleQuotes="''" DoubleQuotes="&amp;quot;&amp;quot;" PrimaryLanguageName="$ID/[No Language]" SublanguageName="$ID/[No Language]" Id="0" HyphenationVendor="$ID/" SpellingVendor="$ID/" />
   <Language Self="Language/$ID/English%3a USA" Name="$ID/English: USA" SingleQuotes="‘’" DoubleQuotes="“”" PrimaryLanguageName="$ID/English" SublanguageName="$ID/USA" Id="269" HyphenationVendor="Proximity" SpellingVendor="Proximity" />
   <Language Self="Language/$ID/English%3a USA Medical" Name="$ID/English: USA Medical" SingleQuotes="‘’" DoubleQuotes="“”" PrimaryLanguageName="$ID/English" SublanguageName="$ID/USA Medical" Id="269" HyphenationVendor="Proximity" SpellingVendor="Proximity" />
@@ -87,12 +87,6 @@
   <TextVariable Self="dTextVariablenLast1" Name="LG_1" VariableType="MatchCharacterStyleType">
     <MatchCharacterStylePreference TextBefore="" TextAfter="" AppliedCharacterStyle="CharacterStyle/headword" SearchStrategy="LastOnPage" ChangeCase="None" DeleteEndPunctuation="false" />
   </TextVariable>
-  <TextVariable Self="dTextVariablenHomoGraphF" Name="HGF" VariableType="MatchCharacterStyleType">
-    <MatchCharacterStylePreference TextBefore="" TextAfter="" AppliedCharacterStyle="CharacterStyle/xhomographnumber" SearchStrategy="FirstOnPage" ChangeCase="None" DeleteEndPunctuation="false" />
-  </TextVariable>
-  <TextVariable Self="dTextVariablenHomoGraphL" Name="HGL" VariableType="MatchCharacterStyleType">
-    <MatchCharacterStylePreference TextBefore="" TextAfter="" AppliedCharacterStyle="CharacterStyle/xhomographnumber" SearchStrategy="LastOnPage" ChangeCase="None" DeleteEndPunctuation="false" />
-  </TextVariable>
   <TextVariable Self="dTextVariablenFirstBookName" Name="FirstBookName" VariableType="MatchCharacterStyleType">
     <MatchCharacterStylePreference TextBefore="" TextAfter="" AppliedCharacterStyle="TitleMain" SearchStrategy="FirstOnPage" ChangeCase="None" DeleteEndPunctuation="false" />
   </TextVariable>
@@ -174,8 +168,21 @@
     <BuildingBlock Self="u91BuildingBlock1" BlockType="PageNumberBuildingBlock" AppliedCharacterStyle="n" CustomText="$ID/" AppliedDelimiter="$ID/" IncludeDelimiter="false" />
   </CrossReferenceFormat>
   <idPkg:BackingStory src="XML/BackingStory.xml" />
+  <idPkg:Story src="Stories/Story_utla.xml" />
+  <idPkg:Story src="Stories/Story_utca.xml" />
+  <idPkg:Story src="Stories/Story_utra.xml" />
   <idPkg:Story src="Stories/Story_1.xml" />
   <idPkg:Story src="Stories/Story_2.xml" />
+  <idPkg:Story src="Stories/Story_3.xml" />
+  <idPkg:Story src="Stories/Story_4.xml" />
+  <idPkg:Story src="Stories/Story_5.xml" />
+  <idPkg:Story src="Stories/Story_6.xml" />
+  <idPkg:Story src="Stories/Story_7.xml" />
+  <idPkg:Story src="Stories/Story_8.xml" />
+  <idPkg:Story src="Stories/Story_9.xml" />
+  <idPkg:Story src="Stories/Story_10.xml" />
+  <idPkg:Story src="Stories/Story_11.xml" />
+  <idPkg:Story src="Stories/Story_12.xml" />
   <IndexingSortOption Self="dIndexingSortOptionnkIndexGroup_Symbol" Name="$ID/kIndexGroup_Symbol" Include="true" Priority="0" HeaderType="Nothing" />
   <IndexingSortOption Self="dIndexingSortOptionnkIndexGroup_Alphabet" Name="$ID/kIndexGroup_Alphabet" Include="true" Priority="1" HeaderType="BasicLatin" />
   <IndexingSortOption Self="dIndexingSortOptionnkIndexGroup_Numeric" Name="$ID/kIndexGroup_Numeric" Include="false" Priority="2" HeaderType="Nothing" />

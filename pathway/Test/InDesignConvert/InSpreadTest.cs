@@ -28,7 +28,7 @@ namespace Test.InDesignConvert
         private InStyles _stylesXML;
         private InStory _storyXML;
         private InSpread _spreadXML;
-        private CSSTree _cssTree;
+        private CssTree _cssTree;
         private XmlNodeList nodesList;
         private readonly ArrayList _singlePages = new ArrayList();
         private readonly ArrayList _facingPages = new ArrayList();
@@ -49,7 +49,7 @@ namespace Test.InDesignConvert
             _outputStory = Common.PathCombine(_outputPath, "Stories");
             _outputSpread = Common.PathCombine(_outputPath, "Spreads");
             _cssProperty = new Dictionary<string, Dictionary<string, string>>();
-            _cssTree = new CSSTree();
+            _cssTree = new CssTree();
 
             _inputCSS1 = Common.DirectoryPathReplace(_testFolderPath + "/input/Page1.css");
             _inputCSS2 = Common.DirectoryPathReplace(_testFolderPath + "/input/Page2.css");

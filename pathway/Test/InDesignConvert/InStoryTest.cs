@@ -25,12 +25,13 @@ namespace Test.InDesignConvert
         Dictionary<string, Dictionary<string, string>> _idAllClass = new Dictionary<string, Dictionary<string, string>>();
         private InStyles _stylesXML;
         private InStory _storyXML;
+        private readonly ArrayList headwordStyles = new ArrayList();
         #endregion
 
         #region Public Variables
         public XPathNodeIterator NodeIter;
         private Dictionary<string, Dictionary<string, string>> _cssProperty;
-        private CSSTree _cssTree;
+        private CssTree _cssTree;
         #endregion
 
         #region Setup
@@ -50,7 +51,7 @@ namespace Test.InDesignConvert
         [SetUp]
         protected void SetupEach()
         {
-            _cssTree = new CSSTree();
+            _cssTree = new CssTree();
         }
         #endregion Setup
 
@@ -442,7 +443,7 @@ namespace Test.InDesignConvert
             Assert.IsTrue(result, _inputCSS + " test Failed");
 
             _expected.Clear();
-            _expected.Add("AppliedFont", "sans-serif");
+            _expected.Add("AppliedFont", "Verdana");
             XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + "t2_1" + "\"]/Properties/AppliedFont";
             result = ValidateNodeValue();
             Assert.IsTrue(result, _inputCSS + " test Failed");
@@ -539,7 +540,7 @@ namespace Test.InDesignConvert
             ExportProcess();
             string expected = Common.DirectoryPathReplace(_testFolderPath + "/expected/stories/PseudoBefore.xml");
             string output = _testFolderPath + "/output/stories/Story_1.xml";
-            FileAssert.AreEqual(expected, output, "PseudoBefore syntax failed in stories.xml");
+            TextFileAssert.AreEqual(expected, output, "PseudoBefore syntax failed in stories.xml");
         }
 
         [Test]
@@ -1199,6 +1200,79 @@ namespace Test.InDesignConvert
         #endregion List
 
         [Test]
+        public void MultiLangHeader1()
+        {
+            _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/MultiLangHeader1.xhtml");
+            _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/MultiLangHeader1.css");
+
+            PublicationInformation projInfo = new PublicationInformation();
+
+            projInfo.ProjectPath = Path.GetDirectoryName(_inputXHTML);
+            projInfo.DefaultXhtmlFileWithPath = _inputXHTML;
+            projInfo.DefaultCssFileWithPath = _inputCSS;
+
+            PreExportProcess preProcessor = new PreExportProcess(projInfo);
+            preProcessor.GetTempFolderPath();
+            preProcessor.ImagePreprocess();
+            preProcessor.ReplaceInvalidTagtoSpan();
+            preProcessor.InsertHiddenChapterNumber();
+            preProcessor.InsertHiddenVerseNumber();
+            preProcessor.GetDefinitionLanguage();
+
+            projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
+            projInfo.DefaultCssFileWithPath = preProcessor.ProcessedCss;
+
+            Dictionary<string, Dictionary<string, string>> cssClass =
+                new Dictionary<string, Dictionary<string, string>>();
+            CssTree cssTree = new CssTree();
+            cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
+            preProcessor.InsertEmptyXHomographNumber(cssClass);
+
+            Dictionary<string, Dictionary<string, string>> idAllClass =
+                new Dictionary<string, Dictionary<string, string>>();
+            InStyles inStyles = new InStyles();
+            projInfo.TempOutputFolder = _outputPath;
+            idAllClass = inStyles.CreateIDStyles(Common.PathCombine(_outputPath, "Resources"), cssClass);
+
+            InGraphic inGraphic = new InGraphic();
+            inGraphic.CreateIDGraphic(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), cssClass,
+                                      cssTree.cssBorderColor);
+
+            InStory inStory = new InStory();
+            Dictionary<string, ArrayList> StyleName =
+                inStory.CreateStory(Common.PathCombine(projInfo.TempOutputFolder, "Stories"),
+                                    projInfo.DefaultXhtmlFileWithPath, idAllClass, cssTree.SpecificityClass,
+                                    cssTree.CssClassOrder);
+
+            InMasterSpread inMasterSpread = new InMasterSpread();
+            ArrayList masterPageNames =
+                inMasterSpread.CreateIDMasterSpread(Common.PathCombine(projInfo.TempOutputFolder, "MasterSpreads"),
+                                                    idAllClass, StyleName["TextVariables"]);
+
+            InSpread inSpread = new InSpread();
+            inSpread.CreateIDSpread(Common.PathCombine(projInfo.TempOutputFolder, "Spreads"), idAllClass,
+                                    StyleName["ColumnClass"]);
+
+            InDesignMap inDesignMap = new InDesignMap();
+            inDesignMap.CreateIDDesignMap(projInfo.TempOutputFolder, StyleName["ColumnClass"].Count, masterPageNames,
+                                          StyleName["TextVariables"], StyleName["CrossRef"]);
+
+            InPreferences inPreferences = new InPreferences();
+            inPreferences.CreateIDPreferences(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), idAllClass);
+
+            // Compare files
+
+            string expectedFolder = Common.PathCombine(_testFolderPath, "Expected\\MultiLangHeader");
+            string output = Common.PathCombine(projInfo.TempOutputFolder, "designmap.xml");
+            string expected = Common.PathCombine(expectedFolder, "designmap1.xml");
+            XmlAssert.AreEqual(output, expected, " designmap.xml is not matching");
+
+            //output = Common.PathCombine(projInfo.TempOutputFolder, "Stories\\Story_2.xml");
+            //expected = Common.PathCombine(expectedFolder, "Stories\\Story_2.xml");
+            //XmlAssert.AreEqual(output, expected, " Story_2.xml is not matching");
+        }
+
+        [Test]
         public void TextTransform()
         {
             _storyXML = new InStory();
@@ -1749,7 +1823,7 @@ namespace Test.InDesignConvert
             projInfo.DefaultCssFileWithPath = preProcessor.ProcessedCss;
 
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
-            CSSTree cssTree = new CSSTree();
+            CssTree cssTree = new CssTree();
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
             preProcessor.InsertEmptyXHomographNumber(cssClass);
 
@@ -1772,7 +1846,7 @@ namespace Test.InDesignConvert
             Dictionary<string, ArrayList> StyleName = inStory.CreateStory(Common.PathCombine(projInfo.TempOutputFolder, "Stories"), projInfo.DefaultXhtmlFileWithPath, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
             InMasterSpread inMasterSpread = new InMasterSpread();
-            ArrayList masterPageNames = inMasterSpread.CreateIDMasterSpread(Common.PathCombine(projInfo.TempOutputFolder, "MasterSpreads"), idAllClass);
+            ArrayList masterPageNames = inMasterSpread.CreateIDMasterSpread(Common.PathCombine(projInfo.TempOutputFolder, "MasterSpreads"), idAllClass, headwordStyles);
 
             InSpread inSpread = new InSpread();
             inSpread.CreateIDSpread(Common.PathCombine(projInfo.TempOutputFolder, "Spreads"), idAllClass, StyleName["ColumnClass"]);
@@ -1833,6 +1907,152 @@ namespace Test.InDesignConvert
             //expected = Common.PathCombine(expectedFolder, "MasterSpreads\\MasterSpread_Right.xml");
             //XmlAssert.AreEqual(output, expected, " MasterSpread_Right.xml is not matching");
 
+        }
+
+        [Test]
+        public void MultiLangHeader2()
+        {
+            _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/MultiLangHeader2.xhtml");
+            _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/MultiLangHeader2.css");
+
+            PublicationInformation projInfo = new PublicationInformation();
+
+            projInfo.ProjectPath = Path.GetDirectoryName(_inputXHTML);
+            projInfo.DefaultXhtmlFileWithPath = _inputXHTML;
+            projInfo.DefaultCssFileWithPath = _inputCSS;
+
+            PreExportProcess preProcessor = new PreExportProcess(projInfo);
+            preProcessor.GetTempFolderPath();
+            preProcessor.ImagePreprocess();
+            preProcessor.ReplaceInvalidTagtoSpan();
+            preProcessor.InsertHiddenChapterNumber();
+            preProcessor.InsertHiddenVerseNumber();
+            preProcessor.GetDefinitionLanguage();
+
+            projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
+            projInfo.DefaultCssFileWithPath = preProcessor.ProcessedCss;
+
+            Dictionary<string, Dictionary<string, string>> cssClass =
+                new Dictionary<string, Dictionary<string, string>>();
+            CssTree cssTree = new CssTree();
+            cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
+            preProcessor.InsertEmptyXHomographNumber(cssClass);
+
+            Dictionary<string, Dictionary<string, string>> idAllClass =
+                new Dictionary<string, Dictionary<string, string>>();
+            InStyles inStyles = new InStyles();
+            projInfo.TempOutputFolder = _outputPath;
+            idAllClass = inStyles.CreateIDStyles(Common.PathCombine(_outputPath, "Resources"), cssClass);
+
+            InGraphic inGraphic = new InGraphic();
+            inGraphic.CreateIDGraphic(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), cssClass,
+                                      cssTree.cssBorderColor);
+
+            InStory inStory = new InStory();
+            Dictionary<string, ArrayList> StyleName =
+                inStory.CreateStory(Common.PathCombine(projInfo.TempOutputFolder, "Stories"),
+                                    projInfo.DefaultXhtmlFileWithPath, idAllClass, cssTree.SpecificityClass,
+                                    cssTree.CssClassOrder);
+
+            InMasterSpread inMasterSpread = new InMasterSpread();
+            ArrayList masterPageNames =
+                inMasterSpread.CreateIDMasterSpread(Common.PathCombine(projInfo.TempOutputFolder, "MasterSpreads"),
+                                                    idAllClass, StyleName["TextVariables"]);
+
+            InSpread inSpread = new InSpread();
+            inSpread.CreateIDSpread(Common.PathCombine(projInfo.TempOutputFolder, "Spreads"), idAllClass,
+                                    StyleName["ColumnClass"]);
+
+            InDesignMap inDesignMap = new InDesignMap();
+            inDesignMap.CreateIDDesignMap(projInfo.TempOutputFolder, StyleName["ColumnClass"].Count, masterPageNames,
+                                          StyleName["TextVariables"], StyleName["CrossRef"]);
+
+            InPreferences inPreferences = new InPreferences();
+            inPreferences.CreateIDPreferences(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), idAllClass);
+
+            // Compare files
+
+            string expectedFolder = Common.PathCombine(_testFolderPath, "Expected\\MultiLangHeader");
+            string output = Common.PathCombine(projInfo.TempOutputFolder, "designmap.xml");
+            string expected = Common.PathCombine(expectedFolder, "designmap2.xml");
+            XmlAssert.AreEqual(output, expected, " designmap.xml is not matching");
+
+            //output = Common.PathCombine(projInfo.TempOutputFolder, "Stories\\Story_2.xml");
+            //expected = Common.PathCombine(expectedFolder, "Stories\\Story_2.xml");
+            //XmlAssert.AreEqual(output, expected, " Story_2.xml is not matching");
+        }
+
+        [Test]
+        public void MultiLangHeader3()
+        {
+            _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/MultiLangHeader3.xhtml");
+            _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/MultiLangHeader3.css");
+
+            PublicationInformation projInfo = new PublicationInformation();
+
+            projInfo.ProjectPath = Path.GetDirectoryName(_inputXHTML);
+            projInfo.DefaultXhtmlFileWithPath = _inputXHTML;
+            projInfo.DefaultCssFileWithPath = _inputCSS;
+
+            PreExportProcess preProcessor = new PreExportProcess(projInfo);
+            preProcessor.GetTempFolderPath();
+            preProcessor.ImagePreprocess();
+            preProcessor.ReplaceInvalidTagtoSpan();
+            preProcessor.InsertHiddenChapterNumber();
+            preProcessor.InsertHiddenVerseNumber();
+            preProcessor.GetDefinitionLanguage();
+
+            projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
+            projInfo.DefaultCssFileWithPath = preProcessor.ProcessedCss;
+
+            Dictionary<string, Dictionary<string, string>> cssClass =
+                new Dictionary<string, Dictionary<string, string>>();
+            CssTree cssTree = new CssTree();
+            cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
+            preProcessor.InsertEmptyXHomographNumber(cssClass);
+
+            Dictionary<string, Dictionary<string, string>> idAllClass =
+                new Dictionary<string, Dictionary<string, string>>();
+            InStyles inStyles = new InStyles();
+            projInfo.TempOutputFolder = _outputPath;
+            idAllClass = inStyles.CreateIDStyles(Common.PathCombine(_outputPath, "Resources"), cssClass);
+
+            InGraphic inGraphic = new InGraphic();
+            inGraphic.CreateIDGraphic(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), cssClass,
+                                      cssTree.cssBorderColor);
+
+            InStory inStory = new InStory();
+            Dictionary<string, ArrayList> StyleName =
+                inStory.CreateStory(Common.PathCombine(projInfo.TempOutputFolder, "Stories"),
+                                    projInfo.DefaultXhtmlFileWithPath, idAllClass, cssTree.SpecificityClass,
+                                    cssTree.CssClassOrder);
+
+            InMasterSpread inMasterSpread = new InMasterSpread();
+            ArrayList masterPageNames =
+                inMasterSpread.CreateIDMasterSpread(Common.PathCombine(projInfo.TempOutputFolder, "MasterSpreads"),
+                                                    idAllClass, StyleName["TextVariables"]);
+
+            InSpread inSpread = new InSpread();
+            inSpread.CreateIDSpread(Common.PathCombine(projInfo.TempOutputFolder, "Spreads"), idAllClass,
+                                    StyleName["ColumnClass"]);
+
+            InDesignMap inDesignMap = new InDesignMap();
+            inDesignMap.CreateIDDesignMap(projInfo.TempOutputFolder, StyleName["ColumnClass"].Count, masterPageNames,
+                                          StyleName["TextVariables"], StyleName["CrossRef"]);
+
+            InPreferences inPreferences = new InPreferences();
+            inPreferences.CreateIDPreferences(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), idAllClass);
+
+            // Compare files
+
+            string expectedFolder = Common.PathCombine(_testFolderPath, "Expected\\MultiLangHeader");
+            string output = Common.PathCombine(projInfo.TempOutputFolder, "designmap.xml");
+            string expected = Common.PathCombine(expectedFolder, "designmap3.xml");
+            XmlAssert.AreEqual(output, expected, " designmap.xml is not matching");
+
+            //output = Common.PathCombine(projInfo.TempOutputFolder, "Stories\\Story_2.xml");
+            //expected = Common.PathCombine(expectedFolder, "Stories\\Story_2.xml");
+            //XmlAssert.AreEqual(output, expected, " Story_2.xml is not matching");
         }
 
         [Test]

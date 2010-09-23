@@ -28,7 +28,7 @@ namespace Test.InDesignConvert
         private string _methodName;
         private string _testFolderPath;
         private InInsertMacro _InsertMacro;
-        private CSSTree _cssTree;
+        private CssTree _cssTree;
         private Dictionary<string, Dictionary<string, string>> _cssProperty;
         private Dictionary<string, Dictionary<string, string>> _cssClass = new Dictionary<string, Dictionary<string, string>>();
         #endregion
@@ -38,7 +38,7 @@ namespace Test.InDesignConvert
         protected void SetUp()
         {
             _InsertMacro = new InInsertMacro();
-            _cssTree = new CSSTree();
+            _cssTree = new CssTree();
             _testFolderPath = PathPart.Bin(Environment.CurrentDirectory, "/InDesignConvert/TestFiles");
         }
         #endregion Setup

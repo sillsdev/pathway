@@ -25,9 +25,10 @@ namespace Test.InDesignConvert
         private string _methodName;
         private string _fileNameWithPath;
         private string _testFolderPath = string.Empty;
-        private CSSTree _cssTree;
+        private CssTree _cssTree;
         private InStyles _stylesXML;
         private ArrayList _listofMasterPages;
+        private readonly ArrayList headwordStyles = new ArrayList();
         private XmlNodeList nodesList;
         private InMasterSpread _masterSpreadXML;
         private Dictionary<string, Dictionary<string, string>> _idAllClass;
@@ -55,7 +56,7 @@ namespace Test.InDesignConvert
             _outputStyle = Common.PathCombine(_outputPath, "Resources");
             _outputStory = Common.PathCombine(_outputPath, "Stories");
             _cssProperty = new Dictionary<string, Dictionary<string, string>>();
-            _cssTree = new CSSTree();
+            _cssTree = new CssTree();
 
             _listofMasterPages = new ArrayList
                                      {
@@ -75,7 +76,8 @@ namespace Test.InDesignConvert
             _methodName = "MasterPageCount";
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS1, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyle, _cssProperty);
-            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass);
+
+            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass, headwordStyles);
             for (int i = 0; i < _listofMasterPages.Count - 1; i++)
             {
                 string fileWithPath = Common.PathCombine(_outputSpread, _listofMasterPages[i].ToString());
@@ -91,7 +93,7 @@ namespace Test.InDesignConvert
             _methodName = "MasterPathPointTypeTest1";
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS1, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyle, _cssProperty);
-            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass);
+            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass, headwordStyles);
             _xPath = "//TextFrame[@Self=\"topleft\"]/Properties/PathGeometry/GeometryPathType/PathPointArray/PathPointType";
             _fileNameWithPath = Common.PathCombine(_outputSpread, "MasterSpread_All.xml");
             nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
@@ -105,7 +107,7 @@ namespace Test.InDesignConvert
             _methodName = "MasterPathPointTypeTest2";
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS1, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyle, _cssProperty);
-            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass);
+            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass, headwordStyles);
             _xPath = "//TextFrame[@Self=\"topleft\"]/Properties/PathGeometry/GeometryPathType/PathPointArray/PathPointType";
             _fileNameWithPath = Common.PathCombine(_outputSpread, "MasterSpread_All.xml");
             nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
@@ -131,7 +133,7 @@ namespace Test.InDesignConvert
             _inputCSS2 = Common.PathCombine(_testFolderPath, "input/CounterPage1.css");
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS2, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyle, _cssProperty);
-            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass);
+            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass, headwordStyles);
             _xPath = "//TextFrame[@Self=\"topright\"]";
             _fileNameWithPath = Common.PathCombine(_outputSpread, "MasterSpread_Left.xml");
             nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
@@ -159,7 +161,7 @@ namespace Test.InDesignConvert
             _inputCSS2 = Common.PathCombine(_testFolderPath, "input/CounterPage2.css");
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS2, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyle, _cssProperty);
-            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass);
+            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass, headwordStyles);
             _xPath = "//TextFrame[@Self=\"topleft\"]";
             _fileNameWithPath = Common.PathCombine(_outputSpread, "MasterSpread_All.xml");
             nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
@@ -187,7 +189,7 @@ namespace Test.InDesignConvert
             _inputCSS3 = Common.PathCombine(_testFolderPath, "input/Page3.css");
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS3, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyle, _cssProperty);
-            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass);
+            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass, headwordStyles);
             _xPath = "//TextFrame[@Self=\"topleft\"]";
             _fileNameWithPath = Common.PathCombine(_outputSpread, "MasterSpread_Left.xml");
             nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
@@ -231,7 +233,7 @@ namespace Test.InDesignConvert
             _inputCSS3 = Common.PathCombine(_testFolderPath, "input/Page4.css");
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS3, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyle, _cssProperty);
-            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass);
+            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass, headwordStyles);
             _fileNameWithPath = Common.PathCombine(_outputSpread, "MasterSpread_All.xml");
             
             _xPath = "//TextFrame[@Self=\"topleft\"]";
@@ -267,7 +269,7 @@ namespace Test.InDesignConvert
             _inputCSS3 = Common.PathCombine(_testFolderPath, "input/allpage1.css");
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS3, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyle, _cssProperty);
-            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass);
+            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass, headwordStyles);
 
             _xPath = "//CharacterStyleRange";
             _fileNameWithPath = Common.PathCombine(_outputStory, "Story_ubca.xml");
@@ -287,7 +289,7 @@ namespace Test.InDesignConvert
             _inputCSS3 = Common.PathCombine(_testFolderPath, "input/allpage2.css");
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS3, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyle, _cssProperty);
-            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass);
+            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass, headwordStyles);
 
 
             _xPath = "//CharacterStyleRange";
@@ -308,7 +310,7 @@ namespace Test.InDesignConvert
             _inputCSS3 = Common.PathCombine(_testFolderPath, "input/mirrorpage1.css");
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS3, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyle, _cssProperty);
-            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass);
+            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass, headwordStyles);
 
 
             _xPath = "//CharacterStyleRange";
@@ -333,7 +335,7 @@ namespace Test.InDesignConvert
             _inputCSS3 = Common.PathCombine(_testFolderPath, "input/mirrorpage2.css");
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS3, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyle, _cssProperty);
-            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass);
+            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass, headwordStyles);
 
 
             _xPath = "//CharacterStyleRange";
@@ -357,7 +359,7 @@ namespace Test.InDesignConvert
             _inputCSS3 = Common.PathCombine(_testFolderPath, "input/MasterPageReference.css");
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS3, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyle, _cssProperty);
-            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass);
+            _masterSpreadXML.CreateIDMasterSpread(_outputSpread, _idAllClass, headwordStyles);
 
             /***********
             //Left Page
