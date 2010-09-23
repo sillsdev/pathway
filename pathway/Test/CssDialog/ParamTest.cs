@@ -72,6 +72,7 @@ namespace Test.CssDialog
         ///A test for SettingPath
         ///</summary>
         [Test]
+		[Ignore("Currently using the registry to get the executable path")]
         public void SettingPathTest()
         {
             string actual;
@@ -126,7 +127,7 @@ namespace Test.CssDialog
             Param.LoadValues(actual);
             if (!Directory.Exists(_publishingSolutionsData))
                 Directory.CreateDirectory(_publishingSolutionsData);
-            Param.ProgBase = _inputBasePath;
+			Common.ProgBase = _inputBasePath;
             Param.Write();
             var expected = Common.PathCombine(_publishingSolutionsData, _StyleSettings);
             XmlAssert.AreEqual(expected, actual, _StyleSettings);
@@ -134,7 +135,7 @@ namespace Test.CssDialog
             var sourceSchema = Common.PathCombine(_inputBasePath, schema);
             var destinationSchema = Common.PathCombine(_publishingSolutionsData, schema);
             XmlAssert.AreEqual(sourceSchema, destinationSchema, schema);
-            Param.ProgBase = null;
+			Common.ProgBase = null;
 			DirectoryInfo directoryInfo = new DirectoryInfo(_publishingSolutionsData);
 			directoryInfo.Delete(true);
 			directoryInfo.Create();
@@ -147,13 +148,13 @@ namespace Test.CssDialog
         [Test]
         public void GetFontNameSizeTest()
         {
-            Param.ProgBase = _supportPath;
+			Common.ProgBase = _supportPath;
             Param.SetFontNameSize();
             string fontName = "Microsoft Sans Serif";
             float fontSize = 9;
             Font expected = new Font(fontName, fontSize);
             Assert.AreEqual(expected, Common.UIFont);
-            Param.ProgBase = "";
+			Common.ProgBase = "";
         }
 
 //yesu

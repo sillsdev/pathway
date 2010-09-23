@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="1">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="8">
   <xs:element name="stylePick">
     <xs:complexType>
       <xs:sequence>
@@ -11,6 +11,7 @@
         <xs:element ref="styles"/>
         <xs:element ref="tasks" minOccurs="0"/>
         <xs:element ref="column-width" minOccurs="0"/>
+        <xs:element ref="mobileProperty" minOccurs="0"/>
         <xs:element ref="customize" minOccurs="0"/>
       </xs:sequence>
       <xs:attribute name="version" use="required"/>
@@ -161,7 +162,7 @@
     <xs:complexType>
       <xs:attribute name="icon" use="required"/>
       <xs:attribute name="name" use="required"/>
-      <xs:attribute name="style" use="required" type="xs:NCName"/>
+      <xs:attribute name="style" use="required"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="column-width">
@@ -196,4 +197,17 @@
       <xs:attribute name="value" use="required"/>
     </xs:complexType>
   </xs:element>
+  <xs:element name="mobileProperty">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="mobilefeature"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="mobilefeature">
+    <xs:complexType>
+      <xs:attribute name="name" use="required" type="xs:string"/>
+      <xs:attribute name="select" use="required"  type="xs:string"/>
+    </xs:complexType>
+  </xs:element>    
 </xs:schema>

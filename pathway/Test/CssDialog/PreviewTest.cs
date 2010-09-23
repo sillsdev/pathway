@@ -16,6 +16,7 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using SIL.PublishingSolution;
 using NUnit.Framework;
 using System.Windows.Forms;
@@ -73,22 +74,15 @@ namespace Test.CssDialog
         ///A test for PdfPreview
         ///</summary>
         [Test]
+        [ExpectedException(typeof(KeyNotFoundException))]
         public void PdfPreviewTest()
         {
-            Preview target = new Preview(); // TODO: Initialize to an appropriate value
+            Preview target = new Preview();
             Form myForm = new Form();
             target.ParentForm = myForm;
             CommonTestMethod.DisableDebugAsserts();
-            try
-            {
-                target.PdfPreview();
-                Assert.Fail("The given key was not present in the dictionary.");
-            }
-            catch (Exception e)
-            {
-                var expected = new System.Collections.Generic.KeyNotFoundException();
-                Assert.AreEqual(e.GetType(), expected.GetType());
-            }
+            target.PdfPreview();
+            Assert.Fail("The given key was not present in the dictionary.");
         }
 
         /// <summary>

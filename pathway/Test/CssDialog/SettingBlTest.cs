@@ -28,7 +28,7 @@ namespace Test.CssDialog
     {
         private string _methodName;
         private string _currentFolder;
-        SettingBl target = new SettingBl();
+        private SettingBl target;
         ListView inputLstView = new ListView();
         ListView expectedLstView = new ListView();
         ListBox inputLstBox = new ListBox();
@@ -43,6 +43,8 @@ namespace Test.CssDialog
         [TestFixtureSetUp]
         protected void SetUp()
         {
+            Common.Testing = true;
+            target = new SettingBl();
             _currentFolder = Common.PathCombine(Environment.CurrentDirectory, "../../CssDialog/TestFiles");
             _inputBasePath = Common.PathCombine(_currentFolder, "Input");
             _expectBasePath = Common.PathCombine(_currentFolder, "Expected");
@@ -349,7 +351,7 @@ namespace Test.CssDialog
             string appFolderPath = Common.LeftString(_currentFolder, "PublishingSolution");
             _methodName = "LoadHyphenationLanguagesTest";
             ComboBox cmbCtl = new ComboBox();
-            target._hyphenationPath = Common.PathCombine(appFolderPath,"PublishingSolution/PublishingSolutionExe/bin/Debug/Hyphenation_Languages");
+            target._hyphenationPath = Common.PathCombine(appFolderPath,"PublishingSolution/PsSupport/Hyphenation_Languages");
             target.LoadHyphenationLanguages(cmbCtl);
             Assert.IsTrue(cmbCtl.Items.Count > 0, _methodName + " test failed");
         }

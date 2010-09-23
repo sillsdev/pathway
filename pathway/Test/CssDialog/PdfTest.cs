@@ -16,8 +16,10 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
+using System.IO;
 using SIL.PublishingSolution;
 using NUnit.Framework;
+using SIL.Tool;
 
 namespace Test.CssDialog
 {
@@ -28,19 +30,27 @@ namespace Test.CssDialog
     [TestFixture]
     public class PdfTest
     {
+        #region setup
+        private TestFiles _tf;
+
+        [TestFixtureSetUp]
+        public void SetUp()
+        {
+            Common.Testing = true;
+            _tf = new TestFiles("CssDialog");
+        }
+        #endregion setup
+
         /// <summary>
         ///A test for Xhtml
         ///</summary>
         [Test]
         public void XhtmlTest()
         {
-            Pdf target = new Pdf(); // TODO: Initialize to an appropriate value
-            string expected = string.Empty; // TODO: Initialize to an appropriate value
-            string actual;
-            target.Xhtml = expected;
-            actual = target.Xhtml;
+            Pdf target = new Pdf(_tf.Copy("T1.xhtml"), _tf.Copy("T1.css"));
+            string expected = _tf.Output("T1.xhtml");
+            string actual = target.Xhtml;
             Assert.AreEqual(expected, actual);
-            //TODO: Verify the correctness of this test method.
         }
 
         /// <summary>
@@ -49,13 +59,10 @@ namespace Test.CssDialog
         [Test]
         public void CssTest()
         {
-            Pdf target = new Pdf(); // TODO: Initialize to an appropriate value
-            string expected = string.Empty; // TODO: Initialize to an appropriate value
-            string actual;
-            target.Css = expected;
-            actual = target.Css;
+            Pdf target = new Pdf(_tf.Copy("T1.xhtml"), _tf.Copy("T1.css"));
+            string expected = _tf.Output("T1.css");
+            string actual = target.Css;
             Assert.AreEqual(expected, actual);
-            // TODO: Verify the correctness of this test method.");
         }
 
         /// <summary>
@@ -64,20 +71,10 @@ namespace Test.CssDialog
         [Test]
         public void CreateTest()
         {
-            Pdf target = new Pdf(); // TODO: Initialize to an appropriate value
-            string outName = string.Empty; // TODO: Initialize to an appropriate value
-            CommonTestMethod.DisableDebugAsserts();
-            try
-            {
-                target.Create(outName);
-                Assert.Fail("Create accepted null arguments for xhtml or css properties");
-            }
-            catch (Exception e)
-            {
-                //var expected = new ArgumentNullException();
-                var expected = new AssertionException("Assertion encountered");
-                Assert.AreEqual(e.GetType(), expected.GetType());
-            }
+            Pdf target = new Pdf(_tf.Copy("T1.xhtml"), _tf.Copy("T1.css"));
+            string outName = _tf.Output("T1.pdf");
+            target.Create(outName);
+            FileAssert.AreEqual(_tf.Expected("T1.pdf"), outName);
         }
 
         /// <summary>
@@ -87,7 +84,7 @@ namespace Test.CssDialog
         public void PdfConstructorTest1()
         {
             Pdf target = new Pdf();
-            // TODO: Implement code to verify target
+            Assert.AreEqual(typeof(Pdf), target.GetType());
         }
 
         /// <summary>
@@ -96,10 +93,10 @@ namespace Test.CssDialog
         [Test]
         public void PdfConstructorTest()
         {
-            string xhtmlFile = string.Empty; // TODO: Initialize to an appropriate value
-            string cssFile = string.Empty; // TODO: Initialize to an appropriate value
+            string xhtmlFile = string.Empty;
+            string cssFile = string.Empty;
             Pdf target = new Pdf(xhtmlFile, cssFile);
-            // TODO: Implement code to verify target
+            Assert.AreEqual(typeof(Pdf), target.GetType());
         }
     }
 }
