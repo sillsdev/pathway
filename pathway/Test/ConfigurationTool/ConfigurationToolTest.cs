@@ -58,7 +58,7 @@ namespace Test.UIConfigurationToolTest
             LoadParam();
 
 
-            //Param.ProgBase = _outputBasePath;
+			//Common.ProgBase = _outputBasePath;
             //Param.Value["UserSheetPath"] = _outputBasePath; 
         }
 
@@ -130,8 +130,9 @@ namespace Test.UIConfigurationToolTest
             al.Add("Sheet-1");
             al.Add("Sheet-4");
             al.Add("Sheet-8");
-            string expected = "Sheet-9";
-            string actual = _configToolBL.GetNewStyleName(al);
+            _configToolBL.StyleName = "Sheet-1";
+            string expected = "Copy of Sheet-1";
+            string actual = _configToolBL.GetNewStyleName(al, "copy");
             Assert.AreEqual(expected, actual);
         }
 
@@ -171,7 +172,7 @@ namespace Test.UIConfigurationToolTest
             _configToolBL.WriteCssClass(writeCss, "letData", value);
             writeCss.Close();
             string expectedFileWithPath = Common.PathCombine(_expectBasePath, fileName);
-            FileAssert.AreEqual(expectedFileWithPath, outputFileWithPath, "WriteCss Test fails");
+            TextFileAssert.AreEqual(expectedFileWithPath, outputFileWithPath, "WriteCss Test fails");
         }
 
         /// <summary>
@@ -320,13 +321,13 @@ namespace Test.UIConfigurationToolTest
             cssNames.Add("style-1");
             cssNames.Add("style-2");
             DataGridView grid = PopulateGrid2();
+            _configToolBL.StyleName = "Sheet-1";
             _configToolBL.CopyStyle(grid, cssNames);
-            string styleName = "style-3";
+            string styleName = "Copy of Sheet-1";
             string xPath = "//styles/" + "paper" + "/style[@name='" + styleName + "']";
             XmlNode removableNode = Param.GetItem(xPath);
             if (removableNode == null)
                 Assert.Fail("DictionaryStyleSettings.xml - The Xpath - " + xPath + "  not found in CopyStyle");
-
         }
 
         /// <summary>
@@ -462,7 +463,7 @@ namespace Test.UIConfigurationToolTest
             _configToolBL.WriteAtImport(writeCss, attrib, key);
             writeCss.Close();
             string expectedFileWithPath = Common.PathCombine(_expectBasePath, fileName);
-            FileAssert.AreEqual(expectedFileWithPath, outputFileWithPath, "WriteCss Test fails");
+            TextFileAssert.AreEqual(expectedFileWithPath, outputFileWithPath, "WriteCss Test fails");
         }
 
         [Test]
@@ -472,7 +473,7 @@ namespace Test.UIConfigurationToolTest
             _configToolBL.CreateCssFile(fileName);
             string expectedFileWithPath = Common.PathCombine(_expectBasePath, fileName);
             string outputFileWithPath = Common.PathCombine(_outputBasePath, fileName);
-            FileAssert.AreEqual(expectedFileWithPath, outputFileWithPath, "CreateCssFile Test fails");
+            TextFileAssert.AreEqual(expectedFileWithPath, outputFileWithPath, "CreateCssFile Test fails");
         }
 
         [Test]
@@ -480,7 +481,7 @@ namespace Test.UIConfigurationToolTest
         {
             DataGridView gridView = new DataGridView();
             string actual = _configToolBL.SetPreviousLayoutSelect(gridView);
-            string expected = "TwoColumn";
+            string expected = "FieldWorksStyles";
             Assert.AreEqual(expected, actual, "SetPreviousLayoutSelect Test failed");
         }
 
@@ -562,10 +563,10 @@ namespace Test.UIConfigurationToolTest
             stylesGrid.Columns.Add("Comment", "Comment");
             stylesGrid.Columns.Add("Type", "Type");
             stylesGrid.Columns.Add("Shown", "Shown");
-
-            string[] row1 = { "Style2", "Style2 is selected", "2 comment", "Custom", "Yes" };
-            string[] row2 = { "txtName123", "txtDesc123", "txtComment123", "Custom", "Yes" };
-            string[] row3 = { "Style3", "Style3 is selected", "3 comment", "Custom", "Yes" };
+            stylesGrid.Columns.Add("approvedBy", "approvedBy");
+            string[] row1 = { "Style2", "Style2 is selected", "2 comment", "Custom", "Yes","GPS" };
+            string[] row2 = { "txtName123", "txtDesc123", "txtComment123", "Custom", "Yes", "GPS" };
+            string[] row3 = { "Style3", "Style3 is selected", "3 comment", "Custom", "Yes", "GPS" };
             stylesGrid.Rows.Add(row1);
             stylesGrid.Rows.Add(row2);
             stylesGrid.Rows.Add(row3);
@@ -585,7 +586,7 @@ namespace Test.UIConfigurationToolTest
             // Verifying the input setting file and css file - in Input Folder
             string settingFile = "DictionaryStyleSettings.xml";
             string sFileName = Common.PathCombine(_outputBasePath, settingFile);
-            Param.ProgBase = _outputBasePath;
+			Common.ProgBase = _outputBasePath;
             Param.LoadValues(sFileName);
             Param.SetLoadType = "Dictionary";
             Param.Value["OutputPath"] = _outputBasePath;
