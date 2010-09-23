@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using System.Xml.Xsl;
-using SIL.PublishingSolution;
 using SIL.PublishingSolution.Filter;
 using SIL.PublishingSolution.Sort;
 
