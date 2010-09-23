@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="3">
+    xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="8">
     <settings>
         <property name="InputPath" value="%(AppData)s/SIL/Pathway"/>
         <property name="OutputPath" value="%(AppData)s/SIL/Pathway"/>
@@ -24,7 +24,7 @@
         <property name="ConfigureDictionary" value="True"/>
         <property name="ReversalIndexes" value="True"/>
         <property name="GrammerSketch" value="False"/>
-        <property name="SelectLayout" value="Draft"/>
+        <property name="LayoutSelected" value="Draft"/>
         <property name="ExtraProcessing" value="True"/>
     </settings>
     <defaultSettings>
@@ -32,7 +32,7 @@
         <property name="ConfigureDictionary" value="True"/>
         <property name="ReversalIndexes" value="True"/>
         <property name="GrammerSketch" value="False"/>
-        <property name="SelectLayout" value="Draft"/>
+        <property name="LayoutSelected" value="Draft"/>
         <property name="ExtraProcessing" value="True"/>
         <property name="PublicationLocation"
             value="%(Documents)s/Publications/%(CurrentProject)s/Dictionary"/>
@@ -64,8 +64,8 @@
             </style>
         </paper>
         <mobile>
-            <style name="GPS11J11" file="GPS11J11.css" approvedBy="GPS">
-                <description>5.25x8.25in - 1 Col - Justified - Charis 11 on 13</description>
+            <style name="GoBible" file="GoBible.css" approvedBy="GPS">
+                <description>Text only, no section heads or cross references</description>
             </style>
         </mobile>
         <web>

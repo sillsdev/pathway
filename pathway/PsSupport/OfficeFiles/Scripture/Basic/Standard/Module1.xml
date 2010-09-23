@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Constant ReferenceFormat for User Desire
-Const ReferenceFormat = &quot;Genesis 1:1 Genesis 1:15&quot;
-Const AutoMacro = &quot;True&quot;
+&apos;Changed On Sep-14-2010 for TD-1554(Format of re-opened file different)
 
-&apos;Changed For TD-1250 (Label of Extra processing in TE should refer to Scripture Reference not Dictionary headword)
 &apos; Changed message content from &quot;word&quot; to &quot;book, chapter and / or verse&quot;
 &apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -22,6 +19,173 @@ Dim strStartVerse As String
 Dim strEndVerse As String
 Dim strFirstParagraph
 Dim VerseNumber As String
+
+&apos;This procudure enables/disables the &quot;Auto Recovery&quot;
+Sub AutoSaveEnableDisable(value as Boolean)
+
+	dim document   as object
+	dim dispatcher as object
+	
+	document   = ThisComponent.CurrentController.Frame
+	dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;)
+	
+	rem ----------------------------------------------------------------------
+	dim args1(0) as new com.sun.star.beans.PropertyValue
+	args1(0).Name = &quot;AutoSave&quot;
+	args1(0).Value = value
+	
+	&apos;args1(1).Name = &quot;TimeIntervall&quot;
+	&apos;args1(1).Value = 7
+	
+	&apos;CommitChanges
+	&apos;AcceptChanges
+	&apos;TimeIntervall
+	dispatcher.executeDispatch(document, &quot;.uno:AcceptChanges&quot;, &quot;&quot;, 0, args1())
+	dispatcher.executeDispatch(document, &quot;.uno:CommitChanges&quot;, &quot;&quot;, 0, args1())
+
+End Sub
+
+&apos;This procedure align the overlapping images
+Sub AlingOverlappingImages 
+dim frameCount, lclNo 
+oGraphics = ThisComponent.getTextFrames
+
+frameCount = oGraphics.getCount() -1
+lclNo = 0
+  For i = 0 To oGraphics.getCount() -1 step 1 
+    	oGraphic = oGraphics.getByIndex(i)
+    	If frameCount &gt; i Then
+	    	nxt = oGraphics.getByIndex(i + 1)
+			If nxt.HoriOrientPosition = oGraphic.HoriOrientPosition Then
+				lclNo = lclNo + 1
+				If lclNo = 1 Then
+				 	oGraphic.HoriOrient = 3
+				 	nxt.HoriOrient = 2
+				elseif lclNo = 2 Then
+				 	oGraphic.HoriOrient = 2
+				 	nxt.HoriOrient = 1	
+				End If
+				if lclNo = 3 Then lclNo = 0
+			End If
+		End If
+  Next    
+End Sub
+
+&apos;This procedure set the dialgue to correct Update References 
+Sub StartDontForget
+
+	&apos;Msgbox &quot;Please NOTE: Use the Update References menu item or tool bar item to correct the references before printing.&quot; , 0 + 64,  &quot;Reference Reminder&quot;
+
+	dim clicked as byte
+	If IsMacroRun = true Then
+		clicked = msgbox(&quot;Headers are updated to contain the first and last book, chapter and / or verse with the &quot; + &quot;&quot;&quot;&quot; + &quot;Update References&quot; + &quot;&quot;&quot;&quot; + &quot; tool bar item or Macro menu item.&quot; &amp; chr(10) &amp; chr(10) &amp; &quot;This should be done once at the beginning and after any changes that affect what information is on a page.&quot;  &amp; chr(10) &amp; chr(10) &amp;  &quot;Would you like to update the headers now?&quot;, 4 + 32 + 256 , &quot;Run header macro?&quot;)
+		&apos;clicked = msgbox (&quot;Headers are updated to contain the first and last book, chapter and / or verse with the &quot; + &quot;&quot;&quot;&quot; + &quot;Update References&quot; + &quot;&quot;&quot;&quot; + &quot; tool bar item or Macro menu item.&quot; &amp; chr(10) &amp; &quot;Would you like to update the headers now?&quot;, 4 + 32 + 256 , &quot;Reference Reminder&quot;)
+		If clicked = 6 Then &apos;If Yes clicked
+			SetReference
+		Else
+			If TotalPages &gt; 100 Then
+				Msgbox(&quot;The headers will not appear to be correct until the repagination is complete.&quot; +  chr(10) + &quot;On long documents it may take a couple of minutes.&quot; &amp; chr(10) &amp; &quot;(Use File--&gt;Page Preview to force repagination.)&quot;,, &quot;Reference Reminder&quot;)
+			End If
+		End If
+	Else
+		if LCase(AutoMacro) = &quot;true&quot; Then
+			SetReference
+		else
+			clicked = msgbox(&quot;Headers are updated to contain the first and last book, chapter and / or verse with the &quot; + &quot;&quot;&quot;&quot; + &quot;Update References&quot; + &quot;&quot;&quot;&quot; + &quot; tool bar item or Macro menu item.&quot; &amp; chr(10) &amp; chr(10) &amp; &quot;This should be done once at the beginning and after any changes that affect what information is on a page.&quot;  &amp; chr(10) &amp; chr(10) &amp;  &quot;Would you like to update the headers now?&quot;, 4 + 32 + 256 , &quot;Run header macro?&quot;)
+			&apos;clicked = msgbox (&quot;Headers are updated to contain the first and last book, chapter and / or verse with the &quot; + &quot;&quot;&quot;&quot; + &quot;Update References&quot; + &quot;&quot;&quot;&quot; + &quot; tool bar item or Macro menu item.&quot; &amp; chr(10) &amp; &quot;Would you like to update the headers now?&quot;, 4 + 32 + 256 , &quot;Reference Reminder&quot;)
+			If clicked = 6 Then &apos;If Yes clicked
+				SetReference
+			End If		
+		end if	
+	End If
+
+	
+	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; Then
+		ExportToDOC_PDF
+	End IF
+End Sub
+
+Sub StartDontForgetTD1485
+
+	&apos;Msgbox &quot;Please NOTE: Use the Update References menu item or tool bar item to correct the references before printing.&quot; , 0 + 64,  &quot;Reference Reminder&quot;
+	if LCase(AutoMacro) = &quot;true&quot; Then
+		&apos;If IsMacroRun = false Then
+			SetReference
+		&apos;End If
+	else
+		dim clicked as byte
+		If IsMacroRun = true Then
+			clicked = msgbox(&quot;Headers are updated to contain the first and last book, chapter and / or verse with the &quot; + &quot;&quot;&quot;&quot; + &quot;Update References&quot; + &quot;&quot;&quot;&quot; + &quot; tool bar item or Macro menu item.&quot; &amp; chr(10) &amp; chr(10) &amp; &quot;This should be done once at the beginning and after any changes that affect what information is on a page.&quot;  &amp; chr(10) &amp; chr(10) &amp;  &quot;Would you like to update the headers now?&quot;, 4 + 32 + 256 , &quot;Run header macro?&quot;)
+			&apos;clicked = msgbox (&quot;Headers are updated to contain the first and last book, chapter and / or verse with the &quot; + &quot;&quot;&quot;&quot; + &quot;Update References&quot; + &quot;&quot;&quot;&quot; + &quot; tool bar item or Macro menu item.&quot; &amp; chr(10) &amp; &quot;Would you like to update the headers now?&quot;, 4 + 32 + 256 , &quot;Reference Reminder&quot;)
+			If clicked = 6 Then &apos;If Yes clicked
+				SetReference
+			End If
+		Else
+			SetReference
+		End If
+	End If
+	
+	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; Then
+		ExportToDOC_PDF
+	End IF
+End Sub
+
+&apos;This procedure removes existing hidden guide words
+Function IsMacroRun
+
+	Dim oParEnum           &apos;Paragraph enumerator 
+	Dim oPar               &apos;Current paragraph 
+	oParEnum = ThisComponent.Text.createEnumeration() 
+	Do While oParEnum.hasMoreElements() 
+		oPar = oParEnum.nextElement() 
+		If oPar.supportsService(&quot;com.sun.star.text.Paragraph&quot;) Then 
+			If InStr(oPar.ParaStyleName, &quot;Guide&quot;) &gt; 0 Then 
+				IsMacroRun = true
+				Exit Function
+			End If 
+		End If 
+	Loop
+	IsMacroRun = false
+End Function
+
+&apos;This procedure exports Odt file into Word/PDF based on the OutputFormat in given FilePath
+Sub ExportToDOC_PDF
+&apos;stardesktop.terminate 
+&apos;On Error GoTo MyError:
+	Dim FilePathWithName,filterType as string
+	Dim oSvc as Object
+   	oDoc = ThisComponent 
+	
+	FilePathWithName = FilePath &amp; &quot;.&quot; &amp; OutputFormat
+   	fileURL = ConvertToURL(FilePathWithName)
+   	
+	if Lcase(OutputFormat) = &quot;doc&quot; Then
+		filterType = &quot;MS WinWord 6.0&quot; 
+	else
+		filterType = &quot;writer_pdf_Export&quot;
+	End If 
+   	oDoc.storeToURL(fileURL, Array(MakePropertyValue(&quot;FilterName&quot;,filterType)) 
+
+	oSvc = createUnoService(&quot;com.sun.star.system.SystemShellExecute&quot;) 
+	oSvc.execute(FilePathWithName, &quot;&quot;, 0) 
+	oDoc.dispose()
+	&apos;wait 5000 
+&apos;Exit Sub
+&apos;MyError:
+	&apos;msgbox &quot;Same file has been opened already&quot; , 0 + 64,  &quot;File Error&quot;	
+End Sub
+&apos;This function sets the Property Value as Word or PDF
+Function MakePropertyValue( Optional cName As String, Optional uValue ) As com.sun.star.beans.PropertyValue 
+   Dim oPropertyValue As New com.sun.star.beans.PropertyValue 
+   If Not IsMissing( cName ) Then 
+      oPropertyValue.Name = cName 
+   EndIf 
+   If Not IsMissing( uValue ) Then 
+      oPropertyValue.Value = uValue 
+   EndIf 
+   MakePropertyValue() = oPropertyValue 
+End Function 
+
 &apos;The main procedure to show the Reference (Ex. Mark 1:1 - 2:26)
 Sub SetReference()
 
@@ -34,6 +198,14 @@ PageCount = TotalPages
 Redim LastParagraph(PageCount+2) As String
 Dim HiddenParagraph(PageCount,1) As String
 
+	oDoc = ThisComponent 
+	oContWindow = oDoc.CurrentController.Frame.ContainerWindow 
+	
+	msgbox &quot;The Open Office window will be hidden while the headers are updated since this cuts the time required for the update in half.&quot;,,&quot;Update References&quot;
+	oContWindow.Visible = false 
+	
+	&apos;AutoSaveEnableDisable(false)&apos;disable the &quot;Auto Recovery&quot;
+	
 If Instr(ReferenceFormat,&quot;:&quot;) &gt; 0 Then
 	VerseNumber = &quot;True&quot;
 Else
@@ -41,6 +213,8 @@ Else
 End If
 
 mytime = now
+
+AlingOverlappingImages()
 
 RemoveOldGuides()
 
@@ -202,11 +376,16 @@ Loop While oVC.jumpToNextPage
     InsertReference(HiddenParagraph,PageCount)
     keep = keep &amp; chr(10) &amp; &quot;After Print &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
     &apos;msgbox keep
-
+	oDoc.store() 
+	
+	&apos;AutoSaveEnableDisable(true)&apos;enable the &quot;Auto Recovery&quot;
+		
+	oContWindow.Visible = true 
 Exit Sub
 MyError:
-	Msgbox &quot;Sorry! Could not update the References.&quot; , 0 + 64,  &quot;Update References&quot;
-
+	If Err &lt;&gt; 1 Then
+		Msgbox &quot;Sorry! Could not update the References.&quot; , 0 + 64,  &quot;Update References&quot;
+	End IF
 End Sub
 
 &apos;This function returns Page Number of given Paragraph
@@ -428,17 +607,26 @@ End Sub
 
 
 &apos;This procedure sets the dialgue to correct Update Reference 
-Sub StartDontForget
+Sub StartDontForget100
+
 	&apos;Msgbox &quot;Please NOTE: Use the Update References menu item or tool bar item to correct the references before printing.&quot; , 0 + 64,  &quot;Reference Reminder&quot;
 	if LCase(AutoMacro) = &quot;true&quot; Then
-		SetReference
+		If IsMacroRun = false Then
+			SetReference
+		End If
 	else
 		dim clicked as byte
 		clicked = msgbox (&quot;Headers are updated to contain the first and last book, chapter and / or verse with the &quot; + &quot;&quot;&quot;&quot; + &quot;Update References&quot; + &quot;&quot;&quot;&quot; + &quot; tool bar item or Macro menu item.&quot; &amp; chr(10) &amp; &quot;Would you like to update the headers now?&quot;, 4 + 32 + 256 , &quot;Reference Reminder&quot;)
 		If clicked = 6 Then &apos;If Yes clicked
-			SetReference
+			If IsMacroRun = false Then
+				SetReference
+			End If
 		End If
 	End If
+	
+	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; Then
+		ExportToDOC_PDF
+	End IF
 End Sub
 
 &apos;This procedure sets the dialgue to confirm user to correction of Update Reference while Printing

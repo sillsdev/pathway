@@ -5,6 +5,8 @@
 <!-- Modified April 14, 2010. -->
 <!-- Modified April 30, 2010: added <div class="Line2">. -->
 <!-- Modified June 7, 2010: replace curly quotes with straight quotes in span text. -->
+<!-- Modiifed June 30, 2010: use Muenchian grouping to speed up the transformation.
+		 Added the processing of span with @class='Inscription'. -->
 
 <!-- Note Jim's use of xsl:transform, rather than xsl:stylesheet. They are interchangeable. -->
 <xsl:transform version="1.0"
@@ -17,6 +19,13 @@
     <xsl:output method="xml" version="1.0" encoding="UTF-8" doctype-public="-//W3C//DTD XHTML 1.1//EN" doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd" indent="yes"/>
 
     <xsl:strip-space elements="*"/>
+
+	<!-- Use a key to speed up the processing of the verses for each chapter. -->
+	<xsl:key name="verses-by-chapter" match="xhtml:span[@class='Verse_Number']"
+			use="generate-id(preceding::xhtml:span[@class='Chapter_Number'][1])" />
+	<!-- Use a key to speed up the processing of the spans for each verse. -->
+	<xsl:key name="spans-by-verse" match="xhtml:span[not(@class) or @class='Inscription']"
+			use="generate-id(preceding::xhtml:span[@class='Verse_Number'][1])" />
 
     <!-- Process the top element. -->
     <xsl:template match="xhtml:html">
@@ -116,9 +125,10 @@
 		<xsl:element name="div">
             <xsl:variable name="startGenerateID" select="generate-id()"/>
             <!-- Collect all the verses to be processed for the given chapter. -->
-            <xsl:variable name="verses" select="following::xhtml:span[@class='Verse_Number']
-							[generate-id(preceding::xhtml:span[@class='Chapter_Number'][1])=$startGenerateID]"/>  
+            <!-- xsl:variable name="verses" select="following::xhtml:span[@class='Verse_Number']
+							[generate-id(preceding::xhtml:span[@class='Chapter_Number'][1])=$startGenerateID]"/ -->
 				<!-- [preceding::xhtml:span[@class='Chapter_Number'][1]=$currentChapter] -->
+			<xsl:variable name="verses" select="key('verses-by-chapter',$startGenerateID)"/>
 			<xsl:attribute name="class"><xsl:text>chapter</xsl:text></xsl:attribute>
 			<xsl:attribute name="title"><xsl:value-of select="."/></xsl:attribute>
             <xsl:apply-templates select="$verses" mode="processVerses"/>
@@ -134,8 +144,10 @@
 			<xsl:attribute name="title"><xsl:value-of select="."/></xsl:attribute>
             <!-- Use the unique identifier (generate-id()) for the verse to gather the corresponding text.  -->
             <xsl:variable name="startGenerateID" select="generate-id()"/>
-            <xsl:variable name="verseSelected" select="following::xhtml:span[not(name()=span[@class='Verse_Number'])]
-							[generate-id(preceding::xhtml:span[@class='Verse_Number'][1])=$startGenerateID]" />
+            <!-- xsl:variable name="verseSelected"
+					select="following::xhtml:span[not(name()=span[@class='Verse_Number'])]
+							[generate-id(preceding::xhtml:span[@class='Verse_Number'][1])=$startGenerateID]" / -->
+			<xsl:variable name="verseSelected" select="key('spans-by-verse',$startGenerateID)"/>
             <xsl:apply-templates select="$verseSelected"/>        
         </xsl:element>
     </xsl:template>

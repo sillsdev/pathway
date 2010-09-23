@@ -1,0 +1,27 @@
+<!-- SubEntry-tpl.htm - snippet for each subentry -->
+  <tr>
+    <td class="tableRow%(Background)s">
+<table border="0" width="100%%">
+  <thead>
+    <th class="col1head">%(Type)s</th>
+    <th class="col2head">&nbsp;</th>
+    <th class="col2head">&nbsp;</th>
+  </thead>
+  <tr>
+    <td class="col1data">
+<!-- <input type="Text" name="form" value="%(Form)s" class="txBox" / --> 
+<span class="syll">%(Form)s</span>
+    </td>
+    <td class="col2data">
+<!-- input type="Text" name="example" value="%(Example)s" class="txBox" / -->
+<span class="exam">%(Example)s</span>
+    </td>
+    <td class="col2data">
+<!-- input type="Text" name="translation" value="%(Translation)s" class="txBox" / -->
+<span class="tran">%(Translation)s</span>
+    </td>
+  </tr>
+%(MoreExamples)s
+</table>
+    </td>
+  </tr>

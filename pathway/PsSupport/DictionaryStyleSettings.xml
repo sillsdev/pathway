@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="3">
+  xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="8">
   <settings>
     <property name="InputPath" value=""/>
     <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Dictionary"/>
@@ -24,7 +24,7 @@
     <property name="ConfigureDictionary" value="True"/>
     <property name="ReversalIndexes" value="True"/>
     <property name="GrammerSketch" value="False"/>
-    <property name="LayoutSelected" value="TwoColumn"/>
+    <property name="LayoutSelected" value="FieldWorksStyles"/>
     <property name="ExtraProcessing" value="True"/>
     <property name="Media" value="paper"/>
   </settings>
@@ -33,7 +33,7 @@
     <property name="ConfigureDictionary" value="True"/>
     <property name="ReversalIndexes" value="True"/>
     <property name="GrammerSketch" value="False"/>
-    <property name="LayoutSelected" value="TwoColumn"/>
+    <property name="LayoutSelected" value="FieldWorksStyles"/>
     <property name="ExtraProcessing" value="True"/>
     <property name="PublicationLocation"
       value="$(Documents)s/$(Base)s/$(CurrentProject)s/Dictionary/$(StyleSheet)s_$(DateTime)s"/>
@@ -137,6 +137,10 @@
       <option name="Yes" file="Rules_Yes.css"/>
       <option name="No" file="Rules_No.css"/>
     </feature>
+<feature name="FileProduced">
+      <option name="One" file="Rules_Yes.css" />
+      <option name="One Per Letter" file="Rules_Yes.css" />
+    </feature>
   </features>
   <categories>
     <category name="Publisher" select="Wycliffe">
@@ -156,26 +160,31 @@
       <item name="Philippines"/>
     </category>
   </categories>
+  <roles select="Output User">
+    <role name="Output User" icon="user.png"/>
+    <role name="Coordinator" icon="coordinator.png"/>
+    <role name="System Designer" icon="designer.png"/>
+  </roles>
   <styles>
     <paper>
-      <style name="OneColumn" file="LayoutOneCol.css" approvedBy="" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg">
+      <style name="OneColumn" file="LayoutOneCol.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg">
         <description>5.25x8.25in - 1 Col - Left aligned - Charis 11 on 13</description>
       </style>
-      <style name="TwoColumn" file="LayoutTwoCol.css" approvedBy="" previewfile1="TwoColumn_LayoutTwoCol p1.jpg" previewfile2="TwoColumn_LayoutTwoCol p2.jpg">
+      <style name="TwoColumn" file="LayoutTwoCol.css" approvedBy="GPS" previewfile1="TwoColumn_LayoutTwoCol p1.jpg" previewfile2="TwoColumn_LayoutTwoCol p2.jpg">
         <description>5.25x8.25in - 2 Col - Left aligned - Charis 9 on 11</description>
       </style>
-      <style name="LikeBuangPNG" file="Layout_04.css" approvedBy="" previewfile1="Pacific_Layout_04 p1.jpg" previewfile2="Pacific_Layout_04 p2.jpg">
+      <style name="LikeBuangPNG" file="Layout_04.css" approvedBy="GPS" previewfile1="Pacific_Layout_04 p1.jpg" previewfile2="Pacific_Layout_04 p2.jpg">
         <description>Double column 9/13pt C5 with one column, sense paragraphs, example callouts,
           writing system separator, embedded spans marked according to writing system, mirrored
           headers and rule lines.</description>
       </style>
-      <style name="FieldworksStyles" file="Layout_12.css" approvedBy="" previewfile1="Fieldworks_Layout_12 P1.jpg" previewfile2="Fieldworks_Layout_12 P2.jpg">
+      <style name="FieldWorksStyles" file="Layout_12.css" approvedBy="GPS" previewfile1="Fieldworks_Layout_12 P1.jpg" previewfile2="Fieldworks_Layout_12 P2.jpg">
         <description>C5 ruled double column with Flex formatting</description>
       </style>
-      <style name="FieldworksArabicBased" file="Layout_13.css" approvedBy="" previewfile1="FieldworksArabicBased_Layout_13 p1.jpg" previewfile2="FieldworksArabicBased_Layout_13 p2.jpg">
+      <style name="FieldWorksArabicBased" file="Layout_13.css" approvedBy="GPS" previewfile1="FieldworksArabicBased_Layout_13 p1.jpg" previewfile2="FieldworksArabicBased_Layout_13 p2.jpg">
         <description>C5 ruled double column with Flex formatting for Arabic based font</description>
       </style>
-      <style name="Draft" file="Layout_01.css" approvedBy="" previewfile1="Draft_Layout_01 p1.jpg" previewfile2="Draft_Layout_01 p2.jpg">
+      <style name="Draft" file="Layout_01.css" approvedBy="GPS" previewfile1="Draft_Layout_01 p1.jpg" previewfile2="Draft_Layout_01 p2.jpg">
         <description>Single column draft 12/24pt A4</description>
       </style>
       <!-- style name="GPS11J11" file="GPS11J11.css" approvedBy="GPS">
@@ -255,28 +264,28 @@
     </style -->
     </paper>
     <mobile>
-      <style name="OneColumn" file="LayoutOneCol.css" approvedBy="" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg">
-        <description>5.25x8.25in - 1 Col - Left aligned - Charis 11 on 15</description>
+      <style name="GoBible" file="GoBible.css" approvedBy="" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg">
+        <description>Text only, no section heads or cross references</description>
       </style>
     </mobile>
     <web>
-      <style name="OneColumn" file="LayoutOneCol.css" approvedBy="" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg">
+      <style name="OneColumnWeb" file="LayoutOneCol.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg">
         <description>5.25x8.25in - 1 Col - Left aligned - Charis 11 on 15</description>
       </style>
     </web>
     <others>
-      <style name="OneColumn" file="LayoutOneCol.css" approvedBy="" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg">
+      <style name="OneColumnOthers" file="LayoutOneCol.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg">
         <description>5.25x8.25in - 1 Col - Left aligned - Charis 11 on 15</description>
       </style>
     </others>
   </styles>
   <tasks>
-    <task name="Quick print" style="FieldworksStyles" icon="Graphic/quick.png"/>
+    <task name="Quick print" style="FieldWorksStyles" icon="Graphic/quick.png"/>
     <task name="Village check" style="Draft" icon="Graphic/draft.png"/>
     <task name="Trial print" style="LikeBuangPNG" icon="Graphic/trialPrint.png"/>
     <task name="Final print" style="TwoColumn" icon="Graphic/final.png"/>
     <task name="Web publish" style="OneColumn" icon="Graphic/web.png"/>
-    <task name="Cell publish" style="OneColumn" icon="Graphic/cell.png"/>
+    <task name="Cell publish" style="GoBible" icon="Graphic/cell.png"/>
   </tasks>
   <column-width>
     <column name="0" width="85"/>

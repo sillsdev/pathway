@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<booklet>
+    <sections>
+        <section name="Front Matter" order="1"/>
+        <section name="Dictionary" order="2"/>
+        <section name="Reversal English" order="3"/>
+        <section name="Reversal Spanish" order="4"/>
+        <section name="Classified Index" order="5"/>
+        <section name="Back Matter" order="6"/>
+    </sections>
+</booklet>

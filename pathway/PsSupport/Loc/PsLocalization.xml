@@ -379,7 +379,7 @@
       <Tip>Close</Tip>
     </Item>
     <Item ID="label1" Tip="true">
-      <English>Primary &amp;Language</English>
+      <English>Primary Language</English>
     </Item>
     <Item ID="label2" Tip="true">
       <English>Font Name</English>
@@ -631,7 +631,7 @@
       <English>Browse</English>
     </Item>
     <Item ID="lblShowProperty">
-      <English>S&amp;howProperty</English>
+      <English>ShowProperty</English>
     </Item>
     <Item ID="btnSave">
       <English>&amp;Save</English>
@@ -649,7 +649,7 @@
       <English>&amp;Next</English>
     </Item>
     <Item ID="lblCSS">
-      <English>Sou&amp;rce CSS</English>
+      <English>Source CSS</English>
     </Item>
     <Item ID="lvwDocumentSection_col0">
       <English>Sections</English>
@@ -1447,7 +1447,7 @@
       <English>S&amp;how Property</English>
     </Item>
     <Item ID="lblCSS">
-      <English>Sou&amp;rce CSS</English>
+      <English>Source CSS</English>
     </Item>
   </Group>
   <Group ID="tsDocumentSteps" Title="tsDocumentSteps" Translator="false">

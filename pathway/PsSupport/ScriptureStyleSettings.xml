@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="3">
+    xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="8">
     <settings>
         <property name="InputPath" value="%(AppData)s/SIL/Pathway"/>
         <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Scripture"/>
@@ -21,13 +21,13 @@
         <property name="MissingIcon" value="Graphic/missing.png"/>
         <property name="Help" value="PsDoc.chm"/>
         <property name="PrintVia" value="OpenOffice"/>
-        <property name="LayoutSelected" value="GPS12L10"/>
+        <property name="LayoutSelected" value="C5 Cols ApplicationStyles"/>
         <property name="ExtraProcessing" value="True"/>
         <property name="Media" value="paper"/>
     </settings>
     <defaultSettings>
         <property name="PrintVia" value="OpenOffice"/>
-        <property name="LayoutSelected" value="GPS12L10"/>
+        <property name="LayoutSelected" value="C5 Cols ApplicationStyles"/>
         <property name="ExtraProcessing" value="True"/>
         <property name="PublicationLocation" value="$(Documents)s/$(Base)s/$(CurrentProject)s/Scripture/$(StyleSheet)s_$(DateTime)s" />
         <property name="Media" value="paper" />
@@ -108,7 +108,7 @@
         </feature>
 <feature name="FileProduced">
       <option name="One" file="Rules_Yes.css" />
-      <option name="OneperBook" file="Rules_Yes.css" />
+      <option name="One Per Book" file="Rules_Yes.css" />
     </feature>
     <feature name="RedLetter">
       <option name="Yes" file="Rules_Yes.css" />
@@ -133,63 +133,68 @@
             <item name="Philippines"/>
         </category>
     </categories>
+  <roles select="Output User">
+    <role name="Output User" icon="user.png"/>
+    <role name="Coordinator" icon="coordinator.png"/>
+    <role name="System Designer" icon="designer.png"/>
+  </roles>
     <styles>
         <paper>
-            <style name="GPS11J11" file="GPS11J11.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 1 Col - Justified - Charis 11 on 13 p2.jpg">
+            <style name="5.25x8.25in 11pt Justified" file="GPS11J11.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 1 Col - Justified - Charis 11 on 13 p2.jpg">
                 <description>5.25x8.25in - 1 Col - Justified - Charis 11 on 13</description>
             </style>
-            <style name="GPS11L11" file="GPS11L11.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p2.jpg" >
+            <style name="5.25x8.25in 11pt Left" file="GPS11L11.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p2.jpg" >
                 <description>5.25x8.25in - 1 Col - Left - Charis 11 on 13</description>
             </style>
-            <style name="GPS12J10" file="GPS12J10.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Justified - Charis 10 on 12 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Justified - Charis 10 on 12 p2.jpg">
+            <style name="5.25x8.25in Cols 10pt Justified" file="GPS12J10.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Justified - Charis 10 on 12 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Justified - Charis 10 on 12 p2.jpg">
                 <description>5.25x8.25in - 2 Col - Justified - Charis 10 on 12</description>
             </style>
-            <style name="GPS12J11" file="GPS12J11.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Justified - Charis 11 on 13 p2.jpg">
+            <style name="5.25x8.25in Cols 11pt Justified" file="GPS12J11.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Justified - Charis 11 on 13 p2.jpg">
                 <description>5.25x8.25in - 2 Col - Justified - Charis 11 on 13</description>
             </style>
-            <style name="GPS12J9" file="GPS12J9.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Justified - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Justified - Charis 9 on 11 p2.jpg">
+            <style name="5.25x8.25in Cols 9pt Justified" file="GPS12J9.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Justified - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Justified - Charis 9 on 11 p2.jpg">
                 <description>5.25x8.25in - 2 Col - Justified - Charis 9 on 11</description>
             </style>
-            <style name="GPS12L10" file="GPS12L10.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Left - Charis 10 on 12 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Left - Charis 10 on 12 p2.jpg">
+            <style name="5.25x8.25in Cols 10pt Left" file="GPS12L10.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Left - Charis 10 on 12 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Left - Charis 10 on 12 p2.jpg">
                 <description>5.25x8.25in - 2 Col - Left - Charis 10 on 12</description>
             </style>
-            <style name="GPS12L11" file="GPS12L11.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Left - Charis 11 on 13 p2.jpg">
+            <style name="5.25x8.25in Cols 11pt Left" file="GPS12L11.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Left - Charis 11 on 13 p2.jpg">
                 <description>5.25x8.25in - 2 Col - Left - Charis 11 on 13</description>
             </style>
-            <style name="GPS12L9" file="GPS12L9.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Left - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Left - Charis 9 on 11 p2.jpg">
+            <style name="5.25x8.25in Cols 9pt Left" file="GPS12L9.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Left - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Left - Charis 9 on 11 p2.jpg">
                 <description>5.25x8.25in - 2 Col - Left - Charis 9 on 11</description>
             </style>
-            <style name="GPS21J11" file="GPS21J11.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg">
+            <style name="5.8x8.7in 11pt Justified" file="GPS21J11.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg">
                 <description>5.8x8.7in - 1 Col - Justified - Charis 11 on 13</description>
             </style>
-            <style name="GPS21L11" file="GPS21L11.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Left - Charis 11 on 13 p2.jpg">
+            <style name="5.8x8.7in 11pt Left" file="GPS21L11.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Left - Charis 11 on 13 p2.jpg">
                 <description>5.8x8.7in - 1 Col - Left - Charis 11 on 13</description>
             </style>
-            <style name="GPS22J10" file="GPS22J10.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Justified - Charis 10 on 12 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Justified - Charis 10 on 12 p2.jpg">
+            <style name="5.8x8.7in Cols 10pt Justified" file="GPS22J10.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Justified - Charis 10 on 12 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Justified - Charis 10 on 12 p2.jpg">
                 <description>5.8x8.7in - 2 Col - Justified - Charis 10 on 12</description>
             </style>
-            <style name="GPS22J11" file="GPS22J11.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Justified - Charis 11 on 13 p2.jpg">
+            <style name="5.8x8.7in Cols 11pt Justified" file="GPS22J11.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Justified - Charis 11 on 13 p2.jpg">
                 <description>5.8x8.7in - 2 Col - Justified - Charis 11 on 13</description>
             </style>
-            <style name="GPS22J9" file="GPS22J9.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Justified - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Justified - Charis 9 on 11 p2.jpg">
+            <style name="5.8x8.7in Cols 9pt Justified" file="GPS22J9.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Justified - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Justified - Charis 9 on 11 p2.jpg">
                 <description>5.8x8.7in - 2 Col - Justified - Charis 9 on 11</description>
             </style>
-            <style name="GPS22L10" file="GPS22L10.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 10 on 12 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 10 on 12 p2.jpg">
+            <style name="5.8x8.7in Cols 10pt Left" file="GPS22L10.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 10 on 12 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 10 on 12 p2.jpg">
                 <description>5.8x8.7in - 2 Col - Left - Charis 10 on 12</description>
             </style>
-            <style name="GPS22L11" file="GPS22L11.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 11 on 13 p2.jpg">
+            <style name="5.8x8.7in Cols 11pt Left" file="GPS22L11.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 11 on 13 p2.jpg">
                 <description>5.8x8.7in - 2 Col - Left - Charis 11 on 13</description>
             </style>
-            <style name="GPS22L9" file="GPS22L9.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p2.jpg">
+            <style name="5.8x8.7in Cols 9pt Left" file="GPS22L9.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p2.jpg">
                 <description>5.8x8.7in - 2 Col - Left - Charis 9 on 11</description>
             </style>
-            <style name="Trial" file="Layout_02.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p2.jpg">
+            <style name="A4 Cols 11pt" file="Layout_02.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p2.jpg">
                 <description> Two column draft 11pt A4 with drop capital. </description>
             </style>
-            <style name="FieldworksStyles" file="Layout_12.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p2.jpg">
-                <description> Two column C5 with Translation Editor formatting. </description>
+            <style name="C5 Cols ApplicationStyles" file="Layout_12.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p2.jpg">
+                <description> Two column C5 output format. </description>
             </style>
-            <style name="Draft" file="Layout_01.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p2.jpg">
+            <style name="A4 11pt draft" file="Layout_01.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p2.jpg">
                 <description> Single column draft 11pt A4 with drop capital </description>
             </style>
         <!-- style name="Trial2" file="Layout_03.css">
@@ -224,28 +229,28 @@
         </style -->
         </paper>
         <mobile>
-            <style name="GPS11J11" file="GPS11J11.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg" >
-                <description>5.25x8.25in - 1 Col - Justified - Charis 11 on 13</description>
+            <style name="GoBible" file="GoBible.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg" >
+                <description>Text only, no section heads or cross references</description>
             </style>
         </mobile>
         <web>
-            <style name="GPS11J11" file="GPS11J11.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg">
-                <description>5.25x8.25in - 1 Col - Justified - Charis 11 on 13</description>
+            <style name="Web 11pt" file="GPS11L11.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p2.jpg" >
+                <description>Web - 1 Col - Left - Charis 11 on 13</description>
             </style>
         </web>
         <others>
-            <style name="GPS11J11" file="GPS11J11.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg">
-                <description>5.25x8.25in - 1 Col - Justified - Charis 11 on 13</description>
+            <style name="5.25x8.25in 11pt Left - Others" file="GPS11L11.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p2.jpg" >
+                <description>5.25x8.25in - 1 Col - Left - Charis 11 on 13</description>
             </style>
         </others>
     </styles>
     <tasks>
-        <task name="Quick print" style="FieldworksStyles" icon="Graphic/quick.png"/>
-        <task name="Village check" style="Draft" icon="Graphic/draft.png"/>
-        <task name="Trial print" style="Trial" icon="Graphic/trialPrint.png"/>
-        <task name="Final print" style="GPS12L10" icon="Graphic/final.png"/>
-        <task name="Web publish" style="GPS11J11" icon="Graphic/web.png"/>
-        <task name="Cell publish" style="GPS11J11" icon="Graphic/cell.png"/>
+        <task name="Quick print" style="C5 Cols ApplicationStyles" icon="Graphic/quick.png"/>
+        <task name="Village check" style="A4 11pt draft" icon="Graphic/draft.png"/>
+        <task name="Trial print" style="5.25x8.25in Cols 10pt Left" icon="Graphic/trialPrint.png"/>
+        <task name="Final print" style="5.25x8.25in 11pt Left" icon="Graphic/final.png"/>
+        <task name="Web publish" style="Web 11pt" icon="Graphic/web.png"/>
+        <task name="Cell publish" style="GoBible" icon="Graphic/cell.png"/>
     </tasks>
     <column-width>
         <column name="0" width="85"/>

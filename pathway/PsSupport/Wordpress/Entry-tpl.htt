@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>%(Stem)s</title>
+  <link rev="made" href="mailto:greg_trihus@sil.org" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="author" content="Greg Trihus" />
+  <meta name="description" content="display stem forms" />
+  <meta name="keywords" content="cherokee" />
+
+<style type="text/css">
+<!--
+.tableRow {
+    border-style: dashed;
+	border-width: 0;
+    border-bottom-width: thin;
+    border-color: black;
+    background-color: maroon;
+	color: white;
+}
+.tableRowIMM {
+    border-style: dashed;
+	border-width: 0;
+    border-bottom-width: thin;
+    border-color: black;
+    background-color: #CCFFCC;
+	color: black;
+}
+.tableRowINC {
+    border-style: dashed;
+	border-width: 0;
+    border-bottom-width: thin;
+    border-color: black;
+    background-color: #CCFFFF;
+	color: black;
+}
+.tableRowDVN {
+    border-style: dashed;
+	border-width: 0;
+    border-bottom-width: thin;
+    border-color: black;
+    background-color: #FFFF99;
+	color: black;
+}
+.tableRowPRC {
+    border-style: dashed;
+	border-width: 0;
+    border-bottom-width: thin;
+    border-color: black;
+    background-color: #90713A;
+	color: white;
+}
+.tableRowCMP {
+    border-style: dashed;
+	border-width: 0;
+    border-bottom-width: thin;
+    border-color: black;
+	background-color: black;
+	color: white;
+}
+.tableRowPL {
+    border-style: dashed;
+	border-width: 0;
+    border-bottom-width: thin;
+    border-color: black;
+    background-color: #A9A9A9;
+	color: white;
+}
+.col1head {
+    text-align: center;
+    border: medium none white;
+    border-right: medium solid white;
+    background-color: #708090;
+    color: black;
+	width: 20%%;
+}
+.col2head {
+    text-align: center;
+    background-color: #708090;
+    color: black;
+	width: 35%%;
+}
+.col1data {
+    border: medium none white;
+    border-right: medium solid white;
+	width: 20%%;
+}
+.col2data {
+	width: 35%%;
+}
+.txBox {
+    width: 95%%;
+}
+-->
+</style>
+
+</head>
+
+<body bgcolor="#000000" text="#A9A9A9" link="#A9A9A9" vlink="#0000FF" alink="#FFFF00">
+
+<table border="0" width="100%%" style="background-color: white;color:black;">
+  <tr>
+    <td>
+%(Table)s
+    </td>
+  </tr>
+  <tr>
+    <td>
+<p align="center"><a href="mailto:%(Email)s?Subject=%(Stem)s">Comments?</a></p>
+    </td>
+  </tr>
+</table>
+
+<hr />
+
+<p><small>Created on ... %(Date)s</small></p>
+</body>
+</html>

@@ -1,10 +1,10 @@
-﻿var columnRule=new Array("columns 1 Solid #808080");
-var borderRule=new Array("@page-footnotes", ".5 solid #000000", "none", "none", "none", "@page-footnote", ".5 solid #000000", "none", "none", "none", "border", ".5 solid #808080", "none", "none", "none", "@page:first-footnotes", ".5 solid #000000", "none", "none", "none", "@page:first-footnote", ".5 solid #000000", "none", "none", "none");
+﻿var columnRule=new Array("");
+var borderRule=new Array("");
 var margin=new Array("");
 var cropMarks = false;
 var indexTab = false;
 // --------------------------------------------------------------------------------------------
-// <copyright file="PlaceFrames.jsx" from='2009' to='2010' company='SIL International'>
+// <copyright file="PlaceFrames.jsx" from='2009' to='2010' company='SIL International'>37094.76
 //      Copyright © 2009, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
@@ -14,10 +14,10 @@ var indexTab = false;
 // Created By:   James Prabu 
 // Created On: Sep 10 2009   
 // Modified By:  James Prabu                        
-// Modified On:  June 01 2010
-// Task Number : TD-1359(Apply macro from current page forward)
+// Modified On:  July 29 2010 
+// Task Number : TD-1494(InDesign: Improve Macro performance for formating)
 // <remarks> 
-// changes in methods such as Group, UnGroup, TabIndex, PlaceFrames
+// main changes in  SetOverflowsPages(), FitFrameToPage(), PlaceFrame()
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -33,6 +33,7 @@ var marginTop, marginBottom, marginLeft,marginRight, pageHeight, pageWidth, head
 var isBorderBottomExists, borderClass,times="";
 var letterParagraphStyle, letterPushMargin=0, constantLetterParagraphStyle="letter_lethead_dicbody";
 var activePageNumber=0;
+var startEvent =0;
 //Delete Menu if it has been created already
 	try
 	{
@@ -61,20 +62,69 @@ myEventListener = mySampleScriptAction.eventListeners.add("onInvoke",partialMacr
 
   function afterOpen(myEvent) 
   {
-     if(app.documents[app.documents.length-1].masterSpreads.item(0).name == "F-FirstPage")
-	var clicked=confirm("Headers are updated to contain the first and last word with the ''Update Guide Words'' tool bar item or Macro menu item.\nWould you like to update the headers now?")
-	if (clicked==true)
-	  {
+	var myGroup;
+
+	myDocument = app.documents[app.documents.length-1];
+	var groupLength = myDocument.groups.length -1;
+	if(groupLength >= 0)
+	{	
+		var documentType = GetDocumentType();
+		var documentMessage = "guidewords with the 'Update Guidewords'";
+		if (documentType == "Scripture")
+			documentMessage = "book, chapter and / or verse with the ''Update References''";
+		
+		var clicked=confirm("Headers are updated to contain the first and last " + documentMessage + " Macro menu item. \n\nThis should be done once at the beginning and after any changes that affect what information is on a page. \n\nWould you like to update the headers now?")
+		if (clicked==true)
+		{
+			startEvent=0;
+			if(app.documents[app.documents.length-1].masterSpreads.item(0).name == "F-FirstPage")
+			main();
+		}
+	     else
+		 {
+			 startEvent=1;
+		 }
+	}
+	else
+	{
+		if(app.documents[app.documents.length-1].masterSpreads.item(0).name == "F-FirstPage")
 		main();
-	  }	  
-  }
+	}
+}
 
 }())
 
 
+//This method returns Document Type (Dictionary or Scripture)
+function GetDocumentType()
+{
+	var myPage, myStory, myPageLength
+	var result="Dictionary";
+	try
+	{
+			//myDocument = app.documents[app.documents.length-1];
+			myPage = myDocument.pages.item(0);//stories
+			for(var myStoryCounter=0; myStoryCounter < myPage.textFrames.length; myStoryCounter++)
+			{
+				myStory = myPage.textFrames.item(myStoryCounter);//stories
+				if(myStory.paragraphs[0].appliedParagraphStyle.name.toLowerCase().indexOf("scrbook") >= 0)
+				{
+					result = "Scripture";
+					return result;
+				}
+			}
+		return result;
+	}
+	catch(myError)
+	{
+		return "Dictionary";
+	}
+}
+
 function partialMacro()
 {
-	myDocument = app.documents[app.documents.length-1];
+	//alert(startEvent);
+	//myDocument = app.documents[app.documents.length-1];
 	try{ 
 		activePageNumber=app.activeWindow.activePage.groups.item(0).parent.name;
 		activePageNumber = activePageNumber - 1;
@@ -99,6 +149,12 @@ function partialMacro()
 
 function main()
 {
+	
+	startEvent=startEvent + 1;
+	if(startEvent>1) //for other than Startup Event
+		myDocument  = app.activeDocument;
+
+			
 	var d = new Date();
 
 	times="Settings";
@@ -143,8 +199,25 @@ function main()
 	d = new Date();
 	times=times + "\n" + d;
 
+	SaveDocument();
+
 	//alert(times);
 }
+
+function SaveDocument()
+{
+	try
+	{
+		if(myDocument.modified == true){
+			myDocument.save(new File("/c/myTestDocument.indd"));
+		}
+	}
+	catch(myError)
+	{
+
+	}	
+}
+
 
 //This method executes the function based on the Macro Variables
 function Optionals()
@@ -157,7 +230,7 @@ function Settings()
 {
 	try
 	{
-		myDocument = app.documents[app.documents.length-1];
+		//myDocument = app.documents[app.documents.length-1];
 		curPageNo =0;
 		myFrames=new Array();	
 		myDocument.printPreferences.cropMarks=cropMarks;
@@ -201,8 +274,8 @@ function ShowPicture()
 //This method moves frame one by one to all pages
 function PlaceFrames()
 {
-	try
-	{
+	//try
+	//{
 	var d1 = new Date();
 	
 	times1="Header";
@@ -274,17 +347,20 @@ function PlaceFrames()
 		currentMarginTop = currentMarginTop + (frameBounds[2] - frameBounds[0]);
 
          //myStory.geometricBounds = [frameBounds[0], myPage.marginPreferences.left , frameBounds[2], pageWidth - myPage.marginPreferences.left]; //(pageWidth - marginLeft)
-	     if(myStory.overflows &&   (pageHeight - currentMarginTop) > 3)
+	    /* if(myStory.overflows &&   (pageHeight - currentMarginTop) > 3)
 		 {
-	 
+			 alert("yes");
 			FitSingleFrameToContent(myStory);
 		}
-		else if(myStory.overflows)
+		else */
+		if(myStory.overflows)
 		{
+			//alert("Overflows");
 			myStory = SetOverflowsPages(myStory,frameBounds);
 			curPageNo = myStory.parent.documentOffset;
 			frameBounds = myStory.geometricBounds;
-			currentMarginTop = marginTop + (frameBounds[2] - frameBounds[0]);
+			//alert(currentMarginTop);
+			//currentMarginTop = marginTop + (frameBounds[2] - frameBounds[0]);
 			//myStory.geometricBounds = [frameBounds[0], myPage.marginPreferences.left , frameBounds[2], pageWidth - myPage.marginPreferences.left]; //(pageWidth - marginLeft)
 		}
 
@@ -308,12 +384,13 @@ function PlaceFrames()
 	times1=times1 + "\n" + d1;
 	
 		//alert(times1);
-	}
+	/*}
 	catch(myError)
 	{
+		alert("error");
 		//myDocument.pages.item(0).appliedMaster = null;
 		//app.activeDocument.pages.item(0).appliedMaster = null;
-	}
+	}*/
 }
 
 //This method assigns FirstPage Master spread to First Page only
@@ -322,7 +399,8 @@ function SetMasterPageForFirstPage()
 	try
 	{
 				//app.documents[app.documents.length-1].masterSpreads.item("A-AllPage")
-				myDocument.pages.item(0).appliedMaster = app.documents[app.documents.length-1].masterSpreads.item("F-FirstPage")
+//myDocument.pages.item(0).appliedMaster = app.documents[app.documents.length-1].masterSpreads.item("F-FirstPage")
+myDocument.pages.item(0).appliedMaster = myDocument.masterSpreads.item("F-FirstPage")
 		//myDocument.pages.item(0).appliedMaster = app.activeDocument.masterSpreads.item("F-FirstPage");//F-FirstPage
 		//app.activeDocument.pages.item(0).appliedMaster = app.activeDocument.masterSpreads.item("F-FirstPage");
 	}
@@ -346,17 +424,20 @@ function AddNewPage(pageNo)
 		if(myDocument.documentPreferences.facingPages)
 		{
 			if((pageNo +1 ) % 2  == 0)
-				myDocument.pages.item(pageNo).appliedMaster = app.documents[app.documents.length-1].masterSpreads.item("L-LeftPage");
+//myDocument.pages.item(pageNo).appliedMaster = app.documents[app.documents.length-1].masterSpreads.item("L-LeftPage");
+myDocument.pages.item(pageNo).appliedMaster = myDocument.masterSpreads.item("L-LeftPage");
 				//myDocument.pages.item(pageNo).appliedMaster = app.activeDocument.masterSpreads.item("L-LeftPage");
 				//app.activeDocument.pages.item(pageNo).appliedMaster = app.activeDocument.masterSpreads.item("L-LeftPage");
 			else
-				myDocument.pages.item(pageNo).appliedMaster = app.documents[app.documents.length-1].masterSpreads.item("R-RightPage");
+//myDocument.pages.item(pageNo).appliedMaster = app.documents[app.documents.length-1].masterSpreads.item("R-RightPage");
+myDocument.pages.item(pageNo).appliedMaster = myDocument.masterSpreads.item("R-RightPage");
 				//myDocument.pages.item(pageNo).appliedMaster = app.activeDocument.masterSpreads.item("R-RightPage");
 				//app.activeDocument.pages.item(pageNo).appliedMaster = app.activeDocument.masterSpreads.item("R-RightPage");
 		}	
 		else
 		{
-			myDocument.pages.item(pageNo).appliedMaster = app.documents[app.documents.length-1].masterSpreads.item("A-AllPage");
+//myDocument.pages.item(pageNo).appliedMaster = app.documents[app.documents.length-1].masterSpreads.item("A-AllPage");
+myDocument.pages.item(pageNo).appliedMaster = myDocument.masterSpreads.item("A-AllPage");
 			//myDocument.pages.item(pageNo).appliedMaster = app.activeDocument.masterSpreads.item("A-AllPage");
 			//app.activeDocument.pages.item(pageNo).appliedMaster = app.activeDocument.masterSpreads.item("A-AllPage");
 		}
@@ -401,46 +482,95 @@ function GetMinHeight(frameType)
 //This method returns Frame type whether "Header" or "Data"
 function GetFrameType(myStory)
 {
-	if(myStory.textFramePreferences.textColumnCount == 1 && myStory.contents.length < 5)
-	{
-		return "Header";
+	try
+	{	
+		if(myStory.textFramePreferences.textColumnCount == 1 && myStory.contents.length < 5)
+		{
+			return "Header";
+		}
+		else
+		{
+			return "Data";
+		}
 	}
-	else
+	catch(myError)
 	{
-		return "Data";
-	}
+		//alert(myStory.textFramePreferences.textColumnCount);
+	}	
 }
 
 //This method generates the liked frames for Parent frame
 function SetOverflowsPages(myStory,frameBounds)
 {
 
-	var pageNo, pageCount, myTextFrame,frameWidth;
+	var pageNo, pageCount, myTextFrame,frameWidth, _marginTop,storyBound,frameHeight, loopNo;
 	frameWidth=frameBounds[3] - frameBounds[1];
 	pageNo = myStory.parent.documentOffset;	
+	_marginTop = marginTop;
 	while(myStory.overflows)
 	{
 		pageCount = myDocument.pages.length -1;
-		
+		loopNo += 1;
 		if(pageCount >= pageNo)
 		{
-			//myDocument.pages.add();	
-			AddNewPage(pageNo + 1);
-			pageNo = pageNo + 1;
+
+			//AddNewPage(pageNo + 1);
+			
+			//pageNo = pageNo + 1;
+			
+			storyBound = myStory.geometricBounds;
 	
 			myTextFrame = myDocument.textFrames.add();
 			myTextFrame.label = myStory.label;
 			//myTextFrame.fit(FitOptions.frameToContent);
 			myTextFrame.previousTextFrame = myStory;
-			
+			myTextFrame.geometricBounds = [marginTop, marginLeft, pageHeight, frameWidth + marginLeft]; //(pageWidth - marginLeft) 
+			myTextFrame.fit(FitOptions.frameToContent);
+			//myTextFrame.geometricBounds = [marginTop, marginLeft, pageHeight, frameWidth + marginLeft]; //(pageWidth - marginLeft) 
 			myTextFrame.textFramePreferences.textColumnCount  = myStory.textFramePreferences.textColumnCount ;
 			myTextFrame.textFramePreferences.textColumnGutter  = myStory.textFramePreferences.textColumnGutter;
 			myTextFrame.textFramePreferences.verticalJustification  = myStory.textFramePreferences.verticalJustification;
+			
+			//myTextFrame.geometricBounds = [marginTop, marginLeft, pageHeight, frameWidth + marginLeft]; //(pageWidth - marginLeft) 
+			
+              //fitFrameBound = myTextFrame.geometricBounds; //pageHeight
+			 //frameHeight = fitFrameBound[2] - fitFrameBound[0];
+			 
+			 
+			 
+			 _marginTop = storyBound[2];
+			 //alert ("local " + _marginTop)
+			 //alert(_marginTop + "   " + pageHeight);
+			  if( pageHeight  - _marginTop < 3)
+			  {
+					AddNewPage(pageNo + 1);
+					pageNo = pageNo + 1;
+					_marginTop = marginTop;
+			  }
+		  
+			MoveFrame(myTextFrame, _marginTop, pageNo);
+			fitFrameBound = myTextFrame.geometricBounds;
+			frameHeight = fitFrameBound[2];
+			
+			//alert("adjust  " + frameHeight);
 
-			myTextFrame.geometricBounds = [marginTop, marginLeft, pageHeight, frameWidth + marginLeft]; //(pageWidth - marginLeft) 
-			MoveFrame(myTextFrame, marginTop, pageNo);
-		
+			if( frameHeight > pageHeight)	
+			 {
+				//alert("re-adjust");
+				myTextFrame.geometricBounds = [_marginTop, marginLeft, pageHeight, frameWidth + marginLeft]; //(pageWidth - marginLeft) 
+				currentMarginTop = marginTop;
+			 }
+			else
+			{
+				frameHeight += 2;
+				myTextFrame.geometricBounds = [_marginTop, marginLeft, frameHeight, frameWidth + marginLeft]; //(pageWidth - marginLeft) 
+				//fitFrameBound = myTextFrame.geometricBounds;
+				currentMarginTop = parseFloat(fitFrameBound[2]); //Global Variable
+			}
 			myStory=myTextFrame;
+			
+			if(loopNo > 3)
+				break;
 		}
 	}
 	if(!myStory.overflows)
@@ -573,7 +703,7 @@ function CollectAllFrame()
 //Move Frame to given position
 function MoveFrame(myStory, currentMarginTop, pageNo)
 {
-	//alert(pageNo);
+	//alert(currentMarginTop);
 	
 	myPage = myDocument.pages.item(pageNo);
 	marginLeft = myPage.marginPreferences.left;
@@ -651,7 +781,6 @@ function FitFrameToPage(myStory)
 		fitFrameBound = myStory.geometricBounds; 
 		myStoryHeight = fitFrameBound[2] -  fitFrameBound[0];
 
-
 		if(myDocument.documentPreferences.facingPages)
 		{
 			if((curPageNo % 2) == 0 && curPageNo > 0)//For Right Page and Not First page
@@ -685,12 +814,26 @@ function FitFrameToPage(myStory)
 		{
 			 frameHeight = fitFrameBound[2];
 		}*/
-		frameHeight = pageHeight;
+	
+		
+		
+		if( fitFrameBound[2] > pageHeight)
+			frameHeight = pageHeight;
+		else
+			frameHeight = fitFrameBound[2];
+
+		//if(myStory.overflows)
+			//alert(myStory.contents,frameHeight + "   " + myStoryHeight);
+			
 	    //alert("currentMarginTop " + currentMarginTop + " frameLeft " + frameLeft  + " frameHeight " + frameHeight   + " frameWidth " + frameWidth)
 						//alert("current Top " + currentMarginTop + "\nPageHeight " + pageHeight);
 		myStory.geometricBounds=[currentMarginTop,frameLeft , frameHeight ,frameWidth];
+
+
+			
 		 if(!myStory.overflows && myStory.nextTextFrame == null)
 		{
+			//alert(myStory.contents);
 			BalancedColumns(myStory);
 		}
 	}
@@ -795,11 +938,11 @@ function isEmptyPage(page)
 function Grouping()
 {
 		var myStory, firstParagraphStyle;
-		var storyLength = myDocument.textFrames.length-1;		
+		var storyLength = myDocument.textFrames.length-1;	
 		for(; storyLength >= 0 ; storyLength--)
 		{
 			myStory = myDocument.textFrames[storyLength];
-			
+			//alert("my count " + myStory.parent.name);
 			if(myStory.parent.name  > activePageNumber)
 			{
 				if(myStory.textFramePreferences.textColumnCount > 1)
@@ -859,6 +1002,7 @@ function Ungrouping()
 			else //Startup Event
 			{
 				//MoveToFirstPageAndCollectAllFrame();
+				//alert("Would you like to run the macro in case changes have been made that require the header to be updated?");
 				CollectAllFrame();
 				ShowPicture();
 			}
@@ -1043,14 +1187,17 @@ try
 	for(var count = 0; count <= pictures.length; count++)
 	{
 		picture = pictures[count];
-		if(picture.parent.name  > activePageNumber)
-		{
+		//alert(picture.parent.name);	
+		//if(picture.parent.name  > activePageNumber)
+		//{
+			
 			if(picture.parent.allPageItems.length > 0)
 			{
 				caption = picture.parent.textFrames[0];
-				
+
 				if(caption.overflows)
 				{
+					
 					gbPicture = picture.geometricBounds;
 					gbContainer = picture.parent.geometricBounds;
 					 pictureHeight = gbPicture[2] - gbPicture[0];
@@ -1065,7 +1212,7 @@ try
 					picture.parent.geometricBounds = [gbContainer[0], gbContainer[1], gbContainer[0] + parentHeight , gbContainer[3]];
 				}
 			 }
-		}
+		//}
      }
      //alert("End");
 }
@@ -1217,6 +1364,16 @@ function GetLastParagraphLetter(myPage)
 		return "  ";
 	}
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

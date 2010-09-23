@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Constant ReferenceFormat for User Desire
-Const ReferenceFormat = &quot;&quot;
-Const AutoMacro = &quot;false&quot;
-&apos;Constant ReferenceFormat for User Desire
-Const ReferenceFormat = &quot;string(guidewordfirst)counter(page)string(guidewordlast)&quot;
-&apos;Changed For TD-1141(PrintVia Extra processing)
+&apos;Changed On Sep-17-2010 for TD-1555(Pictures not on right after first few pages)
 
 &apos;Define the values to Constant Variables for First Guide word, Last Guide word ,Headword Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -19,13 +14,182 @@ Const HOMOGRAPHNUMBER =   &quot;homographnumber&quot;
 Const CONTINUATION_CHARACTER = &quot;...&quot;
 Dim LastParagraph(0) As String
 
+&apos;This procedure enables/disables the &quot;Auto Recovery option&quot;
+Sub AutoSaveEnableDisable(value as Boolean)
+
+	dim document   as object
+	dim dispatcher as object
+	
+	document   = ThisComponent.CurrentController.Frame
+	dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;)
+	
+	rem ----------------------------------------------------------------------
+	dim args1(0) as new com.sun.star.beans.PropertyValue
+	args1(0).Name = &quot;AutoSave&quot;
+	args1(0).Value = value
+	
+	&apos;args1(1).Name = &quot;TimeIntervall&quot;
+	&apos;args1(1).Value = 7
+	
+	&apos;CommitChanges
+	&apos;AcceptChanges
+	&apos;TimeIntervall
+	dispatcher.executeDispatch(document, &quot;.uno:AcceptChanges&quot;, &quot;&quot;, 0, args1())
+	dispatcher.executeDispatch(document, &quot;.uno:CommitChanges&quot;, &quot;&quot;, 0, args1())
+
+end sub
+
+&apos;This procedure align the overlapping images
+Sub AlingOverlappingImages 
+dim frameCount, lclNo, curHoriPos, nxtHoriPos
+oGraphics = ThisComponent.getTextFrames
+
+frameCount = oGraphics.getCount() -1
+lclNo = 0
+  For i = 0 To oGraphics.getCount() -1 step 1 
+
+    	If frameCount &gt; i Then
+	    	oGraphic = oGraphics.getByIndex(i)
+	    	curHoriPos = oGraphic.HoriOrientPosition    	
+	    	nxt = oGraphics.getByIndex(i + 1)
+	    	nxtHoriPos = nxt.HoriOrientPosition 
+			If curHoriPos = nxtHoriPos And (curHoriPos + nxtHoriPos) &gt; 0 Then
+				lclNo = lclNo + 1
+				If lclNo = 1 Then
+				 	oGraphic.HoriOrient = 3
+				 	nxt.HoriOrient = 2
+				elseif lclNo = 2 Then
+				 	oGraphic.HoriOrient = 2
+				 	nxt.HoriOrient = 1	
+				End If
+				if lclNo = 3 Then lclNo = 0
+			End If
+		End If
+  Next    
+End Sub
+	
+&apos;This procedure set the dialgue to correct Update Guide Words 
+Sub StartDontForget
+	&apos;Msgbox &quot;Please NOTE: Use the Update Guide Words menu item or tool bar item to correct the guide words before printing.&quot; , 0 + 64,  &quot;Guide Word Reminder&quot;
+
+	dim clicked as byte
+	If IsMacroRun = true Then
+		clicked = msgbox (&quot;Headers are updated to contain the first and last word with the &quot; + &quot;&quot;&quot;&quot; + &quot;Update Guide Words&quot; + &quot;&quot;&quot;&quot; + &quot; tool bar item or Macro menu item.&quot; &amp; chr(10) &amp; chr(10) &amp; &quot;This should be done once at the beginning and after any changes that affect what information is on a page.&quot;  &amp; chr(10) &amp; chr(10) &amp;  &quot;Would you like to update the headers now?&quot;, 4 + 32 + 256 , &quot;Guide Word Reminder&quot;)
+		If clicked = 6 Then &apos;If Yes clicked
+			SetGuides
+		Else
+			If TotalPages &gt; 100 Then
+				Msgbox(&quot;The headers will not appear to be correct until the repagination is complete.&quot; +  chr(10) + &quot;On long documents it may take a couple of minutes.&quot; &amp; chr(10) &amp; &quot;(Use File--&gt;Page Preview to force repagination.)&quot;,, &quot;Guide Word Reminder&quot;)
+			End If
+		End If
+	Else
+		If LCase(AutoMacro) = &quot;true&quot; Then
+			SetGuides
+		Else
+			clicked = msgbox (&quot;Headers are updated to contain the first and last word with the &quot; + &quot;&quot;&quot;&quot; + &quot;Update Guide Words&quot; + &quot;&quot;&quot;&quot; + &quot; tool bar item or Macro menu item.&quot; &amp; chr(10) &amp; chr(10) &amp; &quot;This should be done once at the beginning and after any changes that affect what information is on a page.&quot;  &amp; chr(10) &amp; chr(10) &amp;  &quot;Would you like to update the headers now?&quot;, 4 + 32 + 256 , &quot;Guide Word Reminder&quot;)
+			If clicked = 6 Then &apos;If Yes clicked
+				SetGuides
+			End If		
+		End If	
+	End If
+	
+	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; Then
+		ExportToDOC_PDF
+	End IF	
+End Sub
+
+Sub StartDontForgetTD1485
+	&apos;Msgbox &quot;Please NOTE: Use the Update Guide Words menu item or tool bar item to correct the guide words before printing.&quot; , 0 + 64,  &quot;Guide Word Reminder&quot;
+	If LCase(AutoMacro) = &quot;true&quot; Then
+		&apos;If IsMacroRun = true Then
+			SetGuides
+		&apos;End If	
+	Else
+		dim clicked as byte
+		If IsMacroRun = true Then
+			clicked = msgbox (&quot;Headers are updated to contain the first and last word with the &quot; + &quot;&quot;&quot;&quot; + &quot;Update Guide Words&quot; + &quot;&quot;&quot;&quot; + &quot; tool bar item or Macro menu item.&quot; &amp; chr(10) &amp; chr(10) &amp; &quot;This should be done once at the beginning and after any changes that affect what information is on a page.&quot;  &amp; chr(10) &amp; chr(10) &amp;  &quot;Would you like to update the headers now?&quot;, 4 + 32 + 256 , &quot;Guide Word Reminder&quot;)
+			If clicked = 6 Then &apos;If Yes clicked
+				SetGuides
+			End If
+		Else
+			SetGuides
+		End If
+	End If	
+	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; Then
+		ExportToDOC_PDF
+	End IF	
+End Sub
+
+&apos;This procedure removes existing hidden guide words
+Function IsMacroRun
+
+	Dim oParEnum           &apos;Paragraph enumerator 
+	Dim oPar               &apos;Current paragraph 
+	oParEnum = ThisComponent.Text.createEnumeration() 
+	Do While oParEnum.hasMoreElements() 
+		oPar = oParEnum.nextElement() 
+		If oPar.supportsService(&quot;com.sun.star.text.Paragraph&quot;) Then 
+			If InStr(oPar.ParaStyleName, &quot;Guide&quot;) &gt; 0 Then 
+				IsMacroRun = true
+				Exit Function
+			End If 
+		End If 
+	Loop
+	IsMacroRun = false
+End Function
+
+&apos;This procedure exports Odt file into Word/PDF based on the OutputFormat in given FilePath
+Sub ExportToDOC_PDF
+&apos;stardesktop.terminate 
+
+	Dim FilePathWithName,filterType as string
+	Dim oSvc as Object
+   	oDoc = ThisComponent 
+	
+	FilePathWithName = FilePath &amp; &quot;.&quot; &amp; OutputFormat
+   	fileURL = ConvertToURL(FilePathWithName)
+   	
+	if Lcase(OutputFormat) = &quot;doc&quot; Then
+		filterType = &quot;MS WinWord 6.0&quot; 
+	else
+		filterType = &quot;writer_pdf_Export&quot;
+	End If 
+   	oDoc.storeToURL(fileURL, Array(MakePropertyValue(&quot;FilterName&quot;,filterType)) 
+
+	oSvc = createUnoService(&quot;com.sun.star.system.SystemShellExecute&quot;) 
+	oSvc.execute(FilePathWithName, &quot;&quot;, 0) 
+	oDoc.dispose()
+End Sub
+
+&apos;This function sets the Property Value as Word or PDF
+Function MakePropertyValue( Optional cName As String, Optional uValue ) As com.sun.star.beans.PropertyValue 
+   Dim oPropertyValue As New com.sun.star.beans.PropertyValue 
+   If Not IsMissing( cName ) Then 
+      oPropertyValue.Name = cName 
+   EndIf 
+   If Not IsMissing( uValue ) Then 
+      oPropertyValue.Value = uValue 
+   EndIf 
+   MakePropertyValue() = oPropertyValue 
+End Function 
+
 &apos;The main procedure to show the First and Last Guide words on Header
 Sub SetGuides()
 On Error GoTo MyError:
 
 	Dim PageCount as Integer
-
+	oDoc = ThisComponent
+	oContWindow = oDoc.CurrentController.Frame.ContainerWindow 
+	
+	msgbox &quot;The Open Office window will be hidden while the headers are updated since this cuts the time required for the update in half.&quot;,,&quot;Update Guide Words&quot;
+	oContWindow.Visible = false 
+	
+	AutoSaveEnableDisable(false) &apos;Disable &quot;Auto Recovery&quot;
+	
 	mytime = now
+	
+	AlingOverlappingImages()
+	
 	RemoveOldGuides()
 	KeepNextParagraph()
 	PageCount = TotalPages
@@ -33,7 +197,7 @@ On Error GoTo MyError:
 	GetLastParagraph()
 	keep = &quot;Keepnext&quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
 	mytime = now
-	
+
 	keep = keep &amp; chr(10) &amp; &quot;RemoveOld&quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
 	mytime = now
 	&apos;PageCount = TotalPages
@@ -42,26 +206,39 @@ On Error GoTo MyError:
 	mytime = now
 	keep = keep &amp; chr(10) &amp; &quot;Insert&quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
 	ReSetTabs()
+	oDoc.store() 
 	
+	AutoSaveEnableDisable(true) &apos;Enable &quot;Auto Recovery&quot;
+	
+	oContWindow.Visible = true 
 	&apos;msgbox keep
 	&apos;&apos;msgbox mytime &amp; chr(10) &amp; now
 Exit Sub
 MyError:
-	Msgbox &quot;Sorry! Could not update the Guide Words.&quot; , 0 + 64,  &quot;Update Guide Words&quot;
+	if Err &lt;&gt; 91 Then
+		Msgbox &quot;Sorry! Could not update the Guide Words.&quot; , 0 + 64,  &quot;Update Guide Words&quot;
+	End If
 End Sub  
 
 &apos;This procedure set the dialgue to correct Update Guide Words 
-Sub StartDontForget
+Sub StartDontForget100
 	&apos;Msgbox &quot;Please NOTE: Use the Update Guide Words menu item or tool bar item to correct the guide words before printing.&quot; , 0 + 64,  &quot;Guide Word Reminder&quot;
 	If LCase(AutoMacro) = &quot;true&quot; Then
-		SetGuides
+		If IsMacroRun = false Then
+			SetGuides
+		End If	
 	Else
 		dim clicked as byte
 		clicked = msgbox (&quot;Headers are updated to contain the first and last word with the &quot; + &quot;&quot;&quot;&quot; + &quot;Update Guide Words&quot; + &quot;&quot;&quot;&quot; + &quot; tool bar item or Macro menu item.&quot; &amp; chr(10) &amp; &quot;Would you like to update the headers now?&quot;, 4 + 32 + 256 , &quot;Guide Word Reminder&quot;)
 		If clicked = 6 Then &apos;If Yes clicked
-			SetGuides
+			If IsMacroRun = false Then
+				SetGuides
+			End If
 		End If
-	End If		
+	End If	
+	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; Then
+		ExportToDOC_PDF
+	End IF	
 End Sub
 
 &apos;This procedure set the dialgue to confirm user to correction of Update Guide Words while Printing
@@ -494,5 +671,6 @@ If oStyle.FooterIsOn Then
 End If
 
 end sub
+
 
 </script:module>
