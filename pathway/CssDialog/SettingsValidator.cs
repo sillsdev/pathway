@@ -17,6 +17,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using System.Windows.Forms;
 using System.Xml;
 using SIL.Tool;
@@ -25,7 +27,7 @@ namespace SIL.PublishingSolution
 {
     public class SettingsValidator
     {
-        #region Privare Variables
+        #region Private Variables
         private bool isProcessSucess = true;
         private string errorTag = "";
         private string allUserSettingsPath = string.Empty;
@@ -35,6 +37,10 @@ namespace SIL.PublishingSolution
         private XmlNode settingsPNode;
         private XmlNode settingsDictPNode;
         private XmlNode settingsScriPNode;
+        private XmlNodeList customPaper;
+        private XmlNodeList customMobile;
+        private XmlNodeList customWeb;
+        private XmlNodeList customOther;
         private static readonly Dictionary<string, string> replaceString = new Dictionary<string, string>();
         private readonly ArrayList boolValue = new ArrayList();
         private readonly ArrayList mediaList = new ArrayList();
@@ -42,8 +48,7 @@ namespace SIL.PublishingSolution
         {
             StyleSettings, DictionaryStyleSettings, ScriptureStyleSettings
         }
-        private static bool _fromPlugin = false;
-        private static string supportFolder = "PathwaySupport";
+        private static bool _fromPlugin;
         private string currentValidatingFileName = string.Empty;
         #endregion
 
@@ -62,6 +67,7 @@ namespace SIL.PublishingSolution
             mediaList.Add("paper");
             mediaList.Add("mobile");
             mediaList.Add("web");
+            mediaList.Add("others");
         }
         #endregion
 
@@ -129,8 +135,8 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// Method to process ScriptuteStyleSettings.xml file, It Process all validations.
         /// </summary>
-        /// <param name="fileNamewithPath"></param>
-        /// <param name="inputtype">Dictionary/scripture</param>
+        /// <param name="fileNamewithPath">Settings filepath</param>
+        /// <param name="inputtype">scripture</param>
         protected void ProcessScriptureSettingFile(string fileNamewithPath, string inputtype)
         {
             settingsScriDoc.Load(fileNamewithPath);
@@ -138,10 +144,17 @@ namespace SIL.PublishingSolution
             bool isValidScriSettings = ProcessValidator(settingsScriPNode, true);
             if (!isValidScriSettings)
             {
+                CopyCustomStyles(fileNamewithPath);
                 CopySettingsFile(FileName.ScriptureStyleSettings.ToString(), inputtype, fileNamewithPath);
+                RestoreCustomStyles(fileNamewithPath);
             }
         }
 
+        /// <summary>
+        /// Method to process DictionaryStyleSettings.xml file, It Process all validations.
+        /// </summary>
+        /// <param name="fileNamewithPath">Settings filepath</param>
+        /// <param name="inputtype">Dictionary</param>
         protected void ProcessDictionarySettingFile(string fileNamewithPath, string inputtype)
         {
             settingsDictDoc.Load(fileNamewithPath);
@@ -149,7 +162,88 @@ namespace SIL.PublishingSolution
             bool isValidDictSettings = ProcessValidator(settingsDictPNode, true);
             if (!isValidDictSettings)
             {
+                CopyCustomStyles(fileNamewithPath);
                 CopySettingsFile(FileName.DictionaryStyleSettings.ToString(), inputtype, fileNamewithPath);
+                RestoreCustomStyles(fileNamewithPath);
+            }
+        }
+
+        /// <summary>
+        /// To paste the customs syles(copied from overwritten file) to the Dictionary/ Scripture stylesettings.xml file
+        /// </summary>
+        /// <param name="cssFilePath">Settings file path</param>
+        protected void RestoreCustomStyles(string cssFilePath)
+        {
+            var settingsXML = new XmlDocument();
+            settingsXML.Load(cssFilePath);
+            XmlElement parentNode = settingsXML.DocumentElement;
+            foreach (string media in mediaList)
+            {
+                string xPathMStyles = "//stylePick/styles/" + media;
+                if (parentNode != null)
+                {
+                    XmlNode childNode = parentNode.SelectSingleNode(xPathMStyles);
+                    if (childNode != null)
+                    {
+                        if (media == "paper" && customPaper.Count > 0)
+                        {
+                            foreach (XmlNode node in customPaper){AppendChildNode(settingsXML, childNode, node);}
+                        }
+                        else if (media == "mobile" && customMobile.Count > 0)
+                        {
+                            foreach (XmlNode node in customMobile){AppendChildNode(settingsXML, childNode, node);}
+                        }
+                        else if (media == "web" && customWeb.Count > 0)
+                        {
+                            foreach (XmlNode node in customWeb){AppendChildNode(settingsXML, childNode, node);}
+                        }
+                        else if (media == "others" && customOther.Count > 0)
+                        {
+                            foreach (XmlNode node in customOther){AppendChildNode(settingsXML, childNode, node);}
+                        }
+                    }
+                }
+            }
+            settingsXML.Save(cssFilePath);
+        }
+
+        /// <summary>
+        /// Add the childnode to the settings file.
+        /// </summary>
+        /// <param name="settingsXML"></param>
+        /// <param name="childNode"></param>
+        /// <param name="node"></param>
+        private static void AppendChildNode(XmlDocument settingsXML, XmlNode childNode, XmlNode node)
+        {
+            string toInsert = node.OuterXml;
+            XmlDocumentFragment docFrag = settingsXML.CreateDocumentFragment();
+            docFrag.InnerXml = toInsert;
+            childNode.AppendChild(docFrag);
+        }
+
+        /// <summary>
+        /// To copy the customs syles to the Dictionary/ Scripture stylesettings.xml file
+        /// </summary>
+        /// <param name="cssFilePath">Settings file path</param>
+        protected void CopyCustomStyles(string cssFilePath)
+        {
+            var settingsXML = new XmlDocument();
+            settingsXML.Load(cssFilePath);
+            XmlElement parentNode = settingsXML.DocumentElement;
+            foreach (string media in mediaList)
+            {
+                string xPathMStyles = "//stylePick/styles/" + media + "/style[@type='Custom']";
+                if (parentNode != null)
+                {
+                    XmlNodeList childNode = parentNode.SelectNodes(xPathMStyles);
+                    if (childNode != null)
+                    {
+                        if (media == "paper"){customPaper = childNode;}
+                        else if (media == "mobile"){customMobile = childNode;}
+                        else if (media == "web"){customWeb = childNode;}
+                        else if (media == "others"){customOther = childNode;}
+                    }
+                }
             }
         }
 
@@ -168,7 +262,7 @@ namespace SIL.PublishingSolution
 
         protected void CopySettingsFile(string fileName, string supportPath, string filePath)
         {
-            string msg = string.Empty;
+            string msg;
             if (errorTag.IndexOf("|") > 0)
             {
                 string[] errMessage = errorTag.Split('|');
@@ -181,10 +275,6 @@ namespace SIL.PublishingSolution
 
             DialogResult result = MessageBox.Show(msg, "Information",
                                 MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-
-            //Settings file are Invalid. Do you want to overwrite the previous settings?
-            //DialogResult result = MessageBox.Show(msg, "Information",
-            //                    MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
 
             if (result == DialogResult.Yes)
             {
@@ -221,14 +311,14 @@ namespace SIL.PublishingSolution
             if (!ValidatePrintVia(parentNode)) return false;
             if (!ValidateConfigureDictionary(parentNode)) return false;
             if (!ValidateReversalIndexes(parentNode)) return false;
-            if (!ValidateGrammarSketch(parentNode)) return false;
+            if (!ValidateGrammerSketch(parentNode)) return false;
             if (!ValidateExtraProcessing(parentNode)) return false;
             if (!ValidateLayoutSelected(parentNode)) return false;
             if (!ValidateMedia(parentNode)) return false;
             if (!ValidateDefaultPrintVia(parentNode)) return false;
             if (!ValidateDefaultConfigureDictionary(parentNode)) return false;
             if (!ValidateDefaultReversalIndexes(parentNode)) return false;
-            if (!ValidateDefaultGrammarSketch(parentNode)) return false;
+            if (!ValidateDefaultGrammerSketch(parentNode)) return false;
             if (!ValidateDefaultExtraProcessing(parentNode)) return false;
             if (!ValidateDefaultLayoutSelected(parentNode)) return false;
             if (!ValidateDefaultMedia(parentNode)) return false;
@@ -261,19 +351,64 @@ namespace SIL.PublishingSolution
         //OutputPath is valid and editable
         protected bool ValidateOutputPath(XmlNode parentNode)
         {
+            bool isWritePermission = false;
             try
             {
-                string methodname = "OutputPath";
+                const string methodname = "OutputPath";
                 string outputPath = GetOutputPath(parentNode);
-                if ((!Directory.Exists(outputPath)) || (!isFileInUse(outputPath)))
+                isWritePermission = IsDirectoryWritable(outputPath);
+                if (!isWritePermission)
                 {
                     errorTag = methodname + "|" + outputPath;
-                    return false;
                 }
             }
             catch { }
-            return true;
+            return isWritePermission;
         }
+
+
+        protected static bool IsDirectoryWritable(string outputPath)
+        {
+            bool isWritePermission = true;
+            try
+            {
+                if (!Directory.Exists(outputPath))
+                {
+                    isWritePermission = false;
+                }
+            }
+            catch { }
+            return isWritePermission;
+            //bool isWritePermission = false;
+            //try
+            //{
+            //    if (!Directory.Exists(outputPath))
+            //    {
+            //        return isWritePermission;
+            //    }
+
+            //    var dInfo = new DirectoryInfo(outputPath);
+            //    DirectorySecurity dSecurity = dInfo.GetAccessControl();
+            //    AuthorizationRuleCollection rules = dSecurity.GetAccessRules(
+            //    true,
+            //    true,
+            //    typeof(SecurityIdentifier));
+
+            //    foreach (FileSystemAccessRule rule in rules)
+            //    {
+            //        string rights = rule.FileSystemRights.ToString();
+            //        if (rights == "Write")
+            //        {
+            //            isWritePermission = true;
+            //            break;
+            //        }
+
+            //    }
+            //}
+            //catch { }
+            //return isWritePermission;
+        }
+
 
         protected static string GetOutputPath(XmlNode parentNode)
         {
@@ -286,56 +421,59 @@ namespace SIL.PublishingSolution
         //UserSheetPath is valid and editable
         protected bool ValidateUserSheetPath(XmlNode parentNode)
         {
+            bool isWritePermission = false;
             try
             {
-                string methodname = "UserSheetPath";
+                const string methodname = "UserSheetPath";
                 const string xPath = "//stylePick/settings/property[@name=\"UserSheetPath\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
                 string path = childNode.Attributes["value"].Value.Replace("%(AppData)s/", "");
                 string appPath = Common.PathCombine(replaceString["%(AppData)s"], Common.DirectoryPathReplace(path));
-                if ((!Directory.Exists(appPath)) || (!isFileInUse(appPath)))
+                isWritePermission = IsDirectoryWritable(appPath);
+                if (!isWritePermission)
                 {
                     errorTag = methodname + "|" + appPath;
-                    return false;
                 }
             }
             catch { }
-            return true;
+            return isWritePermission;
+
         }
 
         //PublicationLocation is valid and editable
         protected bool ValidatePublicationLocation(XmlNode parentNode)
         {
+            bool isWritePermission = false;
             try
             {
-                string methodname = "PublicationLocation";
+                const string methodname = "PublicationLocation";
                 //const string xPath = "//stylePick/settings/property[@name=\"PublicationLocation\"]";
                 //XmlNode childNode = parentNode.SelectSingleNode(xPath);
                 //string path = childNode.Attributes["value"].Value;
                 //path = path.Replace("%(Documents)s", replaceString["%(Documents)s"]);
                 //path = path.Replace("%(CurrentProject)s", replaceString["%(CurrentProject)s"]);
                 //path = path.Replace("%(Base)s", replaceString["%(Base)s"]);
-
                 string defaultPath = "%(Documents)s\\Publications";
                 defaultPath = defaultPath.Replace("%(Documents)s", replaceString["%(Documents)s"]);
-                if ((!Directory.Exists(defaultPath)) || (!isFileInUse(defaultPath)))
+
+                string outputPath = GetOutputPath(parentNode);
+                isWritePermission = IsDirectoryWritable(outputPath);
+                if (!isWritePermission)
                 {
                     try
                     {
                         Directory.CreateDirectory(defaultPath);
-                        return true;
+                        isWritePermission = true;
                     }
                     catch (Exception)
                     {
                         errorTag = methodname + "|" + defaultPath;
-                        return false;
+                        isWritePermission = false;
                     }
-
-
                 }
             }
             catch { }
-            return true;
+            return isWritePermission;
         }
 
         //MasterSheetFolder exists in From program folder
@@ -343,14 +481,14 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "MasterSheetPath";
+                const string methodname = "MasterSheetPath";
                 const string xPath = "//stylePick/settings/property[@name=\"MasterSheetPath\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
 
                 string appPath = Common.GetApplicationPath();
                 if (_fromPlugin)
                 {
-                    appPath = Common.PathCombine(appPath, supportFolder);
+                    appPath = Common.PathCombine(appPath, Common.SupportFolder);
                 }
                 string path = Common.PathCombine(appPath, childNode.Attributes["value"].Value);
                 if (!Directory.Exists(path))
@@ -368,13 +506,13 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "IconPath";
+                const string methodname = "IconPath";
                 const string xPath = "//stylePick/settings/property[@name=\"IconPath\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
                 string appPath = Common.GetApplicationPath();
                 if (_fromPlugin)
                 {
-                    appPath = Common.PathCombine(appPath, supportFolder);
+                    appPath = Common.PathCombine(appPath, Common.SupportFolder);
                 }
                 string path = Common.PathCombine(appPath, childNode.Attributes["value"].Value);
                 if (!Directory.Exists(path))
@@ -392,13 +530,13 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "SamplePath";
+                const string methodname = "SamplePath";
                 const string xPath = "//stylePick/settings/property[@name=\"SamplePath\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
                 string appPath = Common.GetApplicationPath();
                 if (_fromPlugin)
                 {
-                    appPath = Common.PathCombine(appPath, supportFolder);
+                    appPath = Common.PathCombine(appPath, Common.SupportFolder);
                 }
                 string path = Common.PathCombine(appPath, childNode.Attributes["value"].Value);
                 if (!Directory.Exists(path))
@@ -416,7 +554,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "BaseStyles";
+                const string methodname = "BaseStyles";
                 const string xPathMaster = "//stylePick/settings/property[@name=\"MasterSheetPath\"]";
                 const string xPathStyles = "//stylePick/settings/property[@name=\"BaseStyles\"]";
                 XmlNode childNodeMaster = parentNode.SelectSingleNode(xPathMaster);
@@ -426,7 +564,7 @@ namespace SIL.PublishingSolution
                 string appPath = Common.GetApplicationPath();
                 if (_fromPlugin)
                 {
-                    appPath = Common.PathCombine(appPath, supportFolder);
+                    appPath = Common.PathCombine(appPath, Common.SupportFolder);
                 }
                 string path = Common.PathCombine(appPath, partialPath);
                 if (!File.Exists(path))
@@ -444,13 +582,13 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "DefaultIcon";
+                const string methodname = "DefaultIcon";
                 const string xPath = "//stylePick/settings/property[@name=\"DefaultIcon\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
                 string appPath = Common.GetApplicationPath();
                 if (_fromPlugin)
                 {
-                    appPath = Common.PathCombine(appPath, supportFolder);
+                    appPath = Common.PathCombine(appPath, Common.SupportFolder);
                 }
                 string path = Common.PathCombine(appPath, childNode.Attributes["value"].Value);
                 if (!File.Exists(path))
@@ -468,7 +606,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "LastTask";
+                const string methodname = "LastTask";
                 const string xPathTasks = "//stylePick/tasks/task";
                 const string xPathLastTask = "//stylePick/settings/property[@name=\"LastTask\"]";
                 XmlNodeList childNodeTasks = parentNode.SelectNodes(xPathTasks);
@@ -495,7 +633,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "CssEditor";
+                const string methodname = "CssEditor";
                 //Environment.GetEnvironmentVariable("windir");
                 const string xPath = "//stylePick/settings/property[@name=\"CssEditor\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
@@ -515,13 +653,13 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "SelectedIcon";
+                const string methodname = "SelectedIcon";
                 const string xPath = "//stylePick/settings/property[@name=\"SelectedIcon\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
                 string appPath = Common.GetApplicationPath();
                 if (_fromPlugin)
                 {
-                    appPath = Common.PathCombine(appPath, supportFolder);
+                    appPath = Common.PathCombine(appPath, Common.SupportFolder);
                 }
                 string path = Common.PathCombine(appPath, childNode.Attributes["value"].Value);
                 if (!File.Exists(path))
@@ -539,14 +677,17 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "MisingIcon";
+                const string methodname = "MisingIcon";
                 const string xPath = "//stylePick/settings/property[@name=\"MisingIcon\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
-                string path = Common.PathCombine(Common.GetApplicationPath(), childNode.Attributes["value"].Value);
-                if (!File.Exists(path))
+                if (childNode != null)
                 {
-                    errorTag = methodname + "|" + path;
-                    return false;
+                    string path = Common.PathCombine(Common.GetApplicationPath(), childNode.Attributes["value"].Value);
+                    if (!File.Exists(path))
+                    {
+                        errorTag = methodname + "|" + path;
+                        return false;
+                    }
                 }
             }
             catch { }
@@ -558,7 +699,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "PrintVia";
+                const string methodname = "PrintVia";
                 bool isExists = false;
                 const string xPath = "//stylePick/settings/property[@name=\"PrintVia\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
@@ -581,11 +722,15 @@ namespace SIL.PublishingSolution
         //To load the backends
         protected static List<IExportProcess> LoadBackends()
         {
-            string path = Common.PathCombine(Common.GetApplicationPath(), "BackEnds");
+            string path = Path.GetDirectoryName(Param.SettingPath);
+            if (path.Contains("PathwaySupport"))
+                path = path.Replace("PathwaySupport", "");
+			//string path = Common.ProgInstall;
+			//string path = Common.PathCombine(Common.GetApplicationPath(), "PathwaySupport\\BackEnds");
             var _backend = new List<IExportProcess>();
             var directoryInfo = new DirectoryInfo(path);
             _backend.Clear();
-            foreach (FileInfo fileInfo in directoryInfo.GetFiles("*.dll"))
+            foreach (FileInfo fileInfo in directoryInfo.GetFiles("*Convert.dll"))
             {
                 try
                 {
@@ -607,7 +752,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "ConfigureDictionary";
+                const string methodname = "ConfigureDictionary";
                 const string xPath = "//stylePick/settings/property[@name=\"ConfigureDictionary\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
                 string result = childNode.Attributes["value"].Value;
@@ -626,7 +771,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "ReversalIndexes";
+                const string methodname = "ReversalIndexes";
                 const string xPath = "//stylePick/settings/property[@name=\"ReversalIndexes\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
                 string result = childNode.Attributes["value"].Value;
@@ -641,12 +786,12 @@ namespace SIL.PublishingSolution
         }
 
         //GrammarSketch setting is True or False
-        protected bool ValidateGrammarSketch(XmlNode parentNode)
+        protected bool ValidateGrammerSketch(XmlNode parentNode)
         {
             try
             {
-                string methodname = "GrammarSketch";
-                const string xPath = "//stylePick/settings/property[@name=\"GrammarSketch\"]";
+                const string methodname = "GrammerSketch";
+                const string xPath = "//stylePick/settings/property[@name=\'GrammerSketch\']";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
                 string result = childNode.Attributes["value"].Value;
                 if (!boolValue.Contains(result))
@@ -664,7 +809,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "ExtraProcessing";
+                const string methodname = "ExtraProcessing";
                 const string xPath = "//stylePick/settings/property[@name=\"ExtraProcessing\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
                 string result = childNode.Attributes["value"].Value;
@@ -683,12 +828,12 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "LayoutSelected";
+                const string methodname = "LayoutSelected";
                 const string xPathStyles = "//stylePick/styles/*/style";
                 const string xPathSelectedStyle = "//stylePick/settings/property[@name=\"LayoutSelected\"]";
                 XmlNodeList childNodeTasks = parentNode.SelectNodes(xPathStyles);
                 XmlNode childNodeLastTask = parentNode.SelectSingleNode(xPathSelectedStyle);
-                if (childNodeTasks != null)
+                if (childNodeTasks != null && childNodeLastTask != null)
                 {
                     foreach (XmlNode cNode in childNodeTasks)
                     {
@@ -710,14 +855,17 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "Media";
+                const string methodname = "Media";
                 const string xPath = "//stylePick/settings/property[@name=\"Media\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
-                string result = childNode.Attributes["value"].Value;
-                if (!mediaList.Contains(result))
+                if (childNode != null)
                 {
-                    errorTag = methodname;
-                    return false;
+                    string result = childNode.Attributes["value"].Value;
+                    if (!mediaList.Contains(result))
+                    {
+                        errorTag = methodname;
+                        return false;
+                    }
                 }
             }
             catch { }
@@ -729,7 +877,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "PrintVia";
+                const string methodname = "PrintVia";
                 bool isExists = false;
                 const string xPath = "//stylePick/defaultSettings/property[@name=\"PrintVia\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
@@ -754,7 +902,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "DefaultConfigureDictionary";
+                const string methodname = "DefaultConfigureDictionary";
                 const string xPath = "//stylePick/defaultSettings/property[@name=\"ConfigureDictionary\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
                 string result = childNode.Attributes["value"].Value;
@@ -773,7 +921,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "DefaultReversalIndexes";
+                const string methodname = "DefaultReversalIndexes";
                 const string xPath = "//stylePick/defaultSettings/property[@name=\"ReversalIndexes\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
                 string result = childNode.Attributes["value"].Value;
@@ -788,12 +936,12 @@ namespace SIL.PublishingSolution
         }
 
         //GrammarSketch default setting is True or False
-        protected bool ValidateDefaultGrammarSketch(XmlNode parentNode)
+        protected bool ValidateDefaultGrammerSketch(XmlNode parentNode)
         {
             try
             {
-                string methodname = "DefaultGrammarSketch";
-                const string xPath = "//stylePick/defaultSettings/property[@name=\"GrammarSketch\"]";
+                const string methodname = "DefaultGrammerSketch";
+                const string xPath = "//stylePick/defaultSettings/property[@name=\"GrammerSketch\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
                 string result = childNode.Attributes["value"].Value;
                 if (!boolValue.Contains(result))
@@ -811,7 +959,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "DefaultExtraProcessing";
+                const string methodname = "DefaultExtraProcessing";
                 const string xPath = "//stylePick/defaultSettings/property[@name=\"ExtraProcessing\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
                 string result = childNode.Attributes["value"].Value;
@@ -830,7 +978,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "DefaultLayoutSelected";
+                const string methodname = "DefaultLayoutSelected";
                 const string xPathStyles = "//stylePick/styles/*/style";
                 const string xPathSelectedStyle = "//stylePick/defaultSettings/property[@name=\"LayoutSelected\"]";
                 XmlNodeList childNodeTasks = parentNode.SelectNodes(xPathStyles);
@@ -857,14 +1005,17 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "Media";
+                const string methodname = "Media";
                 const string xPath = "//stylePick/defaultSettings/property[@name=\"Media\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
-                string result = childNode.Attributes["value"].Value;
-                if (!mediaList.Contains(result))
+                if (childNode != null)
                 {
-                    errorTag = methodname;
-                    return false;
+                    string result = childNode.Attributes["value"].Value;
+                    if (!mediaList.Contains(result))
+                    {
+                        errorTag = methodname;
+                        return false;
+                    }
                 }
             }
             catch { }
@@ -876,7 +1027,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "FeatureName";
+                const string methodname = "FeatureName";
                 const string xPath = "//stylePick/features/feature";
                 XmlNodeList childNode = parentNode.SelectNodes(xPath);
                 var styleNameList = new ArrayList();
@@ -901,7 +1052,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "FeatureOptionName";
+                const string methodname = "FeatureOptionName";
                 const string xPath = "//stylePick/features/feature";
                 XmlNodeList childNode = parentNode.SelectNodes(xPath);
                 if (childNode != null)
@@ -937,7 +1088,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "FeatureOptionFile";
+                const string methodname = "FeatureOptionFile";
                 const string xPath = "//stylePick/features/feature";
                 XmlNodeList childNode = parentNode.SelectNodes(xPath);
                 if (childNode != null)
@@ -957,7 +1108,7 @@ namespace SIL.PublishingSolution
                                 string appPath = Common.GetApplicationPath();
                                 if (_fromPlugin)
                                 {
-                                    appPath = Common.PathCombine(appPath, supportFolder);
+                                    appPath = Common.PathCombine(appPath, Common.SupportFolder);
                                 }
                                 string path = Common.PathCombine(appPath, partialPath);
                                 if (!File.Exists(path))
@@ -1024,7 +1175,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "StyleName";
+                const string methodname = "StyleName";
                 foreach (string media in mediaList)
                 {
                     string xPathMStyles = "//stylePick/styles/" + media + "/style";
@@ -1056,7 +1207,7 @@ namespace SIL.PublishingSolution
             {
                 string masterPath = GetMasterPath(parentNode);
                 string outputPath = GetOutputPath(parentNode);
-                string methodname = "StyleFile";
+                const string methodname = "StyleFile";
                 foreach (string media in mediaList)
                 {
                     string xPathMStyles = "//stylePick/styles/" + media + "/style";
@@ -1085,7 +1236,7 @@ namespace SIL.PublishingSolution
             string appPath = Common.GetApplicationPath();
             if (_fromPlugin)
             {
-                appPath = Common.PathCombine(appPath, supportFolder);
+                appPath = Common.PathCombine(appPath, Common.SupportFolder);
             }
             const string xPathMaster = "//stylePick/settings/property[@name=\"MasterSheetPath\"]";
             XmlNode masterNode = parentNode.SelectSingleNode(xPathMaster);
@@ -1098,7 +1249,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "TaskName";
+                const string methodname = "TaskName";
                 const string xPathTasks = "//stylePick/tasks/task";
                 XmlNodeList childNode = parentNode.SelectNodes(xPathTasks);
                 if (childNode != null)
@@ -1120,14 +1271,14 @@ namespace SIL.PublishingSolution
             return true;
         }
 
-        //Each tasks/task/@style should exists in styles/paper/style
+        //Each tasks/task/@style should exists in styles//style
         protected bool ValidateTaskStyle(XmlNode parentNode)
         {
             try
             {
-                string methodname = "TaskStyle";
+                const string methodname = "TaskStyle";
                 const string xPathTasks = "//stylePick/tasks/task";
-                const string xPathPStyles = "//stylePick/styles/paper/style";
+                const string xPathPStyles = "//stylePick/styles//style";
                 XmlNodeList childNodeStyles = parentNode.SelectNodes(xPathPStyles);
                 XmlNodeList childNodeTasks = parentNode.SelectNodes(xPathTasks);
                 ArrayList stylesList = GetStylesList(childNodeStyles);
@@ -1172,7 +1323,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "TaskIcon";
+                const string methodname = "TaskIcon";
                 const string xPathTasks = "//stylePick/tasks/task";
                 XmlNodeList childNode = parentNode.SelectNodes(xPathTasks);
                 if (childNode != null)
@@ -1183,7 +1334,7 @@ namespace SIL.PublishingSolution
                         string appPath = Common.GetApplicationPath();
                         if (_fromPlugin)
                         {
-                            appPath = Common.PathCombine(appPath, supportFolder);
+                            appPath = Common.PathCombine(appPath, Common.SupportFolder);
                         }
                         string iconFilePath = Common.PathCombine(appPath, oValue);
                         if (!File.Exists(iconFilePath))
@@ -1204,7 +1355,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "ColumnWidthColumnName";
+                const string methodname = "ColumnWidthColumnName";
                 const string xPath = "//stylePick/column-width/column";
                 XmlNodeList childNode = parentNode.SelectNodes(xPath);
                 if (childNode != null)
@@ -1231,7 +1382,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string methodname = "ColumnWidthColumnWidth";
+                const string methodname = "ColumnWidthColumnWidth";
                 const string xPath = "//stylePick/column-width/column";
                 XmlNodeList childNode = parentNode.SelectNodes(xPath);
                 if (childNode != null)
@@ -1254,21 +1405,21 @@ namespace SIL.PublishingSolution
         /// </summary>
         /// <param name="fileNameWithPath">Filepath with fileName</param>
         /// <returns></returns>
-        protected static bool isFileInUse(string fileNameWithPath)
-        {
-            try
-            {
-                var fs = new FileStream(fileNameWithPath, FileMode.OpenOrCreate);
-                return false;
-            }
-            catch (IOException)
-            {
-                return true;
-            }
-            catch (UnauthorizedAccessException)
-            {
-                return true;
-            }
-        }
+        //protected static bool isFileInUse(string fileNameWithPath)
+        //{
+        //    try
+        //    {
+        //        var fs = new FileStream(fileNameWithPath, FileMode.OpenOrCreate);
+        //        return false;
+        //    }
+        //    catch (IOException)
+        //    {
+        //        return true;
+        //    }
+        //    catch (UnauthorizedAccessException)
+        //    {
+        //        return true;
+        //    }
+        //}
     }
 }

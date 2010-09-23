@@ -22,6 +22,7 @@ using System.Collections;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
+using SIL.FieldWorks.Common.FwUtils;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -237,7 +238,6 @@ namespace SIL.PublishingSolution
             Common.PathwayHelpSetup(File.Exists(Common.FromRegistry("ScriptureStyleSettings.xml")), Common.FromRegistry("Help"));
             Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
             Common.HelpProv.SetHelpKeyword(this, _helpTopic);
-            Common.databaseName = DatabaseName;
         }
 
         private void LoadExtraProcessing()

@@ -18,6 +18,7 @@
 // --------------------------------------------------------------------------------------------
 
 using System.Windows.Forms;
+using SIL.FieldWorks.Common.FwUtils;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -27,7 +28,7 @@ namespace SIL.PublishingSolution
         private static IExportContents _realClass;
         public Contents()
         {
-            //Common.SupportFolder = "PathwaySupport";
+            Common.SupportFolder = "PathwaySupport";
 			Common.ProgBase = Common.GetPSApplicationPath();
             _realClass = new PrintVia();
             ((PrintVia)_realClass).InputType = "Dictionary";

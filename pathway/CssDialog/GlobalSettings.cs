@@ -120,7 +120,7 @@ namespace SIL.PublishingSolution
         {
             string fieldName = ((Control) sender).Name;
             string fieldValue = ((Control)sender).Text;
-            string relativePath = Param.ProgBase;
+			string relativePath = Common.ProgBase;
             string errorMessage = string.Empty;
             if (fieldName == "InputPath" || fieldName == "OutputPath" || fieldName == "UserSheetPath")
             {

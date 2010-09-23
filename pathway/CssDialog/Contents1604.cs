@@ -20,6 +20,7 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
+using SIL.FieldWorks.Common.FwUtils;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution

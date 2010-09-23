@@ -20,80 +20,20 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
+using SIL.FieldWorks.Common.FwUtils;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
-    public partial class Contents1 : Form, IExportContents
+    public partial class ScriptureContents1 : Form, IScriptureContents
     {
-        public Contents1()
+        public ScriptureContents1()
         {
             InitializeComponent();
         }
 
         #region Properties
-
         public string DatabaseName { set; get; }
-
-        public bool ExportMain
-        {
-            set
-            {
-                ChkFilterLexicon.Checked = value;
-            }
-            get
-            {
-                return ChkFilterLexicon.Checked;
-            }
-        }
-
-        public bool ExportReversal
-        {
-            set
-            {
-                ChkFilterReversal.Checked = value;
-            }
-            get
-            {
-                return ChkFilterReversal.Checked;
-            }
-        }
-
-        public bool ExportGrammar
-        {
-            set
-            {
-                ChkFilterGrammar.Checked = value;
-            }
-            get
-            {
-                return ChkFilterGrammar.Checked;
-            }
-        }
-
-        public bool ReversalExists
-        {
-            set
-            {
-                ChkFilterGrammar.Enabled = value;
-            }
-        }
-
-        public bool GrammarExists
-        {
-            set
-            {
-                ChkFilterGrammar.Enabled = value;
-            }
-        }
-
-        public bool ExistingDirectoryInput
-        {
-           get
-            {
-                return ChkExistingDictionary.Checked;
-            }
-        }
 
         public string OutputLocationPath
         {
@@ -103,15 +43,23 @@ namespace SIL.PublishingSolution
             }
         }
 
-        public string ExistingDirectoryLocationPath
+        public bool ExistingPublication
         {
-            get
+           get
             {
-                return TxtExistingDirectory.Text;
+                return ChkExistingPublication.Checked;
             }
         }
 
-        public string DictionaryName
+        public string ExistingLocationPath
+        {
+            get
+            {
+                return TxtExistingPublication.Text;
+            }
+        }
+
+        public string PublicationName
         {
             set
             {
@@ -126,31 +74,29 @@ namespace SIL.PublishingSolution
 
         private void Contents_Load(object sender, EventArgs e)
         {
-            CancelButton = btnCancel;
+            CancelButton = BtnCancel;
             AcceptButton = BtnOk;
-
 
             string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             filePath = Common.PathCombine(filePath, Application.ProductName);
             filePath = Common.PathCombine(filePath, DatabaseName);
-            string fileName = Common.GetNewFolderName(filePath, "Dictionary");
+            string fileName = Common.GetNewFolderName(filePath, "Scripture");
             string destinationFolder = Common.PathCombine(filePath, fileName);
             Directory.CreateDirectory(destinationFolder);
             TxtLocation.Text = destinationFolder;
             if (string.IsNullOrEmpty(TxtName.Text))
                 TxtName.Text = Path.GetFileName(fileName);
-            ChkFilterLexicon.Checked = ChkFilterReversal.Checked = true;
         }
 
-        private void BtnSectionFilterContinue_Click(object sender, EventArgs e)
+        private void BtnOk_Click(object sender, EventArgs e)
         {
             if (!validateInput())
                 return;
-            DialogResult = ChkExistingDictionary.Checked ? DialogResult.No : DialogResult.Yes;
+            DialogResult = ChkExistingPublication.Checked ? DialogResult.No : DialogResult.Yes;
             Close();
         }
 
-        private void BtnSectionFilterCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
@@ -187,13 +133,13 @@ namespace SIL.PublishingSolution
             bool isLocation = Directory.Exists(location);
           
             bool isExistingLocation = true;
-            if (ChkExistingDictionary.Checked)
+            if (ChkExistingPublication.Checked)
             {
-                string existingDir = TxtExistingDirectory.Text;
+                string existingDir = TxtExistingPublication.Text;
                 isExistingLocation = Directory.Exists(existingDir);
             }
 
-            BtnOk.Enabled = isLocation && isExistingLocation && (ChkFilterLexicon.Checked || ChkFilterReversal.Checked);
+            BtnOk.Enabled = isLocation && isExistingLocation;
         }
 
         private void TxtLocation_TextChanged(object sender, EventArgs e)
@@ -201,25 +147,25 @@ namespace SIL.PublishingSolution
             ValidateDirectoryLocation();
         }
 
-        private void ChkExistingDictionary_CheckedChanged(object sender, EventArgs e)
+        private void ChkExistingPublication_CheckedChanged(object sender, EventArgs e)
         {
             ValidateDirectoryLocation();
-            lblExistingDirectory.Enabled = ChkExistingDictionary.Checked;
-            TxtExistingDirectory.Enabled = ChkExistingDictionary.Checked;
-            BtnExistingDirectory.Enabled = ChkExistingDictionary.Checked;
+            lblExistingDirectory.Enabled = ChkExistingPublication.Checked;
+            TxtExistingPublication.Enabled = ChkExistingPublication.Checked;
+            BtnExistingPublication.Enabled = ChkExistingPublication.Checked;
         }
 
-        private void BtnExistingDirectory_Click(object sender, EventArgs e)
+        private void BtnExistingPublication_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderDlg = new FolderBrowserDialog();
             folderDlg.ShowDialog();
             try
             {
-            TxtExistingDirectory.Text = folderDlg.SelectedPath;
+            TxtExistingPublication.Text = folderDlg.SelectedPath;
         }
             catch (NotSupportedException)
             {
-                TxtExistingDirectory.Text = "";
+                TxtExistingPublication.Text = "";
             }
         }
 
@@ -238,15 +184,9 @@ namespace SIL.PublishingSolution
             ValidateDirectoryLocation();
         }
 
-        private void ChkFilterLexicon_CheckedChanged(object sender, EventArgs e)
-        {
-            ValidateDirectoryLocation();
-        }
-
-        private void ChkFilterReversal_CheckedChanged(object sender, EventArgs e)
-        {
-            ValidateDirectoryLocation();
-        }
-
+        //private void ChkFilterLexicon_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    ValidateDirectoryLocation();
+        //}
     }
 }

@@ -105,7 +105,7 @@ namespace SIL.PublishingSolution
                 _xhtml = xhtmlName;
                 _plugin = fromPlugin;
                 _solutionName = solutionName;
-                _supportFolder = Param.FromProg("");
+				_supportFolder = Common.FromRegistry("");
             }
             catch (Exception ex)
             {

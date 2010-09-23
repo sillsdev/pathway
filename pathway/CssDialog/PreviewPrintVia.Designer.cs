@@ -32,11 +32,12 @@
             this.BtnOk = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
             this.BtnHelp = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblPreview = new System.Windows.Forms.Label();
             this.grid = new System.Windows.Forms.DataGridView();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrevious = new System.Windows.Forms.Button();
+            this.lnkEdit = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -69,15 +70,17 @@
             this.BtnHelp.TabIndex = 4;
             this.BtnHelp.Text = "Help";
             this.BtnHelp.UseVisualStyleBackColor = true;
+            this.BtnHelp.Click += new System.EventHandler(this.BtnHelp_Click);
             // 
-            // label1
+            // lblPreview
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(321, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(130, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Sample data in this layout:";
+            this.lblPreview.AutoSize = true;
+            this.lblPreview.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPreview.Location = new System.Drawing.Point(321, 20);
+            this.lblPreview.Name = "lblPreview";
+            this.lblPreview.Size = new System.Drawing.Size(157, 13);
+            this.lblPreview.TabIndex = 6;
+            this.lblPreview.Text = "Sample data in this layout:";
             // 
             // grid
             // 
@@ -125,16 +128,29 @@
             this.btnPrevious.UseVisualStyleBackColor = true;
             this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
             // 
+            // lnkEdit
+            // 
+            this.lnkEdit.AutoSize = true;
+            this.lnkEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnkEdit.Location = new System.Drawing.Point(11, 420);
+            this.lnkEdit.Name = "lnkEdit";
+            this.lnkEdit.Size = new System.Drawing.Size(31, 16);
+            this.lnkEdit.TabIndex = 12;
+            this.lnkEdit.TabStop = true;
+            this.lnkEdit.Text = "Edit";
+            this.lnkEdit.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkEdit_LinkClicked);
+            // 
             // PreviewPrintVia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(645, 452);
+            this.Controls.Add(this.lnkEdit);
             this.Controls.Add(this.btnPrevious);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.grid);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblPreview);
             this.Controls.Add(this.BtnHelp);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnOk);
@@ -145,6 +161,7 @@
             this.ShowIcon = false;
             this.Text = "Select Layout";
             this.Load += new System.EventHandler(this.PreviewPrintVia_Load);
+            this.Activated += new System.EventHandler(this.PreviewPrintVia_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -157,10 +174,11 @@
         private System.Windows.Forms.Button BtnOk;
         private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.Button BtnHelp;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblPreview;
         private System.Windows.Forms.DataGridView grid;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPrevious;
+        private System.Windows.Forms.LinkLabel lnkEdit;
     }
 }

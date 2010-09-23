@@ -66,7 +66,7 @@ namespace SIL.PublishingSolution
 
 
         #region Public Variables
-        public string _hyphenationPath = Param.FromProg("Hyphenation_Languages");
+		public string _hyphenationPath = Common.FromRegistry("Hyphenation_Languages");
         public string _locUser = System.Globalization.RegionInfo.CurrentRegion.TwoLetterISORegionName;
         #endregion
 
@@ -640,7 +640,7 @@ namespace SIL.PublishingSolution
         /// <returns>returns TreeNode</returns>
         public TreeNode LoadCss(string dicPath, string cssFileName)
         {
-            var cssTree = new CSSParser();
+            var cssTree = new CssParser();
             TreeNode cssTreeNode = cssTree.BuildTree(Common.PathCombine(dicPath, cssFileName));
             return cssTreeNode;
         }

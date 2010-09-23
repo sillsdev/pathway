@@ -40,8 +40,8 @@ namespace SIL.PublishingSolution
     }
 
     public class Param
-    {
-        // Settings
+	{
+		// Settings
         public const string InputPath = "InputPath";
         public const string OutputPath = "OutputPath";
         public const string UserSheetPath = "UserSheetPath";
@@ -72,13 +72,13 @@ namespace SIL.PublishingSolution
         public static string UserRole = "Output User";
         public static string MediaType = "paper";
 
-        #region Public properties
-        private static string _LoadType = string.Empty;
+		#region Public properties
+		private static string _LoadType = string.Empty;
         public static string SettingPath
         {
             get
             {
-                return FromProg(_LoadType + DefaultSettingsFileName);
+				return Common.FromRegistry(_LoadType + DefaultSettingsFileName);
             }
         }
 
@@ -102,7 +102,7 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                return FromProg(DefaultSettingsFileName);
+				return Common.FromRegistry(DefaultSettingsFileName);
             }
         }
         #endregion Public properties
@@ -129,7 +129,7 @@ namespace SIL.PublishingSolution
                 ReplacePStoPathWay();
                 Directory.CreateDirectory(Value[OutputPath]);
             }
-
+			
             try
             {
                 if (File.Exists(SettingOutputPath))
@@ -140,7 +140,7 @@ namespace SIL.PublishingSolution
                 LoadValues(SettingPath);
             }
             MediaType = GetAttrByName("//categories/category", "Media", "select").ToLower();
-            LoadDictionary(StyleFile, "styles/" + MediaType + "/style", "file");
+            LoadDictionary(StyleFile, "styles//style", "file");
             LoadImageList();
         }
 
@@ -360,7 +360,7 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// Sets the Gloabal Font Size and Font Name from styleSettings.xml
+        /// Sets the Gloabal Font Size and Font Name from StyleSettings.xml
         /// </summary>
         public static void SetFontNameSize()
         {
@@ -618,7 +618,9 @@ namespace SIL.PublishingSolution
         public static void Write()
         {
             Debug.Assert(xmlMap.DocumentElement != null);
-            Debug.Assert(Directory.Exists(Path.GetDirectoryName(SettingOutputPath)));
+            var folder = Path.GetDirectoryName(SettingOutputPath);
+            if (!Directory.Exists(folder))
+                Directory.CreateDirectory(folder);
             TextWriter textWriter = new StreamWriter(SettingOutputPath);
             xmlMap.Save(textWriter);
             textWriter.Close();
@@ -635,7 +637,7 @@ namespace SIL.PublishingSolution
                 var schema = AttrValue(xmlMap.DocumentElement, "xsi:noNamespaceSchemaLocation");
                 var dstSchemaPath = Common.PathCombine(Path.GetDirectoryName(SettingOutputPath), schema);
                 if (!File.Exists(dstSchemaPath))
-                    File.Copy(FromProg(schema), dstSchemaPath);
+					File.Copy(Common.FromRegistry(schema), dstSchemaPath);
             }
             catch
             {
@@ -786,6 +788,7 @@ namespace SIL.PublishingSolution
             {
                 descNode.InnerText = description;
             }
+            AddAttrValue(style, "shown", "Yes");
             Write();
         }
 
@@ -942,7 +945,7 @@ namespace SIL.PublishingSolution
             if (fa == FileAccess.Write) return fPath;
             if (!File.Exists(fPath))
             {
-                fPath = FromProg(Common.PathCombine(Value[MasterSheetPath], fn));
+				fPath = Common.FromRegistry(Common.PathCombine(Value[MasterSheetPath], fn));
                 //Debug.Assert(File.Exists(fPath),string.Format("StyleSheet file {0} missing", fPath));
             }
             return fPath;
@@ -1148,7 +1151,7 @@ namespace SIL.PublishingSolution
         {
             lv.Items.Clear();
             lv.SmallImageList = imageListSmall;
-            var di = new DirectoryInfo(FromProg(Value[IconPath]));
+			var di = new DirectoryInfo(Common.FromRegistry(Value[IconPath]));
             var exts = new List<string> { ".png" };
             //var exts = new List<string> { ".ico", ".bmp" };
             foreach (var fi in di.GetFiles())
@@ -1159,23 +1162,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        public static string ProgBase = string.Empty;
-        /// <summary>
-        /// Calculates the path to the file based on where the program is installed
-        /// </summary>
-        /// <param name="s">path to file potentially relative to where program was installed</param>
-        /// <returns>full path to file reference by s</returns>
-        public static string FromProg(string s)
-        {
-            if (Path.IsPathRooted(s))
-                return s;
-            //if (ProgBase == string.Empty)
-            if (string.IsNullOrEmpty(ProgBase))
-                ProgBase = Path.GetDirectoryName(Application.ExecutablePath);
-            return Common.PathCombine(ProgBase, s);
-        }
-
-        /// <summary>
+    	/// <summary>
         /// Load ListView icons from image folder
         /// </summary>
         public static void LoadImageList()
@@ -1184,10 +1171,10 @@ namespace SIL.PublishingSolution
             imageListSmall.Images.Clear();
             imageListLarge.Images.Clear();
             imageListLarge.ImageSize = new Size(32, 32);
-            AddBmpIcon(new FileInfo(FromProg(Value[MissingIcon])), new Bitmap(FromProg(Value[MissingIcon])));
-            AddBmpIcon(new FileInfo(FromProg(Value[SelectedIcon])), new Bitmap(FromProg(Value[SelectedIcon])));
-            AddBmpIcon(new FileInfo(FromProg(Value[DefaultIcon])), new Bitmap(FromProg(Value[DefaultIcon])));
-            var di = new DirectoryInfo(FromProg(Value[IconPath]));
+			AddBmpIcon(new FileInfo(Common.FromRegistry(Value[MissingIcon])), new Bitmap(Common.FromRegistry(Value[MissingIcon])));
+			AddBmpIcon(new FileInfo(Common.FromRegistry(Value[SelectedIcon])), new Bitmap(Common.FromRegistry(Value[SelectedIcon])));
+			AddBmpIcon(new FileInfo(Common.FromRegistry(Value[DefaultIcon])), new Bitmap(Common.FromRegistry(Value[DefaultIcon])));
+			var di = new DirectoryInfo(Common.FromRegistry(Value[IconPath]));
             //var icoList = di.GetFiles("*.ico");
             //foreach (var ico in icoList)
             //{

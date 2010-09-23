@@ -20,12 +20,11 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
-using SIL.FieldWorks.Common.FwUtils;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
-    public partial class ScriptureContents1 : Form, IScriptureContents 
+    public partial class ScriptureContents1 : Form, IScriptureContents
     {
         public ScriptureContents1()
         {

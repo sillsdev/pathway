@@ -99,8 +99,8 @@ namespace SIL.PublishingSolution
         {
             //string selectedStyle = Param.TaskSheet(CbTask.Text);
             string selectedStyle = Param.TaskSheet(_currentTask);
-            
-            cssFile = Param.FromProg(Param.StylePath(Param.StyleFile[selectedStyle]));
+
+			cssFile = Common.FromRegistry(Param.StylePath(Param.StyleFile[selectedStyle]));
             if (Param.Value[Param.LastTask] != _currentTask)
             {
                 Param.SetValue(Param.LastTask, _currentTask);
@@ -194,7 +194,7 @@ namespace SIL.PublishingSolution
             {
                 foreach (var iconName in roleIcon)
                 {
-                    var icon = new Bitmap(Param.FromProg(iconName));
+					var icon = new Bitmap(Common.FromRegistry(iconName));
                     imageList.Images.Add(icon);
                 }
             }
@@ -249,13 +249,13 @@ namespace SIL.PublishingSolution
             {
             try
             {
-                    icon = new Bitmap(Param.FromProg(iconName));
+				icon = new Bitmap(Common.FromRegistry(iconName));
                 }
                 catch (Exception)
                 {
                     //Icon sysIcon = new Icon(SystemIcons.WinLogo, 32, 32);
                     //icon = sysIcon.ToBitmap();
-                    icon = new Bitmap(Param.FromProg("Graphic/userTask.png"));
+					icon = new Bitmap(Common.FromRegistry("Graphic/userTask.png"));
                 }
                     imageListTask.Images.Add(icon);
                 }

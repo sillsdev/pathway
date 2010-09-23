@@ -57,7 +57,7 @@ namespace SIL.PublishingSolution
             foreach (Match m in ms)
             {
                 var snippet = m.Groups[1].Value.ToLower();
-                if (File.Exists(Param.FromProg(Common.PathCombine(Param.Value[Param.MasterSheetPath], snippet))) || 
+				if (File.Exists(Common.FromRegistry(Common.PathCombine(Param.Value[Param.MasterSheetPath], snippet))) || 
                     File.Exists(Common.PathCombine(Param.Value[Param.OutputPath], snippet)))
                     Features.Add(snippet);
             }

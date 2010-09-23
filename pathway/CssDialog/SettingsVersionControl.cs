@@ -2,7 +2,6 @@
 using System.Xml;
 using System.Data;
 using System.Collections;
-using System.Xml.Schema;
 
 namespace SIL.PublishingSolution
 {

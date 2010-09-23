@@ -19,6 +19,7 @@
 
 using System.IO;
 using System.Windows.Forms;
+using SIL.FieldWorks.Common.FwUtils;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -26,16 +27,15 @@ namespace SIL.PublishingSolution
     public class ScriptureContents : Form, IScriptureContents
     {
         private static IScriptureContents _realClass;
-
         public ScriptureContents()
         {
-            //Common.SupportFolder = "PathwaySupport";
+            Common.SupportFolder = "PathwaySupport";
 			Common.ProgBase = Common.GetPSApplicationPath();
             _realClass = new PrintVia();
             ((PrintVia) _realClass).InputType = "Scripture";
         }
 
-		#region Properties
+        #region Properties
 
         public string DatabaseName 
         { 

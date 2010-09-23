@@ -75,6 +75,8 @@ namespace SIL.PublishingSolution
             try
             {
                 regPrinceKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL\Prince_is1");
+                if (regPrinceKey == null)
+                    regPrinceKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL\Prince_is1");
             }
             catch (Exception)
             {

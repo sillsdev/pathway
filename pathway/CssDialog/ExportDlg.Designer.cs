@@ -40,12 +40,12 @@
             this.lblExportType.AccessibleName = "lblExportType";
             this.lblExportType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblExportType.ForeColor = System.Drawing.Color.Black;
-            this.lblExportType.Location = new System.Drawing.Point(1, 24);
+            this.lblExportType.Location = new System.Drawing.Point(1, 7);
             this.lblExportType.Name = "lblExportType";
-            this.lblExportType.Size = new System.Drawing.Size(75, 13);
+            this.lblExportType.Size = new System.Drawing.Size(75, 46);
             this.lblExportType.TabIndex = 0;
             this.lblExportType.Text = "Export Type";
-            this.lblExportType.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblExportType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cmbExportType
             // 

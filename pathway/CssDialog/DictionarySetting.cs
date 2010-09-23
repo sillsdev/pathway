@@ -2527,7 +2527,7 @@ namespace SIL.PublishingSolution
         #endregion AssignValueUnit
 
         #region AssignValuePageUnit
-        public bool AssignValuePageUnit(object sender, EventArgs e)
+        public bool AssignValuePageUnit1(object sender, EventArgs e)
         {
             try
             {

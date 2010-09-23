@@ -102,7 +102,7 @@ namespace SIL.PublishingSolution
                 {
                     string DirName = Path.GetDirectoryName(ifn);
                     string fileName = Common.PathCombine(DirName.Substring(DirName.LastIndexOf(Path.DirectorySeparatorChar) + 1), Path.GetFileName(ifn));
-                    string ExePath = Param.FromProg("Styles");
+					string ExePath = Common.FromRegistry("Styles");
                     File.Copy(Common.PathCombine(ExePath, fileName), ifn);
                 }
                 catch (Exception ex)
@@ -174,7 +174,7 @@ namespace SIL.PublishingSolution
 
         private void BtHelp_Click(object sender, EventArgs e)
         {
-            SubProcess.Run(Param.FromProg("Help"), "SilDek.html", false);
+			SubProcess.Run(Common.FromRegistry("Help"), "SilDek.html", false);
         }
 
         private void ModifyOptions_DoubleClick(object sender, EventArgs e)
