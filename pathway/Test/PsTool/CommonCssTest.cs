@@ -34,7 +34,7 @@ namespace Test.PsTool
             string output = GetFileNameWithOutputPath(fileName);
             string expected = GetFileNameWithExpectedPath(fileName);
             Common.MakeSingleCSS(input, output);
-            FileAssert.AreEqual(expected, output);
+            TextFileAssert.AreEqual(expected, output);
             Common.Testing = true;
         }
 
@@ -49,7 +49,7 @@ namespace Test.PsTool
             string output = GetFileNameWithOutputPath(fileName);
             string expected = GetFileNameWithExpectedPath(fileName);
             Common.MakeSingleCSS(input, output);
-            FileAssert.AreEqual(expected, output);
+            TextFileAssert.AreEqual(expected, output);
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace Test.PsTool
             string expected = GetFileNameWithExpectedPath(fileName);
             CopyToOutput(input, output);
             Common.SetDefaultCSS(output, defaultCSS);
-            FileAssert.AreEqual(expected, output);
+            TextFileAssert.AreEqual(expected, output);
         }
 
         /// <summary>

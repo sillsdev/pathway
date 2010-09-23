@@ -186,7 +186,7 @@ namespace Test.PsTool
             myParams["ver"] = "bgt";
             string actual = Common.XsltProcess(inputFile, xsltFile, ext, myParams);
             Assert.AreEqual(expected, Path.GetFileName(actual));
-            FileAssert.AreEqual(GetFileNameWithExpectedPath(expected), actual);
+            TextFileAssert.AreEqual(GetFileNameWithExpectedPath(expected), actual);
         }
 
         /// <summary>
@@ -209,7 +209,7 @@ namespace Test.PsTool
             myParams["l2"] = "tpi";
             string actual = Common.XsltProcess(inputFile, xsltFile, ext, myParams);
             Assert.AreEqual(expected, Path.GetFileName(actual));
-            FileAssert.AreEqual(GetFileNameWithExpectedPath(expected), actual);
+            TextFileAssert.AreEqual(GetFileNameWithExpectedPath(expected), actual);
         }
 
         ///// <summary>
@@ -283,7 +283,7 @@ namespace Test.PsTool
         //    string expected = "GPS12L10.txt";
         //    string actual = Common.Xslt2Process(inputFile, xsltFile, ext);
         //    Assert.AreEqual(expected, Path.GetFileName(actual));
-        //    FileAssert.AreEqual(GetFileNameWithExpectedPath(expected), actual);
+        //    TextFileAssert.AreEqual(GetFileNameWithExpectedPath(expected), actual);
         //}
 
         /// <summary>
@@ -298,7 +298,7 @@ namespace Test.PsTool
             string expected = GetFileNameWithOutputPath("Preview.html");
             string actual = Preview.CreatePreviewFile(xhtmlFile, cssFile, outputFileName, true);
             CopyToOutput(actual, expected);
-            FileAssert.AreEqual(expected, actual);
+            TextFileAssert.AreEqual(expected, actual);
         }
 
         /// <summary>

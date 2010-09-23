@@ -48,7 +48,7 @@ namespace Test.PsTool
             preExportProcess = new PreExportProcess(projInfo);
             string expected = GetFileNameWithExpectedPath(filename);
             string output = preExportProcess.ImagePreprocess();
-            FileAssert.AreEqual(expected, output);
+            TextFileAssert.AreEqual(expected, output);
 
         }
 
@@ -67,7 +67,7 @@ namespace Test.PsTool
             xmldoc.Load(output);
             preExportProcess.ParagraphVerserSetUp(xmldoc);
             xmldoc.Save(output);
-            FileAssert.AreEqual(expected, output);
+            TextFileAssert.AreEqual(expected, output);
         }
         #region private Methods
         private static string GetPath(string place, string filename)

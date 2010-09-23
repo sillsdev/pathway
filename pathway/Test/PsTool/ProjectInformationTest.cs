@@ -395,7 +395,7 @@ namespace Test.PsTool
             string nodeName = "Project";
             string attributeName = "ShowError"; 
             string attributeValue = "False"; 
-            _target.DESetAttribute(nodeName, attributeName, attributeValue);
+            _target.DESetAttribute("//" + nodeName, attributeName, attributeValue);
 
             string expected = "False";
             string actual = _target.DEGetAttribute(nodeName, attributeName);
@@ -418,7 +418,7 @@ namespace Test.PsTool
 
             string projectFile = output;
             _target.SortFolderFileTypes(projectFile);
-            FileAssert.AreEqual(expected,output);
+            TextFileAssert.AreEqual(expected,output);
 
         }
 

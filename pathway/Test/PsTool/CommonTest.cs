@@ -342,19 +342,6 @@ namespace Test.PsTool
         }
          */
 
-
-        /// <summary>
-        ///A test for GetApplicationPath
-        ///</summary>
-        [Test]
-        public void GetApplicationPathTest()
-        {
-            string expected = Path.GetDirectoryName(Application.ExecutablePath); ;
-            string actual = Common.GetApplicationPath();
-            Assert.AreEqual(expected, actual);
-
-        }
-
         /// <summary>
         ///A test for GetAllUserPathWithSilPs
         ///</summary>
@@ -981,7 +968,7 @@ namespace Test.PsTool
             string textToInsert = "Text At Top";
             CopyToOutput(sourceFile, output);
             Common.FileInsertText(output, textToInsert);
-            FileAssert.AreEqual(expected, output);
+            TextFileAssert.AreEqual(expected, output);
 
         }
 
