@@ -47,7 +47,7 @@ namespace Test.XeTeXConvert
         {
             Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../PsSupport");
             Common.SupportFolder = "";
-            Param.ProgBase = Common.ProgInstall;
+			Common.ProgBase = Common.ProgInstall;
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/XeTeXConvert/TestFiles");
             _inputPath = Common.PathCombine(testPath, "input");
             _outputPath = Common.PathCombine(testPath, "output");
@@ -118,7 +118,7 @@ namespace Test.XeTeXConvert
             string deToolFolder = _outputPath;
             SetupStartScript(deToolFolder);
             const string ActualScript = "startXPWtool.bat";
-            FileAssert.AreEqual(FileExpected(ActualScript), FileOutput(ActualScript));
+            TextFileAssert.AreEqualEx(FileExpected(ActualScript), FileOutput(ActualScript), new ArrayList {5, 6});
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace Test.XeTeXConvert
         {
             const string cssName = "DictionaryTemp1.css";
             string cssFullPath = FileInput(cssName);
-            CSSTree cssTree = new CSSTree();
+            CssTree cssTree = new CssTree();
             Dictionary<string, Dictionary<string, string>> cssProperty = cssTree.CreateCssProperty(cssFullPath, true);
             Assert.IsTrue(cssProperty.ContainsKey("definition"));
             Assert.IsTrue(cssProperty.ContainsKey("partofspeech"));
@@ -171,7 +171,7 @@ namespace Test.XeTeXConvert
         {
             const string cssName = "ScriptureTemp1.css";
             string cssFullPath = FileInput(cssName);
-            CSSTree cssTree = new CSSTree();
+            CssTree cssTree = new CssTree();
             Dictionary<string, Dictionary<string, string>> cssProperty = cssTree.CreateCssProperty(cssFullPath, true);
             Assert.IsTrue(cssProperty.ContainsKey("Paragraph"));
             Assert.IsTrue(cssProperty.ContainsKey("Emphasis"));
@@ -208,7 +208,9 @@ namespace Test.XeTeXConvert
             _postscriptLanguage = new PostscriptLanguage();
             SetupSettings(data, dataPath);
             const string ActualSettings = "XPWsettings.txt";
-            FileAssert.AreEqual(FileExpected(ActualSettings), FileOutput(ActualSettings));
+            const string ExpectedSettings = "XPWsettings-let.txt";
+            File.Copy(FileOutput(ActualSettings), FileOutput(ExpectedSettings));
+            TextFileAssert.AreEqual(FileExpected(ExpectedSettings), FileOutput(ActualSettings));
         }
 
         /// <summary>
@@ -233,7 +235,8 @@ namespace Test.XeTeXConvert
             SetupSettings(preExportProcess, dataPath);
             const string ActualSettings = "XPWsettings.txt";
             const string ExpectedSettings = "XPWsettings-gps1.txt";
-            FileAssert.AreEqual(FileExpected(ExpectedSettings), FileOutput(ActualSettings));
+            File.Copy(FileOutput(ActualSettings), FileOutput(ExpectedSettings));
+            TextFileAssert.AreEqual(FileExpected(ExpectedSettings), FileOutput(ActualSettings));
             mocks.VerifyAllExpectationsHaveBeenMet();
         }
 
@@ -247,8 +250,8 @@ namespace Test.XeTeXConvert
             const string BlankName = "blank.css";
             PublicationInformation projInfo = GetProjInfo(XhtmlName, BlankName);
             IPreExportProcess actual = PreProcess(projInfo);
-            FileAssert.AreEqual(FileExpected(XhtmlName), actual.ProcessedXhtml);
-            FileAssert.AreEqual(FileExpected(BlankName), actual.ProcessedCss);
+            TextFileAssert.AreEqual(FileExpected(XhtmlName), actual.ProcessedXhtml);
+            TextFileAssert.AreEqual(FileExpected(BlankName), actual.ProcessedCss);
         }
 
         /// <summary>
@@ -424,7 +427,7 @@ namespace Test.XeTeXConvert
         [Test]
         public void GetTempCopyTest()
         {
-            string name = "BackEnds";
+            string name = "Loc";
             string expected = Common.PathCombine(Path.GetTempPath(), name);
             string actual = GetTempCopy(name);
             Assert.AreEqual(expected, actual);
@@ -464,7 +467,7 @@ namespace Test.XeTeXConvert
             _postscriptLanguage.SetClass2Postscript(selector, postscriptName);
             _postscriptLanguage.AddPostscriptName(postscriptName, isGraphite);
             CreateTexInput(processedXhtml, fileName, dataPath);
-            FileAssert.AreEqual(FileExpected(TexName), FileOutput(TexName));
+            TextFileAssert.AreEqual(FileExpected(TexName), FileOutput(TexName));
         }
 
         /// <summary>

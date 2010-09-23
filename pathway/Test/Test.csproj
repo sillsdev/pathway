@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -24,59 +24,42 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release BTE|AnyCPU' ">
-    <OutputPath>bin\Release BTE\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Corporate7BTE\</OutputPath>
+    <DefineConstants>UiTests, ScenarioTests</DefineConstants>
+    <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseBTE|AnyCPU' ">
-    <OutputPath>bin\ReleaseBTE\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Corporate7SE\</OutputPath>
+    <DefineConstants>UiTests, ScenarioTests</DefineConstants>
+    <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseSE|AnyCPU' ">
-    <OutputPath>bin\ReleaseSE\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwCtx|AnyCPU' ">
+    <OutputPath>bin\PwCtx\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ConTeXt|AnyCPU' ">
+    <OutputPath>bin\ConTeXt\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr3.Runtime, Version=0.3.0.37313, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="Antlr3.Runtime, Version=3.1.3.42154, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdParty\Antlr3.Runtime.dll</HintPath>
+      <HintPath>..\CssParser\bin\Debug\Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="BasicUtils, Version=6.0.4.16364, Culture=neutral, PublicKeyToken=null">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\PsExport\Dlls\BasicUtils.dll</HintPath>
     </Reference>
-    <Reference Include="FwUtils, Version=6.0.4.16380, Culture=neutral, PublicKeyToken=null">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\PsExport\Dlls\FwUtils.dll</HintPath>
-    </Reference>
     <Reference Include="GuiTestDriver, Version=5.5.3391.27786, Culture=neutral, PublicKeyToken=null">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdParty\GuiTestDriver.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdParty\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
@@ -105,7 +88,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CssParser\ClassInfoTest.cs" />
-    <Compile Include="CssParser\CSSTreeTest.cs" />
+    <Compile Include="CssParser\CssTreeTest.cs" />
     <Compile Include="FileUtilsTest.cs" />
     <Compile Include="GoBibleConvert\CheckCV_XHTMLTest.cs" />
     <Compile Include="GoBibleConvert\GoBibleTest.cs" />
@@ -142,6 +125,7 @@
     <Compile Include="LiftPrepare\TestEnvironment.cs" />
     <Compile Include="LiftPrepare\TransformTests\TransformTester.cs" />
     <Compile Include="LiftPrepare\WritingSystemSorterTester.cs" />
+    <Compile Include="LogosConvert\ExportLogosTest.cs" />
     <Compile Include="OdtTest.cs" />
     <Compile Include="CssDialog\CommonTestMethod.cs" />
     <Compile Include="CssDialog\FeatureSheetTest.cs" />
@@ -166,6 +150,7 @@
     <Compile Include="PsTool\CommonXmlTest.cs" />
     <Compile Include="PsTool\FolderTreeTest.cs" />
     <Compile Include="PsTool\FontInternalsTest.cs" />
+    <Compile Include="PsTool\PathwayPathTest.cs" />
     <Compile Include="PsTool\PreExportProcessTest.cs" />
     <Compile Include="PsTool\ProjectInformationTest.cs" />
     <Compile Include="PsTool\SubProcessTest.cs" />
@@ -174,7 +159,10 @@
     <Compile Include="PublishingSolutionExeUi\BuangScenarioTests.cs" />
     <Compile Include="PublishingSolutionExeUi\PsUiScenarioTests.cs" />
     <Compile Include="PublishingSolutionExeUi\PsUiTests.cs" />
+    <Compile Include="TestFiles.cs" />
+    <Compile Include="TextFileAssert.cs" />
     <Compile Include="ValidateXMLFile.cs" />
+    <Compile Include="WordPressConvert\ExportWordPressTest.cs" />
     <Compile Include="XeTeXConvert\ExportXeTeXTest.cs" />
     <Compile Include="XeTeXConvert\PostscriptLanguageTest.cs" />
     <Compile Include="XmlAssert.cs">
@@ -190,6 +178,10 @@
       <Project>{1A58ECC5-75FE-4FE2-B133-8605B382B7C0}</Project>
       <Name>CssDialog</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CssParser\CssParser.csproj">
+      <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
+      <Name>CssParser</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GoBibleConvert\GoBibleConvert.csproj">
       <Project>{C7A3F4E5-1F86-4D22-AB4F-5BEA0D923DDD}</Project>
       <Name>GoBibleConvert</Name>
@@ -201,6 +193,10 @@
     <ProjectReference Include="..\LiftPrepare\LiftPrepare.csproj">
       <Project>{D38235F3-5B02-4835-B380-40E0BDCD5495}</Project>
       <Name>LiftPrepare</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LogosConvert\LogosConvert.csproj">
+      <Project>{E6F68329-4BCE-44C2-A9F0-C5055F42CA39}</Project>
+      <Name>LogosConvert</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenOfficeConvert\OpenOfficeConvert.csproj">
       <Project>{E225E5AF-B603-41D1-BB58-E3AAE05C59FD}</Project>
@@ -214,17 +210,13 @@
       <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
       <Name>PsTool</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PublishingSolutionExe\PublishingSolutionEXE.csproj">
-      <Project>{C37AD0DF-7C87-4666-8335-35FDABFEAA45}</Project>
-      <Name>PublishingSolutionEXE</Name>
+    <ProjectReference Include="..\WordPressConvert\WordPressConvert.csproj">
+      <Project>{12FE8988-5957-427D-BA6C-B4C601F5A558}</Project>
+      <Name>WordPressConvert</Name>
     </ProjectReference>
     <ProjectReference Include="..\XeTeXConvert\XeTeXConvert.csproj">
       <Project>{310E4B50-F423-46B1-AD72-740CC859E4C3}</Project>
       <Name>XeTeXConvert</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CssParser\CSSParser.csproj">
-      <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
-      <Name>CSSParser</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -292,6 +284,8 @@
   <ItemGroup>
     <Folder Include="GoBibleConvert\TestFiles\Output\" />
     <Folder Include="Properties\" />
+    <Folder Include="WordPressConvert\TestFiles\Expected\" />
+    <Folder Include="WordPressConvert\TestFiles\Input\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -302,6 +296,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>%25comspec%25 /c ..\..\PostTestBuild.bat</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

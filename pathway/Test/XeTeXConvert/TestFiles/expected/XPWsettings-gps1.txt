@@ -35,6 +35,7 @@
 % To get ragged right turn this mode on:
 \enablemode[offalignment]
 
+% To typeset right-to-left:
 
 
 
