@@ -107,7 +107,7 @@ sa
       <text:list text:style-name="ul">
         <text:list-item>
           <text:p text:style-name="li_ul_section">li level text 
-<text:span text:style-name="entry_li_ul_section">li level-&gt;entry text </text:span></text:p></text:list-item><text:list-item><text:p text:style-name="li_ul_section">li level text 
+<text:span text:style-name="entry_li_ul_section">li level-&gt;entry text </text:span> </text:p></text:list-item><text:list-item><text:p text:style-name="li_ul_section">li level text 
 </text:p>
           <text:p text:style-name="entry_li_ul_section">li level-&gt;entry text </text:p>
         </text:list-item>

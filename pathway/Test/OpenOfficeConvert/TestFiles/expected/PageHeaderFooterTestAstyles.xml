@@ -10,17 +10,11 @@
     <style:font-face style:name="Scheherazade Graphite Alpha" svg:font-family="'Scheherazade Graphite Alpha'" />
   </office:font-face-decls>
   <office:styles>
-    <style:style style:name="headword_.bzh_entry_letData" style:family="paragraph" style:parent-style-name="entry_letData">
-      <style:text-properties fo:language="none" fo:country="none" />
-    </style:style>
     <style:style style:name="headword_.bzh_entry_letData" style:family="text" style:parent-style-name="entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="pronunciations_entry_letData" style:family="paragraph" style:parent-style-name="entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="pronunciations_entry_letData" style:family="text" style:parent-style-name="entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="pronunciation_.bzh-fonipa_pronunciations_entry_letData" style:family="paragraph" style:parent-style-name="pronunciations_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="none" fo:country="none" />
-    </style:style>
     <style:style style:name="pronunciation_.bzh-fonipa_pronunciations_entry_letData" style:family="text" style:parent-style-name="pronunciations_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
@@ -28,9 +22,6 @@
     <style:style style:name="senses_entry_letData" style:family="text" style:parent-style-name="entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="grammaticalinfo_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="grammaticalinfo_sense_senses_entry_letData" style:family="text" style:parent-style-name="sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="partofspeech_.en_grammaticalinfo_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="grammaticalinfo_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" />
-    </style:style>
     <style:style style:name="partofspeech_.en_grammaticalinfo_sense_senses_entry_letData" style:family="text" style:parent-style-name="grammaticalinfo_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
@@ -46,9 +37,6 @@
     <style:style style:name="xitem_.en_definition_.en_sense_senses_entry_letData" style:family="text" style:parent-style-name="definition_.en_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
-    <style:style style:name="xlanguagetag_.en_xitem_.en_definition_.en_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="xitem_.en_definition_.en_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" />
-    </style:style>
     <style:style style:name="xlanguagetag_.en_xitem_.en_definition_.en_sense_senses_entry_letData" style:family="text" style:parent-style-name="xitem_.en_definition_.en_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
@@ -57,9 +45,6 @@
     </style:style>
     <style:style style:name="xitem_.tpi_definition_.en_sense_senses_entry_letData" style:family="text" style:parent-style-name="definition_.en_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-    </style:style>
-    <style:style style:name="xlanguagetag_.en_xitem_.tpi_definition_.en_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="xitem_.tpi_definition_.en_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" />
     </style:style>
     <style:style style:name="xlanguagetag_.en_xitem_.tpi_definition_.en_sense_senses_entry_letData" style:family="text" style:parent-style-name="xitem_.tpi_definition_.en_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
@@ -74,9 +59,6 @@
     <style:style style:name="example_.bzh_xitem_examples_sense_senses_entry_letData" style:family="text" style:parent-style-name="xitem_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
-    <style:style style:name="xlanguagetag_.en_example_.bzh_xitem_examples_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="example_.bzh_xitem_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" />
-    </style:style>
     <style:style style:name="xlanguagetag_.en_example_.bzh_xitem_examples_sense_senses_entry_letData" style:family="text" style:parent-style-name="example_.bzh_xitem_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
@@ -88,22 +70,13 @@
     <style:style style:name="translation_.en_translations_xitem_examples_sense_senses_entry_letData" style:family="text" style:parent-style-name="translations_xitem_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
-    <style:style style:name="xlanguagetag_.en_translation_.en_translations_xitem_examples_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="translation_.en_translations_xitem_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" />
-    </style:style>
     <style:style style:name="xlanguagetag_.en_translation_.en_translations_xitem_examples_sense_senses_entry_letData" style:family="text" style:parent-style-name="translation_.en_translations_xitem_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="slots_grammaticalinfo_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="grammaticalinfo_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="slots_grammaticalinfo_sense_senses_entry_letData" style:family="text" style:parent-style-name="grammaticalinfo_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="slotname_.en_slots_grammaticalinfo_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="slots_grammaticalinfo_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" />
-    </style:style>
     <style:style style:name="slotname_.en_slots_grammaticalinfo_sense_senses_entry_letData" style:family="text" style:parent-style-name="slots_grammaticalinfo_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-    </style:style>
-    <style:style style:name="xlanguagetag_.en_definition_.en_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="definition_.en_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" />
     </style:style>
     <style:style style:name="xlanguagetag_.en_definition_.en_sense_senses_entry_letData" style:family="text" style:parent-style-name="definition_.en_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
@@ -112,20 +85,11 @@
     <style:style style:name="semanticdomains_sense_senses_entry_letData" style:family="text" style:parent-style-name="sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="xitem_semanticdomains_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="semanticdomains_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="xitem_semanticdomains_sense_senses_entry_letData" style:family="text" style:parent-style-name="semanticdomains_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="semanticdomainabbr_.en_xitem_semanticdomains_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="xitem_semanticdomains_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" />
-    </style:style>
     <style:style style:name="semanticdomainabbr_.en_xitem_semanticdomains_sense_senses_entry_letData" style:family="text" style:parent-style-name="xitem_semanticdomains_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
-    <style:style style:name="semanticdomainname_.en_xitem_semanticdomains_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="xitem_semanticdomains_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" />
-    </style:style>
     <style:style style:name="semanticdomainname_.en_xitem_semanticdomains_sense_senses_entry_letData" style:family="text" style:parent-style-name="xitem_semanticdomains_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-    </style:style>
-    <style:style style:name="xsensenumber_.en_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" />
     </style:style>
     <style:style style:name="xsensenumber_.en_sense_senses_entry_letData" style:family="text" style:parent-style-name="sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
@@ -135,9 +99,6 @@
     </style:style>
     <style:style style:name="example_.bzh_examples_sense_senses_entry_letData" style:family="text" style:parent-style-name="examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-    </style:style>
-    <style:style style:name="xlanguagetag_.en_example_.bzh_examples_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="example_.bzh_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" />
     </style:style>
     <style:style style:name="xlanguagetag_.en_example_.bzh_examples_sense_senses_entry_letData" style:family="text" style:parent-style-name="example_.bzh_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
@@ -150,69 +111,41 @@
     <style:style style:name="translation_.en_translations_examples_sense_senses_entry_letData" style:family="text" style:parent-style-name="translations_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
-    <style:style style:name="xlanguagetag_.en_translation_.en_translations_examples_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="translation_.en_translations_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" />
-    </style:style>
     <style:style style:name="xlanguagetag_.en_translation_.en_translations_examples_sense_senses_entry_letData" style:family="text" style:parent-style-name="translation_.en_translations_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
-    <style:style style:name="semanticdomainabbr_.en_semanticdomains_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="semanticdomains_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" />
-    </style:style>
     <style:style style:name="semanticdomainabbr_.en_semanticdomains_sense_senses_entry_letData" style:family="text" style:parent-style-name="semanticdomains_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-    </style:style>
-    <style:style style:name="semanticdomainname_.en_semanticdomains_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="semanticdomains_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" />
     </style:style>
     <style:style style:name="semanticdomainname_.en_semanticdomains_sense_senses_entry_letData" style:family="text" style:parent-style-name="semanticdomains_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="complexformrefs_entry_letData" style:family="paragraph" style:parent-style-name="entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="complexformrefs_entry_letData" style:family="text" style:parent-style-name="entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="complexentrytype_complexformrefs_entry_letData" style:family="paragraph" style:parent-style-name="complexformrefs_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="complexentrytype_complexformrefs_entry_letData" style:family="text" style:parent-style-name="complexformrefs_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="complexentryform_.bzh_complexformrefs_entry_letData" style:family="paragraph" style:parent-style-name="complexformrefs_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="none" fo:country="none" />
-    </style:style>
     <style:style style:name="complexentryform_.bzh_complexformrefs_entry_letData" style:family="text" style:parent-style-name="complexformrefs_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="primaryrefs_entry_letData" style:family="paragraph" style:parent-style-name="entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="primaryrefs_entry_letData" style:family="text" style:parent-style-name="entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="entrytypeabbr_.en_primaryrefs_entry_letData" style:family="paragraph" style:parent-style-name="primaryrefs_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" />
-    </style:style>
     <style:style style:name="entrytypeabbr_.en_primaryrefs_entry_letData" style:family="text" style:parent-style-name="primaryrefs_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-    </style:style>
-    <style:style style:name="mainentryref_.bzh_primaryrefs_entry_letData" style:family="paragraph" style:parent-style-name="primaryrefs_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="none" fo:country="none" />
     </style:style>
     <style:style style:name="mainentryref_.bzh_primaryrefs_entry_letData" style:family="text" style:parent-style-name="primaryrefs_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="relations_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="relations_sense_senses_entry_letData" style:family="text" style:parent-style-name="sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="lexreftype_.en_relations_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="relations_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" />
-    </style:style>
     <style:style style:name="lexreftype_.en_relations_sense_senses_entry_letData" style:family="text" style:parent-style-name="relations_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="lexreftargets_relations_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="relations_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="lexreftargets_relations_sense_senses_entry_letData" style:family="text" style:parent-style-name="relations_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="sensecrossref_.bzh_lexreftargets_relations_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="lexreftargets_relations_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="none" fo:country="none" />
-    </style:style>
     <style:style style:name="sensecrossref_.bzh_lexreftargets_relations_sense_senses_entry_letData" style:family="text" style:parent-style-name="lexreftargets_relations_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="xitem_relations_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="relations_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="xitem_relations_sense_senses_entry_letData" style:family="text" style:parent-style-name="relations_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="lexreftype_.en_xitem_relations_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="xitem_relations_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" />
-    </style:style>
     <style:style style:name="lexreftype_.en_xitem_relations_sense_senses_entry_letData" style:family="text" style:parent-style-name="xitem_relations_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
@@ -220,45 +153,28 @@
     <style:style style:name="lexreftargets_xitem_relations_sense_senses_entry_letData" style:family="text" style:parent-style-name="xitem_relations_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="xitem_lexreftargets_xitem_relations_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="lexreftargets_xitem_relations_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="xitem_lexreftargets_xitem_relations_sense_senses_entry_letData" style:family="text" style:parent-style-name="lexreftargets_xitem_relations_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="sensecrossref_.bzh_xitem_lexreftargets_xitem_relations_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="xitem_lexreftargets_xitem_relations_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="none" fo:country="none" />
-    </style:style>
     <style:style style:name="sensecrossref_.bzh_xitem_lexreftargets_xitem_relations_sense_senses_entry_letData" style:family="text" style:parent-style-name="xitem_lexreftargets_xitem_relations_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-    </style:style>
-    <style:style style:name="xsensenumber_.en_sensecrossref_.bzh_xitem_lexreftargets_xitem_relations_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="sensecrossref_.bzh_xitem_lexreftargets_xitem_relations_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" />
     </style:style>
     <style:style style:name="xsensenumber_.en_sensecrossref_.bzh_xitem_lexreftargets_xitem_relations_sense_senses_entry_letData" style:family="text" style:parent-style-name="sensecrossref_.bzh_xitem_lexreftargets_xitem_relations_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
-    <style:style style:name="sensecrossref_.bzh_lexreftargets_xitem_relations_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="lexreftargets_xitem_relations_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="none" fo:country="none" />
-    </style:style>
     <style:style style:name="sensecrossref_.bzh_lexreftargets_xitem_relations_sense_senses_entry_letData" style:family="text" style:parent-style-name="lexreftargets_xitem_relations_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
-    <style:style style:name="scientificname_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="scientificname_sense_senses_entry_letData" style:family="text" style:parent-style-name="sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="crossrefs_entry_letData" style:family="paragraph" style:parent-style-name="entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="crossrefs_entry_letData" style:family="text" style:parent-style-name="entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="crossreftype_.en_crossrefs_entry_letData" style:family="paragraph" style:parent-style-name="crossrefs_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" />
-    </style:style>
     <style:style style:name="crossreftype_.en_crossrefs_entry_letData" style:family="text" style:parent-style-name="crossrefs_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="crossreftargets_crossrefs_entry_letData" style:family="paragraph" style:parent-style-name="crossrefs_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="crossreftargets_crossrefs_entry_letData" style:family="text" style:parent-style-name="crossrefs_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="crossref_.bzh_crossreftargets_crossrefs_entry_letData" style:family="paragraph" style:parent-style-name="crossreftargets_crossrefs_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="none" fo:country="none" />
-    </style:style>
     <style:style style:name="crossref_.bzh_crossreftargets_crossrefs_entry_letData" style:family="text" style:parent-style-name="crossreftargets_crossrefs_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="xitem_complexformrefs_entry_letData" style:family="paragraph" style:parent-style-name="complexformrefs_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="xitem_complexformrefs_entry_letData" style:family="text" style:parent-style-name="complexformrefs_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="complexentrytype_xitem_complexformrefs_entry_letData" style:family="paragraph" style:parent-style-name="xitem_complexformrefs_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="complexentrytype_xitem_complexformrefs_entry_letData" style:family="text" style:parent-style-name="xitem_complexformrefs_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="complexentryform_.bzh_xitem_complexformrefs_entry_letData" style:family="paragraph" style:parent-style-name="xitem_complexformrefs_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" />
@@ -278,7 +194,7 @@
     </style:style>
     <style:style style:name="Header" style:family="paragraph" style:parent-style-name="Standard" style:class="extra" />
     <style:style style:name="letHead" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:border-bottom=".5pt solid #aa0000" fo:text-align="center" fo:margin-top="18pt" fo:margin-right=".75in" fo:margin-bottom="18pt" fo:margin-left=".75in" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:paragraph-properties fo:border-bottom=".5pt solid #aa0000" fo:text-align="center" fo:margin-top="18pt" fo:margin-right=".75in" fo:margin-bottom="18pt" fo:margin-left=".75in" fo:padding-bottom="9pt" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
     </style:style>
     <style:style style:name="letter_letHead" style:family="paragraph" style:parent-style-name="letHead">
       <style:paragraph-properties fo:text-align="center" fo:margin-top="18pt" fo:margin-bottom="18pt" style:writing-mode="lr-tb" />
@@ -292,11 +208,11 @@
       <style:paragraph-properties fo:text-align="left" />
     </style:style>
     <style:style style:name="entry_letData" style:family="paragraph" style:parent-style-name="letData">
-      <style:paragraph-properties fo:background-color="#FFFFFF" fo:text-indent="-10pt" fo:margin-left="10pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" fo:padding-top="1pt" />
+      <style:paragraph-properties fo:background-color="#FFFFFF" fo:text-indent="-10pt" fo:margin-left="10pt" fo:padding-left="9pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" fo:padding-top="1pt" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
     <style:style style:name="entry" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:paragraph-properties fo:background-color="#FFFFFF" fo:text-indent="-10pt" fo:margin-left="10pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" fo:padding-top="1pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
+      <style:paragraph-properties fo:background-color="#FFFFFF" fo:text-indent="-10pt" fo:margin-left="10pt" fo:padding-left="9pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" fo:padding-top="1pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#000000" fo:background-color="#FFFFFF" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="xhomographnumber_sensecrossref_.bzh_xitem_lexreftargets_xitem_relations_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="sensecrossref_.bzh_xitem_lexreftargets_xitem_relations_sense_senses_entry_letData">

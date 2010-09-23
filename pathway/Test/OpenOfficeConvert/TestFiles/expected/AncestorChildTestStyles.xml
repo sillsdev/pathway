@@ -10,7 +10,6 @@
     <style:font-face style:name="Scheherazade Graphite Alpha" svg:font-family="'Scheherazade Graphite Alpha'" />
   </office:font-face-decls>
   <office:styles>
-    <style:style style:name="letter1_locator" style:family="paragraph" style:parent-style-name="locator" />
     <style:style style:name="letter1_locator" style:family="text" style:parent-style-name="locator" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="hide" style:family="paragraph" style:parent-style-name="Heading_20_9" style:class="text">
@@ -23,7 +22,6 @@
       <style:text-properties text:display="true" />
     </style:style>
     <style:style style:name="Header" style:family="paragraph" style:parent-style-name="Standard" style:class="extra" />
-    <style:style style:name="headword" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="dictionary" style:family="paragraph" style:parent-style-name="none">
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
@@ -31,37 +29,21 @@
       <style:paragraph-properties fo:text-align="center" />
       <style:text-properties fo:font-size="25pt" style:font-size-complex="25pt" fo:color="#ffa500" />
     </style:style>
-    <style:style style:name="xitem_locator" style:family="paragraph" style:parent-style-name="locator">
-      <style:text-properties fo:font-size="30pt" style:font-size-complex="30pt" fo:color="#008000" />
-    </style:style>
     <style:style style:name="xitem_locator" style:family="text" style:parent-style-name="locator" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:font-size="30pt" style:font-size-complex="30pt" fo:color="#008000" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="xitem" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:font-size="30pt" style:font-size-complex="30pt" fo:color="#008000" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
-    <style:style style:name="letter.locator_locator" style:family="paragraph" style:parent-style-name="locator">
-      <style:paragraph-properties fo:text-align="center" />
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="20pt" style:font-size-complex="20pt" fo:color="#0000ff" />
-    </style:style>
     <style:style style:name="letter.locator_locator" style:family="text" style:parent-style-name="locator" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:paragraph-properties fo:text-align="center" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="20pt" style:font-size-complex="20pt" fo:color="#0000ff" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-    </style:style>
-    <style:style style:name="letter.locator_xitem_locator" style:family="paragraph" style:parent-style-name="xitem_locator" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:paragraph-properties fo:text-align="center" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="20pt" style:font-size-complex="20pt" fo:color="#0000ff" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="letter.locator_xitem_locator" style:family="text" style:parent-style-name="xitem_locator" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:paragraph-properties fo:text-align="center" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="20pt" style:font-size-complex="20pt" fo:color="#0000ff" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="letter.locator" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:paragraph-properties fo:text-align="center" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="20pt" style:font-size-complex="20pt" fo:color="#0000ff" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-    </style:style>
-    <style:style style:name="letter current_locator" style:family="paragraph" style:parent-style-name="locator">
-      <style:text-properties fo:color="#ff0000" fo:background-color="#aaff00" />
     </style:style>
     <style:style style:name="letter current_locator" style:family="text" style:parent-style-name="locator" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:color="#ff0000" fo:background-color="#aaff00" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />

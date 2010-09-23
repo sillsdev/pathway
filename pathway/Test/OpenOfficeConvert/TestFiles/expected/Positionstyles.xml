@@ -22,7 +22,7 @@
     </style:style>
     <style:style style:name="Header" style:family="paragraph" style:parent-style-name="Standard" style:class="extra" />
     <style:style style:name="entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" fo:text-indent="-36pt" fo:margin-left="36pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" fo:padding-top="1pt" />
+      <style:paragraph-properties fo:background-color="#FFFFFF" fo:text-indent="-36pt" fo:margin-left="36pt" fo:padding-left="9pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" fo:padding-top="1pt" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" style:font-size-complex="12pt" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
     <style:style style:name="positionLeft" style:family="paragraph" style:parent-style-name="none">

@@ -21,7 +21,6 @@
       <style:text-properties text:display="true" />
     </style:style>
     <style:style style:name="Header" style:family="paragraph" style:parent-style-name="Standard" style:class="extra" />
-    <style:style style:name="dicBody" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="letHead" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="letter" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-align="center" fo:margin-top="18pt" fo:margin-bottom="18pt" style:writing-mode="lr-tb" />
@@ -31,11 +30,11 @@
       <style:paragraph-properties fo:text-align="left" />
     </style:style>
     <style:style style:name="entryFirst" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" fo:text-indent="-36pt" fo:margin-left="36pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" fo:padding-top="1pt" style:writing-mode="lr-tb" />
+      <style:paragraph-properties fo:background-color="#FFFFFF" fo:text-indent="-36pt" fo:margin-left="36pt" fo:padding-left="9pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" fo:padding-top="1pt" style:writing-mode="lr-tb" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" style:font-size-complex="12pt" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
     <style:style style:name="entrylast" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" fo:text-indent="-36pt" fo:margin-left="36pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" fo:padding-top="1pt" style:writing-mode="rl-tb" fo:text-align="end" />
+      <style:paragraph-properties fo:background-color="#FFFFFF" fo:text-indent="-36pt" fo:margin-left="36pt" fo:padding-left="9pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" fo:padding-top="1pt" style:writing-mode="rl-tb" fo:text-align="end" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" style:font-size-complex="12pt" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
     <style:style style:name="xhomographnumber" style:family="paragraph" style:parent-style-name="none">

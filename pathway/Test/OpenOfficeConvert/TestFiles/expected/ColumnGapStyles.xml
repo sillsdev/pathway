@@ -23,12 +23,7 @@
     <style:style style:name="Header" style:family="paragraph" style:parent-style-name="Standard" style:class="extra" />
     <style:style style:name="letData" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="xitem" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="let_xitem" style:family="paragraph" style:parent-style-name="xitem">
-      <style:paragraph-properties fo:text-align="left" />
-      <style:text-properties fo:font-size="20pt" style:font-size-complex="20pt" />
-    </style:style>
     <style:style style:name="let_xitem" style:family="text" style:parent-style-name="xitem" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:paragraph-properties fo:text-align="left" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-size="20pt" style:font-size-complex="20pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="let" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">

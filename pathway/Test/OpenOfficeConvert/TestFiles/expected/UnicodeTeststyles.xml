@@ -21,7 +21,6 @@
       <style:text-properties text:display="true" />
     </style:style>
     <style:style style:name="Header" style:family="paragraph" style:parent-style-name="Standard" style:class="extra" />
-    <style:style style:name="dicBody" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="headword" style:family="paragraph" style:parent-style-name="none">
       <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:color="#ff0000" />
     </style:style>

@@ -30,10 +30,10 @@
       </text:sequence-decls>
       <text:p text:style-name="P4" /><text:p text:style-name="p4"><text:span text:style-name="child1_p4">
     text
-    </text:span><text:span text:style-name="child2_p4">
+    </text:span> <text:span text:style-name="child2_p4">
     text
-    </text:span></text:p><text:p text:style-name="p4"><text:span text:style-name="child1_p4">
+    </text:span> </text:p><text:p text:style-name="p4"><text:span text:style-name="child1_p4">
             text
-        </text:span><text:span text:style-name="child2_p4">
+        </text:span> <text:span text:style-name="child2_p4">
             text
-        </text:span></text:p></office:text></office:body></office:document-content>
+        </text:span> </text:p></office:text></office:body></office:document-content>

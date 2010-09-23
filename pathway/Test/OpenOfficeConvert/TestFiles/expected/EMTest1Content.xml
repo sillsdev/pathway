@@ -33,6 +33,6 @@
 letdata
              <text:span text:style-name="slotname_letData">
 slotname
-             </text:span><text:span text:style-name="name_letData">
+             </text:span> <text:span text:style-name="name_letData">
 nameclass
-             </text:span></text:p></office:text></office:body></office:document-content>
+             </text:span> </text:p></office:text></office:body></office:document-content>

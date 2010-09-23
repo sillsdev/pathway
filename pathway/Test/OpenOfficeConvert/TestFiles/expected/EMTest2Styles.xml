@@ -24,9 +24,6 @@
     <style:style style:name="a" style:family="paragraph" style:parent-style-name="none">
       <style:text-properties fo:font-size="24pt" style:font-size-complex="24pt" />
     </style:style>
-    <style:style style:name="b_a" style:family="paragraph" style:parent-style-name="a">
-      <style:text-properties fo:font-size="48pt" style:font-size-complex="2em" fo:letter-spacing="48pt" />
-    </style:style>
     <style:style style:name="b_a" style:family="text" style:parent-style-name="a" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:font-size="48pt" style:font-size-complex="2em" fo:letter-spacing="48pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>

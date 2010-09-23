@@ -31,7 +31,7 @@
       <text:p text:style-name="P4" />
       <text:p text:style-name="locator">
 parent text
-      <text:span text:style-name="totext_locator"> div </text:span><text:span text:style-name="totext_locator"> div </text:span>
+      <text:span text:style-name="totext_locator"> div </text:span> <text:span text:style-name="totext_locator"> div </text:span> 
 parent text
 </text:p>
       <text:p text:style-name="locator_locator">

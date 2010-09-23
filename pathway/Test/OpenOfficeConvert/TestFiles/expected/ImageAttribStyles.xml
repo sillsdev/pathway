@@ -13,48 +13,29 @@
     <style:style style:name="head_sectionletter" style:family="paragraph" style:parent-style-name="sectionletter" />
     <style:style style:name="locator_sectionletter" style:family="paragraph" style:parent-style-name="sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="locator_sectionletter" style:family="text" style:parent-style-name="sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="letter_locator_sectionletter" style:family="paragraph" style:parent-style-name="locator_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="letter_locator_sectionletter" style:family="text" style:parent-style-name="locator_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="article_sectionletter" style:family="paragraph" style:parent-style-name="sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="headword_article_sectionletter" style:family="paragraph" style:parent-style-name="article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="headword_article_sectionletter" style:family="text" style:parent-style-name="article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="stress_headword_article_sectionletter" style:family="paragraph" style:parent-style-name="headword_article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="stress_headword_article_sectionletter" style:family="text" style:parent-style-name="headword_article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="variantinflection_article_sectionletter" style:family="paragraph" style:parent-style-name="article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="variantinflection_article_sectionletter" style:family="text" style:parent-style-name="article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="grammarcategory_article_sectionletter" style:family="paragraph" style:parent-style-name="article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="grammarcategory_article_sectionletter" style:family="text" style:parent-style-name="article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="grammaruse_article_sectionletter" style:family="paragraph" style:parent-style-name="article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="grammaruse_article_sectionletter" style:family="text" style:parent-style-name="article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="definition_article_sectionletter" style:family="paragraph" style:parent-style-name="article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="definition_article_sectionletter" style:family="text" style:parent-style-name="article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="worduse_definition_article_sectionletter" style:family="paragraph" style:parent-style-name="definition_article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="worduse_definition_article_sectionletter" style:family="text" style:parent-style-name="definition_article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="example_article_sectionletter" style:family="paragraph" style:parent-style-name="article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="example_article_sectionletter" style:family="text" style:parent-style-name="article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="pronunciation_article_sectionletter" style:family="paragraph" style:parent-style-name="article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="pronunciation_article_sectionletter" style:family="text" style:parent-style-name="article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="stress_pronunciation_article_sectionletter" style:family="paragraph" style:parent-style-name="pronunciation_article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="stress_pronunciation_article_sectionletter" style:family="text" style:parent-style-name="pronunciation_article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="sense_article_sectionletter" style:family="paragraph" style:parent-style-name="article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="sense_article_sectionletter" style:family="text" style:parent-style-name="article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="grammarcategory_sense_article_sectionletter" style:family="paragraph" style:parent-style-name="sense_article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="grammarcategory_sense_article_sectionletter" style:family="text" style:parent-style-name="sense_article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="image_sense_article_sectionletter" style:family="paragraph" style:parent-style-name="sense_article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="image_sense_article_sectionletter" style:family="text" style:parent-style-name="sense_article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="definition_sense_article_sectionletter" style:family="paragraph" style:parent-style-name="sense_article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="definition_sense_article_sectionletter" style:family="text" style:parent-style-name="sense_article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="worduse_definition_sense_article_sectionletter" style:family="paragraph" style:parent-style-name="definition_sense_article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="worduse_definition_sense_article_sectionletter" style:family="text" style:parent-style-name="definition_sense_article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="example_sense_article_sectionletter" style:family="paragraph" style:parent-style-name="sense_article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="example_sense_article_sectionletter" style:family="text" style:parent-style-name="sense_article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="image_article_sectionletter" style:family="paragraph" style:parent-style-name="article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="image_article_sectionletter" style:family="text" style:parent-style-name="article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="subentry_article_sectionletter" style:family="paragraph" style:parent-style-name="article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="subentry_article_sectionletter" style:family="text" style:parent-style-name="article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="headword_subentry_article_sectionletter" style:family="paragraph" style:parent-style-name="subentry_article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="headword_subentry_article_sectionletter" style:family="text" style:parent-style-name="subentry_article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="example_subentry_article_sectionletter" style:family="paragraph" style:parent-style-name="subentry_article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="example_subentry_article_sectionletter" style:family="text" style:parent-style-name="subentry_article_sectionletter" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="hide" style:family="paragraph" style:parent-style-name="Heading_20_9" style:class="text">

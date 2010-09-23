@@ -28,7 +28,7 @@
       <style:text-properties fo:font-size="25pt" style:font-size-complex="25pt" fo:color="#0000ff" />
     </style:style>
     <style:style style:name="entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" />
+      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" />
     </style:style>
     <style:style style:name="xhomographnumber" style:family="paragraph" style:parent-style-name="none">
       <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="77%" style:font-size-complex="77%" style:text-position="sub" fo:color="#ff0000" />

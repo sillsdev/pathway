@@ -25,17 +25,11 @@
       <style:paragraph-properties fo:text-align="left" />
       <style:text-properties fo:font-size="48pt" style:font-size-complex="48pt" fo:letter-spacing="3pt" />
     </style:style>
-    <style:style style:name="slotname_letData" style:family="paragraph" style:parent-style-name="letData">
-      <style:text-properties fo:font-size="48pt" style:font-size-complex="1em" fo:letter-spacing="48pt" />
-    </style:style>
     <style:style style:name="slotname_letData" style:family="text" style:parent-style-name="letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:font-size="48pt" style:font-size-complex="1em" fo:letter-spacing="48pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="slotname" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:font-size="1em" style:font-size-complex="1em" fo:letter-spacing="1em" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-    </style:style>
-    <style:style style:name="name_letData" style:family="paragraph" style:parent-style-name="letData">
-      <style:text-properties fo:font-size="48pt" style:font-size-complex="48pt" fo:letter-spacing="3pt" />
     </style:style>
     <style:style style:name="name_letData" style:family="text" style:parent-style-name="letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:font-size="48pt" style:font-size-complex="48pt" fo:letter-spacing="3pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />

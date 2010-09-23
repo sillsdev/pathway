@@ -46,22 +46,21 @@
       </text:sequence-decls>
       <text:p text:style-name="P4" /><text:p text:style-name="main"><text:span text:style-name="xitem_main">
 No Lang sample text file
-</text:span><text:span text:style-name="xitem_.en_main">
+</text:span> <text:span text:style-name="xitem_.en_main">
 sample text file
-</text:span><text:span text:style-name="xitem_.fr_main">
+</text:span> <text:span text:style-name="xitem_.fr_main">
 exemple de fichier texte
-</text:span><text:span text:style-name="xitem_.es_main">
+</text:span> <text:span text:style-name="xitem_.es_main">
 Este es muestra texto
-</text:span><text:span text:style-name="xitem_.en-US_main">
+</text:span> <text:span text:style-name="xitem_.en-US_main">
 sample text file
-</text:span><text:span text:style-name="xitem_.fr-FR_main">
+</text:span> <text:span text:style-name="xitem_.fr-FR_main">
 exemple de fichier texte
-</text:span><text:span text:style-name="xitem_.es-ES_main">
+</text:span> <text:span text:style-name="xitem_.es-ES_main">
 Este es muestra texto
-</text:span>
-      </text:p>
+</text:span> </text:p>
       <text:p text:style-name="xitem_.es-ES_main">
 Este es muestra texto
 <text:span text:style-name="span_xitem_.es-ES_main">
 Este es muestra texto
-</text:span></text:p></office:text></office:body></office:document-content>
+</text:span> </text:p></office:text></office:body></office:document-content>

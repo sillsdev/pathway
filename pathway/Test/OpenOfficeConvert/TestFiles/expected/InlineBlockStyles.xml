@@ -22,9 +22,6 @@
       <style:text-properties text:display="true" />
     </style:style>
     <style:style style:name="Header" style:family="paragraph" style:parent-style-name="Standard" style:class="extra" />
-    <style:style style:name="totext_locator" style:family="paragraph" style:parent-style-name="locator">
-      <style:text-properties text:display="inline" />
-    </style:style>
     <style:style style:name="totext_locator" style:family="text" style:parent-style-name="locator" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties text:display="inline" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" />
     </style:style>

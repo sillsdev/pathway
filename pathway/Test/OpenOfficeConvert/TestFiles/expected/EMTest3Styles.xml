@@ -10,7 +10,6 @@
     <style:font-face style:name="Scheherazade Graphite Alpha" svg:font-family="'Scheherazade Graphite Alpha'" />
   </office:font-face-decls>
   <office:styles>
-    <style:style style:name="b_a_" style:family="paragraph" style:parent-style-name="a_" />
     <style:style style:name="b_a_" style:family="text" style:parent-style-name="a_" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="hide" style:family="paragraph" style:parent-style-name="Heading_20_9" style:class="text">

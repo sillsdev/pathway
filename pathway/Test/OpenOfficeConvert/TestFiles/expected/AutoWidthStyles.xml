@@ -10,9 +10,6 @@
     <style:font-face style:name="Scheherazade Graphite Alpha" svg:font-family="'Scheherazade Graphite Alpha'" />
   </office:font-face-decls>
   <office:styles>
-    <style:style style:name="span_.bgt_pictureCaption" style:family="paragraph" style:parent-style-name="pictureCaption">
-      <style:text-properties fo:language="none" fo:country="none" />
-    </style:style>
     <style:style style:name="span_.bgt_pictureCaption" style:family="text" style:parent-style-name="pictureCaption" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>

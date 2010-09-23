@@ -37,24 +37,14 @@
       <style:paragraph-properties fo:background-color="#ff0000" />
       <style:text-properties fo:font-size="80pt" style:font-size-complex="80pt" fo:background-color="#ff0000" />
     </style:style>
-    <style:style style:name="child1_p4" style:family="paragraph" style:parent-style-name="p4">
-      <style:paragraph-properties fo:background-color="#0000ff" />
-      <style:text-properties fo:font-size="120pt" style:font-size-complex="larger" fo:color="#000000" fo:background-color="#0000ff" />
-    </style:style>
     <style:style style:name="child1_p4" style:family="text" style:parent-style-name="p4" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:paragraph-properties fo:background-color="#0000ff" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-size="120pt" style:font-size-complex="larger" fo:color="#000000" fo:background-color="#0000ff" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="child1" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:paragraph-properties fo:background-color="#0000ff" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-size="larger" style:font-size-complex="larger" fo:color="#000000" fo:background-color="#0000ff" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
-    <style:style style:name="child2_p4" style:family="paragraph" style:parent-style-name="p4">
-      <style:paragraph-properties fo:background-color="#0000ff" />
-      <style:text-properties fo:font-size="53pt" style:font-size-complex="smaller" fo:background-color="#0000ff" />
-    </style:style>
     <style:style style:name="child2_p4" style:family="text" style:parent-style-name="p4" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:paragraph-properties fo:background-color="#0000ff" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-size="53pt" style:font-size-complex="smaller" fo:background-color="#0000ff" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="child2" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">

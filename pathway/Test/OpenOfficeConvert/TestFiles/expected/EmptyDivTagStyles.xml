@@ -10,9 +10,6 @@
     <style:font-face style:name="Scheherazade Graphite Alpha" svg:font-family="'Scheherazade Graphite Alpha'" />
   </office:font-face-decls>
   <office:styles>
-    <style:style style:name="span_.bgt_TitleMain_scrBook" style:family="paragraph" style:parent-style-name="TitleMain_scrBook">
-      <style:text-properties fo:language="none" fo:country="none" />
-    </style:style>
     <style:style style:name="span_.bgt_TitleMain_scrBook" style:family="text" style:parent-style-name="TitleMain_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
@@ -31,11 +28,11 @@
       <style:paragraph-properties fo:border-top=".5pt solid #000000" fo:text-align="center" fo:margin-left="1in" fo:margin-right="1in" fo:margin-top="9pt" fo:margin-bottom="18pt" />
     </style:style>
     <style:style style:name="TitleMain_scrBook" style:family="paragraph" style:parent-style-name="scrBook">
-      <style:paragraph-properties fo:text-align="center" fo:text-indent="0pt" fo:margin-left="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="36pt" />
+      <style:paragraph-properties fo:text-align="center" fo:text-indent="0pt" fo:margin-left="0pt" fo:padding-bottom="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="36pt" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="20pt" style:font-size-complex="20pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" />
     </style:style>
     <style:style style:name="TitleMain" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:paragraph-properties fo:text-align="center" fo:text-indent="0pt" fo:margin-left="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="36pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
+      <style:paragraph-properties fo:text-align="center" fo:text-indent="0pt" fo:margin-left="0pt" fo:padding-bottom="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="36pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="20pt" style:font-size-complex="20pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="h1" style:family="paragraph" style:parent-style-name="none">

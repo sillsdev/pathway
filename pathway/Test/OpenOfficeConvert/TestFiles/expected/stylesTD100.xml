@@ -21,8 +21,6 @@
       <style:text-properties text:display="true" />
     </style:style>
     <style:style style:name="Header" style:family="paragraph" style:parent-style-name="Standard" style:class="extra" />
-    <style:style style:name="dicBody" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="letHead" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="uppercase" style:family="paragraph" style:parent-style-name="none">
       <style:text-properties fo:text-transform="uppercase" />
     </style:style>

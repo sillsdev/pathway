@@ -10,20 +10,11 @@
     <style:font-face style:name="Scheherazade Graphite Alpha" svg:font-family="'Scheherazade Graphite Alpha'" />
   </office:font-face-decls>
   <office:styles>
-    <style:style style:name="span_.x-kal_SectionHead_scrSection_scrBook" style:family="paragraph" style:parent-style-name="SectionHead_scrSection_scrBook">
-      <style:text-properties fo:language="none" fo:country="none" />
-    </style:style>
     <style:style style:name="span_.x-kal_SectionHead_scrSection_scrBook" style:family="text" style:parent-style-name="SectionHead_scrSection_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
-    <style:style style:name="span_.x-kal_Paragraph_scrSection_scrBook" style:family="paragraph" style:parent-style-name="Paragraph_scrSection_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="none" fo:country="none" />
-    </style:style>
     <style:style style:name="span_.x-kal_Paragraph_scrSection_scrBook" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-    </style:style>
-    <style:style style:name="span_.x-kal_NoteGeneralParagraph_Paragraph_scrSection_scrBook" style:family="paragraph" style:parent-style-name="NoteGeneralParagraph_Paragraph_scrSection_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="none" fo:country="none" />
     </style:style>
     <style:style style:name="span_.x-kal_NoteGeneralParagraph_Paragraph_scrSection_scrBook" style:family="text" style:parent-style-name="NoteGeneralParagraph_Paragraph_scrSection_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
@@ -39,28 +30,14 @@
       <style:text-properties text:display="true" />
     </style:style>
     <style:style style:name="Header" style:family="paragraph" style:parent-style-name="Standard" style:class="extra" />
-    <style:style style:name="AlternateReading_.x-kal_NoteGeneralParagraph_Paragraph_scrSection_scrBook" style:family="paragraph" style:parent-style-name="NoteGeneralParagraph_Paragraph_scrSection_scrBook">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-weight="700" style:font-weight-complex="700" fo:language="none" fo:country="none" />
-    </style:style>
     <style:style style:name="AlternateReading_.x-kal_NoteGeneralParagraph_Paragraph_scrSection_scrBook" style:family="text" style:parent-style-name="NoteGeneralParagraph_Paragraph_scrSection_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-weight="700" style:font-weight-complex="700" fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="AlternateReading" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-weight="700" style:font-weight-complex="700" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
-    <style:style style:name="ChapterNumber_Paragraph_scrSection_scrBook" style:family="paragraph" style:parent-style-name="Paragraph_scrSection_scrBook">
-      <style:paragraph-properties>
-        <style:drop-cap style:lines="2" style:distance="0.20cm" style:length="1" />
-      </style:paragraph-properties>
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-weight="700" style:font-weight-complex="bolder" />
-    </style:style>
     <style:style style:name="ChapterNumber_Paragraph_scrSection_scrBook" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:paragraph-properties>
-        <style:drop-cap style:lines="2" style:distance="0.20cm" style:length="1" />
-      </style:paragraph-properties>
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-weight="700" style:font-weight-complex="bolder" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="ChapterNumber1" style:family="paragraph" style:parent-style-name="Paragraph_scrSection_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
@@ -81,12 +58,7 @@
       <style:paragraph-properties fo:text-align="left" fo:text-indent="0pt" fo:margin-left="0pt" fo:line-height="11pt" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="8pt" style:font-size-complex="8pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" />
     </style:style>
-    <style:style style:name="NameOfGod_.x-kal_Paragraph_scrSection_scrBook" style:family="paragraph" style:parent-style-name="Paragraph_scrSection_scrBook">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="italic" fo:language="none" fo:country="none" />
-    </style:style>
     <style:style style:name="NameOfGod_.x-kal_Paragraph_scrSection_scrBook" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="italic" fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="NameOfGod" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
@@ -119,7 +91,6 @@
       <style:paragraph-properties fo:text-indent="12pt" fo:margin-left="0pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
-    <style:style style:name="scrBody" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="scrBook" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="scrBookName" style:family="paragraph" style:parent-style-name="none">
       <style:text-properties text:display="true" />
@@ -131,23 +102,18 @@
       <style:paragraph-properties fo:text-align="left" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="SectionHead_scrSection_scrBook" style:family="paragraph" style:parent-style-name="scrSection_scrBook">
-      <style:paragraph-properties fo:text-align="center" fo:text-indent="0pt" fo:margin-left="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="8pt" />
+      <style:paragraph-properties fo:text-align="center" fo:text-indent="0pt" fo:margin-left="0pt" fo:padding-bottom="4pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="8pt" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="9pt" style:font-size-complex="9pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" />
     </style:style>
     <style:style style:name="SectionHead" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:paragraph-properties fo:text-align="center" fo:text-indent="0pt" fo:margin-left="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="8pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
+      <style:paragraph-properties fo:text-align="center" fo:text-indent="0pt" fo:margin-left="0pt" fo:padding-bottom="4pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="8pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="9pt" style:font-size-complex="9pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="TitleMain" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:text-indent="0pt" fo:margin-left="0pt" fo:line-height="24pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="36pt" />
+      <style:paragraph-properties fo:text-align="center" fo:text-indent="0pt" fo:margin-left="0pt" fo:line-height="24pt" fo:padding-bottom="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="36pt" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="20pt" style:font-size-complex="20pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" />
     </style:style>
-    <style:style style:name="VerseNumber_Paragraph_scrSection_scrBook" style:family="paragraph" style:parent-style-name="Paragraph_scrSection_scrBook">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" style:font-size-complex="smallerx2" style:text-position="super" />
-    </style:style>
     <style:style style:name="VerseNumber_Paragraph_scrSection_scrBook" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" style:font-size-complex="smallerx2" style:text-position="super" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="VerseNumber" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">

@@ -10,7 +10,10 @@
     <style:font-face style:name="Scheherazade Graphite Alpha" svg:font-family="'Scheherazade Graphite Alpha'" />
   </office:font-face-decls>
   <office:styles>
-    <style:style style:name="Empty" style:family="text" style:parent-style-name="none" />
+    <style:style style:name="columns_scrBook" style:family="paragraph" style:parent-style-name="scrBook" />
+    <style:style style:name="Line1_columns_scrBook" style:family="paragraph" style:parent-style-name="columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
+    <style:style style:name="Line2_columns_scrBook" style:family="paragraph" style:parent-style-name="columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
+    <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="hide" style:family="paragraph" style:parent-style-name="Heading_20_9" style:class="text">
       <style:text-properties text:display="true" />
     </style:style>
@@ -21,10 +24,10 @@
       <style:text-properties text:display="true" />
     </style:style>
     <style:style style:name="Header" style:family="paragraph" style:parent-style-name="Standard" style:class="extra" />
-    <style:style style:name="span_.bgt_IntroSectionHead" style:family="paragraph" style:parent-style-name="IntroSectionHead">
-      <style:text-properties fo:language="none" fo:country="none" />
+    <style:style style:name="span_.bgt_Line1_columns_scrBook" style:family="text" style:parent-style-name="Line1_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
+      <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
-    <style:style style:name="span_.bgt_IntroSectionHead" style:family="text" style:parent-style-name="IntroSectionHead" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
+    <style:style style:name="span_.bgt_Line2_columns_scrBook" style:family="text" style:parent-style-name="Line2_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="span" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />

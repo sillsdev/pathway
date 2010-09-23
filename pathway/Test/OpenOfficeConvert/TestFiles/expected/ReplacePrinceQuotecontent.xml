@@ -28,5 +28,6 @@
         <text:sequence-decl text:display-outline-level="0" text:name="Text" />
         <text:sequence-decl text:display-outline-level="0" text:name="Drawing" />
       </text:sequence-decls>
-      <text:p text:style-name="P4" /><text:p text:style-name="IntroSectionHead"><text:span text:style-name="span_.bgt_IntroSectionHead">A God ke velea tadia na komi Rioriso ke Tabu, “Oti mono tabu
-        eigna inau ku tabu.”</text:span></text:p></office:text></office:body></office:document-content>
+      <text:p text:style-name="P4" /><text:p text:style-name="Line1_columns_scrBook"><text:span text:style-name="span_.bgt_Line1_columns_scrBook">“I Jerusalem, inau ku tutua sina ghahira kori hidigna na
+              vathe.</text:span> </text:p><text:p text:style-name="Line2_columns_scrBook"><text:span text:style-name="span_.bgt_Line2_columns_scrBook">Ahai ke vaututunia, imanea teo keda toatogha ke boi toke ke
+              vaututunia.”</text:span> </text:p></office:text></office:body></office:document-content>

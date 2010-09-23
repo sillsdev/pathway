@@ -10,21 +10,12 @@
     <style:font-face style:name="Scheherazade Graphite Alpha" svg:font-family="'Scheherazade Graphite Alpha'" />
   </office:font-face-decls>
   <office:styles>
-    <style:style style:name="scrBookName_.cwa_scrBook" style:family="paragraph" style:parent-style-name="scrBook">
-      <style:text-properties fo:language="none" fo:country="none" />
-    </style:style>
     <style:style style:name="scrBookName_.cwa_scrBook" style:family="text" style:parent-style-name="scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="TitleMain_scrBook" style:family="paragraph" style:parent-style-name="scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="TitleSecondary_.cwa_TitleMain_scrBook" style:family="paragraph" style:parent-style-name="TitleMain_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="none" fo:country="none" />
-    </style:style>
     <style:style style:name="TitleSecondary_.cwa_TitleMain_scrBook" style:family="text" style:parent-style-name="TitleMain_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-    </style:style>
-    <style:style style:name="span_.cwa_TitleMain_scrBook" style:family="paragraph" style:parent-style-name="TitleMain_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="none" fo:country="none" />
     </style:style>
     <style:style style:name="span_.cwa_TitleMain_scrBook" style:family="text" style:parent-style-name="TitleMain_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
@@ -32,43 +23,25 @@
     <style:style style:name="columns_scrBook" style:family="paragraph" style:parent-style-name="scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="scrSection_columns_scrBook" style:family="paragraph" style:parent-style-name="columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="SectionHead_scrSection_columns_scrBook" style:family="paragraph" style:parent-style-name="scrSection_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="span_.cwa_SectionHead_scrSection_columns_scrBook" style:family="paragraph" style:parent-style-name="SectionHead_scrSection_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="none" fo:country="none" />
-    </style:style>
     <style:style style:name="span_.cwa_SectionHead_scrSection_columns_scrBook" style:family="text" style:parent-style-name="SectionHead_scrSection_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="Paragraph_scrSection_columns_scrBook" style:family="paragraph" style:parent-style-name="scrSection_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="ChapterNumber_.cwa_Paragraph_scrSection_columns_scrBook" style:family="paragraph" style:parent-style-name="Paragraph_scrSection_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="none" fo:country="none" />
-    </style:style>
     <style:style style:name="ChapterNumber_.cwa_Paragraph_scrSection_columns_scrBook" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-    </style:style>
-    <style:style style:name="span_.cwa_Paragraph_scrSection_columns_scrBook" style:family="paragraph" style:parent-style-name="Paragraph_scrSection_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="none" fo:country="none" />
     </style:style>
     <style:style style:name="span_.cwa_Paragraph_scrSection_columns_scrBook" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="REVERSESOLIDUSCitationLine1_scrSection_columns_scrBook" style:family="paragraph" style:parent-style-name="scrSection_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="span_.cwa_REVERSESOLIDUSCitationLine1_scrSection_columns_scrBook" style:family="paragraph" style:parent-style-name="REVERSESOLIDUSCitationLine1_scrSection_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="none" fo:country="none" />
-    </style:style>
     <style:style style:name="span_.cwa_REVERSESOLIDUSCitationLine1_scrSection_columns_scrBook" style:family="text" style:parent-style-name="REVERSESOLIDUSCitationLine1_scrSection_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="REVERSESOLIDUSCitationLine2_scrSection_columns_scrBook" style:family="paragraph" style:parent-style-name="scrSection_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="span_.cwa_REVERSESOLIDUSCitationLine2_scrSection_columns_scrBook" style:family="paragraph" style:parent-style-name="REVERSESOLIDUSCitationLine2_scrSection_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="none" fo:country="none" />
-    </style:style>
     <style:style style:name="span_.cwa_REVERSESOLIDUSCitationLine2_scrSection_columns_scrBook" style:family="text" style:parent-style-name="REVERSESOLIDUSCitationLine2_scrSection_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="ParallelPassageReference_scrSection_columns_scrBook" style:family="paragraph" style:parent-style-name="scrSection_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="span_.cwa_ParallelPassageReference_scrSection_columns_scrBook" style:family="paragraph" style:parent-style-name="ParallelPassageReference_scrSection_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="none" fo:country="none" />
-    </style:style>
     <style:style style:name="span_.cwa_ParallelPassageReference_scrSection_columns_scrBook" style:family="text" style:parent-style-name="ParallelPassageReference_scrSection_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
@@ -83,28 +56,13 @@
       <style:text-properties text:display="true" />
     </style:style>
     <style:style style:name="Header" style:family="paragraph" style:parent-style-name="Standard" style:class="extra" />
-    <style:style style:name="VerseNumber_Paragraph_scrSection_columns_scrBook" style:family="paragraph" style:parent-style-name="Paragraph_scrSection_columns_scrBook">
-      <style:paragraph-properties fo:background-color="#0000ff" fo:text-indent="0pt" fo:margin-left="0pt" />
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" style:text-position="super" fo:color="#ff0000" fo:font-style="italic" fo:font-size="12pt" style:font-size-complex="100%" fo:background-color="#0000ff" />
-    </style:style>
     <style:style style:name="VerseNumber_Paragraph_scrSection_columns_scrBook" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:paragraph-properties fo:background-color="#0000ff" fo:text-indent="0pt" fo:margin-left="0pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" style:text-position="super" fo:color="#ff0000" fo:font-style="italic" fo:font-size="12pt" style:font-size-complex="100%" fo:background-color="#0000ff" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-    </style:style>
-    <style:style style:name="VerseNumber_REVERSESOLIDUSCitationLine2_scrSection_columns_scrBook" style:family="paragraph" style:parent-style-name="REVERSESOLIDUSCitationLine2_scrSection_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:paragraph-properties fo:background-color="#0000ff" fo:text-indent="0pt" fo:margin-left="0pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" style:text-position="super" fo:color="#ff0000" fo:font-style="italic" fo:font-size="12pt" style:font-size-complex="100%" fo:background-color="#0000ff" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="VerseNumber_REVERSESOLIDUSCitationLine2_scrSection_columns_scrBook" style:family="text" style:parent-style-name="REVERSESOLIDUSCitationLine2_scrSection_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:paragraph-properties fo:background-color="#0000ff" fo:text-indent="0pt" fo:margin-left="0pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" style:text-position="super" fo:color="#ff0000" fo:font-style="italic" fo:font-size="12pt" style:font-size-complex="100%" fo:background-color="#0000ff" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-    </style:style>
-    <style:style style:name="VerseNumber_REVERSESOLIDUSCitationLine1_scrSection_columns_scrBook" style:family="paragraph" style:parent-style-name="REVERSESOLIDUSCitationLine1_scrSection_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:paragraph-properties fo:background-color="#0000ff" fo:text-indent="0pt" fo:margin-left="0pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" style:text-position="super" fo:color="#ff0000" fo:font-style="italic" fo:font-size="12pt" style:font-size-complex="100%" fo:background-color="#0000ff" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="VerseNumber_REVERSESOLIDUSCitationLine1_scrSection_columns_scrBook" style:family="text" style:parent-style-name="REVERSESOLIDUSCitationLine1_scrSection_columns_scrBook" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:paragraph-properties fo:background-color="#0000ff" fo:text-indent="0pt" fo:margin-left="0pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" style:text-position="super" fo:color="#ff0000" fo:font-style="italic" fo:font-size="12pt" style:font-size-complex="100%" fo:background-color="#0000ff" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="VerseNumber" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">

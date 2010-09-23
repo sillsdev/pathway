@@ -10,7 +10,38 @@
     <style:font-face style:name="Scheherazade Graphite Alpha" svg:font-family="'Scheherazade Graphite Alpha'" />
   </office:font-face-decls>
   <office:styles>
-    <style:style style:name="Empty" style:family="text" style:parent-style-name="none" />
+    <style:style style:name="pronunciations_entry_letData" style:family="paragraph" style:parent-style-name="entry_letData" />
+    <style:style style:name="pronunciations_entry_letData" style:family="text" style:parent-style-name="entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
+    <style:style style:name="senses_entry_letData" style:family="paragraph" style:parent-style-name="entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
+    <style:style style:name="senses_entry_letData" style:family="text" style:parent-style-name="entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
+    <style:style style:name="partofspeech_.en_grammaticalinfo_sense_senses_entry_letData" style:family="text" style:parent-style-name="grammaticalinfo_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
+      <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
+    </style:style>
+    <style:style style:name="definition_.en_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
+      <style:text-properties fo:language="en" fo:country="US" />
+    </style:style>
+    <style:style style:name="definition_.en_sense_senses_entry_letData" style:family="text" style:parent-style-name="sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
+      <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
+    </style:style>
+    <style:style style:name="xitem_.en_definition_.en_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="definition_.en_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
+      <style:text-properties fo:language="en" fo:country="US" />
+    </style:style>
+    <style:style style:name="xitem_.en_definition_.en_sense_senses_entry_letData" style:family="text" style:parent-style-name="definition_.en_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
+      <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
+    </style:style>
+    <style:style style:name="examples_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
+    <style:style style:name="examples_sense_senses_entry_letData" style:family="text" style:parent-style-name="sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
+    <style:style style:name="xitem_examples_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
+    <style:style style:name="xitem_examples_sense_senses_entry_letData" style:family="text" style:parent-style-name="examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
+    <style:style style:name="translations_xitem_examples_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="xitem_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
+    <style:style style:name="translations_xitem_examples_sense_senses_entry_letData" style:family="text" style:parent-style-name="xitem_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
+    <style:style style:name="translation_.en_translations_xitem_examples_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="translations_xitem_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
+      <style:text-properties fo:language="en" fo:country="US" />
+    </style:style>
+    <style:style style:name="translation_.en_translations_xitem_examples_sense_senses_entry_letData" style:family="text" style:parent-style-name="translations_xitem_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
+      <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
+    </style:style>
+    <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="hide" style:family="paragraph" style:parent-style-name="Heading_20_9" style:class="text">
       <style:text-properties text:display="true" />
     </style:style>
@@ -21,7 +52,6 @@
       <style:text-properties text:display="true" />
     </style:style>
     <style:style style:name="Header" style:family="paragraph" style:parent-style-name="Standard" style:class="extra" />
-    <style:style style:name="dicBody" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="letHead" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="letter_letHead" style:family="paragraph" style:parent-style-name="letHead">
       <style:paragraph-properties fo:text-align="center" fo:margin-top="18pt" fo:margin-bottom="18pt" style:writing-mode="lr-tb" />
@@ -35,11 +65,11 @@
       <style:paragraph-properties fo:text-align="left" />
     </style:style>
     <style:style style:name="entry_letData" style:family="paragraph" style:parent-style-name="letData">
-      <style:paragraph-properties fo:background-color="#FFFFFF" fo:text-indent="-36pt" fo:margin-left="36pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" fo:padding-top="1pt" />
+      <style:paragraph-properties fo:background-color="#FFFFFF" fo:text-indent="-36pt" fo:margin-left="36pt" fo:padding-left="9pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" fo:padding-top="1pt" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" style:font-size-complex="12pt" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
     <style:style style:name="entry" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:paragraph-properties fo:background-color="#FFFFFF" fo:text-indent="-36pt" fo:margin-left="36pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" fo:padding-top="1pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
+      <style:paragraph-properties fo:background-color="#FFFFFF" fo:text-indent="-36pt" fo:margin-left="36pt" fo:padding-left="9pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" fo:padding-top="1pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" style:font-size-complex="12pt" fo:color="#000000" fo:background-color="#FFFFFF" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="xhomographnumber" style:family="paragraph" style:parent-style-name="none">
@@ -54,34 +84,19 @@
     <style:style style:name="sense" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:font-weight="400" style:font-weight-complex="400" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
-    <style:style style:name="xsensenumber_.en_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="sense_senses_entry_letData">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:language="en" fo:country="US" />
-    </style:style>
     <style:style style:name="xsensenumber_.en_sense_senses_entry_letData" style:family="text" style:parent-style-name="sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="xsensenumber" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:font-weight="700" style:font-weight-complex="700" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
-    <style:style style:name="xlanguagetag_.en_xitem_.en_definition_.en_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="xitem_.en_definition_.en_sense_senses_entry_letData">
-      <style:text-properties fo:color="#ff0000" fo:font-size="38pt" style:font-size-complex="38pt" fo:language="en" fo:country="US" />
-    </style:style>
     <style:style style:name="xlanguagetag_.en_xitem_.en_definition_.en_sense_senses_entry_letData" style:family="text" style:parent-style-name="xitem_.en_definition_.en_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:color="#ff0000" fo:font-size="38pt" style:font-size-complex="38pt" fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-    </style:style>
-    <style:style style:name="xlanguagetag_.en_xitem_.tpi_definition_.en_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="xitem_.tpi_definition_.en_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:color="#ff0000" fo:font-size="38pt" style:font-size-complex="38pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" fo:language="en" fo:country="US" />
     </style:style>
     <style:style style:name="xlanguagetag_.en_xitem_.tpi_definition_.en_sense_senses_entry_letData" style:family="text" style:parent-style-name="xitem_.tpi_definition_.en_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:color="#ff0000" fo:font-size="38pt" style:font-size-complex="38pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" fo:language="en" fo:country="US" />
     </style:style>
-    <style:style style:name="xlanguagetag_.en_example_.bzh_xitem_examples_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="example_.bzh_xitem_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:color="#ff0000" fo:font-size="38pt" style:font-size-complex="38pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" fo:language="en" fo:country="US" />
-    </style:style>
-    <style:style style:name="xlanguagetag_.en_example_.bzh_xitem_examples_sense_senses_entry_letData" style:family="text" style:parent-style-name="example_.bzh_xitem_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:color="#ff0000" fo:font-size="38pt" style:font-size-complex="38pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" fo:language="en" fo:country="US" />
-    </style:style>
-    <style:style style:name="xlanguagetag_.en_translation_.en_translations_xitem_examples_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="translation_.en_translations_xitem_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
+    <style:style style:name="xlanguagetag_.en_example_xitem_examples_sense_senses_entry_letData" style:family="text" style:parent-style-name="example_xitem_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:color="#ff0000" fo:font-size="38pt" style:font-size-complex="38pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" fo:language="en" fo:country="US" />
     </style:style>
     <style:style style:name="xlanguagetag_.en_translation_.en_translations_xitem_examples_sense_senses_entry_letData" style:family="text" style:parent-style-name="translation_.en_translations_xitem_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
@@ -90,15 +105,6 @@
     <style:style style:name="xlanguagetag" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:color="#ff0000" fo:font-size="38pt" style:font-size-complex="38pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
-    <style:style style:name="xitem_.en_definition_.en_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="definition_.en_sense_senses_entry_letData">
-      <style:text-properties fo:language="en" fo:country="US" />
-    </style:style>
-    <style:style style:name="xitem_.en_definition_.en_sense_senses_entry_letData" style:family="text" style:parent-style-name="definition_.en_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-    </style:style>
-    <style:style style:name="xitem_examples_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="xitem_examples_sense_senses_entry_letData" style:family="text" style:parent-style-name="examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="xitem" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="xitem_.tpi_definition_.en_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="definition_.en_sense_senses_entry_letData">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" style:font-size-complex="12pt" fo:color="#000000" fo:language="none" fo:country="none" fo:background-color="#FFFFFF" />
     </style:style>
@@ -112,13 +118,11 @@
       <style:paragraph-properties fo:background-color="#FFFFFF" />
       <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:font-size="12pt" style:font-size-complex="12pt" fo:color="#000000" fo:language="none" fo:country="none" fo:background-color="#FFFFFF" />
     </style:style>
-    <style:style style:name="headword_.bzh_entry_letData" style:family="paragraph" style:parent-style-name="entry_letData">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="12pt" style:font-size-complex="12pt" fo:font-weight="700" style:font-weight-complex="700" fo:color="#000000" fo:background-color="#FFFFFF" fo:language="none" fo:country="none" />
-    </style:style>
-    <style:style style:name="headword_.bzh_entry_letData" style:family="text" style:parent-style-name="entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="12pt" style:font-size-complex="12pt" fo:font-weight="700" style:font-weight-complex="700" fo:color="#000000" fo:background-color="#FFFFFF" fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
+    <style:style style:name="headword_entry_letData" style:family="text" style:parent-style-name="entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="12pt" style:font-size-complex="12pt" fo:font-weight="700" style:font-weight-complex="700" fo:color="#000000" fo:background-color="#FFFFFF" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="headword" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
+      <style:paragraph-properties fo:background-color="#FFFFFF" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="12pt" style:font-size-complex="12pt" fo:font-weight="700" style:font-weight-complex="700" fo:color="#000000" fo:background-color="#FFFFFF" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="headword-after" style:family="text" style:parent-style-name="none">
@@ -127,18 +131,13 @@
     <style:style style:name="xitem_xitem.headword-before" style:family="text" style:parent-style-name="none">
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="12pt" style:font-size-complex="12pt" fo:font-weight="700" style:font-weight-complex="700" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
-    <style:style style:name="pronunciations_entry_letData" style:family="paragraph" style:parent-style-name="entry_letData" />
-    <style:style style:name="pronunciations_entry_letData" style:family="text" style:parent-style-name="entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="pronunciations" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="pronunciations-after" style:family="text" style:parent-style-name="none" />
     <style:style style:name="xitem_xitem.pronunciations-before" style:family="text" style:parent-style-name="none" />
-    <style:style style:name="pronunciation_.bzh-fonipa_pronunciations_entry_letData" style:family="paragraph" style:parent-style-name="pronunciations_entry_letData">
-      <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:font-size="12pt" style:font-size-complex="12pt" fo:color="#000000" fo:background-color="#FFFFFF" fo:language="none" fo:country="none" />
-    </style:style>
-    <style:style style:name="pronunciation_.bzh-fonipa_pronunciations_entry_letData" style:family="text" style:parent-style-name="pronunciations_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:font-size="12pt" style:font-size-complex="12pt" fo:color="#000000" fo:background-color="#FFFFFF" fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
+    <style:style style:name="pronunciation_pronunciations_entry_letData" style:family="text" style:parent-style-name="pronunciations_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
+      <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:font-size="12pt" style:font-size-complex="12pt" fo:color="#000000" fo:background-color="#FFFFFF" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="pronunciation" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
+      <style:paragraph-properties fo:background-color="#FFFFFF" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:font-size="12pt" style:font-size-complex="12pt" fo:color="#000000" fo:background-color="#FFFFFF" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="pronunciation-before" style:family="text" style:parent-style-name="none">
@@ -150,53 +149,39 @@
     <style:style style:name="xitem_xitem.pronunciation-before" style:family="text" style:parent-style-name="none">
       <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:font-size="12pt" style:font-size-complex="12pt" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
-    <style:style style:name="senses_entry_letData" style:family="paragraph" style:parent-style-name="entry_letData" />
-    <style:style style:name="senses_entry_letData" style:family="text" style:parent-style-name="entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="senses" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="sense_sense.senses-before" style:family="text" style:parent-style-name="none">
       <style:text-properties fo:font-weight="400" style:font-weight-complex="400" />
     </style:style>
     <style:style style:name="grammaticalinfo_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="sense_senses_entry_letData">
+      <style:paragraph-properties fo:background-color="#FFFFFF" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" style:font-size-complex="12pt" fo:font-style="italic" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
     <style:style style:name="grammaticalinfo_sense_senses_entry_letData" style:family="text" style:parent-style-name="sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
+      <style:paragraph-properties fo:background-color="#FFFFFF" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" style:font-size-complex="12pt" fo:font-style="italic" fo:color="#000000" fo:background-color="#FFFFFF" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="grammaticalinfo" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
+      <style:paragraph-properties fo:background-color="#FFFFFF" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" style:font-size-complex="12pt" fo:font-style="italic" fo:color="#000000" fo:background-color="#FFFFFF" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="grammaticalinfo-after" style:family="text" style:parent-style-name="none">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" style:font-size-complex="12pt" fo:font-style="italic" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
-    <style:style style:name="partofspeech_.en_grammaticalinfo_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="grammaticalinfo_sense_senses_entry_letData">
-      <style:text-properties fo:language="en" fo:country="US" />
-    </style:style>
-    <style:style style:name="partofspeech_.en_grammaticalinfo_sense_senses_entry_letData" style:family="text" style:parent-style-name="grammaticalinfo_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-    </style:style>
-    <style:style style:name="partofspeech" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="partofspeech-after" style:family="text" style:parent-style-name="none" />
-    <style:style style:name="definition_.en_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="sense_senses_entry_letData">
-      <style:text-properties fo:language="en" fo:country="US" />
-    </style:style>
-    <style:style style:name="definition_.en_sense_senses_entry_letData" style:family="text" style:parent-style-name="sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-    </style:style>
-    <style:style style:name="definition" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="definition-after" style:family="text" style:parent-style-name="none" />
     <style:style style:name="xitem_xitem.definition-before" style:family="text" style:parent-style-name="none" />
-    <style:style style:name="examples_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="sense_senses_entry_letData" />
-    <style:style style:name="examples_sense_senses_entry_letData" style:family="text" style:parent-style-name="sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="examples" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="examples-after" style:family="text" style:parent-style-name="none" />
     <style:style style:name="xitem_xitem.examples-before" style:family="text" style:parent-style-name="none" />
-    <style:style style:name="example_.bzh_xitem_examples_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="xitem_examples_sense_senses_entry_letData">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="12pt" style:font-size-complex="12pt" fo:font-style="italic" fo:color="#000000" fo:background-color="#FFFFFF" fo:language="none" fo:country="none" />
+    <style:style style:name="example_xitem_examples_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="xitem_examples_sense_senses_entry_letData">
+      <style:paragraph-properties fo:background-color="#FFFFFF" />
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="12pt" style:font-size-complex="12pt" fo:font-style="italic" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
-    <style:style style:name="example_.bzh_xitem_examples_sense_senses_entry_letData" style:family="text" style:parent-style-name="xitem_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="12pt" style:font-size-complex="12pt" fo:font-style="italic" fo:color="#000000" fo:background-color="#FFFFFF" fo:language="none" fo:country="none" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
+    <style:style style:name="example_xitem_examples_sense_senses_entry_letData" style:family="text" style:parent-style-name="xitem_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
+      <style:paragraph-properties fo:background-color="#FFFFFF" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="12pt" style:font-size-complex="12pt" fo:font-style="italic" fo:color="#000000" fo:background-color="#FFFFFF" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="example" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
+      <style:paragraph-properties fo:background-color="#FFFFFF" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="12pt" style:font-size-complex="12pt" fo:font-style="italic" fo:color="#000000" fo:background-color="#FFFFFF" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="example-after" style:family="text" style:parent-style-name="none">
@@ -205,23 +190,10 @@
     <style:style style:name="xitem_xitem.example-before" style:family="text" style:parent-style-name="none">
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="12pt" style:font-size-complex="12pt" fo:font-style="italic" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
-    <style:style style:name="translations_xitem_examples_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="xitem_examples_sense_senses_entry_letData" />
-    <style:style style:name="translations_xitem_examples_sense_senses_entry_letData" style:family="text" style:parent-style-name="xitem_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="translations" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="translation_.en_translations_xitem_examples_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="translations_xitem_examples_sense_senses_entry_letData">
-      <style:text-properties fo:language="en" fo:country="US" />
-    </style:style>
-    <style:style style:name="translation_.en_translations_xitem_examples_sense_senses_entry_letData" style:family="text" style:parent-style-name="translations_xitem_examples_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-    </style:style>
-    <style:style style:name="translation" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="translation-after" style:family="text" style:parent-style-name="none" />
     <style:style style:name="xitem_xitem.translation-before" style:family="text" style:parent-style-name="none" />
-    <style:style style:name="slots" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="slots-before" style:family="text" style:parent-style-name="none" />
     <style:style style:name="xitem_xitem.slots-before" style:family="text" style:parent-style-name="none" />
-    <style:style style:name="slotname" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="complexformrefs" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="translationL2" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:background-color="#FFFFFF" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" style:font-size-complex="12pt" fo:color="#000000" fo:background-color="#FFFFFF" />

@@ -11,19 +11,13 @@
   </office:font-face-decls>
   <office:styles>
     <style:style style:name="head_sectionletter" style:family="paragraph" style:parent-style-name="sectionletter" />
-    <style:style style:name="grammarrequires_article" style:family="paragraph" style:parent-style-name="article" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
+    <style:style style:name="headword_article" style:family="text" style:parent-style-name="article" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="grammarrequires_article" style:family="text" style:parent-style-name="article" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="relationsynonym_article" style:family="paragraph" style:parent-style-name="article" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="relationsynonym_article" style:family="text" style:parent-style-name="article" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="grammarcategory_article" style:family="paragraph" style:parent-style-name="article" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="grammarcategory_article" style:family="text" style:parent-style-name="article" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="definition_article" style:family="paragraph" style:parent-style-name="article" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="definition_article" style:family="text" style:parent-style-name="article" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="note_article" style:family="paragraph" style:parent-style-name="article" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="note_article" style:family="text" style:parent-style-name="article" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="exampleuse_article" style:family="paragraph" style:parent-style-name="article" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="exampleuse_article" style:family="text" style:parent-style-name="article" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="example_article" style:family="paragraph" style:parent-style-name="article" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="example_article" style:family="text" style:parent-style-name="article" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="hide" style:family="paragraph" style:parent-style-name="Heading_20_9" style:class="text">
@@ -36,18 +30,12 @@
       <style:text-properties text:display="true" />
     </style:style>
     <style:style style:name="Header" style:family="paragraph" style:parent-style-name="Standard" style:class="extra" />
-    <style:style style:name="headword_article" style:family="paragraph" style:parent-style-name="article" />
-    <style:style style:name="headword_article" style:family="text" style:parent-style-name="article" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="headword" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="dictionary" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-align="justify" />
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style style:name="locator" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-align="center" />
-    </style:style>
-    <style:style style:name="pronunciation_article" style:family="paragraph" style:parent-style-name="article">
-      <style:text-properties fo:font-size="20pt" style:font-size-complex="20pt" />
     </style:style>
     <style:style style:name="pronunciation_article" style:family="text" style:parent-style-name="article" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:font-size="20pt" style:font-size-complex="20pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
