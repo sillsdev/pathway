@@ -19,6 +19,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using JWTools;
+using SIL.FieldWorks.Common.FwUtils;
 using SIL.Tool;
 using SIL.Tool.Localization;
 
@@ -230,6 +231,7 @@ namespace SIL.PublishingSolution
 
         protected static string GetSupportPath()
         {
+            Common.SupportFolder = Common.Testing? "": "PathwaySupport";
             return Common.GetPSApplicationPath();
         }
 
