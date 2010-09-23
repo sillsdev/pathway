@@ -8,6 +8,7 @@
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
 // Last reviewed: 
+// Last reviewed: 
 // 
 // <remarks>
 // Creates the Configuration Tool for Dictionary and Scripture 
@@ -31,13 +32,13 @@ namespace SIL.PublishingSolution
         #region Private Variables
         private readonly ArrayList _cssNames = new ArrayList();
         //private string _fileName = string.Empty;
-        private ConfigurationToolBL _configurationToolBL = new ConfigurationToolBL();
+        private static ConfigurationToolBL _configurationToolBL = new ConfigurationToolBL();
         //private TextWriter _writeCss;
         ErrorProvider _errProvider = new ErrorProvider();
         DictionarySetting _ds = new DictionarySetting();
         //        DataSet _dataSet = new DataSet();
         UndoRedo _redoundo;
-        private string _caption = "Pathway Configuration Tool";
+        private string _caption = _configurationToolBL.Caption;
         private string _redoUndoBufferValue = string.Empty;
         // Undo Redo
         //private string _currentControl = string.Empty;
@@ -48,7 +49,10 @@ namespace SIL.PublishingSolution
         private Color _selectedColor = SystemColors.InactiveBorder; //Color.FromArgb(255, 204, 102);
         private Color _deSelectedColor = SystemColors.Control;
         private string _styleName;
-
+        private string _fileProduce = "One";
+        private readonly string InputType;
+        private readonly string MediaTypeEXE;
+        private readonly string StyleEXE;
         //private string _configurationToolBL.StyleName;
         private string _selectedStyle;
         TabPage tabdic = new TabPage();
@@ -56,54 +60,106 @@ namespace SIL.PublishingSolution
         #endregion
 
         #region Constructor
-        public ConfigurationTool()
+        public ConfigurationTool(string inputType, string mediaType, string style)
         {
             InitializeComponent();
+            InputType = inputType;
+            MediaTypeEXE = mediaType;
+            StyleEXE = style.Replace('&', ' ');
         }
         #endregion
 
         #region Control Events
         private void ConfigurationTool_Load(object sender, EventArgs e)
         {
-            tabdic = tabControl1.TabPages[1];
-            tabmob = tabControl1.TabPages[2];
-            tabControl1.TabPages.Remove(tabControl1.TabPages[2]);
-            btnMobile.Enabled = false;
-
-            RemoveSettingsFile();
-            this.MinimumSize = new Size(497, 183);
-            _redoundo = new UndoRedo(tsUndo, tsRedo);
-            SettingsValidation(Param.SettingPath);
-            Param.LoadSettings(); // Load StyleSetting.xml
-            _configurationToolBL.InputType = Param.Value["InputType"];
-            SetInputTypeButton();
-            _configurationToolBL.CreateGridColumn();
-            _configurationToolBL.LoadParam(); // Load DictionaryStyleSettings / ScriptureStyleSettings
-            ShowDataInGrid();
-            _redoundo.Reset();
-
-            _configurationToolBL.SetPreviousLayoutSelect(stylesGrid);
-            PopulateFeatureSheet(); //For TD-1194 // Load Default Values
-            SetInfoTabValue();
-
-            SetSideBar();
-
-            if (!File.Exists(Param.FromProg("ScriptureStyleSettings.xml")))
+            try
             {
-                btnScripture.Enabled = false;
-                btnScripture.Visible = false;
-                btnDictionary.Visible = false;
+                tabdic = tabControl1.TabPages[1];
+                tabmob = tabControl1.TabPages[2];
+                tabControl1.TabPages.Remove(tabControl1.TabPages[2]);
+                btnMobile.Enabled = false;
+                _redoundo = new UndoRedo(tsUndo, tsRedo);
+                MinimumSize = new Size(497, 183);
+                LoadSettings();
+                SetInputTypeButton();
+                _configurationToolBL.CreateGridColumn();
+                _configurationToolBL.LoadParam(); // Load DictionaryStyleSettings / ScriptureStyleSettings
+                ShowDataInGrid();
+                _redoundo.Reset();
+
+                _configurationToolBL.SetPreviousLayoutSelect(stylesGrid);
+                PopulateFeatureSheet(); //For TD-1194 // Load Default Values
+                SetInfoTabValue();
+                SetMediaType();
+                if (!File.Exists(Common.FromRegistry("ScriptureStyleSettings.xml")))
+                {
+                    btnScripture.Enabled = false;
+                    btnScripture.Visible = false;
+                    btnDictionary.Visible = false;
+                }
+                SetFocusToName();
+
+                //For the task TD-1481
+                btnWeb.Enabled = false;
+                btnOthers.Enabled = false;
             }
-            Common.PathwayHelpSetup(btnScripture.Enabled, Param.FromProg("Help"));
-            Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-            Common.HelpProv.SetHelpKeyword(this, "Overview.htm");
-            SetFocusToName();
+            catch(Exception ex)
+            {
+                string ss = ex.Message;
+            }
+        }
+
+        /// <summary>
+        /// When the condigurationtool is run from EXE, the mediatype has changed 
+        /// by Prinvia dialog selection
+        /// </summary>
+        private void SetMediaType()
+        {
+            try
+            {
+                if (MediaTypeEXE.Length != 0)
+                {
+                    _configurationToolBL.MediaType = MediaTypeEXE.ToLower();
+                    SideBar();
+                    _configurationToolBL.SelectRow(stylesGrid, StyleEXE);
+                }
+                else
+                {
+                    SetSideBar();
+                }
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// When the condigurationtool is run from EXE, the load settings are changed.
+        /// </summary>
+        private void LoadSettings()
+        {
+            //Note: Configuration tool can run by two ways
+            //Note: 1 -  Standalone Application
+            //Note: 2 -  The ConfigurationTool.EXE is called by PrintVia dialog from FLEX.
+            if (InputType.Length == 0)
+            {
+                //It will call when the Configtool from Application
+                RemoveSettingsFile();
+                SettingsValidation(Param.SettingPath);
+                Param.LoadSettings(); // Load StyleSetting.xml
+                _configurationToolBL.InputType = Param.Value["InputType"];
+            }
+            else
+            {
+                //It will call when the Configtool from exe
+                Param.LoadSettings(); // Load StyleSetting.xml
+                _configurationToolBL.InputType = InputType;
+                Param.SetLoadType = InputType;
+            }
         }
 
         private static void RemoveSettingsFile()
         {
             string allUsersPath = Common.GetAllUserPath();
-            if (Control.ModifierKeys == Keys.Shift)
+            if (ModifierKeys == Keys.Shift)
             {
                 if (Directory.Exists(allUsersPath))
                 {
@@ -152,35 +208,42 @@ namespace SIL.PublishingSolution
 
         private void tsDelete_Click(object sender, EventArgs e)
         {
+            _redoundo.Reset();
             string name = lblInfoCaption.Text;
             string msg = "Are you sure you want to delete the " + name + " stylesheet?";
             string caption = "Delete Stylesheet";
             DialogResult result = MessageBox.Show(msg, caption, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
             if (result != DialogResult.OK) return;
 
-            _redoundo.Set(Common.Action.Delete, _configurationToolBL.StyleName, null, "", string.Empty);
-            if (_configurationToolBL.SelectedRowIndex >= 0)
+            try
             {
-                string selectedTypeValue = stylesGrid[_configurationToolBL.ColumnType, _configurationToolBL.SelectedRowIndex].Value.ToString().ToLower();
-                if (selectedTypeValue != _configurationToolBL.TypeStandard)
+                //_redoundo.Set(Common.Action.Delete, _configurationToolBL.StyleName, null, "", string.Empty);
+                if (_configurationToolBL.SelectedRowIndex >= 0)
                 {
-                    _configurationToolBL.RemoveXMLNode(_configurationToolBL.StyleName);
-                    stylesGrid.Rows.RemoveAt(stylesGrid.Rows.GetFirstRow(DataGridViewElementStates.Selected));
-                    if (_configurationToolBL.SelectedRowIndex == stylesGrid.Rows.Count) // Is last row?
-                        _configurationToolBL.SelectedRowIndex = _configurationToolBL.SelectedRowIndex - 1;
-                    stylesGrid.Rows[_configurationToolBL.SelectedRowIndex].Selected = true;
-                    //_configurationToolBL.SelectedRowIndex--;
-                    SetInfoTabValue();
+                    string selectedTypeValue = stylesGrid[_configurationToolBL.ColumnType, _configurationToolBL.SelectedRowIndex].Value.ToString().ToLower();
+                    if (selectedTypeValue != _configurationToolBL.TypeStandard)
+                    {
+                        _cssNames.Remove(_configurationToolBL.StyleName);
+                        _configurationToolBL.RemoveXMLNode(_configurationToolBL.StyleName);
+                        stylesGrid.Rows.RemoveAt(stylesGrid.Rows.GetFirstRow(DataGridViewElementStates.Selected));
+                        if (_configurationToolBL.SelectedRowIndex == stylesGrid.Rows.Count) // Is last row?
+                            _configurationToolBL.SelectedRowIndex = _configurationToolBL.SelectedRowIndex - 1;
+                        stylesGrid.Rows[_configurationToolBL.SelectedRowIndex].Selected = true;
+                        //_configurationToolBL.SelectedRowIndex--;
+                        SetInfoTabValue();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Factory style sheet can not be deleted", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Factory style sheet can not be deleted", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Please select a style sheet to delete", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            else
-            {
-                MessageBox.Show("Please select a style sheet to delete", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            catch { }
         }
 
         private void tsSend_Click(object sender, EventArgs e)
@@ -232,7 +295,7 @@ namespace SIL.PublishingSolution
         private static string GetMailBody(string projType, string MailBody)
         {
             if (projType.Length <= 0) return MailBody;
-            MailBody += "Copy the settings file (" + projType + "StyleSettings.xml and styleSettings.xsd) to the path" + "%0D";
+            MailBody += "Copy the settings file (" + projType + "StyleSettings.xml and StyleSettings.xsd) to the path" + "%0D";
             MailBody += "-------------------------------------------------------------------------------------------------------------" + "%0D%0A";
             MailBody += "Windows XP:" + "%0D%0A";
             MailBody += @"C:\Program Files\SIL\Pathway" + "%0D%0A";
@@ -264,10 +327,20 @@ namespace SIL.PublishingSolution
 
         private void tsNew_Click(object sender, EventArgs e)
         {
-            _configurationToolBL.AddMode = true;
-            AddNewRow();
-            SetFocusToName();
-            EnableToolStripButtons(false);
+            try
+            {
+                _configurationToolBL.AddMode = true;
+                _configurationToolBL.AddStyle(stylesGrid, _cssNames);
+                _configurationToolBL.LoadMediaStyle(stylesGrid, _cssNames);
+                _configurationToolBL.SelectRow(stylesGrid, _configurationToolBL.NewStyleName);
+                SetInfoTabValue();
+                txtName.Select();
+                EnableToolStripButtons(true);
+                //AddNewRow();
+                //SetFocusToName();
+                //EnableToolStripButtons(false);
+            }
+            catch { }
         }
 
         private void AddNewRow()
@@ -277,7 +350,7 @@ namespace SIL.PublishingSolution
             stylesGrid.Refresh();
             _configurationToolBL.SelectRow(stylesGrid, "");
             SetInfoTabValue();
-            string newName = _configurationToolBL.GetNewStyleName(_cssNames);
+            string newName = _configurationToolBL.GetNewStyleName(_cssNames, "new");
             txtName.Text = newName;
             lblInfoCaption.Text = newName;
         }
@@ -289,32 +362,27 @@ namespace SIL.PublishingSolution
         }
         private void tsDefault_Click(object sender, EventArgs e)
         {
-            var dlg = new PrintVia("Set Defaults");
-            dlg.InputType = _configurationToolBL.InputType;
-            dlg.DatabaseName = "{Project_Name}";
-            dlg.Media = _configurationToolBL.MediaType;
-            dlg.ShowDialog();
+            try
+            {
+                var dlg = new PrintVia("Set Defaults");
+                dlg.InputType = _configurationToolBL.InputType;
+                dlg.DatabaseName = "{Project_Name}";
+                dlg.Media = _configurationToolBL.MediaType;
+                dlg.ShowDialog();
+            }
+            catch { }
         }
 
-        private void tsCopy_Click(object sender, EventArgs e)
-        {
-            _redoundo.Set(Common.Action.Copy, _configurationToolBL.StyleName, null, "", string.Empty);
-            _configurationToolBL.CopyStyle(stylesGrid, _cssNames);
-            _configurationToolBL.LoadMediaStyle(stylesGrid, _cssNames);
-            _configurationToolBL.SelectRow(stylesGrid, _configurationToolBL.PreviousStyleName);
-            SetInfoTabValue();
-            txtName.Select();
-        }
-
+        
         private void ShowDataInGrid()
         {
             _selectedStyle = Param.Value["LayoutSelected"];
             _redoundo.SettingOutputPath = Param.SettingOutputPath;
             tabControl1.SelectedTab = tabControl1.TabPages[0];
             lblType.Text = _configurationToolBL.InputType;
-
             _configurationToolBL.LoadMediaStyle(stylesGrid, _cssNames);
             _configurationToolBL.GridColumnWidth(stylesGrid);
+            _configurationToolBL.PreviousValue = txtName.Text;
         }
 
         private void SetSideBar()
@@ -338,16 +406,16 @@ namespace SIL.PublishingSolution
                 btnMobile.BackColor = _selectedColor;
                 btnMobile.FlatAppearance.BorderSize = 1;
             }
-            else if (_configurationToolBL.MediaType == "web")
-            {
-                btnWeb.BackColor = _selectedColor;
-                btnWeb.FlatAppearance.BorderSize = 1;
-            }
-            else if (_configurationToolBL.MediaType == "others")
-            {
-                btnOthers.BackColor = _selectedColor;
-                btnOthers.FlatAppearance.BorderSize = 1;
-            }
+            //else if (_configurationToolBL.MediaType == "web")
+            //{
+            //    btnWeb.BackColor = _selectedColor;
+            //    btnWeb.FlatAppearance.BorderSize = 1;
+            //}
+            //else if (_configurationToolBL.MediaType == "others")
+            //{
+            //    btnOthers.BackColor = _selectedColor;
+            //    btnOthers.FlatAppearance.BorderSize = 1;
+            //}
         }
 
         private void WriteCss(object sender)
@@ -379,6 +447,7 @@ namespace SIL.PublishingSolution
                 if (!string.IsNullOrEmpty(importStatement))
                     writeCss.WriteLine(importStatement);
 
+                var value = new Dictionary<string, string>();
                 string attribute = "Justified";
                 string key = ddlJustified.Text;
                 _configurationToolBL.WriteAtImport(writeCss, attribute, key);
@@ -420,7 +489,6 @@ namespace SIL.PublishingSolution
                 _configurationToolBL.WriteAtImport(writeCss, attribute, key);
 
                 //Writing TextBox Values into Css
-                var value = new Dictionary<string, string>();
                 if (txtPageGutterWidth.Text.Length > 0)
                 {
                     value["column-gap"] = txtPageGutterWidth.Text;
@@ -432,16 +500,28 @@ namespace SIL.PublishingSolution
                 value["margin-right"] = txtPageOutside.Text;
                 value["margin-bottom"] = txtPageBottom.Text;
                 value["margin-left"] = txtPageInside.Text;
+                value["-ps-fileproduce"] = "\"" + _fileProduce + "\"";
                 _configurationToolBL.WriteCssClass(writeCss, "page", value);
+
+                if (_configurationToolBL.MediaType.ToLower() == "mobile")
+                {
+                    UpdateFileProduced();
+                }
 
                 writeCss.Flush();
                 writeCss.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Style writing is failed because " + ex.Message, _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-                writeCss.Close();
+                MessageBox.Show("Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '" + ex.Message + "'", _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                //writeCss.Close();
             }
+        }
+
+        private void UpdateFileProduced()
+        {
+            XmlNode node = Param.GetItem("//mobileProperty/mobilefeature[@name='FileProduced']");
+            Param.SetAttrValue(node, "select", _fileProduce);
         }
 
         #endregion
@@ -481,18 +561,22 @@ namespace SIL.PublishingSolution
                     EnableDisablePanel(false);
                     //tsDelete.Enabled = false;
                     tsPreview.Enabled = true;
+                    txtApproved.Visible = true;
+                    lblApproved.Visible = true;
                 }
                 else
                 {
                     EnableDisablePanel(true);
-                    tsPreview.Enabled = false;
+                    //tsPreview.Enabled = false;
+                    txtApproved.Visible = false;
+                    lblApproved.Visible = false;
                 }
             }
             SetCSSTabValue();
         }
 
         /// <summary>
-        /// Fills Values in Display property Tab
+        /// Fills Values in Display property Tab and Properties Tab
         /// </summary>
         private void SetCSSTabValue()
         {
@@ -510,7 +594,6 @@ namespace SIL.PublishingSolution
             txtPageTop.Text = top + "pt";
             double bottom = Math.Round(double.Parse(_configurationToolBL.MarginBottom), 0);
             txtPageBottom.Text = bottom + "pt";
-            SetTextColor();
 
             txtPageGutterWidth.Text = _configurationToolBL.GutterWidth;
             if (_configurationToolBL.GutterWidth.IndexOf('%') == -1)
@@ -528,29 +611,38 @@ namespace SIL.PublishingSolution
             ddlRules.SelectedItem = _configurationToolBL.ColumnRule;
             ddlSense.SelectedItem = _configurationToolBL.Sense;
             ddlVerticalJustify.SelectedItem = _configurationToolBL.VerticalJustify;
+
             try
             {
-                SetStyleSummary();
+                if (_configurationToolBL.InputType.ToLower() == "scripture" && _configurationToolBL.MediaType.ToLower() == "mobile")
+                {
+
+                    ddlFiles.SelectedItem = _configurationToolBL.FileProduced;
+                    SetMobileSummary(null, null);
+                }
+                else
+                {
+                    ddlFileProduceDict.SelectedItem = _configurationToolBL.FileProduced.Trim();
+                    SetStyleSummary();
+
+                }
             }
+
             catch
             {
             }
         }
 
-        /// <summary>
-        /// If the value of margins are invalid at load time, the values are shown in red color(TD-1331).
-        /// </summary>
-        private void SetTextColor()
-        {
-            //CompareMarginValues(txtPageTop, 12);
-            //CompareMarginValues(txtPageInside, 12);
-            //CompareMarginValues(txtPageOutside, 12);
-            //CompareMarginValues(txtPageBottom, 36);
-            CompareMarginValues(txtPageTop, 18);
-            CompareMarginValues(txtPageInside, 18);
-            CompareMarginValues(txtPageOutside, 18);
-            CompareMarginValues(txtPageBottom, 18);
-        }
+        ///// <summary>
+        ///// If the value of margins are invalid at load time, the values are shown in red color(TD-1331).
+        ///// </summary>
+        //private void SetTextColor()
+        //{
+        //    CompareMarginValues(txtPageTop, 18);
+        //    CompareMarginValues(txtPageInside, 18);
+        //    CompareMarginValues(txtPageOutside, 18);
+        //    CompareMarginValues(txtPageBottom, 18);
+        //}
 
         /// <summary>
         /// Fills Values in Display property Tab
@@ -604,12 +696,14 @@ namespace SIL.PublishingSolution
                             case "Justified":
                                 ddlJustified.Items.Add(ctn.Text);
                                 break;
+
                             case "VerticalJustify":
                                 ddlVerticalJustify.Items.Add(ctn.Text);
                                 break;
 
                             case "FileProduced":
                                 ddlFiles.Items.Add(ctn.Text);
+                                ddlFileProduceDict.Items.Add(ctn.Text);
                                 break;
 
                             case "RedLetter":
@@ -628,42 +722,46 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void SetStyleSummary()
         {
-            string leading = (ddlLeading.Text.Length > 0) ? " Line Spacing " + ddlLeading.Text + ", " : " ";
-            string fontSize = (ddlFontSize.Text.Length > 0) ? " Base FontSize - " + ddlFontSize.Text + ", " : "";
+            try
+            {
+                string leading = (ddlLeading.Text.Length > 0) ? " Line Spacing " + ddlLeading.Text + ", " : " ";
+                string fontSize = (ddlFontSize.Text.Length > 0) ? " Base FontSize - " + ddlFontSize.Text + ", " : "";
 
-            string rules = ddlRules.Text == "Yes"
-                               ? "With Divider Lines, "
-                               : "Without Divider Lines, ";
-            string justified = ddlJustified.Text == "Yes"
-                                   ? "Justified, "
-                                   : "";
-            string picture = ddlPicture.Text == "Yes"
-                                 ? "With picture "
-                                 : "Without picture ";
-            string pageSize = (ddlPagePageSize.Text.Length > 0) ? ddlPagePageSize.Text + "," : "";
-            string pageColumn = (ddlPageColumn.Text.Length > 0) ? ddlPageColumn.Text + " Column(s), " : "";
-            string gutter = txtPageGutterWidth.Text.Length > 0 ? "Column Gap - " + txtPageGutterWidth.Text + ", " : "";
+                string rules = ddlRules.Text == "Yes"
+                                   ? "With Divider Lines, "
+                                   : "Without Divider Lines, ";
+                string justified = ddlJustified.Text == "Yes"
+                                       ? "Justified, "
+                                       : "";
+                string picture = ddlPicture.Text == "Yes"
+                                     ? "With picture "
+                                     : "Without picture ";
+                string pageSize = (ddlPagePageSize.Text.Length > 0) ? ddlPagePageSize.Text + "," : "";
+                string pageColumn = (ddlPageColumn.Text.Length > 0) ? ddlPageColumn.Text + " Column(s), " : "";
+                string gutter = txtPageGutterWidth.Text.Length > 0 ? "Column Gap - " + txtPageGutterWidth.Text + ", " : "";
 
-            string marginTop = txtPageTop.Text.Length > 0 ? "Margin Top - " + txtPageTop.Text + ", " : "";
-            string marginBottom = txtPageBottom.Text.Length > 0 ? "Margin Bottom - " + txtPageBottom.Text + ", " : "";
-            string marginInside = txtPageInside.Text.Length > 0 ? "Margin Inside - " + txtPageInside.Text + ", " : "";
-            string marginOutside = txtPageOutside.Text.Length > 0 ? "Margin Outside - " + txtPageOutside.Text + ", " : "";
-            string sense = (ddlSense.Text.Length > 0) ? " Sense Layout - " + ddlSense.Text + "," : "";
-            string combined = pageSize + " " +
-                              pageColumn + "  " +
-                              gutter + " " +
-                              marginTop + " " +
-                              marginBottom + " " +
-                              marginInside + " " +
-                              marginOutside + " " +
-                              leading + " " +
-                              fontSize + " " +
-                              ddlRunningHead.Text + " " +
-                              rules + " " +
-                              justified + " " +
-                              sense + " " +
-                              picture + ".";
-            txtCss.Text = combined;
+                string marginTop = txtPageTop.Text.Length > 0 ? "Margin Top - " + txtPageTop.Text + ", " : "";
+                string marginBottom = txtPageBottom.Text.Length > 0 ? "Margin Bottom - " + txtPageBottom.Text + ", " : "";
+                string marginInside = txtPageInside.Text.Length > 0 ? "Margin Inside - " + txtPageInside.Text + ", " : "";
+                string marginOutside = txtPageOutside.Text.Length > 0 ? "Margin Outside - " + txtPageOutside.Text + ", " : "";
+                string sense = (ddlSense.Text.Length > 0) ? " Sense Layout - " + ddlSense.Text + "," : "";
+                string combined = pageSize + " " +
+                                  pageColumn + "  " +
+                                  gutter + " " +
+                                  marginTop + " " +
+                                  marginBottom + " " +
+                                  marginInside + " " +
+                                  marginOutside + " " +
+                                  leading + " " +
+                                  fontSize + " " +
+                                  ddlRunningHead.Text + " " +
+                                  rules + " " +
+                                  justified + " " +
+                                  sense + " " +
+                                  picture + ".";
+                txtCss.Text = combined;
+            }
+            catch { }
         }
 
         #region Clear All Tab Controls
@@ -680,7 +778,7 @@ namespace SIL.PublishingSolution
         {
             tsNew.Enabled = enable;
             tsDelete.Enabled = enable;
-            tsCopy.Enabled = enable;
+            tsSaveAs.Enabled = enable;
             //tsPreview.Enabled = true;
         }
 
@@ -692,49 +790,114 @@ namespace SIL.PublishingSolution
         {
             tsDelete.Enabled = IsEnable;
             tabDisplay.Enabled = IsEnable;
+            tabMobile.Enabled = IsEnable;
         }
 
         private void txtPageGutterWidth_Validated(object sender, EventArgs e)
         {
-            bool result = _ds.AssignValuePageUnit(txtPageGutterWidth, null);
-            _errProvider = _ds._errProvider;
-            if (!result)
-                ValidatePageWidthMargins(sender, e);
-            WriteCss(txtPageGutterWidth);
+            try
+            {
+                bool result = Common.AssignValuePageUnit(txtPageGutterWidth, null);
+                _errProvider = Common._errProvider;
+                if (_errProvider.GetError(txtPageGutterWidth) != "")
+                {
+                    _errProvider.SetError(txtPageGutterWidth, _errProvider.GetError(txtPageGutterWidth));
+                }
+                else
+                {
+                    ValidatePageWidthMargins(sender, e);
+                }
+                WriteCss(txtPageGutterWidth);
+            }
+            catch { }
         }
 
+        private void txtPageInside_Validated(object sender, EventArgs e)
+        {
+            try
+            {
+                bool result = Common.AssignValuePageUnit(txtPageInside, null);
+                _errProvider = Common._errProvider;
+                if (_errProvider.GetError(txtPageInside) != "")
+                {
+                    _errProvider.SetError(txtPageInside, _errProvider.GetError(txtPageInside));
+                }
+                else
+                {
+                    ValidatePageWidthMargins(sender, e);
+                }
+
+                WriteCss(sender);
+            }
+            catch { }
+        }
 
         private void txtPageOutside_Validated(object sender, EventArgs e)
         {
-            bool result = _ds.AssignValuePageUnit(txtPageOutside, null);
-            _errProvider = _ds._errProvider;
-            if (!result)
-                ValidatePageWidthMargins(sender, e);
-            WriteCss(sender);
+            try
+            {
+                bool result = Common.AssignValuePageUnit(txtPageOutside, null);
+                _errProvider = Common._errProvider;
+                if (_errProvider.GetError(txtPageOutside) != "")
+                {
+                    _errProvider.SetError(txtPageOutside, _errProvider.GetError(txtPageOutside));
+                }
+                else
+                {
+                    ValidatePageWidthMargins(sender, e);
+                }
+                WriteCss(sender);
+            }
+            catch { }
         }
 
         private void txtPageTop_Validated(object sender, EventArgs e)
         {
-            bool result = _ds.AssignValuePageUnit(txtPageTop, null);
-            _errProvider = _ds._errProvider;
-            if (!result)
-                ValidatePageHeightMargins(sender, e);
-            WriteCss(sender);
+            try
+            {
+                bool result = Common.AssignValuePageUnit(txtPageTop, null);
+                _errProvider = Common._errProvider;
+                if (_errProvider.GetError(txtPageTop) != "")
+                {
+                    _errProvider.SetError(txtPageTop, _errProvider.GetError(txtPageTop));
+                }
+                else
+                {
+                    ValidatePageHeightMargins(sender, e);
+                }
+                WriteCss(sender);
+            }
+            catch { }
         }
 
         private void txtPageBottom_Validated(object sender, EventArgs e)
         {
-            bool result = _ds.AssignValuePageUnit(txtPageBottom, null);
-            _errProvider = _ds._errProvider;
-            if (!result)
-                ValidatePageHeightMargins(sender, e);
-            WriteCss(sender);
+            try
+            {
+                bool result = Common.AssignValuePageUnit(txtPageBottom, null);
+                _errProvider = Common._errProvider;
+                if (_errProvider.GetError(txtPageBottom) != "")
+                {
+                    _errProvider.SetError(txtPageBottom, _errProvider.GetError(txtPageBottom));
+                }
+                else
+                {
+                    ValidatePageHeightMargins(sender, e);
+                }
+                WriteCss(sender);
+            }
+            catch { }
         }
 
         private void ConfigurationTool_FormClosing(object sender, FormClosingEventArgs e)
         {
-            setLastSelectedLayout();
-            setDefaultInputType();
+            try
+            {
+                setLastSelectedLayout();
+                setDefaultInputType();
+
+            }
+            catch { }
         }
 
         private void setDefaultInputType()
@@ -753,46 +916,69 @@ namespace SIL.PublishingSolution
         }
         private void btnDictionary_Click(object sender, EventArgs e)
         {
-            btnMobile.Enabled = false;
-            setLastSelectedLayout();
-            _configurationToolBL.WriteMedia();
-            _configurationToolBL.InputType = "Dictionary";
-            SetInputTypeButton();
-            _configurationToolBL.LoadParam();
-            _configurationToolBL.ClearPropertyTab(tabDisplay);
-            PopulateFeatureSheet(); //For TD-1194 // Load Default Values
-            _configurationToolBL.SetPreviousLayoutSelect(stylesGrid);
-            SetSideBar();
-            ShowDataInGrid();
-            _redoundo.Reset();
-
+            try
+            {
+                btnMobile.Enabled = false;
+                btnWeb.Enabled = false;
+                btnOthers.Enabled = false;
+                setLastSelectedLayout();
+                _configurationToolBL.WriteMedia();
+                _configurationToolBL.InputType = "Dictionary";
+                SetInputTypeButton();
+                _configurationToolBL.LoadParam();
+                _configurationToolBL.ClearPropertyTab(tabDisplay);
+                PopulateFeatureSheet(); //For TD-1194 // Load Default Values
+                _configurationToolBL.SetPreviousLayoutSelect(stylesGrid);
+                SetSideBar();
+                ShowDataInGrid();
+                SetMobilePropertyTab();
+                _redoundo.Reset();
+            }
+            catch
+            {
+            }
         }
         private void btnScripture_Click(object sender, EventArgs e)
         {
-            btnMobile.Enabled = true;
-            setLastSelectedLayout();
-            _configurationToolBL.WriteMedia();
-            _configurationToolBL.InputType = "Scripture";
-            SetInputTypeButton();
-            _configurationToolBL.LoadParam();
-            _configurationToolBL.ClearPropertyTab(tabDisplay);
-            PopulateFeatureSheet(); //For TD-1194 // Load Default Values
-            _configurationToolBL.SetPreviousLayoutSelect(stylesGrid);
-            SetSideBar();
-            ShowDataInGrid();
-            _redoundo.Reset();
-
+            try
+            {
+                btnMobile.Enabled = true;
+                btnWeb.Enabled = false;
+                btnOthers.Enabled = false;
+                setLastSelectedLayout();
+                _configurationToolBL.WriteMedia();
+                _configurationToolBL.InputType = "Scripture";
+                SetInputTypeButton();
+                _configurationToolBL.LoadParam();
+                _configurationToolBL.ClearPropertyTab(tabDisplay);
+                _configurationToolBL.ClearPropertyTab(tabmob);
+                PopulateFeatureSheet(); //For TD-1194 // Load Default Values
+                _configurationToolBL.SetPreviousLayoutSelect(stylesGrid);
+                SetSideBar();
+                ShowDataInGrid();
+                SetMobilePropertyTab();
+                _redoundo.Reset();
+            }
+            catch
+            {
+            }
         }
 
         private void SideBar()
         {
-            _configurationToolBL.WriteMedia();
-            setLastSelectedLayout();
-            _configurationToolBL.LoadParam();
-            SetSideBar();
-            ShowDataInGrid();
-            _redoundo.Reset();
-            SetMobilePropertyTab();
+            try
+            {
+                _configurationToolBL.WriteMedia();
+                setLastSelectedLayout();
+                _configurationToolBL.LoadParam();
+                SetSideBar();
+                ShowDataInGrid();
+                _redoundo.Reset();
+                SetMobilePropertyTab();
+            }
+            catch
+            {
+            }
         }
 
         private void SetMobilePropertyTab()
@@ -838,67 +1024,79 @@ namespace SIL.PublishingSolution
                         }
                     }
                 }
+                SetMobileSummary(null, null);
             }
             else
             {
                 tabControl1.TabPages.Add(tabdic);
+                SetStyleSummary();
             }
         }
 
 
         private void txtName_Validated(object sender, EventArgs e)
         {
-            txtName.Text = txtName.Text.Trim();
-            if (!NoDuplicateStyleName() || !ValidateStyleName(txtName.Text))
+            try
             {
-                txtName.Text = _configurationToolBL.PreviousValue;
-                txtName.Focus();
-                return;
-            }
-            string styleName = txtName.Text;
-            _configurationToolBL.FileName = txtName.Text + ".css";
-            if (_configurationToolBL.AddMode) // Add
-            {
-                _redoundo.Set(Common.Action.New, _configurationToolBL.StyleName, null, "", string.Empty);
-
-                Param.StyleFile[styleName] = _configurationToolBL.FileName;
-                string errMsg = _configurationToolBL.CreateCssFile(_configurationToolBL.FileName);
-                if (errMsg.Length > 0)
+                txtName.Text = txtName.Text.Trim();
+                if (!NoDuplicateStyleName() || !ValidateStyleName(txtName.Text))
                 {
-                    //MessageBox.Show("Style Writing is failed because " + errMsg, _caption);
-                    MessageBox.Show("Style writing is failed because " + errMsg, _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-                }
-                _configurationToolBL.AddNew(txtName.Text);
-                EnableToolStripButtons(true);
-                _configurationToolBL.LoadMediaStyle(stylesGrid, _cssNames);
-                _configurationToolBL.SelectRow(stylesGrid, _configurationToolBL.PreviousValue);
-                SetInfoTabValue();
-            }
-            else // Edit
-            {
-                if (_configurationToolBL.PreviousValue == styleName)
-                {
+                    txtName.Text = _configurationToolBL.PreviousValue;
+                    stylesGrid.Rows[_configurationToolBL.SelectedRowIndex].Cells[0].Value =
+                        _configurationToolBL.PreviousValue;
+                    txtName.Focus();
                     return;
                 }
-                //file -> fileNew1 -> fileNew.css
-                string path = Param.Value["UserSheetPath"];
-                string fromFile = Common.PathCombine(path, _configurationToolBL.PreviousValue + ".css");
-                string toFile = Common.PathCombine(path, _configurationToolBL.FileName);
-                if (File.Exists(fromFile))
-                    try
+                string styleName = txtName.Text;
+                _configurationToolBL.FileName = txtName.Text + ".css";
+                stylesGrid[_configurationToolBL.ColumnFile, _configurationToolBL.SelectedRowIndex].Value =
+                    _configurationToolBL.FileName;
+
+                if (_configurationToolBL.AddMode) // Add
+                {
+                    //_redoundo.Set(Common.Action.New, _configurationToolBL.StyleName, null, "", string.Empty);
+
+                    Param.StyleFile[styleName] = _configurationToolBL.FileName;
+                    string errMsg = _configurationToolBL.CreateCssFile(_configurationToolBL.FileName);
+                    if (errMsg.Length > 0)
                     {
-                        File.Move(fromFile, toFile);
+                        MessageBox.Show("Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '" + errMsg + "'", _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                     }
-                    catch
+                    _configurationToolBL.AddNew(txtName.Text);
+                    EnableToolStripButtons(true);
+                    _configurationToolBL.LoadMediaStyle(stylesGrid, _cssNames);
+                    _configurationToolBL.SelectRow(stylesGrid, _configurationToolBL.PreviousValue);
+                    SetInfoTabValue();
+                }
+                else // Edit
+                {
+                    if (_configurationToolBL.PreviousValue == styleName)
                     {
+                        return;
                     }
-                Param.StyleFile[styleName] = _configurationToolBL.FileName;
-                _configurationToolBL.WriteAttrib(_configurationToolBL.AttribName, sender);
-                EnableToolStripButtons(true);
-                IsLayoutSelectedStyle();
+                    //file -> fileNew1 -> fileNew.css
+                    string path = Param.Value["UserSheetPath"];
+                    string fromFile = Common.PathCombine(path, _configurationToolBL.PreviousValue + ".css");
+                    string toFile = Common.PathCombine(path, _configurationToolBL.FileName);
+                    if (File.Exists(fromFile))
+                        try
+                        {
+                            File.Move(fromFile, toFile);
+                        }
+                        catch
+                        {
+                        }
+                    Param.StyleFile[styleName] = _configurationToolBL.FileName;
+                    _configurationToolBL.WriteAttrib(_configurationToolBL.AttribName, sender);
+                    _cssNames.Remove(_configurationToolBL.PreviousValue);
+                    EnableToolStripButtons(true);
+                    IsLayoutSelectedStyle();
+                }
+                _configurationToolBL.StyleName = txtName.Text;
+                lblInfoCaption.Text = txtName.Text;
+
             }
-            _configurationToolBL.StyleName = txtName.Text;
-            lblInfoCaption.Text = txtName.Text;
+            catch { }
         }
 
         //Note - Check This
@@ -928,7 +1126,7 @@ namespace SIL.PublishingSolution
             {
                 foreach (char ch in stringValue)
                 {
-                    if (!(ch == '-' || ch == '_' || ch == ' ' || ch == '.' ||
+                    if (!(ch == '-' || ch == '_' || ch == ' ' || ch == '.' || ch == '(' || ch == ')' ||
                         (ch >= 48 && ch <= 57) || (ch >= 65 && ch <= 90) || (ch >= 97 && ch <= 122)))
                     {
                         result = "Please avoid " + ch + " in the Style name";
@@ -965,43 +1163,58 @@ namespace SIL.PublishingSolution
 
         private void txtDesc_Validated(object sender, EventArgs e)
         {
-            _configurationToolBL.WriteAttrib(_configurationToolBL.ElementDesc, sender);
-            EnableToolStripButtons(true);
+            try
+            {
+                _configurationToolBL.WriteAttrib(_configurationToolBL.ElementDesc, sender);
+                EnableToolStripButtons(true);
+
+            }
+            catch { }
         }
 
         private void chkAvailable_Validated(object sender, EventArgs e)
         {
-            _configurationToolBL.WriteAttrib(_configurationToolBL.AttribShown, sender);
-            EnableToolStripButtons(true);
+            try
+            {
+                _configurationToolBL.WriteAttrib(_configurationToolBL.AttribShown, sender);
+                EnableToolStripButtons(true);
+
+            }
+            catch { }
             // _redoundo.Set(Common.Action.Edit, _configurationToolBL.StyleName, "chkAvailable", _configurationToolBL.PreviousValue, chkAvailable.Checked.ToString());
             //_configurationToolBL.PreviousValue = chkAvailable.Checked.ToString();
         }
 
         private void txtComment_Validated(object sender, EventArgs e)
         {
-            _configurationToolBL.WriteAttrib(_configurationToolBL.ElementComment, sender);
-            EnableToolStripButtons(true);
+            try
+            {
+                _configurationToolBL.WriteAttrib(_configurationToolBL.ElementComment, sender);
+                EnableToolStripButtons(true);
+
+            }
+            catch { }
         }
 
         private void SetGotFocusValue(object sender, EventArgs e)
         {
-            string control;
-            //if (_configurationToolBL.PreviousValue != string.Empty)
-            //{
-            //    _redoundo.Set(Common.Action.Edit, _configurationToolBL.StyleName, _currentControl, _configurationToolBL.PreviousValue);
-            //}
-            _configurationToolBL.PreviousValue = Common.GetTextValue(sender, out control);
-            _redoUndoBufferValue = _configurationToolBL.PreviousValue;
-            _redoundo.PreviousControl = _redoundo.CurrentControl;
-            _redoundo.CurrentControl = control;
+            try
+            {
+                string control;
+                //if (_configurationToolBL.PreviousValue != string.Empty)
+                //{
+                //    _redoundo.Set(Common.Action.Edit, _configurationToolBL.StyleName, _currentControl, _configurationToolBL.PreviousValue);
+                //}
+                _configurationToolBL.PreviousValue = Common.GetTextValue(sender, out control);
+                _redoUndoBufferValue = _configurationToolBL.PreviousValue;
+                _redoundo.PreviousControl = _redoundo.CurrentControl;
+                _redoundo.CurrentControl = control;
+
+            }
+            catch { }
         }
 
         private void ddlPagePageSize_Validated(object sender, EventArgs e)
-        {
-            WriteCss(sender);
-        }
-
-        private void txtPageInside_Validated(object sender, EventArgs e)
         {
             WriteCss(sender);
         }
@@ -1048,32 +1261,41 @@ namespace SIL.PublishingSolution
 
         private void chkAvailable_CheckedChanged(object sender, EventArgs e)
         {
-            _configurationToolBL.UpdateGrid(chkAvailable, stylesGrid);
+            try
+            {
+                _configurationToolBL.UpdateGrid(chkAvailable, stylesGrid);
+
+            }
+            catch { }
             // NOTE - Pending
             //_redoundo.Set(Common.Action.Edit, sender); 
         }
         private void tsUndo_Click(object sender, EventArgs e)
         {
-            ModifyData control = _redoundo.Undo(Common.Action.Edit, _styleName, _redoundo.CurrentControl, _configurationToolBL.PreviousValue);
-            _configurationToolBL.PreviousValue = string.Empty;
-            if (control.Action != Common.Action.Edit) // Add or Delete
+            try
             {
-                _configurationToolBL.LoadParam();
-                _configurationToolBL.ClearPropertyTab(tabDisplay);
-                PopulateFeatureSheet();
-                _configurationToolBL.SetPreviousLayoutSelect(stylesGrid);
-                ShowDataInGrid();
-                _configurationToolBL.SelectRow(stylesGrid, control.EditStyleName);
-            }
-            else // Edit
-            {
-                bool success = SetUI(control);
-                if (!success)
+                ModifyData control = _redoundo.Undo(Common.Action.Edit, _styleName, _redoundo.CurrentControl, _configurationToolBL.PreviousValue);
+                _configurationToolBL.PreviousValue = string.Empty;
+                if (control.Action != Common.Action.Edit) // Add or Delete
                 {
-                    // Ignore Recent modification. Ex: 123 - ignores 3 and gives 12 
-                    tsUndo_Click(sender, e);
+                    _configurationToolBL.LoadParam();
+                    _configurationToolBL.ClearPropertyTab(tabDisplay);
+                    PopulateFeatureSheet();
+                    _configurationToolBL.SetPreviousLayoutSelect(stylesGrid);
+                    ShowDataInGrid();
+                    _configurationToolBL.SelectRow(stylesGrid, control.EditStyleName);
+                }
+                else // Edit
+                {
+                    bool success = SetUI(control);
+                    if (!success)
+                    {
+                        // Ignore Recent modification. Ex: 123 - ignores 3 and gives 12 
+                        tsUndo_Click(sender, e);
+                    }
                 }
             }
+            catch { }
         }
 
         private bool SetUI(ModifyData control)
@@ -1118,25 +1340,30 @@ namespace SIL.PublishingSolution
         }
         private void tsRedo_Click(object sender, EventArgs e)
         {
-            ModifyData control = _redoundo.Redo();
-            if (control.Action != Common.Action.Edit) // Add or Delete
+            try
             {
-                _configurationToolBL.LoadParam();
-                _configurationToolBL.ClearPropertyTab(tabDisplay);
-                PopulateFeatureSheet();
-                _configurationToolBL.SetPreviousLayoutSelect(stylesGrid);
-                ShowDataInGrid();
-                _configurationToolBL.SelectRow(stylesGrid, control.EditStyleName);
-            }
-            else // Edit
-            {
-                bool success = SetUI(control);
-                if (!success)
+                ModifyData control = _redoundo.Redo();
+                if (control.Action != Common.Action.Edit) // Add or Delete
                 {
-                    // Ignore Recent modification. Ex: 123 - ignores 3 and gives 12 
-                    tsRedo_Click(sender, e);
+                    _configurationToolBL.LoadParam();
+                    _configurationToolBL.ClearPropertyTab(tabDisplay);
+                    PopulateFeatureSheet();
+                    _configurationToolBL.SetPreviousLayoutSelect(stylesGrid);
+                    ShowDataInGrid();
+                    _configurationToolBL.SelectRow(stylesGrid, control.EditStyleName);
                 }
+                else // Edit
+                {
+                    bool success = SetUI(control);
+                    if (!success)
+                    {
+                        // Ignore Recent modification. Ex: 123 - ignores 3 and gives 12 
+                        tsRedo_Click(sender, e);
+                    }
+                }
+
             }
+            catch { }
         }
 
         private void ValidateLineHeight(object sender, EventArgs e)
@@ -1148,15 +1375,6 @@ namespace SIL.PublishingSolution
                 int expectedLineHeight = selectedfontSize * 120 / 100;
                 string errMessage = selectedLineHeight < expectedLineHeight ? "Line height should be 120% of font size" : "";
                 _errProvider.SetError(txtPageInside, errMessage);
-
-                //if (expectedLineHeight > selectedLineHeight)
-                //{
-                //    _errProvider.SetError(ddlLeading, "Line height should be 120% of font size");
-                //}
-                //else
-                //{
-                //    _errProvider.SetError(ddlLeading, "");
-                //}
             }
         }
 
@@ -1165,32 +1383,30 @@ namespace SIL.PublishingSolution
             int marginLeft = GetDefaultValue(txtPageInside.Text);
             int marginRight = GetDefaultValue(txtPageOutside.Text);
             int columnGap = GetDefaultValue(txtPageGutterWidth.Text);
-            int expectedWidth = GetPageSize(ddlPagePageSize.Text, "Width") / 4;
+            int expectedWidth = GetPageSize(ddlPagePageSize.Text, "Width") / 2;
             int outputWidth = marginLeft + columnGap + marginRight;
 
             Control ctrl = ((Control)sender);
-            string errMessage = outputWidth > expectedWidth ? "Adjust Margin Inside / Margin Outside / Column Gap to set a Valid input" : "";
+            string errMessage = outputWidth > expectedWidth ? "The combination of the column gap, left and right margins should not exceed half of the page width." : "";
             _errProvider.SetError(ctrl, errMessage);
-
-            if (errMessage.Length == 0)
-            {
-                _errProvider.SetError(txtPageInside, errMessage);
-                _errProvider.SetError(txtPageOutside, errMessage);
-                _errProvider.SetError(txtPageGutterWidth, errMessage);
-            }
-            FillCssValues();
+            _errProvider.SetError(txtPageInside, errMessage);
+            _errProvider.SetError(txtPageOutside, errMessage);
+            _errProvider.SetError(txtPageGutterWidth, errMessage);
+            SetStyleSummary();
         }
 
-        private static void CompareMarginValues(Control txtBox, int lowestBound)
-        {
-
-            int marginInPoint = int.Parse(Common.UnitConverter(txtBox.Text, "pt"));
-
-            if (marginInPoint < lowestBound)
-            {
-                txtBox.ForeColor = Color.Red;
-            }
-        }
+        //private static void CompareMarginValues(Control txtBox, int lowestBound)
+        //{
+        //    int marginInPoint = int.Parse(Common.UnitConverter(txtBox.Text, "pt"));
+        //    if (marginInPoint < lowestBound)
+        //    {
+        //        txtBox.ForeColor = Color.Red;
+        //    }
+        //    else
+        //    {
+        //        txtBox.ForeColor = Color.Black;
+        //    }
+        //}
 
         private void ValidatePageHeightMargins(object sender, EventArgs e)
         {
@@ -1200,15 +1416,16 @@ namespace SIL.PublishingSolution
             int outputHeight = marginTop + marginBottom;
 
             Control ctrl = ((Control)sender);
-            string errMessage = outputHeight > expectedHeight ? "Adjust Margin Top / Margin Bottom to set a Valid input" : "";
+            string errMessage = outputHeight > expectedHeight ? "The combination of the margin-Top and margin-bottom should not exceed a quarter of the page height." : "";
+            
             _errProvider.SetError(ctrl, errMessage);
             if (errMessage.Length == 0)
             {
                 _errProvider.SetError(txtPageTop, errMessage);
                 _errProvider.SetError(txtPageBottom, errMessage);
-                _errProvider.SetError(txtPageGutterWidth, errMessage);
             }
-            FillCssValues();
+            //FillCssValues();
+            SetStyleSummary();
         }
 
         private static int GetPageSize(string paperSize, string dimension)
@@ -1259,7 +1476,7 @@ namespace SIL.PublishingSolution
         }
 
 
-        private int GetDefaultValue(string value)
+        private static int GetDefaultValue(string value)
         {
             if (value.Length > 0 && Common.ValidateNumber(value.Replace("pt", "")))
             {
@@ -1271,80 +1488,73 @@ namespace SIL.PublishingSolution
 
         private void Set(object sender, EventArgs e)
         {
-            FillCssValues();
+            SetStyleSummary();
         }
-        /// <summary>
-        /// Fill the Tab Control values into Text Box
-        /// </summary>
-        private void FillCssValues()
+
+        private void SetMobileSummary(object sender, EventArgs e)
         {
-            string leading = (ddlLeading.Text.Length > 0) ? " Line Spacing " + ddlLeading.Text + ", " : " ";
-            string fontSize = (ddlFontSize.Text.Length > 0) ? " Base FontSize - " + ddlFontSize.Text + ", " : "";
+            string comma = ", ";
+            string red = (ddlRedLetter.Text.Length > 0 && ddlRedLetter.Text.ToLower() == "yes") ? " Red Letter  " : "";
+            if (red.Length == 0)
+                comma = "";
+            string files = (ddlFiles.Text.Length > 0) ? " Numbers of files produced -  " + ddlFiles.Text + comma : " ";
 
-            string rules = ddlRules.Text == "Yes"
-                               ? "With Divider Lines, "
-                               : "Without Divider Lines, ";
-            string justified = ddlJustified.Text == "Yes"
-                                   ? "Justified, "
-                                   : "";
-            string picture = ddlPicture.Text == "Yes"
-                                 ? "With picture "
-                                 : "Without picture ";
-            string pageSize = (ddlPagePageSize.Text.Length > 0) ? ddlPagePageSize.Text + "," : "";
-            string pageColumn = (ddlPageColumn.Text.Length > 0) ? ddlPageColumn.Text + " Column(s), " : "";
-            string gutter = txtPageGutterWidth.Text.Length > 0 ? "Column Gap - " + txtPageGutterWidth.Text + ", " : "";
+            string combined =
+                files + " " +
+                red;
 
-            string marginTop = txtPageTop.Text.Length > 0 ? "Margin Top - " + txtPageTop.Text + ", " : "";
-            string marginBottom = txtPageBottom.Text.Length > 0 ? "Margin Bottom - " + txtPageBottom.Text + ", " : "";
-            string marginInside = txtPageInside.Text.Length > 0 ? "Margin Inside - " + txtPageInside.Text + ", " : "";
-            string marginOutside = txtPageOutside.Text.Length > 0 ? "Margin Outside - " + txtPageOutside.Text + ", " : "";
-            string sense = (ddlSense.Text.Length > 0) ? " Sense Layout - " + ddlSense.Text + "," : "";
-            string combined = pageSize + " " +
-                              pageColumn + "  " +
-                              gutter + " " +
-                              marginTop + " " +
-                              marginBottom + " " +
-                              marginInside + " " +
-                              marginOutside + " " +
-                              leading + " " +
-                              fontSize + " " +
-                              ddlRunningHead.Text + " " +
-                              rules + " " +
-                              justified + " " +
-                              sense + " " +
-                              picture + ".";
             txtCss.Text = combined;
-
         }
+
         private void txtApproved_Validated(object sender, EventArgs e)
         {
-            _configurationToolBL.WriteAttrib(_configurationToolBL.AttribApproved, sender);
-            EnableToolStripButtons(true);
+            try
+            {
+                _configurationToolBL.WriteAttrib(_configurationToolBL.AttribApproved, sender);
+                EnableToolStripButtons(true);
+
+            }
+            catch { }
         }
 
         private void ConfigurationTool_KeyUp(object sender, KeyEventArgs e)
         {
-            //if (e.Control && e.KeyCode == Keys.Delete)
-            if (e.KeyCode == Keys.Delete)
+            try
             {
-                if (tsDelete.Enabled)
+                //if (e.Control && e.KeyCode == Keys.Delete)
+                if (stylesGrid.Focused && e.KeyCode == Keys.Delete)
                 {
-                    tsDelete_Click(sender, null);
+                    if (tsDelete.Enabled)
+                    {
+                        tsDelete_Click(sender, null);
+                    }
+                }
+                else if (e.KeyCode == Keys.F1)
+                {
+                    Common.PathwayHelpSetup(btnScripture.Enabled, Common.FromRegistry("Help"));
+                    Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
+                    Common.HelpProv.SetHelpKeyword(this, "Overview.htm");
+                    SendKeys.Send("{F1}");
                 }
             }
+            catch { }
         }
 
         private void stylesGrid_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (!_configurationToolBL.AddMode)
+            try
             {
-                _configurationToolBL.SelectedRowIndex = e.RowIndex;
-                SetInfoTabValue();
+                if (!_configurationToolBL.AddMode)
+                {
+                    _configurationToolBL.SelectedRowIndex = e.RowIndex;
+                    SetInfoTabValue();
+                }
+                else
+                {
+                    _configurationToolBL.AddMode = false;
+                }
             }
-            else
-            {
-                _configurationToolBL.AddMode = false;
-            }
+            catch { }
         }
 
         private void txtName_Enter(object sender, EventArgs e)
@@ -1366,100 +1576,125 @@ namespace SIL.PublishingSolution
 
         private void btnWeb_Click(object sender, EventArgs e)
         {
-            _configurationToolBL.MediaType = "web";
-            SideBar();
+            //_configurationToolBL.MediaType = "web";
+            //SideBar();
         }
 
         private void btnOthers_Click(object sender, EventArgs e)
         {
-            _configurationToolBL.MediaType = "others";
-            SideBar();
+            //_configurationToolBL.MediaType = "others";
+            //SideBar();
         }
 
         private void stylesGrid_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
         {
-            string columnIndex = e.Column.Index.ToString();
-            string columnWidth = e.Column.Width.ToString();
-            _configurationToolBL.SaveColumnWidth(columnIndex, columnWidth);
+            try
+            {
+                string columnIndex = e.Column.Index.ToString();
+                string columnWidth = e.Column.Width.ToString();
+                _configurationToolBL.SaveColumnWidth(columnIndex, columnWidth);
+            }
+            catch { }
         }
 
         private void txtDesc_KeyUp(object sender, KeyEventArgs e)
         {
-            _configurationToolBL.UpdateGrid(txtDesc, stylesGrid);
-            _redoundo.Set(Common.Action.Edit, _configurationToolBL.StyleName, "txtDesc", _redoUndoBufferValue, txtDesc.Text);
-            _redoUndoBufferValue = txtDesc.Text;
+            try
+            {
+                _configurationToolBL.UpdateGrid(txtDesc, stylesGrid);
+                _redoundo.Set(Common.Action.Edit, _configurationToolBL.StyleName, "txtDesc", _redoUndoBufferValue, txtDesc.Text);
+                _redoUndoBufferValue = txtDesc.Text;
+
+            }
+            catch { }
         }
 
         private void txtComment_KeyUp(object sender, KeyEventArgs e)
         {
-            _configurationToolBL.UpdateGrid(txtComment, stylesGrid);
-            _redoundo.Set(Common.Action.Edit, _configurationToolBL.StyleName, "txtComment", _redoUndoBufferValue, txtComment.Text);
-            _redoUndoBufferValue = txtComment.Text;
-
+            try
+            {
+                _configurationToolBL.UpdateGrid(txtComment, stylesGrid);
+                _redoundo.Set(Common.Action.Edit, _configurationToolBL.StyleName, "txtComment", _redoUndoBufferValue, txtComment.Text);
+                _redoUndoBufferValue = txtComment.Text;
+            }
+            catch { }
         }
 
         private void txtName_KeyUp(object sender, KeyEventArgs e)
         {
-            _configurationToolBL.UpdateGrid(txtName, stylesGrid);
-            _redoundo.Set(Common.Action.Edit, _configurationToolBL.StyleName, "txtName", _redoUndoBufferValue, txtName.Text);
-            _redoUndoBufferValue = txtName.Text;
+            try
+            {
+                _configurationToolBL.UpdateGrid(txtName, stylesGrid);
+                _redoundo.Set(Common.Action.Edit, _configurationToolBL.StyleName, "txtName", _redoUndoBufferValue, txtName.Text);
+                _redoUndoBufferValue = txtName.Text;
+            }
+            catch { }
         }
 
         private void ddlPageColumn_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlPageColumn.Text.Length == 0) return;
-            int columnWidth = int.Parse(ddlPageColumn.Text);
-            _errProvider.SetError(this.txtPageGutterWidth, "");  // Clearing the error Messages
-            if (columnWidth <= 1)
+            try
             {
-                txtPageGutterWidth.Text = "";
-                txtPageGutterWidth.Enabled = false;
-            }
-            else
-            {
-                txtPageGutterWidth.Text = "18pt";
+                if (txtPageGutterWidth.Text.Length == 0)
+                    txtPageGutterWidth.Text = "18pt";
                 txtPageGutterWidth.Enabled = true;
             }
+            catch { }
             //Set(sender, e);
             //txtPageGutterWidth_Validated(sender, e);
         }
 
         private void tsPreview_Click(object sender, EventArgs e)
         {
-            string settingPath = Path.GetDirectoryName(Param.SettingPath);
-            string inputPath = Common.PathCombine(settingPath, "Styles");
-            inputPath = Common.PathCombine(inputPath, Param.Value["InputType"]);
-            string stylenamePath = Common.PathCombine(inputPath, "Preview");
-            if (!Directory.Exists(stylenamePath)) return;
-            String imageFile = Common.PathCombine(stylenamePath, _configurationToolBL.PreviewFileName1);
-            String imageFile1 = Common.PathCombine(stylenamePath, _configurationToolBL.PreviewFileName2);
+            try
+            {
+                string settingPath = Path.GetDirectoryName(Param.SettingPath);
+                string inputPath = Common.PathCombine(settingPath, "Styles");
+                inputPath = Common.PathCombine(inputPath, Param.Value["InputType"]);
+                string stylenamePath = Common.PathCombine(inputPath, "Preview");
+                if (!Directory.Exists(stylenamePath)) return;
+                String imageFile = Common.PathCombine(stylenamePath, _configurationToolBL.PreviewFileName1);
+                String imageFile1 = Common.PathCombine(stylenamePath, _configurationToolBL.PreviewFileName2);
 
-            //Preview_PDF_Export(inputPath); // To Generate PDF files
-            //return;
+                //Preview_PDF_Export(inputPath); // To Generate PDF files
+                //return;
 
-            if (!File.Exists(imageFile))
-            {
-                MessageBox.Show("Preview - File1 is not found");
+
+                if (!(File.Exists(imageFile) && File.Exists(imageFile1)))
+                {
+                    //string path = Param.StylePath(txtName.Text);
+                    string cssFile = Param.StylePath(_configurationToolBL.FileName); //Path.Combine(inputPath, _configurationToolBL.FileName);
+                    PdftoJpg pd = new PdftoJpg();
+                    pd.ConvertPdftoJpg(cssFile,true);
+
+                    imageFile = Path.Combine(Path.GetTempPath(), "Preview.pdf1.jpg");
+                    imageFile1 = Path.Combine(Path.GetTempPath(), "Preview.pdf2.jpg");
+                }
+                if (!File.Exists(imageFile))
+                {
+                    MessageBox.Show("Preview - File1 is not found");
+                }
+                if (!File.Exists(imageFile1))
+                {
+                    MessageBox.Show("Preview - File2 is not found");
+                }
+                if (File.Exists(imageFile) || File.Exists(imageFile1))
+                {
+                    PreviewConfig preview = new PreviewConfig(imageFile,
+                                                              imageFile1)
+                                                {
+                                                    Text = ("Preview - " + _configurationToolBL.StyleName)
+                                                };
+                    preview.Icon = this.Icon;
+                    preview.ShowDialog();
+                }
             }
-            if (!File.Exists(imageFile1))
-            {
-                MessageBox.Show("Preview - File2 is not found");
-            }
-            if (File.Exists(imageFile) || File.Exists(imageFile1))
-            {
-                PreviewConfig preview = new PreviewConfig(imageFile,
-                                                          imageFile1)
-                                            {
-                                                Text = ("Preview - " + _configurationToolBL.StyleName)
-                                            };
-                preview.Icon = this.Icon;
-                preview.ShowDialog();
-            }
+            catch { }
         }
 
         private void Preview_PDF_Export(string inputPath)
         {
-            string _backendPath = Common.PathCombine(Common.GetPSApplicationPath(), "BackEnds");
+            string _backendPath = Common.ProgInstall;
             Backend.Load(_backendPath);
             PublicationInformation _projectInfo = new PublicationInformation();
             _projectInfo.DictionaryOutputName = _configurationToolBL.StyleName + "_" + _configurationToolBL.FileName;
@@ -1480,49 +1715,119 @@ namespace SIL.PublishingSolution
 
         private void txtInformation_Validated(object sender, EventArgs e)
         {
-            Param.WriteMobileAttrib("Information", txtInformation.Text);
+            try
+            {
+                Param.WriteMobileAttrib("Information", txtInformation.Text);
+            }
+            catch
+            {
+            }
         }
 
         private void txtCopyright_Validated(object sender, EventArgs e)
         {
-            Param.WriteMobileAttrib("Copyright", txtCopyright.Text);
+            try
+            {
+                Param.WriteMobileAttrib("Copyright", txtCopyright.Text);
+            }
+            catch
+            {
+            }
         }
 
         private void ddlFiles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Param.WriteMobileAttrib("FileProduced", ddlFiles.Text);
+            try
+            {
+                _fileProduce = ddlFiles.Text;
+                Param.WriteMobileAttrib("FileProduced", ddlFiles.Text);
+                SetMobileSummary(sender, e);
+            }
+            catch { }
         }
 
         private void ddlRedLetter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Param.WriteMobileAttrib("RedLetter", ddlRedLetter.Text);
+            try
+            {
+                Param.WriteMobileAttrib("RedLetter", ddlRedLetter.Text);
+                SetMobileSummary(sender, e);
+            }
+            catch { }
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFile = new OpenFileDialog();
-            openFile.Filter = "icon (*.ico) |*.ico | png (*.png) |*.png";
+            openFile.Filter = "png (*.png) |*.png";
             openFile.ShowDialog();
 
             string filename = openFile.FileName;
             if (filename != "")
             {
-                Image iconImage = Image.FromFile(filename);
-                double height = iconImage.Height;
-                double width = iconImage.Width;
-                if (height != 20 || width != 20)
+                try
                 {
-                    MessageBox.Show("Please choose the icon with 20 x 20 dim.", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
+                    Image iconImage = Image.FromFile(filename);
+                    double height = iconImage.Height;
+                    double width = iconImage.Width;
+                    if (height != 20 || width != 20)
+                    {
+                        MessageBox.Show("Please choose the icon with 20 x 20 dim.", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                    string userPath = (Param.Value["UserSheetPath"]);
+                    string imgFileName = Path.GetFileName(filename);
+                    string toPath = Path.Combine(userPath, imgFileName);
+                    File.Copy(filename, toPath, true);
+                    Param.WriteMobileAttrib("Icon", toPath);
+                    mobileIcon.Image = iconImage;
                 }
-                string userPath = (Param.Value["UserSheetPath"]);
-                string imgFileName = Path.GetFileName(filename);
-                string toPath = Path.Combine(userPath, imgFileName);
-                File.Copy(filename, toPath, true);
-                Param.WriteMobileAttrib("Icon", toPath);
-                mobileIcon.Image = iconImage;
+                catch { }
             }
         }
-    }
 
+        private void ddlFileProduceDict_Validated(object sender, EventArgs e)
+        {
+            try
+            {
+                _fileProduce = ddlFileProduceDict.Text;
+                WriteCss(sender);
+            }
+            catch { }
+        }
+
+        private void ddlFiles_Validated(object sender, EventArgs e)
+        {
+            WriteCss(sender);
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab.Text == "Display Properties")
+            {
+                txtPageInside_Validated(txtPageInside, null);
+                txtPageOutside_Validated(txtPageOutside, null);
+                txtPageTop_Validated(txtPageTop, null);
+                txtPageBottom_Validated(txtPageBottom, null);
+                txtPageGutterWidth_Validated(txtPageGutterWidth, null);
+            }
+        }
+
+        private void tsSaveAs_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //_redoundo.Set(Common.Action.Copy, _configurationToolBL.StyleName, null, "", string.Empty);
+                if (_configurationToolBL.CopyStyle(stylesGrid, _cssNames))
+                {
+                    _configurationToolBL.LoadMediaStyle(stylesGrid, _cssNames);
+                    _configurationToolBL.SelectRow(stylesGrid, _configurationToolBL.PreviousStyleName);
+                    SetInfoTabValue();
+                    txtName.Select();
+                }
+
+            }
+            catch { }
+        }
+    }
 }

@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigurationTool));
             this.stylesGrid = new System.Windows.Forms.DataGridView();
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
             this.tsNew = new System.Windows.Forms.ToolStripButton();
-            this.tsCopy = new System.Windows.Forms.ToolStripButton();
+            this.tsSaveAs = new System.Windows.Forms.ToolStripButton();
             this.tsDelete = new System.Windows.Forms.ToolStripButton();
             this.tsUndo = new System.Windows.Forms.ToolStripButton();
             this.tsRedo = new System.Windows.Forms.ToolStripButton();
@@ -53,6 +54,8 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
             this.tabDisplay = new System.Windows.Forms.TabPage();
+            this.ddlFileProduceDict = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.ddlVerticalJustify = new System.Windows.Forms.ComboBox();
             this.lblVerticalJustify = new System.Windows.Forms.Label();
             this.ddlSense = new System.Windows.Forms.ComboBox();
@@ -113,6 +116,7 @@
             this.TLPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblType = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.stylesGrid)).BeginInit();
             this.toolStripMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -146,8 +150,9 @@
             this.stylesGrid.ReadOnly = true;
             this.stylesGrid.RowHeadersVisible = false;
             this.stylesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.stylesGrid.Size = new System.Drawing.Size(595, 418);
+            this.stylesGrid.Size = new System.Drawing.Size(582, 455);
             this.stylesGrid.TabIndex = 5;
+            this.stylesGrid.TabStop = false;
             this.stylesGrid.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.stylesGrid_RowEnter);
             this.stylesGrid.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.stylesGrid_ColumnWidthChanged);
             // 
@@ -156,7 +161,7 @@
             this.toolStripMain.AccessibleName = "toolStripMain";
             this.toolStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsNew,
-            this.tsCopy,
+            this.tsSaveAs,
             this.tsDelete,
             this.tsUndo,
             this.tsRedo,
@@ -165,7 +170,7 @@
             this.tsSend});
             this.toolStripMain.Location = new System.Drawing.Point(0, 0);
             this.toolStripMain.Name = "toolStripMain";
-            this.toolStripMain.Size = new System.Drawing.Size(991, 52);
+            this.toolStripMain.Size = new System.Drawing.Size(978, 52);
             this.toolStripMain.TabIndex = 5;
             this.toolStripMain.Text = "New";
             // 
@@ -179,25 +184,25 @@
             this.tsNew.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsNew.Name = "tsNew";
             this.tsNew.Size = new System.Drawing.Size(36, 49);
-            this.tsNew.Text = "New";
+            this.tsNew.Text = "&New";
             this.tsNew.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsNew.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             this.tsNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsNew.ToolTipText = "Add a brand new stylesheet ";
             this.tsNew.Click += new System.EventHandler(this.tsNew_Click);
             // 
-            // tsCopy
+            // tsSaveAs
             // 
-            this.tsCopy.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.tsCopy.Image = ((System.Drawing.Image)(resources.GetObject("tsCopy.Image")));
-            this.tsCopy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsCopy.Name = "tsCopy";
-            this.tsCopy.Size = new System.Drawing.Size(39, 49);
-            this.tsCopy.Text = "Copy";
-            this.tsCopy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsCopy.ToolTipText = "Copy the selected stylesheet into a new stylesheet ";
-            this.tsCopy.Click += new System.EventHandler(this.tsCopy_Click);
+            this.tsSaveAs.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.tsSaveAs.Image = ((System.Drawing.Image)(resources.GetObject("tsSaveAs.Image")));
+            this.tsSaveAs.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsSaveAs.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsSaveAs.Name = "tsSaveAs";
+            this.tsSaveAs.Size = new System.Drawing.Size(56, 49);
+            this.tsSaveAs.Text = "Save &As";
+            this.tsSaveAs.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsSaveAs.ToolTipText = "Copy the selected stylesheet into a new stylesheet ";
+            this.tsSaveAs.Click += new System.EventHandler(this.tsSaveAs_Click);
             // 
             // tsDelete
             // 
@@ -208,7 +213,7 @@
             this.tsDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsDelete.Name = "tsDelete";
             this.tsDelete.Size = new System.Drawing.Size(48, 49);
-            this.tsDelete.Text = "Delete";
+            this.tsDelete.Text = "De&lete";
             this.tsDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsDelete.ToolTipText = "Delete the selected stylesheet. (Ctrl + Del)";
             this.tsDelete.Click += new System.EventHandler(this.tsDelete_Click);
@@ -223,7 +228,7 @@
             this.tsUndo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsUndo.Name = "tsUndo";
             this.tsUndo.Size = new System.Drawing.Size(43, 49);
-            this.tsUndo.Text = " Undo";
+            this.tsUndo.Text = " &Undo";
             this.tsUndo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsUndo.ToolTipText = "Undo the last change";
             this.tsUndo.Click += new System.EventHandler(this.tsUndo_Click);
@@ -238,7 +243,7 @@
             this.tsRedo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsRedo.Name = "tsRedo";
             this.tsRedo.Size = new System.Drawing.Size(43, 49);
-            this.tsRedo.Text = " Redo";
+            this.tsRedo.Text = " &Redo";
             this.tsRedo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsRedo.ToolTipText = "Redo the last change";
             this.tsRedo.Click += new System.EventHandler(this.tsRedo_Click);
@@ -252,7 +257,7 @@
             this.tsPreview.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsPreview.Name = "tsPreview";
             this.tsPreview.Size = new System.Drawing.Size(56, 49);
-            this.tsPreview.Text = "Preview";
+            this.tsPreview.Text = "Pre&view";
             this.tsPreview.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsPreview.ToolTipText = "Preview the layout produced by the selected stylesheet";
             this.tsPreview.Click += new System.EventHandler(this.tsPreview_Click);
@@ -266,7 +271,7 @@
             this.tsDefault.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsDefault.Name = "tsDefault";
             this.tsDefault.Size = new System.Drawing.Size(58, 49);
-            this.tsDefault.Text = "Defaults";
+            this.tsDefault.Text = "De&faults";
             this.tsDefault.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsDefault.ToolTipText = "Select the Default Settings for the Print Via dialog";
             this.tsDefault.Click += new System.EventHandler(this.tsDefault_Click);
@@ -280,7 +285,7 @@
             this.tsSend.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsSend.Name = "tsSend";
             this.tsSend.Size = new System.Drawing.Size(39, 49);
-            this.tsSend.Text = "Send";
+            this.tsSend.Text = "S&end";
             this.tsSend.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsSend.ToolTipText = "Send the stylesheets and settings to someone else";
             this.tsSend.Click += new System.EventHandler(this.tsSend_Click);
@@ -290,11 +295,13 @@
             this.tabControl1.Controls.Add(this.tabInfo);
             this.tabControl1.Controls.Add(this.tabDisplay);
             this.tabControl1.Controls.Add(this.tabMobile);
-            this.tabControl1.Location = new System.Drawing.Point(1, 0);
+            this.tabControl1.HotTrack = true;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(275, 368);
+            this.tabControl1.Size = new System.Drawing.Size(275, 405);
             this.tabControl1.TabIndex = 6;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabInfo
             // 
@@ -312,7 +319,7 @@
             this.tabInfo.Location = new System.Drawing.Point(4, 22);
             this.tabInfo.Name = "tabInfo";
             this.tabInfo.Padding = new System.Windows.Forms.Padding(3);
-            this.tabInfo.Size = new System.Drawing.Size(267, 342);
+            this.tabInfo.Size = new System.Drawing.Size(267, 379);
             this.tabInfo.TabIndex = 0;
             this.tabInfo.Text = "Info";
             this.tabInfo.UseVisualStyleBackColor = true;
@@ -320,7 +327,7 @@
             // txtApproved
             // 
             this.txtApproved.Enabled = false;
-            this.txtApproved.Location = new System.Drawing.Point(72, 178);
+            this.txtApproved.Location = new System.Drawing.Point(72, 221);
             this.txtApproved.MaxLength = 10;
             this.txtApproved.Name = "txtApproved";
             this.txtApproved.Size = new System.Drawing.Size(184, 20);
@@ -331,7 +338,7 @@
             // lblApproved
             // 
             this.lblApproved.AutoSize = true;
-            this.lblApproved.Location = new System.Drawing.Point(2, 181);
+            this.lblApproved.Location = new System.Drawing.Point(2, 225);
             this.lblApproved.Name = "lblApproved";
             this.lblApproved.Size = new System.Drawing.Size(68, 13);
             this.lblApproved.TabIndex = 11;
@@ -339,7 +346,7 @@
             // 
             // btnApproved
             // 
-            this.btnApproved.Location = new System.Drawing.Point(232, 208);
+            this.btnApproved.Location = new System.Drawing.Point(232, 252);
             this.btnApproved.Name = "btnApproved";
             this.btnApproved.Size = new System.Drawing.Size(24, 20);
             this.btnApproved.TabIndex = 6;
@@ -350,7 +357,7 @@
             // lblComment
             // 
             this.lblComment.AutoSize = true;
-            this.lblComment.Location = new System.Drawing.Point(19, 118);
+            this.lblComment.Location = new System.Drawing.Point(19, 144);
             this.lblComment.Name = "lblComment";
             this.lblComment.Size = new System.Drawing.Size(51, 13);
             this.lblComment.TabIndex = 9;
@@ -359,7 +366,7 @@
             // chkAvailable
             // 
             this.chkAvailable.AutoSize = true;
-            this.chkAvailable.Location = new System.Drawing.Point(72, 99);
+            this.chkAvailable.Location = new System.Drawing.Point(72, 124);
             this.chkAvailable.Name = "chkAvailable";
             this.chkAvailable.Size = new System.Drawing.Size(15, 14);
             this.chkAvailable.TabIndex = 3;
@@ -370,11 +377,12 @@
             // 
             // txtComment
             // 
-            this.txtComment.Location = new System.Drawing.Point(72, 115);
+            this.txtComment.Location = new System.Drawing.Point(72, 141);
             this.txtComment.Multiline = true;
             this.txtComment.Name = "txtComment";
-            this.txtComment.Size = new System.Drawing.Size(184, 60);
-            this.txtComment.TabIndex = 5;
+            this.txtComment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtComment.Size = new System.Drawing.Size(184, 75);
+            this.txtComment.TabIndex = 4;
             this.txtComment.Validated += new System.EventHandler(this.txtComment_Validated);
             this.txtComment.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtComment_KeyUp);
             this.txtComment.Enter += new System.EventHandler(this.SetGotFocusValue);
@@ -382,7 +390,7 @@
             // lblAvailable
             // 
             this.lblAvailable.AutoSize = true;
-            this.lblAvailable.Location = new System.Drawing.Point(20, 99);
+            this.lblAvailable.Location = new System.Drawing.Point(20, 124);
             this.lblAvailable.Name = "lblAvailable";
             this.lblAvailable.Size = new System.Drawing.Size(50, 13);
             this.lblAvailable.TabIndex = 4;
@@ -393,7 +401,8 @@
             this.txtDesc.Location = new System.Drawing.Point(72, 44);
             this.txtDesc.Multiline = true;
             this.txtDesc.Name = "txtDesc";
-            this.txtDesc.Size = new System.Drawing.Size(184, 52);
+            this.txtDesc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtDesc.Size = new System.Drawing.Size(184, 75);
             this.txtDesc.TabIndex = 2;
             this.txtDesc.Validated += new System.EventHandler(this.txtDesc_Validated);
             this.txtDesc.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDesc_KeyUp);
@@ -411,6 +420,7 @@
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(72, 21);
+            this.txtName.MaxLength = 100;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(184, 20);
             this.txtName.TabIndex = 1;
@@ -429,6 +439,8 @@
             // 
             // tabDisplay
             // 
+            this.tabDisplay.Controls.Add(this.ddlFileProduceDict);
+            this.tabDisplay.Controls.Add(this.label9);
             this.tabDisplay.Controls.Add(this.ddlVerticalJustify);
             this.tabDisplay.Controls.Add(this.lblVerticalJustify);
             this.tabDisplay.Controls.Add(this.ddlSense);
@@ -463,10 +475,31 @@
             this.tabDisplay.Location = new System.Drawing.Point(4, 22);
             this.tabDisplay.Name = "tabDisplay";
             this.tabDisplay.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDisplay.Size = new System.Drawing.Size(267, 342);
+            this.tabDisplay.Size = new System.Drawing.Size(267, 379);
             this.tabDisplay.TabIndex = 1;
-            this.tabDisplay.Text = "Display Properties";
+            this.tabDisplay.Text = "Properties";
             this.tabDisplay.UseVisualStyleBackColor = true;
+            // 
+            // ddlFileProduceDict
+            // 
+            this.ddlFileProduceDict.AccessibleName = "";
+            this.ddlFileProduceDict.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlFileProduceDict.FormattingEnabled = true;
+            this.ddlFileProduceDict.Location = new System.Drawing.Point(93, 307);
+            this.ddlFileProduceDict.Name = "ddlFileProduceDict";
+            this.ddlFileProduceDict.Size = new System.Drawing.Size(151, 21);
+            this.ddlFileProduceDict.TabIndex = 15;
+            this.ddlFileProduceDict.Validated += new System.EventHandler(this.ddlFileProduceDict_Validated);
+            // 
+            // label9
+            // 
+            this.label9.AccessibleName = "lblPageColumn";
+            this.label9.Location = new System.Drawing.Point(0, 311);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(87, 13);
+            this.label9.TabIndex = 96;
+            this.label9.Text = "Files Produced";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // ddlVerticalJustify
             // 
@@ -476,7 +509,7 @@
             this.ddlVerticalJustify.Location = new System.Drawing.Point(93, 163);
             this.ddlVerticalJustify.Name = "ddlVerticalJustify";
             this.ddlVerticalJustify.Size = new System.Drawing.Size(151, 21);
-            this.ddlVerticalJustify.TabIndex = 93;
+            this.ddlVerticalJustify.TabIndex = 9;
             this.ddlVerticalJustify.SelectedIndexChanged += new System.EventHandler(this.Set);
             this.ddlVerticalJustify.Validated += new System.EventHandler(this.ddlVerticalJustify_Validated);
             // 
@@ -495,15 +528,17 @@
             this.ddlSense.AccessibleName = "ddlPageColumn";
             this.ddlSense.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlSense.FormattingEnabled = true;
-            this.ddlSense.Location = new System.Drawing.Point(93, 307);
+            this.ddlSense.Location = new System.Drawing.Point(93, 331);
             this.ddlSense.Name = "ddlSense";
             this.ddlSense.Size = new System.Drawing.Size(151, 21);
-            this.ddlSense.TabIndex = 91;
+            this.ddlSense.TabIndex = 16;
+            this.ddlSense.SelectedIndexChanged += new System.EventHandler(this.Set);
+            this.ddlSense.Validated += new System.EventHandler(this.ddlSense_Validated);
             // 
             // lblSenseLayout
             // 
             this.lblSenseLayout.AccessibleName = "lblPageColumn";
-            this.lblSenseLayout.Location = new System.Drawing.Point(0, 310);
+            this.lblSenseLayout.Location = new System.Drawing.Point(0, 335);
             this.lblSenseLayout.Name = "lblSenseLayout";
             this.lblSenseLayout.Size = new System.Drawing.Size(87, 13);
             this.lblSenseLayout.TabIndex = 92;
@@ -518,7 +553,9 @@
             this.ddlPicture.Location = new System.Drawing.Point(93, 187);
             this.ddlPicture.Name = "ddlPicture";
             this.ddlPicture.Size = new System.Drawing.Size(151, 21);
-            this.ddlPicture.TabIndex = 81;
+            this.ddlPicture.TabIndex = 10;
+            this.ddlPicture.SelectedIndexChanged += new System.EventHandler(this.Set);
+            this.ddlPicture.Validated += new System.EventHandler(this.ddlPicture_Validated);
             // 
             // lblLineSpace
             // 
@@ -548,7 +585,9 @@
             this.ddlLeading.Location = new System.Drawing.Point(93, 211);
             this.ddlLeading.Name = "ddlLeading";
             this.ddlLeading.Size = new System.Drawing.Size(151, 21);
-            this.ddlLeading.TabIndex = 82;
+            this.ddlLeading.TabIndex = 11;
+            this.ddlLeading.SelectedIndexChanged += new System.EventHandler(this.Set);
+            this.ddlLeading.Validated += new System.EventHandler(this.ddlLeading_Validated);
             // 
             // ddlRunningHead
             // 
@@ -558,7 +597,9 @@
             this.ddlRunningHead.Location = new System.Drawing.Point(93, 235);
             this.ddlRunningHead.Name = "ddlRunningHead";
             this.ddlRunningHead.Size = new System.Drawing.Size(151, 21);
-            this.ddlRunningHead.TabIndex = 83;
+            this.ddlRunningHead.TabIndex = 12;
+            this.ddlRunningHead.SelectedIndexChanged += new System.EventHandler(this.Set);
+            this.ddlRunningHead.Validated += new System.EventHandler(this.ddlRunningHead_Validated);
             // 
             // lblRules
             // 
@@ -578,12 +619,14 @@
             this.ddlRules.Location = new System.Drawing.Point(93, 259);
             this.ddlRules.Name = "ddlRules";
             this.ddlRules.Size = new System.Drawing.Size(151, 21);
-            this.ddlRules.TabIndex = 84;
+            this.ddlRules.TabIndex = 13;
+            this.ddlRules.SelectedIndexChanged += new System.EventHandler(this.Set);
+            this.ddlRules.Validated += new System.EventHandler(this.ddlRules_Validated);
             // 
             // lblFont
             // 
             this.lblFont.AccessibleName = "label17";
-            this.lblFont.Location = new System.Drawing.Point(0, 286);
+            this.lblFont.Location = new System.Drawing.Point(0, 287);
             this.lblFont.Name = "lblFont";
             this.lblFont.Size = new System.Drawing.Size(87, 13);
             this.lblFont.TabIndex = 89;
@@ -598,7 +641,9 @@
             this.ddlFontSize.Location = new System.Drawing.Point(93, 283);
             this.ddlFontSize.Name = "ddlFontSize";
             this.ddlFontSize.Size = new System.Drawing.Size(151, 21);
-            this.ddlFontSize.TabIndex = 85;
+            this.ddlFontSize.TabIndex = 14;
+            this.ddlFontSize.SelectedIndexChanged += new System.EventHandler(this.Set);
+            this.ddlFontSize.Validated += new System.EventHandler(this.ddlFontSize_Validated);
             // 
             // label4
             // 
@@ -616,7 +661,7 @@
             this.txtPageGutterWidth.Location = new System.Drawing.Point(93, 114);
             this.txtPageGutterWidth.Name = "txtPageGutterWidth";
             this.txtPageGutterWidth.Size = new System.Drawing.Size(44, 20);
-            this.txtPageGutterWidth.TabIndex = 5;
+            this.txtPageGutterWidth.TabIndex = 7;
             this.txtPageGutterWidth.Tag = "Gutter Width";
             this.txtPageGutterWidth.TextChanged += new System.EventHandler(this.Set);
             this.txtPageGutterWidth.Validated += new System.EventHandler(this.txtPageGutterWidth_Validated);
@@ -657,7 +702,7 @@
             // txtPageInside
             // 
             this.txtPageInside.AccessibleName = "txtPageInside";
-            this.txtPageInside.Location = new System.Drawing.Point(131, 38);
+            this.txtPageInside.Location = new System.Drawing.Point(125, 38);
             this.txtPageInside.Name = "txtPageInside";
             this.txtPageInside.Size = new System.Drawing.Size(33, 20);
             this.txtPageInside.TabIndex = 2;
@@ -669,10 +714,10 @@
             // txtPageTop
             // 
             this.txtPageTop.AccessibleName = "txtPageTop";
-            this.txtPageTop.Location = new System.Drawing.Point(131, 64);
+            this.txtPageTop.Location = new System.Drawing.Point(126, 64);
             this.txtPageTop.Name = "txtPageTop";
             this.txtPageTop.Size = new System.Drawing.Size(33, 20);
-            this.txtPageTop.TabIndex = 2;
+            this.txtPageTop.TabIndex = 4;
             this.txtPageTop.Tag = "Top";
             this.txtPageTop.TextChanged += new System.EventHandler(this.Set);
             this.txtPageTop.Validated += new System.EventHandler(this.txtPageTop_Validated);
@@ -684,7 +729,7 @@
             this.txtPageBottom.Location = new System.Drawing.Point(211, 64);
             this.txtPageBottom.Name = "txtPageBottom";
             this.txtPageBottom.Size = new System.Drawing.Size(33, 20);
-            this.txtPageBottom.TabIndex = 4;
+            this.txtPageBottom.TabIndex = 5;
             this.txtPageBottom.Tag = "Bottom";
             this.txtPageBottom.TextChanged += new System.EventHandler(this.Set);
             this.txtPageBottom.Validated += new System.EventHandler(this.txtPageBottom_Validated);
@@ -703,7 +748,7 @@
             // lblPageOutside
             // 
             this.lblPageOutside.AccessibleName = "lblPageOutside";
-            this.lblPageOutside.Location = new System.Drawing.Point(160, 41);
+            this.lblPageOutside.Location = new System.Drawing.Point(162, 41);
             this.lblPageOutside.Name = "lblPageOutside";
             this.lblPageOutside.Size = new System.Drawing.Size(49, 13);
             this.lblPageOutside.TabIndex = 75;
@@ -713,7 +758,7 @@
             // lblPageBottom
             // 
             this.lblPageBottom.AccessibleName = "lblPageBottom";
-            this.lblPageBottom.Location = new System.Drawing.Point(160, 67);
+            this.lblPageBottom.Location = new System.Drawing.Point(164, 67);
             this.lblPageBottom.Name = "lblPageBottom";
             this.lblPageBottom.Size = new System.Drawing.Size(47, 13);
             this.lblPageBottom.TabIndex = 73;
@@ -723,7 +768,7 @@
             // lblPageTop
             // 
             this.lblPageTop.AccessibleName = "lblPageTop";
-            this.lblPageTop.Location = new System.Drawing.Point(99, 67);
+            this.lblPageTop.Location = new System.Drawing.Point(100, 67);
             this.lblPageTop.Name = "lblPageTop";
             this.lblPageTop.Size = new System.Drawing.Size(26, 13);
             this.lblPageTop.TabIndex = 71;
@@ -738,7 +783,7 @@
             this.ddlJustified.Location = new System.Drawing.Point(93, 138);
             this.ddlJustified.Name = "ddlJustified";
             this.ddlJustified.Size = new System.Drawing.Size(151, 21);
-            this.ddlJustified.TabIndex = 7;
+            this.ddlJustified.TabIndex = 8;
             this.ddlJustified.SelectedIndexChanged += new System.EventHandler(this.Set);
             this.ddlJustified.Enter += new System.EventHandler(this.SetGotFocusValue);
             this.ddlJustified.Validated += new System.EventHandler(this.ddlJustified_Validated);
@@ -815,14 +860,15 @@
             this.tabMobile.Location = new System.Drawing.Point(4, 22);
             this.tabMobile.Name = "tabMobile";
             this.tabMobile.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMobile.Size = new System.Drawing.Size(267, 342);
+            this.tabMobile.Size = new System.Drawing.Size(267, 379);
             this.tabMobile.TabIndex = 2;
             this.tabMobile.Text = "Properties";
             this.tabMobile.UseVisualStyleBackColor = true;
             // 
             // mobileIcon
             // 
-            this.mobileIcon.Location = new System.Drawing.Point(93, 118);
+            this.mobileIcon.Image = ((System.Drawing.Image)(resources.GetObject("mobileIcon.Image")));
+            this.mobileIcon.Location = new System.Drawing.Point(93, 179);
             this.mobileIcon.Name = "mobileIcon";
             this.mobileIcon.Size = new System.Drawing.Size(20, 20);
             this.mobileIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -831,10 +877,10 @@
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(124, 118);
+            this.btnBrowse.Location = new System.Drawing.Point(119, 179);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(68, 23);
-            this.btnBrowse.TabIndex = 64;
+            this.btnBrowse.TabIndex = 59;
             this.btnBrowse.Text = "Browse...";
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
@@ -842,37 +888,39 @@
             // label1
             // 
             this.label1.AccessibleName = "lblPageColumn";
-            this.label1.Location = new System.Drawing.Point(0, 122);
+            this.label1.Location = new System.Drawing.Point(1, 184);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(87, 13);
             this.label1.TabIndex = 63;
-            this.label1.Text = "Icon for phone";
+            this.label1.Text = "Icon for Phone";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtCopyright
             // 
-            this.txtCopyright.Location = new System.Drawing.Point(93, 92);
+            this.txtCopyright.Location = new System.Drawing.Point(93, 153);
             this.txtCopyright.Name = "txtCopyright";
             this.txtCopyright.Size = new System.Drawing.Size(151, 20);
-            this.txtCopyright.TabIndex = 62;
+            this.txtCopyright.TabIndex = 58;
             this.txtCopyright.Validated += new System.EventHandler(this.txtCopyright_Validated);
             // 
             // txtInformation
             // 
             this.txtInformation.Location = new System.Drawing.Point(93, 66);
+            this.txtInformation.Multiline = true;
             this.txtInformation.Name = "txtInformation";
-            this.txtInformation.Size = new System.Drawing.Size(151, 20);
-            this.txtInformation.TabIndex = 61;
+            this.txtInformation.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtInformation.Size = new System.Drawing.Size(151, 78);
+            this.txtInformation.TabIndex = 57;
             this.txtInformation.Validated += new System.EventHandler(this.txtInformation_Validated);
             // 
             // label3
             // 
             this.label3.AccessibleName = "lblPageColumn";
-            this.label3.Location = new System.Drawing.Point(0, 95);
+            this.label3.Location = new System.Drawing.Point(0, 156);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(87, 13);
             this.label3.TabIndex = 60;
-            this.label3.Text = "Copyright holder";
+            this.label3.Text = "Copyright Holder";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label6
@@ -893,7 +941,7 @@
             this.ddlRedLetter.Location = new System.Drawing.Point(93, 39);
             this.ddlRedLetter.Name = "ddlRedLetter";
             this.ddlRedLetter.Size = new System.Drawing.Size(151, 21);
-            this.ddlRedLetter.TabIndex = 57;
+            this.ddlRedLetter.TabIndex = 56;
             this.ddlRedLetter.SelectedIndexChanged += new System.EventHandler(this.ddlRedLetter_SelectedIndexChanged);
             // 
             // label7
@@ -916,6 +964,7 @@
             this.ddlFiles.Size = new System.Drawing.Size(151, 21);
             this.ddlFiles.TabIndex = 55;
             this.ddlFiles.SelectedIndexChanged += new System.EventHandler(this.ddlFiles_SelectedIndexChanged);
+            this.ddlFiles.Validated += new System.EventHandler(this.ddlFiles_Validated);
             // 
             // label8
             // 
@@ -924,7 +973,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(87, 13);
             this.label8.TabIndex = 56;
-            this.label8.Text = "Files produced";
+            this.label8.Text = "Files Produced";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label2
@@ -936,7 +985,7 @@
             this.label2.Location = new System.Drawing.Point(94, 1);
             this.label2.Margin = new System.Windows.Forms.Padding(0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(604, 23);
+            this.label2.Size = new System.Drawing.Size(591, 23);
             this.label2.TabIndex = 14;
             this.label2.Text = "Stylesheets";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -946,7 +995,7 @@
             this.lblInfoCaption.BackColor = System.Drawing.Color.RoyalBlue;
             this.lblInfoCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInfoCaption.ForeColor = System.Drawing.Color.White;
-            this.lblInfoCaption.Location = new System.Drawing.Point(699, 1);
+            this.lblInfoCaption.Location = new System.Drawing.Point(686, 1);
             this.lblInfoCaption.Margin = new System.Windows.Forms.Padding(0);
             this.lblInfoCaption.Name = "lblInfoCaption";
             this.lblInfoCaption.Size = new System.Drawing.Size(290, 23);
@@ -986,7 +1035,7 @@
             this.TLPanelOuter.RowCount = 2;
             this.TLPanelOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             this.TLPanelOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TLPanelOuter.Size = new System.Drawing.Size(991, 450);
+            this.TLPanelOuter.Size = new System.Drawing.Size(978, 487);
             this.TLPanelOuter.TabIndex = 19;
             // 
             // TLPanel1
@@ -1022,7 +1071,7 @@
             this.btnScripture.Name = "btnScripture";
             this.btnScripture.Size = new System.Drawing.Size(85, 23);
             this.btnScripture.TabIndex = 4;
-            this.btnScripture.Text = "Scripture";
+            this.btnScripture.Text = "&Scripture";
             this.btnScripture.UseVisualStyleBackColor = true;
             this.btnScripture.Click += new System.EventHandler(this.btnScripture_Click);
             // 
@@ -1035,7 +1084,7 @@
             this.btnDictionary.Name = "btnDictionary";
             this.btnDictionary.Size = new System.Drawing.Size(85, 23);
             this.btnDictionary.TabIndex = 3;
-            this.btnDictionary.Text = "Dictionary";
+            this.btnDictionary.Text = "&Dictionary";
             this.btnDictionary.UseVisualStyleBackColor = true;
             this.btnDictionary.Click += new System.EventHandler(this.btnDictionary_Click);
             // 
@@ -1063,7 +1112,7 @@
             this.btnOthers.Name = "btnOthers";
             this.btnOthers.Size = new System.Drawing.Size(85, 70);
             this.btnOthers.TabIndex = 3;
-            this.btnOthers.Text = "Others";
+            this.btnOthers.Text = "&Others";
             this.btnOthers.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnOthers.UseVisualStyleBackColor = true;
             this.btnOthers.Click += new System.EventHandler(this.btnOthers_Click);
@@ -1079,7 +1128,7 @@
             this.btnWeb.Name = "btnWeb";
             this.btnWeb.Size = new System.Drawing.Size(85, 70);
             this.btnWeb.TabIndex = 2;
-            this.btnWeb.Text = "Web";
+            this.btnWeb.Text = "&Web";
             this.btnWeb.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnWeb.UseVisualStyleBackColor = true;
             this.btnWeb.Click += new System.EventHandler(this.btnWeb_Click);
@@ -1095,7 +1144,7 @@
             this.btnMobile.Name = "btnMobile";
             this.btnMobile.Size = new System.Drawing.Size(85, 70);
             this.btnMobile.TabIndex = 1;
-            this.btnMobile.Text = "Mobile";
+            this.btnMobile.Text = "&Mobile";
             this.btnMobile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnMobile.UseVisualStyleBackColor = true;
             this.btnMobile.Click += new System.EventHandler(this.btnMobile_Click);
@@ -1111,7 +1160,7 @@
             this.btnPaper.Name = "btnPaper";
             this.btnPaper.Size = new System.Drawing.Size(85, 70);
             this.btnPaper.TabIndex = 0;
-            this.btnPaper.Text = "Paper";
+            this.btnPaper.Text = "&Paper";
             this.btnPaper.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnPaper.UseVisualStyleBackColor = true;
             this.btnPaper.Click += new System.EventHandler(this.btnPaper_Click);
@@ -1127,8 +1176,8 @@
             this.TLPanel2.Name = "TLPanel2";
             this.TLPanel2.RowCount = 1;
             this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 418F));
-            this.TLPanel2.Size = new System.Drawing.Size(598, 418);
+            this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 455F));
+            this.TLPanel2.Size = new System.Drawing.Size(585, 455);
             this.TLPanel2.TabIndex = 1;
             // 
             // TLPanel3
@@ -1137,13 +1186,13 @@
             this.TLPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TLPanel3.Controls.Add(this.panel3, 0, 1);
             this.TLPanel3.Controls.Add(this.txtCss, 0, 0);
-            this.TLPanel3.Location = new System.Drawing.Point(702, 28);
+            this.TLPanel3.Location = new System.Drawing.Point(689, 28);
             this.TLPanel3.Name = "TLPanel3";
             this.TLPanel3.RowCount = 2;
             this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
             this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 175F));
             this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TLPanel3.Size = new System.Drawing.Size(284, 418);
+            this.TLPanel3.Size = new System.Drawing.Size(284, 455);
             this.TLPanel3.TabIndex = 2;
             // 
             // panel3
@@ -1153,7 +1202,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 44);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(278, 371);
+            this.panel3.Size = new System.Drawing.Size(278, 408);
             this.panel3.TabIndex = 20;
             // 
             // lblType
@@ -1173,7 +1222,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(991, 502);
+            this.ClientSize = new System.Drawing.Size(978, 539);
             this.Controls.Add(this.TLPanelOuter);
             this.Controls.Add(this.toolStripMain);
             this.HelpButton = true;
@@ -1241,7 +1290,7 @@
         private System.Windows.Forms.Label lblPagePageSize;
         private System.Windows.Forms.ComboBox ddlPageColumn;
         private System.Windows.Forms.Label lblPageColumn;
-        private System.Windows.Forms.ToolStripButton tsCopy;
+        private System.Windows.Forms.ToolStripButton tsSaveAs;
         private System.Windows.Forms.ComboBox ddlJustified;
         private System.Windows.Forms.Label lblJustified;
         private System.Windows.Forms.TextBox txtPageOutside;
@@ -1295,5 +1344,8 @@
         private System.Windows.Forms.ComboBox ddlFiles;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.PictureBox mobileIcon;
+        private System.Windows.Forms.ComboBox ddlFileProduceDict;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

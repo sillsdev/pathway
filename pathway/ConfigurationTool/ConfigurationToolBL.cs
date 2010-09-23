@@ -18,6 +18,7 @@ namespace SIL.PublishingSolution
         private Dictionary<string, Dictionary<string, string>> _cssClass =
                             new Dictionary<string, Dictionary<string, string>>();
         Dictionary<string, string> standardSize = new Dictionary<string, string>();
+        public string Caption = "Pathway Configuration Tool";
         #endregion
 
         #region Public Variable
@@ -43,6 +44,7 @@ namespace SIL.PublishingSolution
         public string TypeStandard = "Standard";
         public string TypeCustom = "Custom";
         public string PreviousStyleName = string.Empty;
+        public string NewStyleName = string.Empty;
 
         public string PreviousValue = string.Empty;
         //public string CurrentControl = string.Empty;
@@ -232,7 +234,9 @@ namespace SIL.PublishingSolution
                 string key = "page-width";
                 string key1 = "page-height";
                 string width = GetValue(task, key, "612");
+                width = Math.Round(double.Parse(width)).ToString();
                 string height = GetValue(task, key1, "792");
+                height = Math.Round(double.Parse(height)).ToString();
                 string pageSize = PageSize1(width, height);
                 return pageSize;
             }
@@ -295,7 +299,7 @@ namespace SIL.PublishingSolution
                 return align;
             }
         }
-        
+
 
 
         public string Picture
@@ -326,6 +330,16 @@ namespace SIL.PublishingSolution
             }
         }
 
+        public string FileProduced
+        {
+            get
+            {
+                string task = "@page";
+                string key = "-ps-fileproduce";
+                string file = GetValue(task, key, "One");
+                return file.Replace("\"", "");
+            }
+        }
         #endregion
 
         /// <summary>
@@ -361,7 +375,7 @@ namespace SIL.PublishingSolution
         {
             Common.SamplePath = Param.Value["SamplePath"].Replace("Samples", "Styles");
             if (string.IsNullOrEmpty(_cssPath)) return;
-            CSSTree cssTree = new CSSTree();
+            CssTree cssTree = new CssTree();
             _cssClass = cssTree.CreateCssProperty(_cssPath, false);
         }
 
@@ -381,26 +395,82 @@ namespace SIL.PublishingSolution
             return pageSize;
         }
 
-        public string GetNewStyleName(ArrayList cssNames)
+        public string GetNewStyleName(ArrayList cssNames, string mode)
         {
             string preferedName = "CustomSheet-1";
-            if (cssNames.Count > 0)
+            if (mode == "new")
             {
-                int temp = 1;
-                int max = 0;
-                foreach (string styleName in cssNames)
+                if (cssNames.Count > 0)
                 {
-                    string[] ss = styleName.Split('-');
-                    try
-                    {
-                        temp = int.Parse(ss[1]);
-                    }
-                    catch
-                    {
-                    }
-                    if (max < temp) { max = temp; }
-                    preferedName = ss[0] + "-" + (max + 1);
+                    preferedName = GetNewStyleCount(cssNames, preferedName);
                 }
+            }
+            else
+            {
+                preferedName = StyleName;
+                if (StyleName.IndexOf('(') == -1)
+                {
+                    preferedName = "Copy of " + StyleName;
+                }
+                if (cssNames.Count > 0)
+                {
+                    if (cssNames.Contains(preferedName))
+                    {
+                        preferedName = GetDirCount(cssNames, preferedName);
+                    }
+                }
+            }
+            return preferedName;
+        }
+
+        private static string GetNewStyleCount(ArrayList cssNames, string preferedName)
+        {
+            int temp = 1;
+            int max = 0;
+            foreach (string styleName in cssNames)
+            {
+                if (styleName.IndexOf("Copy") >= 0)
+                    continue;
+
+                string[] ss = styleName.Split('-');
+                try
+                {
+                    temp = int.Parse(ss[1]);
+                }
+                catch
+                {
+                }
+                if (max < temp) { max = temp; }
+                preferedName = ss[0] + "-" + (max + 1);
+            }
+            if (cssNames.Contains(preferedName))
+            {
+                preferedName = GetNewStyleCount(cssNames, preferedName);
+            }
+            return preferedName;
+        }
+
+
+        private static string GetDirCount(ArrayList cssNames, string preferedName)
+        {
+            int oldValue = 1;
+            if (preferedName.IndexOf('(') == -1)
+            {
+                preferedName = preferedName.Replace("Copy of", "Copy(2) of");
+                if (!cssNames.Contains(preferedName))
+                {
+                    return preferedName;
+                }
+            }
+            int startPos = preferedName.IndexOf('(');
+            int endPos = preferedName.IndexOf(')');
+            if (startPos > 0)
+                oldValue = int.Parse(preferedName.Substring(startPos + 1, ((endPos - 1) - (startPos))));
+            int newValue = oldValue + 1;
+            preferedName = preferedName.Replace(oldValue.ToString(), newValue.ToString());
+            if (cssNames.Contains(preferedName))
+            {
+                preferedName = GetDirCount(cssNames, preferedName);
             }
             return preferedName;
         }
@@ -432,18 +502,41 @@ namespace SIL.PublishingSolution
             }
         }
 
-        public void CopyStyle(DataGridView grid, ArrayList cssNames)
+        public bool CopyStyle(DataGridView grid, ArrayList cssNames)
+        {
+            var currentRow = grid.Rows[SelectedRowIndex];
+            if (currentRow == null) return false;
+            //var currentDescription = currentRow.Cells[ColumnDescription].Value.ToString();
+            var currentApprovedBy = grid[AttribApproved, SelectedRowIndex].Value.ToString();
+            string type = grid[ColumnType, SelectedRowIndex].Value.ToString();
+            PreviousStyleName = GetNewStyleName(cssNames, "copy");
+            if (PreviousStyleName.Length > 100)
+            {
+                MessageBox.Show("Styles should not be greater than 100 characters.", Caption, MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                return false;
+            }
+            var currentDescription = "Based on " + currentApprovedBy + " stylesheet " + StyleName;
+            Param.SaveSheet(PreviousStyleName, Param.StylePath(StyleName), currentDescription, type);
+            XmlNode baseNode = Param.GetItem("//styles/" + MediaType + "/style[@name='" + PreviousStyleName + "']");
+            Param.SetAttrValue(baseNode, AttribType, TypeCustom);
+            Param.Write();
+            return true;
+        }
+
+        public void AddStyle(DataGridView grid, ArrayList cssNames)
         {
             var currentRow = grid.Rows[SelectedRowIndex];
             if (currentRow == null) return;
             var currentDescription = currentRow.Cells[ColumnDescription].Value.ToString();
             string type = grid[ColumnType, SelectedRowIndex].Value.ToString();
-            PreviousStyleName = GetNewStyleName(cssNames);
-            Param.SaveSheet(PreviousStyleName, Param.StylePath(StyleName), currentDescription, type);
-            XmlNode baseNode = Param.GetItem("//styles/" + MediaType + "/style[@name='" + PreviousStyleName + "']");
+            NewStyleName = GetNewStyleName(cssNames, "new");
+            Param.SaveSheet(NewStyleName, Param.StylePath(StyleName), currentDescription, type);
+            XmlNode baseNode = Param.GetItem("//styles/" + MediaType + "/style[@name='" + NewStyleName + "']");
             Param.SetAttrValue(baseNode, AttribType, TypeCustom);
             Param.Write();
         }
+
 
         /// <summary>
         ///
@@ -538,23 +631,25 @@ namespace SIL.PublishingSolution
 
         public bool SelectRow(DataGridView grid, string sheet)
         {
+            bool result = false;
             for (int i = 0; i < grid.Rows.Count; i++)
             {
                 if (grid.Rows[i].Cells[ColumnName].Value.ToString() == sheet)
                 {
                     grid.Rows[i].Selected = true;
                     SelectedRowIndex = i;
-                    return true;
+                    result = true;
+                    break;
                 }
             }
-            return false;
+            return result;
         }
 
         public string SetPreviousLayoutSelect(DataGridView grid)
         {
             string lastLayout = string.Empty;
             bool selectedNotExist = true;
-            
+
             if (Param.Value.ContainsKey(Param.LayoutSelected))
             {
                 lastLayout = Param.Value[Param.LayoutSelected];
@@ -623,6 +718,7 @@ namespace SIL.PublishingSolution
         public bool IsNameExists(DataGridView grid, string styleName)
         {
             bool result = false;
+            if (PreviousValue.ToLower() == styleName.ToLower()) return result;
             styleName = styleName.Trim().ToLower();
             for (int row = 0; row < grid.Rows.Count - 1; row++)
             {
@@ -632,6 +728,21 @@ namespace SIL.PublishingSolution
                 if (grid[ColumnName, row].Value.ToString().ToLower() == styleName)
                 {
                     result = true;
+                }
+            }
+
+            XmlNodeList xmlNodeList = Param.GetItems("//styles//style");
+            if (xmlNodeList != null)
+            {
+                foreach (XmlNode xmlNode in xmlNodeList)
+                {
+                    XmlNode xn = xmlNode.Attributes.GetNamedItem("name");
+
+                    if (xn != null && xn.Value.ToLower() == styleName.ToLower())
+                    {
+                        result = true;
+                        break;
+                    }
                 }
             }
             return result;
@@ -726,8 +837,13 @@ namespace SIL.PublishingSolution
 
                 row = DataSetForGrid.Tables["Styles"].NewRow();
                 row["Name"] = name != null ? name.Value : string.Empty; //name.Value;
-                if (row["Name"].ToString().IndexOf("CustomSheet") >= 0)
-                    cssNames.Add(row["Name"]);
+                //if (row["Name"].ToString().IndexOf("CustomSheet") >= 0)
+                //    cssNames.Add(row["Name"]);
+                if (row["Name"].ToString().IndexOf("Copy") >= 0 || row["Name"].ToString().IndexOf("Custom") >= 0)
+                {
+                    if (!cssNames.Contains(row["Name"]))
+                        cssNames.Add(row["Name"]);
+                }
                 row["File"] = file.Value;
                 row["Description"] = desc;
                 row["Comment"] = comment;
@@ -796,9 +912,9 @@ namespace SIL.PublishingSolution
         }
 
         //<summary>
-         //Method to copy the settings file(DictionaryStyleSettings.xml/ScriptureSettings.xml) 
-         //from the Alluser path.
-         //</summary>
+        //Method to copy the settings file(DictionaryStyleSettings.xml/ScriptureSettings.xml) 
+        //from the Alluser path.
+        //</summary>
         private static void BackUpUserSettingFiles(string toPath)
         {
             string projType = Param.Value["InputType"];
@@ -899,7 +1015,7 @@ namespace SIL.PublishingSolution
                              Caption = "File",
                              ReadOnly = false,
                              Unique = false,
-                             MaxLength = 70
+                             MaxLength = 100
                          };
             table.Columns.Add(column);
 
