@@ -92,7 +92,7 @@ namespace Test.GoBibleConvert
             restructuredFullName = GetFileNameWithOutputPath(fileName);
             File.Copy(inputFullName, restructuredFullName, true);
             processFolder = GetOutputPath();
-            Param.ProgBase = GetSupportPath();
+			Common.ProgBase = GetSupportPath();
             Param.LoadSettings();
             Param.SetValue(Param.InputType, "Scripture");
             Param.LoadSettings();
@@ -104,7 +104,7 @@ namespace Test.GoBibleConvert
             CreateCollection();
             string actualFullName = GetFileNameWithOutputPath(collections);
             string exepectedFullName = GetFileNameWithExpectedPath(collections);
-            FileAssert.AreEqual(exepectedFullName, actualFullName);
+            TextFileAssert.AreEqual(exepectedFullName, actualFullName);
         }
 
         [Test]
@@ -120,7 +120,7 @@ namespace Test.GoBibleConvert
             collectionFullName = GetFileNameWithOutputPath(collections);
             File.Copy(collectionInputFullName, collectionFullName, true);
             processFolder = GetOutputPath();
-            Param.ProgBase = GetSupportPath();
+			Common.ProgBase = GetSupportPath();
             BuildApplication();
             string actualFullName = GetFileNameWithOutputPath(jarFile);
             string exepectedFullName = GetFileNameWithExpectedPath(jarFile);
@@ -144,7 +144,7 @@ namespace Test.GoBibleConvert
             collectionFullName = Path.Combine(folderWithSpace, collections);
             File.Copy(collectionInputFullName, collectionFullName, true);
             processFolder = GetOutputPath();
-            Param.ProgBase = GetSupportPath();
+			Common.ProgBase = GetSupportPath();
             BuildApplication();
             string actualFullName = Path.Combine(folderWithSpace, jarFile);
             string exepectedFullName = GetFileNameWithExpectedPath(jarFile);
