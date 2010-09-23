@@ -108,13 +108,13 @@ namespace SIL.PublishingSolution
             this.backupToolStripMenuItem,
             this.openFolderInWindowsExplorerToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(234, 224);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(245, 224);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.AccessibleName = "toolStripMenuItem4";
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(233, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(244, 22);
             this.toolStripMenuItem4.Text = "Add File";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
@@ -122,7 +122,7 @@ namespace SIL.PublishingSolution
             // 
             this.toolStripMenuItem6.AccessibleName = "toolStripMenuItem6";
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(233, 22);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(244, 22);
             this.toolStripMenuItem6.Text = "Add New Folder";
             this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
             // 
@@ -130,7 +130,7 @@ namespace SIL.PublishingSolution
             // 
             this.deleteToolStripMenuItem1.AccessibleName = "deleteToolStripMenuItem1";
             this.deleteToolStripMenuItem1.Name = "deleteToolStripMenuItem1";
-            this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(233, 22);
+            this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(244, 22);
             this.deleteToolStripMenuItem1.Text = "Delete";
             this.deleteToolStripMenuItem1.Click += new System.EventHandler(this.deleteToolStripMenuItem1_Click);
             // 
@@ -138,7 +138,7 @@ namespace SIL.PublishingSolution
             // 
             this.renameToolStripMenuItem1.AccessibleName = "renameToolStripMenuItem1";
             this.renameToolStripMenuItem1.Name = "renameToolStripMenuItem1";
-            this.renameToolStripMenuItem1.Size = new System.Drawing.Size(233, 22);
+            this.renameToolStripMenuItem1.Size = new System.Drawing.Size(244, 22);
             this.renameToolStripMenuItem1.Text = "Rename";
             this.renameToolStripMenuItem1.Click += new System.EventHandler(this.renameToolStripMenuItem1_Click_1);
             // 
@@ -146,7 +146,7 @@ namespace SIL.PublishingSolution
             // 
             this.excludeInProjectToolStripMenuItem.AccessibleName = "excludeInProjectToolStripMenuItem";
             this.excludeInProjectToolStripMenuItem.Name = "excludeInProjectToolStripMenuItem";
-            this.excludeInProjectToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.excludeInProjectToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.excludeInProjectToolStripMenuItem.Text = "Exclude from Project";
             this.excludeInProjectToolStripMenuItem.Click += new System.EventHandler(this.excludeInProjectToolStripMenuItem_Click_1);
             // 
@@ -154,7 +154,7 @@ namespace SIL.PublishingSolution
             // 
             this.includeInProjectToolStripMenuItem.AccessibleName = "includeInProjectToolStripMenuItem";
             this.includeInProjectToolStripMenuItem.Name = "includeInProjectToolStripMenuItem";
-            this.includeInProjectToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.includeInProjectToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.includeInProjectToolStripMenuItem.Text = "Include in Project";
             this.includeInProjectToolStripMenuItem.Click += new System.EventHandler(this.includeInProjectToolStripMenuItem_Click);
             // 
@@ -162,7 +162,7 @@ namespace SIL.PublishingSolution
             // 
             this.setAsDefaultCSSToolStripMenuItem.AccessibleName = "setAsDefaultCSSToolStripMenuItem";
             this.setAsDefaultCSSToolStripMenuItem.Name = "setAsDefaultCSSToolStripMenuItem";
-            this.setAsDefaultCSSToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.setAsDefaultCSSToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.setAsDefaultCSSToolStripMenuItem.Text = "Set as default ";
             this.setAsDefaultCSSToolStripMenuItem.Click += new System.EventHandler(this.setAsDefaultCSSToolStripMenuItem_Click);
             // 
@@ -170,7 +170,7 @@ namespace SIL.PublishingSolution
             // 
             this.addExistingFolderToolStripMenuItem.AccessibleName = "addExistingFolderToolStripMenuItem";
             this.addExistingFolderToolStripMenuItem.Name = "addExistingFolderToolStripMenuItem";
-            this.addExistingFolderToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.addExistingFolderToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.addExistingFolderToolStripMenuItem.Text = "Add Existing Folder";
             this.addExistingFolderToolStripMenuItem.Click += new System.EventHandler(this.addExistingFolderToolStripMenuItem_Click);
             // 
@@ -178,7 +178,7 @@ namespace SIL.PublishingSolution
             // 
             this.backupToolStripMenuItem.AccessibleName = "backupToolStripMenuItem";
             this.backupToolStripMenuItem.Name = "backupToolStripMenuItem";
-            this.backupToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.backupToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.backupToolStripMenuItem.Text = "Backup ";
             this.backupToolStripMenuItem.Click += new System.EventHandler(this.backupToolStripMenuItem_Click_1);
             // 
@@ -186,7 +186,7 @@ namespace SIL.PublishingSolution
             // 
             this.openFolderInWindowsExplorerToolStripMenuItem.AccessibleName = "openFolderInWindowsExplorerToolStripMenuItem";
             this.openFolderInWindowsExplorerToolStripMenuItem.Name = "openFolderInWindowsExplorerToolStripMenuItem";
-            this.openFolderInWindowsExplorerToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.openFolderInWindowsExplorerToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.openFolderInWindowsExplorerToolStripMenuItem.Text = "Open Folder in Windows Explorer";
             this.openFolderInWindowsExplorerToolStripMenuItem.Click += new System.EventHandler(this.openFolderInWindowsExplorerToolStripMenuItem_Click);
             // 
@@ -265,9 +265,9 @@ namespace SIL.PublishingSolution
             this.lblCaption.ForeColor = System.Drawing.Color.White;
             this.lblCaption.Location = new System.Drawing.Point(4, 6);
             this.lblCaption.Name = "lblCaption";
-            this.lblCaption.Size = new System.Drawing.Size(67, 18);
+            this.lblCaption.Size = new System.Drawing.Size(72, 18);
             this.lblCaption.TabIndex = 41;
-            this.lblCaption.Text = "ShowPreview";
+            this.lblCaption.Text = " Preview";
             // 
             // btnRefresh
             // 
@@ -314,7 +314,6 @@ namespace SIL.PublishingSolution
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(690, 556);
             this.tableLayoutPanel1.TabIndex = 44;
-            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
             // tableLayoutPanel3
             // 
@@ -446,7 +445,6 @@ namespace SIL.PublishingSolution
             this.PanelLeftTop.Name = "PanelLeftTop";
             this.PanelLeftTop.Size = new System.Drawing.Size(173, 351);
             this.PanelLeftTop.TabIndex = 43;
-            this.PanelLeftTop.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelLeftTop_Paint);
             // 
             // PanelTask
             // 

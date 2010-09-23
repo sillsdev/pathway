@@ -266,7 +266,7 @@ namespace SIL.PublishingSolution
             // 
             this.menuExcerptPreview.Name = "menuExcerptPreview";
             this.menuExcerptPreview.Size = new System.Drawing.Size(193, 22);
-            this.menuExcerptPreview.Text = "Excerpt ShowPreview";
+            this.menuExcerptPreview.Text = "Excerpt Preview";
             this.menuExcerptPreview.Click += new System.EventHandler(this.ExcerptPreview_Click);
             // 
             // filtersForLiftToolStripMenuItem

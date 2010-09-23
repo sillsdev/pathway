@@ -44,7 +44,7 @@ namespace SIL.PublishingSolution
         TreeNode _mySelectedNode;
 
         bool _cssEdited = false;
-        private string _backendPath = Common.PathCombine(Common.GetPSApplicationPath(), "BackEnds");
+		private string _backendPath = Common.ProgInstall;
         PublicationInformation _projectInfo = new PublicationInformation();
 
         private string _currentTask = string.Empty;
@@ -537,7 +537,7 @@ namespace SIL.PublishingSolution
             //TODO: Eliminate dependance on OpenOffice backend for project backup
             //ICssFonts cssFonts = Backend.CreateObject(Common.PathCombine(_backendPath, "OpenOfficeConvert.dll"), "SIL.PublishingSolution.StylesXML") as ICssFonts;
             //ArrayList fontList = cssFonts.GetFontList("BackupProcess", _projectInfo.DefaultCssFileWithPath);
-            CSSTree cssTree = new CSSTree();
+            CssTree cssTree = new CssTree();
             ArrayList fontList = cssTree.GetFontList(_projectInfo.DefaultCssFileWithPath);
             for (int i = 0; i < fontList.Count; i++)
             {
@@ -879,7 +879,7 @@ namespace SIL.PublishingSolution
         /// <param name="statusProgressBar"></param>
         public void Export(ProgressBar statusProgressBar)
         {
-            var cssTree = new CSSParser();
+            var cssTree = new CssParser();
 
             Common.Testing = false;
             _projectInfo.DictionaryOutputName = null;
@@ -893,10 +893,18 @@ namespace SIL.PublishingSolution
             if (verboseClass.ShowError)
             {
                 ShowErrorCSSFile(cssTree);
-                if(verboseClass.ErrorCount > 0)
+                if (verboseClass.ErrorCount > 0)
                 {
-                    
+
                 }
+            }
+            //if (_backendPath.Length == 0)
+            //{
+            //    _backendPath = Common.PathCombine(Common.GetPSApplicationPath(), "BackEnds");
+            //}
+            if (_backendPath.Length == 0)
+            {
+                _backendPath = Common.GetPSApplicationPath();
             }
 
             Backend.Load(_backendPath);
@@ -938,7 +946,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void ShowErrorCSSFile(CSSParser cssTree)
+        private void ShowErrorCSSFile(CssParser cssTree)
         {
             cssTree.GetErrorReport(_projectInfo.DefaultCssFileWithPath);
             //To show errors to user to edit and save the CSS file.
@@ -946,7 +954,7 @@ namespace SIL.PublishingSolution
             {
                 var errForm = new CSSError(cssTree.ErrorList, Path.GetDirectoryName(_projectInfo.DefaultCssFileWithPath));
                 errForm.ShowDialog();
-                cssTree = new CSSParser();
+                cssTree = new CssParser();
                 TreeNode node = cssTree.BuildTree(_projectInfo.DefaultCssFileWithPath);
             }
         }
@@ -1131,7 +1139,7 @@ namespace SIL.PublishingSolution
                 }
                 var uri = "file:///" + outputFileName.Replace(@"\", "/").Replace(":", "|");
                 webPreview.Navigate(uri);
-                lblCaption.Text = ProjectType + " ShowPreview";
+                lblCaption.Text = ProjectType + " Preview";
                 txtCSS.Visible = false;
                 webPreview.Visible = true;
             }
@@ -1212,11 +1220,6 @@ namespace SIL.PublishingSolution
             Common.SetFont(this);
         }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void btnShowAll_Click(object sender, EventArgs e)
         {
             _projectInfo.HideFileInExplorer = !_projectInfo.HideFileInExplorer;
@@ -1236,11 +1239,6 @@ namespace SIL.PublishingSolution
         private void BtnPublishingFile_Click(object sender, EventArgs e)
         {
             PanelShow(3);
-        }
-
-        private void PanelLeftTop_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void ShowPreivew(string type)
@@ -1285,7 +1283,7 @@ namespace SIL.PublishingSolution
             {
                 foreach (var iconName in taskIcon)
                 {
-                    var icon = new Bitmap(Param.FromProg(iconName));
+					var icon = new Bitmap(Common.FromRegistry(iconName));
                     imageListTask.Images.Add(icon);
                 }
             }

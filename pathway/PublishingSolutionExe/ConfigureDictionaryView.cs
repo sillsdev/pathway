@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Xml;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
+using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
     public partial class ConfigureDictionaryView : Form
     {
-        private XmlTextWriter writer = new XmlTextWriter("c:\\UserDictionaryView.xml", null);
+        private static readonly string WriterFullName = Common.GetAllUserPath() + @"\UserDictionaryView.xml";
+        private readonly XmlTextWriter Writer = new XmlTextWriter(WriterFullName, null);
         
         public ConfigureDictionaryView()
         {
@@ -279,13 +275,13 @@ namespace SIL.PublishingSolution
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            writer.WriteRaw("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-            writer.WriteStartElement("Main_Entry");
+            Writer.WriteRaw("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+            Writer.WriteStartElement("Main_Entry");
             TreeNode mainNode = tvConfigure.Nodes[0];
             GetNodeList(mainNode);
-            writer.WriteEndElement();
-            writer.Flush();
-            writer.Close();
+            Writer.WriteEndElement();
+            Writer.Flush();
+            Writer.Close();
 
         }
      
@@ -293,9 +289,9 @@ namespace SIL.PublishingSolution
         {
             foreach (TreeNode firstLevel in mainNode.Nodes)
             {
-                writer.WriteStartElement(ApplyUnderscoreforSymbols(firstLevel.Text));
+                Writer.WriteStartElement(ApplyUnderscoreforSymbols(firstLevel.Text));
                 GetNodeNames(firstLevel);
-                writer.WriteEndElement();
+                Writer.WriteEndElement();
             }
         }
 
@@ -303,12 +299,12 @@ namespace SIL.PublishingSolution
         {
             foreach (TreeNode secondLevel in node.Nodes)
             {
-                writer.WriteStartElement(ApplyUnderscoreforSymbols(secondLevel.Text));
+                Writer.WriteStartElement(ApplyUnderscoreforSymbols(secondLevel.Text));
                 if (secondLevel.FirstNode != null)
                 {
                     GetNodeNames(secondLevel);
                 }
-                writer.WriteEndElement();
+                Writer.WriteEndElement();
             }
         }
 

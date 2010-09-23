@@ -76,7 +76,7 @@ namespace SIL.PublishingSolution
         private void Template_Load(object sender, EventArgs e)
         {
             LocDB.Localize(this, null);     // Form Controls
-            _supportFolder = Param.FromProg(@"Template/" + _projectType);
+			_supportFolder = Common.FromRegistry(@"Template/" + _projectType);
             string[] fileName = Directory.GetFiles(_supportFolder, "*.css");
             foreach (string fName in fileName)
             {

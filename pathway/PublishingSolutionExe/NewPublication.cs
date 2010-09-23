@@ -86,7 +86,7 @@ namespace SIL.PublishingSolution
             txtLocation.Text = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 
             // load CSS Templates
-            _supportFolder = Param.FromProg("Template");
+			_supportFolder = Common.FromRegistry("Template");
             lstSourceCSS.Items.Add("Blank");
         }
 

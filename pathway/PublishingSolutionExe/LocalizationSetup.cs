@@ -175,7 +175,7 @@ namespace SIL.PublishingSolution
 
         }
         /// <summary>
-        /// Gets the Gloabal Font Size and Font Name from styleSettings.xml
+        /// Gets the Gloabal Font Size and Font Name from StyleSettings.xml
         /// </summary>
         public static void GetFontNameSizeFromLoc(string language)
         {
@@ -212,7 +212,7 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// Gets the Gloabal Font Size and Font Name from styleSettings.xml
+        /// Gets the Gloabal Font Size and Font Name from StyleSettings.xml
         /// </summary>
         public static void SetFontNameSizeLoc(Font newFont, string language)
         {

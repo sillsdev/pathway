@@ -164,7 +164,7 @@ namespace SIL.PublishingSolution
                 ImageList imageList = new ImageList { ImageSize = new Size(32, 32) };
                 foreach (var iconName in roleIcon)
                 {
-                    var icon = new Bitmap(Param.FromProg(iconName));
+					var icon = new Bitmap(Common.FromRegistry(iconName));
                     imageList.Images.Add(icon);
                 }
             }
@@ -309,7 +309,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void menuReleaseNotes_Click(object sender, EventArgs e)
         {
-            SubProcess.Run(Param.FromProg("Help"), "SetupPs.rtf", false);
+			SubProcess.Run(Common.FromRegistry("Help"), "SetupPs.rtf", false);
         }
 
         /// <summary>
@@ -737,7 +737,7 @@ namespace SIL.PublishingSolution
         private void ExcerptPreview_Click(object sender, EventArgs e)
         {
             menuExcerptPreview.Checked = !menuExcerptPreview.Checked;
-            string previewText = "ShowPreview : ";
+            string previewText = "Preview : ";
                 if(menuExcerptPreview.Checked)
                 {
                     previewText += "Excerpt";
