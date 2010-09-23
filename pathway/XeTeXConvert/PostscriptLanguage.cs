@@ -13,7 +13,7 @@
 // Manage a list of postscript fonts for XeTeX
 // </remarks>
 // --------------------------------------------------------------------------------------------
-
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -28,7 +28,7 @@ namespace SIL.PublishingSolution
         protected ArrayList _graphite = new ArrayList(_numFonts);
         protected Dictionary<string, string> _class2postscript = new Dictionary<string, string>();
         protected Dictionary<string, string> _lang2class = new Dictionary<string, string>();
-        private const string PartialCachePath = "DEXCTX/miniCTX/texmf-mswin/fonts/cache";
+        private const string PartialCachePath = "/PwCtx/miniCTX/texmf-mswin/fonts/cache";
 
         public PostscriptLanguage()
         {
@@ -105,7 +105,7 @@ namespace SIL.PublishingSolution
 
         public void SaveCache()
         {
-            var sourceDir = Common.PathCombine(Path.GetTempPath(), PartialCachePath);
+            var sourceDir = Common.PathCombine(Environment.GetEnvironmentVariable("SystemDrive"), PartialCachePath);
             var destinationDir = Common.PathCombine(Common.GetAllUserPath(), "cache/" + GetAllFontNames());
             if (!Directory.Exists(destinationDir))
                 FolderTree.Copy(sourceDir,destinationDir);
@@ -116,7 +116,7 @@ namespace SIL.PublishingSolution
             var sourceDir = Common.PathCombine(Common.GetAllUserPath(), "cache/" + GetAllFontNames());
             if (!Directory.Exists(sourceDir))
                 return;
-            var destinationDir = Common.PathCombine(Path.GetTempPath(), PartialCachePath);
+            var destinationDir = Common.PathCombine(Environment.GetEnvironmentVariable("SystemDrive"), PartialCachePath);
             FolderTree.Copy(sourceDir, destinationDir);
         }
 

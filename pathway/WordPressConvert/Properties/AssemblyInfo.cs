@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("PdfConvert")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("WordPressConvert")]
+[assembly: AssemblyDescription("Convert XHTML into wordpress web site")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("sudyk")]
-[assembly: AssemblyProduct("PdfConvert")]
-[assembly: AssemblyCopyright("Copyright © sudyk 2009")]
+[assembly: AssemblyCompany("SIL International")]
+[assembly: AssemblyProduct("WordPressConvert")]
+[assembly: AssemblyCopyright("Copyright ©  2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("497f9b31-025b-42d6-84fa-da6cd7335b38")]
+[assembly: Guid("ab6aec59-01a5-4c12-8d7a-193d6b701ffa")]
 
 // Version information for an assembly consists of the following four values:
 //

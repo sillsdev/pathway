@@ -1,0 +1,44 @@
+If you don't already have a web site, you can set up a site at one of these links:
+http://000space.com/ (paid for by advertizing)
+http://www.000webhost.com/ (paid for by advertizing)
+http://www.godaddy.com/hosting/web-hosting.aspx (charges a nominal fee)
+
+(If you would rather set it up on a local machine (not on the internet) or set up a Windows machine to serve the pages in a local area network, you could use XAMPP from http://sourceforge.net/projects/xampp/
+Note that XAMPP should be started before skype if they are both to run on the same computer because skype will prevent XAMPP from running)
+
+Instructions on installing WordPress given here:
+http://codex.wordpress.org/Installing_WordPress
+
+Then click the plugins, add new on the side bar
+type Tinymce in the search box and install TinyMCE Advanced.
+Activate the TinyMCE advance plugin
+select Settings from the side bar and then TinyMCE Advanced.
+Drag the 'View HTML' icon to the bar in the middle of the screen
+Save Changes
+Click Appearance and then Add a new Theme
+Choose the Techozoic theme
+Install it.
+Make any other desired changes to the look and feel
+you will want to click Pages and then edit the About page to describe your publication
+You may want to add pages for the front matter (grammar description, etc)
+You may want a page on how to user this web site including links to any fonts that should be downloaded and installed and any keyboards that need to be set up.
+
+You can search for fonts at
+scripts.sil.org
+www.scriptureearth.org
+http://veerasundar.com/blog/2009/10/firefox-3-6-to-support-web-open-font-format/
+
+Some keyboards are discribed at these links:
+http://googleblog.blogspot.com/2010/04/integrating-virtual-keyboards-in-google.html
+http://www.arabic-keyboard.org/
+http://www.lexilogos.com/keyboard/index.htm
+
+go back to phpMyAdmin
+select the database (wordpress for example)
+export as wordpress.sql
+(it is useful to have an empty copy of the database)
+import data.sql
+import term.sql
+load site by typing into browser http://localhost/wordpress
+(replace localhost with your host's url -- ex. www.cnec-edu.org)
+You should see the data on the site.

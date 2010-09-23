@@ -1,0 +1,92 @@
+.tableRow {
+    border-style: dashed;
+	border-width: 0;
+    border-bottom-width: thin;
+    border-color: black;
+    background-color: maroon;
+	color: white;
+}
+.tableRowIMM {
+    border-style: dashed;
+	border-width: 0;
+    border-bottom-width: thin;
+    border-color: black;
+    background-color: #CCFFCC;
+	color: black;
+}
+.tableRowINC {
+    border-style: dashed;
+	border-width: 0;
+    border-bottom-width: thin;
+    border-color: black;
+    background-color: #CCFFFF;
+	color: black;
+}
+.tableRowDVN {
+    border-style: dashed;
+	border-width: 0;
+    border-bottom-width: thin;
+    border-color: black;
+    background-color: #FFFF99;
+	color: black;
+}
+.tableRowPRC {
+    border-style: dashed;
+	border-width: 0;
+    border-bottom-width: thin;
+    border-color: black;
+    background-color: #90713A;
+	color: white;
+}
+.tableRowCMP {
+    border-style: dashed;
+	border-width: 0;
+    border-bottom-width: thin;
+    border-color: black;
+	background-color: black;
+	color: white;
+}
+.tableRowPL {
+    border-style: dashed;
+	border-width: 0;
+    border-bottom-width: thin;
+    border-color: black;
+    background-color: #A9A9A9;
+	color: white;
+}
+.col1head {
+    text-align: center;
+    border: medium none white;
+    border-right: medium solid white;
+    background-color: #708090;
+    color: black;
+	width: 20%;
+}
+.col2head {
+    text-align: center;
+    background-color: #708090;
+    color: black;
+	width: 35%;
+}
+.col1data {
+    text-align: left;
+    border: medium none white;
+    border-right: medium solid white;
+	width: 20%;
+}
+.col2data {
+    text-align: left;
+	width: 35%;
+}
+.txBox {
+    width: 95%;
+}
+.syll { font-size: 12pt; line-height: 14pt; }
+.exam { font-size: 12pt; line-height: 14pt; }
+.tran { font-size: 12pt; line-height: 14pt; }
+.stemhd { font-size: 12pt; line-height: 14pt; }
+.glo { font-size: 12pt; line-height: 14pt; }
+.def { font-size: 12pt; line-height: 14pt; }
+.arr { font-size: 12pt; line-height: 14pt; }
+.stm { font-size: 12pt; line-height: 14pt; }
+.partsp { font-size: 12pt; line-height: 14pt; font-style: italic; }

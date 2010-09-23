@@ -1,0 +1,15 @@
+<!-- Example-tpl.htm - snippet for additional examples -->
+  <tr>
+    <td class="col1data">
+<!-- input type="Text" name="example" value="%(AddExample)s" class="txBox" / -->
+<span class="syll">%(AddForm)s</span>
+	</td>
+    <td class="col2data">
+<!-- input type="Text" name="example" value="%(AddExample)s" class="txBox" / -->
+<span class="exam">%(AddExample)s</span>
+    </td>
+    <td class="col2data">
+<!-- input type="Text" name="example" value="%(AddTranslation)s" class="txBox" / -->
+<span class="tran">%(AddTranslation)s</span>
+    </td>
+  </tr>

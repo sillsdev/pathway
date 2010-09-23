@@ -55,6 +55,10 @@ namespace SIL.PublishingSolution
             {
                 returnValue = true;
             }
+            if (!Directory.Exists(Path.Combine(Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System)), "PwCtx/miniRuby")))
+            {
+                returnValue = false;
+            }
             return returnValue;
         }
         #endregion bool Handle(string inputDataType)
@@ -99,7 +103,7 @@ namespace SIL.PublishingSolution
                 if (!Common.Testing)
                 {
                     SubProcess.Run(xetexToolFolder, "startXPWtool.bat");
-                    File.Copy(Common.PathCombine(xetexToolFolder, "XPWtool.PDF"), fileName + ".PDF", true);
+                    File.Copy(Common.PathCombine(xetexToolFolder, "XPWtool.pdf"), fileName + ".pdf", true);
                     _postscriptLanguage.SaveCache();
                     Process.Start(fileName + ".pdf");
                 }
@@ -127,61 +131,41 @@ namespace SIL.PublishingSolution
             string align = "left";
             bool rtl = false;
             string pageSize = "letter";
-            //try
-            //{
-                CSSTree cssTree = new CSSTree();
-                Dictionary<string, Dictionary<string, string>> cssProperty = cssTree.CreateCssProperty(data.ProcessedCss, true);
-                if (_inputType == "dictionary")
+            CssTree cssTree = new CssTree();
+            Dictionary<string, Dictionary<string, string>> cssProperty = cssTree.CreateCssProperty(data.ProcessedCss, true);
+            if (_inputType == "dictionary")
+            {
+                if (cssProperty.ContainsKey("entry") && cssProperty["entry"].ContainsKey("font-size"))
+                    fontSize = cssProperty["entry"]["font-size"];
+                _postscriptLanguage.ClassPostscriptName("letter", "Regular", cssProperty);
+                if (cssProperty.ContainsKey("@page") && cssProperty["@page"].ContainsKey("page-width") && cssProperty["@page"].ContainsKey("page-height"))
                 {
-                    if (cssProperty.ContainsKey("entry") && cssProperty["entry"].ContainsKey("font-size"))
-                        fontSize = cssProperty["entry"]["font-size"];
-                    _postscriptLanguage.ClassPostscriptName("letter", "Regular", cssProperty);
-                    if (cssProperty.ContainsKey("@page") && cssProperty["@page"].ContainsKey("page-width") && cssProperty["@page"].ContainsKey("page-height"))
-                    {
-                        string pageDimensions = cssProperty["@page"]["page-width"] + "x" + cssProperty["@page"]["page-height"];
-                        pageSize = cssTree.PageSize(pageDimensions);
-                    }
-                    if (cssProperty.ContainsKey("letData"))
-                        columns = cssProperty["letData"]["column-count"];
-                    if (cssProperty.ContainsKey("entry"))
-                        align = cssProperty["entry"]["text-align"];
-                }
-                else
-                {
-                    fontSize = cssProperty["Paragraph"]["font-size"];
-                    _postscriptLanguage.ClassPostscriptName("Paragraph", "Regular", cssProperty);
-                    string pageDimensions = cssProperty["@page"]["width"] + "x" + cssProperty["@page"]["height"];
+                    string pageDimensions = cssProperty["@page"]["page-width"] + "x" + cssProperty["@page"]["page-height"];
                     pageSize = cssTree.PageSize(pageDimensions);
-                    columns = cssProperty["columns"]["column-count"];
-                    align = cssProperty["scrSection"]["text-align"];
-                    rtl = cssProperty["Paragraph"].ContainsKey("direction");
-                    if (rtl && cssProperty["Paragraph"]["direction"] != "rtl")
+                }
+                if (cssProperty.ContainsKey("letData"))
+                    columns = cssProperty["letData"]["column-count"];
+                if (cssProperty.ContainsKey("entry"))
+                {
+                    align = cssProperty["entry"]["text-align"];
+                    rtl = cssProperty["entry"].ContainsKey("direction");
+                    if (rtl && cssProperty["entry"]["direction"] != "rtl")
                         rtl = false;
                 }
+            }
+            else
+            {
+                fontSize = cssProperty["Paragraph"]["font-size"];
+                _postscriptLanguage.ClassPostscriptName("Paragraph", "Regular", cssProperty);
+                string pageDimensions = cssProperty["@page"]["width"] + "x" + cssProperty["@page"]["height"];
+                pageSize = cssTree.PageSize(pageDimensions);
+                columns = cssProperty["columns"]["column-count"];
+                align = cssProperty["scrSection"]["text-align"];
+                rtl = cssProperty["Paragraph"].ContainsKey("direction");
+                if (rtl && cssProperty["Paragraph"]["direction"] != "rtl")
+                    rtl = false;
+            }
             _postscriptLanguage.AccumulatePostscriptNames(cssProperty);
-            //foreach (string selector in cssProperty.Keys)
-            //{
-            //    if (selector.Substring(0,1) != "@")
-            //    {
-
-            //    }
-            //    else if (selector.EndsWith("..before"))
-            //    {
-
-            //    }
-            //    else if (selector.EndsWith("..after"))
-            //    {
-
-            //    }
-            //    else
-            //    {
-
-            //    }
-            //}
-            //}
-            //catch
-            //{
-            //}
             var sub = new Substitution { TargetPath = dataPath };
             var map = new Dictionary<string, string>();
             map["Font2"] = _postscriptLanguage.TexFont(2);
@@ -213,7 +197,7 @@ namespace SIL.PublishingSolution
         protected void CreateTexInput(string processedXhtml, string fileName, string dataPath)
         {
             string xslTemplateName = _inputType == "dictionary" ? "pxhtml2xpw-dict.xsl" : "pxhtml2xpw-scr.xsl";
-            string xsltFullName = Param.FromProg(xslTemplateName);
+			string xsltFullName = Common.FromRegistry(xslTemplateName);
             var xsltMap = new Dictionary<string, string>();
             LoadLanguage(processedXhtml, xsltMap);
             Common.XsltProcess(processedXhtml, xsltFullName, ".txt", xsltMap);
@@ -234,7 +218,7 @@ namespace SIL.PublishingSolution
             var folder = Path.Combine(tempFolder, name);
             if (Directory.Exists(folder))
                 Directory.Delete(folder, true);
-            FolderTree.Copy(Param.FromProg(name), folder);
+			FolderTree.Copy(Common.FromRegistry(name), folder);
             return folder;
         }
         #endregion string GetXeTeXToolFolder()
@@ -270,7 +254,7 @@ namespace SIL.PublishingSolution
         /// <param name="deToolFolder">folder for XPWtool</param>
         protected static void SetupStartScript(string deToolFolder)
         {
-            var xCtxFolder = GetTempCopy("DEXCTX");
+            var xCtxFolder = Common.PathCombine(Environment.GetEnvironmentVariable("SystemDrive"), "/PwCtx"); ;
             _postscriptLanguage.RestoreCache();
             var sub = new Substitution { TargetPath = deToolFolder };
             var map = new Dictionary<string, string>();
