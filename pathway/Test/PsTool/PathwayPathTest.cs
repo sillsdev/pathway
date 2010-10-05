@@ -45,7 +45,7 @@ namespace Test.PsTool
         public void GetPathwayDirTest()
         {
             string actual = PathwayPath.GetPathwayDir();
-            Assert.IsTrue(actual.Contains("ReSharper") || actual.Contains("NUnit"));
+            Assert.IsTrue(actual.Replace(" (x86)", "") == @"C:\Program Files\SIL\Pathway7\" || actual.Contains("ReSharper") || actual.Contains("NUnit"));
         }
     }
 }

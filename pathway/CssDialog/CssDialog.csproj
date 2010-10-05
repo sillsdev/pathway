@@ -129,7 +129,6 @@
     <Compile Include="MergeCss.cs" />
     <Compile Include="Param.cs" />
     <Compile Include="Pdf.cs" />
-    <Compile Include="PdftoJpg.cs" />
     <Compile Include="PopupForm.cs">
       <SubType>Form</SubType>
     </Compile>

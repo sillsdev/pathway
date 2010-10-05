@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\ConfigurationTool\Palaso.dll" ComponentGuid="FDC5701D-0080-4E3F-A5D5-C0F067F9C2C3"/>
+	<File Path="Files\ConfigurationTool\icu.net.dll" ComponentGuid="032646B7-57DC-462E-B8B4-E40256D0798E"/>
 	<File Path="Files\PwCtx\miniCTX\texmf-mswin\fonts\cache\x.txt" ComponentGuid="CD09B014-C058-40AD-8B73-863421E38FFB"/>
 	<File Path="Files\PwCtx\miniRuby\lib\ruby\1.9.1\rubygems\custom_require.rb" ComponentGuid="9D6084BF-F0E2-4C8B-82F4-A35B56DBF878"/>
 	<File Path="Files\PwCtx\miniRuby\lib\ruby\1.9.1\i386-mingw32\socket.so" ComponentGuid="7D6E097D-C6AB-4530-878C-DC71FD3752FE"/>

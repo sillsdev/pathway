@@ -16,6 +16,7 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
+using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -38,6 +39,7 @@ namespace SIL.PublishingSolution
         DictionarySetting _ds = new DictionarySetting();
         //        DataSet _dataSet = new DataSet();
         UndoRedo _redoundo;
+        private bool _isCreatePreview = false;
         private string _caption = _configurationToolBL.Caption;
         private string _redoUndoBufferValue = string.Empty;
         // Undo Redo
@@ -53,15 +55,18 @@ namespace SIL.PublishingSolution
         private readonly string InputType;
         private readonly string MediaTypeEXE;
         private readonly string StyleEXE;
+        private string _lastSelectedLayout = string.Empty;
         //private string _configurationToolBL.StyleName;
         private string _selectedStyle;
         TabPage tabdic = new TabPage();
         TabPage tabmob = new TabPage();
+        private TraceSwitch _traceOn = new TraceSwitch("General", "Trace level for application");
         #endregion
 
         #region Constructor
         public ConfigurationTool(string inputType, string mediaType, string style)
         {
+            Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool Constructor");
             InitializeComponent();
             InputType = inputType;
             MediaTypeEXE = mediaType;
@@ -72,8 +77,9 @@ namespace SIL.PublishingSolution
         #region Control Events
         private void ConfigurationTool_Load(object sender, EventArgs e)
         {
-            try
-            {
+            Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool_Load");
+            //try
+            //{
                 tabdic = tabControl1.TabPages[1];
                 tabmob = tabControl1.TabPages[2];
                 tabControl1.TabPages.Remove(tabControl1.TabPages[2]);
@@ -102,11 +108,11 @@ namespace SIL.PublishingSolution
                 //For the task TD-1481
                 btnWeb.Enabled = false;
                 btnOthers.Enabled = false;
-            }
-            catch(Exception ex)
-            {
-                string ss = ex.Message;
-            }
+            //}
+            //catch(Exception ex)
+            //{
+            //    string ss = ex.Message;
+            //}
         }
 
         /// <summary>
@@ -115,6 +121,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void SetMediaType()
         {
+            Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool: SetMediaType");
             try
             {
                 if (MediaTypeEXE.Length != 0)
@@ -136,9 +143,10 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void LoadSettings()
         {
+            Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool: LoadSettings");
             //Note: Configuration tool can run by two ways
             //Note: 1 -  Standalone Application
-            //Note: 2 -  The ConfigurationTool.EXE is called by PrintVia dialog from FLEX.
+            //Note: 2 -  The ConfigurationTool.EXE is called by PrintVia dialog from FLEX.);
             if (InputType.Length == 0)
             {
                 //It will call when the Configtool from Application
@@ -180,6 +188,7 @@ namespace SIL.PublishingSolution
                 bool isValid = Validator.ValidateSettingsFile(filePath, false);
                 if (!isValid)
                 {
+                    _lastSelectedLayout = Param.Value["LayoutSelected"];
                     this.Close();
                 }
             }
@@ -188,6 +197,7 @@ namespace SIL.PublishingSolution
 
         private void SetInputTypeButton()
         {
+            Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool: SetInputTypeButton");
             if (_configurationToolBL.InputType.ToLower() == "scripture")
             {
                 btnScripture.BackColor = _selectedColor;
@@ -220,7 +230,7 @@ namespace SIL.PublishingSolution
                 //_redoundo.Set(Common.Action.Delete, _configurationToolBL.StyleName, null, "", string.Empty);
                 if (_configurationToolBL.SelectedRowIndex >= 0)
                 {
-                    string selectedTypeValue = stylesGrid[_configurationToolBL.ColumnType, _configurationToolBL.SelectedRowIndex].Value.ToString().ToLower();
+                    string selectedTypeValue = stylesGrid[_configurationToolBL.ColumnType, _configurationToolBL.SelectedRowIndex].Value.ToString();
                     if (selectedTypeValue != _configurationToolBL.TypeStandard)
                     {
                         _cssNames.Remove(_configurationToolBL.StyleName);
@@ -244,6 +254,8 @@ namespace SIL.PublishingSolution
                 }
             }
             catch { }
+            _configurationToolBL.PreviousStyleName =
+                stylesGrid.Rows[_configurationToolBL.SelectedRowIndex].Cells[0].Value.ToString();
         }
 
         private void tsSend_Click(object sender, EventArgs e)
@@ -357,6 +369,7 @@ namespace SIL.PublishingSolution
 
         private void SetFocusToName()
         {
+            Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool: SetFocusToName");
             tabControl1.SelectedTab = tabControl1.TabPages[0];
             txtName.Focus();
         }
@@ -364,7 +377,8 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                var dlg = new PrintVia("Set Defaults");
+                //var dlg = new PrintVia("Set Defaults");
+                var dlg = new PrintVia();
                 dlg.InputType = _configurationToolBL.InputType;
                 dlg.DatabaseName = "{Project_Name}";
                 dlg.Media = _configurationToolBL.MediaType;
@@ -376,6 +390,7 @@ namespace SIL.PublishingSolution
         
         private void ShowDataInGrid()
         {
+            Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool: ShowDataInGrid");
             _selectedStyle = Param.Value["LayoutSelected"];
             _redoundo.SettingOutputPath = Param.SettingOutputPath;
             tabControl1.SelectedTab = tabControl1.TabPages[0];
@@ -533,6 +548,7 @@ namespace SIL.PublishingSolution
         /// </summary
         private void SetInfoTabValue()
         {
+            Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool: SetInfoTabValue");
             if (stylesGrid.RowCount > 0)
             {
                 //try
@@ -631,6 +647,7 @@ namespace SIL.PublishingSolution
             catch
             {
             }
+            _isCreatePreview = false;
         }
 
         ///// <summary>
@@ -650,6 +667,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void PopulateFeatureSheet()
         {
+            Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool: PopulateFeatureSheet");
             TreeView TvFeatures = new TreeView();
             _configurationToolBL.PopulateFeatureLists(TvFeatures);
             try
@@ -776,10 +794,14 @@ namespace SIL.PublishingSolution
 
         private void EnableToolStripButtons(bool enable)
         {
-            tsNew.Enabled = enable;
-            tsDelete.Enabled = enable;
-            tsSaveAs.Enabled = enable;
-            //tsPreview.Enabled = true;
+            string selectedTypeValue = stylesGrid[_configurationToolBL.ColumnType, _configurationToolBL.SelectedRowIndex].Value.ToString();
+            if (selectedTypeValue != _configurationToolBL.TypeStandard)
+            {
+                tsNew.Enabled = enable;
+                tsDelete.Enabled = enable;
+                tsSaveAs.Enabled = enable;
+                //tsPreview.Enabled = true;
+            }
         }
 
         /// <summary>
@@ -911,7 +933,10 @@ namespace SIL.PublishingSolution
         private void setLastSelectedLayout()
         {
             //Check and move
-            Param.SetValue(Param.LayoutSelected, txtName.Text); // last layout
+            string layoutName = txtName.Text;
+            if (layoutName.Length == 0)
+                layoutName = _lastSelectedLayout;
+            Param.SetValue(Param.LayoutSelected, layoutName); // last layout
             Param.Write();
         }
         private void btnDictionary_Click(object sender, EventArgs e)
@@ -1118,22 +1143,24 @@ namespace SIL.PublishingSolution
         {
             string result = string.Empty;
             bool valid = true;
-            if (!Common.ValidateStartsWithAlphabet(stringValue))
+            //if (!Common.ValidateStartsWithAlphabet(stringValue))
+            //{
+            //    result = "Please enter the Style name starts with alphabet";
+            //}
+            //else
+            //{
+
+            foreach (char ch in stringValue)
             {
-                result = "Please enter the Style name starts with alphabet";
-            }
-            else
-            {
-                foreach (char ch in stringValue)
+                if (!(ch == '-' || ch == '_' || ch == ' ' || ch == '.' || ch == '(' || ch == ')' ||
+                    (ch >= 48 && ch <= 57) || (ch >= 65 && ch <= 90) || (ch >= 97 && ch <= 122)))
                 {
-                    if (!(ch == '-' || ch == '_' || ch == ' ' || ch == '.' || ch == '(' || ch == ')' ||
-                        (ch >= 48 && ch <= 57) || (ch >= 65 && ch <= 90) || (ch >= 97 && ch <= 122)))
-                    {
-                        result = "Please avoid " + ch + " in the Style name";
-                        break;
-                    }
+                    result = "Please avoid " + ch + " in the Style name";
+                    break;
                 }
             }
+   
+            //}
             if (result != string.Empty)
             {
                 MessageBox.Show(result, _caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1488,6 +1515,7 @@ namespace SIL.PublishingSolution
 
         private void Set(object sender, EventArgs e)
         {
+            _isCreatePreview = true;
             SetStyleSummary();
         }
 
@@ -1544,6 +1572,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
+                _isCreatePreview = false;
                 if (!_configurationToolBL.AddMode)
                 {
                     _configurationToolBL.SelectedRowIndex = e.RowIndex;
@@ -1648,6 +1677,15 @@ namespace SIL.PublishingSolution
         {
             try
             {
+                string fileName = string.Empty;
+                //if (_isCreatePreview)
+                {
+                    string cssFile = Param.StylePath(_configurationToolBL.FileName);
+                    PdftoJpg pd = new PdftoJpg();
+                    fileName = pd.ConvertPdftoJpg(cssFile, true);
+                    //return;
+                }
+
                 string settingPath = Path.GetDirectoryName(Param.SettingPath);
                 string inputPath = Common.PathCombine(settingPath, "Styles");
                 inputPath = Common.PathCombine(inputPath, Param.Value["InputType"]);
@@ -1656,19 +1694,10 @@ namespace SIL.PublishingSolution
                 String imageFile = Common.PathCombine(stylenamePath, _configurationToolBL.PreviewFileName1);
                 String imageFile1 = Common.PathCombine(stylenamePath, _configurationToolBL.PreviewFileName2);
 
-                //Preview_PDF_Export(inputPath); // To Generate PDF files
-                //return;
-
-
                 if (!(File.Exists(imageFile) && File.Exists(imageFile1)))
                 {
-                    //string path = Param.StylePath(txtName.Text);
-                    string cssFile = Param.StylePath(_configurationToolBL.FileName); //Path.Combine(inputPath, _configurationToolBL.FileName);
-                    PdftoJpg pd = new PdftoJpg();
-                    pd.ConvertPdftoJpg(cssFile,true);
-
-                    imageFile = Path.Combine(Path.GetTempPath(), "Preview.pdf1.jpg");
-                    imageFile1 = Path.Combine(Path.GetTempPath(), "Preview.pdf2.jpg");
+                    imageFile = Common.PathCombine(Common.GetAllUserPath(), Path.GetFileNameWithoutExtension(fileName) + ".pdf1.jpg");
+                    imageFile1 = Common.PathCombine(Common.GetAllUserPath(), Path.GetFileNameWithoutExtension(fileName) + ".pdf2.jpg");
                 }
                 if (!File.Exists(imageFile))
                 {
@@ -1687,6 +1716,14 @@ namespace SIL.PublishingSolution
                                                 };
                     preview.Icon = this.Icon;
                     preview.ShowDialog();
+                }
+                string xPath = "//styles/" + _configurationToolBL.MediaType + "/style[@name='" + _configurationToolBL.StyleName + "']";
+                XmlNode baseNode = Param.GetItem(xPath);
+                if (baseNode != null)
+                {
+                    Param.SetAttrValue(baseNode,"previewfile1",imageFile);
+                    Param.SetAttrValue(baseNode, "previewfile2", imageFile1);
+                    Param.Write();
                 }
             }
             catch { }

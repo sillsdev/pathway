@@ -97,7 +97,10 @@ namespace SIL.PublishingSolution
 			{
 				RegistryKey softwareKey = Registry.LocalMachine.OpenSubKey("Software");
 				Debug.Assert(softwareKey != null);
-				return softwareKey.OpenSubKey("SIL");
+				var silKey = softwareKey.OpenSubKey("SIL");
+                if (silKey == null)
+                    silKey = softwareKey.OpenSubKey(@"Wow6432Node\SIL");
+			    return silKey;
 			}
 		}
 

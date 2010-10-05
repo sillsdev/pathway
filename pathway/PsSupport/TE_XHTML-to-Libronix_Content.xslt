@@ -24,7 +24,7 @@
 	<!-- Collection of book names from the given file. -->
 	<xsl:variable name="scrBookNames" select="//xhtml:body[@class='scrBody']/xhtml:div[@class='scrBook']/xhtml:span[@class='scrBookName']"/>
 
-	<!-- ToDo: [Steve] Modify TE export to XHTML to include the Book Code for a given Bible book.
+	<!-- ToDo: [TE team] Modify TE export to XHTML to include the Book Code for a given Bible book.
 		See "New Testament book codes" in the help files for FW Translation Editor. Also for Old Testament book codes. -->
 	<xsl:template name="getBookNumberFromCode">
 		<xsl:param name="bookCode"/>
@@ -550,13 +550,13 @@ A method of getting the book code for a given reference, provided the reference 
 						</xsl:call-template>
 					</xsl:when> <!-- contains($substringBeforeSemicolon,',') -->
 					<xsl:otherwise>
-						<!-- Only make a <data> element if the book abbrev is not empty. -->
+						<!-- Only make a <jump> element if the book abbrev is not empty. -->
 						<xsl:choose>
 							<xsl:when test="string-length($bookAbbrev) > 0">
-								<xsl:element name="data">
+								<xsl:element name="jump">
 									<xsl:attribute name="ref">
 										<xsl:text>Bible:</xsl:text>
-										<!-- TODO: use bookAbbrev if available. -->
+										<!-- Use bookAbbrev if available. -->
 										<xsl:choose>
 											<xsl:when test="string-length($bookAbbrev)>0">
 												<xsl:value-of select="$bookAbbrev"/>
@@ -575,7 +575,7 @@ A method of getting the book code for a given reference, provided the reference 
 										</xsl:choose>
 									</xsl:attribute> <!-- ref -->
 									<xsl:value-of select="substring-before($refString,';')"/>
-								</xsl:element> <!-- data -->
+								</xsl:element> <!-- jump -->
 							</xsl:when> <!-- string-length($bookAbbrev) > 0 -->
 							<xsl:otherwise>
 								<xsl:value-of select="substring-before($refString,';')"/>
@@ -633,13 +633,13 @@ A method of getting the book code for a given reference, provided the reference 
 						</xsl:call-template>
 					</xsl:when>
 					<xsl:otherwise>
-						<!-- Only make a <data> element if the book abbrev is not empty. -->
+						<!-- Only make a <jump> element if the book abbrev is not empty. -->
 						<xsl:choose>
 							<xsl:when test="string-length($bookAbbrev) > 0">
-								<xsl:element name="data">
+								<xsl:element name="jump">
 									<xsl:attribute name="ref">
 										<xsl:text>Bible:</xsl:text>
-										<!-- TODO: use bookAbbrev if available. -->
+										<!-- Use bookAbbrev if available. -->
 										<xsl:variable name="chaptVerseString">
 											<xsl:choose>
 												<xsl:when test="string-length($bookAbbrev)>0">
@@ -658,7 +658,7 @@ A method of getting the book code for a given reference, provided the reference 
 										</xsl:call-template>
 									</xsl:attribute> <!-- ref -->
 									<xsl:value-of select="substring-before($refString,')')"/>
-								</xsl:element> <!-- data -->
+								</xsl:element> <!-- jump -->
 							</xsl:when> <!-- string-length($bookAbbrev) > 0 -->
 							<xsl:otherwise>
 								<xsl:value-of select="substring-before($refString,')')"/>
@@ -763,7 +763,7 @@ A method of getting the book code for a given reference, provided the reference 
 				<xsl:if test="not($showBookName)">
 					<xsl:text>, </xsl:text>
 				</xsl:if>
-				<xsl:element name="data">
+				<xsl:element name="jump">
 					<xsl:attribute name="ref">
 						<xsl:text>Bible:</xsl:text>
 						<!-- Use bookAbbrev if available. -->
@@ -792,7 +792,7 @@ A method of getting the book code for a given reference, provided the reference 
 						<xsl:text>:</xsl:text>
 					</xsl:if>
 					<xsl:value-of select="$verseString"/>
-				</xsl:element> <!-- data -->
+				</xsl:element> <!-- jump -->
 				<!-- Process the reference following the comma. -->
 				<xsl:variable name="substringBeforeBracket">
 					<xsl:choose>
@@ -859,7 +859,7 @@ A method of getting the book code for a given reference, provided the reference 
 				<xsl:if test="starts-with($substringAfterName,'//')">
 					<xsl:text> // </xsl:text>
 				</xsl:if>
-				<xsl:element name="data">
+				<xsl:element name="jump">
 					<xsl:attribute name="ref">
 						<xsl:text>Bible:</xsl:text>
 						<!-- Use bookAbbrev if available. -->
@@ -881,7 +881,7 @@ A method of getting the book code for a given reference, provided the reference 
 						</xsl:choose>
 					</xsl:attribute> <!-- ref -->
 					<xsl:value-of select="$substringAfterSlashes"/>
-				</xsl:element> <!-- data -->
+				</xsl:element> <!-- jump -->
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template> <!-- getRefsFromStringWithComma -->
@@ -983,9 +983,9 @@ A method of getting the book code for a given reference, provided the reference 
 				<xsl:choose>
 					<!-- Is this a 'Note_General_Paragraph'? -->
 					<xsl:when test="following-sibling::xhtml:span[1]/@class='Note_General_Paragraph' ">
-						<!-- xsl:value-of select="following-sibling::xhtml:span/@title" / -->
+						<xsl:value-of select="following-sibling::xhtml:span/@title" />
 						<!-- TODO: TE uses a cross, '†', here, rather than an asterisk. -->
-						<xsl:text>*</xsl:text>
+					<!--	<xsl:text>*</xsl:text> -->
 					</xsl:when>
 					<!-- If not, it is a 'Note_CrossHYPHENReference_Paragraph'. -->
 					<xsl:otherwise>

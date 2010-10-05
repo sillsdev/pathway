@@ -66,7 +66,6 @@ namespace Builder7BTE
             //Calculate Files & Features
             BuilderBL.RemoveSubFolders(instPath + "../Files");
             BuilderBL.DoBatch(instPath, "ConfigurationTool", "postBuild.bat", args[1]);
-            BuilderBL.DoBatch(instPath, "PublishingSolutionExe", "postBuild.bat", args[1]);
             BuilderBL.CopyRelaseFiles(instPath, "ConfigurationTool", "ConfigurationTool", args[1]);
             BuilderBL.CopyFile(instPath, Readme, "../Files/ConfigurationTool");
             BuilderBL.CopyFile(instPath, Tutorial, "../Files/ConfigurationTool");

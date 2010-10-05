@@ -263,7 +263,7 @@ namespace SIL.PublishingSolution
             preProcessor.SetDropCapInCSS(mergedCSS);
             var savedCss = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath),
                                               Path.GetFileName(mergedCSS));
-            File.Copy(mergedCSS, savedCss);
+            File.Copy(mergedCSS, savedCss, true);
             return savedCss;
         }
     }

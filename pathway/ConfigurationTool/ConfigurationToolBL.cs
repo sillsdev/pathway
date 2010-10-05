@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -19,6 +20,7 @@ namespace SIL.PublishingSolution
                             new Dictionary<string, Dictionary<string, string>>();
         Dictionary<string, string> standardSize = new Dictionary<string, string>();
         public string Caption = "Pathway Configuration Tool";
+        private TraceSwitch _traceOn = new TraceSwitch("General", "Trace level for application");
         #endregion
 
         #region Public Variable
@@ -206,7 +208,7 @@ namespace SIL.PublishingSolution
                     task = "columns";
                 }
                 string key = "column-rule-width";
-                string result = GetValue(task, key, "");
+                string result = GetValue(task, key, "0");
                 return result != "0" ? "Yes" : "No";
             }
         }
@@ -543,6 +545,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         public void LoadParam()
         {
+            Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationToolBL: LoadParam");
             Param.SetValue(Param.InputType, InputType); // Dictionary or Scripture
             Param.LoadSettings();
             MediaType = Param.MediaType;
@@ -647,6 +650,7 @@ namespace SIL.PublishingSolution
 
         public string SetPreviousLayoutSelect(DataGridView grid)
         {
+            Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationToolBL: SetPreviousLayoutSelect");
             string lastLayout = string.Empty;
             bool selectedNotExist = true;
 
@@ -937,6 +941,7 @@ namespace SIL.PublishingSolution
         /// <returns>returns DataSet</returns>
         public void CreateGridColumn()
         {
+            Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationToolBL: CreateGridColumn");
             string tableName = "Styles";
             DataTable table = new DataTable(tableName);
             DataColumn column = new DataColumn

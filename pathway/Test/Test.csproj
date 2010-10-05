@@ -51,10 +51,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\CssParser\bin\Debug\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="BasicUtils, Version=6.0.4.16364, Culture=neutral, PublicKeyToken=null">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\PsExport\Dlls\BasicUtils.dll</HintPath>
-    </Reference>
     <Reference Include="GuiTestDriver, Version=5.5.3391.27786, Culture=neutral, PublicKeyToken=null">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdParty\GuiTestDriver.dll</HintPath>

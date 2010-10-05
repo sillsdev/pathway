@@ -36,6 +36,7 @@ if "%1" == "Corporate7SE" goto nogobible
 if "%1" == "ReleaseSE" goto nogobible
 if "%1" == "Release7SE" goto nogobible
 xcopy ..\..\..\GoBibleConvert\bin\%1\GoBibleConvert.* . /y
+xcopy ..\..\..\ParatextSupport\bin\%1\ParatextSupport.* . /y
 goto done
 :nogobible
 rmdir /s /q GoBible
@@ -46,4 +47,4 @@ del TE_XHTML-to-Phone_XHTML.xslt
 del scriptureTemplate.tpl
 del ScriptureStyleSettings.xml
 :done
-pause
+rem pause

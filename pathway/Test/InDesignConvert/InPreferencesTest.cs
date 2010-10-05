@@ -34,7 +34,7 @@ namespace Test.InDesignConvert
             _stylesXML = new InStyles();
             _cssProperty = new Dictionary<string, Dictionary<string, string>>();
             _testFolderPath = PathPart.Bin(Environment.CurrentDirectory, "/InDesignConvert/TestFiles");
-            _outputPath = Common.PathCombine(_testFolderPath, "Output");
+            _outputPath = Common.PathCombine(_testFolderPath, "output");
             _outputResourcePath = Common.PathCombine(_outputPath, "Resources");
         }
         #endregion Setup

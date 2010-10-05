@@ -254,7 +254,8 @@ namespace SIL.PublishingSolution
         /// <param name="deToolFolder">folder for XPWtool</param>
         protected static void SetupStartScript(string deToolFolder)
         {
-            var xCtxFolder = Common.PathCombine(Environment.GetEnvironmentVariable("SystemDrive"), "/PwCtx"); ;
+            var sysDrive = Environment.GetEnvironmentVariable("SystemDrive");
+            var xCtxFolder = Common.PathCombine(sysDrive + "/", "PwCtx"); ;
             _postscriptLanguage.RestoreCache();
             var sub = new Substitution { TargetPath = deToolFolder };
             var map = new Dictionary<string, string>();

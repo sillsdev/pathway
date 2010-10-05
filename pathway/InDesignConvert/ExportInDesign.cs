@@ -23,6 +23,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Windows.Forms;
 using System.Xml;
 using SIL.Tool;
 
@@ -65,9 +66,12 @@ namespace SIL.PublishingSolution
             preProcessor.InsertHiddenVerseNumber();
             preProcessor.GetDefinitionLanguage();
 
+            
+
             string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
             projInfo.DefaultCssFileWithPath = preProcessor.ProcessedCss;
+            projInfo.ProjectPath = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
 
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
@@ -102,7 +106,6 @@ namespace SIL.PublishingSolution
             inPreferences.CreateIDPreferences(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), idAllClass);
 
             SubProcess.AfterProcess(projInfo.ProjectFileWithPath);
-
             Compress(projInfo.TempOutputFolder, Common.PathCombine(projInfo.ProjectPath, fileName));
 
             return true;

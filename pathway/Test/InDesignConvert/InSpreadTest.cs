@@ -44,7 +44,7 @@ namespace Test.InDesignConvert
             _stylesXML = new InStyles();
             _storyXML = new InStory();
             _testFolderPath = PathPart.Bin(Environment.CurrentDirectory, "/InDesignConvert/TestFiles");
-            _outputPath = Common.PathCombine(_testFolderPath, "Output");
+            _outputPath = Common.PathCombine(_testFolderPath, "output");
             _outputStyles = Common.PathCombine(_outputPath, "Resources");
             _outputStory = Common.PathCombine(_outputPath, "Stories");
             _outputSpread = Common.PathCombine(_outputPath, "Spreads");

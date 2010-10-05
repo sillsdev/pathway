@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <Wix xmlns='http://schemas.microsoft.com/wix/2003/01/wi'>
-	<Product UpgradeCode="2CAD8F8F-2EC0-486B-B46A-90B2CD12F1D7" Id="68A7D17F-C81F-4456-983C-ACDF0B19BC03" Name='Pathway BTE 0.5.1' Language='1033'
-			 Version='0.5.1' Manufacturer='SIL International'>
+	<Product UpgradeCode="2CAD8F8F-2EC0-486B-B46A-90B2CD12F1D7" Id="68A7D17F-C81F-4456-983C-ACDF0B19BC03"
+		Name='Pathway BTE Corporate 0.6.8 for FieldWorks 6.0.4' Language='1033' Version='0.6.8' Manufacturer='SIL International'>
 		<Package Id='????????-????-????-????-????????????' Manufacturer='SIL International' InstallerVersion='200' Compressed='yes' />
 		<Condition Message="You need to be an administrator to install this product.">Privileged</Condition>
 		<Condition Message="[ProductName] will only run on Windows 2000 or better. You cannot intall it on this machine.">
@@ -12,14 +12,36 @@
 		</Condition-->
 
 		<Media Id='1' Cabinet='pathway.cab' EmbedCab='yes' CompressionLevel='high'/>
-
-		<Property Id="FWDIR">
-			<RegistrySearch Id="FindFwInstallDir" Key="SOFTWARE\SIL\FieldWorks" Name="RootCodeDir" Root="HKLM" Type="directory"/>
+		
+		<Property Id="FWDIR60" Value="null">
+			<RegistrySearch Id="FindFwInstallDir60" Key="SOFTWARE\SIL\FieldWorks" Name="RootCodeDir" Root="HKLM" Type="directory"/>
 		</Property>
+		<!--Property Id="FWDIR70" Value="null">
+			<RegistrySearch Id="FindFwInstallDir70" Key="SOFTWARE\SIL\FieldWorks\7.0" Name="RootCodeDir" Root="HKLM" Type="directory"/>
+		</Property>
+		<Property Id="FWDIR80" Value="null">
+			<RegistrySearch Id="FindFwInstallDir80" Key="SOFTWARE\SIL\FieldWorks\8.0" Name="RootCodeDir" Root="HKLM" Type="directory"/>
+		</Property -->
+		<CustomAction Id="SetFwDir60" Property="FWDIR" Value="[FWDIR60]" />
+		<!--CustomAction Id="SetFwDir70" Property="FWDIR" Value="[FWDIR70]" />
+		<CustomAction Id="SetFwDir80" Property="FWDIR" Value="[FWDIR80]" / -->
+
+		<CustomAction Id="AssignCDir2CTX" Directory="CTXTARGETDIR" Value="C:\" Execute="firstSequence" />
+		
+		<InstallUISequence>
+			<Custom Action="SetFwDir60" After="AppSearch"><![CDATA[FWDIR60 <> "null"]]></Custom>
+			<!--Custom Action="SetFwDir70" After="SetFwDir60"><![CDATA[FWDIR70 <> "null"]]></Custom>
+			<Custom Action="SetFwDir80" After="SetFwDir70"><![CDATA[FWDIR80 <> "null"]]></Custom -->
+		</InstallUISequence>
+
 		<Property Id="FWDATE">
 			<RegistrySearch Id="FindFwDate" Key="SOFTWARE\SIL\FieldWorks\CoreInstallation" Root="HKLM" Type="raw"/>
 		</Property>
 
+		<InstallExecuteSequence>
+			<Custom Action="AssignCDir2CTX" After="CostFinalize"/>
+		</InstallExecuteSequence>          
+		
 		<FragmentRef Id='pathwayUI'/>
 		<FragmentRef Id='FilesFragment'/>
 		<FragmentRef Id='FeaturesFragment'/>
@@ -33,7 +55,7 @@
 			</Directory>
 			<Directory Id="StartMenuFolder" SourceName="StartMen" LongSource="Start Menu">
 				<Directory Id="ProgramMenuFolder" SourceName="Programs">
-					<Directory Id="PathwayMenu" Name="Pathway" LongName="Pathway">
+					<Directory Id="PathwayMenu" Name="Pathway">
 						<Component Id="ShortcutApp" Guid="96BE5240-DC73-4b1c-A590-9FC7CFE71AEF">
 							<Shortcut Id="ShortcutApp" Directory="PathwayMenu" Name="Pathway" LongName="Pathway Configuration Tool" Target="[#ConfigurationTool.exe]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="INSTALLDIR" />
 						</Component>

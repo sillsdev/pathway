@@ -42,7 +42,7 @@ namespace Test.InDesignConvert
             _storyXML = new InStory();
             _testFolderPath = PathPart.Bin(Environment.CurrentDirectory, "/InDesignConvert/TestFiles");
             ClassProperty = _expected;  //Note: All Reference address initialized here
-            _outputPath = Common.PathCombine(_testFolderPath, "Output");
+            _outputPath = Common.PathCombine(_testFolderPath, "output");
             _outputStyles = Common.PathCombine(_outputPath, "Resources");
             _outputStory = Common.PathCombine(_outputPath, "Stories");
             _cssProperty = new Dictionary<string, Dictionary<string, string>>();

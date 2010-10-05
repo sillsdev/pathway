@@ -51,7 +51,7 @@ namespace Test.InDesignConvert
             _idAllClass = new Dictionary<string, Dictionary<string, string>>();
             _testFolderPath = PathPart.Bin(Environment.CurrentDirectory, "/InDesignConvert/TestFiles");
             ClassProperty = _expected;
-            _outputPath = Common.PathCombine(_testFolderPath, "Output");
+            _outputPath = Common.PathCombine(_testFolderPath, "output");
             _outputSpread = Common.PathCombine(_outputPath, "MasterSpreads");
             _outputStyle = Common.PathCombine(_outputPath, "Resources");
             _outputStory = Common.PathCombine(_outputPath, "Stories");

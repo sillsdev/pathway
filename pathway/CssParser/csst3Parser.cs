@@ -1,4 +1,4 @@
-// $ANTLR 3.1.3 Mar 17, 2009 19:23:44 ..\\..\\csst3.g 2010-09-21 11:04:36
+// $ANTLR 3.1.3 Mar 17, 2009 19:23:44 ..\\..\\csst3.g 2010-10-05 11:38:07
 
 
 using System;
@@ -761,7 +761,7 @@ public class csst3Parser : Parser
 
 
             	// AST REWRITE
-            	// elements:          ruleset, IDENT, pageRule
+            	// elements:          pageRule, ruleset, IDENT
             	// token labels:      
             	// rule labels:       retval
             	// token list labels: 
@@ -1004,7 +1004,7 @@ public class csst3Parser : Parser
 
 
             	// AST REWRITE
-            	// elements:          IDENT, region, pseudo, properties
+            	// elements:          IDENT, pseudo, properties, region
             	// token labels:      
             	// rule labels:       retval
             	// token list labels: 
@@ -1157,7 +1157,7 @@ public class csst3Parser : Parser
 
 
             	// AST REWRITE
-            	// elements:          properties, IDENT
+            	// elements:          IDENT, properties
             	// token labels:      
             	// rule labels:       retval
             	// token list labels: 
@@ -1533,7 +1533,7 @@ public class csst3Parser : Parser
 
 
             	// AST REWRITE
-            	// elements:          pseudo, elem, selectorOperation
+            	// elements:          selectorOperation, pseudo, elem
             	// token labels:      
             	// rule labels:       retval
             	// token list labels: 
@@ -1649,7 +1649,7 @@ public class csst3Parser : Parser
 
 
             	// AST REWRITE
-            	// elements:          selectop, elem
+            	// elements:          elem, selectop
             	// token labels:      
             	// rule labels:       retval
             	// token list labels: 
@@ -2156,7 +2156,7 @@ public class csst3Parser : Parser
 
 
                     	// AST REWRITE
-                    	// elements:          attrib, IDENT
+                    	// elements:          IDENT, attrib
                     	// token labels:      
                     	// rule labels:       retval
                     	// token list labels: 
@@ -2697,7 +2697,7 @@ public class csst3Parser : Parser
 
 
             	// AST REWRITE
-            	// elements:          attribRelate, IDENT, IDENT, STRING
+            	// elements:          attribRelate, STRING, IDENT, IDENT
             	// token labels:      
             	// rule labels:       retval
             	// token list labels: 
@@ -2716,7 +2716,7 @@ public class csst3Parser : Parser
 
             	    adaptor.AddChild(root_1, stream_IDENT.NextNode());
             	    // ..\\..\\csst3.g:101:70: ( attribRelate ( STRING )* ( IDENT )* )?
-            	    if ( stream_attribRelate.HasNext() || stream_IDENT.HasNext() || stream_STRING.HasNext() )
+            	    if ( stream_attribRelate.HasNext() || stream_STRING.HasNext() || stream_IDENT.HasNext() )
             	    {
             	        adaptor.AddChild(root_1, stream_attribRelate.NextTree());
             	        // ..\\..\\csst3.g:101:84: ( STRING )*
@@ -2736,8 +2736,8 @@ public class csst3Parser : Parser
 
             	    }
             	    stream_attribRelate.Reset();
-            	    stream_IDENT.Reset();
             	    stream_STRING.Reset();
+            	    stream_IDENT.Reset();
 
             	    adaptor.AddChild(root_0, root_1);
             	    }
@@ -3451,7 +3451,7 @@ public class csst3Parser : Parser
 
 
             	// AST REWRITE
-            	// elements:          IDENT, args, 67, 66
+            	// elements:          IDENT, args, 66, 67
             	// token labels:      
             	// rule labels:       retval
             	// token list labels: 

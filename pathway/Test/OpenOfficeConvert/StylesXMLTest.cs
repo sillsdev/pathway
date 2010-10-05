@@ -96,6 +96,22 @@ namespace Test.OpenOfficeConvert
         #endregion Private Functions
 
         #region File Comparision
+        ///<summary>
+        ///TD-244 (Update CSSParser to handle revised grammar)
+        /// <summary>
+        /// </summary>      
+        [Test]
+        public void OxesCSSTest()
+        {
+            const string file = "Oxes";
+
+            string input = FileInput(file + ".css");
+            string output = FileOutput(file + "styles.xml");
+            _stylesXML.CreateStyles(input, output, _errorFile, true);
+
+            string expected = FileExpected(file + "styles.xml");
+            XmlAssert.AreEqual(expected, output, "OxesCSSTest failed in styles.xml");
+        }
         ///// <summary>
         ///// TD86 .xitem[lang='en'] syntax in Styles.xml
         ///// </summary>
@@ -1414,9 +1430,7 @@ namespace Test.OpenOfficeConvert
 
             returnValue = _validate.ValidateNodeAttributesNS(true);
             Assert.IsTrue(returnValue);
-
         }
-
 
         ///<summary>
         ///TD63 font-variant: normal; syntax in Styles.xml
@@ -1443,7 +1457,6 @@ namespace Test.OpenOfficeConvert
 
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
-
         }
 
         ///<summary>
@@ -1507,7 +1520,6 @@ namespace Test.OpenOfficeConvert
             _validate.ClassProperty.Add("fo:font-style", "italic");
             _validate.ClassProperty.Add("fo:font-variant", "small-caps");
 
-
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
         }
@@ -1533,7 +1545,6 @@ namespace Test.OpenOfficeConvert
 
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
-
         }
 
         ///<summary>
@@ -1563,11 +1574,10 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue);
 
             _validate.ClassName = "entrylast";
-            _validate.ClassProperty.Add("style:writing-mode", "lr-tb");
+            _validate.ClassProperty.Add("style:writing-mode", "rl-tb");
 
             returnValue = _validate.ValidateNodeAttributesNS(true);
             Assert.IsTrue(returnValue);
-
         }
 
 
@@ -1631,8 +1641,8 @@ namespace Test.OpenOfficeConvert
             _validate.ClassName = "border";
             _validate.ClassProperty.Add("fo:border-left", "solid 3pt #ff0000");
             _validate.ClassProperty.Add("fo:border-right", "solid 3pt #ff0000");
-            _validate.ClassProperty.Add("fo:border-top", "solid 3pt #ff0000");
-            _validate.ClassProperty.Add("fo:border-bottom", "solid 3pt #ff0000");
+            _validate.ClassProperty.Add("fo:border-top", "solid 0 #ff0000");
+            _validate.ClassProperty.Add("fo:border-bottom", "solid 0 #ff0000");
 
             returnValue = _validate.ValidateNodeAttributesNS(true);
             Assert.IsTrue(returnValue);

@@ -112,12 +112,12 @@ namespace Test
                     if (att != null)
                     {
                         propertyValue = att.Value;
-                        break;
                     }
 
                     if (propertyValue != ClassProperty[ns + ":" + key])
                     {
                         match = false;
+                        break;
                     }
                 }
             }

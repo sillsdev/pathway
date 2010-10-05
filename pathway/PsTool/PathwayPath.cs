@@ -62,8 +62,8 @@ namespace SIL.Tool
                 pathwayDir = Path.GetDirectoryName(Application.ExecutablePath);
             }
             // If after all this fall back code, we can't find PsExport in the resulting folder, we're in trouble
-            if (!File.Exists(Path.Combine(pathwayDir, "PsExport.dll")) && !Common.Testing)
-                Debug.Fail("Unable to find Pathway directory in registry.");
+            //if (!File.Exists(Path.Combine(pathwayDir, "PsExport.dll")) && !Common.Testing)
+            //    Debug.Fail("Unable to find Pathway directory in registry.");
             // If the Support folder exists, it should be used.
             Common.SupportFolder = Directory.Exists(Path.Combine(pathwayDir, "PathwaySupport"))? "PathwaySupport": "";
             return pathwayDir;

@@ -208,12 +208,12 @@
       <style:paragraph-properties fo:text-align="left" />
     </style:style>
     <style:style style:name="entry_letData" style:family="paragraph" style:parent-style-name="letData">
-      <style:paragraph-properties fo:background-color="#FFFFFF" fo:text-indent="-10pt" fo:margin-left="10pt" fo:padding-left="9pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" fo:padding-top="1pt" />
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#000000" fo:background-color="#FFFFFF" />
+      <style:paragraph-properties fo:text-indent="-10pt" fo:margin-left="10pt" fo:padding-left="9pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" fo:padding-top="1pt" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#000000" />
     </style:style>
     <style:style style:name="entry" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:paragraph-properties fo:background-color="#FFFFFF" fo:text-indent="-10pt" fo:margin-left="10pt" fo:padding-left="9pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" fo:padding-top="1pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#000000" fo:background-color="#FFFFFF" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
+      <style:paragraph-properties fo:text-indent="-10pt" fo:margin-left="10pt" fo:padding-left="9pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" fo:padding-top="1pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#000000" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="xhomographnumber_sensecrossref_.bzh_xitem_lexreftargets_xitem_relations_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="sensecrossref_.bzh_xitem_lexreftargets_xitem_relations_sense_senses_entry_letData">
       <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="7.7pt" style:font-size-complex="77%" style:text-position="sub" />

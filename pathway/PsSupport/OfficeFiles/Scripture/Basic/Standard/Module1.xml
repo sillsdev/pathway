@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Sep-14-2010 for TD-1554(Format of re-opened file different)
+&apos;Changed On Oct-04-2010 for TD-1616(PDF Output should not be shown while creating preview).
 
 &apos; Changed message content from &quot;word&quot; to &quot;book, chapter and / or verse&quot;
 &apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
@@ -166,8 +166,11 @@ Sub ExportToDOC_PDF
 	End If 
    	oDoc.storeToURL(fileURL, Array(MakePropertyValue(&quot;FilterName&quot;,filterType)) 
 
-	oSvc = createUnoService(&quot;com.sun.star.system.SystemShellExecute&quot;) 
-	oSvc.execute(FilePathWithName, &quot;&quot;, 0) 
+	If Lcase(IsPreview) = &quot;false&quot; Then
+		oSvc = createUnoService(&quot;com.sun.star.system.SystemShellExecute&quot;) 
+		oSvc.execute(FilePathWithName, &quot;&quot;, 0) 
+	End If
+	
 	oDoc.dispose()
 	&apos;wait 5000 
 &apos;Exit Sub

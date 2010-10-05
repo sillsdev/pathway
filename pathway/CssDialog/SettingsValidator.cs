@@ -50,6 +50,8 @@ namespace SIL.PublishingSolution
         }
         private static bool _fromPlugin;
         private string currentValidatingFileName = string.Empty;
+        private bool isCopySettingsFile = false;
+        private bool isCopyProjSettingsFile = false;
         #endregion
 
         #region Constructor
@@ -164,7 +166,8 @@ namespace SIL.PublishingSolution
             {
                 CopyCustomStyles(fileNamewithPath);
                 CopySettingsFile(FileName.DictionaryStyleSettings.ToString(), inputtype, fileNamewithPath);
-                RestoreCustomStyles(fileNamewithPath);
+                if (isProcessSucess)
+                    RestoreCustomStyles(fileNamewithPath);
             }
         }
 
@@ -704,12 +707,15 @@ namespace SIL.PublishingSolution
                 const string xPath = "//stylePick/settings/property[@name=\"PrintVia\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
                 string result = childNode.Attributes["value"].Value;
+                if ((result.ToLower() == "word (using openoffice)") || (result.ToLower() == "pdf (using openoffice) "))
+                    result = "OpenOffice";
                 List<IExportProcess> backEnd = LoadBackends();
                 foreach (IExportProcess process in backEnd)
                 {
                     if (result.ToLower() == process.ExportType.ToLower())
                     {
                         isExists = true;
+                        break;
                     }
                 }
                 errorTag = methodname;
@@ -882,12 +888,15 @@ namespace SIL.PublishingSolution
                 const string xPath = "//stylePick/defaultSettings/property[@name=\"PrintVia\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
                 string result = childNode.Attributes["value"].Value;
+                if ((result.ToLower() == "word (using openoffice)") || (result.ToLower() == "pdf (using openoffice) "))
+                    result = "OpenOffice";
                 List<IExportProcess> backEnd = LoadBackends();
                 foreach (IExportProcess process in backEnd)
                 {
                     if (result.ToLower() == process.ExportType.ToLower())
                     {
                         isExists = true;
+                        break;
                     }
                 }
                 errorTag = methodname;
@@ -1217,8 +1226,13 @@ namespace SIL.PublishingSolution
                         foreach (XmlNode node in childNode)
                         {
                             string oValue = node.Attributes["file"].Value;
+                            string oType = "Standard";
+                            if (node.Attributes["type"] != null)
+                            {
+                                oType = node.Attributes["type"].Value;
+                            }
                             string path = Common.PathCombine(masterPath, oValue);
-                            if (!File.Exists(path) && !File.Exists(Path.Combine(outputPath, oValue)))
+                            if (oType != "Custom" && !File.Exists(path) && !File.Exists(Path.Combine(outputPath, oValue)))
                             {
                                 errorTag = methodname;
                                 return false;

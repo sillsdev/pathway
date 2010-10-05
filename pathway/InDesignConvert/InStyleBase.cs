@@ -1602,7 +1602,7 @@ namespace SIL.PublishingSolution
 
         public void CreateFile(string projectPath)
         {
-            string styleXMLWithPath = Common.PathCombine(projectPath, "styles.xml");
+            string styleXMLWithPath = Common.PathCombine(projectPath, "Styles.xml");
             _writer = new XmlTextWriter(styleXMLWithPath, null) { Formatting = Formatting.Indented };
             _writer.WriteStartDocument();
             _writer.WriteStartElement("idPkg:Styles");

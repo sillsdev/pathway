@@ -56,7 +56,7 @@ namespace SIL.Tool
         public string FinalOutput;
         public string FileToProduce = string.Empty;
         public bool MoveStyleToContent = false;
-
+        public bool JpgPreview = false;
 
 
         #endregion

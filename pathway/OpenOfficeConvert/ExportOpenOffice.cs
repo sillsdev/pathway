@@ -48,7 +48,7 @@ namespace SIL.PublishingSolution
             return returnValue;
         }
 
-        private PublicationInformation publicationInfo;
+        private static PublicationInformation publicationInfo;
         Dictionary<string, string> _dictLexiconPrepStepsFilenames = new Dictionary<string, string>();
         Dictionary<string, string> _dictSectionNames = new Dictionary<string, string>();
         Dictionary<string, Dictionary<string, string>> _dictStepFilenames = new Dictionary<string, Dictionary<string, string>>();
@@ -666,7 +666,11 @@ namespace SIL.PublishingSolution
             Styles styleName = sXML.CreateStyles(projInfo.DefaultCssFileWithPath, strStylePath, projInfo.DefaultXhtmlFileWithPath,
                                                  false);
             //To set Constent variables for User Desire
-            IncludeTextinMacro(strMacroPath, styleName.ReferenceFormat, Common.PathCombine(projInfo.DictionaryPath, Path.GetFileNameWithoutExtension(projInfo.DictionaryPath)), projInfo.FinalOutput);
+            //string macroFileName = Common.PathCombine(projInfo.DictionaryPath,Path.GetFileNameWithoutExtension(projInfo.DictionaryPath));
+            string fname = projInfo.ProjectName ?? projInfo.DictionaryPath;
+            string macroFileName = Common.PathCombine(projInfo.DictionaryPath,
+                                                      Path.GetFileNameWithoutExtension(fname));
+            IncludeTextinMacro(strMacroPath, styleName.ReferenceFormat, macroFileName);
 
             // BEGIN Generate Meta.Xml File
             var metaXML = new MetaXML();
@@ -808,7 +812,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private static void IncludeTextinMacro(string strMacroPath, string ReferenceFormat, string saveAsPath, string finalOutput)
+        private static void IncludeTextinMacro(string strMacroPath, string ReferenceFormat, string saveAsPath)
         {
             var xmldoc = new XmlDocument { XmlResolver = null };
             xmldoc.Load(strMacroPath);
@@ -825,7 +829,7 @@ namespace SIL.PublishingSolution
                     string seperator = "\n";
                     string line1 = "\n'Constant ReferenceFormat for User Desire\nConst ReferenceFormat = \"" +
                                    ReferenceFormat + "\"" + "\nConst AutoMacro = \"" + autoMacro + "\"";
-                    string line2 = "\nConst OutputFormat = \"" + finalOutput + "\"" + "\nConst FilePath = \"" + saveAsPath + "\"" ;
+                    string line2 = "\nConst OutputFormat = \"" + publicationInfo.FinalOutput + "\"" + "\nConst FilePath = \"" + saveAsPath + "\"" + "\nConst IsPreview = \"" + publicationInfo.JpgPreview + "\"";
                     string combined = line1 + line2 + seperator;
 
                     ele.InnerText = combined + ele.InnerText;

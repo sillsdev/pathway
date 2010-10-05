@@ -14,7 +14,17 @@ if "%1" == "ReleaseSE" goto nogobible
 if "%1" == "Release7SE" goto nogobible
 :justgobible
 xcopy ..\..\..\GoBibleConvert\bin\%1\GoBibleConvert.* . /y
+xcopy ..\..\..\ParatextSupport\bin\%1\ParatextSupport.* . /y
+xcopy ..\..\..\PsSupport\ScriptureStyleSettings.xml . /q /y
+goto endBible
 :nogobible
+del TE_XHTML-to-Libronix_MainFile.xslt
+del TE_XHTML-to-Libronix_NonScrolling.xslt
+del TE_XHTML-to-Libronix_ResourcesFile.xslt
+del TE_XHTML-to-Phone_XHTML.xslt
+del scriptureTemplate.tpl
+del ScriptureStyleSettings.xml
+:endBible
 
 if exist styles rmdir styles /s /q
 mkdir Styles
@@ -28,7 +38,6 @@ mkdir Help
 xcopy ..\..\..\Build\Installer\Pathway*.chm .\Help /i /s /q /y
 
 xcopy ..\..\..\PsSupport\DictionaryStyleSettings.xml . /q /y
-xcopy ..\..\..\PsSupport\ScriptureStyleSettings.xml . /q /y
 xcopy ..\..\..\PsSupport\StyleSettings.xml . /q /y
 xcopy ..\..\..\PsSupport\StyleSettings.xsd . /q /y
 

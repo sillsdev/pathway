@@ -66,9 +66,10 @@ namespace SIL.Tool
             EnableRedoUndo();
         }
 
-        public void Set(Common.Action action, string editStyleName, string controlName,string previousText, string currentText)
+        public bool Set(Common.Action action, string editStyleName, string controlName,string previousText, string currentText)
         {
             string fileName = string.Empty;
+            bool isEdit = false;
             if (action == Common.Action.Edit)
             {
                 fileName = controlName;
@@ -76,6 +77,7 @@ namespace SIL.Tool
                 {
                     modifyData = new ModifyData(action, fileName, editStyleName, previousText);
                     _UndoStack.Push(modifyData);
+                    isEdit = true;
                 }
             }
             else
@@ -85,6 +87,7 @@ namespace SIL.Tool
             modifyData = new ModifyData(action, fileName, editStyleName, currentText);
             _UndoStack.Push(modifyData);
             EnableRedoUndo();
+            return isEdit;
         }
         public ModifyData Undo(Common.Action action, string editStyleName, string controlName, string controlText)
         {

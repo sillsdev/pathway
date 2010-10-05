@@ -61,6 +61,7 @@ namespace SIL.PublishingSolution
         //readonly StringBuilder _imageBuilder = new StringBuilder();
         readonly Stack _prevLangStack = new Stack(); // For handle previous Language
         readonly StringBuilder _pseudoBuilder = new StringBuilder();
+        readonly StringBuilder _pseudoBuilderCurrentNode = new StringBuilder();
         bool _contentReplace;
         readonly StringBuilder _classContentBuilder = new StringBuilder();
         int _styleCounter;
@@ -124,6 +125,11 @@ namespace SIL.PublishingSolution
         private ArrayList _imageCaptionEmpty = new ArrayList();
         private int _imageZindexCounter;
         private bool _imagePreviousFinished = false;
+
+        private bool _isStyleExistInCss = false;
+        readonly List<string> _isStyleExist = new List<string>();
+        private XmlNodeType _currentNodeType;
+        private XmlNodeType _previousNodeType;
 
         private List<string> _unUsedParagraphStyle = new List<string>();
 
@@ -429,7 +435,8 @@ namespace SIL.PublishingSolution
                             continue;
                         }
                     }
-                    switch (_reader.NodeType)
+                    _currentNodeType = _reader.NodeType;
+                    switch (_currentNodeType)
                     {
 
                         case XmlNodeType.Element:
@@ -444,6 +451,7 @@ namespace SIL.PublishingSolution
                             WriteText(_footnoteValue);
                             break;
                     }
+                    _previousNodeType = _currentNodeType;
                     if (_contentReplace) // TD-204(unable to put tol/pisin)
                     {
                         WriteText(_footnoteValue);
@@ -865,6 +873,10 @@ namespace SIL.PublishingSolution
             {
                 _readerValue = _readerValue + "_." + _lang;
             }
+            if (_structStyles.AllCSSName.Contains(_readerValue))
+            {
+                _isStyleExistInCss = true;
+            }
             _prevLangStack.Push(_lang);
             bool hasPseudoWritten = false;
             if (_structStyles.PseudoClass.Contains(previousClass + "+" + spaceSplitClass))
@@ -941,6 +953,7 @@ namespace SIL.PublishingSolution
                         string sourceClass = Common.LeftString(_readerValue, "_.");
                         _util.CreateStyleWithNewValue(_styleFilePath, sourceClass, _util.ChildName, makeAttribute, _util.ParentName, _familyType, _structStyles.BackgroundColor);
                         _util.MissingLang = false;
+                        _isStyleExistInCss = true;
                     }
                     else if (_util.ParentName != string.Empty)
                     {
@@ -955,6 +968,19 @@ namespace SIL.PublishingSolution
             {
                 _util.ChildName = _existingStyleName[_parentStyleName];
             }
+
+            //Note : After Ancestor and Parent pseudo got the name , checking it again 
+            if (_structStyles.AllCSSName.Contains(Common.LeftString(_util.ChildName,Common.SepParent)))
+            {
+                _isStyleExistInCss = true;
+            }
+
+            if (_isStyleExistInCss)
+            {
+                _isStyleExist.Add(_util.ChildName);
+                _isStyleExistInCss = false;
+            }
+
             if (_footCal != null)
                 if (_footCal.Length > 0 && _footNoteStyleName == null)
                 {
@@ -1150,6 +1176,12 @@ namespace SIL.PublishingSolution
             //    stylePeek = _styleStack.Peek().ToString();
             //}
 
+            ImageEndElement();
+
+        }
+
+        private void ImageEndElement()
+        {
             if (_imageStart)
             {
                 if (_imageParent == _classAfter)
@@ -1245,8 +1277,7 @@ namespace SIL.PublishingSolution
                     _forcedPara = true;
                 }
                 _usedSpanStack.Push(_util.ChildName);
-                _writer.WriteStartElement("text:span");
-                _writer.WriteAttributeString("text:style-name", _util.ChildName);
+                MissingStyleInCss(_util.ChildName);
                 //_unUsedParagraphStyle.Remove(_util.ChildName); // NOte remove all predicate check
                 //_unUsedParagraphStyle.Add(_util.ChildName);
             }
@@ -1260,9 +1291,15 @@ namespace SIL.PublishingSolution
                         _styleName = _styleName.Substring(0, _styleName.IndexOf(' '));
                     }
                     _usedSpanStack.Push(_styleName);
-                    _writer.WriteStartElement("text:span");
+                    //_writer.WriteStartElement("text:span");
 
-                    _writer.WriteAttributeString("text:style-name", _styleName);
+                    //_writer.WriteStartElement("text:span");
+                    //if (_isStyleExist.Contains(_styleName))
+                    //{
+                    //    _writer.WriteAttributeString("text:style-name", _styleName);
+                    //    _isStyleExist.Remove(_styleName);
+                    //}
+                   MissingStyleInCss(_styleName);
                 }
             }
 
@@ -1309,6 +1346,13 @@ namespace SIL.PublishingSolution
                 //{
                 //    _isDisplayNone = false;
                 //}
+
+                if (!_isDisplayNone &&  _pseudoBuilderCurrentNode.Length > 0)
+                {
+                    _writer.WriteRaw(_pseudoBuilderCurrentNode.ToString());
+                    _pseudoBuilderCurrentNode.Remove(0, _pseudoBuilderCurrentNode.Length);
+                }
+
                 if (!string.IsNullOrEmpty(_footCal))
                 {
                     _formatFootnote += _reader.Value;
@@ -1354,7 +1398,9 @@ namespace SIL.PublishingSolution
                     //{
                     //    VerseNumber = _reader.Value;
                     //}
+                    
                     string data = HardSpace(currClass, _reader.Value);
+                    
                     _writer.WriteString(data);
                 }
                 if (string.Compare(currClass, "ChapterNumber") == 0)
@@ -1375,6 +1421,28 @@ namespace SIL.PublishingSolution
             _isNewLine = false;
 
         }
+
+        private void MissingStyleInCss(string styleName)
+        {
+
+            _writer.WriteStartElement("text:span");
+            if (_isStyleExist.Contains(styleName))
+            {
+                _writer.WriteAttributeString("text:style-name", styleName);
+                _isStyleExist.Remove(styleName);
+            }
+
+
+            ////bool isStyle = _isStyleExist.Peek();
+            //_writer.WriteStartElement("text:span");
+            //if (_isStyleExistInCss)
+            //{
+            //    _writer.WriteAttributeString("text:style-name", styleName);
+            //    //_isStyleExist.Add(styleName);
+            //    //_isStyleExistInCss = false;
+            //}
+        }
+
         #endregion
 
         #region Private Methods
@@ -1571,14 +1639,21 @@ namespace SIL.PublishingSolution
                 {
                     string styleName = currentClass + "-" + "before";
                     // The stylename without styles will be ignored for Pseudo.
-                    _pseudoBuilder.Append("<text:span");
-                    if (!dictContents.PseudoWithoutStyles.Contains(styleName))
+                    if (dictContents.PseudoWithoutStyles.Contains(styleName))
                     {
-                        _pseudoBuilder.Append(" text:style-name=\"" + styleName + "\"");
+                        //_pseudoBuilder.Append(writingContent);
+                        _pseudoBuilderCurrentNode.Append(writingContent);
                     }
-                    _pseudoBuilder.Append(">");
-                    _pseudoBuilder.Append(writingContent);
-                    _pseudoBuilder.Append("</text:span>");
+                    else
+                    {
+                        //_pseudoBuilder.Append("<text:span ");
+                        //_pseudoBuilder.Append("text:style-name=\"" + _styleName + "\">" + writingContent);
+                        //_pseudoBuilder.Append("</text:span>");
+
+                        _pseudoBuilderCurrentNode.Append("<text:span ");
+                        _pseudoBuilderCurrentNode.Append("text:style-name=\"" + styleName + "\">" + writingContent);
+                        _pseudoBuilderCurrentNode.Append("</text:span>");
+                    }
                 }
                 return true;
             }
@@ -1694,39 +1769,21 @@ namespace SIL.PublishingSolution
                 writingContent = dictPseudoAfter[firstName];
             }
 
-            //if (writingContent != "")
-            //{
-            //    _styleName = firstName + "-" + "after";
-            //    // The stylename without styles will be ignored for Pseudo.
-            //    if (pseudoWithOutStyle.Contains(_styleName))
-            //    {
-            //        _writer.WriteString(writingContent);
-            //    }
-            //    else
-            //    {
-            //    _writer.WriteStartElement("text:span");
-            //    _writer.WriteAttributeString("text:style-name", _styleName);
-            //    _writer.WriteString(writingContent);
-            //    _writer.WriteEndElement();
-            //}
-            if (writingContent.Length > 0)
+            if (writingContent != "")
             {
                 _styleName = firstName + "-" + "after";
                 // The stylename without styles will be ignored for Pseudo.
-                //if(!_divOpen)
-                //    _writer.WriteStartElement("text:p"); //Note - Forced para
-
-                _writer.WriteStartElement("text:span");
-                if (!pseudoWithOutStyle.Contains(_styleName))
+                if (pseudoWithOutStyle.Contains(_styleName))
                 {
-                    _writer.WriteAttributeString("text:style-name", _styleName);
+                    _writer.WriteString(writingContent);
                 }
-                //_writer.WriteString(writingContent);
-                _writer.WriteRaw(writingContent);
-                _writer.WriteEndElement();
-
-                //if(!_divOpen)
-                //    _writer.WriteEndElement(); //Note - Forced para End
+                else
+                {
+                    _writer.WriteStartElement("text:span");
+                    _writer.WriteAttributeString("text:style-name", _styleName);
+                    _writer.WriteRaw(writingContent);
+                    _writer.WriteEndElement();
+                }
             }
         }
 
@@ -1867,6 +1924,13 @@ namespace SIL.PublishingSolution
         private void InsertPseudoBefore(string ClassName, string lang, string classAfter, string oldClass,
            Styles dictContents)
         {
+
+            if(_pseudoBuilderCurrentNode.Length > 0)
+            {
+                _pseudoBuilder.Append(_pseudoBuilderCurrentNode);
+                _pseudoBuilderCurrentNode.Remove(0, _pseudoBuilderCurrentNode.Length);
+            }
+
             string writingContent = string.Empty;
             string parentClass = classAfter.IndexOf(' ') >= 0 ? classAfter.Substring(0, classAfter.IndexOf(' ')) : classAfter;
             if (parentClass.IndexOf('_') >= 0)
@@ -1955,14 +2019,23 @@ namespace SIL.PublishingSolution
                 {
                     _styleName = ClassName + "-" + "before";
                     // The stylename without styles will be ignored for Pseudo.
-                    _pseudoBuilder.Append("<text:span");
-                    if (!dictContents.PseudoWithoutStyles.Contains(_styleName))
-                    {
-                        _pseudoBuilder.Append(" text:style-name=\"" + _styleName + "\"");
-                    }
-                    _pseudoBuilder.Append(">");
-                    _pseudoBuilder.Append(writingContent);
-                    _pseudoBuilder.Append("</text:span>");
+                    //_pseudoBuilder.Append("<text:span");
+                if (dictContents.PseudoWithoutStyles.Contains(_styleName))
+                {
+                    //_pseudoBuilder.Append(writingContent);
+                    _pseudoBuilderCurrentNode.Append(writingContent);
+                }
+                else
+                {
+                    //_pseudoBuilder.Append("<text:span ");
+                    //_pseudoBuilder.Append("text:style-name=\"" + _styleName + "\">" + writingContent);
+                    //_pseudoBuilder.Append("</text:span>");
+
+                    _pseudoBuilderCurrentNode.Append("<text:span ");
+                    _pseudoBuilderCurrentNode.Append("text:style-name=\"" + _styleName + "\">" + writingContent);
+                    _pseudoBuilderCurrentNode.Append("</text:span>");
+
+                }
                 }
             }
         }

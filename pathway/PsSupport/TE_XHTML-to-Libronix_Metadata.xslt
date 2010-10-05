@@ -11,14 +11,32 @@
     xmlns:fn="http://www.w3.org/2005/xpath-functions"    
     exclude-result-prefixes="xhtml">
 
-	<xsl:param name="currentYear" select="1959"/>
+	<xsl:param name="currentYear" select="2010"/>
 
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
     <xsl:strip-space elements="*"/>
 
 	<xsl:variable name="CssFilenameAndExtension" select="xhtml:html/xhtml:head/xhtml:link[@rel='stylesheet']/@href" />
 	<!-- Get the filename without the extension. -->
-	<xsl:variable name="CssFilename" select="substring-before($CssFilenameAndExtension,'.css')" />
+	<xsl:variable name="CssFilenameWithoutExtension" select="substring-before($CssFilenameAndExtension,'.css')" />
+
+	<xsl:variable name="ResourceTitle" select="xhtml:html/xhtml:head/xhtml:title/text()"/>
+	<xsl:variable name="ResourceName">
+		<xsl:text>SL_BI_</xsl:text>
+		<xsl:choose>
+			<!-- If the title is empty, use the name of the CSS file. -->
+			<xsl:when test="ResourceTitle = '' ">
+				<xsl:value-of select="translate($CssFilenameWithoutExtension,' ','')"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="translate($ResourceTitle,' ','')"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<!-- ToDo: first, determine the title. This will come from html/head/title if it is not empty. Otherwise use the CSS filename, without the ".css" extension. -->
+	<!-- ToDo: use the title for the header/title of the metadata file. [line 62 and following] -->
+	<!-- ToDo: make a variable that will hold the name of the resource with the prefix "SL_BI_". -->
+	<!-- ToDo: use this variable to name the content, popups, and styles files. [lines 490, 499, and 508] -->
 
     <!-- Process the top element. -->
     <xsl:template match="xhtml:html">
@@ -31,14 +49,13 @@
 			<!-- TODO: find a way to supress the xml namespace "http://www.w3.org/1999/xhtml". -->
 			<xsl:attribute name="category">Resources</xsl:attribute>
 			<xsl:attribute name="name">
-				<xsl:text>SL_BI_</xsl:text>
-				<xsl:value-of select="$CssFilename" />
+				<xsl:value-of select="$ResourceName"/>
 			</xsl:attribute>
 			<!-- Note: The guid needs to come from Jim Albright's Visual Basic application.
 				 For now, I have made a temporary file containing guids associated with filenames. -->
 			<xsl:attribute name="guid">
 				<xsl:text>LLS:</xsl:text>
-				<xsl:value-of select="document('FileGuids.xml')//file[@name=$CssFilename]/@guid" />
+				<xsl:value-of select="document('FileGuids.xml')//file[@name=$ResourceName]/@guid" />
 			</xsl:attribute>
 			<xsl:attribute name="version">2010-08-19T13:18:42Z</xsl:attribute>
 			<xsl:attribute name="creator">sil</xsl:attribute>
@@ -52,9 +69,11 @@
 	<xsl:template match="xhtml:head">
 		<!-- header -->
 		<xsl:element name="header">
-			<xsl:element name="title"><xsl:value-of select="xhtml:title/text()"/></xsl:element>
+			<xsl:element name="title">
+				<xsl:value-of select="$ResourceTitle"/>
+			</xsl:element> <!-- title -->
 			<!-- TODO: Is a sort title, alternate title, or abbreviated title given for some resources? -->
-        </xsl:element>
+        </xsl:element> <!-- header -->
         <!-- metadata -->
         <xsl:variable name="lang">
 			<xsl:value-of select="../xhtml:body[@class='scrBody']/xhtml:div[@class='scrBook'][1]/xhtml:span[@class='scrBookName']/@lang"/>
@@ -79,14 +98,13 @@ document('http://xobjex.com/service/date.xsl')/date/utc/*"/>
 			</xsl:element>
 			<xsl:element name="alternate-id">
 				<xsl:attribute name="guid">
-					<xsl:text>LLS:SL_BI_</xsl:text>
-					<xsl:value-of select="$CssFilename" />
+					<xsl:text>LLS:</xsl:text>
+					<xsl:value-of select="$ResourceName" />
 				</xsl:attribute>
 			</xsl:element>
 			<xsl:element name="alternate-id">
 				<xsl:attribute name="guid">
-					<xsl:text>SL_BI_</xsl:text>
-					<xsl:value-of select="$CssFilename" />
+					<xsl:value-of select="$ResourceName" />
 				</xsl:attribute>
 			</xsl:element>
 			<!-- dc-metadata -->
@@ -470,8 +488,7 @@ document('http://xobjex.com/service/date.xsl')/date/utc/*"/>
 				<xsl:element name="stylesheets">
 					<xsl:element name="file">
 						<xsl:attribute name="src">
-							<xsl:text>SL_BI_</xsl:text>
-							<xsl:value-of select="$CssFilename" />
+							<xsl:value-of select="$ResourceName" />
 							<xsl:text>-Styles.xml</xsl:text>
 						</xsl:attribute>
 					</xsl:element>
@@ -479,8 +496,7 @@ document('http://xobjex.com/service/date.xsl')/date/utc/*"/>
 				<xsl:element name="content">
 					<xsl:element name="file">
 						<xsl:attribute name="src">
-							<xsl:text>SL_BI_</xsl:text>
-							<xsl:value-of select="$CssFilename" />
+							<xsl:value-of select="$ResourceName" />
 							<xsl:text>-Content.xml</xsl:text>
 						</xsl:attribute>
 					</xsl:element>
@@ -488,8 +504,7 @@ document('http://xobjex.com/service/date.xsl')/date/utc/*"/>
 				<xsl:element name="popups">
 					<xsl:element name="file">
 						<xsl:attribute name="src">
-							<xsl:text>SL_BI_</xsl:text>
-							<xsl:value-of select="$CssFilename" />
+							<xsl:value-of select="$ResourceName" />
 							<xsl:text>-Popups.xml</xsl:text>
 						</xsl:attribute>
 					</xsl:element>

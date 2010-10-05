@@ -57,10 +57,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\CssDialog\bin\Debug\CssDialog.dll</HintPath>
     </Reference>
-    <Reference Include="FwUtils, Version=6.0.4.16380, Culture=neutral, PublicKeyToken=null">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\PsExport\Dlls\FwUtils.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -133,10 +129,6 @@
     <ProjectReference Include="..\LiftPrepare\LiftPrepare.csproj">
       <Project>{D38235F3-5B02-4835-B380-40E0BDCD5495}</Project>
       <Name>LiftPrepare</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OdtConvert\OdtConvert.csproj">
-      <Project>{21F7EE2E-B691-4E3D-B734-BC94B4AA891F}</Project>
-      <Name>OdtConvert</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenOfficeConvert\OpenOfficeConvert.csproj">
       <Project>{E225E5AF-B603-41D1-BB58-E3AAE05C59FD}</Project>

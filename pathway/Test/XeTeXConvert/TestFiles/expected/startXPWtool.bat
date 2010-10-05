@@ -1,7 +1,7 @@
 rem startXPWtool-tpl.bat - template for startXPWtool.bat
 C:
-cd C:\Users\Trihus.DALLAS\AppData\Local\Temp\DEXCTX
+cd C:\PwCtx
 call "%cd%\miniCTX\setuptex.bat"
-E:
-cd E:\btai\PublishingSolution\Test\XeTeXConvert\TestFiles\output
+C:
+cd C:\svn\btai\PublishingSolution\Test\XeTeXConvert\TestFiles\output
 "%CD%\XPWtool.bat"

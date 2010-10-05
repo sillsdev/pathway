@@ -72,7 +72,11 @@ namespace SIL.PublishingSolution
             lnkEdit.Visible = _showEdit;
             CreateColumn();
             LoadGridValues(sender);
-            Common.PathwayHelpSetup(File.Exists(Common.FromRegistry("ScriptureStyleSettings.xml")), Common.FromRegistry("Help"));
+            //Common.PathwayHelpSetup(File.Exists(Common.FromRegistry("ScriptureStyleSettings.xml")), Common.FromRegistry("Help"));
+            //Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
+            //Common.HelpProv.SetHelpKeyword(this, _helpTopic);
+            var iType = true;
+            Common.PathwayHelpSetup(iType, Common.FromRegistry("Help"));
             Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
             Common.HelpProv.SetHelpKeyword(this, _helpTopic);
         }
@@ -263,7 +267,7 @@ namespace SIL.PublishingSolution
 
             if (page == 1)
             {
-                CreatePreview();
+                //CreatePreview();
                 preview = _previewFileName1;
                 btnPrevious.Enabled = false;
                 btnNext.Enabled = true;
@@ -290,18 +294,18 @@ namespace SIL.PublishingSolution
 
         }
 
-        private void CreatePreview()
-        {
-            if (!File.Exists(_previewFileName1))
-            {
-                PdftoJpg pd = new PdftoJpg();
-                string cssFile = Param.StylePath(_cssFile);
-                pd.ConvertPdftoJpg(cssFile, false);
+        //private void CreatePreview()
+        //{
+        //    if (!File.Exists(_previewFileName1))
+        //    {
+        //        PdftoJpg pd = new PdftoJpg();
+        //        string cssFile = Param.StylePath(_cssFile);
+        //        pd.ConvertPdftoJpg(cssFile, false);
 
-                _previewFileName1 = Path.Combine(Path.GetTempPath(), "Preview.pdf1.jpg");
-                _previewFileName2 = Path.Combine(Path.GetTempPath(), "Preview.pdf2.jpg");
-            }
-        }
+        //        _previewFileName1 = Path.Combine(Path.GetTempPath(), "Preview.pdf1.jpg");
+        //        _previewFileName2 = Path.Combine(Path.GetTempPath(), "Preview.pdf2.jpg");
+        //    }
+        //}
 
         private void btnNext_Click(object sender, EventArgs e)
         {
@@ -344,7 +348,7 @@ namespace SIL.PublishingSolution
         private void BtnHelp_Click(object sender, EventArgs e)
         {
             var iType = true;
-            iType = InputType.ToLower() != "scripture";
+            //iType = InputType.ToLower() != "scripture";
             Common.PathwayHelpSetup(iType, Common.FromRegistry("Help"));
             Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
             Common.HelpProv.SetHelpKeyword(this, _helpTopic);

@@ -1,3 +1,9 @@
+.Section_Head
+{
+    font-size: 25pt;
+    color:red;
+
+}
 .Chapter_Number {
     font-family: "Charis SIL", serif;	/* default Serif font */
     font-size: 200%;
@@ -8,11 +14,18 @@
     float: left;
     string-set: chapter content();
 }
-.columns {
+.columns2 {
     column-count: 2; -moz-column-count: 2;
     column-gap: .5cm; -moz-column-gap: .5cm;
     column-fill: balance;
 }
+
+.columns1 {
+    column-count: 2; -moz-column-count: 2;
+    column-gap: .5cm; -moz-column-gap: .5cm;
+     column-fill: auto;
+}
+
 .Paragraph {
     font-family: "Charis SIL", serif;	/* cascaded environment */
     font-size: 10pt;	/* cascaded environment */
@@ -41,22 +54,7 @@
     text-indent: 0pt;
     margin-left: 0pt;
 }
-.scrBody {
-}
-.scrBook {
-    column-count: 1;
-    clear: both;
-}
-.scrBookName {
-    string-set: bookname content();
-    display: none;
-}
-.scrSection {
-    column-count: 2;   -moz-column-count: 2;
-    column-gap: 1.5em; -moz-column-gap: 1.5em;
-    column-fill: auto;
-    text-align: left;
-}
+
 .Section_Head {
     font-family: "Charis SIL", serif;	/* cascaded environment */
     font-size: 9pt;	/* cascaded environment */

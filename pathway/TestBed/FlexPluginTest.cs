@@ -495,8 +495,8 @@ namespace TestBed
 
         private void button6_Click(object sender, EventArgs e)
         {
-            PdftoJpg pd = new PdftoJpg();
-            pd.ConvertPdftoJpg(); 
+            //PdftoJpg pd = new PdftoJpg();
+            //pd.ConvertPdftoJpg(); 
         }
     }
     

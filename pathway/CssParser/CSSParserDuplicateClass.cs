@@ -1313,7 +1313,7 @@ namespace SIL.PublishingSolution
             }
             finally
             {
-                File.Delete(Path.GetTempPath() + Path.GetFileName(path));
+                //File.Delete(Path.GetTempPath() + Path.GetFileName(path));
             }
 
         }

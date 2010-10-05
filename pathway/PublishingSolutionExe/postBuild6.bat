@@ -9,6 +9,7 @@ del JobList.xml
 del sectionTypes.xml
 xcopy ..\..\..\Build\Installer\readme.rtf /y
 xcopy ..\..\..\Build\Installer\license.rtf /y
+xcopy ..\..\..\PathwayB\bin\%1\PathwayB.* . /y
 xcopy ..\..\..\OpenOfficeConvert\bin\%1\OpenOfficeConvert.* . /y
 xcopy ..\..\..\LiftPrepare\bin\%1\LiftPrepare.* . /y
 xcopy ..\..\..\InDesignConvert\bin\%1\InDesignConvert.* . /y
@@ -39,4 +40,4 @@ del TE_XHTML-to-Phone_XHTML.xslt
 del scriptureTemplate.tpl
 del ScriptureStyleSettings.xml
 :done
-pause
+rem pause

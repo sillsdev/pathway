@@ -408,11 +408,16 @@ namespace SIL.PublishingSolution
 
                     styleNode.InnerXml = node.OuterXml;
                     node.ParentNode.InsertAfter(styleNode, node);
-                    var nameElement = (XmlElement)node;
-                    nameElement.SetAttribute("style:name", makeClassName);
-                    nameElement.SetAttribute("style:family", familyType);
+                    //var nameElement = (XmlElement)node;
+                    //nameElement.SetAttribute("style:name", makeClassName);
+                    //nameElement.SetAttribute("style:family", familyType);
 
-                    nameElement.SetAttribute("style:parent-style-name", parentName);
+                    //nameElement.SetAttribute("style:parent-style-name", parentName);
+
+                    XmlAttributeCollection attrColl = node.Attributes;
+                    attrColl["style:name"].Value = makeClassName;
+                    attrColl["style:family"].Value = familyType;
+                    attrColl["style:parent-style-name"].Value = parentName;
 
                     XmlNode textNode = null;
                     for (int i = 0; i < node.ChildNodes.Count; i++) // find  Text node
@@ -435,11 +440,15 @@ namespace SIL.PublishingSolution
                     styleNode.InnerXml = node.OuterXml;
                     node.ParentNode.InsertAfter(styleNode, node);
 
-                    var nameElement = (XmlElement)node;
-                    nameElement.SetAttribute("style:name", makeClassName);
-                    nameElement.SetAttribute("style:family", familyType);
+                    //var nameElement = (XmlElement)node;
+                    //nameElement.SetAttribute("style:name", makeClassName);
+                    //nameElement.SetAttribute("style:family", familyType);
 
-                    nameElement.SetAttribute("style:parent-style-name", parentName);
+                    //nameElement.SetAttribute("style:parent-style-name", parentName);
+                    XmlAttributeCollection attrColl = node.Attributes;
+                    attrColl["style:name"].Value = makeClassName;
+                    attrColl["style:family"].Value = familyType;
+                    attrColl["style:parent-style-name"].Value = parentName;
 
                     for (int i = 0; i < node.ChildNodes.Count; i++)
                     {
@@ -542,10 +551,16 @@ namespace SIL.PublishingSolution
                 styleNode.InnerXml = node.OuterXml;
                 node.ParentNode.InsertAfter(styleNode, node);
 
-                var nameElement = (XmlElement)node;
-                nameElement.SetAttribute("style:name", makeClassName);
-                nameElement.SetAttribute("style:family", familyType);
-                nameElement.SetAttribute("style:parent-style-name", parentName);
+                //var nameElement = (XmlElement)node;
+                //nameElement.SetAttribute("style:name", makeClassName);
+                //nameElement.SetAttribute("style:family", familyType);
+
+                //nameElement.SetAttribute("style:parent-style-name", parentName);
+
+                XmlAttributeCollection attrColl = node.Attributes;
+                attrColl["style:name"].Value = makeClassName;
+                attrColl["style:family"].Value = familyType;
+                attrColl["style:parent-style-name"].Value = parentName;
                 doc.Save(styleFilePath);
 
                 // copy "fullString" style to "paragraph" style for Display: Block. Example: Buangx.xhtml & Buangx.css
@@ -563,8 +578,10 @@ namespace SIL.PublishingSolution
                     styleNode.InnerXml = node.OuterXml;
                     node.ParentNode.InsertAfter(styleNode, node);
 
-                    nameElement = (XmlElement)node;
-                    nameElement.SetAttribute("style:family", "paragraph");
+                    //nameElement = (XmlElement)node;
+                    //nameElement.SetAttribute("style:family", "paragraph");
+                    attrColl = node.Attributes;
+                    attrColl["style:family"].Value = "paragraph";
                     doc.Save(styleFilePath);
                 }
             }

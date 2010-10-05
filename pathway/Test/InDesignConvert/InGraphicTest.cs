@@ -52,7 +52,7 @@ namespace Test.InDesignConvert
             _graphicXML = new InGraphic();
             _testFolderPath = PathPart.Bin(Environment.CurrentDirectory, "/InDesignConvert/TestFiles");
             ClassProperty = _expected;  //Note: All Reference address initialized here
-            _output = Common.PathCombine(_testFolderPath, "Output");
+            _output = Common.PathCombine(_testFolderPath, "output");
 
             _cssProperty = new Dictionary<string, Dictionary<string, string>>();
             _cssTree = new CssTree();
