@@ -114,6 +114,7 @@
     <Compile Include="StyleAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="CssParserPostBuild.bat" />
     <None Include="csst3.g" />
   </ItemGroup>
   <ItemGroup>

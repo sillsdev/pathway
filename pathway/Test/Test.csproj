@@ -263,6 +263,7 @@
     <None Include="app.config" />
     <None Include="GoBibleConvert\TestFiles\Expected\1pe_simplified.xhtml" />
     <None Include="GoBibleConvert\TestFiles\InputFiles\1pe.xhtml" />
+    <None Include="PostTestBuild.bat" />
     <None Include="PsTool\TestFiles\Expected\DefaultCss.xhtml" />
     <None Include="PsTool\TestFiles\Expected\FileInsert.xhtml" />
     <None Include="PsTool\TestFiles\Expected\FlexRev.xhtml" />
