@@ -30,6 +30,7 @@ namespace SIL.PublishingSolution
     public class PsExport: IExporter
     {
         private const bool _Wait = true;
+        public bool _fromNUnit = false;
 
         #region Properties
         /// <summary>Gets or sets Output format (ODT, PDF, INX, TeX, HTM, PDB, etc.)</summary>
@@ -85,7 +86,12 @@ namespace SIL.PublishingSolution
                 string cssFullName = GetCssFullName(outDir, mainFullName);
                 if (cssFullName == null) return;
                 string fluffedCssFullName = GetFluffedCssFullName(outFullName, outDir, cssFullName);
-
+                string revFileName = GetRevFullName(outDir);
+                string revCSS = string.Empty;
+                if (revFileName.Length > 0)
+                {
+                    revCSS = GetFluffedCssFullName(GetRevFullName(outDir), outDir, cssFullName);
+                }
                 DestinationSetup();
                 if (DataType == "Scripture")
                     SeExport(mainXhtml, Path.GetFileName(fluffedCssFullName), outDir);
@@ -93,7 +99,7 @@ namespace SIL.PublishingSolution
                 {
                     string revFullName = GetRevFullName(outDir);
                     string gramFullName = MakeXhtml(outDir, "sketch.xml", "XLingPap.xsl", supportPath);
-                    DeExport(outFullName, revFullName, gramFullName, fluffedCssFullName);
+                    DeExport(outFullName, fluffedCssFullName, revFullName, revCSS, gramFullName);
                 }
             }
             catch (InvalidStyleSettingsException err)
@@ -146,7 +152,8 @@ namespace SIL.PublishingSolution
             var expCss = Path.GetFileNameWithoutExtension(outputFullName) + ".css";
             string expCssLine = "@import \"" + expCss + "\";";
             Common.FileInsertText(myCss, expCssLine);
-            var tmpCss = mc.Make(myCss);
+            string outputCSSFileName = "merged" + expCss;
+            var tmpCss = mc.Make(myCss, outputCSSFileName);
             var fluffedCssFullName = Common.PathCombine(outDir, Path.GetFileName(tmpCss));
             File.Copy(tmpCss, fluffedCssFullName, true);
             File.Delete(tmpCss);
@@ -309,10 +316,11 @@ namespace SIL.PublishingSolution
         /// Exports the input files to the chosen destination
         /// </summary>
         /// <param name="lexiconFull">main dictionary content</param>
+        /// /// <param name="lexiconCSS">main css file with style info</param>
         /// <param name="revFull">reversal content</param>
+        /// <param name="revCSS">rev CSS file with style info</param>
         /// <param name="gramFull">grammar content</param>
-        /// <param name="jobFileName">css file with style info</param>
-        public void DeExport(string lexiconFull, string revFull, string gramFull, string jobFileName)
+        public void DeExport(string lexiconFull, string lexiconCSS, string revFull, string revCSS, string gramFull)
         {
             var projInfo = new PublicationInformation();
 
@@ -321,14 +329,17 @@ namespace SIL.PublishingSolution
             projInfo.ProgressBar = ProgressBar;
             projInfo.ProjectFileWithPath = _projectFile;
             projInfo.IsLexiconSectionExist = File.Exists(lexiconFull);
-            projInfo.IsReversalExist = File.Exists(revFull);
+            //projInfo.IsReversalExist = File.Exists(revFull);
+            //projInfo.IsReversalExist = Param.Value[Param.ReversalIndex] == "True";
+            SetReverseExistValue(projInfo);
             projInfo.SwapHeadword = false;
             projInfo.FromPlugin = true;
-            projInfo.DefaultCssFileWithPath = jobFileName;
+            projInfo.DefaultCssFileWithPath = lexiconCSS;
+            projInfo.DefaultRevCssFileWithPath = revCSS;
             projInfo.DefaultXhtmlFileWithPath = lexiconFull;
             projInfo.ProjectInputType = "Dictionary";
             projInfo.DictionaryPath = Path.GetDirectoryName(lexiconFull);
-
+            projInfo.ProjectName = Path.GetFileNameWithoutExtension(lexiconFull);
             //if (lexiconFull == revFull || lexiconFull == gramFull)
             //    projInfo.IsLexiconSectionExist = false;
 
@@ -348,6 +359,19 @@ namespace SIL.PublishingSolution
 
             Backend.Launch(Destination, projInfo);
         }
+
+        private void SetReverseExistValue(PublicationInformation projInfo)
+        {
+            if (_fromNUnit)
+            {
+                projInfo.IsReversalExist = !_fromNUnit;
+            }
+            else
+            {
+                projInfo.IsReversalExist = Param.Value[Param.ReversalIndex] == "True";
+            }
+        }
+
         #endregion DeExport
 
         #region SeExport

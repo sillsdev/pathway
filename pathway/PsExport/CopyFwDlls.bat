@@ -31,15 +31,23 @@ rem ..\VersionCapture.exe %2
 rem rem display version #s for person building installer
 rem rem notepad ..\..\..\PsSupport\FieldworksVersions.txt
 
+rem setup paths
+set base=..\..\..
+set cfg=bin\%1
+if exist %base%\PsExport\CopyFwDlls.bat goto anyCpu
+set base=..\..\..\..
+set cfg=bin\x86\%1
+:anyCpu
+
 rem copy backends
-xcopy ..\..\..\OpenOfficeConvert\bin\%1\OpenOfficeConvert.* . /y
-xcopy ..\..\..\PdfConvert\bin\%1\PdfConvert.* . /y
-xcopy ..\..\..\InDesignConvert\bin\%1\InDesignConvert.* . /y
-xcopy ..\..\..\WordPressConvert\bin\%1\WordPressConvert.* . /y
-xcopy ..\..\..\XeTeXConvert\bin\%1\XeTeXConvert.* . /y
+xcopy %base%\OpenOfficeConvert\%cfg%\OpenOfficeConvert.* . /y
+xcopy %base%\PdfConvert\%cfg%\PdfConvert.* . /y
+xcopy %base%\InDesignConvert\%cfg%\InDesignConvert.* . /y
+xcopy %base%\WordPressConvert\%cfg%\WordPressConvert.* . /y
+xcopy %base%\XeTeXConvert\%cfg%\XeTeXConvert.* . /y
 
 if "%1" == "ReleaseSE" goto nogobible
-xcopy ..\..\..\GoBibleConvert\bin\%1\GoBibleConvert.* . /y
+xcopy %base%\GoBibleConvert\%cfg%\GoBibleConvert.* . /y
 goto done
 :nogobible
 rmdir /s /q GoBible
