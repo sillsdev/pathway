@@ -348,10 +348,9 @@ namespace Test.CssDialog
 
         public void LoadHyphenationLanguagesTest()
         {
-            string appFolderPath = Common.LeftString(_currentFolder, "PublishingSolution");
             _methodName = "LoadHyphenationLanguagesTest";
             ComboBox cmbCtl = new ComboBox();
-            target._hyphenationPath = Common.PathCombine(appFolderPath,"PublishingSolution/PsSupport/Hyphenation_Languages");
+            target._hyphenationPath = PathPart.Bin(Environment.CurrentDirectory,"/../PsSupport/Hyphenation_Languages");
             target.LoadHyphenationLanguages(cmbCtl);
             Assert.IsTrue(cmbCtl.Items.Count > 0, _methodName + " test failed");
         }

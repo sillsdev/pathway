@@ -520,8 +520,7 @@ namespace Test.CssParserTest
         {
             _input.Name = "font-family";
             _input.StringValue = "sans-serif";
-            string appFolderPath = Common.LeftString(Environment.CurrentDirectory, "PublishingSolution");
-            _makeProperty.PsSupportPath = Common.PathCombine(appFolderPath, "PublishingSolution/PsSupport");
+            _makeProperty.PsSupportPath = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
             _expected.Add("font-family", "Verdana");
@@ -595,8 +594,7 @@ namespace Test.CssParserTest
         {
             _input.Name = "font-family";
             _input.StringValue = "dummyfont, fantasy";
-            string appFolderPath = Common.LeftString(Environment.CurrentDirectory, "PublishingSolution");
-            _makeProperty.PsSupportPath = Common.PathCombine(appFolderPath, "PublishingSolution/PsSupport");
+            _makeProperty.PsSupportPath = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
             _expected.Add("font-family", "Modern");
