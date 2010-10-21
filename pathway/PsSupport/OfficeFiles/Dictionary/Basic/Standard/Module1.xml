@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Oct-15-2010 for TD-1603(Problem in viewing configured dictionary exported in ODT (or) ODM file.)
+
+&apos;Changed On Oct-21-2010 for TD-1625(OpenOffice: Hidden document did not open)
 
 &apos;Define the values to Constant Variables for First Guide word, Last Guide word ,Headword Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -221,6 +222,7 @@ MyError:
 	if Err &lt;&gt; 91 Then
 		Msgbox &quot;Sorry! Could not update the Guide Words.&quot; , 0 + 64,  &quot;Update Guide Words&quot;
 	End If
+	oContWindow.Visible = true
 End Sub  
 
 &apos;This procedure set the dialgue to correct Update Guide Words 
