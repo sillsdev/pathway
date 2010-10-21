@@ -22,6 +22,7 @@ namespace SIL.PublishingSolution.Transform
             writer.Close();
             var reader = new StringReader(buffer.ToString());
             var doc = new XmlDocument();
+            doc.XmlResolver = null;
             doc.Load(reader);
             return doc;
         }
