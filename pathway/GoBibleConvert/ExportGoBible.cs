@@ -258,7 +258,7 @@ namespace SIL.PublishingSolution
         {
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             var mc = new MergeCss { OutputLocation = "Preprocess" };
-            string mergedCSS = mc.Make(projInfo.DefaultCssFileWithPath);
+            string mergedCSS = mc.Make(projInfo.DefaultCssFileWithPath, "Temp1.css");
             preProcessor.ReplaceStringInCss(mergedCSS);
             preProcessor.SetDropCapInCSS(mergedCSS);
             var savedCss = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath),
