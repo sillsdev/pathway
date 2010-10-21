@@ -22,6 +22,7 @@ using System.Windows.Forms;
 using System.Collections.ObjectModel;
 //using SharpSvn;
 using SIL.Tool;
+using Test;
 
 namespace Builder
 {
@@ -118,7 +119,11 @@ namespace Builder
                     _installerMain = @"OOS-tpl.wxs";
                     break;
             }
-            var myVersionName = Environment.CurrentDirectory + @"/../../../../ConfigurationTool/Properties/AssemblyInfo.cs";
+            // These lines used to save FieldWorks Version file.
+            Common.SupportFolder = "";
+            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../../PsSupport");
+
+            var myVersionName = PathPart.Bin(Environment.CurrentDirectory, "/../../ConfigurationTool/Properties/AssemblyInfo.cs");
             var m = Regex.Match(FileData.Get(myVersionName), @".assembly. AssemblyFileVersion..([0-9.]+)...");
             BuilderBL.CurrentVersion = m.Groups[1].Value;
             revIndex = BuilderBL.CurrentVersion.LastIndexOf('.') + 1;
@@ -136,7 +141,7 @@ namespace Builder
             }
             else
             {
-                _dllBase = Path.Combine(Environment.CurrentDirectory, @"..\..\..\..\PsExport");
+                _dllBase = PathPart.Bin(Environment.CurrentDirectory, "/../../PsExport");
                 DirectoryInfo directoryInfo = new DirectoryInfo(_dllBase);
                 foreach (DirectoryInfo folder in directoryInfo.GetDirectories(@"Dlls*"))
                 {

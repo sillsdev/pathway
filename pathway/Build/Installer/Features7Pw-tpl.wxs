@@ -9,7 +9,6 @@
 			<ComponentRef Id="LicenseShortcutApp"/>
 			<ComponentRef Id="RegistryEntries"/>
 			%(ConfigurationToolFeatures)s
-			%(PsDllFeatures)s
 		</Feature>
 	</Fragment>
 </Wix>

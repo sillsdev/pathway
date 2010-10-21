@@ -9,9 +9,6 @@
 					</Directory>
 				</Directory>
 			</Directory>
-			<Directory Id="FWDIR" Name="FIELDW~1" LongName="FieldWorks">
-				%(PsDllFiles)s
-			</Directory>
 		</Directory>
 	</Fragment>
 </Wix>

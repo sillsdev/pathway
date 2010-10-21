@@ -1,5 +1,27 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\ConfigurationTool\WordPressConvert.pdb" ComponentGuid="A7AFCCCE-8692-45CA-8088-E8B1DE1E17C3"/>
+	<File Path="Files\ConfigurationTool\PathwayB.pdb" ComponentGuid="EDACE7ED-757B-40F7-97E8-E74E0EE03D68"/>
+	<File Path="Files\ConfigurationTool\icuuc40.dll" ComponentGuid="CC7562E0-4000-497D-BDCD-238ABE4EC63A"/>
+	<File Path="Files\ConfigurationTool\icuin40.dll" ComponentGuid="A4A3FF95-7807-4579-8CA2-3D1AD93412A6"/>
+	<File Path="Files\ConfigurationTool\icudt40.dll" ComponentGuid="F57B8784-2DE6-476C-9CF4-7D9217753FE2"/>
+	<File Path="Files\ConfigurationTool\PsExport.pdb" ComponentGuid="DB30065D-DF4A-46F6-B508-3CDAE83062DC"/>
+	<File Path="Files\ConfigurationTool\ParatextSupport.pdb" ComponentGuid="8D1FB406-38F4-4D65-B052-DE87A1498660"/>
+	<File Path="Files\ConfigurationTool\PreviewDll\gsdll32.dll" ComponentGuid="21DB77BF-D766-479D-B2CD-1C1F5C20E27D"/>
+	<File Path="Files\PathwaySupport\PreviewDll\gsdll32.dll" ComponentGuid="E34ECE06-4DFD-4707-93E6-74475A8BB8A9"/>
+	<File Path="Files\ConfigurationTool\gsdll32.dll" ComponentGuid="CDAA1EF4-1EFB-476C-A59B-16A7F24CB19E"/>
+	<File Path="Files\PublishingSolution\TE_XHTML-to-Libronix_Styles.xslt" ComponentGuid="96096CF5-9790-4ADB-B488-B5334559B846"/>
+	<File Path="Files\PublishingSolution\TE_XHTML-to-Libronix_Popups.xslt" ComponentGuid="82BC7613-CCD7-4D64-8C30-B3C0602DC350"/>
+	<File Path="Files\PublishingSolution\TE_XHTML-to-Libronix_Metadata.xslt" ComponentGuid="1C13B3CC-CED7-4269-A94E-E98DC8CE4026"/>
+	<File Path="Files\PublishingSolution\TE_XHTML-to-Libronix_Content.xslt" ComponentGuid="C151231A-65F4-40B6-B2C8-7571ED8A2E28"/>
+	<File Path="Files\PublishingSolution\PreviewXhtml.xhtml" ComponentGuid="3DB4F2CD-FC14-4023-986C-494D2ABB912A"/>
+	<File Path="Files\PublishingSolution\PathwayB.pdb" ComponentGuid="03D25AD0-7539-4B19-A42B-CF38BB64AD2F"/>
+	<File Path="Files\PublishingSolution\PathwayB.exe" ComponentGuid="7FFBB3B9-EE87-4BB4-A39C-495B062D7D2B"/>
+	<File Path="Files\PublishingSolution\LogosConvert.pdb" ComponentGuid="A6F18A85-9B86-4C31-AB82-F6555B5A666A"/>
+	<File Path="Files\PublishingSolution\LogosConvert.dll.config" ComponentGuid="0756180D-A07E-4A16-8BD1-DE7DE4B8F655"/>
+	<File Path="Files\PublishingSolution\LogosConvert.dll" ComponentGuid="412242A3-21C8-432E-91C0-91CB830A4089"/>
+	<File Path="Files\PublishingSolution\FileGuids.xml" ComponentGuid="06C06564-3FC0-4642-8B7F-CD4A4BFB6469"/>
+	<File Path="Files\PublishingSolution\BookletSettings.xml" ComponentGuid="834D0763-116D-4260-80C6-991228FB96B4"/>
 	<File Path="Files\ConfigurationTool\Palaso.dll" ComponentGuid="FDC5701D-0080-4E3F-A5D5-C0F067F9C2C3"/>
 	<File Path="Files\ConfigurationTool\icu.net.dll" ComponentGuid="032646B7-57DC-462E-B8B4-E40256D0798E"/>
 	<File Path="Files\PwCtx\miniCTX\texmf-mswin\fonts\cache\x.txt" ComponentGuid="CD09B014-C058-40AD-8B73-863421E38FFB"/>

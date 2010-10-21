@@ -20,6 +20,7 @@ using System.IO;
 using System.Windows.Forms;
 using Builder;
 using SIL.Tool;
+using Test;
 
 namespace BuildCtx
 {
@@ -47,7 +48,7 @@ namespace BuildCtx
                 Close();
                 Environment.Exit(0);
             }
-            var instPath = Common.DirectoryPathReplace(Environment.CurrentDirectory + @"/../../../Installer/");
+            var instPath = PathPart.Bin(Environment.CurrentDirectory, "/../Installer/");
             var sub = new Substitution { TargetPath = instPath };
 
             //Update PathwayUI

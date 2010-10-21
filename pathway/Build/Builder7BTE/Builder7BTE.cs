@@ -20,6 +20,7 @@ using System.IO;
 using System.Windows.Forms;
 using Builder;
 using SIL.Tool;
+using Test;
 
 namespace Builder7BTE
 {
@@ -49,7 +50,7 @@ namespace Builder7BTE
                 Close();
                 Environment.Exit(0);
             }
-            var instPath = Common.DirectoryPathReplace(Environment.CurrentDirectory + @"/../../../Installer/");
+            var instPath = PathPart.Bin(Environment.CurrentDirectory, "/../Installer/");
             var sub = new Substitution { TargetPath = instPath };
 
             //Update OOSUI
@@ -58,7 +59,7 @@ namespace Builder7BTE
             const string License = "License.rtf";
             const string HelpFile = "Pathway_Configuration_Tool_BTE.chm";
             const string Tutorial = "Pathway_Student_Manual_BTE.doc";
-            const string Catalog = "UtilityCatalogIncludePublishingSolution.xml";
+            //const string Catalog = "UtilityCatalogIncludePublishingSolution.xml";
             map[Readme] = FileData.Get(instPath + Readme);
             map[License] = FileData.Get(instPath + License);
             sub.FileSubstitute("pathwayUI-tpl.wxs", map);
@@ -72,7 +73,7 @@ namespace Builder7BTE
             BuilderBL.CopyFile(instPath, License, "../Files/ConfigurationTool");
             Directory.Delete(instPath + "../Files/ConfigurationTool/Help", true);
             BuilderBL.CopyFile(instPath, HelpFile, "../Files/ConfigurationTool/Help");
-            BuilderBL.CopyFile(instPath, Catalog, "../Files/PsDll/Language Explorer/Configuration");
+            //BuilderBL.CopyFile(instPath, Catalog, "../Files/PsDll/Language Explorer/Configuration");
             BuilderBL.CopyRelaseFiles(instPath, "PsExport", "ConfigurationTool", args[1]);
             BuilderBL.CopyTree(instPath, "../../PsSupport", "ConfigurationTool");
             Directory.Delete(instPath + "../Files/ConfigurationTool/Template", true);

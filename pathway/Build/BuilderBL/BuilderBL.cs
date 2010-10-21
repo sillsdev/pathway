@@ -15,15 +15,20 @@
 // --------------------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using SIL.Tool;
+using Test;
 
 namespace Builder
 {
     public class BuilderBL
     {
+        private static string _BasePath = string.Empty;
+        private static string _ConfigPath = string.Empty;
+
         /// <summary>
         /// Contains version of PublishingSolution Component on entry
         /// </summary>
@@ -35,7 +40,7 @@ namespace Builder
         /// </summary>
         public static string GetInstPath()
         {
-            return Environment.CurrentDirectory + @"/../../../Installer/";
+            return PathPart.Bin(Environment.CurrentDirectory, "/../Installer/");
         }
         #endregion GetInstPath
 
@@ -185,10 +190,11 @@ namespace Builder
         /// </summary>
         public static void CopyRelaseFiles(string instPath, string source, string dest, string release)
         {
+            SetBaseAndConfig();
             var filesInfo = new DirectoryInfo(instPath + string.Format(@"../Files/{0}", dest));
             if (!filesInfo.Exists)
                 filesInfo.Create();
-            string sourceFullName = string.Format("{0}../../{1}/Bin/{2}", instPath, source, release);
+            string sourceFullName = string.Format("{0}{1}{2}", _BasePath, source, _ConfigPath);
             FolderTree.Copy(sourceFullName, filesInfo.FullName);
             //var srcInfo = new DirectoryInfo(instPath + @"..\" + source + @"/Bin/Release");
             //foreach (var fileInfo in srcInfo.GetFiles("*.*", SearchOption.TopDirectoryOnly))
@@ -282,8 +288,8 @@ namespace Builder
         /// </summary>
         public static string GetCurrentVersion(string app)
         {
-            string appInfoRelativePath = string.Format("/../../../../{0}/Properties/AssemblyInfo.cs", app);
-            var myVersionName = Environment.CurrentDirectory + appInfoRelativePath;
+            string appInfoRelativePath = string.Format("/../../{0}/Properties/AssemblyInfo.cs", app);
+            var myVersionName = PathPart.Bin(Environment.CurrentDirectory, appInfoRelativePath);
             var data = FileData.Get(myVersionName);
             var m = Regex.Match(data, @".assembly. AssemblyFileVersion..([0-9.]+)...");
             var currentVersion = m.Groups[1].Value;
@@ -294,9 +300,20 @@ namespace Builder
 
         public static void DoBatch(string instPath, string project, string process, string config)
         {
-            string folder = Common.PathCombine(instPath, "../../" + project + "/bin/" + config);
+            SetBaseAndConfig();
+            var folder = _BasePath + project + _ConfigPath;
+            var processPath = Common.PathCombine(_BasePath + project, process);
             //MessageBox.Show(folder);
-            SubProcess.Run(folder, Common.PathCombine(folder, "../../" + process), config, true);
+            SubProcess.Run(folder, processPath, config, true);
+        }
+
+        private static void SetBaseAndConfig()
+        {
+            if (_BasePath != string.Empty) return;
+            var m = Regex.Match(Environment.CurrentDirectory, "Build.[A-Za-z0-9]*");
+            Debug.Assert(m.Success);
+            _BasePath = Environment.CurrentDirectory.Substring(0, m.Index);
+            _ConfigPath = Environment.CurrentDirectory.Substring(m.Index + m.Length);
         }
     }
 }

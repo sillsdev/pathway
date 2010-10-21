@@ -35,7 +35,7 @@ var FileLibraryNode = xmlFileLibrary.selectSingleNode("FileLibrary");
 var EditedLibrary = false;
 
 MakeFileSource("Partial ConfigurationTool.wxs", "Files\\ConfigurationTool");
-MakeFileSource("Partial PsDll.wxs", "Files\\PsDll");
+//MakeFileSource("Partial PsDll.wxs", "Files\\PsDll");
 
 if (EditedLibrary)
 {

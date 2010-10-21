@@ -20,6 +20,7 @@ using System.IO;
 using System.Windows.Forms;
 using Builder;
 using SIL.Tool;
+using Test;
 
 namespace BuilderBTE
 {
@@ -49,7 +50,11 @@ namespace BuilderBTE
                 Close();
                 Environment.Exit(0);
             }
-            var instPath = Common.DirectoryPathReplace(Environment.CurrentDirectory + @"/../../../Installer/");
+            // These lines used to get FieldWorks Version file.
+            Common.SupportFolder = "";
+            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../../PsSupport");
+
+            var instPath = PathPart.Bin(Environment.CurrentDirectory, "/../Installer/");
             var sub = new Substitution { TargetPath = instPath };
 
             //Update PathwayUI

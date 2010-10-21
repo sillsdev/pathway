@@ -20,6 +20,7 @@ using System.IO;
 using System.Windows.Forms;
 using Builder;
 using SIL.Tool;
+using Test;
 
 namespace Builder7SE
 {
@@ -49,7 +50,7 @@ namespace Builder7SE
                 Close();
                 Environment.Exit(0);
             }
-            var instPath = Common.DirectoryPathReplace(Environment.CurrentDirectory + @"/../../../Installer/");
+            var instPath = PathPart.Bin(Environment.CurrentDirectory, "/../Installer/");
             var sub = new Substitution { TargetPath = instPath };
 
             //Update OOSUI
@@ -57,7 +58,7 @@ namespace Builder7SE
             const string Readme = "ReadMePw.rtf";
             const string License = "License.rtf";
             const string HelpFile = "Pathway_Configuration_Tool_SE.chm";
-            const string Catalog = "UtilityCatalogIncludePublishingSolution.xml";
+            //const string Catalog = "UtilityCatalogIncludePublishingSolution.xml";
             map[Readme] = FileData.Get(instPath + Readme);
             map[License] = FileData.Get(instPath + License);
             sub.FileSubstitute("pathwayUI-tpl.wxs", map, "pathwayUI.wxs");
@@ -69,16 +70,23 @@ namespace Builder7SE
             BuilderBL.CopyFile(instPath, Readme, "../Files/ConfigurationTool");
             BuilderBL.CopyFile(instPath, License, "../Files/ConfigurationTool");
             BuilderBL.CopyTree(instPath, "../../PsSupport", "ConfigurationTool");
-            Directory.Delete(instPath + "../Files/ConfigurationTool/GoBible", true);
-            Directory.Delete(instPath + "../Files/ConfigurationTool/Template", true);
             Directory.Delete(instPath + "../Files/ConfigurationTool/Help", true);
             BuilderBL.CopyFile(instPath, HelpFile, "../Files/ConfigurationTool/Help");
             BuilderBL.CopyRelaseFiles(instPath, "PsExport", "ConfigurationTool", args[1]);
-            Directory.Delete(instPath + "../Files/ConfigurationTool/Styles/Scripture", true);
-            File.Delete(instPath + "../Files/ConfigurationTool/ScriptureStyleSettings.xml");
-            BuilderBL.CopyFile(instPath, Catalog, "../Files/PsDll/Language Explorer/Configuration");
+
             BuilderBL.RemoveFiles(instPath, "../NotPathway", "ConfigurationTool");
+            Directory.Delete(instPath + "../Files/ConfigurationTool/GoBible", true);
+            Directory.Delete(instPath + "../Files/ConfigurationTool/Template", true);
+            Directory.Delete(instPath + "../Files/ConfigurationTool/Styles/Scripture", true);
+            Directory.Delete(instPath + "../Files/ConfigurationTool/InDesignFiles/Scripture", true);
+            Directory.Delete(instPath + "../Files/ConfigurationTool/OfficeFiles/Scripture", true);
+            Directory.Delete(instPath + "../Files/ConfigurationTool/Samples/Scripture", true);
+            File.Delete(instPath + "../Files/ConfigurationTool/ScriptureStyleSettings.xml");
             File.Delete(instPath + "../Files/ConfigurationTool/TE_XHTML-to-Phone_XHTML.xslt");
+            File.Delete(instPath + "../Files/ConfigurationTool/TE_XHTML-to-Libronix_Content.xslt");
+            File.Delete(instPath + "../Files/ConfigurationTool/TE_XHTML-to-Libronix_Metadata.xslt");
+            File.Delete(instPath + "../Files/ConfigurationTool/TE_XHTML-to-Libronix_Popups.xslt");
+            File.Delete(instPath + "../Files/ConfigurationTool/TE_XHTML-to-Libronix_Styles.xslt");
             File.Delete(instPath + "../Files/ConfigurationTool/pxhtml2xpw-scr.xsl");
             if (args[1] == CORPORATE)
             {

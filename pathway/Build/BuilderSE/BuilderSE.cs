@@ -20,6 +20,7 @@ using System.IO;
 using System.Windows.Forms;
 using Builder;
 using SIL.Tool;
+using Test;
 
 namespace BuilderSE
 {
@@ -49,7 +50,11 @@ namespace BuilderSE
                 Close();
                 Environment.Exit(0);
             }
-            var instPath = Common.DirectoryPathReplace(Environment.CurrentDirectory + @"/../../../Installer/");
+            // These lines used to get FieldWorks Version file.
+            Common.SupportFolder = "";
+            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../../PsSupport");
+
+            var instPath = PathPart.Bin(Environment.CurrentDirectory, "/../Installer/");
             var sub = new Substitution { TargetPath = instPath };
 
             //Update PathwayUI
@@ -72,6 +77,9 @@ namespace BuilderSE
             Directory.Delete(instPath + "../Files/ConfigurationTool/Help", true);
             BuilderBL.CopyFile(instPath, HelpFile, "../Files/ConfigurationTool/Help");
             Directory.Delete(instPath + "../Files/ConfigurationTool/Styles/Scripture", true);
+            //Directory.Delete(instPath + "../Files/ConfigurationTool/InDesign/Scripture", true);
+            Directory.Delete(instPath + "../Files/ConfigurationTool/OfficeFiles/Scripture", true);
+            Directory.Delete(instPath + "../Files/ConfigurationTool/Samples/Scripture", true);
             File.Delete(instPath + "../Files/ConfigurationTool/ScriptureStyleSettings.xml");
             BuilderBL.CopyRelaseFiles(instPath, "PsExport", "PsDll", args[1]);
             BuilderBL.CopyFile(instPath, Catalog, "../Files/PsDll/Language Explorer/Configuration");
@@ -83,8 +91,15 @@ namespace BuilderSE
             BuilderBL.CopyFile(instPath, HelpFile, "../Files/PathwaySupport/Help");
             BuilderBL.RemoveFiles(instPath, "../NotPathway", "PathwaySupport");
             Directory.Delete(instPath + "../Files/PathwaySupport/Styles/Scripture", true);
+            Directory.Delete(instPath + "../Files/PathwaySupport/InDesignFiles/Scripture", true);
+            Directory.Delete(instPath + "../Files/PathwaySupport/OfficeFiles/Scripture", true);
+            Directory.Delete(instPath + "../Files/PathwaySupport/Samples/Scripture", true);
             File.Delete(instPath + "../Files/PathwaySupport/ScriptureStyleSettings.xml");
             File.Delete(instPath + "../Files/PathwaySupport/TE_XHTML-to-Phone_XHTML.xslt");
+            File.Delete(instPath + "../Files/PathwaySupport/TE_XHTML-to-Libronix_Content.xslt");
+            File.Delete(instPath + "../Files/PathwaySupport/TE_XHTML-to-Libronix_Metadata.xslt");
+            File.Delete(instPath + "../Files/PathwaySupport/TE_XHTML-to-Libronix_Popups.xslt");
+            File.Delete(instPath + "../Files/PathwaySupport/TE_XHTML-to-Libronix_Styles.xslt");
             File.Delete(instPath + "../Files/PathwaySupport/pxhtml2xpw-scr.xsl");
             if (args[1] == CORPORATE)
             {
