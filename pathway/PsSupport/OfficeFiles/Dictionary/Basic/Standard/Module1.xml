@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Oct-04-2010 for TD-1616(PDF Output should not be shown while creating preview).
+&apos;Changed On Oct-15-2010 for TD-1603(Problem in viewing configured dictionary exported in ODT (or) ODM file.)
 
 &apos;Define the values to Constant Variables for First Guide word, Last Guide word ,Headword Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -281,13 +281,20 @@ End Function
 
 &apos;This procedure push the letter style content (A a, B b), if letter found in last paragraph of the current page.
 Sub KeepNextParagraph 
+On Error GoTo MyError:
+Dim OldPage
+OldPage = 0
 	ThisComponent.currentController.getViewCursor().jumpToPage(2)
 oDoc = ThisComponent 
 oVC = oDoc.CurrentController.getViewCursor 
 oVC.gotoStart(false) 
 Do 
 	page = oVC.getPage
+	if page = OldPage Then 
+		Exit sub
+	End If	
 	oVC.jumpToEndOfPage 
+
 	Last = oDoc.Text.createTextCursorByRange(oVC) 
 	Last.gotoStartOfParagraph(false)
 	Last.gotoEndOfParagraph(true) 
@@ -301,23 +308,38 @@ Do
 			ThisComponent.currentController.getViewCursor().jumpToPage(page)
 		End If
 	End If	
-Loop While oVC.jumpToNextPage 	 
+	OldPage = page
+Loop While oVC.jumpToNextPage 
+
+Exit Sub
+MyError:
+	&apos;Msgbox &quot;Sorry! Could not update the Guide Words.&quot; , 0 + 64,  &quot;Update Guide Words&quot;	 
 End Sub
 
 &apos;This procedure gets the last paragraph of every page
 Sub GetLastParagraph 
+On Error GoTo MyError:
+Dim OldPage
+OldPage = 0
 	ThisComponent.currentController.getViewCursor().jumpToPage(2)
 oDoc = ThisComponent 
 oVC = oDoc.CurrentController.getViewCursor 
 oVC.gotoStart(false) 
 Do 
 	page = oVC.getPage
+	if page = OldPage Then 
+		Exit sub
+	End If		
 	oVC.jumpToEndOfPage 
 	Last = oDoc.Text.createTextCursorByRange(oVC) 
 	Last.gotoStartOfParagraph(false)
 	Last.gotoEndOfParagraph(true) 
 	LastParagraph(page) = Last.String
-Loop While oVC.jumpToNextPage 	 
+	OldPage = page
+Loop While oVC.jumpToNextPage 
+Exit Sub
+MyError:
+	&apos;Msgbox &quot;Sorry! Could not update the Guide Words.&quot; , 0 + 64,  &quot;Update Guide Words&quot;
 End Sub
 
 
@@ -402,9 +424,9 @@ End Function
 
 &apos;This procedure finds first and last guidewords in everypage.
 Sub LastPara(PageCount) 
-
 Dim HiddenParagraph(PageCount,1) As String
 
+On Error GoTo MyError:
 	ThisComponent.currentController.getViewCursor().jumpToPage(2)
 
 oDoc = ThisComponent 
@@ -489,15 +511,18 @@ If page &gt; 1 Then
 	end if   
 	
     PrevFirst = First
-    PrevLast = Last	 	
+    PrevLast = Last	
+    	
 End If	
+
 Loop While oVC.jumpToNextPage 
 
 	&apos;mytime = now
 InsertGuidewords(HiddenParagraph,PageCount)
-&apos;InsertHiddenParagraph(HiddenParagraph)
-	&apos;keep = &quot;Insert&quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
-	&apos;msgbox keep
+Exit Sub
+MyError:
+	InsertGuidewords(HiddenParagraph,PageCount)
+	&apos;Msgbox &quot;Sorry! Could not update the Guide Words.&quot; , 0 + 64,  &quot;Update Guide Words&quot;
 End Sub
 
 &apos;This procedure called from KeepNextParagraph

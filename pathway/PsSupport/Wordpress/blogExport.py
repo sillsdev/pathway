@@ -284,6 +284,7 @@ class BlogExport:
     \t-t, --taxonomy-index=\tstarting index key for taxonomies
     \t-d, --table-prefix=\ttable prefix (normally wp_)
     \t-u, --user-styles\tuse user styles from FieldWorks
+    \t-i, --include-example=\tText which must be contained in example
     """
     typedisplay = {
         'PRC':'Present Continuous', 
@@ -294,7 +295,7 @@ class BlogExport:
         'pl':'Plural',
         }
     subentryorder = ['PRC','INC','IMM','CMP','DVN']
-    def __init__(self, xhtml, email, mediaRoot, wordpress=True, site=False, folders=False, postIndex=85, taxonomyIndex=10, database='wordpress', prefix='wp_', user=False):
+    def __init__(self, xhtml, email, mediaRoot, wordpress=True, site=False, folders=False, postIndex=85, taxonomyIndex=10, database='wordpress', prefix='wp_', user=False, includeExample=''):
         self.namesinuse = {}
         root = etree.parse(xhtml)
         outpath = os.path.dirname(xhtml)
@@ -310,6 +311,7 @@ class BlogExport:
             self.exampletpl = open('Example-tpl.htt').read()
         entries = self.FindAll(root, '//x:div[@class="entry"]')
         print len(entries), "entries"
+        actualCount = 0
         if site:
             indexPage = IndexPage()
         if wordpress:
@@ -317,18 +319,24 @@ class BlogExport:
             termTable = TermTable(taxonomyIndex, outpath, prefix, database)
         for e in range(len(entries),0,-1):
             entry = entries[e-1]
+            if includeExample != "" and not self.IsTextInNode(entry, includeExample):
+                continue
             map = {}
             thisentry = self.JustNode(entry)
             map["Email"] = email
             map["Root"] = mediaRoot
             map["lastSearch"] = map["Root"] + 'index.htm'
-            map["Stem"] = self.FindItem(thisentry, '//x:span[@class="MoForm-publishRootLexemeForm-FormPub"]//text()')
+            map["Stem"] = self.FindItem(thisentry, '//x:span[@class="LexEntry-publishRootPara-MyLex"]//text()')
             
             map["Background"] = ''
-            citations = self.FindAll(thisentry, '//x:span[@class="LexEntry-publishRootPara-CitationFormPub_L2"]/x:span[@class="xitem"]/x:span/text()')
+            citations = self.FindAll(thisentry, '//x:span[@class="LexEntry-publishRootPara-CitationFormPub_L3"]/x:span[@class="xitem"]/x:span/text()')
+            if not len(citations):
+                citations = self.FindAll(thisentry, '//x:span[@class="LexEntry-publishRootPara-CitationFormPub_L3"]/x:span/text()')
             citation = ''
             for candidate in citations:
-                citation += self.FixSpace(candidate).strip() + " "
+                normalizedCandidate = self.FixSpace(candidate).strip()
+                if normalizedCandidate != "":
+                    citation +=  normalizedCandidate + " "
             map["Citation"] = citation
             if self.SanitizeName(map["Stem"]) == "" and map["Citation"] == "":
                 continue
@@ -349,6 +357,7 @@ class BlogExport:
             else:
                 map["Media"] = ""
             map["Date"] = datetime.date.today().strftime('%B %d, %Y')  # like June 16, 2010
+            actualCount += 1
             if user:
                 outdata = etree.tostring(thisentry).encode('utf-8')
                 map["Entry"] = outdata
@@ -358,13 +367,13 @@ class BlogExport:
                 #Put recognized subentry types out in order
                 for curType in self.subentryorder:
                     for subentry in subentries:
-                        if self.ProcessSubentry(subentry, curType, map):
+                        if self.ProcessSubentry(subentry, curType, includeExample, map):
                             subentrytext += subentrytpl % map
                 for subentry in subentries:
-                    if self.ProcessSubentry(subentry, "", map):
+                    if self.ProcessSubentry(subentry, "", includeExample, map):
                         subentrytext += subentrytpl % map
                 map["SubEntries"] = subentrytext
-                self.MoreExamples(thisentry, '', map)
+                self.MoreExamples(thisentry, '', includeExample, map)
                 outdata = tabletpl % map
                 map["Table"] = outdata
             outname = self.UniqueName(self.SanitizeName(map["Stem"])) + ".htm"
@@ -376,6 +385,7 @@ class BlogExport:
                 outdata = entrytpl % map
                 self.MakeFile(os.path.join(outpath, outname), outdata)
                 indexPage.Add(map, outname)
+        print actualCount, "filtered entrie(s)"
         if wordpress:
             postFile.Close()
             termTable.Write()
@@ -383,7 +393,16 @@ class BlogExport:
         if site:
             indexPage.Make(outpath)
 
-    def ProcessSubentry(self, subentry, curType, map):
+    def ProcessSubentry(self, subentry, curType, inc, map):
+        """ProcessSubentry(subentry, curType, inc, map) - create output for each subentry
+        
+        subentry = etree of xhtml for the subentry
+        curType = if not empty, the type must agree with this one
+        inc = if not empty, the subentry must include this text
+        map = fields found so far in entry (results are added to this dictionary)
+        """
+        if not self.IsTextInNode(subentry, inc):
+            return False
         thissub = self.JustNode(subentry)
         subtype = self.FindItem(thissub, '//x:span[@class="entry-type-abbr-sub"]/x:span/text()')
         if curType != "" and subtype != curType:
@@ -397,20 +416,23 @@ class BlogExport:
         map["Form"] = self.FindItem(thissub, '//x:span[@class="headword-sub"]/text()')
         map["Example"] = u''
         map["Translation"] = u''
-        self.MoreExamples(thissub, '-sub', map)
+        self.MoreExamples(thissub, '-sub', inc, map)
         return True
     
-    def MoreExamples(self, thissub, tag, map):
-        """MoreExamples(thissub, tag, map) - generate text for additional examples
+    def MoreExamples(self, thissub, tag, inc, map):
+        """MoreExamples(thissub, tag, inc, map) - generate text for additional examples
         
         thissub = etree of xhtml for the subentry
         tag = '-sub' if part of a subentry otherwise empty string for main entry
+        inc = if not empty, this text must be included in the example
         map = fields found so far in entry (results are added to this dictionary)
         """
         map["MoreExamples"] = u''
         examples = self.FindAll(thissub, '//x:span[@class="examples%s"]/x:span[@class="xitem"]' % tag)
         if not len(examples):
             examples = self.FindAll(thissub, '//x:span[@class="examples%s"]' % tag)
+        if inc:
+            examples = [x for x in examples if self.IsTextInNode(x, inc)]
         if len(examples):
             start = 0
             if tag == '-sub':
@@ -461,6 +483,11 @@ class BlogExport:
         xml = etree.tostring(node, encoding='utf-8', xml_declaration=True)
         return etree.XML(xml)
 
+    def IsTextInNode(self, node, text):
+        """True if node contains text"""
+        xml = etree.tostring(node, encoding='utf-8', xml_declaration=True)
+        return xml.find(text) >= 0
+
     def FindAll(self, root, xpath):
         """return a list of results of applying xpath to root"""
         XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml"
@@ -496,9 +523,9 @@ def Usage():
 
 if __name__ == '__main__':
     longopt = ['--email=', '--media-root=', '--wordpress', '--site', '--folders', 
-    '--post-index=', '--taxonomy-index=', '--database=', '--table-prefix=', '--user-styles']
+    '--post-index=', '--taxonomy-index=', '--database=', '--table-prefix=', '--user-styles', '--include-example=']
     try:
-        optlist, args = getopt.getopt(sys.argv[1:], 'e:m:wsft:p:n:d:u', longopt)
+        optlist, args = getopt.getopt(sys.argv[1:], 'e:m:wsft:p:n:d:ui:', longopt)
     except getopt.GetoptError:
         Usage()
     xhtml = ''
@@ -522,6 +549,7 @@ if __name__ == '__main__':
     database = 'cherokee_wordpress'
     prefix = 'wp_'
     user = False
+    includeExample = ''
     for o, a in optlist:
         if o in ("-e", "--email"):
             email = a
@@ -543,10 +571,12 @@ if __name__ == '__main__':
             prefix = a
         elif o in ("-u", "--user-styles"):
             user = True
+        elif o in ("-i", "--include-example"):
+            includeExample = a
     if len(args):
         xhtml = args[0]
     if xhtml == '':
         Usage()
     x = BlogExport(xhtml, email=email, mediaRoot=mediaRoot, wordpress=wordpress, 
     site=site, folders=folders, postIndex=postIndex, taxonomyIndex=taxonomyIndex,
-    database=database, prefix=prefix, user=user)
+    database=database, prefix=prefix, user=user, includeExample=includeExample)

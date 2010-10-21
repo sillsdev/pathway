@@ -63,7 +63,9 @@ namespace SIL.PublishingSolution
             {
                 var xhtml = projInfo.DefaultXhtmlFileWithPath;
                 const string prog = "WordPress.bat";
-                var processFolder = Common.FromRegistry("WordPress");
+                var processFolder = Common.PathCombine(Common.GetAllUserPath(), "WordPress");
+                if (!Directory.Exists(processFolder))
+                    processFolder = Common.FromRegistry("WordPress");
                 var progFullPath = Common.PathCombine(processFolder, prog);
                 var args = string.Format(@"""{0}""", xhtml);
                 SubProcess.Run(processFolder, progFullPath, args, true);

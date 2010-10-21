@@ -53,6 +53,10 @@ namespace Test.PsTool
             LoadInputDocument("Dictionary1.de");
             _allUserPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
             Common.SupportFolder = "";
+            string _outputBasePath = Common.PathCombine(GetTestPath(), "Output");
+            if (Directory.Exists(_outputBasePath))
+                Directory.Delete(_outputBasePath, true);
+            Directory.CreateDirectory(_outputBasePath);
             Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../PsSupport");
             Common.Testing = true;
         }

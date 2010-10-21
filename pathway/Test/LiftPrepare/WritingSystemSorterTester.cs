@@ -13,15 +13,15 @@ namespace Test.LiftPrepare
     [TestFixture]
     public class WritingSystemSorterTester
     {
-        private const string TestingDirectory = @"..\..\LiftPrepare\TestFiles\";
-        private const string InputDirectory = TestingDirectory + @"Input\";
-        private const string ActualOutputDirectory = TestingDirectory + @"Output\";
-        private const string ExpectedOutputDirectory = TestingDirectory + @"Expected\";
+        private static string TestingDirectory = PathPart.Bin(Environment.CurrentDirectory, "/LiftPrepare/TestFiles/");
+        private static string InputDirectory = TestingDirectory + @"Input/";
+        private static string ActualOutputDirectory = TestingDirectory + @"Output/";
+        private static string ExpectedOutputDirectory = TestingDirectory + @"Expected/";
 
         [Test]
         public void sortTest()
         {
-            var liftReader = new LiftReader(InputDirectory+@"yi\yi.lift");
+            var liftReader = new LiftReader(InputDirectory+@"yi/yi.lift");
             var liftDocument = new LiftDocument();
             liftDocument.Load(liftReader);
             var wsorter = new LiftLangSorter(liftDocument);
@@ -31,7 +31,7 @@ namespace Test.LiftPrepare
         [Test]
         public void replaceNodesTest()
         {
-            var xmlReader = new XmlTextReader(InputDirectory + @"simple\replacenodes.xml");
+            var xmlReader = new XmlTextReader(InputDirectory + @"simple/replacenodes.xml");
             var xmlDocument = new XmlDocument();
             xmlDocument.Load(xmlReader);
             var nodesAsXmlNodeList = xmlDocument.SelectNodes("letters/*");
@@ -39,7 +39,7 @@ namespace Test.LiftPrepare
             var nodes = wssorter.getListFromXMLNodList(nodesAsXmlNodeList);
             nodes.Sort(new XmlNodeComparer());
             wssorter.replaceSortedNodes(nodes);
-            var xmlWriter = new XmlTextWriter(ActualOutputDirectory + @"simple\replacenodes.xml", null);
+            var xmlWriter = new XmlTextWriter(ActualOutputDirectory + @"simple/replacenodes.xml", null);
             xmlDocument.Save(xmlWriter);
         }
 

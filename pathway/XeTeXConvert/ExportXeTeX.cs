@@ -240,7 +240,7 @@ namespace SIL.PublishingSolution
             string tempFolder = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
             string tempFolderName = Path.GetFileName(tempFolder);
             var mc = new MergeCss { OutputLocation = tempFolderName };
-            string mergedCSS = mc.Make(projInfo.DefaultCssFileWithPath);
+            string mergedCSS = mc.Make(projInfo.DefaultCssFileWithPath, "Temp1.css");
             preProcessor.ReplaceStringInCss(mergedCSS);
             preProcessor.SetDropCapInCSS(mergedCSS);
             return preProcessor;

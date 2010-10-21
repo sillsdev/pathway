@@ -49,6 +49,7 @@ namespace SIL.Tool
         private string _projectInputType;
         private string _outputExtension;
         private string _dictionaryOutputName;
+        private string _DefaultRevCssFileWithPath;
         private string _DefaultCssFileWithPath;
         private string _DefaultXhtmlFileWithPath;
         private XmlDocument _DeXml = new XmlDocument();
@@ -184,6 +185,13 @@ namespace SIL.Tool
             get { return _DefaultCssFileWithPath; }
             set { _DefaultCssFileWithPath = value; }
         }
+
+        public string DefaultRevCssFileWithPath
+        {
+            get { return _DefaultRevCssFileWithPath; }
+            set { _DefaultRevCssFileWithPath = value; }
+        }
+
 
         public string DictionaryOutputName
         {
@@ -481,6 +489,8 @@ namespace SIL.Tool
         /// <param name="parentRecursivePath">Recursive Parent of destinationFolder path</param>
         public void CopyDirectory(DirectoryInfo sourceFolder, DirectoryInfo destinationFolder, string parentRecursivePath)
         {
+            if (sourceFolder.Name.StartsWith("."))  // Ignore .svn folders that are part of subversion repository
+                return;
             string destPathParent = parentRecursivePath;
             AddFolderToXML(destinationFolder.FullName, destPathParent);
 

@@ -54,9 +54,9 @@ namespace Test.CssDialog
         protected void SetUpAll()
         {
             CommonTestMethod.DisableDebugAsserts();
-            string currentFolder = Common.DirectoryPathReplace(Environment.CurrentDirectory + "/../../CssDialog/TestFiles");
+            string currentFolder = PathPart.Bin(Environment.CurrentDirectory, "/CssDialog/TestFiles");
             _inputBasePath = Common.PathCombine(currentFolder, "Input");
-            _supportPath = Common.DirectoryPathReplace(currentFolder + "/../../../PsSupport");
+            _supportPath = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
             var allUsersDataDir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
             _publishingSolutionsData = Common.PathCombine(allUsersDataDir, Common.PathCombine("SIL", "Pathway"));
         }

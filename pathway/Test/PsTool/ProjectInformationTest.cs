@@ -47,6 +47,10 @@ namespace Test.PsTool
             _target = new PublicationInformation();
             actualDocument = new XmlDocument{ XmlResolver =  null};
             LoadInputDocument("Dictionary1.de");
+            var outputPath = Common.PathCombine(GetTestPath(), "Output");
+            if (Directory.Exists(outputPath))
+                Directory.Delete(outputPath, true);
+            Directory.CreateDirectory(outputPath);
             Common.Testing = true;
         }
 
@@ -137,6 +141,13 @@ namespace Test.PsTool
         [Test]
         public void DEGetAttributeTest()
         {
+            string fileName = "DictionarySave.de";
+            string sourceFile = GetFileNameWithPath(fileName);
+            fileName = "dummy.de"; // nothing to do with xml, but addfiletoxml uses this
+            string output = GetFileNameWithOutputPath(fileName);
+            CopyToOutput(sourceFile, output);
+            _target.LoadProjectFile(output);
+
             string nodeName = "Section";
             string attributeName = "No";
             string expected = "1";
@@ -150,7 +161,7 @@ namespace Test.PsTool
         [Test]
         public void LoadProjectFileTest()
         {
-            string projFile = GetFileNameWithPath("test.xhtml");
+            string projFile = GetFileNameWithPath("Test.xhtml");
             _target.LoadProjectFile(projFile);
             XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
             xmlDocument.Load(projFile);
@@ -264,6 +275,7 @@ namespace Test.PsTool
         ///A test for CopyDirectory
         ///</summary>
         [Test]
+        [Ignore]
         public void CopyDirectoryTest()
         {
             string fileName = "DictionarySave.de";
@@ -273,16 +285,16 @@ namespace Test.PsTool
             CopyToOutput(sourceFile, output);
             _target.LoadProjectFile(output);
 
-            string inputPath = Common.PathCombine(GetTestPath(),Common.PathCombine("inputfiles","copyFolder"));
+            string inputPath = Common.PathCombine(GetTestPath(),Common.PathCombine("Inputfiles","CopyFolder"));
             var sourceFolder = new DirectoryInfo(inputPath);
 
-            string outputPath = Common.PathCombine(GetTestPath(), Common.PathCombine("output", "copyFolder"));
+            string outputPath = Common.PathCombine(GetTestPath(), Common.PathCombine("Output", "CopyFolder"));
             var destinationFolder = new DirectoryInfo(outputPath);
 
             string parentRecursivePath = Path.GetDirectoryName(outputPath); 
             _target.CopyDirectory(sourceFolder, destinationFolder, parentRecursivePath);
 
-            string expectedPath = Common.PathCombine(GetTestPath(), Common.PathCombine("expected", "copyFolder"));
+            string expectedPath = Common.PathCombine(GetTestPath(), Common.PathCombine("Expected", "CopyFolder"));
             var expectedFolder = new DirectoryInfo(expectedPath);
 
 
@@ -472,7 +484,7 @@ namespace Test.PsTool
 
         private string GetFileNameWithPath(string fileName)
         {
-            fileName = Common.DirectoryPathReplace(Environment.CurrentDirectory + "/../../PsTool/TestFiles/InputFiles/" + fileName);
+            fileName = PathPart.Bin(Environment.CurrentDirectory,"/PsTool/TestFiles/InputFiles/" + fileName);
             return fileName;
         }
         private static string GetFileNameWithOutputPath(string fileName)
@@ -493,7 +505,7 @@ namespace Test.PsTool
         }
         private static string GetTestPath()
         {
-            string path = Common.DirectoryPathReplace(Environment.CurrentDirectory + "/../../PsTool/TestFiles/");
+            string path = PathPart.Bin(Environment.CurrentDirectory, "/PsTool/TestFiles/");
             return path;
         }
 

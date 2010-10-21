@@ -25,14 +25,14 @@ namespace Test.UIConfigurationToolTest
         /// <summary>holds path to output folder for all tests</summary>
         private static string _outputBasePath = string.Empty;
         private string _supportSource = string.Empty;
-        private ConfigurationToolBL _configToolBL;
+        private ConfigurationTool _configTool;
         /// <summary>
         /// setup Input, Expected, and Output paths relative to location of program
         /// </summary>
         [TestFixtureSetUp]
         protected void SetUp()
         {
-            _configToolBL = new ConfigurationToolBL();
+            _configTool = new ConfigurationTool("","","");
 
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/ConfigurationTool/TestFiles");
             _inputBasePath = Common.PathCombine(testPath, "Input");
@@ -58,7 +58,7 @@ namespace Test.UIConfigurationToolTest
             LoadParam();
 
 
-			//Common.ProgBase = _outputBasePath;
+            //Common.ProgBase = _outputBasePath;
             //Param.Value["UserSheetPath"] = _outputBasePath; 
         }
 
@@ -93,34 +93,34 @@ namespace Test.UIConfigurationToolTest
             DataGridView grid = PopulateGrid2();
             // load grid
             const int mySelectedRowIndex = 0;
-            _configToolBL.SelectedRowIndex = 0;
+            _configTool._CToolBL.SelectedRowIndex = 0;
             TextBox tb1 = new TextBox();
             tb1.Name = "txtDesc";
             tb1.Text = "txtDesc123";
             Control myControl = tb1;
-            _configToolBL.UpdateGrid(myControl, grid);
-            Assert.AreEqual(grid[_configToolBL.ColumnDescription, mySelectedRowIndex].Value.ToString(), tb1.Text, "description error");
+            _configTool._CToolBL.UpdateGrid(myControl, grid);
+            Assert.AreEqual(grid[_configTool._CToolBL.ColumnDescription, mySelectedRowIndex].Value.ToString(), tb1.Text, "description error");
 
             TextBox tb2 = new TextBox();
             tb2.Name = "txtComment";
             tb2.Text = "txtComment123";
             myControl = tb2;
-            _configToolBL.UpdateGrid(myControl, grid);
-            Assert.AreEqual(grid[_configToolBL.ColumnComment, mySelectedRowIndex].Value.ToString(), tb2.Text, "comment error");
+            _configTool._CToolBL.UpdateGrid(myControl, grid);
+            Assert.AreEqual(grid[_configTool._CToolBL.ColumnComment, mySelectedRowIndex].Value.ToString(), tb2.Text, "comment error");
 
             TextBox tb3 = new TextBox();
             tb3.Name = "txtName";
             tb3.Text = "txtName123";
             myControl = tb3;
-            _configToolBL.UpdateGrid(myControl, grid);
-            Assert.AreEqual(grid[_configToolBL.ColumnName, mySelectedRowIndex].Value.ToString(), tb3.Text, "name error");
+            _configTool._CToolBL.UpdateGrid(myControl, grid);
+            Assert.AreEqual(grid[_configTool._CToolBL.ColumnName, mySelectedRowIndex].Value.ToString(), tb3.Text, "name error");
 
             CheckBox ch1 = new CheckBox();
             ch1.Name = "ChkShown";
             ch1.Checked = true;
             myControl = ch1;
-            _configToolBL.UpdateGrid(myControl, grid);
-            Assert.AreEqual(grid[_configToolBL.ColumnShown, mySelectedRowIndex].Value.ToString(), "Yes", "shown error");
+            _configTool._CToolBL.UpdateGrid(myControl, grid);
+            Assert.AreEqual(grid[_configTool._CToolBL.ColumnShown, mySelectedRowIndex].Value.ToString(), "Yes", "shown error");
         }
 
         [Test]
@@ -130,9 +130,9 @@ namespace Test.UIConfigurationToolTest
             al.Add("Sheet-1");
             al.Add("Sheet-4");
             al.Add("Sheet-8");
-            _configToolBL.StyleName = "Sheet-1";
+            _configTool._CToolBL.StyleName = "Sheet-1";
             string expected = "Copy of Sheet-1";
-            string actual = _configToolBL.GetNewStyleName(al, "copy");
+            string actual = _configTool._CToolBL.GetNewStyleName(al, "copy");
             Assert.AreEqual(expected, actual);
         }
 
@@ -141,10 +141,10 @@ namespace Test.UIConfigurationToolTest
         {
             DataGridView stylesGrid = PopulateGrid();
 
-            _configToolBL.SelectRow(stylesGrid, "Style3");
+            _configTool._CToolBL.SelectRow(stylesGrid, "Style3");
             bool fail = stylesGrid.Rows[1].Selected;
 
-            _configToolBL.SelectRow(stylesGrid, "Style2");
+            _configTool._CToolBL.SelectRow(stylesGrid, "Style2");
             bool pass = stylesGrid.Rows[1].Selected;
 
             Assert.IsTrue(!fail && pass, "SelectRow test is failed");
@@ -154,10 +154,10 @@ namespace Test.UIConfigurationToolTest
         {
             DataGridView stylesGrid = PopulateGrid();
             stylesGrid.Rows[1].Selected = true;
-            bool exist = _configToolBL.IsNameExists(stylesGrid, "Style2");
+            bool exist = _configTool._CToolBL.IsNameExists(stylesGrid, "Style2");
             Assert.IsFalse(exist);
 
-            exist = _configToolBL.IsNameExists(stylesGrid, "Style3");
+            exist = _configTool._CToolBL.IsNameExists(stylesGrid, "Style3");
             Assert.IsTrue(exist);
         }
 
@@ -169,7 +169,7 @@ namespace Test.UIConfigurationToolTest
             StreamWriter writeCss = new StreamWriter(outputFileWithPath);
             var value = new Dictionary<string, string>();
             value["column-gap"] = "5pt";
-            _configToolBL.WriteCssClass(writeCss, "letData", value);
+            _configTool._CToolBL.WriteCssClass(writeCss, "letData", value);
             writeCss.Close();
             string expectedFileWithPath = Common.PathCombine(_expectBasePath, fileName);
             TextFileAssert.AreEqual(expectedFileWithPath, outputFileWithPath, "WriteCss Test fails");
@@ -196,7 +196,7 @@ namespace Test.UIConfigurationToolTest
             if (!File.Exists(fileWithPath))
                 Assert.Fail("Please add the input file Draft.css");
 
-            _configToolBL.RemoveXMLNode(styleName);
+            _configTool._CToolBL.RemoveXMLNode(styleName);
 
             removableNode = Param.GetItem(xPath);
             if (removableNode != null)
@@ -216,10 +216,10 @@ namespace Test.UIConfigurationToolTest
             //LoadParam();
 
             string styleName = "MyyStyyle98765";
-            _configToolBL.MediaType = "paper";
-            _configToolBL.StyleName = styleName;
-            _configToolBL.FileName = styleName + ".css";
-            _configToolBL.AddNew(styleName);
+            _configTool._CToolBL.MediaType = "paper";
+            _configTool._CToolBL.StyleName = styleName;
+            _configTool._CToolBL.FileName = styleName + ".css";
+            _configTool._CToolBL.AddNew(styleName);
             string xPath = "//styles/" + "paper" + "/style[@name='" + styleName + "']";
 
             XmlNode removableNode = Param.GetItem(xPath);
@@ -259,7 +259,7 @@ namespace Test.UIConfigurationToolTest
             dd2.Items.Add("2");
             dd2.Items.Add("3");
 
-            _configToolBL.ClearPropertyTab(tabDisplay);
+            _configTool._CToolBL.ClearPropertyTab(tabDisplay);
 
             Assert.IsTrue(tb1.Text.Length == 0 && tb2.Text.Length == 0, "Text Box Value is not cleared");
             Assert.IsTrue(dd1.Items.Count == 0 && dd2.Items.Count == 0, "Combo Box Value is not cleared");
@@ -276,7 +276,7 @@ namespace Test.UIConfigurationToolTest
             string[] expected = { "A4", "A5", "C5", "A6", "Letter", "Half letter", "5.25in x 8.25in", "5.8in x 8.7in", "6in x 9in" };
             for (int i = 0; i < expected.Length; i++)
             {
-                string actual = _configToolBL.PageSize1(width[i], height[i]);
+                string actual = _configTool._CToolBL.PageSize1(width[i], height[i]);
                 Assert.AreEqual(actual, expected[i]);
             }
         }
@@ -294,10 +294,10 @@ namespace Test.UIConfigurationToolTest
 
             for (int i = 0; i < value.Length; i++)
             {
-                _configToolBL.SaveColumnWidth(i.ToString(), value[i]);
+                _configTool._CToolBL.SaveColumnWidth(i.ToString(), value[i]);
             }
 
-            _configToolBL.GridColumnWidth(grid);
+            _configTool._CToolBL.GridColumnWidth(grid);
 
             bool result = true;
             for (int i = 0; i < value.Length; i++)
@@ -321,10 +321,10 @@ namespace Test.UIConfigurationToolTest
             cssNames.Add("style-1");
             cssNames.Add("style-2");
             DataGridView grid = PopulateGrid2();
-            _configToolBL.StyleName = "Sheet-1";
-            _configToolBL.CopyStyle(grid, cssNames);
-            string styleName = "Copy of Sheet-1";
-            string xPath = "//styles/" + "paper" + "/style[@name='" + styleName + "']";
+            _configTool._CToolBL.StyleName = "Sheet-1";
+            _configTool._CToolBL.CopyStyle(grid, cssNames);
+            string sName = "Copy of Sheet-1";
+            string xPath = "//styles/" + "paper" + "/style[@name='" + sName + "']";
             XmlNode removableNode = Param.GetItem(xPath);
             if (removableNode == null)
                 Assert.Fail("DictionaryStyleSettings.xml - The Xpath - " + xPath + "  not found in CopyStyle");
@@ -336,49 +336,49 @@ namespace Test.UIConfigurationToolTest
         [Test]
         public void WriteMedia()
         {
-            _configToolBL.MediaType = "Web";
-            _configToolBL.WriteMedia();
+            _configTool._CToolBL.MediaType = "Web";
+            _configTool._CToolBL.WriteMedia();
             string media = Param.GetAttrByName("//categories/category", "Media", "select");
-            Assert.AreEqual(media, _configToolBL.MediaType, "Media writing failed");
+            Assert.AreEqual(media, _configTool._CToolBL.MediaType, "Media writing failed");
         }
 
- 
+
         /// <summary>
         ///A test for WriteAttribTest
         ///</summary>
         [Test]
         public void WriteAttribTest()
         {
-            _configToolBL.PreviousValue = "Draft";
+            _configTool._CToolBL.PreviousValue = "Draft";
             string key = "StyleName";
             TextBox tb = new TextBox();
-            tb.Text = _configToolBL.PreviousValue;
+            tb.Text = _configTool._CToolBL.PreviousValue;
             object sender = tb;
 
-            bool result = _configToolBL.WriteAttrib(key, sender);
+            bool result = _configTool._CToolBL.WriteAttrib(key, sender);
             Assert.IsFalse(result, "Previous value not utilized properly");
 
-            _configToolBL.StyleName = "no";
-            _configToolBL.MediaType = "no";
-            _configToolBL.PreviousValue = "Draft";
+            _configTool._CToolBL.StyleName = "no";
+            _configTool._CToolBL.MediaType = "no";
+            _configTool._CToolBL.PreviousValue = "Draft";
             key = "StyleName";
             string newStyleName = "NewStyleName";
             tb.Text = newStyleName;
             sender = tb;
 
-            result = _configToolBL.WriteAttrib(key, sender);
+            result = _configTool._CToolBL.WriteAttrib(key, sender);
             Assert.IsFalse(result, "Empty Media & Empty Style not handled");
 
             //Writing StyleName and FileName 
-            key = _configToolBL.AttribName;
-            _configToolBL.StyleName = "LikeBuangPNG";
-            _configToolBL.MediaType = "paper";
-            _configToolBL.PreviousValue = "Draft";
-            _configToolBL.FileName = newStyleName + ".Css";
+            key = _configTool._CToolBL.AttribName;
+            _configTool._CToolBL.StyleName = "LikeBuangPNG";
+            _configTool._CToolBL.MediaType = "paper";
+            _configTool._CToolBL.PreviousValue = "Draft";
+            _configTool._CToolBL.FileName = newStyleName + ".Css";
             tb.Text = newStyleName;
             sender = tb;
 
-            result = _configToolBL.WriteAttrib(key, sender);
+            result = _configTool._CToolBL.WriteAttrib(key, sender);
 
             string xPath = "//styles/" + "paper" + "/style[@name='" + newStyleName + "']";
             XmlNode removableNode = Param.GetItem(xPath);
@@ -386,13 +386,13 @@ namespace Test.UIConfigurationToolTest
                 Assert.Fail("DictionaryStyleSettings.xml - The Xpath - " + xPath + "  not found in WriteAttribTest");
 
             //Writing Shown
-            key = _configToolBL.AttribShown;
+            key = _configTool._CToolBL.AttribShown;
             CheckBox checkBox = new CheckBox();
-            checkBox.Checked =  true;
+            checkBox.Checked = true;
             sender = checkBox;
-            _configToolBL.StyleName = newStyleName;
+            _configTool._CToolBL.StyleName = newStyleName;
 
-            result = _configToolBL.WriteAttrib(key, sender);
+            result = _configTool._CToolBL.WriteAttrib(key, sender);
             removableNode = Param.GetItem(xPath);
             if (removableNode != null)
             {
@@ -401,24 +401,24 @@ namespace Test.UIConfigurationToolTest
             }
 
             //Writing Description 
-            key = _configToolBL.ElementDesc;
+            key = _configTool._CToolBL.ElementDesc;
             tb.Text = "New Description Added";
             sender = tb;
 
-            result = _configToolBL.WriteAttrib(key, sender);
+            result = _configTool._CToolBL.WriteAttrib(key, sender);
             removableNode = Param.GetItem(xPath);
             if (removableNode != null)
             {
                 string desc = removableNode.FirstChild.InnerText;
-                Assert.AreEqual(tb.Text,desc, "Description not added");
+                Assert.AreEqual(tb.Text, desc, "Description not added");
             }
 
             //Writing Comment
-            key = _configToolBL.ElementComment;
+            key = _configTool._CToolBL.ElementComment;
             tb.Text = "New Comment Added";
             sender = tb;
 
-            result = _configToolBL.WriteAttrib(key, sender);
+            result = _configTool._CToolBL.WriteAttrib(key, sender);
             removableNode = Param.GetItem(xPath);
             if (removableNode != null)
             {
@@ -433,16 +433,16 @@ namespace Test.UIConfigurationToolTest
         [Test]
         public void GetValue()
         {
-            _configToolBL.SetCssDictionartyToTest();
+            _configTool._CToolBL.SetCssDictionartyToTest();
             string task = "letData";
             string key = "column-count";
-            string actual = _configToolBL.GetValue(task, key, "");
+            string actual = _configTool._CToolBL.GetValue(task, key, "");
             string expected = "2";
-            Assert.AreEqual(expected,actual,"GetValue Failed");
+            Assert.AreEqual(expected, actual, "GetValue Failed");
 
             task = "entry";
             key = "text-align";
-            actual = _configToolBL.GetValue(task, key, "No");
+            actual = _configTool._CToolBL.GetValue(task, key, "No");
             expected = "justify";
             Assert.AreEqual(expected, actual, "GetValue Failed");
 
@@ -452,7 +452,7 @@ namespace Test.UIConfigurationToolTest
         public void WriteAtImport()
         {
             TreeView TvFeatures = new TreeView();
-            _configToolBL.PopulateFeatureLists(TvFeatures);
+            _configTool._CToolBL.PopulateFeatureLists(TvFeatures);
 
             string fileName = "WriteAtImport.css";
             string outputFileWithPath = Common.PathCombine(_outputBasePath, fileName);
@@ -460,7 +460,7 @@ namespace Test.UIConfigurationToolTest
 
             string attrib = "Page Size";
             string key = "A4";
-            _configToolBL.WriteAtImport(writeCss, attrib, key);
+            _configTool._CToolBL.WriteAtImport(writeCss, attrib, key);
             writeCss.Close();
             string expectedFileWithPath = Common.PathCombine(_expectBasePath, fileName);
             TextFileAssert.AreEqual(expectedFileWithPath, outputFileWithPath, "WriteCss Test fails");
@@ -470,7 +470,7 @@ namespace Test.UIConfigurationToolTest
         public void CreateCssFile()
         {
             string fileName = "CreateCssFile.css";
-            _configToolBL.CreateCssFile(fileName);
+            _configTool._CToolBL.CreateCssFile(fileName);
             string expectedFileWithPath = Common.PathCombine(_expectBasePath, fileName);
             string outputFileWithPath = Common.PathCombine(_outputBasePath, fileName);
             TextFileAssert.AreEqual(expectedFileWithPath, outputFileWithPath, "CreateCssFile Test fails");
@@ -480,7 +480,7 @@ namespace Test.UIConfigurationToolTest
         public void SetPreviousLayoutSelect()
         {
             DataGridView gridView = new DataGridView();
-            string actual = _configToolBL.SetPreviousLayoutSelect(gridView);
+            string actual = _configTool._CToolBL.SetPreviousLayoutSelect(gridView);
             string expected = "FieldWorksStyles";
             Assert.AreEqual(expected, actual, "SetPreviousLayoutSelect Test failed");
         }
@@ -490,10 +490,10 @@ namespace Test.UIConfigurationToolTest
         {
             DataGridView gridView = new DataGridView();
             ArrayList arrayList = new ArrayList();
-            _configToolBL.MediaType = "paper";
-            _configToolBL.CreateGridColumn();
-            _configToolBL.LoadMediaStyle(gridView,arrayList);
-            Assert.IsTrue(_configToolBL.DataSetForGrid.Tables[0].Rows.Count > 0, "LoadMediaStyle Test failed");
+            _configTool._CToolBL.MediaType = "paper";
+            _configTool._CToolBL.CreateGridColumn();
+            _configTool._CToolBL.ShowStyleInGrid(gridView, arrayList);
+            Assert.IsTrue(_configTool._CToolBL.DataSetForGrid.Tables[0].Rows.Count > 0, "ShowStyleInGrid Test failed");
         }
 
         /// <summary>
@@ -502,6 +502,7 @@ namespace Test.UIConfigurationToolTest
         [Test]
         public void CopyCustomStyleToSend()
         {
+            _configTool._CToolBL.MediaType = "paper";
             //LoadParam();
             string folderPath = Common.PathCombine(_outputBasePath, "NewFolderPath");
             if (Directory.Exists(folderPath))
@@ -513,28 +514,28 @@ namespace Test.UIConfigurationToolTest
             fileName = "Layout_12.css"; // File Name
             NunitFileCopy(fileName); // copy to outputFolder
 
-            Assert.IsTrue(_configToolBL.CopyCustomStyleToSend(folderPath), "CopyCustomStyleToSend test failed");
+            Assert.IsTrue(_configTool._CToolBL.CopyCustomStyleToSend(folderPath), "CopyCustomStyleToSend test failed");
         }
 
         [Test]
         public void CreateGridColumn()
         {
-            _configToolBL.CreateGridColumn();
-            int columnCount = _configToolBL.DataSetForGrid.Tables[0].Columns.Count;
+            _configTool._CToolBL.CreateGridColumn();
+            int columnCount = _configTool._CToolBL.DataSetForGrid.Tables[0].Columns.Count;
             Assert.AreEqual(9, columnCount, "Grid Column Count Error");
 
             bool result = true;
             string[] column = { "Name", "Description", "Comment", "Type", "Shown", "Approvedby", "File" };
             for (int i = 0; i < column.Length; i++)
             {
-                if (_configToolBL.DataSetForGrid.Tables[0].Columns[i].ToString() != column[i])
+                if (_configTool._CToolBL.DataSetForGrid.Tables[0].Columns[i].ToString() != column[i])
                 {
                     result = false;
                     break;
                 }
             }
             Assert.IsTrue(result, "Grid Column order is not proper");
-        } 
+        }
         #endregion
 
         #region Methods
@@ -564,7 +565,7 @@ namespace Test.UIConfigurationToolTest
             stylesGrid.Columns.Add("Type", "Type");
             stylesGrid.Columns.Add("Shown", "Shown");
             stylesGrid.Columns.Add("approvedBy", "approvedBy");
-            string[] row1 = { "Style2", "Style2 is selected", "2 comment", "Custom", "Yes","GPS" };
+            string[] row1 = { "Style2", "Style2 is selected", "2 comment", "Custom", "Yes", "GPS" };
             string[] row2 = { "txtName123", "txtDesc123", "txtComment123", "Custom", "Yes", "GPS" };
             string[] row3 = { "Style3", "Style3 is selected", "3 comment", "Custom", "Yes", "GPS" };
             stylesGrid.Rows.Add(row1);
@@ -586,7 +587,7 @@ namespace Test.UIConfigurationToolTest
             // Verifying the input setting file and css file - in Input Folder
             string settingFile = "DictionaryStyleSettings.xml";
             string sFileName = Common.PathCombine(_outputBasePath, settingFile);
-			Common.ProgBase = _outputBasePath;
+            Common.ProgBase = _outputBasePath;
             Param.LoadValues(sFileName);
             Param.SetLoadType = "Dictionary";
             Param.Value["OutputPath"] = _outputBasePath;

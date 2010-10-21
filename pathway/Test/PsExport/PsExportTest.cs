@@ -56,7 +56,7 @@ namespace Test.PsExport
                 Directory.Delete(_outputBasePath, true);
             Directory.CreateDirectory(_outputBasePath);
             // Set application base for test
-            Common.ProgInstall = Common.DirectoryPathReplace(testPath + "/../../../ConfigurationTool/Bin/Debug");
+            Common.ProgInstall = Environment.CurrentDirectory.Replace("Test", "ConfigurationTool");
             FolderTree.Copy(Common.PathCombine(testPath, "../../../PsSupport/OfficeFiles"),Path.Combine(Common.ProgInstall,"OfficeFiles"));
             Backend.Load(Common.ProgInstall);
         }
@@ -181,9 +181,13 @@ namespace Test.PsExport
             if (Directory.Exists(FileInput("Pictures")))
                 FolderTree.Copy(FileInput("Pictures"), FileOutput("Pictures"));
             CopyExistingFile("FlexRev.xhtml");
-            //CopyExistingFile("FlexRev.css");
+            CopyExistingFile("FlexRev.css");
 
             var tpe = new SIL.PublishingSolution.PsExport { Destination = target, DataType = dataType};
+            if (testName.ToLower() == "t5" || testName.ToLower() == "t8")
+            {
+                tpe._fromNUnit = true;
+            }
             tpe.Export(FileOutput(mainXhtml));
             switch (target)
             {
@@ -311,6 +315,7 @@ namespace Test.PsExport
         [Test]
         public void PsExportT5()
         {
+
             ExportTest("T5", "main.xhtml", "Dictionary", "OpenOffice", "T5: Flex ODT Export Test");
         }
         #endregion T5

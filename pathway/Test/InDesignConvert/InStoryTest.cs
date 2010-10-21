@@ -46,6 +46,9 @@ namespace Test.InDesignConvert
             _outputStyles = Common.PathCombine(_outputPath, "Resources");
             _outputStory = Common.PathCombine(_outputPath, "Stories");
             _cssProperty = new Dictionary<string, Dictionary<string, string>>();
+            Common.SupportFolder = "";
+            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
+
         }
 
         [SetUp]

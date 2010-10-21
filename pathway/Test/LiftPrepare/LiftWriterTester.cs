@@ -14,7 +14,7 @@ namespace Test.LiftPrepare
         [Test]
         public void testLiftWriter()
         {
-            var liftWriter = new LiftWriter(TestEnvironment.ActualOutputRoot + @"simple\testLiftWriter.lift");
+            var liftWriter = new LiftWriter(TestEnvironment.ActualOutputRoot + @"simple/testLiftWriter.lift");
             Assert.AreEqual(typeof(XmlTextWriter), liftWriter.GetType().BaseType);
         }
     }

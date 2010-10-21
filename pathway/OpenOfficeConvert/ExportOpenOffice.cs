@@ -524,6 +524,10 @@ namespace SIL.PublishingSolution
                                 {
                                     LexiconFileName = fileName;
                                 }
+                                else if (subSection.Key == "Reversal")
+                                {
+                                    publicationInfo.DefaultCssFileWithPath = publicationInfo.DefaultRevCssFileWithPath;
+                                }
                                 publicationInfo.DefaultXhtmlFileWithPath = fileName;
                                 publicationInfo.ProgressBar = statusProgressBar;
                                 publicationInfo.IsOpenOutput = false;
@@ -652,14 +656,14 @@ namespace SIL.PublishingSolution
                 }
             }
 
-            //Include FlexRev.css when XHTML is FlexRev.xhtml
-            string FlexRev = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
-            if (FlexRev.ToLower() == "flexrev")
-            {
-                string revCSS = Path.Combine(Path.GetDirectoryName(projInfo.DefaultCssFileWithPath), "FlexRev.css");
-                if (File.Exists(revCSS))
-                    projInfo.DefaultCssFileWithPath = revCSS;
-            }
+            ////Include FlexRev.css when XHTML is FlexRev.xhtml
+            //string FlexRev = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+            //if (FlexRev.ToLower() == "flexrev")
+            //{
+            //    string revCSS = Path.Combine(Path.GetDirectoryName(projInfo.DefaultCssFileWithPath), "FlexRev.css");
+            //    if (File.Exists(revCSS))
+            //        projInfo.DefaultCssFileWithPath = revCSS;
+            //}
 
             // BEGIN Generate Styles.Xml File
             var sXML = new StylesXML();
@@ -684,8 +688,8 @@ namespace SIL.PublishingSolution
             preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
             if (projInfo.SwapHeadword)
                 preProcessor.SwapHeadWordAndReversalForm();
+            preProcessor.PreserveSpace();
             projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
-
             //cXML.CreateContent(projInfo.ProgressBar, projInfo.DefaultXhtmlFileWithPath, strToOfficeFolder + Path.DirectorySeparatorChar,
             //                   styleName, fileType);
             projInfo.TempOutputFolder += Path.DirectorySeparatorChar;

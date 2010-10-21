@@ -1,4 +1,8 @@
+if exist setup.py goto rightLoc
 cd ..\..
+if exist setup.py goto rightLoc
+cd ..
+:rightLoc
 rem requires Python 2.5 (www.python.org) with modules Py2Exe, lxml
 python setup.py
 set dst=..\PsSupport\Wordpress

@@ -22,7 +22,7 @@ namespace Test.LiftPrepare
         [Test]
         public void testGetLiftNode()
         {
-            var liftReader = new LiftReader(TestEnvironment.InputRoot + @"simple\validLift.lift");
+            var liftReader = new LiftReader(TestEnvironment.InputRoot + @"simple/validLift.lift");
             liftDocument.Load(liftReader);
             var liftRootNode = liftDocument.getLiftNode();
             StringAssert.AreEqualIgnoringCase("lift",liftRootNode.Name);
@@ -31,7 +31,7 @@ namespace Test.LiftPrepare
         [Test]
         public void testGetEntries()
         {
-            var liftReader = new LiftReader(TestEnvironment.InputRoot + @"simple\liftEntries.lift");
+            var liftReader = new LiftReader(TestEnvironment.InputRoot + @"simple/liftEntries.lift");
             liftDocument.Load(liftReader);
             var liftEntries = liftDocument.getEntries();
             Assert.AreEqual(10, liftEntries.Count());

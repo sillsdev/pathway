@@ -21,7 +21,7 @@ namespace Test.LiftPrepare.TransformTests
         [Test]
         public void testTransform()
         {
-            var documentToTransform = new LiftDocument(TestEnvironment.InputRoot + @"buang\buang-small.lift");
+            var documentToTransform = new LiftDocument(TestEnvironment.InputRoot + @"buang/buang-small.lift");
             var transformedDocument = liftTransformer.applyTo(documentToTransform);
             var writer = new XmlTextWriter(TestEnvironment.ActualOutputRoot + @"buang-small.xhtml",null);
             transformedDocument.Save(writer);

@@ -19,7 +19,7 @@ namespace Test.LiftPrepare
         [SetUp]
         public void setup()
         {
-            var liftReader = new LiftReader(TestEnvironment.InputRoot + @"simple\liftEntries.lift");
+            var liftReader = new LiftReader(TestEnvironment.InputRoot + @"simple/liftEntries.lift");
             document = new LiftDocument();
             document.Load(liftReader);
             entries = document.getEntries();

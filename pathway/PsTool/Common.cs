@@ -28,6 +28,7 @@ using System.Globalization;
 using System.Xml;
 using SIL.PublishingSolution;
 using SIL.Tool.Localization;
+using Test;
 
 #endregion Using
 
@@ -473,14 +474,14 @@ namespace SIL.Tool
             {
                 result = false;
             }
-            else
-            {
-                var rx = new Regex(@"^[a-zA-Z]");
-                if (!rx.IsMatch(stringValue.Trim()))
-                {
-                    result = false;
-                }
-            }
+            //else
+            //{
+            //    var rx = new Regex(@"^[a-zA-Z]");
+            //    if (!rx.IsMatch(stringValue.Trim()))
+            //    {
+            //        result = false;
+            //    }
+            //}
             return result;
         }
         #endregion
@@ -1159,8 +1160,7 @@ namespace SIL.Tool
         /// </summary>
         public static string GetFieldworksVersionPath()
         {
-            return PathCombine(Environment.CurrentDirectory, "../../../../PsSupport/FieldworksVersions.txt");
-            //return PathCombine(GetPSApplicationPath(), "FieldworksVersions.txt");
+            return PathCombine(GetPSApplicationPath(), "FieldworksVersions.txt");
         }
         #endregion isRightFieldworksVersion()
 

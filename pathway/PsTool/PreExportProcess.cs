@@ -140,7 +140,7 @@ namespace SIL.Tool
             if (!File.Exists(tempFile)) return string.Empty;
 
             // xml image copy
-            var xmldoc = new XmlDocument { XmlResolver = null };
+            var xmldoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true};
             xmldoc.Load(tempFile);
             const string tag = "img";
             XmlNodeList nodeList = xmldoc.GetElementsByTagName(tag);
@@ -315,17 +315,21 @@ namespace SIL.Tool
             bool replace = true;
             while ((line = stream.ReadLine()) != null)
             {
-                if (replace == true)
+                if (replace)
                 {
                     if (line.IndexOf("<body") >= 0)
                     {
-                        line = line.Replace(">", @" xml:space=""preserve"">");
+                        //line = line.Replace(">", @" xml:space=""preserve"">");
+                        line = line.Replace("<body", @" <body xml:space=""preserve""  ");
                         replace = false;
                 }
             }
                 sw2.WriteLine(line);
             }
             sw2.Close();
+            fs.Close();
+            fs2.Close();
+
             _xhtmlFileNameWithPath = Newfile;
             return _xhtmlFileNameWithPath;
         }
@@ -526,6 +530,8 @@ namespace SIL.Tool
                     {
                         foreach (XmlNode chapterNode in item)
                         {
+                            if (chapterNode.NodeType == XmlNodeType.Whitespace) continue;
+
                             var chapter = chapterNode.Attributes.GetNamedItem("class");
                             if (chapter != null && chapter.Value.ToLower() == "scrintrosection")
                             {

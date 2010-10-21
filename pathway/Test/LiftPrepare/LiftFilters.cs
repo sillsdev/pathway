@@ -27,11 +27,11 @@ namespace Test.LiftPrepare
         protected void SetUp()
         {
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/LiftPrepare/TestFiles");
-            _inputPath = Common.PathCombine(testPath, "input");
-            _outputPath = Common.PathCombine(testPath, "output");
-            _expectedPath = Common.PathCombine(testPath, "expected");
+            _inputPath = Common.PathCombine(testPath, "Input");
+            _outputPath = Common.PathCombine(testPath, "Output");
+            _expectedPath = Common.PathCombine(testPath, "Expected");
             Common.SupportFolder = "";
-            Common.ProgInstall = Common.DirectoryPathReplace(Environment.CurrentDirectory + "/../../../PsSupport");
+            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
             exportOpenOffice = new ExportOpenOffice();
 
         }
@@ -333,6 +333,7 @@ namespace Test.LiftPrepare
         }
 
         [Test]
+        //[Ignore] //Palaso library fails when loading coallator LiftEntrySorter.cs line 32 (prepLiftForSort)
         public void AkooseSorting()
         {
             string inputLift = "EntrySort.lift";
@@ -349,6 +350,11 @@ namespace Test.LiftPrepare
 
         }
 
-
+        [Test]
+        public void LoadCoallator()
+        {
+            var collator = new Palaso.WritingSystems.Collation.IcuRulesCollator("[alternate shifted]");
+            //If this test fails, platform may not be set to x86
+        }
     }
 }

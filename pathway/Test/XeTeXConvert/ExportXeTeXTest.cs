@@ -250,7 +250,7 @@ namespace Test.XeTeXConvert
             const string BlankName = "blank.css";
             PublicationInformation projInfo = GetProjInfo(XhtmlName, BlankName);
             IPreExportProcess actual = PreProcess(projInfo);
-            TextFileAssert.AreEqual(FileExpected(XhtmlName), actual.ProcessedXhtml);
+            XmlAssert.AreEqual(FileExpected(XhtmlName), actual.ProcessedXhtml, "minimal.xhtml not equal");
             TextFileAssert.AreEqual(FileExpected(BlankName), actual.ProcessedCss);
         }
 

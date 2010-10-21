@@ -56,7 +56,7 @@ namespace Test.OpenOfficeConvert
             _outputPath = Common.PathCombine(testPath, "output");
             _expectedPath = Common.PathCombine(testPath, "expected");
             Common.SupportFolder = "";
-            Common.ProgInstall = Common.DirectoryPathReplace(Environment.CurrentDirectory + "/../../../PsSupport");
+            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
         }
         #endregion Setup
 

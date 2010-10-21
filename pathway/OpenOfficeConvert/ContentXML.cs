@@ -132,7 +132,7 @@ namespace SIL.PublishingSolution
         private XmlNodeType _previousNodeType;
 
         private List<string> _unUsedParagraphStyle = new List<string>();
-
+		private bool _significant = false;
         #endregion
 
         #region Public Methods
@@ -415,10 +415,11 @@ namespace SIL.PublishingSolution
             try
             {
                 _reader = new XmlTextReader(Sourcefile)
-                              {
-                                  XmlResolver = null,
-                                  WhitespaceHandling = WhitespaceHandling.None
-                              };
+                {
+                    XmlResolver = null,
+                    WhitespaceHandling = WhitespaceHandling.Significant
+                    //WhitespaceHandling = WhitespaceHandling.None
+                };
                 //CreateBody();
 
                 while (_reader.Read())
@@ -449,6 +450,10 @@ namespace SIL.PublishingSolution
                             break;
                         case XmlNodeType.Text: // Text.Write
                             WriteText(_footnoteValue);
+                            break;
+                        case XmlNodeType.SignificantWhitespace:
+                            string data = SignificantSpace(_reader.Value);
+                            _writer.WriteString(data);
                             break;
                     }
                     _previousNodeType = _currentNodeType;
@@ -1160,7 +1165,7 @@ namespace SIL.PublishingSolution
                     {
                         _temp = _usedSpanStack.Pop().ToString();
                         _writer.WriteEndElement();
-                        _writer.WriteString(" "); //TD-1513
+                      //  _writer.WriteString(" "); //TD-1513
                     }
                 }
             }
@@ -1400,7 +1405,7 @@ namespace SIL.PublishingSolution
                     //}
                     
                     string data = HardSpace(currClass, _reader.Value);
-                    
+                    data = SignificantSpace(data);
                     _writer.WriteString(data);
                 }
                 if (string.Compare(currClass, "ChapterNumber") == 0)
@@ -2778,6 +2783,34 @@ namespace SIL.PublishingSolution
             //        _writer.WriteEndElement();
             //    }
             //}
+        }
+
+        private string SignificantSpace(string content)
+        {
+            //string content = _reader.Value;
+                content = content.Replace("\r\n", "");
+                content = content.Replace("\t", "");
+                Char[] charac = content.ToCharArray();
+                StringBuilder builder = new StringBuilder();
+                foreach (char var in charac)
+                {
+                    if (var == ' ' || var == '\b')
+                    {
+                        if (_significant)
+                        {
+                            continue;
+                        }
+                        _significant = true;
+                    }
+                    else
+                    {
+                        _significant = false;
+                    }
+                    builder.Append(var);
+                }
+                content = builder.ToString();
+            return content;
+            //_writer.WriteString(content);
         }
         /// -------------------------------------------------------------------------------------------
         /// <summary>

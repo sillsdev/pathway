@@ -24,16 +24,22 @@ rmdir /s/q bin
 cd %base%\Build\BuilderBTE
 rmdir /s/q obj
 rmdir /s/q bin
-cd %base%\Build\SetVersionBTE
-rmdir /s/q obj
-rmdir /s/q bin
 cd %base%\Build\BuilderSE
 rmdir /s/q obj
 rmdir /s/q bin
-cd %base%\Build\SetVersionSE
+cd %base%\Build\Builder7BTE
+rmdir /s/q obj
+rmdir /s/q bin
+cd %base%\Build\Builder7SE
 rmdir /s/q obj
 rmdir /s/q bin
 cd %base%\Build\BuilderBL
+rmdir /s/q obj
+rmdir /s/q bin
+cd %base%\Build\BuildCtx
+rmdir /s/q obj
+rmdir /s/q bin
+cd %base%\BookletBuilder
 rmdir /s/q obj
 rmdir /s/q bin
 cd %base%\ConfigurationTool
@@ -67,6 +73,9 @@ cd %base%\GoBibleConvert
 rmdir /s/q obj
 rmdir /s/q bin
 cd %base%\LogosConvert
+rmdir /s/q obj
+rmdir /s/q bin
+cd %base%\ParatextSupportcl
 rmdir /s/q obj
 rmdir /s/q bin
 cd %base%\PsExport

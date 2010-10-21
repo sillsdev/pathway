@@ -26,9 +26,9 @@ namespace Test
         public TestFiles(string testFilesBase)
         {
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/" + testFilesBase + "/TestFiles");
-            _inputPath = Common.PathCombine(testPath, "input");
+            _inputPath = Common.PathCombine(testPath, "Input");
             _outputPath = Common.PathCombine(testPath, "output");
-            _expectedPath = Common.PathCombine(testPath, "expected");
+            _expectedPath = Common.PathCombine(testPath, "Expected");
             if (Directory.Exists(_outputPath))
                 Directory.Delete(_outputPath, true);
             Directory.CreateDirectory(_outputPath);

@@ -190,7 +190,7 @@ namespace SIL.PublishingSolution
         {
             string attributeName = childAttribute.Name;
             var parentAttribute = new StyleAttribute();
-             float abs = 0F;
+            float abs = 0F;
             string absValue;
 
             var doc = new XmlDocument();
@@ -243,15 +243,15 @@ namespace SIL.PublishingSolution
                                     parentAttribute.SetAttribute(attribute.Value);
                                     if (childAttribute.Unit == "%")
                                     {
-                                        abs = parentAttribute.NumericValue*childAttribute.NumericValue/100.0F;
-                                            // 0.5em = 50%
+                                        abs = parentAttribute.NumericValue * childAttribute.NumericValue / 100.0F;
+                                        // 0.5em = 50%
                                         absValue = abs + "pt";
                                         return (absValue);
                                     }
                                     if (childAttribute.Unit == "em")
                                     {
-                                        abs = parentAttribute.NumericValue*childAttribute.NumericValue;
-                                            // 0.5em = 50%
+                                        abs = parentAttribute.NumericValue * childAttribute.NumericValue;
+                                        // 0.5em = 50%
                                         absValue = abs + "pt";
                                         return (absValue);
                                     }
@@ -597,7 +597,7 @@ namespace SIL.PublishingSolution
             nsmgr.AddNamespace("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
             nsmgr.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
             nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
-          
+
 
             // if new stylename exists
             XmlElement root = doc.DocumentElement;
@@ -666,7 +666,20 @@ namespace SIL.PublishingSolution
                     {
                         XmlAttribute attibBackgroundColor = paraNode.Attributes["fo:background-color"];
                         XmlNode textNode = node.LastChild;
-                        textNode.Attributes.Append(attibBackgroundColor);
+
+                        if (textNode.Attributes.GetNamedItem("fo:background-color") != null)
+                        {
+                            XmlAttribute attibBackgroundColorText = textNode.Attributes["fo:background-color"];
+                            attibBackgroundColorText.Value = attibBackgroundColor.Value;
+                        }
+                        else
+                        {
+                            XmlNode att = attibBackgroundColor.Clone();
+                            XmlAttribute attibBackgroundColorText1 = att.Attributes["fo:background-color"];
+                            textNode.Attributes.Append(attibBackgroundColorText1);
+                        }
+
+                        //textNode.Attributes.Append(attibBackgroundColor);
                         node.RemoveChild(paraNode);
                         node.AppendChild(textNode);
                     }
@@ -681,7 +694,7 @@ namespace SIL.PublishingSolution
         /// <param name="unUsedParagraphStyle">List of unused paragraph style</param>
         public void RemoveUnUsedStyle(string styleFilePath, List<string> unUsedParagraphStyle)
         {
-            if(unUsedParagraphStyle.Count == 0)
+            if (unUsedParagraphStyle.Count == 0)
                 return;
 
             var doc = new XmlDocument();
@@ -696,7 +709,7 @@ namespace SIL.PublishingSolution
             string style = "//st:style[@st:family='paragraph']";
             if (root != null)
             {
-                XmlNodeList node = root.SelectNodes(style, nsmgr); 
+                XmlNodeList node = root.SelectNodes(style, nsmgr);
                 if (node != null)
                 {
                     int nodeCount = node.Count;
@@ -707,11 +720,11 @@ namespace SIL.PublishingSolution
                         {
                             node[i].ParentNode.RemoveChild(node[i]);
 
-                            string style1 = "//st:style[@st:name='" + name.Value +"'] | st:style[@st:family='text']";
-                            XmlNode nodeText = root.SelectSingleNode(style1, nsmgr); 
-                            if(nodeText != null)
+                            string style1 = "//st:style[@st:name='" + name.Value + "'] | st:style[@st:family='text']";
+                            XmlNode nodeText = root.SelectSingleNode(style1, nsmgr);
+                            if (nodeText != null)
                             {
-                                if(nodeText.ChildNodes.Count > 1)
+                                if (nodeText.ChildNodes.Count > 1)
                                     nodeText.RemoveChild(nodeText.FirstChild);
                             }
                             nodeCount--;
@@ -935,8 +948,9 @@ namespace SIL.PublishingSolution
         public void CreateGraphicsStyle(string styleFilePath, string makeClassName, string parentName, string position, string side)
         {
             const string className = "Graphics";
-            var doc = new XmlDocument();
+            var doc = new XmlDocument { XmlResolver = null };
             doc.Load(styleFilePath);
+
             var nsmgr = new XmlNamespaceManager(doc.NameTable);
             nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
             nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
@@ -1124,25 +1138,33 @@ namespace SIL.PublishingSolution
                 XmlNode node = root.SelectSingleNode(style, nsmgr);
                 if (node != null) // class not exist in Styles.xml
                 {
-                     return true;
+                    return true;
                 }
             }
             return false;
         }
 
-        public void GraphicContentChange(string contentFilePath,ArrayList graphicNames)
+        public void GraphicContentChange(string contentFilePath, ArrayList graphicNames)
         {
-            if(graphicNames.Count == 0) return;
+            if (graphicNames.Count == 0) return;
             //MessageBox.Show("Entered");
-            var doc = new XmlDocument();
-            string file = Path.Combine(contentFilePath, "content.xml");
+            var doc = new XmlDocument { PreserveWhitespace = true, XmlResolver = null };
+            string file;
+            if (!Common.Testing)
+            {
+                file = Path.Combine(contentFilePath, "content.xml");
+            }
+            else
+            {
+                file = contentFilePath + "content.xml";
+            }
             doc.Load(file);
 
             var nsmgr = new XmlNamespaceManager(doc.NameTable);
             nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
             nsmgr.AddNamespace("draw", "urn:oasis:names:tc:opendocument:xmlns:drawing:1.0");
 
-            string makeClassName = graphicNames[0].ToString(); 
+            string makeClassName = graphicNames[0].ToString();
             // if new stylename exists
             XmlElement root = doc.DocumentElement;
             //<draw:frame draw:style-name="Graphics0" 
@@ -1151,7 +1173,7 @@ namespace SIL.PublishingSolution
             {
                 XmlNode node = root.SelectSingleNode(style, nsmgr); // work
 
-                if (node == null )
+                if (node == null)
                 {
                     return;
                 }
@@ -1161,14 +1183,14 @@ namespace SIL.PublishingSolution
                 //styleNode.RemoveChild(styleNode.FirstChild);
                 //node.ParentNode.InsertAfter(styleNode, node);
                 node.ParentNode.ReplaceChild(styleNode, node);
-                }
+            }
 
             doc.Save(file);
-            }
         }
-        #endregion
-        // End - Public Methods
     }
+        #endregion
+    // End - Public Methods
+}
     #endregion
 
 

@@ -17,9 +17,9 @@ namespace Test.LiftPrepare
     [Ignore]
     public partial class LiftPrepareTester : Form
     {
-        public const string TestingDirectory = @"..\..\..\TestData\";
-        public const string InputDirectory = TestingDirectory + @"Input\";
-        public const string ActualOutputDirectory = TestingDirectory + @"ActualOutput\";
+        public const string TestingDirectory = @"../../../TestData/";
+        public const string InputDirectory = TestingDirectory + @"Input/";
+        public const string ActualOutputDirectory = TestingDirectory + @"ActualOutput/";
         public const string ExpectedOutputDirectory = TestingDirectory + @"ExpectedOutput";
         public Mockery mocks;
         public LiftPreparer liftPreparer;

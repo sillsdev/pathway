@@ -9,15 +9,12 @@
   </thead>
   <tr>
     <td class="col1data">
-<!-- <input type="Text" name="form" value="%(Form)s" class="txBox" / --> 
 <span class="syll">%(Form)s</span>
     </td>
     <td class="col2data">
-<!-- input type="Text" name="example" value="%(Example)s" class="txBox" / -->
 <span class="exam">%(Example)s</span>
     </td>
     <td class="col2data">
-<!-- input type="Text" name="translation" value="%(Translation)s" class="txBox" / -->
 <span class="tran">%(Translation)s</span>
     </td>
   </tr>

@@ -70,7 +70,7 @@
     </feature>
     <feature name="Sense">
       <option name="Bullet" file="Sense_Bullet.css"/>
-      <option name="No change" file="Sense_nc.css"/>
+      <option name="No Change" file="Sense_nc.css"/>
     </feature>
     <feature name="Example">
       <option name="Callout" file="Example_Callout.css"/>

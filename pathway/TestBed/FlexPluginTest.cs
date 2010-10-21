@@ -305,6 +305,8 @@ namespace TestBed
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            //Common.Testing = true;  - uncomment for page property - but file won't open automatically
+
             if (!File.Exists(txtInputPath.Text))
             {
                 MessageBox.Show("Please enter the valid XHTML path");
@@ -415,18 +417,18 @@ namespace TestBed
                 return;
             }
 
-            OOExportOpenOffice exportOdt = new OOExportOpenOffice();
+            //OOExportOpenOffice exportOdt = new OOExportOpenOffice();
             // ExportOdt exportOdt = new ExportOdt();
-            PublicationInformation projInfo = new PublicationInformation();
+            //PublicationInformation projInfo = new PublicationInformation();
 
-            projInfo.ProjectInputType = "Dictionary";
-            projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
-            projInfo.DictionaryPath = Path.GetDirectoryName(txtInputPath.Text);
-            projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
-            projInfo.DefaultCssFileWithPath = txtCSSInput.Text;
-            projInfo.ProgressBar = new ProgressBar();
-            projInfo.DictionaryOutputName = "test";
-            exportOdt.Export(projInfo);
+            //projInfo.ProjectInputType = "Dictionary";
+            //projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
+            //projInfo.DictionaryPath = Path.GetDirectoryName(txtInputPath.Text);
+            //projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
+            //projInfo.DefaultCssFileWithPath = txtCSSInput.Text;
+            //projInfo.ProgressBar = new ProgressBar();
+            //projInfo.DictionaryOutputName = "test";
+            //exportOdt.Export(projInfo);
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -497,6 +499,11 @@ namespace TestBed
         {
             //PdftoJpg pd = new PdftoJpg();
             //pd.ConvertPdftoJpg(); 
+        }
+
+        private void FlexPluginTest_Load(object sender, EventArgs e)
+        {
+           
         }
     }
     

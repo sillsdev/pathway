@@ -22,8 +22,8 @@ namespace Test.LiftPrepare.FullTests
         [Test]
         public void testFullAkooseTransform()
         {
-            liftPreparer = new LiftPreparer(TestEnvironment.ActualOutputRoot + @"akoose\");
-            liftPreparer.loadLift(TestEnvironment.InputRoot + @"akoose\akoose-small.lift");
+            liftPreparer = new LiftPreparer(TestEnvironment.ActualOutputRoot + @"akoose/");
+            liftPreparer.loadLift(TestEnvironment.InputRoot + @"akoose/akoose-small.lift");
 
             
         }

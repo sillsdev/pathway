@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Xsl;
+
 //using Saxon.Api;
 
 namespace SIL.Tool
@@ -125,7 +126,7 @@ namespace SIL.Tool
         {
             if (!File.Exists(fileName)) return string.Empty;
             string metaName = string.Empty;
-            var reader = new XmlTextReader(fileName) { XmlResolver = null, WhitespaceHandling = WhitespaceHandling.None };
+            var reader = new XmlTextReader(fileName) { XmlResolver = null, WhitespaceHandling = WhitespaceHandling.Significant };
             while (reader.Read())
             {
                 if (reader.IsEmptyElement)
@@ -205,7 +206,7 @@ namespace SIL.Tool
         public static string GetBaseValue(string fileName)
         {
             string baseValue = string.Empty;
-            var doc = new XmlDocument { XmlResolver = null };
+            var doc = new XmlDocument { XmlResolver = null ,PreserveWhitespace = true};
             if(!File.Exists(fileName)) return string.Empty;
             doc.Load(fileName);
             XmlElement root = doc.DocumentElement;
@@ -793,51 +794,72 @@ namespace SIL.Tool
             language = "none";
             string[] langCoun = langCountry.Split('-');
 
-            if (spellCheck.ContainsKey(langCoun[0]))
+            try
             {
-                language = langCoun[0];
-                if (langCoun.Length == 1)
+                if (langCoun.Length < 2)
                 {
-                    string path = PathCombine(GetFiledWorksPath(), "Languages");
-                    string f7Path = GetAllUserAppPath() + @"/SIL/FieldWorks 7";
-                    string xPath = "//SpellCheckDictionary24/Uni";
-                    if (Directory.Exists(f7Path))
+                    var wsPath = PathCombine(GetAllUserAppPath(), "SIL/WritingSystemStore/" + langCoun[0] + ".ldml");
+                    if (File.Exists(wsPath))
                     {
-                        path = PathCombine(f7Path, "Projects\\" + databaseName + "\\WritingSystemStore");
-                        path = PathCombine(path, language + ".ldml");
-                        xPath = "/ldml/special[1]/*[namespace-uri()='urn://palaso.org/ldmlExtensions/v1' and local-name()='spellCheckingId'][1]/@value";
+                        var ldml = new XmlDocument { XmlResolver = null };
+                        ldml.Load(wsPath);
+                        var nsmgr = new XmlNamespaceManager(ldml.NameTable);
+                        nsmgr.AddNamespace("palaso", "urn://palaso.org/ldmlExtensions/v1");
+                        var node = ldml.SelectSingleNode("//palaso:spellCheckingId/@value", nsmgr);
+                        if (node != null)
+                            langCoun = node.Value.Split('_');
+                    }
+                }
+                if (spellCheck.ContainsKey(langCoun[0]))
+                {
+                    language = langCoun[0];
+                    if (langCoun.Length == 1)
+                    {
+                        string path = PathCombine(GetFiledWorksPath(), "Languages");
+                        string f7Path = GetAllUserAppPath() + @"/SIL/FieldWorks 7";
+                        string xPath = "//SpellCheckDictionary24/Uni";
+                        if (Directory.Exists(f7Path))
+                        {
+                            path = PathCombine(f7Path, "Projects\\" + databaseName + "\\WritingSystemStore");
+                            path = PathCombine(path, language + ".ldml");
+                            xPath = "/ldml/special[1]/*[namespace-uri()='urn://palaso.org/ldmlExtensions/v1' and local-name()='spellCheckingId'][1]/@value";
+                        }
+                        else
+                        {
+                            path = PathCombine(path, language + ".xml");
+                        }
+                        if (File.Exists(path))
+                        {
+                            XmlNode node = GetXmlNode(path, xPath);
+                            if (node != null)
+                            {
+                                country = node.InnerText.ToUpper();
+                                country = RightString(country, "_");
+                            }
+                        }
+                        if (country.ToLower() == "none" || country == "<None>")
+                        {
+                            ArrayList countryList = spellCheck[language];
+                            string currentCulture = RightString(Application.CurrentCulture.IetfLanguageTag, "-");
+                            if (countryList != null && countryList.Contains(currentCulture))
+                            {
+                                country = currentCulture;
+                            }
+                            else if (countryList != null)
+                            {
+                                country = countryList[0].ToString();
+                            }
+                        }
                     }
                     else
                     {
-                        path = PathCombine(path, language + ".xml");
-                    }
-                    if (File.Exists(path))
-                    {
-                        XmlNode node = GetXmlNode(path, xPath);
-                        if (node != null)
-                        {
-                            country = node.InnerText;
-                            country = RightString(country, "_");
-                        }
-                    }
-                    if (country.ToLower() == "none" || country == "<None>") 
-                    {
-                        ArrayList countryList = spellCheck[language];
-                        string currentCulture = RightString(Application.CurrentCulture.IetfLanguageTag, "-");
-                        if (countryList != null && countryList.Contains(currentCulture))
-                        {
-                            country = currentCulture;
-                        }
-                        else if (countryList != null)
-                        {
-                            country = countryList[0].ToString();
-                        }
+                        country = langCoun[1].ToUpper();
                     }
                 }
-                else
-                {
-                    country = langCoun[1];
-                }
+
+            }
+            catch
+            {
             }
         }
         #endregion

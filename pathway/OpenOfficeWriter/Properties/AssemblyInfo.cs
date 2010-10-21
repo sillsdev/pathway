@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OdtConvert")]
+[assembly: AssemblyTitle("OpenOfficeWriter")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("OdtConvert")]
-[assembly: AssemblyCopyright("Copyright ©  2009")]
+[assembly: AssemblyCompany("sudyk")]
+[assembly: AssemblyProduct("OpenOfficeWriter")]
+[assembly: AssemblyCopyright("Copyright © sudyk 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("82ce127b-45de-4414-bee7-40365f6cf0b2")]
+[assembly: Guid("91998c8e-a786-4427-9171-4a42fb80d950")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -31,6 +31,6 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
-// [assembly: AssemblyVersion("0.5.11.2111*")]
-[assembly: AssemblyVersion("0.5.11.2111")]
-[assembly: AssemblyFileVersion("0.5.11.2111")]
+// [assembly: AssemblyVersion("0.6.9.2280*")]
+[assembly: AssemblyVersion("0.6.9.2280")]
+[assembly: AssemblyFileVersion("0.6.9.2280")]
