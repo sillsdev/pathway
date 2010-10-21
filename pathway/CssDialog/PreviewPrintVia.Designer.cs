@@ -159,6 +159,7 @@
             this.MinimizeBox = false;
             this.Name = "PreviewPrintVia";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select Layout";
             this.Load += new System.EventHandler(this.PreviewPrintVia_Load);
             this.Activated += new System.EventHandler(this.PreviewPrintVia_Activated);

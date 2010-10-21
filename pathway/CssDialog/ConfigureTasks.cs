@@ -219,7 +219,7 @@ namespace SIL.PublishingSolution
             //}
             if (!CheckStyleSelected()) return;
             var mergeCss = new MergeCss();
-            var myCss = mergeCss.Make(Param.StylePath(LsStyles.Text));
+            var myCss = mergeCss.Make(Param.StylePath(LsStyles.Text), "Temp1.css");
             var newCss = SettingBl.GetNewFileName(LsStyles.Text, "job", Param.Value[Param.InputPath], "onsave");
             File.Copy(myCss, newCss, true);
             File.Copy(myCss, Common.PathCombine(Param.Value[Param.OutputPath], Path.GetFileName(newCss)), true);

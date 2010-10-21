@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintVia));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblAvoidOdtCrash = new System.Windows.Forms.Label();
+            this.chkAvoidOdtCrash = new System.Windows.Forms.CheckBox();
             this.txtSaveInFolder = new System.Windows.Forms.TextBox();
             this.btnBrwsSaveInFolder = new System.Windows.Forms.Button();
             this.BtnBrwsLayout = new System.Windows.Forms.Button();
@@ -47,8 +49,6 @@
             this.BtnOk = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
             this.BtnHelp = new System.Windows.Forms.Button();
-            this.chkAvoidOdtCrash = new System.Windows.Forms.CheckBox();
-            this.lblAvoidOdtCrash = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,6 +76,27 @@
             this.groupBox1.Size = new System.Drawing.Size(478, 234);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
+            // 
+            // lblAvoidOdtCrash
+            // 
+            this.lblAvoidOdtCrash.AutoSize = true;
+            this.lblAvoidOdtCrash.Location = new System.Drawing.Point(35, 197);
+            this.lblAvoidOdtCrash.Name = "lblAvoidOdtCrash";
+            this.lblAvoidOdtCrash.Size = new System.Drawing.Size(105, 13);
+            this.lblAvoidOdtCrash.TabIndex = 16;
+            this.lblAvoidOdtCrash.Text = "Create hidden styles:";
+            this.lblAvoidOdtCrash.Visible = false;
+            // 
+            // chkAvoidOdtCrash
+            // 
+            this.chkAvoidOdtCrash.AutoSize = true;
+            this.chkAvoidOdtCrash.Location = new System.Drawing.Point(146, 197);
+            this.chkAvoidOdtCrash.Name = "chkAvoidOdtCrash";
+            this.chkAvoidOdtCrash.Size = new System.Drawing.Size(183, 17);
+            this.chkAvoidOdtCrash.TabIndex = 15;
+            this.chkAvoidOdtCrash.Text = "Hidden styles prevent ODT crash";
+            this.chkAvoidOdtCrash.UseVisualStyleBackColor = true;
+            this.chkAvoidOdtCrash.Visible = false;
             // 
             // txtSaveInFolder
             // 
@@ -249,27 +270,6 @@
             this.BtnHelp.UseVisualStyleBackColor = true;
             this.BtnHelp.Click += new System.EventHandler(this.BtnHelp_Click);
             // 
-            // chkAvoidOdtCrash
-            // 
-            this.chkAvoidOdtCrash.AutoSize = true;
-            this.chkAvoidOdtCrash.Location = new System.Drawing.Point(146, 197);
-            this.chkAvoidOdtCrash.Name = "chkAvoidOdtCrash";
-            this.chkAvoidOdtCrash.Size = new System.Drawing.Size(183, 17);
-            this.chkAvoidOdtCrash.TabIndex = 15;
-            this.chkAvoidOdtCrash.Text = "Hidden styles prevent ODT crash";
-            this.chkAvoidOdtCrash.UseVisualStyleBackColor = true;
-            this.chkAvoidOdtCrash.Visible = false;
-            // 
-            // lblAvoidOdtCrash
-            // 
-            this.lblAvoidOdtCrash.AutoSize = true;
-            this.lblAvoidOdtCrash.Location = new System.Drawing.Point(35, 197);
-            this.lblAvoidOdtCrash.Name = "lblAvoidOdtCrash";
-            this.lblAvoidOdtCrash.Size = new System.Drawing.Size(105, 13);
-            this.lblAvoidOdtCrash.TabIndex = 16;
-            this.lblAvoidOdtCrash.Text = "Create hidden styles:";
-            this.lblAvoidOdtCrash.Visible = false;
-            // 
             // PrintVia
             // 
             this.AccessibleName = "Print via...";
@@ -285,6 +285,7 @@
             this.MaximizeBox = false;
             this.Name = "PrintVia";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Print via...";
             this.Load += new System.EventHandler(this.PrintVia_Load);
             this.groupBox1.ResumeLayout(false);

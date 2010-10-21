@@ -89,7 +89,7 @@ namespace SIL.PublishingSolution
                 var myPrince = new Prince(princeFullName);
                 var mc = new MergeCss();
                 if (File.Exists(Css))
-                    myPrince.AddStyleSheet(mc.Make(Css));
+                    myPrince.AddStyleSheet(mc.Make(Css, "Temp1.css"));
                 myPrince.Convert(Xhtml, outName);
             }
             else

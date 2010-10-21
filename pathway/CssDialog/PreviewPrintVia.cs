@@ -47,7 +47,6 @@ namespace SIL.PublishingSolution
         private static string _helpTopic = string.Empty;
         private string _media;
         private bool _showEdit = false;
-        private bool _isRefresh = false;
         private string _path;
         private string _cssFile=string.Empty;
 
@@ -69,16 +68,22 @@ namespace SIL.PublishingSolution
 
         private void PreviewPrintVia_Load(object sender, EventArgs e)
         {
-            lnkEdit.Visible = _showEdit;
             CreateColumn();
             LoadGridValues(sender);
-            //Common.PathwayHelpSetup(File.Exists(Common.FromRegistry("ScriptureStyleSettings.xml")), Common.FromRegistry("Help"));
-            //Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-            //Common.HelpProv.SetHelpKeyword(this, _helpTopic);
             var iType = true;
             Common.PathwayHelpSetup(iType, Common.FromRegistry("Help"));
             Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
             Common.HelpProv.SetHelpKeyword(this, _helpTopic);
+            CreateToolTip();
+            lnkEdit.Visible = _showEdit;
+        }
+
+        private void CreateToolTip()
+        {
+            ToolTip toolTip = new ToolTip();
+            toolTip.ShowAlways = true;
+            toolTip.SetToolTip(btnPrevious, "Show Page 1");
+            toolTip.SetToolTip(btnNext, "Show Page 2");
         }
 
         private void LoadGridValues(object sender)
@@ -89,7 +94,6 @@ namespace SIL.PublishingSolution
                 //Param.LoadSettings();
             }
             DataRow row;
-            //string xPathLayouts = "//styles/" + _media + "/style";
             string xPathLayouts = "//styles/*/style[@approvedBy='GPS' or @shown='Yes']";
             XmlNodeList cats = Param.GetItems(xPathLayouts); // add condition for Standard
             int rowId = 0;
@@ -129,6 +133,9 @@ namespace SIL.PublishingSolution
 
                 DataSetForGrid.Tables["Styles"].Rows.Add(row);
             }
+            //DataView dataView = DataSetForGrid.Tables["Styles"].DefaultView;
+            //dataView.Sort = "Name";
+            //grid.DataSource = dataView.Table;
             grid.DataSource = DataSetForGrid.Tables["Styles"];
             grid.Columns[0].Width = 100;
             grid.Columns[1].Width = 198;
@@ -251,6 +258,7 @@ namespace SIL.PublishingSolution
                     SelectedStyle = grid[0, rowid].Value.ToString();
                     string file2 = grid[3, rowid].Value.ToString();
                     _previewFileName2 = Common.PathCombine(_path, file2);
+                    lnkEdit.Enabled = true;
                 }
                 catch
                 {
@@ -323,9 +331,12 @@ namespace SIL.PublishingSolution
 
         private void lnkEdit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            _isRefresh = true;
+            //PleaseWait st = new PleaseWait();
+            //st.ShowDialog();
             string ProgFilesPath = System.Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
             string ConfigToolPath = Common.PathCombine(ProgFilesPath, @"SIL\Pathway7\ConfigurationTool.exe");
+            if(!File.Exists(ConfigToolPath))
+                ConfigToolPath = Common.PathCombine(ProgFilesPath, @"SIL\Pathway\ConfigurationTool.exe");
             //string ConfigToolPath = @"E:\RapidSVN\PublishingSolution\ConfigurationTool\bin\Debug\ConfigurationTool.exe";
             var startInfo = new ProcessStartInfo { FileName = ConfigToolPath };
             startInfo.Arguments = InputType + " " + grid.SelectedRows[0].Cells[4].Value + " " + grid.SelectedRows[0].Cells[0].Value.ToString().Replace(' ', '&');
@@ -333,16 +344,14 @@ namespace SIL.PublishingSolution
             Param.DefaultValue[Param.LayoutSelected] = grid.SelectedRows[0].Cells[0].Value.ToString();
             Param.Write();
             Process.Start(startInfo);
+            lnkEdit.Enabled = false;
+            
         }
 
         private void PreviewPrintVia_Activated(object sender, EventArgs e)
         {
-            if (_isRefresh)
-            {
-                LoadGridValues(sender);
-                _isRefresh = false;
-            }
-
+            Param.LoadSettings();
+            LoadGridValues(sender);
         }
 
         private void BtnHelp_Click(object sender, EventArgs e)

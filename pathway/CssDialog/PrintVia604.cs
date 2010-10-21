@@ -235,9 +235,11 @@ namespace SIL.PublishingSolution
             LoadExtraProcessing();
             LoadProperty();
             txtSaveInFolder.Text = Common.GetSaveInFolder(Param.DefaultValue[Param.PublicationLocation], DatabaseName, cmbSelectLayout.Text);
-            Common.PathwayHelpSetup(File.Exists(Common.FromRegistry("ScriptureStyleSettings.xml")), Common.FromRegistry("Help"));
+            var iType = true;
+            Common.PathwayHelpSetup(iType, Common.FromRegistry("Help"));
             Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
             Common.HelpProv.SetHelpKeyword(this, _helpTopic);
+            Common.databaseName = DatabaseName;
         }
 
         private void LoadExtraProcessing()
@@ -376,7 +378,7 @@ namespace SIL.PublishingSolution
             }
             catch (Exception)
             {
-                MessageBox.Show("Please select a valid path to save", "Pathway", MessageBoxButtons.OK,
+                MessageBox.Show("Please select a folder for which you have creation permission", "Pathway", MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
                 return;
             }
@@ -488,7 +490,7 @@ namespace SIL.PublishingSolution
         private void BtnHelp_Click(object sender, EventArgs e)
         {
             var iType = true;
-            iType = InputType.ToLower() != "scripture";
+            //iType = InputType.ToLower() != "scripture";
             Common.PathwayHelpSetup(iType, Common.FromRegistry("Help"));
             Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
             Common.HelpProv.SetHelpKeyword(this, _helpTopic);
@@ -519,6 +521,8 @@ namespace SIL.PublishingSolution
             {
                 string ProgFilesPath = System.Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
                 string ConfigToolPath = Common.PathCombine(ProgFilesPath, @"SIL\Pathway7\ConfigurationTool.exe");
+                if (!File.Exists(ConfigToolPath))
+                    ConfigToolPath = Common.PathCombine(ProgFilesPath, @"SIL\Pathway\ConfigurationTool.exe");
                 if (File.Exists(ConfigToolPath))
                 {
                     return true;

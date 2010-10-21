@@ -77,7 +77,7 @@ namespace SIL.PublishingSolution
             string PreviewCSSPath = Param.StylePath(Sheet);
             var mergedCss = new MergeCss();
             //string cssCombine = mergedCss.Make(css);
-            string cssCombine = mergedCss.Make(PreviewCSSPath);
+            string cssCombine = mergedCss.Make(PreviewCSSPath, "Temp1.css");
 
             var returnXhtml = CreatePreviewFile(xhtml, cssCombine, "preview", true);
             //var pdf = new Pdf(xhtml, Param.StylePath(Sheet));

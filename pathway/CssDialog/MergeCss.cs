@@ -58,7 +58,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         /// <param name="css">root css file</param>
         /// <returns>name of temporary file</returns>
-        public string Make(string css)
+        public string Make(string css, string outputFileName)
         {
             if (string.IsNullOrEmpty(css)) return string.Empty;
             var tmp = Path.GetTempPath();
@@ -69,11 +69,11 @@ namespace SIL.PublishingSolution
             Random rn = new Random();
             if (Common.Testing)
             {
-                _outName = Common.PathCombine(tmp, "Temp1.css");
+                _outName = Common.PathCombine(tmp, outputFileName);
             }
             else
             {
-                _outName = Common.PathCombine(tmp, rn.Next() + "Temp1.css");
+                _outName = Common.PathCombine(tmp, rn.Next() + outputFileName);
             }
             _cssPath = Path.GetDirectoryName(css);
             var sw = new StreamWriter(_outName);

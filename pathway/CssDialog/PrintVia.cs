@@ -224,7 +224,7 @@ namespace SIL.PublishingSolution
             if (this.Text != "Set Defaults")
             {
                 Param.LoadSettings();
-                SettingsValidation(Param.SettingPath);
+                ValidateXMLVersion(Param.SettingPath);
             }
             Param.SetValue(Param.InputType, InputType);
             Param.LoadSettings();
@@ -251,8 +251,8 @@ namespace SIL.PublishingSolution
             chkExtraProcessing.Text = message;
         }
 
-        #region SettingsValidation
-        private void SettingsValidation(string filePath)
+        #region ValidateXMLVersion
+        private void ValidateXMLVersion(string filePath)
         {
             var versionControl = new SettingsVersionControl();
             var Validator = new SettingsValidator();
@@ -377,7 +377,7 @@ namespace SIL.PublishingSolution
             }
             catch (Exception)
             {
-                MessageBox.Show("Please select a valid path to save", "Pathway", MessageBoxButtons.OK,
+                MessageBox.Show("Please select a folder for which you have creation permission", "Pathway", MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
                 return;
             }
@@ -520,6 +520,8 @@ namespace SIL.PublishingSolution
             {
                 string ProgFilesPath = System.Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
                 string ConfigToolPath = Common.PathCombine(ProgFilesPath, @"SIL\Pathway7\ConfigurationTool.exe");
+                if (!File.Exists(ConfigToolPath))
+                    ConfigToolPath = Common.PathCombine(ProgFilesPath, @"SIL\Pathway\ConfigurationTool.exe");
                 if (File.Exists(ConfigToolPath))
                 {
                     return true;
