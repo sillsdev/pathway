@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
-<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Oct-04-2010 for TD-1616(PDF Output should not be shown while creating preview).
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">&apos;Constant ReferenceFormat for User Desire
+
+&apos;Changed On Oct-21-2010 for TD-1625(OpenOffice: Hidden document did not open)
 
 &apos; Changed message content from &quot;word&quot; to &quot;book, chapter and / or verse&quot;
 &apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
@@ -389,6 +390,7 @@ MyError:
 	If Err &lt;&gt; 1 Then
 		Msgbox &quot;Sorry! Could not update the References.&quot; , 0 + 64,  &quot;Update References&quot;
 	End IF
+	oContWindow.Visible = true 
 End Sub
 
 &apos;This function returns Page Number of given Paragraph
