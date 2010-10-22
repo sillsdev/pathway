@@ -7,6 +7,8 @@ set base=C:\Projects\btai\PublishingSolution
 if exist "%base%" goto found
 set base=C:\SIL\btai\PublishingSoltuion
 if exist "%base%" goto found
+set base=C:\svn\google\pathway
+if exist "%base%" goto found
 set base=C:\svn\btai\PublishingSolution
 if exist "%base%" goto found
 set base=E:\btai\PublishingSolution

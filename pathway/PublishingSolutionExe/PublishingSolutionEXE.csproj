@@ -326,7 +326,8 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>%25COMSPEC%25 /c ..\..\postBuild.bat $(ConfigurationName)</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>

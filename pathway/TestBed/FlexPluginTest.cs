@@ -22,6 +22,7 @@ using System.Xml;
 using SIL.PublishingSolution;
 using SIL.PublishingSolution.Sort;
 using SIL.Tool;
+using Test;
 
 namespace TestBed
 {
@@ -503,7 +504,8 @@ namespace TestBed
 
         private void FlexPluginTest_Load(object sender, EventArgs e)
         {
-           
+            var supportFolder = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
+            FolderTree.Copy(supportFolder, ".");
         }
     }
     

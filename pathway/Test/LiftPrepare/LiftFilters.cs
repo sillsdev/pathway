@@ -33,7 +33,8 @@ namespace Test.LiftPrepare
             Common.SupportFolder = "";
             Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
             exportOpenOffice = new ExportOpenOffice();
-
+            var icuFolder = PathPart.Bin(Environment.CurrentDirectory, "/../LiftPrepare/lib/PalasoLib");
+            FolderTree.Copy(icuFolder, Environment.CurrentDirectory);
         }
         #endregion
 
