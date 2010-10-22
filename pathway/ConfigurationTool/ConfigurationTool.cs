@@ -737,14 +737,9 @@ namespace SIL.PublishingSolution
         }
         #endregion
 
-        private void stylesGrid_RowLeave(object sender, DataGridViewCellEventArgs e)
-        {
-            _CToolBL.stylesGrid_RowLeaveBL(e);
-        }
-
         private void EditCSS(object sender, EventArgs e)
         {
-            _CToolBL.SetEditMode(false);
+            _CToolBL.SetModifyMode(false);
             _CToolBL.ShowCssSummary();
             
         }
@@ -761,27 +756,27 @@ namespace SIL.PublishingSolution
 
         private void txtPageGutterWidth_KeyUp(object sender, KeyEventArgs e)
         {
-            _CToolBL.SetEditMode(true);
+            _CToolBL.SetModifyMode(true);
         }
 
         private void txtPageInside_KeyUp(object sender, KeyEventArgs e)
         {
-            _CToolBL.SetEditMode(true);
+            _CToolBL.SetModifyMode(true);
         }
 
         private void txtPageOutside_KeyUp(object sender, KeyEventArgs e)
         {
-            _CToolBL.SetEditMode(true);
+            _CToolBL.SetModifyMode(true);
         }
 
         private void txtPageTop_KeyUp(object sender, KeyEventArgs e)
         {
-            _CToolBL.SetEditMode(true);
+            _CToolBL.SetModifyMode(true);
         }
 
         private void txtPageBottom_KeyUp(object sender, KeyEventArgs e)
         {
-            _CToolBL.SetEditMode(true);
+            _CToolBL.SetModifyMode(true);
         }
     }
 }

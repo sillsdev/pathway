@@ -154,7 +154,6 @@
             this.stylesGrid.TabIndex = 5;
             this.stylesGrid.TabStop = false;
             this.stylesGrid.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.stylesGrid_RowEnter);
-            this.stylesGrid.RowLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.stylesGrid_RowLeave);
             this.stylesGrid.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.stylesGrid_ColumnWidthChanged);
             // 
             // toolStripMain

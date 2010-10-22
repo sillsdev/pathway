@@ -62,7 +62,7 @@ namespace SIL.PublishingSolution
         public string PreviewFileName2 = string.Empty;
 
         public bool AddMode1;
-        public enum ScreenMode { Load, New, View, Edit, Delete, SaveAs, None };
+        public enum ScreenMode { Load, New, View, Edit, Delete, SaveAs,Modify };
         public ScreenMode _screenMode;
 
         CssTree cssTree = new CssTree();
@@ -239,7 +239,7 @@ namespace SIL.PublishingSolution
                     task = "columns";
                 }
                 string key = "column-count";
-                return GetValue(task, key, "");
+                return GetValue(task, key, "1");
             }
         }
 
@@ -268,8 +268,8 @@ namespace SIL.PublishingSolution
                     task = "columns";
                 }
                 string key = "column-gap";
-                string result = GetValue(task, key, "");
-                return result.Length > 0 ? result : "";
+                string result = GetValue(task, key, "18");
+                return result.Length > 0 ? result : "18";
             }
         }
 
@@ -535,7 +535,7 @@ namespace SIL.PublishingSolution
 
         public void WriteCss()
         {
-            if ((_screenMode != ScreenMode.Edit) || (FileType.ToLower() == "standard")) return;
+            if ((_screenMode != ScreenMode.Modify) || (FileType.ToLower() == "standard")) return;
             StreamWriter writeCss = null;
             //string file1;
             //string attribValue = Common.GetTextValue(sender, out file1);
@@ -632,7 +632,7 @@ namespace SIL.PublishingSolution
                 MessageBox.Show("Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '" + ex.Message + "'", _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                 //writeCss.Close();
             }
-            _screenMode = ScreenMode.View;  
+            _screenMode = ScreenMode.Edit;  
         }
 
         protected void UpdateFileProduced()
@@ -648,7 +648,7 @@ namespace SIL.PublishingSolution
         /// </summary
         protected void ShowInfoValue()
         {
-            if (!(_screenMode == ScreenMode.View || _screenMode == ScreenMode.None)) return;
+            if (!(_screenMode == ScreenMode.View || _screenMode == ScreenMode.Edit)) return;
             Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationTool: ShowInfoValue");
             if (cTool.StylesGrid.RowCount > 0)
             {
@@ -694,7 +694,7 @@ namespace SIL.PublishingSolution
 
             if (cTool.TabControl1.SelectedIndex == 1)
                 ShowCSSValue();
-            _screenMode = ScreenMode.None;
+            _screenMode = ScreenMode.Edit;
         }
 
         /// <summary>
@@ -702,6 +702,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         protected void ShowCSSValue()
         {
+            _screenMode = ScreenMode.View;
             _errProvider.Clear();
             if (cTool.TxtName.Text.Length <= 0) return;
             string path = Param.StylePath(cTool.TxtName.Text);
@@ -750,7 +751,7 @@ namespace SIL.PublishingSolution
             catch
             {
             }
-            _screenMode = ScreenMode.None;
+            _screenMode = ScreenMode.Edit;
         }
 
         ///// <summary>
@@ -1358,7 +1359,7 @@ namespace SIL.PublishingSolution
                         grid[ColumnComment, SelectedRowIndex].Value = myControl.Text;
                         break;
                     case "txtName":
-                        if (_screenMode == ScreenMode.Edit)
+                        if (_screenMode == ScreenMode.Modify)
                             grid[ColumnName, SelectedRowIndex].Value = myControl.Text;
                         break;
                     default:
@@ -1366,7 +1367,7 @@ namespace SIL.PublishingSolution
                         grid[ColumnShown, SelectedRowIndex].Value = checkBox.Checked ? "Yes" : "No";
                         break;
                 }
-                _screenMode = ScreenMode.Edit;   
+                _screenMode = ScreenMode.Modify;   
             }
         }
 
@@ -2132,11 +2133,11 @@ namespace SIL.PublishingSolution
                     }
                     string fileName = string.Empty;
                     //if (_isCreatePreview)
-                    if (_screenMode == ScreenMode.Edit || _screenMode == ScreenMode.SaveAs || _screenMode == ScreenMode.New || !isPreviewFileExist)
+                    if (_screenMode == ScreenMode.Modify || _screenMode == ScreenMode.SaveAs || _screenMode == ScreenMode.New || !isPreviewFileExist)
                     {
                         WriteCss();
                         ShowCSSValue();
-                        _screenMode = ScreenMode.None;
+                        _screenMode = ScreenMode.Edit;
                         PleaseWait st = new PleaseWait();
                         st.ShowDialog();
                         string cssFile = Param.StylePath(FileName);
@@ -2251,27 +2252,24 @@ namespace SIL.PublishingSolution
         }
 
 
-             public void stylesGrid_RowLeaveBL(DataGridViewCellEventArgs e)
-             {
-                 if (_screenMode == ScreenMode.Edit) // Add
-                 {
-                     //SelectedRowIndex = e.RowIndex;
-                     WriteCss();
-                 }
-             }
         public void stylesGrid_RowEnterBL(DataGridViewCellEventArgs e)
         {
             try
             {
+                if (_screenMode == ScreenMode.Modify) // Add
+                {
+                    WriteCss();
+                }
                 _screenMode = ScreenMode.View;
                 SelectedRowIndex = e.RowIndex;
                 ShowInfoValue();
-                //if (_screenMode == ScreenMode.Edit || _screenMode == ScreenMode.None) // Add
+                //_screenMode = ScreenMode.Edit;
+                //if (_screenMode == ScreenMode.Modify || _screenMode == ScreenMode.Edit) // Add
                 //{
                     
                 //    ShowInfoValue();
                 //    //WriteCss();
-                //    _screenMode = ScreenMode.None;
+                //    _screenMode = ScreenMode.Edit;
                 //}
                 //else
                 //{
@@ -2408,7 +2406,7 @@ namespace SIL.PublishingSolution
 
         public void txtName_ValidatingBL(object sender)
         {
-            if (_screenMode != ScreenMode.Edit) return;
+            if (_screenMode != ScreenMode.Modify) return;
             try
             {
                 cTool.TxtName.Text = cTool.TxtName.Text.Trim();
@@ -2444,7 +2442,7 @@ namespace SIL.PublishingSolution
                     SelectRow(cTool.StylesGrid, PreviousValue);
                     ShowInfoValue();
                 }
-                else if(_screenMode == ScreenMode.Edit)
+                else if(_screenMode == ScreenMode.Modify)
                 {
                     if (PreviousValue == styleName)
                     {
@@ -2758,14 +2756,14 @@ namespace SIL.PublishingSolution
 
             _screenMode = ScreenMode.View;
             ShowInfoValue();
-            _screenMode = ScreenMode.None;
+            _screenMode = ScreenMode.Edit;
         }
 
-        public void SetEditMode(bool setEdited)
+        public void SetModifyMode(bool setEdited)
         {
-            if (_screenMode == ScreenMode.None || setEdited)
+            if (_screenMode == ScreenMode.Edit || setEdited)
             {
-                _screenMode = ScreenMode.Edit;
+                _screenMode = ScreenMode.Modify;
                 setEdited = false;
             }
         }
@@ -2829,7 +2827,7 @@ namespace SIL.PublishingSolution
                         cTool.StylesGrid.Rows[SelectedRowIndex].Selected = true;
                         //SelectedRowIndex--;
                         //WriteCss();
-                        _screenMode = ScreenMode.None;
+                        _screenMode = ScreenMode.Edit;
                         ShowInfoValue();
                     }
                     else
