@@ -13,6 +13,7 @@
 // Test methods of FlexDePlugin
 // </remarks>
 // --------------------------------------------------------------------------------------------
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using NUnit.Framework;
@@ -41,6 +42,7 @@ namespace Test.GoBibleConvert
             const string fileName = "1pe.xhtml";
             // Get "1pe.xhtml" from the InputFiles folder.
             string inputFileName = GetFileNameWithInputPath(fileName);
+            Debug.Assert(File.Exists(inputFileName));
             // The original XSLT file is in the folder "C:\SIL\btai\PublishingSolution\PublishingSolutionExe\bin\Debug".
             // A copy of it has been put into the InputFiles folder.
             // Common.XsltProcress creates an output file in the same folder as the input file.
@@ -48,12 +50,15 @@ namespace Test.GoBibleConvert
             // 1pe.xhtml must be moved to the output folder, also.
             string outputFileName = GetFileNameWithOutputPath(fileName);
             File.Copy(inputFileName, outputFileName, true);
+            Debug.Assert(File.Exists(outputFileName));
             const string xsltName = "TE_XHTML-to-Phone_XHTML.xslt";
             string xsltFullName = GetFileNameWithSupportPath(xsltName);
+            Debug.Assert(File.Exists(xsltFullName));
 
             // Transform the original XHTML file.
             string extension = "_cv.xhtml";
             string actualXhtmlOutput = Common.XsltProcess(outputFileName, xsltFullName, extension);
+            Debug.Assert(File.Exists(actualXhtmlOutput));
 
             // Compare the newly transformed file with "1pe_cv.xhtml" from the Expected folder.
             string expectedXhtmlFile = GetFileNameWithExpectedPath("1pe_cv.xhtml");
@@ -67,10 +72,13 @@ namespace Test.GoBibleConvert
             const string fileName = "1pe.xhtml";
             const string restructuredFileName = "1pe_cv.xhtml";
             string inputFullName = GetFileNameWithInputPath(fileName);
+            Debug.Assert(File.Exists(inputFullName));
             string outputFullName = GetFileNameWithOutputPath(fileName);
             File.Copy(inputFullName, outputFullName, true);
+            Debug.Assert(File.Exists(outputFullName));
             const string cssName = "1pe.css";
             string cssFullName = GetFileNameWithInputPath(cssName);
+            Debug.Assert(File.Exists(cssFullName));
             PublicationInformation projInfo = new PublicationInformation();
             projInfo.DefaultXhtmlFileWithPath = outputFullName;
             projInfo.DefaultCssFileWithPath = cssFullName;
