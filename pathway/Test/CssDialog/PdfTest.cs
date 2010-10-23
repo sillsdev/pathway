@@ -71,10 +71,16 @@ namespace Test.CssDialog
         [Test]
         public void CreateTest()
         {
-            Pdf target = new Pdf(_tf.Copy("T1.xhtml"), _tf.Copy("T1.css"));
-            string outName = _tf.Output("T1.pdf");
-            target.Create(outName);
-            FileAssert.AreEqual(_tf.Expected("T1.pdf"), outName);
+            try
+            {
+                Pdf target = new Pdf(_tf.Copy("T1.xhtml"), _tf.Copy("T1.css"));
+                string outName = _tf.Output("T1.pdf");
+                target.Create(outName);
+                FileAssert.AreEqual(_tf.Expected("T1.pdf"), outName);
+            }
+            catch (Pdf.MISSINGPRINCE) // If Prince not installed, ignore test
+            {
+            }
         }
 
         /// <summary>

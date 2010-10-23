@@ -32,12 +32,12 @@ namespace SIL.PublishingSolution
 		/// ------------------------------------------------------------------------------------
 		public static bool RegEntryExists(RegistryKey key, string subKey, string regEntry, out object value)
 		{
-			if (key == null)
-				throw new ArgumentNullException("key");
-
 			value = null;
 
-			if (string.IsNullOrEmpty(subKey))
+            if (key == null)
+                return false;
+
+            if (string.IsNullOrEmpty(subKey))
 			{
 				value = key.GetValue(regEntry);
 				if (value != null)
