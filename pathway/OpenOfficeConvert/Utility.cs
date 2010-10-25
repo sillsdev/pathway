@@ -857,6 +857,7 @@ namespace SIL.PublishingSolution
                 styleNode.InnerXml = node.OuterXml;
                 node.ParentNode.InsertAfter(styleNode, node);
 
+                parentName = parentName.Replace("1", "");
                 var nameElement = (XmlElement)node;
                 nameElement.SetAttribute("style:name", makeClassName);
                 nameElement.SetAttribute("style:parent-style-name", parentName);
