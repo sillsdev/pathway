@@ -508,11 +508,11 @@ namespace SIL.PublishingSolution
             previewPrintVia.SelectedStyle = cmbSelectLayout.Text;
             previewPrintVia.InputType = InputType;
             previewPrintVia.ShowDialog();
+            LoadLayouts();
             if (previewPrintVia.DialogResult == DialogResult.OK)
             {
                 cmbSelectLayout.Text = previewPrintVia.SelectedStyle;
             }
-            LoadLayouts();
         }
 
         private bool EnableEdit()
