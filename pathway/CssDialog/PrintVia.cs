@@ -374,6 +374,7 @@ namespace SIL.PublishingSolution
             {
                 Directory.CreateDirectory(txtSaveInFolder.Text);
                 Directory.Delete(txtSaveInFolder.Text);
+                BtnOk.Enabled = false; 
             }
             catch (Exception)
             {
@@ -534,6 +535,7 @@ namespace SIL.PublishingSolution
         {
             //_media = cmbPrintVia.Text.ToLower() == "gobible" ? "mobile" : "paper";
             string type = Param.MediaType;
+            BtnOk.Enabled = true; 
             if (type == "Media")
             {
                 type = "paper";
