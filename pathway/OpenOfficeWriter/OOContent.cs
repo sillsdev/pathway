@@ -166,6 +166,10 @@ namespace SIL.PublishingSolution
         private bool _IsHeadword = false;
         #endregion
 
+        public OOContent()
+        {
+            _outputType = Common.OutputType.ODT;
+        }
         #region Public Methods
 
         public bool IsNewLine
@@ -263,7 +267,7 @@ namespace SIL.PublishingSolution
             _classFamily = classFamily;
 
             _isNewParagraph = false;
-            //_characterName = "$ID/[No character style]";// "[No character style]"; 
+            _characterName = "None"; 
         }
 
         private void AlterFrameWithoutCaption(string contentFilePath)
@@ -656,62 +660,40 @@ namespace SIL.PublishingSolution
         {
             _writer.WriteStartElement("text:span");
             _writer.WriteAttributeString("text:style-name", characterStyle); //_util.ChildName
+            AddUsedStyleName(characterStyle);
 
-            //_writer.WriteStartElement("CharacterStyleRange");
-            //_writer.WriteAttributeString("AppliedCharacterStyle", "CharacterStyle/" + characterStyle);
+            //content = whiteSpacePre(content); // TODO -2000 - SignificantSpace() - IN OO convert
             _writer.WriteString(content);
             _writer.WriteEndElement();
 
-            //_imageInserted = InsertImage();
-            //SetHomographNumber(false);
-            //string footerClassName = GetFooterClassName(characterStyle);
-
-            //AnchorBookMark();
-
-            //if (isFootnote)
-            //{
-            //    WriteFootNoteMarker(footerClassName, content);
-            //}
-            //else
-            //{
-            //    _writer.WriteStartElement("Content");
-            //    content = WriteCounter(content);
-            //    content = whiteSpacePre(content);
-            //    _writer.WriteString(content);
-            //    _writer.WriteEndElement();
-            //}
-            //AnchorBookMark();
-            //_writer.WriteEndElement();
-            //if (_tagType == "li")
-            //    _writer.WriteRaw("<Br/>");
         }
         /// <summary>
         /// Allow Empty Tag if the class name is given in CSS to apply
         /// </summary>
         private void AllowEmptyTag()
         {
-            string tempClassName = string.Empty;
-            if (_reader.AttributeCount > 0)
-            {
-                tempClassName = _reader.GetAttribute("class");
-            }
-            if (string.IsNullOrEmpty(tempClassName))
-            {
-                tempClassName = _reader.Name;
-            }
+            //string tempClassName = string.Empty;
+            //if (_reader.AttributeCount > 0)
+            //{
+            //    tempClassName = _reader.GetAttribute("class");
+            //}
+            //if (string.IsNullOrEmpty(tempClassName))
+            //{
+            //    tempClassName = _reader.Name;
+            //}
 
-            if (_structStyles.AllCSSName.Contains(tempClassName))
-            {
-                //string paraSpan = _reader.Name == "div" ? "text:p" : "text:span";
-                // Currently Empty Div Tag is allowed. If Span is allowed remove the comment
-                if (_reader.Name == "div")
-                {
-                    const string paraSpan = "text:p";
-                    _writer.WriteStartElement(paraSpan);
-                    _writer.WriteAttributeString("text:style-name", tempClassName);
-                    _writer.WriteEndElement();
-                }
-            }
+            //if (_structStyles.AllCSSName.Contains(tempClassName))
+            //{
+            //    //string paraSpan = _reader.Name == "div" ? "text:p" : "text:span";
+            //    // Currently Empty Div Tag is allowed. If Span is allowed remove the comment
+            //    if (_reader.Name == "div")
+            //    {
+            //        const string paraSpan = "text:p";
+            //        _writer.WriteStartElement(paraSpan);
+            //        _writer.WriteAttributeString("text:style-name", tempClassName);
+            //        _writer.WriteEndElement();
+            //    }
+            //}
         }
 
         /// <summary>
@@ -723,485 +705,6 @@ namespace SIL.PublishingSolution
             bool IsStyleExist = false;
             StartElementBase(_IsHeadword);
 
-            //if (_contentReplace)
-            //{
-            //    _styleCounter++;
-            //}
-            //_tagType = _reader.Name;
-            //_readerValue = _reader.GetAttribute("class");
-
-            //if (_readerValue == null) // Is class name null
-            //{
-            //    _readerValue = _tagType;
-            //}
-            //else
-            //{
-            //    string NewStyleName = _readerValue + "." + _tagType;
-            //    IsStyleExist = _structStyles.AllCSSName.Contains(NewStyleName);
-            //    if (IsStyleExist)
-            //    {
-            //        _readerValue = _readerValue + "." + _tagType;
-            //    }
-            //}
-
-            //string anchorIdValue = _reader.GetAttribute("id");
-            //if (anchorIdValue != null)
-            //{
-            //    anchorIdValue = anchorIdValue.ToLower();
-            //    if (_anchor.Contains(anchorIdValue))
-            //    {
-            //        _anchorIdValue = anchorIdValue;
-            //        _anchor.Remove(anchorIdValue);
-            //    }
-            //}
-
-            //anchorIdValue = _reader.GetAttribute("name");
-            //if (anchorIdValue != null)
-            //{
-            //    anchorIdValue = anchorIdValue.ToLower();
-            //    if (_anchor.Contains(anchorIdValue))
-            //    {
-            //        _anchorIdValue = anchorIdValue;
-            //        _anchor.Remove(anchorIdValue);
-            //    }
-            //}
-
-
-
-            //if (_tagType == "p" ||
-            //    _tagType == "h1" ||
-            //    _tagType == "h2" ||
-            //    _tagType == "h3" ||
-            //    _tagType == "h4" ||
-            //    _tagType == "h5" ||
-            //    _tagType == "h6")
-            //{
-            //    if (!IsStyleExist)
-            //    {
-            //        _readerValue = _tagType;
-            //    }
-
-            //    //if (_readerValue == null)
-            //    //{
-            //    //    _readerValue = _tagType;
-            //    //}
-            //    //else
-            //    //{
-            //    //    string NewStyleName = _readerValue + "." + _tagType;
-            //    //    bool IsStyleExist = _util.IsStyleExist(_styleFilePath, NewStyleName);
-            //    //    if (IsStyleExist)
-            //    //    {
-            //    //        _readerValue = _readerValue + "." + _tagType;
-            //    //    }
-            //    //    else
-            //    //    {
-            //    //        _readerValue = _tagType;
-            //    //    }
-            //    //}
-            //    _tagType = "div";
-            //}
-            //else if (_tagType == "li")
-            //{
-            //    if (_divOpen)
-            //    {
-            //        _writer.WriteEndElement();
-            //        _divOpen = false;
-            //    }
-
-            //    if (_listName.Length != 0)
-            //    {
-            //        _writer.WriteStartElement("text:list");
-            //        _writer.WriteAttributeString("text:style-name", _listName);
-            //        _listName = string.Empty;
-            //    }
-
-            //    _writer.WriteStartElement("text:list-item");
-            //    //if (_readerValue == null)
-            //    //{
-            //    //    _readerValue = _tagType;
-            //    //}
-            //    //else
-            //    //{
-            //    //    _readerValue = _readerValue + "." + _tagType;
-            //    //}
-            //    if (!IsStyleExist)
-            //    {
-            //        _readerValue = _tagType;
-            //    }
-            //    _familyType = "paragraph";
-            //}
-            //else if (_tagType == "ol" ||
-            //    _tagType == "ul")
-            //{
-
-            //    //if (_divOpen)
-            //    //{
-            //    //    _writer.WriteEndElement();
-            //    //    _divOpen = false;
-            //    //}
-            //    //NewLine();
-
-            //    //if (_readerValue == null)
-            //    //{
-            //    //    _readerValue = _tagType;
-            //    //}
-            //    //else
-            //    //{
-            //    //    _readerValue = _readerValue + "." + _tagType;
-            //    //}
-
-            //    // Apply <ol> / <ul> styles
-            //    _listName = _structStyles.ListType.ContainsKey(_readerValue) ? _structStyles.ListType[_readerValue] : _tagType;
-            //}
-            //else if (_tagType == "em")
-            //{
-            //    //if (_readerValue == null)
-            //    //{
-            //    //    _readerValue = _tagType;
-            //    //}
-            //    //else
-            //    //{
-            //    //    _readerValue = _readerValue + "." + _tagType;
-            //    //}
-            //    _tagType = "span";
-            //}
-            //else if (_tagType == "a")
-            //{
-            //    _tagType = "span";
-            //    string hrefValue = _reader.GetAttribute("href");
-            //    if (!string.IsNullOrEmpty(hrefValue) && hrefValue.StartsWith("#"))
-            //    {
-            //        string hrefValueWOHash = hrefValue.Replace("#", "");
-            //        _anchor.Add(hrefValueWOHash.ToLower());
-            //        _anchorStart = true;
-            //    }
-            //}
-
-            //_readerValue = _readerValue.Replace("_", ""); // replacing underscore. In parser Underscore is removed
-            //_readerValue = _readerValue.Replace("-", ""); // replacing Hyphen. In parser Underscore is removed
-            //_footnoteValue = _readerValue;
-
-
-            string previousClass = string.Empty;  // = _classAfter
-            if (_classAfter.IndexOf('_') >= 0)
-            {
-                previousClass = _classAfter.Substring(0, _classAfter.IndexOf('_'));
-                if (previousClass.IndexOf(' ') >= 0)
-                {
-                    previousClass = previousClass.Substring(0, previousClass.IndexOf(' '));
-                }
-            }
-
-            //// sense + sense - display : block;
-            //if (_structStyles.DisplayBlock.Contains(previousClass + "_" + _readerValue))
-            //{
-            //    _tagType = "div";
-            //}
-            //// sense + sense - display : inline;
-            //else if (_structStyles.DisplayInline.Contains(previousClass + "_" + _readerValue))
-            //{
-            //    _tagType = "span";
-            //}
-            ////sense - display : block;
-            //else if (_structStyles.DisplayBlock.Contains(_readerValue))
-            //{
-            //    _tagType = "div";
-            //}
-            ////sense - display : inline;
-            //else if (_structStyles.DisplayInline.Contains(_readerValue))
-            //{
-            //    _tagType = "span";
-            //}
-            ////if (structStyles.FloatAlign.ContainsKey(m_readerValue))
-            ////{
-            ////    if (structStyles.FloatAlign[m_readerValue].ToString() != "none")
-            ////    {
-            ////        _pos = structStyles.FloatAlign[m_readerValue];
-            ////        string _temp1 = styleStack.Peek().ToString();
-            ////        string[] _arrreadervalue = _temp1.Split('_');
-            ////        if (structStyles.ClearProperty.ContainsKey(m_arrreadervalue[0]))
-            ////        {
-            ////            _side = structStyles.ClearProperty[_arrreadervalue[0]];
-            ////            return;
-            ////        }
-            ////        else
-            ////        {
-            ////            _side = "NoClear";
-            ////        }
-            ////    }
-            ////}
-
-            //if (_tagType == "div")
-            //{
-            //    _writer.Formatting = Formatting.Indented;
-            //    if (_divOpen)
-            //    {
-            //        _writer.WriteEndElement();
-            //        _divOpen = false;
-            //        if (_structStyles.SectionName.Contains(_classAfter))
-            //        {
-            //            _writer.WriteEndElement();
-            //        }
-            //    }
-            //    if (_reader.Name == "p")
-            //    {
-            //        //NewLine();
-            //    }
-
-            //    _styleName = _readerValue;
-            //    BeforeDivSpan(_structStyles.SectionName, _readerValue);
-            //    _familyType = "paragraph";
-            //}
-            //else if (_tagType == "span")
-            //{
-            //    _writer.Formatting = Formatting.None;
-            //    _styleName = _readerValue;
-            //    _familyType = "text";
-            //}
-            //else if (_reader.Name == "img")
-            //{
-            //    _readerValue = _reader.GetAttribute("src").ToLower();
-            //    InsertImageCaption(_styleFilePath, targetPath);
-            //    return;
-            //}
-            //else if (_reader.Name == "ol" || _reader.Name == "ul" || _reader.Name == "li")
-            //{
-            //    _styleName = _readerValue;
-            //    _familyType = "paragraph";
-            //}
-            //else
-            //{
-            //    if (_reader.Name == "title") // skip the node
-            //    {
-            //        _reader.Read();
-            //    }
-            //    else if (_reader.Name == "style")
-            //    {
-            //        _reader.Read();
-            //    }
-            //    _tagTypeStack.Push('O'); // Others html head body
-            //    return;
-            //}
-
-            _class = _readerValue;
-            if (_structStyles.FootNoteCall.ContainsKey(_class))
-            {
-                if (_structStyles.FootNoteCall[_class].IndexOf('(') >= 0)
-                {
-                    string attrName = _structStyles.FootNoteCall[_class].Substring(
-                        _structStyles.FootNoteCall[_class].IndexOf('(') + 1,
-                        _structStyles.FootNoteCall[_class].Length -
-                        _structStyles.FootNoteCall[_class].IndexOf('(') - 2);
-                    _footCal = _reader.GetAttribute(attrName);
-                    if (_footCal == "")
-                        _footCal = " ";
-                }
-                else
-                {
-                    _footCal = _structStyles.FootNoteCall[_class];
-                }
-            }
-            //string previousClass = string.Empty;  // = _classAfter
-            //if (_classAfter.IndexOf('_') >= 0)
-            //{
-            //    previousClass = _classAfter.Substring(0, _classAfter.IndexOf('_'));
-            //    if (previousClass.IndexOf(' ') >= 0)
-            //    {
-            //        previousClass = previousClass.Substring(0, previousClass.IndexOf(' '));
-            //    }
-            //}
-
-            if (_structStyles.WhiteSpace.Contains(_class))
-            {
-                _isWhiteSpace = true;
-            }
-            if (_structStyles.DropCap.Contains(_class))  // Matches the drop cap class
-            {
-                _isDropCap = true;
-            }
-
-            string spaceSplitClass = _class;
-            if (_class.IndexOf(' ') >= 0)
-            {
-                spaceSplitClass = _class.Substring(0, _class.IndexOf(' '));
-            }
-
-            if (_structStyles.VisibilityClassName.ContainsKey(spaceSplitClass))
-            {
-                isHiddenText = true;
-            }
-
-            if (_structStyles.ContentCounterReset.ContainsKey(spaceSplitClass))
-            {
-                string key = _structStyles.ContentCounterReset[spaceSplitClass];
-                _structStyles.ContentCounter[key] = 0;
-            }
-
-            if (_counterVolantryReset.ContainsKey(spaceSplitClass))
-            {
-                string key = _counterVolantryReset[spaceSplitClass];
-                _structStyles.ContentCounter[key] = 0;
-            }
-            if (_styleStack.Count > 0)
-            {
-                _parentClass = _styleStack.Peek().ToString();
-                if (_prevLangStack.Count > 0)
-                {
-                    if (_prevLangStack.Peek() != null)
-                        _parentLang = _prevLangStack.Peek().ToString();
-                }
-                if (_parentClass.IndexOf('_') >= 0)
-                {
-                    _parentClass = _parentClass.Substring(0, _parentClass.IndexOf('_'));
-                }
-            }
-            if (_structStyles.CounterParent.ContainsKey(spaceSplitClass))
-            {
-                string key = "";
-                string keyValue = "";
-                foreach (KeyValuePair<string, string> kvp in _structStyles.CounterParent[spaceSplitClass])
-                {
-                    key = kvp.Key;
-                    keyValue = kvp.Value;
-                }
-                _structStyles.ContentCounter[key] = _structStyles.ContentCounter[key] + int.Parse(keyValue);
-            }
-            if (_structStyles.TagAttrib.ContainsKey(_readerValue))
-            {
-                string attrib = _reader.GetAttribute(_structStyles.TagAttrib[_readerValue]);
-                if (attrib != null)
-                {
-                    _readerValue = _structStyles.TagAttrib[_readerValue] + attrib + "_." + _readerValue;
-                }
-            }
-
-            _lang = _reader.GetAttribute("lang");
-            if (_lang != null)
-            {
-                _readerValue = _readerValue + "_." + _lang;
-            }
-            _prevLangStack.Push(_lang);
-            bool hasPseudoWritten = false;
-            if (_structStyles.PseudoClass.Contains(previousClass + "+" + spaceSplitClass))
-            {
-                _beforePseudoParentValue = spaceSplitClass;
-                hasPseudoWritten = InsertPseudoParentBefore(_beforePseudoParentValue, _classAfter, _lang, _class, _structStyles, _prevLang);
-            }
-            if ((_structStyles.PseudoClassBefore.ContainsKey(spaceSplitClass) || _structStyles.PseudoClassBefore.ContainsKey(_readerValue))
-                && hasPseudoWritten == false)
-            {
-                _beforePseudoValue = spaceSplitClass; //Pseudo
-                InsertPseudoBefore(_beforePseudoValue, _lang, _classAfter, _class, _structStyles);
-            }
-            if (_contentReplace == false)
-            {
-                InsertClassContent(spaceSplitClass, _lang, previousClass, _prevLang, _parentClass, _parentLang, _structStyles);
-            }
-            _makeAttribute.Clear();
-
-            if (_styleStack.Count > 0)
-            {
-                // parentStyleName = classAfter + readerValue;
-                _parentStyleName = _styleStack.Peek() + _readerValue;
-            }
-            else
-            {
-                _parentStyleName = "root_" + _readerValue;
-            }
-
-            if (!_existingStyleName.ContainsKey(_parentStyleName))
-            {
-                bool isRelative = false;
-                if (_structStyles.CssClassName.ContainsKey(_readerValue)) // Relative Values
-                {
-                    isRelative = RelativeValue(_styleFilePath, _styleStack, _structStyles, _readerValue);
-                }
-                else if (_structStyles.CssClassName.ContainsKey(_class)) // Relative Values
-                {
-                    isRelative = RelativeValue(_styleFilePath, _styleStack, _structStyles, _class);
-                }
-
-                if (_readerValue.IndexOf(' ') >= 0)
-                {
-                    _readerValue = _readerValue.Substring(0, _readerValue.IndexOf(' '));
-                }
-
-                if (_structStyles.AttribAncestor.ContainsKey(spaceSplitClass))
-                {
-                    _readerValue = GetAncestorNode(_structStyles.AttribAncestor, spaceSplitClass, _class);
-                }
-
-                if (isRelative == false)
-                {
-                    _readerValue = _util.GetNewChildName(_styleFilePath, _styleStack, _readerValue, false);
-                    _styleName = _util.ChildName;
-                    if (_util.MissingLang)
-                    {
-                        string language, country;
-                        var makeAttribute = new Dictionary<string, string>();
-                        //var lib = new Library();
-                        Common.GetCountryCode(out language, out country, _lang, _structStyles.SpellCheck);
-                        //if (language == null)
-                        //{
-                        //    makeAttribute["fo:language"] = "zxx";
-                        //    makeAttribute["fo:country"] = "none";
-                        //}
-                        //else
-                        //{
-                        //    makeAttribute["fo:language"] = language;
-                        //    makeAttribute["fo:country"] = country;
-                        //}
-                        makeAttribute["fo:language"] = language;
-                        makeAttribute["fo:country"] = country;
-                        string sourceClass = Common.LeftString(_readerValue, "_.");
-                        _util.CreateStyleWithNewValue(_styleFilePath, sourceClass, _util.ChildName, makeAttribute, _util.ParentName, _familyType, _structStyles.BackgroundColor);
-                        _util.MissingLang = false;
-                    }
-                    else if (_util.ParentName != string.Empty)
-                    {
-                        _util.CreateStyle(_styleFilePath, _readerValue, _util.ChildName, _util.ParentName, _familyType, _structStyles.BackgroundColor, false);
-                    }
-                    //_unUsedParagraphStyle.Add(_util.ChildName);
-                }
-                //if (FootCal != null && FootNoteStyleName == null)
-                _existingStyleName.Add(_parentStyleName, _util.ChildName);
-            }
-            else
-            {
-                _util.ChildName = _existingStyleName[_parentStyleName];
-            }
-            if (_footCal != null)
-                if (_footCal.Length > 0 && _footNoteStyleName == null)
-                {
-                    _footNoteStyleName = _util.ChildName;
-                }
-            _styleStack.Push(_util.ChildName);
-
-            if (_tagType == "ol" ||
-                _tagType == "ul")
-            {
-                _tagTypeStack.Push('L'); // ol, ul
-            }
-            else if (_reader.Name == "li")
-            {
-                _tagTypeStack.Push('S');
-            }
-
-            if (_familyType == "paragraph")
-            {
-                _divClass = _util.ChildName;
-                _allDivStack.Push(_util.ChildName);
-                _tagTypeStack.Push('P'); // paragraph
-            }
-            else if (_familyType == "text")
-            {
-                _allSpanStack.Push(_util.ChildName);
-                _tagTypeStack.Push('T'); // fullString;
-            }
-            else
-            {
-                _tagTypeStack.Push('O'); // Others
-            }
         }
 
         /// <summary>

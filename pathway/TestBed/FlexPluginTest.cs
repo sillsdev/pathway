@@ -418,18 +418,18 @@ namespace TestBed
                 return;
             }
 
-            //OOExportOpenOffice exportOdt = new OOExportOpenOffice();
-            // ExportOdt exportOdt = new ExportOdt();
-            //PublicationInformation projInfo = new PublicationInformation();
+            OOExportOpenOffice exportOdt = new OOExportOpenOffice();
+            //ExportOdt exportOdt = new ExportOdt();
+            PublicationInformation projInfo = new PublicationInformation();
 
-            //projInfo.ProjectInputType = "Dictionary";
-            //projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
-            //projInfo.DictionaryPath = Path.GetDirectoryName(txtInputPath.Text);
-            //projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
-            //projInfo.DefaultCssFileWithPath = txtCSSInput.Text;
-            //projInfo.ProgressBar = new ProgressBar();
-            //projInfo.DictionaryOutputName = "test";
-            //exportOdt.Export(projInfo);
+            projInfo.ProjectInputType = "Dictionary";
+            projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
+            projInfo.DictionaryPath = Path.GetDirectoryName(txtInputPath.Text);
+            projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
+            projInfo.DefaultCssFileWithPath = txtCSSInput.Text;
+            projInfo.ProgressBar = new ProgressBar();
+            projInfo.DictionaryOutputName = "test";
+            exportOdt.Export(projInfo);
         }
 
         private void button5_Click(object sender, EventArgs e)

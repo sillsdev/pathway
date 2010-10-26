@@ -87,6 +87,7 @@ namespace SIL.PublishingSolution
         protected string _imageSource;
         protected string _imageClass;
         protected string _imageSrcClass;
+        protected Common.OutputType _outputType;
 
         protected ArrayList _headwordStyleName = new ArrayList();
         protected bool _headwordStyles = false;
@@ -332,7 +333,11 @@ namespace SIL.PublishingSolution
         {
             if (_allParagraph.Count > 0 && !_isParagraphClosed) // Is Para Exist
             {
-                _writer.WriteRaw("<Br/>");
+                if(_outputType == Common.OutputType.IDML)
+                {
+                    _writer.WriteRaw("<Br/>");
+                }
+
                 _writer.WriteEndElement();
                 _isNewParagraph = true;
                 _isParagraphClosed = true;
@@ -552,7 +557,7 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
-            AppendParentProperty();
+            AppendParentProperty(); // todo Check
             return _matchedCssStyleName;
         }
 
@@ -606,6 +611,13 @@ namespace SIL.PublishingSolution
                 foreach (KeyValuePair<string, string> property in IdAllClass[parentStyle])
                 {
                     if (_tempStyle.ContainsKey(property.Key) || property.Key == "TextColumnCount") continue;
+
+
+                    //if (_allParagraphProperty.ContainsKey(property.Key))  // todo check
+                    //    continue; // not merging paragraph property
+
+
+
                     _tempStyle[property.Key] = property.Value;
                 }
             }

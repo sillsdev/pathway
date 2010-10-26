@@ -42,6 +42,7 @@ namespace SIL.Tool
         #region Public variable
         public enum Action { New, Delete, Edit, Copy };
         public enum ProjType { Dictionary, Scripture };
+        public enum OutputType { ODT, IDML , PDF , MOBILE, XETEX};
         public static string SamplePath = string.Empty;
         #endregion
 

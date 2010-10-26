@@ -19,8 +19,8 @@ namespace SIL.PublishingSolution
         protected Dictionary<string, string> _allTextProperty;
         protected Dictionary<string, string> _allPageLayoutProperty;
         protected Dictionary<string, string> _allColumnProperty;
-        protected Dictionary<string, string> _paragraphProperty;
-        protected Dictionary<string, string> _textProperty;
+        protected Dictionary<string, string> _paragraphProperty = new Dictionary<string, string>();
+        protected Dictionary<string, string> _textProperty = new Dictionary<string, string>();
         protected Dictionary<string, string> _pageLayoutProperty;
         protected ArrayList _baseTagName = new ArrayList();  // for insert tagName
         protected ArrayList _allTagName = new ArrayList();  // for all tagName

@@ -8,7 +8,7 @@ using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
-    class ModifyOOStyles
+    class ModifyOOStyles : OOStyles
     {
         private XmlDocument _styleXMLdoc;
         private XmlNode _node;
@@ -27,14 +27,18 @@ namespace SIL.PublishingSolution
 
         public ArrayList ModifyStylesXML(string projectPath, Dictionary<string, Dictionary<string, string>> childStyle, List<string> usedStyleName, Dictionary<string, string> languageStyleName, string baseStyle, bool isHeadword)
         {
+            LoadAllProperty();
             _childStyle = childStyle;
             _projectPath = projectPath;
             _isHeadword = isHeadword;
             _languageStyleName = languageStyleName;
-            string styleFilePath = OpenIDStyles();
+            string styleFilePath = OpenIDStyles(); //todo change name
 
+            //nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
+            //nsmgr.AddNamespace("idPkg", "http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging");
             nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
-            nsmgr.AddNamespace("idPkg", "http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging");
+            nsmgr.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+            nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
 
             _root = _styleXMLdoc.DocumentElement;
             if (_root == null)
@@ -42,8 +46,8 @@ namespace SIL.PublishingSolution
                 return null;
             }
 
-            string paraStyle = "$ID/NormalParagraphStyle";
-            string charStyle = "$ID/NormalCharacterStyle";
+            string paraStyle = "Empty";// "$ID/NormalParagraphStyle";
+            string charStyle = "Empty";//"$ID/NormalCharacterStyle";
 
             //if(baseStyle.Length > 0)
             //{
@@ -60,14 +64,16 @@ namespace SIL.PublishingSolution
             {
                 if (!usedStyleName.Contains(className.Key))
                     continue;
-                SetVisibilityColor(className);
-                _tagType = "ParagraphStyle";
-                _xPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + paraStyle + "\"]";
+                //SetVisibilityColor(className);
+                //_tagType = "paragraph";
+                //_xPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + paraStyle + "\"]";
+                //_xPath = "//st:style[@st:name=\"" + paraStyle + "\"]";
+                _xPath = "//style:style[@style:name=\"" + paraStyle + "\"]";
                 InsertNode(className);
-                _tagType = "CharacterStyle";
-                _xPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"" + charStyle + "\"]";
-                InsertNode(className);
-                GetVariableClassName(className.Key);
+                //_tagType = "text";
+                //_xPath = "//st:style[@st:name=\"" + charStyle + "\"]";
+                //InsertNode(className);
+                //GetVariableClassName(className.Key);
             }
         }
 
@@ -113,39 +119,108 @@ namespace SIL.PublishingSolution
             string newClassName = className.Key;
             //string parentClassName = Common.RightString(newClassName, _styleSeperator);
 
-            _node = _root.SelectSingleNode(_xPath, nsmgr);
-            //if (_node == null) return;
+            XmlNode _node = _root.SelectSingleNode(_xPath, nsmgr);
+            if (_node == null) return;
             XmlDocumentFragment styleNode = _styleXMLdoc.CreateDocumentFragment();
             styleNode.InnerXml = _node.OuterXml;
             _node.ParentNode.InsertAfter(styleNode, _node);
 
-            newClassName = _tagType + "/" + className.Key;
-
             _nameElement = (XmlElement)_node;
-            _nameElement.SetAttribute("Self", newClassName);
-            _nameElement.SetAttribute("Name", className.Key);
-            _nameElement.SetAttribute("NextStyle", newClassName);
-            SetTagProperty(className.Key);
-            foreach (KeyValuePair<string, string> property in className.Value)
+            _nameElement.SetAttribute("style:name", newClassName);
+            _nameElement.SetAttribute("style:parent-style-name", "none"); // todo set correct parent
+
+            AddParaTextNode(className, _node);
+
+
+            //SetLanguage(className.Key);
+            //SetBasedOn("None", newClassName);
+            //SetAppliedFont(className.Value,newClassName);
+            //SetLineHeight(className.Value, newClassName);
+            //SetBaseLineShift(className.Value, newClassName);
+            //SetTagNode();
+        }
+
+        private void AddParaTextNode(KeyValuePair<string, Dictionary<string, string>> className, XmlNode node)
+        {
+            _paragraphProperty.Clear();
+            _textProperty.Clear();
+
+            foreach (KeyValuePair<string, string> prop in className.Value)
             {
-                if (property.Key == "Leading" || property.Key == "lang")
+                string propName = prop.Key;
+                if (_allParagraphProperty.ContainsKey(propName))
                 {
-                    continue;
+                    if (!_paragraphProperty.ContainsKey(prop.Key))
+                        _paragraphProperty[_allParagraphProperty[propName]  + prop.Key] = prop.Value;
                 }
-                _nameElement.SetAttribute(property.Key, property.Value);
+                else if (_allTextProperty.ContainsKey(propName))
+                {
+                    if (!_textProperty.ContainsKey(prop.Key))
+                        _textProperty[_allTextProperty[propName]  + prop.Key] = prop.Value;
+                }
             }
 
-            SetLanguage(className.Key);
-            SetBasedOn("None", newClassName);
-            SetAppliedFont(className.Value,newClassName);
-            SetLineHeight(className.Value, newClassName);
-            SetBaseLineShift(className.Value, newClassName);
-            SetTagNode();
+            XmlNode paraNode = null;
+            if (_paragraphProperty.Count > 0)
+            {
+                _nameElement.SetAttribute("style:family", "paragraph");
+                for (int i = 0; i < node.ChildNodes.Count; i++) 
+                {
+                    if (node.ChildNodes[i].Name == "style:paragraph-properties")
+                    {
+                        paraNode = node.ChildNodes[i];
+                    }
+                }
+                if (paraNode == null)
+                {
+                    paraNode = node.AppendChild(_styleXMLdoc.CreateElement("style:paragraph-properties", nsmgr.LookupNamespace("style")));
+                    node.AppendChild(paraNode);
+                }
+
+                XmlElement paraElement = (XmlElement)paraNode; ;
+                foreach (KeyValuePair<string, string> para in _paragraphProperty)
+                {
+                    string[] property = para.Key.Split(':');
+                    string ns = property[0];
+                    string prop = property[1];
+                    paraElement.SetAttribute(prop, nsmgr.LookupNamespace(ns), para.Value);
+                }
+            }
+
+            XmlNode textNode = null;
+            if (_textProperty.Count > 0)
+            {
+                if (_paragraphProperty.Count == 0)
+                    _nameElement.SetAttribute("style:family", "text");
+
+                for (int i = 0; i < node.ChildNodes.Count; i++) // find  Text node
+                {
+                    if (node.ChildNodes[i].Name == "style:text-properties")
+                    {
+                        textNode = node.ChildNodes[i];
+                    }
+                }
+                if (textNode == null)
+                {
+                    textNode = node.AppendChild(_styleXMLdoc.CreateElement("style:text-properties", nsmgr.LookupNamespace("style")));
+                    node.AppendChild(textNode);
+                }
+
+                XmlElement textElement = (XmlElement)textNode;
+                foreach (KeyValuePair<string, string> para in _textProperty)
+                {
+                    string[] property = para.Key.Split(':');
+                    string ns = property[0];
+                    if (ns == "st") ns = "style";
+                    string prop = property[1];
+                    textElement.SetAttribute(prop, nsmgr.LookupNamespace(ns), para.Value);
+                }
+            }
         }
 
         private void SetLanguage(string className)
         {
-            if (_tagType == "ParagraphStyle") // Note - If needed apply only for paragraph style.
+            if (_tagType == "paragraph") // Note - If needed apply only for paragraph style.
             {
                 if (_languageStyleName.ContainsKey(className)) // if lang style then write language for this tag.
                 {
@@ -313,7 +388,7 @@ namespace SIL.PublishingSolution
             string projType = "scripture";
             //string targetFolder = Common.PathCombine(Common.GetTempFolderPath(), "InDesignFiles" + Path.DirectorySeparatorChar + projType);
             string targetFolder = Common.RightRemove(_projectPath, Path.DirectorySeparatorChar.ToString());
-            targetFolder = Common.PathCombine(targetFolder, "Resources");
+            //targetFolder = Common.PathCombine(targetFolder, "Resources");
             string styleFilePath = Common.PathCombine(targetFolder, "Styles.xml");
 
             _styleXMLdoc = new XmlDocument();
@@ -394,5 +469,6 @@ namespace SIL.PublishingSolution
                 }
             }
         }
-    }
+
+   }
 }
