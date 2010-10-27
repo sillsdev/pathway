@@ -265,7 +265,14 @@ namespace SIL.Tool
                         //}
                         if (!File.Exists(PathCombine(cssPath, cssFile)) && SamplePath.Length > 0)
                         {
-                            cssPath = PathCombine(Path.GetDirectoryName(Application.ExecutablePath), SamplePath);
+                            string executablePath = Path.GetDirectoryName(Application.ExecutablePath);
+                            if (executablePath.Contains("ReSharper") || executablePath.Contains("NUnit"))
+                            {
+                                //This code will work when this method call from NUnit Test case
+                                int binFolderPart = Environment.CurrentDirectory.IndexOf(Path.DirectorySeparatorChar + "bin" + Path.DirectorySeparatorChar);
+                                executablePath = DirectoryPathReplace(Environment.CurrentDirectory.Substring(0, binFolderPart) + "/ConfigurationTool/TestFiles/input");
+                            }
+                            cssPath = PathCombine(executablePath, SamplePath);
                         }
                         arrayCSSFile.AddRange(GetCSSFileNames(PathCombine(cssPath, cssFile), BaseCssFileWithPath));
                     }

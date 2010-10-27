@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using SIL.Tool;
@@ -2726,8 +2727,11 @@ namespace SIL.PublishingSolution
 
             Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool_Load");
             tabdic = cTool.TabControl1.TabPages[1];
-            tabmob = cTool.TabControl1.TabPages[2];
-            cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages[2]);
+            if (cTool.TabControl1.TabPages.Count > 2)
+            {
+                tabmob = cTool.TabControl1.TabPages[2];
+                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages[2]);
+            }
             cTool.BtnMobile.Enabled = false;
             _redoundo = new UndoRedo(cTool.TsUndo, cTool.TsRedo);
             cTool.MinimumSize = new Size(497, 183);
@@ -2807,9 +2811,12 @@ namespace SIL.PublishingSolution
             string msg = "Are you sure you want to delete the " + name + " stylesheet?";
             //string msg = "Are you sure you want to delete the " + StyleName + " stylesheet?";
             string caption = "Delete Stylesheet";
-            DialogResult result = MessageBox.Show(msg, caption, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
-            if (result != DialogResult.OK) return;
-
+            if (!cTool._fromNunit)
+            {
+                DialogResult result = MessageBox.Show(msg, caption, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning,
+                                                      MessageBoxDefaultButton.Button2);
+                if (result != DialogResult.OK) return;
+            }
             try
             {
                 //_redoundo.Set(Common.Action.Delete, StyleName, null, "", string.Empty);

@@ -1,0 +1,76 @@
+/* FLExRev.css 8/29/2008 gt - for reversal formatting */
+@page {
+    size: 16.2cm 22.9cm;
+    margin: 2cm 2cm 2cm 2cm;
+    counter-increment: page;
+    @top-left {
+        content: string(guideword, first);
+        direction: ltr;
+        font-family: "Charis SIL", sans-serif;   /* default Sans-Serif font */
+        font-weight: bold;
+        font-size: 10pt;
+        margin-top: 1em;
+    }
+    @top-center {
+        content: counter(page);
+        margin-top: 1em
+    }
+    @top-right {
+        content: string(guideword, last);
+        direction: ltr;
+        font-family: "Charis SIL", sans-serif;   /* default Sans-Serif font */
+        font-weight: bold;
+        font-size: 10pt;
+        margin-top: 1em;
+    }
+}
+@page :first {
+    @top-left { content: ''; }
+    @top-center { content: ''; }
+    @top-right { content: ''; }
+}
+.revAppendix {}
+.header {
+    text-align: center;
+    width: 100%;
+    margin-top: 18pt;
+    margin-bottom: 18pt;
+    font-weight: bold;
+    font-size: 18pt;
+    font-family: "Charis SIL", serif;	/* default Serif font */
+    direction: ltr;
+}
+.letData {
+    column-count: 2; -moz-column-count: 2;
+    column-gap: 1.5em; -moz-column-gap: 1.5em;
+    column-fill: balance;
+    column-rule: solid 1pt #aa0000;
+}
+.entry {
+    display: block;
+    text-indent: -10pt;
+    margin-left: 10pt;
+    font-size: 10pt;
+}
+.headword {
+    font-family: "Charis SIL", serif;
+    font-weight: bold;
+}
+.headword:after { content:' ';}
+.sense {
+    font-family: "Charis SIL", serif;
+    font-weight: normal;
+}
+.sense:after {
+    content:"";
+}
+.sense + .sense:before {
+    content: ", ";
+}
+.xhomographnumber {
+    vertical-align: sub;
+}
+.xsensenumber:before {
+    font-size: 8pt;
+    content: "\25ba";
+}

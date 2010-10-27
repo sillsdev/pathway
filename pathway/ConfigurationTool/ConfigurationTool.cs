@@ -32,6 +32,10 @@ namespace SIL.PublishingSolution
         private TraceSwitch _traceOn = new TraceSwitch("General", "Trace level for application");
         #endregion
 
+        #region Public Variable
+        public bool _fromNunit = false; 
+        #endregion
+
         #region Constructor
         public ConfigurationTool(string inputType, string mediaType, string style)
         {
@@ -67,7 +71,8 @@ namespace SIL.PublishingSolution
             {
                 //It will call when the Configtool from Application
                 RemoveSettingsFile();
-                ValidateXMLVersion(Param.SettingPath);
+                if (!_fromNunit)
+                    ValidateXMLVersion(Param.SettingPath);
                 Param.LoadSettings(); // Load StyleSetting.xml
                 _CToolBL.inputTypeBL = Param.Value["InputType"];
             }
