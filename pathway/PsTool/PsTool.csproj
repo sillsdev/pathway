@@ -151,6 +151,7 @@
     <Compile Include="CommonXml.cs" />
     <Compile Include="FontInternals.cs">
     </Compile>
+    <Compile Include="Param.cs" />
     <Compile Include="PathPart.cs" />
     <Compile Include="PathwayPath.cs" />
     <Compile Include="PleaseWait.cs">
@@ -160,6 +161,12 @@
       <DependentUpon>PleaseWait.cs</DependentUpon>
     </Compile>
     <Compile Include="RegistryHelperLite.cs" />
+    <Compile Include="StyleCategories.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StyleCategories.Designer.cs">
+      <DependentUpon>StyleCategories.cs</DependentUpon>
+    </Compile>
     <Compile Include="UndoRedo.cs" />
     <Compile Include="VerboseClass.cs" />
     <Compile Include="XmlFun.cs" />
@@ -208,6 +215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PleaseWait.resx">
       <DependentUpon>PleaseWait.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StyleCategories.resx">
+      <DependentUpon>StyleCategories.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

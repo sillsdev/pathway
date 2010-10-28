@@ -106,6 +106,13 @@
     <Compile Include="Categories.Designer.cs">
       <DependentUpon>Categories.cs</DependentUpon>
     </Compile>
+    <Compile Include="ConfigurationTool.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfigurationTool.Designer.cs">
+      <DependentUpon>ConfigurationTool.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigurationToolBL.cs" />
     <Compile Include="ConfigureStylesheetDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,8 +170,8 @@
       <DependentUpon>GlobalSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="MergeCss.cs" />
-    <Compile Include="Param.cs" />
     <Compile Include="Pdf.cs" />
+    <Compile Include="PdftoJpg.cs" />
     <Compile Include="PopupForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -209,12 +216,6 @@
     <Compile Include="SettingBl.cs" />
     <Compile Include="SettingsValidator.cs" />
     <Compile Include="SettingsVersionControl.cs" />
-    <Compile Include="StyleCategories.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="StyleCategories.Designer.cs">
-      <DependentUpon>StyleCategories.cs</DependentUpon>
-    </Compile>
     <Compile Include="ConfigureStylesheet.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -244,6 +245,9 @@
     <EmbeddedResource Include="Categories.resx">
       <DependentUpon>Categories.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigurationTool.resx">
+      <DependentUpon>ConfigurationTool.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ConfigureStylesheetDialog.resx">
       <DependentUpon>ConfigureStylesheetDialog.cs</DependentUpon>
@@ -281,6 +285,9 @@
       <DependentUpon>PopupForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="PreviewConfig.resx">
+      <DependentUpon>PreviewConfig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PreviewPrintVia.resx">
       <DependentUpon>PreviewPrintVia.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -299,10 +306,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ScriptureSetting.resx">
       <DependentUpon>ScriptureSetting.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="StyleCategories.resx">
-      <DependentUpon>StyleCategories.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ConfigureStylesheet.resx">
@@ -332,6 +335,10 @@
     <ProjectReference Include="..\CssParser\CssParser.csproj">
       <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
       <Name>CssParser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenOfficeConvert\OpenOfficeConvert.csproj">
+      <Project>{E225E5AF-B603-41D1-BB58-E3AAE05C59FD}</Project>
+      <Name>OpenOfficeConvert</Name>
     </ProjectReference>
     <ProjectReference Include="..\PsTool\PsTool.csproj">
       <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>

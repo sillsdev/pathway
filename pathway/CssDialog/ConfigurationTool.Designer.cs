@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigurationTool));
             this.stylesGrid = new System.Windows.Forms.DataGridView();
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
             this.tsNew = new System.Windows.Forms.ToolStripButton();
@@ -88,7 +87,6 @@
             this.ddlPagePageSize = new System.Windows.Forms.ComboBox();
             this.lblPagePageSize = new System.Windows.Forms.Label();
             this.tabMobile = new System.Windows.Forms.TabPage();
-            this.mobileIcon = new System.Windows.Forms.PictureBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtCopyright = new System.Windows.Forms.TextBox();
@@ -111,19 +109,19 @@
             this.btnOthers = new System.Windows.Forms.Button();
             this.btnWeb = new System.Windows.Forms.Button();
             this.btnMobile = new System.Windows.Forms.Button();
-            this.btnPaper = new System.Windows.Forms.Button();
             this.TLPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.TLPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblType = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnPaper = new System.Windows.Forms.Button();
+            this.mobileIcon = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.stylesGrid)).BeginInit();
             this.toolStripMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabInfo.SuspendLayout();
             this.tabDisplay.SuspendLayout();
             this.tabMobile.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mobileIcon)).BeginInit();
             this.TLPanelOuter.SuspendLayout();
             this.TLPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -131,6 +129,7 @@
             this.TLPanel2.SuspendLayout();
             this.TLPanel3.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mobileIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // stylesGrid
@@ -150,7 +149,7 @@
             this.stylesGrid.ReadOnly = true;
             this.stylesGrid.RowHeadersVisible = false;
             this.stylesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.stylesGrid.Size = new System.Drawing.Size(582, 455);
+            this.stylesGrid.Size = new System.Drawing.Size(581, 482);
             this.stylesGrid.TabIndex = 5;
             this.stylesGrid.TabStop = false;
             this.stylesGrid.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.stylesGrid_RowEnter);
@@ -170,7 +169,7 @@
             this.tsSend});
             this.toolStripMain.Location = new System.Drawing.Point(0, 0);
             this.toolStripMain.Name = "toolStripMain";
-            this.toolStripMain.Size = new System.Drawing.Size(978, 52);
+            this.toolStripMain.Size = new System.Drawing.Size(978, 25);
             this.toolStripMain.TabIndex = 5;
             this.toolStripMain.Text = "New";
             this.toolStripMain.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripMain_ItemClicked);
@@ -179,12 +178,11 @@
             // 
             this.tsNew.AccessibleName = "tsNew";
             this.tsNew.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.tsNew.Image = ((System.Drawing.Image)(resources.GetObject("tsNew.Image")));
             this.tsNew.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.tsNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsNew.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsNew.Name = "tsNew";
-            this.tsNew.Size = new System.Drawing.Size(36, 49);
+            this.tsNew.Size = new System.Drawing.Size(34, 22);
             this.tsNew.Text = "&New";
             this.tsNew.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsNew.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
@@ -195,11 +193,10 @@
             // tsSaveAs
             // 
             this.tsSaveAs.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.tsSaveAs.Image = ((System.Drawing.Image)(resources.GetObject("tsSaveAs.Image")));
             this.tsSaveAs.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsSaveAs.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsSaveAs.Name = "tsSaveAs";
-            this.tsSaveAs.Size = new System.Drawing.Size(56, 49);
+            this.tsSaveAs.Size = new System.Drawing.Size(56, 22);
             this.tsSaveAs.Text = "Save &As";
             this.tsSaveAs.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsSaveAs.ToolTipText = "Copy the selected stylesheet into a new stylesheet (Alt+A)";
@@ -209,11 +206,10 @@
             // 
             this.tsDelete.AccessibleName = "tsClose";
             this.tsDelete.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.tsDelete.Image = ((System.Drawing.Image)(resources.GetObject("tsDelete.Image")));
             this.tsDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsDelete.Name = "tsDelete";
-            this.tsDelete.Size = new System.Drawing.Size(48, 49);
+            this.tsDelete.Size = new System.Drawing.Size(48, 22);
             this.tsDelete.Text = "De&lete";
             this.tsDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsDelete.ToolTipText = "Delete the selected stylesheet (Alt+L)";
@@ -224,11 +220,10 @@
             this.tsUndo.AccessibleName = "tsPreview";
             this.tsUndo.Enabled = false;
             this.tsUndo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.tsUndo.Image = ((System.Drawing.Image)(resources.GetObject("tsUndo.Image")));
             this.tsUndo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsUndo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsUndo.Name = "tsUndo";
-            this.tsUndo.Size = new System.Drawing.Size(43, 49);
+            this.tsUndo.Size = new System.Drawing.Size(43, 22);
             this.tsUndo.Text = " &Undo";
             this.tsUndo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsUndo.ToolTipText = "Undo the last change (Alt+U)";
@@ -239,11 +234,10 @@
             this.tsRedo.AccessibleName = "tsPreview";
             this.tsRedo.Enabled = false;
             this.tsRedo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.tsRedo.Image = ((System.Drawing.Image)(resources.GetObject("tsRedo.Image")));
             this.tsRedo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsRedo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsRedo.Name = "tsRedo";
-            this.tsRedo.Size = new System.Drawing.Size(43, 49);
+            this.tsRedo.Size = new System.Drawing.Size(43, 22);
             this.tsRedo.Text = " &Redo";
             this.tsRedo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsRedo.ToolTipText = "Redo the last change (Alt+R)";
@@ -253,11 +247,10 @@
             // 
             this.tsPreview.AccessibleName = "tsEdit";
             this.tsPreview.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.tsPreview.Image = ((System.Drawing.Image)(resources.GetObject("tsPreview.Image")));
             this.tsPreview.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsPreview.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsPreview.Name = "tsPreview";
-            this.tsPreview.Size = new System.Drawing.Size(56, 49);
+            this.tsPreview.Size = new System.Drawing.Size(56, 22);
             this.tsPreview.Text = "Pre&view";
             this.tsPreview.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsPreview.ToolTipText = "Preview the layout produced by the selected stylesheet (Alt+V)";
@@ -267,11 +260,10 @@
             // 
             this.tsDefault.AccessibleName = "tsHelp";
             this.tsDefault.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.tsDefault.Image = ((System.Drawing.Image)(resources.GetObject("tsDefault.Image")));
             this.tsDefault.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsDefault.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsDefault.Name = "tsDefault";
-            this.tsDefault.Size = new System.Drawing.Size(58, 49);
+            this.tsDefault.Size = new System.Drawing.Size(58, 22);
             this.tsDefault.Text = "De&faults";
             this.tsDefault.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsDefault.ToolTipText = "Select the Default Settings for the Print Via dialog (Alt+F)";
@@ -281,11 +273,10 @@
             // 
             this.tsSend.AccessibleName = "tsExport";
             this.tsSend.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.tsSend.Image = ((System.Drawing.Image)(resources.GetObject("tsSend.Image")));
             this.tsSend.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsSend.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsSend.Name = "tsSend";
-            this.tsSend.Size = new System.Drawing.Size(39, 49);
+            this.tsSend.Size = new System.Drawing.Size(39, 22);
             this.tsSend.Text = "S&end";
             this.tsSend.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsSend.ToolTipText = "Send the stylesheets and settings to someone else (Alt+E)";
@@ -864,16 +855,6 @@
             this.tabMobile.Text = "Properties";
             this.tabMobile.UseVisualStyleBackColor = true;
             // 
-            // mobileIcon
-            // 
-            this.mobileIcon.Image = ((System.Drawing.Image)(resources.GetObject("mobileIcon.Image")));
-            this.mobileIcon.Location = new System.Drawing.Point(93, 179);
-            this.mobileIcon.Name = "mobileIcon";
-            this.mobileIcon.Size = new System.Drawing.Size(20, 20);
-            this.mobileIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.mobileIcon.TabIndex = 65;
-            this.mobileIcon.TabStop = false;
-            // 
             // btnBrowse
             // 
             this.btnBrowse.Location = new System.Drawing.Point(119, 179);
@@ -983,7 +964,7 @@
             this.label2.Location = new System.Drawing.Point(94, 1);
             this.label2.Margin = new System.Windows.Forms.Padding(0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(591, 23);
+            this.label2.Size = new System.Drawing.Size(590, 23);
             this.label2.TabIndex = 14;
             this.label2.Text = "Stylesheets";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -993,7 +974,7 @@
             this.lblInfoCaption.BackColor = System.Drawing.Color.RoyalBlue;
             this.lblInfoCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInfoCaption.ForeColor = System.Drawing.Color.White;
-            this.lblInfoCaption.Location = new System.Drawing.Point(686, 1);
+            this.lblInfoCaption.Location = new System.Drawing.Point(685, 1);
             this.lblInfoCaption.Margin = new System.Windows.Forms.Padding(0);
             this.lblInfoCaption.Name = "lblInfoCaption";
             this.lblInfoCaption.Size = new System.Drawing.Size(290, 23);
@@ -1019,7 +1000,7 @@
             this.TLPanelOuter.ColumnCount = 3;
             this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 92F));
             this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 291F));
+            this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 292F));
             this.TLPanelOuter.Controls.Add(this.label2, 1, 0);
             this.TLPanelOuter.Controls.Add(this.TLPanel1, 0, 1);
             this.TLPanelOuter.Controls.Add(this.lblInfoCaption, 2, 0);
@@ -1027,13 +1008,13 @@
             this.TLPanelOuter.Controls.Add(this.TLPanel3, 2, 1);
             this.TLPanelOuter.Controls.Add(this.lblType, 0, 0);
             this.TLPanelOuter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TLPanelOuter.Location = new System.Drawing.Point(0, 52);
+            this.TLPanelOuter.Location = new System.Drawing.Point(0, 25);
             this.TLPanelOuter.Margin = new System.Windows.Forms.Padding(1);
             this.TLPanelOuter.Name = "TLPanelOuter";
             this.TLPanelOuter.RowCount = 2;
             this.TLPanelOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             this.TLPanelOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TLPanelOuter.Size = new System.Drawing.Size(978, 487);
+            this.TLPanelOuter.Size = new System.Drawing.Size(978, 514);
             this.TLPanelOuter.TabIndex = 19;
             // 
             // TLPanel1
@@ -1105,7 +1086,6 @@
             this.btnOthers.FlatAppearance.BorderColor = System.Drawing.SystemColors.ButtonShadow;
             this.btnOthers.FlatAppearance.BorderSize = 0;
             this.btnOthers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOthers.Image = ((System.Drawing.Image)(resources.GetObject("btnOthers.Image")));
             this.btnOthers.Location = new System.Drawing.Point(0, 210);
             this.btnOthers.Name = "btnOthers";
             this.btnOthers.Size = new System.Drawing.Size(85, 70);
@@ -1121,7 +1101,6 @@
             this.btnWeb.FlatAppearance.BorderColor = System.Drawing.SystemColors.ButtonShadow;
             this.btnWeb.FlatAppearance.BorderSize = 0;
             this.btnWeb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnWeb.Image = ((System.Drawing.Image)(resources.GetObject("btnWeb.Image")));
             this.btnWeb.Location = new System.Drawing.Point(0, 140);
             this.btnWeb.Name = "btnWeb";
             this.btnWeb.Size = new System.Drawing.Size(85, 70);
@@ -1137,7 +1116,6 @@
             this.btnMobile.FlatAppearance.BorderColor = System.Drawing.SystemColors.ButtonShadow;
             this.btnMobile.FlatAppearance.BorderSize = 0;
             this.btnMobile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMobile.Image = ((System.Drawing.Image)(resources.GetObject("btnMobile.Image")));
             this.btnMobile.Location = new System.Drawing.Point(0, 70);
             this.btnMobile.Name = "btnMobile";
             this.btnMobile.Size = new System.Drawing.Size(85, 70);
@@ -1146,22 +1124,6 @@
             this.btnMobile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnMobile.UseVisualStyleBackColor = true;
             this.btnMobile.Click += new System.EventHandler(this.btnMobile_Click);
-            // 
-            // btnPaper
-            // 
-            this.btnPaper.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnPaper.FlatAppearance.BorderColor = System.Drawing.SystemColors.ButtonShadow;
-            this.btnPaper.FlatAppearance.BorderSize = 0;
-            this.btnPaper.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPaper.Image = ((System.Drawing.Image)(resources.GetObject("btnPaper.Image")));
-            this.btnPaper.Location = new System.Drawing.Point(0, 0);
-            this.btnPaper.Name = "btnPaper";
-            this.btnPaper.Size = new System.Drawing.Size(85, 70);
-            this.btnPaper.TabIndex = 0;
-            this.btnPaper.Text = "&Paper";
-            this.btnPaper.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnPaper.UseVisualStyleBackColor = true;
-            this.btnPaper.Click += new System.EventHandler(this.btnPaper_Click);
             // 
             // TLPanel2
             // 
@@ -1174,8 +1136,8 @@
             this.TLPanel2.Name = "TLPanel2";
             this.TLPanel2.RowCount = 1;
             this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 455F));
-            this.TLPanel2.Size = new System.Drawing.Size(585, 455);
+            this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 482F));
+            this.TLPanel2.Size = new System.Drawing.Size(584, 482);
             this.TLPanel2.TabIndex = 1;
             // 
             // TLPanel3
@@ -1184,7 +1146,7 @@
             this.TLPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TLPanel3.Controls.Add(this.panel3, 0, 1);
             this.TLPanel3.Controls.Add(this.txtCss, 0, 0);
-            this.TLPanel3.Location = new System.Drawing.Point(689, 28);
+            this.TLPanel3.Location = new System.Drawing.Point(688, 28);
             this.TLPanel3.Name = "TLPanel3";
             this.TLPanel3.RowCount = 2;
             this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
@@ -1216,6 +1178,30 @@
             this.lblType.Text = "Dictionary";
             this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // btnPaper
+            // 
+            this.btnPaper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnPaper.FlatAppearance.BorderColor = System.Drawing.SystemColors.ButtonShadow;
+            this.btnPaper.FlatAppearance.BorderSize = 0;
+            this.btnPaper.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPaper.Location = new System.Drawing.Point(0, 0);
+            this.btnPaper.Name = "btnPaper";
+            this.btnPaper.Size = new System.Drawing.Size(85, 70);
+            this.btnPaper.TabIndex = 0;
+            this.btnPaper.Text = "&Paper";
+            this.btnPaper.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnPaper.UseVisualStyleBackColor = true;
+            this.btnPaper.Click += new System.EventHandler(this.btnPaper_Click);
+            // 
+            // mobileIcon
+            // 
+            this.mobileIcon.Location = new System.Drawing.Point(93, 179);
+            this.mobileIcon.Name = "mobileIcon";
+            this.mobileIcon.Size = new System.Drawing.Size(20, 20);
+            this.mobileIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.mobileIcon.TabIndex = 65;
+            this.mobileIcon.TabStop = false;
+            // 
             // ConfigurationTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1224,7 +1210,6 @@
             this.Controls.Add(this.TLPanelOuter);
             this.Controls.Add(this.toolStripMain);
             this.HelpButton = true;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "ConfigurationTool";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -1242,7 +1227,6 @@
             this.tabDisplay.PerformLayout();
             this.tabMobile.ResumeLayout(false);
             this.tabMobile.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mobileIcon)).EndInit();
             this.TLPanelOuter.ResumeLayout(false);
             this.TLPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -1251,6 +1235,7 @@
             this.TLPanel3.ResumeLayout(false);
             this.TLPanel3.PerformLayout();
             this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.mobileIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
