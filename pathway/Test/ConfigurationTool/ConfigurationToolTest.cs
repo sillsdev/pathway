@@ -32,7 +32,7 @@ namespace Test.UIConfigurationToolTest
         [TestFixtureSetUp]
         protected void SetUp()
         {
-            _configTool = new ConfigurationTool("","","");
+            _configTool = new ConfigurationTool();
 
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/ConfigurationTool/TestFiles");
             _inputBasePath = Common.PathCombine(testPath, "Input");

@@ -33,17 +33,20 @@ namespace SIL.PublishingSolution
         #endregion
 
         #region Public Variable
-        public bool _fromNunit = false; 
+        public bool _fromNunit = false;
+        public string InputType=string.Empty ;
+        public string MediaType = string.Empty;
+        public string Style = string.Empty;
         #endregion
 
         #region Constructor
-        public ConfigurationTool(string inputType, string mediaType, string style)
+        public ConfigurationTool()
         {
             Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool Constructor");
             InitializeComponent();
-            _CToolBL.inputTypeBL = inputType;
-            _CToolBL.MediaTypeEXE = mediaType;
-            _CToolBL.StyleEXE = style.Replace('&', ' ');
+            _CToolBL.inputTypeBL = InputType;
+            _CToolBL.MediaTypeEXE = MediaType;
+            _CToolBL.StyleEXE = Style.Replace('&', ' ');
             _CToolBL.SetClassReference(this);
         }
         #endregion

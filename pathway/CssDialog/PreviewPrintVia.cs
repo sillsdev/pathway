@@ -75,7 +75,7 @@ namespace SIL.PublishingSolution
             Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
             Common.HelpProv.SetHelpKeyword(this, _helpTopic);
             CreateToolTip();
-            lnkEdit.Visible = _showEdit;
+            btnEdit.Visible = _showEdit;
         }
 
         private void CreateToolTip()
@@ -258,7 +258,7 @@ namespace SIL.PublishingSolution
                     SelectedStyle = grid[0, rowid].Value.ToString();
                     string file2 = grid[3, rowid].Value.ToString();
                     _previewFileName2 = Common.PathCombine(_path, file2);
-                    lnkEdit.Enabled = true;
+                    //lnkEdit.Enabled = true;
                 }
                 catch
                 {
@@ -333,26 +333,26 @@ namespace SIL.PublishingSolution
         {
             //PleaseWait st = new PleaseWait();
             //st.ShowDialog();
-            string ProgFilesPath = System.Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-            string ConfigToolPath = Common.PathCombine(ProgFilesPath, @"SIL\Pathway7\ConfigurationTool.exe");
-            if(!File.Exists(ConfigToolPath))
-                ConfigToolPath = Common.PathCombine(ProgFilesPath, @"SIL\Pathway\ConfigurationTool.exe");
-            //string ConfigToolPath = @"E:\RapidSVN\PublishingSolution\ConfigurationTool\bin\Debug\ConfigurationTool.exe";
-            var startInfo = new ProcessStartInfo { FileName = ConfigToolPath };
-            startInfo.Arguments = InputType + " " + grid.SelectedRows[0].Cells[4].Value + " " + grid.SelectedRows[0].Cells[0].Value.ToString().Replace(' ', '&');
-            Param.SetValue(Param.LayoutSelected, grid.SelectedRows[0].Cells[0].Value.ToString());
-            Param.DefaultValue[Param.LayoutSelected] = grid.SelectedRows[0].Cells[0].Value.ToString();
-            Param.Write();
-            Process.Start(startInfo);
-            lnkEdit.Enabled = false;
+            //string ProgFilesPath = System.Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+            //string ConfigToolPath = Common.PathCombine(ProgFilesPath, @"SIL\Pathway7\ConfigurationTool.exe");
+            //if(!File.Exists(ConfigToolPath))
+            //    ConfigToolPath = Common.PathCombine(ProgFilesPath, @"SIL\Pathway\ConfigurationTool.exe");
+            ////string ConfigToolPath = @"E:\RapidSVN\PublishingSolution\ConfigurationTool\bin\Debug\ConfigurationTool.exe";
+            //var startInfo = new ProcessStartInfo { FileName = ConfigToolPath };
+            //startInfo.Arguments = InputType + " " + grid.SelectedRows[0].Cells[4].Value + " " + grid.SelectedRows[0].Cells[0].Value.ToString().Replace(' ', '&');
+            //Param.SetValue(Param.LayoutSelected, grid.SelectedRows[0].Cells[0].Value.ToString());
+            //Param.DefaultValue[Param.LayoutSelected] = grid.SelectedRows[0].Cells[0].Value.ToString();
+            //Param.Write();
+            //Process.Start(startInfo);
+            //lnkEdit.Enabled = false;
             
         }
 
-        private void PreviewPrintVia_Activated(object sender, EventArgs e)
-        {
-            Param.LoadSettings();
-            LoadGridValues(sender);
-        }
+        //private void PreviewPrintVia_Activated(object sender, EventArgs e)
+        //{
+        //    Param.LoadSettings();
+        //    LoadGridValues(sender);
+        //}
 
         private void BtnHelp_Click(object sender, EventArgs e)
         {
@@ -362,6 +362,29 @@ namespace SIL.PublishingSolution
             Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
             Common.HelpProv.SetHelpKeyword(this, _helpTopic);
             SendKeys.Send("{F1}");
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            //string ProgFilesPath = System.Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+            //string ConfigToolPath = Common.PathCombine(ProgFilesPath, @"SIL\Pathway7\ConfigurationTool.exe");
+            //if (!File.Exists(ConfigToolPath))
+                //ConfigToolPath = Common.PathCombine(ProgFilesPath, @"SIL\Pathway\ConfigurationTool.exe");
+            ////string ConfigToolPath = @"E:\RapidSVN\PublishingSolution\ConfigurationTool\bin\Debug\ConfigurationTool.exe";
+            //var startInfo = new ProcessStartInfo { FileName = ConfigToolPath };
+            //startInfo.Arguments = InputType + " " + grid.SelectedRows[0].Cells[4].Value + " " + grid.SelectedRows[0].Cells[0].Value.ToString().Replace(' ', '&');
+            Param.SetValue(Param.LayoutSelected, grid.SelectedRows[0].Cells[0].Value.ToString());
+            Param.DefaultValue[Param.LayoutSelected] = grid.SelectedRows[0].Cells[0].Value.ToString();
+            Param.Write();
+            ConfigurationTool configurationTool = new ConfigurationTool();
+            configurationTool.InputType = InputType;
+            configurationTool.MediaType = grid.SelectedRows[0].Cells[4].Value.ToString();
+            configurationTool.Style = grid.SelectedRows[0].Cells[0].Value.ToString().Replace(' ', '&');
+            configurationTool.ShowDialog();
+            Param.LoadSettings();
+            LoadGridValues(sender);
+            //Process.Start(startInfo);
+            ////lnkEdit.Enabled = false;
         }
     }
 }

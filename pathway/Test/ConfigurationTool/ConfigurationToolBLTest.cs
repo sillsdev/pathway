@@ -28,7 +28,7 @@ namespace Test.UIConfigurationToolBLTest
         [TestFixtureSetUp]
         protected void SetUp()
         {
-            cTool = new ConfigurationTool("", "", "");
+            cTool = new ConfigurationTool();
             cTool._fromNunit = true;
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/ConfigurationTool/TestFiles");
             _inputBasePath = Common.PathCombine(testPath, "Input");
