@@ -179,6 +179,14 @@
       <DependentUpon>PopupForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Preview.cs" />
+    <Compile Include="PreviewConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreviewConfig.Designer.cs">
+      <DependentUpon>PreviewConfig.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="PreviewPrintVia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -287,6 +295,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PreviewConfig.resx">
       <DependentUpon>PreviewConfig.cs</DependentUpon>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PreviewConfig.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="PreviewPrintVia.resx">
       <DependentUpon>PreviewPrintVia.cs</DependentUpon>

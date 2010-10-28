@@ -2178,13 +2178,13 @@ namespace SIL.PublishingSolution
 
                 if (File.Exists(imageFile) || File.Exists(imageFile1))
                 {
-                    //PreviewConfig preview = new PreviewConfig(imageFile,
-                    //                                          imageFile1)
-                    //                            {
-                    //                                Text = ("Preview - " + StyleName)
-                    //                            };
-                    //preview.Icon = cTool.Icon;
-                    //preview.ShowDialog();
+                    PreviewConfig preview = new PreviewConfig(imageFile,
+                                                              imageFile1)
+                                                {
+                                                    Text = ("Preview - " + StyleName)
+                                                };
+                    preview.Icon = cTool.Icon;
+                    preview.ShowDialog();
                 }
                 else
                 {
