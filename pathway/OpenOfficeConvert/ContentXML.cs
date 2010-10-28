@@ -1406,7 +1406,9 @@ namespace SIL.PublishingSolution
                     
                     string data = HardSpace(currClass, _reader.Value);
                     data = SignificantSpace(data);
-                    _writer.WriteString(data);
+                    bool isWritten = InsertHardLineBreak(data);
+                    if (!isWritten)
+                        _writer.WriteString(data);
                 }
                 if (string.Compare(currClass, "ChapterNumber") == 0)
                 {
@@ -1425,6 +1427,26 @@ namespace SIL.PublishingSolution
             _familyType = "";
             _isNewLine = false;
 
+        }
+
+        private bool InsertHardLineBreak(string content)
+        {
+            bool isWritten = false;
+
+            if (content.IndexOf((char)8232) >= 0)
+            {
+                string[] value = content.Split(new []{(char)8232 });
+                for (int i = 0; i < value.Length; i++)
+                {
+                    if (value[i].Length != 0)
+                    {
+                        _writer.WriteRaw("<text:line-break/>");
+                        _writer.WriteString(value[i]);
+                    }
+                }
+                isWritten = true;
+            }
+            return isWritten;
         }
 
         private void MissingStyleInCss(string styleName)

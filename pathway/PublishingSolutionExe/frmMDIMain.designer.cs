@@ -139,7 +139,7 @@ namespace SIL.PublishingSolution
             this.menuNew.AccessibleName = "menuNew";
             this.menuNew.Name = "menuNew";
             this.menuNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.menuNew.Size = new System.Drawing.Size(163, 22);
+            this.menuNew.Size = new System.Drawing.Size(152, 22);
             this.menuNew.Text = "&New...";
             this.menuNew.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
@@ -148,7 +148,7 @@ namespace SIL.PublishingSolution
             this.menuOpen.AccessibleName = "menuOpen";
             this.menuOpen.Name = "menuOpen";
             this.menuOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.menuOpen.Size = new System.Drawing.Size(163, 22);
+            this.menuOpen.Size = new System.Drawing.Size(152, 22);
             this.menuOpen.Text = "&Open...";
             this.menuOpen.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -158,7 +158,7 @@ namespace SIL.PublishingSolution
             this.menuExport.Name = "menuExport";
             this.menuExport.ShortcutKeyDisplayString = "";
             this.menuExport.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.menuExport.Size = new System.Drawing.Size(163, 22);
+            this.menuExport.Size = new System.Drawing.Size(152, 22);
             this.menuExport.Text = "Expor&t...";
             this.menuExport.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
             // 
@@ -166,7 +166,7 @@ namespace SIL.PublishingSolution
             // 
             this.menuClose.AccessibleName = "menuClose";
             this.menuClose.Name = "menuClose";
-            this.menuClose.Size = new System.Drawing.Size(163, 22);
+            this.menuClose.Size = new System.Drawing.Size(152, 22);
             this.menuClose.Text = "&Close";
             this.menuClose.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
@@ -174,7 +174,7 @@ namespace SIL.PublishingSolution
             // 
             this.menuExit.AccessibleName = "menuExit";
             this.menuExit.Name = "menuExit";
-            this.menuExit.Size = new System.Drawing.Size(163, 22);
+            this.menuExit.Size = new System.Drawing.Size(152, 22);
             this.menuExit.Text = "E&xit";
             this.menuExit.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -193,7 +193,7 @@ namespace SIL.PublishingSolution
             this.menuEdit.AccessibleName = "menuEdit";
             this.menuEdit.Name = "menuEdit";
             this.menuEdit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.menuEdit.Size = new System.Drawing.Size(147, 22);
+            this.menuEdit.Size = new System.Drawing.Size(136, 22);
             this.menuEdit.Text = "E&dit";
             this.menuEdit.Click += new System.EventHandler(this.editToolStripMenuItem1_Click);
             // 
@@ -202,7 +202,7 @@ namespace SIL.PublishingSolution
             this.menuSave.AccessibleName = "menuSave";
             this.menuSave.Name = "menuSave";
             this.menuSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.menuSave.Size = new System.Drawing.Size(147, 22);
+            this.menuSave.Size = new System.Drawing.Size(136, 22);
             this.menuSave.Text = "&Save";
             this.menuSave.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -235,7 +235,7 @@ namespace SIL.PublishingSolution
             // 
             this.menuApplyStyle.AccessibleName = "menuApplyStyle";
             this.menuApplyStyle.Name = "menuApplyStyle";
-            this.menuApplyStyle.Size = new System.Drawing.Size(193, 22);
+            this.menuApplyStyle.Size = new System.Drawing.Size(182, 22);
             this.menuApplyStyle.Text = "&Apply Template...";
             this.menuApplyStyle.Visible = false;
             this.menuApplyStyle.Click += new System.EventHandler(this.menuApplyStyle_Click);
@@ -244,28 +244,28 @@ namespace SIL.PublishingSolution
             // 
             this.menuPreview.AccessibleName = "menuPreview";
             this.menuPreview.Name = "menuPreview";
-            this.menuPreview.Size = new System.Drawing.Size(193, 22);
+            this.menuPreview.Size = new System.Drawing.Size(182, 22);
             this.menuPreview.Text = "Pre&view";
             this.menuPreview.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
             // 
             // menuEditCSS
             // 
             this.menuEditCSS.Name = "menuEditCSS";
-            this.menuEditCSS.Size = new System.Drawing.Size(193, 22);
+            this.menuEditCSS.Size = new System.Drawing.Size(182, 22);
             this.menuEditCSS.Text = "&Edit CSS";
             this.menuEditCSS.Click += new System.EventHandler(this.menuEditCSS_Click);
             // 
             // menuSaveCSS
             // 
             this.menuSaveCSS.Name = "menuSaveCSS";
-            this.menuSaveCSS.Size = new System.Drawing.Size(193, 22);
+            this.menuSaveCSS.Size = new System.Drawing.Size(182, 22);
             this.menuSaveCSS.Text = "&Save CSS";
             this.menuSaveCSS.Click += new System.EventHandler(this.menuSaveCSS_Click);
             // 
             // menuExcerptPreview
             // 
             this.menuExcerptPreview.Name = "menuExcerptPreview";
-            this.menuExcerptPreview.Size = new System.Drawing.Size(193, 22);
+            this.menuExcerptPreview.Size = new System.Drawing.Size(182, 22);
             this.menuExcerptPreview.Text = "Excerpt Preview";
             this.menuExcerptPreview.Click += new System.EventHandler(this.ExcerptPreview_Click);
             // 
@@ -278,41 +278,41 @@ namespace SIL.PublishingSolution
             this.languageFilterToolStripMenuItem,
             this.entrySortToolStripMenuItem});
             this.filtersForLiftToolStripMenuItem.Name = "filtersForLiftToolStripMenuItem";
-            this.filtersForLiftToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.filtersForLiftToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.filtersForLiftToolStripMenuItem.Text = "Lift Prepare";
             // 
             // entryFilterToolStripMenuItem
             // 
             this.entryFilterToolStripMenuItem.Name = "entryFilterToolStripMenuItem";
-            this.entryFilterToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.entryFilterToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.entryFilterToolStripMenuItem.Text = "Entry Filter";
             this.entryFilterToolStripMenuItem.Click += new System.EventHandler(this.entryFilterToolStripMenuItem_Click);
             // 
             // senseFilterToolStripMenuItem
             // 
             this.senseFilterToolStripMenuItem.Name = "senseFilterToolStripMenuItem";
-            this.senseFilterToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.senseFilterToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.senseFilterToolStripMenuItem.Text = "Sense Filter";
             this.senseFilterToolStripMenuItem.Click += new System.EventHandler(this.senseFilterToolStripMenuItem_Click);
             // 
             // setLanguageSortToolStripMenuItem
             // 
             this.setLanguageSortToolStripMenuItem.Name = "setLanguageSortToolStripMenuItem";
-            this.setLanguageSortToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.setLanguageSortToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.setLanguageSortToolStripMenuItem.Text = "Language Sort";
             this.setLanguageSortToolStripMenuItem.Click += new System.EventHandler(this.setLanguageSortToolStripMenuItem_Click);
             // 
             // languageFilterToolStripMenuItem
             // 
             this.languageFilterToolStripMenuItem.Name = "languageFilterToolStripMenuItem";
-            this.languageFilterToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.languageFilterToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.languageFilterToolStripMenuItem.Text = "Language Filter";
             this.languageFilterToolStripMenuItem.Click += new System.EventHandler(this.languageFilterToolStripMenuItem_Click);
             // 
             // entrySortToolStripMenuItem
             // 
             this.entrySortToolStripMenuItem.Name = "entrySortToolStripMenuItem";
-            this.entrySortToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.entrySortToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.entrySortToolStripMenuItem.Text = "Entry Sort";
             this.entrySortToolStripMenuItem.Click += new System.EventHandler(this.entrySortToolStripMenuItem_Click);
             // 
@@ -334,7 +334,7 @@ namespace SIL.PublishingSolution
             // 
             this.menuLocalization.AccessibleName = "menuLocalization";
             this.menuLocalization.Name = "menuLocalization";
-            this.menuLocalization.Size = new System.Drawing.Size(183, 22);
+            this.menuLocalization.Size = new System.Drawing.Size(172, 22);
             this.menuLocalization.Text = "&Localization Tool...";
             this.menuLocalization.Click += new System.EventHandler(this.menuLocalization_Click);
             // 
@@ -342,7 +342,7 @@ namespace SIL.PublishingSolution
             // 
             this.menuLocalizationSetup.AccessibleName = "menuLocalizationSetup";
             this.menuLocalizationSetup.Name = "menuLocalizationSetup";
-            this.menuLocalizationSetup.Size = new System.Drawing.Size(183, 22);
+            this.menuLocalizationSetup.Size = new System.Drawing.Size(172, 22);
             this.menuLocalizationSetup.Text = "Localization &Setup...";
             this.menuLocalizationSetup.Click += new System.EventHandler(this.menuLocalizationSetup_Click);
             // 
@@ -350,7 +350,7 @@ namespace SIL.PublishingSolution
             // 
             this.menuBackup.AccessibleName = "menuBackup";
             this.menuBackup.Name = "menuBackup";
-            this.menuBackup.Size = new System.Drawing.Size(183, 22);
+            this.menuBackup.Size = new System.Drawing.Size(172, 22);
             this.menuBackup.Text = "&Backup Project...";
             this.menuBackup.Click += new System.EventHandler(this.backupProjectToolStripMenuItem_Click);
             // 
@@ -360,14 +360,14 @@ namespace SIL.PublishingSolution
             this.menushowErrorLog.Checked = true;
             this.menushowErrorLog.CheckState = System.Windows.Forms.CheckState.Checked;
             this.menushowErrorLog.Name = "menushowErrorLog";
-            this.menushowErrorLog.Size = new System.Drawing.Size(183, 22);
+            this.menushowErrorLog.Size = new System.Drawing.Size(172, 22);
             this.menushowErrorLog.Text = "S&how Error Log";
             this.menushowErrorLog.Click += new System.EventHandler(this.menushowErrorLog_Click);
             // 
             // menuRole
             // 
             this.menuRole.Name = "menuRole";
-            this.menuRole.Size = new System.Drawing.Size(183, 22);
+            this.menuRole.Size = new System.Drawing.Size(172, 22);
             this.menuRole.Text = "Role";
             // 
             // menuConfigure
@@ -375,13 +375,13 @@ namespace SIL.PublishingSolution
             this.menuConfigure.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuConfigureDictionaryView});
             this.menuConfigure.Name = "menuConfigure";
-            this.menuConfigure.Size = new System.Drawing.Size(183, 22);
+            this.menuConfigure.Size = new System.Drawing.Size(172, 22);
             this.menuConfigure.Text = "Configure";
             // 
             // menuConfigureDictionaryView
             // 
             this.menuConfigureDictionaryView.Name = "menuConfigureDictionaryView";
-            this.menuConfigureDictionaryView.Size = new System.Drawing.Size(208, 22);
+            this.menuConfigureDictionaryView.Size = new System.Drawing.Size(197, 22);
             this.menuConfigureDictionaryView.Text = "Configure Dictionary View";
             this.menuConfigureDictionaryView.Click += new System.EventHandler(this.menuConfigureDictionaryView_Click);
             // 
@@ -400,7 +400,7 @@ namespace SIL.PublishingSolution
             // 
             this.menuCascade.AccessibleName = "menuCascade";
             this.menuCascade.Name = "menuCascade";
-            this.menuCascade.Size = new System.Drawing.Size(152, 22);
+            this.menuCascade.Size = new System.Drawing.Size(141, 22);
             this.menuCascade.Text = "&Cascade";
             this.menuCascade.Click += new System.EventHandler(this.cascadeWindowToolStripMenuItem_Click);
             // 
@@ -408,7 +408,7 @@ namespace SIL.PublishingSolution
             // 
             this.menuTileVertical.AccessibleName = "menuTileVertical";
             this.menuTileVertical.Name = "menuTileVertical";
-            this.menuTileVertical.Size = new System.Drawing.Size(152, 22);
+            this.menuTileVertical.Size = new System.Drawing.Size(141, 22);
             this.menuTileVertical.Text = "Tile &Vertical";
             this.menuTileVertical.Click += new System.EventHandler(this.tileVerticalToolStripMenuItem_Click);
             // 
@@ -416,7 +416,7 @@ namespace SIL.PublishingSolution
             // 
             this.menuTileHorizontal.AccessibleName = "menuTileHorizontal";
             this.menuTileHorizontal.Name = "menuTileHorizontal";
-            this.menuTileHorizontal.Size = new System.Drawing.Size(152, 22);
+            this.menuTileHorizontal.Size = new System.Drawing.Size(141, 22);
             this.menuTileHorizontal.Text = "Tile &Horizontal";
             this.menuTileHorizontal.Click += new System.EventHandler(this.tileHorizontalToolStripMenuItem_Click);
             // 
@@ -440,7 +440,7 @@ namespace SIL.PublishingSolution
             // 
             this.menuContents.AccessibleName = "menuContents";
             this.menuContents.Name = "menuContents";
-            this.menuContents.Size = new System.Drawing.Size(273, 22);
+            this.menuContents.Size = new System.Drawing.Size(262, 22);
             this.menuContents.Text = "&Contents...";
             this.menuContents.Click += new System.EventHandler(this.contentsToolStripMenuItem_Click);
             // 
@@ -448,7 +448,7 @@ namespace SIL.PublishingSolution
             // 
             this.menuLicense.AccessibleName = "menuLicense";
             this.menuLicense.Name = "menuLicense";
-            this.menuLicense.Size = new System.Drawing.Size(273, 22);
+            this.menuLicense.Size = new System.Drawing.Size(262, 22);
             this.menuLicense.Text = "&License...";
             this.menuLicense.Click += new System.EventHandler(this.menuLicense_Click);
             // 
@@ -456,7 +456,7 @@ namespace SIL.PublishingSolution
             // 
             this.menuReleaseNotes.AccessibleName = "menuReleaseNotes";
             this.menuReleaseNotes.Name = "menuReleaseNotes";
-            this.menuReleaseNotes.Size = new System.Drawing.Size(273, 22);
+            this.menuReleaseNotes.Size = new System.Drawing.Size(262, 22);
             this.menuReleaseNotes.Text = "&Release Notes...";
             this.menuReleaseNotes.Click += new System.EventHandler(this.menuReleaseNotes_Click);
             // 
@@ -464,7 +464,7 @@ namespace SIL.PublishingSolution
             // 
             this.menuReadMe.AccessibleName = "menuReadMe";
             this.menuReadMe.Name = "menuReadMe";
-            this.menuReadMe.Size = new System.Drawing.Size(273, 22);
+            this.menuReadMe.Size = new System.Drawing.Size(262, 22);
             this.menuReadMe.Text = "Latest Changes...";
             this.menuReadMe.Click += new System.EventHandler(this.menuReadMe_Click);
             // 
@@ -472,7 +472,7 @@ namespace SIL.PublishingSolution
             // 
             this.menuInterfaceFlex.AccessibleName = "menuInterfaceFlex";
             this.menuInterfaceFlex.Name = "menuInterfaceFlex";
-            this.menuInterfaceFlex.Size = new System.Drawing.Size(273, 22);
+            this.menuInterfaceFlex.Size = new System.Drawing.Size(262, 22);
             this.menuInterfaceFlex.Text = "&Interface to Flex...";
             this.menuInterfaceFlex.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
@@ -480,7 +480,7 @@ namespace SIL.PublishingSolution
             // 
             this.menuFeedBack.AccessibleName = "menuFeedBack";
             this.menuFeedBack.Name = "menuFeedBack";
-            this.menuFeedBack.Size = new System.Drawing.Size(273, 22);
+            this.menuFeedBack.Size = new System.Drawing.Size(262, 22);
             this.menuFeedBack.Text = "&FeedBack...";
             this.menuFeedBack.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
@@ -488,7 +488,7 @@ namespace SIL.PublishingSolution
             // 
             this.menuLargeFiles.AccessibleName = "menuLargeFiles";
             this.menuLargeFiles.Name = "menuLargeFiles";
-            this.menuLargeFiles.Size = new System.Drawing.Size(273, 22);
+            this.menuLargeFiles.Size = new System.Drawing.Size(262, 22);
             this.menuLargeFiles.Text = "Creating and Working with large files...";
             this.menuLargeFiles.Click += new System.EventHandler(this.menuLargeFiles_Click);
             // 
@@ -496,7 +496,7 @@ namespace SIL.PublishingSolution
             // 
             this.menuAbout.AccessibleName = "menuAbout";
             this.menuAbout.Name = "menuAbout";
-            this.menuAbout.Size = new System.Drawing.Size(273, 22);
+            this.menuAbout.Size = new System.Drawing.Size(262, 22);
             this.menuAbout.Text = "&About Publishing Solutions...";
             this.menuAbout.Click += new System.EventHandler(this.aboutDictionaryExpressToolStripMenuItem_Click);
             // 
@@ -777,6 +777,7 @@ namespace SIL.PublishingSolution
             this.Controls.Add(this.toolStripMain);
             this.Controls.Add(this.statusMain);
             this.Controls.Add(this.menuMain);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuMain;

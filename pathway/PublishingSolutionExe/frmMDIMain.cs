@@ -83,20 +83,20 @@ namespace SIL.PublishingSolution
 
             if (Param.Value.Count > 0)
             {
-                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-                {
-                    this.Icon = new Icon("Graphic/BOOK.ico");
-                }
-                else
-                {
-                    using (MemoryStream memoryStream = new MemoryStream())
-                    {
-//                        var image = Image.FromFile("Graphic/book.png");
-//                        image.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Icon);
-//                        memoryStream.Position = 0;
-//                        this.Icon = new Icon(memoryStream);
-                    }
-                }
+//                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+//                {
+//                    //this.Icon = new Icon("Graphic/BOOK.ico");
+//                }
+//                else
+//                {
+//                    using (MemoryStream memoryStream = new MemoryStream())
+//                    {
+////                        var image = Image.FromFile("Graphic/book.png");
+////                        image.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Icon);
+////                        memoryStream.Position = 0;
+////                        this.Icon = new Icon(memoryStream);
+//                    }
+//                }
                 JW_Registry.RootKey = @"SOFTWARE\The Seed Company\Dictionary Express!";
                 LocDB.SetAppTitle();
                 LocDB.BaseName = "PsLocalization.xml";
