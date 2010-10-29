@@ -28,7 +28,7 @@ namespace SIL.PublishingSolution
         protected Dictionary<string, Dictionary<string, string>> _tagProperty = new Dictionary<string, Dictionary<string, string>>();
         protected VerboseClass _verboseWriter = VerboseClass.GetInstance();
 
-        protected Dictionary<string, string> _columnProperty;
+        protected Dictionary<string, string> _columnProperty  = new Dictionary<string, string>();
         protected Dictionary<string, string> _sectionProperty;
         protected Dictionary<string, string> _firstPageLayoutProperty;
         protected Dictionary<string, string> _columnSep;
@@ -122,7 +122,7 @@ namespace SIL.PublishingSolution
             //}
 
             // Creating new Objects
-            _columnProperty = new System.Collections.Generic.Dictionary<string, string>();
+            _columnProperty = new Dictionary<string, string>();
             _sectionProperty = new Dictionary<string, string>();
             _columnSep = new Dictionary<string, string>();
             _pageHeaderFooter = new Dictionary<string, string>[24];

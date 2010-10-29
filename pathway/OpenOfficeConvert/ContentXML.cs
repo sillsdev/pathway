@@ -2333,6 +2333,20 @@ namespace SIL.PublishingSolution
                         float emResult = parentFontsizeAttribute.NumericValue * _attributeInfo.NumericValue;
                         absVal = emResult + "pt";
                     }
+                    else if (_attributeInfo.Name == "fo:line-height")
+                    {
+                        absVal = _util.GetFontsizeInsideSpan(styleFilePath, parentFontsizeAttribute.NumericValue, _attributeInfo);
+                        float parentFontSize = float.Parse(absVal.Replace("pt", ""));
+                        if (parentFontSize == 0)
+                        {
+                            //parentFontSize = parentFontsizeAttribute.NumericValue * 1; 
+                            absVal = "100%"; //"parentFontSize + "pt";
+                        }
+                        else
+                        {
+                            absVal = parentFontSize + "pt";
+                        }
+                    }
                     else
                     {
                         absVal = _util.GetFontsizeInsideSpan(styleFilePath, parentFontsizeAttribute.NumericValue, _attributeInfo);

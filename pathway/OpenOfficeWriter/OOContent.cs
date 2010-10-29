@@ -44,6 +44,7 @@ namespace SIL.PublishingSolution
         readonly Stack _usedSpanStack = new Stack();
         readonly Stack _tagTypeStack = new Stack(); // P - Para, T - Text, I - Image, L - <ol>/<ul> tag , S - <li> tag,  O - Others
         readonly Dictionary<string, string> _makeAttribute = new Dictionary<string, string>();
+        private ArrayList _sectionName = new ArrayList();
         //Dictionary<string, string> dictColumnGap = new Dictionary<string, string>();
 
         bool isHiddenText = false;
@@ -240,16 +241,59 @@ namespace SIL.PublishingSolution
             Dictionary<string, Dictionary<string, string>> ColumnGapEm = new Dictionary<string, Dictionary<string, string>>();
             string _inputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             InitializeData(projInfo.TempOutputFolder, idAllClass, classFamily, cssClassOrder);
-            //ProcessCounterProperty();
+            ProcessProperty();
             OpenXhtmlFile(projInfo.DefaultXhtmlFileWithPath); //reader
             CreateFile(projInfo.TempOutputFolder); //writer
             CreateBody();
+            CreateSection();
             ProcessXHTML(projInfo.ProgressBar, projInfo.DefaultXhtmlFileWithPath, projInfo.TempOutputFolder);
             UpdateRelativeInStylesXML();
             CloseFile(projInfo.TempOutputFolder, ColumnGapEm);
             return new Dictionary<string, ArrayList>();
         }
 
+        private void ProcessProperty()
+        {
+            foreach (string className in IdAllClass.Keys)
+            {
+                string searchKey = "column-count";
+                if (IdAllClass[className].ContainsKey(searchKey))
+                {
+                        if(!_sectionName.Contains(className))
+                            _sectionName.Add(className);
+
+                }
+
+                //searchKey = "counter-reset";
+                //if (IdAllClass[className].ContainsKey(searchKey))
+                //{
+                //    ContentCounterReset[className] = IdAllClass[className][searchKey];
+                //}
+
+            //    // Footnote process 
+            //    searchKey = "display";
+            //    if (IdAllClass[className].ContainsKey(searchKey) && className.IndexOf("..") == -1)
+            //    {
+            //        if (IdAllClass[className][searchKey] == "footnote" || IdAllClass[className][searchKey] == "prince-footnote")
+            //        {
+            //            if (!_FootNote.Contains(className))
+            //                _FootNote.Add(className);
+            //        }
+            //    }
+            //    string searchKey1 = "..footnote-call";
+            //    if (className.IndexOf(searchKey1) >= 0)
+            //    {
+            //        if (!_footnoteCallContent.Contains(className))
+            //            _footnoteCallContent.Add(className);
+            //    }
+            //    string searchKey2 = "..footnote-marker";
+            //    if (className.IndexOf(searchKey2) >= 0)
+            //    {
+            //        if (!_footnoteMarkerContent.Contains(className))
+            //            _footnoteMarkerContent.Add(className);
+            //    }
+            }
+        }
         private void InitializeData(string projectPath, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
         {
             _allStyle = new Stack<string>();
@@ -2058,11 +2102,11 @@ namespace SIL.PublishingSolution
         /// Generate Section block in Content.xml.
         /// </summary>
         /// <param name="sectionName">SectionName List created in styles.xml</param>
-        private void CreateSection(ArrayList sectionName)
+        private void CreateSection()
         {
 
-            RemoveScrSectionClass(sectionName);
-            foreach (string section in sectionName)
+            //RemoveScrSectionClass(sectionName); //todo
+            foreach (string section in _sectionName)
             {
                 //string path = Common.PathCombine(Common.GetTempFolderPath(), section.Trim() + ".xml");
                 string secName = "_" + section.Trim() + ".xml";

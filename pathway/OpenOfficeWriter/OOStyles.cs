@@ -62,7 +62,7 @@ namespace SIL.PublishingSolution
                 /// 
                 AddTagStyle(); // Add missing tags in styles.xml (h1,h2,..)
                 CloseODTStyles();  // Close Styles.xml for odt
-                MergeTag(); // Merge tags in styles.xml (h1,h2,..)
+                //MergeTag(); // Merge tags in styles.xml (h1,h2,..)
                
             }
             catch (Exception ex)
