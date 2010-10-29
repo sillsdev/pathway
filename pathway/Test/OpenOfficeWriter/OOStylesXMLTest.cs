@@ -28,9 +28,9 @@ using SIL.Tool;
 
 #endregion Using
 
-namespace Test.OpenOfficeConvert
+namespace Test.OpenOfficeWriter
 {
-   
+    [TestFixture]
     [Category("BatchTest")]
     public class OOStylesXMLTest
     {
@@ -111,7 +111,7 @@ namespace Test.OpenOfficeConvert
         ///TD-244 (Update CSSParser to handle revised grammar)
         /// <summary>
         /// </summary>      
- /*       [Test]
+        /*       [Test]
         public void OxesCSSTest()
         {
             const string file = "Oxes";
@@ -203,35 +203,7 @@ namespace Test.OpenOfficeConvert
 
         }
           */
-        ///<summary>
-        ///TD54 font-Weigth: 400 syntax in Styles.xml
-        /// <summary>
-        /// </summary>      
-        [Test]
-        public void TextFontWeightTestA_Node()
-        {
-            const string file = "TextFontWeightTestA";
-            string input = FileInput(file + ".css");
-            string output = FileOutput(file + "styles.xml");
-            projInfo.DefaultCssFileWithPath = input;
-            projInfo.TempOutputFolder = _outputPath;
 
-            Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
-            CssTree cssTree = new CssTree();
-            cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
-
-            Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
-            OOStyles ooStyles = new OOStyles();
-
-            idAllClass = ooStyles.CreateStyles(projInfo, cssClass, output);
-
-            _validate = new ValidateXMLFile(output);
-            _validate.ClassName = "letter";
-            _validate.ClassProperty.Add("fo:font-weight", "400");
-
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue, "Font-Weight-Test-A syntax failed in Styles.xml");
-        }
         /*
         ///<summary>
         ///TD55 font-Weigth: 700 syntax in Styles.xml
@@ -1276,5 +1248,4 @@ namespace Test.OpenOfficeConvert
         #endregion
          */
     }
-         
 }

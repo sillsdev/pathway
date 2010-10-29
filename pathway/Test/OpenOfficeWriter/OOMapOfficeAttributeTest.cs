@@ -24,9 +24,9 @@ using SIL.Tool;
 
 #endregion Using
 
-namespace Test.OpenOfficeConvert
+namespace Test.OpenOfficeWriter
 {
-    [TestFixture]
+    
     [Category("BatchTest")]
     public class OOMapPropertyTest
     {

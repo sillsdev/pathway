@@ -678,6 +678,7 @@ namespace SIL.PublishingSolution
             preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
             if (projInfo.SwapHeadword)
                 preProcessor.SwapHeadWordAndReversalForm();
+            preProcessor.PreserveSpace();
             projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
 
             if (projInfo.FileSequence != null && projInfo.FileSequence.Count > 1)

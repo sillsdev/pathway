@@ -86,7 +86,6 @@ namespace SIL.PublishingSolution
         string _styleFilePath;
         float _columnWidth;
         string _temp;
-        string _tagType;
         string _divClass = string.Empty;
         string _allDiv = string.Empty;
         string _class = string.Empty;
@@ -164,6 +163,8 @@ namespace SIL.PublishingSolution
         private string _verseNo;
 
         private bool _IsHeadword = false;
+        private bool _significant;
+
         #endregion
 
         public OOContent()
@@ -257,6 +258,7 @@ namespace SIL.PublishingSolution
 
             _childStyle = new Dictionary<string, string>();
             IdAllClass = new Dictionary<string, Dictionary<string, string>>();
+            ParentClass = new Dictionary<string, string>();
             _newProperty = new Dictionary<string, Dictionary<string, string>>();
             _displayBlock = new Dictionary<string, string>();
             _cssClassOrder = cssClassOrder;
@@ -527,7 +529,7 @@ namespace SIL.PublishingSolution
                 _reader = new XmlTextReader(Sourcefile)
                               {
                                   XmlResolver = null,
-                                  WhitespaceHandling = WhitespaceHandling.None
+                                  WhitespaceHandling = WhitespaceHandling.Significant
                               };
                 //CreateBody();
 
@@ -560,6 +562,11 @@ namespace SIL.PublishingSolution
                             //WriteText(_footnoteValue);
                             Write();
                             break;
+                        case XmlNodeType.SignificantWhitespace:
+                            string data = SignificantSpace(_reader.Value);
+                            _writer.WriteString(data);
+                            break;
+
                     }
                     //if (_contentReplace) // TD-204(unable to put tol/pisin)
                     //{
@@ -583,6 +590,34 @@ namespace SIL.PublishingSolution
                     pb.Visible = false;
                 }
             }
+        }
+
+        private string SignificantSpace(string content)
+        {
+            //string content = _reader.Value;
+            content = content.Replace("\r\n", "");
+            content = content.Replace("\t", "");
+            Char[] charac = content.ToCharArray();
+            StringBuilder builder = new StringBuilder();
+            foreach (char var in charac)
+            {
+                if (var == ' ' || var == '\b')
+                {
+                    if (_significant)
+                    {
+                        continue;
+                    }
+                    _significant = true;
+                }
+                else
+                {
+                    _significant = false;
+                }
+                builder.Append(var);
+            }
+            content = builder.ToString();
+            return content;
+            //_writer.WriteString(content);
         }
         private void Write()
         {
@@ -658,13 +693,20 @@ namespace SIL.PublishingSolution
         }
         private void WriteCharacterStyle(string content, string characterStyle)
         {
-            _writer.WriteStartElement("text:span");
-            _writer.WriteAttributeString("text:style-name", characterStyle); //_util.ChildName
+            if (_tagType == "span" && characterStyle != "none")
+            {
+                _writer.WriteStartElement("text:span");
+                _writer.WriteAttributeString("text:style-name", characterStyle); //_util.ChildName
+            }
             AddUsedStyleName(characterStyle);
 
             //content = whiteSpacePre(content); // TODO -2000 - SignificantSpace() - IN OO convert
+            content = SignificantSpace(content);
             _writer.WriteString(content);
-            _writer.WriteEndElement();
+            if (_tagType == "span" && characterStyle != "none")
+            {
+                _writer.WriteEndElement();
+            }
 
         }
         /// <summary>
@@ -2438,7 +2480,7 @@ namespace SIL.PublishingSolution
         private void UpdateRelativeInStylesXML()
         {
             ModifyOOStyles modifyIDStyles = new ModifyOOStyles();
-            _textVariables = modifyIDStyles.ModifyStylesXML(_projectPath, _newProperty, _usedStyleName, _languageStyleName, "", _IsHeadword);
+            _textVariables = modifyIDStyles.ModifyStylesXML(_projectPath, _newProperty, _usedStyleName, _languageStyleName, "", _IsHeadword, ParentClass);
         }
 
         /// <summary>

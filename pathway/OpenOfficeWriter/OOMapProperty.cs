@@ -366,22 +366,35 @@ namespace SIL.PublishingSolution
             _IDProperty[_propertyKey] = propertyValue;
         }
 
-        public void PaddingLeft(string propertyValue)
+        private void RemoveClassHyphen()
         {
-            _IDProperty[_propertyKey] = propertyValue;
+            if (_propertyKey.IndexOf("class-") >= 0)
+            {
+                _propertyKey = _propertyKey.Replace("class-", "");
+            }
         }
 
+        public void PaddingLeft(string propertyValue)
+        {
+            RemoveClassHyphen();
+            _IDProperty[_propertyKey] = Add_pt(propertyValue);
+        }
+
+ 
         public void PaddingRight(string propertyValue)
         {
-            _IDProperty[_propertyKey] = propertyValue;
+            RemoveClassHyphen();
+            _IDProperty[_propertyKey] = Add_pt(propertyValue);
         }
         public void PaddingTop(string propertyValue)
         {
-            _IDProperty[_propertyKey] = propertyValue;
+            RemoveClassHyphen();
+            _IDProperty[_propertyKey] = Add_pt(propertyValue);
         }
         public void PaddingBottom(string propertyValue)
         {
-            _IDProperty[_propertyKey] = propertyValue;
+            RemoveClassHyphen();
+            _IDProperty[_propertyKey] = Add_pt(propertyValue);
         }
         public void Mirror(string propertyValue)
         {
@@ -389,27 +402,40 @@ namespace SIL.PublishingSolution
         }
         public void PageHeight(string propertyValue)
         {
-            _IDProperty["Page-Height"] = propertyValue;
+            _IDProperty["Page-Height"] = Add_pt(propertyValue);
         }
         public void PageWidth(string propertyValue)
         {
-            _IDProperty["Page-Width"] = propertyValue;
+            _IDProperty["Page-Width"] = Add_pt(propertyValue);
         }
         public void MarginLeft(string propertyValue)
         {
-            _IDProperty[_propertyKey] = propertyValue;
+            RemoveClassHyphen();
+            _IDProperty[_propertyKey] = Add_pt(propertyValue);
         }
         public void MarginRight(string propertyValue)
         {
-            _IDProperty[_propertyKey] = propertyValue;
+            RemoveClassHyphen();
+            _IDProperty[_propertyKey] = Add_pt(propertyValue);
         }
         public void MarginTop(string propertyValue)
         {
-            _IDProperty[_propertyKey] = propertyValue;
+            RemoveClassHyphen();
+            _IDProperty[_propertyKey] = Add_pt(propertyValue);
         }
         public void MarginBottom(string propertyValue)
         {
-            _IDProperty[_propertyKey] = propertyValue;
+            RemoveClassHyphen();
+            _IDProperty[_propertyKey] = Add_pt(propertyValue);
+        }
+
+        private string Add_pt(string propertyValue)
+        {
+            if (propertyValue.IndexOf('%') < 0)
+            {
+                propertyValue = propertyValue + "pt";
+            }
+            return propertyValue;
         }
 
         public void FontFamily(string propertyValue)
@@ -474,7 +500,7 @@ namespace SIL.PublishingSolution
 
         public void TextIndent(string propertyValue)
         {
-            _IDProperty[_propertyKey] = propertyValue;
+            _IDProperty[_propertyKey] = propertyValue + "pt";
         }
 
         public void Color(string propertyValue)
@@ -523,11 +549,11 @@ namespace SIL.PublishingSolution
             if (propertyValue == string.Empty || Common.ValidateAlphabets(propertyValue)
                 || propertyValue.IndexOf('-') > -1)
             {
-                _IDProperty["TextColumnGutter"] = "12";
+                _IDProperty["TextColumnGutter"] = "12pt";
             }
             else
             {
-                _IDProperty["TextColumnGutter"] = propertyValue;
+                _IDProperty["TextColumnGutter"] = Add_pt(propertyValue);
             }
         }
 
@@ -614,7 +640,7 @@ namespace SIL.PublishingSolution
             {
                 propertyValue = propertyValue;
             }
-            _IDProperty[_propertyKey] = propertyValue;
+            _IDProperty[_propertyKey] = Add_pt(propertyValue); 
         }
 
         private void Border(string propertyValue)

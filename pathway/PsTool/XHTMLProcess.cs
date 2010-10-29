@@ -58,6 +58,7 @@ namespace SIL.PublishingSolution
 
         protected Dictionary<string, Dictionary<string, string>> IdAllClass;
         protected Dictionary<string, Dictionary<string, string>> _newProperty;
+        protected Dictionary<string, string> ParentClass;
 
         protected Dictionary<string, ArrayList> _classFamily;
         //protected ClassInfo _classInfo = new ClassInfo();
@@ -91,6 +92,7 @@ namespace SIL.PublishingSolution
 
         protected ArrayList _headwordStyleName = new ArrayList();
         protected bool _headwordStyles = false;
+        private string _parentStyleName;
 
         #endregion
 
@@ -396,7 +398,7 @@ namespace SIL.PublishingSolution
             //string styleName = _precedeClassAttrib.ClassName + _classNameWithLang + Common.SepParent + StackPeek(_allStyle);
             string styleName = _precedeClassAttrib.ClassName + _tagType + _classNameWithLang + Common.SepParent + StackPeek(_allStyle);
             string newStyleName;
-            if (_childStyle.ContainsKey(styleName)) // note: Child Style already created?
+            if (_childStyle.ContainsKey(styleName)) // note: Child Style already created
             {
                 newStyleName = _childStyle[styleName];
                 _psuedoBeforeStyle = _existingPsuedoBeforeStyle[styleName];
@@ -427,7 +429,7 @@ namespace SIL.PublishingSolution
             ArrayList multiClassList = MultiClassCombination(_className);
 
             float ancestorFontSize = FindAncestorFontSize();
-            string parentStyle = StackPeek(_allStyle);
+            _parentStyleName = StackPeek(_allStyle);
 
             string styleName = MatchCssStyle(ancestorFontSize, "null", multiClassList);
             if (styleName == string.Empty) // missing style in CSS
@@ -439,6 +441,7 @@ namespace SIL.PublishingSolution
 
             _newProperty[newStyleName] = _tempStyle;
             IdAllClass[newStyleName] = _tempStyle;
+            ParentClass[newStyleName] = _parentStyleName + "|" + _tagType;
 
             _psuedoBeforeStyle = _psuedoAfterStyle = _psuedoContainsStyle = null;
             string styleBefore = MatchCssStyle(ancestorFontSize, "before", multiClassList);
@@ -476,6 +479,14 @@ namespace SIL.PublishingSolution
 
         private string GetStyleNumber(string styleName)
         {
+            if (_outputType == Common.OutputType.ODT)
+            {
+                if(_parentStyleName == "body") return styleName;
+
+                string newStyleName = styleName + Common.SepParent + _parentStyleName;
+                return newStyleName;
+            }
+
             if(styleName == "headword") return styleName;
             if (styleName == "xhomographnumber") return styleName;
             if (_headwordStyles) return styleName;
@@ -557,7 +568,14 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
-            AppendParentProperty(); // todo Check
+            if (_outputType == Common.OutputType.IDML)
+            {
+                AppendParentProperty(); 
+            }
+            //else if (_outputType == Common.OutputType.ODT)
+            //{
+            //    ParentClass[_matchedCssStyleName] = _parentStyleName + "||" + _tagType;
+            //}
             return _matchedCssStyleName;
         }
 
@@ -611,13 +629,6 @@ namespace SIL.PublishingSolution
                 foreach (KeyValuePair<string, string> property in IdAllClass[parentStyle])
                 {
                     if (_tempStyle.ContainsKey(property.Key) || property.Key == "TextColumnCount") continue;
-
-
-                    //if (_allParagraphProperty.ContainsKey(property.Key))  // todo check
-                    //    continue; // not merging paragraph property
-
-
-
                     _tempStyle[property.Key] = property.Value;
                 }
             }

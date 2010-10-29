@@ -177,8 +177,9 @@
     <Compile Include="CssParser\CssParserTest.cs" />
     <Compile Include="CssParser\GramTest.cs" />
     <Compile Include="CssParser\MakePropertyTest.cs" />
-    <Compile Include="OpenOfficeConvert\MapOfficeAttributeTest.cs" />
     <Compile Include="OpenOfficeConvert\UtilityTest.cs" />
+    <Compile Include="OpenOfficeWriter\OOContentXMLTest.cs" />
+    <Compile Include="OpenOfficeWriter\OOMapOfficeAttributeTest.cs" />
     <Compile Include="OpenOfficeWriter\OOStylesXMLTest.cs" />
     <Compile Include="PsExport\PsExportTest.cs" />
     <Compile Include="OpenOfficeConvert\StylesXMLTest.cs" />

@@ -1199,6 +1199,7 @@ namespace SIL.PublishingSolution
             _childStyle = new Dictionary<string, string>();
             IdAllClass = new Dictionary<string, Dictionary<string, string>>();
             _newProperty = new Dictionary<string, Dictionary<string, string>>();
+            ParentClass = new Dictionary<string, string>();
             _displayBlock = new Dictionary<string, string>();
             _cssClassOrder = cssClassOrder;
             //_classFamily = new Dictionary<string, ArrayList>();

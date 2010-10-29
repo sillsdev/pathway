@@ -24,14 +24,15 @@ namespace SIL.PublishingSolution
         private ArrayList _textVariables = new ArrayList();
         Dictionary<string, string> _languageStyleName = new Dictionary<string, string>();
         Dictionary<string, Dictionary<string, string>> _childStyle = new Dictionary<string, Dictionary<string, string>>();
-
-        public ArrayList ModifyStylesXML(string projectPath, Dictionary<string, Dictionary<string, string>> childStyle, List<string> usedStyleName, Dictionary<string, string> languageStyleName, string baseStyle, bool isHeadword)
+        private Dictionary<string, string> _parentClass;
+        public ArrayList ModifyStylesXML(string projectPath, Dictionary<string, Dictionary<string, string>> childStyle, List<string> usedStyleName, Dictionary<string, string> languageStyleName, string baseStyle, bool isHeadword, Dictionary<string, string> parentClass)
         {
             LoadAllProperty();
             _childStyle = childStyle;
             _projectPath = projectPath;
             _isHeadword = isHeadword;
             _languageStyleName = languageStyleName;
+            _parentClass = parentClass;
             string styleFilePath = OpenIDStyles(); //todo change name
 
             //nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
@@ -118,6 +119,9 @@ namespace SIL.PublishingSolution
         {
             string newClassName = className.Key;
             //string parentClassName = Common.RightString(newClassName, _styleSeperator);
+            string[] parent_Type = _parentClass[newClassName].Split('|');
+
+            string familyType = parent_Type[1] == "div" ? "paragraph" : "text";
 
             XmlNode _node = _root.SelectSingleNode(_xPath, nsmgr);
             if (_node == null) return;
@@ -127,8 +131,9 @@ namespace SIL.PublishingSolution
 
             _nameElement = (XmlElement)_node;
             _nameElement.SetAttribute("style:name", newClassName);
-            _nameElement.SetAttribute("style:parent-style-name", "none"); // todo set correct parent
-
+            _nameElement.SetAttribute("style:family", familyType);
+            _nameElement.SetAttribute("style:parent-style-name", parent_Type[0]); 
+            //style:family="paragraph" style:parent-style-name="none">
             AddParaTextNode(className, _node);
 
 
@@ -163,7 +168,6 @@ namespace SIL.PublishingSolution
             XmlNode paraNode = null;
             if (_paragraphProperty.Count > 0)
             {
-                _nameElement.SetAttribute("style:family", "paragraph");
                 for (int i = 0; i < node.ChildNodes.Count; i++) 
                 {
                     if (node.ChildNodes[i].Name == "style:paragraph-properties")
@@ -190,9 +194,6 @@ namespace SIL.PublishingSolution
             XmlNode textNode = null;
             if (_textProperty.Count > 0)
             {
-                if (_paragraphProperty.Count == 0)
-                    _nameElement.SetAttribute("style:family", "text");
-
                 for (int i = 0; i < node.ChildNodes.Count; i++) // find  Text node
                 {
                     if (node.ChildNodes[i].Name == "style:text-properties")
@@ -211,7 +212,7 @@ namespace SIL.PublishingSolution
                 {
                     string[] property = para.Key.Split(':');
                     string ns = property[0];
-                    if (ns == "st") ns = "style";
+                    //if (ns == "st") ns = "style";
                     string prop = property[1];
                     textElement.SetAttribute(prop, nsmgr.LookupNamespace(ns), para.Value);
                 }
@@ -389,7 +390,9 @@ namespace SIL.PublishingSolution
             //string targetFolder = Common.PathCombine(Common.GetTempFolderPath(), "InDesignFiles" + Path.DirectorySeparatorChar + projType);
             string targetFolder = Common.RightRemove(_projectPath, Path.DirectorySeparatorChar.ToString());
             //targetFolder = Common.PathCombine(targetFolder, "Resources");
-            string styleFilePath = Common.PathCombine(targetFolder, "Styles.xml");
+            //string styleFilePath = Common.PathCombine(targetFolder, "Styles.xml");
+            string fileName = Path.GetFileNameWithoutExtension(_projectPath);
+            string styleFilePath = Common.PathCombine(targetFolder, fileName + "Styles.xml");
 
             _styleXMLdoc = new XmlDocument();
             _styleXMLdoc.Load(styleFilePath);
