@@ -77,6 +77,7 @@ namespace BuilderSE
             BuilderBL.CopyFile(instPath, Readme, "../Files/ConfigurationTool");
             BuilderBL.CopyFile(instPath, Tutorial, "../Files/ConfigurationTool");
             BuilderBL.CopyFile(instPath, License, "../Files/ConfigurationTool");
+            Directory.Delete(instPath + "../Files/ConfigurationTool/Template", true);
             Directory.Delete(instPath + "../Files/ConfigurationTool/Help", true);
             BuilderBL.CopyFile(instPath, HelpFile, "../Files/ConfigurationTool/Help");
             Directory.Delete(instPath + "../Files/ConfigurationTool/Styles/Scripture", true);

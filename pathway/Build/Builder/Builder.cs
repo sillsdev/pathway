@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using SIL.Tool;
+using Test;
 
 namespace Builder
 {
@@ -48,7 +49,11 @@ namespace Builder
                 Close();
                 Environment.Exit(0);
             }
-            var instPath = Common.DirectoryPathReplace(Environment.CurrentDirectory + @"/../../../Installer/");
+            // These lines used to get FieldWorks Version file.
+            Common.SupportFolder = "";
+            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../../PsSupport");
+
+            var instPath = PathPart.Bin(Environment.CurrentDirectory, "/../Installer/");
             var sub = new Substitution { TargetPath = instPath };
 
             //Update OOSUI
@@ -63,6 +68,8 @@ namespace Builder
 
             //Calculate Files & Features
             BuilderBL.RemoveSubFolders(instPath + @"../Files");
+            BuilderBL.DoBatch(instPath, "PublishingSolutionExe", "postBuild.bat", args[1]);
+            BuilderBL.DoBatch(instPath, "PsExport", "CopyFwDlls.bat", args[1]);
             BuilderBL.CopyRelaseFiles(instPath, "PublishingSolutionExe", "PublishingSolution", RELEASE);
             BuilderBL.CopyFile(instPath, Readme, @"../Files/PublishingSolution");
             BuilderBL.CopyFile(instPath, License, @"../Files/PublishingSolution");

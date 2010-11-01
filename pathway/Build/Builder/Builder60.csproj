@@ -185,6 +185,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>Builder.exe $(ConfigurationName)</PostBuildEvent>
+    <PostBuildEvent>$(TargetPath) $(ConfigurationName)</PostBuildEvent>
   </PropertyGroup>
 </Project>

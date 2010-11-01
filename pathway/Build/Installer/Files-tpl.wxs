@@ -6,6 +6,7 @@
 				<Directory Id="PFSIL" Name="SIL">
 					<Directory Id="INSTALLDIR" Name="PUBLIS~1" LongName="PublishingSolution">
 						%(PublishingSolutionFiles)s
+						%(SupportFiles)s
 					</Directory>
 				</Directory>
 			</Directory>
