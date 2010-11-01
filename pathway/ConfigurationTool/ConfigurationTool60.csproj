@@ -128,10 +128,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\PsExport\Dlls601\FwUtils.dll</HintPath>
     </Reference>
-    <Reference Include="PdfToImage, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdParty\PdfToImage.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -139,28 +135,8 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigurationTool.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ConfigurationTool.Designer.cs">
-      <DependentUpon>ConfigurationTool.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ConfigurationToolBL.cs" />
-    <Compile Include="PdftoJpg.cs" />
-    <Compile Include="PreviewConfig.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PreviewConfig.Designer.cs">
-      <DependentUpon>PreviewConfig.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ConfigurationTool.resx">
-      <DependentUpon>ConfigurationTool.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PreviewConfig.resx">
-      <DependentUpon>PreviewConfig.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -212,6 +188,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>%25COMSPEC%25 /c $(ProjectDir)postBuild.bat $(ConfigurationName)</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

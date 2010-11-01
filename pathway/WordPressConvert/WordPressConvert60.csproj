@@ -122,6 +122,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PreBuildEvent>%25comspec%25 /c $(ProjectDir)WordPressBuild.bat</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
 </Project>

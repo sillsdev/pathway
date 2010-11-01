@@ -97,6 +97,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogosConvert60", "LogosConv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildCtx60", "Build\BuildCtx\BuildCtx60.csproj", "{39EBC01A-B1A5-49BF-AEFF-16296D1A272E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenOfficeWriter60", "OpenOfficeWriter\OpenOfficeWriter60.csproj", "{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		ConTeXt|Any CPU = ConTeXt|Any CPU
@@ -645,6 +647,27 @@ Global
 		{39EBC01A-B1A5-49BF-AEFF-16296D1A272E}.ReleaseBTE|x86.ActiveCfg = ReleaseBTE|x86
 		{39EBC01A-B1A5-49BF-AEFF-16296D1A272E}.ReleaseSE|Any CPU.ActiveCfg = ReleaseSE|Any CPU
 		{39EBC01A-B1A5-49BF-AEFF-16296D1A272E}.ReleaseSE|x86.ActiveCfg = ReleaseSE|x86
+		{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}.ConTeXt|Any CPU.ActiveCfg = ConTeXt|Any CPU
+		{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}.ConTeXt|Any CPU.Build.0 = ConTeXt|Any CPU
+		{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}.ConTeXt|x86.ActiveCfg = ConTeXt|Any CPU
+		{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}.CorporateBTE|Any CPU.ActiveCfg = CorporateBTE|Any CPU
+		{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}.CorporateBTE|Any CPU.Build.0 = CorporateBTE|Any CPU
+		{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}.CorporateBTE|x86.ActiveCfg = CorporateBTE|Any CPU
+		{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}.CorporateSE|Any CPU.ActiveCfg = CorporateSE|Any CPU
+		{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}.CorporateSE|Any CPU.Build.0 = CorporateSE|Any CPU
+		{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}.CorporateSE|x86.ActiveCfg = CorporateSE|Any CPU
+		{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}.Release|x86.ActiveCfg = Release|Any CPU
+		{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}.ReleaseBTE|Any CPU.ActiveCfg = Release|Any CPU
+		{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}.ReleaseBTE|Any CPU.Build.0 = Release|Any CPU
+		{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}.ReleaseBTE|x86.ActiveCfg = Release|Any CPU
+		{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}.ReleaseSE|Any CPU.ActiveCfg = Release|Any CPU
+		{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}.ReleaseSE|Any CPU.Build.0 = Release|Any CPU
+		{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}.ReleaseSE|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

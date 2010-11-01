@@ -33,7 +33,10 @@ namespace Test.PsTool
         protected void SetUp()
         {
             sourceFolder = PathPart.Bin(Environment.CurrentDirectory, "/PsTool/TestFiles/inputFiles");
-            TargetFolderWithFileName = PathPart.Bin(Environment.CurrentDirectory, "/PsTool/TestFiles/output/");
+            TargetFolderWithFileName = PathPart.Bin(Environment.CurrentDirectory, "/PsTool/TestFiles/output");
+            if (Directory.Exists(TargetFolderWithFileName))
+                Directory.Delete(TargetFolderWithFileName, true);
+            Directory.CreateDirectory(TargetFolderWithFileName);
             Common.Testing = true;
         }
         #endregion Setup

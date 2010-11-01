@@ -170,6 +170,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PreBuildEvent>%25comspec%25 /c $(ProjectDir)CssParserPostBuild.bat</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
 </Project>

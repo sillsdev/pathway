@@ -345,6 +345,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>%25comspec%25 /c $(ProjectDir)PostTestBuild.bat</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

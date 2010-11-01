@@ -56,7 +56,7 @@
 							<Shortcut Id="ReadMeShortcutApp" Directory="PathwayMenu" Name="ReadMe" Target="[#ReadMePw.rtf]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="INSTALLDIR" />
 						</Component>
 						<Component Id="TutorialShortcutApp" Guid="3A0CF01A-A7C3-49F0-A00F-0574B54370C9">
-							<Shortcut Id="TutorialShortcutApp" Directory="PathwayMenu" Name="Tutorial" LongName="Student Manual" Target="[#Pathway_Student_Manual_BTE.doc]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="INSTALLDIR" />
+							<Shortcut Id="TutorialShortcutApp" Directory="PathwayMenu" Name="Tutorial" LongName="Student Manual" Target="[#Pathway_Student_Manual_SE.doc]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="INSTALLDIR" />
 						</Component>
 						<Component Id="LicenseShortcutApp" Guid="23575D91-3CF8-41dc-96FC-D2466EDE125D">
 							<Shortcut Id="LicenseShortcutApp" Directory="PathwayMenu" Name="License" LongName="License" Target="[#License.rtf]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="INSTALLDIR" />

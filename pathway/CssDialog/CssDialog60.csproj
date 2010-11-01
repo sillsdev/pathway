@@ -129,6 +129,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\PsExport\Dlls601\FwUtils.dll</HintPath>
     </Reference>
+    <Reference Include="PdfToImage, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\PdfToImage.dll</HintPath>
+    </Reference>
     <Reference Include="Prince, Version=1.0.3835.23744, Culture=neutral, PublicKeyToken=8d9b0a8b53aaa3c7">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdParty\Prince.dll</HintPath>
@@ -146,6 +150,13 @@
     <Compile Include="Categories.Designer.cs">
       <DependentUpon>Categories.cs</DependentUpon>
     </Compile>
+    <Compile Include="ConfigurationTool.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfigurationTool.Designer.cs">
+      <DependentUpon>ConfigurationTool.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigurationToolBL.cs" />
     <Compile Include="ConfigureStylesheetDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,8 +211,8 @@
       <DependentUpon>GlobalSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="MergeCss.cs" />
-    <Compile Include="Param.cs" />
     <Compile Include="Pdf.cs" />
+    <Compile Include="PdftoJpg.cs" />
     <Compile Include="PopupForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -209,6 +220,12 @@
       <DependentUpon>PopupForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Preview.cs" />
+    <Compile Include="PreviewConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreviewConfig.Designer.cs">
+      <DependentUpon>PreviewConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="PreviewPrintVia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -246,12 +263,6 @@
     <Compile Include="SettingBl.cs" />
     <Compile Include="SettingsValidator.cs" />
     <Compile Include="SettingsVersionControl.cs" />
-    <Compile Include="StyleCategories.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="StyleCategories.Designer.cs">
-      <DependentUpon>StyleCategories.cs</DependentUpon>
-    </Compile>
     <Compile Include="ConfigureStylesheet.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -281,6 +292,9 @@
     <EmbeddedResource Include="Categories.resx">
       <DependentUpon>Categories.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigurationTool.resx">
+      <DependentUpon>ConfigurationTool.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ConfigureStylesheetDialog.resx">
       <DependentUpon>ConfigureStylesheetDialog.cs</DependentUpon>
@@ -317,6 +331,9 @@
       <DependentUpon>PopupForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="PreviewConfig.resx">
+      <DependentUpon>PreviewConfig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PreviewPrintVia.resx">
       <DependentUpon>PreviewPrintVia.cs</DependentUpon>
     </EmbeddedResource>
@@ -333,10 +350,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ScriptureSetting.resx">
       <DependentUpon>ScriptureSetting.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="StyleCategories.resx">
-      <DependentUpon>StyleCategories.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ConfigureStylesheet.resx">
@@ -365,6 +378,10 @@
     <ProjectReference Include="..\CssParser\CssParser60.csproj">
       <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
       <Name>CssParser60</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenOfficeConvert\OpenOfficeConvert60.csproj">
+      <Project>{E225E5AF-B603-41D1-BB58-E3AAE05C59FD}</Project>
+      <Name>OpenOfficeConvert60</Name>
     </ProjectReference>
     <ProjectReference Include="..\PsTool\PsTool60.csproj">
       <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>

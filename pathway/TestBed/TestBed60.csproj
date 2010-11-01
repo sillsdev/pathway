@@ -164,6 +164,10 @@
       <Project>{E225E5AF-B603-41D1-BB58-E3AAE05C59FD}</Project>
       <Name>OpenOfficeConvert60</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OpenOfficeWriter\OpenOfficeWriter60.csproj">
+      <Project>{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}</Project>
+      <Name>OpenOfficeWriter60</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PsExport\PsExport60.csproj">
       <Project>{DCD48287-7F36-4DBB-94CF-4FF617BF1F78}</Project>
       <Name>PsExport60</Name>
@@ -182,6 +186,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>%25COMSPEC%25 /c $(ProjectDir)PostBuild.bat $(ConfigurationName)</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

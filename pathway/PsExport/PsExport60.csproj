@@ -160,6 +160,7 @@
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>
-    <PreBuildEvent>%25COMSPEC%25 /c $(ProjectDir)CopyFwDlls.bat $(ConfigurationName) 601</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
 </Project>

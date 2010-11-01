@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\PsDll\Palaso.dll" ComponentGuid="EF6BB0EB-5C62-4544-B8E9-090D51EA3B19"/>
+	<File Path="Files\PsDll\LiftPrepare.pdb" ComponentGuid="E49B2BB6-DEA4-4D29-9EA2-1716EE294545"/>
+	<File Path="Files\PsDll\LiftPrepare.dll" ComponentGuid="B6DE1686-C5ED-418B-85B6-C44EA3CBE4F6"/>
+	<File Path="Files\PsDll\icu.net.dll" ComponentGuid="32D310EF-2BD8-4F02-AA8B-40A03958B89D"/>
 	<File Path="Files\ConfigurationTool\Pathway_Student_Manual_SE.doc" ComponentGuid="92521FD3-9949-4780-8FDA-B776F1204D89"/>
 	<File Path="Files\ConfigurationTool\WordPressConvert.pdb" ComponentGuid="A7AFCCCE-8692-45CA-8088-E8B1DE1E17C3"/>
 	<File Path="Files\ConfigurationTool\PathwayB.pdb" ComponentGuid="EDACE7ED-757B-40F7-97E8-E74E0EE03D68"/>

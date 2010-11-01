@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModifyOOStyles.cs" />
     <Compile Include="OldStyles.cs" />
     <Compile Include="OOExportOpenOffice.cs" />
     <Compile Include="OOMetaXML.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="OOModifyStyles.cs" />
     <Compile Include="OOContent.cs" />
     <Compile Include="OOStyles.cs" />
+    <Compile Include="OOUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
