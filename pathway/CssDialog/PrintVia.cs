@@ -304,8 +304,9 @@ namespace SIL.PublishingSolution
         private void LoadLayouts()
         {
             cmbSelectLayout.Items.Clear();
-            //string xPathLayouts = "//styles/" + _media + "/style";
-            string xPathLayouts = "//styles/*/style[@approvedBy='GPS' or @shown='Yes']";
+            ////string xPathLayouts = "//styles/" + _media + "/style";
+            //string xPathLayouts = "//styles/*/style[@approvedBy='GPS' or @shown='Yes']";
+            string xPathLayouts = "//styles/" + _media + "/style[@approvedBy='GPS' or @shown='Yes']";
             XmlNodeList stylenames = Param.GetItems(xPathLayouts);
             foreach (XmlNode stylename in stylenames)
             {
@@ -533,16 +534,32 @@ namespace SIL.PublishingSolution
 
         private void cmbPrintVia_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //_media = cmbPrintVia.Text.ToLower() == "gobible" ? "mobile" : "paper";
-            string type = Param.MediaType;
-            BtnOk.Enabled = true; 
-            if (type == "Media")
-            {
-                type = "paper";
-            }
-            _media = cmbPrintVia.Text.ToLower() == "gobible" ? "mobile" : type;
+            _media = FindMedia();
+
             LoadLayouts();
 
+            ShowAvoidOdtCrash();
+            BtnOk.Enabled = true; 
+        }
+
+        private string FindMedia()
+        {
+            string backend = cmbPrintVia.Text.ToLower();
+            string media;
+
+            if (backend == "gobible")
+            {
+                media = "mobile";
+            }
+            else
+            {
+                media = "paper";
+            }
+            return media;
+        }
+
+        private void ShowAvoidOdtCrash()
+        {
             if(cmbPrintVia.Text.ToLower().IndexOf("openoffice") >= 0 )
             {
                 lblAvoidOdtCrash.Visible = true;

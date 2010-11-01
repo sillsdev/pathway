@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintVia));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblAvoidOdtCrash = new System.Windows.Forms.Label();
             this.chkAvoidOdtCrash = new System.Windows.Forms.CheckBox();
             this.txtSaveInFolder = new System.Windows.Forms.TextBox();
             this.btnBrwsSaveInFolder = new System.Windows.Forms.Button();
@@ -55,7 +54,6 @@
             // groupBox1
             // 
             this.groupBox1.AccessibleName = "Group";
-            this.groupBox1.Controls.Add(this.lblAvoidOdtCrash);
             this.groupBox1.Controls.Add(this.chkAvoidOdtCrash);
             this.groupBox1.Controls.Add(this.txtSaveInFolder);
             this.groupBox1.Controls.Add(this.btnBrwsSaveInFolder);
@@ -77,24 +75,14 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
-            // lblAvoidOdtCrash
-            // 
-            this.lblAvoidOdtCrash.AutoSize = true;
-            this.lblAvoidOdtCrash.Location = new System.Drawing.Point(35, 197);
-            this.lblAvoidOdtCrash.Name = "lblAvoidOdtCrash";
-            this.lblAvoidOdtCrash.Size = new System.Drawing.Size(105, 13);
-            this.lblAvoidOdtCrash.TabIndex = 16;
-            this.lblAvoidOdtCrash.Text = "Create hidden styles:";
-            this.lblAvoidOdtCrash.Visible = false;
-            // 
             // chkAvoidOdtCrash
             // 
             this.chkAvoidOdtCrash.AutoSize = true;
             this.chkAvoidOdtCrash.Location = new System.Drawing.Point(146, 197);
             this.chkAvoidOdtCrash.Name = "chkAvoidOdtCrash";
-            this.chkAvoidOdtCrash.Size = new System.Drawing.Size(183, 17);
+            this.chkAvoidOdtCrash.Size = new System.Drawing.Size(308, 17);
             this.chkAvoidOdtCrash.TabIndex = 15;
-            this.chkAvoidOdtCrash.Text = "Hidden styles prevent ODT crash";
+            this.chkAvoidOdtCrash.Text = "Reduce number of styles to keep Open Office from crashing";
             this.chkAvoidOdtCrash.UseVisualStyleBackColor = true;
             this.chkAvoidOdtCrash.Visible = false;
             // 
@@ -314,7 +302,6 @@
         private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.Button BtnHelp;
         private System.Windows.Forms.TextBox txtSaveInFolder;
-        private System.Windows.Forms.Label lblAvoidOdtCrash;
         private System.Windows.Forms.CheckBox chkAvoidOdtCrash;
     }
 }
