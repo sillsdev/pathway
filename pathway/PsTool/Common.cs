@@ -339,8 +339,10 @@ namespace SIL.Tool
         {
             string appDataDir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
             string psSettings = appDataDir + @"/SIL/Pathway";
-            if (Directory.Exists(psSettings))
-                Directory.Delete(psSettings, true);
+            //string psSettings = PathCombine(appDataDir,"SIL/Pathway");
+            //if (Directory.Exists(psSettings))
+            //    Directory.Delete(psSettings, true);
+            DeleteDirectory(psSettings);
         }
         #endregion
 
@@ -1442,6 +1444,52 @@ namespace SIL.Tool
             returnPath = returnPath.Replace('\\', Path.DirectorySeparatorChar);
             return returnPath;
 
+        }
+
+        /// <summary>
+        /// Deletes the current Directory
+        /// </summary>
+        /// <param name="directoryPath">Directory name to be deleted</param>
+        /// <returns>true/false based on success/failure</returns>
+        public static bool DeleteDirectory(string directoryPath)
+        {
+            bool deleted = false;
+            if (Directory.Exists(directoryPath))
+            {
+                try
+                {
+                    Directory.Delete(directoryPath, true);
+                    deleted = true;
+                }
+                catch(Exception ex)
+                {
+                    Console.Write(ex.Message);
+                }
+            }
+            return deleted;
+        }
+
+        /// <summary>
+        /// Deletes the current File
+        /// </summary>
+        /// <param name="filePath">File name to be deleted</param>
+        /// <returns>true/false based on success/failure</returns>
+        public static bool DeleteFile(string filePath)
+        {
+            bool deleted = false;
+            if (File.Exists(filePath))
+            {
+                try
+                {
+                    File.Delete(filePath);
+                    deleted = true;
+                }
+                catch (Exception ex)
+                {
+                    Console.Write(ex.Message);
+                }
+            }
+            return deleted;
         }
         /// <summary>
         /// Make sure the path contains the proper / for the operating system.

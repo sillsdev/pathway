@@ -109,7 +109,7 @@ namespace SIL.PublishingSolution
         private string _formatFootnote;
 
         readonly Dictionary<string, string> _counterVolantryReset = new Dictionary<string, string>();
-        readonly string _tempFile = Common.PathCombine(Path.GetTempPath(), "tempXHTMLFile.xhtml"); //TD-351
+        readonly string _tempFile = Common.PathCombine(Path.GetTempPath(), "tempXHTMLFile.xhtml"); //TD-351 
         readonly string _hardSpace = Common.ConvertUnicodeToString("\u00A0");
 
         readonly ArrayList _anchor = new ArrayList();

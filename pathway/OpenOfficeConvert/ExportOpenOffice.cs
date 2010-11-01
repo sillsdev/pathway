@@ -57,6 +57,7 @@ namespace SIL.PublishingSolution
         string _endQuote = ")";
         string _singleQuote = "'";
         string _comma = ",";
+        private PreExportProcess preProcessor;
 
         public bool Export(PublicationInformation publicationInformation)
         {
@@ -626,6 +627,7 @@ namespace SIL.PublishingSolution
             bool returnValue = false;
             string strFromOfficeFolder = Common.PathCombine(Common.GetPSApplicationPath(), "OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
             projInfo.TempOutputFolder = Common.PathCombine(Path.GetTempPath(), "OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
+            Common.DeleteDirectory(projInfo.TempOutputFolder);
             string strStylePath = Common.PathCombine(projInfo.TempOutputFolder, "styles.xml");
             string strContentPath = Common.PathCombine(projInfo.TempOutputFolder, "content.xml");
             CopyOfficeFolder(strFromOfficeFolder, projInfo.TempOutputFolder);
@@ -679,7 +681,7 @@ namespace SIL.PublishingSolution
             // BEGIN Generate Meta.Xml File
             var metaXML = new MetaXML();
             metaXML.CreateMeta(projInfo);
-            PreExportProcess preProcessor = new PreExportProcess(projInfo);
+            preProcessor = new PreExportProcess(projInfo);
             // BEGIN Generate Content.Xml File 
             var cXML = new ContentXML();
             string fileName = Path.Combine(projInfo.DictionaryPath, Path.GetFileName(projInfo.DefaultXhtmlFileWithPath));
@@ -728,7 +730,19 @@ namespace SIL.PublishingSolution
                     return false;
                 }
             }
-            projInfo.DefaultXhtmlFileWithPath = defaultXhtml ;
+            finally
+            {
+                projInfo.DefaultXhtmlFileWithPath = defaultXhtml;
+                if (preProcessor != null)
+                {
+                    Common.DeleteDirectory(preProcessor.GetCreatedTempFolderPath);
+                }
+                if(projInfo.TempOutputFolder != null)
+                {
+                    Common.DeleteDirectory(projInfo.TempOutputFolder);
+                }
+            }
+
             //try
             //{
             //    File.Delete(processedXhtml);

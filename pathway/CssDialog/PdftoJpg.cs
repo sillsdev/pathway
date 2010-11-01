@@ -79,11 +79,11 @@ namespace SIL.PublishingSolution
             return ps.ProjectName;
         }
 
-        public void ConvertPdftoJpg()
+        private void ConvertPdftoJpg()
         {
-            string tempFolderPath = Path.GetTempPath();
-            string outputPdfFile = Path.Combine(tempFolderPath, "Preview.pdf");
-            ConvertImage(outputPdfFile);
+            //string tempFolderPath = Path.GetTempPath();
+            //string outputPdfFile = Path.Combine(tempFolderPath, "Preview.pdf");
+            //ConvertImage(outputPdfFile);
         }
 
         private void ConvertImage(string filename)

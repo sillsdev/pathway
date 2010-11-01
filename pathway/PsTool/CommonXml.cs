@@ -915,7 +915,17 @@ namespace SIL.Tool
             for (int i = 0; i < counter; i++)
             {
                 string fileName = Path.Combine(allUserPath, "PartFile" + (i + 1) + ".xhtml");
-                var writer = new XmlTextWriter(fileName, null) { Formatting = Formatting.Indented };
+                DeleteFile(fileName);
+                XmlTextWriter writer = null;
+                try
+                {
+                    writer = new XmlTextWriter(fileName, null) { Formatting = Formatting.Indented };
+                }
+                catch (Exception ex)
+                {
+                    
+                    Console.Write(ex.Message);
+                }
                 writers[fileName] = writer;
             }
 

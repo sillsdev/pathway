@@ -13,7 +13,7 @@ namespace SIL.Tool
     {
         string ProcessedXhtml { get; }
         string ProcessedCss { get; }
-
+        string GetCreatedTempFolderPath { get; }
         /// <summary>
         /// To swap the headword and reversal-form when main.xhtml and FlexRev.xhtml included
         /// </summary>
@@ -72,6 +72,10 @@ namespace SIL.Tool
         }
 
         string tempFolder = Common.PathCombine(Path.GetTempPath(), "Preprocess12");
+        public string GetCreatedTempFolderPath
+        {
+            get { return tempFolder; }
+        }
 
         #region XHTML PreProcessor
         /// <summary>
@@ -194,6 +198,7 @@ namespace SIL.Tool
             }
             Directory.CreateDirectory(tempFolder);
 
+            //Note - copies the xhtml and css files to temp folder
             string tempFile = Common.PathCombine(tempFolder, Path.GetFileName(_xhtmlFileNameWithPath));
             File.Copy(Common.DirectoryPathReplace(_xhtmlFileNameWithPath), tempFile, true);
             _xhtmlFileNameWithPath = tempFile;
