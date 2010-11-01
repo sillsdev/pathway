@@ -107,6 +107,8 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("style:family", familyType); // "paragraph" will override by ContentXML.cs
                 _writer.WriteAttributeString("style:parent-style-name", "none");
 
+                _paragraphProperty.Clear();
+                _textProperty.Clear();
                 _OOClass = new Dictionary<string, string>();
                 _OOProperty = mapProperty.IDProperty(cssClass.Value);
                 foreach (KeyValuePair<string, string> property in _OOProperty)

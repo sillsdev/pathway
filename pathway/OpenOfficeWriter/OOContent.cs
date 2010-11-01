@@ -712,6 +712,7 @@ namespace SIL.PublishingSolution
                 _characterName = StackPeekCharStyle(_allCharacter);
             }
             //content = whiteSpacePre(content);
+
             if (_psuedoContainsStyle != null)
             {
                 if (content.IndexOf(_psuedoContainsStyle.Contains) > -1)
@@ -735,19 +736,43 @@ namespace SIL.PublishingSolution
             }
             return result;
         }
+
+        private void whiteSpacePre(string content)
+        {
+            string whiteSpacePre = GetPropertyValue(_classNameWithLang, "white-space", string.Empty);
+            if (whiteSpacePre == "pre")
+            {
+                 WhiteSpace(content, _classNameWithLang);
+            }
+            else
+            {
+                content = SignificantSpace(content);
+                _writer.WriteString(content);
+            }
+        }
+
+        private string GetPropertyValue(string clsName, string property, string defaultValue)
+        {
+            string valueOfProperty = defaultValue;
+            if (IdAllClass.ContainsKey(clsName) && IdAllClass[clsName].ContainsKey(property))
+            {
+                valueOfProperty = IdAllClass[clsName][property];
+            }
+            return valueOfProperty;
+        }
+
         private void WriteCharacterStyle(string content, string characterStyle)
         {
-            if (_tagType == "span" && characterStyle != "none")
+            if (_tagType == "span" && characterStyle != "none") //span start
             {
                 _writer.WriteStartElement("text:span");
                 _writer.WriteAttributeString("text:style-name", characterStyle); //_util.ChildName
             }
             AddUsedStyleName(characterStyle);
 
-            //content = whiteSpacePre(content); // TODO -2000 - SignificantSpace() - IN OO convert
-            content = SignificantSpace(content);
-            _writer.WriteString(content);
-            if (_tagType == "span" && characterStyle != "none")
+            whiteSpacePre(content); // TODO -2000 - SignificantSpace() - IN OO convert
+
+            if (_tagType == "span" && characterStyle != "none")  // span end
             {
                 _writer.WriteEndElement();
             }
@@ -1588,11 +1613,13 @@ namespace SIL.PublishingSolution
                         _writer.WriteStartElement("text:s");
                         _writer.WriteAttributeString("text:c", j.ToString());
                         _writer.WriteEndElement();
+
                         j = 0;
                     }
                     _writer.WriteEndElement();
                     _writer.WriteStartElement("text:p");
-                    _writer.WriteAttributeString("text:style-name", divClass);
+                    _writer.WriteAttributeString("text:style-name", divClass + j.ToString());
+
                 }
                 else
                 {
