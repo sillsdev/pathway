@@ -562,12 +562,10 @@ namespace SIL.PublishingSolution
         {
             if(cmbPrintVia.Text.ToLower().IndexOf("openoffice") >= 0 )
             {
-                lblAvoidOdtCrash.Visible = true;
                 chkAvoidOdtCrash.Visible = true;
             }
             else
             {
-                lblAvoidOdtCrash.Visible = false;
                 chkAvoidOdtCrash.Visible = false;
             }
         }
