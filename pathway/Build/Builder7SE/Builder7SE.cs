@@ -58,6 +58,7 @@ namespace Builder7SE
             const string Readme = "ReadMePw.rtf";
             const string License = "License.rtf";
             const string HelpFile = "Pathway_Configuration_Tool_SE.chm";
+            const string Tutorial = "Pathway_Student_Manual_SE.doc";
             //const string Catalog = "UtilityCatalogIncludePublishingSolution.xml";
             map[Readme] = FileData.Get(instPath + Readme);
             map[License] = FileData.Get(instPath + License);
@@ -68,6 +69,7 @@ namespace Builder7SE
             BuilderBL.DoBatch(instPath, "ConfigurationTool", "postBuild.bat", args[1]);
             BuilderBL.CopyRelaseFiles(instPath, "ConfigurationTool", "ConfigurationTool", args[1]);
             BuilderBL.CopyFile(instPath, Readme, "../Files/ConfigurationTool");
+            BuilderBL.CopyFile(instPath, Tutorial, "../Files/ConfigurationTool");
             BuilderBL.CopyFile(instPath, License, "../Files/ConfigurationTool");
             BuilderBL.CopyTree(instPath, "../../PsSupport", "ConfigurationTool");
             Directory.Delete(instPath + "../Files/ConfigurationTool/Help", true);

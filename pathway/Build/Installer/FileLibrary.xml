@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\ConfigurationTool\Pathway_Student_Manual_SE.doc" ComponentGuid="92521FD3-9949-4780-8FDA-B776F1204D89"/>
 	<File Path="Files\ConfigurationTool\WordPressConvert.pdb" ComponentGuid="A7AFCCCE-8692-45CA-8088-E8B1DE1E17C3"/>
 	<File Path="Files\ConfigurationTool\PathwayB.pdb" ComponentGuid="EDACE7ED-757B-40F7-97E8-E74E0EE03D68"/>
 	<File Path="Files\ConfigurationTool\icuuc40.dll" ComponentGuid="CC7562E0-4000-497D-BDCD-238ABE4EC63A"/>
