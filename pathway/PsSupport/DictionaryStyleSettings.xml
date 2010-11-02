@@ -261,7 +261,10 @@
     </style -->
     </paper>
     <mobile>
-      <style name="GoBible" file="GoBible.css" approvedBy="" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg">
+      <style name="EBook (epub)" file="epub.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg">
+        <description>5.25x8.25in - 1 Col - Left aligned - Charis 11 on 15</description>
+      </style>
+      <style name="GoBible" file="GoBible.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg" >
         <description>Text only, no section heads or cross references</description>
       </style>
     </mobile>
