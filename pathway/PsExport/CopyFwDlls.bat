@@ -45,6 +45,7 @@ xcopy %base%\PdfConvert\%cfg%\PdfConvert.* . /y
 xcopy %base%\InDesignConvert\%cfg%\InDesignConvert.* . /y
 xcopy %base%\WordPressConvert\%cfg%\WordPressConvert.* . /y
 xcopy %base%\XeTeXConvert\%cfg%\XeTeXConvert.* . /y
+xcopy %base%\epubConvert\%cfg%\epubConvert.* . /y
 
 if "%1" == "ReleaseSE" goto nogobible
 xcopy %base%\GoBibleConvert\%cfg%\GoBibleConvert.* . /y
