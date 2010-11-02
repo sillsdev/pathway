@@ -7,7 +7,6 @@
 			<ComponentRef Id="ReadMeShortcutApp"/>
 			<ComponentRef Id="LicenseShortcutApp"/>
 			%(PublishingSolutionFeatures)s
-			%(SupportFeatures)s
 		</Feature>
 		<!-- Feature Id="PsPlugIn" Title="Fieldworks PublishingSolution Plug-in" Description="Adds PublishingSolution to utility menu to export data " Display="expand" Level="3" AllowAdvertise="no">
 			%(PsDllFeatures)s

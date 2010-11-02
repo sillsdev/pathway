@@ -1,5 +1,11 @@
+set base=..\..\..
+set cfg=bin\%1
+if exist %base%\ConfigurationTool\postBuild.bat goto anyCpu
+set base=..\..\..\..
+set cfg=bin\x86\%1
+:anyCpu
 if exist PsSupport rmdir PsSupport /s /q
-xcopy ..\..\..\PsSupport . /i /s /q /y
+xcopy %base%\PsSupport . /i /s /q /y
 del *.xpr
 del *.txt
 del *.dtd
@@ -7,12 +13,12 @@ del XLingPap.xsl
 del GenericFont.xml
 del JobList.xml
 del sectionTypes.xml
-xcopy ..\..\..\Build\Installer\readme.rtf /y
-xcopy ..\..\..\Build\Installer\license.rtf /y
-xcopy ..\..\..\PathwayB\bin\%1\PathwayB.* . /y
-xcopy ..\..\..\OpenOfficeConvert\bin\%1\OpenOfficeConvert.* . /y
-xcopy ..\..\..\LiftPrepare\bin\%1\LiftPrepare.* . /y
-xcopy ..\..\..\InDesignConvert\bin\%1\InDesignConvert.* . /y
+xcopy %base%\Build\Installer\readme.rtf /y
+xcopy %base%\Build\Installer\license.rtf /y
+xcopy %base%\PathwayB\%cfg%\PathwayB.* . /y
+xcopy %base%\OpenOfficeConvert\%cfg%\OpenOfficeConvert.* . /y
+xcopy %base%\LiftPrepare\%cfg%\LiftPrepare.* . /y
+xcopy %base%\InDesignConvert\%cfg%\InDesignConvert.* . /y
 rem if "%1" == "Release" goto removeXetex
 rem if "%1" == "ReleaseBTE" goto removeXetex
 rem if "%1" == "ReleaseSE" goto removeXetex
@@ -22,10 +28,10 @@ if "%1" == "CorporateBTE" goto removeXetex
 if "%1" == "CorporateSE" goto removeXetex
 if "%1" == "Corporate7BTE" goto removeXetex
 if "%1" == "Corporate7SE" goto removeXetex
-xcopy ..\..\..\XeTeXConvert\bin\%1\XeTeXConvert.* . /y
-xcopy ..\..\..\PdfConvert\bin\%1\PdfConvert.* . /y
-xcopy ..\..\..\WordPressConvert\bin\%1\WordPressConvert.* . /y
-xcopy ..\..\..\LogosConvert\bin\%1\LogosConvert.* . /y
+xcopy %base%\XeTeXConvert\%cfg%\XeTeXConvert.* . /y
+xcopy %base%\PdfConvert\%cfg%\PdfConvert.* . /y
+xcopy %base%\WordPressConvert\%cfg%\WordPressConvert.* . /y
+xcopy %base%\LogosConvert\%cfg%\LogosConvert.* . /y
 goto dogobible
 :removeXetex
 rmdir /s /q Wordpress
@@ -35,8 +41,8 @@ if "%1" == "CorporateSE" goto nogobible
 if "%1" == "Corporate7SE" goto nogobible
 if "%1" == "ReleaseSE" goto nogobible
 if "%1" == "Release7SE" goto nogobible
-xcopy ..\..\..\GoBibleConvert\bin\%1\GoBibleConvert.* . /y
-xcopy ..\..\..\ParatextSupport\bin\%1\ParatextSupport.* . /y
+xcopy %base%\GoBibleConvert\%cfg%\GoBibleConvert.* . /y
+xcopy %base%\ParatextSupport\%cfg%\ParatextSupport.* . /y
 goto done
 :nogobible
 rmdir /s /q GoBible
