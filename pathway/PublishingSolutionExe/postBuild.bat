@@ -35,6 +35,7 @@ xcopy %base%\LogosConvert\%cfg%\LogosConvert.* . /y
 goto dogobible
 :removeXetex
 rmdir /s /q Wordpress
+rmdir /s /q epub
 rmdir /s /q xetexPathway
 :dogobible
 if "%1" == "CorporateSE" goto nogobible
@@ -42,10 +43,12 @@ if "%1" == "Corporate7SE" goto nogobible
 if "%1" == "ReleaseSE" goto nogobible
 if "%1" == "Release7SE" goto nogobible
 xcopy %base%\GoBibleConvert\%cfg%\GoBibleConvert.* . /y
+xcopy %base%\GoBibleConvert\bin\%1\epubConvert.* . /y
 xcopy %base%\ParatextSupport\%cfg%\ParatextSupport.* . /y
 goto done
 :nogobible
 rmdir /s /q GoBible
+rmdir /s /q epub
 del TE_XHTML-to-Libronix_MainFile.xslt
 del TE_XHTML-to-Libronix_NonScrolling.xslt
 del TE_XHTML-to-Libronix_ResourcesFile.xslt
