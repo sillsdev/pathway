@@ -596,21 +596,6 @@ namespace SIL.PublishingSolution
             busyChecking = false;
         }
 
-        /// <summary>
-        /// Outputs one of the mobile attributes: FileProduced, RedLetter, Information, Copyright, or Icon
-        /// </summary>
-        /// <returns>true if successful</returns>
-        public static bool WriteMobileAttrib(string key, string value)
-        {
-            XmlNode baseNode = GetItem("//mobileProperty/mobilefeature[@name='" + key + "']");
-
-            if (baseNode == null) return false;
-            {
-                SetAttrValue(baseNode, "select", value);
-            }
-            Write();
-            return true;
-        }
 
         /// <summary>
         /// 
@@ -1115,6 +1100,19 @@ namespace SIL.PublishingSolution
                 }
             }
             return filePath;
+        }
+
+        /// <summary>
+        /// To set the properties for Scripture GoBible
+        /// </summary>
+        /// <param name="attribName"></param>
+        /// <param name="attribValue"></param>
+        public static void UpdateMobileAtrrib(string attribName, string attribValue, string styleName)
+        {
+            string searchStyleName = styleName;
+            XmlNode node = Param.GetItem("//stylePick/styles/mobile/style[@name='" + searchStyleName + "']/styleProperty[@name='" + attribName + "']");
+            Param.SetAttrValue(node, "value", attribValue);
+            Param.Write();
         }
 
         #region LoadImageList

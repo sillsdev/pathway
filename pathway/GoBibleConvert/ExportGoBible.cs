@@ -193,7 +193,7 @@ namespace SIL.PublishingSolution
             Param.LoadSettings();
             Param.SetValue(Param.InputType, "Scripture");
             Param.LoadSettings();
-            Dictionary<string, string> mobilefeature = Param.GetItemsAsDictionary("//mobileProperty/mobilefeature");
+            Dictionary<string, string> mobilefeature = Param.GetItemsAsDictionary("//stylePick/styles/mobile/style[@name='GoBible']/styleProperty");
             if (mobilefeature.ContainsKey("RedLetter") && mobilefeature["RedLetter"] == "Yes")
                 red = "true";
             if (mobilefeature.ContainsKey("Information"))

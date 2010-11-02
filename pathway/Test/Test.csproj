@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{222CBAAB-B338-4670-A553-B6154E582FC8}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -119,6 +119,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationTool\ConfigurationToolBLTest.cs" />
     <Compile Include="ConfigurationTool\ConfigurationToolTest.cs" />
     <Compile Include="CssDialog\ContentsTest.cs">
       <SubType>Form</SubType>
@@ -176,9 +177,8 @@
     <Compile Include="CssParser\CssParserTest.cs" />
     <Compile Include="CssParser\GramTest.cs" />
     <Compile Include="CssParser\MakePropertyTest.cs" />
+    <Compile Include="OpenOfficeConvert\MapOfficeAttributeTest.cs" />
     <Compile Include="OpenOfficeConvert\UtilityTest.cs" />
-    <Compile Include="OpenOfficeWriter\OOContentXMLTest.cs" />
-    <Compile Include="OpenOfficeWriter\OOMapOfficeAttributeTest.cs" />
     <Compile Include="OpenOfficeWriter\OOStylesXMLTest.cs" />
     <Compile Include="PsExport\PsExportTest.cs" />
     <Compile Include="OpenOfficeConvert\StylesXMLTest.cs" />

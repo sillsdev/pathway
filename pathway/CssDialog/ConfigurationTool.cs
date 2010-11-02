@@ -697,31 +697,32 @@ namespace SIL.PublishingSolution
         private void txtInformation_Validated(object sender, EventArgs e)
         {
             _CToolBL.txtInformation_ValidatedBL();
+            EditMobileCSS(sender, e);
         }
 
         private void txtCopyright_Validated(object sender, EventArgs e)
         {
             _CToolBL.txtCopyright_ValidatedBL();
+            EditMobileCSS(sender, e);
         }
 
-        private void ddlFiles_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _CToolBL.ddlFiles_SelectedIndexChangedBL(sender, e);
-        }
 
         private void ddlRedLetter_SelectedIndexChanged(object sender, EventArgs e)
         {
             _CToolBL.ddlRedLetter_SelectedIndexChangedBL(sender, e);
+            EditMobileCSS(sender, e);
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             _CToolBL.btnBrowse_ClickBL();
+            EditMobileCSS(sender, e);
         }
 
         private void ddlFileProduceDict_Validated(object sender, EventArgs e)
         {
             _CToolBL.ddlFileProduceDict_ValidatedBL(sender);
+            EditMobileCSS(sender, e);
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -750,6 +751,12 @@ namespace SIL.PublishingSolution
             _CToolBL.SetModifyMode(false);
             _CToolBL.ShowCssSummary();
             
+        }
+
+        private void EditMobileCSS(object sender, EventArgs e)
+        {
+            _CToolBL.SetModifyMode(false);
+            _CToolBL.ShowMobileSummaryBL();
         }
 
         private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
@@ -783,6 +790,27 @@ namespace SIL.PublishingSolution
         }
 
         private void txtPageBottom_KeyUp(object sender, KeyEventArgs e)
+        {
+            _CToolBL.SetModifyMode(true);
+        }
+
+        private void ddlFiles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _CToolBL.ddlFiles_SelectedIndexChangedBL(sender, e);
+            EditMobileCSS(sender, e);
+        }
+
+        private void txtInformation_KeyUp(object sender, KeyEventArgs e)
+        {
+            _CToolBL.SetModifyMode(true);
+        }
+
+        private void txtCopyright_KeyUp(object sender, KeyEventArgs e)
+        {
+            _CToolBL.SetModifyMode(true);
+        }
+
+        private void btnBrowse_KeyUp(object sender, KeyEventArgs e)
         {
             _CToolBL.SetModifyMode(true);
         }

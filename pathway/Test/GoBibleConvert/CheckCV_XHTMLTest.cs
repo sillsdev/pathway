@@ -106,11 +106,11 @@ namespace Test.GoBibleConvert
             Param.LoadSettings();
             Param.SetValue(Param.InputType, "Scripture");
             Param.LoadSettings();
-            Param.WriteMobileAttrib("FileProduced", "OneperBook");
-            Param.WriteMobileAttrib("RedLetter", "Yes");
-            Param.WriteMobileAttrib("Information", "Sena 3");
-            Param.WriteMobileAttrib("Copyright", "© 2010 SIL");
-            Param.WriteMobileAttrib("Icon", @"C:\ProgramData\SIL\Pathway\Scripture\Icon.png");
+            Param.UpdateMobileAtrrib("FileProduced", "OneperBook", "GoBible");
+            Param.UpdateMobileAtrrib("RedLetter", "Yes", "GoBible");
+            Param.UpdateMobileAtrrib("Information", "Sena 3", "GoBible");
+            Param.UpdateMobileAtrrib("Copyright", "© 2010 SIL", "GoBible");
+            Param.UpdateMobileAtrrib("Icon", @"C:\ProgramData\SIL\Pathway\Scripture\Icon.png", "GoBible");
             CreateCollection();
             string actualFullName = GetFileNameWithOutputPath(collections);
             string exepectedFullName = GetFileNameWithExpectedPath(collections);

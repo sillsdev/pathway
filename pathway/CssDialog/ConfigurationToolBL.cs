@@ -619,12 +619,6 @@ namespace SIL.PublishingSolution
                 value["margin-left"] = cTool.TxtPageInside.Text;
                 value["-ps-fileproduce"] = "\"" + _fileProduce + "\"";
                 WriteCssClass(writeCss, "page", value);
-
-                if (MediaType.ToLower() == "mobile")
-                {
-                    UpdateFileProduced();
-                }
-
                 writeCss.Flush();
                 writeCss.Close();
             }
@@ -636,11 +630,15 @@ namespace SIL.PublishingSolution
             _screenMode = ScreenMode.Edit;  
         }
 
-        protected void UpdateFileProduced()
-        {
-            XmlNode node = Param.GetItem("//mobileProperty/mobilefeature[@name='FileProduced']");
-            Param.SetAttrValue(node, "select", _fileProduce);
-        }
+        
+
+        //private void UpdateMobileAtrrib(string attribName, string attribValue)
+        //{
+        //    string searchStyleName = StyleName;
+        //    XmlNode node = Param.GetItem("//stylePick/styles/mobile/style[@name='" + searchStyleName + "']/styleProperty[@name='" + attribName + "']");
+        //    Param.SetAttrValue(node, "value", attribValue);
+        //    Param.Write();
+        //}
 
         /// <summary>
         /// transfers grid row values to InfoPanel
@@ -740,7 +738,38 @@ namespace SIL.PublishingSolution
             {
                 if (inputTypeBL.ToLower() == "scripture" && MediaType.ToLower() == "mobile")
                 {
-                    cTool.DdlFiles.SelectedItem = FileProduced;
+                    string filePath = string.Empty;
+                   if(File.Exists(Param.SettingOutputPath))
+                   {
+                       filePath = Param.SettingOutputPath;
+                   }
+                   else if (File.Exists(Param.SettingPath))
+                   {
+                       filePath = Param.SettingPath;
+                   }
+                   XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
+                   foreach (XmlNode VARIABLE in baseNode1)
+                   {
+                       string attribName = VARIABLE.Attributes["name"].Value;
+                       string attribValue = VARIABLE.Attributes["value"].Value;
+                       if (attribName.ToLower() == "fileproduced")
+                       {
+                           cTool.DdlFiles.SelectedItem = attribValue;
+                       }
+                       else if (attribName.ToLower() == "redletter")
+                       {
+                           cTool.DdlRedLetter.SelectedItem = attribValue;
+                       }
+                       else if (attribName.ToLower() == "information")
+                       {
+                           cTool.TxtInformation.Text = attribValue;
+                       }
+                       else if (attribName.ToLower() == "copyright")
+                       {
+                           cTool.TxtCopyright.Text = attribValue;
+                       }
+
+                   }  
                     SetMobileSummary(null, null);
                 }
                 else
@@ -914,8 +943,8 @@ namespace SIL.PublishingSolution
 
         protected void setDefaultInputType()
         {
-            Param.SetValue(Param.InputType, ""); // loading settingsxml.
-            Param.LoadSettings();
+            //Param.SetValue(Param.InputType, ""); // loading settingsxml.
+            //Param.LoadSettings();
             Param.SetValue(Param.InputType, inputTypeBL); // last input type
             Param.Write();
             Param.CopySchemaIfNecessary();
@@ -1387,10 +1416,20 @@ namespace SIL.PublishingSolution
                 return false;
             }
             var currentDescription = "Based on " + currentApprovedBy + " stylesheet " + StyleName;
-            //Param.SaveSheet(PreviousStyleName, Param.StylePath(StyleName), currentDescription, type);
             Param.SaveSheet(PreviousStyleName, Param.StylePath(FileName), currentDescription, type);
             XmlNode baseNode = Param.GetItem("//styles/" + MediaType + "/style[@name='" + PreviousStyleName + "']");
             Param.SetAttrValue(baseNode, AttribType, TypeCustom);
+            //To add StyleProperty for Mobile media
+            if (inputTypeBL.ToLower() == "scripture" && MediaType.ToLower() == "mobile")
+            {
+                XmlNodeList mobileBaseNode =
+                    Param.GetItems("//styles/" + MediaType + "/style[@name='" +
+                                   grid[AttribName, SelectedRowIndex].Value + "']/styleProperty");
+                foreach (XmlNode stylePropertyNode in mobileBaseNode)
+                {
+                    baseNode.AppendChild(stylePropertyNode.Clone());
+                }
+            }
             Param.Write();
             return true;
         }
@@ -1973,7 +2012,7 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
-        public void SetMobileSummaryBL()
+        public void ShowMobileSummaryBL()
         {
             string comma = ", ";
             string red = (cTool.DdlRedLetter.Text.Length > 0 && cTool.DdlRedLetter.Text.ToLower() == "yes") ? " Red Letter  " : "";
@@ -2062,7 +2101,7 @@ namespace SIL.PublishingSolution
                     string imgFileName = Path.GetFileName(filename);
                     string toPath = Path.Combine(userPath, imgFileName);
                     File.Copy(filename, toPath, true);
-                    Param.WriteMobileAttrib("Icon", toPath);
+                    Param.UpdateMobileAtrrib("Icon", toPath, StyleName);
                     cTool.MobileIcon.Image = iconImage;
                 }
                 catch { }
@@ -2073,7 +2112,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                Param.WriteMobileAttrib("RedLetter", cTool.DdlRedLetter.Text);
+                Param.UpdateMobileAtrrib("RedLetter", cTool.DdlRedLetter.Text, StyleName);
                 SetMobileSummary(sender, e);
             }
             catch { }
@@ -2084,7 +2123,7 @@ namespace SIL.PublishingSolution
             try
             {
                 _fileProduce = cTool.DdlFiles.Text;
-                Param.WriteMobileAttrib("FileProduced", cTool.DdlFiles.Text);
+                Param.UpdateMobileAtrrib("FileProduced", cTool.DdlFiles.Text, StyleName);
                 SetMobileSummary(sender, e);
             }
             catch { }
@@ -2094,7 +2133,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                Param.WriteMobileAttrib("Copyright", cTool.TxtCopyright.Text);
+                Param.UpdateMobileAtrrib("Copyright", cTool.TxtCopyright.Text, StyleName);
             }
             catch
             {
@@ -2105,7 +2144,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                Param.WriteMobileAttrib("Information", cTool.TxtInformation.Text);
+                Param.UpdateMobileAtrrib("Information", cTool.TxtInformation.Text, StyleName);
             }
             catch
             {
@@ -2591,7 +2630,7 @@ namespace SIL.PublishingSolution
 
         private void SetMobileSummary(object sender, EventArgs e)
         {
-            SetMobileSummaryBL();
+            ShowMobileSummaryBL();
         }
 
         public void txtPageInside_ValidatedBL(object sender, EventArgs e)

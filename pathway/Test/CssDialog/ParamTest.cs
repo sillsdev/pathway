@@ -236,8 +236,8 @@ namespace Test.CssDialog
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(xmlFile);
 
-            string id = "SelectLayout"; 
-            string val = "Final"; 
+            string id = "LayoutSelected";
+            string val = "Draft"; 
             Param.SetValue(id, val);
             string actual = Param.Value[id];
             Assert.AreEqual(val, actual);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="8">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="9">
   <xs:element name="stylePick">
     <xs:complexType>
       <xs:sequence>
@@ -131,19 +131,25 @@
       <xs:sequence>
         <xs:element ref="description"/>
         <xs:element minOccurs="0" ref="comment"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="styleProperty"/>
       </xs:sequence>
       <xs:attribute name="approvedBy" type="xs:string"/>
-      <xs:attribute name="shown" type="xs:NCName"/>
-      <xs:attribute name="type" type="xs:NCName"/>
-      <!--<xs:attribute name="file" use="required" type="xs:NCName"/>
-      <xs:attribute name="name" use="required" type="xs:NCName"/>-->
       <xs:attribute name="file" use="required"/>
       <xs:attribute name="name" use="required"/>
-      <xs:attribute name="previewfile1" type="xs:string"/>
-      <xs:attribute name="previewfile2" type="xs:string"/>
+      <xs:attribute name="previewfile1"/>
+      <xs:attribute name="previewfile2"/>
+      <xs:attribute name="shown" type="xs:string"/>
+      <xs:attribute name="type" type="xs:string"/>
     </xs:complexType>
-  </xs:element>  <xs:element name="description" type="xs:string"/>
+  </xs:element>  
+  <xs:element name="description" type="xs:string"/>
   <xs:element name="comment" type="xs:string"/>
+  <xs:element name="styleProperty">
+    <xs:complexType>
+      <xs:attribute name="name" type="xs:string"/>
+      <xs:attribute name="value" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="criteria">
     <xs:complexType>
       <xs:attribute name="action" use="required" type="xs:NCName"/>

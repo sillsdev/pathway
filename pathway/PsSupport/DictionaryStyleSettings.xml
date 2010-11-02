@@ -1,43 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="8">
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="9">
   <settings>
-    <property name="InputPath" value=""/>
-    <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Dictionary"/>
-    <property name="UserSheetPath" value="%(AppData)s/SIL/Pathway/Dictionary"/>
-    <property name="PublicationLocation"
-      value="$(Documents)s/$(Base)s/$(CurrentProject)s/Dictionary/$(StyleSheet)s_$(DateTime)s"/>
-    <property name="MasterSheetPath" value="Styles/Dictionary"/>
-    <property name="IconPath" value="Icons"/>
-    <property name="SamplePath" value="Samples/Dictionary"/>
-    <property name="BaseStyles" value="Dictionary.css"/>
-    <property name="DefaultIcon" value="Graphic/book.png"/>
-    <property name="CurrentInput" value=""/>
-    <property name="InputType" value="Dictionary"/>
-    <property name="LastTask" value="Quick print"/>
-    <property name="PreviewType" value="Prince"/>
-    <property name="CssEditor" value="C:/Windows/Notepad.exe"/>
-    <property name="SelectedIcon" value="Graphic/arrow.png"/>
-    <property name="MissingIcon" value="Graphic/missing.png"/>
-    <property name="Help" value="PsDoc.chm"/>
-    <property name="PrintVia" value="OpenOffice"/>
-    <property name="ConfigureDictionary" value="True"/>
-    <property name="ReversalIndexes" value="True"/>
-    <property name="GrammerSketch" value="False"/>
-    <property name="LayoutSelected" value="FieldWorksStyles"/>
-    <property name="ExtraProcessing" value="True"/>
-    <property name="Media" value="paper"/>
+    <property name="InputPath" value="" />
+    <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Dictionary" />
+    <property name="UserSheetPath" value="%(AppData)s/SIL/Pathway/Dictionary" />
+    <property name="PublicationLocation" value="$(Documents)s/$(Base)s/$(CurrentProject)s/Dictionary/$(StyleSheet)s_$(DateTime)s" />
+    <property name="MasterSheetPath" value="Styles/Dictionary" />
+    <property name="IconPath" value="Icons" />
+    <property name="SamplePath" value="Samples/Dictionary" />
+    <property name="BaseStyles" value="Dictionary.css" />
+    <property name="DefaultIcon" value="Graphic/book.png" />
+    <property name="CurrentInput" value="" />
+    <property name="InputType" value="Dictionary" />
+    <property name="LastTask" value="Quick print" />
+    <property name="PreviewType" value="Prince" />
+    <property name="CssEditor" value="C:/Windows/Notepad.exe" />
+    <property name="SelectedIcon" value="Graphic/arrow.png" />
+    <property name="MissingIcon" value="Graphic/missing.png" />
+    <property name="Help" value="PsDoc.chm" />
+    <property name="PrintVia" value="OpenOffice" />
+    <property name="ConfigureDictionary" value="True" />
+    <property name="ReversalIndexes" value="True" />
+    <property name="GrammerSketch" value="False" />
+    <property name="LayoutSelected" value="FieldWorksStyles" />
+    <property name="ExtraProcessing" value="True" />
+    <property name="Media" value="paper" />
   </settings>
   <defaultSettings>
-    <property name="PrintVia" value="OpenOffice"/>
-    <property name="ConfigureDictionary" value="True"/>
-    <property name="ReversalIndexes" value="True"/>
-    <property name="GrammerSketch" value="False"/>
-    <property name="LayoutSelected" value="FieldWorksStyles"/>
-    <property name="ExtraProcessing" value="True"/>
-    <property name="PublicationLocation"
-      value="$(Documents)s/$(Base)s/$(CurrentProject)s/Dictionary/$(StyleSheet)s_$(DateTime)s"/>
-    <property name="Media" value="paper"/>
+    <property name="PrintVia" value="OpenOffice" />
+    <property name="ConfigureDictionary" value="True" />
+    <property name="ReversalIndexes" value="True" />
+    <property name="GrammerSketch" value="False" />
+    <property name="LayoutSelected" value="FieldWorksStyles" />
+    <property name="ExtraProcessing" value="True" />
+    <property name="PublicationLocation" value="$(Documents)s/$(Base)s/$(CurrentProject)s/Dictionary/$(StyleSheet)s_$(DateTime)s" />
+    <property name="Media" value="paper" />
   </defaultSettings>
   <features>
     <!--feature name="Booklet">
@@ -45,8 +42,8 @@
             <option name="No" file=""/>
         </feature-->
     <feature name="Justified">
-      <option name="Yes" file="Justified_Yes.css"/>
-      <option name="No" file="Justified_No.css"/>
+      <option name="Yes" file="Justified_Yes.css" />
+      <option name="No" file="Justified_No.css" />
     </feature>
     <feature name="VerticalJustify">
       <option name="Top" file="VerticalJustify_Top.css" />
@@ -54,116 +51,116 @@
       <option name="Bottom" file="VerticalJustify_Bottom.css" />
     </feature>
     <feature name="Page Size">
-      <option name="A4" file="Page_size_A4.css"/>
-      <option name="A5" file="Page_size_A5.css"/>
-      <option name="C5" file="Page_size_C5.css"/>
-      <option name="A6" file="Page_size_A6.css"/>
-      <option name="Letter" file="Page_size_Letter.css"/>
-      <option name="Half letter" file="Page_size_Half_Letter.css"/>
-      <option name="6in x 9in" file="Page_size_6inx9in.css"/>
-      <option name="5.25in x 8.25in" file="Page_size_GPS1.css"/>
-      <option name="5.8in x 8.7in" file="Page_size_GPS2.css"/>
+      <option name="A4" file="Page_size_A4.css" />
+      <option name="A5" file="Page_size_A5.css" />
+      <option name="C5" file="Page_size_C5.css" />
+      <option name="A6" file="Page_size_A6.css" />
+      <option name="Letter" file="Page_size_Letter.css" />
+      <option name="Half letter" file="Page_size_Half_Letter.css" />
+      <option name="6in x 9in" file="Page_size_6inx9in.css" />
+      <option name="5.25in x 8.25in" file="Page_size_GPS1.css" />
+      <option name="5.8in x 8.7in" file="Page_size_GPS2.css" />
     </feature>
     <feature name="Columns">
-      <option name="1" file="Columns_1.css" icon="column1.png"/>
-      <option name="2" file="Columns_2.css" icon="column2b.png"/>
+      <option name="1" file="Columns_1.css" icon="column1.png" />
+      <option name="2" file="Columns_2.css" icon="column2b.png" />
     </feature>
     <feature name="Sense">
-      <option name="Bullet" file="Sense_Bullet.css"/>
-      <option name="No Change" file="Sense_nc.css"/>
+      <option name="Bullet" file="Sense_Bullet.css" />
+      <option name="No change" file="Sense_nc.css" />
     </feature>
     <feature name="Example">
-      <option name="Callout" file="Example_Callout.css"/>
-      <option name="No change" file="Example_nc.css"/>
+      <option name="Callout" file="Example_Callout.css" />
+      <option name="No change" file="Example_nc.css" />
     </feature>
     <feature name="Writing System">
-      <option name="Seperator" file="Writing_System_Separator.css"/>
-      <option name="No change" file="Writing_System_nc.css"/>
+      <option name="Seperator" file="Writing_System_Separator.css" />
+      <option name="No change" file="Writing_System_nc.css" />
     </feature>
     <feature name="Language Tag">
-      <option name="No" file="Language_Tag_No.css"/>
-      <option name="Yes" file="Language_Tag_Yes.css"/>
+      <option name="No" file="Language_Tag_No.css" />
+      <option name="Yes" file="Language_Tag_Yes.css" />
     </feature>
     <feature name="Font">
-      <option name="Charis SIL" file="Font_Charis.css"/>
-      <option name="Doulos SIL" file="Font_Doulos.css"/>
-      <option name="Sophia SIL" file="Font_Sophia.css"/>
-      <option name="Charis SIL Compact" file="font_charis_compact.css"/>
-      <option name="No Change" file="Font_nc.css"/>
+      <option name="Charis SIL" file="Font_Charis.css" />
+      <option name="Doulos SIL" file="Font_Doulos.css" />
+      <option name="Sophia SIL" file="Font_Sophia.css" />
+      <option name="Charis SIL Compact" file="font_charis_compact.css" />
+      <option name="No Change" file="Font_nc.css" />
     </feature>
     <feature name="Font Size">
-      <option name="12" file="Font_Size_12.css"/>
-      <option name="11" file="Font_Size_11.css"/>
-      <option name="10" file="Font_Size_10.css"/>
-      <option name="9" file="Font_Size_9.css"/>
-      <option name="No Change" file="Font_Size_nc.css"/>
+      <option name="12" file="Font_Size_12.css" />
+      <option name="11" file="Font_Size_11.css" />
+      <option name="10" file="Font_Size_10.css" />
+      <option name="9" file="Font_Size_9.css" />
+      <option name="No Change" file="Font_Size_nc.css" />
     </feature>
     <feature name="Headword Size">
-      <option name="14" file="Headword_Size_14.css"/>
-      <option name="12" file="Headword_Size_12.css"/>
-      <option name="11" file="Headword_Size_11.css"/>
-      <option name="10" file="Headword_Size_10.css"/>
-      <option name="9" file="Headword_Size_9.css"/>
-      <option name="8" file="Headword_Size_8.css"/>
-      <option name="No Change" file="Headword_Size_nc.css"/>
+      <option name="14" file="Headword_Size_14.css" />
+      <option name="12" file="Headword_Size_12.css" />
+      <option name="11" file="Headword_Size_11.css" />
+      <option name="10" file="Headword_Size_10.css" />
+      <option name="9" file="Headword_Size_9.css" />
+      <option name="8" file="Headword_Size_8.css" />
+      <option name="No Change" file="Headword_Size_nc.css" />
     </feature>
     <feature name="Leading">
-      <option name="11" file="Leading_11.css"/>
-      <option name="12" file="Leading_12.css"/>
-      <option name="13" file="Leading_13.css"/>
-      <option name="14" file="Leading_14.css"/>
-      <option name="16" file="Leading_16.css"/>
-      <option name="24" file="Leading_24.css"/>
-      <option name="No Change" file="Leading_nc.css"/>
+      <option name="11" file="Leading_11.css" />
+      <option name="12" file="Leading_12.css" />
+      <option name="13" file="Leading_13.css" />
+      <option name="14" file="Leading_14.css" />
+      <option name="16" file="Leading_16.css" />
+      <option name="24" file="Leading_24.css" />
+      <option name="No Change" file="Leading_nc.css" />
     </feature>
     <feature name="Background">
-      <option name="Transparent" file="Background_Transparent.css"/>
-      <option name="No Change" file="Background_nc.css"/>
+      <option name="Transparent" file="Background_Transparent.css" />
+      <option name="No Change" file="Background_nc.css" />
     </feature>
     <feature name="Embedded Spans">
-      <option name="Writing System Formatted" file="Embedded_Spans.css"/>
-      <option name="Writing System Compact Formatted" file="Compact_Embedded_Spans.css"/>
-      <option name="No Change" file="Embedded_Spans_nc.css"/>
+      <option name="Writing System Formatted" file="Embedded_Spans.css" />
+      <option name="Writing System Compact Formatted" file="Compact_Embedded_Spans.css" />
+      <option name="No Change" file="Embedded_Spans_nc.css" />
     </feature>
     <feature name="Pictures">
-      <option name="Yes" file="Pictures_Yes.css"/>
-      <option name="No" file="Pictures_No.css"/>
+      <option name="Yes" file="Pictures_Yes.css" />
+      <option name="No" file="Pictures_No.css" />
     </feature>
     <feature name="Running Head">
-      <option name="Every Page" file="Running_Head_Every_Page.css"/>
-      <option name="Mirrored" file="Running_Head_Mirrored.css"/>
+      <option name="Every Page" file="Running_Head_Every_Page.css" />
+      <option name="Mirrored" file="Running_Head_Mirrored.css" />
     </feature>
     <feature name="Rules">
-      <option name="Yes" file="Rules_Yes.css"/>
-      <option name="No" file="Rules_No.css"/>
+      <option name="Yes" file="Rules_Yes.css" />
+      <option name="No" file="Rules_No.css" />
     </feature>
-<feature name="FileProduced">
+    <feature name="FileProduced">
       <option name="One" file="Rules_Yes.css" />
       <option name="One Per Letter" file="Rules_Yes.css" />
     </feature>
   </features>
   <categories>
     <category name="Publisher" select="Wycliffe">
-      <item name="Wycliffe"/>
-      <item name="UBS"/>
+      <item name="Wycliffe" />
+      <item name="UBS" />
     </category>
-    <category name="Media" select="Paper">
-      <item name="Paper"/>
-      <item name="Mobile"/>
-      <item name="Web"/>
-      <item name="Others"/>
+    <category name="Media" select="paper">
+      <item name="Paper" />
+      <item name="Mobile" />
+      <item name="Web" />
+      <item name="Others" />
     </category>
     <category name="Location" select="Cameroon">
-      <item name="Cameroon"/>
-      <item name="Africa"/>
-      <item name="Indonesia"/>
-      <item name="Philippines"/>
+      <item name="Cameroon" />
+      <item name="Africa" />
+      <item name="Indonesia" />
+      <item name="Philippines" />
     </category>
   </categories>
   <roles select="Output User">
-    <role name="Output User" icon="user.png"/>
-    <role name="Coordinator" icon="coordinator.png"/>
-    <role name="System Designer" icon="designer.png"/>
+    <role name="Output User" icon="user.png" />
+    <role name="Coordinator" icon="coordinator.png" />
+    <role name="System Designer" icon="designer.png" />
   </roles>
   <styles>
     <paper>
@@ -280,18 +277,18 @@
     </others>
   </styles>
   <tasks>
-    <task name="Quick print" style="FieldWorksStyles" icon="Graphic/quick.png"/>
-    <task name="Village check" style="Draft" icon="Graphic/draft.png"/>
-    <task name="Trial print" style="LikeBuangPNG" icon="Graphic/trialPrint.png"/>
-    <task name="Final print" style="TwoColumn" icon="Graphic/final.png"/>
-    <task name="Web publish" style="OneColumn" icon="Graphic/web.png"/>
-    <task name="Cell publish" style="GoBible" icon="Graphic/cell.png"/>
+    <task name="Quick print" style="FieldWorksStyles" icon="Graphic/quick.png" />
+    <task name="Village check" style="Draft" icon="Graphic/draft.png" />
+    <task name="Trial print" style="LikeBuangPNG" icon="Graphic/trialPrint.png" />
+    <task name="Final print" style="TwoColumn" icon="Graphic/final.png" />
+    <task name="Web publish" style="OneColumn" icon="Graphic/web.png" />
+    <task name="Cell publish" style="GoBible" icon="Graphic/cell.png" />
   </tasks>
   <column-width>
-    <column name="0" width="85"/>
-    <column name="1" width="318"/>
-    <column name="2" width="91"/>
-    <column name="3" width="52"/>
-    <column name="4" width="46"/>
+    <column name="0" width="85" />
+    <column name="1" width="318" />
+    <column name="2" width="91" />
+    <column name="3" width="52" />
+    <column name="4" width="46" />
   </column-width>
 </stylePick>
