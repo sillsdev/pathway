@@ -71,6 +71,9 @@ rmdir /s/q bin
 cd %base%\PdfConvert
 rmdir /s/q obj
 rmdir /s/q bin
+cd %base%\epubConvert
+rmdir /s/q obj
+rmdir /s/q bin
 cd %base%\GoBibleConvert
 rmdir /s/q obj
 rmdir /s/q bin
@@ -110,6 +113,8 @@ cd %base%\Test\CssDialog\TestFiles
 rmdir /s /q output
 cd %base%\Test\CssParser\TestFiles
 del /q gramOutput\*.*
+cd %base%\Test\epubConvert\TestFiles
+rmdir /s /q Output
 cd %base%\Test\GoBibleConvert\TestFiles
 rmdir /s /q Output
 cd %base%\Test\LogosConvert\TestFiles
