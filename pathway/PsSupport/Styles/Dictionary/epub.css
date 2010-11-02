@@ -1,0 +1,97 @@
+body {
+font-size: 11pt;
+font-weight: normal;
+font-style: normal;
+line-height: 115%;
+}
+.letter {
+font-size : 250%;
+font-weight : normal;
+font-style : normal;
+text-align : center;
+text-indent : 0;
+margin-left : 0;
+padding-bottom : 2%;
+padding-top : 2%;
+}
+.entry {
+margin-left : 0;
+margin-left : 12pt;
+padding-bottom: 1%;
+}
+.headword, .headword-minor {
+font-weight: bold;
+font-style: normal;
+margin-right: 10px;
+}
+.partofspeech {
+font-weight: normal;
+font-style: italic;
+margin-right: 10px;
+}
+.example {
+font-weight: bold;
+font-style: italic;
+margin-right: 5px;
+margin-left: 5px;
+}
+.LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub, 
+.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub,
+.xsensenumber {
+font-weight: bold;
+font-style: normal;
+margin-left: 5px;
+margin-right: 5px;
+}
+.xhomographnumber {
+font-size : 67%;
+font-weight: normal;
+font-style: normal;
+vertical-align : -33%;
+text-indent : 0;
+margin-left : 0;
+padding-right: 2px;
+line-height: 80%;
+}
+.REVERSE_SOLIDUSCitation_Line1, .Line1 {
+text-align : left;
+margin-left : 24pt;
+text-indent : -12pt;
+padding-left : 0;
+}
+.REVERSE_SOLIDUSCitation_Line2, .Line2 {
+text-align : left;
+margin-left : 24pt;
+text-indent : -6pt;
+padding-left : 0;
+}
+.REVERSE_SOLIDUSCitation_Line3, .Line3 {
+text-align : left;
+margin-left : 24pt;
+text-indent : 0;
+padding-left : 0;
+}
+.pictureRight {
+float : right;
+text-align : center;
+}
+.pictureLeft {
+float : left;
+position : relative;
+left : -2pc;
+text-align : center;
+}
+.pictureCenter {
+clear : both;
+text-align : center;
+margin-top : 1%;
+}
+.pictureCaption {
+font-size : 80%;
+font-weight : normal;
+font-style : italic;
+display : block;
+text-align : center;
+text-transform : capitalize;
+margin-bottom : .5%;
+}

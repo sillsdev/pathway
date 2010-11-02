@@ -1,0 +1,258 @@
+body {
+font-size: 13pt;
+font-weight: normal;
+font-style: normal;
+line-height: 115%;
+}
+.Title_Main {
+font-size : 250%;
+font-weight : normal;
+font-style : normal;
+text-align : center;
+text-indent : 0;
+margin-left : 0;
+padding-bottom : 2%;
+padding-top : 2%;
+}
+.Title_Secondary {
+display : block;
+font-size : 50%; /* this is 50% of the enclosing Title_Main block, or 125% */
+font-weight : normal;
+font-style : normal;
+text-align : center;
+text-indent : 0;
+margin-left : 0;
+padding-bottom : 2%;
+padding-top : 2%;
+}
+.Chapter_Number {
+font-size : 250%;
+font-weight : normal;
+font-style : normal;
+text-indent : 0;
+margin-left : 0;
+padding-top: 10px;
+padding-left: 0px;
+padding-right: 2px;
+padding-bottom: 1px;
+float : left;
+}
+.Paragraph1 {
+margin-left : 0;
+}
+.Paragraph {
+/*text-indent : 12pt;*/
+margin-left : 12pt;
+}
+.scrBook {
+clear : both;
+}
+/* hidden items */
+.scrBookName, .Verse_Number1 {
+display : none;
+}
+.scrSection {
+text-align : left;
+}
+.Section_Head {
+font-size : 85%;
+font-weight : bold;
+font-style : normal;
+text-align : center;
+text-indent : 0;
+margin-left : 0;
+margin-bottom: 0;
+padding-bottom : 1%;
+padding-top : 2%;
+}
+.Note_General_Paragraph span {
+display: none;
+}
+.footnotes {
+border-top: 1px solid #ccc;
+font-size: 85%;
+padding-top: 1%;
+margin-top: 1%;
+padding-left: 0;
+margin-left : 12pt;
+margin-right: 12pt;
+list-style: none;
+}
+.Note_CrossHYPHENReference_Paragraph span {
+display: none;
+}
+.Note_CrossHYPHENReference_Paragraph {
+font-size : 67%;
+text-indent : 0;
+margin-left : 0;
+padding-left: 2px;
+vertical-align: -10%;
+line-height:80%;
+display : inline;
+list-style-position : inside;
+}
+.Note_General_Paragraph {
+font-size : 67%;
+text-indent : 0;
+margin-left : 0;
+padding-left: 2px;
+display : inline;
+list-style-position : inside;
+line-height:80%;
+}
+.Speech_Line1 {
+text-indent : 0;
+margin-left : 0;
+}
+.Speech_Line2 {
+text-indent : -24pt;
+margin-left : 24pt;
+padding-left : 12pt;
+}
+.Verse_Number {
+font-size : 67%;
+vertical-align : 33%;
+text-indent : 0;
+margin-left : 0;
+padding-right: 2px;
+}
+.Chapter_Head {
+padding-top : 1%;
+padding-bottom : 1%;
+}
+.Emphasis {
+font-style : italic;
+text-indent : 0;
+margin-left : 0;
+}
+.Inscription {
+font-weight : bold;
+font-style : normal;
+text-align : center;
+text-indent : 0;
+margin-left : 0;
+padding-bottom : 0;
+padding-top : 0;
+margin-top : 1%;
+margin-bottom : .5%;
+}
+.Inscription_Paragraph {
+text-indent : 0.2in;
+margin-left : 0;
+}
+.Intro_List_Item1 {
+text-indent : -18pt;
+margin-left : 36pt;
+}
+.Intro_Paragraph {
+text-indent : 0.2in;
+margin-left : 0;
+}
+.Intro_Section_Head {
+font-weight : bold;
+font-style : normal;
+text-align : left;
+text-indent : 0;
+margin-left : 0;
+margin-top : 3pt;
+margin-bottom : 3pt;
+}
+.REVERSE_SOLIDUSCitation_Line1, .Line1 {
+text-align : left;
+margin-left : 24pt;
+text-indent : -12pt;
+padding-left : 0;
+}
+.REVERSE_SOLIDUSCitation_Line2, .Line2 {
+text-align : left;
+margin-left : 24pt;
+text-indent : -6pt;
+padding-left : 0;
+}
+.REVERSE_SOLIDUSCitation_Line3, .Line3 {
+text-align : left;
+margin-left : 24pt;
+text-indent : 0;
+padding-left : 0;
+}
+.Note_CrossHYPHENReference_Paragraph {
+text-indent : 0;
+margin-left : 0;
+display : inline;
+list-style-position : inside;
+}
+.Paragraph_Continuation {
+text-indent : 0;
+margin-left : 0;
+}
+.parallel_passage_reference {
+font-style : italic;
+}
+.scrIntroSection {
+text-align : left;
+}
+.Section_Head_Major {
+font-weight : bold;
+font-style : normal;
+text-align : center;
+text-indent : 0;
+margin-left : 0;
+margin-top : 8pt;
+}
+.Section_Head_Minor {
+font-weight : bold;
+font-style : normal;
+text-align : center;
+text-indent : 0;
+margin-left : 0;
+margin-top : 8pt;
+}
+.Stanza_Break {
+text-indent : 0;
+margin-left : 0;
+}
+.Verse_Number {
+vertical-align : super;
+vertical-align : top;
+text-indent : 0;
+margin-left : 0;
+}
+.Verse_Number_In_Note {
+vertical-align : super;
+vertical-align : top;
+text-indent : 0;
+margin-left : 0;
+}
+.pictureRight {
+float : right;
+text-align : center;
+}
+.pictureLeft {
+float : left;
+position : relative;
+left : -2pc;
+text-align : center;
+}
+.pictureCenter {
+clear : both;
+text-align : center;
+margin-top : 1%;
+}
+.pictureCaption {
+font-size : 80%;
+font-weight : normal;
+font-style : italic;
+display : block;
+text-align : center;
+text-transform : capitalize;
+margin-bottom : .5%;
+}
+.border {
+border-top : 0.5pt solid #808080;
+text-align : center;
+margin-left : 1in;
+margin-right : 1in;
+margin-top : 9pt;
+margin-bottom : 18pt;
+content : "\00A0";
+}
