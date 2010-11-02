@@ -126,6 +126,8 @@
     </Compile>
     <Compile Include="CssParser\ClassInfoTest.cs" />
     <Compile Include="CssParser\CssTreeTest.cs" />
+    <Compile Include="epubConvert\EmbeddedFontTest.cs" />
+    <Compile Include="epubConvert\ExportepubTest.cs" />
     <Compile Include="FileUtilsTest.cs" />
     <Compile Include="GoBibleConvert\CheckCV_XHTMLTest.cs" />
     <Compile Include="GoBibleConvert\GoBibleTest.cs" />
@@ -218,6 +220,10 @@
     <ProjectReference Include="..\CssParser\CssParser.csproj">
       <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
       <Name>CssParser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\epubConvert\epubConvert.csproj">
+      <Project>{B19037F2-26F7-48A2-9301-B5CA335C6824}</Project>
+      <Name>epubConvert</Name>
     </ProjectReference>
     <ProjectReference Include="..\GoBibleConvert\GoBibleConvert.csproj">
       <Project>{C7A3F4E5-1F86-4D22-AB4F-5BEA0D923DDD}</Project>
