@@ -18,10 +18,10 @@ xcopy %base%\PdfConvert\%cfg%\PdfConvert.* . /y
 xcopy %base%\WordPressConvert\%cfg%\WordPressConvert.* . /y
 xcopy %base%\XeTeXConvert\%cfg%\XeTeXConvert.* . /y
 xcopy %base%\LogosConvert\%cfg%\LogosConvert.* . /y
+xcopy %base%\epubConvert\%cfg%\epubConvert.* . /y
 if "%1" == "ReleaseSE" goto nogobible
 if "%1" == "Release7SE" goto nogobible
 :justgobible
-xcopy %base%\epubConvert\%cfg%\epubConvert.* . /y
 xcopy %base%\GoBibleConvert\%cfg%\GoBibleConvert.* . /y
 xcopy %base%\ParatextSupport\%cfg%\ParatextSupport.* . /y
 xcopy %base%\PsSupport\ScriptureStyleSettings.xml . /q /y
