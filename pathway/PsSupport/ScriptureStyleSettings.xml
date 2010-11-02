@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="9">
   <settings>
     <property name="InputPath" value="%(AppData)s/SIL/Pathway" />
@@ -111,6 +111,14 @@
     <feature name="RedLetter">
       <option name="Yes" file="Rules_Yes.css" />
       <option name="No" file="Rules_Yes.css" />
+    </feature>
+    <feature name="EmbedFonts">
+        <option name="Yes" file="Rules_Yes.css" />
+        <option name="No" file="Rules_Yes.css" />
+    </feature>
+    <feature name="Subject">
+        <option name="Religion and Spirituality" file="Rules_Yes.css" />
+        <option name="Reference" file="Rules_Yes.css" />
     </feature>
   </features>
   <categories>
@@ -242,9 +250,24 @@
       </style>
     </web>
     <others>
-      <style name="5.25x8.25in 11pt Left - Others" file="GPS11L11.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p2.jpg">
-        <description>5.25x8.25in - 1 Col - Left - Charis 11 on 13</description>
-      </style>
+        <style name="EBook (epub)" file="epub.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg">
+            <description>1 column flowed text, left aligned, 13pt font</description>
+			<styleProperty name="EmbedFonts" value="Yes"/>
+			<styleProperty name="Creator" value=" " />
+			<styleProperty name="Publisher" value=" " />
+			<styleProperty name="Type" value=" " />
+			<styleProperty name="Source" value=" " />
+			<styleProperty name="Format" value=" " />
+			<styleProperty name="Contributor" value=" " />
+			<styleProperty name="Relation" value=" " />
+			<styleProperty name="Coverage" value=" " />
+            <styleProperty name="FileProduced" value="One" />
+            <styleProperty name="Information" value="Bible text exported from FieldWorks Translation Editor." />
+            <styleProperty name="Copyright" value="© " />
+        </style>
+        <style name="5.25x8.25in 11pt Left - Others" file="GPS11L11.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p2.jpg">
+            <description>5.25x8.25in - 1 Col - Left - Charis 11 on 13</description>
+        </style>
     </others>
   </styles>
   <tasks>
