@@ -911,7 +911,8 @@ namespace SIL.Tool
 
             Dictionary<string, XmlWriter> writers = new Dictionary<string, XmlWriter>();
 
-            string allUserPath = GetAllUserPath();
+            //string allUserPath = GetAllUserPath();
+            string allUserPath = Path.GetTempPath(); 
             for (int i = 0; i < counter; i++)
             {
                 string fileName = Path.Combine(allUserPath, "PartFile" + (i + 1) + ".xhtml");
