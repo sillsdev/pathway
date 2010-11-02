@@ -1458,7 +1458,14 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("text:style-name", styleName);
                 _isStyleExist.Remove(styleName);
             }
-
+            else
+            {
+                string divClass = _allDivStack.Peek().ToString();
+                if (divClass.IndexOf("TitleMain_") > -1)
+                {
+                    _writer.WriteAttributeString("text:style-name", styleName);
+                }
+            }
 
             ////bool isStyle = _isStyleExist.Peek();
             //_writer.WriteStartElement("text:span");
