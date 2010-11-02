@@ -219,6 +219,10 @@ namespace SIL.PublishingSolution
                 sb.Append(Path.DirectorySeparatorChar);
                 sb.Append("OEBPS");
                 string contentFolder = sb.ToString();
+                if (!Directory.Exists(contentFolder))
+                {
+                    Directory.CreateDirectory(contentFolder);
+                }
 
                 // copy the embedded font if needed
                 if (EmbedFonts)

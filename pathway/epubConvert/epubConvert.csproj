@@ -130,4 +130,9 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>xcopy $(TargetDir)$(TargetFileName) $(SolutionDir)ConfigurationTool\bin\$(ConfigurationName)\$(TargetFileName) /y
+xcopy $(TargetDir)$(TargetName).pdb $(SolutionDir)ConfigurationTool\bin\$(ConfigurationName)\$(TargetName).pdb /y
+</PostBuildEvent>
+  </PropertyGroup>
 </Project>
