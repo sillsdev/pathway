@@ -547,7 +547,7 @@ namespace SIL.PublishingSolution
             string backend = cmbPrintVia.Text.ToLower();
             string media;
 
-            if (backend == "gobible")
+            if (backend == "gobible" || backend == "e-book (.epub)")
             {
                 media = "mobile";
             }
