@@ -32,7 +32,7 @@ xcopy %base%\XeTeXConvert\%cfg%\XeTeXConvert.* . /y
 xcopy %base%\PdfConvert\%cfg%\PdfConvert.* . /y
 xcopy %base%\WordPressConvert\%cfg%\WordPressConvert.* . /y
 xcopy %base%\LogosConvert\%cfg%\LogosConvert.* . /y
-xcopy %base%\GoBibleConvert\bin\%cfg%\epubConvert.* . /y
+xcopy %base%\epubConvert\%cfg%\epubConvert.* . /y
 goto dogobible
 :removeXetex
 rmdir /s /q Wordpress

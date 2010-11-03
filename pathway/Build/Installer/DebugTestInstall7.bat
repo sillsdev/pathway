@@ -7,6 +7,10 @@ if not exist "C:\svn\btai\PublishingSolution" goto not64
 set base=C:\svn\btai\PublishingSolution
 set installBase=C:\Program Files (x86)\SIL\Pathway7
 :not64
+if not exist "C:\svn\google\pathway" goto notPw64
+set base=C:\svn\google\pathway
+set installBase=C:\Program Files (x86)\SIL\Pathway7
+:notPw64
 set cfg=\bin\Debug
 set src=%BASE%\PsExport%cfg%
 if exist %src%\PsExport.dll goto goodCfg

@@ -131,6 +131,8 @@
     </Compile>
     <Compile Include="CssParser\ClassInfoTest.cs" />
     <Compile Include="CssParser\CssTreeTest.cs" />
+    <Compile Include="epubConvert\EmbeddedFontTest.cs" />
+    <Compile Include="epubConvert\ExportepubTest.cs" />
     <Compile Include="FileUtilsTest.cs" />
     <Compile Include="GoBibleConvert\CheckCV_XHTMLTest.cs" />
     <Compile Include="GoBibleConvert\GoBibleTest.cs" />
@@ -184,7 +186,8 @@
     <Compile Include="CssParser\MakePropertyTest.cs" />
     <Compile Include="OpenOfficeConvert\MapOfficeAttributeTest.cs" />
     <Compile Include="OpenOfficeConvert\UtilityTest.cs" />
-    <Compile Include="PathPart.cs" />
+    <Compile Include="OpenOfficeWriter\OOContentXMLTest.cs" />
+    <Compile Include="OpenOfficeWriter\OOStylesXMLTest.cs" />
     <Compile Include="PsExport\PsExportTest.cs" />
     <Compile Include="OpenOfficeConvert\StylesXMLTest.cs" />
     <Compile Include="PsTool\CommonCssTest.cs" />
@@ -224,6 +227,10 @@
       <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
       <Name>CssParser60</Name>
     </ProjectReference>
+    <ProjectReference Include="..\epubConvert\epubConvert60.csproj">
+      <Project>{B19037F2-26F7-48A2-9301-B5CA335C6824}</Project>
+      <Name>epubConvert60</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GoBibleConvert\GoBibleConvert60.csproj">
       <Project>{C7A3F4E5-1F86-4D22-AB4F-5BEA0D923DDD}</Project>
       <Name>GoBibleConvert60</Name>
@@ -243,6 +250,10 @@
     <ProjectReference Include="..\OpenOfficeConvert\OpenOfficeConvert60.csproj">
       <Project>{E225E5AF-B603-41D1-BB58-E3AAE05C59FD}</Project>
       <Name>OpenOfficeConvert60</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenOfficeWriter\OpenOfficeWriter60.csproj">
+      <Project>{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}</Project>
+      <Name>OpenOfficeWriter60</Name>
     </ProjectReference>
     <ProjectReference Include="..\PdfConvert\PdfConvert60.csproj">
       <Project>{E75BC85C-6240-45F0-ADBF-F0F80EEFD6D8}</Project>

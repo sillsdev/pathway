@@ -68,7 +68,7 @@ namespace Builder
 
             //Calculate Files & Features
             BuilderBL.RemoveSubFolders(instPath + @"../Files");
-            BuilderBL.DoBatch(instPath, "PsExport", "CopyFwDlls.bat", args[1]);
+            //BuilderBL.DoBatch(instPath, "PsExport", "CopyFwDlls.bat", args[1]);
             BuilderBL.DoBatch(instPath, "PublishingSolutionExe", "postBuild.bat", args[1]);
             BuilderBL.CopyRelaseFiles(instPath, "PublishingSolutionExe", "PublishingSolution", RELEASE);
             BuilderBL.CopyFile(instPath, Readme, @"../Files/PublishingSolution");
