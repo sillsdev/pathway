@@ -452,6 +452,8 @@ namespace SIL.PublishingSolution
                 _newProperty[newStyleBefore] = _tempStyle;
                 IdAllClass[newStyleBefore] = _tempStyle;
                 _psuedoBeforeStyle.StyleName = newStyleBefore;
+                ParentClass[newStyleBefore] = _parentStyleName + "|" + _tagType;
+
             }
 
             string styleAfter = MatchCssStyle(ancestorFontSize, "after", multiClassList);
@@ -462,6 +464,7 @@ namespace SIL.PublishingSolution
                 _newProperty[newStyleAfter] = _tempStyle;
                 IdAllClass[newStyleAfter] = _tempStyle;
                 _psuedoAfterStyle.StyleName = newStyleAfter;
+                ParentClass[newStyleAfter] = _parentStyleName + "|" + _tagType;
             }
 
             string styleContains = MatchCssStyle(ancestorFontSize, "contains", multiClassList);
@@ -472,6 +475,7 @@ namespace SIL.PublishingSolution
                 _newProperty[newStyleContains] = _tempStyle;
                 IdAllClass[newStyleContains] = _tempStyle;
                 _psuedoContainsStyle.StyleName = newStyleContains;
+                ParentClass[newStyleContains] = _parentStyleName + "|" + _tagType;
             }
 
             return newStyleName;

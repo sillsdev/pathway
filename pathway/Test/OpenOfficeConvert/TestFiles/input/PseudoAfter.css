@@ -76,7 +76,7 @@
     color: rgb(0,0,0);	/* cascaded environment */
     background-color: rgb(255,255,255);	/* cascaded environment */
 }
-.pronunciation:before { content: "[" }
+//.pronunciation:before { content: "[" }
 .pronunciation:after { content: "]" }
 .pronunciation>.xitem + .xitem:before { content: " " }
 

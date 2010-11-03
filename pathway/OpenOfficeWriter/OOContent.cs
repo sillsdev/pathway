@@ -815,9 +815,23 @@ namespace SIL.PublishingSolution
         {
             bool IsStyleExist = false;
             StartElementBase(_IsHeadword);
-
+            Psuedo();
         }
 
+        private void Psuedo()
+        {
+            // Psuedo Before
+            if (_psuedoBeforeStyle != null)
+            {
+                _psuedoBefore.Add(_psuedoBeforeStyle);
+            }
+
+            // Psuedo After
+            if (_psuedoAfterStyle != null)
+            {
+                _psuedoAfter[_childName] = _psuedoAfterStyle;
+            }
+        }
         /// <summary>
         /// To insert the Footnote symbol and the Text
         /// </summary>

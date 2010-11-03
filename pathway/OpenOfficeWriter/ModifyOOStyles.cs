@@ -162,7 +162,21 @@ namespace SIL.PublishingSolution
                 else if (_allTextProperty.ContainsKey(propName))
                 {
                     if (!_textProperty.ContainsKey(prop.Key))
-                        _textProperty[_allTextProperty[propName]  + prop.Key] = prop.Value;
+                    {
+                        string keyName = _allTextProperty[propName] + prop.Key;
+                        _textProperty[keyName] = prop.Value;
+
+                        // adding complex attribute
+                        if (keyName == "fo:font-weight" || keyName == "fo:font-size" || keyName == "fo:font-family")
+                        {
+                            string propertyName = keyName;
+                            propertyName = propertyName == "fo:font-family"
+                                               ? "style:font-name"
+                                               : propertyName.Replace("fo:", "style:");
+                            _textProperty[propertyName + "-complex"] = prop.Value;
+                        }
+                    }
+
                 }
                 else if (_allColumnProperty.ContainsKey(propName)) // fullString property
                 {
