@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
-<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">&apos;Constant ReferenceFormat for User Desire
-
-&apos;Changed On Oct-21-2010 for TD-1625(OpenOffice: Hidden document did not open)
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
+&apos;Changed On Nov-03-2010 for TD-1634(Turn off non-printing characters before repaginating for macro)
 
 &apos; Changed message content from &quot;word&quot; to &quot;book, chapter and / or verse&quot;
 &apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
@@ -20,6 +19,21 @@ Dim strStartVerse As String
 Dim strEndVerse As String
 Dim strFirstParagraph
 Dim VerseNumber As String
+
+&apos;This procedure turn off non-printing characters
+Sub TurnOffNonPrintingCharacters
+	dim document   as object
+	dim dispatcher as object
+	
+	document   = ThisComponent.CurrentController.Frame
+	dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;)
+	
+	dim args1(0) as new com.sun.star.beans.PropertyValue
+	args1(0).Name = &quot;ControlCodes&quot;
+	args1(0).Value = false
+	
+	dispatcher.executeDispatch(document, &quot;.uno:ControlCodes&quot;, &quot;&quot;, 0, args1())
+end sub
 
 &apos;This procudure enables/disables the &quot;Auto Recovery&quot;
 Sub AutoSaveEnableDisable(value as Boolean)
@@ -76,7 +90,7 @@ End Sub
 Sub StartDontForget
 
 	&apos;Msgbox &quot;Please NOTE: Use the Update References menu item or tool bar item to correct the references before printing.&quot; , 0 + 64,  &quot;Reference Reminder&quot;
-
+	TurnOffNonPrintingCharacters() 
 	dim clicked as byte
 	If IsMacroRun = true Then
 		clicked = msgbox(&quot;Headers are updated to contain the first and last book, chapter and / or verse with the &quot; + &quot;&quot;&quot;&quot; + &quot;Update References&quot; + &quot;&quot;&quot;&quot; + &quot; tool bar item or Macro menu item.&quot; &amp; chr(10) &amp; chr(10) &amp; &quot;This should be done once at the beginning and after any changes that affect what information is on a page.&quot;  &amp; chr(10) &amp; chr(10) &amp;  &quot;Would you like to update the headers now?&quot;, 4 + 32 + 256 , &quot;Run header macro?&quot;)
