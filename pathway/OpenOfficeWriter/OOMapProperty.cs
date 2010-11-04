@@ -38,8 +38,10 @@ namespace SIL.PublishingSolution
                 switch (_propertyKey)
                 {
                     case "font-weight":
-                    case "font-style":
                         FontWeight(property.Value);
+                        break;
+                    case "font-style":
+                        FontStyle(property.Value);
                         break;
                     case "text-align":
                         TextAlign(property.Value);
@@ -614,6 +616,11 @@ namespace SIL.PublishingSolution
             {
                 propertyValue = "400";
             }
+            _IDProperty[_propertyKey] = propertyValue;
+        }
+
+        public void FontStyle(string propertyValue)
+        {
             _IDProperty[_propertyKey] = propertyValue;
         }
 
