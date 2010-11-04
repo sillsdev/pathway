@@ -1,5 +1,19 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\ConfigurationTool\TE_XHTML-to-epub_XHTML.xslt" ComponentGuid="D3DF2A98-A092-469B-B844-4840D3B419EC"/>
+	<File Path="Files\ConfigurationTool\epub\mimetype" ComponentGuid="B28BF6C2-C8F4-4753-8B2A-45F3AC8A1A3A"/>
+	<File Path="Files\ConfigurationTool\epub\META-INF\container.xml" ComponentGuid="324DFF29-DD9D-4E69-A25E-2479B2BEFF26"/>
+	<File Path="Files\PathwaySupport\TE_XHTML-to-epub_XHTML.xslt" ComponentGuid="B6805E76-6DA0-4628-8997-302DA0223841"/>
+	<File Path="Files\PathwaySupport\Styles\Scripture\epub.css" ComponentGuid="9CA4477D-BE57-490F-8B64-60C2DE07CCF2"/>
+	<File Path="Files\PathwaySupport\Styles\Scripture\base_font_andika.css" ComponentGuid="BAAB1A9E-FFA7-4D90-B6A8-0BFD9FB3FF9C"/>
+	<File Path="Files\PathwaySupport\Styles\Dictionary\Font_Andika.css" ComponentGuid="0C9CF7CC-10E3-4B58-9583-5B1B8F6E564E"/>
+	<File Path="Files\PathwaySupport\Styles\Dictionary\epub.css" ComponentGuid="C4ED58CD-1A98-4E2D-A5CD-CD5225DC6593"/>
+	<File Path="Files\PathwaySupport\epub\mimetype" ComponentGuid="C1413AC2-7ED9-4346-B053-092E885DB8E6"/>
+	<File Path="Files\PathwaySupport\epub\META-INF\container.xml" ComponentGuid="2BF5F169-9033-42C0-9F73-D8ADFA32A7DF"/>
+	<File Path="Files\ConfigurationTool\Styles\Scripture\epub.css" ComponentGuid="E9ADB951-ACD7-4A72-A9AC-A3FFD7DF1668"/>
+	<File Path="Files\ConfigurationTool\Styles\Scripture\base_font_andika.css" ComponentGuid="F2902290-25F1-411C-941C-E92523E4F5CA"/>
+	<File Path="Files\ConfigurationTool\Styles\Dictionary\Font_Andika.css" ComponentGuid="D54D26DE-C8FB-4D1D-B0B7-7B8317911A2A"/>
+	<File Path="Files\ConfigurationTool\Styles\Dictionary\epub.css" ComponentGuid="825BB3B9-C8DF-492C-A894-07456432AF7D"/>
 	<File Path="Files\PublishingSolution\PdfToImage.dll" ComponentGuid="2F34D1FB-1A76-43F1-9339-3986A401CA1C"/>
 	<File Path="Files\PublishingSolution\Palaso.dll" ComponentGuid="369BCF3F-3100-408C-B210-3D4A92005C0B"/>
 	<File Path="Files\PublishingSolution\icu.net.dll" ComponentGuid="1D85806B-38AA-45E7-829C-62522EC5BC41"/>
