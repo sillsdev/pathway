@@ -50,23 +50,10 @@ namespace SIL.PublishingSolution
         bool _pseudoClassName = false;
         protected string _styleFilePath;
         string _attribClassName = string.Empty;
-        ArrayList _firstPageContentNone = new ArrayList();
+        protected ArrayList _firstPageContentNone = new ArrayList();
         protected bool isMirrored = false; //TD-410
 
-        //const string _parentSeperator = ".";
 
-        ////Marks_crop - Declaration
-        //private const double _lineLength = 0.8;
-        //private const double _gapToMargin = .2;
-        //float _PageWidth = 0.00F;
-        //float _leftMargin = 0.00F;
-        //float _rightMargin = 0.00F;
-        //float _rightPosition = 0.00F;
-        //float _PageHeight = 0.00F;
-        //float _topMargin = 0.00F;
-        //float _bottomMargin = 0.00F;
-        //float _bottomPosition = 0.00F;
-        //bool _isFirstpageDimensionChanged = false; // TD-190(marks:crop)
         #endregion
 
         #region public Variable

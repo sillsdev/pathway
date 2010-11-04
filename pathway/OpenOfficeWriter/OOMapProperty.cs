@@ -404,11 +404,11 @@ namespace SIL.PublishingSolution
         }
         public void PageHeight(string propertyValue)
         {
-            _IDProperty["Page-Height"] = Add_pt(propertyValue);
+            _IDProperty[_propertyKey] = Add_pt(propertyValue);
         }
         public void PageWidth(string propertyValue)
         {
-            _IDProperty["Page-Width"] = Add_pt(propertyValue);
+            _IDProperty[_propertyKey] = Add_pt(propertyValue);
         }
         public void MarginLeft(string propertyValue)
         {
