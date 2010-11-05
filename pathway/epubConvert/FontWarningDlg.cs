@@ -9,6 +9,9 @@ namespace epubConvert
     {
         public string MyEmbeddedFont { get; set; }
         public string SelectedFont { get; set; }
+        public int RemainingIssues { get; set; }
+        public string Languages { get; set; }
+        public bool RepeatAction { get; set; }
 
         // Note: this needs to be updated as the font folk free fabulous new font-families.
         public string[] AvailableSILFonts = new string[]
@@ -45,12 +48,18 @@ namespace epubConvert
         {
             icnWarning.Image = SystemIcons.Warning.ToBitmap();
             Text = Resources.FontWarningDlgTitle;
-            txtWarning.Text = String.Format(Resources.EmbedFontsWarning, MyEmbeddedFont);
+            txtWarning.Text = String.Format(Resources.EmbedFontsWarning, MyEmbeddedFont, Languages);
             grpOptions.Text = Resources.EmbedFontOptions;
             rdoEmbedFont.Text = Resources.EmbedFont;
             rdoConvertToSILFont.Text = Resources.ConvertToSILFont;
             ddlSILFonts.Items.AddRange(AvailableSILFonts);
             ddlSILFonts.SelectedIndex = 0;
+            if (RemainingIssues > 0)
+            {
+                chkRepeatAction.Visible = true;
+                chkRepeatAction.Text = String.Format(Resources.RepeatAction, RemainingIssues);
+                chkRepeatAction.Checked = RepeatAction;
+            }
         }
 
         private void ddlSILFonts_SelectedIndexChanged(object sender, EventArgs e)
@@ -78,6 +87,11 @@ namespace epubConvert
             // to the non-SIL font
             SelectedFont = MyEmbeddedFont;
             ddlSILFonts.Enabled = false;
+        }
+
+        private void chkRepeatAction_CheckedChanged(object sender, EventArgs e)
+        {
+            RepeatAction = chkRepeatAction.Checked;
         }
 
     }

@@ -438,6 +438,11 @@ namespace SIL.PublishingSolution
             get { return tabMobile; }
         }
 
+        public TabPage TabOthers
+        {
+            get { return tabOthers; }
+        }
+
         public Button BtnBrowse
         {
             get { return btnBrowse; }
@@ -506,6 +511,86 @@ namespace SIL.PublishingSolution
         public ToolTip ToolTip1
         {
             get { return toolTip1; }
+        }
+
+        public TextBox TxtDescription
+        {
+            get { return txtDescription; }
+        }
+
+        public Label LblDescription
+        {
+            get { return lblDescription; }
+        }
+
+        public Label LblPublisher
+        {
+            get { return lblPublisher; }
+        }
+
+        public TextBox TxtSource
+        {
+            get { return txtSource; }
+        }
+
+        public Label LblSource
+        {
+            get { return lblSource; }
+        }
+
+        public TextBox TxtPublisher
+        {
+            get { return txtPublisher; }
+        }
+
+        public TextBox TxtCoverage
+        {
+            get { return txtCoverage; }
+        }
+
+        public Label LblCoverage
+        {
+            get { return lblCoverage; }
+        }
+
+        public TextBox TxtRelation
+        {
+            get { return txtRelation; }
+        }
+
+        public Label LblRelation
+        {
+            get { return lblRelation; }
+        }
+
+        public TextBox TxtFormat
+        {
+            get { return txtFormat; }
+        }
+
+        public Label LblFormat
+        {
+            get { return lblFormat; }
+        }
+
+        public TextBox TxtRights
+        {
+            get { return txtRights; }
+        }
+
+        public Label LblRights
+        {
+            get { return lblRights; }
+        }
+
+        public ComboBox DdlEmbedFonts
+        {
+            get { return ddlEmbedFonts; }
+        }
+
+        public Label LblEmbedFonts
+        {
+            get { return lblEmbedFonts; }
         }
 
         //private System.Windows.Forms.TableLayoutPanel TLPanelOuter;
@@ -659,8 +744,8 @@ namespace SIL.PublishingSolution
 
         private void btnOthers_Click(object sender, EventArgs e)
         {
-            //_CToolBL.MediaType = "others";
-            //_CToolBL.SideBar();
+            _CToolBL.MediaType = "others";
+            _CToolBL.SideBar();
         }
 
         private void stylesGrid_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
@@ -759,6 +844,12 @@ namespace SIL.PublishingSolution
             _CToolBL.ShowMobileSummaryBL();
         }
 
+        private void EditOthersCSS(object sender, EventArgs e)
+        {
+            _CToolBL.SetModifyMode(false);
+            _CToolBL.ShowOthersSummaryBL();
+        }
+
         private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _CToolBL.txtName_ValidatingBL(sender);
@@ -814,5 +905,75 @@ namespace SIL.PublishingSolution
         {
             _CToolBL.SetModifyMode(true);
         }
-    }
+
+        private void ddlEmbedFonts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _CToolBL.ddlEmbedFonts_SelectedIndexChangedBL(sender, e);
+            EditOthersCSS(sender, e);
+        }
+
+        private void txtDescription_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtDescription_ValidatedBL();
+            EditOthersCSS(sender, e);
+        }
+        private void txtDescription_KeyUp(object sender, EventArgs e)
+        {
+            _CToolBL.SetModifyMode(true);
+        }
+        private void txtPublisher_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtPublisher_ValidatedBL();
+            EditOthersCSS(sender, e);
+        }
+        private void txtPublisher_KeyUp(object sender, EventArgs e)
+        {
+            _CToolBL.SetModifyMode(true);
+        }
+        private void txtSource_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtSource_ValidatedBL();
+            EditOthersCSS(sender, e);
+        }
+        private void txtSource_KeyUp(object sender, EventArgs e)
+        {
+            _CToolBL.SetModifyMode(true);
+        }
+        private void txtFormat_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtFormat_ValidatedBL();
+            EditOthersCSS(sender, e);
+        }
+        private void txtFormat_KeyUp(object sender, EventArgs e)
+        {
+            _CToolBL.SetModifyMode(true);
+        }
+        private void txtRelation_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtRelation_ValidatedBL();
+            EditOthersCSS(sender, e);
+        }
+        private void txtRelation_KeyUp(object sender, EventArgs e)
+        {
+            _CToolBL.SetModifyMode(true);
+        }
+        private void txtCoverage_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtCoverage_ValidatedBL();
+            EditOthersCSS(sender, e);
+        }
+        private void txtCoverage_KeyUp(object sender, EventArgs e)
+        {
+            _CToolBL.SetModifyMode(true);
+        }
+        private void txtRights_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtRights_ValidatedBL();
+            EditOthersCSS(sender, e);
+        }
+        private void txtRights_KeyUp(object sender, EventArgs e)
+        {
+            _CToolBL.SetModifyMode(true);
+        }
+     }
 }

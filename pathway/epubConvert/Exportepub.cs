@@ -50,21 +50,18 @@ namespace SIL.PublishingSolution
         protected string outputPathBase;
         protected string outputNameBase;
         protected static ProgressBar _pb;
-        private EmbeddedFont _defaultFont;  // default font used by this writing system
+        private Dictionary<string, EmbeddedFont> _embeddedFonts;  // font information for this export
+        private Dictionary<string, string> _langFontDictionary; // languages and font names in use for this export
 
 //        protected static PostscriptLanguage _postscriptLanguage = new PostscriptLanguage();
         protected string _inputType;
 
         // property implementations
-        public string FileProduced { get; set; }
         public string Description { get; set; }
         public string Publisher { get; set; }
-        public string Contributor { get; set; }
         public string Relation { get; set; }
         public string Coverage { get; set; }
         public string Rights { get; set; }
-        public string Subject { get; set; }
-        public string Type { get; set; }
         public string Format { get; set; }
         public string Source { get; set; }
         public bool EmbedFonts { get; set; }
@@ -103,7 +100,8 @@ namespace SIL.PublishingSolution
         public bool Export(PublicationInformation projInfo)
         {
             bool success = true;
-
+            _langFontDictionary = new Dictionary<string, string>();
+            _embeddedFonts = new Dictionary<string, EmbeddedFont>();
             var myCursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
             var curdir = Environment.CurrentDirectory;
@@ -131,7 +129,8 @@ namespace SIL.PublishingSolution
                     preProcessor.SwapHeadWordAndReversalForm();
                 }
 
-                projInfo.LanguageFilterKey = GetLanguage(projInfo.DefaultXhtmlFileWithPath);
+
+                BuildLanguagesList(projInfo.DefaultXhtmlFileWithPath);
                 // CSS preprocessing
                 string tempFolder = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
 
@@ -228,30 +227,93 @@ namespace SIL.PublishingSolution
                 if (EmbedFonts)
                 {
                     // First, get the default font for this language from the project info
-                    GetDefaultFontFamily(projInfo.LanguageFilterKey);
-                    if (!_defaultFont.SILFont)
+                    BuildFontsList();
+                    var nonSILFonts = new Dictionary<EmbeddedFont, string>();
+                    string langs;
+                    // Next, collect the non-SIL fonts used in this file
+                    foreach (var embeddedFont in _embeddedFonts)
                     {
-                        FontWarningDlg dlg = new FontWarningDlg();
-                        dlg.MyEmbeddedFont = _defaultFont.Name;
-                        if (dlg.ShowDialog() == DialogResult.OK)
+                        if (!embeddedFont.Value.SILFont)
                         {
-                            if (!_defaultFont.Name.Equals(dlg.SelectedFont))
+                            // append or add this entry to nonSILFonts
+                            if (nonSILFonts.TryGetValue(embeddedFont.Value, out langs))
                             {
-                                // the user has chosen a different (SIL) font - create a new EmbeddedFont
-                                _defaultFont = new EmbeddedFont(dlg.SelectedFont);
+                                // existing entry - add this language to the list of langs that use this font
+                                var sbName = new StringBuilder();
+                                sbName.Append(langs);
+                                sbName.Append(", ");
+                                sbName.Append(embeddedFont.Key);
+                                // set the value
+                                nonSILFonts[embeddedFont.Value] = sbName.ToString();
+                            }
+                            else
+                            {
+                                // new entry
+                                nonSILFonts.Add(embeddedFont.Value, embeddedFont.Key);
                             }
                         }
-                        else
+                    }
+                    // If we came across any non-SIL fonts, show the Font Warning Dialog
+                    // (possibly multiple times) and replace our embedded font items if needed
+                    if (nonSILFonts.Count > 0)
+                    {
+                        FontWarningDlg dlg = new FontWarningDlg();
+                        dlg.RepeatAction = false;
+                        dlg.RemainingIssues = nonSILFonts.Count - 1;
+                        foreach (var nonSilFont in nonSILFonts)
                         {
-                            // User cancelled - error out
-                            return false;
+                            dlg.MyEmbeddedFont = nonSilFont.Key.Name;
+                            dlg.Languages = nonSilFont.Value;
+                            if (dlg.RepeatAction)
+                            {
+                                // user wants to repeat the last action - if the last action
+                                // was to change the font, change this one as well
+                                if (!dlg.UseFontAnyway() && !nonSilFont.Key.Name.Equals(dlg.SelectedFont))
+                                {
+                                    // the user has chosen a different (SIL) font - 
+                                    // create a new EmbeddedFont and add it to the list
+                                    _embeddedFonts.Remove(nonSilFont.Key.Name);
+                                    var newFont = new EmbeddedFont(dlg.SelectedFont);
+                                    _embeddedFonts[dlg.SelectedFont] = newFont; // set index value adds if it doesn't exist
+                                }
+                                continue;
+                            }
+                            // show the dialog
+                            if (dlg.ShowDialog() == DialogResult.OK)
+                            {
+                                if (!dlg.UseFontAnyway() && !nonSilFont.Key.Name.Equals(dlg.SelectedFont))
+                                {
+                                    // the user has chosen a different (SIL) font - 
+                                    // create a new EmbeddedFont and add it to the list
+                                    _embeddedFonts.Remove(nonSilFont.Key.Name);
+                                    var newFont = new EmbeddedFont(dlg.SelectedFont);
+                                    _embeddedFonts[dlg.SelectedFont] = newFont; // set index value adds if it doesn't exist
+                                }
+                            }
+                            else
+                            {
+                                // User cancelled - Cancel out of the whole .epub export
+                                return false;
+                            }
+                            // decrement the remaining issues for the next dialog display
+                            dlg.RemainingIssues--;
                         }
                     }
-                    // Copy the font file and update the CSS to reference it
-                    string dest = Common.PathCombine(contentFolder, _defaultFont.Filename);
-                    File.Copy(Path.Combine(EmbeddedFont.GetFontFolderPath(), _defaultFont.Filename), dest);
-                    ReferenceEmbeddedFont(mergedCSS);
+                    // copy all the fonts over
+                    foreach (var embeddedFont in _embeddedFonts.Values)
+                    {
+                        string dest = Common.PathCombine(contentFolder, embeddedFont.Filename);
+                        File.Copy(Path.Combine(EmbeddedFont.GetFontFolderPath(), embeddedFont.Filename), dest);
+                        
+                    }
+                    // clean up
+                    if (nonSILFonts.Count > 0)
+                    {
+                        nonSILFonts.Clear();
+                    }
                 }
+                // update the CSS file to reference any fonts used by the writing systems
+                ReferenceFonts(mergedCSS);
 
                 // copy over the XHTML and CSS files
                 string cssPath = Common.PathCombine(contentFolder, defaultCSS);
@@ -320,41 +382,64 @@ namespace SIL.PublishingSolution
 
         #region Private Functions
         /// <summary>
-        /// Inserts links to the default embedded font in the CSS file:
-        /// - Adds a @font-face declaration referencing the .ttf file in the archive
-        /// - Sets the font-family for the body element to the referenced font
+        /// Inserts links in the CSS file to the fonts used by the writing systems:
+        /// - If the fonts are embedded, adds a @font-face declaration referencing the .ttf file 
+        ///   that's found in the archive
+        /// - Sets the font-family for the body:lang selector to the referenced font
         /// </summary>
         /// <param name="cssFile"></param>
-        private void ReferenceEmbeddedFont (string cssFile)
+        private void ReferenceFonts (string cssFile)
         {
             if (!File.Exists(cssFile)) return;
             // read in the CSS file
             var reader = new StreamReader(cssFile);
             string content = reader.ReadToEnd();
             reader.Close();
-            // build the @font-face elements
             var sb = new StringBuilder();
-            sb.AppendLine("/* font-face info - added by SIL Pathway */");
-            sb.AppendLine("@font-face {");
-            sb.Append(" font-family : ");
-            sb.Append(_defaultFont.Name);
-            sb.AppendLine(";");
-            sb.Append(" font-weight : ");
-            sb.Append(_defaultFont.Weight);
-            sb.AppendLine(";");
-            sb.Append(" font-style : ");
-            sb.Append(_defaultFont.Style);
-            sb.AppendLine(";");
-            sb.Append(" src : url(");
-            sb.Append(Path.GetFileName(_defaultFont.Filename));
-            sb.AppendLine(");");
-            sb.AppendLine("}");
-            sb.AppendLine("body {");
-            sb.Append("font-family: '");
-            sb.Append(_defaultFont.Name);
-            sb.Append("', ");
-            sb.AppendLine((_defaultFont.Serif) ? "serif;" : "sans-serif;");
-            sb.AppendLine("}");
+            // If we're embedding the fonts, build the @font-face elements
+            if (EmbedFonts)
+            {
+                foreach (var embeddedFont in _embeddedFonts.Values)
+                {
+                    sb.AppendLine("/* font-face info - added by SIL Pathway */");
+                    sb.AppendLine("@font-face {");
+                    sb.Append(" font-family : ");
+                    sb.Append(embeddedFont.Name);
+                    sb.AppendLine(";");
+                    sb.Append(" font-weight : ");
+                    sb.Append(embeddedFont.Weight);
+                    sb.AppendLine(";");
+                    sb.Append(" font-style : ");
+                    sb.Append(embeddedFont.Style);
+                    sb.AppendLine(";");
+                    sb.Append(" src : url(");
+                    sb.Append(Path.GetFileName(embeddedFont.Filename));
+                    sb.AppendLine(");");
+                    sb.AppendLine("}");
+                }
+            }
+            // add :lang pseudo-elements for each language and set them to the proper font
+            foreach( var language in _langFontDictionary)
+            {
+                sb.Append("body:lang(");
+                sb.Append(language.Key);
+                sb.AppendLine(") {");
+                sb.Append("font-family: '");
+                sb.Append(language.Value);
+                sb.Append("', ");
+                EmbeddedFont embeddedFont;
+                if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
+                {
+                    sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
+                }
+                else
+                {
+                    // fall back on a serif font if we can't find it (shouldn't happen)
+                    sb.AppendLine("Times, serif;");
+                }
+                sb.AppendLine("}");
+            }
+
             sb.Append(content);
             // write out the updated CSS file
             var writer = new StreamWriter(cssFile);
@@ -363,19 +448,31 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// Returns the default font family for the writing system. If this information isn't retrievable,
-        /// defaults to "Charis SIL"
+        /// Returns the font families for the languages in _langFontDictionary.
         /// </summary>
-        /// <param name="langCountry">ISO639-1 country code to look up</param>
-        private void GetDefaultFontFamily(string langCountry)
+        private void BuildFontsList()
         {
-            string[] langCoun = langCountry.Split('-');
-
-            try
+            // modifying the _langFontDictionary dictionary - let's make an array copy for the iteration
+            int numLangs = _langFontDictionary.Keys.Count;
+            var langs = new string[numLangs];
+            _langFontDictionary.Keys.CopyTo(langs,0);
+            foreach (var language in langs)
             {
-                if (langCoun.Length < 2)
+                string[] langCoun = language.Split('-');
+
+                try
                 {
-                    var wsPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/WritingSystemStore/" + langCoun[0] + ".ldml");
+                    string wsPath;
+                    if (langCoun.Length < 2)
+                    {
+                        // try the language (no country code) (e.g, "en" for "en-US")
+                        wsPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/WritingSystemStore/" + langCoun[0] + ".ldml");
+                    }
+                    else
+                    {
+                        // try the whole language expression (e.g., "ggo-Telu-IN")
+                        wsPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/WritingSystemStore/" + language + ".ldml");
+                    }
                     if (File.Exists(wsPath))
                     {
                         var ldml = new XmlDocument { XmlResolver = null };
@@ -386,19 +483,15 @@ namespace SIL.PublishingSolution
                         if (node != null)
                         {
                             // build the font information and return
-                            _defaultFont = new EmbeddedFont(node.Value);
-                            return;
+                            _langFontDictionary[language] = node.Value; // set the font used by this language
+                            _embeddedFonts[language] = new EmbeddedFont(node.Value);
                         }
                     }
                 }
+                catch
+                {
+                }
             }
-            catch
-            {
-            }
-            // unable to retrieve font family - give them "Charis SIL" as a backup
-            _defaultFont = new EmbeddedFont("Charis SIL");
-
-            return;
         }
 
         /// <summary>
@@ -436,11 +529,10 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// Returns the primary language used inside this file.
+        /// Parses the specified file and sets the internal languages list to all the languages found in the file.
         /// </summary>
         /// <param name="xhtmlFileName">File name to parse</param>
-        /// <returns>Scripture book name (value of the scrBookName or a headword element in the xhtml file).</returns>
-        private string GetLanguage(string xhtmlFileName)
+        private void BuildLanguagesList(string xhtmlFileName)
         {
             XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
@@ -451,6 +543,27 @@ namespace SIL.PublishingSolution
             xmlReader.Close();
             // should only be one of these after splitting out the chapters.
             XmlNodeList nodes;
+            nodes = xmlDocument.SelectNodes("//@lang", namespaceManager);
+            if (nodes.Count > 0)
+            {
+                foreach (XmlNode node in nodes)
+                {
+                    string value;
+                    if (_langFontDictionary.TryGetValue(node.Value, out value))
+                    {
+                        // already have this item in our list - continue
+                        continue;
+                    }
+                    if (node.Value.ToLower() == "utf-8")
+                    {
+                        // TE-9078 "utf-8" showing up as language in html tag - remove when fixed
+                        continue;
+                    }
+                    // add an entry for this language in the list (the * gets overwritten in BuildFontsList())
+                    _langFontDictionary.Add(node.Value, "*");
+                }
+            }
+            // now go check to see if we're working on scripture or dictionary data
             nodes = xmlDocument.SelectNodes("//xhtml:span[@class='headword']", namespaceManager);
             if (nodes.Count == 0)
             {
@@ -463,14 +576,6 @@ namespace SIL.PublishingSolution
             {
                 _inputType = "dictionary";
             }
-            if (nodes != null && nodes.Count > 0)
-            {
-                var sb = new StringBuilder();
-                sb.Append(nodes[0].Attributes["lang"].Value);
-                return (sb.ToString());
-            }
-            // fall back on English (really a flag that something's wrong).
-            return "en";
         }
 
         /// <summary>
@@ -588,24 +693,6 @@ namespace SIL.PublishingSolution
             {
                 Rights = "";
             }
-            // # of files produced
-            if (mobilefeature.ContainsKey("FileProduced"))
-            {
-                FileProduced = mobilefeature["FileProduced"].Trim();
-            }
-            else
-            {
-                FileProduced = "One";
-            }
-            // Subject
-            if (mobilefeature.ContainsKey("Subject"))
-            {
-                Subject = mobilefeature["Subject"].Trim();
-            }
-            else
-            {
-                Subject = "Reference";
-            }
             // Source
             if (mobilefeature.ContainsKey("Source"))
             {
@@ -688,7 +775,14 @@ namespace SIL.PublishingSolution
             opf.WriteAttributeString("opf", "role", null, "aut");
             opf.WriteValue(Environment.UserName);
             opf.WriteEndElement();
-            opf.WriteElementString("dc", "subject", null, "Religion & Spirituality");
+            if (_inputType == "dictionary")
+            {
+                opf.WriteElementString("dc", "subject", null, "Reference");
+            }
+            else
+            {
+                opf.WriteElementString("dc", "subject", null, "Religion & Spirituality");
+            }
             if (Description.Length > 0)
                 opf.WriteElementString("dc", "description", null, Description);
             if (Publisher.Length > 0)
@@ -703,8 +797,10 @@ namespace SIL.PublishingSolution
                 opf.WriteElementString("dc", "format", null, Format);
             if (Source.Length > 0)
                 opf.WriteElementString("dc", "source", null, Source);
-            if (projInfo.LanguageFilterKey.Length > 0)
-                opf.WriteElementString("dc", "language", null, projInfo.LanguageFilterKey);
+            foreach (var lang in _langFontDictionary.Keys)
+            {
+                opf.WriteElementString("dc", "language", null, lang);
+            }
             if (Coverage.Length > 0)
                 opf.WriteElementString("dc", "coverage", null, Coverage);
             if (Rights.Length > 0)
@@ -724,11 +820,14 @@ namespace SIL.PublishingSolution
             opf.WriteEndElement(); // item
             if (EmbedFonts)
             {
-                opf.WriteStartElement("item"); // item (charis embedded font)
-                opf.WriteAttributeString("id", "epub.embedded.font" + _defaultFont.Name);
-                opf.WriteAttributeString("href", _defaultFont.Filename);
-                opf.WriteAttributeString("media-type", "font/opentype/"); // TODO: works for SIL; what about others?
-                opf.WriteEndElement(); // item
+                foreach (var embeddedFont in _embeddedFonts.Values)
+                {
+                    opf.WriteStartElement("item"); // item (charis embedded font)
+                    opf.WriteAttributeString("id", "epub.embedded.font" + embeddedFont.Name);
+                    opf.WriteAttributeString("href", embeddedFont.Filename);
+                    opf.WriteAttributeString("media-type", "font/opentype/"); 
+                    opf.WriteEndElement(); // item
+                }
             }
             // now add the xhtml files to the manifest
             string[] files = Directory.GetFiles(contentFolder);

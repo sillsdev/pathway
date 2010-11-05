@@ -117,6 +117,23 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblType = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.tabOthers = new System.Windows.Forms.TabPage();
+            this.lblDescription = new System.Windows.Forms.Label();
+            this.txtDescription = new System.Windows.Forms.TextBox();
+            this.lblPublisher = new System.Windows.Forms.Label();
+            this.txtPublisher = new System.Windows.Forms.TextBox();
+            this.lblSource = new System.Windows.Forms.Label();
+            this.txtSource = new System.Windows.Forms.TextBox();
+            this.lblFormat = new System.Windows.Forms.Label();
+            this.txtFormat = new System.Windows.Forms.TextBox();
+            this.lblRelation = new System.Windows.Forms.Label();
+            this.txtRelation = new System.Windows.Forms.TextBox();
+            this.lblCoverage = new System.Windows.Forms.Label();
+            this.txtCoverage = new System.Windows.Forms.TextBox();
+            this.lblRights = new System.Windows.Forms.Label();
+            this.txtRights = new System.Windows.Forms.TextBox();
+            this.lblEmbedFonts = new System.Windows.Forms.Label();
+            this.ddlEmbedFonts = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.stylesGrid)).BeginInit();
             this.toolStripMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -131,6 +148,7 @@
             this.TLPanel2.SuspendLayout();
             this.TLPanel3.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.tabOthers.SuspendLayout();
             this.SuspendLayout();
             // 
             // stylesGrid
@@ -296,6 +314,7 @@
             this.tabControl1.Controls.Add(this.tabInfo);
             this.tabControl1.Controls.Add(this.tabDisplay);
             this.tabControl1.Controls.Add(this.tabMobile);
+            this.tabControl1.Controls.Add(this.tabOthers);
             this.tabControl1.HotTrack = true;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -1174,7 +1193,7 @@
             this.TLPanel2.Name = "TLPanel2";
             this.TLPanel2.RowCount = 1;
             this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 482F));
+            this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 455F));
             this.TLPanel2.Size = new System.Drawing.Size(584, 455);
             this.TLPanel2.TabIndex = 1;
             // 
@@ -1216,6 +1235,188 @@
             this.lblType.Text = "Dictionary";
             this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // tabOthers
+            // 
+            this.tabOthers.Controls.Add(this.ddlEmbedFonts);
+            this.tabOthers.Controls.Add(this.lblEmbedFonts);
+            this.tabOthers.Controls.Add(this.txtRights);
+            this.tabOthers.Controls.Add(this.lblRights);
+            this.tabOthers.Controls.Add(this.txtCoverage);
+            this.tabOthers.Controls.Add(this.lblCoverage);
+            this.tabOthers.Controls.Add(this.txtRelation);
+            this.tabOthers.Controls.Add(this.lblRelation);
+            this.tabOthers.Controls.Add(this.txtFormat);
+            this.tabOthers.Controls.Add(this.lblFormat);
+            this.tabOthers.Controls.Add(this.txtSource);
+            this.tabOthers.Controls.Add(this.lblSource);
+            this.tabOthers.Controls.Add(this.txtPublisher);
+            this.tabOthers.Controls.Add(this.lblPublisher);
+            this.tabOthers.Controls.Add(this.txtDescription);
+            this.tabOthers.Controls.Add(this.lblDescription);
+            this.tabOthers.Location = new System.Drawing.Point(4, 22);
+            this.tabOthers.Name = "tabOthers";
+            this.tabOthers.Size = new System.Drawing.Size(267, 379);
+            this.tabOthers.TabIndex = 3;
+            this.tabOthers.Text = "Properties";
+            this.tabOthers.UseVisualStyleBackColor = true;
+            // 
+            // lblEmbedFonts
+            // 
+            this.lblEmbedFonts.AutoSize = true;
+            this.lblEmbedFonts.Location = new System.Drawing.Point(21, 13);
+            this.lblEmbedFonts.Name = "lblEmbedFonts";
+            this.lblEmbedFonts.Size = new System.Drawing.Size(69, 13);
+            this.lblEmbedFonts.TabIndex = 0;
+            this.lblEmbedFonts.Text = "Embed Fonts";
+            this.lblEmbedFonts.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // ddlEmbedFonts
+            // 
+            this.ddlEmbedFonts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlEmbedFonts.FormattingEnabled = true;
+            this.ddlEmbedFonts.Location = new System.Drawing.Point(100, 10);
+            this.ddlEmbedFonts.Name = "ddlEmbedFonts";
+            this.ddlEmbedFonts.Size = new System.Drawing.Size(150, 21);
+            this.ddlEmbedFonts.TabIndex = 1;
+            this.ddlEmbedFonts.SelectedIndexChanged += new System.EventHandler(this.ddlEmbedFonts_SelectedIndexChanged);
+            // 
+            // lblDescription
+            // 
+            this.lblDescription.AutoSize = true;
+            this.lblDescription.Location = new System.Drawing.Point(30, 43);
+            this.lblDescription.Name = "lblDescription";
+            this.lblDescription.Size = new System.Drawing.Size(59, 13);
+            this.lblDescription.TabIndex = 2;
+            this.lblDescription.Text = "Information";
+            this.lblDescription.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtDescription
+            // 
+            this.txtDescription.Location = new System.Drawing.Point(100, 40);
+            this.txtDescription.Multiline = true;
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtDescription.Size = new System.Drawing.Size(150, 54);
+            this.txtDescription.TabIndex = 3;
+            this.txtDescription.Validated += new System.EventHandler(this.txtDescription_Validated);
+            this.txtDescription.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDescription_KeyUp);
+            // 
+            // lblPublisher
+            // 
+            this.lblPublisher.AutoSize = true;
+            this.lblPublisher.Location = new System.Drawing.Point(40, 103);
+            this.lblPublisher.Name = "lblPublisher";
+            this.lblPublisher.Size = new System.Drawing.Size(50, 13);
+            this.lblPublisher.TabIndex = 4;
+            this.lblPublisher.Text = "Publisher";
+            this.lblPublisher.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtPublisher
+            // 
+            this.txtPublisher.Location = new System.Drawing.Point(100, 100);
+            this.txtPublisher.Name = "txtPublisher";
+            this.txtPublisher.Size = new System.Drawing.Size(150, 20);
+            this.txtPublisher.TabIndex = 5;
+            this.txtPublisher.Validated += new System.EventHandler(this.txtPublisher_Validated);
+            this.txtPublisher.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPublisher_KeyUp);
+            // 
+            // lblSource
+            // 
+            this.lblSource.AutoSize = true;
+            this.lblSource.Location = new System.Drawing.Point(49, 133);
+            this.lblSource.Name = "lblSource";
+            this.lblSource.Size = new System.Drawing.Size(41, 13);
+            this.lblSource.TabIndex = 6;
+            this.lblSource.Text = "Source";
+            this.lblSource.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtSource
+            // 
+            this.txtSource.Location = new System.Drawing.Point(100, 130);
+            this.txtSource.Name = "txtSource";
+            this.txtSource.Size = new System.Drawing.Size(150, 20);
+            this.txtSource.TabIndex = 7;
+            this.txtSource.Validated += new System.EventHandler(this.txtSource_Validated);
+            this.txtSource.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtSource_KeyUp);
+            // 
+            // lblFormat
+            // 
+            this.lblFormat.AutoSize = true;
+            this.lblFormat.Location = new System.Drawing.Point(51, 163);
+            this.lblFormat.Name = "lblFormat";
+            this.lblFormat.Size = new System.Drawing.Size(39, 13);
+            this.lblFormat.TabIndex = 8;
+            this.lblFormat.Text = "Format";
+            this.lblFormat.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtFormat
+            // 
+            this.txtFormat.Location = new System.Drawing.Point(100, 160);
+            this.txtFormat.Name = "txtFormat";
+            this.txtFormat.Size = new System.Drawing.Size(150, 20);
+            this.txtFormat.TabIndex = 9;
+            this.txtFormat.Validated += new System.EventHandler(this.txtFormat_Validated);
+            this.txtFormat.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtFormat_KeyUp);
+            // 
+            // lblRelation
+            // 
+            this.lblRelation.AutoSize = true;
+            this.lblRelation.Location = new System.Drawing.Point(44, 193);
+            this.lblRelation.Name = "lblRelation";
+            this.lblRelation.Size = new System.Drawing.Size(46, 13);
+            this.lblRelation.TabIndex = 10;
+            this.lblRelation.Text = "Relation";
+            this.lblRelation.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtRelation
+            // 
+            this.txtRelation.Location = new System.Drawing.Point(100, 190);
+            this.txtRelation.Name = "txtRelation";
+            this.txtRelation.Size = new System.Drawing.Size(150, 20);
+            this.txtRelation.TabIndex = 11;
+            this.txtRelation.Validated += new System.EventHandler(this.txtRelation_Validated);
+            this.txtRelation.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtRelation_KeyUp);
+            // 
+            // lblCoverage
+            // 
+            this.lblCoverage.AutoSize = true;
+            this.lblCoverage.Location = new System.Drawing.Point(37, 223);
+            this.lblCoverage.Name = "lblCoverage";
+            this.lblCoverage.Size = new System.Drawing.Size(53, 13);
+            this.lblCoverage.TabIndex = 12;
+            this.lblCoverage.Text = "Coverage";
+            this.lblCoverage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtCoverage
+            // 
+            this.txtCoverage.Location = new System.Drawing.Point(100, 220);
+            this.txtCoverage.Name = "txtCoverage";
+            this.txtCoverage.Size = new System.Drawing.Size(150, 20);
+            this.txtCoverage.TabIndex = 13;
+            this.txtCoverage.Validated += new System.EventHandler(this.txtCoverage_Validated);
+            this.txtCoverage.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtCoverage_KeyUp);
+            // 
+            // lblRights
+            // 
+            this.lblRights.AutoSize = true;
+            this.lblRights.Location = new System.Drawing.Point(53, 253);
+            this.lblRights.Name = "lblRights";
+            this.lblRights.Size = new System.Drawing.Size(37, 13);
+            this.lblRights.TabIndex = 14;
+            this.lblRights.Text = "Rights";
+            this.lblRights.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtRights
+            // 
+            this.txtRights.Location = new System.Drawing.Point(100, 250);
+            this.txtRights.Multiline = true;
+            this.txtRights.Name = "txtRights";
+            this.txtRights.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtRights.Size = new System.Drawing.Size(150, 54);
+            this.txtRights.TabIndex = 15;
+            this.txtRights.Validated += new System.EventHandler(this.txtRights_Validated);
+            this.txtRights.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtRights_KeyUp);
+            // 
             // ConfigurationTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1251,6 +1452,8 @@
             this.TLPanel3.ResumeLayout(false);
             this.TLPanel3.PerformLayout();
             this.panel3.ResumeLayout(false);
+            this.tabOthers.ResumeLayout(false);
+            this.tabOthers.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1345,5 +1548,22 @@
         private System.Windows.Forms.ComboBox ddlFileProduceDict;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.TabPage tabOthers;
+        private System.Windows.Forms.TextBox txtDescription;
+        private System.Windows.Forms.Label lblDescription;
+        private System.Windows.Forms.Label lblPublisher;
+        private System.Windows.Forms.TextBox txtSource;
+        private System.Windows.Forms.Label lblSource;
+        private System.Windows.Forms.TextBox txtPublisher;
+        private System.Windows.Forms.TextBox txtCoverage;
+        private System.Windows.Forms.Label lblCoverage;
+        private System.Windows.Forms.TextBox txtRelation;
+        private System.Windows.Forms.Label lblRelation;
+        private System.Windows.Forms.TextBox txtFormat;
+        private System.Windows.Forms.Label lblFormat;
+        private System.Windows.Forms.TextBox txtRights;
+        private System.Windows.Forms.Label lblRights;
+        private System.Windows.Forms.ComboBox ddlEmbedFonts;
+        private System.Windows.Forms.Label lblEmbedFonts;
     }
 }

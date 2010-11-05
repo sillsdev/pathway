@@ -13,6 +13,7 @@
 // Test methods of FlexDePlugin
 // </remarks>
 // --------------------------------------------------------------------------------------------
+using System.IO;
 using epubConvert;
 using NUnit.Framework;
 
@@ -35,6 +36,7 @@ namespace Test.epubConvert
             Assert.IsFalse(arialFont.SILFont);
             const string fontFilename = "arial.ttf";
             Assert.AreEqual(fontFilename, arialFont.Filename);
+            Assert.IsTrue(File.Exists(Path.Combine(EmbeddedFont.GetFontFolderPath(), arialFont.Filename)));
         }
 
         /// <summary>
@@ -52,6 +54,7 @@ namespace Test.epubConvert
             Assert.AreEqual(style, silFont.Style);
             const string fontFilename = "Abyssinica_SIL.ttf";
             Assert.AreEqual(fontFilename, silFont.Filename);
+            Assert.IsTrue(File.Exists(Path.Combine(EmbeddedFont.GetFontFolderPath(), silFont.Filename)));
         }
 
         /// <summary>
@@ -69,6 +72,7 @@ namespace Test.epubConvert
             Assert.AreEqual(style, silFont.Style);
             const string fontFilename = "AndBasR.ttf";
             Assert.AreEqual(fontFilename, silFont.Filename);
+            Assert.IsTrue(File.Exists(Path.Combine(EmbeddedFont.GetFontFolderPath(), silFont.Filename)));
         }
 
         /// <summary>
@@ -86,6 +90,7 @@ namespace Test.epubConvert
             Assert.AreEqual(style, silFont.Style);
             const string fontFilename = "AppSILR.ttf";
             Assert.AreEqual(fontFilename, silFont.Filename);
+            Assert.IsTrue(File.Exists(Path.Combine(EmbeddedFont.GetFontFolderPath(), silFont.Filename)));
         }
         /// <summary>
         /// Test the Charis SIL font
@@ -102,6 +107,7 @@ namespace Test.epubConvert
             Assert.AreEqual(style, silFont.Style);
             const string fontFilename = "CharisSILR.ttf";
             Assert.AreEqual(fontFilename, silFont.Filename);
+            Assert.IsTrue(File.Exists(Path.Combine(EmbeddedFont.GetFontFolderPath(), silFont.Filename)));
         }
         /// <summary>
         /// Test the Dai Banna font
@@ -118,6 +124,7 @@ namespace Test.epubConvert
             Assert.AreEqual(style, silFont.Style);
             const string fontFilename = "DBSILBR.ttf";
             Assert.AreEqual(fontFilename, silFont.Filename);
+            Assert.IsTrue(File.Exists(Path.Combine(EmbeddedFont.GetFontFolderPath(), silFont.Filename)));
         }
         /// <summary>
         /// Test the Doulos SIL font
@@ -134,6 +141,7 @@ namespace Test.epubConvert
             Assert.AreEqual(style, silFont.Style);
             const string fontFilename = "DoulosSILR.ttf";
             Assert.AreEqual(fontFilename, silFont.Filename);
+            Assert.IsTrue(File.Exists(Path.Combine(EmbeddedFont.GetFontFolderPath(), silFont.Filename)));
         }
         /// <summary>
         /// Test the SIL Ezra font
@@ -150,6 +158,7 @@ namespace Test.epubConvert
             Assert.AreEqual(style, silFont.Style);
             const string fontFilename = "SILEOT_0.ttf";
             Assert.AreEqual(fontFilename, silFont.Filename);
+            Assert.IsTrue(File.Exists(Path.Combine(EmbeddedFont.GetFontFolderPath(), silFont.Filename)));
         }
         /// <summary>
         /// Test the SIL Galatia font
@@ -166,6 +175,7 @@ namespace Test.epubConvert
             Assert.AreEqual(style, silFont.Style);
             const string fontFilename = "GalSILR201.ttf";
             Assert.AreEqual(fontFilename, silFont.Filename);
+            Assert.IsTrue(File.Exists(Path.Combine(EmbeddedFont.GetFontFolderPath(), silFont.Filename)));
         }
         /// <summary>
         /// Test the SIL Gentium font
@@ -182,6 +192,7 @@ namespace Test.epubConvert
             Assert.AreEqual(style, silFont.Style);
             const string fontFilename = "GenBasR.ttf";
             Assert.AreEqual(fontFilename, silFont.Filename);
+            Assert.IsTrue(File.Exists(Path.Combine(EmbeddedFont.GetFontFolderPath(), silFont.Filename)));
         }
         /// <summary>
         /// Test the SIL Lateef font
@@ -198,6 +209,7 @@ namespace Test.epubConvert
             Assert.AreEqual(style, silFont.Style);
             const string fontFilename = "LateefRegOT.ttf";
             Assert.AreEqual(fontFilename, silFont.Filename);
+            Assert.IsTrue(File.Exists(Path.Combine(EmbeddedFont.GetFontFolderPath(), silFont.Filename)));
         }
         /// <summary>
         /// Test the SIL Nuosu (Yi) font
@@ -214,6 +226,7 @@ namespace Test.epubConvert
             Assert.AreEqual(style, silFont.Style);
             const string fontFilename = "NuosuSIL.ttf";
             Assert.AreEqual(fontFilename, silFont.Filename);
+            Assert.IsTrue(File.Exists(Path.Combine(EmbeddedFont.GetFontFolderPath(), silFont.Filename)));
         }
         /// <summary>
         /// Test the SIL Padauk font
@@ -230,6 +243,7 @@ namespace Test.epubConvert
             Assert.AreEqual(style, silFont.Style);
             const string fontFilename = "Padauk.ttf";
             Assert.AreEqual(fontFilename, silFont.Filename);
+            Assert.IsTrue(File.Exists(Path.Combine(EmbeddedFont.GetFontFolderPath(), silFont.Filename)));
         }
         /// <summary>
         /// Test the SIL Scheharazade) font
@@ -246,6 +260,7 @@ namespace Test.epubConvert
             Assert.AreEqual(style, silFont.Style);
             const string fontFilename = "ScheherazadeRegOT.ttf";
             Assert.AreEqual(fontFilename, silFont.Filename);
+            Assert.IsTrue(File.Exists(Path.Combine(EmbeddedFont.GetFontFolderPath(), silFont.Filename)));
         }
         /// <summary>
         /// Test the SIL Sophia Nubian font
@@ -262,6 +277,7 @@ namespace Test.epubConvert
             Assert.AreEqual(style, silFont.Style);
             const string fontFilename = "SNR.ttf";
             Assert.AreEqual(fontFilename, silFont.Filename);
+            Assert.IsTrue(File.Exists(Path.Combine(EmbeddedFont.GetFontFolderPath(), silFont.Filename)));
         }
         /// <summary>
         /// Test the SIL Tai Heritage Pro font
@@ -278,6 +294,7 @@ namespace Test.epubConvert
             Assert.AreEqual(style, silFont.Style);
             const string fontFilename = "TaiHeritagePro.ttf";
             Assert.AreEqual(fontFilename, silFont.Filename);
+            Assert.IsTrue(File.Exists(Path.Combine(EmbeddedFont.GetFontFolderPath(), silFont.Filename)));
         }
 
     }

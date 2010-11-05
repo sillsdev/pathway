@@ -175,6 +175,11 @@ namespace SIL.PublishingSolution
         /// <returns></returns>
         public static XmlNode LoadValues(string path)
         {
+            // sanity check for non-existent file
+            if (!File.Exists(path))
+            {
+                return null;
+            }
             UnLoadValues();
             var reader = validatexml(path);
             xmlMap.Load(reader);
@@ -1111,6 +1116,19 @@ namespace SIL.PublishingSolution
         {
             string searchStyleName = styleName;
             XmlNode node = Param.GetItem("//stylePick/styles/mobile/style[@name='" + searchStyleName + "']/styleProperty[@name='" + attribName + "']");
+            Param.SetAttrValue(node, "value", attribValue);
+            Param.Write();
+        }
+
+        /// <summary>
+        /// To set the properties for "others" branch items (just .epub for now)
+        /// </summary>
+        /// <param name="attribName"></param>
+        /// <param name="attribValue"></param>
+        public static void UpdateOthersAtrrib(string attribName, string attribValue, string styleName)
+        {
+            string searchStyleName = styleName;
+            XmlNode node = Param.GetItem("//stylePick/styles/others/style[@name='" + searchStyleName + "']/styleProperty[@name='" + attribName + "']");
             Param.SetAttrValue(node, "value", attribValue);
             Param.Write();
         }

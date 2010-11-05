@@ -36,6 +36,7 @@
             this.btn_OK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.txtWarning = new System.Windows.Forms.TextBox();
+            this.chkRepeatAction = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.icnWarning)).BeginInit();
             this.grpOptions.SuspendLayout();
             this.SuspendLayout();
@@ -55,7 +56,7 @@
             this.grpOptions.Controls.Add(this.rdoEmbedFont);
             this.grpOptions.Location = new System.Drawing.Point(12, 80);
             this.grpOptions.Name = "grpOptions";
-            this.grpOptions.Size = new System.Drawing.Size(360, 75);
+            this.grpOptions.Size = new System.Drawing.Size(410, 75);
             this.grpOptions.TabIndex = 3;
             this.grpOptions.TabStop = false;
             this.grpOptions.Text = "grpOptions";
@@ -65,7 +66,7 @@
             this.ddlSILFonts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlSILFonts.Enabled = false;
             this.ddlSILFonts.FormattingEnabled = true;
-            this.ddlSILFonts.Location = new System.Drawing.Point(141, 44);
+            this.ddlSILFonts.Location = new System.Drawing.Point(191, 43);
             this.ddlSILFonts.Name = "ddlSILFonts";
             this.ddlSILFonts.Size = new System.Drawing.Size(213, 21);
             this.ddlSILFonts.TabIndex = 2;
@@ -99,7 +100,7 @@
             // btn_OK
             // 
             this.btn_OK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btn_OK.Location = new System.Drawing.Point(216, 167);
+            this.btn_OK.Location = new System.Drawing.Point(260, 168);
             this.btn_OK.Name = "btn_OK";
             this.btn_OK.Size = new System.Drawing.Size(75, 23);
             this.btn_OK.TabIndex = 4;
@@ -109,7 +110,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(297, 167);
+            this.btnCancel.Location = new System.Drawing.Point(341, 168);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 5;
@@ -124,15 +125,28 @@
             this.txtWarning.Multiline = true;
             this.txtWarning.Name = "txtWarning";
             this.txtWarning.ReadOnly = true;
-            this.txtWarning.Size = new System.Drawing.Size(312, 62);
+            this.txtWarning.Size = new System.Drawing.Size(362, 62);
             this.txtWarning.TabIndex = 6;
+            // 
+            // chkRepeatAction
+            // 
+            this.chkRepeatAction.AutoSize = true;
+            this.chkRepeatAction.Location = new System.Drawing.Point(13, 172);
+            this.chkRepeatAction.Name = "chkRepeatAction";
+            this.chkRepeatAction.Size = new System.Drawing.Size(109, 17);
+            this.chkRepeatAction.TabIndex = 7;
+            this.chkRepeatAction.Text = "chkRepeatAction";
+            this.chkRepeatAction.UseVisualStyleBackColor = true;
+            this.chkRepeatAction.Visible = false;
+            this.chkRepeatAction.CheckedChanged += new System.EventHandler(this.chkRepeatAction_CheckedChanged);
             // 
             // FontWarningDlg
             // 
             this.AcceptButton = this.btn_OK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 202);
+            this.ClientSize = new System.Drawing.Size(434, 202);
+            this.Controls.Add(this.chkRepeatAction);
             this.Controls.Add(this.txtWarning);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btn_OK);
@@ -162,5 +176,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ComboBox ddlSILFonts;
         private System.Windows.Forms.TextBox txtWarning;
+        private System.Windows.Forms.CheckBox chkRepeatAction;
     }
 }

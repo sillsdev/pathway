@@ -97,7 +97,7 @@ namespace epubConvert.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos; is specified as the default font for your current language. You will need the proper rights in order to embed this font in your distributed document..
+        ///   Looks up a localized string similar to &apos;{0}&apos; is specified as the default font for language(s): &apos;{1}&apos;. You will need the proper rights in order to embed this font in your distributed document..
         /// </summary>
         internal static string EmbedFontsWarning {
             get {
@@ -111,6 +111,15 @@ namespace epubConvert.Properties {
         internal static string FontWarningDlgTitle {
             get {
                 return ResourceManager.GetString("FontWarningDlgTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do this for the next {0} item(s)..
+        /// </summary>
+        internal static string RepeatAction {
+            get {
+                return ResourceManager.GetString("RepeatAction", resourceCulture);
             }
         }
     }

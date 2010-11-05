@@ -127,12 +127,15 @@
     <value>&amp;Use this font instead:</value>
   </data>
   <data name="EmbedFontsWarning" xml:space="preserve">
-    <value>'{0}' is specified as the default font for your current language. You will need the proper rights in order to embed this font in your distributed document.</value>
+    <value>'{0}' is specified as the default font for language(s): '{1}'. You will need the proper rights in order to embed this font in your distributed document.</value>
   </data>
   <data name="EmbedFontOptions" xml:space="preserve">
     <value>What do you want to do?</value>
   </data>
   <data name="Chapter" xml:space="preserve">
     <value>Chapter </value>
+  </data>
+  <data name="RepeatAction" xml:space="preserve">
+    <value>Do this for the next {0} item(s).</value>
   </data>
 </root>

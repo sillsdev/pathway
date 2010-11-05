@@ -103,6 +103,7 @@ namespace SIL.PublishingSolution
         protected string _styleName;
         protected string _previousStyleName;
         protected string _fileProduce = "One";
+        protected string _embedFonts = "Yes";
         public string MediaTypeEXE;
         public string StyleEXE;
         protected string _lastSelectedLayout = string.Empty;
@@ -110,6 +111,7 @@ namespace SIL.PublishingSolution
         protected string _selectedStyle;
         TabPage tabdic = new TabPage();
         TabPage tabmob = new TabPage();
+        TabPage tabothers = new TabPage();
         protected TraceSwitch _traceOn = new TraceSwitch("General", "Trace level for application");
 
         private ConfigurationTool cTool;
@@ -527,11 +529,11 @@ namespace SIL.PublishingSolution
             //    cTool.BtnWeb.BackColor = _selectedColor;
             //    cTool.BtnWeb.FlatAppearance.BorderSize = 1;
             //}
-            //else if (MediaType == "others")
-            //{
-            //    cTool.BtnOthers.BackColor = _selectedColor;
-            //    cTool.BtnOthers.FlatAppearance.BorderSize = 1;
-            //}
+            else if (MediaType == "others")
+            {
+                cTool.BtnOthers.BackColor = _selectedColor;
+                cTool.BtnOthers.FlatAppearance.BorderSize = 1;
+            }
         }
 
         public void WriteCss()
@@ -772,6 +774,45 @@ namespace SIL.PublishingSolution
                    }  
                     SetMobileSummary(null, null);
                 }
+                else if (MediaType.ToLower() == "others")
+                {
+                    XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
+                    foreach (XmlNode VARIABLE in baseNode1)
+                    {
+                        string attribName = VARIABLE.Attributes["name"].Value.ToLower();
+                        string attribValue = VARIABLE.Attributes["value"].Value;
+                        switch (attribName)
+                        {
+                            case "embedfonts":
+                                cTool.DdlEmbedFonts.SelectedItem = attribValue;
+                                break;
+                            case "information":
+                                cTool.TxtDescription.Text = attribValue;
+                                break;
+                            case "publisher":
+                                cTool.TxtPublisher.Text = attribValue;
+                                break;
+                            case "source":
+                                cTool.TxtSource.Text = attribValue;
+                                break;
+                            case "format":
+                                cTool.TxtFormat.Text = attribValue;
+                                break;
+                            case "relation":
+                                cTool.TxtRelation.Text = attribValue;
+                                break;
+                            case "coverage":
+                                cTool.TxtCoverage.Text = attribValue;
+                                break;
+                            case "rights":
+                                cTool.TxtRights.Text = attribValue;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    SetOthersSummary(null, null);
+                }
                 else
                 {
                     cTool.DdlFileProduceDict.SelectedItem = FileProduced.Trim();
@@ -861,6 +902,10 @@ namespace SIL.PublishingSolution
                             case "RedLetter":
                                 cTool.DdlRedLetter.Items.Add(ctn.Text);
                                 break;
+
+                            case "EmbedFonts":
+                                cTool.DdlEmbedFonts.Items.Add(ctn.Text);
+                                break;
                         }
                     }
                 }
@@ -938,6 +983,7 @@ namespace SIL.PublishingSolution
             cTool.TsDelete.Enabled = IsEnable;
             cTool.TabDisplay.Enabled = IsEnable;
             cTool.TabMobile.Enabled = IsEnable;
+            cTool.TabOthers.Enabled = IsEnable;
             cTool.TabInfo.Enabled = IsEnable;
         }
 
@@ -970,62 +1016,128 @@ namespace SIL.PublishingSolution
                 SetSideBar();
                 ShowDataInGrid();
                 _redoundo.Reset();
-                SetMobilePropertyTab();
+                SetPropertyTab();
             }
             catch
             {
             }
         }
 
-        protected void SetMobilePropertyTab()
+        /// <summary>
+        /// Display the appropriate property tab (mobile, others or paper/web).
+        /// </summary>
+        protected void SetPropertyTab()
         {
             cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages[1]);
-            if (MediaType == "mobile")
+            switch (MediaType)
             {
-
-                cTool.TabControl1.TabPages.Add(tabmob);
-                Dictionary<string, string> mobilefeature = Param.GetItemsAsDictionary("//mobileProperty/mobilefeature");
-                if (mobilefeature.Count > 0)
-                {
-                    string key = "FileProduced";
-                    if (mobilefeature.ContainsKey(key))
+                case "mobile":
+                    cTool.TabControl1.TabPages.Add(tabmob);
+                    XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
+                    foreach (XmlNode VARIABLE in baseNode1)
                     {
-                        cTool.DdlFiles.Text = mobilefeature[key];
-                    }
-                    key = "RedLetter";
-                    if (mobilefeature.ContainsKey(key))
-                    {
-                        cTool.DdlRedLetter.Text = mobilefeature[key];
-                    }
-                    key = "Information";
-                    if (mobilefeature.ContainsKey(key))
-                    {
-                        cTool.TxtInformation.Text = mobilefeature[key];
-                    }
-                    key = "Copyright";
-                    if (mobilefeature.ContainsKey(key))
-                    {
-                        cTool.TxtCopyright.Text = mobilefeature[key];
-                    }
-                    key = "Icon";
-                    if (mobilefeature.ContainsKey(key))
-                    {
-                        try
+                        string attribName = VARIABLE.Attributes["name"].Value;
+                        string attribValue = VARIABLE.Attributes["value"].Value;
+                        if (attribName.ToLower() == "fileproduced")
                         {
-                            string iconPath = mobilefeature[key];
-                            cTool.MobileIcon.Load(iconPath);
+                            cTool.DdlFiles.SelectedItem = attribValue;
                         }
-                        catch
+                        else if (attribName.ToLower() == "redletter")
                         {
+                            cTool.DdlRedLetter.SelectedItem = attribValue;
+                        }
+                        else if (attribName.ToLower() == "information")
+                        {
+                            cTool.TxtInformation.Text = attribValue;
+                        }
+                        else if (attribName.ToLower() == "copyright")
+                        {
+                            cTool.TxtCopyright.Text = attribValue;
                         }
                     }
-                }
-                SetMobileSummary(null, null);
-            }
-            else
-            {
-                cTool.TabControl1.TabPages.Add(tabdic);
-                ShowCssSummary();
+                    // EDB 11/5/2010 - replaced mobileFeature items with StyleProperty data
+                    // (the summary info wasn't displaying properly)
+                    //Dictionary<string, string> mobilefeature = Param.GetItemsAsDictionary("//mobileProperty/mobilefeature");
+                    //if (mobilefeature.Count > 0)
+                    //{
+                    //    string key = "FileProduced";
+                    //    if (mobilefeature.ContainsKey(key))
+                    //    {
+                    //        cTool.DdlFiles.Text = mobilefeature[key];
+                    //    }
+                    //    key = "RedLetter";
+                    //    if (mobilefeature.ContainsKey(key))
+                    //    {
+                    //        cTool.DdlRedLetter.Text = mobilefeature[key];
+                    //    }
+                    //    key = "Information";
+                    //    if (mobilefeature.ContainsKey(key))
+                    //    {
+                    //        cTool.TxtInformation.Text = mobilefeature[key];
+                    //    }
+                    //    key = "Copyright";
+                    //    if (mobilefeature.ContainsKey(key))
+                    //    {
+                    //        cTool.TxtCopyright.Text = mobilefeature[key];
+                    //    }
+                    //    key = "Icon";
+                    //    if (mobilefeature.ContainsKey(key))
+                    //    {
+                    //        try
+                    //        {
+                    //            string iconPath = mobilefeature[key];
+                    //            cTool.MobileIcon.Load(iconPath);
+                    //        }
+                    //        catch
+                    //        {
+                    //        }
+                    //    }
+                    SetMobileSummary(null, null);
+                    break;
+                case "others":
+                    cTool.TabControl1.TabPages.Add(tabothers);
+                    XmlNodeList baseNode = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
+                    foreach (XmlNode VARIABLE in baseNode)
+                    {
+                        string attribName = VARIABLE.Attributes["name"].Value.ToLower();
+                        string attribValue = VARIABLE.Attributes["value"].Value;
+                        switch (attribName)
+                        {
+                            case "embedfonts":
+                                cTool.DdlEmbedFonts.SelectedItem = attribValue;
+                                break;
+                            case "information":
+                                cTool.TxtDescription.Text = attribValue;
+                                break;
+                            case "publisher":
+                                cTool.TxtPublisher.Text = attribValue;
+                                break;
+                            case "source":
+                                cTool.TxtSource.Text = attribValue;
+                                break;
+                            case "format":
+                                cTool.TxtFormat.Text = attribValue;
+                                break;
+                            case "relation":
+                                cTool.TxtRelation.Text = attribValue;
+                                break;
+                            case "coverage":
+                                cTool.TxtCoverage.Text = attribValue;
+                                break;
+                            case "rights":
+                                cTool.TxtRights.Text = attribValue;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    SetOthersSummary(null, null);
+                    break;
+                default:
+                    // web, paper
+                    cTool.TabControl1.TabPages.Add(tabdic);
+                    ShowCssSummary();
+                    break;
             }
         }
 
@@ -1421,6 +1533,17 @@ namespace SIL.PublishingSolution
             Param.SetAttrValue(baseNode, AttribType, TypeCustom);
             //To add StyleProperty for Mobile media
             if (inputTypeBL.ToLower() == "scripture" && MediaType.ToLower() == "mobile")
+            {
+                XmlNodeList mobileBaseNode =
+                    Param.GetItems("//styles/" + MediaType + "/style[@name='" +
+                                   grid[AttribName, SelectedRowIndex].Value + "']/styleProperty");
+                foreach (XmlNode stylePropertyNode in mobileBaseNode)
+                {
+                    baseNode.AppendChild(stylePropertyNode.Clone());
+                }
+            }
+            // others (epub)
+            if (MediaType.ToLower() == "others")
             {
                 XmlNodeList mobileBaseNode =
                     Param.GetItems("//styles/" + MediaType + "/style[@name='" +
@@ -2012,6 +2135,15 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
+        public void ShowOthersSummaryBL()
+        {
+            var sb = new StringBuilder();
+            sb.Append((cTool.DdlEmbedFonts.Text.ToLower() == "yes")? "Embedded fonts" : "No embedded fonts");
+
+            cTool.TxtCss.Text = sb.ToString();
+        }
+
+
         public void ShowMobileSummaryBL()
         {
             string comma = ", ";
@@ -2128,6 +2260,95 @@ namespace SIL.PublishingSolution
             }
             catch { }
         }
+
+        public void ddlEmbedFonts_SelectedIndexChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                _embedFonts = cTool.DdlEmbedFonts.Text;
+                Param.UpdateMobileAtrrib("EmbedFonts", cTool.DdlEmbedFonts.Text, StyleName);
+                SetOthersSummary(sender, e);
+            }
+            catch { }
+        }
+
+        public void txtDescription_ValidatedBL()
+        {
+            try
+            {
+                Param.UpdateOthersAtrrib("Description", cTool.TxtCopyright.Text, StyleName);
+            }
+            catch
+            {
+            }
+        }
+
+        public void txtPublisher_ValidatedBL()
+        {
+            try
+            {
+                Param.UpdateOthersAtrrib("Publisher", cTool.TxtCopyright.Text, StyleName);
+            }
+            catch
+            {
+            }
+        }
+
+        public void txtSource_ValidatedBL()
+        {
+            try
+            {
+                Param.UpdateOthersAtrrib("Source", cTool.TxtCopyright.Text, StyleName);
+            }
+            catch
+            {
+            }
+        }
+
+        public void txtFormat_ValidatedBL()
+        {
+            try
+            {
+                Param.UpdateOthersAtrrib("Format", cTool.TxtCopyright.Text, StyleName);
+            }
+            catch
+            {
+            }
+        }
+
+        public void txtRelation_ValidatedBL()
+        {
+            try
+            {
+                Param.UpdateOthersAtrrib("Relation", cTool.TxtCopyright.Text, StyleName);
+            }
+            catch
+            {
+            }
+        }
+
+        public void txtCoverage_ValidatedBL()
+        {
+            try
+            {
+                Param.UpdateOthersAtrrib("Coverage", cTool.TxtCopyright.Text, StyleName);
+            }
+            catch
+            {
+            }
+        }
+
+        public void txtRights_ValidatedBL()
+        {
+            try
+            {
+                Param.UpdateOthersAtrrib("Copyright", cTool.TxtCopyright.Text, StyleName);
+            }
+            catch
+            {
+            }
+        }
+
 
         public void txtCopyright_ValidatedBL()
         {
@@ -2520,7 +2741,7 @@ namespace SIL.PublishingSolution
                 WriteCss();
                 cTool.BtnMobile.Enabled = true;
                 cTool.BtnWeb.Enabled = false;
-                cTool.BtnOthers.Enabled = false;
+                cTool.BtnOthers.Enabled = true;
                 setLastSelectedLayout();
                 WriteMedia();
                 inputTypeBL = "Scripture";
@@ -2528,11 +2749,12 @@ namespace SIL.PublishingSolution
                 LoadParam();
                 ClearPropertyTab(cTool.TabDisplay);
                 ClearPropertyTab(tabmob);
+                ClearPropertyTab(tabothers);
                 PopulateFeatureSheet(); //For TD-1194 // Load Default Values
                 SetPreviousLayoutSelect(cTool.StylesGrid);
                 SetSideBar();
                 ShowDataInGrid();
-                SetMobilePropertyTab();
+                SetPropertyTab();
                 _redoundo.Reset();
             }
             catch
@@ -2547,7 +2769,7 @@ namespace SIL.PublishingSolution
                 WriteCss(); 
                 cTool.BtnMobile.Enabled = false;
                 cTool.BtnWeb.Enabled = false;
-                cTool.BtnOthers.Enabled = false;
+                cTool.BtnOthers.Enabled = true;
                 setLastSelectedLayout();
                 WriteMedia();
                 inputTypeBL = "Dictionary";
@@ -2558,7 +2780,7 @@ namespace SIL.PublishingSolution
                 SetPreviousLayoutSelect(cTool.StylesGrid);
                 SetSideBar();
                 ShowDataInGrid();
-                SetMobilePropertyTab();
+                SetPropertyTab();
                 _redoundo.Reset();
             }
             catch
@@ -2631,6 +2853,11 @@ namespace SIL.PublishingSolution
         private void SetMobileSummary(object sender, EventArgs e)
         {
             ShowMobileSummaryBL();
+        }
+
+        private void SetOthersSummary(object sender, EventArgs e)
+        {
+            ShowOthersSummaryBL();
         }
 
         public void txtPageInside_ValidatedBL(object sender, EventArgs e)
@@ -2769,6 +2996,8 @@ namespace SIL.PublishingSolution
             if (cTool.TabControl1.TabPages.Count > 2)
             {
                 tabmob = cTool.TabControl1.TabPages[2];
+                tabothers = cTool.TabControl1.TabPages[3];
+                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages[3]);
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages[2]);
             }
             cTool.BtnMobile.Enabled = false;
@@ -2795,7 +3024,7 @@ namespace SIL.PublishingSolution
 
             //For the task TD-1481
             cTool.BtnWeb.Enabled = false;
-            cTool.BtnOthers.Enabled = false;
+            cTool.BtnOthers.Enabled = true;
 
             _screenMode = ScreenMode.View;
             ShowInfoValue();

@@ -138,6 +138,14 @@
       <option name="One" file="Rules_Yes.css" />
       <option name="One Per Letter" file="Rules_Yes.css" />
     </feature>
+    <feature name="EmbedFonts">
+      <option name="Yes" file="Rules_Yes.css" />
+      <option name="No" file="Rules_Yes.css" />
+    </feature>
+    <feature name="Subject">
+      <option name="Religion and Spirituality" file="Rules_Yes.css" />
+      <option name="Reference" file="Rules_Yes.css" />
+    </feature>
   </features>
   <categories>
     <category name="Publisher" select="Wycliffe">
@@ -261,9 +269,6 @@
     </style -->
     </paper>
     <mobile>
-      <style name="EBook (epub)" file="epub.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg">
-        <description>5.25x8.25in - 1 Col - Left aligned - Charis 11 on 15</description>
-      </style>
       <style name="GoBible" file="GoBible.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg" >
         <description>Text only, no section heads or cross references</description>
       </style>
@@ -274,8 +279,16 @@
       </style>
     </web>
     <others>
-      <style name="OneColumnOthers" file="LayoutOneCol.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg">
-        <description>5.25x8.25in - 1 Col - Left aligned - Charis 11 on 15</description>
+      <style name="EBook (epub)" file="epub.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg">
+        <description>1 column flowed text, left aligned, default font for each writing system</description>
+        <styleProperty name="EmbedFonts" value="Yes"/>
+        <styleProperty name="Description" value=" " />
+        <styleProperty name="Publisher" value=" " />
+        <styleProperty name="Source" value=" " />
+        <styleProperty name="Format" value=" " />
+        <styleProperty name="Relation" value=" " />
+        <styleProperty name="Coverage" value=" " />
+        <styleProperty name="Copyright" value="© " />
       </style>
     </others>
   </styles>
