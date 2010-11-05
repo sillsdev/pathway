@@ -223,14 +223,15 @@ namespace SIL.PublishingSolution
                     Directory.CreateDirectory(contentFolder);
                 }
 
-                // copy the embedded font if needed
+                // Font handling
+                // First, get the list of fonts used in this project
+                BuildFontsList();
+                // If we're embedding the fonts, handle the non-SIL ones now
                 if (EmbedFonts)
                 {
-                    // First, get the default font for this language from the project info
-                    BuildFontsList();
                     var nonSILFonts = new Dictionary<EmbeddedFont, string>();
                     string langs;
-                    // Next, collect the non-SIL fonts used in this file
+                    // Build the list of non-SIL fonts in use
                     foreach (var embeddedFont in _embeddedFonts)
                     {
                         if (!embeddedFont.Value.SILFont)
@@ -253,7 +254,7 @@ namespace SIL.PublishingSolution
                             }
                         }
                     }
-                    // If we came across any non-SIL fonts, show the Font Warning Dialog
+                    // If there are any non-SIL fonts in use, show the Font Warning Dialog
                     // (possibly multiple times) and replace our embedded font items if needed
                     if (nonSILFonts.Count > 0)
                     {
@@ -313,6 +314,7 @@ namespace SIL.PublishingSolution
                     }
                 }
                 // update the CSS file to reference any fonts used by the writing systems
+                // (if they aren't embedded in the .epub, we'll still link to them here)
                 ReferenceFonts(mergedCSS);
 
                 // copy over the XHTML and CSS files
@@ -674,7 +676,8 @@ namespace SIL.PublishingSolution
         {
             // Load User Interface Collection Parameters
             Param.LoadSettings();
-            Dictionary<string, string> mobilefeature = Param.GetItemsAsDictionary("//mobileProperty/mobilefeature");
+            // TODO: how to pull in the current style?
+            Dictionary<string, string> mobilefeature = Param.GetItemsAsDictionary("//styles/others/style[@name='EBook (epub)']/styleProperty");
             // information
             if (mobilefeature.ContainsKey("Information"))
             {

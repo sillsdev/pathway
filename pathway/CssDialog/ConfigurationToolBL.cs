@@ -2266,7 +2266,7 @@ namespace SIL.PublishingSolution
             try
             {
                 _embedFonts = cTool.DdlEmbedFonts.Text;
-                Param.UpdateMobileAtrrib("EmbedFonts", cTool.DdlEmbedFonts.Text, StyleName);
+                Param.UpdateOthersAtrrib("EmbedFonts", cTool.DdlEmbedFonts.Text, StyleName);
                 SetOthersSummary(sender, e);
             }
             catch { }
@@ -2276,7 +2276,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                Param.UpdateOthersAtrrib("Description", cTool.TxtCopyright.Text, StyleName);
+                Param.UpdateOthersAtrrib("Description", cTool.TxtDescription.Text, StyleName);
             }
             catch
             {
@@ -2287,7 +2287,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                Param.UpdateOthersAtrrib("Publisher", cTool.TxtCopyright.Text, StyleName);
+                Param.UpdateOthersAtrrib("Publisher", cTool.TxtPublisher.Text, StyleName);
             }
             catch
             {
@@ -2298,7 +2298,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                Param.UpdateOthersAtrrib("Source", cTool.TxtCopyright.Text, StyleName);
+                Param.UpdateOthersAtrrib("Source", cTool.TxtSource.Text, StyleName);
             }
             catch
             {
@@ -2309,7 +2309,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                Param.UpdateOthersAtrrib("Format", cTool.TxtCopyright.Text, StyleName);
+                Param.UpdateOthersAtrrib("Format", cTool.TxtFormat.Text, StyleName);
             }
             catch
             {
@@ -2320,7 +2320,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                Param.UpdateOthersAtrrib("Relation", cTool.TxtCopyright.Text, StyleName);
+                Param.UpdateOthersAtrrib("Relation", cTool.TxtRelation.Text, StyleName);
             }
             catch
             {
@@ -2331,7 +2331,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                Param.UpdateOthersAtrrib("Coverage", cTool.TxtCopyright.Text, StyleName);
+                Param.UpdateOthersAtrrib("Coverage", cTool.TxtCoverage.Text, StyleName);
             }
             catch
             {
@@ -2342,7 +2342,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                Param.UpdateOthersAtrrib("Copyright", cTool.TxtCopyright.Text, StyleName);
+                Param.UpdateOthersAtrrib("Copyright", cTool.TxtRights.Text, StyleName);
             }
             catch
             {
