@@ -573,5 +573,10 @@ namespace SIL.PublishingSolution
                 chkAvoidOdtCrash.Visible = false;
             }
         }
+
+        private void ChkAvoidOdtCrashMouseHover(object sender, EventArgs e)
+        {
+            tt_PrintVia.SetToolTip(chkAvoidOdtCrash, " Large files may crash on exit after saving. \n Eliminating the style sheet solved this problem but doesn't allow user to change the styles. \n So initially leave this box unchecked, but if Open Office is crashing, \n you can probably avoid crashing by checking this box.");
+        }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintVia));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chkAvoidOdtCrash = new System.Windows.Forms.CheckBox();
@@ -48,6 +49,7 @@
             this.BtnOk = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
             this.BtnHelp = new System.Windows.Forms.Button();
+            this.tt_PrintVia = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,6 +87,7 @@
             this.chkAvoidOdtCrash.Text = "Reduce number of styles to keep Open Office from crashing";
             this.chkAvoidOdtCrash.UseVisualStyleBackColor = true;
             this.chkAvoidOdtCrash.Visible = false;
+            this.chkAvoidOdtCrash.MouseHover += new System.EventHandler(this.ChkAvoidOdtCrashMouseHover);
             // 
             // txtSaveInFolder
             // 
@@ -303,5 +306,6 @@
         private System.Windows.Forms.Button BtnHelp;
         private System.Windows.Forms.TextBox txtSaveInFolder;
         private System.Windows.Forms.CheckBox chkAvoidOdtCrash;
+        private System.Windows.Forms.ToolTip tt_PrintVia;
     }
 }
