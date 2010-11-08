@@ -146,6 +146,8 @@ namespace SIL.PublishingSolution
                 _paragraphName = _childName;
                 _allParagraph.Push(_paragraphName);
                 _isNewParagraph = true;
+
+                CreateSectionClass(_paragraphName);
             }
             else if (_tagType == "span" || _tagType == "em") 
             {
@@ -178,6 +180,11 @@ namespace SIL.PublishingSolution
             }
             if (_tagType != "img")
                 _allStyle.Push(_childName);
+        }
+
+        public virtual void CreateSectionClass(string name)
+        {
+            
         }
 
         /// <summary>

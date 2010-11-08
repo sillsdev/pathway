@@ -139,6 +139,12 @@ namespace SIL.PublishingSolution
 
                         }
                     }
+                    else if (_allColumnProperty.ContainsKey(propName)) 
+                    {
+                        string prefix = _allColumnProperty[propName].ToString();
+                        _columnProperty[prefix + propName] = property.Value;
+                    }
+
                 }
                 _OOAllClass[cssClass.Key] = _OOClass;
 
@@ -165,10 +171,181 @@ namespace SIL.PublishingSolution
                     }
                     _writer.WriteEndElement();
                 }
+
+                if (_columnProperty.Count > 0) // create a value XML file for content.xml with column property.
+                {
+                    CreateColumnXMLFile(className);
+                }
                 _writer.WriteEndElement();
                 
             }
         }
+
+        /// -------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Create value XML file for storing section and column info
+        /// 
+        /// <list> 
+        /// </list>
+        /// </summary>
+        /// <returns>class Name</returns>
+        /// -------------------------------------------------------------------------------------------        
+        /// 
+        private void CreateColumnXMLFile(string className)
+        {
+            try
+            {
+
+                //_styleName.SectionName.Add(className.Trim());
+                string path = Common.PathCombine(Path.GetTempPath(), "_" + className.Trim() + ".xml");
+
+                XmlTextWriter writerCol = new XmlTextWriter(path, null);
+                writerCol.Formatting = Formatting.Indented;
+                writerCol.WriteStartDocument();
+                writerCol.WriteStartElement("office:document-content");
+                writerCol.WriteAttributeString("xmlns:office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
+                writerCol.WriteAttributeString("xmlns:style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+                writerCol.WriteAttributeString("xmlns:fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+                writerCol.WriteAttributeString("xmlns:text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
+                writerCol.WriteAttributeString("style:parent-style-name", "none");
+
+                writerCol.WriteStartElement("style:style");
+                writerCol.WriteAttributeString("style:name", "Sect_" + className.Trim());
+                writerCol.WriteAttributeString("style:family", "section");
+
+                writerCol.WriteStartElement("style:section-properties");
+                if (_columnProperty.ContainsKey("text:dont-balance-text-columns"))
+                {
+                    writerCol.WriteAttributeString("text:dont-balance-text-columns", _columnProperty["text:dont-balance-text-columns"]);
+                    _columnProperty.Remove("text:dont-balance-text-columns");
+                }
+                else
+                {
+                writerCol.WriteAttributeString("text:dont-balance-text-columns", "false");
+                }
+
+                if (_sectionProperty != null && _sectionProperty.ContainsKey("style:writing-mode"))
+                {
+                    writerCol.WriteAttributeString("style:writing-mode", _sectionProperty["style:writing-mode"]);
+                }
+
+                writerCol.WriteAttributeString("style:editable", "false");
+
+                writerCol.WriteStartElement("style:columns");
+
+
+                string columnGap = "0pt";
+                byte columnCount = 0;
+                foreach (KeyValuePair<string, string> text in _columnProperty)
+                {
+                    if (text.Key == "fo:column-gap")
+                    {
+                        columnGap = text.Value;
+                    }
+                    else if (text.Key == "fo:column-count")
+                    {
+                        columnCount = (byte)Common.ConvertToInch(text.Value);
+                    }
+                }
+
+                writerCol.WriteAttributeString("fo:column-count", columnCount.ToString());
+                float pageWidth = 0;
+                float relWidth = 0;
+                float spacing = 0;
+                float colWidth = 0;
+                if (columnCount > 1)
+                {
+                    pageWidth = Common.ConvertToInch(_pageLayoutProperty["fo:page-width"]);
+                    spacing = Common.ConvertToInch(columnGap) / 2;
+                    relWidth = (pageWidth - (spacing * (columnCount * 2))) / columnCount;
+
+                    if (columnGap.IndexOf("em") > 0 || columnGap.IndexOf("%") > 0) // Column Gap will be calculte in content.xml
+                    {
+                        colWidth = (pageWidth - Common.ConvertToInch(_pageLayoutProperty["fo:margin-left"])
+                                        - Common.ConvertToInch(_pageLayoutProperty["fo:margin-left"])) / 2.0F;
+                    }
+                    else
+                    {
+                        colWidth = (pageWidth - Common.ConvertToInch(columnGap) - Common.ConvertToInch(_pageLayoutProperty["fo:margin-left"])
+                                     - Common.ConvertToInch(_pageLayoutProperty["fo:margin-left"])) / 2.0F;
+                    }
+                    _styleName.ColumnWidth = colWidth; // for picture size calculation
+
+                    string relWidthStr = relWidth.ToString() + "*";
+                    for (int i = 1; i <= columnCount; i++)
+                    {
+                        writerCol.WriteStartElement("style:column");
+                        if (i == 1)
+                        {
+                            writerCol.WriteAttributeString("style:rel-width", relWidthStr);
+                            writerCol.WriteAttributeString("fo:start-indent", 0 + "in");
+                            writerCol.WriteAttributeString("fo:end-indent", spacing + "in");
+                        }
+                        else if (i == columnCount)
+                        {
+                            writerCol.WriteAttributeString("style:rel-width", relWidthStr);
+                            writerCol.WriteAttributeString("fo:start-indent", spacing + "in");
+                            writerCol.WriteAttributeString("fo:end-indent", 0 + "in");
+                        }
+                        else
+                        {
+                            writerCol.WriteAttributeString("style:rel-width", relWidthStr);
+                            writerCol.WriteAttributeString("fo:start-indent", spacing + "in");
+                            writerCol.WriteAttributeString("fo:end-indent", spacing + "in");
+                        }
+                        writerCol.WriteEndElement();
+                    }
+
+                    if (columnGap.IndexOf("em") > 0 || columnGap.IndexOf("%") > 0)
+                    {
+                        Dictionary<string, string> pageProperties = new Dictionary<string, string>();
+                        pageProperties["pageWidth"] = pageWidth.ToString();
+                        pageProperties["columnCount"] = columnCount.ToString();
+                        if (columnGap.IndexOf("em") > 0)
+                            pageProperties["columnGap"] = columnGap.ToString();
+                        else if (columnGap.IndexOf("%") > 0)
+                        {
+                            try
+                            {
+                                int convertToEm = int.Parse(columnGap.Replace("%", "")) / 100;
+                                pageProperties["columnGap"] = "." + convertToEm.ToString() + columnGap.Replace("%", "em");
+
+                            }
+                            catch (Exception)
+                            {
+                                pageProperties["columnGap"] = "1em";
+
+                            }
+                        }
+                        _styleName.ColumnGapEm["Sect_" + className.Trim()] = pageProperties;
+                    }
+                }
+
+                if (_columnSep.Count > 0)
+                {
+                    writerCol.WriteStartElement("style:column-sep");
+                    foreach (KeyValuePair<string, string> text in _columnSep)
+                    {
+                        writerCol.WriteAttributeString(text.Key, text.Value);
+                    }
+                    writerCol.WriteEndElement();
+                }
+
+                writerCol.WriteEndElement();
+                writerCol.WriteEndElement();
+                writerCol.WriteEndElement();
+
+                writerCol.WriteEndElement();
+                writerCol.WriteEndDocument();
+                writerCol.Flush();
+                writerCol.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+            }
+        }
+
         #endregion
 
         #region Page Layouts and Master Page - Header/Footer

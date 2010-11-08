@@ -36,8 +36,6 @@ namespace SIL.PublishingSolution
     {
         #region Private Variable
 
-        //XmlTextWriter _writer;
-        //XmlTextReader _reader;
         readonly Stack _styleStack = new Stack();
         readonly Stack _allSpanStack = new Stack();
         readonly Stack _allDivStack = new Stack();
@@ -53,7 +51,6 @@ namespace SIL.PublishingSolution
         readonly StyleAttribute _fontsizeAttributeInfo = new StyleAttribute();
         string _familyType = string.Empty;
         string _styleName = string.Empty;
-        int _sectionCount;
         // Image
         int _frameCount; //For Picture Frame count
         string _beforePseudoValue = string.Empty;
@@ -78,7 +75,6 @@ namespace SIL.PublishingSolution
         int _pbCounter;
         string _readerValue = string.Empty;
         string _footnoteValue = string.Empty;
-        string _lang = string.Empty;
         string _classAfter = string.Empty;
         char _closeTagType;
         string _parentStyleName;
@@ -244,8 +240,8 @@ namespace SIL.PublishingSolution
             ProcessProperty();
             OpenXhtmlFile(projInfo.DefaultXhtmlFileWithPath); //reader
             CreateFile(projInfo.TempOutputFolder); //writer
-            CreateBody();
             CreateSection();
+            CreateBody();
             ProcessXHTML(projInfo.ProgressBar, projInfo.DefaultXhtmlFileWithPath, projInfo.TempOutputFolder);
             UpdateRelativeInStylesXML();
             CloseFile(projInfo.TempOutputFolder, ColumnGapEm);
@@ -259,8 +255,10 @@ namespace SIL.PublishingSolution
                 string searchKey = "column-count";
                 if (IdAllClass[className].ContainsKey(searchKey))
                 {
-                        if(!_sectionName.Contains(className))
-                            _sectionName.Add(className);
+                    if (!_sectionName.Contains(className))
+                    {
+                        _sectionName.Add(className);
+                    }
 
                 }
 
@@ -294,6 +292,7 @@ namespace SIL.PublishingSolution
             //    }
             }
         }
+
         private void InitializeData(string projectPath, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
         {
             _allStyle = new Stack<string>();
@@ -818,6 +817,27 @@ namespace SIL.PublishingSolution
             Psuedo();
         }
 
+        public override void CreateSectionClass(string readerValue)
+        {
+            string sectionName = string.Empty;
+            readerValue = Common.LeftString(readerValue, "_");
+            if (_sectionName.Contains(readerValue))
+            {
+                sectionName = readerValue;
+            }
+            else if (_sectionName.Contains(readerValue + "." + _tagType))
+            {
+                sectionName = readerValue + "." + _tagType;
+            }
+            if (sectionName.Length > 0)
+            {
+                sectionName = "Sect_" + sectionName;
+                _writer.WriteStartElement("text:section");
+                _writer.WriteAttributeString("text:style-name", sectionName);
+                _writer.WriteAttributeString("text:name", sectionName);
+            }
+        }
+
         private void Psuedo()
         {
             // Psuedo Before
@@ -871,6 +891,12 @@ namespace SIL.PublishingSolution
         {
             _characterName = null;
             _closeChildName = StackPop(_allStyle);
+
+            string sectionName = Common.LeftString(_closeChildName, "_");
+            if (_sectionName.Contains(sectionName)) // section close
+            {
+                _writer.WriteEndElement();
+            }
             //Note: verify &todo in OO td2000 
             /*
             SetHeadwordFalse();
@@ -1998,7 +2024,7 @@ namespace SIL.PublishingSolution
         private void BeforeDivSpan(IList sectionList, string readerValue)
         {
 
-            RemoveScrSectionClass(sectionList);
+            //RemoveScrSectionClass(sectionList);
             string sectionName = string.Empty;
             if (sectionList.Contains(readerValue))
             {
@@ -2014,135 +2040,14 @@ namespace SIL.PublishingSolution
                 _writer.WriteStartElement("text:section");
                 _writer.WriteAttributeString("text:style-name", sectionName);
                 _writer.WriteAttributeString("text:name", sectionName);
-                _sectionCount++;
             }
         }
 
-        /// -------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Handle Relative Values
-        /// 
-        /// <list> 
-        /// </list>
-        /// </summary>
-        /// <param> </param>
-        /// <returns>true, has Relative values</returns>
-        /// -------------------------------------------------------------------------------------------
-        private bool RelativeValue(string styleFilePath, Stack styleStack, OldStyles structStyles, string readerValue)
-        {
-            bool isRelative = false;
-            _fontsizeAttributeInfo.NumericValue = 100;
-            if (structStyles.CssClassName[readerValue].ContainsKey("fo:font-size")) // find fo:font-size value for substitute to em
-            {
-                _fontsizeAttributeInfo.SetAttribute(readerValue, "fo:font-size", structStyles.CssClassName[readerValue]["fo:font-size"]);
-                if (_fontsizeAttributeInfo.Unit == "em")
-                {
-                    _fontsizeAttributeInfo.NumericValue = _fontsizeAttributeInfo.NumericValue * 100;
-                }
-            }
-
-            _fontsizeAttributeInfo.Name = "fo:font-size";
-            _fontsizeAttributeInfo.Unit = "%";
-            string parentFontsize = _util.GetFontsize(styleFilePath, styleStack, _fontsizeAttributeInfo);
-            var parentFontsizeAttribute = new StyleAttribute();
-            parentFontsizeAttribute.SetAttribute(parentFontsize);
-
-            string absVal;
-            foreach (KeyValuePair<string, string> kvp in structStyles.CssClassName[readerValue])
-            {
-                _attributeInfo.SetAttribute(readerValue, kvp.Key, kvp.Value);
-                if (_attributeInfo.Name == "fo:font-size")
-                {
-                    if (_attributeInfo.Unit.ToLower() == "larger" || _attributeInfo.Unit.ToLower() == "smaller")
-                    {
-                        int value = Common.GetLargerSmaller(parentFontsizeAttribute.NumericValue, _attributeInfo.StringValue.ToLower());
-                        absVal = value.ToString() + "pt";
-                    }
-                    else if (_attributeInfo.Unit.ToLower() == "largerx2" || _attributeInfo.Unit.ToLower() == "smallerx2")
-                    {
-                        // for superscript and subscript
-                        string stringValue = string.Empty;
-                        parentFontsizeAttribute.NumericValue = parentFontsizeAttribute.NumericValue * 1.4F;
-                        if (_attributeInfo.Unit.ToLower() == "largerx2")
-                        {
-                            stringValue = "larger";
-                        }
-                        else if (_attributeInfo.Unit.ToLower() == "smallerx2")
-                        {
-                            stringValue = "smaller";
-                        }
-
-                        int value = Common.GetLargerSmaller(parentFontsizeAttribute.NumericValue, stringValue);
-                        absVal = value.ToString() + "pt";
-                    }
-                    else
-                    {
-                        absVal = parentFontsize; // Use calculated value
-                    }
-                }
-                else if (_attributeInfo.Unit == "em")
-                {
-                    if (_attributeInfo.Name == "fo:letter-spacing") // emTest2 and emTest3
-                    {
-                        float emResult = parentFontsizeAttribute.NumericValue * _attributeInfo.NumericValue;
-                        absVal = emResult + "pt";
-                    }
-                    else
-                    {
-                        absVal = _util.GetFontsizeInsideSpan(styleFilePath, parentFontsizeAttribute.NumericValue, _attributeInfo);
-                        float parentFontSize = float.Parse(absVal.Replace("pt", ""));
-                        absVal = parentFontSize + "pt";
-                    }
-                }
-                else if (_attributeInfo.StringValue == "bolder" || _attributeInfo.StringValue == "lighter")
-                {
-                    absVal = _util.GetFontweight(styleFilePath, styleStack, _attributeInfo);
-                }
-                else if (_attributeInfo.Unit == "-em") // TD-143  Open Office: line-height: 110pt;  
-                {
-                    float lineHeightpt = _attributeInfo.NumericValue;
-                    _attributeInfo.NumericValue = 1;
-                    _attributeInfo.Unit = "em";
-                    absVal = _util.GetFontsizeInsideSpan(styleFilePath, parentFontsizeAttribute.NumericValue, _attributeInfo);
-                    //Common.ConvertToInch(absVal);
-                    float parentFontSize = float.Parse(absVal.Replace("pt", ""));
-                    lineHeightpt = (lineHeightpt - parentFontSize) / 2;
-
-                    absVal = lineHeightpt + "pt";
-                }
-                else
-                {
-                    absVal = _util.GetFontsize(styleFilePath, styleStack, _attributeInfo);
-                }
-                if (_attributeInfo.Name == "fo:column-gap")
-                {
-                    if (structStyles.ColumnGapEm.ContainsKey("Sect_" + readerValue))
-                    {
-                        structStyles.ColumnGapEm["Sect_" + readerValue]["columnGap"] = absVal;
-                        _columnWidth = structStyles.ColumnWidth - Common.ConvertToInch(absVal); // for picture size calculation
-                    }
-                    continue;
-                }
-                _makeAttribute.Add(kvp.Key, absVal);
-            }
-            if (_makeAttribute.Count > 0)
-            {
-                isRelative = true;
-                _util.GetNewChildName(styleFilePath, styleStack, readerValue, true);
-                _styleName = _util.ChildName;
-                //if (!ExistingStyleName.Contains(util.ChildName))
-                {
-                    _util.CreateStyleWithNewValue(styleFilePath, readerValue, _util.ChildName, _makeAttribute, _util.ParentName, _familyType, _structStyles.BackgroundColor);
-                    //ExistingStyleName.Add(util.ChildName);
-                }
-            }
-            return isRelative;
-        }
+ 
 
         /// <summary>
         /// Generate Section block in Content.xml.
         /// </summary>
-        /// <param name="sectionName">SectionName List created in styles.xml</param>
         private void CreateSection()
         {
 
