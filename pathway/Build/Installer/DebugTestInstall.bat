@@ -1,4 +1,7 @@
+set base=C:\svn\google\pathway
+if exist %base% goto goodbase
 set base=C:\svn\btai\PublishingSolution
+:goodbase
 set cfg=\bin\Debug
 set src=%BASE%\PsExport%cfg%
 if exist %src%\PsExport.dll goto goodCfg
@@ -29,6 +32,16 @@ xcopy %SRC%\PsExport.dll %DST% /y
 xcopy %SRC%\PsExport.pdb %DST% /y
 xcopy %SRC%\PsTool.dll %DST% /y
 xcopy %SRC%\PsTool.pdb %DST% /y
+
+rem copy backends
+xcopy %base%\OpenOfficeConvert\%cfg%\OpenOfficeConvert.* %DST% /y
+xcopy %base%\PdfConvert\%cfg%\PdfConvert.* %DST% /y
+xcopy %base%\InDesignConvert\%cfg%\InDesignConvert.* %DST% /y
+xcopy %base%\WordPressConvert\%cfg%\WordPressConvert.* %DST% /y
+xcopy %base%\XeTeXConvert\%cfg%\XeTeXConvert.* %DST% /y
+xcopy %base%\epubConvert\%cfg%\epubConvert.* %DST% /y
+xcopy %base%\GoBibleConvert\%cfg%\GoBibleConvert.* %DST% /y
+
 rem xcopy %SRC%\IKVM*.* %DST% /y
 rem xcopy %SRC%\saxon*.* %DST% /y
 
