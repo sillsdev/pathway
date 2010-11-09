@@ -48,6 +48,7 @@ namespace SIL.PublishingSolution
             _CToolBL.MediaTypeEXE = MediaType;
             _CToolBL.StyleEXE = Style.Replace('&', ' ');
             _CToolBL.SetClassReference(this);
+            _CToolBL.CreateToolTip();
         }
         #endregion
 
@@ -358,6 +359,16 @@ namespace SIL.PublishingSolution
             get { return btnPaper; }
         }
 
+        public Button BtnPrevious
+        {
+            get { return btnPrevious; }
+        }
+
+        public Button BtnNext
+        {
+            get { return btnNext; }
+        }
+
         public ComboBox DdlVerticalJustify
         {
             get { return ddlVerticalJustify; }
@@ -591,6 +602,11 @@ namespace SIL.PublishingSolution
         public Label LblEmbedFonts
         {
             get { return lblEmbedFonts; }
+        }
+
+        public PictureBox PicPreview
+        {
+            get { return picPreview; }
         }
 
         //private System.Windows.Forms.TableLayoutPanel TLPanelOuter;
@@ -974,6 +990,16 @@ namespace SIL.PublishingSolution
         private void txtRights_KeyUp(object sender, EventArgs e)
         {
             _CToolBL.SetModifyMode(true);
+        }
+
+        private void btnPrevious_Click(object sender, EventArgs e)
+        {
+            _CToolBL.ShowPreview(1);
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            _CToolBL.ShowPreview(2);
         }
      }
 }

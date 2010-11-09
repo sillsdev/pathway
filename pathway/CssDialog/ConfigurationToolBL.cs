@@ -695,6 +695,8 @@ namespace SIL.PublishingSolution
 
             if (cTool.TabControl1.SelectedIndex == 1)
                 ShowCSSValue();
+            else if (cTool.TabControl1.SelectedTab.Text == "Preview")
+                ShowPreview(1);
             _screenMode = ScreenMode.Edit;
         }
 
@@ -2376,70 +2378,12 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                string settingPath = Path.GetDirectoryName(Param.SettingPath);
-                string inputPath = Common.PathCombine(settingPath, "Styles");
-                inputPath = Common.PathCombine(inputPath, Param.Value["InputType"]);
-                string stylenamePath = Common.PathCombine(inputPath, "Preview");
+                CreatePreviewFile();
 
-                String imageFile = Common.PathCombine(stylenamePath, PreviewFileName1);
-                String imageFile1 = Common.PathCombine(stylenamePath, PreviewFileName2);
-
-                string selectedTypeValue = cTool.StylesGrid[ColumnType, SelectedRowIndex].Value.ToString();
-                if (selectedTypeValue != TypeStandard)
+                if (File.Exists(PreviewFileName1) || File.Exists(PreviewFileName2))
                 {
-                    bool isPreviewFileExist = false;
-                    if (File.Exists(PreviewFileName1) && File.Exists(PreviewFileName2))
-                    {
-                        isPreviewFileExist = true;
-                    }
-                    string fileName = string.Empty;
-                    //if (_isCreatePreview)
-                    if (_screenMode == ScreenMode.Modify || _screenMode == ScreenMode.SaveAs || _screenMode == ScreenMode.New || !isPreviewFileExist)
-                    {
-                        WriteCss();
-                        ShowCSSValue();
-                        _screenMode = ScreenMode.Edit;
-                        PleaseWait st = new PleaseWait();
-                        st.ShowDialog();
-                        string cssFile = Param.StylePath(FileName);
-                        PdftoJpg pd = new PdftoJpg();
-                        fileName = pd.ConvertPdftoJpg(cssFile, true);
-                        //_isCreatePreview = false;
-                        
-
-                        if (!Directory.Exists(stylenamePath)) return;
-
-                        if (!(File.Exists(imageFile) && File.Exists(imageFile1)))
-                        {
-                            imageFile = Common.PathCombine(Common.GetAllUserPath(),
-                                                           Path.GetFileNameWithoutExtension(fileName) + ".pdf1.jpg");
-                            PreviewFileName1 = imageFile;
-                            imageFile1 = Common.PathCombine(Common.GetAllUserPath(),
-                                                            Path.GetFileNameWithoutExtension(fileName) + ".pdf2.jpg");
-                            PreviewFileName2 = imageFile1;
-                        }
-
-                        string xPath = "//styles/" + MediaType + "/style[@name='" + StyleName + "']";
-                        XmlNode baseNode = Param.GetItem(xPath);
-                        if (baseNode != null)
-                        {
-                            Param.SetAttrValue(baseNode, "previewfile1", imageFile);
-                            Param.SetAttrValue(baseNode, "previewfile2", imageFile1);
-                            Param.Write();
-                        }
-                    }
-                    else
-                    {
-                        imageFile = PreviewFileName1;
-                        imageFile1 = PreviewFileName2;
-                    }
-
-                }
-
-                if (File.Exists(imageFile) || File.Exists(imageFile1))
-                {
-                    PreviewConfig preview = new PreviewConfig(imageFile,
-                                                              imageFile1)
+                    PreviewConfig preview = new PreviewConfig(PreviewFileName1,
+                                                              PreviewFileName2)
                                                 {
                                                     Text = ("Preview - " + StyleName)
                                                 };
@@ -2452,6 +2396,75 @@ namespace SIL.PublishingSolution
                 }
             }
             catch { }
+        }
+
+        private void CreatePreviewFile()
+        {
+            string settingPath = Path.GetDirectoryName(Param.SettingPath);
+            string inputPath = Common.PathCombine(settingPath, "Styles");
+            inputPath = Common.PathCombine(inputPath, Param.Value["InputType"]);
+            string stylenamePath = Common.PathCombine(inputPath, "Preview");
+            string selectedTypeValue = cTool.StylesGrid[ColumnType, SelectedRowIndex].Value.ToString();
+            if (selectedTypeValue != TypeStandard)
+            {
+                bool isPreviewFileExist = false;
+                if (File.Exists(PreviewFileName1) && File.Exists(PreviewFileName2))
+                {
+                    isPreviewFileExist = true;
+                }
+                string fileName = string.Empty;
+                if (_screenMode == ScreenMode.Modify || _screenMode == ScreenMode.SaveAs || _screenMode == ScreenMode.New || !isPreviewFileExist)
+                {
+                    WriteCss();
+                    ShowCSSValue();
+                    _screenMode = ScreenMode.Edit;
+                    PleaseWait st = new PleaseWait();
+                    st.ShowDialog();
+                    string cssFile = Param.StylePath(FileName);
+                    PdftoJpg pd = new PdftoJpg();
+                    fileName = pd.ConvertPdftoJpg(cssFile, true);
+
+                    if (!Directory.Exists(stylenamePath)) return;
+
+                    String imageFile = Common.PathCombine(stylenamePath, PreviewFileName1);
+                    String imageFile1 = Common.PathCombine(stylenamePath, PreviewFileName2);
+                    if (!(File.Exists(imageFile) && File.Exists(imageFile1)))
+                    {
+                        imageFile = Common.PathCombine(Common.GetAllUserPath(),
+                                                       Path.GetFileNameWithoutExtension(fileName) + ".pdf1.jpg");
+                        PreviewFileName1 = imageFile;
+                        imageFile1 = Common.PathCombine(Common.GetAllUserPath(),
+                                                        Path.GetFileNameWithoutExtension(fileName) + ".pdf2.jpg");
+                        PreviewFileName2 = imageFile1;
+                    }
+
+                    cTool.StylesGrid[PreviewFile1, SelectedRowIndex].Value = PreviewFileName1;
+                    cTool.StylesGrid[PreviewFile2, SelectedRowIndex].Value = PreviewFileName2;
+
+                    string xPath = "//styles/" + MediaType + "/style[@name='" + StyleName + "']";
+                    XmlNode baseNode = Param.GetItem(xPath);
+                    if (baseNode != null)
+                    {
+                        Param.SetAttrValue(baseNode, "previewfile1", imageFile);
+                        Param.SetAttrValue(baseNode, "previewfile2", imageFile1);
+                        Param.Write();
+                    }
+                }
+
+            }
+            else
+            {
+                PreviewFileName1 = Common.PathCombine(stylenamePath, Path.GetFileName(PreviewFileName1));
+                PreviewFileName2 = Common.PathCombine(stylenamePath, Path.GetFileName(PreviewFileName2));
+            }
+        }
+
+        public void CreateToolTip()
+        {
+            ToolTip toolTip = new ToolTip();
+            toolTip.ShowAlways = true;
+            toolTip.SetToolTip(cTool.BtnPrevious, "Show Page 1");
+            toolTip.SetToolTip(cTool.BtnNext, "Show Page 2");
         }
 
         public void ddlPageColumn_SelectedIndexChangedBL(object sender, EventArgs e)
@@ -2958,7 +2971,7 @@ namespace SIL.PublishingSolution
                     catch
                     {
                     }
-                    System.Diagnostics.Process.Start(string.Format("mailto:{0}?Subject={1}&Body={2}", MailTo,
+                    Process.Start(string.Format("mailto:{0}?Subject={1}&Body={2}", MailTo,
                                                                    MailSubject, MailBody));
 
                 }
@@ -3136,6 +3149,10 @@ namespace SIL.PublishingSolution
             {
                 ShowCSSValue();
             }
+            else if (cTool.TabControl1.SelectedTab.Text == "Preview")
+            {
+                ShowPreview(1);
+            }
         }
 
         public void ddlFileProduceDict_ValidatedBL(object sender)
@@ -3163,7 +3180,6 @@ namespace SIL.PublishingSolution
                     cTool.TxtName.Select();
                 }
                 
-                
                 //_screenMode = ScreenMode.Add;
                 //AddStyleInXML(cTool.StylesGrid, _cssNames);
                 //ShowStyleInGrid(cTool.StylesGrid, _cssNames);
@@ -3177,6 +3193,41 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
+        public void ShowPreview(int page)
+        {
+            CreatePreviewFile();
+            cTool.PicPreview.Visible = false;
+            string preview;
+            cTool.PicPreview.SizeMode = PictureBoxSizeMode.StretchImage;
+            //cTool.BtnPrevious.Visible = true;
+            //cTool.BtnNext.Visible = true;
+
+            if (page == 1)
+            {
+                preview = PreviewFileName1;
+                cTool.BtnPrevious.Enabled = false;
+                cTool.BtnNext.Enabled = true;
+            }
+            else
+            {
+                preview = PreviewFileName2;
+                cTool.BtnPrevious.Enabled = true;
+                cTool.BtnNext.Enabled = false;
+            }
+
+            if (File.Exists(preview))
+            {
+                //lblPreview.Text = "Sample data in this layout:";
+                cTool.PicPreview.Visible = true;
+                cTool.PicPreview.Image = Image.FromFile(preview);
+            }
+            else
+            {
+                //lblPreview.Text = "Sample data not available for a custom stylesheet.";
+                cTool.BtnPrevious.Visible = false;
+                cTool.BtnNext.Visible = false;
+            }
+        }
 
         #endregion
     }
