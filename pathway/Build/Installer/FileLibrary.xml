@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\ConfigurationTool\epubConvert.dll" ComponentGuid="77A148E5-E35E-4E33-A054-9E0F489D2802"/>
 	<File Path="Files\ConfigurationTool\TE_XHTML-to-epub_XHTML.xslt" ComponentGuid="D3DF2A98-A092-469B-B844-4840D3B419EC"/>
 	<File Path="Files\ConfigurationTool\epub\mimetype" ComponentGuid="B28BF6C2-C8F4-4753-8B2A-45F3AC8A1A3A"/>
 	<File Path="Files\ConfigurationTool\epub\META-INF\container.xml" ComponentGuid="324DFF29-DD9D-4E69-A25E-2479B2BEFF26"/>
