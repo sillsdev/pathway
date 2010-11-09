@@ -832,7 +832,7 @@ namespace SIL.PublishingSolution
 
         private static void IncludeTextinMacro(string strMacroPath, string ReferenceFormat, string saveAsPath)
         {
-            var xmldoc = new XmlDocument { XmlResolver = null };
+            var xmldoc = new XmlDocument {XmlResolver = null};
             xmldoc.Load(strMacroPath);
             XmlElement ele = xmldoc.DocumentElement;
             string autoMacro = "False";
@@ -842,21 +842,23 @@ namespace SIL.PublishingSolution
                 {
                     autoMacro = Param.Value[Param.ExtraProcessing];
                 }
-                if (ele != null)
+            }
+            if (ele != null)
+            {
+                string seperator = "\n";
+                string line1 = string.Empty;
+                if (publicationInfo.ProjectInputType.ToLower() == "scripture")
                 {
-                    string seperator = "\n";
-                    string line1 = string.Empty;
-                    if(publicationInfo.ProjectInputType.ToLower() =="scripture")
-                    {
-                        line1 = "\n'Constant ReferenceFormat for User Desire\nConst ReferenceFormat = \"" +
-                                   ReferenceFormat + "\"";
-                    }
-                    line1 = line1 + "\nConst AutoMacro = \"" + autoMacro + "\"";
-                    string line2 = "\nConst OutputFormat = \"" + publicationInfo.FinalOutput + "\"" + "\nConst FilePath = \"" + saveAsPath + "\"" + "\nConst IsPreview = \"" + publicationInfo.JpgPreview + "\"";
-                    string combined = line1 + line2 + seperator;
-
-                    ele.InnerText = combined + ele.InnerText;
+                    line1 = "\n'Constant ReferenceFormat for User Desire\nConst ReferenceFormat = \"" +
+                            ReferenceFormat + "\"";
                 }
+                line1 = line1 + "\nConst AutoMacro = \"" + autoMacro + "\"";
+                string line2 = "\nConst OutputFormat = \"" + publicationInfo.FinalOutput + "\"" +
+                               "\nConst FilePath = \"" + saveAsPath + "\"" + "\nConst IsPreview = \"" +
+                               publicationInfo.JpgPreview + "\"";
+                string combined = line1 + line2 + seperator;
+
+                ele.InnerText = combined + ele.InnerText;
             }
             xmldoc.Save(strMacroPath);
         }

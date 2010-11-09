@@ -329,6 +329,7 @@ namespace TestBed
             projInfo.ProgressBar = new ProgressBar();
             projInfo.DictionaryOutputName = "test";
             projInfo.ProjectInputType = radDictionary.Checked ? "Dictionary" : "Scripture";
+            projInfo.FinalOutput = "odt";
 
             ExportOpenOffice exportOdt = new ExportOpenOffice();
             exportOdt.Export(projInfo);
