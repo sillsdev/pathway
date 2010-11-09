@@ -306,7 +306,6 @@ namespace TestBed
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            //Common.Testing = true;  - uncomment for page property - but file won't open automatically
 
             if (!File.Exists(txtInputPath.Text))
             {
@@ -319,18 +318,19 @@ namespace TestBed
                 MessageBox.Show("Please enter the valid CSS path");
                 return;
             }
-            
-            ExportOpenOffice exportOdt = new ExportOpenOffice() ;
-           // ExportOdt exportOdt = new ExportOdt();
-            PublicationInformation projInfo = new PublicationInformation();
 
-            projInfo.ProjectInputType = "Dictionary";
+            Common.Testing = chkPage.Checked;
+
+            PublicationInformation projInfo = new PublicationInformation();
             projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
             projInfo.DictionaryPath = Path.GetDirectoryName(txtInputPath.Text);
             projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
             projInfo.DefaultCssFileWithPath = txtCSSInput.Text;
             projInfo.ProgressBar = new ProgressBar();
             projInfo.DictionaryOutputName = "test";
+            projInfo.ProjectInputType = radDictionary.Checked ? "Dictionary" : "Scripture";
+
+            ExportOpenOffice exportOdt = new ExportOpenOffice();
             exportOdt.Export(projInfo);
         }
 

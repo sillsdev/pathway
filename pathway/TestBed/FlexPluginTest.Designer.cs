@@ -52,11 +52,15 @@
             this.btnFileSizeZero = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.chkPage = new System.Windows.Forms.CheckBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.radScripture = new System.Windows.Forms.RadioButton();
+            this.radDictionary = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // BtnFlexTest
@@ -157,7 +161,7 @@
             // InDesign
             // 
             this.InDesign.AccessibleName = "BtnFlexTest";
-            this.InDesign.Location = new System.Drawing.Point(436, 136);
+            this.InDesign.Location = new System.Drawing.Point(436, 128);
             this.InDesign.Name = "InDesign";
             this.InDesign.Size = new System.Drawing.Size(118, 28);
             this.InDesign.TabIndex = 49;
@@ -213,6 +217,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkPage);
+            this.groupBox1.Controls.Add(this.panel3);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.button1);
@@ -220,17 +226,17 @@
             this.groupBox1.Controls.Add(this.InDesign);
             this.groupBox1.Location = new System.Drawing.Point(26, 247);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(591, 170);
+            this.groupBox1.Size = new System.Drawing.Size(583, 219);
             this.groupBox1.TabIndex = 51;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "InDesign Export";
+            this.groupBox1.Text = "Export";
             // 
             // button5
             // 
             this.button5.AccessibleName = "BtnFlexTest";
-            this.button5.Location = new System.Drawing.Point(188, 136);
+            this.button5.Location = new System.Drawing.Point(175, 128);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(118, 28);
+            this.button5.Size = new System.Drawing.Size(47, 28);
             this.button5.TabIndex = 53;
             this.button5.Text = "&Builder";
             this.button5.UseVisualStyleBackColor = true;
@@ -239,7 +245,7 @@
             // button4
             // 
             this.button4.AccessibleName = "BtnFlexTest";
-            this.button4.Location = new System.Drawing.Point(41, 136);
+            this.button4.Location = new System.Drawing.Point(40, 128);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(129, 28);
             this.button4.TabIndex = 52;
@@ -250,9 +256,9 @@
             // button1
             // 
             this.button1.AccessibleName = "BtnFlexTest";
-            this.button1.Location = new System.Drawing.Point(312, 136);
+            this.button1.Location = new System.Drawing.Point(241, 128);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(118, 28);
+            this.button1.Size = new System.Drawing.Size(174, 28);
             this.button1.TabIndex = 51;
             this.button1.Text = "&OpenOffice";
             this.button1.UseVisualStyleBackColor = true;
@@ -316,23 +322,53 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button6
+            // chkPage
             // 
-            this.button6.Location = new System.Drawing.Point(26, 421);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 53;
-            this.button6.Text = "button6";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.chkPage.AutoSize = true;
+            this.chkPage.Location = new System.Drawing.Point(270, 193);
+            this.chkPage.Name = "chkPage";
+            this.chkPage.Size = new System.Drawing.Size(118, 17);
+            this.chkPage.TabIndex = 55;
+            this.chkPage.Text = "With Page Property";
+            this.chkPage.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.radDictionary);
+            this.panel3.Controls.Add(this.radScripture);
+            this.panel3.Location = new System.Drawing.Point(241, 162);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(174, 25);
+            this.panel3.TabIndex = 54;
+            // 
+            // radScripture
+            // 
+            this.radScripture.AutoSize = true;
+            this.radScripture.Location = new System.Drawing.Point(81, 3);
+            this.radScripture.Name = "radScripture";
+            this.radScripture.Size = new System.Drawing.Size(67, 17);
+            this.radScripture.TabIndex = 1;
+            this.radScripture.Text = "Scripture";
+            this.radScripture.UseVisualStyleBackColor = true;
+            // 
+            // radDictionary
+            // 
+            this.radDictionary.AutoSize = true;
+            this.radDictionary.Checked = true;
+            this.radDictionary.Location = new System.Drawing.Point(3, 3);
+            this.radDictionary.Name = "radDictionary";
+            this.radDictionary.Size = new System.Drawing.Size(72, 17);
+            this.radDictionary.TabIndex = 2;
+            this.radDictionary.TabStop = true;
+            this.radDictionary.Text = "Dictionary";
+            this.radDictionary.UseVisualStyleBackColor = true;
             // 
             // FlexPluginTest
             // 
             this.AccessibleName = "FlexPluginTest";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(646, 443);
-            this.Controls.Add(this.button6);
+            this.ClientSize = new System.Drawing.Size(646, 497);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
@@ -344,8 +380,11 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -377,6 +416,9 @@
         private System.Windows.Forms.CheckBox chkIncrease;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.CheckBox chkPage;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.RadioButton radDictionary;
+        private System.Windows.Forms.RadioButton radScripture;
     }
 }
