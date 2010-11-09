@@ -845,8 +845,13 @@ namespace SIL.PublishingSolution
                 if (ele != null)
                 {
                     string seperator = "\n";
-                    string line1 = "\n'Constant ReferenceFormat for User Desire\nConst ReferenceFormat = \"" +
-                                   ReferenceFormat + "\"" + "\nConst AutoMacro = \"" + autoMacro + "\"";
+                    string line1 = string.Empty;
+                    if(publicationInfo.ProjectInputType.ToLower() =="scripture")
+                    {
+                        line1 = "\n'Constant ReferenceFormat for User Desire\nConst ReferenceFormat = \"" +
+                                   ReferenceFormat + "\"";
+                    }
+                    line1 = line1 + "\nConst AutoMacro = \"" + autoMacro + "\"";
                     string line2 = "\nConst OutputFormat = \"" + publicationInfo.FinalOutput + "\"" + "\nConst FilePath = \"" + saveAsPath + "\"" + "\nConst IsPreview = \"" + publicationInfo.JpgPreview + "\"";
                     string combined = line1 + line2 + seperator;
 
