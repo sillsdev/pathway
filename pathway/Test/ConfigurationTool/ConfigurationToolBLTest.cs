@@ -347,7 +347,7 @@ namespace Test.UIConfigurationToolBLTest
         {
             //To check the Others button disable property
             bool buttonOthers = cTool.BtnOthers.Enabled;
-            Assert.IsFalse(buttonOthers, "Others button enable Test failed");
+            Assert.IsTrue(buttonOthers, "Others button enable Test failed");
         }
 
         private void WebButtonEnable()
@@ -382,7 +382,7 @@ namespace Test.UIConfigurationToolBLTest
         {
             //To check the Default button enable property
             bool buttonDefault = cTool.TsDefault.Enabled;
-            Assert.IsFalse(buttonDefault, "Default button enable Test failed");
+            Assert.IsTrue(buttonDefault, "Default button enable Test failed");
         }
 
         private void PreviewButtonEnable()
