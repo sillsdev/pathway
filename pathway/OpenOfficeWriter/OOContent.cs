@@ -17,6 +17,7 @@
 #region Using
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Reflection;
 using System.Text;
 using System.Xml;
@@ -158,7 +159,7 @@ namespace SIL.PublishingSolution
         private bool _verserNoStart;
         private string _chapterNo;
         private string _verseNo;
-
+        private PublicationInformation _projInfo;
         private bool _IsHeadword = false;
         private bool _significant;
 
@@ -236,7 +237,7 @@ namespace SIL.PublishingSolution
             _structStyles = styleInfo;
             Dictionary<string, Dictionary<string, string>> ColumnGapEm = new Dictionary<string, Dictionary<string, string>>();
             string _inputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
-            InitializeData(projInfo.TempOutputFolder, idAllClass, classFamily, cssClassOrder);
+            InitializeData(projInfo, idAllClass, classFamily, cssClassOrder);
             ProcessProperty();
             OpenXhtmlFile(projInfo.DefaultXhtmlFileWithPath); //reader
             CreateFile(projInfo.TempOutputFolder); //writer
@@ -293,12 +294,12 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void InitializeData(string projectPath, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
+        private void InitializeData(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
         {
             _allStyle = new Stack<string>();
             _allParagraph = new Stack<string>();
             _allCharacter = new Stack<string>();
-
+            
             _childStyle = new Dictionary<string, string>();
             IdAllClass = new Dictionary<string, Dictionary<string, string>>();
             ParentClass = new Dictionary<string, string>();
@@ -306,9 +307,12 @@ namespace SIL.PublishingSolution
             _displayBlock = new Dictionary<string, string>();
             _cssClassOrder = cssClassOrder;
             //_classFamily = new Dictionary<string, ArrayList>();
+            _projInfo = projInfo;
+
+            _sourcePicturePath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+            _projectPath = projInfo.TempOutputFolder;
 
             IdAllClass = idAllClass;
-            _projectPath = projectPath;
             _classFamily = classFamily;
 
             _isNewParagraph = false;
@@ -762,6 +766,8 @@ namespace SIL.PublishingSolution
 
         private void WriteCharacterStyle(string content, string characterStyle)
         {
+            _imageInserted = InsertImage();
+
             if (_tagType == "span" && characterStyle != "none") //span start
             {
                 _writer.WriteStartElement("text:span");
@@ -903,6 +909,8 @@ namespace SIL.PublishingSolution
             ClosefooterNote();
             EndElementForImage();
             */
+            EndElementForImage();
+
             if (_closeChildName == string.Empty) return;
             if (_psuedoAfter.Count > 0)
             {
@@ -926,687 +934,9 @@ namespace SIL.PublishingSolution
             _classNameWithLang = StackPeek(_allStyle);
             _classNameWithLang = Common.LeftString(_classNameWithLang, "_");
         }
-        private void EndElement(ProgressBar pb)
-        {
-            // if anchor does not have test to write , close the anchor tag.
-            if (_anchorStart && _reader.Name == "a")
-            {
-                _anchorStart = false;
-            }
-            if (_styleStack.Count > 0 && (_styleStack.Peek().ToString() == _footNoteStyleName))
-            {
-                string currClass = _footNoteStyleName.Substring(0, _footNoteStyleName.IndexOf('_'));
-                string FormatMarker = string.Empty;
-                if (_structStyles.FootNoteMarker.ContainsKey(currClass)
-                    && (_structStyles.FootNoteMarker[currClass].IndexOf("#ChapterNumber") >= 0 ||
-                    _structStyles.FootNoteMarker[currClass].IndexOf("#VerseNumber") >= 0))
-                {
-                    FormatMarker = _structStyles.FootNoteMarker[currClass].Replace("#ChapterNumber", _hapterNumber).Replace("#VerseNumber", _verseNumber) + " ";
-                }
-                InsertFootCall(_footCal, currClass, _formatFootnote, FormatMarker);
-                _footCal = null;
-                _formatFootnote = null;
-                _footNoteStyleName = null;
-            }
-
-
-            _closeTagType = (char)_tagTypeStack.Pop();
-
-            if (_contentReplace)
-            {
-                _styleCounter--;
-                if (_styleCounter == 0)
-                {
-                    _contentReplace = false;
-                }
-            }
-            _footnoteValue = string.Empty;
-            _pbCounter++;
-
-            if (progressBarError)
-            {
-                pb.Maximum = _pbCounter;
-            }
-
-            //pb.Value = _pbCounter++; // used to set the value for Progress Bar.
-            if (pb != null)
-                pb.Value = _pbCounter; // used to set the value for Progress Bar.
-            if (_prevLangStack.Count > 0)
-            {
-                if (_prevLangStack.Peek() != null)
-                {
-                    _prevLang = _prevLangStack.Pop().ToString();
-                }
-                else
-                {
-                    _prevLangStack.Pop();
-                }
-            }
-            //tagType = (char)tagTypeStack.Pop();
-            if (_closeTagType == 'P')
-            {
-                if (_styleStack.Count > 0)
-                {
-                    _classAfter = _styleStack.Pop().ToString();
-                    _allDiv = _allDivStack.Pop().ToString();
-                    InsertPseudoAfter(_classAfter, _structStyles.PseudoClassAfter, _structStyles.PseudoWithoutStyles);
-                }
-                if (_divOpen) // Avoid consecutive </fullString:p>
-                {
-                    _writer.WriteEndElement();
-                    _divOpen = false;
-                }
-                string[] currentArray = _classAfter.Split('_');
-                string currentClass = string.Empty;
-                if (currentArray.Length > 0)
-                {
-                    currentClass = currentArray[0];
-                }
-                if (_structStyles.SectionName.Contains(currentClass))
-                {
-                    _writer.WriteEndElement();
-                }
-                if ((char)_tagTypeStack.Peek() == 'S') // <li>
-                {
-                    _tagTypeStack.Pop();
-                    _writer.WriteEndElement();
-                }
-                else if ((char)_tagTypeStack.Peek() == 'L') // Is <ol> or <ul>
-                {
-                    _tagTypeStack.Pop();
-                    _writer.WriteEndElement();
-                    //NewLine();
-                }
-                else if (_reader.Name == "p") // <p>
-                {
-                    //NewLine();
-                }
-
-            }
-            else if (_closeTagType == 'T') // Handling nested span
-            {
-                _classAfter = _styleStack.Pop().ToString();
-                InsertPseudoAfter(_classAfter, _structStyles.PseudoClassAfter, _structStyles.PseudoWithoutStyles);
-                _temp = _allSpanStack.Pop().ToString();
-                _familyType = "";
-                if (_usedSpanStack.Count > 0)
-                {
-                    if (_temp == _usedSpanStack.Peek().ToString())
-                    {
-                        _temp = _usedSpanStack.Pop().ToString();
-                        _writer.WriteEndElement();
-                    }
-                }
-            }
-            //else if (_tagType == 'L') // <ol> & <ul>
-            //{
-            //    _writer.WriteEndElement();
-            //    _classAfter = _styleStack.Pop().ToString();
-            //    NewLine();
-            //}
-            //string stylePeek = string.Empty;
-            //if (_styleStack.Count > 0)
-            //{
-            //    stylePeek = _styleStack.Peek().ToString();
-            //}
-
-            if (_imageStart)
-            {
-                if (_imageParent == _classAfter)
-                {
-                    if (_forcedPara)
-                    {
-                        //_writer.WriteRaw("</text:p>");
-                        _writer.WriteEndElement();
-                        //_forcedPara = false;
-                    }
-                    _writer.WriteEndElement();
-                    _writer.WriteEndElement();
-                    //_writer.WriteRaw("</draw:text-box></draw:frame>");
-                    if (!_imageTextAvailable)
-                        _imageCaptionEmpty.Add(_imageGraphicsName);
-                    _imageStart = false;
-                    _imagePreviousFinished = true;
-                    _imageDiv = false;
-                    _forcedPara = false;
-                    _divOpen = true;  // make it true to continuous writing of, coming paragraph also if 
-
-                }
-            }
-
-        }
-
-        private void WriteText(string currClass)
-        {
-
-            if (_imagePreviousFinished)
-                _imagePreviousFinished = false;
-
-            if (_divOpen == false)
-            {
-                _divClass = _allDivStack.Count > 0 ? _allDivStack.Peek().ToString() : "none";
-                if (_divClass.IndexOf('_') < 0 && _divClass.IndexOf(' ') >= 0)
-                {
-                    _divClass = _divClass.Substring(0, _divClass.IndexOf(' '));
-                }
-
-                if (_isDropCap) // forcing new paragraph for drop caps
-                {
-                    string currentParentStyle = _allDivStack.Peek().ToString();
-                    _writer.WriteStartElement("text:p");
-                    int noOfChar = _reader.Value.Length;
-                    string currentStyle = currClass + noOfChar;
-                    _util.CreateDropCapStyle(_styleFilePath, currClass, currentStyle, currentParentStyle, noOfChar);
-                    _writer.WriteAttributeString("text:style-name", currentStyle);
-                }
-                else
-                {
-                    _writer.WriteStartElement("text:p");
-                    _writer.WriteAttributeString("text:style-name", _divClass);
-                }
-                if (_imageStart)
-                {
-                    _imageDiv = true;
-                    _util.CreateStyleHyphenate(_styleFilePath, _divClass);
-                }
-
-                _divOpen = true;
-                _divClass = string.Empty;
-            }
-            else
-            {
-                if (_isDropCap) // until the next paragraph
-                {
-                    _isDropCap = false;
-                }
-            }
-            if (_imageStart)
-            {
-                _imageTextAvailable = true;
-            }
-            if (_familyType == "text")
-            {
-                if (_imageStart && !_forcedPara && !_imageDiv) // images
-                {
-                    _writer.WriteStartElement("text:p");
-                    _writer.WriteAttributeString("text:style-name", "ForcedDiv");
-                    _util.CreateStyleHyphenate(_styleFilePath, "ForcedDiv");
-                    _forcedPara = true;
-                }
-                _usedSpanStack.Push(_util.ChildName);
-                _writer.WriteStartElement("text:span");
-                _writer.WriteAttributeString("text:style-name", _util.ChildName);
-                //_unUsedParagraphStyle.Remove(_util.ChildName); // NOte remove all predicate check
-                //_unUsedParagraphStyle.Add(_util.ChildName);
-            }
-            else if (_usedSpanStack.Count == 0)
-            {
-                if (_allSpanStack.Count > 0)
-                {
-                    _styleName = _allSpanStack.Peek().ToString();
-                    if (_styleName.IndexOf('_') < 0 && _styleName.IndexOf(' ') >= 0)
-                    {
-                        _styleName = _styleName.Substring(0, _styleName.IndexOf(' '));
-                    }
-                    _usedSpanStack.Push(_styleName);
-                    _writer.WriteStartElement("text:span");
-
-                    _writer.WriteAttributeString("text:style-name", _styleName);
-                }
-            }
-
-            if (isHiddenText)
-            {
-                int noOfChar = _reader.Value.Trim().Replace("\r\n", "").Length;
-                noOfChar = noOfChar + (noOfChar * 20 / 100);
-                _writer.WriteStartElement("text:s");
-                _writer.WriteAttributeString("text:c", noOfChar.ToString());
-                _writer.WriteEndElement();
-                isHiddenText = false;
-                goto last;
-            }
-
-            if (_anchorIdValue.Length > 0)
-            {
-                _writer.WriteStartElement("text:reference-mark");
-                _writer.WriteAttributeString("text:name", _anchorIdValue);
-                _writer.WriteEndElement();
-                _anchorIdValue = string.Empty;
-            }
-
-            if (_contentReplace)
-            {
-                if (_classContentBuilder.Length > 0)
-                {
-                    _writer.WriteRaw(_classContentBuilder.ToString());
-                    _classContentBuilder.Remove(0, _classContentBuilder.Length);
-                }
-            }
-            else if (_isWhiteSpace)
-            {
-                WhiteSpace(_reader.Value, _divClass);
-                _isWhiteSpace = false;
-            }
-            else
-            {
-                if (_pseudoBuilder.Length > 0)
-                {
-                    _writer.WriteRaw(_pseudoBuilder.ToString());
-                    _pseudoBuilder.Remove(0, _pseudoBuilder.Length);
-                }
-                if (!string.IsNullOrEmpty(_footCal))
-                {
-                    _formatFootnote += _reader.Value;
-                }
-                else if ((_structStyles.DisplayFootNote.Count > 0 && _structStyles.DisplayFootNote.Contains(currClass)))
-                {
-                    _autoFootNoteCount++;
-                    _writer.WriteStartElement("text:note");
-                    _writer.WriteAttributeString("text:id", "ftn" + (_autoFootNoteCount));
-                    _writer.WriteAttributeString("text:note-class", currClass);
-                    _writer.WriteStartElement("text:note-citation");
-                    _writer.WriteString(_autoFootNoteCount.ToString());
-                    _writer.WriteEndElement();
-                    _writer.WriteStartElement("text:note-body");
-                    _writer.WriteStartElement("text:p");
-                    _writer.WriteAttributeString("text:style-name", currClass);
-                    _writer.WriteString(". " + _reader.Value);
-                    _writer.WriteEndElement();
-                    _writer.WriteEndElement();
-                    _writer.WriteEndElement();
-                }
-                else if (_anchorStart)
-                {
-                    if (_anchor.Count > 0)
-                    {
-                        string data = HardSpace(currClass, _reader.Value);
-                        string hrefValueWOHash = _anchor[_anchor.Count - 1].ToString();
-                        _writer.WriteStartElement("text:reference-ref");
-                        _writer.WriteAttributeString("text:reference-format", "text");
-                        _writer.WriteAttributeString("text:ref-name", hrefValueWOHash);
-                        _writer.WriteString(data);
-                        _writer.WriteEndElement(); // for Anchor Ends
-                        _anchorStart = false;
-                    }
-                }
-                else
-                {
-                    //if (string.Compare(currClass, "ChapterNumber") == 0)
-                    //{
-                    //    ChapterNumber = _reader.Value;
-                    //}
-                    //else if (string.Compare(currClass, "VerseNumber") == 0)
-                    //{
-                    //    VerseNumber = _reader.Value;
-                    //}
-                    string data = HardSpace(currClass, _reader.Value);
-                    _writer.WriteString(data);
-                }
-                if (string.Compare(currClass, "ChapterNumber") == 0)
-                {
-                    _hapterNumber = _reader.Value;
-                }
-                else if (string.Compare(currClass, "VerseNumber") == 0)
-                {
-                    _verseNumber = _reader.Value;
-                }
-            }
-            last:
-            if (_familyType == "text")
-            {
-                _unUsedParagraphStyle.Add(_util.ChildName);
-            }
-            _familyType = "";
-            _isNewLine = false;
-
-        }
-        #endregion
+       #endregion
 
         #region Private Methods
-
-        private bool InsertPseudoParentBefore(string classN, string classAfter, string lang,
-            string oldClass, OldStyles dictContents, string prevLang)
-        {
-            string writingContent = "\u0b84"; // Changed to Unicode. Because string empty also allowed to write in Content : Normal,None.
-            string ancestorClass = string.Empty;
-            int first = 0;
-            int second = 0;
-            int third = 0;
-
-            string currentClass = classN.IndexOf('_') >= 0 ? classN.Substring(0, classN.IndexOf('_')) : classN;
-
-            if (currentClass.IndexOf(' ') >= 0)
-            {
-                currentClass = currentClass.Substring(0, currentClass.IndexOf(' '));
-            }
-            string parentClass = classAfter.IndexOf('_') >= 0 ? classAfter.Substring(0, classAfter.IndexOf('_')) : classN;
-
-            if (classAfter.IndexOf(' ') >= 0)
-            {
-                parentClass = classAfter.Substring(0, classAfter.IndexOf(' '));
-            }
-            if (classAfter.IndexOf('_') >= 0)
-            {
-                string[] split = classAfter.Split('_');
-                //string getClass = classAfter.Substring(classAfter.IndexOf("_") + 1, (classAfter.Length - classAfter.IndexOf("_")) - 1);
-                ancestorClass = split[1];
-                if (split[1].IndexOf('.') >= 0)
-                {
-                    //getClass = classAfter.Substring(classAfter.IndexOf("_.") + 2, (classAfter.Length - classAfter.IndexOf("_")) - 2);
-                    //getClass = getClass.Substring(getClass.IndexOf("_") + 1, (getClass.Length - getClass.IndexOf("_")) - 1);
-                    ancestorClass = split[2];
-                }
-                //styleName = classN + "_" + getClass;
-            }
-            if (dictContents.PseudoPosition.Contains(oldClass + "_." + lang))
-            {
-                first = dictContents.PseudoPosition.IndexOf(oldClass + "_." + lang);
-            }
-
-            if (dictContents.PseudoPosition.Contains(currentClass + "_." + lang + "_" + parentClass))
-            {
-                second = dictContents.PseudoPosition.IndexOf(currentClass + "_." + lang + "_" + parentClass);
-            }
-
-            if (dictContents.PseudoPosition.Contains(currentClass + "_" + parentClass + "_." + prevLang))
-            {
-                third = dictContents.PseudoPosition.IndexOf(currentClass + "_" + parentClass + "_." + prevLang);
-            }
-
-            if (dictContents.PseudoAttrib.ContainsKey(currentClass + "_." + lang + "_" + parentClass + "_." + prevLang))
-            {
-                writingContent = dictContents.PseudoAttrib[currentClass + "_." + lang + "_" + parentClass + "_." + prevLang];
-                currentClass = currentClass + "_." + lang + "_" + parentClass + "_." + prevLang;
-            }
-            else if (dictContents.PseudoAncestorBefore.ContainsKey(currentClass + "_." + lang + "_" + parentClass + "." + ancestorClass))
-            {
-                writingContent = dictContents.PseudoAncestorBefore[currentClass + "_." + lang + "_" + parentClass + "." + ancestorClass];
-                currentClass = currentClass + "_." + lang + "_" + parentClass + "." + ancestorClass;
-            }
-            else if (dictContents.PseudoAncestorBefore.ContainsKey(currentClass + "_" + parentClass + "." + ancestorClass))
-            {
-                writingContent = dictContents.PseudoAncestorBefore[currentClass + "_" + parentClass + "." + ancestorClass];
-                currentClass = currentClass + "_" + parentClass + "." + ancestorClass;
-            }
-            //else if (dictContents.PseudoClassBefore.ContainsKey(m_OldClass + "_." + lang))
-            //{
-            //    writingContent = dictContents.PseudoClassBefore[m_OldClass + "_." + lang];
-            //    currentClass = OldClass + "_." + lang;
-            //    beforePseudoValue = string.Empty;
-            //}
-            //else if (dictContents.PseudoAttrib.ContainsKey(currentClass + "_." + lang + "_" + parentClass))
-            //{
-            //    writingContent = dictContents.PseudoAttrib[currentClass + "_." + lang + "_" + parentClass];
-            //    currentClass = currentClass + "_." + lang + "_" + parentClass;
-            //}
-            else if (dictContents.PseudoClassBefore.ContainsKey(oldClass + "_." + lang))
-            {
-                if (first >= second)
-                {
-                    writingContent = dictContents.PseudoClassBefore[oldClass + "_." + lang];
-                    currentClass = oldClass + "_." + lang;
-                    _beforePseudoValue = string.Empty;
-                }
-                else if (dictContents.PseudoAttrib.ContainsKey(currentClass + "_." + lang + "_" + parentClass))
-                {
-                    writingContent = dictContents.PseudoAttrib[currentClass + "_." + lang + "_" + parentClass];
-                    currentClass = currentClass + "_." + lang + "_" + parentClass;
-                }
-            }
-            else if (dictContents.PseudoAttrib.ContainsKey(currentClass + "_." + lang + "_" + parentClass) || dictContents.PseudoAttrib.ContainsKey(currentClass + "_" + parentClass + "_." + prevLang))
-            {
-                if (third > second)
-                {
-                    writingContent = dictContents.PseudoAttrib[currentClass + "_" + parentClass + "_." + prevLang];
-                    currentClass = currentClass + "_" + parentClass + "_." + prevLang;
-                }
-                else if (second >= first)
-                {
-                    writingContent = dictContents.PseudoAttrib[currentClass + "_." + lang + "_" + parentClass];
-                    currentClass = currentClass + "_." + lang + "_" + parentClass;
-                }
-                else if (dictContents.PseudoClassBefore.ContainsKey(oldClass + "_." + lang))
-                {
-                    writingContent = dictContents.PseudoClassBefore[oldClass + "_." + lang];
-                    currentClass = oldClass + "_." + lang;
-                    _beforePseudoValue = string.Empty;
-                }
-            }
-            //else if (dictContents.PseudoClassBefore.ContainsKey(oldClass))
-            //{
-            //    writingContent = dictContents.PseudoClassBefore[oldClass];
-            //    currentClass = oldClass;
-            //    _beforePseudoValue = string.Empty;
-            //}
-            else if (dictContents.PseudoClassBefore.ContainsKey(currentClass + "_." + lang))
-            {
-                writingContent = dictContents.PseudoClassBefore[currentClass + "_." + lang];
-                currentClass = currentClass + "_." + lang;
-                _beforePseudoValue = string.Empty;
-            }
-            else if (dictContents.PseudoAttrib.ContainsKey(currentClass + "_." + lang))
-            {
-                writingContent = dictContents.PseudoAttrib[currentClass + "_." + lang];
-                currentClass = currentClass + "_." + lang;
-                _beforePseudoValue = string.Empty;
-            }
-            else if (dictContents.PseudoAttrib.ContainsKey(currentClass + "_" + parentClass))
-            {
-                writingContent = dictContents.PseudoAttrib[currentClass + "_" + parentClass];
-                currentClass = currentClass + "_" + parentClass;
-            }
-            else if (dictContents.PseudoClassBefore.ContainsKey(currentClass))
-            {
-                writingContent = dictContents.PseudoClassBefore[currentClass];
-                _beforePseudoValue = string.Empty;
-            }
-            _beforePseudoParentValue = string.Empty;
-
-            if (writingContent != "\u0b84")
-            {
-
-                if (dictContents.PseudoClassBefore.ContainsKey(classN))
-                {
-                    string ConcatContent = string.Empty;
-                    string x = dictContents.PseudoClassBefore[classN];
-
-                    if (x.IndexOf("counter") >= 0)
-                    {
-                        string[] y = x.Split('\u0b83');
-                        foreach (string var in y)
-                        {
-                            if (var.IndexOf("counter") >= 0)
-                            {
-                                int srtPos = var.IndexOf('(');
-                                int endPos = var.IndexOf(')');
-                                string value = var.Substring(srtPos + 1, endPos - srtPos - 1);
-                                if (dictContents.ContentCounter.ContainsKey(value))
-                                {
-                                    ConcatContent = ConcatContent + dictContents.ContentCounter[value];
-                                }
-                                else
-                                {
-                                    ConcatContent = ConcatContent + "0";
-                                }
-                            }
-                            else
-                            {
-                                ConcatContent = ConcatContent + var.Replace('\'', ' ');
-                            }
-                        }
-                        writingContent = ConcatContent;
-                    }
-                }
-                //if (writingContent != "") // No need to write empty spaces
-                //{
-                //    string styleName = currentClass + "-" + "before";
-                //    // The stylename without styles will be ignored for Pseudo.
-                //    if (dictContents.PseudoWithoutStyles.Contains(styleName))
-                //    {
-                //        _pseudoBuilder.Append(writingContent);
-                //    }
-                //    else
-                //    {
-                //        _pseudoBuilder.Append("<text:span ");
-                //        _pseudoBuilder.Append("text:style-name=\"" + styleName + "\">" + writingContent);
-                //        _pseudoBuilder.Append("</text:span>");
-                //    }
-                //}
-                if (writingContent.Length > 0) // No need to write empty spaces
-                {
-                    string styleName = currentClass + "-" + "before";
-                    // The stylename without styles will be ignored for Pseudo.
-                    _pseudoBuilder.Append("<text:span");
-                    if (!dictContents.PseudoWithoutStyles.Contains(styleName))
-                    {
-                        _pseudoBuilder.Append(" text:style-name=\"" + styleName + "\"");
-                    }
-                    _pseudoBuilder.Append(">");
-                    _pseudoBuilder.Append(writingContent);
-                    _pseudoBuilder.Append("</text:span>");
-                }
-                return true;
-            }
-            return false;
-        }
-
-        /// --------------------------------------------------------------------------------------------------
-        /// <summary>
-        /// To insert the replace the fullString with content for rules
-        /// like .definition > .xitem + .yitem {content: "Test"}
-        /// </summary>
-        /// <param name="classN"></param>
-        /// <param name="lang">Current language</param>
-        /// <param name="prevClass">Previous classname like xitem</param>
-        /// <param name="prevLang">Previous language</param>
-        /// <param name="parent">Parent classname</param>
-        /// <param name="parentLang">parent language like definition</param>
-        /// <param name="dictContents">List of dictionary used</param>
-        /// <returns></returns>
-        /// ---------------------------------------------------------------------------------------------------
-        private void InsertClassContent(string classN, string lang, string prevClass, string prevLang, string parent, string parentLang, OldStyles dictContents)
-        {
-            string contentValue = string.Empty;
-            string currentClass = classN.IndexOf('_') >= 0 ? classN.Substring(0, classN.IndexOf('_')) : classN;
-            if (currentClass.IndexOf(' ') >= 0)
-            {
-                currentClass = currentClass.Substring(0, currentClass.IndexOf(' '));
-            }
-            currentClass = currentClass + "_." + lang;
-            string precedesClass = prevClass + "_." + prevLang;
-            string parentClass = parent + "_." + parentLang;
-            if (dictContents.ClassContent.ContainsKey(currentClass + "." + parentClass + "_" + precedesClass))
-            {
-                contentValue = dictContents.ClassContent[currentClass + "." + parentClass + "_" + precedesClass];
-            }
-            else if (dictContents.ClassContent.ContainsKey(classN + "." + parentClass + "_" + precedesClass))
-            {
-                contentValue = dictContents.ClassContent[classN + "." + parentClass + "_" + precedesClass];
-            }
-            else if (dictContents.ClassContent.ContainsKey(classN + "." + parent + "_" + prevClass))
-            {
-                contentValue = dictContents.ClassContent[classN + "." + parent + "_" + prevClass];
-            }
-            else if (dictContents.ClassContent.ContainsKey(currentClass + "_" + precedesClass + "." + parentClass))
-            {
-                contentValue = dictContents.ClassContent[currentClass + "_" + precedesClass + "." + parentClass];
-            }
-            else if (dictContents.ClassContent.ContainsKey(classN + "_" + prevClass + "." + parent))
-            {
-                contentValue = dictContents.ClassContent[classN + "_" + prevClass + "." + parent];
-            }
-            // .XITEM + .XITEM
-            else if (dictContents.ClassContent.ContainsKey(currentClass + "_" + precedesClass))
-            {
-                contentValue = dictContents.ClassContent[currentClass + "_" + precedesClass];
-            }
-            else if (dictContents.ClassContent.ContainsKey(currentClass + "_" + prevClass))
-            {
-                contentValue = dictContents.ClassContent[currentClass + "_" + prevClass];
-            }
-            else if (dictContents.ClassContent.ContainsKey(currentClass + "_" + prevClass))
-            {
-                contentValue = dictContents.ClassContent[currentClass + "_" + prevClass];
-            }
-            else if (dictContents.ClassContent.ContainsKey(classN + "_" + prevClass))
-            {
-                contentValue = dictContents.ClassContent[classN + "_" + prevClass];
-            }
-            else if (dictContents.ClassContent.ContainsKey(parentClass + "_" + precedesClass + "." + currentClass))
-            {
-                contentValue = dictContents.ClassContent[parentClass + "_" + precedesClass + "." + currentClass];
-            }
-            else if (dictContents.ClassContent.ContainsKey(currentClass))
-            {
-                contentValue = dictContents.ClassContent[currentClass];
-            }
-            else if (dictContents.ClassContent.ContainsKey(classN))
-            {
-                contentValue = dictContents.ClassContent[classN];
-            }
-            //if (isDIVOpen)
-            //{
-            //    _writer.WriteEndElement();
-            //}
-            if (contentValue != string.Empty)
-            {
-                if (_pseudoBuilder.Length > 0)
-                {
-                    _classContentBuilder.Append(_pseudoBuilder.ToString());
-                    _pseudoBuilder.Remove(0, _pseudoBuilder.Length);
-                }
-                _classContentBuilder.Append(contentValue);
-                _contentReplace = true;
-                _styleCounter++;
-            }
-        }
-
-        private void InsertPseudoAfter(string classAfter, IDictionary<string, string> dictPseudoAfter, List<string> pseudoWithOutStyle)
-        {
-            string writingContent = string.Empty;
-            string firstName = classAfter;
-            if (classAfter.IndexOf('_') >= 0)
-            {
-                firstName = classAfter.Substring(0, classAfter.IndexOf('_'));
-            }
-            if (firstName.IndexOf(' ') >= 0)
-            {
-                firstName = firstName.Substring(0, firstName.IndexOf(' '));
-            }
-
-            if (dictPseudoAfter.ContainsKey(firstName))
-            {
-                writingContent = dictPseudoAfter[firstName];
-            }
-
-            //if (writingContent != "")
-            //{
-            //    _styleName = firstName + "-" + "after";
-            //    // The stylename without styles will be ignored for Pseudo.
-            //    if (pseudoWithOutStyle.Contains(_styleName))
-            //    {
-            //        _writer.WriteString(writingContent);
-            //    }
-            //    else
-            //    {
-            //    _writer.WriteStartElement("text:span");
-            //    _writer.WriteAttributeString("text:style-name", _styleName);
-            //    _writer.WriteString(writingContent);
-            //    _writer.WriteEndElement();
-            //}
-            if (writingContent.Length > 0)
-            {
-                _styleName = firstName + "-" + "after";
-                // The stylename without styles will be ignored for Pseudo.
-                _writer.WriteStartElement("text:span");
-                if (!pseudoWithOutStyle.Contains(_styleName))
-                {
-                _writer.WriteAttributeString("text:style-name", _styleName);
-                }
-                _writer.WriteString(writingContent);
-                _writer.WriteEndElement();
-            }
-        }
 
         /// <summary>
         /// Replace trailing "softspace" to "hardspace"
@@ -1675,179 +1005,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private string GetAncestorNode(IDictionary<string, ArrayList> dicAncestor, string utilClassName, string className)
-        {
-            if (_styleStack.Count == 0)
-            {
-                return className;
-            }
-            string readerValue = utilClassName;
-            string getStyleName = utilClassName;
-            int maxIndex = -1;
-            int currIndex;
-            if (className.IndexOf(" ") > 0)
-            {
-                if (dicAncestor.ContainsKey(utilClassName))
-                {
-                    ArrayList arrHasValue = dicAncestor[utilClassName];
-                    string[] arrValue = className.Split(' ');
-                    foreach (string value in arrValue)
-                    {
-                        currIndex = arrHasValue.IndexOf(value);
-                        if (currIndex > maxIndex)
-                        {
-                            maxIndex = currIndex;
-                            readerValue = utilClassName + " " + value;
-                        }
-                    }
-                }
-            }
-
-            currIndex = 0;
-            string ancestorClass = _styleStack.Peek().ToString();
-            if (dicAncestor.ContainsKey(utilClassName))
-            {
-                ArrayList arrAncestor = dicAncestor[utilClassName];
-                string[] arrValue = ancestorClass.Split('_');
-                for (int i = 0; i < arrValue.Length; i++)
-                {
-                    foreach (string classname in arrAncestor)
-                    {
-
-                        if (arrValue[i].Equals(classname))
-                        {
-                            getStyleName = utilClassName + "." + classname;
-                            break;
-                        }
-                        currIndex++;
-                    }
-                }
-            }
-            if (currIndex > maxIndex && maxIndex <= 0)
-            {
-                return getStyleName;
-            }
-            return currIndex < maxIndex && maxIndex >= 1 ? readerValue : utilClassName;
-        }
-
-        /// -------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Generate first block of Content.xml
-        /// 
-        /// <list> 
-        /// </list>
-        /// </summary>
-        /// <param name="ClassName"></param>
-        /// <param name="lang"></param>
-        /// <param name="classAfter"></param>
-        /// <param name="oldClass"></param>
-        /// <param name="dictContents"></param>
-        /// -------------------------------------------------------------------------------------------
-
-        private void InsertPseudoBefore(string ClassName, string lang, string classAfter, string oldClass,
-           OldStyles dictContents)
-        {
-            string writingContent = string.Empty;
-            string parentClass = classAfter.IndexOf(' ') >= 0 ? classAfter.Substring(0, classAfter.IndexOf(' ')) : classAfter;
-            if (parentClass.IndexOf('_') >= 0)
-            {
-                parentClass.Substring(0, parentClass.IndexOf('_'));
-            }
-
-            if (_beforePseudoParentValue == ClassName)
-            {
-                _beforePseudoParentValue = string.Empty;
-            }
-
-            if (dictContents.PseudoClassBefore.ContainsKey(oldClass + "_." + lang))  //.pronunciation[lang=en_US][class_=first-of-type]::before
-            {
-                writingContent = dictContents.PseudoClassBefore[oldClass + "_." + lang]; //.pronounciation first-of-type_.en_US
-                ClassName = oldClass + "_." + lang;
-            }
-            else if (dictContents.PseudoClassBefore.ContainsKey(oldClass)) //.pronunciation[class_=first-of-type]::before
-            {
-                writingContent = dictContents.PseudoClassBefore[oldClass]; //pronounciation first-of-type
-                ClassName = oldClass;
-            }
-            else if (dictContents.PseudoClassBefore.ContainsKey(ClassName + "_." + lang)) //.pronunciation[lang=en_US]::before
-            {
-                writingContent = dictContents.PseudoClassBefore[ClassName + "_." + lang]; //Pronunciation_.en_US
-                ClassName = ClassName + "_." + lang;
-            }
-            else if (dictContents.PseudoClassBefore.ContainsKey(ClassName)) //.pronunciation:before
-            {
-                writingContent = dictContents.PseudoClassBefore[ClassName]; //Pronunciation
-            }
-            _beforePseudoValue = string.Empty;
-
-
-            if (writingContent != "")
-            {
-                if (dictContents.PseudoClassBefore.ContainsKey(ClassName))
-                {
-                    string ConcatContent = string.Empty;
-                    string x = dictContents.PseudoClassBefore[ClassName];
-                    string[] y = x.Split('\u0b83');
-                    if (x.IndexOf("counter") >= 0)
-                    {
-                        foreach (string var in y)
-                        {
-                            if (var.IndexOf("counter") >= 0)
-                            {
-                                int srtPos = var.IndexOf('(');
-                                int endPos = var.IndexOf(')');
-                                string var1 = var.Substring(srtPos + 1, endPos - srtPos - 1);
-                                if (dictContents.ContentCounter.ContainsKey(var1))
-                                {
-                                    ConcatContent = ConcatContent + dictContents.ContentCounter[var1];
-                                }
-                                else
-                                {
-                                    ConcatContent = ConcatContent + "0";
-                                }
-                            }
-                            else
-                            {
-                                ConcatContent = ConcatContent + var.Replace('\'', ' ');
-                            }
-                        }
-                        writingContent = ConcatContent;
-                    }
-                }
-                
-                //_styleName = ClassName + "-" + "before";
-                //    _pseudoBuilder.Append("<text:span ");
-                //    _pseudoBuilder.Append("text:style-name=\"" + _styleName + "\">" + writingContent);
-                //    _pseudoBuilder.Append("</text:span>");
-
-                //// The stylename without styles will be ignored for Pseudo.
-                //if (dictContents.PseudoWithoutStyles.Contains(_styleName))
-                //{
-                //    _pseudoBuilder.Append(writingContent);
-                //}
-                //else
-                //{
-                //    _pseudoBuilder.Append("<text:span ");
-                //    _pseudoBuilder.Append("text:style-name=\"" + _styleName + "\">" + writingContent);
-                //    _pseudoBuilder.Append("</text:span>");
-                //}
-                if (writingContent.Length > 0) // No need to write empty spaces
-                {
-                _styleName = ClassName + "-" + "before";
-                // The stylename without styles will be ignored for Pseudo.
-                    _pseudoBuilder.Append("<text:span");
-                    if (!dictContents.PseudoWithoutStyles.Contains(_styleName))
-                {
-                        _pseudoBuilder.Append(" text:style-name=\"" + _styleName + "\"");
-                }
-                    _pseudoBuilder.Append(">");
-                    _pseudoBuilder.Append(writingContent);
-                _pseudoBuilder.Append("</text:span>");
-                }
-            }
-        }
-
-        private void CreateFile(string targetPath)
+       private void CreateFile(string targetPath)
         {
             string targetContentXML = targetPath + "content.xml";
             _writer = new XmlTextWriter(targetContentXML, null) { Formatting = Formatting.Indented };
@@ -2011,38 +1169,6 @@ namespace SIL.PublishingSolution
         //    return retValue.ToString();
         //}
 
-        /// -------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Generate execute before Span and Div Tag.
-        /// 
-        /// <list> 
-        /// </list>
-        /// </summary>
-        /// <param> </param>
-        /// <returns> </returns>
-        /// -------------------------------------------------------------------------------------------
-        private void BeforeDivSpan(IList sectionList, string readerValue)
-        {
-
-            //RemoveScrSectionClass(sectionList);
-            string sectionName = string.Empty;
-            if (sectionList.Contains(readerValue))
-            {
-                sectionName = readerValue;
-            }
-            else if (sectionList.Contains(readerValue + "." + _tagType))
-            {
-                sectionName = readerValue + "." + _tagType;
-            }
-            if (sectionName.Length > 0)
-            {
-                sectionName = "Sect_" + sectionName;
-                _writer.WriteStartElement("text:section");
-                _writer.WriteAttributeString("text:style-name", sectionName);
-                _writer.WriteAttributeString("text:name", sectionName);
-            }
-        }
-
  
 
         /// <summary>
@@ -2093,285 +1219,370 @@ namespace SIL.PublishingSolution
                 classList.RemoveAt(classList.IndexOf("scrSection"));
         }
 
-        /// <summary>
-        /// Inserts the Image with Caption
-        /// </summary>
-        /// 
-        /// <param name="styleFilePath">Styles.xml file path</param>
-        /// <param name="Targetfile">To path of Target File</param>
-        /// 
-        private void InsertImageCaption(string styleFilePath, string targetfile)
+        private void GetHeightandWidth(ref string height, ref string width)
         {
-            string pos = string.Empty;
-            string side = string.Empty;
-            //int divCount = 1;
-            if (_styleStack.Count > 0)
+            if (_allCharacter.Count > 0)
             {
-                string stackClass = _styleStack.Peek().ToString();
+                string stackClass = _allCharacter.Peek();
                 string[] splitedClassName = stackClass.Split('_');
+
+                string[] allClasses = new string[splitedClassName.Length + 1];
+                splitedClassName.CopyTo(allClasses, 1);
+                allClasses[0] = _imageSrcClass; // including current Class
+                if (allClasses.Length > 0)
+                {
+                    //for (int i = splitedClassName.Length -1; i >= 0; i--)  // From Begining to Recent Class
+                    for (int i = 0; i < allClasses.Length; i++) // // From Recent to Begining Class
+                    {
+                        string clsName = allClasses[i];
+                        string ht = string.Empty;
+                        string wd = string.Empty;
+                        ht = GetPropertyValue(clsName, "height");
+                        wd = GetPropertyValue(clsName, "width");
+                        if (ht.Length > 0 || wd.Length > 0)
+                        {
+                            if (ht.Length > 0)
+                                height = ht;
+
+                            if (wd.Length > 0)
+                                width = wd;
+
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+        private void GetWrapSide(ref string wrapSide, ref string wrapMode)
+        {
+            string clearValue = GetPropertyValue(_imageClass, "clear");
+            if (clearValue.Length > 0)
+            {
+                wrapSide = clearValue;
+            }
+            switch (wrapSide)
+            {
+                case "left":
+                    wrapSide = "RightSide";
+                    break;
+                case "right":
+                    wrapSide = "LeftSide";
+                    break;
+                case "both":
+                    wrapSide = "RightSide";
+                    wrapMode = "JumpObjectTextWrap";
+                    break;
+                case "none":
+                    wrapSide = "BothSides";
+                    break;
+            }
+        }
+
+        private void GetAlignment(string alignment, ref string align, ref string alignPosition, string className)
+        {
+            string clsName = className;
+            TextInfo _titleCase = CultureInfo.CurrentCulture.TextInfo;
+            string floatValue = GetPropertyValue(clsName, "float");
+            if (floatValue.Length > 0)
+            {
+                alignment = floatValue;
+            }
+            if (alignment.Length > 0)
+            {
+                alignment = _titleCase.ToTitleCase(alignment);
+                align = align.Replace("Left", alignment);
+                alignPosition = alignPosition.Replace("Left", alignment);
+            }
+        }
+
+        private void GetAlignment(string alignment, ref string wrapSide, ref string HoriAlignment, ref string AnchorPoint, ref string VertRefPoint, ref string VertAlignment, ref string wrapMode)
+        {
+            if (_allCharacter.Count > 0)
+            {
+                string stackClass2 = _allStyle.Peek();
+                string stackClass1 = _allParagraph.Peek();
+                string stackClass = _allCharacter.Peek();
+                //string[] splitedClassName = stackClass.Split('_');
+
+                string[] splitedClassName = _allStyle.ToArray();
+
                 if (splitedClassName.Length > 0)
                 {
                     //for (int i = splitedClassName.Length -1; i >= 0; i--)  // From Begining to Recent Class
                     for (int i = 0; i < splitedClassName.Length; i++) // // From Recent to Begining Class
                     {
                         string clsName = splitedClassName[i];
-                        if (pos == string.Empty && _structStyles.FloatAlign.ContainsKey(clsName))
+                        string pos = GetPropertyValue(clsName, "float", alignment);
+                        switch (pos)
                         {
-                            pos = _structStyles.FloatAlign[clsName];
+                            case "left":
+                                HoriAlignment = "LeftAlign";
+                                AnchorPoint = "TopLeftAnchor";
+                                VertAlignment = "CenterAlign";
+                                VertRefPoint = "LineBaseline";
+                                break;
+                            case "right":
+                                AnchorPoint = "TopRightAnchor";
+                                HoriAlignment = "RightAlign";
+                                VertAlignment = "CenterAlign";
+                                VertRefPoint = "LineBaseline";
+                                break;
+                            case "top":
+                            case "prince-column-top":
+                            case "-ps-column-top":
+                            case "top-left":
+                                AnchorPoint = "TopLeftAnchor";
+                                HoriAlignment = "LeftAlign";
+                                VertAlignment = "TopAlign";
+                                VertRefPoint = "PageMargins";
+                                wrapMode = "JumpObjectTextWrap";
+                                break;
+                            case "top-right":
+                                AnchorPoint = "TopRightAnchor";
+                                VertAlignment = "TopAlign";
+                                HoriAlignment = "RightAlign";
+                                VertRefPoint = "PageMargins";
+                                wrapMode = "JumpObjectTextWrap";
+                                break;
+                            case "bottom":
+                            case "prince-column-bottom":
+                            case "-ps-column-bottom":
+                            case "bottom-left":
+                                AnchorPoint = "BottomLeftAnchor";
+                                VertAlignment = "BottomAlign";
+                                HoriAlignment = "LeftAlign";
+                                VertRefPoint = "PageMargins";
+                                wrapMode = "JumpObjectTextWrap";
+                                break;
+                            case "bottom-right":
+                                AnchorPoint = "BotomRightAnchor";
+                                VertAlignment = "BottomAlign";
+                                HoriAlignment = "RightAlign";
+                                VertRefPoint = "PageMargins";
+                                wrapMode = "JumpObjectTextWrap";
+                                break;
                         }
-
-                        if (side == string.Empty && _structStyles.ClearProperty.ContainsKey(clsName))
-                        {
-                            side = _structStyles.ClearProperty[clsName];
-                        }
-
-                        if (pos != string.Empty && side != string.Empty)
-                        {
-                            break;
-                        }
+                        wrapSide = GetPropertyValue("clear", clsName, wrapSide);
                     }
                 }
             }
-
-            string classPicture = _reader.GetAttribute("class") ?? "img";
-            string src = _reader.GetAttribute("src").ToLower();
-            string longdesc = _reader.GetAttribute("longdesc");
-            longdesc = longdesc != null ? longdesc.ToLower() : "";
-            string altText = _reader.GetAttribute("alt");
-
-            if (_structStyles.ImageSource.ContainsKey(longdesc))
-            {
-                Dictionary<string, string> tempDict = _structStyles.ImageSource[longdesc];
-                if (tempDict.ContainsKey("float"))
-                {
-                    pos = tempDict["float"];
-                }
-            }
-            _imageTextAvailable = false;
-            ImageBuild(styleFilePath, targetfile, src, altText, classPicture, pos, side, longdesc);
-            _imageStart = true;
-            _imageParent = _util.ChildName;
-
-            /*
-            while (_reader.Read())
-            {
-                if (_reader.IsEmptyElement)
-                {
-                    continue;
-                }
-                switch (_reader.NodeType)
-                {
-                    case XmlNodeType.Element:
-                        divCount++;
-                        break;
-                    case XmlNodeType.EndElement:
-                        divCount--;
-                        if (divCount == 0)
-                        {
-
-                            ImageBuild(styleFilePath, Targetfile, src, altText, classPicture, caption, pos, side, readerValue);
-                            _imageBuilder.Remove(0, _imageBuilder.Length);
-
-                            _styleStack.Pop().ToString();
-                            string tagStyle = _tagTypeStack.Pop().ToString();
-                            if (tagStyle == "P")
-                            {
-                                _allDivStack.Pop();
-                            }
-                            else if (tagStyle == "T")
-                            {
-                                _allSpanStack.Pop();
-                            }
-                            return;
-                        }
-                        break;
-                    case XmlNodeType.Text:
-                        caption += _reader.Value;
-                        break;
-                }
-            }
-           */
-            //return;
         }
-
-        private void ImageBuild(string styleFilePath, string targetFile, string src, string altText, string classPicture, string pos, string side, string readerValue)
+        public bool InsertImage()
         {
-            Common.ColumnWidth = _structStyles.ColumnWidth;
-            _writer.Formatting = Formatting.None;
-            string imgHeight = "0";
-            string imgWidth = "0";
-            string imgHUnit = "in";
-            string imgWUnit = "in";
+            bool inserted = false;
+            if (_imageInsert)
+            {
+                //1 inch = 72 PostScript points
+                string alignment = "left";
+                string wrapSide = string.Empty;
+                string rectHeight = "0";
+                string rectWidth = "0";
+                string srcFile;
+                string wrapMode = "BoundingBoxTextWrap";
+                string HoriAlignment = string.Empty;
+                string VertAlignment = "center";
+                string VertRefPoint = "LineBaseline";
+                string AnchorPoint = "TopLeftAnchor";
 
-            string fromPath = Common.GetPictureFromPath(src, _metaValue, _sourcePicturePath);
-            string fileName = Path.GetFileName(src);
+                isImage = true;
+                inserted = true;
+                string[] cc = _allParagraph.ToArray();
+                imageClass = cc[1];
+                srcFile = _imageSource.ToLower();
+                //string fileName = "file:" + Common.GetPictureFromPath(srcFile, "", _sourcePicturePath);
+                string fromPath = Common.GetPictureFromPath(srcFile, _metaValue, _sourcePicturePath);
+                string fileName = Path.GetFileName(srcFile);
 
-            string normalTargetFile = targetFile;
+            string normalTargetFile = _projInfo.TempOutputFolder;
             string basePath = normalTargetFile.Substring(0, normalTargetFile.LastIndexOf(Path.DirectorySeparatorChar));
             String toPath = Common.DirectoryPathReplace(basePath + "/Pictures/" + fileName);
             if (File.Exists(fromPath))
             {
                 File.Copy(fromPath, toPath, true);
-                if (_structStyles.ImageSize.ContainsKey(classPicture))
+
+            }
+                if (IdAllClass.ContainsKey(srcFile))
                 {
-                    var imageDetails = new ArrayList();
-                    if (_structStyles.ImageSource.ContainsKey(readerValue.ToLower()))
-                    {
-                        Dictionary<string, string> tempDict = _structStyles.ImageSource[readerValue];
-                        imageDetails.Add(tempDict["height"]);
-                        imageDetails.Add(tempDict["width"]);
-                    }
-                    else
-                    {
-                        imageDetails = _structStyles.ImageSize[classPicture];
-                    }
-
-                    foreach (string attb in imageDetails)
-                    {
-                        string[] splitParam = attb.Split(',');
-                        string imgDimenstion = splitParam[0];
-                        try
-                        {
-                            if (imgDimenstion == "height")
-                            {
-                                imgHeight = splitParam[1].Trim();
-                                imgHUnit = splitParam[2].Trim();
-
-                            }
-                            else if (imgDimenstion == "width")
-                            {
-                                imgWidth = splitParam[1].Trim();
-                                imgWUnit = splitParam[2].Trim();
-                                if (imgWUnit == "%")
-                                {
-                                    float iWidth = _columnWidth * float.Parse(imgWidth) / 100F;
-                                    imgWidth = iWidth.ToString();
-                                    imgWUnit = "in";
-                                }
-                            }
-                        }
-                        catch
-                        {
-                            imgHeight = "1";
-                            imgWidth = "1";
-                        }
-                    }
-                    if (imgHeight != "0")
-                    {
-                        if (imgWidth == "0")
-                        {
-                            imgWUnit = imgHUnit;
-                            imgWidth = Common.CalcDimension(fromPath, imgHeight, 'W');
-                        }
-                    }
-                    else if (imgWidth != "0")
-                    {
-                        //imgHUnit = imgWUnit;
-                        imgHeight = Common.CalcDimension(fromPath, imgWidth, 'H');
-                    }
+                    rectHeight = GetPropertyValue(srcFile, "height", rectHeight);
+                    rectWidth = GetPropertyValue(srcFile, "width", rectWidth);
+                    GetAlignment(alignment, ref HoriAlignment, ref AnchorPoint, srcFile);
                 }
                 else
                 {
-                    imgHeight = "1";
-                    imgWidth = Common.CalcDimension(fromPath, imgHeight, 'W');
+                    GetHeightandWidth(ref rectHeight, ref rectWidth);
+                    GetAlignment(alignment, ref wrapSide, ref HoriAlignment, ref AnchorPoint, ref VertRefPoint, ref VertAlignment, ref wrapMode);
+                    GetWrapSide(ref wrapSide, ref wrapMode);
                 }
-            }
-            else // default value
-            {
-                imgHeight = "1";
-                imgWidth = "1";
-            }
 
-            string strFrameCount = "Graphics" + _frameCount;
-            _imageGraphicsName = strFrameCount;
-            if (!_divOpen)  // Forcing a Paragraph Style, if it is not exist
-            {
-                int counter = _styleStack.Count;
-                string divTagName = string.Empty;
-                if (counter > 0)
+                // Setting the Height and Width according css value or the image size
+                if (rectHeight != "0")
                 {
-                    var tempStyle = new string[counter];
-                    _styleStack.CopyTo(tempStyle, 0);
-                    divTagName = counter > 1 ? tempStyle[1] : tempStyle[0];
+                    if (rectWidth == "0")
+                    {
+                        rectWidth = Common.CalcDimension(fileName, rectHeight, 'W');
+                    }
                 }
-                _writer.WriteStartElement("text:p");
-                //_writer.WriteAttributeString("text:style-name", _util.ParentName);
-                _writer.WriteAttributeString("text:style-name", divTagName);
+                else if (rectWidth != "0")
+                {
+                    rectHeight = Common.CalcDimension(fileName, rectWidth, 'H');
+                }
+                else
+                {
+                    //Default value is 72 However the line draws 36pt in X-axis and 36pt in y-axis.
+                    //rectHeight = "36";
+                    rectWidth = "36"; // fixed the width as 1 in;
+                    rectHeight = Common.CalcDimension(fileName, rectWidth, 'H');
+                    if (rectHeight == "0")
+                    {
+                        rectHeight = "36";
+                    }
+                }
 
-                //_divOpen = true;
+                string strFrameCount = "Graphics" + _frameCount;
+                ////TODO Make it function 
+                ////To get Image details
+                //if (File.Exists(fileName1))
+                //{
+                //    Image fullimage = Image.FromFile(fileName1);
+                //    height = fullimage.Height;
+                //    width = fullimage.Width;
+                //}
+
+                //if (!_divOpen)  // Forcing a Paragraph Style, if it is not exist
+                //{
+                //    int counter = _styleStack.Count;
+                //    string divTagName = string.Empty;
+                //    if (counter > 0)
+                //    {
+                //        var tempStyle = new string[counter];
+                //        _styleStack.CopyTo(tempStyle, 0);
+                //        divTagName = counter > 1 ? tempStyle[1] : tempStyle[0];
+                //    }
+                //    _writer.WriteStartElement("text:p");
+                //    //_writer.WriteAttributeString("text:style-name", _util.ParentName);
+                //    _writer.WriteAttributeString("text:style-name", cc[0];);
+
+                //    //_divOpen = true;
+                //}
+
+                // 1st frame
+                _writer.WriteStartElement("draw:frame");
+                _writer.WriteAttributeString("draw:style-name", strFrameCount);
+                _writer.WriteAttributeString("draw:name", strFrameCount);
+
+                _imageZindexCounter++;
+                string imgWUnit = "pt";
+                string imgHUnit = "pt";
+                string anchorType = string.Empty;
+                //if (_imageZindexCounter == 1 || _imageZindexCounter == 4)
+                if (_imagePreviousFinished)
+                {
+                    anchorType = "char";
+                    _writer.WriteAttributeString("text:anchor-type", anchorType);
+                    _writer.WriteAttributeString("draw:z-index", "2");
+                    wrapSide = "both";
+                    HoriAlignment = "center";
+                }
+                else if (HoriAlignment.Length > 0)
+                {
+                    anchorType = "paragraph";
+                    _writer.WriteAttributeString("text:anchor-type", anchorType);
+                    _writer.WriteAttributeString("draw:z-index", "1");
+                }
+                else
+                {
+                    anchorType = "as-char";
+                    _writer.WriteAttributeString("text:anchor-type", anchorType);
+                    _writer.WriteAttributeString("draw:z-index", "0");
+                }
+
+                _writer.WriteAttributeString("svg:width", rectWidth + imgWUnit);
+                _writer.WriteAttributeString("svg:height", rectHeight + imgHUnit);
+                //TD-349(width:auto)
+                if (_structStyles.IsAutoWidthforCaption)
+                {
+                    _writer.WriteAttributeString("fo:min-width", rectWidth + imgWUnit);
+                }
+
+                //1st textbox
+                _writer.WriteStartElement("draw:text-box");
+                _writer.WriteAttributeString("fo:min-height", "0in");
+
+                _frameCount++;
+
+                ModifyOOStyles modifyIDStyles = new ModifyOOStyles();
+                modifyIDStyles.CreateGraphicsStyle(_styleFilePath, strFrameCount, _util.ParentName, HoriAlignment, wrapSide);
+
+                _writer.WriteStartElement("draw:frame");
+                _writer.WriteAttributeString("draw:style-name", strFrameCount);
+                _writer.WriteAttributeString("draw:name", strFrameCount);
+                _writer.WriteAttributeString("text:anchor-type", "paragraph");
+                // _writer.WriteAttributeString("text:anchor-type", anchorType);
+                _writer.WriteAttributeString("svg:width", rectWidth + imgWUnit);
+                _writer.WriteAttributeString("svg:height", rectHeight + imgHUnit);
+
+                //_writer.WriteAttributeString("style:rel-height", "scale");
+                //_writer.WriteAttributeString("style:rel-width", "100%");
+
+                _writer.WriteStartElement("draw:image");
+                _writer.WriteAttributeString("xlink:type", "simple");
+                _writer.WriteAttributeString("xlink:show", "embed");
+                _writer.WriteAttributeString("xlink:actuatet", "onLoad");
+                _writer.WriteAttributeString("xlink:href", "Pictures/" + fileName);
+                _writer.WriteEndElement();
+                string altText = "";
+                _writer.WriteStartElement("svg:desc");
+                _writer.WriteString(altText);
+
+                _writer.WriteEndElement();
+                _writer.WriteEndElement();
+
+
+                _imageInsert = false;
+                _imageSource = string.Empty;
+                _isNewParagraph = false;
             }
-
-
-            // 1st frame
-            _writer.WriteStartElement("draw:frame");
-            _writer.WriteAttributeString("draw:style-name", strFrameCount);
-            _writer.WriteAttributeString("draw:name", strFrameCount);
-
-            _imageZindexCounter++;
-            string anchorType = string.Empty;
-            //if (_imageZindexCounter == 1 || _imageZindexCounter == 4)
-            if (_imagePreviousFinished)
-            {
-                anchorType = "char";
-                _writer.WriteAttributeString("text:anchor-type", anchorType);
-                _writer.WriteAttributeString("draw:z-index", "2");
-                side = "both";
-                pos = "center";
-            }
-            else if (pos.Length > 0)
-            {
-                anchorType = "paragraph";
-                _writer.WriteAttributeString("text:anchor-type", anchorType);
-                _writer.WriteAttributeString("draw:z-index", "1");
-            }
-            else
-            {
-                anchorType = "as-char";
-                _writer.WriteAttributeString("text:anchor-type", anchorType);
-                _writer.WriteAttributeString("draw:z-index", "0");
-            }
-
-            _writer.WriteAttributeString("svg:width", imgWidth + imgWUnit);
-            _writer.WriteAttributeString("svg:height", imgHeight + imgWUnit);
-            //TD-349(width:auto)
-            if (_structStyles.IsAutoWidthforCaption)
-            {
-                _writer.WriteAttributeString("fo:min-width", imgWidth + imgWUnit);
-            }
-
-            //1st textbox
-            _writer.WriteStartElement("draw:text-box");
-            _writer.WriteAttributeString("fo:min-height", "0in");
-
-            _frameCount++;
-
-            _util.CreateGraphicsStyle(styleFilePath, strFrameCount, _util.ParentName, pos, side);
-
-            _writer.WriteStartElement("draw:frame");
-            _writer.WriteAttributeString("draw:style-name", strFrameCount);
-            _writer.WriteAttributeString("draw:name", strFrameCount);
-            _writer.WriteAttributeString("text:anchor-type", "paragraph");
-           // _writer.WriteAttributeString("text:anchor-type", anchorType);
-            _writer.WriteAttributeString("svg:width", imgWidth + imgWUnit);
-            _writer.WriteAttributeString("svg:height", imgHeight + imgWUnit);
-
-            //_writer.WriteAttributeString("style:rel-height", "scale");
-            //_writer.WriteAttributeString("style:rel-width", "100%");
-
-            _writer.WriteStartElement("draw:image");
-            _writer.WriteAttributeString("xlink:type", "simple");
-            _writer.WriteAttributeString("xlink:show", "embed");
-            _writer.WriteAttributeString("xlink:actuatet", "onLoad");
-            _writer.WriteAttributeString("xlink:href", "Pictures/" + fileName);
-            _writer.WriteEndElement();
-
-            _writer.WriteStartElement("svg:desc");
-            _writer.WriteString(altText);
-
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
+            return inserted;
         }
 
+        /// <summary>
+        /// Closing all the tages for Image
+        /// </summary>
+        private void EndElementForImage()
+        {
+            if (_imageInsert && !_imageInserted)
+            {
+                if (_closeChildName == _imageClass) // Without Caption
+                {
+                    _allCharacter.Push(_imageClass); // temporarily storing to get width and position
+                    _imageInserted = InsertImage();
+                    _writer.WriteEndElement(); // for ParagraphStyle
+                    _writer.WriteEndElement(); // for Textframe
+                    _allCharacter.Pop();    // retrieving it again.
+                    isImage = false;
+                    imageClass = "";
+                    _isParagraphClosed = true;
+
+                }
+            }
+            else // With Caption
+            {
+                if (imageClass.Length > 0 && _closeChildName == imageClass)
+                {
+
+                    _writer.WriteEndElement();// for ParagraphStyle
+                    _writer.WriteEndElement(); // for Textframe
+
+                    isImage = false;
+                    imageClass = "";
+                    _isParagraphClosed = true;
+                }
+            }
+        }
+ 
 
         private void CheckMetaRootDirectory()
         {
@@ -2480,10 +1691,30 @@ namespace SIL.PublishingSolution
         private void AddUsedStyleName(string styleName)
         {
             if (!_usedStyleName.Contains(styleName))
+            {
                 _usedStyleName.Add(styleName);
+                AddUsedParentStyleName(styleName);
+            }
         }
 
-
+        /// <summary>
+        /// Recursive Parents styles should be added
+        /// </summary>
+        /// <param name="styleName">current style Name</param>
+        private void AddUsedParentStyleName(string styleName)
+        {
+            if (ParentClass.ContainsKey(styleName))
+            {
+                string parent = ParentClass[styleName];
+                parent = Common.LeftString(parent, "|");
+                if (_usedStyleName.Contains(parent))
+                {
+                    return;
+                }
+                _usedStyleName.Add(parent);
+                AddUsedParentStyleName(parent);
+            }
+        }
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// Generate last block of Content.xml

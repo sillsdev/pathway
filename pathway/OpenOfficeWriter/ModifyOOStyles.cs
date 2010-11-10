@@ -564,6 +564,135 @@ namespace SIL.PublishingSolution
             }
         }
 
+        #region CreateGraphicsStyle(string styleFilePath, string makeClassName, string parentName, string position, string side)
+        /// -------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Create a Graphics style in style.xml, if style has parent.
+        /// New style inherits its parent.
+        /// <list> 
+        /// </list>
+        /// </summary>
+        /// <param name="styleFilePath">syles.xml path</param>
+        /// <param name="makeClassName">combination of child and parent "style name"</param>
+        /// <param name="parentName">Parent "style name"</param>
+        /// <param name="position">Left/Right</param>
+        /// <param name="side">Left/Right</param>
+        /// <returns>None</returns>
+        /// -------------------------------------------------------------------------------------------
+        public void CreateGraphicsStyle(string styleFilePath, string makeClassName, string parentName, string position, string side)
+        {
+            const string className = "Graphics";
+            var doc = new XmlDocument { XmlResolver = null };
+            doc.Load(styleFilePath);
+
+            var nsmgr = new XmlNamespaceManager(doc.NameTable);
+            nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+            nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+
+            // if new stylename exists
+            XmlElement root = doc.DocumentElement;
+            string style = "//st:style[@st:name='" + makeClassName + "']";
+            if (root != null)
+            {
+                XmlNode node = root.SelectSingleNode(style, nsmgr); // work
+                if (node != null)
+                {
+                    return;
+                }
+                style = "//st:style[@st:name='" + className + "']";
+                node = root.SelectSingleNode(style, nsmgr); // work
+
+                XmlDocumentFragment styleNode = doc.CreateDocumentFragment();
+                styleNode.InnerXml = node.OuterXml;
+                node.ParentNode.InsertAfter(styleNode, node);
+
+                var nameElement = (XmlElement)node;
+                nameElement.SetAttribute("style:name", makeClassName);
+                if (side == "none" || side == "NoClear")
+                {
+                    if (position == "left")
+                    {
+                        side = "right";
+                    }
+                    else if (position == "right")
+                    {
+                        side = "left";
+                    }
+                }
+                else if (side == "both")
+                {
+                    side = position;
+                }
+
+                if (position == "right" || position == "left" || position == "center")
+                {
+                    var nameGraphicElement = (XmlElement)node.ChildNodes[0];
+                    nameGraphicElement.SetAttribute("style:run-through", "foreground");
+                    if (side == "Invalid")
+                    {
+
+                    }
+                    else if (side == "right" || side == "left")
+                    {
+                        nameGraphicElement.SetAttribute("style:wrap", side);
+                    }
+                    else if (side == "center")
+                    {
+                        nameGraphicElement.SetAttribute("style:wrap", "none");
+                    }
+                    else
+                    {
+                        nameGraphicElement.SetAttribute("style:wrap", "dynamic");
+                    }
+                    nameGraphicElement.SetAttribute("style:number-wrapped-paragraphs", "no-limit");
+                    nameGraphicElement.SetAttribute("style:wrap-contour", "false");
+                    nameGraphicElement.SetAttribute("style:vertical-pos", "from-top");
+                    nameGraphicElement.SetAttribute("style:vertical-rel", "paragraph");
+                    nameGraphicElement.SetAttribute("style:horizontal-pos", position);
+                    nameGraphicElement.SetAttribute("style:horizontal-rel", "paragraph");
+                    // this is for text flow
+                    //nameGraphicElement.SetAttribute("style:flow-with-text", "true");
+                }
+                else if (position == "both")
+                {
+                    var nameGraphicElement = (XmlElement)node.ChildNodes[0];
+                    if (side != "")
+                    {
+                        nameGraphicElement.SetAttribute("style:wrap", side);
+                    }
+                    else
+                    {
+                        nameGraphicElement.SetAttribute("style:wrap", "none");
+                    }
+                    nameGraphicElement.SetAttribute("style:wrap-contour", "false");
+                    nameGraphicElement.SetAttribute("style:vertical-pos", "from-top");
+                    nameGraphicElement.SetAttribute("style:vertical-rel", "paragraph");
+                    nameGraphicElement.SetAttribute("style:horizontal-pos", "right");
+                    nameGraphicElement.SetAttribute("style:horizontal-rel", "paragraph");
+                }
+                else if (position == "top")
+                {
+                    var nameGraphicElement = (XmlElement)node.ChildNodes[0];
+                    nameGraphicElement.SetAttribute("style:wrap", "none");
+                    nameGraphicElement.SetAttribute("style:wrap-contour", "false");
+                    nameGraphicElement.SetAttribute("style:vertical-pos", position);
+                    nameGraphicElement.SetAttribute("style:vertical-rel", "page-content");
+                    nameGraphicElement.SetAttribute("style:horizontal-pos", "center");
+                    nameGraphicElement.SetAttribute("style:horizontal-rel", "page-content");
+                }
+                else
+                {
+                    var nameGraphicElement = (XmlElement)node.ChildNodes[0];
+                    nameGraphicElement.SetAttribute("style:vertical-pos", "top");
+                    nameGraphicElement.SetAttribute("style:vertical-rel", "baseline");
+                    nameGraphicElement.SetAttribute("style:horizontal-pos", "from-left");
+                    nameGraphicElement.SetAttribute("style:horizontal-rel", "paragraph");
+                }
+            }
+            doc.Save(styleFilePath);
+        }
+        #endregion
+
         private string OpenIDStyles()
         {
             string projType = "scripture";

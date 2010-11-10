@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
@@ -333,6 +334,13 @@ namespace TestBed
 
             ExportOpenOffice exportOdt = new ExportOpenOffice();
             exportOdt.Export(projInfo);
+
+            if(Common.Testing)
+            {
+                string file = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath) + "\\" + Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) + "." +projInfo.FinalOutput;
+                if (File.Exists(file))
+                    Process.Start(file);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
