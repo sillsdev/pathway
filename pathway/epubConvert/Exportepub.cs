@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -114,6 +115,7 @@ namespace SIL.PublishingSolution
             else
             {
                 // basic setup
+                DateTime dt1 = DateTime.Now;    // time this thing
                 var sb = new StringBuilder();
                 Guid bookId = Guid.NewGuid(); // NOTE: this creates a new ID each time Pathway is run. 
                 string outputFolder = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath); // finished .epub goes here
@@ -177,7 +179,7 @@ namespace SIL.PublishingSolution
                 // - adds an "id" in each Chapter_Number span, so we can link to it from the TOC
                 string cvFileName = Path.GetFileNameWithoutExtension(preProcessor.ProcessedXhtml) + "_cv";
                 string xsltFullName = Common.FromRegistry("TE_XHTML-to-epub_XHTML.xslt");
-                string temporaryCvFullName = Common.PathCombine(tempFolder, cvFileName + ".xhtml");
+//                string temporaryCvFullName = Common.PathCombine(tempFolder, cvFileName + ".xhtml");
                 restructuredFullName = Path.Combine(outputFolder, cvFileName + ".xhtml");
 
                 // EDB 10/22/2010
@@ -196,17 +198,39 @@ namespace SIL.PublishingSolution
                 Common.ReplaceInFile(preProcessor.ProcessedXhtml, "<html", "<html xmlns='http://www.w3.org/1999/xhtml'");
                 // end EDB 10/22/2010
 
-                Common.XsltProcess(preProcessor.ProcessedXhtml, xsltFullName, "_cv.xhtml");
                 // split the .XHTML into multiple files, as specified by the user
                 List<string> htmlFiles = new List<string>();
+                List<string> splitFiles = new List<string>();
                 if (projInfo.FileToProduce.ToLower() != "one")
                 {
-                    htmlFiles = SplitFile(temporaryCvFullName, projInfo);
+                    splitFiles = SplitFile(preProcessor.ProcessedXhtml, projInfo);
                 }
                 else
                 {
-                    htmlFiles.Add(temporaryCvFullName);
+                    splitFiles.Add(preProcessor.ProcessedXhtml);
                 }
+
+                foreach (string file in splitFiles)
+                {
+                    if (File.Exists(file))
+                    {
+                        Common.XsltProcess(file, xsltFullName, "_cv.xhtml");
+                        // add this file to the html files list
+                        htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file), (Path.GetFileNameWithoutExtension(file) + "_cv.xhtml")));
+                        // clean up the un-transformed file
+                        File.Delete(file);
+                    }
+                }
+                //// split the .XHTML into multiple files, as specified by the user
+                //List<string> htmlFiles = new List<string>();
+                //if (projInfo.FileToProduce.ToLower() != "one")
+                //{
+                //    htmlFiles = SplitFile(temporaryCvFullName, projInfo);
+                //}
+                //else
+                //{
+                //    htmlFiles.Add(temporaryCvFullName);
+                //}
                 // create the "epub" directory structure and copy over the boilerplate files
                 sb.Append(tempFolder);
                 sb.Append(Path.DirectorySeparatorChar);
@@ -326,8 +350,8 @@ namespace SIL.PublishingSolution
                     //string name = GetBookName(file);
                     string name = Path.GetFileName(file);
                     string substring = Path.GetFileNameWithoutExtension(file).Substring(8);
-                    string dest = Common.PathCombine(contentFolder, "PartFile" + substring.PadLeft(3, '0') + ".xhtml");
-                    File.Copy(file, dest);
+                    string dest = Common.PathCombine(contentFolder, "PartFile" + substring.PadLeft(6, '0') + ".xhtml");
+                    File.Move(file, dest);
                 }
 
                 // copy over the image files
@@ -374,6 +398,8 @@ namespace SIL.PublishingSolution
                 // Done adding content - now zip the whole thing up and name it
                 string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
                 Compress(projInfo.TempOutputFolder, Common.PathCombine(outputFolder, fileName));
+                TimeSpan tsTotal = DateTime.Now - dt1;
+                Debug.WriteLine("Exportepub: time spent in .epub conversion: " + tsTotal);
             }
                 
             // clean up and return
@@ -499,7 +525,7 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// Returns the user-friendly book name inside this file.
         /// </summary>
-        /// <param name="xhtmlFileName">Split xhtml filename in the form PartFile[#].xhtml</param>
+        /// <param name="xhtmlFileName">Split xhtml filename in the form PartFile[#]_cv.xhtml</param>
         /// <returns>User-friendly book name (value of the scrBookName or letter element in the xhtml file).</returns>
         private string GetBookName(string xhtmlFileName)
         {
@@ -519,6 +545,16 @@ namespace SIL.PublishingSolution
             else
             {
                 nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
+                if (nodes == null || nodes.Count == 0)
+                {
+                    // nothing there - check on the span within the Title_Main div
+                    nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']/span", namespaceManager);
+                }
+                if (nodes == null || nodes.Count == 0)
+                {
+                    // we're really scraping the bottom - check on the scrBookCode span
+                    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookCode']", namespaceManager);
+                }
             }
             if (nodes != null && nodes.Count > 0)
             {
