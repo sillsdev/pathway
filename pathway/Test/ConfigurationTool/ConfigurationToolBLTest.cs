@@ -26,6 +26,17 @@ namespace Test.UIConfigurationToolBLTest
 
         #region SetUp Method
         [TestFixtureSetUp]
+        protected void Initialize()
+        {
+            string folderName = "Graphic";
+            CopyFolderSupportToIO(folderName);
+
+            folderName = "Icons";
+            CopyFolderSupportToIO(folderName);
+        }
+
+
+        //[TestFixtureSetUp]
         protected void SetUp()
         {
             cTool = new ConfigurationTool();
@@ -54,11 +65,6 @@ namespace Test.UIConfigurationToolBLTest
             string folderName = "styles";
             CopyFolderSupportToIO(folderName);
 
-            folderName = "Graphic";
-            CopyFolderSupportToIO(folderName);
-
-            folderName = "Icons";
-            CopyFolderSupportToIO(folderName);
         }
 
         private void CopyFile()
@@ -114,21 +120,11 @@ namespace Test.UIConfigurationToolBLTest
         } 
         #endregion
 
-        [Test]
-        public void LoadTest()
-        {
-            CopyFile();
-            LoadParam();
-            cTool._CToolBL.ConfigurationTool_LoadBL();
-            cTool._CToolBL.ConfigurationTool_FormClosingBL();
-            GridRowCount_Load();
-            GridRowValue_Load();
-            FormButtonEnable_Load();
-        }
 
-        //[Test]
+        [Test]
         public void NewWithDefaultTest()
         {
+            SetUp();
             CopyFile();
             LoadParam();
             cTool._CToolBL.ConfigurationTool_LoadBL();
@@ -178,11 +174,14 @@ namespace Test.UIConfigurationToolBLTest
             Assert.AreEqual("One", actual, "Grid file produce Test Failes");
             actual = cTool.DdlSense.Text;
             Assert.AreEqual("", actual, "Grid sense Test Failes");
+
+            cTool.Close();
         }
 
-        //[Test]
+        [Test]
         public void SaveAsWithDefaultTest()
         {
+            SetUp();
             CopyFile();
             LoadParam();
             cTool._CToolBL.ConfigurationTool_LoadBL();
@@ -191,9 +190,9 @@ namespace Test.UIConfigurationToolBLTest
             cTool._CToolBL.tabControl1_SelectedIndexChangedBL();
             int SelectedRowIndex = cTool.StylesGrid.RowCount - 1;
             string actualStyleName = cTool.StylesGrid[0, SelectedRowIndex].Value.ToString();
-            Assert.AreEqual("Copy of FieldWorksStyles", actualStyleName, "GridRowValueTest Test Failes");
+            Assert.AreEqual("Copy of OneColumn", actualStyleName, "GridRowValueTest Test Failes");
             string actual = cTool.StylesGrid[1, SelectedRowIndex].Value.ToString();
-            Assert.AreEqual("Based on GPS stylesheet FieldWorksStyles", actual.Trim(), "GridRowValueTest Test Failes");
+            Assert.AreEqual("Based on GPS stylesheet OneColumn", actual.Trim(), "GridRowValueTest Test Failes");
             actual = cTool.StylesGrid[4, SelectedRowIndex].Value.ToString();
             Assert.AreEqual("Yes", actual, "GridRowValueTest Test Failes");
             actual = cTool.StylesGrid[2, SelectedRowIndex].Value.ToString();
@@ -201,19 +200,19 @@ namespace Test.UIConfigurationToolBLTest
             actual = cTool.TxtApproved.Text;
             Assert.AreEqual("", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlPagePageSize.Text;
-            Assert.AreEqual("C5", actual, "GridRowValueTest Test Failes");
+            Assert.AreEqual("5.25in x 8.25in", actual, "GridRowValueTest Test Failes");
             actual = cTool.TxtPageInside.Text;
-            Assert.AreEqual("57pt", actual, "GridRowValueTest Test Failes");
+            Assert.AreEqual("36pt", actual, "GridRowValueTest Test Failes");
             actual = cTool.TxtPageOutside.Text;
-            Assert.AreEqual("57pt", actual, "GridRowValueTest Test Failes");
+            Assert.AreEqual("36pt", actual, "GridRowValueTest Test Failes");
             actual = cTool.TxtPageTop.Text;
-            Assert.AreEqual("57pt", actual, "GridRowValueTest Test Failes");
+            Assert.AreEqual("36pt", actual, "GridRowValueTest Test Failes");
             actual = cTool.TxtPageBottom.Text;
-            Assert.AreEqual("57pt", actual, "GridRowValueTest Test Failes");
+            Assert.AreEqual("36pt", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlPageColumn.Text;
-            Assert.AreEqual("2", actual, "GridRowValueTest Test Failes");
+            Assert.AreEqual("1", actual, "GridRowValueTest Test Failes");
             actual = cTool.TxtPageGutterWidth.Text;
-            Assert.AreEqual("12pt", actual, "GridRowValueTest Test Failes");
+            Assert.AreEqual("150%", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlJustified.Text;
             Assert.AreEqual("No", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlVerticalJustify.Text;
@@ -221,22 +220,24 @@ namespace Test.UIConfigurationToolBLTest
             actual = cTool.DdlPicture.Text;
             Assert.AreEqual("Yes", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlLeading.Text;
-            Assert.AreEqual("No Change", actual, "GridRowValueTest Test Failes");
+            Assert.AreEqual("13", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlRunningHead.Text;
             Assert.AreEqual("Mirrored", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlRules.Text;
             Assert.AreEqual("Yes", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlFontSize.Text;
-            Assert.AreEqual("No Change", actual, "GridRowValueTest Test Failes");
+            Assert.AreEqual("11", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlFileProduceDict.Text;
             Assert.AreEqual("One", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlSense.Text;
-            Assert.AreEqual("No Change", actual, "GridRowValueTest Test Failes");
+            Assert.AreEqual("", actual, "GridRowValueTest Test Failes");
+            cTool.Close();
         }
 
         [Test]
         public void DeleteWithDefaultTest()
         {
+            SetUp();
             CopyFile();
             LoadParam();
             cTool._CToolBL.ConfigurationTool_LoadBL();
@@ -247,8 +248,20 @@ namespace Test.UIConfigurationToolBLTest
             int afterDelete = cTool.StylesGrid.RowCount;
             Assert.AreEqual(6, afterDelete, "New Count Test Failes");
             //cTool._CToolBL.ConfigurationTool_LoadBL();
+            cTool.Close();
         }
-
+        [Test]
+        public void LoadTest()
+        {
+            SetUp();
+            CopyFile();
+            LoadParam();
+            cTool._CToolBL.ConfigurationTool_LoadBL();
+            cTool._CToolBL.ConfigurationTool_FormClosingBL();
+            GridRowCount_Load();
+            GridRowValue_Load();
+            FormButtonEnable_Load();
+        }
 
         private void AssignNewTest()
         {
@@ -282,6 +295,7 @@ namespace Test.UIConfigurationToolBLTest
             //cTool.DdlRedLetter.Text = "";
             //cTool.TxtInformation.Text = "";
             //cTool.TxtCopyright.Text = "";
+            cTool.Close();
         }
 
         private void GetStyleName(string expStylename)
