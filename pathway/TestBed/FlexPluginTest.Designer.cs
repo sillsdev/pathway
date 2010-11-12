@@ -56,6 +56,7 @@
             this.btnFileSizeZero = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -217,6 +218,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Controls.Add(this.chkPage);
             this.groupBox1.Controls.Add(this.panel3);
             this.groupBox1.Controls.Add(this.button5);
@@ -279,7 +281,7 @@
             this.button5.AccessibleName = "BtnFlexTest";
             this.button5.Location = new System.Drawing.Point(175, 128);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(47, 28);
+            this.button5.Size = new System.Drawing.Size(118, 28);
             this.button5.TabIndex = 53;
             this.button5.Text = "&Builder";
             this.button5.UseVisualStyleBackColor = true;
@@ -292,16 +294,16 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(129, 28);
             this.button4.TabIndex = 52;
-            this.button4.Text = "&OpenOffice NEW CSS PARSER";
+            this.button4.Text = "&New OpenOffice";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button1
             // 
             this.button1.AccessibleName = "BtnFlexTest";
-            this.button1.Location = new System.Drawing.Point(241, 128);
+            this.button1.Location = new System.Drawing.Point(312, 128);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(174, 28);
+            this.button1.Size = new System.Drawing.Size(118, 28);
             this.button1.TabIndex = 51;
             this.button1.Text = "&OpenOffice";
             this.button1.UseVisualStyleBackColor = true;
@@ -365,6 +367,17 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // button6
+            // 
+            this.button6.AccessibleName = "BtnLogos";
+            this.button6.Location = new System.Drawing.Point(41, 162);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(128, 28);
+            this.button6.TabIndex = 56;
+            this.button6.Text = "&Logos";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click_1);
+            // 
             // FlexPluginTest
             // 
             this.AcceptButton = this.button1;
@@ -423,5 +436,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.RadioButton radDictionary;
         private System.Windows.Forms.RadioButton radScripture;
+        private System.Windows.Forms.Button button6;
     }
 }
