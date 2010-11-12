@@ -136,7 +136,7 @@ class TermTable:
         self.outpath = outpath
         self.initn = 4
         self.n = self.initn
-        self.term = {'Uncategorized':1, 'Semantic':2, 'Part of speech':3}
+        self.term = {'Uncategorized':1, 'Domain':2, 'Part of speech':3}
         self.count = {1:0, 2:0, 3:0}
         self.parent = {1:0, 2:0, 3:0}
         self.rel = {}
@@ -299,6 +299,8 @@ class BlogExport:
         self.namesinuse = {}
         root = etree.parse(xhtml)
         outpath = os.path.dirname(xhtml)
+        if outpath == '':
+            outpath = '.'
         if site:
             if user:
                 entrytpl = open('FwEntry-tpl.htt').read()
@@ -412,11 +414,14 @@ class BlogExport:
         map["Background"] = subtype
         if self.typedisplay.has_key(subtype):
             subtype = self.typedisplay[subtype]
-        map["Type"] = subtype
-        map["Form"] = self.FindItem(thissub, '//x:span[@class="headword-sub"]/text()')
         map["Example"] = u''
         map["Translation"] = u''
         self.MoreExamples(thissub, '-sub', inc, map)
+        Form = self.FindItem(thissub, '//x:span[@class="headword-sub"]/text()')
+        if Form != "":
+            map["Type"] = subtype + ": " + Form
+        else:
+            map["Type"] = subtype
         return True
     
     def MoreExamples(self, thissub, tag, inc, map):
