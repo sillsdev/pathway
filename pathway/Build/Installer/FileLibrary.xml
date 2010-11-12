@@ -1,5 +1,10 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\PathwaySupport\Wordpress\main.xhtml" ComponentGuid="1A69B53A-34B4-42CE-853C-AC103207E052"/>
+	<File Path="Files\PathwaySupport\Wordpress\index.htm" ComponentGuid="04F43EA0-6C4A-4FD7-8286-5F07B0525B73"/>
+	<File Path="Files\PathwaySupport\Wordpress\data.sql" ComponentGuid="F01B8CD4-EC75-4102-972F-F9E9BFEC32EF"/>
+	<File Path="Files\PathwaySupport\Wordpress\adehosga1.htm" ComponentGuid="FC04718F-B9BF-490A-BE03-79B51877A98F"/>
+	<File Path="Files\ConfigurationTool\Wordpress\main.xhtml" ComponentGuid="12EE59E8-8B91-42CC-8441-DC631DAEB7B7"/>
 	<File Path="Files\ConfigurationTool\epubConvert.dll" ComponentGuid="77A148E5-E35E-4E33-A054-9E0F489D2802"/>
 	<File Path="Files\ConfigurationTool\TE_XHTML-to-epub_XHTML.xslt" ComponentGuid="D3DF2A98-A092-469B-B844-4840D3B419EC"/>
 	<File Path="Files\ConfigurationTool\epub\mimetype" ComponentGuid="B28BF6C2-C8F4-4753-8B2A-45F3AC8A1A3A"/>

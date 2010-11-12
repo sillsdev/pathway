@@ -160,6 +160,10 @@
       <Project>{D38235F3-5B02-4835-B380-40E0BDCD5495}</Project>
       <Name>LiftPrepare</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LogosConvert\LogosConvert60.csproj">
+      <Project>{E10D5643-1A82-4A3F-915B-92EC80C86815}</Project>
+      <Name>LogosConvert60</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenOfficeConvert\OpenOfficeConvert60.csproj">
       <Project>{E225E5AF-B603-41D1-BB58-E3AAE05C59FD}</Project>
       <Name>OpenOfficeConvert60</Name>

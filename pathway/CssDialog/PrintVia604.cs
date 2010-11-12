@@ -225,7 +225,7 @@ namespace SIL.PublishingSolution
             if (this.Text != "Set Defaults")
             {
                 Param.LoadSettings();
-                SettingsValidation(Param.SettingPath);
+                ValidateXMLVersion(Param.SettingPath);
             }
             Param.SetValue(Param.InputType, InputType);
             Param.LoadSettings();
@@ -252,8 +252,8 @@ namespace SIL.PublishingSolution
             chkExtraProcessing.Text = message;
         }
 
-        #region SettingsValidation
-        private void SettingsValidation(string filePath)
+        #region ValidateXMLVersion
+        private void ValidateXMLVersion(string filePath)
         {
             var versionControl = new SettingsVersionControl();
             var Validator = new SettingsValidator();
@@ -305,8 +305,9 @@ namespace SIL.PublishingSolution
         private void LoadLayouts()
         {
             cmbSelectLayout.Items.Clear();
-            //string xPathLayouts = "//styles/" + _media + "/style";
-            string xPathLayouts = "//styles/*/style[@approvedBy='GPS' or @shown='Yes']";
+            ////string xPathLayouts = "//styles/" + _media + "/style";
+            //string xPathLayouts = "//styles/*/style[@approvedBy='GPS' or @shown='Yes']";
+            string xPathLayouts = "//styles/" + _media + "/style[@approvedBy='GPS' or @shown='Yes']";
             XmlNodeList stylenames = Param.GetItems(xPathLayouts);
             foreach (XmlNode stylename in stylenames)
             {
@@ -375,6 +376,7 @@ namespace SIL.PublishingSolution
             {
                 Directory.CreateDirectory(txtSaveInFolder.Text);
                 Directory.Delete(txtSaveInFolder.Text);
+                BtnOk.Enabled = false; 
             }
             catch (Exception)
             {
@@ -508,11 +510,11 @@ namespace SIL.PublishingSolution
             previewPrintVia.SelectedStyle = cmbSelectLayout.Text;
             previewPrintVia.InputType = InputType;
             previewPrintVia.ShowDialog();
+            LoadLayouts();
             if (previewPrintVia.DialogResult == DialogResult.OK)
             {
                 cmbSelectLayout.Text = previewPrintVia.SelectedStyle;
             }
-            LoadLayouts();
         }
 
         private bool EnableEdit()
@@ -533,25 +535,49 @@ namespace SIL.PublishingSolution
 
         private void cmbPrintVia_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //_media = cmbPrintVia.Text.ToLower() == "gobible" ? "mobile" : "paper";
-            string type = Param.MediaType;
-            if (type == "Media")
-            {
-                type = "paper";
-            }
-            _media = cmbPrintVia.Text.ToLower() == "gobible" ? "mobile" : type;
+            _media = FindMedia();
+
             LoadLayouts();
 
+            ShowAvoidOdtCrash();
+            BtnOk.Enabled = true; 
+        }
+
+        private string FindMedia()
+            {
+            string backend = cmbPrintVia.Text.ToLower();
+            string media;
+
+            if (backend == "gobible")
+            {
+                media = "mobile";
+            }
+            else if (backend == "e-book (.epub)")
+            {
+                media = "others";
+            }
+            else
+            {
+                media = "paper";
+            }
+            return media;
+            }
+
+        private void ShowAvoidOdtCrash()
+        {
             if(cmbPrintVia.Text.ToLower().IndexOf("openoffice") >= 0 )
             {
-                lblAvoidOdtCrash.Visible = true;
                 chkAvoidOdtCrash.Visible = true;
             }
             else
             {
-                lblAvoidOdtCrash.Visible = false;
                 chkAvoidOdtCrash.Visible = false;
             }
+        }
+
+        private void ChkAvoidOdtCrashMouseHover(object sender, EventArgs e)
+        {
+            tt_PrintVia.SetToolTip(chkAvoidOdtCrash, " Large files may crash on exit after saving. \n Eliminating the style sheet solved this problem but doesn't allow user to change the styles. \n So initially leave this box unchecked, but if Open Office is crashing, \n you can probably avoid crashing by checking this box.");
         }
     }
 }

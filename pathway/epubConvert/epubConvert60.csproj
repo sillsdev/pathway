@@ -8,8 +8,8 @@
     <ProjectGuid>{B19037F2-26F7-48A2-9301-B5CA335C6824}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>epubExport</RootNamespace>
-    <AssemblyName>epubExport</AssemblyName>
+    <RootNamespace>epubConvert</RootNamespace>
+    <AssemblyName>epubConvert</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>
