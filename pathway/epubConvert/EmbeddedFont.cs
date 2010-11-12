@@ -64,8 +64,8 @@ namespace epubConvert
             {
                 // This isn't an SIL font. Try to find the font info if we can
                 SILFont = false;
-                Weight = "regular";
-                Style = "regular";
+                Weight = "normal";
+                Style = "normal";
                 Filename = FontInternals.GetFontFileName(Name, Style);
             }
         }
@@ -86,32 +86,32 @@ namespace epubConvert
             {
                 case "Abyssinica":
                     bFound = true;
-                    Weight = "regular";
-                    Style = "regular";
+                    Weight = "normal";
+                    Style = "normal";
                     Filename = "Abyssinica_SIL.ttf";
                     SILFont = true;
                     Serif = true;
                     break;
                 case "Andika":
                     bFound = true;
-                    Weight = "regular";
-                    Style = "regular";
+                    Weight = "normal";
+                    Style = "normal";
                     Filename = "AndBasR.ttf";
                     SILFont = true;
                     Serif = false;
                     break;
                 case "Apparatus SIL":
                     bFound = true;
-                    Weight = "regular";
-                    Style = "regular";
+                    Weight = "normal";
+                    Style = "normal";
                     Filename = "AppSILR.ttf";
                     SILFont = true;
                     Serif = true;
                     break;
                 case "Charis SIL":
                     bFound = true;
-                    Weight = "regular";
-                    Style = "regular";
+                    Weight = "normal";
+                    Style = "normal";
                     Filename = "CharisSILR.ttf";
                     SILFont = true;
                     Serif = true;
@@ -126,80 +126,80 @@ namespace epubConvert
                     break;
                 case "Doulos SIL":
                     bFound = true;
-                    Weight = "regular";
-                    Style = "regular";
+                    Weight = "normal";
+                    Style = "normal";
                     Filename = "DoulosSILR.ttf";
                     SILFont = true;
                     Serif = true;
                     break;
                 case "Ezra":
                     bFound = true;
-                    Weight = "regular";
-                    Style = "regular";
+                    Weight = "normal";
+                    Style = "normal";
                     Filename = "SILEOT_0.ttf";
                     SILFont = true;
                     Serif = true;
                     break;
                 case "Galatia":
                     bFound = true;
-                    Weight = "regular";
-                    Style = "regular";
+                    Weight = "normal";
+                    Style = "normal";
                     Filename = "GalSILR201.ttf";
                     SILFont = true;
                     Serif = true;
                     break;
                 case "Gentium":
                     bFound = true;
-                    Weight = "regular";
-                    Style = "regular";
+                    Weight = "normal";
+                    Style = "normal";
                     Filename = "GenBasR.ttf";
                     SILFont = true;
                     Serif = true;
                     break;
                 case "Lateef":
                     bFound = true;
-                    Weight = "regular";
-                    Style = "regular";
+                    Weight = "normal";
+                    Style = "normal";
                     Filename = "LateefRegOT.ttf";
                     SILFont = true;
                     Serif = true;
                     break;
                 case "Nuosu":
                     bFound = true;
-                    Weight = "regular";
-                    Style = "regular";
+                    Weight = "normal";
+                    Style = "normal";
                     Filename = "NuosuSIL.ttf";
                     SILFont = true;
                     Serif = true;
                     break;
                 case "Padauk":
                     bFound = true;
-                    Weight = "regular";
-                    Style = "regular";
+                    Weight = "normal";
+                    Style = "normal";
                     Filename = "Padauk.ttf";
                     SILFont = true;
                     Serif = true;
                     break;
                 case "Scheharazade":
                     bFound = true;
-                    Weight = "regular";
-                    Style = "regular";
+                    Weight = "normal";
+                    Style = "normal";
                     Filename = "ScheherazadeRegOT.ttf";
                     SILFont = true;
                     Serif = true;
                     break;
                 case "Sophia Nubian":
                     bFound = true;
-                    Weight = "regular";
-                    Style = "regular";
+                    Weight = "normal";
+                    Style = "normal";
                     Filename = "SNR.ttf";
                     SILFont = true;
                     Serif = true;
                     break;
                 case "Tai Heritage Pro":
                     bFound = true;
-                    Weight = "regular";
-                    Style = "regular";
+                    Weight = "normal";
+                    Style = "normal";
                     Filename = "TaiHeritagePro.ttf";
                     SILFont = true;
                     Serif = true;

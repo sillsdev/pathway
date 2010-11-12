@@ -285,6 +285,8 @@ namespace SIL.PublishingSolution
                         FontWarningDlg dlg = new FontWarningDlg();
                         dlg.RepeatAction = false;
                         dlg.RemainingIssues = nonSILFonts.Count - 1;
+                        var langArray = new string[_langFontDictionary.Keys.Count];
+                        _langFontDictionary.Keys.CopyTo(langArray,0);
                         foreach (var nonSilFont in nonSILFonts)
                         {
                             dlg.MyEmbeddedFont = nonSilFont.Key.Name;
@@ -300,6 +302,14 @@ namespace SIL.PublishingSolution
                                     _embeddedFonts.Remove(nonSilFont.Key.Name);
                                     var newFont = new EmbeddedFont(dlg.SelectedFont);
                                     _embeddedFonts[dlg.SelectedFont] = newFont; // set index value adds if it doesn't exist
+                                    // also update the references in _langFontDictionary
+                                    foreach (var lang in langArray)
+                                    {
+                                        if (_langFontDictionary[lang] == nonSilFont.Key.Name)
+                                        {
+                                            _langFontDictionary[lang] = dlg.SelectedFont;
+                                        }
+                                    }
                                 }
                                 continue;
                             }
@@ -313,6 +323,14 @@ namespace SIL.PublishingSolution
                                     _embeddedFonts.Remove(nonSilFont.Key.Name);
                                     var newFont = new EmbeddedFont(dlg.SelectedFont);
                                     _embeddedFonts[dlg.SelectedFont] = newFont; // set index value adds if it doesn't exist
+                                    // also update the references in _langFontDictionary
+                                    foreach (var lang in langArray)
+                                    {
+                                        if (_langFontDictionary[lang] == nonSilFont.Key.Name)
+                                        {
+                                            _langFontDictionary[lang] = dlg.SelectedFont;
+                                        }
+                                    }
                                 }
                             }
                             else
@@ -465,14 +483,72 @@ namespace SIL.PublishingSolution
                     // fall back on a serif font if we can't find it (shouldn't happen)
                     sb.AppendLine("Times, serif;");
                 }
+                // also insert the text direction for this language
+                sb.Append("direction: ");
+                sb.Append(getTextDirection(language.Key));
+                sb.AppendLine(";");
                 sb.AppendLine("}");
             }
-
-            sb.Append(content);
+            // nuke the @import statement (we're going off one CSS file here)
+            string contentNoImport = content.Substring(content.IndexOf(';') + 1);
+            sb.Append(contentNoImport);
             // write out the updated CSS file
             var writer = new StreamWriter(cssFile);
             writer.Write(sb.ToString());
             writer.Close();
+        }
+
+        /// <summary>
+        /// Returns the text direction specified by the writing system, or "ltr" if not found
+        /// </summary>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        private string getTextDirection(string language)
+        {
+            string[] langCoun = language.Split('-');
+            string direction;
+
+            try
+            {
+                string wsPath;
+                if (langCoun.Length < 2)
+                {
+                    // try the language (no country code) (e.g, "en" for "en-US")
+                    wsPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/WritingSystemStore/" + langCoun[0] + ".ldml");
+                }
+                else
+                {
+                    // try the whole language expression (e.g., "ggo-Telu-IN")
+                    wsPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/WritingSystemStore/" + language + ".ldml");
+                }
+                if (File.Exists(wsPath))
+                {
+                    var ldml = new XmlDocument { XmlResolver = null };
+                    ldml.Load(wsPath);
+                    var nsmgr = new XmlNamespaceManager(ldml.NameTable);
+                    nsmgr.AddNamespace("palaso", "urn://palaso.org/ldmlExtensions/v1");
+                    var node = ldml.SelectSingleNode("//orientation/@characters", nsmgr);
+                    if (node != null)
+                    {
+                        // get the text direction specified by the .ldml file
+                        direction = (node.Value.ToLower().Equals("right-to-left")) ? "rtl" : "ltr"; 
+                    }
+                    else
+                    {
+                        direction = "ltr";
+                    }
+                }
+                else
+                {
+                    direction = "ltr";
+                }
+            }
+            catch
+            {
+                direction = "ltr";
+            }
+
+            return direction;
         }
 
         /// <summary>
@@ -512,7 +588,7 @@ namespace SIL.PublishingSolution
                         {
                             // build the font information and return
                             _langFontDictionary[language] = node.Value; // set the font used by this language
-                            _embeddedFonts[language] = new EmbeddedFont(node.Value);
+                            _embeddedFonts[node.Value] = new EmbeddedFont(node.Value);
                         }
                     }
                 }
@@ -544,11 +620,11 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
+                nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']/span", namespaceManager);
                 if (nodes == null || nodes.Count == 0)
                 {
-                    // nothing there - check on the span within the Title_Main div
-                    nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']/span", namespaceManager);
+                    // nothing there - check on the scrBookName span
+                    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
                 }
                 if (nodes == null || nodes.Count == 0)
                 {
