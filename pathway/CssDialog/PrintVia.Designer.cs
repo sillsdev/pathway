@@ -80,11 +80,11 @@
             // chkAvoidOdtCrash
             // 
             this.chkAvoidOdtCrash.AutoSize = true;
-            this.chkAvoidOdtCrash.Location = new System.Drawing.Point(146, 197);
+            this.chkAvoidOdtCrash.Location = new System.Drawing.Point(121, 197);
             this.chkAvoidOdtCrash.Name = "chkAvoidOdtCrash";
-            this.chkAvoidOdtCrash.Size = new System.Drawing.Size(308, 17);
+            this.chkAvoidOdtCrash.Size = new System.Drawing.Size(358, 17);
             this.chkAvoidOdtCrash.TabIndex = 15;
-            this.chkAvoidOdtCrash.Text = "Reduce number of styles to keep Open Office from crashing";
+            this.chkAvoidOdtCrash.Text = "Reduce the number of style names to keep Open Office from crashing.";
             this.chkAvoidOdtCrash.UseVisualStyleBackColor = true;
             this.chkAvoidOdtCrash.Visible = false;
             this.chkAvoidOdtCrash.MouseHover += new System.EventHandler(this.ChkAvoidOdtCrashMouseHover);
@@ -92,7 +92,7 @@
             // txtSaveInFolder
             // 
             this.txtSaveInFolder.AccessibleName = "SaveIn";
-            this.txtSaveInFolder.Location = new System.Drawing.Point(146, 171);
+            this.txtSaveInFolder.Location = new System.Drawing.Point(121, 171);
             this.txtSaveInFolder.Name = "txtSaveInFolder";
             this.txtSaveInFolder.Size = new System.Drawing.Size(282, 20);
             this.txtSaveInFolder.TabIndex = 14;
@@ -100,7 +100,7 @@
             // btnBrwsSaveInFolder
             // 
             this.btnBrwsSaveInFolder.AccessibleName = "Browse";
-            this.btnBrwsSaveInFolder.Location = new System.Drawing.Point(431, 169);
+            this.btnBrwsSaveInFolder.Location = new System.Drawing.Point(406, 169);
             this.btnBrwsSaveInFolder.Name = "btnBrwsSaveInFolder";
             this.btnBrwsSaveInFolder.Size = new System.Drawing.Size(24, 24);
             this.btnBrwsSaveInFolder.TabIndex = 13;
@@ -113,7 +113,7 @@
             this.BtnBrwsLayout.AccessibleName = "Preview";
             this.BtnBrwsLayout.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnBrwsLayout.BackgroundImage")));
             this.BtnBrwsLayout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnBrwsLayout.Location = new System.Drawing.Point(431, 118);
+            this.BtnBrwsLayout.Location = new System.Drawing.Point(406, 118);
             this.BtnBrwsLayout.Name = "BtnBrwsLayout";
             this.BtnBrwsLayout.Size = new System.Drawing.Size(24, 24);
             this.BtnBrwsLayout.TabIndex = 12;
@@ -124,7 +124,7 @@
             // 
             this.chkExtraProcessing.AccessibleName = "Extra";
             this.chkExtraProcessing.AutoSize = true;
-            this.chkExtraProcessing.Location = new System.Drawing.Point(146, 149);
+            this.chkExtraProcessing.Location = new System.Drawing.Point(121, 149);
             this.chkExtraProcessing.Name = "chkExtraProcessing";
             this.chkExtraProcessing.Size = new System.Drawing.Size(297, 17);
             this.chkExtraProcessing.TabIndex = 10;
@@ -136,7 +136,7 @@
             this.cmbSelectLayout.AccessibleName = "Layout";
             this.cmbSelectLayout.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSelectLayout.FormattingEnabled = true;
-            this.cmbSelectLayout.Location = new System.Drawing.Point(146, 120);
+            this.cmbSelectLayout.Location = new System.Drawing.Point(121, 120);
             this.cmbSelectLayout.Name = "cmbSelectLayout";
             this.cmbSelectLayout.Size = new System.Drawing.Size(282, 21);
             this.cmbSelectLayout.TabIndex = 9;
@@ -145,7 +145,7 @@
             // chkGramSketch
             // 
             this.chkGramSketch.AutoSize = true;
-            this.chkGramSketch.Location = new System.Drawing.Point(146, 97);
+            this.chkGramSketch.Location = new System.Drawing.Point(121, 97);
             this.chkGramSketch.Name = "chkGramSketch";
             this.chkGramSketch.Size = new System.Drawing.Size(105, 17);
             this.chkGramSketch.TabIndex = 8;
@@ -156,7 +156,7 @@
             // chkRevIndexes
             // 
             this.chkRevIndexes.AutoSize = true;
-            this.chkRevIndexes.Location = new System.Drawing.Point(146, 74);
+            this.chkRevIndexes.Location = new System.Drawing.Point(121, 74);
             this.chkRevIndexes.Name = "chkRevIndexes";
             this.chkRevIndexes.Size = new System.Drawing.Size(108, 17);
             this.chkRevIndexes.TabIndex = 7;
@@ -167,7 +167,7 @@
             // chkConfigDictionary
             // 
             this.chkConfigDictionary.AutoSize = true;
-            this.chkConfigDictionary.Location = new System.Drawing.Point(146, 51);
+            this.chkConfigDictionary.Location = new System.Drawing.Point(121, 51);
             this.chkConfigDictionary.Name = "chkConfigDictionary";
             this.chkConfigDictionary.Size = new System.Drawing.Size(127, 17);
             this.chkConfigDictionary.TabIndex = 6;
@@ -180,7 +180,7 @@
             this.cmbPrintVia.AccessibleName = "PrintVia";
             this.cmbPrintVia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPrintVia.FormattingEnabled = true;
-            this.cmbPrintVia.Location = new System.Drawing.Point(146, 20);
+            this.cmbPrintVia.Location = new System.Drawing.Point(121, 20);
             this.cmbPrintVia.Name = "cmbPrintVia";
             this.cmbPrintVia.Size = new System.Drawing.Size(197, 21);
             this.cmbPrintVia.TabIndex = 5;
@@ -189,7 +189,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(69, 175);
+            this.label5.Location = new System.Drawing.Point(44, 175);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(75, 13);
             this.label5.TabIndex = 4;
@@ -198,7 +198,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(56, 151);
+            this.label4.Location = new System.Drawing.Point(31, 151);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(88, 13);
             this.label4.TabIndex = 3;
@@ -207,7 +207,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(73, 124);
+            this.label3.Location = new System.Drawing.Point(48, 124);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 13);
             this.label3.TabIndex = 2;
@@ -216,7 +216,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(31, 53);
+            this.label2.Location = new System.Drawing.Point(6, 53);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 13);
             this.label2.TabIndex = 1;
@@ -225,7 +225,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(96, 24);
+            this.label1.Location = new System.Drawing.Point(71, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(48, 13);
             this.label1.TabIndex = 0;
