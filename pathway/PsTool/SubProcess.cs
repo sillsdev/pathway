@@ -26,6 +26,9 @@ namespace SIL.Tool
     /// </summary>
     public static class SubProcess
     {
+        public static int ExitCode;
+        public static string RedirectOutput;
+
         #region RunProcess
         /// <summary>
         /// Runs process name from the instPath folder. Waits until complete before returning.
@@ -47,12 +50,25 @@ namespace SIL.Tool
             p1.StartInfo.FileName = name;
             if (arg != null)
                 p1.StartInfo.Arguments = arg;
+            p1.StartInfo.RedirectStandardOutput = !string.IsNullOrEmpty(RedirectOutput);
+            p1.StartInfo.RedirectStandardError = p1.StartInfo.RedirectStandardOutput;
+            p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
             p1.Start();
             if (wait)
             {
                 if (p1.Id <= 0)
                     throw new MissingSatelliteAssemblyException(name);
                 p1.WaitForExit();
+            }
+            ExitCode = p1.ExitCode;
+            if (!string.IsNullOrEmpty(RedirectOutput))
+            {
+                string result = p1.StandardOutput.ReadToEnd();
+                result += p1.StandardError.ReadToEnd();
+                StreamWriter streamWriter = new StreamWriter(RedirectOutput);
+                streamWriter.Write(result);
+                streamWriter.Close();
+                RedirectOutput = null;
             }
             Directory.SetCurrentDirectory(theCurrent);
         }

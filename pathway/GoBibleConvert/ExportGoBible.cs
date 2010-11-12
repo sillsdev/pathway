@@ -38,6 +38,7 @@ namespace SIL.PublishingSolution
         protected string collectionFullName;
         protected string collectionName;
         protected static ProgressBar _pb;
+        private const string RedirectOutputFileName = "Convert.log";
 
         public string ExportType
         {
@@ -89,13 +90,39 @@ namespace SIL.PublishingSolution
             inProcess.PerformStep();
             Restructure(projInfo, inProcess);
             inProcess.PerformStep();
-            CreateCollection();
+            if (!CreateCollection())
+            {
+                Cursor.Current = myCursor;
+                inProcess.Close();
+                return false;
+            }
             inProcess.PerformStep();
             BuildApplication();
             inProcess.PerformStep();
             inProcess.Close();
             Cursor.Current = myCursor;
-            if (projInfo.IsOpenOutput)
+            const int ExitOk = 0;
+            if (SubProcess.ExitCode != ExitOk)
+            {
+                string msg = string.Format("The conversion has exited with an error. Do you want to display additional details on the error?");
+                DialogResult dialogResult = MessageBox.Show(msg, "GoBible Export", MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    string redirectDirectory = Path.GetDirectoryName(collectionFullName);
+                    string redirectFullName = Path.Combine(redirectDirectory, RedirectOutputFileName);
+                    StreamReader streamReader = new StreamReader(redirectFullName);
+                    string errMsg = "";
+                    while (!streamReader.EndOfStream)
+                    {
+                        string line = streamReader.ReadLine();
+                        if (!char.IsWhiteSpace(line[0]))
+                            errMsg += line + "\r\n";
+                    }
+                    streamReader.Close();
+                    MessageBox.Show(errMsg, "GoBible Export Error Details", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else if (projInfo.IsOpenOutput)
             {
                 string result = Common.PathCombine(processFolder, collectionName + ".jar");
                 string msg = string.Format("Please copy the file {0} to your phone", result);
@@ -164,7 +191,7 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// Create collections files (using variables set up by Restructure
         /// </summary>
-        protected void CreateCollection()
+        protected bool CreateCollection()
         {
             var sourceText = Path.GetFileName(restructuredFullName);
 
@@ -182,6 +209,8 @@ namespace SIL.PublishingSolution
             XmlNamespaceManager xmlNamespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             xmlNamespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             var books = xmlDocument.SelectNodes("//xhtml:div[@class='scrBook']/@title", xmlNamespaceManager);
+            if (DuplicateBooks(books))
+                return false;
             collectionFullName = Path.Combine(processFolder, "Collections.txt");
 
             // Set Default Collection Parameters
@@ -216,6 +245,36 @@ namespace SIL.PublishingSolution
                 textWriter.WriteLine("Book: " + xmlNode.Value);
             }
             textWriter.Close();
+            return true;
+        }
+
+        private bool DuplicateBooks(XmlNodeList books)
+        {
+            List<string> allBooks = new List<string>();
+            List<string> duplicateBooks = new List<string>();
+            foreach (XmlNode bookNode in books)
+            {
+                string bookName = bookNode.Value;
+                if (allBooks.Contains(bookName))
+                {
+                    if (!duplicateBooks.Contains(bookName))
+                        duplicateBooks.Add(bookName);
+                }
+                else
+                {
+                    allBooks.Add(bookName);
+                }
+            }
+            if (duplicateBooks.Count > 0)
+            {
+                string errMsg = "The follow book names are duplicated:\r\n";
+                foreach (string name in duplicateBooks)
+                    errMsg += "\t" + name + "\r\n";
+                errMsg += "Please correct names in Translation Editor: File: Properties: Book Properties.";
+                MessageBox.Show(errMsg, "GoBible Export Dpulicate Book(s) Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return true;
+            }
+            return false;
         }
 
         protected void BuildApplication()
@@ -227,6 +286,7 @@ namespace SIL.PublishingSolution
             var progFolder = SubProcess.GetLocation(prog);
             var progFullName = Common.PathCombine(progFolder, prog);
             var args = string.Format(@"-Xmx128m -jar ""{0}"" ""{1}""", creatorFullPath, collectionFullName);
+            SubProcess.RedirectOutput = RedirectOutputFileName;
             SubProcess.Run(processFolder, progFullName, args, true);
         }
 
