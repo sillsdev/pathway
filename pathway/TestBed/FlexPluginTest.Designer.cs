@@ -44,6 +44,10 @@
             this.txtInputPath = new System.Windows.Forms.TextBox();
             this.Btn_InputPath = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkPage = new System.Windows.Forms.CheckBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.radDictionary = new System.Windows.Forms.RadioButton();
+            this.radScripture = new System.Windows.Forms.RadioButton();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -52,15 +56,11 @@
             this.btnFileSizeZero = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.chkPage = new System.Windows.Forms.CheckBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.radScripture = new System.Windows.Forms.RadioButton();
-            this.radDictionary = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // BtnFlexTest
@@ -231,6 +231,49 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Export";
             // 
+            // chkPage
+            // 
+            this.chkPage.AutoSize = true;
+            this.chkPage.Checked = true;
+            this.chkPage.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPage.Location = new System.Drawing.Point(270, 193);
+            this.chkPage.Name = "chkPage";
+            this.chkPage.Size = new System.Drawing.Size(118, 17);
+            this.chkPage.TabIndex = 55;
+            this.chkPage.Text = "With Page Property";
+            this.chkPage.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.radDictionary);
+            this.panel3.Controls.Add(this.radScripture);
+            this.panel3.Location = new System.Drawing.Point(241, 162);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(174, 25);
+            this.panel3.TabIndex = 54;
+            // 
+            // radDictionary
+            // 
+            this.radDictionary.AutoSize = true;
+            this.radDictionary.Checked = true;
+            this.radDictionary.Location = new System.Drawing.Point(3, 3);
+            this.radDictionary.Name = "radDictionary";
+            this.radDictionary.Size = new System.Drawing.Size(72, 17);
+            this.radDictionary.TabIndex = 2;
+            this.radDictionary.TabStop = true;
+            this.radDictionary.Text = "Dictionary";
+            this.radDictionary.UseVisualStyleBackColor = true;
+            // 
+            // radScripture
+            // 
+            this.radScripture.AutoSize = true;
+            this.radScripture.Location = new System.Drawing.Point(81, 3);
+            this.radScripture.Name = "radScripture";
+            this.radScripture.Size = new System.Drawing.Size(67, 17);
+            this.radScripture.TabIndex = 1;
+            this.radScripture.Text = "Scripture";
+            this.radScripture.UseVisualStyleBackColor = true;
+            // 
             // button5
             // 
             this.button5.AccessibleName = "BtnFlexTest";
@@ -322,49 +365,9 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // chkPage
-            // 
-            this.chkPage.AutoSize = true;
-            this.chkPage.Location = new System.Drawing.Point(270, 193);
-            this.chkPage.Name = "chkPage";
-            this.chkPage.Size = new System.Drawing.Size(118, 17);
-            this.chkPage.TabIndex = 55;
-            this.chkPage.Text = "With Page Property";
-            this.chkPage.UseVisualStyleBackColor = true;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.radDictionary);
-            this.panel3.Controls.Add(this.radScripture);
-            this.panel3.Location = new System.Drawing.Point(241, 162);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(174, 25);
-            this.panel3.TabIndex = 54;
-            // 
-            // radScripture
-            // 
-            this.radScripture.AutoSize = true;
-            this.radScripture.Location = new System.Drawing.Point(81, 3);
-            this.radScripture.Name = "radScripture";
-            this.radScripture.Size = new System.Drawing.Size(67, 17);
-            this.radScripture.TabIndex = 1;
-            this.radScripture.Text = "Scripture";
-            this.radScripture.UseVisualStyleBackColor = true;
-            // 
-            // radDictionary
-            // 
-            this.radDictionary.AutoSize = true;
-            this.radDictionary.Checked = true;
-            this.radDictionary.Location = new System.Drawing.Point(3, 3);
-            this.radDictionary.Name = "radDictionary";
-            this.radDictionary.Size = new System.Drawing.Size(72, 17);
-            this.radDictionary.TabIndex = 2;
-            this.radDictionary.TabStop = true;
-            this.radDictionary.Text = "Dictionary";
-            this.radDictionary.UseVisualStyleBackColor = true;
-            // 
             // FlexPluginTest
             // 
+            this.AcceptButton = this.button1;
             this.AccessibleName = "FlexPluginTest";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -381,10 +384,10 @@
             this.panel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

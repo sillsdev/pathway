@@ -689,9 +689,7 @@ namespace SIL.PublishingSolution
 
             projInfo.TempOutputFolder += Path.DirectorySeparatorChar;
             cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
-            //cXML.CreateStory(projInfo,Common.PathCombine(projInfo.TempOutputFolder, "Stories"), projInfo.DefaultXhtmlFileWithPath, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
-            //cXML.CreateStory(projInfo, projInfo.ProjectPath, projInfo.DefaultXhtmlFileWithPath, cssClass, new Dictionary<string, ArrayList>(), new ArrayList(), inStyles._styleName);
-            
+           
 
             if (projInfo.MoveStyleToContent) 
                 MoveStylesToContent(strStylePath, strContentPath);

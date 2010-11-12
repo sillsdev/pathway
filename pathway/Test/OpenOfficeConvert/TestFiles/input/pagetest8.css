@@ -1,0 +1,30 @@
+@page {
+background-color:red;
+    size: 14.8cm 21cm;
+    margin: 3cm 3cm;
+   @top-right{
+        content: counter(page);
+color:red;
+    }    
+}
+@page :first {
+
+}
+
+@page :left {
+background-color:green;
+   @bottom-center {
+        content: counter(page);
+color:red;
+    }    
+}
+
+
+@page :right {
+background-color:violet;
+   @bottom-left {
+        content: counter(page);
+color:yellow;
+    }    
+}
+

@@ -878,40 +878,58 @@
     <text:linenumbering-configuration text:number-lines="false" text:offset="0.1965in" style:num-format="1" text:number-position="left" text:increment="5" />
   </office:styles>
   <office:automatic-styles>
-    <style:style style:name="HeaderPageLeft" style:family="text">
+    <style:style style:name="PageHeaderFooter0" style:family="text">
       <style:text-properties content="string,(,guideword,first,)" fo:font-size="10pt" fo:font-family="Times New Roman" fo:font-weight="700" fo:color="#ff0000" />
     </style:style>
-    <style:style style:name="HeaderPageNumber" style:family="text">
+    <style:style style:name="PageHeaderFooter1" style:family="text">
       <style:text-properties content="inherit" fo:background-color="#0000ff" fo:font-size="12pt" fo:font-family="Arial" fo:font-weight="700" fo:color="#008000" />
     </style:style>
-    <style:style style:name="HeaderPageRight" style:family="text">
+    <style:style style:name="PageHeaderFooter2" style:family="text">
       <style:text-properties content="string,(,guideword,last,)" fo:font-size="10pt" fo:font-family="Georgia" fo:font-weight="700" fo:color="#ffa500" />
     </style:style>
-    <style:style style:name="FooterPageLeft" style:family="text">
+    <style:style style:name="PageHeaderFooter3" style:family="text">
       <style:text-properties content="string,(,guideword,last,)" fo:font-size="10pt" fo:font-family="Times New Roman" fo:font-weight="700" fo:color="#ff0000" />
     </style:style>
-    <style:style style:name="FooterPageNumber" style:family="text">
+    <style:style style:name="PageHeaderFooter4" style:family="text">
       <style:text-properties content="guide" fo:background-color="#0000ff" fo:font-size="12pt" fo:font-family="Arial" fo:font-weight="700" fo:color="#008000" />
     </style:style>
-    <style:style style:name="FooterPageRight" style:family="text">
+    <style:style style:name="PageHeaderFooter5" style:family="text">
       <style:text-properties content="counter,(,page,)" fo:font-size="10pt" fo:font-family="Georgia" fo:font-weight="700" fo:color="#ffa500" />
     </style:style>
-    <style:style style:name="AllHeaderPageLeft" style:family="text">
+    <style:style style:name="PageHeaderFooter12" style:family="text">
       <style:text-properties content="counter,(,page,)" fo:font-size="10pt" fo:font-family="Times New Roman" fo:font-weight="700" fo:color="#ff0000" />
     </style:style>
-    <style:style style:name="AllHeaderPageNumber" style:family="text">
+    <style:style style:name="PageHeaderFooter13" style:family="text">
       <style:text-properties content="inherit" fo:background-color="#0000ff" fo:font-size="12pt" fo:font-family="Arial" fo:font-weight="700" fo:color="#008000" />
     </style:style>
-    <style:style style:name="AllHeaderPageRight" style:family="text">
+    <style:style style:name="PageHeaderFooter14" style:family="text">
       <style:text-properties content="string,(,guideword,first,)" fo:font-size="10pt" fo:font-family="Georgia" fo:font-weight="700" fo:color="#ffa500" />
     </style:style>
-    <style:style style:name="AllFooterPageLeft" style:family="text">
+    <style:style style:name="PageHeaderFooter15" style:family="text">
       <style:text-properties content="string,(,guideword,last,)" fo:font-size="10pt" fo:font-family="Times New Roman" fo:font-weight="700" fo:color="#ff0000" />
     </style:style>
-    <style:style style:name="AllFooterPageNumber" style:family="text">
+    <style:style style:name="PageHeaderFooter16" style:family="text">
       <style:text-properties content="string,(,guideword,first,)" fo:background-color="#0000ff" fo:font-size="12pt" fo:font-family="Arial" fo:font-weight="700" fo:color="#008000" />
     </style:style>
-    <style:style style:name="AllFooterPageRight" style:family="text">
+    <style:style style:name="PageHeaderFooter17" style:family="text">
+      <style:text-properties content="counter,(,page,)" fo:font-size="10pt" fo:font-family="Georgia" fo:font-weight="700" fo:color="#ffa500" />
+    </style:style>
+    <style:style style:name="PageHeaderFooter18" style:family="text">
+      <style:text-properties content="counter,(,page,)" fo:font-size="10pt" fo:font-family="Times New Roman" fo:font-weight="700" fo:color="#ff0000" />
+    </style:style>
+    <style:style style:name="PageHeaderFooter19" style:family="text">
+      <style:text-properties content="inherit" fo:background-color="#0000ff" fo:font-size="12pt" fo:font-family="Arial" fo:font-weight="700" fo:color="#008000" />
+    </style:style>
+    <style:style style:name="PageHeaderFooter20" style:family="text">
+      <style:text-properties content="string,(,guideword,first,)" fo:font-size="10pt" fo:font-family="Georgia" fo:font-weight="700" fo:color="#ffa500" />
+    </style:style>
+    <style:style style:name="PageHeaderFooter21" style:family="text">
+      <style:text-properties content="string,(,guideword,last,)" fo:font-size="10pt" fo:font-family="Times New Roman" fo:font-weight="700" fo:color="#ff0000" />
+    </style:style>
+    <style:style style:name="PageHeaderFooter22" style:family="text">
+      <style:text-properties content="string,(,guideword,first,)" fo:background-color="#0000ff" fo:font-size="12pt" fo:font-family="Arial" fo:font-weight="700" fo:color="#008000" />
+    </style:style>
+    <style:style style:name="PageHeaderFooter23" style:family="text">
       <style:text-properties content="counter,(,page,)" fo:font-size="10pt" fo:font-family="Georgia" fo:font-weight="700" fo:color="#ffa500" />
     </style:style>
     <style:page-layout style:name="pm1">
@@ -933,7 +951,31 @@
       </style:footer-style>
     </style:page-layout>
     <style:page-layout style:name="pm3">
-      <style:page-layout-properties fo:page-width="7in" fo:page-height="10in" style:num-format="1" style:print-orientation="portrait" fo:margin-top=".5in" fo:margin-right=".5in" fo:margin-bottom=".5in" fo:margin-left=".5in" style:writing-mode="lr-tb" style:footnote-max-height="0in" fo:background-color="#ffff00" fo:border-top="solid .25in #008000" fo:border-bottom="solid .25in #008000" fo:border-left="solid .25in #008000" fo:border-right="solid .25in #008000">
+      <style:page-layout-properties fo:margin-top=".5in" fo:margin-right=".5in" fo:margin-bottom=".5in" fo:margin-left=".5in" fo:background-color="#ffff00" fo:page-width="7in" fo:page-height="10in" fo:border-top="solid .25in #008000" fo:border-bottom="solid .25in #008000" fo:border-left="solid .25in #008000" fo:border-right="solid .25in #008000" style:num-format="1" style:print-orientation="portrait" style:writing-mode="lr-tb" style:footnote-max-height="0in">
+        <style:background-image />
+        <style:footnote-sep style:width="0.0071in" style:distance-before-sep="0.0398in" style:distance-after-sep="0.0398in" style:adjustment="left" style:rel-width="25%" style:color="#000000" />
+      </style:page-layout-properties>
+      <style:header-style>
+        <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
+      </style:header-style>
+      <style:footer-style>
+        <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
+      </style:footer-style>
+    </style:page-layout>
+    <style:page-layout style:name="pm4" style:page-usage="left">
+      <style:page-layout-properties fo:page-width="7in" fo:page-height="10in" style:num-format="1" style:print-orientation="portrait" fo:margin-top=".5in" fo:margin-right=".5in" fo:margin-bottom=".5in" fo:margin-left=".5in" style:writing-mode="lr-tb" style:footnote-max-height="0in" fo:background-color="#00aa55" fo:border-top="solid .25in #ff0000" fo:border-bottom="solid .25in #ff0000" fo:border-left="solid .25in #ff0000" fo:border-right="solid .25in #ff0000">
+        <style:background-image />
+        <style:footnote-sep style:width="0.0071in" style:distance-before-sep="0.0398in" style:distance-after-sep="0.0398in" style:adjustment="left" style:rel-width="25%" style:color="#000000" />
+      </style:page-layout-properties>
+      <style:header-style>
+        <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
+      </style:header-style>
+      <style:footer-style>
+        <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
+      </style:footer-style>
+    </style:page-layout>
+    <style:page-layout style:name="pm5" style:page-usage="right">
+      <style:page-layout-properties fo:page-width="7in" fo:page-height="10in" style:num-format="1" style:print-orientation="portrait" fo:margin-top=".5in" fo:margin-right=".5in" fo:margin-bottom=".5in" fo:margin-left=".5in" style:writing-mode="lr-tb" style:footnote-max-height="0in" fo:background-color="#00aa55" fo:border-top="solid .25in #ff0000" fo:border-bottom="solid .25in #ff0000" fo:border-left="solid .25in #ff0000" fo:border-right="solid .25in #ff0000">
         <style:background-image />
         <style:footnote-sep style:width="0.0071in" style:distance-before-sep="0.0398in" style:distance-after-sep="0.0398in" style:adjustment="left" style:rel-width="25%" style:color="#000000" />
       </style:page-layout-properties>
@@ -946,70 +988,91 @@
     </style:page-layout>
   </office:automatic-styles>
   <office:master-styles>
-    <style:master-page style:name="Standard" style:page-layout-name="pm1">
-      <style:header>
-        <text:p text:style-name="Header" />
-      </style:header>
-      <style:footer>
-        <text:p text:style-name="Footer" />
-      </style:footer>
-      <style:footer-left>
-        <text:p text:style-name="Footer" />
-      </style:footer-left>
-    </style:master-page>
-    <style:master-page style:name="XHTML" style:page-layout-name="pm2">
+    <style:master-page style:name="Standard" style:page-layout-name="pm1" />
+    <style:master-page style:name="XHTML" style:page-layout-name="pm2" style:next-style-name="Right_20_Page" />
+    <style:master-page style:name="First_20_Page" style:display-name="First Page" style:next-style-name="Left_20_Page" style:page-layout-name="pm3">
       <style:header>
         <text:p text:style-name="Header">
-          <text:span text:style-name="AllHeaderPageLeft">
-            <text:page-number text:select-page="current">4</text:page-number>
-          </text:span>
-          <text:tab />
-          <text:span text:style-name="AllHeaderPageNumber">inherit</text:span>
-          <text:tab />
-          <text:span text:style-name="AllHeaderPageRight">
-            <text:chapter text:display="name" text:outline-level="9" />
-          </text:span>
-        </text:p>
-      </style:header>
-      <style:footer>
-        <text:p text:style-name="Footer">
-          <text:span text:style-name="AllFooterPageLeft">
-            <text:chapter text:display="name" text:outline-level="10" />
-          </text:span>
-          <text:tab />
-          <text:span text:style-name="AllFooterPageNumber">
+          <text:span text:style-name="PageHeaderFooter0">
             <text:chapter text:display="name" text:outline-level="9" />
           </text:span>
           <text:tab />
-          <text:span text:style-name="AllFooterPageRight">
-            <text:page-number text:select-page="current">4</text:page-number>
-          </text:span>
-        </text:p>
-      </style:footer>
-    </style:master-page>
-    <style:master-page style:name="First_20_Page" style:display-name="First Page" style:page-layout-name="pm3" style:next-style-name="XHTML">
-      <style:header>
-        <text:p text:style-name="Header">
-          <text:span text:style-name="HeaderPageLeft">
-            <text:chapter text:display="name" text:outline-level="9" />
-          </text:span>
+          <text:span text:style-name="PageHeaderFooter1">inherit</text:span>
           <text:tab />
-          <text:span text:style-name="HeaderPageNumber">inherit</text:span>
-          <text:tab />
-          <text:span text:style-name="HeaderPageRight">
+          <text:span text:style-name="PageHeaderFooter2">
             <text:chapter text:display="name" text:outline-level="10" />
           </text:span>
         </text:p>
       </style:header>
       <style:footer>
         <text:p text:style-name="Footer">
-          <text:span text:style-name="FooterPageLeft">
+          <text:span text:style-name="PageHeaderFooter3">
             <text:chapter text:display="name" text:outline-level="10" />
           </text:span>
           <text:tab />
-          <text:span text:style-name="FooterPageNumber">guide</text:span>
+          <text:span text:style-name="PageHeaderFooter4">guide</text:span>
           <text:tab />
-          <text:span text:style-name="FooterPageRight">
+          <text:span text:style-name="PageHeaderFooter5">
+            <text:page-number text:select-page="current">4</text:page-number>
+          </text:span>
+        </text:p>
+      </style:footer>
+    </style:master-page>
+    <style:master-page style:name="Left_20_Page" style:display-name="Left Page" style:page-layout-name="pm4" style:next-style-name="Right_20_Page">
+      <style:header>
+        <text:p text:style-name="Header">
+          <text:span text:style-name="PageHeaderFooter12">
+            <text:page-number text:select-page="current">4</text:page-number>
+          </text:span>
+          <text:tab />
+          <text:span text:style-name="PageHeaderFooter13">inherit</text:span>
+          <text:tab />
+          <text:span text:style-name="PageHeaderFooter14">
+            <text:chapter text:display="name" text:outline-level="9" />
+          </text:span>
+        </text:p>
+      </style:header>
+      <style:footer>
+        <text:p text:style-name="Footer">
+          <text:span text:style-name="PageHeaderFooter15">
+            <text:chapter text:display="name" text:outline-level="10" />
+          </text:span>
+          <text:tab />
+          <text:span text:style-name="PageHeaderFooter16">
+            <text:chapter text:display="name" text:outline-level="9" />
+          </text:span>
+          <text:tab />
+          <text:span text:style-name="PageHeaderFooter17">
+            <text:page-number text:select-page="current">4</text:page-number>
+          </text:span>
+        </text:p>
+      </style:footer>
+    </style:master-page>
+    <style:master-page style:name="Right_20_Page" style:display-name="Right Page" style:page-layout-name="pm5" style:next-style-name="Left_20_Page">
+      <style:header>
+        <text:p text:style-name="Header">
+          <text:span text:style-name="PageHeaderFooter18">
+            <text:page-number text:select-page="current">4</text:page-number>
+          </text:span>
+          <text:tab />
+          <text:span text:style-name="PageHeaderFooter19">inherit</text:span>
+          <text:tab />
+          <text:span text:style-name="PageHeaderFooter20">
+            <text:chapter text:display="name" text:outline-level="9" />
+          </text:span>
+        </text:p>
+      </style:header>
+      <style:footer>
+        <text:p text:style-name="Footer">
+          <text:span text:style-name="PageHeaderFooter21">
+            <text:chapter text:display="name" text:outline-level="10" />
+          </text:span>
+          <text:tab />
+          <text:span text:style-name="PageHeaderFooter22">
+            <text:chapter text:display="name" text:outline-level="9" />
+          </text:span>
+          <text:tab />
+          <text:span text:style-name="PageHeaderFooter23">
             <text:page-number text:select-page="current">4</text:page-number>
           </text:span>
         </text:p>

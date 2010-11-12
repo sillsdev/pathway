@@ -1706,155 +1706,155 @@ namespace Test.OpenOfficeConvert
 
         }
 
-        ///<summary>
-        ///TD-425 Impliment Start and Last References in same page
-        /// <summary>
-        /// </summary>      
-        [Test]
+        /////<summary>
+        /////TD-425 Impliment Start and Last References in same page
+        ///// <summary>
+        ///// </summary>      
+        //[Test]
 
-        public void SinglePageRefTest_Node()
-        {
+        //public void SinglePageRefTest_Node()
+        //{
 
-            const string file = "SinglePageRef";
+        //    const string file = "SinglePageRef";
 
-            string input = FileInput(file + ".css");
-            string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+        //    string input = FileInput(file + ".css");
+        //    string output = FileOutput(file + "styles.xml");
+        //    _stylesXML.CreateStyles(input, output, _errorFile, true);
 
-            // Note - single node test
-            _validate = new ValidateXMLFile(output);
-            _validate.ClassName = "AllHeaderPageLeft";
-            _validate.ClassProperty.Add("fo:font-weight", "700");
+        //    // Note - single node test
+        //    _validate = new ValidateXMLFile(output);
+        //    _validate.ClassName = "AllHeaderPageLeft";
+        //    _validate.ClassProperty.Add("fo:font-weight", "700");
 
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
+        //    returnValue = _validate.ValidateNodeAttributesNS(false);
+        //    Assert.IsTrue(returnValue);
 
-            _validate = new ValidateXMLFile(output);
-            _validate.ClassName = "AllHeaderPageRight";
-            _validate.ClassProperty.Add("fo:font-weight", "700");
+        //    _validate = new ValidateXMLFile(output);
+        //    _validate.ClassName = "AllHeaderPageRight";
+        //    _validate.ClassProperty.Add("fo:font-weight", "700");
 
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
+        //    returnValue = _validate.ValidateNodeAttributesNS(false);
+        //    Assert.IsTrue(returnValue);
 
-            //style:master-page style:name="First_20_Page"
-            //Third Node
-            //XPath = "//style:style[@style:name='" + ClassName + "']";
-            //string xpath = "//style:master-page[style:name=\"First_20_Page\"]";
-            string xpath = "//style:master-page[@style:name='XHTML']";
-            _validate.ClassName = string.Empty;
-            string inner =
-                //"<text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">" +
-                "<style:header xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\">" +
-                "<text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">" +
-                "<text:span text:style-name=\"AllHeaderPageLeft\">" +
-                "<text:chapter text:display=\"name\" text:outline-level=\"9\" />" +
-                "</text:span>" +
-                "<text:tab />" +
-                "<text:span text:style-name=\"AllHeaderPageNumber\">" +
-                "<text:page-number text:select-page=\"current\">4</text:page-number>" +
-                "</text:span>" +
-                "<text:tab />" +
-                "<text:span text:style-name=\"AllHeaderPageRight\">" +
-                "<text:chapter text:display=\"name\" text:outline-level=\"10\" />" +
-                "</text:span>" +
-                "</text:p>" +
-                "</style:header>";
+        //    //style:master-page style:name="First_20_Page"
+        //    //Third Node
+        //    //XPath = "//style:style[@style:name='" + ClassName + "']";
+        //    //string xpath = "//style:master-page[style:name=\"First_20_Page\"]";
+        //    string xpath = "//style:master-page[@style:name='XHTML']";
+        //    _validate.ClassName = string.Empty;
+        //    string inner =
+        //        //"<text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">" +
+        //        "<style:header xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\">" +
+        //        "<text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">" +
+        //        "<text:span text:style-name=\"AllHeaderPageLeft\">" +
+        //        "<text:chapter text:display=\"name\" text:outline-level=\"9\" />" +
+        //        "</text:span>" +
+        //        "<text:tab />" +
+        //        "<text:span text:style-name=\"AllHeaderPageNumber\">" +
+        //        "<text:page-number text:select-page=\"current\">4</text:page-number>" +
+        //        "</text:span>" +
+        //        "<text:tab />" +
+        //        "<text:span text:style-name=\"AllHeaderPageRight\">" +
+        //        "<text:chapter text:display=\"name\" text:outline-level=\"10\" />" +
+        //        "</text:span>" +
+        //        "</text:p>" +
+        //        "</style:header>";
 
-            returnValue = _validate.ValidateNodeInnerXml(xpath, inner);
-            Assert.IsTrue(returnValue);
+        //    returnValue = _validate.ValidateNodeInnerXml(xpath, inner);
+        //    Assert.IsTrue(returnValue);
 
-        }
+        //}
 
-        ///<summary>
-        ///TD-428 Impliment Start and Last References in Mirror page
-        /// <summary>
-        /// </summary>      
-        [Test]
-        public void MirroredPageRefTest_Node()
-        {
-            const string file = "MirroredPageRef";
+        /////<summary>
+        /////TD-428 Impliment Start and Last References in Mirror page
+        ///// <summary>
+        ///// </summary>      
+        //[Test]
+        //public void MirroredPageRefTest_Node()
+        //{
+        //    const string file = "MirroredPageRef";
 
-            string input = FileInput(file + ".css");
-            string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+        //    string input = FileInput(file + ".css");
+        //    string output = FileOutput(file + "styles.xml");
+        //    _stylesXML.CreateStyles(input, output, _errorFile, true);
 
-            //First Node
-            string xpath = "//style:page-layout[@style:name='";
-            _validate = new ValidateXMLFile(output);
-            _validate.ClassName = "pm1";
-            _validate.ClassProperty.Add("style:page-usage", "mirrored");
+        //    //First Node
+        //    string xpath = "//style:page-layout[@style:name='";
+        //    _validate = new ValidateXMLFile(output);
+        //    _validate.ClassName = "pm1";
+        //    _validate.ClassProperty.Add("style:page-usage", "mirrored");
 
-            returnValue = _validate.ValidateNodeAttributesNS(0, xpath);
-            Assert.IsTrue(returnValue);
+        //    returnValue = _validate.ValidateNodeAttributesNS(0, xpath);
+        //    Assert.IsTrue(returnValue);
 
-            xpath = "samenode";
-            _validate.ClassProperty.Add("fo:page-width", "14.8cm");
-            _validate.ClassProperty.Add("fo:page-height", "21cm");
-            _validate.ClassProperty.Add("style:num-format", "1");
-            _validate.ClassProperty.Add("style:print-orientation", "portrait");
-            _validate.ClassProperty.Add("style:writing-mode", "lr-tb");
-            _validate.ClassProperty.Add("style:footnote-max-height", "0in");
+        //    xpath = "samenode";
+        //    _validate.ClassProperty.Add("fo:page-width", "14.8cm");
+        //    _validate.ClassProperty.Add("fo:page-height", "21cm");
+        //    _validate.ClassProperty.Add("style:num-format", "1");
+        //    _validate.ClassProperty.Add("style:print-orientation", "portrait");
+        //    _validate.ClassProperty.Add("style:writing-mode", "lr-tb");
+        //    _validate.ClassProperty.Add("style:footnote-max-height", "0in");
 
-            _validate.ClassProperty.Add("fo:margin-top", "1.15cm");
-            _validate.ClassProperty.Add("fo:margin-right", "1.5cm");
-            _validate.ClassProperty.Add("fo:margin-bottom", "1.5cm");
-            _validate.ClassProperty.Add("fo:margin-left", "1.5cm");
+        //    _validate.ClassProperty.Add("fo:margin-top", "1.15cm");
+        //    _validate.ClassProperty.Add("fo:margin-right", "1.5cm");
+        //    _validate.ClassProperty.Add("fo:margin-bottom", "1.5cm");
+        //    _validate.ClassProperty.Add("fo:margin-left", "1.5cm");
 
-            returnValue = _validate.ValidateNodeAttributesNS(1, xpath); // style:page-layout-properties
-            Assert.IsTrue(returnValue);
+        //    returnValue = _validate.ValidateNodeAttributesNS(1, xpath); // style:page-layout-properties
+        //    Assert.IsTrue(returnValue);
 
-            //Second Node
-            xpath = "//style:page-layout[@style:name='";
-            _validate.ClassName = "pm2";
-            _validate.ClassProperty.Add("style:page-usage", "mirrored");
+        //    //Second Node
+        //    xpath = "//style:page-layout[@style:name='";
+        //    _validate.ClassName = "pm2";
+        //    _validate.ClassProperty.Add("style:page-usage", "mirrored");
 
-            returnValue = _validate.ValidateNodeAttributesNS(0, xpath);
-            Assert.IsTrue(returnValue);
+        //    returnValue = _validate.ValidateNodeAttributesNS(0, xpath);
+        //    Assert.IsTrue(returnValue);
 
-            xpath = "samenode";
-            _validate.ClassProperty.Add("fo:page-width", "14.8cm");
-            _validate.ClassProperty.Add("fo:page-height", "21cm");
-            _validate.ClassProperty.Add("style:num-format", "1");
-            _validate.ClassProperty.Add("style:print-orientation", "portrait");
-            _validate.ClassProperty.Add("style:writing-mode", "lr-tb");
-            _validate.ClassProperty.Add("style:footnote-max-height", "0in");
+        //    xpath = "samenode";
+        //    _validate.ClassProperty.Add("fo:page-width", "14.8cm");
+        //    _validate.ClassProperty.Add("fo:page-height", "21cm");
+        //    _validate.ClassProperty.Add("style:num-format", "1");
+        //    _validate.ClassProperty.Add("style:print-orientation", "portrait");
+        //    _validate.ClassProperty.Add("style:writing-mode", "lr-tb");
+        //    _validate.ClassProperty.Add("style:footnote-max-height", "0in");
 
-            _validate.ClassProperty.Add("fo:margin-top", "1.15cm");
-            _validate.ClassProperty.Add("fo:margin-right", "1.5cm");
-            _validate.ClassProperty.Add("fo:margin-bottom", "1.5cm");
-            _validate.ClassProperty.Add("fo:margin-left", "1.5cm");
+        //    _validate.ClassProperty.Add("fo:margin-top", "1.15cm");
+        //    _validate.ClassProperty.Add("fo:margin-right", "1.5cm");
+        //    _validate.ClassProperty.Add("fo:margin-bottom", "1.5cm");
+        //    _validate.ClassProperty.Add("fo:margin-left", "1.5cm");
 
-            returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
-            Assert.IsTrue(returnValue);
+        //    returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
+        //    Assert.IsTrue(returnValue);
 
-            //Third Node
-            xpath = "//style:header-left";
-            _validate.ClassName = string.Empty;
-            string inner = "<text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">" +
-            "<text:span text:style-name=\"AllHeaderPageLeft\">" +
-            "<text:chapter text:display=\"name\" text:outline-level=\"9\" />" +
-            "</text:span>" +
-            "<text:tab />" +
-            "<text:span text:style-name=\"AllHeaderPageNumber\">" +
-            "<text:page-number text:select-page=\"current\">4</text:page-number>" +
-            "</text:span>" +
-            "<text:tab />" +
-            "<text:span text:style-name=\"AllHeaderPageRight\" />" +
-            "</text:p>";
-            returnValue = _validate.ValidateNodeInnerXml(xpath, inner);
-            Assert.IsTrue(returnValue);
+        //    //Third Node
+        //    xpath = "//style:header-left";
+        //    _validate.ClassName = string.Empty;
+        //    string inner = "<text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">" +
+        //    "<text:span text:style-name=\"AllHeaderPageLeft\">" +
+        //    "<text:chapter text:display=\"name\" text:outline-level=\"9\" />" +
+        //    "</text:span>" +
+        //    "<text:tab />" +
+        //    "<text:span text:style-name=\"AllHeaderPageNumber\">" +
+        //    "<text:page-number text:select-page=\"current\">4</text:page-number>" +
+        //    "</text:span>" +
+        //    "<text:tab />" +
+        //    "<text:span text:style-name=\"AllHeaderPageRight\" />" +
+        //    "</text:p>";
+        //    returnValue = _validate.ValidateNodeInnerXml(xpath, inner);
+        //    Assert.IsTrue(returnValue);
 
-            //Fourth Node
-            xpath = "//style:master-page[@style:name='";
-            _validate.ClassName = "First_20_Page";
+        //    //Fourth Node
+        //    xpath = "//style:master-page[@style:name='";
+        //    _validate.ClassName = "First_20_Page";
 
-            _validate.ClassProperty.Add("style:display-name", "First Page");
-            _validate.ClassProperty.Add("style:page-layout-name", "pm2");
-            _validate.ClassProperty.Add("style:next-style-name", "Standard");
+        //    _validate.ClassProperty.Add("style:display-name", "First Page");
+        //    _validate.ClassProperty.Add("style:page-layout-name", "pm2");
+        //    _validate.ClassProperty.Add("style:next-style-name", "Standard");
 
-            returnValue = _validate.ValidateNodeAttributesNS(0, xpath);
-            Assert.IsTrue(returnValue);
-        }
+        //    returnValue = _validate.ValidateNodeAttributesNS(0, xpath);
+        //    Assert.IsTrue(returnValue);
+        //}
 
         ///<summary>
         ///TD-245 Handle hyphenation related keywords
