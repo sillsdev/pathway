@@ -443,7 +443,7 @@ class BlogExport:
             if tag == '-sub':
                 example1 = self.JustNode(examples[0])
                 map["Form"] = self.FixSpace(self.FindItem(example1, '//x:span/x:span/x:span[@lang="chr"]/text()'))
-                map["Example"] = self.FindItem(example1, '//x:span/x:span/x:span[@lang="chr-x-ACC"]/text()')
+                map["Example"] = self.FindItem(example1, '//x:span/x:span/x:span[@lang="chr-x-SP"]/text()')
                 map["Translation"] = self.FindItem(example1, '//x:span[@class="translation%s"]/x:span[@lang="en"]/text()' % tag)
                 start = 1
             exampletext = u''
