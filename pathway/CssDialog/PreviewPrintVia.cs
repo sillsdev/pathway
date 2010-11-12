@@ -84,6 +84,7 @@ namespace SIL.PublishingSolution
             toolTip.ShowAlways = true;
             toolTip.SetToolTip(btnPrevious, "Show Page 1");
             toolTip.SetToolTip(btnNext, "Show Page 2");
+            toolTip.SetToolTip(btnEdit, "Modify the Properties of the Selected Layout");
         }
 
         private void LoadGridValues(object sender)
