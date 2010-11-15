@@ -52,8 +52,11 @@ namespace epubConvert
             grpOptions.Text = Resources.EmbedFontOptions;
             rdoEmbedFont.Text = Resources.EmbedFont;
             rdoConvertToSILFont.Text = Resources.ConvertToSILFont;
-            ddlSILFonts.Items.AddRange(AvailableSILFonts);
-            ddlSILFonts.SelectedIndex = 0;
+            if (ddlSILFonts.Items.Count == 0)
+            {
+                ddlSILFonts.Items.AddRange(AvailableSILFonts);
+                ddlSILFonts.SelectedIndex = 0;
+            }
             if (RemainingIssues > 0)
             {
                 chkRepeatAction.Visible = true;

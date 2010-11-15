@@ -104,7 +104,7 @@
 		<xsl:if test="count(child::*) > 0 or string-length(normalize-space(./text())) > 0">
 			<xsl:copy>
 				<xsl:if test="@lang != ''">
-					<xsl:attribute name="lang"><xsl:value-of select="@lang"/></xsl:attribute>
+					<xsl:attribute name="xml:lang"><xsl:value-of select="@lang"/></xsl:attribute>
 				</xsl:if>
 				<xsl:for-each select="@*[not(local-name() = 'lang' )]">
 					<xsl:copy/>

@@ -260,21 +260,27 @@ namespace SIL.PublishingSolution
                     {
                         if (!embeddedFont.Value.SILFont)
                         {
-                            // append or add this entry to nonSILFonts
-                            if (nonSILFonts.TryGetValue(embeddedFont.Value, out langs))
+                            foreach (var language in _langFontDictionary.Keys)
                             {
-                                // existing entry - add this language to the list of langs that use this font
-                                var sbName = new StringBuilder();
-                                sbName.Append(langs);
-                                sbName.Append(", ");
-                                sbName.Append(embeddedFont.Key);
-                                // set the value
-                                nonSILFonts[embeddedFont.Value] = sbName.ToString();
-                            }
-                            else
-                            {
-                                // new entry
-                                nonSILFonts.Add(embeddedFont.Value, embeddedFont.Key);
+                                if (_langFontDictionary[language].Equals(embeddedFont.Key))
+                                {
+                                    // add this language to the list of langs that use this font
+                                    if (nonSILFonts.TryGetValue(embeddedFont.Value, out langs))
+                                    {
+                                        // existing entry - add this language to the list of langs that use this font
+                                        var sbName = new StringBuilder();
+                                        sbName.Append(langs);
+                                        sbName.Append(", ");
+                                        sbName.Append(language);
+                                        // set the value
+                                        nonSILFonts[embeddedFont.Value] = sbName.ToString();
+                                    }
+                                    else
+                                    {
+                                        // new entry
+                                        nonSILFonts.Add(embeddedFont.Value, language);
+                                    }
+                                }
                             }
                         }
                     }
@@ -467,7 +473,7 @@ namespace SIL.PublishingSolution
             // add :lang pseudo-elements for each language and set them to the proper font
             foreach( var language in _langFontDictionary)
             {
-                sb.Append("body:lang(");
+                sb.Append("*:lang(");
                 sb.Append(language.Key);
                 sb.AppendLine(") {");
                 sb.Append("font-family: '");
