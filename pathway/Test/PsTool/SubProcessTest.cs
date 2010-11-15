@@ -14,6 +14,7 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 using System;
+using System.IO;
 using SIL.Tool;
 using NUnit.Framework;
 
@@ -49,6 +50,28 @@ namespace Test.PsTool
             string instPath = string.Empty;
             string name = string.Empty;
             SubProcess.Run(instPath, name);
+        }
+
+        /// <summary>
+        ///A test for Run
+        ///</summary>
+        [Test]
+        public void RunTest()
+        {
+            string instPath = Path.GetTempPath();
+            string name = "Find.exe";
+            string arg = "/?";
+            bool wait = true;
+            const string EchoLog = "Find.log";
+            SubProcess.RedirectOutput = EchoLog;
+            SubProcess.Run(instPath, name, arg, wait);
+            Assert.AreNotEqual(0, SubProcess.ExitCode);
+            string logFullName = Path.Combine(instPath, EchoLog);
+            Assert.IsTrue(File.Exists(logFullName));
+            StreamReader streamReader = new StreamReader(logFullName);
+            string result = streamReader.ReadToEnd();
+            streamReader.Close();
+            File.Delete(logFullName);
         }
 
         /// <summary>

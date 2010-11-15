@@ -39,6 +39,7 @@ namespace SIL.PublishingSolution
         protected string collectionName;
         protected static ProgressBar _pb;
         private const string RedirectOutputFileName = "Convert.log";
+        List<string> DuplicateBooks = new List<string>();
 
         public string ExportType
         {
@@ -92,6 +93,11 @@ namespace SIL.PublishingSolution
             inProcess.PerformStep();
             if (!CreateCollection())
             {
+                string errMsg = "The follow book names are duplicated:\r\n";
+                foreach (string name in DuplicateBooks)
+                    errMsg += "\t" + name + "\r\n";
+                errMsg += "Please correct names in Translation Editor: File: Properties: Book Properties.";
+                MessageBox.Show(errMsg, "GoBible Export Dpulicate Book(s) Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Cursor.Current = myCursor;
                 inProcess.Close();
                 return false;
@@ -209,20 +215,21 @@ namespace SIL.PublishingSolution
             XmlNamespaceManager xmlNamespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             xmlNamespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             var books = xmlDocument.SelectNodes("//xhtml:div[@class='scrBook']/@title", xmlNamespaceManager);
-            if (DuplicateBooks(books))
+            if (IsDuplicateBooks(books))
                 return false;
             collectionFullName = Path.Combine(processFolder, "Collections.txt");
 
             // Set Default Collection Parameters
             var red = "false";
             var info = "Bible text exported from FieldWorks Translation Editor.";
-			var iconPath = Common.FromRegistry(Common.PathCombine("GoBible/GoBibleCore/Icon", "Icon.png"));
+			var iconFullName = Common.FromRegistry(Common.PathCombine("GoBible/GoBibleCore/Icon", "Icon.png"));
 
             // Load User Interface Collection Parameters
             Param.LoadSettings();
             Param.SetValue(Param.InputType, "Scripture");
             Param.LoadSettings();
-            Dictionary<string, string> mobilefeature = Param.GetItemsAsDictionary("//stylePick/styles/mobile/style[@name='GoBible']/styleProperty");
+            string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
+            Dictionary<string, string> mobilefeature = Param.GetItemsAsDictionary("//stylePick/styles/mobile/style[@name='" + layout + "']/styleProperty");
             if (mobilefeature.ContainsKey("RedLetter") && mobilefeature["RedLetter"] == "Yes")
                 red = "true";
             if (mobilefeature.ContainsKey("Information"))
@@ -230,12 +237,18 @@ namespace SIL.PublishingSolution
             if (mobilefeature.ContainsKey("Copyright"))
                 info += " " + mobilefeature["Copyright"].Trim();
             if (mobilefeature.ContainsKey("Icon"))
-                iconPath = mobilefeature["Icon"];
+                if (File.Exists(mobilefeature["Icon"]))
+                    iconFullName = mobilefeature["Icon"];
+            var iconDirectory = Path.GetDirectoryName(iconFullName);
+            var iconName = Path.GetFileName(iconFullName);
+            const bool overwrite = true;
+            if (iconDirectory != processFolder)
+                File.Copy(iconFullName, Path.Combine(processFolder, iconName), overwrite);
 
             // Write collection file
             TextWriter textWriter = new StreamWriter(collectionFullName);
             textWriter.WriteLine("Info: " + info);
-            textWriter.WriteLine("Phone-Icon-Filepath: " + iconPath); // path to 20x20 *.png icon file
+            textWriter.WriteLine("Phone-Icon-Filepath: " + iconName); // path to 20x20 *.png icon file
             textWriter.WriteLine("RedLettering: " + red);  // relies on correct tag
             textWriter.WriteLine("Source-Text: " + sourceText);
             textWriter.WriteLine("Source-Format: xhtml_te");
@@ -248,33 +261,23 @@ namespace SIL.PublishingSolution
             return true;
         }
 
-        private bool DuplicateBooks(XmlNodeList books)
+        protected bool IsDuplicateBooks(XmlNodeList books)
         {
             List<string> allBooks = new List<string>();
-            List<string> duplicateBooks = new List<string>();
             foreach (XmlNode bookNode in books)
             {
                 string bookName = bookNode.Value;
                 if (allBooks.Contains(bookName))
                 {
-                    if (!duplicateBooks.Contains(bookName))
-                        duplicateBooks.Add(bookName);
+                    if (!DuplicateBooks.Contains(bookName))
+                        DuplicateBooks.Add(bookName);
                 }
                 else
                 {
                     allBooks.Add(bookName);
                 }
             }
-            if (duplicateBooks.Count > 0)
-            {
-                string errMsg = "The follow book names are duplicated:\r\n";
-                foreach (string name in duplicateBooks)
-                    errMsg += "\t" + name + "\r\n";
-                errMsg += "Please correct names in Translation Editor: File: Properties: Book Properties.";
-                MessageBox.Show(errMsg, "GoBible Export Dpulicate Book(s) Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return true;
-            }
-            return false;
+            return DuplicateBooks.Count > 0;
         }
 
         protected void BuildApplication()

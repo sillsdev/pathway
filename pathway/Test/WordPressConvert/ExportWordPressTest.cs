@@ -14,6 +14,7 @@
 using System;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Xml;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
@@ -26,7 +27,7 @@ namespace Test.WordPressConvert
     /// </summary>
     /// ----------------------------------------------------------------------------------------
     [TestFixture]
-    public class ExportWordPressTest
+    public class ExportWordPressTest: ExportGoBible
     {
         #region setup
         private string _inputPath;
@@ -99,6 +100,32 @@ namespace Test.WordPressConvert
             Assert.IsTrue(actual);
             const string dataSql = "data.sql";
             Assert.AreEqual("", IsEqualAllButTime(FileExpected(dataSql), FileOutput(dataSql)));
+        }
+
+        /// <summary>
+        ///A test for DuplicateBooks 
+        ///</summary>
+        [Test]
+        public void IsDuplicateBooksTest()
+        {
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.LoadXml("<books><book title='Korin'/><book title='Korin'/></books>");
+            XmlNodeList books = xmlDocument.SelectNodes("//book/@title");
+            bool result = IsDuplicateBooks(books);
+            Assert.IsTrue(result);
+        }
+
+        /// <summary>
+        ///A test for DuplicateBooks is false
+        ///</summary>
+        [Test]
+        public void NotIsDuplicateBooksTest()
+        {
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.LoadXml("<books><book title='1 Korin'/><book title='2 Korin'/></books>");
+            XmlNodeList books = xmlDocument.SelectNodes("//book/@title");
+            bool result = IsDuplicateBooks(books);
+            Assert.IsFalse(result);
         }
 
         private static string IsEqualAllButTime(string fileExpectedName, string fileOutputName)
