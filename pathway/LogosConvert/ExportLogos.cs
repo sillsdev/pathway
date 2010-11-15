@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
+using System.Xml;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -84,6 +85,7 @@ namespace SIL.PublishingSolution
                     string msg = string.Format("Please submit the file {0} for compiling", result);
                     MessageBox.Show(msg, "Logos Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+                UpdateGUID(projInfo);
             }
             catch (Exception exception)
             {
@@ -95,6 +97,39 @@ namespace SIL.PublishingSolution
                 Environment.CurrentDirectory = curdir;
             }
             return true;
+        }
+
+        private void UpdateGUID(PublicationInformation projInfo)
+        {
+            string FileGuidPath = Path.Combine(Common.GetPSApplicationPath(),"FileGuids.xml");
+            if (!File.Exists(FileGuidPath)) return;
+            XmlDocument xmlDoc = new XmlDocument { XmlResolver = null };
+            xmlDoc.Load(FileGuidPath);
+            string outputName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+            string xPath = "//files/file[@name='" + outputName + "']";
+            //"//st:style[@st:name='" + name.Value + "']
+            var node = xmlDoc.SelectSingleNode(xPath);
+            if (node == null)
+            {
+                string newGuid = Guid.NewGuid().ToString();
+                XmlElement elmRoot = xmlDoc.DocumentElement;
+
+                XmlElement newFile = xmlDoc.CreateElement("file");
+
+                // Add the Id attribute.
+                XmlAttribute attName = xmlDoc.CreateAttribute("name");
+                attName.Value = outputName;
+                newFile.Attributes.Append(attName);
+
+                XmlAttribute attGUID = xmlDoc.CreateAttribute("guid");
+                attName.Value = newGuid;
+                newFile.Attributes.Append(attGUID);
+
+                elmRoot.AppendChild(newFile);
+
+                xmlDoc.Save(FileGuidPath);
+            }
+
         }
 
         private void ZipResults(PublicationInformation projInfo)
