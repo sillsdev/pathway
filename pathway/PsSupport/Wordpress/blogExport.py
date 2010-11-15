@@ -454,7 +454,7 @@ class BlogExport:
                     combine = False
                 else:
                     map["AddForm"] = self.FixSpace(self.FindItem(thisexample, '//x:span/x:span/x:span[@lang="chr"]/text()'))
-                map["AddExample"] = self.FindItem(thisexample, '//x:span/x:span/x:span[@lang="chr-x-ACC"]/text()')
+                map["AddExample"] = self.FindItem(thisexample, '//x:span/x:span/x:span[@lang="chr-x-SP"]/text()')
                 map["AddTranslation"] = self.FindItem(thisexample, '//x:span[@class="translation%s"]/x:span[@lang="en"]/text()' % tag)
                 if map.has_key("Example") and map["Example"] == '' and map["Translation"] == '' and map["AddForm"] == '':
                     map["Example"] = map["AddExample"]
