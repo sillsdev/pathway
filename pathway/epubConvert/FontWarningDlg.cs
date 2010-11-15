@@ -54,7 +54,14 @@ namespace epubConvert
             rdoConvertToSILFont.Text = Resources.ConvertToSILFont;
             if (ddlSILFonts.Items.Count == 0)
             {
-                ddlSILFonts.Items.AddRange(AvailableSILFonts);
+                // update the possible replacements based on what's installed on this system
+                foreach (var availableSilFont in AvailableSILFonts)
+                {
+                    if (EmbeddedFont.IsInstalled(availableSilFont))
+                    {
+                        ddlSILFonts.Items.Add(availableSilFont);
+                    }
+                }
                 ddlSILFonts.SelectedIndex = 0;
             }
             if (RemainingIssues > 0)

@@ -257,6 +257,36 @@ namespace epubConvert
                 return sb.ToString();
             }
         }
+
+        /// <summary>
+        /// Returns whether the given font is installed on this system. This can either be the
+        /// font Filename (e.g., "Arial.ttf") or the font family / user friendly name of a font.
+        /// (The filename lookup is faster.)
+        /// </summary>
+        /// <param name="font">Font family or font filename</param>
+        /// <returns>true if font is installed</returns>
+        public static bool IsInstalled (string font)
+        {
+            if (font.EndsWith(".ttf") || font.EndsWith(".otf"))
+            {
+                // quick check - this font should reside in the fonts folder
+                String fullFilename = Path.Combine(GetFontFolderPath(), font);
+                return (File.Exists(fullFilename));
+            }
+            else
+            {
+                // longer check - instantiate an embedded font and test the filename
+                var embeddedFont = new EmbeddedFont(font);
+                if (embeddedFont.Filename == null)
+                {
+                    // not an SIL font, not on the system
+                    return false;
+                }
+                String fullFilename = Path.Combine(GetFontFolderPath(), embeddedFont.Filename);
+                return (File.Exists(fullFilename));
+            }
+        }
+
         #endregion
     }
 
