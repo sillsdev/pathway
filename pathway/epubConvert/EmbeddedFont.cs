@@ -118,8 +118,8 @@ namespace epubConvert
                     break;
                 case "Dai Banna":
                     bFound = true;
-                    Weight = "regular";
-                    Style = "regular";
+                    Weight = "normal";
+                    Style = "normal";
                     Filename = "DBSILBR.ttf";
                     SILFont = true;
                     Serif = true;
