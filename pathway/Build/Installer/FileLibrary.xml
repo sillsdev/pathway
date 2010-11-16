@@ -1,5 +1,42 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\PsDll\LogosConvert.pdb" ComponentGuid="91524153-765B-45DB-ACC9-22A405641DEE"/>
+	<File Path="Files\PsDll\LogosConvert.dll.config" ComponentGuid="9991D1BD-C35A-4814-B914-895E3FD93E16"/>
+	<File Path="Files\PsDll\LogosConvert.dll" ComponentGuid="4DE98891-6A58-4FA0-8CA6-D89188CD39FD"/>
+	<File Path="Files\PsDll\epubConvert.pdb" ComponentGuid="1373DD03-D175-4CE5-9BCE-3DD14697C1DE"/>
+	<File Path="Files\PsDll\epubConvert.dll" ComponentGuid="9E0B1EFF-9B99-43DB-A6C0-1B7F80624F26"/>
+	<File Path="Files\ConfigurationTool\epubConvert.pdb" ComponentGuid="5021D5B3-5CA3-4949-8A47-B46022C925A6"/>
+	<File Path="Files\PathwaySupport\Styles\Scripture\PageNumber_TopOutside.css" ComponentGuid="52CC359B-F527-4A94-B90E-58A96C84F38F"/>
+	<File Path="Files\PathwaySupport\Styles\Scripture\PageNumber_TopInside.css" ComponentGuid="CB4FA809-071E-46BD-B1A5-5FF3041B4B72"/>
+	<File Path="Files\PathwaySupport\Styles\Scripture\PageNumber_TopCenter.css" ComponentGuid="9AD9A296-2981-4647-AC24-5D364CB90C84"/>
+	<File Path="Files\PathwaySupport\Styles\Scripture\PageNumber_None.css" ComponentGuid="BD556535-D981-4F70-A7BF-298A1158BA90"/>
+	<File Path="Files\PathwaySupport\Styles\Scripture\PageNumber_BottomOutside.css" ComponentGuid="106DA0F3-8A6A-441D-8319-4F482772E594"/>
+	<File Path="Files\PathwaySupport\Styles\Scripture\PageNumber_BottomInside.css" ComponentGuid="0D3DACFB-BE2F-470F-BE28-A0B0DA24E773"/>
+	<File Path="Files\PathwaySupport\Styles\Scripture\PageNumber_BottomCenter_FirstPage.css" ComponentGuid="A36809F9-24BA-4242-8D40-A8CF2225439C"/>
+	<File Path="Files\PathwaySupport\Styles\Scripture\PageNumber_BottomCenter.css" ComponentGuid="04207EAA-38B0-43DE-8746-1F8772FAA520"/>
+	<File Path="Files\PathwaySupport\Styles\Dictionary\PageNumber_TopOutside.css" ComponentGuid="4DC688B4-FFB7-42C5-B4E6-BEA9B18EFBF6"/>
+	<File Path="Files\PathwaySupport\Styles\Dictionary\PageNumber_TopInside.css" ComponentGuid="9A1E7505-8351-47EC-A26F-245AEF418048"/>
+	<File Path="Files\PathwaySupport\Styles\Dictionary\PageNumber_TopCenter.css" ComponentGuid="AC72D77D-E86A-4CC9-8AAA-FFC6A3B64DA9"/>
+	<File Path="Files\PathwaySupport\Styles\Dictionary\PageNumber_None.css" ComponentGuid="73B6101D-EBE2-4956-9E79-6C81C7C98EBA"/>
+	<File Path="Files\PathwaySupport\Styles\Dictionary\PageNumber_BottomOutside.css" ComponentGuid="BFDCAF5A-5D83-40A1-BAB6-6D1C7C68280E"/>
+	<File Path="Files\PathwaySupport\Styles\Dictionary\PageNumber_BottomInside.css" ComponentGuid="41130153-448B-4A3B-89D5-C69DE4DDBCB1"/>
+	<File Path="Files\PathwaySupport\Styles\Dictionary\PageNumber_BottomCenter.css" ComponentGuid="A2601ECE-5BB8-4400-B1F5-E907AF462107"/>
+	<File Path="Files\PsDll\PathwayB.exe" ComponentGuid="21DB1453-BAB5-421D-A79B-6FA6E4FE56CD"/>
+	<File Path="Files\ConfigurationTool\Styles\Scripture\PageNumber_TopOutside.css" ComponentGuid="6F9215C6-D1AF-41F5-B2AD-CC8BD2F9AF4E"/>
+	<File Path="Files\ConfigurationTool\Styles\Scripture\PageNumber_TopInside.css" ComponentGuid="E7D44637-EF54-4A10-AAA2-58B8C9C9BE5F"/>
+	<File Path="Files\ConfigurationTool\Styles\Scripture\PageNumber_TopCenter.css" ComponentGuid="7A80AA95-DB91-4AA8-9325-C32AB182BFA5"/>
+	<File Path="Files\ConfigurationTool\Styles\Scripture\PageNumber_None.css" ComponentGuid="F2EBA3A8-BC08-4C39-9800-5E4CC0B66113"/>
+	<File Path="Files\ConfigurationTool\Styles\Scripture\PageNumber_BottomOutside.css" ComponentGuid="E6D37E5B-9F53-4727-A2EA-548DD5404E62"/>
+	<File Path="Files\ConfigurationTool\Styles\Scripture\PageNumber_BottomInside.css" ComponentGuid="43C0C057-9676-4B8B-9ABB-B7937A47B0E9"/>
+	<File Path="Files\ConfigurationTool\Styles\Scripture\PageNumber_BottomCenter_FirstPage.css" ComponentGuid="6D3A3A8C-68AF-4447-8F8A-C0E97A5832E3"/>
+	<File Path="Files\ConfigurationTool\Styles\Scripture\PageNumber_BottomCenter.css" ComponentGuid="A8D26BF9-84FD-463A-8BA4-B47982A05F96"/>
+	<File Path="Files\ConfigurationTool\Styles\Dictionary\PageNumber_TopOutside.css" ComponentGuid="389CD1DA-D64D-428A-AACD-E605D3A5632A"/>
+	<File Path="Files\ConfigurationTool\Styles\Dictionary\PageNumber_TopInside.css" ComponentGuid="B6EF7E2F-7C5D-45A1-A1BD-B1A5FEDD753A"/>
+	<File Path="Files\ConfigurationTool\Styles\Dictionary\PageNumber_TopCenter.css" ComponentGuid="7D13B3BE-6EF7-4831-BF40-257D407E58C2"/>
+	<File Path="Files\ConfigurationTool\Styles\Dictionary\PageNumber_None.css" ComponentGuid="9F05E011-4412-497C-88F1-68B4033311F4"/>
+	<File Path="Files\ConfigurationTool\Styles\Dictionary\PageNumber_BottomOutside.css" ComponentGuid="B36A17AC-4A19-43FB-8242-9E5B0C265689"/>
+	<File Path="Files\ConfigurationTool\Styles\Dictionary\PageNumber_BottomInside.css" ComponentGuid="62130D43-231C-4C43-97C0-2FE1EF981F70"/>
+	<File Path="Files\ConfigurationTool\Styles\Dictionary\PageNumber_BottomCenter.css" ComponentGuid="87010BF9-BA6B-4E2F-B0B6-3752467FC9C1"/>
 	<File Path="Files\PathwaySupport\Wordpress\main.xhtml" ComponentGuid="1A69B53A-34B4-42CE-853C-AC103207E052"/>
 	<File Path="Files\PathwaySupport\Wordpress\index.htm" ComponentGuid="04F43EA0-6C4A-4FD7-8286-5F07B0525B73"/>
 	<File Path="Files\PathwaySupport\Wordpress\data.sql" ComponentGuid="F01B8CD4-EC75-4102-972F-F9E9BFEC32EF"/>

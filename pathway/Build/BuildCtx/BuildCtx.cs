@@ -43,7 +43,7 @@ namespace BuildCtx
         private void BuildCtx_Load(object sender, EventArgs e)
         {
             var args = Environment.GetCommandLineArgs();
-            if (args.Length < 2 || args[1] != "ConTeXt")
+            if (args.Length < 2 || args[1] != "PwCtx")
             {
                 Close();
                 Environment.Exit(0);

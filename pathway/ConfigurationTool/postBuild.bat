@@ -10,6 +10,8 @@ xcopy %base%\PathwayB\%cfg%\PathwayB.* . /y
 xcopy %base%\OpenOfficeConvert\%cfg%\OpenOfficeConvert.* . /y
 xcopy %base%\LiftPrepare\%cfg%\LiftPrepare.* . /y
 xcopy %base%\InDesignConvert\%cfg%\InDesignConvert.* . /y
+xcopy %base%\LogosConvert\%cfg%\LogosConvert.* . /y
+xcopy %base%\epubConvert\%cfg%\epubConvert.* . /y
 if "%1" == "CorporateBTE" goto justgobible
 if "%1" == "Corporate7BTE" goto justgobible
 if "%1" == "CorporateSE" goto nogobible
@@ -17,8 +19,6 @@ if "%1" == "Corporate7SE" goto nogobible
 xcopy %base%\PdfConvert\%cfg%\PdfConvert.* . /y
 xcopy %base%\WordPressConvert\%cfg%\WordPressConvert.* . /y
 xcopy %base%\XeTeXConvert\%cfg%\XeTeXConvert.* . /y
-xcopy %base%\LogosConvert\%cfg%\LogosConvert.* . /y
-xcopy %base%\epubConvert\%cfg%\epubConvert.* . /y
 if "%1" == "ReleaseSE" goto nogobible
 if "%1" == "Release7SE" goto nogobible
 :justgobible
@@ -31,6 +31,7 @@ del TE_XHTML-to-Libronix_MainFile.xslt
 del TE_XHTML-to-Libronix_NonScrolling.xslt
 del TE_XHTML-to-Libronix_ResourcesFile.xslt
 del TE_XHTML-to-Phone_XHTML.xslt
+del pxhtml2xpw-scr.xsl
 del scriptureTemplate.tpl
 del ScriptureStyleSettings.xml
 :endBible

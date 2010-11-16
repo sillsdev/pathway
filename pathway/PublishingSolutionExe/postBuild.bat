@@ -19,6 +19,9 @@ xcopy %base%\PathwayB\%cfg%\PathwayB.* . /y
 xcopy %base%\OpenOfficeConvert\%cfg%\OpenOfficeConvert.* . /y
 xcopy %base%\LiftPrepare\%cfg%\LiftPrepare.* . /y
 xcopy %base%\InDesignConvert\%cfg%\InDesignConvert.* . /y
+xcopy %base%\LogosConvert\%cfg%\LogosConvert.* . /y
+xcopy %base%\epubConvert\%cfg%\epubConvert.* . /y
+xcopy %base%\PdfConvert\%cfg%\PdfConvert.* . /y
 rem if "%1" == "Release" goto removeXetex
 rem if "%1" == "ReleaseBTE" goto removeXetex
 rem if "%1" == "ReleaseSE" goto removeXetex
@@ -29,10 +32,7 @@ if "%1" == "CorporateSE" goto removeXetex
 if "%1" == "Corporate7BTE" goto removeXetex
 if "%1" == "Corporate7SE" goto removeXetex
 xcopy %base%\XeTeXConvert\%cfg%\XeTeXConvert.* . /y
-xcopy %base%\PdfConvert\%cfg%\PdfConvert.* . /y
 xcopy %base%\WordPressConvert\%cfg%\WordPressConvert.* . /y
-xcopy %base%\LogosConvert\%cfg%\LogosConvert.* . /y
-xcopy %base%\epubConvert\%cfg%\epubConvert.* . /y
 goto dogobible
 :removeXetex
 rmdir /s /q Wordpress

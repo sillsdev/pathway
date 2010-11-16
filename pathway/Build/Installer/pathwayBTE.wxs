@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <Wix xmlns='http://schemas.microsoft.com/wix/2003/01/wi'>
 	<Product UpgradeCode="2CAD8F8F-2EC0-486B-B46A-90B2CD12F1D7" Id="68A7D17F-C81F-4456-983C-ACDF0B19BC03"
-		Name='Pathway BTE 0.6.10 for FieldWorks 6.0.4' Language='1033' Version='0.6.10' Manufacturer='SIL International'>
+		Name='Pathway BTE 0.6.11 for FieldWorks 6.0.4' Language='1033' Version='0.6.11' Manufacturer='SIL International'>
 		<Package Id='????????-????-????-????-????????????' Manufacturer='SIL International' InstallerVersion='200' Compressed='yes' />
 		<Condition Message="You need to be an administrator to install this product.">Privileged</Condition>
 		<Condition Message="[ProductName] will only run on Windows 2000 or better. You cannot intall it on this machine.">
