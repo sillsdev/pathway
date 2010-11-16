@@ -111,7 +111,8 @@ xcopy %BASE%\ConfigurationTool%cfg%\*Convert.* "%DST%" /y
 
 
 :doneConvert
-xcopy %BASE%\..\XeTeX\xhtml2DEX.xsl "%DST%" /y
+xcopy %BASE%\PsSupport\pxhtml2xpw-dict.xsl "%DST%" /y
+xcopy %BASE%\PsSupport\pxhtml2xpw-scr.xsl "%DST%" /y
 rem md %DST%\PathwaySupport\DEXCTX
 rem xcopy %BASE%\..\XeTeX\DEXCTX\*.* %DST%\PathwaySupport\DEXCTX /s /q
 

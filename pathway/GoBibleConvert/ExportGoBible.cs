@@ -39,7 +39,7 @@ namespace SIL.PublishingSolution
         protected string collectionName;
         protected static ProgressBar _pb;
         private const string RedirectOutputFileName = "Convert.log";
-        List<string> DuplicateBooks = new List<string>();
+        List<string> DuplicateBooks;
 
         public string ExportType
         {
@@ -263,6 +263,7 @@ namespace SIL.PublishingSolution
 
         protected bool IsDuplicateBooks(XmlNodeList books)
         {
+            DuplicateBooks = new List<string>();
             List<string> allBooks = new List<string>();
             foreach (XmlNode bookNode in books)
             {

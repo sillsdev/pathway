@@ -50,7 +50,8 @@ md "%DST%\PathwaySupport"
 xcopy %BASE%\PsSupport\*.* %DST%\PathwaySupport /s /q
 xcopy %BASE%\PublishingSolutionExe%cfg%\*Convert.* %DST% /y /q
 
-xcopy %BASE%\..\XeTeX\xhtml2DEX.xsl %DST%\PathwaySupport /y
+xcopy %BASE%\PsSupport\pxhtml2xpw-dict.xsl "%DST%" /y
+xcopy %BASE%\PsSupport\pxhtml2xpw-scr.xsl "%DST%" /y
 rem md %DST%\PathwaySupport\DEXCTX
 rem xcopy %BASE%\..\XeTeX\DEXCTX\*.* %DST%\PathwaySupport\DEXCTX /s /q
 

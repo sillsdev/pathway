@@ -251,8 +251,8 @@
         <styleProperty name="FileProduced" value="One" />
         <styleProperty name="RedLetter" value="No" />
         <styleProperty name="Information" value="Bible text exported from FieldWorks Translation Editor." />
-        <styleProperty name="Copyright" value="© " />
-        <styleProperty name="Icon" value="C:\Documents and Settings\All Users\Application Data\SIL\Pathway\Scripture\trialPrint.png" />
+        <styleProperty name="Copyright" value="© 2010 Wycliffe Bible Translators International" />
+        <styleProperty name="Icon" value="Icon.png" />
       </style>
     </mobile>
     <web>

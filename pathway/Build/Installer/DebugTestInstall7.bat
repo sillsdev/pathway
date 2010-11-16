@@ -48,7 +48,8 @@ rem Now copy all the Backends to the Pathway directory instead of to a backends 
 rem xcopy %BASE%\PublishingSolutionExe%cfg%\Backends\*.* "%DST%\PathwaySupport\Backends" /y /q
 xcopy %BASE%\ConfigurationTool%cfg%\*Convert.* "%DST%" /y
 
-xcopy %BASE%\..\XeTeX\xhtml2DEX.xsl "%DST%" /y
+xcopy %BASE%\PsSupport\pxhtml2xpw-dict.xsl "%DST%" /y
+xcopy %BASE%\PsSupport\pxhtml2xpw-scr.xsl "%DST%" /y
 rem md %DST%\PathwaySupport\DEXCTX
 rem xcopy %BASE%\..\XeTeX\DEXCTX\*.* %DST%\PathwaySupport\DEXCTX /s /q
 

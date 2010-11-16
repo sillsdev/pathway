@@ -1,5 +1,5 @@
 Info: Sena 3 © 2010 SIL
-Phone-Icon-Filepath: C:\ProgramData\SIL\Pathway\Scripture\Icon.png
+Phone-Icon-Filepath: Icon.png
 RedLettering: true
 Source-Text: 1pe_cv.xhtml
 Source-Format: xhtml_te

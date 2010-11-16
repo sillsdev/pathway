@@ -97,7 +97,6 @@ namespace Test.GoBibleConvert
         public void CreateCollectionTest()
         {
             const string fileName = "1pe_cv.xhtml";
-            const string collections = "Collections.txt";
             string inputFullName = GetFileNameWithInputPath(fileName);
             restructuredFullName = GetFileNameWithOutputPath(fileName);
             File.Copy(inputFullName, restructuredFullName, true);
@@ -106,12 +105,16 @@ namespace Test.GoBibleConvert
             Param.LoadSettings();
             Param.SetValue(Param.InputType, "Scripture");
             Param.LoadSettings();
-            Param.UpdateMobileAtrrib("FileProduced", "OneperBook", "GoBible");
-            Param.UpdateMobileAtrrib("RedLetter", "Yes", "GoBible");
-            Param.UpdateMobileAtrrib("Information", "Sena 3", "GoBible");
-            Param.UpdateMobileAtrrib("Copyright", "© 2010 SIL", "GoBible");
-            Param.UpdateMobileAtrrib("Icon", @"C:\ProgramData\SIL\Pathway\Scripture\Icon.png", "GoBible");
+            const string layout = "GoBible";
+            Param.UpdateMobileAtrrib("FileProduced", "OneperBook", layout);
+            Param.UpdateMobileAtrrib("RedLetter", "Yes", layout);
+            Param.UpdateMobileAtrrib("Information", "Sena 3", layout);
+            Param.UpdateMobileAtrrib("Copyright", "© 2010 SIL", layout);
+            Param.UpdateMobileAtrrib("Icon", @"C:\ProgramData\SIL\Pathway\Scripture\Icon.png", layout);
+            Param.SetValue(Param.LayoutSelected, layout);
+            Param.Write();
             CreateCollection();
+            const string collections = "Collections.txt";
             string actualFullName = GetFileNameWithOutputPath(collections);
             string exepectedFullName = GetFileNameWithExpectedPath(collections);
             TextFileAssert.AreEqual(exepectedFullName, actualFullName);
