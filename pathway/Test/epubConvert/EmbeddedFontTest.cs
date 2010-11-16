@@ -155,7 +155,7 @@ namespace Test.epubConvert
             Assert.AreEqual(weight, silFont.Weight);
             const string style = "normal";
             Assert.AreEqual(style, silFont.Style);
-            const string fontFilename = "SILEOT_0.ttf";
+            const string fontFilename = "SILEOT.ttf";
             Assert.AreEqual(fontFilename, silFont.Filename);
             Assert.IsTrue(EmbeddedFont.IsInstalled(silFont.Filename));
         }

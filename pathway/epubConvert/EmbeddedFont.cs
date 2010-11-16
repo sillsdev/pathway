@@ -136,7 +136,7 @@ namespace epubConvert
                     bFound = true;
                     Weight = "normal";
                     Style = "normal";
-                    Filename = "SILEOT_0.ttf";
+                    Filename = "SILEOT.ttf";
                     SILFont = true;
                     Serif = true;
                     break;
