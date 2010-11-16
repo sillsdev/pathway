@@ -50,11 +50,6 @@ md "%DST%\PathwaySupport"
 xcopy %BASE%\PsSupport\*.* %DST%\PathwaySupport /s /q
 xcopy %BASE%\PublishingSolutionExe%cfg%\*Convert.* %DST% /y /q
 
-xcopy %BASE%\PsSupport\pxhtml2xpw-dict.xsl "%DST%" /y
-xcopy %BASE%\PsSupport\pxhtml2xpw-scr.xsl "%DST%" /y
-rem md %DST%\PathwaySupport\DEXCTX
-rem xcopy %BASE%\..\XeTeX\DEXCTX\*.* %DST%\PathwaySupport\DEXCTX /s /q
-
 rem the first line here works with the development version the second, the installed version.
 if not exist "%DST%\..\..\DistFiles\Language Explorer\Configuration" goto nodev
 xcopy %BASE%\Build\Installer\UtilityCatalogIncludePublishingSolution.xml "%DST%\..\..\DistFiles\Language Explorer\Configuration" /y
