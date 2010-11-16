@@ -231,7 +231,54 @@ namespace SIL.PublishingSolution
 
             }
         }
+        public string PageNumber
+        {
+            get
+            {
+                string defaultValue = "None";
+                string task = "@page:left-top-center";
+                string key = "content";
+                string result = GetValue(task, key, "false");
+                if (result.IndexOf("counter") > -1 && result.IndexOf("page") > -1)
+                {
+                    defaultValue = "Top Center";
+                }
 
+                task = "@page:left-bottom-center";
+                key = "content";
+                result = GetValue(task, key, "false");
+                if (result.IndexOf("counter") > -1 && result.IndexOf("page") > -1)
+                {
+                    defaultValue = "Bottom Center";
+                }
+
+                task = "@page:left-top-right";
+                key = "content";
+                result = GetValue(task, key, "false");
+                if (result.IndexOf("counter") > -1 && result.IndexOf("page") > -1)
+                {
+                    defaultValue = "Top Inside Margin";
+                }
+
+                task = "@page:left-bottom-right";
+                key = "content";
+                result = GetValue(task, key, "false");
+                if (result.IndexOf("counter") > -1 && result.IndexOf("page") > -1)
+                {
+                    defaultValue = "Bottom Inside Margin";
+                }
+
+                task = "@page:left-bottom-left";
+                key = "content";
+                result = GetValue(task, key, "false");
+                if (result.IndexOf("counter") > -1 && result.IndexOf("page") > -1)
+                {
+                    defaultValue = "Bottom Outside Margin";
+                }
+
+                return defaultValue;
+            }
+        }
         public string ColumnCount
         {
             get
@@ -599,6 +646,10 @@ namespace SIL.PublishingSolution
                 key = cTool.DdlRunningHead.Text;
                 WriteAtImport(writeCss, attribute, key);
 
+                attribute = "Page Number";
+                key = cTool.DdlPageNumber.Text;
+                WriteAtImport(writeCss, attribute, key);
+
                 attribute = "Rules";
                 key = cTool.DdlRules.Text;
                 WriteAtImport(writeCss, attribute, key);
@@ -729,6 +780,7 @@ namespace SIL.PublishingSolution
                     cTool.TxtPageGutterWidth.Text = cTool.TxtPageGutterWidth.Text + "pt";
             }
             cTool.DdlPageColumn.SelectedItem = ColumnCount;
+            cTool.DdlPageNumber.SelectedItem = PageNumber;
             cTool.DdlFontSize.SelectedItem = FontSize;
             cTool.DdlLeading.SelectedItem = Leading;
             cTool.DdlPicture.SelectedItem = Picture;
@@ -876,6 +928,10 @@ namespace SIL.PublishingSolution
                                 cTool.DdlRunningHead.Items.Add(ctn.Text);
                                 break;
 
+                            case "Page Number":
+                                cTool.DdlPageNumber.Items.Add(ctn.Text);
+                                break;
+
                             case "Rules":
                                 cTool.DdlRules.Items.Add(ctn.Text);
                                 break;
@@ -1000,12 +1056,20 @@ namespace SIL.PublishingSolution
 
         protected void setLastSelectedLayout()
         {
-            //Check and move
-            string layoutName = cTool.TxtName.Text;
-            if (layoutName.Length == 0)
-                layoutName = _lastSelectedLayout;
-            Param.SetValue(Param.LayoutSelected, layoutName); // last layout
-            Param.Write();
+            try
+            {
+                //Check and move
+                string layoutName = cTool.TxtName.Text;
+                if (layoutName.Length == 0)
+                    layoutName = _lastSelectedLayout;
+                Param.SetValue(Param.LayoutSelected, layoutName); // last layout
+                Param.Write();
+
+            }
+            catch
+            {
+            }
+           
         }
 
         public void SideBar()

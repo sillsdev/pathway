@@ -53,8 +53,7 @@ namespace Test.PsExport
             _inputBasePath = Common.PathCombine(testPath, "Input");
             _expectBasePath = Common.PathCombine(testPath, "Expect");
             _outputBasePath = Common.PathCombine(testPath, "Output");
-            if (Directory.Exists(_outputBasePath))
-                Directory.Delete(_outputBasePath, true);
+            Common.DeleteDirectory(_outputBasePath);
             Directory.CreateDirectory(_outputBasePath);
             // Set application base for test
             DoBatch("ConfigurationTool", "postBuild.bat", "Debug");

@@ -1,0 +1,11 @@
+/* Bottom Center.css */
+@page :left {
+    @bottom-center{
+           content: counter( page);
+    }
+}
+@page :right {
+   @bottom-center{
+           content: counter( page);
+    }
+}

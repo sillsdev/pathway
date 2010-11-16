@@ -138,6 +138,9 @@
             this.picPreview = new System.Windows.Forms.PictureBox();
             this.btnPrevious = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
+            this.LblPageNumber = new System.Windows.Forms.Label();
+            this.ddlPageNumber = new System.Windows.Forms.ComboBox();
+
             ((System.ComponentModel.ISupportInitialize)(this.stylesGrid)).BeginInit();
             this.toolStripMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -469,6 +472,8 @@
             // 
             // tabDisplay
             // 
+            this.tabDisplay.Controls.Add(this.LblPageNumber);
+            this.tabDisplay.Controls.Add(this.ddlPageNumber);
             this.tabDisplay.Controls.Add(this.ddlFileProduceDict);
             this.tabDisplay.Controls.Add(this.label9);
             this.tabDisplay.Controls.Add(this.ddlVerticalJustify);
@@ -515,7 +520,7 @@
             this.ddlFileProduceDict.AccessibleName = "";
             this.ddlFileProduceDict.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlFileProduceDict.FormattingEnabled = true;
-            this.ddlFileProduceDict.Location = new System.Drawing.Point(93, 307);
+            this.ddlFileProduceDict.Location = new System.Drawing.Point(93, 330);
             this.ddlFileProduceDict.Name = "ddlFileProduceDict";
             this.ddlFileProduceDict.Size = new System.Drawing.Size(151, 21);
             this.ddlFileProduceDict.TabIndex = 15;
@@ -525,7 +530,7 @@
             // label9
             // 
             this.label9.AccessibleName = "lblPageColumn";
-            this.label9.Location = new System.Drawing.Point(0, 311);
+            this.label9.Location = new System.Drawing.Point(0, 334);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(87, 13);
             this.label9.TabIndex = 96;
@@ -558,7 +563,7 @@
             this.ddlSense.AccessibleName = "ddlPageColumn";
             this.ddlSense.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlSense.FormattingEnabled = true;
-            this.ddlSense.Location = new System.Drawing.Point(93, 331);
+            this.ddlSense.Location = new System.Drawing.Point(93, 354);
             this.ddlSense.Name = "ddlSense";
             this.ddlSense.Size = new System.Drawing.Size(151, 21);
             this.ddlSense.TabIndex = 16;
@@ -567,7 +572,7 @@
             // lblSenseLayout
             // 
             this.lblSenseLayout.AccessibleName = "lblPageColumn";
-            this.lblSenseLayout.Location = new System.Drawing.Point(0, 335);
+            this.lblSenseLayout.Location = new System.Drawing.Point(0, 358);
             this.lblSenseLayout.Name = "lblSenseLayout";
             this.lblSenseLayout.Size = new System.Drawing.Size(87, 13);
             this.lblSenseLayout.TabIndex = 92;
@@ -630,7 +635,7 @@
             // lblRules
             // 
             this.lblRules.AccessibleName = "label17";
-            this.lblRules.Location = new System.Drawing.Point(0, 262);
+            this.lblRules.Location = new System.Drawing.Point(0, 285);
             this.lblRules.Name = "lblRules";
             this.lblRules.Size = new System.Drawing.Size(87, 13);
             this.lblRules.TabIndex = 88;
@@ -642,7 +647,7 @@
             this.ddlRules.AccessibleName = "ddlPageColumn";
             this.ddlRules.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlRules.FormattingEnabled = true;
-            this.ddlRules.Location = new System.Drawing.Point(93, 259);
+            this.ddlRules.Location = new System.Drawing.Point(93, 282);
             this.ddlRules.Name = "ddlRules";
             this.ddlRules.Size = new System.Drawing.Size(151, 21);
             this.ddlRules.TabIndex = 13;
@@ -651,7 +656,7 @@
             // lblFont
             // 
             this.lblFont.AccessibleName = "label17";
-            this.lblFont.Location = new System.Drawing.Point(0, 287);
+            this.lblFont.Location = new System.Drawing.Point(0, 310);
             this.lblFont.Name = "lblFont";
             this.lblFont.Size = new System.Drawing.Size(87, 13);
             this.lblFont.TabIndex = 89;
@@ -663,7 +668,7 @@
             this.ddlFontSize.AccessibleName = "ddlPageColumn";
             this.ddlFontSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlFontSize.FormattingEnabled = true;
-            this.ddlFontSize.Location = new System.Drawing.Point(93, 283);
+            this.ddlFontSize.Location = new System.Drawing.Point(93, 306);
             this.ddlFontSize.Name = "ddlFontSize";
             this.ddlFontSize.Size = new System.Drawing.Size(151, 21);
             this.ddlFontSize.TabIndex = 14;
@@ -1458,6 +1463,27 @@
             this.btnNext.Text = ">";
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // LblPageNumber
+            // 
+            this.LblPageNumber.AccessibleName = "LblPageNumber";
+            this.LblPageNumber.Location = new System.Drawing.Point(0, 262);
+            this.LblPageNumber.Name = "LblPageNumber";
+            this.LblPageNumber.Size = new System.Drawing.Size(87, 13);
+            this.LblPageNumber.TabIndex = 98;
+            this.LblPageNumber.Text = "Page Numbers";
+            this.LblPageNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // ddlPageNumber
+            // 
+            this.ddlPageNumber.AccessibleName = "ddlPageNumber";
+            this.ddlPageNumber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlPageNumber.FormattingEnabled = true;
+            this.ddlPageNumber.Location = new System.Drawing.Point(93, 259);
+            this.ddlPageNumber.Name = "ddlPageNumber";
+            this.ddlPageNumber.Size = new System.Drawing.Size(151, 21);
+            this.ddlPageNumber.TabIndex = 97;
+            this.ddlPageNumber.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
+
             // 
             // ConfigurationTool
             // 
@@ -1613,5 +1639,7 @@
         private System.Windows.Forms.PictureBox picPreview;
         private System.Windows.Forms.Button btnPrevious;
         private System.Windows.Forms.Button btnNext;
+        private System.Windows.Forms.Label LblPageNumber;
+        private System.Windows.Forms.ComboBox ddlPageNumber;
     }
 }

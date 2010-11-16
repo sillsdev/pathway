@@ -100,7 +100,18 @@
       <option name="Genesis 1" file="Running_Head_Mirrored_Chapter.css" />
       <option name="Genesis 1-2" file="Running_Head_Paged_Chapter.css" />
     </feature>
-    <feature name="Rules">
+    <feature name="Page Number">
+      <option name="Top Inside Margin" file="PageNumber_TopInside.css" />
+     <option name="Top Outside Margin" file="PageNumber_TopOutside.css" />
+      <option name="Top Center" file="PageNumber_TopCenter.css" />
+      
+      <option name="Bottom Inside Margin" file="PageNumber_BottomInside.css" />
+      <option name="Bottom Outside Margin" file="PageNumber_BottomOutside.css" />
+      <option name="Bottom Center" file="PageNumber_BottomCenter.css" />
+      
+      <option name="None" file="PageNumber_None.css" />
+    </feature>
+        <feature name="Rules">
       <option name="Yes" file="Rules_Yes.css" />
       <option name="No" file="Rules_No.css" />
     </feature>

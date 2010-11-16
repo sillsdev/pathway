@@ -1,0 +1,13 @@
+/* Page number  Top Inside.css */
+@page :left {
+    @top-right {
+          content: counter( page);
+           margin-top: 1cm;
+    }
+}
+
+@page :right {
+    @top-left {
+           content: counter( page);
+    }
+}

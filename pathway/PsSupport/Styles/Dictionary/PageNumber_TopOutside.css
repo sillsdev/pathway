@@ -1,0 +1,13 @@
+/* Page number  Top Outside.css */
+@page :left {
+@top-left {
+           content: counter( page);
+    }
+}
+
+@page :right {
+    @top-right {
+           content: counter( page);
+    }
+    
+}

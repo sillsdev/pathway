@@ -5,7 +5,7 @@
     }    
     @top-right     { content: ''; }
     @bottom-left   { content: ''; }
-    @bottom-center { content: counter(page); }
+    @bottom-center { content: ''; }
     @bottom-right  { content: ''; }
 }
 @page :first {
@@ -13,6 +13,6 @@
     @top-center    { content: ''; }
     @top-right     { content: ''; }
     @bottom-left   { content: ''; }
-    @bottom-center { content: counter(page); }
+    @bottom-center { content: ''; }
     @bottom-right  { content: ''; }
 }

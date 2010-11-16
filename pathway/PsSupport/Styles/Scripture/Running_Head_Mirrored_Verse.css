@@ -3,7 +3,7 @@
     @top-center    { content: ''; }
     @top-right     { content: ''; }
     @bottom-left   { content: ''; }
-    @bottom-center { content: counter(page); }
+    @bottom-center { content: ''; }
     @bottom-right  { content: ''; }
 }
 @page :left {
@@ -11,7 +11,7 @@
         content: string(bookname, first) " "  string(chapter, first) string(verse, first);
         font-weight: bold;
     }
-    @top-center { content: counter(page); }
+    @top-center { content: ''; }
     @top-right     { content: ''; }
     @bottom-left   { content: ''; }
     @bottom-center { content: ''; }
@@ -19,7 +19,7 @@
 }
 @page :right {
     @top-left { content: ''; }
-    @top-center { content: counter(page); }
+    @top-center { content: ''; }
     @top-right     {
         content: string(bookname, last) " "  string(chapter, last) string(verse, last);
         font-weight: bold;

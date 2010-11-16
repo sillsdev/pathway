@@ -254,6 +254,11 @@ namespace SIL.PublishingSolution
             get { return ddlPageColumn; }
         }
 
+        public ComboBox DdlPageNumber
+        {
+            get { return ddlPageNumber; }
+        }
+
         public Label LblPageColumn
         {
             get { return lblPageColumn; }
