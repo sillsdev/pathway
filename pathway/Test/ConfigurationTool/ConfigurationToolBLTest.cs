@@ -28,6 +28,18 @@ namespace Test.UIConfigurationToolBLTest
         [TestFixtureSetUp]
         protected void Initialize()
         {
+            string testPath = PathPart.Bin(Environment.CurrentDirectory, "/ConfigurationTool/TestFiles");
+            _inputBasePath = Common.PathCombine(testPath, "Input");
+            _expectBasePath = Common.PathCombine(testPath, "Expected");
+            _outputBasePath = Common.PathCombine(testPath, "Output");
+
+            const bool recursive = true;
+            if (Directory.Exists(_outputBasePath))
+                Directory.Delete(_outputBasePath, recursive);
+            Directory.CreateDirectory(_outputBasePath);
+
+            _supportSource = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
+
             string folderName = "Graphic";
             CopyFolderSupportToIO(folderName);
 
@@ -35,22 +47,12 @@ namespace Test.UIConfigurationToolBLTest
             CopyFolderSupportToIO(folderName);
         }
 
-
-        //[TestFixtureSetUp]
         protected void SetUp()
         {
             cTool = new ConfigurationTool();
             cTool._fromNunit = true;
-            string testPath = PathPart.Bin(Environment.CurrentDirectory, "/ConfigurationTool/TestFiles");
-            _inputBasePath = Common.PathCombine(testPath, "Input");
-            _expectBasePath = Common.PathCombine(testPath, "Expected");
-            _outputBasePath = Common.PathCombine(testPath, "Output");
 
             _pathwayPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/Pathway");
-
-            _supportSource = Common.DirectoryPathReplace(testPath + "/../../../PsSupport");
-
-
 
             stylename = new ArrayList
                             {
@@ -64,7 +66,6 @@ namespace Test.UIConfigurationToolBLTest
 
             string folderName = "styles";
             CopyFolderSupportToIO(folderName);
-
         }
 
         private void CopyFile()
@@ -83,16 +84,16 @@ namespace Test.UIConfigurationToolBLTest
         {
             const string schemaFile = "StyleSettings.xsd";
             string fromFileName = Common.PathCombine(_supportSource, fileName);
+            File.Copy(fromFileName, Common.PathCombine(_outputBasePath, fileName), true);
             string partialPath = Common.PathCombine(_pathwayPath, type);
             string toFileName = Common.PathCombine(partialPath, fileName);
             if (Directory.Exists(partialPath))
-            {
                 Directory.Delete(partialPath, true);
-            }
             Directory.CreateDirectory(partialPath);
             File.Copy(fromFileName, toFileName, true);
 
             fromFileName = Common.PathCombine(_supportSource, schemaFile);
+            File.Copy(fromFileName, Common.PathCombine(_outputBasePath, schemaFile), true);
             toFileName = Common.PathCombine(partialPath, schemaFile);
             File.Copy(fromFileName, toFileName, true);
         }

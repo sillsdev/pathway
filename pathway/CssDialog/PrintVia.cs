@@ -19,7 +19,6 @@
 
 using System;
 using System.Collections;
-using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
@@ -32,7 +31,6 @@ namespace SIL.PublishingSolution
         #region PrintVia Constructors
 
         private static string _helpTopic = string.Empty;
-        private string _installedPath = Common.ProgInstall;
         public bool _fromPlugIn;
         public PrintVia()
         {

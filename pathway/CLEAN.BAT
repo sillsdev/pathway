@@ -108,7 +108,7 @@ rmdir /s/q obj
 rmdir /s/q bin
 
 cd %base%\Test\ConfigurationTool\TestFiles
-del /q output\*.*
+rmdir /s /q output
 cd %base%\Test\CssDialog\TestFiles
 rmdir /s /q output
 cd %base%\Test\CssParser\TestFiles
