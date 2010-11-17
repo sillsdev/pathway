@@ -233,6 +233,7 @@ namespace SIL.PublishingSolution
             ScriptureAdjust();
             LoadBackEnds();
             LoadLayouts();
+            SetOkStatus();
             LoadExtraProcessing();
             LoadProperty();
             txtSaveInFolder.Text = Common.GetSaveInFolder(Param.DefaultValue[Param.PublicationLocation], DatabaseName, cmbSelectLayout.Text);
@@ -486,7 +487,9 @@ namespace SIL.PublishingSolution
         #region SetOkStatus
         private void SetOkStatus()
         {
-            BtnOk.Enabled = chkConfigDictionary.Checked || chkRevIndexes.Checked || chkGramSketch.Checked;
+            BtnOk.Enabled = (Param.Value["InputType"] == Common.ProjectType.Scripture.ToString());
+            BtnOk.Enabled = BtnOk.Enabled || chkConfigDictionary.Checked || chkRevIndexes.Checked || chkGramSketch.Checked;
+            BtnOk.Enabled = BtnOk.Enabled && chkPolicy.Checked;
         }
         #endregion SetOkStatus
 
@@ -541,7 +544,7 @@ namespace SIL.PublishingSolution
             LoadLayouts();
 
             ShowAvoidOdtCrash();
-            BtnOk.Enabled = true; 
+            SetOkStatus();
         }
 
         private string FindMedia()
@@ -581,32 +584,27 @@ namespace SIL.PublishingSolution
             tt_PrintVia.SetToolTip(chkAvoidOdtCrash, " Large files may crash on exit after saving. \n Eliminating the style sheet solved this problem but doesn't allow user to change the styles. \n So initially leave this box unchecked, but if Open Office is crashing, \n you can probably avoid crashing by checking this box.");
         }
 
-        private void chkSilMember_CheckedChanged(object sender, EventArgs e)
-        {
-            chkPolicy.Enabled = chkSilMember.Checked;
-            if(!chkSilMember.Checked)
-                chkPolicy.Checked = chkSilMember.Checked;
-        }
-
         private void chkPolicy_CheckedChanged(object sender, EventArgs e)
         {
-            btnPolicy.Enabled = chkPolicy.Checked;
+            //btnPolicy.Enabled = chkPolicy.Checked;
+            SetOkStatus();
         }
 
         private void btnPolicy_Click(object sender, EventArgs e)
         {
+            _helpTopic = "Concepts/Intellectual_Property.htm";
+            BtnHelp_Click(sender, e);
+            //string helpPath = Common.PathCombine(_installedPath, "help");
+            //string fileName = "Intellectual_Property.docx";
+            //string helpFile = Common.PathCombine(helpPath, fileName);
 
-            string helpPath = Common.PathCombine(_installedPath, "help");
-            string fileName = "Intellectual_Property.docx";
-            string helpFile = Common.PathCombine(helpPath, fileName);
-
-            try
-            {
-                Process.Start(helpFile);
-            }
-            catch
-            {
-            }
+            //try
+            //{
+            //    Process.Start(helpFile);
+            //}
+            //catch
+            //{
+            //}
         }
     }
 }

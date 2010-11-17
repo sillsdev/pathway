@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\ConfigurationTool\Help\Intellectual_Property.docx" ComponentGuid="1BCE0C03-F784-4FBA-8DCF-4A2B343B5A2F"/>
 	<File Path="Files\PsDll\LogosConvert.pdb" ComponentGuid="91524153-765B-45DB-ACC9-22A405641DEE"/>
 	<File Path="Files\PsDll\LogosConvert.dll.config" ComponentGuid="9991D1BD-C35A-4814-B914-895E3FD93E16"/>
 	<File Path="Files\PsDll\LogosConvert.dll" ComponentGuid="4DE98891-6A58-4FA0-8CA6-D89188CD39FD"/>
