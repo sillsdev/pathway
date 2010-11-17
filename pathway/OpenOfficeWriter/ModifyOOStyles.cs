@@ -374,7 +374,7 @@ namespace SIL.PublishingSolution
                     }
                 }
 
-                if (_columnSep.Count > 0)
+                if (_columnSep != null && _columnSep.Count > 0)
                 {
                     writerCol.WriteStartElement("style:column-sep");
                     foreach (KeyValuePair<string, string> text in _columnSep)
@@ -692,6 +692,72 @@ namespace SIL.PublishingSolution
             doc.Save(styleFilePath);
         }
         #endregion
+
+
+        #region SetColumnGap(string contentFilePath, Dictionary<string, Dictionary<string, string>> columnGapEm)
+        /// <summary>
+        /// Open Content.xml for updating column-gap em value
+        /// </summary>
+        /// <param name="contentFilePath">Content.xml file path</param>
+        /// <param name="columnGapEm"> Column Gap Value</param>
+        /// <returns>Column Property </returns>
+        public Dictionary<string, XmlNode> SetColumnGap(string contentFilePath, Dictionary<string, Dictionary<string, string>> columnGapEm)
+        {
+            var columnGap = new Dictionary<string, XmlNode>();
+            var columnGapBuilder = new StringBuilder();
+            var xmlDoc = new XmlDocument();
+            var nsmgr = new XmlNamespaceManager(xmlDoc.NameTable);
+            nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+            nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+            foreach (KeyValuePair<string, Dictionary<string, string>> kvp in columnGapEm)
+            {
+                XmlNode newChild;
+                XmlAttribute xmlAttrib;
+                columnGapBuilder.Remove(0, columnGapBuilder.Length);
+                Dictionary<string, string> columnValue = columnGapEm[kvp.Key];
+                float columnGapValue = Common.ConvertToInch(columnValue["columnGap"]);
+                float pageWidth = Common.ConvertToInch(columnValue["pageWidth"]);
+                var columnCount = (int)Common.ConvertToInch(columnValue["columnCount"]);
+                float spacing = columnGapValue / 2;
+                float relWidth = (pageWidth - (spacing * (columnCount * 2))) / columnCount;
+                XmlNode parentNode = xmlDoc.CreateElement("dummy");
+                for (int i = 1; i <= columnCount; i++)
+                {
+                    float startIndent;
+                    float endIndent;
+                    if (i == 1)
+                    {
+                        startIndent = 0.0F;
+                        endIndent = spacing;
+                    }
+                    else if (i == columnCount)
+                    {
+                        startIndent = spacing;
+                        endIndent = 0.0F;
+                    }
+                    else
+                    {
+                        startIndent = spacing;
+                        endIndent = spacing;
+                    }
+                    newChild = xmlDoc.CreateElement("style:column", nsmgr.LookupNamespace("st"));
+                    xmlAttrib = xmlDoc.CreateAttribute("style:rel-width", nsmgr.LookupNamespace("st"));
+                    xmlAttrib.Value = relWidth + "*";
+                    newChild.Attributes.Append(xmlAttrib);
+                    xmlAttrib = xmlDoc.CreateAttribute("fo:start-indent", nsmgr.LookupNamespace("fo"));
+                    xmlAttrib.Value = startIndent + "in";
+                    newChild.Attributes.Append(xmlAttrib);
+                    xmlAttrib = xmlDoc.CreateAttribute("fo:end-indent", nsmgr.LookupNamespace("fo"));
+                    xmlAttrib.Value = endIndent + "in";
+                    newChild.Attributes.Append(xmlAttrib);
+                    parentNode.AppendChild(newChild);
+                }
+                columnGap[kvp.Key] = parentNode;
+            }
+            return columnGap;
+        }
+        #endregion
+
 
         private string OpenIDStyles()
         {

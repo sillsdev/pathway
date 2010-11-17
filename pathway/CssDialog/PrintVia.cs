@@ -19,6 +19,7 @@
 
 using System;
 using System.Collections;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
@@ -31,6 +32,7 @@ namespace SIL.PublishingSolution
         #region PrintVia Constructors
 
         private static string _helpTopic = string.Empty;
+        private string _installedPath = Common.ProgInstall;
         public bool _fromPlugIn;
         public PrintVia()
         {
@@ -577,6 +579,34 @@ namespace SIL.PublishingSolution
         private void ChkAvoidOdtCrashMouseHover(object sender, EventArgs e)
         {
             tt_PrintVia.SetToolTip(chkAvoidOdtCrash, " Large files may crash on exit after saving. \n Eliminating the style sheet solved this problem but doesn't allow user to change the styles. \n So initially leave this box unchecked, but if Open Office is crashing, \n you can probably avoid crashing by checking this box.");
+        }
+
+        private void chkSilMember_CheckedChanged(object sender, EventArgs e)
+        {
+            chkPolicy.Enabled = chkSilMember.Checked;
+            if(!chkSilMember.Checked)
+                chkPolicy.Checked = chkSilMember.Checked;
+        }
+
+        private void chkPolicy_CheckedChanged(object sender, EventArgs e)
+        {
+            btnPolicy.Enabled = chkPolicy.Checked;
+        }
+
+        private void btnPolicy_Click(object sender, EventArgs e)
+        {
+
+            string helpPath = Common.PathCombine(_installedPath, "help");
+            string fileName = "Intellectual_Property.docx";
+            string helpFile = Common.PathCombine(helpPath, fileName);
+
+            try
+            {
+                Process.Start(helpFile);
+            }
+            catch
+            {
+            }
         }
     }
 }

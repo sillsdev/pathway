@@ -242,6 +242,9 @@ namespace SIL.PublishingSolution
                 _allColumnProperty.Add("column-gap", "fo:");
                 _allColumnProperty.Add("column-fill", "fo:");
                 _allColumnProperty.Add("column-rule", "style:");
+                _allColumnProperty.Add("column-rule-width", "style:");
+                _allColumnProperty.Add("column-rule-style", "style:");
+                _allColumnProperty.Add("column-rule-color", "style:");
                 _allColumnProperty.Add("dont-balance-text-columns", "text:");
 
 

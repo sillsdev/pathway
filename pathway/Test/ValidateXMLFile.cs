@@ -179,7 +179,7 @@ namespace Test
                     if (att != null)
                     {
                         propertyValue = att.Value;
-                        break;
+                        //break;
                     }
 
                     if (propertyValue != ClassProperty[ns + ":" + key])

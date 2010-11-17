@@ -50,7 +50,12 @@
             this.BtnCancel = new System.Windows.Forms.Button();
             this.BtnHelp = new System.Windows.Forms.Button();
             this.tt_PrintVia = new System.Windows.Forms.ToolTip(this.components);
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chkSilMember = new System.Windows.Forms.CheckBox();
+            this.chkPolicy = new System.Windows.Forms.CheckBox();
+            this.btnPolicy = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -73,7 +78,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(478, 234);
+            this.groupBox1.Size = new System.Drawing.Size(478, 223);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
@@ -233,7 +238,7 @@
             // 
             // BtnOk
             // 
-            this.BtnOk.Location = new System.Drawing.Point(253, 260);
+            this.BtnOk.Location = new System.Drawing.Point(247, 350);
             this.BtnOk.Name = "BtnOk";
             this.BtnOk.Size = new System.Drawing.Size(75, 23);
             this.BtnOk.TabIndex = 2;
@@ -243,7 +248,7 @@
             // 
             // BtnCancel
             // 
-            this.BtnCancel.Location = new System.Drawing.Point(334, 260);
+            this.BtnCancel.Location = new System.Drawing.Point(328, 350);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(75, 23);
             this.BtnCancel.TabIndex = 3;
@@ -253,7 +258,7 @@
             // 
             // BtnHelp
             // 
-            this.BtnHelp.Location = new System.Drawing.Point(415, 260);
+            this.BtnHelp.Location = new System.Drawing.Point(409, 350);
             this.BtnHelp.Name = "BtnHelp";
             this.BtnHelp.Size = new System.Drawing.Size(75, 23);
             this.BtnHelp.TabIndex = 4;
@@ -261,12 +266,58 @@
             this.BtnHelp.UseVisualStyleBackColor = true;
             this.BtnHelp.Click += new System.EventHandler(this.BtnHelp_Click);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btnPolicy);
+            this.groupBox2.Controls.Add(this.chkPolicy);
+            this.groupBox2.Controls.Add(this.chkSilMember);
+            this.groupBox2.Location = new System.Drawing.Point(13, 241);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(477, 103);
+            this.groupBox2.TabIndex = 5;
+            this.groupBox2.TabStop = false;
+            // 
+            // chkSilMember
+            // 
+            this.chkSilMember.AutoSize = true;
+            this.chkSilMember.Location = new System.Drawing.Point(118, 19);
+            this.chkSilMember.Name = "chkSilMember";
+            this.chkSilMember.Size = new System.Drawing.Size(279, 17);
+            this.chkSilMember.TabIndex = 0;
+            this.chkSilMember.Text = "I am an SIL member/working in SIL sponsored project";
+            this.chkSilMember.UseVisualStyleBackColor = true;
+            this.chkSilMember.CheckedChanged += new System.EventHandler(this.chkSilMember_CheckedChanged);
+            // 
+            // chkPolicy
+            // 
+            this.chkPolicy.Enabled = false;
+            this.chkPolicy.Location = new System.Drawing.Point(118, 45);
+            this.chkPolicy.Name = "chkPolicy";
+            this.chkPolicy.Size = new System.Drawing.Size(284, 30);
+            this.chkPolicy.TabIndex = 1;
+            this.chkPolicy.Text = "I am conforming to the SIL policies related to copyright, permission and publicat" +
+                "ion";
+            this.chkPolicy.UseVisualStyleBackColor = true;
+            this.chkPolicy.CheckedChanged += new System.EventHandler(this.chkPolicy_CheckedChanged);
+            // 
+            // btnPolicy
+            // 
+            this.btnPolicy.Enabled = false;
+            this.btnPolicy.Location = new System.Drawing.Point(397, 45);
+            this.btnPolicy.Name = "btnPolicy";
+            this.btnPolicy.Size = new System.Drawing.Size(74, 23);
+            this.btnPolicy.TabIndex = 2;
+            this.btnPolicy.Text = "Policy";
+            this.btnPolicy.UseVisualStyleBackColor = true;
+            this.btnPolicy.Click += new System.EventHandler(this.btnPolicy_Click);
+            // 
             // PrintVia
             // 
             this.AccessibleName = "Print via...";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(502, 296);
+            this.ClientSize = new System.Drawing.Size(502, 376);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.BtnHelp);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnOk);
@@ -281,6 +332,8 @@
             this.Load += new System.EventHandler(this.PrintVia_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -307,5 +360,9 @@
         private System.Windows.Forms.TextBox txtSaveInFolder;
         private System.Windows.Forms.CheckBox chkAvoidOdtCrash;
         private System.Windows.Forms.ToolTip tt_PrintVia;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button btnPolicy;
+        private System.Windows.Forms.CheckBox chkPolicy;
+        private System.Windows.Forms.CheckBox chkSilMember;
     }
 }

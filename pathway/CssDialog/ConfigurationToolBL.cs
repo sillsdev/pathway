@@ -268,6 +268,15 @@ namespace SIL.PublishingSolution
                     defaultValue = "Bottom Inside Margin";
                 }
 
+                //Note - top outside margin - is occupied with headword already
+                task = "@page:left-top-left";
+                key = "content";
+                result = GetValue(task, key, "false");
+                if (result.IndexOf("counter") > -1 && result.IndexOf("page") > -1)
+                {
+                    defaultValue = "Top Outside Margin";
+                }
+
                 task = "@page:left-bottom-left";
                 key = "content";
                 result = GetValue(task, key, "false");
@@ -275,6 +284,7 @@ namespace SIL.PublishingSolution
                 {
                     defaultValue = "Bottom Outside Margin";
                 }
+
 
                 return defaultValue;
             }

@@ -162,6 +162,7 @@ namespace SIL.PublishingSolution
         private PublicationInformation _projInfo;
         private bool _IsHeadword = false;
         private bool _significant;
+        private Dictionary<string, Dictionary<string, string>> _dictColumnGapEm = new Dictionary<string, Dictionary<string, string>>();
 
         #endregion
 
@@ -235,7 +236,6 @@ namespace SIL.PublishingSolution
             OldStyles styleInfo = new OldStyles(); 
 
             _structStyles = styleInfo;
-            Dictionary<string, Dictionary<string, string>> ColumnGapEm = new Dictionary<string, Dictionary<string, string>>();
             string _inputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             InitializeData(projInfo, idAllClass, classFamily, cssClassOrder);
             ProcessProperty();
@@ -245,7 +245,7 @@ namespace SIL.PublishingSolution
             CreateBody();
             ProcessXHTML(projInfo.ProgressBar, projInfo.DefaultXhtmlFileWithPath, projInfo.TempOutputFolder);
             UpdateRelativeInStylesXML();
-            CloseFile(projInfo.TempOutputFolder, ColumnGapEm);
+            CloseFile(projInfo.TempOutputFolder);
             return new Dictionary<string, ArrayList>();
         }
 
@@ -261,6 +261,11 @@ namespace SIL.PublishingSolution
                         _sectionName.Add(className);
                     }
 
+                }
+
+                if(className.IndexOf("Sect_") >= 0)
+                {
+                    _dictColumnGapEm[className] = IdAllClass[className];
                 }
 
                 //searchKey = "counter-reset";
@@ -627,7 +632,7 @@ namespace SIL.PublishingSolution
             {
                 var msg = new[] { e.Message, Sourcefile };
                 LocDB.Message("errProcessXHTML", Sourcefile + " is Not Valid. " + "\n" + e.Message, msg, LocDB.MessageTypes.Info, LocDB.MessageDefault.First);
-                CloseFile(targetPath, _structStyles.ColumnGapEm);
+                CloseFile(targetPath);
             }
             finally
             {
@@ -641,6 +646,7 @@ namespace SIL.PublishingSolution
 
         private string SignificantSpace(string content)
         {
+            if (content == null) return "";
             //string content = _reader.Value;
             content = content.Replace("\r\n", "");
             content = content.Replace("\t", "");
@@ -1724,7 +1730,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         /// <returns> </returns>
         /// -------------------------------------------------------------------------------------------
-        private void CloseFile(string targetPath, Dictionary<string, Dictionary<string, string>> dictColumnGapEm)
+        private void CloseFile(string targetPath)
         {
             string targetFile = targetPath + "content.xml";
             //if (_odtEndFiles != null)
@@ -1754,7 +1760,7 @@ namespace SIL.PublishingSolution
             if (_reader != null)
                 _reader.Close();
 
-            if (dictColumnGapEm.Count > 0)
+            if (_dictColumnGapEm != null && _dictColumnGapEm.Count > 0)
             {
                 var xmlDoc = new XmlDocument { PreserveWhitespace = true };
                 var nsmgr = new XmlNamespaceManager(xmlDoc.NameTable);
@@ -1762,7 +1768,9 @@ namespace SIL.PublishingSolution
                 nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
                 xmlDoc.Load(targetFile);
                 XmlElement root = xmlDoc.DocumentElement;
-                Dictionary<string, XmlNode> ColumnGap = _util.SetColumnGap(targetFile, dictColumnGapEm);
+
+                ModifyOOStyles modifyIDStyles = new ModifyOOStyles();
+                Dictionary<string, XmlNode> ColumnGap = modifyIDStyles.SetColumnGap(targetFile, _dictColumnGapEm);
                 foreach (KeyValuePair<string, XmlNode> secName in ColumnGap)
                 {
                     string style = "//st:style[@st:name='" + secName.Key + "']//st:columns";

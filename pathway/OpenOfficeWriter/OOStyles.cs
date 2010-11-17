@@ -115,6 +115,8 @@ namespace SIL.PublishingSolution
 
                 _paragraphProperty.Clear();
                 _textProperty.Clear();
+                _columnProperty.Clear();
+
                 _OOClass = new Dictionary<string, string>();
                 _OOProperty = mapProperty.IDProperty(cssClass.Value);
                 foreach (KeyValuePair<string, string> property in _OOProperty)
@@ -141,8 +143,7 @@ namespace SIL.PublishingSolution
                     }
                     else if (_allColumnProperty.ContainsKey(propName)) 
                     {
-                        string prefix = _allColumnProperty[propName].ToString();
-                        _columnProperty[prefix + propName] = property.Value;
+                        MapColumnProperty(property, propName);
                     }
 
                 }
@@ -178,6 +179,25 @@ namespace SIL.PublishingSolution
                 }
                 _writer.WriteEndElement();
                 
+            }
+        }
+
+        private void MapColumnProperty(KeyValuePair<string, string> property, string propName)
+        {
+            string prefix = _allColumnProperty[propName];
+            if (propName == "column-rule-width" || propName == "column-rule-style" || propName == "column-rule-color")
+            {
+                if (propName == "column-rule-width")
+                    propName = "width";
+                if (propName == "column-rule-color")
+                    propName = "color";
+
+                if (propName != "column-rule-style")  // still not handled
+                    _columnSep[prefix + propName] = property.Value; // Column rule Dictionary
+            }
+            else
+            {
+                _columnProperty[prefix + propName] = property.Value;
             }
         }
 
@@ -317,7 +337,7 @@ namespace SIL.PublishingSolution
 
                             }
                         }
-                        _styleName.ColumnGapEm["Sect_" + className.Trim()] = pageProperties;
+                        _OOAllClass["Sect_" + className.Trim()] = pageProperties;
                     }
                 }
 

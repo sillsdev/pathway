@@ -182,6 +182,16 @@ namespace SIL.PublishingSolution
                     case "column-fill":
                         ColumnFill(property.Value);
                         break;
+                    case "column-rule-style":
+                        ColumnRule(property.Value);
+                        break;
+                    case "column-rule-color":
+                        ColumnColor(property.Value);
+                        break;
+                    case "column-rule-width":
+                        ColumnWidth(property.Value);
+                        break;
+
                     case "pathway":
                         Pathway(property.Value);
                         break;
@@ -196,6 +206,26 @@ namespace SIL.PublishingSolution
             }
 
             return _IDProperty;
+        }
+
+        private void ColumnRule(string propertyValue)
+        {
+            //_propertyKey = ""
+            _IDProperty[_propertyKey] = propertyValue;
+        }
+
+        private void ColumnColor(string propertyValue)
+        {
+            propertyValue = ColorConversion(propertyValue);
+            //_propertyKey = "color";
+
+            _IDProperty[_propertyKey] = propertyValue;
+        }
+
+        private void ColumnWidth(string propertyValue)
+        {
+            //_propertyKey = "width";
+            _IDProperty[_propertyKey] = Add_pt(propertyValue);
         }
 
         public void VerticalJustification(string propertyValue)
@@ -507,6 +537,12 @@ namespace SIL.PublishingSolution
 
         public void Color(string propertyValue)
         {
+            propertyValue = ColorConversion(propertyValue);
+            _IDProperty[_propertyKey] = propertyValue;
+        }
+
+        private string ColorConversion(string propertyValue)
+        {
             if (propertyValue.IndexOf("rgb") >= 0)
             {
                 propertyValue = ColorRGB(propertyValue);
@@ -524,7 +560,7 @@ namespace SIL.PublishingSolution
             {
                 propertyValue = _dicColorInfo[propertyValue.ToLower()];
             }
-            _IDProperty[_propertyKey] = propertyValue;
+            return propertyValue;
         }
 
         public void BGColor(string propertyValue)
@@ -551,11 +587,11 @@ namespace SIL.PublishingSolution
             if (propertyValue == string.Empty || Common.ValidateAlphabets(propertyValue)
                 || propertyValue.IndexOf('-') > -1)
             {
-                _IDProperty["TextColumnGutter"] = "12pt";
+                _IDProperty[_propertyKey] = "12pt";
             }
             else
             {
-                _IDProperty["TextColumnGutter"] = Add_pt(propertyValue);
+                _IDProperty[_propertyKey] = Add_pt(propertyValue);
             }
         }
 
