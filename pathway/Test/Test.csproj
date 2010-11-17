@@ -126,11 +126,7 @@
     </Compile>
     <Compile Include="CssParser\ClassInfoTest.cs" />
     <Compile Include="CssParser\CssTreeTest.cs" />
-    <Compile Include="epubConvert\EmbeddedFontTest.cs" />
-    <Compile Include="epubConvert\ExportepubTest.cs" />
     <Compile Include="FileUtilsTest.cs" />
-    <Compile Include="GoBibleConvert\CheckCV_XHTMLTest.cs" />
-    <Compile Include="GoBibleConvert\GoBibleTest.cs" />
     <Compile Include="InDesignConvert\InDesignMapTest.cs" />
     <Compile Include="InDesignConvert\InGraphicTest.cs" />
     <Compile Include="InDesignConvert\InInsertMacroTest.cs" />
@@ -269,8 +265,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="GoBibleConvert\TestFiles\Expected\1pe_simplified.xhtml" />
-    <None Include="GoBibleConvert\TestFiles\InputFiles\1pe.xhtml" />
     <None Include="PostTestBuild.bat" />
     <None Include="PsTool\TestFiles\Expected\DefaultCss.xhtml" />
     <None Include="PsTool\TestFiles\Expected\FileInsert.xhtml" />
@@ -331,7 +325,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="GoBibleConvert\TestFiles\Output\" />
     <Folder Include="Properties\" />
     <Folder Include="WordPressConvert\TestFiles\Expected\" />
     <Folder Include="WordPressConvert\TestFiles\Input\" />

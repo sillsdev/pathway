@@ -31,6 +31,9 @@ namespace SIL.PublishingSolution
         protected Dictionary<string, string> _columnProperty  = new Dictionary<string, string>();
         protected Dictionary<string, string> _sectionProperty;
         protected Dictionary<string, string> _firstPageLayoutProperty;
+        protected Dictionary<string, string> _leftPageLayoutProperty;
+        protected Dictionary<string, string> _rightPageLayoutProperty;
+
         protected Dictionary<string, string> _columnSep;
 
         ClassInfo _selectorClass;

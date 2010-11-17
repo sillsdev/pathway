@@ -383,6 +383,12 @@ namespace SIL.PublishingSolution
 
             pageName = "@page:first";
             _firstPageLayoutProperty = ProcessPageProperty(pageName);
+
+            pageName = "@page:left";
+            _leftPageLayoutProperty = ProcessPageProperty(pageName);
+
+            pageName = "@page:right";
+            _rightPageLayoutProperty = ProcessPageProperty(pageName);
         }
 
         private Dictionary<string, string> ProcessPageProperty(string pageName)
@@ -1019,332 +1025,196 @@ namespace SIL.PublishingSolution
                     _pageHeaderFooter[i] = _pageHeaderFooter[i + 6];
                 }
             }
+
+            _firstPageLayoutProperty = MergePageProperty(_firstPageLayoutProperty, true, "first");
+            _firstPageLayoutProperty = MergePageProperty(_firstPageLayoutProperty, false, "first");
+            _leftPageLayoutProperty = MergePageProperty(_leftPageLayoutProperty, false, "left");
+            _rightPageLayoutProperty = MergePageProperty(_rightPageLayoutProperty, false, "right");
+
         }
 
+        private Dictionary<string, string> MergePageProperty(Dictionary<string, string> layoutProperty, bool fromRight, string pageName)
+        {
+            int headerFooterIndex = 0;
+            if (pageName.IndexOf("left") == 0)
+            {
+                headerFooterIndex = 12;
+            }
+            else if (pageName.IndexOf("right") == 0)
+            {
+                headerFooterIndex = 18;
+            }
+
+            if (fromRight)
+            {
+                if (layoutProperty.Count == 0)
+                {
+                    layoutProperty = _rightPageLayoutProperty;
+                }
+                else
+                {
+                    foreach (KeyValuePair<string, string> property in _rightPageLayoutProperty)
+                    {
+                        if (!layoutProperty.ContainsKey(property.Key))
+                        {
+                            layoutProperty[property.Key] = property.Value;
+                        }
+                    }
+                }
+                for (int i = 0; i <= 5; i++)
+                {
+                    if (_pageHeaderFooter[i].Count == 0)
+                    {
+                        _pageHeaderFooter[i] = _pageHeaderFooter[i + 18];
+                    }
+                    else
+                    {
+                        foreach (KeyValuePair<string, string> property in _pageHeaderFooter[i + 18])
+                        {
+                            if (!_pageHeaderFooter[i].ContainsKey(property.Key))
+                            {
+                                _pageHeaderFooter[i][property.Key] = property.Value;
+                            }
+                        }
+                    }
+
+                }
+
+            }
+            else
+            {
+                if (layoutProperty.Count == 0)
+                {
+                    layoutProperty = _pageLayoutProperty;
+                }
+                else
+                {
+                    foreach (KeyValuePair<string, string> property in _pageLayoutProperty)
+                    {
+                        if (!layoutProperty.ContainsKey(property.Key))
+                        {
+                            layoutProperty[property.Key] = property.Value;
+                        }
+                    }
+                }
+
+
+
+
+                for (int i = 0; i <= 5; i++)
+                {
+                    if (_pageHeaderFooter[i + headerFooterIndex].Count == 0)
+                    {
+                        _pageHeaderFooter[i + headerFooterIndex] = _pageHeaderFooter[i + 6];
+                    }
+                    else
+                    {
+                        foreach (KeyValuePair<string, string> property in _pageHeaderFooter[i + 6])
+                        {
+                            if (!_pageHeaderFooter[i + headerFooterIndex].ContainsKey(property.Key))
+                            {
+                                _pageHeaderFooter[i + headerFooterIndex][property.Key] = property.Value;
+                            }
+                        }
+                    }
+
+                }
+
+
+            }
+            return layoutProperty;
+        }
+
+        private void CreateHeaderFooterStyle(string hf, int index)
+        {
+            _writer.WriteStartElement("style:" + hf.ToLower());
+            _writer.WriteStartElement("text:p");
+            _writer.WriteAttributeString("text:style-name", hf);
+            if (_pageHeaderFooter[index].ContainsKey("content"))
+            {
+                _writer.WriteStartElement("text:span");
+                _writer.WriteAttributeString("text:style-name", "PageHeaderFooter" + index);
+                FillHeaderFooter(_pageHeaderFooter[index]["content"], index);
+                _writer.WriteEndElement();
+            }
+            _writer.WriteStartElement("text:tab");
+            _writer.WriteEndElement();
+            if (_pageHeaderFooter[++index].ContainsKey("content"))
+            {
+                _writer.WriteStartElement("text:span");
+                _writer.WriteAttributeString("text:style-name", "PageHeaderFooter" + index);
+                FillHeaderFooter(_pageHeaderFooter[index]["content"], index);
+                _writer.WriteEndElement();
+            }
+            _writer.WriteStartElement("text:tab");
+            _writer.WriteEndElement();
+            if (_pageHeaderFooter[++index].ContainsKey("content"))
+            {
+                _writer.WriteStartElement("text:span");
+                _writer.WriteAttributeString("text:style-name", "PageHeaderFooter" + index);
+                FillHeaderFooter(_pageHeaderFooter[index]["content"], index);
+                _writer.WriteEndElement();
+            }
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+        }
+
+   
         private void MasterPageCreation()
         {
             _writer.WriteStartElement("office:master-styles"); // pm1
 
+            #region STANDARD CODE PART
             ///STANDARD CODE PART
             _writer.WriteStartElement("style:master-page");
             _writer.WriteAttributeString("style:name", "Standard");
             _writer.WriteAttributeString("style:page-layout-name", "pm1");
-            _writer.WriteStartElement("style:header");
-            _writer.WriteStartElement("text:p");
-            _writer.WriteAttributeString("text:style-name", "Header");
-            //Right page Contents
-            if (_pageHeaderFooter[18].Count > 0 || _pageHeaderFooter[19].Count > 0 || _pageHeaderFooter[20].Count > 0)
-            {
-                if (_pageHeaderFooter[18].ContainsKey("content"))
-                {
-                    _writer.WriteStartElement("text:span");
-                    _writer.WriteAttributeString("text:style-name", "AllHeaderPageLeft");
-                    FillHeaderFooter(_pageHeaderFooter[18]["content"], 18);
-                    _writer.WriteEndElement();
-                }
-                _writer.WriteStartElement("text:tab");
-                _writer.WriteEndElement();
-                if (_pageHeaderFooter[19].ContainsKey("content"))
-                {
-                    _writer.WriteStartElement("text:span");
-                    _writer.WriteAttributeString("text:style-name", "AllHeaderPageNumber");
-                    FillHeaderFooter(_pageHeaderFooter[19]["content"], 19);
-                    _writer.WriteEndElement();
-                }
-                _writer.WriteStartElement("text:tab");
-                _writer.WriteEndElement();
-                if (_pageHeaderFooter[20].ContainsKey("content"))
-                {
-                    _writer.WriteStartElement("text:span");
-                    _writer.WriteAttributeString("text:style-name", "AllHeaderPageRight");
-                    FillHeaderFooter(_pageHeaderFooter[20]["content"], 20);
-                    _writer.WriteEndElement();
-                }
-            }
-            else
-            {
-                if (isMirrored)
-                {
-                    //If no content in right, loads from allpage contents
-                    SetAllPageHeader();
-                }
-            }
-            _writer.WriteEndElement(); // Close if p
-            _writer.WriteEndElement(); // Close of header
+            _writer.WriteEndElement();
+            ///STANDARD CODE PART ENDS 
+            #endregion
 
-            if (isMirrored)
-            {
-                //header-left only created when page is set to mirrored
-                _writer.WriteStartElement("style:header-left");
-                _writer.WriteStartElement("text:p");
-                _writer.WriteAttributeString("text:style-name", "Header");
-                if (_pageHeaderFooter[12].Count > 0 || _pageHeaderFooter[13].Count > 0 || _pageHeaderFooter[14].Count > 0)
-                {
-                    if (_pageHeaderFooter[12].ContainsKey("content"))
-                    {
-                        _writer.WriteStartElement("text:span");
-                        _writer.WriteAttributeString("text:style-name", "AllHeaderPageLeft");
-                        FillHeaderFooter(_pageHeaderFooter[12]["content"], 12);
-                        _writer.WriteEndElement();
-                    }
-                    _writer.WriteStartElement("text:tab");
-                    _writer.WriteEndElement();
-                    if (_pageHeaderFooter[13].ContainsKey("content"))
-                    {
-                        _writer.WriteStartElement("text:span");
-                        _writer.WriteAttributeString("text:style-name", "AllHeaderPageNumber");
-                        FillHeaderFooter(_pageHeaderFooter[13]["content"], 13);
-                        _writer.WriteEndElement();
-                    }
-                    _writer.WriteStartElement("text:tab");
-                    _writer.WriteEndElement();
-                    if (_pageHeaderFooter[14].ContainsKey("content"))
-                    {
-                        _writer.WriteStartElement("text:span");
-                        _writer.WriteAttributeString("text:style-name", "AllHeaderPageRight");
-                        FillHeaderFooter(_pageHeaderFooter[14]["content"], 14);
-                        _writer.WriteEndElement();
-                    }
-                }
-                else
-                {
-                    SetAllPageHeader();
-                }
-                _writer.WriteEndElement(); // Close of p
-                _writer.WriteEndElement(); // Close of Header-left
-            }
-
-            _writer.WriteStartElement("style:footer");
-            _writer.WriteStartElement("text:p");
-            _writer.WriteAttributeString("text:style-name", "Footer");
-            if (_pageHeaderFooter[21].Count > 0 || _pageHeaderFooter[22].Count > 0 || _pageHeaderFooter[23].Count > 0)
-            {
-                if (_pageHeaderFooter[21].ContainsKey("content"))
-                {
-                    _writer.WriteStartElement("text:span");
-                    _writer.WriteAttributeString("text:style-name", "AllFooterPageLeft");
-                    FillHeaderFooter(_pageHeaderFooter[21]["content"], 21);
-                    _writer.WriteEndElement();
-                }
-                _writer.WriteStartElement("text:tab");
-                _writer.WriteEndElement();
-                if (_pageHeaderFooter[22].ContainsKey("content"))
-                {
-                    _writer.WriteStartElement("text:span");
-                    _writer.WriteAttributeString("text:style-name", "AllFooterPageNumber");
-                    FillHeaderFooter(_pageHeaderFooter[22]["content"], 22);
-                    _writer.WriteEndElement();
-                }
-                _writer.WriteStartElement("text:tab");
-                _writer.WriteEndElement();
-                if (_pageHeaderFooter[23].ContainsKey("content"))
-                {
-                    _writer.WriteStartElement("text:span");
-                    _writer.WriteAttributeString("text:style-name", "AllFooterPageRight");
-                    FillHeaderFooter(_pageHeaderFooter[23]["content"], 23);
-                    _writer.WriteEndElement();
-                }
-            }
-            else
-            {
-                if (isMirrored)
-                {
-                    //If no content in right, loads from allpage contents
-                    SetAllPageFooter();
-                }
-            }
-            _writer.WriteEndElement(); // Close of p
-            _writer.WriteEndElement(); // Close if footer
-
-            _writer.WriteStartElement("style:footer-left");
-            _writer.WriteStartElement("text:p");
-            _writer.WriteAttributeString("text:style-name", "Footer");
-            if (_pageHeaderFooter[15].Count > 0 || _pageHeaderFooter[15].Count > 0 || _pageHeaderFooter[17].Count > 0)
-            {
-                if (_pageHeaderFooter[15].ContainsKey("content"))
-                {
-                    _writer.WriteStartElement("text:span");
-                    _writer.WriteAttributeString("text:style-name", "AllFooterPageLeft");
-                    FillHeaderFooter(_pageHeaderFooter[15]["content"], 15);
-                    _writer.WriteEndElement();
-                }
-                _writer.WriteStartElement("text:tab");
-                _writer.WriteEndElement();
-                if (_pageHeaderFooter[16].ContainsKey("content"))
-                {
-                    _writer.WriteStartElement("text:span");
-                    _writer.WriteAttributeString("text:style-name", "AllFooterPageNumber");
-                    FillHeaderFooter(_pageHeaderFooter[16]["content"], 16);
-                    _writer.WriteEndElement();
-                }
-                _writer.WriteStartElement("text:tab");
-                _writer.WriteEndElement();
-                if (_pageHeaderFooter[17].ContainsKey("content"))
-                {
-                    _writer.WriteStartElement("text:span");
-                    _writer.WriteAttributeString("text:style-name", "AllFooterPageRight");
-                    FillHeaderFooter(_pageHeaderFooter[17]["content"], 17);
-                    _writer.WriteEndElement();
-                }
-            }
-            else
-            {
-                if (isMirrored)
-                {
-                    SetAllPageFooter();
-                }
-            }
-            _writer.WriteEndElement(); // Close of p
-            _writer.WriteEndElement(); // Close of Footer-Left
-
-            _writer.WriteEndElement(); // Close of Master page Standard
-
-            ///STANDARD CODE PART ENDS
-
+            #region XHTML CODE PART
             ////XHTML CODE PART START
-
             _writer.WriteStartElement("style:master-page");
             _writer.WriteAttributeString("style:name", "XHTML"); // All PageProperty
             _writer.WriteAttributeString("style:page-layout-name", "pm2");
-            if (!isMirrored)
-            {
-                /* Begin AllPage Header */
-                if (_pageHeaderFooter[6].Count > 0 || _pageHeaderFooter[7].Count > 0 || _pageHeaderFooter[8].Count > 0)
-                {
-                    _writer.WriteStartElement("style:header");
-                    _writer.WriteStartElement("text:p");
-                    _writer.WriteAttributeString("text:style-name", "Header");
-                    SetAllPageHeader();
-                    _writer.WriteEndElement();
-                    _writer.WriteEndElement();
-                }
-                /* Begin AllPage Footer */
-                if (_pageHeaderFooter[9].Count > 0 || _pageHeaderFooter[10].Count > 0 || _pageHeaderFooter[11].Count > 0)
-                {
-                    _writer.WriteStartElement("style:footer");
-                    _writer.WriteStartElement("text:p");
-                    _writer.WriteAttributeString("text:style-name", "Footer");
-                    SetAllPageFooter();
-                    _writer.WriteEndElement(); // close of p
-                    _writer.WriteEndElement(); // Close of Footer
-                }
-            }
+            _writer.WriteAttributeString("style:next-style-name", "Right_20_Page");
             _writer.WriteEndElement(); // Close of Master Page
+            ////XHTML CODE PART ENDS 
+            #endregion
 
-            ////XHTML CODE PART ENDS
-
-            //// First CODE PART START
-
+            #region First CODE PART
             _writer.WriteStartElement("style:master-page");
             _writer.WriteAttributeString("style:name", "First_20_Page");
             _writer.WriteAttributeString("style:display-name", "First Page"); // First PageProperty
-            if (isMirrored)
-            {
-                _writer.WriteAttributeString("style:page-layout-name", "pm2");
-                _writer.WriteAttributeString("style:next-style-name", "Standard");
-            }
-            else
-            {
-                _writer.WriteAttributeString("style:page-layout-name", "pm3");
-                _writer.WriteAttributeString("style:next-style-name", "XHTML");
-            }
-            /*Begin Firstpage Header */
-            if (_pageHeaderFooter[0].Count > 0 || _pageHeaderFooter[1].Count > 0 || _pageHeaderFooter[2].Count > 0)
-            {
-                if (IsContentAvailable(0) || IsCropMarkChecked)
-                {
-                    _writer.WriteStartElement("style:header");
-                    _writer.WriteStartElement("text:p");
-                    _writer.WriteAttributeString("text:style-name", "Header");
-                    if (IsCropMarkChecked)
-                    {
-                        foreach (KeyValuePair<string, string> para in _firstPageLayoutProperty)
-                        {
-                            _pageLayoutProperty[para.Key] = para.Value;
-                        }
-
-                        foreach (KeyValuePair<string, string> para in _pageLayoutProperty)
-                        {
-                            _writer.WriteAttributeString(para.Key, para.Value);
-                        }
-                        AddHeaderCropMarks(_pageLayoutProperty);
-                    }
-                    if (_pageHeaderFooter[0].ContainsKey("content"))
-                    {
-                        _writer.WriteStartElement("text:span");
-                        _writer.WriteAttributeString("text:style-name", "HeaderPageLeft");
-                        FillHeaderFooter(_pageHeaderFooter[0]["content"], 0);
-                        _writer.WriteEndElement();
-                    }
-                    _writer.WriteStartElement("text:tab");
-                    _writer.WriteEndElement();
-                    if (_pageHeaderFooter[1].ContainsKey("content"))
-                    {
-                        _writer.WriteStartElement("text:span");
-                        _writer.WriteAttributeString("text:style-name", "HeaderPageNumber");
-                        FillHeaderFooter(_pageHeaderFooter[1]["content"], 1);
-                        _writer.WriteEndElement();
-                    }
-                    _writer.WriteStartElement("text:tab");
-                    _writer.WriteEndElement();
-                    if (_pageHeaderFooter[2].ContainsKey("content"))
-                    {
-                        _writer.WriteStartElement("text:span");
-                        _writer.WriteAttributeString("text:style-name", "HeaderPageRight");
-                        FillHeaderFooter(_pageHeaderFooter[2]["content"], 2);
-                        _writer.WriteEndElement();
-                    }
-                    _writer.WriteEndElement(); // Close of p
-                    _writer.WriteEndElement(); // Close of Header
-                }
-                //// First CODE PART ENDS
-
-            }
-
-            /*Begin Firstpage Footer */
-            if (_pageHeaderFooter[3].Count > 0 || _pageHeaderFooter[4].Count > 0 || _pageHeaderFooter[5].Count > 0)
-            {
-                if (IsContentAvailable(3))
-                {
-                    _writer.WriteStartElement("style:footer");
-                    _writer.WriteStartElement("text:p");
-                    _writer.WriteAttributeString("text:style-name", "Footer");
-
-                    if (_pageHeaderFooter[3].ContainsKey("content"))
-                    {
-                        _writer.WriteStartElement("text:span");
-                        _writer.WriteAttributeString("text:style-name", "FooterPageLeft");
-                        FillHeaderFooter(_pageHeaderFooter[3]["content"], 3);
-                        _writer.WriteEndElement();
-                    }
-                    _writer.WriteStartElement("text:tab");
-                    _writer.WriteEndElement();
-
-                    if (_pageHeaderFooter[4].ContainsKey("content"))
-                    {
-                        _writer.WriteStartElement("text:span");
-                        _writer.WriteAttributeString("text:style-name", "FooterPageNumber");
-                        FillHeaderFooter(_pageHeaderFooter[4]["content"], 4);
-                        _writer.WriteEndElement();
-                    }
-
-                    _writer.WriteStartElement("text:tab");
-                    _writer.WriteEndElement();
-
-                    if (_pageHeaderFooter[5].ContainsKey("content"))
-                    {
-                        _writer.WriteStartElement("text:span");
-                        _writer.WriteAttributeString("text:style-name", "FooterPageRight");
-                        FillHeaderFooter(_pageHeaderFooter[5]["content"], 5);
-                        _writer.WriteEndElement();
-                    }
-
-                    _writer.WriteEndElement(); // Close of p
-                    _writer.WriteEndElement(); // Close of Footer
-                }
-                /*End Firstpage Footer */
-            }
+            _writer.WriteAttributeString("style:next-style-name", "Left_20_Page");
+            _writer.WriteAttributeString("style:page-layout-name", "pm3");
+            CreateHeaderFooterStyle("Header", 0);
+            CreateHeaderFooterStyle("Footer", 3);
             _writer.WriteEndElement(); // Close of Master Page
+            #endregion
+
+            #region LEFT CODE PART
+            _writer.WriteStartElement("style:master-page");
+            _writer.WriteAttributeString("style:name", "Left_20_Page"); // Left PageProperty
+            _writer.WriteAttributeString("style:display-name", "Left Page"); // Left PageProperty
+            _writer.WriteAttributeString("style:page-layout-name", "pm4");
+            _writer.WriteAttributeString("style:next-style-name", "Right_20_Page");
+            CreateHeaderFooterStyle("Header", 12);
+            CreateHeaderFooterStyle("Footer", 15);
+            _writer.WriteEndElement(); // Close of Master Page
+            #endregion
+
+            #region RIGHT CODE PART
+            _writer.WriteStartElement("style:master-page");
+            _writer.WriteAttributeString("style:name", "Right_20_Page"); // Right PageProperty
+            _writer.WriteAttributeString("style:display-name", "Right Page"); // Right PageProperty
+            _writer.WriteAttributeString("style:page-layout-name", "pm5");
+            _writer.WriteAttributeString("style:next-style-name", "Left_20_Page");
+            CreateHeaderFooterStyle("Header", 18);
+            CreateHeaderFooterStyle("Footer", 21);
+            _writer.WriteEndElement(); // Close of Master Page
+            #endregion
         }
 
         private void InsertHeaderRule()
@@ -1447,147 +1317,17 @@ namespace SIL.PublishingSolution
         private void ODTPageFooter()
         {
             //office:styles Attributes.
-            //// fullString:notes-configuration footnote
             _writer.WriteStartElement("office:automatic-styles");
-
-            // Styles applies to First PageProperty
-            _writer.WriteStartElement("style:style");
-            _writer.WriteAttributeString("style:name", "HeaderPageLeft");
-            _writer.WriteAttributeString("style:family", "text");
-            _writer.WriteStartElement("style:text-properties");
-            foreach (KeyValuePair<string, string> attProperty in _pageHeaderFooter[0])
+            //For First page
+            for (int i = 0; i <= 5; i++)
             {
-                _writer.WriteAttributeString(attProperty.Key, attProperty.Value);
+                FillPageHeaderFooter(i);
             }
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-
-            _writer.WriteStartElement("style:style");
-            _writer.WriteAttributeString("style:name", "HeaderPageNumber");
-            _writer.WriteAttributeString("style:family", "text");
-            _writer.WriteStartElement("style:text-properties");
-            foreach (KeyValuePair<string, string> attProperty in _pageHeaderFooter[1])
+            //For Left and Right page
+            for (int i = 12; i <= 23; i++)
             {
-                _writer.WriteAttributeString(attProperty.Key, attProperty.Value);
+                FillPageHeaderFooter(i);
             }
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-
-            _writer.WriteStartElement("style:style");
-            _writer.WriteAttributeString("style:name", "HeaderPageRight");
-            _writer.WriteAttributeString("style:family", "text");
-            _writer.WriteStartElement("style:text-properties");
-            foreach (KeyValuePair<string, string> attProperty in _pageHeaderFooter[2])
-            {
-                _writer.WriteAttributeString(attProperty.Key, attProperty.Value);
-            }
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-
-            //Begin Footer FirstPage Styles
-            _writer.WriteStartElement("style:style");
-            _writer.WriteAttributeString("style:name", "FooterPageLeft");
-            _writer.WriteAttributeString("style:family", "text");
-            _writer.WriteStartElement("style:text-properties");
-            foreach (KeyValuePair<string, string> attProperty in _pageHeaderFooter[3])
-            {
-                _writer.WriteAttributeString(attProperty.Key, attProperty.Value);
-            }
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-
-            _writer.WriteStartElement("style:style");
-            _writer.WriteAttributeString("style:name", "FooterPageNumber");
-            _writer.WriteAttributeString("style:family", "text");
-            _writer.WriteStartElement("style:text-properties");
-            foreach (KeyValuePair<string, string> attProperty in _pageHeaderFooter[4])
-            {
-                _writer.WriteAttributeString(attProperty.Key, attProperty.Value);
-            }
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-
-            _writer.WriteStartElement("style:style");
-            _writer.WriteAttributeString("style:name", "FooterPageRight");
-            _writer.WriteAttributeString("style:family", "text");
-            _writer.WriteStartElement("style:text-properties");
-            foreach (KeyValuePair<string, string> attProperty in _pageHeaderFooter[5])
-            {
-                _writer.WriteAttributeString(attProperty.Key, attProperty.Value);
-            }
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-            //End Footer FirstPage Styles
-
-            //Begin Header Styles applies to All Pages except First PageProperty
-            _writer.WriteStartElement("style:style");
-            _writer.WriteAttributeString("style:name", "AllHeaderPageLeft");
-            _writer.WriteAttributeString("style:family", "text");
-            _writer.WriteStartElement("style:text-properties");
-            foreach (KeyValuePair<string, string> attProperty in _pageHeaderFooter[6])
-            {
-                if (attProperty.Key.Substring(attProperty.Key.Length - 1) != ":")
-                    _writer.WriteAttributeString(attProperty.Key, attProperty.Value);
-            }
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-
-            _writer.WriteStartElement("style:style");
-            _writer.WriteAttributeString("style:name", "AllHeaderPageNumber");
-            _writer.WriteAttributeString("style:family", "text");
-            _writer.WriteStartElement("style:text-properties");
-            foreach (KeyValuePair<string, string> attProperty in _pageHeaderFooter[7])
-            {
-                _writer.WriteAttributeString(attProperty.Key, attProperty.Value);
-            }
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-
-            _writer.WriteStartElement("style:style");
-            _writer.WriteAttributeString("style:name", "AllHeaderPageRight");
-            _writer.WriteAttributeString("style:family", "text");
-            _writer.WriteStartElement("style:text-properties");
-            foreach (KeyValuePair<string, string> attProperty in _pageHeaderFooter[8])
-            {
-                if (attProperty.Key.Substring(attProperty.Key.Length - 1) != ":")
-                    _writer.WriteAttributeString(attProperty.Key, attProperty.Value);
-            }
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-
-            //Begin Footer Allpage  Styles applies to All Pages except First PageProperty
-            _writer.WriteStartElement("style:style");
-            _writer.WriteAttributeString("style:name", "AllFooterPageLeft");
-            _writer.WriteAttributeString("style:family", "text");
-            _writer.WriteStartElement("style:text-properties");
-            foreach (KeyValuePair<string, string> attProperty in _pageHeaderFooter[9])
-            {
-                _writer.WriteAttributeString(attProperty.Key, attProperty.Value);
-            }
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-
-            _writer.WriteStartElement("style:style");
-            _writer.WriteAttributeString("style:name", "AllFooterPageNumber");
-            _writer.WriteAttributeString("style:family", "text");
-            _writer.WriteStartElement("style:text-properties");
-            foreach (KeyValuePair<string, string> attProperty in _pageHeaderFooter[10])
-            {
-                _writer.WriteAttributeString(attProperty.Key, attProperty.Value);
-            }
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-
-            _writer.WriteStartElement("style:style");
-            _writer.WriteAttributeString("style:name", "AllFooterPageRight");
-            _writer.WriteAttributeString("style:family", "text");
-            _writer.WriteStartElement("style:text-properties");
-            foreach (KeyValuePair<string, string> attProperty in _pageHeaderFooter[11])
-            {
-                _writer.WriteAttributeString(attProperty.Key, attProperty.Value);
-            }
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
             //End Footer AllPage Style
 
             PageLayout();
@@ -1595,7 +1335,19 @@ namespace SIL.PublishingSolution
             // office:automatic-styles - Ends
             _writer.WriteEndElement();
         }
-
+        private void FillPageHeaderFooter(int index)
+        {
+            _writer.WriteStartElement("style:style");
+            _writer.WriteAttributeString("style:name", "PageHeaderFooter" + index);
+            _writer.WriteAttributeString("style:family", "text");
+            _writer.WriteStartElement("style:text-properties");
+            foreach (KeyValuePair<string, string> attProperty in _pageHeaderFooter[index])
+            {
+                _writer.WriteAttributeString(attProperty.Key, attProperty.Value);
+            }
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+        }
         private void PageLayout()
         {
             _writer.WriteStartElement("style:page-layout");
@@ -1658,10 +1410,6 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("style:page-layout-properties");
             foreach (KeyValuePair<string, string> para in _firstPageLayoutProperty)
             {
-                _pageLayoutProperty[para.Key] = para.Value;
-            }
-            foreach (KeyValuePair<string, string> para in _pageLayoutProperty)
-            {
                 _writer.WriteAttributeString(para.Key, para.Value);
             }
             _writer.WriteStartElement("style:background-image");
@@ -1680,6 +1428,58 @@ namespace SIL.PublishingSolution
             //End Header & Footer styles for pm3
             _writer.WriteEndElement();
             /* pm3 ends*/
+
+            /* pm4 starts */
+            _writer.WriteStartElement("style:page-layout"); // pm4
+            _writer.WriteAttributeString("style:name", "pm4");  // Left Page
+            _writer.WriteAttributeString("style:page-usage", "left");
+            _writer.WriteStartElement("style:page-layout-properties");
+            foreach (KeyValuePair<string, string> para in _leftPageLayoutProperty)
+            {
+                _writer.WriteAttributeString(para.Key, para.Value);
+            }
+            _writer.WriteStartElement("style:background-image");
+            _writer.WriteEndElement();
+            // START FootNote Seperator
+            FootnoteSeperator();
+            // END FootNote Seperator
+            _writer.WriteEndElement(); // end of style:page-layout-properties
+            //Header & Footer styles for pm4
+            _writer.WriteStartElement("style:header-style");
+            LoadHeaderFooterSettings();
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("style:footer-style");
+            LoadHeaderFooterSettings();
+            _writer.WriteEndElement();
+            //End Header & Footer styles for pm4
+            _writer.WriteEndElement();
+            /* pm4 ends*/
+
+            /* pm5 starts */
+            _writer.WriteStartElement("style:page-layout"); // pm5
+            _writer.WriteAttributeString("style:name", "pm5");  // Right Page
+            _writer.WriteAttributeString("style:page-usage", "right");
+            _writer.WriteStartElement("style:page-layout-properties");
+            foreach (KeyValuePair<string, string> para in _rightPageLayoutProperty)
+            {
+                _writer.WriteAttributeString(para.Key, para.Value);
+            }
+            _writer.WriteStartElement("style:background-image");
+            _writer.WriteEndElement();
+            // START FootNote Seperator
+            FootnoteSeperator();
+            // END FootNote Seperator
+            _writer.WriteEndElement(); // end of style:page-layout-properties
+            //Header & Footer styles for pm5
+            _writer.WriteStartElement("style:header-style");
+            LoadHeaderFooterSettings();
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("style:footer-style");
+            LoadHeaderFooterSettings();
+            _writer.WriteEndElement();
+            //End Header & Footer styles for pm5
+            _writer.WriteEndElement();
+            /* pm5 ends*/
         }
 
         private void LoadHeaderFooterSettings()
@@ -1717,13 +1517,13 @@ namespace SIL.PublishingSolution
         /// <param name="index">Dictionary Index</param>
         /// <returns> </returns>
         /// -------------------------------------------------------------------------------------------
-        private void FillHeaderFooter(string contentValue, byte index)
+        private void FillHeaderFooter(string contentValue, int index)
         {
             try
             {
                 if (_pageHeaderFooter[index].Count > 0)
                 {
-                    if (contentValue.IndexOf("first,)") > 0 && contentValue.IndexOf("last,)") > 0)
+                    if (contentValue.IndexOf("first)") > 0 && contentValue.IndexOf("last)") > 0)
                     {
                         _styleName.IsMacroEnable = true;
                         _writer.WriteStartElement("text:chapter");
@@ -1735,7 +1535,7 @@ namespace SIL.PublishingSolution
                         _writer.WriteAttributeString("text:outline-level", "10");
                         _writer.WriteEndElement();
                     }
-                    else if (contentValue.IndexOf("first,)") > 0)
+                    else if (contentValue.IndexOf("first)") > 0)
                     {
                         _styleName.IsMacroEnable = true;
                         _writer.WriteStartElement("text:chapter");
@@ -1743,7 +1543,7 @@ namespace SIL.PublishingSolution
                         _writer.WriteAttributeString("text:outline-level", "9");
                         _writer.WriteEndElement();
                     }
-                    else if (contentValue.IndexOf("last,)") > 0)
+                    else if (contentValue.IndexOf("last)") > 0)
                     {
                         _styleName.IsMacroEnable = true;
                         _writer.WriteStartElement("text:chapter");
@@ -1751,14 +1551,14 @@ namespace SIL.PublishingSolution
                         _writer.WriteAttributeString("text:outline-level", "10");
                         _writer.WriteEndElement();
                     }
-                    else if (contentValue.IndexOf("page,)") > 0)
+                    else if (contentValue.IndexOf("page") > 0 && contentValue.IndexOf("counter") >= 0)
                     {
                         _writer.WriteStartElement("text:page-number");
                         _writer.WriteAttributeString("text:select-page", "current");
                         _writer.WriteString("4");
                         _writer.WriteEndElement();
                     }
-                    else if (contentValue.IndexOf("start,)") > 0)
+                    else if (contentValue.IndexOf("start)") > 0)
                     {
                         _styleName.IsMacroEnable = true;
                         _writer.WriteStartElement("text:chapter");
