@@ -5,6 +5,15 @@
     ps-NonConsecutiveReferenceSeparator-string:",";
 }
 
+.Alternate_Reading {
+    font-style: italic;
+    display: inline;
+    display: footnote;
+    display: prince-footnote;
+    position: footnote;
+    list-style-position: inside;
+}
+
 .Chapter_Head {
     padding-top:21pt;
     padding-bottom:21pt;
@@ -118,11 +127,23 @@
     vertical-align: top;
     line-height: none;
 }
-.Note_General_Paragraph::footnote-marker {
+/*.Note_General_Paragraph::footnote-marker {
     font-weight: bold;
     content: string(chapter) string(verse) ' = ';
-    /* content: string(footnoteMarker); font-size: 6pt; vertical-align: super; color: purple; */
+    /* content: string(footnoteMarker); font-size: 6pt; vertical-align: super; color: purple;
     text-align: left;
+} */
+.Note_Target_Reference::footnote-marker {
+    font-weight: bold;
+}
+.Note_General_Paratraph::footnote-call {
+    color: purple;
+    content: attr(title);
+    vertical-align: super;
+    vertical-align: top;
+    line-height: none;
+}
+.scrFootnoteMarker {
 }
 .Paragraph {
     text-indent: 12pt;
@@ -136,8 +157,17 @@
     margin-left: 0pt;
 }
 
-.parallel_passage_reference {
-    font-style:Italic;
+.parallel_passage_reference,  .Parallel_Passage_Reference {
+    font-style: italic;
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    margin-top: 0pt;
+    margin-bottom: 3pt;
+}
+
+.rem {
+    display: none;
 }
 
 .scrBody {
@@ -146,11 +176,12 @@
     column-count: 1;
     clear: both;
 }
+.scrBookCode {
+    display: none;
+}
 .scrBookName {
     string-set: bookname content();
     display: none;
-}
-.scrFootnoteMarker {
 }
 .scrIntroSection {
     text-align: left;
@@ -186,6 +217,10 @@
     margin-top: 8pt;
 }
 
+.See_In_Glossary {
+    color: blue;
+}
+
 span {
     prince-text-replace: "<<" "\201C" ">>" "\201D" "<" "\2018" ">" "\2019";
 }
@@ -195,6 +230,7 @@ span {
     margin-left: 0pt;
 }
 .Title_Main {
+    font-size: 18pt;
     font-weight: bold;	/* cascaded environment */
     font-style: normal;	/* cascaded environment */
     text-align: center;
