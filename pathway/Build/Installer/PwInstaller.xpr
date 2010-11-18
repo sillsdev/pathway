@@ -12,10 +12,12 @@
         <file name="BuildInstallerSE.bat"/>
         <file name="Features.wxs"/>
         <file name="Features7Pw-tpl.wxs"/>
+        <file name="FeaturesCtx-tpl.wxs"/>
         <file name="FeaturesPw-tpl.wxs"/>
         <file name="FileLibrary.xml"/>
         <file name="Files.wxs"/>
         <file name="Files7Pw-tpl.wxs"/>
+        <file name="FilesCtx-tpl.wxs"/>
         <file name="FilesPw-tpl.wxs"/>
         <file name="GenerateFilesSource7Pw.js"/>
         <file name="GenerateFilesSourcePw.js"/>

@@ -28,7 +28,7 @@ namespace SIL.PublishingSolution
         protected ArrayList _graphite = new ArrayList(_numFonts);
         protected Dictionary<string, string> _class2postscript = new Dictionary<string, string>();
         protected Dictionary<string, string> _lang2class = new Dictionary<string, string>();
-        private const string PartialCachePath = "/PwCtx/miniCTX/texmf-mswin/fonts/cache";
+        private const string PartialCachePath = "miniCTX/texmf-mswin/fonts/cache";
 
         public PostscriptLanguage()
         {
@@ -105,7 +105,7 @@ namespace SIL.PublishingSolution
 
         public void SaveCache()
         {
-            var sourceDir = Common.PathCombine(Environment.GetEnvironmentVariable("SystemDrive"), PartialCachePath);
+            var sourceDir = Common.PathCombine(PathwayPath.GetCtxDir(), PartialCachePath);
             var destinationDir = Common.PathCombine(Common.GetAllUserPath(), "cache/" + GetAllFontNames());
             if (!Directory.Exists(destinationDir))
                 FolderTree.Copy(sourceDir,destinationDir);
@@ -116,7 +116,7 @@ namespace SIL.PublishingSolution
             var sourceDir = Common.PathCombine(Common.GetAllUserPath(), "cache/" + GetAllFontNames());
             if (!Directory.Exists(sourceDir))
                 return;
-            var destinationDir = Common.PathCombine(Environment.GetEnvironmentVariable("SystemDrive"), PartialCachePath);
+            var destinationDir = Common.PathCombine(PathwayPath.GetCtxDir(), PartialCachePath);
             FolderTree.Copy(sourceDir, destinationDir);
         }
 

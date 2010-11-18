@@ -28,5 +28,13 @@
 				</Directory>
 			</Directory>
 		</DirectoryRef>
+		<DirectoryRef Id="TARGETDIR">
+			<Component Id="RegistryEntries" Guid="1E85BB00-28F3-405a-B7AC-BEBA4BE4AF44">
+				<Registry Root="HKLM" Action="createKeyAndRemoveKeyOnUninstall" 
+					Key="Software\SIL\PwCtx" />
+				<Registry Root="HKLM" Action="write" 
+					Key="Software\SIL\PwCtx" Name="ConTeXtDir" Type="string" Value="[PwCtxFolder]" />
+			</Component>
+		</DirectoryRef>
 	</Product>
 </Wix>

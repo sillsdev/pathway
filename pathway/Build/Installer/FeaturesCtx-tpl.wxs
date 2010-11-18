@@ -4,6 +4,7 @@
 		<Feature Id="Application" Title="Pathway mini-ConTeXt" Description="TeX version minimized for use with Pathway" Display="expand" Level="3" AllowAdvertise="no">
 			<ComponentRef Id="ReadMeShortcutApp"/>
 			<ComponentRef Id="LicenseShortcutApp"/>
+			<ComponentRef Id="RegistryEntries"/>
 			%(PwCtxFeatures)s
 		</Feature>
 	</Fragment>

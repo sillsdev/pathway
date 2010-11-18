@@ -55,7 +55,7 @@ namespace SIL.PublishingSolution
             {
                 returnValue = true;
             }
-            if (!Directory.Exists(Path.Combine(Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System)), "PwCtx/miniRuby")))
+            if (string.IsNullOrEmpty(PathwayPath.GetCtxDir()))
             {
                 returnValue = false;
             }
@@ -99,7 +99,8 @@ namespace SIL.PublishingSolution
                 SetupSettings(data, dataPath);
                 CreateTexInput(data.ProcessedXhtml, fileName, dataPath);
                 AddImages(Path.GetDirectoryName(data.ProcessedXhtml), dataPath);
-                SetupStartScript(xetexToolFolder);
+                if (!SetupStartScript(xetexToolFolder))
+                    return false;
                 if (!Common.Testing)
                 {
                     SubProcess.Run(xetexToolFolder, "startXPWtool.bat");
@@ -252,10 +253,13 @@ namespace SIL.PublishingSolution
         /// Creates the startXPWtool.bat from the template
         /// </summary>
         /// <param name="deToolFolder">folder for XPWtool</param>
-        protected static void SetupStartScript(string deToolFolder)
+        protected static bool SetupStartScript(string deToolFolder)
         {
-            var sysDrive = Environment.GetEnvironmentVariable("SystemDrive");
-            var xCtxFolder = Common.PathCombine(sysDrive + "/", "PwCtx"); ;
+            var xCtxFolder = PathwayPath.GetCtxDir();
+            if (string.IsNullOrEmpty(xCtxFolder))
+                return false;
+            if (xCtxFolder.EndsWith("\\"))
+                xCtxFolder = xCtxFolder.Substring(0, xCtxFolder.Length - 1);
             _postscriptLanguage.RestoreCache();
             var sub = new Substitution { TargetPath = deToolFolder };
             var map = new Dictionary<string, string>();
@@ -264,6 +268,7 @@ namespace SIL.PublishingSolution
             map["ToolDrive"] = deToolFolder.Substring(0, 1);
             map["ToolFolder"] = deToolFolder;
             sub.FileSubstitute("startXPWtool-tpl.bat", map);
+            return true;
         }
         #endregion SetupStartScript(string deToolFolder)
 

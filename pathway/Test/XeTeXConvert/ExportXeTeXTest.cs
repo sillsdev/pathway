@@ -116,9 +116,11 @@ namespace Test.XeTeXConvert
             string supportTemplate = Common.PathCombine("xetexPathway", ScriptTemplate);
             File.Copy(FileProg(supportTemplate), FileOutput(ScriptTemplate), true);
             string deToolFolder = _outputPath;
-            SetupStartScript(deToolFolder);
-            const string ActualScript = "startXPWtool.bat";
-            TextFileAssert.AreEqualEx(FileExpected(ActualScript), FileOutput(ActualScript), new ArrayList {5, 6});
+            if (SetupStartScript(deToolFolder))
+            {
+                const string ActualScript = "startXPWtool.bat";
+                TextFileAssert.AreEqualEx(FileExpected(ActualScript), FileOutput(ActualScript), new ArrayList { 5, 6 });
+            }
         }
 
         /// <summary>
@@ -401,7 +403,7 @@ namespace Test.XeTeXConvert
         {
             ExportXeTeX target = new ExportXeTeX();
             string inputDataType = "Dictionary";
-            bool expected = true;
+            bool expected = !string.IsNullOrEmpty(PathwayPath.GetCtxDir());
             bool actual;
             actual = target.Handle(inputDataType);
             Assert.AreEqual(expected, actual);
@@ -415,7 +417,7 @@ namespace Test.XeTeXConvert
         {
             ExportXeTeX target = new ExportXeTeX();
             string inputDataType = "Scripture";
-            bool expected = true;
+            bool expected = !string.IsNullOrEmpty(PathwayPath.GetCtxDir());
             bool actual;
             actual = target.Handle(inputDataType);
             Assert.AreEqual(expected, actual);

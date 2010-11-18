@@ -1,5 +1,13 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\ConfigurationTool\ScripturePreview.xhtml" ComponentGuid="7995A725-DC58-44F3-8E76-F36EED3DA45C"/>
+	<File Path="Files\ConfigurationTool\DictionaryPreview.xhtml" ComponentGuid="AD581277-A694-4FA5-87A3-927D2195A895"/>
+	<File Path="Files\ConfigurationTool\Styles\Scripture\Preview\GPS - C5 - 2 Col p2.jpg" ComponentGuid="CA572DE1-C4F0-40F6-AEB7-0498F86B3CE3"/>
+	<File Path="Files\ConfigurationTool\Styles\Scripture\Preview\GPS - C5 - 2 Col p1.jpg" ComponentGuid="5D6B2D29-BE2B-4CC0-9B7F-F11D8F49CB6B"/>
+	<File Path="Files\ConfigurationTool\Styles\Scripture\Preview\GPS - A4 - 2 Col - Charis 11 on 13 p2.jpg" ComponentGuid="B0563D6B-D431-4910-86D9-050EA23EBABB"/>
+	<File Path="Files\ConfigurationTool\Styles\Scripture\Preview\GPS - A4 - 2 Col - Charis 11 on 13 p1.jpg" ComponentGuid="0ED1C886-4306-48BD-81F2-E48D65910129"/>
+	<File Path="Files\ConfigurationTool\Styles\Scripture\Preview\GPS - A4 - 1 Col - Charis 11 on 13 p2.jpg" ComponentGuid="8A202ADD-79BB-4A14-AA34-6CE2B0A27C7D"/>
+	<File Path="Files\ConfigurationTool\Styles\Scripture\Preview\GPS - A4 - 1 Col - Charis 11 on 13 p1.jpg" ComponentGuid="86A47557-5FB2-4468-82FE-B57911124459"/>
 	<File Path="Files\ConfigurationTool\Help\Intellectual_Property.docx" ComponentGuid="1BCE0C03-F784-4FBA-8DCF-4A2B343B5A2F"/>
 	<File Path="Files\PsDll\LogosConvert.pdb" ComponentGuid="91524153-765B-45DB-ACC9-22A405641DEE"/>
 	<File Path="Files\PsDll\LogosConvert.dll.config" ComponentGuid="9991D1BD-C35A-4814-B914-895E3FD93E16"/>
