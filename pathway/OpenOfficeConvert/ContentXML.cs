@@ -2561,6 +2561,9 @@ namespace SIL.PublishingSolution
 
             string normalTargetFile = targetFile;
             string basePath = normalTargetFile.Substring(0, normalTargetFile.LastIndexOf(Path.DirectorySeparatorChar));
+            string picturePath = Common.DirectoryPathReplace(basePath + "/Pictures");
+            if (!Directory.Exists(picturePath))
+                Directory.CreateDirectory(picturePath);
             String toPath = Common.DirectoryPathReplace(basePath + "/Pictures/" + fileName);
             if (File.Exists(fromPath))
             {

@@ -612,6 +612,10 @@ namespace SIL.PublishingSolution
                     _cssProperty = new Dictionary<string, string>();
                     _cssClass[styleAttributeInfo.ClassName] = _cssProperty;
                 }
+                else
+                {
+                    _cssProperty = _cssClass[styleAttributeInfo.ClassName];
+                }
 
                 Dictionary<string, string> getProperty = new Dictionary<string, string>();
                 getProperty = _mapProperty.CreateProperty(styleAttributeInfo);
