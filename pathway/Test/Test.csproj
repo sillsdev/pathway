@@ -204,6 +204,10 @@
     <Compile Include="XmlAssert.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="epubConvert\EmbeddedFontTest.cs" />
+    <Compile Include="epubConvert\ExportepubTest.cs" />
+    <Compile Include="GoBibleConvert\CheckCV_XHTMLTest.cs" />
+    <Compile Include="GoBibleConvert\GoBibleTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConfigurationTool\ConfigurationTool.csproj">
