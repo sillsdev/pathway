@@ -9,7 +9,7 @@ echo.
 echo. Purpose: This utility copies DLLs and other needed files from the SVN 
 echo.         development directory to either the Pathway or FieldWorks 
 echo.         directory. This is similar to the CopyToProgFiles.bat file, but
-echo.         uses environment variables and a parameter (debug | release) to
+echo.         uses environment variables and a parameter (debug or release) to
 echo.         control the input and output directories.
 echo. 
 echo. System environment vars:
@@ -22,10 +22,10 @@ echo.                    e.g., c:\Program Files\SIL\Pathway 7
 echo.
 echo. Batch Parameter:
 echo. 
-echo.  debug | release -> specifies the release to copy over
+echo.  "debug" or "release" : specifies the release to copy over
 echo.
 echo.--------------------------------------------------------------------------
-goto end
+rem goto end
 
 :envCheck
 echo.
@@ -42,6 +42,7 @@ set base=%SVN_DIR%
 set thirdParty=%BASE%\ThirdParty
 if /i "%1"=="debug" goto debugEnv
 goto releaseEnv
+
 :debugEnv
 echo.
 echo. [Debug]
@@ -49,6 +50,7 @@ set dst=%PW_HOME%
 set installBase=%DST%
 set cfg=\bin\Debug
 goto startCopy
+
 :releaseEnv
 echo.
 echo. [Release]
@@ -97,7 +99,6 @@ xcopy %SRC%\PsExport.pdb "%DST%" /y
 xcopy %SRC%\PsTool.pdb "%DST%" /y
 
 :nopdb
-
 xcopy %BASE%\PsSupport\*.* "%DST%" /s /q /y
 
 rem Now copy all the Backends to the Pathway directory instead of to a backends directory.
@@ -106,6 +107,7 @@ rem xcopy %BASE%\PublishingSolutionExe\Bin\Debug\Backends\*.* "%DST%\PathwaySupp
 if /i "%1"=="debug" goto debugConvert
 xcopy %BASE%\ConfigurationTool%cfg%7SE\*Convert.* "%DST%" /y
 goto :doneConvert
+
 :debugConvert
 xcopy %BASE%\ConfigurationTool%cfg%\*Convert.* "%DST%" /y
 
@@ -116,18 +118,20 @@ if Exist "%FW_HOME%\Language Explorer\Configuration" goto FwInstalled
 if "%FwBase%" == "" goto noFw
 xcopy %BASE%\Build\Installer\UtilityCatalogIncludePublishingSolution.xml "%FwBase%\DistFiles\Language Explorer\Configuration" /y
 goto noFw
+
 :FwInstalled
 xcopy %BASE%\Build\Installer\UtilityCatalogIncludePublishingSolution.xml "%FW_HOME%\Language Explorer\Configuration" /y
 :noFw
 
 if not exist "%USERPROFILE%\Application Data\Adobe\InDesign\Version 6.0\en_US\Scripts" goto notxp
 xcopy %BASE%\PsSupport\InDesignFiles\Dictionary\Scripts "%USERPROFILE%\Application Data\Adobe\InDesign\Version 6.0\en_US\Scripts" /s/y
+
 :notxp
 if not exist "%USERPROFILE%\AppData\Roaming\Adobe\InDesign\Version 6.0\en_US\Scripts" goto not7
 xcopy %BASE%\PsSupport\InDesignFiles\Dictionary\Scripts "%USERPROFILE%\AppData\Roaming\Adobe\InDesign\Version 6.0\en_US\Scripts" /s/y
+
 :not7
 :done
-
 echo.
 echo. Registering path...
 echo.--------------------------------------------------------------------------
@@ -135,8 +139,10 @@ set pathext=.reg;%pathext%
 if not exist "%SVN_DIR%\PublishingSolution" goto win32reg
 %BASE%\Build\Installer\Pathway7-64.reg
 goto regdone
+
 :win32reg
 %BASE%\Build\Installer\Pathway7.reg
+
 :regdone
 echo.
 echo. Copy process complete. Have an outstanding day!
