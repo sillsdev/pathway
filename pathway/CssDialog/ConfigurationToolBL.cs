@@ -850,7 +850,7 @@ namespace SIL.PublishingSolution
                             case "embedfonts":
                                 cTool.DdlEmbedFonts.SelectedItem = attribValue;
                                 break;
-                            case "information":
+                            case "description":
                                 cTool.TxtDescription.Text = attribValue;
                                 break;
                             case "publisher":
@@ -868,7 +868,7 @@ namespace SIL.PublishingSolution
                             case "coverage":
                                 cTool.TxtCoverage.Text = attribValue;
                                 break;
-                            case "rights":
+                            case "copyright":
                                 cTool.TxtRights.Text = attribValue;
                                 break;
                             default:
@@ -1501,7 +1501,7 @@ namespace SIL.PublishingSolution
             else
             {
                 preferedName = StyleName;
-                if (StyleName.IndexOf('(') == -1)
+                if (StyleName.IndexOf('(') == -1 || StyleName.IndexOf("(epub)(") == -1)
                 {
                     preferedName = "Copy of " + StyleName;
                 }
@@ -3084,6 +3084,7 @@ namespace SIL.PublishingSolution
 
         public void ConfigurationTool_LoadBL()
         {
+
             _screenMode = ScreenMode.Load;
 
             Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool_Load");

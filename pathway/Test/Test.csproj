@@ -122,6 +122,7 @@
     <Compile Include="ConfigurationTool\ConfigurationToolBLTest.cs" />
     <Compile Include="ConfigurationTool\ConfigurationToolTest.cs" />
     <Compile Include="CssDialog\ContentsTest.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="CssParser\ClassInfoTest.cs" />
     <Compile Include="CssParser\CssTreeTest.cs" />
