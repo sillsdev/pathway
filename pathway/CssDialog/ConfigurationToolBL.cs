@@ -109,7 +109,7 @@ namespace SIL.PublishingSolution
         protected string _lastSelectedLayout = string.Empty;
         //protected string StyleName;
         protected string _selectedStyle;
-        TabPage tabdic = new TabPage();
+        TabPage tabDisplay = new TabPage();
         TabPage tabmob = new TabPage();
         TabPage tabothers = new TabPage();
         protected TraceSwitch _traceOn = new TraceSwitch("General", "Trace level for application");
@@ -1105,10 +1105,13 @@ namespace SIL.PublishingSolution
         protected void SetPropertyTab()
         {
             cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages[1]);
+            //cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabdisplay"]);
             switch (MediaType)
             {
                 case "mobile":
-                    cTool.TabControl1.TabPages.Add(tabmob);
+                    //cTool.TabControl1.TabPages.Add(tabmob);
+                    cTool.TabControl1.TabPages.Insert(1, tabmob);
+                    
                     XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
                     foreach (XmlNode VARIABLE in baseNode1)
                     {
@@ -1171,7 +1174,9 @@ namespace SIL.PublishingSolution
                     SetMobileSummary(null, null);
                     break;
                 case "others":
-                    cTool.TabControl1.TabPages.Add(tabothers);
+                    //cTool.TabControl1.TabPages.Add(tabothers);
+                    cTool.TabControl1.TabPages.Insert(1, tabothers);
+                    
                     XmlNodeList baseNode = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
                     foreach (XmlNode VARIABLE in baseNode)
                     {
@@ -1211,7 +1216,8 @@ namespace SIL.PublishingSolution
                     break;
                 default:
                     // web, paper
-                    cTool.TabControl1.TabPages.Add(tabdic);
+                    //cTool.TabControl1.TabPages.Add(tabDisplay);
+                    cTool.TabControl1.TabPages.Insert(1,tabDisplay);
                     ShowCssSummary();
                     break;
             }
@@ -3079,13 +3085,17 @@ namespace SIL.PublishingSolution
             _screenMode = ScreenMode.Load;
 
             Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool_Load");
-            tabdic = cTool.TabControl1.TabPages[1];
+            //tabDisplay = cTool.TabControl1.TabPages[1];
+            tabDisplay = cTool.TabControl1.TabPages["tabdisplay"];
             if (cTool.TabControl1.TabPages.Count > 2)
             {
-                tabmob = cTool.TabControl1.TabPages[2];
-                tabothers = cTool.TabControl1.TabPages[3];
-                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages[3]);
-                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages[2]);
+                //tabmob = cTool.TabControl1.TabPages[2];
+                //tabothers = cTool.TabControl1.TabPages[3];
+                tabmob = cTool.TabControl1.TabPages["tabmobile"];
+                tabothers = cTool.TabControl1.TabPages["tabothers"];
+
+                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabmobile"]);
+                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabothers"]);
             }
             cTool.BtnMobile.Enabled = false;
             _redoundo = new UndoRedo(cTool.TsUndo, cTool.TsRedo);
@@ -3211,17 +3221,18 @@ namespace SIL.PublishingSolution
 
         public void tabControl1_SelectedIndexChangedBL()
         {
-            if (cTool.TabControl1.SelectedTab.Text == "Display Properties")
-            {
-                txtPageInside_ValidatedBL(cTool.TxtPageInside, null);
-                txtPageOutside_ValidatedBL(cTool.TxtPageOutside, null);
-                txtPageTop_ValidatedBL(cTool.TxtPageTop, null);
-                txtPageBottom_ValidatedBL(cTool.TxtPageBottom, null);
-                txtPageGutterWidth_ValidatedBL(cTool.TxtPageGutterWidth, null);
-            }
-            else if (cTool.TabControl1.SelectedIndex ==1)
+
+            if (cTool.TabControl1.SelectedIndex == 1) // css properties
             {
                 ShowCSSValue();
+                if (cTool.BtnPaper.Enabled && cTool.TabControl1.TabPages[1].Enabled)
+                {
+                    txtPageInside_ValidatedBL(cTool.TxtPageInside, null);
+                    txtPageOutside_ValidatedBL(cTool.TxtPageOutside, null);
+                    txtPageTop_ValidatedBL(cTool.TxtPageTop, null);
+                    txtPageBottom_ValidatedBL(cTool.TxtPageBottom, null);
+                    txtPageGutterWidth_ValidatedBL(cTool.TxtPageGutterWidth, null);
+                }
             }
             else if (cTool.TabControl1.SelectedTab.Text == "Preview")
             {

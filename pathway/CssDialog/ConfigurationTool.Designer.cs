@@ -54,6 +54,8 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
             this.tabDisplay = new System.Windows.Forms.TabPage();
+            this.LblPageNumber = new System.Windows.Forms.Label();
+            this.ddlPageNumber = new System.Windows.Forms.ComboBox();
             this.ddlFileProduceDict = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.ddlVerticalJustify = new System.Windows.Forms.ComboBox();
@@ -116,6 +118,10 @@
             this.lblPublisher = new System.Windows.Forms.Label();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.lblDescription = new System.Windows.Forms.Label();
+            this.tabPreview = new System.Windows.Forms.TabPage();
+            this.btnPrevious = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.picPreview = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lblInfoCaption = new System.Windows.Forms.Label();
             this.txtCss = new System.Windows.Forms.TextBox();
@@ -134,13 +140,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblType = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tabPreview = new System.Windows.Forms.TabPage();
-            this.picPreview = new System.Windows.Forms.PictureBox();
-            this.btnPrevious = new System.Windows.Forms.Button();
-            this.btnNext = new System.Windows.Forms.Button();
-            this.LblPageNumber = new System.Windows.Forms.Label();
-            this.ddlPageNumber = new System.Windows.Forms.ComboBox();
-
             ((System.ComponentModel.ISupportInitialize)(this.stylesGrid)).BeginInit();
             this.toolStripMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -149,6 +148,8 @@
             this.tabMobile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mobileIcon)).BeginInit();
             this.tabOthers.SuspendLayout();
+            this.tabPreview.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
             this.TLPanelOuter.SuspendLayout();
             this.TLPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -156,8 +157,6 @@
             this.TLPanel2.SuspendLayout();
             this.TLPanel3.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.tabPreview.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
             this.SuspendLayout();
             // 
             // stylesGrid
@@ -514,6 +513,27 @@
             this.tabDisplay.TabIndex = 1;
             this.tabDisplay.Text = "Properties";
             this.tabDisplay.UseVisualStyleBackColor = true;
+            // 
+            // LblPageNumber
+            // 
+            this.LblPageNumber.AccessibleName = "LblPageNumber";
+            this.LblPageNumber.Location = new System.Drawing.Point(0, 262);
+            this.LblPageNumber.Name = "LblPageNumber";
+            this.LblPageNumber.Size = new System.Drawing.Size(87, 13);
+            this.LblPageNumber.TabIndex = 98;
+            this.LblPageNumber.Text = "Page Numbers";
+            this.LblPageNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // ddlPageNumber
+            // 
+            this.ddlPageNumber.AccessibleName = "ddlPageNumber";
+            this.ddlPageNumber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlPageNumber.FormattingEnabled = true;
+            this.ddlPageNumber.Location = new System.Drawing.Point(93, 259);
+            this.ddlPageNumber.Name = "ddlPageNumber";
+            this.ddlPageNumber.Size = new System.Drawing.Size(151, 21);
+            this.ddlPageNumber.TabIndex = 97;
+            this.ddlPageNumber.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
             // 
             // ddlFileProduceDict
             // 
@@ -1180,6 +1200,48 @@
             this.lblDescription.Text = "Information";
             this.lblDescription.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // tabPreview
+            // 
+            this.tabPreview.Controls.Add(this.btnPrevious);
+            this.tabPreview.Controls.Add(this.btnNext);
+            this.tabPreview.Controls.Add(this.picPreview);
+            this.tabPreview.Location = new System.Drawing.Point(4, 22);
+            this.tabPreview.Name = "tabPreview";
+            this.tabPreview.Size = new System.Drawing.Size(267, 379);
+            this.tabPreview.TabIndex = 4;
+            this.tabPreview.Text = "Preview";
+            this.tabPreview.UseVisualStyleBackColor = true;
+            // 
+            // btnPrevious
+            // 
+            this.btnPrevious.Enabled = false;
+            this.btnPrevious.Location = new System.Drawing.Point(211, 0);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.Size = new System.Drawing.Size(25, 23);
+            this.btnPrevious.TabIndex = 12;
+            this.btnPrevious.Text = "<";
+            this.btnPrevious.UseVisualStyleBackColor = true;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.Enabled = false;
+            this.btnNext.Location = new System.Drawing.Point(238, 0);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(25, 23);
+            this.btnNext.TabIndex = 11;
+            this.btnNext.Text = ">";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // picPreview
+            // 
+            this.picPreview.Location = new System.Drawing.Point(3, 24);
+            this.picPreview.Name = "picPreview";
+            this.picPreview.Size = new System.Drawing.Size(260, 352);
+            this.picPreview.TabIndex = 0;
+            this.picPreview.TabStop = false;
+            // 
             // label2
             // 
             this.label2.BackColor = System.Drawing.Color.RoyalBlue;
@@ -1422,69 +1484,6 @@
             this.lblType.Text = "Dictionary";
             this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // tabPreview
-            // 
-            this.tabPreview.Controls.Add(this.btnPrevious);
-            this.tabPreview.Controls.Add(this.btnNext);
-            this.tabPreview.Controls.Add(this.picPreview);
-            this.tabPreview.Location = new System.Drawing.Point(4, 22);
-            this.tabPreview.Name = "tabPreview";
-            this.tabPreview.Size = new System.Drawing.Size(267, 379);
-            this.tabPreview.TabIndex = 4;
-            this.tabPreview.Text = "Preview";
-            this.tabPreview.UseVisualStyleBackColor = true;
-            // 
-            // picPreview
-            // 
-            this.picPreview.Location = new System.Drawing.Point(3, 24);
-            this.picPreview.Name = "picPreview";
-            this.picPreview.Size = new System.Drawing.Size(260, 352);
-            this.picPreview.TabIndex = 0;
-            this.picPreview.TabStop = false;
-            // 
-            // btnPrevious
-            // 
-            this.btnPrevious.Enabled = false;
-            this.btnPrevious.Location = new System.Drawing.Point(211, 0);
-            this.btnPrevious.Name = "btnPrevious";
-            this.btnPrevious.Size = new System.Drawing.Size(25, 23);
-            this.btnPrevious.TabIndex = 12;
-            this.btnPrevious.Text = "<";
-            this.btnPrevious.UseVisualStyleBackColor = true;
-            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
-            // 
-            // btnNext
-            // 
-            this.btnNext.Enabled = false;
-            this.btnNext.Location = new System.Drawing.Point(238, 0);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(25, 23);
-            this.btnNext.TabIndex = 11;
-            this.btnNext.Text = ">";
-            this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // LblPageNumber
-            // 
-            this.LblPageNumber.AccessibleName = "LblPageNumber";
-            this.LblPageNumber.Location = new System.Drawing.Point(0, 262);
-            this.LblPageNumber.Name = "LblPageNumber";
-            this.LblPageNumber.Size = new System.Drawing.Size(87, 13);
-            this.LblPageNumber.TabIndex = 98;
-            this.LblPageNumber.Text = "Page Numbers";
-            this.LblPageNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // ddlPageNumber
-            // 
-            this.ddlPageNumber.AccessibleName = "ddlPageNumber";
-            this.ddlPageNumber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlPageNumber.FormattingEnabled = true;
-            this.ddlPageNumber.Location = new System.Drawing.Point(93, 259);
-            this.ddlPageNumber.Name = "ddlPageNumber";
-            this.ddlPageNumber.Size = new System.Drawing.Size(151, 21);
-            this.ddlPageNumber.TabIndex = 97;
-            this.ddlPageNumber.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
-
-            // 
             // ConfigurationTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1514,6 +1513,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.mobileIcon)).EndInit();
             this.tabOthers.ResumeLayout(false);
             this.tabOthers.PerformLayout();
+            this.tabPreview.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picPreview)).EndInit();
             this.TLPanelOuter.ResumeLayout(false);
             this.TLPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -1522,8 +1523,6 @@
             this.TLPanel3.ResumeLayout(false);
             this.TLPanel3.PerformLayout();
             this.panel3.ResumeLayout(false);
-            this.tabPreview.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picPreview)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
