@@ -205,13 +205,13 @@
       <style name="5.8x8.7in Cols 9pt Left" file="GPS22L9.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p2.jpg">
         <description>5.8x8.7in - 2 Col - Left - Charis 9 on 11</description>
       </style>
-      <style name="A4 Cols 11pt" file="Layout_02.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p2.jpg">
+      <style name="A4 Cols 11pt" file="Layout_02.css" approvedBy="GPS" previewfile1="GPS - A4 - 2 Col - Charis 11 on 13 p1.jpg" previewfile2="GPS - A4 - 2 Col - Charis 11 on 13 p2.jpg">
         <description> Two column draft 11pt A4 with drop capital. </description>
       </style>
-      <style name="C5 Cols ApplicationStyles" file="Layout_12.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p2.jpg">
+      <style name="C5 Cols ApplicationStyles" file="Layout_12.css" approvedBy="GPS" previewfile1="GPS - C5 - 2 Col p1.jpg" previewfile2="GPS - C5 - 2 Col p2.jpg">
         <description> Two column C5 output format. </description>
       </style>
-      <style name="A4 11pt draft" file="Layout_01.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p2.jpg">
+      <style name="A4 11pt draft" file="Layout_01.css" approvedBy="GPS" previewfile1="GPS - A4 - 1 Col - Charis 11 on 13 p1.jpg" previewfile2="GPS - A4 - 1 Col - Charis 11 on 13 p2.jpg">
         <description> Single column draft 11pt A4 with drop capital </description>
       </style>
       <!-- style name="Trial2" file="Layout_03.css">

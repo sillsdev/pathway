@@ -2502,7 +2502,7 @@ namespace SIL.PublishingSolution
                     st.ShowDialog();
                     string cssFile = Param.StylePath(FileName);
                     PdftoJpg pd = new PdftoJpg();
-                    fileName = pd.ConvertPdftoJpg(cssFile, true);
+                    fileName = pd.ConvertPdftoJpg(cssFile, true, _loadType);
 
                     if (!Directory.Exists(stylenamePath)) return;
 
@@ -3011,8 +3011,10 @@ namespace SIL.PublishingSolution
                 ShowStyleInGrid(cTool.StylesGrid, _cssNames);
                 SelectRow(cTool.StylesGrid, NewStyleName);
                 WriteCss();
+                cTool.TabControl1.SelectedIndex = 0;
                 ShowInfoValue();
                 cTool.TxtName.Select();
+
                 //EnableToolStripButtons(true);
                 ////AddNewRow();
                 ////SetFocusToName();

@@ -11,7 +11,7 @@ namespace SIL.PublishingSolution
 {
     public class PdftoJpg
     {
-        public string ConvertPdftoJpg(string cssFullFileName,bool fromPreview)
+        public string ConvertPdftoJpg(string cssFullFileName,bool fromPreview, string loadType)
         {
             string cssMergeFullFileName;
             if (fromPreview)
@@ -27,8 +27,9 @@ namespace SIL.PublishingSolution
 
             string PsSupportPath = Path.Combine(Common.LeftString(cssFullFileName, "Pathway"), "Pathway");
             string PsSupportPathfrom = Common.GetApplicationPath();
-            string xhtmlPreviewFilePath = Path.Combine(PsSupportPath , "PreviewXhtml.xhtml");
-            string xhtmlPreviewFile_fromPath = Path.Combine(PsSupportPathfrom, "PreviewXhtml.xhtml");
+            string previewFile = loadType + "Preview.xhtml";
+            string xhtmlPreviewFilePath = Path.Combine(PsSupportPath, previewFile);
+            string xhtmlPreviewFile_fromPath = Path.Combine(PsSupportPathfrom, previewFile);
             if (!File.Exists(xhtmlPreviewFilePath))
             {
                 if(File.Exists(xhtmlPreviewFile_fromPath))
@@ -52,7 +53,8 @@ namespace SIL.PublishingSolution
            
             //ps.DictionaryPath = Common.PathCombine(Path.GetDirectoryName(xhtmlPreviewFilePath),b);
             ps.DictionaryPath = Path.GetDirectoryName(xhtmlPreviewFilePath);
-            ps.ProjectInputType = "Dictionary";
+            //ps.ProjectInputType = "Dictionary";
+            ps.ProjectInputType = loadType;
          
             ExportOpenOffice openOffice = new ExportOpenOffice();
             openOffice.Export(ps);
