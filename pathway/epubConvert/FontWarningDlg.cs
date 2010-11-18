@@ -18,19 +18,18 @@ namespace epubConvert
         {
                     "Abyssinica",
                     "Andika",
-                    "Apparatus",
+                    "Apparatus SIL",
                     "Scheharazade",
                     "Lateef",
-                    "Charis",
+                    "Charis SIL",
                     "Dai Banna",
-                    "Doulos",
+                    "Doulos SIL",
                     "Ezra",
                     "Galatia",
                     "Gentium",
                     "Nuosu",
                     "Padauk",
-                    "SIL IPA Unicode",
-                    "Sophia",
+                    "Sophia Nubian",
                     "Tai Heritage Pro"
         };
 
