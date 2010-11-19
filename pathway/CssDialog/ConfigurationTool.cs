@@ -78,7 +78,7 @@ namespace SIL.PublishingSolution
                 if (!_fromNunit)
                     ValidateXMLVersion(Param.SettingPath);
                 Param.LoadSettings(); // Load StyleSetting.xml
-                _CToolBL.inputTypeBL = Param.Value["InputType"];
+                _CToolBL.inputTypeBL = _CToolBL.LoadInputType();
             }
             else
             {

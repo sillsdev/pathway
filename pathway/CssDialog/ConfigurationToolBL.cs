@@ -465,6 +465,7 @@ namespace SIL.PublishingSolution
                 cTool.BtnScripture.Focus();
                 cTool.LblSenseLayout.Visible = false;
                 cTool.DdlSense.Visible = false;
+                cTool.BtnMobile.Enabled = true;
             }
             else
             {
@@ -473,6 +474,7 @@ namespace SIL.PublishingSolution
                 cTool.BtnDictionary.Focus();
                 cTool.LblSenseLayout.Visible = true;
                 cTool.DdlSense.Visible = true;
+                cTool.BtnMobile.Enabled = false;
             }
         }
 
@@ -1104,6 +1106,9 @@ namespace SIL.PublishingSolution
         /// </summary>
         protected void SetPropertyTab()
         {
+            //if (!(MediaType == "mobile" || MediaType == "others"))
+            //    return;
+
             cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages[1]);
             //cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabdisplay"]);
             switch (MediaType)
@@ -1429,6 +1434,7 @@ namespace SIL.PublishingSolution
                 else
                 {
                     SetSideBar();
+                    SetPropertyTab();
                 }
             }
             catch { }
@@ -1461,6 +1467,58 @@ namespace SIL.PublishingSolution
             catch
             {
             }
+        }
+
+        /// <summary>
+        /// Load InputType from StyleSettings.xml. Ex: Scripture or Dictionary
+        /// </summary>
+        public string LoadInputType()
+        {
+            string inputType = string.Empty;
+            string settingPath = Common.LeftString(Param.Value["OutputPath"], "Pathway");
+            string xmlPath = Common.PathCombine(settingPath, Common.PathCombine("Pathway", "StyleSettings.xml"));
+            if (!File.Exists(xmlPath))
+            {
+                settingPath = Path.GetDirectoryName(Param.SettingPath);
+                xmlPath = Path.Combine(settingPath, "StyleSettings.xml");
+            }
+            if (!File.Exists(xmlPath)) return inputType;
+            XmlDocument xmlDoc = new XmlDocument { XmlResolver = null };
+            xmlDoc.Load(xmlPath);
+
+            string xPath = "//settings/property[@name='InputType']";
+
+            var node = xmlDoc.SelectSingleNode(xPath);
+            if (node != null)
+            {
+                inputType = node.Attributes["value"].Value;
+            }
+            return inputType;
+        }
+
+        /// <summary>
+        /// Save InputType to StyleSettings.xml. Ex: Scripture or Dictionary
+        /// </summary>
+        public void SaveInputType(string inputType)
+        {
+            string settingPath = Common.LeftString(Param.Value["OutputPath"], "Pathway");
+            string xmlPath = Common.PathCombine(settingPath, Common.PathCombine("Pathway", "StyleSettings.xml"));
+            if (!File.Exists(xmlPath))
+            {
+                settingPath = Path.GetDirectoryName(Param.SettingPath);
+                xmlPath = Path.Combine(settingPath, "StyleSettings.xml");
+            }
+
+            XmlDocument xmlDoc = new XmlDocument { XmlResolver = null };
+            xmlDoc.Load(xmlPath);
+            string xPath = "//settings/property[@name='InputType']";
+
+            var node = xmlDoc.SelectSingleNode(xPath);
+            if (node != null)
+            {
+                node.Attributes["value"].Value = inputType;
+            }
+            xmlDoc.Save(xmlPath);
         }
 
         protected void ParseCSS(string cssPath, string loadType)
@@ -2838,6 +2896,7 @@ namespace SIL.PublishingSolution
                 setLastSelectedLayout();
                 WriteMedia();
                 inputTypeBL = "Scripture";
+                //SaveInputType(inputTypeBL);
                 SetInputTypeButton();
                 LoadParam();
                 ClearPropertyTab(cTool.TabDisplay);
@@ -2866,6 +2925,7 @@ namespace SIL.PublishingSolution
                 setLastSelectedLayout();
                 WriteMedia();
                 inputTypeBL = "Dictionary";
+                //SaveInputType(inputTypeBL);
                 SetInputTypeButton();
                 LoadParam();
                 ClearPropertyTab(cTool.TabDisplay);
@@ -2887,6 +2947,7 @@ namespace SIL.PublishingSolution
             {
                 setLastSelectedLayout();
                 setDefaultInputType();
+                SaveInputType(inputTypeBL);
                 WriteCss();
             }
             catch { }
@@ -3100,7 +3161,7 @@ namespace SIL.PublishingSolution
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabmobile"]);
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabothers"]);
             }
-            cTool.BtnMobile.Enabled = false;
+            //cTool.BtnMobile.Enabled = false;
             _redoundo = new UndoRedo(cTool.TsUndo, cTool.TsRedo);
             cTool.MinimumSize = new Size(497, 183);
             cTool.LoadSettings();
@@ -3119,6 +3180,7 @@ namespace SIL.PublishingSolution
                 cTool.BtnScripture.Enabled = false;
                 cTool.BtnScripture.Visible = false;
                 cTool.BtnDictionary.Visible = false;
+                cTool.BtnMobile.Enabled = true;
             }
             SetFocusToName();
 
