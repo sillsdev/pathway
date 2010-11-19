@@ -365,7 +365,7 @@ namespace SIL.PublishingSolution
             {
                 projInfo.ProjectName = Path.GetFileNameWithoutExtension(revFull);
             }
-
+            SetExtraProcessingValue(projInfo);
             Backend.Launch(Destination, projInfo);
         }
 
@@ -378,6 +378,18 @@ namespace SIL.PublishingSolution
             else
             {
                 projInfo.IsReversalExist = Param.Value[Param.ReversalIndex] == "True";
+            }
+        }
+
+        private void SetExtraProcessingValue(PublicationInformation projInfo)
+        {
+            if (_fromNUnit)
+            {
+                projInfo.IsExtraProcessing = _fromNUnit;
+            }
+            else
+            {
+                projInfo.IsExtraProcessing = Param.Value[Param.ExtraProcessing] == "True";
             }
         }
 
@@ -411,6 +423,7 @@ namespace SIL.PublishingSolution
                 projInfo.ProgressBar = pb;
                 projInfo.IsOpenOutput = !Common.Testing;
                 projInfo.ProjectName = Path.GetFileNameWithoutExtension(mainXhtml);
+                SetExtraProcessingValue(projInfo);
                 Backend.Launch(Destination, projInfo);
             }
         }

@@ -34,6 +34,7 @@ namespace SIL.Tool
         private bool _hideFile;
         private bool _isLexiconExist;
         private bool _isReversalExist;
+        private bool _isExtraProcessing;
         private bool _swapHeadword;
         private string _linkedCSS;
         private string _projectMode;
@@ -203,6 +204,12 @@ namespace SIL.Tool
         {
             get { return _isReversalExist; }
             set { _isReversalExist = value; }
+        }
+
+        public bool IsExtraProcessing
+        {
+            get { return _isExtraProcessing; }
+            set { _isExtraProcessing = value; }
         }
 
         public bool IsLexiconSectionExist

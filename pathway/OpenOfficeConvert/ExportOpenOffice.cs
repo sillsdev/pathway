@@ -670,7 +670,7 @@ namespace SIL.PublishingSolution
             // BEGIN Generate Styles.Xml File
             var sXML = new StylesXML();
             Styles styleName = sXML.CreateStyles(projInfo.DefaultCssFileWithPath, strStylePath, projInfo.DefaultXhtmlFileWithPath,
-                                                 false);
+                                                 false, projInfo.IsExtraProcessing);
             //To set Constent variables for User Desire
             //string macroFileName = Common.PathCombine(projInfo.DictionaryPath,Path.GetFileNameWithoutExtension(projInfo.DictionaryPath));
             string fname = projInfo.ProjectName ?? projInfo.DictionaryPath;

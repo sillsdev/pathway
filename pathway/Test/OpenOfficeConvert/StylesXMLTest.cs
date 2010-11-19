@@ -69,7 +69,7 @@ namespace Test.OpenOfficeConvert
         {
             string input = FileInput(file + ".css");
             string output = FileOutput(file + _outputName);
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             string expected = FileExpected(file + _expectedName);
             XmlAssert.AreEqual(expected, output, file + _errorMessage);
@@ -107,7 +107,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             string expected = FileExpected(file + "styles.xml");
             XmlAssert.AreEqual(expected, output, "OxesCSSTest failed in styles.xml");
@@ -932,7 +932,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "xitem_.en";
@@ -962,7 +962,7 @@ namespace Test.OpenOfficeConvert
         {
             string input = FileInput("TD100.css");
             string output = FileOutput("stylesTD100.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "uppercase";
@@ -995,7 +995,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -1016,7 +1016,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -1037,7 +1037,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -1057,7 +1057,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -1078,7 +1078,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -1106,7 +1106,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -1127,7 +1127,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -1156,7 +1156,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter1";
@@ -1207,7 +1207,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -1226,7 +1226,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -1248,7 +1248,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -1278,7 +1278,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -1314,7 +1314,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -1349,7 +1349,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -1388,7 +1388,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -1422,7 +1422,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "entry";
@@ -1443,7 +1443,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -1470,7 +1470,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "a";
@@ -1506,7 +1506,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "a";
@@ -1531,7 +1531,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "xhomographnumber";
@@ -1558,7 +1558,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -1592,7 +1592,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "orphans";
@@ -1614,7 +1614,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "entry";
@@ -1635,7 +1635,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "border";
@@ -1660,7 +1660,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "positionLeft";
@@ -1686,7 +1686,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "unit";
@@ -1868,7 +1868,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "scriptureText.div";
@@ -1898,7 +1898,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             var xd = new XmlDocument();
             xd.Load(output);
@@ -1937,7 +1937,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "CharisSIL";
@@ -1958,7 +1958,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "DoulosSIL";
@@ -1978,7 +1978,7 @@ namespace Test.OpenOfficeConvert
             const string file = "fixed-line-height";
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "entry";
@@ -2000,7 +2000,7 @@ namespace Test.OpenOfficeConvert
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            _stylesXML.CreateStyles(input, output, _errorFile, true, true);
 
             //First Node
             string xpath = "//style:page-layout[@style:name='pm2']";
