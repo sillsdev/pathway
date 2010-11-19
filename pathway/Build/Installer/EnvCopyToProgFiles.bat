@@ -20,9 +20,11 @@ echo.                    e.g., C:\Program Files\SIL\FieldWorks 7
 echo.         PW_HOME -> Pathway installation directory, 
 echo.                    e.g., c:\Program Files\SIL\Pathway 7
 echo.
-echo. Batch Parameter:
+echo. Batch Parameters:
 echo. 
-echo.  "debug" or "release" : specifies the release to copy over
+echo. 1. "debug" or "release" : specifies the release to copy over
+echo. 2. "x86" or "any" : specifies the CPU build to be copied over
+echo.                     (if not specified, the x86 build will be copied)
 echo.
 echo.--------------------------------------------------------------------------
 rem goto end
@@ -40,6 +42,9 @@ echo. Setting environment variables...
 if not exist %SVN_DIR% goto notInEnvVars
 set base=%SVN_DIR%
 set thirdParty=%BASE%\ThirdParty
+if /i "%2"=="any" set CPU=
+if /i "%2"=="x86" set CPU=\x86
+if /i "%2"=="" set CPU=\x86
 if /i "%1"=="debug" goto debugEnv
 goto releaseEnv
 
@@ -48,7 +53,7 @@ echo.
 echo. [Debug]
 set dst=%PW_HOME%
 set installBase=%DST%
-set cfg=\bin\Debug
+set cfg=\bin%CPU%\Debug
 goto startCopy
 
 :releaseEnv
@@ -56,7 +61,7 @@ echo.
 echo. [Release]
 set dst=%FW_HOME%
 set installBase=%DST%
-set cfg=\bin\Release
+set cfg=\bin%CPU%\Release
 goto startCopy
 
 :notInEnvVars
@@ -103,14 +108,6 @@ xcopy %BASE%\PsSupport\*.* "%DST%" /s /q /y
 
 rem Now copy all the Backends to the Pathway directory instead of to a backends directory.
 rem xcopy %BASE%\PublishingSolutionExe\Bin\Debug\Backends\*.* "%DST%\PathwaySupport\Backends" /y /q
-
-if /i "%1"=="debug" goto debugConvert
-xcopy %BASE%\ConfigurationTool%cfg%7SE\*Convert.* "%DST%" /y
-goto :doneConvert
-
-:debugConvert
-xcopy %BASE%\ConfigurationTool%cfg%\*Convert.* "%DST%" /y
-
 
 :doneConvert
 rem the first line here works with the development version the second, the installed version.
