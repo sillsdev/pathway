@@ -685,6 +685,8 @@ namespace SIL.PublishingSolution
                                 case "prince-hyphenate-patterns":
                                 case "showerror":
                                 case "-ps-paper-size":
+                                case "-ps-vertical-justification":
+                                case "visibility":
                                     break;
 
                                 default:

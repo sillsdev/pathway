@@ -170,7 +170,7 @@ namespace Test.OpenOfficeWriter
             Assert.IsTrue(returnValue, "LanguageTest syntax failed in Styles.xml");
         }
 
-
+*/
         ///<summary>
         ///TD100 text-transform syntax in Styles.xml
         /// 
@@ -178,9 +178,10 @@ namespace Test.OpenOfficeWriter
         [Test]
         public void TextTransformTest_Node()
         {
-            string input = FileInput("TD100.css");
-            string output = FileOutput("stylesTD100.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            const string file = "TD100";
+            string input = FileInput(file + ".css");
+            string output = FileOutput(file + "styles.xml");
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "uppercase";
@@ -202,9 +203,27 @@ namespace Test.OpenOfficeWriter
             Assert.IsTrue(returnValue, "TextTransform syntax failed in Styles.xml");
 
         }
-          */
 
-        /*
+        ///<summary>
+        ///TD55 font-Weigth: 700 syntax in Styles.xml
+        /// <summary>
+        /// </summary>      
+        [Test]
+        public void TextFontWeightTestA_Node()
+        {
+            const string file = "TextFontWeightTestA";
+            string input = FileInput(file + ".css");
+            string output = FileOutput(file + "styles.xml");
+            GetCssClass(input, output);
+
+            _validate = new ValidateXMLFile(output);
+            _validate.ClassName = "letter";
+            _validate.ClassProperty.Add("fo:font-weight", "400");
+
+            returnValue = _validate.ValidateNodeAttributesNS(false);
+            Assert.IsTrue(returnValue, "Font-Weight-Test-A syntax failed in Styles.xml");
+        }
+
         ///<summary>
         ///TD55 font-Weigth: 700 syntax in Styles.xml
         /// <summary>
@@ -213,10 +232,9 @@ namespace Test.OpenOfficeWriter
         public void TextFontWeightTestB_Node()
         {
             const string file = "TextFontWeightTestB";
-
             string input = FileInput(file + ".css");
-            string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            string output = FileOutput(file + "styles.xml");
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -234,10 +252,9 @@ namespace Test.OpenOfficeWriter
         public void TextFontWeightTestC_Node()
         {
             const string file = "TextFontWeightTestC";
-
             string input = FileInput(file + ".css");
-            string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            string output = FileOutput(file + "styles.xml");
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -254,10 +271,9 @@ namespace Test.OpenOfficeWriter
         public void TextFontWeightTestD_Node()
         {
             const string file = "TextFontWeightTestD";
-
             string input = FileInput(file + ".css");
-            string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            string output = FileOutput(file + "styles.xml");
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -275,10 +291,9 @@ namespace Test.OpenOfficeWriter
         public void TextFontWeightTestE_Node()
         {
             const string file = "TextFontWeightTestE";
-
             string input = FileInput(file + ".css");
-            string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            string output = FileOutput(file + "styles.xml");
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -303,10 +318,9 @@ namespace Test.OpenOfficeWriter
         public void TextFontStyleTestA_Node()
         {
             const string file = "TextFontStyleTestA";
-
             string input = FileInput(file + ".css");
-            string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            string output = FileOutput(file + "styles.xml");
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -324,10 +338,9 @@ namespace Test.OpenOfficeWriter
         public void TextFontStyleTestB_Node()
         {
             const string file = "TextFontStyleTestB";
-
             string input = FileInput(file + ".css");
-            string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            string output = FileOutput(file + "styles.xml");
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -355,8 +368,8 @@ namespace Test.OpenOfficeWriter
             const string file = "FontFamily";
 
             string input = FileInput(file + ".css");
-            string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            string output = FileOutput(file + "styles.xml");
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter1";
@@ -399,7 +412,7 @@ namespace Test.OpenOfficeWriter
             Assert.IsTrue(returnValue);
 
         }
-         */
+
 
         [Test]
         public void TextAlignTestA_Node()
@@ -408,6 +421,19 @@ namespace Test.OpenOfficeWriter
             const string file = "TextAlignTestA";
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
+            Dictionary<string, Dictionary<string, string>> cssClass = GetCssClass(input, output);
+
+            _validate = new ValidateXMLFile(output);
+            _validate.ClassName = "letter";
+            _validate.ClassProperty.Add("fo:text-align", "right");
+
+            returnValue = _validate.ValidateNodeAttributesNS(true);
+            Assert.IsTrue(returnValue);
+
+        }
+
+        private Dictionary<string, Dictionary<string, string>> GetCssClass(string input, string output)
+        {
             projInfo.DefaultCssFileWithPath = input;
             projInfo.TempOutputFolder = _outputPath;
 
@@ -419,30 +445,10 @@ namespace Test.OpenOfficeWriter
             OOStyles ooStyles = new OOStyles();
 
             idAllClass = ooStyles.CreateStyles(projInfo, cssClass, output);
-
-
-            //_stylesXML.CreateStyles(input, output, _errorFile, true);
-
-            //string expected = FileExpected(file + "styles.xml");
-            //XmlAssert.AreEqual(expected, output, "OxesCSSTest failed in styles.xml");
-
-
-            //const string file = "TextAlignTestA";
-
-            //string input = FileInput(file + ".css");
-            //string output = FileOutput(file + "styles.xml");
-            //_stylesXML.CreateStyles(input, output, _errorFile, true);
-            //output = FileOutput(file + "styles.xml");
-            _validate = new ValidateXMLFile(output);
-            _validate.ClassName = "letter";
-            _validate.ClassProperty.Add("fo:text-align", "right");
-
-            returnValue = _validate.ValidateNodeAttributesNS(true);
-            Assert.IsTrue(returnValue);
-
+            return cssClass;
         }
 
-        /*
+
         [Test]
         public void TextAlignTestB_Node()
         {
@@ -450,7 +456,7 @@ namespace Test.OpenOfficeWriter
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -468,23 +474,23 @@ namespace Test.OpenOfficeWriter
         [Test]
         public void TextFontSizeTestA_Node()
         {
-            const string file = "TextFontSizeTestA";
 
+            const string file = "TextFontSizeTestA";
             string input = FileInput(file + ".css");
-            string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            string output = FileOutput(file + "styles.xml");
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
-            _validate.ClassProperty.Add("fo:font-size", "2in");
-            _validate.ClassProperty.Add("fo:font-size-complex", "2in");
+            _validate.ClassProperty.Add("fo:font-size", "144pt");
+            _validate.ClassProperty.Add("fo:font-size-complex", "144pt");
 
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
 
             _validate.ClassName = "letter1";
-            _validate.ClassProperty.Add("fo:font-size", "5cm");
-            _validate.ClassProperty.Add("fo:font-size-complex", "5cm");
+            _validate.ClassProperty.Add("fo:font-size", "141.7323pt");
+            _validate.ClassProperty.Add("fo:font-size-complex", "141.7323pt");
 
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
@@ -499,10 +505,9 @@ namespace Test.OpenOfficeWriter
         public void TextFontSizeTestB_Node()
         {
             const string file = "TextFontSizeTestB";
-
             string input = FileInput(file + ".css");
-            string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            string output = FileOutput(file + "styles.xml");
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -513,15 +518,15 @@ namespace Test.OpenOfficeWriter
             Assert.IsTrue(returnValue);
 
             _validate.ClassName = "letter1";
-            _validate.ClassProperty.Add("fo:font-size", "1.5em");
-            _validate.ClassProperty.Add("fo:font-size-complex", "1.5em");
+            _validate.ClassProperty.Add("fo:font-size", "150%");
+            _validate.ClassProperty.Add("fo:font-size-complex", "150%");
 
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
 
             _validate.ClassName = "letter2";
-            _validate.ClassProperty.Add("fo:font-size", "1.5em");
-            _validate.ClassProperty.Add("fo:font-size-complex", "1.5em");
+            _validate.ClassProperty.Add("fo:font-size", "150%");
+            _validate.ClassProperty.Add("fo:font-size-complex", "150%");
 
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
@@ -535,10 +540,9 @@ namespace Test.OpenOfficeWriter
         public void TextFontSizeTestC_Node()
         {
             const string file = "TextFontSizeTestC";
-
             string input = FileInput(file + ".css");
-            string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            string output = FileOutput(file + "styles.xml");
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -570,10 +574,9 @@ namespace Test.OpenOfficeWriter
         public void TextFontSizeTestD_Node()
         {
             const string file = "TextFontSizeTestD";
-
             string input = FileInput(file + ".css");
-            string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            string output = FileOutput(file + "styles.xml");
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -597,44 +600,44 @@ namespace Test.OpenOfficeWriter
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
         }
+        /*
 
+                ///<summary>
+                ///TD70 padding-bottom: 9pt; syntax in Styles.xml
+                /// <summary>
+                /// </summary>     
+                ///
+                [Ignore]
+                [Test]
+                public void PaddingBottomTest_Node()
+                {
+                    const string file = "PaddingBottomTest";
 
-        ///<summary>
-        ///TD70 padding-bottom: 9pt; syntax in Styles.xml
-        /// <summary>
-        /// </summary>     
-        ///
-        [Ignore]
-        [Test]
-        public void PaddingBottomTest_Node()
-        {
-            const string file = "PaddingBottomTest";
+                    string input = FileInput(file + ".css");
+                    string output = FileOutput(file + "styles.xml");
+                    _stylesXML.CreateStyles(input, output, _errorFile, true);
 
-            string input = FileInput(file + ".css");
-            string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+                    _validate = new ValidateXMLFile(output);
+                    _validate.ClassName = "letter";
+                    _validate.ClassProperty.Add("fo:font-size", "22pt");
 
-            _validate = new ValidateXMLFile(output);
-            _validate.ClassName = "letter";
-            _validate.ClassProperty.Add("fo:font-size", "22pt");
+                    returnValue = _validate.ValidateNodeAttributesNS(false);
+                    Assert.IsTrue(returnValue);
 
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
+                    //Note: letter1 font-size should not exist, to write it
+                    //_validate.ClassName = "letter1";
+                    //_validate.ClassProperty.Add("fo:font-size", "18pt");
 
-            //Note: letter1 font-size should not exist, to write it
-            //_validate.ClassName = "letter1";
-            //_validate.ClassProperty.Add("fo:font-size", "18pt");
+                    //returnValue = _validate.ValidateNodeAttributesNS(false);
+                    //Assert.IsTrue(returnValue);
 
-            //returnValue = _validate.ValidateNodeAttributesNS(false);
-            //Assert.IsTrue(returnValue);
+                    _validate.ClassName = "letter2";
+                    _validate.ClassProperty.Add("fo:font-size", "6.6pt");
 
-            _validate.ClassName = "letter2";
-            _validate.ClassProperty.Add("fo:font-size", "6.6pt");
-
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-        }
-
+                    returnValue = _validate.ValidateNodeAttributesNS(false);
+                    Assert.IsTrue(returnValue);
+                }
+        */
         ///<summary>
         ///TD81 page-break-before: always syntax in Styles.xml
         /// <summary>
@@ -646,7 +649,7 @@ namespace Test.OpenOfficeWriter
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "entry";
@@ -664,10 +667,9 @@ namespace Test.OpenOfficeWriter
         public void TextFontVariantTestA_Node()
         {
             const string file = "TextFontVariantTestA";
-
             string input = FileInput(file + ".css");
-            string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            string output = FileOutput(file + "styles.xml");
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -688,13 +690,14 @@ namespace Test.OpenOfficeWriter
         /// <summary>
         /// </summary>      
         [Test]
+        [Ignore]
         public void FontWeightBolder_Node()
         {
             const string file = "FontWeightBolder";
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "a";
@@ -730,7 +733,7 @@ namespace Test.OpenOfficeWriter
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "a";
@@ -755,7 +758,7 @@ namespace Test.OpenOfficeWriter
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "xhomographnumber";
@@ -782,7 +785,7 @@ namespace Test.OpenOfficeWriter
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -816,7 +819,7 @@ namespace Test.OpenOfficeWriter
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "orphans";
@@ -838,7 +841,7 @@ namespace Test.OpenOfficeWriter
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "entry";
@@ -852,6 +855,7 @@ namespace Test.OpenOfficeWriter
         /// <summary>
         /// </summary>      
         [Test]
+        [Ignore]
         public void BorderTest_Node()
         {
 
@@ -859,7 +863,7 @@ namespace Test.OpenOfficeWriter
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "border";
@@ -878,13 +882,14 @@ namespace Test.OpenOfficeWriter
         /// <summary>
         /// </summary>      
         [Test]
+        [Ignore]
         public void PositionTest_Node()
         {
             const string file = "Position";
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "positionLeft";
@@ -910,7 +915,7 @@ namespace Test.OpenOfficeWriter
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "unit";
@@ -935,7 +940,7 @@ namespace Test.OpenOfficeWriter
         /// <summary>
         /// </summary>      
         [Test]
-
+        [Ignore]
         public void SinglePageRefTest_Node()
         {
 
@@ -943,7 +948,7 @@ namespace Test.OpenOfficeWriter
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            GetCssClass(input, output);
 
             // Note - single node test
             _validate = new ValidateXMLFile(output);
@@ -994,13 +999,14 @@ namespace Test.OpenOfficeWriter
         /// <summary>
         /// </summary>      
         [Test]
+        [Ignore]
         public void MirroredPageRefTest_Node()
         {
             const string file = "MirroredPageRef";
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            GetCssClass(input, output);
 
             //First Node
             string xpath = "//style:page-layout[@style:name='";
@@ -1092,10 +1098,10 @@ namespace Test.OpenOfficeWriter
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
-            _validate.ClassName = "scriptureText.div";
+            _validate.ClassName = "div.scriptureText";
             _validate.ClassProperty.Add("fo:hyphenation-ladder-count", "1");
 
             returnValue = _validate.ValidateNodeAttributesNS(true);
@@ -1122,7 +1128,7 @@ namespace Test.OpenOfficeWriter
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            GetCssClass(input, output);
 
             var xd = new XmlDocument();
             xd.Load(output);
@@ -1161,7 +1167,7 @@ namespace Test.OpenOfficeWriter
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "CharisSIL";
@@ -1182,7 +1188,7 @@ namespace Test.OpenOfficeWriter
 
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "DoulosSIL";
@@ -1197,12 +1203,13 @@ namespace Test.OpenOfficeWriter
         ///TD-461 (Open Office fixed-line-height: 14pt;)
         ///</summary>      
         [Test]
+        [Ignore]
         public void FixedLineHeightTest_Node()
         {
             const string file = "fixed-line-height";
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "entry";
@@ -1218,13 +1225,13 @@ namespace Test.OpenOfficeWriter
         /// <summary>
         /// </summary>      
         [Test]
+        [Ignore]
         public void HeaderSpace_Node()
         {
             const string file = "HeaderSpace";
-
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
+            GetCssClass(input, output);
 
             //First Node
             string xpath = "//style:page-layout[@style:name='pm2']";
@@ -1245,7 +1252,7 @@ namespace Test.OpenOfficeWriter
             Assert.IsTrue(returnValue);
         }
 
-        #endregion
-         */
+
+
     }
 }

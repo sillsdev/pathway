@@ -261,14 +261,14 @@ namespace SIL.PublishingSolution
 
         private void Widows(string propertyValue)
         {
-            _IDProperty["KeepLastLines"] = propertyValue;
-            AddKeepLinesTogetherProperty();
+            _IDProperty[_propertyKey] = propertyValue;
         }
 
         private void Orphans(string propertyValue)
         {
-            _IDProperty["KeepFirstLines"] = propertyValue;
-            AddKeepLinesTogetherProperty();
+            _IDProperty[_propertyKey] = propertyValue;
+
+            //AddKeepLinesTogetherProperty();
         }
 
         private void AddKeepLinesTogetherProperty()
@@ -296,20 +296,20 @@ namespace SIL.PublishingSolution
 
         public void HyphenateLines(string propertyValue)
         {
-            _IDProperty["HyphenateLadderLimit"] = propertyValue;
+            _IDProperty["hyphenation-ladder-count"] = propertyValue;
         }
         public void HyphenateAfter(string propertyValue)
         {
-            _IDProperty["HyphenateAfterFirst"] = propertyValue;
+            _IDProperty["hyphenation-remain-char-count"] = propertyValue;
         }
         public void HyphenateBefore(string propertyValue)
         {
-            _IDProperty["HyphenateBeforeLast"] = propertyValue;
+            _IDProperty["hyphenation-push-char-count"] = propertyValue;
         }
         public void Hyphens(string propertyValue)
         {
             string value = propertyValue == "none" ? "false" : "true";
-            _IDProperty["Hyphenation"] = value;
+            _IDProperty["hyphenate"] = value;
         }
         public void SimpleProperty(KeyValuePair<string, string> property)
         {
@@ -340,13 +340,15 @@ namespace SIL.PublishingSolution
 
         public void LineHeight(string propertyValue)
         {
-            _propertyKey = "line-height";
-            const bool lineHeight = false;
-            propertyValue = FontHeight(propertyValue, lineHeight);
-            if (propertyValue == null)
-            {
-                _propertyKey = "";
-            }
+            //_propertyKey = "line-height";
+            //const bool lineHeight = false;
+            //propertyValue = FontHeight(propertyValue, lineHeight);
+            //if (propertyValue == null)
+            //{
+            //    _propertyKey = "";
+            //}
+            _IDProperty[_propertyKey] = propertyValue;
+
         }
         public void VerticalAlign(string propertyValue)
         {
@@ -377,7 +379,7 @@ namespace SIL.PublishingSolution
 
         public void TextTransform(string propertyValue)
         {
-            _IDProperty["TextTransform"] = propertyValue;
+            _IDProperty[_propertyKey] = propertyValue;
         }
 
         public void PageBreakBefore(string propertyValue)
@@ -597,15 +599,7 @@ namespace SIL.PublishingSolution
 
         public void FontVariant(string propertyValue)
         {
-            if (propertyValue == "normal")
-            {
-                propertyValue = "Normal";
-            }
-            else if (propertyValue == "small-caps")
-            {
-                propertyValue = "SmallCaps";
-            }
-            _IDProperty["Capitalization"] = propertyValue;
+            _IDProperty[_propertyKey] = propertyValue;
         }
 
         /// <summary>
