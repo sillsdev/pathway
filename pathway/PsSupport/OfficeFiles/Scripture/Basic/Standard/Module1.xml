@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Nov-03-2010 for TD-1634(Turn off non-printing characters before repaginating for macro)
+&apos;Changed On Nov-22-2010 for TD-1693(Headers are missing from odd pages)
 
 &apos; Changed message content from &quot;word&quot; to &quot;book, chapter and / or verse&quot;
 &apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
@@ -357,6 +357,7 @@ Do
 				If strStartChapter &lt;&gt; strEndChapter Then
 					strFirstReference = strFirstReference &amp; &quot;, &quot; &amp; strEndChapter
 				End If	
+				strLastReference = strEndBook &amp; &quot; &quot; &amp; 	strEndChapter
 			Else
 				strFirstReference = strStartBook &amp; &quot; &quot;
 				If strPrevStartChapter &lt;&gt; strStartChapter And strPrevStartChapter &lt; strStartChapter  Then
@@ -372,6 +373,7 @@ Do
 				strLastReference = strEndBook &amp; &quot; ,&quot; &amp; 	strEndChapter
 	
 			End If
+			
 		End If
 		
 	End If
