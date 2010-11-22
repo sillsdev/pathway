@@ -686,6 +686,7 @@ namespace SIL.PublishingSolution
             var cXML = new ContentXML();
             string fileName = Path.Combine(projInfo.DictionaryPath, Path.GetFileName(projInfo.DefaultXhtmlFileWithPath));
             preProcessor.GetTempFolderPath();
+            preProcessor.GetfigureNode();
             preProcessor.ImagePreprocess();
             preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
             if (projInfo.SwapHeadword)

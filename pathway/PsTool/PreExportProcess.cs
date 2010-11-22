@@ -144,7 +144,7 @@ namespace SIL.Tool
             if (!File.Exists(tempFile)) return string.Empty;
 
             // xml image copy
-            var xmldoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true};
+            var xmldoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
             xmldoc.Load(tempFile);
             const string tag = "img";
             XmlNodeList nodeList = xmldoc.GetElementsByTagName(tag);
@@ -193,7 +193,7 @@ namespace SIL.Tool
                 }
                 catch
                 {
-                    tempFolder = Common.PathCombine(Path.GetTempPath(),"SilPathWay" + Path.GetFileNameWithoutExtension(Path.GetTempFileName()));
+                    tempFolder = Common.PathCombine(Path.GetTempPath(), "SilPathWay" + Path.GetFileNameWithoutExtension(Path.GetTempFileName()));
                 }
             }
             Directory.CreateDirectory(tempFolder);
@@ -204,10 +204,10 @@ namespace SIL.Tool
             _xhtmlFileNameWithPath = tempFile;
 
             tempFile = Common.PathCombine(tempFolder, Path.GetFileName(_cssFileNameWithPath));
-            if(File.Exists(_cssFileNameWithPath))
-            File.Copy(Common.DirectoryPathReplace(_cssFileNameWithPath), tempFile, true);
+            if (File.Exists(_cssFileNameWithPath))
+                File.Copy(Common.DirectoryPathReplace(_cssFileNameWithPath), tempFile, true);
             _cssFileNameWithPath = tempFile;
-           
+
         }
 
         public string InsertEmptyXHomographNumber(IDictionary<string, Dictionary<string, string>> cssClass)
@@ -217,11 +217,11 @@ namespace SIL.Tool
                 string OutputFile = OpenFile();
                 string pattern = "<span class=\"headword\" ([^>]+)>[^<]*</[^>]+>";
                 MatchCollection matchs = Regex.Matches(_fileContent.ToString(), pattern);
-                if(matchs.Count == 0)
+                if (matchs.Count == 0)
                 {
                     pattern = "{<span class=\"headword\" ([^>]+)><span class=\"xitem\" ([^>]+)>[^<]*</[^>]+><span class=\"xitem\" ([^>]+)>[^<]*</[^>]+><span class=\"xitem\" ([^>]+)>[^<]*</[^>]+>[^>]+>}|{<span class=\"headword\" ([^>]+)>[^<].+[^>]+>[^<].+[^>]+>[^<].+[^>]+>}";
                     matchs = Regex.Matches(_fileContent.ToString(), pattern);
-                    if(matchs.Count > 0)
+                    if (matchs.Count > 0)
                     {
                         foreach (Match match in matchs)
                         {
@@ -239,18 +239,18 @@ namespace SIL.Tool
                                     _fileContent.Replace(matchText, replaceText);
                                 }
                             }
-                            
+
                         }
                     }
                 }
                 else
                 {
-                foreach (Match match in matchs)
-                {
-                    string matchText = match.Value;
-                    const string replace = "<span class=\"xhomographnumber\"> </span>";
-                    string replaceText = match.Value.Replace("</span>", "") + replace + "</span>";
-                    _fileContent.Replace(matchText, replaceText);
+                    foreach (Match match in matchs)
+                    {
+                        string matchText = match.Value;
+                        const string replace = "<span class=\"xhomographnumber\"> </span>";
+                        string replaceText = match.Value.Replace("</span>", "") + replace + "</span>";
+                        _fileContent.Replace(matchText, replaceText);
                     }
                 }
                 var writer = new StreamWriter(OutputFile);
@@ -263,20 +263,20 @@ namespace SIL.Tool
 
         public string ReplaceInvalidTagtoSpan()
         {
-                string OutputFile = OpenFile();
-                const string pattern = "_AllComplexFormEntryBackRefs|LexEntryRef_PrimaryLexemes";
-                MatchCollection matchs = Regex.Matches(_fileContent.ToString(), pattern);
-                foreach (Match match in matchs)
-                {
-                    string matchText = match.Value;
-                    const string replaceText = "span";
-                    //const string replaceText = "";
-                    _fileContent.Replace(matchText, replaceText);
-                }
-                var writer = new StreamWriter(OutputFile);
-                writer.Write(_fileContent);
-                writer.Close();
-                _xhtmlFileNameWithPath = OutputFile;
+            string OutputFile = OpenFile();
+            const string pattern = "_AllComplexFormEntryBackRefs|LexEntryRef_PrimaryLexemes";
+            MatchCollection matchs = Regex.Matches(_fileContent.ToString(), pattern);
+            foreach (Match match in matchs)
+            {
+                string matchText = match.Value;
+                const string replaceText = "span";
+                //const string replaceText = "";
+                _fileContent.Replace(matchText, replaceText);
+            }
+            var writer = new StreamWriter(OutputFile);
+            writer.Write(_fileContent);
+            writer.Close();
+            _xhtmlFileNameWithPath = OutputFile;
 
             return _xhtmlFileNameWithPath;
         }
@@ -297,7 +297,7 @@ namespace SIL.Tool
             string OutputFile = _xhtmlFileNameWithPath;
             var reader = new StreamReader(OutputFile, Encoding.UTF8);
             _fileContent.Append(reader.ReadToEnd());
-                reader.Close();
+            reader.Close();
             return OutputFile;
         }
 
@@ -305,7 +305,7 @@ namespace SIL.Tool
         /// Modify <body> tag as <body xml:space="preserve">
         /// </summary>
         public string PreserveSpace()
-                {
+        {
             FileStream fs = new FileStream(_xhtmlFileNameWithPath, FileMode.Open);
             StreamReader stream = new StreamReader(fs);
 
@@ -327,8 +327,8 @@ namespace SIL.Tool
                         //line = line.Replace(">", @" xml:space=""preserve"">");
                         line = line.Replace("<body", @" <body xml:space=""preserve""  ");
                         replace = false;
+                    }
                 }
-            }
                 sw2.WriteLine(line);
             }
             sw2.Close();
@@ -440,7 +440,7 @@ namespace SIL.Tool
                         if (entryLang == null)
                         {
                             newNode = GetNode(node1, "definition");
-                            if(newNode != null)
+                            if (newNode != null)
                                 if (newNode.Attributes != null && newNode.Attributes["lang"] != null)
                                 {
                                     definitionLang = newNode.Attributes["lang"].Value;
@@ -460,16 +460,82 @@ namespace SIL.Tool
             return _xhtmlFileNameWithPath;
         }
 
+        public string GetfigureNode()
+        {
+            var xDoc = new XmlDocument { XmlResolver = null };
+            xDoc.Load(_xhtmlFileNameWithPath);
+            XmlNodeList nodeList = xDoc.GetElementsByTagName("figure");
+            if (nodeList.Count > 0)
+            {
+                int counter = nodeList.Count;
+                for (int i = 0; i < counter; i++)
+                {
+                    XmlNode oldChild = nodeList[0];
+                    if (oldChild == null) break;
+                    string src = oldChild.Attributes["file"].Value;
+                    string cap = oldChild.InnerText;
+                    string refer = oldChild.Attributes["ref"].Value;
+                    string pos = oldChild.Attributes["size"].Value;
+                    string alt = oldChild.Attributes["desc"].Value;
+                    if (pos == "span")
+                        pos = "pictureCenter";
+                    else
+                        pos = "pictureRight";
+                    //<div class="pictureRight" id="a2"  >
+                    //   <img id ="b2" src="figures\WA03904b.tif" alt="alternative"/>
+                    //   <div class="caption">
+                    //     Mbitebí ámʋ fɛ́ɛ́ bɔkʋsʋ́ nywɛ́ amʋ́ nkandɩ́ɛ. (Mateo 25:7)
+                    //   </div>
+                    // </div>
+                    XmlNode newNode = xDoc.CreateElement("div");
+                    XmlAttribute xmlAttribute = xDoc.CreateAttribute("class");
+                    newNode.Attributes.Append(xmlAttribute);
+
+                    xmlAttribute = xDoc.CreateAttribute("id");
+                    xmlAttribute.Value = "i1";
+                    newNode.Attributes.Append(xmlAttribute);
+
+                    XmlNode newNodeImg = xDoc.CreateElement("img");
+                    xmlAttribute = xDoc.CreateAttribute("src");
+                    xmlAttribute.Value = "figures\\" + src;
+                    newNodeImg.Attributes.Append(xmlAttribute);
+
+                    xmlAttribute = xDoc.CreateAttribute("id");
+                    xmlAttribute.Value = "i2";
+                    newNodeImg.Attributes.Append(xmlAttribute);
+
+                    xmlAttribute = xDoc.CreateAttribute("alt");
+                    xmlAttribute.Value = alt;
+                    newNodeImg.Attributes.Append(xmlAttribute);
+
+                    newNode.AppendChild(newNodeImg);
+
+                    XmlNode newNodeDiv = xDoc.CreateElement("div");
+                    xmlAttribute = xDoc.CreateAttribute("class");
+                    xmlAttribute.Value = pos;  // postition class
+                    newNodeDiv.Attributes.Append(xmlAttribute);
+                    newNodeDiv.InnerText = cap + "(" + refer + ")";
+
+                    newNode.AppendChild(newNodeDiv);
+
+                    oldChild.ParentNode.ReplaceChild(newNode, oldChild);
+                }
+                xDoc.Save(_xhtmlFileNameWithPath);
+            }
+            xDoc = null;
+            return _xhtmlFileNameWithPath;
+        }
+
         private XmlNode GetNode(XmlNode node, string className)
         {
-            if (isNodeFound) return returnNode; 
+            if (isNodeFound) return returnNode;
 
             foreach (XmlNode ChildNode in node)
             {
                 if (ChildNode.HasChildNodes)
                 {
                     GetNode(ChildNode, className);
-                    if (isNodeFound) return returnNode; 
+                    if (isNodeFound) return returnNode;
                 }
                 if (ChildNode.Attributes != null && ChildNode.Attributes["class"] != null)
                 {
@@ -507,7 +573,7 @@ namespace SIL.Tool
                     {
                         foreach (XmlNode chapterNode in item)
                         {
-                            if(chapterNode.Attributes == null) return;
+                            if (chapterNode.Attributes == null) return;
                             var chapter = chapterNode.Attributes.GetNamedItem("class");
                             if (chapter != null && chapter.Value.ToLower() == "chapter_number")
                             {
