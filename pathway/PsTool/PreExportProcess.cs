@@ -467,6 +467,11 @@ namespace SIL.Tool
             XmlNodeList nodeList = xDoc.GetElementsByTagName("figure");
             if (nodeList.Count > 0)
             {
+                //object keyValue;
+                //var gotKey = RegistryHelperLite.RegEntryExists(RegistryHelperLite.ParatextKey, "Settings_Directory", "", out keyValue);
+                //string paratextDir = "";
+                //if (gotKey)
+                //    paratextDir = (string) keyValue;
                 int counter = nodeList.Count;
                 for (int i = 0; i < counter; i++)
                 {

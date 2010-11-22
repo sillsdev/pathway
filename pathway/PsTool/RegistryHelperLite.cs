@@ -103,6 +103,24 @@ namespace SIL.PublishingSolution
 			    return silKey;
 			}
 		}
-
+		/// ------------------------------------------------------------------------------------
+		/// <summary>
+		/// Gets the registry key for the Paratext application from the local machine
+		/// settings. This is 'HKLM\Software\ScrChecks\1.0'
+		/// NOTE: This key is not opened for write access because it will fail on 
+		/// non-administrator logins.
+		/// </summary>
+		/// ------------------------------------------------------------------------------------
+        public static RegistryKey ParatextKey
+        {
+            get
+            {
+                RegistryKey softwareKey = Registry.LocalMachine.OpenSubKey("software");
+                var scrChecksKey = softwareKey.OpenSubKey(@"ScrChecks\1.0");
+                if (scrChecksKey == null)
+                    scrChecksKey = softwareKey.OpenSubKey(@"Wow6432Node\ScrChecks\1.0");
+                return scrChecksKey;
+            }
+        }
 	}
 }
