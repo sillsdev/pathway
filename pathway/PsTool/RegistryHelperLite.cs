@@ -15,7 +15,7 @@ using System;
 using System.Diagnostics;
 using Microsoft.Win32;
 
-namespace SIL.PublishingSolution
+namespace SIL.Tool
 {
 	class RegistryHelperLite
 	{

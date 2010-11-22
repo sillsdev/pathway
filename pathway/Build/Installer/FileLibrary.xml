@@ -1,5 +1,13 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\PathwaySupport\ScripturePreview.xhtml" ComponentGuid="9C1654F8-B8A1-4803-A336-D3E709144959"/>
+	<File Path="Files\PathwaySupport\DictionaryPreview.xhtml" ComponentGuid="152DC34B-BB98-4D15-8429-2CE18FD13354"/>
+	<File Path="Files\PathwaySupport\Styles\Scripture\Preview\GPS - C5 - 2 Col p2.jpg" ComponentGuid="E74C7BEE-A5E9-44AB-9672-F0B4DB5A0286"/>
+	<File Path="Files\PathwaySupport\Styles\Scripture\Preview\GPS - C5 - 2 Col p1.jpg" ComponentGuid="62991BD5-34F6-41F4-BB2D-B2BB8788B384"/>
+	<File Path="Files\PathwaySupport\Styles\Scripture\Preview\GPS - A4 - 2 Col - Charis 11 on 13 p2.jpg" ComponentGuid="9B398B1B-41F4-4D7E-9551-F3EBB9B1F4E4"/>
+	<File Path="Files\PathwaySupport\Styles\Scripture\Preview\GPS - A4 - 2 Col - Charis 11 on 13 p1.jpg" ComponentGuid="38541A48-536D-439E-883A-720A62CFD976"/>
+	<File Path="Files\PathwaySupport\Styles\Scripture\Preview\GPS - A4 - 1 Col - Charis 11 on 13 p2.jpg" ComponentGuid="90DCB3D8-B848-4B5E-8A1F-CA906F5A536A"/>
+	<File Path="Files\PathwaySupport\Styles\Scripture\Preview\GPS - A4 - 1 Col - Charis 11 on 13 p1.jpg" ComponentGuid="ED9F58B4-3BDC-4634-A8B1-CCB9284F9170"/>
 	<File Path="Files\ConfigurationTool\ScripturePreview.xhtml" ComponentGuid="7995A725-DC58-44F3-8E76-F36EED3DA45C"/>
 	<File Path="Files\ConfigurationTool\DictionaryPreview.xhtml" ComponentGuid="AD581277-A694-4FA5-87A3-927D2195A895"/>
 	<File Path="Files\ConfigurationTool\Styles\Scripture\Preview\GPS - C5 - 2 Col p2.jpg" ComponentGuid="CA572DE1-C4F0-40F6-AEB7-0498F86B3CE3"/>

@@ -18,7 +18,7 @@ namespace SIL.Tool
 {
     /// ----------------------------------------------------------------------------------------
     /// <summary>
-    ///
+    /// Get the Path names that were created by the installer in the registry
     /// </summary>
     /// ----------------------------------------------------------------------------------------
     public class PathwayPath
@@ -27,12 +27,35 @@ namespace SIL.Tool
         /// <summary>
         /// Gets the directory for the Pathway application.
         /// </summary>
+        /// <returns>
+        /// name or the directory or string.Empty if the directory name isn't in the registry.
+        /// </returns>
         /// ------------------------------------------------------------------------------------
         public static string GetPathwayDir()
         {
             var pathwayDir = Path.GetDirectoryName(Application.ExecutablePath);
             Common.SupportFolder = Directory.Exists(Path.Combine(pathwayDir, "PathwaySupport")) ? "PathwaySupport" : "";
             return pathwayDir;
+        }
+
+        /// ------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets the directory for the ConTeXt software for the XeTeX back end.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// name or the directory or string.Empty if the directory name isn't in the registry.
+        /// </returns>
+        /// ------------------------------------------------------------------------------------
+        public static string GetCtxDir()
+        {
+            object regObj;
+            if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.CompanyKeyLocalMachine,
+                                                  "PwCtx", "ConTeXtDir", out regObj))
+            {
+                return (string) regObj;
+            }
+            return "";
         }
     }
 }

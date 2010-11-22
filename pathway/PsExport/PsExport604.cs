@@ -140,13 +140,17 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// Combines all css files into one and adds expected css to beginning
         /// </summary>
-        /// <param name="outputFullName">Name used to caluculatte default css name</param>
+        /// <param name="outputFullName">Name used to calculate default css name</param>
         /// <param name="outDir">where results will be stored</param>
         /// <param name="cssFullName">name and path of css file</param>
         /// <returns></returns>
         public string GetFluffedCssFullName(string outputFullName, string outDir, string cssFullName)
         {
             var mc = new MergeCss();
+            string fluffedCssFullName;
+
+            try
+            {
             string myCss = Common.PathCombine(outDir, Path.GetFileName(cssFullName));
             if (cssFullName != myCss)
                 File.Copy(cssFullName, myCss, true);
@@ -155,9 +159,14 @@ namespace SIL.PublishingSolution
             Common.FileInsertText(myCss, expCssLine);
             string outputCSSFileName = "merged" + expCss;
             var tmpCss = mc.Make(myCss, outputCSSFileName);
-            var fluffedCssFullName = Common.PathCombine(outDir, Path.GetFileName(tmpCss));
+                fluffedCssFullName = Common.PathCombine(outDir, Path.GetFileName(tmpCss));
             File.Copy(tmpCss, fluffedCssFullName, true);
             File.Delete(tmpCss);
+            }
+            catch (Exception)
+            {
+                fluffedCssFullName = string.Empty;
+            }
             return fluffedCssFullName;
         }
 
@@ -358,7 +367,7 @@ namespace SIL.PublishingSolution
             {
                 projInfo.ProjectName = Path.GetFileNameWithoutExtension(revFull);
             }
-
+            SetExtraProcessingValue(projInfo);
             Backend.Launch(Destination, projInfo);
         }
 
@@ -371,6 +380,18 @@ namespace SIL.PublishingSolution
             else
             {
                 projInfo.IsReversalExist = Param.Value[Param.ReversalIndex] == "True";
+            }
+        }
+
+        private void SetExtraProcessingValue(PublicationInformation projInfo)
+        {
+            if (_fromNUnit)
+            {
+                projInfo.IsExtraProcessing = _fromNUnit;
+            }
+            else
+            {
+                projInfo.IsExtraProcessing = Param.Value[Param.ExtraProcessing] == "True";
             }
         }
 
@@ -404,6 +425,7 @@ namespace SIL.PublishingSolution
                 projInfo.ProgressBar = pb;
                 projInfo.IsOpenOutput = !Common.Testing;
                 projInfo.ProjectName = Path.GetFileNameWithoutExtension(mainXhtml);
+                SetExtraProcessingValue(projInfo);
                 Backend.Launch(Destination, projInfo);
             }
         }
