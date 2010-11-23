@@ -11,11 +11,8 @@
 // File: PathwayPath.cs
 // Responsibility: Trihus
 // ---------------------------------------------------------------------------------------------
-using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
-using SIL.PublishingSolution;
-
 
 namespace SIL.Tool
 {
