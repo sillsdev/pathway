@@ -286,7 +286,7 @@ namespace TestBed
 
         private void Btn_InputPath_Click(object sender, EventArgs e)
         {
-            txtInputPath.Text = GetFilePath("XHTML Files|*.xhtml");
+            txtInputPath.Text = GetFilePath("XHTML Files|*.xhtml|XML Files|*.xml");
             txtCSSInput.Text = Path.ChangeExtension(txtInputPath.Text, "css");
         }
 
@@ -526,6 +526,16 @@ namespace TestBed
 
             var actual = target.Export(projInfo);
         }
+
+        private void btnParaText_Click(object sender, EventArgs e)
+        {
+            ParatextPathwayLink paraText = new ParatextPathwayLink("MyprojName", "MydatabaseName", "en", "en", "Sankar");
+            XmlDocument usfxDoc = new XmlDocument();
+            usfxDoc.Load(txtInputPath.Text);
+            paraText.ExportToPathway(usfxDoc);
+        }
+
+
     }
     
 }

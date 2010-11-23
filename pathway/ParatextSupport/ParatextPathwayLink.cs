@@ -71,6 +71,7 @@ namespace SIL.PublishingSolution
 		/// </summary>
 		public void ExportToPathway(XmlDocument usfxDoc)
 		{
+//usfxDoc.Save("d:\\usfxDoc.xml");
 			if (string.IsNullOrEmpty(usfxDoc.InnerText))
 			{
 				// TODO: Localize string

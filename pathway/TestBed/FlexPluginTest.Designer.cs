@@ -44,6 +44,8 @@
             this.txtInputPath = new System.Windows.Forms.TextBox();
             this.Btn_InputPath = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnParaText = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.chkPage = new System.Windows.Forms.CheckBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.radDictionary = new System.Windows.Forms.RadioButton();
@@ -56,7 +58,6 @@
             this.btnFileSizeZero = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -162,9 +163,9 @@
             // InDesign
             // 
             this.InDesign.AccessibleName = "BtnFlexTest";
-            this.InDesign.Location = new System.Drawing.Point(436, 128);
+            this.InDesign.Location = new System.Drawing.Point(476, 128);
             this.InDesign.Name = "InDesign";
-            this.InDesign.Size = new System.Drawing.Size(118, 28);
+            this.InDesign.Size = new System.Drawing.Size(78, 28);
             this.InDesign.TabIndex = 49;
             this.InDesign.Text = "&InDesign ";
             this.InDesign.UseVisualStyleBackColor = true;
@@ -218,6 +219,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnParaText);
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Controls.Add(this.chkPage);
             this.groupBox1.Controls.Add(this.panel3);
@@ -233,12 +235,34 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Export";
             // 
+            // btnParaText
+            // 
+            this.btnParaText.AccessibleName = "BtnFlexTest";
+            this.btnParaText.Location = new System.Drawing.Point(141, 128);
+            this.btnParaText.Name = "btnParaText";
+            this.btnParaText.Size = new System.Drawing.Size(74, 28);
+            this.btnParaText.TabIndex = 57;
+            this.btnParaText.Text = "&ParaText";
+            this.btnParaText.UseVisualStyleBackColor = true;
+            this.btnParaText.Click += new System.EventHandler(this.btnParaText_Click);
+            // 
+            // button6
+            // 
+            this.button6.AccessibleName = "BtnLogos";
+            this.button6.Location = new System.Drawing.Point(221, 128);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(78, 28);
+            this.button6.TabIndex = 56;
+            this.button6.Text = "&Logos";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click_1);
+            // 
             // chkPage
             // 
             this.chkPage.AutoSize = true;
             this.chkPage.Checked = true;
             this.chkPage.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPage.Location = new System.Drawing.Point(270, 193);
+            this.chkPage.Location = new System.Drawing.Point(393, 193);
             this.chkPage.Name = "chkPage";
             this.chkPage.Size = new System.Drawing.Size(118, 17);
             this.chkPage.TabIndex = 55;
@@ -249,7 +273,7 @@
             // 
             this.panel3.Controls.Add(this.radDictionary);
             this.panel3.Controls.Add(this.radScripture);
-            this.panel3.Location = new System.Drawing.Point(241, 162);
+            this.panel3.Location = new System.Drawing.Point(364, 162);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(174, 25);
             this.panel3.TabIndex = 54;
@@ -279,9 +303,9 @@
             // button5
             // 
             this.button5.AccessibleName = "BtnFlexTest";
-            this.button5.Location = new System.Drawing.Point(175, 128);
+            this.button5.Location = new System.Drawing.Point(305, 128);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(118, 28);
+            this.button5.Size = new System.Drawing.Size(73, 28);
             this.button5.TabIndex = 53;
             this.button5.Text = "&Builder";
             this.button5.UseVisualStyleBackColor = true;
@@ -292,7 +316,7 @@
             this.button4.AccessibleName = "BtnFlexTest";
             this.button4.Location = new System.Drawing.Point(40, 128);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(129, 28);
+            this.button4.Size = new System.Drawing.Size(95, 28);
             this.button4.TabIndex = 52;
             this.button4.Text = "&New OpenOffice";
             this.button4.UseVisualStyleBackColor = true;
@@ -301,9 +325,9 @@
             // button1
             // 
             this.button1.AccessibleName = "BtnFlexTest";
-            this.button1.Location = new System.Drawing.Point(312, 128);
+            this.button1.Location = new System.Drawing.Point(384, 128);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(118, 28);
+            this.button1.Size = new System.Drawing.Size(86, 28);
             this.button1.TabIndex = 51;
             this.button1.Text = "&OpenOffice";
             this.button1.UseVisualStyleBackColor = true;
@@ -367,17 +391,6 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button6
-            // 
-            this.button6.AccessibleName = "BtnLogos";
-            this.button6.Location = new System.Drawing.Point(41, 162);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(128, 28);
-            this.button6.TabIndex = 56;
-            this.button6.Text = "&Logos";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click_1);
-            // 
             // FlexPluginTest
             // 
             this.AcceptButton = this.button1;
@@ -437,5 +450,6 @@
         private System.Windows.Forms.RadioButton radDictionary;
         private System.Windows.Forms.RadioButton radScripture;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button btnParaText;
     }
 }
