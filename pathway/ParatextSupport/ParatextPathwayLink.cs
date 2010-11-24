@@ -31,6 +31,11 @@ namespace SIL.PublishingSolution
 		/// <param name="userName">Name of the user.</param>
 		public ParatextPathwayLink(string projName, string databaseName, string ws, string userWs, string userName)
 		{
+            if (ws == "en")
+            {
+                ws = "xxx";
+            }
+
 			m_databaseName = databaseName;
 
 			// Set parameters for the XSLT.
@@ -71,7 +76,10 @@ namespace SIL.PublishingSolution
 		/// </summary>
 		public void ExportToPathway(XmlDocument usfxDoc)
 		{
-//usfxDoc.Save("d:\\usfxDoc.xml");
+            //// TestBed Code
+            //// Save Paratext usfxDoc file.
+            // usfxDoc.Save("d:\\usfxDoc.xml");
+
 			if (string.IsNullOrEmpty(usfxDoc.InnerText))
 			{
 				// TODO: Localize string
