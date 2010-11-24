@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Nov-22-2010 for TD-1693(Headers are missing from odd pages)
+&apos;Changed On Nov-24-2010 for TD-1691(Parallel_Passage_Reference and Section_Head should be marked &quot;Keep with next&quot; after macro is run)
 
-&apos; Changed message content from &quot;word&quot; to &quot;book, chapter and / or verse&quot;
+&apos; Handled &quot;Keep with next&quot;
 &apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
 Const LASTGUIDESTYLE =  &quot;GuideR&quot;
+
 &apos;Const ENTRYPARASTYLE =  &quot;Paragraph_scrSection_scrBook&quot; &apos;&quot;first_section_scriptureText&quot; &apos;&quot;entry_letData&quot;
 Const ENTRYPARASTYLE =  &quot;scrBook&quot; &apos; &quot;Paragraph_scrSection_scrBook&quot;
 &apos;Declaration of Reference Variables
@@ -235,6 +236,7 @@ mytime = now
 AlingOverlappingImages()
 
 RemoveOldGuides()
+KeepNextParagraph()
 
 GetLastParagraph
 
@@ -745,6 +747,81 @@ Sub RemoveOldGuides
 End Sub
 
 
+&apos;This procedure push the Section Header and Parallel_Passage_Reference, if letter found in last paragraph of the current page.
+Sub KeepNextParagraph 
+On Error GoTo MyError:
+Dim OldPage, StyleFirstName
+OldPage = 0
+	ThisComponent.currentController.getViewCursor().jumpToPage(2)
+oDoc = ThisComponent 
+oVC = oDoc.CurrentController.getViewCursor 
+oVC.gotoStart(false) 
+Do 
+	page = oVC.getPage
+	if page = OldPage Then 
+		Exit sub
+	End If	
+	oVC.jumpToEndOfPage 
+
+	Last = oDoc.Text.createTextCursorByRange(oVC) 
+	Last.gotoStartOfParagraph(false)
+	Last.gotoEndOfParagraph(true) 
+	&apos;LastParagraph(page) = Last.String
+
+	&apos;If Len(Trim(Last.String)) &gt; 0 Then
+		StyleFirstName = GetStyleName(LCase(Last.ParaStyleName))
+		If StyleFirstName = &quot;sectionhead&quot; Or StyleFirstName = &quot;parallelpassagereference&quot; Then
+			Call PushToNextPage(StyleFirstName)
+			&apos;if page = 46 then
+				If StyleFirstName = &quot;parallelpassagereference&quot; Then
+					oVC.jumpToEndOfPage 
+					Last = oDoc.Text.createTextCursorByRange(oVC) 
+					Last.gotoStartOfParagraph(false)
+					Last.gotoEndOfParagraph(true) 
+					StyleFirstName = GetStyleName(LCase(Last.ParaStyleName))
+					If StyleFirstName = &quot;sectionhead&quot; Then
+						Call PushToNextPage(StyleFirstName)
+					End If
+				End IF
+			&apos;end if			
+			ThisComponent.currentController.getViewCursor().jumpToPage(page)
+		End If
+	&apos;End If	
+	OldPage = page
+Loop While oVC.jumpToNextPage 
+
+Exit Sub
+MyError:
+	&apos;Msgbox &quot;Sorry! Could not update the Guide Words.&quot; , 0 + 64,  &quot;Update Reference&quot;	 
+End Sub
+
+&apos;This procedure called from KeepNextParagraph
+Sub PushToNextPage(StyleFirstName)
+	document   = ThisComponent.CurrentController.Frame
+	dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;)
+	
+	If StyleFirstName = &quot;parallelpassagereference&quot; Then
+		dispatcher.executeDispatch(document, &quot;.uno:GoToPrevPara&quot;, &quot;&quot;, 0, Array())
+	Else
+		dispatcher.executeDispatch(document, &quot;.uno:GotoStartOfPara&quot;, &quot;&quot;, 0, Array())
+	End If
+	
+	dispatcher.executeDispatch(document, &quot;.uno:InsertPara&quot;, &quot;&quot;, 0, Array())
+	&apos;If StyleFirstName = &quot;parallelpassagereference&quot; Then
+		&apos;dispatcher.executeDispatch(document, &quot;.uno:InsertPara&quot;, &quot;&quot;, 0, Array())
+	&apos;End If	
+End Sub
+
+&apos;This function returns first styleName from the StylesTree (entry~letData)
+Function GetStyleName(StylesTree)
+	Dim arrStyles
+	arrStyles = split(StylesTree,&quot;_&quot;)
+	If(Ubound(arrStyles) &gt; 0) Then
+		GetStyleName = arrStyles(0)
+	Else
+		GetStyleName = &quot;&quot;
+	End If
+End Function
 
 
 </script:module>
