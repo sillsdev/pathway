@@ -33,7 +33,7 @@ namespace SIL.PublishingSolution
 		{
             if (ws == "en")
             {
-                ws = "xxx";
+                ws = "zxx";
             }
 
 			m_databaseName = databaseName;
