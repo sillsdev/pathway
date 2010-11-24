@@ -835,6 +835,11 @@ namespace SIL.Tool
                             {
                                 country = node.InnerText.ToUpper();
                                 country = RightString(country, "_");
+                                if (country == "EN")
+                                {
+                                    var cultureName = Application.CurrentCulture.TextInfo.CultureName.Split('-');
+                                    country = cultureName[1];
+                                }
                             }
                         }
                         if (country.ToLower() == "none" || country == "<None>")

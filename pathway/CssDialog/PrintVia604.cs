@@ -486,6 +486,8 @@ namespace SIL.PublishingSolution
         #region SetOkStatus
         private void SetOkStatus()
         {
+            if (Param.Value.Count == 0)
+                return;
             BtnOk.Enabled = (Param.Value["InputType"] == Common.ProjectType.Scripture.ToString());
             BtnOk.Enabled = BtnOk.Enabled || chkConfigDictionary.Checked || chkRevIndexes.Checked || chkGramSketch.Checked;
             BtnOk.Enabled = BtnOk.Enabled && chkPolicy.Checked;
@@ -589,21 +591,10 @@ namespace SIL.PublishingSolution
             SetOkStatus();
         }
 
-        private void btnPolicy_Click(object sender, EventArgs e)
+        private void hlPropertyInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             _helpTopic = "Concepts/Intellectual_Property.htm";
             BtnHelp_Click(sender, e);
-            //string helpPath = Common.PathCombine(_installedPath, "help");
-            //string fileName = "Intellectual_Property.docx";
-            //string helpFile = Common.PathCombine(helpPath, fileName);
-
-            //try
-            //{
-            //    Process.Start(helpFile);
-            //}
-            //catch
-            //{
-            //}
         }
     }
 }

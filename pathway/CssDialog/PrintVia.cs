@@ -590,21 +590,10 @@ namespace SIL.PublishingSolution
             SetOkStatus();
         }
 
-        private void btnPolicy_Click(object sender, EventArgs e)
+        private void hlPropertyInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             _helpTopic = "Concepts/Intellectual_Property.htm";
             BtnHelp_Click(sender, e);
-            //string helpPath = Common.PathCombine(_installedPath, "help");
-            //string fileName = "Intellectual_Property.docx";
-            //string helpFile = Common.PathCombine(helpPath, fileName);
-
-            //try
-            //{
-            //    Process.Start(helpFile);
-            //}
-            //catch
-            //{
-            //}
         }
     }
 }
