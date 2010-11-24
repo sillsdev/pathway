@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using NUnit.Framework;
 using SIL.Tool;
 
 namespace Test
@@ -77,6 +78,7 @@ namespace Test
             XPath = "//style:style[@style:name='" + ClassName + "']";
             XmlNode node = ValidateGetNodeNS();
 
+            Assert.IsNotNull(node, ClassName + " node missing");
             if (node == null)
             {
                 match = false;
@@ -116,6 +118,7 @@ namespace Test
 
                     if (propertyValue != ClassProperty[ns + ":" + key])
                     {
+                        Assert.AreEqual(ClassProperty[ns + ":" + key], propertyKey);
                         match = false;
                         break;
                     }

@@ -838,7 +838,8 @@ namespace SIL.Tool
                                 if (country == "EN")
                                 {
                                     var cultureName = Application.CurrentCulture.TextInfo.CultureName.Split('-');
-                                    country = cultureName[1];
+                                    if (cultureName[0].ToUpper() == "EN")
+                                        country = cultureName[1];
                                 }
                             }
                         }
