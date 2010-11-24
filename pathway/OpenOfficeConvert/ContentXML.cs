@@ -1049,7 +1049,8 @@ namespace SIL.PublishingSolution
                 _writer.WriteString(marker);
                 _writer.WriteEndElement();
             }
-            _writer.WriteString(text);
+            //_writer.WriteString(text);
+            _writer.WriteRaw(text);
             _writer.WriteEndElement();
             _writer.WriteEndElement();
             _writer.WriteEndElement();
@@ -1360,7 +1361,13 @@ namespace SIL.PublishingSolution
 
                 if (!string.IsNullOrEmpty(_footCal))
                 {
-                    _formatFootnote += _reader.Value;
+                    string FootnoteStyleName = string.Empty;
+                    StringBuilder footnoteStyle = new StringBuilder();
+                    footnoteStyle.Append("<text:span ");
+                    footnoteStyle.Append("text:style-name=\"" + _allSpanStack.Peek() + "\">" + _reader.Value);
+                    footnoteStyle.Append("</text:span>");
+                    _formatFootnote += footnoteStyle.ToString();
+                    //_formatFootnote += _reader.Value;
                 }
                 else if ((_structStyles.DisplayFootNote.Count > 0 && _structStyles.DisplayFootNote.Contains(currClass)))
                 {

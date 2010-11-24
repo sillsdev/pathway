@@ -21,7 +21,7 @@ div.scriptureText{
   ophans:2;
 }
 
- p {
+p {
     font-size: 10pt; 
     text-indent: 2em;
     padding: 0;
@@ -49,6 +49,7 @@ div.scriptureText{
   text-indent: 0;
   margin-left: 2em; 
   font-weight: normal;
+  color:green;
 }
 
 /* marker in the body text indicating a footnote*/
@@ -60,11 +61,13 @@ div.scriptureText{
   line-height: none;
 }
 
+
 /* marker in footnote in front of the text */
 .footnote::footnote-marker {
     font-size: 10pt;
     font-weight: bold;
     content: '\2021'  /* ' ' string(chapterx) ":" string(versex) ' =?  '*/ ;
     text-align: left;
+  color:red;
 }
 
