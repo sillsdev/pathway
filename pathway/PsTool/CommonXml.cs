@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Xsl;
+using Microsoft.Win32;
 
 //using Saxon.Api;
 
@@ -344,6 +345,39 @@ namespace SIL.Tool
                     }
                 }
             }
+            //For ParaText Path.
+            if (fromPath == string.Empty)
+            {
+                string databaseNamePara = databaseName; // "NKOu1"; // todo substitute for database name
+                string key = @"HKEY_LOCAL_MACHINE\SOFTWARE\ScrChecks\1.0\Settings_Directory";
+                object paraPath1 = Registry.GetValue(key, "", "");
+                string paraPath = paraPath1.ToString();
+                string dataPath = PathCombine(paraPath, databaseNamePara);
+                fileName = Path.GetFileName(src); // para + database + fileName
+                string flexPict = PathCombine(dataPath, fileName);
+                if (File.Exists(flexPict))
+                {
+                    fromPath = flexPict;
+                }
+                else
+                {   // para + database + figures(folder) + fileName
+                    flexPict = PathCombine(dataPath, PathCombine("figures", fileName));
+                    if (File.Exists(flexPict))
+                    {
+                        fromPath = flexPict;
+                    }
+                    else
+                    {   // para + database + fileName with exact sourceFolder path
+                        flexPict = PathCombine(dataPath, src);
+                        if (File.Exists(flexPict))
+                        {
+                            fromPath = flexPict;
+                        }
+                    }
+                }
+            }
+
+
             return fromPath;
         }
 

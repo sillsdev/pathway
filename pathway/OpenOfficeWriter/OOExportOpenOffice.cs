@@ -871,10 +871,11 @@ namespace SIL.PublishingSolution
         /// <param name="destFolder"></param>
         private void CopyOfficeFolder(string sourceFolder, string destFolder)
         {
-            if (Directory.Exists(destFolder))
-            {
-                Directory.Delete(destFolder, true);
-            }
+            //if (Directory.Exists(destFolder))
+            //{
+            //    Directory.Delete(destFolder, true);
+            //}
+            Common.DeleteDirectory(destFolder);
             Directory.CreateDirectory(destFolder);
             string[] files = Directory.GetFiles(sourceFolder);
             try

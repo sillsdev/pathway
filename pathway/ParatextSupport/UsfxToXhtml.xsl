@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:output method="xml" version="1.0" encoding="UTF-8" omit-xml-declaration="no" indent="yes"
-	 doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" />
+		doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"/>
 	<xsl:param name="ws" select="'es'"/>
 	<xsl:param name="userWs" select="'en'"/>
 	<xsl:param name="dateTime" select="'4-June-2010'"/>
@@ -9,16 +9,16 @@
 	<xsl:param name="projName" select="PROJNAME"/>
 
 	<!-- Get book identification -->
-	<xsl:variable name="bookCode" select="usfm/book/@id" />
-	<xsl:variable name="bookInToc" select="normalize-space(usfm/para[@style='toc2'])" />
-	<xsl:variable name="bookHeading" select="normalize-space(usfm/para[@style='h'])" />
-	<xsl:variable name="bookTitle" select="normalize-space(usfm/para[@style='mt'])" />
-	<xsl:variable name="bookTitle1" select="normalize-space(usfm/para[@style='mt1'])" />
+	<xsl:variable name="bookCode" select="usfm/book/@id"/>
+	<xsl:variable name="bookInToc" select="normalize-space(usfm/para[@style='toc2'])"/>
+	<xsl:variable name="bookHeading" select="normalize-space(usfm/para[@style='h'])"/>
+	<xsl:variable name="bookTitle" select="normalize-space(usfm/para[@style='mt'])"/>
+	<xsl:variable name="bookTitle1" select="normalize-space(usfm/para[@style='mt1'])"/>
 
 	<!-- The templates matching * and @* match and copy unhandled elements/attributes. -->
 	<xsl:template match="*">
 		<xsl:copy>
-			<xsl:apply-templates select="@* | node()" />
+			<xsl:apply-templates select="@* | node()"/>
 		</xsl:copy>
 	</xsl:template>
 
@@ -33,10 +33,10 @@
 	<xsl:template match="usfm">
 		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="utf-8" lang="utf-8">
 			<head>
-				<title />
-				<link rel="stylesheet" href="PROJNAME.css" type="text/css" />
-				<meta name="description" content="PROJNAME exported by {$user} on {$dateTime}" />
-				<meta name="filename" content="PROJNAME.xhtml" />
+				<title/>
+				<link rel="stylesheet" href="PROJNAME.css" type="text/css"/>
+				<meta name="description" content="PROJNAME exported by {$user} on {$dateTime}"/>
+				<meta name="filename" content="PROJNAME.xhtml"/>
 			</head>
 			<body class="scrBody">
 				<xsl:apply-templates/>
@@ -54,8 +54,9 @@
 						<xsl:choose>
 							<xsl:when test="string-length($bookHeading) = 0">
 								<xsl:choose>
-									<xsl:when test="string-length($bookTitle) = 0 and string-length($bookTitle1) = 0">
-										<xsl:value-of select="$bookCode" />
+									<xsl:when
+										test="string-length($bookTitle) = 0 and string-length($bookTitle1) = 0">
+										<xsl:value-of select="$bookCode"/>
 									</xsl:when>
 									<xsl:otherwise>
 										<!-- We may have a title in \mt or \mt1, but we include both since one of them will be empty. -->
@@ -82,12 +83,12 @@
 			<!-- Convert all SFM style markers to Translation Editor styles. -->
 
 			<!-- Remove 'h' paragraphs. -->
-			<xsl:when test="@style = 'h'" />
+			<xsl:when test="@style = 'h'"/>
 
 			<!-- Convert Scripture title styles -->
 			<xsl:when test="@style = 'mt' or @style = 'mt1'">
 				<div class="Title_Main" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</div>
 			</xsl:when>
 			<!-- mt2 and mt3 are paragraph styles, but they will need to become spans and be moved inside
@@ -106,94 +107,94 @@
 			<!-- Convert introduction styles. -->
 			<xsl:when test="@style = 'is'">
 				<h1 class="Intro_Section_Head" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</h1>
 			</xsl:when>
 			<xsl:when test="@style = 'ip'">
 				<p class="Intro_Paragraph" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'iq1'">
 				<p class="Intro_Citation_Line1" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'iq2'">
 				<p class="Intro_Citation_Line2" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'imq'">
 				<p class="Intro_Citation_Paragraph" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'ipr'">
 				<p class="Intro_Cross-Reference" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'io1'">
 				<p class="Intro_List_Item1" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'io2'">
 				<p class="Intro_List_Item2" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'io3'">
 				<p class="Intro_List_Item3" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 
 			<!-- Convert Scripture heading styles. -->
 			<xsl:when test="@style = 's' or @style = 's1' or @style = 'cs'">
 				<h1 class="Section_Head" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</h1>
 			</xsl:when>
 			<xsl:when test="@style = 'cl'">
 				<h1 class="Chapter_Head" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</h1>
 			</xsl:when>
 			<xsl:when test="@style = 'd'">
 				<h1 class="Hebrew_Title" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</h1>
 			</xsl:when>
 			<xsl:when test="@style = 'r'">
 				<h1 class="Parallel_Passage_Reference" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</h1>
 			</xsl:when>
 			<xsl:when test="@style = 'ms'">
 				<h1 class="Section_Head_Major" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</h1>
 			</xsl:when>
 			<xsl:when test="@style = 's2'">
 				<h1 class="Section_Head_Minor" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</h1>
 			</xsl:when>
 			<xsl:when test="@style = 'qa'">
 				<h1 class="Section_Head_Series" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</h1>
 			</xsl:when>
 			<xsl:when test="@style = 'mr'">
 				<h1 class="Section_Range_Paragraph" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</h1>
 			</xsl:when>
 			<xsl:when test="@style = 'sp'">
 				<h1 class="Speech_Speaker" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</h1>
 			</xsl:when>
 			<!-- No SFM mapping for:
@@ -203,8 +204,8 @@
 			<!-- Convert Scripture paragraph styles. -->
 			<xsl:when test="@style = 'p'">
 				<p class="Paragraph" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:call-template name="MoveOrphanedChapter" />
-					<xsl:apply-templates />
+					<xsl:call-template name="MoveOrphanedChapter"/>
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<!-- No SFM mapping for:
@@ -215,122 +216,122 @@
 			-->
 			<xsl:when test="@style = 'cls'">
 				<p class="Closing" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'lit'">
 				<p class="Congregational_Response" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'pr'">
 				<p class="Cross-Reference" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'qc'">
 				<p class="Doxology" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'pmc'">
 				<p class="Embedded_Text_Closing" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'qm'">
 				<p class="Embedded_Text_Line1" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'qm2'">
 				<p class="Embedded_Text_Line2" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'qm3'">
 				<p class="Embedded_Text_Line3" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'pmo'">
 				<p class="Embedded_Text_Opening" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'pm'">
 				<p class="Embedded_Text_Paragraph" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'mi'">
 				<p class="Embedded_Text_Paragraph_Continuation" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'pmr'">
 				<p class="Embedded_Text_Refrain" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'pc'">
 				<p class="Inscription_Paragraph" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'qs'">
 				<p class="Interlude" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'q1'">
 				<p class="Line1" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'q2'">
 				<p class="Line2" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'q3'">
 				<p class="Line3" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'li1'">
 				<p class="List_Item1" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'pi1'">
 				<p class="List_Item1_Additional" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'li2'">
 				<p class="List_Item2" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'pi2'">
 				<p class="List_Item2_Additional" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'li3'">
 				<p class="List_Item3" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'm'">
 				<p class="Paragraph_Continuation" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'qr'">
 				<p class="Refrain" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<!-- No SFM mapping for:
@@ -339,32 +340,32 @@
 			-->
 			<xsl:when test="@style = 'b'">
 				<p class="Stanza_Break" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'tc'">
 				<p class="Table_Cell" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'th'">
 				<p class="Table_Cell_Head" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'thr'">
 				<p class="Table_Cell_Head_Last" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'tcr'">
 				<p class="Table_Cell_Last" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'tr'">
 				<p class="Table_Row" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates />
+					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 			<!-- No SFM mapping for:
@@ -376,7 +377,7 @@
 			<xsl:otherwise>
 				<p class="{@style}" xmlns="http://www.w3.org/1999/xhtml">
 					<span lang="{$ws}">
-						<xsl:apply-templates />
+						<xsl:apply-templates/>
 					</span>
 				</p>
 			</xsl:otherwise>
@@ -438,7 +439,8 @@
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'imt2'">
-				<span class="Intro_Title_Secondary" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
+				<span class="Intro_Title_Secondary" lang="{$ws}"
+					xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:value-of select="."/>
 				</span>
 			</xsl:when>
@@ -458,7 +460,8 @@
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'ord'">
-				<span class="Ordinal_Number_Ending" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
+				<span class="Ordinal_Number_Ending" lang="{$ws}"
+					xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:value-of select="."/>
 				</span>
 			</xsl:when>
@@ -512,7 +515,8 @@
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'figlaypos'">
-				<span class="Figure_Layout_Position" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
+				<span class="Figure_Layout_Position" lang="{$ws}"
+					xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:value-of select="."/>
 				</span>
 			</xsl:when>
@@ -532,7 +536,8 @@
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'fig'">
-				<span class="Figure_USFM_Parameters" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
+				<span class="Figure_USFM_Parameters" lang="{$ws}"
+					xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:value-of select="."/>
 				</span>
 			</xsl:when>
@@ -549,7 +554,8 @@
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'fr' or @style = 'xo'">
-				<span class="Note_Target_Reference" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
+				<span class="Note_Target_Reference" lang="{$ws}"
+					xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:value-of select="."/>
 				</span>
 			</xsl:when>
@@ -581,15 +587,39 @@
 			or the one before that (in case there is a single heading paragraph). The problem is if there are multiple 
 			heading paragraphs.
 			-->
-			<xsl:when test="preceding-sibling::*[1][self::chapter]">
-				<span class="Chapter_Number" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="preceding-sibling::*[1][self::chapter]/@number"/>
-				</span>
-			</xsl:when>
-			<xsl:when test="preceding-sibling::*[2][self::chapter]">
-				<span class="Chapter_Number" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="preceding-sibling::*[2][self::chapter]/@number"/>
-				</span>
+			<xsl:when test="./verse[@number='1']">
+				<xsl:choose>
+					<xsl:when test="preceding-sibling::*[1][self::chapter]">
+						<span class="Chapter_Number" lang="{$ws}"
+							xmlns="http://www.w3.org/1999/xhtml">
+							<xsl:value-of select="preceding-sibling::*[1][self::chapter]/@number"/>
+						</span>
+					</xsl:when>
+					<xsl:when test="preceding-sibling::*[2][self::chapter]">
+						<span class="Chapter_Number" lang="{$ws}"
+							xmlns="http://www.w3.org/1999/xhtml">
+							<xsl:value-of select="preceding-sibling::*[2][self::chapter]/@number"/>
+						</span>
+					</xsl:when>
+					<xsl:when test="preceding-sibling::*[3][self::chapter]">
+						<span class="Chapter_Number" lang="{$ws}"
+							xmlns="http://www.w3.org/1999/xhtml">
+							<xsl:value-of select="preceding-sibling::*[3][self::chapter]/@number"/>
+						</span>
+					</xsl:when>
+					<xsl:when test="preceding-sibling::*[4][self::chapter]">
+						<span class="Chapter_Number" lang="{$ws}"
+							xmlns="http://www.w3.org/1999/xhtml">
+							<xsl:value-of select="preceding-sibling::*[4][self::chapter]/@number"/>
+						</span>
+					</xsl:when>
+					<xsl:when test="preceding-sibling::*[5][self::chapter]">
+						<span class="Chapter_Number" lang="{$ws}"
+							xmlns="http://www.w3.org/1999/xhtml">
+							<xsl:value-of select="preceding-sibling::*[5][self::chapter]/@number"/>
+						</span>
+					</xsl:when>
+				</xsl:choose>
 			</xsl:when>
 		</xsl:choose>
 	</xsl:template>
@@ -614,16 +644,17 @@
 	</xsl:template>
 
 	<xsl:template match="note">
-		<xsl:variable name="footnoteNumber" select="count(preceding::note)+1" />
+		<xsl:variable name="footnoteNumber" select="count(preceding::note)+1"/>
 		<xsl:variable name="footnoteCaller">
 			<xsl:number format="a" value="$footnoteNumber"/>
 		</xsl:variable>
 		<span class="scrFootnoteMarker" xmlns="http://www.w3.org/1999/xhtml">
-			<a href="#{$bookCode}-{$footnoteNumber}"></a>
+			<a href="#{$bookCode}-{$footnoteNumber}"/>
 		</span>
-		<span class="Note_General_Paragraph" id="{$bookCode}-{$footnoteNumber}" title="{$footnoteCaller}" xmlns="http://www.w3.org/1999/xhtml">
+		<span class="Note_General_Paragraph" id="{$bookCode}-{$footnoteNumber}"
+			title="{$footnoteCaller}" xmlns="http://www.w3.org/1999/xhtml">
 			<!-- Handle template for character styles. -->
-			<xsl:apply-templates />
+			<xsl:apply-templates/>
 		</span>
 	</xsl:template>
 

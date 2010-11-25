@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Xsl;
+using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
@@ -37,7 +38,7 @@ namespace SIL.PublishingSolution
             }
 
 			m_databaseName = databaseName;
-
+		    Common.databaseName = databaseName;
 			// Set parameters for the XSLT.
 			m_xslParams = new Dictionary<string, object>();
 			m_xslParams.Add("ws", ws);

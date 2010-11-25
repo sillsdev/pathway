@@ -1196,81 +1196,91 @@ namespace SIL.PublishingSolution
             string result = string.Empty;
             try
             {
-            if (parameter.Length > 0)
-            {
-                if (!(parameter[0] == '\"' || parameter[0] == '\''))
+                if (parameter.Length > 0)
                 {
-                    parameter = "'" + parameter + "'";
-                }
-                int strlen = parameter.Length;
-                char quoteOpen = ' ';
-                while (count < strlen)
-                {
-                    // Handling Single / Double Quotes
-                    char c1 = parameter[count];
-                    Console.WriteLine(c1);
-                    if (parameter[count] == '\"' || parameter[count] == '\'')
+                    if (!(parameter[0] == '\"' || parameter[0] == '\''))
                     {
-                        if (parameter[count] == quoteOpen)
+                        parameter = "'" + parameter + "'";
+                    }
+                    int strlen = parameter.Length;
+                    char quoteOpen = ' ';
+                    while (count < strlen)
+                    {
+                        // Handling Single / Double Quotes
+                        char c1 = parameter[count];
+                        Console.WriteLine(c1);
+                        if (parameter[count] == '\"' || parameter[count] == '\'')
                         {
-                            quoteOpen = ' ';
-                            count++;
-                            continue;
+                            if (parameter[count] == quoteOpen)
+                            {
+                                quoteOpen = ' ';
+                                count++;
+                                continue;
+                            }
+                            if (quoteOpen == ' ')
+                            {
+                                quoteOpen = parameter[count];
+                                count++;
+                                continue;
+                            }
                         }
-                        if (quoteOpen == ' ')
+
+                        if (parameter[count] == '\\')
                         {
-                            quoteOpen = parameter[count];
+                            string unicode = string.Empty;
                             count++;
-                            continue;
+                            int value = parameter[count];
+
+                            //if condition added to check any escape character precede with slash
+                            if (!((value > 47 && value < 58) || (value > 64 && value < 71) || (value > 96 && value < 103)))
+                            {
+                                result += parameter[count];
+                                count++;
+                                continue;
+                            }
+
+                            if (parameter[count] == 'u')
+                            {
+                                count++;
+                            }
+                            while (count < strlen)
+                            {
+                                value = parameter[count];
+                                if ((value > 47 && value < 58) || (value > 64 && value < 71) || (value > 96 && value < 103))
+                                {
+                                    unicode += parameter[count];
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                                count++;
+                            }
+                            // unicode convertion
+                            int decimalvalue = Convert.ToInt32(unicode, 16);
+                            var c = (char)decimalvalue;
+                            result += c.ToString();
+                        }
+                        else
+                        {
+                            result += parameter[count];
+                            count++;
                         }
                     }
-
-                    if (parameter[count] == '\\')
+                    if (quoteOpen != ' ')
                     {
-                        string unicode = string.Empty;
-                        count++;
-                        if (parameter[count] == 'u')
-                        {
-                            count++;
-                        }
-                        while (count < strlen)
-                        {
-                            int value = parameter[count];
-                            if ((value > 47 && value < 58) || (value > 64 && value < 71) || (value > 96 && value < 103))
-                            {
-                                unicode += parameter[count];
-                            }
-                            else
-                            {
-                                break;
-                            }
-                            count++;
-                        }
-                        // unicode convertion
-                        int decimalvalue = Convert.ToInt32(unicode, 16);
-                        var c = (char) decimalvalue;
-                        result += c.ToString();
+                        result = "";
                     }
                     else
                     {
-                        result += parameter[count];
-                        count++;
+                        // Replace <, > and & character to &lt; &gt; &amp;
+                        result = result.Replace("&", "&amp;");
+                        result = result.Replace("<", "&lt;");
+                        result = result.Replace(">", "&gt;");
                     }
                 }
-                if (quoteOpen != ' ')
-                {
-                    result = "";
-                }
-                else
-                {
-                    // Replace <, > and & character to &lt; &gt; &amp;
-                    result = result.Replace("&", "&amp;");
-                    result = result.Replace("<", "&lt;");
-                    result = result.Replace(">", "&gt;");
-                }
+                return result;
             }
-            return result;
-        }
             catch (Exception)
             {
                return result;
@@ -1398,10 +1408,8 @@ namespace SIL.PublishingSolution
                         }
                         for (int i = 0; i < childNode.Nodes.Count; i++)
                         {
-                            if (childNode.Nodes[i].Text.IndexOf("'") >= 0 || childNode.Nodes[i].Text.IndexOf("\"") >= 0)
+                            if ((!_isReCycle) && (childNode.Nodes[i].Text.IndexOf("'") >= 0 || childNode.Nodes[i].Text.IndexOf("\"") >= 0))
                             {
-                                childNode.Nodes[i].Text = childNode.Nodes[i].Text.Replace("'", "").Replace(
-                                    "\"", "");
                                 childNode.Nodes[i].Text = UnicodeConversion(childNode.Nodes[i].Text);
                             }
                         }

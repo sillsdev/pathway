@@ -712,7 +712,7 @@ namespace SIL.PublishingSolution
             // Psuedo Before
             foreach (ClassInfo psuedoBefore in _psuedoBefore)
             {
-                WriteCharacterStyle(psuedoBefore.Content, psuedoBefore.StyleName);
+                WriteCharacterStyle(psuedoBefore.Content, psuedoBefore.StyleName, true);
             }
 
             // Text Write
@@ -731,7 +731,7 @@ namespace SIL.PublishingSolution
                 }
             }
             string modifiedContent = ModifiedContent(content, _previousParagraphName, _characterName);
-            WriteCharacterStyle(modifiedContent, _characterName);
+            WriteCharacterStyle(modifiedContent, _characterName, false);
 
             _psuedoBefore.Clear();
         }
@@ -746,7 +746,7 @@ namespace SIL.PublishingSolution
             return result;
         }
 
-        private void whiteSpacePre(string content)
+        private void whiteSpacePre(string content, bool pseudo)
         {
             string whiteSpacePre = GetPropertyValue(_classNameWithLang, "white-space", string.Empty);
             if (whiteSpacePre == "pre")
@@ -756,7 +756,10 @@ namespace SIL.PublishingSolution
             else
             {
                 content = SignificantSpace(content);
-                _writer.WriteString(content);
+                if (pseudo)
+                    _writer.WriteRaw(content);
+                else
+                    _writer.WriteString(content);
             }
         }
 
@@ -770,7 +773,7 @@ namespace SIL.PublishingSolution
             return valueOfProperty;
         }
 
-        private void WriteCharacterStyle(string content, string characterStyle)
+        private void WriteCharacterStyle(string content, string characterStyle, bool pseudo)
         {
             _imageInserted = InsertImage();
 
@@ -781,7 +784,7 @@ namespace SIL.PublishingSolution
             }
             AddUsedStyleName(characterStyle);
 
-            whiteSpacePre(content); // TODO -2000 - SignificantSpace() - IN OO convert
+            whiteSpacePre(content, pseudo); // TODO -2000 - SignificantSpace() - IN OO convert
 
             if (_tagType == "span" && characterStyle != "none")  // span end
             {
@@ -923,7 +926,7 @@ namespace SIL.PublishingSolution
                 if (_psuedoAfter.ContainsKey(_closeChildName))
                 {
                     ClassInfo classInfo = _psuedoAfter[_closeChildName];
-                    WriteCharacterStyle(classInfo.Content, classInfo.StyleName);
+                    WriteCharacterStyle(classInfo.Content, classInfo.StyleName, true);
                     _psuedoAfter.Remove(_closeChildName);
                 }
             }

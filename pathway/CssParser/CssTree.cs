@@ -458,8 +458,9 @@ namespace SIL.PublishingSolution
             
             if (_attributeInfo.Name.ToLower() == "content")
             {
-                _attributeInfo.StringValue = _attributeInfo.StringValue.Replace("'", "");
-                _attributeInfo.StringValue = _attributeInfo.StringValue.Replace("\"", "");
+                //_attributeInfo.StringValue = Common.UnicodeConversion(_attributeInfo.StringValue);
+                //_attributeInfo.StringValue = _attributeInfo.StringValue.Replace("'", "");
+                //_attributeInfo.StringValue = _attributeInfo.StringValue.Replace("\"", "");
                 _attributeInfo.StringValue = ReplaceCountertoPipeLine(_attributeInfo.StringValue);
                 //if (_classInfo.Pseudo == "before")
                 //{
