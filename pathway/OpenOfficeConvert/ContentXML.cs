@@ -1064,14 +1064,16 @@ namespace SIL.PublishingSolution
             {
                 _anchorStart = false;
             }
+            string FormatMarker = string.Empty;
             if (_styleStack.Count > 0 && (_styleStack.Peek().ToString() == _footNoteStyleName))
             {
                 string currClass = _footNoteStyleName.Substring(0, _footNoteStyleName.IndexOf('_'));
-                string FormatMarker = string.Empty;
                 if (_structStyles.FootNoteMarker.ContainsKey(currClass)
-                    && (_structStyles.FootNoteMarker[currClass].IndexOf("#ChapterNumber") >= 0 ||
+                    && (_structStyles.FootNoteMarker[currClass].IndexOf("#ChapterNumber") >= 0 &&
                     _structStyles.FootNoteMarker[currClass].IndexOf("#VerseNumber") >= 0))
                 {
+                    if (_hapterNumber != null)
+                        if (_hapterNumber.IndexOf(':') == -1) _hapterNumber = _hapterNumber + ":";
                     FormatMarker = _structStyles.FootNoteMarker[currClass].Replace("#ChapterNumber", _hapterNumber).Replace("#VerseNumber", _verseNumber) + " ";
                 }
                 InsertFootCall(_footCal, currClass, _formatFootnote, FormatMarker);
