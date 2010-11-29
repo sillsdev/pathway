@@ -329,6 +329,8 @@ class BlogExport:
             map["Root"] = mediaRoot
             map["lastSearch"] = map["Root"] + 'index.htm'
             map["Stem"] = self.FindItem(thisentry, '//x:span[@class="LexEntry-publishRootPara-MyLex"]//text()')
+            if map["Stem"] == '':
+                map["Stem"] = self.FindItem(thisentry, '//x:span[@class="headword"]//text()')
             
             map["Background"] = ''
             citations = self.FindAll(thisentry, '//x:span[@class="LexEntry-publishRootPara-CitationFormPub_L3"]/x:span[@class="xitem"]/x:span/text()')
