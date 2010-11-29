@@ -18,7 +18,10 @@
 	<!-- Use a key to speed up the processing of the verses for each chapter. -->
 	<xsl:key name="verses-by-chapter" match="xhtml:span[@class='Verse_Number']"
 			use="generate-id(preceding::xhtml:span[@class='Chapter_Number'][1])" />
-
+	
+	<!-- the main language of this document -->
+	<xsl:variable name="docLanguage" select="xhtml:html/@lang" />
+	
 	<!--Straight copy for these elements. -->
 	<xsl:template match="xhtml:html | xhtml:head | xhtml:title | xhtml:link | xhtml:body | xhtml:a">
 		<xsl:copy>
@@ -99,11 +102,11 @@
 	</xsl:template>
     
 	<!-- span processing -->  
-	<!-- .epub doesn't recognize the lang attribute for spans - remove them here. -->
+	<!-- .epub uses xml:lang instead of lang (it uses an xml mimetype). -->
 	<xsl:template match="xhtml:span">
 		<xsl:if test="count(child::*) > 0 or string-length(normalize-space(./text())) > 0">
 			<xsl:copy>
-				<xsl:if test="@lang != ''">
+				<xsl:if test="@lang != '' and @lang !=docLanguage">
 					<xsl:attribute name="xml:lang"><xsl:value-of select="@lang"/></xsl:attribute>
 				</xsl:if>
 				<xsl:for-each select="@*[not(local-name() = 'lang' )]">
@@ -121,7 +124,7 @@
 				<!-- if this is a Chapter_Number span, add an ID with Book and Chapter -->
 				<xsl:if test="@class = 'Chapter_Number'">
 				<!--	<xsl:attribute name="id"><xsl:value-of select="../../../../xhtml:span[1]"/><xsl:value-of select="."/></xsl:attribute> -->
-					<xsl:attribute name="id"><xsl:text>CH_</xsl:text><xsl:value-of select="."/></xsl:attribute>
+					<xsl:attribute name="id"><xsl:text>id</xsl:text><xsl:value-of select="../../../../xhtml:span[@class='scrBookCode']"/><xsl:text>_</xsl:text><xsl:value-of select="."/></xsl:attribute>
 				</xsl:if>
 				<xsl:if test="@class='Note_General_Paragraph'">
 					<xsl:element name="a">
@@ -139,7 +142,7 @@
 				<!-- Note that the chapter is found by selecting "previous...[1]" - that selects the first item, counting backwards
 				       (i.e. the previous node). Ugh. -->
 				<xsl:if test="@class = 'Verse_Number'">
-					<xsl:attribute name="id"><xsl:value-of select="../../../../xhtml:span[1]"/><xsl:text>_</xsl:text><xsl:value-of select="preceding::xhtml:span[@class='Chapter_Number'][1]"/><xsl:text>_</xsl:text><xsl:value-of select="."/></xsl:attribute>
+					<xsl:attribute name="id"><xsl:text>id</xsl:text><xsl:value-of select="../../../../xhtml:span[@class='scrBookCode']"/><xsl:text>_</xsl:text><xsl:value-of select="preceding::xhtml:span[@class='Chapter_Number'][1]"/><xsl:text>_</xsl:text><xsl:value-of select="."/></xsl:attribute>
 				</xsl:if>
 				<xsl:apply-templates/>
 				<xsl:if test="@class='sense-variantrefs'">

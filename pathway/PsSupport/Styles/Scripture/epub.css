@@ -48,7 +48,7 @@ margin-left : 12pt;
 clear : both;
 }
 /* hidden items */
-.scrBookName, .Verse_Number1, scrBookCode {
+.scrBookName, .Verse_Number1, .scrBookCode {
 display : none;
 }
 .scrSection {

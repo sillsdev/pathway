@@ -118,11 +118,16 @@ xcopy %SRC%\PsTool.pdb "%DST%" /y
 :nopdb
 xcopy %BASE%\PsSupport\*.* "%DST%" /s /q /y
 
+rem ** EDB commented out - pretty sure this is a duplicate set of calls
+rem ** (the xcopy calls above should handle the _Convert_ DLLs directly)
+rem ** there's also a side-effect in postBuild.bat that changes the BASE
+rem ** variable.
+
 rem Now copy all the Backends to the Pathway directory instead of to a backends directory.
-cd %BASE%\ConfigurationTool%cfg%
-call %BASE%\ConfigurationTool\postBuild.bat debug
-cd %BASE%\Build\Installer
-xcopy %BASE%\ConfigurationTool%cfg%\*Convert.* "%DST%" /y
+rem cd %BASE%\ConfigurationTool%cfg%
+rem call %BASE%\ConfigurationTool\postBuild.bat debug
+rem cd %BASE%\Build\Installer
+rem xcopy %BASE%\ConfigurationTool%cfg%\*Convert.* "%DST%" /y
 
 :doneConvert
 rem the first line here works with the development version the second, the installed version.
