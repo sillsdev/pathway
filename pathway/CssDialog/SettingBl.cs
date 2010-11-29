@@ -66,11 +66,30 @@ namespace SIL.PublishingSolution
 
 
         #region Public Variables
-		public string _hyphenationPath = Common.FromRegistry("Hyphenation_Languages");
-        public string _locUser = System.Globalization.RegionInfo.CurrentRegion.TwoLetterISORegionName;
+	    public string _hyphenationPath = Common.FromRegistry("Hyphenation_Languages");
+        public string _locUser = GetRegionCode();
         #endregion
 
         #region Public Functions
+
+	/// <summary>
+        /// To swap the ListBox Items based on pressing the Up and Down buttons.
+        /// </summary>
+        /// <param name="lstCtl">ListBox Control</param>
+        /// <param name="dir">Up or Down</param>
+        public static string GetRegionCode()
+        {
+          string regCode = string.Empty;
+          try
+	  {
+		regCode = System.Globalization.RegionInfo.CurrentRegion.TwoLetterISORegionName;
+	  }
+         catch 
+          {}
+         return regCode;
+         }
+
+
 
         /// <summary>
         /// To swap the ListBox Items based on pressing the Up and Down buttons.

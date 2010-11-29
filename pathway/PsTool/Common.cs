@@ -1275,8 +1275,12 @@ namespace SIL.Tool
                 ProgBase = PathwayPath.GetPathwayDir();
                 if (string.IsNullOrEmpty(ProgBase))
                 {
+                    if(!Testing)
+                    {
                     Debug.Fail(@"Pathway directory is not specified in the registry (HKEY_LOCAL_MACHINE/SOFTWARE/SIL/PATHWAY/PathwayDir)");
-                    return FromProg(file);
+return FromProg(file);
+                    }
+                    
                 }
             }
             return Path.Combine(ProgBase, file);

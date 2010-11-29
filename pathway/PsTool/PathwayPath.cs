@@ -35,34 +35,38 @@ namespace SIL.Tool
         {
             string pathwayDir = string.Empty;
             object regObj;
-            if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.CompanyKeyLocalMachine,
-                "Pathway", "PathwayDir", out regObj))
+            try
             {
-                Common.SupportFolder = "";
-                return (string)regObj;
+                if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.CompanyKeyLocalMachine,
+                    "Pathway", "PathwayDir", out regObj))
+                {
+                    Common.SupportFolder = "";
+                    return (string)regObj;
+                }
+                var fwKey = RegistryHelperLite.CompanyKeyLocalMachine.OpenSubKey("FieldWorks");
+                if (fwKey != null && Common.fromPlugin)
+                {
+                    if (!RegistryHelperLite.RegEntryExists(fwKey, "8.0", "RootCodeDir", out regObj))
+                        if (!RegistryHelperLite.RegEntryExists(fwKey, "7.0", "RootCodeDir", out regObj))
+                            if (!RegistryHelperLite.RegEntryExists(fwKey, "", "RootCodeDir", out regObj))
+                                regObj = string.Empty;
+                    pathwayDir = (string)regObj;
+                    // The next line helps those using the developer version of FieldWorks
+                    pathwayDir = pathwayDir.Replace("DistFiles", @"Output\Debug").Replace("distfiles", @"Output\Debug");
+                }
+                if (!File.Exists(Path.Combine(pathwayDir, "PsExport.dll")))
+                    pathwayDir = string.Empty;
+                if (pathwayDir == string.Empty)
+                {
+                    pathwayDir = Path.GetDirectoryName(Application.ExecutablePath);
+                }
+                // If after all this fall back code, we can't find PsExport in the resulting folder, we're in trouble
+                //if (!File.Exists(Path.Combine(pathwayDir, "PsExport.dll")) && !Common.Testing)
+                //    Debug.Fail("Unable to find Pathway directory in registry.");
+                // If the Support folder exists, it should be used.
+                Common.SupportFolder = Directory.Exists(Path.Combine(pathwayDir, "PathwaySupport")) ? "PathwaySupport" : "";
             }
-            var fwKey = RegistryHelperLite.CompanyKeyLocalMachine.OpenSubKey("FieldWorks");
-            if (fwKey != null && Common.fromPlugin)
-            {
-                if (!RegistryHelperLite.RegEntryExists(fwKey, "8.0", "RootCodeDir", out regObj))
-                    if (!RegistryHelperLite.RegEntryExists(fwKey, "7.0", "RootCodeDir", out regObj))
-                        if (!RegistryHelperLite.RegEntryExists(fwKey, "", "RootCodeDir", out regObj))
-                            regObj = string.Empty;
-                pathwayDir = (string)regObj;
-                // The next line helps those using the developer version of FieldWorks
-                pathwayDir = pathwayDir.Replace("DistFiles", @"Output\Debug").Replace("distfiles", @"Output\Debug");
-            }
-            if (!File.Exists(Path.Combine(pathwayDir, "PsExport.dll")))
-                pathwayDir = string.Empty;
-            if (pathwayDir == string.Empty)
-            {
-                pathwayDir = Path.GetDirectoryName(Application.ExecutablePath);
-            }
-            // If after all this fall back code, we can't find PsExport in the resulting folder, we're in trouble
-            //if (!File.Exists(Path.Combine(pathwayDir, "PsExport.dll")) && !Common.Testing)
-            //    Debug.Fail("Unable to find Pathway directory in registry.");
-            // If the Support folder exists, it should be used.
-            Common.SupportFolder = Directory.Exists(Path.Combine(pathwayDir, "PathwaySupport"))? "PathwaySupport": "";
+            catch { }
             return pathwayDir;
         }
 
@@ -81,7 +85,7 @@ namespace SIL.Tool
             if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.CompanyKeyLocalMachine,
                                                   "PwCtx", "ConTeXtDir", out regObj))
             {
-                return (string) regObj;
+                return (string)regObj;
             }
             return "";
         }
