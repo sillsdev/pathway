@@ -107,7 +107,10 @@ xcopy %SRC%\PsTool.pdb "%DST%" /y
 xcopy %BASE%\PsSupport\*.* "%DST%" /s /q /y
 
 rem Now copy all the Backends to the Pathway directory instead of to a backends directory.
-rem xcopy %BASE%\PublishingSolutionExe\Bin\Debug\Backends\*.* "%DST%\PathwaySupport\Backends" /y /q
+cd %BASE%\ConfigurationTool%cfg%
+call %BASE%\ConfigurationTool\postBuild.bat debug
+cd %BASE%\Build\Installer
+xcopy %BASE%\ConfigurationTool%cfg%\*Convert.* "%DST%" /y
 
 :doneConvert
 rem the first line here works with the development version the second, the installed version.
