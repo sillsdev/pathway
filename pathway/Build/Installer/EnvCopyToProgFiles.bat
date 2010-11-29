@@ -133,7 +133,7 @@ echo.
 echo. Registering path...
 echo.--------------------------------------------------------------------------
 set pathext=.reg;%pathext%
-if not exist "%SVN_DIR%\PublishingSolution" goto win32reg
+if not "%PROCESSOR_ARCHITECTURE%" == "AMD64" goto win32reg
 %BASE%\Build\Installer\Pathway7-64.reg
 goto regdone
 
