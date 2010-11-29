@@ -1119,9 +1119,8 @@ namespace SIL.Tool
                     if (!File.Exists(fullName))
                         continue;
                     FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(fullName);
-                    if (int.Parse(fileVersionInfo.FileVersion.Substring(0, 1)) > 6 || (fileVersionInfo.FileVersion.StartsWith("6.1")))
-                        if (float.Parse(version.Substring(0, 3)) > 6.0)
-                            continue; // latest version uses reflection and no longer requires precise version agreement
+                    if (float.Parse(version.Substring(0, 3)) > 6.0)
+                        continue; // latest version uses reflection and no longer requires precise version agreement
                     if (fileVersionInfo.FileVersion != version)
                         return false;
                 }
