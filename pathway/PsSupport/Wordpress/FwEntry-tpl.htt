@@ -7,7 +7,7 @@
   <meta name="author" content="Greg Trihus" />
   <meta name="description" content="display stem forms" />
   <meta name="keywords" content="cherokee" />
-  <link rel="stylesheet" href="..\main.css" type="text/css"/>
+  <link rel="stylesheet" href="%(CssPath)s\main.css" type="text/css"/>
 </head>
 
 <body bgcolor="#000000" text="#A9A9A9" link="#A9A9A9" vlink="#0000FF" alink="#FFFF00">

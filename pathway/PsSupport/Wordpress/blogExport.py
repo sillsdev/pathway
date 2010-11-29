@@ -386,6 +386,10 @@ class BlogExport:
             if folders:
                 outname = self.UseFolders(outname)
             if site:
+                cssPath = '.'
+                if folders:
+                    cssPath = '..'
+                map["CssPath"] = cssPath
                 outdata = entrytpl % map
                 self.MakeFile(os.path.join(outpath, outname), outdata)
                 indexPage.Add(map, outname)
