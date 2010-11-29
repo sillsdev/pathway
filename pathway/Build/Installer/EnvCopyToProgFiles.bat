@@ -85,6 +85,18 @@ echo.
 echo. Copying files...
 echo.--------------------------------------------------------------------------
 xcopy %base%\ConfigurationTool%cfg% "%DST%" /y
+
+rem copy over the Converters as well
+xcopy %base%\OpenOfficeConvert%cfg%\OpenOfficeConvert.* "%DST%" /y
+xcopy %base%\LiftPrepare%cfg%\LiftPrepare.* "%DST%" /y
+xcopy %base%\InDesignConvert%cfg%\InDesignConvert.* "%DST%" /y
+xcopy %base%\LogosConvert%cfg%\LogosConvert.* "%DST%" /y
+xcopy %base%\epubConvert%cfg%\epubConvert.* "%DST%" /y
+xcopy %base%\PdfConvert%cfg%\PdfConvert.* "%DST%" /y
+xcopy %base%\WordPressConvert%cfg%\WordPressConvert.* "%DST%" /y
+xcopy %base%\XeTeXConvert%cfg%\XeTeXConvert.* "%DST%" /y
+xcopy %base%\GoBibleConvert%cfg%\GoBibleConvert.* "%DST%" /y
+
 xcopy %base%\ParatextSupport%cfg%\ParatextSupport.dll "%DST%" /y
 xcopy %SRC%\CssDialog.dll "%DST%" /y
 xcopy %SRC%\CSSParser.dll "%DST%" /y
@@ -96,7 +108,7 @@ xcopy %SRC%\Prince.dll "%DST%" /y
 rem xcopy %SRC%\IKVM*.* "%DST%" /y
 rem xcopy %SRC%\saxon*.* "%DST%" /y
 
-if /i "%1"=="debug" goto nopdb
+if /i "%1"=="release" goto nopdb
 xcopy %base%\ParatextSupport%cfg%\ParatextSupport.pdb "%DST%" /y
 xcopy %SRC%\CssDialog.pdb "%DST%" /y
 xcopy %SRC%\CSSParser.pdb "%DST%" /y

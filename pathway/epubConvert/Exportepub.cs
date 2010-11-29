@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
@@ -448,12 +449,17 @@ namespace SIL.PublishingSolution
             string content = reader.ReadToEnd();
             reader.Close();
             var sb = new StringBuilder();
-            // If we're embedding the fonts, build the @font-face elements
+            // write a timestamp for field troubleshooting
+            sb.Append("/* font info - added by ");
+            sb.Append(Application.ProductName);
+            sb.Append(" (");
+            sb.Append(Assembly.GetCallingAssembly().FullName);
+            sb.AppendLine(") */");
+            // If we're embedding the fonts, build the @font-face elements))))
             if (EmbedFonts)
             {
                 foreach (var embeddedFont in _embeddedFonts.Values)
                 {
-                    sb.AppendLine("/* font-face info - added by SIL Pathway */");
                     sb.AppendLine("@font-face {");
                     sb.Append(" font-family : ");
                     sb.Append(embeddedFont.Name);
