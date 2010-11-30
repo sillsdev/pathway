@@ -2,9 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
+using System.Windows.Forms;
 using SIL.PublishingSolution;
 
 namespace SIL.Tool
@@ -207,6 +209,8 @@ namespace SIL.Tool
             if (File.Exists(_cssFileNameWithPath))
                 File.Copy(Common.DirectoryPathReplace(_cssFileNameWithPath), tempFile, true);
             _cssFileNameWithPath = tempFile;
+            // add a timestamp to the .css for troubleshooting purposes
+            AddProductVersionToCSS();
 
         }
 
@@ -718,6 +722,24 @@ namespace SIL.Tool
             tw.WriteLine("font-size: 0.1pt;");
             tw.WriteLine("visibility: hidden;");
             tw.WriteLine("}");
+            tw.Close();
+        }
+
+        /// <summary>
+        /// Appends a timestamp to the .css file for field troubleshooting
+        /// </summary>
+        private void AddProductVersionToCSS()
+        {
+            TextWriter tw = new StreamWriter(_cssFileNameWithPath, true);
+            var sb = new StringBuilder();
+            sb.Append("/* Preprocessed CSS - called by ");
+            sb.Append(Application.ProductName);
+            sb.Append(" v.");
+            sb.Append(Application.ProductVersion);
+            sb.Append(" (pathway module: ");
+            sb.Append(Assembly.GetCallingAssembly().FullName);
+            sb.AppendLine(") */");
+            tw.WriteLine(sb.ToString());
             tw.Close();
         }
 
