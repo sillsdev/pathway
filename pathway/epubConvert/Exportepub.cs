@@ -611,6 +611,55 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
+        /// Returns a book ID to be used in the .opf file. This is similar to the GetBookName call, but here
+        /// we're wanting something that (1) doesn't start with a numeric value and (2) is unique.
+        /// </summary>
+        /// <param name="xhtmlFileName"></param>
+        /// <returns></returns>
+        private string GetBookID (string xhtmlFileName)
+        {
+            xhtmlFileName.GetHashCode();
+            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
+            xmlDocument.Load(xmlReader);
+            xmlReader.Close();
+            // should only be one of these after splitting out the chapters.
+            XmlNodeList nodes;
+            if (_inputType.Equals("dictionary"))
+            {
+                nodes = xmlDocument.SelectNodes("//xhtml:div[@class='letter']", namespaceManager);
+            }
+            else
+            {
+                // start out with the book code (e.g., 2CH for 2 Chronicles)
+                nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookCode']", namespaceManager);
+                if (nodes == null || nodes.Count == 0)
+                {
+                    // no book code - use scrBookName
+                    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
+                }
+                if (nodes == null || nodes.Count == 0)
+                {
+                    // no scrBookName - use Title_Main
+                    nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']/span", namespaceManager);
+                }
+            }
+            if (nodes != null && nodes.Count > 0)
+            {
+                var sb = new StringBuilder();
+                // just in case the name starts with a number, prepend "id"
+                sb.Append("id");
+                sb.Append(nodes[0].InnerText);
+                return (sb.ToString());
+            }
+            // fall back on just the file name
+            return Path.GetFileName(xhtmlFileName);            
+        }
+
+        /// <summary>
         /// Returns the user-friendly book name inside this file.
         /// </summary>
         /// <param name="xhtmlFileName">Split xhtml filename in the form PartFile[#]_cv.xhtml</param>
@@ -708,7 +757,7 @@ namespace SIL.PublishingSolution
         /// Writes the chapter links out to the specified XmlWriter (the .ncx file).
         /// </summary>
         /// <returns>List of url strings</returns>
-        private void WriteChapterLinks(string xhtmlFileName, int playOrder, XmlWriter ncx)
+        private void WriteChapterLinks(string xhtmlFileName, ref int playOrder, XmlWriter ncx)
         {
             XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
@@ -947,13 +996,15 @@ namespace SIL.PublishingSolution
             opf.WriteEndElement(); // item
             if (EmbedFonts)
             {
+                int fontNum = 1;
                 foreach (var embeddedFont in _embeddedFonts.Values)
                 {
                     opf.WriteStartElement("item"); // item (charis embedded font)
-                    opf.WriteAttributeString("id", "epub.embedded.font" + embeddedFont.Name);
+                    opf.WriteAttributeString("id", "epub.embedded.font" + fontNum);
                     opf.WriteAttributeString("href", embeddedFont.Filename);
                     opf.WriteAttributeString("media-type", "font/opentype/"); 
                     opf.WriteEndElement(); // item
+                    fontNum++;
                 }
             }
             // now add the xhtml files to the manifest
@@ -966,11 +1017,11 @@ namespace SIL.PublishingSolution
                 if (name.EndsWith(".xhtml"))
                 {
                     // if we can, write out the "user friendly" book name in the TOC
-                    string bookName = GetBookName(file); 
+                    string fileId = GetBookID(file); 
 //                    string bookName = (nameNoExt.IndexOf("_") > -1) ?
 //                        (nameNoExt.Substring(name.IndexOf("_") + 1)) : (nameNoExt);
                     opf.WriteStartElement("item");
-                    opf.WriteAttributeString("id", bookName);
+                    opf.WriteAttributeString("id", fileId);
                     opf.WriteAttributeString("href", name);
                     opf.WriteAttributeString("media-type", "application/xhtml+xml");
                     opf.WriteEndElement(); // item
@@ -1018,12 +1069,12 @@ namespace SIL.PublishingSolution
                 string name = Path.GetFileName(file);
                 if (name.EndsWith(".xhtml"))
                 {
-                    string nameNoExt = Path.GetFileNameWithoutExtension(file);
-                    string bookName = GetBookName(file); 
+//                    string nameNoExt = Path.GetFileNameWithoutExtension(file);
+                    string fileId = GetBookID(file); 
 //                    string bookName = (nameNoExt.IndexOf("_") > -1) ? 
 //                        (nameNoExt.Substring(name.IndexOf("_") + 1)) : (nameNoExt);
                     opf.WriteStartElement("itemref"); // item (stylesheet)
-                    opf.WriteAttributeString("idref", bookName);
+                    opf.WriteAttributeString("idref", fileId);
                     opf.WriteEndElement(); // itemref
                 }
             }
@@ -1031,11 +1082,16 @@ namespace SIL.PublishingSolution
             // guide
             opf.WriteStartElement("guide");
             // The <guide> element is optional; I'm not sure that it buys us anything -
-            // for now, just add a single element for the first filename in the list.
+            // for now, just add a single element for the first xhtml filename in the list.
             opf.WriteStartElement("reference");
             opf.WriteAttributeString("type", "text");
             opf.WriteAttributeString("title", projInfo.ProjectName);
-            opf.WriteAttributeString("href", Path.GetFileName(files[0]));
+            int index = 0;
+            while (!files[index].EndsWith(".xhtml") && index < files.Length)
+            {
+                index++;
+            }
+            opf.WriteAttributeString("href", Path.GetFileName(files[index]));
             opf.WriteEndElement(); // reference
             opf.WriteEndElement(); // guide
             opf.WriteEndElement(); // package
@@ -1092,7 +1148,7 @@ namespace SIL.PublishingSolution
                 string name = Path.GetFileName(file);
                 if (name.EndsWith(".xhtml"))
                 {
-                    string nameNoExt = Path.GetFileNameWithoutExtension(file);
+//                    string nameNoExt = Path.GetFileNameWithoutExtension(file);
                     string bookName = GetBookName(file);
 //                    string bookName = (nameNoExt.IndexOf("_") > -1) ?
 //                        (nameNoExt.Substring(name.IndexOf("_") + 1)) : (nameNoExt);
@@ -1107,7 +1163,7 @@ namespace SIL.PublishingSolution
                     ncx.WriteEndElement(); // meta
                     index++;
                     // chapters within the books (nested as a subhead)
-                    WriteChapterLinks(file, index, ncx);
+                    WriteChapterLinks(file, ref index, ncx);
                     // end the book's navPoint element
                     ncx.WriteEndElement(); // navPoint
                 }

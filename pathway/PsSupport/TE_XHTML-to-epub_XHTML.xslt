@@ -21,6 +21,9 @@
 	
 	<!-- the main language of this document -->
 	<xsl:variable name="docLanguage" select="xhtml:html/@lang" />
+	<!--  upper and lower case for XSLT 1.x case modification -->
+	<xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'" />
+	<xsl:variable name="lowercase" select="'abcdefghijklmnopqrstuvwxyz'" />
 	
 	<!--Straight copy for these elements. -->
 	<xsl:template match="xhtml:html | xhtml:head | xhtml:title | xhtml:link | xhtml:body | xhtml:a">
@@ -31,6 +34,15 @@
 			<xsl:apply-templates/>
 		</xsl:copy>
 	</xsl:template>
+	
+	<!-- FWR -2550 workaround: convert these markers to uppercase (the cross-refs use upper case) -->
+	<xsl:template match="xhtml:a[../@class='scrFootnoteMarker']" >
+		<xsl:copy>
+			<xsl:attribute name="href"><xsl:value-of select="translate(@href, $lowercase, $uppercase)"/></xsl:attribute>
+			<xsl:apply-templates />
+		</xsl:copy>
+	</xsl:template>
+	
 
 	<!-- Special processing for a couple divs -->
 	<xsl:template match="xhtml:div">
