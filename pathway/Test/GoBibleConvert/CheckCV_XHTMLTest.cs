@@ -263,6 +263,51 @@ namespace Test.GoBibleConvert
             mocks.VerifyAllExpectationsHaveBeenMet();
         }
 
+        /// <summary>
+        /// Test when book data is not nested under book tag.
+        /// </summary>
+        [Test]
+        public void BookDataNestedFalseTest()
+        {
+            const string origFileName = "luke.xhtml";
+            IPublicationInformation projInfo = mocks.NewMock<IPublicationInformation>();
+            Expect.Once.On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(GetFileNameWithInputPath(origFileName)));
+            var result = BookDataNested(projInfo);
+            Assert.IsFalse(result);
+            mocks.VerifyAllExpectationsHaveBeenMet();
+        }
+
+        /// <summary>
+        /// Test when book data is nested under book tag.
+        /// </summary>
+        [Test]
+        public void BookDataNestedTrueTest()
+        {
+            const string origFileName = "1pe.xhtml";
+            IPublicationInformation projInfo = mocks.NewMock<IPublicationInformation>();
+            Expect.Once.On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(GetFileNameWithInputPath(origFileName)));
+            var result = BookDataNested(projInfo);
+            Assert.IsTrue(result);
+            mocks.VerifyAllExpectationsHaveBeenMet();
+        }
+
+        /// <summary>
+        /// Nest book data under div with scrBook class.
+        /// </summary>
+        [Test]
+        public void NestBookDataTest()
+        {
+            const string origFileName = "luke.xhtml";
+            string workingCopy = GetFileNameWithOutputPath(origFileName);
+            File.Copy(GetFileNameWithInputPath(origFileName),workingCopy, true);
+            IPublicationInformation projInfo = mocks.NewMock<IPublicationInformation>();
+            Expect.Exactly(3).On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(workingCopy));
+            NestBookData(projInfo);
+            var result = BookDataNested(projInfo);
+            Assert.IsTrue(result);
+            mocks.VerifyAllExpectationsHaveBeenMet();
+        }
+
         #region private Methods
         private static string GetPath(string place, string filename)
         {

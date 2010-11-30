@@ -86,10 +86,13 @@ namespace SIL.PublishingSolution
             //MessageBox.Show(string.Format("Preparing to convert {0} for cell phone", projInfo.DefaultXhtmlFileWithPath), "GoBible Export");
             var myCursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
-            var inProcess = new InProcess(0, 5);
+            var inProcess = new InProcess(0, 6);
             inProcess.Show();
             inProcess.PerformStep();
             collectionName = GetCollectionName(projInfo);
+            inProcess.PerformStep();
+            if (!BookDataNested(projInfo))
+                NestBookData(projInfo);
             inProcess.PerformStep();
             Restructure(projInfo, inProcess);
             inProcess.PerformStep();
@@ -145,6 +148,65 @@ namespace SIL.PublishingSolution
             //    success = false;
             //}
             return success;
+        }
+
+        /// <summary>
+        /// Return True if book data is nested under scrBook element
+        /// </summary>
+        /// <param name="projInfo">contains name of xhtml file to check</param>
+        /// <returns>True if book data nested</returns>
+        protected bool BookDataNested(IPublicationInformation projInfo)
+        {
+            XmlNodeList bookNodes = GetPathFromXhtml(projInfo.DefaultXhtmlFileWithPath, "//xhtml:div[@class='scrBook']");
+            foreach (XmlNode book in bookNodes)
+            {
+                if (book.ChildNodes.Count <= 1)
+                    return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Nests book data (between scrBook tags) under scrBook tag
+        /// </summary>
+        /// <param name="projInfo">contains name of xhtml file to process</param>
+        protected void NestBookData(IPublicationInformation projInfo)
+        {
+            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            XmlReader xmlReader = XmlReader.Create(projInfo.DefaultXhtmlFileWithPath, xmlReaderSettings);
+            xmlDocument.Load(xmlReader);
+            xmlReader.Close();
+            XmlNamespaceManager xmlNamespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+            xmlNamespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            XmlNode bodyNode = xmlDocument.SelectSingleNode("//xhtml:body", xmlNamespaceManager);
+
+            XmlNode curBook = null;
+            for (int childIdx = 0; childIdx < bodyNode.ChildNodes.Count;  )
+            {
+                XmlNode node = bodyNode.ChildNodes[childIdx];
+                var nodeClass = node.SelectSingleNode("@class").Value;
+                if (nodeClass == "scrBook")
+                {
+                    curBook = node;
+                    childIdx += 1;
+                }
+                else
+                {
+                    if (curBook != null)
+                    {
+                        curBook.AppendChild(node); // I think this moves and removes from body
+                    }
+                    else
+                    {
+                        childIdx += 1;
+                    }
+                }
+            }
+            XmlWriterSettings xmlWriterSettings = new XmlWriterSettings();
+            XmlWriter xmlWriter = XmlWriter.Create(projInfo.DefaultXhtmlFileWithPath, xmlWriterSettings);
+            xmlDocument.WriteTo(xmlWriter);
+            xmlWriter.Close();
         }
 
         protected void Restructure(PublicationInformation projInfo, IInProcess inProcess)
