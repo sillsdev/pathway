@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:output method="xml" version="1.0" encoding="UTF-8" omit-xml-declaration="no" indent="yes"
-		doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"/>
+	 doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"/>
 	<xsl:param name="ws" select="'es'"/>
 	<xsl:param name="userWs" select="'en'"/>
 	<xsl:param name="dateTime" select="'4-June-2010'"/>
 	<xsl:param name="user" select="'Lothers'"/>
-	<xsl:param name="projName" select="PROJNAME"/>
+	<xsl:param name="projName" select="'PROJNAME'"/>
+	<xsl:param name="stylesheet" select="'usfm.sty'"/>	<!-- Paratext stylesheet name -->
+	<xsl:param name="figurePath"/> <!-- Path to figures folder with a final directory separator character -->
+	<xsl:param name="altFigurePath"/> <!-- Alternate path to figures folder with a final directory separator character -->
 
 	<!-- Get book identification -->
 	<xsl:variable name="bookCode" select="usfm/book/@id"/>
@@ -34,9 +37,10 @@
 		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="utf-8" lang="utf-8">
 			<head>
 				<title/>
-				<link rel="stylesheet" href="PROJNAME.css" type="text/css"/>
-				<meta name="description" content="PROJNAME exported by {$user} on {$dateTime}"/>
-				<meta name="filename" content="PROJNAME.xhtml"/>
+				<link rel="stylesheet" href="{$projName}.css" type="text/css"/>
+				<meta name="description" content="{$projName} exported by {$user} on {$dateTime}"/>
+				<meta name="filename" content="{$projName}.xhtml"/>
+				<meta name="stylesheet" content="{$stylesheet}"/>
 			</head>
 			<body class="scrBody">
 				<xsl:apply-templates/>
@@ -54,8 +58,7 @@
 						<xsl:choose>
 							<xsl:when test="string-length($bookHeading) = 0">
 								<xsl:choose>
-									<xsl:when
-										test="string-length($bookTitle) = 0 and string-length($bookTitle1) = 0">
+									<xsl:when test="string-length($bookTitle) = 0 and string-length($bookTitle1) = 0">
 										<xsl:value-of select="$bookCode"/>
 									</xsl:when>
 									<xsl:otherwise>
@@ -82,8 +85,9 @@
 		<xsl:choose>
 			<!-- Convert all SFM style markers to Translation Editor styles. -->
 
-			<!-- Remove 'h' paragraphs. -->
+			<!-- Remove 'h' and 'rem' paragraphs. -->
 			<xsl:when test="@style = 'h'"/>
+			<xsl:when test="@style = 'rem'"/>
 
 			<!-- Convert Scripture title styles -->
 			<xsl:when test="@style = 'mt' or @style = 'mt1'">
@@ -105,7 +109,7 @@
 			</xsl:when>
 
 			<!-- Convert introduction styles. -->
-			<xsl:when test="@style = 'is'">
+			<xsl:when test="@style = 'is' or @style = 'is1'">
 				<h1 class="Intro_Section_Head" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</h1>
@@ -172,12 +176,12 @@
 					<xsl:apply-templates/>
 				</h1>
 			</xsl:when>
-			<xsl:when test="@style = 'ms'">
+			<xsl:when test="@style = 'ms' or @style = 'ms1'">
 				<h1 class="Section_Head_Major" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</h1>
 			</xsl:when>
-			<xsl:when test="@style = 's2'">
+			<xsl:when test="@style = 's2' or @style = 'ms2'">
 				<h1 class="Section_Head_Minor" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</h1>
@@ -239,7 +243,7 @@
 					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
-			<xsl:when test="@style = 'qm'">
+			<xsl:when test="@style = 'qm' or @style = 'qm1'">
 				<p class="Embedded_Text_Line1" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</p>
@@ -284,7 +288,7 @@
 					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
-			<xsl:when test="@style = 'q1'">
+			<xsl:when test="@style = 'q' or @style = 'q1'">
 				<p class="Line1" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</p>
@@ -299,8 +303,18 @@
 					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
-			<xsl:when test="@style = 'li1'">
+			<xsl:when test="@style = 'li1' or @style = 'ph1'"> <!-- ph# is deprecated. li# is the recommended alternate. -->
 				<p class="List_Item1" xmlns="http://www.w3.org/1999/xhtml">
+					<xsl:apply-templates/>
+				</p>
+			</xsl:when>
+			<xsl:when test="@style = 'li2' or @style = 'ph2'">
+				<p class="List_Item2" xmlns="http://www.w3.org/1999/xhtml">
+					<xsl:apply-templates/>
+				</p>
+			</xsl:when>
+			<xsl:when test="@style = 'li3' or @style = 'ph3'">
+				<p class="List_Item3" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
@@ -309,18 +323,8 @@
 					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
-			<xsl:when test="@style = 'li2'">
-				<p class="List_Item2" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
-				</p>
-			</xsl:when>
 			<xsl:when test="@style = 'pi2'">
 				<p class="List_Item2_Additional" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
-				</p>
-			</xsl:when>
-			<xsl:when test="@style = 'li3'">
-				<p class="List_Item3" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
@@ -348,7 +352,7 @@
 					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
-			<xsl:when test="@style = 'th'">
+			<xsl:when test="@style = 'th' or @style = 'th1'">
 				<p class="Table_Cell_Head" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</p>
@@ -384,6 +388,22 @@
 		</xsl:choose>
 	</xsl:template>
 
+	<!-- Handle figure element -->
+	<xsl:template match="para/figure">
+		<!-- 
+		<figure style="{@style}" desc="{@desc}" file="{$figurePath}{@file}" size="{@size}" loc="{@loc}" copy="{@copy}" ref="{@ref}"  xmlns="http://www.w3.org/1999/xhtml">
+			<xsl:apply-templates/>
+			</figure>-->
+		<div class="pictureCenter" xmlns="http://www.w3.org/1999/xhtml">
+			<img class="picture" src="{$figurePath}{@file}" alt="{$altFigurePath}{@file}"/>
+			<div class="pictureCaption">
+				<span lang="{$ws}">
+					<xsl:value-of select="."/>
+				</span>
+			</div>
+		</div>
+	</xsl:template>
+	
 	<!-- Enclose paragraph text within a writing system. -->
 	<xsl:template match="para/text()">
 		<span lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
@@ -439,8 +459,7 @@
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'imt2'">
-				<span class="Intro_Title_Secondary" lang="{$ws}"
-					xmlns="http://www.w3.org/1999/xhtml">
+				<span class="Intro_Title_Secondary" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:value-of select="."/>
 				</span>
 			</xsl:when>
@@ -460,8 +479,7 @@
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'ord'">
-				<span class="Ordinal_Number_Ending" lang="{$ws}"
-					xmlns="http://www.w3.org/1999/xhtml">
+				<span class="Ordinal_Number_Ending" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:value-of select="."/>
 				</span>
 			</xsl:when>
@@ -503,45 +521,6 @@
 			Verse_Number_In_Note (fv, V)
 			-->
 
-			<!-- TODO/REVIEW: Figure styles still need to be handled. -->
-			<xsl:when test="@style = 'figdesc' or @style = 'cap'">
-				<span class="Figure_Description" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
-				</span>
-			</xsl:when>
-			<xsl:when test="@style = 'figcat' or @style = 'cat'">
-				<span class="Figure_Filename" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
-				</span>
-			</xsl:when>
-			<xsl:when test="@style = 'figlaypos'">
-				<span class="Figure_Layout_Position" lang="{$ws}"
-					xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
-				</span>
-			</xsl:when>
-			<xsl:when test="@style = 'figrefrng'">
-				<span class="Figure_Location" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
-				</span>
-			</xsl:when>
-			<xsl:when test="@style = 'figcopy'">
-				<span class="Figure_Copyright" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
-				</span>
-			</xsl:when>
-			<xsl:when test="@style = 'figscale'">
-				<span class="Figure_Scale" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
-				</span>
-			</xsl:when>
-			<xsl:when test="@style = 'fig'">
-				<span class="Figure_USFM_Parameters" lang="{$ws}"
-					xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
-				</span>
-			</xsl:when>
-
 			<!-- Footnote character styles -->
 			<xsl:when test="@style = 'ft' or @style = 'xt'">
 				<span lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
@@ -554,8 +533,7 @@
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'fr' or @style = 'xo'">
-				<span class="Note_Target_Reference" lang="{$ws}"
-					xmlns="http://www.w3.org/1999/xhtml">
+				<span class="Note_Target_Reference" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:value-of select="."/>
 				</span>
 			</xsl:when>
@@ -564,13 +542,13 @@
 					<xsl:value-of select="."/>
 				</span>
 			</xsl:when>
-			<xsl:when test="@style = 'fq' or @style = 'xq'">
+			<xsl:when test="@style = 'fq' or @style = 'fqa' or @style = 'xq'">
 				<span class="Alternate_Reading" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:value-of select="."/>
 				</span>
 			</xsl:when>
 
-			<!-- Character style does not have a mapping to Translation Editor style so use SFM. -->
+			<!-- Character style does not have a mapping to Translation Editor style so use SFM as the style. -->
 			<xsl:otherwise>
 				<span class="{@style}" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:value-of select="."/>
@@ -587,39 +565,15 @@
 			or the one before that (in case there is a single heading paragraph). The problem is if there are multiple 
 			heading paragraphs.
 			-->
-			<xsl:when test="./verse[@number='1']">
-				<xsl:choose>
-					<xsl:when test="preceding-sibling::*[1][self::chapter]">
-						<span class="Chapter_Number" lang="{$ws}"
-							xmlns="http://www.w3.org/1999/xhtml">
-							<xsl:value-of select="preceding-sibling::*[1][self::chapter]/@number"/>
-						</span>
-					</xsl:when>
-					<xsl:when test="preceding-sibling::*[2][self::chapter]">
-						<span class="Chapter_Number" lang="{$ws}"
-							xmlns="http://www.w3.org/1999/xhtml">
-							<xsl:value-of select="preceding-sibling::*[2][self::chapter]/@number"/>
-						</span>
-					</xsl:when>
-					<xsl:when test="preceding-sibling::*[3][self::chapter]">
-						<span class="Chapter_Number" lang="{$ws}"
-							xmlns="http://www.w3.org/1999/xhtml">
-							<xsl:value-of select="preceding-sibling::*[3][self::chapter]/@number"/>
-						</span>
-					</xsl:when>
-					<xsl:when test="preceding-sibling::*[4][self::chapter]">
-						<span class="Chapter_Number" lang="{$ws}"
-							xmlns="http://www.w3.org/1999/xhtml">
-							<xsl:value-of select="preceding-sibling::*[4][self::chapter]/@number"/>
-						</span>
-					</xsl:when>
-					<xsl:when test="preceding-sibling::*[5][self::chapter]">
-						<span class="Chapter_Number" lang="{$ws}"
-							xmlns="http://www.w3.org/1999/xhtml">
-							<xsl:value-of select="preceding-sibling::*[5][self::chapter]/@number"/>
-						</span>
-					</xsl:when>
-				</xsl:choose>
+			<xsl:when test="preceding-sibling::*[1][self::chapter]">
+				<span class="Chapter_Number" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
+					<xsl:value-of select="preceding-sibling::*[1][self::chapter]/@number"/>
+				</span>
+			</xsl:when>
+			<xsl:when test="preceding-sibling::*[2][self::chapter]">
+				<span class="Chapter_Number" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
+					<xsl:value-of select="preceding-sibling::*[2][self::chapter]/@number"/>
+				</span>
 			</xsl:when>
 		</xsl:choose>
 	</xsl:template>
@@ -649,10 +603,9 @@
 			<xsl:number format="a" value="$footnoteNumber"/>
 		</xsl:variable>
 		<span class="scrFootnoteMarker" xmlns="http://www.w3.org/1999/xhtml">
-			<a href="#{$bookCode}-{$footnoteNumber}"/>
+			<a href="#{$bookCode}-{$footnoteNumber}"></a>
 		</span>
-		<span class="Note_General_Paragraph" id="{$bookCode}-{$footnoteNumber}"
-			title="{$footnoteCaller}" xmlns="http://www.w3.org/1999/xhtml">
+		<span class="Note_General_Paragraph" id="{$bookCode}-{$footnoteNumber}" title="{$footnoteCaller}" xmlns="http://www.w3.org/1999/xhtml">
 			<!-- Handle template for character styles. -->
 			<xsl:apply-templates/>
 		</span>

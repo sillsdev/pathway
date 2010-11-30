@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -22,20 +23,71 @@ namespace SIL.PublishingSolution
 		private XslCompiledTransform m_addImpliedSection = new XslCompiledTransform();
 		private XslCompiledTransform m_encloseScrInColumns = new XslCompiledTransform();
 
+		/// ------------------------------------------------------------------------------------
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ParatextPathwayLink"/> class.
 		/// </summary>
-		/// <param name="projName">Name of the project (from scrText.Name) </param>
+		/// <param name="databaseName">Name of the database.</param>
+		/// <param name="xslParams">The parameters from Paratext for the XSLT.</param>
+		/// ------------------------------------------------------------------------------------
+		public ParatextPathwayLink(string databaseName, Dictionary<string, object> xslParams)
+		{
+			m_databaseName = databaseName;
+			m_xslParams = xslParams;
+
+			// If the writing system is undefined or set (by default) to English, add a writing system code 
+			// that should not have a dictionary to prevent all words from being marked as misspelled.
+			object strWs;
+			if (m_xslParams.TryGetValue("ws", out strWs))
+			{
+				if ((string)strWs == "en")
+					m_xslParams["ws"] = "zxx";
+			}
+			else
+			{
+				Debug.Fail("Missing writing system parameter for XSLT");
+				m_xslParams.Add("ws", "zxx");
+			}
+
+			// Create stylesheets
+			m_cleanUsfx.Load(XmlReader.Create(
+				Assembly.GetExecutingAssembly().GetManifestResourceStream(
+				"ParatextSupport.XML_without_line_breaks.xsl")));
+			m_usfxToXhtml.Load(XmlReader.Create(
+				Assembly.GetExecutingAssembly().GetManifestResourceStream(
+				"ParatextSupport.UsfxToXhtml.xsl")));
+			m_moveTitleSpansToTitle.Load(XmlReader.Create(
+				Assembly.GetExecutingAssembly().GetManifestResourceStream(
+				"ParatextSupport.MoveTitleSpansToTitle.xsl")));
+			m_moveSpansToParas.Load(XmlReader.Create(
+				Assembly.GetExecutingAssembly().GetManifestResourceStream(
+				"ParatextSupport.MoveSpansToParas.xsl")));
+			m_encloseParasInSections.Load(XmlReader.Create(
+				Assembly.GetExecutingAssembly().GetManifestResourceStream(
+				"ParatextSupport.EncloseParasInSections.xsl")));
+			m_addImpliedSection.Load(XmlReader.Create(
+				Assembly.GetExecutingAssembly().GetManifestResourceStream(
+				"ParatextSupport.AddImpliedSection.xsl")));
+			m_encloseScrInColumns.Load(XmlReader.Create(
+				Assembly.GetExecutingAssembly().GetManifestResourceStream(
+				"ParatextSupport.EncloseScrInColumns.xsl")));
+		}
+
+		/// ------------------------------------------------------------------------------------
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ParatextPathwayLink"/> class.
+		/// This is included only for backward compatibility with earlier versions of Paratext.
+		/// </summary>
+		/// <param name="projName">Name of the project (from scrText.Name)</param>
 		/// <param name="databaseName">Name of the database.</param>
 		/// <param name="ws">The writing system locale.</param>
 		/// <param name="userWs">The user writing system locale.</param>
 		/// <param name="userName">Name of the user.</param>
+		/// ------------------------------------------------------------------------------------
 		public ParatextPathwayLink(string projName, string databaseName, string ws, string userWs, string userName)
 		{
-            if (ws == "en")
-            {
-                ws = "zxx";
-            }
+			if (ws == "en")
+				ws = "zxx";
 
 			m_databaseName = databaseName;
 		    Common.databaseName = databaseName;
@@ -72,9 +124,12 @@ namespace SIL.PublishingSolution
 				"ParatextSupport.EncloseScrInColumns.xsl")));
 		}
 
+		/// ------------------------------------------------------------------------------------
 		/// <summary>
 		/// Exports to the current Scripture book to pathway.
 		/// </summary>
+		/// <param name="usfxDoc">The XML document representation of the USFM file.</param>
+		/// ------------------------------------------------------------------------------------
 		public void ExportToPathway(XmlDocument usfxDoc)
 		{
             //// TestBed Code
@@ -103,8 +158,8 @@ namespace SIL.PublishingSolution
 				{
 					// TODO: Localize string
 					result = MessageBox.Show(string.Format("{0}" + Environment.NewLine +
-					                                       " already exists. Overwrite?", fileName), string.Empty,
-					                         MessageBoxButtons.YesNo);
+						" already exists. Overwrite?", fileName), string.Empty,
+					    MessageBoxButtons.YesNo);
 					if (result == DialogResult.No)
 						return;
 				}
@@ -117,20 +172,25 @@ namespace SIL.PublishingSolution
 			}
 		}
 
+		/// ------------------------------------------------------------------------------------
 		/// <summary>
 		/// Exports to the current Scripture book to pathway.
 		/// </summary>
+		/// <param name="usfxDoc">The XML document representation of the USFM file.</param>
+		/// ------------------------------------------------------------------------------------
 		public void ExportToPathway(List<XmlDocument> usfxDoc)
 		{
 			throw new NotImplementedException("Instead of a list, the usfxDoc could be passed in as a dictionary keyed " +
 				"by the book number/id (which could be added to the XHTML file name)");
 		}
 
+		/// ------------------------------------------------------------------------------------
 		/// <summary>
 		/// Converts the USFX to XHTML for Pathway.
 		/// </summary>
-		/// <param name="usfx">The XML representation of the standard format (USFX).</param>
+		/// <param name="usfx">The XML document representation of the USFM file.</param>
 		/// <param name="fileName">file name with full path where xhtml file will be written</param>
+		/// ------------------------------------------------------------------------------------
 		private void ConvertUsfxToPathwayXhtml(string usfx, string fileName)
 		{
 			// Create argument list
