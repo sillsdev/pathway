@@ -23,11 +23,17 @@ using SIL.Tool.Localization;
 
 namespace SIL.Tool
 {
+    public interface IPublicationInformation
+    {
+        string DefaultXhtmlFileWithPath { get; set; }
+        string DefaultCssFileWithPath { get; set; }
+    }
+
     /// <summary>
     /// PublicationInformation Class contains the details of Dictionary/Scripture Project information
     /// and the information about the files/folders.
     /// </summary>
-    public class PublicationInformation
+    public class PublicationInformation : IPublicationInformation
     {
         #region Private variable
         private TreeView _dictExplorer;

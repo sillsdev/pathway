@@ -102,32 +102,6 @@ namespace Test.WordPressConvert
             Assert.AreEqual("", IsEqualAllButTime(FileExpected(dataSql), FileOutput(dataSql)));
         }
 
-        /// <summary>
-        ///A test for DuplicateBooks 
-        ///</summary>
-        [Test]
-        public void IsDuplicateBooksTest()
-        {
-            XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<books><book title='Korin'/><book title='Korin'/></books>");
-            XmlNodeList books = xmlDocument.SelectNodes("//book/@title");
-            bool result = IsDuplicateBooks(books);
-            Assert.IsTrue(result);
-        }
-
-        /// <summary>
-        ///A test for DuplicateBooks is false
-        ///</summary>
-        [Test]
-        public void NotIsDuplicateBooksTest()
-        {
-            XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<books><book title='1 Korin'/><book title='2 Korin'/></books>");
-            XmlNodeList books = xmlDocument.SelectNodes("//book/@title");
-            bool result = IsDuplicateBooks(books);
-            Assert.IsFalse(result);
-        }
-
         private static string IsEqualAllButTime(string fileExpectedName, string fileOutputName)
         {
             const string pat = @"\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d";

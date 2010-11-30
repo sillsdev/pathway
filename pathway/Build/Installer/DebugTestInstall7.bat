@@ -25,6 +25,9 @@ rem set dst=C:\Progra~1\SIL\FieldWorks
 rem Make sure that the new directory exists.
 if not exist "%installBase%" mkdir "%installBase%"
 
+cd %BASE%\ConfigurationTool%cfg%
+call %BASE%\ConfigurationTool\postBuild.bat Debug
+cd %BASE%\Build\Installer
 xcopy %base%\ConfigurationTool%cfg% "%DST%" /y
 xcopy %base%\ParatextSupport%cfg%\ParatextSupport.dll "%DST%" /y
 xcopy %base%\ParatextSupport%cfg%\ParatextSupport.pdb "%DST%" /y
@@ -43,10 +46,6 @@ rem xcopy %SRC%\IKVM*.* "%DST%" /y
 rem xcopy %SRC%\saxon*.* "%DST%" /y
 
 xcopy %BASE%\PsSupport\*.* "%DST%" /s /q /y
-
-rem Now copy all the Backends to the Pathway directory instead of to a backends directory.
-rem xcopy %BASE%\PublishingSolutionExe%cfg%\Backends\*.* "%DST%\PathwaySupport\Backends" /y /q
-xcopy %BASE%\ConfigurationTool%cfg%\*Convert.* "%DST%" /y
 
 rem the first line here works with the development version the second, the installed version.
 if Exist "C:\Program Files\SIL\FieldWorks 7\Language Explorer\Configuration" goto FwInstalled

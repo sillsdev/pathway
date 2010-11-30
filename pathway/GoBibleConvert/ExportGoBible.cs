@@ -86,8 +86,10 @@ namespace SIL.PublishingSolution
             //MessageBox.Show(string.Format("Preparing to convert {0} for cell phone", projInfo.DefaultXhtmlFileWithPath), "GoBible Export");
             var myCursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
-            var inProcess = new InProcess(0, 4);
+            var inProcess = new InProcess(0, 5);
             inProcess.Show();
+            inProcess.PerformStep();
+            collectionName = GetCollectionName(projInfo);
             inProcess.PerformStep();
             Restructure(projInfo, inProcess);
             inProcess.PerformStep();
@@ -153,9 +155,9 @@ namespace SIL.PublishingSolution
 
             // Merge the individual CSS stylesheets into one temporary stylesheet and
             // copy it to the process folder.
-            string mergedCssPathName = GetMergedCSS(projInfo);
+            GetMergedCSS(projInfo);
             // Preprocess the xhtml file to replace image names, and link to the merged css file.
-            string processedXhtmlFile = GetProcessedXhtml(projInfo, mergedCssPathName);
+            string processedXhtmlFile = GetProcessedXhtml(projInfo);
 
             Common.xsltProgressBar = inProcess.Bar();
             inProcess.AddToMaximum(Chapters(processedXhtmlFile));
@@ -163,7 +165,7 @@ namespace SIL.PublishingSolution
             // Next, get the transformation (XSLT) file, which has been put in the folder
             // "C:\SIL\btai\PublishingSolution\PublishingSolutionExe\bin\Debug".
             // The path for the default XHTML file is "$(Desktop)\\Scripture".
-            string cvFileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) + "_cv";
+            string cvFileName = Path.GetFileNameWithoutExtension(processedXhtmlFile) + "_cv";
             const string xsltName = "TE_XHTML-to-Phone_XHTML.xslt";
 			string xsltFullName = Common.FromRegistry(xsltName);
             processFolder = Path.GetDirectoryName(processedXhtmlFile);
@@ -179,18 +181,11 @@ namespace SIL.PublishingSolution
                 File.Copy(temporaryCvFullName, restructuredFullName, true);
         }
 
-        protected static int Chapters(string name)
+        protected int Chapters(string name)
         {
             if (!File.Exists(name))
                 Thread.Sleep(300);
-            XmlDocument xmlDocument = new XmlDocument {XmlResolver = null};
-            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
-            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings {XmlResolver = null, ProhibitDtd = false};
-            XmlReader xmlReader = XmlReader.Create(name, xmlReaderSettings);
-            xmlDocument.Load(xmlReader);
-            xmlReader.Close();
-            var nodes = xmlDocument.SelectNodes("//xhtml:span[@class='Chapter_Number']", namespaceManager);
+            XmlNodeList nodes = GetPathFromXhtml(name, "//xhtml:span[@class='Chapter_Number']");
             return nodes.Count;
         }
 
@@ -201,20 +196,8 @@ namespace SIL.PublishingSolution
         {
             var sourceText = Path.GetFileName(restructuredFullName);
 
-            // Calculate collection Name
-            char[] delim = new char[] { '_' };
-            var sourceNameSections = Path.GetFileNameWithoutExtension(sourceText).Split(delim);
-            collectionName = sourceNameSections[0];
-
             // Calculate book list
-            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
-            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings {XmlResolver = null, ProhibitDtd = false};
-            XmlReader xmlReader = XmlReader.Create(restructuredFullName, xmlReaderSettings);
-            xmlDocument.Load(xmlReader);
-            xmlReader.Close();
-            XmlNamespaceManager xmlNamespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
-            xmlNamespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var books = xmlDocument.SelectNodes("//xhtml:div[@class='scrBook']/@title", xmlNamespaceManager);
+            XmlNodeList books = GetPathFromXhtml(restructuredFullName, "//xhtml:div[@class='scrBook']/@title");
             if (IsDuplicateBooks(books))
                 return false;
             collectionFullName = Path.Combine(processFolder, "Collections.txt");
@@ -261,6 +244,24 @@ namespace SIL.PublishingSolution
             return true;
         }
 
+        /// <summary>
+        /// Returns the list of nodes selected by path in name
+        /// </summary>
+        /// <param name="name">xhtml file to query</param>
+        /// <param name="path">XPath query</param>
+        /// <returns>list of nodes resulting from applying Xpath path to file name</returns>
+        protected XmlNodeList GetPathFromXhtml(string name, string path)
+        {
+            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings {XmlResolver = null, ProhibitDtd = false};
+            XmlReader xmlReader = XmlReader.Create(name, xmlReaderSettings);
+            xmlDocument.Load(xmlReader);
+            xmlReader.Close();
+            XmlNamespaceManager xmlNamespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+            xmlNamespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            return xmlDocument.SelectNodes(path, xmlNamespaceManager);
+        }
+
         protected bool IsDuplicateBooks(XmlNodeList books)
         {
             DuplicateBooks = new List<string>();
@@ -298,19 +299,17 @@ namespace SIL.PublishingSolution
         /// Preprocess the xhtml file to replace image names, and link to the merged css file.
         /// </summary>
         /// <param name="projInfo">information about input data</param>
-        /// <param name="mergedCSS">full path of file containing style sheet</param>
         /// <returns>path name to processed xthml file</returns>
-        private static string GetProcessedXhtml(PublicationInformation projInfo, string mergedCSS)
+        private string GetProcessedXhtml(PublicationInformation projInfo)
         {
-            //Environment.CurrentDirectory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
-            //string processedXhtml = Common.ImagePreprocess(projInfo.DefaultXhtmlFileWithPath);
-            //ReplaceSlashToREVERSE_SOLIDUS(processedXhtml);
-            //if (projInfo.SwapHeadword)
-            //    SwapHeadWordAndReversalForm(processedXhtml);
-            //string defaultCSS = Path.GetFileName(mergedCSS);
-            //Common.SetDefaultCSS(processedXhtml, defaultCSS);
-            //return processedXhtml;
-            return projInfo.DefaultXhtmlFileWithPath;
+            var result = projInfo.DefaultXhtmlFileWithPath;
+            if (Path.GetFileNameWithoutExtension(result) == collectionName)
+            {
+                result = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath),
+                                                  collectionName + ".xhtml");
+                File.Copy(projInfo.DefaultXhtmlFileWithPath, result, true);
+            }
+            return result;
         }
 
         /// <summary>
@@ -326,9 +325,68 @@ namespace SIL.PublishingSolution
             preProcessor.ReplaceStringInCss(mergedCSS);
             preProcessor.SetDropCapInCSS(mergedCSS);
             var savedCss = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath),
-                                              Path.GetFileName(mergedCSS));
+                                              collectionName + ".css");
             File.Copy(mergedCSS, savedCss, true);
             return savedCss;
+        }
+
+        /// <summary>
+        /// returns the project name from the path
+        /// </summary>
+        /// <param name="projInfo">data on project</param>
+        /// <returns>Project Name</returns>
+        protected string GetProjectName(IPublicationInformation projInfo)
+        {
+            var scrDir = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+            var projDir = Path.GetDirectoryName(scrDir);
+            return Path.GetFileName(projDir);
+        }
+
+        /// <summary>
+        /// Returns the book code from the input file
+        /// </summary>
+        /// <param name="projInfo">project file names</param>
+        /// <returns>Book Code</returns>
+        protected string GetBookCode(IPublicationInformation projInfo)
+        {
+            XmlNodeList codeNodes = GetPathFromXhtml(projInfo.DefaultXhtmlFileWithPath, "//xhtml:span[@class='scrBookCode']");
+            if (codeNodes.Count == 0)
+            {
+                codeNodes = GetPathFromXhtml(projInfo.DefaultXhtmlFileWithPath, "//xhtml:span[@class='scrBookName']");
+            }
+            string result = "";
+            if (codeNodes.Count > 0)
+                result = codeNodes[0].InnerText;
+            if (codeNodes.Count > 1)
+                result += "_" + codeNodes[codeNodes.Count - 1].InnerText;
+            result = Sanitize(result);
+            return result;
+        }
+
+        protected string Sanitize(string result)
+        {
+            result.Trim();
+            if (result.Contains(" "))
+            {
+                var newResult = "";
+                foreach (char c in result)
+                {
+                    if (!char.IsWhiteSpace(c))
+                        newResult = newResult + c;
+                }
+                result = newResult;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Construct collection name from project and book
+        /// </summary>
+        /// <param name="projInfo">project data</param>
+        /// <returns>Collection Name</returns>
+        protected string GetCollectionName(IPublicationInformation projInfo)
+        {
+            return GetProjectName(projInfo) + "_" + GetBookCode(projInfo);
         }
     }
 }

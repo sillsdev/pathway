@@ -15,7 +15,7 @@
 // --------------------------------------------------------------------------------------------
 using System.Diagnostics;
 using System.IO;
-using System.Windows.Forms;
+using System.Xml;
 using NUnit.Framework;
 using System;
 using SIL.PublishingSolution;
@@ -37,7 +37,7 @@ namespace Test.GoBibleConvert
         ///A test for XhtmlCheck
         ///</summary>
         [Test]
-        [Ignore("Hands Team City")]
+        [Ignore("Hangs Team City")]
         public void XhtmlCheck()
         {
             const string fileName = "1pe.xhtml";
@@ -113,11 +113,16 @@ namespace Test.GoBibleConvert
             Param.UpdateMobileAtrrib("Icon", @"C:\ProgramData\SIL\Pathway\Scripture\Icon.png", layout);
             Param.SetValue(Param.LayoutSelected, layout);
             Param.Write();
+            const string origFileName = "1pe.xhtml";
+            IPublicationInformation projInfo = mocks.NewMock<IPublicationInformation>();
+            Expect.Exactly(2).On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(GetFileNameWithInputPath(origFileName)));
+            collectionName = GetCollectionName(projInfo);
             CreateCollection();
             const string collections = "Collections.txt";
             string actualFullName = GetFileNameWithOutputPath(collections);
             string exepectedFullName = GetFileNameWithExpectedPath(collections);
             TextFileAssert.AreEqual(exepectedFullName, actualFullName);
+            mocks.VerifyAllExpectationsHaveBeenMet();
         }
 
         [Test]
@@ -172,6 +177,90 @@ namespace Test.GoBibleConvert
             int actual = Chapters(inputFullName);
             const int expected = 5;
             Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        ///A test for DuplicateBooks 
+        ///</summary>
+        [Test]
+        public void IsDuplicateBooksTest()
+        {
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.LoadXml("<books><book title='Korin'/><book title='Korin'/></books>");
+            XmlNodeList books = xmlDocument.SelectNodes("//book/@title");
+            bool result = IsDuplicateBooks(books);
+            Assert.IsTrue(result);
+        }
+
+        /// <summary>
+        ///A test for DuplicateBooks is false
+        ///</summary>
+        [Test]
+        public void NotIsDuplicateBooksTest()
+        {
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.LoadXml("<books><book title='1 Korin'/><book title='2 Korin'/></books>");
+            XmlNodeList books = xmlDocument.SelectNodes("//book/@title");
+            bool result = IsDuplicateBooks(books);
+            Assert.IsFalse(result);
+        }
+
+        /// <summary>
+        /// Test if project name can be estracted from PublicationInformation
+        /// </summary>
+        [Test]
+        public void GetProjectNameTest()
+        {
+            const string fileName = "1pe.xhtml";
+            string inputFullName = GetFileNameWithInputPath(fileName);
+            IPublicationInformation projInfo = mocks.NewMock<IPublicationInformation>();
+            Expect.Exactly(1).On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(inputFullName));
+            var result = GetProjectName(projInfo);
+            Assert.AreEqual("TestFiles", result);
+            mocks.VerifyAllExpectationsHaveBeenMet();
+        }
+
+        /// <summary>
+        /// Test if project name can be estracted from PublicationInformation
+        /// </summary>
+        [Test]
+        public void GetBookCode1Test()
+        {
+            const string fileName = "1pe.xhtml";
+            string inputFullName = GetFileNameWithInputPath(fileName);
+            IPublicationInformation projInfo = mocks.NewMock<IPublicationInformation>();
+            Expect.Exactly(1).On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(inputFullName));
+            var result = GetBookCode(projInfo);
+            Assert.AreEqual("1Pe", result);
+            mocks.VerifyAllExpectationsHaveBeenMet();
+        }
+
+        /// <summary>
+        /// Test if project name can be estracted from PublicationInformation
+        /// </summary>
+        [Test]
+        public void GetCollectionNameTest()
+        {
+            const string origFileName = "1pe.xhtml";
+            IPublicationInformation projInfo = mocks.NewMock<IPublicationInformation>();
+            Expect.Exactly(2).On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(GetFileNameWithInputPath(origFileName)));
+            collectionName = GetCollectionName(projInfo);
+            Assert.AreEqual("TestFiles_1Pe", collectionName);
+            mocks.VerifyAllExpectationsHaveBeenMet();
+        }
+
+        /// <summary>
+        /// Test if project name can be estracted from PublicationInformation
+        /// </summary>
+        [Test]
+        public void GetCollectionName2Test()
+        {
+            const string origFileName = "luke.xhtml";
+            IPublicationInformation projInfo = mocks.NewMock<IPublicationInformation>();
+            Expect.Exactly(3).On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(GetFileNameWithInputPath(origFileName)));
+            collectionName = GetCollectionName(projInfo);
+            Assert.AreEqual("TestFiles_Matthew", collectionName);
+            mocks.VerifyAllExpectationsHaveBeenMet();
         }
 
         #region private Methods

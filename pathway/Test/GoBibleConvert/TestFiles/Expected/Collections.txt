@@ -3,5 +3,5 @@ Phone-Icon-Filepath: Icon.png
 RedLettering: true
 Source-Text: 1pe_cv.xhtml
 Source-Format: xhtml_te
-Collection: 1pe
+Collection: TestFiles_1Pe
 Book: 1 Pita
