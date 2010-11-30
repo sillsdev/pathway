@@ -15,7 +15,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Net;
+using System.Net.Mail;
 using System.Windows.Forms;
 using System.Xml;
 using SIL.Tool;
@@ -24,6 +27,7 @@ namespace SIL.PublishingSolution
 {
     public class ExportLogos : IExportProcess 
     {
+        const string GuidFileName = "FileGuids.xml";
         protected string processFolder;
         protected string restructuredFullName;
         protected string outputPathBase;
@@ -73,6 +77,7 @@ namespace SIL.PublishingSolution
             {
                 var myCursor = Cursor.Current;
                 Cursor.Current = Cursors.WaitCursor;
+                UpdateGUID(projInfo);
                 CreateMetadata(projInfo);
                 CreateStylesheet(projInfo);
                 CreatePopups(projInfo);
@@ -82,10 +87,25 @@ namespace SIL.PublishingSolution
                 if (projInfo.IsOpenOutput)
                 {
                     string result = outputPathBase + ".zip";
-                    string msg = string.Format("Please submit the file {0} for compiling", result);
-                    MessageBox.Show(msg, "Logos Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    const string MailTo = "Pathway@sil.org";
+                    const string MailSubject = "Logos File Prepare";
+                    string MailBody = string.Format("I am attaching \"{0}\". Please transform it and return it to me.", result);
+                    var cmd = string.Format("mailto:{0}?subject={1}&body={2}", MailTo, Sanitize(MailSubject), Sanitize(MailBody));
+                    Process.Start(cmd);
+                    //MailMessage mail = new MailMessage(MailTo, MailTo, MailSubject, MailBody);
+                    //var attach = new Attachment(result);
+                    //mail.Attachments.Add(attach);
+                    //SmtpClient client = new SmtpClient("https://mail.jaars.org", 465);
+                    //client.UseDefaultCredentials = true;
+                    //try
+                    //{
+                    //    client.Send(mail);
+                    //}
+                    //catch (Exception e)
+                    //{
+                    //    MessageBox.Show(string.Format("Please submit {0} for conversion to Logos", result), e.Message, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    //}
                 }
-                UpdateGUID(projInfo);
             }
             catch (Exception exception)
             {
@@ -99,10 +119,39 @@ namespace SIL.PublishingSolution
             return true;
         }
 
+        /// <summary>
+        /// Replaces non-alphanumeric characters with percent notation.
+        /// </summary>
+        /// <param name="cmd">input command</param>
+        /// <returns>encoded command</returns>
+        protected string Sanitize(string cmd)
+        {
+            string result = string.Empty;
+            foreach (char c in cmd)
+            {
+                if (char.IsLetterOrDigit(c) || c == '.')
+                {
+                    result += c.ToString();
+                }
+                else
+                {
+                    int i = c;
+                    result += ("%" + i.ToString("X2"));
+                }
+            }
+            return result;
+        }
+
         private void UpdateGUID(PublicationInformation projInfo)
         {
-            string FileGuidPath = Path.Combine(Common.GetPSApplicationPath(),"FileGuids.xml");
-            if (!File.Exists(FileGuidPath)) return;
+            var dataDir = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+            var projDir = Path.GetDirectoryName(dataDir);
+            string FileGuidPath = Path.Combine(projDir, GuidFileName);
+            if (!File.Exists(FileGuidPath))
+            {
+                string srcGuidFile = Path.Combine(Common.GetPSApplicationPath(), GuidFileName);
+                File.Copy(srcGuidFile, FileGuidPath);
+            }
             XmlDocument xmlDoc = new XmlDocument { XmlResolver = null };
             xmlDoc.Load(FileGuidPath);
             string outputName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
@@ -173,8 +222,20 @@ namespace SIL.PublishingSolution
         protected void ApplyTransform(PublicationInformation projInfo, string xsltName, string ending)
         {
             string processedXhtmlFile = projInfo.DefaultXhtmlFileWithPath;
-			string xsltFullName = Common.FromRegistry(xsltName);
             processFolder = Path.GetDirectoryName(processedXhtmlFile);
+            var guidFileFullName = Path.Combine(processFolder, GuidFileName);
+            if (!File.Exists(guidFileFullName))
+            {
+                var projDir = Path.GetDirectoryName(processFolder);
+                var savedGuids = Path.Combine(projDir, GuidFileName);
+                File.Copy(savedGuids, guidFileFullName);    // File put here by UpdateGuid
+            }
+            var xsltFullName = Path.Combine(processFolder, xsltName);
+            if (!File.Exists(xsltFullName))
+            {
+                string srcXsltFullName = Common.FromRegistry(xsltName);
+                File.Copy(srcXsltFullName, xsltFullName);                
+            }
             var xsltParam = new Dictionary<string, string> {{"currentYear", DateTime.Now.Year.ToString()}};
             Common.XsltProcess(processedXhtmlFile, xsltFullName, ending + ".xml", xsltParam);
         }

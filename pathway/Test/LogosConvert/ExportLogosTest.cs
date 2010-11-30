@@ -28,7 +28,7 @@ namespace Test.LogosConvert
     /// </summary>
     /// ----------------------------------------------------------------------------------------
     [TestFixture]
-    public class ExportLogosTest
+    public class ExportLogosTest : ExportLogos
     {
         #region setup
         private TestFiles _TestFiles;
@@ -98,6 +98,14 @@ namespace Test.LogosConvert
             ZipAreEqual(_TestFiles.Expected(dataZip), _TestFiles.Output(dataZip));
         }
 
+        /// <summary>
+        /// Test function used to prepare email message
+        /// </summary>
+        [Test]
+        public void SanitizeText()
+        {
+            Assert.AreEqual("C%3A%5C5.3%2F8%22.zip", Sanitize("C:\\5.3/8\".zip"));
+        }
         #region Private Functions
         /// <summary>
         /// Create a simple PublicationInformation instance
