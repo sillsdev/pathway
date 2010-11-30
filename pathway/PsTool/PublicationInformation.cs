@@ -40,7 +40,7 @@ namespace SIL.Tool
         private bool _hideFile;
         private bool _isLexiconExist;
         private bool _isReversalExist;
-        private bool _isExtraProcessing;
+        private bool _isExtraProcessing = true;
         private bool _swapHeadword;
         private string _linkedCSS;
         private string _projectMode;

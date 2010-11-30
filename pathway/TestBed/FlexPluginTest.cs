@@ -331,6 +331,7 @@ namespace TestBed
             projInfo.DictionaryOutputName = "test";
             projInfo.ProjectInputType = radDictionary.Checked ? "Dictionary" : "Scripture";
             projInfo.FinalOutput = "odt";
+            projInfo.IsExtraProcessing = true;
 
             ExportOpenOffice exportOdt = new ExportOpenOffice();
             exportOdt.Export(projInfo);

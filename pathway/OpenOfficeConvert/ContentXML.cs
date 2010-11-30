@@ -177,10 +177,10 @@ namespace SIL.PublishingSolution
             //TODO: When the Input has been preprocessed, GetProjectType returns the wrong type!
             //_projectType = Common.GetProjectType(projInfo.DefaultXhtmlFileWithPath);
             _projectType = projInfo.ProjectInputType;
-            if (_projectType == "Scripture")
-            {
+            //if (_projectType == "Scripture")
+            //{
                 structStyles.IsMacroEnable = true;
-            }
+            //}
             InitializeObject(structStyles, projInfo.OutputExtension); // Creates new Objects
             CreateFile(projInfo.TempOutputFolder);
             CreateSection(structStyles.SectionName);
