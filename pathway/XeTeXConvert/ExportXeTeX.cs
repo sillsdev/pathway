@@ -113,7 +113,7 @@ namespace SIL.PublishingSolution
             }
             catch (Exception ex)
             {
-                var msg = ex.Message;
+                //FileData.SaveError(ex.Message);
                 success = false;
             }
             return success;
@@ -158,7 +158,7 @@ namespace SIL.PublishingSolution
             {
                 fontSize = cssProperty["Paragraph"]["font-size"];
                 _postscriptLanguage.ClassPostscriptName("Paragraph", "Regular", cssProperty);
-                string pageDimensions = cssProperty["@page"]["width"] + "x" + cssProperty["@page"]["height"];
+                string pageDimensions = cssProperty["@page"]["page-width"] + "x" + cssProperty["@page"]["page-height"];
                 pageSize = cssTree.PageSize(pageDimensions);
                 columns = cssProperty["columns"]["column-count"];
                 align = cssProperty["scrSection"]["text-align"];
@@ -238,12 +238,8 @@ namespace SIL.PublishingSolution
             preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
             if (projInfo.SwapHeadword)
                 preProcessor.SwapHeadWordAndReversalForm();
-            string tempFolder = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
-            string tempFolderName = Path.GetFileName(tempFolder);
-            var mc = new MergeCss { OutputLocation = tempFolderName };
-            string mergedCSS = mc.Make(projInfo.DefaultCssFileWithPath, "Temp1.css");
-            preProcessor.ReplaceStringInCss(mergedCSS);
-            preProcessor.SetDropCapInCSS(mergedCSS);
+            preProcessor.ReplaceStringInCss(preProcessor.ProcessedCss);
+            preProcessor.SetDropCapInCSS(preProcessor.ProcessedCss);
             return preProcessor;
         }
         #endregion string GetMergedCSS(PublicationInformation projInfo)

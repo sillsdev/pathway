@@ -71,4 +71,4 @@ goto regdone
 :not64reg
 %BASE%\Build\Installer\Pathway7.reg
 :regdone
-pause
+rem pause

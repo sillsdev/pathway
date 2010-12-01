@@ -150,6 +150,11 @@ namespace SIL.PublishingSolution
 
             try
             {
+                if (!File.Exists(cssFullName))
+                {
+                    var layout = Param.Value[Param.LayoutSelected];
+                    cssFullName = Param.StylePath(Param.StyleFile[layout]);
+                }
                 string myCss = Common.PathCombine(outDir, Path.GetFileName(cssFullName));
                 if (cssFullName != myCss)
                     File.Copy(cssFullName, myCss, true);
