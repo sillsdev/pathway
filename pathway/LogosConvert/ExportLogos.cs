@@ -17,8 +17,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Net;
-using System.Net.Mail;
 using System.Windows.Forms;
 using System.Xml;
 using SIL.Tool;
@@ -170,9 +168,9 @@ namespace SIL.PublishingSolution
                 attName.Value = outputName;
                 newFile.Attributes.Append(attName);
 
-                XmlAttribute attGUID = xmlDoc.CreateAttribute("guid");
-                attName.Value = newGuid;
-                newFile.Attributes.Append(attGUID);
+                XmlAttribute attGuid = xmlDoc.CreateAttribute("guid");
+                attGuid.Value = newGuid;
+                newFile.Attributes.Append(attGuid);
 
                 elmRoot.AppendChild(newFile);
 
