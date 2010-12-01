@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Nov-03-2010 for TD-1634(Turn off non-printing characters before repaginating for macro)
+&apos;Changed On Dec-01-2010 for TD-1702(Implement Progressbar to Dictionary document)
 
 &apos;Define the values to Constant Variables for First Guide word, Last Guide word ,Headword Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -13,6 +13,86 @@ Const TITLEPARASTYLE = &quot;letter&quot;
 Const HOMOGRAPHNUMBER =   &quot;homographnumber&quot;
 Const CONTINUATION_CHARACTER = &quot;...&quot;
 Dim LastParagraph(0) As String
+
+
+&apos; needs writer document 
+Dim oProgressBarModel As Object 
+Dim oSubWindow As Object
+Dim oFrame As Object
+Dim oSubFrame As Object
+Dim ProgressValue As Integer
+Dim PageCount as Integer
+
+&apos;Create Progress bar
+Sub ShowProcessingDialog() 
+  oDoc = ThisComponent &apos; needs document 
+  oController = oDoc.getCurrentController() 
+  oFrame = oController.getFrame() 
+  oContainerWindow = oFrame.ContainerWindow 
+  oToolkit = oContainerWindow.Toolkit 
+  
+  &apos; sub window with sub frame 
+  oSubWindow = CreateNewWindow(oToolkit,oContainerWindow, 300,300,380,120) 
+  oSubWindow.Title=&quot;Update Guidewords&quot;
+  oSubFrame = CreateUnoService(&quot;com.sun.star.frame.Frame&quot;) 
+  oSubFrame.initialize(oSubWindow) 
+  oFrame.getFrames().append(oSubFrame) 
+  
+  &apos; container of controls (Frame)
+  oContainer = CreateUnoService(&quot;com.sun.star.awt.UnoControlContainer&quot;) 
+  oContainerModel = CreateUnoService(&quot;com.sun.star.awt.UnoControlContainerModel&quot;) 
+  oContainerModel.BackgroundColor = &quot;&amp;HEEEEEE&quot; &apos;-1 
+  oContainer.setModel(oContainerModel) 
+  oContainer.setPosSize(0,0,380,120,com.sun.star.awt.PosSize.POSSIZE) 
+  oContainer.createPeer(oToolkit,oSubWindow) 
+  
+  &apos; progressbar 
+  oProgressBarModel = CreateUnoService(&quot;com.sun.star.awt.UnoControlProgressBarModel&quot;) 
+  oProgressBar = CreateUnoService( &quot;com.sun.star.awt.UnoControlProgressBar&quot; ) 
+  oProgressBar.setModel(oProgressBarModel) 
+  oProgressBar.setPosSize(39,65,300,30, com.sun.star.awt.PosSize.POSSIZE ) 
+  oContainer.addControl(&quot;progressbar&quot;,oProgressBar) 
+  
+  &apos; label 
+  oLabel = CreateUnoService(&quot;com.sun.star.awt.UnoControlFixedText&quot;) 
+  oLabelModel = CreateUnoService(&quot;com.sun.star.awt.UnoControlFixedTextModel&quot;) 
+  oLabelModel.Label = &quot;The Open Office window will be hidden while the headers are updated&quot; + chr(13) + &quot;because this reduces the time it takes to do the update.&quot; 
+&apos;  oLabelModel.Color = &quot;red&quot; &apos;-1 
+  oLabel.setModel(oLabelModel) 
+  oLabel.setPosSize(23,20,380,30,com.sun.star.awt.PosSize.POSSIZE) 
+  oContainer.addControl(&quot;label&quot;,oLabel) 
+  
+  &apos; show window 
+  oSubWindow.setEnable(False) 
+  oSubWindow.setVisible(True) 
+ &apos; oSubWindow.setVisible(False) 
+End Sub 
+
+&apos;Increments progressbar value
+Sub MyProgressBar(ProgressValue)
+	oProgressBarModel.ProgressValue = ProgressValue &apos; * 1
+End Sub
+
+&apos; create new non-modal dialog 
+Function CreateNewWindow(oToolkit,oParent,nX,nY,nWidth,nHeight) As Object 
+  aRect = CreateUnoStruct(&quot;com.sun.star.awt.Rectangle&quot;) 
+  With aRect 
+    .X = nX 
+    .Y = nY 
+    .Width = nWidth 
+    .Height = nHeight 
+  End With 
+  aWinDesc = CreateUnoStruct(&quot;com.sun.star.awt.WindowDescriptor&quot;) 
+  With aWinDesc 
+    .Type = com.sun.star.awt.WindowClass.TOP 
+    .WindowServiceName = &quot;dialog&quot; 
+    .ParentIndex = -1 
+    .Bounds = aRect 
+    .Parent = oParent 
+    .WindowAttributes = com.sun.star.awt.WindowAttribute.MOVEABLE + com.sun.star.awt.WindowAttribute.CLOSEABLE 
+  End With 
+  CreateNewWindow = oToolkit.createWindow(aWinDesc) 
+End Function  
 
 &apos;This procedure turn off non-printing characters
 Sub TurnOffNonPrintingCharacters
@@ -194,23 +274,30 @@ End Function
 &apos;The main procedure to show the First and Last Guide words on Header
 Sub SetGuides()
 On Error GoTo MyError:
+Dim isProgressClosed As Boolean
 
-	Dim PageCount as Integer
 	oDoc = ThisComponent
 	oContWindow = oDoc.CurrentController.Frame.ContainerWindow 
 	
-	msgbox &quot;The Open Office window will be hidden while the headers are updated since this cuts the time required for the update in half.&quot;,,&quot;Update Guide Words&quot;
+	&apos;msgbox &quot;The Open Office window will be hidden while the headers are updated since this cuts the time required for the update in half.&quot;,,&quot;Update Guide Words&quot;
 	oContWindow.Visible = false 
 	
-	AutoSaveEnableDisable(false) &apos;Disable &quot;Auto Recovery&quot;
+	&apos;AutoSaveEnableDisable(false) &apos;Disable &quot;Auto Recovery&quot;
 	
 	mytime = now
+PageCount = TotalPages
+&apos;=========Progressbar
+ShowProcessingDialog() 
+ProgressValue = 5
+oProgressBarModel.ProgressValueMax = PageCount * 4
+oProgressBarModel.ProgressValue = ProgressValue
+&apos;=========Progressbar
 	
 	AlingOverlappingImages()
 	
 	RemoveOldGuides()
 	KeepNextParagraph()
-	PageCount = TotalPages
+	&apos;PageCount = TotalPages
 	Redim LastParagraph(PageCount) As String	
 	GetLastParagraph()
 	keep = &quot;Keepnext&quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
@@ -220,24 +307,38 @@ On Error GoTo MyError:
 	mytime = now
 	&apos;PageCount = TotalPages
 	LastPara(PageCount)
+	
 	keep = keep &amp; chr(10) &amp; &quot;Search&quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
 	mytime = now
 	keep = keep &amp; chr(10) &amp; &quot;Insert&quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
 	ReSetTabs()
-	oDoc.store() 
 	
-	AutoSaveEnableDisable(true) &apos;Enable &quot;Auto Recovery&quot;
+	oProgressBarModel.ProgressValue = PageCount * 4
+	oDoc.store() 
+
+	CloseProgressBar	
+	&apos;AutoSaveEnableDisable(true) &apos;Enable &quot;Auto Recovery&quot;
 	
 	oContWindow.Visible = true 
 	&apos;msgbox keep
 	&apos;&apos;msgbox mytime &amp; chr(10) &amp; now
 Exit Sub
 MyError:
+	If isProgressClosed = False Then
+		CloseProgressBar
+	End If
 	if Err &lt;&gt; 91 Then
-		Msgbox &quot;Sorry! Could not update the Guide Words.&quot; , 0 + 64,  &quot;Update Guide Words&quot;
+		Msgbox &quot;Sorry! Could not update the Guide Words.&quot; , 0 + 64,  &quot;Update Guidewords&quot;
 	End If
 	oContWindow.Visible = true
 End Sub  
+
+&apos;This procedure dispose the Progressbar
+Sub CloseProgressBar
+  oSubWindow.setVisible(False) 
+  oFrame.getFrames().remove(oSubFrame) 
+  oSubWindow.dispose() 
+End Sub
 
 &apos;This procedure set the dialgue to correct Update Guide Words 
 Sub StartDontForget100
@@ -305,6 +406,12 @@ oDoc = ThisComponent
 oVC = oDoc.CurrentController.getViewCursor 
 oVC.gotoStart(false) 
 Do 
+
+		&apos;=========Progressbar    
+			ProgressValue=ProgressValue+1
+			MyProgressBar(ProgressValue)
+		&apos;=========Progressbar  
+		
 	page = oVC.getPage
 	if page = OldPage Then 
 		Exit sub
@@ -342,6 +449,12 @@ oDoc = ThisComponent
 oVC = oDoc.CurrentController.getViewCursor 
 oVC.gotoStart(false) 
 Do 
+
+		&apos;=========Progressbar    
+			ProgressValue=ProgressValue+1
+			MyProgressBar(ProgressValue)
+		&apos;=========Progressbar  
+		
 	page = oVC.getPage
 	if page = OldPage Then 
 		Exit sub
@@ -368,6 +481,12 @@ oVC = oDoc.CurrentController.getViewCursor
 oVC.gotoStart(false) 
 PageCount = TotalPages
 Do 
+
+		&apos;=========Progressbar    
+			ProgressValue=ProgressValue+1
+			MyProgressBar(ProgressValue)
+		&apos;=========Progressbar  
+		
 	page = oVC.getPage
 	
 	if PrevPageNo &gt;= page Then
@@ -449,6 +568,12 @@ oDoc = ThisComponent
 oVC = oDoc.CurrentController.getViewCursor 
 oVC.gotoStart(false) 
 Do
+
+		&apos;=========Progressbar    
+			ProgressValue=ProgressValue+1
+			MyProgressBar(ProgressValue)
+		&apos;=========Progressbar  
+		
     page = oVC.getPage 
 If page &gt; 1 Then
 
