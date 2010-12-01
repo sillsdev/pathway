@@ -30,31 +30,34 @@ namespace SIL.Tool
     /// </summary>
     public class ZipFolder
     {
-        #region AddToZip(string filename, string archive, Boolean addCompresed)
+        #region AddToZip(string[] filename, string archive)
         /// <summary>
-        /// Add a single file to an existing Zip archive, with the option of adding the file
-        /// as deflated or stored (no compression). As of 10/19/2010, these are the only compression 
-        /// options supported by the ICSharpCode library.
-        /// Note: Files are currently added to the root of the archive.
+        /// Add files to an existing Zip archive, 
         /// </summary>
-        /// <param name="filename">Path and filename of the file to add to the archive</param>
+        /// <param name="filename">Array of path / filenames to add to the archive</param>
         /// <param name="archive">Zip archive that we want to add the file to</param>
-        /// <param name="addCompresed">true if compressed, false if stored</param>
-        public void AddToZip(string filename, string archive, Boolean addCompresed)
+        public void AddToZip(string[] filename, string archive)
         {
-            if (!File.Exists(filename) || !File.Exists(archive))
+            if (!File.Exists(archive))
             {
                 return;
             }
 
             try
             {
-
                 ZipFile zf = new ZipFile(archive);
                 zf.BeginUpdate();
-                // NameTransform nukes the path info from Filename (so it gets added to the top level of the archive)
-                zf.NameTransform = new ZipNameTransform(Path.GetDirectoryName(filename));
-                zf.Add(filename, (addCompresed) ? CompressionMethod.Deflated : CompressionMethod.Stored);
+                // path relative to the archive
+                zf.NameTransform = new ZipNameTransform(Path.GetDirectoryName(archive));
+                foreach (var file in filename)
+                {
+                    // skip if this isn't a real file
+                    if (!File.Exists(file))
+                    {
+                        continue;
+                    }
+                    zf.Add(file, CompressionMethod.Deflated);
+                }
                 zf.CommitUpdate();
                 zf.Close();
             }

@@ -1232,14 +1232,21 @@ namespace SIL.PublishingSolution
             var mODT = new ZipFolder();
             string outputPathWithFileName = outputPath + ".epub";
 
-            mODT.CreateZip(sourceFolder, outputPathWithFileName, 0);
-
-            // add the mimetype file to this archive, uncompressed
-            string strFromOfficeFolder = Common.PathCombine(Common.GetPSApplicationPath(), "epub");
-            string mimetypeFile = Common.PathCombine(strFromOfficeFolder, "mimetype");
-            string copiedMimetypePath = Path.Combine(sourceFolder, Path.GetFileName(mimetypeFile));
-            File.Copy(mimetypeFile, copiedMimetypePath);
-            mODT.AddToZip(copiedMimetypePath, outputPathWithFileName, false);
+            // add the content to the existing epub.zip file
+            string zipFile = Path.Combine(sourceFolder, "epub.zip");
+            string contentFolder = Path.Combine(sourceFolder, "OEBPS");
+            string[] files = Directory.GetFiles(contentFolder);
+            mODT.AddToZip(files, zipFile);
+            var sb = new StringBuilder();
+            sb.Append(sourceFolder);
+            sb.Append(Path.DirectorySeparatorChar);
+            sb.Append("META-INF");
+            sb.Append(Path.DirectorySeparatorChar);
+            sb.Append("container.xml");
+            var containerFile = new string[1] {sb.ToString()};
+            mODT.AddToZip(containerFile, zipFile);
+            // copy the results to the output directory
+            File.Copy(zipFile, outputPathWithFileName, true);
 
             try
             {
