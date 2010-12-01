@@ -42,7 +42,6 @@ set cfg=bin\x86\%1
 rem copy backends
 xcopy %base%\OpenOfficeConvert\%cfg%\OpenOfficeConvert.* . /y
 xcopy %base%\InDesignConvert\%cfg%\InDesignConvert.* . /y
-xcopy %base%\LogosConvert\%cfg%\LogosConvert.* . /y
 xcopy %base%\epubConvert\%cfg%\epubConvert.* . /y
 xcopy %base%\PathwayB\%cfg%\PathwayB.* . /y
 if "%1" == "CorporateBTE" goto justgobible
@@ -56,6 +55,7 @@ xcopy %base%\XeTeXConvert\%cfg%\XeTeXConvert.* . /y
 :justgobible
 if "%1" == "ReleaseSE" goto nogobible
 xcopy %base%\GoBibleConvert\%cfg%\GoBibleConvert.* . /y
+xcopy %base%\LogosConvert\%cfg%\LogosConvert.* . /y
 goto done
 :nogobible
 rmdir /s /q GoBible

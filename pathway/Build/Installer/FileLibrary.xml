@@ -1,5 +1,40 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\PathwaySupport\Help\Intellectual_Property.docx" ComponentGuid="9EFBA3A9-15E8-477B-828F-C172D11EA251"/>
+	<File Path="Files\PublishingSolution\TE_XHTML-to-epub_XHTML.xslt" ComponentGuid="ABE36DC5-1C6E-4135-9A2F-A6D17908A0FE"/>
+	<File Path="Files\PublishingSolution\ScripturePreview.xhtml" ComponentGuid="14A4E7B3-F290-4945-97DF-BD7D26CEBE33"/>
+	<File Path="Files\PublishingSolution\DictionaryPreview.xhtml" ComponentGuid="67B48426-EBD9-4BE8-8877-F540E9491392"/>
+	<File Path="Files\PublishingSolution\Styles\Scripture\PageNumber_TopOutside.css" ComponentGuid="8F6F1322-1864-4B13-9324-0A52FE965CFA"/>
+	<File Path="Files\PublishingSolution\Styles\Scripture\PageNumber_TopInside.css" ComponentGuid="BC8490B4-BB9F-49F2-BB9A-E87A7AD22EF7"/>
+	<File Path="Files\PublishingSolution\Styles\Scripture\PageNumber_TopCenter.css" ComponentGuid="C9CEE07E-752B-4CF9-8559-9D88F2E722D5"/>
+	<File Path="Files\PublishingSolution\Styles\Scripture\PageNumber_None.css" ComponentGuid="3912359D-37F0-402D-9CE6-67128BE181BB"/>
+	<File Path="Files\PublishingSolution\Styles\Scripture\PageNumber_BottomOutside.css" ComponentGuid="AA4ECB6E-6123-4638-8D52-E2713F9AE7A3"/>
+	<File Path="Files\PublishingSolution\Styles\Scripture\PageNumber_BottomInside.css" ComponentGuid="23BCD033-FAA2-4066-9385-420097AFE815"/>
+	<File Path="Files\PublishingSolution\Styles\Scripture\PageNumber_BottomCenter_FirstPage.css" ComponentGuid="7C602FFC-AD0D-4675-A34D-377D126323B4"/>
+	<File Path="Files\PublishingSolution\Styles\Scripture\PageNumber_BottomCenter.css" ComponentGuid="9A475F97-DF4D-4FBB-82FE-0D630D53CB31"/>
+	<File Path="Files\PublishingSolution\Styles\Scripture\epub.css" ComponentGuid="CA6F6995-9AC3-4306-B5DA-F5B69C15B587"/>
+	<File Path="Files\PublishingSolution\Styles\Scripture\base_font_andika.css" ComponentGuid="A4F036BC-AC8B-4275-82D3-9889D091DB9B"/>
+	<File Path="Files\PublishingSolution\Styles\Scripture\Preview\GPS - C5 - 2 Col p2.jpg" ComponentGuid="0D3B18EC-D33E-4C3A-A0E2-2D3767B7958C"/>
+	<File Path="Files\PublishingSolution\Styles\Scripture\Preview\GPS - C5 - 2 Col p1.jpg" ComponentGuid="E0CC5711-7188-4DB6-A384-22232F1D2B2A"/>
+	<File Path="Files\PublishingSolution\Styles\Scripture\Preview\GPS - A4 - 2 Col - Charis 11 on 13 p2.jpg" ComponentGuid="9ACDBCCE-960E-45F9-9F09-B1C8B7826A37"/>
+	<File Path="Files\PublishingSolution\Styles\Scripture\Preview\GPS - A4 - 2 Col - Charis 11 on 13 p1.jpg" ComponentGuid="DB72D9BF-52EC-4DE7-81A6-7832BC9B74FF"/>
+	<File Path="Files\PublishingSolution\Styles\Scripture\Preview\GPS - A4 - 1 Col - Charis 11 on 13 p2.jpg" ComponentGuid="8CF36EB8-5D0E-4508-8287-BF975174AAC2"/>
+	<File Path="Files\PublishingSolution\Styles\Scripture\Preview\GPS - A4 - 1 Col - Charis 11 on 13 p1.jpg" ComponentGuid="2D518066-3DD6-4744-A773-C272867EBF89"/>
+	<File Path="Files\PublishingSolution\Styles\Dictionary\PageNumber_TopOutside.css" ComponentGuid="A0DBEB68-8245-4F88-B29C-52635D02D814"/>
+	<File Path="Files\PublishingSolution\Styles\Dictionary\PageNumber_TopInside.css" ComponentGuid="DE58F268-242E-4292-AD5A-BC761E190007"/>
+	<File Path="Files\PublishingSolution\Styles\Dictionary\PageNumber_TopCenter.css" ComponentGuid="D669DB84-DD25-4C31-ADE9-7C2053304FB9"/>
+	<File Path="Files\PublishingSolution\Styles\Dictionary\PageNumber_None.css" ComponentGuid="A35E761C-3F8F-44A1-B0DD-2A23B7C08C28"/>
+	<File Path="Files\PublishingSolution\Styles\Dictionary\PageNumber_BottomOutside.css" ComponentGuid="0901E992-DCD1-4D58-8F26-C6819F744386"/>
+	<File Path="Files\PublishingSolution\Styles\Dictionary\PageNumber_BottomInside.css" ComponentGuid="B7545CE0-0A73-4833-A5D4-DA587AC8A568"/>
+	<File Path="Files\PublishingSolution\Styles\Dictionary\PageNumber_BottomCenter.css" ComponentGuid="1E755B96-68A5-4D7E-A6E9-C3C42E627709"/>
+	<File Path="Files\PublishingSolution\Styles\Dictionary\Font_Andika.css" ComponentGuid="194E4B68-8BBB-4DBD-8C8B-B4C1751D1D76"/>
+	<File Path="Files\PublishingSolution\Styles\Dictionary\epub.css" ComponentGuid="776075EB-1266-49A5-A4BB-14D8892EF040"/>
+	<File Path="Files\PublishingSolution\Help\Intellectual_Property.docx" ComponentGuid="20C2493D-E679-4F9B-96B3-8D5B01B0158E"/>
+	<File Path="Files\PublishingSolution\epub\mimetype" ComponentGuid="FCAF456D-F8DE-4C60-BD04-C664B627A17E"/>
+	<File Path="Files\PublishingSolution\epub\epub.zip" ComponentGuid="B43A42BA-F2ED-4614-93B2-FA1C0CD8F629"/>
+	<File Path="Files\PublishingSolution\epub\META-INF\container.xml" ComponentGuid="9FC3FD83-C46B-4958-9ED5-7A74C41120A9"/>
+	<File Path="Files\PathwaySupport\epub\epub.zip" ComponentGuid="1F7E6F1D-2674-407C-8F20-B48A5D43B9BF"/>
+	<File Path="Files\ConfigurationTool\epub\epub.zip" ComponentGuid="3C10DF90-9CFC-44F3-881D-2BC603572E6E"/>
 	<File Path="Files\PathwaySupport\ScripturePreview.xhtml" ComponentGuid="9C1654F8-B8A1-4803-A336-D3E709144959"/>
 	<File Path="Files\PathwaySupport\DictionaryPreview.xhtml" ComponentGuid="152DC34B-BB98-4D15-8429-2CE18FD13354"/>
 	<File Path="Files\PathwaySupport\Styles\Scripture\Preview\GPS - C5 - 2 Col p2.jpg" ComponentGuid="E74C7BEE-A5E9-44AB-9672-F0B4DB5A0286"/>

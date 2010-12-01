@@ -10,7 +10,6 @@ xcopy %base2%\PathwayB\%cfg2%\PathwayB.* . /y
 xcopy %base2%\OpenOfficeConvert\%cfg2%\OpenOfficeConvert.* . /y
 xcopy %base2%\LiftPrepare\%cfg2%\LiftPrepare.* . /y
 xcopy %base2%\InDesignConvert\%cfg2%\InDesignConvert.* . /y
-xcopy %base2%\LogosConvert\%cfg2%\LogosConvert.* . /y
 xcopy %base2%\epubConvert\%cfg2%\epubConvert.* . /y
 if "%1" == "CorporateBTE" goto justgobible
 if "%1" == "Corporate7BTE" goto justgobible
@@ -23,6 +22,7 @@ if "%1" == "ReleaseSE" goto nogobible
 if "%1" == "Release7SE" goto nogobible
 :justgobible
 xcopy %base2%\GoBibleConvert\%cfg2%\GoBibleConvert.* . /y
+xcopy %base2%\LogosConvert\%cfg2%\LogosConvert.* . /y
 xcopy %base2%\ParatextSupport\%cfg2%\ParatextSupport.* . /y
 xcopy %base2%\PsSupport\ScriptureStyleSettings.xml . /q /y
 goto endBible

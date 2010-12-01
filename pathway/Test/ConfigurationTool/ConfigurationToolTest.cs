@@ -38,6 +38,10 @@ namespace Test.UIConfigurationToolTest
             _inputBasePath = Common.PathCombine(testPath, "Input");
             _expectBasePath = Common.PathCombine(testPath, "Expected");
             _outputBasePath = Common.PathCombine(testPath, "Output");
+            const bool recursiveDelete = true;
+            if (Directory.Exists(_outputBasePath))
+                Directory.Delete(_outputBasePath, recursiveDelete);
+            Directory.CreateDirectory(_outputBasePath);
 
             _supportSource = Common.DirectoryPathReplace(testPath + "/../../../PsSupport");
 

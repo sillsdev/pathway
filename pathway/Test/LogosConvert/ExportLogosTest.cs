@@ -56,7 +56,7 @@ namespace Test.LogosConvert
         {
             var target = new ExportLogos();
             var actual = target.Handle("Dictionary");
-            Assert.IsTrue(actual);
+            Assert.IsFalse(actual);
         }
 
         [Test]

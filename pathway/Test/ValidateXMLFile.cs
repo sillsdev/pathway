@@ -118,7 +118,7 @@ namespace Test
 
                     if (propertyValue != ClassProperty[ns + ":" + key])
                     {
-                        Assert.AreEqual(ClassProperty[ns + ":" + key], propertyKey);
+                        Assert.AreEqual(ClassProperty[ns + ":" + key], propertyValue);
                         match = false;
                         break;
                     }
