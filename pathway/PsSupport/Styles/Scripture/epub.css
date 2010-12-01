@@ -185,8 +185,13 @@ list-style-position : inside;
 text-indent : 0;
 margin-left : 0;
 }
-.parallel_passage_reference {
-font-style : italic;
+.parallel_passage_reference, .Parallel_Passage_Reference {
+font-style: italic;
+text-align: center;
+text-indent: 0pt;
+margin-left: 0pt;
+margin-top: 0pt;
+margin-bottom: 3pt;
 }
 .scrIntroSection {
 text-align : left;
