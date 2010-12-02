@@ -14,7 +14,8 @@ namespace SIL.PublishingSolution
 	public class ParatextPathwayLink
 	{
 		private Dictionary<string, object> m_xslParams;
-		private string m_databaseName;
+        private string m_projectName;
+        private string m_databaseName;
 		private XslCompiledTransform m_cleanUsfx = new XslCompiledTransform();
 		private XslCompiledTransform m_usfxToXhtml = new XslCompiledTransform();
 		private XslCompiledTransform m_moveTitleSpansToTitle = new XslCompiledTransform();
@@ -86,9 +87,14 @@ namespace SIL.PublishingSolution
 		/// ------------------------------------------------------------------------------------
 		public ParatextPathwayLink(string projName, string databaseName, string ws, string userWs, string userName)
 		{
+            //// TestBed Code
+            //// Display parameter
+            //MessageBox.Show("projName - " + projName + ", databaseName - " + databaseName + ", ws - " + ws + ", userWs - " + userWs + ", userName - " + userName);
+
 			if (ws == "en")
 				ws = "zxx";
 
+		    m_projectName = projName;
 			m_databaseName = databaseName;
 		    Common.databaseName = databaseName;
 			// Set parameters for the XSLT.
@@ -135,14 +141,13 @@ namespace SIL.PublishingSolution
             //// TestBed Code
             //// Save Paratext usfxDoc file.
             // usfxDoc.Save("d:\\usfxDoc.xml");
-
 			if (string.IsNullOrEmpty(usfxDoc.InnerText))
 			{
 				// TODO: Localize string
 				MessageBox.Show("The specified book has no content to export.", string.Empty, MessageBoxButtons.OK);
 				return;
 			}
-			ScriptureContents dlg = new ScriptureContents();
+            ScriptureContents dlg = new ScriptureContents();
 			dlg.DatabaseName = m_databaseName;
 			DialogResult result = dlg.ShowDialog();
 			if (result != DialogResult.Cancel)
@@ -151,6 +156,11 @@ namespace SIL.PublishingSolution
 
 				// Get the file name as set on the dialog.
 				string outputLocationPath = dlg.OutputLocationPath;
+                
+                string cssFullPath = Path.Combine(outputLocationPath, pubName + ".css");
+                StyToCSS styToCss = new StyToCSS();
+                styToCss.ConvertStyToCSS(m_projectName, cssFullPath);
+
 				// ENHANCE/TODO: Add book number/id to end of file when exporting multiple books.
 				string fileName = Path.Combine(outputLocationPath, pubName + ".xhtml");
 
@@ -165,8 +175,10 @@ namespace SIL.PublishingSolution
 				}
 
 				ConvertUsfxToPathwayXhtml(usfxDoc.InnerXml, fileName);
+                //MessageBox.Show("ProjectName-" + m_projectName + ", CSSPath-" + cssFullPath);
+                //MessageBox.Show("Filename-" + fileName);
 
-				PsExport exporter = new PsExport();
+                PsExport exporter = new PsExport();
 				exporter.DataType = "Scripture";
 				exporter.Export(fileName);
 			}

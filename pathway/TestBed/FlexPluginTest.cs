@@ -530,7 +530,7 @@ namespace TestBed
 
         private void btnParaText_Click(object sender, EventArgs e)
         {
-            ParatextPathwayLink paraText = new ParatextPathwayLink("MyprojName", "MydatabaseName", "en", "en", "Sankar");
+            ParatextPathwayLink paraText = new ParatextPathwayLink("NKOu1", "NKOu1", "en", "en", "Sankar");
             XmlDocument usfxDoc = new XmlDocument();
             usfxDoc.Load(txtInputPath.Text);
             paraText.ExportToPathway(usfxDoc);
