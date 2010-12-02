@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Dec-01-2010 for TD-1702(Implement Progressbar to Dictionary document)
+&apos;Changed On Dec-02-2010 for TD-1709(macro crashes with kyj export to Word &amp; PDF)
 
 &apos;Define the values to Constant Variables for First Guide word, Last Guide word ,Headword Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -297,7 +297,7 @@ oProgressBarModel.ProgressValue = ProgressValue
 	
 	RemoveOldGuides()
 	KeepNextParagraph()
-	&apos;PageCount = TotalPages
+	PageCount = TotalPages
 	Redim LastParagraph(PageCount) As String	
 	GetLastParagraph()
 	keep = &quot;Keepnext&quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
@@ -328,7 +328,7 @@ MyError:
 		CloseProgressBar
 	End If
 	if Err &lt;&gt; 91 Then
-		Msgbox &quot;Sorry! Could not update the Guide Words.&quot; , 0 + 64,  &quot;Update Guidewords&quot;
+		Msgbox &quot;Sorry! Could not update the Guide Words.&quot; , 0 + 64,  &quot;Update Guide Words&quot;
 	End If
 	oContWindow.Visible = true
 End Sub  

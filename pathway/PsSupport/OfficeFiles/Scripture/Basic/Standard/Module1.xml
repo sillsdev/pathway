@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Dec-01-2010 for TD-1591(Progress bar for guide word macro)
+&apos;Changed On Dec-02-2010 for TD-1709(macro crashes with kyj export to Word &amp; PDF)
 
-&apos; Implemented &quot;Progress bar&quot;
 &apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
 Const LASTGUIDESTYLE =  &quot;GuideR&quot;
@@ -298,8 +297,7 @@ On Error GoTo MyError:
 Dim VerseCharStyle, ChapterCharStyle, BookCharStyle
 Dim isEndChapterFoundAlready As Boolean
 PageCount = TotalPages
-Redim LastParagraph(PageCount+2) As String
-Dim HiddenParagraph(PageCount,1) As String
+
 Dim isProgressClosed As Boolean
 
 	oDoc = ThisComponent 
@@ -330,6 +328,10 @@ oProgressBarModel.ProgressValue = ProgressValue
 RemoveOldGuides
 
 KeepNextParagraph
+
+PageCount = TotalPages
+Redim LastParagraph(PageCount+2) As String
+Dim HiddenParagraph(PageCount,1) As String
 
 GetLastParagraph
 
