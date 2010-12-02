@@ -366,6 +366,36 @@ namespace SIL.Tool
             }
             return result;
         }
+
+        /// <summary>
+        /// To replace the symbol to text
+        /// </summary>
+        /// <param name="value">input symbol</param>
+        /// <returns>Replaced text</returns>
+        public static string ReplaceSymbolToText(string value)
+        {
+            if (value.IndexOf("&") >= 0)
+            {
+                value = value.Replace("&", "&amp;");
+            }
+            else if (value.IndexOf("<") >= 0)
+            {
+                value = value.Replace("<", "&lt;");
+            }
+            else if (value.IndexOf(">") >= 0)
+            {
+                value = value.Replace(">", "&gt;");
+            }
+            else if (value.IndexOf("\"") >= 0)
+            {
+                value = value.Replace("\"", "&quot;");
+            }
+            else if (value.IndexOf("'") >= 0)
+            {
+                value = value.Replace("'", "&apos;");
+            }
+            return value;
+        }
         #endregion
 
         #region RightRemove(string fullString, string splitString)

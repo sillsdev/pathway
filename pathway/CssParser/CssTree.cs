@@ -623,7 +623,10 @@ namespace SIL.PublishingSolution
 
                 foreach (var prop in getProperty)
                 {
-                    _cssProperty[prop.Key] = prop.Value.Replace("\"","");
+                    if(prop.Key != "prince-text-replace")
+                     _cssProperty[prop.Key] = prop.Value.Replace("\"","");
+                    else
+                        _cssProperty[prop.Key] = prop.Value;
                 }
             }
             catch (Exception ex)

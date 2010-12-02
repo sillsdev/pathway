@@ -691,6 +691,83 @@ namespace SIL.PublishingSolution
             }
             doc.Save(styleFilePath);
         }
+ 
+        /// <summary>
+        /// Creates a Style for Drop caps according to no of Characters
+        /// </summary>
+        /// <example>Chapter No 1, 11, 111, 1111 etc., creates styles for each character   </example>
+        /// <param name="styleFilePath">syles.xml path</param>
+        /// <param name="className">Child "style name"</param>
+        /// <param name="makeClassName">New Child "style name"</param>
+        /// <param name="parentName">Parent "style name"</param>
+        /// <param name="noOfChar">No of Character to be displayed as Drop Caps</param>
+        public void CreateDropCapStyle(string styleFilePath, string className, string makeClassName, string parentName, int noOfChar)
+        {
+            var doc = new XmlDocument();
+            doc.Load(styleFilePath);
+            var nsmgr = new XmlNamespaceManager(doc.NameTable);
+            nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+            nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+
+            // if new stylename exists
+            XmlElement root = doc.DocumentElement;
+            string style = "//st:style[@st:name='" + makeClassName + "']";
+            if (root != null)
+            {
+                XmlNode node = root.SelectSingleNode(style, nsmgr); // work
+                if (node != null)
+                {
+                    return;
+                }
+
+                style = "//st:style[@st:name='" + className + "']";
+                node = root.SelectSingleNode(style, nsmgr);
+
+                if (node == null) // class not exist in Styles.xml
+                {
+                    style = "//st:style[@st:name='Empty']";
+                    node = root.SelectSingleNode(style, nsmgr);
+                }
+
+                XmlAttribute attribToBeChanged;
+                foreach (XmlNode childNode in node.ChildNodes)
+                {
+                    if (childNode.Name == "style:paragraph-properties")
+                    {
+                        foreach (XmlNode chNode in childNode.ChildNodes)
+                        {
+                            if (chNode.Name == "style:drop-cap")
+                            {
+                                //if (childNode.Attributes.GetNamedItem("style:lines") != null)  // if needed we can use this for no of lines.
+                                //{
+                                //    attribToBeChanged = childNode.Attributes["style:lines"];
+                                //    attribToBeChanged.Value = noOfChar.ToString();
+                                //}
+
+                                if (chNode.Attributes.GetNamedItem("style:length") != null)
+                                {
+                                    attribToBeChanged = chNode.Attributes["style:length"];
+                                    attribToBeChanged.Value = noOfChar.ToString();
+                                }
+                            }
+                        }
+                    }
+                    if (childNode.Name == "style:text-properties") // Removing all the Child properties of Text Node, to avoid in Paragraph property.
+                    {
+                        node.RemoveChild(childNode);
+                    }
+                }
+                XmlDocumentFragment styleNode = doc.CreateDocumentFragment();
+                styleNode.InnerXml = node.OuterXml;
+                node.ParentNode.InsertAfter(styleNode, node);
+
+                parentName = parentName.Replace("1", "");
+                var nameElement = (XmlElement)node;
+                nameElement.SetAttribute("style:name", makeClassName);
+                nameElement.SetAttribute("style:parent-style-name", parentName);
+            }
+            doc.Save(styleFilePath);
+        }
         #endregion
 
 

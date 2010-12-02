@@ -59,7 +59,7 @@ namespace SIL.PublishingSolution
         protected Dictionary<string, Dictionary<string, string>> IdAllClass;
         protected Dictionary<string, Dictionary<string, string>> _newProperty;
         protected Dictionary<string, string> ParentClass;
-
+        protected Dictionary<string, string> _listTypeDictionary = new Dictionary<string, string>();
         protected Dictionary<string, ArrayList> _classFamily;
         //protected ClassInfo _classInfo = new ClassInfo();
         protected string _className;
@@ -67,6 +67,8 @@ namespace SIL.PublishingSolution
         private string _isTagClass;
         private string _listType;
         protected string _anchorBookMarkName = string.Empty;
+        protected string _anchorIdValue = string.Empty;
+        protected bool _anchorStart;
 
         protected string _childName = string.Empty;
         protected string _closeChildName = string.Empty;
@@ -88,11 +90,17 @@ namespace SIL.PublishingSolution
         protected string _imageSource;
         protected string _imageClass;
         protected string _imageSrcClass;
+        protected bool _isAutoWidthforCaption;
         protected Common.OutputType _outputType;
+        protected string _listName = string.Empty;
 
         protected ArrayList _headwordStyleName = new ArrayList();
         protected bool _headwordStyles = false;
         private string _parentStyleName;
+        protected ArrayList _visibilityClassName = new ArrayList();
+        protected Dictionary<string, string> _replaceSymbolToText = new Dictionary<string, string>();
+        protected List<string> _dropCap = new List<string>();
+        protected bool _isDropCap;
 
         #endregion
 
@@ -148,6 +156,10 @@ namespace SIL.PublishingSolution
                 _isNewParagraph = true;
 
                 CreateSectionClass(_paragraphName);
+
+                DivTypeLi_Odt();
+
+
             }
             else if (_tagType == "span" || _tagType == "em") 
             {
@@ -166,6 +178,7 @@ namespace SIL.PublishingSolution
             else if (_tagType == "a")
             {
                 _anchorBookMarkName = Common.RightString(_classNameWithLang, Common.SepTag);
+                _anchorStart = true;
             }
             else
             {
@@ -180,6 +193,38 @@ namespace SIL.PublishingSolution
             }
             if (_tagType != "img")
                 _allStyle.Push(_childName);
+        }
+
+        private void DivTypeLi_Odt()
+        {
+            if (_outputType == Common.OutputType.ODT)
+            {
+                if (_tagType == "ol" || _tagType == "ul")
+                {
+                    _listName = _listTypeDictionary.ContainsKey(_paragraphName)
+                                    ? _listTypeDictionary[_paragraphName]
+                                    : _tagType;
+                }
+                else if (_tagType == "li")
+                {
+                    if (_isNewParagraph)
+                    {
+                        _writer.WriteEndElement();
+                        _isNewParagraph = true;
+                        _isParagraphClosed = true;
+                    }
+
+                    if (_listName.Length != 0)
+                    {
+                        _writer.WriteStartElement("text:list");
+                        _writer.WriteAttributeString("text:style-name", _listName);
+                        _listName = string.Empty;
+                       
+                    }
+                    _writer.WriteStartElement("text:list-item");
+                }
+            }
+
         }
 
         public virtual void CreateSectionClass(string name)
@@ -240,6 +285,7 @@ namespace SIL.PublishingSolution
         {
             _xhtmlAttribute.Clear();
             _isclassNameExist = false;
+            _anchorStart = false;
             _lang = string.Empty;
             _className = _tagType = _reader.Name;
 
@@ -265,6 +311,12 @@ namespace SIL.PublishingSolution
                     else if (!(_reader.Name == "id" || _reader.Name == "xml:space"))
                     {
                         _xhtmlAttribute.Add(_reader.Name + _reader.Value);
+                        if (_reader.Name == "id") 
+                            _anchorIdValue = _reader.Value;
+                    }
+                    else if (_reader.Name == "id")
+                    {
+                        _anchorIdValue = _reader.Value;
                     }
                 }
             }
@@ -273,27 +325,36 @@ namespace SIL.PublishingSolution
             _isTagClass = Common.IsTagClass(_tagType);
             if (_isTagClass != string.Empty)
             {
-                if (_tagType == "ol" || _tagType == "ul")
-                {
-                    //classNameWithLang = _tagType + Common.SepTag + _className;
-                    //_className = _tagType;
-                    _listType = _tagType;
-                }
-                else if (_tagType == "li")
-                {
-                    _className = _tagType;
-                    string tagType;
-                    if (_listType == "ol" || _listType == "ul")
+                    //DivTypeLi_Odt();
+                    string tagType = string.Empty;
+                    if (_tagType == "ol" || _tagType == "ul")
                     {
-                        tagType = _listType + "First";
-                        _listType = _listType + "4";
+                        //classNameWithLang = _tagType + Common.SepTag + _className;
+                        //_className = _tagType;
+                        _listType = _tagType;
                     }
-                    else
+                    else if (_tagType == "li")
                     {
-                        tagType = _listType + "Next";
+                        _className = _tagType;
+                        if (_outputType == Common.OutputType.IDML)
+                        {
+                            if (_listType == "ol" || _listType == "ul")
+                            {
+                                tagType = _listType + "First";
+                                _listType = _listType + "4";
+                            }
+                            else
+                            {
+                                tagType = _listType + "Next";
+                            }
+                        }
+                        else if (_outputType == Common.OutputType.ODT)
+                        {
+                            tagType = _listType;
+                        }
+                        classNameWithLang = tagType + Common.SepTag + _className;
                     }
-                    classNameWithLang = tagType + Common.SepTag + _className;
-                }
+                
                 else if (_tagType == "p")
                 {
                     //classNameWithLang = _tagType + Common.SepTag + _className;
@@ -340,6 +401,11 @@ namespace SIL.PublishingSolution
 
         protected void ClosePara()
         {
+            if (_outputType == Common.OutputType.ODT && (_reader.Name == "ul" || _reader.Name == "ol"))
+            {
+                _writer.WriteEndElement();
+            }
+
             if (_allParagraph.Count > 0 && !_isParagraphClosed) // Is Para Exist
             {
                 if(_outputType == Common.OutputType.IDML)

@@ -195,9 +195,9 @@ namespace SIL.PublishingSolution
                     case "pathway":
                         Pathway(property.Value);
                         break;
-                    case "list-style-position":
-                        ListStyle(property.Value);
-                        break;
+                    //case "list-style-position":
+                    //    ListStyle(property.Value);
+                    //    break;
 
                     default:
                         SimpleProperty(property);

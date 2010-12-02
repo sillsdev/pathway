@@ -1,6 +1,6 @@
-ï»¿// --------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
 // <copyright file="InStyles.cs" from='2009' to='2010' company='SIL International'>
-//      Copyright Â© 2009, SIL International. All Rights Reserved.   
+//      Copyright © 2009, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -123,6 +123,9 @@ namespace SIL.PublishingSolution
                 {
                     _OOClass[property.Key] = property.Value; // for future usage
 
+                    if (property.Key == "list-style-type")  //List type - li,ol,ul
+                        CreateListType(property.Value);
+
                     string propName = property.Key;
                     if (_allParagraphProperty.ContainsKey(propName))
                     {
@@ -152,6 +155,7 @@ namespace SIL.PublishingSolution
                 if (_paragraphProperty.Count > 0)
                 {
                     _writer.WriteStartElement("style:paragraph-properties");
+                    DropCap();
                     foreach (KeyValuePair<string, string> para in _paragraphProperty)
                     {
                         _writer.WriteAttributeString(para.Key, para.Value);
@@ -180,6 +184,133 @@ namespace SIL.PublishingSolution
                 _writer.WriteEndElement();
                 
             }
+        }
+        private void DropCap()
+        {
+            if (_paragraphProperty.ContainsKey("fo:float") && _paragraphProperty.ContainsKey("style:vertical-align"))
+            {
+                //_styleName.DropCap.Add(className);
+                _paragraphProperty.Clear();  // Remove all paragraph property
+                _writer.WriteStartElement("style:drop-cap");
+                if (_textProperty.ContainsKey("fo:font-size"))
+                {
+                    string lines = "2";
+                    if (_textProperty["fo:font-size"].IndexOf('%') > 0)
+                    {
+                        lines = (int.Parse(_textProperty["fo:font-size"].Replace("%", "")) / 100).ToString();
+                    }
+                    _writer.WriteAttributeString("style:lines", lines);
+                    _textProperty.Remove("fo:font-size");
+                    // _textProperty.Remove("fo:font-weight");
+                }
+                _writer.WriteAttributeString("style:distance", "0.20cm");
+                _writer.WriteAttributeString("style:length", "1"); // No of Character
+                _writer.WriteEndElement();
+            }
+        }
+        /// <summary>
+        /// Create custom List
+        /// list-style-type: none;
+        /// </summary>
+        /// <param name="listType">Type Name</param>
+        private void CreateListType(string listType)
+        {
+            string listName = "Listdecimal";
+            string numFormat = "1";
+            string numSuffix = ".";
+            if (listType == "none")
+            {
+                listName = "Listnone";
+                numFormat = string.Empty;
+                numSuffix = string.Empty;
+            }
+            else if (listType == "disc")
+            {
+                listName = "Listdisc";
+                numFormat = "•";
+            }
+            else if (listType == "circle")
+            {
+                listName = "Listcircle";
+                numFormat = "?";
+            }
+            else if (listType == "square")
+            {
+                listName = "Listsquare";
+                numFormat = "?";
+            }
+            else if (listType == "decimal")
+            {
+                listName = "Listdecimal";
+                numFormat = "1";
+            }
+            else if (listType == "lower-roman")
+            {
+                listName = "Listlowerroman";
+                numFormat = "i";
+            }
+            else if (listType == "upper-roman")
+            {
+                listName = "Listupperroman";
+                numFormat = "I";
+            }
+            else if (listType == "lower-alpha")
+            {
+                listName = "Listloweralpha";
+                numFormat = "a";
+            }
+            else if (listType == "upper-alpha")
+            {
+                listName = "Listupperalpha";
+                numFormat = "A";
+            }
+
+            switch (listType)
+            {
+
+                case "disc":
+                case "circle":
+                case "square":
+                    {
+                        _writer.WriteStartElement("text:list-style");
+                        _writer.WriteAttributeString("style:name", listName);
+                        _writer.WriteStartElement("text:list-level-style-bullet");
+                        _writer.WriteAttributeString("text:level", "1");
+                        _writer.WriteAttributeString("text:style-name", "Bullet_20_Symbols");
+                        _writer.WriteAttributeString("style:num-suffix", numSuffix);
+                        _writer.WriteAttributeString("text:bullet-char", numFormat);
+                        break;
+                    }
+                case "none":
+                case "decimal":
+                case "lower-roman":
+                case "upper-roman":
+                case "lower-alpha":
+                case "upper-alpha":
+                    {
+                        _writer.WriteStartElement("text:list-style");
+                        _writer.WriteAttributeString("style:name", listName);
+                        _writer.WriteStartElement("text:list-level-style-number");
+                        _writer.WriteAttributeString("text:level", "1");
+                        _writer.WriteAttributeString("text:style-name", "Numbering_20_Symbols");
+                        _writer.WriteAttributeString("style:num-suffix", numSuffix);
+                        _writer.WriteAttributeString("style:num-format", numFormat);
+                        break;
+                    }
+            }
+
+            _writer.WriteStartElement("style:list-level-properties");
+            _writer.WriteAttributeString("text:list-level-position-and-space-mode", "label-alignment");
+            _writer.WriteStartElement("style:list-level-label-alignment");
+            _writer.WriteAttributeString("text:label-followed-by", "listtab");
+            _writer.WriteAttributeString("text:list-tab-stop-position", "0.5in");
+            _writer.WriteAttributeString("fo:text-indent", "-0.25in");
+            _writer.WriteAttributeString("fo:margin-left", "0.5in");
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            //_styleName.ListType[className] = listName;
         }
 
         private void MapColumnProperty(KeyValuePair<string, string> property, string propName)
