@@ -104,7 +104,8 @@ namespace SIL.PublishingSolution
                     break;
                 case "\\Color":
                     value = PropertyValue(line);
-                    _cssProp["color"] = value;
+                    string strHex = String.Format("{0:x2}", Convert.ToUInt32(value));
+                    _cssProp["color"] = "#" + strHex;
                     break;
                 case "\\Justification":
                     value = PropertyValue(line);
