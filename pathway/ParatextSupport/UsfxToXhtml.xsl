@@ -78,7 +78,9 @@
 					</xsl:otherwise>
 				</xsl:choose>
 			</span>
+			<span class="scrBookCode" lang="{$ws}"><xsl:value-of select="$bookCode"/></span>
 		</div>
+		
 	</xsl:template>
 
 	<xsl:template match="para">
@@ -139,7 +141,7 @@
 					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
-			<xsl:when test="@style = 'io1'">
+			<xsl:when test="@style = 'io' or @style = 'io1'">
 				<p class="Intro_List_Item1" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</p>
