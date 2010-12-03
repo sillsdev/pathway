@@ -3160,6 +3160,7 @@ namespace SIL.PublishingSolution
 
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabmobile"]);
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabothers"]);
+                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPicture"]);
             }
             //cTool.BtnMobile.Enabled = false;
             _redoundo = new UndoRedo(cTool.TsUndo, cTool.TsRedo);
