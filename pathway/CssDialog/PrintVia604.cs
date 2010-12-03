@@ -405,8 +405,11 @@ namespace SIL.PublishingSolution
                 directoryInfo.Create();
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                Param.SetValue(Param.PublicationLocation, dlg.SelectedPath);
-                txtSaveInFolder.Text = dlg.SelectedPath;
+                string folderName = cmbSelectLayout.Text + "_" + DateTime.Now.ToString("yyyy-MM-dd_hhmm");
+                string newSaveInFolderPath = Common.PathCombine(dlg.SelectedPath, folderName);
+                Param.SetValue(Param.PublicationLocation, newSaveInFolderPath);
+
+                txtSaveInFolder.Text = newSaveInFolderPath;
             }
         }
 
