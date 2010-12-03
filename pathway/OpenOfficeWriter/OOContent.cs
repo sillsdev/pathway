@@ -133,9 +133,6 @@ namespace SIL.PublishingSolution
         private ArrayList _textVariables = new ArrayList();
         private ArrayList _columnClass = new ArrayList();
         private ArrayList _psuedoBefore = new ArrayList();
-        public Dictionary<string, Dictionary<string, string>> contentCounterIncrement = new Dictionary<string, Dictionary<string, string>>();
-        public Dictionary<string, string> ContentCounterReset = new Dictionary<string, string>();
-        public Dictionary<string, int> ContentCounter = new Dictionary<string, int>();
         private Dictionary<string, ClassInfo> _psuedoAfter = new Dictionary<string, ClassInfo>();
         //private Dictionary<string, ArrayList> _styleName = new Dictionary<string, ArrayList>();
         private ArrayList _crossRef = new ArrayList();
@@ -337,12 +334,35 @@ namespace SIL.PublishingSolution
                 // Drop caps ends
 
 
-                //searchKey = "counter-reset";
-                //if (IdAllClass[className].ContainsKey(searchKey))
-                //{
-                //    ContentCounterReset[className] = IdAllClass[className][searchKey];
-                //}
+                searchKey = "counter-increment";
+                if (IdAllClass[className].ContainsKey(searchKey))
+                {
+                    var key = new Dictionary<string, string>();
+                    string value = IdAllClass[className][searchKey];
+                    if (value.IndexOf(',') > 0)
+                    {
+                        string[] splitcomma = value.Split(',');
+                        if (splitcomma.Length > 1)
+                        {
+                            key[splitcomma[0]] = splitcomma[1];
+                            contentCounterIncrement[className] = key;
+                            ContentCounter[splitcomma[0]] = 0;
+                        }
+                    }
+                    else
+                    {
+                        key[value] = "1";
+                        contentCounterIncrement[className] = key;
+                        ContentCounter[value] = 0;
+                    }
 
+                }
+
+                searchKey = "counter-reset";
+                if (IdAllClass[className].ContainsKey(searchKey))
+                {
+                    ContentCounterReset[className] = IdAllClass[className][searchKey];
+                }
             //    // Footnote process 
             //    searchKey = "display";
             //    if (IdAllClass[className].ContainsKey(searchKey) && className.IndexOf("..") == -1)
@@ -867,7 +887,7 @@ namespace SIL.PublishingSolution
 
             if (!AnchorBookMark())
             {
-
+                content = WriteCounter(content);
                 whiteSpacePre(content, pseudo); // TODO -2000 - SignificantSpace() - IN OO convert
 
             }
@@ -975,6 +995,7 @@ namespace SIL.PublishingSolution
         {
             bool IsStyleExist = false;
             StartElementBase(_IsHeadword);
+            SetClassCounter();
             Psuedo();
             VisibilityCheck();
             DropCaps();

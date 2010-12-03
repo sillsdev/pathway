@@ -381,7 +381,69 @@ namespace Test
             }
             return match;
         }
+        public bool ValidateOfficeTextNodeList(int count,string value, string paraSpan)
+        {
+            bool match = true;
 
+            XmlNode node = GetOfficeNode();
+            if (node == null)
+            {
+                match = false;
+            }
+            else
+            {
+                string subpath = paraSpan.ToLower() == "para"
+                                     ? "//text:p[@text:style-name='" + ClassName + "']"
+                                     : "//text:span[@text:style-name='" + ClassName + "']";
+                XPath = subpath;
+                node = ValidateGetNodeNS(count,node);
+                if (node != null)
+                {
+                    if (ChildClassName.Length > 0 && ChildClassType.Length > 0)
+                    {
+                        subpath = ChildClassType.ToLower() == "para"
+                                     ? "//text:p[@text:style-name='" + ChildClassName + "']"
+                                     : "//text:span[@text:style-name='" + ChildClassName + "']";
+                        XPath = subpath;
+                        node = ValidateGetNodeNS(count, node);
+                        if (node != null)
+                        {
+                            string innerText = GetReplacedInnerXml(node);
+                            if (innerText != value)
+                            {
+                                match = false;
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        string inner;
+                        if (GetOuterXml)
+                        {
+                            inner = GetReplacedOuterXml(node);
+                        }
+                        else if (GetInnerText)
+                        {
+                            inner = GetReplacedInnerText(node);
+                        }
+                        else
+                        {
+                            inner = GetReplacedInnerXml(node);
+                        }
+                        if (inner != value)
+                        {
+                            match = false;
+                        }
+                    }
+                }
+                else
+                {
+                    match = false;
+                }
+            }
+            return match;
+        }
         public XmlNode GetOfficeNode()
         {
             string oldXpath = XPath;
@@ -519,6 +581,25 @@ namespace Test
             XmlNode returnValue = xnode.SelectSingleNode(XPath, nsmgr); // work
             return returnValue;
         }
+
+        /// <summary>
+        /// search the node with namespace
+        /// </summary>
+        /// <returns>the attributes value</returns>
+        public XmlNode ValidateGetNodeNS(int count, XmlNode xnode)
+        {
+            XmlNode returnNode = null;
+            XmlNodeList nodeList = xnode.SelectNodes(XPath, nsmgr);
+            int counter = 1;
+            if (nodeList != null)
+                foreach (XmlNode node in nodeList)
+                {
+                    if(counter++ == count)
+                        returnNode = node;
+                }
+            return returnNode;
+        }
+
         private XmlDocument GetDoc()
         {
             //Openoffice search

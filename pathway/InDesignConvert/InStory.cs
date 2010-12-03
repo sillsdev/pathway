@@ -45,9 +45,6 @@ namespace SIL.PublishingSolution
         private ArrayList _textVariables = new ArrayList();
         private ArrayList _columnClass = new ArrayList();
         private ArrayList _psuedoBefore = new ArrayList();
-        public Dictionary<string, Dictionary<string, string>> contentCounterIncrement = new Dictionary<string, Dictionary<string, string>>();
-        public Dictionary<string, string> ContentCounterReset = new Dictionary<string, string>();
-        public Dictionary<string, int> ContentCounter = new Dictionary<string, int>();
         private Dictionary<string, ClassInfo> _psuedoAfter = new Dictionary<string, ClassInfo>();
         private Dictionary<string, ArrayList> _styleName = new Dictionary<string, ArrayList>();
         private ArrayList _crossRef = new ArrayList();
@@ -399,46 +396,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private string WriteCounter(string content)
-        {
-            try
-            {
-                string ConcatContent = string.Empty;
-                string origContent = content;
-                if (origContent.IndexOf("counter") >= 0)
-                {
-                    string[] y = origContent.Split('|');
 
-                    foreach (string var in y)
-                    {
-                        if (var.IndexOf("counter") >= 0)
-                        {
-                            int srtPos = var.IndexOf('(');
-                            int endPos = var.IndexOf(')');
-                            string var1 = var.Substring(srtPos + 1, endPos - srtPos - 1);
-                            if (ContentCounter.ContainsKey(var1))
-                            {
-                                ConcatContent = ConcatContent + ContentCounter[var1];
-                            }
-                            else
-                            {
-                                ConcatContent = ConcatContent + "0";
-                            }
-                        }
-                        else
-                        {
-                            ConcatContent = ConcatContent + var.Replace('\'', ' ');
-                        }
-                    }
-                    content = ConcatContent;
-                }
-                return content;
-            }
-            catch (Exception)
-            {
-                return string.Empty;
-            }
-        }
 
         public bool InsertImage()
         {
@@ -974,47 +932,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void SetClassCounter()
-        {
-            string classNameNoLang = _classNameWithLang;
-            bool isIncrClassmatch = false;
-            bool isResetClassmatch = false;
-            if (classNameNoLang.IndexOf("_.") > 0)
-                classNameNoLang = Common.LeftString(classNameNoLang, "_.");
 
-            string[] splitClass = classNameNoLang.Split(' ');
-            foreach (string clName in splitClass)
-            {
-                if (ContentCounterReset.ContainsKey(clName))
-                {
-                    classNameNoLang = clName;
-                    isResetClassmatch = true;
-                    //break;
-                }
-                if (contentCounterIncrement.ContainsKey(clName))
-                {
-                    classNameNoLang = clName;
-                    isIncrClassmatch = true;
-                    //break;
-                }
-            }
-            if (isResetClassmatch)
-            {
-                string key = ContentCounterReset[classNameNoLang];
-                ContentCounter[key] = 0;
-            }
-            if (isIncrClassmatch)
-            {
-                string key = "";
-                string keyValue = "";
-                foreach (KeyValuePair<string, string> kvp in contentCounterIncrement[classNameNoLang])
-                {
-                    key = kvp.Key;
-                    keyValue = kvp.Value;
-                }
-                ContentCounter[key] = ContentCounter[key] + int.Parse(keyValue);
-            }
-        }
 
         private void DropCaps()
         {
