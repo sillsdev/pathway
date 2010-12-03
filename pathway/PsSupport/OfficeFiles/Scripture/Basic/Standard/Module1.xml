@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Dec-02-2010 for TD-1709(macro crashes with kyj export to Word &amp; PDF)
+&apos;Changed On Dec-03-2010 for TD-1698(Picture Position Should be based on Reference Location)
 
 &apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -28,6 +28,31 @@ Dim oFrame As Object
 Dim oSubFrame As Object
 Dim ProgressValue As Integer
 Dim PageCount as Integer
+
+
+&apos;Set Picture Position based on Reference Location
+Sub PicturePosition
+dim frameCount, lclNo 
+oGraphics = ThisComponent.getTextFrames
+
+frameCount = oGraphics.getCount() -1
+lclNo = 0
+  For i = 0 To oGraphics.getCount() -1 step 1 
+    	oGraphic = oGraphics.getByIndex(i)
+    	If frameCount &gt; i Then
+	    	GetPictureVerse(oGraphic.String)
+		End If
+  Next  
+End Sub
+
+&apos;Place the Image within verse
+Sub GetPictureVerse(ImageCaption)
+	Dim pos as Integer
+	Dim style as String
+	pos=Mid(ImageCaption,len(ImageCaption)-2)
+	move(pos,style)
+End Sub
+
 
 &apos;Create Progress bar
 Sub ShowProcessingDialog() 
