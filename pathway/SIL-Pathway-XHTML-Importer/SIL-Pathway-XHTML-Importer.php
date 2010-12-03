@@ -52,12 +52,45 @@ if ( class_exists( 'WP_Importer' ) ) {
 		var $posts = array ();
 		var $file;
 
+		function start()
+		{
+			if ( empty ( $_GET['step'] ) )
+				$step = 0;
+			else
+				$step = (int) $_GET['step'];
+
+			$this->header();
+
+			switch ($step) {
+				case 0 :
+					$this->greet();
+					break;
+				case 1 :
+					/**
+					 * Presumably wp_nonce_field has been set somewhere for
+					 * check_admin_referer to see if something succeeded.
+					 */
+					check_admin_referer('import-upload');
+//					$result = $this->import();
+//					if (is_wp_error( $result ))
+//						echo $result->get_error_message();
+					break;
+
+			}
+			$this->footer();
+		}
+
+		function greet() {
+			echo '<div class="narrow">';
+			echo '<p>' . __( 'Howdy! This importer allows you to import SIL Pathway XHTML data into your WordPress site.', 'sil-pathway-xhtml-importer' ) . '</p>';
+			//wp_import_upload_form("admin.php?import=rss&amp;step=1");
+			echo '</div>';
+		}
+
 		function header() {
 			echo '<div class="wrap">';
 			screen_icon();
-			/** @todo Internationalize */
-			//echo '<h2>'.__('Import SIL Pathway XHTML', 'sil-pathway-xhtml-importer').'</h2>';
-			 echo '<h2>Import SIL Pathway XHTML</h2>';
+			echo '<h2>' . __( 'Import SIL Pathway XHTML', 'sil-pathway-xhtml-importer' ) . '</h2>';
 		 }
 
 		 function footer() {
@@ -77,9 +110,7 @@ if ( class_exists( 'WP_Importer' ) ) {
 			echo '<ol>';
 			
 			foreach ($this->posts as $post) {
-				/** @todo Internationalize */
-				//echo "<li>".__('Importing post...', 'sil-pathway-xhtml-importer');
-				echo '<li>Importing post...';
+				echo "<li>" . __( 'Importing post...', 'sil-pathway-xhtml-importer');
 
 				extract($post);
 				$post_id = post_exists($post_title, $post_content, $post_date);
@@ -127,34 +158,6 @@ if ( class_exists( 'WP_Importer' ) ) {
 
 		}
 		
-		function start()
-		{
-			if ( empty ( $_GET['step'] ) )
-				$step = 0;
-			else
-				$step = (int) $_GET['step'];
-
-			$this->header();
-
-			switch ($step) {
-				case 0 :
-					$this->greet();
-					break;
-				case 1 :
-					/**
-					 * Presumably wp_nonce_field has been set somewhere for
-					 * check_admin_referer to see if something succeeded.
-					 */
-					check_admin_referer('import-upload');
-//					$result = $this->import();
-//					if (is_wp_error( $result ))
-//						echo $result->get_error_message();
-					break;
-
-			}
-			$this->footer();
-		}
-
 		function SIL_Pathway_XHTML_Import()
         {
 			/**
@@ -169,9 +172,7 @@ if ( class_exists( 'WP_Importer' ) ) {
 	 * $callback.
 	 */
 	$pathway_import = new SIL_Pathway_XHTML_Import();
-	/** @todo Internationalize */
-	//register_importer('pathway-xhtml', __('XHTML', 'sil-pathway-xhtml-importer'), __('Import posts from an SIL Pathway XHTML file.', 'sil-pathway-xhtml-importer'), array ($pathway_import, 'dispatch'));
-	register_importer('pathway-xhtml', 'SIL Pathway XHTML', 'Import posts from an SIL Pathway XHTML file.', array ($pathway_import, 'start'));
+	register_importer('pathway-xhtml', __('SIL Pathway XHTML', 'sil-pathway-xhtml-importer'), __('Import posts from an SIL Pathway XHTML file.', 'sil-pathway-xhtml-importer'), array ($pathway_import, 'start'));
 
 } // class_exists( 'WP_Importer' )
 
