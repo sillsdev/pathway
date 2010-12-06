@@ -253,7 +253,7 @@ namespace Test.XeTeXConvert
             PublicationInformation projInfo = GetProjInfo(XhtmlName, BlankName);
             IPreExportProcess actual = PreProcess(projInfo);
             XmlAssert.AreEqual(FileExpected(XhtmlName), actual.ProcessedXhtml, "minimal.xhtml not equal");
-            TextFileAssert.AreEqual(FileExpected(BlankName), actual.ProcessedCss);
+            TextFileAssert.AreEqualEx(FileExpected(BlankName), actual.ProcessedCss, new ArrayList { 1 });
         }
 
         /// <summary>
