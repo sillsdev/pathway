@@ -85,3 +85,8 @@
     font-size: 8pt;
     color: rgb(47,96,255);
 }
+
+.pictureRightNone {
+    display:none;
+    text-align: center;
+}

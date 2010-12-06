@@ -2464,8 +2464,23 @@ namespace SIL.PublishingSolution
         /// 
         private void InsertImageCaption(string styleFilePath, string targetfile)
         {
+
             string pos = string.Empty;
             string side = string.Empty;
+            string classPicture = _reader.GetAttribute("class") ?? "img";
+
+            if(_isDisplayNone) // Checking all parent classes
+                return;
+
+            if (_structStyles.DisplayNone.Contains(classPicture)) // Checking current class
+                return;
+
+            string src = _reader.GetAttribute("src").ToLower();
+            string longdesc = _reader.GetAttribute("longdesc");
+            longdesc = longdesc != null ? longdesc.ToLower() : "";
+            string altText = _reader.GetAttribute("alt");
+
+
             //int divCount = 1;
             if (_styleStack.Count > 0)
             {
@@ -2494,12 +2509,6 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
-
-            string classPicture = _reader.GetAttribute("class") ?? "img";
-            string src = _reader.GetAttribute("src").ToLower();
-            string longdesc = _reader.GetAttribute("longdesc");
-            longdesc = longdesc != null ? longdesc.ToLower() : "";
-            string altText = _reader.GetAttribute("alt");
 
             if (_structStyles.ImageSource.ContainsKey(longdesc))
             {
