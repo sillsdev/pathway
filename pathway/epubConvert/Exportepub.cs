@@ -18,13 +18,10 @@
 // | `-container.xml
 // |-OEBPS
 //   |-content.opf
-//   |-page-template.xpgt
+//   |-toc.ncx
 //   |-<any fonts and other files embedded into the archive>
 //   |-<list of files in book – xhtml format + .css for styling>
-//   |-toc.ncx
-//   |-toc.xhtml
-//   `-images
-//     `-<any images referenced in book files>
+//   '-<any images referenced in book files>
 //
 // See also http://www.openebook.org/2007/ops/OPS_2.0_final_spec.html
 // </remarks>
@@ -354,7 +351,7 @@ namespace SIL.PublishingSolution
                     foreach (var embeddedFont in _embeddedFonts.Values)
                     {
                         string dest = Common.PathCombine(contentFolder, embeddedFont.Filename);
-                        File.Copy(Path.Combine(EmbeddedFont.GetFontFolderPath(), embeddedFont.Filename), dest);
+                        File.Copy(Path.Combine(FontInternals.GetFontFolderPath(), embeddedFont.Filename), dest);
                         
                     }
                     // clean up
@@ -418,8 +415,9 @@ namespace SIL.PublishingSolution
                 }
 
                 // generate the toc / manifest files
-                createOpf(projInfo, contentFolder, bookId);
-                createNCX(projInfo, contentFolder, bookId);
+                CreateOpf(projInfo, contentFolder, bookId);
+                CreateNcx(projInfo, contentFolder, bookId);
+                CreateCoverImage(contentFolder);
 
                 // Done adding content - now zip the whole thing up and name it
                 string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
@@ -755,6 +753,46 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
+        /// Creates a cover image based on the language code and type of project (dictionary or scripture). This
+        /// is saved as "cover.png" in the content (OEBPS) folder.
+        /// </summary>
+        /// <param name="contentFolder">Content folder the resulting file is saved to.</param>
+        private void CreateCoverImage(string contentFolder)
+        {
+            // open up the appropriate image for processing
+            string strGraphicsFolder = Common.PathCombine(Common.GetPSApplicationPath(), "Graphic");
+            string strImageFile = Path.Combine(strGraphicsFolder,
+                                               (_inputType == "dictionary") ? "book_se.png" : "book_bte.png");
+            if (!File.Exists(strImageFile)) return;
+            var bmp = new Bitmap(strImageFile);
+            Graphics g = Graphics.FromImage(bmp);
+            // We're going to be "badging" the book image with the language code; this badge consists of a rectangle
+            // in the lower-right side with the language code string in it.
+            var enumerator = _langFontDictionary.GetEnumerator();
+            enumerator.MoveNext();
+            var langCode = enumerator.Current.Key;
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+            var strFormat = new StringFormat
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
+            // figure out the dimensions of our rect based on the font info
+            Font badgeFont = new Font("Tahoma", 64);
+            SizeF size = g.MeasureString(langCode, badgeFont, 640);
+            int width = (int) Math.Ceiling(size.Width);
+            int height = (int) Math.Ceiling(size.Height);
+            Rectangle rect = new Rectangle((620 - width), (620-height), width, height);
+            // draw the badge (rect and string)
+            g.FillRectangle(Brushes.White, rect);
+            g.DrawRectangle(Pens.Black, rect);
+            g.DrawString(langCode, badgeFont, Brushes.Black, new RectangleF(new PointF((620f - size.Width), (620f - size.Height)),size), strFormat);
+            // save this puppy
+            string strCoverImageFile = Path.Combine(contentFolder, "cover.png");
+            bmp.Save(strCoverImageFile);
+        }
+
+        /// <summary>
         /// Writes the chapter links out to the specified XmlWriter (the .ncx file).
         /// </summary>
         /// <returns>List of url strings</returns>
@@ -934,7 +972,7 @@ namespace SIL.PublishingSolution
         /// <param name="projInfo">Project information</param>
         /// <param name="contentFolder">Content folder (.../OEBPS)</param>
         /// <param name="bookId">Unique identifier for the book we're generating.</param>
-        private void createOpf(PublicationInformation projInfo, string contentFolder, Guid bookId)
+        private void CreateOpf(PublicationInformation projInfo, string contentFolder, Guid bookId)
         {
             XmlWriter opf = XmlWriter.Create(Common.PathCombine(contentFolder, "content.opf"));
             opf.WriteStartDocument();
@@ -986,6 +1024,11 @@ namespace SIL.PublishingSolution
             opf.WriteAttributeString("id", "BookId");
             opf.WriteValue(bookId.ToString());
             opf.WriteEndElement();
+            // meta elements
+            opf.WriteStartElement("meta");
+            opf.WriteAttributeString("name", "cover");
+            opf.WriteAttributeString("content", "cover-image");
+            opf.WriteEndElement(); // meta
             opf.WriteEndElement(); // metadata
             // manifest
             opf.WriteStartElement("manifest");
@@ -995,6 +1038,17 @@ namespace SIL.PublishingSolution
             opf.WriteAttributeString("href", "toc.ncx");
             opf.WriteAttributeString("media-type", "application/x-dtbncx+xml");
             opf.WriteEndElement(); // item
+            opf.WriteStartElement("item");
+            opf.WriteAttributeString("id", "cover");
+            opf.WriteAttributeString("href", "cover.html");
+            opf.WriteAttributeString("media-type", "application/xhtml+xml");
+            opf.WriteEndElement(); // item
+            opf.WriteStartElement("item");
+            opf.WriteAttributeString("id", "cover-image");
+            opf.WriteAttributeString("href", "cover.png");
+            opf.WriteAttributeString("media-type", "image/png");
+            opf.WriteEndElement(); // item
+
             if (EmbedFonts)
             {
                 int fontNum = 1;
@@ -1064,6 +1118,14 @@ namespace SIL.PublishingSolution
             // spine
             opf.WriteStartElement("spine");
             opf.WriteAttributeString("toc", "ncx");
+            // a couple items for the cover image
+            opf.WriteStartElement("itemref"); 
+            opf.WriteAttributeString("idref", "cover");
+            opf.WriteAttributeString("linear", "yes");
+            opf.WriteEndElement(); // itemref
+            opf.WriteStartElement("itemref"); 
+            opf.WriteAttributeString("idref", "normal-first-content");
+            opf.WriteEndElement(); // itemref
             foreach (string file in files)
             {
                 // add an <itemref> for each xhtml file in the set
@@ -1082,8 +1144,12 @@ namespace SIL.PublishingSolution
             opf.WriteEndElement(); // spine
             // guide
             opf.WriteStartElement("guide");
-            // The <guide> element is optional; I'm not sure that it buys us anything -
-            // for now, just add a single element for the first xhtml filename in the list.
+            // cover image
+            opf.WriteStartElement("reference");
+            opf.WriteAttributeString("type", "cover");
+            opf.WriteAttributeString("title", "Cover");
+            opf.WriteEndElement(); // reference
+            // first xhtml filename
             opf.WriteStartElement("reference");
             opf.WriteAttributeString("type", "text");
             opf.WriteAttributeString("title", projInfo.ProjectName);
@@ -1100,15 +1166,13 @@ namespace SIL.PublishingSolution
             opf.Close();
         }
 
-
-
         /// <summary>
         /// Creates the table of contents file used by .epub readers (toc.ncx).
         /// </summary>
         /// <param name="projInfo">project information</param>
         /// <param name="contentFolder">the content folder (../OEBPS)</param>
         /// <param name="bookId">Unique identifier for the book we're creating</param>
-        private void createNCX(PublicationInformation projInfo, string contentFolder, Guid bookId)
+        private void CreateNcx(PublicationInformation projInfo, string contentFolder, Guid bookId)
         {
             // toc.ncx
             XmlWriter ncx = XmlWriter.Create(Common.PathCombine(contentFolder, "toc.ncx"));

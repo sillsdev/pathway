@@ -261,3 +261,13 @@ margin-top : 9pt;
 margin-bottom : 18pt;
 content : "\00A0";
 }
+/* Paratext-only (for now) styles */
+.iot {
+font-weight : bold;
+font-style : normal;
+text-align : center;
+text-indent : 0;
+margin-left : 0;
+margin-top : 8pt;
+
+}

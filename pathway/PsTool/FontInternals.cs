@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.IO;
+using System.Text;
 using Microsoft.Win32;
 
 namespace SIL.Tool
@@ -93,6 +94,9 @@ namespace SIL.Tool
 
     public static class FontInternals
     {
+        // Windows only - Guid for Fonts folder
+        public static readonly Guid FontsFolder = new Guid("FD228CB7-AE11-4AE3-864C-16F3910AB8FE");
+
         private static TT_OFFSET_TABLE ttOffsetTable;
         private static SFNT sFnt;
         private static OT_OFFSET_TABLE otOffsetTable;
@@ -107,9 +111,11 @@ namespace SIL.Tool
         public static string GetPostscriptName(string familyName, string style)
         {
             string fontName = GetFontFileName(familyName, style);
-            string root = Environment.GetEnvironmentVariable("SystemRoot");
-            if (root == null) return string.Empty;
-            string fontRoot = Path.Combine(root, "Fonts");
+            string fontRoot = GetFontFolderPath();
+            if (fontRoot == null)
+            {
+                return string.Empty;
+            }
             string fontFullName = Path.Combine(fontRoot, fontName);
             return GetPostscriptName(fontFullName);
         }
@@ -344,6 +350,11 @@ namespace SIL.Tool
             return BitConverter.ToUInt32(btValue, 0);
         }
 
+        //public static string GetFontFamily(string fontFullName)
+        //{
+
+        //}
+
         public static string GetFontFileName(string familyName, string style)
         {
             RegistryKey fontsKey;
@@ -398,15 +409,21 @@ namespace SIL.Tool
         public static bool IsGraphite(string familyName, string style)
         {
             string fontName = GetFontFileName(familyName, style);
-            string root = Environment.GetEnvironmentVariable("SystemRoot");
-            if (root == null) return false;
-            string fontRoot = Path.Combine(root, "Fonts");
+            string fontRoot = GetFontFolderPath();
+            if (fontRoot == null)
+            {
+                return false;
+            }
             string fontFullName = Path.Combine(fontRoot, fontName);
             return IsGraphite(fontFullName);
         }
 
         public static bool IsGraphite(string fontFullName)
         {
+            if (!File.Exists(fontFullName))
+            {
+                return false;
+            }
             FileStream fs = new FileStream(fontFullName, FileMode.Open, FileAccess.Read);
             BinaryReader r = new BinaryReader(fs);
             TT_OFFSET_TABLE ttResult = GetOffsetTable(r);
@@ -429,5 +446,125 @@ namespace SIL.Tool
             return false;
         }
 
+        public static bool IsSILFont (string fontFullName)
+        {
+            if (!File.Exists(fontFullName))
+            {
+                return false;
+            }
+            FileStream fs = new FileStream(fontFullName, FileMode.Open, FileAccess.Read);
+            BinaryReader r = new BinaryReader(fs);
+            TT_OFFSET_TABLE ttResult = GetOffsetTable(r);
+
+            //Must be maj =1 minor = 0
+            if (ttResult.uMajorVersion != 1 || ttResult.uMinorVersion != 0)
+                return false;
+
+            TT_TABLE_DIRECTORY tbName = new TT_TABLE_DIRECTORY();
+            bool bFound = false;
+            for (int i = 0; i < ttResult.uNumOfTables; i++)
+            {
+                tbName = GetNameTable(r);
+                string szName = tbName.szTag1.ToString() + tbName.szTag2.ToString() + tbName.szTag3.ToString() + tbName.szTag4.ToString();
+                if (szName != null)
+                {
+                    if (szName == "name")
+                    {
+                        bFound = true;
+                        tbName.uLength = BigEndianValue(tbName.uLength);
+                        tbName.uOffset = BigEndianValue(tbName.uOffset);
+                        break;
+                    }
+                }
+            }
+            if (bFound)
+            {
+                fs.Position = tbName.uOffset;
+                TT_NAME_TABLE_HEADER ttNTResult = GetNameTableHeader(r);
+                string result = "";
+                for (int i = 0; i < ttNTResult.uNRCount; i++)
+                {
+                    TT_NAME_RECORD ttNMResult = GetNameRecord(r);
+                    const int CopyrightId = 0;
+                    if (ttNMResult.uNameID == CopyrightId)
+                    {
+                        fs.Position = tbName.uOffset + ttNMResult.uStringOffset + ttNTResult.uStorageOffset;
+                        char [] szResult = r.ReadChars(ttNMResult.uStringLength);
+                        for (int j = 0; j < ttNMResult.uStringLength; j++)
+                        {
+                            switch (ttNMResult.uEncodingID)
+                            {
+                                case 0: // SIL Fonts use this encoding
+                                    result += szResult[j];
+                                    break;
+                                case 3: // Windows Fonts use this encoding (first byte is NUL)
+                                    j++;
+                                    result += szResult[j];
+                                    break;
+                            }
+                        }
+                        break;
+                    }
+                }
+                if (result != "")
+                {
+                    // we got something out of the CopyrightId slot - does it contain "SIL" or "Summer Institute of Linguistics"?
+                    if (result.Contains("SIL") || result.Contains("Summer Institute of Linguistics"))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        #region Windows_Interop_Methods
+        // older call
+        [DllImport("shell32.dll")]
+        private static extern int SHGetFolderPath(IntPtr hwndOwner, int nFolder, IntPtr hToken,
+            uint dwFlags, [Out] StringBuilder pszPath);
+
+        // newer (Vista and later) call to get a known folder
+        [DllImport("shell32.dll")]
+        static extern int SHGetKnownFolderPath([MarshalAs(UnmanagedType.LPStruct)] Guid rfid, uint dwFlags,
+            IntPtr hToken, out IntPtr pszPath);
+
+        /// <summary>
+        /// Returns the font folder path for this workstation, even on non-US locales. This currently
+        /// is a Windows-only method that calls interop methods to get its work done; I'm not sure
+        /// what sort of work needs to be done to get it to work under Mono.
+        /// </summary>
+        /// <returns></returns>
+        public static string GetFontFolderPath()
+        {
+            OperatingSystem osInfo = Environment.OSVersion;
+            if (osInfo.Platform == PlatformID.Win32NT && osInfo.Version.Major >= 6)
+            {
+                // Vista or later - support for newer SHGetKnownFolderPath
+                var ptr = IntPtr.Zero;
+                try
+                {
+                    var ret = SHGetKnownFolderPath(FontsFolder, 0x0000, IntPtr.Zero, out ptr);
+                    if (ret != 0)
+                    {
+                        throw Marshal.GetExceptionForHR(ret);
+                    }
+                    return Marshal.PtrToStringUni(ptr);
+
+                }
+                finally
+                {
+                    Marshal.FreeCoTaskMem(ptr);
+                }
+            }
+            else
+            {
+                // older SHGetFolderPath
+                var sb = new StringBuilder();
+                SHGetFolderPath(IntPtr.Zero, 0x0014, IntPtr.Zero, 0x0000, sb);
+                return sb.ToString();
+            }
+        }
+        #endregion
     }
 }

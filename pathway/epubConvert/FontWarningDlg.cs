@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Text;
+using System.IO;
 using System.Windows.Forms;
 using epubConvert.Properties;
+using SIL.Tool;
 
 namespace epubConvert
 {
@@ -13,25 +16,7 @@ namespace epubConvert
         public string Languages { get; set; }
         public bool RepeatAction { get; set; }
 
-        // Note: this needs to be updated as the font folk free fabulous new font-families.
-        public string[] AvailableSILFonts = new string[]
-        {
-                    "Abyssinica",
-                    "Andika",
-                    "Apparatus SIL",
-                    "Scheharazade",
-                    "Lateef",
-                    "Charis SIL",
-                    "Dai Banna",
-                    "Doulos SIL",
-                    "Ezra",
-                    "Galatia",
-                    "Gentium",
-                    "Nuosu",
-                    "Padauk",
-                    "Sophia Nubian",
-                    "Tai Heritage Pro"
-        };
+        private PrivateFontCollection pfc = new PrivateFontCollection();
 
         public FontWarningDlg()
         {
@@ -54,13 +39,7 @@ namespace epubConvert
             if (ddlSILFonts.Items.Count == 0)
             {
                 // update the possible replacements based on what's installed on this system
-                foreach (var availableSilFont in AvailableSILFonts)
-                {
-                    if (EmbeddedFont.IsInstalled(availableSilFont))
-                    {
-                        ddlSILFonts.Items.Add(availableSilFont);
-                    }
-                }
+                BuildSILFontList();
                 ddlSILFonts.SelectedIndex = 0;
             }
             if (RemainingIssues > 0)
@@ -68,6 +47,27 @@ namespace epubConvert
                 chkRepeatAction.Visible = true;
                 chkRepeatAction.Text = String.Format(Resources.RepeatAction, RemainingIssues);
                 chkRepeatAction.Checked = RepeatAction;
+            }
+        }
+
+        /// <summary>
+        /// Scans the current workstation's Fonts directory and builds the list of available SIL fonts
+        /// </summary>
+        private void BuildSILFontList()
+        {
+            string fontFolder = FontInternals.GetFontFolderPath();
+            string[] files = Directory.GetFiles(fontFolder, "*.ttf");
+            foreach (var file in files)
+            {
+                if (FontInternals.IsSILFont(file))
+                {
+                    pfc.AddFontFile(file);
+                }
+            }
+            // add the font families to the dropdown
+            foreach (var fontFamily in pfc.Families)
+            {
+                int item = ddlSILFonts.Items.Add(fontFamily.GetName(0));
             }
         }
 
