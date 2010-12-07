@@ -5,8 +5,7 @@
 	xmlns="http://www.w3.org/1999/xhtml">
 	
 	<xsl:output method="xml" version="1.0" encoding="UTF-8" omit-xml-declaration="yes" indent="yes" 
-				doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"
-				doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" />
+				doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" />
 
 	<!-- Copy all content that isn't explicitly processed by templates. -->
 	<xsl:template match="@*|node()">

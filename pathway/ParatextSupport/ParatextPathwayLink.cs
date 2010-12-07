@@ -23,6 +23,7 @@ namespace SIL.PublishingSolution
 		private XslCompiledTransform m_encloseParasInSections = new XslCompiledTransform();
 		private XslCompiledTransform m_addImpliedSection = new XslCompiledTransform();
 		private XslCompiledTransform m_encloseScrInColumns = new XslCompiledTransform();
+		private XslCompiledTransform m_encloseSectionsInBook = new XslCompiledTransform();
 
 		/// ------------------------------------------------------------------------------------
 		/// <summary>
@@ -50,34 +51,14 @@ namespace SIL.PublishingSolution
 				m_xslParams.Add("ws", "zxx");
 			}
 
-			// Create stylesheets
-			m_cleanUsfx.Load(XmlReader.Create(
-				Assembly.GetExecutingAssembly().GetManifestResourceStream(
-				"ParatextSupport.XML_without_line_breaks.xsl")));
-			m_usfxToXhtml.Load(XmlReader.Create(
-				Assembly.GetExecutingAssembly().GetManifestResourceStream(
-				"ParatextSupport.UsfxToXhtml.xsl")));
-			m_moveTitleSpansToTitle.Load(XmlReader.Create(
-				Assembly.GetExecutingAssembly().GetManifestResourceStream(
-				"ParatextSupport.MoveTitleSpansToTitle.xsl")));
-			m_moveSpansToParas.Load(XmlReader.Create(
-				Assembly.GetExecutingAssembly().GetManifestResourceStream(
-				"ParatextSupport.MoveSpansToParas.xsl")));
-			m_encloseParasInSections.Load(XmlReader.Create(
-				Assembly.GetExecutingAssembly().GetManifestResourceStream(
-				"ParatextSupport.EncloseParasInSections.xsl")));
-			m_addImpliedSection.Load(XmlReader.Create(
-				Assembly.GetExecutingAssembly().GetManifestResourceStream(
-				"ParatextSupport.AddImpliedSection.xsl")));
-			m_encloseScrInColumns.Load(XmlReader.Create(
-				Assembly.GetExecutingAssembly().GetManifestResourceStream(
-				"ParatextSupport.EncloseScrInColumns.xsl")));
+			LoadStyleSheets();
 		}
 
 		/// ------------------------------------------------------------------------------------
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ParatextPathwayLink"/> class.
-		/// This is included only for backward compatibility with earlier versions of Paratext.
+		/// This method overload is included only for backward compatibility with earlier versions 
+		/// of Paratext.
 		/// </summary>
 		/// <param name="projName">Name of the project (from scrText.Name)</param>
 		/// <param name="databaseName">Name of the database.</param>
@@ -106,6 +87,16 @@ namespace SIL.PublishingSolution
 			m_xslParams.Add("user", userName);
 			m_xslParams.Add("projName", projName);
 
+			LoadStyleSheets();
+		}
+
+		/// ------------------------------------------------------------------------------------
+		/// <summary>
+		/// Loads the style sheets that are used to transform from Paratext USFX to XHTML.
+		/// </summary>
+		/// ------------------------------------------------------------------------------------
+		private void LoadStyleSheets()
+		{
 			// Create stylesheets
 			m_cleanUsfx.Load(XmlReader.Create(
 				Assembly.GetExecutingAssembly().GetManifestResourceStream(
@@ -128,6 +119,9 @@ namespace SIL.PublishingSolution
 			m_encloseScrInColumns.Load(XmlReader.Create(
 				Assembly.GetExecutingAssembly().GetManifestResourceStream(
 				"ParatextSupport.EncloseScrInColumns.xsl")));
+			m_encloseSectionsInBook.Load(XmlReader.Create(
+				Assembly.GetExecutingAssembly().GetManifestResourceStream(
+				"ParatextSupport.EncloseSectionsInBook.xsl")));
 		}
 
 		/// ------------------------------------------------------------------------------------
@@ -192,6 +186,7 @@ namespace SIL.PublishingSolution
 		/// ------------------------------------------------------------------------------------
 		public void ExportToPathway(List<XmlDocument> usfxDoc)
 		{
+			// TODO: Add book number/id to end of file when exporting multiple books.
 			throw new NotImplementedException("Instead of a list, the usfxDoc could be passed in as a dictionary keyed " +
 				"by the book number/id (which could be added to the XHTML file name)");
 		}
@@ -252,10 +247,16 @@ namespace SIL.PublishingSolution
 			//m_addImpliedSection.Transform(reader4_5, null, htmlw4_5, null);
 
 			// Step 5. Move Scripture sections into columns element.
-			FileStream xhtmlFile = new FileStream(fileName, FileMode.Create);
-			XmlWriter htmlw5 = XmlWriter.Create(xhtmlFile, m_encloseScrInColumns.OutputSettings);
+			StringBuilder scrSectionsInColumns = new StringBuilder();
+			XmlWriter htmlw5 = XmlWriter.Create(scrSectionsInColumns, m_encloseScrInColumns.OutputSettings);
 			XmlReader reader5 = XmlReader.Create(new StringReader(parasInSections.ToString()), settings);
 			m_encloseScrInColumns.Transform(reader5, null, htmlw5, null);
+
+			// Step 6. Move all sections into scrBook element.
+			FileStream xhtmlFile = new FileStream(fileName, FileMode.Create);
+			XmlWriter htmlw6 = XmlWriter.Create(xhtmlFile, m_encloseSectionsInBook.OutputSettings);
+			XmlReader reader6 = XmlReader.Create(new StringReader(scrSectionsInColumns.ToString()), settings);
+			m_encloseSectionsInBook.Transform(reader6, null, htmlw6, null);
 			xhtmlFile.Close();
 		}
 	}
