@@ -288,11 +288,8 @@ namespace SIL.PublishingSolution
         }
         public void LetterSpacing(string propertyValue)
         {
-            _IDProperty["MinimumLetterSpacing"] = "0";
-            _IDProperty["DesiredLetterSpacing"] = propertyValue;
-            _IDProperty["MaximumLetterSpacing"] = propertyValue;
+            _IDProperty[_propertyKey] = Add_pt(propertyValue);
         }
-
 
         public void HyphenateLines(string propertyValue)
         {

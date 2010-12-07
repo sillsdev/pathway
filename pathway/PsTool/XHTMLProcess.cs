@@ -163,8 +163,6 @@ namespace SIL.PublishingSolution
                 CreateSectionClass(_paragraphName);
 
                 DivTypeLi_Odt();
-
-
             }
             else if (_tagType == "span" || _tagType == "em") 
             {
@@ -812,7 +810,11 @@ namespace SIL.PublishingSolution
                 if (property.Value.IndexOf("%") > 0)
                 {
                     float value = float.Parse(property.Value.Replace("%", ""));
-                    _tempStyle[property.Key] = (ancestorFontSize * value / 100).ToString();
+                    _tempStyle[property.Key] = (ancestorFontSize * value / 100).ToString() ;
+                    if (_outputType != Common.OutputType.IDML)
+                    {
+                        _tempStyle[property.Key] = (ancestorFontSize * value / 100).ToString() + "pt";
+                    }
                 }
                 else
                 {
