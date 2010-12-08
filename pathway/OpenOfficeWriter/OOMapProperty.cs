@@ -743,7 +743,7 @@ namespace SIL.PublishingSolution
 
         public void Display(string propertyValue)
         {
-            propertyValue = propertyValue == "none" ? "true" : "false";
+            //propertyValue = propertyValue == "none" ? "true" : "false";
             _IDProperty[_propertyKey] = propertyValue;
         }
 

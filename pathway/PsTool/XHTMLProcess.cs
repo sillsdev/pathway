@@ -21,6 +21,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Text;
 using System.Xml;
 using SIL.PublishingSolution;
 using SIL.Tool;
@@ -105,6 +106,19 @@ namespace SIL.PublishingSolution
         public Dictionary<string, Dictionary<string, string>> contentCounterIncrement = new Dictionary<string, Dictionary<string, string>>();
         public Dictionary<string, string> ContentCounterReset = new Dictionary<string, string>();
         public Dictionary<string, int> ContentCounter = new Dictionary<string, int>();
+
+        protected  bool _chapterNoStart;
+        protected bool _verserNoStart;
+        protected string _chapterNo;
+        protected string _verseNo;
+        protected bool _footnoteStart = false;
+        protected bool isFootnote = false;
+        protected string footnoteClass = string.Empty;
+        protected StringBuilder footnoteContent = new StringBuilder();
+        protected ArrayList _FootNote = new ArrayList();
+        protected ArrayList _footnoteCallContent = new ArrayList();
+        protected ArrayList _footnoteMarkerContent = new ArrayList();
+        protected Dictionary<string, string> _footNoteMarker = new Dictionary<string, string>();
 
 
         #endregion
@@ -328,7 +342,6 @@ namespace SIL.PublishingSolution
             _isTagClass = Common.IsTagClass(_tagType);
             if (_isTagClass != string.Empty)
             {
-                    //DivTypeLi_Odt();
                     string tagType = string.Empty;
                     if (_tagType == "ol" || _tagType == "ul")
                     {
@@ -350,12 +363,13 @@ namespace SIL.PublishingSolution
                             {
                                 tagType = _listType + "Next";
                             }
+                            classNameWithLang = tagType + Common.SepTag + _className;
                         }
                         else if (_outputType == Common.OutputType.ODT)
                         {
                             tagType = _listType;
+                            classNameWithLang = _className + Common.SepTag + tagType;
                         }
-                        classNameWithLang = tagType + Common.SepTag + _className;
                     }
                 
                 else if (_tagType == "p")
@@ -546,7 +560,77 @@ namespace SIL.PublishingSolution
                 return string.Empty;
             }
         }
+        /// <summary>
+        /// Collects the contents of footnotes, ChapterNo and verseno.
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        protected bool CollectFootNoteChapterVerse(string content)
+        {
+            if (_className.ToLower() == "chapternumber")
+            {
+                _chapterNo = content;
+            }
+            else if (_className.ToLower() == "versenumber")
+            {
+                _verseNo = content;
+            }
+            if (isFootnote)
+            {
+                footnoteContent.Append(_reader.Value);
+            }
+            return isFootnote;
+        }
 
+        protected string StackPeekCharStyle(Stack<string> stack)
+        {
+            string result = "$ID/[No character style]";
+            if (stack.Count > 0)
+            {
+                result = stack.Peek();
+            }
+            return result;
+        }
+        /// <summary>
+        /// Sets the chapterno, verseno and class names for footer
+        /// </summary>
+        protected void FooterSetup()
+        {
+            string characterStyle = StackPeekCharStyle(_allCharacter);
+            //if (characterStyle.ToLower().IndexOf("chapternumber") == 0)
+            //    _chapterNoStart = true;
+            //if (characterStyle.ToLower().IndexOf("versenumber") >= 0)
+            //    _verserNoStart = true;
+            //_FootNote.Add("footnote");
+            if (_FootNote.Contains(_className))
+            {
+                footnoteClass = characterStyle;
+                isFootnote = true;
+
+                //Note : if needed call this below code for - "footer call"
+                //string footerCallClassName += "..footnote-call";
+                //if(IdAllClass.ContainsKey(footerCallClassName))
+                //{
+                //    string content = IdAllClass[footerCallClassName]["content"];
+                //    string a = _reader.GetAttribute("title");
+                //    footnoteContent.Append(a);
+                //}
+
+                string footerMarkerClassName = _className + "..footnote-marker";
+                if (IdAllClass.ContainsKey(footerMarkerClassName))
+                {
+                    string a = string.Empty;
+                    string content = IdAllClass[footerMarkerClassName]["content"];
+                    if (content.IndexOf("string(chapter)") >= 0)
+                        a = content.ToLower().Replace("string(chapter)", _chapterNo);
+                    if (content.IndexOf("string(verse)") >= 0)
+                        a = a.Replace("string(verse)", _verseNo);
+                    footnoteContent.Append(a);
+                }
+            }
+
+            //}
+        }
         #region Private Methods
 
 

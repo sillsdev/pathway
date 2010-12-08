@@ -116,7 +116,7 @@ namespace Test
                         propertyValue = att.Value;
                     }
 
-                    Assert.AreEqual(ClassProperty[ns + ":" + key], propertyValue);
+                    //Assert.AreEqual(ClassProperty[ns + ":" + key], propertyValue);
                     if (propertyValue != ClassProperty[ns + ":" + key])
                     {
                         match = false;

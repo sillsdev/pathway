@@ -34,7 +34,7 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                return "OpenOffice";
+                return "OpenOfficeWriter";
             }
         }
 
@@ -60,42 +60,6 @@ namespace SIL.PublishingSolution
 
   
 
-        public bool Export_Old(PublicationInformation publicationInformation)
-        {
-            publicationInfo = publicationInformation;
-            if (Path.GetExtension(publicationInformation.DefaultXhtmlFileWithPath) == ".lift")
-            {
-                publicationInformation.DefaultXhtmlFileWithPath = TransformLiftToXhtml(publicationInformation);
-            }
-
-            Dictionary<string, string> dictSecName = new Dictionary<string, string>();
-
-            SplitFile(publicationInformation); 
-
-
-            if (publicationInformation.FromPlugin)
-            {
-                dictSecName = CreatePageDictionary(publicationInformation);
-            }
-            else
-            {
-                dictSecName = GetPageSectionSteps();
-            }
-
-            dictSecName = SplitXhtmlAsMultiplePart(publicationInformation, dictSecName);
-
-
-            if (dictSecName.Count > 0)
-            {
-                ExportWithDocumentSections(publicationInfo.ProgressBar);
-            }
-            else
-            {
-                publicationInfo.DictionaryOutputName = publicationInfo.ProjectName;
-                ExportOneSection(publicationInfo);
-            }
-            return true;
-        }
 
         private void SplitFile(PublicationInformation publicationInformation)
         {
@@ -617,69 +581,171 @@ namespace SIL.PublishingSolution
             }
         }
 
-        public bool ExportOneSection(PublicationInformation projInfo)
-        {
-            return true;
-        }
-
         /// <summary>
         /// Convert XHTML to ODT
         /// </summary>
         public bool Export(PublicationInformation projInfo)
         {
+            publicationInfo = projInfo;
             string defaultXhtml = projInfo.DefaultXhtmlFileWithPath;
             projInfo.OutputExtension = "odt";
             Common.OdType = Common.OdtType.OdtChild;
             bool returnValue = false;
             VerboseClass verboseClass = VerboseClass.GetInstance();
 
-            
+
             string strFromOfficeFolder = Common.PathCombine(Common.GetPSApplicationPath(), "OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
             projInfo.TempOutputFolder = Common.PathCombine(Path.GetTempPath(), "OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
 
             //todo comment this
-            string strStylePath = Common.PathCombine(projInfo.TempOutputFolder, "styles.xml");
-            string strContentPath = Common.PathCombine(projInfo.TempOutputFolder, "content.xml");
+            //string strStylePath = Common.PathCombine(projInfo.TempOutputFolder, "styles.xml");
+            //string strContentPath = Common.PathCombine(projInfo.TempOutputFolder, "content.xml");
 
 
             CopyOfficeFolder(strFromOfficeFolder, projInfo.TempOutputFolder);
 
 
             //string strMacroPath = Common.PathCombine(projInfo.TempOutputFolder, "Basic/Standard/Module1.xml");
-            string strMacroPath = Common.PathCombine(projInfo.TempOutputFolder, "Basic/Standard/Module1.xml");
-            string outputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+            //string strMacroPath = Common.PathCombine(projInfo.TempOutputFolder, "Basic/Standard/Module1.xml");
+            //string outputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
 
-            string outputFileName = SetMasterFileType(projInfo, outputPath);
 
+            Dictionary<string, string> dictSecName = new Dictionary<string, string>();
 
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
 
+            if (cssClass.ContainsKey("@page") && cssClass["@page"].ContainsKey("-ps-fileproduce"))
+            {
+                projInfo.FileToProduce = cssClass["@page"]["-ps-fileproduce"];
+            }
+
+            if (projInfo.FromPlugin)
+            {
+                dictSecName = CreatePageDictionary(projInfo);
+            }
+            else
+            {
+                dictSecName = GetPageSectionSteps();
+            }
+
+            dictSecName = SplitXhtmlAsMultiplePart(projInfo, dictSecName);
+
+
+            if (dictSecName.Count > 0)
+            {
+                ExportWithDocumentSections(publicationInfo.ProgressBar);
+            }
+            else
+            {
+                publicationInfo.DictionaryOutputName = publicationInfo.ProjectName;
+                ExportOneSection(publicationInfo);
+            }
+            return returnValue;
+        }
+
+        /// <summary>
+        /// Convert XHTML to ODT
+        /// </summary>
+        public bool ExportOneSection(PublicationInformation projInfo)
+        {
+            string ReferenceFormat = string.Empty;
+            string defaultXhtml = projInfo.DefaultXhtmlFileWithPath;
+            //string fileType = "odt";
+            projInfo.OutputExtension = "odt";
+            Common.OdType = Common.OdtType.OdtChild;
+            bool returnValue = false;
+            string strFromOfficeFolder = Common.PathCombine(Common.GetPSApplicationPath(), "OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
+            projInfo.TempOutputFolder = Common.PathCombine(Path.GetTempPath(), "OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
+            Common.DeleteDirectory(projInfo.TempOutputFolder);
+            string strStylePath = Common.PathCombine(projInfo.TempOutputFolder, "styles.xml");
+            string strContentPath = Common.PathCombine(projInfo.TempOutputFolder, "content.xml");
+            CopyOfficeFolder(strFromOfficeFolder, projInfo.TempOutputFolder);
+            //string strMacroPath = Common.PathCombine(projInfo.TempOutputFolder, "Basic/Standard/Module1.xml");
+            string strMacroPath = Common.PathCombine(projInfo.TempOutputFolder, "Basic/Standard/Module1.xml");
+            string outputFileName;
+            string outputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+            VerboseClass verboseClass = VerboseClass.GetInstance();
+            if (projInfo.FileSequence != null && projInfo.FileSequence.Count > 1)
+            {
+                projInfo.OutputExtension = "odm";  // Master Document
+                Common.OdType = Common.OdtType.OdtMaster;
+                if (projInfo.DictionaryOutputName == null)
+                    projInfo.DictionaryOutputName = projInfo.DefaultXhtmlFileWithPath.Replace(Path.GetExtension(projInfo.DefaultXhtmlFileWithPath), "");
+                outputFileName = Common.PathCombine(outputPath, projInfo.DictionaryOutputName); // OdtMaster is created in Dictionary Name
+            }
+            else
+            {
+                // All other OdtChild files are created in the name of Xhtml or xml file Names.
+                if (projInfo.DictionaryOutputName == null)
+                {
+                    outputFileName = projInfo.DefaultXhtmlFileWithPath.Replace(Path.GetExtension(projInfo.DefaultXhtmlFileWithPath), "");
+                }
+                else
+                {
+                    outputFileName = Common.PathCombine(outputPath, projInfo.DictionaryOutputName);
+                    Common.OdType = Common.OdtType.OdtNoMaster; // to all the Page property process
+                }
+            }
+
+            ////Include FlexRev.css when XHTML is FlexRev.xhtml
+            //string FlexRev = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+            //if (FlexRev.ToLower() == "flexrev")
+            //{
+            //    string revCSS = Path.Combine(Path.GetDirectoryName(projInfo.DefaultCssFileWithPath), "FlexRev.css");
+            //    if (File.Exists(revCSS))
+            //        projInfo.DefaultCssFileWithPath = revCSS;
+            //}
+            Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
+            CssTree cssTree = new CssTree();
+            cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
+
+            // BEGIN Generate Styles.Xml File
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
             OOStyles inStyles = new OOStyles();
-            idAllClass = inStyles.CreateStyles(projInfo, cssClass,"Styles.xml");
-
+            idAllClass = inStyles.CreateStyles(projInfo, cssClass, "Styles.xml");
 
             //To set Constent variables for User Desire
-            IncludeTextinMacro(strMacroPath, "styleName.ReferenceFormat", Common.PathCombine(projInfo.DictionaryPath, Path.GetFileNameWithoutExtension(projInfo.DictionaryPath)), projInfo.FinalOutput);
+            //string macroFileName = Common.PathCombine(projInfo.DictionaryPath,Path.GetFileNameWithoutExtension(projInfo.DictionaryPath));
+            string fname = projInfo.ProjectName ?? projInfo.DictionaryPath;
+            string macroFileName = Common.PathCombine(projInfo.DictionaryPath,
+                                                      Path.GetFileNameWithoutExtension(fname));
+            //if (value != string.Empty && value.IndexOf("string(bookname") >= 0)
+            //{
+            //    if (value.IndexOf("string(verse") >= 0)
+            //    {
+            //        return "Genesis 1:1 Genesis 1:15";
+            //    }
+            //    else
+            //    {
+            //        return "Genesis 1";
 
+            //    }
+            //}
+
+            //IncludeTextinMacro(strMacroPath, styleName.ReferenceFormat, macroFileName);
+            IncludeTextinMacro(strMacroPath, "Genesis 1", macroFileName);
 
             // BEGIN Generate Meta.Xml File
             var metaXML = new OOMetaXML();
             metaXML.CreateMeta(projInfo);
-
-
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             // BEGIN Generate Content.Xml File 
             var cXML = new OOContent();
+            string fileName = Path.Combine(projInfo.DictionaryPath, Path.GetFileName(projInfo.DefaultXhtmlFileWithPath));
             preProcessor.GetTempFolderPath();
+            preProcessor.GetfigureNode();
             preProcessor.ImagePreprocess();
             preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
             if (projInfo.SwapHeadword)
                 preProcessor.SwapHeadWordAndReversalForm();
             preProcessor.PreserveSpace();
             projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
+            //cXML.CreateContent(projInfo.ProgressBar, projInfo.DefaultXhtmlFileWithPath, strToOfficeFolder + Path.DirectorySeparatorChar,
+            //                   styleName, fileType);
+            projInfo.TempOutputFolder += Path.DirectorySeparatorChar;
+            cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
             if (projInfo.FileSequence != null && projInfo.FileSequence.Count > 1)
             {
@@ -687,11 +753,7 @@ namespace SIL.PublishingSolution
                 ul.CreateMasterContents(strContentPath, projInfo.FileSequence);
             }
 
-            projInfo.TempOutputFolder += Path.DirectorySeparatorChar;
-            cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
-           
-
-            if (projInfo.MoveStyleToContent) 
+            if (projInfo.MoveStyleToContent)
                 MoveStylesToContent(strStylePath, strContentPath);
 
             var mODT = new ZipFolder();
@@ -718,7 +780,19 @@ namespace SIL.PublishingSolution
                     return false;
                 }
             }
-            projInfo.DefaultXhtmlFileWithPath = defaultXhtml ;
+            finally
+            {
+                projInfo.DefaultXhtmlFileWithPath = defaultXhtml;
+                if (preProcessor != null)
+                {
+                    Common.DeleteDirectory(preProcessor.GetCreatedTempFolderPath);
+                }
+                if (projInfo.TempOutputFolder != null)
+                {
+                    Common.DeleteDirectory(projInfo.TempOutputFolder);
+                }
+            }
+
             //try
             //{
             //    File.Delete(processedXhtml);
@@ -728,35 +802,6 @@ namespace SIL.PublishingSolution
             //    Console.Write(ex.Message);
             //}
             return returnValue;
-        }
-
-        private string SetMasterFileType(PublicationInformation projInfo, string outputPath)
-        {
-            string outputFileName;
-// Master Document
-            if (projInfo.FileSequence != null && projInfo.FileSequence.Count > 1)
-            {
-                projInfo.OutputExtension = "odm";  
-                Common.OdType = Common.OdtType.OdtMaster;
-                if (projInfo.DictionaryOutputName == null)
-                    projInfo.DictionaryOutputName = projInfo.DefaultXhtmlFileWithPath.Replace(Path.GetExtension(projInfo.DefaultXhtmlFileWithPath), "");
-                outputFileName = Common.PathCombine(outputPath, projInfo.DictionaryOutputName); // OdtMaster is created in Dictionary Name
-            }
-                // All other OdtChild files are created in the name of Xhtml or xml file Names.
-            else
-            {
-                
-                if (projInfo.DictionaryOutputName == null)
-                {
-                    outputFileName = projInfo.DefaultXhtmlFileWithPath.Replace(Path.GetExtension(projInfo.DefaultXhtmlFileWithPath), "");
-                }
-                else
-                {
-                    outputFileName = Common.PathCombine(outputPath, projInfo.DictionaryOutputName);
-                    Common.OdType = Common.OdtType.OdtNoMaster; // to all the Page property process
-                }
-            }
-            return outputFileName;
         }
 
         private static void MoveStylesToContent(string strStylePath, string strContentPath)
@@ -835,7 +880,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private static void IncludeTextinMacro(string strMacroPath, string ReferenceFormat, string saveAsPath, string finalOutput)
+        private void IncludeTextinMacro(string strMacroPath, string ReferenceFormat, string saveAsPath)
         {
             var xmldoc = new XmlDocument { XmlResolver = null };
             xmldoc.Load(strMacroPath);
@@ -847,16 +892,23 @@ namespace SIL.PublishingSolution
                 {
                     autoMacro = Param.Value[Param.ExtraProcessing];
                 }
-                if (ele != null)
+            }
+            if (ele != null)
+            {
+                string seperator = "\n";
+                string line1 = string.Empty;
+                if (publicationInfo.ProjectInputType.ToLower() == "scripture")
                 {
-                    string seperator = "\n";
-                    string line1 = "\n'Constant ReferenceFormat for User Desire\nConst ReferenceFormat = \"" +
-                                   ReferenceFormat + "\"" + "\nConst AutoMacro = \"" + autoMacro + "\"";
-                    string line2 = "\nConst OutputFormat = \"" + finalOutput + "\"" + "\nConst FilePath = \"" + saveAsPath + "\"";
-                    string combined = line1 + line2 + seperator;
-
-                    ele.InnerText = combined + ele.InnerText;
+                    line1 = "\n'Constant ReferenceFormat for User Desire\nConst ReferenceFormat = \"" +
+                            ReferenceFormat + "\"";
                 }
+                line1 = line1 + "\nConst AutoMacro = \"" + autoMacro + "\"";
+                string line2 = "\nConst OutputFormat = \"" + publicationInfo.FinalOutput + "\"" +
+                               "\nConst FilePath = \"" + saveAsPath + "\"" + "\nConst IsPreview = \"" +
+                               publicationInfo.JpgPreview + "\"";
+                string combined = line1 + line2 + seperator;
+
+                ele.InnerText = combined + ele.InnerText;
             }
             xmldoc.Save(strMacroPath);
         }

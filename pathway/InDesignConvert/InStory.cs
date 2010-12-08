@@ -51,20 +51,7 @@ namespace SIL.PublishingSolution
         private int _crossRefCounter = 1;
         private bool _isWhiteSpace = true;
         private bool _imageInserted;
-        private bool _footnoteStart = false;
-        bool isFootnote = false;
-        private string footnoteClass = string.Empty;
-        private StringBuilder footnoteContent = new StringBuilder();
-        //private InDesignStyles _inDesignStyles;
-        private ArrayList _FootNote = new ArrayList();
-        private ArrayList _footnoteCallContent = new ArrayList();
-        private ArrayList _footnoteMarkerContent = new ArrayList();
         private List<string> _usedStyleName = new List<string>();
-        private bool _chapterNoStart;
-        private bool _verserNoStart;
-        private string _chapterNo;
-        private string _verseNo;
-
         private bool _IsHeadword = false;
         #endregion
 
@@ -244,27 +231,7 @@ namespace SIL.PublishingSolution
             _psuedoBefore.Clear();
         }
 
-        /// <summary>
-        /// Collects the contents of footnotes, ChapterNo and verseno.
-        /// </summary>
-        /// <param name="content"></param>
-        /// <returns></returns>
-        private bool CollectFootNoteChapterVerse(string content)
-        {
-            if (_className.ToLower() == "chapternumber")
-            {
-                _chapterNo = content;
-            }
-            else if (_className.ToLower() == "versenumber")
-            {
-                _verseNo = content;
-            }
-            if (isFootnote)
-            {
-                footnoteContent.Append(_reader.Value);
-            }
-            return isFootnote;
-        }
+
 
         private string whiteSpacePre(string content)
         {
@@ -884,45 +851,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        /// <summary>
-        /// Sets the chapterno, verseno and class names for footer
-        /// </summary>
-        private void FooterSetup()
-        {
-            string characterStyle = StackPeekCharStyle(_allCharacter);
-            //if (characterStyle.ToLower().IndexOf("chapternumber") == 0)
-            //    _chapterNoStart = true;
-            //if (characterStyle.ToLower().IndexOf("versenumber") >= 0)
-            //    _verserNoStart = true;
 
-            if (_FootNote.Contains(_className))
-            {
-                footnoteClass = characterStyle;
-                isFootnote = true;
-
-                //Note : if needed call this below code for - "footer call"
-                //string footerCallClassName += "..footnote-call";
-                //if(IdAllClass.ContainsKey(footerCallClassName))
-                //{
-                //    string content = IdAllClass[footerCallClassName]["content"];
-                //    string a = _reader.GetAttribute("title");
-                //    footnoteContent.Append(a);
-                //}
-
-                string footerMarkerClassName = _className + "..footnote-marker";
-                if (IdAllClass.ContainsKey(footerMarkerClassName))
-                {
-                    string a = string.Empty;
-                    string content = IdAllClass[footerMarkerClassName]["content"];
-                    if (content.IndexOf("string(chapter)") >= 0)
-                        a = content.ToLower().Replace("string(chapter)", _chapterNo);
-                    if (content.IndexOf("string(verse)") >= 0)
-                        a = a.Replace("string(verse)", _verseNo);
-                    footnoteContent.Append(a);
-                }
-            }
-            //}
-        }
 
         private void SetHomographNumber(bool defValue)
         {
@@ -1097,15 +1026,7 @@ namespace SIL.PublishingSolution
 
         #region Private Methods
 
-        private string StackPeekCharStyle(Stack<string> stack)
-        {
-            string result = "$ID/[No character style]";
-            if (stack.Count > 0)
-            {
-                result = stack.Peek();
-            }
-            return result;
-        }
+
 
         private void InitializeData(string projectPath, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
         {

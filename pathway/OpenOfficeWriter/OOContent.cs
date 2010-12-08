@@ -139,19 +139,7 @@ namespace SIL.PublishingSolution
         private int _crossRefCounter = 1;
         private bool _isWhiteSpace = true;
         private bool _imageInserted;
-        private bool _footnoteStart = false;
-        bool isFootnote = false;
-        private string footnoteClass = string.Empty;
-        private StringBuilder footnoteContent = new StringBuilder();
-        //private InDesignStyles _inDesignStyles;
-        private ArrayList _FootNote = new ArrayList();
-        private ArrayList _footnoteCallContent = new ArrayList();
-        private ArrayList _footnoteMarkerContent = new ArrayList();
         private List<string> _usedStyleName = new List<string>();
-        private bool _chapterNoStart;
-        private bool _verserNoStart;
-        private string _chapterNo;
-        private string _verseNo;
         private PublicationInformation _projInfo;
         private bool _IsHeadword = false;
         private bool _significant;
@@ -363,28 +351,37 @@ namespace SIL.PublishingSolution
                 {
                     ContentCounterReset[className] = IdAllClass[className][searchKey];
                 }
-            //    // Footnote process 
-            //    searchKey = "display";
-            //    if (IdAllClass[className].ContainsKey(searchKey) && className.IndexOf("..") == -1)
-            //    {
-            //        if (IdAllClass[className][searchKey] == "footnote" || IdAllClass[className][searchKey] == "prince-footnote")
-            //        {
-            //            if (!_FootNote.Contains(className))
-            //                _FootNote.Add(className);
-            //        }
-            //    }
-            //    string searchKey1 = "..footnote-call";
-            //    if (className.IndexOf(searchKey1) >= 0)
-            //    {
-            //        if (!_footnoteCallContent.Contains(className))
-            //            _footnoteCallContent.Add(className);
-            //    }
-            //    string searchKey2 = "..footnote-marker";
-            //    if (className.IndexOf(searchKey2) >= 0)
-            //    {
-            //        if (!_footnoteMarkerContent.Contains(className))
-            //            _footnoteMarkerContent.Add(className);
-            //    }
+
+                // Footnote process 
+                searchKey = "display";
+                if (IdAllClass[className].ContainsKey(searchKey) && className.IndexOf("..") == -1)
+                {
+                    if (IdAllClass[className][searchKey] == "footnote" || IdAllClass[className][searchKey] == "prince-footnote")
+                    {
+                        if (!_FootNote.Contains(className))
+                            _FootNote.Add(className);
+                    }
+                }
+                searchKey = "..footnote-call";
+                if (className.IndexOf(searchKey) >= 0)
+                {
+                    if (!_footnoteCallContent.Contains(className))
+                        _footnoteCallContent.Add(className);
+                }
+                searchKey = "..footnote-marker";
+                if (className.IndexOf(searchKey) >= 0)
+                {
+                    if (!_footnoteMarkerContent.Contains(className))
+                    {
+                        _footnoteMarkerContent.Add(className);
+                        if(IdAllClass[className].ContainsKey("content"))
+                        {
+                            _footNoteMarker[className] = IdAllClass[className]["content"];
+                        }
+                    }
+                    
+                }
+               
             }
         }
 
@@ -808,7 +805,7 @@ namespace SIL.PublishingSolution
         {
             string content = _reader.Value;
 
-            //if (CollectFootNoteChapterVerse(content)) return;
+            if (CollectFootNoteChapterVerse(content)) return;
 
             // Psuedo Before
             foreach (ClassInfo psuedoBefore in _psuedoBefore)
@@ -880,8 +877,15 @@ namespace SIL.PublishingSolution
 
             if ((_tagType == "span" || _tagType == "a") && characterStyle != "none") //span start
             {
-                _writer.WriteStartElement("text:span");
-                _writer.WriteAttributeString("text:style-name", characterStyle); //_util.ChildName
+                if (isFootnote)
+                {
+                    string footerClassName = Common.LeftString(characterStyle, "_");
+                    WriteFootNoteMarker(footerClassName, footnoteContent.ToString(), "");
+                    return;
+                }
+
+                    _writer.WriteStartElement("text:span");
+                    _writer.WriteAttributeString("text:style-name", characterStyle); //_util.ChildName
             }
             AddUsedStyleName(characterStyle);
 
@@ -896,6 +900,60 @@ namespace SIL.PublishingSolution
                 _writer.WriteEndElement();
             }
 
+        }
+
+        private void WriteFootNoteMarker(string footerClassName, string content,string marker)
+        {
+            string footerMark = footerClassName + "..footnote-marker";
+            string footCallSymb = string.Empty;
+            if(_footNoteMarker.ContainsKey(footerMark))
+                footCallSymb = _footNoteMarker[footerMark];
+
+            //if (_footNoteMarker[footerMark].IndexOf("#ChapterNumber") >= 0 &&
+            //        _footNoteMarker[footerMark].IndexOf("#VerseNumber") >= 0)
+            //{
+            //    if (_chapterNo != null)
+            //        if (_chapterNo.IndexOf(':') == -1) _chapterNo = _chapterNo + ":";
+            //    footCallSymb =
+            //        _structStyles.FootNoteMarker[footerMark].Replace("#ChapterNumber", _chapterNo).Replace(
+            //            "#VerseNumber", _verseNo) + " ";
+            //}
+
+            if (_footNoteMarker[footerMark].IndexOf('(') >= 0)
+            {
+                string attrName = _footNoteMarker[footerMark].Substring(
+                    _footNoteMarker[footerMark].IndexOf('(') + 1,
+                    _footNoteMarker[footerMark].Length -
+                    _footNoteMarker[footerMark].IndexOf('(') - 2);
+                footCallSymb = _reader.GetAttribute(attrName);
+                if (string.IsNullOrEmpty(_footCal))
+                    _footCal = " ";
+            }
+
+            _autoFootNoteCount++;
+            _writer.WriteStartElement("text:note");
+            _writer.WriteAttributeString("text:id", "ftn" + (_autoFootNoteCount));
+            _writer.WriteAttributeString("text:note-class", "footnote");
+            _writer.WriteStartElement("text:note-citation");
+            _writer.WriteAttributeString("text:label", footCallSymb);
+            _writer.WriteString(footCallSymb);
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("text:note-body");
+            _writer.WriteStartElement("text:p");
+            _writer.WriteAttributeString("text:style-name", footerClassName);
+            if (marker != string.Empty)
+            {
+                _writer.WriteStartElement("text:span");
+                _writer.WriteAttributeString("text:style-name", "Footnote Characters");
+                _writer.WriteString(marker);
+                _writer.WriteEndElement();
+            }
+            //_writer.WriteString(text);
+            _writer.WriteRaw(content);
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            //isFootnote = false;
         }
 
         private bool VisibleHidden()
@@ -999,6 +1057,7 @@ namespace SIL.PublishingSolution
             Psuedo();
             VisibilityCheck();
             DropCaps();
+            FooterSetup();
         }
 
         private void DropCaps()
@@ -1104,6 +1163,7 @@ namespace SIL.PublishingSolution
             ClosefooterNote();
             EndElementForImage();
             */
+            ClosefooterNote();
             EndElementForImage();
 
             if (_closeChildName == string.Empty) return;
@@ -1909,6 +1969,20 @@ namespace SIL.PublishingSolution
                 }
                 _usedStyleName.Add(parent);
                 AddUsedParentStyleName(parent);
+            }
+        }
+
+        /// <summary>
+        /// Closes the opened footnote Content, Chapter No and VerseNo
+        /// </summary>
+        private void ClosefooterNote()
+        {
+            //footnoteClass = "footnote_p.first_section_div.scriptureText_scrBody";
+            if (_closeChildName.Length > 0 && _closeChildName == footnoteClass)
+            {
+                WriteCharacterStyle(footnoteContent.ToString(), footnoteClass,false);
+                isFootnote = false;
+                footnoteContent.Remove(0, footnoteContent.Length);
             }
         }
         /// -------------------------------------------------------------------------------------------
