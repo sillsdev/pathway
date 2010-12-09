@@ -2,11 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection;
-using System.Text;
-using System.Windows.Forms;
 using System.Xml;
-using System.Xml.Xsl;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -18,7 +14,15 @@ namespace SIL.PublishingSolution
         Dictionary<string, string> _cssProp;
         Dictionary<string, string> _mapClassName = new Dictionary<string, string>();
 
-        public void ConvertStyToCSS(string database, string cssFullPath)
+		/// ------------------------------------------------------------
+		/// <summary>
+		/// Convert a Paratext sty file to a CSS.
+		/// </summary>
+		/// <param name="database">The settings for the Paratext database.
+		/// </param>
+		/// <param name="cssFullPath">The CSS full path.</param>
+        /// ------------------------------------------------------------
+		public void ConvertStyToCSS(string database, string cssFullPath)
         {
 
             //_styFullPath = styFullPath;
@@ -29,7 +33,14 @@ namespace SIL.PublishingSolution
             WriteCSS();
         }
 
-        private void FindStyFile(string database)
+		/// ------------------------------------------------------------
+		/// <summary>
+		/// Finds the sty file for a Paratext project.
+		/// </summary>
+		/// <param name="database">The settings for the Paratext database.
+		/// </param>
+		/// ------------------------------------------------------------
+		private void FindStyFile(string database)
         {
             string ssfFile = database + ".ssf";
             string ssfFullPath;
@@ -43,7 +54,7 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                Debug.WriteLine(ssfFile + " is not exist.");
+                Debug.WriteLine(ssfFile + " does not exist.");
                 return;
             }
             //string ssfFile;
@@ -72,12 +83,18 @@ namespace SIL.PublishingSolution
             _styFullPath = Common.PathCombine(Path.GetDirectoryName(ssfFullPath), ssfFile);
         }
 
-	    private void ParseFile()
+		/// ------------------------------------------------------------------------
+		/// <summary>
+		/// Parses all the lines in an sty file converting the settings to 
+		/// properties in a CSS.
+		/// </summary>
+	    /// ------------------------------------------------------------------------
+		private void ParseFile()
         {
             _styleInfo.Clear();
             if(!File.Exists(_styFullPath))
             {
-                Debug.WriteLine(_styFullPath + " is not exist.");
+                Debug.WriteLine(_styFullPath + " does not exist.");
                 return;
             }
             StreamReader file = new StreamReader(_styFullPath);
@@ -89,7 +106,13 @@ namespace SIL.PublishingSolution
             file.Close();
         }
 
-        private void ParseLine(string line)
+		/// ------------------------------------------------------------
+		/// <summary>
+		/// Parses a line in an Paratext sty file.
+		/// </summary>
+		/// <param name="line">The line in a Paratext sty file.</param>
+        /// ------------------------------------------------------------
+		private void ParseLine(string line)
         {
             string value;
             string word = Common.LeftString(line, " ");
@@ -154,7 +177,14 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void CreateClass(string line)
+		/// ------------------------------------------------------------
+		/// <summary>
+		/// Creates CSS style.
+		/// </summary>
+		/// <param name="line">A line from the sty file which should
+		/// contain the name of the style.</param>
+        /// ------------------------------------------------------------
+		private void CreateClass(string line)
         {
             int start = line.IndexOf(" ") + 1;
             int end = line.IndexOf(" ", start);
@@ -175,7 +205,15 @@ namespace SIL.PublishingSolution
 
         }
 
-        private string PropertyValue(string line)
+		/// ------------------------------------------------------------
+		/// <summary>
+		/// Gets the value from a line in the sty file.
+		/// </summary>
+		/// <param name="line">A line from the sty file which should
+		/// contain property values for a style.</param>
+		/// <returns></returns>
+        /// ------------------------------------------------------------
+		private string PropertyValue(string line)
         {
             string propertyVal;
             try
@@ -190,7 +228,13 @@ namespace SIL.PublishingSolution
             return propertyVal;
         }
 
-        private void WriteCSS()
+		/// ------------------------------------------------------------
+		/// <summary>
+		/// Writes the Cascading Style Sheet given properties determined
+		/// from the Paratext sty file.
+		/// </summary>
+        /// ------------------------------------------------------------
+		private void WriteCSS()
         {
             TextWriter cssFile = new StreamWriter(_cssFullPath);
 
@@ -208,7 +252,12 @@ namespace SIL.PublishingSolution
             cssFile.Close();
         }
 
-        private void MapClassName()
+		/// ------------------------------------------------------------
+		/// <summary>
+		/// Maps a standard format marker to a style name.
+		/// </summary>
+        /// ------------------------------------------------------------
+		private void MapClassName()
         {
             _mapClassName["toc1"] = "scrBookCode";
             _mapClassName["toc2"] = "scrBookName";

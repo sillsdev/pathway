@@ -392,12 +392,10 @@
 
 	<!-- Handle figure element -->
 	<xsl:template match="para/figure">
-		<!-- 
-		<figure style="{@style}" desc="{@desc}" file="{$figurePath}{@file}" size="{@size}" loc="{@loc}" copy="{@copy}" ref="{@ref}"  xmlns="http://www.w3.org/1999/xhtml">
-			<xsl:apply-templates/>
-			</figure>-->
+		<xsl:variable name="figureNumber" select="count(preceding::figure)+1"/>
+		
 		<div class="pictureCenter" xmlns="http://www.w3.org/1999/xhtml">
-			<img class="picture" src="{$figurePath}{@file}" alt="{$altFigurePath}{@file}"/>
+			<img id="{$bookCode}-{$figureNumber}-Figure" class="picture" src="{$figurePath}{@file}" alt="{$altFigurePath}{@file}"/>
 			<div class="pictureCaption">
 				<span lang="{$ws}">
 					<xsl:value-of select="."/>
@@ -605,7 +603,7 @@
 			<xsl:number format="a" value="$footnoteNumber"/>
 		</xsl:variable>
 		<span class="scrFootnoteMarker" xmlns="http://www.w3.org/1999/xhtml">
-			<a href="#{$bookCode}-{$footnoteNumber}"></a>
+			<a href="#{$bookCode}-{$footnoteNumber}"/>
 		</span>
 		<span class="Note_General_Paragraph" id="{$bookCode}-{$footnoteNumber}" title="{$footnoteCaller}" xmlns="http://www.w3.org/1999/xhtml">
 			<!-- Handle template for character styles. -->
