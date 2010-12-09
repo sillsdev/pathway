@@ -63,14 +63,20 @@ if ( class_exists( 'WP_Importer' ) ) {
 			$this->header();
 
 			switch ($step) {
+				/**
+				 * First, greet the user and prompt for files.
+				 */
 				case 0 :
-					$this->greet_getfiles();
+					echo '<div class="narrow">';
+					echo '<p>' . __( 'Howdy! This importer allows you to import SIL Pathway XHTML data into your WordPress site.',
+							'sil-pathway-xhtml-importer' ) . '</p>';
+					$this->get_file_names();
+					echo '</div>';
 					break;
+				/**
+				 * Second, upload files
+				 */
 				case 1 :
-					/**
-					 * wp_nonce_field has been set by wp_import_upload-form.
-					 * check_admin_referer to see if something succeeded.
-					 */
 					check_admin_referer('import-upload');
 					//$result = $this->import_xhtml();
 					$result = $this->upload_files();
@@ -82,39 +88,72 @@ if ( class_exists( 'WP_Importer' ) ) {
 			$this->footer();
 		}
 
-		function greet_getfiles() {
-			echo '<div class="narrow">';
-			echo '<p>' . __( 'Howdy! This importer allows you to import SIL Pathway XHTML data into your WordPress site.',
-					'sil-pathway-xhtml-importer' ) . '</p>';
-			/**
-			 * wp_import_upload_form looks like it does what I want it to,
-			 * but the parameter is a bit of a mystery at the moment. (I pulled
-			 * the idea of the call from rss-importer.php.) The function lives
-			 * in template.php.
-			 */
-			wp_import_upload_form("admin.php?import=pathway-xhtml&amp;step=1");
-			echo '</div>';
+		/**
+		 * Brings up the form to get the files to upload. Based on wp_import_upload_form
+		 * in template.php.
+		 *
+		 * @since 3.0
+		 * @param string $action The action attribute for the form.
+		 */
+		function get_file_names() {
+			/** @todo Change the max upload size */
+			$bytes = apply_filters( 'import_upload_size_limit', wp_max_upload_size() );
+			$size = wp_convert_bytes_to_hr( $bytes );
+			$upload_dir = wp_upload_dir();
+			if ( ! empty( $upload_dir['error'] ) ) :
+				?><div class="error"><p><?php _e('Before you can upload your import file, you will need to fix the following error:'); ?></p>
+				<p><strong><?php echo $upload_dir['error']; ?></strong></p></div><?php
+			else :
+?>
+<form enctype="multipart/form-data" id="import-upload-form" method="post" action="<?php echo esc_attr(
+		wp_nonce_url("admin.php?import=pathway-xhtml&amp;step=1", 'import-upload')); ?>">
+<p>
+<label for="upload"><?php _e( 'Choose an XHTML file from your computer:' ); ?></label> (<?php printf( __('Maximum size: %s' ), $size ); ?>)
+<input type="file" id="upload" name="import" size="25" />
+<input type="hidden" name="action" value="save" />
+<input type="hidden" name="max_file_size" value="<?php echo $bytes; ?>" />
+</p>
+<p class="submit">
+<input type="submit" class="button" value="<?php esc_attr_e( 'Upload files and import' ); ?>" />
+</p>
+</form>
+<?php
+	endif;
 		}
 
+		/**
+		 * Header for the screen
+		 */
 		function header() {
 			echo '<div class="wrap">';
 			screen_icon();
 			echo '<h2>' . __( 'Import SIL Pathway XHTML', 'sil-pathway-xhtml-importer' ) . '</h2>';
 		 }
 
-		 function footer() {
-			 echo '</div>';
-		 }
+		/**
+		 * Footer for the screen
+		 */
+		function footer() {
+			echo '</div>';
+		}
 
+		/**
+		 * Import the XHTML data
+		 *
+		 * @return <type>
+		 */
 		function import_xhtml() {
-			$file = wp_import_handle_upload();
+		$file = wp_import_handle_upload();
 			if ( isset($file['error']) ) {
-				echo $file['error'];
-				return;
+				 echo $file['error'];
+				 return;
+
 			}
 		}
 
 		/**
+		 * Upload the files indicated by the user.
+		 *
 		 * This is intended to be an override of wp_import_handle_upload.
 		 * For some reason it's still calling the underlying function.
 		 */
