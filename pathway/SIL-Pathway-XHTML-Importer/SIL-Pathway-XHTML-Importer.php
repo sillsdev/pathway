@@ -54,6 +54,7 @@ if ( class_exists( 'WP_Importer' ) ) {
 
 		function start()
 		{
+			/** @todo See if there is a better way to do this than these steps */
 			if ( empty ( $_GET['step'] ) )
 				$step = 0;
 			else
@@ -63,27 +64,35 @@ if ( class_exists( 'WP_Importer' ) ) {
 
 			switch ($step) {
 				case 0 :
-					$this->greet();
+					$this->greet_getfiles();
 					break;
 				case 1 :
 					/**
-					 * Presumably wp_nonce_field has been set somewhere for
+					 * wp_nonce_field has been set by wp_import_upload-form.
 					 * check_admin_referer to see if something succeeded.
 					 */
 					check_admin_referer('import-upload');
-//					$result = $this->import();
-//					if (is_wp_error( $result ))
-//						echo $result->get_error_message();
+					//$result = $this->import_xhtml();
+					$result = $this->upload_files();
+					if (is_wp_error( $result ))
+						echo $result->get_error_message();
 					break;
 
 			}
 			$this->footer();
 		}
 
-		function greet() {
+		function greet_getfiles() {
 			echo '<div class="narrow">';
-			echo '<p>' . __( 'Howdy! This importer allows you to import SIL Pathway XHTML data into your WordPress site.', 'sil-pathway-xhtml-importer' ) . '</p>';
-			//wp_import_upload_form("admin.php?import=rss&amp;step=1");
+			echo '<p>' . __( 'Howdy! This importer allows you to import SIL Pathway XHTML data into your WordPress site.',
+					'sil-pathway-xhtml-importer' ) . '</p>';
+			/**
+			 * wp_import_upload_form looks like it does what I want it to,
+			 * but the parameter is a bit of a mystery at the moment. (I pulled
+			 * the idea of the call from rss-importer.php.) The function lives
+			 * in template.php.
+			 */
+			wp_import_upload_form("admin.php?import=pathway-xhtml&amp;step=1");
 			echo '</div>';
 		}
 
@@ -97,67 +106,49 @@ if ( class_exists( 'WP_Importer' ) ) {
 			 echo '</div>';
 		 }
 
-		function _normalize_tag($matches) {
-			return '<' . strtolower( $matches[1] );
-		}
-		
-		function get_posts() {
-			global $wpdb;
-			/** TODO Complete this */
-		}
-		
-		function import_posts() {
-			echo '<ol>';
-			
-			foreach ($this->posts as $post) {
-				echo "<li>" . __( 'Importing post...', 'sil-pathway-xhtml-importer');
-
-				extract($post);
-				$post_id = post_exists($post_title, $post_content, $post_date);
-				if ( $post_id ) {
-					_e('Post already imported', 'sil-pathway-xhtml-importer');
-					
-				} else {
-					$post_id = wp_insert_post($post);
-					if ( is_wp_error( $post_id ) )
-						return $post_id;
-					if (!$post_id) {
-						_e('Couldn&#8217;t get post ID', 'sil-pathway-xhtml-importer');
-						return;
-					}
-
-					if (0 != count($categories))
-						wp_create_categories($categories, $post_id);
-
-					_e('Done!', 'sil-pathway-xhtml-importer');
-
-				}
-				echo '</li>';
-			}
-			echo '</ol>';
-		}
-		
-		function import() {
+		function import_xhtml() {
 			$file = wp_import_handle_upload();
 			if ( isset($file['error']) ) {
 				echo $file['error'];
 				return;
 			}
-
-			$this->file = $file['file'];
-			$this->get_posts();
-			$result = $this->import_posts();
-			if ( is_wp_error( $result ) )
-				return $result;
-			wp_import_cleanup($file['id']);
-			do_action('import_done', 'rss');
-			
-			echo '<h3>';
-			printf(__('All done. <a href="%s">Have fun!</a>', 'sil-pathway-xhtml-importer'), get_option('home'));
-			echo '</h3>';
-
 		}
-		
+
+		/**
+		 * This is intended to be an override of wp_import_handle_upload.
+		 * For some reason it's still calling the underlying function.
+		 */
+
+		function upload_files() {
+			if ( !isset($_FILES['import']) ) {
+				$file['error'] = __( 'The file is either empty, or uploads are disabled in your php.ini, or post_max_size is defined as smaller than upload_max_filesize in php.ini.' );
+				return $file;
+			}
+
+			$overrides = array( 'test_form' => false, 'test_type' => false );
+			$file = wp_handle_upload( $_FILES['import'], $overrides );
+
+			if ( isset( $file['error'] ) )
+				return $file;
+
+			$url = $file['url'];
+			$type = $file['type'];
+			$file = addslashes( $file['file'] );
+			$filename = basename( $file );
+
+			// Construct the object array
+			$object = array( 'post_title' => $filename,
+				'post_content' => $url,
+				'post_mime_type' => $type,
+				'guid' => $url
+			);
+
+			// Save the data
+			$id = wp_insert_attachment( $object, $file );
+
+			return array( 'file' => $file, 'id' => $id );
+		}
+
 		function SIL_Pathway_XHTML_Import()
         {
 			/**
@@ -172,7 +163,10 @@ if ( class_exists( 'WP_Importer' ) ) {
 	 * $callback.
 	 */
 	$pathway_import = new SIL_Pathway_XHTML_Import();
-	register_importer('pathway-xhtml', __('SIL Pathway XHTML', 'sil-pathway-xhtml-importer'), __('Import posts from an SIL Pathway XHTML file.', 'sil-pathway-xhtml-importer'), array ($pathway_import, 'start'));
+	register_importer('pathway-xhtml',
+			__('SIL Pathway XHTML', 'sil-pathway-xhtml-importer'),
+			__('Import posts from an SIL Pathway XHTML file.', 'sil-pathway-xhtml-importer'),
+			array ($pathway_import, 'start'));
 
 } // class_exists( 'WP_Importer' )
 
