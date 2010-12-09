@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Constant ReferenceFormat for User Desire
-Const AutoMacro = &quot;true&quot;
-Const OutputFormat = &quot;odt&quot;
-Const FilePath = &quot;C:\mytest_Dic&quot;
-Const IsPreview = &quot;false&quot;
 
 &apos;Changed On Dec-08-2010 for TD-1714(Incompleted messages in &quot;Update Guidewords&quot; message box.)
 
