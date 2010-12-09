@@ -89,16 +89,34 @@ if ( class_exists( 'WP_Importer' ) ) {
 		}
 
 		/**
-		 * Brings up the form to get the files to upload. Based on wp_import_upload_form
-		 * in template.php.
+		 * Brings up the form to get the files to upload. The code is based on
+		 * the function wp_import_upload_form in template.php.
 		 *
 		 * @since 3.0
-		 * @param string $action The action attribute for the form.
 		 */
 		function get_file_names() {
-			/** @todo Change the max upload size */
+			
+			/** @todo The max file size is determined by the settings in php.ini.
+			 * upload_max_files is set to 2MB by default. This can be cranked up,
+			 * but then the post_max_size apparently needs to be at least as big
+			 * as the upload_max_files setting. This all assumes that the
+			 * settings are accessible. Will they? Note that if the file size
+			 * is bigger than the limit, the server simply will not upload it,
+			 * and there is no indication to the user as to what happened.
+			 *
+			 * If the limitation will continue, we have one of two options:
+			 *
+			 * 1. The program will need to get a lot smarter and chunk the XHTML
+			 * into smaller pieces. It will upload each piece and then import it
+			 * all.
+			 * 
+			 * 2. The user will just have to FTP files up to the server.
+			 *
+			 * This issue is logged in Jira TD-1727.
+			 */
 			$bytes = apply_filters( 'import_upload_size_limit', wp_max_upload_size() );
 			$size = wp_convert_bytes_to_hr( $bytes );
+			
 			$upload_dir = wp_upload_dir();
 			if ( ! empty( $upload_dir['error'] ) ) :
 				?><div class="error"><p><?php _e('Before you can upload your import file, you will need to fix the following error:'); ?></p>
@@ -109,7 +127,15 @@ if ( class_exists( 'WP_Importer' ) ) {
 		wp_nonce_url("admin.php?import=pathway-xhtml&amp;step=1", 'import-upload')); ?>">
 <p>
 <label for="upload"><?php _e( 'Choose an XHTML file from your computer:' ); ?></label> (<?php printf( __('Maximum size: %s' ), $size ); ?>)
-<input type="file" id="upload" name="import" size="25" />
+</p>
+<p>
+<input type="file" id="upload" name="import" size="100" />
+</p>
+<p>
+<label for="upload"><?php _e( 'Choose the associated CSS file from your computer:' ); ?></label> (<?php printf( __('Maximum size: %s' ), $size ); ?>)
+</p>
+<p>
+<input type="file" id="upload" name="import" size="100" />
 <input type="hidden" name="action" value="save" />
 <input type="hidden" name="max_file_size" value="<?php echo $bytes; ?>" />
 </p>
