@@ -68,6 +68,11 @@ namespace epubConvert
             // this works for SIL fonts only because there's currently one sans-serif font (Andika)
             Serif = (name.Contains("Andika")? false: true);
             Filename = FontInternals.GetFontFileName(name, Style);
+            if (Filename == null)
+            {
+                // this font isn't installed
+                return;
+            }
             SILFont = FontInternals.IsSILFont(Path.Combine(FontInternals.GetFontFolderPath(), Filename));
         }
 
