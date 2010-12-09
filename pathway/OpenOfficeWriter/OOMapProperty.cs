@@ -531,7 +531,7 @@ namespace SIL.PublishingSolution
 
         public void TextIndent(string propertyValue)
         {
-            _IDProperty[_propertyKey] = propertyValue + "pt";
+            _IDProperty[_propertyKey] = Add_pt(propertyValue);
         }
 
         public void Color(string propertyValue)

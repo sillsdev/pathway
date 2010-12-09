@@ -942,7 +942,6 @@ namespace Test.OpenOfficeWriter
         /// <summary>
         /// </summary>      
         [Test]
-        [Ignore]
         public void SinglePageRefTest_Node()
         {
 
@@ -954,14 +953,14 @@ namespace Test.OpenOfficeWriter
 
             // Note - single node test
             _validate = new ValidateXMLFile(output);
-            _validate.ClassName = "AllHeaderPageLeft";
+            _validate.ClassName = "PageHeaderFooter12";
             _validate.ClassProperty.Add("fo:font-weight", "700");
 
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
 
             _validate = new ValidateXMLFile(output);
-            _validate.ClassName = "AllHeaderPageRight";
+            _validate.ClassName = "PageHeaderFooter14";
             _validate.ClassProperty.Add("fo:font-weight", "700");
 
             returnValue = _validate.ValidateNodeAttributesNS(false);
@@ -971,21 +970,21 @@ namespace Test.OpenOfficeWriter
             //Third Node
             //XPath = "//style:style[@style:name='" + ClassName + "']";
             //string xpath = "//style:master-page[style:name=\"First_20_Page\"]";
-            string xpath = "//style:master-page[@style:name='XHTML']";
+            string xpath = "//style:master-page[@style:name='Left_20_Page']";
             _validate.ClassName = string.Empty;
             string inner =
                 //"<text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">" +
                 "<style:header xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\">" +
                 "<text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">" +
-                "<text:span text:style-name=\"AllHeaderPageLeft\">" +
+                "<text:span text:style-name=\"PageHeaderFooter12\">" +
                 "<text:chapter text:display=\"name\" text:outline-level=\"9\" />" +
                 "</text:span>" +
                 "<text:tab />" +
-                "<text:span text:style-name=\"AllHeaderPageNumber\">" +
+                "<text:span text:style-name=\"PageHeaderFooter13\">" +
                 "<text:page-number text:select-page=\"current\">4</text:page-number>" +
                 "</text:span>" +
                 "<text:tab />" +
-                "<text:span text:style-name=\"AllHeaderPageRight\">" +
+                "<text:span text:style-name=\"PageHeaderFooter14\">" +
                 "<text:chapter text:display=\"name\" text:outline-level=\"10\" />" +
                 "</text:span>" +
                 "</text:p>" +
@@ -994,6 +993,28 @@ namespace Test.OpenOfficeWriter
             returnValue = _validate.ValidateNodeInnerXml(xpath, inner);
             Assert.IsTrue(returnValue);
 
+            xpath = "//style:master-page[@style:name='Right_20_Page']";
+            _validate.ClassName = string.Empty;
+            inner =
+                //"<text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">" +
+                "<style:header xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\">" +
+                "<text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">" +
+                "<text:span text:style-name=\"PageHeaderFooter18\">" +
+                "<text:chapter text:display=\"name\" text:outline-level=\"9\" />" +
+                "</text:span>" +
+                "<text:tab />" +
+                "<text:span text:style-name=\"PageHeaderFooter19\">" +
+                "<text:page-number text:select-page=\"current\">4</text:page-number>" +
+                "</text:span>" +
+                "<text:tab />" +
+                "<text:span text:style-name=\"PageHeaderFooter20\">" +
+                "<text:chapter text:display=\"name\" text:outline-level=\"10\" />" +
+                "</text:span>" +
+                "</text:p>" +
+                "</style:header>";
+
+            returnValue = _validate.ValidateNodeInnerXml(xpath, inner);
+            Assert.IsTrue(returnValue);
         }
 
         ///<summary>

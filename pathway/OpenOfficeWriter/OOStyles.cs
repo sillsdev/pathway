@@ -1258,6 +1258,10 @@ namespace SIL.PublishingSolution
 
         private void CreateHeaderFooterStyle(string hf, int index)
         {
+
+            if (!(_pageHeaderFooter[index].ContainsKey("content") || _pageHeaderFooter[index + 1].ContainsKey("content") || _pageHeaderFooter[index + 2].ContainsKey("content")))
+                return;
+
             _writer.WriteStartElement("style:" + hf.ToLower());
             _writer.WriteStartElement("text:p");
             _writer.WriteAttributeString("text:style-name", hf);
