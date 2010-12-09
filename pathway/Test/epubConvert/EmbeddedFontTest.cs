@@ -1,16 +1,16 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="FontInternalsTest.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright © 2009, SIL International. All Rights Reserved.   
+// <copyright file="EmbeddedFontTest.cs" from='2009' to='2010' company='SIL International'>
+//      Copyright © 2010, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
 // </copyright> 
-// <author>Greg Trihus</author>
-// <email>greg_trihus@sil.org</email>
+// <author>Erik Brommers</author>
+// <email>erik_brommers@sil.org</email>
 // Last reviewed: 
 // 
 // <remarks>
-// Test methods of FlexDePlugin
+// Test methods of EmbeddedFont class
 // </remarks>
 // --------------------------------------------------------------------------------------------
 using epubConvert;
@@ -69,8 +69,6 @@ namespace Test.epubConvert
             Assert.AreEqual(weight, silFont.Weight);
             const string style = "normal";
             Assert.AreEqual(style, silFont.Style);
-            const string fontFilename = "AndBasR.ttf";
-            Assert.AreEqual(fontFilename, silFont.Filename);
             Assert.IsTrue(EmbeddedFont.IsInstalled(silFont.Filename));
         }
 
@@ -87,8 +85,6 @@ namespace Test.epubConvert
             Assert.AreEqual(weight, silFont.Weight);
             const string style = "normal";
             Assert.AreEqual(style, silFont.Style);
-            const string fontFilename = "AppSILR.ttf";
-            Assert.AreEqual(fontFilename, silFont.Filename);
             Assert.IsTrue(EmbeddedFont.IsInstalled(silFont.Filename));
         }
         /// <summary>
@@ -121,8 +117,6 @@ namespace Test.epubConvert
             Assert.AreEqual(weight, silFont.Weight);
             const string style = "normal";
             Assert.AreEqual(style, silFont.Style);
-            const string fontFilename = "DBSILBR.ttf";
-            Assert.AreEqual(fontFilename, silFont.Filename);
             Assert.IsTrue(EmbeddedFont.IsInstalled(silFont.Filename));
         }
         /// <summary>
@@ -155,8 +149,6 @@ namespace Test.epubConvert
             Assert.AreEqual(weight, silFont.Weight);
             const string style = "normal";
             Assert.AreEqual(style, silFont.Style);
-            const string fontFilename = "SILEOT.ttf";
-            Assert.AreEqual(fontFilename, silFont.Filename);
             Assert.IsTrue(EmbeddedFont.IsInstalled(silFont.Filename));
         }
         /// <summary>
@@ -189,8 +181,6 @@ namespace Test.epubConvert
             Assert.AreEqual(weight, silFont.Weight);
             const string style = "normal";
             Assert.AreEqual(style, silFont.Style);
-            const string fontFilename = "GenBasR.ttf";
-            Assert.AreEqual(fontFilename, silFont.Filename);
             Assert.IsTrue(EmbeddedFont.IsInstalled(silFont.Filename));
         }
         /// <summary>
@@ -250,15 +240,13 @@ namespace Test.epubConvert
         [Test]
         public void ScheharazadeTest()
         {
-            var silFont = new EmbeddedFont("Scheharazade");
+            var silFont = new EmbeddedFont("Scheherazade");
             Assert.IsTrue(silFont.SILFont);
             Assert.IsTrue(silFont.Serif);
             const string weight = "normal";
             Assert.AreEqual(weight, silFont.Weight);
             const string style = "normal";
             Assert.AreEqual(style, silFont.Style);
-            const string fontFilename = "ScheherazadeRegOT.ttf";
-            Assert.AreEqual(fontFilename, silFont.Filename);
             Assert.IsTrue(EmbeddedFont.IsInstalled(silFont.Filename));
         }
         /// <summary>

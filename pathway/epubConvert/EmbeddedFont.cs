@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using SIL.Tool;
 
@@ -62,6 +63,10 @@ namespace epubConvert
             Name = name;
             Weight = "normal";
             Style = "normal";
+            // edb 12/9/2010 BUGBUG:
+            // need a way to query the font for its generic serif/sans-serif characteristics
+            // this works for SIL fonts only because there's currently one sans-serif font (Andika)
+            Serif = (name.Contains("Andika")? false: true);
             Filename = FontInternals.GetFontFileName(name, Style);
             SILFont = FontInternals.IsSILFont(Path.Combine(FontInternals.GetFontFolderPath(), Filename));
         }

@@ -198,9 +198,16 @@ namespace SIL.Tool
                         fs.Position = tbName.uOffset + ttNMResult.uStringOffset + ttNTResult.uStorageOffset;
                         char [] szResult = r.ReadChars(ttNMResult.uStringLength);
                         string result = "";
+                        // Usually the uEncodingID will tell us whether we're using single or double-byte encoding,
+                        // but sometimes it lies. Verify by testing the first character in the array for '\0'
+                        int uId = ttNMResult.uEncodingID;
+                        if (szResult[0] == '\0')
+                        {
+                            uId = 3;
+                        }
                         for (int j = 0; j < ttNMResult.uStringLength; j++)
                         {
-                            switch (ttNMResult.uEncodingID)
+                            switch (uId)
                             {
                                 case 0: // SIL Fonts use this encoding
                                     result += szResult[j];
@@ -490,11 +497,18 @@ namespace SIL.Tool
                     {
                         fs.Position = tbName.uOffset + ttNMResult.uStringOffset + ttNTResult.uStorageOffset;
                         char [] szResult = r.ReadChars(ttNMResult.uStringLength);
+                        // Usually the uEncodingID will tell us whether we're using single or double-byte encoding,
+                        // but sometimes it lies. Verify by testing the first character in the array for '\0'
+                        int uId = ttNMResult.uEncodingID;
+                        if (szResult[0] == '\0')
+                        {
+                            uId = 3;
+                        }
                         for (int j = 0; j < ttNMResult.uStringLength; j++)
                         {
-                            switch (ttNMResult.uEncodingID)
+                            switch (uId)
                             {
-                                case 0: // SIL Fonts use this encoding
+                                case 0: // SIL Fonts use this encoding (but sometimes lie)
                                     result += szResult[j];
                                     break;
                                 case 3: // Windows Fonts use this encoding (first byte is NUL)
