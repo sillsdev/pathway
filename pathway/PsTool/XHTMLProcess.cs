@@ -1120,37 +1120,42 @@ namespace SIL.PublishingSolution
             string[] ancestorStyleName = _allStyle.ToArray();
             float fontSize = 12F;
 
+            string fontPointSize = "font-size";
+            if (_outputType == Common.OutputType.IDML)
+                fontPointSize = "PointSize";
+
             // Search in ancestor class
             foreach (string ancestor in ancestorStyleName)
             {
                 if (IdAllClass.ContainsKey(ancestor))
                 {
-                    if (IdAllClass[ancestor].ContainsKey("PointSize"))
+                    if (IdAllClass[ancestor].ContainsKey(fontPointSize))
                     {
-                        fontSize = float.Parse(IdAllClass[ancestor]["PointSize"]);
+                        fontSize = float.Parse(IdAllClass[ancestor][fontPointSize].Replace("pt", ""));
                         break;
                     }
                 }
             }
 
             // Search in current class
-            if (IdAllClass.ContainsKey(_classNameWithLang) && IdAllClass[_classNameWithLang].ContainsKey("PointSize"))
+            if (IdAllClass.ContainsKey(_classNameWithLang) && IdAllClass[_classNameWithLang].ContainsKey(fontPointSize))
             {
-                string currentFontSize = IdAllClass[_classNameWithLang]["PointSize"];
+
+                string currentFontSize = IdAllClass[_classNameWithLang][fontPointSize];
                 if (currentFontSize.IndexOf("%") > 0)
                 {
                     float value = float.Parse(currentFontSize.Replace("%", ""));
                     fontSize = fontSize * value / 100;
-                    IdAllClass[_classNameWithLang]["PointSize"] = fontSize.ToString();
+                    IdAllClass[_classNameWithLang][fontPointSize] = fontSize.ToString();
                 }
                 else if (currentFontSize == "larger" || currentFontSize == "smaller")
                 {
                     fontSize = Common.GetLargerSmaller(fontSize, currentFontSize);
-                    IdAllClass[_classNameWithLang]["PointSize"] = fontSize.ToString();
+                    IdAllClass[_classNameWithLang][fontPointSize] = fontSize.ToString();
                 }
                 else
                 {
-                    fontSize = float.Parse(currentFontSize);
+                    fontSize = float.Parse(currentFontSize.Replace("pt",""));
                 }
             }
 

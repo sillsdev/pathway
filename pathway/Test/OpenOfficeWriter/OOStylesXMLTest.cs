@@ -884,7 +884,6 @@ namespace Test.OpenOfficeWriter
         /// <summary>
         /// </summary>      
         [Test]
-        [Ignore]
         public void PositionTest_Node()
         {
             const string file = "Position";
@@ -1021,8 +1020,7 @@ namespace Test.OpenOfficeWriter
         ///TD-428 Impliment Start and Last References in Mirror page
         /// <summary>
         /// </summary>      
-        [Test]
-        [Ignore]
+        //[Test]
         public void MirroredPageRefTest_Node()
         {
             const string file = "MirroredPageRef";

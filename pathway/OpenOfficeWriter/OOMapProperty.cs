@@ -669,6 +669,8 @@ namespace SIL.PublishingSolution
             else if (propertyValue == "smaller" || propertyValue == "larger")
             {
                 propertyValue = propertyValue;
+                _IDProperty[_propertyKey] = propertyValue;
+                return;
             }
             else
             {

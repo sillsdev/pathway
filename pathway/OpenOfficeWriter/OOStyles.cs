@@ -118,13 +118,15 @@ namespace SIL.PublishingSolution
                 _columnProperty.Clear();
 
                 _OOClass = new Dictionary<string, string>();
-                _OOProperty = mapProperty.IDProperty(cssClass.Value);
+
+                Dictionary<string, string> propValue = new Dictionary<string, string>();
+                propValue = PropertyReplace(cssClass.Value);
+
+                _OOProperty = mapProperty.IDProperty(propValue);
+
                 foreach (KeyValuePair<string, string> property in _OOProperty)
                 {
                     _OOClass[property.Key] = property.Value; // for future usage
-
-                    if (property.Key == "list-style-type")  //List type - li,ol,ul
-                        CreateListType(property.Value);
 
                     string propName = property.Key;
                     if (_allParagraphProperty.ContainsKey(propName))
@@ -185,6 +187,41 @@ namespace SIL.PublishingSolution
                 
             }
         }
+
+        private Dictionary<string, string> PropertyReplace(Dictionary<string, string> OOProperty)
+        {
+            string key = "list-style-type";
+            if (OOProperty.ContainsKey(key))  //List type - li,ol,ul
+                CreateListType(OOProperty[key]);
+
+            key = "position";
+            if (OOProperty.ContainsKey(key) && (OOProperty.ContainsKey("left") || OOProperty.ContainsKey("right"))) 
+            {
+                OOProperty.Remove(key);
+                if (OOProperty.ContainsKey("left"))
+                {
+                    OOProperty["margin-left"] = OOProperty["left"];
+                    OOProperty.Remove("left");
+                }
+                else if (OOProperty.ContainsKey("right"))
+                {
+
+                    if (OOProperty["right"].IndexOf("-") >= 0)
+                    {
+                        OOProperty["margin-left"] = OOProperty["right"];
+                        //_paragraphProperty[_allParagraphProperty["margin-left"] + "margin-left"] = styleAttributeInfo.StringValue.Replace("-", "");
+                    }
+                    else
+                    {
+                        OOProperty["margin-left"] = "-" + OOProperty["right"];
+                        //_paragraphProperty[_allParagraphProperty["margin-left"] + "margin-left"] = "-" + styleAttributeInfo.StringValue;
+                    }
+                    OOProperty.Remove("right");
+                }        
+            }
+            return OOProperty;
+        }
+
         private void DropCap()
         {
             if (_paragraphProperty.ContainsKey("fo:float") && _paragraphProperty.ContainsKey("style:vertical-align"))
