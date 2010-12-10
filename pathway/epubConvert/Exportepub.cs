@@ -34,11 +34,11 @@ using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using epubConvert;
 using SIL.Tool;
-
 
 namespace SIL.PublishingSolution
 {
@@ -130,8 +130,9 @@ namespace SIL.PublishingSolution
                     preProcessor.SwapHeadWordAndReversalForm();
                 }
 
-
                 BuildLanguagesList(projInfo.DefaultXhtmlFileWithPath);
+                var langArray = new string[_langFontDictionary.Keys.Count];
+                _langFontDictionary.Keys.CopyTo(langArray, 0);
                 // CSS preprocessing
                 string tempFolder = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
 
@@ -194,7 +195,7 @@ namespace SIL.PublishingSolution
                 Common.ReplaceInFile(preProcessor.ProcessedXhtml, "</LexSense_VariantFormEntryBackRefs", "</span");
                 Common.ReplaceInFile(preProcessor.ProcessedXhtml, "</LexSense_RefsFrom_LexReference_Targets", "</span");
                 // end EDB 10/29/2010
-                Common.ReplaceInFile(preProcessor.ProcessedXhtml, "<html", "<html xmlns='http://www.w3.org/1999/xhtml'");
+                Common.ReplaceInFile(preProcessor.ProcessedXhtml, "<html", string.Format("<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'", langArray[0], getTextDirection(langArray[0])));
                 // end EDB 10/22/2010
 
                 // split the .XHTML into multiple files, as specified by the user
@@ -290,8 +291,6 @@ namespace SIL.PublishingSolution
                         FontWarningDlg dlg = new FontWarningDlg();
                         dlg.RepeatAction = false;
                         dlg.RemainingIssues = nonSILFonts.Count - 1;
-                        var langArray = new string[_langFontDictionary.Keys.Count];
-                        _langFontDictionary.Keys.CopyTo(langArray,0);
                         foreach (var nonSilFont in nonSILFonts)
                         {
                             dlg.MyEmbeddedFont = nonSilFont.Key.Name;
@@ -350,6 +349,11 @@ namespace SIL.PublishingSolution
                     // copy all the fonts over
                     foreach (var embeddedFont in _embeddedFonts.Values)
                     {
+                        if (embeddedFont.Filename == null)
+                        {
+                            Debug.WriteLine("ERROR: embedded font " + embeddedFont.Name + " is not installed - skipping");
+                            continue;
+                        }
                         string dest = Common.PathCombine(contentFolder, embeddedFont.Filename);
                         File.Copy(Path.Combine(FontInternals.GetFontFolderPath(), embeddedFont.Filename), dest);
                         
@@ -459,6 +463,13 @@ namespace SIL.PublishingSolution
             {
                 foreach (var embeddedFont in _embeddedFonts.Values)
                 {
+                    if (embeddedFont.Filename == null)
+                    {
+                        sb.Append("/* missing embedded font: ");
+                        sb.Append(embeddedFont.Name);
+                        sb.AppendLine(" */");
+                        continue;
+                    }
                     sb.AppendLine("@font-face {");
                     sb.Append(" font-family : ");
                     sb.Append(embeddedFont.Name);
@@ -881,6 +892,62 @@ namespace SIL.PublishingSolution
             return fileNameWithPath;
         }
 
+        private List<string> ChunkFile(string xhtmlFilename)
+        {
+            List<string> fileNames = new List<string>();
+            XmlTextReader _reader;
+            var reader = new StreamReader(xhtmlFilename);
+            string content = reader.ReadToEnd().ToLower();
+            reader.Close();
+
+            var match = Regex.Matches(content, "\"" + xhtmlFilename + "\"");
+            int counter = match.Count;
+
+            if (counter <= 0)
+                return fileNames;
+
+            try
+            {
+                _reader = new XmlTextReader(xhtmlFilename)
+                {
+                    XmlResolver = null,
+                    WhitespaceHandling = WhitespaceHandling.Significant
+                };
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return fileNames;
+            }
+            Dictionary<string, XmlWriter> writers = new Dictionary<string, XmlWriter>();
+
+            //string allUserPath = GetAllUserPath();
+            string allUserPath = Path.GetTempPath();
+            for (int i = 0; i < counter; i++)
+            {
+                string fileName = Path.Combine(allUserPath, "PartFile" + (i + 1) + ".xhtml");
+                if (File.Exists(fileName))
+                {
+                    File.Delete(fileName);
+                }
+
+                XmlTextWriter writer = null;
+                try
+                {
+                    writer = new XmlTextWriter(fileName, null) { Formatting = Formatting.Indented };
+                }
+                catch (Exception ex)
+                {
+
+                    Console.Write(ex.Message);
+                }
+                writers[fileName] = writer;
+            }
+
+            return fileNames;
+        }
+
         /// <summary>
         /// Loads the settings file and pulls out the values we look at.
         /// </summary>
@@ -1054,6 +1121,11 @@ namespace SIL.PublishingSolution
                 int fontNum = 1;
                 foreach (var embeddedFont in _embeddedFonts.Values)
                 {
+                    if (embeddedFont.Filename == null)
+                    {
+                        // already written out that this font doesn't exist in the CSS file; just skip it here
+                        continue;
+                    }
                     opf.WriteStartElement("item"); // item (charis embedded font)
                     opf.WriteAttributeString("id", "epub.embedded.font" + fontNum);
                     opf.WriteAttributeString("href", embeddedFont.Filename);

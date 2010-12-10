@@ -115,6 +115,24 @@ namespace epubConvert.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Missing Font: &apos;{0}&apos;.
+        /// </summary>
+        internal static string MissingFontTitle {
+            get {
+                return ResourceManager.GetString("MissingFontTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is specified as the default font for language(s): &apos;{1}&apos;, but cannot be found on this system. Select another font to use instead, or click Cancel to stop the conversion to .epub..
+        /// </summary>
+        internal static string MissingFontWarning {
+            get {
+                return ResourceManager.GetString("MissingFontWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do this for the next {0} item(s)..
         /// </summary>
         internal static string RepeatAction {

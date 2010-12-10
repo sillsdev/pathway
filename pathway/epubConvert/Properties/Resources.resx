@@ -138,4 +138,10 @@
   <data name="RepeatAction" xml:space="preserve">
     <value>Do this for the next {0} item(s).</value>
   </data>
+  <data name="MissingFontWarning" xml:space="preserve">
+    <value>'{0}' is specified as the default font for language(s): '{1}', but cannot be found on this system. Select another font to use instead, or click Cancel to stop the conversion to .epub.</value>
+  </data>
+  <data name="MissingFontTitle" xml:space="preserve">
+    <value>Missing Font: '{0}'</value>
+  </data>
 </root>

@@ -30,6 +30,7 @@
         {
             this.icnWarning = new System.Windows.Forms.PictureBox();
             this.grpOptions = new System.Windows.Forms.GroupBox();
+            this.lblSubstituteSILFont = new System.Windows.Forms.Label();
             this.ddlSILFonts = new System.Windows.Forms.ComboBox();
             this.rdoConvertToSILFont = new System.Windows.Forms.RadioButton();
             this.rdoEmbedFont = new System.Windows.Forms.RadioButton();
@@ -51,6 +52,7 @@
             // 
             // grpOptions
             // 
+            this.grpOptions.Controls.Add(this.lblSubstituteSILFont);
             this.grpOptions.Controls.Add(this.ddlSILFonts);
             this.grpOptions.Controls.Add(this.rdoConvertToSILFont);
             this.grpOptions.Controls.Add(this.rdoEmbedFont);
@@ -60,6 +62,16 @@
             this.grpOptions.TabIndex = 3;
             this.grpOptions.TabStop = false;
             this.grpOptions.Text = "grpOptions";
+            // 
+            // lblSubstituteSILFont
+            // 
+            this.lblSubstituteSILFont.AutoSize = true;
+            this.lblSubstituteSILFont.Location = new System.Drawing.Point(45, 46);
+            this.lblSubstituteSILFont.Name = "lblSubstituteSILFont";
+            this.lblSubstituteSILFont.Size = new System.Drawing.Size(101, 13);
+            this.lblSubstituteSILFont.TabIndex = 3;
+            this.lblSubstituteSILFont.Text = "lblSubstituteSILFont";
+            this.lblSubstituteSILFont.Visible = false;
             // 
             // ddlSILFonts
             // 
@@ -177,5 +189,6 @@
         private System.Windows.Forms.ComboBox ddlSILFonts;
         private System.Windows.Forms.TextBox txtWarning;
         private System.Windows.Forms.CheckBox chkRepeatAction;
+        private System.Windows.Forms.Label lblSubstituteSILFont;
     }
 }

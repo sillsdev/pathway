@@ -10,14 +10,17 @@ namespace epubConvert
 {
     public partial class FontWarningDlg : Form
     {
+        // properties
         public string MyEmbeddedFont { get; set; }
         public string SelectedFont { get; set; }
         public int RemainingIssues { get; set; }
         public string Languages { get; set; }
         public bool RepeatAction { get; set; }
 
+        // variables
         private PrivateFontCollection pfc = new PrivateFontCollection();
 
+        // methods
         public FontWarningDlg()
         {
             InitializeComponent();
@@ -25,17 +28,35 @@ namespace epubConvert
 
         public bool UseFontAnyway()
         {
-            return rdoEmbedFont.Checked;
+            return (!rdoEmbedFont.Visible) ? false : rdoEmbedFont.Checked;
         }
 
         private void FontWarningDlg_Load(object sender, EventArgs e)
         {
             icnWarning.Image = SystemIcons.Warning.ToBitmap();
-            Text = Resources.FontWarningDlgTitle;
-            txtWarning.Text = String.Format(Resources.EmbedFontsWarning, MyEmbeddedFont, Languages);
-            grpOptions.Text = Resources.EmbedFontOptions;
-            rdoEmbedFont.Text = Resources.EmbedFont;
-            rdoConvertToSILFont.Text = Resources.ConvertToSILFont;
+            EmbeddedFont curfont = new EmbeddedFont(MyEmbeddedFont);
+            if (curfont.Filename == null)
+            {
+                // show "missing font" UI (only option is to substitute)
+                Text = String.Format(Resources.MissingFontTitle, MyEmbeddedFont);
+                txtWarning.Text = String.Format(Resources.MissingFontWarning, MyEmbeddedFont, Languages);
+                grpOptions.Text = "";
+                rdoEmbedFont.Visible = false;
+                rdoConvertToSILFont.Visible = false;
+                lblSubstituteSILFont.Visible = true;
+                lblSubstituteSILFont.Text = Resources.ConvertToSILFont;
+                ddlSILFonts.Enabled = true;
+            }
+            else
+            {
+                // show "non SIL font" UI (radio buttons with the option to just embed)
+                Text = Resources.FontWarningDlgTitle;
+                txtWarning.Text = String.Format(Resources.EmbedFontsWarning, MyEmbeddedFont, Languages);
+                grpOptions.Text = Resources.EmbedFontOptions;
+                rdoEmbedFont.Text = Resources.EmbedFont;
+                rdoConvertToSILFont.Text = Resources.ConvertToSILFont;
+                lblSubstituteSILFont.Visible = false;
+            }
             if (ddlSILFonts.Items.Count == 0)
             {
                 // update the possible replacements based on what's installed on this system
