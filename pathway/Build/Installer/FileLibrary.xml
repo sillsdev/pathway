@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\PathwaySupport\Graphic\book_se.png" ComponentGuid="F386912D-60E8-4E9C-84FF-270E4EC34BEC"/>
+	<File Path="Files\PathwaySupport\Graphic\book_bte.png" ComponentGuid="998B121C-08DC-4330-88B0-AB885B549672"/>
+	<File Path="Files\ConfigurationTool\Graphic\book_se.png" ComponentGuid="773F4AE9-3F6A-4A89-9001-3EBECEE79745"/>
+	<File Path="Files\ConfigurationTool\Graphic\book_bte.png" ComponentGuid="9EA51C3A-E9A7-408C-827F-D4175E4F1A81"/>
 	<File Path="Files\PathwaySupport\Help\Intellectual_Property.docx" ComponentGuid="9EFBA3A9-15E8-477B-828F-C172D11EA251"/>
 	<File Path="Files\PublishingSolution\TE_XHTML-to-epub_XHTML.xslt" ComponentGuid="ABE36DC5-1C6E-4135-9A2F-A6D17908A0FE"/>
 	<File Path="Files\PublishingSolution\ScripturePreview.xhtml" ComponentGuid="14A4E7B3-F290-4945-97DF-BD7D26CEBE33"/>

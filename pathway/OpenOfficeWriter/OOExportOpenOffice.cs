@@ -23,6 +23,7 @@ using System.Xml;
 using SIL.PublishingSolution.Sort;
 using SIL.Tool;
 using SIL.Tool.Localization;
+using Test;
 
 namespace SIL.PublishingSolution
 {
@@ -594,6 +595,8 @@ namespace SIL.PublishingSolution
             VerboseClass verboseClass = VerboseClass.GetInstance();
 
 
+            Common.SupportFolder = "";
+            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
             string strFromOfficeFolder = Common.PathCombine(Common.GetPSApplicationPath(), "OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
             projInfo.TempOutputFolder = Common.PathCombine(Path.GetTempPath(), "OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
 
