@@ -1184,12 +1184,11 @@ namespace SIL.PublishingSolution
         public static void LoadImageList()
         {
             LoadIconMap();
-            imageListSmall.Images.Clear();
-            imageListLarge.Images.Clear();
+            ClearImageList();
             imageListLarge.ImageSize = new Size(32, 32);
-			AddBmpIcon(new FileInfo(Common.FromRegistry(Value[MissingIcon])), new Bitmap(Common.FromRegistry(Value[MissingIcon])));
-			AddBmpIcon(new FileInfo(Common.FromRegistry(Value[SelectedIcon])), new Bitmap(Common.FromRegistry(Value[SelectedIcon])));
-			AddBmpIcon(new FileInfo(Common.FromRegistry(Value[DefaultIcon])), new Bitmap(Common.FromRegistry(Value[DefaultIcon])));
+			AddBmpIcon(new FileInfo(Common.FromRegistry(Value[MissingIcon])), GetBitmap(Common.FromRegistry(Value[MissingIcon])));
+			AddBmpIcon(new FileInfo(Common.FromRegistry(Value[SelectedIcon])), GetBitmap(Common.FromRegistry(Value[SelectedIcon])));
+			AddBmpIcon(new FileInfo(Common.FromRegistry(Value[DefaultIcon])), GetBitmap(Common.FromRegistry(Value[DefaultIcon])));
 			var di = new DirectoryInfo(Common.FromRegistry(Value[IconPath]));
             //var icoList = di.GetFiles("*.ico");
             //foreach (var ico in icoList)
@@ -1200,8 +1199,22 @@ namespace SIL.PublishingSolution
             //}
             var bmpList = di.GetFiles("*.png");
             foreach (var bmp in bmpList)
-                AddBmpIcon(bmp, new Bitmap(bmp.FullName));
+                AddBmpIcon(bmp, GetBitmap(bmp.FullName));
             imageListCount = 0;
+        }
+
+        protected static Image GetBitmap(string name)
+        {
+            FileStream fileStream = new FileStream(name, FileMode.Open);
+            var bmp = new Bitmap(fileStream);
+            fileStream.Close();
+            return bmp;
+        }
+
+        public static void ClearImageList()
+        {
+            imageListSmall.Images.Clear();
+            imageListLarge.Images.Clear();
         }
 
         /// <summary>
