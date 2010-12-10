@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-
-&apos;Changed On Dec-08-2010 for TD-1714(Incompleted messages in &quot;Update Guidewords&quot; message box.)
+&apos;Changed On Dec-10-2010 for TD-1723(Sorry could not update message in &quot;Update GuideWord&quot; screen.)
 
 &apos;Define the values to Constant Variables for First Guide word, Last Guide word ,Headword Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -71,11 +70,11 @@ Sub ShowProcessingDialog()
   oLabel.Alignment = 1
   oLabel.setPosSize(5,37,500,30,com.sun.star.awt.PosSize.POSSIZE) 
   oContainer.addControl(&quot;label&quot;,oLabel) 
-  
+    
   &apos; show window 
   oSubWindow.setEnable(False) 
   oSubWindow.setVisible(True) 
- &apos; oSubWindow.setVisible(False) 
+  &apos;oSubWindow.setVisible(False) 
 End Sub 
 
 &apos;Increments progressbar value
@@ -423,7 +422,7 @@ Do
 		&apos;=========Progressbar  
 		
 	page = oVC.getPage
-	if page = OldPage Then 
+	if page &lt;= OldPage Then &apos;before it was page = OldPage
 		Exit sub
 	End If	
 	oVC.jumpToEndOfPage 
@@ -466,9 +465,10 @@ Do
 		&apos;=========Progressbar  
 		
 	page = oVC.getPage
-	if page = OldPage Then 
+	if page &lt;= OldPage Then &apos;before it was page = OldPage
 		Exit sub
-	End If		
+	End If	
+		
 	oVC.jumpToEndOfPage 
 	Last = oDoc.Text.createTextCursorByRange(oVC) 
 	Last.gotoStartOfParagraph(false)
@@ -485,6 +485,9 @@ End Sub
 &apos;This procedure find the first paragraph of every page
 Sub InsertGuidewords(HiddenParagraph,PageCount) 
 dim PrevPageNo
+&apos;Dim OldPage
+&apos;OldPage = 0
+
 	ThisComponent.currentController.getViewCursor().jumpToPage(2)
 oDoc = ThisComponent 
 oVC = oDoc.CurrentController.getViewCursor 
@@ -498,7 +501,9 @@ Do
 		&apos;=========Progressbar  
 		
 	page = oVC.getPage
-	
+	&apos;if page &lt;= OldPage Then &apos;before it was page = OldPage
+		&apos;Exit sub
+	&apos;End If	
 	if PrevPageNo &gt;= page Then
 		page = PrevPageNo + 1
 		ThisComponent.currentController.getViewCursor().jumpToPage(page)
@@ -544,6 +549,7 @@ Do
 			ThisComponent.currentController.getViewCursor().jumpToPage(page)	
 		End If
 		PrevPageNo = page
+		&apos;OldPage = page
 Loop While oVC.jumpToNextPage 	 
 End Sub
 
@@ -570,6 +576,8 @@ End Function
 &apos;This procedure finds first and last guidewords in everypage.
 Sub LastPara(PageCount) 
 Dim HiddenParagraph(PageCount,1) As String
+Dim OldPage
+OldPage = 0
 
 On Error GoTo MyError:
 	ThisComponent.currentController.getViewCursor().jumpToPage(2)
@@ -585,6 +593,12 @@ Do
 		&apos;=========Progressbar  
 		
     page = oVC.getPage 
+    
+	if page &lt;= OldPage Then &apos;before it was page = OldPage
+		InsertGuidewords(HiddenParagraph,PageCount)
+		Exit sub
+	End If	
+	    
 If page &gt; 1 Then
 
     LastParaString = LastParagraph(page)
@@ -663,7 +677,7 @@ If page &gt; 1 Then
 	
     PrevFirst = First
     PrevLast = Last	
-    	
+    OldPage = page	
 End If	
 
 Loop While oVC.jumpToNextPage 
@@ -850,7 +864,6 @@ If oStyle.FooterIsOn Then
 End If
 
 end sub
-
 
 
 </script:module>
