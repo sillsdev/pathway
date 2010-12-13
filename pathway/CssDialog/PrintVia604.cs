@@ -184,6 +184,7 @@ namespace SIL.PublishingSolution
         }
 
         private static string _publicationName;
+        private string _newSaveInFolderPath = string.Empty;
 
         public string BackEnd
         {
@@ -406,10 +407,9 @@ namespace SIL.PublishingSolution
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 string folderName = cmbSelectLayout.Text + "_" + DateTime.Now.ToString("yyyy-MM-dd_hhmm");
-                string newSaveInFolderPath = Common.PathCombine(dlg.SelectedPath, folderName);
-                Param.SetValue(Param.PublicationLocation, newSaveInFolderPath);
-
-                txtSaveInFolder.Text = newSaveInFolderPath;
+                _newSaveInFolderPath = Common.PathCombine(dlg.SelectedPath, folderName);
+                Param.SetValue(Param.PublicationLocation, _newSaveInFolderPath);
+                txtSaveInFolder.Text = _newSaveInFolderPath;
             }
         }
 
@@ -417,6 +417,10 @@ namespace SIL.PublishingSolution
         {
             _publicationName = cmbSelectLayout.Text;
             txtSaveInFolder.Text = Common.GetSaveInFolder(Param.DefaultValue[Param.PublicationLocation], DatabaseName, cmbSelectLayout.Text);
+            if (_newSaveInFolderPath.Length > 0)
+            {
+                txtSaveInFolder.Text = Path.GetDirectoryName(_newSaveInFolderPath) + cmbSelectLayout.Text + "_" + DateTime.Now.ToString("yyyy-MM-dd_hhmm");
+            }
         }
 
         private void chkConfigDictionary_CheckedChanged(object sender, EventArgs e)
