@@ -207,39 +207,45 @@ namespace SIL.Tool
         public static string GetBaseValue(string fileName)
         {
             string baseValue = string.Empty;
-            var doc = new XmlDocument { XmlResolver = null ,PreserveWhitespace = true};
-            if(!File.Exists(fileName)) return string.Empty;
-            doc.Load(fileName);
-            XmlElement root = doc.DocumentElement;
-            if (root != null)
-                if (root.HasChildNodes)
-                {
-                    foreach (XmlNode xmlNode in root.ChildNodes)
+            try
+            {
+                var doc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
+                if (!File.Exists(fileName)) return string.Empty;
+                doc.Load(fileName);
+                XmlElement root = doc.DocumentElement;
+                if (root != null)
+                    if (root.HasChildNodes)
                     {
-                        if (xmlNode.Name == "head")
+                        foreach (XmlNode xmlNode in root.ChildNodes)
                         {
-                            foreach (XmlNode child in xmlNode.ChildNodes)
+                            if (xmlNode.Name == "head")
                             {
-                                if (child.Name == "base")
+                                foreach (XmlNode child in xmlNode.ChildNodes)
                                 {
-                                    baseValue = child.Attributes["href"].ToString();
-                                    if (baseValue.IndexOf("file://") >= 0)  // from the file access
+                                    if (child.Name == "base")
                                     {
-                                        const int designatorLength = 7;
-                                        baseValue = baseValue.Substring(designatorLength, baseValue.Length - designatorLength);
+                                        baseValue = child.Attributes["href"].ToString();
+                                        if (baseValue.IndexOf("file://") >= 0)  // from the file access
+                                        {
+                                            const int designatorLength = 7;
+                                            baseValue = baseValue.Substring(designatorLength, baseValue.Length - designatorLength);
+                                        }
+                                        if (baseValue.Length > 0)
+                                        {
+                                            xmlNode.RemoveChild(child); // Remove the base Node, to avoid the conflict
+                                        }
+                                        break;
                                     }
-                                    if (baseValue.Length > 0)
-                                    {
-                                        xmlNode.RemoveChild(child); // Remove the base Node, to avoid the conflict
-                                    }
-                                    break;
                                 }
+                                break;
                             }
-                            break;
                         }
                     }
-                }
-            doc.Save(fileName);
+                doc.Save(fileName);
+            }
+            catch
+            {
+            }
             return baseValue;
         }
 

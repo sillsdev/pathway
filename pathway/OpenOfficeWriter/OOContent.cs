@@ -17,6 +17,7 @@
 #region Using
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using System.Text;
@@ -489,43 +490,49 @@ namespace SIL.PublishingSolution
         /// <param name="sourceFile">The Xhtml File</param>
         private void AnchorTagProcessing(string sourceFile)
         {
-            const string tag = "a";
-            var xDoc = new XmlDocument { XmlResolver = null };
-            xDoc.Load(sourceFile);
-            XmlNodeList nodeList = xDoc.GetElementsByTagName(tag);
-            if (nodeList.Count > 0)
+            try
             {
-                //FileOpen(sourceFile);
-                nodeList = xDoc.GetElementsByTagName(tag);
-                string fileContent = xDoc.OuterXml.ToLower();
+                const string tag = "a";
+                var xDoc = new XmlDocument { XmlResolver = null };
+                xDoc.Load(sourceFile);
+                XmlNodeList nodeList = xDoc.GetElementsByTagName(tag);
                 if (nodeList.Count > 0)
                 {
-                    foreach (XmlNode item in nodeList)
+                    //FileOpen(sourceFile);
+                    nodeList = xDoc.GetElementsByTagName(tag);
+                    string fileContent = xDoc.OuterXml.ToLower();
+                    if (nodeList.Count > 0)
                     {
-                        var name = item.Attributes.GetNamedItem("href");
-                        if (name != null)
+                        foreach (XmlNode item in nodeList)
                         {
-                            if (name.Value.IndexOf('#') >= 0)
+                            var name = item.Attributes.GetNamedItem("href");
+                            if (name != null)
                             {
-                                var href = name.Value.Replace("#", "");
-                                if (href.Length > 0)
+                                if (name.Value.IndexOf('#') >= 0)
                                 {
-                                    href = href.ToLower();
-                                    string hrefQuot = "\"" + href + "\"";
-                                    if (fileContent.IndexOf(hrefQuot) < 0)
+                                    var href = name.Value.Replace("#", "");
+                                    if (href.Length > 0)
                                     {
-                                        name.Value = "";
-                                    }
-                                    else
-                                    {
-                                        _anchor.Add(href.ToLower());
+                                        href = href.ToLower();
+                                        string hrefQuot = "\"" + href + "\"";
+                                        if (fileContent.IndexOf(hrefQuot) < 0)
+                                        {
+                                            name.Value = "";
+                                        }
+                                        else
+                                        {
+                                            _anchor.Add(href.ToLower());
+                                        }
                                     }
                                 }
                             }
                         }
                     }
+                    xDoc.Save(sourceFile);
                 }
-                xDoc.Save(sourceFile);
+            }
+            catch
+            {
             }
         }
 
@@ -716,7 +723,11 @@ namespace SIL.PublishingSolution
             catch (XmlException e)
             {
                 var msg = new[] { e.Message, Sourcefile };
-                LocDB.Message("errProcessXHTML", Sourcefile + " is Not Valid. " + "\n" + e.Message, msg, LocDB.MessageTypes.Info, LocDB.MessageDefault.First);
+                if (LocDB.DB != null)
+                {
+                    LocDB.Message("errProcessXHTML", Sourcefile + " is Not Valid. " + "\n" + e.Message, msg,
+                                  LocDB.MessageTypes.Info, LocDB.MessageDefault.First);
+                }
                 CloseFile(targetPath);
             }
             finally
@@ -2010,68 +2021,74 @@ namespace SIL.PublishingSolution
         /// -------------------------------------------------------------------------------------------
         private void CloseFile(string targetPath)
         {
-            string targetFile = targetPath + "content.xml";
-            //if (_odtEndFiles != null)
-            //{
-            //    for (int i = 0; i < _odtEndFiles.Count; i++)  // ODM - ODT 
-            //    {
-            //        string outputFile = _odtEndFiles[i].ToString().Replace("xhtml", "odt");
-            //        _writer.WriteStartElement("text:section");
-            //        _writer.WriteAttributeString("text:style-name", "SectODM");
-            //        _writer.WriteAttributeString("text:name", outputFile);
-            //        //_writer.WriteAttributeString("text:protected", "true"); // read only
-            //        _writer.WriteAttributeString("text:protected", "false"); // Enabled for macro purpose - headword
-
-            //        _writer.WriteStartElement("text:section-source");
-            //        _writer.WriteAttributeString("xlink:href", "../" + outputFile);
-            //        _writer.WriteAttributeString("text:filter-name", "writer8");
-            //        _writer.WriteEndElement();
-            //        _writer.WriteEndElement();
-            //    }
-            //}
-
-            _writer.WriteEndElement();
-            _writer.WriteEndDocument();
-            _writer.Flush();
-            _writer.Close();
-
-            if (_reader != null)
-                _reader.Close();
-
-            if (_dictColumnGapEm != null && _dictColumnGapEm.Count > 0)
+            try
             {
-                var xmlDoc = new XmlDocument { PreserveWhitespace = true };
-                var nsmgr = new XmlNamespaceManager(xmlDoc.NameTable);
-                nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
-                nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
-                xmlDoc.Load(targetFile);
-                XmlElement root = xmlDoc.DocumentElement;
+                string targetFile = targetPath + "content.xml";
+                //if (_odtEndFiles != null)
+                //{
+                //    for (int i = 0; i < _odtEndFiles.Count; i++)  // ODM - ODT 
+                //    {
+                //        string outputFile = _odtEndFiles[i].ToString().Replace("xhtml", "odt");
+                //        _writer.WriteStartElement("text:section");
+                //        _writer.WriteAttributeString("text:style-name", "SectODM");
+                //        _writer.WriteAttributeString("text:name", outputFile);
+                //        //_writer.WriteAttributeString("text:protected", "true"); // read only
+                //        _writer.WriteAttributeString("text:protected", "false"); // Enabled for macro purpose - headword
 
-                ModifyOOStyles modifyIDStyles = new ModifyOOStyles();
-                Dictionary<string, XmlNode> ColumnGap = modifyIDStyles.SetColumnGap(targetFile, _dictColumnGapEm);
-                foreach (KeyValuePair<string, XmlNode> secName in ColumnGap)
+                //        _writer.WriteStartElement("text:section-source");
+                //        _writer.WriteAttributeString("xlink:href", "../" + outputFile);
+                //        _writer.WriteAttributeString("text:filter-name", "writer8");
+                //        _writer.WriteEndElement();
+                //        _writer.WriteEndElement();
+                //    }
+                //}
+
+                _writer.WriteEndElement();
+                _writer.WriteEndDocument();
+                _writer.Flush();
+                _writer.Close();
+
+                if (_reader != null)
+                    _reader.Close();
+
+                if (_dictColumnGapEm != null && _dictColumnGapEm.Count > 0)
                 {
-                    string style = "//st:style[@st:name='" + secName.Key + "']//st:columns";
-                    if (root != null)
+                    var xmlDoc = new XmlDocument { PreserveWhitespace = true };
+                    var nsmgr = new XmlNamespaceManager(xmlDoc.NameTable);
+                    nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+                    nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+                    xmlDoc.Load(targetFile);
+                    XmlElement root = xmlDoc.DocumentElement;
+
+                    ModifyOOStyles modifyIDStyles = new ModifyOOStyles();
+                    Dictionary<string, XmlNode> ColumnGap = modifyIDStyles.SetColumnGap(targetFile, _dictColumnGapEm);
+                    foreach (KeyValuePair<string, XmlNode> secName in ColumnGap)
                     {
-                        XmlNode ele = root.SelectSingleNode(style, nsmgr);
-                        if (ele != null)
+                        string style = "//st:style[@st:name='" + secName.Key + "']//st:columns";
+                        if (root != null)
                         {
-                            for (int i = ele.ChildNodes.Count - 1; i >= 0; i--)
+                            XmlNode ele = root.SelectSingleNode(style, nsmgr);
+                            if (ele != null)
                             {
-                                if (ele.ChildNodes[i].Name == "style:column" || ele.ChildNodes[i].Name == "#whitespace")
+                                for (int i = ele.ChildNodes.Count - 1; i >= 0; i--)
                                 {
-                                    ele.RemoveChild(ele.ChildNodes[i]);
+                                    if (ele.ChildNodes[i].Name == "style:column" || ele.ChildNodes[i].Name == "#whitespace")
+                                    {
+                                        ele.RemoveChild(ele.ChildNodes[i]);
+                                    }
                                 }
+                                XmlNode colNode = ColumnGap[secName.Key];
+                                XmlDocumentFragment styleNode = xmlDoc.CreateDocumentFragment();
+                                styleNode.InnerXml = colNode.InnerXml;
+                                ele.AppendChild(styleNode);
                             }
-                            XmlNode colNode = ColumnGap[secName.Key];
-                            XmlDocumentFragment styleNode = xmlDoc.CreateDocumentFragment();
-                            styleNode.InnerXml = colNode.InnerXml;
-                            ele.AppendChild(styleNode);
                         }
                     }
+                    xmlDoc.Save(targetFile);
                 }
-                xmlDoc.Save(targetFile);
+            }
+            catch
+            {
             }
         }
         #endregion

@@ -144,10 +144,13 @@ namespace SIL.Tool
             // Removal of html tag namespace and other formats.
             Common.ReplaceInFile(tempFile, @"<html\b[^>]*>", "<html>");
             if (!File.Exists(tempFile)) return string.Empty;
-
+            var xmldoc = new XmlDocument();
             // xml image copy
-            var xmldoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
-            xmldoc.Load(tempFile);
+            try
+            {
+                xmldoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
+                xmldoc.Load(tempFile);
+            
             const string tag = "img";
             XmlNodeList nodeList = xmldoc.GetElementsByTagName(tag);
             if (nodeList.Count > 0)
@@ -182,6 +185,10 @@ namespace SIL.Tool
             }
             ParagraphVerserSetUp(xmldoc); // TODO - Seperate it from this method.
             xmldoc.Save(tempFile);
+            }
+            catch
+            {
+            } 
             return tempFile;
         }
 
@@ -466,72 +473,78 @@ namespace SIL.Tool
 
         public string GetfigureNode()
         {
-            var xDoc = new XmlDocument { XmlResolver = null };
-            xDoc.Load(_xhtmlFileNameWithPath);
-            XmlNodeList nodeList = xDoc.GetElementsByTagName("figure");
-            if (nodeList.Count > 0)
+            try
             {
-                //object keyValue;
-                //var gotKey = RegistryHelperLite.RegEntryExists(RegistryHelperLite.ParatextKey, "Settings_Directory", "", out keyValue);
-                //string paratextDir = "";
-                //if (gotKey)
-                //    paratextDir = (string) keyValue;
-                int counter = nodeList.Count;
-                for (int i = 0; i < counter; i++)
+                var xDoc = new XmlDocument { XmlResolver = null };
+                xDoc.Load(_xhtmlFileNameWithPath);
+                XmlNodeList nodeList = xDoc.GetElementsByTagName("figure");
+                if (nodeList.Count > 0)
                 {
-                    XmlNode oldChild = nodeList[0];
-                    if (oldChild == null) break;
-                    string src = oldChild.Attributes["file"].Value;
-                    string cap = oldChild.InnerText;
-                    string refer = oldChild.Attributes["ref"].Value;
-                    string pos = oldChild.Attributes["size"].Value;
-                    string alt = oldChild.Attributes["desc"].Value;
-                    if (pos == "span")
-                        pos = "pictureCenter";
-                    else
-                        pos = "pictureRight";
-                    //<div class="pictureRight" id="a2"  >
-                    //   <img id ="b2" src="figures\WA03904b.tif" alt="alternative"/>
-                    //   <div class="caption">
-                    //     Mbitebí ámʋ fɛ́ɛ́ bɔkʋsʋ́ nywɛ́ amʋ́ nkandɩ́ɛ. (Mateo 25:7)
-                    //   </div>
-                    // </div>
-                    XmlNode newNode = xDoc.CreateElement("div");
-                    XmlAttribute xmlAttribute = xDoc.CreateAttribute("class");
-                    newNode.Attributes.Append(xmlAttribute);
+                    //object keyValue;
+                    //var gotKey = RegistryHelperLite.RegEntryExists(RegistryHelperLite.ParatextKey, "Settings_Directory", "", out keyValue);
+                    //string paratextDir = "";
+                    //if (gotKey)
+                    //    paratextDir = (string) keyValue;
+                    int counter = nodeList.Count;
+                    for (int i = 0; i < counter; i++)
+                    {
+                        XmlNode oldChild = nodeList[0];
+                        if (oldChild == null) break;
+                        string src = oldChild.Attributes["file"].Value;
+                        string cap = oldChild.InnerText;
+                        string refer = oldChild.Attributes["ref"].Value;
+                        string pos = oldChild.Attributes["size"].Value;
+                        string alt = oldChild.Attributes["desc"].Value;
+                        if (pos == "span")
+                            pos = "pictureCenter";
+                        else
+                            pos = "pictureRight";
+                        //<div class="pictureRight" id="a2"  >
+                        //   <img id ="b2" src="figures\WA03904b.tif" alt="alternative"/>
+                        //   <div class="caption">
+                        //     Mbitebí ámʋ fɛ́ɛ́ bɔkʋsʋ́ nywɛ́ amʋ́ nkandɩ́ɛ. (Mateo 25:7)
+                        //   </div>
+                        // </div>
+                        XmlNode newNode = xDoc.CreateElement("div");
+                        XmlAttribute xmlAttribute = xDoc.CreateAttribute("class");
+                        newNode.Attributes.Append(xmlAttribute);
 
-                    xmlAttribute = xDoc.CreateAttribute("id");
-                    xmlAttribute.Value = "i1";
-                    newNode.Attributes.Append(xmlAttribute);
+                        xmlAttribute = xDoc.CreateAttribute("id");
+                        xmlAttribute.Value = "i1";
+                        newNode.Attributes.Append(xmlAttribute);
 
-                    XmlNode newNodeImg = xDoc.CreateElement("img");
-                    xmlAttribute = xDoc.CreateAttribute("src");
-                    xmlAttribute.Value = "figures\\" + src;
-                    newNodeImg.Attributes.Append(xmlAttribute);
+                        XmlNode newNodeImg = xDoc.CreateElement("img");
+                        xmlAttribute = xDoc.CreateAttribute("src");
+                        xmlAttribute.Value = "figures\\" + src;
+                        newNodeImg.Attributes.Append(xmlAttribute);
 
-                    xmlAttribute = xDoc.CreateAttribute("id");
-                    xmlAttribute.Value = "i2";
-                    newNodeImg.Attributes.Append(xmlAttribute);
+                        xmlAttribute = xDoc.CreateAttribute("id");
+                        xmlAttribute.Value = "i2";
+                        newNodeImg.Attributes.Append(xmlAttribute);
 
-                    xmlAttribute = xDoc.CreateAttribute("alt");
-                    xmlAttribute.Value = alt;
-                    newNodeImg.Attributes.Append(xmlAttribute);
+                        xmlAttribute = xDoc.CreateAttribute("alt");
+                        xmlAttribute.Value = alt;
+                        newNodeImg.Attributes.Append(xmlAttribute);
 
-                    newNode.AppendChild(newNodeImg);
+                        newNode.AppendChild(newNodeImg);
 
-                    XmlNode newNodeDiv = xDoc.CreateElement("div");
-                    xmlAttribute = xDoc.CreateAttribute("class");
-                    xmlAttribute.Value = pos;  // postition class
-                    newNodeDiv.Attributes.Append(xmlAttribute);
-                    newNodeDiv.InnerText = cap + "(" + refer + ")";
+                        XmlNode newNodeDiv = xDoc.CreateElement("div");
+                        xmlAttribute = xDoc.CreateAttribute("class");
+                        xmlAttribute.Value = pos;  // postition class
+                        newNodeDiv.Attributes.Append(xmlAttribute);
+                        newNodeDiv.InnerText = cap + "(" + refer + ")";
 
-                    newNode.AppendChild(newNodeDiv);
+                        newNode.AppendChild(newNodeDiv);
 
-                    oldChild.ParentNode.ReplaceChild(newNode, oldChild);
+                        oldChild.ParentNode.ReplaceChild(newNode, oldChild);
+                    }
+                    xDoc.Save(_xhtmlFileNameWithPath);
                 }
-                xDoc.Save(_xhtmlFileNameWithPath);
+                xDoc = null;
             }
-            xDoc = null;
+            catch
+            {
+            }
             return _xhtmlFileNameWithPath;
         }
 

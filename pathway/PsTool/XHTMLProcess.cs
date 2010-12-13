@@ -224,8 +224,9 @@ namespace SIL.PublishingSolution
             {
                 if (_tagType == "ol" || _tagType == "ul")
                 {
-                    _listName = _listTypeDictionary.ContainsKey(_paragraphName)
-                                    ? _listTypeDictionary[_paragraphName]
+                    string tag = Common.LeftString(_paragraphName, "_");
+                    _listName = _listTypeDictionary.ContainsKey(tag)
+                                    ? "List" + _listTypeDictionary[tag].Replace("-","")
                                     : _tagType;
                 }
                 else if (_tagType == "li")

@@ -591,6 +591,7 @@ namespace SIL.PublishingSolution
                 case "text-transform":
                 case "white-space":
                 case "list-style-position":
+                case "list-style-type":
                 case "direction":
                 case "float":
                 case "clear":
