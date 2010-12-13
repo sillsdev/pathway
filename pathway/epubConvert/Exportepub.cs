@@ -177,7 +177,7 @@ namespace SIL.PublishingSolution
                 // - strips out "lang" tags from <span> elements (.epub doesn't like them there)
                 // - strips out <meta> tags (.epub chokes on the filename IIRC.  TODO: verify the problem here)
                 // - adds an "id" in each Chapter_Number span, so we can link to it from the TOC
-                string cvFileName = Path.GetFileNameWithoutExtension(preProcessor.ProcessedXhtml) + "_cv";
+                string cvFileName = Path.GetFileNameWithoutExtension(preProcessor.ProcessedXhtml) + "_";
                 string xsltFullName = Common.FromRegistry("TE_XHTML-to-epub_XHTML.xslt");
 //                string temporaryCvFullName = Common.PathCombine(tempFolder, cvFileName + ".xhtml");
                 restructuredFullName = Path.Combine(outputFolder, cvFileName + ".xhtml");
@@ -214,9 +214,9 @@ namespace SIL.PublishingSolution
                 {
                     if (File.Exists(file))
                     {
-                        Common.XsltProcess(file, xsltFullName, "_cv.xhtml");
+                        Common.XsltProcess(file, xsltFullName, "_.xhtml");
                         // add this file to the html files list
-                        htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file), (Path.GetFileNameWithoutExtension(file) + "_cv.xhtml")));
+                        htmlFiles.Add(Path.Combine(Path.GetDirectoryName(file), (Path.GetFileNameWithoutExtension(file) + "_.xhtml")));
                         // clean up the un-transformed file
                         File.Delete(file);
                     }
@@ -371,7 +371,7 @@ namespace SIL.PublishingSolution
                 // copy over the XHTML and CSS files
                 string cssPath = Common.PathCombine(contentFolder, defaultCSS);
                 File.Copy(mergedCSS, cssPath);
-                // copy the xhtml files into the content directory; if we can, give them scripture book names
+                // copy the xhtml files into the content directory
                 foreach (string file in htmlFiles)
                 {
                     //string name = GetBookName(file);
@@ -379,6 +379,16 @@ namespace SIL.PublishingSolution
                     string substring = Path.GetFileNameWithoutExtension(file).Substring(8);
                     string dest = Common.PathCombine(contentFolder, "PartFile" + substring.PadLeft(6, '0') + ".xhtml");
                     File.Move(file, dest);
+                    // split the file into smaller pieces if needed (scriptures only for now)
+                    if (_inputType == "scripture")
+                    {
+                        List<string> files = SplitBook(dest);
+                        if (files.Count > 1)
+                        {
+                            // file was split out - delete "dest" (it's been replaced)
+                            File.Delete(dest);
+                        }
+                    }
                 }
 
                 // copy over the image files
@@ -672,7 +682,7 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// Returns the user-friendly book name inside this file.
         /// </summary>
-        /// <param name="xhtmlFileName">Split xhtml filename in the form PartFile[#]_cv.xhtml</param>
+        /// <param name="xhtmlFileName">Split xhtml filename in the form PartFile[#]_.xhtml</param>
         /// <returns>User-friendly book name (value of the scrBookName or letter element in the xhtml file).</returns>
         private string GetBookName(string xhtmlFileName)
         {
@@ -807,7 +817,7 @@ namespace SIL.PublishingSolution
         /// Writes the chapter links out to the specified XmlWriter (the .ncx file).
         /// </summary>
         /// <returns>List of url strings</returns>
-        private void WriteChapterLinks(string xhtmlFileName, ref int playOrder, XmlWriter ncx)
+        private void WriteChapterLinks(string xhtmlFileName, ref int playOrder, XmlWriter ncx, ref int chapnum)
         {
             XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
@@ -829,7 +839,6 @@ namespace SIL.PublishingSolution
             {
                 var sb = new StringBuilder();
                 string name = Path.GetFileName(xhtmlFileName);
-                int chapnum = 1;
                 foreach(XmlNode node in nodes)
                 {
                     string textString;
@@ -892,59 +901,98 @@ namespace SIL.PublishingSolution
             return fileNameWithPath;
         }
 
-        private List<string> ChunkFile(string xhtmlFilename)
+        /// <summary>
+        /// Splits a book file into smaller files, based on file size.
+        /// </summary>
+        /// <param name="xhtmlFilename">file to split into smaller pieces</param>
+        /// <returns></returns>
+        private List<string> SplitBook(string xhtmlFilename)
         {
+            const long maxSize = 204800; // 200KB
+            // sanity check - make sure the file exists
+            if (!File.Exists(xhtmlFilename))
+            {
+                return null;
+            }
             List<string> fileNames = new List<string>();
-            XmlTextReader _reader;
+            // is it worth splitting this file?
+            FileInfo fi = new FileInfo(xhtmlFilename);
+            if (fi.Length <= maxSize)
+            {
+                // not worth splitting this file - just return it
+                fileNames.Add(xhtmlFilename);
+                return fileNames;
+            }
+
+            // If we got here, it's worth our time to split the file out.
+            StreamWriter writer;
             var reader = new StreamReader(xhtmlFilename);
-            string content = reader.ReadToEnd().ToLower();
+            string content = reader.ReadToEnd();
             reader.Close();
 
-            var match = Regex.Matches(content, "\"" + xhtmlFilename + "\"");
-            int counter = match.Count;
-
-            if (counter <= 0)
-                return fileNames;
-
-            try
+            string bookcode = "<span class=\"scrBookCode\">" + GetBookID(xhtmlFilename) + "</span>";
+            string head = content.Substring(0, content.IndexOf("<body"));
+            bool done = false;
+            int startIndex = 0;
+            int fileIndex = 1;
+            int softMax = 0, realMax = 0;
+            var sb = new StringBuilder();
+            while (!done)
             {
-                _reader = new XmlTextReader(xhtmlFilename)
+                // look for the next <div class="Section_Head"> after our soft maximum size
+                string outFile = Path.Combine(Path.GetDirectoryName(xhtmlFilename), (Path.GetFileNameWithoutExtension(xhtmlFilename) + fileIndex.ToString().PadLeft(2, '0') + ".xhtml"));
+                softMax = startIndex + (int) (maxSize/2); // UTF-16
+                if (softMax > content.Length)
                 {
-                    XmlResolver = null,
-                    WhitespaceHandling = WhitespaceHandling.Significant
-                };
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return fileNames;
-            }
-            Dictionary<string, XmlWriter> writers = new Dictionary<string, XmlWriter>();
-
-            //string allUserPath = GetAllUserPath();
-            string allUserPath = Path.GetTempPath();
-            for (int i = 0; i < counter; i++)
-            {
-                string fileName = Path.Combine(allUserPath, "PartFile" + (i + 1) + ".xhtml");
-                if (File.Exists(fileName))
-                {
-                    File.Delete(fileName);
+                    realMax = -1;
                 }
-
-                XmlTextWriter writer = null;
-                try
+                else
                 {
-                    writer = new XmlTextWriter(fileName, null) { Formatting = Formatting.Indented };
+                    realMax = content.IndexOf("<div class=\"Section_Head", softMax);
                 }
-                catch (Exception ex)
+                if (realMax == -1)
                 {
-
-                    Console.Write(ex.Message);
+                    // no more section heads - just pull in the rest of the content
+                    // write out head + substring(startIndex to the end)
+                    sb.Append(head);
+                    sb.Append("<body class=\"scrBody\"><div class=\"scrBook\">");
+                    sb.Append(bookcode);
+                    sb.AppendLine(content.Substring(startIndex));
+                    writer = new StreamWriter(outFile);
+                    writer.Write(sb.ToString());
+                    writer.Close();
+                    // add this file to fileNames)))
+                    fileNames.Add(outFile);
+                    break;
                 }
-                writers[fileName] = writer;
+                // build the content
+                if (startIndex == 0)
+                {
+                    // for the first section, we go from the start of the file to realMax
+                    sb.Append(content.Substring(0, (realMax - startIndex)));
+                    sb.AppendLine("</div></body></html>"); // close out the xhtml
+                }
+                else
+                {
+                    // for the subsequent sections, we need the head + the substring (startIndex to realMax)
+                    sb.Append(head);
+                    sb.Append("<body class=\"scrBody\"><div class=\"scrBook\">");
+                    sb.Append(content.Substring(startIndex, (realMax - startIndex)));
+                    sb.AppendLine("</div></body></html>"); // close out the xhtml
+                }
+                // write the string buffer content out to file
+                writer = new StreamWriter(outFile);
+                writer.Write(sb.ToString());
+                writer.Close();
+                // add this file to fileNames
+                fileNames.Add(outFile);
+                // move the indices up for the next file chunk
+                startIndex = realMax;
+                // reset the stringbuilder
+                sb.Length = 0;
+                fileIndex++;
             }
-
+            // return the result
             return fileNames;
         }
 
@@ -1280,15 +1328,57 @@ namespace SIL.PublishingSolution
             // individual navpoint elements (one for each xhtml)
             string[] files = Directory.GetFiles(contentFolder, "*.xhtml");
             int index = 1;
+            int chapNum = 1;
+            bool needsEnd = false;
             foreach (string file in files)
             {
                 string name = Path.GetFileName(file);
-                if (name.EndsWith(".xhtml"))
+//              string nameNoExt = Path.GetFileNameWithoutExtension(file);
+                if (!Path.GetFileNameWithoutExtension(file).EndsWith("_"))
                 {
-//                    string nameNoExt = Path.GetFileNameWithoutExtension(file);
+                    // this is a split file - is it the first one?
+                    if (Path.GetFileNameWithoutExtension(file).EndsWith("1"))
+                    {
+                        // first chunk of a split file
+                        if (needsEnd)
+                        {
+                            // end the last book's navPoint element
+                            ncx.WriteEndElement(); // navPoint
+                            needsEnd = false;
+                        }
+                        // start a new book entry, but don't end it
+                        string bookName = GetBookName(file);
+                        ncx.WriteStartElement("navPoint");
+                        ncx.WriteAttributeString("id", "dtb:uid");
+                        ncx.WriteAttributeString("playOrder", index.ToString());
+                        ncx.WriteStartElement("navLabel");
+                        ncx.WriteElementString("text", bookName);
+                        ncx.WriteEndElement(); // navlabel
+                        ncx.WriteStartElement("content");
+                        ncx.WriteAttributeString("src", name);
+                        ncx.WriteEndElement(); // meta
+                        index++;
+                        // chapters within the books (nested as a subhead)
+                        chapNum = 1;
+                        WriteChapterLinks(file, ref index, ncx, ref chapNum);
+                        needsEnd = true;
+                    }
+                    else
+                    {
+                        // somewhere in the middle of a split file - just write out the chapter entries
+                        WriteChapterLinks(file, ref index, ncx, ref chapNum);
+                    }
+                }
+                else
+                {
+                    // no split in this file - write out the book and chapter stuff
+                    if (needsEnd)
+                    {
+                        // end the book's navPoint element
+                        ncx.WriteEndElement(); // navPoint
+                        needsEnd = false;
+                    }
                     string bookName = GetBookName(file);
-//                    string bookName = (nameNoExt.IndexOf("_") > -1) ?
-//                        (nameNoExt.Substring(name.IndexOf("_") + 1)) : (nameNoExt);
                     ncx.WriteStartElement("navPoint");
                     ncx.WriteAttributeString("id", "dtb:uid");
                     ncx.WriteAttributeString("playOrder", index.ToString());
@@ -1300,7 +1390,8 @@ namespace SIL.PublishingSolution
                     ncx.WriteEndElement(); // meta
                     index++;
                     // chapters within the books (nested as a subhead)
-                    WriteChapterLinks(file, ref index, ncx);
+                    chapNum = 1;
+                    WriteChapterLinks(file, ref index, ncx, ref chapNum);
                     // end the book's navPoint element
                     ncx.WriteEndElement(); // navPoint
                 }

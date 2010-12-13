@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Transform XHTML file exported from TE into a simpler XHTML to be used in making a phone app. -->
+<!-- Transform XHTML file exported from TE into a "flatter" XHTML to be used in making an .epub file. -->
+<!-- Note that this transform is meant to create a file that is neither chapter nor section-centric. -->
 <!-- ?xml version="1.0"? -->
 <!-- From Larry W.'s TE_XHTML-to-Phone_XHTML.xslt -->
 <!-- Modified October 6, 2010. -->
@@ -98,8 +99,49 @@
 		</xsl:copy>
 	</xsl:template>
 
-	<!-- don't copy meta -->
+	<!-- skip these elements altogether -->
 	<xsl:template match="xhtml:meta" />
+	<xsl:template match="xhtml:span[../@class='Title_Main']" />
+
+	<!-- write out the contents of these elements, but not the elements themselves -->
+	<xsl:template match="xhtml:div[@class='scrSection']">
+		<xsl:apply-templates/>
+		<!-- If there are any footnotes / endnotes, list them here at the end of each section -->
+		<xsl:if test="count(descendant::xhtml:span[@class='Note_General_Paragraph']) > 0">
+			<xsl:element name="ul">
+				<xsl:attribute name="class"><xsl:text>footnotes</xsl:text></xsl:attribute>
+				<!-- general notes - use the note title for the list bullet -->
+				<xsl:for-each select="descendant::xhtml:span[@class='Note_General_Paragraph']">
+					<xsl:element name="li">
+						<xsl:attribute name="id"><xsl:text>FN_</xsl:text><xsl:value-of select="@id"/></xsl:attribute>
+						<xsl:element name="a">
+							<xsl:attribute name="href"><xsl:text>#</xsl:text><xsl:value-of select="@id"/></xsl:attribute>
+							<xsl:text>[</xsl:text><xsl:value-of select="@title"/><xsl:text>]</xsl:text>
+						</xsl:element>
+						<xsl:text> </xsl:text>
+						<xsl:value-of select="."/>
+					</xsl:element>
+				</xsl:for-each>
+				<!-- cross-references - use the verse number for the list bullet -->
+				<xsl:for-each select="descendant::xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']">
+					<xsl:element name="li">
+						<xsl:attribute name="id"><xsl:text>FN_</xsl:text><xsl:value-of select="@id"/></xsl:attribute>
+						<xsl:element name="a">
+							<xsl:attribute name="href"><xsl:text>#</xsl:text><xsl:value-of select="@id"/></xsl:attribute>
+							<xsl:value-of select="preceding::xhtml:span[@class='Chapter_Number'][1]"/><xsl:text>:</xsl:text>
+							<xsl:value-of select="preceding::xhtml:span[@class='Verse_Number'][1]"/>
+						</xsl:element>
+						<xsl:text> </xsl:text>
+						<xsl:value-of select="."/>
+					</xsl:element>
+				</xsl:for-each>
+			</xsl:element>
+		</xsl:if>
+	</xsl:template>
+	
+	<xsl:template match="xhtml:div[@class='columns']" >
+		<xsl:apply-templates />
+	</xsl:template>
 	
 	<!-- Process the chapters. -->
 	<xsl:template match="xhtml:span[@class='Chapter_Number']" mode="process">
@@ -113,6 +155,30 @@
 	        	</xsl:element>
 	</xsl:template>
     
+	<!-- Title for each book -->
+	<xsl:template match="xhtml:div[@class='Title_Main']">
+		<xsl:element name="div">
+			<xsl:attribute name="class"><xsl:text>Title_Main</xsl:text></xsl:attribute>
+			<xsl:attribute name="xml:lang"><xsl:value-of select="descendant::xhtml:span/@lang"/></xsl:attribute>
+			<xsl:value-of select="descendant::xhtml:span"/>
+		</xsl:element>
+		<xsl:apply-templates/>
+	</xsl:template>
+	
+	<!-- inner text for scriptures - they don't have a class, so we'll assign them to class "scrText" -->
+	<xsl:template match="xhtml:div[@class='Paragraph']/xhtml:span[not(@class)]">
+		<xsl:element name="span">
+			<xsl:attribute name="class"><xsl:text>scrText</xsl:text></xsl:attribute>
+			<xsl:if test="@lang != '' and @lang !=docLanguage">
+				<xsl:attribute name="xml:lang"><xsl:value-of select="@lang"/></xsl:attribute>
+			</xsl:if>
+			<xsl:for-each select="@*[not(local-name() = 'lang' )]">
+				<xsl:copy/>
+			</xsl:for-each>
+			<xsl:apply-templates></xsl:apply-templates>
+		</xsl:element>
+	</xsl:template>
+	
 	<!-- span processing -->  
 	<!-- .epub uses xml:lang instead of lang (it uses an xml mimetype). -->
 	<xsl:template match="xhtml:span">
