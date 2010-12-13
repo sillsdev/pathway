@@ -89,7 +89,8 @@ namespace SIL.PublishingSolution
         protected string _classNameWithLang;
         protected bool _imageInsert;
         protected string _imageSource;
-        protected string _imageClass;
+        protected string _imageLongDesc;
+        protected string _imageClass = string.Empty;
         protected string _imageSrcClass;
         protected bool _isAutoWidthforCaption;
         protected Common.OutputType _outputType;
@@ -185,11 +186,16 @@ namespace SIL.PublishingSolution
             }
             else if (_tagType == "img")
             {
-                _imageSource = _reader.GetAttribute("src").ToLower();
+                _imageSource = _reader.GetAttribute("src") ?? string.Empty; 
+                _imageSource = _imageSource.ToLower();
+
+                _imageLongDesc = _reader.GetAttribute("longdesc") ?? string.Empty;
+                _imageLongDesc = _imageLongDesc.ToLower();
                 //_characterName = _childName;
                 //_allCharacter.Push(_characterName);
                 _imageInsert = true;
-                _imageClass = StackPeek(_allParagraph);
+                //_imageClass = StackPeek(_allParagraph);
+                _imageClass = StackPeek(_allStyle);
                 _imageSrcClass = _className;
             }
             else if (_tagType == "a")
@@ -678,6 +684,12 @@ namespace SIL.PublishingSolution
             if (styleName == string.Empty) // missing style in CSS
             {
                 styleName = _className;
+                if (_outputType == Common.OutputType.ODT)
+                {
+                    if (_lang.Length > 0)
+                        styleName = _className + Common.SepAttrib + _lang;
+                }
+
             }
             //string newStyleName = styleName + Common.SepParent + parentStyle;
             string newStyleName = GetStyleNumber(styleName);

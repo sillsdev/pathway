@@ -854,10 +854,54 @@ namespace SIL.PublishingSolution
             else
             {
                 content = SignificantSpace(content);
-                if (pseudo)
+                //if (pseudo)
+                //    _writer.WriteRaw(content);
+                //else if(!VisibleHidden())
+                //    _writer.WriteString(content);
+
+                //if (!VisibleHidden())
+                //{
+                //    if (_imageClass.Length > 0)
+                //    {
+                //        if (!_isNewParagraph)
+                //        {
+                //            _writer.WriteStartElement("text:p");
+                //            _writer.WriteAttributeString("text:style-name", "ForcedDiv");
+                //            _writer.WriteString(content);
+                //            _writer.WriteEndElement();
+
+                //            _util.CreateStyleHyphenate(_styleFilePath, "ForcedDiv");
+                //        }
+                //    }
+                //    else if (pseudo)
+                //    {
+                //        _writer.WriteRaw(content);
+                //    }
+                //    else
+                //    {
+                //        _writer.WriteString(content);
+                //    }
+                //}
+                if (_imageClass.Length > 0)
+                    {
+                        if (!_isNewParagraph)
+                        {
+                            _writer.WriteStartElement("text:p");
+                            _writer.WriteAttributeString("text:style-name", "ForcedDiv");
+                            _writer.WriteString(content);
+                            _writer.WriteEndElement();
+
+                            _util.CreateStyleHyphenate(_styleFilePath, "ForcedDiv");
+                        }
+                    }
+                else  if (pseudo)
+                {
                     _writer.WriteRaw(content);
-                else if(!VisibleHidden())
+                }
+                else if (!VisibleHidden())
+                {
                     _writer.WriteString(content);
+                }
             }
         }
 
@@ -1538,33 +1582,22 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void GetAlignment(string alignment, ref string align, ref string alignPosition, string className)
+        private void GetAlignment(ref string align, string className)
         {
             string clsName = className;
-            TextInfo _titleCase = CultureInfo.CurrentCulture.TextInfo;
+            //TextInfo _titleCase = CultureInfo.CurrentCulture.TextInfo;
             string floatValue = GetPropertyValue(clsName, "float");
             if (floatValue.Length > 0)
             {
-                alignment = floatValue;
-            }
-            if (alignment.Length > 0)
-            {
-                alignment = _titleCase.ToTitleCase(alignment);
-                align = align.Replace("Left", alignment);
-                alignPosition = alignPosition.Replace("Left", alignment);
+                align = floatValue;
             }
         }
 
-        private void GetAlignment(string alignment, ref string wrapSide, ref string HoriAlignment, ref string AnchorPoint, ref string VertRefPoint, ref string VertAlignment, ref string wrapMode)
+        private void GetAlignment(ref string wrapSide, ref string HoriAlignment)
         {
-            if (_allCharacter.Count > 0)
-            {
-                string stackClass2 = _allStyle.Peek();
-                string stackClass1 = _allParagraph.Peek();
-                string stackClass = _allCharacter.Peek();
-                //string[] splitedClassName = stackClass.Split('_');
-
-                string[] splitedClassName = _allStyle.ToArray();
+            string[] splitedClassName =  _allStyle.ToArray();
+            //if (_allStyle.Count > 0)
+            //    splitedClassName = _allStyle.ToArray();
 
                 if (splitedClassName.Length > 0)
                 {
@@ -1572,68 +1605,46 @@ namespace SIL.PublishingSolution
                     for (int i = 0; i < splitedClassName.Length; i++) // // From Recent to Begining Class
                     {
                         string clsName = splitedClassName[i];
-                        string pos = GetPropertyValue(clsName, "float", alignment);
+                        string pos = GetPropertyValue(clsName, "float", "left");
                         switch (pos)
                         {
                             case "left":
-                                HoriAlignment = "LeftAlign";
-                                AnchorPoint = "TopLeftAnchor";
-                                VertAlignment = "CenterAlign";
-                                VertRefPoint = "LineBaseline";
+                                HoriAlignment = pos;
                                 break;
                             case "right":
-                                AnchorPoint = "TopRightAnchor";
-                                HoriAlignment = "RightAlign";
-                                VertAlignment = "CenterAlign";
-                                VertRefPoint = "LineBaseline";
+                                HoriAlignment = pos;
                                 break;
                             case "top":
                             case "prince-column-top":
                             case "-ps-column-top":
                             case "top-left":
-                                AnchorPoint = "TopLeftAnchor";
-                                HoriAlignment = "LeftAlign";
-                                VertAlignment = "TopAlign";
-                                VertRefPoint = "PageMargins";
-                                wrapMode = "JumpObjectTextWrap";
+                                HoriAlignment = "left";
                                 break;
                             case "top-right":
-                                AnchorPoint = "TopRightAnchor";
-                                VertAlignment = "TopAlign";
-                                HoriAlignment = "RightAlign";
-                                VertRefPoint = "PageMargins";
-                                wrapMode = "JumpObjectTextWrap";
+                                HoriAlignment = "right";
                                 break;
                             case "bottom":
                             case "prince-column-bottom":
                             case "-ps-column-bottom":
                             case "bottom-left":
-                                AnchorPoint = "BottomLeftAnchor";
-                                VertAlignment = "BottomAlign";
-                                HoriAlignment = "LeftAlign";
-                                VertRefPoint = "PageMargins";
-                                wrapMode = "JumpObjectTextWrap";
+                                HoriAlignment = "left";
                                 break;
                             case "bottom-right":
-                                AnchorPoint = "BotomRightAnchor";
-                                VertAlignment = "BottomAlign";
-                                HoriAlignment = "RightAlign";
-                                VertRefPoint = "PageMargins";
-                                wrapMode = "JumpObjectTextWrap";
+                                HoriAlignment = "right";
                                 break;
                         }
                         wrapSide = GetPropertyValue("clear", clsName, wrapSide);
                     }
                 }
             }
-        }
+        
         public bool InsertImage()
         {
             bool inserted = false;
             if (_imageInsert)
             {
                 //1 inch = 72 PostScript points
-                string alignment = "left";
+                //string alignment = "left";
                 string wrapSide = string.Empty;
                 string rectHeight = "0";
                 string rectWidth = "0";
@@ -1641,14 +1652,15 @@ namespace SIL.PublishingSolution
                 string wrapMode = "BoundingBoxTextWrap";
                 string HoriAlignment = string.Empty;
                 string VertAlignment = "center";
-                string VertRefPoint = "LineBaseline";
-                string AnchorPoint = "TopLeftAnchor";
+                //string VertRefPoint = "LineBaseline";
+                //string AnchorPoint = "TopLeftAnchor";
 
                 isImage = true;
                 inserted = true;
-                string[] cc = _allParagraph.ToArray();
-                imageClass = cc[1];
-                srcFile = _imageSource.ToLower();
+                string[] cc = _allStyle.ToArray(); //_allParagraph.ToArray();
+                imageClass = cc[0]; //cc[1];
+                srcFile = _imageSource;
+                string srcFilrLongDesc = _imageLongDesc;
                 //string fileName = "file:" + Common.GetPictureFromPath(srcFile, "", _sourcePicturePath);
                 string fromPath = Common.GetPictureFromPath(srcFile, _metaValue, _sourcePicturePath);
                 string fileName = Path.GetFileName(srcFile);
@@ -1661,16 +1673,18 @@ namespace SIL.PublishingSolution
                 File.Copy(fromPath, toPath, true);
 
             }
-                if (IdAllClass.ContainsKey(srcFile))
+            if (IdAllClass.ContainsKey(srcFilrLongDesc))  
                 {
-                    rectHeight = GetPropertyValue(srcFile, "height", rectHeight);
-                    rectWidth = GetPropertyValue(srcFile, "width", rectWidth);
-                    GetAlignment(alignment, ref HoriAlignment, ref AnchorPoint, srcFile);
+                    //img[src='Thomsons-gazelle1.jpg'] 
+                    rectHeight = GetPropertyValue(srcFilrLongDesc, "height", rectHeight);
+                    rectWidth = GetPropertyValue(srcFilrLongDesc, "width", rectWidth);
+                    GetAlignment(ref HoriAlignment, srcFilrLongDesc);
                 }
                 else
                 {
                     GetHeightandWidth(ref rectHeight, ref rectWidth);
-                    GetAlignment(alignment, ref wrapSide, ref HoriAlignment, ref AnchorPoint, ref VertRefPoint, ref VertAlignment, ref wrapMode);
+                    //GetAlignment(alignment, ref wrapSide, ref HoriAlignment, ref AnchorPoint, ref VertRefPoint, ref VertAlignment, ref wrapMode);
+                    GetAlignment(ref wrapSide, ref HoriAlignment);
                     GetWrapSide(ref wrapSide, ref wrapMode);
                 }
 
@@ -1688,8 +1702,8 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    //Default value is 72 However the line draws 36pt in X-axis and 36pt in y-axis.
-                    rectHeight = "72"; // fixed the width as 1 in;
+                    //Default value is 72 
+                    rectHeight = "72"; // fixed the width as 1 in = 72pt;
                     rectWidth = Common.CalcDimension(fromPath, rectHeight, 'W');
                     if (rectHeight == "0")
                     {
@@ -1742,7 +1756,8 @@ namespace SIL.PublishingSolution
                     wrapSide = "both";
                     HoriAlignment = "center";
                 }
-                else if (HoriAlignment.Length > 0)
+                else 
+                if (HoriAlignment.Length > 0)
                 {
                     anchorType = "paragraph";
                     _writer.WriteAttributeString("text:anchor-type", anchorType);
@@ -1831,7 +1846,6 @@ namespace SIL.PublishingSolution
 
                     _writer.WriteEndElement();// for ParagraphStyle
                     _writer.WriteEndElement(); // for Textframe
-
                     isImage = false;
                     imageClass = "";
                     _isParagraphClosed = true;

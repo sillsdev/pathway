@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml;
+using Microsoft.Win32;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -25,9 +27,12 @@ namespace SIL.PublishingSolution
         Dictionary<string, string> _languageStyleName = new Dictionary<string, string>();
         Dictionary<string, Dictionary<string, string>> _childStyle = new Dictionary<string, Dictionary<string, string>>();
         private Dictionary<string, string> _parentClass;
+        private Dictionary<string, ArrayList> _spellCheck = new Dictionary<string, ArrayList>();
+
         public ArrayList ModifyStylesXML(string projectPath, Dictionary<string, Dictionary<string, string>> childStyle, List<string> usedStyleName, Dictionary<string, string> languageStyleName, string baseStyle, bool isHeadword, Dictionary<string, string> parentClass)
         {
             LoadAllProperty();
+            LoadSpellCheck();
             _childStyle = childStyle;
             _projectPath = projectPath;
             _isHeadword = isHeadword;
@@ -183,6 +188,13 @@ namespace SIL.PublishingSolution
                     _columnProperty[_allColumnProperty[propName] + prop.Key] = prop.Value;
                 }
 
+            }
+            if (_languageStyleName.ContainsKey(className.Key))
+            {
+                string language, country;
+                Common.GetCountryCode(out language, out country, _languageStyleName[className.Key], _spellCheck);
+                _textProperty["fo:language"] = language;
+                _textProperty["fo:country"] = country;
             }
 
             XmlNode paraNode = null;
@@ -396,6 +408,74 @@ namespace SIL.PublishingSolution
             catch (Exception ex)
             {
                 Console.Write(ex.Message);
+            }
+        }
+
+        private void LoadSpellCheck()
+        {
+            const string sKey = @"SOFTWARE\classes\.odt";
+            RegistryKey key;
+            try
+            {
+                key = Registry.LocalMachine.OpenSubKey(sKey);
+            }
+            catch (Exception)
+            {
+                key = null;
+            }
+            // Check to see if Open Office Installed
+            if (key == null)
+                return;
+            object value = key.GetValue("");
+            if (value == null)
+                return;
+            string documentType = value.ToString();
+
+            string sKey2 = string.Format(@"SOFTWARE\Classes\{0}\shell\open\command", documentType);
+            RegistryKey key2;
+            try
+            {
+                key2 = Registry.LocalMachine.OpenSubKey(sKey2);
+            }
+            catch (Exception)
+            {
+                key2 = null;
+            }
+            if (key2 == null)
+                return;
+
+            string launchCommand = key2.GetValue("").ToString();
+            Match m = Regex.Match(launchCommand, "\"(.*)program");
+
+            string spellPath = Common.PathCombine("share", "autocorr");
+            string openOfficePath = Common.PathCombine(m.Groups[1].Value, "basis");
+            openOfficePath = Directory.Exists(openOfficePath)
+                                 ? Common.PathCombine(openOfficePath, spellPath)
+                                 : Common.PathCombine(m.Groups[1].Value, spellPath);
+            if (!Directory.Exists(openOfficePath)) return;
+
+            string[] spellFiles = Directory.GetFiles(openOfficePath, "acor_*.dat");
+            foreach (string fileName in spellFiles)
+            {
+                string fName = Path.GetFileNameWithoutExtension(fileName);
+                string[] lang_coun = fName.Substring(5).Split('-');
+                if (lang_coun.Length == 2)
+                {
+                    string lang = lang_coun[0];
+                    string coun = lang_coun[1];
+
+                    if (_spellCheck.ContainsKey(lang))
+                    {
+                        _spellCheck[lang].Add(coun);
+                    }
+                    else
+                    {
+                        ArrayList arLang = new ArrayList();
+                        //arLang = _styleName.AttribAncestor[coun];
+                        arLang.Add(coun);
+                        _spellCheck[lang] = arLang;
+                    }
+                }
             }
         }
 

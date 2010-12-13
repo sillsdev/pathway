@@ -111,7 +111,6 @@
     <Compile Include="OOExportOpenOffice.cs" />
     <Compile Include="OOStyleBase.cs" />
     <Compile Include="OOMapProperty.cs" />
-    <Compile Include="OOModifyStyles.cs" />
     <Compile Include="OOContent.cs" />
     <Compile Include="OOStyles.cs" />
     <Compile Include="OOUtility.cs">
