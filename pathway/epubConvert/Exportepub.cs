@@ -427,6 +427,8 @@ namespace SIL.PublishingSolution
                             continue;
                     }
                 }
+                // be sure to clean up any hyperlink references to the old file types
+                CleanupImageReferences(contentFolder);
 
                 // generate the toc / manifest files
                 CreateOpf(projInfo, contentFolder, bookId);
@@ -879,6 +881,33 @@ namespace SIL.PublishingSolution
             }
         }
 
+        /// <summary>
+        /// The .epub format doesn't support all image file types; when we copied the image files over, we had
+        /// to convert the unsupported file types to .png. Here we'll do a search/replace for all references to
+        /// the old versions.
+        /// </summary>
+        /// <param name="contentFolder">OEBPS folder containing all the xhtml files we need to clean up</param>
+        private void CleanupImageReferences (string contentFolder)
+        {
+            string[] files = Directory.GetFiles(contentFolder, "*.xhtml");
+            foreach (string file in files)
+            {
+                var reader = new StreamReader(file);
+                string content = reader.ReadToEnd();
+                reader.Close();
+                content = Regex.Replace(content, ".bmp", ".png");
+                content = Regex.Replace(content, ".tiff", ".png");
+                content = Regex.Replace(content, ".tif", ".png");
+                content = Regex.Replace(content, ".ico", ".png");
+                content = Regex.Replace(content, ".wmf", ".png");
+                content = Regex.Replace(content, ".pcx", ".png");
+                content = Regex.Replace(content, ".cgm", ".png");
+                var writer = new StreamWriter(file);
+                writer.Write(content);
+                writer.Close();
+            }
+        }
+
 
         /// <summary>
         /// Splits the specified xhtml file out into multiple files, either based on letter (dictionary) or book (scripture). 
@@ -1214,7 +1243,7 @@ namespace SIL.PublishingSolution
                     opf.WriteStartElement("item"); // item (image)
                     opf.WriteAttributeString("id", "image" + nameNoExt);
                     opf.WriteAttributeString("href", name);
-                    opf.WriteAttributeString("media-type", "image/jpg");
+                    opf.WriteAttributeString("media-type", "image/jpeg");
                     opf.WriteEndElement(); // item
                 }
                 else if (name.EndsWith(".gif"))
