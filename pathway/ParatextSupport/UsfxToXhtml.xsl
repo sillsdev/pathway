@@ -111,8 +111,18 @@
 			</xsl:when>
 
 			<!-- Convert introduction styles. -->
-			<xsl:when test="@style = 'is' or @style = 'is1'">
-				<h1 class="Intro_Section_Head" xmlns="http://www.w3.org/1999/xhtml">
+			<xsl:when test="@style = 'im' or @style = 'im1'">
+				<h1 class="Intro_Title_Main" xmlns="http://www.w3.org/1999/xhtml">
+					<xsl:apply-templates/>
+				</h1>
+			</xsl:when>
+			<xsl:when test="@style = 'im2'">
+				<h1 class="Intro_Title_Secondary" xmlns="http://www.w3.org/1999/xhtml">
+					<xsl:apply-templates/>
+				</h1>
+			</xsl:when>
+			<xsl:when test="@style = 'im3'">
+				<h1 class="Intro_Title_Tertiary" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</h1>
 			</xsl:when>
@@ -121,7 +131,7 @@
 					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
-			<xsl:when test="@style = 'iq1'">
+			<xsl:when test="@style = 'iq' or @style = 'iq1'">
 				<p class="Intro_Citation_Line1" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</p>
@@ -141,24 +151,24 @@
 					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
-			<xsl:when test="@style = 'io' or @style = 'io1'">
+			<xsl:when test="@style = 'io' or @style = 'io1' or @style = 'ili' or @style = 'ili1'">
 				<p class="Intro_List_Item1" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
-			<xsl:when test="@style = 'io2'">
+			<xsl:when test="@style = 'io2' or @style = 'ili2'">
 				<p class="Intro_List_Item2" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
-			<xsl:when test="@style = 'io3'">
+			<xsl:when test="@style = 'io3' or @style = 'ili3'">
 				<p class="Intro_List_Item3" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
 
 			<!-- Convert Scripture heading styles. -->
-			<xsl:when test="@style = 's' or @style = 's1' or @style = 'cs'">
+			<xsl:when test="@style = 's' or @style = 's1' or @style = 'cs' or @style = 'imte'">
 				<h1 class="Section_Head" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</h1>
@@ -193,7 +203,7 @@
 					<xsl:apply-templates/>
 				</h1>
 			</xsl:when>
-			<xsl:when test="@style = 'mr'">
+			<xsl:when test="@style = 'mr' or @style = 'sr'">
 				<h1 class="Section_Range_Paragraph" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</h1>
@@ -393,8 +403,18 @@
 	<!-- Handle figure element -->
 	<xsl:template match="para/figure">
 		<xsl:variable name="figureNumber" select="count(preceding::figure)+1"/>
-		
-		<div class="pictureCenter" xmlns="http://www.w3.org/1999/xhtml">
+		<xsl:variable name="pictureLoc">
+			<xsl:choose>
+				<xsl:when test="@size = 'span'">
+					<xsl:element name="pictureLoc">pictureCenter</xsl:element>
+				</xsl:when>
+				<xsl:otherwise> <!-- col -->
+					<xsl:element name="pictureLoc">pictureRight</xsl:element>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+
+		<div class="{$pictureLoc}" xmlns="http://www.w3.org/1999/xhtml">
 			<img id="{$bookCode}-{$figureNumber}-Figure" class="picture" src="{$figurePath}{@file}" alt="{$altFigurePath}{@file}"/>
 			<div class="pictureCaption">
 				<span lang="{$ws}">
