@@ -174,7 +174,6 @@
     <Compile Include="CssDialog\CommonTestMethod.cs" />
     <Compile Include="CssDialog\FeatureSheetTest.cs" />
     <Compile Include="CssDialog\MergeCssTest.cs" />
-    <Compile Include="CssDialog\ParamTest.cs" />
     <Compile Include="CssDialog\PdfTest.cs" />
     <Compile Include="CssDialog\PreviewTest.cs" />
     <Compile Include="CssDialog\SettingBlTest.cs" />
@@ -195,6 +194,7 @@
     <Compile Include="PsTool\CommonXmlTest.cs" />
     <Compile Include="PsTool\FolderTreeTest.cs" />
     <Compile Include="PsTool\FontInternalsTest.cs" />
+    <Compile Include="PsTool\ParamTest.cs" />
     <Compile Include="PsTool\PathwayPathTest.cs" />
     <Compile Include="PsTool\PreExportProcessTest.cs" />
     <Compile Include="PsTool\ProjectInformationTest.cs" />

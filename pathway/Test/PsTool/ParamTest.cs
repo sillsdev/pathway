@@ -34,7 +34,7 @@ namespace Test.CssDialog
     ///to contain all ParamTest Unit Tests
     ///</summary>
     [TestFixture]
-    public class ParamTest
+    public class ParamTest: Param
     {
         /// <summary>path to input folder for all tests</summary>
         string _inputBasePath = string.Empty;
@@ -364,6 +364,31 @@ namespace Test.CssDialog
             string val = string.Empty; // TODO: Initialize to an appropriate value
             Param.SetAttrValue(node, name, val);
             // TODO: A method that does not return a value cannot be verified.");
+        }
+
+        [Test]
+        public void GetBitmapTypeTest()
+        {
+            Common.ProgBase = _supportPath;
+            var iconPath = Common.FromRegistry(Value[MissingIcon]);
+            var attributes = File.GetAttributes(iconPath);
+            try
+            {
+                File.SetAttributes(iconPath, FileAttributes.ReadOnly);
+            }
+            catch (Exception)   // Normally the file is read only on Windows Vista & 7
+            {
+            }
+            var bmp = GetBitmap(iconPath);  // Will throw an error if opened for ReadWrite
+            var type = bmp.GetType();
+            Assert.AreEqual(typeof(Bitmap),type);
+            try
+            {
+                File.SetAttributes(iconPath, attributes);
+            }
+            catch (Exception)   // Normally the file is read only on Windows Vista & 7
+            {
+            }
         }
 
         #region private Method

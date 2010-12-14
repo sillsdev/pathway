@@ -258,15 +258,15 @@ namespace SIL.PublishingSolution
 
         private void CreateColumnXMLFile(string className)
         {
+            //_styleName.SectionName.Add(className.Trim());
+            string path = Common.PathCombine(Path.GetTempPath(), "_" + className.Trim() + ".xml");
+
+            XmlTextWriter writerCol = new XmlTextWriter(path, null);
+            writerCol.Formatting = Formatting.Indented;
+            writerCol.WriteStartDocument();
+
             try
             {
-
-                //_styleName.SectionName.Add(className.Trim());
-                string path = Common.PathCombine(Path.GetTempPath(), "_" + className.Trim() + ".xml");
-
-                XmlTextWriter writerCol = new XmlTextWriter(path, null);
-                writerCol.Formatting = Formatting.Indented;
-                writerCol.WriteStartDocument();
                 writerCol.WriteStartElement("office:document-content");
                 writerCol.WriteAttributeString("xmlns:office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
                 writerCol.WriteAttributeString("xmlns:style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
@@ -405,13 +405,16 @@ namespace SIL.PublishingSolution
                 writerCol.WriteEndElement();
 
                 writerCol.WriteEndElement();
-                writerCol.WriteEndDocument();
-                writerCol.Flush();
-                writerCol.Close();
             }
             catch (Exception ex)
             {
                 Console.Write(ex.Message);
+            }
+            finally
+            {
+                writerCol.WriteEndDocument();
+                writerCol.Flush();
+                writerCol.Close();
             }
         }
 

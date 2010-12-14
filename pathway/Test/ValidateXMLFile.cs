@@ -607,8 +607,8 @@ namespace Test
             XmlDocument doc = null;
             if (File.Exists(FileNameWithPath))
             {
-                doc = new XmlDocument();
-                doc.Load(FileNameWithPath);
+                doc = new XmlDocument {XmlResolver = null};
+                doc.LoadXml(FileData.Get(FileNameWithPath));
 
                 nsmgr = new XmlNamespaceManager(doc.NameTable);
                 nsmgr.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");

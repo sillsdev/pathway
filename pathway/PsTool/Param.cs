@@ -1184,7 +1184,8 @@ namespace SIL.PublishingSolution
         public static void LoadImageList()
         {
             LoadIconMap();
-            ClearImageList();
+            imageListSmall.Images.Clear();
+            imageListLarge.Images.Clear();
             imageListLarge.ImageSize = new Size(32, 32);
 			AddBmpIcon(new FileInfo(Common.FromRegistry(Value[MissingIcon])), GetBitmap(Common.FromRegistry(Value[MissingIcon])));
 			AddBmpIcon(new FileInfo(Common.FromRegistry(Value[SelectedIcon])), GetBitmap(Common.FromRegistry(Value[SelectedIcon])));
@@ -1203,18 +1204,17 @@ namespace SIL.PublishingSolution
             imageListCount = 0;
         }
 
+        /// <summary>
+        /// Returns and in memory Image of the Bitmap from disk
+        /// </summary>
+        /// <param name="name">path to bitmap file</param>
+        /// <returns>memory image of Bitmap</returns>
         protected static Image GetBitmap(string name)
         {
-            FileStream fileStream = new FileStream(name, FileMode.Open);
+            FileStream fileStream = new FileStream(name, FileMode.Open, FileAccess.Read);
             var bmp = new Bitmap(fileStream);
             fileStream.Close();
             return bmp;
-        }
-
-        public static void ClearImageList()
-        {
-            imageListSmall.Images.Clear();
-            imageListLarge.Images.Clear();
         }
 
         /// <summary>
