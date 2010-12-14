@@ -393,6 +393,7 @@ namespace SIL.PublishingSolution
 
                 // copy over the image files
                 string[] imageFiles = Directory.GetFiles(tempFolder);
+                bool renamedImages = false;
                 foreach (string file in imageFiles)
                 {
                     switch (Path.GetExtension(file))
@@ -421,6 +422,7 @@ namespace SIL.PublishingSolution
                                 var image = Image.FromFile(file);
                                 image.Save(fileStream, System.Drawing.Imaging.ImageFormat.Png);
                             }
+                            renamedImages = true;
                             continue;
                         default:
                             // not an image file (or not one we recognize) - skip
@@ -428,7 +430,10 @@ namespace SIL.PublishingSolution
                     }
                 }
                 // be sure to clean up any hyperlink references to the old file types
-                CleanupImageReferences(contentFolder);
+                if (renamedImages)
+                {
+                    CleanupImageReferences(contentFolder);
+                }
 
                 // generate the toc / manifest files
                 CreateOpf(projInfo, contentFolder, bookId);
@@ -1222,8 +1227,6 @@ namespace SIL.PublishingSolution
                 {
                     // if we can, write out the "user friendly" book name in the TOC
                     string fileId = GetBookID(file); 
-//                    string bookName = (nameNoExt.IndexOf("_") > -1) ?
-//                        (nameNoExt.Substring(name.IndexOf("_") + 1)) : (nameNoExt);
                     opf.WriteStartElement("item");
                     opf.WriteAttributeString("id", fileId);
                     opf.WriteAttributeString("href", name);
@@ -1272,19 +1275,13 @@ namespace SIL.PublishingSolution
             opf.WriteAttributeString("idref", "cover");
             opf.WriteAttributeString("linear", "yes");
             opf.WriteEndElement(); // itemref
-            opf.WriteStartElement("itemref"); 
-            opf.WriteAttributeString("idref", "normal-first-content");
-            opf.WriteEndElement(); // itemref
             foreach (string file in files)
             {
                 // add an <itemref> for each xhtml file in the set
                 string name = Path.GetFileName(file);
                 if (name.EndsWith(".xhtml"))
                 {
-//                    string nameNoExt = Path.GetFileNameWithoutExtension(file);
                     string fileId = GetBookID(file); 
-//                    string bookName = (nameNoExt.IndexOf("_") > -1) ? 
-//                        (nameNoExt.Substring(name.IndexOf("_") + 1)) : (nameNoExt);
                     opf.WriteStartElement("itemref"); // item (stylesheet)
                     opf.WriteAttributeString("idref", fileId);
                     opf.WriteEndElement(); // itemref
@@ -1295,6 +1292,7 @@ namespace SIL.PublishingSolution
             opf.WriteStartElement("guide");
             // cover image
             opf.WriteStartElement("reference");
+            opf.WriteAttributeString("href", "cover.html");
             opf.WriteAttributeString("type", "cover");
             opf.WriteAttributeString("title", "Cover");
             opf.WriteEndElement(); // reference
