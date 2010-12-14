@@ -857,7 +857,6 @@ namespace Test.OpenOfficeWriter
         /// <summary>
         /// </summary>      
         [Test]
-        [Ignore]
         public void BorderTest_Node()
         {
 
@@ -871,8 +870,8 @@ namespace Test.OpenOfficeWriter
             _validate.ClassName = "border";
             _validate.ClassProperty.Add("fo:border-left", "solid 3pt #ff0000");
             _validate.ClassProperty.Add("fo:border-right", "solid 3pt #ff0000");
-            _validate.ClassProperty.Add("fo:border-top", "solid 0 #ff0000");
-            _validate.ClassProperty.Add("fo:border-bottom", "solid 0 #ff0000");
+            _validate.ClassProperty.Add("fo:border-top", "solid 0pt #ff0000");
+            _validate.ClassProperty.Add("fo:border-bottom", "solid 0pt #ff0000");
 
             returnValue = _validate.ValidateNodeAttributesNS(true);
             Assert.IsTrue(returnValue);
@@ -1246,7 +1245,6 @@ namespace Test.OpenOfficeWriter
         /// <summary>
         /// </summary>      
         [Test]
-        [Ignore]
         public void HeaderSpace_Node()
         {
             const string file = "HeaderSpace";
@@ -1255,21 +1253,23 @@ namespace Test.OpenOfficeWriter
             GetCssClass(input, output);
 
             //First Node
-            string xpath = "//style:page-layout[@style:name='pm2']";
+            string xpath = "//style:page-layout[@style:name='pm3']";
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = string.Empty;
-            string inner = "<style:page-layout-properties fo:page-width=\"8.5in\" fo:page-height=\"11in\" style:num-format=\"1\" style:print-orientation=\"portrait\" fo:margin-top=\"0.7874in\" fo:margin-right=\"0.7874in\" fo:margin-bottom=\"0.7874in\" fo:margin-left=\"0.7874in\" style:writing-mode=\"lr-tb\" style:footnote-max-height=\"0in\" fo:padding-top=\"72pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:background-image /></style:page-layout-properties><style:header-style xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header-footer-properties fo:margin-bottom=\"106.3464pt\" fo:min-height=\"14.21pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header-footer-properties fo:margin-bottom=\"106.3464pt\" fo:min-height=\"14.21pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style>";
+            _validate.ClassProperty.Add("fo:padding-top=","72pt");
+            //string content = "<style:page-layout-properties fo:page-width=\"8.5in\" fo:page-height=\"11in\" style:num-format=\"1\" style:print-orientation=\"portrait\" fo:margin-top=\"0.7874in\" fo:margin-right=\"0.7874in\" fo:margin-bottom=\"0.7874in\" fo:margin-left=\"0.7874in\" style:writing-mode=\"lr-tb\" style:footnote-max-height=\"0in\" fo:padding-top=\"72pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:background-image /></style:page-layout-properties><style:header-style xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header-footer-properties fo:margin-bottom=\"106.3464pt\" fo:min-height=\"14.21pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header-footer-properties fo:margin-bottom=\"106.3464pt\" fo:min-height=\"14.21pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style>";
 
-            returnValue = _validate.ValidateNodeInnerXml(xpath, inner);
+            returnValue = _validate.ValidateNodeAttributesNS(1,xpath);
             Assert.IsTrue(returnValue);
 
             //second Node
-            xpath = "//style:page-layout[@style:name='pm3']";
+            xpath = "//style:page-layout[@style:name='pm4']";
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = string.Empty;
-            inner = "<style:page-layout-properties fo:page-width=\"8.5in\" fo:page-height=\"11in\" style:num-format=\"1\" style:print-orientation=\"portrait\" fo:margin-top=\"0.7874in\" fo:margin-right=\"0.7874in\" fo:margin-bottom=\"0.7874in\" fo:margin-left=\"0.7874in\" style:writing-mode=\"lr-tb\" style:footnote-max-height=\"0in\" fo:padding-top=\"72pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:background-image /><style:footnote-sep style:width=\"0.0071in\" style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:adjustment=\"left\" style:rel-width=\"25%\" style:color=\"#000000\" /></style:page-layout-properties><style:header-style xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header-footer-properties fo:margin-bottom=\"106.3464pt\" fo:min-height=\"14.21pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header-footer-properties fo:margin-bottom=\"106.3464pt\" fo:min-height=\"14.21pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style>";
+            _validate.ClassProperty.Add("fo:padding-top=", "72pt");
+            //string content = "<style:page-layout-properties fo:page-width=\"8.5in\" fo:page-height=\"11in\" style:num-format=\"1\" style:print-orientation=\"portrait\" fo:margin-top=\"0.7874in\" fo:margin-right=\"0.7874in\" fo:margin-bottom=\"0.7874in\" fo:margin-left=\"0.7874in\" style:writing-mode=\"lr-tb\" style:footnote-max-height=\"0in\" fo:padding-top=\"72pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:background-image /></style:page-layout-properties><style:header-style xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header-footer-properties fo:margin-bottom=\"106.3464pt\" fo:min-height=\"14.21pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header-footer-properties fo:margin-bottom=\"106.3464pt\" fo:min-height=\"14.21pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style>";
 
-            returnValue = _validate.ValidateNodeInnerXml(xpath, inner);
+            returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
             Assert.IsTrue(returnValue);
         }
 

@@ -379,6 +379,10 @@ namespace SIL.PublishingSolution
                     propertyName = "";
                     break;
                 default:
+                    if (styleAttributeInfo.Name.IndexOf("width") > 0)
+                    {
+                        propertyValue = propertyValue.Replace(",", "");
+                    }
                     _cssProperty[propertyName] = propertyValue;
                     propertyName = "";
                     break;
