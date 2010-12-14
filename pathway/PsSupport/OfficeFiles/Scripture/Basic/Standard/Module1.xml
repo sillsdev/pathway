@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Dec-03-2010 for TD-1698(Picture Position Should be based on Reference Location)
+&apos;Changed On Dec-14-2010 for TD-1737(Incomplete messages in Scripture macro)
 
 &apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -53,7 +53,6 @@ Sub GetPictureVerse(ImageCaption)
 	move(pos,style)
 End Sub
 
-
 &apos;Create Progress bar
 Sub ShowProcessingDialog() 
   oDoc = ThisComponent &apos; needs document 
@@ -63,7 +62,7 @@ Sub ShowProcessingDialog()
   oToolkit = oContainerWindow.Toolkit 
   
   &apos; sub window with sub frame 
-  oSubWindow = CreateNewWindow(oToolkit,oContainerWindow, 300,300,380,120) 
+  oSubWindow = CreateNewWindow(oToolkit,oContainerWindow, 300,300,500,120) 
   oSubWindow.Title=&quot;Update References&quot;
   oSubFrame = CreateUnoService(&quot;com.sun.star.frame.Frame&quot;) 
   oSubFrame.initialize(oSubWindow) 
@@ -74,23 +73,32 @@ Sub ShowProcessingDialog()
   oContainerModel = CreateUnoService(&quot;com.sun.star.awt.UnoControlContainerModel&quot;) 
   oContainerModel.BackgroundColor = &quot;&amp;HEEEEEE&quot; &apos;-1 
   oContainer.setModel(oContainerModel) 
-  oContainer.setPosSize(0,0,380,120,com.sun.star.awt.PosSize.POSSIZE) 
+  oContainer.setPosSize(0,0,500,120,com.sun.star.awt.PosSize.POSSIZE) 
   oContainer.createPeer(oToolkit,oSubWindow) 
   
   &apos; progressbar 
   oProgressBarModel = CreateUnoService(&quot;com.sun.star.awt.UnoControlProgressBarModel&quot;) 
   oProgressBar = CreateUnoService( &quot;com.sun.star.awt.UnoControlProgressBar&quot; ) 
   oProgressBar.setModel(oProgressBarModel) 
-  oProgressBar.setPosSize(39,65,300,30, com.sun.star.awt.PosSize.POSSIZE ) 
+  oProgressBar.setPosSize(50,65,400,30, com.sun.star.awt.PosSize.POSSIZE ) 
   oContainer.addControl(&quot;progressbar&quot;,oProgressBar) 
   
-  &apos; label 
+  &apos; label 1
   oLabel = CreateUnoService(&quot;com.sun.star.awt.UnoControlFixedText&quot;) 
   oLabelModel = CreateUnoService(&quot;com.sun.star.awt.UnoControlFixedTextModel&quot;) 
-  oLabelModel.Label = &quot;The Open Office window will be hidden while the headers are updated&quot; + chr(13) + &quot;because this reduces the time it takes to do the update.&quot; 
-&apos;  oLabelModel.Color = &quot;red&quot; &apos;-1 
+  oLabelModel.Label = &quot;The Open Office window will be hidden while the headers are updated&quot;
   oLabel.setModel(oLabelModel) 
-  oLabel.setPosSize(23,20,380,30,com.sun.star.awt.PosSize.POSSIZE) 
+  oLabel.Alignment = 1
+  oLabel.setPosSize(5,20,500,30,com.sun.star.awt.PosSize.POSSIZE) 
+  oContainer.addControl(&quot;label&quot;,oLabel) 
+
+  &apos; label 2
+  oLabel = CreateUnoService(&quot;com.sun.star.awt.UnoControlFixedText&quot;) 
+  oLabelModel = CreateUnoService(&quot;com.sun.star.awt.UnoControlFixedTextModel&quot;) 
+  oLabelModel.Label = &quot;because this reduces the time it takes to do the update.&quot; 
+  oLabel.setModel(oLabelModel) 
+  oLabel.Alignment = 1
+  oLabel.setPosSize(5,37,500,30,com.sun.star.awt.PosSize.POSSIZE) 
   oContainer.addControl(&quot;label&quot;,oLabel) 
   
   &apos; show window 
