@@ -144,7 +144,6 @@ namespace SIL.PublishingSolution
         private PublicationInformation _projInfo;
         private bool _IsHeadword = false;
         private bool _significant;
-        private Dictionary<string, Dictionary<string, string>> _dictColumnGapEm = new Dictionary<string, Dictionary<string, string>>();
 
         #endregion
 

@@ -361,7 +361,7 @@ namespace SIL.PublishingSolution
                         writerCol.WriteEndElement();
                     }
 
-                    if (columnGap.IndexOf("em") > 0 || columnGap.IndexOf("%") > 0)
+                    if (columnGap.IndexOf("em") > 0 || columnGap.IndexOf("%") > 0 || columnGap.IndexOf("-") > -1)
                     {
                         Dictionary<string, string> pageProperties = new Dictionary<string, string>();
                         pageProperties["pageWidth"] = pageWidth.ToString();
@@ -381,6 +381,10 @@ namespace SIL.PublishingSolution
                                 pageProperties["columnGap"] = "1em";
 
                             }
+                        }
+                        else if (columnGap.IndexOf("-") > -1)
+                        {
+                            pageProperties["columnGap"] = columnGap.Replace("-", "");
                         }
                         _styleName.ColumnGapEm["Sect_" + className.Trim()] = pageProperties;
                     }

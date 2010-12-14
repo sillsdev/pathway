@@ -63,6 +63,7 @@ namespace SIL.PublishingSolution
         protected Dictionary<string, string> _listTypeDictionary = new Dictionary<string, string>();
         protected Dictionary<string, ArrayList> _classFamily;
         //protected ClassInfo _classInfo = new ClassInfo();
+        protected Dictionary<string, Dictionary<string, string>> _dictColumnGapEm = new Dictionary<string, Dictionary<string, string>>();
         protected string _className;
         protected ArrayList _attribute;
         private string _isTagClass;
@@ -911,6 +912,11 @@ namespace SIL.PublishingSolution
                     if (_outputType != Common.OutputType.IDML)
                     {
                         _tempStyle[property.Key] = (ancestorFontSize * value / 100).ToString() + "pt";
+                        if (property.Key == "column-gap") // For column-gap: 2em; change the value as (-ve)
+                        {
+                            _dictColumnGapEm["Sect_" + _className.Trim()]["columnGap"] = _tempStyle[property.Key];
+                            _tempStyle[property.Key] = (-ancestorFontSize * value / 100).ToString();
+                        }
                     }
                 }
                 else
