@@ -10,17 +10,17 @@ Stable tag: 0.1
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 */
 
-/** @todo Change the above Plugin URI */
-/** @todo Change the licensing above and below. If GPL2, see WP plugin doc about license. */
+/* @todo Change the above Plugin URI */
+/* @todo Change the licensing above and below. If GPL2, see WP plugin doc about license. */
 
-/**
+/*
  * Check to make sure we can even load an importer.
  */
 
 if ( ! defined( 'WP_LOAD_IMPORTERS' ) )
     return;
 
-/**
+/*
  * Include the WordPress Importer.
  */
 require_once ABSPATH . 'wp-admin/includes/import.php';
@@ -32,29 +32,30 @@ if ( ! class_exists('WP_Importer') )
         require_once $class_wp_importer;
     }
 
-/**
- * SIL FieldWorks XHTML Importer
- *
- * Imports data from an SIL Pathway XHTML file. The data may come from SIL
- * FieldWorks or other applications.
- *
- * PHP version 5.2
- *
- * LICENSE
- *
- * @package WordPress
- * @subpackage Importer
- * @since 3.0
- */
-
 if ( class_exists( 'WP_Importer' ) ) {
+
+	/**
+	 * SIL FieldWorks XHTML Importer
+	 *
+	 * Imports data from an SIL Pathway XHTML file. The data may come from SIL
+	 * FieldWorks or other applications.
+	 *
+	 * PHP version 5.2
+	 *
+	 * LICENSE
+	 *
+	 * @package WordPress
+	 * @subpackage Importer
+	 * @since 3.0
+	 */
+
 	class SIL_Pathway_XHTML_Import extends WP_Importer {
 		var $posts = array ();
 		var $file;
 
 		function start()
 		{
-			/** @todo See if there is a better way to do this than these steps */
+			/* @todo See if there is a better way to do this than these steps */
 			if ( empty ( $_GET['step'] ) )
 				$step = 0;
 			else
@@ -63,31 +64,51 @@ if ( class_exists( 'WP_Importer' ) ) {
 			$this->header();
 
 			switch ($step) {
-				/**
+				/*
 				 * First, greet the user and prompt for files.
 				 */
 				case 0 :
-					echo '<div class="narrow">';
-					echo '<p>' . __( 'Howdy! This importer allows you to import SIL Pathway XHTML data into your WordPress site.',
-							'sil-pathway-xhtml-importer' ) . '</p>';
+					$this->hello();
 					$this->get_file_names();
 					echo '</div>';
 					break;
-				/**
-				 * Second, upload files
+				/*
+				 * Second, upload and import files
 				 */
 				case 1 :
 					check_admin_referer('import-upload');
-					//$result = $this->import_xhtml();
-					$result = $this->upload_files();
+					$result = $this->upload_files('xhtml');
 					if (is_wp_error( $result ))
 						echo $result->get_error_message();
+					$result = $this->upload_files('css');
+					if (is_wp_error( $result ))
+						echo $result->get_error_message();
+
+					//$result = $this->import_xhtml();
+
+					$this->goodbye();
 					break;
 
 			}
 			$this->footer();
 		}
 
+		/**
+		 * Greet the user.
+		 */
+		function hello(){
+			echo '<div class="narrow">';
+			echo '<p>' . __( 'Howdy! This importer allows you to import SIL Pathway XHTML data into your WordPress site.',
+					'sil-pathway-xhtml-importer' ) . '</p>';
+		}
+
+		/**
+		 * Finish up.
+		 */
+		function goodbye(){
+			echo '<div class="narrow">';
+			echo '<p>' . __( 'Finished!', 'sil-pathway-xhtml-importer' ) . '</p>';
+		}
 		/**
 		 * Brings up the form to get the files to upload. The code is based on
 		 * the function wp_import_upload_form in template.php.
@@ -96,7 +117,7 @@ if ( class_exists( 'WP_Importer' ) ) {
 		 */
 		function get_file_names() {
 			
-			/** @todo The max file size is determined by the settings in php.ini.
+			/* @todo The max file size is determined by the settings in php.ini.
 			 * upload_max_files is set to 2MB by default. This can be cranked up,
 			 * but then the post_max_size apparently needs to be at least as big
 			 * as the upload_max_files setting. This all assumes that the
@@ -129,13 +150,13 @@ if ( class_exists( 'WP_Importer' ) ) {
 <label for="upload"><?php _e( 'Choose an XHTML file from your computer:' ); ?></label> (<?php printf( __('Maximum size: %s' ), $size ); ?>)
 </p>
 <p>
-<input type="file" id="upload" name="import" size="100" />
+<input type="file" id="upload" name="xhtml" size="100" />
 </p>
 <p>
 <label for="upload"><?php _e( 'Choose the associated CSS file from your computer:' ); ?></label> (<?php printf( __('Maximum size: %s' ), $size ); ?>)
 </p>
 <p>
-<input type="file" id="upload" name="import" size="100" />
+<input type="file" id="upload" name="css" size="100" />
 <input type="hidden" name="action" value="save" />
 <input type="hidden" name="max_file_size" value="<?php echo $bytes; ?>" />
 </p>
@@ -178,20 +199,20 @@ if ( class_exists( 'WP_Importer' ) ) {
 		}
 
 		/**
-		 * Upload the files indicated by the user.
+		 * Upload the files indicated by the user. An override of
+		 * wp_import_handle_upload.
 		 *
-		 * This is intended to be an override of wp_import_handle_upload.
-		 * For some reason it's still calling the underlying function.
+		 * @param string $which_file The file being uploaded
 		 */
 
-		function upload_files() {
-			if ( !isset($_FILES['import']) ) {
+		function upload_files($which_file) {
+			if ( !isset($_FILES[$which_file]) ) {
 				$file['error'] = __( 'The file is either empty, or uploads are disabled in your php.ini, or post_max_size is defined as smaller than upload_max_filesize in php.ini.' );
 				return $file;
 			}
 
 			$overrides = array( 'test_form' => false, 'test_type' => false );
-			$file = wp_handle_upload( $_FILES['import'], $overrides );
+			$file = wp_handle_upload( $_FILES[$which_file], $overrides );
 
 			if ( isset( $file['error'] ) )
 				return $file;
@@ -222,7 +243,7 @@ if ( class_exists( 'WP_Importer' ) ) {
 		}
 	} // class
 
-	/**
+	/*
 	 * Register the importer so WordPress knows it exists. Specify the start
 	 * function as an entry point. Paramaters: $id, $name, $description,
 	 * $callback.
@@ -236,13 +257,13 @@ if ( class_exists( 'WP_Importer' ) ) {
 } // class_exists( 'WP_Importer' )
 
 function pathway_xhtml_importer_init() {
-	/**
+	/*
 	 * Load the translated strings for the plugin.
 	 */
     load_plugin_textdomain('sil-pathway-xhtml-importer', false, dirname( plugin_basename( __FILE__ ) ) );
 }
 
-/**
+/*
  * Hook the importer's init into the WordPress init.
  */
 add_action('init', 'pathway_xhtml_importer_init');
