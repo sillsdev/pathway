@@ -43,8 +43,7 @@ namespace SIL.PublishingSolution
         public bool Handle(string inputDataType)
         {
             bool returnValue = false;
-            //inputDataType.ToLower() == "scripture"
-            if (inputDataType.ToLower() == "dictionary")
+            if (inputDataType.ToLower() == "dictionary" || inputDataType.ToLower() == "scripture")
             {
                 returnValue = true;
             }
