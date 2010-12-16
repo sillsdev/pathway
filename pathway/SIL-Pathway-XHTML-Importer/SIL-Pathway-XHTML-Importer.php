@@ -80,11 +80,13 @@ if ( class_exists( 'WP_Importer' ) ) {
 					$result = $this->upload_files('xhtml');
 					if (is_wp_error( $result ))
 						echo $result->get_error_message();
+					$xhtml_file = $result['file'];
+
 					$result = $this->upload_files('css');
 					if (is_wp_error( $result ))
 						echo $result->get_error_message();
 
-					//$result = $this->import_xhtml();
+					$result = $this->import_xhtml($xhtml_file);
 
 					$this->goodbye();
 					break;
@@ -185,24 +187,11 @@ if ( class_exists( 'WP_Importer' ) ) {
 		}
 
 		/**
-		 * Import the XHTML data
-		 *
-		 * @return <type>
-		 */
-		function import_xhtml() {
-		$file = wp_import_handle_upload();
-			if ( isset($file['error']) ) {
-				 echo $file['error'];
-				 return;
-
-			}
-		}
-
-		/**
 		 * Upload the files indicated by the user. An override of
 		 * wp_import_handle_upload.
 		 *
-		 * @param string $which_file The file being uploaded
+		 * @param string $which_file = The file being uploaded
+		 * @return array $file = the file, $id = the file's ID
 		 */
 
 		function upload_files($which_file) {
@@ -233,6 +222,50 @@ if ( class_exists( 'WP_Importer' ) ) {
 			$id = wp_insert_attachment( $object, $file );
 
 			return array( 'file' => $file, 'id' => $id );
+		}
+
+		/**
+		 * Import the XHTML data
+		 *
+		 * @return <type>
+		 */
+		function import_xhtml($xhtml_file) {
+			$xhtml_file = realpath($xhtml_file);
+			$dom = new DOMDocument('1.0', 'utf-8');
+			$ret_val = $dom->load($xhtml_file);
+			$xpath = new DOMXPath($dom);
+			$xpath->registerNamespace('xhtml', 'http://www.w3.org/1999/xhtml');
+			$entry_nodes = $xpath->query('//xhtml:div[@class="entry"]');
+			
+			/*
+			 * Loop through the entries so we can post them to WordPress.
+			 */
+			foreach ($entry_nodes as $entry_element){
+				/*
+				 * should be only 1 headword at most
+				 */
+				$headwords = $xpath->query('./xhtml:span[@class="headword"]', $entry_element);
+				$headword = $headwords->item(0)->nodeValue;
+				
+				$entry_xml = $dom->saveXML($entry_element);
+
+//				$senses = $xpath->query('./xhtml:span[@class="senses"]/xhtml:span[@class="sense"]', $entry_element);
+//				foreach ($senses as $sense){
+//					$definition = $xpath->query('./xhtml:span[starts-with(@class,"definition")]', $sense)->item(0);
+//				}
+
+				/*
+				 * Build the post to put into WordPress
+				 */
+				$post = array(
+					'post_title' => $headword,
+					'post_content' => $entry_xml,
+					'post_status' => 'publish'
+				);
+				wp_insert_post($post);
+			}
+
+			return;
 		}
 
 		function SIL_Pathway_XHTML_Import()
