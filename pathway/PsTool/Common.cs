@@ -1697,7 +1697,10 @@ return FromProg(file);
                     }
                     else if (Type == 'H')
                     {
-                        retValue = height / width * double.Parse(imgDimension);
+                        if (imgDimension.IndexOf("%") > 0)
+                            retValue = height;
+                        else
+                            retValue = height / width * double.Parse(imgDimension);
                     }
                 }
             }

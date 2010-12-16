@@ -117,7 +117,7 @@ namespace SIL.PublishingSolution
         private ArrayList _imageCaptionEmpty = new ArrayList();
         private int _imageZindexCounter;
         private bool _imagePreviousFinished = false;
-
+        private bool _imageParaForCaption = false;
         private List<string> _unUsedParagraphStyle = new List<string>();
 
         #endregion
@@ -800,6 +800,9 @@ namespace SIL.PublishingSolution
                     // Note: Paragraph Start Element
                     _writer.WriteStartElement("text:p");
                     _writer.WriteAttributeString("text:style-name", _paragraphName); //_divClass
+
+                    //if (_imageInserted)
+                    //    _imageParaForCaption = true;
                 }
                 AddUsedStyleName(_paragraphName);
                 _previousParagraphName = _paragraphName;
@@ -894,14 +897,13 @@ namespace SIL.PublishingSolution
                 //}
                 if (_imageClass.Length > 0)
                     {
-                        if (!_isNewParagraph)
+                        //if (!_isNewParagraph)
                         {
-                            _writer.WriteStartElement("text:p");
-                            _writer.WriteAttributeString("text:style-name", "ForcedDiv");
+                            //_writer.WriteStartElement("text:p");
+                            //_writer.WriteAttributeString("text:style-name", "ForcedDiv");
                             _writer.WriteString(content);
-                            _writer.WriteEndElement();
+                            //_writer.WriteEndElement();
 
-                            _util.CreateStyleHyphenate(_styleFilePath, "ForcedDiv");
                         }
                     }
                 else  if (pseudo)
@@ -929,7 +931,7 @@ namespace SIL.PublishingSolution
         {
             _imageInserted = InsertImage();
 
-            if ((_tagType == "span" || _tagType == "a") && characterStyle != "none") //span start
+            if ((_tagType == "span" || _tagType == "a") && characterStyle != "none" || (_tagType == "img" && _imageInserted)) //span start
             {
                 if (isFootnote)
                 {
@@ -938,9 +940,22 @@ namespace SIL.PublishingSolution
                     return;
                 }
 
-                    _writer.WriteStartElement("text:span");
-                    _writer.WriteAttributeString("text:style-name", characterStyle); //_util.ChildName
+                if (_imageClass.Length > 0)
+                {
+                    //if (!_isNewParagraph && !_forcedPara)
+                    if (!_forcedPara)
+                    {
+                        _writer.WriteStartElement("text:p");
+                        _writer.WriteAttributeString("text:style-name", "ForcedDiv");
+                        _util.CreateStyleHyphenate(_styleFilePath, "ForcedDiv");
+                        _forcedPara = true;
+                    }
+                }
+
+                _writer.WriteStartElement("text:span");
+                _writer.WriteAttributeString("text:style-name", characterStyle); //_util.ChildName
             }
+
             AddUsedStyleName(characterStyle);
 
             if (!AnchorBookMark())
@@ -949,7 +964,7 @@ namespace SIL.PublishingSolution
                 whiteSpacePre(content, pseudo); // TODO -2000 - SignificantSpace() - IN OO convert
 
             }
-            if ((_tagType == "span" || _tagType == "a") && characterStyle != "none")  // span end
+            if ((_tagType == "span" || _tagType == "a") && characterStyle != "none" || (_tagType == "img" && _imageInserted))  // span end
             {
                 _writer.WriteEndElement();
             }
@@ -1577,17 +1592,17 @@ namespace SIL.PublishingSolution
             switch (wrapSide)
             {
                 case "left":
-                    wrapSide = "RightSide";
+                    wrapSide = "right";
                     break;
                 case "right":
-                    wrapSide = "LeftSide";
+                    wrapSide = "left";
                     break;
                 case "both":
-                    wrapSide = "RightSide";
+                    wrapSide = "right";
                     wrapMode = "JumpObjectTextWrap";
                     break;
                 case "none":
-                    wrapSide = "BothSides";
+                    wrapSide = "both";
                     break;
             }
         }
@@ -1644,12 +1659,22 @@ namespace SIL.PublishingSolution
                                 break;
                         }
                         wrapSide = GetPropertyValue("clear", clsName, wrapSide);
+                        if(HoriAlignment != "left")
+                            break;
                     }
                 }
             }
         
         public bool InsertImage()
         {
+            string classPicture = _reader.GetAttribute("class") ?? "img";
+
+            //if (_isDisplayNone) // Checking all parent classes
+            //    return;
+
+            //if (_structStyles.DisplayNone.Contains(classPicture)) // Checking current class
+            //    return;
+
             bool inserted = false;
             if (_imageInsert)
             {
@@ -1683,7 +1708,7 @@ namespace SIL.PublishingSolution
                 File.Copy(fromPath, toPath, true);
 
             }
-            if (IdAllClass.ContainsKey(srcFilrLongDesc))  
+                if (IdAllClass.ContainsKey(srcFilrLongDesc))  
                 {
                     //img[src='Thomsons-gazelle1.jpg'] 
                     rectHeight = GetPropertyValue(srcFilrLongDesc, "height", rectHeight);
@@ -1779,9 +1804,16 @@ namespace SIL.PublishingSolution
                     _writer.WriteAttributeString("text:anchor-type", anchorType);
                     _writer.WriteAttributeString("draw:z-index", "0");
                 }
+                string width = rectWidth;
+                if (rectWidth.IndexOf("%") == -1)
+                    width = rectWidth + imgWUnit;
 
-                _writer.WriteAttributeString("svg:width", rectWidth + imgWUnit);
-                _writer.WriteAttributeString("svg:height", rectHeight + imgHUnit);
+                string height = rectHeight;
+                if (rectHeight.IndexOf("%") == -1)
+                    height = rectHeight + imgWUnit;
+
+                _writer.WriteAttributeString("svg:width", width);
+                _writer.WriteAttributeString("svg:height", height);
                 //TD-349(width:auto)
                 if (_isAutoWidthforCaption)
                 {
@@ -1802,8 +1834,19 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("draw:name", strFrameCount);
                 _writer.WriteAttributeString("text:anchor-type", "paragraph");
                 // _writer.WriteAttributeString("text:anchor-type", anchorType);
-                _writer.WriteAttributeString("svg:width", rectWidth + imgWUnit);
-                _writer.WriteAttributeString("svg:height", rectHeight + imgHUnit);
+
+                if (rectWidth.IndexOf("%") == -1)
+                    width = rectWidth + imgWUnit;
+                else
+                    width = "100%";
+
+                if (rectHeight.IndexOf("%") == -1)
+                    height = rectHeight + imgWUnit;
+                else
+                    height = "100%";
+
+                _writer.WriteAttributeString("svg:width", width);
+                _writer.WriteAttributeString("svg:height", height);
 
                 //_writer.WriteAttributeString("style:rel-height", "scale");
                 //_writer.WriteAttributeString("style:rel-width", "100%");
@@ -1844,20 +1887,26 @@ namespace SIL.PublishingSolution
                     _writer.WriteEndElement(); // for Textframe
                     _allCharacter.Pop();    // retrieving it again.
                     isImage = false;
-                    imageClass = "";
+                    _imageClass = "";
                     _isParagraphClosed = true;
 
                 }
             }
             else // With Caption
             {
-                if (imageClass.Length > 0 && _closeChildName == imageClass)
+                if (_imageClass.Length > 0 && _closeChildName == _imageClass)
                 {
+                    if (_forcedPara)
+                    {
+                        _writer.WriteEndElement(); // for ParagraphStyle}
+                        _forcedPara = false;
+                    }
+
 
                     _writer.WriteEndElement();// for ParagraphStyle
                     _writer.WriteEndElement(); // for Textframe
                     isImage = false;
-                    imageClass = "";
+                    _imageClass = "";
                     _isParagraphClosed = true;
                 }
             }
