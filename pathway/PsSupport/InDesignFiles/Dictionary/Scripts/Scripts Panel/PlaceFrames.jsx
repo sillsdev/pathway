@@ -14,10 +14,10 @@ var margin=new Array("letHead", "1.5", "4.5", "1.666667", "4.5");//
 // Created By:   James Prabu 
 // Created On: Sep 10 2009   
 // Modified By:  James Prabu                        
-// Modified On:  July 29 2010 
-// Task Number : TD-1494(InDesign: Improve Macro performance for formating)
+// Modified On:  Dec 16 2010 
+// Task Number : TD-1740(Text not placed on right page of spread)
 // <remarks> 
-// main changes in  SetOverflowsPages(), FitFrameToPage(), PlaceFrame()
+// main changes in  main(removed startEvent), SetOverflowsPages(commented frameHeight > pageHeight) 
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -89,9 +89,13 @@ function partialMacro()
 function main()
 {
 	
+
+/*	
 	startEvent=startEvent + 1;
 	if(startEvent>1) //for other than Startup Event
 		myDocument  = app.activeDocument;
+*/
+	myDocument  = app.documents[app.documents.length-1]
 
 			
 	var d = new Date();
@@ -125,6 +129,8 @@ function main()
 	PlaceFrames();
 	d = new Date();
 	times=times + "\n" + d;
+	
+	
 
 	times="\n" + times + "\nOptionals";
 	times=times + "\n" + d;
@@ -301,6 +307,7 @@ function PlaceFrames()
 			//alert(currentMarginTop);
 			//currentMarginTop = marginTop + (frameBounds[2] - frameBounds[0]);
 			//myStory.geometricBounds = [frameBounds[0], myPage.marginPreferences.left , frameBounds[2], pageWidth - myPage.marginPreferences.left]; //(pageWidth - marginLeft)
+			
 		}
 
 		if(firstParagraphStyle == letterParagraphStyle)//"lethead_dicbody"
@@ -464,7 +471,7 @@ function SetOverflowsPages(myStory,frameBounds)
 			//myTextFrame.fit(FitOptions.frameToContent);
 			myTextFrame.previousTextFrame = myStory;
 			myTextFrame.geometricBounds = [marginTop, marginLeft, pageHeight, frameWidth + marginLeft]; //(pageWidth - marginLeft) 
-			myTextFrame.fit(FitOptions.frameToContent);
+			//myTextFrame.fit(FitOptions.frameToContent);
 			//myTextFrame.geometricBounds = [marginTop, marginLeft, pageHeight, frameWidth + marginLeft]; //(pageWidth - marginLeft) 
 			myTextFrame.textFramePreferences.textColumnCount  = myStory.textFramePreferences.textColumnCount ;
 			myTextFrame.textFramePreferences.textColumnGutter  = myStory.textFramePreferences.textColumnGutter;
@@ -488,7 +495,10 @@ function SetOverflowsPages(myStory,frameBounds)
 			  }
 		  
 			MoveFrame(myTextFrame, _marginTop, pageNo);
+/*
 			fitFrameBound = myTextFrame.geometricBounds;
+			
+			
 			frameHeight = fitFrameBound[2];
 			
 			//alert("adjust  " + frameHeight);
@@ -496,18 +506,19 @@ function SetOverflowsPages(myStory,frameBounds)
 			if( frameHeight > pageHeight)	
 			 {
 				//alert("re-adjust");
-				myTextFrame.geometricBounds = [_marginTop, marginLeft, pageHeight, frameWidth + marginLeft]; //(pageWidth - marginLeft) 
+				myTextFrame.geometricBounds = [_marginTop, fitFrameBound[1], pageHeight, frameWidth + fitFrameBound[1]]; //(pageWidth - marginLeft) 
 				currentMarginTop = marginTop;
 			 }
 			else
 			{
 				frameHeight += 2;
-				myTextFrame.geometricBounds = [_marginTop, marginLeft, frameHeight, frameWidth + marginLeft]; //(pageWidth - marginLeft) 
+				myTextFrame.geometricBounds = [_marginTop, fitFrameBound[1], frameHeight, frameWidth + fitFrameBound[1]]; //(pageWidth - marginLeft) 
 				//fitFrameBound = myTextFrame.geometricBounds;
 				currentMarginTop = parseFloat(fitFrameBound[2]); //Global Variable
 			}
+*/			
 			myStory=myTextFrame;
-			
+
 			if(loopNo > 3)
 				break;
 		}
@@ -643,7 +654,6 @@ function CollectAllFrame()
 function MoveFrame(myStory, currentMarginTop, pageNo)
 {
 	//alert(currentMarginTop);
-	
 	myPage = myDocument.pages.item(pageNo);
 	marginLeft = myPage.marginPreferences.left;
 	marginRight = myPage.marginPreferences.right;
@@ -653,6 +663,7 @@ function MoveFrame(myStory, currentMarginTop, pageNo)
 	{
 		if((pageNo % 2) == 0 && pageNo > 0)//For Right Page and Not First page
 		{
+			//alert(pageWidth);
 			myStory.move([marginLeft + pageWidth, currentMarginTop]);
 		}
 		else
