@@ -409,24 +409,38 @@ namespace SIL.PublishingSolution
         {
             RemoveClassHyphen();
             _IDProperty[_propertyKey] = Add_pt(propertyValue);
+            IncludeBorder(_propertyKey);
         }
 
- 
         public void PaddingRight(string propertyValue)
         {
             RemoveClassHyphen();
             _IDProperty[_propertyKey] = Add_pt(propertyValue);
+            IncludeBorder(_propertyKey);
         }
         public void PaddingTop(string propertyValue)
         {
             RemoveClassHyphen();
             _IDProperty[_propertyKey] = Add_pt(propertyValue);
+            IncludeBorder(_propertyKey);
         }
         public void PaddingBottom(string propertyValue)
         {
             RemoveClassHyphen();
             _IDProperty[_propertyKey] = Add_pt(propertyValue);
+            IncludeBorder(_propertyKey);
         }
+
+        public void IncludeBorder(string propertyKey)
+        {
+            if (propertyKey.IndexOf("padding") == -1) return;
+            string borderProperty = propertyKey.Replace("padding", "border");
+            if (!_IDProperty.ContainsKey(borderProperty))
+            {
+                _IDProperty[borderProperty] = "0.5pt solid #ffffff";
+            }
+        }
+
         public void Mirror(string propertyValue)
         {
             _IDProperty["FacingPages"] = propertyValue;

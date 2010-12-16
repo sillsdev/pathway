@@ -776,6 +776,26 @@ namespace Test.OpenOfficeWriter
             Assert.IsTrue(returnValue);
         }
 
+        [Test]
+        public void Padding_Node()
+        {
+            const string file = "Padding";
+
+            string input = FileInput(file + ".css");
+            string output = FileOutput(file + "styles.xml");
+            GetCssClass(input, output);
+
+            _validate = new ValidateXMLFile(output);
+            _validate.ClassName = "entry";
+            _validate.ClassProperty.Add("fo:border-left", "0.5pt solid #ffffff");
+            _validate.ClassProperty.Add("fo:border-right", "0.5pt solid #ffffff");
+            _validate.ClassProperty.Add("fo:border-top", "0.5pt solid #ffffff");
+            _validate.ClassProperty.Add("fo:border-bottom", "0.5pt solid #ffffff");
+
+            returnValue = _validate.ValidateNodeAttributesNS(true);
+            Assert.IsTrue(returnValue);
+        }
+
         ///<summary>
         ///TD-270 (Direction:ltr)
         /// <summary>
