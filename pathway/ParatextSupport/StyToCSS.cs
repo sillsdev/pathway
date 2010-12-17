@@ -10,9 +10,9 @@ namespace SIL.PublishingSolution
 	public class StyToCSS
 	{
 	    private string _styFullPath, _cssFullPath;
-        Dictionary<string, Dictionary<string, string>> _styleInfo = new Dictionary<string, Dictionary<string, string>>();
-        Dictionary<string, string> _cssProp;
-        Dictionary<string, string> _mapClassName = new Dictionary<string, string>();
+        private Dictionary<string, Dictionary<string, string>> _styleInfo = new Dictionary<string, Dictionary<string, string>>();
+		private Dictionary<string, string> _cssProp;
+		private Dictionary<string, string> _mapClassName = new Dictionary<string, string>();
 
 		/// ------------------------------------------------------------
 		/// <summary>
@@ -42,45 +42,39 @@ namespace SIL.PublishingSolution
 		/// ------------------------------------------------------------
 		private void FindStyFile(string database)
         {
-            string ssfFile = database + ".ssf";
-            string ssfFullPath;
-            if (File.Exists("c:\\My Paratext Projects\\" + ssfFile))
-            {
-                ssfFullPath = "c:\\My Paratext Projects\\" + ssfFile;
-            }
-            else if (File.Exists("d:\\My Paratext Projects\\" + ssfFile))
-            {
-                ssfFullPath = "d:\\My Paratext Projects\\" + ssfFile;
-            }
-            else
-            {
-                Debug.WriteLine(ssfFile + " does not exist.");
-                return;
-            }
-            //string ssfFile;
+			string ssfFile = database + ".ssf";
+			string ssfFullPath;
+			if (File.Exists("c:\\My Paratext Projects\\" + ssfFile))
+			{
+				ssfFullPath = "c:\\My Paratext Projects\\" + ssfFile;
+			}
+			else if (File.Exists("d:\\My Paratext Projects\\" + ssfFile))
+			{
+				ssfFullPath = "d:\\My Paratext Projects\\" + ssfFile;
+			}
+			else
+			{
+				Debug.WriteLine(ssfFile + " does not exist.");
+				return;
+			}
+			//string ssfFile;
 
-            bool isStylesheet=false;
-            var reader = new XmlTextReader(ssfFullPath) {XmlResolver = null};
-            while (reader.Read())
-            {
-                if (reader.NodeType == XmlNodeType.Element)
-                {
-                    if (reader.Name == "StyleSheet") // Is class name null
-                    {
-                        isStylesheet = true;
-                    }
-                }
-                else if (reader.NodeType == XmlNodeType.Text)
-                {
-                    if (isStylesheet) // Is class name null
-                    {
-                        ssfFile = reader.Value;
-                        break;
-                    }
-                }
-            }
-            reader.Close();
-            _styFullPath = Common.PathCombine(Path.GetDirectoryName(ssfFullPath), ssfFile);
+			bool isStylesheet = false;
+			var reader = new XmlTextReader(ssfFullPath) { XmlResolver = null };
+			while (reader.Read())
+			{
+				if (reader.NodeType == XmlNodeType.Element && reader.Name == "StyleSheet") // Is class name null
+				{
+					isStylesheet = true;
+				}
+				else if (reader.NodeType == XmlNodeType.Text && isStylesheet)
+				{
+					ssfFile = reader.Value;
+					break;
+				}
+			}
+			reader.Close();
+			_styFullPath = Common.PathCombine(Path.GetDirectoryName(ssfFullPath), ssfFile);
         }
 
 		/// ------------------------------------------------------------------------
@@ -116,6 +110,7 @@ namespace SIL.PublishingSolution
         {
             string value;
             string word = Common.LeftString(line, " ");
+
             switch (word)
             {
                 case "\\Name":
@@ -187,7 +182,8 @@ namespace SIL.PublishingSolution
 		private void CreateClass(string line)
         {
             int start = line.IndexOf(" ") + 1;
-            int end = line.IndexOf(" ", start);
+			int iSecondSpace = line.IndexOf(" ", start);
+            int end = (iSecondSpace > start) ? iSecondSpace : line.Length;
             string className = line.Substring(start, end - start);
 
             if (className.IndexOf("...") > 0)

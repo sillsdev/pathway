@@ -50,7 +50,9 @@ namespace SIL.PublishingSolution
 				Debug.Fail("Missing writing system parameter for XSLT");
 				m_xslParams.Add("ws", "zxx");
 			}
-
+			object projObj;
+			if (m_xslParams.TryGetValue("projName", out projObj))
+				m_projectName = (string)projObj;
 			LoadStyleSheets();
 		}
 
