@@ -691,7 +691,6 @@ namespace Test.OpenOfficeWriter
         /// <summary>
         /// </summary>      
         [Test]
-        [Ignore]
         public void FontWeightBolder_Node()
         {
             const string file = "FontWeightBolder";
@@ -709,15 +708,15 @@ namespace Test.OpenOfficeWriter
             Assert.IsTrue(returnValue);
 
             _validate.ClassName = "b";
-            _validate.ClassProperty.Add("fo:font-weight", "lighter");
-            _validate.ClassProperty.Add("fo:font-weight-complex", "lighter");
+            _validate.ClassProperty.Add("fo:font-weight", "400");
+            _validate.ClassProperty.Add("fo:font-weight-complex", "400");
 
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
 
             _validate.ClassName = "c";
-            _validate.ClassProperty.Add("fo:font-weight", "bolder");
-            _validate.ClassProperty.Add("fo:font-weight-complex", "bolder");
+            _validate.ClassProperty.Add("fo:font-weight", "700");
+            _validate.ClassProperty.Add("fo:font-weight-complex", "700");
 
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
