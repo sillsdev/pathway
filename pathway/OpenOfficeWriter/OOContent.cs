@@ -843,7 +843,10 @@ namespace SIL.PublishingSolution
             }
             string modifiedContent = ModifiedContent(content, _previousParagraphName, _characterName);
             WriteCharacterStyle(modifiedContent, _characterName, false);
-
+            if (_isDropCap) // until the next paragraph
+            {
+                _isDropCap = false;
+            }
             _psuedoBefore.Clear();
         }
 
