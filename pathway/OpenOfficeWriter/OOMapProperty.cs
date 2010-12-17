@@ -337,14 +337,14 @@ namespace SIL.PublishingSolution
 
         public void LineHeight(string propertyValue)
         {
-            //_propertyKey = "line-height";
+            _propertyKey = "line-height";
             //const bool lineHeight = false;
             //propertyValue = FontHeight(propertyValue, lineHeight);
             //if (propertyValue == null)
             //{
             //    _propertyKey = "";
             //}
-            _IDProperty[_propertyKey] = propertyValue;
+            _IDProperty[_propertyKey] = Add_pt(propertyValue);
 
         }
         public void VerticalAlign(string propertyValue)

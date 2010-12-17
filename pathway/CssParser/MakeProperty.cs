@@ -310,6 +310,7 @@ namespace SIL.PublishingSolution
                     ColumnGap(styleAttributeInfo);
                     break;
                 case "line-height":
+                case "-ps-fixed-line-height":
                     LineHeight(styleAttributeInfo);
                     break;
                 case "counter-increment":

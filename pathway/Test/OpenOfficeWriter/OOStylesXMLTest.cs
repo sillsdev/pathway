@@ -1243,7 +1243,6 @@ namespace Test.OpenOfficeWriter
         ///TD-461 (Open Office fixed-line-height: 14pt;)
         ///</summary>      
         [Test]
-        [Ignore]
         public void FixedLineHeightTest_Node()
         {
             const string file = "fixed-line-height";

@@ -909,9 +909,18 @@ namespace SIL.PublishingSolution
                 {
                     float value = float.Parse(property.Value.Replace("%", ""));
                     _tempStyle[property.Key] = (ancestorFontSize * value / 100).ToString() ;
+                    const string point = "pt";
                     if (_outputType != Common.OutputType.IDML)
                     {
-                        _tempStyle[property.Key] = (ancestorFontSize * value / 100).ToString() + "pt";
+                        float size = ancestorFontSize*value/100;
+                        if (property.Key == "line-height")
+                        {
+                            float basepoint = size - ancestorFontSize;
+                            if (basepoint <= 0) basepoint = ancestorFontSize; // if 1eem or 0em
+                            size = basepoint;
+                        }
+                        _tempStyle[property.Key] = size + point;
+
                         if (property.Key == "column-gap") // For column-gap: 2em; change the value as (-ve)
                         {
                             _dictColumnGapEm["Sect_" + _className.Trim()]["columnGap"] = _tempStyle[property.Key];
