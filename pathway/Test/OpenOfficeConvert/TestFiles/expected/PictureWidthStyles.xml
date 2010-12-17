@@ -8,6 +8,7 @@
     <style:font-face style:name="MS Mincho" svg:font-family="'MS Mincho'" style:font-family-generic="system" style:font-pitch="variable" />
     <style:font-face style:name="Tahoma" svg:font-family="'Tahoma'" style:font-family-generic="system" style:font-pitch="variable" />
     <style:font-face style:name="Scheherazade Graphite Alpha" svg:font-family="'Scheherazade Graphite Alpha'" />
+    <style:font-face style:name="Latha" svg:font-family="'Latha'" />
   </office:font-face-decls>
   <office:styles>
     <style:style style:name="pictureCaption_pictureRight_entry_letData" style:family="paragraph" style:parent-style-name="pictureRight_entry_letData" />
