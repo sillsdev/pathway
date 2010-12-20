@@ -1125,19 +1125,22 @@ namespace SIL.PublishingSolution
 
         private void WordCharSpace(float ancestorFontSize)
         {
-            if (_tempStyle.ContainsKey("DesiredLetterSpacing"))
+            if (_outputType == Common.OutputType.IDML)
             {
-                float value = float.Parse(_tempStyle["DesiredLetterSpacing"]);
-                float percentage = value / ancestorFontSize * 100 * 3.6F;
-                _tempStyle["DesiredLetterSpacing"] = percentage.ToString();
-                _tempStyle["MaximumLetterSpacing"] = percentage.ToString();
-            }
-            if (_tempStyle.ContainsKey("DesiredWordSpacing"))
-            {
-                float value = float.Parse(_tempStyle["DesiredWordSpacing"]);
-                float percentage = value / ancestorFontSize * 100 * 3.6F;
-                _tempStyle["DesiredWordSpacing"] = percentage.ToString();
-                _tempStyle["MaximumWordSpacing"] = percentage.ToString();
+                if (_tempStyle.ContainsKey("DesiredLetterSpacing"))
+                {
+                    float value = float.Parse(_tempStyle["DesiredLetterSpacing"]);
+                    float percentage = value/ancestorFontSize*100*3.6F;
+                    _tempStyle["DesiredLetterSpacing"] = percentage.ToString();
+                    _tempStyle["MaximumLetterSpacing"] = percentage.ToString();
+                }
+                if (_tempStyle.ContainsKey("DesiredWordSpacing"))
+                {
+                    float value = float.Parse(_tempStyle["DesiredWordSpacing"]);
+                    float percentage = value/ancestorFontSize*100*3.6F;
+                    _tempStyle["DesiredWordSpacing"] = percentage.ToString();
+                    _tempStyle["MaximumWordSpacing"] = percentage.ToString();
+                }
             }
         }
 
