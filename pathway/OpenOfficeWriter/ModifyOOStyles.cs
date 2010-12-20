@@ -139,7 +139,8 @@ namespace SIL.PublishingSolution
             _nameElement.SetAttribute("style:family", familyType);
             _nameElement.SetAttribute("style:parent-style-name", parent_Type[0]); 
             //style:family="paragraph" style:parent-style-name="none">
-            AddParaTextNode(className, _node);
+
+            AddParaTextNode(className, _node, familyType);
 
 
             //SetLanguage(className.Key);
@@ -150,7 +151,24 @@ namespace SIL.PublishingSolution
             //SetTagNode();
         }
 
-        private void AddParaTextNode(KeyValuePair<string, Dictionary<string, string>> className, XmlNode node)
+        /// <summary>
+        /// Moves Background color to text property from para property if it is span
+        /// </summary>
+        /// <param name="para"></param>
+        /// <param name="text"></param>
+        /// <param name="familyType"></param>
+        private void BackgroundColorSpan(Dictionary<string, string> para, Dictionary<string, string> text,string familyType)
+        {
+            string backColorKey = "fo:background-color";
+            if (para.ContainsKey(backColorKey) && familyType == "text")
+            {
+                text[backColorKey] = para[backColorKey];
+                para.Remove(backColorKey);
+            }
+            
+        }
+
+        private void AddParaTextNode(KeyValuePair<string, Dictionary<string, string>> className, XmlNode node, string familyType)
         {
             _paragraphProperty.Clear();
             _textProperty.Clear();
@@ -189,6 +207,9 @@ namespace SIL.PublishingSolution
                 }
 
             }
+
+            BackgroundColorSpan(_paragraphProperty, _textProperty, familyType);
+
             if (_languageStyleName.ContainsKey(className.Key))
             {
                 string language, country;
@@ -486,170 +507,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void SetLanguage(string className)
-        {
-            if (_tagType == "paragraph") // Note - If needed apply only for paragraph style.
-            {
-                if (_languageStyleName.ContainsKey(className)) // if lang style then write language for this tag.
-                {
-                    string lang = _languageStyleName[className];
-                    WriteEntryLanguage(lang);
-                }
-            }
-        }
-
-        private void WriteEntryLanguage(string lang)
-        {
-            string language = string.Empty;
-            switch (lang)
-            {
-                case "es":
-                case "spa":
-                    language = "$ID/Spanish: Castilian";
-                    break;
-                case "pt":
-                case "por":
-                    language = "$ID/Portuguese";
-                    break;
-                case "en":
-                case "eng":
-                    language = "$ID/English: USA";
-                    break;
-                case "bg":
-                case "bul":
-                    language = "$ID/Bulgarian";
-                    break;
-                case "ca":
-                case "cat":
-                    language = "$ID/Catalan";
-                    break;
-                case "da":
-                case "dan":
-                    language = "$ID/Danish";
-                    break;
-                case "nl":
-                case "nld":
-                    language = "$ID/Dutch";
-                    break;
-                case "fr":
-                case "fra":
-                    language = "$ID/French";
-                    break;
-                case "el":
-                case "ell":
-                    language = "$ID/Greek";
-                    break;
-                case "hu":
-                case "hun":
-                    language = "$ID/Hungarian";
-                    break;
-                case "it":
-                case "ita":
-                    language = "$ID/Italian";
-                    break;
-                case "pl":
-                case "pol":
-                    language = "$ID/Polish";
-                    break;
-                case "ru":
-                case "rus":
-                    language = "$ID/Russian";
-                    break;
-                case "sk":
-                case "slk":
-                    language = "$ID/Slovak";
-                    break;
-                case "sv":
-                case "swe":
-                    language = "$ID/Swedish";
-                    break;
-                case "tr":
-                case "tur":
-                    language = "$ID/Turkish";
-                    break;
-                case "uk":
-                case "ukr":
-                    language = "$ID/Ukrainian";
-                    break;
-
-                default:
-                    language = "$ID/English: USA";
-                    break;
-            }
-            _nameElement.SetAttribute("AppliedLanguage", language);
-        }
-
-        private void SetBasedOn(string parentStyle, string sourceClassName)
-        {
-            string style = "//" + _tagType + "[@Self='" + sourceClassName + "']/Properties/BasedOn";
-            XmlNode nodeBasedOn = _root.SelectSingleNode(style, nsmgr);
-            if (nodeBasedOn != null)
-            {
-                var nameElement = (XmlElement)nodeBasedOn;
-                nameElement.SetAttribute("type", "object");
-                nodeBasedOn.InnerText = _tagType + "/" + parentStyle;
-            }
-        }
-
-        private void SetAppliedFont(Dictionary<string, string> className, string sourceClassName)
-        {
-            if (className.ContainsKey("AppliedFont"))
-        {
-            string style = "//" + _tagType + "[@Self='" + sourceClassName + "']/Properties/AppliedFont";
-            XmlNode nodeAppliedFont = _root.SelectSingleNode(style, nsmgr);
-            if (nodeAppliedFont != null)
-            {
-                var nameElement = (XmlElement)nodeAppliedFont;
-                nameElement.SetAttribute("type", "string");
-                    nodeAppliedFont.InnerText = className["AppliedFont"];
-                }
-            }
-        }
-
-        private void SetLineHeight(Dictionary<string, string> className, string sourceClassName)
-        {
-            if (className.ContainsKey("Leading"))
-            {
-                string style = "//" + _tagType + "[@Self='" + sourceClassName + "']/Properties/Leading";
-                XmlNode nodeLeading = _root.SelectSingleNode(style, nsmgr);
-                if (nodeLeading != null)
-                {
-                    var nameElement = (XmlElement)nodeLeading;
-                    string propertyType = Common.GetLeadingType(className);
-                    string text = className["Leading"];
-                    if (sourceClassName.IndexOf("ParagraphStyle/ChapterNumber") >= 0 || sourceClassName.IndexOf("CharacterStyle/ChapterNumber") >= 0)
-                    {
-                        propertyType = "enumeration";
-                        text = "Auto";
-                    }
-                    nameElement.SetAttribute("type", propertyType);
-                    nodeLeading.InnerText = text;
-                }
-            }
-        }
-        private void SetBaseLineShift(Dictionary<string, string> className, string sourceClassName)
-        {
-            if (className.ContainsKey("BaselineShift"))
-            {
-                if (sourceClassName.IndexOf("CharacterStyle/ChapterNumber") >= 0) //if (sourceClassName.IndexOf("ParagraphStyle/ChapterNumber") >= 0 || sourceClassName.IndexOf("CharacterStyle/ChapterNumber") >= 0)
-                {
-                    string style = "//" + _tagType + "[@Self='" + sourceClassName + "']";
-                    XmlNode baselineShift = _root.SelectSingleNode(style, nsmgr);
-                    if (baselineShift != null)
-                    {
-                        var nameElement = (XmlElement)baselineShift;
-                        string pointSize = className["PointSize"];
-                        int pt = int.Parse(pointSize);
-                        //int baseshift = pt - 12;
-                        int baseshift = pt * 2 / 3;
-                        int point = pt * 2/3;
-                        nameElement.SetAttribute("BaselineShift", "-" + baseshift);
-                        nameElement.SetAttribute("PointSize", "-" + point);
-                    }
-                
-                }
-            }
-        }
+ 
 
         #region CreateGraphicsStyle(string styleFilePath, string makeClassName, string parentName, string position, string side)
         /// -------------------------------------------------------------------------------------------
