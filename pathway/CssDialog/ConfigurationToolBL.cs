@@ -478,6 +478,34 @@ namespace SIL.PublishingSolution
             }
         }
 
+        /// <summary>
+        /// For TD-1745, To hidden the Dictionary and Scripture button in ConfigurationTool when it called from FLEX/Paratext
+        /// </summary>
+        protected void ShowInputTypeButton()
+        {
+            Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationTool: SetInputTypeButton");
+            string inpType = cTool.InputType;
+            if (inpType.Length > 0)
+            {
+                if (inpType.ToLower() == "scripture")
+                {
+                    btnScripture_ClickBL();
+                }
+                else
+                {
+                    cTool.BtnMobile.Visible = false;
+                    btnDictionary_ClickBL();
+                }
+                cTool.BtnScripture.Visible = false;
+                cTool.BtnDictionary.Visible = false;
+            }
+            else
+            {
+                cTool.BtnScripture.Visible = true;
+                cTool.BtnDictionary.Visible = true;
+            }
+        }
+
         public string AssemblyFileVersion
         {
             get
@@ -3167,6 +3195,7 @@ namespace SIL.PublishingSolution
             cTool.MinimumSize = new Size(497, 183);
             cTool.LoadSettings();
             SetInputTypeButton();
+            ShowInputTypeButton();
             CreateGridColumn();
             LoadParam(); // Load DictionaryStyleSettings / ScriptureStyleSettings
             ShowDataInGrid();
