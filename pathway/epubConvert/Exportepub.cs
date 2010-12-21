@@ -1187,11 +1187,12 @@ namespace SIL.PublishingSolution
             opf.WriteAttributeString("href", "toc.ncx");
             opf.WriteAttributeString("media-type", "application/x-dtbncx+xml");
             opf.WriteEndElement(); // item
-            opf.WriteStartElement("item");
-            opf.WriteAttributeString("id", "cover");
-            opf.WriteAttributeString("href", "cover.html");
-            opf.WriteAttributeString("media-type", "application/xhtml+xml");
-            opf.WriteEndElement(); // item
+            // NOTE: cover.html seems to be missing from the repository -- gt
+            //opf.WriteStartElement("item");
+            //opf.WriteAttributeString("id", "cover");
+            //opf.WriteAttributeString("href", "cover.html");
+            //opf.WriteAttributeString("media-type", "application/xhtml+xml");
+            //opf.WriteEndElement(); // item
             opf.WriteStartElement("item");
             opf.WriteAttributeString("id", "cover-image");
             opf.WriteAttributeString("href", "cover.png");
@@ -1291,11 +1292,12 @@ namespace SIL.PublishingSolution
             // guide
             opf.WriteStartElement("guide");
             // cover image
-            opf.WriteStartElement("reference");
-            opf.WriteAttributeString("href", "cover.html");
-            opf.WriteAttributeString("type", "cover");
-            opf.WriteAttributeString("title", "Cover");
-            opf.WriteEndElement(); // reference
+            // NOTE: cover.html seems to be missing from the repository -- gt
+            //opf.WriteStartElement("reference");
+            //opf.WriteAttributeString("href", "cover.html");
+            //opf.WriteAttributeString("type", "cover");
+            //opf.WriteAttributeString("title", "Cover");
+            //opf.WriteEndElement(); // reference
             // first xhtml filename
             opf.WriteStartElement("reference");
             opf.WriteAttributeString("type", "text");

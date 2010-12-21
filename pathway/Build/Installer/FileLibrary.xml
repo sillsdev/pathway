@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\ConfigurationTool\InDesignFiles\Dictionary\Scripts\Scripts Panel\Testing.jsx" ComponentGuid="9389054B-3808-4841-A53D-B0EBA7E73F65"/>
+	<File Path="Files\PathwaySupport\InDesignFiles\Dictionary\Scripts\Scripts Panel\Testing.jsx" ComponentGuid="FEBE60EE-2B61-46FA-BFF7-A7F2CDA86B7D"/>
 	<File Path="Files\PathwaySupport\Graphic\book_se.png" ComponentGuid="F386912D-60E8-4E9C-84FF-270E4EC34BEC"/>
 	<File Path="Files\PathwaySupport\Graphic\book_bte.png" ComponentGuid="998B121C-08DC-4330-88B0-AB885B549672"/>
 	<File Path="Files\ConfigurationTool\Graphic\book_se.png" ComponentGuid="773F4AE9-3F6A-4A89-9001-3EBECEE79745"/>
