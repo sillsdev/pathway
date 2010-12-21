@@ -1187,12 +1187,11 @@ namespace SIL.PublishingSolution
             opf.WriteAttributeString("href", "toc.ncx");
             opf.WriteAttributeString("media-type", "application/x-dtbncx+xml");
             opf.WriteEndElement(); // item
-            // NOTE: cover.html seems to be missing from the repository -- gt
-            //opf.WriteStartElement("item");
-            //opf.WriteAttributeString("id", "cover");
-            //opf.WriteAttributeString("href", "cover.html");
-            //opf.WriteAttributeString("media-type", "application/xhtml+xml");
-            //opf.WriteEndElement(); // item
+            opf.WriteStartElement("item");
+            opf.WriteAttributeString("id", "cover");
+            opf.WriteAttributeString("href", "cover.html");
+            opf.WriteAttributeString("media-type", "application/xhtml+xml");
+            opf.WriteEndElement(); // item
             opf.WriteStartElement("item");
             opf.WriteAttributeString("id", "cover-image");
             opf.WriteAttributeString("href", "cover.png");
