@@ -68,14 +68,46 @@ namespace SIL.PublishingSolution
         protected ArrayList _attribute;
         private string _isTagClass;
         private string _listType;
+
+        #region Anchor
         protected string _anchorBookMarkName = string.Empty;
         protected string _anchorIdValue = string.Empty;
         protected bool _anchorStart;
+        #endregion
 
         protected string _childName = string.Empty;
         protected string _closeChildName = string.Empty;
         protected bool _isNewParagraph;
         protected bool _isParagraphClosed = true;
+
+        #region Footnote
+        protected bool _chapterNoStart;
+        protected bool _verserNoStart;
+        protected string _chapterNo;
+        protected string _verseNo;
+        protected bool _footnoteStart = false;
+        protected bool isFootnote = false;
+        protected string footnoteClass = string.Empty;
+        protected StringBuilder footnoteContent = new StringBuilder();
+        protected ArrayList _FootNote = new ArrayList();
+        protected ArrayList _footnoteCallContent = new ArrayList();
+        protected ArrayList _footnoteMarkerContent = new ArrayList();
+        protected Dictionary<string, string> _footNoteMarker = new Dictionary<string, string>();
+        #endregion
+        #region counter
+        public Dictionary<string, Dictionary<string, string>> contentCounterIncrement = new Dictionary<string, Dictionary<string, string>>();
+        public Dictionary<string, string> ContentCounterReset = new Dictionary<string, string>();
+        public Dictionary<string, int> ContentCounter = new Dictionary<string, int>();
+        #endregion
+        #region Image
+        protected bool _imageInsert;
+        protected string _imageSource;
+        protected string _imageLongDesc;
+        protected string _imageClass = string.Empty;
+        protected string _imageSrcClass;
+        protected bool _isAutoWidthforCaption;
+
+        #endregion
 
         protected string _paragraphName;
         protected string _previousParagraphName;
@@ -88,12 +120,7 @@ namespace SIL.PublishingSolution
         protected bool _isclassNameExist;
         protected string _projectPath;
         protected string _classNameWithLang;
-        protected bool _imageInsert;
-        protected string _imageSource;
-        protected string _imageLongDesc;
-        protected string _imageClass = string.Empty;
-        protected string _imageSrcClass;
-        protected bool _isAutoWidthforCaption;
+
         protected Common.OutputType _outputType;
         protected string _listName = string.Empty;
 
@@ -102,26 +129,12 @@ namespace SIL.PublishingSolution
         private string _parentStyleName;
         protected ArrayList _visibilityClassName = new ArrayList();
         protected Dictionary<string, string> _replaceSymbolToText = new Dictionary<string, string>();
+
         protected List<string> _dropCap = new List<string>();
         protected bool _isDropCap;
 
-        public Dictionary<string, Dictionary<string, string>> contentCounterIncrement = new Dictionary<string, Dictionary<string, string>>();
-        public Dictionary<string, string> ContentCounterReset = new Dictionary<string, string>();
-        public Dictionary<string, int> ContentCounter = new Dictionary<string, int>();
-
-        protected  bool _chapterNoStart;
-        protected bool _verserNoStart;
-        protected string _chapterNo;
-        protected string _verseNo;
-        protected bool _footnoteStart = false;
-        protected bool isFootnote = false;
-        protected string footnoteClass = string.Empty;
-        protected StringBuilder footnoteContent = new StringBuilder();
-        protected ArrayList _FootNote = new ArrayList();
-        protected ArrayList _footnoteCallContent = new ArrayList();
-        protected ArrayList _footnoteMarkerContent = new ArrayList();
-        protected Dictionary<string, string> _footNoteMarker = new Dictionary<string, string>();
-
+        protected bool _isDisplayNone = false;
+        protected string _displayNoneStyle = string.Empty;
 
         #endregion
 
@@ -292,6 +305,11 @@ namespace SIL.PublishingSolution
             else if (value == "inline")
             {
                 _tagType = "span";
+            }
+            else if (value.ToLower() == "none")
+            {
+                _isDisplayNone = true;
+                _displayNoneStyle = _classNameWithLang;
             }
         }
 

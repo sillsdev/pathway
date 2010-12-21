@@ -177,41 +177,7 @@ namespace SIL.PublishingSolution
             _odtFiles = _structStyles.MasterDocument;
         }
 
-        /// -------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Generate Content.xml body from .xhtml
-        /// <list> 
-        /// </list>
-        /// </summary>
-        /// <param name="projInfo">Project Information</param>
-        /// <param name="structStyles">"style name" collection, which has relative values</param>
-        /// <returns> </returns>
-        /// -------------------------------------------------------------------------------------------
-        //public void CreateContent(ProgressBar pb, string Sourcefile, string targetPath, Styles structStyles, string fileType)
-        //public void CreateContent(PublicationInformation projInfo, Styles structStyles)
-        //{
-        //    //TODO: When the Input has been preprocessed, GetProjectType returns the wrong type!
-        //    //_projectType = Common.GetProjectType(projInfo.DefaultXhtmlFileWithPath);
-        //    _projectType = projInfo.ProjectInputType;
-        //    if (_projectType == "Scripture")
-        //    {
-        //        structStyles.IsMacroEnable = true;
-        //    }
-        //    InitializeObject(structStyles, projInfo.OutputExtension); // Creates new Objects
-        //    CreateFile(projInfo.TempOutputFolder);
-        //    //CreateSection(structStyles.SectionName);
-        //    //projInfo.DefaultXhtmlFileWithPath = PreProcess(projInfo.DefaultXhtmlFileWithPath, structStyles);
-        //    Common.SetProgressBarValue(projInfo.ProgressBar, projInfo.DefaultXhtmlFileWithPath);
-        //    CreateBody();
-        //    Console.WriteLine(Common.OdType.ToString());
-        //    if (Common.OdType != Common.OdtType.OdtMaster)
-        //        ProcessXHTML(projInfo.ProgressBar, projInfo.DefaultXhtmlFileWithPath, projInfo.TempOutputFolder);
-            
-        //    CloseFile(projInfo.TempOutputFolder, structStyles.ColumnGapEm);
-        //    AlterFrameWithoutCaption(projInfo.TempOutputFolder);
-        //    CleanUp();
-        //}
-
+ 
         public Dictionary<string, ArrayList> CreateStory(PublicationInformation projInfo,  Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
         {
             OldStyles styleInfo = new OldStyles(); 
@@ -620,42 +586,7 @@ namespace SIL.PublishingSolution
                 }
             }
         }
-        private void ProcessXHTML_id(string xhtmlFileWithPath)
-        {
-            try
-            {
-                while (_reader.Read())
-                {
-                    if (IsEmptyNode())
-                    {
-                        continue;
-                    }
 
-                    switch (_reader.NodeType)
-                    {
-                        case XmlNodeType.Element:
-                            //StartElement();
-                            break;
-                        case XmlNodeType.Text:
-                            //Write();
-                            break;
-                        case XmlNodeType.EndElement:
-                            //EndElement();
-                            break;
-                        case XmlNodeType.SignificantWhitespace:
-                            if (_reader.Value.Replace(" ", "") == "")
-                            {
-                                //Write();
-                            }
-                            break;
-                    }
-                }
-            }
-            catch (XmlException e)
-            {
-                var msg = new[] { e.Message, xhtmlFileWithPath };
-            }
-        }
 
         private void ProcessXHTML(ProgressBar pb, string Sourcefile, string targetPath)
         {
@@ -698,11 +629,9 @@ namespace SIL.PublishingSolution
                             break;
                         case XmlNodeType.EndElement:
                             EndElement();
-                            //EndElement(pb);
 
                             break;
                         case XmlNodeType.Text: // Text.Write
-                            //WriteText(_footnoteValue);
                             Write();
                             break;
                         case XmlNodeType.SignificantWhitespace:
@@ -769,11 +698,7 @@ namespace SIL.PublishingSolution
         }
         private void Write()
         {
-            //if (isFileCreated == false)
-            //{
-            //    //CreateFile();
-            //    _textFrameClass.Add(_childName);
-            //}
+            if (_isDisplayNone) return; // skip the node
 
             if (_isNewParagraph)
             {
@@ -784,7 +709,7 @@ namespace SIL.PublishingSolution
 
                 ClosePara();
 
-//todo extract drop caps
+                //todo extract drop caps
                 if (_isDropCap) // forcing new paragraph for drop caps
                 {
                     string currentParentStyle = _paragraphName;
@@ -954,7 +879,17 @@ namespace SIL.PublishingSolution
                         _forcedPara = true;
                     }
                 }
-
+                //Todo force para if span comes without para
+                //else if (!_isNewParagraph)
+                //{
+                //    //_isNewParagraph = false;
+                //    if (_paragraphName == null)
+                //    {
+                //        _paragraphName = StackPeek(_allParagraph); // _allParagraph.Pop();
+                //    }
+                //    _writer.WriteStartElement("text:p");
+                //    _writer.WriteAttributeString("text:style-name", _paragraphName); //_divClass
+                //}
                 _writer.WriteStartElement("text:span");
                 _writer.WriteAttributeString("text:style-name", characterStyle); //_util.ChildName
             }
@@ -1123,7 +1058,8 @@ namespace SIL.PublishingSolution
         /// <param name="targetPath"></param>
         private void StartElement(string targetPath)
         {
-            bool IsStyleExist = false;
+            //if (_isDisplayNone) return; // skip the node
+
             StartElementBase(_IsHeadword);
             SetClassCounter();
             Psuedo();
@@ -1142,7 +1078,6 @@ namespace SIL.PublishingSolution
 
         private void VisibilityCheck()
         {
-            //string
             if (_visibilityClassName.Contains(_className))
             {
                 isHiddenText = true;
@@ -1172,6 +1107,8 @@ namespace SIL.PublishingSolution
 
         private void Psuedo()
         {
+            if (_isDisplayNone) return; // skip the node
+
             // Psuedo Before
             if (_psuedoBeforeStyle != null)
             {
@@ -1184,61 +1121,63 @@ namespace SIL.PublishingSolution
                 _psuedoAfter[_childName] = _psuedoAfterStyle;
             }
         }
-        /// <summary>
-        /// To insert the Footnote symbol and the Text
-        /// </summary>
-        /// <param name="footCallSymb">FootNote call symbol</param>
-        /// <param name="clsName">Class name for the FootNote</param>
-        /// <param name="text">Text of FootNote</param>
-        /// <param name="marker">Marker Format symbol added to boottom</param>
-        private void InsertFootCall(string footCallSymb, string clsName, string text, string marker)
-        {
-            if (_structStyles.ContentCounterReset.ContainsKey(clsName))
-                _autoFootNoteCount = 0;
-            _autoFootNoteCount++;
-            _writer.WriteStartElement("text:note");
-            _writer.WriteAttributeString("text:id", "ftn" + (_autoFootNoteCount));
-            _writer.WriteAttributeString("text:note-class", "footnote");
-            _writer.WriteStartElement("text:note-citation");
-            _writer.WriteAttributeString("text:label", footCallSymb);
-            _writer.WriteString(footCallSymb);
-            _writer.WriteEndElement();
-            _writer.WriteStartElement("text:note-body");
-            _writer.WriteStartElement("text:p");
-            _writer.WriteAttributeString("text:style-name", clsName);
-            if (marker != string.Empty)
-            {
-                _writer.WriteStartElement("text:span");
-                _writer.WriteAttributeString("text:style-name", "Footnote Characters");
-                _writer.WriteString(marker);
-                _writer.WriteEndElement();
-            }
-            _writer.WriteString(text);
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-        }
+        ///// <summary>
+        ///// To insert the Footnote symbol and the Text
+        ///// </summary>
+        ///// <param name="footCallSymb">FootNote call symbol</param>
+        ///// <param name="clsName">Class name for the FootNote</param>
+        ///// <param name="text">Text of FootNote</param>
+        ///// <param name="marker">Marker Format symbol added to boottom</param>
+        //private void InsertFootCall(string footCallSymb, string clsName, string text, string marker)
+        //{
+        //    if (_structStyles.ContentCounterReset.ContainsKey(clsName))
+        //        _autoFootNoteCount = 0;
+        //    _autoFootNoteCount++;
+        //    _writer.WriteStartElement("text:note");
+        //    _writer.WriteAttributeString("text:id", "ftn" + (_autoFootNoteCount));
+        //    _writer.WriteAttributeString("text:note-class", "footnote");
+        //    _writer.WriteStartElement("text:note-citation");
+        //    _writer.WriteAttributeString("text:label", footCallSymb);
+        //    _writer.WriteString(footCallSymb);
+        //    _writer.WriteEndElement();
+        //    _writer.WriteStartElement("text:note-body");
+        //    _writer.WriteStartElement("text:p");
+        //    _writer.WriteAttributeString("text:style-name", clsName);
+        //    if (marker != string.Empty)
+        //    {
+        //        _writer.WriteStartElement("text:span");
+        //        _writer.WriteAttributeString("text:style-name", "Footnote Characters");
+        //        _writer.WriteString(marker);
+        //        _writer.WriteEndElement();
+        //    }
+        //    _writer.WriteString(text);
+        //    _writer.WriteEndElement();
+        //    _writer.WriteEndElement();
+        //    _writer.WriteEndElement();
+        //}
 
         private void EndElement()
         {
             _characterName = null;
             _closeChildName = StackPop(_allStyle);
-
-            string sectionName = Common.LeftString(_closeChildName, "_");
-            if (_sectionName.Contains(sectionName)) // section close
-            {
-                _writer.WriteEndElement();
-            }
-            //Note: verify &todo in OO td2000 
-            /*
-            SetHeadwordFalse();
-            ClosefooterNote();
-            EndElementForImage();
-            */
-            ClosefooterNote();
-            EndElementForImage();
-
             if (_closeChildName == string.Empty) return;
+            string closeChild = Common.LeftString(_closeChildName, "_");
+
+            CheckDisplayNone(closeChild);
+            SectionClose(closeChild);
+            //SetHeadwordFalse();  Note: verify &todo in OO td2000 
+            ClosefooterNote();
+            EndElementForImage();
+            PseudoAfter();
+            EndElementBase(); //Note: base class
+            ColumnClass();
+
+            _classNameWithLang = StackPeek(_allStyle);
+            _classNameWithLang = Common.LeftString(_classNameWithLang, "_");
+        }
+
+        private void PseudoAfter()
+        {
             if (_psuedoAfter.Count > 0)
             {
                 if (_psuedoAfter.ContainsKey(_closeChildName))
@@ -1248,8 +1187,10 @@ namespace SIL.PublishingSolution
                     _psuedoAfter.Remove(_closeChildName);
                 }
             }
+        }
 
-            EndElementBase();
+        private void ColumnClass()
+        {
             if (_columnClass.Count > 0)
             {
                 if (_closeChildName == _columnClass[_columnClass.Count - 1].ToString())
@@ -1258,10 +1199,23 @@ namespace SIL.PublishingSolution
                     //////////////////////////CloseFile(); ???
                 }
             }
-            _classNameWithLang = StackPeek(_allStyle);
-            _classNameWithLang = Common.LeftString(_classNameWithLang, "_");
         }
-       #endregion
+
+        private void SectionClose(string closeChild)
+        {
+            if (_sectionName.Contains(closeChild)) // section close
+            {
+                _writer.WriteEndElement();
+            }
+        }
+
+        private void CheckDisplayNone(string closeChild)
+        {
+            if (closeChild.Length > 0 && _displayNoneStyle == closeChild)
+                _isDisplayNone = false;
+        }
+
+        #endregion
 
         #region Private Methods
 
