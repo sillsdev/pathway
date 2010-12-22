@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\PathwaySupport\Styles\Dictionary\Vernacular_rtl.css" ComponentGuid="06AA08A5-DAD2-459D-987C-1AD6D7A089D1"/>
+	<File Path="Files\PathwaySupport\epub\OEBPS\cover.html" ComponentGuid="5516FAE7-73D0-45DF-A440-93C245AE9EF9"/>
+	<File Path="Files\ConfigurationTool\Styles\Dictionary\Vernacular_rtl.css" ComponentGuid="A1D066D8-EEAD-4E96-96E8-5027126421C0"/>
+	<File Path="Files\ConfigurationTool\epub\OEBPS\cover.html" ComponentGuid="2D35A6CF-79E1-45E9-A674-BD743C93A531"/>
 	<File Path="Files\ConfigurationTool\InDesignFiles\Dictionary\Scripts\Scripts Panel\Testing.jsx" ComponentGuid="9389054B-3808-4841-A53D-B0EBA7E73F65"/>
 	<File Path="Files\PathwaySupport\InDesignFiles\Dictionary\Scripts\Scripts Panel\Testing.jsx" ComponentGuid="FEBE60EE-2B61-46FA-BFF7-A7F2CDA86B7D"/>
 	<File Path="Files\PathwaySupport\Graphic\book_se.png" ComponentGuid="F386912D-60E8-4E9C-84FF-270E4EC34BEC"/>
