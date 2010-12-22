@@ -176,11 +176,13 @@ namespace SIL.PublishingSolution
             _xhtmlClassAttrib.SetClassAttrib(_className, _xhtmlAttribute);
             classInfo.CoreClass = _xhtmlClassAttrib;
             classInfo.Precede = _precedeClassAttrib;
+
+            BlockInline();
+
             _childName = FindStyleName();
             GetHeadwordStyles(isHeadword);
             _allStyleInfo.Push(classInfo);
 
-            BlockInline();
             string[] divTypeList = new[] { "div", "ol", "ul", "li", "p", "body", "h1", "h2", "h3", "h4", "h5", "h6" };
             List<string> divType = new List<string>(divTypeList);
             if (divType.Contains(_tagType))
