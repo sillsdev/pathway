@@ -1,0 +1,32 @@
+.complexform-form,
+.crossref,
+.etymology-form,
+.example,
+.headword,
+.headword-minor,
+.LexEntry-publishStemComponentTarget-MLHeadWordPub,
+.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub,
+.sense-crossref,
+.variantref-form {
+    font-size: 18pt;
+    direction: rtl;
+}
+
+.xitem[lang='ur'] {
+    font-size: 18pt;
+    direction: rtl;
+}
+
+.xitem[lang='ar'] {
+    font-size: 18pt;
+    direction: rtl;
+}
+
+.letData, .entry, .revEntry, .subentry {
+    direction: rtl;
+    text-align: right;
+    unicode-bidi: embed;
+}
+.headword > .xitem + .xitem {
+    font-size: 18pt;
+}
