@@ -318,21 +318,25 @@ namespace SIL.PublishingSolution
                             ArrayList genericFamilyList = new ArrayList(new[] { "serif", "sans-serif", "cursive", "fantasy", "monospace" });
 
                             fontName = font[0];
-                            if (genericFamilyList.Contains(genericFamily))
+                            for (int i = 0; i < fontLength; i++)
                             {
-                                //string xmlFileNameWithPath = Common.PathCombine(Common.GetPSApplicationPath(), "GenericFont.xml");
-                                string xmlFileNameWithPath = Common.PathCombine(PsSupportPath, "GenericFont.xml");
-                                string xPath = "//font-preference/generic-family [@name = \"" + genericFamily + "\"]";
-                                ArrayList fontList = new ArrayList();
-                                fontList = Common.GetXmlNodeList(xmlFileNameWithPath, xPath);
-                                if (fontList.Count > 0)
+                                fontName = font[i].Replace("<", "");
+                                fontName = fontName.Replace(">", "");
+                                fontName = fontName.Replace("default", "").Trim();
+
+                                if (genericFamilyList.Contains(fontName))
                                 {
-                                    fontName = fontList[0].ToString();
+                                    //string xmlFileNameWithPath = Common.PathCombine(Common.GetPSApplicationPath(), "GenericFont.xml");
+                                    string xmlFileNameWithPath = Common.PathCombine(PsSupportPath, "GenericFont.xml");
+                                    string xPath = "//font-preference/generic-family [@name = \"" + fontName + "\"]";
+                                    ArrayList fontList = new ArrayList();
+                                    fontList = Common.GetXmlNodeList(xmlFileNameWithPath, xPath);
+                                    if (fontList.Count > 0)
+                                    {
+                                        fontName = fontList[0].ToString();
+                                        break;
+                                    }
                                 }
-                            }
-                            else
-                            {
-                                fontName = font[0];
                             }
 
                             attributeInfo.StringValue = fontName.Trim();

@@ -407,10 +407,17 @@ namespace Test.OpenOfficeWriter
             // letter6 no style
 
             _validate.ClassName = "letter7";
-            _validate.ClassProperty.Add("fo:font-family", "dummyfont");
+            _validate.ClassProperty.Add("fo:font-family", "dummyfamily");
 
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
+
+            _validate.ClassName = "letter8";
+            _validate.ClassProperty.Add("fo:font-family", "Times New Roman");
+
+            returnValue = _validate.ValidateNodeAttributesNS(false);
+            Assert.IsTrue(returnValue);
+
 
         }
 
