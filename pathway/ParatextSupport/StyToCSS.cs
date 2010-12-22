@@ -181,6 +181,8 @@ namespace SIL.PublishingSolution
         /// ------------------------------------------------------------
 		private void CreateClass(string line)
         {
+            if (line.IndexOf("DEPRECATED ") >= 0 || line.IndexOf("OBSOLETE ") >= 0)
+                line = line.Replace("DEPRECATED ", "").Replace("OBSOLETE ", "");
             int start = line.IndexOf(" ") + 1;
 			int iSecondSpace = line.IndexOf(" ", start);
             int end = (iSecondSpace > start) ? iSecondSpace : line.Length;
@@ -236,15 +238,17 @@ namespace SIL.PublishingSolution
 
             foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _styleInfo)
             {
-                if(cssClass.Key == "\\Name") return;
-                cssFile.WriteLine("." + cssClass.Key);
-                cssFile.WriteLine("{");
-                foreach (KeyValuePair<string, string> property in cssClass.Value)
+                if (cssClass.Key != "\\Name")
                 {
-                    cssFile.WriteLine(property.Key + ": " + property.Value + ";");
+                    cssFile.WriteLine("." + cssClass.Key);
+                    cssFile.WriteLine("{");
+                    foreach (KeyValuePair<string, string> property in cssClass.Value)
+                    {
+                        cssFile.WriteLine(property.Key + ": " + property.Value + ";");
+                    }
+                    cssFile.WriteLine("}");
+                    cssFile.WriteLine();
                 }
-                cssFile.WriteLine("}");
-                cssFile.WriteLine();
             }
             cssFile.Close();
         }
