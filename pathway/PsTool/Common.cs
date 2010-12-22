@@ -1409,6 +1409,16 @@ return FromProg(file);
         }
 
         /// <summary>
+        /// Path.GetFileNameWithoutEx failed in this case "5.25x8.25in 11pt Justified_2010-12-17_0251.xhtml"
+        /// </summary>
+        public static string GetFileNameWithoutExtension(string fileNameWithPath)
+        {
+            string fileName = Path.GetFileName(fileNameWithPath);
+            fileName = fileName.Substring(0, fileName.LastIndexOf('.'));
+            return fileName;
+        }
+
+        /// <summary>
         /// ol.myclass or ol
         /// </summary>
         /// <param name="newClassName">ol.myclass,div.class</param>

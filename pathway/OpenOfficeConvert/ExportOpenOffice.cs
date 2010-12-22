@@ -672,10 +672,8 @@ namespace SIL.PublishingSolution
             Styles styleName = sXML.CreateStyles(projInfo.DefaultCssFileWithPath, strStylePath, projInfo.DefaultXhtmlFileWithPath,
                                                  false, projInfo.IsExtraProcessing);
             //To set Constent variables for User Desire
-            //string macroFileName = Common.PathCombine(projInfo.DictionaryPath,Path.GetFileNameWithoutExtension(projInfo.DictionaryPath));
-            string fname = projInfo.ProjectName ?? projInfo.DictionaryPath;
-            string macroFileName = Common.PathCombine(projInfo.DictionaryPath,
-                                                      Path.GetFileNameWithoutExtension(fname));
+            string fname = Common.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+            string macroFileName = Common.PathCombine(projInfo.DictionaryPath, fname);
             IncludeTextinMacro(strMacroPath, styleName.ReferenceFormat, macroFileName);
 
             // BEGIN Generate Meta.Xml File
