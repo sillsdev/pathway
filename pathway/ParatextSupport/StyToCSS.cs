@@ -236,6 +236,7 @@ namespace SIL.PublishingSolution
 
             foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _styleInfo)
             {
+                if(cssClass.Key == "\\Name") return;
                 cssFile.WriteLine("." + cssClass.Key);
                 cssFile.WriteLine("{");
                 foreach (KeyValuePair<string, string> property in cssClass.Value)
