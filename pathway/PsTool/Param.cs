@@ -930,7 +930,7 @@ namespace SIL.PublishingSolution
         /// <returns></returns>
         public static string StylePath(string sheet, FileAccess fa)
         {
-            var fn = sheet.Contains(".") ? sheet : StyleFile.ContainsKey(sheet) ? StyleFile[sheet] :  "";
+            var fn = sheet.Contains(".css") ? sheet : StyleFile.ContainsKey(sheet) ? StyleFile[sheet] :  "";
             var fPath = Common.PathCombine(Value[UserSheetPath], fn);
             if (fa == FileAccess.Write) return fPath;
             if (!File.Exists(fPath))
