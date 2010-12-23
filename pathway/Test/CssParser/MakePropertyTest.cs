@@ -566,7 +566,7 @@ namespace Test.CssParserTest
             _input.StringValue = "dummyfont, dummyfamily";
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
-            _expected.Add("font-family", "dummyfont");
+            _expected.Add("font-family", "dummyfamily");
             Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
         }
         [Test]
