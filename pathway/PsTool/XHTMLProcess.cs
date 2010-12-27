@@ -79,6 +79,7 @@ namespace SIL.PublishingSolution
         protected string _closeChildName = string.Empty;
         protected bool _isNewParagraph;
         protected bool _isParagraphClosed = true;
+        protected List<string> divType;
 
         #region Footnote
         protected bool _chapterNoStart;
@@ -184,16 +185,20 @@ namespace SIL.PublishingSolution
             _allStyleInfo.Push(classInfo);
 
             string[] divTypeList = new[] { "div", "ol", "ul", "li", "p", "body", "h1", "h2", "h3", "h4", "h5", "h6" };
-            List<string> divType = new List<string>(divTypeList);
+            divType = new List<string>(divTypeList);
             if (divType.Contains(_tagType))
             {
                 _paragraphName = _childName;
                 _allParagraph.Push(_paragraphName);
                 _isNewParagraph = true;
 
+                if (_tagType == "ol" || _tagType == "ul")
+                {
+                }
+                else if (_tagType == "li")
+                {
+                }
                 CreateSectionClass(_paragraphName);
-
-                DivTypeLi_Odt();
             }
             else if (_tagType == "span" || _tagType == "em") 
             {
@@ -234,38 +239,7 @@ namespace SIL.PublishingSolution
                 _allStyle.Push(_childName);
         }
 
-        private void DivTypeLi_Odt()
-        {
-            if (_outputType == Common.OutputType.ODT)
-            {
-                if (_tagType == "ol" || _tagType == "ul")
-                {
-                    string tag = Common.LeftString(_paragraphName, "_");
-                    _listName = _listTypeDictionary.ContainsKey(tag)
-                                    ? "List" + _listTypeDictionary[tag].Replace("-","")
-                                    : _tagType;
-                }
-                else if (_tagType == "li")
-                {
-                    if (_isNewParagraph)
-                    {
-                        _writer.WriteEndElement();
-                        _isNewParagraph = true;
-                        _isParagraphClosed = true;
-                    }
 
-                    if (_listName.Length != 0)
-                    {
-                        _writer.WriteStartElement("text:list");
-                        _writer.WriteAttributeString("text:style-name", _listName);
-                        _listName = string.Empty;
-                       
-                    }
-                    _writer.WriteStartElement("text:list-item");
-                }
-            }
-
-        }
 
         public virtual void CreateSectionClass(string name)
         {
@@ -446,11 +420,6 @@ namespace SIL.PublishingSolution
 
         protected void ClosePara()
         {
-            if (_outputType == Common.OutputType.ODT && (_reader.Name == "ul" || _reader.Name == "ol"))
-            {
-                _writer.WriteEndElement();
-            }
-
             if (_allParagraph.Count > 0 && !_isParagraphClosed) // Is Para Exist
             {
                 if(_outputType == Common.OutputType.IDML)
@@ -461,6 +430,16 @@ namespace SIL.PublishingSolution
                 _writer.WriteEndElement();
                 _isNewParagraph = true;
                 _isParagraphClosed = true;
+
+                //if (_outputType == Common.OutputType.ODT && (_reader.Name == "ul" || _reader.Name == "ol"))
+                //{
+                //    _writer.WriteEndElement();
+                //}
+                //if (_outputType == Common.OutputType.ODT && (_reader.Name == "li"))
+                //{
+                //    _writer.WriteEndElement();
+                //}
+
             }
         }
 
@@ -718,7 +697,9 @@ namespace SIL.PublishingSolution
 
             _newProperty[newStyleName] = _tempStyle;
             IdAllClass[newStyleName] = _tempStyle;
-            ParentClass[newStyleName] = _parentStyleName + "|" + _tagType;
+            string tagType = _tagType;
+            if (divType.Contains(_tagType)) tagType = "div";
+            ParentClass[newStyleName] = _parentStyleName + "|" + tagType;
 
             _psuedoBeforeStyle = _psuedoAfterStyle = _psuedoContainsStyle = null;
             string styleBefore = MatchCssStyle(ancestorFontSize, "before", multiClassList);

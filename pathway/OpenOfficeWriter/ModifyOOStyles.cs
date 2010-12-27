@@ -139,7 +139,7 @@ namespace SIL.PublishingSolution
             _nameElement.SetAttribute("style:family", familyType);
             _nameElement.SetAttribute("style:parent-style-name", parent_Type[0]); 
             //style:family="paragraph" style:parent-style-name="none">
-
+            SetTagProperty(className.Key);
             AddParaTextNode(className, _node, familyType);
 
 
@@ -894,39 +894,47 @@ namespace SIL.PublishingSolution
             _tagName = Common.IsTagClass(newClassName);
             if (_tagName != string.Empty)
             {
-                if (_tagName == "olFirst") // ol first line
+                //if (_tagName == "olFirst") // ol first line
+                //{
+                //    _nameElement.SetAttribute("SpaceBefore", "12");
+                //    _nameElement.SetAttribute("LeftIndent", "36");
+                //    _nameElement.SetAttribute("BulletsAndNumberingListType", "NumberedList");
+                //    _nameElement.SetAttribute("NumberingExpression", "^#.^.");
+                //    _nameElement.SetAttribute("BulletsTextAfter", "^.");
+                //    _nameElement.SetAttribute("NumberingContinue", "false");
+                //}
+                //else if (_tagName == "ol4Next") // ol rest of the line
+                //{
+                //    _nameElement.SetAttribute("LeftIndent", "36");
+                //    _nameElement.SetAttribute("BulletsAndNumberingListType", "NumberedList");
+                //    _nameElement.SetAttribute("NumberingExpression", "^#.^.");
+                //    _nameElement.SetAttribute("BulletsTextAfter", "^.");
+                //    _nameElement.SetAttribute("NumberingContinue", "true");
+                //}
+                //else if (_tagName == "ulFirst") // ul
+                //{
+                //    _nameElement.SetAttribute("SpaceBefore", "12");
+                //    _nameElement.SetAttribute("LeftIndent", "36");
+                //    _nameElement.SetAttribute("BulletsAndNumberingListType", "BulletList");
+                //    _nameElement.SetAttribute("BulletsTextAfter", "^.");
+                //}
+                //else if (_tagName == "ul4Next") // ul
+                //{
+                //    _nameElement.SetAttribute("LeftIndent", "36");
+                //    _nameElement.SetAttribute("BulletsAndNumberingListType", "BulletList");
+                //    _nameElement.SetAttribute("BulletsTextAfter", "^.");
+                //}
+                //else 
+                if (_tagName == "ul" || _tagName == "ol") // ul or ol
                 {
-                    _nameElement.SetAttribute("SpaceBefore", "12");
-                    _nameElement.SetAttribute("LeftIndent", "36");
-                    _nameElement.SetAttribute("BulletsAndNumberingListType", "NumberedList");
-                    _nameElement.SetAttribute("NumberingExpression", "^#.^.");
-                    _nameElement.SetAttribute("BulletsTextAfter", "^.");
-                    _nameElement.SetAttribute("NumberingContinue", "false");
-                }
-                else if (_tagName == "ol4Next") // ol rest of the line
-                {
-                    _nameElement.SetAttribute("LeftIndent", "36");
-                    _nameElement.SetAttribute("BulletsAndNumberingListType", "NumberedList");
-                    _nameElement.SetAttribute("NumberingExpression", "^#.^.");
-                    _nameElement.SetAttribute("BulletsTextAfter", "^.");
-                    _nameElement.SetAttribute("NumberingContinue", "true");
-                }
-                else if (_tagName == "ulFirst") // ul
-                {
-                    _nameElement.SetAttribute("SpaceBefore", "12");
-                    _nameElement.SetAttribute("LeftIndent", "36");
-                    _nameElement.SetAttribute("BulletsAndNumberingListType", "BulletList");
-                    _nameElement.SetAttribute("BulletsTextAfter", "^.");
-                }
-                else if (_tagName == "ul4Next") // ul
-                {
-                    _nameElement.SetAttribute("LeftIndent", "36");
-                    _nameElement.SetAttribute("BulletsAndNumberingListType", "BulletList");
-                    _nameElement.SetAttribute("BulletsTextAfter", "^.");
-                }
-                else if (_tagName == "ul" || _tagName == "ol") // ul or ol
-                {
-                    _nameElement.SetAttribute("LeftIndent", "36");
+                    //_nameElement.SetAttribute("LeftIndent", "36");
+                    //_writer.WriteStartElement("text:list-style");
+                    //_writer.WriteAttributeString("style:name", listName);
+                    //_writer.WriteStartElement("text:list-level-style-bullet");
+                    _nameElement.SetAttribute("text:level", "1");
+                    _nameElement.SetAttribute("text:style-name", "Bullet_20_Symbols");
+                    _nameElement.SetAttribute("style:num-suffix", ".");
+                    _nameElement.SetAttribute("text:bullet-char", "1");
                 }
             }
         }

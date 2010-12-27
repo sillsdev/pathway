@@ -144,7 +144,7 @@ namespace SIL.PublishingSolution
         private PublicationInformation _projInfo;
         private bool _IsHeadword = false;
         private bool _significant;
-
+        private bool _isListBegin;
         #endregion
 
         public OOContent()
@@ -711,6 +711,29 @@ namespace SIL.PublishingSolution
 
                 ClosePara();
 
+                if (_isListBegin)
+                {
+                    _isListBegin = false;
+                    _writer.WriteStartElement("text:list");
+                    _writer.WriteAttributeString("text:style-name", "ListDisc");
+                }
+                //if (_tagType == "ol" || _tagType == "ul")
+                //{
+                //    string tag = Common.LeftString(_paragraphName, "_");
+                //    _listName = _listTypeDictionary.ContainsKey(tag)
+                //                    ? "List" + _listTypeDictionary[tag].Replace("-","")
+                //                    : _tagType;
+                //}
+                //else if (_tagType == "li")
+                //{
+                //}
+                string tag = Common.LeftString(_paragraphName, "_");
+                if (tag == "li.ol" || tag == "li.ul")
+                {
+                    _writer.WriteStartElement("text:list-item");
+
+                }
+
                 //todo extract drop caps
                 if (_isDropCap) // forcing new paragraph for drop caps
                 {
@@ -1063,6 +1086,15 @@ namespace SIL.PublishingSolution
             //if (_isDisplayNone) return; // skip the node
 
             StartElementBase(_IsHeadword);
+            
+            string tag = Common.LeftString(_paragraphName, "_");
+            if (tag.StartsWith("ol.") || tag.StartsWith("ul"))
+            {
+                _isListBegin = true;
+                //_writer.WriteStartElement("text:list");
+                //_writer.WriteAttributeString("text:style-name", "ListDisc");
+            }
+
             SetClassCounter();
             Psuedo();
             VisibilityCheck();
@@ -1166,6 +1198,15 @@ namespace SIL.PublishingSolution
             string closeChild = Common.LeftString(_closeChildName, "_");
 
             CheckDisplayNone(closeChild);
+            if (_outputType == Common.OutputType.ODT && (_reader.Name == "ul" || _reader.Name == "ol"))
+            {
+                _writer.WriteEndElement();
+            }
+            if (_outputType == Common.OutputType.ODT && (_reader.Name == "li"))
+            {
+                _writer.WriteEndElement();
+            }
+
             SectionClose(closeChild);
             //SetHeadwordFalse();  Note: verify &todo in OO td2000 
             ClosefooterNote();
