@@ -241,6 +241,8 @@ namespace SIL.PublishingSolution
                 {
                     _replaceSymbolToText.Clear();
                     string[] values = IdAllClass[className][searchKey].Split('\"');
+                    if(values.Length <= 1)
+                        values = IdAllClass[className][searchKey].Split('\'');
                                 for (int i = 0; i < values.Length; i++)
                                 {
                                     if (values[i].Length > 0)
