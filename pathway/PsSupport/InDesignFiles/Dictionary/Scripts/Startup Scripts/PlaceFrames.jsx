@@ -14,8 +14,8 @@ var indexTab = false;
 // Created By:   James Prabu 
 // Created On: Sep 10 2009   
 // Modified By:  James Prabu                        
-// Modified On:  Dec 16 2010 
-// Task Number : TD-1740(Text not placed on right page of spread)
+// Modified On:  Dec 28 2010 
+// Task Number : TD-1754(InDesign: "Javascript Error" when open very first document)
 // <remarks> 
 // main changes in  main(removed startEvent), SetOverflowsPages(commented frameHeight > pageHeight) 
 // </remarks>
@@ -804,7 +804,6 @@ function FitFrameToPage(myStory)
 			{
 				frameLeft = marginLeft;
 				frameWidth = pageWidth - marginRight;
-				
 			}
 		    else
 			{
@@ -855,61 +854,6 @@ function FitFrameToPage(myStory)
 	}	
 }
 
-//This method fit the Frame to it's content size (in Height)
-function FitFrameToPage100(myStory)
-{
-	try
-	{
-		var fitFrameBound, frameHeight, myStoryHeight, frameLeft, frameWidth;
-		fitFrameBound = myStory.geometricBounds; 
-		myStoryHeight = fitFrameBound[2] -  fitFrameBound[0];
-
-
-		if(myDocument.documentPreferences.facingPages)
-		{
-			if((curPageNo % 2) == 0 && curPageNo > 0)//For Right Page and Not First page
-			{
-				frameLeft = marginLeft + pageWidth;
-				frameWidth = (pageWidth * 2) - marginRight;
-			}
-			else if((curPageNo % 2) == 0 && curPageNo == 0)//For Right Page and First page
-			{
-				frameLeft = marginLeft;
-				frameWidth = pageWidth - marginRight;
-			}
-		    else
-			{
-				frameLeft = marginRight;//For Mirror Page Left is Right
-				frameWidth = pageWidth - marginLeft;
-			}
-		}
-		else
-		{
-				frameLeft = marginLeft;
-				frameWidth = pageWidth - marginRight;		
-		}
-		//if(myStoryHeight >= pageHeight  || fitFrameBound[2]  >= pageHeight)
-		if(fitFrameBound[2]  >= pageHeight)
-		{
-			frameHeight = pageHeight;
-		}	
-		else
-		{
-			 frameHeight = fitFrameBound[2];
-		}
-	    //alert("currentMarginTop " + currentMarginTop + " frameLeft " + frameLeft  + " frameHeight " + frameHeight   + " frameWidth " + frameWidth)
-		myStory.geometricBounds=[currentMarginTop,frameLeft , frameHeight ,frameWidth];
-		 if(!myStory.overflows && myStory.nextTextFrame == null)
-		{
-			//alert(myStory.contents);
-			BalancedColumns(myStory);
-		}
-	}
-	catch(myError)
-	{
-
-	}	
-}
 
 //Delete the empty pages
 function DeleteEmptyPages()
@@ -1377,6 +1321,61 @@ function GetLastParagraphLetter(myPage)
 	}
 }
 
+//This method fit the Frame to it's content size (in Height)
+function FitFrameToPage100(myStory)
+{
+	try
+	{
+		var fitFrameBound, frameHeight, myStoryHeight, frameLeft, frameWidth;
+		fitFrameBound = myStory.geometricBounds; 
+		myStoryHeight = fitFrameBound[2] -  fitFrameBound[0];
+
+
+		if(myDocument.documentPreferences.facingPages)
+		{
+			if((curPageNo % 2) == 0 && curPageNo > 0)//For Right Page and Not First page
+			{
+				frameLeft = marginLeft + pageWidth;
+				frameWidth = (pageWidth * 2) - marginRight;
+			}
+			else if((curPageNo % 2) == 0 && curPageNo == 0)//For Right Page and First page
+			{
+				frameLeft = marginLeft;
+				frameWidth = pageWidth - marginRight;
+			}
+		    else
+			{
+				frameLeft = marginRight;//For Mirror Page Left is Right
+				frameWidth = pageWidth - marginLeft;
+			}
+		}
+		else
+		{
+				frameLeft = marginLeft;
+				frameWidth = pageWidth - marginRight;		
+		}
+		//if(myStoryHeight >= pageHeight  || fitFrameBound[2]  >= pageHeight)
+		if(fitFrameBound[2]  >= pageHeight)
+		{
+			frameHeight = pageHeight;
+		}	
+		else
+		{
+			 frameHeight = fitFrameBound[2];
+		}
+	    //alert("currentMarginTop " + currentMarginTop + " frameLeft " + frameLeft  + " frameHeight " + frameHeight   + " frameWidth " + frameWidth)
+		myStory.geometricBounds=[currentMarginTop,frameLeft , frameHeight ,frameWidth];
+		 if(!myStory.overflows && myStory.nextTextFrame == null)
+		{
+			//alert(myStory.contents);
+			BalancedColumns(myStory);
+		}
+	}
+	catch(myError)
+	{
+
+	}	
+}
 
 
 

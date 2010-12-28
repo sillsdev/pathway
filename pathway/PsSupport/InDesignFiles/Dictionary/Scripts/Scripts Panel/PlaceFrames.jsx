@@ -14,8 +14,8 @@ var margin=new Array("letHead", "1.5", "4.5", "1.666667", "4.5");//
 // Created By:   James Prabu 
 // Created On: Sep 10 2009   
 // Modified By:  James Prabu                        
-// Modified On:  Dec 16 2010 
-// Task Number : TD-1740(Text not placed on right page of spread)
+// Modified On:  Dec 28 2010 
+// Task Number : TD-1754(InDesign: "Javascript Error" when open very first document)
 // <remarks> 
 // main changes in  main(removed startEvent), SetOverflowsPages(commented frameHeight > pageHeight) 
 // </remarks>
