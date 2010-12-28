@@ -720,46 +720,37 @@ namespace SIL.PublishingSolution
 
                 ClosePara();
 
-                if (_isListBegin)
-                {
-                    string tag1 = Common.LeftString(_listName, "_");
-                    _listName = _listTypeDictionary.ContainsKey(tag1)
-                                    ? "List" + _listTypeDictionary[tag1].Replace("-", "")
-                                    : _tagType;
-
-                    if (_listName == _tagType)
-                    {
-                        tag1 = Common.LeftString(_paragraphName, "_");
-                        _listName = _listTypeDictionary.ContainsKey(tag1)
-                                        ? "List" + _listTypeDictionary[tag1].Replace("-", "")
-                                        : _tagType;
-  
-                    }
-                    //string type = _listTypeDictionary.ContainsKey(_readerValue) ? _listTypeDictionary[_readerValue] : _tagType;
-
-                    _isListBegin = false;
-                    //_writer.Flush();
-                    //_writer.Close();
-                    
-                    _writer.WriteStartElement("text:list");
-                    _writer.WriteAttributeString("text:style-name", _listName);
-                }
-                //if (_tagType == "ol" || _tagType == "ul")
+                //if (_isListBegin)
                 //{
-                //    string tag = Common.LeftString(_paragraphName, "_");
-                //    _listName = _listTypeDictionary.ContainsKey(tag)
-                //                    ? "List" + _listTypeDictionary[tag].Replace("-","")
+                //    string tag1 = Common.LeftString(_listName, "_");
+                //    _listName = _listTypeDictionary.ContainsKey(tag1)
+                //                    ? "List" + _listTypeDictionary[tag1].Replace("-", "")
                 //                    : _tagType;
-                //}
-                //else if (_tagType == "li")
-                //{
-                //}
-                string tag = Common.LeftString(_paragraphName, "_");
-                if (tag == "li.ol" || tag == "li.ul" || tag == "li")
-                {
-                    _writer.WriteStartElement("text:list-item");
 
-                }
+                //    if (_listName == _tagType)
+                //    {
+                //        tag1 = Common.LeftString(_paragraphName, "_");
+                //        _listName = _listTypeDictionary.ContainsKey(tag1)
+                //                        ? "List" + _listTypeDictionary[tag1].Replace("-", "")
+                //                        : _tagType;
+  
+                //    }
+                //    //string type = _listTypeDictionary.ContainsKey(_readerValue) ? _listTypeDictionary[_readerValue] : _tagType;
+
+                //    _isListBegin = false;
+                //    //_writer.Flush();
+                //    //_writer.Close();
+                    
+                //    _writer.WriteStartElement("text:list");
+                //    _writer.WriteAttributeString("text:style-name", _listName);
+                //}
+
+                //string tag = Common.LeftString(_paragraphName, "_");
+                //if (tag == "li.ol" || tag == "li.ul" || tag == "li")
+                //{
+                //    _writer.WriteStartElement("text:list-item");
+
+                //}
 
                 //todo extract drop caps
                 if (_isDropCap) // forcing new paragraph for drop caps
@@ -1114,20 +1105,31 @@ namespace SIL.PublishingSolution
 
             StartElementBase(_IsHeadword);
             
-            string tag = Common.LeftString(_paragraphName, "_");
-            if (tag.StartsWith("ol.") || tag.StartsWith("ul"))
-            {
-                _isListBegin = true;
-                _listName = _paragraphName;
-                //_writer.WriteStartElement("text:list");
-                //_writer.WriteAttributeString("text:style-name", "ListDisc");
-            }
-
+            ListBegin();
             SetClassCounter();
             Psuedo();
             VisibilityCheck();
             DropCaps();
             FooterSetup();
+        }
+
+        private void ListBegin()
+        {
+            if ( _tagType == "ol" || _tagType == "ul")
+            {
+                ClosePara();
+                string listClassName = Common.LeftString(_paragraphName, "_");
+                if (listClassName.IndexOf(_tagType) == -1 || !IdAllClass.ContainsKey(listClassName))
+                {
+                    listClassName = _tagType;
+                }
+                _writer.WriteStartElement("text:list");
+                _writer.WriteAttributeString("text:style-name", listClassName);
+            }
+            else if (_tagType == "li")
+            {
+                _writer.WriteStartElement("text:list-item");
+            }
         }
 
         private void DropCaps()
