@@ -1291,12 +1291,11 @@ namespace SIL.PublishingSolution
             // guide
             opf.WriteStartElement("guide");
             // cover image
-            // NOTE: cover.html seems to be missing from the repository -- gt
-            //opf.WriteStartElement("reference");
-            //opf.WriteAttributeString("href", "cover.html");
-            //opf.WriteAttributeString("type", "cover");
-            //opf.WriteAttributeString("title", "Cover");
-            //opf.WriteEndElement(); // reference
+            opf.WriteStartElement("reference");
+            opf.WriteAttributeString("href", "cover.html");
+            opf.WriteAttributeString("type", "cover");
+            opf.WriteAttributeString("title", "Cover");
+            opf.WriteEndElement(); // reference
             // first xhtml filename
             opf.WriteStartElement("reference");
             opf.WriteAttributeString("type", "text");
