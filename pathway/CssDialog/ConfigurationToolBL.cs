@@ -783,7 +783,6 @@ namespace SIL.PublishingSolution
                     cTool.LblApproved.Visible = false;
                 }
             }
-
             if (cTool.TabControl1.SelectedIndex == 1)
                 ShowCSSValue();
             else if (cTool.TabControl1.SelectedTab.Text == "Preview")
@@ -801,7 +800,7 @@ namespace SIL.PublishingSolution
             if (cTool.TxtName.Text.Length <= 0) return;
             string path = Param.StylePath(cTool.TxtName.Text);
             //if (_cssClass.Count == 0) // Add
-                ParseCSS(path, Param.Value["InputType"]);
+            ParseCSS(path, Param.Value["InputType"]);
             //SetDefaultCSSValue(path, Param.Value["InputType"]);
 
             double left = Math.Round(double.Parse(MarginLeft), 0);
@@ -949,60 +948,75 @@ namespace SIL.PublishingSolution
                         switch (task)
                         {
                             case "Page Size":
-                                cTool.DdlPagePageSize.Items.Add(ctn.Text);
+                                if (!cTool.DdlPagePageSize.Items.Contains(ctn.Text))
+                                    cTool.DdlPagePageSize.Items.Add(ctn.Text);
                                 break;
 
                             case "Columns":
-                                cTool.DdlPageColumn.Items.Add(ctn.Text);
+                                if (!cTool.DdlPageColumn.Items.Contains(ctn.Text))
+                                    cTool.DdlPageColumn.Items.Add(ctn.Text);
                                 break;
 
                             case "Leading":
-                                cTool.DdlLeading.Items.Add(ctn.Text);
+                                if (!cTool.DdlLeading.Items.Contains(ctn.Text))
+                                    cTool.DdlLeading.Items.Add(ctn.Text);
                                 break;
 
                             case "Font Size":
-                                cTool.DdlFontSize.Items.Add(ctn.Text);
+                                if (!cTool.DdlFontSize.Items.Contains(ctn.Text))
+                                    cTool.DdlFontSize.Items.Add(ctn.Text);
                                 break;
 
                             case "Running Head":
-                                cTool.DdlRunningHead.Items.Add(ctn.Text);
+                                if (!cTool.DdlRunningHead.Items.Contains(ctn.Text))
+                                    cTool.DdlRunningHead.Items.Add(ctn.Text);
                                 break;
 
                             case "Page Number":
-                                cTool.DdlPageNumber.Items.Add(ctn.Text);
+                                if (!cTool.DdlPageNumber.Items.Contains(ctn.Text))
+                                    cTool.DdlPageNumber.Items.Add(ctn.Text);
                                 break;
 
                             case "Rules":
-                                cTool.DdlRules.Items.Add(ctn.Text);
+                                if (!cTool.DdlRules.Items.Contains(ctn.Text))
+                                    cTool.DdlRules.Items.Add(ctn.Text);
                                 break;
 
                             case "Pictures":
-                                cTool.DdlPicture.Items.Add(ctn.Text);
+                                if (!cTool.DdlPicture.Items.Contains(ctn.Text))
+                                    cTool.DdlPicture.Items.Add(ctn.Text);
                                 break;
 
                             case "Sense":
-                                cTool.DdlSense.Items.Add(ctn.Text);
+                                if (!cTool.DdlSense.Items.Contains(ctn.Text))
+                                    cTool.DdlSense.Items.Add(ctn.Text);
                                 break;
 
                             case "Justified":
-                                cTool.DdlJustified.Items.Add(ctn.Text);
+                                if (!cTool.DdlJustified.Items.Contains(ctn.Text))
+                                    cTool.DdlJustified.Items.Add(ctn.Text);
                                 break;
 
                             case "VerticalJustify":
-                                cTool.DdlVerticalJustify.Items.Add(ctn.Text);
+                                if (!cTool.DdlVerticalJustify.Items.Contains(ctn.Text))
+                                    cTool.DdlVerticalJustify.Items.Add(ctn.Text);
                                 break;
 
                             case "FileProduced":
-                                cTool.DdlFiles.Items.Add(ctn.Text);
-                                cTool.DdlFileProduceDict.Items.Add(ctn.Text);
+                                if (!cTool.DdlFiles.Items.Contains(ctn.Text))
+                                    cTool.DdlFiles.Items.Add(ctn.Text);
+                                if (!cTool.DdlFileProduceDict.Items.Contains(ctn.Text))
+                                    cTool.DdlFileProduceDict.Items.Add(ctn.Text);
                                 break;
 
                             case "RedLetter":
-                                cTool.DdlRedLetter.Items.Add(ctn.Text);
+                                if (!cTool.DdlRedLetter.Items.Contains(ctn.Text))
+                                    cTool.DdlRedLetter.Items.Add(ctn.Text);
                                 break;
 
                             case "EmbedFonts":
-                                cTool.DdlEmbedFonts.Items.Add(ctn.Text);
+                                if (!cTool.DdlEmbedFonts.Items.Contains(ctn.Text))
+                                    cTool.DdlEmbedFonts.Items.Add(ctn.Text);
                                 break;
                         }
                     }
@@ -3173,7 +3187,7 @@ namespace SIL.PublishingSolution
 
         public void ConfigurationTool_LoadBL()
         {
-
+            
             _screenMode = ScreenMode.Load;
 
             Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool_Load");

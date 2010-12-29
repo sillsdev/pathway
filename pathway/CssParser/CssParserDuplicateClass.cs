@@ -98,7 +98,11 @@ namespace SIL.PublishingSolution
                 string BaseCssFileWithPath = inputCSSPath;
                 ArrayList arrayCSSFile = Common.GetCSSFileNames(inputCSSPath, BaseCssFileWithPath);
                 arrayCSSFile.Add(BaseCssFileWithPath);
-                GetErrorReport(inputCSSPath);
+                try
+                {
+                    GetErrorReport(inputCSSPath);
+                }
+                catch{}
                 string file = Common.MakeSingleCSS(inputCSSPath, "_MergedCSS.css");
                 var fileSize = new FileInfo(_mergepath);
                 if (fileSize.Length > 0)

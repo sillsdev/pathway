@@ -272,6 +272,18 @@ namespace SIL.Tool
                                 int binFolderPart = Environment.CurrentDirectory.IndexOf(Path.DirectorySeparatorChar + "bin" + Path.DirectorySeparatorChar);
                                 executablePath = DirectoryPathReplace(Environment.CurrentDirectory.Substring(0, binFolderPart) + "/ConfigurationTool/TestFiles/input");
                             }
+                            else if (executablePath.Contains("FieldWorks 7") || executablePath.Contains("FieldWorks"))
+                            {
+                                //Change the path which have the default styles
+                                string folderName = Path.GetDirectoryName(executablePath);
+                                executablePath = PathCombine(folderName, "Pathway7");
+                            }
+                            else if (executablePath.Contains("Paratext 7"))
+                            {
+                                //Change the path which have the default styles
+                                string folderName = LeftString(executablePath, "Paratext 7");
+                                executablePath = DirectoryPathReplace(PathCombine(folderName, "SIL\\Pathway7"));
+                            }
                             cssPath = PathCombine(executablePath, SamplePath);
                         }
                         arrayCSSFile.AddRange(GetCSSFileNames(PathCombine(cssPath, cssFile), BaseCssFileWithPath));
@@ -1490,6 +1502,19 @@ return FromProg(file);
         }
 
         /// <summary>
+        /// Make sure the path contains the proper / for the operating system.
+        /// </summary>
+        /// <param name="path">input path</param>
+        /// <returns>normalized with "/" path</returns>
+        public static string DirectoryPathReplaceWithSlash(string path)
+        {
+            if (string.IsNullOrEmpty(path)) return path;
+            string returnPath = path.Replace('\\', '/');
+            returnPath = returnPath.Replace(Path.DirectorySeparatorChar, '/');
+            return returnPath;
+        }
+
+        /// <summary>
         /// Deletes the current Directory
         /// </summary>
         /// <param name="directoryPath">Directory name to be deleted</param>
@@ -1534,18 +1559,7 @@ return FromProg(file);
             }
             return deleted;
         }
-        /// <summary>
-        /// Make sure the path contains the proper / for the operating system.
-        /// </summary>
-        /// <param name="path">input path</param>
-        /// <returns>normalized with "/" path</returns>
-        public static string DirectoryPathReplaceWithSlash(string path)
-        {
-            if (string.IsNullOrEmpty(path)) return path;
-            string returnPath = path.Replace('\\', '/');
-            returnPath = returnPath.Replace(Path.DirectorySeparatorChar, '/');
-            return returnPath;
-        }
+
         #region MakeSingleCSS(string fullPath)
         /// -------------------------------------------------------------------------------------------
         /// <summary>
