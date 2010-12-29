@@ -582,7 +582,7 @@ namespace SIL.PublishingSolution
         {
             Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationTool: ShowDataInGrid");
             _selectedStyle = Param.Value["LayoutSelected"];
-            _redoundo.SettingOutputPath = Param.SettingOutputPath;
+            //_redoundo.SettingOutputPath = Param.SettingOutputPath;
             cTool.TabControl1.SelectedTab = cTool.TabControl1.TabPages[0];
             cTool.LblType.Text = inputTypeBL;
             ShowStyleInGrid(cTool.StylesGrid, _cssNames);
@@ -1898,6 +1898,7 @@ namespace SIL.PublishingSolution
         public bool WriteAttrib(string key, object sender)
         {
             bool result = false;
+            
             string file;
             string attribValue = Common.GetTextValue(sender, out file);
             if (PreviousValue == attribValue)
@@ -1923,6 +1924,7 @@ namespace SIL.PublishingSolution
             {
                 Param.SetAttrValue(baseNode, key, attribValue);
             }
+            _cssNames.Add(attribValue);
             Param.Write();
             return true;
         }
@@ -1949,6 +1951,8 @@ namespace SIL.PublishingSolution
                     result = true;
                 }
             }
+
+            if (cTool.TabControl1.SelectedIndex != 0) return result;
 
             XmlNodeList xmlNodeList = Param.GetItems("//styles//style");
             if (xmlNodeList != null)
@@ -2915,7 +2919,7 @@ namespace SIL.PublishingSolution
                         {
                         }
                     Param.StyleFile[styleName] = FileName;
-                    WriteAttrib(AttribName, sender);
+                    WriteAttrib(AttribName, cTool.TxtName);
                     _cssNames.Remove(PreviousValue);
                     EnableToolStripButtons(true);
                     IsLayoutSelectedStyle();
@@ -3205,7 +3209,7 @@ namespace SIL.PublishingSolution
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPicture"]);
             }
             //cTool.BtnMobile.Enabled = false;
-            _redoundo = new UndoRedo(cTool.TsUndo, cTool.TsRedo);
+            //_redoundo = new UndoRedo(cTool.TsUndo, cTool.TsRedo);
             cTool.MinimumSize = new Size(497, 183);
             cTool.LoadSettings();
             SetInputTypeButton();
@@ -3213,7 +3217,7 @@ namespace SIL.PublishingSolution
             CreateGridColumn();
             LoadParam(); // Load DictionaryStyleSettings / ScriptureStyleSettings
             ShowDataInGrid();
-            _redoundo.Reset();
+            //_redoundo.Reset();
 
             SetPreviousLayoutSelect(cTool.StylesGrid);
             PopulateFeatureSheet(); //For TD-1194 // Load Default Values
@@ -3278,7 +3282,7 @@ namespace SIL.PublishingSolution
         public void tsDelete_ClickBL()
         {
             _screenMode = ScreenMode.Delete;
-            _redoundo.Reset();
+            //_redoundo.Reset();
             //StyleName = cTool.StylesGrid[ColumnName, SelectedRowIndex].Value.ToString();
             //cTool.LblInfoCaption.Text = StyleName;
             string name = cTool.LblInfoCaption.Text;
