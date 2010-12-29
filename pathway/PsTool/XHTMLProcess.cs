@@ -705,24 +705,26 @@ namespace SIL.PublishingSolution
             string styleBefore = MatchCssStyle(ancestorFontSize, "before", multiClassList);
             if (styleBefore != string.Empty)
             {
+                string tag = "span"; //  always character styles
                 //string newStyleBefore = styleBefore + Common.SepParent + parentStyle;
                 string newStyleBefore = GetStyleNumber(styleBefore);
                 _newProperty[newStyleBefore] = _tempStyle;
                 IdAllClass[newStyleBefore] = _tempStyle;
                 _psuedoBeforeStyle.StyleName = newStyleBefore;
-                ParentClass[newStyleBefore] = _parentStyleName + "|" + _tagType;
+                ParentClass[newStyleBefore] = _parentStyleName + "|" + tag;
 
             }
 
             string styleAfter = MatchCssStyle(ancestorFontSize, "after", multiClassList);
             if (styleAfter != string.Empty)
             {
+                string tag = "span"; //  always character styles
                 //string newStyleAfter = styleAfter + Common.SepParent + parentStyle;
                 string newStyleAfter = GetStyleNumber(styleAfter);
                 _newProperty[newStyleAfter] = _tempStyle;
                 IdAllClass[newStyleAfter] = _tempStyle;
                 _psuedoAfterStyle.StyleName = newStyleAfter;
-                ParentClass[newStyleAfter] = _parentStyleName + "|" + _tagType;
+                ParentClass[newStyleAfter] = _parentStyleName + "|" + tag;
             }
 
             string styleContains = MatchCssStyle(ancestorFontSize, "contains", multiClassList);

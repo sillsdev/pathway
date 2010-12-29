@@ -902,7 +902,7 @@ namespace SIL.PublishingSolution
         {
             _imageInserted = InsertImage();
 
-            if ((_tagType == "span" || _tagType == "a") && characterStyle != "none" || (_tagType == "img" && _imageInserted)) //span start
+            if ((_tagType == "span" || _tagType == "a" || pseudo) && characterStyle != "none" || (_tagType == "img" && _imageInserted)) //span start
             {
                 if (isFootnote)
                 {
@@ -945,7 +945,7 @@ namespace SIL.PublishingSolution
                 whiteSpacePre(content, pseudo); // TODO -2000 - SignificantSpace() - IN OO convert
 
             }
-            if ((_tagType == "span" || _tagType == "a") && characterStyle != "none" || (_tagType == "img" && _imageInserted))  // span end
+            if ((_tagType == "span" || _tagType == "a" || pseudo) && characterStyle != "none" || (_tagType == "img" && _imageInserted))  // span end
             {
                 _writer.WriteEndElement();
             }
