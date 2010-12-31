@@ -133,6 +133,7 @@ namespace SIL.PublishingSolution
 
         private List<string> _unUsedParagraphStyle = new List<string>();
 		private bool _significant = false;
+        private List<string> _languageFont = new List<string>();
         #endregion
 
         #region Public Methods
@@ -190,10 +191,15 @@ namespace SIL.PublishingSolution
             Console.WriteLine(Common.OdType.ToString());
             if (Common.OdType != Common.OdtType.OdtMaster)
                 ProcessXHTML(projInfo.ProgressBar, projInfo.DefaultXhtmlFileWithPath, projInfo.TempOutputFolder);
-
+            AddFontFamily(_styleFilePath, _languageFont);
             CloseFile(projInfo.TempOutputFolder, structStyles.ColumnGapEm);
             AlterFrameWithoutCaption(projInfo.TempOutputFolder);
             CleanUp();
+        }
+
+        private void AddFontFamily(string folder, List<string> font)
+        {
+            _util.AddFontDeclarative(folder, font);
         }
 
         private void AlterFrameWithoutCaption(string contentFilePath)
@@ -953,6 +959,20 @@ namespace SIL.PublishingSolution
                         //    makeAttribute["fo:language"] = language;
                         //    makeAttribute["fo:country"] = country;
                         //}
+                        if (_lang == "ggo-Telu-IN" || _lang == "te")
+                        {
+                            if(!makeAttribute.ContainsKey("fo:font-name") || makeAttribute.ContainsKey("fo:font-name") && makeAttribute["fo:font-name"] != "Gautami")
+                            {
+                                if (makeAttribute.Count == 0)
+                                    _util.MissingLang = false;
+                                const string FOTNAME = "Gautami";
+                                makeAttribute["fo:font-name"] = FOTNAME;
+                                if(!_languageFont.Contains(FOTNAME))
+                                 _languageFont.Add(FOTNAME);
+                            }
+                            //language = FOTNAME;
+                            //country = "In";
+                        }
                         makeAttribute["fo:language"] = language;
                         makeAttribute["fo:country"] = country;
                         string sourceClass = Common.LeftString(_readerValue, "_.");

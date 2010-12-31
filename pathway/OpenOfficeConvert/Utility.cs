@@ -453,14 +453,72 @@ namespace SIL.PublishingSolution
                     for (int i = 0; i < node.ChildNodes.Count; i++)
                     {
                         XmlNode child = node.ChildNodes[i];
-                        foreach (XmlAttribute attribute in child.Attributes)
+                        if(child != null)
+                        if (child.Attributes.Count >= makeAttribute.Count)
                         {
-                            if (makeAttribute.ContainsKey(attribute.Name))
+                            foreach (XmlAttribute attribute in child.Attributes)
                             {
-                                attribute.Value = makeAttribute[attribute.Name];
+                                if (makeAttribute.ContainsKey(attribute.Name))
+                                {
+                                    attribute.Value = makeAttribute[attribute.Name];
+                                }
                             }
                         }
+
+                        else
+                        {
+                            if (child.Attributes.GetNamedItem("fo:font-name") == null && makeAttribute.ContainsKey("fo:font-name"))
+                            {
+                                child.Attributes.Append(doc.CreateAttribute("fo:font-name",
+                                                                                nsmgr.LookupNamespace("fo"))).InnerText
+                                        = makeAttribute["fo:font-name"];
+                                child.Attributes.Append(doc.CreateAttribute("style:font-name-complex",
+                                                                                nsmgr.LookupNamespace("st"))).InnerText
+                                        = makeAttribute["fo:font-name"];
+                            }
+                            else
+                            {
+                                if (node.ChildNodes[i].Name == "style:text-properties")
+                                {
+                                    //XmlNode x1 = child.Attributes.GetNamedItem("fo:font-name");
+                                    //x1.Value = makeAttribute["fo:font-name"];
+                                }
+                            }
+                            
+                        }
                     }
+                    if (node.ChildNodes.Count == 0)
+                    {
+                        if (makeAttribute.ContainsKey("fo:language") || makeAttribute.ContainsKey("fo:language")
+|| makeAttribute.ContainsKey("fo:font-name"))
+                        {
+                            XmlNode textNode1 =
+                                node.AppendChild(doc.CreateElement("style:text-properties", nsmgr.LookupNamespace("st")));
+
+                            if (makeAttribute.ContainsKey("fo:language"))
+                                textNode1.Attributes.Append(doc.CreateAttribute("fo:language",
+                                                                                nsmgr.LookupNamespace("fo"))).
+                                    InnerText = makeAttribute["fo:language"];
+
+                            if (makeAttribute.ContainsKey("fo:country"))
+                                textNode1.Attributes.Append(doc.CreateAttribute("fo:country",
+                                                                                nsmgr.LookupNamespace("fo"))).
+                                    InnerText = makeAttribute["fo:country"];
+
+                            if (makeAttribute.ContainsKey("fo:font-name"))
+                            {
+                                textNode1.Attributes.Append(doc.CreateAttribute("fo:font-name",
+                                                                                nsmgr.LookupNamespace("fo"))).InnerText
+                                    = makeAttribute["fo:font-name"];
+
+                                textNode1.Attributes.Append(doc.CreateAttribute("style:font-name-complex",
+                                                                                nsmgr.LookupNamespace("st"))).InnerText
+                                    = makeAttribute["fo:font-name"];
+                            }
+                        }
+
+                    }
+
                 }
 
                 doc.Save(styleFilePath);
@@ -1187,6 +1245,38 @@ namespace SIL.PublishingSolution
             }
 
             doc.Save(file);
+        }
+
+        public void AddFontDeclarative(string styleFilePath, List<string> font)
+        {
+            if(font.Count == 0) return;
+
+            var doc = new XmlDocument();
+            doc.Load(styleFilePath);
+            var nsmgr = new XmlNamespaceManager(doc.NameTable);
+            nsmgr.AddNamespace("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
+            //office:font-face-decls
+            // if new stylename exists
+            XmlElement root = doc.DocumentElement;
+            string style = "//office:font-face-decls";
+            if (root != null)
+            {
+                XmlNode node = root.SelectSingleNode(style, nsmgr); // work
+                 if (node == null)
+                {
+                    return;
+                }
+                 foreach (string s in font)
+                 {
+                     //style:font-face style:name="Gautami" svg:font-family="'Gautami'"
+                     XmlNode styleNode = node.FirstChild.CloneNode(true);
+                     node.AppendChild(styleNode);
+                     XmlAttributeCollection attrColl = styleNode.Attributes;
+                     attrColl["style:name"].Value = s;
+                     attrColl["svg:font-family"].Value = s;
+                 }
+            }
+            doc.Save(styleFilePath);
         }
     }
         #endregion
