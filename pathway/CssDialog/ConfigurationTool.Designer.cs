@@ -122,6 +122,18 @@
             this.btnPrevious = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.picPreview = new System.Windows.Forms.PictureBox();
+            this.tabPicture = new System.Windows.Forms.TabPage();
+            this.ChkDontPicture = new System.Windows.Forms.CheckBox();
+            this.LblPicPosition = new System.Windows.Forms.Label();
+            this.DdlPicPosition = new System.Windows.Forms.ComboBox();
+            this.GrpPicture = new System.Windows.Forms.GroupBox();
+            this.Lblcm = new System.Windows.Forms.Label();
+            this.RadSingleColumn = new System.Windows.Forms.RadioButton();
+            this.RadEntirePage = new System.Windows.Forms.RadioButton();
+            this.RadWidthIf = new System.Windows.Forms.RadioButton();
+            this.RadWidthAll = new System.Windows.Forms.RadioButton();
+            this.LblPictureWidth = new System.Windows.Forms.Label();
+            this.SpinPicWidth = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.lblInfoCaption = new System.Windows.Forms.Label();
             this.txtCss = new System.Windows.Forms.TextBox();
@@ -140,18 +152,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblType = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tabPicture = new System.Windows.Forms.TabPage();
-            this.GrpPicture = new System.Windows.Forms.GroupBox();
-            this.SpinPicWidth = new System.Windows.Forms.NumericUpDown();
-            this.LblPictureWidth = new System.Windows.Forms.Label();
-            this.DdlPicPosition = new System.Windows.Forms.ComboBox();
-            this.RadWidthAll = new System.Windows.Forms.RadioButton();
-            this.RadWidthIf = new System.Windows.Forms.RadioButton();
-            this.LblPicPosition = new System.Windows.Forms.Label();
-            this.ChkDontPicture = new System.Windows.Forms.CheckBox();
-            this.RadEntirePage = new System.Windows.Forms.RadioButton();
-            this.RadSingleColumn = new System.Windows.Forms.RadioButton();
-            this.Lblcm = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.stylesGrid)).BeginInit();
             this.toolStripMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -162,6 +162,9 @@
             this.tabOthers.SuspendLayout();
             this.tabPreview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
+            this.tabPicture.SuspendLayout();
+            this.GrpPicture.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SpinPicWidth)).BeginInit();
             this.TLPanelOuter.SuspendLayout();
             this.TLPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -169,9 +172,6 @@
             this.TLPanel2.SuspendLayout();
             this.TLPanel3.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.tabPicture.SuspendLayout();
-            this.GrpPicture.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SpinPicWidth)).BeginInit();
             this.SuspendLayout();
             // 
             // stylesGrid
@@ -416,6 +416,7 @@
             this.chkAvailable.Size = new System.Drawing.Size(15, 14);
             this.chkAvailable.TabIndex = 3;
             this.chkAvailable.UseVisualStyleBackColor = true;
+            this.chkAvailable.CheckStateChanged += new System.EventHandler(this.chkAvailable_CheckStateChanged);
             this.chkAvailable.Validated += new System.EventHandler(this.chkAvailable_Validated);
             this.chkAvailable.Enter += new System.EventHandler(this.SetGotFocusValue);
             this.chkAvailable.CheckedChanged += new System.EventHandler(this.chkAvailable_CheckedChanged);
@@ -1258,6 +1259,141 @@
             this.picPreview.TabIndex = 0;
             this.picPreview.TabStop = false;
             // 
+            // tabPicture
+            // 
+            this.tabPicture.Controls.Add(this.ChkDontPicture);
+            this.tabPicture.Controls.Add(this.LblPicPosition);
+            this.tabPicture.Controls.Add(this.DdlPicPosition);
+            this.tabPicture.Controls.Add(this.GrpPicture);
+            this.tabPicture.Location = new System.Drawing.Point(4, 22);
+            this.tabPicture.Name = "tabPicture";
+            this.tabPicture.Size = new System.Drawing.Size(267, 379);
+            this.tabPicture.TabIndex = 5;
+            this.tabPicture.Text = "Pictures";
+            this.tabPicture.UseVisualStyleBackColor = true;
+            // 
+            // ChkDontPicture
+            // 
+            this.ChkDontPicture.AutoSize = true;
+            this.ChkDontPicture.Location = new System.Drawing.Point(16, 13);
+            this.ChkDontPicture.Name = "ChkDontPicture";
+            this.ChkDontPicture.Size = new System.Drawing.Size(135, 17);
+            this.ChkDontPicture.TabIndex = 5;
+            this.ChkDontPicture.Text = "Do not include pictures";
+            this.ChkDontPicture.UseVisualStyleBackColor = true;
+            // 
+            // LblPicPosition
+            // 
+            this.LblPicPosition.AutoSize = true;
+            this.LblPicPosition.Location = new System.Drawing.Point(23, 202);
+            this.LblPicPosition.Name = "LblPicPosition";
+            this.LblPicPosition.Size = new System.Drawing.Size(80, 13);
+            this.LblPicPosition.TabIndex = 4;
+            this.LblPicPosition.Text = "Picture Position";
+            // 
+            // DdlPicPosition
+            // 
+            this.DdlPicPosition.FormattingEnabled = true;
+            this.DdlPicPosition.Location = new System.Drawing.Point(109, 199);
+            this.DdlPicPosition.Name = "DdlPicPosition";
+            this.DdlPicPosition.Size = new System.Drawing.Size(121, 21);
+            this.DdlPicPosition.TabIndex = 1;
+            // 
+            // GrpPicture
+            // 
+            this.GrpPicture.Controls.Add(this.Lblcm);
+            this.GrpPicture.Controls.Add(this.RadSingleColumn);
+            this.GrpPicture.Controls.Add(this.RadEntirePage);
+            this.GrpPicture.Controls.Add(this.RadWidthIf);
+            this.GrpPicture.Controls.Add(this.RadWidthAll);
+            this.GrpPicture.Controls.Add(this.LblPictureWidth);
+            this.GrpPicture.Controls.Add(this.SpinPicWidth);
+            this.GrpPicture.Location = new System.Drawing.Point(5, 35);
+            this.GrpPicture.Name = "GrpPicture";
+            this.GrpPicture.Size = new System.Drawing.Size(257, 154);
+            this.GrpPicture.TabIndex = 0;
+            this.GrpPicture.TabStop = false;
+            // 
+            // Lblcm
+            // 
+            this.Lblcm.AutoSize = true;
+            this.Lblcm.Location = new System.Drawing.Point(182, 29);
+            this.Lblcm.Name = "Lblcm";
+            this.Lblcm.Size = new System.Drawing.Size(21, 13);
+            this.Lblcm.TabIndex = 6;
+            this.Lblcm.Text = "cm";
+            // 
+            // RadSingleColumn
+            // 
+            this.RadSingleColumn.AutoSize = true;
+            this.RadSingleColumn.Location = new System.Drawing.Point(52, 98);
+            this.RadSingleColumn.Name = "RadSingleColumn";
+            this.RadSingleColumn.Size = new System.Drawing.Size(92, 17);
+            this.RadSingleColumn.TabIndex = 5;
+            this.RadSingleColumn.TabStop = true;
+            this.RadSingleColumn.Text = "Single Column";
+            this.RadSingleColumn.UseVisualStyleBackColor = true;
+            // 
+            // RadEntirePage
+            // 
+            this.RadEntirePage.AutoSize = true;
+            this.RadEntirePage.Location = new System.Drawing.Point(52, 118);
+            this.RadEntirePage.Name = "RadEntirePage";
+            this.RadEntirePage.Size = new System.Drawing.Size(80, 17);
+            this.RadEntirePage.TabIndex = 4;
+            this.RadEntirePage.TabStop = true;
+            this.RadEntirePage.Text = "Entire Page";
+            this.RadEntirePage.UseVisualStyleBackColor = true;
+            // 
+            // RadWidthIf
+            // 
+            this.RadWidthIf.AutoSize = true;
+            this.RadWidthIf.Checked = true;
+            this.RadWidthIf.Location = new System.Drawing.Point(52, 53);
+            this.RadWidthIf.Name = "RadWidthIf";
+            this.RadWidthIf.Size = new System.Drawing.Size(199, 17);
+            this.RadWidthIf.TabIndex = 3;
+            this.RadWidthIf.TabStop = true;
+            this.RadWidthIf.Text = "Use this width if a width not specified";
+            this.RadWidthIf.UseVisualStyleBackColor = true;
+            // 
+            // RadWidthAll
+            // 
+            this.RadWidthAll.AutoSize = true;
+            this.RadWidthAll.Location = new System.Drawing.Point(52, 76);
+            this.RadWidthAll.Name = "RadWidthAll";
+            this.RadWidthAll.Size = new System.Drawing.Size(159, 17);
+            this.RadWidthAll.TabIndex = 2;
+            this.RadWidthAll.TabStop = true;
+            this.RadWidthAll.Text = "Use this width for all pictures";
+            this.RadWidthAll.UseVisualStyleBackColor = true;
+            // 
+            // LblPictureWidth
+            // 
+            this.LblPictureWidth.AutoSize = true;
+            this.LblPictureWidth.Location = new System.Drawing.Point(6, 29);
+            this.LblPictureWidth.Name = "LblPictureWidth";
+            this.LblPictureWidth.Size = new System.Drawing.Size(71, 13);
+            this.LblPictureWidth.TabIndex = 1;
+            this.LblPictureWidth.Text = "Picture Width";
+            // 
+            // SpinPicWidth
+            // 
+            this.SpinPicWidth.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.SpinPicWidth.Location = new System.Drawing.Point(79, 27);
+            this.SpinPicWidth.Name = "SpinPicWidth";
+            this.SpinPicWidth.Size = new System.Drawing.Size(101, 20);
+            this.SpinPicWidth.TabIndex = 0;
+            this.SpinPicWidth.Value = new decimal(new int[] {
+            400,
+            0,
+            0,
+            131072});
+            // 
             // label2
             // 
             this.label2.BackColor = System.Drawing.Color.RoyalBlue;
@@ -1500,141 +1636,6 @@
             this.lblType.Text = "Dictionary";
             this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // tabPicture
-            // 
-            this.tabPicture.Controls.Add(this.ChkDontPicture);
-            this.tabPicture.Controls.Add(this.LblPicPosition);
-            this.tabPicture.Controls.Add(this.DdlPicPosition);
-            this.tabPicture.Controls.Add(this.GrpPicture);
-            this.tabPicture.Location = new System.Drawing.Point(4, 22);
-            this.tabPicture.Name = "tabPicture";
-            this.tabPicture.Size = new System.Drawing.Size(267, 379);
-            this.tabPicture.TabIndex = 5;
-            this.tabPicture.Text = "Pictures";
-            this.tabPicture.UseVisualStyleBackColor = true;
-            // 
-            // GrpPicture
-            // 
-            this.GrpPicture.Controls.Add(this.Lblcm);
-            this.GrpPicture.Controls.Add(this.RadSingleColumn);
-            this.GrpPicture.Controls.Add(this.RadEntirePage);
-            this.GrpPicture.Controls.Add(this.RadWidthIf);
-            this.GrpPicture.Controls.Add(this.RadWidthAll);
-            this.GrpPicture.Controls.Add(this.LblPictureWidth);
-            this.GrpPicture.Controls.Add(this.SpinPicWidth);
-            this.GrpPicture.Location = new System.Drawing.Point(5, 35);
-            this.GrpPicture.Name = "GrpPicture";
-            this.GrpPicture.Size = new System.Drawing.Size(257, 154);
-            this.GrpPicture.TabIndex = 0;
-            this.GrpPicture.TabStop = false;
-            // 
-            // SpinPicWidth
-            // 
-            this.SpinPicWidth.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.SpinPicWidth.Location = new System.Drawing.Point(79, 27);
-            this.SpinPicWidth.Name = "SpinPicWidth";
-            this.SpinPicWidth.Size = new System.Drawing.Size(101, 20);
-            this.SpinPicWidth.TabIndex = 0;
-            this.SpinPicWidth.Value = new decimal(new int[] {
-            400,
-            0,
-            0,
-            131072});
-            // 
-            // LblPictureWidth
-            // 
-            this.LblPictureWidth.AutoSize = true;
-            this.LblPictureWidth.Location = new System.Drawing.Point(6, 29);
-            this.LblPictureWidth.Name = "LblPictureWidth";
-            this.LblPictureWidth.Size = new System.Drawing.Size(71, 13);
-            this.LblPictureWidth.TabIndex = 1;
-            this.LblPictureWidth.Text = "Picture Width";
-            // 
-            // DdlPicPosition
-            // 
-            this.DdlPicPosition.FormattingEnabled = true;
-            this.DdlPicPosition.Location = new System.Drawing.Point(109, 199);
-            this.DdlPicPosition.Name = "DdlPicPosition";
-            this.DdlPicPosition.Size = new System.Drawing.Size(121, 21);
-            this.DdlPicPosition.TabIndex = 1;
-            // 
-            // RadWidthAll
-            // 
-            this.RadWidthAll.AutoSize = true;
-            this.RadWidthAll.Location = new System.Drawing.Point(52, 76);
-            this.RadWidthAll.Name = "RadWidthAll";
-            this.RadWidthAll.Size = new System.Drawing.Size(159, 17);
-            this.RadWidthAll.TabIndex = 2;
-            this.RadWidthAll.TabStop = true;
-            this.RadWidthAll.Text = "Use this width for all pictures";
-            this.RadWidthAll.UseVisualStyleBackColor = true;
-            // 
-            // RadWidthIf
-            // 
-            this.RadWidthIf.AutoSize = true;
-            this.RadWidthIf.Checked = true;
-            this.RadWidthIf.Location = new System.Drawing.Point(52, 53);
-            this.RadWidthIf.Name = "RadWidthIf";
-            this.RadWidthIf.Size = new System.Drawing.Size(199, 17);
-            this.RadWidthIf.TabIndex = 3;
-            this.RadWidthIf.TabStop = true;
-            this.RadWidthIf.Text = "Use this width if a width not specified";
-            this.RadWidthIf.UseVisualStyleBackColor = true;
-            // 
-            // LblPicPosition
-            // 
-            this.LblPicPosition.AutoSize = true;
-            this.LblPicPosition.Location = new System.Drawing.Point(23, 202);
-            this.LblPicPosition.Name = "LblPicPosition";
-            this.LblPicPosition.Size = new System.Drawing.Size(80, 13);
-            this.LblPicPosition.TabIndex = 4;
-            this.LblPicPosition.Text = "Picture Position";
-            // 
-            // ChkDontPicture
-            // 
-            this.ChkDontPicture.AutoSize = true;
-            this.ChkDontPicture.Location = new System.Drawing.Point(16, 13);
-            this.ChkDontPicture.Name = "ChkDontPicture";
-            this.ChkDontPicture.Size = new System.Drawing.Size(135, 17);
-            this.ChkDontPicture.TabIndex = 5;
-            this.ChkDontPicture.Text = "Do not include pictures";
-            this.ChkDontPicture.UseVisualStyleBackColor = true;
-            // 
-            // RadEntirePage
-            // 
-            this.RadEntirePage.AutoSize = true;
-            this.RadEntirePage.Location = new System.Drawing.Point(52, 118);
-            this.RadEntirePage.Name = "RadEntirePage";
-            this.RadEntirePage.Size = new System.Drawing.Size(80, 17);
-            this.RadEntirePage.TabIndex = 4;
-            this.RadEntirePage.TabStop = true;
-            this.RadEntirePage.Text = "Entire Page";
-            this.RadEntirePage.UseVisualStyleBackColor = true;
-            // 
-            // RadSingleColumn
-            // 
-            this.RadSingleColumn.AutoSize = true;
-            this.RadSingleColumn.Location = new System.Drawing.Point(52, 98);
-            this.RadSingleColumn.Name = "RadSingleColumn";
-            this.RadSingleColumn.Size = new System.Drawing.Size(92, 17);
-            this.RadSingleColumn.TabIndex = 5;
-            this.RadSingleColumn.TabStop = true;
-            this.RadSingleColumn.Text = "Single Column";
-            this.RadSingleColumn.UseVisualStyleBackColor = true;
-            // 
-            // Lblcm
-            // 
-            this.Lblcm.AutoSize = true;
-            this.Lblcm.Location = new System.Drawing.Point(182, 29);
-            this.Lblcm.Name = "Lblcm";
-            this.Lblcm.Size = new System.Drawing.Size(21, 13);
-            this.Lblcm.TabIndex = 6;
-            this.Lblcm.Text = "cm";
-            // 
             // ConfigurationTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1666,6 +1667,11 @@
             this.tabOthers.PerformLayout();
             this.tabPreview.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).EndInit();
+            this.tabPicture.ResumeLayout(false);
+            this.tabPicture.PerformLayout();
+            this.GrpPicture.ResumeLayout(false);
+            this.GrpPicture.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SpinPicWidth)).EndInit();
             this.TLPanelOuter.ResumeLayout(false);
             this.TLPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -1674,11 +1680,6 @@
             this.TLPanel3.ResumeLayout(false);
             this.TLPanel3.PerformLayout();
             this.panel3.ResumeLayout(false);
-            this.tabPicture.ResumeLayout(false);
-            this.tabPicture.PerformLayout();
-            this.GrpPicture.ResumeLayout(false);
-            this.GrpPicture.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SpinPicWidth)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

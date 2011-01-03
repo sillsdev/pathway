@@ -701,7 +701,7 @@ namespace SIL.PublishingSolution
 
         private void chkAvailable_Validated(object sender, EventArgs e)
         {
-            _CToolBL.chkAvailable_ValidatedBL(sender);
+            //_CToolBL.chkAvailable_ValidatedBL(sender);
         }
 
         private void txtComment_Validated(object sender, EventArgs e)
@@ -1005,6 +1005,11 @@ namespace SIL.PublishingSolution
         private void btnNext_Click(object sender, EventArgs e)
         {
             _CToolBL.ShowPreview(2);
+        }
+
+        private void chkAvailable_CheckStateChanged(object sender, EventArgs e)
+        {
+            _CToolBL.chkAvailable_ValidatedBL(sender);
         }
      }
 }

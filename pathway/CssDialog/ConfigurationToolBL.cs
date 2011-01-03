@@ -1459,7 +1459,7 @@ namespace SIL.PublishingSolution
         //}
 
         /// <summary>
-        /// When the condigurationtool is run from EXE, the mediatype has changed 
+        /// When the configurationtool is run from EXE, the mediatype has changed 
         /// by Prinvia dialog selection
         /// </summary>
         protected void SetMediaType()
@@ -1821,6 +1821,7 @@ namespace SIL.PublishingSolution
         public void WriteMedia()
         {
             XmlNode baseNode = Param.GetItem("//categories/category[@name = \"Media\"]");
+            if (MediaType.Length <= 0) MediaType = Param.GetAttrByName("//categories/category", "Media", "select").ToLower();
             Param.SetAttrValue(baseNode, "select", MediaType);
             Param.Write();
         }
