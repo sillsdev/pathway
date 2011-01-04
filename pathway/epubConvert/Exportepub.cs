@@ -211,6 +211,22 @@ namespace SIL.PublishingSolution
                     splitFiles.Add(preProcessor.ProcessedXhtml);
                 }
 
+                // If we are working with a dictionary and have a reversal index, process it now
+                if (projInfo.IsReversalExist)
+                {
+                    var revFile = Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
+                    // EDB 10/20/2010 - TD-1629 - remove when merged CSS passes validation
+                    // (note that the rev file uses a "FlexRev.css", not "main.css"
+                    Common.SetDefaultCSS(revFile, defaultCSS);
+                    // EDB 10/29/2010 FWR-2697 - remove when fixed in FLEx
+                    Common.ReplaceInFile(revFile, "<ReversalIndexEntry_Self", "<span class='ReversalIndexEntry_Self'");
+                    Common.ReplaceInFile(revFile, "</ReversalIndexEntry_Self", "</span");
+                    // now split out the html as needed
+                    List<string> fileNameWithPath = new List<string>();
+                    fileNameWithPath = Common.SplitXhtmlFile(revFile, "letHead", "RevIndex", true);
+                    splitFiles.AddRange(fileNameWithPath);
+                }
+
                 foreach (string file in splitFiles)
                 {
                     if (File.Exists(file))
@@ -395,10 +411,9 @@ namespace SIL.PublishingSolution
                 // copy the xhtml files into the content directory
                 foreach (string file in htmlFiles)
                 {
-                    //string name = GetBookName(file);
-                    string name = Path.GetFileName(file);
+                    string name = Path.GetFileNameWithoutExtension(file).Substring(0, 8);
                     string substring = Path.GetFileNameWithoutExtension(file).Substring(8);
-                    string dest = Common.PathCombine(contentFolder, "PartFile" + substring.PadLeft(6, '0') + ".xhtml");
+                    string dest = Common.PathCombine(contentFolder, name + substring.PadLeft(6, '0') + ".xhtml");
                     File.Move(file, dest);
                     // split the file into smaller pieces if needed (scriptures only for now)
                     if (_inputType == "scripture")
@@ -870,7 +885,14 @@ namespace SIL.PublishingSolution
             XmlNodeList nodes;
             if (_inputType.Equals("dictionary"))
             {
-                nodes = xmlDocument.SelectNodes("//xhtml:div[@class='entry']", namespaceManager);
+                if (xhtmlFileName.Contains("RevIndex"))
+                {
+                    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='ReversalIndexEntry_Self']", namespaceManager);
+                }
+                else
+                {
+                    nodes = xmlDocument.SelectNodes("//xhtml:div[@class='entry']", namespaceManager);
+                }
             }
             else
             {
@@ -1388,12 +1410,28 @@ namespace SIL.PublishingSolution
             ncx.WriteStartElement("navMap");
             // individual navpoint elements (one for each xhtml)
             string[] files = Directory.GetFiles(contentFolder, "*.xhtml");
+            bool RevIndex = false;
             int index = 1;
             int chapNum = 1;
             bool needsEnd = false;
             foreach (string file in files)
             {
                 string name = Path.GetFileName(file);
+                // nest the reversal index entries
+                if (name.Contains("RevIndex") && RevIndex == false)
+                {
+                    ncx.WriteStartElement("navPoint");
+                    ncx.WriteAttributeString("id", "dtb:uid");
+                    ncx.WriteAttributeString("playOrder", index.ToString());
+                    ncx.WriteStartElement("navLabel");
+                    ncx.WriteElementString("text", "Reversal Index");
+                    ncx.WriteEndElement(); // navlabel
+                    ncx.WriteStartElement("content");
+                    ncx.WriteAttributeString("src", name);
+                    ncx.WriteEndElement(); // meta
+                    index++;
+                    RevIndex = true;
+                }
 //              string nameNoExt = Path.GetFileNameWithoutExtension(file);
                 if (!Path.GetFileNameWithoutExtension(file).EndsWith("_"))
                 {
@@ -1456,6 +1494,11 @@ namespace SIL.PublishingSolution
                     // end the book's navPoint element
                     ncx.WriteEndElement(); // navPoint
                 }
+            }
+            // close out the reversal index entry if needed
+            if (RevIndex)
+            {
+                ncx.WriteEndElement(); // navPoint
             }
             ncx.WriteEndElement(); // navmap
             ncx.WriteEndElement(); // ncx

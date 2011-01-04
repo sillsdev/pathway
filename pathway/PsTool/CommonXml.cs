@@ -910,6 +910,7 @@ namespace SIL.Tool
         }
         #endregion
 
+
         /// <summary>
         /// This method splits the input xhtml into different files 
         /// and stores in the temp path using the class name to split the file
@@ -919,7 +920,24 @@ namespace SIL.Tool
         /// <param name="bookSplitterClass">The class name to split the class</param>
         /// <param name = "adjacentClass"></param>
         /// <returns>The entire path of the splitted files are retured as List</returns>
-        public static List<string> SplitXhtmlFile(string xhtmlFileWithPath, string bookSplitterClass,bool adjacentClass)
+        public static List<string> SplitXhtmlFile(string xhtmlFileWithPath, string bookSplitterClass, bool adjacentClass)
+        {
+            return SplitXhtmlFile(xhtmlFileWithPath, bookSplitterClass, "PartFile", adjacentClass);
+        }
+
+
+        /// <summary>
+        /// This method splits the input xhtml into different files 
+        /// and stores in the temp path using the class name to split the file. This override allows you
+        /// to specify the resulting filename prefix (e.g., "PartFile" in "PartFile1.xhtml").
+        /// 
+        /// </summary>
+        /// <param name="xhtmlFileWithPath">The input Xhtml File </param>
+        /// <param name="bookSplitterClass">The class name to split the class</param>
+        /// <param name="filenamePrefix"></param>
+        /// <param name = "adjacentClass"></param>
+        /// <returns>The entire path of the splitted files are retured as List</returns>
+        public static List<string> SplitXhtmlFile(string xhtmlFileWithPath, string bookSplitterClass, string filenamePrefix, bool adjacentClass)
         {
             List<string> books = new List<string>();
             XmlTextReader _reader;
@@ -961,7 +979,7 @@ namespace SIL.Tool
             string allUserPath = Path.GetTempPath(); 
             for (int i = 0; i < counter; i++)
             {
-                string fileName = Path.Combine(allUserPath, "PartFile" + (i + 1) + ".xhtml");
+                string fileName = Path.Combine(allUserPath, filenamePrefix + (i + 1) + ".xhtml");
                 DeleteFile(fileName);
                 XmlTextWriter writer = null;
                 try

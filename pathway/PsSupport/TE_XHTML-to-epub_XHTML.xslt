@@ -199,6 +199,10 @@
 				<xsl:if test="@class='semantic-domain-name'">
 					<xsl:text> - </xsl:text>
 				</xsl:if>
+				<!-- if this is a reversal index entry (for a dictionary), add an ID -->
+				<xsl:if test="@class='ReversalIndexEntry_Self'">
+					<xsl:attribute name="id"><xsl:value-of select="generate-id()"/></xsl:attribute>
+				</xsl:if>
 				<!-- if this is a Chapter_Number span, add an ID with Book and Chapter -->
 				<xsl:if test="@class = 'Chapter_Number'">
 				<!--	<xsl:attribute name="id"><xsl:value-of select="../../../../xhtml:span[1]"/><xsl:value-of select="."/></xsl:attribute> -->
