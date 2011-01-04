@@ -19,6 +19,7 @@ namespace epubConvert
 
         // variables
         private PrivateFontCollection pfc = new PrivateFontCollection();
+        private string[] _silFonts;
 
         // methods
         public FontWarningDlg()
@@ -60,8 +61,11 @@ namespace epubConvert
             if (ddlSILFonts.Items.Count == 0)
             {
                 // update the possible replacements based on what's installed on this system
-                BuildSILFontList();
-                ddlSILFonts.SelectedIndex = 0;
+                ddlSILFonts.Items.AddRange(_silFonts);
+                if (ddlSILFonts.Items.Count > 0)
+                {
+                    ddlSILFonts.SelectedIndex = 0;
+                }
             }
             if (RemainingIssues > 0)
             {
@@ -74,7 +78,7 @@ namespace epubConvert
         /// <summary>
         /// Scans the current workstation's Fonts directory and builds the list of available SIL fonts
         /// </summary>
-        private void BuildSILFontList()
+        public int BuildSILFontList()
         {
             string fontFolder = FontInternals.GetFontFolderPath();
             string[] files = Directory.GetFiles(fontFolder, "*.ttf");
@@ -85,11 +89,13 @@ namespace epubConvert
                     pfc.AddFontFile(file);
                 }
             }
-            // add the font families to the dropdown
+            int index = 0;
+            _silFonts = new string[pfc.Families.Length];
             foreach (var fontFamily in pfc.Families)
             {
-                int item = ddlSILFonts.Items.Add(fontFamily.GetName(0));
+                _silFonts[index++] = fontFamily.GetName(0);
             }
+            return index;
         }
 
         private void ddlSILFonts_SelectedIndexChanged(object sender, EventArgs e)

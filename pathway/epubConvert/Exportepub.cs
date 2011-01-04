@@ -38,6 +38,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using epubConvert;
+using epubConvert.Properties;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -317,8 +318,28 @@ namespace SIL.PublishingSolution
                                 }
                                 continue;
                             }
+                            // sanity check - are there any SIL fonts installed?
+                            int count = dlg.BuildSILFontList();
+                            if (count == 0)
+                            {
+                                // No SIL fonts found (returns a DialogResult.Abort):
+                                // tell the user there are no SIL fonts installed, and allow them to Cancel
+                                // and install the fonts now
+                                if (MessageBox.Show (Resources.NoSILFontsMessage, Resources.NoSILFontsTitle, 
+                                    MessageBoxButtons.OKCancel,MessageBoxIcon.Warning) 
+                                    == DialogResult.Cancel)
+                                {
+                                    // user cancelled the operation - Cancel out of the whole .epub export
+                                    return false;
+                                }
+                                // user clicked OK - leave the embedded font list alone and continue the export
+                                // (presumably the user has the proper rights to this font, even though it isn't
+                                // an SIL font)
+                                break;
+                            }
                             // show the dialog
-                            if (dlg.ShowDialog() == DialogResult.OK)
+                            DialogResult result = dlg.ShowDialog();
+                            if (result == DialogResult.OK)
                             {
                                 if (!dlg.UseFontAnyway() && !nonSilFont.Key.Name.Equals(dlg.SelectedFont))
                                 {
@@ -337,7 +358,7 @@ namespace SIL.PublishingSolution
                                     }
                                 }
                             }
-                            else
+                            else if (result == DialogResult.Cancel)
                             {
                                 // User cancelled - Cancel out of the whole .epub export
                                 return false;
@@ -438,7 +459,7 @@ namespace SIL.PublishingSolution
                 // generate the toc / manifest files
                 CreateOpf(projInfo, contentFolder, bookId);
                 CreateNcx(projInfo, contentFolder, bookId);
-                CreateCoverImage(contentFolder);
+                CreateCoverImage(contentFolder, projInfo);
 
                 // Done adding content - now zip the whole thing up and name it
                 string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
@@ -785,20 +806,33 @@ namespace SIL.PublishingSolution
         /// is saved as "cover.png" in the content (OEBPS) folder.
         /// </summary>
         /// <param name="contentFolder">Content folder the resulting file is saved to.</param>
-        private void CreateCoverImage(string contentFolder)
+        /// <param name="projInfo"></param>
+        private void CreateCoverImage(string contentFolder, PublicationInformation projInfo)
         {
             // open up the appropriate image for processing
             string strGraphicsFolder = Common.PathCombine(Common.GetPSApplicationPath(), "Graphic");
-            string strImageFile = Path.Combine(strGraphicsFolder,
-                                               (_inputType == "dictionary") ? "book_se.png" : "book_bte.png");
+            string strImageFile = Path.Combine(strGraphicsFolder, "cover.png");
             if (!File.Exists(strImageFile)) return;
             var bmp = new Bitmap(strImageFile);
             Graphics g = Graphics.FromImage(bmp);
-            // We're going to be "badging" the book image with the language code; this badge consists of a rectangle
-            // in the lower-right side with the language code string in it.
+            // We're going to be "badging" the book image with a title - this consists of the database name
+            // and project name (split into multiple lines if from Paratext)
             var enumerator = _langFontDictionary.GetEnumerator();
             enumerator.MoveNext();
-            var langCode = enumerator.Current.Key;
+            var sb = new StringBuilder();
+            sb.AppendLine(Common.databaseName);
+            if (projInfo.ProjectName.Contains("EBook (epub)"))
+            {
+                // Paratext has a _really long_ project name - split out into multiple lines
+                string[] parts = projInfo.ProjectName.Split('_');
+                sb.AppendLine(parts[0]); // "EBook (epub)"
+                sb.Append(parts[1]); // date of publication
+            }
+            else
+            {
+                sb.Append(projInfo.ProjectName);
+            }
+            //var langCode = enumerator.Current.Key;
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
             var strFormat = new StringFormat
             {
@@ -806,15 +840,15 @@ namespace SIL.PublishingSolution
                 LineAlignment = StringAlignment.Center
             };
             // figure out the dimensions of our rect based on the font info
-            Font badgeFont = new Font("Tahoma", 64);
-            SizeF size = g.MeasureString(langCode, badgeFont, 640);
+            Font badgeFont = new Font("Times New Roman", 48);
+            SizeF size = g.MeasureString(sb.ToString(), badgeFont, 640);
             int width = (int) Math.Ceiling(size.Width);
             int height = (int) Math.Ceiling(size.Height);
-            Rectangle rect = new Rectangle((620 - width), (620-height), width, height);
+            Rectangle rect = new Rectangle((225 - (width / 2)), 100, width, height);
             // draw the badge (rect and string)
-            g.FillRectangle(Brushes.White, rect);
-            g.DrawRectangle(Pens.Black, rect);
-            g.DrawString(langCode, badgeFont, Brushes.Black, new RectangleF(new PointF((620f - size.Width), (620f - size.Height)),size), strFormat);
+            g.FillRectangle(Brushes.Brown, rect);
+            g.DrawRectangle(Pens.Gold, rect);
+            g.DrawString(sb.ToString(), badgeFont, Brushes.Gold, new RectangleF(new PointF((225f - (size.Width / 2)), 100f),size), strFormat);
             // save this puppy
             string strCoverImageFile = Path.Combine(contentFolder, "cover.png");
             bmp.Save(strCoverImageFile);
@@ -1134,7 +1168,7 @@ namespace SIL.PublishingSolution
             opf.WriteStartElement("metadata");
             opf.WriteAttributeString("xmlns", "dc", null, "http://purl.org/dc/elements/1.1/");
             opf.WriteAttributeString("xmlns", "opf", null, "http://www.idpf.org/2007/opf");
-            opf.WriteElementString("dc", "title", null, projInfo.ProjectName);
+            opf.WriteElementString("dc", "title", null, Common.databaseName + " " + projInfo.ProjectName);
             opf.WriteStartElement("dc", "creator", null);       //<dc:creator opf:role="aut">[author]</dc:creator>
             opf.WriteAttributeString("opf", "role", null, "aut");
             opf.WriteValue(Environment.UserName);

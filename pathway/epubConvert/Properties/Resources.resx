@@ -144,4 +144,10 @@
   <data name="MissingFontTitle" xml:space="preserve">
     <value>Missing Font: '{0}'</value>
   </data>
+  <data name="NoSILFontsMessage" xml:space="preserve">
+    <value>No SIL Fonts were found on this machine. Make sure you have the proper rights to embed the fonts you have selected in your distributed document. If you are not sure, click Cancel and contact your administrator to install SIL fonts on this machine.</value>
+  </data>
+  <data name="NoSILFontsTitle" xml:space="preserve">
+    <value>No SIL Fonts Found</value>
+  </data>
 </root>

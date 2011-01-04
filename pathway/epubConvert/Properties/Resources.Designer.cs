@@ -133,6 +133,24 @@ namespace epubConvert.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No SIL Fonts were found on this machine. Make sure you have the proper rights to embed the fonts you have selected in your distributed document. If you are not sure, click Cancel and contact your administrator to install SIL fonts on this machine..
+        /// </summary>
+        internal static string NoSILFontsMessage {
+            get {
+                return ResourceManager.GetString("NoSILFontsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No SIL Fonts Found.
+        /// </summary>
+        internal static string NoSILFontsTitle {
+            get {
+                return ResourceManager.GetString("NoSILFontsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do this for the next {0} item(s)..
         /// </summary>
         internal static string RepeatAction {
