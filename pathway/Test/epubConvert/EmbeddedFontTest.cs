@@ -161,12 +161,12 @@ namespace Test.epubConvert
             Assert.AreEqual(style, silFont.Style);
         }
         /// <summary>
-        /// Test the SIL Gentium font
+        /// Test the SIL Gentium Basic font
         /// </summary>
         [Test]
         public void GentiumTest()
         {
-            var silFont = new EmbeddedFont("Gentium");
+            var silFont = new EmbeddedFont("Gentium Basic");
             Assert.IsTrue(EmbeddedFont.IsInstalled(silFont.Filename));
             Assert.IsTrue(silFont.SILFont);
             Assert.IsTrue(silFont.Serif);
