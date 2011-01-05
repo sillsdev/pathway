@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Dec-10-2010 for TD-1723(Sorry could not update message in &quot;Update GuideWord&quot; screen.)
+&apos;Changed On Jan-05-2010 for TD-1786(Output files does not have compete properties settings and format in FLEX.)
 
 &apos;Define the values to Constant Variables for First Guide word, Last Guide word ,Headword Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -790,7 +790,7 @@ Sub RemoveOldGuides
 		oPar = oParEnum.nextElement() 
 		If oPar.supportsService(&quot;com.sun.star.text.Paragraph&quot;) Then 
 			If InStr(oPar.ParaStyleName, &quot;Guide&quot;) &gt; 0 Then 
-			    oPar.Anchor.ParaStyleName = ENTRYPARASTYLE
+			    &apos;oPar.Anchor.ParaStyleName = ENTRYPARASTYLE
 				ThisComponent.Text.removeTextContent(oPar) 
 			End If 
 		End If 

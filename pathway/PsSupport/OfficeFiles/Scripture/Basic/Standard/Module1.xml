@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Dec-30-2010 for TD-1772(Book name lost in Sena 3)
+&apos;Changed On Jan-05-2011 for TD-1786(Output files does not have compete properties settings and format in FLEX.)
 
 &apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -303,7 +303,7 @@ Sub ExportToDOC_PDF
 		oSvc = createUnoService(&quot;com.sun.star.system.SystemShellExecute&quot;) 
 		oSvc.execute(FilePathWithName, &quot;&quot;, 0) 
 	End If
-
+	
 	oDoc.dispose()
 	&apos;wait 5000 
 &apos;Exit Sub
@@ -350,8 +350,6 @@ End If
 mytime = now
 
 AlingOverlappingImages()
-keep = chr(10) &amp; &quot;Overlapping Images &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
-mytime = now
 
 &apos;=========Progressbar
 ShowProcessingDialog() 
@@ -359,19 +357,10 @@ ProgressValue = 5
 oProgressBarModel.ProgressValueMax = PageCount * 4
 &apos;=========Progressbar
 
-keep = keep &amp; chr(10) &amp; &quot;ProgressDialog &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
-mytime = now
-
 oProgressBarModel.ProgressValue = ProgressValue
 RemoveOldGuides
 
-keep = keep &amp; chr(10) &amp; &quot;RemoveOldGuides &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
-mytime = now
-
 KeepNextParagraph
-
-keep = keep &amp; chr(10) &amp; &quot;KeepNextParagraph &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
-mytime = now
 
 PageCount = TotalPages
 Redim LastParagraph(PageCount+2) As String
@@ -379,7 +368,7 @@ Dim HiddenParagraph(PageCount,1) As String
 
 GetLastParagraph
 
-keep = keep &amp; chr(10) &amp; &quot;GetLastParagraph &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
+keep = chr(10) &amp; &quot;After General &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
 mytime = now
 
 strStartBook = &quot;&quot;
@@ -548,8 +537,8 @@ Loop While oVC.jumpToNextPage
     InsertReference(HiddenParagraph,PageCount)
     oProgressBarModel.ProgressValue = PageCount * 4
 
-    keep = keep &amp; chr(10) &amp; &quot;InsertReference &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
-    mytime= now
+    keep = keep &amp; chr(10) &amp; &quot;After Print &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
+    &apos;msgbox keep
 	oDoc.store() 
 &apos;===========Progressbar
 	CloseProgressBar
@@ -558,9 +547,6 @@ Loop While oVC.jumpToNextPage
 	&apos;AutoSaveEnableDisable(true)&apos;enable the &quot;Auto Recovery&quot;
 		
 	oContWindow.Visible = true 
-	
-	keep = keep &amp; chr(10) &amp; &quot;Store and CloseProgressbar &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
-    &apos;msgbox keep
 Exit Sub
 MyError:
 	If isProgressClosed = False Then
@@ -933,7 +919,7 @@ Sub RemoveOldGuides
 		oPar = oParEnum.nextElement() 
 		If oPar.supportsService(&quot;com.sun.star.text.Paragraph&quot;) Then 
 			If InStr(oPar.ParaStyleName, &quot;Guide&quot;) &gt; 0 Then 
-			    oPar.Anchor.ParaStyleName = ENTRYPARASTYLE
+			    &apos;oPar.Anchor.ParaStyleName = ENTRYPARASTYLE
 				ThisComponent.Text.removeTextContent(oPar) 
 			End If 
 		End If 
