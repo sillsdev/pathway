@@ -533,6 +533,8 @@ namespace SIL.PublishingSolution
                     sb.Append(" font-style : ");
                     sb.Append(embeddedFont.Style);
                     sb.AppendLine(";");
+                    sb.AppendLine(" font-variant : normal;");
+                    sb.AppendLine(" font-size : all;");
                     sb.Append(" src : url(");
                     sb.Append(Path.GetFileName(embeddedFont.Filename));
                     sb.AppendLine(");");
@@ -913,6 +915,8 @@ namespace SIL.PublishingSolution
                         // for a dictionary, the headword / headword-minor is the label
                         if (!node.HasChildNodes)
                         {
+                            // reset the stringbuilder
+                            sb.Length = 0;
                             // This entry doesn't have any information - skip it
                             continue;
                         }
