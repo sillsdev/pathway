@@ -80,7 +80,7 @@ rmdir /s/q bin
 cd %base%\LogosConvert
 rmdir /s/q obj
 rmdir /s/q bin
-cd %base%\ParatextSupportcl
+cd %base%\ParatextSupport
 rmdir /s/q obj
 rmdir /s/q bin
 cd %base%\PsExport
