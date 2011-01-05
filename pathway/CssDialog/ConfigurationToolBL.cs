@@ -1925,7 +1925,7 @@ namespace SIL.PublishingSolution
             {
                 Param.SetAttrValue(baseNode, key, attribValue);
             }
-            _cssNames.Add(attribValue);
+
             Param.Write();
             return true;
         }
