@@ -1288,7 +1288,16 @@ namespace SIL.PublishingSolution
                     // if we can, write out the "user friendly" book name in the TOC
                     string fileId = GetBookID(file); 
                     opf.WriteStartElement("item");
-                    opf.WriteAttributeString("id", fileId);
+                    if (_inputType == "dictionary")
+                    {
+                        // the book ID can be wacky (and non-unique) for dictionaries. Just use the filename.
+                        opf.WriteAttributeString("id", nameNoExt);
+                    }
+                    else
+                    {
+                        // scripture - use the book ID
+                        opf.WriteAttributeString("id", fileId);
+                    }
                     opf.WriteAttributeString("href", name);
                     opf.WriteAttributeString("media-type", "application/xhtml+xml");
                     opf.WriteEndElement(); // item
@@ -1343,7 +1352,16 @@ namespace SIL.PublishingSolution
                 {
                     string fileId = GetBookID(file); 
                     opf.WriteStartElement("itemref"); // item (stylesheet)
-                    opf.WriteAttributeString("idref", fileId);
+                    if (_inputType == "dictionary")
+                    {
+                        // the book ID can be wacky (and non-unique) for dictionaries. Just use the filename.
+                        opf.WriteAttributeString("idref", Path.GetFileNameWithoutExtension(file));
+                    }
+                    else
+                    {
+                        // scripture - use the book ID
+                        opf.WriteAttributeString("idref", fileId);
+                    }
                     opf.WriteEndElement(); // itemref
                 }
             }
@@ -1359,7 +1377,7 @@ namespace SIL.PublishingSolution
             // first xhtml filename
             opf.WriteStartElement("reference");
             opf.WriteAttributeString("type", "text");
-            opf.WriteAttributeString("title", projInfo.ProjectName);
+            opf.WriteAttributeString("title", Common.databaseName + " " + projInfo.ProjectName);
             int index = 0;
             while (!files[index].EndsWith(".xhtml") && index < files.Length)
             {
