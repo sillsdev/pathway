@@ -670,11 +670,11 @@ namespace SIL.PublishingSolution
             // BEGIN Generate Styles.Xml File
             var sXML = new StylesXML();
             Styles styleName = sXML.CreateStyles(projInfo.DefaultCssFileWithPath, strStylePath, projInfo.DefaultXhtmlFileWithPath,
-                                                 false, projInfo.IsExtraProcessing);
+                                                 false);
             //To set Constent variables for User Desire
             string fname = Common.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             string macroFileName = Common.PathCombine(projInfo.DictionaryPath, fname);
-            IncludeTextinMacro(strMacroPath, styleName.ReferenceFormat, macroFileName);
+            IncludeTextinMacro(strMacroPath, styleName.ReferenceFormat, macroFileName, projInfo.IsExtraProcessing);
 
             // BEGIN Generate Meta.Xml File
             var metaXML = new MetaXML();
@@ -829,7 +829,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private static void IncludeTextinMacro(string strMacroPath, string ReferenceFormat, string saveAsPath)
+        private static void IncludeTextinMacro(string strMacroPath, string ReferenceFormat, string saveAsPath, bool runMacroFirstTime)
         {
             var xmldoc = new XmlDocument {XmlResolver = null};
             xmldoc.Load(strMacroPath);
@@ -855,7 +855,8 @@ namespace SIL.PublishingSolution
                 string line2 = "\nConst OutputFormat = \"" + publicationInfo.FinalOutput + "\"" +
                                "\nConst FilePath = \"" + saveAsPath + "\"" + "\nConst IsPreview = \"" +
                                publicationInfo.JpgPreview + "\"";
-                string combined = line1 + line2 + seperator;
+                string line3 = "\nConst RunMacroFirstTime = \"" + runMacroFirstTime + "\"";
+                string combined = line1 + line2 + line3 + seperator;
 
                 ele.InnerText = combined + ele.InnerText;
             }
