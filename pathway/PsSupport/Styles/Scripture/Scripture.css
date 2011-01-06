@@ -102,7 +102,6 @@
     color: purple;
     content: attr(title);
     vertical-align: super;
-    vertical-align: top;
     line-height: none;
 }
 .Note_CrossHYPHENReference_Paragraph::footnote-marker {
@@ -244,14 +243,12 @@ span {
 }
 .Verse_Number {
     vertical-align: super;
-    vertical-align: top;
     text-indent: 0pt;
     margin-left: 0pt;
     string-set: verse content();
 }
 .Verse_Number_In_Note {
     vertical-align: super;
-    vertical-align: top;
     text-indent: 0pt;
     margin-left: 0pt;
 }

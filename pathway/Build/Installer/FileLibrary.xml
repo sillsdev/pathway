@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\PublishingSolution\Graphic\cover.png" ComponentGuid="700C5DC5-8A60-45D7-B111-2439ADFACA45"/>
+	<File Path="Files\PathwaySupport\Graphic\cover.png" ComponentGuid="BBFEF406-EFD8-42D2-BB2F-06D4936AE8B2"/>
+	<File Path="Files\ConfigurationTool\Graphic\cover.png" ComponentGuid="863B1240-E8A6-4F6E-876B-6F3066B8BA5C"/>
 	<File Path="Files\PublishingSolution\Styles\Dictionary\Vernacular_rtl.css" ComponentGuid="6BEFED32-F1C9-4D84-8F73-86160CFFB900"/>
 	<File Path="Files\PublishingSolution\InDesignFiles\Dictionary\Scripts\Scripts Panel\Testing.jsx" ComponentGuid="79282BA1-9091-4658-B655-F9AFD4A6D82E"/>
 	<File Path="Files\PublishingSolution\Graphic\book_se.png" ComponentGuid="C463601B-DDEB-48B4-ABD9-B9B0718AF608"/>
