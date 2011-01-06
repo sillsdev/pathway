@@ -6,28 +6,9 @@
 		<div class="yui-b" >
 			<div class="yui-ge"><div class="yui-u first">
 
-		   		<table>	
-		   		<tr> 
-		   			<td>
-						<h3>Look up English, Chinese or Nuosu Yi</h3>
-						<br>
-						&nbsp;
-				   		<a href="">Yi Index Chart</a>				   		
-						&nbsp;&nbsp;
-				   		<a href="">Radical Stroke Index</a>
-		   			</td>
-
-				</tr>
-		         <tr>
-		   			<td>
-				 	     <form id="searchform" method="get" action="<?php bloginfo('home'); ?>">
-							<input type="text" name="s" id="s" value="" size=40>
-							<input type="submit" id="searchsubmit" name="search" value="Search" />
-			 	     	 </form>		   			
-		   			</td>
-		   		</tr>
-		   		</table>  	
-
+	<?php 
+	require("searchform.php");
+	?>
 
 <!-- 2nd sidebar -->
 </div><!-- end yiu-u -->
