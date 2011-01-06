@@ -16,9 +16,8 @@
 							<input type="submit" id="searchsubmit" name="search" value="Search" />
 							<select name="key">
 								<option value=""></option>
-								<option value="1">Nuosu Character</option>
-								<option value="2">Chinese Character</option>
-								<option value="3">English</option>
+								<option value="1">Nuosu Pinyin</option>
+								<option value="2">English</option>
 							</select>							
 			 	     	 </form>
 		   			</td>
