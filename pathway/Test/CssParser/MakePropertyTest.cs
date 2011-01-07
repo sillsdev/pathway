@@ -531,10 +531,10 @@ namespace Test.CssParserTest
         public void FontFamily3()
         {
             _input.Name = "font-family";
-            _input.StringValue = "Tahoma, \"Times New Roman\",serif";
+            _input.StringValue = "Georgia, \"Times New Roman\",serif";
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
-            _expected.Add("font-family", "Tahoma");
+            _expected.Add("font-family", "Georgia");
             Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
         }
 
@@ -542,10 +542,10 @@ namespace Test.CssParserTest
         public void FontFamily4()
         {
             _input.Name = "font-family";
-            _input.StringValue = "dummyfont, Tahoma,\"Times New Roman\",serif";
+            _input.StringValue = "dummyfont, Georgia,\"Times New Roman\",serif";
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
-            _expected.Add("font-family", "Tahoma");
+            _expected.Add("font-family", "Georgia");
             Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
         }
 
@@ -745,7 +745,7 @@ namespace Test.CssParserTest
         }
         #endregion Public Functions
 
-        /// ///////////////////////////////////////////////////////////////////////////////////
+        
 
         #region private Functions
         private void BorderExpectedValues()
