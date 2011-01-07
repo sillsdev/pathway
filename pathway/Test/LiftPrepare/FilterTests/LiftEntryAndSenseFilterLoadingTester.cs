@@ -41,12 +41,13 @@ namespace Test.LiftPrepare.FilterTests
         }
 
         [Test]
-        [ExpectedException(typeof(LiftFilterChooseStatementException))]
         public void loadingInvalidEntryAndSenseFilter()
         {
-            var entryAndSenseFilters = setupEntryAndSenseFilters("");
-            loadEntryAndSenseFiltersThroughMockView(entryAndSenseFilters);
-            mocks.VerifyAllExpectationsHaveBeenMet();
+            Assert.Throws<LiftFilterChooseStatementException>(
+                delegate { setupEntryAndSenseFilters(""); } );
+            //var entryAndSenseFilters = setupEntryAndSenseFilters("");
+            //loadEntryAndSenseFiltersThroughMockView(entryAndSenseFilters);
+            //mocks.VerifyAllExpectationsHaveBeenMet();
         }
 
         private void loadEntryAndSenseFiltersThroughMockView(LiftEntryAndSenseFilters filters)

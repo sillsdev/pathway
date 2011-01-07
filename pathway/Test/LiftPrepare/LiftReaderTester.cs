@@ -15,10 +15,14 @@ namespace Test.LiftPrepare
         }
 
         [Test]
-        [ExpectedException(typeof(Environ.InvalidLiftException))]
         public void testInvalidLift()
         {
-            liftReader = new LiftReader(TestEnvironment.InputRoot + @"simple/invalidLift.lift");
+            Assert.Throws<Environ.InvalidLiftException>(
+                delegate
+                    {
+                        new LiftReader(TestEnvironment.InputRoot + @"simple/invalidLift.lift");
+                    }
+                );
         }
     }
 }

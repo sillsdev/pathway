@@ -31,25 +31,33 @@ namespace Test.PsTool
         ///A test for Run
         ///</summary>
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void RunEmptyTest1()
         {
             string instPath = string.Empty;
             string name = string.Empty;
             bool wait = false;
-            SubProcess.Run(instPath, name, wait);
+            Assert.Throws<ArgumentException>(
+                delegate
+                    {
+                        SubProcess.Run(instPath, name, wait);
+                    }
+                );
         }
 
         /// <summary>
         ///A test for Run
         ///</summary>
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void RunEmptyTest()
         {
             string instPath = string.Empty;
             string name = string.Empty;
-            SubProcess.Run(instPath, name);
+            Assert.Throws<ArgumentException>(
+                delegate
+                    {
+                        SubProcess.Run(instPath, name);
+                    }
+                );
         }
 
         /// <summary>

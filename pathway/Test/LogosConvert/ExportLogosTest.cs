@@ -71,13 +71,16 @@ namespace Test.LogosConvert
         ///A test for Export
         ///</summary>
         [Test]
-        [ExpectedException("System.ArgumentNullException")]
         public void ExportNullTest()
         {
             var target = new ExportLogos();
             PublicationInformation projInfo = null;
-            var actual = target.Export(projInfo);
-            Assert.IsFalse(actual);
+            Assert.Throws<ArgumentNullException>(
+                delegate
+                    {
+                        target.Export(projInfo);
+                    }
+                );
         }
 
         /// <summary>

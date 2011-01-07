@@ -339,9 +339,6 @@ namespace Test
         /// </summary>
         /// ------------------------------------------------------------------------------------
         [Test]
-        [Ignore]
-        //[ExpectedException(ExceptionType = typeof(IOException),
-            //ExpectedMessage = "File ReadMe.txt is locked (open for write).")]
         public void Delete_FailsIfOpenForWrite()
         {
             MockFileOS fileOs = new MockFileOS();
@@ -349,7 +346,12 @@ namespace Test
             string filename = "ReadMe.txt";
             fileOs.AddFile(filename, "For more information, read this.", Encoding.ASCII);
             fileOs.LockFile(filename);
-            fileOs.Delete(filename);
+            Assert.Throws<IOException>(
+                delegate
+                    {
+                        fileOs.Delete(filename);
+                    }
+                );
         }
 
         /// ------------------------------------------------------------------------------------
@@ -358,10 +360,6 @@ namespace Test
         /// </summary>
         /// ------------------------------------------------------------------------------------
         [Test]
-        [Ignore]
-
-        //[ExpectedException(ExceptionType = typeof(IOException),
-            //ExpectedMessage = "File ReadMe.txt is locked (open for read).")]
         public void Delete_FailsIfOpenForRead()
         {
             MockFileOS fileOs = new MockFileOS();
@@ -369,7 +367,12 @@ namespace Test
             string filename = "ReadMe.txt";
             fileOs.AddFile(filename, "For more information, read this.", Encoding.ASCII);
             TextReader reader = fileOs.GetReader(filename, Encoding.ASCII);
-            fileOs.Delete(filename);
+            Assert.Throws<IOException>(
+                delegate
+                    {
+                        fileOs.Delete(filename);
+                    }
+                );
         }
 
         /// ------------------------------------------------------------------------------------
@@ -378,15 +381,16 @@ namespace Test
         /// </summary>
         /// ------------------------------------------------------------------------------------
         [Test]
-        [Ignore]
-
-        //[ExpectedException(ExceptionType = typeof(IOException),
-            //ExpectedMessage = "File ReadMe.txt not found.")]
         public void Delete_FailsIfFileDoesNotExist()
         {
             MockFileOS fileOs = new MockFileOS();
             ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
-            fileOs.Delete("ReadMe.txt");
+            Assert.Throws<IOException>(
+                delegate
+                    {
+                        fileOs.Delete("ReadMe.txt");
+                    }
+                );
         }
 
         /// ------------------------------------------------------------------------------------

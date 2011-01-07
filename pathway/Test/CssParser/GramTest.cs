@@ -521,11 +521,9 @@ namespace Test.CssParserTest
         /// CSS throws error
         /// </summary>
         [Test]
-        //[ExpectedException(typeof(RewriteEarlyExitException))]
-        public void CssThrowsErrorT30b()
+        public void CssNoErrorT30b()
         {
-            OneTest("T30b", "CSS throws error");
-            //Assert.Fail("RewriteEarlyExitException not generated");
+            OneTest("T30b", "CSS no error");
         }
         #endregion T30b
 

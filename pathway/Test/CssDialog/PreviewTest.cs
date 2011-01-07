@@ -74,15 +74,18 @@ namespace Test.CssDialog
         ///A test for PdfPreview
         ///</summary>
         [Test]
-        [ExpectedException(typeof(KeyNotFoundException))]
         public void PdfPreviewTest()
         {
             Preview target = new Preview();
             Form myForm = new Form();
             target.ParentForm = myForm;
             CommonTestMethod.DisableDebugAsserts();
-            target.PdfPreview();
-            Assert.Fail("The given key was not present in the dictionary.");
+            Assert.Throws<KeyNotFoundException>(
+                delegate
+                    {
+                        target.PdfPreview();
+                    }
+                );
         }
 
         /// <summary>
