@@ -53,8 +53,8 @@
 			</xsl:for-each>
 			<xsl:apply-templates/>
 			<xsl:if test="@class = 'scrSection'">
-				<!-- If there are any footnotes / endnotes, list them here at the end of each section -->
-				<xsl:if test="count(descendant::xhtml:span[@class='Note_General_Paragraph']) > 0">
+				<xsl:if test="(count(descendant::xhtml:span[@class='Note_General_Paragraph']) +
+					count(descendant::xhtml:span[@class='Note_CrossHYPHENReference_Paragraph'])) > 0">
 					<xsl:element name="ul">
 						<xsl:attribute name="class"><xsl:text>footnotes</xsl:text></xsl:attribute>
 						<!-- general notes - use the note title for the list bullet -->
@@ -106,8 +106,8 @@
 	<!-- write out the contents of these elements, but not the elements themselves -->
 	<xsl:template match="xhtml:div[@class='scrSection']">
 		<xsl:apply-templates/>
-		<!-- If there are any footnotes / endnotes, list them here at the end of each section -->
-		<xsl:if test="count(descendant::xhtml:span[@class='Note_General_Paragraph']) > 0">
+		<xsl:if test="(count(descendant::xhtml:span[@class='Note_General_Paragraph']) +
+		count(descendant::xhtml:span[@class='Note_CrossHYPHENReference_Paragraph'])) > 0">
 			<xsl:element name="ul">
 				<xsl:attribute name="class"><xsl:text>footnotes</xsl:text></xsl:attribute>
 				<!-- general notes - use the note title for the list bullet -->
@@ -138,7 +138,6 @@
 			</xsl:element>
 		</xsl:if>
 	</xsl:template>
-	
 	<xsl:template match="xhtml:div[@class='columns']" >
 		<xsl:apply-templates />
 	</xsl:template>

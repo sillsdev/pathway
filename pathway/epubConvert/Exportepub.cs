@@ -717,7 +717,8 @@ namespace SIL.PublishingSolution
                 var sb = new StringBuilder();
                 // just in case the name starts with a number, prepend "id"
                 sb.Append("id");
-                sb.Append(nodes[0].InnerText);
+                // remove any whitespace in the node text (the ID can't have it)
+                sb.Append(new Regex(@"\s*").Replace(nodes[0].InnerText, string.Empty));
                 return (sb.ToString());
             }
             // fall back on just the file name
