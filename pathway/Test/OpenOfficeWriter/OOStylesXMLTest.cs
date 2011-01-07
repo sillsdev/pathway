@@ -1207,6 +1207,7 @@ namespace Test.OpenOfficeWriter
         /// <summary>
         /// </summary>      
         [Test]
+        [Category("SkipOnTeamCity")]
         public void CharisSILFont_Node()
         {
             const string file = "CharisSILFont";
@@ -1228,6 +1229,7 @@ namespace Test.OpenOfficeWriter
         /// <summary>
         /// </summary>      
         [Test]
+        [Category("SkipOnTeamCity")]
         public void DoulosSILFont_Node()
         {
             const string file = "DoulosSILFont";

@@ -42,6 +42,7 @@ namespace Test.epubConvert
         /// Test the SIL Abyssinica font
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void AbyssinicaTest()
         {
             var silFont = new EmbeddedFont("Abyssinica");
@@ -58,6 +59,7 @@ namespace Test.epubConvert
         /// Test the SIL Andika font
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void AndikaTest()
         {
             var silFont = new EmbeddedFont("Andika");
@@ -74,6 +76,7 @@ namespace Test.epubConvert
         /// Test the Apparatus SIL font
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void ApparatusTest()
         {
             var silFont = new EmbeddedFont("Apparatus SIL");
@@ -89,6 +92,7 @@ namespace Test.epubConvert
         /// Test the Charis SIL font
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void CharisTest()
         {
             var silFont = new EmbeddedFont("Charis SIL");
@@ -104,6 +108,7 @@ namespace Test.epubConvert
         /// Test the Dai Banna font
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void DaiBannaTest()
         {
             var silFont = new EmbeddedFont("Dai Banna");
@@ -119,6 +124,7 @@ namespace Test.epubConvert
         /// Test the Doulos SIL font
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void DoulosTest()
         {
             var silFont = new EmbeddedFont("Doulos SIL");
@@ -134,6 +140,7 @@ namespace Test.epubConvert
         /// Test the SIL Ezra font
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void EzraTest()
         {
             var silFont = new EmbeddedFont("Ezra SIL");
@@ -149,6 +156,7 @@ namespace Test.epubConvert
         /// Test the SIL Galatia font
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void GalatiaTest()
         {
             var silFont = new EmbeddedFont("Galatia SIL");
@@ -164,6 +172,7 @@ namespace Test.epubConvert
         /// Test the SIL Gentium Basic font
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void GentiumTest()
         {
             var silFont = new EmbeddedFont("Gentium Basic");
@@ -179,6 +188,7 @@ namespace Test.epubConvert
         /// Test the SIL Lateef font
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void LateefTest()
         {
             var silFont = new EmbeddedFont("Lateef");
@@ -194,6 +204,7 @@ namespace Test.epubConvert
         /// Test the SIL Nuosu (Yi) font
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void NuosuTest()
         {
             var silFont = new EmbeddedFont("Nuosu");
@@ -209,6 +220,7 @@ namespace Test.epubConvert
         /// Test the SIL Padauk font
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void PadaukTest()
         {
             var silFont = new EmbeddedFont("Padauk");
@@ -224,6 +236,7 @@ namespace Test.epubConvert
         /// Test the SIL Scheharazade) font
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void ScheharazadeTest()
         {
             var silFont = new EmbeddedFont("Scheherazade");
@@ -239,6 +252,7 @@ namespace Test.epubConvert
         /// Test the SIL Sophia Nubian font
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void SophiaNubianTest()
         {
             var silFont = new EmbeddedFont("Sophia Nubian");
@@ -254,6 +268,7 @@ namespace Test.epubConvert
         /// Test the SIL Tai Heritage Pro font
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void TaiHeritageProTest()
         {
             var silFont = new EmbeddedFont("Tai Heritage Pro");
