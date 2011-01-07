@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Jan-05-2011 for TD-1786(Output files does not have compete properties settings and format in FLEX.)
+&apos;Changed On Jan-07-2011 for TD-1779(no information in headers)
 
 &apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -210,28 +210,30 @@ Sub StartDontForget
 	&apos;Msgbox &quot;Please NOTE: Use the Update References menu item or tool bar item to correct the references before printing.&quot; , 0 + 64,  &quot;Reference Reminder&quot;
 	TurnOffNonPrintingCharacters() 
 	dim clicked as byte
-	If IsMacroRun = true Then
-		clicked = msgbox(&quot;Headers are updated to contain the first and last book, chapter and / or verse with the &quot; + &quot;&quot;&quot;&quot; + &quot;Update References&quot; + &quot;&quot;&quot;&quot; + &quot; tool bar item or Macro menu item.&quot; &amp; chr(10) &amp; chr(10) &amp; &quot;This should be done once at the beginning and after any changes that affect what information is on a page.&quot;  &amp; chr(10) &amp; chr(10) &amp;  &quot;Would you like to update the headers now?&quot;, 4 + 32 + 256 , &quot;Run header macro?&quot;)
-		&apos;clicked = msgbox (&quot;Headers are updated to contain the first and last book, chapter and / or verse with the &quot; + &quot;&quot;&quot;&quot; + &quot;Update References&quot; + &quot;&quot;&quot;&quot; + &quot; tool bar item or Macro menu item.&quot; &amp; chr(10) &amp; &quot;Would you like to update the headers now?&quot;, 4 + 32 + 256 , &quot;Reference Reminder&quot;)
-		If clicked = 6 Then &apos;If Yes clicked
-			SetReference
-		Else
-			If TotalPages &gt; 100 Then
-				Msgbox(&quot;The headers will not appear to be correct until the repagination is complete.&quot; +  chr(10) + &quot;On long documents it may take a couple of minutes.&quot; &amp; chr(10) &amp; &quot;(Use File--&gt;Page Preview to force repagination.)&quot;,, &quot;Reference Reminder&quot;)
-			End If
-		End If
-	Else
-		if LCase(AutoMacro) = &quot;true&quot; Then
-			SetReference
-		else
+	
+	If Lcase(RunMacroFirstTime) = &quot;true&quot; Then
+		If IsMacroRun = true Then
 			clicked = msgbox(&quot;Headers are updated to contain the first and last book, chapter and / or verse with the &quot; + &quot;&quot;&quot;&quot; + &quot;Update References&quot; + &quot;&quot;&quot;&quot; + &quot; tool bar item or Macro menu item.&quot; &amp; chr(10) &amp; chr(10) &amp; &quot;This should be done once at the beginning and after any changes that affect what information is on a page.&quot;  &amp; chr(10) &amp; chr(10) &amp;  &quot;Would you like to update the headers now?&quot;, 4 + 32 + 256 , &quot;Run header macro?&quot;)
 			&apos;clicked = msgbox (&quot;Headers are updated to contain the first and last book, chapter and / or verse with the &quot; + &quot;&quot;&quot;&quot; + &quot;Update References&quot; + &quot;&quot;&quot;&quot; + &quot; tool bar item or Macro menu item.&quot; &amp; chr(10) &amp; &quot;Would you like to update the headers now?&quot;, 4 + 32 + 256 , &quot;Reference Reminder&quot;)
 			If clicked = 6 Then &apos;If Yes clicked
 				SetReference
-			End If		
-		end if	
+			Else
+				If TotalPages &gt; 100 Then
+					Msgbox(&quot;The headers will not appear to be correct until the repagination is complete.&quot; +  chr(10) + &quot;On long documents it may take a couple of minutes.&quot; &amp; chr(10) &amp; &quot;(Use File--&gt;Page Preview to force repagination.)&quot;,, &quot;Reference Reminder&quot;)
+				End If
+			End If
+		Else
+			if LCase(AutoMacro) = &quot;true&quot; Then
+				SetReference
+			else
+				clicked = msgbox(&quot;Headers are updated to contain the first and last book, chapter and / or verse with the &quot; + &quot;&quot;&quot;&quot; + &quot;Update References&quot; + &quot;&quot;&quot;&quot; + &quot; tool bar item or Macro menu item.&quot; &amp; chr(10) &amp; chr(10) &amp; &quot;This should be done once at the beginning and after any changes that affect what information is on a page.&quot;  &amp; chr(10) &amp; chr(10) &amp;  &quot;Would you like to update the headers now?&quot;, 4 + 32 + 256 , &quot;Run header macro?&quot;)
+				&apos;clicked = msgbox (&quot;Headers are updated to contain the first and last book, chapter and / or verse with the &quot; + &quot;&quot;&quot;&quot; + &quot;Update References&quot; + &quot;&quot;&quot;&quot; + &quot; tool bar item or Macro menu item.&quot; &amp; chr(10) &amp; &quot;Would you like to update the headers now?&quot;, 4 + 32 + 256 , &quot;Reference Reminder&quot;)
+				If clicked = 6 Then &apos;If Yes clicked
+					SetReference
+				End If		
+			end if	
+		End If
 	End If
-
 	
 	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; Then
 		ExportToDOC_PDF

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Jan-05-2010 for TD-1786(Output files does not have compete properties settings and format in FLEX.)
+&apos;Changed On Jan-07-2011 for TD-1779(no information in headers)
 
 &apos;Define the values to Constant Variables for First Guide word, Last Guide word ,Headword Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -177,24 +177,27 @@ Sub StartDontForget
 	&apos;Msgbox &quot;Please NOTE: Use the Update Guide Words menu item or tool bar item to correct the guide words before printing.&quot; , 0 + 64,  &quot;Guide Word Reminder&quot;
 	TurnOffNonPrintingCharacters()
 	dim clicked as byte
-	If IsMacroRun = true Then
-		clicked = msgbox (&quot;Headers are updated to contain the first and last word with the &quot; + &quot;&quot;&quot;&quot; + &quot;Update Guide Words&quot; + &quot;&quot;&quot;&quot; + &quot; tool bar item or Macro menu item.&quot; &amp; chr(10) &amp; chr(10) &amp; &quot;This should be done once at the beginning and after any changes that affect what information is on a page.&quot;  &amp; chr(10) &amp; chr(10) &amp;  &quot;Would you like to update the headers now?&quot;, 4 + 32 + 256 , &quot;Guide Word Reminder&quot;)
-		If clicked = 6 Then &apos;If Yes clicked
-			SetGuides
-		Else
-			If TotalPages &gt; 100 Then
-				Msgbox(&quot;The headers will not appear to be correct until the repagination is complete.&quot; +  chr(10) + &quot;On long documents it may take a couple of minutes.&quot; &amp; chr(10) &amp; &quot;(Use File--&gt;Page Preview to force repagination.)&quot;,, &quot;Guide Word Reminder&quot;)
-			End If
-		End If
-	Else
-		If LCase(AutoMacro) = &quot;true&quot; Then
-			SetGuides
-		Else
+	
+	If Lcase(RunMacroFirstTime) = &quot;true&quot; Then	
+		If IsMacroRun = true Then
 			clicked = msgbox (&quot;Headers are updated to contain the first and last word with the &quot; + &quot;&quot;&quot;&quot; + &quot;Update Guide Words&quot; + &quot;&quot;&quot;&quot; + &quot; tool bar item or Macro menu item.&quot; &amp; chr(10) &amp; chr(10) &amp; &quot;This should be done once at the beginning and after any changes that affect what information is on a page.&quot;  &amp; chr(10) &amp; chr(10) &amp;  &quot;Would you like to update the headers now?&quot;, 4 + 32 + 256 , &quot;Guide Word Reminder&quot;)
 			If clicked = 6 Then &apos;If Yes clicked
 				SetGuides
-			End If		
-		End If	
+			Else
+				If TotalPages &gt; 100 Then
+					Msgbox(&quot;The headers will not appear to be correct until the repagination is complete.&quot; +  chr(10) + &quot;On long documents it may take a couple of minutes.&quot; &amp; chr(10) &amp; &quot;(Use File--&gt;Page Preview to force repagination.)&quot;,, &quot;Guide Word Reminder&quot;)
+				End If
+			End If
+		Else
+			If LCase(AutoMacro) = &quot;true&quot; Then
+				SetGuides
+			Else
+				clicked = msgbox (&quot;Headers are updated to contain the first and last word with the &quot; + &quot;&quot;&quot;&quot; + &quot;Update Guide Words&quot; + &quot;&quot;&quot;&quot; + &quot; tool bar item or Macro menu item.&quot; &amp; chr(10) &amp; chr(10) &amp; &quot;This should be done once at the beginning and after any changes that affect what information is on a page.&quot;  &amp; chr(10) &amp; chr(10) &amp;  &quot;Would you like to update the headers now?&quot;, 4 + 32 + 256 , &quot;Guide Word Reminder&quot;)
+				If clicked = 6 Then &apos;If Yes clicked
+					SetGuides
+				End If		
+			End If	
+		End If
 	End If
 	
 	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; Then
