@@ -134,6 +134,7 @@ namespace SIL.PublishingSolution
         private List<string> _unUsedParagraphStyle = new List<string>();
 		private bool _significant = false;
         private List<string> _languageFont = new List<string>();
+        private Dictionary<string,string> fontLangMap = new Dictionary<string, string>();
         #endregion
 
         #region Public Methods
@@ -183,6 +184,7 @@ namespace SIL.PublishingSolution
                 structStyles.IsMacroEnable = true;
             //}
             InitializeObject(structStyles, projInfo.OutputExtension); // Creates new Objects
+            CreateFontLanguageMap();
             CreateFile(projInfo.TempOutputFolder);
             CreateSection(structStyles.SectionName);
             projInfo.DefaultXhtmlFileWithPath = PreProcess(projInfo.DefaultXhtmlFileWithPath, structStyles);
@@ -195,6 +197,22 @@ namespace SIL.PublishingSolution
             CloseFile(projInfo.TempOutputFolder, structStyles.ColumnGapEm);
             AlterFrameWithoutCaption(projInfo.TempOutputFolder);
             CleanUp();
+        }
+
+        private void CreateFontLanguageMap()
+        {
+            string PsSupportPath = Common.GetPSApplicationPath();
+            string xmlFileNameWithPath = Common.PathCombine(PsSupportPath, "GenericFont.xml");
+            string xPath = "//font-language-mapping";
+            XmlNodeList fontList = Common.GetXmlNodes(xmlFileNameWithPath, xPath);
+            if (fontList != null && fontList.Count > 0)
+            {
+                foreach (XmlNode xmlNode in fontList)
+                {
+                    fontLangMap[xmlNode.Attributes.GetNamedItem("name").Value] = xmlNode.InnerText;
+                }
+            }
+
         }
 
         private void AddFontFamily(string folder, List<string> font)
@@ -949,30 +967,21 @@ namespace SIL.PublishingSolution
                         var makeAttribute = new Dictionary<string, string>();
                         //var lib = new Library();
                         Common.GetCountryCode(out language, out country, _lang, _structStyles.SpellCheck);
-                        //if (language == null)
-                        //{
-                        //    makeAttribute["fo:language"] = "zxx";
-                        //    makeAttribute["fo:country"] = "none";
-                        //}
-                        //else
-                        //{
-                        //    makeAttribute["fo:language"] = language;
-                        //    makeAttribute["fo:country"] = country;
-                        //}
-                        if (_lang == "ggo-Telu-IN" || _lang == "te")
+                        if(_lang != null)
+                         if (fontLangMap.ContainsKey(_lang))
                         {
-                            if(!makeAttribute.ContainsKey("fo:font-name") || makeAttribute.ContainsKey("fo:font-name") && makeAttribute["fo:font-name"] != "Gautami")
+                            string fname = fontLangMap[_lang];
+                            if (!makeAttribute.ContainsKey("fo:font-name") || (makeAttribute.ContainsKey("fo:font-name") && makeAttribute["fo:font-name"] != fname))
                             {
                                 if (makeAttribute.Count == 0)
                                     _util.MissingLang = false;
-                                const string FOTNAME = "Gautami";
-                                makeAttribute["fo:font-name"] = FOTNAME;
-                                if(!_languageFont.Contains(FOTNAME))
-                                 _languageFont.Add(FOTNAME);
+
+                                makeAttribute["fo:font-name"] = fname;
+                                if (!_languageFont.Contains(fname))
+                                    _languageFont.Add(fname);
                             }
-                            //language = FOTNAME;
-                            //country = "In";
                         }
+  
                         makeAttribute["fo:language"] = language;
                         makeAttribute["fo:country"] = country;
                         string sourceClass = Common.LeftString(_readerValue, "_.");

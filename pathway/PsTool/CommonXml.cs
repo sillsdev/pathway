@@ -540,8 +540,17 @@ namespace SIL.Tool
         /// <returns>Returns XmlNodeList</returns>
         public static XmlNodeList GetXmlNodes(string xmlFileNameWithPath, string xPath)
         {
-            XmlNodeList resultNode = GetXmlNode(xmlFileNameWithPath, xPath).ChildNodes;
-            return resultNode;
+            //XmlNodeList resultNode = GetXmlNode(xmlFileNameWithPath, xPath).ChildNodes;
+            //return resultNode;
+            XmlNodeList resultNodeList = null;
+            XmlNode resultNode = GetXmlNode(xmlFileNameWithPath, xPath);
+            if(resultNode != null)
+            {
+                resultNodeList = resultNode.ChildNodes;
+            }
+            return resultNodeList;
+
+
         }
         #endregion
 
