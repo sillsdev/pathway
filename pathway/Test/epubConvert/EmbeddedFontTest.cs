@@ -29,6 +29,7 @@ namespace Test.epubConvert
         /// Test a known non-SIL font
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void NonSilFontTest()
         {
             var arialFont = new EmbeddedFont("Arial");

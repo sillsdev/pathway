@@ -126,6 +126,7 @@ namespace Test.GoBibleConvert
         }
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void BuildApplicationTest()
         {
             const string fileName = "1pe_cv.xhtml";
@@ -146,6 +147,7 @@ namespace Test.GoBibleConvert
         }
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void BuildApplication2Test()
         {
             const string fileName = "1pe_cv.xhtml";
