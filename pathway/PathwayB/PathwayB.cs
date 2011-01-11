@@ -48,6 +48,7 @@ namespace SIL.PublishingSolution
                             break;
                         case "--target":
                         case "-t":
+                            //Note: If export type is more than one word, quotes must be used
                             exportType = args[i++];
                             break;
                         case "--input":
