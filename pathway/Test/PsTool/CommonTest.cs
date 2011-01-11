@@ -1053,7 +1053,7 @@ namespace Test.PsTool
             string database = "{Current_Project}";
             string layout = "Quick";
             string dateTime = DateTime.Now.ToString("yyyy-MM-dd_hhmm");
-            string expected = documents + @"\Publications\{Current_Project}\Dictionary\Quick_" + dateTime;
+            string expected = Common.PathCombine(documents, @"Publications\{Current_Project}\Dictionary\Quick_" + dateTime);
             string actual = Common.GetSaveInFolder(template, database, layout);
             Assert.AreEqual(expected, actual);
         }
