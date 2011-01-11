@@ -58,6 +58,7 @@ namespace Test.XeTeXConvert
         ///A test for SaveCache
         ///</summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void SaveCacheTest()
         {
             PostscriptLanguage target = new PostscriptLanguage();
@@ -145,6 +146,7 @@ namespace Test.XeTeXConvert
         ///A test for AccumulatePostscriptNames
         ///</summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void AccumulatePostscriptNamesTest()
         {
             const string lang1 = "bzh";

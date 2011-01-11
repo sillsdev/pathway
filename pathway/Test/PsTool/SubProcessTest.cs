@@ -64,6 +64,7 @@ namespace Test.PsTool
         ///A test for Run
         ///</summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void RunTest()
         {
             string instPath = Path.GetTempPath();
@@ -99,6 +100,7 @@ namespace Test.PsTool
         ///A test for ExistsOnPath
         ///</summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void ExistsOnPathTest()
         {
             string name = "candle.exe";

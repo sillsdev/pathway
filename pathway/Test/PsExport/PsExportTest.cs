@@ -301,6 +301,7 @@ namespace Test.PsExport
         /// Test ODT export
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void SeExportT2()
         {
             SeExportTest("T2", "1pe.xhtml", "Layout_02.css", "OpenOffice",  "T2: ODT Export Test");
@@ -324,6 +325,7 @@ namespace Test.PsExport
         /// Test TE Export test
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void PsExportT4()
         {
             ExportTest("T4", "1pe.xhtml", "Scripture", "OpenOffice", "T4: TE ODT Export Test");
@@ -335,6 +337,7 @@ namespace Test.PsExport
         /// Test Flex Export test
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void PsExportT5()
         {
 
@@ -347,6 +350,7 @@ namespace Test.PsExport
         /// Test Flex Export test
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void PsExportT6()
         {
             ExportTest("T6", "main.xhtml", "Dictionary", "OpenOffice", "T6: Flex ODT Export Test");
@@ -356,6 +360,7 @@ namespace Test.PsExport
         /// Test Flex Export test
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void PsExportT7()
         {
             ExportTest("T7", "FlexRev.xhtml", "Dictionary", "OpenOffice", "T7: Flex ODT Export Test");
@@ -365,6 +370,7 @@ namespace Test.PsExport
         /// Test Flex Export test - Page A5 Test
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void PsExportT8()
         {
             ExportTest("T8", "main.xhtml", "Dictionary", "OpenOffice", "T8: Flex ODT Export Test");
@@ -375,6 +381,7 @@ namespace Test.PsExport
         /// Test Flex Export test
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void PsExportT9()
         {
             //OnePerBook.xhtml
@@ -387,6 +394,7 @@ namespace Test.PsExport
         /// Test Flex Export test
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void PsExportT10()
         {
             //OnePerLetter.xhtml

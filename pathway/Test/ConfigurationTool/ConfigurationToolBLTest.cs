@@ -123,6 +123,7 @@ namespace Test.UIConfigurationToolBLTest
 
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void NewWithDefaultTest()
         {
             SetUp();
@@ -180,6 +181,7 @@ namespace Test.UIConfigurationToolBLTest
         }
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void SaveAsWithDefaultTest()
         {
             SetUp();

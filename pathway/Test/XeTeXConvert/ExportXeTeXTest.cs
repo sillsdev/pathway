@@ -195,6 +195,7 @@ namespace Test.XeTeXConvert
         ///A test for SetupSettings
         ///</summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void SetupSettingsTest()
         {
             IPreExportProcess data = mocks.NewMock<IPreExportProcess>();
@@ -219,6 +220,7 @@ namespace Test.XeTeXConvert
         /// Test that the settings referred to in SetupSettings exist in css
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void SetupSettingsPropertyTest()
         {
             const string cssName = "DictionaryTemp1.css";
@@ -381,6 +383,7 @@ namespace Test.XeTeXConvert
         ///A test for Launch
         ///</summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void LaunchTest()
         {
             Common.Testing = true;

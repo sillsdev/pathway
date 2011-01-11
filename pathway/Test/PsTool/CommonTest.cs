@@ -1046,6 +1046,7 @@ namespace Test.PsTool
 
         #region SaveInFolderTests
         [Test]
+        [Category("SkipOnTeamCity")]
         public void GetSaveInFolderTest()
         {
             string template = "$(Documents)s/$(Base)s/$(CurrentProject)s/Dictionary/$(StyleSheet)s_$(DateTime)s";

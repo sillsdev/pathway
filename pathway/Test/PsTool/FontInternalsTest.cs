@@ -56,6 +56,7 @@ namespace Test.PsTool
         ///A test Arial Postscript font name
         ///</summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void YiTest()
         {
             var root = Environment.GetEnvironmentVariable("SystemRoot");
@@ -69,6 +70,7 @@ namespace Test.PsTool
         ///A test Arial Postscript font name
         ///</summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void ScheherazadeTest()
         {
             var root = Environment.GetEnvironmentVariable("SystemRoot");
@@ -83,6 +85,7 @@ namespace Test.PsTool
         ///A test Arial Postscript font name
         ///</summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void SimSunTest()
         {
             var root = Environment.GetEnvironmentVariable("SystemRoot");
@@ -97,6 +100,7 @@ namespace Test.PsTool
         ///A test Arial Postscript font name
         ///</summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void MyriadProTest()
         {
             var root = Environment.GetEnvironmentVariable("SystemRoot");
@@ -111,6 +115,7 @@ namespace Test.PsTool
         ///A test Arial Postscript font name
         ///</summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void SimSun2Test()
         {
             var root = Environment.GetEnvironmentVariable("SystemRoot");
@@ -122,6 +127,7 @@ namespace Test.PsTool
 
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void GetFontFileNameTest()
         {
             string familyName = "Charis SIL";
@@ -133,6 +139,7 @@ namespace Test.PsTool
 
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void GetFontFileNameTest2()
         {
             string familyName = "Charis SIL";
@@ -144,6 +151,7 @@ namespace Test.PsTool
 
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void GetFontFileNameTest3()
         {
             string familyName = "Scheherazade Graphite Alpha";
@@ -155,6 +163,7 @@ namespace Test.PsTool
 
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void GetFontFileNameTest4()
         {
             string familyName = "Scheherazade Graphite Alpha";
@@ -166,6 +175,7 @@ namespace Test.PsTool
 
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void GetFontFileNameTest5()
         {
             string familyName = "Yi plus Phonetics";
@@ -177,6 +187,7 @@ namespace Test.PsTool
         
         
         [Test]
+        [Category("SkipOnTeamCity")]
         public void CharisBoldTest2()
         {
             string familyName = "Charis SIL";
@@ -203,6 +214,7 @@ namespace Test.PsTool
         ///A test Arial Postscript font name
         ///</summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void CharisGraphiteTest()
         {
             var root = Environment.GetEnvironmentVariable("SystemRoot");
@@ -215,6 +227,7 @@ namespace Test.PsTool
         ///A test Arial Postscript font name
         ///</summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void ScheherazadeGraphiteTest()
         {
             var root = Environment.GetEnvironmentVariable("SystemRoot");
