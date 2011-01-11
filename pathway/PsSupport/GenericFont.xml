@@ -1,49 +1,45 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <fontroot>
-<font-preference>
+    
+    <font-preference>
+        <generic-family name="serif">
+            <font> Times New Roman</font>
+            <font> Georgia</font>
+        </generic-family>
+        <generic-family name="sans-serif">
+            <font>Verdana</font>
+            <font>Arial</font>
+        </generic-family>
+        <generic-family name="cursive">
+            <font>Comic Sans MS</font>
+            <font>Lydian Cursive </font>
+        </generic-family>
+        <generic-family name="fantasy">
+            <font> Modern</font>
+            <font> Fencing</font>
+        </generic-family>
+        <generic-family name="monospace">
+            <font>Courier New </font>
+            <font>Lucida Console</font>
+        </generic-family>
+    </font-preference>
 
-    <generic-family name="serif">
-        <font> Times New Roman</font>
-        <font> Georgia</font>
-    </generic-family>
-
-    <generic-family name="sans-serif">
-        <font>Verdana</font>
-        <font>Arial</font>
-    </generic-family>
-
-    <generic-family name="cursive">
-        <font>Comic Sans MS</font>
-        <font>Lydian Cursive </font>
-    </generic-family>
-
-    <generic-family name="fantasy">
-        <font> Modern</font>
-        <font> Fencing</font>
-    </generic-family>
-
-    <generic-family name="monospace">
-        <font>Courier New </font>
-        <font>Lucida Console</font>
-    </generic-family>
-
-
-</font-preference>
-
-
-
-
-
-<font-language-mapping>
-<language name ="te">
-    <font>Gautami</font>
-</language>
-<language name ="ggo-Telu-IN">
-    <font>Gautami</font>
-</language>
-<language name ="tamil">
-    <font>Latha</font>
-</language>
-</font-language-mapping>
+    <font-language-mapping>
+        <language name="te">
+            <font>Gautami</font>
+        </language>
+        <language name="ggo-Telu-IN">
+            <font>Gautami</font>
+        </language>
+        <language name="ta">
+            <font>Latha</font>
+        </language>
+        <language name="tam">
+            <font>Latha</font>
+        </language>
+        <language name="hi">
+            <font>Mangal</font>
+        </language>
+    </font-language-mapping>
 
 </fontroot>
