@@ -542,15 +542,42 @@ namespace SIL.PublishingSolution
                 }
             }
             // add :lang pseudo-elements for each language and set them to the proper font
-            foreach( var language in _langFontDictionary)
+            bool firstLang = true;
+            foreach (var language in _langFontDictionary)
             {
+                EmbeddedFont embeddedFont;
+                // If this is the first language in the loop (i.e., the main language),
+                // set the font for the body element
+                if (firstLang)
+                {
+                    sb.AppendLine("body {");
+                    sb.Append("font-family: '");
+                    sb.Append(language.Value);
+                    sb.Append("', ");
+                    if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
+                    {
+                        sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
+                    }
+                    else
+                    {
+                        // fall back on a serif font if we can't find it (shouldn't happen)
+                        sb.AppendLine("Times, serif;");
+                    }
+                    // also insert the text direction for this language
+                    sb.Append("direction: ");
+                    sb.Append(getTextDirection(language.Key));
+                    sb.AppendLine(";");
+                    sb.AppendLine("}");
+                    // finished processing - clear the flag
+                    firstLang = false;
+                }
+                // set the font for the *:lang(xxx) pseudo-element
                 sb.Append("*:lang(");
                 sb.Append(language.Key);
                 sb.AppendLine(") {");
                 sb.Append("font-family: '");
                 sb.Append(language.Value);
                 sb.Append("', ");
-                EmbeddedFont embeddedFont;
                 if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
                 {
                     sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
