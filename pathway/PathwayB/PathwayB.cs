@@ -9,7 +9,7 @@
 #endregion
 //
 // File: PathwayB.cs
-// Responsibility: Trihus
+// Responsibility: Greg Trihus
 // ---------------------------------------------------------------------------------------------
 using System;
 using System.IO;
