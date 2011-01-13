@@ -1024,7 +1024,7 @@ namespace SIL.PublishingSolution
                         if(PNode.Text == "PROPERTY" && PNode.FirstNode.Text == newNode.FirstNode.Text)
                         {
                             PNode.Remove();
-                            snode.Nodes.Add(newNode);
+                            snode.Nodes.Add((TreeNode)newNode.Clone());
                         }
                     }
                     
