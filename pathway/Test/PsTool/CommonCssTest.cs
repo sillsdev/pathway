@@ -135,6 +135,7 @@ namespace Test.PsTool
         ///A test for SetDefaultCSS
         ///</summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void SetDefaultCSSTest()
         {
             string fileName = "DefaultCss.xhtml";
