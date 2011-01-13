@@ -185,6 +185,7 @@ namespace SIL.PublishingSolution
             OldStyles styleInfo = new OldStyles(); 
 
             _structStyles = styleInfo;
+            _structStyles.IsMacroEnable = true;
             string _inputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             InitializeData(projInfo, idAllClass, classFamily, cssClassOrder);
             ProcessProperty();

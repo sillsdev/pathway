@@ -432,7 +432,16 @@ namespace TestBed
             //ExportOdt exportOdt = new ExportOdt();
             PublicationInformation projInfo = new PublicationInformation();
 
-            projInfo.ProjectInputType = "Dictionary";
+            string ProjType = "Dictionary";
+
+            if(radScripture.Checked)
+            {
+                ProjType = "Scripture";
+            }
+
+
+            projInfo.FinalOutput = "odt";
+            projInfo.ProjectInputType = ProjType;
             projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
             projInfo.DictionaryPath = Path.GetDirectoryName(txtInputPath.Text);
             projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;

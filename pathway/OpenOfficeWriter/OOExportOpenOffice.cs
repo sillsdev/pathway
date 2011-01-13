@@ -49,7 +49,7 @@ namespace SIL.PublishingSolution
             return returnValue;
         }
 
-        private PublicationInformation publicationInfo;
+        private static PublicationInformation publicationInfo;
         Dictionary<string, string> _dictLexiconPrepStepsFilenames = new Dictionary<string, string>();
         Dictionary<string, string> _dictSectionNames = new Dictionary<string, string>();
         Dictionary<string, Dictionary<string, string>> _dictStepFilenames = new Dictionary<string, Dictionary<string, string>>();
@@ -665,7 +665,6 @@ namespace SIL.PublishingSolution
             string strStylePath = Common.PathCombine(projInfo.TempOutputFolder, "styles.xml");
             string strContentPath = Common.PathCombine(projInfo.TempOutputFolder, "content.xml");
             CopyOfficeFolder(strFromOfficeFolder, projInfo.TempOutputFolder);
-            //string strMacroPath = Common.PathCombine(projInfo.TempOutputFolder, "Basic/Standard/Module1.xml");
             string strMacroPath = Common.PathCombine(projInfo.TempOutputFolder, "Basic/Standard/Module1.xml");
             string outputFileName;
             string outputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
@@ -711,24 +710,13 @@ namespace SIL.PublishingSolution
 
             //To set Constent variables for User Desire
             //string macroFileName = Common.PathCombine(projInfo.DictionaryPath,Path.GetFileNameWithoutExtension(projInfo.DictionaryPath));
-            string fname = projInfo.ProjectName ?? projInfo.DictionaryPath;
-            string macroFileName = Common.PathCombine(projInfo.DictionaryPath,
-                                                      Path.GetFileNameWithoutExtension(fname));
-            //if (value != string.Empty && value.IndexOf("string(bookname") >= 0)
-            //{
-            //    if (value.IndexOf("string(verse") >= 0)
-            //    {
-            //        return "Genesis 1:1 Genesis 1:15";
-            //    }
-            //    else
-            //    {
-            //        return "Genesis 1";
+            string fname = Common.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+            string macroFileName = Common.PathCombine(projInfo.DictionaryPath, fname);
+            //IncludeTextinMacro(strMacroPath, idAllClass.ReferenceFormat, macroFileName, projInfo.IsExtraProcessing);
+            string refFormat = string.Empty;
+            refFormat = GetReferenceFormat(idAllClass, refFormat);
+            IncludeTextinMacro(strMacroPath, refFormat, macroFileName, projInfo.IsExtraProcessing);
 
-            //    }
-            //}
-
-            //IncludeTextinMacro(strMacroPath, styleName.ReferenceFormat, macroFileName);
-            IncludeTextinMacro(strMacroPath, "Genesis 1", macroFileName);
 
             // BEGIN Generate Meta.Xml File
             var metaXML = new OOMetaXML();
@@ -807,6 +795,24 @@ namespace SIL.PublishingSolution
             return returnValue;
         }
 
+        private string GetReferenceFormat(Dictionary<string, Dictionary<string, string>> idAllClass, string refFormat)
+        {
+            if (idAllClass.ContainsKey("ReferenceFormat"))
+                if (idAllClass["ReferenceFormat"].ContainsKey("@page"))
+                {
+                    refFormat = idAllClass["ReferenceFormat"]["@page"];
+                }
+                else if (idAllClass["ReferenceFormat"].ContainsKey("@page:left"))
+                {
+                    refFormat = idAllClass["ReferenceFormat"]["@page:left"];
+                }
+                else if (idAllClass["ReferenceFormat"].ContainsKey("@page:right"))
+                {
+                    refFormat = idAllClass["ReferenceFormat"]["@page:right"];
+                }
+            return refFormat;
+        }
+
         private static void MoveStylesToContent(string strStylePath, string strContentPath)
         {
             string[] s =  {
@@ -883,7 +889,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void IncludeTextinMacro(string strMacroPath, string ReferenceFormat, string saveAsPath)
+        private static void IncludeTextinMacro(string strMacroPath, string ReferenceFormat, string saveAsPath, bool runMacroFirstTime)
         {
             var xmldoc = new XmlDocument { XmlResolver = null };
             xmldoc.Load(strMacroPath);
@@ -909,13 +915,16 @@ namespace SIL.PublishingSolution
                 string line2 = "\nConst OutputFormat = \"" + publicationInfo.FinalOutput + "\"" +
                                "\nConst FilePath = \"" + saveAsPath + "\"" + "\nConst IsPreview = \"" +
                                publicationInfo.JpgPreview + "\"";
-                string combined = line1 + line2 + seperator;
+                string line3 = "\nConst RunMacroFirstTime = \"" + runMacroFirstTime + "\"";
+                string combined = line1 + line2 + line3 + seperator;
 
                 ele.InnerText = combined + ele.InnerText;
             }
             xmldoc.Save(strMacroPath);
         }
 
+
+        
         #endregion
 
         #region Private Functions

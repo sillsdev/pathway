@@ -161,6 +161,7 @@ namespace SIL.PublishingSolution
             _styleName.PrecedeClass = new Dictionary<string, string>();
             _styleName.IsAutoWidthforCaption = false;
             _styleName.VisibilityClassName = new Dictionary<string, string>();
+            
 
             _styleName.PseudoWithoutStyles = new List<string>();
 
