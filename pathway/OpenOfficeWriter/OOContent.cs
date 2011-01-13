@@ -1363,7 +1363,8 @@ namespace SIL.PublishingSolution
        private void CreateFile(string targetPath)
         {
             string targetContentXML = targetPath + "content.xml";
-            _writer = new XmlTextWriter(targetContentXML, null) { Formatting = Formatting.Indented };
+           _writer = new XmlTextWriter(targetContentXML, null);
+            //{ Formatting = Formatting.Indented };
             _writer.WriteStartDocument();
 
             //office:document-content Attributes.
