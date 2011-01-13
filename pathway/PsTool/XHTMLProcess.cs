@@ -589,7 +589,7 @@ namespace SIL.PublishingSolution
             return isFootnote;
         }
 
-        protected string StackPeekCharStyle(Stack<string> stack)
+        protected virtual string StackPeekCharStyle(Stack<string> stack)
         {
             string result = "$ID/[No character style]";
             if (stack.Count > 0)

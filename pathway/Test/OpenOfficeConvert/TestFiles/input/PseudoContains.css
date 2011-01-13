@@ -1,0 +1,26 @@
+.main
+{
+font-size: 18pt;
+}
+
+.main > .xitem
+{ 
+color: blue;
+font-size: 24pt;
+}
+
+
+.xitem:contains("sam")
+{
+content: "contain";
+font-size: 36pt;
+color:red;
+}
+
+.xitem + .xitem:contains("sam")
+{
+content: "XXcontain";
+font-size: 18pt;
+color:green;
+}
+

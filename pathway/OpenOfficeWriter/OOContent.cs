@@ -721,48 +721,9 @@ namespace SIL.PublishingSolution
 
                 ClosePara();
 
-                //if (_isListBegin)
-                //{
-                //    string tag1 = Common.LeftString(_listName, "_");
-                //    _listName = _listTypeDictionary.ContainsKey(tag1)
-                //                    ? "List" + _listTypeDictionary[tag1].Replace("-", "")
-                //                    : _tagType;
-
-                //    if (_listName == _tagType)
-                //    {
-                //        tag1 = Common.LeftString(_paragraphName, "_");
-                //        _listName = _listTypeDictionary.ContainsKey(tag1)
-                //                        ? "List" + _listTypeDictionary[tag1].Replace("-", "")
-                //                        : _tagType;
-  
-                //    }
-                //    //string type = _listTypeDictionary.ContainsKey(_readerValue) ? _listTypeDictionary[_readerValue] : _tagType;
-
-                //    _isListBegin = false;
-                //    //_writer.Flush();
-                //    //_writer.Close();
-                    
-                //    _writer.WriteStartElement("text:list");
-                //    _writer.WriteAttributeString("text:style-name", _listName);
-                //}
-
-                //string tag = Common.LeftString(_paragraphName, "_");
-                //if (tag == "li.ol" || tag == "li.ul" || tag == "li")
-                //{
-                //    _writer.WriteStartElement("text:list-item");
-
-                //}
-
-                //todo extract drop caps
-                if (_isDropCap) // forcing new paragraph for drop caps
+                if (_isDropCap) 
                 {
-                    string currentParentStyle = _paragraphName;
-                    _writer.WriteStartElement("text:p");
-                    int noOfChar = _reader.Value.Length;
-                    string currentStyle = _className + noOfChar;
-                    ModifyOOStyles oom = new ModifyOOStyles();
-                    oom.CreateDropCapStyle(_styleFilePath, _className, currentStyle, currentParentStyle, noOfChar);
-                    _writer.WriteAttributeString("text:style-name", currentStyle);
+                    DropCapsParagraph();
                 }
                 else
                 {
@@ -783,6 +744,17 @@ namespace SIL.PublishingSolution
             isFileEmpty = false;
         }
 
+        private void DropCapsParagraph()
+        {
+            string currentParentStyle = _paragraphName;
+            _writer.WriteStartElement("text:p");
+            int noOfChar = _reader.Value.Length;
+            string currentStyle = _className + noOfChar;
+            ModifyOOStyles oom = new ModifyOOStyles();
+            oom.CreateDropCapStyle(_styleFilePath, _className, currentStyle, currentParentStyle, noOfChar);
+            _writer.WriteAttributeString("text:style-name", currentStyle);
+        }
+
         private void WriteText()
         {
             string content = _reader.Value;
@@ -801,17 +773,18 @@ namespace SIL.PublishingSolution
                 _characterName = StackPeekCharStyle(_allCharacter);
             }
             //content = whiteSpacePre(content);
-
+            bool contains = false;
             if (_psuedoContainsStyle != null)
             {
                 if (content.IndexOf(_psuedoContainsStyle.Contains) > -1)
                 {
                     content = _psuedoContainsStyle.Content;
                     _characterName = _psuedoContainsStyle.StyleName;
+                    contains = true;
                 }
             }
             string modifiedContent = ModifiedContent(content, _previousParagraphName, _characterName);
-            WriteCharacterStyle(modifiedContent, _characterName, false);
+            WriteCharacterStyle(modifiedContent, _characterName, contains);
             if (_isDropCap) // until the next paragraph
             {
                 _isDropCap = false;
@@ -819,7 +792,7 @@ namespace SIL.PublishingSolution
             _psuedoBefore.Clear();
         }
 
-        private string StackPeekCharStyle(Stack<string> stack)
+        protected override string StackPeekCharStyle(Stack<string> stack)
         {
             string result = "none";
             if (stack.Count > 0)
@@ -839,34 +812,6 @@ namespace SIL.PublishingSolution
             else
             {
                 content = SignificantSpace(content);
-                //if (pseudo)
-                //    _writer.WriteRaw(content);
-                //else if(!VisibleHidden())
-                //    _writer.WriteString(content);
-
-                //if (!VisibleHidden())
-                //{
-                //    if (_imageClass.Length > 0)
-                //    {
-                //        if (!_isNewParagraph)
-                //        {
-                //            _writer.WriteStartElement("text:p");
-                //            _writer.WriteAttributeString("text:style-name", "ForcedDiv");
-                //            _writer.WriteString(content);
-                //            _writer.WriteEndElement();
-
-                //            _util.CreateStyleHyphenate(_styleFilePath, "ForcedDiv");
-                //        }
-                //    }
-                //    else if (pseudo)
-                //    {
-                //        _writer.WriteRaw(content);
-                //    }
-                //    else
-                //    {
-                //        _writer.WriteString(content);
-                //    }
-                //}
                 if (_imageClass.Length > 0)
                     {
                         //if (!_isNewParagraph)
@@ -999,7 +944,6 @@ namespace SIL.PublishingSolution
                 _writer.WriteString(marker);
                 _writer.WriteEndElement();
             }
-            //_writer.WriteString(text);
             _writer.WriteRaw(content);
             _writer.WriteEndElement();
             _writer.WriteEndElement();
