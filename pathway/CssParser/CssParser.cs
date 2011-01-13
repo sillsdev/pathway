@@ -895,7 +895,8 @@ namespace SIL.PublishingSolution
                             {
                                 if (!repProperty.Contains(childNode.FirstNode.Text))
                                 {
-                                    RuleNode.Nodes.Add(childNode);
+                                    RuleNode.Nodes.Add((TreeNode)childNode.Clone());
+                                    //RuleNode.Nodes.Add(childNode);
                                 }
                                 else
                                 {
@@ -914,7 +915,8 @@ namespace SIL.PublishingSolution
                             {
                                 if (isSameClass || !repProperty.Contains(childNode.FirstNode.Text))
                                 {
-                                    repNode.Nodes.Add(childNode);
+                                    //repNode.Nodes.Add(childNode);
+                                    repNode.Nodes.Add((TreeNode)childNode.Clone());
                                 }
                             }
                         }
