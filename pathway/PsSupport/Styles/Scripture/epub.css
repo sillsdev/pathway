@@ -50,6 +50,7 @@ clear : both;
 /* hidden items */
 .scrBookName, .Verse_Number1, .scrBookCode {
 display : none;
+visibility: hidden;
 }
 .scrSection {
 text-align : left;
@@ -67,6 +68,7 @@ padding-top : 2%;
 }
 .Note_General_Paragraph span {
 display: none;
+visibility: hidden;
 }
 .footnotes {
 border-top: 1px solid #ccc;
@@ -80,6 +82,7 @@ list-style: none;
 }
 .Note_CrossHYPHENReference_Paragraph span {
 display: none;
+visibility: hidden;
 }
 .Note_CrossHYPHENReference_Paragraph {
 font-size : 67%;
