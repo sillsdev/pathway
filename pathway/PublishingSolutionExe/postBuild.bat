@@ -20,6 +20,9 @@ xcopy %base%\OpenOfficeConvert\%cfg%\OpenOfficeConvert.* . /y
 xcopy %base%\LiftPrepare\%cfg%\LiftPrepare.* . /y
 xcopy %base%\InDesignConvert\%cfg%\InDesignConvert.* . /y
 xcopy %base%\epubConvert\%cfg%\epubConvert.* . /y
+xcopy %base%\epubValidator\%cfg%\epubValidator.* . /y
+rem the epubcheck subdir needs to be copied alongside the epubValidator files
+xcopy %base%\ThirdParty\epubcheck-1.1\* .\epubcheck-1.1  /i /s /q /y
 xcopy %base%\PdfConvert\%cfg%\PdfConvert.* . /y
 rem if "%1" == "Release" goto removeXetex
 rem if "%1" == "ReleaseBTE" goto removeXetex

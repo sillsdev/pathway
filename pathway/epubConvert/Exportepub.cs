@@ -39,6 +39,7 @@ using System.Windows.Forms;
 using System.Xml;
 using epubConvert;
 using epubConvert.Properties;
+using epubValidator;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -481,11 +482,19 @@ namespace SIL.PublishingSolution
                 Compress(projInfo.TempOutputFolder, Common.PathCombine(outputFolder, fileName));
                 TimeSpan tsTotal = DateTime.Now - dt1;
                 Debug.WriteLine("Exportepub: time spent in .epub conversion: " + tsTotal);
+
+                // clean up
+                Environment.CurrentDirectory = curdir;
+                Cursor.Current = myCursor;
+
+                // Postscript - validate the file using our epubcheck wrapper
+                MessageBox.Show(Resources.ExportCallingEpubValidator, Resources.ExportComplete, MessageBoxButtons.OK,MessageBoxIcon.Information);
+                var validationDialog = new ValidationDialog();
+                string outputPathWithFileName = Common.PathCombine(outputFolder, fileName) + ".epub";
+                validationDialog.FileName = outputPathWithFileName;
+                validationDialog.ShowDialog();
             }
                 
-            // clean up and return
-            Environment.CurrentDirectory = curdir;
-            Cursor.Current = myCursor;
             return success;
         }
 
@@ -1630,17 +1639,17 @@ namespace SIL.PublishingSolution
             // copy the results to the output directory
             File.Copy(zipFile, outputPathWithFileName, true);
 
-            try
-            {
-                Common.OpenOutput(outputPathWithFileName);
-            }
-            catch (System.ComponentModel.Win32Exception ex)
-            {
-                if (ex.NativeErrorCode == 1155)
-                {
+            //try
+            //{
+            //    Common.OpenOutput(outputPathWithFileName);
+            //}
+            //catch (System.ComponentModel.Win32Exception ex)
+            //{
+            //    if (ex.NativeErrorCode == 1155)
+            //    {
 
-                }
-            }
+            //    }
+            //}
         }
 
         #endregion

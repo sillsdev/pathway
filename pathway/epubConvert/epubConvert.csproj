@@ -162,6 +162,10 @@
       <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
       <Name>CssParser</Name>
     </ProjectReference>
+    <ProjectReference Include="..\epubValidator\epubValidator.csproj">
+      <Project>{403F8C54-4154-4D79-AED7-326B976875B4}</Project>
+      <Name>epubValidator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LiftPrepare\LiftPrepare.csproj">
       <Project>{D38235F3-5B02-4835-B380-40E0BDCD5495}</Project>
       <Name>LiftPrepare</Name>

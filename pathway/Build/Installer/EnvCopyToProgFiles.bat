@@ -84,18 +84,30 @@ echo. destination directory: %FW_HOME%
 echo. 
 echo. Copying files...
 echo.--------------------------------------------------------------------------
-xcopy %base%\ConfigurationTool%cfg% "%DST%" /y
 
+rem run the postbuild.bat file in the configuration tool - 
+rem this stages the files we need in the ConfigurationTool's output directory
+cd %BASE%\ConfigurationTool%cfg%
+call %BASE%\ConfigurationTool\postBuild.bat debug
+cd %BASE%\Build\Installer
+
+rem now copy the files from the ConfigurationTool output directory to the destination folder
+xcopy %base%\ConfigurationTool%cfg% "%DST%" /y
+xcopy %base%\ConfigurationTool%cfg%\epubcheck-1.1\* "%DST%"\epubcheck-1.1 /i /s /q /y
+
+rem ** edb 1/14/2011: these should be taken care of by calling postBuild.bat and copying over the results
+rem ** in the code blocks above
 rem copy over the Converters as well
-xcopy %base%\OpenOfficeConvert%cfg%\OpenOfficeConvert.* "%DST%" /y
-xcopy %base%\LiftPrepare%cfg%\LiftPrepare.* "%DST%" /y
-xcopy %base%\InDesignConvert%cfg%\InDesignConvert.* "%DST%" /y
-xcopy %base%\LogosConvert%cfg%\LogosConvert.* "%DST%" /y
-xcopy %base%\epubConvert%cfg%\epubConvert.* "%DST%" /y
-xcopy %base%\PdfConvert%cfg%\PdfConvert.* "%DST%" /y
-xcopy %base%\WordPressConvert%cfg%\WordPressConvert.* "%DST%" /y
-xcopy %base%\XeTeXConvert%cfg%\XeTeXConvert.* "%DST%" /y
-xcopy %base%\GoBibleConvert%cfg%\GoBibleConvert.* "%DST%" /y
+rem xcopy %base%\OpenOfficeConvert%cfg%\OpenOfficeConvert.* "%DST%" /y
+rem xcopy %base%\LiftPrepare%cfg%\LiftPrepare.* "%DST%" /y
+rem xcopy %base%\InDesignConvert%cfg%\InDesignConvert.* "%DST%" /y
+rem xcopy %base%\LogosConvert%cfg%\LogosConvert.* "%DST%" /y
+rem xcopy %base%\epubConvert%cfg%\epubConvert.* "%DST%" /y
+rem xcopy %base%\epubValidator%cfg%\epubValidator.* "%DST%" /y
+rem xcopy %base%\PdfConvert%cfg%\PdfConvert.* "%DST%" /y
+rem xcopy %base%\WordPressConvert%cfg%\WordPressConvert.* "%DST%" /y
+rem xcopy %base%\XeTeXConvert%cfg%\XeTeXConvert.* "%DST%" /y
+rem xcopy %base%\GoBibleConvert%cfg%\GoBibleConvert.* "%DST%" /y
 
 xcopy %base%\ParatextSupport%cfg%\ParatextSupport.dll "%DST%" /y
 xcopy %SRC%\CssDialog.dll "%DST%" /y
@@ -117,17 +129,6 @@ xcopy %SRC%\PsTool.pdb "%DST%" /y
 
 :nopdb
 xcopy %BASE%\PsSupport\*.* "%DST%" /s /q /y
-
-rem ** EDB commented out - pretty sure this is a duplicate set of calls
-rem ** (the xcopy calls above should handle the _Convert_ DLLs directly)
-rem ** there's also a side-effect in postBuild.bat that changes the BASE
-rem ** variable.
-
-rem Now copy all the Backends to the Pathway directory instead of to a backends directory.
-rem cd %BASE%\ConfigurationTool%cfg%
-rem call %BASE%\ConfigurationTool\postBuild.bat debug
-rem cd %BASE%\Build\Installer
-rem xcopy %BASE%\ConfigurationTool%cfg%\*Convert.* "%DST%" /y
 
 :doneConvert
 rem the first line here works with the development version the second, the installed version.

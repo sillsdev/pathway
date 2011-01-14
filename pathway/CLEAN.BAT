@@ -74,6 +74,9 @@ rmdir /s/q bin
 cd %base%\epubConvert
 rmdir /s/q obj
 rmdir /s/q bin
+cd %base%\epubValidator
+rmdir /s/q obj
+rmdir /s/q bin
 cd %base%\GoBibleConvert
 rmdir /s/q obj
 rmdir /s/q bin

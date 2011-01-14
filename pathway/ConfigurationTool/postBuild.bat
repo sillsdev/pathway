@@ -5,12 +5,14 @@ set base2=..\..\..\..
 set cfg2=bin\x86\%1
 :anyCpu
 xcopy %base2%\ThirdParty\gsdll32.dll . /y
+xcopy %base2%\ThirdParty\epubcheck-1.1\* .\epubcheck-1.1  /i /s /q /y
 xcopy %base2%\LiftPrepare\Lib\PalasoLib\*.dll . /y
 xcopy %base2%\PathwayB\%cfg2%\PathwayB.* . /y
 xcopy %base2%\OpenOfficeConvert\%cfg2%\OpenOfficeConvert.* . /y
 xcopy %base2%\LiftPrepare\%cfg2%\LiftPrepare.* . /y
 xcopy %base2%\InDesignConvert\%cfg2%\InDesignConvert.* . /y
 xcopy %base2%\epubConvert\%cfg2%\epubConvert.* . /y
+xcopy %base2%\epubValidator\%cfg2%\epubValidator.* . /y
 if "%1" == "CorporateBTE" goto justgobible
 if "%1" == "Corporate7BTE" goto justgobible
 if "%1" == "CorporateSE" goto nogobible

@@ -106,6 +106,24 @@ namespace epubConvert.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export to .epub has completed successfully. Pathway will now launch the .epub validation tool to verify the contents of the document..
+        /// </summary>
+        internal static string ExportCallingEpubValidator {
+            get {
+                return ResourceManager.GetString("ExportCallingEpubValidator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export Complete.
+        /// </summary>
+        internal static string ExportComplete {
+            get {
+                return ResourceManager.GetString("ExportComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Font Copyright Warning.
         /// </summary>
         internal static string FontWarningDlgTitle {

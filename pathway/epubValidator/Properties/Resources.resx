@@ -117,43 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FontWarningDlgTitle" xml:space="preserve">
-    <value>Font Copyright Warning</value>
+  <data name="InstructionsSpecifyFilename" xml:space="preserve">
+    <value>Click on the Browse button to select a file to validate, then click on the Validate button to start the process.</value>
   </data>
-  <data name="EmbedFont" xml:space="preserve">
-    <value>&amp;Embed the font. I have the proper rights to redistribute it.</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Title" xml:space="preserve">
+    <value>Validate .epub File</value>
   </data>
-  <data name="ConvertToSILFont" xml:space="preserve">
-    <value>&amp;Use this font instead:</value>
+  <data name="Description" xml:space="preserve">
+    <value>Welcome to the .epub file validator. This program uses an open source utility called "epubcheck" to help find errors within the .epub file that could prevent it from opening or displaying properly in e-book readers.</value>
   </data>
-  <data name="EmbedFontsWarning" xml:space="preserve">
-    <value>'{0}' is specified as the default font for language(s): '{1}'. You will need the proper rights in order to embed this font in your distributed document.</value>
+  <data name="InstructionsClickValidate" xml:space="preserve">
+    <value>Click the Validate button below to start the process.</value>
   </data>
-  <data name="EmbedFontOptions" xml:space="preserve">
-    <value>What do you want to do?</value>
+  <data name="PleaseWait" xml:space="preserve">
+    <value>Calling epubcheck to validate the file. This process can take up to a minute or more, depending on the file size.</value>
   </data>
-  <data name="Chapter" xml:space="preserve">
-    <value>Chapter </value>
-  </data>
-  <data name="RepeatAction" xml:space="preserve">
-    <value>Do this for the next {0} item(s).</value>
-  </data>
-  <data name="MissingFontWarning" xml:space="preserve">
-    <value>'{0}' is specified as the default font for language(s): '{1}', but cannot be found on this system. Select another font to use instead, or click Cancel to stop the conversion to .epub.</value>
-  </data>
-  <data name="MissingFontTitle" xml:space="preserve">
-    <value>Missing Font: '{0}'</value>
-  </data>
-  <data name="NoSILFontsMessage" xml:space="preserve">
-    <value>No SIL Fonts were found on this machine. Make sure you have the proper rights to embed the fonts you have selected in your distributed document. If you are not sure, click Cancel and contact your administrator to install SIL fonts on this machine.</value>
-  </data>
-  <data name="NoSILFontsTitle" xml:space="preserve">
-    <value>No SIL Fonts Found</value>
-  </data>
-  <data name="ExportCallingEpubValidator" xml:space="preserve">
-    <value>Export to .epub has completed successfully. Pathway will now launch the .epub validation tool to verify the contents of the document.</value>
-  </data>
-  <data name="ExportComplete" xml:space="preserve">
-    <value>Export Complete</value>
+  <data name="epub_logo_color1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\epub_logo_color.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

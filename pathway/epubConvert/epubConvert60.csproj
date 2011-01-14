@@ -175,10 +175,17 @@
   <ItemGroup>
     <EmbeddedResource Include="FontWarningDlg.resx">
       <DependentUpon>FontWarningDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\epubValidator\epubValidator60.csproj">
+      <Project>{C789DC85-2A06-4425-BA3C-A51E28E9626E}</Project>
+      <Name>epubValidator60</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PsTool\PsTool60.csproj">
       <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
       <Name>PsTool60</Name>
