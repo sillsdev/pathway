@@ -25,9 +25,6 @@
 		<CustomAction Id="SetFwDir60" Property="FWDIR" Value="[FWDIR60]" />
 		<!--CustomAction Id="SetFwDir70" Property="FWDIR" Value="[FWDIR70]" />
 		<CustomAction Id="SetFwDir80" Property="FWDIR" Value="[FWDIR80]" / -->
-
-		<CustomAction Id="AssignCDir2CTX" Directory="CTXTARGETDIR" Value="C:\" Execute="firstSequence" />
-		
 		<InstallUISequence>
 			<Custom Action="SetFwDir60" After="AppSearch"><![CDATA[FWDIR60 <> "null"]]></Custom>
 			<!--Custom Action="SetFwDir70" After="SetFwDir60"><![CDATA[FWDIR70 <> "null"]]></Custom>
@@ -38,10 +35,6 @@
 			<RegistrySearch Id="FindFwDate" Key="SOFTWARE\SIL\FieldWorks\CoreInstallation" Root="HKLM" Type="raw"/>
 		</Property>
 
-		<InstallExecuteSequence>
-			<Custom Action="AssignCDir2CTX" After="CostFinalize"/>
-		</InstallExecuteSequence>          
-		
 		<FragmentRef Id='pathwayUI'/>
 		<FragmentRef Id='FilesFragment'/>
 		<FragmentRef Id='FeaturesFragment'/>
@@ -60,7 +53,7 @@
 							<Shortcut Id="ShortcutApp" Directory="PathwayMenu" Name="Pathway" LongName="Pathway Configuration Tool" Target="[#ConfigurationTool.exe]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="INSTALLDIR" />
 						</Component>
 						<Component Id="ReadMeShortcutApp" Guid="23575D91-3CF8-41dc-96FC-D2466EDE125C">
-							<Shortcut Id="ReadMeShortcutApp" Directory="PathwayMenu" Name="ReadMe" LongName="ReadMe" Target="[#ReadMePw.rtf]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="INSTALLDIR" />
+							<Shortcut Id="ReadMeShortcutApp" Directory="PathwayMenu" Name="ReadMe" Target="[#ReadMePw.rtf]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="INSTALLDIR" />
 						</Component>
 						<Component Id="TutorialShortcutApp" Guid="3A0CF01A-A7C3-49F0-A00F-0574B54370C9">
 							<Shortcut Id="TutorialShortcutApp" Directory="PathwayMenu" Name="Tutorial" LongName="Student Manual" Target="[#Pathway_Student_Manual_BTE.doc]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="INSTALLDIR" />

@@ -53,7 +53,7 @@
 							<Shortcut Id="ShortcutApp" Directory="PathwayMenu" Name="Pathway" LongName="Pathway Configuration Tool" Target="[#ConfigurationTool.exe]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="INSTALLDIR" />
 						</Component>
 						<Component Id="ReadMeShortcutApp" Guid="23575D91-3CF8-41dc-96FC-D2466EDE125C">
-							<Shortcut Id="ReadMeShortcutApp" Directory="PathwayMenu" Name="ReadMe" LongName="ReadMe" Target="[#ReadMePw.rtf]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="INSTALLDIR" />
+							<Shortcut Id="ReadMeShortcutApp" Directory="PathwayMenu" Name="ReadMe" Target="[#ReadMePw.rtf]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="INSTALLDIR" />
 						</Component>
 						<Component Id="TutorialShortcutApp" Guid="3A0CF01A-A7C3-49F0-A00F-0574B54370C9">
 							<Shortcut Id="TutorialShortcutApp" Directory="PathwayMenu" Name="Tutorial" LongName="Student Manual" Target="[#Pathway_Student_Manual_BTE.doc]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="INSTALLDIR" />

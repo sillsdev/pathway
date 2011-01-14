@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <Wix xmlns='http://schemas.microsoft.com/wix/2003/01/wi'>
-	<Product UpgradeCode="2CAD8F8F-2EC0-486B-B46A-90B2CD12F1D7" Id="68A7D17F-C81F-4456-983C-ACDF0B19BC03"
+	<Product UpgradeCode="74173B43-8B0C-499e-99B0-759A6C8EBDD2" Id="7F47A1B7-AA90-40dd-96D7-E9432D90DF4E"
 		Name='%(Product)s%(PwVer)s' Language='1033' Version='%(PwVer)s' Manufacturer='SIL International'>
 		<Package Id='????????-????-????-????-????????????' Manufacturer='SIL International' InstallerVersion='200' Compressed='yes' />
 		<Condition Message="You need to be an administrator to install this product.">Privileged</Condition>
@@ -48,12 +48,12 @@
 			</Directory>
 			<Directory Id="StartMenuFolder" SourceName="StartMen" LongSource="Start Menu">
 				<Directory Id="ProgramMenuFolder" SourceName="Programs">
-					<Directory Id="PathwayMenu" Name="Pathway" LongName="Pathway">
+					<Directory Id="PathwayMenu" Name="Pathway7">
 						<Component Id="ShortcutApp" Guid="96BE5240-DC73-4b1c-A590-9FC7CFE71AEF">
 							<Shortcut Id="ShortcutApp" Directory="PathwayMenu" Name="Pathway" LongName="Pathway Configuration Tool" Target="[#ConfigurationTool.exe]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="INSTALLDIR" />
 						</Component>
 						<Component Id="ReadMeShortcutApp" Guid="23575D91-3CF8-41dc-96FC-D2466EDE125C">
-							<Shortcut Id="ReadMeShortcutApp" Directory="PathwayMenu" Name="ReadMe" LongName="ReadMe" Target="[#ReadMePw.rtf]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="INSTALLDIR" />
+							<Shortcut Id="ReadMeShortcutApp" Directory="PathwayMenu" Name="ReadMe" Target="[#ReadMePw.rtf]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="INSTALLDIR" />
 						</Component>
 						<Component Id="TutorialShortcutApp" Guid="3A0CF01A-A7C3-49F0-A00F-0574B54370C9">
 							<Shortcut Id="TutorialShortcutApp" Directory="PathwayMenu" Name="Tutorial" LongName="Student Manual" Target="[#Pathway_Student_Manual_SE.doc]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="INSTALLDIR" />

@@ -1,0 +1,4 @@
+BasicUtils.dll,6.0.6.40519
+FwUtils.dll,6.0.6.40519
+ICSharpCode.SharpZipLib.dll,0.85.5.452
+XMLUtils.dll,6.0.6.40519
