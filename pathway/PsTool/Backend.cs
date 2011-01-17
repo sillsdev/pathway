@@ -71,7 +71,7 @@ namespace SIL.PublishingSolution
                 {
                     if (process.ExportType.ToLower() == "openoffice")
                     {
-                        _exportType.Add("Word (Using OpenOffice)");
+                        //_exportType.Add("Word (Using OpenOffice)");  // TD-1818 
                         _exportType.Add("Pdf (Using OpenOffice) ");
                     }
                     _exportType.Add(process.ExportType);
@@ -129,10 +129,10 @@ namespace SIL.PublishingSolution
             if (type.ToLower().IndexOf("openoffice") >= 0)
             {
                 publicationInformation.FinalOutput = "odt";
-                if(type.ToLower().IndexOf("word") >= 0)
-                {
-                    publicationInformation.FinalOutput = "doc";
-                }
+                //if(type.ToLower().IndexOf("word") >= 0)   // TD-1818 
+                //{
+                //    publicationInformation.FinalOutput = "doc";
+                //}
                 if (type.ToLower().IndexOf("pdf") >= 0)
                 {
                     publicationInformation.FinalOutput = "pdf";
