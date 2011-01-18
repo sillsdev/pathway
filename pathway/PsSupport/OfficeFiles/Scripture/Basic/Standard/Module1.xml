@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Jan-07-2011 for TD-1779(no information in headers)
+&apos;Changed On Jan-18-2011 for TD-1800(Header with book name and abbreviation)
 
 &apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -587,9 +587,17 @@ Sub FirstPageBook(strStartBook)
  			Exit Sub
  		End If
     	If oTextElement.supportsService(&quot;com.sun.star.text.Paragraph&quot;) then
-    		If LCase(Trim(oTextElement.ParaStyleName)) = &quot;scrbook&quot; Then
-    			strStartBook = oTextElement.String
-    			Exit Sub
+    		If LCase(Trim(oTextElement.ParaStyleName)) = &quot;scrbook_scrbody&quot; Then&apos;titlemain_scrbook
+    		    oParaEnume = oTextElement.createEnumeration()
+    			While oParaEnume.hasMoreElements()
+			    	oPortion = oParaEnume.nextElement() 
+			    	If InStr(Lcase(oPortion.CharStyleName) , &quot;scrBookName&quot;) &gt; 0 Then&apos;titlemain_scrbook
+			    		strStartBook = oPortion.String
+			    		Exit Sub
+			    	End If
+    			Wend
+    			&apos;strStartBook = oTextElement.String
+    			&apos;Exit Sub
     		End If
     	End If
     Wend	
@@ -742,15 +750,17 @@ Function ReturnReferenceBook(MyParagraph)
 	oParaEnume = MyParagraph.createEnumeration() 
 	While oParaEnume.hasMoreElements() 
 	 	oPara = oParaEnume.nextElement() 
-		&apos;enumeration for portions in the paragraph 
-	  	oPortionEnume = oPara.createEnumeration() 
-	  	While oPortionEnume.hasMoreElements() 
-	    	oPortion = oPortionEnume.nextElement() 
-	    	If InStr(Lcase(oPortion.CharStyleName) , &quot;titlemain_scrbook&quot;) &gt; 0 Then
-	    		ReturnReferenceBook = oPortion.String
-	    		Exit Function
-	    	End If
-	  	WEnd 
+	 	If LCase(Trim(oPara.ParaStyleName)) = &quot;scrbook_scrbody&quot; Then&apos;titlemain_scrbook
+			&apos;enumeration for portions in the paragraph 
+		  	oPortionEnume = oPara.createEnumeration() 
+		  	While oPortionEnume.hasMoreElements() 
+		    	oPortion = oPortionEnume.nextElement() 
+		    	If InStr(Lcase(oPortion.CharStyleName) , &quot;scrBookName&quot;) &gt; 0 Then&apos;titlemain_scrbook
+		    		ReturnReferenceBook = oPortion.String
+		    		Exit Function
+		    	End If
+		  	WEnd 
+	  	End If
 	WEnd	
 End Function
 
