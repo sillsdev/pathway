@@ -85,6 +85,7 @@ namespace Test.epubConvert
         }
 
         [Test]
+        [Ignore("Hangs Team City")]
         public void ExportDictionaryPassTest()
         {
             const string XhtmlName = "main.xhtml";
@@ -102,6 +103,7 @@ namespace Test.epubConvert
         }
 
         [Test]
+        [Ignore("Hangs Team City")]
         public void ExportScripturePassTest()
         {
             const string XhtmlName = "Scripture Draft.xhtml";
