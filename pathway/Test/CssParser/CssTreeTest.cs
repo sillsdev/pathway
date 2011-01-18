@@ -27,7 +27,7 @@ namespace Test.CssParserTest
         {
             _output = new Dictionary<string, Dictionary<string, string>>();
             _expected = new Dictionary<string, Dictionary<string, string>>();
-            _testFolderPath = PathPart.Bin(Environment.CurrentDirectory, "/CSSParser/TestFiles/cssInput");
+            _testFolderPath = PathPart.Bin(Environment.CurrentDirectory, "/CssParser/TestFiles/cssInput");
         }
         #endregion Setup
         [Test]
