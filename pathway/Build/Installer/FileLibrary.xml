@@ -1,5 +1,13 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\ConfigurationTool\epubValidator.exe" ComponentGuid="3F8FAF63-9412-4B14-BA2E-F755DE40D95E"/>
+	<File Path="Files\ConfigurationTool\epubcheck-1.1\README.txt" ComponentGuid="55170368-EEA5-4986-B9DE-EEB5BF15258D"/>
+	<File Path="Files\ConfigurationTool\epubcheck-1.1\jing_license.txt" ComponentGuid="084770C6-AB9D-440E-9594-4BFCD46BA767"/>
+	<File Path="Files\ConfigurationTool\epubcheck-1.1\jigsaw_license.txt" ComponentGuid="5739B5A3-B1F0-45D1-8D98-FCF3CB24F117"/>
+	<File Path="Files\ConfigurationTool\epubcheck-1.1\epubcheck-1.1.jar" ComponentGuid="AFFFFD1B-7627-4EB1-9404-435D21936D2D"/>
+	<File Path="Files\ConfigurationTool\epubcheck-1.1\COPYING.txt" ComponentGuid="0C546AC4-5941-4DF8-BDAC-9F8C7FA6664B"/>
+	<File Path="Files\ConfigurationTool\epubcheck-1.1\lib\saxon.jar" ComponentGuid="A76416E9-C2A6-4B00-B7D4-8EA66CD91840"/>
+	<File Path="Files\ConfigurationTool\epubcheck-1.1\lib\jigsaw.jar" ComponentGuid="45F5D268-2B59-4163-96C9-45418B70598C"/>
 	<File Path="Files\PublishingSolution\Graphic\cover.png" ComponentGuid="700C5DC5-8A60-45D7-B111-2439ADFACA45"/>
 	<File Path="Files\PathwaySupport\Graphic\cover.png" ComponentGuid="BBFEF406-EFD8-42D2-BB2F-06D4936AE8B2"/>
 	<File Path="Files\ConfigurationTool\Graphic\cover.png" ComponentGuid="863B1240-E8A6-4F6E-876B-6F3066B8BA5C"/>
