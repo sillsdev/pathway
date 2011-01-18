@@ -342,7 +342,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>$(ProjectDir)\PostTestBuild.bat</PostBuildEvent>
   </PropertyGroup>
 </Project>

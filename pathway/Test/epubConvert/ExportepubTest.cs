@@ -39,11 +39,11 @@ namespace Test.epubConvert
             Common.SupportFolder = "";
             Common.ProgBase = Common.ProgInstall;
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/epubConvert/TestFiles");
-            _inputPath = Common.PathCombine(testPath, "input");
-            _outputPath = Common.PathCombine(testPath, "output");
-            _expectedPath = Common.PathCombine(testPath, "expected");
-            if (Directory.Exists(_outputPath))
-                Directory.Delete(_outputPath, true);
+            _inputPath = Common.PathCombine(testPath, "Input");
+            _outputPath = Common.PathCombine(testPath, "Output");
+            _expectedPath = Common.PathCombine(testPath, "Expected");
+//            if (Directory.Exists(_outputPath))
+//                Directory.Delete(_outputPath, true);
             Directory.CreateDirectory(_outputPath);
         }
         #endregion setup
@@ -82,6 +82,36 @@ namespace Test.epubConvert
             PublicationInformation projInfo = null;
             var actual = target.Export(projInfo);
             Assert.IsFalse(actual);
+        }
+
+        [Test]
+        public void ExportDictionaryPassTest()
+        {
+            const string XhtmlName = "main.xhtml";
+            const string CssName = "main.css";
+            PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
+            File.Copy(FileInput("FlexRev.xhtml"), FileOutput("FlexRev.xhtml"), true);
+            File.Copy(FileInput("FlexRev.css"), FileOutput("FlexRev.css"), true);
+            projInfo.IsReversalExist = true;
+            projInfo.DefaultRevCssFileWithPath = Path.Combine(_inputPath, "FlexRev.css");
+            projInfo.ProjectName = "EBook (epub)_" + DateTime.Now.Date.ToShortDateString() + "_" +
+                                   DateTime.Now.Date.ToShortTimeString();
+            var target = new Exportepub();
+            var actual = target.Export(projInfo);
+            Assert.IsTrue(actual);
+        }
+
+        [Test]
+        public void ExportScripturePassTest()
+        {
+            const string XhtmlName = "Scripture Draft.xhtml";
+            const string CssName = "Scripture Draft.css";
+            PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
+            projInfo.IsReversalExist = false;
+            projInfo.ProjectName = "Scripture Draft";
+            var target = new Exportepub();
+            var actual = target.Export(projInfo);
+            Assert.IsTrue(actual);
         }
 
 

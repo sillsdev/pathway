@@ -265,142 +265,13 @@ namespace SIL.PublishingSolution
                     Directory.CreateDirectory(contentFolder);
                 }
 
-                // Font handling
+                // -- Font handling --
                 // First, get the list of fonts used in this project
                 BuildFontsList();
-                // If we're embedding the fonts, handle the non-SIL ones now
+                // Embed fonts if needed
                 if (EmbedFonts)
                 {
-                    var nonSILFonts = new Dictionary<EmbeddedFont, string>();
-                    string langs;
-                    // Build the list of non-SIL fonts in use
-                    foreach (var embeddedFont in _embeddedFonts)
-                    {
-                        if (!embeddedFont.Value.SILFont)
-                        {
-                            foreach (var language in _langFontDictionary.Keys)
-                            {
-                                if (_langFontDictionary[language].Equals(embeddedFont.Key))
-                                {
-                                    // add this language to the list of langs that use this font
-                                    if (nonSILFonts.TryGetValue(embeddedFont.Value, out langs))
-                                    {
-                                        // existing entry - add this language to the list of langs that use this font
-                                        var sbName = new StringBuilder();
-                                        sbName.Append(langs);
-                                        sbName.Append(", ");
-                                        sbName.Append(language);
-                                        // set the value
-                                        nonSILFonts[embeddedFont.Value] = sbName.ToString();
-                                    }
-                                    else
-                                    {
-                                        // new entry
-                                        nonSILFonts.Add(embeddedFont.Value, language);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    // If there are any non-SIL fonts in use, show the Font Warning Dialog
-                    // (possibly multiple times) and replace our embedded font items if needed
-                    if (nonSILFonts.Count > 0)
-                    {
-                        FontWarningDlg dlg = new FontWarningDlg();
-                        dlg.RepeatAction = false;
-                        dlg.RemainingIssues = nonSILFonts.Count - 1;
-                        foreach (var nonSilFont in nonSILFonts)
-                        {
-                            dlg.MyEmbeddedFont = nonSilFont.Key.Name;
-                            dlg.Languages = nonSilFont.Value;
-                            if (dlg.RepeatAction)
-                            {
-                                // user wants to repeat the last action - if the last action
-                                // was to change the font, change this one as well
-                                if (!dlg.UseFontAnyway() && !nonSilFont.Key.Name.Equals(dlg.SelectedFont))
-                                {
-                                    // the user has chosen a different (SIL) font - 
-                                    // create a new EmbeddedFont and add it to the list
-                                    _embeddedFonts.Remove(nonSilFont.Key.Name);
-                                    var newFont = new EmbeddedFont(dlg.SelectedFont);
-                                    _embeddedFonts[dlg.SelectedFont] = newFont; // set index value adds if it doesn't exist
-                                    // also update the references in _langFontDictionary
-                                    foreach (var lang in langArray)
-                                    {
-                                        if (_langFontDictionary[lang] == nonSilFont.Key.Name)
-                                        {
-                                            _langFontDictionary[lang] = dlg.SelectedFont;
-                                        }
-                                    }
-                                }
-                                continue;
-                            }
-                            // sanity check - are there any SIL fonts installed?
-                            int count = dlg.BuildSILFontList();
-                            if (count == 0)
-                            {
-                                // No SIL fonts found (returns a DialogResult.Abort):
-                                // tell the user there are no SIL fonts installed, and allow them to Cancel
-                                // and install the fonts now
-                                if (MessageBox.Show (Resources.NoSILFontsMessage, Resources.NoSILFontsTitle, 
-                                    MessageBoxButtons.OKCancel,MessageBoxIcon.Warning) 
-                                    == DialogResult.Cancel)
-                                {
-                                    // user cancelled the operation - Cancel out of the whole .epub export
-                                    return false;
-                                }
-                                // user clicked OK - leave the embedded font list alone and continue the export
-                                // (presumably the user has the proper rights to this font, even though it isn't
-                                // an SIL font)
-                                break;
-                            }
-                            // show the dialog
-                            DialogResult result = dlg.ShowDialog();
-                            if (result == DialogResult.OK)
-                            {
-                                if (!dlg.UseFontAnyway() && !nonSilFont.Key.Name.Equals(dlg.SelectedFont))
-                                {
-                                    // the user has chosen a different (SIL) font - 
-                                    // create a new EmbeddedFont and add it to the list
-                                    _embeddedFonts.Remove(nonSilFont.Key.Name);
-                                    var newFont = new EmbeddedFont(dlg.SelectedFont);
-                                    _embeddedFonts[dlg.SelectedFont] = newFont; // set index value adds if it doesn't exist
-                                    // also update the references in _langFontDictionary
-                                    foreach (var lang in langArray)
-                                    {
-                                        if (_langFontDictionary[lang] == nonSilFont.Key.Name)
-                                        {
-                                            _langFontDictionary[lang] = dlg.SelectedFont;
-                                        }
-                                    }
-                                }
-                            }
-                            else if (result == DialogResult.Cancel)
-                            {
-                                // User cancelled - Cancel out of the whole .epub export
-                                return false;
-                            }
-                            // decrement the remaining issues for the next dialog display
-                            dlg.RemainingIssues--;
-                        }
-                    }
-                    // copy all the fonts over
-                    foreach (var embeddedFont in _embeddedFonts.Values)
-                    {
-                        if (embeddedFont.Filename == null)
-                        {
-                            Debug.WriteLine("ERROR: embedded font " + embeddedFont.Name + " is not installed - skipping");
-                            continue;
-                        }
-                        string dest = Common.PathCombine(contentFolder, embeddedFont.Filename);
-                        File.Copy(Path.Combine(FontInternals.GetFontFolderPath(), embeddedFont.Filename), dest);
-                        
-                    }
-                    // clean up
-                    if (nonSILFonts.Count > 0)
-                    {
-                        nonSILFonts.Clear();
-                    }
+                    if (!EmbedAllFonts(langArray, contentFolder)) return false;
                 }
                 // update the CSS file to reference any fonts used by the writing systems
                 // (if they aren't embedded in the .epub, we'll still link to them here)
@@ -483,22 +354,180 @@ namespace SIL.PublishingSolution
                 TimeSpan tsTotal = DateTime.Now - dt1;
                 Debug.WriteLine("Exportepub: time spent in .epub conversion: " + tsTotal);
 
+
+                // Postscript - validate the file using our epubcheck wrapper
+                if (Common.Testing)
+                {
+                    // Running the unit test - just run the validator and return the result
+                    var outputPathWithFileName = Common.PathCombine(outputFolder, fileName) + ".epub";
+                    var validationResults = epubValidator.Program.ValidateFile(outputPathWithFileName);
+                    Debug.WriteLine("Exportepub: validation results: " + validationResults);
+                    // we've succeeded if epubcheck returns no errors
+                    success = (validationResults.Contains("No errors or warnings detected"));
+                }
+                else
+                {
+                    MessageBox.Show(Resources.ExportCallingEpubValidator, Resources.ExportComplete, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    var validationDialog = new ValidationDialog();
+                    var outputPathWithFileName = Common.PathCombine(outputFolder, fileName) + ".epub";
+                    validationDialog.FileName = outputPathWithFileName;
+                    validationDialog.ShowDialog();
+                }
+
                 // clean up
                 Environment.CurrentDirectory = curdir;
                 Cursor.Current = myCursor;
-
-                // Postscript - validate the file using our epubcheck wrapper
-                MessageBox.Show(Resources.ExportCallingEpubValidator, Resources.ExportComplete, MessageBoxButtons.OK,MessageBoxIcon.Information);
-                var validationDialog = new ValidationDialog();
-                string outputPathWithFileName = Common.PathCombine(outputFolder, fileName) + ".epub";
-                validationDialog.FileName = outputPathWithFileName;
-                validationDialog.ShowDialog();
             }
                 
             return success;
         }
 
+
         #region Private Functions
+        /// <summary>
+        /// Handles font embedding for the .epub file. The fonts are verified before they are copied over, to
+        /// make sure they (1) exist on the system and (2) are SIL produced. For the latter, the user is able
+        /// to embed them anyway if they click that they have the appropriate rights (it's an honor system approach).
+        /// </summary>
+        /// <param name="langArray"></param>
+        /// <param name="contentFolder"></param>
+        /// <returns></returns>
+        private bool EmbedAllFonts(string[] langArray, string contentFolder)
+        {
+            var nonSILFonts = new Dictionary<EmbeddedFont, string>();
+            string langs;
+            // Build the list of non-SIL fonts in use
+            foreach (var embeddedFont in _embeddedFonts)
+            {
+                if (!embeddedFont.Value.SILFont)
+                {
+                    foreach (var language in _langFontDictionary.Keys)
+                    {
+                        if (_langFontDictionary[language].Equals(embeddedFont.Key))
+                        {
+                            // add this language to the list of langs that use this font
+                            if (nonSILFonts.TryGetValue(embeddedFont.Value, out langs))
+                            {
+                                // existing entry - add this language to the list of langs that use this font
+                                var sbName = new StringBuilder();
+                                sbName.Append(langs);
+                                sbName.Append(", ");
+                                sbName.Append(language);
+                                // set the value
+                                nonSILFonts[embeddedFont.Value] = sbName.ToString();
+                            }
+                            else
+                            {
+                                // new entry
+                                nonSILFonts.Add(embeddedFont.Value, language);
+                            }
+                        }
+                    }
+                }
+            }
+            // If there are any non-SIL fonts in use, show the Font Warning Dialog
+            // (possibly multiple times) and replace our embedded font items if needed
+            // (if we're running a test, skip the dialog and just embed the font)
+            if (nonSILFonts.Count > 0 && !Common.Testing)
+            {
+                FontWarningDlg dlg = new FontWarningDlg();
+                dlg.RepeatAction = false;
+                dlg.RemainingIssues = nonSILFonts.Count - 1;
+                foreach (var nonSilFont in nonSILFonts)
+                {
+                    dlg.MyEmbeddedFont = nonSilFont.Key.Name;
+                    dlg.Languages = nonSilFont.Value;
+                    if (dlg.RepeatAction)
+                    {
+                        // user wants to repeat the last action - if the last action
+                        // was to change the font, change this one as well
+                        if (!dlg.UseFontAnyway() && !nonSilFont.Key.Name.Equals(dlg.SelectedFont))
+                        {
+                            // the user has chosen a different (SIL) font - 
+                            // create a new EmbeddedFont and add it to the list
+                            _embeddedFonts.Remove(nonSilFont.Key.Name);
+                            var newFont = new EmbeddedFont(dlg.SelectedFont);
+                            _embeddedFonts[dlg.SelectedFont] = newFont; // set index value adds if it doesn't exist
+                            // also update the references in _langFontDictionary
+                            foreach (var lang in langArray)
+                            {
+                                if (_langFontDictionary[lang] == nonSilFont.Key.Name)
+                                {
+                                    _langFontDictionary[lang] = dlg.SelectedFont;
+                                }
+                            }
+                        }
+                        continue;
+                    }
+                    // sanity check - are there any SIL fonts installed?
+                    int count = dlg.BuildSILFontList();
+                    if (count == 0)
+                    {
+                        // No SIL fonts found (returns a DialogResult.Abort):
+                        // tell the user there are no SIL fonts installed, and allow them to Cancel
+                        // and install the fonts now
+                        if (MessageBox.Show(Resources.NoSILFontsMessage, Resources.NoSILFontsTitle,
+                                             MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)
+                            == DialogResult.Cancel)
+                        {
+                            // user cancelled the operation - Cancel out of the whole .epub export
+                            return false;
+                        }
+                        // user clicked OK - leave the embedded font list alone and continue the export
+                        // (presumably the user has the proper rights to this font, even though it isn't
+                        // an SIL font)
+                        break;
+                    }
+                    // show the dialog
+                    DialogResult result = dlg.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        if (!dlg.UseFontAnyway() && !nonSilFont.Key.Name.Equals(dlg.SelectedFont))
+                        {
+                            // the user has chosen a different (SIL) font - 
+                            // create a new EmbeddedFont and add it to the list
+                            _embeddedFonts.Remove(nonSilFont.Key.Name);
+                            var newFont = new EmbeddedFont(dlg.SelectedFont);
+                            _embeddedFonts[dlg.SelectedFont] = newFont; // set index value adds if it doesn't exist
+                            // also update the references in _langFontDictionary
+                            foreach (var lang in langArray)
+                            {
+                                if (_langFontDictionary[lang] == nonSilFont.Key.Name)
+                                {
+                                    _langFontDictionary[lang] = dlg.SelectedFont;
+                                }
+                            }
+                        }
+                    }
+                    else if (result == DialogResult.Cancel)
+                    {
+                        // User cancelled - Cancel out of the whole .epub export
+                        return false;
+                    }
+                    // decrement the remaining issues for the next dialog display
+                    dlg.RemainingIssues--;
+                }
+            }
+            // copy all the fonts over
+            foreach (var embeddedFont in _embeddedFonts.Values)
+            {
+                if (embeddedFont.Filename == null)
+                {
+                    Debug.WriteLine("ERROR: embedded font " + embeddedFont.Name + " is not installed - skipping");
+                    continue;
+                }
+                string dest = Common.PathCombine(contentFolder, embeddedFont.Filename);
+                File.Copy(Path.Combine(FontInternals.GetFontFolderPath(), embeddedFont.Filename), dest);
+
+            }
+            // clean up
+            if (nonSILFonts.Count > 0)
+            {
+                nonSILFonts.Clear();
+            }
+            return true;
+        }
+
         /// <summary>
         /// Inserts links in the CSS file to the fonts used by the writing systems:
         /// - If the fonts are embedded, adds a @font-face declaration referencing the .ttf file 
@@ -1653,6 +1682,5 @@ namespace SIL.PublishingSolution
         }
 
         #endregion
-
     }
 }
