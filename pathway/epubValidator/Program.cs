@@ -21,6 +21,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
+using SIL.Tool;
 
 namespace epubValidator
 {
@@ -47,6 +48,9 @@ namespace epubValidator
             }
             if (File.Exists(Filename))
             {
+                const string prog = "java.exe";
+                var progFolder = SubProcess.GetLocation(prog);
+                var progFullName = Common.PathCombine(progFolder, prog);
                 var sb = new StringBuilder();
                 sb.Append("-jar");
                 sb.Append(" \"");
@@ -67,7 +71,7 @@ namespace epubValidator
                                {
                                    StartInfo =
                                        {
-                                           FileName = "java.exe",
+                                           FileName = progFullName,
                                            Arguments = procArgs,
                                            RedirectStandardError = true,
                                            RedirectStandardOutput = true,
