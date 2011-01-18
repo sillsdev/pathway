@@ -203,8 +203,6 @@ namespace SIL.PublishingSolution
         private void Preprocess(string xhtmlFile)
         {
             AnchorTagProcessing(xhtmlFile);
-            ReplaceString(xhtmlFile);
-
         }
 
 
@@ -427,26 +425,22 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// To replace the symbol string if the symbol matches with the text
         /// </summary>
-        /// <param name="sourceFile">XHTML file path</param>
- private void ReplaceString(string sourceFile)
+        /// <param name="data">XML Content</param>
+        private string ReplaceString(string data)
         {
             if (_replaceSymbolToText.Count > 0)
             {
-                var sr = new StreamReader(sourceFile);
-                string ss = sr.ReadToEnd();
-                sr.Close();
                 foreach (string srchKey in _replaceSymbolToText.Keys)
                 {
-                    if (ss.IndexOf(srchKey) >= 0)
+                    if (data.IndexOf(srchKey) >= 0)
                     {
-                        ss = ss.Replace(srchKey, _replaceSymbolToText[srchKey]);
+                        data = data.Replace(srchKey, _replaceSymbolToText[srchKey]);
                     }
                 }
-                var sw = new StreamWriter(sourceFile);
-                sw.Write(ss);
-                sw.Close();
             }
+            return data;
         }
+
         /// <summary>
         /// Used for preprocess work to point the tempfile copied from source xhtml file.
         /// </summary>
@@ -758,7 +752,7 @@ namespace SIL.PublishingSolution
         private void WriteText()
         {
             string content = _reader.Value;
-
+            content = ReplaceString(content);
             if (CollectFootNoteChapterVerse(content)) return;
 
             // Psuedo Before
