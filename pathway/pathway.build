@@ -56,6 +56,21 @@
         <call target="ReleaseBTE"/>
     </target>
     
+    <target name="sprint6">
+        <call target="clean"/>
+        <call target="Set606"/>
+        <call target="CorporateBTE"/>
+        <call target="CorporateSE"/>
+        <call target="Release"/>
+        <call target="Set605"/>
+        <call target="CorporateBTE"/>
+        <call target="CorporateSE"/>
+        <call target="Set604"/>
+        <call target="CorporateBTE"/>
+        <call target="CorporateSE"/>
+        <call target="ReleaseBTE"/>
+    </target>
+    
     <target name="ConTeXt">
         <property name="Configuration" value="PwCtx"/>
         <call target="AllPwCtx"/>
@@ -114,7 +129,7 @@
                 <namespace prefix="wix" uri="${WixNs}"/>
             </namespaces>
         </xmlpoke>
-        <xmlpoke file="${myFile}" xpath="//wix:Product/@Version" value="${PwVer}">
+        <xmlpoke file="${myFile}" xpath="//wix:Product/@Version" value="${FullPwVer}">
             <namespaces>
                 <namespace prefix="wix" uri="${WixNs}"/>
             </namespaces>
@@ -290,9 +305,9 @@
         <property name="InfoRestLen" value="${string::get-length(AssemblyInfo) - int::parse(VerIdx)}"/>
         <property name="InfoRest" value="${string::substring(AssemblyInfo, VerIdx, InfoRestLen)}"/>
         <property name="VerLen" value="${string::index-of(InfoRest, ')]') - 1}"/>
-        <property name="FullVer" value="${string::substring(InfoRest, 0, VerLen)}"/>
-        <property name="RevIdx" value="${string::last-index-of(FullVer, '.')}"/>
-        <property name="PwVer" value="${string::substring(FullVer, 0, RevIdx)}"/>
+        <property name="FullPwVer" value="${string::substring(InfoRest, 0, VerLen)}"/>
+        <property name="RevIdx" value="${string::last-index-of(FullPwVer, '.')}"/>
+        <property name="PwVer" value="${string::substring(FullPwVer, 0, RevIdx)}"/>
         <echo message="PwVer is ${PwVer}"/>
     </target>
     
@@ -417,7 +432,7 @@
         <property name="myFile" value="Build\Installer\Pathway${Scope}.wxs"/>
         <copy file="Build\Installer\PathwayBTE-tpl.wxs" tofile="${myFile}" overwrite="true"/>
         <xmlpoke file="${myFile}" xpath="//Product/@Name" value="${Product}${PwVer} for FieldWorks ${FwVer}"/>
-        <xmlpoke file="${myFile}" xpath="//wix:Product/@Version" value="${PwVer}">
+        <xmlpoke file="${myFile}" xpath="//wix:Product/@Version" value="${FullPwVer}">
             <namespaces>
                 <namespace prefix="wix" uri="${WixNs}"/>
             </namespaces>
@@ -446,7 +461,7 @@
                 <namespace prefix="wix" uri="${WixNs}"/>
             </namespaces>
         </xmlpoke>
-        <xmlpoke file="${myFile}" xpath="//wix:Product/@Version" value="${PwVer}">
+        <xmlpoke file="${myFile}" xpath="//wix:Product/@Version" value="${FullPwVer}">
             <namespaces>
                 <namespace prefix="wix" uri="${WixNs}"/>
             </namespaces>

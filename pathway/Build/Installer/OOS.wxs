@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2003/01/wi">
   <!-- Product UpgradeCode="2CAD8F8F-2EC0-486B-B46A-90B2CD12F1D7" Id="68A7D17F-C81F-4456-983C-ACDF0B19BC03" 
 	Name='SIL PublishingSolution %(PwVer)s for FieldWorks %(FwVer)s' Language='1033' Version='%(PwVer)s' Manufacturer='SIL International' -->
-  <Product UpgradeCode="785AEC48-1E2B-48f4-8F62-8128736F49B1" Id="EC1A877E-2767-4d3f-BFB2-249E1DED9000" Name="SIL PublishingSolution 0.6.14" Language="1033" Version="0.6.14" Manufacturer="SIL International">
+  <Product UpgradeCode="785AEC48-1E2B-48f4-8F62-8128736F49B1" Id="EC1A877E-2767-4d3f-BFB2-249E1DED9000" Name="SIL PublishingSolution 0.6.15" Language="1033" Version="0.6.15.465" Manufacturer="SIL International">
     <Package Id="????????-????-????-????-????????????" Manufacturer="SIL International" InstallerVersion="200" Compressed="yes" />
     <Condition Message="You need to be an administrator to install this product.">Privileged</Condition>
     <Condition Message="[ProductName] will only run on Windows 2000 or better. You cannot intall it on this machine."><![CDATA[(NOT Version9X) OR (NOT VersionNT OR (VersionNT >= 500))]]></Condition>

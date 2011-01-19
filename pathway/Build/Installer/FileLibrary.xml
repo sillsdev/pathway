@@ -1,5 +1,19 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\PublishingSolution\epubcheck-1.1\README.txt" ComponentGuid="7221B23A-CF1E-45BD-91C3-97D28DF266CD"/>
+	<File Path="Files\PublishingSolution\epubcheck-1.1\jing_license.txt" ComponentGuid="C6647651-16FA-4539-AB26-EBDD33BA4FFB"/>
+	<File Path="Files\PublishingSolution\epubcheck-1.1\jigsaw_license.txt" ComponentGuid="4C89FDF8-B178-446E-887C-AAE35171BF3D"/>
+	<File Path="Files\PublishingSolution\epubcheck-1.1\epubcheck-1.1.jar" ComponentGuid="F96FCC1C-C8AC-4521-9D7D-C6A6413FC9AE"/>
+	<File Path="Files\PublishingSolution\epubcheck-1.1\COPYING.txt" ComponentGuid="6C25EAD2-2B20-4158-A829-1DA7831C157B"/>
+	<File Path="Files\PublishingSolution\epubcheck-1.1\lib\saxon.jar" ComponentGuid="4E0FD012-2173-4FD1-BFE0-9067808A45D6"/>
+	<File Path="Files\PublishingSolution\epubcheck-1.1\lib\jigsaw.jar" ComponentGuid="84F27499-573F-40DC-A07B-C1D2BB0D05B9"/>
+	<File Path="Files\PsDll\epubcheck-1.1\README.txt" ComponentGuid="E5E42899-B1F7-4511-BBDE-3221D8A20940"/>
+	<File Path="Files\PsDll\epubcheck-1.1\jing_license.txt" ComponentGuid="30A50523-6882-4C41-9338-DB2C3B44B997"/>
+	<File Path="Files\PsDll\epubcheck-1.1\jigsaw_license.txt" ComponentGuid="85BB44B9-FA6C-4E53-B95A-A21E27CE5621"/>
+	<File Path="Files\PsDll\epubcheck-1.1\epubcheck-1.1.jar" ComponentGuid="697E1B2E-7F2A-487E-862C-54E441180191"/>
+	<File Path="Files\PsDll\epubcheck-1.1\COPYING.txt" ComponentGuid="C2226ED2-6060-45C0-AB6D-703FE2159F58"/>
+	<File Path="Files\PsDll\epubcheck-1.1\lib\saxon.jar" ComponentGuid="EDB96C62-0FAA-4456-BE7F-3B0459C296CB"/>
+	<File Path="Files\PsDll\epubcheck-1.1\lib\jigsaw.jar" ComponentGuid="CC2A648C-FF2E-4974-BA52-AF9F829C541A"/>
 	<File Path="Files\ConfigurationTool\epubValidator.exe" ComponentGuid="3F8FAF63-9412-4B14-BA2E-F755DE40D95E"/>
 	<File Path="Files\ConfigurationTool\epubcheck-1.1\README.txt" ComponentGuid="55170368-EEA5-4986-B9DE-EEB5BF15258D"/>
 	<File Path="Files\ConfigurationTool\epubcheck-1.1\jing_license.txt" ComponentGuid="084770C6-AB9D-440E-9594-4BFCD46BA767"/>

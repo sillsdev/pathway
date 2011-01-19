@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{C789DC85-2A06-4425-BA3C-A51E28E9626E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -173,6 +173,12 @@
   <ItemGroup>
     <Content Include="Resources\epub_logo_color.ico" />
     <Content Include="Resources\epub_logo_color.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PsTool\PsTool60.csproj">
+      <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
+      <Name>PsTool60</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
