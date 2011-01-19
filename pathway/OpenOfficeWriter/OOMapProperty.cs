@@ -349,29 +349,34 @@ namespace SIL.PublishingSolution
         }
         public void VerticalAlign(string propertyValue)
         {
-
-            if (propertyValue == "super" || propertyValue == "sub")
+            try
             {
-                _propertyKey = "text-position";
+                if (propertyValue == "super" || propertyValue == "sub")
+                {
+                    _propertyKey = "text-position";
+                }
+                else if (propertyValue == "text-top")
+                {
+                    propertyValue = "top";
+                }
+                else if (propertyValue == "text-bottom")
+                {
+                    propertyValue = "bottom";
+                }
+                else if (propertyValue == "middle"
+                         || propertyValue == "top" || propertyValue == "bottom"
+                         || propertyValue == "baseline")
+                {
+                }
+                else
+                {
+                    throw new Exception("Input not valid");
+                }
+                _IDProperty[_propertyKey] = propertyValue;
             }
-            else if (propertyValue == "text-top")
+            catch
             {
-                propertyValue = "top";
             }
-            else if (propertyValue == "text-bottom")
-            {
-                propertyValue = "bottom";
-            }
-            else if (propertyValue == "middle"
-                || propertyValue == "top" || propertyValue == "bottom"
-                || propertyValue == "baseline")
-            {
-            }
-            else
-            {
-                throw new Exception("Input not valid");
-            }
-            _IDProperty[_propertyKey] = propertyValue;
         }
 
         public void TextTransform(string propertyValue)
