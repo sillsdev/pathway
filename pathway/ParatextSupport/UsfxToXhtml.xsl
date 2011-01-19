@@ -220,8 +220,7 @@
 			<!-- Convert Scripture paragraph styles. -->
 			<xsl:when test="@style = 'p'">
 				<p class="Paragraph" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:call-template name="MoveOrphanedChapter"/>
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<!-- No SFM mapping for:
@@ -232,122 +231,122 @@
 			-->
 			<xsl:when test="@style = 'cls'">
 				<p class="Closing" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'lit'">
 				<p class="Congregational_Response" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'pr'">
 				<p class="Cross-Reference" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'qc'">
 				<p class="Doxology" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'pmc'">
 				<p class="Embedded_Text_Closing" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'qm' or @style = 'qm1'">
 				<p class="Embedded_Text_Line1" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'qm2'">
 				<p class="Embedded_Text_Line2" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'qm3'">
 				<p class="Embedded_Text_Line3" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'pmo'">
 				<p class="Embedded_Text_Opening" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'pm'">
 				<p class="Embedded_Text_Paragraph" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'mi'">
 				<p class="Embedded_Text_Paragraph_Continuation" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'pmr'">
 				<p class="Embedded_Text_Refrain" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'pc'">
 				<p class="Inscription_Paragraph" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'qs'">
 				<p class="Interlude" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'q' or @style = 'q1'">
 				<p class="Line1" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'q2'">
 				<p class="Line2" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'q3'">
 				<p class="Line3" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'li1' or @style = 'ph1'"> <!-- ph# is deprecated. li# is the recommended alternate. -->
 				<p class="List_Item1" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'li2' or @style = 'ph2'">
 				<p class="List_Item2" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'li3' or @style = 'ph3'">
 				<p class="List_Item3" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'pi1'">
 				<p class="List_Item1_Additional" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'pi2'">
 				<p class="List_Item2_Additional" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'm'">
 				<p class="Paragraph_Continuation" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<xsl:when test="@style = 'qr'">
 				<p class="Refrain" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
+					<xsl:call-template name="AddParaContent"/>
 				</p>
 			</xsl:when>
 			<!-- No SFM mapping for:
@@ -577,39 +576,61 @@
 		</xsl:choose>
 	</xsl:template>
 
-	<!-- Move any chapters under html and followed by a paragraph into the following paragraph. -->
-	<xsl:template name="MoveOrphanedChapter">
-		<!--<xsl:comment>MoveOrphanedChapter called.</xsl:comment>-->
-		<xsl:choose>
-			<!-- REVIEW: How far back do we go? This will check if the element before the current paragraph is a chapter, 
-			or the one before that (in case there is a single heading paragraph). The problem is if there are multiple 
-			heading paragraphs.
-			-->
-			<xsl:when test="preceding-sibling::*[1][self::chapter]">
-				<span class="Chapter_Number" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="preceding-sibling::*[1][self::chapter]/@number"/>
-				</span>
-			</xsl:when>
-			<xsl:when test="preceding-sibling::*[2][self::chapter]">
-				<span class="Chapter_Number" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="preceding-sibling::*[2][self::chapter]/@number"/>
-				</span>
-			</xsl:when>
-		</xsl:choose>
+	<xsl:template name="AddParaContent">
+		<xsl:call-template name="FindChapter"/>
+		<xsl:apply-templates/>
+	</xsl:template>
+	
+	<xsl:template name="FindChapter">
+		<xsl:apply-templates select="preceding-sibling::*[1]" mode="FindChapter"/>
 	</xsl:template>
 
-	<!-- Delete any chapters that are siblings of para (children of body). -->
-	<xsl:template match="chapter[following-sibling::*[1][self::para]]">
-		<!--<xsl:comment>Matched html/chapter</xsl:comment>-->
-	</xsl:template>
-
-	<!--
-	<xsl:template match="chapter">
+	<xsl:template match="chapter" mode="FindChapter">
 		<span class="Chapter_Number" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
 			<xsl:value-of select="@number"/>
 		</span>
 	</xsl:template>
-	-->
+	
+	<xsl:template match="para" mode="FindChapter">
+		<xsl:choose>
+			<!-- If we encounter a recognized content paragraph style, we don't need
+			to continue searching for a chapter. Any prior chapter number should already
+			have been included in a previous content paragraph. -->
+			<xsl:when test="@style = 'p'"/>
+			<xsl:when test="@style = 'cls'"/>
+			<xsl:when test="@style = 'lit'"/>
+			<xsl:when test="@style = 'pr'"/>
+			<xsl:when test="@style = 'qc'"/>
+			<xsl:when test="@style = 'pmc'"/>
+			<xsl:when test="@style = 'qm' or @style = 'qm1'"/>
+			<xsl:when test="@style = 'qm2'"/>
+			<xsl:when test="@style = 'qm3'"/>
+			<xsl:when test="@style = 'pmo'"/>
+			<xsl:when test="@style = 'pm'"/>
+			<xsl:when test="@style = 'mi'"/>
+			<xsl:when test="@style = 'pmr'"/>
+			<xsl:when test="@style = 'pc'"/>
+			<xsl:when test="@style = 'qs'"/>
+			<xsl:when test="@style = 'q' or @style = 'q1'"/>
+			<xsl:when test="@style = 'q2'"/>
+			<xsl:when test="@style = 'q3'"/>
+			<xsl:when test="@style = 'li1' or @style = 'ph1'"/> <!-- ph# is deprecated. li# is the recommended alternate. -->
+			<xsl:when test="@style = 'li2' or @style = 'ph2'"/>
+			<xsl:when test="@style = 'li3' or @style = 'ph3'"/>
+			<xsl:when test="@style = 'pi1'"/>
+			<xsl:when test="@style = 'pi2'"/>
+			<xsl:when test="@style = 'm'"/>
+			<xsl:when test="@style = 'qr'"/>
+			
+			<!-- If we encounter an introduction style, we shouldn't find a chapter element earlier. -->
+			<xsl:when test="starts-with(@style, 'i')"/>
+			
+			<!-- Otherwise, keep iterating backwards searching for a chapter number. -->
+			<xsl:otherwise>
+				<xsl:apply-templates select="preceding-sibling::*[1]" mode="FindChapter"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
 
 	<xsl:template match="verse">
 		<span class="Verse_Number" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">

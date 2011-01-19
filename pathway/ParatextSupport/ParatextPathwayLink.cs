@@ -70,10 +70,6 @@ namespace SIL.PublishingSolution
 		/// ------------------------------------------------------------------------------------
 		public ParatextPathwayLink(string projName, string databaseName, string ws, string userWs, string userName)
 		{
-            //// TestBed Code
-            //// Display parameter
-            //MessageBox.Show("projName - " + projName + ", databaseName - " + databaseName + ", ws - " + ws + ", userWs - " + userWs + ", userName - " + userName);
-
 			if (ws == "en")
 				ws = "zxx";
 
@@ -171,8 +167,6 @@ namespace SIL.PublishingSolution
 				}
 
 				ConvertUsfxToPathwayXhtml(usfxDoc.InnerXml, fileName);
-                //MessageBox.Show("ProjectName-" + m_projectName + ", CSSPath-" + cssFullPath);
-                //MessageBox.Show("Filename-" + fileName);
 
                 PsExport exporter = new PsExport();
 				exporter.DataType = "Scripture";
