@@ -28,11 +28,14 @@ namespace SIL.PublishingSolution
         Dictionary<string, Dictionary<string, string>> _childStyle = new Dictionary<string, Dictionary<string, string>>();
         private Dictionary<string, string> _parentClass;
         private Dictionary<string, ArrayList> _spellCheck = new Dictionary<string, ArrayList>();
+        private List<string> _languageFont = new List<string>();
+        private Dictionary<string, string> fontLangMap = new Dictionary<string, string>();
 
         public ArrayList ModifyStylesXML(string projectPath, Dictionary<string, Dictionary<string, string>> childStyle, List<string> usedStyleName, Dictionary<string, string> languageStyleName, string baseStyle, bool isHeadword, Dictionary<string, string> parentClass)
         {
             LoadAllProperty();
             LoadSpellCheck();
+            CreateFontLanguageMap();
             _childStyle = childStyle;
             _projectPath = projectPath;
             _isHeadword = isHeadword;
@@ -61,7 +64,56 @@ namespace SIL.PublishingSolution
             //}
             CreateStyle(paraStyle, charStyle, usedStyleName);
             _styleXMLdoc.Save(styleFilePath);
+
+            AddFontDeclarative(styleFilePath, _languageFont);
+
             return _textVariables;
+        }
+        public void AddFontDeclarative(string styleFilePath, List<string> font)
+        {
+            if (font.Count == 0) return;
+
+            var doc = new XmlDocument();
+            doc.Load(styleFilePath);
+            var nsmgr = new XmlNamespaceManager(doc.NameTable);
+            nsmgr.AddNamespace("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
+            //office:font-face-decls
+            // if new stylename exists
+            XmlElement root = doc.DocumentElement;
+            string style = "//office:font-face-decls";
+            if (root != null)
+            {
+                XmlNode node = root.SelectSingleNode(style, nsmgr); // work
+                if (node == null)
+                {
+                    return;
+                }
+                foreach (string s in font)
+                {
+                    //style:font-face style:name="Gautami" svg:font-family="'Gautami'"
+                    XmlNode styleNode = node.FirstChild.CloneNode(true);
+                    node.AppendChild(styleNode);
+                    XmlAttributeCollection attrColl = styleNode.Attributes;
+                    attrColl["style:name"].Value = s;
+                    attrColl["svg:font-family"].Value = s;
+                }
+            }
+            doc.Save(styleFilePath);
+        }
+        private void CreateFontLanguageMap()
+        {
+            string PsSupportPath = Common.GetPSApplicationPath();
+            string xmlFileNameWithPath = Common.PathCombine(PsSupportPath, "GenericFont.xml");
+            string xPath = "//font-language-mapping";
+            XmlNodeList fontList = Common.GetXmlNodes(xmlFileNameWithPath, xPath);
+            if (fontList != null && fontList.Count > 0)
+            {
+                foreach (XmlNode xmlNode in fontList)
+                {
+                    fontLangMap[xmlNode.Attributes.GetNamedItem("name").Value] = xmlNode.InnerText;
+                }
+            }
+
         }
 
         private void CreateStyle(string paraStyle, string charStyle, List<string> usedStyleName)
@@ -214,6 +266,29 @@ namespace SIL.PublishingSolution
             {
                 string language, country;
                 Common.GetCountryCode(out language, out country, _languageStyleName[className.Key], _spellCheck);
+                string _lang = string.Empty;
+
+                string lg = Common.RightString(className.Key,"_");
+                if (lg.StartsWith("."))
+                {
+                    string lang = Common.LeftString(lg, "_");
+                    _lang = lang.Replace(".", "");
+                }
+                if (_lang != string.Empty)
+                    if (fontLangMap.ContainsKey(_lang))
+                    {
+                        string fname = fontLangMap[_lang];
+                        if (!_textProperty.ContainsKey("fo:font-name") || (_textProperty.ContainsKey("fo:font-name") && _textProperty["fo:font-name"] != fname))
+                        {
+                            //if (_textProperty.Count == 0)
+                            //    _util.MissingLang = false;
+
+                            _textProperty["fo:font-name"] = fname;
+                            _textProperty["style:font-name-complex"] = fname;
+                            if (!_languageFont.Contains(fname))
+                                _languageFont.Add(fname);
+                        }
+                    }
                 _textProperty["fo:language"] = language;
                 _textProperty["fo:country"] = country;
             }
