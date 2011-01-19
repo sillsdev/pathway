@@ -55,6 +55,17 @@ visibility: hidden;
 .scrSection {
 text-align : left;
 }
+.Section_Range_Paragraph {
+font-size : 90%;
+font-weight : normal;
+font-style : italic;
+text-align : center;
+text-indent : 0;
+margin-left : 0;
+margin-bottom: 0;
+padding-bottom : 1%;
+padding-top : 0;
+}
 .Section_Head {
 font-size : 85%;
 font-weight : bold;
