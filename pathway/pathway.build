@@ -61,7 +61,6 @@
         <call target="Set606"/>
         <call target="CorporateBTE"/>
         <call target="CorporateSE"/>
-        <call target="Release"/>
         <call target="Set605"/>
         <call target="CorporateBTE"/>
         <call target="CorporateSE"/>
@@ -431,7 +430,11 @@
     <target name="MakePw">
         <property name="myFile" value="Build\Installer\Pathway${Scope}.wxs"/>
         <copy file="Build\Installer\PathwayBTE-tpl.wxs" tofile="${myFile}" overwrite="true"/>
-        <xmlpoke file="${myFile}" xpath="//Product/@Name" value="${Product}${PwVer} for FieldWorks ${FwVer}"/>
+        <xmlpoke file="${myFile}" xpath="//wix:Product/@Name" value="${Product}${PwVer} for FieldWorks ${FwVer}">
+            <namespaces>
+                <namespace prefix="wix" uri="${WixNs}"/>
+            </namespaces>
+        </xmlpoke>
         <xmlpoke file="${myFile}" xpath="//wix:Product/@Version" value="${FullPwVer}">
             <namespaces>
                 <namespace prefix="wix" uri="${WixNs}"/>
