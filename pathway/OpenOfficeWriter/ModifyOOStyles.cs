@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using System.Xml;
 using Microsoft.Win32;
 using SIL.Tool;
@@ -100,21 +101,27 @@ namespace SIL.PublishingSolution
             }
             doc.Save(styleFilePath);
         }
+
         private void CreateFontLanguageMap()
         {
-            string PsSupportPath = Common.GetPSApplicationPath();
-            string xmlFileNameWithPath = Common.PathCombine(PsSupportPath, "GenericFont.xml");
-            string xPath = "//font-language-mapping";
-            XmlNodeList fontList = Common.GetXmlNodes(xmlFileNameWithPath, xPath);
-            if (fontList != null && fontList.Count > 0)
-            {
-                foreach (XmlNode xmlNode in fontList)
-                {
-                    fontLangMap[xmlNode.Attributes.GetNamedItem("name").Value] = xmlNode.InnerText;
-                }
-            }
+            string f7Path = Common.PathCombine(Common.GetFiledWorksPathVersion(), "Projects\\" + Common.databaseName + "\\WritingSystemStore");
+            fontLangMap = Common.FillMappedFonts(f7Path, fontLangMap);
+            //MessageBox.Show("Common.databaseName -> " + Common.databaseName + " = " + f7Path + fontLangMap.Count);
 
+            if (fontLangMap.Count == 0)
+            {
+                string wsPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/WritingSystemStore");
+                fontLangMap = Common.FillMappedFonts(wsPath, fontLangMap);
+                //MessageBox.Show("SIL/WritingSystemStore -> " + fontLangMap.Count);
+            }
+            if (fontLangMap.Count == 0)
+            {
+                fontLangMap = Common.FillMappedFonts(fontLangMap);
+                //MessageBox.Show("GenericFont -> " + fontLangMap.Count);
+            }
         }
+
+
 
         private void CreateStyle(string paraStyle, string charStyle, List<string> usedStyleName)
         {
@@ -135,42 +142,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void SetVisibilityColor(KeyValuePair<string, Dictionary<string, string>> className)
-        {
-            if (className.Value.ContainsKey("visibility"))
-            {
-                if (className.Value["visibility"] == "hidden")
-                {
-                    className.Value["FillColor"] = "Color/Paper";
-                    className.Value["StrokeColor"] = "Color/Paper";
-                }
-                className.Value.Remove("visibility");
-            }
-        }
-
-        private void GetVariableClassName(string className)
-        {
-            if (className.IndexOf("TitleMain") == 5)
-            {
-                _textVariables.Add("TitleMain_" + className);
-            }
-            else if (className.IndexOf("hideChapterNumber_") == 0)
-            {
-                _textVariables.Add("ChapterNumber_" + className);
-            }
-            else if (className.IndexOf("hideVerseNumber_") == 0)
-            {
-                _textVariables.Add("hideVerseNumber_" + className);
-            }
-            //else if (className.IndexOf("headword") == 0)
-            //{
-            //    _textVariables.Add("Guideword_" + className);
-            //}
-            //else if (className.IndexOf("xhomographnumber") == 0)
-            //{
-            //    _textVariables.Add("HomoGraphNumber_" + className);
-            //}
-        }
 
         private void InsertNode(KeyValuePair<string, Dictionary<string, string>> className)
         {
@@ -193,14 +164,6 @@ namespace SIL.PublishingSolution
             //style:family="paragraph" style:parent-style-name="none">
             SetTagProperty(className.Key);
             AddParaTextNode(className, _node, familyType);
-
-
-            //SetLanguage(className.Key);
-            //SetBasedOn("None", newClassName);
-            //SetAppliedFont(className.Value,newClassName);
-            //SetLineHeight(className.Value, newClassName);
-            //SetBaseLineShift(className.Value, newClassName);
-            //SetTagNode();
         }
 
         /// <summary>
@@ -349,7 +312,6 @@ namespace SIL.PublishingSolution
             {
                 CreateColumnXMLFile(className.Key);
             }
-
         }
 
         private void CreateColumnXMLFile(string className)
@@ -969,79 +931,12 @@ namespace SIL.PublishingSolution
             _tagName = Common.IsTagClass(newClassName);
             if (_tagName != string.Empty)
             {
-                //if (_tagName == "olFirst") // ol first line
-                //{
-                //    _nameElement.SetAttribute("SpaceBefore", "12");
-                //    _nameElement.SetAttribute("LeftIndent", "36");
-                //    _nameElement.SetAttribute("BulletsAndNumberingListType", "NumberedList");
-                //    _nameElement.SetAttribute("NumberingExpression", "^#.^.");
-                //    _nameElement.SetAttribute("BulletsTextAfter", "^.");
-                //    _nameElement.SetAttribute("NumberingContinue", "false");
-                //}
-                //else if (_tagName == "ol4Next") // ol rest of the line
-                //{
-                //    _nameElement.SetAttribute("LeftIndent", "36");
-                //    _nameElement.SetAttribute("BulletsAndNumberingListType", "NumberedList");
-                //    _nameElement.SetAttribute("NumberingExpression", "^#.^.");
-                //    _nameElement.SetAttribute("BulletsTextAfter", "^.");
-                //    _nameElement.SetAttribute("NumberingContinue", "true");
-                //}
-                //else if (_tagName == "ulFirst") // ul
-                //{
-                //    _nameElement.SetAttribute("SpaceBefore", "12");
-                //    _nameElement.SetAttribute("LeftIndent", "36");
-                //    _nameElement.SetAttribute("BulletsAndNumberingListType", "BulletList");
-                //    _nameElement.SetAttribute("BulletsTextAfter", "^.");
-                //}
-                //else if (_tagName == "ul4Next") // ul
-                //{
-                //    _nameElement.SetAttribute("LeftIndent", "36");
-                //    _nameElement.SetAttribute("BulletsAndNumberingListType", "BulletList");
-                //    _nameElement.SetAttribute("BulletsTextAfter", "^.");
-                //}
-                //else 
                 if (_tagName == "ul" || _tagName == "ol") // ul or ol
                 {
-                    //_nameElement.SetAttribute("LeftIndent", "36");
-                    //_writer.WriteStartElement("text:list-style");
-                    //_writer.WriteAttributeString("style:name", listName);
-                    //_writer.WriteStartElement("text:list-level-style-bullet");
                     _nameElement.SetAttribute("text:level", "1");
                     _nameElement.SetAttribute("text:style-name", "Bullet_20_Symbols");
                     _nameElement.SetAttribute("style:num-suffix", ".");
                     _nameElement.SetAttribute("text:bullet-char", "1");
-                }
-            }
-        }
-
-        private void SetTagNode()
-        {
-            if (_tagName.Length > 0)
-            {
-                if (_tagName == "olFirst" || _tagName == "ol4Next")
-                {
-                    string olNode = "<TabList type=\"list\">";
-                    olNode += "<ListItem type=\"record\">";
-                    olNode += "<Alignment type=\"enumeration\">LeftAlign</Alignment>";
-                    olNode += "<AlignmentCharacter type=\"string\">.</AlignmentCharacter>";
-                    olNode += "<Leader type=\"string\">";
-                    olNode += "<Position type=\"unit\">0</Position>";
-                    olNode += "</Leader>";
-                    olNode += "</ListItem>";
-                    olNode += "</TabList>";
-
-                    XmlElement tabList = _styleXMLdoc.CreateElement("TabList");
-                    tabList.InnerXml = olNode;
-                    _nameElement.AppendChild(tabList);
-                }
-                else if (_tagName == "ulFirst" || _tagName == "ul4Next")
-                {
-                    string olNode = "<BulletChar BulletCharacterType=\"UnicodeOnly\" BulletCharacterValue=\"42\"/>";
-
-                    XmlElement tabList = _styleXMLdoc.CreateElement("TabList");
-                    tabList.InnerXml = olNode;
-                    _nameElement.AppendChild(tabList);
-
                 }
             }
         }

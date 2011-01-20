@@ -1353,6 +1353,20 @@ return FromProg(file);
         }
         #endregion
 
+        #region GetFiledWorksPath Version()
+        /// <summary>
+        /// Return the Field Works Path 
+        /// </summary>
+        /// <returns>Field Works Path</returns>
+        public static string GetFiledWorksPathVersion()
+        {
+        string executablePath = Path.GetDirectoryName(Application.ExecutablePath);
+        if (executablePath.Contains("FieldWorks 7"))
+            return Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"/SIL/FieldWorks 7/";
+        
+            return GetFiledWorksPath();
+        }
+        #endregion
         public static string GetProductName()
         {
             return Application.ProductName;
@@ -1826,6 +1840,45 @@ return FromProg(file);
                 controlName = myvalue.Name;
             }
             return attribValue;
+        }
+
+        public static Dictionary<string, string> FillMappedFonts(Dictionary<string, string> fontLangMapTemp)
+        {
+            string PsSupportPath = GetPSApplicationPath();
+            string xmlFileNameWithPath = PathCombine(PsSupportPath, "GenericFont.xml");
+            string xPath = "//font-language-mapping";
+            XmlNodeList fontList = GetXmlNodes(xmlFileNameWithPath, xPath);
+            if (fontList != null && fontList.Count > 0)
+            {
+                foreach (XmlNode xmlNode in fontList)
+                {
+                    fontLangMapTemp[xmlNode.Attributes.GetNamedItem("name").Value] = xmlNode.InnerText;
+                }
+            }
+            return fontLangMapTemp;
+        }
+
+        public static Dictionary<string, string> FillMappedFonts(string wsPath, Dictionary<string, string> fontLangMapTemp)
+        {
+            if (!Directory.Exists(wsPath)) return fontLangMapTemp;
+
+            DirectoryInfo dir = new DirectoryInfo(wsPath);
+            FileInfo[] files = dir.GetFiles("*.ldml");
+            foreach (FileInfo file in files)
+            {
+                var ldml = new XmlDocument { XmlResolver = null };
+                ldml.Load(Common.PathCombine(wsPath, file.Name));
+                var nsmgr = new XmlNamespaceManager(ldml.NameTable);
+                nsmgr.AddNamespace("palaso", "urn://palaso.org/ldmlExtensions/v1");
+                var node = ldml.SelectSingleNode("//special/palaso:defaultFontFamily/@value", nsmgr);
+                if (node != null)
+                {
+                    string fontname = file.Name.Replace(".ldml", "");
+                    if (!fontLangMapTemp.ContainsKey(fontname))
+                        fontLangMapTemp[fontname] = node.Value;
+                }
+            }
+            return fontLangMapTemp;
         }
     }
 }

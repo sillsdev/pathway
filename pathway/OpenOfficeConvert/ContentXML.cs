@@ -201,20 +201,24 @@ namespace SIL.PublishingSolution
 
         private void CreateFontLanguageMap()
         {
-            string PsSupportPath = Common.GetPSApplicationPath();
-            string xmlFileNameWithPath = Common.PathCombine(PsSupportPath, "GenericFont.xml");
-            string xPath = "//font-language-mapping";
-            XmlNodeList fontList = Common.GetXmlNodes(xmlFileNameWithPath, xPath);
-            if (fontList != null && fontList.Count > 0)
-            {
-                foreach (XmlNode xmlNode in fontList)
-                {
-                    fontLangMap[xmlNode.Attributes.GetNamedItem("name").Value] = xmlNode.InnerText;
-                }
-            }
+            string f7Path = Common.PathCombine(Common.GetFiledWorksPathVersion(), "Projects\\" + Common.databaseName + "\\WritingSystemStore");
+            fontLangMap = Common.FillMappedFonts(f7Path, fontLangMap);
+            //MessageBox.Show("Common.databaseName -> " + Common.databaseName + " = " + f7Path + fontLangMap.Count);
 
+            if (fontLangMap.Count == 0)
+            {
+                string wsPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/WritingSystemStore");
+                fontLangMap = Common.FillMappedFonts(wsPath, fontLangMap);
+                //MessageBox.Show("SIL/WritingSystemStore -> " + fontLangMap.Count);
+            }
+            if (fontLangMap.Count == 0)
+            {
+                fontLangMap = Common.FillMappedFonts(fontLangMap);
+                //MessageBox.Show("GenericFont -> " + fontLangMap.Count);
+            }
         }
 
+ 
         private void AddFontFamily(string folder, List<string> font)
         {
             _util.AddFontDeclarative(folder, font);
