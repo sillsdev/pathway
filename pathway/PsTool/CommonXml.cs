@@ -661,7 +661,7 @@ namespace SIL.Tool
                 if (ext.ToLower().Contains("html"))
                 {
                     writer.WriteStartDocument();
-                    writer.WriteDocType("html", "-//W3C//DTD XHTML 1.0 Strict//EN", "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd", null);
+                    //writer.WriteDocType("html", "-//W3C//DTD XHTML 1.0 Strict//EN", "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd", null);
                 }
                 xslt.Transform(reader, xslArg, writer);
                 writer.Close();
