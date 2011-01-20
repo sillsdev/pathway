@@ -9,7 +9,8 @@ namespace SIL.PublishingSolution
 {
 	public class StyToCSS
 	{
-	    private string _styFullPath, _cssFullPath;
+	    public string StyFullPath;
+        private string _cssFullPath;
         private Dictionary<string, Dictionary<string, string>> _styleInfo = new Dictionary<string, Dictionary<string, string>>();
 		private Dictionary<string, string> _cssProp;
 		private Dictionary<string, string> _mapClassName = new Dictionary<string, string>();
@@ -25,7 +26,7 @@ namespace SIL.PublishingSolution
 		public void ConvertStyToCSS(string database, string cssFullPath)
         {
 
-            //_styFullPath = styFullPath;
+            //StyFullPath = styFullPath;
             _cssFullPath = cssFullPath;
             FindStyFile(database);
             MapClassName();
@@ -74,7 +75,7 @@ namespace SIL.PublishingSolution
 				}
 			}
 			reader.Close();
-			_styFullPath = Common.PathCombine(Path.GetDirectoryName(ssfFullPath), ssfFile);
+			StyFullPath = Common.PathCombine(Path.GetDirectoryName(ssfFullPath), ssfFile);
         }
 
 		/// ------------------------------------------------------------------------
@@ -86,12 +87,12 @@ namespace SIL.PublishingSolution
 		private void ParseFile()
         {
             _styleInfo.Clear();
-            if(!File.Exists(_styFullPath))
+            if(!File.Exists(StyFullPath))
             {
-                Debug.WriteLine(_styFullPath + " does not exist.");
+                Debug.WriteLine(StyFullPath + " does not exist.");
                 return;
             }
-            StreamReader file = new StreamReader(_styFullPath);
+            StreamReader file = new StreamReader(StyFullPath);
             string line;
             while ((line = file.ReadLine()) != null)
             {
@@ -126,6 +127,7 @@ namespace SIL.PublishingSolution
                     _cssProp["color"] = "#" + strHex;
                     break;
                 case "\\Justification":
+                case "\\JustificationType": // ??
                     value = PropertyValue(line);
                     _cssProp["text-align"] = value;
                     break;
@@ -168,6 +170,11 @@ namespace SIL.PublishingSolution
                     break;
                 case "\\Underline":
                     _cssProp["text-decoration"] = "underline";
+                    break;
+                case "\\LineSpacing":
+                    value = PropertyValue(line);
+                    string val = LineSpace(value);
+                    _cssProp["line-height"] = val;
                     break;
             }
         }
@@ -253,12 +260,30 @@ namespace SIL.PublishingSolution
             cssFile.Close();
         }
 
-		/// ------------------------------------------------------------
-		/// <summary>
-		/// Maps a standard format marker to a style name.
-		/// </summary>
-        /// ------------------------------------------------------------
-		private void MapClassName()
+            /// <summary>
+            /// Convert paratext unit to css unit
+            /// </summary>
+            /// <param name="value">0/1/2</param>
+            /// <returns>100%/150%/200%</returns>
+        private string LineSpace(string value)
+        {
+		    string result = string.Empty; 
+            if (value == "0")
+            {
+                result = "100%";
+            }
+            else if(value == "1")
+            {
+                result = "150%";
+            }
+            else if (value == "2")
+            {
+                result = "200%";
+            }
+		    return result;
+        }
+
+        private void MapClassName()
         {
             _mapClassName["toc1"] = "scrBookCode";
             _mapClassName["toc2"] = "scrBookName";

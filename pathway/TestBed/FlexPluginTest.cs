@@ -302,7 +302,7 @@ namespace TestBed
         private void BtnInputCSS_Click(object sender, EventArgs e)
         {
 
-            txtCSSInput.Text = GetFilePath("CSS Files|*.css");
+            txtCSSInput.Text = GetFilePath("CSS Files|*.css|STY Files|*.sty");
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -545,7 +545,13 @@ namespace TestBed
             paraText.ExportToPathway(usfxDoc);
         }
 
-
+        private void StyConvert_Click(object sender, EventArgs e)
+        {
+            StyToCSS styToCss = new StyToCSS();
+            styToCss.StyFullPath = txtCSSInput.Text;
+            string outputCSS = txtCSSInput.Text.Replace(".sty", ".css");
+            styToCss.ConvertStyToCSS("TestBed",outputCSS );
+            MessageBox.Show("Exported in " + outputCSS);
+        }
     }
-    
 }

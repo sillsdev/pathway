@@ -324,11 +324,14 @@ namespace SIL.PublishingSolution
                 if (shown)
                     cmbSelectLayout.Items.Add(stylename.Attributes["name"].Value);
             }
-            cmbSelectLayout.SelectedIndex = cmbSelectLayout.FindStringExact(cmbSelectLayout.Text);
-            if (cmbSelectLayout.SelectedIndex == -1)
+            if (cmbSelectLayout.Items.Count > 0)
             {
-                cmbSelectLayout.SelectedIndex = 0;
-                cmbSelectLayout.Text = cmbSelectLayout.Items[0].ToString();
+                cmbSelectLayout.SelectedIndex = cmbSelectLayout.FindStringExact(cmbSelectLayout.Text);
+                if (cmbSelectLayout.SelectedIndex == -1)
+                {
+                    cmbSelectLayout.SelectedIndex = 0;
+                    cmbSelectLayout.Text = cmbSelectLayout.Items[0].ToString();
+                }
             }
         }
         #endregion LoadLayouts

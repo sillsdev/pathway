@@ -44,6 +44,7 @@
             this.txtInputPath = new System.Windows.Forms.TextBox();
             this.Btn_InputPath = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button7 = new System.Windows.Forms.Button();
             this.btnParaText = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.chkPage = new System.Windows.Forms.CheckBox();
@@ -219,6 +220,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button7);
             this.groupBox1.Controls.Add(this.btnParaText);
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Controls.Add(this.chkPage);
@@ -234,6 +236,17 @@
             this.groupBox1.TabIndex = 51;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Export";
+            // 
+            // button7
+            // 
+            this.button7.AccessibleName = "BtnFlexTest";
+            this.button7.Location = new System.Drawing.Point(41, 159);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(95, 28);
+            this.button7.TabIndex = 58;
+            this.button7.Text = ".&Sty to .CSS";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.StyConvert_Click);
             // 
             // btnParaText
             // 
@@ -451,5 +464,6 @@
         private System.Windows.Forms.RadioButton radScripture;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button btnParaText;
+        private System.Windows.Forms.Button button7;
     }
 }
