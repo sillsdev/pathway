@@ -267,10 +267,10 @@
       <style:text-properties content="" />
     </style:style>
     <style:style style:name="PageHeaderFooter1" style:family="text">
-      <style:text-properties content="string,(,bookname,last,), ,string,(,chapter,last,),:,string,(,verse,last,)" style:writing-mode="lr-tb" fo:font-family="Arial" />
+      <style:text-properties content="string,(,bookname,last,), ,string,(,chapter,last,),:,string,(,verse,last,)" style:writing-mode="lr-tb" fo:font-family="Arial" style:font-name-complex="Arial" />
     </style:style>
     <style:style style:name="PageHeaderFooter2" style:family="text">
-      <style:text-properties content="counter,(,page,)" style:writing-mode="lr-tb" fo:font-family="Arial" />
+      <style:text-properties content="counter,(,page,)" style:writing-mode="lr-tb" fo:font-family="Arial" style:font-name-complex="Arial" />
     </style:style>
     <style:style style:name="PageHeaderFooter3" style:family="text">
       <style:text-properties content="" />
@@ -285,10 +285,10 @@
       <style:text-properties content="" />
     </style:style>
     <style:style style:name="PageHeaderFooter13" style:family="text">
-      <style:text-properties content="string,(,bookname,last,), ,string,(,chapter,last,),:,string,(,verse,last,)" style:writing-mode="lr-tb" fo:font-family="Arial" />
+      <style:text-properties content="string,(,bookname,last,), ,string,(,chapter,last,),:,string,(,verse,last,)" style:writing-mode="lr-tb" fo:font-family="Arial" style:font-name-complex="Arial" />
     </style:style>
     <style:style style:name="PageHeaderFooter14" style:family="text">
-      <style:text-properties content="counter,(,page,)" style:writing-mode="lr-tb" fo:font-family="Arial" />
+      <style:text-properties content="counter,(,page,)" style:writing-mode="lr-tb" fo:font-family="Arial" style:font-name-complex="Arial" />
     </style:style>
     <style:style style:name="PageHeaderFooter15" style:family="text">
       <style:text-properties content="" />
@@ -303,10 +303,10 @@
       <style:text-properties content="" />
     </style:style>
     <style:style style:name="PageHeaderFooter19" style:family="text">
-      <style:text-properties content="string,(,bookname,last,), ,string,(,chapter,last,),:,string,(,verse,last,)" style:writing-mode="lr-tb" fo:font-family="Arial" />
+      <style:text-properties content="string,(,bookname,last,), ,string,(,chapter,last,),:,string,(,verse,last,)" style:writing-mode="lr-tb" fo:font-family="Arial" style:font-name-complex="Arial" />
     </style:style>
     <style:style style:name="PageHeaderFooter20" style:family="text">
-      <style:text-properties content="counter,(,page,)" style:writing-mode="lr-tb" fo:font-family="Arial" />
+      <style:text-properties content="counter,(,page,)" style:writing-mode="lr-tb" fo:font-family="Arial" style:font-name-complex="Arial" />
     </style:style>
     <style:style style:name="PageHeaderFooter21" style:family="text">
       <style:text-properties content="" />
