@@ -407,11 +407,11 @@
     </style:style>
     <style:style style:name="entry_letData" style:family="paragraph" style:parent-style-name="letData">
       <style:paragraph-properties fo:text-indent="-17.008pt" fo:margin-left="17.008pt" fo:padding-left="0pt" fo:border-bottom="solid 0pt #ffffff" fo:border-top="solid 0pt #ffffff" fo:border-left="solid 0pt #ffffff" fo:border-right="solid 0pt #ffffff" fo:padding-bottom="2pt" fo:padding-top="1pt" />
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="11pt" style:font-size-complex="11pt" />
+      <style:text-properties fo:font-family="Charis SIL Compact" style:font-name-complex="Charis SIL Compact" fo:font-size="11pt" style:font-size-complex="11pt" />
     </style:style>
     <style:style style:name="entry" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:paragraph-properties fo:text-indent="-17.008pt" fo:margin-left="17.008pt" fo:padding-left="0pt" fo:border-bottom="solid 0pt #ffffff" fo:border-top="solid 0pt #ffffff" fo:border-left="solid 0pt #ffffff" fo:border-right="solid 0pt #ffffff" fo:padding-bottom="2pt" fo:padding-top="1pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="11pt" style:font-size-complex="11pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
+      <style:text-properties fo:font-family="Charis SIL Compact" style:font-name-complex="Charis SIL Compact" fo:font-size="11pt" style:font-size-complex="11pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="h1" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:margin-top="0.1in" fo:margin-bottom="0.1in" style:line-spacing="100%" />
