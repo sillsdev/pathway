@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\ConfigurationTool\Styles\Scripture\Running_Head_Paged_Verse_Abbr.css" ComponentGuid="8CD2480E-6D81-4BC6-9118-80B2BF3BFFFB"/>
+	<File Path="Files\ConfigurationTool\Styles\Scripture\Running_Head_Paged_Chapter_Abbr.css" ComponentGuid="F9CE5EE8-C98B-4A6F-BF77-E1275D3F937E"/>
+	<File Path="Files\ConfigurationTool\Styles\Scripture\Running_Head_Mirrored_Verse_Abbr.css" ComponentGuid="750875A7-EEE0-4E55-B642-E7DC35ADB6B1"/>
+	<File Path="Files\ConfigurationTool\Styles\Scripture\Running_Head_Mirrored_Chapter_Abbr.css" ComponentGuid="285C8A91-F4A1-48E1-B020-EF50CE7D8FA5"/>
 	<File Path="Files\PublishingSolution\epubcheck-1.1\README.txt" ComponentGuid="7221B23A-CF1E-45BD-91C3-97D28DF266CD"/>
 	<File Path="Files\PublishingSolution\epubcheck-1.1\jing_license.txt" ComponentGuid="C6647651-16FA-4539-AB26-EBDD33BA4FFB"/>
 	<File Path="Files\PublishingSolution\epubcheck-1.1\jigsaw_license.txt" ComponentGuid="4C89FDF8-B178-446E-887C-AAE35171BF3D"/>
