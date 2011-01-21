@@ -648,6 +648,7 @@ namespace SIL.PublishingSolution
             string decValue = string.Empty;
             try
             {
+                if (hexValue.IndexOf("#") == -1) return "00 00 00";
                 string hexFormat = hexValue.Replace("#", "");
                 char[] RGB = hexFormat.ToCharArray();
                 if (RGB.Length < 6)

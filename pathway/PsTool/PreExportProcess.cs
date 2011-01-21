@@ -307,6 +307,7 @@ namespace SIL.Tool
 
             string OutputFile = _xhtmlFileNameWithPath;
             var reader = new StreamReader(OutputFile, Encoding.UTF8);
+            _fileContent.Remove(0, _fileContent.Length);
             _fileContent.Append(reader.ReadToEnd());
             reader.Close();
             return OutputFile;
