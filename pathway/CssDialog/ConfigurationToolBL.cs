@@ -1135,8 +1135,8 @@ namespace SIL.PublishingSolution
                 LoadParam();
                 SetSideBar();
                 ShowDataInGrid();
-                _redoundo.Reset();
                 SetPropertyTab();
+                _redoundo.Reset();
             }
             catch
             {
@@ -3210,7 +3210,7 @@ namespace SIL.PublishingSolution
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPicture"]);
             }
             //cTool.BtnMobile.Enabled = false;
-            //_redoundo = new UndoRedo(cTool.TsUndo, cTool.TsRedo);
+            _redoundo = new UndoRedo(cTool.TsUndo, cTool.TsRedo);
             cTool.MinimumSize = new Size(497, 183);
             cTool.LoadSettings();
             SetInputTypeButton();
