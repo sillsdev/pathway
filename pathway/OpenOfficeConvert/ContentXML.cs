@@ -449,9 +449,20 @@ namespace SIL.PublishingSolution
                     //WhitespaceHandling = WhitespaceHandling.None
                 };
                 //CreateBody();
-
+                bool headXML = true;
                 while (_reader.Read())
                 {
+                    if (headXML)
+                    {
+                        if (_reader.Name == "body")
+                        {
+                            headXML = false;
+                        }
+                        else if (_reader.Name != "html")
+                        {
+                            continue;
+                        }
+                    }
                     if (_reader.IsEmptyElement)
                     {
                         if (_reader.Name != "img")

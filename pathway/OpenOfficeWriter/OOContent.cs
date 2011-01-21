@@ -612,9 +612,20 @@ namespace SIL.PublishingSolution
                                   WhitespaceHandling = WhitespaceHandling.Significant
                               };
                 //CreateBody();
-
+                bool headXML = true;
                 while (_reader.Read())
                 {
+                    if (headXML) // skip previous parts of <body> tag
+                    {
+                        if (_reader.Name == "body")
+                        {
+                            headXML = false;
+                        }
+                        else if (_reader.Name != "html")
+                        {
+                            continue;
+                        }
+                    }
                     if (_reader.IsEmptyElement)
                     {
                         if (_reader.Name != "img")
