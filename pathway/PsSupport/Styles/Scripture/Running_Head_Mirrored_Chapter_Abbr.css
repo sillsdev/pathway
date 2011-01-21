@@ -1,0 +1,32 @@
+@page :first {
+    @top-left      { content: ''; }
+    @top-center    { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :left {
+    @top-left {
+        -ps-referenceFormat: "Gen 1";
+        content: string(bookname, first) " "  string(chapter, first);
+        font-weight: bold;
+    }
+    @top-center  { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :right {
+    @top-left { content: ''; }
+    @top-center  { content: ''; }
+    @top-right     {
+        -ps-referenceFormat: "Gen 1";
+        content: string(bookname, last) " "  string(chapter, last);
+        font-weight: bold;
+    }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}

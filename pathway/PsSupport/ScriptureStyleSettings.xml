@@ -99,6 +99,10 @@
       <option name="Genesis 1:1-2:1" file="Running_Head_Paged_Verse.css" />
       <option name="Genesis 1" file="Running_Head_Mirrored_Chapter.css" />
       <option name="Genesis 1-2" file="Running_Head_Paged_Chapter.css" />
+      <option name="Gen 1:1" file="Running_Head_Mirrored_Verse_Abbr.css" />
+      <option name="Gen 1:1-2:1" file="Running_Head_Paged_Verse_Abbr.css" />
+      <option name="Gen 1" file="Running_Head_Mirrored_Chapter_Abbr.css" />
+      <option name="Gen 1-2" file="Running_Head_Paged_Chapter_Abbr.css" />
     </feature>
     <feature name="Page Number">
       <option name="Top Inside Margin" file="PageNumber_TopInside.css" />

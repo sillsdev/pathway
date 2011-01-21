@@ -610,6 +610,7 @@ namespace SIL.PublishingSolution
                 case "-ps-vertical-justification":
                 case "-ps-fileproduce":
                 case "prince-text-replace":
+                case "-ps-referenceformat":
                     _cssProperty[styleAttributeInfo.Name] = value;
                     break;
 

@@ -474,6 +474,10 @@ namespace SIL.PublishingSolution
 
                 if (_classInfo.Content.ToLower() == "normal") _classInfo.Content = string.Empty;
             }
+            else if (_attributeInfo.Name.ToLower() == "-ps-referenceformat")
+            {
+                _classInfo.Content = _attributeInfo.StringValue.Replace("\"", "");
+            }
             //else
             //{
             //CreateFullyQualifiedName(_attributeInfo);
