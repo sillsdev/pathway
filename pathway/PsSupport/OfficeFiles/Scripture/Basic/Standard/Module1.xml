@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Jan-18-2011 for TD-1800(Header with book name and abbreviation)
+&apos;Changed On Jan-24-2011 for TD-1832(OpenOffice: Show abbreviation or book name for header)
 
 &apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -327,7 +327,7 @@ End Function
 &apos;The main procedure to show the Reference (Ex. Mark 1:1 - 2:26)
 Sub SetReference()
 
-On Error GoTo MyError:
+&apos;On Error GoTo MyError:
 
 Dim VerseCharStyle, ChapterCharStyle, BookCharStyle
 Dim isEndChapterFoundAlready As Boolean
@@ -449,7 +449,8 @@ Do
 			strEndBook = strTemp		
 		Else
 			strEndBook = strStartBook
-		End If	
+		End If
+		IsBookChanged = &quot;No&quot;	
 	End If	
 	
 	If VerseNumber = &quot;True&quot; Then
@@ -474,36 +475,37 @@ Do
 		strStartChapter = strPrevStartChapter
 	End If
 	
-	If VerseNumber = &quot;True&quot; Then
-        If ReferenceFormat = &quot;Genesis 1:1-15&quot; Then
-			strFirstReference = strStartBook &amp; &quot; &quot; &amp; strStartChapter &amp; &quot; : &quot; &amp; strStartVerse
-			strLastReference = &quot;-&quot; &amp; strEndVerse
-        ElseIf ReferenceFormat = &quot;Genesis 1:1 1:15&quot; Then
-			strFirstReference = strStartBook &amp; &quot; &quot; &amp; strStartChapter &amp; &quot; : &quot; &amp; strStartVerse
-			strLastReference = &quot; &quot; &amp; strEndChapter &amp; &quot; : &quot; &amp; strEndVerse
+	If VerseNumber = &quot;True&quot; Then&apos;&quot;Genesis 1:1
+        If ReferenceFormat = &quot;Genesis 1:1&quot; Or ReferenceFormat = &quot;Gen 1:1&quot; Then
+			strFirstReference = strStartBook &amp; &quot; &quot; &amp; strStartChapter &amp; &quot;:&quot; &amp; strStartVerse
+			strLastReference =  strEndBook &amp; &quot; &quot; &amp; strEndChapter &amp; &quot;:&quot; &amp; strEndVerse
+        ElseIf ReferenceFormat = &quot;Genesis 1:1-2:1&quot; Or ReferenceFormat = &quot;Gen 1:1-2:1&quot; Then
+			strFirstReference = strStartBook &amp; &quot; &quot; &amp; strStartChapter &amp; &quot;:&quot; &amp; strStartVerse
+			strLastReference =  strEndBook &amp; &quot; &quot; &amp; strEndChapter &amp; &quot;:&quot; &amp; strEndVerse
+			&apos;strLastReference = &quot;-&quot; &amp; strEndChapter &amp; &quot;:&quot; &amp; strEndVerse
 		Else &apos;Genesis 1:1 Genesis 1:15
-			strFirstReference = strStartBook &amp; &quot; &quot; &amp; strStartChapter &amp; &quot; : &quot; &amp; strStartVerse
-			strLastReference = &quot; &quot; &amp; strEndBook &amp; &quot; &quot; &amp; strEndChapter &amp; &quot; : &quot; &amp; strEndVerse
+			strFirstReference = strStartBook &amp; &quot; &quot; &amp; strStartChapter &amp; &quot;:&quot; &amp; strStartVerse
+			strLastReference = &quot; &quot; &amp; strEndBook &amp; &quot; &quot; &amp; strEndChapter &amp; &quot;:&quot; &amp; strEndVerse
 		End If
-	Else
-        If ReferenceFormat = &quot;Genesis 1, 2&quot; Or ReferenceFormat = &quot;Genesis 1&quot; Then
+	Else&apos;&quot;Genesis 1
+        If ReferenceFormat = &quot;Genesis 1-2&quot; Or ReferenceFormat = &quot;Genesis 1&quot; Or ReferenceFormat = &quot;Gen 1-2&quot; Or ReferenceFormat = &quot;Gen 1&quot; Then
         	If strStartBook = strEndBook Then
 				strFirstReference = strStartBook &amp; &quot; &quot;
 				If strPrevStartChapter &lt;&gt; strStartChapter Then
 					If strStartVerse &lt;&gt; 1 Then
-						strFirstReference = strFirstReference &amp; strPrevStartChapter &amp; &quot;, &quot;
+						strFirstReference = strFirstReference &amp; strPrevStartChapter &amp; &quot;-&quot;
 					End If
 				End If
 				strFirstReference = strFirstReference &amp; strStartChapter
-					
-				If strStartChapter &lt;&gt; strEndChapter Then
-					strFirstReference = strFirstReference &amp; &quot;, &quot; &amp; strEndChapter
-				End If	
+				&apos;Changed for TD-1832	
+				&apos;If strStartChapter &lt;&gt; strEndChapter Then
+					&apos;strFirstReference = strFirstReference &amp; &quot;-&quot; &amp; strEndChapter
+				&apos;End If	
 				strLastReference = strEndBook &amp; &quot; &quot; &amp; 	strEndChapter
 			Else
 				strFirstReference = strStartBook &amp; &quot; &quot;
 				If strPrevStartChapter &lt;&gt; strStartChapter And strPrevStartChapter &lt; strStartChapter  Then
-					strFirstReference = strFirstReference &amp; strPrevStartChapter &amp; &quot;, &quot;
+					strFirstReference = strFirstReference &amp; strPrevStartChapter &amp; &quot;-&quot;
 				ElseIf strPrevStartChapter &lt;&gt; strStartChapter And strPrevStartChapter &gt;= strStartChapter  Then
 					strFirstReference = strFirstReference &amp; strPrevStartChapter
 				End If
@@ -512,7 +514,7 @@ Do
 					strFirstReference = strFirstReference &amp; strStartChapter
 				End If
 				
-				strLastReference = strEndBook &amp; &quot; ,&quot; &amp; 	strEndChapter
+				strLastReference = strEndBook &amp; &quot;-&quot; &amp; 	strEndChapter
 	
 			End If
 			
@@ -579,6 +581,7 @@ End Function
 
 &apos;This procedure finds and assigns the Book Name If Book Name is available in First Page
 Sub FirstPageBook(strStartBook)
+Dim oPortion
 	oTextElementEnum = ThisComponent.getText().createEnumeration() 
  	While oTextElementEnum.hasMoreElements() 
  		oTextElement = oTextElementEnum.nextElement
@@ -587,15 +590,18 @@ Sub FirstPageBook(strStartBook)
  			Exit Sub
  		End If
     	If oTextElement.supportsService(&quot;com.sun.star.text.Paragraph&quot;) then
-    		If LCase(Trim(oTextElement.ParaStyleName)) = &quot;scrbook_scrbody&quot; Then&apos;titlemain_scrbook
-    		    oParaEnume = oTextElement.createEnumeration()
-    			While oParaEnume.hasMoreElements()
-			    	oPortion = oParaEnume.nextElement() 
-			    	If InStr(Lcase(oPortion.CharStyleName) , &quot;scrBookName&quot;) &gt; 0 Then&apos;titlemain_scrbook
-			    		strStartBook = oPortion.String
-			    		Exit Sub
-			    	End If
-    			Wend
+    	    If Mid(Lcase(oTextElement.ParaStyleName),1,7) = &quot;scrbook&quot; Then&apos;titlemain_scrbook
+    	    	strStartBook = GetBookCodeName(Trim(oTextElement.String))	 	
+    		&apos;If InStr(Lcase(oTextElement.ParaStyleName) , &quot;scrbook&quot;) &gt; 0 Then&apos;titlemain_scrbook
+    		    &apos;oParaEnume = oTextElement.createEnumeration()
+    			&apos;While oParaEnume.hasMoreElements()
+			    	&apos;oPortion = oParaEnume.nextElement() 
+			    	&apos;&apos;msgbox  oPortion.CharStyleName + &quot; - &quot; +  oTextElement.String + &quot; - &quot; +  oPortion.String
+			    	&apos;If InStr(Lcase(oPortion.CharStyleName) , &quot;scrbookname&quot;) &gt; 0 Then&apos;titlemain_scrbook
+			    		&apos;strStartBook = oPortion.String
+			    		&apos;Exit Sub
+			    	&apos;End If
+    			&apos;Wend
     			&apos;strStartBook = oTextElement.String
     			&apos;Exit Sub
     		End If
@@ -745,23 +751,44 @@ Function ReturnReferenceChapter(MyParagraph)
 	WEnd	
 End Function
 
+
 &apos;This Procedure loops the given Paragraph and find the Book
 Function ReturnReferenceBook(MyParagraph)
+Dim oPortion
 	oParaEnume = MyParagraph.createEnumeration() 
 	While oParaEnume.hasMoreElements() 
 	 	oPara = oParaEnume.nextElement() 
-	 	If LCase(Trim(oPara.ParaStyleName)) = &quot;scrbook_scrbody&quot; Then&apos;titlemain_scrbook
-			&apos;enumeration for portions in the paragraph 
-		  	oPortionEnume = oPara.createEnumeration() 
-		  	While oPortionEnume.hasMoreElements() 
-		    	oPortion = oPortionEnume.nextElement() 
-		    	If InStr(Lcase(oPortion.CharStyleName) , &quot;scrBookName&quot;) &gt; 0 Then&apos;titlemain_scrbook
-		    		ReturnReferenceBook = oPortion.String
-		    		Exit Function
-		    	End If
-		  	WEnd 
+    	If Mid(Lcase(oPara.ParaStyleName),1,7) = &quot;scrbook&quot; Then&apos;titlemain_scrbook	
+    		ReturnReferenceBook = GetBookCodeName(Trim(oPara.String)) 	
+			&apos;&apos;enumeration for portions in the paragraph 
+		  	&apos;oPortionEnume = oPara.createEnumeration() 
+		  	&apos;While oPortionEnume.hasMoreElements() 
+		    	&apos;oPortion = oPortionEnume.nextElement()
+		    	&apos;&apos;msgbox  oPortion.CharStyleName + &quot; - &quot; +  oPara.String + &quot; - &quot; +  oPortion.String
+		    	&apos;If InStr(Lcase(oPortion.CharStyleName) , &quot;scrbookname&quot;) &gt; 0 Then&apos;titlemain_scrbook
+					&apos;If len(Trim(oPortion.String)) = 0 Then
+						&apos;ReturnReferenceBook = GetBookCodeName(Trim(oPara.String))
+					&apos;Else
+		    			&apos;ReturnReferenceBook = oPortion.String
+		    		&apos;End If
+		    		&apos;msgbox  oPortion.CharStyleName + &quot; - &quot; +  oPara.String + &quot; - &quot; +  ReturnReferenceBook
+		    		&apos;Exit Function
+		    	&apos;End If
+		  	&apos;Wend 
 	  	End If
 	WEnd	
+End Function
+
+Function GetBookCodeName(ParaString)
+dim myList
+	If Len(ParaString) &gt; 0 Then
+		myList = split(Trim(ParaString),&quot; &quot;)	
+		If Mid(ReferenceFormat,1,4) = &quot;Gen &quot; Then
+			GetBookCodeName = myList(1)
+		Else
+			GetBookCodeName = myList(0)
+		End If	
+	End If
 End Function
 
 
@@ -1020,56 +1047,4 @@ Function GetStyleName(StylesTree)
 	End If
 End Function
 
-Sub ShowProcessingDialog123() 
-  oDoc = ThisComponent &apos; needs document 
-  oController = oDoc.getCurrentController() 
-  oFrame = oController.getFrame() 
-  oContainerWindow = oFrame.ContainerWindow 
-  oToolkit = oContainerWindow.Toolkit 
-  
-  &apos; sub window with sub frame 
-  oSubWindow = CreateNewWindow(oToolkit,oContainerWindow, 400,300,260,100) 
-  oSubWindow.Title=&quot;Guidewords&quot;
-  oSubFrame = CreateUnoService(&quot;com.sun.star.frame.Frame&quot;) 
-  oSubFrame.initialize(oSubWindow) 
-  oFrame.getFrames().append(oSubFrame) 
-  
-  &apos; container of controls (Frame)
-  oContainer = CreateUnoService(&quot;com.sun.star.awt.UnoControlContainer&quot;) 
-  oContainerModel = CreateUnoService(&quot;com.sun.star.awt.UnoControlContainerModel&quot;) 
-  oContainerModel.BackgroundColor = &quot;&amp;HEEEEEE&quot; &apos;-1 
-  oContainer.setModel(oContainerModel) 
-  oContainer.setPosSize(0,0,260,100,com.sun.star.awt.PosSize.POSSIZE) 
-  oContainer.createPeer(oToolkit,oSubWindow) 
-  
-  &apos; progressbar 
-  oProgressBarModel = CreateUnoService(&quot;com.sun.star.awt.UnoControlProgressBarModel&quot;) 
-  oProgressBar = CreateUnoService( &quot;com.sun.star.awt.UnoControlProgressBar&quot; ) 
-  oProgressBar.setModel(oProgressBarModel) 
-  oProgressBar.setPosSize(39,50,180,20, com.sun.star.awt.PosSize.POSSIZE ) 
-  oContainer.addControl(&quot;progressbar&quot;,oProgressBar) 
-  
-  &apos; label 
-  oLabel = CreateUnoService(&quot;com.sun.star.awt.UnoControlFixedText&quot;) 
-  oLabelModel = CreateUnoService(&quot;com.sun.star.awt.UnoControlFixedTextModel&quot;) 
-  oLabelModel.Label = &quot;Macro is updating guidewords ...&quot; 
-&apos;  oLabelModel.Color = &quot;red&quot; &apos;-1 
-  oLabel.setModel(oLabelModel) 
-  oLabel.setPosSize(50,20,180,30,com.sun.star.awt.PosSize.POSSIZE) 
-  oContainer.addControl(&quot;label&quot;,oLabel) 
-  
-  &apos; show window 
-  oSubWindow.setEnable(False) 
-  oSubWindow.setVisible(True) 
-  
-  &apos; process something 
-  Processing(oDoc) 
-
-
-
-  oSubWindow.setVisible(False) 
-  oFrame.getFrames().remove(oSubFrame) 
-  
-  oSubWindow.dispose() 
-End Sub 
 </script:module>
