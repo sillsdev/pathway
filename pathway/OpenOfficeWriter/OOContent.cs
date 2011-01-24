@@ -1693,7 +1693,7 @@ namespace SIL.PublishingSolution
                 File.Copy(fromPath, toPath, true);
 
             }
-                if (IdAllClass.ContainsKey(srcFilrLongDesc))  
+            if (srcFilrLongDesc.Length > 0 && IdAllClass.ContainsKey(srcFilrLongDesc))  
                 {
                     //img[src='Thomsons-gazelle1.jpg'] 
                     rectHeight = GetPropertyValue(srcFilrLongDesc, "height", rectHeight);
@@ -1725,7 +1725,7 @@ namespace SIL.PublishingSolution
                     //Default value is 72 
                     rectHeight = "72"; // fixed the width as 1 in = 72pt;
                     rectWidth = Common.CalcDimension(fromPath, rectHeight, 'W');
-                    if (rectHeight == "0")
+                    if (rectWidth == "0")
                     {
                         rectWidth = "72";
                     }
