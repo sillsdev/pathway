@@ -106,6 +106,7 @@ namespace SIL.PublishingSolution
         protected string _imageLongDesc;
         protected string _imageClass = string.Empty;
         protected string _imageSrcClass;
+        protected string _imageAltText;
         protected bool _isAutoWidthforCaption;
 
         #endregion
@@ -212,6 +213,8 @@ namespace SIL.PublishingSolution
 
                 _imageLongDesc = _reader.GetAttribute("longdesc") ?? string.Empty;
                 _imageLongDesc = _imageLongDesc.ToLower();
+
+                _imageAltText = _reader.GetAttribute("alt") ?? string.Empty;
                 //_characterName = _childName;
                 //_allCharacter.Push(_characterName);
                 _imageInsert = true;
