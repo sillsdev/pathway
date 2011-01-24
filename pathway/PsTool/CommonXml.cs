@@ -356,7 +356,7 @@ namespace SIL.Tool
             {
                 string databaseNamePara = databaseName; // "NKOu1"; // todo substitute for database name
                 string key = @"HKEY_LOCAL_MACHINE\SOFTWARE\ScrChecks\1.0\Settings_Directory";
-                object paraPath1 = Registry.GetValue(key, "", "");
+                object paraPath1 = Registry.GetValue(key, "", "") ?? string.Empty;
                 string paraPath = paraPath1.ToString();
                 string dataPath = PathCombine(paraPath, databaseNamePara);
                 fileName = Path.GetFileName(src); // para + database + fileName
