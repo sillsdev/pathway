@@ -262,7 +262,7 @@ namespace SIL.PublishingSolution
 
                 // avoid white background color for pdf thru openoffice - TD-1573
                 searchKey = "background-color";
-                if (IdAllClass[className].ContainsKey(searchKey) && IdAllClass[className][searchKey] == "#ffffff")
+                if (IdAllClass[className].ContainsKey(searchKey) && IdAllClass[className][searchKey].ToLower() == "#ffffff")
                 {
                     IdAllClass[className].Remove(searchKey);
                 }
