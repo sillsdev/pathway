@@ -21,7 +21,6 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
-using SIL.Tool;
 
 namespace epubValidator
 {
@@ -40,6 +39,45 @@ namespace epubValidator
             Application.Run(new ValidationDialog());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>Path and filename for Java.exe (or null if not found</returns>
+        public static string GetJavaExe()
+        {
+            var name = "java.exe";
+            string fullName = "";
+            var currentPath = Environment.GetEnvironmentVariable("path");
+            if (!String.IsNullOrEmpty(currentPath))
+            {
+                string[] directories = currentPath.Split(new[] {';'});
+                foreach (string directory in directories)
+                try
+                {
+                    var myDirectory = directory.Replace("\"", "");
+                    if (!Directory.Exists(myDirectory)) continue;
+                    fullName = Path.Combine(myDirectory, name);
+                    if (File.Exists(fullName))
+                    {
+                        return fullName;
+                    }
+                }
+                catch (Exception e)
+                {
+                    e.Source = directory + @"\" + name;
+                    throw;
+                }
+            }
+            // either no path defined (not likely) or Java.exe isn't on the path
+            return name;
+        }
+
+        /// <summary>
+        /// Calls epubcheck to validata the file. The results (error or normal output) are passed back in the
+        /// string return value.
+        /// </summary>
+        /// <param name="Filename">Full path / filename of .epub file to validate</param>
+        /// <returns>Results of the epubcheck run</returns>
         public static string ValidateFile (string Filename)
         {
             if (Filename == null)
@@ -48,9 +86,7 @@ namespace epubValidator
             }
             if (File.Exists(Filename))
             {
-                const string prog = "java.exe";
-                var progFolder = SubProcess.GetLocation(prog);
-                var progFullName = Common.PathCombine(progFolder, prog);
+                var progFullName = GetJavaExe();
                 var sb = new StringBuilder();
                 sb.Append("-jar");
                 sb.Append(" \"");
@@ -98,10 +134,9 @@ namespace epubValidator
                 if (outputMessage.Length > 0) return outputMessage;
                 return null;
             }
-            else
-            {
-                return ("Invalid filename:" + Filename);
-            }
+
+            //filename isn't a valid file
+            return ("Invalid filename:" + Filename);
         }
     }
 }

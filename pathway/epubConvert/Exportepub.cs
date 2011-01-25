@@ -35,6 +35,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using epubConvert;
@@ -117,11 +118,16 @@ namespace SIL.PublishingSolution
             {
                 // basic setup
                 DateTime dt1 = DateTime.Now;    // time this thing
+                var inProcess = new InProcess(0, 9); // create a progress bar with 7 steps (we'll add more below)
+                inProcess.Show();
+                inProcess.PerformStep();
                 var sb = new StringBuilder();
                 Guid bookId = Guid.NewGuid(); // NOTE: this creates a new ID each time Pathway is run. 
                 string outputFolder = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath); // finished .epub goes here
                 PreExportProcess preProcessor = new PreExportProcess(projInfo);
                 Environment.CurrentDirectory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+                Common.SetProgressBarValue(projInfo.ProgressBar, projInfo.DefaultXhtmlFileWithPath);
+                inProcess.PerformStep();
                 //_postscriptLanguage.SaveCache();
                 // XHTML preprocessing
                  preProcessor.GetTempFolderPath();
@@ -174,7 +180,7 @@ namespace SIL.PublishingSolution
                 Common.SetDefaultCSS(projInfo.DefaultXhtmlFileWithPath, defaultCSS);
                 Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCSS);
                 // pull in the style settings
-                LoadPropertiesFromSettings(); 
+                LoadPropertiesFromSettings();
                 // transform the XHTML content with our XSLT. Currently this does the following:
                 // - strips out "lang" tags from <span> elements (.epub doesn't like them there)
                 // - strips out <meta> tags (.epub chokes on the filename IIRC.  TODO: verify the problem here)
@@ -199,10 +205,12 @@ namespace SIL.PublishingSolution
                 // end EDB 10/29/2010
                 Common.ReplaceInFile(preProcessor.ProcessedXhtml, "<html", string.Format("<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'", langArray[0], getTextDirection(langArray[0])));
                 // end EDB 10/22/2010
+                inProcess.PerformStep();
 
                 // split the .XHTML into multiple files, as specified by the user
                 List<string> htmlFiles = new List<string>();
                 List<string> splitFiles = new List<string>();
+                Common.xsltProgressBar = inProcess.Bar();
                 if (projInfo.FileToProduce.ToLower() != "one")
                 {
                     splitFiles = SplitFile(preProcessor.ProcessedXhtml, projInfo);
@@ -227,6 +235,8 @@ namespace SIL.PublishingSolution
                     fileNameWithPath = Common.SplitXhtmlFile(revFile, "letHead", "RevIndex", true);
                     splitFiles.AddRange(fileNameWithPath);
                 }
+                // add the total file count (so far) to the progress bar, so it's a little more accurate
+                inProcess.AddToMaximum(splitFiles.Count);
 
                 foreach (string file in splitFiles)
                 {
@@ -238,6 +248,7 @@ namespace SIL.PublishingSolution
                         // clean up the un-transformed file
                         File.Delete(file);
                     }
+                    inProcess.PerformStep();
                 }
                 //// split the .XHTML into multiple files, as specified by the user
                 //List<string> htmlFiles = new List<string>();
@@ -264,6 +275,7 @@ namespace SIL.PublishingSolution
                 {
                     Directory.CreateDirectory(contentFolder);
                 }
+                inProcess.PerformStep();
 
                 // -- Font handling --
                 // First, get the list of fonts used in this project
@@ -271,11 +283,19 @@ namespace SIL.PublishingSolution
                 // Embed fonts if needed
                 if (EmbedFonts)
                 {
-                    if (!EmbedAllFonts(langArray, contentFolder)) return false;
+                    if (!EmbedAllFonts(langArray, contentFolder))
+                    {
+                        // user cancelled the epub conversion - clean up and exit
+                        Environment.CurrentDirectory = curdir;
+                        Cursor.Current = myCursor;
+                        inProcess.Close();
+                        return false;
+                    }
                 }
                 // update the CSS file to reference any fonts used by the writing systems
                 // (if they aren't embedded in the .epub, we'll still link to them here)
                 ReferenceFonts(mergedCSS);
+                inProcess.PerformStep();
 
                 // copy over the XHTML and CSS files
                 string cssPath = Common.PathCombine(contentFolder, defaultCSS);
@@ -298,6 +318,7 @@ namespace SIL.PublishingSolution
                         }
                     }
                 }
+                inProcess.PerformStep();
 
                 // copy over the image files
                 string[] imageFiles = Directory.GetFiles(tempFolder);
@@ -342,17 +363,21 @@ namespace SIL.PublishingSolution
                 {
                     CleanupImageReferences(contentFolder);
                 }
+                inProcess.PerformStep();
 
                 // generate the toc / manifest files
                 CreateOpf(projInfo, contentFolder, bookId);
                 CreateNcx(projInfo, contentFolder, bookId);
                 CreateCoverImage(contentFolder, projInfo);
+                inProcess.PerformStep();
 
                 // Done adding content - now zip the whole thing up and name it
                 string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
                 Compress(projInfo.TempOutputFolder, Common.PathCombine(outputFolder, fileName));
                 TimeSpan tsTotal = DateTime.Now - dt1;
                 Debug.WriteLine("Exportepub: time spent in .epub conversion: " + tsTotal);
+                inProcess.PerformStep();
+                inProcess.Close();
 
 
                 // Postscript - validate the file using our epubcheck wrapper
@@ -384,6 +409,8 @@ namespace SIL.PublishingSolution
 
 
         #region Private Functions
+
+        #region Font Handling
         /// <summary>
         /// Handles font embedding for the .epub file. The fonts are verified before they are copied over, to
         /// make sure they (1) exist on the system and (2) are SIL produced. For the latter, the user is able
@@ -641,6 +668,56 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
+        /// Returns the font families for the languages in _langFontDictionary.
+        /// </summary>
+        private void BuildFontsList()
+        {
+            // modifying the _langFontDictionary dictionary - let's make an array copy for the iteration
+            int numLangs = _langFontDictionary.Keys.Count;
+            var langs = new string[numLangs];
+            _langFontDictionary.Keys.CopyTo(langs, 0);
+            foreach (var language in langs)
+            {
+                string[] langCoun = language.Split('-');
+
+                try
+                {
+                    string wsPath;
+                    if (langCoun.Length < 2)
+                    {
+                        // try the language (no country code) (e.g, "en" for "en-US")
+                        wsPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/WritingSystemStore/" + langCoun[0] + ".ldml");
+                    }
+                    else
+                    {
+                        // try the whole language expression (e.g., "ggo-Telu-IN")
+                        wsPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/WritingSystemStore/" + language + ".ldml");
+                    }
+                    if (File.Exists(wsPath))
+                    {
+                        var ldml = new XmlDocument { XmlResolver = null };
+                        ldml.Load(wsPath);
+                        var nsmgr = new XmlNamespaceManager(ldml.NameTable);
+                        nsmgr.AddNamespace("palaso", "urn://palaso.org/ldmlExtensions/v1");
+                        var node = ldml.SelectSingleNode("//palaso:defaultFontFamily/@value", nsmgr);
+                        if (node != null)
+                        {
+                            // build the font information and return
+                            _langFontDictionary[language] = node.Value; // set the font used by this language
+                            _embeddedFonts[node.Value] = new EmbeddedFont(node.Value);
+                        }
+                    }
+                }
+                catch
+                {
+                }
+            }
+        }
+
+        #endregion
+
+        #region Language Handling
+        /// <summary>
         /// Returns the text direction specified by the writing system, or "ltr" if not found
         /// </summary>
         /// <param name="language"></param>
@@ -694,51 +771,56 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// Returns the font families for the languages in _langFontDictionary.
+        /// Parses the specified file and sets the internal languages list to all the languages found in the file.
         /// </summary>
-        private void BuildFontsList()
+        /// <param name="xhtmlFileName">File name to parse</param>
+        private void BuildLanguagesList(string xhtmlFileName)
         {
-            // modifying the _langFontDictionary dictionary - let's make an array copy for the iteration
-            int numLangs = _langFontDictionary.Keys.Count;
-            var langs = new string[numLangs];
-            _langFontDictionary.Keys.CopyTo(langs,0);
-            foreach (var language in langs)
+            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
+            xmlDocument.Load(xmlReader);
+            xmlReader.Close();
+            // should only be one of these after splitting out the chapters.
+            XmlNodeList nodes;
+            nodes = xmlDocument.SelectNodes("//@lang", namespaceManager);
+            if (nodes.Count > 0)
             {
-                string[] langCoun = language.Split('-');
-
-                try
+                foreach (XmlNode node in nodes)
                 {
-                    string wsPath;
-                    if (langCoun.Length < 2)
+                    string value;
+                    if (_langFontDictionary.TryGetValue(node.Value, out value))
                     {
-                        // try the language (no country code) (e.g, "en" for "en-US")
-                        wsPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/WritingSystemStore/" + langCoun[0] + ".ldml");
+                        // already have this item in our list - continue
+                        continue;
                     }
-                    else
+                    if (node.Value.ToLower() == "utf-8")
                     {
-                        // try the whole language expression (e.g., "ggo-Telu-IN")
-                        wsPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/WritingSystemStore/" + language + ".ldml");
+                        // TE-9078 "utf-8" showing up as language in html tag - remove when fixed
+                        continue;
                     }
-                    if (File.Exists(wsPath))
-                    {
-                        var ldml = new XmlDocument { XmlResolver = null };
-                        ldml.Load(wsPath);
-                        var nsmgr = new XmlNamespaceManager(ldml.NameTable);
-                        nsmgr.AddNamespace("palaso", "urn://palaso.org/ldmlExtensions/v1");
-                        var node = ldml.SelectSingleNode("//palaso:defaultFontFamily/@value", nsmgr);
-                        if (node != null)
-                        {
-                            // build the font information and return
-                            _langFontDictionary[language] = node.Value; // set the font used by this language
-                            _embeddedFonts[node.Value] = new EmbeddedFont(node.Value);
-                        }
-                    }
-                }
-                catch
-                {
+                    // add an entry for this language in the list (the * gets overwritten in BuildFontsList())
+                    _langFontDictionary.Add(node.Value, "*");
                 }
             }
+            // now go check to see if we're working on scripture or dictionary data
+            nodes = xmlDocument.SelectNodes("//xhtml:span[@class='headword']", namespaceManager);
+            if (nodes.Count == 0)
+            {
+                // not in this file - this might be scripture?
+                nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
+                if (nodes.Count > 0)
+                    _inputType = "scripture";
+            }
+            else
+            {
+                _inputType = "dictionary";
+            }
         }
+
+        #endregion
 
         /// <summary>
         /// Returns a book ID to be used in the .opf file. This is similar to the GetBookName call, but here
@@ -832,56 +914,6 @@ namespace SIL.PublishingSolution
             }
             // fall back on just the file name
             return Path.GetFileName(xhtmlFileName);
-        }
-
-        /// <summary>
-        /// Parses the specified file and sets the internal languages list to all the languages found in the file.
-        /// </summary>
-        /// <param name="xhtmlFileName">File name to parse</param>
-        private void BuildLanguagesList(string xhtmlFileName)
-        {
-            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
-            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
-            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
-            XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
-            xmlDocument.Load(xmlReader);
-            xmlReader.Close();
-            // should only be one of these after splitting out the chapters.
-            XmlNodeList nodes;
-            nodes = xmlDocument.SelectNodes("//@lang", namespaceManager);
-            if (nodes.Count > 0)
-            {
-                foreach (XmlNode node in nodes)
-                {
-                    string value;
-                    if (_langFontDictionary.TryGetValue(node.Value, out value))
-                    {
-                        // already have this item in our list - continue
-                        continue;
-                    }
-                    if (node.Value.ToLower() == "utf-8")
-                    {
-                        // TE-9078 "utf-8" showing up as language in html tag - remove when fixed
-                        continue;
-                    }
-                    // add an entry for this language in the list (the * gets overwritten in BuildFontsList())
-                    _langFontDictionary.Add(node.Value, "*");
-                }
-            }
-            // now go check to see if we're working on scripture or dictionary data
-            nodes = xmlDocument.SelectNodes("//xhtml:span[@class='headword']", namespaceManager);
-            if (nodes.Count == 0)
-            {
-                // not in this file - this might be scripture?
-                nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
-                if (nodes.Count > 0)
-                    _inputType = "scripture";
-            }
-            else
-            {
-                _inputType = "dictionary";
-            }
         }
 
         /// <summary>
@@ -1039,122 +1071,41 @@ namespace SIL.PublishingSolution
             }
         }
 
-
-        /// <summary>
-        /// Splits the specified xhtml file out into multiple files, either based on letter (dictionary) or book (scripture). 
-        /// This method was adapted from ExportOpenOffice.cs.
-        /// </summary>
-        /// <param name="temporaryCvFullName"></param>
-        /// <param name="pubInfo"></param>
-        /// <returns></returns>
-        private List<string> SplitFile(string temporaryCvFullName, PublicationInformation pubInfo)
+        private int GetChapterCount(string xhtmlFileName)
         {
-            List<string> fileNameWithPath = new List<string>();
+            if (!File.Exists(xhtmlFileName))
+                Thread.Sleep(300);
+            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
+            xmlDocument.Load(xmlReader);
+            xmlReader.Close();
+            XmlNamespaceManager xmlNamespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+            xmlNamespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            XmlNodeList nodes;
             if (_inputType.Equals("dictionary"))
             {
-                fileNameWithPath = Common.SplitXhtmlFile(temporaryCvFullName, "letHead", true);
+                // is this a reversal index or the normal dictionary stuff?
+                if (xhtmlFileName.Contains("FlexRev"))
+                {
+                    // reversal index - count the RevIndex nodes
+                    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='RevIndex']", xmlNamespaceManager);
+                }
+                else
+                {
+                    // main dictionary - count the letHead nodes
+                    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='letHead']", xmlNamespaceManager);
+                }
             }
             else
             {
-                fileNameWithPath = Common.SplitXhtmlFile(temporaryCvFullName, "scrBook", false);
+                // Scripture - count the Chapter_Number nodex
+                nodes = xmlDocument.SelectNodes("//xhtml:span[@class='Chapter_Number']", xmlNamespaceManager);
             }
-            return fileNameWithPath;
+
+            return nodes == null ? 0 : nodes.Count;
         }
 
-        /// <summary>
-        /// Splits a book file into smaller files, based on file size.
-        /// </summary>
-        /// <param name="xhtmlFilename">file to split into smaller pieces</param>
-        /// <returns></returns>
-        private List<string> SplitBook(string xhtmlFilename)
-        {
-            const long maxSize = 204800; // 200KB
-            // sanity check - make sure the file exists
-            if (!File.Exists(xhtmlFilename))
-            {
-                return null;
-            }
-            List<string> fileNames = new List<string>();
-            // is it worth splitting this file?
-            FileInfo fi = new FileInfo(xhtmlFilename);
-            if (fi.Length <= maxSize)
-            {
-                // not worth splitting this file - just return it
-                fileNames.Add(xhtmlFilename);
-                return fileNames;
-            }
-
-            // If we got here, it's worth our time to split the file out.
-            StreamWriter writer;
-            var reader = new StreamReader(xhtmlFilename);
-            string content = reader.ReadToEnd();
-            reader.Close();
-
-            string bookcode = "<span class=\"scrBookCode\">" + GetBookID(xhtmlFilename) + "</span>";
-            string head = content.Substring(0, content.IndexOf("<body"));
-            bool done = false;
-            int startIndex = 0;
-            int fileIndex = 1;
-            int softMax = 0, realMax = 0;
-            var sb = new StringBuilder();
-            while (!done)
-            {
-                // look for the next <div class="Section_Head"> after our soft maximum size
-                string outFile = Path.Combine(Path.GetDirectoryName(xhtmlFilename), (Path.GetFileNameWithoutExtension(xhtmlFilename) + fileIndex.ToString().PadLeft(2, '0') + ".xhtml"));
-                softMax = startIndex + (int) (maxSize/2); // UTF-16
-                if (softMax > content.Length)
-                {
-                    realMax = -1;
-                }
-                else
-                {
-                    realMax = content.IndexOf("<div class=\"Section_Head", softMax);
-                }
-                if (realMax == -1)
-                {
-                    // no more section heads - just pull in the rest of the content
-                    // write out head + substring(startIndex to the end)
-                    sb.Append(head);
-                    sb.Append("<body class=\"scrBody\"><div class=\"scrBook\">");
-                    sb.Append(bookcode);
-                    sb.AppendLine(content.Substring(startIndex));
-                    writer = new StreamWriter(outFile);
-                    writer.Write(sb.ToString());
-                    writer.Close();
-                    // add this file to fileNames)))
-                    fileNames.Add(outFile);
-                    break;
-                }
-                // build the content
-                if (startIndex == 0)
-                {
-                    // for the first section, we go from the start of the file to realMax
-                    sb.Append(content.Substring(0, (realMax - startIndex)));
-                    sb.AppendLine("</div></body></html>"); // close out the xhtml
-                }
-                else
-                {
-                    // for the subsequent sections, we need the head + the substring (startIndex to realMax)
-                    sb.Append(head);
-                    sb.Append("<body class=\"scrBody\"><div class=\"scrBook\">");
-                    sb.Append(content.Substring(startIndex, (realMax - startIndex)));
-                    sb.AppendLine("</div></body></html>"); // close out the xhtml
-                }
-                // write the string buffer content out to file
-                writer = new StreamWriter(outFile);
-                writer.Write(sb.ToString());
-                writer.Close();
-                // add this file to fileNames
-                fileNames.Add(outFile);
-                // move the indices up for the next file chunk
-                startIndex = realMax;
-                // reset the stringbuilder
-                sb.Length = 0;
-                fileIndex++;
-            }
-            // return the result
-            return fileNames;
-        }
 
         /// <summary>
         /// Loads the settings file and pulls out the values we look at.
@@ -1239,6 +1190,202 @@ namespace SIL.PublishingSolution
                 EmbedFonts = true;
             }
         }
+
+        #region File Processing Methods
+        /// <summary>
+        /// Splits the specified xhtml file out into multiple files, either based on letter (dictionary) or book (scripture). 
+        /// This method was adapted from ExportOpenOffice.cs.
+        /// </summary>
+        /// <param name="temporaryCvFullName"></param>
+        /// <param name="pubInfo"></param>
+        /// <returns></returns>
+        private List<string> SplitFile(string temporaryCvFullName, PublicationInformation pubInfo)
+        {
+            List<string> fileNameWithPath = new List<string>();
+            if (_inputType.Equals("dictionary"))
+            {
+                fileNameWithPath = Common.SplitXhtmlFile(temporaryCvFullName, "letHead", true);
+            }
+            else
+            {
+                fileNameWithPath = Common.SplitXhtmlFile(temporaryCvFullName, "scrBook", false);
+            }
+            return fileNameWithPath;
+        }
+
+        /// <summary>
+        /// Splits a book file into smaller files, based on file size.
+        /// </summary>
+        /// <param name="xhtmlFilename">file to split into smaller pieces</param>
+        /// <returns></returns>
+        private List<string> SplitBook(string xhtmlFilename)
+        {
+            const long maxSize = 204800; // 200KB
+            // sanity check - make sure the file exists
+            if (!File.Exists(xhtmlFilename))
+            {
+                return null;
+            }
+            List<string> fileNames = new List<string>();
+            // is it worth splitting this file?
+            FileInfo fi = new FileInfo(xhtmlFilename);
+            if (fi.Length <= maxSize)
+            {
+                // not worth splitting this file - just return it
+                fileNames.Add(xhtmlFilename);
+                return fileNames;
+            }
+
+            // If we got here, it's worth our time to split the file out.
+            StreamWriter writer;
+            var reader = new StreamReader(xhtmlFilename);
+            string content = reader.ReadToEnd();
+            reader.Close();
+
+            string bookcode = "<span class=\"scrBookCode\">" + GetBookID(xhtmlFilename) + "</span>";
+            string head = content.Substring(0, content.IndexOf("<body"));
+            bool done = false;
+            int startIndex = 0;
+            int fileIndex = 1;
+            int softMax = 0, realMax = 0;
+            var sb = new StringBuilder();
+            while (!done)
+            {
+                // look for the next <div class="Section_Head"> after our soft maximum size
+                string outFile = Path.Combine(Path.GetDirectoryName(xhtmlFilename), (Path.GetFileNameWithoutExtension(xhtmlFilename) + fileIndex.ToString().PadLeft(2, '0') + ".xhtml"));
+                softMax = startIndex + (int)(maxSize / 2); // UTF-16
+                if (softMax > content.Length)
+                {
+                    realMax = -1;
+                }
+                else
+                {
+                    realMax = content.IndexOf("<div class=\"Section_Head", softMax);
+                }
+                if (realMax == -1)
+                {
+                    // no more section heads - just pull in the rest of the content
+                    // write out head + substring(startIndex to the end)
+                    sb.Append(head);
+                    sb.Append("<body class=\"scrBody\"><div class=\"scrBook\">");
+                    sb.Append(bookcode);
+                    sb.AppendLine(content.Substring(startIndex));
+                    writer = new StreamWriter(outFile);
+                    writer.Write(sb.ToString());
+                    writer.Close();
+                    // add this file to fileNames)))
+                    fileNames.Add(outFile);
+                    break;
+                }
+                // build the content
+                if (startIndex == 0)
+                {
+                    // for the first section, we go from the start of the file to realMax
+                    sb.Append(content.Substring(0, (realMax - startIndex)));
+                    sb.AppendLine("</div></body></html>"); // close out the xhtml
+                }
+                else
+                {
+                    // for the subsequent sections, we need the head + the substring (startIndex to realMax)
+                    sb.Append(head);
+                    sb.Append("<body class=\"scrBody\"><div class=\"scrBook\">");
+                    sb.Append(content.Substring(startIndex, (realMax - startIndex)));
+                    sb.AppendLine("</div></body></html>"); // close out the xhtml
+                }
+                // write the string buffer content out to file
+                writer = new StreamWriter(outFile);
+                writer.Write(sb.ToString());
+                writer.Close();
+                // add this file to fileNames
+                fileNames.Add(outFile);
+                // move the indices up for the next file chunk
+                startIndex = realMax;
+                // reset the stringbuilder
+                sb.Length = 0;
+                fileIndex++;
+            }
+            // return the result
+            return fileNames;
+        }
+
+        /// <summary>
+        /// Copies the selected source folder and its subdirectories to the destination folder path. 
+        /// This is a recursive method.
+        /// </summary>
+        /// <param name="sourceFolder"></param>
+        /// <param name="destFolder"></param>
+        private void CopyFolder(string sourceFolder, string destFolder)
+        {
+            if (Directory.Exists(destFolder))
+            {
+                Directory.Delete(destFolder, true);
+            }
+            Directory.CreateDirectory(destFolder);
+            string[] files = Directory.GetFiles(sourceFolder);
+            try
+            {
+                foreach (string file in files)
+                {
+                    string name = Path.GetFileName(file);
+                    string dest = Common.PathCombine(destFolder, name);
+                    // Special processing for the mimetype file - don't copy it now; copy it after
+                    // compressing the rest of the archive (in Compress() below) as a stored / not compressed
+                    // file in the archive. This is keeping in line with the .epub OEBPS Container Format (OCF)
+                    // recommendations: http://www.idpf.org/ocf/ocf1.0/download/ocf10.htm.
+                    if (name != "mimetype")
+                    {
+                        File.Copy(file, dest);
+                    }
+                }
+
+                string[] folders = Directory.GetDirectories(sourceFolder);
+                foreach (string folder in folders)
+                {
+                    string name = Path.GetFileName(folder);
+                    string dest = Common.PathCombine(destFolder, name);
+                    if (name != ".svn")
+                    {
+                        CopyFolder(folder, dest);
+                    }
+                }
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+        /// <summary>
+        /// Compresses the selected folder's contents and saves the archive in the specified outputPath
+        /// with the extension .epub.
+        /// </summary>
+        /// <param name="sourceFolder">Folder to compress</param>
+        /// <param name="outputPath">Output path and filename (without extension)</param>
+        private void Compress(string sourceFolder, string outputPath)
+        {
+            var mODT = new ZipFolder();
+            string outputPathWithFileName = outputPath + ".epub";
+
+            // add the content to the existing epub.zip file
+            string zipFile = Path.Combine(sourceFolder, "epub.zip");
+            string contentFolder = Path.Combine(sourceFolder, "OEBPS");
+            string[] files = Directory.GetFiles(contentFolder);
+            mODT.AddToZip(files, zipFile);
+            var sb = new StringBuilder();
+            sb.Append(sourceFolder);
+            sb.Append(Path.DirectorySeparatorChar);
+            sb.Append("META-INF");
+            sb.Append(Path.DirectorySeparatorChar);
+            sb.Append("container.xml");
+            var containerFile = new string[1] { sb.ToString() };
+            mODT.AddToZip(containerFile, zipFile);
+            // copy the results to the output directory
+            File.Copy(zipFile, outputPathWithFileName, true);
+        }
+
+        #endregion
+
+        #region EPUB metadata handlers
 
         /// <summary>
         /// Generates the manifest and metadata information file used by the .epub reader
@@ -1594,92 +1741,7 @@ namespace SIL.PublishingSolution
             ncx.Close();
         }
 
-        /// <summary>
-        /// Copies the selected source folder and its subdirectories to the destination folder path. 
-        /// This is a recursive method.
-        /// </summary>
-        /// <param name="sourceFolder"></param>
-        /// <param name="destFolder"></param>
-        private void CopyFolder(string sourceFolder, string destFolder)
-        {
-            if (Directory.Exists(destFolder))
-            {
-                Directory.Delete(destFolder, true);
-            }
-            Directory.CreateDirectory(destFolder);
-            string[] files = Directory.GetFiles(sourceFolder);
-            try
-            {
-                foreach (string file in files)
-                {
-                    string name = Path.GetFileName(file);
-                    string dest = Common.PathCombine(destFolder, name);
-                    // Special processing for the mimetype file - don't copy it now; copy it after
-                    // compressing the rest of the archive (in Compress() below) as a stored / not compressed
-                    // file in the archive. This is keeping in line with the .epub OEBPS Container Format (OCF)
-                    // recommendations: http://www.idpf.org/ocf/ocf1.0/download/ocf10.htm.
-                    if (name != "mimetype")
-                    {
-                        File.Copy(file, dest);
-                    }
-                }
-
-                string[] folders = Directory.GetDirectories(sourceFolder);
-                foreach (string folder in folders)
-                {
-                    string name = Path.GetFileName(folder);
-                    string dest = Common.PathCombine(destFolder, name);
-                    if (name != ".svn")
-                    {
-                        CopyFolder(folder, dest);
-                    }
-                }
-            }
-            catch
-            {
-                return;
-            }
-        }
-
-        /// <summary>
-        /// Compresses the selected folder's contents and saves the archive in the specified outputPath
-        /// with the extension .epub.
-        /// </summary>
-        /// <param name="sourceFolder">Folder to compress</param>
-        /// <param name="outputPath">Output path and filename (without extension)</param>
-        private void Compress(string sourceFolder, string outputPath)
-        {
-            var mODT = new ZipFolder();
-            string outputPathWithFileName = outputPath + ".epub";
-
-            // add the content to the existing epub.zip file
-            string zipFile = Path.Combine(sourceFolder, "epub.zip");
-            string contentFolder = Path.Combine(sourceFolder, "OEBPS");
-            string[] files = Directory.GetFiles(contentFolder);
-            mODT.AddToZip(files, zipFile);
-            var sb = new StringBuilder();
-            sb.Append(sourceFolder);
-            sb.Append(Path.DirectorySeparatorChar);
-            sb.Append("META-INF");
-            sb.Append(Path.DirectorySeparatorChar);
-            sb.Append("container.xml");
-            var containerFile = new string[1] {sb.ToString()};
-            mODT.AddToZip(containerFile, zipFile);
-            // copy the results to the output directory
-            File.Copy(zipFile, outputPathWithFileName, true);
-
-            //try
-            //{
-            //    Common.OpenOutput(outputPathWithFileName);
-            //}
-            //catch (System.ComponentModel.Win32Exception ex)
-            //{
-            //    if (ex.NativeErrorCode == 1155)
-            //    {
-
-            //    }
-            //}
-        }
+        #endregion
 
         #endregion
     }

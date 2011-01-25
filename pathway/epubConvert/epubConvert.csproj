@@ -166,6 +166,10 @@
       <Project>{403F8C54-4154-4D79-AED7-326B976875B4}</Project>
       <Name>epubValidator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GoBibleConvert\GoBibleConvert.csproj">
+      <Project>{C7A3F4E5-1F86-4D22-AB4F-5BEA0D923DDD}</Project>
+      <Name>GoBibleConvert</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LiftPrepare\LiftPrepare.csproj">
       <Project>{D38235F3-5B02-4835-B380-40E0BDCD5495}</Project>
       <Name>LiftPrepare</Name>
