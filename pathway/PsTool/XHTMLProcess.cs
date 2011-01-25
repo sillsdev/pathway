@@ -922,7 +922,10 @@ namespace SIL.PublishingSolution
                         if (property.Key == "line-height")
                         {
                             float basepoint = size - ancestorFontSize;
-                            if (basepoint <= 0) basepoint = ancestorFontSize; // if 1eem or 0em
+                            if (basepoint <= 0 ) 
+                                basepoint = ancestorFontSize; // if 1eem or 0em
+                            else if (basepoint < ancestorFontSize)
+                                basepoint = size; // 110%
                             size = basepoint;
                         }
                         _tempStyle[property.Key] = size + point;
