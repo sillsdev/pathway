@@ -12,7 +12,7 @@ class Target:
     def __init__(self, **kw):
         self.__dict__.update(kw)
         # for the versioninfo resources
-        self.version = "0.1.0"
+        self.version = "0.1.1.501"
         self.company_name = "SIL International"
         self.copyright = "2011 Greg Trihus"
         self.name = "Flex Text Export"

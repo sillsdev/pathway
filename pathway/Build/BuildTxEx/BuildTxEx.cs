@@ -58,7 +58,7 @@ namespace BuildTxEx
             map[Readme] = FileData.Get(instPath + Readme);
             map[License] = FileData.Get(instPath + License);
             sub.FileSubstitute("PwTxExUI-tpl.wxs", map);
-            BuilderBL.UpdateInstallerDescription(instPath, "PwTxEx-tpl.wxs", "0.1.0.0", null, "");
+            BuilderBL.UpdateInstallerDescription(instPath, "PwTxEx-tpl.wxs", "0.1.1.501", null, "");
 
             //Calculate Files & Features
             BuilderBL.RemoveSubFolders(instPath + "../Files");
@@ -84,7 +84,7 @@ namespace BuildTxEx
             {
                 DateTime now = DateTime.Now;
                 var curDate = now.ToString("yyyy-MM-d");
-                string version = "0.1.0.0";
+                string version = "0.1.1.501";
                 var target = string.Format("{0}SetupTxEx-{1}-{2}.msi", instPath, version, curDate);
                 if (File.Exists(target))
                     File.Delete(target);

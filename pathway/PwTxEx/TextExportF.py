@@ -16,7 +16,7 @@ class TextExport(wx.Frame):
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_TEXTEXPORT, name='TextExport',
               parent=prnt, pos=wx.Point(686, 257), size=wx.Size(294, 453),
-              style=wx.DEFAULT_FRAME_STYLE, title='Text Export 0.1.0.0')
+              style=wx.DEFAULT_FRAME_STYLE, title='Text Export 0.1.1.501')
         self.SetClientSize(wx.Size(276, 408))
 
         self.staticText1 = wx.StaticText(id=wxID_TEXTEXPORTSTATICTEXT1,
@@ -57,6 +57,13 @@ class TextExport(wx.Frame):
                 finally:
                     dlg.Destroy()
                     sys.exit(-2)
+            except f7tx.MissingData, e:
+                dlg = wx.MessageDialog(self, e.value, 'Missing Data', wx.OK | wx.ICON_ERROR)
+                try:
+                    dlg.ShowModal()
+                finally:
+                    dlg.Destroy()
+                    sys.exit(-3)
             dlg = wx.MessageDialog(self, 'To see the results in InDesign, save as RTF. Launch InDesign and used <ctrl/D> and shift-Insert', 'Next Steps', wx.OK | wx.ICON_INFORMATION)
             try:
                 dlg.ShowModal()

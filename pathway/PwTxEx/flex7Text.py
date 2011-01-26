@@ -27,10 +27,23 @@ class MissingSoftware(Exception):
         
     def __str__(self):
         return repr(self.value)
+    
+class MissingData(Exception):
+    def __init__(self, value):
+        self.value = value
+    
+    def __str(self):
+        return repr(self.value)
 
 class fwdata:
     def __init__(self, fullname):
-        self.root = etree.parse(fullname)
+        try:
+            self.root = etree.parse(fullname)
+        except IOError:
+            nameparts = os.path.splitext(fullname)
+            if os.path.isfile(nameparts[0] + '.fwdb'):
+                raise MissingData('Please convert this project to the stand alone format')
+            raise
    
     def TextGuids(self):
         return self.root.xpath('//rt[@class="Text"]/@guid')
