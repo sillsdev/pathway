@@ -1,3 +1,14 @@
+#-----------------------------------------------------------------------------
+# Name:        TextExport.py
+# Purpose:     Application base for TextExport
+#
+# Author:      <greg_trihus@sil.org>
+#
+# Created:     2011/01/26
+# RCS-ID:      $Id: TextExport.py $
+# Copyright:   (c) 2011 SIL International
+# Licence:     <mit>
+#-----------------------------------------------------------------------------
 #!/usr/bin/env python
 #Boa:App:BoaApp
 

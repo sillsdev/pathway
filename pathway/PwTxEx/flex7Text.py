@@ -6,7 +6,7 @@
 #
 # Created:     2011/01/23
 # RCS-ID:      $Id: flex7Text.py $
-# Copyright:   (c) 2006
+# Copyright:   (c) 2011 SIL International
 # Licence:     <mit>
 #-----------------------------------------------------------------------------
 #!/usr/bin/env python
@@ -18,6 +18,7 @@ from lxml import etree
 XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml"
 XHTML = "{%s}" % XHTML_NAMESPACE
 NSMAP = {None : XHTML_NAMESPACE} # default namespace
+FOLDER = 'TextExport'
 
 modules ={}
 
@@ -28,7 +29,7 @@ class MissingSoftware(Exception):
     def __str__(self):
         return repr(self.value)
     
-class MissingData(Exception):
+class DataFormat(Exception):
     def __init__(self, value):
         self.value = value
     
@@ -42,35 +43,36 @@ class fwdata:
         except IOError:
             nameparts = os.path.splitext(fullname)
             if os.path.isfile(nameparts[0] + '.fwdb'):
-                raise MissingData('Please convert this project to the stand alone format')
+                raise DataFormat(fullname)
             raise
-   
-    def TextGuids(self):
-        return self.root.xpath('//rt[@class="Text"]/@guid')
-
-    def TextNames(self, text):
-        return self._GetRuns('//rt[@class="Text"][@guid="%s"]/Name/AUni' % text)
+        
+    def TextNodes(self):
+        return self.root.xpath('//rt[@class="Text"]')
     
-    def TextContentGuid(self, text):
-        return self.root.xpath('//rt[@class="Text"][@guid="%s"]/Contents/objsur/@guid' % text)[0]
+    def Names(self, node):
+        print 'Names for', node.attrib['guid']
+        nameNode = node.find('Name')
+        if nameNode == None:
+            return []
+        return self._ProcRuns(list(nameNode))
     
+    def ContentGuid(self, node):
+        return node.find('Contents').find('objsur').attrib['guid']
+       
     def TextParagraphGuids(self, guid):
+        print 'Paragraphs for', guid
         return self.root.xpath('//rt[@class="StText"][@guid="%s"]/Paragraphs/objsur/@guid' % guid)
     
     def ParagraphRuns(self, guid):
-        return self._GetRuns('//rt[@class="StTxtPara"][@guid="%s"]/Contents/Str/Run' % guid)
+        print 'Runs for', guid
+        return self._ProcRuns(self.root.xpath('//rt[@class="StTxtPara"][@guid="%s"]/Contents/Str/Run' % guid))
     
-    def ParagraphText(self, guid):
-        return self.root.xpath('//rt[@class="StTxtPara"][@guid="%s"]/Contents/Str/Run/text()' % guid)
-    
-    def _GetRuns(self, xpath):
-        print xpath
-        ws = self.root.xpath(xpath + '/@ws')
-        text = self.root.xpath(xpath + '/text()')
+    def _ProcRuns(self, runnodes):
         runs = []
-        if len(ws) == len(text):
-            for i in range(len(ws)):
-                runs.append([ws[i], text[i]])
+        for runnode in runnodes:
+            text = runnode.text
+            if text:
+                runs.append([runnode.attrib['ws'], text])
         return runs
     
 class xhtmlDoc:
@@ -91,7 +93,7 @@ class xhtmlDoc:
         self.content = self._DoChild(self.body, "div", "letData")
             
     def Paragraph(self, runs):
-        para = self._DoChild(self.content, "div", "Entry")
+        para = self._DoChild(self.content, "div", "entry")
         self._DoRuns(para, runs, "span", None)
         
     def Xhtml(self):
@@ -120,15 +122,15 @@ def ProjDir():
 def TextExport(proj, progress):
     os.chdir(os.path.join(ProjDir(), proj))
     data = fwdata(proj + '.fwdata')
-    texts = data.TextGuids()
+    textNodes = data.TextNodes()
     if progress != None:
-        progress.gauge1.SetRange(len(texts))
-    outName = '%s %d Texts.xhtml' % (proj, len(texts))
+        progress.gauge1.SetRange(len(textNodes))
+    outName = '%s %d Texts.xhtml' % (proj, len(textNodes))
     xhtml = xhtmlDoc(outName, 'main.css')
     n = 0
-    for text in texts:
-        xhtml.Book(data.TextNames(text))
-        contGuid = data.TextContentGuid(text)
+    for textNode in textNodes:
+        xhtml.Book(data.Names(textNode))
+        contGuid = data.ContentGuid(textNode)
         for paraGuid in data.TextParagraphGuids(contGuid):
             xhtml.Paragraph(data.ParagraphRuns(paraGuid))
         if progress != None:
@@ -137,6 +139,9 @@ def TextExport(proj, progress):
             n += 1
             progress.gauge1.SetValue(n)
             progress.Update()
+    if not os.path.isdir(FOLDER):
+        os.mkdir(FOLDER)
+    os.chdir(FOLDER)
     fl = open(outName, 'w')
     fl.write(etree.tostring(xhtml.Xhtml(), encoding='UTF-8', xml_declaration=True))
     fl.close()
@@ -167,15 +172,15 @@ mainCss = '''
     text-align: left;
 }
 .entry {
-    font-family: "Times New Roman", serif;	/* default Serif font */
-    font-size: 10pt;	/* inherited */
+    font-family: "Charis SIL", serif;	/* default Serif font */
+    font-size: 12pt;	/* inherited */
     border-style: solid;
     border-top-width: 0pt;
     border-bottom-width: 0pt;
     border-left-width: 0pt;
     border-right-width: 0pt;
-    text-indent: -36pt;
-    margin-left: 36pt;
+    text-indent: 36pt;
+    margin-left: 0pt;
     padding-left: 9pt;
     padding-bottom: 2pt;
     padding-top: 1pt;
@@ -193,8 +198,9 @@ def PwDir():
 def LaunchOpenOffice(proj, outName):
     os.chdir(PwDir())
     projDir = os.path.join(ProjDir(), proj)
-    xhtml = os.path.join(projDir, outName)
-    css = os.path.join(projDir, "main.css")
+    folder = os.path.join(projDir, FOLDER)
+    xhtml = os.path.join(folder, outName)
+    css = os.path.join(folder, "main.css")
     pathwayb = os.popen('PathwayB -x "%s" -c "%s" -l' % (xhtml, css))
     res = pathwayb.read()
     fl = open(os.path.join(projDir, "PathwayB.log"), 'w')
@@ -203,7 +209,10 @@ def LaunchOpenOffice(proj, outName):
 
 def ProcessProj(proj, progress=None):
     outName = TextExport(proj, progress)
-    return LaunchOpenOffice(proj, outName)
+    if progress:
+        parent = progress.GetParent()
+        parent.Produced(os.path.join(os.path.join(os.path.join(ProjDir(), proj), FOLDER), outName))
+    LaunchOpenOffice(proj, outName)
 
 def main():
     proj = 'AkooseDic'

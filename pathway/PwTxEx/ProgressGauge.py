@@ -1,3 +1,14 @@
+#-----------------------------------------------------------------------------
+# Name:        ProgressGauge.py
+# Purpose:     Progress dialog for TextExport
+#
+# Author:      <greg_trihus@sil.org>
+#
+# Created:     2011/01/26
+# RCS-ID:      $Id: ProgressGauge.py $
+# Copyright:   (c) 2011 SIL International
+# Licence:     <mit>
+#-----------------------------------------------------------------------------
 #Boa:Frame:ProgressGauge
 
 import wx

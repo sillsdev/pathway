@@ -1,7 +1,19 @@
+#-----------------------------------------------------------------------------
+# Name:        setup.py
+# Purpose:     Builds TextExport Application using py2exe
+#
+# Author:      <greg_trihus@sil.org>
+#
+# Created:     2011/01/26
+# RCS-ID:      $Id: setup.py $
+# Copyright:   (c) 2011
+# Licence:     <mit>
+#-----------------------------------------------------------------------------
 from distutils.core import setup
 import py2exe
 import sys
 import os
+from TextExportF import version
 
 # If run without args, build executables, in quiet mode.
 if len(sys.argv) == 1:
@@ -12,7 +24,7 @@ class Target:
     def __init__(self, **kw):
         self.__dict__.update(kw)
         # for the versioninfo resources
-        self.version = "0.1.1.501"
+        self.version = version
         self.company_name = "SIL International"
         self.copyright = "2011 Greg Trihus"
         self.name = "Flex Text Export"

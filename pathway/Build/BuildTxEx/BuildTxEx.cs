@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using Builder;
@@ -58,7 +59,8 @@ namespace BuildTxEx
             map[Readme] = FileData.Get(instPath + Readme);
             map[License] = FileData.Get(instPath + License);
             sub.FileSubstitute("PwTxExUI-tpl.wxs", map);
-            BuilderBL.UpdateInstallerDescription(instPath, "PwTxEx-tpl.wxs", "0.1.1.501", null, "");
+            var version = FileVersionInfo.GetVersionInfo(Common.PathCombine(instPath, "../../PwTxEx/dist/TextExport.exe")).FileVersion;
+            BuilderBL.UpdateInstallerDescription(instPath, "PwTxEx-tpl.wxs", version, null, "");
 
             //Calculate Files & Features
             BuilderBL.RemoveSubFolders(instPath + "../Files");
@@ -84,7 +86,6 @@ namespace BuildTxEx
             {
                 DateTime now = DateTime.Now;
                 var curDate = now.ToString("yyyy-MM-d");
-                string version = "0.1.1.501";
                 var target = string.Format("{0}SetupTxEx-{1}-{2}.msi", instPath, version, curDate);
                 if (File.Exists(target))
                     File.Delete(target);
