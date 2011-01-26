@@ -1,5 +1,10 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\PwTxEx\graphics\CHECKFRE.bmp" ComponentGuid="B6B6CCC4-D551-4592-BD4F-199450A446F6"/>
+	<File Path="Files\PwTxEx\w9xpopen.exe" ComponentGuid="80498A61-3508-4EBD-80FD-ECFF3A11FF63"/>
+	<File Path="Files\PwTxEx\TextExport.exe" ComponentGuid="CAE01121-416D-4286-9293-91F0184C5947"/>
+	<File Path="Files\PwTxEx\MSVCR71.dll" ComponentGuid="16CDFB38-5574-4DBB-906F-D77B8951F232"/>
+	<File Path="Files\PwTxEx\graphics\CHECKFRE.ICO" ComponentGuid="4526371E-4C0D-4541-A127-AEAC910D9CAB"/>
 	<File Path="Files\ConfigurationTool\Styles\Scripture\Running_Head_Paged_Verse_Abbr.css" ComponentGuid="8CD2480E-6D81-4BC6-9118-80B2BF3BFFFB"/>
 	<File Path="Files\ConfigurationTool\Styles\Scripture\Running_Head_Paged_Chapter_Abbr.css" ComponentGuid="F9CE5EE8-C98B-4A6F-BF77-E1275D3F937E"/>
 	<File Path="Files\ConfigurationTool\Styles\Scripture\Running_Head_Mirrored_Verse_Abbr.css" ComponentGuid="750875A7-EEE0-4E55-B642-E7DC35ADB6B1"/>

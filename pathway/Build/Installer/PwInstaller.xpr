@@ -10,17 +10,21 @@
         <file name="BuildInstaller7SE.bat"/>
         <file name="BuildInstallerBTE.bat"/>
         <file name="BuildInstallerSE.bat"/>
+        <file name="BuildInstallerTxEx.bat"/>
         <file name="Features.wxs"/>
         <file name="Features7Pw-tpl.wxs"/>
         <file name="FeaturesCtx-tpl.wxs"/>
         <file name="FeaturesPw-tpl.wxs"/>
+        <file name="FeaturesTxEx-tpl.wxs"/>
         <file name="FileLibrary.xml"/>
         <file name="Files.wxs"/>
         <file name="Files7Pw-tpl.wxs"/>
         <file name="FilesCtx-tpl.wxs"/>
         <file name="FilesPw-tpl.wxs"/>
+        <file name="FilesTxEx-tpl.wxs"/>
         <file name="GenerateFilesSource7Pw.js"/>
         <file name="GenerateFilesSourcePw.js"/>
+        <file name="GenerateFilesSourceTxEx.js"/>
         <file name="License.rtf"/>
         <file name="OOS-tpl.wxs"/>
         <file name="Partial%20PwCtx.wxs"/>
@@ -39,6 +43,8 @@
         <file name="PwCtx-tpl.wxs"/>
         <file name="PwCtxUI-tpl.wxs"/>
         <file name="PwCtxUI.wxs"/>
+        <file name="PwTxEx-tpl.wxs"/>
+        <file name="PwTxExUI-tpl.wxs"/>
         <file name="ReadMePw.rtf"/>
         <file name="UtilityCatalogIncludePathway.xml"/>
     </projectTree>

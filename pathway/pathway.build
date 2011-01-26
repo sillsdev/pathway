@@ -17,6 +17,9 @@
                 <include name="Build/*/obj/**" />
                 <include name="WordPressConvert/build/**" />
                 <include name="WordPressConvert/dist/**" />
+                <include name="PwTxEx/build/**" />
+                <include name="PwTxEx/dist/**" />
+                <include name="PwTxEx/*.pyc" />
                 <include name="**/TestFiles/output/**" />
             </fileset>
         </delete>
@@ -75,6 +78,12 @@
         <call target="AllPwCtx"/>
     </target>
     <target name="AllPwCtx" depends="BuildCtx, BuilderBL, PsTool"/>
+    
+    <target name="TextExport">
+        <property name="Configuration" value="PwTxEx"/>
+        <call target="AllPwTxEx"/>
+    </target>
+    <target name="AllPwTxEx" depends="BuildTxEx, BuilderBL, PsTool"/>
     
     <target name="Corporate7BTE">
         <property name="Scope" value="BTE"/>
@@ -151,6 +160,15 @@
             <property name="Configuration" value="${Configuration}"/>
             <property name="Platform" value="${Platform}"/>
         </msbuild>
+    </target>
+    <target name="BuildTxEx" depends="BuilderBL, PsTool,PwTxEx">
+        <msbuild project="Build\BuildTxEx\BuildTxEx.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="PwTxEx">
+        <exec program="c:\Python25\Python.exe" commandline="setup.py" workingdir="PwTxEx"/>
     </target>
     <target name="Builder7BTE" depends="BuilderBL, PsTool">
         <msbuild project="Build\Builder7BTE\Builder7BTE.csproj" >
@@ -473,6 +491,12 @@
     
     <target name="BuildCtx60" depends="BuilderBL60, PsTool60">
         <msbuild project="Build\BuildCtx\BuildCtx60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="BuildTxEx60" depends="BuilderBL60, PsTool60">
+        <msbuild project="Build\BuildTxEx\BuildTxEx60.csproj" >
             <property name="Configuration" value="${Configuration}"/>
             <property name="Platform" value="${Platform}"/>
         </msbuild>

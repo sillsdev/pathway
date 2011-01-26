@@ -41,6 +41,9 @@ rmdir /s/q bin
 cd %base%\Build\BuildCtx
 rmdir /s/q obj
 rmdir /s/q bin
+cd %base%\Build\BuildTxEx
+rmdir /s/q obj
+rmdir /s/q bin
 cd %base%\BookletBuilder
 rmdir /s/q obj
 rmdir /s/q bin

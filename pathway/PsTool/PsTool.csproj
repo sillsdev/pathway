@@ -70,6 +70,9 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwCtx|AnyCPU' ">
     <OutputPath>bin\PwCtx\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwTxEx|AnyCPU' ">
+    <OutputPath>bin\PwTxEx\</OutputPath>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ConTeXt|AnyCPU' ">
     <OutputPath>bin\ConTeXt\</OutputPath>
   </PropertyGroup>
@@ -121,6 +124,10 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwCtx|x86' ">
     <OutputPath>bin\x86\PwCtx\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwTxEx|x86' ">
+    <OutputPath>bin\x86\PwTxEx\</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ConTeXt|x86' ">
