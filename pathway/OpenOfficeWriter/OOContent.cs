@@ -96,12 +96,6 @@ namespace SIL.PublishingSolution
         string _parentLang = string.Empty;
         string _projectType = string.Empty;
         private bool _forcedPara;
-        private string _hapterNumber;
-        private string _verseNumber;
-        private string _footCal;
-        private string _footNoteStyleName;
-        private string _formatFootnote;
-
         readonly Dictionary<string, string> _counterVolantryReset = new Dictionary<string, string>();
         readonly string _tempFile = Common.PathCombine(Path.GetTempPath(), "tempXHTMLFile.xhtml"); //TD-351
         readonly string _hardSpace = Common.ConvertUnicodeToString("\u00A0");
@@ -119,6 +113,7 @@ namespace SIL.PublishingSolution
         private bool _imagePreviousFinished = false;
         private bool _imageParaForCaption = false;
         private List<string> _unUsedParagraphStyle = new List<string>();
+        string footCallSymb = string.Empty;
 
         #endregion
         #region Private Variable
@@ -657,10 +652,6 @@ namespace SIL.PublishingSolution
                             break;
 
                     }
-                    //if (_contentReplace) // TD-204(unable to put tol/pisin)
-                    //{
-                    //    WriteText(_footnoteValue);
-                    //}
                 }
                 //TimeSpan totalTime = DateTime.Now - startTime;
                 //System.Windows.Forms.MessageBox.Show(totalTime.ToString());
@@ -860,7 +851,8 @@ namespace SIL.PublishingSolution
                 if (isFootnote)
                 {
                     string footerClassName = Common.LeftString(characterStyle, "_");
-                    WriteFootNoteMarker(footerClassName, footnoteContent.ToString(), "");
+                    StringBuilder footnoteStyle = MakeFootnoteStyle(characterStyle);
+                    WriteFootNoteMarker(footerClassName, footnoteStyle.ToString(), "");
                     return;
                 }
 
@@ -906,33 +898,21 @@ namespace SIL.PublishingSolution
 
         }
 
+        private StringBuilder MakeFootnoteStyle(string characterStyle)
+        {
+            StringBuilder footnoteStyle = new StringBuilder();
+            footnoteStyle.Append("<text:span ");
+            footnoteStyle.Append("text:style-name=\"" + characterStyle + "\">" + footnoteContent);
+            footnoteStyle.Append("</text:span>");
+            return footnoteStyle;
+        }
+
         private void WriteFootNoteMarker(string footerClassName, string content, string marker)
         {
-            string footerMark = footerClassName + "..footnote-marker";
-            string footCallSymb = string.Empty;
-            if (_footNoteMarker.ContainsKey(footerMark))
-                footCallSymb = _footNoteMarker[footerMark];
-
-            //if (_footNoteMarker[footerMark].IndexOf("#ChapterNumber") >= 0 &&
-            //        _footNoteMarker[footerMark].IndexOf("#VerseNumber") >= 0)
-            //{
-            //    if (_chapterNo != null)
-            //        if (_chapterNo.IndexOf(':') == -1) _chapterNo = _chapterNo + ":";
-            //    footCallSymb =
-            //        _structStyles.FootNoteMarker[footerMark].Replace("#ChapterNumber", _chapterNo).Replace(
-            //            "#VerseNumber", _verseNo) + " ";
-            //}
-
-            if (_footNoteMarker[footerMark].IndexOf('(') >= 0)
-            {
-                string attrName = _footNoteMarker[footerMark].Substring(
-                    _footNoteMarker[footerMark].IndexOf('(') + 1,
-                    _footNoteMarker[footerMark].Length -
-                    _footNoteMarker[footerMark].IndexOf('(') - 2);
-                footCallSymb = _reader.GetAttribute(attrName);
-                if (string.IsNullOrEmpty(_footCal))
-                    _footCal = " ";
-            }
+            string footerCall = footerClassName + "..footnote-call";
+            string footerMarker = footerClassName + "..footnote-marker";
+            if (IdAllClass.ContainsKey(footerCall) && String.IsNullOrEmpty(footCallSymb))
+                footCallSymb = IdAllClass[footerCall]["content"];
 
             _autoFootNoteCount++;
             _writer.WriteStartElement("text:note");
@@ -945,10 +925,11 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("text:note-body");
             _writer.WriteStartElement("text:p");
             _writer.WriteAttributeString("text:style-name", footerClassName);
-            if (marker != string.Empty)
+            if (marker != string.Empty && marker != footCallSymb)
             {
+                
                 _writer.WriteStartElement("text:span");
-                _writer.WriteAttributeString("text:style-name", "Footnote Characters");
+                _writer.WriteAttributeString("text:style-name", footerMarker);
                 _writer.WriteString(marker);
                 _writer.WriteEndElement();
             }
@@ -1014,7 +995,7 @@ namespace SIL.PublishingSolution
                         _anchorBookMarkName = string.Empty;
                         dataWritten = true;
                     }
-
+ 
                 }
             }
             return dataWritten;
@@ -1063,6 +1044,7 @@ namespace SIL.PublishingSolution
             Psuedo();
             VisibilityCheck();
             DropCaps();
+            SetFootnote();
             FooterSetup();
         }
 
@@ -1082,6 +1064,20 @@ namespace SIL.PublishingSolution
             else if (_tagType == "li")
             {
                 _writer.WriteStartElement("text:list-item");
+            }
+        }
+
+        private void SetFootnote()
+        {
+            string footerCall = _className + "..footnote-call";
+            if (IdAllClass.ContainsKey(footerCall))
+            {
+                footCallSymb = IdAllClass[footerCall]["content"];
+                if (footCallSymb.IndexOf('(') >= 0)
+                {
+                    string attrName = footCallSymb.Substring(footCallSymb.IndexOf('(') + 1, footCallSymb.Length - footCallSymb.IndexOf('(') - 2);
+                    footCallSymb = _reader.GetAttribute(attrName) + " ";
+                }
             }
         }
 
@@ -1138,41 +1134,7 @@ namespace SIL.PublishingSolution
                 _psuedoAfter[_childName] = _psuedoAfterStyle;
             }
         }
-        ///// <summary>
-        ///// To insert the Footnote symbol and the Text
-        ///// </summary>
-        ///// <param name="footCallSymb">FootNote call symbol</param>
-        ///// <param name="clsName">Class name for the FootNote</param>
-        ///// <param name="text">Text of FootNote</param>
-        ///// <param name="marker">Marker Format symbol added to boottom</param>
-        //private void InsertFootCall(string footCallSymb, string clsName, string text, string marker)
-        //{
-        //    if (_structStyles.ContentCounterReset.ContainsKey(clsName))
-        //        _autoFootNoteCount = 0;
-        //    _autoFootNoteCount++;
-        //    _writer.WriteStartElement("text:note");
-        //    _writer.WriteAttributeString("text:id", "ftn" + (_autoFootNoteCount));
-        //    _writer.WriteAttributeString("text:note-class", "footnote");
-        //    _writer.WriteStartElement("text:note-citation");
-        //    _writer.WriteAttributeString("text:label", footCallSymb);
-        //    _writer.WriteString(footCallSymb);
-        //    _writer.WriteEndElement();
-        //    _writer.WriteStartElement("text:note-body");
-        //    _writer.WriteStartElement("text:p");
-        //    _writer.WriteAttributeString("text:style-name", clsName);
-        //    if (marker != string.Empty)
-        //    {
-        //        _writer.WriteStartElement("text:span");
-        //        _writer.WriteAttributeString("text:style-name", "Footnote Characters");
-        //        _writer.WriteString(marker);
-        //        _writer.WriteEndElement();
-        //    }
-        //    _writer.WriteString(text);
-        //    _writer.WriteEndElement();
-        //    _writer.WriteEndElement();
-        //    _writer.WriteEndElement();
-        //}
-
+       
         private void EndElement()
         {
             _characterName = null;
