@@ -15,7 +15,7 @@ import wx, os, sys, glob
 import flex7Text as f7tx
 import ProgressGauge
 
-version = '0.1.2.502'
+version = '0.1.3.502'
 
 def create(parent):
     return TextExport(parent)

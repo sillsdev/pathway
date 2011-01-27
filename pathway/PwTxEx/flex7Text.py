@@ -75,6 +75,35 @@ class fwdata:
                 runs.append([runnode.attrib['ws'], text])
         return runs
     
+class WritingSystemFonts:
+    def __init__(self, proj):
+        self.ws = {}
+        myProj = os.path.join(ProjDir(), proj)
+        self.wsPath = os.path.join(myProj, "WritingSystemStore")
+        
+    def Add(self, ws):
+        if self.ws.has_key(ws):
+            return
+        fullName = os.path.join(self.wsPath, ws + ".ldml")
+        if os.path.isfile(fullName):
+            ldml = open(fullName).read()
+            begText = '<palaso:defaultFontFamily value="'
+            i = ldml.index(begText)
+            if i > 0:
+                i += len(begText)
+                j = ldml[i:].index('"')
+                self.ws[ws] = ldml[i:i + j]
+                
+    def AddList(self, runs):
+        for run in runs:
+            self.Add(run[0])
+                
+    def Css(self):
+        css = ''
+        for wsPair in self.ws.items():
+            css += 'span[lang="%s"] { font-family: "%s"; }\n' % wsPair
+        return css
+
 class xhtmlDoc:
     def __init__(self, title, css):
         self.xhtml = etree.Element(XHTML + "html", nsmap = NSMAP)
@@ -88,12 +117,13 @@ class xhtmlDoc:
         self.body = etree.SubElement(self.xhtml, XHTML + "body")
 
     def Book(self, runs):
-        book = self._DoChild(self.body, "div", "letHead")
-        self._DoRuns(book, runs, "div", "letter")
-        self.content = self._DoChild(self.body, "div", "letData")
+        for run in runs:
+            book = self._DoChild(self.body, "div", "mainTitle")
+            self._OneRun(book, run, "span", None)
+        self.content = self._DoChild(self.body, "div", "columns")
             
     def Paragraph(self, runs):
-        para = self._DoChild(self.content, "div", "entry")
+        para = self._DoChild(self.content, "div", "content")
         self._DoRuns(para, runs, "span", None)
         
     def Xhtml(self):
@@ -101,6 +131,9 @@ class xhtmlDoc:
     
     def _DoRuns(self, parent, runs, tag, tagClass):
         for run in runs:
+            self._OneRun(parent, run, tag, tagClass)
+
+    def _OneRun(self, parent, run, tag, tagClass):
             span = self._DoChild(parent, tag, tagClass)
             span.set("lang", run[0])
             span.text = run[1]
@@ -128,11 +161,16 @@ def TextExport(proj, progress):
     outName = '%s %d Texts.xhtml' % (proj, len(textNodes))
     xhtml = xhtmlDoc(outName, 'main.css')
     n = 0
+    ws = WritingSystemFonts(proj)
     for textNode in textNodes:
-        xhtml.Book(data.Names(textNode))
+        names = data.Names(textNode)
+        ws.AddList(names)
+        xhtml.Book(names)
         contGuid = data.ContentGuid(textNode)
         for paraGuid in data.TextParagraphGuids(contGuid):
-            xhtml.Paragraph(data.ParagraphRuns(paraGuid))
+            runs = data.ParagraphRuns(paraGuid)
+            ws.AddList(runs)
+            xhtml.Paragraph(runs)
         if progress != None:
             if progress.canceled:
                 break
@@ -146,33 +184,28 @@ def TextExport(proj, progress):
     fl.write(etree.tostring(xhtml.Xhtml(), encoding='UTF-8', xml_declaration=True))
     fl.close()
     fl = open("main.css", 'w')
-    fl.write(mainCss)
+    fl.write(mainCss % ws.Css())
     fl.close()
     return outName
 
 mainCss = '''
-.letHead {
-    column-count: 1;
-    clear: both;
-}
-.letter {
+.mainTitle {
     text-align: center;
-    width: 100%;
-    margin-top: 18pt;
-    margin-bottom: 18pt;
-    direction: ltr;
-    font-family: "Charis SIL", serif;	/* default Serif font */
     font-weight: bold;
     font-size: 24pt;
+    margin-top: 18pt;
+    margin-bottom: 6pt;
+    column-count: 1;
+    direction: ltr;
 }
-.letData {
+.columns {
     column-count: 2;   -moz-column-count: 2;
     column-gap: 1.5em; -moz-column-gap: 1.5em;
     column-fill: balance;
     text-align: left;
 }
-.entry {
-    font-family: "Charis SIL", serif;	/* default Serif font */
+.content {
+    /* font-family: "Charis SIL", serif;	 default Serif font */
     font-size: 12pt;	/* inherited */
     border-style: solid;
     border-top-width: 0pt;
@@ -185,6 +218,7 @@ mainCss = '''
     padding-bottom: 2pt;
     padding-top: 1pt;
 }
+%s
 '''
 
 def PwDir():
