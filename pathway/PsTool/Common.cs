@@ -972,6 +972,63 @@ namespace SIL.Tool
         }
         #endregion
 
+        #region StreamReplaceInFile(string filePath, string searchText, string replaceText)
+        /// <summary>
+        /// Stream-based version of ReplaceInFile. This uses a straight find/replace rather than a Regex
+        /// (which only works on strings) - if you don't need a full regex, this will keep your memory consumption
+        /// down.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="searchText"></param>
+        /// <param name="replaceText"></param>
+        static public void StreamReplaceInFile(string filePath, string searchText, string replaceText)
+        {
+            if (!File.Exists(filePath)) return;
+            var reader = new FileStream(filePath,FileMode.Open);
+            var writer = new FileStream(filePath + ".tmp", FileMode.Create);
+            int next;
+            while ((next = reader.ReadByte()) != -1)
+            {
+                byte b = (byte)next;
+                if (b == searchText[0]) // first char in search text?
+                {
+                    // yes - searchText.Length chars into a buffer and compare them
+                    int len = searchText.Length;
+                    long pos = reader.Position;
+                    byte[] buf = new byte[len];
+                    buf[0] = b;
+                    if (reader.Read(buf, 1, (len - 1)) == -1)
+                    {
+                        // reached the end of file - write out what we hit and jump out of the while loop
+                        //                        writer.Write(new string(buf));
+                        continue;
+                    }
+                    string data = Encoding.UTF8.GetString(buf);
+                    if (String.Compare(searchText, data, true) == 0)
+                    {
+                        // found an instance of our search text - replace it with our replaceText
+                        writer.Write(Encoding.UTF8.GetBytes(replaceText), 0, replaceText.Length);
+                    }
+                    else
+                    {
+                        // not what we're looking for - just write it out
+                        reader.Position = pos;
+                        writer.WriteByte(b);
+                    }
+                }
+                else // not what we're looking for - just write it out
+                {
+                    writer.WriteByte(b);
+                }
+            }
+            reader.Close();
+            writer.Close();
+            // replace the original file with the new one
+            File.Delete(filePath);
+            File.Move((filePath + ".tmp"), filePath);
+        }
+        #endregion
+
         #region GetNewFolderName(string filePath, string folderName, string UserFileName)
         /// <summary>
         /// Return the New Folder Name after checking it whether its existing.

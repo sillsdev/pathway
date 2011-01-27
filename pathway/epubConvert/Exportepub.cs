@@ -198,12 +198,12 @@ namespace SIL.PublishingSolution
                 // TODO: remove this line when TE provides valid XHTML output.
                 //
                 // EDB 10/29/2010 FWR-2697 - remove when fixed in FLEx
-                Common.ReplaceInFile(preProcessor.ProcessedXhtml, "<LexSense_VariantFormEntryBackRefs", "<span class='LexSense_VariantFormEntryBackRefs'");
-                Common.ReplaceInFile(preProcessor.ProcessedXhtml, "<LexSense_RefsFrom_LexReference_Targets", "<span class='LexSense_RefsFrom_LexReference_Targets'");
-                Common.ReplaceInFile(preProcessor.ProcessedXhtml, "</LexSense_VariantFormEntryBackRefs", "</span");
-                Common.ReplaceInFile(preProcessor.ProcessedXhtml, "</LexSense_RefsFrom_LexReference_Targets", "</span");
+                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<LexSense_VariantFormEntryBackRefs", "<span class='LexSense_VariantFormEntryBackRefs'");
+                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<LexSense_RefsFrom_LexReference_Targets", "<span class='LexSense_RefsFrom_LexReference_Targets'");
+                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "</LexSense_VariantFormEntryBackRefs", "</span");
+                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "</LexSense_RefsFrom_LexReference_Targets", "</span");
                 // end EDB 10/29/2010
-                Common.ReplaceInFile(preProcessor.ProcessedXhtml, "<html", string.Format("<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'", langArray[0], getTextDirection(langArray[0])));
+                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html", string.Format("<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'", langArray[0], getTextDirection(langArray[0])));
                 // end EDB 10/22/2010
                 inProcess.PerformStep();
 
@@ -228,8 +228,8 @@ namespace SIL.PublishingSolution
                     // (note that the rev file uses a "FlexRev.css", not "main.css"
                     Common.SetDefaultCSS(revFile, defaultCSS);
                     // EDB 10/29/2010 FWR-2697 - remove when fixed in FLEx
-                    Common.ReplaceInFile(revFile, "<ReversalIndexEntry_Self", "<span class='ReversalIndexEntry_Self'");
-                    Common.ReplaceInFile(revFile, "</ReversalIndexEntry_Self", "</span");
+                    Common.StreamReplaceInFile(revFile, "<ReversalIndexEntry_Self", "<span class='ReversalIndexEntry_Self'");
+                    Common.StreamReplaceInFile(revFile, "</ReversalIndexEntry_Self", "</span");
                     // now split out the html as needed
                     List<string> fileNameWithPath = new List<string>();
                     fileNameWithPath = Common.SplitXhtmlFile(revFile, "letHead", "RevIndex", true);
@@ -1055,57 +1055,68 @@ namespace SIL.PublishingSolution
             string[] files = Directory.GetFiles(contentFolder, "*.xhtml");
             foreach (string file in files)
             {
+                // using a streaming approach to reduce the memory footprint of this method
+                // (we had Regex.Replace before, but it was using >100MB of data on larger dictionaries)
                 var reader = new StreamReader(file);
-                string content = reader.ReadToEnd();
+                var writer = new StreamWriter(file + ".tmp");
+                Int32 next;
+                while ((next = reader.Read()) != -1)
+                {
+                    char b = (char) next;
+                    if (b == '.') // found a period - is it a filename extension that we need to change?
+                    {
+                        // copy the period and the next 3 characters into a string
+                        int len = 4;
+                        char[] buf = new char[len];
+                        buf[0] = b;
+                        reader.Read(buf, 1, 3);
+                        string data = new string(buf);
+                        // is this an unsupported filename extension?
+                        switch (data)
+                        {
+                            case ".bmp":
+                            case ".ico":
+                            case ".wmf":
+                            case ".pcx":
+                            case ".cgm":
+                                // yes - replace with ".png"
+                                writer.Write(".png");
+                                break;
+                            case ".tif":
+                                // yes, but this could be either ".tif" or ".tiff" -
+                                // find out which one by peeking at the next character
+                                int nextchar = reader.Peek();
+                                if (((char) nextchar) == 'f')
+                                {
+                                    // ".tiff" case
+                                    reader.Read(); // move the reader up one position (consume the "f")
+                                    // replace with ".png"
+                                    writer.Write(".png");
+                                }
+                                else
+                                {
+                                    // ".tif" case - replace it with ".png"
+                                    writer.Write(".png");
+                                }
+                                break;
+                            default:
+                                // not an unsupported extension - just write the data we collected
+                                writer.Write(data);
+                                break;
+                        }
+                    }
+                    else // not a "."
+                    {
+                        writer.Write((char)next);
+                    }
+                }
                 reader.Close();
-                content = Regex.Replace(content, ".bmp", ".png");
-                content = Regex.Replace(content, ".tiff", ".png");
-                content = Regex.Replace(content, ".tif", ".png");
-                content = Regex.Replace(content, ".ico", ".png");
-                content = Regex.Replace(content, ".wmf", ".png");
-                content = Regex.Replace(content, ".pcx", ".png");
-                content = Regex.Replace(content, ".cgm", ".png");
-                var writer = new StreamWriter(file);
-                writer.Write(content);
                 writer.Close();
+                // replace the original file with the new one
+                File.Delete(file);
+                File.Move((file + ".tmp"), file);
             }
         }
-
-        private int GetChapterCount(string xhtmlFileName)
-        {
-            if (!File.Exists(xhtmlFileName))
-                Thread.Sleep(300);
-            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
-            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
-            XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
-            xmlDocument.Load(xmlReader);
-            xmlReader.Close();
-            XmlNamespaceManager xmlNamespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
-            xmlNamespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            XmlNodeList nodes;
-            if (_inputType.Equals("dictionary"))
-            {
-                // is this a reversal index or the normal dictionary stuff?
-                if (xhtmlFileName.Contains("FlexRev"))
-                {
-                    // reversal index - count the RevIndex nodes
-                    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='RevIndex']", xmlNamespaceManager);
-                }
-                else
-                {
-                    // main dictionary - count the letHead nodes
-                    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='letHead']", xmlNamespaceManager);
-                }
-            }
-            else
-            {
-                // Scripture - count the Chapter_Number nodex
-                nodes = xmlDocument.SelectNodes("//xhtml:span[@class='Chapter_Number']", xmlNamespaceManager);
-            }
-
-            return nodes == null ? 0 : nodes.Count;
-        }
-
 
         /// <summary>
         /// Loads the settings file and pulls out the values we look at.
