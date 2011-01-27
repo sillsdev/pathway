@@ -58,17 +58,19 @@ namespace SIL.PublishingSolution
             _cssClass = cssClass;
 
             supportFileFolder = Common.PathCombine(Common.GetPSApplicationPath(), "InDesignFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
-            strMacroPath = Common.PathCombine(supportFileFolder, "Scripts\\Startup Scripts\\PlaceFrames.jsx");
-
             //Create and copy file to temp folder
-            string tempFolder = Path.Combine(Common.GetApplicationDataPath(), "ToCopyMacro"); //TD-1740
-            string tempMacroFile = Path.Combine(tempFolder, Path.GetFileName(strMacroPath));
-            if (File.Exists(tempMacroFile))
-                File.Delete(tempMacroFile);
-            File.Copy(strMacroPath, tempMacroFile, true);
-            strMacroPath = tempMacroFile;
+            projInfo.TempOutputFolder = Common.PathCombine(Path.GetTempPath(), "InDesignFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
+            CopyFolderWithFiles(supportFileFolder, projInfo.TempOutputFolder);
+            strMacroPath = Common.PathCombine(projInfo.TempOutputFolder, "Scripts\\Startup Scripts\\PlaceFrames.jsx");
 
-            ReadFile(false, textContent);
+            try
+            {
+                ReadFile(false, textContent);
+            }
+            catch (Exception)
+            {
+                return;  // TODO Scripture has no macro!
+            }
 
             insertVariable.Add(GetColumnRule());
             insertVariable.Add(GetBorderRule());
@@ -77,11 +79,6 @@ namespace SIL.PublishingSolution
             insertVariable.Add(GetIndexTab(projInfo.ProjectInputType));
 
             WriteFile(textContent, insertVariable);
-
-            //Copy and delete the temp file
-            string appPath = Common.PathCombine(supportFileFolder, @"Scripts\Startup Scripts");
-            File.Copy(strMacroPath, Common.PathCombine(appPath, Path.GetFileName(strMacroPath)), true);
-            File.Delete(tempMacroFile);
 
             CopySupportFolder(projInfo);
         }
@@ -337,17 +334,11 @@ namespace SIL.PublishingSolution
         public void CopySupportFolder(PublicationInformation projInfo)
         {
             Common.SupportFolder = "";
-            string projType = projInfo.ProjectInputType;
             const string postPath = @"/en_US/Scripts";
-            string ScriptsFolderWithPath = Common.PathCombine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Adobe/InDesign/");
-            string versionName = GetVersionFolderName(ScriptsFolderWithPath);
-            ScriptsFolderWithPath = ScriptsFolderWithPath + versionName + postPath;
-            projInfo.TempOutputFolder = Common.PathCombine(Path.GetTempPath(), "InDesignFiles" + Path.DirectorySeparatorChar + projType);
-
-            // To Copy InDesign Folder 
-            CopyFolderWithFiles(supportFileFolder, projInfo.TempOutputFolder);
-            // To Copy Script Folder 
-            CopyFolderWithFiles(Common.PathCombine(supportFileFolder, "Scripts"), ScriptsFolderWithPath);
+            string scriptsFolderWithPath = Common.PathCombine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Adobe/InDesign/");
+            string versionName = GetVersionFolderName(scriptsFolderWithPath);
+            scriptsFolderWithPath = scriptsFolderWithPath + versionName + postPath;
+            CopyFolderWithFiles(Common.PathCombine(projInfo.TempOutputFolder, "Scripts"), scriptsFolderWithPath);
         }
 
         private static string GetVersionFolderName(string ScriptsFolderWithPath)

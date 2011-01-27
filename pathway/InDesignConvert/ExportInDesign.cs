@@ -14,17 +14,9 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
 using System.IO;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Windows.Forms;
-using System.Xml;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -36,7 +28,7 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                return "InDesign Alpha";
+                return "InDesign";
             }
         }
 
@@ -105,7 +97,7 @@ namespace SIL.PublishingSolution
             inPreferences.CreateIDPreferences(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), idAllClass);
 
             SubProcess.AfterProcess(projInfo.ProjectFileWithPath);
-            Compress(projInfo.TempOutputFolder, Common.PathCombine(projInfo.ProjectPath, fileName));
+            Compress(projInfo.TempOutputFolder, Common.PathCombine(projInfo.DictionaryPath, fileName));
 
             return true;
         }

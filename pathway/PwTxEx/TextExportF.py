@@ -15,14 +15,14 @@ import wx, os, sys, glob
 import flex7Text as f7tx
 import ProgressGauge
 
-version = '0.1.3.502'
+version = '0.1.4.508'
 
 def create(parent):
     return TextExport(parent)
 
-[wxID_TEXTEXPORT, wxID_TEXTEXPORTLISTBOX1, wxID_TEXTEXPORTOK, 
- wxID_TEXTEXPORTSTATICTEXT1, 
-] = [wx.NewId() for _init_ctrls in range(4)]
+[wxID_TEXTEXPORT, wxID_TEXTEXPORTINDESIGN, wxID_TEXTEXPORTLISTBOX1, 
+ wxID_TEXTEXPORTOK, wxID_TEXTEXPORTSTATICTEXT1, 
+] = [wx.NewId() for _init_ctrls in range(5)]
 
 class TextExport(wx.Frame):
     def _init_ctrls(self, prnt):
@@ -45,6 +45,10 @@ class TextExport(wx.Frame):
               style=0)
         self.Ok.Bind(wx.EVT_BUTTON, self.OnOkButton, id=wxID_TEXTEXPORTOK)
 
+        self.inDesign = wx.RadioButton(id=wxID_TEXTEXPORTINDESIGN,
+              label='InDesign', name='inDesign', parent=self, pos=wx.Point(208,
+              16), size=wx.Size(72, 16), style=0)
+
     def __init__(self, parent):
         self._init_ctrls(parent)
         self.SetTitle('%s %s' % (self.GetTitle(), version))
@@ -55,6 +59,7 @@ class TextExport(wx.Frame):
             if os.path.isdir(n):
                 self.projs.append(os.path.basename(n))
         self.listBox1.Set(self.projs)
+        self.inDesign.SetValue(True)
 
     def OnOkButton(self, event):
         sel = self.listBox1.GetSelection()
@@ -63,7 +68,7 @@ class TextExport(wx.Frame):
             pg.Show()
             pg.Update()
             try:
-                f7tx.ProcessProj(self.projs[sel], pg)
+                f7tx.ProcessProj(self.projs[sel], pg, self.inDesign.GetValue())
             except f7tx.MissingSoftware, e:
                 dlg = wx.MessageDialog(self, 'Please install %s' % e.value, 'Missing Software', wx.OK | wx.ICON_ERROR)
                 try:
@@ -79,11 +84,6 @@ class TextExport(wx.Frame):
                     dlg.Destroy()
                     pg.Destroy()
                     return
-            dlg = wx.MessageDialog(self, 'To see the results in InDesign, save as RTF. Launch InDesign and used <ctrl/D> and shift-Insert', 'Next Steps', wx.OK | wx.ICON_INFORMATION)
-            try:
-                dlg.ShowModal()
-            finally:
-                dlg.Destroy()
             self.Destroy()
         else:
             dlg = wx.MessageDialog(self, 'Please select a project', 'Error', wx.OK | wx.ICON_ERROR)

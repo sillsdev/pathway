@@ -147,9 +147,15 @@ namespace SIL.Tool
         public static void AfterProcess(string outFullName)
         {
             const string AfterProcess = "AfterPwConvert.bat";
-            string processFolder = GetProcessFolder(outFullName);
-            if (File.Exists(Path.Combine(processFolder, AfterProcess)))
-                Run(processFolder, AfterProcess, '"' + outFullName + '"', true);
+            try
+            {
+                string processFolder = GetProcessFolder(outFullName);
+                if (File.Exists(Path.Combine(processFolder, AfterProcess)))
+                    Run(processFolder, AfterProcess, '"' + outFullName + '"', true);
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }

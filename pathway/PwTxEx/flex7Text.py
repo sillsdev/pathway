@@ -229,27 +229,30 @@ def PwDir():
     projPath, projPathType = _winreg.QueryValueEx(pwKeys, 'PathwayDir')
     return projPath
 
-def LaunchOpenOffice(proj, outName):
+def Launch(proj, outName, inDesign):
     os.chdir(PwDir())
     projDir = os.path.join(ProjDir(), proj)
     folder = os.path.join(projDir, FOLDER)
     xhtml = os.path.join(folder, outName)
     css = os.path.join(folder, "main.css")
-    pathwayb = os.popen('PathwayB -x "%s" -c "%s" -l' % (xhtml, css))
+    backend = ''
+    if inDesign:
+        backend = '-t InDesign'
+    pathwayb = os.popen('PathwayB -x "%s" -c "%s" -l %s' % (xhtml, css, backend))
     res = pathwayb.read()
     fl = open(os.path.join(projDir, "PathwayB.log"), 'w')
     fl.write(res)
     fl.close()
 
-def ProcessProj(proj, progress=None):
+def ProcessProj(proj, progress=None, inDesign=True):
     outName = TextExport(proj, progress)
     if progress:
         parent = progress.GetParent()
         parent.Produced(os.path.join(os.path.join(os.path.join(ProjDir(), proj), FOLDER), outName))
-    LaunchOpenOffice(proj, outName)
+    Launch(proj, outName, inDesign)
 
 def main():
-    proj = 'AkooseDic'
+    proj = 'Sena 3'
     ProcessProj(proj)
 
 if __name__ == '__main__':
