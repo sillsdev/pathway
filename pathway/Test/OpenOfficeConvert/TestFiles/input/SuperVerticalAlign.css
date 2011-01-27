@@ -1,0 +1,24 @@
+.a{
+ font-size: 20pt;
+  font-weight: bold;
+}
+
+.b {
+    vertical-align: super;
+}
+
+.c
+{
+ font-size: 10pt;
+ vertical-align: super;
+}
+
+.d {
+    font-size: 50%;
+    vertical-align: sub;
+}
+
+.e {
+    font-size: 2em;
+    vertical-align: super;
+}
