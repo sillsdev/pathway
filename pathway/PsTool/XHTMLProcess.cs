@@ -748,7 +748,7 @@ namespace SIL.PublishingSolution
         {
             if (_outputType == Common.OutputType.ODT)
             {
-                if(_parentStyleName == "body") return styleName;
+                //if(_parentStyleName == "body") return styleName;
 
                 string newStyleName = styleName + Common.SepParent + _parentStyleName;
                 return newStyleName;
