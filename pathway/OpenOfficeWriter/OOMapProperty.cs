@@ -337,15 +337,15 @@ namespace SIL.PublishingSolution
 
         public void LineHeight(string propertyValue)
         {
-            _propertyKey = "line-height";
-            //const bool lineHeight = false;
-            //propertyValue = FontHeight(propertyValue, lineHeight);
-            //if (propertyValue == null)
-            //{
-            //    _propertyKey = "";
-            //}
-            _IDProperty[_propertyKey] = Add_pt(propertyValue);
-
+            _propertyKey = "line-spacing";
+            if (propertyValue.IndexOf("%") > 0)
+            {
+                _IDProperty[_propertyKey] = propertyValue; // refer xhtmlprocess.AssignProperty()
+            }
+            else
+            {
+                _IDProperty[_propertyKey] = Add_pt(propertyValue);
+            }
         }
         public void VerticalAlign(string propertyValue)
         {
@@ -401,7 +401,11 @@ namespace SIL.PublishingSolution
                     value = value * 2;
                     _IDProperty["font-size"] = value + "%";
                 }
-                else if (propertyValue == "smaller" || propertyValue == "larger")
+                else if (propertyValue == "smaller")
+                {
+                    _IDProperty["font-size"] = "100%";
+                }
+                else if (propertyValue == "larger")
                 {
                     _IDProperty["font-size"] = "200%";
                 }

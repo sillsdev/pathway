@@ -901,7 +901,65 @@ namespace SIL.PublishingSolution
             }
         }
 
+        
+
         private void AssignProperty(string cssStyleName, float ancestorFontSize)
+        {
+            if (!IdAllClass.ContainsKey(cssStyleName))
+            {
+                return;
+            }
+            foreach (KeyValuePair<string, string> property in IdAllClass[cssStyleName])
+            {
+                if (_tempStyle.ContainsKey(property.Key)) continue;
+
+                if (_outputType == Common.OutputType.ODT && property.Key == "line-spacing")
+                {
+                    string without_pt = property.Value.Replace("pt", "");
+                    float value = float.Parse(without_pt.Replace("%", ""));
+                    float lineHeight = 0;
+                    if (property.Value.IndexOf("%") > 0)
+                    {
+                        lineHeight = (value - 100) * ancestorFontSize / 100;
+                        lineHeight = lineHeight / 2;
+                    }
+                    else if (property.Value.IndexOf("pt") > 0)
+                    {
+                        lineHeight = (value - ancestorFontSize) / 2;
+                    }
+                    if (lineHeight > 0)
+                    {
+                        _tempStyle[property.Key] = lineHeight + "pt";
+                    }
+                }
+                else if (property.Value.IndexOf("%") > 0)
+                {
+                    float value = float.Parse(property.Value.Replace("%", ""));
+                    _tempStyle[property.Key] = (ancestorFontSize * value / 100).ToString();
+                    const string point = "pt";
+                    if (_outputType == Common.OutputType.ODT)
+                    {
+                        if (property.Key == "column-gap") // For column-gap: 2em; change the value as (-ve)
+                        {
+                            _dictColumnGapEm["Sect_" + _className.Trim()]["columnGap"] = _tempStyle[property.Key] + "pt";
+                            _tempStyle[property.Key] = (-ancestorFontSize * value / 100).ToString();
+                        }
+                        else
+                        {
+                            float size = ancestorFontSize * value / 100;
+                            _tempStyle[property.Key] = size + point;
+                        }
+                    }
+                }
+                else
+                {
+                    _tempStyle[property.Key] = property.Value;
+                }
+            }
+            WordCharSpace(ancestorFontSize);
+        }
+
+        private void AssignPropertyOLD(string cssStyleName, float ancestorFontSize)
         {
             if (!IdAllClass.ContainsKey(cssStyleName))
             {
@@ -914,15 +972,15 @@ namespace SIL.PublishingSolution
                 if (property.Value.IndexOf("%") > 0)
                 {
                     float value = float.Parse(property.Value.Replace("%", ""));
-                    _tempStyle[property.Key] = (ancestorFontSize * value / 100).ToString() ;
+                    _tempStyle[property.Key] = (ancestorFontSize * value / 100).ToString();
                     const string point = "pt";
                     if (_outputType != Common.OutputType.IDML)
                     {
-                        float size = ancestorFontSize*value/100;
+                        float size = ancestorFontSize * value / 100;
                         if (property.Key == "line-height")
                         {
                             float basepoint = size - ancestorFontSize;
-                            if (basepoint <= 0 ) 
+                            if (basepoint <= 0)
                                 basepoint = ancestorFontSize; // if 1eem or 0em
                             else if (basepoint < ancestorFontSize)
                                 basepoint = size; // 110%
