@@ -354,6 +354,7 @@ namespace SIL.PublishingSolution
                 if (propertyValue == "super" || propertyValue == "sub")
                 {
                     _propertyKey = "text-position";
+                    SuperSub();
                 }
                 else if (propertyValue == "text-top")
                 {
@@ -376,6 +377,34 @@ namespace SIL.PublishingSolution
             }
             catch
             {
+            }
+        }
+
+        /// <summary>
+        /// Superscript and Subscript
+        /// </summary>
+        public void SuperSub()
+        {
+            if (_IDProperty.ContainsKey("font-size"))
+            {
+                string propertyValue = _IDProperty["font-size"];
+                
+                if (propertyValue.IndexOf("pt")>0)
+                {
+                    int value = int.Parse(propertyValue.Replace("pt", ""));
+                    value = value*2;
+                    _IDProperty["font-size"] = value + "pt";
+                }
+                else if (propertyValue.IndexOf("%")>0)
+                {
+                    int value = int.Parse(propertyValue.Replace("%", ""));
+                    value = value * 2;
+                    _IDProperty["font-size"] = value + "%";
+                }
+            }
+            else
+            {
+                _IDProperty["font-size"] = "200%";
             }
         }
 
