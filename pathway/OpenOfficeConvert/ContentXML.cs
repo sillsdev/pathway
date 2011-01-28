@@ -201,6 +201,7 @@ namespace SIL.PublishingSolution
 
         private void CreateFontLanguageMap()
         {
+            if (Common.Testing) return;
             string f7Path = Common.PathCombine(Common.GetFiledWorksPathVersion(), "Projects\\" + Common.databaseName + "\\WritingSystemStore");
             fontLangMap = Common.FillMappedFonts(f7Path, fontLangMap);
             //MessageBox.Show("Common.databaseName -> " + Common.databaseName + " = " + f7Path + fontLangMap.Count);

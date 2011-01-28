@@ -441,13 +441,17 @@ namespace TestBed
 
 
             projInfo.FinalOutput = "odt";
-            projInfo.ProjectInputType = ProjType;
+            
             projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
             projInfo.DictionaryPath = Path.GetDirectoryName(txtInputPath.Text);
             projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
             projInfo.DefaultCssFileWithPath = txtCSSInput.Text;
             projInfo.ProgressBar = new ProgressBar();
             projInfo.DictionaryOutputName = "test";
+
+            ProjType = Common.GetProjectType(projInfo.DefaultXhtmlFileWithPath);
+            projInfo.ProjectInputType = ProjType;
+
             exportOdt.Export(projInfo);
         }
 

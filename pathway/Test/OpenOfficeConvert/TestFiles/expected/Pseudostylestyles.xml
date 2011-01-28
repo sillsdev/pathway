@@ -9,7 +9,6 @@
     <style:font-face style:name="Tahoma" svg:font-family="'Tahoma'" style:font-family-generic="system" style:font-pitch="variable" />
     <style:font-face style:name="Scheherazade Graphite Alpha" svg:font-family="'Scheherazade Graphite Alpha'" />
     <style:font-face style:name="Latha" svg:font-family="'Latha'" />
-    <style:font-face style:name="Times New Roman" svg:font-family="Times New Roman" style:font-family-generic="roman" style:font-pitch="variable" />
   </office:font-face-decls>
   <office:styles>
     <style:style style:name="entry_letData" style:family="paragraph" style:parent-style-name="letData" />
@@ -50,10 +49,10 @@
       <style:text-properties fo:color="#008000" fo:font-size="15pt" style:font-size-complex="15pt" />
     </style:style>
     <style:style style:name="number_.en_headword_.bzh_entry_letData" style:family="text" style:parent-style-name="headword_.bzh_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:color="#ee82ee" fo:font-size="25pt" style:font-size-complex="25pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
+      <style:text-properties fo:color="#ee82ee" fo:font-size="25pt" style:font-size-complex="25pt" fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
     </style:style>
     <style:style style:name="number_.en_headword_.bzh_entry" style:family="text" style:parent-style-name="headword_.bzh_entry" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:color="#ee82ee" fo:font-size="25pt" style:font-size-complex="25pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
+      <style:text-properties fo:color="#ee82ee" fo:font-size="25pt" style:font-size-complex="25pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" fo:language="en" fo:country="US" />
     </style:style>
     <style:style style:name="number" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:text-properties fo:color="#ee82ee" fo:font-size="25pt" style:font-size-complex="25pt" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
