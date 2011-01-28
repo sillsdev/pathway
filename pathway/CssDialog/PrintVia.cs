@@ -592,7 +592,7 @@ namespace SIL.PublishingSolution
 
         private void ChkAvoidOdtCrashMouseHover(object sender, EventArgs e)
         {
-            tt_PrintVia.SetToolTip(chkAvoidOdtCrash, " Large files may crash on exit after saving. \n Eliminating the style sheet solved this problem but doesn't allow user to change the styles. \n So initially leave this box unchecked, but if Open Office is crashing, \n you can probably avoid crashing by checking this box.");
+            tt_PrintVia.SetToolTip(chkAvoidOdtCrash, "Large files (500 or more pages) can cause Open Office to crash after a Save operation.\nIf you experience crashes, select this option to eliminate the stylesheet and apply the style\nattributes as direct formatting. This makes subsequent formatting changes inconvenient.");
         }
 
         private void chkPolicy_CheckedChanged(object sender, EventArgs e)
