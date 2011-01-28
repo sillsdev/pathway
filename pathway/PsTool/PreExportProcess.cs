@@ -88,9 +88,9 @@ namespace SIL.Tool
             const string tempString = "\"T_em.pz726h\"";
             const string reversalString = "\"reversal-form\"";
             const string headwordString = "\"headword\"";
-            Common.ReplaceInFile(_xhtmlFileNameWithPath, reversalString, tempString);
-            Common.ReplaceInFile(_xhtmlFileNameWithPath, headwordString, reversalString);
-            Common.ReplaceInFile(_xhtmlFileNameWithPath, tempString, headwordString);
+            Common.StreamReplaceInFile(_xhtmlFileNameWithPath, reversalString, tempString);
+            Common.StreamReplaceInFile(_xhtmlFileNameWithPath, headwordString, reversalString);
+            Common.StreamReplaceInFile(_xhtmlFileNameWithPath, tempString, headwordString);
         }
 
         private bool ClassPos(string ss, int findPos)
@@ -116,7 +116,7 @@ namespace SIL.Tool
         {
             string searchText = "class=\"\\\\";
             string replaceText = "class=\"REVERSESOLIDUS";
-            Common.ReplaceInFile(_xhtmlFileNameWithPath, searchText, replaceText);
+            Common.StreamReplaceInFile(_xhtmlFileNameWithPath, searchText, replaceText);
 
             searchText = "class=\"([\\\\]*\\w+)[*]";
             replaceText = "class = \"$1ASTERISK";

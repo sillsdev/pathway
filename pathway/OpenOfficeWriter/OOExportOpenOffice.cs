@@ -228,13 +228,13 @@ namespace SIL.PublishingSolution
                     break;
 
             }
-            Common.ReplaceInFile(newTempXslfile, filterParameter, filterXpath);
+            Common.StreamReplaceInFile(newTempXslfile, filterParameter, filterXpath);
         }
 
         private void ReplaceNamespace(string xmlFile)
         {
             string nameSpace = "xmlns=\"http://www.w3.org/1999/XSL/Transform\"";
-            Common.ReplaceInFile(xmlFile, nameSpace, ""); // replacing the namespace with empty
+            Common.StreamReplaceInFile(xmlFile, nameSpace, ""); // replacing the namespace with empty
         }
 
 

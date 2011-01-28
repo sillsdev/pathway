@@ -135,11 +135,11 @@ namespace SIL.PublishingSolution
                 revFullName = "";
             else
             {
-                Common.ReplaceInFile(revFullName, "<ReversalIndexEntry_Self>", "");
-                Common.ReplaceInFile(revFullName, "</ReversalIndexEntry_Self>", "");
-                Common.ReplaceInFile(revFullName, "class=\"headword\"", "class=\"headref\"");
+                Common.StreamReplaceInFile(revFullName, "<ReversalIndexEntry_Self>", "");
+                Common.StreamReplaceInFile(revFullName, "</ReversalIndexEntry_Self>", "");
+                Common.StreamReplaceInFile(revFullName, "class=\"headword\"", "class=\"headref\"");
                 string revCssFullName = revFullName.Substring(0, revFullName.Length - 6) + ".css";
-                Common.ReplaceInFile(revCssFullName, ".headword", ".headref");
+                Common.StreamReplaceInFile(revCssFullName, ".headword", ".headref");
             }
             return revFullName;
         }
