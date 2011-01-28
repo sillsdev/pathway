@@ -401,7 +401,12 @@ namespace SIL.PublishingSolution
                     value = value * 2;
                     _IDProperty["font-size"] = value + "%";
                 }
+                else if (propertyValue == "smaller" || propertyValue == "larger")
+                {
+                    _IDProperty["font-size"] = "200%";
+                }
             }
+
             else
             {
                 _IDProperty["font-size"] = "200%";
