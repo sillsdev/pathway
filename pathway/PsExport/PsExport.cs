@@ -133,6 +133,14 @@ namespace SIL.PublishingSolution
             string revFullName = Common.PathCombine(outDir, "FlexRev.xhtml");
             if (!File.Exists(revFullName))
                 revFullName = "";
+            else
+            {
+                Common.ReplaceInFile(revFullName, "<ReversalIndexEntry_Self>", "");
+                Common.ReplaceInFile(revFullName, "</ReversalIndexEntry_Self>", "");
+                Common.ReplaceInFile(revFullName, "class=\"headword\"", "class=\"headref\"");
+                string revCssFullName = revFullName.Substring(0, revFullName.Length - 6) + ".css";
+                Common.ReplaceInFile(revCssFullName, ".headword", ".headref");
+            }
             return revFullName;
         }
 
