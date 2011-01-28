@@ -15,7 +15,7 @@ import wx, os, sys, glob
 import flex7Text as f7tx
 import ProgressGauge
 
-version = '0.1.4.508'
+version = '0.1.5.523'
 
 def create(parent):
     return TextExport(parent)
@@ -33,8 +33,8 @@ class TextExport(wx.Frame):
         self.SetClientSize(wx.Size(311, 408))
 
         self.staticText1 = wx.StaticText(id=wxID_TEXTEXPORTSTATICTEXT1,
-              label='Coose Project', name='staticText1', parent=self,
-              pos=wx.Point(16, 16), size=wx.Size(79, 16), style=0)
+              label='Choose Project', name='staticText1', parent=self,
+              pos=wx.Point(16, 16), size=wx.Size(86, 16), style=0)
 
         self.listBox1 = wx.ListBox(choices=[], id=wxID_TEXTEXPORTLISTBOX1,
               name='listBox1', parent=self, pos=wx.Point(16, 40),
@@ -45,9 +45,10 @@ class TextExport(wx.Frame):
               style=0)
         self.Ok.Bind(wx.EVT_BUTTON, self.OnOkButton, id=wxID_TEXTEXPORTOK)
 
-        self.inDesign = wx.RadioButton(id=wxID_TEXTEXPORTINDESIGN,
-              label='InDesign', name='inDesign', parent=self, pos=wx.Point(208,
-              16), size=wx.Size(72, 16), style=0)
+        self.inDesign = wx.CheckBox(id=wxID_TEXTEXPORTINDESIGN,
+              label='InDesign', name='inDesign', parent=self, pos=wx.Point(200,
+              16), size=wx.Size(82, 16), style=0)
+        self.inDesign.SetValue(True)
 
     def __init__(self, parent):
         self._init_ctrls(parent)
@@ -59,7 +60,6 @@ class TextExport(wx.Frame):
             if os.path.isdir(n):
                 self.projs.append(os.path.basename(n))
         self.listBox1.Set(self.projs)
-        self.inDesign.SetValue(True)
 
     def OnOkButton(self, event):
         sel = self.listBox1.GetSelection()
