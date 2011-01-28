@@ -57,20 +57,17 @@ namespace SIL.PublishingSolution
                 projInfo.ProjectInputType = "Dictionary"; //TODO
             _cssClass = cssClass;
 
-            supportFileFolder = Common.PathCombine(Common.GetPSApplicationPath(), "InDesignFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
             //Create and copy file to temp folder
+            supportFileFolder = Common.PathCombine(Common.GetPSApplicationPath(), "InDesignFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
             projInfo.TempOutputFolder = Common.PathCombine(Path.GetTempPath(), "InDesignFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
             CopyFolderWithFiles(supportFileFolder, projInfo.TempOutputFolder);
-            strMacroPath = Common.PathCombine(projInfo.TempOutputFolder, "Scripts\\Startup Scripts\\PlaceFrames.jsx");
 
-            try
-            {
-                ReadFile(false, textContent);
-            }
-            catch (Exception)
-            {
-                return;  // TODO Scripture has no macro!
-            }
+            //Same macro is used for dictionary and scripture
+            var scriptsFolder = Common.PathCombine(Common.GetPSApplicationPath(), "InDesignFiles/Dictionary/Scripts");
+            CopyFolderWithFiles(scriptsFolder, Common.PathCombine(projInfo.TempOutputFolder, "scripts"));
+
+            strMacroPath = Common.PathCombine(projInfo.TempOutputFolder, "Scripts/Startup Scripts/PlaceFrames.jsx");
+            ReadFile(false, textContent);
 
             insertVariable.Add(GetColumnRule());
             insertVariable.Add(GetBorderRule());
