@@ -1856,8 +1856,6 @@ namespace SIL.PublishingSolution
                     _writer.WriteEndElement(); // for Textframe
                     isImage = false;
                     _imageClass = "";
-                    _isParagraphClosed = false;
-                    _isNewParagraph = true;
                 }
             }
         }
