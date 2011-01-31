@@ -23,6 +23,14 @@ namespace SIL.PublishingSolution
         private int _specificityWeightage;
         public ArrayList cssBorderColor;
         private bool _setDefaultPageValue = true;
+        public Common.OutputType OutputType;
+
+         #region Constructor
+        public CssTree()
+        {
+            OutputType = Common.OutputType.IDML; 
+        }
+        #endregion
 
         public Dictionary<string, Dictionary<string, string>> CreateCssProperty(string cssSourceFile, bool setDefaultPageValue)
         {
@@ -83,8 +91,16 @@ namespace SIL.PublishingSolution
 
             //para
             propertyName = new Dictionary<string, string>();
-            propertyName["padding-top"] = "12";
-            propertyName["padding-bottom"] = "12";
+            if (OutputType == Common.OutputType.ODT)
+            {
+                propertyName["margin-top"] = "6";
+                propertyName["margin-bottom"] = "6";
+            }
+            else
+            {
+                propertyName["padding-top"] = "12";
+                propertyName["padding-bottom"] = "12";
+            }
             defaultTagProperty["p"] = propertyName;
 
 
