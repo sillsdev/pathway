@@ -118,10 +118,10 @@ namespace Test.CssParserTest
             _input.StringValue = "1,m";
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
-            _expected.Add("margin-top", "0");
-            _expected.Add("margin-right", "0");
-            _expected.Add("margin-bottom", "0");
-            _expected.Add("margin-left", "0");
+            _expected.Add("margin-top", "1");
+            _expected.Add("margin-right", "1");
+            _expected.Add("margin-bottom", "1");
+            _expected.Add("margin-left", "1");
             string error = _input.Name + ":" + _input.StringValue;
             Assert.IsTrue(CompareDictionary(), error);
 

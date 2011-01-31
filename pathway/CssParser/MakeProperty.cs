@@ -725,20 +725,24 @@ namespace SIL.PublishingSolution
         {
             var ParamList = new ArrayList();
             string[] parameters = styleAttributeInfo.StringValue.Split(',');
-            for (int i = 0; i < parameters.Length; i++)
+            int length = parameters.Length;
+            for (int i = 0; i < length; i++)
             {
-                string unit = parameters[i + 1];
-                if ((i == parameters.Length - 1 || !_unit.Contains(unit)) && parameters[i] != "0")
+                string value = parameters[i];
+                if (!Common.ValidateNumber(value))
+                    continue;
+                string unit = "pt";
+                if (i < length - 1)
                 {
-                    ParamList.Add("0");
-                    break;
+                    string nextVal = parameters[i + 1];
+                    if (_unit.Contains(nextVal))
+                    {
+                        unit = nextVal;
+                        i++;
+                    }
                 }
-                if (!_unit.Contains(unit))
-                    unit = "";
-                ParamList.Add(Common.UnitConverter(parameters[i] + unit));
-                if (!_unit.Contains(unit))
-                    i--;
-                i++;
+                ParamList.Add(Common.UnitConverter(value + unit));
+
             }
             return ParamList;
         }

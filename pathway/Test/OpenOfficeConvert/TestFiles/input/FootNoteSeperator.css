@@ -1,0 +1,236 @@
+@page {
+  marks: crop cross ;
+  size: 5in 8in portrait;
+  font: 10pt Gentium, Georgia, serif;
+  line-height: 13;
+  
+@top-center {
+    margin: 13pt 24pt 0 18pt;
+    content: string(bookx, start) " "  string(chapterx, start) ":" string(versex, start)  " — "  string(chapterx, last) ":" string(versex, last);
+}
+
+@footnotes {
+  border-top: thin solid black;
+  padding: 0.3em 0;
+  margin-top: 0.6em;
+  margin-left: 2pi;
+}
+}
+
+@page :first {
+  margin: 4pc 2pc 2pc 1.5pc;
+  @top-center { content: normal}
+}
+
+ @page :left {
+    margin: 4pc 1.5pc 2pc 2pc;
+    @bottom-left {
+      content: counter(page);
+}
+}
+@page :right {
+  margin: 4pc 2pc 2pc 1.5pc;
+  @bottom-right {
+    content: counter(page);
+}
+}
+@page :first {
+    @bottom-right {
+      content: normal;
+}
+}
+
+@page cover_page{
+ @top-center {
+    content: normal;
+}   
+ @bottom-right {
+    content: normal;
+}
+ @bottom-left {
+    content: normal;
+}
+}
+
+div.introduction{
+  font-style:italic;
+  border-bottom-width: 1pt;
+  border-bottom-style:solid;
+  padding: 0 0 6pt 0;
+  margin: 0 0 6pt 0;
+}
+
+div.scriptureText{columns:2;
+  column-gap:6pt;
+  column-fill: balance;
+  prince-hyphenate-patterns: url("../hyphen-nfa.txt") ;
+  hyphens: auto ;
+  hyphenate-before: 2;
+  hyphenate-after: 3; 
+  hyphenate-lines: 1; 
+  widows:2;
+  ophans:2;
+}
+
+oxes, oxesText, chapter, section, title, sectionHead {
+  display: block;
+}
+
+header { display: none}
+
+/* replacement of strings */
+div.scriptureText {
+  prince-text-replace:   
+  
+/*   "'"                 "\2019" */ 
+/* ligatures */
+    'fi'		'&#xFB01;yyy'
+    'fl'		'&#xFB02;xxx'
+}
+
+p.parallelPassage  {
+  font-size: 9pt;
+  font-family: arial, helvetica, sans-serif;
+  text-indent:0;
+  margin: 0;
+  line-height: 13pt;
+  page-break-after: avoid;
+  text-align: left;
+}
+
+ p { font-size: 10pt; 
+    text-indent: 2em;
+    padding: 0;
+    margin:0;
+    text-align: justify; text-justify: newspaper;
+    line-height: 13pt;
+}
+ p.first { 
+    text-indent: 0em;
+    padding: 0;
+    margin:0;
+}
+/* poetry */
+li{
+  line-height: 13pt;
+}
+li.level1 {  
+    text-indent: -3em;
+    margin-left: 4em; 
+    list-style-type: none;
+    page-break-inside:avoid; 
+}
+li.level2 {  
+    text-indent: -2em;
+    margin-left: 4em; 
+    list-style-type: none;
+    page-break-inside:avoid;
+}
+li.level3{
+    text-indent: -1em;
+    margin-left: 4em; 
+    list-style-type: none;
+    page-break-inside:avoid;
+}
+
+div.caption{
+  margin: 0;
+  width:auto;
+  font-size:8pt;
+  padding: 0;
+  position:relative;
+/*  top: -3pt; */
+  border-style: solid;
+border-color: #abcdef;
+border-width: 0 1px 0;
+}
+
+.crossReference{
+ display: none;
+  display: footnote;
+  display: prince-footnote;
+  position: footnote;
+  list-style-position:inside;
+  font-size: 9pt;
+  line-height: none;
+  font-family:arial, helvetica, sans-serif;
+  color: black;
+  text-align: left;
+  text-indent: 0;
+  margin-left: 2em;
+  font-weight: normal;
+}
+.footnote {
+  display: none;
+  display: footnote;
+  display: prince-footnote;
+  position: footnote;
+  list-style-position: inside;
+  font-size: 9pt;
+  line-height: none;
+  font-family: arial, helvetica, sans-serif;
+  color: black;
+  text-align:left;
+  text-indent: 0;
+  margin-left: 2em; 
+  font-weight: normal;
+}
+
+.crossReference::footnote-call {
+  color:purple;
+  content: '\2020' ' ';
+  font-size: 6pt;
+  vertical-align: super;
+  line-height: none;
+}
+
+.footnote::footnote-call {
+  color:purple;
+  content: '\2021' ' ';
+  font-size: 6pt;
+  vertical-align: super;
+  line-height: none;
+}
+.footnote::footnote-marker {
+    font-size: 10pt;
+    font-weight: bold;
+   content: string(chapterx) ":" string(versex) ' =  ' ;
+   text-align: left;
+}
+
+.crossReference::footnote-marker {
+   font-size: 10pt;
+   font-weight: bold;
+   content: string(chapterx) ":" string(versex) ' =  ' ;
+   text-align:left;
+}
+
+span{
+  line-height: 13pt;
+}
+
+.chapterNumber {
+  string-set: chapterx content();
+  float:left;
+  vertical-align: top;
+  color:#D4D4C7;
+  font-size:28pt;
+  line-height: 26pt;
+  margin: 0;
+  padding: 0 0.5em 0 0;
+  font-family:sans-serif;
+} 
+ 
+.verseNumber {
+  string-set: versex content();
+  font-family: san-serif;
+  font-size: 8pt;
+  vertical-align: top;
+  color: purple;
+  margin: 0;
+  padding-top: 0pt;  
+  padding-right: 0.5pt; 
+  padding-bottom: 0;
+  padding-left:0;
+}
+

@@ -267,6 +267,9 @@ namespace SIL.PublishingSolution
                 _allPageLayoutProperty.Add("background-color", "fo:");
                 _allPageLayoutProperty.Add("border-bottom", "fo:");
                 _allPageLayoutProperty.Add("border-top", "fo:");
+                _allPageLayoutProperty.Add("border-top-style", "fo:");
+                _allPageLayoutProperty.Add("border-top-width", "fo:");
+                _allPageLayoutProperty.Add("border-top-color", "fo:");
                 _allPageLayoutProperty.Add("border-left", "fo:");
                 _allPageLayoutProperty.Add("border-right", "fo:");
                 _allPageLayoutProperty.Add("padding-top", "fo:");
