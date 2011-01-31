@@ -66,6 +66,7 @@ namespace BuildTxEx
             BuilderBL.RemoveSubFolders(instPath + "../Files");
             BuilderBL.CopyTree(instPath, "../../PwTxEx/dist", "PwTxEx");
 
+            BuilderBL.ZeroCheck(Common.PathCombine(instPath, "../Files"));
             SubProcess.Run(instPath, "GenerateFilesSourceTxEx.js");
             BuilderBL.SetFilesNFeatures("PwTxEx", instPath, sub, map);
             sub.FileSubstitute("FilesTxEx-tpl.wxs", map, "Files.wxs");

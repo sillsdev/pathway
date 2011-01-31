@@ -91,6 +91,7 @@ namespace Builder7BTE
             //    BuilderBL.CopyTree(instPath, "../../PwCtx", "PwCtx");
             //}
 
+            BuilderBL.ZeroCheck(Common.PathCombine(instPath, "../Files"));
             SubProcess.Run(instPath, "GenerateFilesSource7Pw.js");
             BuilderBL.SetFilesNFeatures("ConfigurationTool", instPath, sub, map);
             BuilderBL.SetFilesNFeatures("PsDll", instPath, sub, map);

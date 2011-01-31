@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using SIL.Tool;
@@ -298,6 +299,10 @@ namespace Builder
         }
         #endregion GetCurrentVersion
 
+        #region DoBatch
+        /// <summary>
+        /// Executes a batach file. Normally used to copy files into install folder
+        /// </summary>
         public static void DoBatch(string instPath, string project, string process, string config)
         {
             SetBaseAndConfig();
@@ -306,7 +311,12 @@ namespace Builder
             //MessageBox.Show(folder);
             SubProcess.Run(folder, processPath, config, true);
         }
+        #endregion DoBatch
 
+        #region SetBaseAndConfig
+        /// <summary>
+        /// Break path into base and configuration sections
+        /// </summary>
         private static void SetBaseAndConfig()
         {
             if (_BasePath != string.Empty) return;
@@ -315,5 +325,56 @@ namespace Builder
             _BasePath = Environment.CurrentDirectory.Substring(0, m.Index);
             _ConfigPath = Environment.CurrentDirectory.Substring(m.Index + m.Length);
         }
+        #endregion SetBaseAndConfig
+
+        #region ZeroCheck
+        /// <summary>
+        /// Throws ZeroLengthFileException if the folder tree contains a zero length file.
+        /// </summary>
+        public static void ZeroCheck(string path)
+        {
+            DirectoryInfo directoryInfo = new DirectoryInfo(path);
+            foreach (FileInfo fileInfo in directoryInfo.GetFiles())
+            {
+                if (fileInfo.Length == 0)
+                    throw new ZeroLengthFileException(fileInfo.FullName);
+            }
+            foreach (DirectoryInfo subDirectoryInfo in directoryInfo.GetDirectories())
+            {
+                ZeroCheck(subDirectoryInfo.FullName);
+            }
+        }
+        #endregion ZeroCheck
     }
+
+    #region ZeroLengthFileException
+    [Serializable]
+    public class ZeroLengthFileException : Exception
+    {
+        //
+        // For guidelines regarding the creation of new exception types, see
+        //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/cpgenref/html/cpconerrorraisinghandlingguidelines.asp
+        // and
+        //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dncscol/html/csharp07192001.asp
+        //
+
+        public ZeroLengthFileException()
+        {
+        }
+
+        public ZeroLengthFileException(string message) : base(message)
+        {
+        }
+
+        public ZeroLengthFileException(string message, Exception inner) : base(message, inner)
+        {
+        }
+
+        protected ZeroLengthFileException(
+            SerializationInfo info,
+            StreamingContext context) : base(info, context)
+        {
+        }
+    }
+    #endregion ZeroLengthFileException
 }

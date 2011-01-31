@@ -64,6 +64,7 @@ namespace BuildCtx
             BuilderBL.RemoveSubFolders(instPath + "../Files");
             BuilderBL.CopyTree(instPath, "../../PwCtx", "PwCtx");
 
+            BuilderBL.ZeroCheck(Common.PathCombine(instPath, "../Files"));
             SubProcess.Run(instPath, "GenerateFilesSourceCtx.js");
             BuilderBL.SetFilesNFeatures("PwCtx", instPath, sub, map);
             sub.FileSubstitute("FilesCtx-tpl.wxs", map, "Files.wxs");

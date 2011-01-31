@@ -80,6 +80,7 @@ namespace Builder
             //BuilderBL.CopyTree(instPath, "../../PublishingSolutionExe/Bin/Release/Backends", "PathwaySupport/Backends");
             //CopyTree(instPath, "../../../XeTeX/DEXCTX", "PathwaySupport/DEXCTX");
             //File.Copy(Common.PathCombine(instPath + "../../../XeTeX", DeToolTransform), Common.PathCombine(instPath + "../Files/PathwaySupport", DeToolTransform), true);
+            BuilderBL.ZeroCheck(Common.PathCombine(instPath, "../Files"));
             SubProcess.Run(instPath, "GenerateFilesSource.js");
             BuilderBL.SetFilesNFeatures("PublishingSolution", instPath, sub, map);
             //BuilderBL.SetFilesNFeatures("PsDll", instPath, sub, map);
