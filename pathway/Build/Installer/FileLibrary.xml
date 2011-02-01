@@ -1,5 +1,11 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\ConfigurationTool\Styles\Dictionary\PageNumber_TopRight.css" ComponentGuid="F335E460-DA42-4641-B222-F30FCA0D08C3"/>
+	<File Path="Files\ConfigurationTool\Styles\Dictionary\PageNumber_TopLeft.css" ComponentGuid="87E460AA-3EBE-495C-88A2-DBA3D9E6F9BD"/>
+	<File Path="Files\ConfigurationTool\Styles\Dictionary\PageNumber_TopCenter_Mirrored.css" ComponentGuid="3CC9BA1A-B398-445D-A79D-78BAED6201BE"/>
+	<File Path="Files\ConfigurationTool\Styles\Dictionary\PageNumber_BottomRight.css" ComponentGuid="0EFE445E-B2C7-41FD-A8DB-D59CD88735B2"/>
+	<File Path="Files\ConfigurationTool\Styles\Dictionary\PageNumber_BottomLeft.css" ComponentGuid="40DFA730-9CBA-43EE-856A-743588B5F0FB"/>
+	<File Path="Files\ConfigurationTool\Styles\Dictionary\PageNumber_BottomCenterMirrored.css" ComponentGuid="F1093F9F-E496-4872-99F4-5350085C5A0E"/>
 	<File Path="Files\PwTxEx\graphics\CHECKFRE.bmp" ComponentGuid="B6B6CCC4-D551-4592-BD4F-199450A446F6"/>
 	<File Path="Files\PwTxEx\w9xpopen.exe" ComponentGuid="80498A61-3508-4EBD-80FD-ECFF3A11FF63"/>
 	<File Path="Files\PwTxEx\TextExport.exe" ComponentGuid="CAE01121-416D-4286-9293-91F0184C5947"/>
