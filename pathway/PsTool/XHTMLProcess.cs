@@ -279,7 +279,10 @@ namespace SIL.PublishingSolution
             string value = GetPropertyValue(string.Empty, "display");
             if (value == "block")
             {
-                _tagType = "div";
+                if (_tagType == "span")
+                {
+                    _tagType = "div";
+                }
             }
             else if (value == "inline")
             {

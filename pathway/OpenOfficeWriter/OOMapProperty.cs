@@ -392,13 +392,13 @@ namespace SIL.PublishingSolution
                 if (propertyValue.IndexOf("pt")>0)
                 {
                     int value = int.Parse(propertyValue.Replace("pt", ""));
-                    value = value*2;
+                    value = (int)(value * 1.5);
                     _IDProperty["font-size"] = value + "pt";
                 }
                 else if (propertyValue.IndexOf("%")>0)
                 {
                     int value = int.Parse(propertyValue.Replace("%", ""));
-                    value = value * 2;
+                    value = (int)(value * 1.5);
                     _IDProperty["font-size"] = value + "%";
                 }
                 else if (propertyValue == "smaller")
@@ -407,13 +407,13 @@ namespace SIL.PublishingSolution
                 }
                 else if (propertyValue == "larger")
                 {
-                    _IDProperty["font-size"] = "200%";
+                    _IDProperty["font-size"] = "150%";
                 }
             }
 
             else
             {
-                _IDProperty["font-size"] = "200%";
+                _IDProperty["font-size"] = "150%";
             }
         }
 
