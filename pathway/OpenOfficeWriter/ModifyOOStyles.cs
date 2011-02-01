@@ -225,7 +225,7 @@ namespace SIL.PublishingSolution
             }
 
             BackgroundColorSpan(_paragraphProperty, _textProperty, familyType);
-
+            DropCaps(_paragraphProperty, _textProperty);
             if (_languageStyleName.ContainsKey(className.Key))
             {
                 string language, country;
@@ -312,6 +312,20 @@ namespace SIL.PublishingSolution
             if (_columnProperty.Count > 0) // create a value XML file for content.xml with column property.
             {
                 CreateColumnXMLFile(className.Key);
+            }
+        }
+
+        private void DropCaps(Dictionary<string, string> paragraphProperty, Dictionary<string, string> textProperty)
+        {
+            if (paragraphProperty.ContainsKey("fo:float") && paragraphProperty.ContainsKey("style:vertical-align"))
+            {
+                paragraphProperty.Clear();  // Remove all paragraph property
+                if (textProperty.ContainsKey("fo:font-size"))
+                {
+                    textProperty.Remove("fo:font-size");
+                    if (textProperty.ContainsKey("style:font-size-complex"))
+                     textProperty.Remove("style:font-size-complex");
+                }
             }
         }
 
