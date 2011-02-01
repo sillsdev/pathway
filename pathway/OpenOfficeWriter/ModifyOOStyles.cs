@@ -225,7 +225,7 @@ namespace SIL.PublishingSolution
             }
 
             BackgroundColorSpan(_paragraphProperty, _textProperty, familyType);
-            DropCaps(_paragraphProperty, _textProperty);
+            //DropCaps(_paragraphProperty, _textProperty);
             if (_languageStyleName.ContainsKey(className.Key))
             {
                 string language, country;
