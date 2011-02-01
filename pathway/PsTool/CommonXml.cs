@@ -373,11 +373,21 @@ namespace SIL.Tool
                         fromPath = flexPict;
                     }
                     else
-                    {   // para + database + fileName with exact sourceFolder path
-                        flexPict = PathCombine(dataPath, src);
+                    {  
+                        // para + database + local(folder) + figures(folder) + fileName
+                        flexPict = PathCombine(dataPath,PathCombine("local", PathCombine("figures", fileName)));
                         if (File.Exists(flexPict))
                         {
                             fromPath = flexPict;
+                        }
+                        else
+                        {
+                            // para + database + fileName with exact sourceFolder path
+                            flexPict = PathCombine(dataPath, src);
+                            if (File.Exists(flexPict))
+                            {
+                                fromPath = flexPict;
+                            }
                         }
                     }
                 }
