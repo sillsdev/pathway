@@ -1,0 +1,7 @@
+/* Page number  Top Right.css */
+@page{
+    @top-right {
+          content: counter( page);
+           margin-top: 1cm;
+    }
+}

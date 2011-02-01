@@ -474,29 +474,16 @@ namespace SIL.PublishingSolution
             
             if (_attributeInfo.Name.ToLower() == "content")
             {
-                //_attributeInfo.StringValue = Common.UnicodeConversion(_attributeInfo.StringValue);
-                //_attributeInfo.StringValue = _attributeInfo.StringValue.Replace("'", "");
-                //_attributeInfo.StringValue = _attributeInfo.StringValue.Replace("\"", "");
                 _attributeInfo.StringValue = ReplaceCountertoPipeLine(_attributeInfo.StringValue);
-                //if (_classInfo.Pseudo == "before")
-                //{
-                //    _attributeInfo.StringValue = _attributeInfo.StringValue + " ";
-                //}
-                //else if (_classInfo.Pseudo == "after")
-                //{
-                //    _attributeInfo.StringValue = " " + _attributeInfo.StringValue;
-                //}
                 _classInfo.Content = _attributeInfo.StringValue;
-
                 if (_classInfo.Content.ToLower() == "normal") _classInfo.Content = string.Empty;
             }
             else if (_attributeInfo.Name.ToLower() == "-ps-referenceformat")
             {
+                _attributeInfo.StringValue = ReplaceCountertoPipeLine(_attributeInfo.StringValue.Replace("\"", ""));
                 _classInfo.Content = _attributeInfo.StringValue.Replace("\"", "");
             }
-            //else
-            //{
-            //CreateFullyQualifiedName(_attributeInfo);
+
             CreateFullyQualifiedClassName(_attributeInfo);
 
             AddProperty(_attributeInfo);

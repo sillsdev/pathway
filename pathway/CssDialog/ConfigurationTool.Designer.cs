@@ -667,7 +667,7 @@
             this.ddlRunningHead.Name = "ddlRunningHead";
             this.ddlRunningHead.Size = new System.Drawing.Size(151, 21);
             this.ddlRunningHead.TabIndex = 12;
-            this.ddlRunningHead.SelectedIndexChanged += new System.EventHandler(this.EditCSS);
+            this.ddlRunningHead.SelectedIndexChanged += new System.EventHandler(this.ddlRunningHead_SelectedIndexChanged);
             // 
             // lblRules
             // 

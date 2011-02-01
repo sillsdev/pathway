@@ -194,7 +194,7 @@ namespace SIL.PublishingSolution
                         string task = "@page:left-top-right";
                         string key = "content";
                         string result = GetValue(task, key, "false");
-                        if (result.IndexOf("page") > 0)
+                        if (result.IndexOf("page") > 0 || result.IndexOf("guideword") > 0)
                         {
                             return "Mirrored";
                         }
@@ -202,26 +202,19 @@ namespace SIL.PublishingSolution
                     }
                     else
                     {
-                        string task = "@page:left-top-left";
-                        string key = "content";
-                        string result = GetValue(task, key, "false");
-                        if (result.IndexOf("verse") > 0)
+                        string key = "-ps-referenceformat";
+                        string task = "@page:left-top-left$@page:right-top-right";
+                        string result = GetPageValue(task, key, "false");
+                        if (result.Length > 0)
                         {
-                            return "Genesis 1:1";
-                        }
-
-                        task = "@page:left-top-left";
-                        result = GetValue(task, key, "false");
-                        if (result.IndexOf("chapter") > 0)
-                        {
-                            return "Genesis 1";
+                            return result;
                         }
 
                         task = "@page-top-center";
-                        result = GetValue(task, key, "false");
-                        if (result.IndexOf("verse") > 0)
+                        result = GetPageValue(task, key, "false");
+                        if (result.Length > 0)
                         {
-                            return "Genesis 1:1-2:1";
+                            return result;
                         }
 
                         defaultValue = "Genesis 1-2";
@@ -236,55 +229,103 @@ namespace SIL.PublishingSolution
             get
             {
                 string defaultValue = "None";
-                string task = "@page:left-top-center";
+                //Mirrored page
+                string task = "@page:left-top-right";
                 string key = "content";
                 string result = GetValue(task, key, "false");
-                if (result.IndexOf("counter") > -1 && result.IndexOf("page") > -1)
-                {
-                    defaultValue = "Top Center";
-                }
-
-                task = "@page:left-bottom-center";
-                key = "content";
-                result = GetValue(task, key, "false");
-                if (result.IndexOf("counter") > -1 && result.IndexOf("page") > -1)
-                {
-                    defaultValue = "Bottom Center";
-                }
-
-                task = "@page:left-top-right";
-                key = "content";
-                result = GetValue(task, key, "false");
-                if (result.IndexOf("counter") > -1 && result.IndexOf("page") > -1)
+                if (result.IndexOf("page") > 0)
                 {
                     defaultValue = "Top Inside Margin";
+                }
+
+                task = "@page:left-top-left";
+                key = "content";
+                result = GetValue(task, key, "false");
+                if (result.IndexOf("page") > 0)
+                {
+                    defaultValue = "Top Outside Margin";
+                }
+
+                task = "@page:left-top-center";
+                key = "content";
+                result = GetValue(task, key, "false");
+                if (result.IndexOf("page") > 0)
+                {
+                    defaultValue = "Top Center";
                 }
 
                 task = "@page:left-bottom-right";
                 key = "content";
                 result = GetValue(task, key, "false");
-                if (result.IndexOf("counter") > -1 && result.IndexOf("page") > -1)
+                if (result.IndexOf("page") > 0)
                 {
                     defaultValue = "Bottom Inside Margin";
-                }
-
-                //Note - top outside margin - is occupied with headword already
-                task = "@page:left-top-left";
-                key = "content";
-                result = GetValue(task, key, "false");
-                if (result.IndexOf("counter") > -1 && result.IndexOf("page") > -1)
-                {
-                    defaultValue = "Top Outside Margin";
                 }
 
                 task = "@page:left-bottom-left";
                 key = "content";
                 result = GetValue(task, key, "false");
-                if (result.IndexOf("counter") > -1 && result.IndexOf("page") > -1)
+                if (result.IndexOf("page") > 0)
                 {
                     defaultValue = "Bottom Outside Margin";
                 }
 
+                task = "@page:left-bottom-center";
+                key = "content";
+                result = GetValue(task, key, "false");
+                if (result.IndexOf("page") > 0)
+                {
+                    defaultValue = "Bottom Center";
+                }
+                //Every Page
+                task = "@page-top-left";
+                key = "content";
+                result = GetValue(task, key, "false");
+                if (result.IndexOf("page") > 0)
+                {
+                    defaultValue = "Top Left Margin";
+                }
+
+                task = "@page-top-right";
+                key = "content";
+                result = GetValue(task, key, "false");
+                if (result.IndexOf("page") > 0)
+                {
+                    defaultValue = "Top Right Margin";
+                }
+
+                task = "@page-top-center";
+                key = "content";
+                result = GetValue(task, key, "false");
+                if (result.IndexOf("page") > 0)
+                {
+                    defaultValue = "Top Center";
+                }
+
+                task = "@page-bottom-right";
+                key = "content";
+                result = GetValue(task, key, "false");
+                if (result.IndexOf("page") > 0)
+                {
+                    defaultValue = "Bottom Right Margin";
+                }
+
+                task = "@page-bottom-left";
+                key = "content";
+                result = GetValue(task, key, "false");
+                if (result.IndexOf("page") > 0)
+                {
+                    defaultValue = "Bottom Left Margin";
+                }
+
+                task = "@page-bottom-center";
+                key = "content";
+                result = GetValue(task, key, "false");
+                if (result.IndexOf("page") > 0)
+                {
+                    defaultValue = "Bottom Center";
+                }
+                
 
                 return defaultValue;
             }
@@ -819,13 +860,13 @@ namespace SIL.PublishingSolution
                     cTool.TxtPageGutterWidth.Text = cTool.TxtPageGutterWidth.Text + "pt";
             }
             cTool.DdlPageColumn.SelectedItem = ColumnCount;
-            cTool.DdlPageNumber.SelectedItem = PageNumber;
             cTool.DdlFontSize.SelectedItem = FontSize;
             cTool.DdlLeading.SelectedItem = Leading;
             cTool.DdlPicture.SelectedItem = Picture;
             cTool.DdlJustified.SelectedItem = JustifyUI;
             cTool.DdlPagePageSize.SelectedItem = PageSize;
             cTool.DdlRunningHead.SelectedItem = RunningHeader;
+            cTool.DdlPageNumber.SelectedItem = PageNumber;
             cTool.DdlRules.SelectedItem = ColumnRule;
             cTool.DdlSense.SelectedItem = Sense;
             cTool.DdlVerticalJustify.SelectedItem = VerticalJustify;
@@ -1025,6 +1066,15 @@ namespace SIL.PublishingSolution
             catch
             {
             }
+        }
+
+        /// <summary>
+        /// Fills PageNumber Values in Display property Tab
+        /// 
+        /// </summary>
+        protected void PopulatePageNumberFeature()
+        {
+            
         }
 
         /// <summary>
@@ -1567,9 +1617,10 @@ namespace SIL.PublishingSolution
         {
             _cssPath = cssPath;
             _loadType = loadType;
+            cssTree = new CssTree();
             Common.SamplePath = Param.Value["SamplePath"].Replace("Samples", "Styles");
             if (string.IsNullOrEmpty(_cssPath)) return;
-            _cssClass = cssTree.CreateCssProperty(_cssPath, false);
+            _cssClass = cssTree.CreateCssProperty(_cssPath, true);
         }
 
         public string GetValue(string task, string key, string defaultValue)
@@ -1579,6 +1630,19 @@ namespace SIL.PublishingSolution
                 return _cssClass[task][key];
             }
             return defaultValue;
+        }
+
+        public string GetPageValue(string task, string key, string defaultValue)
+        {
+            string[] srchRegion = task.Split('$');
+            for (int i = 0; i < srchRegion.Length; i++)
+            {
+                if (_cssClass.ContainsKey(srchRegion[i]) && _cssClass[srchRegion[i]].ContainsKey(key))
+                {
+                    return _cssClass[srchRegion[i]][key];
+                }
+            }
+            return string.Empty;
         }
 
         public string PageSize1(string width, string height)
@@ -2786,6 +2850,31 @@ namespace SIL.PublishingSolution
 
             }
             catch { }
+        }
+
+        public void DdlRunningHeadSelectedIndexChangedBl(string pageType)
+        {
+            Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationTool: PopulatePageNumberFeature");
+            string xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";
+            XmlNodeList pageNumList = Param.GetItems(xPath);
+            cTool.DdlPageNumber.Items.Clear();
+            try
+            {
+                foreach (XmlNode node in pageNumList)
+                {
+                    if (node.Attributes != null)
+                    {
+                        string value = node.Attributes["name"].Value;
+                        if (!cTool.DdlPageNumber.Items.Contains(value))
+                            cTool.DdlPageNumber.Items.Add(value);
+                    }
+                }
+                cTool.DdlPageNumber.SelectedIndex = 0;
+            }
+            catch
+            {
+            }
+            
         }
 
         public void tsUndo_ClickBL(object sender, EventArgs e)

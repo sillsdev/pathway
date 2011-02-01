@@ -1,0 +1,4 @@
+/* Bottom Left.css */
+@page{
+    @bottom-left  {  content: counter( page); }
+}

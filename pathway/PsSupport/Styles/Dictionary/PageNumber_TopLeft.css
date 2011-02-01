@@ -1,6 +1,6 @@
-/* Bottom Center.css */
+/* Page number  Top Left.css */
 @page{
-    @bottom-center{
+@top-left {
            content: counter( page);
     }
 }

@@ -1011,5 +1011,12 @@ namespace SIL.PublishingSolution
         {
             _CToolBL.chkAvailable_ValidatedBL(sender);
         }
+
+        private void ddlRunningHead_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string pageType = ddlRunningHead.SelectedItem.ToString();
+            _CToolBL.DdlRunningHeadSelectedIndexChangedBl(pageType);
+            EditCSS(sender, e);
+        }
      }
 }

@@ -1,0 +1,7 @@
+/* Page number  Bottom Right.css */
+@page{
+    @bottom-right {
+           content: counter( page);
+    }
+    
+}

@@ -1068,21 +1068,25 @@ namespace SIL.PublishingSolution
                 if (childNode != null)
                     foreach (XmlNode node in childNode)
                     {
-                        string value = node.Attributes["name"].Value;
-                        string xPathOption = "//stylePick/features/feature[@name=\"" + value + "\"]/option";
-                        XmlNodeList OptionNode = parentNode.SelectNodes(xPathOption);
-                        var optionList = new ArrayList();
-                        if (OptionNode != null)
-                            foreach (XmlNode oNode in OptionNode)
-                            {
-                                string oValue = oNode.Attributes["name"].Value;
-                                if (optionList.Contains(oValue))
+                        if (node.Attributes != null)
+                        {
+                            string value = node.Attributes["name"].Value;
+                            string xPathOption = "//stylePick/features/feature[@name=\"" + value + "\"]/option";
+                            XmlNodeList OptionNode = parentNode.SelectNodes(xPathOption);
+                            var optionList = new ArrayList();
+                            if (OptionNode != null)
+                                foreach (XmlNode oNode in OptionNode)
                                 {
-                                    errorTag = methodname;
-                                    return false;
+                                    string oValue = oNode.Attributes["name"].Value;
+                                    if (oValue == "Top Center" || oValue == "Bottom Center") continue;
+                                    if (optionList.Contains(oValue))
+                                    {
+                                        errorTag = methodname;
+                                        return false;
+                                    }
+                                    optionList.Add(oValue);
                                 }
-                                optionList.Add(oValue);
-                            }
+                        }
                     }
             }
             catch { }
