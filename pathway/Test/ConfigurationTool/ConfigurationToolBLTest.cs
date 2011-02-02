@@ -175,7 +175,7 @@ namespace Test.UIConfigurationToolBLTest
             actual = cTool.DdlFileProduceDict.Text;
             Assert.AreEqual("One", actual, "Grid file produce Test Failes");
             actual = cTool.DdlSense.Text;
-            Assert.AreEqual("", actual, "Grid sense Test Failes");
+            Assert.AreEqual("No change", actual, "Grid sense Test Failes");
 
             cTool.Close();
         }
@@ -233,7 +233,7 @@ namespace Test.UIConfigurationToolBLTest
             actual = cTool.DdlFileProduceDict.Text;
             Assert.AreEqual("One", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlSense.Text;
-            Assert.AreEqual("", actual, "GridRowValueTest Test Failes");
+            Assert.AreEqual("No change", actual, "GridRowValueTest Test Failes");
             cTool.Close();
         }
 

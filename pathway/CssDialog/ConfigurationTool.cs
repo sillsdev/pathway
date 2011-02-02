@@ -878,6 +878,7 @@ namespace SIL.PublishingSolution
 
         private void toolStripMain_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
+            _CToolBL.PreviousStyleName = txtName.Text;
             _CToolBL.txtName_ValidatingBL(sender);
         }
 
@@ -1014,9 +1015,9 @@ namespace SIL.PublishingSolution
 
         private void ddlRunningHead_SelectedIndexChanged(object sender, EventArgs e)
         {
+            EditCSS(sender, e);
             string pageType = ddlRunningHead.SelectedItem.ToString();
             _CToolBL.DdlRunningHeadSelectedIndexChangedBl(pageType);
-            EditCSS(sender, e);
         }
      }
 }

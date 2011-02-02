@@ -113,8 +113,8 @@ namespace SIL.PublishingSolution
         TabPage tabmob = new TabPage();
         TabPage tabothers = new TabPage();
         protected TraceSwitch _traceOn = new TraceSwitch("General", "Trace level for application");
-
         private ConfigurationTool cTool;
+        Dictionary<string, string> pageDict = new Dictionary<string, string>();
         #endregion
 
         #region Constructor
@@ -130,7 +130,22 @@ namespace SIL.PublishingSolution
             standardSize["418x626"] = "5.8in x 8.7in";
             standardSize["432x648"] = "6in x 9in";
 
-            _screenMode = ScreenMode.Load;  
+            _screenMode = ScreenMode.Load;
+
+            //Mirrored
+            pageDict.Add("@page:left-top-right", "Top Inside Margin");
+            pageDict.Add("@page:left-top-left", "Top Outside Margin");
+            pageDict.Add("@page:left-top-center", "Top Center");
+            pageDict.Add("@page:left-bottom-right", "Bottom Inside Margin");
+            pageDict.Add("@page:left-bottom-left", "Bottom Outside Margin");
+            pageDict.Add("@page:left-bottom-center", "Bottom Center");
+            //Every Page
+            pageDict.Add("@page-top-left", "Top Left Margin");
+            pageDict.Add("@page-top-right", "Top Right Margin");
+            pageDict.Add("@page-top-center", "Top Center");
+            pageDict.Add("@page-bottom-right", "Bottom Right Margin");
+            pageDict.Add("@page-bottom-left", "Bottom Left Margin");
+            pageDict.Add("@page-bottom-center", "Bottom Center");
         }
 
         //public void SetDefaultCSSValue(string cssPath, string loadType)
@@ -194,7 +209,7 @@ namespace SIL.PublishingSolution
                         string task = "@page:left-top-right";
                         string key = "content";
                         string result = GetValue(task, key, "false");
-                        if (result.IndexOf("page") > 0 || result.IndexOf("guideword") > 0)
+                        if (result.IndexOf("page") > 0 || result.IndexOf("guideword") > 0 || result == "true")
                         {
                             return "Mirrored";
                         }
@@ -229,104 +244,15 @@ namespace SIL.PublishingSolution
             get
             {
                 string defaultValue = "None";
-                //Mirrored page
-                string task = "@page:left-top-right";
-                string key = "content";
-                string result = GetValue(task, key, "false");
-                if (result.IndexOf("page") > 0)
+                foreach (string srchKey in pageDict.Keys)
                 {
-                    defaultValue = "Top Inside Margin";
+                    const string key = "content";
+                    string result = GetValue(srchKey, key, "false");
+                    if (result.IndexOf("page") > 0)
+                    {
+                        return pageDict[srchKey];
+                    }
                 }
-
-                task = "@page:left-top-left";
-                key = "content";
-                result = GetValue(task, key, "false");
-                if (result.IndexOf("page") > 0)
-                {
-                    defaultValue = "Top Outside Margin";
-                }
-
-                task = "@page:left-top-center";
-                key = "content";
-                result = GetValue(task, key, "false");
-                if (result.IndexOf("page") > 0)
-                {
-                    defaultValue = "Top Center";
-                }
-
-                task = "@page:left-bottom-right";
-                key = "content";
-                result = GetValue(task, key, "false");
-                if (result.IndexOf("page") > 0)
-                {
-                    defaultValue = "Bottom Inside Margin";
-                }
-
-                task = "@page:left-bottom-left";
-                key = "content";
-                result = GetValue(task, key, "false");
-                if (result.IndexOf("page") > 0)
-                {
-                    defaultValue = "Bottom Outside Margin";
-                }
-
-                task = "@page:left-bottom-center";
-                key = "content";
-                result = GetValue(task, key, "false");
-                if (result.IndexOf("page") > 0)
-                {
-                    defaultValue = "Bottom Center";
-                }
-                //Every Page
-                task = "@page-top-left";
-                key = "content";
-                result = GetValue(task, key, "false");
-                if (result.IndexOf("page") > 0)
-                {
-                    defaultValue = "Top Left Margin";
-                }
-
-                task = "@page-top-right";
-                key = "content";
-                result = GetValue(task, key, "false");
-                if (result.IndexOf("page") > 0)
-                {
-                    defaultValue = "Top Right Margin";
-                }
-
-                task = "@page-top-center";
-                key = "content";
-                result = GetValue(task, key, "false");
-                if (result.IndexOf("page") > 0)
-                {
-                    defaultValue = "Top Center";
-                }
-
-                task = "@page-bottom-right";
-                key = "content";
-                result = GetValue(task, key, "false");
-                if (result.IndexOf("page") > 0)
-                {
-                    defaultValue = "Bottom Right Margin";
-                }
-
-                task = "@page-bottom-left";
-                key = "content";
-                result = GetValue(task, key, "false");
-                if (result.IndexOf("page") > 0)
-                {
-                    defaultValue = "Bottom Left Margin";
-                }
-
-                task = "@page-bottom-center";
-                key = "content";
-                result = GetValue(task, key, "false");
-                if (result.IndexOf("page") > 0)
-                {
-                    defaultValue = "Bottom Center";
-                }
-                
-
                 return defaultValue;
             }
         }
@@ -474,7 +400,7 @@ namespace SIL.PublishingSolution
                 {
                     return "Bullet";
                 }
-                return "No Change";
+                return "No change";
             }
         }
 
@@ -1627,7 +1553,10 @@ namespace SIL.PublishingSolution
         {
             if (_cssClass.ContainsKey(task) && _cssClass[task].ContainsKey(key))
             {
-                return _cssClass[task][key];
+                string result = _cssClass[task][key].Replace("'","");
+                if (result.Length == 0)
+                    result = "true";
+                return result;
             }
             return defaultValue;
         }
@@ -1904,7 +1833,7 @@ namespace SIL.PublishingSolution
             Param.SetNodeText(copyNode, ElementDesc, ""); // description
             Param.SetNodeText(copyNode, ElementComment, ""); // comment
             baseNode.ParentNode.AppendChild(copyNode);
-
+            
             Param.Write();
             //AddMode = false;
         }
@@ -2982,7 +2911,7 @@ namespace SIL.PublishingSolution
                     string errMsg = CreateCssFile(FileName);
                     if (errMsg.Length > 0)
                     {
-                        MessageBox.Show("Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '" + errMsg + "'", _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                        MessageBox.Show(@"Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '" + errMsg + @"'", _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                     }
                     AddNew(cTool.TxtName.Text);
                     EnableToolStripButtons(true);
