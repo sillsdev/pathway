@@ -56,7 +56,7 @@ namespace SIL.PublishingSolution
             //ps.ProjectInputType = "Dictionary";
             ps.ProjectInputType = loadType;
          
-            ExportOpenOffice openOffice = new ExportOpenOffice();
+            OOExportOpenOffice openOffice = new OOExportOpenOffice();
             openOffice.Export(ps);
 
             //Pdf pdf = new Pdf(xhtmlPreviewFilePath, cssMergeFullFileName);

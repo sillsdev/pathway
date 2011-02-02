@@ -167,10 +167,6 @@
       <Project>{E6F68329-4BCE-44C2-A9F0-C5055F42CA39}</Project>
       <Name>LogosConvert</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenOfficeConvert\OpenOfficeConvert.csproj">
-      <Project>{E225E5AF-B603-41D1-BB58-E3AAE05C59FD}</Project>
-      <Name>OpenOfficeConvert</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OpenOfficeWriter\OpenOfficeWriter.csproj">
       <Project>{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}</Project>
       <Name>OpenOfficeWriter</Name>

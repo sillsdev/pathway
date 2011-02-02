@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{1A58ECC5-75FE-4FE2-B133-8605B382B7C0}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -350,9 +350,9 @@
       <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
       <Name>CssParser</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenOfficeConvert\OpenOfficeConvert.csproj">
-      <Project>{E225E5AF-B603-41D1-BB58-E3AAE05C59FD}</Project>
-      <Name>OpenOfficeConvert</Name>
+    <ProjectReference Include="..\OpenOfficeWriter\OpenOfficeWriter.csproj">
+      <Project>{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}</Project>
+      <Name>OpenOfficeWriter</Name>
     </ProjectReference>
     <ProjectReference Include="..\PsTool\PsTool.csproj">
       <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>

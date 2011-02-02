@@ -140,10 +140,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CssDialog\CssDialog.csproj">
-      <Project>{1A58ECC5-75FE-4FE2-B133-8605B382B7C0}</Project>
-      <Name>CssDialog</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CssParser\CssParser.csproj">
       <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
       <Name>CssParser</Name>

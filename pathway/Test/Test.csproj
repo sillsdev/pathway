@@ -170,16 +170,12 @@
     <Compile Include="CssDialog\SettingBlTest.cs" />
     <Compile Include="CssParser\ClassAttributeTest.cs" />
     <Compile Include="CssParser\StyleAttributeTest.cs" />
-    <Compile Include="OpenOfficeConvert\ContentXMLTest.cs" />
     <Compile Include="CssParser\CssParserTest.cs" />
     <Compile Include="CssParser\GramTest.cs" />
     <Compile Include="CssParser\MakePropertyTest.cs" />
-    <Compile Include="OpenOfficeConvert\MapOfficeAttributeTest.cs" />
-    <Compile Include="OpenOfficeConvert\UtilityTest.cs" />
     <Compile Include="OpenOfficeWriter\OOContentXMLTest.cs" />
     <Compile Include="OpenOfficeWriter\OOStylesXMLTest.cs" />
     <Compile Include="PsExport\PsExportTest.cs" />
-    <Compile Include="OpenOfficeConvert\StylesXMLTest.cs" />
     <Compile Include="PsTool\CommonCssTest.cs" />
     <Compile Include="PsTool\CommonTest.cs" />
     <Compile Include="PsTool\CommonXmlTest.cs" />
@@ -241,10 +237,6 @@
     <ProjectReference Include="..\LogosConvert\LogosConvert.csproj">
       <Project>{E6F68329-4BCE-44C2-A9F0-C5055F42CA39}</Project>
       <Name>LogosConvert</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenOfficeConvert\OpenOfficeConvert.csproj">
-      <Project>{E225E5AF-B603-41D1-BB58-E3AAE05C59FD}</Project>
-      <Name>OpenOfficeConvert</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenOfficeWriter\OpenOfficeWriter.csproj">
       <Project>{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}</Project>
@@ -329,6 +321,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="OpenOfficeConvert\" />
     <Folder Include="Properties\" />
     <Folder Include="WordPressConvert\TestFiles\Expected\" />
     <Folder Include="WordPressConvert\TestFiles\Input\" />
