@@ -1116,8 +1116,23 @@ namespace SIL.PublishingSolution
         {
             string searchStyleName = styleName;
             XmlNode node = Param.GetItem("//stylePick/styles/mobile/style[@name='" + searchStyleName + "']/styleProperty[@name='" + attribName + "']");
-            Param.SetAttrValue(node, "value", attribValue);
-            Param.Write();
+            if (node == null)
+            {
+                // styleProperty node doesn't exist yet (this happens when the user clicks "new" instead of "copy") -
+                // create it now - s/b like this: <styleProperty name="[attribName]" value="[attribValue]" />
+                XmlNode baseNode = GetItem("//stylePick/styles/mobile/style[@name='" + searchStyleName + "']");
+                var childNode = xmlMap.CreateNode(XmlNodeType.Element, "styleProperty", "");
+                AddAttrValue(childNode, "name", attribName);
+                AddAttrValue(childNode, "value", attribValue);
+                baseNode.AppendChild(childNode);
+                Write();
+            }
+            else
+            {
+                // attribute is there - just set the value
+                SetAttrValue(node, "value", attribValue);
+                Write();
+            }
         }
 
         /// <summary>
@@ -1128,9 +1143,24 @@ namespace SIL.PublishingSolution
         public static void UpdateOthersAtrrib(string attribName, string attribValue, string styleName)
         {
             string searchStyleName = styleName;
-            XmlNode node = Param.GetItem("//stylePick/styles/others/style[@name='" + searchStyleName + "']/styleProperty[@name='" + attribName + "']");
-            Param.SetAttrValue(node, "value", attribValue);
-            Param.Write();
+            XmlNode node = GetItem("//stylePick/styles/others/style[@name='" + searchStyleName + "']/styleProperty[@name='" + attribName + "']");
+            if (node == null)
+            {
+                // styleProperty node doesn't exist yet (this happens when the user clicks "new" instead of "copy") -
+                // create it now - s/b like this: <styleProperty name="[attribName]" value="[attribValue]" />
+                XmlNode baseNode = GetItem("//stylePick/styles/others/style[@name='" + searchStyleName + "']");
+                var childNode = xmlMap.CreateNode(XmlNodeType.Element, "styleProperty", "");
+                AddAttrValue(childNode, "name", attribName);
+                AddAttrValue(childNode, "value", attribValue);
+                baseNode.AppendChild(childNode);
+                Write();
+            }
+            else
+            {
+                // attribute is there - just set the value
+                SetAttrValue(node, "value", attribValue);
+                Write();
+            }
         }
 
         #region LoadImageList

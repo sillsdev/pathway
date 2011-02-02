@@ -103,6 +103,7 @@ namespace SIL.PublishingSolution
         protected string _styleName;
         protected string _previousStyleName;
         protected string _fileProduce = "One";
+        protected string _tocLevel = "2 - Book and Chapter";
         protected string _embedFonts = "Yes";
         public string MediaTypeEXE;
         public string StyleEXE;
@@ -846,6 +847,27 @@ namespace SIL.PublishingSolution
                             case "embedfonts":
                                 cTool.DdlEmbedFonts.SelectedItem = attribValue;
                                 break;
+                            case "toclevel":
+                                cTool.DdlTocLevel.SelectedItem = attribValue;
+                                break;
+                            case "coverimage":
+                                if (File.Exists(attribValue))
+                                {
+                                    try
+                                    {
+                                        cTool.CoverImage.Image = Image.FromFile(attribValue);
+                                    }
+                                    catch (Exception)
+                                    {
+                                        cTool.CoverImage.Image = cTool.CoverImage.InitialImage;
+                                        throw;
+                                    }
+                                }
+                                else
+                                {
+                                    cTool.CoverImage.Image = cTool.CoverImage.InitialImage;
+                                }
+                                break;
                             case "description":
                                 cTool.TxtDescription.Text = attribValue;
                                 break;
@@ -985,6 +1007,12 @@ namespace SIL.PublishingSolution
                                 if (!cTool.DdlEmbedFonts.Items.Contains(ctn.Text))
                                     cTool.DdlEmbedFonts.Items.Add(ctn.Text);
                                 break;
+
+                            case "TOCLevel":
+                                if (!cTool.DdlTocLevel.Items.Contains(ctn.Text))
+                                    cTool.DdlTocLevel.Items.Add(ctn.Text);
+                                break;
+
                         }
                     }
                 }
@@ -1209,6 +1237,25 @@ namespace SIL.PublishingSolution
                         {
                             case "embedfonts":
                                 cTool.DdlEmbedFonts.SelectedItem = attribValue;
+                                break;
+                            case "CoverImage":
+                                if (File.Exists(attribValue))
+                                {
+                                    try
+                                    {
+                                        cTool.CoverImage.Image = Image.FromFile(attribValue);
+                                    }
+                                    catch (Exception)
+                                    {
+                                        // problem loading the file - put up the initial image
+                                        cTool.CoverImage.Image = cTool.CoverImage.InitialImage;
+                                    }
+                                }
+                                else
+                                {
+                                    // no file specified - assume the default
+                                    cTool.CoverImage.Image = cTool.CoverImage.InitialImage;
+                                }                        
                                 break;
                             case "information":
                                 cTool.TxtDescription.Text = attribValue;
@@ -2420,6 +2467,37 @@ namespace SIL.PublishingSolution
             }
         }
 
+        public void btnCoverImage_ClickBL()
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "Image Files (*.png, *.jpg)|*.png;*.jpg";
+            openFile.ShowDialog();
+
+            string filename = openFile.FileName;
+            if (filename != "")
+            {
+                try
+                {
+                    Image iconImage = Image.FromFile(filename);
+                    double height = iconImage.Height;
+                    double width = iconImage.Width;
+                    if (height > 1000 || width > 1000)
+                    {
+                        MessageBox.Show("The selected image is too large. Please select an image with less that 1000 pixels in height and length.",
+                            _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                    string userPath = (Param.Value["UserSheetPath"]);
+                    string imgFileName = Path.GetFileName(filename);
+                    string toPath = Path.Combine(userPath, imgFileName);
+                    File.Copy(filename, toPath, true);
+                    Param.UpdateOthersAtrrib("CoverImage", toPath, StyleName);
+                    cTool.CoverImage.Image = iconImage;
+                }
+                catch { }
+            }
+        }
+
         public void ddlRedLetter_SelectedIndexChangedBL(object sender, EventArgs e)
         {
             try
@@ -2441,6 +2519,18 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
+        public void ddlTocLevel_SelectedIndexChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                _tocLevel = cTool.DdlTocLevel.Text;
+                Param.UpdateOthersAtrrib("TOCLevel", cTool.DdlTocLevel.Text, StyleName);
+                SetOthersSummary(sender, e);
+            }
+            catch { }
+        }
+
+
         public void ddlEmbedFonts_SelectedIndexChangedBL(object sender, EventArgs e)
         {
             try
@@ -2452,7 +2542,7 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
-        public void txtDescription_ValidatedBL()
+        public void txtDescription_ValidatedBL(object sender)
         {
             try
             {
@@ -2463,7 +2553,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        public void txtPublisher_ValidatedBL()
+        public void txtPublisher_ValidatedBL(object sender)
         {
             try
             {
@@ -2474,7 +2564,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        public void txtSource_ValidatedBL()
+        public void txtSource_ValidatedBL(object sender)
         {
             try
             {
@@ -2485,7 +2575,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        public void txtFormat_ValidatedBL()
+        public void txtFormat_ValidatedBL(object sender)
         {
             try
             {
@@ -2496,7 +2586,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        public void txtRelation_ValidatedBL()
+        public void txtRelation_ValidatedBL(object sender)
         {
             try
             {
@@ -2507,7 +2597,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        public void txtCoverage_ValidatedBL()
+        public void txtCoverage_ValidatedBL(object sender)
         {
             try
             {
@@ -2518,7 +2608,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        public void txtRights_ValidatedBL()
+        public void txtRights_ValidatedBL(object sender)
         {
             try
             {
@@ -2530,7 +2620,7 @@ namespace SIL.PublishingSolution
         }
 
 
-        public void txtCopyright_ValidatedBL()
+        public void txtCopyright_ValidatedBL(object sender)
         {
             try
             {
@@ -2541,7 +2631,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        public void txtInformation_ValidatedBL()
+        public void txtInformation_ValidatedBL(object sender)
         {
             try
             {

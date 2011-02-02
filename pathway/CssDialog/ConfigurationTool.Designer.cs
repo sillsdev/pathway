@@ -102,6 +102,11 @@
             this.ddlFiles = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.tabOthers = new System.Windows.Forms.TabPage();
+            this.imgCoverImage = new System.Windows.Forms.PictureBox();
+            this.btnCoverImage = new System.Windows.Forms.Button();
+            this.lblCoverImage = new System.Windows.Forms.Label();
+            this.ddlTocLevel = new System.Windows.Forms.ComboBox();
+            this.lblTocLevel = new System.Windows.Forms.Label();
             this.ddlEmbedFonts = new System.Windows.Forms.ComboBox();
             this.lblEmbedFonts = new System.Windows.Forms.Label();
             this.txtRights = new System.Windows.Forms.TextBox();
@@ -160,6 +165,7 @@
             this.tabMobile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mobileIcon)).BeginInit();
             this.tabOthers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgCoverImage)).BeginInit();
             this.tabPreview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
             this.tabPicture.SuspendLayout();
@@ -1044,6 +1050,11 @@
             // 
             // tabOthers
             // 
+            this.tabOthers.Controls.Add(this.imgCoverImage);
+            this.tabOthers.Controls.Add(this.btnCoverImage);
+            this.tabOthers.Controls.Add(this.lblCoverImage);
+            this.tabOthers.Controls.Add(this.ddlTocLevel);
+            this.tabOthers.Controls.Add(this.lblTocLevel);
             this.tabOthers.Controls.Add(this.ddlEmbedFonts);
             this.tabOthers.Controls.Add(this.lblEmbedFonts);
             this.tabOthers.Controls.Add(this.txtRights);
@@ -1067,6 +1078,56 @@
             this.tabOthers.Text = "Properties";
             this.tabOthers.UseVisualStyleBackColor = true;
             // 
+            // imgCoverImage
+            // 
+            this.imgCoverImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.imgCoverImage.Image = ((System.Drawing.Image)(resources.GetObject("imgCoverImage.Image")));
+            this.imgCoverImage.InitialImage = ((System.Drawing.Image)(resources.GetObject("imgCoverImage.InitialImage")));
+            this.imgCoverImage.Location = new System.Drawing.Point(100, 66);
+            this.imgCoverImage.Name = "imgCoverImage";
+            this.imgCoverImage.Size = new System.Drawing.Size(32, 32);
+            this.imgCoverImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.imgCoverImage.TabIndex = 20;
+            this.imgCoverImage.TabStop = false;
+            // 
+            // btnCoverImage
+            // 
+            this.btnCoverImage.Location = new System.Drawing.Point(138, 71);
+            this.btnCoverImage.Name = "btnCoverImage";
+            this.btnCoverImage.Size = new System.Drawing.Size(112, 23);
+            this.btnCoverImage.TabIndex = 5;
+            this.btnCoverImage.Text = "&Browse...";
+            this.btnCoverImage.UseVisualStyleBackColor = true;
+            this.btnCoverImage.Click += new System.EventHandler(this.btnCoverImage_Click);
+            // 
+            // lblCoverImage
+            // 
+            this.lblCoverImage.AutoSize = true;
+            this.lblCoverImage.Location = new System.Drawing.Point(23, 76);
+            this.lblCoverImage.Name = "lblCoverImage";
+            this.lblCoverImage.Size = new System.Drawing.Size(67, 13);
+            this.lblCoverImage.TabIndex = 4;
+            this.lblCoverImage.Text = "Cover Image";
+            // 
+            // ddlTocLevel
+            // 
+            this.ddlTocLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlTocLevel.FormattingEnabled = true;
+            this.ddlTocLevel.Location = new System.Drawing.Point(100, 38);
+            this.ddlTocLevel.Name = "ddlTocLevel";
+            this.ddlTocLevel.Size = new System.Drawing.Size(150, 21);
+            this.ddlTocLevel.TabIndex = 3;
+            this.ddlTocLevel.SelectedIndexChanged += new System.EventHandler(this.ddlTocLevel_SelectedIndexChanged);
+            // 
+            // lblTocLevel
+            // 
+            this.lblTocLevel.AutoSize = true;
+            this.lblTocLevel.Location = new System.Drawing.Point(32, 41);
+            this.lblTocLevel.Name = "lblTocLevel";
+            this.lblTocLevel.Size = new System.Drawing.Size(58, 13);
+            this.lblTocLevel.TabIndex = 2;
+            this.lblTocLevel.Text = "TOC Level";
+            // 
             // ddlEmbedFonts
             // 
             this.ddlEmbedFonts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1089,131 +1150,138 @@
             // 
             // txtRights
             // 
-            this.txtRights.Location = new System.Drawing.Point(100, 250);
+            this.txtRights.Location = new System.Drawing.Point(100, 307);
             this.txtRights.Multiline = true;
             this.txtRights.Name = "txtRights";
             this.txtRights.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtRights.Size = new System.Drawing.Size(150, 54);
-            this.txtRights.TabIndex = 15;
+            this.txtRights.TabIndex = 19;
             this.txtRights.Validated += new System.EventHandler(this.txtRights_Validated);
+            this.txtRights.Enter += new System.EventHandler(this.SetGotFocusValue);
             // 
             // lblRights
             // 
             this.lblRights.AutoSize = true;
-            this.lblRights.Location = new System.Drawing.Point(53, 253);
+            this.lblRights.Location = new System.Drawing.Point(53, 310);
             this.lblRights.Name = "lblRights";
             this.lblRights.Size = new System.Drawing.Size(37, 13);
-            this.lblRights.TabIndex = 14;
+            this.lblRights.TabIndex = 18;
             this.lblRights.Text = "Rights";
             this.lblRights.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtCoverage
             // 
-            this.txtCoverage.Location = new System.Drawing.Point(100, 220);
+            this.txtCoverage.Location = new System.Drawing.Point(100, 279);
             this.txtCoverage.Name = "txtCoverage";
             this.txtCoverage.Size = new System.Drawing.Size(150, 20);
-            this.txtCoverage.TabIndex = 13;
+            this.txtCoverage.TabIndex = 17;
             this.txtCoverage.Validated += new System.EventHandler(this.txtCoverage_Validated);
+            this.txtCoverage.Enter += new System.EventHandler(this.SetGotFocusValue);
             // 
             // lblCoverage
             // 
             this.lblCoverage.AutoSize = true;
-            this.lblCoverage.Location = new System.Drawing.Point(37, 223);
+            this.lblCoverage.Location = new System.Drawing.Point(37, 282);
             this.lblCoverage.Name = "lblCoverage";
             this.lblCoverage.Size = new System.Drawing.Size(53, 13);
-            this.lblCoverage.TabIndex = 12;
+            this.lblCoverage.TabIndex = 16;
             this.lblCoverage.Text = "Coverage";
             this.lblCoverage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtRelation
             // 
-            this.txtRelation.Location = new System.Drawing.Point(100, 190);
+            this.txtRelation.Location = new System.Drawing.Point(100, 251);
             this.txtRelation.Name = "txtRelation";
             this.txtRelation.Size = new System.Drawing.Size(150, 20);
-            this.txtRelation.TabIndex = 11;
+            this.txtRelation.TabIndex = 15;
             this.txtRelation.Validated += new System.EventHandler(this.txtRelation_Validated);
+            this.txtRelation.Enter += new System.EventHandler(this.SetGotFocusValue);
             // 
             // lblRelation
             // 
             this.lblRelation.AutoSize = true;
-            this.lblRelation.Location = new System.Drawing.Point(44, 193);
+            this.lblRelation.Location = new System.Drawing.Point(44, 254);
             this.lblRelation.Name = "lblRelation";
             this.lblRelation.Size = new System.Drawing.Size(46, 13);
-            this.lblRelation.TabIndex = 10;
+            this.lblRelation.TabIndex = 14;
             this.lblRelation.Text = "Relation";
             this.lblRelation.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtFormat
             // 
-            this.txtFormat.Location = new System.Drawing.Point(100, 160);
+            this.txtFormat.Location = new System.Drawing.Point(100, 223);
             this.txtFormat.Name = "txtFormat";
             this.txtFormat.Size = new System.Drawing.Size(150, 20);
-            this.txtFormat.TabIndex = 9;
+            this.txtFormat.TabIndex = 13;
             this.txtFormat.Validated += new System.EventHandler(this.txtFormat_Validated);
+            this.txtFormat.Enter += new System.EventHandler(this.SetGotFocusValue);
             // 
             // lblFormat
             // 
             this.lblFormat.AutoSize = true;
-            this.lblFormat.Location = new System.Drawing.Point(51, 163);
+            this.lblFormat.Location = new System.Drawing.Point(51, 226);
             this.lblFormat.Name = "lblFormat";
             this.lblFormat.Size = new System.Drawing.Size(39, 13);
-            this.lblFormat.TabIndex = 8;
+            this.lblFormat.TabIndex = 12;
             this.lblFormat.Text = "Format";
             this.lblFormat.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtSource
             // 
-            this.txtSource.Location = new System.Drawing.Point(100, 130);
+            this.txtSource.Location = new System.Drawing.Point(100, 195);
             this.txtSource.Name = "txtSource";
             this.txtSource.Size = new System.Drawing.Size(150, 20);
-            this.txtSource.TabIndex = 7;
+            this.txtSource.TabIndex = 11;
             this.txtSource.Validated += new System.EventHandler(this.txtSource_Validated);
+            this.txtSource.Enter += new System.EventHandler(this.SetGotFocusValue);
             // 
             // lblSource
             // 
             this.lblSource.AutoSize = true;
-            this.lblSource.Location = new System.Drawing.Point(49, 133);
+            this.lblSource.Location = new System.Drawing.Point(49, 198);
             this.lblSource.Name = "lblSource";
             this.lblSource.Size = new System.Drawing.Size(41, 13);
-            this.lblSource.TabIndex = 6;
+            this.lblSource.TabIndex = 10;
             this.lblSource.Text = "Source";
             this.lblSource.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtPublisher
             // 
-            this.txtPublisher.Location = new System.Drawing.Point(100, 100);
+            this.txtPublisher.Location = new System.Drawing.Point(100, 167);
             this.txtPublisher.Name = "txtPublisher";
             this.txtPublisher.Size = new System.Drawing.Size(150, 20);
-            this.txtPublisher.TabIndex = 5;
+            this.txtPublisher.TabIndex = 9;
             this.txtPublisher.Validated += new System.EventHandler(this.txtPublisher_Validated);
+            this.txtPublisher.Enter += new System.EventHandler(this.SetGotFocusValue);
             // 
             // lblPublisher
             // 
             this.lblPublisher.AutoSize = true;
-            this.lblPublisher.Location = new System.Drawing.Point(40, 103);
+            this.lblPublisher.Location = new System.Drawing.Point(40, 170);
             this.lblPublisher.Name = "lblPublisher";
             this.lblPublisher.Size = new System.Drawing.Size(50, 13);
-            this.lblPublisher.TabIndex = 4;
+            this.lblPublisher.TabIndex = 8;
             this.lblPublisher.Text = "Publisher";
             this.lblPublisher.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(100, 40);
+            this.txtDescription.Location = new System.Drawing.Point(100, 105);
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtDescription.Size = new System.Drawing.Size(150, 54);
-            this.txtDescription.TabIndex = 3;
+            this.txtDescription.TabIndex = 7;
             this.txtDescription.Validated += new System.EventHandler(this.txtDescription_Validated);
+            this.txtDescription.Enter += new System.EventHandler(this.SetGotFocusValue);
             // 
             // lblDescription
             // 
             this.lblDescription.AutoSize = true;
-            this.lblDescription.Location = new System.Drawing.Point(30, 43);
+            this.lblDescription.Location = new System.Drawing.Point(31, 108);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(59, 13);
-            this.lblDescription.TabIndex = 2;
+            this.lblDescription.TabIndex = 6;
             this.lblDescription.Text = "Information";
             this.lblDescription.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -1665,6 +1733,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.mobileIcon)).EndInit();
             this.tabOthers.ResumeLayout(false);
             this.tabOthers.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgCoverImage)).EndInit();
             this.tabPreview.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).EndInit();
             this.tabPicture.ResumeLayout(false);
@@ -1809,5 +1878,10 @@
         private System.Windows.Forms.RadioButton RadWidthAll;
         private System.Windows.Forms.Label LblPictureWidth;
         private System.Windows.Forms.NumericUpDown SpinPicWidth;
+        private System.Windows.Forms.ComboBox ddlTocLevel;
+        private System.Windows.Forms.Label lblTocLevel;
+        private System.Windows.Forms.Button btnCoverImage;
+        private System.Windows.Forms.Label lblCoverImage;
+        private System.Windows.Forms.PictureBox imgCoverImage;
     }
 }

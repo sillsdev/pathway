@@ -504,6 +504,11 @@ namespace SIL.PublishingSolution
             get { return ddlFiles; }
         }
 
+        public ComboBox DdlTocLevel
+        {
+            get { return ddlTocLevel; }
+        }
+
         public Label Label8
         {
             get { return label8; }
@@ -512,6 +517,11 @@ namespace SIL.PublishingSolution
         public PictureBox MobileIcon
         {
             get { return mobileIcon; }
+        }
+
+        public PictureBox CoverImage
+        {
+            get { return imgCoverImage; }
         }
 
         public ComboBox DdlFileProduceDict
@@ -802,13 +812,13 @@ namespace SIL.PublishingSolution
 
         private void txtInformation_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtInformation_ValidatedBL();
+            _CToolBL.txtInformation_ValidatedBL(sender);
             EditMobileCSS(sender, e);
         }
 
         private void txtCopyright_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtCopyright_ValidatedBL();
+            _CToolBL.txtCopyright_ValidatedBL(sender);
             EditMobileCSS(sender, e);
         }
 
@@ -936,7 +946,7 @@ namespace SIL.PublishingSolution
 
         private void txtDescription_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtDescription_ValidatedBL();
+            _CToolBL.txtDescription_ValidatedBL(sender);
             EditOthersCSS(sender, e);
         }
         private void txtDescription_KeyUp(object sender, EventArgs e)
@@ -945,7 +955,7 @@ namespace SIL.PublishingSolution
         }
         private void txtPublisher_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtPublisher_ValidatedBL();
+            _CToolBL.txtPublisher_ValidatedBL(sender);
             EditOthersCSS(sender, e);
         }
         private void txtPublisher_KeyUp(object sender, EventArgs e)
@@ -954,7 +964,7 @@ namespace SIL.PublishingSolution
         }
         private void txtSource_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtSource_ValidatedBL();
+            _CToolBL.txtSource_ValidatedBL(sender);
             EditOthersCSS(sender, e);
         }
         private void txtSource_KeyUp(object sender, EventArgs e)
@@ -963,7 +973,7 @@ namespace SIL.PublishingSolution
         }
         private void txtFormat_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtFormat_ValidatedBL();
+            _CToolBL.txtFormat_ValidatedBL(sender);
             EditOthersCSS(sender, e);
         }
         private void txtFormat_KeyUp(object sender, EventArgs e)
@@ -972,7 +982,7 @@ namespace SIL.PublishingSolution
         }
         private void txtRelation_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtRelation_ValidatedBL();
+            _CToolBL.txtRelation_ValidatedBL(sender);
             EditOthersCSS(sender, e);
         }
         private void txtRelation_KeyUp(object sender, EventArgs e)
@@ -981,7 +991,7 @@ namespace SIL.PublishingSolution
         }
         private void txtCoverage_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtCoverage_ValidatedBL();
+            _CToolBL.txtCoverage_ValidatedBL(sender);
             EditOthersCSS(sender, e);
         }
         private void txtCoverage_KeyUp(object sender, EventArgs e)
@@ -990,7 +1000,7 @@ namespace SIL.PublishingSolution
         }
         private void txtRights_Validated(object sender, EventArgs e)
         {
-            _CToolBL.txtRights_ValidatedBL();
+            _CToolBL.txtRights_ValidatedBL(sender);
             EditOthersCSS(sender, e);
         }
         private void txtRights_KeyUp(object sender, EventArgs e)
@@ -1018,6 +1028,18 @@ namespace SIL.PublishingSolution
             EditCSS(sender, e);
             string pageType = ddlRunningHead.SelectedItem.ToString();
             _CToolBL.DdlRunningHeadSelectedIndexChangedBl(pageType);
+        }
+
+	private void btnCoverImage_Click(object sender, EventArgs e)
+        {
+            _CToolBL.btnCoverImage_ClickBL();
+            EditOthersCSS(sender, e);
+        }
+
+        private void ddlTocLevel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _CToolBL.ddlTocLevel_SelectedIndexChangedBL(sender, e);
+            EditOthersCSS(sender, e);
         }
      }
 }

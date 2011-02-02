@@ -131,6 +131,12 @@
         <option name="Yes" file="Rules_Yes.css" />
         <option name="No" file="Rules_Yes.css" />
     </feature>
+    <feature name="TOCLevel">
+      <option name="1 - Book Only" file="Rules_Yes.css" />
+      <option name="2 - Book and Chapter" file="Rules_Yes.css" />
+      <option name="3 - Book, Major Section and Chapter" file="Rules_Yes.css" />
+      <option name="2 - Book, Major Section, Chapter and Minor Section" file="Rules_Yes.css" />
+    </feature>
     <feature name="Subject">
         <option name="Religion and Spirituality" file="Rules_Yes.css" />
         <option name="Reference" file="Rules_Yes.css" />
@@ -255,7 +261,7 @@
         <styleProperty name="FileProduced" value="One" />
         <styleProperty name="RedLetter" value="No" />
         <styleProperty name="Information" value="DRAFT Bible text." />
-        <styleProperty name="Copyright" value="© 2010 Wycliffe Bible Translators, Inc." />
+        <styleProperty name="Copyright" value="© 2011 Wycliffe Bible Translators, Inc." />
         <styleProperty name="Icon" value="Icon.png" />
       </style>
     </mobile>
@@ -268,6 +274,8 @@
       <style name="EBook (epub)" file="epub.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p2.jpg">
         <description>1 column flowed text, left aligned, 13pt font</description>
         <styleProperty name="EmbedFonts" value="Yes"/>
+        <styleProperty name="CoverImage" value="cover.png"/>
+        <styleProperty name="TOCLevel" value="2 - Book and Chapter"/>
         <styleProperty name="Creator" value=" " />
         <styleProperty name="Publisher" value=" " />
         <styleProperty name="Type" value=" " />
@@ -277,7 +285,7 @@
         <styleProperty name="Relation" value=" " />
         <styleProperty name="Coverage" value=" " />
         <styleProperty name="Information" value="DRAFT Bible text." />
-        <styleProperty name="Copyright" value="© 2010 Wycliffe Bible Translators, Inc." />
+        <styleProperty name="Copyright" value="© 2011 Wycliffe Bible Translators, Inc." />
       </style>
     </others>
   </styles>

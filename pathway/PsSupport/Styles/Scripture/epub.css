@@ -25,6 +25,11 @@ margin-left : 0;
 padding-bottom : 2%;
 padding-top : 2%;
 }
+.Alternate_Reading {
+font-weight: bold;
+text-indent: 0pt;
+margin-left: 0pt;
+}
 .Chapter_Number {
 font-size : 250%;
 font-weight : normal;
@@ -76,6 +81,10 @@ margin-left : 0;
 margin-bottom: 0;
 padding-bottom : 1%;
 padding-top : 2%;
+}
+.See_In_Glossary {
+    text-indent: 0pt;
+    margin-left: 0pt;
 }
 .Note_General_Paragraph span {
 display: none;
@@ -292,6 +301,14 @@ margin-top : 9pt;
 margin-bottom : 18pt;
 content : "\00A0";
 }
+.REVERSE_SOLIDUS2, .REVERSE_SOLIDUScom, .REVERSE_SOLIDUSCom, .REVERSE_SOLIDUSEllaFULL_STOP,
+.REVERSE_SOLIDUSsl, .REVERSE_SOLIDUSv1, .REVERSE_SOLIDUSv14, .REVERSE_SOLIDUSv15,
+.REVERSE_SOLIDUSv19, .REVERSE_SOLIDUSv20, .REVERSE_SOLIDUSv8 {
+    font-size: 90%;	/* cascaded environment */
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+
 /* Paratext-only (for now) styles */
 .iot {
 font-weight : bold;
@@ -300,5 +317,4 @@ text-align : center;
 text-indent : 0;
 margin-left : 0;
 margin-top : 8pt;
-
 }

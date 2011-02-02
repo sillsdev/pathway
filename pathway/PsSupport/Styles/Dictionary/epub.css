@@ -4,6 +4,9 @@ font-weight: normal;
 font-style: normal;
 line-height: 115%;
 }
+.letHead {
+clear : both;
+} 
 .letter {
 font-size : 250%;
 font-weight : normal;
@@ -14,6 +17,12 @@ margin-left : 0;
 padding-bottom : 2%;
 padding-top : 2%;
 }
+.letData {
+column-count : 2;
+column-gap : 1.5em;
+column-fill : balance;
+text-align : left;
+} 
 .entry {
 margin-left : 0;
 margin-left : 12pt;
@@ -35,6 +44,9 @@ font-style: italic;
 margin-right: 5px;
 margin-left: 5px;
 }
+.sense {
+font-weight : normal;
+} 
 .LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub, 
 .LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub,
 .xsensenumber {
@@ -115,4 +127,168 @@ display : block;
 text-align : center;
 text-transform : capitalize;
 margin-bottom : .5%;
+}
+
+
+/****************************************/
+.complexform-form,
+.crossref,
+.LexEntry-publishStemComponentTarget-MLHeadWordPub,
+.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub,
+.LexSense-publishStemComponentTarget-OwnerOutlinePub,
+.LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub,
+.sense-crossref,
+.crossref-headword,
+.reversal-form {
+font-size : 90%;
+font-weight : bold;
+}
+.complexform-form:after,
+.complexformrefs:after,
+.complexformrefs > .xitem + .xitem:before,
+.complexform-type:after,
+.crossref > .xitem + .xitem:before,
+.definition:after,
+.definition > .xitem + .xitem:before,
+.encyclopedic-info > .xitem + .xitem:before,
+.entryref-primary-minor:before,
+.entryref-summary-minor:before,
+.entryref-type:after,
+.entryref-type-minor:after,
+.etymology:after,
+.etymology-form:after,
+.etymology-gloss:after,
+.examples:after,
+.examples > .xitem + .xitem:before,
+.grammatical-info:after,
+.headword:after,
+.headword > .xitem + .xitem:before,
+.headword-minor:after,
+.headword-minor > .xitem + .xitem:before,
+.LexEntry-publishStemComponentTarget-MLHeadWordPub > .xitem + .xitem:before,
+.LexEntry-publishStemComponentTarget-SummaryDefinitionPub:before,
+.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub > .xitem + .xitem:before,
+.LexEntry-publishStemMinorPrimaryTarget-SummaryDefinitionPub:before,
+.LexEntryType-publishStemEntryType-AbbreviationPub:after,
+.LexEntryType-publishStemMinorEntryType-AbbreviationPub:after,
+.LexEntryType-publishStemMinorVariantType-ReverseAbbrPub:after,
+.LexEntryType-publishStemSenseVariantType-ReverseAbbrPub:after,
+.LexEntryType-publishStemVariantType-ReverseAbbrPub:after,
+.LexSense-publishStemComponentTarget-GlossPub:before,
+.LexSense-publishStemComponentTarget-GlossPub > .xitem + .xitem:before,
+.LexSense-publishStemComponentTarget-OwnerOutlinePub > .xitem + .xitem:before,
+.LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub > .xitem + .xitem:before,
+.partofspeech:after,
+.pictureSense:after,
+.primaryrefs-minor:after,
+.scientific-name:after,
+.sense-complexformrefs:after,
+.sense-complexformrefs > .xitem + .xitem:before,
+.sense-complexform-type:after,
+.sense-crossref > .xitem + .xitem:before,
+.senses > .sense + .sense:before,
+.sense-variantref-entry-type:after,
+.translation:after,
+.translation > .xitem + .xitem:before,
+.variantref-entry-type:after,
+.variantref-entry-type-minor:after,
+.CmSemanticDomain-publishSemDomForReversal-AbbreviationPub:before,
+.CmSemanticDomain-publishSemDomForReversal-NamePub:before,
+.complexformref-entry-type:before,
+.complexformref-headword:before,
+.complexformrefs:before,
+.complexformrefs>.xitem + .xitem:before
+.crossref-headword:before,
+.crossref-headword>.xitem + .xitem:before,
+.reversal-form:after {
+content : " ";
+}
+LexEntryType-publishStemSenseVariantType-ReverseAbbrPub {
+padding-right: 5px;
+}
+.crossrefs:after {
+content : ". ";
+}
+.crossrefs > .xitem + .xitem:before,
+.relations > .xitem + .xitem:before,
+.variantrefs > .xitem + .xitem:before,
+.variantrefs-minor > .xitem + .xitem:before,
+.sense-variantrefs > .xitem + .xitem:before {
+content : "; ";
+}
+.encyclopedic-info:before {
+content : "[";
+}
+.encyclopedic-info:after {
+content : "] ";
+}
+.entryref-component > .xitem + .xitem:before,
+.entryref-primary-minor > .xitem + .xitem:before,
+.entryref-type > .xitem + .xitem:before,
+.entryref-type-minor > .xitem + .xitem:before,
+.crossref-targets > .xitem + .xitem:before,
+.lexref-targets > .xitem + .xitem:before,
+.primaryrefs > .xitem + .xitem:before,
+.primaryrefs-minor > .xitem + .xitem:before,
+.semantic-domains > .xitem + .xitem:before,
+.sense-variantref-entry-type > .xitem + .xitem:before,
+.sense-variantref-form > .xitem + .xitem:before,
+.usage-types > .xitem + .xitem:before,
+.variantref-entry-type > .xitem + .xitem:before,
+.variantref-entry-type-minor > .xitem + .xitem:before,
+.variantref-form > .xitem + .xitem:before,
+.variantref-form-minor > .xitem + .xitem:before {
+content : ", ";
+}
+.etymology-form,
+.sense-complexform-form,
+.sense-variantref-form,
+.variantref-form,
+.variantref-form-minor,
+.complexformref-headword {
+font-size : 90%;
+}
+.grammatical-info,
+.lexref-type {
+font-size : 90%;
+font-style : italic;
+}
+.lexref-type:after {
+content : ": ";
+}
+.primaryrefs:before,
+.sense-variantrefs:before,
+.variantrefs:before,
+.variantrefs-minor:before {
+content : "(";
+}
+.primaryrefs:after,
+.sense-variantrefs:after,
+.variantrefs:after,
+.variantrefs-minor:after {
+content : ") ";
+}
+.relations:after {
+content : ". ";
+}
+.semantic-domain-abbr:after,
+.CmSemanticDomain-publishSemDomForReversal-AbbreviationPub:after {
+content : " - ";
+}
+/* AARGH - this is in English... */
+.semantic-domains:before {
+content : "(sem. domains: ";
+}
+.semantic-domains:after {
+content : ".) ";
+}
+.usage-types:before {
+content : "{";
+}
+.usage-types:after {
+content : "} ";
+}
+.complexform-components>.xitem + .xitem:before,
+.complexform-entry-type>.xitem + .xitem:before {
+content: "," 
 }

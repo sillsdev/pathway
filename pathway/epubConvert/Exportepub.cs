@@ -35,7 +35,6 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using epubConvert;
@@ -68,7 +67,8 @@ namespace SIL.PublishingSolution
         public string Format { get; set; }
         public string Source { get; set; }
         public bool EmbedFonts { get; set; }
-
+        public string CoverImage { get; set; }
+        public string TocLevel { get; set; }
 
         // interface methods
         public string ExportType
@@ -150,13 +150,25 @@ namespace SIL.PublishingSolution
                 // epub.css file.
                 // TODO: replace this with the merged CSS file block (below) when our merging process passes validation.
                 string mergedCSS;
+                var sbPath = new StringBuilder();
+                sbPath.Append(Common.GetPSApplicationPath());
+//                sbPath.Append(Path.DirectorySeparatorChar);
+                sbPath.Append("Styles");
+                sbPath.Append(Path.DirectorySeparatorChar);
                 // EDB - try not messing with the CSS file
-                if (File.Exists(Path.Combine(outputFolder, "epub.css")))
+                if (_inputType.Equals("scripture"))
                 {
-                    mergedCSS = Path.Combine(outputFolder, "epub.css");
+                    sbPath.Append("Scripture");
+                    sbPath.Append(Path.DirectorySeparatorChar);
+                    sbPath.Append("epub.css");
+                    mergedCSS = sbPath.ToString();
                 }
-                else {
-                    mergedCSS = projInfo.DefaultCssFileWithPath;
+                else
+                {
+                    sbPath.Append("Dictionary");
+                    sbPath.Append(Path.DirectorySeparatorChar);
+                    sbPath.Append("epub.css");
+                    mergedCSS = sbPath.ToString();
                 }
 //                string tempFolderName = Path.GetFileName(tempFolder);
 //                var mc = new MergeCss { OutputLocation = tempFolderName };
@@ -925,8 +937,22 @@ namespace SIL.PublishingSolution
         private void CreateCoverImage(string contentFolder, PublicationInformation projInfo)
         {
             // open up the appropriate image for processing
+            string strImageFile;
+            if (File.Exists(CoverImage))
+            {
+                // if the user has specified a custom cover image, use that instead of ours
+                // (copy it to the destination folder as "cover.png" and return)
+                // Note that we're not badging the file for custom cover images
+                strImageFile = CoverImage;
+                string dest = Path.Combine(contentFolder, "cover.png");
+                var img = new Bitmap(strImageFile);
+                img.Save(dest);
+                return;
+            }
+            // no custom cover image specified (or the file specified can't be found) -
+            // use our default cover image + the badging information
             string strGraphicsFolder = Common.PathCombine(Common.GetPSApplicationPath(), "Graphic");
-            string strImageFile = Path.Combine(strGraphicsFolder, "cover.png");
+            strImageFile = Path.Combine(strGraphicsFolder, "cover.png");
             if (!File.Exists(strImageFile)) return;
             var bmp = new Bitmap(strImageFile);
             Graphics g = Graphics.FromImage(bmp);
@@ -1125,80 +1151,100 @@ namespace SIL.PublishingSolution
         {
             // Load User Interface Collection Parameters
             Param.LoadSettings();
+            string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
+            Dictionary<string, string> othersfeature = Param.GetItemsAsDictionary("//stylePick/styles/others/style[@name='" + layout + "']/styleProperty");
             // TODO: how to pull in the current style?
-            Dictionary<string, string> mobilefeature = Param.GetItemsAsDictionary("//styles/others/style[@name='EBook (epub)']/styleProperty");
+//            Dictionary<string, string> mobilefeature = Param.GetItemsAsDictionary("//styles/others/style[@name='EBook (epub)']/styleProperty");
             // information
-            if (mobilefeature.ContainsKey("Information"))
+            if (othersfeature.ContainsKey("Information"))
             {
-                Description = mobilefeature["Information"].Trim();
+                Description = othersfeature["Information"].Trim();
             }
             else
             {
                 Description = "";
             }
             // copyright
-            if (mobilefeature.ContainsKey("Copyright"))
+            if (othersfeature.ContainsKey("Copyright"))
             {
-                Rights = mobilefeature["Copyright"].Trim();
+                Rights = othersfeature["Copyright"].Trim();
             }
             else
             {
                 Rights = "";
             }
             // Source
-            if (mobilefeature.ContainsKey("Source"))
+            if (othersfeature.ContainsKey("Source"))
             {
-                Source = mobilefeature["Source"].Trim();
+                Source = othersfeature["Source"].Trim();
             }
             else
             {
                 Source = "";
             }
             // Format
-            if (mobilefeature.ContainsKey("Format"))
+            if (othersfeature.ContainsKey("Format"))
             {
-                Format = mobilefeature["Format"].Trim();
+                Format = othersfeature["Format"].Trim();
             }
             else
             {
                 Format = "";
             }
             // Publisher
-            if (mobilefeature.ContainsKey("Publisher"))
+            if (othersfeature.ContainsKey("Publisher"))
             {
-                Publisher = mobilefeature["Publisher"].Trim();
+                Publisher = othersfeature["Publisher"].Trim();
             }
             else
             {
                 Publisher = "";
             }
             // Coverage
-            if (mobilefeature.ContainsKey("Coverage"))
+            if (othersfeature.ContainsKey("Coverage"))
             {
-                Coverage = mobilefeature["Coverage"].Trim();
+                Coverage = othersfeature["Coverage"].Trim();
             }
             else
             {
                 Coverage = "";
             }
             // Rights
-            if (mobilefeature.ContainsKey("Rights"))
+            if (othersfeature.ContainsKey("Rights"))
             {
-                Rights = mobilefeature["Rights"].Trim();
+                Rights = othersfeature["Rights"].Trim();
             }
             else
             {
                 Rights = "";
             }
             // embed fonts
-            if (mobilefeature.ContainsKey("EmbedFonts"))
+            if (othersfeature.ContainsKey("EmbedFonts"))
             {
-                EmbedFonts = (mobilefeature["EmbedFonts"].Trim().Equals("Yes")) ? true : false;
+                EmbedFonts = (othersfeature["EmbedFonts"].Trim().Equals("Yes")) ? true : false;
             }
             else
             {
                 // default - we're more concerned about accurate font rendering
                 EmbedFonts = true;
+            }
+            // Cover Image
+            if (othersfeature.ContainsKey("CoverImage"))
+            {
+                CoverImage = othersfeature["CoverImage"].Trim();
+            }
+            else
+            {
+                CoverImage = "";
+            }
+            // TOC Level
+            if (othersfeature.ContainsKey("TOCLevel"))
+            {
+                TocLevel = othersfeature["TOCLevel"].Trim();
+            }
+            else
+            {
+                TocLevel = "";
             }
         }
 

@@ -74,8 +74,8 @@
             </style>
         </web>
         <others>
-            <style name="GPS11J11" file="GPS11J11.css" approvedBy="GPS">
-                <description>5.25x8.25in - 1 Col - Justified - Charis 11 on 13</description>
+            <style name="EBook (epub)" file="epub.css" approvedBy="GPS">
+                <description>1 column flowed text, left aligned, 13pt font</description>
             </style>
         </others>
     </styles>

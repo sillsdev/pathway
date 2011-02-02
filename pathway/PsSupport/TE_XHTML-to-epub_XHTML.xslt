@@ -189,15 +189,6 @@
 				<xsl:for-each select="@*[not(local-name() = 'lang' )]">
 					<xsl:copy/>
 				</xsl:for-each>
-				<xsl:if test="@class='sense-variantrefs'">
-					<xsl:text> (</xsl:text>
-				</xsl:if>
-				<xsl:if test="@class='semantic-domains'">
-					<xsl:text> (</xsl:text>
-				</xsl:if>
-				<xsl:if test="@class='semantic-domain-name'">
-					<xsl:text> - </xsl:text>
-				</xsl:if>
 				<!-- if this is a reversal index entry (for a dictionary), add an ID -->
 				<xsl:if test="@class='ReversalIndexEntry_Self'">
 					<xsl:attribute name="id"><xsl:value-of select="generate-id()"/></xsl:attribute>
@@ -226,12 +217,6 @@
 					<xsl:attribute name="id"><xsl:text>id</xsl:text><xsl:value-of select="../../../../xhtml:span[@class='scrBookCode']"/><xsl:text>_</xsl:text><xsl:value-of select="preceding::xhtml:span[@class='Chapter_Number'][1]"/><xsl:text>_</xsl:text><xsl:value-of select="."/></xsl:attribute>
 				</xsl:if>
 				<xsl:apply-templates/>
-				<xsl:if test="@class='sense-variantrefs'">
-					<xsl:text>) </xsl:text>
-				</xsl:if>
-				<xsl:if test="@class='semantic-domains'">
-					<xsl:text>) </xsl:text>
-				</xsl:if>
 			</xsl:copy>
 		</xsl:if>
 	</xsl:template>
