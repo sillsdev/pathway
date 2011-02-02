@@ -187,7 +187,7 @@ namespace SIL.PublishingSolution
                 {
                     File.Delete(niceNameCSS);
                 }
-                File.Move(mergedCSS, niceNameCSS);
+                File.Copy(mergedCSS, niceNameCSS);
                 mergedCSS = niceNameCSS;
                 Common.SetDefaultCSS(projInfo.DefaultXhtmlFileWithPath, defaultCSS);
                 Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCSS);
@@ -1706,6 +1706,7 @@ namespace SIL.PublishingSolution
             int index = 1;
             int chapNum = 1;
             bool needsEnd = false;
+            bool skipChapterInfo = TocLevel.StartsWith("1");
             foreach (string file in files)
             {
                 string name = Path.GetFileName(file);
@@ -1751,10 +1752,13 @@ namespace SIL.PublishingSolution
                         index++;
                         // chapters within the books (nested as a subhead)
                         chapNum = 1;
-                        WriteChapterLinks(file, ref index, ncx, ref chapNum);
+                        if (!skipChapterInfo)
+                        {
+                            WriteChapterLinks(file, ref index, ncx, ref chapNum);
+                        }
                         needsEnd = true;
                     }
-                    else
+                    else if (!skipChapterInfo)
                     {
                         // somewhere in the middle of a split file - just write out the chapter entries
                         WriteChapterLinks(file, ref index, ncx, ref chapNum);
@@ -1782,7 +1786,10 @@ namespace SIL.PublishingSolution
                     index++;
                     // chapters within the books (nested as a subhead)
                     chapNum = 1;
-                    WriteChapterLinks(file, ref index, ncx, ref chapNum);
+                    if (!skipChapterInfo)
+                    {
+                        WriteChapterLinks(file, ref index, ncx, ref chapNum);
+                    }
                     // end the book's navPoint element
                     ncx.WriteEndElement(); // navPoint
                 }
