@@ -8,7 +8,7 @@ xcopy %base2%\ThirdParty\gsdll32.dll . /y
 xcopy %base2%\ThirdParty\epubcheck-1.1\* .\epubcheck-1.1  /i /s /q /y
 xcopy %base2%\LiftPrepare\Lib\PalasoLib\*.dll . /y
 xcopy %base2%\PathwayB\%cfg2%\PathwayB.* . /y
-xcopy %base2%\OpenOfficeConvert\%cfg2%\OpenOfficeConvert.* . /y
+xcopy %base2%\OpenOfficeWriter\%cfg2%\OpenOfficeWriter.* . /y
 xcopy %base2%\LiftPrepare\%cfg2%\LiftPrepare.* . /y
 xcopy %base2%\InDesignConvert\%cfg2%\InDesignConvert.* . /y
 xcopy %base2%\epubConvert\%cfg2%\epubConvert.* . /y

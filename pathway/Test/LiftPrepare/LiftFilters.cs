@@ -19,7 +19,7 @@ namespace Test.LiftPrepare
         private string _outputPath;
         private string _expectedPath;
         private PublicationInformation _projInfo;
-        private OOExportOpenOffice exportOpenOffice;
+        private ExportOpenOffice exportOpenOffice;
         #endregion Private Variables
         #region SetUp
 
@@ -32,7 +32,7 @@ namespace Test.LiftPrepare
             _expectedPath = Common.PathCombine(testPath, "Expected");
             Common.SupportFolder = "";
             Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
-            exportOpenOffice = new OOExportOpenOffice();
+            exportOpenOffice = new ExportOpenOffice();
             var icuFolder = PathPart.Bin(Environment.CurrentDirectory, "/../LiftPrepare/lib/PalasoLib");
             FolderTree.Copy(icuFolder, Environment.CurrentDirectory);
         }

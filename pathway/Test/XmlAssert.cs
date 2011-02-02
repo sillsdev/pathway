@@ -13,6 +13,7 @@
 // ODT Test Support
 // </remarks>
 // --------------------------------------------------------------------------------------------
+using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.Xml;
 using System.Xml;
@@ -43,6 +44,23 @@ namespace Test
             Stream outputStream = (Stream)outputCanon.GetOutput(typeof(Stream));
             Stream expectStream = (Stream)expectCanon.GetOutput(typeof(Stream));
             FileAssert.AreEqual(expectStream, outputStream, msg);
+        }
+
+        public static void Ignore(string path, string xpath, Dictionary<string, string> nameSpaces)
+        {
+            XmlDocument xmlDocument = new XmlDocument{XmlResolver = null};
+            XmlNamespaceManager ns = new XmlNamespaceManager(xmlDocument.NameTable);
+            if (nameSpaces != null)
+                foreach (string key in nameSpaces.Keys)
+                    ns.AddNamespace(key, nameSpaces[key]);
+            xmlDocument.Load(path);
+            XmlNode xmlNode = xmlDocument.SelectSingleNode(xpath, ns);
+            if (xmlNode != null)
+            {
+                xmlNode.InnerText = "Ignore";
+                xmlDocument.Save(path);
+            }
+            xmlDocument.RemoveAll();
         }
     }
 }

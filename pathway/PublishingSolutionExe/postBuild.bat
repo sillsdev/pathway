@@ -16,7 +16,7 @@ del sectionTypes.xml
 xcopy %base%\Build\Installer\readme.rtf /y
 xcopy %base%\Build\Installer\license.rtf /y
 xcopy %base%\PathwayB\%cfg%\PathwayB.* . /y
-xcopy %base%\OpenOfficeConvert\%cfg%\OpenOfficeConvert.* . /y
+xcopy %base%\OpenOfficeWriter\%cfg%\OpenOfficeWriter.* . /y
 xcopy %base%\LiftPrepare\%cfg%\LiftPrepare.* . /y
 xcopy %base%\InDesignConvert\%cfg%\InDesignConvert.* . /y
 xcopy %base%\epubConvert\%cfg%\epubConvert.* . /y

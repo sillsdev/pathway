@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\ConfigurationTool\OpenOfficeWriter.dll.config" ComponentGuid="DEE17433-AAFD-4236-8C52-49433AE2D715"/>
+	<File Path="Files\ConfigurationTool\OpenOfficeWriter.pdb" ComponentGuid="EB20CFDC-4BCC-4015-BFDB-92C9A151490A"/>
+	<File Path="Files\ConfigurationTool\OpenOfficeWriter.dll" ComponentGuid="541C5F39-4179-4AC7-9006-824FC694544A"/>
 	<File Path="Files\ConfigurationTool\Styles\Dictionary\PageNumber_TopRight.css" ComponentGuid="F335E460-DA42-4641-B222-F30FCA0D08C3"/>
 	<File Path="Files\ConfigurationTool\Styles\Dictionary\PageNumber_TopLeft.css" ComponentGuid="87E460AA-3EBE-495C-88A2-DBA3D9E6F9BD"/>
 	<File Path="Files\ConfigurationTool\Styles\Dictionary\PageNumber_TopCenter_Mirrored.css" ComponentGuid="3CC9BA1A-B398-445D-A79D-78BAED6201BE"/>

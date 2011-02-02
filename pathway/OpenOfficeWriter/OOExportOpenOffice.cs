@@ -27,7 +27,7 @@ using Test;
 
 namespace SIL.PublishingSolution
 {
-    public class OOExportOpenOffice : IExportProcess
+    public class ExportOpenOffice : IExportProcess
     {
         #region Public Functions
 
@@ -35,7 +35,7 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                return "OpenOfficeWriter";
+                return "OpenOffice";
             }
         }
 
@@ -466,7 +466,7 @@ namespace SIL.PublishingSolution
         {
             Common.ShowMessage = false;
             _odtFiles.Clear();
-            var exportProcess = new OOExportOpenOffice();
+            var exportProcess = new ExportOpenOffice();
             string LexiconFileName = string.Empty;
 
             foreach (KeyValuePair<int, Dictionary<string, string>> keyvalue in _dictSorderSection)
@@ -543,7 +543,7 @@ namespace SIL.PublishingSolution
             ExportOneSection(publicationInfo);
         }
 
-        private void XslProcess(KeyValuePair<string, string> subSection, string fileName, string xslFileName, OOExportOpenOffice exportOpenOffice, ProgressBar statusProgressBar)
+        private void XslProcess(KeyValuePair<string, string> subSection, string fileName, string xslFileName, ExportOpenOffice exportOpenOffice, ProgressBar statusProgressBar)
         {
             bool generated;
             if (_dictStepFilenames.ContainsKey(subSection.Key))

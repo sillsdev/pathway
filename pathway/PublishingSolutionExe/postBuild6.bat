@@ -10,7 +10,7 @@ del sectionTypes.xml
 xcopy ..\..\..\Build\Installer\readme.rtf /y
 xcopy ..\..\..\Build\Installer\license.rtf /y
 xcopy ..\..\..\PathwayB\bin\%1\PathwayB.* . /y
-xcopy ..\..\..\OpenOfficeConvert\bin\%1\OpenOfficeConvert.* . /y
+xcopy ..\..\..\OpenOfficeWriter\bin\%1\OpenOfficeWriter.* . /y
 xcopy ..\..\..\LiftPrepare\bin\%1\LiftPrepare.* . /y
 xcopy ..\..\..\InDesignConvert\bin\%1\InDesignConvert.* . /y
 rem if "%1" == "Release" goto removeXetex

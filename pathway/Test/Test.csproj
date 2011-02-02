@@ -197,6 +197,7 @@
     <Compile Include="WordPressConvert\ExportWordPressTest.cs" />
     <Compile Include="XeTeXConvert\ExportXeTeXTest.cs" />
     <Compile Include="XeTeXConvert\PostscriptLanguageTest.cs" />
+    <Compile Include="XhtmlExport\XhtmlExportTest.cs" />
     <Compile Include="XmlAssert.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -325,6 +326,8 @@
     <Folder Include="Properties\" />
     <Folder Include="WordPressConvert\TestFiles\Expected\" />
     <Folder Include="WordPressConvert\TestFiles\Input\" />
+    <Folder Include="XhtmlExport\TestFiles\Expect\" />
+    <Folder Include="XhtmlExport\TestFiles\Input\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

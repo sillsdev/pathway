@@ -41,15 +41,20 @@ namespace SIL.PublishingSolution
 
             _backend.Clear();
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
-            foreach (FileInfo fileInfo in directoryInfo.GetFiles("*Convert.dll"))
+            foreach (FileInfo fileInfo in directoryInfo.GetFiles("*.dll"))
             {
                 //IExportProcess exportProcess =
                 //    CreateObject(fileInfo.FullName, "SIL.PublisingSoltuion." + Path.GetFileNameWithoutExtension(fileInfo.Name)) as
                 //    IExportProcess;
-
+                string fileName = string.Empty;
+                if (fileInfo.Name.Contains("Convert"))
+                    fileName = Path.GetFileNameWithoutExtension(fileInfo.Name).Replace("Convert", "");
+                else if (fileInfo.Name.Contains("Writer"))
+                    fileName = Path.GetFileNameWithoutExtension(fileInfo.Name).Replace("Writer", "");
+                else
+                    continue;
                 try
                 {
-                    string fileName = Path.GetFileNameWithoutExtension(fileInfo.Name).Replace("Convert", "");
                     fileName = "SIL.PublishingSolution.Export" + fileName;
                     IExportProcess exportProcess = CreateObject(fileInfo.FullName, fileName) as IExportProcess;
 

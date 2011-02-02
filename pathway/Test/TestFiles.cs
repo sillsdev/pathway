@@ -13,6 +13,7 @@
 // ---------------------------------------------------------------------------------------------
 using System;
 using System.IO;
+using System.Threading;
 using SIL.Tool;
 
 namespace Test
@@ -30,12 +31,17 @@ namespace Test
             _outputPath = Common.PathCombine(testPath, "output");
             _expectedPath = Common.PathCombine(testPath, "Expected");
             if (Directory.Exists(_outputPath))
+            {
                 Directory.Delete(_outputPath, true);
+                Thread.Sleep(1000);
+            }
             Directory.CreateDirectory(_outputPath);
         }
 
         public string Input(string fileName)
         {
+            if (string.IsNullOrEmpty(fileName))
+                return _inputPath;
             return Common.PathCombine(_inputPath, fileName);
         }
 
@@ -48,11 +54,15 @@ namespace Test
 
         public string Output(string fileName)
         {
+            if (string.IsNullOrEmpty(fileName))
+                return _outputPath;
             return Common.PathCombine(_outputPath, fileName);
         }
 
         public string Expected(string fileName)
         {
+            if (string.IsNullOrEmpty(fileName))
+                return _expectedPath;
             return Common.PathCombine(_expectedPath, fileName);
         }
     }

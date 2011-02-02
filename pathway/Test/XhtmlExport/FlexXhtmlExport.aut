@@ -1,0 +1,38 @@
+; Flex XHTML Export Script
+; ========================
+;
+; OS:     Windows 9x/NT
+; Author: Greg Trihus <greg_trihus@sil.org>
+;
+; Runs fieldworks to export YCE-Test as XHTML
+
+IfEqual,proj,,SetEnv,proj,YCE-Test
+IFEqual,Backup,,SetEnv,Backup,YCE-Test 2010-11-04 1357.fwbackup
+IfEqual,IncOpt,,SetEnv,IncOpt,c
+IfEqual,InputPath,,SetEnv,InputPath,c:\\svn\\btai\\Tests
+IfEqual,OutputPath,,SetEnv,OutputPath,C:\\svn\\XhtmlData
+;MsgBox, 4, AutoIt Flex XHTML Export, Run Fieldworks and Export %proj% as XHTML. Run?
+;IfMsgBox, NO, Goto, denied
+
+ifExist,%FW_HOME%\\FieldWorks.exe, Goto, GotHome
+RegRead,FW_HOME,REG_SZ,HKEY_LOCAL_MACHINE,Software\\SIL\\Fieldworks\\7.0,RootCodeDir
+ifExist,%FW_HOME%\\FieldWorks.exe, Goto, GotHome
+MsgBox, 48, Missing FieldWorks 7, Unable to find location of FieldWorks 7
+Goto, denied
+
+GotHome:
+Run, "%FW_HOME%\\Fieldworks.exe" -app Flex -db "%proj%" -restore "%InputPath%\\%Backup%" -include %IncOpt%
+WinWaitActive, %proj% - FieldWorks Language Explorer
+Send, !fe{DOWN 5}{ENTER}
+WinWaitActive, Export to XHTML
+Send, %OutputPath%\\%proj%.xhtml{ENTER}
+WinWaitActive, %proj% - FieldWorks Language Explorer
+Send, !{F4}
+WinWaitClose, %proj% - FieldWorks Language Explorer
+
+denied:
+Exit
+
+[ADLIB]
+Global Writing Systems Changed,writing systems were updated,Send, !n
+Confirm Save As,,Send, !y

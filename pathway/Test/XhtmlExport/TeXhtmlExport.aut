@@ -1,0 +1,42 @@
+; Flex XHTML Export Script
+; ========================
+;
+; OS:     Windows 9x/NT
+; Author: Greg Trihus <greg_trihus@sil.org>
+;
+; Runs fieldworks to export YCE-Test as XHTML
+
+IfEqual,proj,,SetEnv,proj,Nkonya
+IfEqual,Backup,,SetEnv,Backup,Nkonya 2010-11-04 1419.fwbackup
+IfEqual,IncOpt,,SetEnv,IncOpt,cl
+IfEqual,InputPath,,SetEnv,InputPath,c:\\svn\\btai\\Tests
+IfEqual,OutputPath,,SetEnv,OutputPath,C:\\svn\\XhtmlData
+;MsgBox, 4, AutoIt Flex XHTML Export, Run Fieldworks and Export %proj% as XHTML. Run?
+;IfMsgBox, NO, Goto, denied
+
+ifExist,%FW_HOME%\\FieldWorks.exe, Goto, GotHome
+RegRead,FW_HOME,REG_SZ,HKEY_LOCAL_MACHINE,Software\\SIL\\Fieldworks\\7.0,RootCodeDir
+ifExist,%FW_HOME%\\FieldWorks.exe, Goto, GotHome
+MsgBox, 48, Missing FieldWorks 7, Unable to find location of FieldWorks 7
+Goto, denied
+
+GotHome:
+Run, "%FW_HOME%\\Fieldworks.exe" -app Te -db "%proj%" -restore "%InputPath%\\%Backup%" -include %IncOpt%
+WinWaitActive, %proj% - Translation Editor
+Sleep, 500
+Send, !fe{DOWN 4}{ENTER}
+WinWaitActive, Export XHTML
+Sleep, 500
+Send, !f+{HOME}
+Send, %OutputPath%\\%proj%.xhtml{ENTER}
+WinWaitActive, %proj% - Translation Editor
+Sleep, 2500
+Send, !{F4}
+WinWaitClose, %proj% - Translation Editor
+
+denied:
+Exit
+
+[ADLIB]
+Global Writing Systems Changed,writing systems were updated,Send, !n
+Export XHTML,replace it,Send, !y

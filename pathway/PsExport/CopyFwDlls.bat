@@ -40,7 +40,7 @@ set cfg=bin\x86\%1
 :anyCpu
 
 rem copy backends
-xcopy %base%\OpenOfficeConvert\%cfg%\OpenOfficeConvert.* . /y
+xcopy %base%\OpenOfficeWriter\%cfg%\OpenOfficeWriter.* . /y
 xcopy %base%\InDesignConvert\%cfg%\InDesignConvert.* . /y
 xcopy %base%\epubConvert\%cfg%\epubConvert.* . /y
 xcopy %base%\epubValidator\%cfg%\epubValidator.* . /y
