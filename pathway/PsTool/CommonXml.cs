@@ -366,11 +366,20 @@ namespace SIL.Tool
                     fromPath = flexPict;
                 }
                 else
-                {   // para + database + figures(folder) + fileName
+                {
+                    // Note: In ParaText original files are stored in {any Drive\My Paratext Projects\{project name}\local\figures}
+                    // Note: The converted jpg files are stored under figures folder.
+
+                    // para + database + figures(folder) + fileName
                     flexPict = PathCombine(dataPath, PathCombine("figures", fileName));
-                    if (File.Exists(flexPict))
+                    string flexJPGPath = flexPict;
+                    if (Path.GetExtension(flexJPGPath).ToLower() != "jpg") // jpg files need no conversion
                     {
-                        fromPath = flexPict;
+                        flexJPGPath = Path.ChangeExtension(flexPict, "jpg");
+                    }
+                    if (File.Exists(flexJPGPath))
+                    {
+                        fromPath = flexJPGPath;
                     }
                     else
                     {  
