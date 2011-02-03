@@ -1,0 +1,26 @@
+.letter {
+        
+font-family:"Arial Unicode MS";
+font-size:22pt;
+ font-weight: bold;
+font-style:italic;
+}
+
+.letter1 {
+
+ font-size:x-large;
+ font-weight: normal;
+font-variant: small-caps;
+font-style:inherit;
+font-family:sans-serif;
+}
+
+.letter2 
+{   
+   
+font-size:xx-small;
+ font-weight: bold;
+font-variant: small-caps;
+font-family:inherit;
+font-style:italic;
+}

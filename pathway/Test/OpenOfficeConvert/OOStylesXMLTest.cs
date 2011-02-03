@@ -28,7 +28,7 @@ using SIL.Tool;
 
 #endregion Using
 
-namespace Test.OpenOfficeWriter
+namespace Test.OpenOfficeConvert
 {
     [TestFixture]
     [Category("BatchTest")]

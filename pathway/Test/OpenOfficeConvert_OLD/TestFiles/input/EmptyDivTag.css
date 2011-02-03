@@ -1,0 +1,29 @@
+// File Name: EmptyDivTag.css
+@page {
+     size: 6.25in 8.75in;
+    margin: .5in .5in .5in .5in;
+  }
+
+.border {
+    border-top: .5pt solid #000;
+    text-align: center;
+    margin-left: 1in;
+    margin-right: 1in;
+    margin-top: 9pt;
+    margin-bottom: 18pt;
+    content: "\00A0";
+}
+
+
+.Title_Main {
+    font-family: "Charis SIL", serif;	/* cascaded environment */
+    font-size: 20pt;	/* cascaded environment */
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    padding-bottom: 12pt;
+    padding-top: 36pt;
+}
+

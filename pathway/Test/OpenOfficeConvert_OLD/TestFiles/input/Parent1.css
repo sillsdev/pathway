@@ -1,0 +1,8 @@
+
+.xitem[lang='en']
+{  color: orange;}
+
+.main > .xitem{ color: red;}
+
+.xitem + .xitem{ color: blue;}
+.xitem + .xitem[lang='en']{ color: green;}

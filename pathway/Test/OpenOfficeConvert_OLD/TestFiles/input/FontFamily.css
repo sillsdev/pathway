@@ -1,0 +1,51 @@
+.letter1 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 24pt;
+    font-family: "Times New Roman", serif;
+}
+
+.letter2 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 24pt;
+    font-family: sans-serif;	/* default Serif font */
+}
+
+.letter3 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 24pt;
+    font-family: Tahoma, "Times New Roman", serif;	/* default Serif font */
+}
+
+.letter4 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 24pt;
+    font-family: dummyfont, Tahoma, "Times New Roman", serif;	/* default Serif font */
+}
+
+.letter5 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 24pt;
+    font-family: dummyfont;
+}
+
+.letter6 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 24pt;
+
+}
+
+.letter7 {
+    font-size: 24pt;
+    font-family: dummyfont, dummyfamily;
+}
+
+.letter8 {
+    font-size: 24pt;
+    font-family: "<default serif>", serif;
+}

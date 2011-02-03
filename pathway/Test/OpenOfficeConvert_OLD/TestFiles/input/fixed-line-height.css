@@ -1,0 +1,37 @@
+@page {
+   size: 8.5in 11in;
+}
+.body {
+}
+.section {
+}
+.entry {
+   -ps-fixed-line-height: 14pt;
+}
+.headword :after {
+   content: ' ';
+}
+.headword {
+   font-weight: bold;
+}
+.pronunciation :before {
+   content: '[';
+}
+.pronunciation :after {
+   content: '] ';
+}
+.pronunciation {
+   font-style: italic;
+}
+.definition :after {
+   content: ' ';
+}
+.definition {
+}
+.example :before {
+   content: 'ex:';
+   font-style: italic;
+   font-weight: bold;
+}
+.example {
+}

@@ -1,0 +1,18 @@
+
+.letData {
+font-size: 48pt;
+text-align: left;
+letter-spacing: 3pt;
+}
+
+.slot-name
+{
+	font-size: 1em;
+	letter-spacing: 1em;
+}
+
+.name
+{
+	font-size: 48pt;
+	letter-spacing: 100%; 
+}

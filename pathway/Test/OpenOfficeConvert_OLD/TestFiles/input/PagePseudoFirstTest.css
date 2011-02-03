@@ -1,0 +1,47 @@
+/*@page :first {
+    @top-left { content: ''; }
+    @top-center { content: ''; }
+    @top-right { content: ''; }
+}*/
+
+.entry
+{
+   page-break-before: always;
+}
+
+/*@page {
+    margin: 6in 2in 6in 2in;
+ background-color:blue;
+   
+}*/
+
+
+@page :first {
+background-color:#ff000f;
+    @top-left { content: '#';
+background-color:#ff0000;
+font-size: 25pt;
+ font-family: "Times new roman";
+        font-weight: bold;
+border-bottom: dashed .5pt #ff0000;
+color: #aaff00;
+ }
+    @top-center { 
+content: '$';
+background-color:#00ff00;
+font-size: 25pt;
+ font-family: Arial;
+        font-weight: bold;
+border-bottom: dashed .5pt #ff0000;
+color: #aaff00;
+
+ }
+    @top-right { content: '&';
+background-color:#0000ff;
+font-size: 25pt;
+ font-family: Georgia;
+        font-weight: bold;
+border-bottom: dashed .5pt #ff0000;
+color: #aaff00;
+ }
+}

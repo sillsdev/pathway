@@ -1,0 +1,28 @@
+.dictionary 
+{
+	text-align: justify;
+	font-size: 10pt;
+}
+.locator
+{
+	display:block;
+	text-align: center;
+	flow:static(locator);
+}
+
+.headword 
+{
+	display: inline;
+	font-family:sans-serif;
+	font-weight:bold;
+	font-size:100%;
+	color: #aa0000;
+}
+
+.entry
+{
+   page-break-after: always;
+   font-size: 15pt;
+}
+
+

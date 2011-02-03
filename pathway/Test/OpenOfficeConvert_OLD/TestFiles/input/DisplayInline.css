@@ -1,0 +1,18 @@
+@page {
+    margin: 2cm 2cm 2cm 2cm;
+}
+.dicBody {
+}
+.letHead {
+
+    text-align: center;
+    margin: 18pt 9pt;
+    margin-left: .75in;
+    margin-right: .75in;
+    padding-bottom: 9pt;
+}
+.letter {
+    display: inline;
+    font-weight: bold;
+    font-size: 24pt;
+}

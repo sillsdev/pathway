@@ -1,0 +1,16 @@
+.t1 {
+    font-size: 15pt;
+    text-align: left;
+    color:blue;
+    text-indent:100pt;
+}
+.verse {
+    vertical-align:super;
+    font-size:50%;
+    color:green;
+}
+.salvation {
+    font-size: 15pt;
+    text-align: left;
+    color:red;
+}

@@ -1,0 +1,47 @@
+@page {
+background-color:red;
+    size: 14.8cm 21cm;
+    margin: 3cm 3cm;
+    @top-left {
+    }
+    @top-center {
+    }    
+    @top-right {
+        content: counter(page);
+	color:yellow;
+	font-size:16pt;
+  	font-style: italic;
+
+    }
+
+ @bottom-left {
+        content: counter(page);
+	color:orange;
+	font-size:8pt;
+  	font-style: italic;
+  font-weight: bold;
+
+    }
+}
+@page :first {
+background-color:blue;
+}
+
+@page :left {
+background-color:green;
+}
+
+
+@page :right {
+background-color:violet;
+    @top-left {
+        content: "Right top left";
+        font-weight: bold;
+    }
+    @top-center {
+        content: counter(page);
+    }    
+    @top-right {
+    }
+}
+

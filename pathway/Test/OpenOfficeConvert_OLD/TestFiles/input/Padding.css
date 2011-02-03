@@ -1,0 +1,34 @@
+.dicBody {
+}
+.letHead {
+    column-count: 1;
+    clear: both;
+}
+.letter {
+    text-align: center;
+    width: 100%;
+    margin-top: 18pt;
+    margin-bottom: 18pt;
+    font-weight: bold;
+    font-size: 24pt;
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    direction: ltr;
+}
+.letData {
+    column-count: 2;
+    column-gap: 1em;
+    column-fill: auto;
+    text-align: left;
+}
+.entry {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: 12pt;	/* inherited */
+    color: rgb(0,0,0);	/* inherited */
+    background-color: rgb(255,255,255);	/* inherited */
+    text-indent: -36pt;
+    margin-left: 36pt;
+    padding-left: 9pt;
+    padding-bottom: 2pt;
+    padding-top: 1pt;
+    clear: both;
+}

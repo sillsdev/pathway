@@ -1,0 +1,12 @@
+span[lang='bzh'] {
+    font-family: "Charis SIL", serif;	
+    font-weight: bold;
+    font-size: 12pt;
+    color:red;
+}
+span[lang='tpi'] {
+    font-family: "Charis SIL", serif;	
+    font-style: italic;
+    font-size: 12pt;
+    color:blue;
+}

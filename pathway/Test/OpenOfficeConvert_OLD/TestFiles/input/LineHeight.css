@@ -1,0 +1,12 @@
+.t1 {font-size: 36pt }
+.t2 {font-size: 36pt }
+.inner1 { line-height: 48pt; font-size: 24pt }
+.inner2 { line-height: 3em; }
+.inner3 { line-height: 300%; font-size: 24pt }
+.inner4 { line-height: 3; }
+
+.noheight 
+{ 
+line-height: none; 
+color: orange;
+}

@@ -1,0 +1,20 @@
+.divColor {
+    color:red;
+ display:none;
+}
+
+.divColor:before
+{
+content: "yesu";
+}
+.spanColor1 {
+    color:blue;
+    display:none;
+     }
+
+
+.spanColor2 {
+    color:white;
+    background-color: red;
+     font-weight:bold;
+     }
