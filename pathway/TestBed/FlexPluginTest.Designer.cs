@@ -253,7 +253,7 @@
             this.btnParaText.AccessibleName = "BtnFlexTest";
             this.btnParaText.Location = new System.Drawing.Point(141, 128);
             this.btnParaText.Name = "btnParaText";
-            this.btnParaText.Size = new System.Drawing.Size(74, 28);
+            this.btnParaText.Size = new System.Drawing.Size(68, 28);
             this.btnParaText.TabIndex = 57;
             this.btnParaText.Text = "&ParaText";
             this.btnParaText.UseVisualStyleBackColor = true;
@@ -264,7 +264,7 @@
             this.button6.AccessibleName = "BtnLogos";
             this.button6.Location = new System.Drawing.Point(221, 128);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(78, 28);
+            this.button6.Size = new System.Drawing.Size(68, 28);
             this.button6.TabIndex = 56;
             this.button6.Text = "&Logos";
             this.button6.UseVisualStyleBackColor = true;
@@ -318,7 +318,7 @@
             this.button5.AccessibleName = "BtnFlexTest";
             this.button5.Location = new System.Drawing.Point(305, 128);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(73, 28);
+            this.button5.Size = new System.Drawing.Size(68, 28);
             this.button5.TabIndex = 53;
             this.button5.Text = "&Builder";
             this.button5.UseVisualStyleBackColor = true;
@@ -338,11 +338,11 @@
             // button1
             // 
             this.button1.AccessibleName = "BtnFlexTest";
-            this.button1.Location = new System.Drawing.Point(384, 128);
+            this.button1.Location = new System.Drawing.Point(379, 128);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(86, 28);
+            this.button1.Size = new System.Drawing.Size(91, 28);
             this.button1.TabIndex = 51;
-            this.button1.Text = "&OpenOffice";
+            this.button1.Text = "&OLD_OpenOffice";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 

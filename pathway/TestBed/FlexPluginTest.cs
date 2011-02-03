@@ -308,40 +308,40 @@ namespace TestBed
         private void button1_Click_1(object sender, EventArgs e)
         {
             MessageBox.Show("Code is commented");
-            //if (!File.Exists(txtInputPath.Text))
-            //{
-            //    MessageBox.Show("Please enter the valid XHTML path");
-            //    return;
-            //}
+            if (!File.Exists(txtInputPath.Text))
+            {
+                MessageBox.Show("Please enter the valid XHTML path");
+                return;
+            }
 
-            //if (!File.Exists(txtCSSInput.Text))
-            //{
-            //    MessageBox.Show("Please enter the valid CSS path");
-            //    return;
-            //}
+            if (!File.Exists(txtCSSInput.Text))
+            {
+                MessageBox.Show("Please enter the valid CSS path");
+                return;
+            }
 
-            //Common.Testing = chkPage.Checked;
+            Common.Testing = chkPage.Checked;
 
-            //PublicationInformation projInfo = new PublicationInformation();
-            //projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
-            //projInfo.DictionaryPath = Path.GetDirectoryName(txtInputPath.Text);
-            //projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
-            //projInfo.DefaultCssFileWithPath = txtCSSInput.Text;
-            //projInfo.ProgressBar = new ProgressBar();
-            //projInfo.DictionaryOutputName = "test";
-            //projInfo.ProjectInputType = radDictionary.Checked ? "Dictionary" : "Scripture";
-            //projInfo.FinalOutput = "odt";
-            //projInfo.IsExtraProcessing = true;
+            PublicationInformation projInfo = new PublicationInformation();
+            projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
+            projInfo.DictionaryPath = Path.GetDirectoryName(txtInputPath.Text);
+            projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
+            projInfo.DefaultCssFileWithPath = txtCSSInput.Text;
+            projInfo.ProgressBar = new ProgressBar();
+            projInfo.DictionaryOutputName = "test";
+            projInfo.ProjectInputType = radDictionary.Checked ? "Dictionary" : "Scripture";
+            projInfo.FinalOutput = "odt";
+            projInfo.IsExtraProcessing = true;
 
-            //ExportOpenOffice exportOdt = new ExportOpenOffice();
-            //exportOdt.Export(projInfo);
+            ExportOpenOffice_OLD exportOdt = new ExportOpenOffice_OLD();
+            exportOdt.Export(projInfo);
 
-            //if(Common.Testing)
-            //{
-            //    string file = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath) + "\\" + Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) + "." +projInfo.FinalOutput;
-            //    if (File.Exists(file))
-            //        Process.Start(file);
-            //}
+            if (Common.Testing)
+            {
+                string file = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath) + "\\" + Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) + "." + projInfo.FinalOutput;
+                if (File.Exists(file))
+                    Process.Start(file);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
