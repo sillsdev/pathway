@@ -3048,6 +3048,7 @@ namespace SIL.PublishingSolution
                 cTool.BtnMobile.Enabled = true;
                 cTool.BtnWeb.Enabled = false;
                 cTool.BtnOthers.Enabled = true;
+                cTool.DdlTocLevel.Items.Clear(); // clear / repopulate this dropdown
                 setLastSelectedLayout();
                 WriteMedia();
                 inputTypeBL = "Scripture";
@@ -3077,6 +3078,7 @@ namespace SIL.PublishingSolution
                 cTool.BtnMobile.Enabled = false;
                 cTool.BtnWeb.Enabled = false;
                 cTool.BtnOthers.Enabled = true;
+                cTool.DdlTocLevel.Items.Clear(); // clear / repopulate this dropdown
                 setLastSelectedLayout();
                 WriteMedia();
                 inputTypeBL = "Dictionary";

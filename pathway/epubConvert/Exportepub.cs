@@ -1062,6 +1062,50 @@ namespace SIL.PublishingSolution
                     ncx.WriteStartElement("content");
                     ncx.WriteAttributeString("src", sb.ToString());
                     ncx.WriteEndElement(); // meta
+                    // If this is a dictionary with TOC level 3, gather the senses for this entry
+                    if (_inputType.Equals("dictionary") && TocLevel.StartsWith("3"))
+                    {
+                        // see if there are any senses to add to this entry
+                        XmlNodeList childNodes = node.SelectNodes(".//xhtml:span[@class='sense']", namespaceManager);
+                        if (childNodes != null)
+                        {
+                            sb.Length = 0;
+                            playOrder++;
+                            foreach (XmlNode childNode in childNodes)
+                            {
+                                // for a dictionary, the grammatical-info//partofspeech//span is the label
+                                if (!childNode.HasChildNodes)
+                                {
+                                    // reset the stringbuilder
+                                    sb.Length = 0;
+                                    // This entry doesn't have any information - skip it
+                                    continue;
+                                }
+                                textString = childNode.FirstChild.FirstChild.InnerText;
+
+                                sb.Append(name);
+                                sb.Append("#");
+                                if (childNode.Attributes != null)
+                                {
+                                    sb.Append(childNode.Attributes["id"].Value);
+                                }
+                                // write out the node
+                                ncx.WriteStartElement("navPoint");
+                                ncx.WriteAttributeString("id", "dtb:uid");
+                                ncx.WriteAttributeString("playOrder", playOrder.ToString());
+                                ncx.WriteStartElement("navLabel");
+                                ncx.WriteElementString("text", textString);
+                                ncx.WriteEndElement(); // navlabel
+                                ncx.WriteStartElement("content");
+                                ncx.WriteAttributeString("src", sb.ToString());
+                                ncx.WriteEndElement(); // meta
+                                ncx.WriteEndElement(); // navPoint
+                                // reset the stringbuilder
+                                sb.Length = 0;
+                                playOrder++;
+                            }
+                        }
+                    }
                     ncx.WriteEndElement(); // navPoint
                     // reset the stringbuilder
                     sb.Length = 0;

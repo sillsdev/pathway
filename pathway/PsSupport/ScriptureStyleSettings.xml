@@ -135,7 +135,7 @@
       <option name="1 - Book Only" file="Rules_Yes.css" />
       <option name="2 - Book and Chapter" file="Rules_Yes.css" />
       <option name="3 - Book, Major Section and Chapter" file="Rules_Yes.css" />
-      <option name="2 - Book, Major Section, Chapter and Minor Section" file="Rules_Yes.css" />
+      <option name="4 - Book, Major Section, Chapter and Minor Section" file="Rules_Yes.css" />
     </feature>
     <feature name="Subject">
         <option name="Religion and Spirituality" file="Rules_Yes.css" />
