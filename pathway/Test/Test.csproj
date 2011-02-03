@@ -173,9 +173,6 @@
     <Compile Include="CssParser\CssParserTest.cs" />
     <Compile Include="CssParser\GramTest.cs" />
     <Compile Include="CssParser\MakePropertyTest.cs" />
-    <Compile Include="OpenOfficeWriter\OOContentXMLTest.cs" />
-    <Compile Include="OpenOfficeWriter\OOStylesXMLTest.cs" />
-    <Compile Include="PsExport\PsExportTest.cs" />
     <Compile Include="PsTool\CommonCssTest.cs" />
     <Compile Include="PsTool\CommonTest.cs" />
     <Compile Include="PsTool\CommonXmlTest.cs" />
@@ -238,10 +235,6 @@
     <ProjectReference Include="..\LogosConvert\LogosConvert.csproj">
       <Project>{E6F68329-4BCE-44C2-A9F0-C5055F42CA39}</Project>
       <Name>LogosConvert</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenOfficeWriter\OpenOfficeWriter.csproj">
-      <Project>{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}</Project>
-      <Name>OpenOfficeWriter</Name>
     </ProjectReference>
     <ProjectReference Include="..\PsExport\PsExport.csproj">
       <Project>{DCD48287-7F36-4DBB-94CF-4FF617BF1F78}</Project>
@@ -323,7 +316,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="OpenOfficeConvert\" />
+    <Folder Include="OpenOfficeWriter\" />
     <Folder Include="Properties\" />
+    <Folder Include="PsExport\" />
     <Folder Include="WordPressConvert\TestFiles\Expected\" />
     <Folder Include="WordPressConvert\TestFiles\Input\" />
     <Folder Include="XhtmlExport\TestFiles\Expect\" />

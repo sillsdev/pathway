@@ -167,10 +167,6 @@
       <Project>{E6F68329-4BCE-44C2-A9F0-C5055F42CA39}</Project>
       <Name>LogosConvert</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenOfficeWriter\OpenOfficeWriter.csproj">
-      <Project>{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}</Project>
-      <Name>OpenOfficeWriter</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ParatextSupport\ParatextSupport.csproj">
       <Project>{E9E86AC5-EC9E-40C4-A386-64A77C48034B}</Project>
       <Name>ParatextSupport</Name>
