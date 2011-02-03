@@ -306,8 +306,24 @@ namespace SIL.PublishingSolution
         private void LoadLayouts()
         {
             cmbSelectLayout.Items.Clear();
-            ////string xPathLayouts = "//styles/" + _media + "/style";
-            //string xPathLayouts = "//styles/*/style[@approvedBy='GPS' or @shown='Yes']";
+            
+            ApprovedByValidation();
+
+            ShownValidation();
+
+            if (cmbSelectLayout.Items.Count > 0)
+            {
+                cmbSelectLayout.SelectedIndex = cmbSelectLayout.FindStringExact(cmbSelectLayout.Text);
+                if (cmbSelectLayout.SelectedIndex == -1)
+                {
+                    cmbSelectLayout.SelectedIndex = 0;
+                    cmbSelectLayout.Text = cmbSelectLayout.Items[0].ToString();
+                }
+            }
+        }
+
+        private void ShownValidation()
+        {
             string xPathLayouts = "//styles/" + _media + "/style[@approvedBy='GPS' or @shown='Yes']";
             XmlNodeList stylenames = Param.GetItems(xPathLayouts);
             foreach (XmlNode stylename in stylenames)
@@ -324,16 +340,42 @@ namespace SIL.PublishingSolution
                 if (shown)
                     cmbSelectLayout.Items.Add(stylename.Attributes["name"].Value);
             }
-            if (cmbSelectLayout.Items.Count > 0)
+        }
+
+        private void ApprovedByValidation()
+        {
+            bool isUpdated = false;
+            bool isApprovedByExists = false;
+            string xPathLayouts = "//styles/" + _media + "/style";
+            XmlNodeList stylenames = Param.GetItems(xPathLayouts);
+            foreach (XmlNode stylename in stylenames)
             {
-                cmbSelectLayout.SelectedIndex = cmbSelectLayout.FindStringExact(cmbSelectLayout.Text);
-                if (cmbSelectLayout.SelectedIndex == -1)
+                foreach (XmlAttribute attr in stylename.Attributes)
                 {
-                    cmbSelectLayout.SelectedIndex = 0;
-                    cmbSelectLayout.Text = cmbSelectLayout.Items[0].ToString();
+                    if (attr.Name == "approvedBy")
+                    {
+                        isApprovedByExists = true;
+                        if (attr.Value.Trim() == "")
+                        {
+                            attr.Value = "GPS";
+                            isUpdated = true;
+                        }
+                    }
+                }
+                if (!isApprovedByExists)
+                {
+                    Param.AddAttrValue(stylename, "approvedBy", "GPS");
+                    isUpdated = true;
+                    isApprovedByExists = true;
                 }
             }
+
+            if (isUpdated )
+            {
+                Param.Write();
+            }
         }
+
         #endregion LoadLayouts
 
         #region LoadBackEnds
