@@ -350,6 +350,10 @@
       <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
       <Name>CssParser</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OpenOfficeConvert\OpenOfficeConvert.csproj">
+      <Project>{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}</Project>
+      <Name>OpenOfficeConvert</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PsTool\PsTool.csproj">
       <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
       <Name>PsTool</Name>
