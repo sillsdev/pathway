@@ -390,19 +390,19 @@ namespace SIL.Tool
             {
                 value = value.Replace("&", "&amp;");
             }
-            else if (value.IndexOf("<") >= 0)
+            if (value.IndexOf("<") >= 0)
             {
                 value = value.Replace("<", "&lt;");
             }
-            else if (value.IndexOf(">") >= 0)
+            if (value.IndexOf(">") >= 0)
             {
                 value = value.Replace(">", "&gt;");
             }
-            else if (value.IndexOf("\"") >= 0)
+            if (value.IndexOf("\"") >= 0)
             {
                 value = value.Replace("\"", "&quot;");
             }
-            else if (value.IndexOf("'") >= 0)
+            if (value.IndexOf("'") >= 0)
             {
                 value = value.Replace("'", "&apos;");
             }

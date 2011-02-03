@@ -590,7 +590,7 @@ namespace SIL.PublishingSolution
             }
             if (isFootnote)
             {
-                footnoteContent.Append(_reader.Value);
+                footnoteContent.Append(content);
             }
             return isFootnote;
         }

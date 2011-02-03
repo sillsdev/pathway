@@ -423,6 +423,7 @@ namespace SIL.PublishingSolution
         /// <param name="data">XML Content</param>
         private string ReplaceString(string data)
         {
+            data = Common.ReplaceSymbolToText(data);
             if (_replaceSymbolToText.Count > 0)
             {
                 foreach (string srchKey in _replaceSymbolToText.Keys)
