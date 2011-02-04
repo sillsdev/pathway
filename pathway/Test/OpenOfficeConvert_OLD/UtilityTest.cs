@@ -8,7 +8,7 @@ using SIL.PublishingSolution;
 using SIL.Tool;
 using ArrayList=System.Collections.ArrayList;
 
-namespace Test.Old_OpenOfficeConvert
+namespace Test.zOld_OpenOfficeConvert
 {
     /// <summary>
     ///This is a test class for UtilityTest and is intended

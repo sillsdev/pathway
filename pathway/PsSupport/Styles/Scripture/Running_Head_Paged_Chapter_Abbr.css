@@ -2,7 +2,7 @@
     @top-left      { content: ''; }
     @top-center {
     -ps-referenceFormat: "Gen 1-2";
-    content: string(bookname, first) " "  string(chapter, first) "  "  string(chapter, last);
+    content: string(bookname, first) " "  string(chapter, first) "-"  string(chapter, last);
     }    
     @top-right     { content: ''; }
     @bottom-left   { content: ''; }

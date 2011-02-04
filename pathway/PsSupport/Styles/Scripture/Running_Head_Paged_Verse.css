@@ -1,7 +1,8 @@
 @page {
     @top-left      { content: ''; }
     @top-center {
-    content: string(bookname, first) " "  string(chapter, first) string(verse, first)  " — "  string(chapter, last) string(verse, last);
+    -ps-referenceFormat: "Genesis 1:1-2:1";
+    content: string(bookname, first) " "  string(chapter, first) ":" string(verse, first)  "-"  string(chapter, last) ":" string(verse, last);
     }    
     @top-right     { content: ''; }
     @bottom-left   { content: ''; }

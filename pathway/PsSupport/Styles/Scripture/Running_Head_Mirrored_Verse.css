@@ -8,7 +8,8 @@
 }
 @page :left {
     @top-left {
-        content: string(bookname, first) " "  string(chapter, first) string(verse, first);
+        -ps-referenceFormat: "Genesis 1:1";
+        content: string(bookname, first) " "  string(chapter, first) ":" string(verse, first);
         font-weight: bold;
     }
     @top-center { content: ''; }
@@ -21,6 +22,7 @@
     @top-left { content: ''; }
     @top-center { content: ''; }
     @top-right     {
+        -ps-referenceFormat: "Genesis 1:1";
         content: string(bookname, last) " "  string(chapter, last) string(verse, last);
         font-weight: bold;
     }

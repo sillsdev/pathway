@@ -1,7 +1,8 @@
 @page {
     @top-left      { content: ''; }
     @top-center {
-    content: string(bookname, first) " "  string(chapter, first) " — "  string(chapter, last);
+    -ps-referenceFormat: "Genesis 1-2";
+    content: string(bookname, first) " "  string(chapter, first) "-"  string(chapter, last);
     }    
     @top-right     { content: ''; }
     @bottom-left   { content: ''; }
