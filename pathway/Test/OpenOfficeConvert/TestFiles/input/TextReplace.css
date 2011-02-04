@@ -1,0 +1,33 @@
+@page 
+{
+    size: 16.2cm 22.9cm;
+    marks: crop;
+    counter-increment: page;
+    margin: 1.15cm 1.5cm;
+}
+
+.scrBook {
+    column-count: 1;
+    clear: both;
+}
+
+.scrBookName {
+    string-set: bookname content();
+
+}
+
+span {
+    prince-text-replace: "<<" "\201C" ">>" "\201D" "<" "\2018" ">" "\2019";
+}
+
+.Note_General_Paragraph {
+    font-size: 8pt;	/* cascaded environment */
+    text-indent: 0pt;
+    margin-left: 0pt;
+    display: inline;
+    display: footnote;
+    display: prince-footnote;
+    position: footnote;
+    list-style-position: inside;
+}
+
