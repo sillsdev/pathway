@@ -617,7 +617,7 @@ namespace SIL.PublishingSolution
                         {
                             headXML = false;
                         }
-                        else if (_reader.Name != "html")
+                        else 
                         {
                             continue;
                         }

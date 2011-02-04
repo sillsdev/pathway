@@ -235,7 +235,9 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    return;
+                    _tagType = "O";
+                    //_allStyle.Push(_childName);
+                    //return;
                 }
             }
             if (_tagType != "img")

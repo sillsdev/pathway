@@ -307,7 +307,7 @@ namespace TestBed
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            MessageBox.Show("Code is commented");
+            //MessageBox.Show("Code is commented");
             if (!File.Exists(txtInputPath.Text))
             {
                 MessageBox.Show("Please enter the valid XHTML path");
