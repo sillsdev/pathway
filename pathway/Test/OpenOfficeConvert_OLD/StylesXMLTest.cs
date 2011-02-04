@@ -30,6 +30,7 @@ using SIL.Tool;
 namespace Test.zOld_OpenOfficeConvert
 {
     [TestFixture]
+    [Ignore]
     [Category("BatchTest")]
     public class StylesXMLTest
     {

@@ -15,6 +15,7 @@ namespace Test.zOld_OpenOfficeConvert
     ///to contain all UtilityTest Unit Tests
     ///</summary>
     [TestFixture]
+    [Ignore]
     [Category("BatchTest")]
     public class UtilityTest
     {
