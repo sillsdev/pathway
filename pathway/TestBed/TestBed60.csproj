@@ -53,7 +53,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;Not7</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
@@ -168,9 +168,9 @@
       <Project>{E225E5AF-B603-41D1-BB58-E3AAE05C59FD}</Project>
       <Name>OpenOfficeConvert60</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenOfficeWriter\OpenOfficeWriter60.csproj">
-      <Project>{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}</Project>
-      <Name>OpenOfficeWriter60</Name>
+    <ProjectReference Include="..\OpenOfficeConvert_OLD\OpenOfficeConvert_OLD60.csproj">
+      <Project>{82BBBF18-36E9-4C7B-89DE-FCC24A0C80A5}</Project>
+      <Name>OpenOfficeConvert_OLD60</Name>
     </ProjectReference>
     <ProjectReference Include="..\PsExport\PsExport60.csproj">
       <Project>{DCD48287-7F36-4DBB-94CF-4FF617BF1F78}</Project>

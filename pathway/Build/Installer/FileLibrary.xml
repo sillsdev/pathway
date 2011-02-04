@@ -1,8 +1,25 @@
 <?xml version="1.0"?>
 <FileLibrary>
-	<File Path="Files\ConfigurationTool\OpenOfficeWriter.dll.config" ComponentGuid="DEE17433-AAFD-4236-8C52-49433AE2D715"/>
-	<File Path="Files\ConfigurationTool\OpenOfficeWriter.pdb" ComponentGuid="EB20CFDC-4BCC-4015-BFDB-92C9A151490A"/>
-	<File Path="Files\ConfigurationTool\OpenOfficeWriter.dll" ComponentGuid="541C5F39-4179-4AC7-9006-824FC694544A"/>
+	<File Path="Files\PublishingSolution\Styles\Scripture\Running_Head_Paged_Verse_Abbr.css" ComponentGuid="CC021924-EEB6-40FA-A057-7E7CC496977E"/>
+	<File Path="Files\PublishingSolution\Styles\Scripture\Running_Head_Paged_Chapter_Abbr.css" ComponentGuid="E4BF84C2-E792-4B97-8FAF-7822394B2965"/>
+	<File Path="Files\PublishingSolution\Styles\Scripture\Running_Head_Mirrored_Verse_Abbr.css" ComponentGuid="C2AB0B6E-A80D-448C-B3D2-3B44CCF93B56"/>
+	<File Path="Files\PublishingSolution\Styles\Scripture\Running_Head_Mirrored_Chapter_Abbr.css" ComponentGuid="2039D644-C9BD-4100-BD79-D683523E9779"/>
+	<File Path="Files\PublishingSolution\Styles\Dictionary\PageNumber_TopRight.css" ComponentGuid="9EB0CCE0-3613-46DD-864E-8D483856E5DA"/>
+	<File Path="Files\PublishingSolution\Styles\Dictionary\PageNumber_TopLeft.css" ComponentGuid="4BADA14E-2414-4E77-90F4-1138F153FB0E"/>
+	<File Path="Files\PublishingSolution\Styles\Dictionary\PageNumber_TopCenter_Mirrored.css" ComponentGuid="1BD17E93-1A07-47ED-9EE2-8A317561089C"/>
+	<File Path="Files\PublishingSolution\Styles\Dictionary\PageNumber_BottomRight.css" ComponentGuid="DECE3450-9397-4AB8-83D9-C9D4289ABA75"/>
+	<File Path="Files\PublishingSolution\Styles\Dictionary\PageNumber_BottomLeft.css" ComponentGuid="071FBE6B-AF13-4A69-AD7A-AACC6BCA8598"/>
+	<File Path="Files\PublishingSolution\Styles\Dictionary\PageNumber_BottomCenterMirrored.css" ComponentGuid="4B34ACD3-6EB7-4905-ABE3-EFCB39A6E60E"/>
+	<File Path="Files\PathwaySupport\Styles\Scripture\Running_Head_Paged_Verse_Abbr.css" ComponentGuid="BDA82887-8952-4FFF-BDBC-FDBDC8B05340"/>
+	<File Path="Files\PathwaySupport\Styles\Scripture\Running_Head_Paged_Chapter_Abbr.css" ComponentGuid="42A62023-7085-492C-9A8A-A4EF14F168A6"/>
+	<File Path="Files\PathwaySupport\Styles\Scripture\Running_Head_Mirrored_Verse_Abbr.css" ComponentGuid="F7FBEBCA-EFA6-4C83-AA37-E80BCFB17503"/>
+	<File Path="Files\PathwaySupport\Styles\Scripture\Running_Head_Mirrored_Chapter_Abbr.css" ComponentGuid="713E7BC1-559A-4358-9A5F-82054A816538"/>
+	<File Path="Files\PathwaySupport\Styles\Dictionary\PageNumber_TopRight.css" ComponentGuid="8B2648AB-AE17-41DD-A705-D9094E8739FF"/>
+	<File Path="Files\PathwaySupport\Styles\Dictionary\PageNumber_TopLeft.css" ComponentGuid="385861EA-9C06-42AE-B9DC-05364C40D0A6"/>
+	<File Path="Files\PathwaySupport\Styles\Dictionary\PageNumber_TopCenter_Mirrored.css" ComponentGuid="C5E601F4-4870-48D0-BA9F-6A9F09770B21"/>
+	<File Path="Files\PathwaySupport\Styles\Dictionary\PageNumber_BottomRight.css" ComponentGuid="E4DDB9E5-DCCE-487B-A0F9-7287C732A1E3"/>
+	<File Path="Files\PathwaySupport\Styles\Dictionary\PageNumber_BottomLeft.css" ComponentGuid="35885751-38F7-4C42-9F4B-F88D76A71E70"/>
+	<File Path="Files\PathwaySupport\Styles\Dictionary\PageNumber_BottomCenterMirrored.css" ComponentGuid="1C034D37-523A-42D0-A4FE-017F62E10998"/>
 	<File Path="Files\ConfigurationTool\Styles\Dictionary\PageNumber_TopRight.css" ComponentGuid="F335E460-DA42-4641-B222-F30FCA0D08C3"/>
 	<File Path="Files\ConfigurationTool\Styles\Dictionary\PageNumber_TopLeft.css" ComponentGuid="87E460AA-3EBE-495C-88A2-DBA3D9E6F9BD"/>
 	<File Path="Files\ConfigurationTool\Styles\Dictionary\PageNumber_TopCenter_Mirrored.css" ComponentGuid="3CC9BA1A-B398-445D-A79D-78BAED6201BE"/>

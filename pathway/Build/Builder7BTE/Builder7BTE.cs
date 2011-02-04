@@ -73,7 +73,6 @@ namespace Builder7BTE
             BuilderBL.CopyFile(instPath, License, "../Files/ConfigurationTool");
             Directory.Delete(instPath + "../Files/ConfigurationTool/Help", true);
             BuilderBL.CopyFile(instPath, HelpFile, "../Files/ConfigurationTool/Help");
-            //BuilderBL.CopyFile(instPath, Catalog, "../Files/PsDll/Language Explorer/Configuration");
             BuilderBL.CopyRelaseFiles(instPath, "PsExport", "ConfigurationTool", args[1]);
             BuilderBL.CopyTree(instPath, "../../PsSupport", "ConfigurationTool");
             Directory.Delete(instPath + "../Files/ConfigurationTool/Template", true);
@@ -82,7 +81,6 @@ namespace Builder7BTE
             {
                 Directory.Delete(instPath + "../Files/ConfigurationTool/xetexPathway", true);
                 Directory.Delete(instPath + "../Files/ConfigurationTool/Wordpress", true);
-                BuilderBL.RemoveFiles(instPath, "../NotCorporate", "PsDll");
                 BuilderBL.RemoveFiles(instPath, "../NotCorporate", "ConfigurationTool");
                 //Directory.CreateDirectory(Common.PathCombine(instPath, "../Files/PwCtw"));
             }
@@ -94,7 +92,6 @@ namespace Builder7BTE
             BuilderBL.ZeroCheck(Common.PathCombine(instPath, "../Files"));
             SubProcess.Run(instPath, "GenerateFilesSource7Pw.js");
             BuilderBL.SetFilesNFeatures("ConfigurationTool", instPath, sub, map);
-            BuilderBL.SetFilesNFeatures("PsDll", instPath, sub, map);
             sub.FileSubstitute("Files7Pw-tpl.wxs", map, "Files.wxs");
             sub.FileSubstitute("Features7Pw-tpl.wxs", map, "Features.wxs");
 
