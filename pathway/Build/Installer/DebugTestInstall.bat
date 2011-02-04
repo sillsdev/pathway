@@ -32,6 +32,7 @@ xcopy %SRC%\PsExport.dll %DST% /y
 xcopy %SRC%\PsExport.pdb %DST% /y
 xcopy %SRC%\PsTool.dll %DST% /y
 xcopy %SRC%\PsTool.pdb %DST% /y
+xcopy %base%\ThirdParty\epubcheck-1.1\* %DST%\epubcheck-1.1  /i /s /q /y
 
 rem copy backends
 xcopy %base%\OpenOfficeConvert\%cfg%\OpenOfficeConvert.* %DST% /y
@@ -40,6 +41,7 @@ xcopy %base%\InDesignConvert\%cfg%\InDesignConvert.* %DST% /y
 xcopy %base%\WordPressConvert\%cfg%\WordPressConvert.* %DST% /y
 xcopy %base%\XeTeXConvert\%cfg%\XeTeXConvert.* %DST% /y
 xcopy %base%\epubConvert\%cfg%\epubConvert.* %DST% /y
+xcopy %base%\epubValidator\%cfg%\epubValidator.* %DST% /y
 xcopy %base%\GoBibleConvert\%cfg%\GoBibleConvert.* %DST% /y
 
 rem xcopy %SRC%\IKVM*.* %DST% /y

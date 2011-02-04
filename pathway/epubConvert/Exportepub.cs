@@ -150,9 +150,10 @@ namespace SIL.PublishingSolution
                 // epub.css file.
                 // TODO: replace this with the merged CSS file block (below) when our merging process passes validation.
                 string mergedCSS;
-                var sbPath = new StringBuilder();
-                sbPath.Append(Common.GetPSApplicationPath());
-//                sbPath.Append(Path.DirectorySeparatorChar);
+                var appPath = Common.GetPSApplicationPath();
+                var sbPath = new StringBuilder(appPath);
+                if (!appPath.EndsWith(Path.DirectorySeparatorChar.ToString()))
+                    sbPath.Append(Path.DirectorySeparatorChar);
                 sbPath.Append("Styles");
                 sbPath.Append(Path.DirectorySeparatorChar);
                 // EDB - try not messing with the CSS file
