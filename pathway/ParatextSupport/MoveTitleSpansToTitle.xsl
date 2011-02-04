@@ -14,9 +14,16 @@
 		</xsl:copy>
 	</xsl:template>
 
+	<!-- Remove text (empty lines) at the root level. -->
+	<xsl:strip-space elements="*"/>
+	
+	<!-- Remove chapter elements that were transformed to spans and moved inside <p> elements 
+		in the previous transformation. -->
+	<xsl:template match="chapter"/>
+		
 	<!-- Move any spans that are part of the title into the title div -->
 	<xsl:template match="xhtml:div[@class='Title_Main']">
-		<div class="Title_Main">
+		<div class="Title_Main" xmlns="http://www.w3.org/1999/xhtml">
 			<!-- Include any preceding secondary or tertiary titles in this title. -->
 			<xsl:call-template name="MoveSpansBeforeTitle" />
 
