@@ -312,7 +312,6 @@ namespace SIL.PublishingSolution
         {
             _xhtmlAttribute.Clear();
             _isclassNameExist = false;
-            _anchorStart = false;
             _lang = string.Empty;
             _className = _tagType = _reader.Name;
 

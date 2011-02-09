@@ -886,12 +886,22 @@ namespace SIL.PublishingSolution
 
             AddUsedStyleName(characterStyle);
 
-            if (!AnchorBookMark())
-            {
-                content = WriteCounter(content);
-                whiteSpacePre(content, pseudo); // TODO -2000 - SignificantSpace() - IN OO convert
+            //if (!AnchorBookMark())
+            //{
+            //    content = WriteCounter(content);
+            //    whiteSpacePre(content, pseudo); // TODO -2000 - SignificantSpace() - IN OO convert
+            //}
 
+            bool isAnchorTagOpen = AnchorBookMark();
+            content = WriteCounter(content);
+            whiteSpacePre(content, pseudo); // TODO -2000 - SignificantSpace() - IN OO convert
+            
+            if(isAnchorTagOpen)
+            {
+                _writer.WriteEndElement();
             }
+
+
             if ((_tagType == "span" || _tagType == "a" || pseudo) && characterStyle != "none" || (_tagType == "img" && _imageInserted))  // span end
             {
                 _writer.WriteEndElement();
@@ -959,6 +969,41 @@ namespace SIL.PublishingSolution
 
         private bool AnchorBookMark()
         {
+            bool isAnchorTagOpen = false;
+            if (_anchorStart)
+            {
+                string status = _anchorBookMarkName.Substring(0, 4);
+
+                if (status == "href")
+                {
+                    //string hrefValueWOHash = Common.RightString(_anchorBookMarkName, "#"); // _anchor[_anchor.Count - 1].ToString();
+                    string anchorName = _anchorBookMarkName.Replace("href#", "");
+                    _writer.WriteStartElement("text:reference-ref");
+                    _writer.WriteAttributeString("text:reference-format", "text");
+                    _writer.WriteAttributeString("text:ref-name", anchorName.ToLower());
+                    //_writer.WriteString(data);
+                    //_writer.WriteEndElement(); // for Anchor Ends
+
+                    isAnchorTagOpen = true;
+                }
+                else if (status == "name")
+                {
+                    string anchorName = _anchorBookMarkName.Replace("name", "");
+                    _writer.WriteStartElement("text:reference-mark");
+                    _writer.WriteAttributeString("text:name", anchorName.ToLower());
+                    _writer.WriteEndElement();
+                }
+
+                _anchorBookMarkName = string.Empty;
+                _anchorIdValue = string.Empty;
+                _anchor.Clear(); 
+                _anchorStart = false;
+            }
+            return isAnchorTagOpen;
+        }
+
+        private bool AnchorBookMark1()
+        {
             bool dataWritten = false;
             if (_anchorStart && _anchorIdValue.Length > 0)
             {
@@ -996,7 +1041,7 @@ namespace SIL.PublishingSolution
                         _anchorBookMarkName = string.Empty;
                         dataWritten = true;
                     }
- 
+
                 }
             }
             return dataWritten;
