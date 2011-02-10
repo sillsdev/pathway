@@ -136,7 +136,7 @@ namespace SIL.PublishingSolution
 			if (string.IsNullOrEmpty(usfxDoc.InnerText))
 			{
 				// TODO: Localize string
-				MessageBox.Show("The specified book has no content to export.", string.Empty, MessageBoxButtons.OK);
+				MessageBox.Show("The current book has no content to export.", string.Empty, MessageBoxButtons.OK);
 				return;
 			}
             ScriptureContents dlg = new ScriptureContents();
@@ -152,8 +152,6 @@ namespace SIL.PublishingSolution
                 string cssFullPath = Path.Combine(outputLocationPath, pubName + ".css");
                 StyToCSS styToCss = new StyToCSS();
                 styToCss.ConvertStyToCSS(m_projectName, cssFullPath);
-
-				// ENHANCE/TODO: Add book number/id to end of file when exporting multiple books.
 				string fileName = Path.Combine(outputLocationPath, pubName + ".xhtml");
 
 				if (File.Exists(fileName))
@@ -166,7 +164,7 @@ namespace SIL.PublishingSolution
 						return;
 				}
 
-				ConvertUsfxToPathwayXhtml(usfxDoc.InnerXml, fileName);
+				ConvertUsfxToPathwayXhtmlFile(usfxDoc.InnerXml, fileName);
 
                 PsExport exporter = new PsExport();
 				exporter.DataType = "Scripture";
@@ -176,25 +174,91 @@ namespace SIL.PublishingSolution
 
 		/// ------------------------------------------------------------------------------------
 		/// <summary>
-		/// Exports to the current Scripture book to pathway.
+		/// Exports to the specified Scripture books to pathway.
 		/// </summary>
-		/// <param name="usfxDoc">The XML document representation of the USFM file.</param>
+		/// <param name="usfxBooksToExport">The XML document representation of the Scripture 
+		/// books in USFM file.</param>
 		/// ------------------------------------------------------------------------------------
-		public void ExportToPathway(List<XmlDocument> usfxDoc)
+		public void ExportToPathway(List<XmlDocument> usfxBooksToExport)
 		{
-			// TODO: Add book number/id to end of file when exporting multiple books.
-			throw new NotImplementedException("Instead of a list, the usfxDoc could be passed in as a dictionary keyed " +
-				"by the book number/id (which could be added to the XHTML file name)");
+			// TODO: ProgressBar progressBar = new ProgressBar();
+			ScriptureContents dlg = new ScriptureContents();
+			dlg.DatabaseName = m_databaseName;
+			DialogResult result = dlg.ShowDialog();
+			if (result != DialogResult.Cancel)
+			{
+				string pubName = dlg.PublicationName;
+
+				// Get the file name as set on the dialog.
+				string outputLocationPath = dlg.OutputLocationPath;
+
+				string cssFullPath = Path.Combine(outputLocationPath, pubName + ".css");
+				StyToCSS styToCss = new StyToCSS();
+				styToCss.ConvertStyToCSS(m_projectName, cssFullPath);
+				string fileName = Path.Combine(outputLocationPath, pubName + ".xhtml");
+
+				if (File.Exists(fileName))
+				{
+					// TODO: Localize string
+					result = MessageBox.Show(string.Format("{0}" + Environment.NewLine +
+						" already exists. Overwrite?", fileName), string.Empty,
+						MessageBoxButtons.YesNo);
+					if (result == DialogResult.No)
+						return;
+				}
+
+				XmlDocument scrBooksDoc = CombineUsfxDocs(usfxBooksToExport);
+
+				if (string.IsNullOrEmpty(scrBooksDoc.InnerText))
+				{
+					// TODO: Localize string
+					MessageBox.Show("The current book has no content to export.", string.Empty, MessageBoxButtons.OK);
+					return;
+				}
+				ConvertUsfxToPathwayXhtmlFile(scrBooksDoc.InnerXml, fileName);
+
+				PsExport exporter = new PsExport();
+				exporter.DataType = "Scripture";
+				exporter.Export(fileName);
+			}
 		}
 
 		/// ------------------------------------------------------------------------------------
 		/// <summary>
-		/// Converts the USFX to XHTML for Pathway.
+		/// Combines USFX of multiple books into a single XmlDocument.
+		/// </summary>
+		/// <param name="usfxBooksToExport">The Scripture books in USFX format to export.</param>
+		/// <returns>a single XmlDocument containing all books.</returns>
+		/// ------------------------------------------------------------------------------------
+		private XmlDocument CombineUsfxDocs(List<XmlDocument> usfxBooksToExport)
+		{
+			Debug.Assert(usfxBooksToExport != null && usfxBooksToExport.Count > 0);
+
+			XmlDocument allBooks = usfxBooksToExport[0];
+			if (usfxBooksToExport.Count == 1)
+				return allBooks;
+
+			for (int iDoc = 1; iDoc < usfxBooksToExport.Count; iDoc++)
+			{
+				foreach (XmlNode nodeToAdd in usfxBooksToExport[iDoc].SelectSingleNode("/usfm").ChildNodes)
+				{
+					XmlNode prevNode = allBooks.SelectSingleNode("usfm").LastChild;
+					XmlNode commonParent = prevNode.ParentNode;
+					commonParent.InsertAfter(allBooks.ImportNode(nodeToAdd, true), prevNode);
+				}
+			}
+
+			return allBooks;
+		}
+
+		/// ------------------------------------------------------------------------------------
+		/// <summary>
+		/// Converts the USFX to an XHTML file for Pathway.
 		/// </summary>
 		/// <param name="usfx">The XML document representation of the USFM file.</param>
 		/// <param name="fileName">file name with full path where xhtml file will be written</param>
 		/// ------------------------------------------------------------------------------------
-		private void ConvertUsfxToPathwayXhtml(string usfx, string fileName)
+		private void ConvertUsfxToPathwayXhtmlFile(string usfx, string fileName)
 		{
 			// Create argument list
 			XsltArgumentList args = new XsltArgumentList();

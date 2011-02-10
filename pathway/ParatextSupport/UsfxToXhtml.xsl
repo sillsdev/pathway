@@ -12,11 +12,11 @@
 	<xsl:param name="altFigurePath"/> <!-- Alternate path to figures folder with a final directory separator character -->
 
 	<!-- Get book identification -->
-	<xsl:variable name="bookCode" select="usfm/book/@id"/>
+	<!-- <xsl:variable name="bookCode" select="usfm/book/@id"/> 
 	<xsl:variable name="bookInToc" select="normalize-space(usfm/para[@style='toc2'])"/>
 	<xsl:variable name="bookHeading" select="normalize-space(usfm/para[@style='h'])"/>
 	<xsl:variable name="bookTitle" select="normalize-space(usfm/para[@style='mt'])"/>
-	<xsl:variable name="bookTitle1" select="normalize-space(usfm/para[@style='mt1'])"/>
+	<xsl:variable name="bookTitle1" select="normalize-space(usfm/para[@style='mt1'])"/> -->
 
 	<!-- The templates matching * and @* match and copy unhandled elements/attributes. -->
 	<xsl:template match="*">
@@ -48,7 +48,15 @@
 		</html>
 	</xsl:template>
 
+	<!-- TODO: avoid setting variables if book element is found before the para with the specified style attribute -->
 	<xsl:template match="book">
+		<!-- Get book identification -->
+		<xsl:variable name="bookCode" select="@id"/>
+		<xsl:variable name="bookInToc" select="normalize-space(following::para[@style='toc2'])"/>
+		<xsl:variable name="bookHeading" select="normalize-space(following::para[@style='h'])"/>
+		<xsl:variable name="bookTitle" select="normalize-space(following::para[@style='mt'])"/>
+		<xsl:variable name="bookTitle1" select="normalize-space(following::para[@style='mt1'])"/>
+
 		<div class="scrBook" xmlns="http://www.w3.org/1999/xhtml">
 			<span class="scrBookName" lang="{$ws}">
 				<!-- Find the name of the book in this fallback sequence: (1) book name specified in toc2 
@@ -402,6 +410,8 @@
 	<!-- Handle figure element -->
 	<xsl:template match="para/figure">
 		<xsl:variable name="figureNumber" select="count(preceding::figure)+1"/>
+		<xsl:variable name="bookCode" select="preceding::book[1]/@id"/>
+		
 		<xsl:variable name="pictureLoc">
 			<xsl:choose>
 				<xsl:when test="@size = 'span'">
@@ -640,6 +650,7 @@
 
 	<xsl:template match="note">
 		<xsl:variable name="footnoteNumber" select="count(preceding::note)+1"/>
+		<xsl:variable name="bookCode" select="preceding::book[1]/@id"/>
 		<xsl:variable name="footnoteCaller">
 			<xsl:number format="a" value="$footnoteNumber"/>
 		</xsl:variable>

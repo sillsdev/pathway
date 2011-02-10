@@ -14,6 +14,9 @@
 		</xsl:copy>
 	</xsl:template>
 
+	<!-- Remove text (empty lines) at the root level. -->
+	<xsl:strip-space elements="*"/>
+	
 	<!-- Move any spans that are immediate children of <body> to a new paragraph. -->
 	<xsl:template match="xhtml:span[ancestor::*[1][self::xhtml:body]]">
 		<!-- Beginning with the first span in a (potential) series... -->

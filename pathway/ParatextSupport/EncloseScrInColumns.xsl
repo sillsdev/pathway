@@ -14,6 +14,9 @@
 		</xsl:copy>
 	</xsl:template>
 
+	<!-- Remove text (empty lines) at the root level. -->
+	<xsl:strip-space elements="*"/>
+	
 	<!-- Move scrSections at the <body> level to a new columns div. -->
 	<xsl:template match="xhtml:div[@class = 'scrSection'][ancestor::*[1][self::xhtml:body]]">
 		<!--<xsl:comment>Testing for first scrSection div...</xsl:comment>-->
