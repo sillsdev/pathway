@@ -97,22 +97,30 @@ namespace SIL.PublishingSolution
             inPreferences.CreateIDPreferences(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), idAllClass);
 
             SubProcess.AfterProcess(projInfo.ProjectFileWithPath);
-            Compress(projInfo.TempOutputFolder, Common.PathCombine(projInfo.DictionaryPath, fileName));
+
+            string ldmlFullName = Common.PathCombine(projInfo.DictionaryPath, fileName + ".idml");
+            Compress(projInfo.TempOutputFolder, ldmlFullName);
+
+            if (projInfo.IsOpenOutput)
+                Launch(ldmlFullName);
 
             return true;
         }
 
         
 
-        private void Compress(string sourceFolder, string outputPath)
+        private void Compress(string sourceFolder, string ldmlFullName)
         {
             var mODT = new ZipFolder();
-            string outputPathWithFileName = outputPath + ".idml";
             //string outputPathWithFileName = DefaultXhtmlFileWithPath.Replace(".xhtml", ".idml");
-            mODT.CreateZip(sourceFolder, outputPathWithFileName, 0);
+            mODT.CreateZip(sourceFolder, ldmlFullName, 0);
+        }
+
+        private void Launch(string ldmlFullName)
+        {
             try
             {
-                Common.OpenOutput(outputPathWithFileName);
+                Common.OpenOutput(ldmlFullName);
             }
             catch (System.ComponentModel.Win32Exception ex)
             {

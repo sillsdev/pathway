@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\ConfigurationTool\OpenOfficeConvert_OLD.dll" ComponentGuid="925B71FF-2829-4A5F-80D8-BB515115C477"/>
 	<File Path="Files\PublishingSolution\Styles\Scripture\Running_Head_Paged_Verse_Abbr.css" ComponentGuid="CC021924-EEB6-40FA-A057-7E7CC496977E"/>
 	<File Path="Files\PublishingSolution\Styles\Scripture\Running_Head_Paged_Chapter_Abbr.css" ComponentGuid="E4BF84C2-E792-4B97-8FAF-7822394B2965"/>
 	<File Path="Files\PublishingSolution\Styles\Scripture\Running_Head_Mirrored_Verse_Abbr.css" ComponentGuid="C2AB0B6E-A80D-448C-B3D2-3B44CCF93B56"/>

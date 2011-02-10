@@ -59,11 +59,32 @@ namespace Test
             return Common.PathCombine(_outputPath, fileName);
         }
 
+        public string SubOutput(string test, string fileName)
+        {
+            var subPath = Common.PathCombine(_outputPath, test);
+            if (!Directory.Exists(subPath))
+            {
+                Directory.CreateDirectory(subPath);
+                Thread.Sleep(1000);
+            }
+            if (string.IsNullOrEmpty(fileName))
+                return subPath;
+            return Common.PathCombine(subPath, fileName);
+        }
+
         public string Expected(string fileName)
         {
             if (string.IsNullOrEmpty(fileName))
                 return _expectedPath;
             return Common.PathCombine(_expectedPath, fileName);
+        }
+
+        public string SubExpected(string test, string fileName)
+        {
+            var subPath = Common.PathCombine(_expectedPath, test);
+            if (string.IsNullOrEmpty(fileName))
+                return subPath;
+            return Common.PathCombine(subPath, fileName);
         }
     }
 }
