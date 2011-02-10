@@ -1276,7 +1276,6 @@
     <Folder Include="PsExport\TestFiles\Input\T7\Pictures\" />
     <Folder Include="WordPressConvert\TestFiles\Expected\" />
     <Folder Include="WordPressConvert\TestFiles\Input\" />
-    <Folder Include="XhtmlExport\TestFiles\Expect\" />
     <Folder Include="XhtmlExport\TestFiles\Input\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
