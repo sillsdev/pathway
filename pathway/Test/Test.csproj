@@ -127,6 +127,7 @@
     <Compile Include="CssParser\ClassInfoTest.cs" />
     <Compile Include="CssParser\CssTreeTest.cs" />
     <Compile Include="FileUtilsTest.cs" />
+    <Compile Include="IdmlTest.cs" />
     <Compile Include="InDesignConvert\InDesignMapTest.cs" />
     <Compile Include="InDesignConvert\InGraphicTest.cs" />
     <Compile Include="InDesignConvert\InInsertMacroTest.cs" />

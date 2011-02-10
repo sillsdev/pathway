@@ -151,7 +151,7 @@ namespace Test.XhtmlExport
         {
             var idmlExpect = _tf.SubExpected(project, project + ".idml");
             var idmlOutput = _tf.SubOutput(project, project + ".idml");
-            FileAssert.AreEqual(idmlExpect, idmlOutput, message);
+            IdmlTest.AreEqual(idmlExpect, idmlOutput, message);
         }
 
         private static void OdtCheck(string project, string message)
@@ -200,7 +200,7 @@ namespace Test.XhtmlExport
         [Category("SkipOnTeamCity")]
         public void NkonyaSampleExportTest()
         {
-            FieldWorksXhtmlExport("Te", "Nkonya Sample", "Nkonya Sample 2011-02-09 1029.fwbackup", "Export changed");
+            FieldWorksXhtmlExport("Te", "Nkonya Sample", "Nkonya Sample 2011-02-10 1347.fwbackup", "Export changed");
         }
         #endregion Nkonya Sample
 
@@ -245,10 +245,9 @@ namespace Test.XhtmlExport
 
         #region Gondwana Sample InDesign
         /// <summary>
-        /// Gondwana Sample Open Office Back End Test
+        /// Gondwana Sample InDesign Back End Test
         /// </summary>
         [Test]
-        [Ignore]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void GondwanaSampleInDesignTest()
@@ -256,5 +255,18 @@ namespace Test.XhtmlExport
             PathawyB("Gondwana Sample", "Dictionary", "InDesign");
         }
         #endregion Gondwana Sample InDesign
+
+        #region Nkonya Sample InDesign
+        /// <summary>
+        /// Nkonya Sample InDesign Back End Test
+        /// </summary>
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void NkonyaSampleInDesignTest()
+        {
+            PathawyB("Nkonya Sample", "Scripture", "InDesign");
+        }
+        #endregion Nkonya Sample InDesign
     }
 }

@@ -282,7 +282,8 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    _pageClass = "@page:right";
+                    //_pageClass = "@page:right";
+                    _pageClass = "@page";
                 }
             }
             else
@@ -333,7 +334,8 @@ namespace SIL.PublishingSolution
             {
                 masterSpreadName = "MasterLeft";
             }
-            else if (_pageClass == "@page:right" && (_page % 2 == 1))
+            //else if (_pageClass == "@page:right" && (_page % 2 == 1))
+            else if (_pageClass == "@page" && (_page % 2 == 1))
             {
                 masterSpreadName = "MasterRight";
             }
