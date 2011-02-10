@@ -100,8 +100,10 @@
 	</xsl:template>
 
 	<!-- skip these elements altogether -->
+	<xsl:template match="xhtml:span[@class='Note_General_Paragraph']/xhtml:span" />
+	<xsl:template match="xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']/xhtml:span" />
 	<xsl:template match="xhtml:meta" />
-	<xsl:template match="xhtml:span[../@class='Title_Main']" />
+	<!-- <xsl:template match="xhtml:span[../@class='Title_Main']" /> -->
 
 	<!-- write out the contents of these elements, but not the elements themselves -->
 	<xsl:template match="xhtml:div[@class='scrSection']">
@@ -141,6 +143,9 @@
 	<xsl:template match="xhtml:div[@class='columns']" >
 		<xsl:apply-templates />
 	</xsl:template>
+	<xsl:template match="xhtml:div[@class='Title_Main']" >
+		<xsl:apply-templates />
+	</xsl:template>
 	
 	<!-- Process the chapters. -->
 	<xsl:template match="xhtml:span[@class='Chapter_Number']" mode="process">
@@ -154,14 +159,31 @@
 	        	</xsl:element>
 	</xsl:template>
     
-	<!-- Title for each book -->
-	<xsl:template match="xhtml:div[@class='Title_Main']">
+	<!-- Title section(s) for each book -->
+	<!-- The spans in these divs are some combination of the main title and/or secondary / tertiary titles. Just handle the main title here, as it doesn't have a class for the span text. -->
+	<xsl:template match="xhtml:div[@class='Title_Main']/xhtml:span[not(@class)]">
 		<xsl:element name="div">
 			<xsl:attribute name="class"><xsl:text>Title_Main</xsl:text></xsl:attribute>
-			<xsl:attribute name="xml:lang"><xsl:value-of select="descendant::xhtml:span/@lang"/></xsl:attribute>
-			<xsl:value-of select="descendant::xhtml:span"/>
+			<xsl:if test="@lang != '' and @lang !=docLanguage">
+				<xsl:attribute name="xml:lang"><xsl:value-of select="@lang"/></xsl:attribute>
+			</xsl:if>
+			<xsl:value-of select="."/>
 		</xsl:element>
 		<xsl:apply-templates/>
+	</xsl:template>
+
+	<xsl:template match="xhtml:div[@class='Title_Main']/xhtml:span[@class='Title_Secondary']">
+		<xsl:element name="div">
+			<xsl:attribute name="class"><xsl:text>Title_Secondary</xsl:text></xsl:attribute>
+			<xsl:value-of select="."/>
+		</xsl:element>
+	</xsl:template>
+
+	<xsl:template match="xhtml:div[@class='Title_Main']/xhtml:span[@class='Title_Tertiary']">
+		<xsl:element name="div">
+			<xsl:attribute name="class"><xsl:text>Title_Tertiary</xsl:text></xsl:attribute>
+			<xsl:value-of select="."/>
+		</xsl:element>
 	</xsl:template>
 	
 	<!-- inner text for scriptures - they don't have a class, so we'll assign them to class "scrText" -->
@@ -223,8 +245,10 @@
     
 	<!-- Special handling of text. -->
 	<xsl:template match="text()">
-		<!-- Replace curly quotes with straight quotes. -->
-		<xsl:value-of select="translate(.,'“”','&quot;&quot;')"/>
+		<xsl:if test="not(ancestor::xhtml:div[@class='Title_Main']/xhtml:span[not(@class)])">
+			<!-- Replace curly quotes with straight quotes. -->
+			<xsl:value-of select="translate(.,'“”','&quot;&quot;')"/>
+		</xsl:if>
 	</xsl:template>
 
 	<!-- Default element and attribute templates. -->
