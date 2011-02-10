@@ -1793,7 +1793,12 @@ return FromProg(file);
                     else if (Type == 'H')
                     {
                         if (imgDimension.IndexOf("%") > 0)
-                            retValue = height;
+                        {
+                            int counter;
+                            string retValue1 = GetNumericChar(imgDimension, out counter);
+                            double width1 = double.Parse(retValue1) / 100 * ColumnWidth;
+                            retValue = height / width * width1;
+                        }
                         else
                             retValue = height / width * double.Parse(imgDimension);
                     }

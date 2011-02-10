@@ -945,8 +945,21 @@ namespace SIL.PublishingSolution
                     {
                         if (property.Key == "column-gap") // For column-gap: 2em; change the value as (-ve)
                         {
-                            _dictColumnGapEm["Sect_" + _className.Trim()]["columnGap"] = _tempStyle[property.Key] + "pt";
+                            string secClass = "Sect_" + _className.Trim();
+                            _dictColumnGapEm[secClass]["columnGap"] = _tempStyle[property.Key] + "pt";
                             _tempStyle[property.Key] = (-ancestorFontSize * value / 100).ToString();
+
+                            if (true)
+                            {
+                                //Common.ConvertToInch(columnGap) 
+                                int counter;
+                                string colGapValue = _dictColumnGapEm[secClass]["columnGap"];
+                                string columnGap = Common.GetNumericChar(colGapValue, out counter);
+                                float columnGapInch = Common.ConvertToInch(columnGap);
+                                float expColumnGap = Common.ConvertToInch(_dictColumnGapEm[secClass]["pageWidth"]) - columnGapInch - Common.ConvertToInch(_dictColumnGapEm[secClass]["marginLeft"])
+                                             - Common.ConvertToInch(_dictColumnGapEm[secClass]["marginLeft"]) / 2.0F;
+                                Common.ColumnWidth = float.Parse(Common.UnitConverter(expColumnGap + "in", "pt"));
+                            }
                         }
                         else
                         {

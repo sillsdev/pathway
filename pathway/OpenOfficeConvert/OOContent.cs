@@ -219,8 +219,12 @@ namespace SIL.PublishingSolution
                 {
                     _dictColumnGapEm[className] = IdAllClass[className];
                 }
-
-
+                string colWidth = string.Empty;
+                if (className.IndexOf("SectColumnWidth_") >= 0)
+                {
+                    colWidth = IdAllClass[className]["ColumnWidth"];
+                    Common.ColumnWidth = double.Parse(colWidth);
+                }
 
                 searchKey = "visibility";
                 if (IdAllClass[className].ContainsKey(searchKey) && IdAllClass[className][searchKey] == "hidden")
@@ -811,16 +815,16 @@ namespace SIL.PublishingSolution
                 content = SignificantSpace(content);
                 if (_imageClass.Length > 0)
                 {
-                    if (!_imageParaForCaption)
-                    {
-                        _writer.WriteStartElement("text:p");
-                        _writer.WriteAttributeString("text:style-name", "paraStyle");
-                    }
+                    //if (!_imageParaForCaption)
+                    //{
+                    //    _writer.WriteStartElement("text:p");
+                    //    _writer.WriteAttributeString("text:style-name", "paraStyle");
+                    //}
                     _writer.WriteString(content);
-                    if (!_imageParaForCaption)
-                    {
-                        _writer.WriteEndElement();
-                    }
+                    //if (!_imageParaForCaption)
+                    //{
+                    //    _writer.WriteEndElement();
+                    //}
                 }
                 else if (pseudo)
                 {
@@ -845,7 +849,7 @@ namespace SIL.PublishingSolution
 
         private void WriteCharacterStyle(string content, string characterStyle, bool pseudo)
         {
-            _imageInserted = InsertImage();
+            //_imageInserted = InsertImage();
 
             if ((_tagType == "span" || _tagType == "a" || pseudo) && characterStyle != "none" || (_tagType == "img" && _imageInserted)) //span start
             {
@@ -860,7 +864,9 @@ namespace SIL.PublishingSolution
                 if (_imageClass.Length > 0)
                 {
                     //if (!_isNewParagraph && !_forcedPara)
-                    if (!_forcedPara)
+                    bool a = _isNewParagraph;
+                    bool b = _isParagraphClosed;
+                    if (_isParagraphClosed && !_forcedPara)
                     {
                         _writer.WriteStartElement("text:p");
                         _writer.WriteAttributeString("text:style-name", "ForcedDiv");
@@ -1084,7 +1090,7 @@ namespace SIL.PublishingSolution
             //if (_isDisplayNone) return; // skip the node
 
             StartElementBase(_IsHeadword);
-
+            _imageInserted = InsertImage();
             ListBegin();
             SetClassCounter();
             Psuedo();
@@ -1543,9 +1549,9 @@ namespace SIL.PublishingSolution
 
         private void GetHeightandWidth(ref string height, ref string width)
         {
-            if (_allCharacter.Count > 0)
+            if (_allStyle.Count > 0)
             {
-                string stackClass = _allCharacter.Peek();
+                string stackClass = _allStyle.Peek();
                 string[] splitedClassName = stackClass.Split('_');
 
                 string[] allClasses = new string[splitedClassName.Length + 1];
@@ -1726,6 +1732,7 @@ namespace SIL.PublishingSolution
                     {
                         rectWidth = Common.CalcDimension(fromPath, rectHeight, 'W');
                     }
+
                 }
                 else if (rectWidth != "0" && rectWidth != "72") // 72 = auto width
                 {
@@ -1736,11 +1743,16 @@ namespace SIL.PublishingSolution
                     //Default value is 72 
                     rectHeight = "72"; // fixed the width as 1 in = 72pt;
                     rectWidth = Common.CalcDimension(fromPath, rectHeight, 'W');
-                    if (rectWidth == "0")
-                    {
-                        rectWidth = "72";
-                    }
                 }
+                if (rectWidth == "0")
+                {
+                    rectWidth = "72";
+                }
+                if (rectHeight == "0")
+                {
+                    rectHeight = "72";
+                }
+
 
                 string strFrameCount = "Graphics" + _frameCount;
                 ////TODO Make it function 
@@ -1768,6 +1780,23 @@ namespace SIL.PublishingSolution
 
                 //    //_divOpen = true;
                 //}
+                if (_isParagraphClosed)  // Forcing a Paragraph Style, if it is not exist
+                {
+                    int counter = _allParagraph.Count;
+                    string divTagName = string.Empty;
+                    if (counter > 0)
+                    {
+                        var tempStyle = new string[counter];
+                        _allParagraph.CopyTo(tempStyle, 0);
+                        divTagName = counter > 1 ? tempStyle[1] : tempStyle[0];
+                    }
+                    _writer.WriteStartElement("text:p");
+                    //_writer.WriteAttributeString("text:style-name", _util.ParentName);
+                    _writer.WriteAttributeString("text:style-name", divTagName);
+
+                    _isParagraphClosed = false;
+                    _isNewParagraph = false;
+                }
 
                 // 1st frame
                 _writer.WriteStartElement("draw:frame");
@@ -1863,6 +1892,7 @@ namespace SIL.PublishingSolution
                 _imageInsert = false;
                 _imageSource = string.Empty;
                 _isNewParagraph = false;
+                _isParagraphClosed = true;
             }
             return inserted;
         }
@@ -1902,6 +1932,11 @@ namespace SIL.PublishingSolution
                     _writer.WriteEndElement(); // for Textframe
                     isImage = false;
                     _imageClass = "";
+                    _isNewParagraph = false;
+                    _isParagraphClosed = false;
+                    //bool a = _isNewParagraph;
+                    //bool b = _isParagraphClosed;
+
                 }
             }
         }
