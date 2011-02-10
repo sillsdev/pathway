@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Jan-07-2011 for TD-1779(no information in headers)
+&apos;Changed On Feb-10-2011 for TD-1888(header for reversal only export wrong)
 
 &apos;Define the values to Constant Variables for First Guide word, Last Guide word ,Headword Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
 Const LASTGUIDESTYLE =  &quot;GuideR&quot;
 Const HEADWORDSTYLE = &quot;headword&quot;
 Const HEADWORD_MINOR_STYLE = &quot;headwordminor&quot;
-Const ENTRYPARASTYLE =  &quot;entry_letData&quot;
+Const ENTRYPARASTYLE =  &quot;entry_letData_dicBody&quot; &apos; &quot;entry_letData&quot;
 Const TITLEPARASTYLE = &quot;letter&quot;
 Const HOMOGRAPHNUMBER =   &quot;homographnumber&quot;
 Const CONTINUATION_CHARACTER = &quot;...&quot;
@@ -391,6 +391,7 @@ End Function
 
 &apos;This function gives the guidewords from the given paragraph
 Function GuideWord(oCursor)
+Dim myStyle
   oParaEnume = oCursor.createEnumeration() 
   While oParaEnume.hasMoreElements() 
     oPara = oParaEnume.nextElement() 
@@ -399,7 +400,8 @@ Function GuideWord(oCursor)
     While oPortionEnume.hasMoreElements() 
       	TextPortion = oPortionEnume.nextElement() &apos;reversalform-after
 		&apos;If (GetStyleName(TextPortion.CharStyleName) = &quot;reversalform&quot; AND Len(Trim(GuideWord)) = 0) OR GetStyleName(TextPortion.CharStyleName) = HEADWORDSTYLE OR GetStyleName(TextPortion.CharStyleName) = HEADWORD_MINOR_STYLE OR  InStr(GetStyleName(TextPortion.CharStyleName), HOMOGRAPHNUMBER) &gt; 0  THEN
-     	If (GetStyleName(TextPortion.CharStyleName) = &quot;reversalform&quot; AND Len(Trim(GuideWord)) = 0) OR GetStyleName(TextPortion.CharStyleName) = HEADWORDSTYLE OR GetStyleName(TextPortion.CharStyleName) = HEADWORD_MINOR_STYLE THEN
+	    myStyle = GetStyleName(TextPortion.CharStyleName)
+     	If (myStyle = &quot;reversalform&quot; AND Len(Trim(GuideWord)) = 0) OR myStyle = HEADWORDSTYLE OR myStyle = HEADWORD_MINOR_STYLE THEN
       		GuideWord = GuideWord &amp; Trim(TextPortion.String) &amp; &quot; &quot;
 		ElseIf Len(Trim(TextPortion.String)) &gt; 0 Then
       		Exit Function
@@ -532,7 +534,16 @@ Do
 			paraStyle1 = FIRSTGUIDESTYLE
 			&apos;InsertGuide(paraText1,paraPos1,paraStyle1)
 			
-			If LastParagraph(page -1) = LastParagraph(page) Then
+		
+			If Len(Trim(paraText)) = 0 And Len(Trim(paraText1)) &gt; 0 Then
+				paraText = paraText1
+			End If
+			
+			If Len(Trim(paraText1)) = 0 And Len(Trim(paraText)) &gt; 0 Then
+				paraText1 = paraText
+			End If			
+			
+			If LastParagraph(page -1) = LastParagraph(page) And Len(Trim(LastParagraph(page))) &gt; 0 Then
 				InsertGuide(paraText1,paraPos1,paraStyle1)
 				InsertGuide(paraText,paraPos,paraStyle)
 			Else
@@ -558,6 +569,7 @@ End Sub
 
 &apos;This function finds whether guideword exists in given pragraph
 Function IsGuide(oCursor)
+Dim myStyle
   IsGuide = False
   oParaEnume = oCursor.createEnumeration() 
   While oParaEnume.hasMoreElements() 
@@ -568,7 +580,8 @@ Function IsGuide(oCursor)
       oPortion = oPortionEnume.nextElement() 
       &apos;msgbox &quot;String: &quot; &amp; oPortion.getString() &amp; &quot;CharStyleName: &quot; &amp; oPortion.CharStyleName &apos;HOMOGRAPHNUMBER 
       &apos;If oPortion.ParaStyleName = ENTRYPARASTYLE AND GetStyleName(oPortion.CharStyleName) = &quot;reversalform&quot; OR GetStyleName(oPortion.CharStyleName) = HEADWORDSTYLE OR GetStyleName(oPortion.CharStyleName) = HEADWORD_MINOR_STYLE OR InStr(GetStyleName(oPortion.CharStyleName), HOMOGRAPHNUMBER) &gt; 0 THEN
-      If oPortion.ParaStyleName = ENTRYPARASTYLE AND GetStyleName(oPortion.CharStyleName) = &quot;reversalform&quot; OR GetStyleName(oPortion.CharStyleName) = HEADWORDSTYLE OR GetStyleName(oPortion.CharStyleName) = HEADWORD_MINOR_STYLE THEN
+	  myStyle = GetStyleName(oPortion.CharStyleName)	
+      If oPortion.ParaStyleName = ENTRYPARASTYLE AND myStyle = &quot;reversalform&quot; OR myStyle = HEADWORDSTYLE OR myStyle = HEADWORD_MINOR_STYLE THEN
       		IsGuide = True
       End If
       Exit Function
