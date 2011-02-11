@@ -437,6 +437,7 @@ namespace SIL.PublishingSolution
                 SaveDefaultProperty(this);
             _publicationName = Path.GetFileName(txtSaveInFolder.Text);
             txtSaveInFolder.Text = Path.GetDirectoryName(txtSaveInFolder.Text);
+            Common.TimeStarted = DateTime.Now;
             Close();
         }
 

@@ -188,7 +188,7 @@ namespace SIL.PublishingSolution
                 {
                     File.Delete(niceNameCSS);
                 }
-                File.Copy(mergedCSS, niceNameCSS);
+                File.Copy(mergedCSS, niceNameCSS); 
                 mergedCSS = niceNameCSS;
                 Common.SetDefaultCSS(projInfo.DefaultXhtmlFileWithPath, defaultCSS);
                 Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCSS);
@@ -392,12 +392,16 @@ namespace SIL.PublishingSolution
                 inProcess.PerformStep();
                 inProcess.Close();
 
+                // clean up
+                var outputPathWithFileName = Common.PathCombine(outputFolder, fileName) + ".epub";
+                Common.CleanupOutputDirectory(outputFolder, outputPathWithFileName);
+                Environment.CurrentDirectory = curdir;
+                Cursor.Current = myCursor;
 
                 // Postscript - validate the file using our epubcheck wrapper
                 if (Common.Testing)
                 {
                     // Running the unit test - just run the validator and return the result
-                    var outputPathWithFileName = Common.PathCombine(outputFolder, fileName) + ".epub";
                     var validationResults = epubValidator.Program.ValidateFile(outputPathWithFileName);
                     Debug.WriteLine("Exportepub: validation results: " + validationResults);
                     // we've succeeded if epubcheck returns no errors
@@ -407,19 +411,13 @@ namespace SIL.PublishingSolution
                 {
                     MessageBox.Show(Resources.ExportCallingEpubValidator, Resources.ExportComplete, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     var validationDialog = new ValidationDialog();
-                    var outputPathWithFileName = Common.PathCombine(outputFolder, fileName) + ".epub";
                     validationDialog.FileName = outputPathWithFileName;
                     validationDialog.ShowDialog();
                 }
-
-                // clean up
-                Environment.CurrentDirectory = curdir;
-                Cursor.Current = myCursor;
             }
                 
             return success;
         }
-
 
         #region Private Functions
 

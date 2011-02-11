@@ -71,6 +71,7 @@ namespace SIL.Tool
         public static double ColumnWidth = 0.0;
         public static string errorMessage = string.Empty;
         public static string databaseName = string.Empty;
+        public static DateTime TimeStarted { get; set; }
 
         public enum FileType
         {
@@ -1583,6 +1584,35 @@ return FromProg(file);
             string returnPath = path.Replace('\\', '/');
             returnPath = returnPath.Replace(Path.DirectorySeparatorChar, '/');
             return returnPath;
+        }
+
+        /// <summary>
+        /// Cleans up the output directory of all "temporary" files created during the export process.
+        /// This is determined by comparing the timestamp on each file to the DateTime we stored in the
+        /// PrintVia.On_OK() method. Files with an earlier timestamp will be ignored, except for the .de file
+        /// (that gets copied over as part of the export process).
+        /// </summary>
+        /// <param name="outputFolder">Output directory to clean up</param>
+        /// <param name="keepFilename">This is the permanent output file you want to keep (.odt, .epub, etc.)</param>
+        public static void CleanupOutputDirectory(string outputFolder, string keepFilename)
+        {
+            var outputFiles = Directory.GetFiles(outputFolder);
+            foreach (var outputFile in outputFiles)
+            {
+                if (!outputFile.Equals(keepFilename))
+                {
+                    // Did we modify this file during our export? If so, delete it
+                    if (File.GetLastWriteTime(outputFile).CompareTo(TimeStarted) > 0)
+                    {
+                        File.Delete(outputFile);
+                    }
+                    // delete the Scripture.de / Dictionary.de file as well
+                    else if (outputFile.EndsWith(".de"))
+                    {
+                        File.Delete(outputFile);
+                    }
+                }
+            }
         }
 
         /// <summary>
