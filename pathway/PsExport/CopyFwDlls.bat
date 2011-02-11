@@ -59,6 +59,7 @@ xcopy %base%\XeTeXConvert\%cfg%\XeTeXConvert.* . /y
 :justgobible
 if "%1" == "ReleaseSE" goto nogobible
 xcopy %base%\GoBibleConvert\%cfg%\GoBibleConvert.* . /y
+xcopy %base%\YouVersionConvert\%cfg%\YouVersionConvert.* . /y
 xcopy %base%\LogosConvert\%cfg%\LogosConvert.* . /y
 goto done
 :nogobible
