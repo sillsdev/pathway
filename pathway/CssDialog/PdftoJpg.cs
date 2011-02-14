@@ -22,8 +22,6 @@ namespace SIL.PublishingSolution
             {
                 cssMergeFullFileName = cssFullFileName;
             }
-            //string tempFolderPath = Path.GetTempPath();
-            //string outputPdfFile = Path.Combine(tempFolderPath, "Preview.pdf");
 
             string PsSupportPath = Path.Combine(Common.LeftString(cssFullFileName, "Pathway"), "Pathway");
             string PsSupportPathfrom = Common.GetApplicationPath();
@@ -50,10 +48,8 @@ namespace SIL.PublishingSolution
             string fileName = Path.GetTempFileName();
             ps.ProjectName = fileName;
             ps.JpgPreview = true;
-           
-            //ps.DictionaryPath = Common.PathCombine(Path.GetDirectoryName(xhtmlPreviewFilePath),b);
+            ps.DictionaryOutputName = fileName;
             ps.DictionaryPath = Path.GetDirectoryName(xhtmlPreviewFilePath);
-            //ps.ProjectInputType = "Dictionary";
             ps.ProjectInputType = loadType;
          
             ExportOpenOffice openOffice = new ExportOpenOffice();
@@ -61,8 +57,8 @@ namespace SIL.PublishingSolution
 
             //Pdf pdf = new Pdf(xhtmlPreviewFilePath, cssMergeFullFileName);
             //pdf.Create(outputPdfFile);
-            string outputPdfFile = Path.Combine(ps.DictionaryPath, Path.GetFileNameWithoutExtension(fileName) + ".pdf");
-
+            //string outputPdfFile = Path.Combine(ps.DictionaryPath, Path.GetFileNameWithoutExtension(fileName) + ".pdf");
+            string outputPdfFile = Path.Combine(ps.DictionaryPath, Path.GetFileNameWithoutExtension(xhtmlPreviewFilePath) + ".pdf");
 
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -77,7 +73,7 @@ namespace SIL.PublishingSolution
                 Application.DoEvents();
             }
             //MessageBox.Show(stopWatch.Elapsed.ToString());
-            ConvertImage(outputPdfFile);
+            ConvertImage(outputPdfFile, fileName);
             return ps.ProjectName;
         }
 
@@ -88,10 +84,13 @@ namespace SIL.PublishingSolution
             //ConvertImage(outputPdfFile);
         }
 
-        private void ConvertImage(string filename)
+        private void ConvertImage(string filename,string outputFileName)
         {
             try
             {
+                //string previewFile = outputFileName;
+                string outputPath = Path.Combine(Path.GetDirectoryName(filename), Path.GetFileNameWithoutExtension(outputFileName)) + ".pdf";
+                File.Copy(filename, outputPath,true);
                 PDFConvert converter = new PDFConvert();
                 string fileExtenstion = ".jpg";
                 bool Converted = false;
@@ -99,9 +98,9 @@ namespace SIL.PublishingSolution
                 converter.FirstPageToConvert = 1;
                 converter.LastPageToConvert = 2;
                 converter.FitPage = false;
-                converter.JPEGQuality = 20;
+                converter.JPEGQuality = 75;
                 converter.OutputFormat = "jpeg";
-                System.IO.FileInfo input = new FileInfo(filename);
+                FileInfo input = new FileInfo(outputPath);
                 string output = string.Format("{0}\\{1}{2}", input.Directory, input.Name, fileExtenstion);
                 //If the output file exist alrady be sure to add a random name at the end until is unique!
                 while (File.Exists(output))
@@ -109,11 +108,9 @@ namespace SIL.PublishingSolution
                     output = output.Replace(fileExtenstion, string.Format("{1}{0}", fileExtenstion, DateTime.Now.Ticks));
                 }
                 Converted = converter.Convert(input.FullName, output);
-
             }
             catch (Exception)
             {
-                
                 throw;
             }
         }

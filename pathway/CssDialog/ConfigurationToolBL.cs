@@ -2745,6 +2745,11 @@ namespace SIL.PublishingSolution
             }
         }
 
+        /// <summary>
+        /// Comparing the loaded values in property values vs changed property values
+        /// Except the Label controls
+        /// </summary>
+        /// <returns></returns>
         private bool IsPropertyModified()
         {
             if (_propertyValue.Count == 0 )
@@ -2761,7 +2766,6 @@ namespace SIL.PublishingSolution
                 
                 if (_propertyValue[i++] != val)
                 {
-                    //string a = _propertyValue[i-1];
                     propertyModified = true;
                     break;
                 }
