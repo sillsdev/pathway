@@ -1162,11 +1162,11 @@
             // lblRights
             // 
             this.lblRights.AutoSize = true;
-            this.lblRights.Location = new System.Drawing.Point(53, 310);
+            this.lblRights.Location = new System.Drawing.Point(5, 310);
             this.lblRights.Name = "lblRights";
-            this.lblRights.Size = new System.Drawing.Size(37, 13);
+            this.lblRights.Size = new System.Drawing.Size(85, 13);
             this.lblRights.TabIndex = 18;
-            this.lblRights.Text = "Rights";
+            this.lblRights.Text = "Copyright Holder";
             this.lblRights.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtCoverage
