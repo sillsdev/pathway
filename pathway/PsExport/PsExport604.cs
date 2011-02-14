@@ -134,6 +134,14 @@ namespace SIL.PublishingSolution
             string revFullName = Common.PathCombine(outDir, "FlexRev.xhtml");
             if (!File.Exists(revFullName))
                 revFullName = "";
+            else
+            {
+                Common.StreamReplaceInFile(revFullName, "<ReversalIndexEntry_Self>", "");
+                Common.StreamReplaceInFile(revFullName, "</ReversalIndexEntry_Self>", "");
+                Common.StreamReplaceInFile(revFullName, "class=\"headword\"", "class=\"headref\"");
+                string revCssFullName = revFullName.Substring(0, revFullName.Length - 6) + ".css";
+                Common.StreamReplaceInFile(revCssFullName, ".headword", ".headref");
+            }
             return revFullName;
         }
 
@@ -151,6 +159,11 @@ namespace SIL.PublishingSolution
 
             try
             {
+                if (!File.Exists(cssFullName))
+                {
+                    var layout = Param.Value[Param.LayoutSelected];
+                    cssFullName = Param.StylePath(Param.StyleFile[layout]);
+                }
             string myCss = Common.PathCombine(outDir, Path.GetFileName(cssFullName));
             if (cssFullName != myCss)
                 File.Copy(cssFullName, myCss, true);
