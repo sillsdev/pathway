@@ -21,34 +21,18 @@
 	<xsl:template match="xhtml:span[ancestor::*[1][self::xhtml:body]]">
 		<!-- Beginning with the first span in a (potential) series... -->
 		<xsl:if test="not(preceding-sibling::*[1][self::xhtml:span])">
-			<xsl:call-template name="MoveSpansToPara" />
+			<p class="Paragraph" xmlns="http://www.w3.org/1999/xhtml">
+				<xsl:apply-templates select="." mode="MoveSpansToPara" />
+			</p>
 		</xsl:if>
 	</xsl:template>
 	
-	<xsl:template name="MoveSpansToPara">
-		<p class="Paragraph">
-			<xsl:apply-templates select="." mode="MoveSpansToPara" />
-		</p>
-	</xsl:template>
-	
 	<xsl:template match="xhtml:span" mode="MoveSpansToPara">
-		<!-- <xsl:comment>Moving span to paragraph</xsl:comment> -->
-		<span>
-			<xsl:copy-of select="@*"/>
-			<xsl:apply-templates />
-		</span>
-		<xsl:choose>
-			<xsl:when test="following-sibling::*[1][self::xhtml:span]">
-				<!-- Move any following spans (without parent paragraphs) to this paragraph. -->
-				<!-- <xsl:comment>Moving following-sibling to paragraph</xsl:comment> -->
-				<xsl:apply-templates select="following-sibling::*[1][self::xhtml:span]" mode="MoveSpansToPara" />
-			</xsl:when>
-			<xsl:otherwise>
-				<!-- <xsl:comment>Copying following-sibling</xsl:comment> -->
-				<xsl:copy>
-					<xsl:apply-templates select="@*|node()" />
-				</xsl:copy>
-			</xsl:otherwise>
-		</xsl:choose>
+		<xsl:copy>
+			<xsl:apply-templates select="@*|node()"/>
+		</xsl:copy>
+
+		<!-- Move any following spans (without parent paragraphs) to this paragraph. -->
+		<xsl:apply-templates select="following-sibling::*[1][self::xhtml:span]" mode="MoveSpansToPara" />
 	</xsl:template>
 </xsl:stylesheet>

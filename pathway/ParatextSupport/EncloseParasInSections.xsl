@@ -20,18 +20,11 @@
 	<!-- Create section divisions -->
 	<xsl:template match="xhtml:h1">
 		<xsl:choose>
-			<xsl:when test="@class = 'Intro_Section_Head'">
-				<div class="scrIntroSection" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:call-template name="Section_Head"/>
-				</div>
-			</xsl:when>
-			<xsl:when test="@class = 'Section_Head' or @class = 'Chapter_Head' or @class = 'Hebrew_Title' or 
-					  @class = 'Parallel_Passage_Reference' or @class = 'Section_Head_Major' or 
-					  @class = 'Section_Head_Minor' or @class = 'Section_Head_Series' or @class = 'Section_Range_Paragraph' or 
-					  @class = 'Speech_Speaker' or @class = 'Variant_Section_Head'">
-				<div class="scrSection" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:call-template name="Section_Head"/>
-				</div>
+			<xsl:when test="@class = 'Intro_Section_Head' or @class = 'Section_Head' or @class = 'Chapter_Head' or 
+					@class = 'Hebrew_Title' or @class = 'Parallel_Passage_Reference' or @class = 'Section_Head_Major' or 
+					@class = 'Section_Head_Minor' or @class = 'Section_Head_Series' or @class = 'Section_Range_Paragraph' or 
+					@class = 'Speech_Speaker' or @class = 'Variant_Section_Head'">
+						<xsl:call-template name="Section_Head"/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:comment>Unrecognized Heading: {@class}</xsl:comment>
@@ -39,32 +32,59 @@
 		</xsl:choose>
 	</xsl:template>
 
-	<xsl:template name="Section_Head">
-		<xsl:apply-templates select="." mode="Section_Head"/>
-	</xsl:template>
-
 	<!-- Copy heading and content paragraphs that follow a section head. -->
 	<xsl:template match="xhtml:h1" mode="Section_Head">
-		<div class="{@class}" xmlns="http://www.w3.org/1999/xhtml">
-			<xsl:apply-templates/>
+		<div xmlns="http://www.w3.org/1999/xhtml">
+			<xsl:apply-templates select="@*|node()"/>
 		</div>
-		<xsl:choose>
-			<xsl:when test="following-sibling::*[1][self::xhtml:h1]" >
-				<xsl:apply-templates select="following-sibling::*[1][self::xhtml:h1]" mode="Section_Head"/>	
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:apply-templates select="following-sibling::*[1][self::xhtml:p]" mode="Section_Head"/>
-			</xsl:otherwise>
-		</xsl:choose>
+		
+		<xsl:apply-templates select="following-sibling::*[1][self::xhtml:h1 or self::xhtml:p]" 
+			mode="Section_Head"/>
+	</xsl:template>
+	
+	<!-- When a Scripture content paragraph is preceded by an introduction content paragraph, 
+		create a new section. -->
+	<xsl:template match="xhtml:p[not(starts-with(@class, 'Intro_'))]
+		[preceding-sibling::*[1][self::xhtml:p[starts-with(@class, 'Intro_')]]]">
+		<xsl:call-template name="Section_Head"/>
 	</xsl:template>
 	
 	<xsl:template match="xhtml:p" mode="Section_Head">
-		<div class="{@class}" xmlns="http://www.w3.org/1999/xhtml">
-			<xsl:apply-templates/>
+		<div xmlns="http://www.w3.org/1999/xhtml">
+			<xsl:apply-templates select="@*|node()"/>
 		</div>
-		<xsl:apply-templates select="following-sibling::*[1][self::xhtml:p]" mode="Section_Head"/>
+		<xsl:choose>
+			<xsl:when test="starts-with(@class, 'Intro_') and 
+				following-sibling::*[1][self::xhtml:p[not(starts-with(@class, 'Intro_'))]]"/>
+			<xsl:otherwise>
+				<xsl:apply-templates select="following-sibling::*[1][self::xhtml:p]" mode="Section_Head"/>
+			</xsl:otherwise>
+		</xsl:choose>		
 	</xsl:template>
 
+	<!-- When a paragraph is immediately preceded by a div rather than an h1, this is an indication
+		that an explicit section head indication is absent, so we need to create a new section. -->
+	<xsl:template match="xhtml:p[preceding-sibling::*[1][self::xhtml:div]]">
+		<xsl:call-template name="Section_Head"/>
+	</xsl:template>
+	
+	<xsl:template name="Section_Head">
+		<xsl:variable name="class">
+			<xsl:choose>
+				<xsl:when test="starts-with(@class, 'Intro_')">
+					<xsl:value-of select="'scrIntroSection'"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="'scrSection'"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		
+		<div class="{$class}" xmlns="http://www.w3.org/1999/xhtml">
+			<xsl:apply-templates select="." mode="Section_Head"/>
+		</div>
+	</xsl:template>
+	
 	<!-- Remove heading and content nodes at the root level. -->
 	<!-- Only delete headings that are preceded by another heading. -->
 	<xsl:template match="xhtml:h1[preceding-sibling::*[1][self::xhtml:h1]]"/>

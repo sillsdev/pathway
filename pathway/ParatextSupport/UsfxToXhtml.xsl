@@ -11,13 +11,6 @@
 	<xsl:param name="figurePath"/> <!-- Path to figures folder with a final directory separator character -->
 	<xsl:param name="altFigurePath"/> <!-- Alternate path to figures folder with a final directory separator character -->
 
-	<!-- Get book identification -->
-	<!-- <xsl:variable name="bookCode" select="usfm/book/@id"/> 
-	<xsl:variable name="bookInToc" select="normalize-space(usfm/para[@style='toc2'])"/>
-	<xsl:variable name="bookHeading" select="normalize-space(usfm/para[@style='h'])"/>
-	<xsl:variable name="bookTitle" select="normalize-space(usfm/para[@style='mt'])"/>
-	<xsl:variable name="bookTitle1" select="normalize-space(usfm/para[@style='mt1'])"/> -->
-
 	<!-- The templates matching * and @* match and copy unhandled elements/attributes. -->
 	<xsl:template match="*">
 		<xsl:copy>
@@ -48,7 +41,6 @@
 		</html>
 	</xsl:template>
 
-	<!-- TODO: avoid setting variables if book element is found before the para with the specified style attribute -->
 	<xsl:template match="book">
 		<!-- Get book identification -->
 		<xsl:variable name="bookCode" select="@id"/>
@@ -131,6 +123,11 @@
 			</xsl:when>
 			<xsl:when test="@style = 'im3'">
 				<h1 class="Intro_Title_Tertiary" xmlns="http://www.w3.org/1999/xhtml">
+					<xsl:apply-templates/>
+				</h1>
+			</xsl:when>
+			<xsl:when test="@style = 'is'">
+				<h1 class="Intro_Section_Head" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</h1>
 			</xsl:when>

@@ -19,17 +19,10 @@
 	
 	<!-- Move scrSections at the <body> level to a new columns div. -->
 	<xsl:template match="xhtml:div[@class = 'scrSection'][ancestor::*[1][self::xhtml:body]]">
-		<!--<xsl:comment>Testing for first scrSection div...</xsl:comment>-->
 		<xsl:choose>
 			<xsl:when test="not(preceding-sibling::*[1][self::xhtml:div][@class = 'scrSection'])">
-				<!--<xsl:comment>Calling MoveScrSectionToColumns</xsl:comment>-->
 					<xsl:call-template name="MoveScrSectionToColumns" />
 			</xsl:when>
-			<!--
-			<xsl:otherwise>
-				<xsl:apply-templates />
-			</xsl:otherwise>
-			-->
 		</xsl:choose>
 	</xsl:template>
 
@@ -40,13 +33,11 @@
 	</xsl:template>
 
 	<xsl:template match="xhtml:div" mode="MoveScrSectionToColumns">
-		<!--<xsl:comment>Moving scrSection to columns element</xsl:comment>-->
 		<div class="{@class}">
 			<xsl:apply-templates />
 		</div>
 		<xsl:if test="following-sibling::*[1][self::xhtml:div][@class = 'scrSection']">
 			<!-- Move any subsequent scrSection divs to the columns div. -->
-			<!--<xsl:comment>Moving next scrSection to columns</xsl:comment>-->
 			<xsl:apply-templates select="following-sibling::*[1][self::xhtml:div][@class = 'scrSection']" mode="MoveScrSectionToColumns" />
 		</xsl:if>
 	</xsl:template>

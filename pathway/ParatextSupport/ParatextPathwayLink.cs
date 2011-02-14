@@ -21,7 +21,6 @@ namespace SIL.PublishingSolution
 		private XslCompiledTransform m_moveTitleSpansToTitle = new XslCompiledTransform();
 		private XslCompiledTransform m_moveSpansToParas = new XslCompiledTransform();
 		private XslCompiledTransform m_encloseParasInSections = new XslCompiledTransform();
-		private XslCompiledTransform m_addImpliedSection = new XslCompiledTransform();
 		private XslCompiledTransform m_encloseScrInColumns = new XslCompiledTransform();
 		private XslCompiledTransform m_encloseSectionsInBook = new XslCompiledTransform();
 
@@ -111,9 +110,6 @@ namespace SIL.PublishingSolution
 			m_encloseParasInSections.Load(XmlReader.Create(
 				Assembly.GetExecutingAssembly().GetManifestResourceStream(
 				"ParatextSupport.EncloseParasInSections.xsl")));
-			m_addImpliedSection.Load(XmlReader.Create(
-				Assembly.GetExecutingAssembly().GetManifestResourceStream(
-				"ParatextSupport.AddImpliedSection.xsl")));
 			m_encloseScrInColumns.Load(XmlReader.Create(
 				Assembly.GetExecutingAssembly().GetManifestResourceStream(
 				"ParatextSupport.EncloseScrInColumns.xsl")));
@@ -299,12 +295,6 @@ namespace SIL.PublishingSolution
 			XmlWriter htmlw4 = XmlWriter.Create(parasInSections, m_encloseParasInSections.OutputSettings);
 			XmlReader reader4 = XmlReader.Create(new StringReader(spansToParas.ToString()), settings);
 			m_encloseParasInSections.Transform(reader4, null, htmlw4, null);
-
-			//// Step 4.5. Add implied section (when there isn't an explicit section head between the intro and Scripture content)
-			//StringBuilder implicitSectionAdded = new StringBuilder();
-			//XmlWriter htmlw4_5 = XmlWriter.Create(implicitSectionAdded, m_addImpliedSection.OutputSettings);
-			//XmlReader reader4_5 = XmlReader.Create(new StringReader(parasInSections.ToString()), settings);
-			//m_addImpliedSection.Transform(reader4_5, null, htmlw4_5, null);
 
 			// Step 5. Move Scripture sections into columns element.
 			StringBuilder scrSectionsInColumns = new StringBuilder();
