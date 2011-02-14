@@ -24,7 +24,7 @@ namespace SIL.PublishingSolution
         Dictionary<string, string> standardSize = new Dictionary<string, string>();
         public string Caption = "Pathway Configuration Tool";
         public TraceSwitch _traceOnBL = new TraceSwitch("General", "Trace level for application");
-        
+        private List<string> _propertyValue = new List<string>();
         #endregion
 
         #region Public Variable
@@ -900,11 +900,26 @@ namespace SIL.PublishingSolution
                     cTool.DdlFileProduceDict.SelectedItem = FileProduced.Trim();
                     ShowCssSummary();
                 }
+                SavePropertyValue();
             }
             catch
             {
             }
             _screenMode = ScreenMode.Edit;
+        }
+
+        private void SavePropertyValue()
+        {
+            Control.ControlCollection ctls = cTool.TabControl1.TabPages[1].Controls;
+            _propertyValue.Clear();
+            foreach (Control control in ctls)
+            {
+                if (control.GetType().Name == "Label")
+                    continue;
+
+                string val = control.Text;
+                _propertyValue.Add(val);
+            }
         }
 
         ///// <summary>
@@ -1887,6 +1902,7 @@ namespace SIL.PublishingSolution
 
         public bool SelectRow(DataGridView grid, string sheet)
         {
+            _propertyValue.Clear();
             bool result = false;
             for (int i = 0; i < grid.Rows.Count; i++)
             {
@@ -2680,8 +2696,10 @@ namespace SIL.PublishingSolution
                 {
                     isPreviewFileExist = true;
                 }
+                //(_screenMode == ScreenMode.Modify || _screenMode == ScreenMode.SaveAs || _screenMode == ScreenMode.New || !isPreviewFileExist)
                 string fileName = string.Empty;
-                if (_screenMode == ScreenMode.Modify || _screenMode == ScreenMode.SaveAs || _screenMode == ScreenMode.New || !isPreviewFileExist)
+
+                if (IsPropertyModified() || (isPreviewFileExist == false))
                 {
                     WriteCss();
                     ShowCSSValue();
@@ -2725,6 +2743,30 @@ namespace SIL.PublishingSolution
                 PreviewFileName1 = Common.PathCombine(stylenamePath, Path.GetFileName(PreviewFileName1));
                 PreviewFileName2 = Common.PathCombine(stylenamePath, Path.GetFileName(PreviewFileName2));
             }
+        }
+
+        private bool IsPropertyModified()
+        {
+            if (_propertyValue.Count == 0 )
+                    return false;
+
+            bool propertyModified = false;
+            int i = 0;
+            Control.ControlCollection ctls = cTool.TabControl1.TabPages[1].Controls;
+            foreach (Control control in ctls)
+            {
+                if (control.GetType().Name == "Label") continue;
+
+                string val = control.Text;
+                
+                if (_propertyValue[i++] != val)
+                {
+                    //string a = _propertyValue[i-1];
+                    propertyModified = true;
+                    break;
+                }
+            }
+            return propertyModified;
         }
 
         public void CreateToolTip()
