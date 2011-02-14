@@ -87,7 +87,6 @@
     <Compile Include="StyToCSS.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AddImpliedSection.xsl" />
     <EmbeddedResource Include="EncloseParasInSections.xsl" />
     <EmbeddedResource Include="EncloseScrInColumns.xsl" />
     <EmbeddedResource Include="MoveSpansToParas.xsl" />
