@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <settings>
+    <property name="InputPath" value="" />
+    <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Dictionary" />
+    <property name="UserSheetPath" value="%(AppData)s/SIL/Pathway/Dictionary" />
+    <property name="PublicationLocation" value="$(Documents)s/$(Base)s/$(CurrentProject)s/Dictionary/$(StyleSheet)s_$(DateTime)s" />
+    <property name="MasterSheetPath" value="Styles/Dictionary" />
+    <property name="IconPath" value="Icons" />
+    <property name="SamplePath" value="Samples/Dictionary" />
+    <property name="BaseStyles" value="Dictionary.css" />
+    <property name="DefaultIcon" value="Graphic/book.png" />
+    <property name="CurrentInput" value="" />
+    <property name="InputType" value="Dictionary" />
+    <property name="LastTask" value="Quick print" />
+    <property name="PreviewType" value="Prince" />
+    <property name="CssEditor" value="C:/Windows/Notepad.exe" />
+    <property name="SelectedIcon" value="Graphic/arrow.png" />
+    <property name="MissingIcon" value="Graphic/missing.png" />
+    <property name="Help" value="PsDoc.chm" />
+    <property name="PrintVia" value="OpenOffice" />
+    <property name="ConfigureDictionary" value="True" />
+    <property name="ReversalIndexes" value="True" />
+    <property name="GrammerSketch" value="False" />
+    <property name="LayoutSelected" value="FieldWorksStyles" />
+    <property name="ExtraProcessing" value="True" />
+    <property name="Media" value="paper" />
+  </settings>
+  <defaultSettings>
+    <property name="PrintVia" value="OpenOffice" />
+    <property name="ConfigureDictionary" value="True" />
+    <property name="ReversalIndexes" value="True" />
+    <property name="GrammerSketch" value="False" />
+    <property name="LayoutSelected" value="FieldWorksStyles" />
+    <property name="ExtraProcessing" value="True" />
+    <property name="PublicationLocation" value="$(Documents)s/$(Base)s/$(CurrentProject)s/Dictionary/$(StyleSheet)s_$(DateTime)s" />
+    <property name="Media" value="paper" />
+  </defaultSettings>
+  <features>
+    <!--feature name="Booklet">
+            <option name="Yes" file=""/>
+            <option name="No" file=""/>
+        </feature-->
+    <feature name="Justified">
+      <option name="Yes" file="Justified_Yes.css" />
+      <option name="No" file="Justified_No.css" />
+    </feature>
+    <feature name="VerticalJustify">
+      <option name="Top" file="VerticalJustify_Top.css" />
+      <option name="Center" file="VerticalJustify_Center.css" />
+      <option name="Bottom" file="VerticalJustify_Bottom.css" />
+    </feature>
+    <feature name="Page Size">
+      <option name="A4" file="Page_size_A4.css" />
+      <option name="A5" file="Page_size_A5.css" />
+      <option name="C5" file="Page_size_C5.css" />
+      <option name="A6" file="Page_size_A6.css" />
+      <option name="Letter" file="Page_size_Letter.css" />
+      <option name="Half letter" file="Page_size_Half_Letter.css" />
+      <option name="6in x 9in" file="Page_size_6inx9in.css" />
+      <option name="5.25in x 8.25in" file="Page_size_GPS1.css" />
+      <option name="5.8in x 8.7in" file="Page_size_GPS2.css" />
+    </feature>
+    <feature name="Columns">
+      <option name="1" file="Columns_1.css" icon="column1.png" />
+      <option name="2" file="Columns_2.css" icon="column2b.png" />
+    </feature>
+    <feature name="Sense">
+      <option name="Bullet" file="Sense_Bullet.css" />
+      <option name="No change" file="Sense_nc.css" />
+    </feature>
+    <feature name="Example">
+      <option name="Callout" file="Example_Callout.css" />
+      <option name="No change" file="Example_nc.css" />
+    </feature>
+    <feature name="Writing System">
+      <option name="Seperator" file="Writing_System_Separator.css" />
+      <option name="No change" file="Writing_System_nc.css" />
+    </feature>
+    <feature name="Language Tag">
+      <option name="No" file="Language_Tag_No.css" />
+      <option name="Yes" file="Language_Tag_Yes.css" />
+    </feature>
+    <feature name="Font">
+      <option name="Charis SIL" file="Font_Charis.css" />
+      <option name="Doulos SIL" file="Font_Doulos.css" />
+      <option name="Sophia SIL" file="Font_Sophia.css" />
+      <option name="Charis SIL Compact" file="font_charis_compact.css" />
+      <option name="No Change" file="Font_nc.css" />
+    </feature>
+    <feature name="Font Size">
+      <option name="12" file="Font_Size_12.css" />
+      <option name="11" file="Font_Size_11.css" />
+      <option name="10" file="Font_Size_10.css" />
+      <option name="9" file="Font_Size_9.css" />
+      <option name="No Change" file="Font_Size_nc.css" />
+    </feature>
+    <feature name="Headword Size">
+      <option name="14" file="Headword_Size_14.css" />
+      <option name="12" file="Headword_Size_12.css" />
+      <option name="11" file="Headword_Size_11.css" />
+      <option name="10" file="Headword_Size_10.css" />
+      <option name="9" file="Headword_Size_9.css" />
+      <option name="8" file="Headword_Size_8.css" />
+      <option name="No Change" file="Headword_Size_nc.css" />
+    </feature>
+    <feature name="Leading">
+      <option name="11" file="Leading_11.css" />
+      <option name="12" file="Leading_12.css" />
+      <option name="13" file="Leading_13.css" />
+      <option name="14" file="Leading_14.css" />
+      <option name="16" file="Leading_16.css" />
+      <option name="24" file="Leading_24.css" />
+      <option name="No Change" file="Leading_nc.css" />
+    </feature>
+    <feature name="Background">
+      <option name="Transparent" file="Background_Transparent.css" />
+      <option name="No Change" file="Background_nc.css" />
+    </feature>
+    <feature name="Embedded Spans">
+      <option name="Writing System Formatted" file="Embedded_Spans.css" />
+      <option name="Writing System Compact Formatted" file="Compact_Embedded_Spans.css" />
+      <option name="No Change" file="Embedded_Spans_nc.css" />
+    </feature>
+    <feature name="Pictures">
+      <option name="Yes" file="Pictures_Yes.css" />
+      <option name="No" file="Pictures_No.css" />
+    </feature>
+    <feature name="Running Head">
+      <option name="Every Page" file="Running_Head_Every_Page.css" />
+      <option name="Mirrored" file="Running_Head_Mirrored.css" />
+    </feature>
+    <feature name="Page Number">
+      <option name="Top Inside Margin" file="PageNumber_TopInside.css" type="Mirrored" />
+      <option name="Top Outside Margin" file="PageNumber_TopOutside.css" type="Mirrored" />
+      <option name="Top Center" file="PageNumber_TopCenter_Mirrored.css" type="Mirrored" />
+      <option name="Bottom Inside Margin" file="PageNumber_BottomInside.css" type="Mirrored" />
+      <option name="Bottom Outside Margin" file="PageNumber_BottomOutside.css" type="Mirrored" />
+      <option name="Bottom Center" file="PageNumber_BottomCenter_Mirrored.css" type="Mirrored" />
+      <option name="Top Left Margin" file="PageNumber_TopLeft.css" type="Every Page" />
+      <option name="Top Right Margin" file="PageNumber_TopRight.css" type="Every Page" />
+      <option name="Top Center" file="PageNumber_TopCenter.css" type="Every Page" />
+      <option name="Bottom Left Margin" file="PageNumber_BottomLeft.css" type="Every Page" />
+      <option name="Bottom Right Margin" file="PageNumber_BottomRight.css" type="Every Page" />
+      <option name="Bottom Center" file="PageNumber_BottomCenter.css" type="Every Page" />
+      <option name="None" file="PageNumber_None.css" type="Both" />
+    </feature>
+    <feature name="Rules">
+      <option name="Yes" file="Rules_Yes.css" />
+      <option name="No" file="Rules_No.css" />
+    </feature>
+    <feature name="FileProduced">
+      <option name="One" file="Rules_Yes.css" />
+      <option name="One Per Letter" file="Rules_Yes.css" />
+    </feature>
+    <feature name="EmbedFonts">
+      <option name="Yes" file="Rules_Yes.css" />
+      <option name="No" file="Rules_Yes.css" />
+    </feature>
+    <feature name="TOCLevel">
+      <option name="1 - Letter Only" file="Rules_Yes.css" />
+      <option name="2 - Letter and Entry" file="Rules_Yes.css" />
+      <option name="3 - Letter, Entry and Sense" file="Rules_Yes.css" />
+    </feature>
+    <feature name="Subject">
+      <option name="Religion and Spirituality" file="Rules_Yes.css" />
+      <option name="Reference" file="Rules_Yes.css" />
+    </feature>
+  </features>
+  <categories>
+    <category name="Publisher" select="Wycliffe">
+      <item name="Wycliffe" />
+      <item name="UBS" />
+    </category>
+    <category name="Media" select="paper">
+      <item name="Paper" />
+      <item name="Mobile" />
+      <item name="Web" />
+      <item name="Others" />
+    </category>
+    <category name="Location" select="Cameroon">
+      <item name="Cameroon" />
+      <item name="Africa" />
+      <item name="Indonesia" />
+      <item name="Philippines" />
+    </category>
+  </categories>
+  <roles select="Output User">
+    <role name="Output User" icon="user.png" />
+    <role name="Coordinator" icon="coordinator.png" />
+    <role name="System Designer" icon="designer.png" />
+  </roles>
+  <styles>
+    <paper>
+      <style name="OneColumn" file="LayoutOneCol.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg" shown="Yes">
+        <description>5.25x8.25in - 1 Col - Left aligned - Charis 11 on 13</description>
+      </style>
+      <style name="TwoColumn" file="LayoutTwoCol.css" approvedBy="GPS" previewfile1="TwoColumn_LayoutTwoCol p1.jpg" previewfile2="TwoColumn_LayoutTwoCol p2.jpg">
+        <description>5.25x8.25in - 2 Col - Left aligned - Charis 9 on 11</description>
+      </style>
+      <style name="LikeBuangPNG" file="Layout_04.css" approvedBy="GPS" previewfile1="Pacific_Layout_04 p1.jpg" previewfile2="Pacific_Layout_04 p2.jpg">
+        <description>Double column 9/13pt C5 with one column, sense paragraphs, example callouts,
+          writing system separator, embedded spans marked according to writing system, mirrored
+          headers and rule lines.</description>
+      </style>
+      <style name="FieldWorksStyles" file="Layout_12.css" approvedBy="GPS" previewfile1="Fieldworks_Layout_12 P1.jpg" previewfile2="Fieldworks_Layout_12 P2.jpg">
+        <description>C5 ruled double column with Flex formatting</description>
+      </style>
+      <style name="FieldWorksArabicBased" file="Layout_13.css" approvedBy="GPS" previewfile1="FieldworksArabicBased_Layout_13 p1.jpg" previewfile2="FieldworksArabicBased_Layout_13 p2.jpg">
+        <description>C5 ruled double column with Flex formatting for Arabic based font</description>
+      </style>
+      <style name="Draft" file="Layout_01.css" approvedBy="GPS" previewfile1="Draft_Layout_01 p1.jpg" previewfile2="Draft_Layout_01 p2.jpg">
+        <description>Single column draft 12/24pt A4</description>
+      </style>
+      <!-- style name="GPS11J11" file="GPS11J11.css" approvedBy="GPS">
+        <description>5.25x8.25in - 1 Col - Justified - Charis 11 on 13</description>
+      </style>
+      <style name="GPS11L11" file="GPS11L11.css" approvedBy="GPS">
+        <description>5.25x8.25in - 1 Col - Left - Charis 11 on 13</description>
+      </style>
+      <style name="GPS12J10" file="GPS12J10.css" approvedBy="GPS">
+        <description>5.25x8.25in - 2 Col - Justified - Charis 10 on 12</description>
+      </style>
+      <style name="GPS12J11" file="GPS12J11.css" approvedBy="GPS">
+        <description>5.25x8.25in - 2 Col - Justified - Charis 11 on 13</description>
+      </style>
+      <style name="GPS12J9" file="GPS12J9.css" approvedBy="GPS">
+        <description>5.25x8.25in - 2 Col - Justified - Charis 9 on 11</description>
+      </style>
+      <style name="GPS12L10" file="GPS12L10.css" approvedBy="GPS">
+        <description>5.25x8.25in - 2 Col - Left - Charis 10 on 12</description>
+      </style>
+      <style name="GPS12L11" file="GPS12L11.css" approvedBy="GPS">
+        <description>5.25x8.25in - 2 Col - Left - Charis 11 on 13</description>
+      </style>
+      <style name="GPS12L9" file="GPS12L9.css" approvedBy="GPS">
+        <description>5.25x8.25in - 2 Col - Left - Charis 9 on 11</description>
+      </style>
+      <style name="GPS21J11" file="GPS21J11.css" approvedBy="GPS">
+        <description>5.8x8.7in - 1 Col - Justified - Charis 11 on 13</description>
+      </style>
+      <style name="GPS21L11" file="GPS21L11.css" approvedBy="GPS">
+        <description>5.8x8.7in - 1 Col - Left - Charis 11 on 13</description>
+      </style>
+      <style name="GPS22J10" file="GPS22J10.css" approvedBy="GPS">
+        <description>5.8x8.7in - 2 Col - Justified - Charis 10 on 12</description>
+      </style>
+      <style name="GPS22J11" file="GPS22J11.css" approvedBy="GPS">
+        <description>5.8x8.7in - 2 Col - Justified - Charis 11 on 13</description>
+      </style>
+      <style name="GPS22J9" file="GPS22J9.css" approvedBy="GPS">
+        <description>5.8x8.7in - 2 Col - Justified - Charis 9 on 11</description>
+      </style>
+      <style name="GPS22L10" file="GPS22L10.css" approvedBy="GPS">
+        <description>5.8x8.7in - 2 Col - Left - Charis 10 on 12</description>
+      </style>
+      <style name="GPS22L11" file="GPS22L11.css" approvedBy="GPS">
+        <description>5.8x8.7in - 2 Col - Left - Charis 11 on 13</description>
+      </style>
+      <style name="GPS22L9" file="GPS22L9.css" approvedBy="GPS">
+        <description>5.8x8.7in - 2 Col - Left - Charis 9 on 11</description>
+      </style>
+    <style name="Draft2" file="Layout_02.css">
+      <description>Single column 12/24pt letter with language tags and without pictures</description>
+    </style>
+    <style name="Draft3" file="Layout_03.css">
+      <description>Single column draft 12/12pt A4 with language tags</description>
+    </style>
+    <style name="Technical" file="Layout_05.css">
+      <description>Single column draft 12/12pt A5 with pictures and language tags</description>
+    </style>
+    <style name="Large" file="Layout_06.css">
+      <description>Double column draft 12pt justified A4</description>
+    </style>
+    <style name="Final" file="Layout_07.css">
+      <description>double column final copy 10/12pt A5</description>
+    </style>
+    <style name="Web" file="Layout_08.css">
+      <description>single column 12pt with pictures</description>
+    </style>
+    <style name="Cell" file="Layout_09.css">
+      <description>Single column 12pt without pictures</description>
+    </style>
+    <style name="FW-A4" file="Layout_10.css">
+      <description>A4 double column with Flex formatting</description>
+    </style>
+    <style name="FW-Letter" file="Layout_11.css">
+      <description>Letter Double Column with Flex formatting</description>
+    </style -->
+      <style name="Test1" file="Test1.css" shown="Yes" type="Custom">
+        <description>Based on GPS stylesheet Draft</description>
+      </style>
+      <style name="Test2" file="Test2.css" shown="Yes" type="Custom">
+        <description>Based on GPS stylesheet LikeBuangPNG</description>
+      </style>
+    </paper>
+    <mobile>
+      <style name="GoBible" file="GoBible.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg">
+        <description>Text only, no section heads or cross references</description>
+      </style>
+    </mobile>
+    <web>
+      <style name="OneColumnWeb" file="LayoutOneCol.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg">
+        <description>5.25x8.25in - 1 Col - Left aligned - Charis 11 on 15</description>
+      </style>
+    </web>
+    <others>
+      <style name="EBook (epub)" file="epub.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg">
+        <description>1 column flowed text, left aligned, default font for each writing system</description>
+        <styleProperty name="EmbedFonts" value="Yes" />
+        <styleProperty name="CoverImage" value="cover.png" />
+        <styleProperty name="TOCLevel" value="2 - Letter and Entry" />
+        <styleProperty name="Creator" value=" " />
+        <styleProperty name="Publisher" value=" " />
+        <styleProperty name="Type" value=" " />
+        <styleProperty name="Source" value=" " />
+        <styleProperty name="Format" value=" " />
+        <styleProperty name="Contributor" value=" " />
+        <styleProperty name="Relation" value=" " />
+        <styleProperty name="Coverage" value=" " />
+        <styleProperty name="Information" value="DRAFT Dictionary." />
+        <styleProperty name="Copyright" value="2011 Wycliffe Bible Translators, Inc." />
+      </style>
+    </others>
+  </styles>
+  <tasks>
+    <task name="Quick print" style="FieldWorksStyles" icon="Graphic/quick.png" />
+    <task name="Village check" style="Draft" icon="Graphic/draft.png" />
+    <task name="Trial print" style="LikeBuangPNG" icon="Graphic/trialPrint.png" />
+    <task name="Final print" style="TwoColumn" icon="Graphic/final.png" />
+    <task name="Web publish" style="OneColumn" icon="Graphic/web.png" />
+    <task name="Cell publish" style="GoBible" icon="Graphic/cell.png" />
+  </tasks>
+  <column-width>
+    <column name="0" width="85" />
+    <column name="1" width="318" />
+    <column name="2" width="91" />
+    <column name="3" width="52" />
+    <column name="4" width="46" />
+  </column-width>
+</stylePick>

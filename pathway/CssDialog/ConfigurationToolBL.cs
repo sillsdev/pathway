@@ -207,10 +207,13 @@ namespace SIL.PublishingSolution
                 {
                     if (_loadType == "Dictionary")
                     {
-                        string task = "@page:left-top-right";
+                        string task = "@page:left-top-left";
                         string key = "content";
                         string result = GetValue(task, key, "false");
-                        if (result.IndexOf("page") > 0 || result.IndexOf("guideword") > 0 || result == "true")
+                        //task = "@page:right-top-right";
+                        //key = "content";
+                        //result = GetValue(task, key, "false");
+                        if (result.IndexOf("page") > 0 || result.IndexOf("guideword") > 0)
                         {
                             return "Mirrored";
                         }
@@ -1037,14 +1040,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        /// <summary>
-        /// Fills PageNumber Values in Display property Tab
-        /// 
-        /// </summary>
-        protected void PopulatePageNumberFeature()
-        {
-            
-        }
 
         /// <summary>
         /// Fill the Tab Control values into Text Box
@@ -1616,8 +1611,8 @@ namespace SIL.PublishingSolution
             if (_cssClass.ContainsKey(task) && _cssClass[task].ContainsKey(key))
             {
                 string result = _cssClass[task][key].Replace("'","");
-                if (result.Length == 0)
-                    result = "true";
+                //if (result.Length == 0)
+                //    result = "true";
                 return result;
             }
             return defaultValue;
@@ -1825,9 +1820,35 @@ namespace SIL.PublishingSolution
             {
                 var values = Param.featureList[attribute];
                 string fileName = values[key];
+                if (attribute.ToLower() == "page number")
+                {
+                    string pageType = cTool.DdlRunningHead.SelectedItem.ToString();
+                    fileName = GetPageNumberImport(pageType, key);
+                }
                 writeCss.WriteLine("@import \"" + fileName + "\";");
             }
         }
+
+        public string GetPageNumberImport(string pageType, string pos)
+        {
+            Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationTool: PopulatePageNumberFeature");
+            string xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";
+            XmlNodeList pageNumList = Param.GetItems(xPath);
+            try
+            {
+                foreach (XmlNode node in pageNumList)
+                {
+                    if (node.Attributes != null)
+                        if (node.Attributes["name"].Value == pos)
+                        {
+                            return node.Attributes["file"].Value;
+                        }
+                }
+            }
+            catch{}
+            return "PageNumber_None.css";
+        }
+
 
         public void PopulateFeatureLists(TreeView TvFeatures)
         {

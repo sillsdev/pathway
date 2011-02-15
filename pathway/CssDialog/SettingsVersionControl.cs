@@ -1,7 +1,9 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 using System.Data;
 using System.Collections;
+using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
@@ -35,10 +37,15 @@ namespace SIL.PublishingSolution
         public void UpdateSettingsFile(string appPath)
         {
             _xmlFileWithPath = appPath;
+            string allUserPath = Path.Combine(Path.Combine(Common.GetAllUserAppPath(),"SIL\\Pathway"), Path.GetFileName(appPath));
+            if (File.Exists(allUserPath))
+            {
+                _xmlFileWithPath = allUserPath;
+            }
             Param.LoadValues(_xmlFileWithPath);
 
-            MigrateProjectSettingsFile(appPath, "sSchemaPath", "sSettingsPath");
-            MigrateProjectSettingsFile(appPath, "projSchemaPath", "projSettingsPath");
+            //MigrateProjectSettingsFile(_xmlFileWithPath, "sSchemaPath", "sSettingsPath", appPath);
+            MigrateProjectSettingsFile(_xmlFileWithPath, "projSchemaPath", "projSettingsPath", appPath);
         }
 
         /// <summary>
@@ -47,49 +54,42 @@ namespace SIL.PublishingSolution
         /// <param name="appPath">all users path</param>
         /// <param name="schemaPath">Schema file path</param>
         /// <param name="settingsPath">Settings file path</param>
-        private void MigrateProjectSettingsFile(string appPath, string schemaPath, string settingsPath)
+        /// <param name="installerPath">Installer path</param>
+        private void MigrateProjectSettingsFile(string appPath, string schemaPath, string settingsPath, string installerPath)
         {
-            string appSchemaVersion = GetAttrByName(GetDirectoryPath("appSchemaPath", appPath), "xs:schema", "version");
+            Param.LoadSettings();
+            string appSchemaVersion = GetAttrByName(GetDirectoryPath("appSchemaPath", installerPath), "xs:schema", "version");
             string projSchemaVersion = GetAttrByName(GetDirectoryPath(schemaPath, appPath), "xs:schema", "version");
             string projSettingsVerNum = GetAttrByName(GetDirectoryPath(settingsPath, appPath), "xs:schema", "version");
             if (File.Exists(GetDirectoryPath(schemaPath, appPath)))
             {
                 if (projSchemaVersion != appSchemaVersion)
                 {
-                    File.Copy(GetDirectoryPath("appSchemaPath", appPath), GetDirectoryPath(schemaPath, appPath), true);
+                    File.Copy(GetDirectoryPath("appSchemaPath", installerPath), GetDirectoryPath(schemaPath, appPath), true);
                     projSchemaVersion = appSchemaVersion;
                 }
 
                 if (projSettingsVerNum != projSchemaVersion)
                 {
-                    string appSettingsPath = GetDirectoryPath("appSettingsPath", appPath);
-                    if (settingsPath.IndexOf("proj") == 0)
-                    {
-                        appSettingsPath = GetDirectoryPath("appProjSettingsPath", appPath);
-                    }
+                    //string appSettingsPath = GetDirectoryPath("appSettingsPath", appPath);
+                    //if (settingsPath.IndexOf("proj") == 0)
+                    //{
+                    //    appSettingsPath = GetDirectoryPath("appProjSettingsPath", appPath);
+                    //}
 
                     if(projSettingsVerNum == "0")
                     {
                         Version1(GetDirectoryPath(settingsPath, appPath), projSchemaVersion);
                     }
-                    Version2(GetDirectoryPath(settingsPath, appPath), appSettingsPath, projSchemaVersion);
-
-                    //int oldVer = int.Parse(projSettingsVerNum);
-                    //int newVer = int.Parse(projSchemaVersion);
-                    //for (int i = oldVer + 1; i <= newVer; i++)
-                    //{
-                    //    if (i == 1)
-                    //    {
-                    //        Version1(GetDirectoryPath(settingsPath, appPath), projSchemaVersion);
-                    //    }
-                    //    else if (i == 2)
-                    //    {
-                    //        Version2(GetDirectoryPath(settingsPath, appPath), appSettingsPath, projSchemaVersion);
-                    //    }
-                    //}
+                    //Version2(GetDirectoryPath(settingsPath, appPath), appSettingsPath, projSchemaVersion);
+                    string usrPath = GetDirectoryPath(settingsPath, appPath);
+                    string insPath = Common.PathCombine(Path.GetDirectoryName(installerPath), Path.GetFileName(usrPath));
+                    Common.MigrateCustomSheet(usrPath, insPath);
                 }
             }
         }
+
+        
 
         /// <summary>
         /// Method to return the path combinations
@@ -113,16 +113,16 @@ namespace SIL.PublishingSolution
             switch (DirectoryName)
             {
                 case "sSchemaPath":
-                    path = Path.Combine(Path.GetDirectoryName(Param.SettingOutputPath), xmlFile[3].ToString());
+                    path = Path.Combine(Common.PathCombine(Common.GetAllUserAppPath(), "SIL\\Pathway"), xmlFile[3].ToString());
                     break;
                 case "sSettingsPath":
-                    path = Path.Combine(Path.GetDirectoryName(Param.SettingOutputPath), xmlFile[0].ToString());
+                    path = Path.Combine(Common.PathCombine(Common.GetAllUserAppPath(), "SIL\\Pathway"), xmlFile[0].ToString());
                     break;
                 case "projSchemaPath":
-                    path = Path.Combine(Path.GetDirectoryName(Param.SettingOutputPath), Param.Value["InputType"]) + "\\" + xmlFile[3];
+                    path = Path.Combine(Path.GetDirectoryName(Param.SettingOutputPath), xmlFile[3].ToString());
                     break;
                 case "projSettingsPath":
-                    path = Path.Combine(Path.GetDirectoryName(Param.SettingOutputPath), Param.Value["InputType"]) + "\\" + projFile;
+                    path = Path.Combine(Path.GetDirectoryName(Param.SettingOutputPath), projFile);
                     break;
                 case "appSchemaPath":
                     path = Path.Combine(Path.GetDirectoryName(appPath), xmlFile[3].ToString());
@@ -191,18 +191,22 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                var oData = new DataSet();
                 var oReader = new XmlTextReader(oldFile);
-                oData.ReadXml(oReader, XmlReadMode.Auto);
-                oReader.Close();
-
-                var rData = new DataSet();
                 var rReader = new XmlTextReader(recentFile);
+
+                var oData = new DataSet();
+                oData.EnforceConstraints = false;
+                oData.ReadXml(oReader, XmlReadMode.Auto);
+                
+                var rData = new DataSet();
+                rData.EnforceConstraints = false;
                 rData.ReadXml(rReader, XmlReadMode.Auto);
-                rReader.Close();
 
                 rData.Merge(oData);
                 rData.WriteXml(oldFile);
+
+                rReader.Close();
+                oReader.Close();
 
                 XmlDocument xdoc = new XmlDocument();
                 xdoc.Load(oldFile);

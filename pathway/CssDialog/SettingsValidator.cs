@@ -102,29 +102,6 @@ namespace SIL.PublishingSolution
                 if (File.Exists(fileNamewithPath)) ProcessScriptureSettingFile(fileNamewithPath, inputtype);
             }
             return isProcessSucess;
-
-            //string allUsersPathWithoutFileName = Path.GetDirectoryName(Param.SettingOutputPath);
-            //if (allUsersPathWithoutFileName.IndexOf(Param.Value["InputType"]) == -1)
-            //{
-            //    allUsersPathWithoutFileName = Path.Combine(allUsersPathWithoutFileName, Param.Value["InputType"]);
-            //}
-            //string sPath = Path.GetDirectoryName(Param.SettingOutputPath).Replace(Param.Value["InputType"],"");
-
-            //allUserSettingsPath = Path.Combine(sPath, FileName.StyleSettings + ".xml");
-
-            //if (File.Exists(allUserSettingsPath)) ProcessSettingsFile(allUserSettingsPath);
-
-            //if (GetInputType(allUserSettingsPath) == Common.ProjectType.Dictionary.ToString())
-            //{
-            //    string fileNamewithPath = Path.Combine(allUsersPathWithoutFileName, FileName.DictionaryStyleSettings + ".xml");
-            //    if (File.Exists(fileNamewithPath)) ProcessDictionarySettingFile(fileNamewithPath);
-            //}
-            //else
-            //{
-            //    string fileNamewithPath = Path.Combine(allUsersPathWithoutFileName, FileName.ScriptureStyleSettings + ".xml");
-            //    if (File.Exists(fileNamewithPath)) ProcessScriptureSettingFile(fileNamewithPath);
-            //}
-            //return isProcessSucess;
         }
 
         protected static string GetInputType(string SettingsPath)
@@ -288,7 +265,8 @@ namespace SIL.PublishingSolution
                     allUsersFolder = Common.PathCombine(allUsersFolder, supportPath);
                 }
                 string programPath = Common.PathCombine(programFolder, fileName + ".xml");
-                File.Copy(programPath, Path.Combine(allUsersFolder, fileName + ".xml"), true);
+                //File.Copy(programPath, Path.Combine(allUsersFolder, fileName + ".xml"), true);
+                Common.MigrateCustomSheet(Path.Combine(allUsersFolder, fileName + ".xml"), programPath);
                 isProcessSucess = true;
             }
             else

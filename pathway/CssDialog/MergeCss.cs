@@ -18,7 +18,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -109,6 +111,7 @@ namespace SIL.PublishingSolution
                     if (!File.Exists(validName)) return;
                 }
             }
+            ImportLayoutStyles(validName);
             sr = new StreamReader(validName);
             while (!sr.EndOfStream)
             {
@@ -124,6 +127,66 @@ namespace SIL.PublishingSolution
             }
             sr.Close();
         }
-        #endregion Private Methods
+
+        private void ImportLayoutStyles(string name)
+        {
+            var sbuilder = new StringBuilder();
+            string validName = IsLayoutExist(name);
+            if(!File.Exists(validName))
+            {
+                return;
+            }
+
+            var reader = new StreamReader(validName);
+            while (!reader.EndOfStream)
+            {
+                string line1 = reader.ReadLine();
+                if (line1 != null)
+                    if (line1.IndexOf("Running_Head_") >= 0 || line1.IndexOf("PageNumber_") >= 0)
+                    {
+                        continue;
+                    }
+                    sbuilder.AppendLine(line1);
+            }
+            reader.Close();
+            string searchText = "@import \"" + Path.GetFileName(validName) + "\";"; //@import "LayoutTwoCol.css";
+            string replaceText = sbuilder.ToString();
+            Common.StreamReplaceInFile(name, searchText, replaceText);
+        }
+
+        private string IsLayoutExist(string name)
+        {
+            string validName = name;
+            var sr = new StreamReader(name);
+            while (!sr.EndOfStream)
+            {
+                string line = sr.ReadToEnd();
+                Match m = Regex.Match(line, "@import \"(Layout*.*)\";", RegexOptions.IgnoreCase);
+                Match p = Regex.Match(line, "@import \"(Running_Head_Every_Page.*)\";", RegexOptions.IgnoreCase);
+                if (m.Success)
+                {
+                    string fileName = m.Groups[1].Value;
+                    if (fileName != "Layout_01.css" && p.Success)
+                    {
+                        validName = Common.PathCombine(_cssPath, fileName);
+                        if (!File.Exists(validName))
+                        {
+                            try
+                            {
+                                validName = Param.StylePath(fileName);
+                            }
+                            catch (KeyNotFoundException ex)
+                            {
+                               
+                            }
+                        }
+                    }
+                }
+            }
+            sr.Close();
+            return validName;
+        }
     }
+        #endregion Private Methods
+    
 }

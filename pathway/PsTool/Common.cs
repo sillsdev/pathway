@@ -1726,6 +1726,39 @@ return FromProg(file);
             return mergedCSSfile;
         }
 
+        public static void RemovePreviousMirroredPage(ArrayList arrayCssFile)
+        {
+            bool removeMirrorPage = false;
+            bool removePageNumber = false;
+            int count = arrayCssFile.Count;
+            for (int i = count - 1; i >= 0; i--)
+            {
+                string cssFile = arrayCssFile[i].ToString();
+                //For Mirrored Page
+                if (cssFile.IndexOf("Running_Head_Every_Page.css") >= 0)
+                {
+                    removeMirrorPage = true;
+                }
+                if (removeMirrorPage)
+                {
+                    if (cssFile.IndexOf("Running_Head_Mirrored.css") >= 0)
+                    {
+                        arrayCssFile.RemoveAt(i);
+                    }
+                }
+                //For Page number
+                if (cssFile.IndexOf("PageNumber_") >= 0)
+                {
+                    if (removePageNumber)
+                    {
+                        arrayCssFile.RemoveAt(i);
+                    }
+                    removePageNumber = true;
+                }
+
+            }
+        }
+
         /// <summary>
         /// Make sure the path contains the proper / for the operating system.
         /// </summary>
@@ -1972,5 +2005,101 @@ return FromProg(file);
             }
             return fontLangMapTemp;
         }
+
+        public static void MigrateCustomSheet(string userSheet, string updatedSheet)
+        {
+            List<string> mediaType = new List<string>();
+            mediaType.Add("paper");
+            mediaType.Add("mobile");
+            mediaType.Add("web");
+            mediaType.Add("others");
+            XmlDocument userSettings = new XmlDocument();
+            XmlDocument installerSettings = new XmlDocument();
+            string backUpFileName = "backUp_" + DateTime.Now.ToString("MM-dd-yyyy") + ".xml";
+            string backUpFilePath = Path.Combine(Path.GetDirectoryName(userSheet), backUpFileName);
+            File.Copy(userSheet, backUpFilePath, true);
+            File.Copy(updatedSheet, userSheet, true);
+
+            userSettings.Load(backUpFilePath);
+            installerSettings.Load(userSheet);
+            foreach (string media in mediaType)
+            {
+                string xPathUser = @"//stylePick/styles/" + media + "/style[@type='Custom']";
+                XmlNodeList nodeList = userSettings.SelectNodes(xPathUser);
+
+                string xPathInstaller = @"//stylePick/styles/" + media;
+                XmlNode nodeInst = installerSettings.SelectSingleNode(xPathInstaller);
+                if (nodeList != null)
+                    foreach (XmlNode node in nodeList)
+                    {
+                        XmlDocumentFragment docFrag = installerSettings.CreateDocumentFragment();
+                        docFrag.InnerXml = node.OuterXml;
+                        nodeInst.AppendChild(docFrag);
+                    }
+            }
+            installerSettings.Save(userSheet);
+        }
+
+        ///// <summary>
+        ///// If the user selected page style is "Every Page", this method will remove the "@Page:left" and 
+        ///// "@page:right" tag from the  CSS file.
+        ///// </summary>
+        ///// <param name="filePath">CSS file to remove the @page:left and @page:right</param>
+        //public static void RemovePageLeftPageRightClass(string filePath)
+        //{
+        //    StringBuilder sb = new StringBuilder();
+        //    string line;
+
+        //    if (File.Exists(filePath))
+        //    {
+        //        string tempFile = Path.Combine(Path.GetDirectoryName(filePath), "_temp.css");
+        //        File.Copy(filePath, tempFile, true);
+        //        StreamReader file = null;
+        //        try
+        //        {
+
+        //            int braces = 0;
+        //            bool countBraces = false;
+
+        //            file = new StreamReader(tempFile);
+        //            while ((line = file.ReadLine()) != null)
+        //            {
+        //                if ((line.IndexOf("@page :left") > -1) ||
+        //                    (line.IndexOf("@page :right") > -1))
+        //                {
+        //                    countBraces = true;
+        //                }
+
+
+        //                if (countBraces)
+        //                {
+        //                    if (line.IndexOf("{") > -1)
+        //                    {
+        //                        braces++;
+        //                    }
+        //                    if (line.IndexOf("}") > -1)
+        //                    {
+        //                        braces--;
+        //                    }
+
+        //                    if (braces == 0)
+        //                    {
+        //                        countBraces = false;
+        //                    }
+        //                    continue;
+        //                }
+
+        //                sb.AppendLine(line);
+        //            }
+        //            File.WriteAllText(filePath, sb.ToString());
+        //            File.Delete(tempFile);
+        //        }
+        //        finally
+        //        {
+        //            if (file != null)
+        //                file.Close();
+        //        }
+        //    }
+        //}
     }
 }

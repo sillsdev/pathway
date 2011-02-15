@@ -39,7 +39,9 @@ namespace Test.PsTool
         private string _projectFilePath;
         public string _node;
         string _allUserPath;
-
+        string _inputBasePath = string.Empty;
+        string _outputBasePath = string.Empty;
+        string _expectBasePath = string.Empty;
 
         /// <summary>
         /// Turn off debug.assert messages for unit tests
@@ -53,7 +55,13 @@ namespace Test.PsTool
             LoadInputDocument("Dictionary1.de");
             _allUserPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
             Common.SupportFolder = "";
-            string _outputBasePath = Common.PathCombine(GetTestPath(), "Output");
+            _outputBasePath = Common.PathCombine(GetTestPath(), "Output");
+            _inputBasePath = Common.PathCombine(GetTestPath(), "InputFiles");
+            _expectBasePath = Common.PathCombine(GetTestPath(), "Expected");
+            //string currentFolder = PathPart.Bin(Environment.CurrentDirectory, "/CssDialog/TestFiles");
+            //_inputBasePath = Common.PathCombine(currentFolder, "Input");
+            //_expectBasePath = Common.PathCombine(currentFolder, "Expected");
+            //_expectBasePath = Common.PathCombine(currentFolder, "Output");
             if (Directory.Exists(_outputBasePath))
                 Directory.Delete(_outputBasePath, true);
             Directory.CreateDirectory(_outputBasePath);
@@ -763,6 +771,7 @@ namespace Test.PsTool
 
         }
 
+        ///<summary>
         ///A test for UnitConverter 2 Parameter
         ///</summary>
         [Test]
@@ -775,6 +784,7 @@ namespace Test.PsTool
             Assert.AreEqual(expected, actual);
         }
 
+        ///<summary>
         ///A test for UnitConverter 2 Parameter
         ///</summary>
         [Test]
@@ -786,6 +796,8 @@ namespace Test.PsTool
             string actual = Common.UnitConverter(inputValue, outputUnit);
             Assert.AreEqual(expected, actual);
         }
+
+        ///<summary>
         ///A test for UnitConverter 2 Parameter
         ///</summary>
         [Test]
@@ -797,6 +809,8 @@ namespace Test.PsTool
             string actual = Common.UnitConverter(inputValue, outputUnit);
             Assert.AreEqual(expected, actual);
         }
+
+        ///<summary>
         ///A test for UnitConverter 2 Parameter
         ///</summary>
         [Test]
@@ -808,6 +822,8 @@ namespace Test.PsTool
             string actual = Common.UnitConverter(inputValue, outputUnit);
             Assert.AreEqual(expected, actual);
         }
+
+        ///<summary>
         ///A test for UnitConverter 2 Parameter
         ///</summary>
         [Test]
@@ -819,6 +835,8 @@ namespace Test.PsTool
             string actual = Common.UnitConverter(inputValue, outputUnit);
             Assert.AreEqual(expected, actual);
         }
+
+        ///<summary>
         ///A test for UnitConverter 2 Parameter
         ///</summary>
         [Test]
@@ -831,6 +849,7 @@ namespace Test.PsTool
             Assert.AreEqual(expected, actual);
         }
 
+        ///<summary>
         ///A test for UnitConverter 2 Parameter
         ///</summary>
         [Test]
@@ -842,6 +861,8 @@ namespace Test.PsTool
             string actual = Common.UnitConverter(inputValue, outputUnit);
             Assert.AreEqual(expected, actual);
         }
+
+        ///<summary>
         ///A test for UnitConverter 2 Parameter
         ///</summary>
         [Test]
@@ -861,7 +882,7 @@ namespace Test.PsTool
             Assert.AreEqual(expected, actual);
         }
 
-
+        ///<summary>
         ///A test for UnitConverter 2 Parameter
         ///</summary>
         [Test]
@@ -878,6 +899,37 @@ namespace Test.PsTool
              outputUnit = "pt";
              actual = Common.UnitConverter(inputValue, outputUnit);
             Assert.AreEqual(expected, actual);
+        }
+
+        ///<summary>
+        ///A test for migration of custom styles to the latest stylesettings.
+        ///</summary>
+        [Test]
+        public void MigrateCustomStyleSheet()
+        {
+            string fileName = "DictionaryStyleSettings.xml";
+            string actual = Common.PathCombine(_outputBasePath, fileName);
+            string expected = Common.PathCombine(_expectBasePath, fileName);
+            string customSettingsFile = Common.PathCombine(_inputBasePath, fileName);
+            string installerSettingsFile = Common.PathCombine(_inputBasePath, "Actual" + fileName);
+            string oCustomSettingsFile = Common.PathCombine(_outputBasePath, fileName);
+            string oInstallerSettingsFile = Common.PathCombine(_outputBasePath, "Actual" + fileName);
+            File.Copy(customSettingsFile, oCustomSettingsFile);
+            File.Copy(installerSettingsFile, oInstallerSettingsFile);
+            Common.MigrateCustomSheet(oCustomSettingsFile, oInstallerSettingsFile);
+            XmlAssert.AreEqual(expected, actual, "Dictionary migration test failed");
+
+            fileName = "ScriptureStyleSettings.xml";
+            actual = Common.PathCombine(_outputBasePath, fileName);
+            expected = Common.PathCombine(_expectBasePath, fileName);
+            customSettingsFile = Common.PathCombine(_inputBasePath, fileName);
+            installerSettingsFile = Common.PathCombine(_inputBasePath, "Actual" + fileName);
+            oCustomSettingsFile = Common.PathCombine(_outputBasePath, fileName);
+            oInstallerSettingsFile = Common.PathCombine(_outputBasePath, "Actual" + fileName);
+            File.Copy(customSettingsFile, oCustomSettingsFile);
+            File.Copy(installerSettingsFile, oInstallerSettingsFile);
+            Common.MigrateCustomSheet(oCustomSettingsFile, oInstallerSettingsFile);
+            XmlAssert.AreEqual(expected, actual, "Scripture migration test failed");
         }
 
         #region PathCombine
