@@ -109,7 +109,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenOfficeConvert_OLD", "Op
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouVersionConvert", "YouVersionConvert\YouVersionConvert.csproj", "{92364016-A6BF-4C15-8106-8C7F57F5C172}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{01D94176-2638-4B18-B2A3-10488FCDA9C5}"
+	ProjectSection(SolutionItems) = preProject
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+		PublishingSolution.vsmdi = PublishingSolution.vsmdi
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = PublishingSolution.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		ConTeXt|Any CPU = ConTeXt|Any CPU
 		ConTeXt|x86 = ConTeXt|x86

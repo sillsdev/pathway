@@ -677,7 +677,7 @@ namespace SIL.Tool
                 var setting = new XmlReaderSettings {ProhibitDtd = false, XmlResolver = null};
                 XmlReader reader = XmlReader.Create(inputFile, setting);
                 var writer = new XmlTextWriter(result, Encoding.UTF8) { Namespaces = true };
-                if (ext.ToLower().Contains("html"))
+                if (ext.ToLower().Contains("xhtml"))
                 {
                     writer.WriteStartDocument();
                     //writer.WriteDocType("html", "-//W3C//DTD XHTML 1.0 Strict//EN", "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd", null);
