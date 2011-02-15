@@ -210,7 +210,7 @@
     <Compile Include="epubConvert\ExportepubTest.cs" />
     <Compile Include="GoBibleConvert\CheckCV_XHTMLTest.cs" />
     <Compile Include="GoBibleConvert\GoBibleTest.cs" />
-    <Compile Include="YouVersion\ExportYouVersionTest.cs" />
+    <Compile Include="YouVersionConvert\ExportYouVersionTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConfigurationTool\ConfigurationTool.csproj">
