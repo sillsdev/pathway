@@ -1683,6 +1683,7 @@ return FromProg(file);
             arrayCSSFile = GetCSSFileNames(fullPath, BaseCssFileWithPath);
             //if(arrayCSSFile.Count == 0) return BaseCssFileWithPath; //
             arrayCSSFile.Add(BaseCssFileWithPath);
+            RemovePreviousMirroredPage(arrayCSSFile);
             FileStream fs2;
             try
             {

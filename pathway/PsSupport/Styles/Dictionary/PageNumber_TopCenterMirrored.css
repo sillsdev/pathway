@@ -1,4 +1,4 @@
-/* Top Center.css */
+/* Top Center Mirrored.css */
 @page :left {
     @top-center{
            content: counter( page);

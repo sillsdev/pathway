@@ -1,4 +1,4 @@
-/* Bottom Center.css */
+/* Bottom Center Mirrored.css */
 @page :left {
     @bottom-center{
            content: counter( page);

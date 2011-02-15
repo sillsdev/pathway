@@ -133,10 +133,10 @@
     <feature name="Page Number">
       <option name="Top Inside Margin" file="PageNumber_TopInside.css" type="Mirrored" />
       <option name="Top Outside Margin" file="PageNumber_TopOutside.css" type="Mirrored" />
-      <option name="Top Center" file="PageNumber_TopCenter_Mirrored.css" type="Mirrored" />
+      <option name="Top Center" file="PageNumber_TopCenterMirrored.css" type="Mirrored" />
       <option name="Bottom Inside Margin" file="PageNumber_BottomInside.css" type="Mirrored" />
       <option name="Bottom Outside Margin" file="PageNumber_BottomOutside.css" type="Mirrored" />
-      <option name="Bottom Center" file="PageNumber_BottomCenter_Mirrored.css" type="Mirrored" />
+      <option name="Bottom Center" file="PageNumber_BottomCenterMirrored.css" type="Mirrored" />
       <option name="Top Left Margin" file="PageNumber_TopLeft.css" type="Every Page" />
       <option name="Top Right Margin" file="PageNumber_TopRight.css" type="Every Page" />
       <option name="Top Center" file="PageNumber_TopCenter.css" type="Every Page" />
@@ -156,11 +156,6 @@
     <feature name="EmbedFonts">
       <option name="Yes" file="Rules_Yes.css" />
       <option name="No" file="Rules_Yes.css" />
-    </feature>
-    <feature name="TOCLevel">
-      <option name="1 - Letter Only" file="Rules_Yes.css" />
-      <option name="2 - Letter and Entry" file="Rules_Yes.css" />
-      <option name="3 - Letter, Entry and Sense" file="Rules_Yes.css" />
     </feature>
     <feature name="Subject">
       <option name="Religion and Spirituality" file="Rules_Yes.css" />
@@ -302,18 +297,13 @@
       <style name="EBook (epub)" file="epub.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg">
         <description>1 column flowed text, left aligned, default font for each writing system</description>
         <styleProperty name="EmbedFonts" value="Yes" />
-        <styleProperty name="CoverImage" value="cover.png"/>
-        <styleProperty name="TOCLevel" value="2 - Letter and Entry"/>
-        <styleProperty name="Creator" value=" " />
+        <styleProperty name="Description" value="DRAFT COPY" />
         <styleProperty name="Publisher" value=" " />
-        <styleProperty name="Type" value=" " />
         <styleProperty name="Source" value=" " />
         <styleProperty name="Format" value=" " />
-        <styleProperty name="Contributor" value=" " />
         <styleProperty name="Relation" value=" " />
         <styleProperty name="Coverage" value=" " />
-        <styleProperty name="Information" value="DRAFT Dictionary." />
-        <styleProperty name="Copyright" value="© 2011 Wycliffe Bible Translators, Inc." />
+        <styleProperty name="Copyright" value="© 2010 SIL International, Inc." />
       </style>
     </others>
   </styles>
