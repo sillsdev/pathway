@@ -3381,7 +3381,6 @@ namespace SIL.PublishingSolution
 
         public void ConfigurationTool_LoadBL()
         {
-            
             _screenMode = ScreenMode.Load;
 
             Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool_Load");
@@ -3420,6 +3419,12 @@ namespace SIL.PublishingSolution
                 cTool.BtnDictionary.Visible = false;
                 cTool.BtnMobile.Enabled = true;
             }
+            // Window title (includes the version and edition (BTE / SE))
+            var sb = new StringBuilder();
+            sb.Append("Pathway Configuration Tool");
+            sb.Append(cTool.BtnScripture.Visible ? " - BTE " : " - SE ");
+            sb.Append(Application.ProductVersion);
+            cTool.Text = sb.ToString();
             SetFocusToName();
 
             //For the task TD-1481
