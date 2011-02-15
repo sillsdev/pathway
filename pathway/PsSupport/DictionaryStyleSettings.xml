@@ -157,6 +157,11 @@
       <option name="Yes" file="Rules_Yes.css" />
       <option name="No" file="Rules_Yes.css" />
     </feature>
+    <feature name="TOCLevel">
+      <option name="1 - Letter Only" file="Rules_Yes.css" />
+      <option name="2 - Letter and Entry" file="Rules_Yes.css" />
+      <option name="3 - Letter, Entry and Sense" file="Rules_Yes.css" />
+    </feature>
     <feature name="Subject">
       <option name="Religion and Spirituality" file="Rules_Yes.css" />
       <option name="Reference" file="Rules_Yes.css" />
@@ -297,13 +302,18 @@
       <style name="EBook (epub)" file="epub.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg">
         <description>1 column flowed text, left aligned, default font for each writing system</description>
         <styleProperty name="EmbedFonts" value="Yes" />
-        <styleProperty name="Description" value="DRAFT COPY" />
+        <styleProperty name="CoverImage" value="cover.png"/>
+        <styleProperty name="TOCLevel" value="2 - Letter and Entry"/>
+        <styleProperty name="Creator" value=" " />
         <styleProperty name="Publisher" value=" " />
+        <styleProperty name="Type" value=" " />
         <styleProperty name="Source" value=" " />
         <styleProperty name="Format" value=" " />
+        <styleProperty name="Contributor" value=" " />
         <styleProperty name="Relation" value=" " />
         <styleProperty name="Coverage" value=" " />
-        <styleProperty name="Copyright" value="© 2010 SIL International, Inc." />
+        <styleProperty name="Information" value="DRAFT Dictionary." />
+        <styleProperty name="Copyright" value="© 2011 Wycliffe Bible Translators, Inc." />
       </style>
     </others>
   </styles>
