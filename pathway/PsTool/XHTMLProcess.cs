@@ -634,6 +634,7 @@ namespace SIL.PublishingSolution
                 if (IdAllClass.ContainsKey(footerMarkerClassName))
                 {
                     string a = string.Empty;
+                    if (!IdAllClass[footerMarkerClassName].ContainsKey("content")) return;
                     string content = IdAllClass[footerMarkerClassName]["content"];
                     if (content.IndexOf("string(chapter)") >= 0)
                         a = content.ToLower().Replace("string(chapter)", _chapterNo);

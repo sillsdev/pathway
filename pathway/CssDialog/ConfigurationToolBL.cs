@@ -596,7 +596,8 @@ namespace SIL.PublishingSolution
 
         public void WriteCss()
         {
-            if ((_screenMode != ScreenMode.Modify) || (FileType.ToLower() == "standard")) return;
+            //if ((_screenMode != ScreenMode.Modify) || (FileType.ToLower() == "standard")) return;
+            if (IsPropertyModified() == false || (FileType.ToLower() == "standard")) return;
             StreamWriter writeCss = null;
             //string file1;
             //string attribValue = Common.GetTextValue(sender, out file1);
@@ -3512,8 +3513,11 @@ namespace SIL.PublishingSolution
 
         public void tabControl1_SelectedIndexChangedBL()
         {
-
-            if (cTool.TabControl1.SelectedIndex == 1) // css properties
+            if (cTool.TabControl1.SelectedIndex == 0) // css properties
+            {
+                WriteCss();
+            }
+            else if (cTool.TabControl1.SelectedIndex == 1) // css properties
             {
                 ShowCSSValue();
                 if (cTool.BtnPaper.Enabled && cTool.TabControl1.TabPages[1].Enabled)
