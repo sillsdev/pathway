@@ -87,8 +87,9 @@ namespace Test.UIConfigurationToolBLTest
             File.Copy(fromFileName, Common.PathCombine(_outputBasePath, fileName), true);
             string partialPath = Common.PathCombine(_pathwayPath, type);
             string toFileName = Common.PathCombine(partialPath, fileName);
-            if (Directory.Exists(partialPath))
-                Directory.Delete(partialPath, true);
+            //if (Directory.Exists(partialPath))
+            //    Directory.Delete(partialPath, true);
+            Common.DeleteDirectory(partialPath);
             Directory.CreateDirectory(partialPath);
             File.Copy(fromFileName, toFileName, true);
 

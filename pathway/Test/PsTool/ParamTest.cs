@@ -137,7 +137,8 @@ namespace Test.CssDialog
             XmlAssert.AreEqual(sourceSchema, destinationSchema, schema);
 			Common.ProgBase = null;
 			DirectoryInfo directoryInfo = new DirectoryInfo(_publishingSolutionsData);
-			directoryInfo.Delete(true);
+			//directoryInfo.Delete(true);
+            Common.DeleteDirectory(_publishingSolutionsData);
 			directoryInfo.Create();
             Param.UnLoadValues();
         }

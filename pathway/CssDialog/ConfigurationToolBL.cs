@@ -686,6 +686,17 @@ namespace SIL.PublishingSolution
                 WriteCssClass(writeCss, "page", value);
                 writeCss.Flush();
                 writeCss.Close();
+
+
+                PreviewFileName1 = "";
+                PreviewFileName2 = "";
+                cTool.StylesGrid[PreviewFile1, SelectedRowIndex].Value = PreviewFileName1;
+                cTool.StylesGrid[PreviewFile2, SelectedRowIndex].Value = PreviewFileName2;
+                XmlNode baseNode = Param.GetItem("//styles/" + MediaType + "/style[@name='" + StyleName + "']");
+                Param.SetAttrValue(baseNode, "previewfile1", PreviewFileName1);
+                Param.SetAttrValue(baseNode, "previewfile2", PreviewFileName1);
+                Param.Write();
+
             }
             catch (Exception ex)
             {
@@ -2734,17 +2745,17 @@ namespace SIL.PublishingSolution
 
                     if (!Directory.Exists(stylenamePath)) return;
 
-                    String imageFile = Common.PathCombine(stylenamePath, PreviewFileName1);
-                    String imageFile1 = Common.PathCombine(stylenamePath, PreviewFileName2);
-                    if (!(File.Exists(imageFile) && File.Exists(imageFile1)))
-                    {
-                        imageFile = Common.PathCombine(Common.GetAllUserPath(),
+                    //String imageFile = Common.PathCombine(stylenamePath, PreviewFileName1);
+                    //String imageFile1 = Common.PathCombine(stylenamePath, PreviewFileName2);
+                    //if (!(File.Exists(imageFile) && File.Exists(imageFile1)) || IsPropertyModified())
+                    //{
+                        String imageFile = Common.PathCombine(Common.GetAllUserPath(),
                                                        Path.GetFileNameWithoutExtension(fileName) + ".pdf1.jpg");
                         PreviewFileName1 = imageFile;
-                        imageFile1 = Common.PathCombine(Common.GetAllUserPath(),
+                        String imageFile1 = Common.PathCombine(Common.GetAllUserPath(),
                                                         Path.GetFileNameWithoutExtension(fileName) + ".pdf2.jpg");
                         PreviewFileName2 = imageFile1;
-                    }
+                    //}
 
                     cTool.StylesGrid[PreviewFile1, SelectedRowIndex].Value = PreviewFileName1;
                     cTool.StylesGrid[PreviewFile2, SelectedRowIndex].Value = PreviewFileName2;

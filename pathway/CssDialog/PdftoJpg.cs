@@ -91,6 +91,7 @@ namespace SIL.PublishingSolution
                 //string previewFile = outputFileName;
                 string outputPath = Path.Combine(Path.GetDirectoryName(filename), Path.GetFileNameWithoutExtension(outputFileName)) + ".pdf";
                 File.Copy(filename, outputPath,true);
+                Common.DeleteFile(filename);
                 PDFConvert converter = new PDFConvert();
                 string fileExtenstion = ".jpg";
                 bool Converted = false;
