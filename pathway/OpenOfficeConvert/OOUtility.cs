@@ -1112,36 +1112,47 @@ namespace SIL.PublishingSolution
             if(graphicNames.Count == 0) return;
             //MessageBox.Show("Entered");
             var doc = new XmlDocument();
-            string file = Path.Combine(contentFilePath, "content.xml");
+            string file;
+            if (!Common.Testing)
+            {
+                file = Path.Combine(contentFilePath, "content.xml");
+            }
+            else
+            {
+                file = contentFilePath + "content.xml";
+            }
             doc.Load(file);
 
             var nsmgr = new XmlNamespaceManager(doc.NameTable);
             nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
             nsmgr.AddNamespace("draw", "urn:oasis:names:tc:opendocument:xmlns:drawing:1.0");
 
-            string makeClassName = graphicNames[0].ToString(); 
-            // if new stylename exists
-            XmlElement root = doc.DocumentElement;
-            //<draw:frame draw:style-name="Graphics0" 
-            string style = "//draw:frame[@draw:style-name='" + makeClassName + "']";
-            if (root != null)
+            foreach (string graphicName in graphicNames)
             {
-                XmlNode node = root.SelectSingleNode(style, nsmgr); // work
+                string makeClassName = graphicName; // graphicNames[0].ToString();
+                if (String.IsNullOrEmpty(makeClassName)) return;
 
-                if (node == null )
+                XmlElement root = doc.DocumentElement;
+                //<draw:frame draw:style-name="Graphics0" 
+                string style = "//draw:frame[@draw:style-name='" + makeClassName + "']";
+                if (root != null)
                 {
-                    return;
-                }
+                    XmlNode node = root.SelectSingleNode(style, nsmgr); // work
+                    if (node == null)
+                    {
+                        return;
+                    }
 
-                XmlDocumentFragment styleNode = doc.CreateDocumentFragment();
-                styleNode.InnerXml = node.FirstChild.FirstChild.OuterXml;
-                //styleNode.RemoveChild(styleNode.FirstChild);
-                //node.ParentNode.InsertAfter(styleNode, node);
-                node.ParentNode.ReplaceChild(styleNode, node);
+                    XmlDocumentFragment styleNode = doc.CreateDocumentFragment();
+                    styleNode.InnerXml = node.FirstChild.FirstChild.OuterXml;
+                    //styleNode.RemoveChild(styleNode.FirstChild);
+                    //node.ParentNode.InsertAfter(styleNode, node);
+                    node.ParentNode.ReplaceChild(styleNode, node);
                 }
-
-            doc.Save(file);
             }
+            doc.Save(file);
+            // if new stylename exists
+        }
         }
         #endregion
         // End - Public Methods

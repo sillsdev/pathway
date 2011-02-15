@@ -192,6 +192,8 @@ namespace SIL.PublishingSolution
             ProcessXHTML(projInfo.ProgressBar, projInfo.DefaultXhtmlFileWithPath, projInfo.TempOutputFolder);
             UpdateRelativeInStylesXML();
             CloseFile(projInfo.TempOutputFolder);
+            AlterFrameWithoutCaption(projInfo.TempOutputFolder);
+
             return new Dictionary<string, ArrayList>();
         }
 
@@ -850,7 +852,10 @@ namespace SIL.PublishingSolution
         private void WriteCharacterStyle(string content, string characterStyle, bool pseudo)
         {
             //_imageInserted = InsertImage();
-
+            if (_imageClass.Length > 0)
+            {
+                _imageTextAvailable = true;
+            }
             if ((_tagType == "span" || _tagType == "a" || pseudo) && characterStyle != "none" || (_tagType == "img" && _imageInserted)) //span start
             {
                 if (isFootnote)
@@ -1755,6 +1760,7 @@ namespace SIL.PublishingSolution
 
 
                 string strFrameCount = "Graphics" + _frameCount;
+                _imageGraphicsName = strFrameCount;
                 ////TODO Make it function 
                 ////To get Image details
                 //if (File.Exists(fileName1))
@@ -1912,7 +1918,7 @@ namespace SIL.PublishingSolution
                     _writer.WriteEndElement(); // for Textframe
                     _allCharacter.Pop();    // retrieving it again.
                     isImage = false;
-                    _imageClass = "";
+                    _imageClass = string.Empty;
                     _isParagraphClosed = true;
 
                 }
@@ -1937,6 +1943,10 @@ namespace SIL.PublishingSolution
                     //bool a = _isNewParagraph;
                     //bool b = _isParagraphClosed;
 
+                    if (!_imageTextAvailable)
+                        _imageCaptionEmpty.Add(_imageGraphicsName);
+
+                    _imageTextAvailable = false;
                 }
             }
         }
