@@ -75,16 +75,25 @@ namespace Test.YouVersion
             Assert.Inconclusive("A method that does not return a value cannot be verified.");
         }
 
+        [Test]
+        public void OneChapterPerSectionTest()
+        {
+            string inputFullName = string.Empty; // TODO: Initialize to an appropriate value
+            string expected = string.Empty; // TODO: Initialize to an appropriate value
+            string actual = OneChapterPerSection(inputFullName);
+            Assert.AreEqual(expected, actual);
+        }
+
         /// <summary>
         ///A test for SplitByChapters
         ///</summary>
         [Test]
         public void SplitByChaptersTest()
         {
-            IPublicationInformation projInfo = null; // TODO: Initialize to an appropriate value
+            string input = string.Empty; // TODO: Initialize to an appropriate value
             string expected = string.Empty; // TODO: Initialize to an appropriate value
             string actual;
-            actual = SplitByChapters(projInfo);
+            actual = SplitByChapters(input);
             Assert.AreEqual(expected, actual);
             Assert.Inconclusive("Verify the correctness of this test method.");
         }
