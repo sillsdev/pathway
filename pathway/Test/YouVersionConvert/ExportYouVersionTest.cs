@@ -15,6 +15,8 @@
 // --------------------------------------------------------------------------------------------
 
 #region Using
+
+using System;
 using SIL.PublishingSolution;
 using System.Xml;
 using SIL.Tool;
@@ -34,18 +36,28 @@ namespace Test.YouVersion
     [Ignore]
     public class ExportYouVersionTest : ExportYouVersion
     {
+        #region Setup
+
+        private TestFiles _testFiles;
+
+        [TestFixtureSetUp]
+        public void Setup()
+        {
+            _testFiles = new TestFiles("YouVersionConvert");
+        }
+        #endregion Setup
+
         /// <summary>
         ///A test for ZipHtml
         ///</summary>
         [Test]
         public void ZipHtmlTest()
         {
-            string htmlFolder = string.Empty; // TODO: Initialize to an appropriate value
-            string expected = string.Empty; // TODO: Initialize to an appropriate value
-            string actual;
-            actual = ZipHtml(htmlFolder);
+            string htmlFolder = _testFiles.Output("html");
+            FolderTree.Copy(_testFiles.Input("html"), htmlFolder);
+            string expected = _testFiles.Output("html.zip");
+            string actual = ZipHtml(htmlFolder);
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
         /// <summary>

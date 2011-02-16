@@ -1,5 +1,19 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\PsDll\YouVersionConvert.pdb" ComponentGuid="402137D9-499D-4DD2-8572-A9ED69E502B4"/>
+	<File Path="Files\PsDll\YouVersionConvert.dll" ComponentGuid="66E5634D-7078-4D53-9927-D35B0CCFA72B"/>
+	<File Path="Files\ConfigurationTool\YouVersionConvert.pdb" ComponentGuid="6F6BB65E-30BD-4E5C-AC6E-EF7A4DCAC886"/>
+	<File Path="Files\PublishingSolution\YouVersionConvert.pdb" ComponentGuid="6D1F3626-83D4-438E-902E-7F1B174C1A0A"/>
+	<File Path="Files\PublishingSolution\YouVersionConvert.dll" ComponentGuid="9B4DD637-51D3-4A65-811C-1D3D60E51185"/>
+	<File Path="Files\PublishingSolution\TE_XHTML-to-YouVersion_OneChapter_HTML.xslt" ComponentGuid="E1F0A238-00C6-4F91-BA12-A1D237655CC9"/>
+	<File Path="Files\PublishingSolution\Styles\Dictionary\PageNumber_TopCenterMirrored.css" ComponentGuid="FFCFF856-2AA2-49C6-93C7-431D6AA7D3B5"/>
+	<File Path="Files\PathwaySupport\YouVersion.xpr" ComponentGuid="BDC910BE-AC07-482A-BE4E-EA1AA8A998CD"/>
+	<File Path="Files\PathwaySupport\TE_XHTML-to-YouVersion_OneChapter_HTML.xslt" ComponentGuid="65A460CE-CEEC-4D5A-B022-30758312804A"/>
+	<File Path="Files\PathwaySupport\Styles\Dictionary\PageNumber_TopCenterMirrored.css" ComponentGuid="957EC87A-B68A-4EDC-A8EC-7B016C0F9FF1"/>
+	<File Path="Files\ConfigurationTool\YouVersionConvert.dll" ComponentGuid="E4606DF6-FA60-4C06-8D2F-CF050CAEA6E6"/>
+	<File Path="Files\ConfigurationTool\YouVersion.xpr" ComponentGuid="08A6169E-B74F-476F-9273-CD1CAF677052"/>
+	<File Path="Files\ConfigurationTool\TE_XHTML-to-YouVersion_OneChapter_HTML.xslt" ComponentGuid="E233D3B1-9975-4030-A0ED-DE56285EFCD9"/>
+	<File Path="Files\ConfigurationTool\Styles\Dictionary\PageNumber_TopCenterMirrored.css" ComponentGuid="90B10E10-2F12-4935-A05C-6201B33F7311"/>
 	<File Path="Files\ConfigurationTool\OpenOfficeConvert_OLD.dll" ComponentGuid="925B71FF-2829-4A5F-80D8-BB515115C477"/>
 	<File Path="Files\PublishingSolution\Styles\Scripture\Running_Head_Paged_Verse_Abbr.css" ComponentGuid="CC021924-EEB6-40FA-A057-7E7CC496977E"/>
 	<File Path="Files\PublishingSolution\Styles\Scripture\Running_Head_Paged_Chapter_Abbr.css" ComponentGuid="E4BF84C2-E792-4B97-8FAF-7822394B2965"/>
