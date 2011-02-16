@@ -595,9 +595,9 @@ namespace SIL.PublishingSolution
             VerboseClass verboseClass = VerboseClass.GetInstance();
 
 
-            Common.SupportFolder = "";
+            //Common.SupportFolder = "";
             //Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
-            string strFromOfficeFolder = Common.PathCombine(Common.GetPSApplicationPath(), "OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
+            string strFromOfficeFolder = Common.FromRegistry("OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
             projInfo.TempOutputFolder = Common.PathCombine(Path.GetTempPath(), "OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
 
             //todo comment this
