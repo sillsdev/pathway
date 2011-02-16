@@ -1590,6 +1590,7 @@
             // btnOthers
             // 
             this.btnOthers.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnOthers.Enabled = false;
             this.btnOthers.FlatAppearance.BorderColor = System.Drawing.SystemColors.ButtonShadow;
             this.btnOthers.FlatAppearance.BorderSize = 0;
             this.btnOthers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1606,6 +1607,7 @@
             // btnWeb
             // 
             this.btnWeb.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnWeb.Enabled = false;
             this.btnWeb.FlatAppearance.BorderColor = System.Drawing.SystemColors.ButtonShadow;
             this.btnWeb.FlatAppearance.BorderSize = 0;
             this.btnWeb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1622,6 +1624,7 @@
             // btnMobile
             // 
             this.btnMobile.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnMobile.Enabled = false;
             this.btnMobile.FlatAppearance.BorderColor = System.Drawing.SystemColors.ButtonShadow;
             this.btnMobile.FlatAppearance.BorderSize = 0;
             this.btnMobile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1638,6 +1641,7 @@
             // btnPaper
             // 
             this.btnPaper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnPaper.Enabled = false;
             this.btnPaper.FlatAppearance.BorderColor = System.Drawing.SystemColors.ButtonShadow;
             this.btnPaper.FlatAppearance.BorderSize = 0;
             this.btnPaper.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

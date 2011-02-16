@@ -436,6 +436,9 @@ namespace SIL.PublishingSolution
                 cTool.BtnScripture.Focus();
                 cTool.LblSenseLayout.Visible = false;
                 cTool.DdlSense.Visible = false;
+                cTool.BtnPaper.Enabled = true;
+                cTool.BtnWeb.Enabled = false;
+                cTool.BtnOthers.Enabled = true;
                 cTool.BtnMobile.Enabled = true;
             }
             else
@@ -445,6 +448,9 @@ namespace SIL.PublishingSolution
                 cTool.BtnDictionary.Focus();
                 cTool.LblSenseLayout.Visible = true;
                 cTool.DdlSense.Visible = true;
+                cTool.BtnPaper.Enabled = true;
+                cTool.BtnWeb.Enabled = false;
+                cTool.BtnOthers.Enabled = true;
                 cTool.BtnMobile.Enabled = false;
             }
         }
@@ -464,7 +470,6 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    cTool.BtnMobile.Visible = false;
                     btnDictionary_ClickBL();
                 }
                 cTool.BtnScripture.Visible = false;
@@ -3124,9 +3129,6 @@ namespace SIL.PublishingSolution
             try
             {
                 WriteCss();
-                cTool.BtnMobile.Enabled = true;
-                cTool.BtnWeb.Enabled = false;
-                cTool.BtnOthers.Enabled = true;
                 cTool.DdlTocLevel.Items.Clear(); // clear / repopulate this dropdown
                 setLastSelectedLayout();
                 WriteMedia();
@@ -3153,10 +3155,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                WriteCss(); 
-                cTool.BtnMobile.Enabled = false;
-                cTool.BtnWeb.Enabled = false;
-                cTool.BtnOthers.Enabled = true;
+                WriteCss();
                 cTool.DdlTocLevel.Items.Clear(); // clear / repopulate this dropdown
                 setLastSelectedLayout();
                 WriteMedia();
@@ -3397,7 +3396,6 @@ namespace SIL.PublishingSolution
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabothers"]);
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPicture"]);
             }
-            //cTool.BtnMobile.Enabled = false;
             _redoundo = new UndoRedo(cTool.TsUndo, cTool.TsRedo);
             cTool.MinimumSize = new Size(497, 183);
             cTool.LoadSettings();
@@ -3412,12 +3410,16 @@ namespace SIL.PublishingSolution
             PopulateFeatureSheet(); //For TD-1194 // Load Default Values
             //ShowInfoValue();
             SetMediaType();
+            // sanity check - if the ScriptureStyleSettings file isn't there, make sure
+            // the dictionary styles are selected (and the buttons are hidden)
             if (!File.Exists(Common.FromRegistry("ScriptureStyleSettings.xml")))
             {
+                // select the dictionary styles
+                btnDictionary_ClickBL(); 
+                // hide the Scripture / Dictionary buttons (they don't apply)
                 cTool.BtnScripture.Enabled = false;
                 cTool.BtnScripture.Visible = false;
                 cTool.BtnDictionary.Visible = false;
-                cTool.BtnMobile.Enabled = true;
             }
             // Window title (includes the version and edition (BTE / SE))
             var sb = new StringBuilder();
