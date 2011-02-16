@@ -38,6 +38,7 @@ namespace SIL.PublishingSolution
         protected string collectionFullName;
         protected string collectionName;
         protected static ProgressBar _pb;
+        private string _iconFile;
         private const string RedirectOutputFileName = "Convert.log";
         List<string> DuplicateBooks;
 
@@ -113,6 +114,7 @@ namespace SIL.PublishingSolution
             inProcess.Close();
             Cursor.Current = myCursor;
             const int ExitOk = 0;
+            string result = Common.PathCombine(processFolder, Sanitize(collectionName) + ".jar");
             if (SubProcess.ExitCode != ExitOk)
             {
                 string msg = string.Format("The conversion has exited with an error. Do you want to display additional details on the error?");
@@ -135,9 +137,16 @@ namespace SIL.PublishingSolution
             }
             else if (projInfo.IsOpenOutput)
             {
-                string result = Common.PathCombine(processFolder, collectionName + ".jar");
                 string msg = string.Format("Please copy the file {0} to your phone", result);
                 MessageBox.Show(msg, "GoBible Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            // clean up
+            Common.CleanupOutputDirectory(processFolder, result); // keep the .jar file only
+            // if the icon file has an older date, it won't get picked up by CleanupOutputDirectory - 
+            // clean it out manually if needed
+            if (File.Exists(Path.Combine(processFolder, _iconFile)))
+            {
+                File.Delete(Path.Combine(processFolder, _iconFile));
             }
             Environment.CurrentDirectory = curdir;
             success = true;
@@ -285,15 +294,15 @@ namespace SIL.PublishingSolution
                 if (File.Exists(mobilefeature["Icon"]))
                     iconFullName = mobilefeature["Icon"];
             var iconDirectory = Path.GetDirectoryName(iconFullName);
-            var iconName = Path.GetFileName(iconFullName);
+            _iconFile = Path.GetFileName(iconFullName);
             const bool overwrite = true;
             if (iconDirectory != processFolder)
-                File.Copy(iconFullName, Path.Combine(processFolder, iconName), overwrite);
+                File.Copy(iconFullName, Path.Combine(processFolder, _iconFile), overwrite);
 
             // Write collection file
             TextWriter textWriter = new StreamWriter(collectionFullName);
             textWriter.WriteLine("Info: " + info);
-            textWriter.WriteLine("Phone-Icon-Filepath: " + iconName); // path to 20x20 *.png icon file
+            textWriter.WriteLine("Phone-Icon-Filepath: " + _iconFile); // path to 20x20 *.png icon file
             textWriter.WriteLine("RedLettering: " + red);  // relies on correct tag
             textWriter.WriteLine("Source-Text: " + sourceText);
             textWriter.WriteLine("Source-Format: xhtml_te");
