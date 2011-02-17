@@ -293,7 +293,7 @@ namespace SIL.PublishingSolution
             else if (value.ToLower() == "none")
             {
                 _isDisplayNone = true;
-                _displayNoneStyle = _classNameWithLang;
+                _displayNoneStyle = Common.LeftString(_classNameWithLang,Common.SepParent);
             }
         }
 
@@ -330,6 +330,7 @@ namespace SIL.PublishingSolution
                     else if (_reader.Name == "lang")
                     {
                         _lang = _reader.Value;
+                        if (_lang == "zxx") continue;
                         //classNameWithLang = classNameWithLang + Common.SepAttrib + _lang;
                         _xhtmlAttribute.Add(_lang);
                         AddEntryLanguage();

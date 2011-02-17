@@ -392,28 +392,28 @@ namespace SIL.PublishingSolution
                 if (propertyValue.IndexOf("pt")>0)
                 {
                     int value = int.Parse(propertyValue.Replace("pt", ""));
-                    value = (int)(value * 1.5);
+                    value = (int)(value * 1);
                     _IDProperty["font-size"] = value + "pt";
                 }
                 else if (propertyValue.IndexOf("%")>0)
                 {
                     int value = int.Parse(propertyValue.Replace("%", ""));
-                    value = (int)(value * 1.5);
+                    value = (int)(value * 1);
                     _IDProperty["font-size"] = value + "%";
                 }
                 else if (propertyValue == "smaller")
                 {
-                    _IDProperty["font-size"] = "100%";
+                    _IDProperty["font-size"] = "75%";
                 }
                 else if (propertyValue == "larger")
                 {
-                    _IDProperty["font-size"] = "150%";
+                    _IDProperty["font-size"] = "100%";
                 }
             }
 
             else
             {
-                _IDProperty["font-size"] = "150%";
+                _IDProperty["font-size"] = "100%";
             }
         }
 
@@ -477,10 +477,21 @@ namespace SIL.PublishingSolution
         public void IncludeBorder(string propertyKey)
         {
             if (propertyKey.IndexOf("padding") == -1) return;
-            string borderProperty = propertyKey.Replace("padding", "border");
-            if (!_IDProperty.ContainsKey(borderProperty))
+            string borderPos = "border-bottom";
+            AppendBorderToPadding(borderPos);
+            borderPos = "border-top";
+            AppendBorderToPadding(borderPos);
+            borderPos = "border-left";
+            AppendBorderToPadding(borderPos);
+            borderPos = "border-right";
+            AppendBorderToPadding(borderPos);
+        }
+
+        private void AppendBorderToPadding(string borderPos)
+        {
+            if (!_IDProperty.ContainsKey(borderPos))
             {
-                _IDProperty[borderProperty] = "0.5pt solid #ffffff";
+                _IDProperty[borderPos] = "0.5pt solid #ffffff";
             }
         }
 
