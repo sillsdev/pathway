@@ -8,6 +8,7 @@
            font-size: 12pt;
            margin-top: 1cm;
     }
+    @top-center{ content: ''; }
     @top-right {
            content: string( guideword, last);
            direction: ltr;
@@ -16,6 +17,9 @@
            font-size: 12pt;
            margin-top: 1cm;
     }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
 }
 
 @page :first {
