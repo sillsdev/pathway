@@ -1606,7 +1606,7 @@ namespace SIL.PublishingSolution
                     wrapSide = "left";
                     break;
                 case "both":
-                    wrapSide = "right";
+                    wrapSide = "both";
                     wrapMode = "JumpObjectTextWrap";
                     break;
                 case "none":
@@ -1651,16 +1651,16 @@ namespace SIL.PublishingSolution
                         case "prince-column-top":
                         case "-ps-column-top":
                         case "top-left":
-                            HoriAlignment = "left";
+                            HoriAlignment = "top";
                             break;
                         case "top-right":
-                            HoriAlignment = "right";
+                            HoriAlignment = "top";
                             break;
                         case "bottom":
                         case "prince-column-bottom":
                         case "-ps-column-bottom":
                         case "bottom-left":
-                            HoriAlignment = "left";
+                            HoriAlignment = "bottom";
                             break;
                         case "bottom-right":
                             HoriAlignment = "right";
