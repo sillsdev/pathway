@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Transform one chapter from XHTML to HTML used by YouVersion. -->
+
 <xsl:stylesheet version="1.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
@@ -7,17 +9,7 @@
 
 	<xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes"/>
 
-    <!-- xsl:output method="html"
-		doctype-system="http://www.w3.org/TR/html4/strict.dtd"
-		doctype-public="-//W3C//DTD HTML 4.01//EN"
-		encoding="UTF-8" indent="yes"/ -->
-
     <xsl:strip-space elements="*"/>
-
-    <!-- Get the name of the file before the extension to use as part of the name of the output files. -->
-    <!-- xsl:variable name="FileNameBeginning">
-		<xsl:value-of select="substring-before(/xhtml:html/xhtml:head/xhtml:meta[@name='filename']/@content, '.') "/>
-    </xsl:variable -->
 
 	<xsl:variable name="bookCode">
 		<xsl:value-of select="/xhtml:html/xhtml:body/xhtml:p[@class='scrBookCode']/text()"/>

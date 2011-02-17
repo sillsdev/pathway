@@ -64,7 +64,7 @@
 
 	<!-- Appropriately handle chapter numbers in 'div' elements that are not section heads nor parallel passage references. -->
     <xsl:template match="xhtml:div[not(@class='Section_Head') and not(@class='Parallel_Passage_Reference')]">
-		<xsl:if test="child::*[1][name()='span' and @class='Chapter_Number'] and preceding-sibling::*[1][@class='Paragraph']">
+		<xsl:if test="child::*[1][name()='span' and @class='Chapter_Number'] and preceding-sibling::*[1][@class='Paragraph' or @class='Paragraph_Continuation' or @class='Line1' or @class='Line2']">
 			<xsl:text disable-output-escaping="yes">
                 &lt;/div&gt;
                 &lt;div class="scrSection"&gt;

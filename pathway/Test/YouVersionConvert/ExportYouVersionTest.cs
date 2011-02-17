@@ -15,26 +15,20 @@
 // --------------------------------------------------------------------------------------------
 
 #region Using
-
-using System;
 using System.IO;
 using SIL.PublishingSolution;
 using System.Xml;
 using SIL.Tool;
 using NUnit.Framework;
-
 #endregion Using
 
-namespace Test.YouVersion
+namespace Test.YouVersionConvert
 {
-    
-    
     /// <summary>
     ///This is a test class for ExportYouVersionTest and is intended
     ///to contain all ExportYouVersionTest Unit Tests
     ///</summary>
     [TestFixture]
-    [Ignore]
     public class ExportYouVersionTest : ExportYouVersion
     {
         #region Setup
@@ -58,7 +52,7 @@ namespace Test.YouVersion
             LoadParam(testName);
             string htmlFolder = _testFiles.Output("html");
             FolderTree.Copy(_testFiles.Input("html"), htmlFolder);
-            string expected = _testFiles.Output(Path.Combine(testName,"html.zip"));
+            string expected = _testFiles.Output(Path.Combine(testName, "html.zip"));
             string actual = ZipHtml(htmlFolder);
             Assert.AreEqual(expected, actual);
         }
@@ -83,10 +77,13 @@ namespace Test.YouVersion
         [Test]
         public void OneChapterPerSectionTest()
         {
-            string inputFullName = string.Empty; // TODO: Initialize to an appropriate value
-            string expected = string.Empty; // TODO: Initialize to an appropriate value
+            const string fileName = "nko-1Ti.xhtml";
+            string inputFullName = _testFiles.Output(fileName);
+            const bool overwrite = true;
+            File.Copy(_testFiles.Input(fileName), inputFullName, overwrite);
+            string expected = _testFiles.Expected(fileName.Replace(".xhtml", "_ospc.xhtml"));
             string actual = OneChapterPerSection(inputFullName);
-            Assert.AreEqual(expected, actual);
+            FileAssert.AreEqual(expected,actual);
         }
 
         /// <summary>
@@ -95,12 +92,36 @@ namespace Test.YouVersion
         [Test]
         public void SplitByChaptersTest()
         {
-            string input = string.Empty; // TODO: Initialize to an appropriate value
-            string expected = string.Empty; // TODO: Initialize to an appropriate value
-            string actual;
-            actual = SplitByChapters(input);
+            const string fileName = "nko-1Ti_ospc.xhtml";
+            string input = _testFiles.Output(fileName);
+            const bool overwrite = true;
+            File.Copy(_testFiles.Input(fileName), input, overwrite);
+            string expected = _testFiles.Output("xhtml");
+            string actual = SplitByChapters(input);
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            DirectoryInfo directoryInfo = new DirectoryInfo(actual);
+            Assert.AreEqual(6, directoryInfo.GetFiles().Length);
+            const string chapter6 = "nko.1TI.6.xhtml";
+            FileAssert.AreEqual(_testFiles.Expected(chapter6), Path.Combine(actual,chapter6));
+        }
+
+        /// <summary>
+        ///A test for SplitByChapters
+        ///</summary>
+        [Test]
+        public void SplitByChaptersAchi2CoTest()
+        {
+            const string fileName = "achiDraft_ospc.xhtml";
+            string input = _testFiles.Output(fileName);
+            const bool overwrite = true;
+            File.Copy(_testFiles.Input(fileName), input, overwrite);
+            string expected = _testFiles.Output("xhtml");
+            string actual = SplitByChapters(input);
+            Assert.AreEqual(expected, actual);
+            DirectoryInfo directoryInfo = new DirectoryInfo(actual);
+            Assert.AreEqual(13, directoryInfo.GetFiles().Length);
+            const string chapter7 = "x-acc.2CO.7.xhtml";
+            FileAssert.AreEqual(_testFiles.Expected(chapter7), Path.Combine(actual, chapter7));
         }
 
         /// <summary>
@@ -109,9 +130,12 @@ namespace Test.YouVersion
         [Test]
         public void SetupOutputFolderTest()
         {
-            string folder = string.Empty; // TODO: Initialize to an appropriate value
+            const string testFolder = "SetupOutputFolder";
+            string folder = _testFiles.Output(testFolder);
             SetupOutputFolder(folder);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
+            Assert.IsTrue(Directory.Exists(folder));
+            DirectoryInfo directoryInfo = new DirectoryInfo(folder);
+            Assert.AreEqual(0, directoryInfo.GetFiles().Length);
         }
 
         /// <summary>
@@ -120,25 +144,13 @@ namespace Test.YouVersion
         [Test]
         public void NestBookDataTest()
         {
-            IPublicationInformation projInfo = null; // TODO: Initialize to an appropriate value
-            NestBookData(projInfo);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
-        }
-
-        /// <summary>
-        ///A test for Launch
-        ///</summary>
-        [Test]
-        public void LaunchTest()
-        {
-            ExportYouVersion target = new ExportYouVersion(); // TODO: Initialize to an appropriate value
-            string exportType = string.Empty; // TODO: Initialize to an appropriate value
-            PublicationInformation publicationInformation = null; // TODO: Initialize to an appropriate value
-            bool expected = false; // TODO: Initialize to an appropriate value
-            bool actual;
-            actual = Launch(exportType, publicationInformation);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            const string fileName = "nko-1Ti-flat.xhtml";
+            string inputFullName = _testFiles.Output(fileName);
+            const bool overwrite = true;
+            File.Copy(_testFiles.Input(fileName), inputFullName, overwrite);
+            NestBookData(inputFullName);
+            string expected = _testFiles.Expected(fileName);
+            FileAssert.AreEqual(expected, inputFullName);
         }
 
         /// <summary>
@@ -147,13 +159,12 @@ namespace Test.YouVersion
         [Test]
         public void HandleTest()
         {
-            ExportYouVersion target = new ExportYouVersion(); // TODO: Initialize to an appropriate value
-            string inputDataType = string.Empty; // TODO: Initialize to an appropriate value
-            bool expected = false; // TODO: Initialize to an appropriate value
-            bool actual;
-            actual = Handle(inputDataType);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            bool actual = Handle("Dictionary");
+            const bool expectedDictionary = false;
+            Assert.AreEqual(expectedDictionary, actual);
+            actual = Handle("Scripture");
+            const bool expectedScripture = true;
+            Assert.AreEqual(expectedScripture, actual);
         }
 
         /// <summary>
@@ -162,13 +173,11 @@ namespace Test.YouVersion
         [Test]
         public void GetPathFromXhtmlTest()
         {
-            string name = string.Empty; // TODO: Initialize to an appropriate value
-            string path = string.Empty; // TODO: Initialize to an appropriate value
-            XmlNodeList expected = null; // TODO: Initialize to an appropriate value
-            XmlNodeList actual;
-            actual = GetPathFromXhtml(name, path);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            const string fileName = "nko-1Ti.xhtml";
+            string name = _testFiles.Input(fileName);
+            const string path = "//xhtml:span[@class='Chapter_Number']";
+            XmlNodeList actual = GetPathFromXhtml(name, path);
+            Assert.AreEqual(6, actual.Count);
         }
 
         /// <summary>
@@ -177,12 +186,10 @@ namespace Test.YouVersion
         [Test]
         public void GetXmlDocumentTest()
         {
-            string name = string.Empty; // TODO: Initialize to an appropriate value
-            XmlDocument expected = null; // TODO: Initialize to an appropriate value
-            XmlDocument actual;
-            actual = GetXmlDocument(name);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            const string fileName = "nko-1Ti.xhtml";
+            string name = _testFiles.Input(fileName);
+            XmlDocument actual = GetXmlDocument(name);
+            Assert.AreEqual(396, actual.SelectNodes("//descendant::*").Count);
         }
 
         /// <summary>
@@ -191,12 +198,13 @@ namespace Test.YouVersion
         [Test]
         public void ConvertToHtmlTest()
         {
-            string processFolder = string.Empty; // TODO: Initialize to an appropriate value
-            string expected = string.Empty; // TODO: Initialize to an appropriate value
-            string actual;
-            actual = ConvertToHtml(processFolder);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            string processFolder = _testFiles.Output("xhtml");
+            FolderTree.Copy(_testFiles.Input("xhtml"), processFolder);
+            string actual = ConvertToHtml(processFolder);
+            DirectoryInfo directoryInfo = new DirectoryInfo(actual);
+            Assert.AreEqual(6, directoryInfo.GetFiles().Length);
+            const string chapter6 = "nko.1TI.6.html";
+            FileAssert.AreEqual(_testFiles.Expected(chapter6), Path.Combine(actual,chapter6));
         }
 
         /// <summary>
@@ -205,11 +213,12 @@ namespace Test.YouVersion
         [Test]
         public void CleanUpTest()
         {
-            string processFolder = string.Empty; // TODO: Initialize to an appropriate value
-            string htmlFolder = string.Empty; // TODO: Initialize to an appropriate value
-            string zippedResult = string.Empty; // TODO: Initialize to an appropriate value
+            string processFolder = _testFiles.Output("xhtml");
+            string htmlFolder = _testFiles.Output("Html");
+            string zippedResult = _testFiles.Output(Path.Combine("ZipHtmlTest", "html.zip"));
             CleanUp(processFolder, htmlFolder, zippedResult);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
+            Assert.IsFalse(Directory.Exists(processFolder));
+            Assert.IsFalse(Directory.Exists(htmlFolder));
         }
 
         /// <summary>
@@ -218,12 +227,12 @@ namespace Test.YouVersion
         [Test]
         public void BookDataNestedTest()
         {
-            IPublicationInformation projInfo = null; // TODO: Initialize to an appropriate value
-            bool expected = false; // TODO: Initialize to an appropriate value
-            bool actual;
-            actual = BookDataNested(projInfo);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            string inputFullName = _testFiles.Input("nko-1Ti.xhtml");
+            bool actual = BookDataNested(inputFullName);
+            Assert.IsTrue(actual);
+            inputFullName = _testFiles.Input("nko-1Ti-flat.xhtml");
+            actual = BookDataNested(inputFullName);
+            Assert.IsFalse(actual);
         }
 
         /// <summary>
@@ -232,26 +241,20 @@ namespace Test.YouVersion
         [Test]
         public void AddBookLevelParagraphTest()
         {
-            XmlDocument chapterFile = null; // TODO: Initialize to an appropriate value
-            string classValue = string.Empty; // TODO: Initialize to an appropriate value
-            string content = string.Empty; // TODO: Initialize to an appropriate value
-            XmlNode chapterFileBody = null; // TODO: Initialize to an appropriate value
+            XmlDocument chapterFile = new XmlDocument {XmlResolver = null};
+            chapterFile.LoadXml(XhtmlTemplate);
+            var chapterNs = GetXmlNamespaceManager(chapterFile);
+            const string classValue = "scrBookCode";
+            const string content = "1TI";
+            XmlNode chapterFileBody = chapterFile.SelectSingleNode("//xhtml:body", chapterNs);
             AddBookLevelParagraph(chapterFile, classValue, content, chapterFileBody);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
-        }
-
-        /// <summary>
-        ///A test for GetXmlNamespaceManager
-        ///</summary>
-        [Test]
-        public void GetXmlNamespaceManagerTest()
-        {
-            XmlDocument xmlDocument = null; // TODO: Initialize to an appropriate value
-            XmlNamespaceManager expected = null; // TODO: Initialize to an appropriate value
-            XmlNamespaceManager actual;
-            actual = GetXmlNamespaceManager(xmlDocument);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            const string fileName = "AddP.xhtml";
+            string fullName = _testFiles.Output(fileName);
+            var xmlWriterSettings = new XmlWriterSettings { Indent = true };
+            XmlWriter xmlWriter = XmlWriter.Create(fullName, xmlWriterSettings);
+            chapterFile.WriteTo(xmlWriter);
+            xmlWriter.Close();
+            FileAssert.AreEqual(_testFiles.Expected(fullName), fullName);
         }
 
         private void LoadParam(string outputName)
