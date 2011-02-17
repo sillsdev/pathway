@@ -1,0 +1,86 @@
+@page {
+    @footnotes {
+        border-top: thin solid black;
+        padding: 4pt 0;
+        margin-top: 5pt;
+    }
+    @footnote {
+        border-top: thin solid black;
+        padding: 4pt 0;
+        margin-top: 5pt;
+    }
+}
+.Note_Target_Reference
+{
+font-size: 12pt;
+font-weight: bold;
+}
+
+.Alternate_Reading
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.Alternate_Reading {
+    font-style: italic;
+    display: inline;
+    display: footnote;
+    display: prince-footnote;
+    position: footnote;
+    list-style-position: inside;
+}
+
+.crossHYPHENReference::footnote-call {
+    font-style:Italic;
+}
+
+
+.Note_CrossHYPHENReference_Paragraph {
+    text-indent: 0pt;
+    margin-left: 0pt;
+    display: inline;
+    display: footnote;
+    display: prince-footnote;
+    position: footnote;
+    list-style-position: inside;
+}
+.Note_CrossHYPHENReference_Paragraph::footnote-call {
+    color: purple;
+    content: attr(title);
+    vertical-align: super;
+    line-height: none;
+}
+.Note_CrossHYPHENReference_Paragraph::footnote-marker {
+    font-weight: bold;
+    content: string(chapter) string(verse) ' = ';
+    /* content: string(footnoteMarker); font-size: 6pt; vertical-align: super; color: purple; */
+    text-align: left;
+}
+.Note_General_Paragraph {
+    text-indent: 0pt;
+    margin-left: 0pt;
+    display: inline;
+    display: footnote;
+    display: prince-footnote;
+    position: footnote;
+    list-style-position: inside;
+}
+.Note_General_Paragraph::footnote-call {
+    color: purple;
+    content: attr(title);
+    vertical-align: super;
+    vertical-align: top;
+    line-height: none;
+}
+
+.Note_Target_Reference::footnote-marker {
+    font-weight: bold;
+}
+.Note_General_Paratraph::footnote-call {
+    color: purple;
+    content: attr(title);
+    vertical-align: super;
+    vertical-align: top;
+    line-height: none;
+}
