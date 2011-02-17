@@ -17,6 +17,7 @@
 #region Using
 
 using System;
+using System.IO;
 using SIL.PublishingSolution;
 using System.Xml;
 using SIL.Tool;
@@ -53,9 +54,11 @@ namespace Test.YouVersion
         [Test]
         public void ZipHtmlTest()
         {
+            const string testName = "ZipHtmlTest";
+            LoadParam(testName);
             string htmlFolder = _testFiles.Output("html");
             FolderTree.Copy(_testFiles.Input("html"), htmlFolder);
-            string expected = _testFiles.Output("html.zip");
+            string expected = _testFiles.Output(Path.Combine(testName,"html.zip"));
             string actual = ZipHtml(htmlFolder);
             Assert.AreEqual(expected, actual);
         }
@@ -64,15 +67,17 @@ namespace Test.YouVersion
         ///A test for WriteChapter
         ///</summary>
         [Test]
-
         public void WriteChapterTest()
         {
-            XmlNode chapterFile = null; // TODO: Initialize to an appropriate value
-            string processFolder = string.Empty; // TODO: Initialize to an appropriate value
-            string bookCode = string.Empty; // TODO: Initialize to an appropriate value
-            string curChapter = string.Empty; // TODO: Initialize to an appropriate value
+            var chapterFile = new XmlDocument { XmlResolver = null };
+            chapterFile.LoadXml(XhtmlTemplate);
+            string processFolder = _testFiles.Output(null);
+            string bookCode = "MAT";
+            string curChapter = "1";
+            WsCode = "nko";
             WriteChapter(chapterFile, processFolder, bookCode, curChapter);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
+            const string fileName = "nko.MAT.1.xhtml";
+            FileAssert.AreEqual(_testFiles.Expected(fileName), _testFiles.Output(fileName));
         }
 
         [Test]
@@ -247,6 +252,22 @@ namespace Test.YouVersion
             actual = GetXmlNamespaceManager(xmlDocument);
             Assert.AreEqual(expected, actual);
             Assert.Inconclusive("Verify the correctness of this test method.");
+        }
+
+        private void LoadParam(string outputName)
+        {
+            const bool overwrite = true;
+            const string schemaFile = "StyleSettings.xsd";
+            File.Copy(_testFiles.Input(schemaFile), _testFiles.Output(schemaFile), overwrite);
+            const string settingFile = "ScriptureStyleSettings.xml";
+            string sFileName = _testFiles.Output(settingFile);
+            File.Copy(_testFiles.Input(settingFile), sFileName, overwrite);
+            Common.ProgBase = _testFiles.Output(null);
+            Param.LoadValues(sFileName);
+            Param.SetLoadType = "Scripture";
+            Param.Value[Param.PublicationLocation] = Common.PathCombine(Common.ProgBase, outputName);
+            Param.Value[Param.OutputPath] = Common.ProgBase;
+            Param.Value[Param.UserSheetPath] = Common.ProgBase;
         }
     }
 }

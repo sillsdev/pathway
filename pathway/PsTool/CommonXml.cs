@@ -611,6 +611,7 @@ namespace SIL.Tool
 
         #region XsltProcess(string inputFile, string xsltFile, string ext)
         public static ProgressBar xsltProgressBar = null;
+        public static Formatting xsltFormat = Formatting.None;
 
         public static string XsltProcess(string inputFile, string xsltFile, string ext)
         {
@@ -676,7 +677,9 @@ namespace SIL.Tool
                 //Transform the file. and writing to temporary File
                 var setting = new XmlReaderSettings {ProhibitDtd = false, XmlResolver = null};
                 XmlReader reader = XmlReader.Create(inputFile, setting);
-                var writer = new XmlTextWriter(result, Encoding.UTF8) { Namespaces = true };
+                var writer = new XmlTextWriter(result, Encoding.UTF8) { Namespaces = true};
+                writer.Formatting = xsltFormat;
+                xsltFormat = Formatting.None;
                 if (ext.ToLower().Contains("xhtml"))
                 {
                     writer.WriteStartDocument();
