@@ -1,0 +1,15 @@
+
+.partofspeech {
+    font-size: 25pt;
+    color: red;	
+    display:block;
+}
+
+
+/*
+.partofspeech[lang='tam'] {
+    font-size: 25pt;
+    color: blue;	
+    display:block;
+}
+*/
