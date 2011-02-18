@@ -8,8 +8,8 @@
     <ProjectGuid>{C789DC85-2A06-4425-BA3C-A51E28E9626E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>epubValidator60</RootNamespace>
-    <AssemblyName>epubValidator60</AssemblyName>
+    <RootNamespace>epubValidator</RootNamespace>
+    <AssemblyName>epubValidator</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -147,6 +147,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -29,7 +29,7 @@
         <property name="Configuration" value="Debug"/>
         <call target="AllDebug"/>
     </target>
-    <target name="AllDebug" depends="BookletBuilder, ConfigurationTool, PsExport, ParatextSupport, PathwayB, epubConvert, GoBibleConvert, InDesignConvert, LogosConvert, OpenOfficeConvert, OpenOfficeWriter, PdfConvert, WordPressConvert, XeTeXConvert, YouVersionConvert, Test, TestBed"/>
+    <target name="AllDebug" depends="BookletBuilder, ConfigurationTool, PsExport, ParatextSupport, PathwayB, epubConvert, GoBibleConvert, InDesignConvert, LogosConvert, OpenOfficeConvert, OpenOfficeConvert_OLD,  PdfConvert, WordPressConvert, XeTeXConvert, YouVersionConvert, Test, TestBed"/>
     <target name="test" depends="debug">
         <exec program="testpathway.bat"/>
     </target>
@@ -116,7 +116,7 @@
         <call target="AllRelease7BTE"/>
         <call target="Builder7BTE"/>
     </target>
-    <target name="AllRelease7BTE" depends="BuilderBL, ConfigurationTool, epubConvert, GoBibleConvert, InDesignConvert, LogosConvert, OpenOfficeConvert, ParatextSupport, PathwayB, PdfConvert, PsExport, WordPressConvert, XeTeXConvert"/>
+    <target name="AllRelease7BTE" depends="BuilderBL, ConfigurationTool, epubConvert, GoBibleConvert, InDesignConvert, LogosConvert, OpenOfficeConvert, ParatextSupport, PathwayB, PdfConvert, PsExport, WordPressConvert, XeTeXConvert, YouVersionConvert"/>
     
     <target name="Release7SE">
         <property name="Scope" value="BTE"/>
@@ -242,8 +242,8 @@
             <property name="Platform" value="${Platform}"/>
         </msbuild>
     </target>
-    <target name="OpenOfficeWriter" depends="CssDialog, CssParser, LiftPrepare, PsTool">
-        <msbuild project="OpenOfficeWriter\OpenOfficeWriter.csproj" >
+    <target name="OpenOfficeConvert_OLD" depends="CssParser, LiftPrepare, PsTool">
+        <msbuild project="OpenOfficeConvert_OLD\OpenOfficeConvert_OLD.csproj" >
             <property name="Configuration" value="${Configuration}"/>
             <property name="Platform" value="${Platform}"/>
         </msbuild>
@@ -290,13 +290,13 @@
             <property name="Platform" value="${Platform}"/>
         </msbuild>
     </target>
-    <target name="Test" depends="ConfigurationTool, CssDialog, CssParser, epubConvert, GoBibleConvert, InDesignConvert, LiftPrepare, LogosConvert, OpenOfficeConvert, OpenOfficeWriter, PsExport, PsTool, WordPressConvert, XeTeXConvert, YouVersionConvert">
+    <target name="Test" depends="ConfigurationTool, CssDialog, CssParser, epubConvert, GoBibleConvert, InDesignConvert, LiftPrepare, LogosConvert, OpenOfficeConvert, OpenOfficeConvert_OLD, PsExport, PsTool, WordPressConvert, XeTeXConvert, YouVersionConvert">
         <msbuild project="Test\Test.csproj" >
             <property name="Configuration" value="${Configuration}"/>
             <property name="Platform" value="${Platform}"/>
         </msbuild>
     </target>
-    <target name="TestBed" depends="CssDialog, CssParser, InDesignConvert, LiftPrepare, LogosConvert, OpenOfficeConvert, OpenOfficeWriter, ParatextSupport, PsExport, PsTool">
+    <target name="TestBed" depends="CssDialog, CssParser, InDesignConvert, LiftPrepare, LogosConvert, OpenOfficeConvert, OpenOfficeConvert_OLD, ParatextSupport, PsExport, PsTool">
         <msbuild project="TestBed\TestBed.csproj" >
             <property name="Configuration" value="${Configuration}"/>
             <property name="Platform" value="${Platform}"/>
@@ -579,8 +579,8 @@
             <property name="Platform" value="${Platform}"/>
         </msbuild>
     </target>
-    <target name="OpenOfficeWriter60" depends="CssDialog60, CssParser60, LiftPrepare, PsTool60">
-        <msbuild project="OpenOfficeWriter\OpenOfficeWriter60.csproj" >
+    <target name="OpenOfficeConvert_OLD60" depends="CssDialog60, CssParser60, LiftPrepare, PsTool60">
+        <msbuild project="OpenOfficeConvert_OLD\OpenOfficeConvert_OLD60.csproj" >
             <property name="Configuration" value="${Configuration}"/>
             <property name="Platform" value="${Platform}"/>
         </msbuild>
@@ -627,13 +627,13 @@
             <property name="Platform" value="${Platform}"/>
         </msbuild>
     </target>
-    <target name="Test60" depends="ConfigurationTool60, CssDialog60, CssParser60, epubConvert60, GoBibleConvert60, InDesignConvert60, LiftPrepare, LogosConvert60, OpenOfficeConvert60, OpenOfficeWriter60, PsExport60, PsTool60, WordPressConvert60, XeTeXConvert60, YouVersionConvert60">
+    <target name="Test60" depends="ConfigurationTool60, CssDialog60, CssParser60, epubConvert60, GoBibleConvert60, InDesignConvert60, LiftPrepare, LogosConvert60, OpenOfficeConvert60, OpenOfficeConvert_OLD60, PsExport60, PsTool60, WordPressConvert60, XeTeXConvert60, YouVersionConvert60">
         <msbuild project="Test\Test60.csproj" >
             <property name="Configuration" value="${Configuration}"/>
             <property name="Platform" value="${Platform}"/>
         </msbuild>
     </target>
-    <target name="TestBed60" depends="CssDialog60, CssParser60, InDesignConvert60, LiftPrepare, LogosConvert60, OpenOfficeConvert60, OpenOfficeWriter60, ParatextSupport60, PsExport60, PsTool60">
+    <target name="TestBed60" depends="CssDialog60, CssParser60, InDesignConvert60, LiftPrepare, LogosConvert60, OpenOfficeConvert60, OpenOfficeConvert_OLD60, ParatextSupport60, PsExport60, PsTool60">
         <msbuild project="TestBed\TestBed60.csproj" >
             <property name="Configuration" value="${Configuration}"/>
             <property name="Platform" value="${Platform}"/>

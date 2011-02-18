@@ -22,7 +22,7 @@ namespace epubValidator.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "2.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    internal class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace epubValidator.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("epubValidator.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace epubValidator.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,13 +63,13 @@ namespace epubValidator.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Welcome to the .epub file validator. This program uses an open source utility called &quot;epubcheck&quot; to help find errors within the .epub file that could prevent it from opening or displaying properly in e-book readers..
         /// </summary>
-        public static string Description {
+        internal static string Description {
             get {
                 return ResourceManager.GetString("Description", resourceCulture);
             }
         }
         
-        public static System.Drawing.Bitmap epub_logo_color1 {
+        internal static System.Drawing.Bitmap epub_logo_color1 {
             get {
                 object obj = ResourceManager.GetObject("epub_logo_color1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -79,7 +79,7 @@ namespace epubValidator.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Click the Validate button below to start the process..
         /// </summary>
-        public static string InstructionsClickValidate {
+        internal static string InstructionsClickValidate {
             get {
                 return ResourceManager.GetString("InstructionsClickValidate", resourceCulture);
             }
@@ -88,7 +88,7 @@ namespace epubValidator.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Click on the Browse button to select a file to validate, then click on the Validate button to start the process..
         /// </summary>
-        public static string InstructionsSpecifyFilename {
+        internal static string InstructionsSpecifyFilename {
             get {
                 return ResourceManager.GetString("InstructionsSpecifyFilename", resourceCulture);
             }
@@ -97,7 +97,7 @@ namespace epubValidator.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Calling epubcheck to validate the file. This process can take up to a minute or more, depending on the file size..
         /// </summary>
-        public static string PleaseWait {
+        internal static string PleaseWait {
             get {
                 return ResourceManager.GetString("PleaseWait", resourceCulture);
             }
@@ -106,7 +106,7 @@ namespace epubValidator.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Validate .epub File.
         /// </summary>
-        public static string Title {
+        internal static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
             }

@@ -77,7 +77,6 @@ namespace Builder7SE
             BuilderBL.CopyRelaseFiles(instPath, "PsExport", "ConfigurationTool", args[1]);
 
             BuilderBL.RemoveFiles(instPath, "../NotPathway", "ConfigurationTool");
-            Directory.Delete(instPath + "../Files/ConfigurationTool/epub", true);
             Directory.Delete(instPath + "../Files/ConfigurationTool/GoBible", true);
             Directory.Delete(instPath + "../Files/ConfigurationTool/Template", true);
             Directory.Delete(instPath + "../Files/ConfigurationTool/Styles/Scripture", true);

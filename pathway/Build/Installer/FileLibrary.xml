@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\PsDll\epubValidator.pdb" ComponentGuid="A604A1A1-0C38-45FF-B9DA-70D4E7CEE06B"/>
+	<File Path="Files\PsDll\epubValidator.exe" ComponentGuid="0F084EAD-1877-411A-8C47-44FFCDBA79FF"/>
+	<File Path="Files\ConfigurationTool\epubValidator.pdb" ComponentGuid="A489F3F0-9527-4029-AF63-A8E4C6B2F124"/>
+	<File Path="Files\PathwaySupport\TE_FixChapters_XHTML.xslt" ComponentGuid="640DFA0A-248E-41B9-8E14-FA315172180E"/>
 	<File Path="Files\ConfigurationTool\TE_FixChapters_XHTML.xslt" ComponentGuid="949F04B7-B46E-44CE-AAC2-18C49A4A267B"/>
 	<File Path="Files\ConfigurationTool\OpenOfficeConvert_OLD.pdb" ComponentGuid="AA5EE136-17AD-4F5B-BB39-BBD444C0C456"/>
 	<File Path="Files\PsDll\YouVersionConvert.pdb" ComponentGuid="402137D9-499D-4DD2-8572-A9ED69E502B4"/>
