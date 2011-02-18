@@ -201,14 +201,14 @@ namespace SIL.PublishingSolution
                 }
                 CreateSectionClass(_paragraphName);
             }
-            else if (_tagType == "span" || _tagType == "em") 
+            else if (_tagType == "span" || _tagType == "em")
             {
                 _characterName = _childName;
                 _allCharacter.Push(_characterName);
             }
             else if (_tagType == "img")
             {
-                _imageSource = _reader.GetAttribute("src") ?? string.Empty; 
+                _imageSource = _reader.GetAttribute("src") ?? string.Empty;
                 _imageSource = _imageSource.ToLower();
 
                 _imageLongDesc = _reader.GetAttribute("longdesc") ?? string.Empty;
@@ -248,7 +248,7 @@ namespace SIL.PublishingSolution
 
         public virtual void CreateSectionClass(string name)
         {
-            
+
         }
 
         /// <summary>
@@ -278,7 +278,11 @@ namespace SIL.PublishingSolution
 
         private void BlockInline()
         {
-            string value = GetPropertyValue(string.Empty, "display");
+            string imgTag = Common.LeftString(_className, Common.SepParent);
+            if(imgTag == "img") 
+                return;
+
+            string value = GetDisplayBlock(_className, "display");
             if (value == "block")
             {
                 if (_tagType == "span")
@@ -293,8 +297,31 @@ namespace SIL.PublishingSolution
             else if (value.ToLower() == "none")
             {
                 _isDisplayNone = true;
-                _displayNoneStyle = Common.LeftString(_classNameWithLang,Common.SepParent);
+                _displayNoneStyle = Common.LeftString(_classNameWithLang, Common.SepParent);
             }
+        }
+
+        private string GetDisplayBlock(string multiClass, string propertyName)
+        {
+            string returnValue = string.Empty;
+            ArrayList cssClassDetail1 = new ArrayList();
+            if (_classFamily.ContainsKey(multiClass))
+            {
+                cssClassDetail1 = _classFamily[multiClass];
+            }
+            if (cssClassDetail1 == null) return _matchedCssStyleName;
+
+            foreach (ClassInfo cssClassInfo in cssClassDetail1)
+            {
+                string className = cssClassInfo.StyleName;
+                if (IdAllClass.ContainsKey(className) && IdAllClass[className].ContainsKey(propertyName))
+                {
+                    returnValue = IdAllClass[className][propertyName];
+                    break;
+                }
+            }
+            return returnValue;
+
         }
 
         protected string GetPropertyValue(string className, string propertyName)
@@ -338,7 +365,7 @@ namespace SIL.PublishingSolution
                     else if (!(_reader.Name == "id" || _reader.Name == "xml:space"))
                     {
                         _xhtmlAttribute.Add(_reader.Name + _reader.Value);
-                        if (_reader.Name == "id") 
+                        if (_reader.Name == "id")
                             _anchorIdValue = _reader.Value;
                     }
                     else if (_reader.Name == "id")
@@ -352,36 +379,36 @@ namespace SIL.PublishingSolution
             _isTagClass = Common.IsTagClass(_tagType);
             if (_isTagClass != string.Empty)
             {
-                    string tagType = string.Empty;
-                    if (_tagType == "ol" || _tagType == "ul")
+                string tagType = string.Empty;
+                if (_tagType == "ol" || _tagType == "ul")
+                {
+                    //classNameWithLang = _tagType + Common.SepTag + _className;
+                    //_className = _tagType;
+                    _listType = _tagType;
+                }
+                else if (_tagType == "li")
+                {
+                    _className = _tagType;
+                    if (_outputType == Common.OutputType.IDML)
                     {
-                        //classNameWithLang = _tagType + Common.SepTag + _className;
-                        //_className = _tagType;
-                        _listType = _tagType;
+                        if (_listType == "ol" || _listType == "ul")
+                        {
+                            tagType = _listType + "First";
+                            _listType = _listType + "4";
+                        }
+                        else
+                        {
+                            tagType = _listType + "Next";
+                        }
+                        classNameWithLang = tagType + Common.SepTag + _className;
                     }
-                    else if (_tagType == "li")
+                    else if (_outputType == Common.OutputType.ODT)
                     {
-                        _className = _tagType;
-                        if (_outputType == Common.OutputType.IDML)
-                        {
-                            if (_listType == "ol" || _listType == "ul")
-                            {
-                                tagType = _listType + "First";
-                                _listType = _listType + "4";
-                            }
-                            else
-                            {
-                                tagType = _listType + "Next";
-                            }
-                            classNameWithLang = tagType + Common.SepTag + _className;
-                        }
-                        else if (_outputType == Common.OutputType.ODT)
-                        {
-                            tagType = _listType;
-                            classNameWithLang = _className + Common.SepTag + tagType;
-                        }
+                        tagType = _listType;
+                        classNameWithLang = _className + Common.SepTag + tagType;
                     }
-                
+                }
+
                 else if (_tagType == "p")
                 {
                     //classNameWithLang = _tagType + Common.SepTag + _className;
@@ -430,7 +457,7 @@ namespace SIL.PublishingSolution
         {
             if (_allParagraph.Count > 0 && !_isParagraphClosed) // Is Para Exist
             {
-                if(_outputType == Common.OutputType.IDML)
+                if (_outputType == Common.OutputType.IDML)
                 {
                     _writer.WriteRaw("<Br/>");
                 }
@@ -493,7 +520,7 @@ namespace SIL.PublishingSolution
             return modifiedContent;
         }
 
-        protected  void SetClassCounter()
+        protected void SetClassCounter()
         {
             string classNameNoLang = _classNameWithLang;
             bool isIncrClassmatch = false;
@@ -671,7 +698,7 @@ namespace SIL.PublishingSolution
                 _existingPsuedoBeforeStyle[styleName] = _psuedoBeforeStyle;
                 _existingPsuedoAfterStyle[styleName] = _psuedoAfterStyle;
                 _existingPsuedoContainsStyle[styleName] = _psuedoContainsStyle;
-                if(_lang.Length > 0)
+                if (_lang.Length > 0)
                     _languageStyleName[newStyleName] = _lang;
             }
             //if (SkipEmptyIDChapterNumber())
@@ -760,17 +787,17 @@ namespace SIL.PublishingSolution
                 return newStyleName;
             }
 
-            if(styleName == "headword") return styleName;
+            if (styleName == "headword") return styleName;
             if (styleName == "xhomographnumber") return styleName;
             if (_headwordStyles) return styleName;
             int suffix = 1;
             string newname;
-            while(true)
+            while (true)
             {
                 newname = styleName + Common.SepParent + suffix++;
                 if (!_newProperty.ContainsKey(newname))
                 {
-                    break; 
+                    break;
                 }
             }
             return newname;
@@ -843,7 +870,7 @@ namespace SIL.PublishingSolution
             }
             if (_outputType == Common.OutputType.IDML)
             {
-                AppendParentProperty(); 
+                AppendParentProperty();
             }
             //else if (_outputType == Common.OutputType.ODT)
             //{
@@ -884,7 +911,7 @@ namespace SIL.PublishingSolution
             cssClassInfoTag.Ancestor.SetClassAttrib(cssClassInfo.Ancestor.ClassName, cssClassInfo.Ancestor.Attribute);
             cssClassInfoTag.ParentPrecede.SetClassAttrib(cssClassInfo.ParentPrecede.ClassName, cssClassInfo.ParentPrecede.Attribute);
             cssClassInfoTag.Precede.SetClassAttrib(cssClassInfo.Precede.ClassName, cssClassInfo.Precede.Attribute);
-            
+
             cssClassInfoTag.StyleName = cssClassInfo.StyleName;
             cssClassInfoTag.TagName = cssClassInfo.TagName;
             cssClassInfoTag.Content = cssClassInfo.Content;
@@ -907,7 +934,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        
+
 
         private void AssignProperty(string cssStyleName, float ancestorFontSize)
         {
@@ -1033,7 +1060,7 @@ namespace SIL.PublishingSolution
         {
             if (_isclassNameExist == false)
             {
-                if(classAttrib.ClassName == string.Empty) // Tag class
+                if (classAttrib.ClassName == string.Empty) // Tag class
                 {
                     if (_tagType != cssTagFamily)
                     {
@@ -1062,7 +1089,7 @@ namespace SIL.PublishingSolution
                 }
             }
             parent.Reverse();
-           return match;
+            return match;
         }
 
         private bool CompareClass(ClassAttrib cssClassInfo)
@@ -1114,7 +1141,7 @@ namespace SIL.PublishingSolution
             return match;
         }
 
- 
+
 
         private bool IsSubClass(string superSet, string subSet)
         {
@@ -1219,14 +1246,14 @@ namespace SIL.PublishingSolution
                 if (_tempStyle.ContainsKey("DesiredLetterSpacing"))
                 {
                     float value = float.Parse(_tempStyle["DesiredLetterSpacing"]);
-                    float percentage = value/ancestorFontSize*100*3.6F;
+                    float percentage = value / ancestorFontSize * 100 * 3.6F;
                     _tempStyle["DesiredLetterSpacing"] = percentage.ToString();
                     _tempStyle["MaximumLetterSpacing"] = percentage.ToString();
                 }
                 if (_tempStyle.ContainsKey("DesiredWordSpacing"))
                 {
                     float value = float.Parse(_tempStyle["DesiredWordSpacing"]);
-                    float percentage = value/ancestorFontSize*100*3.6F;
+                    float percentage = value / ancestorFontSize * 100 * 3.6F;
                     _tempStyle["DesiredWordSpacing"] = percentage.ToString();
                     _tempStyle["MaximumWordSpacing"] = percentage.ToString();
                 }
@@ -1275,7 +1302,7 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    fontSize = float.Parse(currentFontSize.Replace("pt",""));
+                    fontSize = float.Parse(currentFontSize.Replace("pt", ""));
                 }
             }
 

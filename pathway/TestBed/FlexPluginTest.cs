@@ -281,6 +281,7 @@ namespace TestBed
             //string xhtmlFileWithPath = txtInputPath.Text;
             //string cssFileWithPath = txtCSSInput.Text;
             projInfo.ProjectFileWithPath = projInfo.ProjectPath;
+            projInfo.DictionaryPath = projInfo.ProjectPath;
             exportInDesign.Export(projInfo);
         }
 
