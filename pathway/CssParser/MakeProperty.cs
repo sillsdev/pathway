@@ -611,6 +611,11 @@ namespace SIL.PublishingSolution
                 case "-ps-fileproduce":
                 case "prince-text-replace":
                 case "-ps-referenceformat":
+                case "-ps-positionchapternumbers-string": 
+                case "-ps-includeversenumber-string":
+                case "-ps-includeverseinheaderreferences-string":
+                case "ps-nonconsecutivereferenceseparator-string":
+                case "-ps-nonconsecutivereferenceseparator-string":
                     _cssProperty[styleAttributeInfo.Name] = value;
                     break;
 
