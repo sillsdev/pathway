@@ -135,7 +135,7 @@ namespace SIL.PublishingSolution
         private int _crossRefCounter = 1;
         private bool _isWhiteSpace = true;
         private bool _imageInserted;
-        private List<string> _usedStyleName = new List<string>();
+
         private PublicationInformation _projInfo;
         private bool _IsHeadword = false;
         private bool _significant;
@@ -763,7 +763,7 @@ namespace SIL.PublishingSolution
         {
             string content = _reader.Value;
             content = ReplaceString(content);
-            if (CollectFootNoteChapterVerse(content)) return;
+            if (CollectFootNoteChapterVerse(content, Common.OutputType.ODT.ToString())) return;
 
             // Psuedo Before
             foreach (ClassInfo psuedoBefore in _psuedoBefore)
@@ -924,9 +924,10 @@ namespace SIL.PublishingSolution
         private StringBuilder MakeFootnoteStyle(string characterStyle)
         {
             StringBuilder footnoteStyle = new StringBuilder();
-            footnoteStyle.Append("<text:span ");
-            footnoteStyle.Append("text:style-name=\"" + characterStyle + "\">" + footnoteContent);
-            footnoteStyle.Append("</text:span>");
+            //footnoteStyle.Append("<text:span ");
+            //footnoteStyle.Append("text:style-name=\"" + characterStyle + "\">" + footnoteContent);
+            //footnoteStyle.Append("</text:span>");
+            footnoteStyle.Append(footnoteContent);
             return footnoteStyle;
         }
 
@@ -2053,37 +2054,7 @@ namespace SIL.PublishingSolution
             _textVariables = modifyIDStyles.ModifyStylesXML(_projectPath, _newProperty, _usedStyleName, _languageStyleName, "", _IsHeadword, ParentClass);
         }
 
-        /// <summary>
-        /// Store used Paragraph adn Character style name. This data used in ModifyIDStyle.cs
-        /// </summary>
-        /// <param name="styleName">a_b</param>
-        private void AddUsedStyleName(string styleName)
-        {
-            if (!_usedStyleName.Contains(styleName))
-            {
-                _usedStyleName.Add(styleName);
-                AddUsedParentStyleName(styleName);
-            }
-        }
-
-        /// <summary>
-        /// Recursive Parents styles should be added
-        /// </summary>
-        /// <param name="styleName">current style Name</param>
-        private void AddUsedParentStyleName(string styleName)
-        {
-            if (ParentClass.ContainsKey(styleName))
-            {
-                string parent = ParentClass[styleName];
-                parent = Common.LeftString(parent, "|");
-                if (_usedStyleName.Contains(parent))
-                {
-                    return;
-                }
-                _usedStyleName.Add(parent);
-                AddUsedParentStyleName(parent);
-            }
-        }
+        
 
         /// <summary>
         /// Closes the opened footnote Content, Chapter No and VerseNo

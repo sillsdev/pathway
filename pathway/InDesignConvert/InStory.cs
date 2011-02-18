@@ -203,7 +203,7 @@ namespace SIL.PublishingSolution
         {
             string content = _reader.Value;
 
-            if (CollectFootNoteChapterVerse(content)) return;
+            if (CollectFootNoteChapterVerse(content, Common.OutputType.IDML.ToString())) return;
 
             // Psuedo Before
             foreach (ClassInfo psuedoBefore in _psuedoBefore)
@@ -318,9 +318,11 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("AppliedCharacterStyle", "CharacterStyle/$ID/[No character style]");
             _writer.WriteStartElement("Content");
             _writer.WriteRaw("<?ACE 4?> ");
-            _writer.WriteString(content.Replace(" ", "").Replace("\r\n", " "));
+            string leftPart = Common.LeftString(content.Replace("\r\n", " "), "<");
+            _writer.WriteString(leftPart);
             _writer.WriteEndElement();
             _writer.WriteEndElement();
+            _writer.WriteRaw(content.Replace(leftPart, "").Replace("\r\n", " "));
             _writer.WriteEndElement();
             _writer.WriteEndElement();
         }

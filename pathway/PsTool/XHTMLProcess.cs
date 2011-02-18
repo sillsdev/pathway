@@ -138,6 +138,7 @@ namespace SIL.PublishingSolution
         protected bool _isDisplayNone = false;
         protected string _displayNoneStyle = string.Empty;
 
+        protected List<string> _usedStyleName = new List<string>();
         #endregion
 
         #region Constructor
@@ -602,12 +603,14 @@ namespace SIL.PublishingSolution
                 return string.Empty;
             }
         }
+
         /// <summary>
         /// Collects the contents of footnotes, ChapterNo and verseno.
         /// </summary>
         /// <param name="content"></param>
+        /// <param name="outputType">ODT/IDML</param>
         /// <returns></returns>
-        protected bool CollectFootNoteChapterVerse(string content)
+        protected bool CollectFootNoteChapterVerse(string content, string outputType)
         {
             if (_className.ToLower() == "chapternumber")
             {
@@ -619,10 +622,53 @@ namespace SIL.PublishingSolution
             }
             if (isFootnote)
             {
-                footnoteContent.Append(content);
+                AddUsedStyleName(_characterName);
+                StringBuilder footnoteFormat = new StringBuilder();
+                if (outputType == Common.OutputType.ODT.ToString())
+                {
+                    footnoteFormat.Append("<text:span text:style-name=\"" + _characterName + "\">" + content + "</text:span>");
+                }
+                else
+                {
+                    footnoteFormat.Append("<CharacterStyleRange AppliedCharacterStyle=\"" + "CharacterStyle/" + _characterName + "\"><Content>" + content + "</Content></CharacterStyleRange>");
+                }
+                footnoteContent.Append(footnoteFormat);
             }
             return isFootnote;
         }
+
+        /// <summary>
+        /// Store used Paragraph adn Character style name. This data used in ModifyIDStyle.cs
+        /// </summary>
+        /// <param name="styleName">a_b</param>
+        protected void AddUsedStyleName(string styleName)
+        {
+            if (!_usedStyleName.Contains(styleName))
+            {
+                _usedStyleName.Add(styleName);
+                AddUsedParentStyleName(styleName);
+            }
+        }
+
+        /// <summary>
+        /// Recursive Parents styles should be added
+        /// </summary>
+        /// <param name="styleName">current style Name</param>
+        protected void AddUsedParentStyleName(string styleName)
+        {
+            if (ParentClass.ContainsKey(styleName))
+            {
+                string parent = ParentClass[styleName];
+                parent = Common.LeftString(parent, "|");
+                if (_usedStyleName.Contains(parent))
+                {
+                    return;
+                }
+                _usedStyleName.Add(parent);
+                AddUsedParentStyleName(parent);
+            }
+        }
+
 
         protected virtual string StackPeekCharStyle(Stack<string> stack)
         {

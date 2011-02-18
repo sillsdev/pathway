@@ -1608,8 +1608,18 @@ namespace Test.InDesignConvert
             bool result = StoryXmlNodeTest(true);
             Assert.IsTrue(result, _inputCSS + " test Failed");
 
-            _expected.Add("Content", " 11-1=Israel:ReghiakoriDiksonari.");
-            XPath = "//ParagraphStyleRange//Footnote/ParagraphStyleRange[@AppliedParagraphStyle = \"ParagraphStyle/NoteGeneralParagraph..footnote-marker\"]";
+            _expected.Add("Content", " 11-1 = ");
+            XPath = "//ParagraphStyleRange/CharacterStyleRange/Footnote/ParagraphStyleRange/CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/$ID/[No character style]\"]";
+            result = StoryXmlNodeTest(false);
+            Assert.IsTrue(result, _inputCSS + " test Failed");
+
+            _expected.Add("Content", "Israel:");
+            XPath = "//ParagraphStyleRange/CharacterStyleRange/Footnote/ParagraphStyleRange/CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/Emphasis_1\"]";
+            result = StoryXmlNodeTest(false);
+            Assert.IsTrue(result, _inputCSS + " test Failed");
+
+            _expected.Add("Content", " Reghia kori Diksonari.");
+            XPath = "//ParagraphStyleRange/CharacterStyleRange/Footnote/ParagraphStyleRange/CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/span_7\"]";
             result = StoryXmlNodeTest(false);
             Assert.IsTrue(result, _inputCSS + " test Failed");
         }
