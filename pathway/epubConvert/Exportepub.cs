@@ -338,7 +338,7 @@ namespace SIL.PublishingSolution
                 bool renamedImages = false;
                 foreach (string file in imageFiles)
                 {
-                    switch (Path.GetExtension(file))
+                    switch (Path.GetExtension(file) == null ? "" : Path.GetExtension(file).ToLower())
                     {
                         case ".jpg":
                         case ".jpeg":
@@ -1623,7 +1623,7 @@ namespace SIL.PublishingSolution
                     opf.WriteAttributeString("media-type", "text/css");
                     opf.WriteEndElement(); // item
                 }
-                else if (name.EndsWith(".jpg") || name.EndsWith(".jpeg"))
+                else if (name.ToLower().EndsWith(".jpg") || name.ToLower().EndsWith(".jpeg"))
                 {
                     opf.WriteStartElement("item"); // item (image)
                     opf.WriteAttributeString("id", "image" + nameNoExt);
@@ -1631,7 +1631,7 @@ namespace SIL.PublishingSolution
                     opf.WriteAttributeString("media-type", "image/jpeg");
                     opf.WriteEndElement(); // item
                 }
-                else if (name.EndsWith(".gif"))
+                else if (name.ToLower().EndsWith(".gif"))
                 {
                     opf.WriteStartElement("item"); // item (image)
                     opf.WriteAttributeString("id", "image" + nameNoExt);
@@ -1639,7 +1639,7 @@ namespace SIL.PublishingSolution
                     opf.WriteAttributeString("media-type", "image/gif");
                     opf.WriteEndElement(); // item
                 }
-                else if (name.EndsWith(".png"))
+                else if (name.ToLower().EndsWith(".png"))
                 {
                     opf.WriteStartElement("item"); // item (image)
                     opf.WriteAttributeString("id", "image" + nameNoExt);
