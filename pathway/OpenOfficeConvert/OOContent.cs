@@ -633,6 +633,10 @@ namespace SIL.PublishingSolution
                     {
                         if (_reader.Name != "img")
                         {
+                            if (_reader.Name == "a")
+                            {
+                                continue;
+                            }
                             if (_metaValue.Length <= 0)
                             {
                                 CheckMetaRootDirectory();
@@ -1012,6 +1016,17 @@ namespace SIL.PublishingSolution
                 _anchor.Clear(); 
                 _anchorStart = false;
             }
+            //else
+            //{
+            //    if (_anchorIdValue.Length > 0)
+            //    {
+            //        string anchorName = _anchorBookMarkName.Replace("name", "");
+            //        _writer.WriteStartElement("text:reference-mark");
+            //        _writer.WriteAttributeString("text:name", _anchorIdValue.ToLower());
+            //        _writer.WriteEndElement();
+            //        _anchorIdValue = string.Empty;
+            //    }
+            //}
             return isAnchorTagOpen;
         }
 
