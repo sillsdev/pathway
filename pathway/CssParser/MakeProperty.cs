@@ -435,7 +435,11 @@ namespace SIL.PublishingSolution
         private void ValidateLineHeight(StyleAttribute styleAttributeInfo)
         {
             string attrValue = DeleteSeperator(styleAttributeInfo.StringValue);
-            if(styleAttributeInfo.StringValue.IndexOf(",") < 0)
+            if (styleAttributeInfo.StringValue.ToLower() == "none" || styleAttributeInfo.StringValue.ToLower() == "normal")
+            {
+                attrValue = "100%";
+            }
+            else if(styleAttributeInfo.StringValue.IndexOf(",") < 0)
             {
                 int value = int.Parse(styleAttributeInfo.StringValue)*100;
                 attrValue = value.ToString() + "%";
