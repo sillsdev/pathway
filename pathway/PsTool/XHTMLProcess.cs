@@ -626,11 +626,11 @@ namespace SIL.PublishingSolution
                 StringBuilder footnoteFormat = new StringBuilder();
                 if (outputType == Common.OutputType.ODT.ToString())
                 {
-                    footnoteFormat.Append("<text:span text:style-name=\"" + _characterName + "\">" + content + "</text:span>");
+                    footnoteFormat.Append("<text:span text:style-name=\"" + _characterName + "\">" + Common.ReplaceSymbolToText(content) + "</text:span>");
                 }
                 else
                 {
-                    footnoteFormat.Append("<CharacterStyleRange AppliedCharacterStyle=\"" + "CharacterStyle/" + _characterName + "\"><Content>" + content + "</Content></CharacterStyleRange>");
+                    footnoteFormat.Append("<CharacterStyleRange AppliedCharacterStyle=\"" + "CharacterStyle/" + _characterName + "\"><Content>" + Common.ReplaceSymbolToText(content) + "</Content></CharacterStyleRange>");
                 }
                 footnoteContent.Append(footnoteFormat);
             }

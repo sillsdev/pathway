@@ -936,7 +936,7 @@ namespace SIL.PublishingSolution
             string footerCall = footerClassName + "..footnote-call";
             string footerMarker = footerClassName + "..footnote-marker";
             if (IdAllClass.ContainsKey(footerCall) && String.IsNullOrEmpty(footCallSymb))
-                footCallSymb = IdAllClass[footerCall]["content"];
+                footCallSymb = string.Empty;
 
             _autoFootNoteCount++;
             _writer.WriteStartElement("text:note");
@@ -1135,7 +1135,7 @@ namespace SIL.PublishingSolution
                 if (footCallSymb.IndexOf('(') >= 0)
                 {
                     string attrName = footCallSymb.Substring(footCallSymb.IndexOf('(') + 1, footCallSymb.Length - footCallSymb.IndexOf('(') - 2);
-                    footCallSymb = _reader.GetAttribute(attrName) + " ";
+                    footCallSymb = _reader.GetAttribute(attrName);
                 }
             }
         }
