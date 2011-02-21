@@ -671,8 +671,10 @@ namespace SIL.PublishingSolution
                 sb.AppendLine("}");
             }
             // nuke the @import statement (we're going off one CSS file here)
-            string contentNoImport = content.Substring(content.IndexOf(';') + 1);
-            sb.Append(contentNoImport);
+            //string contentNoImport = content.Substring(content.IndexOf(';') + 1);
+            //sb.Append(contentNoImport);
+            // remove the @import statement IF it exists in the css file
+            sb.Append(content.StartsWith("@import") ? content.Substring(content.IndexOf(';') + 1) : content);
             // write out the updated CSS file
             var writer = new StreamWriter(cssFile);
             writer.Write(sb.ToString());

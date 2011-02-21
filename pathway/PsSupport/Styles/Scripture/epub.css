@@ -15,7 +15,6 @@ padding-bottom : 2%;
 padding-top : 2%;
 }
 .Title_Secondary {
-display : block;
 font-size : 125%;
 font-weight : normal;
 font-style : italic;
@@ -26,7 +25,6 @@ padding-bottom : 2%;
 padding-top : 1%;
 }
 .Title_Tertiary {
-display : block;
 font-size : 100%;
 font-weight : normal;
 font-style : normal;
