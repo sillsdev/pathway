@@ -27,8 +27,19 @@
 	<xsl:variable name="lowercase" select="'abcdefghijklmnopqrstuvwxyz'" />
 	
 	<!--Straight copy for these elements. -->
-	<xsl:template match="xhtml:html | xhtml:head | xhtml:title | xhtml:link | xhtml:body | xhtml:a">
+	<xsl:template match="xhtml:html | xhtml:head | xhtml:title | xhtml:link | xhtml:a">
 		<xsl:copy>
+			<xsl:for-each select="@*">
+				<xsl:copy/>
+			</xsl:for-each>
+			<xsl:apply-templates/>
+		</xsl:copy>
+	</xsl:template>
+	
+	<!-- create an ID for the body element so we can link to it -->
+	<xsl:template match="xhtml:body">
+		<xsl:copy>
+			<xsl:attribute name="id"><xsl:text>body</xsl:text></xsl:attribute>
 			<xsl:for-each select="@*">
 				<xsl:copy/>
 			</xsl:for-each>

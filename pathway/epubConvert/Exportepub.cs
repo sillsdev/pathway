@@ -243,6 +243,7 @@ namespace SIL.PublishingSolution
                     // EDB 10/29/2010 FWR-2697 - remove when fixed in FLEx
                     Common.StreamReplaceInFile(revFile, "<ReversalIndexEntry_Self", "<span class='ReversalIndexEntry_Self'");
                     Common.StreamReplaceInFile(revFile, "</ReversalIndexEntry_Self", "</span");
+                    Common.StreamReplaceInFile(revFile, "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"utf-8\" lang=\"utf-8\"", string.Format("<html  xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'", langArray[0], getTextDirection(langArray[0])));
                     // now split out the html as needed
                     List<string> fileNameWithPath = new List<string>();
                     fileNameWithPath = Common.SplitXhtmlFile(revFile, "letHead", "RevIndex", true);
@@ -1763,7 +1764,7 @@ namespace SIL.PublishingSolution
                     ncx.WriteElementString("text", "Reversal Index");
                     ncx.WriteEndElement(); // navlabel
                     ncx.WriteStartElement("content");
-                    ncx.WriteAttributeString("src", name);
+                    ncx.WriteAttributeString("src", name + "#body");
                     ncx.WriteEndElement(); // meta
                     index++;
                     RevIndex = true;

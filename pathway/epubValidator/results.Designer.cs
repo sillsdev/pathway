@@ -38,6 +38,8 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.Location = new System.Drawing.Point(13, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(378, 18);
@@ -46,6 +48,7 @@
             // 
             // btnClose
             // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnClose.Location = new System.Drawing.Point(397, 12);
             this.btnClose.Name = "btnClose";
@@ -56,6 +59,8 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.Location = new System.Drawing.Point(12, 38);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(379, 35);
@@ -76,6 +81,9 @@
             // 
             // textBox1
             // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.BackColor = System.Drawing.SystemColors.Window;
             this.textBox1.Location = new System.Drawing.Point(16, 100);
             this.textBox1.Multiline = true;
