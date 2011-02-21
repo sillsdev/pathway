@@ -3461,7 +3461,7 @@ namespace SIL.PublishingSolution
                 }
                 else if (e.KeyCode == Keys.F1)
                 {
-                    Common.PathwayHelpSetup(cTool.BtnScripture.Enabled, Common.FromRegistry("Help"));
+                    Common.PathwayHelpSetup();
                     Common.HelpProv.SetHelpNavigator(cTool, HelpNavigator.Topic);
                     Common.HelpProv.SetHelpKeyword(cTool, "Overview.htm");
                     SendKeys.Send("{F1}");

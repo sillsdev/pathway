@@ -1925,16 +1925,14 @@ return FromProg(file);
         /// <summary>
         /// setup help file
         /// </summary>
-        /// <param name="bteEdition">true for Bible Translation Edition</param>
-        /// <param name="helpDirectory">Path for where to find help file</param>
-        public static void PathwayHelpSetup(bool bteEdition, string helpDirectory)
+        public static void PathwayHelpSetup()
         {
             try
             {
-                string edition = bteEdition ? "BTE" : "SE";
-                string helpName = string.Format("Pathway_Configuration_Tool_{0}.chm", edition);
-                string helpPath = PathCombine(helpDirectory, helpName);
-                HelpProv.HelpNamespace = helpPath;
+                var helpFolder = FromRegistry("Help");
+                var directoryInfo = new DirectoryInfo(helpFolder);
+                var fileInfoList = directoryInfo.GetFiles("*.chm");
+                HelpProv.HelpNamespace = fileInfoList[0].FullName;
             }
             catch
             {

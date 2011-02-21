@@ -70,8 +70,7 @@ namespace SIL.PublishingSolution
         {
             CreateColumn();
             LoadGridValues(sender);
-            var iType = true;
-            Common.PathwayHelpSetup(iType, Common.FromRegistry("Help"));
+            Common.PathwayHelpSetup();
             Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
             Common.HelpProv.SetHelpKeyword(this, _helpTopic);
             CreateToolTip();
@@ -357,9 +356,7 @@ namespace SIL.PublishingSolution
 
         private void BtnHelp_Click(object sender, EventArgs e)
         {
-            var iType = true;
-            //iType = InputType.ToLower() != "scripture";
-            Common.PathwayHelpSetup(iType, Common.FromRegistry("Help"));
+            Common.PathwayHelpSetup();
             Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
             Common.HelpProv.SetHelpKeyword(this, _helpTopic);
             SendKeys.Send("{F1}");

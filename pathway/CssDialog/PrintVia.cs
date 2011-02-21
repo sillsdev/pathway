@@ -236,8 +236,7 @@ namespace SIL.PublishingSolution
             LoadExtraProcessing();
             LoadProperty();
             txtSaveInFolder.Text = Common.GetSaveInFolder(Param.DefaultValue[Param.PublicationLocation], DatabaseName, cmbSelectLayout.Text);
-            var iType = true;
-            Common.PathwayHelpSetup(iType, Common.FromRegistry("Help"));
+            Common.PathwayHelpSetup();
             Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
             Common.HelpProv.SetHelpKeyword(this, _helpTopic);
             Common.databaseName = DatabaseName;
@@ -549,11 +548,7 @@ namespace SIL.PublishingSolution
 
         private void BtnHelp_Click(object sender, EventArgs e)
         {
-            var helpFolder = Common.FromRegistry("Help");
-            var directoryInfo = new DirectoryInfo(helpFolder);
-            var fileInfoList = directoryInfo.GetFiles("*BTE.chm");
-            var iType = fileInfoList.Length > 0;
-            Common.PathwayHelpSetup(iType, helpFolder);
+            Common.PathwayHelpSetup();
             Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
             Common.HelpProv.SetHelpKeyword(this, _helpTopic);
             SendKeys.Send("{F1}");
