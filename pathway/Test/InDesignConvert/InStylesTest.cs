@@ -708,7 +708,7 @@ namespace Test.InDesignConvert
             XmlNode node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
             string result = node.Attributes["type"].Value;
             result = result + "_" + node.InnerText;
-            Assert.AreEqual(result, "enumeration_Auto", classname + "test failed");
+            Assert.AreEqual(result, "unit_14", classname + "test failed");
         }
         #endregion
 
