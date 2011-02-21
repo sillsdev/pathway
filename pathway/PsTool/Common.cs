@@ -1601,15 +1601,23 @@ return FromProg(file);
             {
                 if (!outputFile.Equals(keepFilename))
                 {
-                    // Did we modify this file during our export? If so, delete it
-                    if (File.GetLastWriteTime(outputFile).CompareTo(TimeStarted) > 0)
+                    try
                     {
-                        File.Delete(outputFile);
+                        // Did we modify this file during our export? If so, delete it
+                        if (File.GetLastWriteTime(outputFile).CompareTo(TimeStarted) > 0)
+                        {
+                            File.Delete(outputFile);
+                        }
+                        // delete the Scripture.de / Dictionary.de file as well
+                        else if (outputFile.EndsWith(".de"))
+                        {
+                            File.Delete(outputFile);
+                        }
                     }
-                    // delete the Scripture.de / Dictionary.de file as well
-                    else if (outputFile.EndsWith(".de"))
+                    catch (Exception)
                     {
-                        File.Delete(outputFile);
+                        // problem with this file - just continue with the next one
+                        continue;
                     }
                 }
             }
