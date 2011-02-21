@@ -71,7 +71,7 @@
 }
 .Note_CrossHYPHENReference_Paragraph::footnote-marker {
     font-weight: bold;
-    content: string(chapter) string(verse) ' = ';
+    content: string(chapter) string(verse) ' ';
     /* content: string(footnoteMarker); font-size: 6pt; vertical-align: super; color: purple; */
     text-align: left;
 }
@@ -93,7 +93,7 @@
 }
 .Note_General_Paragraph::footnote-marker {
     font-weight: bold;
-    content: string(chapter) string(verse) ' = ';
+    content: string(chapter) string(verse) ' ';
     /* content: string(footnoteMarker); font-size: 6pt; vertical-align: super; color: purple; */
     text-align: left;
 }

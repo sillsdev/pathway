@@ -175,6 +175,7 @@ namespace SIL.PublishingSolution
                 fluffedCssFullName = Common.PathCombine(outDir, Path.GetFileName(tmpCss));
             File.Copy(tmpCss, fluffedCssFullName, true);
             File.Delete(tmpCss);
+            Common.StreamReplaceInFile(fluffedCssFullName, "string(verse) ' = '", "string(verse) ' '"); //TD-1945
             }
             catch (Exception)
             {
