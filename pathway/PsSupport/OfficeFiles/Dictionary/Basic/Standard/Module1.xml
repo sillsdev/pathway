@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Feb-10-2011 for TD-1888(header for reversal only export wrong)
+&apos;Changed On Feb-22-2011 for TD-1916(Paratext Open Office even header missing)
 
 &apos;Define the values to Constant Variables for First Guide word, Last Guide word ,Headword Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -200,9 +200,9 @@ Sub StartDontForget
 		End If
 	End If
 	
-	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; Then
-		ExportToDOC_PDF
-	End IF	
+	&apos;If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; Then
+		&apos;ExportToDOC_PDF
+	&apos;End IF	
 End Sub
 
 Sub StartDontForgetTD1485
@@ -332,6 +332,11 @@ oProgressBarModel.ProgressValue = ProgressValue
 	&apos;AutoSaveEnableDisable(true) &apos;Enable &quot;Auto Recovery&quot;
 	
 	oContWindow.Visible = true 
+	
+	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; Then
+		ExportToDOC_PDF
+	End IF
+		
 	&apos;msgbox keep
 	&apos;&apos;msgbox mytime &amp; chr(10) &amp; now
 Exit Sub

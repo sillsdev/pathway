@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Jan-24-2011 for TD-1832(OpenOffice: Show abbreviation or book name for header)
+&apos;Changed On Feb-22-2011 for TD-1916(Paratext Open Office even header missing)
 
 &apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -235,9 +235,9 @@ Sub StartDontForget
 		End If
 	End If
 	
-	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; Then
-		ExportToDOC_PDF
-	End IF
+	&apos;If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; Then
+		&apos;ExportToDOC_PDF
+	&apos;End IF
 End Sub
 
 Sub StartDontForgetTD1485
@@ -327,7 +327,7 @@ End Function
 &apos;The main procedure to show the Reference (Ex. Mark 1:1 - 2:26)
 Sub SetReference()
 
-&apos;On Error GoTo MyError:
+On Error GoTo MyError:
 
 Dim VerseCharStyle, ChapterCharStyle, BookCharStyle
 Dim isEndChapterFoundAlready As Boolean
@@ -551,6 +551,10 @@ Loop While oVC.jumpToNextPage
 	&apos;AutoSaveEnableDisable(true)&apos;enable the &quot;Auto Recovery&quot;
 		
 	oContWindow.Visible = true 
+	
+	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; Then
+		ExportToDOC_PDF
+	End IF
 Exit Sub
 MyError:
 	If isProgressClosed = False Then
