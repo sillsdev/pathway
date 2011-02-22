@@ -25,6 +25,23 @@
     text-indent: 0px;
     text-align: center;
 }
+.pictureColumn {
+    float: right;
+    width: 100%;
+    margin: 0px 0px 5px 5px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.picturePage {
+    float: top;
+    clear: both;
+    width: 100%;
+    margin: 0px 5px 5px 0px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
 .pictureRight > .picture {
     width: 95px;
     height: 84px;

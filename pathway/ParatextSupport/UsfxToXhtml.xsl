@@ -412,10 +412,10 @@
 		<xsl:variable name="pictureLoc">
 			<xsl:choose>
 				<xsl:when test="@size = 'span'">
-					<xsl:element name="pictureLoc">pictureCenter</xsl:element>
+					<xsl:element name="pictureLoc">picturePage</xsl:element>
 				</xsl:when>
 				<xsl:otherwise> <!-- col -->
-					<xsl:element name="pictureLoc">pictureRight</xsl:element>
+					<xsl:element name="pictureLoc">pictureColumn</xsl:element>
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
