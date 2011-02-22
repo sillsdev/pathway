@@ -24,6 +24,7 @@ namespace SIL.PublishingSolution
         Dictionary<string, string> standardSize = new Dictionary<string, string>();
         public string Caption = "Pathway Configuration Tool";
         public TraceSwitch _traceOnBL = new TraceSwitch("General", "Trace level for application");
+        private List<string> _infoValue = new List<string>();
         private List<string> _propertyValue = new List<string>();
         #endregion
 
@@ -928,6 +929,36 @@ namespace SIL.PublishingSolution
             _screenMode = ScreenMode.Edit;
         }
 
+        /// <summary>
+        /// Save Info tab initial value
+        /// </summary>
+        private void SaveInfoValue()
+        {
+            Control.ControlCollection ctls = cTool.TabControl1.TabPages[0].Controls;
+            _infoValue.Clear();
+            foreach (Control control in ctls)
+            {
+                if (control.GetType().Name == "Label")
+                    continue;
+
+                string val;
+
+                if (control.GetType().Name == "CheckBox")
+                {
+                    CheckBox checkBox = (CheckBox)control;
+                    val = checkBox.Checked.ToString();
+                }
+                else
+                {
+                    val = control.Text;
+                }
+                _infoValue.Add(val);
+            }
+        }
+
+        /// <summary>
+        /// Save property Initial Value
+        /// </summary>
         private void SavePropertyValue()
         {
             Control.ControlCollection ctls = cTool.TabControl1.TabPages[1].Controls;
@@ -2811,6 +2842,42 @@ namespace SIL.PublishingSolution
             return propertyModified;
         }
 
+        /// <summary>
+        /// Comparing the loaded values in info tab values vs changed info values
+        /// Except the Label controls
+        /// </summary>
+        /// <returns></returns>
+        private bool IsInfoValueModified()
+        {
+            if (_infoValue.Count == 0)
+                return false;
+
+            bool infoValueModified = false;
+            int i = 0;
+            Control.ControlCollection ctls = cTool.TabControl1.TabPages[0].Controls;
+            foreach (Control control in ctls)
+            {
+                if (control.GetType().Name == "Label") continue;
+                string val;
+
+                if (control.GetType().Name == "CheckBox")
+                {
+                    CheckBox checkBox = (CheckBox)control;
+                    val = checkBox.Checked.ToString();
+                }
+                else
+                {
+                    val = control.Text;
+                }
+
+                if (_infoValue[i++] != val)
+                {
+                    infoValueModified = true;
+                    break;
+                }
+            }
+            return infoValueModified;
+        }
         public void CreateToolTip()
         {
             ToolTip toolTip = new ToolTip();
