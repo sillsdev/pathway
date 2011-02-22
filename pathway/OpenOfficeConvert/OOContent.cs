@@ -718,7 +718,11 @@ namespace SIL.PublishingSolution
         }
         private void Write()
         {
-            if (_isDisplayNone) return; // skip the node
+            if (_isDisplayNone)
+            {
+                CollectFootNoteChapterVerse(ReplaceString(_reader.Value), Common.OutputType.ODT.ToString());
+                return; // skip the node
+            }
 
             if (_isNewParagraph)
             {

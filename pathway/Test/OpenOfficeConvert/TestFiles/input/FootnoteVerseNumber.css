@@ -215,3 +215,7 @@
     margin-left: 0pt;
     string-set: verse content();
 }
+
+.Verse_Number1 {
+display:none;
+}
