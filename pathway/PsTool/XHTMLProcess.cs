@@ -616,7 +616,7 @@ namespace SIL.PublishingSolution
             {
                 _chapterNo = content;
             }
-            else if (_className.ToLower() == "versenumber")
+            else if (_className.ToLower() == "versenumber" || _className.ToLower() == "versenumber1")
             {
                 _verseNo = content;
             }
