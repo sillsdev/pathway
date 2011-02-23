@@ -968,6 +968,13 @@ namespace SIL.PublishingSolution
                             _embeddedFonts[node.Value] = new EmbeddedFont(node.Value);
                         }
                     }
+                    else
+                    {
+                        // Paratext case (no .ldml file) - fall back on Charis
+                        _langFontDictionary[language] = "Charis SIL"; // set the font used by this language
+                        _embeddedFonts["Charis SIL"] = new EmbeddedFont("Charis SIL");
+
+                    }
                 }
                 catch
                 {
