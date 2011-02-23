@@ -49,6 +49,7 @@ namespace SIL.PublishingSolution
             nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
             nsmgr.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
             nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+            nsmgr.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
 
             _root = _styleXMLdoc.DocumentElement;
             if (_root == null)
