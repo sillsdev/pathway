@@ -1596,10 +1596,26 @@ return FromProg(file);
         /// <param name="keepFilename">This is the permanent output file you want to keep (.odt, .epub, etc.)</param>
         public static void CleanupOutputDirectory(string outputFolder, string keepFilename)
         {
+            var al = new ArrayList();
+            al.Add(keepFilename);
+            CleanupOutputDirectory(outputFolder, al);
+        }
+
+        /// <summary>
+        /// Cleans up the output directory of all "temporary" files created during the export process.
+        /// This is determined by comparing the timestamp on each file to the DateTime we stored in the
+        /// PrintVia.On_OK() method. Files with an earlier timestamp will be ignored, except for the .de file
+        /// (that gets copied over as part of the export process).
+        /// This override allows for multiple files to be saved
+        /// </summary>
+        /// <param name="outputFolder">Output directory to clean up</param>
+        /// <param name="keepFilenames">ArrayList of string elements; these are the files to keep.</param>
+        public static void CleanupOutputDirectory(string outputFolder, ArrayList keepFilenames)
+        {
             var outputFiles = Directory.GetFiles(outputFolder);
             foreach (var outputFile in outputFiles)
             {
-                if (!outputFile.Equals(keepFilename))
+                if (!keepFilenames.Contains(outputFile))
                 {
                     try
                     {
