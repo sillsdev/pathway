@@ -167,12 +167,12 @@ namespace SIL.PublishingSolution
             return mat.Count;
         }
 
-        public void InitializeObject(OldStyles styleInfo, string fileType)
-        {
-            _structStyles = styleInfo;
-            _fileType = fileType;
-            _odtFiles = _structStyles.MasterDocument;
-        }
+        //public void InitializeObject(OldStyles styleInfo, string fileType)
+        //{
+        //    _structStyles = styleInfo;
+        //    _fileType = fileType;
+        //    _odtFiles = _structStyles.MasterDocument;
+        //}
 
 
         public Dictionary<string, ArrayList> CreateStory(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
@@ -365,6 +365,7 @@ namespace SIL.PublishingSolution
 
         private void InitializeData(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
         {
+            _fileType = projInfo.OutputExtension;
             _allStyle = new Stack<string>();
             _allParagraph = new Stack<string>();
             _allCharacter = new Stack<string>();
@@ -599,6 +600,8 @@ namespace SIL.PublishingSolution
 
         private void ProcessXHTML(ProgressBar pb, string Sourcefile, string targetPath)
         {
+            if (_fileType == "odm") return;
+            
             if (pb != null && pb.Maximum == 0)
             {
                 progressBarError = true;

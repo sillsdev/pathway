@@ -237,8 +237,9 @@ namespace Test.PsExport
             TestPathSetup(testName);
 
             var di = new DirectoryInfo(_outputTestPath);
-            if (di.Exists)
-                di.Delete(true);
+            //if (di.Exists)
+            //    di.Delete(true);
+            Common.DeleteDirectory(_outputTestPath);
             di.Create();
 
             Common.SupportFolder = "";
