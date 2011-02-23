@@ -50,10 +50,6 @@ namespace Test.epubConvert
             Assert.IsTrue(EmbeddedFont.IsInstalled(silFont.Filename));
             Assert.IsTrue(silFont.SILFont);
             Assert.IsTrue(silFont.Serif);
-            const string weight = "normal";
-            Assert.AreEqual(weight, silFont.Weight);
-            const string style = "normal";
-            Assert.AreEqual(style, silFont.Style);
         }
 
         /// <summary>
@@ -67,10 +63,6 @@ namespace Test.epubConvert
             Assert.IsTrue(EmbeddedFont.IsInstalled(silFont.Filename));
             Assert.IsTrue(silFont.SILFont);
             Assert.IsFalse(silFont.Serif);
-            const string weight = "normal";
-            Assert.AreEqual(weight, silFont.Weight);
-            const string style = "normal";
-            Assert.AreEqual(style, silFont.Style);
         }
 
         /// <summary>
@@ -84,10 +76,6 @@ namespace Test.epubConvert
             Assert.IsTrue(EmbeddedFont.IsInstalled(silFont.Filename));
             Assert.IsTrue(silFont.SILFont);
             Assert.IsTrue(silFont.Serif);
-            const string weight = "normal";
-            Assert.AreEqual(weight, silFont.Weight);
-            const string style = "normal";
-            Assert.AreEqual(style, silFont.Style);
         }
         /// <summary>
         /// Test the Charis SIL font
@@ -100,10 +88,6 @@ namespace Test.epubConvert
             Assert.IsTrue(EmbeddedFont.IsInstalled(silFont.Filename));
             Assert.IsTrue(silFont.SILFont);
             Assert.IsTrue(silFont.Serif);
-            const string weight = "normal";
-            Assert.AreEqual(weight, silFont.Weight);
-            const string style = "normal";
-            Assert.AreEqual(style, silFont.Style);
         }
         /// <summary>
         /// Test the Dai Banna font
@@ -116,10 +100,6 @@ namespace Test.epubConvert
             Assert.IsTrue(EmbeddedFont.IsInstalled(silFont.Filename));
             Assert.IsTrue(silFont.SILFont);
             Assert.IsTrue(silFont.Serif);
-            const string weight = "normal";
-            Assert.AreEqual(weight, silFont.Weight);
-            const string style = "normal";
-            Assert.AreEqual(style, silFont.Style);
         }
         /// <summary>
         /// Test the Doulos SIL font
@@ -132,10 +112,6 @@ namespace Test.epubConvert
             Assert.IsTrue(EmbeddedFont.IsInstalled(silFont.Filename));
             Assert.IsTrue(silFont.SILFont);
             Assert.IsTrue(silFont.Serif);
-            const string weight = "normal";
-            Assert.AreEqual(weight, silFont.Weight);
-            const string style = "normal";
-            Assert.AreEqual(style, silFont.Style);
         }
         /// <summary>
         /// Test the SIL Ezra font
@@ -148,10 +124,6 @@ namespace Test.epubConvert
             Assert.IsTrue(EmbeddedFont.IsInstalled(silFont.Filename));
             Assert.IsTrue(silFont.SILFont);
             Assert.IsTrue(silFont.Serif);
-            const string weight = "normal";
-            Assert.AreEqual(weight, silFont.Weight);
-            const string style = "normal";
-            Assert.AreEqual(style, silFont.Style);
         }
         /// <summary>
         /// Test the SIL Galatia font
@@ -164,10 +136,6 @@ namespace Test.epubConvert
             Assert.IsTrue(EmbeddedFont.IsInstalled(silFont.Filename));
             Assert.IsTrue(silFont.SILFont);
             Assert.IsTrue(silFont.Serif);
-            const string weight = "normal";
-            Assert.AreEqual(weight, silFont.Weight);
-            const string style = "normal";
-            Assert.AreEqual(style, silFont.Style);
         }
         /// <summary>
         /// Test the SIL Gentium Basic font
@@ -180,10 +148,6 @@ namespace Test.epubConvert
             Assert.IsTrue(EmbeddedFont.IsInstalled(silFont.Filename));
             Assert.IsTrue(silFont.SILFont);
             Assert.IsTrue(silFont.Serif);
-            const string weight = "normal";
-            Assert.AreEqual(weight, silFont.Weight);
-            const string style = "normal";
-            Assert.AreEqual(style, silFont.Style);
         }
         /// <summary>
         /// Test the SIL Lateef font
@@ -196,10 +160,6 @@ namespace Test.epubConvert
             Assert.IsTrue(EmbeddedFont.IsInstalled(silFont.Filename));
             Assert.IsTrue(silFont.SILFont);
             Assert.IsTrue(silFont.Serif);
-            const string weight = "normal";
-            Assert.AreEqual(weight, silFont.Weight);
-            const string style = "normal";
-            Assert.AreEqual(style, silFont.Style);
         }
         /// <summary>
         /// Test the SIL Nuosu (Yi) font
@@ -212,10 +172,6 @@ namespace Test.epubConvert
             Assert.IsTrue(EmbeddedFont.IsInstalled(silFont.Filename));
             Assert.IsTrue(silFont.SILFont);
             Assert.IsTrue(silFont.Serif);
-            const string weight = "normal";
-            Assert.AreEqual(weight, silFont.Weight);
-            const string style = "normal";
-            Assert.AreEqual(style, silFont.Style);
         }
         /// <summary>
         /// Test the SIL Padauk font
@@ -228,10 +184,6 @@ namespace Test.epubConvert
             Assert.IsTrue(EmbeddedFont.IsInstalled(silFont.Filename));
             Assert.IsTrue(silFont.SILFont);
             Assert.IsTrue(silFont.Serif);
-            const string weight = "normal";
-            Assert.AreEqual(weight, silFont.Weight);
-            const string style = "normal";
-            Assert.AreEqual(style, silFont.Style);
         }
         /// <summary>
         /// Test the SIL Scheharazade) font
@@ -244,10 +196,6 @@ namespace Test.epubConvert
             Assert.IsTrue(EmbeddedFont.IsInstalled(silFont.Filename));
             Assert.IsTrue(silFont.SILFont);
             Assert.IsTrue(silFont.Serif);
-            const string weight = "normal";
-            Assert.AreEqual(weight, silFont.Weight);
-            const string style = "normal";
-            Assert.AreEqual(style, silFont.Style);
         }
         /// <summary>
         /// Test the SIL Sophia Nubian font
@@ -260,10 +208,6 @@ namespace Test.epubConvert
             Assert.IsTrue(EmbeddedFont.IsInstalled(silFont.Filename));
             Assert.IsTrue(silFont.SILFont);
             Assert.IsTrue(silFont.Serif);
-            const string weight = "normal";
-            Assert.AreEqual(weight, silFont.Weight);
-            const string style = "normal";
-            Assert.AreEqual(style, silFont.Style);
         }
         /// <summary>
         /// Test the SIL Tai Heritage Pro font
@@ -276,10 +220,6 @@ namespace Test.epubConvert
             Assert.IsTrue(EmbeddedFont.IsInstalled(silFont.Filename));
             Assert.IsTrue(silFont.SILFont);
             Assert.IsTrue(silFont.Serif);
-            const string weight = "normal";
-            Assert.AreEqual(weight, silFont.Weight);
-            const string style = "normal";
-            Assert.AreEqual(style, silFont.Style);
         }
 
     }

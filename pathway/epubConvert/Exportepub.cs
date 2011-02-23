@@ -68,8 +68,10 @@ namespace SIL.PublishingSolution
         public string Format { get; set; }
         public string Source { get; set; }
         public bool EmbedFonts { get; set; }
+        public bool IncludeFontVariants { get; set; }
         public string CoverImage { get; set; }
         public string TocLevel { get; set; }
+        public int MaxImageWidth { get; set; }
 
         // interface methods
         public string ExportType
@@ -338,6 +340,7 @@ namespace SIL.PublishingSolution
                 // copy over the image files
                 string[] imageFiles = Directory.GetFiles(tempFolder);
                 bool renamedImages = false;
+                Image image;
                 foreach (string file in imageFiles)
                 {
                     switch (Path.GetExtension(file) == null ? "" : Path.GetExtension(file).ToLower())
@@ -351,7 +354,7 @@ namespace SIL.PublishingSolution
                             string dest = Common.PathCombine(contentFolder, name);
                             // sanity check - if the image is gigantic, scale it
                             image = Image.FromFile(file);
-                            if (image.Width > 600)
+                            if (image.Width > MaxImageWidth)
                             {
                                 // need to scale image
                                 var img = ResizeImage(image);
@@ -387,7 +390,7 @@ namespace SIL.PublishingSolution
                             using (var fileStream = new FileStream(Common.PathCombine(contentFolder, imageName), FileMode.CreateNew))
                             {
                                 image = Image.FromFile(file);
-                                if (image.Width > 600)
+                                if (image.Width > MaxImageWidth)
                                 {
                                     var img = ResizeImage(image);
                                     img.Save(fileStream, System.Drawing.Imaging.ImageFormat.Png);
@@ -589,6 +592,29 @@ namespace SIL.PublishingSolution
                 }
                 string dest = Common.PathCombine(contentFolder, embeddedFont.Filename);
                 File.Copy(Path.Combine(FontInternals.GetFontFolderPath(), embeddedFont.Filename), dest);
+                if (IncludeFontVariants)
+                {
+                    // italic
+                    if (embeddedFont.HasItalic && embeddedFont.ItalicFilename != embeddedFont.Filename)
+                    {
+                        dest = Common.PathCombine(contentFolder, embeddedFont.ItalicFilename);
+                        if (!File.Exists(dest))
+                        {
+                            File.Copy(Path.Combine(FontInternals.GetFontFolderPath(), embeddedFont.ItalicFilename),
+                                      dest);
+                        }
+                    }
+                    // bold
+                    if (embeddedFont.HasBold && embeddedFont.BoldFilename != embeddedFont.Filename)
+                    {
+                        dest = Common.PathCombine(contentFolder, embeddedFont.BoldFilename);
+                        if (!File.Exists(dest))
+                        {
+                            File.Copy(Path.Combine(FontInternals.GetFontFolderPath(), embeddedFont.BoldFilename),
+                                      dest);
+                        }
+                    }
+                }
 
             }
             // clean up
@@ -636,18 +662,48 @@ namespace SIL.PublishingSolution
                     sb.Append(" font-family : ");
                     sb.Append(embeddedFont.Name);
                     sb.AppendLine(";");
-                    sb.Append(" font-weight : ");
-                    sb.Append(embeddedFont.Weight);
-                    sb.AppendLine(";");
-                    sb.Append(" font-style : ");
-                    sb.Append(embeddedFont.Style);
-                    sb.AppendLine(";");
+                    sb.AppendLine(" font-weight : normal;");
+                    sb.AppendLine(" font-style : normal;");
                     sb.AppendLine(" font-variant : normal;");
                     sb.AppendLine(" font-size : all;");
                     sb.Append(" src : url(");
                     sb.Append(Path.GetFileName(embeddedFont.Filename));
                     sb.AppendLine(");");
                     sb.AppendLine("}");
+                    if (IncludeFontVariants)
+                    {
+                        // Italic version
+                        if (embeddedFont.HasItalic)
+                        {
+                            sb.AppendLine("@font-face {");
+                            sb.Append(" font-family : i_");
+                            sb.Append(embeddedFont.Name);
+                            sb.AppendLine(";");
+                            sb.AppendLine(" font-weight : normal;");
+                            sb.AppendLine(" font-style : italic;");
+                            sb.AppendLine(" font-variant : normal;");
+                            sb.AppendLine(" font-size : all;");
+                            sb.Append(" src : url(");
+                            sb.Append(Path.GetFileName(embeddedFont.ItalicFilename));
+                            sb.AppendLine(");");
+                            sb.AppendLine("}");
+                        }
+                        if (embeddedFont.HasBold)
+                        {
+                            sb.AppendLine("@font-face {");
+                            sb.Append(" font-family : b_");
+                            sb.Append(embeddedFont.Name);
+                            sb.AppendLine(";");
+                            sb.AppendLine(" font-weight : bold;");
+                            sb.AppendLine(" font-style : normal;");
+                            sb.AppendLine(" font-variant : normal;");
+                            sb.AppendLine(" font-size : all;");
+                            sb.Append(" src : url(");
+                            sb.Append(Path.GetFileName(embeddedFont.BoldFilename));
+                            sb.AppendLine(");");
+                            sb.AppendLine("}");
+                        }
+                    }
                 }
             }
             // add :lang pseudo-elements for each language and set them to the proper font
@@ -659,6 +715,7 @@ namespace SIL.PublishingSolution
                 // set the font for the body element
                 if (firstLang)
                 {
+                    sb.AppendLine("/* default language font info */");
                     sb.AppendLine("body {");
                     sb.Append("font-family: '");
                     sb.Append(language.Value);
@@ -677,9 +734,61 @@ namespace SIL.PublishingSolution
                     sb.Append(getTextDirection(language.Key));
                     sb.AppendLine(";");
                     sb.AppendLine("}");
+                    if (IncludeFontVariants)
+                    {
+                        // Italic version
+                        if (embeddedFont.HasItalic)
+                        {
+                            sb.Append(".partofspeech, .example, .grammatical-info, .lexref-type, ");
+                            sb.Append(".parallel_passage_reference, .Parallel_Passage_Reference, ");
+                            sb.AppendLine(".Emphasis, .pictureCaption, .Section_Range_Paragraph {");
+                            sb.Append("font-family: 'i_");
+                            sb.Append(language.Value);
+                            sb.Append("', ");
+                            if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
+                            {
+                                sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
+                            }
+                            else
+                            {
+                                // fall back on a serif font if we can't find it (shouldn't happen)
+                                sb.AppendLine("Times, serif;");
+                            }
+                            sb.AppendLine("}");
+                        }
+                        // Bold version
+                        if (embeddedFont.HasBold)
+                        {
+                            sb.Append(
+                                ".headword, .headword-minor, .LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub, ");
+                            sb.Append(".LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub, .xsensenumber");
+                            sb.Append(
+                                ".complexform-form, .crossref, .LexEntry-publishStemComponentTarget-MLHeadWordPub, ");
+                            sb.Append(
+                                ".LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub, .LexSense-publishStemComponentTarget-OwnerOutlinePub, ");
+                            sb.Append(".LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub, .sense-crossref, ");
+                            sb.Append(".crossref-headword, .reversal-form, ");
+                            sb.Append(".Alternate_Reading, .Section_Head, .Section_Head_Minor, ");
+                            sb.AppendLine(".Inscription, .Intro_Section_Head, .Section_Head_Major, .iot {");
+                            sb.Append("font-family: 'b_");
+                            sb.Append(language.Value);
+                            sb.Append("', ");
+                            if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
+                            {
+                                sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
+                            }
+                            else
+                            {
+                                // fall back on a serif font if we can't find it (shouldn't happen)
+                                sb.AppendLine("Times, serif;");
+                            }
+                            sb.AppendLine("}");
+                        }
+                    }
                     // finished processing - clear the flag
                     firstLang = false;
                 }
+
                 // set the font for the *:lang(xxx) pseudo-element
                 sb.Append("*:lang(");
                 sb.Append(language.Key);
@@ -701,7 +810,113 @@ namespace SIL.PublishingSolution
                 sb.Append(getTextDirection(language.Key));
                 sb.AppendLine(";");
                 sb.AppendLine("}");
+
+                if (IncludeFontVariants)
+                {
+                    // italic version
+                    if (embeddedFont.HasItalic)
+                    {
+                        // dictionary
+                        sb.Append(".partofspeech:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .example:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .grammatical-info:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .lexref-type:lang(");
+                        sb.Append(language.Key);
+                        // scripture
+                        sb.Append("), .parallel_passage_reference:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .Parallel_Passage_Reference:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .Emphasis:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .pictureCaption:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .Section_Range_Paragraph:lang(");
+                        sb.Append(language.Key);
+                        sb.AppendLine(") {");
+                        sb.Append("font-family: 'i_");
+                        sb.Append(language.Value);
+                        sb.Append("', ");
+                        if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
+                        {
+                            sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
+                        }
+                        else
+                        {
+                            // fall back on a serif font if we can't find it (shouldn't happen)
+                            sb.AppendLine("Times, serif;");
+                        }
+                        sb.AppendLine("}");
+                    }
+                    // bold version
+                    if (embeddedFont.HasBold)
+                    {
+                        // dictionary
+                        sb.Append(".headword:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .headword-minor:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .xsensenumber:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .complexform-form:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .crossref:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .LexEntry-publishStemComponentTarget-MLHeadWordPub:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .LexSense-publishStemComponentTarget-OwnerOutlinePub:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .sense-crossref:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .crossref-headword:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .reversal-form:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .Alternate_Reading:lang(");
+                        // scripture
+                        sb.Append(language.Key);
+                        sb.Append("), .Section_Head:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .Section_Head_Minor:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .Inscription:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .Intro_Section_Head:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .Section_Head_Major:lang(");
+                        sb.Append(language.Key);
+                        sb.Append("), .iot:lang(");
+                        sb.Append(language.Key);
+                        sb.AppendLine(") {");
+                        sb.Append("font-family: 'b_");
+                        sb.Append(language.Value);
+                        sb.Append("', ");
+                        if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
+                        {
+                            sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
+                        }
+                        else
+                        {
+                            // fall back on a serif font if we can't find it (shouldn't happen)
+                            sb.AppendLine("Times, serif;");
+                        }
+                        sb.AppendLine("}");
+                    }
+                }
             }
+            sb.AppendLine("/* end auto-generated font info */");
+            sb.AppendLine();
             // nuke the @import statement (we're going off one CSS file here)
             //string contentNoImport = content.Substring(content.IndexOf(';') + 1);
             //sb.Append(contentNoImport);
@@ -963,13 +1178,12 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// Resizes the given image down to 600px and saves the results in the given destination file.
+        /// Resizes the given image down to MaxImageWidth pixels and returns the result.
         /// </summary>
         /// <param name="image">File to resize</param>
-        /// <param name="OutputFilename">Where to save the resized file</param>
         private Image ResizeImage(Image image)
         {
-            float nPercent = ((float)600 / (float)image.Width);
+            float nPercent = ((float)MaxImageWidth / (float)image.Width);
             int destW = (int) (image.Width * nPercent);
             int destH = (int) (image.Height*nPercent);
             var b = new Bitmap(destW, destH);
@@ -979,7 +1193,7 @@ namespace SIL.PublishingSolution
             g.Dispose();
             return (Image)b;
         }
-		
+
         /// <summary>
         /// Creates a cover image based on the language code and type of project (dictionary or scripture). This
         /// is saved as "cover.png" in the content (OEBPS) folder.
@@ -1324,6 +1538,30 @@ namespace SIL.PublishingSolution
                 // default - we're more concerned about accurate font rendering
                 EmbedFonts = true;
             }
+            if (othersfeature.ContainsKey("IncludeFontVariants"))
+            {
+                IncludeFontVariants = (othersfeature["IncludeFontVariants"].Trim().Equals("Yes")) ? true : false;
+            }
+            else
+            {
+                // false (for now)
+                IncludeFontVariants = true;
+            }
+            if (othersfeature.ContainsKey("MaxImageWidth"))
+            {
+                try
+                {
+                    MaxImageWidth = int.Parse(othersfeature["MaxImageWidth"].Trim());
+                }
+                catch (Exception)
+                {
+                    MaxImageWidth = 600;
+                }
+            }
+            else
+            {
+                MaxImageWidth = 600;
+            }
             // Cover Image
             if (othersfeature.ContainsKey("CoverImage"))
             {
@@ -1640,6 +1878,29 @@ namespace SIL.PublishingSolution
                     opf.WriteAttributeString("media-type", "font/opentype/"); 
                     opf.WriteEndElement(); // item
                     fontNum++;
+                    if (IncludeFontVariants)
+                    {
+                        // italic
+                        if (embeddedFont.HasItalic && embeddedFont.Filename.CompareTo(embeddedFont.ItalicFilename) != 0)
+                        {
+                            opf.WriteStartElement("item"); // item (charis embedded font)
+                            opf.WriteAttributeString("id", "epub.embedded.font_i_" + fontNum);
+                            opf.WriteAttributeString("href", embeddedFont.ItalicFilename);
+                            opf.WriteAttributeString("media-type", "font/opentype/");
+                            opf.WriteEndElement(); // item
+                            fontNum++;
+                        }
+                        // bold
+                        if (embeddedFont.HasBold && embeddedFont.Filename.CompareTo(embeddedFont.BoldFilename) != 0)
+                        {
+                            opf.WriteStartElement("item"); // item (charis embedded font)
+                            opf.WriteAttributeString("id", "epub.embedded.font_b_" + fontNum);
+                            opf.WriteAttributeString("href", embeddedFont.BoldFilename);
+                            opf.WriteAttributeString("media-type", "font/opentype/");
+                            opf.WriteEndElement(); // item
+                            fontNum++;
+                        }
+                    }
                 }
             }
             // now add the xhtml files to the manifest
