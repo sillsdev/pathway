@@ -135,6 +135,10 @@
       <option name="1 - Book Only" file="Rules_Yes.css" />
       <option name="2 - Book and Chapter" file="Rules_Yes.css" />
     </feature>
+    <feature name="IncludeFontVariants">
+      <option name="Yes" file="Rules_Yes.css" />
+      <option name="No" file="Rules_Yes.css" />
+    </feature>
     <feature name="Subject">
         <option name="Religion and Spirituality" file="Rules_Yes.css" />
         <option name="Reference" file="Rules_Yes.css" />
@@ -274,6 +278,8 @@
         <styleProperty name="EmbedFonts" value="Yes"/>
         <styleProperty name="CoverImage" value="cover.png"/>
         <styleProperty name="TOCLevel" value="2 - Book and Chapter"/>
+        <styleProperty name="IncludeFontVariants" value="Yes" />
+        <styleProperty name="MaxImageWidth" value="600" />
         <styleProperty name="Creator" value=" " />
         <styleProperty name="Publisher" value=" " />
         <styleProperty name="Type" value=" " />

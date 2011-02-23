@@ -106,6 +106,7 @@ namespace SIL.PublishingSolution
         protected string _fileProduce = "One";
         protected string _tocLevel = "2 - Book and Chapter";
         protected string _embedFonts = "Yes";
+        protected string _includeFontVariants = "Yes";
         public string MediaTypeEXE;
         public string StyleEXE;
         protected string _lastSelectedLayout = string.Empty;
@@ -868,6 +869,12 @@ namespace SIL.PublishingSolution
                             case "embedfonts":
                                 cTool.DdlEmbedFonts.SelectedItem = attribValue;
                                 break;
+                            case "includefontvariants":
+                                cTool.DdlIncludeFontVariants.SelectedItem = attribValue;
+                                break;
+                            case "maximagewidth":
+                                cTool.TxtMaxImageWidth.Text = attribValue;
+                                break;
                             case "toclevel":
                                 cTool.DdlTocLevel.SelectedItem = attribValue;
                                 break;
@@ -1072,6 +1079,11 @@ namespace SIL.PublishingSolution
                             case "EmbedFonts":
                                 if (!cTool.DdlEmbedFonts.Items.Contains(ctn.Text))
                                     cTool.DdlEmbedFonts.Items.Add(ctn.Text);
+                                break;
+
+                            case "IncludeFontVariants":
+                                if (!cTool.DdlIncludeFontVariants.Items.Contains(ctn.Text))
+                                    cTool.DdlIncludeFontVariants.Items.Add(ctn.Text);
                                 break;
 
                             case "TOCLevel":
@@ -1296,7 +1308,13 @@ namespace SIL.PublishingSolution
                             case "embedfonts":
                                 cTool.DdlEmbedFonts.SelectedItem = attribValue;
                                 break;
-                            case "CoverImage":
+                            case "includefontvariants":
+                                cTool.DdlIncludeFontVariants.SelectedItem = attribValue;
+                                break;
+                            case "maximagewidth":
+                                cTool.TxtMaxImageWidth.Text = attribValue;
+                                break;
+                            case "coverimage":
                                 if (File.Exists(attribValue))
                                 {
                                     try
@@ -2623,6 +2641,26 @@ namespace SIL.PublishingSolution
                 _embedFonts = cTool.DdlEmbedFonts.Text;
                 Param.UpdateOthersAtrrib("EmbedFonts", cTool.DdlEmbedFonts.Text, StyleName);
                 SetOthersSummary(sender, e);
+            }
+            catch { }
+        }
+
+        public void ddlIncludeFontVariants_SelectedIndexChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                _embedFonts = cTool.DdlEmbedFonts.Text;
+                Param.UpdateOthersAtrrib("IncludeFontVariants", cTool.DdlEmbedFonts.Text, StyleName);
+                SetOthersSummary(sender, e);
+            }
+            catch { }
+        }
+
+        public void txtMaxImageWidth_ValidatedBL(object sender)
+        {
+            try
+            {
+                Param.UpdateOthersAtrrib("MaxImageWidth", cTool.TxtMaxImageWidth.Text, StyleName);
             }
             catch { }
         }

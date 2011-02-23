@@ -609,6 +609,16 @@ namespace SIL.PublishingSolution
             get { return lblRights; }
         }
 
+        public TextBox TxtMaxImageWidth
+        {
+            get { return txtMaxImageWidth; }
+        }
+
+        public Label LblMaxImageWidth
+        {
+            get { return lblMaxImageWidth; }
+        }
+
         public ComboBox DdlEmbedFonts
         {
             get { return ddlEmbedFonts; }
@@ -617,6 +627,16 @@ namespace SIL.PublishingSolution
         public Label LblEmbedFonts
         {
             get { return lblEmbedFonts; }
+        }
+
+        public ComboBox DdlIncludeFontVariants
+        {
+            get { return ddlIncludeFontVariants; }
+        }
+
+        public Label LblIncludeFontVariants
+        {
+            get { return lblIncludeFontVariants; }
         }
 
         public PictureBox PicPreview
@@ -941,6 +961,18 @@ namespace SIL.PublishingSolution
         private void ddlEmbedFonts_SelectedIndexChanged(object sender, EventArgs e)
         {
             _CToolBL.ddlEmbedFonts_SelectedIndexChangedBL(sender, e);
+            EditOthersCSS(sender, e);
+        }
+
+        private void ddlIncludeFontVariants_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _CToolBL.ddlEmbedFonts_SelectedIndexChangedBL(sender, e);
+            EditOthersCSS(sender, e);
+        }
+
+        private void txtMaxImageWidth_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtMaxImageWidth_ValidatedBL(sender);
             EditOthersCSS(sender, e);
         }
 
