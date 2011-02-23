@@ -31,6 +31,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -348,8 +349,31 @@ namespace SIL.PublishingSolution
                             // .epub supports this image format - just copy the thing over
                             string name = Path.GetFileName(file);
                             string dest = Common.PathCombine(contentFolder, name);
-                            File.Copy(file, dest);
-                            continue;
+                            // sanity check - if the image is gigantic, scale it
+                            image = Image.FromFile(file);
+                            if (image.Width > 600)
+                            {
+                                // need to scale image
+                                var img = ResizeImage(image);
+                                switch (Path.GetExtension(file).ToLower())
+                                {
+                                    case ".jpg": 
+                                    case ".jpeg":
+                                        img.Save(dest, System.Drawing.Imaging.ImageFormat.Jpeg);
+                                        break;
+                                    case ".gif":
+                                        img.Save(dest, System.Drawing.Imaging.ImageFormat.Gif);
+                                        break;
+                                    default:
+                                        img.Save(dest, System.Drawing.Imaging.ImageFormat.Png);
+                                        break;
+                                }
+                            }
+                            else
+                            {
+                                File.Copy(file, dest);
+                            }
+                            break;
                         case ".bmp":
                         case ".tif":
                         case ".tiff":
@@ -362,14 +386,22 @@ namespace SIL.PublishingSolution
                             var imageName = Path.GetFileNameWithoutExtension(file) + ".png";
                             using (var fileStream = new FileStream(Common.PathCombine(contentFolder, imageName), FileMode.CreateNew))
                             {
-                                var image = Image.FromFile(file);
-                                image.Save(fileStream, System.Drawing.Imaging.ImageFormat.Png);
+                                image = Image.FromFile(file);
+                                if (image.Width > 600)
+                                {
+                                    var img = ResizeImage(image);
+                                    img.Save(fileStream, System.Drawing.Imaging.ImageFormat.Png);
+                                }
+                                else
+                                {
+                                    image.Save(fileStream, System.Drawing.Imaging.ImageFormat.Png);
+                                }
                             }
                             renamedImages = true;
-                            continue;
+                            break;
                         default:
                             // not an image file (or not one we recognize) - skip
-                            continue;
+                            break;
                     }
                 }
                 // be sure to clean up any hyperlink references to the old file types
@@ -930,6 +962,24 @@ namespace SIL.PublishingSolution
             return Path.GetFileName(xhtmlFileName);
         }
 
+        /// <summary>
+        /// Resizes the given image down to 600px and saves the results in the given destination file.
+        /// </summary>
+        /// <param name="image">File to resize</param>
+        /// <param name="OutputFilename">Where to save the resized file</param>
+        private Image ResizeImage(Image image)
+        {
+            float nPercent = ((float)600 / (float)image.Width);
+            int destW = (int) (image.Width * nPercent);
+            int destH = (int) (image.Height*nPercent);
+            var b = new Bitmap(destW, destH);
+            var g = Graphics.FromImage((Image) b);
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            g.DrawImage(image, 0, 0, destW, destH);
+            g.Dispose();
+            return (Image)b;
+        }
+		
         /// <summary>
         /// Creates a cover image based on the language code and type of project (dictionary or scripture). This
         /// is saved as "cover.png" in the content (OEBPS) folder.
