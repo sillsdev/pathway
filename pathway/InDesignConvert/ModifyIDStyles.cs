@@ -296,7 +296,8 @@ namespace SIL.PublishingSolution
                     {
                         var nameElement = (XmlElement)baselineShift;
                         string pointSize = className["PointSize"];
-                        int pt = int.Parse(pointSize);
+                        string point2 = Common.LeftString(pointSize, ".");
+                        int pt = int.Parse(point2);
                         //int baseshift = pt - 12;
                         int baseshift = pt * 2 / 3;
                         int point = pt * 2/3;

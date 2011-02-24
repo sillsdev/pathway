@@ -318,11 +318,19 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("AppliedCharacterStyle", "CharacterStyle/$ID/[No character style]");
             _writer.WriteStartElement("Content");
             _writer.WriteRaw("<?ACE 4?> ");
-            string leftPart = Common.LeftString(content.Replace("\r\n", " "), "<");
+            string replace = content.Replace("\r\n", " ");
+            //string leftPart = Common.LeftString(, "<");
+            string leftPart = Common.LeftString(replace, "<");
             _writer.WriteString(leftPart);
             _writer.WriteEndElement();
             _writer.WriteEndElement();
-            _writer.WriteRaw(content.Replace(leftPart, "").Replace("\r\n", " "));
+            string replaceLeft = content; 
+            //content.Replace(leftPart, "");
+            if (leftPart.Length > 0)
+                replaceLeft = content.Replace(leftPart, "");
+            replace = replaceLeft.Replace("\r\n", " ");
+            //_writer.WriteRaw(content.Replace(leftPart, "").Replace("\r\n", " "));
+            _writer.WriteRaw(replace);
             _writer.WriteEndElement();
             _writer.WriteEndElement();
         }

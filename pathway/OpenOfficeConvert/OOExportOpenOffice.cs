@@ -462,7 +462,7 @@ namespace SIL.PublishingSolution
             return dictSecName;
         }
 
-        private void ExportWithDocumentSections(ProgressBar statusProgressBar)
+        private void ExportODM(ProgressBar statusProgressBar)
         {
             Common.ShowMessage = false;
             _odtFiles.Clear();
@@ -500,7 +500,7 @@ namespace SIL.PublishingSolution
                                 publicationInfo.DefaultXhtmlFileWithPath = fileName;
                                 publicationInfo.ProgressBar = statusProgressBar;
                                 publicationInfo.IsOpenOutput = false;
-                                generated = ExportOneSection(publicationInfo);
+                                generated = ExportODT(publicationInfo);
                                 if (generated)
                                 {
                                     string returnFileName = Path.GetFileName(fileName);
@@ -540,7 +540,7 @@ namespace SIL.PublishingSolution
             publicationInfo.ProgressBar = statusProgressBar;
             publicationInfo.FileSequence = _odtFiles;
             publicationInfo.IsOpenOutput = true;
-            ExportOneSection(publicationInfo);
+            ExportODT(publicationInfo);
         }
 
         private void XslProcess(KeyValuePair<string, string> subSection, string fileName, string xslFileName, ExportOpenOffice exportOpenOffice, ProgressBar statusProgressBar)
@@ -572,7 +572,7 @@ namespace SIL.PublishingSolution
                 //generated = exportOpenOffice.Export(statusProgressBar, projectInfo.DictionaryPath, returnFileName, projectInfo.DefaultCssFileWithPath, false, null, projectInfo.ProjectInputType);
                 publicationInfo.ProgressBar = statusProgressBar;
                 publicationInfo.IsOpenOutput = false;
-                generated = ExportOneSection(publicationInfo);
+                generated = ExportODT(publicationInfo);
 
                 if (generated)
                 {
@@ -638,24 +638,22 @@ namespace SIL.PublishingSolution
 
             if (dictSecName.Count > 0)
             {
-                ExportWithDocumentSections(publicationInfo.ProgressBar);
+                ExportODM(publicationInfo.ProgressBar);
             }
             else
             {
                 publicationInfo.DictionaryOutputName = publicationInfo.ProjectName;
-                ExportOneSection(publicationInfo);
+                ExportODT(publicationInfo);
             }
             return returnValue;
         }
 
         /// <summary>
-        /// Convert XHTML to ODT
+        /// Convert XHTML to ODT and ODM
         /// </summary>
-        public bool ExportOneSection(PublicationInformation projInfo)
+        public bool ExportODT(PublicationInformation projInfo)
         {
-            string ReferenceFormat = string.Empty;
             string defaultXhtml = projInfo.DefaultXhtmlFileWithPath;
-            //string fileType = "odt";
             projInfo.OutputExtension = "odt";
             Common.OdType = Common.OdtType.OdtChild;
             bool returnValue = false;
@@ -691,14 +689,6 @@ namespace SIL.PublishingSolution
                 }
             }
 
-            ////Include FlexRev.css when XHTML is FlexRev.xhtml
-            //string FlexRev = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
-            //if (FlexRev.ToLower() == "flexrev")
-            //{
-            //    string revCSS = Path.Combine(Path.GetDirectoryName(projInfo.DefaultCssFileWithPath), "FlexRev.css");
-            //    if (File.Exists(revCSS))
-            //        projInfo.DefaultCssFileWithPath = revCSS;
-            //}
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
             cssTree.OutputType = Common.OutputType.ODT; 
@@ -710,14 +700,11 @@ namespace SIL.PublishingSolution
             idAllClass = inStyles.CreateStyles(projInfo, cssClass, "Styles.xml");
 
             //To set Constent variables for User Desire
-            //string macroFileName = Common.PathCombine(projInfo.DictionaryPath,Path.GetFileNameWithoutExtension(projInfo.DictionaryPath));
             string fname = Common.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             string macroFileName = Common.PathCombine(projInfo.DictionaryPath, fname);
-            //IncludeTextinMacro(strMacroPath, idAllClass.ReferenceFormat, macroFileName, projInfo.IsExtraProcessing);
             string refFormat = string.Empty;
             refFormat = GetReferenceFormat(idAllClass, refFormat);
             IncludeTextinMacro(strMacroPath, refFormat, macroFileName, projInfo.IsExtraProcessing);
-
 
             // BEGIN Generate Meta.Xml File
             var metaXML = new OOMetaXML();
@@ -725,7 +712,6 @@ namespace SIL.PublishingSolution
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             // BEGIN Generate Content.Xml File 
             var cXML = new OOContent();
-            string fileName = Path.Combine(projInfo.DictionaryPath, Path.GetFileName(projInfo.DefaultXhtmlFileWithPath));
             preProcessor.GetTempFolderPath();
             preProcessor.GetfigureNode();
             preProcessor.ImagePreprocess();
@@ -734,8 +720,6 @@ namespace SIL.PublishingSolution
                 preProcessor.SwapHeadWordAndReversalForm();
             preProcessor.PreserveSpace();
             projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
-            //cXML.CreateContent(projInfo.ProgressBar, projInfo.DefaultXhtmlFileWithPath, strToOfficeFolder + Path.DirectorySeparatorChar,
-            //                   styleName, fileType);
             projInfo.TempOutputFolder += Path.DirectorySeparatorChar;
             cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
@@ -784,15 +768,6 @@ namespace SIL.PublishingSolution
                     Common.DeleteDirectory(projInfo.TempOutputFolder);
                 }
             }
-
-            //try
-            //{
-            //    File.Delete(processedXhtml);
-            //}
-            //catch(Exception ex)
-            //{
-            //    Console.Write(ex.Message);
-            //}
             return returnValue;
         }
 

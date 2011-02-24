@@ -67,7 +67,7 @@ namespace SIL.PublishingSolution
         ArrayList _odtFiles;
         //ArrayList _odtEndFiles;
 
-        string _fileType = string.Empty;
+        string _outputExtension = string.Empty;
         int _autoFootNoteCount;
         private string _sourcePicturePath;
 
@@ -166,14 +166,6 @@ namespace SIL.PublishingSolution
             MatchCollection mat = reg.Matches(text);
             return mat.Count;
         }
-
-        //public void InitializeObject(OldStyles styleInfo, string fileType)
-        //{
-        //    _structStyles = styleInfo;
-        //    _fileType = fileType;
-        //    _odtFiles = _structStyles.MasterDocument;
-        //}
-
 
         public Dictionary<string, ArrayList> CreateStory(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
         {
@@ -365,7 +357,7 @@ namespace SIL.PublishingSolution
 
         private void InitializeData(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
         {
-            _fileType = projInfo.OutputExtension;
+            _outputExtension = projInfo.OutputExtension;
             _allStyle = new Stack<string>();
             _allParagraph = new Stack<string>();
             _allCharacter = new Stack<string>();
@@ -600,7 +592,7 @@ namespace SIL.PublishingSolution
 
         private void ProcessXHTML(ProgressBar pb, string Sourcefile, string targetPath)
         {
-            if (_fileType == "odm") return;
+            if (_outputExtension == "odm") return;
             
             if (pb != null && pb.Maximum == 0)
             {
@@ -1476,7 +1468,7 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
-            if (_fileType == "odm")
+            if (_outputExtension == "odm")
             {
                 _writer.WriteStartElement("style:style");
                 _writer.WriteAttributeString("style:name", "SectODM");
