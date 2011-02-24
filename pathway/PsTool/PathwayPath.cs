@@ -37,6 +37,12 @@ namespace SIL.Tool
             object regObj;
             try
             {
+                if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.CompanyKeyCurrentUser,
+                    "Pathway", "PathwayDir", out regObj))
+                {
+                    Common.SupportFolder = "";
+                    return (string)regObj;
+                }
                 if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.CompanyKeyLocalMachine,
                     "Pathway", "PathwayDir", out regObj))
                 {

@@ -103,7 +103,27 @@ namespace SIL.Tool
 			    return silKey;
 			}
 		}
-		/// ------------------------------------------------------------------------------------
+        /// ------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets the registry key for the current application's company from the local machine
+        /// settings. This is 'HKLM\Software\{Application.CompanyName}'
+        /// NOTE: This key is not opened for write access because it will fail on 
+        /// non-administrator logins.
+        /// </summary>
+        /// ------------------------------------------------------------------------------------
+        public static RegistryKey CompanyKeyCurrentUser
+        {
+            get
+            {
+                RegistryKey softwareKey = Registry.CurrentUser.OpenSubKey("Software");
+                Debug.Assert(softwareKey != null);
+                var silKey = softwareKey.OpenSubKey("SIL");
+                if (silKey == null)
+                    silKey = softwareKey.OpenSubKey(@"Wow6432Node\SIL");
+                return silKey;
+            }
+        }
+        /// ------------------------------------------------------------------------------------
 		/// <summary>
 		/// Gets the registry key for the Paratext application from the local machine
 		/// settings. This is 'HKLM\Software\ScrChecks\1.0'
