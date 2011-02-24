@@ -53,7 +53,7 @@ namespace Test.YouVersionConvert
             string htmlFolder = _testFiles.Output("html");
             FolderTree.Copy(_testFiles.Input("html"), htmlFolder);
             string expected = _testFiles.Output(Path.Combine(testName, "html.zip"));
-            string actual = ZipHtml(htmlFolder);
+            string actual = ZipIt(htmlFolder);
             Assert.AreEqual(expected, actual);
         }
 
@@ -193,18 +193,45 @@ namespace Test.YouVersionConvert
         }
 
         /// <summary>
-        ///A test for ConvertToHtml
+        ///A test for Convert to Html
         ///</summary>
         [Test]
-        public void ConvertToHtmlTest()
+        public void ConvertHtmlTest()
         {
             string processFolder = _testFiles.Output("xhtml");
             FolderTree.Copy(_testFiles.Input("xhtml"), processFolder);
-            string actual = ConvertToHtml(processFolder);
-            DirectoryInfo directoryInfo = new DirectoryInfo(actual);
+            string outFolder = _testFiles.Output("zipHtml");
+            SetupOutputFolder(outFolder);
+            const string xslt = "TE_XHTML-to-YouVersion_OneChapter_HTML.xslt";
+            const string type = "Html";
+            const string ext = ".html";
+            Convert(processFolder, outFolder, xslt, type, ext);
+            string actualOutFolder = Path.Combine(outFolder, type);
+            DirectoryInfo directoryInfo = new DirectoryInfo(actualOutFolder);
             Assert.AreEqual(6, directoryInfo.GetFiles().Length);
             const string chapter6 = "nko.1TI.6.html";
-            FileAssert.AreEqual(_testFiles.Expected(chapter6), Path.Combine(actual,chapter6));
+            FileAssert.AreEqual(_testFiles.Expected(chapter6), Path.Combine(actualOutFolder,chapter6));
+        }
+
+        /// <summary>
+        ///A test for Convert to Sql
+        ///</summary>
+        [Test]
+        public void ConvertSqlTest()
+        {
+            string processFolder = _testFiles.Output("xhtml");
+            FolderTree.Copy(_testFiles.Input("xhtml"), processFolder);
+            string outFolder = _testFiles.Output("zipSql");
+            SetupOutputFolder(outFolder);
+            const string xslt = "TE_XHTML-to-YouVersion_OneChapter_SQL.xslt";
+            const string type = "Sql";
+            const string ext = ".sql";
+            Convert(processFolder, outFolder, xslt, type, ext);
+            string actualOutFolder = Path.Combine(outFolder, type);
+            DirectoryInfo directoryInfo = new DirectoryInfo(actualOutFolder);
+            Assert.AreEqual(6, directoryInfo.GetFiles().Length);
+            const string chapter6 = "nko.1TI.6.sql";
+            FileAssert.AreEqual(_testFiles.Expected(chapter6), Path.Combine(actualOutFolder, chapter6));
         }
 
         /// <summary>
