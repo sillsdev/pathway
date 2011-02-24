@@ -301,6 +301,7 @@ namespace SIL.PublishingSolution
                 case "width":
                 case "height":
                 case "visibility":
+                case "prince-text-replace":
                     _IDProperty[property.Key] = value;
                     break;
                 default:
@@ -315,6 +316,7 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
+            //if (propertyValue == "normal" || propertyValue == "100%")
             if (propertyValue == "normal")
                 propertyValue = "Auto";
 

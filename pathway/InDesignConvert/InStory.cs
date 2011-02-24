@@ -107,14 +107,38 @@ namespace SIL.PublishingSolution
                     ContentCounterReset[className] = IdAllClass[className][searchKey];
                 }
 
+                searchKey = "prince-text-replace";
+                if (IdAllClass[className].ContainsKey(searchKey))
+                {
+                    _replaceSymbolToText.Clear();
+                    string[] values = IdAllClass[className][searchKey].Split('\"');
+                    if (values.Length <= 1)
+                        values = IdAllClass[className][searchKey].Split('\'');
+                    for (int i = 0; i < values.Length; i++)
+                    {
+                        if (values[i].Length > 0)
+                        {
+                            string key = values[i].Replace("\"", "");
+                            //key = Common.ReplaceSymbolToText(key);
+                            i++;
+                            i++;
+                            string value = values[i].Replace("\"", "");
+                            value = Common.ReplaceSymbolToText(value);
+                            CssParser cssParser = new CssParser();
+                            _replaceSymbolToText[key] = cssParser.UnicodeConversion(value);
+                        }
+                    }
+                }
+
                 // Footnote process 
                 searchKey = "display";
-                if (IdAllClass[className].ContainsKey(searchKey) && className.IndexOf("..") == -1)
+                if (IdAllClass[className].ContainsKey(searchKey) && className.IndexOf("..footnote") > 0)
                 {
-                    if (IdAllClass[className][searchKey] == "footnote" || IdAllClass[className][searchKey] == "prince-footnote")
+                    string footnoteClsName = Common.LeftString(className, "..");
+                    if (IdAllClass[footnoteClsName][searchKey] == "footnote" || IdAllClass[footnoteClsName][searchKey] == "prince-footnote")
                     {
-                        if (!_FootNote.Contains(className))
-                            _FootNote.Add(className);
+                        if (!_FootNote.Contains(footnoteClsName))
+                            _FootNote.Add(footnoteClsName);
                     }
                 }
                 string searchKey1 = "..footnote-call";
@@ -202,6 +226,7 @@ namespace SIL.PublishingSolution
         private void WriteText()
         {
             string content = _reader.Value;
+            content = ReplaceString(content);
 
             if (CollectFootNoteChapterVerse(content, Common.OutputType.IDML.ToString())) return;
 
@@ -231,7 +256,25 @@ namespace SIL.PublishingSolution
             _psuedoBefore.Clear();
         }
 
-
+        /// <summary>
+        /// To replace the symbol string if the symbol matches with the text
+        /// </summary>
+        /// <param name="data">XML Content</param>
+        private string ReplaceString(string data)
+        {
+            //data = Common.ReplaceSymbolToText(data);
+            if (_replaceSymbolToText.Count > 0)
+            {
+                foreach (string srchKey in _replaceSymbolToText.Keys)
+                {
+                    if (data.IndexOf(srchKey) >= 0)
+                    {
+                        data = data.Replace(srchKey, _replaceSymbolToText[srchKey]);
+                    }
+                }
+            }
+            return data;
+        }
 
         private string whiteSpacePre(string content)
         {
