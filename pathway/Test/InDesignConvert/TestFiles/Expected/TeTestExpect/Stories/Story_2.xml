@@ -1,0 +1,2839 @@
+<?xml version="1.0"?>
+<idPkg:Story xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="6.0">
+  <Story Self="1" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
+    <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
+    <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrBook_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrBookName_1">
+        <Content />
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/TitleMain_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_1">
+        <Content>Ruth</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroSectionHead_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_2">
+        <Content>INTRODUCTION</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_3">
+        <Content>Ruth est le personnage principal du livre qui porte son nom &amp; that's it.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_4">
+        <Content>Le livre de Ruth raconte l'histoire d'une famille israélite qui est presque totalement détruite, puis recommence à vivre. Cette histoire se passe au temps où les chefs du peuple d'Israël s'appelaient “les juges”, mais elle a été écrite plus tard.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHead_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_5">
+        <Content>Les malheursde la famille d'Élimélek</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <Rectangle Self="u1fa" StoryTitle="$ID/" ContentType="GraphicType" StrokeWeight="0" StrokeColor="Swatch/None" GradientFillStart="0 0" GradientFillLength="0" GradientFillAngle="0" GradientStrokeStart="0 0" GradientStrokeLength="0" GradientStrokeAngle="0" Locked="false" LocalDisplaySetting="Default" GradientFillHiliteLength="0" GradientFillHiliteAngle="0" GradientStrokeHiliteLength="0" GradientStrokeHiliteAngle="0" AppliedObjectStyle="ObjectStyle/$ID/[Normal Graphics Frame]" ItemTransform="1 0 0 1 0 -36">
+      <Properties>
+        <PathGeometry>
+          <GeometryPathType PathOpen="false">
+            <PathPointArray>
+              <PathPointType Anchor="-0 -36" LeftDirection="-0 -36" RightDirection="-0 -36" />
+              <PathPointType Anchor="-0 36" LeftDirection="-0 36" RightDirection="-0 36" />
+              <PathPointType Anchor="0 36" LeftDirection="0 36" RightDirection="0 36" />
+              <PathPointType Anchor="0 -36" LeftDirection="0 -36" RightDirection="0 -36" />
+            </PathPointArray>
+          </GeometryPathType>
+        </PathGeometry>
+      </Properties>
+      <AnchoredObjectSetting AnchoredPosition="Anchored" SpineRelative="false" LockPosition="false" PinPosition="true" AnchorPoint="TopLeftAnchor" HorizontalAlignment="LeftAlign" HorizontalReferencePoint="ColumnEdge" VerticalAlignment="CenterAlign" VerticalReferencePoint="LineBaseline" AnchorXoffset="0" AnchorYoffset="0" AnchorSpaceAbove="0" />
+      <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="RightSide" TextWrapMode="JumpObjectTextWrap">
+        <Properties>
+          <TextWrapOffset Top="0" Left="0" Bottom="0" Right="0" />
+        </Properties>
+        <ContourOption ContourType="SameAsClipping" IncludeInsideEdges="false" ContourPathName="$ID/" />
+      </TextWrapPreference>
+      <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
+      <FrameFittingOption LeftCrop="0" TopCrop="0" RightCrop="0" BottomCrop="0" FittingOnEmptyFrame="ContentToFrame" FittingAlignment="CenterAnchor" />
+      <Image Self="u222" Space="$ID/#Links_RGB" ActualPpi="0 72" EffectivePpi="72 72" ImageRenderingIntent="UseColorSettings" LocalDisplaySetting="Default" ImageTypeName="$ID/JPEG" AppliedObjectStyle="ObjectStyle/$ID/[None]" ItemTransform="0 0 0 1 -0 -36">
+        <Properties>
+          <Profile type="string">$ID/None</Profile>
+          <GraphicBounds Left="0" Top="0" Right="72" Bottom="72" />
+        </Properties>
+        <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="BothSides" TextWrapMode="None">
+          <Properties>
+            <TextWrapOffset Top="0" Left="0" Bottom="0" Right="0" />
+          </Properties>
+          <ContourOption ContourType="SameAsClipping" IncludeInsideEdges="false" ContourPathName="$ID/" />
+        </TextWrapPreference>
+        <Link Self="u225" AssetURL="$ID/" AssetID="$ID/" LinkResourceURI="file:" StoredState="Normal" LinkClassID="35906" LinkClientID="257" LinkResourceModified="false" LinkObjectModified="false" ShowInUI="true" CanEmbed="true" CanUnembed="true" CanPackage="true" ImportPolicy="NoAutoImport" ExportPolicy="NoAutoExport" LinkImportStamp="file 128811558721632778 187452" LinkImportModificationTime="2009-03-10T16:21:12" LinkImportTime="2009-12-17T16:28:20" />
+        <ClippingPathSettings ClippingType="None" InvertPath="false" IncludeInsideEdges="false" RestrictToFrame="false" UseHighResolutionImage="true" Threshold="25" Tolerance="2" InsetFrame="0" AppliedPathName="$ID/" Index="-1" />
+        <ImageIOPreference ApplyPhotoshopClippingPath="true" AllowAutoEmbedding="true" AlphaChannelName="$ID/" />
+      </Image>
+      <TextFrame Self="u">
+        <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/pictureCenter_1" />
+      </TextFrame>
+    </Rectangle>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ChapterNumber_1">
+      <Content>1</Content>
+    </CharacterStyleRange>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_1">
+      <Content>1</Content>
+    </CharacterStyleRange>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <Content>1</Content>
+    </CharacterStyleRange>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_1">
+      <Content>1</Content>
+    </CharacterStyleRange>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_6">
+      <Content>Cette histoire se passe au tempsoù les juges gouvernent le peuple d'Israël. À ce moment-là, il y a une famine dans le pays. Alors Élimélek, un homme du village de Bethléem,</Content>
+    </CharacterStyleRange>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_7">
+      <Content> dans la région de Juda, part avec sa femme et ses deux fils. Ils vont dans la région de Moab</Content>
+    </CharacterStyleRange>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph..footnote-call">
+      <HyperlinkTextSource Self="Hyperlink_F42f5853c-9e2c-433a-9494-5ca12930fd38" Name="Hyperlink F42f5853c-9e2c-433a-9494-5ca12930fd38" Hidden="false" AppliedCharacterStyle="n" Position="Superscript">
+        <Footnote>
+          <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteGeneralParagraph..footnote-marker">
+            <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+              <Content><?ACE 4?> 1: = </Content>
+            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/AlternateReading_1"><Content>Les juges:</Content></CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_8"><Content>À une époque de leur histoire, les Israélites ont été dirigés par des juges. C&apos;étaient des personnes envoyées par Dieu. Dieu les chargeait plus particulièrement de délivrer une ou plusieurs tribus en guerre et de diriger le peuple. Ils rendaient aussi la justice. </Content></CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/AlternateReading_2"><Content>Moab:</Content></CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_8"><Content>pays fertile situé à l&apos;est de la mer Morte.</Content></CharacterStyleRange></ParagraphStyleRange>
+        </Footnote>
+      </HyperlinkTextSource>
+    </CharacterStyleRange>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_9">
+      <Content>. </Content>
+    </CharacterStyleRange>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <Content>1</Content>
+    </CharacterStyleRange>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <Content>2</Content>
+    </CharacterStyleRange>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
+      <Content>2</Content>
+    </CharacterStyleRange>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_10">
+      <Content>Sa femme s'appelle Noémi,et ses fils s'appellent Malon et Kilion. Ils sont du clan d'Éfrata. Ils arrivent donc dans le pays de Moabet s'installent là. </Content>
+    </CharacterStyleRange>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <Content>1</Content>
+    </CharacterStyleRange>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <Content>3</Content>
+    </CharacterStyleRange>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
+      <Content>3</Content>
+    </CharacterStyleRange>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_10">
+      <Content>Ensuite, Élimélek, le mari de Noémi, meurt,et Noémi reste seule avec ses deux fils. </Content>
+    </CharacterStyleRange>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <Content>1</Content>
+    </CharacterStyleRange>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <Content>4</Content>
+    </CharacterStyleRange>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
+      <Content>4</Content>
+    </CharacterStyleRange>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_10">
+      <Content>Plus tard, les garçons se marient avec des filles de Moab: l'une s'appelle Orpa, l'autre s'appelle Ruth. Ils habitent là pendant dix ans à peu près. </Content>
+    </CharacterStyleRange>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <Content>1</Content>
+    </CharacterStyleRange>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <Content>5</Content>
+    </CharacterStyleRange>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
+      <Content>5</Content>
+    </CharacterStyleRange>
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_10">
+      <Content>Puis Malon et Kilion meurent aussi, tous les deux. Noémi reste seule, sans enfants et sans mari.</Content>
+    </CharacterStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHead_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_11">
+        <Content>Ruth part avec Noémià Bethléem</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_3">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+        <Content>6-7</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
+        <Content>6-7</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_12">
+        <Content>Un jour, toujours dans le pays de Moab, Noémi apprend cette nouvelle: le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_1">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_13">
+        <Content> a montré sa bonté pour son peupleen lui donnant de bonnes récoltes. Alors elle se prépare à quitter le pays de Moabavec les deux femmes de ses fils. Elle quitte le lieuoù elle vit avec ses deux belles-filles. Les femmes prennent la route ensemble pour aller au pays de Juda. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_4">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+        <Content>8</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
+        <Content>8</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_12">
+        <Content>Mais Noémi dit à Orpa et à Ruth: “Maintenant, mes filles,rentrez chacune chez votre mère. Vous avez agi avec bontéenvers mes fils qui sont morts et envers moi. De la même façon, que le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_1">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_13">
+        <Content> montresa bonté envers vous! </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_4">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+        <Content>9</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
+        <Content>9</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_12">
+        <Content>Qu'il vous permette à toutes les deux de retrouver un mariet d'être heureuses avec lui!” Puis elle les embrasse. Alors les deux jeunes femmes se mettentà pleurer beaucoup. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_4">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+        <Content>10</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
+        <Content>10</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_12">
+        <Content>Puis elles disent à Noémi: “Non! Nous allons avec toi dans ton pays.” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_4">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+        <Content>11</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
+        <Content>11</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_12">
+        <Content>Mais Noémi leur dit: “Rentrez dans votre famille, mes filles. Pourquoi est-ce que vous voulez venir avec moi? Est-ce que je peux encore avoir des filsqui pourraient se marier avec vous</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph..footnote-call">
+        <HyperlinkTextSource Self="Hyperlink_F3ed97a6e-dbd4-472a-a467-fd17c8ced75a" Name="Hyperlink F3ed97a6e-dbd4-472a-a467-fd17c8ced75a" Hidden="false" AppliedCharacterStyle="n" Position="Superscript">
+          <Footnote>
+            <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteGeneralParagraph..footnote-marker">
+              <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+                <Content><?ACE 4?> 1:11 = </Content>
+              </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_14"><Content>Quand un homme mourait sans enfant, son frère ou son parent le plus proche devait se marier avec la veuve pour donner des enfants au mort. C&apos;est la coutume du “lévirat”. Voir Deutéronome 25.5-10; Ruth 4.5,10.</Content></CharacterStyleRange></ParagraphStyleRange>
+          </Footnote>
+        </HyperlinkTextSource>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_15">
+        <Content>? Non! Je suis trop vieille pour cela. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_4">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+        <Content>12</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
+        <Content>12</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_12">
+        <Content>Rentrez chez vous, mes filles. Oui, partez. Je suis trop vieille pour me remarier. Bien sûr, je pourrais dire: ‘Il y a encore de l'espoir pour moi. Oui, cette nuit même, je vais avoir un mariqui va me donner des fils.’ </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_4">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+        <Content>13</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
+        <Content>13</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_12">
+        <Content>Mais, même dans ce cas, est-ce que vous pouvez attendre qu'ils soient grands? Est-ce que vous allez refuserde vous remarier pour cela? Non, mes filles, ma vie est plus dure que la vôtre. En effet, la main du </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_1">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_13">
+        <Content> m'a frappée.”</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_3">
+        <Content>14</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_3">
+        <Content>14</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_16">
+        <Content>Alors les deux jeunes femmes recommencentà pleurer beaucoup. Puis Orpa dit au revoir à sa belle-mèreen l'embrassant. Mais Ruth décide de rester avec elle. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_6">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_3">
+        <Content>15</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_3">
+        <Content>15</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_16">
+        <Content>Noémi dit à Ruth: “Regarde, ta belle-so!eur est retournéevers son peuple et vers le dieu de son peuple. Fais comme elle, rentre chez toi!” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_6">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_3">
+        <Content>16</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_3">
+        <Content>16</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_16">
+        <Content>Mais Ruth répond: “Ne me force pas à te quitter pour rentrer chez moi. Là où tu iras, j'irai. Là où tu habiteras, j'habiterai. Ton peuple sera mon peuple, et ton Dieu sera mon Dieu. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_6">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_3">
+        <Content>17</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_3">
+        <Content>17</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_16">
+        <Content>Là où tu mourras, je mourrai, et là on m'enterrera. Que le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_2">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_17">
+        <Content> me punisse très sévèrement si ce n'est pas la mort qui me sépare de toi!”</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHead_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_18">
+        <Content>Noémi retourne à Bethléem,et Ruth va avec elle</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_4">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_7">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_4">
+        <Content>18</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_4">
+        <Content>18</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_19">
+        <Content>Quand Noémi voit que Ruth veut à tout prixvenir avec elle, elle n'insiste plus. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_8">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_4">
+        <Content>19</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_4">
+        <Content>19</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_19">
+        <Content>Les deux femmes marchent ensemble jusqu'à Bethléem.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_20">
+        <Content>Quand elles arrivent là, tous les habitants sont surpris de les voir. Les femmes du village disent: “Est-ce que c'est Noémi?” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>20</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>20</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Mais Noémi leur répond: “Ne m'appelez pas Noémi, la femme heureuse. Appelez-moi Mara, la femme amère, car le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_1">
+        <Content>Tout-Puissant</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_22">
+        <Content> a rendu ma vie très amère. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>21</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>21</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>En partant d'ici, j'avais les mains pleines. Le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_3">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_23">
+        <Content> me fait revenir les mains vides. Il s'est tourné contre moi, le Tout-Puissant m'a fait du mal. Ne m'appelez donc plus Noémi, la femme heureuse!”</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_10">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>22</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>22</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>C'est de cette façon que Noémi revient du pays de Moab, avec Ruth, sa belle-fille moabite. Elles arrivent à Bethléem au momentoù la récolte de </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_1">
+        <Content>l'orge</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_22">
+        <Content> commence.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHead_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_18">
+        <Content>Ruth ramasse des épisdans le champ de Booz</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/ChapterNumber1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ChapterNumber_2">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_11">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_4">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_2">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_24">
+        <Content>Noémi a un parentdans la famille d'Élimélek, son mari. C'est un riche notable. Il s'appelle Booz. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_8">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_4">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_4">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_19">
+        <Content>Un jour, Ruth la Moabite dit à Noémi: “Laisse-moi aller dans les champs. Je ramasserai les épis derrière quelqu'un</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph..footnote-call">
+        <HyperlinkTextSource Self="Hyperlink_F10469e95-c350-43ed-8441-181aec42ee4e" Name="Hyperlink F10469e95-c350-43ed-8441-181aec42ee4e" Hidden="false" AppliedCharacterStyle="n" Position="Superscript">
+          <Footnote>
+            <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteGeneralParagraph..footnote-marker">
+              <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+                <Content><?ACE 4?> 2:2 = </Content>
+              </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_25"><Content>Les gens pauvres avaient le droit de ramasser les épis laissés par ceux qui faisaient la récolte. Voir Lévitique 19.9-10 et Deutéronome 24.19-21.</Content></CharacterStyleRange></ParagraphStyleRange>
+          </Footnote>
+        </HyperlinkTextSource>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_26">
+        <Content>qui sera bon envers moi en me permettant de le faire.” Noémi répond: “Vas-y, ma fille.” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_8">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_4">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_4">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_19">
+        <Content>Ruth part et elle va dans un champ, pour ramasser les épis derrière ceux qui récoltent. Par chance, le champ où elle vaest celui de Booz, de la famille d'Élimélek.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_10">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Un peu plus tard, Booz arrive de Bethléem. Il salue les ouvriers: “Que le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_3">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_23">
+        <Content> soit avec vous!” Les ouvriers répondent: “Que le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_3">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_23">
+        <Content> te </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_1">
+        <Content>bénisse!</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_22">
+        <Content>” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>5</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>5</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Booz demande au chef des ouvriers: “Qui est cette jeune femme?” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>6</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>6</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Le chef répond: “C'est une jeune Moabite. Elle est revenue du pays de Moab avec Noémi. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>7</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>7</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Elle m'a dit: ‘Permets-moi de ramasser les épisque les ouvriers laissent tomber des </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_1">
+        <Content>gerbes.</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_22">
+        <Content>’ Elle est venue ce matin et jusqu'à maintenant, elle ne s'est presque pas reposée.” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>8</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>8</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Alors Booz dit à Ruth: “Écoute, ma fille, ne va pas ramasser les épisdans un autre champ. Reste ici et travaille avec mes servantes. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>9</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>9</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Regarde bien les endroits où les hommes récoltentet suis les femmes qui ramassent les épis. J'ai commandé à mes serviteursde te laisser tranquille. Si tu as soif, va boire de l'eaudans les récipients que mes serviteurs ont remplis.” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>10</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>10</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Ruth s'incline jusqu'à terre devant Booz. Puis elle lui dit: “Tu me regardes avec bontéet tu t'intéresses à moiqui suis une étrangère. Comment est-ce possible?” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>11</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>11</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Booz répond: “J'ai appris tout ce que tu as faitpour ta belle-mère depuis la mort de ton mari. Tu as laissé ton père, ta mère, ton pays. Et tu es venue vivre au milieu d'un peupleque tu ne connaissais pas avant. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>12</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>12</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Que le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_3">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_23">
+        <Content> te récompensepour tout cela! Tu es venue te mettre sous la protection du </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_3">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_23">
+        <Content>, Dieu d'Israël. Qu'il te récompense largement!” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>13</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>13</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Ruth répond à Booz: “Maître, tu es vraiment bon pour moi. Tu m'encourages en me parlant avec bonté. Et pourtant, je ne suis même pascomme l'une de tes servantes.”</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_10">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>14</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>14</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Au moment du repas, Booz dit à Ruth: “Viens manger avec nous. Prends un morceau de painet trempe-le dans la sauce.” Ruth s'assoit à côté des ouvriers. Booz lui tend des épis grillés. Elle en mange autant qu'elle veutet il lui en reste. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>15</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>15</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Puis Ruth se lèvepour aller de nouveau ramasser des épis. Ensuite, Booz donne cet ordre à ses serviteurs: “Laissez-la ramasser les épis, même entre les gerbes. Ne lui faites pas de reproches. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>16</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>16</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Enlevez même quelques épis des gerbeset laissez-les par terrepour qu'elle les ramasse. Ne lui faites aucun reproche.” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>17</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>17</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Ruth ramasse les épis dans le champ de Boozjusqu'au soir. Puis elle bat les épis qu'elle a ramassés. Elle remplit un grand sac de grains </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_1">
+        <Content>d'orge.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_10">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>18</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>18</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Elle rapporte le sac au village. Noémi, sa belle-mère, voit ce qu'elle a ramassé. Ruth sort aussi ce qui reste de son repaset elle le donne à Noémi. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>19</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>19</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Noémi lui demande: “Où as-tu ramassé ces épis aujourd'hui? Dans quel champ est-ce que tu as travaillé? Que Dieu bénisse celui qui a été bon pour toi!”</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_20">
+        <Content>Ruth raconte: “J'ai travaillé dans le champ d'un hommequi s'appelle Booz.” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>20</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>20</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Alors Noémi dit à Ruth: “Je le vois, le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_3">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_23">
+        <Content> continue à nous montrer sa bonté. Il est bon pour nous les vivants,comme il est bon pour les morts. Qu'il bénisse cet homme!” Puis Noémi ajoute: “Booz est un homme de notre famille proche. Il est l'un de ceux qui ont la responsabilité de prendre soin de nous</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph..footnote-call">
+        <HyperlinkTextSource Self="Hyperlink_F66fb170f-1f1d-418b-86d8-171477728299" Name="Hyperlink F66fb170f-1f1d-418b-86d8-171477728299" Hidden="false" AppliedCharacterStyle="n" Position="Superscript">
+          <Footnote>
+            <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteGeneralParagraph..footnote-marker">
+              <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+                <Content><?ACE 4?> 2:20 = </Content>
+              </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_27"><Content>Quand un homme mourait sans enfant, son parent le plus proche devait se marier avec la veuve pour donner des enfants au mort. Il devait aussi racheter ses terres pour qu&apos;elles restent dans la famille.</Content></CharacterStyleRange></ParagraphStyleRange>
+          </Footnote>
+        </HyperlinkTextSource>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_28">
+        <Content>.” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>21</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>21</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Ruth la Moabite dit encore: “Booz m'a dit aussi: ‘Continue à ramasser les épisderrière mes serviteurs jusqu'à la fin de la récolte.’ ” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>22</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>22</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Noémi dit à Ruth: “C'est bien, ma fille. Continue de travailler avec les servantes de Booz. Si tu vas dans le champ de quelqu'un d'autre, tu risques d'être mal reçue.”</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_10">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>23</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>23</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Ruth va donc ramasser les épis d'orgeet de </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_1">
+        <Content>blé</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_22">
+        <Content> avec les servantes de Booz, jusqu'à la fin de la récolte. Elle continue à habiter avec sa belle-mère.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHead_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_18">
+        <Content>Ruth passe la nuitaux pieds de Booz</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/ChapterNumber1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ChapterNumber_2">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_11">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_4">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_2">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_24">
+        <Content>Un jour, Noémi dit à Ruth: “Ma fille, je dois trouver une solutionpour que tu sois heureuse. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_8">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_4">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_4">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_19">
+        <Content>Tu le sais, ce Booz qui t'a laissée travailleravec ses servantes, il est de notre famille. Ce soir, il va battre </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_2">
+        <Content>l'orge</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_29">
+        <Content> sur la placeoù on bat les grains. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_8">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_4">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_4">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_19">
+        <Content>Lave-toi, parfume-toi, mets ta belle robe et va là-bas. Mais ne te montre pas avant la fin de son repas. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_8">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_4">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_4">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_19">
+        <Content>Quand Booz se couchera,regarde l'endroit où il est. Ensuite, approche-toi, écarte un peu sa couvertureet couche-toi à ses pieds</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph..footnote-call">
+        <HyperlinkTextSource Self="Hyperlink_Fae3f9f55-e5fc-4bd8-a7f0-8714c4a8b1aa" Name="Hyperlink Fae3f9f55-e5fc-4bd8-a7f0-8714c4a8b1aa" Hidden="false" AppliedCharacterStyle="n" Position="Superscript">
+          <Footnote>
+            <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteGeneralParagraph..footnote-marker">
+              <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+                <Content><?ACE 4?> 3:4 = </Content>
+              </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_30"><Content>Ce geste est une demande de protection de la part de Ruth.</Content></CharacterStyleRange></ParagraphStyleRange>
+          </Footnote>
+        </HyperlinkTextSource>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_26">
+        <Content>. Après cela, il te dira lui-mêmece que tu dois faire.” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_8">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_4">
+        <Content>5</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_4">
+        <Content>5</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_19">
+        <Content>Ruth répond: “Je ferai tout ce que tu m'as dit.”</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_10">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>6</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>6</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Ruth va à l'endroit où Booz bat les grains. Elle fait exactement ce que Noémi lui a dit. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>7</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>7</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Booz mange et boitet il est de très bonne humeur. Il vient se coucher au bord du tas de grains. Alors Ruth s'approche doucement, elle écarte la couvertureet se couche à ses pieds.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_10">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>8</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>8</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Au milieu de la nuit,Booz se réveille brusquement. Il se retourne et voit une femmecouchée à ses pieds. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>9</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>9</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Il dit: “Qui est-ce?” Elle répond: “C'est moi, Ruth.Protège-moi. En effet, tu es un proche parentet tu as la responsabilité de prendre soin de moi</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph..footnote-call">
+        <HyperlinkTextSource Self="Hyperlink_F2fec492c-dfce-42b9-a37a-d1a899d1509e" Name="Hyperlink F2fec492c-dfce-42b9-a37a-d1a899d1509e" Hidden="false" AppliedCharacterStyle="n" Position="Superscript">
+          <Footnote>
+            <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteGeneralParagraph..footnote-marker">
+              <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+                <Content><?ACE 4?> 3:9 = </Content>
+              </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_31"><Content>Voir Ruth 2.20 et la note.</Content></CharacterStyleRange></ParagraphStyleRange>
+          </Footnote>
+        </HyperlinkTextSource>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_28">
+        <Content>.” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>10</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>10</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Booz répond: “Que le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_3">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_23">
+        <Content> te </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_1">
+        <Content>bénisse</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_22">
+        <Content>! Tu n'as pas cherché l'amour des jeunes gens, riches ou pauvres. Ce que tu viens de faire prouve ta fidélité à la famille de ta belle-mère. Tu as agi encore mieux qu'avant. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>11</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>11</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Maintenant, Ruth, n'aie pas peur. Je ferai pour toi tout ce que tu voudras. En effet, tu es une femme de valeur, tout le monde le sait. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>12</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>12</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Oui, c'est vrai, je dois prendre soin de toi. Mais il y a quelqu'un d'autrequi est encore plus proche de ta famille que moi. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>13</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>13</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Reste ici cette nuit. Demain matin, nous verronss'il veut remplir son devoir envers toi. Si oui, il doit le faire. S'il ne veut pas, je te promets cecidevant le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_3">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_23">
+        <Content>: je ferai pour toi ce que je dois faire. Dors jusqu'à demain matin!”</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_10">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>14</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>14</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Ruth reste couchée aux pieds de Boozjusqu'au matin. Puis elle se lève très tôt, avant la lumière du jour, pour qu'on ne la reconnaisse pas. En effet, Booz pensait: on ne doit pas savoir que cette femme est venue ici. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>15</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>15</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Il dit à Ruth: “Enlève ton pagne de dessuset tiens-le bien.”Elle le tient bien. Alors Booz mesure à peu près 15 kilos d'orgeet il les met dans le pagne de Ruth. Ensuite, il revient au village. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>16</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>16</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Ruth va chez sa belle-mère. Noémi lui demande: “Cela s'est bien passé, ma fille?”</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_20">
+        <Content>Ruth lui racontetout ce que Booz a fait pour elle. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>17</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>17</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Elle ajoute: “Il m'a donné ces 15 kilos d'orgeen me disant: ‘Tu ne dois pas rentrer chez ta belle-mèreles mains vides.’ ” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>18</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>18</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Noémi dit: “Attends ici, ma fille. Tu vas voir comment les choses vont finir. En effet, cet homme-là ne sera pas satisfait s'il ne règle pas cette affaire aujourd'hui.”</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHead_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_18">
+        <Content>Booz achète le champ d'Éliméleket prend Ruth pour femme</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/ChapterNumber1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ChapterNumber_2">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_11">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_4">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_2">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_24">
+        <Content>Booz va à l'entrée du village, là où on discute des affaires. Il s'assoit. Booz a parlé à Ruth d'un parent très proche d'Élimélek. Cet homme passe justement par là. Booz lui dit: “Arrête-toi! Viens t'asseoir ici.” L'homme s'arrête et il s'assoit. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_8">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_4">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_4">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_19">
+        <Content>Alors Booz demande à dix </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_2">
+        <Content>anciens </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_29">
+        <Content>du village de s'asseoir avec eux. Ils s'assoient. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_8">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_4">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_4">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_19">
+        <Content>Ensuite, Booz dit à cet autre parent d'Élimélek: “Noémi est revenue du pays de Moab, tu le sais. Eh bien, elle va vendre le champ qui était à notre frère Élimélek. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_8">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_4">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_4">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_19">
+        <Content>Moi, j'ai décidé de t'en parler devant les anciens et devant tous ceux qui sont là. Si tu veux racheter ce champ, rachète-le. Si tu ne veux pas, dis-le-moi. En effet, c'est toi le premier qui as le droit de racheter,et moi le deuxième.”L'homme dit: “Je veux bien racheter le champ.”</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_8">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_4">
+        <Content>5</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_4">
+        <Content>5</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_19">
+        <Content>Booz dit: “Si tu achètes le champ à Noémi,tu dois aussi prendre pour femme Ruth la Moabite. Ainsi, la propriété du champ restera dans la famille de son mari mort</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph..footnote-call">
+        <HyperlinkTextSource Self="Hyperlink_F7e15ff75-fafd-44d2-910d-8b55c4b9165d" Name="Hyperlink F7e15ff75-fafd-44d2-910d-8b55c4b9165d" Hidden="false" AppliedCharacterStyle="n" Position="Superscript">
+          <Footnote>
+            <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteGeneralParagraph..footnote-marker">
+              <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+                <Content><?ACE 4?> 4:5 = </Content>
+              </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_32"><Content>Voir Ruth 2.20 et la note.</Content></CharacterStyleRange></ParagraphStyleRange>
+          </Footnote>
+        </HyperlinkTextSource>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_26">
+        <Content>.” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_8">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_4">
+        <Content>6</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_4">
+        <Content>6</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_19">
+        <Content>L'homme répond: “Dans ce cas, je ne peux pas. En effet, je risque de diminuer ma propriété. Donc, prends pour toi le droit de racheter. Moi, je ne peux pas.”</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_10">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>7</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>7</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Autrefois, en Israël, quand des hommes achetaient ou échangeaient quelque chose, l'un des deux enlevait sa sandaleet il la donnait à l'autre. Ce geste montrait que l'affaire était réglée. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>8</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>8</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Donc, celui qui a le droitde racheter le champ d'Élimélekdit à Booz: “Achète le champ.” Puis il enlève sa sandale. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>9</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>9</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Booz dit aux anciens et à tous ceux qui sont là: “Aujourd'hui, vous êtes </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_1">
+        <Content>témoins</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_22">
+        <Content>: j'achète à Noémi tout ce qui était à Éliméleket à ses fils Kilion et Malon. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>10</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>10</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Je prends aussi pour femme Ruth la Moabite, qui était la femme de Malon. Ainsi la propriété du champ restera dans la famille du mort. De plus, il aura des enfants. Ainsi, son nom gardera sa place parmi ses frères, et sa famille sera présentequand les affaires de son village seront discutées. Aujourd'hui, vous êtes témoins de cela.” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>11</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>11</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Les anciens et tous ceux qui sont là répondent: “Oui, nous en sommes témoins! Que le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_3">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_1">
+        <Content>bénisse</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_22">
+        <Content> la femmequi entre dans ta maison! Qu'elle ressemble à Rachel et à Léa, les deux femmes de Jacob qui ont donné naissance au peuple d'Israël! Que tu sois riche dans le clan d'Éfrata, et que ton nom soit célèbre à Bethléem! </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>12</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>12</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Que le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_3">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_23">
+        <Content> te donne beaucoup d'enfants avec cette jeune femme! Et que ta famille soit comme celle de Pérès, le fils de Juda et de Tamar!”</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHead_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_18">
+        <Content>La naissance d'Obed,ancêtre de David</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_4">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_7">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_4">
+        <Content>13</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_4">
+        <Content>13</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_19">
+        <Content>Alors Booz se marie avec Ruth,et Ruth devient sa femme. Il s'unit à elle. Le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_4">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_33">
+        <Content> la </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_2">
+        <Content>bénit</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_29">
+        <Content>, elle devient enceinteet elle met au monde un garçon. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_8">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_4">
+        <Content>14</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_4">
+        <Content>14</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_19">
+        <Content>C'est pourquoi les femmes disent à Noémi: “Remercions le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_4">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_33">
+        <Content>!Aujourd'hui, il te donne quelqu'unqui pourra prendre soin de toi. Ton petit-fils deviendra célèbre en Israël. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_8">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_4">
+        <Content>15</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_4">
+        <Content>15</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_19">
+        <Content>Il va te faire revivreet te soutenir dans ta vieillesse. Ta belle-fille vaut mieux pour toi que sept fils, car elle t'aime et t'a donné ce petit-fils.” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_8">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_4">
+        <Content>16</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_4">
+        <Content>16</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_19">
+        <Content>Alors Noémi prend l'enfantet elle le serre sur son co!eur. Puis c'est elle qui s'occupe de lui. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_8">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_4">
+        <Content>17</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_4">
+        <Content>17</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_19">
+        <Content>Les voisines disent: “Noémi a un fils!” Elles lui donnent le nom d'Obed. Obed est le père de Jessé, qui est le père de David.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_10">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>18</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>18</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Voici la liste des ancêtres de David,à partir de Pérès: Pérès est le père de Hesron. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>19</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>19</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Hesron est le père de Ram.Ram est le père d'Amminadab. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>20</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>20</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Amminadab est le père de Nachon. Nachon est le père de Salman. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>21</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>21</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Salman est le père de Booz. Booz est le père d'Obed. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+        <Content>22</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
+        <Content>22</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_21">
+        <Content>Obed est le père de Jessé,et Jessé est le père de David.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrBook_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrBookName_2">
+        <Content />
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/TitleMain_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_34">
+        <Content>Jonas</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHead_4">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_35">
+        <Content>Jonas veut fuir loin du Seigneur</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/pictureCaption_1">
+      <Rectangle Self="u1fa" StoryTitle="$ID/" ContentType="GraphicType" StrokeWeight="0" StrokeColor="Swatch/None" GradientFillStart="0 0" GradientFillLength="0" GradientFillAngle="0" GradientStrokeStart="0 0" GradientStrokeLength="0" GradientStrokeAngle="0" Locked="false" LocalDisplaySetting="Default" GradientFillHiliteLength="0" GradientFillHiliteAngle="0" GradientStrokeHiliteLength="0" GradientStrokeHiliteAngle="0" AppliedObjectStyle="ObjectStyle/$ID/[Normal Graphics Frame]" ItemTransform="1 0 0 1 0 -36">
+        <Properties>
+          <PathGeometry>
+            <GeometryPathType PathOpen="false">
+              <PathPointArray>
+                <PathPointType Anchor="-0 -36" LeftDirection="-0 -36" RightDirection="-0 -36" />
+                <PathPointType Anchor="-0 36" LeftDirection="-0 36" RightDirection="-0 36" />
+                <PathPointType Anchor="0 36" LeftDirection="0 36" RightDirection="0 36" />
+                <PathPointType Anchor="0 -36" LeftDirection="0 -36" RightDirection="0 -36" />
+              </PathPointArray>
+            </GeometryPathType>
+          </PathGeometry>
+        </Properties>
+        <AnchoredObjectSetting AnchoredPosition="Anchored" SpineRelative="false" LockPosition="false" PinPosition="true" AnchorPoint="TopLeftAnchor" HorizontalAlignment="LeftAlign" HorizontalReferencePoint="ColumnEdge" VerticalAlignment="CenterAlign" VerticalReferencePoint="LineBaseline" AnchorXoffset="0" AnchorYoffset="0" AnchorSpaceAbove="0" />
+        <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="RightSide" TextWrapMode="JumpObjectTextWrap">
+          <Properties>
+            <TextWrapOffset Top="0" Left="0" Bottom="0" Right="0" />
+          </Properties>
+          <ContourOption ContourType="SameAsClipping" IncludeInsideEdges="false" ContourPathName="$ID/" />
+        </TextWrapPreference>
+        <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
+        <FrameFittingOption LeftCrop="0" TopCrop="0" RightCrop="0" BottomCrop="0" FittingOnEmptyFrame="ContentToFrame" FittingAlignment="CenterAnchor" />
+        <Image Self="u222" Space="$ID/#Links_RGB" ActualPpi="0 72" EffectivePpi="72 72" ImageRenderingIntent="UseColorSettings" LocalDisplaySetting="Default" ImageTypeName="$ID/JPEG" AppliedObjectStyle="ObjectStyle/$ID/[None]" ItemTransform="0 0 0 1 -0 -36">
+          <Properties>
+            <Profile type="string">$ID/None</Profile>
+            <GraphicBounds Left="0" Top="0" Right="72" Bottom="72" />
+          </Properties>
+          <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="BothSides" TextWrapMode="None">
+            <Properties>
+              <TextWrapOffset Top="0" Left="0" Bottom="0" Right="0" />
+            </Properties>
+            <ContourOption ContourType="SameAsClipping" IncludeInsideEdges="false" ContourPathName="$ID/" />
+          </TextWrapPreference>
+          <Link Self="u225" AssetURL="$ID/" AssetID="$ID/" LinkResourceURI="file:" StoredState="Normal" LinkClassID="35906" LinkClientID="257" LinkResourceModified="false" LinkObjectModified="false" ShowInUI="true" CanEmbed="true" CanUnembed="true" CanPackage="true" ImportPolicy="NoAutoImport" ExportPolicy="NoAutoExport" LinkImportStamp="file 128811558721632778 187452" LinkImportModificationTime="2009-03-10T16:21:12" LinkImportTime="2009-12-17T16:28:20" />
+          <ClippingPathSettings ClippingType="None" InvertPath="false" IncludeInsideEdges="false" RestrictToFrame="false" UseHighResolutionImage="true" Threshold="25" Tolerance="2" InsetFrame="0" AppliedPathName="$ID/" Index="-1" />
+          <ImageIOPreference ApplyPhotoshopClippingPath="true" AllowAutoEmbedding="true" AlphaChannelName="$ID/" />
+        </Image>
+        <TextFrame Self="u">
+          <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/pictureCaption_1">
+            <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_36">
+              <Content>This is </Content>
+            </CharacterStyleRange>
+            <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_3">
+              <Content>not</Content>
+            </CharacterStyleRange>
+            <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_37">
+              <Content> Jonah!</Content>
+            </CharacterStyleRange><Br/></ParagraphStyleRange>
+        </TextFrame>
+      </Rectangle>
+    </ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/ChapterNumber1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ChapterNumber_3">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_12">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_6">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_3">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_38">
+        <Content>Un jour, le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_5">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_39">
+        <Content> adresse cet ordre à Jonas, </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_40">
+        <Content>le fils d'Amittaï: </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_13">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_6">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_6">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_41">
+        <Content>“Debout, va à Ninive</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph..footnote-call">
+        <HyperlinkTextSource Self="Hyperlink_Fd21ac77e-abcc-40b7-9dfb-b49f8ae05d4e" Name="Hyperlink Fd21ac77e-abcc-40b7-9dfb-b49f8ae05d4e" Hidden="false" AppliedCharacterStyle="n" Position="Superscript">
+          <Footnote>
+            <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteGeneralParagraph..footnote-marker">
+              <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+                <Content><?ACE 4?> 1:2 = </Content>
+              </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/AlternateReading_3"><Content>Ninive</Content></CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_42"><Content>a été la capitale de l&apos;empire assyrien au 7</Content></CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/OrdinalNumberEnding_1"><Content>e</Content></CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_43"><Content> siècle avant J.-C.</Content></CharacterStyleRange></ParagraphStyleRange>
+          </Footnote>
+        </HyperlinkTextSource>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_44">
+        <Content>, la grande ville. Tu menaceras ses habitants en disant: ‘Le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_5">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_39">
+        <Content> en a assez de voir vos actions mauvaises.’ ”</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_7">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_14">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_7">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_7">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_45">
+        <Content>Jonas se met en route, mais pour fuir à Tarsis, loin du </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_6">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_46">
+        <Content>. Il arrive à Jaffa</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph..footnote-call">
+        <HyperlinkTextSource Self="Hyperlink_F2a33867f-7bba-4f5b-a903-64fb65cce4e6" Name="Hyperlink F2a33867f-7bba-4f5b-a903-64fb65cce4e6" Hidden="false" AppliedCharacterStyle="n" Position="Superscript">
+          <Footnote>
+            <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteGeneralParagraph..footnote-marker">
+              <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+                <Content><?ACE 4?> 1:3 = </Content>
+              </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/AlternateReading_4"><Content>Tarsis:</Content></CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_47"><Content>cette ville était très loin du pays d&apos;Israël, on ne sait pas où. </Content></CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/AlternateReading_5"><Content>Jaffa:</Content></CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_47"><Content>port au bord de la mer Méditerranée.</Content></CharacterStyleRange></ParagraphStyleRange>
+          </Footnote>
+        </HyperlinkTextSource>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_48">
+        <Content>. Là, il trouve un bateau qui part </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Foreign_1">
+        <Content>pour Tarsis. Il paie</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_49">
+        <Content> son voyage. Puis il monte dans le bateau, pour aller avec les marins à Tarsis, loin du </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_6">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_46">
+        <Content>.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_8">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_15">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_8">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_8">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_50">
+        <Content>Mais le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_7">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_51">
+        <Content> lance sur la mer un vent violent, et la tempête est si forte que le bateau risque de se casser. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_16">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_8">
+        <Content>5</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_8">
+        <Content>5</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_50">
+        <Content>Les marins ont peur, chacun crie vers son dieu. Ils jettent à la mer tous les objets qui sont dans le bateau pour le rendre plus léger. Pendant ce temps, Jonas est descendu au fond du bateau, il s'est couché et dort profondément. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_16">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_8">
+        <Content>6</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_8">
+        <Content>6</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_50">
+        <Content>Le capitaine du bateau s'approche de lui et lui dit: “Quoi? Tu dors! Lève-toi, crie vers ton dieu! Il pensera peut-être à nous, et nous ne mourrons pas.” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_16">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_8">
+        <Content>7</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_8">
+        <Content>7</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_50">
+        <Content>Puis, les marins se disent entre eux: “Pour connaître le responsable du malheur qui nous arrive, </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_4">
+        <Content>tirons</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_52">
+        <Content> au sort.” Ils tirent au sort, et le sort tombe sur Jonas. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_16">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_8">
+        <Content>8</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_8">
+        <Content>8</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_50">
+        <Content>Alors les marins lui disent: “Notre malheur vient de toi. Dis-nous: qu'est-ce que tu fais ici? D'où viens-tu? De quel pays et de quel peuple es-tu?” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_16">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_8">
+        <Content>9</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_8">
+        <Content>9</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_50">
+        <Content>Jonas répond: “Je suis </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_4">
+        <Content>hébreu</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_52">
+        <Content>, et c'est le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_7">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_51">
+        <Content> que j'adore, le Dieu qui est au </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_4">
+        <Content>ciel</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_52">
+        <Content>, celui qui a fait la mer et la terre.” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_16">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_8">
+        <Content>10</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_8">
+        <Content>10</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_50">
+        <Content>Puis il leur raconte son histoire. Les marins ont très peur. Ils disent à Jonas: “Qu'est-ce que tu as fait là!” En effet, maintenant, ils savent que Jonas fuit loin du </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_7">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_51">
+        <Content>. Ils lui demandent: </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_16">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_8">
+        <Content>11</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_8">
+        <Content>11</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_50">
+        <Content>“Qu'est-ce que nous allons faire de toi pour que la mer se calme autour de nous?” En effet, les vagues montent de plus en plus. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_16">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_8">
+        <Content>12</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_8">
+        <Content>12</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_50">
+        <Content>Jonas répond aux marins: “Prenez-moi et jetez-moi à la mer. Ainsi la mer deviendra calme autour de vous. Oui, je le sais, cette violente tempête vous attaque à cause de moi.” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_16">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_8">
+        <Content>13</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_8">
+        <Content>13</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_50">
+        <Content>Les marins rament pour rejoindre la côte, mais ils n'y arrivent pas. Les vagues montent de plus en plus contre eux. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_16">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_8">
+        <Content>14</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_8">
+        <Content>14</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_50">
+        <Content>Ils prient le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_7">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_51">
+        <Content> et disent: “Ah! </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_7">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_51">
+        <Content>, ne nous fais pas mourir à cause de cet homme! Ne nous rends pas non plus responsables de la mort d'un innocent. En effet, c'est toi, </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_7">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_51">
+        <Content>, qui as fait ce que tu as voulu.”</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_8">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_15">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_8">
+        <Content>15</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_8">
+        <Content>15</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_50">
+        <Content>Puis, ils prennent Jonas et ils le jettent à la mer. Alors la colère de la mer se calme. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_16">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_8">
+        <Content>16</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_8">
+        <Content>16</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_50">
+        <Content>Ensuite, les hommes sont remplis d'un grand respect envers le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_7">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_51">
+        <Content>. Ils lui offrent un sacrifice et ils lui font des promesses avec serment.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHead_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_53">
+        <Content>Jonas prie le Seigneur</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/ChapterNumber1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ChapterNumber_4">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_17">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_9">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_4">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_54">
+        <Content>Le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_8">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_55">
+        <Content> envoie un grand poisson pour avaler Jonas. Jonas reste dans le ventre du poisson trois jours et trois nuits. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_18">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_9">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_9">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_56">
+        <Content>Dans le ventre du poisson, il prie le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_8">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_55">
+        <Content> son Dieu. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_18">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_9">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_9">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_56">
+        <Content>Il dit:</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_57">
+        <Content>“Je suis très malheureux.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>Alors je crie vers toi, </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_9">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_59">
+        <Content>,</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>et tu me réponds.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>De la profondeur de la mort,</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>j'appelle au secours</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>et tu entends ma voix.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_19">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_60">
+        <Content>Tu m'as jeté dans un trou profond</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>au co!eur de la mer,</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>et l'eau m'entoure.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>Toutes tes vagues et toute ton eau</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>tombent sur moi.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_19">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+        <Content>5</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
+        <Content>5</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_60">
+        <Content>Et moi, je dis:</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>‘Tu m'as chassé loin de tes yeux.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>Pourtant,</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>je veux revoir ton temple </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_5">
+        <Content>saint.’</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_19">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+        <Content>6</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
+        <Content>6</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_60">
+        <Content>L'eau m'arrive jusqu'au cou.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>La mer m'entoure.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>Des herbes s'enroulent</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>autour de ma tête.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_19">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+        <Content>7</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
+        <Content>7</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_60">
+        <Content>Je suis descendu</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>jusqu'au pied des montagnes.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>Je suis dans le monde des morts,</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>et les portes sont fermées à clé derrière moi,</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>pour toujours.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>Mais toi, </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_9">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_59">
+        <Content> mon Dieu,</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>tu me fais remonter vivant de ce trou.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_19">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+        <Content>8</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
+        <Content>8</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_10">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_59">
+        <Content> mon Dieu,</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>je vais bientôt mourir.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>Alors je me souviens de toi, </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_9">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_59">
+        <Content>,</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>et ma prière monte près de toi</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>dans ton temple saint.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_19">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+        <Content>9</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
+        <Content>9</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_60">
+        <Content>Ceux qui adorent les faux dieux</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>n'ont aucune chance d'être sauvés.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_19">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+        <Content>10</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
+        <Content>10</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_60">
+        <Content>Mais moi, je chanterai ta louange,</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>je t'offrirai des sacrifices.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>Je tiendrai</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>les promesses que je t'ai faites.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
+        <Content>Oui, c'est toi qui sauves, </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_9">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_59">
+        <Content>!”</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/ParagraphContinuation_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_20">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_11">
+        <Content>11</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_11">
+        <Content>11</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_61">
+        <Content>Alors le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_11">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_62">
+        <Content> donne cet ordre au poisson: “Rejette Jonas sur la terre!” Et aussitôt le poisson obéit.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHead_6">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_63">
+        <Content>Jonas obéit à l'ordre du Seigneur et va à Ninive</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/ChapterNumber1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ChapterNumber_5">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_21">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_5">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_64">
+        <Content>Une deuxième fois, le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_12">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_65">
+        <Content> dit à Jonas: </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>“Debout! Va à Ninive</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph..footnote-call">
+        <HyperlinkTextSource Self="Hyperlink_Fdf032e3c-bf35-4286-8f5e-0f4f81378a6b" Name="Hyperlink Fdf032e3c-bf35-4286-8f5e-0f4f81378a6b" Hidden="false" AppliedCharacterStyle="n" Position="Superscript">
+          <Footnote>
+            <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteGeneralParagraph..footnote-marker">
+              <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+                <Content><?ACE 4?> 3:2 = </Content>
+              </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_67"><Content>Voir Jonas 1.1 et la note.</Content></CharacterStyleRange></ParagraphStyleRange>
+          </Footnote>
+        </HyperlinkTextSource>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_68">
+        <Content>, la grande ville. Annonce-lui le message que je te donne.” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>Alors Jonas se lève. Il part, mais cette fois, il va à Ninive, comme le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_12">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_65">
+        <Content> l'a demandé. Ninive est une ville extraordinairement grande. Il faut trois jours pour la traverser. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>Jonas entre dans la ville, il marche pendant un jour entier. Il annonce aux gens: “Dans quarante jours, Ninive sera détruite!” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>5</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>5</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>Aussitôt, les gens de Ninive croient à la parole de Dieu. Ils décident de ne rien manger. Tous mettent des habits de deuil, les riches comme les pauvres. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>6</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>6</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>Le roi de Ninive apprend la nouvelle. Il se lève de son siège. Il enlève son habit royal, il met un habit de deuil, et s'assoit sur de la cendre. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>7</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>7</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>Puis le roi et ses ministres donnent cet ordre: “Criez dans la ville ces paroles: ‘Il est interdit aux habitants et aux bêtes, bo!eufs, moutons et chèvres, de manger et de boire</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph..footnote-call">
+        <HyperlinkTextSource Self="Hyperlink_F22b21ff6-a0e6-4861-843b-474f349d0548" Name="Hyperlink F22b21ff6-a0e6-4861-843b-474f349d0548" Hidden="false" AppliedCharacterStyle="n" Position="Superscript">
+          <Footnote>
+            <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteGeneralParagraph..footnote-marker">
+              <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+                <Content><?ACE 4?> 3:7 = </Content>
+              </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_69"><Content>Certains peuples d&apos;Orient avaient sans doute la coutume de faire participer les animaux au deuil.</Content></CharacterStyleRange></ParagraphStyleRange>
+          </Footnote>
+        </HyperlinkTextSource>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_68">
+        <Content>! </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>8</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>8</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>Tout le monde doit mettre des habits de deuil, les gens et les bêtes! Chacun doit crier vers Dieu de toutes ses forces. Chacun doit abandonner sa mauvaise conduite et arrêter les actions violentes qu'il fait! </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>9</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>9</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>Qui sait? Dieu changera peut-être d'avis. Il abandonnera sa colère contre nous, et nous ne mourrons pas.’ ”</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_11">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_23">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_13">
+        <Content>10</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_13">
+        <Content>10</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_70">
+        <Content>Dieu voit leurs efforts pour abandonner leur mauvaise conduite. Il change d'avis. Il regrette le mal qu'il voulait leur faire, et il ne le fait pas.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHead_6">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_63">
+        <Content>Jonas se met en colère, et le Seigneur lui parle</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/ChapterNumber1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ChapterNumber_5">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_21">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_5">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_64">
+        <Content>Jonas n'est pas content du tout, vraiment pas du tout. Il se met en colère. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>Il fait cette prière au </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_12">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_65">
+        <Content>: “Ah! </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_12">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_65">
+        <Content>, je le savais bien quand j'étais encore dans mon pays. C'est pourquoi je me suis dépêché de fuir à Tarsis</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph..footnote-call">
+        <HyperlinkTextSource Self="Hyperlink_Fafd17d11-5330-4e85-9969-4c501f0315db" Name="Hyperlink Fafd17d11-5330-4e85-9969-4c501f0315db" Hidden="false" AppliedCharacterStyle="n" Position="Superscript">
+          <Footnote>
+            <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteGeneralParagraph..footnote-marker">
+              <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+                <Content><?ACE 4?> 4:2 = </Content>
+              </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_71"><Content>Voir Jonas 1.3 et la note.</Content></CharacterStyleRange></ParagraphStyleRange>
+          </Footnote>
+        </HyperlinkTextSource>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_68">
+        <Content>. Je le savais bien, tu es plein de tendresse et de pitié, patient, plein d'amour, et tu regrettes tes menaces. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>Maintenant, </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_12">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_65">
+        <Content>, laisse-moi mourir. Oui, je préfère la mort à la vie.” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>Le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_12">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_65">
+        <Content> répond à Jonas: “Est-ce que tu as raison de te mettre en colère?” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>5</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>5</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>Jonas sort de la ville et il s'arrête à l'est de Ninive. Là, il se construit un abri et s'assoit dessous, à l'ombre. Il veut voir ce qui va se passer dans la ville. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>6</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>6</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>Alors le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_12">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_65">
+        <Content> Dieu fait pousser une plante au-dessus de Jonas. De cette façon, il aura de l'ombre et sera guéri de sa mauvaise humeur. Jonas est rempli de joie à cause de la plante. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>7</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>7</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>Mais le jour suivant, un peu avant le lever du soleil, Dieu envoie un ver. Le ver pique la plante, et la plante sèche. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>8</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>8</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>Puis, quand le soleil se lève, Dieu envoie de l'est un vent brûlant. Le soleil tape sur la tête de Jonas. Il va bientôt s'évanouir. Alors il souhaite la mort et dit: “Je préfère la mort à la vie.” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>9</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>9</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>Dieu demande à Jonas: “Est-ce que tu as raison de te mettre en colère à cause de cette plante?” Jonas répond: “Oui, j'ai bien raison de me mettre en colère et de souhaiter la mort!” </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>10</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>10</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>Le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_12">
+        <Content>Seigneur</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_65">
+        <Content> lui dit: “Toi, tu as pitié de cette plante. Pourtant, elle ne t'a demandé aucun travail. Ce n'est pas toi qui l'as fait pousser. En une nuit elle a grandi, en une nuit elle a séché. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>11</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>11</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>À Ninive, il y a plus de 120 000 habitants qui ne savent pas ce qui est bon pour eux. Il y a aussi beaucoup d'animaux. Alors, est-ce que je ne peux pas, moi, avoir pitié de cette grande ville de Ninive?”</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrBook_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrBookName_2">
+        <Content />
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/TitleMain_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_34">
+        <Content>ÉPÎTRE À PHILÉMON</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroSectionHead_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_72">
+        <Content>Introduction</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_73">
+        <Content>De toutes les lettres de Paul parvenues jusqu'à nous, l'Epître à Philémon est la plus brève, la plus personnelle aussi. Pour autant, elle n'est pas une «lettre privée». Paul s'adresse en effet aussi à l'«Eglise qui s'assemble dans la maison de Philémon» (v. 2).</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHead_7">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_74">
+        <Content>Salutation</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_24">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_14">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_6">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_75">
+        <Content>Paul, prisonnier de </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_13">
+        <Content>Jésus Christ</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_76">
+        <Content> et Timothée, le frère, à Philémon, notre bien-aimé collaborateur, </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_25">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_14">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_14">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_77">
+        <Content>et à Apphia, notre soeur, et à Archippe, notre compagnon d'armes, et à l'Eglise qui s'assemble dans ta maison. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_25">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_14">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_14">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_77">
+        <Content>A vous grâce et paix, de la part de Dieu notre Père et du </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_13">
+        <Content>Seigneur Jésus Christ</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph..footnote-call">
+        <HyperlinkTextSource Self="Hyperlink_F3cd531d6-a3b3-42e9-83c8-689f76b55de4" Name="Hyperlink F3cd531d6-a3b3-42e9-83c8-689f76b55de4" Hidden="false" AppliedCharacterStyle="n" Position="Superscript">
+          <Footnote>
+            <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteGeneralParagraph..footnote-marker">
+              <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+                <Content><?ACE 4?> 4:3 = </Content>
+              </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_78"><Content>General footnote content.</Content></CharacterStyleRange></ParagraphStyleRange>
+          </Footnote>
+        </HyperlinkTextSource>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_79">
+        <Content>.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHead_6">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_63">
+        <Content>L'amour et de la foi de Philemon</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_10">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_26">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>Je rends grâce à mon Dieu en faisant continuellement mention de toi dans mes prières, </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>5</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>5</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>car j'entends parler de l'amour et de la foi que tu as envers le </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_12">
+        <Content>Seigneur Jésus</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_65">
+        <Content> et en faveur de tous les saints. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>6</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>6</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>Que ta participation à la foi soit efficace</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph..footnote-call">
+        <HyperlinkTextSource Self="Hyperlink_Fd2ca65c1-2249-450c-b8cd-356c94c60226" Name="Hyperlink Fd2ca65c1-2249-450c-b8cd-356c94c60226" Hidden="false" AppliedCharacterStyle="n" Position="Superscript">
+          <Footnote>
+            <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteGeneralParagraph..footnote-marker">
+              <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+                <Content><?ACE 4?> 4:6 = </Content>
+              </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_80"><Content>Second general footnote.</Content></CharacterStyleRange></ParagraphStyleRange>
+          </Footnote>
+        </HyperlinkTextSource>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_68">
+        <Content>: fais donc connaître tout le bien que nous pouvons accomplir pour la cause du </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NameOfGod_12">
+        <Content>Christ</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_65">
+        <Content>. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>7</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>7</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>Grande joie et consolation m'ont déjà été apportées: par ton amour, frère, tu as réconforté le coeur des saints.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHead_6">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_63">
+        <Content>Une requête à Philémon</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_10">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_26">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>8</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>8</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>Aussi, bien que j'aie, en Christ, toute liberté de te prescrire ton devoir, </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>9</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>9</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>c'est de préférence au nom de l'amour que je t'adresse une requête. Oui, moi Paul, qui suis un vieillard, moi qui suis maintenant prisonnier de Jésus Christ, </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>10</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>10</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>je te prie pour mon enfant, celui que j'ai engendré en prison, Onésime, </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>11</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>11</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>qui jadis t'a été inutile et qui, maintenant, nous est utile, à toi comme à moi. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>12</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>12</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>Je te le renvoie, lui qui est comme mon propre coeur. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>13</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>13</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>Je l'aurais volontiers gardé près de moi, afin qu'il me serve à ta place dans la prison où je suis à cause de l'Evangile; </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>14</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>14</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>mais je n'ai rien voulu faire sans ton accord, afin que ce bienfait n'ait pas l'air forcé, mais qu'il vienne de ton bon gré. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>15</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>15</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>Peut-être Onésime n'a-t-il été séparé de toi pour un temps qu'afin de t'être rendu pour l'éternité, </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+        <Content>16</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
+        <Content>16</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_66">
+        <Content>non plus comme un esclave mais comme bien mieux qu'un esclave: un frère bien-aimé. Il l'est tellement pour moi, combien plus le sera-t-il pour toi, et en tant qu'homme et en tant que chrétien.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_11">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_23">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_13">
+        <Content>17</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_13">
+        <Content>17</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_70">
+        <Content>Si donc tu me tiens pour ton frère en la foi, reçois-le comme si c'était moi. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_27">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_13">
+        <Content>18</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_13">
+        <Content>18</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_70">
+        <Content>Et s'il t'a fait quelque tort ou s'il a quelque dette envers toi, porte cela à mon compte. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_27">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_13">
+        <Content>19</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_13">
+        <Content>19</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_70">
+        <Content>- C'est moi, Paul, qui l'écris de ma propre main: c'est moi qui paierai... Et je ne te rappelle pas que toi, tu as aussi une dette envers moi, et c'est toi-même! </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_27">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_13">
+        <Content>20</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_13">
+        <Content>20</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_70">
+        <Content>Allons, frère, rends-moi ce service dans le Seigneur; donne à mon coeur son réconfort en Christ! </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_27">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_13">
+        <Content>21</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_13">
+        <Content>21</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_70">
+        <Content>C'est en me fiant à ton obéissance que je t'écris: je sais que tu feras plus encore que je ne dis.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_11">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_23">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_13">
+        <Content>22</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_13">
+        <Content>22</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_70">
+        <Content>En même temps, prépare-moi un logement: j'espère en effet, grâce à vos prières, vous être rendu. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_27">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_13">
+        <Content>23</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_13">
+        <Content>23</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_70">
+        <Content>Epaphras, mon compagnon de captivité en Jésus Christ, te salue, </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_27">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_13">
+        <Content>24</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_13">
+        <Content>24</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_70">
+        <Content>ainsi que Marc, Aristarque, Démas et Luc, mes collaborateurs. </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_27">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_13">
+        <Content>25</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_13">
+        <Content>25</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_70">
+        <Content>La grâce du Seigneur Jésus Christ soit avec vous.</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+  </Story>
+</idPkg:Story>

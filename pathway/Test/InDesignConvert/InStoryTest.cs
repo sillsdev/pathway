@@ -1871,10 +1871,77 @@ namespace Test.InDesignConvert
         }
 
         [Test]
-        public void BuangExport()
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void TokPisin()
+        {
+            //Scripture
+            string fileName = "TokPisin";
+            _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".xhtml");
+            _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".css");
+            FileComparisionTest("TokPisinExpect");
+        }
+
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void TeTest()
+        {
+            //Scripture
+            string fileName = "TeTest";
+            _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".xhtml");
+            _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".css");
+            FileComparisionTest("TeTestExpect");
+        }
+
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void Bughotugospels()
+        {
+            //Scripture
+            string fileName = "Bughotu-gospels";
+            _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".xhtml");
+            _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".css");
+            FileComparisionTest("Bughotu-gospelsExpect");
+        }
+
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void B1pe()
+        {
+            //Scripture
+            string fileName = "B1pe";
+            _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".xhtml");
+            _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".css");
+            FileComparisionTest("B1peExpect");
+        }
+
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void Kabwa()
+        {
+            //Scripture
+            string fileName = "Kabwa";
+            _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".xhtml");
+            _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".css");
+            FileComparisionTest("KabwaExpect");
+        }
+
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void BuangExportDictionary()
         {
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/BuangExport.xhtml");
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/BuangExport.css");
+            FileComparisionTest("BuangExpect");
+        }
+
+        public void FileComparisionTest(string fileName)
+        {
 
             PublicationInformation projInfo = new PublicationInformation();
 
@@ -1898,6 +1965,10 @@ namespace Test.InDesignConvert
             ////To insert the variable for macro use
             //InInsertMacro insertMacro = new InInsertMacro();
             //insertMacro.InsertMacroVariable(projInfo, cssClass);
+
+            //string outputStory2 = Common.PathCombine(projInfo.TempOutputFolder, "Stories\\Story_2.xml");
+            //Common.DeleteFile(outputStory2);
+            //File.Create(outputStory2);
 
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
             InStyles inStyles = new InStyles();
@@ -1926,8 +1997,9 @@ namespace Test.InDesignConvert
             inPreferences.CreateIDPreferences(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), idAllClass);
 
             // Compare files
-
-            string expectedFolder = Common.PathCombine(_testFolderPath, "Expected\\BuangExpect");
+            
+            //string expectedFolder = Common.PathCombine(_testFolderPath, "Expected\\BuangExpect");
+            string expectedFolder = Common.PathCombine(_testFolderPath, "Expected\\" + fileName);
             string output = Common.PathCombine(projInfo.TempOutputFolder, "designmap.xml");
             string expected = Common.PathCombine(expectedFolder, "designmap.xml");
             XmlAssert.AreEqual(output, expected, " designmap.xml is not matching");
