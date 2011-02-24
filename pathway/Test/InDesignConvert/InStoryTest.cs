@@ -648,6 +648,61 @@ namespace Test.InDesignConvert
             Assert.IsTrue(result, styleName + " test Failed");
         }
 
+        //TD-1969
+        [Test]
+        public void PrinceTextReplace()
+        {
+            _storyXML = new InStory();
+            _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/PrinceTextReplace.css");
+            _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/PrinceTextReplace.xhtml");
+            ExportProcess();
+
+            _expected.Clear();
+            string styleName = "span_1";
+            XPath = "//CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]//Content";
+            string content = "ámʋ asɩ wie tá á, ɔlɔwa mʋ akasɩ́pʋ́ abanyɔ́ gyankpá. Ɔlɛbláa amʋ́ ɔbɛ́ɛ, “Mlɩyɔ wúlu amʋ ɔnɔ́ á, ";
+            bool result = ValidateNodeContent(_outputStory, content);
+            Assert.IsTrue(result, styleName + " test Failed");
+
+            _expected.Clear();
+            styleName = "span_3";
+            XPath = "//CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]//Content";
+            content = "Nɩ́ ɔkʋ ɔfɩ́tɛ́ mlɩ asʋankʋ á, mlɩbla mʋ mlɩaa, ‘Anɩ Wíe dɛ́ amʋ́ hián.’ Ɩnʋnʋ ɔbɛ́ha mlɔ́pʋ amʋ́ ba mɩ.”";
+            result = ValidateNodeContent(_outputStory, content);
+            Assert.IsTrue(result, styleName + " test Failed");
+        }
+
+        //TD-1970
+        [Test]
+        public void FootnoteSpanContent()
+        {
+            _storyXML = new InStory();
+            _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/FootnoteSpanContent.css");
+            _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/FootnoteSpanContent.xhtml");
+            ExportProcess();
+
+            _expected.Clear();
+            string styleName = "NoteTargetReference_1";
+            XPath = "//CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]//Content";
+            string content = "21:1 ";
+            bool result = ValidateNodeContent(_outputStory, content);
+            Assert.IsTrue(result, styleName + " test Failed");
+
+            _expected.Clear();
+            styleName = "AlternateReading_1";
+            XPath = "//CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]//Content";
+            content = "Nfɔ-nyíbʋ ";
+            result = ValidateNodeContent(_outputStory, content);
+            Assert.IsTrue(result, styleName + " test Failed");
+
+            _expected.Clear();
+            styleName = "span_2";
+            XPath = "//CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]//Content";
+            content = "igyi obubwí kʋá ɩbʋ mantáa Yerusalem, bʋtɛtɩ́ mʋ́ Olifbʋ.";
+            result = ValidateNodeContent(_outputStory, content);
+            Assert.IsTrue(result, styleName + " test Failed");
+        }
+
         //[Test]
         //public void PseudoBefore()
         //{
