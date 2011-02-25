@@ -1651,6 +1651,35 @@ namespace Test.InDesignConvert
         }
 
         [Test]
+        /// TD-1967 - TD-1968 - DropCaps with No of Digits Test
+        public void DropCaps_Digits()
+        {
+            _storyXML = new InStory();
+            string fileName = "dropcaps_digits";
+            _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".css");
+            _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".xhtml");
+            ExportProcess();
+
+            _expected.Add("DropCapCharacters", "1");
+            _expected.Add("DropCapLines", "2");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"ChapterNumber1\"]";
+            bool result = StyleXmlNodeTest(true);
+            Assert.IsTrue(result, _inputCSS + " test Failed");
+
+            _expected.Add("DropCapCharacters", "2");
+            _expected.Add("DropCapLines", "2");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"ChapterNumber2\"]";
+            result = StyleXmlNodeTest(true);
+            Assert.IsTrue(result, _inputCSS + " test Failed");
+
+            _expected.Add("DropCapCharacters", "3");
+            _expected.Add("DropCapLines", "2");
+            XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"ChapterNumber3\"]";
+            result = StyleXmlNodeTest(true);
+            Assert.IsTrue(result, _inputCSS + " test Failed");
+
+        }
+        [Test]
         public void FootNote()
         {
             _storyXML = new InStory();
@@ -1879,7 +1908,7 @@ namespace Test.InDesignConvert
             string fileName = "TokPisin";
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".xhtml");
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".css");
-            FileComparisionTest("TokPisinExpect");
+            FileComparisionTest("TokPisinExpect", "1");
         }
 
         [Test]
@@ -1891,19 +1920,20 @@ namespace Test.InDesignConvert
             string fileName = "TeTest";
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".xhtml");
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".css");
-            FileComparisionTest("TeTestExpect");
+            FileComparisionTest("TeTestExpect", "1");
         }
 
         [Test]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
+        [Ignore]
         public void Bughotugospels()
         {
             //Scripture
             string fileName = "Bughotu-gospels";
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".xhtml");
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".css");
-            FileComparisionTest("Bughotu-gospelsExpect");
+            FileComparisionTest("Bughotu-gospelsExpect", "2");
         }
 
         [Test]
@@ -1915,7 +1945,7 @@ namespace Test.InDesignConvert
             string fileName = "B1pe";
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".xhtml");
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".css");
-            FileComparisionTest("B1peExpect");
+            FileComparisionTest("B1peExpect", "2");
         }
 
         [Test]
@@ -1927,7 +1957,7 @@ namespace Test.InDesignConvert
             string fileName = "Kabwa";
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".xhtml");
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".css");
-            FileComparisionTest("KabwaExpect");
+            FileComparisionTest("KabwaExpect", "2");
         }
 
         [Test]
@@ -1937,12 +1967,11 @@ namespace Test.InDesignConvert
         {
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/BuangExport.xhtml");
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/BuangExport.css");
-            FileComparisionTest("BuangExpect");
+            FileComparisionTest("BuangExpect", "2");
         }
 
-        public void FileComparisionTest(string fileName)
+        public void FileComparisionTest(string fileName, string fileNo)
         {
-
             PublicationInformation projInfo = new PublicationInformation();
 
             projInfo.ProjectPath = Path.GetDirectoryName(_inputXHTML);
@@ -2004,8 +2033,8 @@ namespace Test.InDesignConvert
             string expected = Common.PathCombine(expectedFolder, "designmap.xml");
             XmlAssert.AreEqual(output, expected, " designmap.xml is not matching");
 
-            output = Common.PathCombine(projInfo.TempOutputFolder, "Stories\\Story_2.xml");
-            expected = Common.PathCombine(expectedFolder, "Stories\\Story_2.xml");
+            output = Common.PathCombine(projInfo.TempOutputFolder, "Stories\\Story_" + fileNo + ".xml");
+            expected = Common.PathCombine(expectedFolder, "Stories\\Story_" + fileNo + ".xml");
             XmlAssert.AreEqual(output, expected, " Story_2.xml is not matching");
 
             output = Common.PathCombine(projInfo.TempOutputFolder, "Resources\\styles.xml");

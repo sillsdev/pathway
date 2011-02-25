@@ -53,6 +53,9 @@ namespace SIL.PublishingSolution
         private bool _imageInserted;
         private List<string> _usedStyleName = new List<string>();
         private bool _IsHeadword = false;
+        private bool _isDropCap = false;
+        private string _dropCapStyle = string.Empty;
+        private string _currentStoryName = string.Empty;
         #endregion
 
         public Dictionary<string, ArrayList> CreateStory(string projectPath, string xhtmlFileWithPath, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
@@ -326,8 +329,15 @@ namespace SIL.PublishingSolution
                 _writer.WriteStartElement("Content");
                 content = WriteCounter(content);
                 content = whiteSpacePre(content);
+                if (_isDropCap)
+                {
+                    content = _chapterNo;
+                    _isDropCap = false;
+                }
+
                 _writer.WriteString(content);
                 _writer.WriteEndElement();
+                
             }
             AnchorBookMark();
             _writer.WriteEndElement();
@@ -921,13 +931,19 @@ namespace SIL.PublishingSolution
             string classNameWOLang = _classNameWithLang;
             if (classNameWOLang.IndexOf("_.") > 0)
                 classNameWOLang = Common.LeftString(classNameWOLang, "_.");
+            string inner = string.Empty; //_reader.ReadString();
+
+            if (classNameWOLang == "ChapterNumber")
+                _chapterNo = _reader.ReadString();
 
             if (IdAllClass.ContainsKey(classNameWOLang) && IdAllClass[classNameWOLang].ContainsKey("float") && IdAllClass[classNameWOLang].ContainsKey("BaselineShift"))
             {
                 Dictionary<string, string> mystyle = new Dictionary<string, string>();
-
+                _isDropCap = true;
                 string lines = "2";
-
+                _allStyle.Pop();
+                CollectFootNoteChapterVerse(_chapterNo, Common.OutputType.IDML.ToString());
+                
                 try
                 {
                     if (IdAllClass[classNameWOLang].ContainsKey("PointSize") && IdAllClass[classNameWOLang]["PointSize"].IndexOf('%') > 0)
@@ -938,11 +954,12 @@ namespace SIL.PublishingSolution
                 catch
                 {
                 }
-                mystyle["DropCapCharacters"] = "1"; // One Character
+                mystyle["DropCapCharacters"] = _chapterNo.Length.ToString();
                 mystyle["DropCapLines"] = lines; // No of Lines.
-                //_paragraphName = classNameWOLang + "1_" + parentClassName;
-                _paragraphName = classNameWOLang + "1";
+                _paragraphName = classNameWOLang + _chapterNo.Length.ToString();
                 _newProperty[_paragraphName] = mystyle;
+                _dropCapStyle = _paragraphName;
+                Write();
             }
         }
 

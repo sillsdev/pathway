@@ -358,7 +358,7 @@ namespace SIL.PublishingSolution
                     else if (_reader.Name == "lang")
                     {
                         _lang = _reader.Value;
-                        if (_lang == "zxx") continue;
+                        //if (_lang == "zxx") continue;
                         //classNameWithLang = classNameWithLang + Common.SepAttrib + _lang;
                         _xhtmlAttribute.Add(_lang);
                         AddEntryLanguage();
@@ -612,11 +612,11 @@ namespace SIL.PublishingSolution
         /// <returns></returns>
         protected bool CollectFootNoteChapterVerse(string content, string outputType)
         {
-            if (_className.ToLower() == "chapternumber")
+            if (_outputType == Common.OutputType.ODT && _className.ToLower() == "chapternumber")
             {
                 _chapterNo = content;
             }
-            else if (_className.ToLower() == "versenumber" || _className.ToLower() == "versenumber1")
+            if (_className.ToLower() == "versenumber" || _className.ToLower() == "versenumber1")
             {
                 _verseNo = content;
             }
@@ -1048,6 +1048,7 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
+                    if (property.Key != "prince-text-replace")
                     _tempStyle[property.Key] = property.Value;
                 }
             }
