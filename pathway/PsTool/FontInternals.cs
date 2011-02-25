@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Text;
@@ -214,7 +215,10 @@ namespace SIL.Tool
                                     break;
                                 case 3: // Windows Fonts use this encoding (first byte is NUL)
                                     j++;
-                                    result += szResult[j];
+                                    if (j < ttNMResult.uStringLength)
+                                    {
+                                        result += szResult[j];
+                                    }
                                     break;
                             }
                         }
@@ -486,47 +490,58 @@ namespace SIL.Tool
             }
             if (bFound)
             {
-                fs.Position = tbName.uOffset;
-                TT_NAME_TABLE_HEADER ttNTResult = GetNameTableHeader(r);
-                string result = "";
-                for (int i = 0; i < ttNTResult.uNRCount; i++)
+                try
                 {
-                    TT_NAME_RECORD ttNMResult = GetNameRecord(r);
-                    const int CopyrightId = 0;
-                    if (ttNMResult.uNameID == CopyrightId)
+                    fs.Position = tbName.uOffset;
+                    TT_NAME_TABLE_HEADER ttNTResult = GetNameTableHeader(r);
+                    string result = "";
+                    for (int i = 0; i < ttNTResult.uNRCount; i++)
                     {
-                        fs.Position = tbName.uOffset + ttNMResult.uStringOffset + ttNTResult.uStorageOffset;
-                        char [] szResult = r.ReadChars(ttNMResult.uStringLength);
-                        // Usually the uEncodingID will tell us whether we're using single or double-byte encoding,
-                        // but sometimes it lies. Verify by testing the first character in the array for '\0'
-                        int uId = ttNMResult.uEncodingID;
-                        if (szResult[0] == '\0')
+                        TT_NAME_RECORD ttNMResult = GetNameRecord(r);
+                        const int CopyrightId = 0;
+                        if (ttNMResult.uNameID == CopyrightId)
                         {
-                            uId = 3;
-                        }
-                        for (int j = 0; j < ttNMResult.uStringLength; j++)
-                        {
-                            switch (uId)
+                            fs.Position = tbName.uOffset + ttNMResult.uStringOffset + ttNTResult.uStorageOffset;
+                            char[] szResult = r.ReadChars(ttNMResult.uStringLength);
+                            // Usually the uEncodingID will tell us whether we're using single or double-byte encoding,
+                            // but sometimes it lies. Verify by testing the first character in the array for '\0'
+                            int uId = ttNMResult.uEncodingID;
+                            if (szResult[0] == '\0')
                             {
-                                case 0: // SIL Fonts use this encoding (but sometimes lie)
-                                    result += szResult[j];
-                                    break;
-                                case 3: // Windows Fonts use this encoding (first byte is NUL)
-                                    j++;
-                                    result += szResult[j];
-                                    break;
+                                uId = 3;
                             }
+                            for (int j = 0; j < ttNMResult.uStringLength; j++)
+                            {
+                                switch (uId)
+                                {
+                                    case 0: // SIL Fonts use this encoding (but sometimes lie)
+                                        result += szResult[j];
+                                        break;
+                                    case 3: // Windows Fonts use this encoding (first byte is NUL)
+                                        j++;
+                                        if (j < ttNMResult.uStringLength)
+                                        {
+                                            result += szResult[j];
+                                        }
+                                        break;
+                                }
+                            }
+                            break;
                         }
-                        break;
+                    }
+                    if (result != "")
+                    {
+                        // we got something out of the CopyrightId slot - does it contain "SIL" or "Summer Institute of Linguistics"?
+                        if (result.Contains("SIL") || result.Contains("Summer Institute of Linguistics"))
+                        {
+                            return true;
+                        }
                     }
                 }
-                if (result != "")
+                catch (Exception e)
                 {
-                    // we got something out of the CopyrightId slot - does it contain "SIL" or "Summer Institute of Linguistics"?
-                    if (result.Contains("SIL") || result.Contains("Summer Institute of Linguistics"))
-                    {
-                        return true;
-                    }
+                    Debug.WriteLine(e.ToString());
+                    return false;
                 }
             }
             return false;
