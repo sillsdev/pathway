@@ -111,6 +111,7 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("NextStyle", "ParagraphStyle/" + cssClass.Key);
                 _writer.WriteAttributeString("KeyboardShortcut", "0 0");
                 _IDProperty = mapProperty.IDProperty(cssClass.Value);
+                DeleteRelativeInFootnote(cssClass);
                 SuperscriptSubscriptIncreaseFontSize(false);
                 PositionProperty();
 
@@ -124,6 +125,10 @@ namespace SIL.PublishingSolution
                         _IDClass[property.Key] = property.Value;
                         continue;
                     }
+                    //if (property.Key == "prince-text-replace")
+                    //{
+                    //    continue;
+                    //}
                     if (property.Key == "StrokeColor")
                     {
                         _IDClass[property.Key] = property.Value;
@@ -154,6 +159,25 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement(); //End RootParagraphStyleGroup
         }
 
+        private void DeleteRelativeInFootnote(KeyValuePair<string, Dictionary<string, string>> cssClass)
+        {
+            if (cssClass.Key.IndexOf("..footnote-cal") > 0 || cssClass.Key.IndexOf("..footnote-marker") > 0)
+            {
+                ArrayList removeProperty = new ArrayList();
+                foreach (KeyValuePair<string, string> property in _IDProperty)
+                {
+                    if (property.Value.IndexOf("%") > 0)
+                    {
+                        removeProperty.Add(property.Key);
+                    }
+                }
+                foreach (string property in removeProperty)
+                {
+                    _IDProperty.Remove(property);
+                }
+            }
+        }
+
         private void CreateCharacterStyle()
         {
             foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _cssProperty)
@@ -169,6 +193,7 @@ namespace SIL.PublishingSolution
                     _writer.WriteAttributeString("NextStyle", "CharacterStyle/" + cssClass.Key);
                     _writer.WriteAttributeString("KeyboardShortcut", "0 0");
                     _IDProperty = mapProperty.IDProperty(cssClass.Value);
+                    DeleteRelativeInFootnote(cssClass);
                     SuperscriptSubscriptIncreaseFontSize(true);
                     _IDClass = new Dictionary<string, string>(); // note: ToDo seperate the process
                     _IDAllClass[cssClass.Key] = _IDClass;

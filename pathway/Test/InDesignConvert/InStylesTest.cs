@@ -712,6 +712,29 @@ namespace Test.InDesignConvert
         }
         #endregion
 
+        [Test]
+        // TD-1973 and TD-1974
+        public void RemoveRelativeInFootnote()
+        {
+            string _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/RemoveRelativeInFootnote.xhtml");
+            string _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/RemoveRelativeInFootnote.css");
+            _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
+            _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
+            _storyXML.CreateStory(_outputStory, _inputXHTML, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
+            FileNameWithPath = Common.PathCombine(_output, "Styles.xml");
+
+            string classname = "NoteGeneralParagraph..footnote-call";
+            XPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"" + classname + "\"]";
+            _expected.Add("BaselineShift", "50%");
+            Assert.IsFalse(ValidateNodeAttribute(), " failed for Footnote - BaselineShift");
+
+            classname = "NoteGeneralParagraph..footnote-marker";
+            XPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"" + classname + "\"]";
+            _expected.Add("Leading", "100%");
+            Assert.IsFalse(ValidateNodeAttribute(), " failed for Footnote - Leading");
+        }
+
+
         #endregion
     }
 }
