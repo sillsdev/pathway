@@ -1343,7 +1343,6 @@ namespace SIL.PublishingSolution
                         if (childNodes != null)
                         {
                             sb.Length = 0;
-                            playOrder++;
                             foreach (XmlNode childNode in childNodes)
                             {
                                 // for a dictionary, the grammatical-info//partofspeech//span is the label
@@ -1354,6 +1353,7 @@ namespace SIL.PublishingSolution
                                     // This entry doesn't have any information - skip it
                                     continue;
                                 }
+                                playOrder++;
                                 textString = childNode.FirstChild.FirstChild.InnerText;
 
                                 sb.Append(name);
@@ -1375,7 +1375,6 @@ namespace SIL.PublishingSolution
                                 ncx.WriteEndElement(); // navPoint
                                 // reset the stringbuilder
                                 sb.Length = 0;
-                                playOrder++;
                             }
                         }
                     }
