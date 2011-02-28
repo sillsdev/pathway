@@ -2072,7 +2072,8 @@ return FromProg(file);
         {
             if (Directory.Exists(destFolder))
             {
-                Directory.Delete(destFolder, true);
+                //Directory.Delete(destFolder, true);
+                DeleteDirectory(destFolder);
             }
             Directory.CreateDirectory(destFolder);
             string[] files = Directory.GetFiles(sourceFolder);
