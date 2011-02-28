@@ -15,7 +15,8 @@
 			These spans may come from more than one paragraph.-->
 	<xsl:key name="spans-by-verse"
 			match="xhtml:span[(not(@class) or @class='Inscription' or @class='Words_Of_Christ') and
-						not(parent::xhtml:div[@class='Section_Head'])]"
+							not(parent::xhtml:div[@class='Section_Head']) and
+							not(parent::xhtml:span[@class='Note_General_Paragraph'])]"
 			use="generate-id(preceding::xhtml:span[@class='Verse_Number'][1])" />
 
 	<xsl:variable name="bookCode">
@@ -159,8 +160,8 @@ INSERT INTO "</xsl:text>
 		<!-- If this is the end of the paragraph, add a carriage return. -->
 		<xsl:if test="not(following-sibling::xhtml:span[not(@class)]) and
 						(not(parent::xhtml:div/following-sibling::xhtml:div) or
-							parent::xhtml:div/following-sibling::xhtml:div[@class='Paragraph' or
-														@class='Paragraph_Continuation'])">
+							parent::xhtml:div/following-sibling::xhtml:div[1][@class='Paragraph' or @class='Line1' or
+												@class='Line2' or @class='Paragraph_Continuation'])">
 			<xsl:text>
 </xsl:text>
 		</xsl:if>
@@ -188,11 +189,27 @@ INSERT INTO "</xsl:text>
 		<!-- If this is the end of the paragraph, add an empty paragraph element. -->
 		<xsl:if test="not(following-sibling::xhtml:span[not(@class)]) and
 						(not(parent::xhtml:div/following-sibling::xhtml:div) or
-							(parent::xhtml:div/following-sibling::xhtml:div[@class='Paragraph' or
-														@class='Paragraph_Continuation']) )">
-			<xsl:text>&lt;p&gt; &lt;/p&gt;</xsl:text>
+							parent::xhtml:div/following-sibling::xhtml:div[1][@class='Paragraph' or @class='Line1' or
+												@class='Line2' or @class='Paragraph_Continuation'])">
+			<xsl:choose>
+				<!-- When the next div has the class "Paragraph", add an empty paragraph element. -->
+				<xsl:when test="parent::xhtml:div/following-sibling::xhtml:div[1][@class='Paragraph']">
+					<xsl:text>&lt;p&gt; &lt;/p&gt;</xsl:text>
+				</xsl:when>
+				<!-- Otherwise add a carriage return. -->
+				<xsl:otherwise>
+					<xsl:text>
+</xsl:text>
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:if>
-	</xsl:template> <!-- xhtml:span mode="unformatted" -->
+	</xsl:template> <!-- xhtml:span mode="basichtml" -->
+
+	<!-- Skip the div if the class is 'Parallel_Passage_Reference' or 'pictureCenter'.
+		We see no evidence of these being used by YouVersion.com. -->
+	<xsl:template match="xhtml:div[@class='Parallel_Passage_Reference']"/>
+<!--    <xsl:template match="xhtml:div[@class='pictureCenter']"/> -->
+	<xsl:template match="xhtml:span[@class='Note_General_Paragraph']"/>
 
 <!--	<xsl:template match="xhtml:div[@class='Paragraph' or @class='Paragraph_Continuation' or @class='Line1' or @class='Line2']"> -->
 
@@ -225,11 +242,11 @@ INSERT INTO "</xsl:text>
 			<xsl:value-of select="text()"/>
 		</xsl:element> <- span ->
 	</xsl:template> <- xhtml:span[@class='Words_Of_Christ'] -->
-
 	<!-- Skip the div if the class is 'Parallel_Passage_Reference' or 'pictureCenter'.
 		We see no evidence of these being used by YouVersion.com. -->
 	<xsl:template match="xhtml:div[@class='Parallel_Passage_Reference']"/>
 <!--    <xsl:template match="xhtml:div[@class='pictureCenter']"/> -->
+
 	<!-- Skip the span if the class is 'See_In_Glossary'. This is not used by YouVersion. -->
 <!--    <xsl:template match="xhtml:span[@class='See_In_Glossary']"/> -->
 
