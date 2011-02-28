@@ -748,9 +748,14 @@ namespace SIL.PublishingSolution
         private string GetPropertyValue(string clsName, string property, string defaultValue)
         {
             string valueOfProperty = defaultValue;
-            if (IdAllClass.ContainsKey(clsName) && IdAllClass[clsName].ContainsKey(property))
+            string excludeParent = Common.LeftString(clsName, "_");
+            //if (IdAllClass.ContainsKey(clsName) && IdAllClass[clsName].ContainsKey(property))
+            //{
+            //    valueOfProperty = IdAllClass[clsName][property];
+            //}
+            if (IdAllClass.ContainsKey(excludeParent) && IdAllClass[excludeParent].ContainsKey(property))
             {
-                valueOfProperty = IdAllClass[clsName][property];
+                valueOfProperty = IdAllClass[excludeParent][property];
             }
             return valueOfProperty;
         }
@@ -799,14 +804,14 @@ namespace SIL.PublishingSolution
 
         private void GetAlignment(string alignment, ref string wrapSide, ref string HoriAlignment, ref string AnchorPoint, ref string VertRefPoint, ref string VertAlignment, ref string wrapMode)
         {
-            if (_allCharacter.Count > 0)
+            if (_allParagraph.Count > 0)
             {
                 string stackClass2 = _allStyle.Peek();
                 string stackClass1 = _allParagraph.Peek();
                 string stackClass = _allCharacter.Peek();
                 //string[] splitedClassName = stackClass.Split('_');
 
-                string[] splitedClassName = _allStyle.ToArray();
+                string[] splitedClassName = _allParagraph.ToArray(); ; // _allStyle.ToArray();
 
                 if (splitedClassName.Length > 0)
                 {
@@ -864,7 +869,12 @@ namespace SIL.PublishingSolution
                                 wrapMode = "JumpObjectTextWrap";
                                 break;
                         }
-                        wrapSide = GetPropertyValue("clear", clsName, wrapSide);
+                            wrapSide = GetPropertyValue(clsName, "clear", wrapSide);
+                            if (pos != "left" && wrapSide != "none")
+                            {
+                                break;
+                            }
+
                     }
                 }
             }
