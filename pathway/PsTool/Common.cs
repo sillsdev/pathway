@@ -2063,6 +2063,45 @@ return FromProg(file);
             installerSettings.Save(userSheet);
         }
 
+        /// <summary>
+        /// To copy Temporary Office files to Environmental Temp Folder instead of keeping changes in Application Itself.
+        /// </summary>
+        /// <param name="sourceFolder"></param>
+        /// <param name="destFolder"></param>
+        public static void CopyOfficeFolder(string sourceFolder, string destFolder)
+        {
+            if (Directory.Exists(destFolder))
+            {
+                Directory.Delete(destFolder, true);
+            }
+            Directory.CreateDirectory(destFolder);
+            string[] files = Directory.GetFiles(sourceFolder);
+            try
+            {
+                foreach (string file in files)
+                {
+                    string name = Path.GetFileName(file);
+                    string dest = Common.PathCombine(destFolder, name);
+                    File.Copy(file, dest);
+                }
+
+                string[] folders = Directory.GetDirectories(sourceFolder);
+                foreach (string folder in folders)
+                {
+                    string name = Path.GetFileName(folder);
+                    string dest = Common.PathCombine(destFolder, name);
+                    if (name != ".svn")
+                    {
+                        CopyOfficeFolder(folder, dest);
+                    }
+                }
+            }
+            catch
+            {
+                return;
+            }
+        }
+
         ///// <summary>
         ///// If the user selected page style is "Every Page", this method will remove the "@Page:left" and 
         ///// "@page:right" tag from the  CSS file.

@@ -17,6 +17,7 @@ namespace Test.InDesignConvert
         private string _inputCSS;
         private string _inputXHTML;
         private string _outputPath;
+        private string _expectedPath;
         private string _outputStory;
         private string _outputStyles;
         private Dictionary<string, string> _expected = new Dictionary<string, string>();
@@ -43,12 +44,14 @@ namespace Test.InDesignConvert
             _testFolderPath = PathPart.Bin(Environment.CurrentDirectory, "/InDesignConvert/TestFiles");
             ClassProperty = _expected;  //Note: All Reference address initialized here
             _outputPath = Common.PathCombine(_testFolderPath, "output");
+            _expectedPath = Common.PathCombine(_testFolderPath, "expected");
+            _expectedPath = Common.PathCombine(_expectedPath, "BuangExpect");
             _outputStyles = Common.PathCombine(_outputPath, "Resources");
             _outputStory = Common.PathCombine(_outputPath, "Stories");
             _cssProperty = new Dictionary<string, Dictionary<string, string>>();
             Common.SupportFolder = "";
             Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
-
+            Common.CopyOfficeFolder(_expectedPath, _outputPath);
         }
 
         [SetUp]
