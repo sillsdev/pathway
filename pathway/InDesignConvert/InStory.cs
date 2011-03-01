@@ -806,9 +806,9 @@ namespace SIL.PublishingSolution
         {
             if (_allParagraph.Count > 0)
             {
-                string stackClass2 = _allStyle.Peek();
-                string stackClass1 = _allParagraph.Peek();
-                string stackClass = _allCharacter.Peek();
+                //string stackClass2 = _allStyle.Peek();
+                //string stackClass1 = _allParagraph.Peek();
+                //string stackClass = _allCharacter.Peek();
                 //string[] splitedClassName = stackClass.Split('_');
 
                 string[] splitedClassName = _allParagraph.ToArray(); ; // _allStyle.ToArray();
