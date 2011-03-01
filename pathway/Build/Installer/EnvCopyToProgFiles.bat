@@ -80,7 +80,7 @@ if not exist "%installBase%" mkdir "%installBase%"
 :startCopy
 set SRC=%BASE%\PsExport%cfg%
 echo. base source directory: %base%
-echo. destination directory: %FW_HOME%
+echo. destination directory: %DST%
 echo. 
 echo. Copying files...
 echo.--------------------------------------------------------------------------
@@ -94,6 +94,11 @@ cd %BASE%\Build\Installer
 rem now copy the files from the ConfigurationTool output directory to the destination folder
 xcopy %base%\ConfigurationTool%cfg% "%DST%" /y
 xcopy %base%\ConfigurationTool%cfg%\epubcheck-1.1\* "%DST%"\epubcheck-1.1 /i /s /q /y
+
+rem nuke the extra entries in the Print Via dialog
+cd %DST%
+del OpenOfficeConvert_OLD.dll
+cd %BASE%\Build\Installer
 
 rem ** edb 1/14/2011: these should be taken care of by calling postBuild.bat and copying over the results
 rem ** in the code blocks above
