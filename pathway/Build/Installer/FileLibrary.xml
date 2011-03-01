@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\PublishingSolution\TE_XHTML-to-YouVersion_OneChapter_SQL.xslt" ComponentGuid="E5C3E1C0-875E-4871-97F9-68BAFCD9B42D"/>
+	<File Path="Files\PublishingSolution\TE_FixChapters_XHTML.xslt" ComponentGuid="623C58C4-9F3A-4FB6-9FCF-E23973293008"/>
+	<File Path="Files\PathwaySupport\TE_XHTML-to-YouVersion_OneChapter_SQL.xslt" ComponentGuid="C83E21C6-7574-4B12-A851-33D2A96FE18D"/>
+	<File Path="Files\ConfigurationTool\TE_XHTML-to-YouVersion_OneChapter_SQL.xslt" ComponentGuid="96E469DB-B09C-4A6E-AE89-14833619F574"/>
 	<File Path="Files\PsDll\epubValidator.pdb" ComponentGuid="A604A1A1-0C38-45FF-B9DA-70D4E7CEE06B"/>
 	<File Path="Files\PsDll\epubValidator.exe" ComponentGuid="0F084EAD-1877-411A-8C47-44FFCDBA79FF"/>
 	<File Path="Files\ConfigurationTool\epubValidator.pdb" ComponentGuid="A489F3F0-9527-4029-AF63-A8E4C6B2F124"/>
