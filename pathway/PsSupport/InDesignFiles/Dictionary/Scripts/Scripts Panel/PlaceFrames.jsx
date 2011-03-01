@@ -14,13 +14,16 @@ var margin=new Array("letHead", "1.5", "4.5", "1.666667", "4.5");//
 // Created By:   James Prabu 
 // Created On: Sep 10 2009   
 // Modified By:  James Prabu                        
-// Modified On:  Dec 28 2010 
-// Task Number : TD-1754(InDesign: "Javascript Error" when open very first document)
+// Modified On:  Mar 01 2011 
+// Task Number : TD-1984(InDesign: InDesign gets Hung)
 // <remarks> 
-// main changes in  main(removed startEvent), SetOverflowsPages(commented frameHeight > pageHeight) 
+// main changes in  BalancedColumn() for Footnote handling
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
+//$.level = 1; 
+//debugger;	
+ 
 var myDocument;
 var myFrames=new Array();
 var marginTop, marginBottom, marginLeft,marginRight, pageHeight, pageWidth, headerMinHeight = 6, dataMinHeight = 3, curPageNo =0,currentMarginTop;
@@ -106,17 +109,22 @@ function main()
 	d = new Date();
 	times=times + "\n" + d;
 	
+
 	times="\n" + times + "\nCheckBorder";
 	times=times + "\n" + d;
 	CheckBorder();
 	d = new Date();	
 	times=times + "\n" + d;
+	
 
+	
 	times="\n" + times + "\nUngrouping";
 	times=times + "\n" + d;
 	Ungrouping();
 	d = new Date();
 	times=times + "\n" + d;
+	
+
 /*
 	times="\n" + times + "\nMoveToFirstPage";
 	times=times + "\n" + d;
@@ -130,7 +138,7 @@ function main()
 	d = new Date();
 	times=times + "\n" + d;
 	
-	
+
 
 	times="\n" + times + "\nOptionals";
 	times=times + "\n" + d;
@@ -138,13 +146,17 @@ function main()
 	d = new Date();
 	times=times + "\n" + d;
 
+
+			
 	times="\n" + times + "\nGrouping";
 	times=times + "\n" + d;
 	Grouping();//Should be always as Last function
 	d = new Date();
 	times=times + "\n" + d;
 
+			
 	SaveDocument();
+
 
 	//alert(times);
 }
@@ -154,7 +166,7 @@ function SaveDocument()
 	try
 	{
 		if(myDocument.modified == true){
-			myDocument.save(new File("/c/myTestDocument.indd"));
+			//myDocument.save(new File("/c/myTestDocument.indd"));
 		}
 	}
 	catch(myError)
@@ -228,6 +240,9 @@ function PlaceFrames()
 	SetMasterPageForFirstPage();
 
 	DeleteEmptyPages();
+	
+
+	
 	//MoveToFirstPage();
 	var myStory, myPage, frameBounds,pageBounds, frameType, frameHeight, minHeight, firstParagraphStyle;// = myDocument.stories.item(0); 
      var prePageNo=1;
@@ -247,6 +262,9 @@ function PlaceFrames()
 	currentMarginTop = marginTop;
 
     DrawPictureCaption();
+	
+
+		
 	//return 0;
 	d1 = new Date();
 	times1=times1 + "\n" + d1;
@@ -257,8 +275,10 @@ function PlaceFrames()
 
 	curPageNo = activePageNumber;	
     
+
 	for(var myStoryCounter=activePageNumber; myStoryCounter <= myFrames.length-1;myStoryCounter++)
 	{
+
 		goNewPage = false;
 		myStory = myFrames[myStoryCounter];
 		//alert(myStory.contents);
@@ -535,18 +555,30 @@ function SetOverflowsPages(myStory,frameBounds)
 //Set Column Balance to Multi-Column Text Frames
 function BalancedColumns(myStory)
 {
-		var fixedFrameBound, fitFrameBound;
-		fixedFrameBound = myStory.geometricBounds; 
-		for(unit=1;unit<=fixedFrameBound[2] * 2;unit++)
+	try
+	{
+						//debugger;	
+		if(myStory.footnotes.length == 0)
 		{
-			fitFrameBound = myStory.geometricBounds; 			
-			myStory.geometricBounds=[fitFrameBound[0], fitFrameBound[1], fitFrameBound[2] - .5,fitFrameBound[3]];//.5 
-			if(myStory.overflows)
+			var fixedFrameBound, fitFrameBound;
+			fixedFrameBound = myStory.geometricBounds; 
+			for(unit=1;unit<=parseInt(fixedFrameBound[2]) * 2;unit++)
 			{
-			myStory.geometricBounds=[fitFrameBound[0], fitFrameBound[1], fitFrameBound[2] + .5,fitFrameBound[3]];//.5
-				break;
+				fitFrameBound = myStory.geometricBounds; 	
+				fitFrameBound[2] = fitFrameBound[2].toFixed(2); 
+				myStory.geometricBounds=[fitFrameBound[0], fitFrameBound[1], fitFrameBound[2] -1,fitFrameBound[3]];//.5 
+				if(myStory.overflows)
+				{
+				myStory.geometricBounds=[fitFrameBound[0], fitFrameBound[1], fitFrameBound[2] +1,fitFrameBound[3]];//.5
+					break;
+				}
 			}
 		}
+	}
+	catch(myError)
+	{
+		return "  ";
+	}
 }
 
 // This method move all frames to first page
@@ -918,7 +950,7 @@ function Grouping()
 function DeleteLines()
 {
 		var myLine;
-		var LineLength = myDocument.graphicLines.length -1;		
+		var LineLength = myDocument.graphicLines.length -1;	
 		for(; LineLength >= 0 ; LineLength--)
 		{
 			myLine = myDocument.graphicLines[LineLength];
@@ -938,6 +970,7 @@ function Ungrouping()
 			{
 				for(; groupLength >= 0 ; groupLength--)
 				{
+					alert(groupLength);
 					myGroup = myDocument.groups[groupLength];
 					if(myGroup.parent.name  > activePageNumber)
 					myGroup.ungroup();
@@ -959,7 +992,6 @@ function Ungrouping()
 		}
 		catch(myError)
 		{
-			//alert("U");
 			//myLine.strokeWeight = "1pt";
 		}		
 
@@ -1133,37 +1165,39 @@ function DrawPictureCaption()
 	var pictures = myDocument.allGraphics;
 try
 {
-	//alert(pictures.length);
-	for(var count = 0; count <= pictures.length; count++)
+	if(pictures.length > 0)
 	{
-		picture = pictures[count];
-		//alert(picture.parent.name);	
-		//if(picture.parent.name  > activePageNumber)
-		//{
-			
-			if(picture.parent.allPageItems.length > 0)
-			{
-				caption = picture.parent.textFrames[0];
-
-				if(caption.overflows)
+		for(var count = 0; count <= pictures.length; count++)
+		{
+			picture = pictures[count];
+			//alert(picture.parent.name);	
+			//if(picture.parent.name  > activePageNumber)
+			//{
+				
+				if(picture.parent.allPageItems.length > 0)
 				{
-					
-					gbPicture = picture.geometricBounds;
-					gbContainer = picture.parent.geometricBounds;
-					 pictureHeight = gbPicture[2] - gbPicture[0];
-					caption.geometricBounds = [gbPicture[2] + 0.1, gbPicture[1], gbPicture[2] + 1, gbPicture[3]];
-					FitSingleFrameToContent(caption);
-					gbCaption = caption.geometricBounds;
-					captionHeight = gbCaption[2] - gbCaption[0];
-					parentHeight = (pictureHeight + captionHeight);// + 0.5;//captionHeightUnit
-					if(gbContainer[1]==gbContainer[3])
-					gbContainer[3] += 0.5;
-					//alert(gbContainer[0] + "\n" + gbContainer[1] + "\n" +  gbContainer[0] + parentHeight + "\n" +  gbContainer[3])
-					picture.parent.geometricBounds = [gbContainer[0], gbContainer[1], gbContainer[0] + parentHeight , gbContainer[3]];
-				}
-			 }
-		//}
-     }
+					caption = picture.parent.textFrames[0];
+
+					if(caption.overflows)
+					{
+						
+						gbPicture = picture.geometricBounds;
+						gbContainer = picture.parent.geometricBounds;
+						 pictureHeight = gbPicture[2] - gbPicture[0];
+						caption.geometricBounds = [gbPicture[2] + 0.1, gbPicture[1], gbPicture[2] + 1, gbPicture[3]];
+						FitSingleFrameToContent(caption);
+						gbCaption = caption.geometricBounds;
+						captionHeight = gbCaption[2] - gbCaption[0];
+						parentHeight = (pictureHeight + captionHeight);// + 0.5;//captionHeightUnit
+						if(gbContainer[1]==gbContainer[3])
+						gbContainer[3] += 0.5;
+						//alert(gbContainer[0] + "\n" + gbContainer[1] + "\n" +  gbContainer[0] + parentHeight + "\n" +  gbContainer[3])
+						picture.parent.geometricBounds = [gbContainer[0], gbContainer[1], gbContainer[0] + parentHeight , gbContainer[3]];
+					}
+				 }
+			//}
+		 }
+	}
      //alert("End");
 }
  catch(myError)

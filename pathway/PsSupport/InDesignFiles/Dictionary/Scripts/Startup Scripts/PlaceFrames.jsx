@@ -14,13 +14,15 @@ var indexTab = false;
 // Created By:   James Prabu 
 // Created On: Sep 10 2009   
 // Modified By:  James Prabu                        
-// Modified On:  Dec 28 2010 
-// Task Number : TD-1754(InDesign: "Javascript Error" when open very first document)
+// Modified On:  Mar 01 2011 
+// Task Number : TD-1984(InDesign: InDesign gets Hung)
 // <remarks> 
-// main changes in  main(removed startEvent), SetOverflowsPages(commented frameHeight > pageHeight) 
+// main changes in  BalancedColumn() for Footnote handling
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
+//$.level = 1; 
+//debugger;
 	
 #target indesign
 #targetengine "session"
@@ -597,18 +599,30 @@ function SetOverflowsPages(myStory,frameBounds)
 //Set Column Balance to Multi-Column Text Frames
 function BalancedColumns(myStory)
 {
-		var fixedFrameBound, fitFrameBound;
-		fixedFrameBound = myStory.geometricBounds; 
-		for(unit=1;unit<=fixedFrameBound[2] * 2;unit++)
+	try
+	{
+						//debugger;	
+		if(myStory.footnotes.length == 0)
 		{
-			fitFrameBound = myStory.geometricBounds; 			
-			myStory.geometricBounds=[fitFrameBound[0], fitFrameBound[1], fitFrameBound[2] - .5,fitFrameBound[3]];//.5 
-			if(myStory.overflows)
+			var fixedFrameBound, fitFrameBound;
+			fixedFrameBound = myStory.geometricBounds; 
+			for(unit=1;unit<=parseInt(fixedFrameBound[2]) * 2;unit++)
 			{
-			myStory.geometricBounds=[fitFrameBound[0], fitFrameBound[1], fitFrameBound[2] + .5,fitFrameBound[3]];//.5
-				break;
+				fitFrameBound = myStory.geometricBounds; 	
+				fitFrameBound[2] = fitFrameBound[2].toFixed(2); 
+				myStory.geometricBounds=[fitFrameBound[0], fitFrameBound[1], fitFrameBound[2] -1,fitFrameBound[3]];//.5 
+				if(myStory.overflows)
+				{
+				myStory.geometricBounds=[fitFrameBound[0], fitFrameBound[1], fitFrameBound[2] +1,fitFrameBound[3]];//.5
+					break;
+				}
 			}
 		}
+	}
+	catch(myError)
+	{
+		return "  ";
+	}
 }
 
 // This method move all frames to first page
@@ -1139,37 +1153,39 @@ function DrawPictureCaption()
 	var pictures = myDocument.allGraphics;
 try
 {
-	//alert(pictures.length);
-	for(var count = 0; count <= pictures.length; count++)
+	if(pictures.length > 0)
 	{
-		picture = pictures[count];
-		//alert(picture.parent.name);	
-		//if(picture.parent.name  > activePageNumber)
-		//{
-			
-			if(picture.parent.allPageItems.length > 0)
-			{
-				caption = picture.parent.textFrames[0];
-
-				if(caption.overflows)
+		for(var count = 0; count <= pictures.length; count++)
+		{
+			picture = pictures[count];
+			//alert(picture.parent.name);	
+			//if(picture.parent.name  > activePageNumber)
+			//{
+				
+				if(picture.parent.allPageItems.length > 0)
 				{
-					
-					gbPicture = picture.geometricBounds;
-					gbContainer = picture.parent.geometricBounds;
-					 pictureHeight = gbPicture[2] - gbPicture[0];
-					caption.geometricBounds = [gbPicture[2] + 0.1, gbPicture[1], gbPicture[2] + 1, gbPicture[3]];
-					FitSingleFrameToContent(caption);
-					gbCaption = caption.geometricBounds;
-					captionHeight = gbCaption[2] - gbCaption[0];
-					parentHeight = (pictureHeight + captionHeight);// + 0.5;//captionHeightUnit
-					if(gbContainer[1]==gbContainer[3])
-					gbContainer[3] += 0.5;
-					//alert(gbContainer[0] + "\n" + gbContainer[1] + "\n" +  gbContainer[0] + parentHeight + "\n" +  gbContainer[3])
-					picture.parent.geometricBounds = [gbContainer[0], gbContainer[1], gbContainer[0] + parentHeight , gbContainer[3]];
-				}
-			 }
-		//}
-     }
+					caption = picture.parent.textFrames[0];
+
+					if(caption.overflows)
+					{
+						
+						gbPicture = picture.geometricBounds;
+						gbContainer = picture.parent.geometricBounds;
+						 pictureHeight = gbPicture[2] - gbPicture[0];
+						caption.geometricBounds = [gbPicture[2] + 0.1, gbPicture[1], gbPicture[2] + 1, gbPicture[3]];
+						FitSingleFrameToContent(caption);
+						gbCaption = caption.geometricBounds;
+						captionHeight = gbCaption[2] - gbCaption[0];
+						parentHeight = (pictureHeight + captionHeight);// + 0.5;//captionHeightUnit
+						if(gbContainer[1]==gbContainer[3])
+						gbContainer[3] += 0.5;
+						//alert(gbContainer[0] + "\n" + gbContainer[1] + "\n" +  gbContainer[0] + parentHeight + "\n" +  gbContainer[3])
+						picture.parent.geometricBounds = [gbContainer[0], gbContainer[1], gbContainer[0] + parentHeight , gbContainer[3]];
+					}
+				 }
+			//}
+		 }
+	}
      //alert("End");
 }
  catch(myError)

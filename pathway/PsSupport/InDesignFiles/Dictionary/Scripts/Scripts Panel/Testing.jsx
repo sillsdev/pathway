@@ -13,6 +13,9 @@ var letterParagraphStyle, letterPushMargin=0, constantLetterParagraphStyle="lett
 var activePageNumber=0;
 var startEvent =1;
 
+ $.level = 1; 
+
+ 
 
 Test();
 
@@ -24,17 +27,19 @@ Test();
 
 function Test()
 {
-
+ //debugger;
 	var myPage, myStory, myPageLength
 	var result="Dictionary";
 
 			myDocument  = app.documents[app.documents.length-1]
 			//myDocument = app.documents[app.documents.length-1];
-			myPage = myDocument.pages.item(1);//stories
-			alert(myPage.textFrames.length);
+			myPage = myDocument.pages.item(0);//stories
+			//alert(myPage.textFrames.length);
 			for(var myStoryCounter=0; myStoryCounter < myPage.textFrames.length; myStoryCounter++)
 			{
 				myStory = myPage.textFrames.item(myStoryCounter);//stories
-				alert(myStory.contents,myStory.geometricBounds);
+				//alert(myStory.contents.indexOf(SpecialCharacters.footnoteSymbol));	
+alert(myStory.footnotes.length);				
+				//alert(myStory.contents,myStory.geometricBounds);
 			}
 }
