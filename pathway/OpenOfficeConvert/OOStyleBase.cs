@@ -180,6 +180,8 @@ namespace SIL.PublishingSolution
             _allPageLayoutProperty = new Dictionary<string, string>();
             _pageLayoutProperty = new Dictionary<string, string>();
             _firstPageLayoutProperty = new Dictionary<string, string>();
+            _styleName.ColumnGapEm = new Dictionary<string, Dictionary<string, string>>();
+
             try
             {
                 _allParagraphProperty.Add("text-align", "fo:");

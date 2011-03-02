@@ -37,9 +37,22 @@ namespace Test
             GetOuterXml = false;
             FileNameWithPath = fileName;
             LoadedDoc = GetDoc();
+            TestFilesIndesign();
+           
         }
         public ValidateXMLFile()
         {
+            TestFilesIndesign();
+        }
+
+        public void TestFilesIndesign()
+        {
+            string testFilesBase = "InDesignConvert";
+            string testPath = PathPart.Bin(Environment.CurrentDirectory, "/" + testFilesBase + "/TestFiles");
+            string outputPath = Common.PathCombine(testPath, "output");
+            string expectedPath = Common.PathCombine(testPath, "Expected");
+            expectedPath = Common.PathCombine(expectedPath, "BuangExpect");
+            Common.CopyOfficeFolder(expectedPath, outputPath);
         }
         public bool ValidateNodeAttribute()
         {

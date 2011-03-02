@@ -141,6 +141,7 @@ namespace SIL.PublishingSolution
         private bool _significant;
         private bool _isListBegin;
         private Dictionary<string, string> ListType;
+        private string _anchorText = string.Empty;
 
         #endregion
 
@@ -907,6 +908,9 @@ namespace SIL.PublishingSolution
             //    whiteSpacePre(content, pseudo); // TODO -2000 - SignificantSpace() - IN OO convert
             //}
 
+            if (_anchorStart)
+                _anchorText = content;
+
             bool isAnchorTagOpen = AnchorBookMark();
             content = WriteCounter(content);
             whiteSpacePre(content, pseudo); // TODO -2000 - SignificantSpace() - IN OO convert
@@ -1210,6 +1214,9 @@ namespace SIL.PublishingSolution
        
         private void EndElement()
         {
+            if (_reader.Name == "a" && _anchorText.Length == 0)
+                _anchorStart = false;
+
             _characterName = null;
             _closeChildName = StackPop(_allStyle);
             if (_closeChildName == string.Empty) return;
