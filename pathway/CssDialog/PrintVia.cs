@@ -20,6 +20,7 @@
 using System;
 using System.Collections;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
 using SIL.Tool;
@@ -576,11 +577,14 @@ namespace SIL.PublishingSolution
         {
             if (_fromPlugIn)
             {
-                string ProgFilesPath = System.Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-                string ConfigToolPath = Common.PathCombine(ProgFilesPath, @"SIL\Pathway7\ConfigurationTool.exe");
-                if (!File.Exists(ConfigToolPath))
-                    ConfigToolPath = Common.PathCombine(ProgFilesPath, @"SIL\Pathway\ConfigurationTool.exe");
-                if (File.Exists(ConfigToolPath))
+                // Take into account custom directory installs - just look for the ConfigurationTool.exe
+                // in the same directory as this .dll.
+                string fullPathwayPath = Path.GetDirectoryName(Assembly.GetAssembly(typeof (PrintVia)).CodeBase);
+                // if the path returned starts with file://, trim that part out
+                string pathwayPath = (fullPathwayPath.StartsWith("file"))
+                                         ? fullPathwayPath.Substring(6)
+                                         : fullPathwayPath;
+                if (File.Exists(Path.Combine(pathwayPath, "ConfigurationTool.exe")))
                 {
                     return true;
                 }

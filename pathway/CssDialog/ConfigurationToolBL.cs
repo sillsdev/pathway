@@ -3529,7 +3529,7 @@ namespace SIL.PublishingSolution
             // Window title (includes the version and edition (BTE / SE))
             var sb = new StringBuilder();
             sb.Append("Pathway Configuration Tool");
-            sb.Append(cTool.BtnScripture.Visible ? " - BTE " : " - SE ");
+            sb.Append(File.Exists(Common.FromRegistry("ScriptureStyleSettings.xml")) ? " - BTE " : " - SE ");
             sb.Append(Application.ProductVersion);
             cTool.Text = sb.ToString();
             SetFocusToName();
