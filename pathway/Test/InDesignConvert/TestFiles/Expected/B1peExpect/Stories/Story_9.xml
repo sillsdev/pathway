@@ -3,9 +3,9 @@
   <Story Self="9" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
     <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
     <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/letter_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
-        <Content>H h</Content>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/t1_body">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/[No character style]">
+        <Content>T1 class</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
   </Story>
 </idPkg:Story>

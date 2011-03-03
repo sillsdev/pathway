@@ -84,7 +84,7 @@ namespace SIL.PublishingSolution
                     string retValue = Common.GetNumericChar(fontValue, out counter);
                     if (retValue.Length > 0)
                     {
-                        float value = float.Parse(retValue) * 2.5F;
+                        float value = float.Parse(retValue) * 1.0F;
                         string unit = fontValue.Substring(counter);
                         newValue = value + unit;
                     }

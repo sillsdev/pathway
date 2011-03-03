@@ -186,7 +186,7 @@
         <Leading type="unit">0.1</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_1" Name="VerseNumber_1" Imported="false" NextStyle="CharacterStyle/VerseNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumber_1" Name="VerseNumber_1" Imported="false" NextStyle="CharacterStyle/VerseNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -242,7 +242,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_2" Name="VerseNumber_2" Imported="false" NextStyle="CharacterStyle/VerseNumber_2" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumber_2" Name="VerseNumber_2" Imported="false" NextStyle="CharacterStyle/VerseNumber_2" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -298,7 +298,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_3" Name="VerseNumber_3" Imported="false" NextStyle="CharacterStyle/VerseNumber_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumber_3" Name="VerseNumber_3" Imported="false" NextStyle="CharacterStyle/VerseNumber_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -362,7 +362,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_4" Name="VerseNumber_4" Imported="false" NextStyle="CharacterStyle/VerseNumber_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumber_4" Name="VerseNumber_4" Imported="false" NextStyle="CharacterStyle/VerseNumber_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -410,7 +410,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_5" Name="VerseNumber_5" Imported="false" NextStyle="CharacterStyle/VerseNumber_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumber_5" Name="VerseNumber_5" Imported="false" NextStyle="CharacterStyle/VerseNumber_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -482,7 +482,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_6" Name="VerseNumber_6" Imported="false" NextStyle="CharacterStyle/VerseNumber_6" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumber_6" Name="VerseNumber_6" Imported="false" NextStyle="CharacterStyle/VerseNumber_6" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -562,7 +562,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_7" Name="VerseNumber_7" Imported="false" NextStyle="CharacterStyle/VerseNumber_7" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumber_7" Name="VerseNumber_7" Imported="false" NextStyle="CharacterStyle/VerseNumber_7" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -610,7 +610,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_8" Name="VerseNumber_8" Imported="false" NextStyle="CharacterStyle/VerseNumber_8" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumber_8" Name="VerseNumber_8" Imported="false" NextStyle="CharacterStyle/VerseNumber_8" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -666,7 +666,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_9" Name="VerseNumber_9" Imported="false" NextStyle="CharacterStyle/VerseNumber_9" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumber_9" Name="VerseNumber_9" Imported="false" NextStyle="CharacterStyle/VerseNumber_9" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -754,7 +754,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_10" Name="VerseNumber_10" Imported="false" NextStyle="CharacterStyle/VerseNumber_10" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumber_10" Name="VerseNumber_10" Imported="false" NextStyle="CharacterStyle/VerseNumber_10" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -794,7 +794,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_11" Name="VerseNumber_11" Imported="false" NextStyle="CharacterStyle/VerseNumber_11" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumber_11" Name="VerseNumber_11" Imported="false" NextStyle="CharacterStyle/VerseNumber_11" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -866,7 +866,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_12" Name="VerseNumber_12" Imported="false" NextStyle="CharacterStyle/VerseNumber_12" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumber_12" Name="VerseNumber_12" Imported="false" NextStyle="CharacterStyle/VerseNumber_12" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -898,42 +898,42 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/NoteCrossHYPHENReferenceParagraph" Name="NoteCrossHYPHENReferenceParagraph" Imported="false" NextStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph" KeyboardShortcut="0 0" PointSize="20" Leading="8" FirstLineIndent="0" LeftIndent="0" display="prince-footnote" position="footnote">
+    <CharacterStyle Self="CharacterStyle/NoteCrossHYPHENReferenceParagraph" Name="NoteCrossHYPHENReferenceParagraph" Imported="false" NextStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph" KeyboardShortcut="0 0" PointSize="8" Leading="8" FirstLineIndent="0" LeftIndent="0" display="prince-footnote" position="footnote">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/NoteCrossHYPHENReferenceParagraph..footnote-call" Name="NoteCrossHYPHENReferenceParagraph..footnote-call" Imported="false" NextStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph..footnote-call" KeyboardShortcut="0 0" FillColor="Color/#800080" content="attr(title)" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" display="prince-footnote" position="footnote">
+    <CharacterStyle Self="CharacterStyle/NoteCrossHYPHENReferenceParagraph..footnote-call" Name="NoteCrossHYPHENReferenceParagraph..footnote-call" Imported="false" NextStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph..footnote-call" KeyboardShortcut="0 0" FillColor="Color/#800080" content="attr(title)" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" display="prince-footnote" position="footnote">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/NoteCrossHYPHENReferenceParagraph..footnote-marker" Name="NoteCrossHYPHENReferenceParagraph..footnote-marker" Imported="false" NextStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph..footnote-marker" KeyboardShortcut="0 0" PointSize="20" FontStyle="Bold" content="string(chapter):string(verse) = " Justification="LeftAlign" Leading="8" FirstLineIndent="0" LeftIndent="0" display="prince-footnote" position="footnote">
+    <CharacterStyle Self="CharacterStyle/NoteCrossHYPHENReferenceParagraph..footnote-marker" Name="NoteCrossHYPHENReferenceParagraph..footnote-marker" Imported="false" NextStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph..footnote-marker" KeyboardShortcut="0 0" PointSize="8" FontStyle="Bold" content="string(chapter):string(verse) = " Justification="LeftAlign" Leading="8" FirstLineIndent="0" LeftIndent="0" display="prince-footnote" position="footnote">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/NoteGeneralParagraph" Name="NoteGeneralParagraph" Imported="false" NextStyle="CharacterStyle/NoteGeneralParagraph" KeyboardShortcut="0 0" PointSize="20" FirstLineIndent="0" LeftIndent="0" Leading="8" display="prince-footnote" position="footnote">
+    <CharacterStyle Self="CharacterStyle/NoteGeneralParagraph" Name="NoteGeneralParagraph" Imported="false" NextStyle="CharacterStyle/NoteGeneralParagraph" KeyboardShortcut="0 0" PointSize="8" FirstLineIndent="0" LeftIndent="0" Leading="8" display="prince-footnote" position="footnote">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/NoteGeneralParagraph..footnote-call" Name="NoteGeneralParagraph..footnote-call" Imported="false" NextStyle="CharacterStyle/NoteGeneralParagraph..footnote-call" KeyboardShortcut="0 0" FillColor="Color/#800080" content="attr(title)" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" display="prince-footnote" position="footnote">
+    <CharacterStyle Self="CharacterStyle/NoteGeneralParagraph..footnote-call" Name="NoteGeneralParagraph..footnote-call" Imported="false" NextStyle="CharacterStyle/NoteGeneralParagraph..footnote-call" KeyboardShortcut="0 0" FillColor="Color/#800080" content="attr(title)" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" display="prince-footnote" position="footnote">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/NoteGeneralParagraph..footnote-marker" Name="NoteGeneralParagraph..footnote-marker" Imported="false" NextStyle="CharacterStyle/NoteGeneralParagraph..footnote-marker" KeyboardShortcut="0 0" PointSize="20" FontStyle="Bold" content="string(chapter):string(verse) = " Justification="LeftAlign" FirstLineIndent="0" LeftIndent="0" Leading="8" display="prince-footnote" position="footnote">
+    <CharacterStyle Self="CharacterStyle/NoteGeneralParagraph..footnote-marker" Name="NoteGeneralParagraph..footnote-marker" Imported="false" NextStyle="CharacterStyle/NoteGeneralParagraph..footnote-marker" KeyboardShortcut="0 0" PointSize="8" FontStyle="Bold" content="string(chapter):string(verse) = " Justification="LeftAlign" FirstLineIndent="0" LeftIndent="0" Leading="8" display="prince-footnote" position="footnote">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
@@ -1163,7 +1163,7 @@
         <Leading type="unit">0.1</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_1" Name="VerseNumber_1" Imported="false" NextStyle="ParagraphStyle/VerseNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_1" Name="VerseNumber_1" Imported="false" NextStyle="ParagraphStyle/VerseNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1219,7 +1219,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_2" Name="VerseNumber_2" Imported="false" NextStyle="ParagraphStyle/VerseNumber_2" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_2" Name="VerseNumber_2" Imported="false" NextStyle="ParagraphStyle/VerseNumber_2" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1275,7 +1275,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_3" Name="VerseNumber_3" Imported="false" NextStyle="ParagraphStyle/VerseNumber_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_3" Name="VerseNumber_3" Imported="false" NextStyle="ParagraphStyle/VerseNumber_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1339,7 +1339,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_4" Name="VerseNumber_4" Imported="false" NextStyle="ParagraphStyle/VerseNumber_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_4" Name="VerseNumber_4" Imported="false" NextStyle="ParagraphStyle/VerseNumber_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1387,7 +1387,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_5" Name="VerseNumber_5" Imported="false" NextStyle="ParagraphStyle/VerseNumber_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_5" Name="VerseNumber_5" Imported="false" NextStyle="ParagraphStyle/VerseNumber_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1459,7 +1459,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_6" Name="VerseNumber_6" Imported="false" NextStyle="ParagraphStyle/VerseNumber_6" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_6" Name="VerseNumber_6" Imported="false" NextStyle="ParagraphStyle/VerseNumber_6" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1539,7 +1539,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_7" Name="VerseNumber_7" Imported="false" NextStyle="ParagraphStyle/VerseNumber_7" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_7" Name="VerseNumber_7" Imported="false" NextStyle="ParagraphStyle/VerseNumber_7" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1587,7 +1587,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_8" Name="VerseNumber_8" Imported="false" NextStyle="ParagraphStyle/VerseNumber_8" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_8" Name="VerseNumber_8" Imported="false" NextStyle="ParagraphStyle/VerseNumber_8" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1643,7 +1643,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_9" Name="VerseNumber_9" Imported="false" NextStyle="ParagraphStyle/VerseNumber_9" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_9" Name="VerseNumber_9" Imported="false" NextStyle="ParagraphStyle/VerseNumber_9" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1731,7 +1731,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_10" Name="VerseNumber_10" Imported="false" NextStyle="ParagraphStyle/VerseNumber_10" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_10" Name="VerseNumber_10" Imported="false" NextStyle="ParagraphStyle/VerseNumber_10" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1771,7 +1771,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_11" Name="VerseNumber_11" Imported="false" NextStyle="ParagraphStyle/VerseNumber_11" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_11" Name="VerseNumber_11" Imported="false" NextStyle="ParagraphStyle/VerseNumber_11" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1843,7 +1843,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_12" Name="VerseNumber_12" Imported="false" NextStyle="ParagraphStyle/VerseNumber_12" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_12" Name="VerseNumber_12" Imported="false" NextStyle="ParagraphStyle/VerseNumber_12" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -2075,7 +2075,7 @@
         <Leading type="unit">8</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/NoteCrossHYPHENReferenceParagraph..footnote-call" Name="NoteCrossHYPHENReferenceParagraph..footnote-call" Imported="false" NextStyle="ParagraphStyle/NoteCrossHYPHENReferenceParagraph..footnote-call" KeyboardShortcut="0 0" FillColor="Color/#800080" content="attr(title)" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" display="prince-footnote">
+    <ParagraphStyle Self="ParagraphStyle/NoteCrossHYPHENReferenceParagraph..footnote-call" Name="NoteCrossHYPHENReferenceParagraph..footnote-call" Imported="false" NextStyle="ParagraphStyle/NoteCrossHYPHENReferenceParagraph..footnote-call" KeyboardShortcut="0 0" FillColor="Color/#800080" content="attr(title)" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" display="prince-footnote">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
@@ -2098,7 +2098,7 @@
         <Leading type="unit">8</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/NoteGeneralParagraph..footnote-call" Name="NoteGeneralParagraph..footnote-call" Imported="false" NextStyle="ParagraphStyle/NoteGeneralParagraph..footnote-call" KeyboardShortcut="0 0" FillColor="Color/#800080" content="attr(title)" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" display="prince-footnote">
+    <ParagraphStyle Self="ParagraphStyle/NoteGeneralParagraph..footnote-call" Name="NoteGeneralParagraph..footnote-call" Imported="false" NextStyle="ParagraphStyle/NoteGeneralParagraph..footnote-call" KeyboardShortcut="0 0" FillColor="Color/#800080" content="attr(title)" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" display="prince-footnote">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
@@ -2225,7 +2225,7 @@
         <Leading type="unit">24</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber" Name="VerseNumber" Imported="false" NextStyle="ParagraphStyle/VerseNumber" KeyboardShortcut="0 0" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber" Name="VerseNumber" Imported="false" NextStyle="ParagraphStyle/VerseNumber" KeyboardShortcut="0 0" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>

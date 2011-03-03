@@ -1922,21 +1922,21 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/NoteGeneralParagraph" Name="NoteGeneralParagraph" Imported="false" NextStyle="CharacterStyle/NoteGeneralParagraph" KeyboardShortcut="0 0" PointSize="20" FirstLineIndent="0" LeftIndent="0" Leading="100%" display="prince-footnote" position="footnote">
+    <CharacterStyle Self="CharacterStyle/NoteGeneralParagraph" Name="NoteGeneralParagraph" Imported="false" NextStyle="CharacterStyle/NoteGeneralParagraph" KeyboardShortcut="0 0" PointSize="8" FirstLineIndent="0" LeftIndent="0" Leading="100%" display="prince-footnote" position="footnote">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/NoteGeneralParagraph..footnote-call" Name="NoteGeneralParagraph..footnote-call" Imported="false" NextStyle="CharacterStyle/NoteGeneralParagraph..footnote-call" KeyboardShortcut="0 0" FillColor="Color/#800080" content="attr(title)" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" display="prince-footnote" position="footnote">
+    <CharacterStyle Self="CharacterStyle/NoteGeneralParagraph..footnote-call" Name="NoteGeneralParagraph..footnote-call" Imported="false" NextStyle="CharacterStyle/NoteGeneralParagraph..footnote-call" KeyboardShortcut="0 0" FillColor="Color/#800080" content="attr(title)" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" display="prince-footnote" position="footnote">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/NoteGeneralParagraph..footnote-marker" Name="NoteGeneralParagraph..footnote-marker" Imported="false" NextStyle="CharacterStyle/NoteGeneralParagraph..footnote-marker" KeyboardShortcut="0 0" PointSize="25" FontStyle="Bold" content="string(chapter):string(verse) = " Justification="LeftAlign" FirstLineIndent="0" LeftIndent="0" display="prince-footnote" position="footnote">
+    <CharacterStyle Self="CharacterStyle/NoteGeneralParagraph..footnote-marker" Name="NoteGeneralParagraph..footnote-marker" Imported="false" NextStyle="CharacterStyle/NoteGeneralParagraph..footnote-marker" KeyboardShortcut="0 0" PointSize="10" FontStyle="Bold" content="string(chapter):string(verse) = " Justification="LeftAlign" FirstLineIndent="0" LeftIndent="0" display="prince-footnote" position="footnote">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
@@ -4102,7 +4102,7 @@
         <Leading type="unit">100%</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/NoteGeneralParagraph..footnote-call" Name="NoteGeneralParagraph..footnote-call" Imported="false" NextStyle="ParagraphStyle/NoteGeneralParagraph..footnote-call" KeyboardShortcut="0 0" FillColor="Color/#800080" content="attr(title)" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0" display="prince-footnote">
+    <ParagraphStyle Self="ParagraphStyle/NoteGeneralParagraph..footnote-call" Name="NoteGeneralParagraph..footnote-call" Imported="false" NextStyle="ParagraphStyle/NoteGeneralParagraph..footnote-call" KeyboardShortcut="0 0" FillColor="Color/#800080" content="attr(title)" PointSize="6" Position="Superscript" FirstLineIndent="0" LeftIndent="0" display="prince-footnote">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>

@@ -3,8 +3,8 @@
   <Story Self="1" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
     <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
     <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/letter_letHead_dicBody">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/[No character style]">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/letter_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
         <Content>A a</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
   </Story>

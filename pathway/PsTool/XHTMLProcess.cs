@@ -622,6 +622,7 @@ namespace SIL.PublishingSolution
             }
             if (isFootnote)
             {
+                if (string.IsNullOrEmpty(_characterName)) return false;
                 AddUsedStyleName(_characterName);
                 StringBuilder footnoteFormat = new StringBuilder();
                 if (outputType == Common.OutputType.ODT.ToString())
