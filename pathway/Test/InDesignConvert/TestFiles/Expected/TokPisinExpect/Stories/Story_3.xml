@@ -3,61 +3,127 @@
   <Story Self="3" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
     <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
     <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrBook_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrBookName_2">
-        <Content />
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/ChapterHead_scrSection_scrBook_scrBody">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_ChapterHead_scrSection_scrBook_scrBody">
+        <Content>Jisas i kamap long graun</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/TitleMain_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_107">
-        <Content>Sen Mak Ke Risoa</Content>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHead_scrSection_scrBook_scrBody">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_SectionHead_scrSection_scrBook_scrBody">
+        <Content>Nem bilong ol lain tumbuna bilong Jisas Krais</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroSectionHead_3">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_108">
-        <Content>Na Titiono Eigna Na Buka Iaani</Content>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/ChapterNumber1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ChapterNumber_Paragraph_scrSection_scrBook_scrBody">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_Paragraph_scrSection_scrBook_scrBody">
+        <Content>1</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_Paragraph_scrSection_scrBook_scrBody">
+        <Content>Dispela †  em i tok long ol lain tumbuna bilong Jisas Krais. Jisas em i bilong lain bilong Devit na Devit em i bilong lain bilong Abraham. replace text here</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_3">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_109">
-        <Content>Mak boi sikei duadia mara salaghe rua na mane vaovarongo nigna a Jisas, kari imanea ke mono duagna a Pol kori vido ke taetaveti bali titionoa na Rorongo ke Toke. Reghia Buka Tango 13:5.</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_110">
-        <Content>Kori buka iaani, a Mak ke titionoa na komi fata ke eia a Jisas ma na nigna na velepuhi, kari na fata ke nagho vano tagna a Mak, na komi fata ke eia a Jisas. Mak ke titionoa na komi reghithehe ke eia a Jisas, eigna na komi reghithehe ke tateli aua na mana nigna a God ke mono itagna, me tatelia mua imanea a Dathegna God ke mai bali vahavira na komi tinoni.</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_110">
-        <Content>Na komi tinoni Jiu kena toatogha a Vahavi keda mai me rihura nidia na komi thevuioka gi e vunaghi pungusira thovohaliu. Kori vido mara na Farise, mi mara na Sadiusi, mi mara puhidia mara Jiu kena reghia a Jisas ke boi eia vaghagna iangeni, imarea kena boi vaututunia imanea a Vahavi mena thevuioka itagna.</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_110">
-        <Content>Da Mak ke risoa na buka iaani kori vido mara Rom kena vaparara na komi tinoni kiloau. Imanea ke magnahaghinira eigna kedana vaututunia a Jisas keda hathera, eigna kori mana nigna a God, a Jisas ke vatoke tabirura arahai kena vahaghi me gigi aura na komi tidatho, me sokara tabiru kori thehe. Mak ke magnahaghinia mua imarea kedana adoa na havi mathangani duagna a Krais boi na fata ke malumu.</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroSectionHead_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_111">
-        <Content>Na Komi Fata Ke Nagho Kori Buka Iaani:</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_3">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_112">
-        <Content>Nigna na titiono a Jon Siuvitabu (1:1-8)</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_113">
-        <Content>Na siuvitabu ma na auaugna a Jisas (1:9-13)</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_113">
-        <Content>Nigna na agutu a Jisas i Galili (1:14--9:50)</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_113">
-        <Content>A Jisas ke taveti au i Galili me vano i Jerusalem (10:1-52)</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_113">
-        <Content>Na vagougovui wik a Jisas ke mono i Jerusalem (11:1--13:37)</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_113">
-        <Content>A Jisas ke thehe me ghoi havi tabiru (14:1--16:20)</Content>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_scrSection_scrBook_scrBody">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_Paragraph_scrSection_scrBook_scrBody">
+        <Content>2</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_Paragraph_scrSection_scrBook_scrBody">
+        <Content>Abraham em i papa bilong Aisak</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody">
+        <HyperlinkTextSource Self="Hyperlink_F7BE51147-AA97-40A2-BA86-4DF84849E9F9" Name="Hyperlink F7BE51147-AA97-40A2-BA86-4DF84849E9F9" Hidden="false" AppliedCharacterStyle="n">
+          <Content>a</Content>
+        </HyperlinkTextSource>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_Paragraph_scrSection_scrBook_scrBody">
+        <Content>. Na Aisak em i papa bilong Jekop. Na Jekop em i papa bilong Juda wantaim ol brata bilong en. ‡</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_Paragraph_scrSection_scrBook_scrBody">
+        <Content>3</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_Paragraph_scrSection_scrBook_scrBody">
+        <Content>Juda †  em i papa bilong Peres wantaim Sera. Mama bilong tupela em Tamar. Na Peres em i papa bilong Hesron. Na Hesron em i papa bilong Ram.</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_Paragraph_scrSection_scrBook_scrBody">
+        <Content>4</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_Paragraph_scrSection_scrBook_scrBody">
+        <Content>Na Ram em i papa bilong Aminadap. Na Aminadap em i papa bilong Nason. Na Nason em i papa bilong Salmon.</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_Paragraph_scrSection_scrBook_scrBody">
+        <Content>5</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_Paragraph_scrSection_scrBook_scrBody">
+        <Content>Na Salmon em i papa bilong Boas. Mama bilong en em Rahap. Na Boas em i papa bilong Obet. Mama bilong en em Rut. Na Obet em i papa bilong Jesi.</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_Paragraph_scrSection_scrBook_scrBody">
+        <Content>6</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_Paragraph_scrSection_scrBook_scrBody">
+        <Content>Na †  Jesi em i papa bilong King Devit</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody">
+        <HyperlinkTextSource Self="Hyperlink_FA94A4499-63D2-4B83-A49E-56F8CF6F92C9" Name="Hyperlink FA94A4499-63D2-4B83-A49E-56F8CF6F92C9" Hidden="false" AppliedCharacterStyle="n">
+          <Content>b</Content>
+        </HyperlinkTextSource>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/none">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_Paragraph_scrSection_scrBook_scrBody">
+        <Content>.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
   </Story>
 </idPkg:Story>

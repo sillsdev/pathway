@@ -40,6 +40,9 @@ namespace SIL.PublishingSolution
         protected Stack<string> _allStyle;
         protected Stack<string> _allParagraph;
         protected Stack<string> _allCharacter;
+        protected Stack<string> _doNotInheritProperty;
+        protected string _doNotInheritOriginalClass = string.Empty;
+        protected string _doNotInheritClass = string.Empty;
         protected Stack<ClassInfo> _allStyleInfo = new Stack<ClassInfo>();
         protected ClassAttrib _precedeClassAttrib = new ClassAttrib();
         protected ClassAttrib _xhtmlClassAttrib = new ClassAttrib();
@@ -973,14 +976,45 @@ namespace SIL.PublishingSolution
             string parentStyle = StackPeek(_allStyle);
             if (IdAllClass.ContainsKey(parentStyle))
             {
+                DoNotInherit(parentStyle);
+
                 foreach (KeyValuePair<string, string> property in IdAllClass[parentStyle])
                 {
-                    if (_tempStyle.ContainsKey(property.Key) || property.Key == "TextColumnCount") continue;
+                    if (_outputType == Common.OutputType.IDML)
+                    {
+                        if (_tempStyle.ContainsKey(property.Key) || property.Key == "TextColumnCount")
+                        {
+                             continue;
+                        }
+                    }
                     _tempStyle[property.Key] = property.Value;
                 }
             }
         }
 
+        private void DoNotInherit(string parentStyle)
+        {
+            bool removed = false;
+            if (IdAllClass[parentStyle].ContainsKey("SpaceBefore"))
+            {
+                IdAllClass[parentStyle].Remove("SpaceBefore");
+                removed = true;
+            }
+            if (IdAllClass[parentStyle].ContainsKey("SpaceAfter"))
+            {
+                IdAllClass[parentStyle].Remove("SpaceAfter");
+                removed = true;
+            }
+            if (removed)
+            {
+                string originalParentStyle = Common.LeftString(parentStyle, "_");
+                if (_doNotInheritProperty.Contains(originalParentStyle) == false)
+                {
+                    _doNotInheritOriginalClass = parentStyle;
+                    _doNotInheritClass = originalParentStyle;
+                }
+            }
+        }
 
 
         private void AssignProperty(string cssStyleName, float ancestorFontSize)

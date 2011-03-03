@@ -213,6 +213,8 @@ namespace SIL.PublishingSolution
 
                 ClosePara();
 
+                DoNotInheritClassStart();
+
                 _writer.WriteStartElement("ParagraphStyleRange");
                 // Note: Paragraph Start Element
                 _writer.WriteAttributeString("AppliedParagraphStyle", "ParagraphStyle/" + _paragraphName);
@@ -224,6 +226,44 @@ namespace SIL.PublishingSolution
             }
             WriteText();
             isFileEmpty = false;
+        }
+
+        private void DoNotInheritClassStart()
+        {
+            if (_doNotInheritClass.Length == 0) return;
+
+            string property = "SpaceBefore";
+            if (IdAllClass.ContainsKey(_doNotInheritClass)==false)
+            {
+                return;
+            }
+
+            if (IdAllClass[_doNotInheritClass].ContainsKey(property))
+            {
+                string value = IdAllClass[_doNotInheritClass][property];
+                _newProperty[_paragraphName][property] = value;
+            }
+            _doNotInheritProperty.Push(_doNotInheritOriginalClass);
+            _doNotInheritOriginalClass = string.Empty;
+            _doNotInheritClass = string.Empty;
+        }
+
+        private void DoNotInheritClassEnd(string closeChildName)
+        {
+            if (_doNotInheritProperty.Count == 0) return;
+
+            string className = _doNotInheritProperty.Peek(); 
+            string property = "SpaceAfter";
+
+            if (closeChildName == className)
+            {
+                if (IdAllClass[className].ContainsKey(property))
+                {
+                    string value = IdAllClass[className][property];
+                    _newProperty[_previousParagraphName][property] = value;
+                }
+                _doNotInheritProperty.Pop(); 
+            }
         }
 
         private void WriteText()
@@ -978,6 +1018,7 @@ namespace SIL.PublishingSolution
             _characterName = null;
             //WriteEmptyHomographStyle();
             _closeChildName = StackPop(_allStyle);
+            DoNotInheritClassEnd(_closeChildName);
             SetHeadwordFalse();
             ClosefooterNote();
             EndElementForImage();
@@ -1114,6 +1155,7 @@ namespace SIL.PublishingSolution
             _allStyle = new Stack<string>();
             _allParagraph = new Stack<string>();
             _allCharacter = new Stack<string>();
+            _doNotInheritProperty = new Stack<string>();
 
             _childStyle = new Dictionary<string, string>();
             IdAllClass = new Dictionary<string, Dictionary<string, string>>();

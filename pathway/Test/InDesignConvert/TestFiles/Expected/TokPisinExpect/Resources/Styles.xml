@@ -18,7 +18,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/TitleMain_1" Name="TitleMain_1" Imported="false" NextStyle="CharacterStyle/TitleMain_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="12" SpaceBefore="36" clear="both">
+    <CharacterStyle Self="CharacterStyle/TitleMain_1" Name="TitleMain_1" Imported="false" NextStyle="CharacterStyle/TitleMain_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="36" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -26,7 +26,7 @@
         <Leading type="unit">24</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_1" Name="span_1" Imported="false" NextStyle="CharacterStyle/span_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="12" SpaceBefore="36" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_1" Name="span_1" Imported="false" NextStyle="CharacterStyle/span_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -82,7 +82,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/SectionHead_1" Name="SectionHead_1" Imported="false" NextStyle="CharacterStyle/SectionHead_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="4" SpaceBefore="8" clear="both">
+    <CharacterStyle Self="CharacterStyle/SectionHead_1" Name="SectionHead_1" Imported="false" NextStyle="CharacterStyle/SectionHead_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="8" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -90,7 +90,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_5" Name="span_5" Imported="false" NextStyle="CharacterStyle/span_5" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="4" SpaceBefore="8" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_5" Name="span_5" Imported="false" NextStyle="CharacterStyle/span_5" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -218,7 +218,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/pictureCaption_1" Name="pictureCaption_1" Imported="false" NextStyle="CharacterStyle/pictureCaption_1" KeyboardShortcut="0 0" float="center" SpaceBefore="2" RightIndent="2" SpaceAfter="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" AppliedFont="Charis SIL" PointSize="18" clear="both">
+    <CharacterStyle Self="CharacterStyle/pictureCaption_1" Name="pictureCaption_1" Imported="false" NextStyle="CharacterStyle/pictureCaption_1" KeyboardShortcut="0 0" float="center" RightIndent="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" AppliedFont="Charis SIL" PointSize="18" clear="both" SpaceBefore="2">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -226,7 +226,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_10" Name="span_10" Imported="false" NextStyle="CharacterStyle/span_10" KeyboardShortcut="0 0" float="center" SpaceBefore="2" RightIndent="2" SpaceAfter="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" AppliedFont="Charis SIL" PointSize="18" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_10" Name="span_10" Imported="false" NextStyle="CharacterStyle/span_10" KeyboardShortcut="0 0" float="center" RightIndent="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" AppliedFont="Charis SIL" PointSize="18" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -386,7 +386,7 @@
         <Leading type="unit">8</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/SectionHead_2" Name="SectionHead_2" Imported="false" NextStyle="CharacterStyle/SectionHead_2" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="4" SpaceBefore="8" clear="both">
+    <CharacterStyle Self="CharacterStyle/SectionHead_2" Name="SectionHead_2" Imported="false" NextStyle="CharacterStyle/SectionHead_2" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="8" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -394,7 +394,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_17" Name="span_17" Imported="false" NextStyle="CharacterStyle/span_17" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="4" SpaceBefore="8" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_17" Name="span_17" Imported="false" NextStyle="CharacterStyle/span_17" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -410,7 +410,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/pictureCaption_2" Name="pictureCaption_2" Imported="false" NextStyle="CharacterStyle/pictureCaption_2" KeyboardShortcut="0 0" float="center" SpaceBefore="2" RightIndent="2" SpaceAfter="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" AppliedFont="Charis SIL" PointSize="18" clear="both">
+    <CharacterStyle Self="CharacterStyle/pictureCaption_2" Name="pictureCaption_2" Imported="false" NextStyle="CharacterStyle/pictureCaption_2" KeyboardShortcut="0 0" float="center" RightIndent="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" AppliedFont="Charis SIL" PointSize="18" clear="both" SpaceBefore="2">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -418,7 +418,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_18" Name="span_18" Imported="false" NextStyle="CharacterStyle/span_18" KeyboardShortcut="0 0" float="center" SpaceBefore="2" RightIndent="2" SpaceAfter="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" AppliedFont="Charis SIL" PointSize="18" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_18" Name="span_18" Imported="false" NextStyle="CharacterStyle/span_18" KeyboardShortcut="0 0" float="center" RightIndent="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" AppliedFont="Charis SIL" PointSize="18" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -746,7 +746,7 @@
         <Leading type="unit">8</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/SectionHead_3" Name="SectionHead_3" Imported="false" NextStyle="CharacterStyle/SectionHead_3" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="4" SpaceBefore="8" clear="both">
+    <CharacterStyle Self="CharacterStyle/SectionHead_3" Name="SectionHead_3" Imported="false" NextStyle="CharacterStyle/SectionHead_3" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="8" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -754,7 +754,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_30" Name="span_30" Imported="false" NextStyle="CharacterStyle/span_30" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="4" SpaceBefore="8" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_30" Name="span_30" Imported="false" NextStyle="CharacterStyle/span_30" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1026,7 +1026,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/SectionHead_4" Name="SectionHead_4" Imported="false" NextStyle="CharacterStyle/SectionHead_4" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="4" SpaceBefore="8" clear="both">
+    <CharacterStyle Self="CharacterStyle/SectionHead_4" Name="SectionHead_4" Imported="false" NextStyle="CharacterStyle/SectionHead_4" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="8" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1034,7 +1034,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_40" Name="span_40" Imported="false" NextStyle="CharacterStyle/span_40" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="4" SpaceBefore="8" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_40" Name="span_40" Imported="false" NextStyle="CharacterStyle/span_40" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1074,7 +1074,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/SectionHead_5" Name="SectionHead_5" Imported="false" NextStyle="CharacterStyle/SectionHead_5" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="4" SpaceBefore="8" clear="both">
+    <CharacterStyle Self="CharacterStyle/SectionHead_5" Name="SectionHead_5" Imported="false" NextStyle="CharacterStyle/SectionHead_5" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="8" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1082,7 +1082,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_43" Name="span_43" Imported="false" NextStyle="CharacterStyle/span_43" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="4" SpaceBefore="8" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_43" Name="span_43" Imported="false" NextStyle="CharacterStyle/span_43" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1209,7 +1209,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/TitleMain_1" Name="TitleMain_1" Imported="false" NextStyle="ParagraphStyle/TitleMain_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="12" SpaceBefore="36" clear="both">
+    <ParagraphStyle Self="ParagraphStyle/TitleMain_1" Name="TitleMain_1" Imported="false" NextStyle="ParagraphStyle/TitleMain_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="36" clear="both">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1217,7 +1217,7 @@
         <Leading type="unit">24</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_1" Name="span_1" Imported="false" NextStyle="ParagraphStyle/span_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="12" SpaceBefore="36" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_1" Name="span_1" Imported="false" NextStyle="ParagraphStyle/span_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1273,7 +1273,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/SectionHead_1" Name="SectionHead_1" Imported="false" NextStyle="ParagraphStyle/SectionHead_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="4" SpaceBefore="8" clear="both">
+    <ParagraphStyle Self="ParagraphStyle/SectionHead_1" Name="SectionHead_1" Imported="false" NextStyle="ParagraphStyle/SectionHead_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="8" clear="both">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1281,7 +1281,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_5" Name="span_5" Imported="false" NextStyle="ParagraphStyle/span_5" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="4" SpaceBefore="8" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_5" Name="span_5" Imported="false" NextStyle="ParagraphStyle/span_5" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1409,7 +1409,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/pictureCaption_1" Name="pictureCaption_1" Imported="false" NextStyle="ParagraphStyle/pictureCaption_1" KeyboardShortcut="0 0" float="center" SpaceBefore="2" RightIndent="2" SpaceAfter="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" AppliedFont="Charis SIL" PointSize="18" clear="both">
+    <ParagraphStyle Self="ParagraphStyle/pictureCaption_1" Name="pictureCaption_1" Imported="false" NextStyle="ParagraphStyle/pictureCaption_1" KeyboardShortcut="0 0" float="center" RightIndent="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" AppliedFont="Charis SIL" PointSize="18" clear="both" SpaceBefore="2">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1417,7 +1417,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_10" Name="span_10" Imported="false" NextStyle="ParagraphStyle/span_10" KeyboardShortcut="0 0" float="center" SpaceBefore="2" RightIndent="2" SpaceAfter="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" AppliedFont="Charis SIL" PointSize="18" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_10" Name="span_10" Imported="false" NextStyle="ParagraphStyle/span_10" KeyboardShortcut="0 0" float="center" RightIndent="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" AppliedFont="Charis SIL" PointSize="18" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1577,7 +1577,7 @@
         <Leading type="unit">8</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/SectionHead_2" Name="SectionHead_2" Imported="false" NextStyle="ParagraphStyle/SectionHead_2" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="4" SpaceBefore="8" clear="both">
+    <ParagraphStyle Self="ParagraphStyle/SectionHead_2" Name="SectionHead_2" Imported="false" NextStyle="ParagraphStyle/SectionHead_2" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="8" clear="both">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1585,7 +1585,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_17" Name="span_17" Imported="false" NextStyle="ParagraphStyle/span_17" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="4" SpaceBefore="8" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_17" Name="span_17" Imported="false" NextStyle="ParagraphStyle/span_17" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1601,7 +1601,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/pictureCaption_2" Name="pictureCaption_2" Imported="false" NextStyle="ParagraphStyle/pictureCaption_2" KeyboardShortcut="0 0" float="center" SpaceBefore="2" RightIndent="2" SpaceAfter="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" AppliedFont="Charis SIL" PointSize="18" clear="both">
+    <ParagraphStyle Self="ParagraphStyle/pictureCaption_2" Name="pictureCaption_2" Imported="false" NextStyle="ParagraphStyle/pictureCaption_2" KeyboardShortcut="0 0" float="center" RightIndent="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" AppliedFont="Charis SIL" PointSize="18" clear="both" SpaceBefore="2">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1609,7 +1609,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_18" Name="span_18" Imported="false" NextStyle="ParagraphStyle/span_18" KeyboardShortcut="0 0" float="center" SpaceBefore="2" RightIndent="2" SpaceAfter="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" AppliedFont="Charis SIL" PointSize="18" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_18" Name="span_18" Imported="false" NextStyle="ParagraphStyle/span_18" KeyboardShortcut="0 0" float="center" RightIndent="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" AppliedFont="Charis SIL" PointSize="18" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1937,7 +1937,7 @@
         <Leading type="unit">8</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/SectionHead_3" Name="SectionHead_3" Imported="false" NextStyle="ParagraphStyle/SectionHead_3" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="4" SpaceBefore="8" clear="both">
+    <ParagraphStyle Self="ParagraphStyle/SectionHead_3" Name="SectionHead_3" Imported="false" NextStyle="ParagraphStyle/SectionHead_3" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="8" clear="both">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1945,7 +1945,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_30" Name="span_30" Imported="false" NextStyle="ParagraphStyle/span_30" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="4" SpaceBefore="8" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_30" Name="span_30" Imported="false" NextStyle="ParagraphStyle/span_30" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -2217,7 +2217,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/SectionHead_4" Name="SectionHead_4" Imported="false" NextStyle="ParagraphStyle/SectionHead_4" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="4" SpaceBefore="8" clear="both">
+    <ParagraphStyle Self="ParagraphStyle/SectionHead_4" Name="SectionHead_4" Imported="false" NextStyle="ParagraphStyle/SectionHead_4" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="8" clear="both">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -2225,7 +2225,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_40" Name="span_40" Imported="false" NextStyle="ParagraphStyle/span_40" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="4" SpaceBefore="8" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_40" Name="span_40" Imported="false" NextStyle="ParagraphStyle/span_40" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -2265,7 +2265,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/SectionHead_5" Name="SectionHead_5" Imported="false" NextStyle="ParagraphStyle/SectionHead_5" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="4" SpaceBefore="8" clear="both">
+    <ParagraphStyle Self="ParagraphStyle/SectionHead_5" Name="SectionHead_5" Imported="false" NextStyle="ParagraphStyle/SectionHead_5" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="8" clear="both">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -2273,7 +2273,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_43" Name="span_43" Imported="false" NextStyle="ParagraphStyle/span_43" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceAfter="4" SpaceBefore="8" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_43" Name="span_43" Imported="false" NextStyle="ParagraphStyle/span_43" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
