@@ -2239,6 +2239,12 @@
         <Leading type="unit">0.1</Leading>
       </Properties>
     </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/hideVerseNumber1" Name="hideVerseNumber1" Imported="false" NextStyle="ParagraphStyle/hideVerseNumber1" KeyboardShortcut="0 0" PointSize="0.1" visibility="hidden">
+      <Properties>
+        <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+      </Properties>
+    </ParagraphStyle>
     <ParagraphStyle Self="ParagraphStyle/hideVerseNumber" Name="hideVerseNumber" Imported="false" NextStyle="ParagraphStyle/hideVerseNumber" KeyboardShortcut="0 0" PointSize="0.1" visibility="hidden">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>

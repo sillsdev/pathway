@@ -727,6 +727,11 @@ namespace SIL.Tool
         public void SetHideVerseNumberInCSS()
         {
             TextWriter tw = new StreamWriter(_cssFileNameWithPath, true);
+            tw.WriteLine(".hide_Verse_Number1 {");
+            tw.WriteLine("font-size: 0.1pt;");
+            tw.WriteLine("visibility: hidden;");
+            tw.WriteLine("}");
+
             tw.WriteLine(".hide_Verse_Number {");
             tw.WriteLine("font-size: 0.1pt;");
             tw.WriteLine("visibility: hidden;");
