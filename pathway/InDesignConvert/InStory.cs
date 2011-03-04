@@ -617,8 +617,8 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("VerticalReferencePoint", VertRefPoint);
                 //InLIne  //AboveLine
                 _writer.WriteAttributeString("AnchorXoffset", "0");
-                _writer.WriteAttributeString("AnchorYoffset", "0");
-                _writer.WriteAttributeString("AnchorSpaceAbove", "0");
+                _writer.WriteAttributeString("AnchorYoffset", "25");
+                _writer.WriteAttributeString("AnchorSpaceAbove", "4");
                 _writer.WriteEndElement();
                 _writer.WriteStartElement("TextWrapPreference");
                 _writer.WriteAttributeString("Inverse", "false");
@@ -797,6 +797,10 @@ namespace SIL.PublishingSolution
             {
                 valueOfProperty = IdAllClass[excludeParent][property];
             }
+            else if (IdAllClass.ContainsKey(clsName) && IdAllClass[clsName].ContainsKey(property))
+            {
+                valueOfProperty = IdAllClass[clsName][property];
+            }
             return valueOfProperty;
         }
 
@@ -860,7 +864,7 @@ namespace SIL.PublishingSolution
                     {
                         string clsName = splitedClassName[i];
                         string pos = GetPropertyValue(clsName, "float", alignment);
-                        switch (pos)
+                        switch (pos.ToLower())
                         {
                             case "left":
                                 HoriAlignment = "LeftAlign";
@@ -883,6 +887,12 @@ namespace SIL.PublishingSolution
                                 VertAlignment = "TopAlign";
                                 VertRefPoint = "PageMargins";
                                 wrapMode = "JumpObjectTextWrap";
+                                break;
+                            case "center":
+                                AnchorPoint = "TopCenterAnchor";
+                                HoriAlignment = "CenterAlign";
+                                VertAlignment = "CenterAlign";
+                                VertRefPoint = "LineBaseline";
                                 break;
                             case "top-right":
                                 AnchorPoint = "TopRightAnchor";
@@ -914,7 +924,7 @@ namespace SIL.PublishingSolution
                             {
                                 break;
                             }
-
+                        return;
                     }
                 }
             }
