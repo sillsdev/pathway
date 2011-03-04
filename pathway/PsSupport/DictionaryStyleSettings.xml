@@ -310,6 +310,7 @@
         <styleProperty name="TOCLevel" value="2 - Letter and Entry"/>
         <styleProperty name="IncludeFontVariants" value="Yes" />
         <styleProperty name="MaxImageWidth" value="600" />
+        <styleProperty name="Title" value=" "/>
         <styleProperty name="Creator" value=" " />
         <styleProperty name="Publisher" value=" " />
         <styleProperty name="Type" value=" " />

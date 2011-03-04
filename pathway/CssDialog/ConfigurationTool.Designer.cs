@@ -102,6 +102,10 @@
             this.ddlFiles = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.tabOthers = new System.Windows.Forms.TabPage();
+            this.txtCreator = new System.Windows.Forms.TextBox();
+            this.lblCreator = new System.Windows.Forms.Label();
+            this.txtBookTitle = new System.Windows.Forms.TextBox();
+            this.lblBookTitle = new System.Windows.Forms.Label();
             this.lblPx = new System.Windows.Forms.Label();
             this.txtMaxImageWidth = new System.Windows.Forms.TextBox();
             this.lblMaxImageWidth = new System.Windows.Forms.Label();
@@ -202,7 +206,7 @@
             this.stylesGrid.ReadOnly = true;
             this.stylesGrid.RowHeadersVisible = false;
             this.stylesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.stylesGrid.Size = new System.Drawing.Size(581, 455);
+            this.stylesGrid.Size = new System.Drawing.Size(557, 478);
             this.stylesGrid.TabIndex = 5;
             this.stylesGrid.TabStop = false;
             this.stylesGrid.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.stylesGrid_RowEnter);
@@ -222,7 +226,7 @@
             this.tsSend});
             this.toolStripMain.Location = new System.Drawing.Point(0, 0);
             this.toolStripMain.Name = "toolStripMain";
-            this.toolStripMain.Size = new System.Drawing.Size(978, 52);
+            this.toolStripMain.Size = new System.Drawing.Size(954, 52);
             this.toolStripMain.TabIndex = 5;
             this.toolStripMain.Text = "New";
             this.toolStripMain.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripMain_ItemClicked);
@@ -355,7 +359,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(275, 405);
+            this.tabControl1.Size = new System.Drawing.Size(275, 428);
             this.tabControl1.TabIndex = 6;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -375,7 +379,7 @@
             this.tabInfo.Location = new System.Drawing.Point(4, 22);
             this.tabInfo.Name = "tabInfo";
             this.tabInfo.Padding = new System.Windows.Forms.Padding(3);
-            this.tabInfo.Size = new System.Drawing.Size(267, 379);
+            this.tabInfo.Size = new System.Drawing.Size(267, 402);
             this.tabInfo.TabIndex = 0;
             this.tabInfo.Text = "Info";
             this.tabInfo.UseVisualStyleBackColor = true;
@@ -537,7 +541,7 @@
             this.tabDisplay.Location = new System.Drawing.Point(4, 22);
             this.tabDisplay.Name = "tabDisplay";
             this.tabDisplay.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDisplay.Size = new System.Drawing.Size(267, 379);
+            this.tabDisplay.Size = new System.Drawing.Size(267, 402);
             this.tabDisplay.TabIndex = 1;
             this.tabDisplay.Text = "Properties";
             this.tabDisplay.UseVisualStyleBackColor = true;
@@ -938,7 +942,7 @@
             this.tabMobile.Location = new System.Drawing.Point(4, 22);
             this.tabMobile.Name = "tabMobile";
             this.tabMobile.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMobile.Size = new System.Drawing.Size(267, 379);
+            this.tabMobile.Size = new System.Drawing.Size(267, 402);
             this.tabMobile.TabIndex = 2;
             this.tabMobile.Text = "Properties";
             this.tabMobile.UseVisualStyleBackColor = true;
@@ -1055,6 +1059,10 @@
             // 
             // tabOthers
             // 
+            this.tabOthers.Controls.Add(this.txtCreator);
+            this.tabOthers.Controls.Add(this.lblCreator);
+            this.tabOthers.Controls.Add(this.txtBookTitle);
+            this.tabOthers.Controls.Add(this.lblBookTitle);
             this.tabOthers.Controls.Add(this.lblPx);
             this.tabOthers.Controls.Add(this.txtMaxImageWidth);
             this.tabOthers.Controls.Add(this.lblMaxImageWidth);
@@ -1083,10 +1091,46 @@
             this.tabOthers.Controls.Add(this.lblDescription);
             this.tabOthers.Location = new System.Drawing.Point(4, 22);
             this.tabOthers.Name = "tabOthers";
-            this.tabOthers.Size = new System.Drawing.Size(267, 379);
+            this.tabOthers.Size = new System.Drawing.Size(267, 402);
             this.tabOthers.TabIndex = 3;
             this.tabOthers.Text = "Properties";
             this.tabOthers.UseVisualStyleBackColor = true;
+            // 
+            // txtCreator
+            // 
+            this.txtCreator.Location = new System.Drawing.Point(100, 204);
+            this.txtCreator.Name = "txtCreator";
+            this.txtCreator.Size = new System.Drawing.Size(150, 20);
+            this.txtCreator.TabIndex = 15;
+            this.txtCreator.Validated += new System.EventHandler(this.txtCreator_Validated);
+            // 
+            // lblCreator
+            // 
+            this.lblCreator.AutoSize = true;
+            this.lblCreator.Location = new System.Drawing.Point(49, 207);
+            this.lblCreator.Name = "lblCreator";
+            this.lblCreator.Size = new System.Drawing.Size(41, 13);
+            this.lblCreator.TabIndex = 14;
+            this.lblCreator.Text = "Creator";
+            this.lblCreator.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtBookTitle
+            // 
+            this.txtBookTitle.Location = new System.Drawing.Point(100, 140);
+            this.txtBookTitle.Name = "txtBookTitle";
+            this.txtBookTitle.Size = new System.Drawing.Size(150, 20);
+            this.txtBookTitle.TabIndex = 11;
+            this.txtBookTitle.Validated += new System.EventHandler(this.txtBookTitle_Validated);
+            // 
+            // lblBookTitle
+            // 
+            this.lblBookTitle.AutoSize = true;
+            this.lblBookTitle.Location = new System.Drawing.Point(35, 143);
+            this.lblBookTitle.Name = "lblBookTitle";
+            this.lblBookTitle.Size = new System.Drawing.Size(55, 13);
+            this.lblBookTitle.TabIndex = 10;
+            this.lblBookTitle.Text = "Book Title";
+            this.lblBookTitle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblPx
             // 
@@ -1099,7 +1143,7 @@
             // 
             // txtMaxImageWidth
             // 
-            this.txtMaxImageWidth.Location = new System.Drawing.Point(125, 62);
+            this.txtMaxImageWidth.Location = new System.Drawing.Point(125, 58);
             this.txtMaxImageWidth.MaxLength = 4;
             this.txtMaxImageWidth.Name = "txtMaxImageWidth";
             this.txtMaxImageWidth.Size = new System.Drawing.Size(80, 20);
@@ -1109,7 +1153,7 @@
             // lblMaxImageWidth
             // 
             this.lblMaxImageWidth.AutoSize = true;
-            this.lblMaxImageWidth.Location = new System.Drawing.Point(5, 65);
+            this.lblMaxImageWidth.Location = new System.Drawing.Point(5, 61);
             this.lblMaxImageWidth.Name = "lblMaxImageWidth";
             this.lblMaxImageWidth.Size = new System.Drawing.Size(114, 13);
             this.lblMaxImageWidth.TabIndex = 4;
@@ -1120,7 +1164,7 @@
             // 
             this.ddlIncludeFontVariants.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlIncludeFontVariants.FormattingEnabled = true;
-            this.ddlIncludeFontVariants.Location = new System.Drawing.Point(125, 36);
+            this.ddlIncludeFontVariants.Location = new System.Drawing.Point(125, 34);
             this.ddlIncludeFontVariants.Name = "ddlIncludeFontVariants";
             this.ddlIncludeFontVariants.Size = new System.Drawing.Size(125, 21);
             this.ddlIncludeFontVariants.TabIndex = 3;
@@ -1129,7 +1173,7 @@
             // lblIncludeFontVariants
             // 
             this.lblIncludeFontVariants.AutoSize = true;
-            this.lblIncludeFontVariants.Location = new System.Drawing.Point(12, 39);
+            this.lblIncludeFontVariants.Location = new System.Drawing.Point(12, 37);
             this.lblIncludeFontVariants.Name = "lblIncludeFontVariants";
             this.lblIncludeFontVariants.Size = new System.Drawing.Size(107, 13);
             this.lblIncludeFontVariants.TabIndex = 2;
@@ -1141,7 +1185,7 @@
             this.imgCoverImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.imgCoverImage.Image = ((System.Drawing.Image)(resources.GetObject("imgCoverImage.Image")));
             this.imgCoverImage.InitialImage = ((System.Drawing.Image)(resources.GetObject("imgCoverImage.InitialImage")));
-            this.imgCoverImage.Location = new System.Drawing.Point(100, 114);
+            this.imgCoverImage.Location = new System.Drawing.Point(100, 106);
             this.imgCoverImage.Name = "imgCoverImage";
             this.imgCoverImage.Size = new System.Drawing.Size(32, 32);
             this.imgCoverImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1150,7 +1194,7 @@
             // 
             // btnCoverImage
             // 
-            this.btnCoverImage.Location = new System.Drawing.Point(138, 119);
+            this.btnCoverImage.Location = new System.Drawing.Point(138, 110);
             this.btnCoverImage.Name = "btnCoverImage";
             this.btnCoverImage.Size = new System.Drawing.Size(112, 23);
             this.btnCoverImage.TabIndex = 9;
@@ -1161,7 +1205,7 @@
             // lblCoverImage
             // 
             this.lblCoverImage.AutoSize = true;
-            this.lblCoverImage.Location = new System.Drawing.Point(23, 124);
+            this.lblCoverImage.Location = new System.Drawing.Point(23, 116);
             this.lblCoverImage.Name = "lblCoverImage";
             this.lblCoverImage.Size = new System.Drawing.Size(67, 13);
             this.lblCoverImage.TabIndex = 8;
@@ -1171,7 +1215,7 @@
             // 
             this.ddlTocLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlTocLevel.FormattingEnabled = true;
-            this.ddlTocLevel.Location = new System.Drawing.Point(100, 88);
+            this.ddlTocLevel.Location = new System.Drawing.Point(100, 82);
             this.ddlTocLevel.Name = "ddlTocLevel";
             this.ddlTocLevel.Size = new System.Drawing.Size(150, 21);
             this.ddlTocLevel.TabIndex = 7;
@@ -1180,7 +1224,7 @@
             // lblTocLevel
             // 
             this.lblTocLevel.AutoSize = true;
-            this.lblTocLevel.Location = new System.Drawing.Point(32, 91);
+            this.lblTocLevel.Location = new System.Drawing.Point(32, 85);
             this.lblTocLevel.Name = "lblTocLevel";
             this.lblTocLevel.Size = new System.Drawing.Size(58, 13);
             this.lblTocLevel.TabIndex = 6;
@@ -1208,138 +1252,138 @@
             // 
             // txtRights
             // 
-            this.txtRights.Location = new System.Drawing.Point(100, 321);
+            this.txtRights.Location = new System.Drawing.Point(100, 348);
             this.txtRights.Multiline = true;
             this.txtRights.Name = "txtRights";
             this.txtRights.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtRights.Size = new System.Drawing.Size(150, 46);
-            this.txtRights.TabIndex = 23;
+            this.txtRights.Size = new System.Drawing.Size(150, 36);
+            this.txtRights.TabIndex = 27;
             this.txtRights.Validated += new System.EventHandler(this.txtRights_Validated);
             this.txtRights.Enter += new System.EventHandler(this.SetGotFocusValue);
             // 
             // lblRights
             // 
             this.lblRights.AutoSize = true;
-            this.lblRights.Location = new System.Drawing.Point(5, 324);
+            this.lblRights.Location = new System.Drawing.Point(5, 351);
             this.lblRights.Name = "lblRights";
             this.lblRights.Size = new System.Drawing.Size(85, 13);
-            this.lblRights.TabIndex = 22;
+            this.lblRights.TabIndex = 26;
             this.lblRights.Text = "Copyright Holder";
             this.lblRights.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtCoverage
             // 
-            this.txtCoverage.Location = new System.Drawing.Point(100, 295);
+            this.txtCoverage.Location = new System.Drawing.Point(100, 324);
             this.txtCoverage.Name = "txtCoverage";
             this.txtCoverage.Size = new System.Drawing.Size(150, 20);
-            this.txtCoverage.TabIndex = 21;
+            this.txtCoverage.TabIndex = 25;
             this.txtCoverage.Validated += new System.EventHandler(this.txtCoverage_Validated);
             this.txtCoverage.Enter += new System.EventHandler(this.SetGotFocusValue);
             // 
             // lblCoverage
             // 
             this.lblCoverage.AutoSize = true;
-            this.lblCoverage.Location = new System.Drawing.Point(37, 298);
+            this.lblCoverage.Location = new System.Drawing.Point(37, 327);
             this.lblCoverage.Name = "lblCoverage";
             this.lblCoverage.Size = new System.Drawing.Size(53, 13);
-            this.lblCoverage.TabIndex = 20;
+            this.lblCoverage.TabIndex = 24;
             this.lblCoverage.Text = "Coverage";
             this.lblCoverage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtRelation
             // 
-            this.txtRelation.Location = new System.Drawing.Point(100, 269);
+            this.txtRelation.Location = new System.Drawing.Point(100, 300);
             this.txtRelation.Name = "txtRelation";
             this.txtRelation.Size = new System.Drawing.Size(150, 20);
-            this.txtRelation.TabIndex = 19;
+            this.txtRelation.TabIndex = 23;
             this.txtRelation.Validated += new System.EventHandler(this.txtRelation_Validated);
             this.txtRelation.Enter += new System.EventHandler(this.SetGotFocusValue);
             // 
             // lblRelation
             // 
             this.lblRelation.AutoSize = true;
-            this.lblRelation.Location = new System.Drawing.Point(44, 272);
+            this.lblRelation.Location = new System.Drawing.Point(44, 303);
             this.lblRelation.Name = "lblRelation";
             this.lblRelation.Size = new System.Drawing.Size(46, 13);
-            this.lblRelation.TabIndex = 18;
+            this.lblRelation.TabIndex = 22;
             this.lblRelation.Text = "Relation";
             this.lblRelation.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtFormat
             // 
-            this.txtFormat.Location = new System.Drawing.Point(100, 243);
+            this.txtFormat.Location = new System.Drawing.Point(100, 276);
             this.txtFormat.Name = "txtFormat";
             this.txtFormat.Size = new System.Drawing.Size(150, 20);
-            this.txtFormat.TabIndex = 17;
+            this.txtFormat.TabIndex = 21;
             this.txtFormat.Validated += new System.EventHandler(this.txtFormat_Validated);
             this.txtFormat.Enter += new System.EventHandler(this.SetGotFocusValue);
             // 
             // lblFormat
             // 
             this.lblFormat.AutoSize = true;
-            this.lblFormat.Location = new System.Drawing.Point(51, 246);
+            this.lblFormat.Location = new System.Drawing.Point(51, 279);
             this.lblFormat.Name = "lblFormat";
             this.lblFormat.Size = new System.Drawing.Size(39, 13);
-            this.lblFormat.TabIndex = 16;
+            this.lblFormat.TabIndex = 20;
             this.lblFormat.Text = "Format";
             this.lblFormat.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtSource
             // 
-            this.txtSource.Location = new System.Drawing.Point(100, 217);
+            this.txtSource.Location = new System.Drawing.Point(100, 252);
             this.txtSource.Name = "txtSource";
             this.txtSource.Size = new System.Drawing.Size(150, 20);
-            this.txtSource.TabIndex = 15;
+            this.txtSource.TabIndex = 19;
             this.txtSource.Validated += new System.EventHandler(this.txtSource_Validated);
             this.txtSource.Enter += new System.EventHandler(this.SetGotFocusValue);
             // 
             // lblSource
             // 
             this.lblSource.AutoSize = true;
-            this.lblSource.Location = new System.Drawing.Point(49, 220);
+            this.lblSource.Location = new System.Drawing.Point(49, 255);
             this.lblSource.Name = "lblSource";
             this.lblSource.Size = new System.Drawing.Size(41, 13);
-            this.lblSource.TabIndex = 14;
+            this.lblSource.TabIndex = 18;
             this.lblSource.Text = "Source";
             this.lblSource.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtPublisher
             // 
-            this.txtPublisher.Location = new System.Drawing.Point(100, 191);
+            this.txtPublisher.Location = new System.Drawing.Point(100, 228);
             this.txtPublisher.Name = "txtPublisher";
             this.txtPublisher.Size = new System.Drawing.Size(150, 20);
-            this.txtPublisher.TabIndex = 13;
+            this.txtPublisher.TabIndex = 17;
             this.txtPublisher.Validated += new System.EventHandler(this.txtPublisher_Validated);
             this.txtPublisher.Enter += new System.EventHandler(this.SetGotFocusValue);
             // 
             // lblPublisher
             // 
             this.lblPublisher.AutoSize = true;
-            this.lblPublisher.Location = new System.Drawing.Point(40, 194);
+            this.lblPublisher.Location = new System.Drawing.Point(40, 231);
             this.lblPublisher.Name = "lblPublisher";
             this.lblPublisher.Size = new System.Drawing.Size(50, 13);
-            this.lblPublisher.TabIndex = 12;
+            this.lblPublisher.TabIndex = 16;
             this.lblPublisher.Text = "Publisher";
             this.lblPublisher.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(100, 150);
+            this.txtDescription.Location = new System.Drawing.Point(100, 164);
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtDescription.Size = new System.Drawing.Size(150, 35);
-            this.txtDescription.TabIndex = 11;
+            this.txtDescription.Size = new System.Drawing.Size(150, 36);
+            this.txtDescription.TabIndex = 13;
             this.txtDescription.Validated += new System.EventHandler(this.txtDescription_Validated);
             this.txtDescription.Enter += new System.EventHandler(this.SetGotFocusValue);
             // 
             // lblDescription
             // 
             this.lblDescription.AutoSize = true;
-            this.lblDescription.Location = new System.Drawing.Point(31, 150);
+            this.lblDescription.Location = new System.Drawing.Point(31, 164);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(59, 13);
-            this.lblDescription.TabIndex = 10;
+            this.lblDescription.TabIndex = 12;
             this.lblDescription.Text = "Information";
             this.lblDescription.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -1350,7 +1394,7 @@
             this.tabPreview.Controls.Add(this.picPreview);
             this.tabPreview.Location = new System.Drawing.Point(4, 22);
             this.tabPreview.Name = "tabPreview";
-            this.tabPreview.Size = new System.Drawing.Size(267, 379);
+            this.tabPreview.Size = new System.Drawing.Size(267, 402);
             this.tabPreview.TabIndex = 4;
             this.tabPreview.Text = "Preview";
             this.tabPreview.UseVisualStyleBackColor = true;
@@ -1393,7 +1437,7 @@
             this.tabPicture.Controls.Add(this.GrpPicture);
             this.tabPicture.Location = new System.Drawing.Point(4, 22);
             this.tabPicture.Name = "tabPicture";
-            this.tabPicture.Size = new System.Drawing.Size(267, 379);
+            this.tabPicture.Size = new System.Drawing.Size(267, 402);
             this.tabPicture.TabIndex = 5;
             this.tabPicture.Text = "Pictures";
             this.tabPicture.UseVisualStyleBackColor = true;
@@ -1529,7 +1573,7 @@
             this.label2.Location = new System.Drawing.Point(94, 1);
             this.label2.Margin = new System.Windows.Forms.Padding(0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(590, 23);
+            this.label2.Size = new System.Drawing.Size(566, 23);
             this.label2.TabIndex = 14;
             this.label2.Text = "Stylesheets";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1539,7 +1583,7 @@
             this.lblInfoCaption.BackColor = System.Drawing.Color.RoyalBlue;
             this.lblInfoCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInfoCaption.ForeColor = System.Drawing.Color.White;
-            this.lblInfoCaption.Location = new System.Drawing.Point(685, 1);
+            this.lblInfoCaption.Location = new System.Drawing.Point(661, 1);
             this.lblInfoCaption.Margin = new System.Windows.Forms.Padding(0);
             this.lblInfoCaption.Name = "lblInfoCaption";
             this.lblInfoCaption.Size = new System.Drawing.Size(290, 23);
@@ -1579,7 +1623,7 @@
             this.TLPanelOuter.RowCount = 2;
             this.TLPanelOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             this.TLPanelOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TLPanelOuter.Size = new System.Drawing.Size(978, 487);
+            this.TLPanelOuter.Size = new System.Drawing.Size(954, 510);
             this.TLPanelOuter.TabIndex = 19;
             // 
             // TLPanel1
@@ -1724,8 +1768,8 @@
             this.TLPanel2.Name = "TLPanel2";
             this.TLPanel2.RowCount = 1;
             this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 455F));
-            this.TLPanel2.Size = new System.Drawing.Size(584, 455);
+            this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 478F));
+            this.TLPanel2.Size = new System.Drawing.Size(560, 478);
             this.TLPanel2.TabIndex = 1;
             // 
             // TLPanel3
@@ -1734,13 +1778,13 @@
             this.TLPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TLPanel3.Controls.Add(this.panel3, 0, 1);
             this.TLPanel3.Controls.Add(this.txtCss, 0, 0);
-            this.TLPanel3.Location = new System.Drawing.Point(688, 28);
+            this.TLPanel3.Location = new System.Drawing.Point(664, 28);
             this.TLPanel3.Name = "TLPanel3";
             this.TLPanel3.RowCount = 2;
             this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
             this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 175F));
             this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TLPanel3.Size = new System.Drawing.Size(284, 455);
+            this.TLPanel3.Size = new System.Drawing.Size(284, 478);
             this.TLPanel3.TabIndex = 2;
             // 
             // panel3
@@ -1750,7 +1794,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 44);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(278, 408);
+            this.panel3.Size = new System.Drawing.Size(278, 431);
             this.panel3.TabIndex = 20;
             // 
             // lblType
@@ -1770,7 +1814,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(978, 539);
+            this.ClientSize = new System.Drawing.Size(954, 562);
             this.Controls.Add(this.TLPanelOuter);
             this.Controls.Add(this.toolStripMain);
             this.HelpButton = true;
@@ -1950,5 +1994,9 @@
         private System.Windows.Forms.Label lblMaxImageWidth;
         private System.Windows.Forms.TextBox txtMaxImageWidth;
         private System.Windows.Forms.Label lblPx;
+        private System.Windows.Forms.TextBox txtBookTitle;
+        private System.Windows.Forms.Label lblBookTitle;
+        private System.Windows.Forms.TextBox txtCreator;
+        private System.Windows.Forms.Label lblCreator;
     }
 }

@@ -60,6 +60,8 @@ namespace SIL.PublishingSolution
         protected string _inputType;
 
         // property implementations
+        public string Title { get; set; }
+        public string Creator { get; set; }
         public string Description { get; set; }
         public string Publisher { get; set; }
         public string Relation { get; set; }
@@ -1234,18 +1236,27 @@ namespace SIL.PublishingSolution
             var enumerator = _langFontDictionary.GetEnumerator();
             enumerator.MoveNext();
             var sb = new StringBuilder();
-            sb.AppendLine(Common.databaseName);
-            if (projInfo.ProjectName.Contains("EBook (epub)"))
+            if (Title != "")
             {
-                // Paratext has a _really long_ project name - split out into multiple lines
-                string[] parts = projInfo.ProjectName.Split('_');
-                sb.AppendLine(parts[0]); // "EBook (epub)"
-                sb.Append(parts[1]); // date of publication
+                sb.Append(Title);
             }
             else
             {
-                sb.Append(projInfo.ProjectName);
+                // no title specified - create a default one based on the database name
+                sb.AppendLine(Common.databaseName);
+                if (projInfo.ProjectName.Contains("EBook (epub)"))
+                {
+                    // Paratext has a _really long_ project name - split out into multiple lines
+                    string[] parts = projInfo.ProjectName.Split('_');
+                    sb.AppendLine(parts[0]); // "EBook (epub)"
+                    sb.Append(parts[1]); // date of publication
+                }
+                else
+                {
+                    sb.Append(projInfo.ProjectName);
+                }
             }
+            var strTitle = sb.ToString();
             //var langCode = enumerator.Current.Key;
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
             var strFormat = new StringFormat
@@ -1255,14 +1266,14 @@ namespace SIL.PublishingSolution
             };
             // figure out the dimensions of our rect based on the font info
             Font badgeFont = new Font("Times New Roman", 48);
-            SizeF size = g.MeasureString(sb.ToString(), badgeFont, 640);
+            SizeF size = g.MeasureString(strTitle, badgeFont, 640);
             int width = (int) Math.Ceiling(size.Width);
             int height = (int) Math.Ceiling(size.Height);
             Rectangle rect = new Rectangle((225 - (width / 2)), 100, width, height);
             // draw the badge (rect and string)
             g.FillRectangle(Brushes.Brown, rect);
             g.DrawRectangle(Pens.Gold, rect);
-            g.DrawString(sb.ToString(), badgeFont, Brushes.Gold, new RectangleF(new PointF((225f - (size.Width / 2)), 100f),size), strFormat);
+            g.DrawString(strTitle, badgeFont, Brushes.Gold, new RectangleF(new PointF((225f - (size.Width / 2)), 100f), size), strFormat);
             // save this puppy
             string strCoverImageFile = Path.Combine(contentFolder, "cover.png");
             bmp.Save(strCoverImageFile);
@@ -1469,8 +1480,24 @@ namespace SIL.PublishingSolution
             Param.LoadSettings();
             string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
             Dictionary<string, string> othersfeature = Param.GetItemsAsDictionary("//stylePick/styles/others/style[@name='" + layout + "']/styleProperty");
-            // TODO: how to pull in the current style?
-//            Dictionary<string, string> mobilefeature = Param.GetItemsAsDictionary("//styles/others/style[@name='EBook (epub)']/styleProperty");
+            // Title (book title in Configuration Tool UI / dc:title in metadata)
+            if (othersfeature.ContainsKey("Title"))
+            {
+                Title = othersfeature["Title"].Trim();
+            }
+            else
+            {
+                Title = "";
+            }
+            // Creator (dc:creator)
+            if (othersfeature.ContainsKey("Creator"))
+            {
+                Creator = othersfeature["Creator"].Trim();
+            }
+            else
+            {
+                Creator = "";
+            }
             // information
             if (othersfeature.ContainsKey("Information"))
             {
@@ -1804,10 +1831,10 @@ namespace SIL.PublishingSolution
             opf.WriteStartElement("metadata");
             opf.WriteAttributeString("xmlns", "dc", null, "http://purl.org/dc/elements/1.1/");
             opf.WriteAttributeString("xmlns", "opf", null, "http://www.idpf.org/2007/opf");
-            opf.WriteElementString("dc", "title", null, Common.databaseName + " " + projInfo.ProjectName);
+            opf.WriteElementString("dc", "title", null, (Title == "") ? (Common.databaseName + " " + projInfo.ProjectName) : Title);
             opf.WriteStartElement("dc", "creator", null);       //<dc:creator opf:role="aut">[author]</dc:creator>
             opf.WriteAttributeString("opf", "role", null, "aut");
-            opf.WriteValue(Environment.UserName);
+            opf.WriteValue((Creator == "") ? Environment.UserName : Creator);
             opf.WriteEndElement();
             if (_inputType == "dictionary")
             {

@@ -152,7 +152,7 @@ padding-right: 2px;
 padding-top : 1%;
 padding-bottom : 1%;
 }
-.Emphasis {
+.Emphasis, .it {
 font-style : italic;
 text-indent : 0;
 margin-left : 0;

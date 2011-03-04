@@ -599,6 +599,26 @@ namespace SIL.PublishingSolution
             get { return lblFormat; }
         }
 
+        public TextBox TxtBookTitle
+        {
+            get { return txtBookTitle; }
+        }
+
+        public Label LblBookTitle
+        {
+            get { return lblBookTitle; }
+        }
+
+        public TextBox TxtCreator
+        {
+            get { return txtCreator; }
+        }
+
+        public Label LblCreator
+        {
+            get { return lblCreator; }
+        }
+
         public TextBox TxtRights
         {
             get { return txtRights; }
@@ -1033,6 +1053,16 @@ namespace SIL.PublishingSolution
         private void txtRights_Validated(object sender, EventArgs e)
         {
             _CToolBL.txtRights_ValidatedBL(sender);
+            EditOthersCSS(sender, e);
+        }
+        private void txtBookTitle_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtBookTitle_ValidatedBL(sender);
+            EditOthersCSS(sender, e);
+        }
+        private void txtCreator_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtCreator_ValidatedBL(sender);
             EditOthersCSS(sender, e);
         }
         private void txtRights_KeyUp(object sender, EventArgs e)

@@ -896,7 +896,7 @@ namespace SIL.PublishingSolution
                                     cTool.CoverImage.Image = cTool.CoverImage.InitialImage;
                                 }
                                 break;
-                            case "description":
+                            case "information":
                                 cTool.TxtDescription.Text = attribValue;
                                 break;
                             case "publisher":
@@ -916,6 +916,12 @@ namespace SIL.PublishingSolution
                                 break;
                             case "copyright":
                                 cTool.TxtRights.Text = attribValue;
+                                break;
+                            case "title":
+                                cTool.TxtBookTitle.Text = attribValue;
+                                break;
+                            case "creator":
+                                cTool.TxtCreator.Text = attribValue;
                                 break;
                             default:
                                 break;
@@ -1350,6 +1356,12 @@ namespace SIL.PublishingSolution
                                 break;
                             case "coverage":
                                 cTool.TxtCoverage.Text = attribValue;
+                                break;
+                            case "title":
+                                cTool.TxtBookTitle.Text = attribValue;
+                                break;
+                            case "creator":
+                                cTool.TxtCreator.Text = attribValue;
                                 break;
                             case "rights":
                                 cTool.TxtRights.Text = attribValue;
@@ -2669,7 +2681,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                Param.UpdateOthersAtrrib("Description", cTool.TxtDescription.Text, StyleName);
+                Param.UpdateOthersAtrrib("Information", cTool.TxtDescription.Text, StyleName);
             }
             catch
             {
@@ -2731,6 +2743,28 @@ namespace SIL.PublishingSolution
             }
         }
 
+        public void txtBookTitle_ValidatedBL(object sender)
+        {
+            try
+            {
+                Param.UpdateOthersAtrrib("Title", cTool.TxtBookTitle.Text, StyleName);
+            }
+            catch
+            {
+            }
+        }
+
+        public void txtCreator_ValidatedBL(object sender)
+        {
+            try
+            {
+                Param.UpdateOthersAtrrib("Creator", cTool.TxtCreator.Text, StyleName);
+            }
+            catch
+            {
+            }
+        }
+
         public void txtRights_ValidatedBL(object sender)
         {
             try
@@ -2741,7 +2775,6 @@ namespace SIL.PublishingSolution
             {
             }
         }
-
 
         public void txtCopyright_ValidatedBL(object sender)
         {
