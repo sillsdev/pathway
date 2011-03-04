@@ -38,7 +38,7 @@ namespace SIL.PublishingSolution
         #endregion
 
 
-        public Dictionary<string, Dictionary<string, string>> CreateIDStyles(string projectPath, Dictionary<string, Dictionary<string, string>> cssProperty)
+        public Dictionary<string, Dictionary<string, string>> CreateXeTexStyles(string projectPath, Dictionary<string, Dictionary<string, string>> cssProperty)
         {
             try
             {

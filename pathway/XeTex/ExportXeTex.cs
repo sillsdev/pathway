@@ -28,7 +28,7 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                return "InDesign";
+                return "XeTex";
             }
         }
 
@@ -49,13 +49,13 @@ namespace SIL.PublishingSolution
         public bool Export(PublicationInformation projInfo)
         {
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
-            preProcessor.GetTempFolderPath();
-            preProcessor.PreserveSpace();
-            preProcessor.ImagePreprocess();
-            preProcessor.ReplaceInvalidTagtoSpan();
-            preProcessor.InsertHiddenChapterNumber();
-            preProcessor.InsertHiddenVerseNumber();
-            preProcessor.GetDefinitionLanguage();
+            //preProcessor.GetTempFolderPath();
+            //preProcessor.PreserveSpace();
+            //preProcessor.ImagePreprocess();
+            //preProcessor.ReplaceInvalidTagtoSpan();
+            //preProcessor.InsertHiddenChapterNumber();
+            //preProcessor.InsertHiddenVerseNumber();
+            //preProcessor.GetDefinitionLanguage();
 
             string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
@@ -65,37 +65,20 @@ namespace SIL.PublishingSolution
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
-            //return false;
-            preProcessor.InsertEmptyXHomographNumber(cssClass);
+            
+            Dictionary<string, Dictionary<string, string>> xeTexAllClass = new Dictionary<string, Dictionary<string, string>>();
+            XeTexStyles xeTexStyles = new XeTexStyles();
+            xeTexAllClass = xeTexStyles.CreateXeTexStyles(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), cssClass);
 
-            Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
-            XeTexStyles inStyles = new XeTexStyles();
-            idAllClass = inStyles.CreateIDStyles(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), cssClass);
-
-            XeTexContent inStory = new XeTexContent();
-            Dictionary<string, ArrayList> StyleName = inStory.CreateStory(Common.PathCombine(projInfo.TempOutputFolder, "Stories"), projInfo.DefaultXhtmlFileWithPath, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
-
-            XeTexMap inDesignMap = new XeTexMap();
-            inDesignMap.CreateIDDesignMap(projInfo.TempOutputFolder, StyleName["ColumnClass"].Count, StyleName["TextVariables"], StyleName["CrossRef"]);
+            XeTexContent xeTexContent = new XeTexContent();
+            Dictionary<string, ArrayList> StyleName = xeTexContent.CreateStory(Common.PathCombine(projInfo.TempOutputFolder, "Stories"), projInfo.DefaultXhtmlFileWithPath, xeTexAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
             SubProcess.AfterProcess(projInfo.ProjectFileWithPath);
 
-            string ldmlFullName = Common.PathCombine(projInfo.DictionaryPath, fileName + ".idml");
-            Compress(projInfo.TempOutputFolder, ldmlFullName);
-
-            if (projInfo.IsOpenOutput)
-                Launch(ldmlFullName);
+            //if (projInfo.IsOpenOutput)
+            //    Launch("ldmlFullName");
 
             return true;
-        }
-
-        
-
-        private void Compress(string sourceFolder, string ldmlFullName)
-        {
-            var mODT = new ZipFolder();
-            //string outputPathWithFileName = DefaultXhtmlFileWithPath.Replace(".xhtml", ".idml");
-            mODT.CreateZip(sourceFolder, ldmlFullName, 0);
         }
 
         private void Launch(string ldmlFullName)
