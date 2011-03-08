@@ -2,7 +2,7 @@ body {
 font-size: 13pt;
 font-weight: normal;
 font-style: normal;
-line-height: 115%;
+line-height: 125%;
 }
 .Title_Main {
 font-size : 250%;
@@ -52,10 +52,10 @@ padding-bottom: 1px;
 float : left;
 }
 .Paragraph1 {
-margin-left : 0;
+margin-left : 12pt;
 }
 .Paragraph {
-/*text-indent : 12pt;*/
+text-indent : 12pt;
 margin-left : 12pt;
 }
 .scrBook {
@@ -247,6 +247,8 @@ margin-top : 8pt;
 .Stanza_Break {
 text-indent : 0;
 margin-left : 0;
+height: .9em;
+content: "&nbsp;";
 }
 .Verse_Number {
 vertical-align : super;
