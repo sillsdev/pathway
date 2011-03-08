@@ -36,6 +36,7 @@ namespace SIL.PublishingSolution
 
         protected XmlTextWriter _writer;
         protected XmlTextReader _reader;
+        protected StreamWriter _xetexFile;
 
         protected Stack<string> _allStyle;
         protected Stack<string> _allParagraph;
@@ -461,12 +462,18 @@ namespace SIL.PublishingSolution
         {
             if (_allParagraph.Count > 0 && !_isParagraphClosed) // Is Para Exist
             {
-                if (_outputType == Common.OutputType.IDML)
+                if (_outputType == Common.OutputType.XETEX)
                 {
-                    _writer.WriteRaw("<Br/>");
+                    _xetexFile.WriteLine();
                 }
-
-                _writer.WriteEndElement();
+                else
+                {
+                    if (_outputType == Common.OutputType.IDML)
+                    {
+                        _writer.WriteRaw("<Br/>");
+                    }
+                    _writer.WriteEndElement();
+                }
                 _isNewParagraph = true;
                 _isParagraphClosed = true;
 
