@@ -59,6 +59,7 @@
             this.btnFileSizeZero = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.btnXeTex = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -220,6 +221,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnXeTex);
             this.groupBox1.Controls.Add(this.button7);
             this.groupBox1.Controls.Add(this.btnParaText);
             this.groupBox1.Controls.Add(this.button6);
@@ -404,6 +406,17 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // btnXeTex
+            // 
+            this.btnXeTex.AccessibleName = "BtnFlexTest";
+            this.btnXeTex.Location = new System.Drawing.Point(142, 159);
+            this.btnXeTex.Name = "btnXeTex";
+            this.btnXeTex.Size = new System.Drawing.Size(67, 28);
+            this.btnXeTex.TabIndex = 59;
+            this.btnXeTex.Text = "XeTex";
+            this.btnXeTex.UseVisualStyleBackColor = true;
+            this.btnXeTex.Click += new System.EventHandler(this.btnXeTex_Click);
+            // 
             // FlexPluginTest
             // 
             this.AcceptButton = this.button1;
@@ -465,5 +478,6 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button btnParaText;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button btnXeTex;
     }
 }

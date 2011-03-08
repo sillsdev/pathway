@@ -191,6 +191,10 @@
       <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
       <Name>CssParser</Name>
     </ProjectReference>
+    <ProjectReference Include="..\XeTex\XeTex.csproj">
+      <Project>{D1ACC574-32FD-4EF3-B993-79D18B759B77}</Project>
+      <Name>XeTex</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -562,5 +562,33 @@ namespace TestBed
             MessageBox.Show("Exported in " + outputCSS);
 #endif
         }
+
+        private void btnXeTex_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(txtInputPath.Text))
+            {
+                MessageBox.Show("Please enter the valid XHTML path");
+                return;
+            }
+
+            if (!File.Exists(txtCSSInput.Text))
+            {
+                MessageBox.Show("Please enter the valid CSS path");
+                return;
+            }
+            ExportXeTex exportXeTex = new ExportXeTex();
+            PublicationInformation projInfo = new PublicationInformation();
+
+            projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
+            projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
+            projInfo.DefaultCssFileWithPath = txtCSSInput.Text;
+
+            //string projectPath = Path.GetDirectoryName(txtInputPath.Text);
+            //string xhtmlFileWithPath = txtInputPath.Text;
+            //string cssFileWithPath = txtCSSInput.Text;
+            projInfo.ProjectFileWithPath = projInfo.ProjectPath;
+            projInfo.DictionaryPath = projInfo.ProjectPath;
+            exportXeTex.Export(projInfo);
+        }
     }
 }

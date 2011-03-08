@@ -7,152 +7,155 @@ namespace SIL.PublishingSolution
     public class XeTexMapProperty
     {
         private Dictionary<string, string> _IDProperty = new Dictionary<string, string>();
+        private string _property; 
         private Dictionary<string, string> _cssProperty = new Dictionary<string, string>();
         private bool _IsKeepLineWrittern = false;
+        private string _className;
         //TextInfo _titleCase = CultureInfo.CurrentCulture.TextInfo;
-        public Dictionary<string, string> IDProperty(Dictionary<string, string> cssProperty)
+        public string XeTexProperty(Dictionary<string, string> cssProperty,string className)
         {
-            _IDProperty.Clear();
+            _className = className;
+            _property = string.Empty;
             _cssProperty = cssProperty;
             foreach (KeyValuePair<string, string> property in cssProperty)
             {
                 switch (property.Key.ToLower())
                 {
-                    case "font-weight":
-                    case "font-style":
-                        FontWeight(cssProperty);
-                        break;
-                    case "text-align":
-                        TextAlign(property.Value);
-                        break;
-                    case "font-size":
-                        FontSize(property.Value);
-                        break;
-                    case "text-decoration":
-                        TextDecoration(property.Value);
-                        break;
-                    case "font-variant":
-                        FontVariant(property.Value);
-                        break;
-                    case "text-indent":
-                        TextIndent(property.Value);
-                        break;
-                    case "margin-left":
-                        MarginLeft(property.Value);
-                        break;
-                    case "margin-right":
-                        MarginRight(property.Value);
-                        break;
-                    case "margin-top":
-                        MarginTop(property.Value);
-                        break;
-                    case "margin-bottom":
-                        MarginBottom(property.Value);
-                        break;
+                    //case "font-weight":
+                    //case "font-style":
+                    //    FontWeight(cssProperty);
+                    //    break;
+                    //case "text-align":
+                    //    TextAlign(property.Value);
+                    //    break;
+                    //case "font-size":
+                    //    FontSize(property.Value);
+                    //    break;
+                    //case "text-decoration":
+                    //    TextDecoration(property.Value);
+                    //    break;
+                    //case "font-variant":
+                    //    FontVariant(property.Value);
+                    //    break;
+                    //case "text-indent":
+                    //    TextIndent(property.Value);
+                    //    break;
+                    //case "margin-left":
+                    //    MarginLeft(property.Value);
+                    //    break;
+                    //case "margin-right":
+                    //    MarginRight(property.Value);
+                    //    break;
+                    //case "margin-top":
+                    //    MarginTop(property.Value);
+                    //    break;
+                    //case "margin-bottom":
+                    //    MarginBottom(property.Value);
+                    //    break;
                     case "font-family":
                         FontFamily(property.Value);
                         break;
-                    case "page-width":
-                        PageWidth(property.Value);
-                        break;
-                    case "page-height":
-                        PageHeight(property.Value);
-                        break;
-                    case "mirror":
-                        Mirror(property.Value);
-                        break;
-                    case "padding-left":
-                    case "class-margin-left":
-                        PaddingLeft(property.Value);
-                        break;
-                    case "padding-right":
-                    case "class-margin-right":
-                        PaddingRight(property.Value);
-                        break;
-                    case "padding-top":
-                    case "class-margin-top":
-                        PaddingTop(property.Value);
-                        break;
-                    case "padding-bottom":
-                    case "class-margin-bottom":
-                        PaddingBottom(property.Value);
-                        break;
-                    case "padding":
-                    case "margin":
-                        //Margin(styleAttributeInfo);
-                        break;
-                    case "color":
-                        Color(property.Value);
-                        break;
-                    case "background-color":
-                        BGColor(property.Value);
-                        break;
-                    case "size":
-                        //Size(styleAttributeInfo);
-                        break;
-                    case "language":
-                        //Language(styleAttributeInfo);
-                        break;
-                    case "border":
-                        //Border(styleAttributeInfo);
-                        break;
-                    case "column-count":
-                        ColumnCount(property.Value);
-                        break;
-                    case "column-gap":
-                        ColumnGap(property.Value);
-                        break;
-                    case "display":
-                         Display(property.Value);
-                        break;
-                    case "page-break-before":
-                        PageBreakBefore(property.Value);
-                        break;
-                    case "text-transform":
-                        TextTransform(property.Value);
-                        break;
-                    case "vertical-align":
-                        VerticalAlign(property.Value);
-                        break;
-                    case "line-height":
-                        LineHeight(property.Value);
-                        break;
-                    case "hyphens":
-                        Hyphens(property.Value);
-                        break;
-                    case "hyphenate-before":
-                        HyphenateBefore(property.Value);
-                        break;
-                    case "hyphenate-after":
-                        HyphenateAfter(property.Value);
-                        break;
-                    case "hyphenate-lines":
-                        HyphenateLines(property.Value);
-                        break;
-                    case "letter-spacing":
-                        LetterSpacing(property.Value);
-                        break;
-                    case "word-spacing":
-                        WordSpacing(property.Value);
-                        break;
-                    case "orphans":
-                        Orphans(property.Value);
-                        break;
-                    case "widows":
-                        Widows(property.Value);
-                        break;
-                    case "direction":
-                        Direction(property.Value);
-                        break;
-                    case "-ps-vertical-justification":
-                        VerticalJustification(property.Value);
-                        break;
-                    default:
-                        SimpleProperty(property);
-                        break;
+                    //case "page-width":
+                    //    PageWidth(property.Value);
+                    //    break;
+                    //case "page-height":
+                    //    PageHeight(property.Value);
+                    //    break;
+                    //case "mirror":
+                    //    Mirror(property.Value);
+                    //    break;
+                    //case "padding-left":
+                    //case "class-margin-left":
+                    //    PaddingLeft(property.Value);
+                    //    break;
+                    //case "padding-right":
+                    //case "class-margin-right":
+                    //    PaddingRight(property.Value);
+                    //    break;
+                    //case "padding-top":
+                    //case "class-margin-top":
+                    //    PaddingTop(property.Value);
+                    //    break;
+                    //case "padding-bottom":
+                    //case "class-margin-bottom":
+                    //    PaddingBottom(property.Value);
+                    //    break;
+                    //case "padding":
+                    //case "margin":
+                    //    //Margin(styleAttributeInfo);
+                    //    break;
+                    //case "color":
+                    //    Color(property.Value);
+                    //    break;
+                    //case "background-color":
+                    //    BGColor(property.Value);
+                    //    break;
+                    //case "size":
+                    //    //Size(styleAttributeInfo);
+                    //    break;
+                    //case "language":
+                    //    //Language(styleAttributeInfo);
+                    //    break;
+                    //case "border":
+                    //    //Border(styleAttributeInfo);
+                    //    break;
+                    //case "column-count":
+                    //    ColumnCount(property.Value);
+                    //    break;
+                    //case "column-gap":
+                    //    ColumnGap(property.Value);
+                    //    break;
+                    //case "display":
+                    //     Display(property.Value);
+                    //    break;
+                    //case "page-break-before":
+                    //    PageBreakBefore(property.Value);
+                    //    break;
+                    //case "text-transform":
+                    //    TextTransform(property.Value);
+                    //    break;
+                    //case "vertical-align":
+                    //    VerticalAlign(property.Value);
+                    //    break;
+                    //case "line-height":
+                    //    LineHeight(property.Value);
+                    //    break;
+                    //case "hyphens":
+                    //    Hyphens(property.Value);
+                    //    break;
+                    //case "hyphenate-before":
+                    //    HyphenateBefore(property.Value);
+                    //    break;
+                    //case "hyphenate-after":
+                    //    HyphenateAfter(property.Value);
+                    //    break;
+                    //case "hyphenate-lines":
+                    //    HyphenateLines(property.Value);
+                    //    break;
+                    //case "letter-spacing":
+                    //    LetterSpacing(property.Value);
+                    //    break;
+                    //case "word-spacing":
+                    //    WordSpacing(property.Value);
+                    //    break;
+                    //case "orphans":
+                    //    Orphans(property.Value);
+                    //    break;
+                    //case "widows":
+                    //    Widows(property.Value);
+                    //    break;
+                    //case "direction":
+                    //    Direction(property.Value);
+                    //    break;
+                    //case "-ps-vertical-justification":
+                    //    VerticalJustification(property.Value);
+                    //    break;
+                    //default:
+                    //    SimpleProperty(property);
+                    //    break;
                 }
             }
-            return _IDProperty;
+            return _property;
         }
 
         public void VerticalJustification(string propertyValue)
@@ -472,8 +475,21 @@ namespace SIL.PublishingSolution
         }
         public void FontFamily(string propertyValue)
         {
-            _IDProperty["AppliedFont"] = propertyValue;
+            _property = @"\font\" + _className + "=\"" + propertyValue + "\"";
+            _property += GetFontSize();
+            // _IDProperty["AppliedFont"] = propertyValue;
         }
+
+        public string GetFontSize()
+        {
+            string fontSize = string.Empty;  
+            if (_cssProperty.ContainsKey("font-size"))
+            {
+                fontSize = " at " + _cssProperty["font-size"] + "pt";
+            }
+            return fontSize;
+        }
+
         public void TextIndent(string propertyValue)
         {
             if (propertyValue == string.Empty)
@@ -638,6 +654,7 @@ namespace SIL.PublishingSolution
                 return;
             }
             _IDProperty["PointSize"] = propertyValue;
+
         }
         /// <summary>
         /// 

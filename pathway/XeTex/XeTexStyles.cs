@@ -17,6 +17,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -33,27 +34,19 @@ namespace SIL.PublishingSolution
         private Dictionary<string, string> _IDClass = new Dictionary<string, string>();
         //CSSTree _cssTree = new CSSTree();
         XeTexMapProperty mapProperty = new XeTexMapProperty();
+        private StreamWriter _xetexFile;
         //public InDesignStyles InDesignStyles;
         //public ArrayList _FootNote;
         #endregion
 
 
-        public Dictionary<string, Dictionary<string, string>> CreateXeTexStyles(string projectPath, Dictionary<string, Dictionary<string, string>> cssProperty)
+        public Dictionary<string, Dictionary<string, string>> CreateXeTexStyles(string projectPath, StreamWriter xetexFile, Dictionary<string, Dictionary<string, string>> cssProperty)
         {
             try
             {
+                _xetexFile = xetexFile;
                 _cssProperty = cssProperty;
-                CreateFile(projectPath);
-                CreateRootCharacterStyleGroup();
-                CreateCharacterStyle();
-                CreateRootParagraphStyleGroup();
-                CreateParagraphStyle();  // CODE HERE
-                CreateTOCStyle();
-                CreateRootCellStyleGroup();
-                CreateRootTableStyleGroup();
-                CreateRootObjectStyleGroup();
-                CreateTrapPreset();
-                EndIDStyles();
+                CreateStyle();  // CODE HERE
             }
             catch (Exception ex)
             {
@@ -100,63 +93,42 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void CreateParagraphStyle()
+        private void CreateStyle()
         {
             foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _cssProperty)
             {
-                _writer.WriteStartElement("ParagraphStyle");
-                _writer.WriteAttributeString("Self", "ParagraphStyle/" + cssClass.Key);
-                _writer.WriteAttributeString("Name", cssClass.Key);
-                _writer.WriteAttributeString("Imported", "false");
-                _writer.WriteAttributeString("NextStyle", "ParagraphStyle/" + cssClass.Key);
-                _writer.WriteAttributeString("KeyboardShortcut", "0 0");
-                _IDProperty = mapProperty.IDProperty(cssClass.Value);
-                DeleteRelativeInFootnote(cssClass);
-                SuperscriptSubscriptIncreaseFontSize(false);
-                PositionProperty();
 
-                _IDClass = new Dictionary<string, string>(); // note: ToDo seperate the process
-                _IDAllClass[cssClass.Key] = _IDClass;
-
-                foreach (KeyValuePair<string, string> property in _IDProperty)
+                string xeTexProperty = mapProperty.XeTexProperty(cssClass.Value, cssClass.Key);
+                if (xeTexProperty.Trim().Length > 0)
                 {
-                    if (property.Key == "AppliedFont")
-                    {
-                        _IDClass[property.Key] = property.Value;
-                        continue;
-                    }
-                    //if (property.Key == "prince-text-replace")
-                    //{
-                    //    continue;
-                    //}
-                    if (property.Key == "StrokeColor")
-                    {
-                        _IDClass[property.Key] = property.Value;
-                        InsertBackgroundColor(property.Value);
-                    }
-                    else
-                    {
-                        _IDClass[property.Key] = property.Value;
-                        _writer.WriteAttributeString(property.Key, property.Value);
-                    }
+                    _xetexFile.WriteLine(xeTexProperty);
                 }
-                _writer.WriteStartElement("Properties");
-                _writer.WriteStartElement("BasedOn");
-                _writer.WriteAttributeString("type", "string");
-                _writer.WriteString("$ID/[No paragraph style]");
-                _writer.WriteEndElement();
-                _writer.WriteStartElement("PreviewColor");
-                _writer.WriteAttributeString("type", "enumeration");
-                _writer.WriteString("Nothing");
-                _writer.WriteEndElement();
-                CreateParagraphProperty("AppliedFont", "string");
-                string propertyType = Common.GetLeadingType(_IDProperty);
-                CreateParagraphProperty("Leading", propertyType);
-                _writer.WriteEndElement();
+                //_IDClass = new Dictionary<string, string>(); // note: ToDo seperate the process
+                //_IDAllClass[cssClass.Key] = _IDClass;
 
-                _writer.WriteEndElement();
+                //_xetexFile.WriteLine("nopagenumbers");
+
+                //foreach (KeyValuePair<string, string> property in _IDProperty)
+                //{
+                //    if (property.Key == "AppliedFont")
+                //    {
+                //        _IDClass[property.Key] = property.Value;
+                //        continue;
+                //    }
+                //    if (property.Key == "StrokeColor")
+                //    {
+                //        _IDClass[property.Key] = property.Value;
+                //        InsertBackgroundColor(property.Value);
+                //    }
+                //    else
+                //    {
+                //        _IDClass[property.Key] = property.Value;
+                //        _writer.WriteAttributeString(property.Key, property.Value);
+                //    }
+                //}
+
             }
-            _writer.WriteEndElement(); //End RootParagraphStyleGroup
+            //_writer.WriteEndElement(); //End RootParagraphStyleGroup
         }
 
         private void DeleteRelativeInFootnote(KeyValuePair<string, Dictionary<string, string>> cssClass)
@@ -177,66 +149,6 @@ namespace SIL.PublishingSolution
                 }
             }
         }
-
-        private void CreateCharacterStyle()
-        {
-            foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _cssProperty)
-            {
-                if (cssClass.Value.ContainsKey("display") && (cssClass.Value["display"] == "footnote"
-                                                               || cssClass.Value["display"] == "prince-footnote"))
-                {
-
-                    _writer.WriteStartElement("CharacterStyle");
-                    _writer.WriteAttributeString("Self", "CharacterStyle/" + cssClass.Key);
-                    _writer.WriteAttributeString("Name", cssClass.Key);
-                    _writer.WriteAttributeString("Imported", "false");
-                    _writer.WriteAttributeString("NextStyle", "CharacterStyle/" + cssClass.Key);
-                    _writer.WriteAttributeString("KeyboardShortcut", "0 0");
-                    _IDProperty = mapProperty.IDProperty(cssClass.Value);
-                    DeleteRelativeInFootnote(cssClass);
-                    SuperscriptSubscriptIncreaseFontSize(true);
-                    _IDClass = new Dictionary<string, string>(); // note: ToDo seperate the process
-                    _IDAllClass[cssClass.Key] = _IDClass;
-
-                    foreach (KeyValuePair<string, string> property in _IDProperty)
-                    {
-                        if (property.Key == "AppliedFont")
-                        {
-                            _IDClass[property.Key] = property.Value;
-                            continue;
-                        }
-                        if (property.Key == "StrokeColor")
-                        {
-                            _IDClass[property.Key] = property.Value;
-                            InsertBackgroundColor(property.Value);
-                        }
-                        else
-                        {
-                            _IDClass[property.Key] = property.Value;
-                            _writer.WriteAttributeString(property.Key, property.Value);
-                        }
-                    }
-                    _writer.WriteStartElement("Properties");
-                    _writer.WriteStartElement("BasedOn");
-                    _writer.WriteAttributeString("type", "string");
-                    _writer.WriteString("$ID/[No paragraph style]");
-                    _writer.WriteEndElement();
-                    _writer.WriteStartElement("PreviewColor");
-                    _writer.WriteAttributeString("type", "enumeration");
-                    _writer.WriteString("Nothing");
-                    _writer.WriteEndElement();
-                    _writer.WriteStartElement("Leading");
-                    _writer.WriteAttributeString("type", "enumeration");
-                    _writer.WriteString("Auto");
-                    _writer.WriteEndElement();
-                    _writer.WriteEndElement();
-                    _writer.WriteEndElement();
-                }
-            }
-            _writer.WriteEndElement(); //End of RootCharacterStyleGroup
-        }
-
-
 
         private void PositionProperty()
         {

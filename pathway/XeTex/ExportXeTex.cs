@@ -65,21 +65,33 @@ namespace SIL.PublishingSolution
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
-            
+
+            string xetexFullFile = Path.Combine(projInfo.ProjectPath, fileName + ".tex");
+            StreamWriter xetexFile = new StreamWriter(xetexFullFile);
+
             Dictionary<string, Dictionary<string, string>> xeTexAllClass = new Dictionary<string, Dictionary<string, string>>();
             XeTexStyles xeTexStyles = new XeTexStyles();
-            xeTexAllClass = xeTexStyles.CreateXeTexStyles(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), cssClass);
+            xeTexAllClass = xeTexStyles.CreateXeTexStyles(projInfo.ProjectPath, xetexFile, cssClass);
 
             XeTexContent xeTexContent = new XeTexContent();
-            Dictionary<string, ArrayList> StyleName = xeTexContent.CreateStory(Common.PathCombine(projInfo.TempOutputFolder, "Stories"), projInfo.DefaultXhtmlFileWithPath, xeTexAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
+            Dictionary<string, ArrayList> StyleName = xeTexContent.CreateContent(projInfo.ProjectPath, xetexFile, projInfo.DefaultXhtmlFileWithPath, xeTexAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
-            SubProcess.AfterProcess(projInfo.ProjectFileWithPath);
+            CloseFile(xetexFile);
+            //SubProcess.AfterProcess(projInfo.ProjectFileWithPath);
 
             //if (projInfo.IsOpenOutput)
             //    Launch("ldmlFullName");
-
             return true;
         }
+
+        private void CloseFile(StreamWriter xetexFile)
+        {
+            xetexFile.WriteLine();
+            xetexFile.WriteLine(@"\bye");
+            xetexFile.Flush();
+            xetexFile.Close();
+        }
+
 
         private void Launch(string ldmlFullName)
         {

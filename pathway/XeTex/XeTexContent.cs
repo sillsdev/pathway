@@ -58,14 +58,15 @@ namespace SIL.PublishingSolution
         private string _currentStoryName = string.Empty;
         #endregion
 
-        public Dictionary<string, ArrayList> CreateStory(string projectPath, string xhtmlFileWithPath, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
+        public Dictionary<string, ArrayList> CreateContent(string projectPath, StreamWriter xetexFile, string xhtmlFileWithPath, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
         {
+            _xetexFile = xetexFile;
             _inputPath = Path.GetDirectoryName(xhtmlFileWithPath);
             InitializeData(projectPath, idAllClass, classFamily, cssClassOrder);
             ProcessCounterProperty();
             OpenXhtmlFile(xhtmlFileWithPath);
             ProcessXHTML(xhtmlFileWithPath);
-            UpdateRelativeInStylesXML();
+            //UpdateRelativeInStylesXML();
             CloseFile();
             _styleName["ColumnClass"] = _textFrameClass;
             _styleName["TextVariables"] = _textVariables;
@@ -374,8 +375,9 @@ namespace SIL.PublishingSolution
                     content = _chapterNo;
                     _isDropCap = false;
                 }
-
-                _writer.WriteString(content);
+                
+                //_writer.WriteString(content);
+                _xetexFile.Write(content);
                 _writer.WriteEndElement();
                 
             }
@@ -396,6 +398,14 @@ namespace SIL.PublishingSolution
             else // regular style
             {
                 _writer.WriteAttributeString("AppliedCharacterStyle", "CharacterStyle/" + characterStyle);
+                if (characterStyle.IndexOf("No character style") > 0)
+                {
+                    _xetexFile.Write("\\" + _previousParagraphName + " ");
+                }
+                else
+                {
+                    _xetexFile.Write("\\" + characterStyle + " ");
+                }
                 AddUsedStyleName(characterStyle);
             }
             return footerClassName;
