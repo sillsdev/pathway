@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Feb-23-2011 for TD-1917(Paratext Open Office odd header incorrect)
+&apos;Changed On Mar-08-2011 for TD-1994(Header on page 3 is for Chapter 1 instead of chapter 21)
 
 &apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -522,9 +522,12 @@ Do
         If ReferenceFormat = &quot;Genesis 1-2&quot; Or ReferenceFormat = &quot;Genesis 1&quot; Or ReferenceFormat = &quot;Gen 1-2&quot; Or ReferenceFormat = &quot;Gen 1&quot; Then
         	If strStartBook = strEndBook Then
 				strFirstReference = strStartBook &amp; &quot; &quot;
-				If strPrevStartChapter &lt;&gt; strStartChapter Then
-					If strStartVerse &lt;&gt; 1 Then
-						strFirstReference = strFirstReference &amp; strPrevStartChapter &amp; &quot;-&quot;
+				
+				If ReferenceFormat = &quot;Genesis 1-2&quot; Or ReferenceFormat = &quot;Gen 1-2&quot; Then
+					If strPrevStartChapter &lt;&gt; strStartChapter Then
+						If strStartVerse &lt;&gt; 1 Then
+							strFirstReference = strFirstReference &amp; strPrevStartChapter &amp; &quot;-&quot;
+						End If
 					End If
 				End If
 				strFirstReference = strFirstReference &amp; strStartChapter
@@ -535,12 +538,14 @@ Do
 				strLastReference = strEndBook &amp; &quot; &quot; &amp; 	strEndChapter
 			Else
 				strFirstReference = strStartBook &amp; &quot; &quot;
-				If strPrevStartChapter &lt;&gt; strStartChapter And strPrevStartChapter &lt; strStartChapter  Then
-					strFirstReference = strFirstReference &amp; strPrevStartChapter &amp; &quot;-&quot;
-				ElseIf strPrevStartChapter &lt;&gt; strStartChapter And strPrevStartChapter &gt;= strStartChapter  Then
-					strFirstReference = strFirstReference &amp; strPrevStartChapter
-				End If
 				
+				If ReferenceFormat = &quot;Genesis 1-2&quot; Or ReferenceFormat = &quot;Gen 1-2&quot; Then
+					If strPrevStartChapter &lt;&gt; strStartChapter And strPrevStartChapter &lt; strStartChapter  Then
+						strFirstReference = strFirstReference &amp; strPrevStartChapter &amp; &quot;-&quot;
+					ElseIf strPrevStartChapter &lt;&gt; strStartChapter And strPrevStartChapter &gt;= strStartChapter  Then
+						strFirstReference = strFirstReference &amp; strPrevStartChapter
+					End If
+				End If
 				If  strPrevStartChapter &lt; strStartChapter Then
 					strFirstReference = strFirstReference &amp; strStartChapter
 				End If
@@ -563,6 +568,11 @@ Do
 	strStartBook = strEndBook
 	Else
 		FirstPageBook(strStartBook)
+		page = oVC.getPage 
+		FirstChapterNumber(strStartChapter)
+		page = oVC.getPage 
+		strEndChapter = strStartChapter 
+		strPrevStartChapter =  strStartChapter
 		strEndBook = strStartBook
 	End If	
 Loop While oVC.jumpToNextPage 
@@ -626,7 +636,7 @@ Dim oPortion
  		End If
     	If oTextElement.supportsService(&quot;com.sun.star.text.Paragraph&quot;) then
     	    If Mid(Lcase(oTextElement.ParaStyleName),1,7) = &quot;scrbook&quot; Then&apos;titlemain_scrbook
-    	    	strStartBook = GetBookCodeName(Trim(oTextElement.String))	 	
+    	    	strStartBook = GetBookCodeName(Trim(oTextElement.String))
     		&apos;If InStr(Lcase(oTextElement.ParaStyleName) , &quot;scrbook&quot;) &gt; 0 Then&apos;titlemain_scrbook
     		    &apos;oParaEnume = oTextElement.createEnumeration()
     			&apos;While oParaEnume.hasMoreElements()
@@ -643,6 +653,59 @@ Dim oPortion
     	End If
     Wend	
 End Sub
+
+Function GetBookCodeName(ParaString)
+dim myList, count
+&apos;ParaString = &quot;Peta&quot;
+&apos;ParaString = &quot;1 Peta&quot;
+&apos;ParaString = &quot;Peter Pet&quot;
+&apos;ParaString = &quot;1 Peter 1 Pet&quot;
+	If Len(ParaString) &gt; 0 Then
+		myList = split(Trim(ParaString),&quot; &quot;)
+		count = UBound(myList) + 1
+		If count = 1 Then
+			GetBookCodeName = ParaString
+		ElseIf count = 2 Then
+		   If(val(mid(trim(ParaString),1,1)) = 0) Then
+				If Mid(ReferenceFormat,1,4) = &quot;Gen &quot; Then
+					GetBookCodeName = myList(1)
+				Else
+					GetBookCodeName = myList(0)
+				End If	
+		   Else
+		   		GetBookCodeName = ParaString
+		   End If
+		ElseIf  count = 4 Then
+			If Mid(ReferenceFormat,1,4) = &quot;Gen &quot; Then
+				GetBookCodeName = myList(2) &amp; &quot; &quot; &amp; myList(3)
+			Else
+				GetBookCodeName = myList(0) &amp; &quot; &quot; &amp; myList(1)
+			End If		
+		End If
+	End If
+End Function
+
+Sub FirstChapterNumber(strChapterNumber)
+Dim oPortion
+	oTextElementEnum = ThisComponent.getText().createEnumeration() 
+ 	While oTextElementEnum.hasMoreElements() 
+ 		oTextElement = oTextElementEnum.nextElement
+    	If oTextElement.supportsService(&quot;com.sun.star.text.Paragraph&quot;) then
+    	    If Mid(Lcase(oTextElement.ParaStyleName),1,13) = &quot;chapternumber&quot; Then&apos;titlemain_scrbook
+    	    	strChapterNumber = GetFirstChapterNumber(Trim(oTextElement.String))	
+    	    	Exit Sub 	
+    		End If
+    	End If
+    Wend	
+End Sub
+
+Function GetFirstChapterNumber(ParaString)
+dim myList
+	If Len(ParaString) &gt; 0 Then
+		myList = split(Trim(ParaString),&quot; &quot;)
+		GetFirstChapterNumber = myList(0)
+	End If
+End Function
 
 &apos;This procedure Insert Reference as Hidden Paragraph
 Sub InsertReference(HiddenParagraph,PageCount) 
@@ -715,7 +778,7 @@ Sub GetReferenceASC(MyParagraph,PageNo,RefVariable,Source)
 		  	If Len(Trim(RefVariable)) &gt; 0 Then
 		  		Exit Do
 		  	End If
-		  	If Left(MyParagraph.String,16) = Left(LastParagraph(PageNo),16) Then
+		  	If Left(MyParagraph.String,7) = Left(LastParagraph(PageNo),7) Then
 				Exit Do
 		  	End If
 		Loop While MyParagraph.gotoNextParagraph(false)
@@ -814,38 +877,6 @@ Dim oPortion
 	WEnd	
 End Function
 
-Function GetBookCodeName(ParaString)
-dim myList, count
-&apos;ParaString = &quot;Peta&quot;
-&apos;ParaString = &quot;1 Peta&quot;
-&apos;ParaString = &quot;Peter Pet&quot;
-&apos;ParaString = &quot;1 Peter 1 Pet&quot;
-	If Len(ParaString) &gt; 0 Then
-		myList = split(Trim(ParaString),&quot; &quot;)
-		count = UBound(myList) + 1
-		If count = 1 Then
-			GetBookCodeName = ParaString
-		ElseIf count = 2 Then
-		   If(val(mid(trim(ParaString),1,1)) = 0) Then
-				If Mid(ReferenceFormat,1,4) = &quot;Gen &quot; Then
-					GetBookCodeName = myList(1)
-				Else
-					GetBookCodeName = myList(0)
-				End If	
-		   Else
-		   		GetBookCodeName = ParaString
-		   End If
-		ElseIf  count = 4 Then
-			If Mid(ReferenceFormat,1,4) = &quot;Gen &quot; Then
-				GetBookCodeName = myList(2) &amp; &quot; &quot; &amp; myList(3)
-			Else
-				GetBookCodeName = myList(0) &amp; &quot; &quot; &amp; myList(1)
-			End If		
-		End If
-	End If
-End Function
-
-
 &apos;This Procedure loops the page and store the last paragraph in Array
 Sub GetLastParagraph
 On Error GoTo MyError:
@@ -870,7 +901,8 @@ Do
 
 	oVC.jumpToEndOfPage 
 	Last = oDoc.Text.createTextCursorByRange(oVC) 
-	
+	&apos;msgbox Last.String
+	&apos;Last.gotoStartOfSentence(false)
 	Last.gotoStartOfParagraph(true)
 	&apos;Last.gotoEndOfParagraph(false)
 
