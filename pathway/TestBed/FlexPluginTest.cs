@@ -287,7 +287,7 @@ namespace TestBed
 
         private void Btn_InputPath_Click(object sender, EventArgs e)
         {
-            txtInputPath.Text = GetFilePath("XHTML Files|*.xhtml|XML Files|*.xml");
+            txtInputPath.Text = GetFilePath("XHTML Files|*.xhtml|XML Files|*.xml|Tex|*.tex");
             txtCSSInput.Text = Path.ChangeExtension(txtInputPath.Text, "css");
         }
 
@@ -583,12 +583,22 @@ namespace TestBed
             projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
             projInfo.DefaultCssFileWithPath = txtCSSInput.Text;
 
-            //string projectPath = Path.GetDirectoryName(txtInputPath.Text);
-            //string xhtmlFileWithPath = txtInputPath.Text;
-            //string cssFileWithPath = txtCSSInput.Text;
             projInfo.ProjectFileWithPath = projInfo.ProjectPath;
             projInfo.DictionaryPath = projInfo.ProjectPath;
             exportXeTex.Export(projInfo);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(txtInputPath.Text))
+            {
+                MessageBox.Show("Please enter the valid XHTML path");
+                return;
+            }
+
+            ExportXeTex exportXeTex = new ExportXeTex();
+            exportXeTex.CallXeTex(txtInputPath.Text,true);
+
         }
     }
 }

@@ -531,7 +531,6 @@ namespace PrincessConvert
             this.Controls.Add(this.Panel1);
             this.Name = "settings";
             this.Text = "settings";
-            this.Load += new System.EventHandler(this.settings_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView1)).EndInit();
             this.Panel1.ResumeLayout(false);
             this.Panel1.PerformLayout();

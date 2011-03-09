@@ -16,8 +16,11 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Windows.Forms;
 using SIL.Tool;
+using Test;
 
 namespace SIL.PublishingSolution
 {
@@ -77,12 +80,53 @@ namespace SIL.PublishingSolution
             Dictionary<string, ArrayList> StyleName = xeTexContent.CreateContent(projInfo.ProjectPath, xetexFile, projInfo.DefaultXhtmlFileWithPath, xeTexAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
             CloseFile(xetexFile);
-            //SubProcess.AfterProcess(projInfo.ProjectFileWithPath);
 
-            //if (projInfo.IsOpenOutput)
-            //    Launch("ldmlFullName");
+            //CallXeTex(Path.GetFileName(xetexFullFile));
+            CallXeTex(xetexFullFile,true);
             return true;
         }
+
+        public void CallXeTex(string xetexFullFile,bool openFile)
+        {
+            string instPath = Application.ExecutablePath.ToString();
+            instPath = PathPart.Bin(instPath, "");
+            instPath = Common.PathCombine(instPath, @"..\XeTex\xetexExe\bin");
+            string dest = Common.PathCombine(instPath,Path.GetFileName(xetexFullFile));
+            File.Copy(xetexFullFile, dest,true);
+
+            if (!File.Exists(dest))
+            {
+                MessageBox.Show("File is not copied");
+                return;
+            }
+
+            string name = "xetex.exe";
+            Process p1 = new Process();
+            Directory.SetCurrentDirectory(instPath);
+            p1.StartInfo.FileName = name;
+            if (xetexFullFile != null)
+                p1.StartInfo.Arguments = Path.GetFileName(xetexFullFile);
+            //p1.StartInfo.RedirectStandardOutput = !string.IsNullOrEmpty(RedirectOutput);
+            p1.StartInfo.RedirectStandardError = p1.StartInfo.RedirectStandardOutput;
+            p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
+            p1.Start();
+            //if (true)
+            //{
+            //    //if (p1.Id <= 0)
+            //    //    throw new MissingSatelliteAssemblyException(name);
+            //    p1.WaitForExit();
+            //}
+            if (openFile)
+            {
+                string fileNameNoPath = Path.Combine(instPath,Path.GetFileNameWithoutExtension(xetexFullFile) +
+                                                     ".pdf");
+                if (File.Exists(fileNameNoPath))
+                {
+                        Common.OpenOutput(fileNameNoPath);
+                }
+            }
+        }
+
 
         private void CloseFile(StreamWriter xetexFile)
         {

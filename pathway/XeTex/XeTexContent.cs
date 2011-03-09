@@ -272,7 +272,7 @@ namespace SIL.PublishingSolution
             string content = _reader.Value;
             content = ReplaceString(content);
 
-            if (CollectFootNoteChapterVerse(content, Common.OutputType.IDML.ToString())) return;
+            if (CollectFootNoteChapterVerse(content, Common.OutputType.XETEX.ToString())) return;
 
             // Psuedo Before
             foreach (ClassInfo psuedoBefore in _psuedoBefore)
@@ -1012,7 +1012,7 @@ namespace SIL.PublishingSolution
                 _isDropCap = true;
                 string lines = "2";
                 _allStyle.Pop();
-                CollectFootNoteChapterVerse(_chapterNo, Common.OutputType.IDML.ToString());
+                CollectFootNoteChapterVerse(_chapterNo, Common.OutputType.XETEX.ToString());
                 
                 try
                 {
@@ -1171,7 +1171,7 @@ namespace SIL.PublishingSolution
 
         private void InitializeData(string projectPath, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
         {
-            _outputType = Common.OutputType.IDML;
+            _outputType = Common.OutputType.XETEX;
             _allStyle = new Stack<string>();
             _allParagraph = new Stack<string>();
             _allCharacter = new Stack<string>();

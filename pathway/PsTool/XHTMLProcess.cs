@@ -836,7 +836,7 @@ namespace SIL.PublishingSolution
 
         private string GetStyleNumber(string styleName)
         {
-            if (_outputType == Common.OutputType.ODT)
+            if (_outputType != Common.OutputType.IDML)
             {
                 //if(_parentStyleName == "body") return styleName;
 

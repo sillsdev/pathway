@@ -44,6 +44,7 @@
             this.txtInputPath = new System.Windows.Forms.TextBox();
             this.Btn_InputPath = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnXeTex = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.btnParaText = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
@@ -59,7 +60,7 @@
             this.btnFileSizeZero = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.btnXeTex = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -221,6 +222,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button8);
             this.groupBox1.Controls.Add(this.btnXeTex);
             this.groupBox1.Controls.Add(this.button7);
             this.groupBox1.Controls.Add(this.btnParaText);
@@ -238,6 +240,17 @@
             this.groupBox1.TabIndex = 51;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Export";
+            // 
+            // btnXeTex
+            // 
+            this.btnXeTex.AccessibleName = "BtnFlexTest";
+            this.btnXeTex.Location = new System.Drawing.Point(142, 159);
+            this.btnXeTex.Name = "btnXeTex";
+            this.btnXeTex.Size = new System.Drawing.Size(67, 28);
+            this.btnXeTex.TabIndex = 59;
+            this.btnXeTex.Text = "XeTex";
+            this.btnXeTex.UseVisualStyleBackColor = true;
+            this.btnXeTex.Click += new System.EventHandler(this.btnXeTex_Click);
             // 
             // button7
             // 
@@ -406,16 +419,16 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // btnXeTex
+            // button8
             // 
-            this.btnXeTex.AccessibleName = "BtnFlexTest";
-            this.btnXeTex.Location = new System.Drawing.Point(142, 159);
-            this.btnXeTex.Name = "btnXeTex";
-            this.btnXeTex.Size = new System.Drawing.Size(67, 28);
-            this.btnXeTex.TabIndex = 59;
-            this.btnXeTex.Text = "XeTex";
-            this.btnXeTex.UseVisualStyleBackColor = true;
-            this.btnXeTex.Click += new System.EventHandler(this.btnXeTex_Click);
+            this.button8.AccessibleName = "BtnFlexTest";
+            this.button8.Location = new System.Drawing.Point(222, 159);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(94, 28);
+            this.button8.TabIndex = 60;
+            this.button8.Text = "Direct Tex File";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // FlexPluginTest
             // 
@@ -479,5 +492,6 @@
         private System.Windows.Forms.Button btnParaText;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button btnXeTex;
+        private System.Windows.Forms.Button button8;
     }
 }
