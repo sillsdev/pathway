@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Mar-08-2011 for TD-1994(Header on page 3 is for Chapter 1 instead of chapter 21)
+&apos;Changed On Mar-09-2011 for TD-2021(No header on page number 2)
 
 &apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -637,6 +637,7 @@ Dim oPortion
     	If oTextElement.supportsService(&quot;com.sun.star.text.Paragraph&quot;) then
     	    If Mid(Lcase(oTextElement.ParaStyleName),1,7) = &quot;scrbook&quot; Then&apos;titlemain_scrbook
     	    	strStartBook = GetBookCodeName(Trim(oTextElement.String))
+    	    	Exit Sub	 	
     		&apos;If InStr(Lcase(oTextElement.ParaStyleName) , &quot;scrbook&quot;) &gt; 0 Then&apos;titlemain_scrbook
     		    &apos;oParaEnume = oTextElement.createEnumeration()
     			&apos;While oParaEnume.hasMoreElements()
@@ -857,7 +858,8 @@ Dim oPortion
 	While oParaEnume.hasMoreElements() 
 	 	oPara = oParaEnume.nextElement() 
     	If Mid(Lcase(oPara.ParaStyleName),1,7) = &quot;scrbook&quot; Then&apos;titlemain_scrbook	
-    		ReturnReferenceBook = GetBookCodeName(Trim(oPara.String)) 	
+    		ReturnReferenceBook = GetBookCodeName(Trim(oPara.String)) 
+    		Exit Function	
 			&apos;&apos;enumeration for portions in the paragraph 
 		  	&apos;oPortionEnume = oPara.createEnumeration() 
 		  	&apos;While oPortionEnume.hasMoreElements() 
