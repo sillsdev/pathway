@@ -60,6 +60,7 @@ namespace PrincessConvert
             this.cbShowPDFToolbar.TabIndex = 0;
             this.cbShowPDFToolbar.Text = "Show PDF toolbar";
             this.cbShowPDFToolbar.UseVisualStyleBackColor = true;
+            this.cbShowPDFToolbar.Click += new System.EventHandler(this.cbPDFshowBookmarks_CheckedChanged);
             // 
             // cbShowSinglePage
             // 
@@ -80,6 +81,7 @@ namespace PrincessConvert
             this.cbShowThumbnails.TabIndex = 2;
             this.cbShowThumbnails.Text = "Show thumbnails";
             this.cbShowThumbnails.UseVisualStyleBackColor = true;
+            this.cbShowThumbnails.Click += new System.EventHandler(this.cbShowThumbnails_CheckedChanged);
             this.cbShowThumbnails.CheckedChanged += new System.EventHandler(this.cbShowThumbnails_CheckedChanged);
             // 
             // cbShowScrollBars
@@ -101,6 +103,7 @@ namespace PrincessConvert
             this.cbPDFshowBookmarks.TabIndex = 4;
             this.cbPDFshowBookmarks.Text = "Show bookmarks";
             this.cbPDFshowBookmarks.UseVisualStyleBackColor = true;
+            this.cbPDFshowBookmarks.Click += new System.EventHandler(this.cbPDFshowBookmarks_CheckedChanged);
             this.cbPDFshowBookmarks.CheckedChanged += new System.EventHandler(this.cbPDFshowBookmarks_CheckedChanged);
             // 
             // btnOK

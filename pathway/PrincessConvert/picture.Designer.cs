@@ -198,6 +198,7 @@ namespace PrincessConvert
             this.btnOK.TabIndex = 7;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnCancel
             // 
@@ -207,6 +208,7 @@ namespace PrincessConvert
             this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // lblMarginTopInLines
             // 
@@ -246,13 +248,14 @@ namespace PrincessConvert
             // 
             // btnInsertGraphicHere
             // 
-            this.btnInsertGraphicHere.Location = new System.Drawing.Point(449, 415);
+            this.btnInsertGraphicHere.Location = new System.Drawing.Point(448, 415);
             this.btnInsertGraphicHere.Name = "btnInsertGraphicHere";
             this.btnInsertGraphicHere.Size = new System.Drawing.Size(53, 24);
             this.btnInsertGraphicHere.TabIndex = 16;
             this.btnInsertGraphicHere.Text = "Insert";
             this.btnInsertGraphicHere.UseVisualStyleBackColor = true;
             this.btnInsertGraphicHere.Visible = false;
+            this.btnInsertGraphicHere.Click += new System.EventHandler(this.btnInsertGraphicHere_Click);
             // 
             // pictureBox2
             // 
@@ -272,6 +275,7 @@ namespace PrincessConvert
             this.btnRemove.Text = "Remove";
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Visible = false;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // PictureDialog
             // 
@@ -285,6 +289,7 @@ namespace PrincessConvert
             this.tbLineHeight.Size = new System.Drawing.Size(40, 20);
             this.tbLineHeight.TabIndex = 19;
             this.tbLineHeight.WordWrap = false;
+            this.tbLineHeight.TextChanged += new System.EventHandler(this.tbLineHeight_TextChanged);
             // 
             // tbColumnWidth
             // 
@@ -294,6 +299,7 @@ namespace PrincessConvert
             this.tbColumnWidth.Size = new System.Drawing.Size(40, 20);
             this.tbColumnWidth.TabIndex = 20;
             this.tbColumnWidth.WordWrap = false;
+            this.tbColumnWidth.TextChanged += new System.EventHandler(this.tbColumnWidth_TextChanged);
             // 
             // tbPictureWidthInPixels
             // 
@@ -427,6 +433,7 @@ namespace PrincessConvert
             this.btnBrowse.TabIndex = 35;
             this.btnBrowse.Text = "Browse...";
             this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // tbGraphicFileName
             // 
@@ -639,6 +646,7 @@ namespace PrincessConvert
             0,
             0,
             0});
+            this.NumericUpDownPercentOfColumnForPicture.Click += new System.EventHandler(this.NumericUpDownPercentOfColumnForPicture_ValueChanged);
             // 
             // lblPicturePercentWidth
             // 

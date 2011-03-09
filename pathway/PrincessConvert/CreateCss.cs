@@ -405,47 +405,48 @@ namespace PrincessConvert
 
         private void InitializeComponent()
         {
-this.lblGeneratedStylesheetName = new System.Windows.Forms.Label();
-this.lblGPSStylesheetName = new System.Windows.Forms.Label();
-this.btnConvert = new System.Windows.Forms.Button();
-this.SuspendLayout();
-// 
-// lblGeneratedStylesheetName
-// 
-this.lblGeneratedStylesheetName.AutoSize = true;
-this.lblGeneratedStylesheetName.Location = new System.Drawing.Point(45, 81);
-this.lblGeneratedStylesheetName.Name = "lblGeneratedStylesheetName";
-this.lblGeneratedStylesheetName.Size = new System.Drawing.Size(168, 13);
-this.lblGeneratedStylesheetName.TabIndex = 5;
-this.lblGeneratedStylesheetName.Text = "xxx generated stylesheet file name";
-// 
-// lblGPSStylesheetName
-// 
-this.lblGPSStylesheetName.AutoSize = true;
-this.lblGPSStylesheetName.Location = new System.Drawing.Point(45, 68);
-this.lblGPSStylesheetName.Name = "lblGPSStylesheetName";
-this.lblGPSStylesheetName.Size = new System.Drawing.Size(142, 13);
-this.lblGPSStylesheetName.TabIndex = 4;
-this.lblGPSStylesheetName.Text = "xxx GPS stylesheet file name";
-// 
-// btnConvert
-// 
-this.btnConvert.Location = new System.Drawing.Point(190, 239);
-this.btnConvert.Name = "btnConvert";
-this.btnConvert.Size = new System.Drawing.Size(75, 23);
-this.btnConvert.TabIndex = 3;
-this.btnConvert.Text = "Button1";
-this.btnConvert.UseVisualStyleBackColor = true;
-// 
-// CreateCss
-// 
-this.ClientSize = new System.Drawing.Size(510, 373);
-this.Controls.Add(this.lblGeneratedStylesheetName);
-this.Controls.Add(this.lblGPSStylesheetName);
-this.Controls.Add(this.btnConvert);
-this.Name = "CreateCss";
-this.ResumeLayout(false);
-this.PerformLayout();
+            this.lblGeneratedStylesheetName = new System.Windows.Forms.Label();
+            this.lblGPSStylesheetName = new System.Windows.Forms.Label();
+            this.btnConvert = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // lblGeneratedStylesheetName
+            // 
+            this.lblGeneratedStylesheetName.AutoSize = true;
+            this.lblGeneratedStylesheetName.Location = new System.Drawing.Point(45, 81);
+            this.lblGeneratedStylesheetName.Name = "lblGeneratedStylesheetName";
+            this.lblGeneratedStylesheetName.Size = new System.Drawing.Size(168, 13);
+            this.lblGeneratedStylesheetName.TabIndex = 5;
+            this.lblGeneratedStylesheetName.Text = "xxx generated stylesheet file name";
+            // 
+            // lblGPSStylesheetName
+            // 
+            this.lblGPSStylesheetName.AutoSize = true;
+            this.lblGPSStylesheetName.Location = new System.Drawing.Point(45, 68);
+            this.lblGPSStylesheetName.Name = "lblGPSStylesheetName";
+            this.lblGPSStylesheetName.Size = new System.Drawing.Size(142, 13);
+            this.lblGPSStylesheetName.TabIndex = 4;
+            this.lblGPSStylesheetName.Text = "xxx GPS stylesheet file name";
+            // 
+            // btnConvert
+            // 
+            this.btnConvert.Location = new System.Drawing.Point(190, 239);
+            this.btnConvert.Name = "btnConvert";
+            this.btnConvert.Size = new System.Drawing.Size(75, 23);
+            this.btnConvert.TabIndex = 3;
+            this.btnConvert.Text = "Button1";
+            this.btnConvert.UseVisualStyleBackColor = true;
+            this.btnConvert.Click += new System.EventHandler(this.btnConvert_Click);
+            // 
+            // CreateCss
+            // 
+            this.ClientSize = new System.Drawing.Size(510, 373);
+            this.Controls.Add(this.lblGeneratedStylesheetName);
+            this.Controls.Add(this.lblGPSStylesheetName);
+            this.Controls.Add(this.btnConvert);
+            this.Name = "CreateCss";
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

@@ -3307,6 +3307,11 @@ namespace PrincessConvert
 
 	}
 
+    private void SettingsToolStripMenuItem_Click_1(object sender, EventArgs e)
+    {
+
+    }
+
 	//   Public Sub UpdatePageNumber()
 	//       iPDFpageNumber = GetPageNumber(AxAcroPDF1.Handle).ToString()
 	//   End Sub

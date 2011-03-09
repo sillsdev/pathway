@@ -34,6 +34,7 @@ namespace PrincessConvert
 	{
 		//Load += settingsLoad;
 		// This call is required by the Windows Form Designer.
+	    settingsLoad();
 		InitializeComponent();
 		// Add any initializationAfterthe InitializeComponent() call.
 	}       
@@ -407,18 +408,11 @@ namespace PrincessConvert
 
 	}
 
-	private void lbColumnWidthUnits_SelectedIndexChanged(System.Object sender, System.EventArgs e)
-	{
-	}
-
-
-
 
 	private void NumericUpDownNumberOfColumns_ValueChanged(System.Object sender, System.EventArgs e)
 	{
 		tbColumnWidthInPoints.Text = null;
 	}
-
 
 
 	private void NumericUpDownRightMarginInPoints_ValueChanged(System.Object sender, System.EventArgs e)
@@ -535,6 +529,7 @@ namespace PrincessConvert
         Main main = new Main();
 		main.writeIniFile();
 	}
-      
+
+     
     }
 }

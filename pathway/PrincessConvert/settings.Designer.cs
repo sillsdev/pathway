@@ -37,7 +37,7 @@ namespace PrincessConvert
         [System.Diagnostics.DebuggerStepThrough()]
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle DataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DataGridView1 = new System.Windows.Forms.DataGridView();
             this.FontDialog1 = new System.Windows.Forms.FontDialog();
             this.btnFont = new System.Windows.Forms.Button();
@@ -75,94 +75,97 @@ namespace PrincessConvert
             this.NumericUpDownNumberOfColumns = new System.Windows.Forms.NumericUpDown();
             this.lblNumberOfColumn = new System.Windows.Forms.Label();
             this.lblColumnGap = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)this.DataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridView1)).BeginInit();
             this.Panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)this.NumericUpDownColumnGapInPoints).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)this.NumericUpDownLeftMarginPoints).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)this.NumericUpDownRightMarginInPoints).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)this.NumericUpDownBottomMarginInPoints).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)this.NumericUpDownTopMarginInPoints).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)this.NumericUpDownLineHeight).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)this.NumericUpDownNumberOfColumns).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownColumnGapInPoints)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownLeftMarginPoints)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownRightMarginInPoints)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownBottomMarginInPoints)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownTopMarginInPoints)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownLineHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownNumberOfColumns)).BeginInit();
             this.SuspendLayout();
-            //
-            //DataGridView1
-            //
+            // 
+            // DataGridView1
+            // 
             this.DataGridView1.AllowUserToAddRows = false;
             this.DataGridView1.AllowUserToDeleteRows = false;
             this.DataGridView1.AllowUserToOrderColumns = true;
-            DataGridViewCellStyle3.BackColor = System.Drawing.Color.Aquamarine;
-            this.DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Aquamarine;
+            this.DataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridView1.Location = new System.Drawing.Point(37, 312);
             this.DataGridView1.Name = "DataGridView1";
             this.DataGridView1.Size = new System.Drawing.Size(700, 150);
             this.DataGridView1.TabIndex = 1;
-            //
-            //btnFont
-            //
+            // 
+            // btnFont
+            // 
             this.btnFont.Location = new System.Drawing.Point(48, 482);
             this.btnFont.Name = "btnFont";
             this.btnFont.Size = new System.Drawing.Size(75, 23);
             this.btnFont.TabIndex = 3;
             this.btnFont.Text = "Font";
             this.btnFont.UseVisualStyleBackColor = true;
-            //
-            //tbColumnWidthInPoints
-            //
+            this.btnFont.Click += new System.EventHandler(this.btnFont_Click);
+            // 
+            // tbColumnWidthInPoints
+            // 
             this.tbColumnWidthInPoints.Location = new System.Drawing.Point(148, 214);
             this.tbColumnWidthInPoints.Name = "tbColumnWidthInPoints";
             this.tbColumnWidthInPoints.Size = new System.Drawing.Size(40, 20);
             this.tbColumnWidthInPoints.TabIndex = 36;
             this.tbColumnWidthInPoints.WordWrap = false;
-            //
-            //lblLineHeight
-            //
+            // 
+            // lblLineHeight
+            // 
             this.lblLineHeight.AutoSize = true;
             this.lblLineHeight.Location = new System.Drawing.Point(207, 85);
             this.lblLineHeight.Name = "lblLineHeight";
             this.lblLineHeight.Size = new System.Drawing.Size(59, 13);
             this.lblLineHeight.TabIndex = 37;
             this.lblLineHeight.Text = "Line height";
-            //
-            //lbInputUnits
-            //
+            // 
+            // lbInputUnits
+            // 
             this.lbInputUnits.AllowDrop = true;
             this.lbInputUnits.FormattingEnabled = true;
             this.lbInputUnits.Location = new System.Drawing.Point(490, 31);
             this.lbInputUnits.Name = "lbInputUnits";
             this.lbInputUnits.Size = new System.Drawing.Size(56, 17);
             this.lbInputUnits.TabIndex = 39;
-            //
-            //lbLineHeightUnits
-            //
+            // 
+            // lbLineHeightUnits
+            // 
             this.lbLineHeightUnits.AllowDrop = true;
             this.lbLineHeightUnits.FormattingEnabled = true;
             this.lbLineHeightUnits.Location = new System.Drawing.Point(443, 157);
             this.lbLineHeightUnits.Name = "lbLineHeightUnits";
             this.lbLineHeightUnits.Size = new System.Drawing.Size(56, 17);
             this.lbLineHeightUnits.TabIndex = 40;
-            //
-            //btnCancel
-            //
+            // 
+            // btnCancel
+            // 
             this.btnCancel.Location = new System.Drawing.Point(513, 215);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 41;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            //
-            //btnOK
-            //
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnOK
+            // 
             this.btnOK.Location = new System.Drawing.Point(422, 215);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 42;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
-            //
-            //Panel1
-            //
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            // 
+            // Panel1
+            // 
             this.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Panel1.Controls.Add(this.btnConvert);
             this.Panel1.Controls.Add(this.lblPageSize);
@@ -201,336 +204,326 @@ namespace PrincessConvert
             this.Panel1.Name = "Panel1";
             this.Panel1.Size = new System.Drawing.Size(579, 249);
             this.Panel1.TabIndex = 0;
-            //
-            //btnConvert
-            //
+            // 
+            // btnConvert
+            // 
             this.btnConvert.Location = new System.Drawing.Point(490, 54);
             this.btnConvert.Name = "btnConvert";
             this.btnConvert.Size = new System.Drawing.Size(75, 23);
             this.btnConvert.TabIndex = 73;
             this.btnConvert.Text = "Convert";
             this.btnConvert.UseVisualStyleBackColor = true;
-            //
-            //lblPageSize
-            //
+            this.btnConvert.Click += new System.EventHandler(this.btnConvert_Click);
+            // 
+            // lblPageSize
+            // 
             this.lblPageSize.AutoSize = true;
             this.lblPageSize.Location = new System.Drawing.Point(29, 24);
             this.lblPageSize.Name = "lblPageSize";
             this.lblPageSize.Size = new System.Drawing.Size(53, 13);
             this.lblPageSize.TabIndex = 72;
             this.lblPageSize.Text = "Page size";
-            //
-            //lbPageSize
-            //
+            // 
+            // lbPageSize
+            // 
             this.lbPageSize.FormattingEnabled = true;
             this.lbPageSize.Location = new System.Drawing.Point(148, 20);
             this.lbPageSize.Name = "lbPageSize";
             this.lbPageSize.Size = new System.Drawing.Size(181, 17);
             this.lbPageSize.TabIndex = 71;
-            //
-            //btnCalculateNumberOfLines
-            //
+            // 
+            // btnCalculateNumberOfLines
+            // 
             this.btnCalculateNumberOfLines.Location = new System.Drawing.Point(197, 212);
             this.btnCalculateNumberOfLines.Name = "btnCalculateNumberOfLines";
             this.btnCalculateNumberOfLines.Size = new System.Drawing.Size(140, 23);
             this.btnCalculateNumberOfLines.TabIndex = 70;
             this.btnCalculateNumberOfLines.Text = "Calculate number of lines per page";
             this.btnCalculateNumberOfLines.UseVisualStyleBackColor = true;
-            //
-            //tbColumnHeightInLines
-            //
+            this.btnCalculateNumberOfLines.Click += new System.EventHandler(this.btnCalculateNumberOfLines_Click);
+            // 
+            // tbColumnHeightInLines
+            // 
             this.tbColumnHeightInLines.Location = new System.Drawing.Point(342, 212);
             this.tbColumnHeightInLines.Name = "tbColumnHeightInLines";
             this.tbColumnHeightInLines.Size = new System.Drawing.Size(40, 20);
             this.tbColumnHeightInLines.TabIndex = 69;
             this.tbColumnHeightInLines.WordWrap = false;
-            //
-            //btnCalculateColumnWidthInPoints
-            //
+            // 
+            // btnCalculateColumnWidthInPoints
+            // 
             this.btnCalculateColumnWidthInPoints.Location = new System.Drawing.Point(8, 214);
             this.btnCalculateColumnWidthInPoints.Name = "btnCalculateColumnWidthInPoints";
             this.btnCalculateColumnWidthInPoints.Size = new System.Drawing.Size(130, 23);
             this.btnCalculateColumnWidthInPoints.TabIndex = 68;
             this.btnCalculateColumnWidthInPoints.Text = "Calculate width in points";
             this.btnCalculateColumnWidthInPoints.UseVisualStyleBackColor = true;
-            //
-            //tbPageHeightInPoints
-            //
+            this.btnCalculateColumnWidthInPoints.Click += new System.EventHandler(this.btnCalculateColumnWidthInPoints_Click);
+            // 
+            // tbPageHeightInPoints
+            // 
             this.tbPageHeightInPoints.Location = new System.Drawing.Point(341, 52);
             this.tbPageHeightInPoints.Name = "tbPageHeightInPoints";
             this.tbPageHeightInPoints.Size = new System.Drawing.Size(40, 20);
             this.tbPageHeightInPoints.TabIndex = 67;
             this.tbPageHeightInPoints.WordWrap = false;
-            //
-            //lblPageHeightInPoints
-            //
+            // 
+            // lblPageHeightInPoints
+            // 
             this.lblPageHeightInPoints.AutoSize = true;
             this.lblPageHeightInPoints.Location = new System.Drawing.Point(207, 59);
             this.lblPageHeightInPoints.Name = "lblPageHeightInPoints";
             this.lblPageHeightInPoints.Size = new System.Drawing.Size(106, 13);
             this.lblPageHeightInPoints.TabIndex = 66;
             this.lblPageHeightInPoints.Text = "Page height in points";
-            //
-            //tbPageWidthInPoints
-            //
+            // 
+            // tbPageWidthInPoints
+            // 
             this.tbPageWidthInPoints.Location = new System.Drawing.Point(149, 56);
             this.tbPageWidthInPoints.Name = "tbPageWidthInPoints";
             this.tbPageWidthInPoints.Size = new System.Drawing.Size(40, 20);
             this.tbPageWidthInPoints.TabIndex = 65;
             this.tbPageWidthInPoints.WordWrap = false;
-            //
-            //lblPageWidth
-            //
+            // 
+            // lblPageWidth
+            // 
             this.lblPageWidth.AutoSize = true;
             this.lblPageWidth.Location = new System.Drawing.Point(27, 59);
             this.lblPageWidth.Name = "lblPageWidth";
             this.lblPageWidth.Size = new System.Drawing.Size(102, 13);
             this.lblPageWidth.TabIndex = 64;
             this.lblPageWidth.Text = "Page width in points";
-            //
-            //NumericUpDownColumnGapInPoints
-            //
+            // 
+            // NumericUpDownColumnGapInPoints
+            // 
             this.NumericUpDownColumnGapInPoints.Location = new System.Drawing.Point(148, 180);
             this.NumericUpDownColumnGapInPoints.Maximum = new decimal(new int[] {
-			99,
-			0,
-			0,
-			0
-		});
+            99,
+            0,
+            0,
+            0});
             this.NumericUpDownColumnGapInPoints.Name = "NumericUpDownColumnGapInPoints";
             this.NumericUpDownColumnGapInPoints.Size = new System.Drawing.Size(40, 20);
             this.NumericUpDownColumnGapInPoints.TabIndex = 62;
             this.NumericUpDownColumnGapInPoints.Value = new decimal(new int[] {
-			6,
-			0,
-			0,
-			0
-		});
-            //
-            //lblConvertToPoints
-            //
+            6,
+            0,
+            0,
+            0});
+            this.NumericUpDownColumnGapInPoints.Click += new System.EventHandler(this.NumericUpDownColumnGap_ValueChanged);
+            // 
+            // lblConvertToPoints
+            // 
             this.lblConvertToPoints.AutoSize = true;
             this.lblConvertToPoints.Location = new System.Drawing.Point(440, 13);
             this.lblConvertToPoints.Name = "lblConvertToPoints";
             this.lblConvertToPoints.Size = new System.Drawing.Size(88, 13);
             this.lblConvertToPoints.TabIndex = 61;
             this.lblConvertToPoints.Text = "Convert to Points";
-            //
-            //tbConvertedValue
-            //
+            // 
+            // tbConvertedValue
+            // 
             this.tbConvertedValue.Location = new System.Drawing.Point(444, 56);
             this.tbConvertedValue.Name = "tbConvertedValue";
             this.tbConvertedValue.Size = new System.Drawing.Size(40, 20);
             this.tbConvertedValue.TabIndex = 60;
             this.tbConvertedValue.WordWrap = false;
-            //
-            //tbInputValueToConvert
-            //
+            // 
+            // tbInputValueToConvert
+            // 
             this.tbInputValueToConvert.Location = new System.Drawing.Point(444, 28);
             this.tbInputValueToConvert.Name = "tbInputValueToConvert";
             this.tbInputValueToConvert.Size = new System.Drawing.Size(40, 20);
             this.tbInputValueToConvert.TabIndex = 59;
             this.tbInputValueToConvert.WordWrap = false;
-            //
-            //Label3
-            //
+            // 
+            // Label3
+            // 
             this.Label3.AutoSize = true;
             this.Label3.Location = new System.Drawing.Point(207, 151);
             this.Label3.Name = "Label3";
             this.Label3.Size = new System.Drawing.Size(116, 13);
             this.Label3.TabIndex = 58;
             this.Label3.Text = "Margin bottom in points";
-            //
-            //NumericUpDownLeftMarginPoints
-            //
+            // 
+            // NumericUpDownLeftMarginPoints
+            // 
             this.NumericUpDownLeftMarginPoints.Location = new System.Drawing.Point(148, 149);
             this.NumericUpDownLeftMarginPoints.Maximum = new decimal(new int[] {
-			99,
-			0,
-			0,
-			0
-		});
+            99,
+            0,
+            0,
+            0});
             this.NumericUpDownLeftMarginPoints.Name = "NumericUpDownLeftMarginPoints";
             this.NumericUpDownLeftMarginPoints.Size = new System.Drawing.Size(40, 20);
             this.NumericUpDownLeftMarginPoints.TabIndex = 57;
             this.NumericUpDownLeftMarginPoints.Value = new decimal(new int[] {
-			12,
-			0,
-			0,
-			0
-		});
-            //
-            //Label2
-            //
+            12,
+            0,
+            0,
+            0});
+            this.NumericUpDownLeftMarginPoints.Click += new System.EventHandler(this.NumericUpDownLeftMarginPoints_ValueChanged);
+            // 
+            // Label2
+            // 
             this.Label2.AutoSize = true;
             this.Label2.Location = new System.Drawing.Point(27, 115);
             this.Label2.Name = "Label2";
             this.Label2.Size = new System.Drawing.Size(104, 13);
             this.Label2.TabIndex = 56;
             this.Label2.Text = "Margin right in points";
-            //
-            //NumericUpDownRightMarginInPoints
-            //
+            // 
+            // NumericUpDownRightMarginInPoints
+            // 
             this.NumericUpDownRightMarginInPoints.Location = new System.Drawing.Point(148, 113);
             this.NumericUpDownRightMarginInPoints.Maximum = new decimal(new int[] {
-			99,
-			0,
-			0,
-			0
-		});
+            99,
+            0,
+            0,
+            0});
             this.NumericUpDownRightMarginInPoints.Name = "NumericUpDownRightMarginInPoints";
             this.NumericUpDownRightMarginInPoints.Size = new System.Drawing.Size(40, 20);
             this.NumericUpDownRightMarginInPoints.TabIndex = 55;
             this.NumericUpDownRightMarginInPoints.Value = new decimal(new int[] {
-			12,
-			0,
-			0,
-			0
-		});
-            //
-            //lblMarginLeft
-            //
+            12,
+            0,
+            0,
+            0});
+            this.NumericUpDownRightMarginInPoints.Click += new System.EventHandler(this.NumericUpDownRightMarginInPoints_ValueChanged);
+            // 
+            // lblMarginLeft
+            // 
             this.lblMarginLeft.AutoSize = true;
             this.lblMarginLeft.Location = new System.Drawing.Point(27, 151);
             this.lblMarginLeft.Name = "lblMarginLeft";
             this.lblMarginLeft.Size = new System.Drawing.Size(98, 13);
             this.lblMarginLeft.TabIndex = 54;
             this.lblMarginLeft.Text = "Margin left in points";
-            //
-            //NumericUpDownBottomMarginInPoints
-            //
+            // 
+            // NumericUpDownBottomMarginInPoints
+            // 
             this.NumericUpDownBottomMarginInPoints.Location = new System.Drawing.Point(341, 149);
             this.NumericUpDownBottomMarginInPoints.Maximum = new decimal(new int[] {
-			99,
-			0,
-			0,
-			0
-		});
+            99,
+            0,
+            0,
+            0});
             this.NumericUpDownBottomMarginInPoints.Name = "NumericUpDownBottomMarginInPoints";
             this.NumericUpDownBottomMarginInPoints.Size = new System.Drawing.Size(40, 20);
             this.NumericUpDownBottomMarginInPoints.TabIndex = 53;
             this.NumericUpDownBottomMarginInPoints.Value = new decimal(new int[] {
-			12,
-			0,
-			0,
-			0
-		});
-            //
-            //lblMarginTopInPoints
-            //
+            12,
+            0,
+            0,
+            0});
+            // 
+            // lblMarginTopInPoints
+            // 
             this.lblMarginTopInPoints.AutoSize = true;
             this.lblMarginTopInPoints.Location = new System.Drawing.Point(207, 115);
             this.lblMarginTopInPoints.Name = "lblMarginTopInPoints";
             this.lblMarginTopInPoints.Size = new System.Drawing.Size(99, 13);
             this.lblMarginTopInPoints.TabIndex = 52;
             this.lblMarginTopInPoints.Text = "Margin top in points";
-            //
-            //NumericUpDownTopMarginInPoints
-            //
+            // 
+            // NumericUpDownTopMarginInPoints
+            // 
             this.NumericUpDownTopMarginInPoints.Location = new System.Drawing.Point(341, 113);
             this.NumericUpDownTopMarginInPoints.Maximum = new decimal(new int[] {
-			99,
-			0,
-			0,
-			0
-		});
+            99,
+            0,
+            0,
+            0});
             this.NumericUpDownTopMarginInPoints.Name = "NumericUpDownTopMarginInPoints";
             this.NumericUpDownTopMarginInPoints.Size = new System.Drawing.Size(40, 20);
             this.NumericUpDownTopMarginInPoints.TabIndex = 51;
             this.NumericUpDownTopMarginInPoints.Value = new decimal(new int[] {
-			12,
-			0,
-			0,
-			0
-		});
-            //
-            //lbColumnGapUnits
-            //
+            12,
+            0,
+            0,
+            0});
+            // 
+            // lbColumnGapUnits
+            // 
             this.lbColumnGapUnits.AllowDrop = true;
             this.lbColumnGapUnits.FormattingEnabled = true;
             this.lbColumnGapUnits.Location = new System.Drawing.Point(444, 134);
             this.lbColumnGapUnits.Name = "lbColumnGapUnits";
             this.lbColumnGapUnits.Size = new System.Drawing.Size(56, 17);
             this.lbColumnGapUnits.TabIndex = 49;
-            //
-            //NumericUpDownLineHeight
-            //
+            // 
+            // NumericUpDownLineHeight
+            // 
             this.NumericUpDownLineHeight.DecimalPlaces = 2;
             this.NumericUpDownLineHeight.Increment = new decimal(new int[] {
-			25,
-			0,
-			0,
-			131072
-		});
+            25,
+            0,
+            0,
+            131072});
             this.NumericUpDownLineHeight.Location = new System.Drawing.Point(341, 83);
             this.NumericUpDownLineHeight.Maximum = new decimal(new int[] {
-			18,
-			0,
-			0,
-			0
-		});
+            18,
+            0,
+            0,
+            0});
             this.NumericUpDownLineHeight.Minimum = new decimal(new int[] {
-			8,
-			0,
-			0,
-			0
-		});
+            8,
+            0,
+            0,
+            0});
             this.NumericUpDownLineHeight.Name = "NumericUpDownLineHeight";
             this.NumericUpDownLineHeight.Size = new System.Drawing.Size(52, 20);
             this.NumericUpDownLineHeight.TabIndex = 48;
             this.NumericUpDownLineHeight.Value = new decimal(new int[] {
-			11,
-			0,
-			0,
-			0
-		});
-            //
-            //NumericUpDownNumberOfColumns
-            //
+            11,
+            0,
+            0,
+            0});
+            // 
+            // NumericUpDownNumberOfColumns
+            // 
             this.NumericUpDownNumberOfColumns.Location = new System.Drawing.Point(149, 83);
             this.NumericUpDownNumberOfColumns.Maximum = new decimal(new int[] {
-			6,
-			0,
-			0,
-			0
-		});
+            6,
+            0,
+            0,
+            0});
             this.NumericUpDownNumberOfColumns.Minimum = new decimal(new int[] {
-			1,
-			0,
-			0,
-			0
-		});
+            1,
+            0,
+            0,
+            0});
             this.NumericUpDownNumberOfColumns.Name = "NumericUpDownNumberOfColumns";
             this.NumericUpDownNumberOfColumns.Size = new System.Drawing.Size(40, 20);
             this.NumericUpDownNumberOfColumns.TabIndex = 47;
             this.NumericUpDownNumberOfColumns.Value = new decimal(new int[] {
-			1,
-			0,
-			0,
-			0
-		});
-            //
-            //lblNumberOfColumn
-            //
+            1,
+            0,
+            0,
+            0});
+            this.NumericUpDownNumberOfColumns.Click += new System.EventHandler(this.NumericUpDownNumberOfColumns_ValueChanged);
+            // 
+            // lblNumberOfColumn
+            // 
             this.lblNumberOfColumn.AutoSize = true;
             this.lblNumberOfColumn.Location = new System.Drawing.Point(27, 85);
             this.lblNumberOfColumn.Name = "lblNumberOfColumn";
             this.lblNumberOfColumn.Size = new System.Drawing.Size(98, 13);
             this.lblNumberOfColumn.TabIndex = 46;
             this.lblNumberOfColumn.Text = "Number of columns";
-            //
-            //lblColumnGap
-            //
+            // 
+            // lblColumnGap
+            // 
             this.lblColumnGap.AutoSize = true;
             this.lblColumnGap.Location = new System.Drawing.Point(27, 182);
             this.lblColumnGap.Name = "lblColumnGap";
             this.lblColumnGap.Size = new System.Drawing.Size(63, 13);
             this.lblColumnGap.TabIndex = 44;
             this.lblColumnGap.Text = "Column gap";
-            //
-            //settings
-            //
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6f, 13f);
+            // 
+            // settings
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(792, 666);
             this.Controls.Add(this.btnFont);
@@ -538,16 +531,17 @@ namespace PrincessConvert
             this.Controls.Add(this.Panel1);
             this.Name = "settings";
             this.Text = "settings";
-            ((System.ComponentModel.ISupportInitialize)this.DataGridView1).EndInit();
+            this.Load += new System.EventHandler(this.settings_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridView1)).EndInit();
             this.Panel1.ResumeLayout(false);
             this.Panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)this.NumericUpDownColumnGapInPoints).EndInit();
-            ((System.ComponentModel.ISupportInitialize)this.NumericUpDownLeftMarginPoints).EndInit();
-            ((System.ComponentModel.ISupportInitialize)this.NumericUpDownRightMarginInPoints).EndInit();
-            ((System.ComponentModel.ISupportInitialize)this.NumericUpDownBottomMarginInPoints).EndInit();
-            ((System.ComponentModel.ISupportInitialize)this.NumericUpDownTopMarginInPoints).EndInit();
-            ((System.ComponentModel.ISupportInitialize)this.NumericUpDownLineHeight).EndInit();
-            ((System.ComponentModel.ISupportInitialize)this.NumericUpDownNumberOfColumns).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownColumnGapInPoints)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownLeftMarginPoints)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownRightMarginInPoints)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownBottomMarginInPoints)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownTopMarginInPoints)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownLineHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownNumberOfColumns)).EndInit();
             this.ResumeLayout(false);
 
         }
