@@ -70,7 +70,7 @@ namespace Test.YouVersionConvert
             string curChapter = "1";
             WsCode = "nko";
             WriteChapter(chapterFile, processFolder, bookCode, curChapter);
-            const string fileName = "nko.MAT.1.xhtml";
+            const string fileName = "MAT.1.xhtml";
             FileAssert.AreEqual(_testFiles.Expected(fileName), _testFiles.Output(fileName));
         }
 
@@ -101,7 +101,7 @@ namespace Test.YouVersionConvert
             Assert.AreEqual(expected, actual);
             DirectoryInfo directoryInfo = new DirectoryInfo(actual);
             Assert.AreEqual(6, directoryInfo.GetFiles().Length);
-            const string chapter6 = "nko.1Tim.6.xhtml";
+            const string chapter6 = "1Tim.6.xhtml";
             FileAssert.AreEqual(_testFiles.Expected(chapter6), Path.Combine(actual,chapter6));
         }
 
@@ -120,7 +120,7 @@ namespace Test.YouVersionConvert
             Assert.AreEqual(expected, actual);
             DirectoryInfo directoryInfo = new DirectoryInfo(actual);
             Assert.AreEqual(13, directoryInfo.GetFiles().Length);
-            const string chapter7 = "x-acc.2Cor.7.xhtml";
+            const string chapter7 = "2Cor.7.xhtml";
             FileAssert.AreEqual(_testFiles.Expected(chapter7), Path.Combine(actual, chapter7));
         }
 
