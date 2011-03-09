@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic;
+﻿using System.Windows.Forms;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Diagnostics;
 
 namespace PrincessConvert
 {
-    partial class Main : System.Windows.Forms.Form
+    partial class Main : Form
     {
 
         //Form overrides dispose to clean up the component list.
