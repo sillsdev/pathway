@@ -405,7 +405,8 @@
 	</xsl:template>
 
 	<!-- Handle figure element -->
-	<xsl:template match="para/figure">
+	<!-- <xsl:template match="para/figure"> -->
+	<xsl:template match="figure">
 		<xsl:variable name="figureNumber" select="count(preceding::figure)+1"/>
 		<xsl:variable name="bookCode" select="preceding::book[1]/@id"/>
 		
@@ -421,10 +422,13 @@
 		</xsl:variable>
 
 		<div class="{$pictureLoc}" xmlns="http://www.w3.org/1999/xhtml">
-			<img id="{$bookCode}-{$figureNumber}-Figure" class="picture" src="{$figurePath}{@file}" alt="{$altFigurePath}{@file}"/>
+			<img id="Figure-{$bookCode}-{$figureNumber}" class="picture" src="{$figurePath}{@file}" alt="{$altFigurePath}{@file}"/>
 			<div class="pictureCaption">
 				<span lang="{$ws}">
 					<xsl:value-of select="."/>
+				</span>
+				<span lang="{$ws}" class="reference">
+					<xsl:value-of select="@ref"/>					
 				</span>
 			</div>
 		</div>
