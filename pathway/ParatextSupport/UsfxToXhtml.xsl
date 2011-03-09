@@ -464,7 +464,7 @@
 					<xsl:value-of select="."/>
 				</span>
 			</xsl:when>
-			<xsl:when test="@style = 'em'">
+			<xsl:when test="@style = 'em' or @style = 'it'">
 				<span class="Emphasis" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:value-of select="."/>
 				</span>
@@ -645,19 +645,54 @@
 		</span>
 	</xsl:template>
 
+	<!-- Convert footnotes, cross references and end notes. -->
 	<xsl:template match="note">
+		<!-- Number of footnotes thus far of all styles (used to make unique footnote reference) -->
 		<xsl:variable name="footnoteNumber" select="count(preceding::note)+1"/>
 		<xsl:variable name="bookCode" select="preceding::book[1]/@id"/>
 		<xsl:variable name="footnoteCaller">
-			<xsl:number format="a" value="$footnoteNumber"/>
+			<xsl:choose>
+				<!-- Only set a footnote caller for footnotes and endnotes, not cross-references. -->
+				<xsl:when test="@caller = '+'">
+					<xsl:variable name="footnoteStyle" select="@style"/>
+					<!-- For calculating the index, only count notes with the same style so they can have different numbering systems. -->
+					<xsl:variable name="footnoteIndex" select="count(preceding::note[@style=$footnoteStyle])+1"/>
+					<xsl:number format="a" value="$footnoteIndex"/>
+				</xsl:when>
+				<xsl:when test="not(@caller = '+' or @caller = '-')">
+					<!-- Custom symbol specified so use whatever character is specified. -->
+					<xsl:value-of select="@caller"/>
+				</xsl:when>
+			</xsl:choose>
+		</xsl:variable>
+		<xsl:variable name="footnoteStyle">
+			<xsl:choose>
+				<xsl:when test="@style = 'x'">
+					<xsl:value-of select="'Note_CrossHYPHENReference_Paragraph'"/>
+				</xsl:when>
+				<xsl:when test="@style = 'fe'">
+					<xsl:value-of select="'EndNote_General_Paragraph'"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="'Note_General_Paragraph'"/>
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:variable>
 		<span class="scrFootnoteMarker" xmlns="http://www.w3.org/1999/xhtml">
-			<a href="#{$bookCode}-{$footnoteNumber}"/>
+			<a href="#Footnote-{$bookCode}-{$footnoteNumber}"/>
 		</span>
-		<span class="Note_General_Paragraph" id="{$bookCode}-{$footnoteNumber}" title="{$footnoteCaller}" xmlns="http://www.w3.org/1999/xhtml">
+		
+		<span class="{$footnoteStyle}" id="Footnote-{$bookCode}-{$footnoteNumber}" title="{$footnoteCaller}" xmlns="http://www.w3.org/1999/xhtml">
 			<!-- Handle template for character styles. -->
 			<xsl:apply-templates/>
 		</span>
 	</xsl:template>
 
+	<!-- Enclose paragraph text for a note within a writing system, if it isn't already. -->
+	<xsl:template match="note/text()">
+		<span lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
+			<xsl:value-of select="."/>
+		</span>
+	</xsl:template>
+	
 </xsl:stylesheet>
