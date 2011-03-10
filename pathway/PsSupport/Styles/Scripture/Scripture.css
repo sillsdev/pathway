@@ -110,6 +110,7 @@
     /* content: string(footnoteMarker); font-size: 6pt; vertical-align: super; color: purple; */
     text-align: left;
 }
+.Endnote_General_Paragraph,
 .Note_General_Paragraph {
     text-indent: 0pt;
     margin-left: 0pt;
@@ -119,6 +120,7 @@
     position: footnote;
     list-style-position: inside;
 }
+.Endnote_General_Paragraph::footnote-call,
 .Note_General_Paragraph::footnote-call {
     color: purple;
     content: attr(title);
@@ -135,7 +137,8 @@
 .Note_Target_Reference::footnote-marker {
     font-weight: bold;
 }
-.Note_General_Paratraph::footnote-call {
+.Endnote_General_Paragraph::footnote-call,
+.Note_General_Paragraph::footnote-call {
     color: purple;
     content: attr(title);
     vertical-align: super;
