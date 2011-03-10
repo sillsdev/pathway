@@ -202,6 +202,7 @@
     <Compile Include="WordPressConvert\ExportWordPressTest.cs" />
     <Compile Include="XeTeXConvert\ExportXeTeXTest.cs" />
     <Compile Include="XeTeXConvert\PostscriptLanguageTest.cs" />
+    <Compile Include="Xetex\XeTexContentTest.cs" />
     <Compile Include="XhtmlExport\XhtmlExportTest.cs" />
     <Compile Include="XmlAssert.cs">
       <SubType>Code</SubType>
@@ -1281,6 +1282,9 @@
     <Folder Include="PsExport\TestFiles\Input\T7\Pictures\" />
     <Folder Include="WordPressConvert\TestFiles\Expected\" />
     <Folder Include="WordPressConvert\TestFiles\Input\" />
+    <Folder Include="Xetex\TestFiles\Expected\" />
+    <Folder Include="Xetex\TestFiles\input\" />
+    <Folder Include="Xetex\TestFiles\output\" />
     <Folder Include="XhtmlExport\TestFiles\Input\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
