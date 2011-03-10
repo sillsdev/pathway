@@ -67,12 +67,17 @@ namespace SIL.PublishingSolution
             ProcessXHTML(xhtmlFileWithPath);
             UpdateRelativeInStylesXML();
             CloseFile();
+            SetColumnValue();
+            return _styleName;
+        }
+
+        private void SetColumnValue()
+        {
             _styleName["ColumnClass"] = _textFrameClass;
             _styleName["TextVariables"] = _textVariables;
             _styleName["CrossRef"] = _crossRef;
             if (_headwordStyleName.Count > 0)
                 _styleName["TextVariables"].AddRange(_headwordStyleName);
-            return _styleName;
         }
 
         private void ProcessCounterProperty()

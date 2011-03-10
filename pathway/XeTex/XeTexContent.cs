@@ -52,6 +52,7 @@ namespace SIL.PublishingSolution
         private bool _isWhiteSpace = true;
         private bool _imageInserted;
         private List<string> _usedStyleName = new List<string>();
+        private List<string> _mergedInlineStyle;
         private bool _IsHeadword = false;
         private bool _isDropCap = false;
         private string _dropCapStyle = string.Empty;
@@ -60,7 +61,7 @@ namespace SIL.PublishingSolution
 
         #endregion
 
-        public Dictionary<string, ArrayList> CreateContent(string projectPath, StreamWriter xetexFile, string xhtmlFileWithPath, Dictionary<string, List<string>> classInlineStyle, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
+        public Dictionary<string, Dictionary<string, string>> CreateContent(string projectPath, StreamWriter xetexFile, string xhtmlFileWithPath, Dictionary<string, List<string>> classInlineStyle, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
         {
             _xetexFile = xetexFile;
             _classInlineStyle = classInlineStyle;
@@ -72,12 +73,7 @@ namespace SIL.PublishingSolution
             ProcessXHTML(xhtmlFileWithPath);
             //UpdateRelativeInStylesXML();
             CloseFile();
-            _styleName["ColumnClass"] = _textFrameClass;
-            _styleName["TextVariables"] = _textVariables;
-            _styleName["CrossRef"] = _crossRef;
-            if (_headwordStyleName.Count > 0)
-                _styleName["TextVariables"].AddRange(_headwordStyleName);
-            return _styleName;
+            return _newProperty;
         }
 
         private void ProcessCounterProperty()
@@ -168,11 +164,23 @@ namespace SIL.PublishingSolution
         {
             try
             {
+                bool headXML = true;
                 while (_reader.Read())
                 {
                     if (IsEmptyNode())
                     {
                         continue;
+                    }
+                    if (headXML) // skip previous parts of <body> tag
+                    {
+                        if (_reader.Name == "body")
+                        {
+                            headXML = false;
+                        }
+                        else
+                        {
+                            continue;
+                        }
                     }
 
                     switch (_reader.NodeType)
@@ -357,11 +365,11 @@ namespace SIL.PublishingSolution
 
         private void WriteCharacterStyle(string content, string characterStyle)
         {
-            _imageInserted = InsertImage();
+            //_imageInserted = InsertImage();
             SetHomographNumber(false);
             _writer.WriteStartElement("CharacterStyleRange");
 
-            string footerClassName = GetFooterClassName(characterStyle);
+            string footerClassName = WritePara(characterStyle);
 
             AnchorBookMark();
 
@@ -390,7 +398,7 @@ namespace SIL.PublishingSolution
             //    _writer.WriteRaw("<Br/>");
         }
 
-        private string GetFooterClassName(string characterStyle)
+        private string WritePara(string characterStyle)
         {
             string footerClassName = string.Empty;
             if (isFootnote)
@@ -402,6 +410,7 @@ namespace SIL.PublishingSolution
             {
                 _writer.WriteAttributeString("AppliedCharacterStyle", "CharacterStyle/" + characterStyle);
                 string paraStyle;
+                
                 if (characterStyle.IndexOf("No character style") > 0)
                 {
                     paraStyle = _previousParagraphName;
@@ -410,20 +419,60 @@ namespace SIL.PublishingSolution
                 {
                     paraStyle = characterStyle;
                 }
-                if (_classInlineStyle.ContainsKey(paraStyle))
+                string mergedParaStyle = MergeInlineStyle(paraStyle);
+
+                if (_classInlineStyle.ContainsKey(mergedParaStyle))
                 {
-                    List<string> inlineStyle = _classInlineStyle[paraStyle];
+                    List<string> inlineStyle = _classInlineStyle[mergedParaStyle];
                     foreach (string property in inlineStyle)
                     {
                         _xetexFile.Write(property);
                     }
                     _xetexFile.Write("{");
-                    _xetexFile.Write("\\" + paraStyle + " ");
+                    _xetexFile.Write("\\" + mergedParaStyle + " ");
                     _braceClass.Push(_childName);
                 }
                 AddUsedStyleName(characterStyle);
             }
             return footerClassName;
+        }
+
+        private string MergeInlineStyle(string paraStyle)
+        {
+            paraStyle = paraStyle.Replace("_body", "");
+            string parentClass = paraStyle;
+            string mergedClass = paraStyle.Replace("_", "");
+            string[] parent = paraStyle.Split('_');
+            if (parent.Length > 0)
+            {
+                string childClass = Common.LeftString(paraStyle, "_");
+                parentClass = paraStyle.Replace(childClass + "_", "");
+                parentClass = parentClass.Replace("_", "");
+                if (_classInlineStyle.ContainsKey(mergedClass))
+                {
+                    return mergedClass;
+                }
+                _mergedInlineStyle = new List<string>();
+                //Copy
+                if (_classInlineStyle.ContainsKey(childClass))
+                {
+                    foreach (string sty in _classInlineStyle[childClass])
+                    {
+                        _mergedInlineStyle.Add(sty);
+                    }
+                }
+                //Merge
+                if (_classInlineStyle.ContainsKey(parentClass))
+                {
+                    foreach (string sty in _classInlineStyle[parentClass])
+                    {
+                        if (!_mergedInlineStyle.Contains(sty))
+                            _mergedInlineStyle.Add(sty);
+                    }
+                }
+                _classInlineStyle[mergedClass] = _mergedInlineStyle;
+            }
+            return mergedClass;
         }
 
         private void WriteFootNoteMarker(string footerClassName, string content)
@@ -491,289 +540,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-
-
-        public bool InsertImage()
-        {
-            bool inserted = false;
-           if (_imageInsert)
-            {
-            //1 inch = 72 PostScript points
-            string alignment = "Center";
-            string wrapSide = "none";
-            string rectHeight = "0";
-            string rectWidth = "0";
-            string srcFile;
-            string wrapMode = "BoundingBoxTextWrap";
-            string HoriAlignment = "LeftAlign";
-            const string HoriRefPoint = "ColumnEdge";
-            string VertAlignment = "CenterAlign";
-            string VertRefPoint = "LineBaseline";
-            string AnchorPoint = "TopLeftAnchor";
- 
-                isImage = true;
-                inserted = true;
-                string[] cc = _allParagraph.ToArray();
-                imageClass = cc[1];
-                srcFile = _imageSource.ToLower();
-                string fileName = "file:" + Common.GetPictureFromPath(srcFile, "", _inputPath);
-                string fileName1 = Common.GetPictureFromPath(srcFile, "", _inputPath);
-                if (IdAllClass.ContainsKey(srcFile))
-                {
-                    rectHeight = GetPropertyValue(srcFile, "height", rectHeight);
-                    rectWidth = GetPropertyValue(srcFile, "width", rectWidth);
-                    GetAlignment(alignment, ref HoriAlignment, ref AnchorPoint, srcFile);
-                }
-                else
-                {
-                    GetHeightandWidth(ref rectHeight, ref rectWidth);
-                    GetAlignment(alignment, ref wrapSide, ref HoriAlignment, ref AnchorPoint, ref VertRefPoint, ref VertAlignment, ref wrapMode);
-                    GetWrapSide(ref wrapSide, ref wrapMode);
-                }
-
-                // Setting the Height and Width according css value or the image size
-                if (rectHeight != "0")
-                {
-                    if (rectWidth == "0")
-                    {
-                        rectWidth = Common.CalcDimension(fileName1, rectHeight, 'W');
-                    }
-                }
-                else if (rectWidth != "0")
-                {
-                    rectHeight = Common.CalcDimension(fileName1, rectWidth, 'H');
-                }
-                else
-                {
-                    //Default value is 72 However the line draws 36pt in X-axis and 36pt in y-axis.
-                    //rectHeight = "36";
-                    rectWidth = "36"; // fixed the width as 1 in;
-                    rectHeight = Common.CalcDimension(fileName1, rectWidth, 'H');
-                    if (rectHeight == "0")
-                    {
-                        rectHeight = "36";
-                    }
-                }
-
-                double x = double.Parse(rectWidth) / 2;
-                double y = double.Parse(rectHeight) / 2;
-
-                string xPlus = x.ToString();
-                string xMinus = "-" + xPlus;
-
-                string yPlus = y.ToString();
-                string yMinus = "-" + yPlus;
-
-                int height = 72; //1 in
-                int width = 72; // 1 in
-
-                //TODO Make it function 
-                //To get Image details
-                if (File.Exists(fileName1))
-                {
-                    Image fullimage = Image.FromFile(fileName1);
-                    height = fullimage.Height;
-                    width = fullimage.Width;
-                }
-                // Writing the Images
-                _writer.WriteStartElement("Rectangle");
-                _writer.WriteAttributeString("Self", "u1fa");
-                _writer.WriteAttributeString("StoryTitle", "$ID/");
-                _writer.WriteAttributeString("ContentType", "GraphicType");
-                _writer.WriteAttributeString("StrokeWeight", "0");
-                _writer.WriteAttributeString("StrokeColor", "Swatch/None");
-                _writer.WriteAttributeString("GradientFillStart", "0 0");
-                _writer.WriteAttributeString("GradientFillLength", "0");
-                _writer.WriteAttributeString("GradientFillAngle", "0");
-                _writer.WriteAttributeString("GradientStrokeStart", "0 0");
-                _writer.WriteAttributeString("GradientStrokeLength", "0");
-                _writer.WriteAttributeString("GradientStrokeAngle", "0");
-                _writer.WriteAttributeString("Locked", "false");
-                _writer.WriteAttributeString("LocalDisplaySetting", "Default");
-                _writer.WriteAttributeString("GradientFillHiliteLength", "0");
-                _writer.WriteAttributeString("GradientFillHiliteAngle", "0");
-                _writer.WriteAttributeString("GradientStrokeHiliteLength", "0");
-                _writer.WriteAttributeString("GradientStrokeHiliteAngle", "0");
-                _writer.WriteAttributeString("AppliedObjectStyle", "ObjectStyle/$ID/[Normal Graphics Frame]");
-                //_writer.WriteAttributeString("ItemTransform", "1 0 0 1 36 -36");
-                _writer.WriteAttributeString("ItemTransform", "1 0 0 1 " + xPlus + " " + yMinus); // 36 -36 
-                _writer.WriteStartElement("Properties");
-                _writer.WriteStartElement("PathGeometry");
-                _writer.WriteStartElement("GeometryPathType");
-                _writer.WriteAttributeString("PathOpen", "false");
-                _writer.WriteStartElement("PathPointArray");
-                _writer.WriteStartElement("PathPointType");
-                _writer.WriteAttributeString("Anchor", xMinus + " " + yMinus);
-                _writer.WriteAttributeString("LeftDirection", xMinus + " " + yMinus);
-                _writer.WriteAttributeString("RightDirection", xMinus + " " + yMinus);
-                _writer.WriteEndElement();
-                _writer.WriteStartElement("PathPointType");
-                _writer.WriteAttributeString("Anchor", xMinus + " " + yPlus);
-                _writer.WriteAttributeString("LeftDirection", xMinus + " " + yPlus);
-                _writer.WriteAttributeString("RightDirection", xMinus + " " + yPlus);
-                _writer.WriteEndElement();
-                _writer.WriteStartElement("PathPointType");
-                _writer.WriteAttributeString("Anchor", xPlus + " " + yPlus);
-                _writer.WriteAttributeString("LeftDirection", xPlus + " " + yPlus);
-                _writer.WriteAttributeString("RightDirection", xPlus + " " + yPlus);
-                _writer.WriteEndElement();
-                _writer.WriteStartElement("PathPointType");
-                _writer.WriteAttributeString("Anchor", xPlus + " " + yMinus);
-                _writer.WriteAttributeString("LeftDirection", xPlus + " " + yMinus);
-                _writer.WriteAttributeString("RightDirection", xPlus + " " + yMinus);
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
-
-
-                _writer.WriteStartElement("AnchoredObjectSetting");
-                // Anchored, InlinePosition, AboveLine
-                _writer.WriteAttributeString("AnchoredPosition", "Anchored");
-                _writer.WriteAttributeString("SpineRelative", "false");
-                _writer.WriteAttributeString("LockPosition", "false");
-                _writer.WriteAttributeString("PinPosition", "true");
-                _writer.WriteAttributeString("AnchorPoint", AnchorPoint);
-                //CenterAlign, RightAlign , LeftAlign
-                _writer.WriteAttributeString("HorizontalAlignment", HoriAlignment);
-                _writer.WriteAttributeString("HorizontalReferencePoint", HoriRefPoint);
-                _writer.WriteAttributeString("VerticalAlignment", VertAlignment);
-                _writer.WriteAttributeString("VerticalReferencePoint", VertRefPoint);
-                //InLIne  //AboveLine
-                _writer.WriteAttributeString("AnchorXoffset", "0");
-                _writer.WriteAttributeString("AnchorYoffset", "25");
-                _writer.WriteAttributeString("AnchorSpaceAbove", "4");
-                _writer.WriteEndElement();
-                _writer.WriteStartElement("TextWrapPreference");
-                _writer.WriteAttributeString("Inverse", "false");
-                _writer.WriteAttributeString("ApplyToMasterPageOnly", "false");
-                _writer.WriteAttributeString("TextWrapSide", wrapSide);
-                _writer.WriteAttributeString("TextWrapMode", wrapMode);
-                _writer.WriteStartElement("Properties");
-                _writer.WriteStartElement("TextWrapOffset");
-                _writer.WriteAttributeString("Top", "0");
-                _writer.WriteAttributeString("Left", "0");
-                _writer.WriteAttributeString("Bottom", "0");
-                _writer.WriteAttributeString("Right", "0");
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
-
-                _writer.WriteStartElement("ContourOption");
-                _writer.WriteAttributeString("ContourType", "SameAsClipping");
-                _writer.WriteAttributeString("IncludeInsideEdges", "false");
-                _writer.WriteAttributeString("ContourPathName", "$ID/");
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
-                _writer.WriteStartElement("InCopyExportOption");
-                _writer.WriteAttributeString("IncludeGraphicProxies", "true");
-                _writer.WriteAttributeString("IncludeAllResources", "false");
-                _writer.WriteEndElement();
-                _writer.WriteStartElement("FrameFittingOption");
-                _writer.WriteAttributeString("LeftCrop", "0");
-                _writer.WriteAttributeString("TopCrop", "0");
-                _writer.WriteAttributeString("RightCrop", "0");
-                _writer.WriteAttributeString("BottomCrop", "0");
-                _writer.WriteAttributeString("FittingOnEmptyFrame", "ContentToFrame");
-                _writer.WriteAttributeString("FittingAlignment", "CenterAnchor");
-
-                _writer.WriteEndElement();
-                _writer.WriteStartElement("Image");
-                _writer.WriteAttributeString("Self", "u222");
-                _writer.WriteAttributeString("Space", "$ID/#Links_RGB");
-                _writer.WriteAttributeString("ActualPpi", (x * 2) + " " + (y * 2));
-                _writer.WriteAttributeString("EffectivePpi", width + " " + height);
-                _writer.WriteAttributeString("ImageRenderingIntent", "UseColorSettings");
-                _writer.WriteAttributeString("LocalDisplaySetting", "Default");
-                _writer.WriteAttributeString("ImageTypeName", "$ID/JPEG");
-                _writer.WriteAttributeString("AppliedObjectStyle", "ObjectStyle/$ID/[None]");
-                //TODO Make it function 
-                double ImageX = (x * 2) / width;
-                double ImageY = (y * 2) / height;
-                _writer.WriteAttributeString("ItemTransform",
-                                             ImageX + " 0 0 " + ImageY + " " + xMinus + " " + yMinus);
-                _writer.WriteStartElement("Properties");
-                _writer.WriteStartElement("Profile");
-                _writer.WriteAttributeString("type", "string");
-                _writer.WriteString("$ID/None");
-                _writer.WriteEndElement();
-                _writer.WriteStartElement("GraphicBounds");
-                _writer.WriteAttributeString("Left", "0");
-                _writer.WriteAttributeString("Top", "0");
-                _writer.WriteAttributeString("Right", width.ToString());
-                _writer.WriteAttributeString("Bottom", height.ToString());
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
-                _writer.WriteStartElement("TextWrapPreference");
-                _writer.WriteAttributeString("Inverse", "false");
-                _writer.WriteAttributeString("ApplyToMasterPageOnly", "false");
-                _writer.WriteAttributeString("TextWrapSide", "BothSides");
-                _writer.WriteAttributeString("TextWrapMode", "None");
-                _writer.WriteStartElement("Properties");
-                _writer.WriteStartElement("TextWrapOffset");
-                _writer.WriteAttributeString("Top", "0");
-                _writer.WriteAttributeString("Left", "0");
-                _writer.WriteAttributeString("Bottom", "0");
-                _writer.WriteAttributeString("Right", "0");
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
-                _writer.WriteStartElement("ContourOption");
-                _writer.WriteAttributeString("ContourType", "SameAsClipping");
-                _writer.WriteAttributeString("IncludeInsideEdges", "false");
-                _writer.WriteAttributeString("ContourPathName", "$ID/");
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
-
-                _writer.WriteStartElement("Link");
-                _writer.WriteAttributeString("Self", "u225");
-                _writer.WriteAttributeString("AssetURL", "$ID/");
-                _writer.WriteAttributeString("AssetID", "$ID/");
-                _writer.WriteAttributeString("LinkResourceURI", fileName);
-                _writer.WriteAttributeString("StoredState", "Normal");
-                _writer.WriteAttributeString("LinkClassID", "35906");
-                _writer.WriteAttributeString("LinkClientID", "257");
-                _writer.WriteAttributeString("LinkResourceModified", "false");
-                _writer.WriteAttributeString("LinkObjectModified", "false");
-                _writer.WriteAttributeString("ShowInUI", "true");
-                _writer.WriteAttributeString("CanEmbed", "true");
-                _writer.WriteAttributeString("CanUnembed", "true");
-                _writer.WriteAttributeString("CanPackage", "true");
-                _writer.WriteAttributeString("ImportPolicy", "NoAutoImport");
-                _writer.WriteAttributeString("ExportPolicy", "NoAutoExport");
-                _writer.WriteAttributeString("LinkImportStamp", "file 128811558721632778 187452");
-                _writer.WriteAttributeString("LinkImportModificationTime", "2009-03-10T16:21:12");
-                _writer.WriteAttributeString("LinkImportTime", "2009-12-17T16:28:20");
-                _writer.WriteEndElement();
-                _writer.WriteStartElement("ClippingPathSettings");
-                _writer.WriteAttributeString("ClippingType", "None");
-                _writer.WriteAttributeString("InvertPath", "false");
-                _writer.WriteAttributeString("IncludeInsideEdges", "false");
-                _writer.WriteAttributeString("RestrictToFrame", "false");
-                _writer.WriteAttributeString("UseHighResolutionImage", "true");
-                _writer.WriteAttributeString("Threshold", "25");
-                _writer.WriteAttributeString("Tolerance", "2");
-                _writer.WriteAttributeString("InsetFrame", "0");
-                _writer.WriteAttributeString("AppliedPathName", "$ID/");
-                _writer.WriteAttributeString("Index", "-1");
-                _writer.WriteEndElement();
-                _writer.WriteStartElement("ImageIOPreference");
-                _writer.WriteAttributeString("ApplyPhotoshopClippingPath", "true");
-                _writer.WriteAttributeString("AllowAutoEmbedding", "true");
-                _writer.WriteAttributeString("AlphaChannelName", "$ID/");
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
-
-                _writer.WriteStartElement("TextFrame");
-                _writer.WriteAttributeString("Self", "u" + Path.GetFileNameWithoutExtension(fileName1));
-                _writer.WriteStartElement("ParagraphStyleRange");
-                _writer.WriteAttributeString("AppliedParagraphStyle", "ParagraphStyle/" + cc[0]);
-
-                _imageInsert = false;
-                _imageSource = string.Empty;
-                _isNewParagraph = false;
-            }
-            return inserted;
-        }
 
         private void GetHeightandWidth(ref string height, ref string width)
         {
@@ -1124,7 +890,7 @@ namespace SIL.PublishingSolution
                 if (_closeChildName == _imageClass) // Without Caption
                 {
                     _allCharacter.Push(_imageClass); // temporarily storing to get width and position
-                    _imageInserted = InsertImage();
+                    //_imageInserted = InsertImage();
                     _writer.WriteEndElement(); // for ParagraphStyle
                     _writer.WriteEndElement(); // for Textframe
                     _writer.WriteEndElement(); // for rectangle
@@ -1250,12 +1016,6 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             isFileCreated = true;
             isFileEmpty = true;
-        }
-
-        private void UpdateRelativeInStylesXML()
-        {
-            ModifyXeTexStyles modifyIDStyles = new ModifyXeTexStyles();
-            _textVariables = modifyIDStyles.ModifyStylesXML(_projectPath, _newProperty, _usedStyleName,_languageStyleName,  "", _IsHeadword);
         }
 
         private void CloseFile()

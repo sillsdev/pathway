@@ -50,9 +50,10 @@ namespace SIL.PublishingSolution
                     //case "text-indent":
                     //    TextIndent(property.Value);
                     //    break;
-                    //case "margin-left":
-                    //    MarginLeft(property.Value);
-                    //    break;
+                    case "margin-left":
+                    case "class-margin-left":
+                        MarginLeft(property.Value);
+                        break;
                     //case "margin-right":
                     //    MarginRight(property.Value);
                     //    break;
@@ -474,7 +475,9 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
+            propertyValue = "\\leftskip " + propertyValue + "pt";
             _IDProperty["Margin-Left"] = propertyValue;
+            _inlineStyle.Add(propertyValue);
         }
         public void MarginRight(string propertyValue)
         {
@@ -594,11 +597,12 @@ namespace SIL.PublishingSolution
                 return;
             }
 
-            if (propertyValue == "none")
-            {
-                propertyValue = "false";
-            }
-            else if (propertyValue == "underline")
+            //if (propertyValue == "none")
+            //{
+            //    propertyValue = "false";
+            //}
+            //else 
+            if (propertyValue == "underline")
             {
                 propertyValue = "true";
             }

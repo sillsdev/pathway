@@ -20,55 +20,94 @@ namespace SIL.PublishingSolution
         private string _xPath;
         private XmlElement _nameElement;
         private string _tagName;
+        private string _xetexFullFile;
         private bool _isHeadword;
         private ArrayList _textVariables = new ArrayList();
+        private List<string> _mergedClass = new List<string>();
         Dictionary<string, string> _languageStyleName = new Dictionary<string, string>();
         Dictionary<string, Dictionary<string, string>> _childStyle = new Dictionary<string, Dictionary<string, string>>();
+        Dictionary<string, string> _tempStyle;
+        Dictionary<string, Dictionary<string, string>> mergedStyle = new Dictionary<string, Dictionary<string, string>>();
+        Dictionary<string, Dictionary<string, string>> _cssClass = new Dictionary<string, Dictionary<string, string>>();
+        XeTexMapProperty mapProperty = new XeTexMapProperty();
 
-        public ArrayList ModifyStylesXML(string projectPath, Dictionary<string, Dictionary<string, string>> childStyle, List<string> usedStyleName, Dictionary<string, string> languageStyleName, string baseStyle, bool isHeadword)
+        public void ModifyStylesXML(string projectPath, StreamWriter xetexFile, Dictionary<string, Dictionary<string, string>> newProperty, 
+            Dictionary<string, Dictionary<string, string>> cssClass, string xetexFullFile)
         {
-            _childStyle = childStyle;
             _projectPath = projectPath;
-            _isHeadword = isHeadword;
-            _languageStyleName = languageStyleName;
-            string styleFilePath = OpenIDStyles();
-
-            nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
-            nsmgr.AddNamespace("idPkg", "http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging");
-
-            _root = _styleXMLdoc.DocumentElement;
-            if (_root == null)
+            _cssClass = cssClass;
+            _xetexFullFile = xetexFullFile;
+            foreach (KeyValuePair<string, Dictionary<string, string>> cssStyle in newProperty)
             {
-                return null;
+                MergeCssStyle(cssStyle.Key);
             }
-
-            string paraStyle = "$ID/NormalParagraphStyle";
-            string charStyle = "$ID/NormalCharacterStyle";
-
-            //if(baseStyle.Length > 0)
-            //{
-            //    paraStyle =  baseStyle;
-            //}
-            CreateStyle(paraStyle, charStyle, usedStyleName);
-            _styleXMLdoc.Save(styleFilePath);
-            return _textVariables;
+            MapProperty();
         }
 
-        private void CreateStyle(string paraStyle, string charStyle, List<string> usedStyleName)
+        private void MapProperty()
         {
-            foreach (KeyValuePair<string, Dictionary<string, string>> className in _childStyle)
+            foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _cssClass)
             {
-                if (!usedStyleName.Contains(className.Key))
-                    continue;
-                SetVisibilityColor(className);
-                _tagType = "ParagraphStyle";
-                _xPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + paraStyle + "\"]";
-                InsertNode(className);
-                _tagType = "CharacterStyle";
-                _xPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"" + charStyle + "\"]";
-                InsertNode(className);
-                GetVariableClassName(className.Key);
+                if (cssClass.Key.IndexOf("@page") >= 0 || cssClass.Key.IndexOf("h1") >= 0 ||
+                    cssClass.Key.IndexOf("h2") >= 0 || cssClass.Key.IndexOf("h3") >= 0 ||
+                    cssClass.Key.IndexOf("h4") >= 0 || cssClass.Key.IndexOf("h5") >= 0 ||
+                    cssClass.Key.IndexOf("h6") >= 0) continue;
+
+                List<string> _inlineStyle = new List<string>();
+                string xeTexProperty = mapProperty.XeTexProperty(cssClass.Value, cssClass.Key, _inlineStyle);
+
+                if (xeTexProperty.Trim().Length > 0)
+                {
+                    Common.FileInsertText(_xetexFullFile, xeTexProperty);
+                    //_xetexFile.WriteLine(xeTexProperty);
+                }
+
+
             }
+        }
+
+        /// <summary>
+        /// parentClassName = b_a
+        /// step1: b_a = b 
+        /// step2: b_a = merge a
+        /// </summary>
+        /// <param name="paraStyle"></param>
+        private void MergeCssStyle(string paraStyle)
+        {
+            paraStyle = paraStyle.Replace("_body", "");
+            string parentClass = paraStyle;
+            string mergedClass = paraStyle.Replace("_", "");
+            string[] parent = paraStyle.Split('_');
+            if (parent.Length > 0)
+            {
+                string childClass = Common.LeftString(paraStyle, "_");
+                parentClass = paraStyle.Replace(childClass + "_", "");
+                parentClass = parentClass.Replace("_", "");
+                if (_cssClass.ContainsKey(mergedClass))
+                {
+                    return;
+                }
+                _tempStyle = new Dictionary<string, string>();
+                //Copy
+                if (_cssClass.ContainsKey(childClass))
+                {
+                    foreach (KeyValuePair<string, string> property in _cssClass[childClass])
+                    {
+                        _tempStyle[property.Key] = property.Value;
+                    }
+                }
+                //Merge
+                if (_cssClass.ContainsKey(mergedClass))
+                {
+                    foreach (KeyValuePair<string, string> property in _cssClass[mergedClass])
+                    {
+                        if (!_tempStyle.ContainsKey(property.Key))
+                            _tempStyle[property.Key] = property.Value;
+                    }
+                }
+                _cssClass[mergedClass] = _tempStyle;
+            }
+            _mergedClass.Add(mergedClass);
         }
 
         private void SetVisibilityColor(KeyValuePair<string, Dictionary<string, string>> className)
@@ -137,7 +176,7 @@ namespace SIL.PublishingSolution
 
             SetLanguage(className.Key);
             SetBasedOn("None", newClassName);
-            SetAppliedFont(className.Value,newClassName);
+            SetAppliedFont(className.Value, newClassName);
             SetLineHeight(className.Value, newClassName);
             SetBaseLineShift(className.Value, newClassName);
             SetTagNode();
@@ -251,13 +290,13 @@ namespace SIL.PublishingSolution
         private void SetAppliedFont(Dictionary<string, string> className, string sourceClassName)
         {
             if (className.ContainsKey("AppliedFont"))
-        {
-            string style = "//" + _tagType + "[@Self='" + sourceClassName + "']/Properties/AppliedFont";
-            XmlNode nodeAppliedFont = _root.SelectSingleNode(style, nsmgr);
-            if (nodeAppliedFont != null)
             {
-                var nameElement = (XmlElement)nodeAppliedFont;
-                nameElement.SetAttribute("type", "string");
+                string style = "//" + _tagType + "[@Self='" + sourceClassName + "']/Properties/AppliedFont";
+                XmlNode nodeAppliedFont = _root.SelectSingleNode(style, nsmgr);
+                if (nodeAppliedFont != null)
+                {
+                    var nameElement = (XmlElement)nodeAppliedFont;
+                    nameElement.SetAttribute("type", "string");
                     nodeAppliedFont.InnerText = className["AppliedFont"];
                 }
             }
@@ -300,11 +339,11 @@ namespace SIL.PublishingSolution
                         int pt = int.Parse(point2);
                         //int baseshift = pt - 12;
                         int baseshift = pt * 2 / 3;
-                        int point = pt * 2/3;
+                        int point = pt * 2 / 3;
                         nameElement.SetAttribute("BaselineShift", "-" + baseshift);
                         nameElement.SetAttribute("PointSize", "-" + point);
                     }
-                
+
                 }
             }
         }

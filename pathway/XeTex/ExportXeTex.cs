@@ -78,9 +78,12 @@ namespace SIL.PublishingSolution
             classInlineStyle = xeTexStyles.CreateXeTexStyles(projInfo.ProjectPath, xetexFile, cssClass);
 
             XeTexContent xeTexContent = new XeTexContent();
-            Dictionary<string, ArrayList> StyleName = xeTexContent.CreateContent(projInfo.ProjectPath, xetexFile, projInfo.DefaultXhtmlFileWithPath, classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder);
+            Dictionary<string, Dictionary<string, string>> newProperty = xeTexContent.CreateContent(projInfo.ProjectPath, xetexFile, projInfo.DefaultXhtmlFileWithPath, classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
             CloseFile(xetexFile);
+
+            ModifyXeTexStyles modifyXeTexStyles = new ModifyXeTexStyles();
+            modifyXeTexStyles.ModifyStylesXML(projInfo.ProjectPath, xetexFile, newProperty, cssClass, xetexFullFile);
 
             //CallXeTex(Path.GetFileName(xetexFullFile));
             CallXeTex(xetexFullFile,true);

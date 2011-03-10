@@ -63,16 +63,21 @@ namespace SIL.PublishingSolution
             //\font\hoefler="Hoefler Text/B:Letter Case=Small Caps" at 12pt
             foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _cssProperty)
             {
+                if (cssClass.Key.IndexOf("@page") >= 0 || cssClass.Key.IndexOf("h1") >= 0 || 
+                    cssClass.Key.IndexOf("h2") >= 0 || cssClass.Key.IndexOf("h3") >= 0 || 
+                    cssClass.Key.IndexOf("h4") >= 0 || cssClass.Key.IndexOf("h5") >= 0 || 
+                    cssClass.Key.IndexOf("h6") >= 0) continue;
+
                 _inlineStyle = new List<string>();
                 string xeTexProperty = mapProperty.XeTexProperty(cssClass.Value, cssClass.Key, _inlineStyle);
-                if (_inlineStyle.Count > 0)
+
+                //if (_inlineStyle.Count > 0)
                 {
                     _classInlineStyle[cssClass.Key] = _inlineStyle;
                 }
                 if (xeTexProperty.Trim().Length > 0)
                 {
-                    if(cssClass.Key == "letter")
-                    _xetexFile.WriteLine(xeTexProperty);
+                    //_xetexFile.WriteLine(xeTexProperty);
                 }
                 //_IDClass = new Dictionary<string, string>(); // note: ToDo seperate the process
                 //_IDAllClass[cssClass.Key] = _IDClass;
