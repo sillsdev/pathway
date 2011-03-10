@@ -55,6 +55,8 @@ if "%1" == "Corporate7SE" goto nogobible
 xcopy %base%\PdfConvert\%cfg%\PdfConvert.* . /y
 xcopy %base%\WordPressConvert\%cfg%\WordPressConvert.* . /y
 xcopy %base%\XeTeXConvert\%cfg%\XeTeXConvert.* . /y
+xcopy %base%\XeTex\%cfg%\XeTexWriter.* . /y
+xcopy %base%\XeTex\xetexExe .\xetexExe /i /s /q /y
 
 :justgobible
 if "%1" == "ReleaseSE" goto nogobible

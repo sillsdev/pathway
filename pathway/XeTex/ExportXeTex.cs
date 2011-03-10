@@ -89,11 +89,11 @@ namespace SIL.PublishingSolution
 
         public void CallXeTex(string xetexFullFile,bool openFile)
         {
-            string instPath = Application.ExecutablePath.ToString();
-            instPath = PathPart.Bin(instPath, "");
-            instPath = Common.PathCombine(instPath, @"..\XeTex\xetexExe\bin");
+            string workingXetex = Common.GetTempCopy("xetexExe");
+            string instPath = Common.PathCombine(workingXetex, "bin");
             string dest = Common.PathCombine(instPath,Path.GetFileName(xetexFullFile));
-            File.Copy(xetexFullFile, dest,true);
+            const bool overwrite = true;
+            File.Copy(xetexFullFile, dest, overwrite);
 
             if (!File.Exists(dest))
             {
@@ -101,31 +101,49 @@ namespace SIL.PublishingSolution
                 return;
             }
 
-            string name = "xetex.exe";
-            Process p1 = new Process();
+            string originalDirectory = Directory.GetCurrentDirectory();
             Directory.SetCurrentDirectory(instPath);
+            const string name = "xetex.exe";
+            //string p1Output = string.Empty;
+            string p1Error = string.Empty;
+            using (Process p1 = new Process())
+            {
             p1.StartInfo.FileName = name;
             if (xetexFullFile != null)
-                p1.StartInfo.Arguments = Path.GetFileName(xetexFullFile);
-            //p1.StartInfo.RedirectStandardOutput = !string.IsNullOrEmpty(RedirectOutput);
+                    p1.StartInfo.Arguments = "-interaction=batchmode \"" + Path.GetFileName(xetexFullFile) + "\"";
+                p1.StartInfo.RedirectStandardOutput = true;
             p1.StartInfo.RedirectStandardError = p1.StartInfo.RedirectStandardOutput;
             p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
             p1.Start();
-            //if (true)
-            //{
-            //    //if (p1.Id <= 0)
-            //    //    throw new MissingSatelliteAssemblyException(name);
-            //    p1.WaitForExit();
-            //}
-            if (openFile)
-            {
-                string fileNameNoPath = Path.Combine(instPath,Path.GetFileNameWithoutExtension(xetexFullFile) +
-                                                     ".pdf");
-                if (File.Exists(fileNameNoPath))
-                {
-                   Common.OpenOutput(fileNameNoPath);
-                }
+                p1.WaitForExit();
+                //p1Output = p1.StandardOutput.ReadToEnd();
+                p1Error = p1.StandardError.ReadToEnd();
             }
+            Directory.SetCurrentDirectory(originalDirectory);
+            string texNameOnly = Path.GetFileNameWithoutExtension(xetexFullFile);
+            string userFolder = Path.GetDirectoryName(xetexFullFile);
+            string logFullName = CopyProcessResult(instPath, texNameOnly, ".log", userFolder);
+            string pdfFullName = CopyProcessResult(instPath, texNameOnly, ".pdf", userFolder);
+            if (openFile && File.Exists(pdfFullName))
+            {
+                Common.OpenOutput(pdfFullName);
+            }
+            //MessageBox.Show(p1Output, "XeTex output");
+            MessageBox.Show(p1Error, "XeTex errors");
+            MessageBox.Show(string.Format("Review {0} for conversion results.", logFullName), "XeTex log");
+            const bool recursive = true;
+            Directory.Delete(workingXetex, recursive);
+        }
+
+        protected static string CopyProcessResult(string instPath, string texNameOnly, string ext, string userFolder)
+                {
+            const bool overwrite = true;
+            string logName = texNameOnly + ext;
+            string tmpLogFullName = Path.Combine(instPath, logName);
+            string logFullName = Path.Combine(userFolder, logName);
+            if (File.Exists(tmpLogFullName))
+                File.Copy(tmpLogFullName, logFullName, overwrite);
+            return logFullName;
         }
 
 

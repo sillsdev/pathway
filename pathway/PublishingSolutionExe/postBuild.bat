@@ -34,6 +34,8 @@ if "%1" == "CorporateSE" goto removeXetex
 if "%1" == "Corporate7BTE" goto removeXetex
 if "%1" == "Corporate7SE" goto removeXetex
 xcopy %base%\XeTeXConvert\%cfg%\XeTeXConvert.* . /y
+xcopy %base%\XeTex\%cfg%\XeTexWriter.* . /y
+xcopy %base%\XeTex\xetexExe .\xetexExe /i /s /q /y
 xcopy %base%\WordPressConvert\%cfg%\WordPressConvert.* . /y
 goto dogobible
 :removeXetex

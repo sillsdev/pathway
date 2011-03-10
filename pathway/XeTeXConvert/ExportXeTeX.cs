@@ -94,7 +94,7 @@ namespace SIL.PublishingSolution
                 Environment.CurrentDirectory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
                 IPreExportProcess data = PreProcess(projInfo);
                 string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
-                string xetexToolFolder = GetTempCopy("xetexPathway");
+                string xetexToolFolder = Common.GetTempCopy("xetexPathway");
                 string dataPath = Common.PathCombine(xetexToolFolder, "data");
                 SetupSettings(data, dataPath);
                 CreateTexInput(data.ProcessedXhtml, fileName, dataPath);
@@ -207,22 +207,6 @@ namespace SIL.PublishingSolution
             File.Copy(texFullName, Common.PathCombine(dataPath, "Input.txt"), true);
         }
         #endregion CreateTexInput(string processedXhtml, string fileName, string dataPath)
-
-        #region string GetTempCopy(string name)
-        /// <summary>
-        /// Makes a copy of folder in a writable location
-        /// </summary>
-        /// <returns>full path to folder</returns>
-        protected static string GetTempCopy(string name)
-        {
-            var tempFolder = Path.GetTempPath();
-            var folder = Path.Combine(tempFolder, name);
-            if (Directory.Exists(folder))
-                Directory.Delete(folder, true);
-			FolderTree.Copy(Common.FromRegistry(name), folder);
-            return folder;
-        }
-        #endregion string GetXeTeXToolFolder()
 
         #region string GetMergedCSS(PublicationInformation projInfo)
         /// <summary>

@@ -434,7 +434,7 @@ namespace Test.XeTeXConvert
         {
             string name = "Loc";
             string expected = Common.PathCombine(Path.GetTempPath(), name);
-            string actual = GetTempCopy(name);
+            string actual = Common.GetTempCopy(name);
             Assert.AreEqual(expected, actual);
             Directory.Delete(expected, true);
         }

@@ -46,6 +46,7 @@ rem xcopy %SRC%\IKVM*.* "%DST%" /y
 rem xcopy %SRC%\saxon*.* "%DST%" /y
 
 xcopy %BASE%\PsSupport\*.* "%DST%" /s /q /y
+xcopy %BASE%\XeTex\xetexExe "%DST%\xetexExe" /i /s /q /y
 
 rem the first line here works with the development version the second, the installed version.
 if Exist "C:\Program Files\SIL\FieldWorks 7\Language Explorer\Configuration" goto FwInstalled

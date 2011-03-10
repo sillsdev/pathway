@@ -1202,6 +1202,22 @@ namespace SIL.Tool
 
         #endregion
 
+        #region string GetTempCopy(string name)
+        /// <summary>
+        /// Makes a copy of folder in a writable location
+        /// </summary>
+        /// <returns>full path to folder</returns>
+        public static string GetTempCopy(string name)
+        {
+            var tempFolder = Path.GetTempPath();
+            var folder = Path.Combine(tempFolder, name);
+            if (Directory.Exists(folder))
+                Directory.Delete(folder, true);
+            FolderTree.Copy(Common.FromRegistry(name), folder);
+            return folder;
+        }
+        #endregion string GetXeTeXToolFolder()
+
         #region isRightFieldworksVersion()
         /// <summary>
         /// Checks that version numbers of fieldworks assemblies agree with those available at compile time
