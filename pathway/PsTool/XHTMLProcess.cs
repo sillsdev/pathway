@@ -42,6 +42,7 @@ namespace SIL.PublishingSolution
         protected Stack<string> _allParagraph;
         protected Stack<string> _allCharacter;
         protected Stack<string> _doNotInheritProperty;
+        protected Stack<string> _braceClass = new Stack<string>();
         protected string _doNotInheritOriginalClass = string.Empty;
         protected string _doNotInheritClass = string.Empty;
         protected Stack<ClassInfo> _allStyleInfo = new Stack<ClassInfo>();
