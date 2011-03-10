@@ -10,27 +10,37 @@ namespace SIL.PublishingSolution
         private string _property; 
         private Dictionary<string, string> _cssProperty = new Dictionary<string, string>();
         private bool _IsKeepLineWrittern = false;
+
         private string _className;
+
+        private string _fontName;
+        private List<string> _fontOption = new List<string>();
+        private List<string> _fontStyle = new List<string>();
+        private string _fontSize = string.Empty;
+        private List<string> _inlineStyle;
+
+
         //TextInfo _titleCase = CultureInfo.CurrentCulture.TextInfo;
-        public string XeTexProperty(Dictionary<string, string> cssProperty,string className)
+        public string XeTexProperty(Dictionary<string, string> cssProperty,string className, List<string> inlineStyle)
         {
             _className = className;
             _property = string.Empty;
             _cssProperty = cssProperty;
+            _inlineStyle = inlineStyle;
             foreach (KeyValuePair<string, string> property in cssProperty)
             {
                 switch (property.Key.ToLower())
                 {
-                    //case "font-weight":
-                    //case "font-style":
-                    //    FontWeight(cssProperty);
-                    //    break;
-                    //case "text-align":
-                    //    TextAlign(property.Value);
-                    //    break;
-                    //case "font-size":
-                    //    FontSize(property.Value);
-                    //    break;
+                    case "font-weight":
+                    case "font-style":
+                        FontWeight(cssProperty);
+                        break;
+                    case "text-align":
+                        TextAlign(property.Value);
+                        break;
+                    case "font-size":
+                        FontSize(property.Value);
+                        break;
                     //case "text-decoration":
                     //    TextDecoration(property.Value);
                     //    break;
@@ -155,7 +165,24 @@ namespace SIL.PublishingSolution
                     //    break;
                 }
             }
-            return _property;
+            string  style = ComposeStyle();
+            return style;
+        }
+
+        private string ComposeStyle()
+        {
+            //string style = @"\font\" + _className + "=\"" + propertyValue + "\"";
+            string style = @"\font\" + _className + "=\"" + _fontName;
+            foreach (string sty in _fontOption)
+            {
+                style += sty;
+            }
+            style += "\"";
+            if (_fontSize.Length >0 )
+            {
+                style += _fontSize;
+            }
+            return style;
         }
 
         public void VerticalJustification(string propertyValue)
@@ -475,8 +502,9 @@ namespace SIL.PublishingSolution
         }
         public void FontFamily(string propertyValue)
         {
-            _property = @"\font\" + _className + "=\"" + propertyValue + "\"";
-            _property += GetFontSize();
+            _fontName = propertyValue;
+            //_property = @"\font\" + _className + "=\"" + propertyValue + "\"";
+            //_property += GetFontSize();
             // _IDProperty["AppliedFont"] = propertyValue;
         }
 
@@ -594,21 +622,22 @@ namespace SIL.PublishingSolution
             }
             string strValue = propertyWeight + propertyStyle;
 
-            if (strValue == "normalnormal" || strValue == "normal")
+            //if (strValue == "normalnormal" || strValue == "normal")
+            //{
+            //    propertyValue = "Regular";
+            //}
+            //else
+            if (strValue == "boldnormal" || strValue == "bold")
             {
-                propertyValue = "Regular";
-            }
-            else if (strValue == "boldnormal" || strValue == "bold")
-            {
-                propertyValue = "Bold";
+                propertyValue = "/B";
             }
             else if (strValue == "normalitalic" || strValue == "italic")
             {
-                propertyValue = "Italic";
+                propertyValue = "/I";
             }
             else if (strValue == "bolditalic")
             {
-                propertyValue = "Bold Italic";
+                propertyValue = "/BI";
             }
 
             if (propertyValue == string.Empty)
@@ -616,6 +645,7 @@ namespace SIL.PublishingSolution
                 return;
             }
             _IDProperty["FontStyle"] = propertyValue;
+            _fontOption.Add(propertyValue);
         }
         public void TextAlign(string propertyValue)
         {
@@ -624,23 +654,25 @@ namespace SIL.PublishingSolution
                 return;
             }
 
-            if (propertyValue == "justify")
+            //if (propertyValue == "justify")
+            //{
+            //    propertyValue = "FullyJustified";
+            //}
+            //else 
+            if (propertyValue == "center")
             {
-                propertyValue = "FullyJustified";
-            }
-            else if (propertyValue == "center")
-            {
-                propertyValue = "CenterAlign";
+                propertyValue = "\\centerline";
             }
             else if (propertyValue == "left")
             {
-                propertyValue = "LeftAlign";
+                propertyValue = "\\leftline";
             }
             else if (propertyValue == "right")
             {
-                propertyValue = "RightAlign";
+                propertyValue = "\\rightline";
             }
             _IDProperty["Justification"] = propertyValue;
+            _inlineStyle.Add(propertyValue);
         }
         public void FontSize(string propertyValue)
         {
@@ -654,6 +686,7 @@ namespace SIL.PublishingSolution
                 return;
             }
             _IDProperty["PointSize"] = propertyValue;
+            _fontSize = " at " + propertyValue + "pt";
 
         }
         /// <summary>

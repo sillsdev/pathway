@@ -72,12 +72,13 @@ namespace SIL.PublishingSolution
             string xetexFullFile = Path.Combine(projInfo.ProjectPath, fileName + ".tex");
             StreamWriter xetexFile = new StreamWriter(xetexFullFile);
 
+            Dictionary<string, List<string>> classInlineStyle = new Dictionary<string, List<string>>();
             Dictionary<string, Dictionary<string, string>> xeTexAllClass = new Dictionary<string, Dictionary<string, string>>();
             XeTexStyles xeTexStyles = new XeTexStyles();
-            xeTexAllClass = xeTexStyles.CreateXeTexStyles(projInfo.ProjectPath, xetexFile, cssClass);
+            classInlineStyle = xeTexStyles.CreateXeTexStyles(projInfo.ProjectPath, xetexFile, cssClass);
 
             XeTexContent xeTexContent = new XeTexContent();
-            Dictionary<string, ArrayList> StyleName = xeTexContent.CreateContent(projInfo.ProjectPath, xetexFile, projInfo.DefaultXhtmlFileWithPath, xeTexAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
+            Dictionary<string, ArrayList> StyleName = xeTexContent.CreateContent(projInfo.ProjectPath, xetexFile, projInfo.DefaultXhtmlFileWithPath, classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
             CloseFile(xetexFile);
 
@@ -122,7 +123,7 @@ namespace SIL.PublishingSolution
                                                      ".pdf");
                 if (File.Exists(fileNameNoPath))
                 {
-                        Common.OpenOutput(fileNameNoPath);
+                   Common.OpenOutput(fileNameNoPath);
                 }
             }
         }

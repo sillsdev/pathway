@@ -35,12 +35,14 @@ namespace SIL.PublishingSolution
         //CSSTree _cssTree = new CSSTree();
         XeTexMapProperty mapProperty = new XeTexMapProperty();
         private StreamWriter _xetexFile;
+        private List<string> _inlineStyle;
+        Dictionary<string, List<string>> _classInlineStyle = new Dictionary<string, List<string>>();
         //public InDesignStyles InDesignStyles;
         //public ArrayList _FootNote;
         #endregion
 
 
-        public Dictionary<string, Dictionary<string, string>> CreateXeTexStyles(string projectPath, StreamWriter xetexFile, Dictionary<string, Dictionary<string, string>> cssProperty)
+        public Dictionary<string, List<string>> CreateXeTexStyles(string projectPath, StreamWriter xetexFile, Dictionary<string, Dictionary<string, string>> cssProperty)
         {
             try
             {
@@ -52,55 +54,24 @@ namespace SIL.PublishingSolution
             {
                 Console.Write(ex.Message);
             }
-            return _IDAllClass;
-        }
-
-        /// <summary>
-        /// Increase font-size 250% for Subscript and Superscript
-        /// </summary>
-        /// <param name="isIncrease">to increase font-size even the property is not super/sub script</param>
-        private void SuperscriptSubscriptIncreaseFontSize(bool isIncrease)
-        {
-            bool isSuperSub = false;
-            if (_IDProperty.ContainsKey("Position") && (_IDProperty["Position"] == "Subscript" || _IDProperty["Position"] == "Superscript"))
-            {
-                isSuperSub  = true;
-            }
-
-            if (isSuperSub || isIncrease) // increase font-size for superscipt & subscript
-            {
-                string newValue = "100%";
-                if (_IDProperty.ContainsKey("PointSize"))
-                {
-                    string fontValue = _IDProperty["PointSize"];
-                    int counter;
-                    string retValue = Common.GetNumericChar(fontValue, out counter);
-                    if (retValue.Length > 0)
-                    {
-                        float value = float.Parse(retValue) * 1.0F;
-                        string unit = fontValue.Substring(counter);
-                        newValue = value + unit;
-                    }
-                    else
-                    {
-                        if (fontValue == "larger" || fontValue == "smaller")
-                        {
-                            newValue = fontValue;
-                        }
-                    }
-                }
-                _IDProperty["PointSize"] = newValue;
-            }
+            //return _IDAllClass;
+            return _classInlineStyle;
         }
 
         private void CreateStyle()
         {
+            //\font\hoefler="Hoefler Text/B:Letter Case=Small Caps" at 12pt
             foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _cssProperty)
             {
-
-                string xeTexProperty = mapProperty.XeTexProperty(cssClass.Value, cssClass.Key);
+                _inlineStyle = new List<string>();
+                string xeTexProperty = mapProperty.XeTexProperty(cssClass.Value, cssClass.Key, _inlineStyle);
+                if (_inlineStyle.Count > 0)
+                {
+                    _classInlineStyle[cssClass.Key] = _inlineStyle;
+                }
                 if (xeTexProperty.Trim().Length > 0)
                 {
+                    if(cssClass.Key == "letter")
                     _xetexFile.WriteLine(xeTexProperty);
                 }
                 //_IDClass = new Dictionary<string, string>(); // note: ToDo seperate the process
@@ -222,5 +193,44 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("StrokeColor", propertyValue);
             _writer.WriteAttributeString("EndJoin", "BevelEndJoin");
         }
+
+        /// <summary>
+        /// Increase font-size 250% for Subscript and Superscript
+        /// </summary>
+        /// <param name="isIncrease">to increase font-size even the property is not super/sub script</param>
+        private void SuperscriptSubscriptIncreaseFontSize(bool isIncrease)
+        {
+            bool isSuperSub = false;
+            if (_IDProperty.ContainsKey("Position") && (_IDProperty["Position"] == "Subscript" || _IDProperty["Position"] == "Superscript"))
+            {
+                isSuperSub = true;
+            }
+
+            if (isSuperSub || isIncrease) // increase font-size for superscipt & subscript
+            {
+                string newValue = "100%";
+                if (_IDProperty.ContainsKey("PointSize"))
+                {
+                    string fontValue = _IDProperty["PointSize"];
+                    int counter;
+                    string retValue = Common.GetNumericChar(fontValue, out counter);
+                    if (retValue.Length > 0)
+                    {
+                        float value = float.Parse(retValue) * 1.0F;
+                        string unit = fontValue.Substring(counter);
+                        newValue = value + unit;
+                    }
+                    else
+                    {
+                        if (fontValue == "larger" || fontValue == "smaller")
+                        {
+                            newValue = fontValue;
+                        }
+                    }
+                }
+                _IDProperty["PointSize"] = newValue;
+            }
+        }
+
     }
 }

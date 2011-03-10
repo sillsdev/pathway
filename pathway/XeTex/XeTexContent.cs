@@ -56,12 +56,16 @@ namespace SIL.PublishingSolution
         private bool _isDropCap = false;
         private string _dropCapStyle = string.Empty;
         private string _currentStoryName = string.Empty;
+        Dictionary<string, List<string>> _classInlineStyle = new Dictionary<string, List<string>>();
+
         #endregion
 
-        public Dictionary<string, ArrayList> CreateContent(string projectPath, StreamWriter xetexFile, string xhtmlFileWithPath, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
+        public Dictionary<string, ArrayList> CreateContent(string projectPath, StreamWriter xetexFile, string xhtmlFileWithPath, Dictionary<string, List<string>> classInlineStyle, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
         {
             _xetexFile = xetexFile;
+            _classInlineStyle = classInlineStyle;
             _inputPath = Path.GetDirectoryName(xhtmlFileWithPath);
+            Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
             InitializeData(projectPath, idAllClass, classFamily, cssClassOrder);
             ProcessCounterProperty();
             OpenXhtmlFile(xhtmlFileWithPath);
@@ -379,7 +383,6 @@ namespace SIL.PublishingSolution
                 //_writer.WriteString(content);
                 _xetexFile.Write(content);
                 _writer.WriteEndElement();
-                
             }
             AnchorBookMark();
             _writer.WriteEndElement();
@@ -398,13 +401,25 @@ namespace SIL.PublishingSolution
             else // regular style
             {
                 _writer.WriteAttributeString("AppliedCharacterStyle", "CharacterStyle/" + characterStyle);
+                string paraStyle;
                 if (characterStyle.IndexOf("No character style") > 0)
                 {
-                    _xetexFile.Write("\\" + _previousParagraphName + " ");
+                    paraStyle = _previousParagraphName;
                 }
                 else
                 {
-                    _xetexFile.Write("\\" + characterStyle + " ");
+                    paraStyle = characterStyle;
+                }
+                if (_classInlineStyle.ContainsKey(paraStyle))
+                {
+                    List<string> inlineStyle = _classInlineStyle[paraStyle];
+                    foreach (string property in inlineStyle)
+                    {
+                        _xetexFile.Write(property);
+                    }
+                    _xetexFile.Write("{");
+                    _xetexFile.Write("\\" + paraStyle + " ");
+                    _braceClass.Push(_childName);
                 }
                 AddUsedStyleName(characterStyle);
             }
@@ -1038,6 +1053,7 @@ namespace SIL.PublishingSolution
             _characterName = null;
             //WriteEmptyHomographStyle();
             _closeChildName = StackPop(_allStyle);
+            CloseBrace(_closeChildName);
             DoNotInheritClassEnd(_closeChildName);
             SetHeadwordFalse();
             ClosefooterNote();
@@ -1065,6 +1081,15 @@ namespace SIL.PublishingSolution
             }
             _classNameWithLang = StackPeek(_allStyle);
             _classNameWithLang = Common.LeftString(_classNameWithLang, "_");
+        }
+
+        private void CloseBrace(string closeChildName)
+        {
+            string brace = StackPeek(_braceClass);
+            if(closeChildName == brace)
+            {
+                _xetexFile.Write("}");
+            }
         }
 
         private void SetHeadwordFalse()
