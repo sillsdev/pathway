@@ -270,6 +270,10 @@
       <Project>{310E4B50-F423-46B1-AD72-740CC859E4C3}</Project>
       <Name>XeTeXConvert</Name>
     </ProjectReference>
+    <ProjectReference Include="..\XeTex\XeTex.csproj">
+      <Project>{D1ACC574-32FD-4EF3-B993-79D18B759B77}</Project>
+      <Name>XeTex</Name>
+    </ProjectReference>
     <ProjectReference Include="..\YouVersionConvert\YouVersionConvert.csproj">
       <Project>{92364016-A6BF-4C15-8106-8C7F57F5C172}</Project>
       <Name>YouVersionConvert</Name>

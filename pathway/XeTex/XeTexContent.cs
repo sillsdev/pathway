@@ -428,7 +428,11 @@ namespace SIL.PublishingSolution
                     {
                         _xetexFile.Write(property);
                     }
-                    _xetexFile.Write("{");
+                    if (inlineStyle.Count > 0)
+                    {
+                        _xetexFile.Write("{");
+                        _braceClass.Push(_childName);
+                    }
                     _xetexFile.Write("\\" + mergedParaStyle + " ");
                     _braceClass.Push(_childName);
                 }

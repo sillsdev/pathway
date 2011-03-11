@@ -16,17 +16,14 @@ namespace SIL.PublishingSolution
         private string _fontName;
         private List<string> _fontOption = new List<string>();
         private List<string> _fontStyle = new List<string>();
-        private string _fontSize = string.Empty;
+        private string _fontSize;
         private List<string> _inlineStyle;
 
 
         //TextInfo _titleCase = CultureInfo.CurrentCulture.TextInfo;
         public string XeTexProperty(Dictionary<string, string> cssProperty,string className, List<string> inlineStyle)
         {
-            _className = className;
-            _property = string.Empty;
-            _cssProperty = cssProperty;
-            _inlineStyle = inlineStyle;
+            Initialize(className, cssProperty, inlineStyle);
             foreach (KeyValuePair<string, string> property in cssProperty)
             {
                 switch (property.Key.ToLower())
@@ -95,9 +92,9 @@ namespace SIL.PublishingSolution
                     //case "margin":
                     //    //Margin(styleAttributeInfo);
                     //    break;
-                    //case "color":
-                    //    Color(property.Value);
-                    //    break;
+                    case "color":
+                        Color(property.Value);
+                        break;
                     //case "background-color":
                     //    BGColor(property.Value);
                     //    break;
@@ -170,6 +167,19 @@ namespace SIL.PublishingSolution
             return style;
         }
 
+        private void Initialize(string className, Dictionary<string, string> cssProperty, List<string> inlineStyle)
+        {
+            _className = className;
+            _property = string.Empty;
+            _cssProperty = cssProperty;
+            _inlineStyle = inlineStyle;
+
+            _fontName = "Times New Roman";
+            _fontOption.Clear();
+            _fontStyle.Clear();
+            _fontSize = " at 12pt";
+        }
+
         private string ComposeStyle()
         {
             //string style = @"\font\" + _className + "=\"" + propertyValue + "\"";
@@ -179,6 +189,13 @@ namespace SIL.PublishingSolution
                 style += sty;
             }
             style += "\"";
+
+            foreach (string sty in _fontStyle)
+            {
+                style += sty;
+            }
+
+
             if (_fontSize.Length >0 )
             {
                 style += _fontSize;
@@ -535,6 +552,8 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
+            string color = ":color=" + propertyValue.Replace("#","");   //:color=880000
+            _fontStyle.Add(color);
             _IDProperty["FillColor"] = "Color/" + propertyValue;
         }
         public void BGColor(string propertyValue)

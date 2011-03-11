@@ -17,6 +17,7 @@ namespace Test.Xetex
         #region Private Variables
         private string _inputCSS;
         private string _inputXHTML;
+        private string _inputPath;
         private string _outputPath;
         private string _expectedPath;
         private string _outputStory;
@@ -28,27 +29,26 @@ namespace Test.Xetex
         private InStyles _stylesXML;
         private InStory _storyXML;
         private readonly ArrayList headwordStyles = new ArrayList();
-        #endregion
 
-        #region Public Variables
-        public XPathNodeIterator NodeIter;
         private Dictionary<string, Dictionary<string, string>> _cssProperty;
         private CssTree _cssTree;
-        #endregion
+        private PublicationInformation _projInfo;
+        private Dictionary<string, List<string>> _classInlineStyle;
 
+        #endregion
         #region Setup
         [TestFixtureSetUp]
         protected void SetUpAll()
         {
+            Common.Testing = true;
             _stylesXML = new InStyles();
             _storyXML = new InStory();
-            _testFolderPath = PathPart.Bin(Environment.CurrentDirectory, "/InDesignConvert/TestFiles");
-            //ClassProperty = _expected;  //Note: All Reference address initialized here
+            _projInfo = new PublicationInformation();
+            _classInlineStyle = new Dictionary<string, List<string>>();
+            _testFolderPath = PathPart.Bin(Environment.CurrentDirectory, "/Xetex/TestFiles");
+            _inputPath = Common.PathCombine(_testFolderPath, "input");
             _outputPath = Common.PathCombine(_testFolderPath, "output");
             _expectedPath = Common.PathCombine(_testFolderPath, "expected");
-            _expectedPath = Common.PathCombine(_expectedPath, "BuangExpect");
-            _outputStyles = Common.PathCombine(_outputPath, "Resources");
-            _outputStory = Common.PathCombine(_outputPath, "Stories");
             _cssProperty = new Dictionary<string, Dictionary<string, string>>();
             Common.SupportFolder = "";
             Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
@@ -69,50 +69,75 @@ namespace Test.Xetex
         /// Parent comes as multiple times
         /// </summary>
         [Test]
-        public void T1Test()
+        public void TextAlignTest()
         {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "TextAlign";
+            ExportProcess(file);
+            FileCompare(file);
+        }
 
-            //_projInfo.ProjectInputType = "Dictionary";
-            //const string file = "BuangExport";
-            //DateTime startTime = DateTime.Now;
-
-            //string styleOutput = GetStyleOutput(file);
-
-            //_totalTime = DateTime.Now - startTime;
-
-            //string styleExpected = Common.PathCombine(_expectedPath, "BuangExportstyles.xml");
-            //string contentExpected = Common.PathCombine(_expectedPath, "BuangExportcontent.xml");
-            //XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
-            //XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+        private void FileCompare(string file)
+        {
+            string texOutput = FileOutput(file + ".tex");
+            string texExpected = FileExpected(file + ".tex");
+            FileAssert.AreEqual(texOutput, texExpected, file + " in tex ");
         }
 
         private void ExportProcess(string file)
         {
-            //OOContent contentXML = new OOContent();
-            //OOStyles stylesXML = new OOStyles();
-            //string fileOutput = _index > 0 ? file + _index + ".css" : file + ".css";
+            string input = FileInput(file + ".xhtml");
+            _projInfo.DefaultXhtmlFileWithPath = input;
 
-            ////string input = FileInput(file + ".css");
-            //string input = FileInput(fileOutput);
+            input = FileInput(file + ".css");
+            _projInfo.DefaultCssFileWithPath = input;
 
-            //_projInfo.DefaultCssFileWithPath = input;
-            //_projInfo.TempOutputFolder = _outputPath;
+            _projInfo.TempOutputFolder = _outputPath;
+            _projInfo.OutputExtension = ".tex";
 
-            //Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
-            //CssTree cssTree = new CssTree();
-            //cssClass = cssTree.CreateCssProperty(input, true);
+            Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
+            CssTree cssTree = new CssTree();
+            cssClass = cssTree.CreateCssProperty(input, true);
 
-            ////StyleXML
-            //string styleOutput = FileOutput(file + _styleFile);
-            //Dictionary<string, Dictionary<string, string>> idAllClass = stylesXML.CreateStyles(_projInfo, cssClass, styleOutput);
+            string xetexFullFile = Path.Combine(_outputPath, file + ".tex");
+            StreamWriter xetexFile = new StreamWriter(xetexFullFile);
 
-            //// ContentXML
-            //_projInfo.DefaultXhtmlFileWithPath = FileInput(file + ".xhtml");
-            //_projInfo.TempOutputFolder = FileOutput(file);
-            //contentXML.CreateStory(_projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
-            //_projInfo.TempOutputFolder = _projInfo.TempOutputFolder + _contentFile;
-            //return styleOutput;
+            XeTexStyles styles = new XeTexStyles();
+            _classInlineStyle = styles.CreateXeTexStyles(_outputPath,xetexFile, cssClass);
+
+            XeTexContent content = new XeTexContent();
+            content.CreateContent(_outputPath, xetexFile, _projInfo.DefaultXhtmlFileWithPath,
+                                  _classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder);
+
+            CloseFile(xetexFile);
         }
+
+        #region Private Functions
+        private string FileInput(string fileName)
+        {
+            return Common.PathCombine(_inputPath, fileName);
+        }
+
+        private string FileOutput(string fileName)
+        {
+            return Common.PathCombine(_outputPath, fileName);
+        }
+
+        private string FileExpected(string fileName)
+        {
+            return Common.PathCombine(_expectedPath, fileName);
+        }
+        private void CloseFile(StreamWriter xetexFile)
+        {
+            xetexFile.WriteLine();
+            xetexFile.WriteLine(@"\bye");
+            xetexFile.Flush();
+            xetexFile.Close();
+        }
+
+        #endregion PrivateFunctions
+
+
 
         #endregion
     }

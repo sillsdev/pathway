@@ -97,9 +97,9 @@ namespace SIL.PublishingSolution
                     }
                 }
                 //Merge
-                if (_cssClass.ContainsKey(mergedClass))
+                if (_cssClass.ContainsKey(parentClass))
                 {
-                    foreach (KeyValuePair<string, string> property in _cssClass[mergedClass])
+                    foreach (KeyValuePair<string, string> property in _cssClass[parentClass])
                     {
                         if (!_tempStyle.ContainsKey(property.Key))
                             _tempStyle[property.Key] = property.Value;
