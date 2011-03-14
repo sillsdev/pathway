@@ -1654,16 +1654,22 @@ namespace SIL.PublishingSolution
         /// </summary>
         public void SaveInputType(string inputType)
         {
-            string settingPath = Common.LeftString(Param.Value["OutputPath"], "Pathway");
-            string xmlPath = Common.PathCombine(settingPath, Common.PathCombine("Pathway", "StyleSettings.xml"));
-            if (!File.Exists(xmlPath))
+            string allUserSettingPath = Common.LeftString(Param.Value["OutputPath"], "Pathway");
+            string allUserXmlPath = Common.PathCombine(allUserSettingPath, Common.PathCombine("Pathway", "StyleSettings.xml"));
+            if (!Directory.Exists(Path.GetDirectoryName(allUserXmlPath)))
             {
-                settingPath = Path.GetDirectoryName(Param.SettingPath);
-                xmlPath = Path.Combine(settingPath, "StyleSettings.xml");
+                Directory.CreateDirectory(Path.GetDirectoryName(allUserXmlPath));
+            }
+            if (!File.Exists(allUserXmlPath))
+            {
+                string settingPath = Path.GetDirectoryName(Param.SettingPath);
+                string xmlPath = Path.Combine(settingPath, "StyleSettings.xml");
+                File.Copy(xmlPath, allUserXmlPath, true);
+                File.Copy(xmlPath.Replace(".xml", ".xsd"), allUserXmlPath.Replace(".xml", ".xsd"), true);
             }
 
             XmlDocument xmlDoc = new XmlDocument { XmlResolver = null };
-            xmlDoc.Load(xmlPath);
+            xmlDoc.Load(allUserXmlPath);
             string xPath = "//settings/property[@name='InputType']";
 
             var node = xmlDoc.SelectSingleNode(xPath);
@@ -1671,7 +1677,7 @@ namespace SIL.PublishingSolution
             {
                 node.Attributes["value"].Value = inputType;
             }
-            xmlDoc.Save(xmlPath);
+            xmlDoc.Save(allUserXmlPath);
         }
 
         protected void ParseCSS(string cssPath, string loadType)

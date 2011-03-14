@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text;
+using System.Xml;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
@@ -14,6 +15,7 @@ namespace Test.UIConfigurationToolBLTest
     public class ConfigurationToolBLTest
     {
         private ConfigurationTool cTool;
+        private ConfigurationToolBL cToolBL;
         /// <summary>holds path to input folder for all tests</summary>
         private static string _inputBasePath = string.Empty;
         /// <summary>holds path to expected results folder for all tests</summary>
@@ -51,6 +53,7 @@ namespace Test.UIConfigurationToolBLTest
         {
             cTool = new ConfigurationTool();
             cTool._fromNunit = true;
+            cToolBL = new ConfigurationToolBL();
 
             _pathwayPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/Pathway");
 
@@ -254,6 +257,7 @@ namespace Test.UIConfigurationToolBLTest
             //cTool._CToolBL.ConfigurationTool_LoadBL();
             cTool.Close();
         }
+
         [Test]
         public void LoadTest()
         {
@@ -265,6 +269,22 @@ namespace Test.UIConfigurationToolBLTest
             GridRowCount_Load();
             GridRowValue_Load();
             FormButtonEnable_Load();
+        }
+
+
+        [Test]
+        public void SaveInputTypeTest()
+        {
+            SetUp();
+            Param.Value["OutputPath"] = _outputBasePath;
+            cToolBL.SaveInputType("Scripture");
+            const string expected = "Scripture";
+            var xdoc = new XmlDocument();
+            xdoc.Load(Common.PathCombine(_outputBasePath, Common.PathCombine("Pathway", "StyleSettings.xml")));
+            XmlNode node = xdoc.SelectSingleNode("//stylePick/settings/property[@name='InputType']");
+            if (node != null)
+                if (node.Attributes != null)
+                    Assert.IsTrue(node.Attributes["value"].Value == expected, "SaveInputType Test failed");
         }
 
         private void AssignNewTest()
@@ -444,5 +464,6 @@ namespace Test.UIConfigurationToolBLTest
             bool tabInfoEnable = cTool.TabInfo.Enabled;
             Assert.IsFalse(tabInfoEnable, "Tab Info enable Test failed");
         }
+
     }
 }
