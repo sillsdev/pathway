@@ -41,8 +41,8 @@
 		</html>
 	</xsl:template>
 
+	<!-- Define the book. -->
 	<xsl:template match="book">
-		<!-- Get book identification -->
 		<xsl:variable name="bookCode" select="@id"/>
 		<xsl:variable name="bookInToc" select="normalize-space(following::para[@style='toc2'])"/>
 		<xsl:variable name="bookHeading" select="normalize-space(following::para[@style='h'])"/>
@@ -54,39 +54,30 @@
 				<!-- Find the name of the book in this fallback sequence: (1) book name specified in toc2 
 					(2) book name in the heading, (3) main title, (4) three-letter book code -->
 				<xsl:choose>
-					<xsl:when test="string-length($bookInToc) = 0">
-						<xsl:choose>
-							<xsl:when test="string-length($bookHeading) = 0">
-								<xsl:choose>
-									<xsl:when test="string-length($bookTitle) = 0 and string-length($bookTitle1) = 0">
-										<xsl:value-of select="$bookCode"/>
-									</xsl:when>
-									<xsl:otherwise>
-										<!-- We may have a title in \mt or \mt1, but we include both since one of them will be empty. -->
-										<xsl:value-of select="$bookTitle"/>
-										<xsl:value-of select="$bookTitle1"/>
-									</xsl:otherwise>
-								</xsl:choose>
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:value-of select="$bookHeading"/>
-							</xsl:otherwise>
-						</xsl:choose>
+					<xsl:when test="string-length($bookInToc) != 0">
+						<xsl:value-of select="$bookInToc"/>
+					</xsl:when>
+					<xsl:when test="string-length($bookHeading) != 0">
+						<xsl:value-of select="$bookHeading"/>
+					</xsl:when>
+					<xsl:when test="string-length($bookTitle) != 0">
+						<xsl:value-of select="$bookTitle"/>
+					</xsl:when>
+					<xsl:when test="string-length($bookTitle1) != 0">
+						<xsl:value-of select="$bookTitle1"/>
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:value-of select="$bookInToc"/>
+						<xsl:value-of select="$bookCode"/>
 					</xsl:otherwise>
 				</xsl:choose>
 			</span>
 			<span class="scrBookCode" lang="{$ws}"><xsl:value-of select="$bookCode"/></span>
 		</div>
-		
 	</xsl:template>
 
+	<!-- Convert all paragraph SFM style markers to styles understood by Pathway. -->
 	<xsl:template match="para">
 		<xsl:choose>
-			<!-- Convert all SFM style markers to Translation Editor styles. -->
-
 			<!-- Remove 'h' and 'rem' paragraphs. -->
 			<xsl:when test="@style = 'h'"/>
 			<xsl:when test="@style = 'rem'"/>
@@ -97,19 +88,19 @@
 					<xsl:apply-templates/>
 				</div>
 			</xsl:when>
-			<!-- mt2 and mt3 are paragraph styles, but they will need to become spans and be moved inside
-			     the adjacent title division/paragraph. -->
+			<!-- mt2, mt3 and mt4 are paragraph styles, but they will need to become spans and be moved (later) inside
+				the adjacent title division/paragraph. -->
 			<xsl:when test="@style = 'mt2'">
 				<span class="Title_Secondary" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:value-of select="."/>
 				</span>
 			</xsl:when>
-			<xsl:when test="@style = 'mt3'">
+			<xsl:when test="@style = 'mt3' or @style = 'mt4'">
 				<span class="Title_Tertiary" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:value-of select="."/>
 				</span>
 			</xsl:when>
-
+			
 			<!-- Convert introduction styles. -->
 			<xsl:when test="@style = 'im' or @style = 'im1'">
 				<h1 class="Intro_Title_Main" xmlns="http://www.w3.org/1999/xhtml">
@@ -393,7 +384,10 @@
 				Variant_Section_Tail
 			-->
 
-			<!-- Mapping not available to TE style, so just use SFM. -->
+			<!-- Remove toc styles since they contain metadata that we don't want to display.  -->
+			<xsl:when test="@style = 'toc1' or @style = 'toc2' or @style = 'toc3'"/>
+			
+			<!-- Mapping not available to Pathway style, so just use SFM. -->
 			<xsl:otherwise>
 				<p class="{@style}" xmlns="http://www.w3.org/1999/xhtml">
 					<span lang="{$ws}">
@@ -405,7 +399,6 @@
 	</xsl:template>
 
 	<!-- Handle figure element -->
-	<!-- <xsl:template match="para/figure"> -->
 	<xsl:template match="figure">
 		<xsl:variable name="figureNumber" select="count(preceding::figure)+1"/>
 		<xsl:variable name="bookCode" select="preceding::book[1]/@id"/>
@@ -448,7 +441,7 @@
 		</span>
 	</xsl:template>
 
-	<!-- Convert character styles from SFM to Translation Editor styles. -->
+	<!-- Convert character styles from SFM to styles understood by Pathway. -->
 	<xsl:template match="char">
 		<xsl:choose>
 			<!-- Translation Editor character styles with no mapping to SFM:
@@ -528,17 +521,6 @@
 					<xsl:value-of select="."/>
 				</span>
 			</xsl:when>
-			<!-- REVIEW: mt2 and mt3 are paragraph styles in USFX that need to be converted to character styles. -->
-			<xsl:when test="@style = 'mt2'">
-				<span class="Title_Secondary" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
-				</span>
-			</xsl:when>
-			<xsl:when test="@style = 'mt3'">
-				<span class="Title_Tertiary" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
-				</span>
-			</xsl:when>
 			<xsl:when test="@style = 'uw'">
 				<span class="Untranslated_Word" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:value-of select="."/>
@@ -587,6 +569,7 @@
 		</xsl:choose>
 	</xsl:template>
 
+	<!-- Pull the chapter number into the paragraph content. -->
 	<xsl:template name="AddParaContent">
 		<xsl:call-template name="FindChapter"/>
 		<xsl:apply-templates/>
@@ -602,6 +585,7 @@
 		</span>
 	</xsl:template>
 	
+	<!-- Search backward for a chapter, stopping the search if an intro or content para is encountered. -->
 	<xsl:template match="para" mode="FindChapter">
 		<xsl:choose>
 			<!-- If we encounter a recognized content paragraph style, we don't need
@@ -664,7 +648,7 @@
 					<xsl:number format="a" value="$footnoteIndex"/>
 				</xsl:when>
 				<xsl:when test="not(@caller = '+' or @caller = '-')">
-					<!-- Custom symbol specified so use whatever character is specified. -->
+					<!-- Custom symbol specified so use whatever character is provided. -->
 					<xsl:value-of select="@caller"/>
 				</xsl:when>
 			</xsl:choose>
@@ -686,10 +670,20 @@
 			<a href="#Footnote-{$bookCode}-{$footnoteNumber}"/>
 		</span>
 		
-		<span class="{$footnoteStyle}" id="Footnote-{$bookCode}-{$footnoteNumber}" title="{$footnoteCaller}" xmlns="http://www.w3.org/1999/xhtml">
-			<!-- Handle template for character styles. -->
-			<xsl:apply-templates/>
-		</span>
+		<xsl:choose>
+			<xsl:when test="string-length($footnoteCaller) != 0">
+				<span class="{$footnoteStyle}" id="Footnote-{$bookCode}-{$footnoteNumber}" title="{$footnoteCaller}" xmlns="http://www.w3.org/1999/xhtml">
+					<!-- Handle template for character styles. -->
+					<xsl:apply-templates/>
+				</span>
+			</xsl:when>
+			<xsl:otherwise>
+				<span class="{$footnoteStyle}" id="Footnote-{$bookCode}-{$footnoteNumber}" xmlns="http://www.w3.org/1999/xhtml">
+					<!-- Handle template for character styles. -->
+					<xsl:apply-templates/>
+				</span>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 
 	<!-- Enclose paragraph text for a note within a writing system, if it isn't already. -->

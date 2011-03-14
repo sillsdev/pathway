@@ -25,13 +25,13 @@
 	<xsl:template match="xhtml:div[@class='scrBook']">
 		<xsl:copy>
 			<xsl:apply-templates select="@*|node()"/>
-			<xsl:apply-templates select="following-sibling::*[1]" mode="scrBook"/>
+			<xsl:apply-templates select="following-sibling::*[1][self::xhtml:div]" mode="scrBook"/>
 		</xsl:copy>
 	</xsl:template>
 
 	<xsl:template match="xhtml:div" mode="scrBook">
 		<xsl:copy-of select="."/>
-		<xsl:apply-templates select="following-sibling::*[1]" mode="scrBook"/>
+		<xsl:apply-templates select="following-sibling::*[1][self::xhtml:div]" mode="scrBook"/>
 	</xsl:template>
 
 	<!-- Stop processing when another scrBook div element is encountered. -->
