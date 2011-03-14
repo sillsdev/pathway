@@ -35,6 +35,10 @@
 	</xsl:template>
 	
 	<!-- Ensure that a book title is included, if it hasn't already been specified. -->
+	<!-- This is currently commented out because other SFMs can be included at the beginning of the file.
+		The template below assumes that Title_Main should immediately follow the scrBook <div>, which is not
+		necessarily a valid assumption.
+		Adding an empty title can be searched for and set more reliably when the context can be set to a single book. 
 	<xsl:template match="xhtml:div[@class='scrBook']">
 		<xsl:copy-of select="."/>
 		<xsl:if test="not(following-sibling::*[1][self::xhtml:div][@class = 'Title_Main'])">
@@ -43,5 +47,5 @@
 				<span lang="{$lang}"/>
 			</div>
 		</xsl:if>
-	</xsl:template>
+	</xsl:template> -->
 </xsl:stylesheet>
