@@ -220,18 +220,22 @@ namespace Test.YouVersionConvert
         public void ConvertSqlTest()
         {
             string processFolder = _testFiles.Output("xhtml");
-            FolderTree.Copy(_testFiles.Input("xhtml"), processFolder);
+            // Clean out the processFolder before copying new files into it.
+            Directory.Delete(processFolder, true);
+            Directory.CreateDirectory(processFolder);
+            // Now get the files.
+            FolderTree.Copy(_testFiles.Input("sql"), processFolder);
             string outFolder = _testFiles.Output("zipSql");
             SetupOutputFolder(outFolder);
-            const string xslt = "TE_XHTML-to-YouVersion_OneChapter_SQL.xslt";
+            const string xslt = "TE_XHTML-to-YouVersion_SQL.xslt";
             const string type = "Sql";
             const string ext = ".sql";
-            Convert(processFolder, outFolder, xslt, type, ext);
+            ConvertSql(processFolder, outFolder, xslt, type, ext);
             string actualOutFolder = Path.Combine(outFolder, type);
             DirectoryInfo directoryInfo = new DirectoryInfo(actualOutFolder);
-            Assert.AreEqual(6, directoryInfo.GetFiles().Length);
-            const string chapter6 = "nko.1TI.6.sql";
-            FileAssert.AreEqual(_testFiles.Expected(chapter6), Path.Combine(actualOutFolder, chapter6));
+            Assert.AreEqual(1, directoryInfo.GetFiles().Length);
+            const string accGospels = "Acc Gospels.sql";
+            FileAssert.AreEqual(_testFiles.Expected(accGospels), Path.Combine(actualOutFolder, accGospels));
         }
 
         /// <summary>
