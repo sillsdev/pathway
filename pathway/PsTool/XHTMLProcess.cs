@@ -926,7 +926,7 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
-            if (_outputType == Common.OutputType.IDML)
+            if (_outputType != Common.OutputType.ODT)
             {
                 AppendParentProperty();
             }
@@ -994,8 +994,16 @@ namespace SIL.PublishingSolution
                         {
                              continue;
                         }
+                        _tempStyle[property.Key] = property.Value;
                     }
-                    _tempStyle[property.Key] = property.Value;
+                    else if (_outputType == Common.OutputType.XETEX)
+                    {
+                        if (_tempStyle.ContainsKey(property.Key) == false)
+                        {
+                            _tempStyle[property.Key] = property.Value;
+                        }
+                    }
+                    
                 }
             }
         }

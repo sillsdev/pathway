@@ -37,10 +37,10 @@ namespace SIL.PublishingSolution
             _projectPath = projectPath;
             _cssClass = cssClass;
             _xetexFullFile = xetexFullFile;
-            foreach (KeyValuePair<string, Dictionary<string, string>> cssStyle in newProperty)
-            {
-                MergeCssStyle(cssStyle.Key);
-            }
+            //foreach (KeyValuePair<string, Dictionary<string, string>> cssStyle in newProperty)
+            //{
+            //    MergeCssStyle(cssStyle.Key);
+            //}
             MapProperty();
         }
 
@@ -54,7 +54,11 @@ namespace SIL.PublishingSolution
                     cssClass.Key.IndexOf("h6") >= 0) continue;
 
                 List<string> _inlineStyle = new List<string>();
-                string xeTexProperty = mapProperty.XeTexProperty(cssClass.Value, cssClass.Key, _inlineStyle);
+                
+                string className = RemoveBody(cssClass.Key);
+                if (className.Length == 0 ) continue; 
+
+                string xeTexProperty = mapProperty.XeTexProperty(cssClass.Value, className, _inlineStyle);
 
                 if (xeTexProperty.Trim().Length > 0)
                 {
@@ -64,6 +68,17 @@ namespace SIL.PublishingSolution
 
 
             }
+        }
+
+        private string RemoveBody(string paraStyle)
+        {
+            if (paraStyle.IndexOf("_body") == -1)
+            {
+                return string.Empty;
+            }
+            paraStyle = paraStyle.Replace("_body", "");
+            string simplified = paraStyle.Replace("_", "");
+            return simplified;
         }
 
         /// <summary>

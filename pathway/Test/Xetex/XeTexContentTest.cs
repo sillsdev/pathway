@@ -106,7 +106,7 @@ namespace Test.Xetex
             _classInlineStyle = styles.CreateXeTexStyles(_outputPath,xetexFile, cssClass);
 
             XeTexContent content = new XeTexContent();
-            content.CreateContent(_outputPath, xetexFile, _projInfo.DefaultXhtmlFileWithPath,
+            content.CreateContent(_outputPath, cssClass, xetexFile, _projInfo.DefaultXhtmlFileWithPath,
                                   _classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
             CloseFile(xetexFile);
