@@ -768,6 +768,7 @@ namespace SIL.PublishingSolution
             string content = _reader.Value;
             content = ReplaceString(content);
             if (CollectFootNoteChapterVerse(content, Common.OutputType.ODT.ToString())) return;
+            content = InsertSpaceInTextforMacro(content); //TD-2034
 
             // Psuedo Before
             foreach (ClassInfo psuedoBefore in _psuedoBefore)
@@ -798,6 +799,35 @@ namespace SIL.PublishingSolution
                 _isDropCap = false;
             }
             _psuedoBefore.Clear();
+        }
+
+        /// <summary>
+        /// For TD-2034
+        /// Macro need the space between two different cases
+        /// 1. BookName and BookCode
+        /// 2. ChapterNumber and VerseNumber
+        /// So, Method to insert the space before the text, if already exists removed and add again.
+        /// </summary>
+        /// <param name="content">Input text to be need to add space before</param>
+        /// <returns>Text with space based on condition</returns>
+        private string InsertSpaceInTextforMacro(string content)
+        {
+            if (_allCharacter.Count > 0)
+            {
+                //if (_allCharacter.Peek().IndexOf("scrBookName") == 0 || _allCharacter.Peek().IndexOf("ChapterNumber") == 0)
+                //{
+                //    content = content.TrimEnd() + " ";
+                //}
+                if (_allCharacter.Peek().IndexOf("scrBookName") == 0)
+                {
+                    content = content.TrimEnd() + " ";
+                }
+                else if (_allCharacter.Peek().ToLower().IndexOf("versenumber") == 0 || _allCharacter.Peek().ToLower().IndexOf("versenumber1") == 0)
+                {
+                    content = " " + content.TrimStart();
+                }
+            }
+            return content;
         }
 
         protected override string StackPeekCharStyle(Stack<string> stack)

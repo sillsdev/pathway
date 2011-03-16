@@ -37,7 +37,7 @@
       <text:p text:style-name="P4" />
       <text:section text:style-name="Sect_scrBook" text:name="Sect_scrBook">
         <text:p text:style-name="scrBook_scrBody">
-          <text:span text:style-name="scrBookName_scrBook_scrBody">Ruth</text:span>
+          <text:span text:style-name="scrBookName_scrBook_scrBody">Ruth </text:span>
         </text:p>
         <text:p text:style-name="TitleMain_scrBook_scrBody">
           <text:span text:style-name="span_.x-kal_TitleMain_scrBook_scrBody">Ruth</text:span>
@@ -62,7 +62,7 @@
         </text:p>
         <text:p text:style-name="ChapterNumber1">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">1</text:span>
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">1</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 1</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Cette histoire se passe au tempsoù les juges gouvernent le peuple d'Israël. À ce moment-là, il y a une famine dans le pays. Alors Élimélek, un homme du village de Bethléem,</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody"> dans la région de Juda, part avec sa femme et ses deux fils. Ils vont dans la région de Moab</text:span>
           <text:note text:id="ftn1" text:note-class="footnote">
@@ -85,7 +85,7 @@
           <text:span text:style-name="span_.x-kal_SectionHead_scrSection_scrBook_scrBody">Ruth part avec Noémià Bethléem</text:span>
         </text:p>
         <text:p text:style-name="Paragraph_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">6-7</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 6-7</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Un jour, toujours dans le pays de Moab, Noémi apprend cette nouvelle: le </text:span>
           <text:span text:style-name="NameOfGod_Paragraph_scrSection_scrBook_scrBody">Seigneur</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody"> a montré sa bonté pour son peupleen lui donnant de bonnes récoltes. Alors elle se prépare à quitter le pays de Moabavec les deux femmes de ses fils. Elle quitte le lieuoù elle vit avec ses deux belles-filles. Les femmes prennent la route ensemble pour aller au pays de Juda. </text:span>
@@ -114,7 +114,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody"> m'a frappée.”</text:span>
         </text:p>
         <text:p text:style-name="Paragraph_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">14</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 14</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Alors les deux jeunes femmes recommencentà pleurer beaucoup. Puis Orpa dit au revoir à sa belle-mèreen l'embrassant. Mais Ruth décide de rester avec elle. </text:span>
           <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">15</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Noémi dit à Ruth: “Regarde, ta belle-so!eur est retournéevers son peuple et vers le dieu de son peuple. Fais comme elle, rentre chez toi!” </text:span>
@@ -129,7 +129,7 @@
           <text:span text:style-name="span_.x-kal_SectionHead_scrSection_scrBook_scrBody">Noémi retourne à Bethléem,et Ruth va avec elle</text:span>
         </text:p>
         <text:p text:style-name="Paragraph_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">18</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 18</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Quand Noémi voit que Ruth veut à tout prixvenir avec elle, elle n'insiste plus. </text:span>
           <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">19</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Les deux femmes marchent ensemble jusqu'à Bethléem.</text:span>
@@ -146,7 +146,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody"> me fait revenir les mains vides. Il s'est tourné contre moi, le Tout-Puissant m'a fait du mal. Ne m'appelez donc plus Noémi, la femme heureuse!”</text:span>
         </text:p>
         <text:p text:style-name="Paragraph_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">22</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 22</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">C'est de cette façon que Noémi revient du pays de Moab, avec Ruth, sa belle-fille moabite. Elles arrivent à Bethléem au momentoù la récolte de </text:span>
           <text:span text:style-name="Emphasis_Paragraph_scrSection_scrBook_scrBody">l'orge</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody"> commence.</text:span>
@@ -156,7 +156,7 @@
         </text:p>
         <text:p text:style-name="ChapterNumber1">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">2</text:span>
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">1</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 1</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Noémi a un parentdans la famille d'Élimélek, son mari. C'est un riche notable. Il s'appelle Booz. </text:span>
           <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">2</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Un jour, Ruth la Moabite dit à Noémi: “Laisse-moi aller dans les champs. Je ramasserai les épis derrière quelqu'un</text:span>
@@ -171,7 +171,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Ruth part et elle va dans un champ, pour ramasser les épis derrière ceux qui récoltent. Par chance, le champ où elle vaest celui de Booz, de la famille d'Élimélek.</text:span>
         </text:p>
         <text:p text:style-name="Paragraph_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">4</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 4</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Un peu plus tard, Booz arrive de Bethléem. Il salue les ouvriers: “Que le </text:span>
           <text:span text:style-name="NameOfGod_Paragraph_scrSection_scrBook_scrBody">Seigneur</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody"> soit avec vous!” Les ouvriers répondent: “Que le </text:span>
@@ -205,7 +205,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Ruth répond à Booz: “Maître, tu es vraiment bon pour moi. Tu m'encourages en me parlant avec bonté. Et pourtant, je ne suis même pascomme l'une de tes servantes.”</text:span>
         </text:p>
         <text:p text:style-name="Paragraph_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">14</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 14</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Au moment du repas, Booz dit à Ruth: “Viens manger avec nous. Prends un morceau de painet trempe-le dans la sauce.” Ruth s'assoit à côté des ouvriers. Booz lui tend des épis grillés. Elle en mange autant qu'elle veutet il lui en reste. </text:span>
           <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">15</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Puis Ruth se lèvepour aller de nouveau ramasser des épis. Ensuite, Booz donne cet ordre à ses serviteurs: “Laissez-la ramasser les épis, même entre les gerbes. Ne lui faites pas de reproches. </text:span>
@@ -216,7 +216,7 @@
           <text:span text:style-name="Emphasis_Paragraph_scrSection_scrBook_scrBody">d'orge.</text:span>
         </text:p>
         <text:p text:style-name="Paragraph_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">18</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 18</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Elle rapporte le sac au village. Noémi, sa belle-mère, voit ce qu'elle a ramassé. Ruth sort aussi ce qui reste de son repaset elle le donne à Noémi. </text:span>
           <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">19</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Noémi lui demande: “Où as-tu ramassé ces épis aujourd'hui? Dans quel champ est-ce que tu as travaillé? Que Dieu bénisse celui qui a été bon pour toi!”</text:span>
@@ -240,7 +240,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Noémi dit à Ruth: “C'est bien, ma fille. Continue de travailler avec les servantes de Booz. Si tu vas dans le champ de quelqu'un d'autre, tu risques d'être mal reçue.”</text:span>
         </text:p>
         <text:p text:style-name="Paragraph_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">23</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 23</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Ruth va donc ramasser les épis d'orgeet de </text:span>
           <text:span text:style-name="Emphasis_Paragraph_scrSection_scrBook_scrBody">blé</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody"> avec les servantes de Booz, jusqu'à la fin de la récolte. Elle continue à habiter avec sa belle-mère.</text:span>
@@ -250,7 +250,7 @@
         </text:p>
         <text:p text:style-name="ChapterNumber1">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">3</text:span>
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">1</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 1</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Un jour, Noémi dit à Ruth: “Ma fille, je dois trouver une solutionpour que tu sois heureuse. </text:span>
           <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">2</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Tu le sais, ce Booz qui t'a laissée travailleravec ses servantes, il est de notre famille. Ce soir, il va battre </text:span>
@@ -271,13 +271,13 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Ruth répond: “Je ferai tout ce que tu m'as dit.”</text:span>
         </text:p>
         <text:p text:style-name="Paragraph_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">6</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 6</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Ruth va à l'endroit où Booz bat les grains. Elle fait exactement ce que Noémi lui a dit. </text:span>
           <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">7</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Booz mange et boitet il est de très bonne humeur. Il vient se coucher au bord du tas de grains. Alors Ruth s'approche doucement, elle écarte la couvertureet se couche à ses pieds.</text:span>
         </text:p>
         <text:p text:style-name="Paragraph_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">8</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 8</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Au milieu de la nuit,Booz se réveille brusquement. Il se retourne et voit une femmecouchée à ses pieds. </text:span>
           <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">9</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Il dit: “Qui est-ce?” Elle répond: “C'est moi, Ruth.Protège-moi. En effet, tu es un proche parentet tu as la responsabilité de prendre soin de moi</text:span>
@@ -304,7 +304,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">: je ferai pour toi ce que je dois faire. Dors jusqu'à demain matin!”</text:span>
         </text:p>
         <text:p text:style-name="Paragraph_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">14</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 14</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Ruth reste couchée aux pieds de Boozjusqu'au matin. Puis elle se lève très tôt, avant la lumière du jour, pour qu'on ne la reconnaisse pas. En effet, Booz pensait: on ne doit pas savoir que cette femme est venue ici. </text:span>
           <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">15</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Il dit à Ruth: “Enlève ton pagne de dessuset tiens-le bien.”Elle le tient bien. Alors Booz mesure à peu près 15 kilos d'orgeet il les met dans le pagne de Ruth. Ensuite, il revient au village. </text:span>
@@ -323,7 +323,7 @@
         </text:p>
         <text:p text:style-name="ChapterNumber1">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">4</text:span>
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">1</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 1</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Booz va à l'entrée du village, là où on discute des affaires. Il s'assoit. Booz a parlé à Ruth d'un parent très proche d'Élimélek. Cet homme passe justement par là. Booz lui dit: “Arrête-toi! Viens t'asseoir ici.” L'homme s'arrête et il s'assoit. </text:span>
           <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">2</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Alors Booz demande à dix </text:span>
@@ -333,7 +333,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Ensuite, Booz dit à cet autre parent d'Élimélek: “Noémi est revenue du pays de Moab, tu le sais. Eh bien, elle va vendre le champ qui était à notre frère Élimélek. </text:span>
           <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">4</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Moi, j'ai décidé de t'en parler devant les anciens et devant tous ceux qui sont là. Si tu veux racheter ce champ, rachète-le. Si tu ne veux pas, dis-le-moi. En effet, c'est toi le premier qui as le droit de racheter,et moi le deuxième.”L'homme dit: “Je veux bien racheter le champ.”</text:span>
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">5</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 5</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Booz dit: “Si tu achètes le champ à Noémi,tu dois aussi prendre pour femme Ruth la Moabite. Ainsi, la propriété du champ restera dans la famille de son mari mort</text:span>
           <text:note text:id="ftn7" text:note-class="footnote">
             <text:note-citation text:label="g">g</text:note-citation>
@@ -346,7 +346,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">L'homme répond: “Dans ce cas, je ne peux pas. En effet, je risque de diminuer ma propriété. Donc, prends pour toi le droit de racheter. Moi, je ne peux pas.”</text:span>
         </text:p>
         <text:p text:style-name="Paragraph_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">7</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 7</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Autrefois, en Israël, quand des hommes achetaient ou échangeaient quelque chose, l'un des deux enlevait sa sandaleet il la donnait à l'autre. Ce geste montrait que l'affaire était réglée. </text:span>
           <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">8</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Donc, celui qui a le droitde racheter le champ d'Élimélekdit à Booz: “Achète le champ.” Puis il enlève sa sandale. </text:span>
@@ -370,7 +370,7 @@
           <text:span text:style-name="span_.x-kal_SectionHead_scrSection_scrBook_scrBody">La naissance d'Obed,ancêtre de David</text:span>
         </text:p>
         <text:p text:style-name="Paragraph_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">13</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 13</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Alors Booz se marie avec Ruth,et Ruth devient sa femme. Il s'unit à elle. Le </text:span>
           <text:span text:style-name="NameOfGod_Paragraph_scrSection_scrBook_scrBody">Seigneur</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody"> la </text:span>
@@ -388,7 +388,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Les voisines disent: “Noémi a un fils!” Elles lui donnent le nom d'Obed. Obed est le père de Jessé, qui est le père de David.</text:span>
         </text:p>
         <text:p text:style-name="Paragraph_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">18</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 18</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Voici la liste des ancêtres de David,à partir de Pérès: Pérès est le père de Hesron. </text:span>
           <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">19</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Hesron est le père de Ram.Ram est le père d'Amminadab. </text:span>
@@ -402,7 +402,7 @@
       </text:section>
       <text:section text:style-name="Sect_scrBook" text:name="Sect_scrBook">
         <text:p text:style-name="scrBook_scrBody">
-          <text:span text:style-name="scrBookName_scrBook_scrBody">Jonas</text:span>
+          <text:span text:style-name="scrBookName_scrBook_scrBody">Jonas </text:span>
         </text:p>
         <text:p text:style-name="TitleMain_scrBook_scrBody">
           <text:span text:style-name="span_.x-kal_TitleMain_scrBook_scrBody">Jonas</text:span>
@@ -427,7 +427,7 @@
         </text:p>
         <text:p text:style-name="ChapterNumber1">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">1</text:span>
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">1</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 1</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Un jour, le </text:span>
           <text:span text:style-name="NameOfGod_Paragraph_scrSection_scrBook_scrBody">Seigneur</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody"> adresse cet ordre à Jonas, </text:span>
@@ -445,7 +445,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody"> en a assez de voir vos actions mauvaises.’ ”</text:span>
         </text:p>
         <text:p text:style-name="Paragraph_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">3</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 3</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Jonas se met en route, mais pour fuir à Tarsis, loin du </text:span>
           <text:span text:style-name="NameOfGod_Paragraph_scrSection_scrBook_scrBody">Seigneur</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">. Il arrive à Jaffa</text:span>
@@ -462,7 +462,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">.</text:span>
         </text:p>
         <text:p text:style-name="Paragraph_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">4</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 4</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Mais le </text:span>
           <text:span text:style-name="NameOfGod_Paragraph_scrSection_scrBook_scrBody">Seigneur</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody"> lance sur la mer un vent violent, et la tempête est si forte que le bateau risque de se casser. </text:span>
@@ -504,7 +504,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">, qui as fait ce que tu as voulu.”</text:span>
         </text:p>
         <text:p text:style-name="Paragraph_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">15</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 15</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Puis, ils prennent Jonas et ils le jettent à la mer. Alors la colère de la mer se calme. </text:span>
           <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">16</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Ensuite, les hommes sont remplis d'un grand respect envers le </text:span>
@@ -516,7 +516,7 @@
         </text:p>
         <text:p text:style-name="ChapterNumber1">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">2</text:span>
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">1</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 1</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Le </text:span>
           <text:span text:style-name="NameOfGod_Paragraph_scrSection_scrBook_scrBody">Seigneur</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody"> envoie un grand poisson pour avaler Jonas. Jonas reste dans le ventre du poisson trois jours et trois nuits. </text:span>
@@ -548,7 +548,7 @@
           <text:span text:style-name="span_.x-kal_Line1_scrSection_scrBook_scrBody">et tu entends ma voix.</text:span>
         </text:p>
         <text:p text:style-name="Line1_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Line1_scrSection_scrBook_scrBody">4</text:span>
+          <text:span text:style-name="VerseNumber_Line1_scrSection_scrBook_scrBody"> 4</text:span>
           <text:span text:style-name="span_.x-kal_Line1_scrSection_scrBook_scrBody">Tu m'as jeté dans un trou profond</text:span>
         </text:p>
         <text:p text:style-name="Line1_scrSection_scrBook_scrBody">
@@ -564,7 +564,7 @@
           <text:span text:style-name="span_.x-kal_Line1_scrSection_scrBook_scrBody">tombent sur moi.</text:span>
         </text:p>
         <text:p text:style-name="Line1_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Line1_scrSection_scrBook_scrBody">5</text:span>
+          <text:span text:style-name="VerseNumber_Line1_scrSection_scrBook_scrBody"> 5</text:span>
           <text:span text:style-name="span_.x-kal_Line1_scrSection_scrBook_scrBody">Et moi, je dis:</text:span>
         </text:p>
         <text:p text:style-name="Line1_scrSection_scrBook_scrBody">
@@ -578,7 +578,7 @@
           <text:span text:style-name="Emphasis_Line1_scrSection_scrBook_scrBody">saint.’</text:span>
         </text:p>
         <text:p text:style-name="Line1_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Line1_scrSection_scrBook_scrBody">6</text:span>
+          <text:span text:style-name="VerseNumber_Line1_scrSection_scrBook_scrBody"> 6</text:span>
           <text:span text:style-name="span_.x-kal_Line1_scrSection_scrBook_scrBody">L'eau m'arrive jusqu'au cou.</text:span>
         </text:p>
         <text:p text:style-name="Line1_scrSection_scrBook_scrBody">
@@ -591,7 +591,7 @@
           <text:span text:style-name="span_.x-kal_Line1_scrSection_scrBook_scrBody">autour de ma tête.</text:span>
         </text:p>
         <text:p text:style-name="Line1_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Line1_scrSection_scrBook_scrBody">7</text:span>
+          <text:span text:style-name="VerseNumber_Line1_scrSection_scrBook_scrBody"> 7</text:span>
           <text:span text:style-name="span_.x-kal_Line1_scrSection_scrBook_scrBody">Je suis descendu</text:span>
         </text:p>
         <text:p text:style-name="Line1_scrSection_scrBook_scrBody">
@@ -615,7 +615,7 @@
           <text:span text:style-name="span_.x-kal_Line1_scrSection_scrBook_scrBody">tu me fais remonter vivant de ce trou.</text:span>
         </text:p>
         <text:p text:style-name="Line1_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Line1_scrSection_scrBook_scrBody">8</text:span>
+          <text:span text:style-name="VerseNumber_Line1_scrSection_scrBook_scrBody"> 8</text:span>
           <text:span text:style-name="NameOfGod_Line1_scrSection_scrBook_scrBody">Seigneur</text:span>
           <text:span text:style-name="span_.x-kal_Line1_scrSection_scrBook_scrBody"> mon Dieu,</text:span>
         </text:p>
@@ -634,14 +634,14 @@
           <text:span text:style-name="span_.x-kal_Line1_scrSection_scrBook_scrBody">dans ton temple saint.</text:span>
         </text:p>
         <text:p text:style-name="Line1_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Line1_scrSection_scrBook_scrBody">9</text:span>
+          <text:span text:style-name="VerseNumber_Line1_scrSection_scrBook_scrBody"> 9</text:span>
           <text:span text:style-name="span_.x-kal_Line1_scrSection_scrBook_scrBody">Ceux qui adorent les faux dieux</text:span>
         </text:p>
         <text:p text:style-name="Line1_scrSection_scrBook_scrBody">
           <text:span text:style-name="span_.x-kal_Line1_scrSection_scrBook_scrBody">n'ont aucune chance d'être sauvés.</text:span>
         </text:p>
         <text:p text:style-name="Line1_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Line1_scrSection_scrBook_scrBody">10</text:span>
+          <text:span text:style-name="VerseNumber_Line1_scrSection_scrBook_scrBody"> 10</text:span>
           <text:span text:style-name="span_.x-kal_Line1_scrSection_scrBook_scrBody">Mais moi, je chanterai ta louange,</text:span>
         </text:p>
         <text:p text:style-name="Line1_scrSection_scrBook_scrBody">
@@ -659,7 +659,7 @@
           <text:span text:style-name="span_.x-kal_Line1_scrSection_scrBook_scrBody">!”</text:span>
         </text:p>
         <text:p text:style-name="ParagraphContinuation_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_ParagraphContinuation_scrSection_scrBook_scrBody">11</text:span>
+          <text:span text:style-name="VerseNumber_ParagraphContinuation_scrSection_scrBook_scrBody"> 11</text:span>
           <text:span text:style-name="span_.x-kal_ParagraphContinuation_scrSection_scrBook_scrBody">Alors le </text:span>
           <text:span text:style-name="NameOfGod_ParagraphContinuation_scrSection_scrBook_scrBody">Seigneur</text:span>
           <text:span text:style-name="span_.x-kal_ParagraphContinuation_scrSection_scrBook_scrBody"> donne cet ordre au poisson: “Rejette Jonas sur la terre!” Et aussitôt le poisson obéit.</text:span>
@@ -669,7 +669,7 @@
         </text:p>
         <text:p text:style-name="ChapterNumber1">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">3</text:span>
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">1</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 1</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Une deuxième fois, le </text:span>
           <text:span text:style-name="NameOfGod_Paragraph_scrSection_scrBook_scrBody">Seigneur</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody"> dit à Jonas: </text:span>
@@ -707,7 +707,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Qui sait? Dieu changera peut-être d'avis. Il abandonnera sa colère contre nous, et nous ne mourrons pas.’ ”</text:span>
         </text:p>
         <text:p text:style-name="Paragraph_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">10</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 10</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Dieu voit leurs efforts pour abandonner leur mauvaise conduite. Il change d'avis. Il regrette le mal qu'il voulait leur faire, et il ne le fait pas.</text:span>
         </text:p>
         <text:p text:style-name="SectionHead_scrSection_scrBook_scrBody">
@@ -715,7 +715,7 @@
         </text:p>
         <text:p text:style-name="ChapterNumber1">
           <text:span text:style-name="ChapterNumber_Paragraph_scrSection_scrBook_scrBody">4</text:span>
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">1</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 1</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Jonas n'est pas content du tout, vraiment pas du tout. Il se met en colère. </text:span>
           <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">2</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Il fait cette prière au </text:span>
@@ -760,7 +760,7 @@
       </text:section>
       <text:section text:style-name="Sect_scrBook" text:name="Sect_scrBook">
         <text:p text:style-name="scrBook_scrBody">
-          <text:span text:style-name="scrBookName_scrBook_scrBody">***</text:span>
+          <text:span text:style-name="scrBookName_scrBook_scrBody">*** </text:span>
         </text:p>
         <text:p text:style-name="TitleMain_scrBook_scrBody">
           <text:span text:style-name="span_.x-kal_TitleMain_scrBook_scrBody">ÉPÎTRE À PHILÉMON</text:span>
@@ -775,7 +775,7 @@
           <text:span text:style-name="span_.x-kal_SectionHead_scrSection_scrBook_scrBody">Salutation</text:span>
         </text:p>
         <text:p text:style-name="Paragraph_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">1</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 1</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Paul, prisonnier de </text:span>
           <text:span text:style-name="NameOfGod_Paragraph_scrSection_scrBook_scrBody">Jésus Christ</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody"> et Timothée, le frère, à Philémon, notre bien-aimé collaborateur, </text:span>
@@ -796,7 +796,7 @@
           <text:span text:style-name="span_.x-kal_SectionHead_scrSection_scrBook_scrBody">L'amour et de la foi de Philemon</text:span>
         </text:p>
         <text:p text:style-name="Paragraph_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">4</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 4</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Je rends grâce à mon Dieu en faisant continuellement mention de toi dans mes prières, </text:span>
           <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">5</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">car j'entends parler de l'amour et de la foi que tu as envers le </text:span>
@@ -820,7 +820,7 @@
           <text:span text:style-name="span_.x-kal_SectionHead_scrSection_scrBook_scrBody">Une requête à Philémon</text:span>
         </text:p>
         <text:p text:style-name="Paragraph_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">8</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 8</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Aussi, bien que j'aie, en Christ, toute liberté de te prescrire ton devoir, </text:span>
           <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">9</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">c'est de préférence au nom de l'amour que je t'adresse une requête. Oui, moi Paul, qui suis un vieillard, moi qui suis maintenant prisonnier de Jésus Christ, </text:span>
@@ -840,7 +840,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">non plus comme un esclave mais comme bien mieux qu'un esclave: un frère bien-aimé. Il l'est tellement pour moi, combien plus le sera-t-il pour toi, et en tant qu'homme et en tant que chrétien.</text:span>
         </text:p>
         <text:p text:style-name="Paragraph_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">17</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 17</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Si donc tu me tiens pour ton frère en la foi, reçois-le comme si c'était moi. </text:span>
           <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">18</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Et s'il t'a fait quelque tort ou s'il a quelque dette envers toi, porte cela à mon compte. </text:span>
@@ -852,7 +852,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">C'est en me fiant à ton obéissance que je t'écris: je sais que tu feras plus encore que je ne dis.</text:span>
         </text:p>
         <text:p text:style-name="Paragraph_scrSection_scrBook_scrBody">
-          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">22</text:span>
+          <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 22</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">En même temps, prépare-moi un logement: j'espère en effet, grâce à vos prières, vous être rendu. </text:span>
           <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">23</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">Epaphras, mon compagnon de captivité en Jésus Christ, te salue, </text:span>
