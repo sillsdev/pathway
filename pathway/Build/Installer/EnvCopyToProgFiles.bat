@@ -169,7 +169,8 @@ goto regdone
 
 :regdone
 echo.
-echo. Copy process complete. Have an outstanding day!
+echo. Copy process completed at %TIME%. 
+echo. Have an outstanding day!
 echo.
 echo.==========================================================================
 echo.
