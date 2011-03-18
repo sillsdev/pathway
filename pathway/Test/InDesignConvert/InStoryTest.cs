@@ -1275,7 +1275,7 @@ namespace Test.InDesignConvert
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             preProcessor.GetTempFolderPath();
             preProcessor.ImagePreprocess();
-            preProcessor.ReplaceInvalidTagtoSpan();
+            preProcessor.ReplaceInvalidTagtoSpan("_AllComplexFormEntryBackRefs|LexEntryRef_PrimaryLexemes", "span");
             preProcessor.InsertHiddenChapterNumber();
             preProcessor.InsertHiddenVerseNumber();
             preProcessor.GetDefinitionLanguage();
@@ -2096,7 +2096,7 @@ namespace Test.InDesignConvert
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             preProcessor.GetTempFolderPath();
             preProcessor.ImagePreprocess();
-            preProcessor.ReplaceInvalidTagtoSpan();
+            preProcessor.ReplaceInvalidTagtoSpan("_AllComplexFormEntryBackRefs|LexEntryRef_PrimaryLexemes", "span");
             preProcessor.InsertHiddenChapterNumber();
             preProcessor.InsertHiddenVerseNumber();
             preProcessor.GetDefinitionLanguage();
@@ -2169,7 +2169,7 @@ namespace Test.InDesignConvert
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             preProcessor.GetTempFolderPath();
             preProcessor.ImagePreprocess();
-            preProcessor.ReplaceInvalidTagtoSpan();
+            preProcessor.ReplaceInvalidTagtoSpan("_AllComplexFormEntryBackRefs|LexEntryRef_PrimaryLexemes", "span");
             preProcessor.InsertHiddenChapterNumber();
             preProcessor.InsertHiddenVerseNumber();
             preProcessor.GetDefinitionLanguage();

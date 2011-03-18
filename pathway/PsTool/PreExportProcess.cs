@@ -272,24 +272,76 @@ namespace SIL.Tool
             return _xhtmlFileNameWithPath;
         }
 
-        public string ReplaceInvalidTagtoSpan()
+        public string ReplaceInvalidTagtoSpan(string pattern, string tagType)
         {
             string OutputFile = OpenFile();
-            const string pattern = "_AllComplexFormEntryBackRefs|LexEntryRef_PrimaryLexemes";
+            //string pattern = "_AllComplexFormEntryBackRefs|LexEntryRef_PrimaryLexemes";
             MatchCollection matchs = Regex.Matches(_fileContent.ToString(), pattern);
             foreach (Match match in matchs)
             {
                 string matchText = match.Value;
-                const string replaceText = "span";
-                //const string replaceText = "";
+                string replaceText = tagType;
                 _fileContent.Replace(matchText, replaceText);
-            }
-            var writer = new StreamWriter(OutputFile);
-            writer.Write(_fileContent);
-            writer.Close();
-            _xhtmlFileNameWithPath = OutputFile;
 
+                var writer = new StreamWriter(OutputFile);
+                writer.Write(_fileContent);
+                writer.Close();
+            }
+            _xhtmlFileNameWithPath = OutputFile;
             return _xhtmlFileNameWithPath;
+        }
+
+        /// <summary>
+        /// AnchorTage Processing for <a> Tag to point the href</a>
+        /// </summary>
+        /// <param name="sourceFile">The Xhtml File</param>
+        /// <param name="anchor">Arraylist value</param>
+        public void AnchorTagProcessing(string sourceFile, ref ArrayList anchor)
+        {
+            try
+            {
+                const string tag = "a";
+                var xDoc = new XmlDocument { XmlResolver = null };
+                xDoc.Load(sourceFile);
+                XmlNodeList nodeList = xDoc.GetElementsByTagName(tag);
+                if (nodeList.Count > 0)
+                {
+                    //FileOpen(sourceFile);
+                    nodeList = xDoc.GetElementsByTagName(tag);
+                    string fileContent = xDoc.OuterXml.ToLower();
+                    if (nodeList.Count > 0)
+                    {
+                        foreach (XmlNode item in nodeList)
+                        {
+                            var name = item.Attributes.GetNamedItem("href");
+                            if (name != null)
+                            {
+                                if (name.Value.IndexOf('#') >= 0)
+                                {
+                                    var href = name.Value.Replace("#", "");
+                                    if (href.Length > 0)
+                                    {
+                                        href = href.ToLower();
+                                        string hrefQuot = "\"" + href + "\"";
+                                        if (fileContent.IndexOf(hrefQuot) < 0)
+                                        {
+                                            name.Value = "";
+                                        }
+                                        else
+                                        {
+                                            anchor.Add(href.ToLower());
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    xDoc.Save(sourceFile);
+                }
+            }
+            catch
+            {
+            }
         }
 
         private string OpenFile()

@@ -100,7 +100,7 @@ namespace SIL.PublishingSolution
         readonly string _tempFile = Common.PathCombine(Path.GetTempPath(), "tempXHTMLFile.xhtml"); //TD-351
         readonly string _hardSpace = Common.ConvertUnicodeToString("\u00A0");
 
-        readonly ArrayList _anchor = new ArrayList();
+        ArrayList _anchor = new ArrayList();
         private XmlDocument _xmldoc;
         private bool _imageStart;
         private string _imageParent;
@@ -192,7 +192,10 @@ namespace SIL.PublishingSolution
 
         private void Preprocess(string xhtmlFile)
         {
-            AnchorTagProcessing(xhtmlFile);
+            PreExportProcess preProcessor = new PreExportProcess(_projInfo);
+            preProcessor.AnchorTagProcessing(xhtmlFile, ref _anchor);
+            preProcessor.ReplaceInvalidTagtoSpan("CmPicture-publishStemPile-ThumbnailPub", "div");
+
         }
 
 
@@ -450,58 +453,6 @@ namespace SIL.PublishingSolution
                 sourceFile = _tempFile;
             }
             return sourceFile;
-        }
-
-        /// <summary>
-        /// AnchorTage Processing for <a> Tag to point the href</a>
-        /// </summary>
-        /// <param name="sourceFile">The Xhtml File</param>
-        private void AnchorTagProcessing(string sourceFile)
-        {
-            try
-            {
-                const string tag = "a";
-                var xDoc = new XmlDocument { XmlResolver = null };
-                xDoc.Load(sourceFile);
-                XmlNodeList nodeList = xDoc.GetElementsByTagName(tag);
-                if (nodeList.Count > 0)
-                {
-                    //FileOpen(sourceFile);
-                    nodeList = xDoc.GetElementsByTagName(tag);
-                    string fileContent = xDoc.OuterXml.ToLower();
-                    if (nodeList.Count > 0)
-                    {
-                        foreach (XmlNode item in nodeList)
-                        {
-                            var name = item.Attributes.GetNamedItem("href");
-                            if (name != null)
-                            {
-                                if (name.Value.IndexOf('#') >= 0)
-                                {
-                                    var href = name.Value.Replace("#", "");
-                                    if (href.Length > 0)
-                                    {
-                                        href = href.ToLower();
-                                        string hrefQuot = "\"" + href + "\"";
-                                        if (fileContent.IndexOf(hrefQuot) < 0)
-                                        {
-                                            name.Value = "";
-                                        }
-                                        else
-                                        {
-                                            _anchor.Add(href.ToLower());
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    xDoc.Save(sourceFile);
-                }
-            }
-            catch
-            {
-            }
         }
 
         /// <summary>
