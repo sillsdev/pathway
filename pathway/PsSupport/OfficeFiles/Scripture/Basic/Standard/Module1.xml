@@ -29,38 +29,6 @@ Dim oSubFrame As Object
 Dim ProgressValue As Integer
 Dim PageCount as Integer
 
-
-Function GetBookCodeName2()
-dim myList, count
-&apos;ParaString = &quot;Peta&quot;
-&apos;ParaString = &quot;1 Peta&quot;
-&apos;ParaString = &quot;Peter Pet&quot;
-ParaString = &quot;1 Peter 1 Pet&quot;
-	If Len(ParaString) &gt; 0 Then
-		myList = split(Trim(ParaString),&quot; &quot;)
-		count = UBound(myList) + 1
-		If count = 1 Then
-			GetBookCodeName = ParaString
-		ElseIf count = 2 Then
-		   If(val(mid(trim(ParaString),1,1)) = 0) Then
-				If Mid(ReferenceFormat,1,4) = &quot;Gen &quot; Then
-					GetBookCodeName = myList(1)
-				Else
-					GetBookCodeName = myList(0)
-				End If	
-		   Else
-		   		GetBookCodeName = ParaString
-		   End If
-		ElseIf  count = 4 Then
-			If Mid(ReferenceFormat,1,4) = &quot;Gen &quot; Then
-				GetBookCodeName = myList(2) &amp; &quot; &quot; &amp; myList(3)
-			Else
-				GetBookCodeName = myList(0) &amp; &quot; &quot; &amp; myList(1)
-			End If		
-		End If
-	End If
-End Function
-
 &apos;Set Picture Position based on Reference Location
 Sub PicturePosition
 dim frameCount, lclNo 
