@@ -95,7 +95,6 @@ namespace SIL.PublishingSolution
         string _parentClass = string.Empty;
         string _parentLang = string.Empty;
         string _projectType = string.Empty;
-        private bool _forcedPara;
         readonly Dictionary<string, string> _counterVolantryReset = new Dictionary<string, string>();
         readonly string _tempFile = Common.PathCombine(Path.GetTempPath(), "tempXHTMLFile.xhtml"); //TD-351
         readonly string _hardSpace = Common.ConvertUnicodeToString("\u00A0");

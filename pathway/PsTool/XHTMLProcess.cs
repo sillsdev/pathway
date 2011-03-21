@@ -113,7 +113,7 @@ namespace SIL.PublishingSolution
         protected string _imageSrcClass;
         protected string _imageAltText;
         protected bool _isAutoWidthforCaption;
-
+        protected bool _forcedPara;
         #endregion
 
         protected string _paragraphName;
@@ -487,6 +487,13 @@ namespace SIL.PublishingSolution
                 //    _writer.WriteEndElement();
                 //}
 
+            }
+            if(_forcedPara)
+            {
+                _writer.WriteEndElement();
+                _isNewParagraph = true;
+                _isParagraphClosed = true;
+                _forcedPara = false;
             }
         }
 
