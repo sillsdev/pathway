@@ -648,7 +648,10 @@ namespace SIL.Tool
                     {
                         foreach (XmlNode chapterNode in item)
                         {
-                            if (chapterNode.Attributes == null) return;
+                            if (chapterNode.Attributes == null)
+                            {
+                                continue;
+                            }
                             var chapter = chapterNode.Attributes.GetNamedItem("class");
                             if (chapter != null && chapter.Value.ToLower() == "chapter_number")
                             {
