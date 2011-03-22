@@ -970,7 +970,7 @@ namespace SIL.Tool
             var contentWriter = new StringBuilder();
             contentWriter.Append(Regex.Replace(content.ToString(), searchText, replaceText));
             var writer = new StreamWriter(filePath);
-            writer.Write(content);
+            writer.Write(contentWriter);
             writer.Close();
         }
         #endregion
