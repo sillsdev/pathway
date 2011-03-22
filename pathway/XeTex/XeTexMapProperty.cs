@@ -41,9 +41,9 @@ namespace SIL.PublishingSolution
                     //case "text-decoration":
                     //    TextDecoration(property.Value);
                     //    break;
-                    //case "font-variant":
-                    //    FontVariant(property.Value);
-                    //    break;
+                    case "font-variant":
+                        FontVariant(property.Value);
+                        break;
                     //case "text-indent":
                     //    TextIndent(property.Value);
                     //    break;
@@ -544,7 +544,16 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
+            if (propertyValue == "0")
+            {
+                propertyValue = "\noindent";
+            }
+            else
+            {
+                propertyValue = "\\parindent=" + propertyValue + "pt";
+            }
             _IDProperty["FirstLineIndent"] = propertyValue;
+            _inlineStyle.Add(propertyValue);
         }
         public void Color(string propertyValue)
         {
@@ -601,13 +610,14 @@ namespace SIL.PublishingSolution
 
             if (propertyValue == "normal")
             {
-                propertyValue = "Normal";
+                propertyValue = "";
             }
             else if (propertyValue == "small-caps")
             {
-                propertyValue = "SmallCaps";
+                propertyValue = ":+c2sc,+smcp";
             }
             _IDProperty["Capitalization"] = propertyValue;
+            _fontOption.Add(propertyValue);
         }
         public void TextDecoration(string propertyValue)
         {
