@@ -85,10 +85,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdParty\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="GoBibleConvert, Version=0.6.18.758, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\GoBibleConvert\bin\Debug\GoBibleConvert.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -158,6 +154,10 @@
     <ProjectReference Include="..\CssDialog\CssDialog.csproj">
       <Project>{1A58ECC5-75FE-4FE2-B133-8605B382B7C0}</Project>
       <Name>CssDialog</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GoBibleConvert\GoBibleConvert.csproj">
+      <Project>{C7A3F4E5-1F86-4D22-AB4F-5BEA0D923DDD}</Project>
+      <Name>GoBibleConvert</Name>
     </ProjectReference>
     <ProjectReference Include="..\InDesignConvert\InDesignConvert.csproj">
       <Project>{8D0D307D-3785-4561-A923-FF3DDF6C2F14}</Project>
