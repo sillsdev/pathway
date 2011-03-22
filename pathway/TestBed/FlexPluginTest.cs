@@ -600,5 +600,30 @@ namespace TestBed
             exportXeTex.CallXeTex(txtInputPath.Text,true);
 
         }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(txtInputPath.Text))
+            {
+                MessageBox.Show("Please enter the valid XHTML path");
+                return;
+            }
+
+            //if (!File.Exists(txtCSSInput.Text))
+            //{
+            //    MessageBox.Show("Please enter the valid CSS path");
+            //    return;
+            //}
+            ExportGoBible exportGoBible = new ExportGoBible();
+            PublicationInformation projInfo = new PublicationInformation();
+
+            projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
+            projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
+            projInfo.DefaultCssFileWithPath = txtCSSInput.Text;
+
+            projInfo.ProjectFileWithPath = projInfo.ProjectPath;
+            projInfo.DictionaryPath = projInfo.ProjectPath;
+            exportGoBible.Export(projInfo);
+        }
     }
 }

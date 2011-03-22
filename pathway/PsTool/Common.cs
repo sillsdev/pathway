@@ -964,9 +964,11 @@ namespace SIL.Tool
         {
             if (!File.Exists(filePath)) return;
             var reader = new StreamReader(filePath);
-            string content = reader.ReadToEnd();
+            var content = new StringBuilder();
+            content.Append(reader.ReadToEnd());
             reader.Close();
-            content = Regex.Replace(content, searchText, replaceText);
+            var contentWriter = new StringBuilder();
+            contentWriter.Append(Regex.Replace(content.ToString(), searchText, replaceText));
             var writer = new StreamWriter(filePath);
             writer.Write(content);
             writer.Close();
