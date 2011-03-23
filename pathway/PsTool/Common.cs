@@ -26,9 +26,8 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Xml;
-using SIL.PublishingSolution;
+using Microsoft.Win32;
 using SIL.Tool.Localization;
-using Test;
 
 #endregion Using
 
@@ -952,6 +951,66 @@ namespace SIL.Tool
             return exportType;
         }
         #endregion
+
+        /// <summary>
+        /// Returns whether the given executable is installed on the system. For Windows, this is based on the
+        /// items in the Installer / Uninstall areas of the registry - if the program was just copied over, it
+        /// will not show up as actually installed on your system.
+        /// </summary>
+        /// <param name="ExecutableName">Display name (without extension) of the program</param>
+        /// <returns></returns>
+        public static bool IsProgramInstalled(string ExecutableName)
+        {
+            // first check - HKCR\Installer\Products
+            const string installRegistryKey = @"Installer\Products";
+            using (var key = Registry.ClassesRoot.OpenSubKey(installRegistryKey))
+            {
+                foreach (string subkeyName in key.GetSubKeyNames())
+                {
+                    try
+                    {
+                        using (RegistryKey subkey = key.OpenSubKey(subkeyName))
+                        {
+                            if (subkey.GetValue("ProductName").ToString().ToLower().IndexOf(ExecutableName.ToLower()) != -1)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        // If there was a problem getting the subkey, continue to the next key
+                        continue;
+                    }
+                }
+            }
+
+            // second check - HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall
+            const string uninstallRegistryKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
+            using (var key = Registry.LocalMachine.OpenSubKey(uninstallRegistryKey))
+            {
+                foreach (string subkeyName in key.GetSubKeyNames())
+                {
+                    try
+                    {
+                        using (RegistryKey subkey = key.OpenSubKey(subkeyName))
+                        {
+                            if (subkey.GetValue("DisplayName").ToString().ToLower().Equals(ExecutableName.ToLower()))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        // If there was a problem getting the subkey, continue to the next key
+                        continue;
+                    }
+                }
+            }
+
+            return false;
+        }
 
         #region ReplaceInFile(string filePath, string searchText, string replaceText)
         /// <summary>

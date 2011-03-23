@@ -708,12 +708,13 @@ namespace SIL.Tool
                 }
             }
 
+            // Fill in empty <title> elements if needed
             string titleTag = "title";
             XmlNodeList titleNodeList = xmldoc.GetElementsByTagName(titleTag);
             if (titleNodeList.Count > 0)
             {
                 XmlNode item = titleNodeList[0];
-                if (item.Value == null)
+                if (item.InnerText.Length == 0)
                 {
                     XmlNode parent = item.ParentNode;
                     XmlNode title = xmldoc.CreateNode("element", "title", null);

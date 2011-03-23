@@ -39,7 +39,6 @@ namespace Test.PsTool
         ///A test for ImagePreprocess
         ///</summary>
         [Test]
-        [Ignore("Erik - attack this in the morning; whitspace pops up over here from ParagraphVerserSetUp")]
         public void ImagePreprocessTest()
         {
             string filename = "ImagePreProcess.xhtml";
@@ -57,7 +56,6 @@ namespace Test.PsTool
         ///A test for ParagraphVerserSetUp
         ///</summary>
         [Test]
-        [Ignore("Erik - attack this in the morning; whitspace pops up over here from ParagraphVerserSetUp")]
         public void ParagraphVerserSetUpTest()
         {
             XmlDocument xmldoc = new XmlDocument { XmlResolver = null };
