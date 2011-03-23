@@ -64,6 +64,8 @@ namespace Test.Xetex
 
         #region Public Functions
 
+        #region Nunits
+
         /// <summary>
         /// Multi Parent Test - .subsenses > .sense > .xsensenumber { font-size:10pt;}
         /// Parent comes as multiple times
@@ -148,6 +150,20 @@ namespace Test.Xetex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void MarginTopTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "MarginTop";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+        
+        #endregion
+
+        #region Private Functions
+
         private void FileCompare(string file)
         {
             string texOutput = FileOutput(file + ".tex");
@@ -187,7 +203,6 @@ namespace Test.Xetex
 
         }
 
-        #region Private Functions
         private string FileInput(string fileName)
         {
             return Common.PathCombine(_inputPath, fileName);
@@ -211,8 +226,6 @@ namespace Test.Xetex
         }
 
         #endregion PrivateFunctions
-
-
 
         #endregion
     }
