@@ -7,7 +7,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_2">
         <Content>Obhukangati</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph1_1">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/ChapterNumber1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ChapterNumber_1">
+        <Content>1</Content>
+      </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_1">
         <Content>1</Content>
       </CharacterStyleRange>
@@ -1125,11 +1128,14 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_23">
         <Content>(Mat 1:18-25)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_7">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/ChapterNumber1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ChapterNumber_2">
+        <Content>2</Content>
+      </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_18">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_13">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber1_2">
         <Content>1</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_2">
@@ -1162,7 +1168,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_25">
         <Content>Ego, abhantu bhonsego bhakagya kira muntu mu-mugi gwa oruganda rwabho.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_8">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_7">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_20">
         <Content>2</Content>
       </CharacterStyleRange>
@@ -1215,7 +1221,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_27">
         <Content>Abharisya Bhararwirwa na Maraika</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_9">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_8">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
         <Content>2</Content>
       </CharacterStyleRange>
@@ -1276,7 +1282,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_28">
         <Content>Ekimanyiriryo kya okorokya gayo niga, mwakanyoore omwana ekijaare araribhwe mwitubha rya okurisirya gintugo, akundikiribhwe emyenda gya ekyana."</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_10">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_9">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_24">
         <Content>2</Content>
       </CharacterStyleRange>
@@ -1306,7 +1312,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_31">
         <Content>Na mu-kyaro, omurembe gubhe ku-bhantu bhanu arabhekirirya."</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_11">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_10">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_26">
         <Content>2</Content>
       </CharacterStyleRange>
@@ -1355,7 +1361,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_32">
         <Content>Bhonsego bhanu bhegwa ganu bhakeeribhwa na abharisya, bhakaruguura bhukong'u.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_10">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_9">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_24">
         <Content>2</Content>
       </CharacterStyleRange>
@@ -1380,7 +1386,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_29">
         <Content>Abharisya bhayo bhakahunjuka, enu bharamukumya Waryubha, kugonsego ganu bhegwa na okugarora. Kyego bhurya bhaakeribhwa na maraika, nigo gonsego gakoreka.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_10">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_9">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_24">
         <Content>2</Content>
       </CharacterStyleRange>
@@ -1397,7 +1403,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_33">
         <Content>Yesu Aratuurwa Mbere ya Waryubha</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_12">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_11">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_29">
         <Content>2</Content>
       </CharacterStyleRange>
@@ -1434,7 +1440,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_34">
         <Content>Hamwi na gayo, bhendanga bhamurusirye ekimwenso kyego yang'orwa ku-maragiriryo ga Omukama, ega, "Bharenderwa bharusye bhiguti bhibhiri au amaana gabhiri ga ekiguti".</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_13">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_12">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_31">
         <Content>2</Content>
       </CharacterStyleRange>
@@ -1551,7 +1557,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_41">
         <Content>Hata abhantu bhaaho bha Israeiri bhonsego bharitogonibhwa."</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_14">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_13">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_36">
         <Content>2</Content>
       </CharacterStyleRange>
@@ -1588,7 +1594,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_42">
         <Content>Abhantu bhayo, amang'ana ganu gebhisanga mumyoyo gyabho, garitubhuka ku-bhurabhu. Uuwe wonse oriigwa obhururu bhukong'u oribha kyaunu obhitirwe na omuhyu omoogi."</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_13">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_12">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_31">
         <Content>2</Content>
       </CharacterStyleRange>
@@ -1625,7 +1631,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_35">
         <Content>Ebhaga riyo riyo Ana akeyorokya, akaamba kumukumya Waryubha, akararika amang'ana ga omwana uyo kubhantu bhonsego bhanu bhaganyiriranga Waryubha atuurye Yerusaremu.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_13">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_12">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_31">
         <Content>2</Content>
       </CharacterStyleRange>
@@ -1654,7 +1660,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_33">
         <Content>Omwana Yesu Mu-Risyengerero rya Waryubha</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_12">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_11">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_29">
         <Content>2</Content>
       </CharacterStyleRange>
@@ -1715,7 +1721,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_34">
         <Content>Hanu ya bhabhura, bhakahunjuka Yerusaremu, naho bhamutune eyo.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_13">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_12">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_31">
         <Content>2</Content>
       </CharacterStyleRange>
@@ -1740,7 +1746,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_35">
         <Content>Abhantu bhonsego bhanu bheegwa kyego yaringa aragamba. Bhakaruguura bhukong'u eguru ya obhumanyi bhwaye, na kyego yakyukyanga.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_13">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_12">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_31">
         <Content>2</Content>
       </CharacterStyleRange>
@@ -1777,7 +1783,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_35">
         <Content>Naho erikyukya riyo, abhebhuri bhaye bhatarimanya.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_13">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_12">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_31">
         <Content>2</Content>
       </CharacterStyleRange>
@@ -1810,11 +1816,14 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_43">
         <Content>(Mat 26:1-5, 14-16; Mar 14:1-2, 10-11; Yoh 11:45-53)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_15">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/ChapterNumber2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ChapterNumber_3">
+        <Content>22</Content>
+      </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_38">
         <Content>22</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_25">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber1_3">
         <Content>1</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_3">
@@ -1835,7 +1844,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_45">
         <Content>Abhakuru bha abhasyengeri hamwi na abhehigirya bha amaragiriryo, bhaaringa bharatuna enjira ya okwita Yesu. Nawe, bhobhohanga abhantu.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_16">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_14">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_40">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -1892,7 +1901,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_48">
         <Content>(Mat 26:17-30; Mar 14:12-26; Yoh 13:21-30; 1 Kor 11:23-25)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_17">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_15">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_42">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -1929,7 +1938,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_49">
         <Content>Bhakamubhuurya, "Orenda tusemeeryeha?"</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_16">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_44">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -1966,7 +1975,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_50">
         <Content>Wonse yakabhorokye ekyumba ekinene mu-nyumba ginu gigegeni, mwakanyore kikorerwe amagodo, museemerye muyo."</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_16">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_44">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -1979,7 +1988,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_50">
         <Content>Bhakagya bhakanyoora gonsego kyego Yesu abhakeererye. Bhakaamba okuseemya ebhyakurya bhya Epasaka.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_16">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_44">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -1992,7 +2001,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_50">
         <Content>Eribhaga rya okurya hanu ryahika, Yesu akekara kurya ebhyakurya hamwi na abhatumwa ht</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_16">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_51">
         <Content> bhaye. </Content>
       </CharacterStyleRange>
@@ -2020,7 +2029,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_50">
         <Content>Kwakubha ndabhakeerya ega, ntakyara kweki ebhyakurya bhya Epasaka mpaka gonsego ganu gaseemibhwa ku-bhukama bhwa Waryubha, gakoreke."</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_16">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_44">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2045,7 +2054,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_50">
         <Content>Kwakubha ndabhakeerya ega, kwambira bhoono, ntakyanywa kweki edivai, mpaka obhukama bhwa Waryubha hanubhuriija."</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_16">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_44">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2058,7 +2067,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_50">
         <Content>Akamara akagega omkate, akakumya Waryubha, akagubhutura, akabhahana abhatumwa bhaye akabhakeerya, "Gunu ngo omubhiri gwani gunu gurimwenswa kwa ajiri yenyu, mukore ego kwa okunhituka oni!"</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_16">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_44">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2071,7 +2080,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_50">
         <Content>Egoego hanu bhamara okurya ebhyakurya, akagega ekikombe akagamba, "Ekikombe kinu, nkya emuma enhya inu erihwa kwa okwitika amanyinga gani kwa ajiri yenyu.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_16">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_44">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2112,7 +2121,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_52">
         <Content>Ginhaka eguru ya obhukuru</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_19">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_17">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_46">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2137,7 +2146,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_53">
         <Content>Egihaka giyo gikakora Yesu abhakeerye ega, "Abhakama bha bhanu bhatamanyiri Waryubha, bharatunga abhantu bhabho kwa eginguru. Na abhakuru bhabho bhara bhandirirya abhantu bhabho na okwikumya ega, mbhaseren'ya.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_20">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_48">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2162,7 +2171,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_54">
         <Content>Mbe! Niwi omkuru? Unu arekara kumeja kurya ebhyakurya, kusi unu arareta ebhyakurya? Ndamanya ng'unu arekara kurya ebhyakurya. Nawe oni ndihanu gati yenyu kya omukori wa emirimu.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_20">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_48">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2207,7 +2216,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_55">
         <Content>(Mat 26:31-35; Mar 14:27-31; Yoh 13:36-38)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_21">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_19">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_50">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2244,7 +2253,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_56">
         <Content>Simoni akamukyukya ega, "Omukama wetu, oni ndingi hamwi nauuwe, na ndatura kugya kubhohwa mwigereja, hata kwitwa hamwi na uuwe!"</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_20">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_48">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2261,7 +2270,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_52">
         <Content>Ganu Ganyamwa Eguru ya Yesu Garakorwa Bhoono</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_19">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_17">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_46">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2274,7 +2283,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_53">
         <Content>Ebhagarindi Yesu akabhuurya abhehigira bhaye, "hanu nabhatuma bira ensakwa ya egihera wara ensaho na bira bhiratu mwasuhirwa kintu kiyo kyonsego?" Bhakakyukya, "tutasuhirwa".</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_20">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_48">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2299,7 +2308,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_54">
         <Content>kwakubha ndabhakeerya ega, amang'ana ganu ga amanyamo amarabhu ga Waryubha, yabharwa hamwi na abhasarya, garenderwa gakoreke. Ganu ganyamwa eguru yani, gahikire obhuteero bhwago.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_20">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_48">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2320,7 +2329,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_55">
         <Content>(Mat 26:36-46; Mar 14:32-42)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_21">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_19">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_50">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2345,7 +2354,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_56">
         <Content>Hanu yahika mu-nkuku akabhakeerya ega, "Muusabhe Waryubha naho mutaaja kusoha mumasakyo".</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_20">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_48">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2382,7 +2391,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_54">
         <Content>Rumwiigo, maraika kurwa murwire akamurwira akamwijurya ginguru.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_20">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_48">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2395,7 +2404,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_54">
         <Content>Wonse kwabhurya yaringa na obhururu bhwaru, akagendererye kusabha Waryubha. Ebhigeri bhyaye bhikabha bhiratonya hansi kya amatonyekera ga amanyinga.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_20">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_48">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2428,7 +2437,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_55">
         <Content>(Mat 26:47-56; Mar 14:43-50; Yoh 18:3-11)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_21">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_19">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_50">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2441,7 +2450,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_56">
         <Content>Mbe, hanu yaringa akyagamba gayo, akajirwa na abhantu bhaaru. Na unu yabhirikirwanga Yuda, oumwi wa abhehigira bhaye ekumi na bhabhiri, aringi embere ya abhantu bhayo akamusuntarira akamuhumbhata.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_20">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_48">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2466,7 +2475,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_54">
         <Content>Abhehigira bhaye hanu bhaarora ganu garinga hang'i kukoreka, bhakamubhuurya, "Omukama wetu tiga, tubhageje na egimpanga?"</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_20">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_48">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2491,7 +2500,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_54">
         <Content>Yesu akagamba tiga eng'ana inu eresa!" Akakun'ya okutwi kwa omuntu uyo, akakuhwen'ya.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_20">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_48">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2516,7 +2525,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_54">
         <Content>ndegwa kirasiku twagosoryanga hamwi mu-nyumba ya Waryubha, mutangwata! Nawe bhoono, eribhaga ryenyu ndyorinu, erya obhutungi bhwa abhasarya".</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_20">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_48">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2537,7 +2546,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_55">
         <Content>(Mat 26:57-58; Mar 14:53-54, 66-72; Yoh 18:12-18, 25-27)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_21">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_19">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_50">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2574,7 +2583,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_56">
         <Content>Nawe Petero akanga, "Uuwe! Omukariunu! Oni ntamumanyiri omuntu uyo".</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_20">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_48">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2587,7 +2596,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_54">
         <Content>Hakego omuntu oundi akarora Petero, akamubhuurya,"Uuwe wonse ng'umwi wabho. "Nawe Petero akakyukya, "Mura uuwe! Oni ntamumanyiri we!"</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_20">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_48">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2612,7 +2621,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_54">
         <Content>Nawe Petero akakyukya, "Mura uuwe! gayo oragambha,oni ntagamanyiri!"</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_20">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_57">
         <Content>Hanu yaringa akyagamba gayo, ensarigoko ekaragura. </Content>
       </CharacterStyleRange>
@@ -2628,7 +2637,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_54">
         <Content>Omukama akamwikyukirya, akamumahirira Petero mumeso. Rumwigo, Petero akahituka amang'ana ganu Omukama yaringa amariri kumukeerya ega, rero, ensarigoko etararagura rero, wakanyange mara kasatu."</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_20">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_48">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2649,7 +2658,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_55">
         <Content>(Mat 26:67-68; Mar 14:65)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_21">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_19">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_50">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2694,7 +2703,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_55">
         <Content>(Mat 26:59-66; Mar 14:55-64; Yoh 18:19-24)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_21">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_19">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_50">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2743,7 +2752,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_56">
         <Content>Nawe kurwa bhoono, Omwana wa Adamu aribha yekeri rubhaara rwa okuryo rwa Waryubha owa obhuturo.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_20">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_48">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2756,7 +2765,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_54">
         <Content>Bhonsego, bhakamubhuurya Yesu kweki, "Nko okugamba uuwe mwana wa Waryubha?" Yesu akakyukya, "Ndegwa abhene mutubhwiri ega, oni ng'o!"</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_20">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_18">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_48">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -2777,11 +2786,14 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_55">
         <Content>(Mat 27:1-2, 11-14; Mar 15:1-5; Yoh 18:28-38)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_21">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/ChapterNumber2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ChapterNumber_4">
+        <Content>23</Content>
+      </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_52">
         <Content>23</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_32">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber1_4">
         <Content>1</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_4">
@@ -2802,7 +2814,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_59">
         <Content>Bhakaamba kumujongera kwa bhururu bharagamba ega, "Omuntu unu tumunyoreri arasarya ekyaro kyetu kwa kubha arakan'ya abhantu, bhatatobha erigoti ku Kaisari. Na aragamba ega, weki ng'o Kristo Omukama."</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_22">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_20">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_54">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -2815,11 +2827,11 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_60">
         <Content>Nho Pirato akamubhuurya ega, "Uuwe Mukama wa abhayahudi?"</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_23">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_21">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_61">
         <Content>Yesu woonse akagamba, "Ndegwa uuwe omwene otubhwiri!"</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_23">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_21">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_55">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -2832,7 +2844,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_62">
         <Content>Pirato akabhakeerya abhakuru bha abhasyengeri, hamwi na omuganda gwa abhantu. "Omuntu unu atana bhusarya bhuyobhonsego."</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_23">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_21">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_55">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -2845,7 +2857,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_62">
         <Content>Nawe abhantu bhayo bhakakomererya ega! "Arasigirirya abhantu kwa obhwihigirya bhwaye ku-kyaro kyonsego kya bhuyahudi yambira Gariraya, na bhoono yahikiri Yudea."</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_23">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_21">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_55">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -2874,7 +2886,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_63">
         <Content>Yesu arahirwa ku Herode.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_24">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_22">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_57">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -2911,7 +2923,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_64">
         <Content>Abhakuru bha abhasyengeri na abhehigirya bha amaragiriryo bhakabha bha okwamba kumujongera.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_25">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_23">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_59">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -2944,7 +2956,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_67">
         <Content>(Mat 27:15-26; Mar 15:6-15; Yoh 18:38--19:16)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_26">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_24">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_61">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -2993,7 +3005,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_68">
         <Content>Kwego, ndamutema ebhibhoko, ndamara ndamuhatira."</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_25">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_63">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -3006,7 +3018,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_69">
         <Content>Pirato yaringa arenderwa okuhatira mubhohwa umwi kira hanu enyangi ya Epasaka yahikanga.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_25">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_63">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -3031,7 +3043,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_69">
         <Content>Baraba uyo, yaringa abhoherwe mwigereja kwa kubha yaringa akoreri obhusarya mu-mugi, na yaringa yetiri omuntu.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_25">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_63">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -3056,7 +3068,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_69">
         <Content>Nawe bheki bhakagendererya kutema ekituri, "mubhambe ku-msarabha! mubhambe ku-msarabha!"</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_25">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_63">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -3069,7 +3081,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_69">
         <Content>Pirato akabhakeerya kweki orwa kasatu! "Akoreri bhubhibhiki? Ndegwa ntakurora bhusarya bhuyo bhonsego ku-mwene bhunu bhurakore yetwe. Kwego ndamutema ebhibhoko mare muhatire."</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_25">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_63">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -3082,7 +3094,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_69">
         <Content>Nawe abhantu bhayo bhakagendererya okutema ekituri bhukong'u ega, Yesu abhambwe kumsarabha. Kubhumaririryo ekituri kyabho kikahiga.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_25">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_63">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -3115,7 +3127,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_67">
         <Content>(Mat 27:32-44; Mar 15:21-32; Yoh 19:17-27)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_26">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_24">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_61">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -3128,7 +3140,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_68">
         <Content>Hanu bharinga bharamuhira Yesu okumubhamba ku-musarabha, bhakasikana na omuntu umwi, eriina ryaaye Simoni wa omugi gwa Kurene, ararwa mu-bhijiji. Mbe, bhakamugwata, bhakamwitikya omusarabha gunu Yesu yaringa yetiikiri, akabha aragenda enyuma yaye.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_25">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_63">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -3177,7 +3189,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_69">
         <Content>Eribhaga riyo abhantu bharikeerya eginkuku, "mutugwire na ebhikuku mtukundikirirye".</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_25">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_63">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -3190,7 +3202,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_69">
         <Content>Kwa ensonga yega, kama gayo garakoreka ku-muntu unuatasarirye kintu eribha egaki kumusarya?"</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_25">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_63">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -3215,7 +3227,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_69">
         <Content>Hanu bhahika ahasi hanu harabhirikirwa Ekihuri kya Omutwe, nho bhakamubhamba ku-musarabha. Bhakabhamba na abhasarya bhabhiri bhayo, umwi rubhaara rwaye rwa okuryo na oundi rubhaara rwaye rwa okumosi.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_25">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_63">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -3228,7 +3240,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_69">
         <Content>Yesu akagamba, "Tata! Obhabhire! Kwakubha bhatamanyiri kinu bharakora.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_25">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_70">
         <Content> Abhasikare bhayo bhaamara bhakagabhana egingibho gyaye kwa okugitemera ekura. </Content>
       </CharacterStyleRange>
@@ -3244,11 +3256,11 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_69">
         <Content>Abhantu bhaaringa bhemiriri hayo bharamahirira ganu garakoreka.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_25">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_70">
         <Content>Abhakuru bha Abhayahudi bhakamujera bharagamba, "Ndegwa yatuuryanga abhandi! Mbe, bhoono yetuurye omwene, Kama ng'o Kristo amuchwagurwa wa Waryubha.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_25">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_63">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -3273,7 +3285,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_69">
         <Content>Bhakamukeerya ega, "kama heene uuwe mu-kama wa Abhayahudi, ituurye omwene turore!"</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_25">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_63">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -3286,7 +3298,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_69">
         <Content>Na eguru ya omusarabha gunu yaringa abhambirwe-ko, gakaturwa-ko amanyamo gega, , "Unu ng'o Omukama wa Abhayahudi."</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_25">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_63">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -3299,7 +3311,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_69">
         <Content>Oumwi wa abhasarya a bhabhiri bhanu bhaaringa bhabhambirwe kumusarabha hamwi, akatuka Yesu ega, " Mbhuheene ega, uuwe nuwe Kristo? Mbe! Ituurya omwene! Otuturye na bhetu bhonse!"</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_25">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_63">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -3324,7 +3336,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_69">
         <Content>Nawe bheetu tujibhiibhwe kwa obhuhene, ganu ngo endihi ya ganu twakora. Nawe omuntu unu, atakora kiyo kyonsego kibhibhi".</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_25">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_63">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -3357,7 +3369,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_67">
         <Content>(Mat 27:45-56; Mar 15:33-41; Yoh 19:28-30)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_26">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_24">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_61">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -3382,7 +3394,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_68">
         <Content>Eshuka inu yaringa eturungajiibhwe mwisyengerero rya Waryubha, ekabharuka mabhaara gabhiri.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_25">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_63">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -3395,7 +3407,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_69">
         <Content>Yesu akakuura kwa eriisi enene, "Tata! Obhuhoru bhwani ndbhutuura mu-mabhoko gaho". Hanu yamara okugamba gayo, gukawamo.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_25">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_63">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -3408,7 +3420,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_69">
         <Content>Omukuru wa abhasikare hanu yarora ganu gakorekeri, akamukumya Waryubha akamara akagamba ega, "Mbhuheene ega, omuntu unu yaringa wa heene!"</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_25">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_63">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -3441,7 +3453,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_67">
         <Content>(Mat 27:57-61; Mar 15:42-47; Yoh 19:38-42)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_26">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_24">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_61">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -3466,7 +3478,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_68">
         <Content>Yaringa muntu wa heene, na yaganyiriranga obhukama bhwa Waryubha bhuje. Hata kama yaringa umwi wa eribharaja erikuru rya abhayahudi, atekiriran'ya na bharikyaye ku-ng'ana iyo ya okwita Yesu.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_25">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_63">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -3503,7 +3515,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_69">
         <Content>Orusiku ruyo ryaringa ijumaa na ndwo rwaringa orusiku rwa okuseemya kwa esabato, na esabato yaringa yambhiri.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_25">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_63">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -3536,11 +3548,14 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_67">
         <Content>(Mat 28:1-10; Mar 16:1-8; Yoh 20:1-10)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_26">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/ChapterNumber2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ChapterNumber_5">
+        <Content>24</Content>
+      </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_65">
         <Content>24</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_39">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber1_5">
         <Content>1</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_5">
@@ -3573,7 +3588,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_72">
         <Content>bhakasoha munsi, nawe bhatagurora omubhiri gwa Omukama Yesu.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_28">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_26">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_67">
         <Content>24</Content>
       </CharacterStyleRange>
@@ -3598,7 +3613,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_73">
         <Content>Abhakari bhayo bhakagwatwaa na enkubhi, bhakhiin'ya obhusu bhwabho hansi.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_29">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_74">
         <Content>Nho abhantu bhayo bhakabhakeerya ega, "Kwaki muratuna omuhoru gati ya abhaku? </Content>
       </CharacterStyleRange>
@@ -3626,7 +3641,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_75">
         <Content>ega, yenderwanga omwana wa Adamu atuurwe mu-mabhoko ga abhasarya, abhambwe kumusarabha na orusiku rwa kasatu ahyuke!"</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_29">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_70">
         <Content>24</Content>
       </CharacterStyleRange>
@@ -3663,7 +3678,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_75">
         <Content>Bhanu bhaagamba amang'ana gayo ku-bhatumwa bha Yesu, mbha Mariamu Magidarena, Yoana na Mariamu ng'ina wabho Yakobo, hamwi na abhakari abhandi bhanu bharinga hamwi nabho.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_29">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_70">
         <Content>24</Content>
       </CharacterStyleRange>
@@ -3676,7 +3691,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_75">
         <Content>Nawe abhatumwa bha Yesu hanu bhegwa amang'ana gayo, bhakabhehya abhakari bhakamaha ega ninjabhuro.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_29">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_27">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_70">
         <Content>24</Content>
       </CharacterStyleRange>
@@ -3697,7 +3712,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_77">
         <Content>(Mar 16:12-13)s</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_30">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_28">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_71">
         <Content>24</Content>
       </CharacterStyleRange>
@@ -3722,7 +3737,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_78">
         <Content>Bhagendanga bharahairira eguru ya amang'ana ganu gaatukiri.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_31">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_29">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_73">
         <Content>24</Content>
       </CharacterStyleRange>
@@ -3747,7 +3762,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_79">
         <Content>Nawe ameso gabho gakabha na amarimoni, bhakamurora naho bhatamanya ega ng'o.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_31">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_29">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_73">
         <Content>24</Content>
       </CharacterStyleRange>
@@ -3808,7 +3823,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_79">
         <Content>Nawe bhetu twesiganga ega, weki ng'o akaturirye Israeri. Na kurwa amang'ana gayo gakoreke, rero ndusiku rwa kasatu.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_31">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_29">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_73">
         <Content>24</Content>
       </CharacterStyleRange>
@@ -3833,7 +3848,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_79">
         <Content>bhatanyoora omubhiri gwaye mu-mbihira na ega, bhakarwirwa na maraika. maraika uyo akabhakeerya ega, Yesu m- muhoru.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_31">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_29">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_73">
         <Content>24</Content>
       </CharacterStyleRange>
@@ -3846,7 +3861,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_79">
         <Content>"Hanu bhamariri kutukeerya ego, bharikyetu bhaagya ku-mbihira, bhaanyora gonsego kyego abhakari bhayo bhatukererye. Nawe Yesu omwene bhatamuruji."</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_31">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_29">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_73">
         <Content>24</Content>
       </CharacterStyleRange>
@@ -3871,7 +3886,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_79">
         <Content>Kusi etenderwanga Kristo kuhitira enyanko iyo, na kusoha mu-bhurabhu bhwaye?"</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_31">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_29">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_73">
         <Content>24</Content>
       </CharacterStyleRange>
@@ -3884,7 +3899,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_79">
         <Content>Nho, Yesu akabhatubhurira amang'ana gonsego ganu ganyamwa eguru yaye, kwambira ebhitabho bhya Musa, na ebhitabho bhya abharooti bhonsego.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_31">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_29">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_73">
         <Content>24</Content>
       </CharacterStyleRange>
@@ -3921,7 +3936,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_79">
         <Content>Na hanu bhekara hamwi ku-meja okurya ebhyakurya, Yesu akagega omukate, akagunonka, akakumya Waryubha, akabhahana.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_31">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_29">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_73">
         <Content>24</Content>
       </CharacterStyleRange>
@@ -3934,7 +3949,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_79">
         <Content>Rumwigo ameso gabho gakarimbururwa na bhakamumanya, hayohayo akabhabhurako.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_31">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_29">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_73">
         <Content>24</Content>
       </CharacterStyleRange>
@@ -3947,7 +3962,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_79">
         <Content>Mbe, bhakabhuuran'ya, "kwaki tutamumanyiri hanu yari arahaira nabhetu ku-njira, aratorokya Amanyamo Amarabhu ga Waryubha?</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_31">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_29">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_73">
         <Content>24</Content>
       </CharacterStyleRange>
@@ -3992,7 +4007,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_81">
         <Content>(Mat 28:16-20; Mar 16:14-18; Yoh 20:19-23; Miko 1:6-8)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_32">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_30">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_75">
         <Content>24</Content>
       </CharacterStyleRange>
@@ -4005,7 +4020,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_82">
         <Content>Eribhaga bharinga bhakya hairira amang'ana gayo rumwigo, Yesu omwene akemirira gati yabho akabhakeerya, "omurembe gubhe ku-bhenyu!"</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_33">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_31">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_76">
         <Content>24</Content>
       </CharacterStyleRange>
@@ -4018,7 +4033,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_83">
         <Content>Bhaketakya na bhakobhoha bhukong'u kwa kubha bhamanyanga ega bharuji ekihwi.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_33">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_31">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_76">
         <Content>24</Content>
       </CharacterStyleRange>
@@ -4043,7 +4058,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_83">
         <Content>Mumahe amabhoko gani na amaguru gani nho mumanye ega noni omwene! Mu-mbhabhate! Murore kwa kubha ekihwi kitana minoku na maguha kyego murandora oni kubha nagyo."</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_33">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_31">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_76">
         <Content>24</Content>
       </CharacterStyleRange>
@@ -4104,7 +4119,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_83">
         <Content>Hanu yamara akabhakeerya, "Ganu, ngo nabhakeeryanga hanu naringa hamwi nabhenyu, ega gonsego ganu ganyamwa eguru yani garenderwa gakoreke, ganu garingi ku-maragiriryo ga Musa na kubhitabho bhya abharooti na ebhitabho bhya kugi Zaburi.'</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_33">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_31">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_76">
         <Content>24</Content>
       </CharacterStyleRange>
@@ -4153,7 +4168,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_83">
         <Content>Na bhenyu mbho ambasuti bha amang'ana gayo.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_33">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_31">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_76">
         <Content>24</Content>
       </CharacterStyleRange>
@@ -4174,7 +4189,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_81">
         <Content>(Mar 16:19-20; Miko 1:9-11)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_32">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_30">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_75">
         <Content>24</Content>
       </CharacterStyleRange>
@@ -4199,7 +4214,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_82">
         <Content>Na hanu yaringa akyabhanonka, akabhatiga akemukibhwa kugya murwire .</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_33">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_31">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_76">
         <Content>24</Content>
       </CharacterStyleRange>

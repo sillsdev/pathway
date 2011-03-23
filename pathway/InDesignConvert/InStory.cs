@@ -1001,14 +1001,14 @@ namespace SIL.PublishingSolution
             if (classNameWOLang == "ChapterNumber")
                 _chapterNo = _reader.ReadString();
 
+            Dictionary<string, string> mystyle = new Dictionary<string, string>();
             if (IdAllClass.ContainsKey(classNameWOLang) && IdAllClass[classNameWOLang].ContainsKey("float") && IdAllClass[classNameWOLang].ContainsKey("BaselineShift"))
             {
-                Dictionary<string, string> mystyle = new Dictionary<string, string>();
                 _isDropCap = true;
                 string lines = "2";
                 _allStyle.Pop();
                 CollectFootNoteChapterVerse(_chapterNo, Common.OutputType.IDML.ToString());
-                
+
                 try
                 {
                     if (IdAllClass[classNameWOLang].ContainsKey("PointSize") && IdAllClass[classNameWOLang]["PointSize"].IndexOf('%') > 0)
@@ -1024,6 +1024,14 @@ namespace SIL.PublishingSolution
                 _paragraphName = classNameWOLang + _chapterNo.Length.ToString();
                 _newProperty[_paragraphName] = mystyle;
                 _dropCapStyle = _paragraphName;
+                Write();
+            }
+            else if (classNameWOLang == "ChapterNumber")
+            {
+                CollectFootNoteChapterVerse(_chapterNo, Common.OutputType.IDML.ToString());
+                _paragraphName = classNameWOLang + _chapterNo.Length.ToString();
+                _newProperty[_paragraphName] = mystyle;
+                _isDropCap = true;
                 Write();
             }
         }

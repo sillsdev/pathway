@@ -89,7 +89,7 @@ namespace SIL.PublishingSolution
         #region Footnote
         protected bool _chapterNoStart;
         protected bool _verserNoStart;
-        protected string _chapterNo;
+        protected string _chapterNo = string.Empty;
         protected string _verseNo;
         protected bool _footnoteStart = false;
         protected bool isFootnote = false;
