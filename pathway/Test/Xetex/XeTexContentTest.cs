@@ -138,6 +138,16 @@ namespace Test.Xetex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void TextAlignCenterTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "TextAlignCenter";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         private void FileCompare(string file)
         {
             string texOutput = FileOutput(file + ".tex");
