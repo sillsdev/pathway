@@ -108,6 +108,15 @@ namespace Test.Xetex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void FontVariantSmallCapTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "FontVariantSmallCap";
+            ExportProcess(file);
+            FileCompare(file);
+        }
 
         private void FileCompare(string file)
         {

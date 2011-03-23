@@ -8,7 +8,7 @@ using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
-    class ModifyXeTexStyles
+    public class ModifyXeTexStyles
     {
         private XmlDocument _styleXMLdoc;
         private XmlNode _node;

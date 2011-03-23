@@ -1,0 +1,6 @@
+.letter {
+    font-variant: small-caps;
+    font-size: 24pt;
+    font-family: "Times New Roman";	/* default Serif font */
+}
+
