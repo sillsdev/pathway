@@ -118,6 +118,16 @@ namespace Test.Xetex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void FontSizePointTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "FontSizePoint";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         private void FileCompare(string file)
         {
             string texOutput = FileOutput(file + ".tex");
