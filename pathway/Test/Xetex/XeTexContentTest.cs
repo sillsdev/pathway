@@ -128,6 +128,16 @@ namespace Test.Xetex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void FontWeightBoldTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "FontWeightBold";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         private void FileCompare(string file)
         {
             string texOutput = FileOutput(file + ".tex");
