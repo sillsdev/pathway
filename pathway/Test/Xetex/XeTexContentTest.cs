@@ -170,6 +170,16 @@ namespace Test.Xetex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void TextAlignRightTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "TextAlignRight";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         #endregion
 
         #region Private Functions
