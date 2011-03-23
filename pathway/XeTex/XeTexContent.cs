@@ -306,6 +306,9 @@ namespace SIL.PublishingSolution
                 
                 //_writer.WriteString(content);
                 _xetexFile.Write(content);
+                string a = _tagType;
+                if(_tagType == "div")
+                    _xetexFile.Write("\r\n");
                 _writer.WriteEndElement();
             }
             AnchorBookMark();

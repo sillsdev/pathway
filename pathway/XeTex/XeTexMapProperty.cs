@@ -563,7 +563,7 @@ namespace SIL.PublishingSolution
             }
             string color = ":color=" + propertyValue.Replace("#","");   //:color=880000
             _fontStyle.Add(color);
-            _IDProperty["FillColor"] = "Color/" + propertyValue;
+            //_IDProperty["FillColor"] = "Color/" + propertyValue;
         }
         public void BGColor(string propertyValue)
         {
