@@ -159,7 +159,17 @@ namespace Test.Xetex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void DisplayBlockTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "DisplayBlock";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         #endregion
 
         #region Private Functions
