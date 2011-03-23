@@ -98,6 +98,16 @@ namespace Test.Xetex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void FontStyleItalicTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "FontStyleItalic";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
 
         private void FileCompare(string file)
         {
@@ -128,10 +138,14 @@ namespace Test.Xetex
             _classInlineStyle = styles.CreateXeTexStyles(_outputPath,xetexFile, cssClass);
 
             XeTexContent content = new XeTexContent();
-            content.CreateContent(_outputPath, cssClass, xetexFile, _projInfo.DefaultXhtmlFileWithPath,
+            Dictionary<string, Dictionary<string, string>> newProperty = content.CreateContent(_outputPath, cssClass, xetexFile, _projInfo.DefaultXhtmlFileWithPath,
                                   _classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
             CloseFile(xetexFile);
+
+            ModifyXeTexStyles modifyXeTexStyles = new ModifyXeTexStyles();
+            modifyXeTexStyles.ModifyStylesXML(_projInfo.ProjectPath, xetexFile, newProperty, cssClass, xetexFullFile);
+
         }
 
         #region Private Functions
