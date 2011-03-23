@@ -44,9 +44,9 @@ namespace SIL.PublishingSolution
                     case "font-variant":
                         FontVariant(property.Value);
                         break;
-                    //case "text-indent":
-                    //    TextIndent(property.Value);
-                    //    break;
+                    case "text-indent":
+                        TextIndent(property.Value);
+                        break;
                     case "margin-left":
                     case "class-margin-left":
                         MarginLeft(property.Value);
@@ -552,7 +552,7 @@ namespace SIL.PublishingSolution
             {
                 propertyValue = "\\parindent=" + propertyValue + "pt";
             }
-            _IDProperty["FirstLineIndent"] = propertyValue;
+            //_IDProperty["FirstLineIndent"] = propertyValue;
             _inlineStyle.Add(propertyValue);
         }
         public void Color(string propertyValue)

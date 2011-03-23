@@ -69,6 +69,7 @@ namespace Test.Xetex
         /// Parent comes as multiple times
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void TextAlignTest()
         {
             _projInfo.ProjectInputType = "Dictionary";
@@ -76,6 +77,27 @@ namespace Test.Xetex
             ExportProcess(file);
             FileCompare(file);
         }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void TextIndentTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "TextIndent";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void TextColorTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "Color";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
 
         private void FileCompare(string file)
         {

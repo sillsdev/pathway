@@ -75,9 +75,9 @@ namespace SIL.PublishingSolution
                 {
                     _classInlineStyle[cssClass.Key] = _inlineStyle;
                 }
-                if (xeTexProperty.Trim().Length > 0)
+                if (xeTexProperty.Trim().Length > 0 && Common.Testing)
                 {
-                    //_xetexFile.WriteLine(xeTexProperty);
+                    _xetexFile.WriteLine(xeTexProperty);
                 }
                 //_IDClass = new Dictionary<string, string>(); // note: ToDo seperate the process
                 //_IDAllClass[cssClass.Key] = _IDClass;
