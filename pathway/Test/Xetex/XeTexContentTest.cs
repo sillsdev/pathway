@@ -275,6 +275,17 @@ namespace Test.Xetex
             ExportProcess(file);
             FileCompare(file);
         }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void ImageBaseTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "ImageBase";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         #endregion
 
 

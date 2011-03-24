@@ -86,17 +86,26 @@ namespace SIL.PublishingSolution
             modifyXeTexStyles.ModifyStylesXML(projInfo.ProjectPath, xetexFile, newProperty, cssClass, xetexFullFile);
 
             //CallXeTex(Path.GetFileName(xetexFullFile));
-            CallXeTex(xetexFullFile,true);
+            CallXeTex(xetexFullFile, true, newProperty["ImagePath"]);
             return true;
         }
 
-        public void CallXeTex(string xetexFullFile,bool openFile)
+        public void CallXeTex(string xetexFullFile,bool openFile,Dictionary<string, string> ImageFilePath)
         {
             string workingXetex = Common.GetTempCopy("xetexExe");
             string instPath = Common.PathCombine(workingXetex, "bin");
             string dest = Common.PathCombine(instPath,Path.GetFileName(xetexFullFile));
             const bool overwrite = true;
             File.Copy(xetexFullFile, dest, overwrite);
+
+
+            foreach (KeyValuePair<string, string> keyValuePair in ImageFilePath)
+            {
+
+                string filePath = keyValuePair.Value;
+                string toPath = Path.Combine(instPath, Path.GetFileName(filePath));
+                File.Copy(filePath, toPath, true);
+            }
 
             if (!File.Exists(dest))
             {

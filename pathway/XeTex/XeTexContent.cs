@@ -58,6 +58,7 @@ namespace SIL.PublishingSolution
         private string _dropCapStyle = string.Empty;
         private string _currentStoryName = string.Empty;
         Dictionary<string, List<string>> _classInlineStyle = new Dictionary<string, List<string>>();
+        private string xhtmlFile;
 
         #endregion
 
@@ -66,6 +67,7 @@ namespace SIL.PublishingSolution
             _xetexFile = xetexFile;
             _classInlineStyle = classInlineStyle;
             _inputPath = Path.GetDirectoryName(xhtmlFileWithPath);
+            xhtmlFile = xhtmlFileWithPath;
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
             InitializeData(projectPath, cssClass, classFamily, cssClassOrder);
             //ProcessCounterProperty();
@@ -127,6 +129,8 @@ namespace SIL.PublishingSolution
 
         private void Write()
         {
+            //_imageInserted = InsertImage(); // TODO
+
             if (isFileCreated == false)
             {
                 CreateFile();
@@ -472,6 +476,122 @@ namespace SIL.PublishingSolution
             }
         }
 
+        public bool InsertImage()
+        {
+            bool inserted = false;
+            if (_imageInsert)
+            {
+                //1 inch = 72 PostScript points
+                string alignment = "Center";
+                string wrapSide = "none";
+                string rectHeight = "0";
+                string rectWidth = "0";
+                string srcFile;
+                string wrapMode = "BoundingBoxTextWrap";
+                string HoriAlignment = "LeftAlign";
+                const string HoriRefPoint = "ColumnEdge";
+                string VertAlignment = "CenterAlign";
+                string VertRefPoint = "LineBaseline";
+                string AnchorPoint = "TopLeftAnchor";
+
+                isImage = true;
+                inserted = true;
+                string[] cc = _allParagraph.ToArray();
+                imageClass = cc[1];
+                srcFile = _imageSource.ToLower();
+                string fileName = "file:" + Common.GetPictureFromPath(srcFile, "", _inputPath);
+                string fileName1 = Common.GetPictureFromPath(srcFile, "", _inputPath);
+                if (IdAllClass.ContainsKey(srcFile))
+                {
+                    rectHeight = GetPropertyValue(srcFile, "height", rectHeight);
+                    rectWidth = GetPropertyValue(srcFile, "width", rectWidth);
+                    GetAlignment(alignment, ref HoriAlignment, ref AnchorPoint, srcFile);
+                }
+                else
+                {
+                    GetHeightandWidth(ref rectHeight, ref rectWidth);
+                    GetAlignment(alignment, ref wrapSide, ref HoriAlignment, ref AnchorPoint, ref VertRefPoint, ref VertAlignment, ref wrapMode);
+                    GetWrapSide(ref wrapSide, ref wrapMode);
+                }
+
+                // Setting the Height and Width according css value or the image size
+                if (rectHeight != "0")
+                {
+                    if (rectWidth == "0")
+                    {
+                        rectWidth = Common.CalcDimension(fileName1, rectHeight, 'W');
+                    }
+                }
+                else if (rectWidth != "0")
+                {
+                    rectHeight = Common.CalcDimension(fileName1, rectWidth, 'H');
+                }
+                else
+                {
+                    //Default value is 72 However the line draws 36pt in X-axis and 36pt in y-axis.
+                    //rectHeight = "36";
+                    rectWidth = "36"; // fixed the width as 1 in;
+                    rectHeight = Common.CalcDimension(fileName1, rectWidth, 'H');
+                    if (rectHeight == "0")
+                    {
+                        rectHeight = "36";
+                    }
+                }
+
+                double x = double.Parse(rectWidth) / 2;
+                double y = double.Parse(rectHeight) / 2;
+
+                string xPlus = x.ToString();
+                string xMinus = "-" + xPlus;
+
+                string yPlus = y.ToString();
+                string yMinus = "-" + yPlus;
+
+                int height = 72; //1 in
+                int width = 72; // 1 in
+
+                string picFile = string.Empty;
+                //TODO Make it function 
+                //To get Image details
+                if (File.Exists(fileName1))
+                {
+                    picFile = Path.GetFileName(fileName1);
+                    string toPath = Path.Combine(_inputPath,picFile );
+                    File.Copy(fileName1,toPath,true);
+                    //Dictionary<string, Dictionary<string, string>>() 
+                    Dictionary<string, string> prop = new Dictionary<string, string>();
+                    prop.Add("filePath",fileName1);
+                    _newProperty["ImagePath"] = prop;
+
+                    Image fullimage = Image.FromFile(fileName1);
+                    height = fullimage.Height;
+                    width = fullimage.Width;
+                    
+                }
+
+                _xetexFile.WriteLine("");
+                _xetexFile.WriteLine("");
+
+                string p1 = @"\def\leftpicpar#1{\setbox0=\hbox{\XeTeXpicfile #1}";
+                string p2 = @"\dimen0=\wd0 \advance\dimen0 by 3pt";
+                string p3 = @"\count255=\ht0 \advance\count255 by \baselineskip";
+                string p4 = @"\divide\count255 by \baselineskip";
+                string p5 = @"\hangindent\dimen0 \hangafter-\count255";
+                string p6 = @"\noindent\llap{\vbox to 0pt{\kern-0.7\baselineskip\box0\vss}\kern3pt}";
+                string p7 = @"\indent\ignorespaces}";
+
+                _xetexFile.Write(p1 + p2 + p3 + p4 + p5 + p6 + p7);
+                _xetexFile.WriteLine("");
+                string wp = "\\leftpicpar{\"" + picFile + "\" scaled 400}";
+                _xetexFile.Write(wp);
+                _xetexFile.WriteLine("");
+                _xetexFile.WriteLine("");
+                _imageInsert = false;
+                _imageSource = string.Empty;
+                _isNewParagraph = false;
+            }
+            return inserted;
+        }
 
         private void GetHeightandWidth(ref string height, ref string width)
         {
@@ -657,6 +777,7 @@ namespace SIL.PublishingSolution
         {
             SetHeadwordTrue();
             StartElementBase(_IsHeadword);
+            _imageInserted = InsertImage();
             SetClassCounter();
             Psuedo();
             DropCaps();
@@ -823,9 +944,9 @@ namespace SIL.PublishingSolution
                 {
                     _allCharacter.Push(_imageClass); // temporarily storing to get width and position
                     //_imageInserted = InsertImage();
-                    _writer.WriteEndElement(); // for ParagraphStyle
-                    _writer.WriteEndElement(); // for Textframe
-                    _writer.WriteEndElement(); // for rectangle
+                    //_writer.WriteEndElement(); // for ParagraphStyle
+                    //_writer.WriteEndElement(); // for Textframe
+                    //_writer.WriteEndElement(); // for rectangle
                     _allCharacter.Pop();    // retrieving it again.
                     isImage = false;
                     imageClass = "";
@@ -838,9 +959,9 @@ namespace SIL.PublishingSolution
                 if (imageClass.Length > 0 && _closeChildName == imageClass)
                 {
 
-                    _writer.WriteEndElement();// for ParagraphStyle
-                    _writer.WriteEndElement(); // for Textframe
-                    _writer.WriteEndElement(); // for rectangle
+                    //_writer.WriteEndElement();// for ParagraphStyle
+                    //_writer.WriteEndElement(); // for Textframe
+                    //_writer.WriteEndElement(); // for rectangle
 
                     isImage = false;
                     imageClass = "";

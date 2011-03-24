@@ -597,7 +597,7 @@ namespace TestBed
             }
 
             ExportXeTex exportXeTex = new ExportXeTex();
-            exportXeTex.CallXeTex(txtInputPath.Text,true);
+            exportXeTex.CallXeTex(txtInputPath.Text,true,new Dictionary<string, string>());
 
         }
 
