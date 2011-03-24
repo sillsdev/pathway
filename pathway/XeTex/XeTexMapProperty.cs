@@ -184,6 +184,9 @@ namespace SIL.PublishingSolution
         private string ComposeStyle()
         {
             //string style = @"\font\" + _className + "=\"" + propertyValue + "\"";
+            if (_className.IndexOf(Common.SepPseudo) > 0)
+                _className = _className.Replace(Common.SepPseudo, "");
+
             string style = @"\font\" + _className + "=\"" + _fontName;
             foreach (string sty in _fontOption)
             {

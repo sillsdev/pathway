@@ -1,0 +1,8 @@
+.letHead {
+    font-size:25pt;
+}
+.letHead:after {
+    content: "***";
+    color:orange;
+    font-size:18pt;
+}

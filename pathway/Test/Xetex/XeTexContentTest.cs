@@ -180,6 +180,16 @@ namespace Test.Xetex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void PseudoAfterTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "PseudoAfter";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         #endregion
 
         #region Private Functions
