@@ -107,22 +107,22 @@ namespace Test.XhtmlExport
         /// <summary>
         /// Runs Pathway on the data and applies the back end
         /// </summary>
-        private static void PathawyB(string project, string inputType, string backend)
+        private static void PathawyB(string project, string layout, string inputType, string backend)
         {
-            PathawyB(project, inputType, backend, "");
+            PathawyB(project, layout, inputType, backend, "");
         }
 
         /// <summary>
         /// Runs Pathway on the data and applies the back end
         /// </summary>
-        private static void PathawyB(string project, string inputType, string backend, string message)
+        private static void PathawyB(string project, string layout, string inputType, string backend, string message)
         {
             const bool overwrite = true;
             var xhtmlName = project + ".xhtml";
             var xhtmlInput = _tf.Expected(xhtmlName);
             var xhtmlOutput = _tf.SubOutput(project, xhtmlName);
             File.Copy(xhtmlInput, xhtmlOutput, overwrite);
-            var cssName = project + ".css";
+            var cssName = layout + ".css";
             var cssInput = _tf.Expected(cssName);
             var cssOutput = _tf.SubOutput(project, cssName);
             File.Copy(cssInput, cssOutput, overwrite);
@@ -226,7 +226,7 @@ namespace Test.XhtmlExport
         [Category("SkipOnTeamCity")]
         public void GondwanaSampleOpenOfficeTest()
         {
-            PathawyB("Gondwana Sample", "Dictionary", "OpenOffice");
+            PathawyB("Gondwana Sample", "Gondwana Sample", "Dictionary", "OpenOffice");
         }
         #endregion Gondwana Sample Open Office
 
@@ -239,7 +239,20 @@ namespace Test.XhtmlExport
         [Category("SkipOnTeamCity")]
         public void NkonyaSampleOpenOfficeTest()
         {
-            PathawyB("Nkonya Sample", "Scripture", "OpenOffice");
+            PathawyB("Nkonya Sample", "Scripture Draft", "Scripture", "OpenOffice");
+        }
+        #endregion Nkonya Sample Open Office
+
+        #region Paratext NKOu3 Open Office
+        /// <summary>
+        /// Paratext NKOu3 Open Office Back End Test
+        /// </summary>
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void NKOu3OpenOfficeTest()
+        {
+            PathawyB("NKOu3", "NKOu3", "Scripture", "OpenOffice");
         }
         #endregion Nkonya Sample Open Office
 
@@ -252,7 +265,7 @@ namespace Test.XhtmlExport
         [Category("SkipOnTeamCity")]
         public void GondwanaSampleInDesignTest()
         {
-            PathawyB("Gondwana Sample", "Dictionary", "InDesign");
+            PathawyB("Gondwana Sample", "Gondwana Sample", "Dictionary", "InDesign");
         }
         #endregion Gondwana Sample InDesign
 
@@ -265,8 +278,21 @@ namespace Test.XhtmlExport
         [Category("SkipOnTeamCity")]
         public void NkonyaSampleInDesignTest()
         {
-            PathawyB("Nkonya Sample", "Scripture", "InDesign");
+            PathawyB("Nkonya Sample", "Scripture Draft", "Scripture", "InDesign");
         }
         #endregion Nkonya Sample InDesign
+
+        #region Paratext NKOu3 InDesign
+        /// <summary>
+        /// Paratext NKOu3 InDesign Back End Test
+        /// </summary>
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void NKOu3InDesignTest()
+        {
+            PathawyB("NKOu3", "NKOu3", "Scripture", "InDesign");
+        }
+        #endregion Nkonya Sample Open Office
     }
 }

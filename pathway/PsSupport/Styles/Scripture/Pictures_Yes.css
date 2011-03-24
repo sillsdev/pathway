@@ -56,3 +56,9 @@ div.pictureLeft > img.picture {
     text-transform:capitalize;
 }
 
+span.reference :before {
+	content: "(";
+}
+span.reference :after {
+	content: ")";
+}
