@@ -315,7 +315,14 @@ namespace Test.Xetex
             FileCompare(file);
         }
 
-
+ 		[Test]
+        public void DisplayNone()
+        {
+            const string file = "DiplayNone";
+            _projInfo.ProjectInputType = "Dictionary";
+            ExportProcess(file);
+            FileCompare(file);
+        }
         #endregion
 
 
