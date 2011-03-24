@@ -190,6 +190,15 @@ namespace Test.Xetex
             FileCompare(file);
         }
 
+        //[Test]
+        //[Category("SkipOnTeamCity")]
+        //public void TextDecorationTest()
+        //{
+        //    _projInfo.ProjectInputType = "Dictionary";
+        //    const string file = "TextDecoration";
+        //    ExportProcess(file);
+        //    FileCompare(file);
+        //}
 
         #region NestedDiv
         [Test]
@@ -282,6 +291,16 @@ namespace Test.Xetex
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "ImageBase";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void TextIndentPcTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "TextIndentPC";
             ExportProcess(file);
             FileCompare(file);
         }
