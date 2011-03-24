@@ -190,6 +190,74 @@ namespace Test.Xetex
             FileCompare(file);
         }
 
+
+        #region NestedDiv
+        [Test]
+        public void NestedDiv1()
+        {
+            const string file = "NestedDivCase1";
+            _projInfo.ProjectInputType = "Dictionary";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        public void NestedDiv2()
+        {
+            const string file = "NestedDivCase2";
+            _projInfo.ProjectInputType = "Dictionary";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        public void NestedDiv3()
+        {
+            const string file = "NestedDivCase3";
+            _projInfo.ProjectInputType = "Dictionary";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+
+        [Test]
+        public void NestedDiv4()
+        {
+            const string file = "NestedDivCase4";
+            _projInfo.ProjectInputType = "Dictionary";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        public void NestedDiv5()
+        {
+            const string file = "NestedDivCase5";
+            _projInfo.ProjectInputType = "Dictionary";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        public void NestedDiv6()
+        {
+            const string file = "NestedDivCase6";
+            _projInfo.ProjectInputType = "Dictionary";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+
+        [Test]
+        public void NestedSpan1()
+        {
+            const string file = "NestedSpan1";
+            _projInfo.ProjectInputType = "Dictionary";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+        #endregion
+
         #endregion
 
         #region Private Functions

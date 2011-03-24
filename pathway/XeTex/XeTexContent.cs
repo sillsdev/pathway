@@ -153,11 +153,11 @@ namespace SIL.PublishingSolution
                 _isNewParagraph = false;
                 _isParagraphClosed = false;
             }
-            //Note - for Xetex Added for Extra Line for Paragraph
-            if (_tagType == "div")
-            {
-                _xetexFile.Write("\r\n");
-            }
+            ////Note - for Xetex Added for Extra Line for Paragraph
+            //if (_tagType == "div")
+            //{
+            //    _xetexFile.Write("\r\n");
+            //}
 
             WriteText();
             isFileEmpty = false;
@@ -311,13 +311,10 @@ namespace SIL.PublishingSolution
                 }
                 
                 //_writer.WriteString(content);
-                if (_tagType == "div")
-                {
-                    //_xetexFile.Write("\r\n");
-                    //_xetexFile.Write("\r\n");
-                }
-
                 _xetexFile.Write(content);
+                string a = _tagType;
+                if(_tagType == "div")
+                    _xetexFile.Write("\r\n");
                 _writer.WriteEndElement();
             }
             AnchorBookMark();
@@ -366,7 +363,6 @@ namespace SIL.PublishingSolution
                         mergedParaStyle = mergedParaStyle.Replace(Common.SepPseudo, "");
 
                     _xetexFile.Write("\\" + mergedParaStyle + " ");
-                    _braceClass.Push(_childName);
                 }
                 AddUsedStyleName(characterStyle);
             }
@@ -788,7 +784,7 @@ namespace SIL.PublishingSolution
         private void CloseBrace(string closeChildName)
         {
             string brace = StackPeek(_braceClass);
-            if(closeChildName == brace)
+            if (brace.Length !=0 && closeChildName == brace)
             {
                 _xetexFile.Write("}");
             }

@@ -1,0 +1,16 @@
+.ta {
+    font-size: 20pt;
+   color:red;
+}
+
+.tb {
+   color:blue;
+}
+.tc {
+   color:green;
+    font-size: 12pt;		/* inherited */
+}
+.td {
+    text-align: left;
+   color:yellow;
+}
