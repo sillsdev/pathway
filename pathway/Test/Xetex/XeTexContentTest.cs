@@ -333,6 +333,43 @@ namespace Test.Xetex
             ExportProcess(file);
             FileCompare(file);
         }
+
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void Counter1Test()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "Counter1";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void Counter2Test()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "Counter2";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void Counter3Test()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "Counter3";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+
+
+
+
+
         #endregion
 
 

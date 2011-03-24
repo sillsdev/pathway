@@ -86,7 +86,12 @@ namespace SIL.PublishingSolution
             modifyXeTexStyles.ModifyStylesXML(projInfo.ProjectPath, xetexFile, newProperty, cssClass, xetexFullFile);
 
             //CallXeTex(Path.GetFileName(xetexFullFile));
-            CallXeTex(xetexFullFile, true, newProperty["ImagePath"]);
+            Dictionary<string, string> imgPath = new Dictionary<string, string>();
+            if (newProperty.ContainsKey("ImagePath"))
+            {
+                imgPath = newProperty["ImagePath"];
+            }
+            CallXeTex(xetexFullFile, true, imgPath);
             return true;
         }
 

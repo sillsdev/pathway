@@ -2180,6 +2180,18 @@ return FromProg(file);
             }
         }
 
+        public static string ReplaceSeperators(string styleName)
+        {
+            if (styleName.IndexOf(SepPseudo) > 0)
+                styleName = styleName.Replace(SepPseudo, "");
+
+            if (styleName.IndexOf(" ") > 0)
+                styleName = styleName.Replace(" ", "");
+
+            return styleName;
+        }
+
+
         ///// <summary>
         ///// If the user selected page style is "Every Page", this method will remove the "@Page:left" and 
         ///// "@page:right" tag from the  CSS file.

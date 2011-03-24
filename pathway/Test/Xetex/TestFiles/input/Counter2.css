@@ -1,0 +1,28 @@
+.article {
+	counter-increment: article;
+  	margin-bottom: 2pt;
+    	font-style:italic;
+                  counter-reset: sense;
+}
+
+
+.section-letter{
+	//counter-reset: sense;
+        //counter-reset: example;
+    	font-style:normal;
+}
+
+.sense{
+	counter-increment: sense;
+    	font-weight: bold;
+ 	color:blue;
+}
+.example
+{
+    	counter-increment: example;
+}
+.sense::before {
+    	content: counter(article) "."  counter(first-of-type) "." counter(example) ;
+    	font-weight: bold;
+ 	color:red;
+}

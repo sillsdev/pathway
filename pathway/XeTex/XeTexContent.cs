@@ -70,13 +70,98 @@ namespace SIL.PublishingSolution
             xhtmlFile = xhtmlFileWithPath;
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
             InitializeData(projectPath, cssClass, classFamily, cssClassOrder);
-            //ProcessCounterProperty();
+            ProcessCounterProperty();
             OpenXhtmlFile(xhtmlFileWithPath);
             ProcessXHTML(xhtmlFileWithPath);
             //UpdateRelativeInStylesXML();
             CloseFile();
             return _newProperty;
         }
+
+        private void ProcessCounterProperty()
+        {
+            _FootNote.Clear();
+            foreach (string className in IdAllClass.Keys)
+            {
+                string searchKey = "counter-increment";
+                if (IdAllClass[className].ContainsKey(searchKey))
+                {
+                    var key = new Dictionary<string, string>();
+                    string value = IdAllClass[className][searchKey];
+                    if (value.IndexOf(',') > 0)
+                    {
+                        string[] splitcomma = value.Split(',');
+                        if (splitcomma.Length > 1)
+                        {
+                            key[splitcomma[0]] = splitcomma[1];
+                            contentCounterIncrement[className] = key;
+                            ContentCounter[splitcomma[0]] = 0;
+                        }
+                    }
+                    else
+                    {
+                        key[value] = "1";
+                        contentCounterIncrement[className] = key;
+                        ContentCounter[value] = 0;
+                    }
+
+                }
+
+                searchKey = "counter-reset";
+                if (IdAllClass[className].ContainsKey(searchKey))
+                {
+                    ContentCounterReset[className] = IdAllClass[className][searchKey];
+                }
+
+                //searchKey = "prince-text-replace";
+                //if (IdAllClass[className].ContainsKey(searchKey))
+                //{
+                //    _replaceSymbolToText.Clear();
+                //    string[] values = IdAllClass[className][searchKey].Split('\"');
+                //    if (values.Length <= 1)
+                //        values = IdAllClass[className][searchKey].Split('\'');
+                //    for (int i = 0; i < values.Length; i++)
+                //    {
+                //        if (values[i].Length > 0)
+                //        {
+                //            string key = values[i].Replace("\"", "");
+                //            //key = Common.ReplaceSymbolToText(key);
+                //            i++;
+                //            i++;
+                //            string value = values[i].Replace("\"", "");
+                //            value = Common.ReplaceSymbolToText(value);
+                //            CssParser cssParser = new CssParser();
+                //            _replaceSymbolToText[key] = cssParser.UnicodeConversion(value);
+                //        }
+                //    }
+                //}
+
+                //// Footnote process 
+                //searchKey = "display";
+                //if (IdAllClass[className].ContainsKey(searchKey) && className.IndexOf("..footnote") > 0)
+                //{
+                //    string footnoteClsName = Common.LeftString(className, "..");
+                //    if (IdAllClass[footnoteClsName][searchKey] == "footnote" || IdAllClass[footnoteClsName][searchKey] == "prince-footnote")
+                //    {
+                //        if (!_FootNote.Contains(footnoteClsName))
+                //            _FootNote.Add(footnoteClsName);
+                //    }
+                //}
+                //string searchKey1 = "..footnote-call";
+                //if (className.IndexOf(searchKey1) >= 0)
+                //{
+                //    if (!_footnoteCallContent.Contains(className))
+                //        _footnoteCallContent.Add(className);
+                //}
+                //string searchKey2 = "..footnote-marker";
+                //if (className.IndexOf(searchKey2) >= 0)
+                //{
+                //    if (!_footnoteMarkerContent.Contains(className))
+                //        _footnoteMarkerContent.Add(className);
+                //}
+            }
+        }
+
 
         private void ProcessXHTML(string xhtmlFileWithPath)
         {
@@ -316,7 +401,6 @@ namespace SIL.PublishingSolution
                 
                 //_writer.WriteString(content);
                 _xetexFile.Write(content);
-                string a = _tagType;
                 if(_tagType == "div")
                     _xetexFile.Write("\r\n");
                 _writer.WriteEndElement();
@@ -363,8 +447,7 @@ namespace SIL.PublishingSolution
                         _braceClass.Push(_childName);
                     }
 
-                    if (mergedParaStyle.IndexOf(Common.SepPseudo) > 0)
-                        mergedParaStyle = mergedParaStyle.Replace(Common.SepPseudo, "");
+                    mergedParaStyle = Common.ReplaceSeperators(mergedParaStyle);
 
                     _xetexFile.Write("\\" + mergedParaStyle + " ");
                 }
