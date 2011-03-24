@@ -127,9 +127,9 @@ namespace SIL.PublishingSolution
                     //case "vertical-align":
                     //    VerticalAlign(property.Value);
                     //    break;
-                    //case "line-height":
-                    //    LineHeight(property.Value);
-                    //    break;
+                    case "line-height":
+                        LineHeight(property.Value);
+                        break;
                     //case "hyphens":
                     //    Hyphens(property.Value);
                     //    break;
@@ -372,10 +372,17 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            //if (propertyValue == "normal" || propertyValue == "100%")
-            if (propertyValue == "normal")
-                propertyValue = "Auto";
 
+            if (propertyValue == "none")
+            {
+                propertyValue = "\\baselineskip=0pt";
+            }
+            else
+            {
+                propertyValue = "\\baselineskip=" + propertyValue + "pt";
+            }
+            
+            _inlineStyle.Add(propertyValue);
             _IDProperty["Leading"] = propertyValue;
         }
         public void VerticalAlign(string propertyValue)

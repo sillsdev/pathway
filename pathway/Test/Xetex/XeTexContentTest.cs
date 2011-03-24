@@ -375,6 +375,16 @@ namespace Test.Xetex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void LineHeightNoneTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "LineHeightNone";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
 
 
 
