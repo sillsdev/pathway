@@ -258,7 +258,18 @@ namespace Test.Xetex
         }
         #endregion
 
+        [Test]
+        public void EMTest1()
+        {
+            const string file = "EMTest1";
+            _projInfo.ProjectInputType = "Dictionary";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         #endregion
+
+
 
         #region Private Functions
 
