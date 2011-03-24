@@ -267,6 +267,14 @@ namespace Test.Xetex
             FileCompare(file);
         }
 
+        [Test]
+        public void Font1()
+        {
+            const string file = "Font1";
+            _projInfo.ProjectInputType = "Dictionary";
+            ExportProcess(file);
+            FileCompare(file);
+        }
         #endregion
 
 
