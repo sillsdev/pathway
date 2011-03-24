@@ -51,9 +51,10 @@ namespace SIL.PublishingSolution
                     case "class-margin-left":
                         MarginLeft(property.Value);
                         break;
-                    //case "margin-right":
-                    //    MarginRight(property.Value);
-                    //    break;
+                    case "margin-right":
+                    case "class-margin-right":
+                        MarginRight(property.Value);
+                        break;
                     case "margin-top":
                     case "class-margin-top":
                         MarginTop(property.Value);
@@ -506,7 +507,9 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
+            propertyValue = "\\rightskip=" + propertyValue + "pt";
             _IDProperty["Margin-Right"] = propertyValue;
+            _inlineStyle.Add(propertyValue);
         }
         public void MarginTop(string propertyValue)
         {

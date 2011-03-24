@@ -305,6 +305,17 @@ namespace Test.Xetex
             FileCompare(file);
         }
 
+       [Test]
+        [Category("SkipOnTeamCity")]
+        public void MarginRightTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "MarginRight";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+
         #endregion
 
 
