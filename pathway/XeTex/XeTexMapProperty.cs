@@ -142,9 +142,9 @@ namespace SIL.PublishingSolution
                     //case "hyphenate-lines":
                     //    HyphenateLines(property.Value);
                     //    break;
-                    //case "letter-spacing":
-                    //    LetterSpacing(property.Value);
-                    //    break;
+                    case "letter-spacing":
+                        LetterSpacing(property.Value);
+                        break;
                     //case "word-spacing":
                     //    WordSpacing(property.Value);
                     //    break;
@@ -297,9 +297,13 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            _IDProperty["MinimumLetterSpacing"] = "0";
-            _IDProperty["DesiredLetterSpacing"] = propertyValue;
-            _IDProperty["MaximumLetterSpacing"] = propertyValue;
+            //_IDProperty["MinimumLetterSpacing"] = "0";
+            //_IDProperty["DesiredLetterSpacing"] = propertyValue;
+            //_IDProperty["MaximumLetterSpacing"] = propertyValue;
+
+            string space = ":letterspace=" + propertyValue;
+            _fontStyle.Add(space);
+
         }
 
 

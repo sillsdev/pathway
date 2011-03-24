@@ -365,6 +365,15 @@ namespace Test.Xetex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void LetterspaceTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "Letterspace";
+            ExportProcess(file);
+            FileCompare(file);
+        }
 
 
 
