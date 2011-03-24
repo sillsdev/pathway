@@ -323,6 +323,16 @@ namespace Test.Xetex
             ExportProcess(file);
             FileCompare(file);
         }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void TextAlignJustifyTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "TextAlignJustify";
+            ExportProcess(file);
+            FileCompare(file);
+        }
         #endregion
 
 

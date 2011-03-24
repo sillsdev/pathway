@@ -713,6 +713,10 @@ namespace SIL.PublishingSolution
             {
                 propertyValue = "\\rightline";
             }
+            else if (propertyValue == "justify")
+            {
+                propertyValue = "\\line";
+            }
             _IDProperty["Justification"] = propertyValue;
             _inlineStyle.Add(propertyValue);
         }
