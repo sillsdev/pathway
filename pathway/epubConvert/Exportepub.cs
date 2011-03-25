@@ -57,7 +57,7 @@ namespace SIL.PublishingSolution
         private Dictionary<string, string> _langFontDictionary; // languages and font names in use for this export
 
 //        protected static PostscriptLanguage _postscriptLanguage = new PostscriptLanguage();
-        protected string _inputType;
+        protected string _inputType = "dictionary";
 
         // property implementations
         public string Title { get; set; }
@@ -1317,7 +1317,11 @@ namespace SIL.PublishingSolution
                     string textString;
                     sb.Append(name);
                     sb.Append("#");
-                    sb.Append(node.Attributes["id"].Value);
+                    XmlNode val = node.Attributes["id"];
+                    if(val != null)
+                        sb.Append(val);
+                    //sb.Append(node.Attributes["id"].Value);
+                        
                     if (_inputType.Equals("dictionary"))
                     {
                         // for a dictionary, the headword / headword-minor is the label
