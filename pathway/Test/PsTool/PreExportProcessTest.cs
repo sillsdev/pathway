@@ -48,7 +48,7 @@ namespace Test.PsTool
             preExportProcess = new PreExportProcess(projInfo);
             string expected = GetFileNameWithExpectedPath(filename);
             string output = preExportProcess.ImagePreprocess();
-            TextFileAssert.AreEqual(expected, output);
+            XmlAssert.AreEqual(expected, output, "");
 
         }
 
