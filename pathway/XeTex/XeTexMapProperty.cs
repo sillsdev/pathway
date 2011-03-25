@@ -374,7 +374,7 @@ namespace SIL.PublishingSolution
                 return;
             }
 
-            if (propertyValue == "none")
+            if (propertyValue == "100%")
             {
                 propertyValue = "\\baselineskip=0pt";
             }
@@ -675,7 +675,7 @@ namespace SIL.PublishingSolution
             //    propertyValue = "Regular";
             //}
             //else
-            if (strValue == "boldnormal" || strValue == "bold")
+            if (strValue == "boldnormal" || strValue == "bold" || strValue == "700")
             {
                 propertyValue = "/B";
             }
@@ -683,7 +683,7 @@ namespace SIL.PublishingSolution
             {
                 propertyValue = "/I";
             }
-            else if (strValue == "bolditalic")
+            else if (strValue == "bolditalic" || strValue == "700italic")
             {
                 propertyValue = "/BI";
             }

@@ -142,6 +142,26 @@ namespace Test.Xetex
 
         [Test]
         [Category("SkipOnTeamCity")]
+        public void FontWeight400Test()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "FontWeight400";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void FontWeight700Test()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "FontWeight700";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
         public void TextAlignCenterTest()
         {
             _projInfo.ProjectInputType = "Dictionary";
@@ -392,6 +412,26 @@ namespace Test.Xetex
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "LineHeightNone";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        //[Test]
+        [Category("SkipOnTeamCity")]
+        public void LineHeightPercentageTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "LineHeightPercentage";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        //[Test]
+        [Category("SkipOnTeamCity")]
+        public void LineHeightPointTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "LineHeightPoint";
             ExportProcess(file);
             FileCompare(file);
         }
