@@ -66,12 +66,13 @@ namespace SIL.PublishingSolution
                     case "font-family":
                         FontFamily(property.Value);
                         break;
-                    //case "page-width":
-                    //    PageWidth(property.Value);
-                    //    break;
-                    //case "page-height":
-                    //    PageHeight(property.Value);
-                    //    break;
+                        //\special{papersize=5in,8in}
+                    case "page-width":
+                        PageWidth(property.Value);
+                        break;
+                    case "page-height":
+                        PageHeight(property.Value);
+                        break;
                     //case "mirror":
                     //    Mirror(property.Value);
                     //    break;
@@ -98,9 +99,9 @@ namespace SIL.PublishingSolution
                     case "color":
                         Color(property.Value);
                         break;
-                    //case "background-color":
-                    //    BGColor(property.Value);
-                    //    break;
+                    case "background-color":
+                        BGColor(property.Value);
+                        break;
                     //case "size":
                     //    //Size(styleAttributeInfo);
                     //    break;
@@ -186,24 +187,35 @@ namespace SIL.PublishingSolution
         private string ComposeStyle()
         {
             //string style = @"\font\" + _className + "=\"" + propertyValue + "\"";
+            string style = string.Empty;
             _className = Common.ReplaceSeperators(_className);
-
-            string style = @"\font\" + _className + "=\"" + _fontName;
-            foreach (string sty in _fontOption)
+            if (_className == "@page")
             {
-                style += sty;
+                //\special{papersize=5in,8in}
+                style = @"\special{papersize=" + _IDProperty["Page-Height"] + "pt ," + _IDProperty["Page-Width"] + "pt} \\r\\n";
+                //cmyk 0.1 0.9 0.5 0
+                if(_IDProperty.ContainsKey("backgroundColor"))
+                    style += @"\special{background cmyk " + _IDProperty["backgroundColor"] + "}";
             }
-            style += "\"";
-
-            foreach (string sty in _fontStyle)
+            else
             {
-                style += sty;
-            }
+                style = @"\font\" + _className + "=\"" + _fontName;
+                foreach (string sty in _fontOption)
+                {
+                    style += sty;
+                }
+                style += "\"";
+
+                foreach (string sty in _fontStyle)
+                {
+                    style += sty;
+                }
 
 
-            if (_fontSize.Length >0 )
-            {
-                style += _fontSize;
+                if (_fontSize.Length > 0)
+                {
+                    style += _fontSize;
+                }
             }
             return style;
         }
@@ -594,7 +606,16 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            _IDProperty["StrokeColor"] = "Color/" + propertyValue;
+            string cVal = propertyValue.Replace("#", "");
+            //decValue += " " + int.Parse(concatChar, System.Globalization.NumberStyles.HexNumber);
+
+            int red = int.Parse(cVal.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
+            int green = int.Parse(cVal.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
+            int blue = int.Parse(cVal.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
+
+
+            _IDProperty["backgroundColor"] = rgb2cmyk(red,green,blue);
+
         }
         public void ColumnCount(string propertyValue)
         {
@@ -775,6 +796,35 @@ namespace SIL.PublishingSolution
                 decValue = "00 00 00";
             }
             return decValue.Trim();
+        }
+
+
+        private string rgb2cmyk(int r, int g, int b)
+        {
+            float computedC = 0;
+            float computedM = 0;
+            float computedY = 0;
+            float computedK = 0;
+
+
+            // BLACK
+            if (r == 0 && g == 0 && b == 0)
+            {
+                return "0 0 0 1";
+            }
+
+            computedC = 1 - (r/255);
+            computedM = 1 - (g/255);
+            computedY = 1 - (b/255);
+
+            var minCMY = Math.Min(computedC, Math.Min(computedM, computedY));
+
+            computedC = (computedC - minCMY)/(1 - minCMY);
+            computedM = (computedM - minCMY)/(1 - minCMY);
+            computedY = (computedY - minCMY)/(1 - minCMY);
+            computedK = minCMY;
+            string cmyk = computedC + " " + computedM + " " + computedY + " " + computedK;
+            return cmyk;
         }
 
         public void Display(string propertyValue)

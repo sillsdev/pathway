@@ -48,7 +48,7 @@ namespace SIL.PublishingSolution
         {
             foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _cssClass)
             {
-                if (cssClass.Key.IndexOf("@page") >= 0 || cssClass.Key.IndexOf("h1") >= 0 ||
+                if (cssClass.Key.IndexOf("h1") >= 0 ||
                     cssClass.Key.IndexOf("h2") >= 0 || cssClass.Key.IndexOf("h3") >= 0 ||
                     cssClass.Key.IndexOf("h4") >= 0 || cssClass.Key.IndexOf("h5") >= 0 ||
                     cssClass.Key.IndexOf("h6") >= 0) continue;
@@ -72,7 +72,7 @@ namespace SIL.PublishingSolution
 
         private string RemoveBody(string paraStyle)
         {
-            if (paraStyle.IndexOf("_body") == -1)
+            if (paraStyle.IndexOf("_body") == -1 && paraStyle != "@page")
             {
                 return string.Empty;
             }
