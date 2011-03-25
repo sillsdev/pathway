@@ -315,6 +315,17 @@ namespace Test.Xetex
             FileCompare(file);
         }
 
+
+       [Test]
+       [Category("SkipOnTeamCity")]
+       public void UnderlineTest()
+       {
+           _projInfo.ProjectInputType = "Dictionary";
+           const string file = "Underline";
+           ExportProcess(file);
+           FileCompare(file);
+       }
+
  		[Test]
         public void DisplayNone()
         {

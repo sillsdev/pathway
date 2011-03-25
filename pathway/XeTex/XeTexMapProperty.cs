@@ -38,9 +38,10 @@ namespace SIL.PublishingSolution
                     case "font-size":
                         FontSize(property.Value);
                         break;
-                    //case "text-decoration":
-                    //    TextDecoration(property.Value);
-                    //    break;
+                    case "text-decoration":
+                    case "class-text-decoration":
+                        TextDecoration(property.Value);
+                        break;
                     case "font-variant":
                         FontVariant(property.Value);
                         break;
@@ -645,17 +646,12 @@ namespace SIL.PublishingSolution
                 return;
             }
 
-            //if (propertyValue == "none")
-            //{
-            //    propertyValue = "false";
-            //}
-            //else 
-            if (propertyValue == "underline")
-            {
-                propertyValue = "true";
-            }
+            //propertyValue = "$\\underline{" + propertyValue + "}$";
+            propertyValue = "\\underline";
             _IDProperty["Underline"] = propertyValue;
+            _inlineStyle.Add(propertyValue);
         }
+
         public void FontWeight(Dictionary<string, string> cssProperty)
         {
             if (_IDProperty.ContainsKey("FontStyle")) return;

@@ -59,7 +59,13 @@ namespace SIL.PublishingSolution
         private string _currentStoryName = string.Empty;
         Dictionary<string, List<string>> _classInlineStyle = new Dictionary<string, List<string>>();
         private string xhtmlFile;
-
+        
+        protected Stack<string> _braceClass = new Stack<string>();
+        protected Stack<string> _braceInlineClass = new Stack<string>();
+        protected Dictionary<string, int> _braceInlineClassCount = new Dictionary<string, int>();
+        protected Stack<string> _mathStyleClass = new Stack<string>();
+        private List<string> _mathStyle = new List<string>();
+        
         #endregion
 
         public Dictionary<string, Dictionary<string, string>> CreateContent(string projectPath, Dictionary<string, Dictionary<string, string>> cssClass, StreamWriter xetexFile, string xhtmlFileWithPath, Dictionary<string, List<string>> classInlineStyle, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
@@ -70,7 +76,8 @@ namespace SIL.PublishingSolution
             xhtmlFile = xhtmlFileWithPath;
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
             InitializeData(projectPath, cssClass, classFamily, cssClassOrder);
-            ProcessCounterProperty();
+            InitializeMathStyle();
+            //ProcessCounterProperty();
             OpenXhtmlFile(xhtmlFileWithPath);
             ProcessXHTML(xhtmlFileWithPath);
             //UpdateRelativeInStylesXML();
@@ -439,17 +446,26 @@ namespace SIL.PublishingSolution
                     List<string> inlineStyle = _classInlineStyle[mergedParaStyle];
                     foreach (string property in inlineStyle)
                     {
+                        if (_mathStyle.Contains(property))
+                        {
+                            _xetexFile.Write("$");
+                            _mathStyleClass.Push(_childName);
+                        }
                         _xetexFile.Write(property);
+                        _xetexFile.Write("{");
                     }
+
                     if (inlineStyle.Count > 0)
                     {
-                        _xetexFile.Write("{");
-                        _braceClass.Push(_childName);
+                        _braceInlineClassCount[_childName] = inlineStyle.Count;
+                        _braceInlineClass.Push(_childName);
                     }
 
-                    mergedParaStyle = Common.ReplaceSeperators(mergedParaStyle);
+                    if (mergedParaStyle.IndexOf(Common.SepPseudo) > 0)
+                        mergedParaStyle = mergedParaStyle.Replace(Common.SepPseudo, "");
 
-                    _xetexFile.Write("\\" + mergedParaStyle + " ");
+                    _xetexFile.Write("\\" + mergedParaStyle + "{");
+                    _braceClass.Push(_childName);
                 }
                 AddUsedStyleName(characterStyle);
             }
@@ -987,10 +1003,29 @@ namespace SIL.PublishingSolution
 
         private void CloseBrace(string closeChildName)
         {
-            string brace = StackPeek(_braceClass);
+            string brace = StackPeek(_braceInlineClass);
             if (brace.Length !=0 && closeChildName == brace)
             {
+                int count = _braceInlineClassCount[brace];
+                for (int i = 0; i < count; i++)
+                {
+                    _xetexFile.Write("}");
+                }
+                StackPop(_braceInlineClass);
+            }
+
+            string clsbrace = StackPeek(_braceClass);
+            if (clsbrace.Length != 0 && closeChildName == clsbrace)
+            {
                 _xetexFile.Write("}");
+                StackPop(_braceClass);
+            }
+
+            string dollar = StackPeek(_mathStyleClass);
+            if (dollar.Length != 0 && closeChildName == dollar)
+            {
+                _xetexFile.Write("$");
+                StackPop(_mathStyleClass);
             }
         }
 
@@ -1090,6 +1125,11 @@ namespace SIL.PublishingSolution
         {
             if (!_usedStyleName.Contains(styleName))
                 _usedStyleName.Add(styleName);
+        }
+
+        private void InitializeMathStyle()
+        {
+            _mathStyle.Add("\\underline");
         }
 
         #region Private Methods
