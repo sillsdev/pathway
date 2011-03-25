@@ -408,6 +408,7 @@ namespace SIL.PublishingSolution
                 
                 //_writer.WriteString(content);
                 _xetexFile.Write(content);
+                _xetexFile.Write("}");
                 if(_tagType == "div")
                     _xetexFile.Write("\r\n");
                 _writer.WriteEndElement();
@@ -441,6 +442,7 @@ namespace SIL.PublishingSolution
                 }
                 string mergedParaStyle = MergeInlineStyle(paraStyle);
 
+                string getStyleName = StackPeek(_allStyle); 
                 if (_classInlineStyle.ContainsKey(mergedParaStyle))
                 {
                     List<string> inlineStyle = _classInlineStyle[mergedParaStyle];
@@ -449,7 +451,7 @@ namespace SIL.PublishingSolution
                         if (_mathStyle.Contains(property))
                         {
                             _xetexFile.Write("$");
-                            _mathStyleClass.Push(_childName);
+                            _mathStyleClass.Push(getStyleName);
                         }
                         _xetexFile.Write(property);
                         _xetexFile.Write("{");
@@ -458,14 +460,14 @@ namespace SIL.PublishingSolution
                     if (inlineStyle.Count > 0)
                     {
                         _braceInlineClassCount[_childName] = inlineStyle.Count;
-                        _braceInlineClass.Push(_childName);
+                        _braceInlineClass.Push(getStyleName);
                     }
 
                     if (mergedParaStyle.IndexOf(Common.SepPseudo) > 0)
                         mergedParaStyle = mergedParaStyle.Replace(Common.SepPseudo, "");
 
                     _xetexFile.Write("\\" + mergedParaStyle + "{");
-                    _braceClass.Push(_childName);
+                    //_braceClass.Push(getStyleName);
                 }
                 AddUsedStyleName(characterStyle);
             }
@@ -1014,12 +1016,12 @@ namespace SIL.PublishingSolution
                 StackPop(_braceInlineClass);
             }
 
-            string clsbrace = StackPeek(_braceClass);
-            if (clsbrace.Length != 0 && closeChildName == clsbrace)
-            {
-                _xetexFile.Write("}");
-                StackPop(_braceClass);
-            }
+            //string clsbrace = StackPeek(_braceClass);
+            //if (clsbrace.Length != 0 && closeChildName == clsbrace)
+            //{
+            //    _xetexFile.Write("}");
+            //    StackPop(_braceClass);
+            //}
 
             string dollar = StackPeek(_mathStyleClass);
             if (dollar.Length != 0 && closeChildName == dollar)
