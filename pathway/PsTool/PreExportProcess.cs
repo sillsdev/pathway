@@ -183,8 +183,15 @@ namespace SIL.Tool
                     counter++;
                 }
             }
-            ParagraphVerserSetUp(xmldoc); // TODO - Seperate it from this method.
-            xmldoc.Save(tempFile);
+            try
+            {
+                ParagraphVerserSetUp(xmldoc); // TODO - Seperate it from this method.
+            }
+            catch (Exception ex)
+            {
+               Console.Write(ex.Message);
+            } 
+                xmldoc.Save(tempFile);
             }
             catch
             {
@@ -275,19 +282,25 @@ namespace SIL.Tool
         public string ReplaceInvalidTagtoSpan(string pattern, string tagType)
         {
             string OutputFile = OpenFile();
-            //string pattern = "_AllComplexFormEntryBackRefs|LexEntryRef_PrimaryLexemes";
-            MatchCollection matchs = Regex.Matches(_fileContent.ToString(), pattern);
-            foreach (Match match in matchs)
+            try
             {
-                string matchText = match.Value;
-                string replaceText = tagType;
-                _fileContent.Replace(matchText, replaceText);
+                //string pattern = "_AllComplexFormEntryBackRefs|LexEntryRef_PrimaryLexemes";
+                MatchCollection matchs = Regex.Matches(_fileContent.ToString(), pattern);
+                foreach (Match match in matchs)
+                {
+                    string matchText = match.Value;
+                    string replaceText = tagType;
+                    _fileContent.Replace(matchText, replaceText);
 
-                var writer = new StreamWriter(OutputFile);
-                writer.Write(_fileContent);
-                writer.Close();
+                    var writer = new StreamWriter(OutputFile);
+                    writer.Write(_fileContent);
+                    writer.Close();
+                }
+
             }
-            _xhtmlFileNameWithPath = OutputFile;
+            catch
+            {
+            } _xhtmlFileNameWithPath = OutputFile;
             return _xhtmlFileNameWithPath;
         }
 
@@ -657,7 +670,12 @@ namespace SIL.Tool
                             {
                                 XmlNode verseNode = chapterNode.NextSibling;
                                 if (verseNode == null) continue;
-                                var verse = verseNode.Attributes.GetNamedItem("class");
+                                XmlNode verse = null;
+                                if (verseNode.Attributes == null)
+                                {
+                                    continue;
+                                }
+                                verse = verseNode.Attributes.GetNamedItem("class");
                                 if (verse != null && verse.Value.ToLower() == "verse_number")
                                 {
                                     para.Value = "Paragraph1";
@@ -680,7 +698,10 @@ namespace SIL.Tool
                         foreach (XmlNode chapterNode in item)
                         {
                             if (chapterNode.NodeType == XmlNodeType.Whitespace) continue;
-
+                            if (chapterNode.Attributes == null)
+                            {
+                                continue;
+                            }
                             var chapter = chapterNode.Attributes.GetNamedItem("class");
                             if (chapter != null && chapter.Value.ToLower() == "scrintrosection")
                             {
