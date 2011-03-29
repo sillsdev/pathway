@@ -355,6 +355,7 @@ namespace SIL.PublishingSolution
                 {
                     _propertyKey = "text-position";
                     SuperSub();
+                    propertyValue += " 75%";
                 }
                 else if (propertyValue == "text-top")
                 {

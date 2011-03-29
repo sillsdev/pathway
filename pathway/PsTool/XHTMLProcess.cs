@@ -1069,7 +1069,7 @@ namespace SIL.PublishingSolution
                         _tempStyle[property.Key] = lineHeight + "pt";
                     }
                 }
-                else if (property.Value.IndexOf("%") > 0)
+                else if (property.Value.IndexOf("%") > 0 && property.Key != "text-position")
                 {
                     float value = float.Parse(property.Value.Replace("%", ""));
                     _tempStyle[property.Key] = (ancestorFontSize * value / 100).ToString();

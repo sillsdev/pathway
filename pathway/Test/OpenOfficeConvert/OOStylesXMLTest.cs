@@ -770,13 +770,13 @@ namespace Test.OpenOfficeConvert
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "xhomographnumber";
-            _validate.ClassProperty.Add("style:text-position", "sub");
+            _validate.ClassProperty.Add("style:text-position", "sub 75%");
 
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
 
             _validate.ClassName = "xhomographnumbersuper";
-            _validate.ClassProperty.Add("style:text-position", "super");
+            _validate.ClassProperty.Add("style:text-position", "super 75%");
 
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
