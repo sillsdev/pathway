@@ -86,7 +86,7 @@ namespace SIL.PublishingSolution
 
         private void GetVariableClassName(string className)
         {
-            if (className.IndexOf("TitleMain") == 5)
+            if (className.IndexOf("TitleMain") == 5 || className.IndexOf("scrBookName") == 0)
             {
                 _textVariables.Add("TitleMain_" + className);
             }

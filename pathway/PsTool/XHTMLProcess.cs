@@ -507,10 +507,10 @@ namespace SIL.PublishingSolution
             string modifiedContent = content;
             if (styleName != null && IdAllClass.ContainsKey(styleName))
             {
-                if (IdAllClass[styleName].ContainsKey("display") && IdAllClass[styleName]["display"] == "none")
-                {
-                    modifiedContent = string.Empty;
-                }
+                //if (IdAllClass[styleName].ContainsKey("display") && IdAllClass[styleName]["display"] == "none")
+                //{
+                //    modifiedContent = string.Empty;
+                //}
                 if (IdAllClass[styleName].ContainsKey("TextTransform"))
                 {
                     modifiedContent = TextTransform(content, styleName, modifiedContent);

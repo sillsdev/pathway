@@ -681,6 +681,10 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
+            if(propertyValue == "none")
+            {
+                _IDProperty["PointSize"] = "0.1";
+            }
             _IDProperty["display"] = propertyValue;
         }        
     }

@@ -5,7 +5,7 @@
     <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrBook_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrBookName_1">
-        <Content />
+        <Content>Ruth</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/TitleMain_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_1">
@@ -1399,7 +1399,7 @@
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrBook_2">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrBookName_2">
-        <Content />
+        <Content>Jonas</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/TitleMain_2">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_27">
@@ -2457,7 +2457,7 @@
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrBook_2">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrBookName_2">
-        <Content />
+        <Content>***</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/TitleMain_2">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_27">

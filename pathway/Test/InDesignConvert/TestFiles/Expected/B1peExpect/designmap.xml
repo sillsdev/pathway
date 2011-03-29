@@ -82,7 +82,7 @@
     <MatchParagraphStylePreference TextBefore="" TextAfter="" AppliedParagraphStyle="ParagraphStyle/$ID/NormalParagraphStyle" SearchStrategy="FirstOnPage" ChangeCase="None" DeleteEndPunctuation="false" />
   </TextVariable>
   <TextVariable Self="dTextVariablenFirstBookName" Name="FirstBookName" VariableType="MatchCharacterStyleType">
-    <MatchCharacterStylePreference TextBefore="" TextAfter="" AppliedCharacterStyle="TitleMain" SearchStrategy="FirstOnPage" ChangeCase="None" DeleteEndPunctuation="false" />
+    <MatchCharacterStylePreference TextBefore="" TextAfter="" AppliedCharacterStyle="CharacterStyle/scrBookName_1" SearchStrategy="FirstOnPage" ChangeCase="None" DeleteEndPunctuation="false" />
   </TextVariable>
   <TextVariable Self="dTextVariablenFirstChapterNumber" Name="FirstChapterNumber" VariableType="MatchCharacterStyleType">
     <MatchCharacterStylePreference TextBefore="" TextAfter="" AppliedCharacterStyle="CharacterStyle/hideChapterNumber_1" SearchStrategy="FirstOnPage" ChangeCase="None" DeleteEndPunctuation="false" />
@@ -91,7 +91,7 @@
     <MatchCharacterStylePreference TextBefore="" TextAfter="" AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1" SearchStrategy="FirstOnPage" ChangeCase="None" DeleteEndPunctuation="false" />
   </TextVariable>
   <TextVariable Self="dTextVariablenLastBookName" Name="LastBookName" VariableType="MatchCharacterStyleType">
-    <MatchCharacterStylePreference TextBefore="" TextAfter="" AppliedCharacterStyle="TitleMain" SearchStrategy="LastOnPage" ChangeCase="None" DeleteEndPunctuation="false" />
+    <MatchCharacterStylePreference TextBefore="" TextAfter="" AppliedCharacterStyle="CharacterStyle/scrBookName_1" SearchStrategy="LastOnPage" ChangeCase="None" DeleteEndPunctuation="false" />
   </TextVariable>
   <TextVariable Self="dTextVariablenLastChapterNumber" Name="LastChapterNumber" VariableType="MatchCharacterStyleType">
     <MatchCharacterStylePreference TextBefore="" TextAfter="" AppliedCharacterStyle="CharacterStyle/hideChapterNumber_1" SearchStrategy="LastOnPage" ChangeCase="None" DeleteEndPunctuation="false" />

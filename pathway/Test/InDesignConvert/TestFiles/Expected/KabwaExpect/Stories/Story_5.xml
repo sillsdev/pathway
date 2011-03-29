@@ -3,65 +3,9 @@
   <Story Self="5" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
     <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
     <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrBook_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrBookName_2">
-        <Content />
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/TitleMain_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_107">
-        <Content>Sen Luk Ke Risoa</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroSectionHead_3">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_108">
-        <Content>Na Titiono Eigna Na Buka Iaani</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_3">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_109">
-        <Content>A Luk na dokta ke adoa puala na puhi rioriso. Luk boi na mane vaovarongo nigna a Jisas me boi na mane Jiu. Gi e risoa na buka iaani, sethe na maghavu a Luk ke mono duagna a Pol kori vido ke taetaveti bali titionoa na Rorongo ke Toke. Reghia Buka Tango 16:8-10. Leghugna a Luk ke risoa na buka iaani, imanea ke risoa mua na Buka Tango.</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_110">
-        <Content>A Luk ke risoa na buka iaani vania sina mane puhi, na ahagna a Tiofilus, kari e risoa mua vanira na komi tinoni kena boi Jiu. A Luk ke magnahaghinira kedana ijumia mena adoa mena vaututunia Jisas. A Luk ke risoa na buka iaani bali tateli aua na Rorongo ke Toke eigna a Jisas e pukuni tutuni. Mi imanea ke magnahaghinira na komi tinoni gougovu kedana adoa a God ke dothovira, ma a Jisas ke mai bali vahavira.</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_110">
-        <Content>Kekeha fata ke risoa a Luk e boi mono tadia na komi buka kena risora a Matiu, ma a Mak, ma a Jon. Imanea ke risoa eigna kekeha fata ke tate mai kori vido a Jisas ke havi mai, mi kori vido ke hutu hadi. Me risoa mua kekeha titiono velepuhi ke eia a Jisas ke boi mono tadia na komi buka tavogha, vaghagna: Na Manegna I Samaria Ke Toke (10:25-37), Na Sip Ke Hahi (15:1-7), ma Na Mane Mathangani Ke Taveti Sania A Tamagna (15:11-32).</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_110">
-        <Content>Na komi fata ke risoa a Luk kori buka iaani ke tateli aua a Jisas ke pukuni dothovira na komi tinoni gougovu, boi arahai vamua kena jino. A Luk ke velea a Jisas ke dothovira na komi tinoni koakoa, ma na komi tinoni kena papara kori havidia, me ghaghana bohera na koi vaivine.</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroSectionHead_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_111">
-        <Content>Na Komi Fata Ke Nagho Kori Buka Iaani:</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_3">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_112">
-        <Content>A Jon Siuvitabu ma a Jisas ke havi mai (1:1--2:52)</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_113">
-        <Content>Nigna na titiono a Jon Siuvitabu (3:1-20)</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_113">
-        <Content>Na siuvitabu ma na auaugna a Jisas (3:21--4:13)</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_113">
-        <Content>Nigna na agutu a Jisas i Galili (4:14--9:50)</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_113">
-        <Content>A Jisas ke taveti au i Galili me vano i Jerusalem (9:51--19:27)</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_113">
-        <Content>Na vagougovui wik a Jisas ke mono i Jerusalem (19:28--21:38)</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_113">
-        <Content>A Jisas ke thehe me ghoi havi tabiru (22:1--24:53)</Content>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/t2_t1_body">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/[No character style]">
+        <Content>Junction tables, which handle many to many relationships, should be named by concatenating the names of the tables that have a one to many relationship with the junction table. For example, you might have "Provider" and "Patient" tables. Since providers can have many patients and patients can have many providers (specialists) a table is needed to hold the data for those relationships in a junction table. This table should be named ProviderPatient. Since this convention can result in lengthy table names, abbreviations sometimes may be used at your discretion. Junction tables, which handle many to many relationships, should be named by concatenating the names of the tables that have a one to many relationship with the junction table. For example, you might have "Provider" and "Patient" tables. Since providers can have many patients and patients can have many providers (specialists) a table is needed to hold the data for those relationships in a junction table. This table should be named ProviderPatient. Since this convention can result in lengthy table names, abbreviations sometimes may be used at your discretion. Junction tables, which handle many to many relationships, should be named by concatenating the names of the tables that have a one to many relationship with the junction table. For example, you might have "Provider" and "Patient" tables. Since providers can have many patients and patients can have many providers (specialists) a table is needed to hold the data for those relationships in a junction table. This table should be named ProviderPatient. Since this convention can result in lengthy table names, abbreviations sometimes may be used at your discretion. Junction tables, which handle many to many relationships, should be named by concatenating the names of the tables that have a one to many relationship with the junction table. For example, you might have "Provider" and "Patient" tables. Since providers can have many patients and patients can have many providers (specialists) a table is needed to hold the data for those relationships in a junction table. This table should be named ProviderPatient. Since this convention can result in lengthy table names, abbreviations sometimes may be used at your discretion. Junction tables, which handle many to many relationships, should be named by concatenating the names of the tables that have a one to many relationship with the junction table. For example, you might have "Provider" and "Patient" tables. Since providers can have many patients and patients can have many providers (specialists) a table is needed to hold the data for those relationships in a junction table. This table should be named ProviderPatient. Since this convention can result in lengthy table names, abbreviations sometimes may be used at your discretion. Junction tables, which handle many to many relationships, should be named by concatenating the names of the tables that have a one to many relationship with the junction table. For example, you might have "Provider" and "Patient" tables. Since providers can have many patients and patients can have many providers (specialists) a table is needed to hold the data for those relationships in a junction table. This table should be named ProviderPatient. Since this convention can result in lengthy table names, abbreviations sometimes may be used at your discretion. Junction tables, which handle many to many relationships, should be named by concatenating the names of the tables that have a one to many relationship with the junction table. For example, you might have "Provider" and "Patient" tables. Since providers can have many patients and patients can have many providers (specialists) a table is needed to hold the data for those relationships in a junction table. This table should be named ProviderPatient. Since this convention can result in lengthy table names, abbreviations sometimes may be used at your discretion. Junction tables, which handle many to many relationships, should be named by concatenating the names of the tables that have a one to many relationship with the junction table. For example, you might have "Provider" and "Patient" tables. Since providers can have many patients and patients can have many providers (specialists) a table is needed to hold the data for those relationships in a junction table. This table should be named ProviderPatient. Since this convention can result in lengthy table names, abbreviations sometimes may be used at your discretion. Junction tables, which handle many to many relationships, should be named by concatenating the names of the tables that have a one to many relationship with the junction table. For example, you might have "Provider" and "Patient" tables. Since providers can have many patients and patients can have many providers (specialists) a table is needed to hold the data for those relationships in a junction table. This table should be named ProviderPatient. Since this convention can result in lengthy table names, abbreviations sometimes may be used at your discretion. Junction tables, which handle many to many relationships, should be named by concatenating the names of the tables that have a one to many relationship with the junction table. For example, you might have "Provider" and "Patient" tables. Since providers can have many patients and patients can have many providers (specialists) a table is needed to hold the data for those relationships in a junction table. This table should be named ProviderPatient. Since this convention can result in lengthy table names, abbreviations sometimes may be used at your discretion.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
   </Story>
 </idPkg:Story>

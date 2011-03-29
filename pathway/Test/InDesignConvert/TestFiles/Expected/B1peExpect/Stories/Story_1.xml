@@ -5,7 +5,7 @@
     <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrBook_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrBookName_1">
-        <Content />
+        <Content>Pita</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/TitleMain_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_1">

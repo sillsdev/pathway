@@ -10,7 +10,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/scrBookName_1" Name="scrBookName_1" Imported="false" NextStyle="CharacterStyle/scrBookName_1" KeyboardShortcut="0 0" display="none" clear="both">
+    <CharacterStyle Self="CharacterStyle/scrBookName_1" Name="scrBookName_1" Imported="false" NextStyle="CharacterStyle/scrBookName_1" KeyboardShortcut="0 0" PointSize="0.1" display="none" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -426,7 +426,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/scrBookName_2" Name="scrBookName_2" Imported="false" NextStyle="CharacterStyle/scrBookName_2" KeyboardShortcut="0 0" display="none" clear="both">
+    <CharacterStyle Self="CharacterStyle/scrBookName_2" Name="scrBookName_2" Imported="false" NextStyle="CharacterStyle/scrBookName_2" KeyboardShortcut="0 0" PointSize="0.1" display="none" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1406,7 +1406,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/scrBookName_1" Name="scrBookName_1" Imported="false" NextStyle="ParagraphStyle/scrBookName_1" KeyboardShortcut="0 0" display="none" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/scrBookName_1" Name="scrBookName_1" Imported="false" NextStyle="ParagraphStyle/scrBookName_1" KeyboardShortcut="0 0" PointSize="0.1" display="none" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1822,7 +1822,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/scrBookName_2" Name="scrBookName_2" Imported="false" NextStyle="ParagraphStyle/scrBookName_2" KeyboardShortcut="0 0" display="none" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/scrBookName_2" Name="scrBookName_2" Imported="false" NextStyle="ParagraphStyle/scrBookName_2" KeyboardShortcut="0 0" PointSize="0.1" display="none" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -2987,7 +2987,7 @@
         <PreviewColor type="enumeration">Nothing</PreviewColor>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/scrBookName" Name="scrBookName" Imported="false" NextStyle="ParagraphStyle/scrBookName" KeyboardShortcut="0 0" display="none">
+    <ParagraphStyle Self="ParagraphStyle/scrBookName" Name="scrBookName" Imported="false" NextStyle="ParagraphStyle/scrBookName" KeyboardShortcut="0 0" PointSize="0.1" display="none">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>

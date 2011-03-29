@@ -1093,7 +1093,7 @@ namespace Test.InDesignConvert
             styleName = "b_1";
             _expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[2][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
-            content = string.Empty;
+            content = "class b";
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
         }
