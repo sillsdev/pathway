@@ -192,7 +192,7 @@ namespace SIL.PublishingSolution
             if (_className == "@page")
             {
                 //\special{papersize=5in,8in}
-                style = @"\special{papersize=" + _IDProperty["Page-Height"] + "pt ," + _IDProperty["Page-Width"] + "pt} \\r\\n";
+                //style = @"\special{papersize=" + _IDProperty["Page-Height"] + "pt ," + _IDProperty["Page-Width"] + "pt} \\r\\n";
                 //cmyk 0.1 0.9 0.5 0
                 if(_IDProperty.ContainsKey("backgroundColor"))
                     style += @"\special{background cmyk " + _IDProperty["backgroundColor"] + "}";

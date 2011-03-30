@@ -77,7 +77,7 @@ namespace SIL.PublishingSolution
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
             InitializeData(projectPath, cssClass, classFamily, cssClassOrder);
             InitializeMathStyle();
-            //ProcessCounterProperty();
+            ProcessCounterProperty();
             OpenXhtmlFile(xhtmlFileWithPath);
             ProcessXHTML(xhtmlFileWithPath);
             //UpdateRelativeInStylesXML();
@@ -144,28 +144,35 @@ namespace SIL.PublishingSolution
                 //}
 
                 //// Footnote process 
-                //searchKey = "display";
-                //if (IdAllClass[className].ContainsKey(searchKey) && className.IndexOf("..footnote") > 0)
-                //{
-                //    string footnoteClsName = Common.LeftString(className, "..");
-                //    if (IdAllClass[footnoteClsName][searchKey] == "footnote" || IdAllClass[footnoteClsName][searchKey] == "prince-footnote")
-                //    {
-                //        if (!_FootNote.Contains(footnoteClsName))
-                //            _FootNote.Add(footnoteClsName);
-                //    }
-                //}
-                //string searchKey1 = "..footnote-call";
-                //if (className.IndexOf(searchKey1) >= 0)
-                //{
-                //    if (!_footnoteCallContent.Contains(className))
-                //        _footnoteCallContent.Add(className);
-                //}
-                //string searchKey2 = "..footnote-marker";
-                //if (className.IndexOf(searchKey2) >= 0)
-                //{
-                //    if (!_footnoteMarkerContent.Contains(className))
-                //        _footnoteMarkerContent.Add(className);
-                //}
+                searchKey = "display";
+                if (IdAllClass[className].ContainsKey(searchKey) && className.IndexOf("..footnote") > 0)
+                {
+                    string footnoteClsName = Common.LeftString(className, "..");
+                    if (IdAllClass[footnoteClsName][searchKey] == "footnote" || IdAllClass[footnoteClsName][searchKey] == "prince-footnote")
+                    {
+                        if (!_FootNote.Contains(footnoteClsName))
+                            _FootNote.Add(footnoteClsName);
+                    }
+                }
+                string searchKey1 = "..footnote-call";
+                if (className.IndexOf(searchKey1) >= 0)
+                {
+                    if (!_footnoteCallContent.Contains(className))
+                        _footnoteCallContent.Add(className);
+                }
+                searchKey = "..footnote-marker";
+                if (className.IndexOf(searchKey) >= 0)
+                {
+                    if (!_footnoteMarkerContent.Contains(className))
+                    {
+                        _footnoteMarkerContent.Add(className);
+                        if (IdAllClass[className].ContainsKey("content"))
+                        {
+                            _footNoteMarker[className] = IdAllClass[className]["content"];
+                        }
+                    }
+
+                }
             }
         }
 
@@ -514,29 +521,13 @@ namespace SIL.PublishingSolution
 
         private void WriteFootNoteMarker(string footerClassName, string content)
         {
-            _writer.WriteAttributeString("Position", "Superscript");
-            _writer.WriteStartElement("Footnote");
-            _writer.WriteStartElement("ParagraphStyleRange");
-            _writer.WriteAttributeString("AppliedParagraphStyle", "ParagraphStyle/" + footerClassName + "..footnote-marker");
-            _writer.WriteStartElement("CharacterStyleRange");
-            _writer.WriteAttributeString("AppliedCharacterStyle", "CharacterStyle/$ID/[No character style]");
-            _writer.WriteStartElement("Content");
-            _writer.WriteRaw("<?ACE 4?> ");
-            string replace = content.Replace("\r\n", " ");
-            //string leftPart = Common.LeftString(, "<");
-            string leftPart = Common.LeftString(replace, "<");
-            _writer.WriteString(leftPart);
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-            string replaceLeft = content; 
-            //content.Replace(leftPart, "");
-            if (leftPart.Length > 0)
-                replaceLeft = content.Replace(leftPart, "");
-            replace = replaceLeft.Replace("\r\n", " ");
-            //_writer.WriteRaw(content.Replace(leftPart, "").Replace("\r\n", " "));
-            _writer.WriteRaw(replace);
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
+            //Todo - Unicode marker
+            string markerClassName = footerClassName + "..footnote-marker";
+            string marker = _footNoteMarker[markerClassName];
+            _xetexFile.Write("  \\footnote {" + marker +  "} ");
+            _xetexFile.Write("{");
+            _xetexFile.Write(content);
+            _xetexFile.Write("}");
         }
 
         private void AnchorBookMark()

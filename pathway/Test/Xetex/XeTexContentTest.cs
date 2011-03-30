@@ -456,6 +456,17 @@ namespace Test.Xetex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void FootNoteTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "FootNote";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+
         #endregion
 
 

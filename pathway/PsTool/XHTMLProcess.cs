@@ -647,6 +647,11 @@ namespace SIL.PublishingSolution
                 {
                     footnoteFormat.Append("<text:span text:style-name=\"" + _characterName + "\">" + Common.ReplaceSymbolToText(content) + "</text:span>");
                 }
+                else if (outputType == Common.OutputType.XETEX.ToString())
+                {
+                    footnoteFormat.Append(Common.ReplaceSymbolToText(content));
+                }
+
                 else
                 {
                     footnoteFormat.Append("<CharacterStyleRange AppliedCharacterStyle=\"" + "CharacterStyle/" + _characterName + "\"><Content>" + Common.ReplaceSymbolToText(content) + "</Content></CharacterStyleRange>");
