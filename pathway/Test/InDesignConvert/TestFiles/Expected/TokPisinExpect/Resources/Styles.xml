@@ -178,7 +178,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_1" Name="VerseNumber_1" Imported="false" NextStyle="CharacterStyle/VerseNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="smaller" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumber_1" Name="VerseNumber_1" Imported="false" NextStyle="CharacterStyle/VerseNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="18" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -194,7 +194,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/scrFootnoteMarker_1" Name="scrFootnoteMarker_1" Imported="false" NextStyle="CharacterStyle/scrFootnoteMarker_1" KeyboardShortcut="0 0" PointSize="13" FontStyle="Bold" Position="Superscript" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/scrFootnoteMarker_1" Name="scrFootnoteMarker_1" Imported="false" NextStyle="CharacterStyle/scrFootnoteMarker_1" KeyboardShortcut="0 0" PointSize="18" FontStyle="Bold" Position="Superscript" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -266,7 +266,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_2" Name="VerseNumber_2" Imported="false" NextStyle="CharacterStyle/VerseNumber_2" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="smaller" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumber_2" Name="VerseNumber_2" Imported="false" NextStyle="CharacterStyle/VerseNumber_2" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="18" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -306,7 +306,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_3" Name="VerseNumber_3" Imported="false" NextStyle="CharacterStyle/VerseNumber_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="smaller" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumber_3" Name="VerseNumber_3" Imported="false" NextStyle="CharacterStyle/VerseNumber_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="18" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -354,7 +354,7 @@
         <Leading type="unit">8</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/scrFootnoteMarker_2" Name="scrFootnoteMarker_2" Imported="false" NextStyle="CharacterStyle/scrFootnoteMarker_2" KeyboardShortcut="0 0" PointSize="13" FontStyle="Bold" Position="Superscript" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/scrFootnoteMarker_2" Name="scrFootnoteMarker_2" Imported="false" NextStyle="CharacterStyle/scrFootnoteMarker_2" KeyboardShortcut="0 0" PointSize="18" FontStyle="Bold" Position="Superscript" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -378,7 +378,7 @@
         <Leading type="unit">8</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/scrFootnoteMarker_3" Name="scrFootnoteMarker_3" Imported="false" NextStyle="CharacterStyle/scrFootnoteMarker_3" KeyboardShortcut="0 0" PointSize="13" FontStyle="Bold" Position="Superscript" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/scrFootnoteMarker_3" Name="scrFootnoteMarker_3" Imported="false" NextStyle="CharacterStyle/scrFootnoteMarker_3" KeyboardShortcut="0 0" PointSize="18" FontStyle="Bold" Position="Superscript" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -434,7 +434,7 @@
         <Leading type="unit">0.1</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_4" Name="VerseNumber_4" Imported="false" NextStyle="CharacterStyle/VerseNumber_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="smaller" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumber_4" Name="VerseNumber_4" Imported="false" NextStyle="CharacterStyle/VerseNumber_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="18" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -506,7 +506,7 @@
         <Leading type="unit">0.1</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_5" Name="VerseNumber_5" Imported="false" NextStyle="CharacterStyle/VerseNumber_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="smaller" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumber_5" Name="VerseNumber_5" Imported="false" NextStyle="CharacterStyle/VerseNumber_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="18" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -530,7 +530,7 @@
         <Leading type="unit">0.1</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/scrFootnoteMarker_4" Name="scrFootnoteMarker_4" Imported="false" NextStyle="CharacterStyle/scrFootnoteMarker_4" KeyboardShortcut="0 0" PointSize="13" FontStyle="Bold" Position="Superscript" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/scrFootnoteMarker_4" Name="scrFootnoteMarker_4" Imported="false" NextStyle="CharacterStyle/scrFootnoteMarker_4" KeyboardShortcut="0 0" PointSize="18" FontStyle="Bold" Position="Superscript" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -881,7 +881,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_1" Name="VerseNumber_1" Imported="false" NextStyle="ParagraphStyle/VerseNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="smaller" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_1" Name="VerseNumber_1" Imported="false" NextStyle="ParagraphStyle/VerseNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="18" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -897,7 +897,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/scrFootnoteMarker_1" Name="scrFootnoteMarker_1" Imported="false" NextStyle="ParagraphStyle/scrFootnoteMarker_1" KeyboardShortcut="0 0" PointSize="13" FontStyle="Bold" Position="Superscript" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both">
+    <ParagraphStyle Self="ParagraphStyle/scrFootnoteMarker_1" Name="scrFootnoteMarker_1" Imported="false" NextStyle="ParagraphStyle/scrFootnoteMarker_1" KeyboardShortcut="0 0" PointSize="18" FontStyle="Bold" Position="Superscript" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -969,7 +969,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_2" Name="VerseNumber_2" Imported="false" NextStyle="ParagraphStyle/VerseNumber_2" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="smaller" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_2" Name="VerseNumber_2" Imported="false" NextStyle="ParagraphStyle/VerseNumber_2" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="18" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1009,7 +1009,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_3" Name="VerseNumber_3" Imported="false" NextStyle="ParagraphStyle/VerseNumber_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="smaller" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_3" Name="VerseNumber_3" Imported="false" NextStyle="ParagraphStyle/VerseNumber_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="18" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1057,7 +1057,7 @@
         <Leading type="unit">8</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/scrFootnoteMarker_2" Name="scrFootnoteMarker_2" Imported="false" NextStyle="ParagraphStyle/scrFootnoteMarker_2" KeyboardShortcut="0 0" PointSize="13" FontStyle="Bold" Position="Superscript" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
+    <ParagraphStyle Self="ParagraphStyle/scrFootnoteMarker_2" Name="scrFootnoteMarker_2" Imported="false" NextStyle="ParagraphStyle/scrFootnoteMarker_2" KeyboardShortcut="0 0" PointSize="18" FontStyle="Bold" Position="Superscript" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1081,7 +1081,7 @@
         <Leading type="unit">8</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/scrFootnoteMarker_3" Name="scrFootnoteMarker_3" Imported="false" NextStyle="ParagraphStyle/scrFootnoteMarker_3" KeyboardShortcut="0 0" PointSize="13" FontStyle="Bold" Position="Superscript" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
+    <ParagraphStyle Self="ParagraphStyle/scrFootnoteMarker_3" Name="scrFootnoteMarker_3" Imported="false" NextStyle="ParagraphStyle/scrFootnoteMarker_3" KeyboardShortcut="0 0" PointSize="18" FontStyle="Bold" Position="Superscript" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1137,7 +1137,7 @@
         <Leading type="unit">0.1</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_4" Name="VerseNumber_4" Imported="false" NextStyle="ParagraphStyle/VerseNumber_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="smaller" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_4" Name="VerseNumber_4" Imported="false" NextStyle="ParagraphStyle/VerseNumber_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="18" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1209,7 +1209,7 @@
         <Leading type="unit">0.1</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_5" Name="VerseNumber_5" Imported="false" NextStyle="ParagraphStyle/VerseNumber_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="smaller" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_5" Name="VerseNumber_5" Imported="false" NextStyle="ParagraphStyle/VerseNumber_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="18" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1233,7 +1233,7 @@
         <Leading type="unit">0.1</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/scrFootnoteMarker_4" Name="scrFootnoteMarker_4" Imported="false" NextStyle="ParagraphStyle/scrFootnoteMarker_4" KeyboardShortcut="0 0" PointSize="13" FontStyle="Bold" Position="Superscript" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both">
+    <ParagraphStyle Self="ParagraphStyle/scrFootnoteMarker_4" Name="scrFootnoteMarker_4" Imported="false" NextStyle="ParagraphStyle/scrFootnoteMarker_4" KeyboardShortcut="0 0" PointSize="18" FontStyle="Bold" Position="Superscript" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1569,7 +1569,7 @@
         <PreviewColor type="enumeration">Nothing</PreviewColor>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/scrFootnoteMarker" Name="scrFootnoteMarker" Imported="false" NextStyle="ParagraphStyle/scrFootnoteMarker" KeyboardShortcut="0 0" PointSize="smaller" FontStyle="Bold" Position="Superscript">
+    <ParagraphStyle Self="ParagraphStyle/scrFootnoteMarker" Name="scrFootnoteMarker" Imported="false" NextStyle="ParagraphStyle/scrFootnoteMarker" KeyboardShortcut="0 0" PointSize="100%" FontStyle="Bold" Position="Superscript">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
@@ -1610,7 +1610,7 @@
         <Leading type="unit">24</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber" Name="VerseNumber" Imported="false" NextStyle="ParagraphStyle/VerseNumber" KeyboardShortcut="0 0" PointSize="smaller" Position="Superscript">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber" Name="VerseNumber" Imported="false" NextStyle="ParagraphStyle/VerseNumber" KeyboardShortcut="0 0" PointSize="100%" Position="Superscript">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>

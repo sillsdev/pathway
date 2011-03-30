@@ -642,7 +642,7 @@ namespace Test.InDesignConvert
             FileNameWithPath = Common.PathCombine(_output, "Styles.xml");
             XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
 
-            _expected.Add("PointSize", "6");
+            _expected.Add("PointSize", "100%");
             Assert.IsTrue(ValidateNodeAttribute(), " failed for IncreaseFontSizeForSuper");
         }
         #endregion

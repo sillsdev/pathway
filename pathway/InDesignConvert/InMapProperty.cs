@@ -336,9 +336,11 @@ namespace SIL.PublishingSolution
                     break;
                 case "super":
                     _IDProperty["Position"] = "Superscript";
+                    _IDProperty["PointSize"] = "100%";
                     break;
                 case "sub":
                     _IDProperty["Position"] = "Subscript";
+                    _IDProperty["PointSize"] = "100%";
                     break;
                 case "text-top":
                 case "top":

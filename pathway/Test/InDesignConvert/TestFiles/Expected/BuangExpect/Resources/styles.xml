@@ -34,7 +34,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/xhomographnumber" Name="xhomographnumber" Imported="false" NextStyle="CharacterStyle/xhomographnumber" KeyboardShortcut="0 0" FontStyle="Bold" PointSize="6.6" Position="Subscript" AppliedFont="Times New Roman" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/xhomographnumber" Name="xhomographnumber" Imported="false" NextStyle="CharacterStyle/xhomographnumber" KeyboardShortcut="0 0" FontStyle="Bold" PointSize="12" Position="Subscript" AppliedFont="Times New Roman" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -5081,7 +5081,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/xhomographnumber" Name="xhomographnumber" Imported="false" NextStyle="ParagraphStyle/xhomographnumber" KeyboardShortcut="0 0" FontStyle="Bold" PointSize="6.6" Position="Subscript" AppliedFont="Times New Roman" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/xhomographnumber" Name="xhomographnumber" Imported="false" NextStyle="ParagraphStyle/xhomographnumber" KeyboardShortcut="0 0" FontStyle="Bold" PointSize="12" Position="Subscript" AppliedFont="Times New Roman" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -10089,7 +10089,7 @@
         <AppliedFont type="string">Times New Roman</AppliedFont>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/xhomographnumber" Name="xhomographnumber" Imported="false" NextStyle="ParagraphStyle/xhomographnumber" KeyboardShortcut="0 0" FontStyle="Bold" PointSize="55%" Position="Subscript">
+    <ParagraphStyle Self="ParagraphStyle/xhomographnumber" Name="xhomographnumber" Imported="false" NextStyle="ParagraphStyle/xhomographnumber" KeyboardShortcut="0 0" FontStyle="Bold" PointSize="100%" Position="Subscript">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
