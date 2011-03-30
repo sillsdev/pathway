@@ -88,9 +88,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="EncloseParasInSections.xsl" />
-    <EmbeddedResource Include="EncloseScrInColumns.xsl" />
-    <EmbeddedResource Include="MoveSpansToParas.xsl" />
-    <EmbeddedResource Include="MoveTitleSpansToTitle.xsl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="XML_without_line_breaks.xsl" />
@@ -117,7 +114,7 @@
     <None Include="PostBuild.bat" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="EncloseSectionsInBook.xsl" />
+    <EmbeddedResource Include="SeparateIntoBooks.xsl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

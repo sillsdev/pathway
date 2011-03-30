@@ -17,6 +17,18 @@
 	<!-- Remove text (empty lines) at the root level. -->
 	<xsl:strip-space elements="*"/>
 	
+	<!-- Create intro and Scripture structure within the book. -->
+	<xsl:template match="xhtml:div[@class='scrBook']">
+		<xsl:copy>
+			<xsl:copy-of select="@*"/>
+			<xsl:copy-of select="*[not(self::xhtml:h1 or self::xhtml:p)]"/>
+			<xsl:apply-templates select="*[self::xhtml:h1 or self::xhtml:p][starts-with(@class, 'Intro_')]"/>
+			<div class="columns" xmlns="http://www.w3.org/1999/xhtml">
+				<xsl:apply-templates select="*[self::xhtml:h1 or self::xhtml:p][not(starts-with(@class, 'Intro_'))]"/>
+			</div>
+		</xsl:copy>
+	</xsl:template>
+	
 	<!-- Create section divisions -->
 	<xsl:template match="xhtml:h1">
 		<xsl:choose>

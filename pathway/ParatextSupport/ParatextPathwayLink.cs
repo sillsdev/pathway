@@ -16,13 +16,11 @@ namespace SIL.PublishingSolution
 		private Dictionary<string, object> m_xslParams;
         private string m_projectName;
         private string m_databaseName;
-		private XslCompiledTransform m_cleanUsfx = new XslCompiledTransform();
-		private XslCompiledTransform m_usfxToXhtml = new XslCompiledTransform();
-		private XslCompiledTransform m_moveTitleSpansToTitle = new XslCompiledTransform();
-		private XslCompiledTransform m_moveSpansToParas = new XslCompiledTransform();
+		private XslCompiledTransform m_cleanUsx = new XslCompiledTransform();
+		private XslCompiledTransform m_separateIntoBooks = new XslCompiledTransform();
+		private XslCompiledTransform m_usxToXhtml = new XslCompiledTransform();
 		private XslCompiledTransform m_encloseParasInSections = new XslCompiledTransform();
-		private XslCompiledTransform m_encloseScrInColumns = new XslCompiledTransform();
-		private XslCompiledTransform m_encloseSectionsInBook = new XslCompiledTransform();
+		//private XslCompiledTransform m_encloseScrInColumns = new XslCompiledTransform();
 
 		/// ------------------------------------------------------------------------------------
 		/// <summary>
@@ -89,47 +87,38 @@ namespace SIL.PublishingSolution
 
 		/// ------------------------------------------------------------------------------------
 		/// <summary>
-		/// Loads the style sheets that are used to transform from Paratext USFX to XHTML.
+		/// Loads the style sheets that are used to transform from Paratext USX to XHTML.
 		/// </summary>
 		/// ------------------------------------------------------------------------------------
 		private void LoadStyleSheets()
 		{
 			// Create stylesheets
-			m_cleanUsfx.Load(XmlReader.Create(
+			m_cleanUsx.Load(XmlReader.Create(
 				Assembly.GetExecutingAssembly().GetManifestResourceStream(
 				"ParatextSupport.XML_without_line_breaks.xsl")));
-			m_usfxToXhtml.Load(XmlReader.Create(
+			m_separateIntoBooks.Load(XmlReader.Create(
+				Assembly.GetExecutingAssembly().GetManifestResourceStream(
+				"ParatextSupport.SeparateIntoBooks.xsl")));                
+			m_usxToXhtml.Load(XmlReader.Create(
 				Assembly.GetExecutingAssembly().GetManifestResourceStream(
 				"ParatextSupport.UsfxToXhtml.xsl")));
-			m_moveTitleSpansToTitle.Load(XmlReader.Create(
-				Assembly.GetExecutingAssembly().GetManifestResourceStream(
-				"ParatextSupport.MoveTitleSpansToTitle.xsl")));
-			m_moveSpansToParas.Load(XmlReader.Create(
-				Assembly.GetExecutingAssembly().GetManifestResourceStream(
-				"ParatextSupport.MoveSpansToParas.xsl")));
 			m_encloseParasInSections.Load(XmlReader.Create(
 				Assembly.GetExecutingAssembly().GetManifestResourceStream(
 				"ParatextSupport.EncloseParasInSections.xsl")));
-			m_encloseScrInColumns.Load(XmlReader.Create(
-				Assembly.GetExecutingAssembly().GetManifestResourceStream(
-				"ParatextSupport.EncloseScrInColumns.xsl")));
-			m_encloseSectionsInBook.Load(XmlReader.Create(
-				Assembly.GetExecutingAssembly().GetManifestResourceStream(
-				"ParatextSupport.EncloseSectionsInBook.xsl")));
 		}
 
 		/// ------------------------------------------------------------------------------------
 		/// <summary>
 		/// Exports to the current Scripture book to pathway.
 		/// </summary>
-		/// <param name="usfxDoc">The XML document representation of the USFM file.</param>
+		/// <param name="usxDoc">The XML document representation of the USFM file.</param>
 		/// ------------------------------------------------------------------------------------
-		public void ExportToPathway(XmlDocument usfxDoc)
+		public void ExportToPathway(XmlDocument usxDoc)
 		{
             //// TestBed Code
-            //// Save Paratext usfxDoc file.
-            // usfxDoc.Save("d:\\usfxDoc.xml");
-			if (string.IsNullOrEmpty(usfxDoc.InnerText))
+            //// Save Paratext usxDoc file.
+            // usfxDoc.Save("d:\\usxDoc.xml");
+			if (string.IsNullOrEmpty(usxDoc.InnerText))
 			{
 				// TODO: Localize string
 				MessageBox.Show("The current book has no content to export.", string.Empty, MessageBoxButtons.OK);
@@ -160,7 +149,15 @@ namespace SIL.PublishingSolution
 						return;
 				}
 
-				ConvertUsfxToPathwayXhtmlFile(usfxDoc.InnerXml, fileName);
+				try
+				{
+					Application.UseWaitCursor = true;
+					ConvertUsxToPathwayXhtmlFile(usxDoc.InnerXml, fileName);
+				}
+				finally
+				{
+					Application.UseWaitCursor = false;
+				}
 
                 PsExport exporter = new PsExport();
 				exporter.DataType = "Scripture";
@@ -172,10 +169,10 @@ namespace SIL.PublishingSolution
 		/// <summary>
 		/// Exports to the specified Scripture books to pathway.
 		/// </summary>
-		/// <param name="usfxBooksToExport">The XML document representation of the Scripture 
+		/// <param name="usxBooksToExport">The XML document representation of the Scripture 
 		/// books in USFM file.</param>
 		/// ------------------------------------------------------------------------------------
-		public void ExportToPathway(List<XmlDocument> usfxBooksToExport)
+		public void ExportToPathway(List<XmlDocument> usxBooksToExport)
 		{
 			// TODO: ProgressBar progressBar = new ProgressBar();
 			ScriptureContents dlg = new ScriptureContents();
@@ -203,7 +200,7 @@ namespace SIL.PublishingSolution
 						return;
 				}
 
-				XmlDocument scrBooksDoc = CombineUsfxDocs(usfxBooksToExport);
+				XmlDocument scrBooksDoc = CombineUsxDocs(usxBooksToExport);
 
 				if (string.IsNullOrEmpty(scrBooksDoc.InnerText))
 				{
@@ -211,7 +208,7 @@ namespace SIL.PublishingSolution
 					MessageBox.Show("The current book has no content to export.", string.Empty, MessageBoxButtons.OK);
 					return;
 				}
-				ConvertUsfxToPathwayXhtmlFile(scrBooksDoc.InnerXml, fileName);
+				ConvertUsxToPathwayXhtmlFile(scrBooksDoc.InnerXml, fileName);
 
 				PsExport exporter = new PsExport();
 				exporter.DataType = "Scripture";
@@ -221,22 +218,22 @@ namespace SIL.PublishingSolution
 
 		/// ------------------------------------------------------------------------------------
 		/// <summary>
-		/// Combines USFX of multiple books into a single XmlDocument.
+		/// Combines USX of multiple books into a single XmlDocument.
 		/// </summary>
-		/// <param name="usfxBooksToExport">The Scripture books in USFX format to export.</param>
+		/// <param name="usxBooksToExport">The Scripture books in USX format to export.</param>
 		/// <returns>a single XmlDocument containing all books.</returns>
 		/// ------------------------------------------------------------------------------------
-		private XmlDocument CombineUsfxDocs(List<XmlDocument> usfxBooksToExport)
+		private XmlDocument CombineUsxDocs(List<XmlDocument> usxBooksToExport)
 		{
-			Debug.Assert(usfxBooksToExport != null && usfxBooksToExport.Count > 0);
+			Debug.Assert(usxBooksToExport != null && usxBooksToExport.Count > 0);
 
-			XmlDocument allBooks = usfxBooksToExport[0];
-			if (usfxBooksToExport.Count == 1)
+			XmlDocument allBooks = usxBooksToExport[0];
+			if (usxBooksToExport.Count == 1)
 				return allBooks;
 
-			for (int iDoc = 1; iDoc < usfxBooksToExport.Count; iDoc++)
+			for (int iDoc = 1; iDoc < usxBooksToExport.Count; iDoc++)
 			{
-				foreach (XmlNode nodeToAdd in usfxBooksToExport[iDoc].SelectSingleNode("/usfm").ChildNodes)
+				foreach (XmlNode nodeToAdd in usxBooksToExport[iDoc].SelectSingleNode("/usfm").ChildNodes)
 				{
 					XmlNode prevNode = allBooks.SelectSingleNode("usfm").LastChild;
 					XmlNode commonParent = prevNode.ParentNode;
@@ -249,64 +246,43 @@ namespace SIL.PublishingSolution
 
 		/// ------------------------------------------------------------------------------------
 		/// <summary>
-		/// Converts the USFX to an XHTML file for Pathway.
+		/// Converts the USX to an XHTML file for Pathway.
 		/// </summary>
-		/// <param name="usfx">The XML document representation of the USFM file.</param>
+		/// <param name="usx">The XML document representation of the USFM file.</param>
 		/// <param name="fileName">file name with full path where xhtml file will be written</param>
 		/// ------------------------------------------------------------------------------------
-		private void ConvertUsfxToPathwayXhtmlFile(string usfx, string fileName)
+		private void ConvertUsxToPathwayXhtmlFile(string usx, string fileName)
 		{
 			// Create argument list
 			XsltArgumentList args = new XsltArgumentList();
-			//args.AddExtensionObject("urn:extensions", new XsltExtensions());
-			// REVIEW: I removed the following line for this new location.
-			//args.AddExtensionObject("urn:usfmextensions", new UsfmXsltExtensions());
 			foreach (string paramName in m_xslParams.Keys)
 				args.AddParam(paramName, "", m_xslParams[paramName]);
 
-			// Step 0. Remove line breaks.
-			StringBuilder cleanUsfx = new StringBuilder();
-			XmlWriter htmlw0 = XmlWriter.Create(cleanUsfx, m_cleanUsfx.OutputSettings);
-			m_cleanUsfx.Transform(XmlReader.Create(new StringReader(usfx)), null, htmlw0, null);
+			// Step 1. Separate books into their own elements for subsequent processing.
+			StringBuilder separatedBooks = new StringBuilder();
+			XmlWriter htmlw05 = XmlWriter.Create(separatedBooks, m_usxToXhtml.OutputSettings);
+			m_separateIntoBooks.Transform(XmlReader.Create(new StringReader(usx)), null, htmlw05, null);
 
-			// Step 1. Convert the SFMs to styles recognized by Pathway. 
-			// (Also, move chapter numbers to the following paragraph, if they are not included there, in preparation for the next steps).
+			// Step 2. Remove line breaks for next step (to prevent creation of empty spans).
+			StringBuilder cleanUsx = new StringBuilder();
+			XmlWriter htmlw0 = XmlWriter.Create(cleanUsx, m_cleanUsx.OutputSettings);
+			m_cleanUsx.Transform(XmlReader.Create(new StringReader(separatedBooks.ToString())), null, htmlw0, null);
+
+			// Step 3. Convert the SFMs to styles recognized by Pathway. Also, change the structure of the 
+			//       following elements to Pathway's format: book title, chapters, figures, footnotes.
 			StringBuilder html = new StringBuilder();
-			XmlWriter htmlw = XmlWriter.Create(html, m_usfxToXhtml.OutputSettings);
-			m_usfxToXhtml.Transform(XmlReader.Create(new StringReader(cleanUsfx.ToString())), args, htmlw, null);
+			XmlWriter htmlw = XmlWriter.Create(html, m_usxToXhtml.OutputSettings);
+			m_usxToXhtml.Transform(XmlReader.Create(new StringReader(cleanUsx.ToString())), args, htmlw, null);
 
 			XmlReaderSettings settings = new XmlReaderSettings();
 			settings.ProhibitDtd = false;
 
-			// Step 2. Move title spans inside a paragraph.
-			StringBuilder titleSpansToTitle = new StringBuilder();
-			XmlWriter htmlw2 = XmlWriter.Create(titleSpansToTitle, m_moveTitleSpansToTitle.OutputSettings);
-			XmlReader reader2 = XmlReader.Create(new StringReader(html.ToString()), settings);
-			m_moveTitleSpansToTitle.Transform(reader2, null, htmlw2, null);
-
-			// Step 3. Move any text outside a paragraph element into a paragraph.
-			StringBuilder spansToParas = new StringBuilder();
-			XmlWriter htmlw3 = XmlWriter.Create(spansToParas, m_moveSpansToParas.OutputSettings);
-			XmlReader reader3 = XmlReader.Create(new StringReader(titleSpansToTitle.ToString()), settings);
-			m_moveSpansToParas.Transform(reader3, null, htmlw3, null);
-
-			// Step 4. Move paragraphs into appropriate section type (as determined by the paragraph styles).
-			StringBuilder parasInSections = new StringBuilder();
-			XmlWriter htmlw4 = XmlWriter.Create(parasInSections, m_encloseParasInSections.OutputSettings);
-			XmlReader reader4 = XmlReader.Create(new StringReader(spansToParas.ToString()), settings);
-			m_encloseParasInSections.Transform(reader4, null, htmlw4, null);
-
-			// Step 5. Move Scripture sections into columns element.
-			StringBuilder scrSectionsInColumns = new StringBuilder();
-			XmlWriter htmlw5 = XmlWriter.Create(scrSectionsInColumns, m_encloseScrInColumns.OutputSettings);
-			XmlReader reader5 = XmlReader.Create(new StringReader(parasInSections.ToString()), settings);
-			m_encloseScrInColumns.Transform(reader5, null, htmlw5, null);
-
-			// Step 6. Move all sections into scrBook element.
+			// Step 4. Move paragraphs into appropriate section type (as determined by the paragraph styles) and 
+			//       include the Scripture sections within columns.
 			FileStream xhtmlFile = new FileStream(fileName, FileMode.Create);
-			XmlWriter htmlw6 = XmlWriter.Create(xhtmlFile, m_encloseSectionsInBook.OutputSettings);
-			XmlReader reader6 = XmlReader.Create(new StringReader(scrSectionsInColumns.ToString()), settings);
-			m_encloseSectionsInBook.Transform(reader6, null, htmlw6, null);
+			XmlWriter htmlw4 = XmlWriter.Create(xhtmlFile, m_encloseParasInSections.OutputSettings);
+			XmlReader reader4 = XmlReader.Create(new StringReader(html.ToString()), settings);
+			m_encloseParasInSections.Transform(reader4, null, htmlw4, null);
 			xhtmlFile.Close();
 		}
 	}

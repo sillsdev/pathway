@@ -44,10 +44,10 @@
 	<!-- Define the book. -->
 	<xsl:template match="book">
 		<xsl:variable name="bookCode" select="@id"/>
-		<xsl:variable name="bookInToc" select="normalize-space(following::para[@style='toc2'])"/>
-		<xsl:variable name="bookHeading" select="normalize-space(following::para[@style='h'])"/>
-		<xsl:variable name="bookTitle" select="normalize-space(following::para[@style='mt'])"/>
-		<xsl:variable name="bookTitle1" select="normalize-space(following::para[@style='mt1'])"/>
+		<xsl:variable name="bookInToc" select="normalize-space(para[@style='toc2'])"/>
+		<xsl:variable name="bookHeading" select="normalize-space(para[@style='h'])"/>
+		<xsl:variable name="bookTitle" select="normalize-space(para[@style='mt'])"/>
+		<xsl:variable name="bookTitle1" select="normalize-space(para[@style='mt1'])"/>
 
 		<div class="scrBook" xmlns="http://www.w3.org/1999/xhtml">
 			<span class="scrBookName" lang="{$ws}">
@@ -72,9 +72,67 @@
 				</xsl:choose>
 			</span>
 			<span class="scrBookCode" lang="{$ws}"><xsl:value-of select="$bookCode"/></span>
+			<div class = "Title_Main" xmlns="http://www.w3.org/1999/xhtml">
+				<xsl:choose>
+					<xsl:when test="para[@style='mt' or @style='mt1']">
+						<xsl:apply-templates select="para[@style='mt' or @style='mt1']" mode="title"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<span lang="{$ws}"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</div>
+			
+			<xsl:apply-templates/>
 		</div>
 	</xsl:template>
 
+	<!-- Convert the title to a form understood by Pathway -->
+	<xsl:template match="para" mode="title">
+		<xsl:apply-templates select="preceding-sibling::*[1][self::para][@style='mt2' or @style='mt3' or @style='mt4']" 
+			mode="preceding-sibling-title"/>
+		<!-- <span lang="{$ws}"  xmlns="http://www.w3.org/1999/xhtml"> -->
+		<xsl:apply-templates/>
+		<!-- </span> -->
+		<xsl:apply-templates select="following-sibling::*[1][self::para][@style='mt2' or @style='mt3' or @style='mt4']" 
+			mode="following-sibling-title"/>
+	</xsl:template>
+	
+	<!-- Include any title paragraphs preceding the main title -->
+	<xsl:template match="para" mode="preceding-sibling-title">
+		<xsl:apply-templates select="preceding-sibling::*[1][self::para][@style='mt2' or @style='mt3' or @style='mt4']" 
+			mode="preceding-sibling-title"/>
+		<xsl:call-template name="span-title"/>
+	</xsl:template>
+	
+	<!-- Include any title paragraphs following the main title -->
+	<xsl:template match="para" mode="following-sibling-title">
+		<xsl:call-template name="span-title"/>
+		<xsl:apply-templates select="following-sibling::*[1][self::para][@style='mt2' or @style='mt3']" 
+			mode="following-sibling-title"/>
+	</xsl:template>
+	
+	<!-- For secondary or tertiary title style, convert it to a span -->
+	<xsl:template name="span-title">
+		<xsl:variable name="class">
+			<xsl:choose>
+				<xsl:when test="@style='mt2'">
+					<xsl:value-of select="'Title_Secondary'"/>
+				</xsl:when>
+				<xsl:when test="@style='mt3' or @style='mt4'">
+					<xsl:value-of select="'Title_Tertiary'"/>
+				</xsl:when>
+			</xsl:choose>
+		</xsl:variable>
+		
+		<span class="{$class}" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
+			<xsl:value-of select="."/>
+		</span>
+	</xsl:template>
+	
+	<!-- Attempt to delete extra title spans at body level -->
+	<xsl:template match="body/span[@class='Title_Secondary' or @class='Title_Tertiary']"/>
+	
 	<!-- Convert all paragraph SFM style markers to styles understood by Pathway. -->
 	<xsl:template match="para">
 		<xsl:choose>
@@ -82,24 +140,10 @@
 			<xsl:when test="@style = 'h'"/>
 			<xsl:when test="@style = 'rem'"/>
 
-			<!-- Convert Scripture title styles -->
-			<xsl:when test="@style = 'mt' or @style = 'mt1'">
-				<div class="Title_Main" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:apply-templates/>
-				</div>
-			</xsl:when>
-			<!-- mt2, mt3 and mt4 are paragraph styles, but they will need to become spans and be moved (later) inside
-				the adjacent title division/paragraph. -->
-			<xsl:when test="@style = 'mt2'">
-				<span class="Title_Secondary" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
-				</span>
-			</xsl:when>
-			<xsl:when test="@style = 'mt3' or @style = 'mt4'">
-				<span class="Title_Tertiary" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
-				</span>
-			</xsl:when>
+			<!-- Scripture title markers are converted elsewhere. They include the following markers:
+				mt, mt1, mt2, mt3, mt4
+				They need to be deleted here. -->
+			<xsl:when test="@style='mt' or @style='mt1' or @style='mt2' or @style='mt3' or @style='mt4'"/>
 			
 			<!-- Convert introduction styles. -->
 			<xsl:when test="@style = 'im' or @style = 'im1'">
@@ -400,8 +444,8 @@
 
 	<!-- Handle figure element -->
 	<xsl:template match="figure">
-		<xsl:variable name="figureNumber" select="count(preceding::figure)+1"/>
-		<xsl:variable name="bookCode" select="preceding::book[1]/@id"/>
+		<xsl:variable name="bookCode" select="ancestor::book/@id"/>
+		<xsl:variable name="figureNumber" select="count(preceding::figure[ancestor::book[@id=$bookCode]])+1"/>
 		
 		<xsl:variable name="pictureLoc">
 			<xsl:choose>
@@ -443,6 +487,23 @@
 
 	<!-- Convert character styles from SFM to styles understood by Pathway. -->
 	<xsl:template match="char">
+		<xsl:call-template name="char"/>
+	</xsl:template>
+	
+	<xsl:template match="book/char">
+		<xsl:if test="not(preceding-sibling::*[1][self::char])">
+			<p class="Paragraph" xmlns="http://www.w3.org/1999/xhtml">
+				<xsl:apply-templates select="." mode="char"/>
+			</p>
+		</xsl:if>
+	</xsl:template>
+	
+	<xsl:template match="char" mode="char">
+		<xsl:call-template name="char"/>
+		<xsl:apply-templates select="following-sibling::*[1][self::char]" mode="char"/>
+	</xsl:template>
+	
+	<xsl:template name="char">
 		<xsl:choose>
 			<!-- Translation Editor character styles with no mapping to SFM:
 					Abbreviation
@@ -571,22 +632,20 @@
 
 	<!-- Pull the chapter number into the paragraph content. -->
 	<xsl:template name="AddParaContent">
-		<xsl:call-template name="FindChapter"/>
+		<xsl:apply-templates select="preceding-sibling::*[1]" mode="chapter"/>
 		<xsl:apply-templates/>
 	</xsl:template>
 	
-	<xsl:template name="FindChapter">
-		<xsl:apply-templates select="preceding-sibling::*[1]" mode="FindChapter"/>
-	</xsl:template>
+	<xsl:template match="*" mode="chapter"/>
 
-	<xsl:template match="chapter" mode="FindChapter">
+	<xsl:template match="chapter" mode="chapter">
 		<span class="Chapter_Number" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
 			<xsl:value-of select="@number"/>
 		</span>
 	</xsl:template>
 	
 	<!-- Search backward for a chapter, stopping the search if an intro or content para is encountered. -->
-	<xsl:template match="para" mode="FindChapter">
+	<xsl:template match="para" mode="chapter">
 		<xsl:choose>
 			<!-- If we encounter a recognized content paragraph style, we don't need
 			to continue searching for a chapter. Any prior chapter number should already
@@ -622,11 +681,14 @@
 			
 			<!-- Otherwise, keep iterating backwards searching for a chapter number. -->
 			<xsl:otherwise>
-				<xsl:apply-templates select="preceding-sibling::*[1]" mode="FindChapter"/>
+				<xsl:apply-templates select="preceding-sibling::*[1]" mode="chapter"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
 
+	<!-- Remove chapter numbers from the top level. -->
+	<xsl:template match="chapter"/>
+	
 	<xsl:template match="verse">
 		<span class="Verse_Number" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
 			<xsl:value-of select="@number"/>
@@ -636,15 +698,15 @@
 	<!-- Convert footnotes, cross references and end notes. -->
 	<xsl:template match="note">
 		<!-- Number of footnotes thus far of all styles (used to make unique footnote reference) -->
-		<xsl:variable name="footnoteNumber" select="count(preceding::note)+1"/>
-		<xsl:variable name="bookCode" select="preceding::book[1]/@id"/>
+		<xsl:variable name="bookCode" select="ancestor::book/@id"/>
+		<xsl:variable name="footnoteNumber" select="count(preceding::note[ancestor::book[@id=$bookCode]])+1"/>
 		<xsl:variable name="footnoteCaller">
 			<xsl:choose>
 				<!-- Only set a footnote caller for footnotes and endnotes, not cross-references. -->
 				<xsl:when test="@caller = '+'">
 					<xsl:variable name="footnoteStyle" select="@style"/>
 					<!-- For calculating the index, only count notes with the same style so they can have different numbering systems. -->
-					<xsl:variable name="footnoteIndex" select="count(preceding::note[@style=$footnoteStyle])+1"/>
+					<xsl:variable name="footnoteIndex" select="count(preceding::note[ancestor::book[@id=$bookCode]][@style=$footnoteStyle])+1"/>
 					<xsl:number format="a" value="$footnoteIndex"/>
 				</xsl:when>
 				<xsl:when test="not(@caller = '+' or @caller = '-')">
@@ -678,7 +740,7 @@
 				</span>
 			</xsl:when>
 			<xsl:otherwise>
-				<span class="{$footnoteStyle}" id="Footnote-{$bookCode}-{$footnoteNumber}" xmlns="http://www.w3.org/1999/xhtml">
+				<span class="{$footnoteStyle}" id="Footnote-{$bookCode}-{$footnoteNumber}" title="" xmlns="http://www.w3.org/1999/xhtml">
 					<!-- Handle template for character styles. -->
 					<xsl:apply-templates/>
 				</span>
