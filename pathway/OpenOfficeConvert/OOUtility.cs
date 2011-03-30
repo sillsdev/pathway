@@ -1110,8 +1110,8 @@ namespace SIL.PublishingSolution
         public void GraphicContentChange(string contentFilePath,ArrayList graphicNames)
         {
             if(graphicNames.Count == 0) return;
-            //MessageBox.Show("Entered");
-            var doc = new XmlDocument();
+            var doc = new XmlDocument { PreserveWhitespace = true, XmlResolver = null };
+           
             string file;
             if (!Common.Testing)
             {

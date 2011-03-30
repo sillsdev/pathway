@@ -1677,6 +1677,7 @@ namespace SIL.PublishingSolution
 
         public bool InsertImage()
         {
+
             string classPicture = _reader.GetAttribute("class") ?? "img";
             string altText = _imageAltText;
             //if (_isDisplayNone) // Checking all parent classes
@@ -1916,7 +1917,7 @@ namespace SIL.PublishingSolution
                 if (_closeChildName == _imageClass) // Without Caption
                 {
                     _allCharacter.Push(_imageClass); // temporarily storing to get width and position
-                    _imageInserted = InsertImage();
+                    //_imageInserted = InsertImage();
                     _writer.WriteEndElement(); // for ParagraphStyle
                     _writer.WriteEndElement(); // for Textframe
                     _allCharacter.Pop();    // retrieving it again.
