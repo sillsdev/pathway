@@ -35,6 +35,8 @@ namespace SIL.PublishingSolution
         public Dictionary<string, Dictionary<string, string>> CreateCssProperty(string cssSourceFile, bool setDefaultPageValue)
         {
             var cssTree = new CssParserDuplicateClass();
+            cssTree.OutputType = OutputType;
+            Common._outputType = OutputType;
             TreeNode node = cssTree.BuildTree(cssSourceFile);
             //To show errors to user to edit and save the CSS file.
             //node = CssErrorHandler(cssTree, cssSourceFile, node);  // Error Handling.

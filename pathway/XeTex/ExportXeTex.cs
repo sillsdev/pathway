@@ -67,6 +67,7 @@ namespace SIL.PublishingSolution
 
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
+            cssTree.OutputType = Common.OutputType.XETEX; 
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
 
             string xetexFullFile = Path.Combine(projInfo.ProjectPath, fileName + ".tex");

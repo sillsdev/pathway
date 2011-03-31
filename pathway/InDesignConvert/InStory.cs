@@ -132,8 +132,7 @@ namespace SIL.PublishingSolution
                             i++;
                             string value = values[i].Replace("\"", "");
                             value = Common.ReplaceSymbolToText(value);
-                            CssParser cssParser = new CssParser();
-                            _replaceSymbolToText[key] = cssParser.UnicodeConversion(value);
+                            _replaceSymbolToText[key] = Common.UnicodeConversion(value);
                         }
                     }
                 }

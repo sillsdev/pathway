@@ -413,7 +413,6 @@ namespace SIL.PublishingSolution
                     _isDropCap = false;
                 }
                 
-                //_writer.WriteString(content);
                 _xetexFile.Write(content);
                 _xetexFile.Write("}");
                 if(_tagType == "div")

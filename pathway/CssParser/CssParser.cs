@@ -77,6 +77,8 @@ namespace SIL.PublishingSolution
             public bool IsClassContent;
             public bool HasProperty;
         }
+        public Common.OutputType OutputType;
+
         #endregion
 
         /// -------------------------------------------------------------------------------------------
@@ -1204,110 +1206,7 @@ namespace SIL.PublishingSolution
             return;
         }
 
-        /// -------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Unicode Conversion 
-        /// </summary>
-        /// <param name="parameter">input String</param>
-        /// <returns>Unicode Character</returns>
-        /// -------------------------------------------------------------------------------------------
-        public string UnicodeConversion(string parameter)
-        {
-            int count = 0;
-            string result = string.Empty;
-            try
-            {
-            if (parameter.Length > 0)
-            {
-                if (!(parameter[0] == '\"' || parameter[0] == '\''))
-                {
-                    parameter = "'" + parameter + "'";
-                }
-                int strlen = parameter.Length;
-                char quoteOpen = ' ';
-                while (count < strlen)
-                {
-                    // Handling Single / Double Quotes
-                    char c1 = parameter[count];
-                    Console.WriteLine(c1);
-                    if (parameter[count] == '\"' || parameter[count] == '\'')
-                    {
-                        if (parameter[count] == quoteOpen)
-                        {
-                            quoteOpen = ' ';
-                            count++;
-                            continue;
-                        }
-                        if (quoteOpen == ' ')
-                        {
-                            quoteOpen = parameter[count];
-                            count++;
-                            continue;
-                        }
-                    }
-
-                    if (parameter[count] == '\\')
-                    {
-                        string unicode = string.Empty;
-                        count++;
-                        int value = parameter[count];
-
-                        //if condition added to check any escape character precede with slash
-                        if (!((value > 47 && value < 58) || (value > 64 && value < 71) || (value > 96 && value < 103)))
-                        {
-                            result += parameter[count];
-                            count++;
-                            continue;
-                        }
-
-                        if (parameter[count] == 'u')
-                        {
-                            count++;
-                        }
-                        while (count < strlen)
-                        {
-                            value = parameter[count];
-                            if ((value > 47 && value < 58) || (value > 64 && value < 71) || (value > 96 && value < 103))
-                            {
-                                unicode += parameter[count];
-                            }
-                            else
-                            {
-                                break;
-                            }
-                            count++;
-                        }
-                        // unicode convertion
-                        int decimalvalue = Convert.ToInt32(unicode, 16);
-                        var c = (char) decimalvalue;
-                        result += c.ToString();
-                    }
-                    else
-                    {
-                        result += parameter[count];
-                        count++;
-                    }
-                }
-                if (quoteOpen != ' ')
-                {
-                    result = "";
-                }
-                else
-                {
-                    // Replace <, > and & character to &lt; &gt; &amp;
-                    result = result.Replace("&", "&amp;");
-                    result = result.Replace("<", "&lt;");
-                    result = result.Replace(">", "&gt;");
-                }
-            }
-            return result;
-        }
-            catch (Exception)
-            {
-               return result;
-            }
-        }
-
+ 
         /// <summary>
         /// To list the errors found in CSS inout file and error's are added into ErrorList.
         /// </summary>
@@ -1431,7 +1330,7 @@ namespace SIL.PublishingSolution
                         {
                             if ((!_isReCycle) && (childNode.Nodes[i].Text.IndexOf("'") >= 0 || childNode.Nodes[i].Text.IndexOf("\"") >= 0))
                             {
-                                childNode.Nodes[i].Text = UnicodeConversion(childNode.Nodes[i].Text);
+                                childNode.Nodes[i].Text = Common.UnicodeConversion(childNode.Nodes[i].Text);
                             }
                         }
                     }

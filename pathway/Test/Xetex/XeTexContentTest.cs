@@ -204,6 +204,7 @@ namespace Test.Xetex
         [Category("SkipOnTeamCity")]
         public void PseudoAfterTest()
         {
+            //Added with Unicode
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "PseudoAfter";
             ExportProcess(file);
@@ -466,6 +467,16 @@ namespace Test.Xetex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void FootNoteTest1()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "FootNote";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
 
         #endregion
 
@@ -493,6 +504,7 @@ namespace Test.Xetex
 
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
+            cssTree.OutputType = Common.OutputType.XETEX;
             cssClass = cssTree.CreateCssProperty(input, true);
 
             string xetexFullFile = Path.Combine(_outputPath, file + ".tex");
