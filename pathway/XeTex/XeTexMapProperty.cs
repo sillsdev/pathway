@@ -668,7 +668,7 @@ namespace SIL.PublishingSolution
             }
 
             //propertyValue = "$\\underline{" + propertyValue + "}$";
-            propertyValue = "\\underline";
+            propertyValue = "\\underbar";
             _IDProperty["Underline"] = propertyValue;
             _inlineStyle.Add(propertyValue);
         }

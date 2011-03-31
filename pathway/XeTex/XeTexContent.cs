@@ -1122,7 +1122,7 @@ namespace SIL.PublishingSolution
 
         private void InitializeMathStyle()
         {
-            _mathStyle.Add("\\underline");
+            //_mathStyle.Add("\\underline");
         }
 
         #region Private Methods
