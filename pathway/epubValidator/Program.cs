@@ -86,50 +86,67 @@ namespace epubValidator
             }
             if (File.Exists(Filename))
             {
-                var progFullName = GetJavaExe();
-                var sb = new StringBuilder();
-                sb.Append("-jar");
-                sb.Append(" \"");
-                var strAppDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
-                sb.Append(strAppDir.Substring(6)); // Remove the leading file:/ from the CodeBase result
-                //sb.Append(".");
-                sb.Append(Path.DirectorySeparatorChar);
-                sb.Append("epubcheck-1.1");
-                sb.Append(Path.DirectorySeparatorChar);
-                sb.Append("epubcheck-1.1.jar");
-                sb.Append("\" ");
-                sb.Append("\"");
-                sb.Append(Filename);
-                sb.Append("\"");
-                var procArgs = sb.ToString();
-                const int timeout = 60;
-                var proc = new Process
-                               {
-                                   StartInfo =
-                                       {
-                                           FileName = progFullName,
-                                           Arguments = procArgs,
-                                           RedirectStandardError = true,
-                                           RedirectStandardOutput = true,
-                                           WindowStyle = ProcessWindowStyle.Hidden,
-                                           UseShellExecute = false
-                                       }
-                               };
+                string errorMessage = "", outputMessage = "";
+                try
+                {
+                    var progFullName = GetJavaExe();
+                    var sb = new StringBuilder();
+                    if (progFullName.Length > 0)
+                    {
+                        sb.Append("-jar");
+                        sb.Append(" \"");
+                        var strAppDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
+                        sb.Append(strAppDir.Substring(6)); // Remove the leading file:/ from the CodeBase result
+                        //sb.Append(".");
+                        sb.Append(Path.DirectorySeparatorChar);
+                        sb.Append("epubcheck-1.1");
+                        sb.Append(Path.DirectorySeparatorChar);
+                        sb.Append("epubcheck-1.1.jar");
+                        sb.Append("\" ");
+                        sb.Append("\"");
+                        sb.Append(Filename);
+                        sb.Append("\"");
+                        var procArgs = sb.ToString();
+                        const int timeout = 60;
+                        var proc = new Process
+                        {
+                            StartInfo =
+                            {
+                                FileName = progFullName,
+                                Arguments = procArgs,
+                                RedirectStandardError = true,
+                                RedirectStandardOutput = true,
+                                WindowStyle = ProcessWindowStyle.Hidden,
+                                UseShellExecute = false
+                            }
+                        };
 
-                proc.Start();
+                        proc.Start();
 
-                proc.WaitForExit
-                    (
-                        (timeout <= 0)
-                        ? int.MaxValue : timeout * 100 *
-                           60
-                    );
+                        proc.WaitForExit
+                            (
+                                (timeout <= 0)
+                                ? int.MaxValue : timeout * 100 *
+                                   60
+                            );
 
-                var errorMessage = proc.StandardError.ReadToEnd();
-                proc.WaitForExit();
+                        errorMessage = proc.StandardError.ReadToEnd();
+                        proc.WaitForExit();
 
-                var outputMessage = proc.StandardOutput.ReadToEnd();
-                proc.WaitForExit();
+                        outputMessage = proc.StandardOutput.ReadToEnd();
+                        proc.WaitForExit();
+                    } // java progFullName.Length > 0
+                    else
+                    {
+                        sb.AppendLine("Unable to locate Java on this computer's search path. Java is required to run the .epub Validation tool.");
+                        sb.AppendLine("You can install Java from the following website: http://www.java.com/en/download/index.jsp");
+                        errorMessage = sb.ToString();
+                    }
+                } // try
+                catch (Exception e)
+                {
+                    errorMessage = e.Message;
+                }
                 if (errorMessage.Length > 0) return errorMessage;
                 if (outputMessage.Length > 0) return outputMessage;
                 return null;
