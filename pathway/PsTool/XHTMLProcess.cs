@@ -861,6 +861,11 @@ namespace SIL.PublishingSolution
 
             if (styleName == "headword") return styleName;
             if (styleName == "xhomographnumber") return styleName;
+            if (styleName == "hideChapterNumber") return styleName;
+            if (styleName == "hideVerseNumber") return styleName;
+            if (styleName == "hideVerseNumber1") return styleName;
+            //if (styleName == "ChapterNumber") return styleName;
+            //if (styleName == "VerseNumber") return styleName;
             if (_headwordStyles) return styleName;
             int suffix = 1;
             string newname;

@@ -90,11 +90,11 @@ namespace SIL.PublishingSolution
             {
                 _textVariables.Add("TitleMain_" + className);
             }
-            else if (className.IndexOf("hideChapterNumber_") == 0)
+            else if (className.IndexOf("hideChapterNumber") == 0)
             {
                 _textVariables.Add("ChapterNumber_" + className);
             }
-            else if (className.IndexOf("hideVerseNumber_") == 0)
+            else if (className.IndexOf("hideVerseNumber") == 0)
             {
                 _textVariables.Add("hideVerseNumber_" + className);
             }
