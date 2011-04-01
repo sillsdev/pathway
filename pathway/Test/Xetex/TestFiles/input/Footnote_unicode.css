@@ -1,0 +1,26 @@
+
+.footnote {
+  //display: none;
+  display: footnote;
+  display: prince-footnote;
+  position: footnote;
+  font-size: 9pt;
+}
+
+/* marker in the body text indicating a footnote*/
+.footnote::footnote-call {
+  content: '\2021' ' ';
+  font-size: 6pt;
+}
+
+
+/* marker in footnote in front of the text */
+.footnote::footnote-marker {
+    font-size: 10pt;
+    font-weight: bold;
+    content: '\2021' 
+    //content: '*';  
+    //text-align: left;
+  //color:red;
+}
+

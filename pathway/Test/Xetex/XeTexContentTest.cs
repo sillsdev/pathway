@@ -469,10 +469,10 @@ namespace Test.Xetex
 
         [Test]
         [Category("SkipOnTeamCity")]
-        public void FootNoteTest1()
+        public void FootNoteUnicodeTest()
         {
             _projInfo.ProjectInputType = "Dictionary";
-            const string file = "FootNote";
+            const string file = "Footnote_unicode";
             ExportProcess(file);
             FileCompare(file);
         }

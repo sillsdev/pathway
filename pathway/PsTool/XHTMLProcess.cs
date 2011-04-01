@@ -98,6 +98,8 @@ namespace SIL.PublishingSolution
         protected ArrayList _FootNote = new ArrayList();
         protected ArrayList _footnoteCallContent = new ArrayList();
         protected ArrayList _footnoteMarkerContent = new ArrayList();
+        protected ClassInfo _footnoteMarkerClass = new ClassInfo();
+
         protected Dictionary<string, string> _footNoteMarker = new Dictionary<string, string>();
         #endregion
         #region counter
@@ -890,6 +892,9 @@ namespace SIL.PublishingSolution
 
                 foreach (ClassInfo cssClassInfo in cssClassDetail)
                 {
+                    if (cssClassInfo.Pseudo == "footnote-marker")
+                        _footnoteMarkerClass = cssClassInfo;
+
                     if (cssClassInfo.Pseudo != psuedo) continue;
 
                     resultCoreClass = CompareCoreClass(cssClassInfo.CoreClass, _xhtmlClassAttrib, multiClass);

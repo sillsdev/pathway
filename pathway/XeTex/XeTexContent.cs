@@ -160,19 +160,6 @@ namespace SIL.PublishingSolution
                     if (!_footnoteCallContent.Contains(className))
                         _footnoteCallContent.Add(className);
                 }
-                searchKey = "..footnote-marker";
-                if (className.IndexOf(searchKey) >= 0)
-                {
-                    if (!_footnoteMarkerContent.Contains(className))
-                    {
-                        _footnoteMarkerContent.Add(className);
-                        if (IdAllClass[className].ContainsKey("content"))
-                        {
-                            _footNoteMarker[className] = IdAllClass[className]["content"];
-                        }
-                    }
-
-                }
             }
         }
 
@@ -520,9 +507,10 @@ namespace SIL.PublishingSolution
 
         private void WriteFootNoteMarker(string footerClassName, string content)
         {
-            //Todo - Unicode marker
             string markerClassName = footerClassName + "..footnote-marker";
-            string marker = _footNoteMarker[markerClassName];
+            string marker = string.Empty;
+            if (_footnoteMarkerClass.StyleName == markerClassName)
+                marker = _footnoteMarkerClass.Content;
             _xetexFile.Write("  \\footnote {" + marker +  "} ");
             _xetexFile.Write("{");
             _xetexFile.Write(content);
