@@ -86,11 +86,11 @@ namespace epubValidator
             }
             if (File.Exists(Filename))
             {
+                var sb = new StringBuilder();
                 string errorMessage = "", outputMessage = "";
                 try
                 {
                     var progFullName = GetJavaExe();
-                    var sb = new StringBuilder();
                     if (progFullName.Length > 0)
                     {
                         sb.Append("-jar");
@@ -145,7 +145,16 @@ namespace epubValidator
                 } // try
                 catch (Exception e)
                 {
-                    errorMessage = e.Message;
+                    sb.AppendLine("The .epub Validator encountered an error while attempting to validate the file.");
+                    sb.AppendLine();
+                    sb.AppendLine("Exception Message:");
+                    sb.AppendLine(e.Message);
+                    if (e.InnerException != null)
+                    {
+                        sb.AppendLine("Inner Exception:");
+                        sb.AppendLine(e.InnerException.ToString());
+                    }
+                    errorMessage = sb.ToString();
                 }
                 if (errorMessage.Length > 0) return errorMessage;
                 if (outputMessage.Length > 0) return outputMessage;
