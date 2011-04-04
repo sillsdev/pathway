@@ -111,7 +111,7 @@ INSERT INTO "</xsl:text>
 		<xsl:text>_</xsl:text>
 		<xsl:value-of select="$currentChapter"/> -->
 		<xsl:text>reader_bible_versedata</xsl:text>
-		<xsl:text>" ("version", "book", "verse", "unformatted", "idxfti", "basichtml") VALUES ('</xsl:text>
+		<xsl:text>" ("version", "book", "verse", "unformatted", "basichtml") VALUES ('</xsl:text>
 		<xsl:value-of select="$langAbbr"/>
 		<xsl:text>', '</xsl:text>
 		<xsl:value-of select="$bookCode"/>
@@ -129,7 +129,7 @@ INSERT INTO "</xsl:text>
 		<xsl:text>', '</xsl:text>
 		<!-- Handle the spans for this verse in the "unformatted" form. -->
 		<xsl:apply-templates select="$verseSpans" mode="unformatted"/>
-		<xsl:text>', '', '</xsl:text>
+		<xsl:text>', '</xsl:text>
 		<!-- Handle the spans for this verse in the "basichtml" form. -->
 		<!-- First look for a main title that applies to this span. -->
 		<xsl:if test="$currentChapter = '1' and $verseNumber = '1' ">
