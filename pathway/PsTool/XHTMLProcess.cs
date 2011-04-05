@@ -146,6 +146,10 @@ namespace SIL.PublishingSolution
         protected string _displayNoneStyle = string.Empty;
 
         protected List<string> _usedStyleName = new List<string>();
+        protected bool _textWritten = false;
+        protected bool _imageInserted;
+        protected bool _overWriteParagraph;
+
         #endregion
 
         #region Constructor
@@ -475,11 +479,37 @@ namespace SIL.PublishingSolution
                     {
                         _writer.WriteRaw("<Br/>");
                     }
-                    _writer.WriteEndElement();
+
+
+                    if (_outputType == Common.OutputType.ODT)
+                    {
+                        if (_imageClass.Length > 0 && !_textWritten)
+                        {
+                            _overWriteParagraph = true;
+                        }
+                        else
+                        {
+                            _writer.WriteEndElement();
+                            _textWritten = false;
+                        }
+                    }
+                    else
+                    {
+                        _writer.WriteEndElement();
+                    }
                 }
                 _isNewParagraph = true;
                 _isParagraphClosed = true;
 
+                if (_outputType == Common.OutputType.ODT)
+                {
+                    if (_overWriteParagraph)
+                    {
+                        _isNewParagraph = false;
+                        _isParagraphClosed = false;
+                        //_overWriteParagraph = false;
+                    }
+                }
                 //if (_outputType == Common.OutputType.ODT && (_reader.Name == "ul" || _reader.Name == "ol"))
                 //{
                 //    _writer.WriteEndElement();

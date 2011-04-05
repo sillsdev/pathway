@@ -133,7 +133,6 @@ namespace SIL.PublishingSolution
         private ArrayList _crossRef = new ArrayList();
         private int _crossRefCounter = 1;
         private bool _isWhiteSpace = true;
-        private bool _imageInserted;
 
         private PublicationInformation _projInfo;
         private bool _IsHeadword = false;
@@ -141,7 +140,6 @@ namespace SIL.PublishingSolution
         private bool _isListBegin;
         private Dictionary<string, string> ListType;
         private string _anchorText = string.Empty;
-
         #endregion
 
         public OOContent()
@@ -696,6 +694,7 @@ namespace SIL.PublishingSolution
                 _paragraphName = null;
                 _isNewParagraph = false;
                 _isParagraphClosed = false;
+                _textWritten = false;
             }
             WriteText();
             isFileEmpty = false;
@@ -904,6 +903,8 @@ namespace SIL.PublishingSolution
             {
                 _writer.WriteEndElement();
             }
+            if(_imageClass.Length <= 0)
+                    _textWritten = true;
 
         }
 
@@ -1684,7 +1685,7 @@ namespace SIL.PublishingSolution
 
             //if (_structStyles.DisplayNone.Contains(classPicture)) // Checking current class
             //    return;
-
+            _overWriteParagraph = false;
             bool inserted = false;
             if (_imageInsert)
             {
