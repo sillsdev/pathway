@@ -219,23 +219,18 @@ namespace Test.YouVersionConvert
         [Test]
         public void ConvertSqlTest()
         {
-            string processFolder = _testFiles.Output("xhtml");
-            // Clean out the processFolder before copying new files into it.
-            Directory.Delete(processFolder, true);
-            Directory.CreateDirectory(processFolder);
-            // Now get the files.
-            FolderTree.Copy(_testFiles.Input("sql"), processFolder);
             string outFolder = _testFiles.Output("zipSql");
             SetupOutputFolder(outFolder);
+            string restructuredInput = _testFiles.Input("achiDraft_ospc.xhtml");
             const string xslt = "TE_XHTML-to-YouVersion_SQL.xslt";
             const string type = "Sql";
             const string ext = ".sql";
-            ConvertSql(processFolder, outFolder, xslt, type, ext);
+            ConvertSql(restructuredInput, outFolder, xslt, type, ext);
             string actualOutFolder = Path.Combine(outFolder, type);
             DirectoryInfo directoryInfo = new DirectoryInfo(actualOutFolder);
             Assert.AreEqual(1, directoryInfo.GetFiles().Length);
-            const string accGospels = "Acc Gospels.sql";
-            FileAssert.AreEqual(_testFiles.Expected(accGospels), Path.Combine(actualOutFolder, accGospels));
+            const string accCorinthians = "achiDraft_ospc.sql";
+            FileAssert.AreEqual(_testFiles.Expected(accCorinthians), Path.Combine(actualOutFolder, accCorinthians));
         }
 
         /// <summary>
