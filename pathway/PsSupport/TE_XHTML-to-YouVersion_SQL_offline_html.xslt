@@ -133,7 +133,8 @@ insert into verses_html (book, verse, html) values ('</xsl:text>
 		<xsl:value-of select="$verseNumber"/>
 		<xsl:text disable-output-escaping="yes">"&gt;&lt;strong class="verseno"&gt;</xsl:text>
 		<xsl:value-of select="$verseNumber"/>
-		<xsl:text disable-output-escaping="yes">&lt;/strong&gt;&amp;nbsp;</xsl:text>
+		<!-- '$#160;' is the non breaking space, nbsp. -->
+		<xsl:text disable-output-escaping="yes">&lt;/strong&gt;&#160;</xsl:text>
 		<xsl:apply-templates select="$verseSpans" mode="basichtml"/>
 		<xsl:text disable-output-escaping="yes">&lt;/span&gt;');</xsl:text>
 	</xsl:template>
