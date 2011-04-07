@@ -11,8 +11,11 @@
 
     <xsl:strip-space elements="*"/>
 
+	<!-- Use the OSIS book code, not the TE book code. -->
 	<xsl:variable name="bookCode">
-		<xsl:value-of select="/xhtml:html/xhtml:body/xhtml:p[@class='scrBookCode']/text()"/>
+		<xsl:call-template name="getOsisBookCode">
+			<xsl:with-param name="TEBookCode" select="/xhtml:html/xhtml:body/xhtml:p[@class='scrBookCode']/text()"/>
+		</xsl:call-template>
 	</xsl:variable>
 
 	<xsl:variable name="bookName">
@@ -56,12 +59,14 @@
     </xsl:template> <!-- xhtml:div[@class='scrSection'] -->
 
 	<xsl:template match="xhtml:div[@class='Section_Head']">
-		<xsl:element name="h2">
-			<xsl:attribute name="lang">
-				<xsl:value-of select="xhtml:span/@lang"/>
-			</xsl:attribute>
-			<xsl:value-of select="xhtml:span/text()"/>
-		</xsl:element>
+		<xsl:if test="string-length(xhtml:span/text()) > 0">
+			<xsl:element name="h2">
+				<xsl:attribute name="lang">
+					<xsl:value-of select="xhtml:span/@lang"/>
+				</xsl:attribute>
+				<xsl:value-of select="xhtml:span/text()"/>
+			</xsl:element>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="xhtml:div[@class='Paragraph' or @class='Paragraph_Continuation' or @class='Line1' or @class='Line2']">
@@ -149,6 +154,47 @@
 			<xsl:value-of select="text()"/>
 		</xsl:element> <!-- span -->
 	</xsl:template> <!-- xhtml:span[@class='Words_Of_Christ'] -->
+
+	<!-- Get the Osis book code that corresponds to the given TE book code. -->
+	<xsl:template name="getOsisBookCode">
+		<xsl:param name="TEBookCode"/>
+		<xsl:choose>
+			<xsl:when test="$TEBookCode='MAT' ">Matt</xsl:when>
+			<xsl:when test="$TEBookCode='MRK' ">Mark</xsl:when>
+			<xsl:when test="$TEBookCode='LUK' ">Luke</xsl:when>
+			<xsl:when test="$TEBookCode='JHN' ">John</xsl:when>
+			<xsl:when test="$TEBookCode='ACT' ">Acts</xsl:when>
+			<xsl:when test="$TEBookCode='ROM' ">Rom</xsl:when>
+			<xsl:when test="$TEBookCode='1CO' ">1Cor</xsl:when>
+			<xsl:when test="$TEBookCode='2CO' ">2Cor</xsl:when>
+			<xsl:when test="$TEBookCode='GAL' ">Gal</xsl:when>
+			<xsl:when test="$TEBookCode='EPH' ">Eph</xsl:when>
+			<xsl:when test="$TEBookCode='PHP' ">Phil</xsl:when>
+			<xsl:when test="$TEBookCode='COL' ">Col</xsl:when>
+			<xsl:when test="$TEBookCode='1TH' ">1Thess</xsl:when>
+			<xsl:when test="$TEBookCode='2TH' ">2Thess</xsl:when>
+			<xsl:when test="$TEBookCode='1TI' ">1Tim</xsl:when>
+			<xsl:when test="$TEBookCode='2TI' ">2Tim</xsl:when>
+			<xsl:when test="$TEBookCode='TIT' ">Titus</xsl:when>
+			<xsl:when test="$TEBookCode='PHM' ">Phlm</xsl:when>
+			<xsl:when test="$TEBookCode='HEB' ">Heb</xsl:when>
+			<xsl:when test="$TEBookCode='JAS' ">Jas</xsl:when>
+			<xsl:when test="$TEBookCode='1PE' ">1Pet</xsl:when>
+			<xsl:when test="$TEBookCode='2PE' ">2Pet</xsl:when>
+			<xsl:when test="$TEBookCode='1JN' ">1John</xsl:when>
+			<xsl:when test="$TEBookCode='2JN' ">2John</xsl:when>
+			<xsl:when test="$TEBookCode='3JN' ">3John</xsl:when>
+			<xsl:when test="$TEBookCode='JUD' ">Jude</xsl:when>
+			<xsl:when test="$TEBookCode='REV' ">Rev</xsl:when>
+			<xsl:otherwise>
+				<xsl:comment>
+					<xsl:text> Warning: TE Book Code "</xsl:text>
+					<xsl:value-of select="$TEBookCode"/>
+					<xsl:text>" is not recognized. </xsl:text>
+				</xsl:comment>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template> <!-- getOsisBookCode -->
 
 	<!-- Skip the div if the class is 'Parallel_Passage_Reference' or 'pictureCenter'.
 		We see no evidence of these being used by YouVersion.com. -->
