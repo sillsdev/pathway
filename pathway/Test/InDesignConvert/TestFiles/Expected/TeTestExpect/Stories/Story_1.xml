@@ -71,10 +71,10 @@
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ChapterNumber_1">
       <Content>1</Content>
     </CharacterStyleRange>
-    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_1">
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
       <Content>1</Content>
     </CharacterStyleRange>
-    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
       <Content>1</Content>
     </CharacterStyleRange>
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_1">
@@ -99,10 +99,10 @@
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_9">
       <Content>. </Content>
     </CharacterStyleRange>
-    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
       <Content>1</Content>
     </CharacterStyleRange>
-    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
       <Content>2</Content>
     </CharacterStyleRange>
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -111,10 +111,10 @@
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_10">
       <Content>Sa femme s'appelle Noémi,et ses fils s'appellent Malon et Kilion. Ils sont du clan d'Éfrata. Ils arrivent donc dans le pays de Moabet s'installent là. </Content>
     </CharacterStyleRange>
-    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
       <Content>1</Content>
     </CharacterStyleRange>
-    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
       <Content>3</Content>
     </CharacterStyleRange>
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -123,10 +123,10 @@
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_10">
       <Content>Ensuite, Élimélek, le mari de Noémi, meurt,et Noémi reste seule avec ses deux fils. </Content>
     </CharacterStyleRange>
-    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
       <Content>1</Content>
     </CharacterStyleRange>
-    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
       <Content>4</Content>
     </CharacterStyleRange>
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -135,10 +135,10 @@
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_10">
       <Content>Plus tard, les garçons se marient avec des filles de Moab: l'une s'appelle Orpa, l'autre s'appelle Ruth. Ils habitent là pendant dix ans à peu près. </Content>
     </CharacterStyleRange>
-    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
       <Content>1</Content>
     </CharacterStyleRange>
-    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
       <Content>5</Content>
     </CharacterStyleRange>
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -152,10 +152,10 @@
         <Content>Ruth part avec Noémià Bethléem</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>6-7</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -170,10 +170,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_11">
         <Content> a montré sa bonté pour son peupleen lui donnant de bonnes récoltes. Alors elle se prépare à quitter le pays de Moabavec les deux femmes de ses fils. Elle quitte le lieuoù elle vit avec ses deux belles-filles. Les femmes prennent la route ensemble pour aller au pays de Juda. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>8</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -188,10 +188,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_11">
         <Content> montresa bonté envers vous! </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>9</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -200,10 +200,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_10">
         <Content>Qu'il vous permette à toutes les deux de retrouver un mariet d'être heureuses avec lui!” Puis elle les embrasse. Alors les deux jeunes femmes se mettentà pleurer beaucoup. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>10</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -212,10 +212,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_10">
         <Content>Puis elles disent à Noémi: “Non! Nous allons avec toi dans ton pays.” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>11</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -237,10 +237,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_9">
         <Content>? Non! Je suis trop vieille pour cela. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>12</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -249,10 +249,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_10">
         <Content>Rentrez chez vous, mes filles. Oui, partez. Je suis trop vieille pour me remarier. Bien sûr, je pourrais dire: ‘Il y a encore de l'espoir pour moi. Oui, cette nuit même, je vais avoir un mariqui va me donner des fils.’ </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>13</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -268,10 +268,10 @@
         <Content> m'a frappée.”</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_4">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>14</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -280,10 +280,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_13">
         <Content>Alors les deux jeunes femmes recommencentà pleurer beaucoup. Puis Orpa dit au revoir à sa belle-mèreen l'embrassant. Mais Ruth décide de rester avec elle. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>15</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -292,10 +292,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_13">
         <Content>Noémi dit à Ruth: “Regarde, ta belle-so!eur est retournéevers son peuple et vers le dieu de son peuple. Fais comme elle, rentre chez toi!” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>16</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -304,10 +304,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_13">
         <Content>Mais Ruth répond: “Ne me force pas à te quitter pour rentrer chez moi. Là où tu iras, j'irai. Là où tu habiteras, j'habiterai. Ton peuple sera mon peuple, et ton Dieu sera mon Dieu. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>17</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -327,10 +327,10 @@
         <Content>Noémi retourne à Bethléem,et Ruth va avec elle</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>18</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -339,10 +339,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_10">
         <Content>Quand Noémi voit que Ruth veut à tout prixvenir avec elle, elle n'insiste plus. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>19</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -355,10 +355,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_15">
         <Content>Quand elles arrivent là, tous les habitants sont surpris de les voir. Les femmes du village disent: “Est-ce que c'est Noémi?” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>20</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -373,10 +373,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_16">
         <Content> a rendu ma vie très amère. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>21</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -392,10 +392,10 @@
         <Content> me fait revenir les mains vides. Il s'est tourné contre moi, le Tout-Puissant m'a fait du mal. Ne m'appelez donc plus Noémi, la femme heureuse!”</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_4">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>22</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -418,10 +418,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ChapterNumber_2">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>1</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_1">
@@ -430,10 +430,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_6">
         <Content>Noémi a un parentdans la famille d'Élimélek, son mari. C'est un riche notable. Il s'appelle Booz. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>2</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -455,10 +455,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_9">
         <Content>qui sera bon envers moi en me permettant de le faire.” Noémi répond: “Vas-y, ma fille.” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>3</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -468,10 +468,10 @@
         <Content>Ruth part et elle va dans un champ, pour ramasser les épis derrière ceux qui récoltent. Par chance, le champ où elle vaest celui de Booz, de la famille d'Élimélek.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_3">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_6">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>4</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_3">
@@ -498,10 +498,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_20">
         <Content>” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_7">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>5</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_3">
@@ -510,10 +510,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_18">
         <Content>Booz demande au chef des ouvriers: “Qui est cette jeune femme?” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_7">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>6</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_3">
@@ -522,10 +522,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_18">
         <Content>Le chef répond: “C'est une jeune Moabite. Elle est revenue du pays de Moab avec Noémi. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_7">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>7</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_3">
@@ -540,10 +540,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_20">
         <Content>’ Elle est venue ce matin et jusqu'à maintenant, elle ne s'est presque pas reposée.” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_7">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>8</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_3">
@@ -552,10 +552,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_18">
         <Content>Alors Booz dit à Ruth: “Écoute, ma fille, ne va pas ramasser les épisdans un autre champ. Reste ici et travaille avec mes servantes. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_7">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>9</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_3">
@@ -564,10 +564,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_18">
         <Content>Regarde bien les endroits où les hommes récoltentet suis les femmes qui ramassent les épis. J'ai commandé à mes serviteursde te laisser tranquille. Si tu as soif, va boire de l'eaudans les récipients que mes serviteurs ont remplis.” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_7">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>10</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_3">
@@ -576,10 +576,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_18">
         <Content>Ruth s'incline jusqu'à terre devant Booz. Puis elle lui dit: “Tu me regardes avec bontéet tu t'intéresses à moiqui suis une étrangère. Comment est-ce possible?” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_7">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>11</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_3">
@@ -588,10 +588,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_18">
         <Content>Booz répond: “J'ai appris tout ce que tu as faitpour ta belle-mère depuis la mort de ton mari. Tu as laissé ton père, ta mère, ton pays. Et tu es venue vivre au milieu d'un peupleque tu ne connaissais pas avant. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_7">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>12</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_3">
@@ -612,10 +612,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_19">
         <Content>, Dieu d'Israël. Qu'il te récompense largement!” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_7">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>13</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_3">
@@ -625,10 +625,10 @@
         <Content>Ruth répond à Booz: “Maître, tu es vraiment bon pour moi. Tu m'encourages en me parlant avec bonté. Et pourtant, je ne suis même pascomme l'une de tes servantes.”</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_4">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>14</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -637,10 +637,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_13">
         <Content>Au moment du repas, Booz dit à Ruth: “Viens manger avec nous. Prends un morceau de painet trempe-le dans la sauce.” Ruth s'assoit à côté des ouvriers. Booz lui tend des épis grillés. Elle en mange autant qu'elle veutet il lui en reste. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>15</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -649,10 +649,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_13">
         <Content>Puis Ruth se lèvepour aller de nouveau ramasser des épis. Ensuite, Booz donne cet ordre à ses serviteurs: “Laissez-la ramasser les épis, même entre les gerbes. Ne lui faites pas de reproches. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>16</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -661,10 +661,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_13">
         <Content>Enlevez même quelques épis des gerbeset laissez-les par terrepour qu'elle les ramasse. Ne lui faites aucun reproche.” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>17</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -677,10 +677,10 @@
         <Content>d'orge.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_4">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>18</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -689,10 +689,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_13">
         <Content>Elle rapporte le sac au village. Noémi, sa belle-mère, voit ce qu'elle a ramassé. Ruth sort aussi ce qui reste de son repaset elle le donne à Noémi. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>19</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -705,10 +705,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_15">
         <Content>Ruth raconte: “J'ai travaillé dans le champ d'un hommequi s'appelle Booz.” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>20</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -736,10 +736,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_22">
         <Content>.” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>21</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -748,10 +748,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_13">
         <Content>Ruth la Moabite dit encore: “Booz m'a dit aussi: ‘Continue à ramasser les épisderrière mes serviteurs jusqu'à la fin de la récolte.’ ” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>22</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -761,10 +761,10 @@
         <Content>Noémi dit à Ruth: “C'est bien, ma fille. Continue de travailler avec les servantes de Booz. Si tu vas dans le champ de quelqu'un d'autre, tu risques d'être mal reçue.”</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_4">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>23</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -787,10 +787,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ChapterNumber_2">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>1</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_1">
@@ -799,10 +799,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_6">
         <Content>Un jour, Noémi dit à Ruth: “Ma fille, je dois trouver une solutionpour que tu sois heureuse. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>2</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -817,10 +817,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_23">
         <Content> sur la placeoù on bat les grains. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>3</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -829,10 +829,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_10">
         <Content>Lave-toi, parfume-toi, mets ta belle robe et va là-bas. Mais ne te montre pas avant la fin de son repas. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>4</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -854,10 +854,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_9">
         <Content>. Après cela, il te dira lui-mêmece que tu dois faire.” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>5</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -867,10 +867,10 @@
         <Content>Ruth répond: “Je ferai tout ce que tu m'as dit.”</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_3">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_6">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>6</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_3">
@@ -879,10 +879,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_18">
         <Content>Ruth va à l'endroit où Booz bat les grains. Elle fait exactement ce que Noémi lui a dit. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_7">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>7</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_3">
@@ -892,10 +892,10 @@
         <Content>Booz mange et boitet il est de très bonne humeur. Il vient se coucher au bord du tas de grains. Alors Ruth s'approche doucement, elle écarte la couvertureet se couche à ses pieds.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_4">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>8</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -904,10 +904,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_13">
         <Content>Au milieu de la nuit,Booz se réveille brusquement. Il se retourne et voit une femmecouchée à ses pieds. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>9</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -929,10 +929,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_22">
         <Content>.” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>10</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -953,10 +953,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_16">
         <Content>! Tu n'as pas cherché l'amour des jeunes gens, riches ou pauvres. Ce que tu viens de faire prouve ta fidélité à la famille de ta belle-mère. Tu as agi encore mieux qu'avant. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>11</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -965,10 +965,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_13">
         <Content>Maintenant, Ruth, n'aie pas peur. Je ferai pour toi tout ce que tu voudras. En effet, tu es une femme de valeur, tout le monde le sait. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>12</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -977,10 +977,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_13">
         <Content>Oui, c'est vrai, je dois prendre soin de toi. Mais il y a quelqu'un d'autrequi est encore plus proche de ta famille que moi. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>13</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -996,10 +996,10 @@
         <Content>: je ferai pour toi ce que je dois faire. Dors jusqu'à demain matin!”</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_4">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>14</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -1008,10 +1008,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_13">
         <Content>Ruth reste couchée aux pieds de Boozjusqu'au matin. Puis elle se lève très tôt, avant la lumière du jour, pour qu'on ne la reconnaisse pas. En effet, Booz pensait: on ne doit pas savoir que cette femme est venue ici. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>15</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -1020,10 +1020,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_13">
         <Content>Il dit à Ruth: “Enlève ton pagne de dessuset tiens-le bien.”Elle le tient bien. Alors Booz mesure à peu près 15 kilos d'orgeet il les met dans le pagne de Ruth. Ensuite, il revient au village. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>16</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -1036,10 +1036,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_15">
         <Content>Ruth lui racontetout ce que Booz a fait pour elle. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>17</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -1048,10 +1048,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_13">
         <Content>Elle ajoute: “Il m'a donné ces 15 kilos d'orgeen me disant: ‘Tu ne dois pas rentrer chez ta belle-mèreles mains vides.’ ” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>18</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -1068,10 +1068,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ChapterNumber_2">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>1</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_1">
@@ -1080,10 +1080,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_6">
         <Content>Booz va à l'entrée du village, là où on discute des affaires. Il s'assoit. Booz a parlé à Ruth d'un parent très proche d'Élimélek. Cet homme passe justement par là. Booz lui dit: “Arrête-toi! Viens t'asseoir ici.” L'homme s'arrête et il s'assoit. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>2</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -1098,10 +1098,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_23">
         <Content>du village de s'asseoir avec eux. Ils s'assoient. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>3</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -1110,10 +1110,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_10">
         <Content>Ensuite, Booz dit à cet autre parent d'Élimélek: “Noémi est revenue du pays de Moab, tu le sais. Eh bien, elle va vendre le champ qui était à notre frère Élimélek. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>4</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -1122,10 +1122,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_10">
         <Content>Moi, j'ai décidé de t'en parler devant les anciens et devant tous ceux qui sont là. Si tu veux racheter ce champ, rachète-le. Si tu ne veux pas, dis-le-moi. En effet, c'est toi le premier qui as le droit de racheter,et moi le deuxième.”L'homme dit: “Je veux bien racheter le champ.”</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>5</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -1147,10 +1147,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_9">
         <Content>.” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>6</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -1160,10 +1160,10 @@
         <Content>L'homme répond: “Dans ce cas, je ne peux pas. En effet, je risque de diminuer ma propriété. Donc, prends pour toi le droit de racheter. Moi, je ne peux pas.”</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_3">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_6">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>7</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_3">
@@ -1172,10 +1172,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_18">
         <Content>Autrefois, en Israël, quand des hommes achetaient ou échangeaient quelque chose, l'un des deux enlevait sa sandaleet il la donnait à l'autre. Ce geste montrait que l'affaire était réglée. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_7">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>8</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_3">
@@ -1184,10 +1184,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_18">
         <Content>Donc, celui qui a le droitde racheter le champ d'Élimélekdit à Booz: “Achète le champ.” Puis il enlève sa sandale. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_7">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>9</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_3">
@@ -1202,10 +1202,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_20">
         <Content>: j'achète à Noémi tout ce qui était à Éliméleket à ses fils Kilion et Malon. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_7">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>10</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_3">
@@ -1214,10 +1214,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_18">
         <Content>Je prends aussi pour femme Ruth la Moabite, qui était la femme de Malon. Ainsi la propriété du champ restera dans la famille du mort. De plus, il aura des enfants. Ainsi, son nom gardera sa place parmi ses frères, et sa famille sera présentequand les affaires de son village seront discutées. Aujourd'hui, vous êtes témoins de cela.” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_7">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>11</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_3">
@@ -1235,10 +1235,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_20">
         <Content> la femmequi entre dans ta maison! Qu'elle ressemble à Rachel et à Léa, les deux femmes de Jacob qui ont donné naissance au peuple d'Israël! Que tu sois riche dans le clan d'Éfrata, et que ton nom soit célèbre à Bethléem! </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_7">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>12</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_3">
@@ -1258,10 +1258,10 @@
         <Content>La naissance d'Obed,ancêtre de David</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>13</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -1282,10 +1282,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_23">
         <Content>, elle devient enceinteet elle met au monde un garçon. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>14</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -1300,10 +1300,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_11">
         <Content>!Aujourd'hui, il te donne quelqu'unqui pourra prendre soin de toi. Ton petit-fils deviendra célèbre en Israël. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>15</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -1312,10 +1312,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_10">
         <Content>Il va te faire revivreet te soutenir dans ta vieillesse. Ta belle-fille vaut mieux pour toi que sept fils, car elle t'aime et t'a donné ce petit-fils.” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>16</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -1324,10 +1324,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_10">
         <Content>Alors Noémi prend l'enfantet elle le serre sur son co!eur. Puis c'est elle qui s'occupe de lui. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>17</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_1">
@@ -1337,10 +1337,10 @@
         <Content>Les voisines disent: “Noémi a un fils!” Elles lui donnent le nom d'Obed. Obed est le père de Jessé, qui est le père de David.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_4">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>18</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -1349,10 +1349,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_13">
         <Content>Voici la liste des ancêtres de David,à partir de Pérès: Pérès est le père de Hesron. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>19</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -1361,10 +1361,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_13">
         <Content>Hesron est le père de Ram.Ram est le père d'Amminadab. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>20</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -1373,10 +1373,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_13">
         <Content>Amminadab est le père de Nachon. Nachon est le père de Salman. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>21</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -1385,10 +1385,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_13">
         <Content>Salman est le père de Booz. Booz est le père d'Obed. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>22</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_2">
@@ -1465,10 +1465,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ChapterNumber_3">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_8">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_4">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>1</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_2">
@@ -1486,10 +1486,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_33">
         <Content>le fils d'Amittaï: </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_9">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_4">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>2</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_4">
@@ -1518,10 +1518,10 @@
         <Content> en a assez de voir vos actions mauvaises.’ ”</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_5">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_10">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_5">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>3</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_5">
@@ -1562,10 +1562,10 @@
         <Content>.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_6">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_11">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_6">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>4</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_6">
@@ -1580,10 +1580,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_44">
         <Content> lance sur la mer un vent violent, et la tempête est si forte que le bateau risque de se casser. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_6">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>5</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_6">
@@ -1592,10 +1592,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_43">
         <Content>Les marins ont peur, chacun crie vers son dieu. Ils jettent à la mer tous les objets qui sont dans le bateau pour le rendre plus léger. Pendant ce temps, Jonas est descendu au fond du bateau, il s'est couché et dort profondément. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_6">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>6</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_6">
@@ -1604,10 +1604,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_43">
         <Content>Le capitaine du bateau s'approche de lui et lui dit: “Quoi? Tu dors! Lève-toi, crie vers ton dieu! Il pensera peut-être à nous, et nous ne mourrons pas.” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_6">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>7</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_6">
@@ -1622,10 +1622,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_45">
         <Content> au sort.” Ils tirent au sort, et le sort tombe sur Jonas. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_6">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>8</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_6">
@@ -1634,10 +1634,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_43">
         <Content>Alors les marins lui disent: “Notre malheur vient de toi. Dis-nous: qu'est-ce que tu fais ici? D'où viens-tu? De quel pays et de quel peuple es-tu?” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_6">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>9</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_6">
@@ -1664,10 +1664,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_45">
         <Content>, celui qui a fait la mer et la terre.” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_6">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>10</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_6">
@@ -1682,10 +1682,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_44">
         <Content>. Ils lui demandent: </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_6">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>11</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_6">
@@ -1694,10 +1694,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_43">
         <Content>“Qu'est-ce que nous allons faire de toi pour que la mer se calme autour de nous?” En effet, les vagues montent de plus en plus. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_6">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>12</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_6">
@@ -1706,10 +1706,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_43">
         <Content>Jonas répond aux marins: “Prenez-moi et jetez-moi à la mer. Ainsi la mer deviendra calme autour de vous. Oui, je le sais, cette violente tempête vous attaque à cause de moi.” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_6">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>13</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_6">
@@ -1718,10 +1718,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_43">
         <Content>Les marins rament pour rejoindre la côte, mais ils n'y arrivent pas. Les vagues montent de plus en plus contre eux. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_6">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>14</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_6">
@@ -1749,10 +1749,10 @@
         <Content>, qui as fait ce que tu as voulu.”</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_6">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_11">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_6">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>15</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_6">
@@ -1761,10 +1761,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_43">
         <Content>Puis, ils prennent Jonas et ils le jettent à la mer. Alors la colère de la mer se calme. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_6">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>16</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_6">
@@ -1787,10 +1787,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ChapterNumber_4">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_13">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_7">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>1</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_3">
@@ -1805,10 +1805,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_48">
         <Content> envoie un grand poisson pour avaler Jonas. Jonas reste dans le ventre du poisson trois jours et trois nuits. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_14">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_7">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>2</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_7">
@@ -1823,10 +1823,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_48">
         <Content> son Dieu. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_14">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_7">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>3</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_7">
@@ -1866,10 +1866,10 @@
         <Content>et tu entends ma voix.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_15">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_8">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>4</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_8">
@@ -1895,10 +1895,10 @@
         <Content>tombent sur moi.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_15">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_8">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>5</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_8">
@@ -1923,10 +1923,10 @@
         <Content>saint.’</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_15">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_8">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>6</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_8">
@@ -1948,10 +1948,10 @@
         <Content>autour de ma tête.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_15">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_8">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>7</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_8">
@@ -1991,10 +1991,10 @@
         <Content>tu me fais remonter vivant de ce trou.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_15">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_8">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>8</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_8">
@@ -2029,10 +2029,10 @@
         <Content>dans ton temple saint.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_15">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_8">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>9</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_8">
@@ -2046,10 +2046,10 @@
         <Content>n'ont aucune chance d'être sauvés.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_15">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_8">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>10</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_8">
@@ -2081,10 +2081,10 @@
         <Content>!”</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/ParagraphContinuation_1">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_16">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_9">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>11</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_9">
@@ -2107,10 +2107,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ChapterNumber_5">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_17">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>1</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_4">
@@ -2125,10 +2125,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
         <Content> dit à Jonas: </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_18">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>2</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
@@ -2150,10 +2150,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_61">
         <Content>, la grande ville. Annonce-lui le message que je te donne.” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_18">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>3</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
@@ -2168,10 +2168,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
         <Content> l'a demandé. Ninive est une ville extraordinairement grande. Il faut trois jours pour la traverser. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_18">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>4</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
@@ -2180,10 +2180,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_59">
         <Content>Jonas entre dans la ville, il marche pendant un jour entier. Il annonce aux gens: “Dans quarante jours, Ninive sera détruite!” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_18">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>5</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
@@ -2192,10 +2192,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_59">
         <Content>Aussitôt, les gens de Ninive croient à la parole de Dieu. Ils décident de ne rien manger. Tous mettent des habits de deuil, les riches comme les pauvres. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_18">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>6</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
@@ -2204,10 +2204,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_59">
         <Content>Le roi de Ninive apprend la nouvelle. Il se lève de son siège. Il enlève son habit royal, il met un habit de deuil, et s'assoit sur de la cendre. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_18">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>7</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
@@ -2229,10 +2229,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_61">
         <Content>! </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_18">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>8</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
@@ -2241,10 +2241,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_59">
         <Content>Tout le monde doit mettre des habits de deuil, les gens et les bêtes! Chacun doit crier vers Dieu de toutes ses forces. Chacun doit abandonner sa mauvaise conduite et arrêter les actions violentes qu'il fait! </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_18">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>9</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
@@ -2254,10 +2254,10 @@
         <Content>Qui sait? Dieu changera peut-être d'avis. Il abandonnera sa colère contre nous, et nous ne mourrons pas.’ ”</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_9">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_19">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_11">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>10</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_11">
@@ -2274,10 +2274,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ChapterNumber_5">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_17">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>1</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_4">
@@ -2286,10 +2286,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_57">
         <Content>Jonas n'est pas content du tout, vraiment pas du tout. Il se met en colère. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_18">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>2</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
@@ -2323,10 +2323,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_61">
         <Content>. Je le savais bien, tu es plein de tendresse et de pitié, patient, plein d'amour, et tu regrettes tes menaces. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_18">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>3</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
@@ -2341,10 +2341,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
         <Content>, laisse-moi mourir. Oui, je préfère la mort à la vie.” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_18">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>4</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
@@ -2359,10 +2359,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
         <Content> répond à Jonas: “Est-ce que tu as raison de te mettre en colère?” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_18">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>5</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
@@ -2371,10 +2371,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_59">
         <Content>Jonas sort de la ville et il s'arrête à l'est de Ninive. Là, il se construit un abri et s'assoit dessous, à l'ombre. Il veut voir ce qui va se passer dans la ville. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_18">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>6</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
@@ -2389,10 +2389,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
         <Content> Dieu fait pousser une plante au-dessus de Jonas. De cette façon, il aura de l'ombre et sera guéri de sa mauvaise humeur. Jonas est rempli de joie à cause de la plante. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_18">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>7</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
@@ -2401,10 +2401,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_59">
         <Content>Mais le jour suivant, un peu avant le lever du soleil, Dieu envoie un ver. Le ver pique la plante, et la plante sèche. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_18">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>8</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
@@ -2413,10 +2413,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_59">
         <Content>Puis, quand le soleil se lève, Dieu envoie de l'est un vent brûlant. Le soleil tape sur la tête de Jonas. Il va bientôt s'évanouir. Alors il souhaite la mort et dit: “Je préfère la mort à la vie.” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_18">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>9</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
@@ -2425,10 +2425,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_59">
         <Content>Dieu demande à Jonas: “Est-ce que tu as raison de te mettre en colère à cause de cette plante?” Jonas répond: “Oui, j'ai bien raison de me mettre en colère et de souhaiter la mort!” </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_18">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>10</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
@@ -2443,10 +2443,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_58">
         <Content> lui dit: “Toi, tu as pitié de cette plante. Pourtant, elle ne t'a demandé aucun travail. Ce n'est pas toi qui l'as fait pousser. En une nuit elle a grandi, en une nuit elle a séché. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_18">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_10">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>11</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_10">
@@ -2476,10 +2476,10 @@
         <Content>Salutation</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_10">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_20">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>1</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_5">
@@ -2494,10 +2494,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_69">
         <Content> et Timothée, le frère, à Philémon, notre bien-aimé collaborateur, </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_21">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>2</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
@@ -2506,10 +2506,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_70">
         <Content>et à Apphia, notre soeur, et à Archippe, notre compagnon d'armes, et à l'Eglise qui s'assemble dans ta maison. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_21">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>3</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
@@ -2539,10 +2539,10 @@
         <Content>L'amour et de la foi de Philemon</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_10">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_20">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>4</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
@@ -2551,10 +2551,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_70">
         <Content>Je rends grâce à mon Dieu en faisant continuellement mention de toi dans mes prières, </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_21">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>5</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
@@ -2569,10 +2569,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_69">
         <Content> et en faveur de tous les saints. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_21">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>6</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
@@ -2600,10 +2600,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_69">
         <Content>. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_21">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>7</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
@@ -2617,10 +2617,10 @@
         <Content>Une requête à Philémon</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_10">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_20">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>8</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
@@ -2629,10 +2629,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_70">
         <Content>Aussi, bien que j'aie, en Christ, toute liberté de te prescrire ton devoir, </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_21">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>9</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
@@ -2641,10 +2641,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_70">
         <Content>c'est de préférence au nom de l'amour que je t'adresse une requête. Oui, moi Paul, qui suis un vieillard, moi qui suis maintenant prisonnier de Jésus Christ, </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_21">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>10</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
@@ -2653,10 +2653,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_70">
         <Content>je te prie pour mon enfant, celui que j'ai engendré en prison, Onésime, </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_21">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>11</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
@@ -2665,10 +2665,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_70">
         <Content>qui jadis t'a été inutile et qui, maintenant, nous est utile, à toi comme à moi. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_21">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>12</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
@@ -2677,10 +2677,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_70">
         <Content>Je te le renvoie, lui qui est comme mon propre coeur. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_21">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>13</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
@@ -2689,10 +2689,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_70">
         <Content>Je l'aurais volontiers gardé près de moi, afin qu'il me serve à ta place dans la prison où je suis à cause de l'Evangile; </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_21">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>14</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
@@ -2701,10 +2701,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_70">
         <Content>mais je n'ai rien voulu faire sans ton accord, afin que ce bienfait n'ait pas l'air forcé, mais qu'il vienne de ton bon gré. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_21">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>15</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
@@ -2713,10 +2713,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_70">
         <Content>Peut-être Onésime n'a-t-il été séparé de toi pour un temps qu'afin de t'être rendu pour l'éternité, </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_21">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_12">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>16</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_12">
@@ -2726,10 +2726,10 @@
         <Content>non plus comme un esclave mais comme bien mieux qu'un esclave: un frère bien-aimé. Il l'est tellement pour moi, combien plus le sera-t-il pour toi, et en tant qu'homme et en tant que chrétien.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_11">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_13">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>17</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_13">
@@ -2738,10 +2738,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_74">
         <Content>Si donc tu me tiens pour ton frère en la foi, reçois-le comme si c'était moi. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_23">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_13">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>18</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_13">
@@ -2750,10 +2750,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_74">
         <Content>Et s'il t'a fait quelque tort ou s'il a quelque dette envers toi, porte cela à mon compte. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_23">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_13">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>19</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_13">
@@ -2762,10 +2762,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_74">
         <Content>- C'est moi, Paul, qui l'écris de ma propre main: c'est moi qui paierai... Et je ne te rappelle pas que toi, tu as aussi une dette envers moi, et c'est toi-même! </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_23">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_13">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>20</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_13">
@@ -2774,10 +2774,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_74">
         <Content>Allons, frère, rends-moi ce service dans le Seigneur; donne à mon coeur son réconfort en Christ! </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_23">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_13">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>21</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_13">
@@ -2787,10 +2787,10 @@
         <Content>C'est en me fiant à ton obéissance que je t'écris: je sais que tu feras plus encore que je ne dis.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_11">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_22">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_13">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>22</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_13">
@@ -2799,10 +2799,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_74">
         <Content>En même temps, prépare-moi un logement: j'espère en effet, grâce à vos prières, vous être rendu. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_23">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_13">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>23</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_13">
@@ -2811,10 +2811,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_74">
         <Content>Epaphras, mon compagnon de captivité en Jésus Christ, te salue, </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_23">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_13">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>24</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_13">
@@ -2823,10 +2823,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_74">
         <Content>ainsi que Marc, Aristarque, Démas et Luc, mes collaborateurs. </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_23">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber_13">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideVerseNumber">
         <Content>25</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_13">

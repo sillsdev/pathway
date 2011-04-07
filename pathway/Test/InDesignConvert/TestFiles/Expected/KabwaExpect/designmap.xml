@@ -85,19 +85,19 @@
     <MatchCharacterStylePreference TextBefore="" TextAfter="" AppliedCharacterStyle="CharacterStyle/scrBookName_1" SearchStrategy="FirstOnPage" ChangeCase="None" DeleteEndPunctuation="false" />
   </TextVariable>
   <TextVariable Self="dTextVariablenFirstChapterNumber" Name="FirstChapterNumber" VariableType="MatchCharacterStyleType">
-    <MatchCharacterStylePreference TextBefore="" TextAfter="" AppliedCharacterStyle="CharacterStyle/hideChapterNumber_1" SearchStrategy="FirstOnPage" ChangeCase="None" DeleteEndPunctuation="false" />
+    <MatchCharacterStylePreference TextBefore="" TextAfter="" AppliedCharacterStyle="CharacterStyle/hideChapterNumber" SearchStrategy="FirstOnPage" ChangeCase="None" DeleteEndPunctuation="false" />
   </TextVariable>
   <TextVariable Self="dTextVariablenFirstVerseNumber" Name="FirstVerseNumber" VariableType="MatchCharacterStyleType">
-    <MatchCharacterStylePreference TextBefore="" TextAfter="" AppliedCharacterStyle="CharacterStyle/hideVerseNumber1_1" SearchStrategy="FirstOnPage" ChangeCase="None" DeleteEndPunctuation="false" />
+    <MatchCharacterStylePreference TextBefore="" TextAfter="" AppliedCharacterStyle="CharacterStyle/hideVerseNumber1" SearchStrategy="FirstOnPage" ChangeCase="None" DeleteEndPunctuation="false" />
   </TextVariable>
   <TextVariable Self="dTextVariablenLastBookName" Name="LastBookName" VariableType="MatchCharacterStyleType">
     <MatchCharacterStylePreference TextBefore="" TextAfter="" AppliedCharacterStyle="CharacterStyle/scrBookName_1" SearchStrategy="LastOnPage" ChangeCase="None" DeleteEndPunctuation="false" />
   </TextVariable>
   <TextVariable Self="dTextVariablenLastChapterNumber" Name="LastChapterNumber" VariableType="MatchCharacterStyleType">
-    <MatchCharacterStylePreference TextBefore="" TextAfter="" AppliedCharacterStyle="CharacterStyle/hideChapterNumber_1" SearchStrategy="LastOnPage" ChangeCase="None" DeleteEndPunctuation="false" />
+    <MatchCharacterStylePreference TextBefore="" TextAfter="" AppliedCharacterStyle="CharacterStyle/hideChapterNumber" SearchStrategy="LastOnPage" ChangeCase="None" DeleteEndPunctuation="false" />
   </TextVariable>
   <TextVariable Self="dTextVariablenLastVerseNumber" Name="LastVerseNumber" VariableType="MatchCharacterStyleType">
-    <MatchCharacterStylePreference TextBefore="" TextAfter="" AppliedCharacterStyle="CharacterStyle/hideVerseNumber1_1" SearchStrategy="LastOnPage" ChangeCase="None" DeleteEndPunctuation="false" />
+    <MatchCharacterStylePreference TextBefore="" TextAfter="" AppliedCharacterStyle="CharacterStyle/hideVerseNumber1" SearchStrategy="LastOnPage" ChangeCase="None" DeleteEndPunctuation="false" />
   </TextVariable>
   <idPkg:Tags src="XML/Tags.xml" />
   <Layer Self="ub6" Name="Layer 1" Visible="true" Locked="false" IgnoreWrap="false" ShowGuides="true" LockGuides="false" UI="true" Expendable="true" Printable="true">

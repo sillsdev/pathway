@@ -122,7 +122,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/hideChapterNumber_1" Name="hideChapterNumber_1" Imported="false" NextStyle="CharacterStyle/hideChapterNumber_1" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/hideChapterNumber" Name="hideChapterNumber" Imported="false" NextStyle="CharacterStyle/hideChapterNumber" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -130,7 +130,7 @@
         <Leading type="unit">0.1</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/hideVerseNumber_1" Name="hideVerseNumber_1" Imported="false" NextStyle="CharacterStyle/hideVerseNumber_1" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper">
+    <CharacterStyle Self="CharacterStyle/hideVerseNumber" Name="hideVerseNumber" Imported="false" NextStyle="CharacterStyle/hideVerseNumber" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -155,22 +155,6 @@
       </Properties>
     </CharacterStyle>
     <CharacterStyle Self="CharacterStyle/Paragraph_2" Name="Paragraph_2" Imported="false" NextStyle="CharacterStyle/Paragraph_2" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="18" FirstLineIndent="12" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">20</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/hideChapterNumber_2" Name="hideChapterNumber_2" Imported="false" NextStyle="CharacterStyle/hideChapterNumber_2" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/hideVerseNumber_2" Name="hideVerseNumber_2" Imported="false" NextStyle="CharacterStyle/hideVerseNumber_2" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -210,14 +194,6 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/hideChapterNumber_3" Name="hideChapterNumber_3" Imported="false" NextStyle="CharacterStyle/hideChapterNumber_3" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
-      </Properties>
-    </CharacterStyle>
     <CharacterStyle Self="CharacterStyle/Paragraph_3" Name="Paragraph_3" Imported="false" NextStyle="CharacterStyle/Paragraph_3" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="18" FirstLineIndent="12" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
@@ -250,22 +226,6 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/hideChapterNumber_4" Name="hideChapterNumber_4" Imported="false" NextStyle="CharacterStyle/hideChapterNumber_4" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/hideVerseNumber_3" Name="hideVerseNumber_3" Imported="false" NextStyle="CharacterStyle/hideVerseNumber_3" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">20</Leading>
-      </Properties>
-    </CharacterStyle>
     <CharacterStyle Self="CharacterStyle/VerseNumber_2" Name="VerseNumber_2" Imported="false" NextStyle="CharacterStyle/VerseNumber_2" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="18" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
@@ -290,22 +250,6 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/hideChapterNumber_5" Name="hideChapterNumber_5" Imported="false" NextStyle="CharacterStyle/hideChapterNumber_5" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/hideVerseNumber_4" Name="hideVerseNumber_4" Imported="false" NextStyle="CharacterStyle/hideVerseNumber_4" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">20</Leading>
-      </Properties>
-    </CharacterStyle>
     <CharacterStyle Self="CharacterStyle/VerseNumber_3" Name="VerseNumber_3" Imported="false" NextStyle="CharacterStyle/VerseNumber_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="18" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
@@ -322,28 +266,12 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/hideChapterNumber_6" Name="hideChapterNumber_6" Imported="false" NextStyle="CharacterStyle/hideChapterNumber_6" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
-      </Properties>
-    </CharacterStyle>
     <CharacterStyle Self="CharacterStyle/span_14" Name="span_14" Imported="false" NextStyle="CharacterStyle/span_14" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="18" FirstLineIndent="12" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
         <Leading type="unit">20</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/hideChapterNumber_7" Name="hideChapterNumber_7" Imported="false" NextStyle="CharacterStyle/hideChapterNumber_7" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
       </Properties>
     </CharacterStyle>
     <CharacterStyle Self="CharacterStyle/NoteGeneralParagraph_1" Name="NoteGeneralParagraph_1" Imported="false" NextStyle="CharacterStyle/NoteGeneralParagraph_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="8" Justification="LeftAlign" clear="both">
@@ -426,14 +354,6 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/hideChapterNumber_8" Name="hideChapterNumber_8" Imported="false" NextStyle="CharacterStyle/hideChapterNumber_8" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
-      </Properties>
-    </CharacterStyle>
     <CharacterStyle Self="CharacterStyle/VerseNumber_4" Name="VerseNumber_4" Imported="false" NextStyle="CharacterStyle/VerseNumber_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="18" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
@@ -466,22 +386,6 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/hideChapterNumber_9" Name="hideChapterNumber_9" Imported="false" NextStyle="CharacterStyle/hideChapterNumber_9" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/hideVerseNumber_5" Name="hideVerseNumber_5" Imported="false" NextStyle="CharacterStyle/hideVerseNumber_5" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">20</Leading>
-      </Properties>
-    </CharacterStyle>
     <CharacterStyle Self="CharacterStyle/PWHide_2" Name="PWHide_2" Imported="false" NextStyle="CharacterStyle/PWHide_2" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
@@ -498,14 +402,6 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/hideChapterNumber_10" Name="hideChapterNumber_10" Imported="false" NextStyle="CharacterStyle/hideChapterNumber_10" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
-      </Properties>
-    </CharacterStyle>
     <CharacterStyle Self="CharacterStyle/VerseNumber_5" Name="VerseNumber_5" Imported="false" NextStyle="CharacterStyle/VerseNumber_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="18" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
@@ -520,14 +416,6 @@
         <AppliedFont type="string">Charis SIL</AppliedFont>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
         <Leading type="unit">20</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/hideChapterNumber_11" Name="hideChapterNumber_11" Imported="false" NextStyle="CharacterStyle/hideChapterNumber_11" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
       </Properties>
     </CharacterStyle>
     <CharacterStyle Self="CharacterStyle/scrFootnoteMarker_4" Name="scrFootnoteMarker_4" Imported="false" NextStyle="CharacterStyle/scrFootnoteMarker_4" KeyboardShortcut="0 0" PointSize="18" FontStyle="Bold" Position="Superscript" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both">
@@ -600,14 +488,6 @@
         <AppliedFont type="string">Charis SIL</AppliedFont>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
         <Leading type="unit">20</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/hideChapterNumber_12" Name="hideChapterNumber_12" Imported="false" NextStyle="CharacterStyle/hideChapterNumber_12" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
       </Properties>
     </CharacterStyle>
     <CharacterStyle Self="CharacterStyle/hideVerseNumberAlternate_1" Name="hideVerseNumberAlternate_1" Imported="false" NextStyle="CharacterStyle/hideVerseNumberAlternate_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="18" FirstLineIndent="12" Justification="LeftAlign" clear="both">
@@ -825,7 +705,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/hideChapterNumber_1" Name="hideChapterNumber_1" Imported="false" NextStyle="ParagraphStyle/hideChapterNumber_1" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/hideChapterNumber" Name="hideChapterNumber" Imported="false" NextStyle="ParagraphStyle/hideChapterNumber" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -833,7 +713,7 @@
         <Leading type="unit">0.1</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/hideVerseNumber_1" Name="hideVerseNumber_1" Imported="false" NextStyle="ParagraphStyle/hideVerseNumber_1" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/hideVerseNumber" Name="hideVerseNumber" Imported="false" NextStyle="ParagraphStyle/hideVerseNumber" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -858,22 +738,6 @@
       </Properties>
     </ParagraphStyle>
     <ParagraphStyle Self="ParagraphStyle/Paragraph_2" Name="Paragraph_2" Imported="false" NextStyle="ParagraphStyle/Paragraph_2" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="18" FirstLineIndent="12" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">20</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/hideChapterNumber_2" Name="hideChapterNumber_2" Imported="false" NextStyle="ParagraphStyle/hideChapterNumber_2" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/hideVerseNumber_2" Name="hideVerseNumber_2" Imported="false" NextStyle="ParagraphStyle/hideVerseNumber_2" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -913,14 +777,6 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/hideChapterNumber_3" Name="hideChapterNumber_3" Imported="false" NextStyle="ParagraphStyle/hideChapterNumber_3" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
-      </Properties>
-    </ParagraphStyle>
     <ParagraphStyle Self="ParagraphStyle/Paragraph_3" Name="Paragraph_3" Imported="false" NextStyle="ParagraphStyle/Paragraph_3" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="18" FirstLineIndent="12" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
@@ -953,22 +809,6 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/hideChapterNumber_4" Name="hideChapterNumber_4" Imported="false" NextStyle="ParagraphStyle/hideChapterNumber_4" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/hideVerseNumber_3" Name="hideVerseNumber_3" Imported="false" NextStyle="ParagraphStyle/hideVerseNumber_3" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">20</Leading>
-      </Properties>
-    </ParagraphStyle>
     <ParagraphStyle Self="ParagraphStyle/VerseNumber_2" Name="VerseNumber_2" Imported="false" NextStyle="ParagraphStyle/VerseNumber_2" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="18" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
@@ -993,22 +833,6 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/hideChapterNumber_5" Name="hideChapterNumber_5" Imported="false" NextStyle="ParagraphStyle/hideChapterNumber_5" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/hideVerseNumber_4" Name="hideVerseNumber_4" Imported="false" NextStyle="ParagraphStyle/hideVerseNumber_4" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">20</Leading>
-      </Properties>
-    </ParagraphStyle>
     <ParagraphStyle Self="ParagraphStyle/VerseNumber_3" Name="VerseNumber_3" Imported="false" NextStyle="ParagraphStyle/VerseNumber_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="18" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
@@ -1025,28 +849,12 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/hideChapterNumber_6" Name="hideChapterNumber_6" Imported="false" NextStyle="ParagraphStyle/hideChapterNumber_6" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
-      </Properties>
-    </ParagraphStyle>
     <ParagraphStyle Self="ParagraphStyle/span_14" Name="span_14" Imported="false" NextStyle="ParagraphStyle/span_14" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="18" FirstLineIndent="12" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
         <Leading type="unit">20</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/hideChapterNumber_7" Name="hideChapterNumber_7" Imported="false" NextStyle="ParagraphStyle/hideChapterNumber_7" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
       </Properties>
     </ParagraphStyle>
     <ParagraphStyle Self="ParagraphStyle/NoteGeneralParagraph_1" Name="NoteGeneralParagraph_1" Imported="false" NextStyle="ParagraphStyle/NoteGeneralParagraph_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="8" Justification="LeftAlign" clear="both">
@@ -1129,14 +937,6 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/hideChapterNumber_8" Name="hideChapterNumber_8" Imported="false" NextStyle="ParagraphStyle/hideChapterNumber_8" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
-      </Properties>
-    </ParagraphStyle>
     <ParagraphStyle Self="ParagraphStyle/VerseNumber_4" Name="VerseNumber_4" Imported="false" NextStyle="ParagraphStyle/VerseNumber_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="18" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
@@ -1169,22 +969,6 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/hideChapterNumber_9" Name="hideChapterNumber_9" Imported="false" NextStyle="ParagraphStyle/hideChapterNumber_9" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/hideVerseNumber_5" Name="hideVerseNumber_5" Imported="false" NextStyle="ParagraphStyle/hideVerseNumber_5" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">20</Leading>
-      </Properties>
-    </ParagraphStyle>
     <ParagraphStyle Self="ParagraphStyle/PWHide_2" Name="PWHide_2" Imported="false" NextStyle="ParagraphStyle/PWHide_2" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
@@ -1201,14 +985,6 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/hideChapterNumber_10" Name="hideChapterNumber_10" Imported="false" NextStyle="ParagraphStyle/hideChapterNumber_10" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
-      </Properties>
-    </ParagraphStyle>
     <ParagraphStyle Self="ParagraphStyle/VerseNumber_5" Name="VerseNumber_5" Imported="false" NextStyle="ParagraphStyle/VerseNumber_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="18" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
@@ -1223,14 +999,6 @@
         <AppliedFont type="string">Charis SIL</AppliedFont>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
         <Leading type="unit">20</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/hideChapterNumber_11" Name="hideChapterNumber_11" Imported="false" NextStyle="ParagraphStyle/hideChapterNumber_11" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
       </Properties>
     </ParagraphStyle>
     <ParagraphStyle Self="ParagraphStyle/scrFootnoteMarker_4" Name="scrFootnoteMarker_4" Imported="false" NextStyle="ParagraphStyle/scrFootnoteMarker_4" KeyboardShortcut="0 0" PointSize="18" FontStyle="Bold" Position="Superscript" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both">
@@ -1303,14 +1071,6 @@
         <AppliedFont type="string">Charis SIL</AppliedFont>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
         <Leading type="unit">20</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/hideChapterNumber_12" Name="hideChapterNumber_12" Imported="false" NextStyle="ParagraphStyle/hideChapterNumber_12" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
       </Properties>
     </ParagraphStyle>
     <ParagraphStyle Self="ParagraphStyle/hideVerseNumberAlternate_1" Name="hideVerseNumberAlternate_1" Imported="false" NextStyle="ParagraphStyle/hideVerseNumberAlternate_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="18" FirstLineIndent="12" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
