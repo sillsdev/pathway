@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\ConfigurationTool\TE_XHTML-to-YouVersion_SQL_offline_unformatted.xslt" ComponentGuid="FD34D160-800A-49E3-A69F-B74E03541B3E"/>
+	<File Path="Files\ConfigurationTool\TE_XHTML-to-YouVersion_SQL_offline_html.xslt" ComponentGuid="690F4E45-0D86-42D0-81F1-B59D38D6F651"/>
+	<File Path="Files\ConfigurationTool\result" ComponentGuid="CA37F05E-FB75-42F3-8E8D-B20BBD8A85ED"/>
 	<File Path="Files\PublishingSolution\TE_XHTML-to-YouVersion_SQL.xslt" ComponentGuid="5060C644-36F9-439D-AEEF-1C0DC046E8A1"/>
 	<File Path="Files\PublishingSolution\xetexExe\share\texmf\web2c\texmf.cnf" ComponentGuid="CEBD70A8-1AF6-4F1A-A512-E4A0484EDCCB"/>
 	<File Path="Files\PublishingSolution\xetexExe\share\texmf\web2c\fmtutil.cnf" ComponentGuid="E92AF25A-D5F5-4049-A9F5-50006A3F6420"/>
