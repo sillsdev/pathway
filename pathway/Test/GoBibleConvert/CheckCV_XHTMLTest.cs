@@ -32,6 +32,16 @@ namespace Test.GoBibleConvert
     public class CheckCV_XHTMLTest : ExportGoBible
     {
         private readonly Mockery mocks = new Mockery();
+        #region Setup
+
+        private TestFiles _testFiles;
+
+        [TestFixtureSetUp]
+        public void Setup()
+        {
+            _testFiles = new TestFiles("GoBibleConvert");
+        }
+        #endregion Setup
 
         ///<summary>
         ///A test for XhtmlCheck
@@ -42,14 +52,14 @@ namespace Test.GoBibleConvert
         {
             const string fileName = "1pe.xhtml";
             // Get "1pe.xhtml" from the InputFiles folder.
-            string inputFileName = GetFileNameWithInputPath(fileName);
+            string inputFileName = _testFiles.Input(fileName);
             Debug.Assert(File.Exists(inputFileName));
             // The original XSLT file is in the folder "C:\SIL\btai\PublishingSolution\PublishingSolutionExe\bin\Debug".
             // A copy of it has been put into the InputFiles folder.
             // Common.XsltProcress creates an output file in the same folder as the input file.
             // Therefore, since we want 1pe_cv.xhtml to be created in the output folder,
             // 1pe.xhtml must be moved to the output folder, also.
-            string outputFileName = GetFileNameWithOutputPath(fileName);
+            string outputFileName = _testFiles.Output(fileName);
             File.Copy(inputFileName, outputFileName, true);
             Debug.Assert(File.Exists(outputFileName));
             const string xsltName = "TE_XHTML-to-Phone_XHTML.xslt";
@@ -62,7 +72,7 @@ namespace Test.GoBibleConvert
             Debug.Assert(File.Exists(actualXhtmlOutput));
 
             // Compare the newly transformed file with "1pe_cv.xhtml" from the Expected folder.
-            string expectedXhtmlFile = GetFileNameWithExpectedPath("1pe_cv.xhtml");
+            string expectedXhtmlFile = _testFiles.Expected("1pe_cv.xhtml");
             XmlAssert.AreEqual(expectedXhtmlFile, actualXhtmlOutput, "1pe_cv.xhtml was not transformed correctly");
         }
 
@@ -72,13 +82,13 @@ namespace Test.GoBibleConvert
         {
             const string fileName = "1pe.xhtml";
             const string restructuredFileName = "1pe_cv.xhtml";
-            string inputFullName = GetFileNameWithInputPath(fileName);
+            string inputFullName = _testFiles.Input(fileName);
             Debug.Assert(File.Exists(inputFullName));
-            string outputFullName = GetFileNameWithOutputPath(fileName);
+            string outputFullName = _testFiles.Output(fileName);
             File.Copy(inputFullName, outputFullName, true);
             Debug.Assert(File.Exists(outputFullName));
             const string cssName = "1pe.css";
-            string cssFullName = GetFileNameWithInputPath(cssName);
+            string cssFullName = _testFiles.Input(cssName);
             Debug.Assert(File.Exists(cssFullName));
             PublicationInformation projInfo = new PublicationInformation();
             projInfo.DefaultXhtmlFileWithPath = outputFullName;
@@ -88,7 +98,7 @@ namespace Test.GoBibleConvert
             Expect.Once.On(inProcess).Method("Bar").WithNoArguments();
             Restructure(projInfo, inProcess);
             Assert.AreEqual(Path.GetDirectoryName(outputFullName), processFolder);
-            string expectedRestructuredFullName = GetFileNameWithOutputPath(restructuredFileName);
+            string expectedRestructuredFullName = _testFiles.Expected(restructuredFileName);
             Assert.AreEqual(expectedRestructuredFullName, restructuredFullName);
             mocks.VerifyAllExpectationsHaveBeenMet();
         }
@@ -97,10 +107,10 @@ namespace Test.GoBibleConvert
         public void CreateCollectionTest()
         {
             const string fileName = "1pe_cv.xhtml";
-            string inputFullName = GetFileNameWithInputPath(fileName);
-            restructuredFullName = GetFileNameWithOutputPath(fileName);
+            string inputFullName = _testFiles.Input(fileName);
+            restructuredFullName = _testFiles.Output(fileName);
             File.Copy(inputFullName, restructuredFullName, true);
-            processFolder = GetOutputPath();
+            processFolder = _testFiles.Output("");
 			Common.ProgBase = GetSupportPath();
             Param.LoadSettings();
             Param.SetValue(Param.InputType, "Scripture");
@@ -115,12 +125,12 @@ namespace Test.GoBibleConvert
             Param.Write();
             const string origFileName = "1pe.xhtml";
             IPublicationInformation projInfo = mocks.NewMock<IPublicationInformation>();
-            Expect.Exactly(2).On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(GetFileNameWithInputPath(origFileName)));
+            Expect.Exactly(2).On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(_testFiles.Input(origFileName)));
             collectionName = GetCollectionName(projInfo);
             CreateCollection();
             const string collections = "Collections.txt";
-            string actualFullName = GetFileNameWithOutputPath(collections);
-            string exepectedFullName = GetFileNameWithExpectedPath(collections);
+            string actualFullName = _testFiles.Output(collections);
+            string exepectedFullName = _testFiles.Expected(collections);
             TextFileAssert.AreEqual(exepectedFullName, actualFullName);
             mocks.VerifyAllExpectationsHaveBeenMet();
         }
@@ -132,17 +142,17 @@ namespace Test.GoBibleConvert
             const string fileName = "1pe_cv.xhtml";
             const string collections = "Collections.txt";
             const string jarFile = "1Pita.jar";
-            string inputFullName = GetFileNameWithInputPath(fileName);
-            restructuredFullName = GetFileNameWithOutputPath(fileName);
+            string inputFullName = _testFiles.Input(fileName);
+            restructuredFullName = _testFiles.Output(fileName);
             File.Copy(inputFullName, restructuredFullName, true);
-            string collectionInputFullName = GetFileNameWithInputPath(collections);
-            collectionFullName = GetFileNameWithOutputPath(collections);
+            string collectionInputFullName = _testFiles.Input(collections);
+            collectionFullName = _testFiles.Output(collections);
             File.Copy(collectionInputFullName, collectionFullName, true);
-            processFolder = GetOutputPath();
+            processFolder = _testFiles.Output("");
 			Common.ProgBase = GetSupportPath();
             BuildApplication();
-            string actualFullName = GetFileNameWithOutputPath(jarFile);
-            string exepectedFullName = GetFileNameWithExpectedPath(jarFile);
+            string actualFullName = _testFiles.Output(jarFile);
+            string exepectedFullName = _testFiles.Expected(jarFile);
             GoBibleTest.AreEqual(exepectedFullName, actualFullName);
         }
 
@@ -153,21 +163,21 @@ namespace Test.GoBibleConvert
             const string fileName = "1pe_cv.xhtml";
             const string collections = "Collections.txt";
             const string jarFile = "1Pita.jar";
-            string inputFullName = GetFileNameWithInputPath(fileName);
-            string folderWithSpace = GetFileNameWithOutputPath("with space");
+            string inputFullName = _testFiles.Input(fileName);
+            string folderWithSpace = _testFiles.Output("with space");
             if (Directory.Exists(folderWithSpace))
                 Directory.Delete(folderWithSpace, true);
             Directory.CreateDirectory(folderWithSpace);
             restructuredFullName = Path.Combine(folderWithSpace, fileName);
             File.Copy(inputFullName, restructuredFullName, true);
-            string collectionInputFullName = GetFileNameWithInputPath(collections);
+            string collectionInputFullName = _testFiles.Input(collections);
             collectionFullName = Path.Combine(folderWithSpace, collections);
             File.Copy(collectionInputFullName, collectionFullName, true);
-            processFolder = GetOutputPath();
+            processFolder = _testFiles.Output("");
 			Common.ProgBase = GetSupportPath();
             BuildApplication();
             string actualFullName = Path.Combine(folderWithSpace, jarFile);
-            string exepectedFullName = GetFileNameWithExpectedPath(jarFile);
+            string exepectedFullName = _testFiles.Expected(jarFile);
             GoBibleTest.AreEqual(exepectedFullName, actualFullName);
         }
 
@@ -175,7 +185,7 @@ namespace Test.GoBibleConvert
         public void ChaptersTest()
         {
             const string fileName = "1pe.xhtml";
-            string inputFullName = GetFileNameWithInputPath(fileName);
+            string inputFullName = _testFiles.Input(fileName);
             int actual = Chapters(inputFullName);
             const int expected = 5;
             Assert.AreEqual(expected, actual);
@@ -214,7 +224,7 @@ namespace Test.GoBibleConvert
         public void GetProjectNameTest()
         {
             const string fileName = "1pe.xhtml";
-            string inputFullName = GetFileNameWithInputPath(fileName);
+            string inputFullName = _testFiles.Input(fileName);
             IPublicationInformation projInfo = mocks.NewMock<IPublicationInformation>();
             Expect.Exactly(1).On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(inputFullName));
             var result = GetProjectName(projInfo);
@@ -229,7 +239,7 @@ namespace Test.GoBibleConvert
         public void GetBookCode1Test()
         {
             const string fileName = "1pe.xhtml";
-            string inputFullName = GetFileNameWithInputPath(fileName);
+            string inputFullName = _testFiles.Input(fileName);
             IPublicationInformation projInfo = mocks.NewMock<IPublicationInformation>();
             Expect.Exactly(1).On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(inputFullName));
             var result = GetBookCode(projInfo);
@@ -245,7 +255,7 @@ namespace Test.GoBibleConvert
         {
             const string origFileName = "1pe.xhtml";
             IPublicationInformation projInfo = mocks.NewMock<IPublicationInformation>();
-            Expect.Exactly(2).On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(GetFileNameWithInputPath(origFileName)));
+            Expect.Exactly(2).On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(_testFiles.Input(origFileName)));
             collectionName = GetCollectionName(projInfo);
             Assert.AreEqual("TestFiles_1Pe", collectionName);
             mocks.VerifyAllExpectationsHaveBeenMet();
@@ -259,7 +269,7 @@ namespace Test.GoBibleConvert
         {
             const string origFileName = "luke.xhtml";
             IPublicationInformation projInfo = mocks.NewMock<IPublicationInformation>();
-            Expect.Exactly(3).On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(GetFileNameWithInputPath(origFileName)));
+            Expect.Exactly(3).On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(_testFiles.Input(origFileName)));
             collectionName = GetCollectionName(projInfo);
             Assert.AreEqual("TestFiles_Matthew", collectionName);
             mocks.VerifyAllExpectationsHaveBeenMet();
@@ -273,7 +283,7 @@ namespace Test.GoBibleConvert
         {
             const string origFileName = "luke.xhtml";
             IPublicationInformation projInfo = mocks.NewMock<IPublicationInformation>();
-            Expect.Once.On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(GetFileNameWithInputPath(origFileName)));
+            Expect.Once.On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(_testFiles.Input(origFileName)));
             var result = BookDataNested(projInfo);
             Assert.IsFalse(result);
             mocks.VerifyAllExpectationsHaveBeenMet();
@@ -287,7 +297,7 @@ namespace Test.GoBibleConvert
         {
             const string origFileName = "1pe.xhtml";
             IPublicationInformation projInfo = mocks.NewMock<IPublicationInformation>();
-            Expect.Once.On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(GetFileNameWithInputPath(origFileName)));
+            Expect.Once.On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(_testFiles.Input(origFileName)));
             var result = BookDataNested(projInfo);
             Assert.IsTrue(result);
             mocks.VerifyAllExpectationsHaveBeenMet();
@@ -300,8 +310,8 @@ namespace Test.GoBibleConvert
         public void NestBookDataTest()
         {
             const string origFileName = "luke.xhtml";
-            string workingCopy = GetFileNameWithOutputPath(origFileName);
-            File.Copy(GetFileNameWithInputPath(origFileName),workingCopy, true);
+            string workingCopy = _testFiles.Output(origFileName);
+            File.Copy(_testFiles.Input(origFileName),workingCopy, true);
             IPublicationInformation projInfo = mocks.NewMock<IPublicationInformation>();
             Expect.Exactly(3).On(projInfo).GetProperty("DefaultXhtmlFileWithPath").Will(Return.Value(workingCopy));
             NestBookData(projInfo);
@@ -311,30 +321,6 @@ namespace Test.GoBibleConvert
         }
 
         #region private Methods
-        private static string GetPath(string place, string filename)
-        {
-            return Common.PathCombine(GetTestPath(), Common.PathCombine(place, filename));
-        }
-        private static string GetOutputPath()
-        {
-            return Common.PathCombine(GetTestPath(), "Output");
-        }
-        private static string GetTestPath()
-        {
-            return PathPart.Bin(Environment.CurrentDirectory, "/GoBibleConvert/TestFiles/");
-        }
-        private static string GetFileNameWithExpectedPath(string fileName)
-        {
-            return Common.DirectoryPathReplace(GetPath("Expected", fileName));
-        }
-        private static string GetFileNameWithInputPath(string fileName)
-        {
-            return Common.DirectoryPathReplace(GetPath("InputFiles", fileName));
-        }
-        private static string GetFileNameWithOutputPath(string fileName)
-        {
-            return Common.DirectoryPathReplace(GetPath("Output", fileName));
-        }
         private static string GetSupportPath()
         {
             return PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
