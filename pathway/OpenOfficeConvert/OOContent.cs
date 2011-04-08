@@ -674,7 +674,7 @@ namespace SIL.PublishingSolution
                     _paragraphName = StackPeek(_allParagraph); // _allParagraph.Pop();
                 }
 
-                ClosePara();
+                ClosePara(false);
 
                 if (_isDropCap)
                 {
@@ -1109,7 +1109,7 @@ namespace SIL.PublishingSolution
         {
             if (_tagType == "ol" || _tagType == "ul")
             {
-                ClosePara();
+                ClosePara(false);
                 string listClassName = Common.LeftString(_paragraphName, "_");
                 if (listClassName.IndexOf(_tagType) == -1 || !IdAllClass.ContainsKey(listClassName))
                 {
@@ -1215,9 +1215,9 @@ namespace SIL.PublishingSolution
             SectionClose(closeChild);
             //SetHeadwordFalse();  Note: verify &todo in OO td2000 
             ClosefooterNote();
-            EndElementForImage();
+            bool isImageEnd = EndElementForImage();
             PseudoAfter();
-            EndElementBase(); //Note: base class
+            EndElementBase(isImageEnd); //Note: base class
             ColumnClass();
 
             _classNameWithLang = StackPeek(_allStyle);
@@ -1910,8 +1910,9 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// Closing all the tages for Image
         /// </summary>
-        private void EndElementForImage()
+        private bool EndElementForImage()
         {
+            bool isImageEnd = false;
             if (_imageInsert && !_imageInserted)
             {
                 if (_closeChildName == _imageClass) // Without Caption
@@ -1924,7 +1925,7 @@ namespace SIL.PublishingSolution
                     isImage = false;
                     _imageClass = string.Empty;
                     _isParagraphClosed = true;
-
+                    isImageEnd = true;
                 }
             }
             else // With Caption
@@ -1951,8 +1952,10 @@ namespace SIL.PublishingSolution
                         _imageCaptionEmpty.Add(_imageGraphicsName);
 
                     _imageTextAvailable = false;
+                    isImageEnd = true;
                 }
             }
+            return isImageEnd;
         }
 
 

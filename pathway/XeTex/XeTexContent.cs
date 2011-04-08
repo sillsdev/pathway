@@ -230,7 +230,7 @@ namespace SIL.PublishingSolution
                     _paragraphName = StackPeek(_allParagraph); // _allParagraph.Pop();
                 }
 
-                ClosePara();
+                ClosePara(false);
 
                 DoNotInheritClassStart();
 
@@ -968,7 +968,7 @@ namespace SIL.PublishingSolution
                 }
             }
 
-            EndElementBase();
+            EndElementBase(false);
             if (_columnClass.Count > 0)
             {
                 if (_closeChildName == _columnClass[_columnClass.Count - 1].ToString())
