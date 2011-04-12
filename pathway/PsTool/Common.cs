@@ -246,7 +246,7 @@ namespace SIL.Tool
             }
             string cssPath = Path.GetDirectoryName(cssFileWithPath);
             string strText;
-            var fs = new FileStream(cssFileWithPath, FileMode.Open);
+            var fs = new FileStream(cssFileWithPath, FileMode.Open, FileAccess.Read);
             var sr = new StreamReader(fs);
             try
             {
@@ -1913,7 +1913,7 @@ return FromProg(file);
             {
                 sw2.WriteLine("/* File Name: " + Path.GetFileName(arrayCSSFile[i].ToString()) + " */");
                 string fstr;
-                var fs = new FileStream(arrayCSSFile[i].ToString(), FileMode.Open);
+                var fs = new FileStream(arrayCSSFile[i].ToString(), FileMode.Open, FileAccess.Read);
                 var sr = new StreamReader(fs);
                 while ((fstr = sr.ReadLine()) != null)
                 {
