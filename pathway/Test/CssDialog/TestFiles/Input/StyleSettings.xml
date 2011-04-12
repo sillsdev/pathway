@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="10">
+    xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="11">
     <settings>
         <property name="InputPath" value="%(AppData)s/SIL/Pathway"/>
         <property name="OutputPath" value="%(AppData)s/SIL/Pathway"/>
@@ -74,8 +74,8 @@
             </style>
         </web>
         <others>
-            <style name="GPS11J11" file="GPS11J11.css" approvedBy="GPS">
-                <description>5.25x8.25in - 1 Col - Justified - Charis 11 on 13</description>
+            <style name="EBook (epub)" file="epub.css" approvedBy="GPS">
+                <description>1 column flowed text, left aligned, 13pt font</description>
             </style>
         </others>
     </styles>
@@ -85,4 +85,26 @@
     <customize>
         <font name="Microsoft Sans Serif" size="9"/>
     </customize>
+    <Organizations>
+        <Organization>SIl International</Organization>
+        <Organization>United Bible Societies</Organization>
+        <Organization>Pioneer Bible Translators</Organization>
+    </Organizations>
+    <Metadata>
+        <meta name="Title" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Creator" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Publisher" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Description" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Copyright Holder" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+    </Metadata>
 </stylePick>

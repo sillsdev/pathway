@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="10">
+    xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="11">
     <settings>
         <property name="InputPath" value="%(AppData)s/SIL/Pathway"/>
         <property name="OutputPath" value="%(AppData)s/SIL/Pathway"/>
@@ -85,4 +85,74 @@
     <customize>
         <font name="Microsoft Sans Serif" size="9"/>
     </customize>
+    <Organizations>
+        <Organization>SIl International</Organization>
+        <Organization>United Bible Societies</Organization>
+        <Organization>Pioneer Bible Translators</Organization>
+    </Organizations>
+    <Metadata>
+        <meta name="Title" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Creator" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Publisher" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Description" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Copyright Holder" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Type" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Source" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Format" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Contributor" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Relation" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Coverage" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Subject" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Date" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Language" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Identifier" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Cover Page" outputTypes="epub">
+            <defaultValue>Yes</defaultValue>
+        </meta>
+        <meta name="Cover Page Filename" outputTypes="epub">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Cover Page Title" outputTypes="epub">
+            <defaultValue>Yes</defaultValue>
+        </meta>
+        <meta name="Title Page" outputTypes="all">
+            <defaultValue>No</defaultValue>
+        </meta>
+        <meta name="Copyright Page" outputTypes="all">
+            <defaultValue>No</defaultValue>
+        </meta>
+        <meta name="Copyright Page Filename" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+    </Metadata>
 </stylePick>

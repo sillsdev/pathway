@@ -519,10 +519,11 @@ namespace SIL.PublishingSolution
             get { return mobileIcon; }
         }
 
-        public PictureBox CoverImage
-        {
-            get { return imgCoverImage; }
-        }
+        //**EDB MOVE THIS**
+        //public PictureBox CoverImage
+        //{
+        //    get { return imgCoverImage; }
+        //}
 
         public ComboBox DdlFileProduceDict
         {
@@ -539,95 +540,142 @@ namespace SIL.PublishingSolution
             get { return toolTip1; }
         }
 
-        public TextBox TxtDescription
+        public TextBox TxtBaseFontSize
         {
-            get { return txtDescription; }
+            get { return txtBaseFontSize; }
         }
 
-        public Label LblDescription
+        public TextBox TxtDefaultLineHeight
         {
-            get { return lblDescription; }
+            get { return txtDefaultLineHeight; }
         }
 
-        public Label LblPublisher
+        //**EDB MOVE THIS**
+        //public CheckBox ChkColophon
+        //{
+        //    get { return chkColophon; }
+        //}
+
+        public ComboBox DdlDefaultAlignment
         {
-            get { return lblPublisher; }
+            get { return ddlDefaultAlignment; }
         }
 
-        public TextBox TxtSource
+        public Label LblChapterNumbers
         {
-            get { return txtSource; }
+            get { return lblChapterNumbers; }
         }
 
-        public Label LblSource
+        public ComboBox DdlChapterNumbers
         {
-            get { return lblSource; }
+            get { return ddlChapterNumbers; }
         }
 
-        public TextBox TxtPublisher
+        public ComboBox DdlDefaultFont
         {
-            get { return txtPublisher; }
+            get { return ddlDefaultFont; }
         }
 
-        public TextBox TxtCoverage
+        public ComboBox DdlMissingFont
         {
-            get { return txtCoverage; }
+            get { return ddlMissingFont; }
         }
 
-        public Label LblCoverage
+        public ComboBox DdlNonSILFont
         {
-            get { return lblCoverage; }
+            get { return ddlNonSILFont; }
         }
 
-        public TextBox TxtRelation
-        {
-            get { return txtRelation; }
-        }
+        //**EDB MOVE THIS**
+        //public TextBox TxtDescription
+        //{
+        //    get { return txtDescription; }
+        //}
 
-        public Label LblRelation
-        {
-            get { return lblRelation; }
-        }
+        //public Label LblDescription
+        //{
+        //    get { return lblDescription; }
+        //}
 
-        public TextBox TxtFormat
-        {
-            get { return txtFormat; }
-        }
+        //public Label LblPublisher
+        //{
+        //    get { return lblPublisher; }
+        //}
 
-        public Label LblFormat
-        {
-            get { return lblFormat; }
-        }
+        //public TextBox TxtSource
+        //{
+        //    get { return txtSource; }
+        //}
 
-        public TextBox TxtBookTitle
-        {
-            get { return txtBookTitle; }
-        }
+        //public Label LblSource
+        //{
+        //    get { return lblSource; }
+        //}
 
-        public Label LblBookTitle
-        {
-            get { return lblBookTitle; }
-        }
+        //public TextBox TxtPublisher
+        //{
+        //    get { return txtPublisher; }
+        //}
 
-        public TextBox TxtCreator
-        {
-            get { return txtCreator; }
-        }
+        //public TextBox TxtCoverage
+        //{
+        //    get { return txtCoverage; }
+        //}
 
-        public Label LblCreator
-        {
-            get { return lblCreator; }
-        }
+        //public Label LblCoverage
+        //{
+        //    get { return lblCoverage; }
+        //}
 
-        public TextBox TxtRights
-        {
-            get { return txtRights; }
-        }
+        //public TextBox TxtRelation
+        //{
+        //    get { return txtRelation; }
+        //}
 
-        public Label LblRights
-        {
-            get { return lblRights; }
-        }
+        //public Label LblRelation
+        //{
+        //    get { return lblRelation; }
+        //}
+
+        //public TextBox TxtFormat
+        //{
+        //    get { return txtFormat; }
+        //}
+
+        //public Label LblFormat
+        //{
+        //    get { return lblFormat; }
+        //}
+
+        //public TextBox TxtBookTitle
+        //{
+        //    get { return txtBookTitle; }
+        //}
+
+        //public Label LblBookTitle
+        //{
+        //    get { return lblBookTitle; }
+        //}
+
+        //public TextBox TxtCreator
+        //{
+        //    get { return txtCreator; }
+        //}
+
+        //public Label LblCreator
+        //{
+        //    get { return lblCreator; }
+        //}
+
+        //public TextBox TxtRights
+        //{
+        //    get { return txtRights; }
+        //}
+
+        //public Label LblRights
+        //{
+        //    get { return lblRights; }
+        //}
 
         public TextBox TxtMaxImageWidth
         {
@@ -639,24 +687,14 @@ namespace SIL.PublishingSolution
             get { return lblMaxImageWidth; }
         }
 
-        public ComboBox DdlEmbedFonts
+        public CheckBox ChkEmbedFonts
         {
-            get { return ddlEmbedFonts; }
+            get { return chkEmbedFonts; }
         }
 
-        public Label LblEmbedFonts
+        public CheckBox ChkIncludeFontVariants
         {
-            get { return lblEmbedFonts; }
-        }
-
-        public ComboBox DdlIncludeFontVariants
-        {
-            get { return ddlIncludeFontVariants; }
-        }
-
-        public Label LblIncludeFontVariants
-        {
-            get { return lblIncludeFontVariants; }
+            get { return chkIncludeFontVariants; }
         }
 
         public PictureBox PicPreview
@@ -862,7 +900,6 @@ namespace SIL.PublishingSolution
             EditMobileCSS(sender, e);
         }
 
-
         private void ddlRedLetter_SelectedIndexChanged(object sender, EventArgs e)
         {
             _CToolBL.ddlRedLetter_SelectedIndexChangedBL(sender, e);
@@ -963,6 +1000,67 @@ namespace SIL.PublishingSolution
             EditMobileCSS(sender, e);
         }
 
+        //**EDB MOVE THIS**
+        //private void chkColophon_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    _CToolBL.chkColophon_CheckedChangedBL(sender, e);
+        //    EditOthersCSS(sender, e);
+        //}
+
+        private void chkIncludeFontVariants_CheckedChanged(object sender, EventArgs e)
+        {
+            _CToolBL.chkIncludeFontVariants_CheckedChangedBL(sender, e);
+            EditOthersCSS(sender, e);
+        }
+
+        private void chkEmbedFonts_CheckedChanged(object sender, EventArgs e)
+        {
+            _CToolBL.chkEmbedFonts_CheckedChangedBL(sender, e);
+            EditOthersCSS(sender, e);
+        }
+
+        private void txtBaseFontSize_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtBaseFontSize_ValidatedBL(sender);
+            EditOthersCSS(sender, e);
+        }
+
+        private void txtDefaultLineHeight_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtDefaultLineHeight_ValidatedBL(sender);
+            EditOthersCSS(sender, e);
+        }
+
+        private void ddlChapterNumbers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _CToolBL.ddlChapterNumbers_SelectedIndexChangedBL(sender, e);
+            EditOthersCSS(sender, e);
+        }
+
+        private void ddlDefaultAlignment_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _CToolBL.ddlDefaultAlignment_SelectedIndexChangedBL(sender, e);
+            EditOthersCSS(sender, e);
+        }
+
+        private void ddlDefaultFont_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _CToolBL.ddlDefaultFont_SelectedIndexChangedBL(sender, e);
+            EditOthersCSS(sender, e);
+        }
+
+        private void ddlMissingFont_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _CToolBL.ddlMissingFont_SelectedIndexChangedBL(sender, e);
+            EditOthersCSS(sender, e);
+        }
+
+        private void ddlNonSILFont_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _CToolBL.ddlNonSILFont_SelectedIndexChangedBL(sender, e);
+            EditOthersCSS(sender, e);
+        }
+
         private void txtInformation_KeyUp(object sender, KeyEventArgs e)
         {
             _CToolBL.SetModifyMode(true);
@@ -978,97 +1076,58 @@ namespace SIL.PublishingSolution
             _CToolBL.SetModifyMode(true);
         }
 
-        private void ddlEmbedFonts_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _CToolBL.ddlEmbedFonts_SelectedIndexChangedBL(sender, e);
-            EditOthersCSS(sender, e);
-        }
-
-        private void ddlIncludeFontVariants_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _CToolBL.ddlEmbedFonts_SelectedIndexChangedBL(sender, e);
-            EditOthersCSS(sender, e);
-        }
-
         private void txtMaxImageWidth_Validated(object sender, EventArgs e)
         {
             _CToolBL.txtMaxImageWidth_ValidatedBL(sender);
             EditOthersCSS(sender, e);
         }
 
-        private void txtDescription_Validated(object sender, EventArgs e)
-        {
-            _CToolBL.txtDescription_ValidatedBL(sender);
-            EditOthersCSS(sender, e);
-        }
-        private void txtDescription_KeyUp(object sender, EventArgs e)
-        {
-            _CToolBL.SetModifyMode(true);
-        }
-        private void txtPublisher_Validated(object sender, EventArgs e)
-        {
-            _CToolBL.txtPublisher_ValidatedBL(sender);
-            EditOthersCSS(sender, e);
-        }
-        private void txtPublisher_KeyUp(object sender, EventArgs e)
-        {
-            _CToolBL.SetModifyMode(true);
-        }
-        private void txtSource_Validated(object sender, EventArgs e)
-        {
-            _CToolBL.txtSource_ValidatedBL(sender);
-            EditOthersCSS(sender, e);
-        }
-        private void txtSource_KeyUp(object sender, EventArgs e)
-        {
-            _CToolBL.SetModifyMode(true);
-        }
-        private void txtFormat_Validated(object sender, EventArgs e)
-        {
-            _CToolBL.txtFormat_ValidatedBL(sender);
-            EditOthersCSS(sender, e);
-        }
-        private void txtFormat_KeyUp(object sender, EventArgs e)
-        {
-            _CToolBL.SetModifyMode(true);
-        }
-        private void txtRelation_Validated(object sender, EventArgs e)
-        {
-            _CToolBL.txtRelation_ValidatedBL(sender);
-            EditOthersCSS(sender, e);
-        }
-        private void txtRelation_KeyUp(object sender, EventArgs e)
-        {
-            _CToolBL.SetModifyMode(true);
-        }
-        private void txtCoverage_Validated(object sender, EventArgs e)
-        {
-            _CToolBL.txtCoverage_ValidatedBL(sender);
-            EditOthersCSS(sender, e);
-        }
-        private void txtCoverage_KeyUp(object sender, EventArgs e)
-        {
-            _CToolBL.SetModifyMode(true);
-        }
-        private void txtRights_Validated(object sender, EventArgs e)
-        {
-            _CToolBL.txtRights_ValidatedBL(sender);
-            EditOthersCSS(sender, e);
-        }
-        private void txtBookTitle_Validated(object sender, EventArgs e)
-        {
-            _CToolBL.txtBookTitle_ValidatedBL(sender);
-            EditOthersCSS(sender, e);
-        }
-        private void txtCreator_Validated(object sender, EventArgs e)
-        {
-            _CToolBL.txtCreator_ValidatedBL(sender);
-            EditOthersCSS(sender, e);
-        }
-        private void txtRights_KeyUp(object sender, EventArgs e)
-        {
-            _CToolBL.SetModifyMode(true);
-        }
+        //**EDB MOVE THIS**
+        //private void txtDescription_Validated(object sender, EventArgs e)
+        //{
+        //    _CToolBL.txtDescription_ValidatedBL(sender);
+        //    EditOthersCSS(sender, e);
+        //}
+        //private void txtPublisher_Validated(object sender, EventArgs e)
+        //{
+        //    _CToolBL.txtPublisher_ValidatedBL(sender);
+        //    EditOthersCSS(sender, e);
+        //}
+        //private void txtSource_Validated(object sender, EventArgs e)
+        //{
+        //    _CToolBL.txtSource_ValidatedBL(sender);
+        //    EditOthersCSS(sender, e);
+        //}
+        //private void txtFormat_Validated(object sender, EventArgs e)
+        //{
+        //    _CToolBL.txtFormat_ValidatedBL(sender);
+        //    EditOthersCSS(sender, e);
+        //}
+        //private void txtRelation_Validated(object sender, EventArgs e)
+        //{
+        //    _CToolBL.txtRelation_ValidatedBL(sender);
+        //    EditOthersCSS(sender, e);
+        //}
+        //private void txtCoverage_Validated(object sender, EventArgs e)
+        //{
+        //    _CToolBL.txtCoverage_ValidatedBL(sender);
+        //    EditOthersCSS(sender, e);
+        //}
+        //private void txtRights_Validated(object sender, EventArgs e)
+        //{
+        //    _CToolBL.txtRights_ValidatedBL(sender);
+        //    EditOthersCSS(sender, e);
+        //}
+        //private void txtBookTitle_Validated(object sender, EventArgs e)
+        //{
+        //    _CToolBL.txtBookTitle_ValidatedBL(sender);
+        //    EditOthersCSS(sender, e);
+        //}
+        //private void txtCreator_Validated(object sender, EventArgs e)
+        //{
+        //    _CToolBL.txtCreator_ValidatedBL(sender);
+        //    EditOthersCSS(sender, e);
+        //}
 
         private void btnPrevious_Click(object sender, EventArgs e)
         {
@@ -1092,11 +1151,12 @@ namespace SIL.PublishingSolution
             _CToolBL.DdlRunningHeadSelectedIndexChangedBl(pageType);
         }
 
-	private void btnCoverImage_Click(object sender, EventArgs e)
-        {
-            _CToolBL.btnCoverImage_ClickBL();
-            EditOthersCSS(sender, e);
-        }
+        //**EDB MOVE THIS**
+        //private void btnCoverImage_Click(object sender, EventArgs e)
+        //{
+        //    _CToolBL.btnCoverImage_ClickBL();
+        //    EditOthersCSS(sender, e);
+        //}
 
         private void ddlTocLevel_SelectedIndexChanged(object sender, EventArgs e)
         {

@@ -152,6 +152,12 @@
     <Compile Include="ExportDlg.Designer.cs">
       <DependentUpon>ExportDlg.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExportThroughPathway.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExportThroughPathway.Designer.cs">
+      <DependentUpon>ExportThroughPathway.cs</DependentUpon>
+    </Compile>
     <Compile Include="IExportContents.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -179,6 +185,12 @@
       <DependentUpon>GlobalSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="MergeCss.cs" />
+    <Compile Include="OrganizationNameDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrganizationNameDialog.Designer.cs">
+      <DependentUpon>OrganizationNameDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pdf.cs" />
     <Compile Include="PdftoJpg.cs" />
     <Compile Include="PopupForm.cs">
@@ -229,6 +241,12 @@
     </Compile>
     <Compile Include="ScriptureSetting.Designer.cs">
       <DependentUpon>ScriptureSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectOrganizationDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectOrganizationDialog.Designer.cs">
+      <DependentUpon>SelectOrganizationDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="SettingBl.cs" />
     <Compile Include="SettingsValidator.cs" />
@@ -291,8 +309,13 @@
       <DependentUpon>ExportDlg.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ExportThroughPathway.resx">
+      <DependentUpon>ExportThroughPathway.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="InProcess.resx">
       <DependentUpon>InProcess.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ModifyOptions.resx">
       <DependentUpon>ModifyOptions.cs</DependentUpon>
@@ -300,6 +323,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GlobalSettings.resx">
       <DependentUpon>GlobalSettings.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrganizationNameDialog.resx">
+      <DependentUpon>OrganizationNameDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PopupForm.resx">
@@ -323,6 +350,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources2.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ScriptureContents1.resx">
       <DependentUpon>ScriptureContents1.cs</DependentUpon>
@@ -338,6 +366,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PublicationTask.resx">
       <DependentUpon>PublicationTask.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectOrganizationDialog.resx">
+      <DependentUpon>SelectOrganizationDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SymbolMap.resx">
@@ -368,6 +400,12 @@
       <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
       <Name>PsTool</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\epub_logo_color.png" />
+    <None Include="Resources\DocumentTools.png" />
+    <None Include="Resources\draw-text.png" />
+    <None Include="Resources\cell.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

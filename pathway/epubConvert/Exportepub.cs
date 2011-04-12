@@ -45,6 +45,14 @@ using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
+    public enum FontHandling
+    {
+        EmbedFont,
+        SubstituteDefaultFont,
+        PromptUser,
+        CancelExport
+    }
+
     public class Exportepub : IExportProcess 
     {
 
@@ -74,6 +82,18 @@ namespace SIL.PublishingSolution
         public string CoverImage { get; set; }
         public string TocLevel { get; set; }
         public int MaxImageWidth { get; set; }
+
+        public int BaseFontSize { get; set; }
+        public int DefaultLineHeight { get; set; }
+        /// <summary>
+        /// Fallback font (if the embedded font is missing or non-SIL)
+        /// </summary>
+        public string DefaultFont { get; set; }
+        public bool AddColophon { get; set; }
+        public string DefaultAlignment { get; set; }
+        public string ChapterNumbers { get; set; }
+        public FontHandling MissingFont { get; set; } // note that this doesn't use all the enum values
+        public FontHandling NonSilFont { get; set; }
 
         // interface methods
         public string ExportType
@@ -199,6 +219,8 @@ namespace SIL.PublishingSolution
                 Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCSS);
                 // pull in the style settings
                 LoadPropertiesFromSettings();
+                // customize the CSS file based on the settings
+                CustomizeCSS(mergedCSS);
                 // transform the XHTML content with our XSLT. Currently this does the following:
                 // - strips out "lang" tags from <span> elements (.epub doesn't like them there)
                 // - strips out <meta> tags (.epub chokes on the filename IIRC.  TODO: verify the problem here)
@@ -509,15 +531,35 @@ namespace SIL.PublishingSolution
                 FontWarningDlg dlg = new FontWarningDlg();
                 dlg.RepeatAction = false;
                 dlg.RemainingIssues = nonSILFonts.Count - 1;
+                // Handle the cases where the user wants to automatically process non-SIL / missing fonts
+                if (NonSilFont == FontHandling.CancelExport)
+                {
+                    // TODO: implement message box
+                    // Give the user a message indicating there's a non-SIL font in their writing system, and
+                    // to go fix the problem. Don't let them continue with the export.
+                    return false;
+                }
+                if (NonSilFont != FontHandling.PromptUser)
+                {
+                    dlg.RepeatAction = true; // the handling picks up below...
+                    dlg.SelectedFont = DefaultFont;
+                }
+                bool isMissing = false;
+                bool isManualProcess = false;
                 foreach (var nonSilFont in nonSILFonts)
                 {
                     dlg.MyEmbeddedFont = nonSilFont.Key.Name;
                     dlg.Languages = nonSilFont.Value;
+                    isMissing = (nonSilFont.Key.Filename == null);
+                    isManualProcess = ((isMissing == false && NonSilFont == FontHandling.PromptUser) || (isMissing == true && MissingFont == FontHandling.PromptUser));
                     if (dlg.RepeatAction)
                     {
                         // user wants to repeat the last action - if the last action
                         // was to change the font, change this one as well
-                        if (!dlg.UseFontAnyway() && !nonSilFont.Key.Name.Equals(dlg.SelectedFont))
+                        // (this is also where the automatic FontHandling takes place)
+                        if ((!dlg.UseFontAnyway() && !nonSilFont.Key.Name.Equals(dlg.SelectedFont) && isManualProcess) || // manual "repeat this action" for non-SIL AND missing fonts
+                            (isMissing == false && NonSilFont == FontHandling.SubstituteDefaultFont && !nonSilFont.Key.Name.Equals(DefaultFont)) || // automatic for non-SIL fonts
+                            (isMissing == true && MissingFont == FontHandling.SubstituteDefaultFont && !nonSilFont.Key.Name.Equals(DefaultFont))) // automatic for missing fonts
                         {
                             // the user has chosen a different (SIL) font - 
                             // create a new EmbeddedFont and add it to the list
@@ -533,6 +575,8 @@ namespace SIL.PublishingSolution
                                 }
                             }
                         }
+                        // the UseFontAnyway checkbox (and FontHandling.EmbedFont) cases fall through here -
+                        // The current non-SIL font is ignored and embedded below
                         continue;
                     }
                     // sanity check - are there any SIL fonts installed?
@@ -638,6 +682,7 @@ namespace SIL.PublishingSolution
         {
             if (!File.Exists(cssFile)) return;
             // read in the CSS file
+            string mainTextDirection = "ltr";
             var reader = new StreamReader(cssFile);
             string content = reader.ReadToEnd();
             reader.Close();
@@ -733,6 +778,7 @@ namespace SIL.PublishingSolution
                     }
                     // also insert the text direction for this language
                     sb.Append("direction: ");
+                    mainTextDirection = getTextDirection(language.Key);
                     sb.Append(getTextDirection(language.Key));
                     sb.AppendLine(";");
                     sb.AppendLine("}");
@@ -928,6 +974,14 @@ namespace SIL.PublishingSolution
             var writer = new StreamWriter(cssFile);
             writer.Write(sb.ToString());
             writer.Close();
+            // one more - specify the chapter number float side
+            // reset the stringbuilder
+            sb.Length = 0;
+            sb.AppendLine(".Chapter_Number {");
+            sb.Append("float: ");
+            sb.Append(mainTextDirection);
+            sb.AppendLine(";");
+            Common.ReplaceInFile(cssFile, ".Chapter_Number {", sb.ToString());
         }
 
         /// <summary>
@@ -1476,6 +1530,62 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
+        /// Modifies the CSS based on the parameters from the Configuration Tool:
+        /// - BaseFontSize
+        /// - DefaultLineHeight
+        /// - DefaultAlignment
+        /// - ChapterNumbers
+        /// </summary>
+        /// <param name="cssFile"></param>
+        private void CustomizeCSS(string cssFile)
+        {
+            if (!File.Exists(cssFile)) return;
+            // BaseFontSize and DefaultLineHeight - body element only
+            var sb = new StringBuilder();
+            sb.AppendLine("body {");
+            sb.Append("font-size: ");
+            sb.Append(BaseFontSize);
+            sb.AppendLine("pt;");
+            sb.Append("line-height: ");
+            sb.Append(DefaultLineHeight);
+            sb.AppendLine("%;");
+            Common.StreamReplaceInFile(cssFile, "body {", sb.ToString());
+            // ChapterNumbers - scripture only
+            if (_inputType == "scripture")
+            {
+                // ChapterNumbers (drop cap or in margin) - .Chapter_Number and .Paragraph1 class elements
+                sb.Length = 0;  // reset the stringbuilder
+                sb.AppendLine(".Chapter_Number {");
+                //sb.AppendLine((ChapterNumbers == "Drop Cap") ? "text-indent: 0;" : "text-indent: -48pt;");
+                sb.Append("font-size: ");
+                sb.AppendLine((ChapterNumbers == "Drop Cap") ? "250%;" : "24pt;");
+                // vertical alignment of Cap specified by setting the padding-top to (defaultlineheight / 2)
+                sb.Append("padding-top: ");
+                sb.Append(BaseFontSize / 2);
+                sb.AppendLine("pt;");
+                if (ChapterNumbers != "Drop Cap")
+                {
+                    sb.AppendLine("width: 48pt;");
+                    sb.AppendLine("height: 500pt;");
+                }
+                sb.Append("padding-right: ");
+                sb.AppendLine((ChapterNumbers == "Drop Cap") ? "4pt;" : "0;");
+                Common.StreamReplaceInFile(cssFile, ".Chapter_Number {", sb.ToString());
+                sb.Length = 0; // reset the stringbuilder
+                sb.AppendLine(".Paragraph1 {");
+                sb.Append("margin-left: ");
+                sb.AppendLine((ChapterNumbers == "Drop Cap") ? "48pt;" : "0pt;");
+                Common.StreamReplaceInFile(cssFile, ".Paragraph1 {", sb.ToString());
+            }
+            // DefaultAlignment - several spots in the css file
+            sb.Length = 0; // reset the stringbuilder
+            sb.Append("text-align: ");
+            sb.Append(DefaultAlignment.ToLower());
+            sb.AppendLine(";");
+            Common.StreamReplaceInFile(cssFile, "text-align:left;", sb.ToString());
+        }
+
+        /// <summary>
         /// Loads the settings file and pulls out the values we look at.
         /// </summary>
         private void LoadPropertiesFromSettings()
@@ -1572,7 +1682,7 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                // default - we're more concerned about accurate font rendering
+                // default - we're more concerned about accurate font rendering than size
                 EmbedFonts = true;
             }
             if (othersfeature.ContainsKey("IncludeFontVariants"))
@@ -1581,7 +1691,6 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                // false (for now)
                 IncludeFontVariants = true;
             }
             if (othersfeature.ContainsKey("MaxImageWidth"))
@@ -1616,6 +1725,119 @@ namespace SIL.PublishingSolution
             else
             {
                 TocLevel = "";
+            }
+            // Default Font
+            if (othersfeature.ContainsKey("DefaultFont"))
+            {
+                DefaultFont = othersfeature["DefaultFont"].Trim();
+            }
+            else
+            {
+                DefaultFont = "Charis SIL";
+            }
+            // Default Alignment
+            if (othersfeature.ContainsKey("DefaultAlignment"))
+            {
+                DefaultAlignment = othersfeature["DefaultAlignment"].Trim();
+            }
+            else
+            {
+                DefaultAlignment = "Justified";
+            }
+            // Chapter Numbers
+            if (othersfeature.ContainsKey("ChapterNumbers"))
+            {
+                ChapterNumbers = othersfeature["ChapterNumbers"].Trim();
+            }
+            else
+            {
+                ChapterNumbers = "Drop Cap"; // default
+            }
+            // base font size
+            if (othersfeature.ContainsKey("BaseFontSize"))
+            {
+                try
+                {
+                    BaseFontSize = int.Parse(othersfeature["BaseFontSize"].Trim());
+                }
+                catch (Exception)
+                {
+                    BaseFontSize = 13;
+                }
+            }
+            else
+            {
+                BaseFontSize = 13;
+            }
+            // default line height
+            if (othersfeature.ContainsKey("DefaultLineHeight"))
+            {
+                try
+                {
+                    DefaultLineHeight = int.Parse(othersfeature["DefaultLineHeight"].Trim());
+                }
+                catch (Exception)
+                {
+                    DefaultLineHeight = 125;
+                }
+            }
+            else
+            {
+                DefaultLineHeight = 125;
+            }
+            // Colophon
+            if (othersfeature.ContainsKey("Colophon"))
+            {
+                AddColophon = (othersfeature["Colophon"].Trim().Equals("Yes")) ? true : false;
+            }
+            else
+            {
+                AddColophon = true;
+            }
+            // Missing Font
+            // Note that the Embed Font enum value doesn't apply here (if it were to appear, we'd fall to the Default
+            // "Prompt user" case
+            if (othersfeature.ContainsKey("MissingFont"))
+            {
+                switch (othersfeature["MissingFont"].Trim())
+                {
+                    case "Use Fallback Font":
+                        MissingFont = FontHandling.SubstituteDefaultFont;
+                        break;
+                    case  "Cancel Export":
+                        MissingFont = FontHandling.CancelExport;
+                        break;
+                    default: // "Prompt User" case goes here
+                        MissingFont = FontHandling.PromptUser;
+                        break;
+                }
+            }
+            else
+            {
+                MissingFont = FontHandling.PromptUser;
+            }
+            // Non SIL Font
+            if (othersfeature.ContainsKey("NonSILFont"))
+            {
+                switch(othersfeature["NonSILFont"].Trim())
+                {
+                    case "Embed Font Anyway":
+                        NonSilFont = FontHandling.EmbedFont;
+                        break;
+                    case "Use Fallback Font":
+                        NonSilFont = FontHandling.SubstituteDefaultFont;
+                        break;
+                    case  "Cancel Export":
+                        NonSilFont = FontHandling.CancelExport;
+                        break;
+                    default: // "Prompt User" case goes here
+                        NonSilFont = FontHandling.PromptUser;
+                        break;
+                }
+            }
+            else
+            {
+                NonSilFont = FontHandling.PromptUser;
             }
         }
 

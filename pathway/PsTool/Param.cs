@@ -35,7 +35,11 @@ namespace SIL.PublishingSolution
 
         public override string ToString()
         {
-            return "{0} is not a valid settings file";
+            if (FullFilePath == null)
+            {
+                return "No filepath set for settings file.";
+            }
+            return String.Format("'{0}' is not a valid settings file.", FullFilePath);
         }
     }
 
@@ -66,6 +70,30 @@ namespace SIL.PublishingSolution
         public const string LayoutSelected = "LayoutSelected";
         public const string ExtraProcessing = "ExtraProcessing";
         public const string Media = "Media";
+        // TD-2344: Publication Information (15 Dublin Core metadata elements: http://dublincore.org/documents/dces/)
+        public const string Title = "Title";
+        public const string Creator = "Creator";
+        public const string Publisher = "Publisher";
+        public const string Description = "Description";
+        public const string CopyrightHolder = "Copyright Holder";
+        // the rest are not in the UI, but we'll write out what we can to disk (language, date, etc.)
+        public const string Type = "Type";
+        public const string Source = "Source";
+        public const string Format = "Format";
+        public const string Contributor = "Contributor";
+        public const string Relation = "Relation";
+        public const string Coverage = "Coverage";
+        public const string Subject = "Subject";
+        public const string Date = "Date";
+        public const string Language = "Language";
+        public const string Identifier = "Identifier";
+        // TD-2344: Front Matter
+        public const string CoverPage = "Cover Page";
+        public const string CoverPageFilename = "Cover Page Filename";
+        public const string CoverPageTitle = "Cover Page Title";
+        public const string TitlePage = "Title Page";
+        public const string CopyrightPage = "Copyright Page";
+        public const string CopyrightPageFilename = "Copyright Page Filename";
 
         // Other constants
         private const string DefaultSettingsFileName = "StyleSettings.xml";

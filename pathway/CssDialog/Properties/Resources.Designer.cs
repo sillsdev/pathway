@@ -66,5 +66,42 @@ namespace SIL.PublishingSolution.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+
+        internal static System.Drawing.Bitmap DocumentTools
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("DocumentTools", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        internal static System.Drawing.Bitmap draw_text
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("draw_text", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        internal static System.Drawing.Bitmap epub_logo_color
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("epub_logo_color", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        internal static System.Drawing.Bitmap cell
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("cell", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
     }
 }

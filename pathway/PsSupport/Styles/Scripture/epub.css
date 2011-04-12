@@ -1,8 +1,11 @@
 body {
-font-size: 13pt;
+/* NOTE: elements filled in by the epub export based on
+the user's preferences from the Configuration Tool:
+   font-size: --> from BaseFontSize
+   line-height: --> from DefaultLineHeight
+*/
 font-weight: normal;
 font-style: normal;
-line-height: 125%;
 }
 .Title_Main {
 font-size : 250%;
@@ -40,23 +43,34 @@ text-indent: 0pt;
 margin-left: 0pt;
 }
 .Chapter_Number {
-font-size : 250%;
+/* NOTE: elements filled in by the epub export based on
+the user's preferences from the Configuration Tool:
+   font-size: -->  from ChapterNumbers
+   padding-top: --> from (BaseFontSize / 2)
+   width: --> if ChapterNumbers is set to left margin
+   height: --> if ChapterNumbers is set to left margin
+   padding-right: --> from ChapterNumbers
+*/
 font-weight : normal;
 font-style : normal;
-text-indent : 0;
 margin-left : 0;
-padding-top: 10px;
-padding-left: 0px;
-padding-right: 2px;
-padding-bottom: 1px;
-float : left;
+padding-left: 0;
+padding-right: 4pt;
+padding-bottom: 1pt;
 }
 .Paragraph1 {
-margin-left : 12pt;
+/* NOTE: elements filled in by the epub export based on
+the user's preferences from the Configuration Tool:
+   margin-left: --> from ChapterNumbers
+*/
+margin-right: 48pt;
+text-align:left;
 }
 .Paragraph {
 text-indent : 12pt;
-margin-left : 12pt;
+margin-left : 48pt;
+margin-right: 48pt;
+text-align:left;
 }
 .scrBook {
 clear : both;
@@ -67,7 +81,7 @@ display : none;
 visibility: hidden;
 }
 .scrSection {
-text-align : left;
+text-align:left;
 }
 .Section_Range_Paragraph {
 font-size : 90%;
@@ -106,8 +120,8 @@ font-size: 85%;
 padding-top: 1%;
 margin-top: 1%;
 padding-left: 0;
-margin-left : 12pt;
-margin-right: 12pt;
+margin-left : 48pt;
+margin-right: 48pt;
 list-style: none;
 }
 .Note_CrossHYPHENReference_Paragraph span {
@@ -140,8 +154,9 @@ margin-left : 0;
 }
 .Speech_Line2 {
 text-indent : -24pt;
-margin-left : 24pt;
-padding-left : 12pt;
+margin-left : 60pt;
+padding-left : 24pt;
+margin-right: 48pt;
 }
 .Verse_Number {
 font-size : 67%;
@@ -175,8 +190,9 @@ text-indent : 0.2in;
 margin-left : 0;
 }
 .Intro_List_Item1 {
-text-indent : -18pt;
-margin-left : 36pt;
+text-indent : -30pt;
+margin-left : 60pt;
+margin-right: 48pt;
 }
 .Intro_Paragraph {
 text-indent : 0.2in;
@@ -185,7 +201,7 @@ margin-left : 0;
 .Intro_Section_Head {
 font-weight : bold;
 font-style : normal;
-text-align : left;
+text-align:left;
 text-indent : 0;
 margin-left : 0;
 margin-top : 3pt;
@@ -193,19 +209,22 @@ margin-bottom : 3pt;
 }
 .REVERSE_SOLIDUSCitation_Line1, .Line1 {
 text-align : left;
-margin-left : 24pt;
+margin-left : 72pt;
+margin-right: 48pt;
 text-indent : -12pt;
 padding-left : 0;
 }
 .REVERSE_SOLIDUSCitation_Line2, .Line2 {
 text-align : left;
-margin-left : 24pt;
-text-indent : -6pt;
+margin-left : 72pt;
+margin-right: 48pt;
+text-indent : -12pt;
 padding-left : 0;
 }
 .REVERSE_SOLIDUSCitation_Line3, .Line3 {
 text-align : left;
-margin-left : 24pt;
+margin-left : 72pt;
+margin-right: 48pt;
 text-indent : 0;
 padding-left : 0;
 }
@@ -217,7 +236,8 @@ list-style-position : inside;
 }
 .Paragraph_Continuation {
 text-indent : 0;
-margin-left : 0;
+margin-left : 48pt;
+margin-right: 48pt;
 }
 .parallel_passage_reference, .Parallel_Passage_Reference {
 font-style: italic;

@@ -1,8 +1,11 @@
 body {
-font-size: 11pt;
+/* NOTE: elements filled in by the epub export based on
+the user's preferences from the Configuration Tool:
+   font-size: --> from BaseFontSize
+   line-height: --> from DefaultLineHeight
+*/
 font-weight: normal;
 font-style: normal;
-line-height: 115%;
 }
 .letHead {
 clear : both;
@@ -24,7 +27,6 @@ column-fill : balance;
 text-align : left;
 } 
 .entry {
-margin-left : 0;
 margin-left : 12pt;
 padding-bottom: 1%;
 }
@@ -67,19 +69,22 @@ line-height: 80%;
 }
 .REVERSE_SOLIDUSCitation_Line1, .Line1 {
 text-align : left;
-margin-left : 24pt;
+margin-left : 72pt;
+margin-right: 48pt;
 text-indent : -12pt;
 padding-left : 0;
 }
 .REVERSE_SOLIDUSCitation_Line2, .Line2 {
 text-align : left;
-margin-left : 24pt;
-text-indent : -6pt;
+margin-left : 72pt;
+margin-right: 48pt;
+text-indent : -12pt;
 padding-left : 0;
 }
 .REVERSE_SOLIDUSCitation_Line3, .Line3 {
 text-align : left;
-margin-left : 24pt;
+margin-left : 72pt;
+margin-right: 48pt;
 text-indent : 0;
 padding-left : 0;
 }
@@ -130,7 +135,6 @@ margin-bottom : .5%;
 }
 
 
-/****************************************/
 .complexform-form,
 .crossref,
 .LexEntry-publishStemComponentTarget-MLHeadWordPub,
