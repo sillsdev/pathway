@@ -120,7 +120,7 @@ namespace SIL.PublishingSolution
                     continue;
                 }
                 sw.WriteLine(line);
-                sw.Write(sr.ReadToEnd());
+                //sw.Write(sr.ReadToEnd());
             }
             sr.Close();
         }

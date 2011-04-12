@@ -139,5 +139,21 @@ namespace Test.CssDialog
             string expected = Common.PathCombine(_expectBasePath, "MergeFile.css"); ; // TODO: Initialize to an appropriate value
             TextFileAssert.AreEqual(expected, actual, "Make Funtion test failed");
         }
+
+        /// <summary>
+        ///A test for Make function with non-existant preprocessing folder
+        ///</summary>
+        [Test]
+        public void MakeTest4()
+        {
+            MergeCss target = new MergeCss { OutputLocation = "Preprocess" };
+            var workDir = Path.Combine(Path.GetTempPath(), "Preprocess");
+            if (Directory.Exists(workDir))
+                Directory.Delete(workDir, true);
+            string css = Common.PathCombine(_inputBasePath, "MergeFile7.css"); // TODO: Initialize to an appropriate value
+            string actual = target.Make(css, "Temp1.css");
+            string expected = Common.PathCombine(_expectBasePath, "MergeBottomImportFile.css"); ; // TODO: Initialize to an appropriate value
+            TextFileAssert.AreEqual(expected, actual, "Make Funtion test failed");
+        }
     }
 }

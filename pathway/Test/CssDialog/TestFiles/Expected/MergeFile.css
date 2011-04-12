@@ -55,6 +55,7 @@
 {
 	string-set: word content();
 }
+
 .entry 	
 {
    font-weight: normal;	/* inherited */
