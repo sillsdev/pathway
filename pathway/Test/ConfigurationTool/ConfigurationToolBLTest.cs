@@ -276,11 +276,12 @@ namespace Test.UIConfigurationToolBLTest
         public void SaveInputTypeTest()
         {
             SetUp();
+            CopyFile();
             Param.Value["OutputPath"] = _outputBasePath;
             cToolBL.SaveInputType("Scripture");
             const string expected = "Scripture";
             var xdoc = new XmlDocument();
-            xdoc.Load(Common.PathCombine(_outputBasePath, Common.PathCombine("Pathway", "StyleSettings.xml")));
+            xdoc.Load(Common.PathCombine(Common.GetAllUserPath(), "StyleSettings.xml"));
             XmlNode node = xdoc.SelectSingleNode("//stylePick/settings/property[@name='InputType']");
             if (node != null)
                 if (node.Attributes != null)

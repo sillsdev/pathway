@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.Drawing.Text;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -861,8 +860,6 @@ namespace SIL.PublishingSolution
                 else if (MediaType.ToLower() == "others")
                 {
                     XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
-                    cTool.LblChapterNumbers.Visible = (inputTypeBL == "Scripture");
-                    cTool.DdlChapterNumbers.Visible = (inputTypeBL == "Scripture");
                     foreach (XmlNode VARIABLE in baseNode1)
                     {
                         string attribName = VARIABLE.Attributes["name"].Value.ToLower();
@@ -870,15 +867,10 @@ namespace SIL.PublishingSolution
                         switch (attribName)
                         {
                             case "embedfonts":
-                                cTool.ChkEmbedFonts.Checked = (attribValue == "Yes") ? true : false;
-                                bool bEnabled = cTool.ChkEmbedFonts.Checked;
-                                cTool.ChkIncludeFontVariants.Enabled = bEnabled;
-                                cTool.DdlDefaultFont.Enabled = bEnabled;
-                                cTool.DdlMissingFont.Enabled = bEnabled;
-                                cTool.DdlNonSILFont.Enabled = bEnabled;
+                                cTool.DdlEmbedFonts.SelectedItem = attribValue;
                                 break;
                             case "includefontvariants":
-                                cTool.ChkIncludeFontVariants.Checked = (attribValue == "Yes") ? true : false;
+                                cTool.DdlIncludeFontVariants.SelectedItem = attribValue;
                                 break;
                             case "maximagewidth":
                                 cTool.TxtMaxImageWidth.Text = attribValue;
@@ -886,78 +878,51 @@ namespace SIL.PublishingSolution
                             case "toclevel":
                                 cTool.DdlTocLevel.SelectedItem = attribValue;
                                 break;
-                            //**EDB MOVE THIS**
-                            //case "coverimage":
-                            //    if (File.Exists(attribValue))
-                            //    {
-                            //        try
-                            //        {
-                            //            cTool.CoverImage.Image = Image.FromFile(attribValue);
-                            //        }
-                            //        catch (Exception)
-                            //        {
-                            //            cTool.CoverImage.Image = cTool.CoverImage.InitialImage;
-                            //            throw;
-                            //        }
-                            //    }
-                            //    else
-                            //    {
-                            //        cTool.CoverImage.Image = cTool.CoverImage.InitialImage;
-                            //    }
-                            //    break;
-                            case "basefontsize":
-                                cTool.TxtBaseFontSize.Text = attribValue;
+                            case "coverimage":
+                                if (File.Exists(attribValue))
+                                {
+                                    try
+                                    {
+                                        cTool.CoverImage.Image = Image.FromFile(attribValue);
+                                    }
+                                    catch (Exception)
+                                    {
+                                        cTool.CoverImage.Image = cTool.CoverImage.InitialImage;
+                                        throw;
+                                    }
+                                }
+                                else
+                                {
+                                    cTool.CoverImage.Image = cTool.CoverImage.InitialImage;
+                                }
                                 break;
-                            case "defaultlineheight":
-                                cTool.TxtDefaultLineHeight.Text = attribValue;
+                            case "information":
+                                cTool.TxtDescription.Text = attribValue;
                                 break;
-                            //**EDB MOVE THIS**
-                            //case "addcolophonpage":
-                            //    cTool.ChkColophon.Checked = (attribValue == "Yes") ? true : false;
-                            //    break;
-                            case "defaultalignment":
-                                cTool.DdlDefaultAlignment.SelectedItem = attribValue;
+                            case "publisher":
+                                cTool.TxtPublisher.Text = attribValue;
                                 break;
-                            case "chapternumbers":
-                                cTool.DdlChapterNumbers.SelectedItem = attribValue;
+                            case "source":
+                                cTool.TxtSource.Text = attribValue;
                                 break;
-                            case "defaultfont":
-                                cTool.DdlDefaultFont.SelectedItem = attribValue;
+                            case "format":
+                                cTool.TxtFormat.Text = attribValue;
                                 break;
-                            case "missingfont":
-                                cTool.DdlMissingFont.SelectedItem = attribValue;
+                            case "relation":
+                                cTool.TxtRelation.Text = attribValue;
                                 break;
-                            case "nonsilfont":
-                                cTool.DdlNonSILFont.SelectedItem = attribValue;
+                            case "coverage":
+                                cTool.TxtCoverage.Text = attribValue;
                                 break;
-                            //**EDB MOVE THIS**
-                            //case "information":
-                            //    cTool.TxtDescription.Text = attribValue;
-                            //    break;
-                            //case "publisher":
-                            //    cTool.TxtPublisher.Text = attribValue;
-                            //    break;
-                            //case "source":
-                            //    cTool.TxtSource.Text = attribValue;
-                            //    break;
-                            //case "format":
-                            //    cTool.TxtFormat.Text = attribValue;
-                            //    break;
-                            //case "relation":
-                            //    cTool.TxtRelation.Text = attribValue;
-                            //    break;
-                            //case "coverage":
-                            //    cTool.TxtCoverage.Text = attribValue;
-                            //    break;
-                            //case "copyright":
-                            //    cTool.TxtRights.Text = attribValue;
-                            //    break;
-                            //case "title":
-                            //    cTool.TxtBookTitle.Text = attribValue;
-                            //    break;
-                            //case "creator":
-                            //    cTool.TxtCreator.Text = attribValue;
-                            //    break;
+                            case "copyright":
+                                cTool.TxtRights.Text = attribValue;
+                                break;
+                            case "title":
+                                cTool.TxtBookTitle.Text = attribValue;
+                                break;
+                            case "creator":
+                                cTool.TxtCreator.Text = attribValue;
+                                break;
                             default:
                                 break;
                         }
@@ -1039,24 +1004,6 @@ namespace SIL.PublishingSolution
         protected void PopulateFeatureSheet()
         {
             Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationTool: PopulateFeatureSheet");
-            // populate the font drop-down if needed
-            if (cTool.DdlDefaultFont.Items.Count == 0)
-            {
-                string fontFolder = FontInternals.GetFontFolderPath();
-                string[] files = Directory.GetFiles(fontFolder, "*.ttf");
-                PrivateFontCollection pfc = new PrivateFontCollection();
-                foreach (var file in files)
-                {
-                    if (FontInternals.IsSILFont(file))
-                    {
-                        pfc.AddFontFile(file);
-                    }
-                }
-                foreach (var fontFamily in pfc.Families)
-                {
-                    cTool.DdlDefaultFont.Items.Add(fontFamily.GetName(0));
-                }
-            }
             TreeView TvFeatures = new TreeView();
             PopulateFeatureLists(TvFeatures);
             try
@@ -1135,24 +1082,14 @@ namespace SIL.PublishingSolution
                                     cTool.DdlRedLetter.Items.Add(ctn.Text);
                                 break;
 
-                            case "ChapterNumbers":
-                                if (!cTool.DdlChapterNumbers.Items.Contains(ctn.Text))
-                                    cTool.DdlChapterNumbers.Items.Add(ctn.Text);
-                                break;
-                                
-                            case "DefaultAlignment":
-                                if (!cTool.DdlDefaultAlignment.Items.Contains(ctn.Text))
-                                    cTool.DdlDefaultAlignment.Items.Add(ctn.Text);
-                                break;
-                            
-                            case "MissingFont":
-                                if (!cTool.DdlMissingFont.Items.Contains(ctn.Text))
-                                    cTool.DdlMissingFont.Items.Add(ctn.Text);
+                            case "EmbedFonts":
+                                if (!cTool.DdlEmbedFonts.Items.Contains(ctn.Text))
+                                    cTool.DdlEmbedFonts.Items.Add(ctn.Text);
                                 break;
 
-                            case "NonSILFont":
-                                if (!cTool.DdlNonSILFont.Items.Contains(ctn.Text))
-                                    cTool.DdlNonSILFont.Items.Add(ctn.Text);
+                            case "IncludeFontVariants":
+                                if (!cTool.DdlIncludeFontVariants.Items.Contains(ctn.Text))
+                                    cTool.DdlIncludeFontVariants.Items.Add(ctn.Text);
                                 break;
 
                             case "TOCLevel":
@@ -1324,6 +1261,43 @@ namespace SIL.PublishingSolution
                             cTool.TxtCopyright.Text = attribValue;
                         }
                     }
+                    // EDB 11/5/2010 - replaced mobileFeature items with StyleProperty data
+                    // (the summary info wasn't displaying properly)
+                    //Dictionary<string, string> mobilefeature = Param.GetItemsAsDictionary("//mobileProperty/mobilefeature");
+                    //if (mobilefeature.Count > 0)
+                    //{
+                    //    string key = "FileProduced";
+                    //    if (mobilefeature.ContainsKey(key))
+                    //    {
+                    //        cTool.DdlFiles.Text = mobilefeature[key];
+                    //    }
+                    //    key = "RedLetter";
+                    //    if (mobilefeature.ContainsKey(key))
+                    //    {
+                    //        cTool.DdlRedLetter.Text = mobilefeature[key];
+                    //    }
+                    //    key = "Information";
+                    //    if (mobilefeature.ContainsKey(key))
+                    //    {
+                    //        cTool.TxtInformation.Text = mobilefeature[key];
+                    //    }
+                    //    key = "Copyright";
+                    //    if (mobilefeature.ContainsKey(key))
+                    //    {
+                    //        cTool.TxtCopyright.Text = mobilefeature[key];
+                    //    }
+                    //    key = "Icon";
+                    //    if (mobilefeature.ContainsKey(key))
+                    //    {
+                    //        try
+                    //        {
+                    //            string iconPath = mobilefeature[key];
+                    //            cTool.MobileIcon.Load(iconPath);
+                    //        }
+                    //        catch
+                    //        {
+                    //        }
+                    //    }
                     SetMobileSummary(null, null);
                     break;
                 case "others":
@@ -1331,8 +1305,6 @@ namespace SIL.PublishingSolution
                     cTool.TabControl1.TabPages.Insert(1, tabothers);
                     
                     XmlNodeList baseNode = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
-                    cTool.LblChapterNumbers.Visible = (inputTypeBL == "Scripture");
-                    cTool.DdlChapterNumbers.Visible = (inputTypeBL == "Scripture");
                     foreach (XmlNode VARIABLE in baseNode)
                     {
                         string attribName = VARIABLE.Attributes["name"].Value.ToLower();
@@ -1340,92 +1312,60 @@ namespace SIL.PublishingSolution
                         switch (attribName)
                         {
                             case "embedfonts":
-                                cTool.ChkEmbedFonts.Checked = (attribValue == "Yes") ? true : false;
-                                bool bEnabled = cTool.ChkEmbedFonts.Checked;
-                                cTool.ChkIncludeFontVariants.Enabled = bEnabled;
-                                cTool.DdlDefaultFont.Enabled = bEnabled;
-                                cTool.DdlMissingFont.Enabled = bEnabled;
-                                cTool.DdlNonSILFont.Enabled = bEnabled;
+                                cTool.DdlEmbedFonts.SelectedItem = attribValue;
                                 break;
                             case "includefontvariants":
-                                cTool.ChkIncludeFontVariants.Checked = (attribValue == "Yes") ? true : false;
+                                cTool.DdlIncludeFontVariants.SelectedItem = attribValue;
                                 break;
                             case "maximagewidth":
                                 cTool.TxtMaxImageWidth.Text = attribValue;
                                 break;
-                            //**EDB MOVE THIS**
-                            //case "coverimage":
-                            //    if (File.Exists(attribValue))
-                            //    {
-                            //        try
-                            //        {
-                            //            cTool.CoverImage.Image = Image.FromFile(attribValue);
-                            //        }
-                            //        catch (Exception)
-                            //        {
-                            //            // problem loading the file - put up the initial image
-                            //            cTool.CoverImage.Image = cTool.CoverImage.InitialImage;
-                            //        }
-                            //    }
-                            //    else
-                            //    {
-                            //        // no file specified - assume the default
-                            //        cTool.CoverImage.Image = cTool.CoverImage.InitialImage;
-                            //    }                        
-                            //    break;
-                            case "basefontsize":
-                                cTool.TxtBaseFontSize.Text = attribValue;
+                            case "coverimage":
+                                if (File.Exists(attribValue))
+                                {
+                                    try
+                                    {
+                                        cTool.CoverImage.Image = Image.FromFile(attribValue);
+                                    }
+                                    catch (Exception)
+                                    {
+                                        // problem loading the file - put up the initial image
+                                        cTool.CoverImage.Image = cTool.CoverImage.InitialImage;
+                                    }
+                                }
+                                else
+                                {
+                                    // no file specified - assume the default
+                                    cTool.CoverImage.Image = cTool.CoverImage.InitialImage;
+                                }                        
                                 break;
-                            case "defaultlineheight":
-                                cTool.TxtDefaultLineHeight.Text = attribValue;
+                            case "information":
+                                cTool.TxtDescription.Text = attribValue;
                                 break;
-                            //**EDB MOVE THIS**
-                            //case "addcolophonpage":
-                            //    cTool.ChkColophon.Checked = (attribValue == "Yes") ? true : false;
-                            //    break;
-                            case "defaultalignment":
-                                cTool.DdlDefaultAlignment.SelectedItem = attribValue;
+                            case "publisher":
+                                cTool.TxtPublisher.Text = attribValue;
                                 break;
-                            case "chapternumbers":
-                                cTool.DdlChapterNumbers.SelectedItem = attribValue;
+                            case "source":
+                                cTool.TxtSource.Text = attribValue;
                                 break;
-                            case "defaultfont":
-                                cTool.DdlDefaultFont.SelectedItem = attribValue;
+                            case "format":
+                                cTool.TxtFormat.Text = attribValue;
                                 break;
-                            case "missingfont":
-                                cTool.DdlMissingFont.SelectedItem = attribValue;
+                            case "relation":
+                                cTool.TxtRelation.Text = attribValue;
                                 break;
-                            case "nonsilfont":
-                                cTool.DdlNonSILFont.SelectedItem = attribValue;
+                            case "coverage":
+                                cTool.TxtCoverage.Text = attribValue;
                                 break;
-                            //**EDB MOVE THIS**
-                            //case "information":
-                            //    cTool.TxtDescription.Text = attribValue;
-                            //    break;
-                            //case "publisher":
-                            //    cTool.TxtPublisher.Text = attribValue;
-                            //    break;
-                            //case "source":
-                            //    cTool.TxtSource.Text = attribValue;
-                            //    break;
-                            //case "format":
-                            //    cTool.TxtFormat.Text = attribValue;
-                            //    break;
-                            //case "relation":
-                            //    cTool.TxtRelation.Text = attribValue;
-                            //    break;
-                            //case "coverage":
-                            //    cTool.TxtCoverage.Text = attribValue;
-                            //    break;
-                            //case "title":
-                            //    cTool.TxtBookTitle.Text = attribValue;
-                            //    break;
-                            //case "creator":
-                            //    cTool.TxtCreator.Text = attribValue;
-                            //    break;
-                            //case "rights":
-                            //    cTool.TxtRights.Text = attribValue;
-                            //    break;
+                            case "title":
+                                cTool.TxtBookTitle.Text = attribValue;
+                                break;
+                            case "creator":
+                                cTool.TxtCreator.Text = attribValue;
+                                break;
+                            case "rights":
+                                cTool.TxtRights.Text = attribValue;
+                                break;
                             default:
                                 break;
                         }
@@ -1714,11 +1654,11 @@ namespace SIL.PublishingSolution
         /// </summary>
         public void SaveInputType(string inputType)
         {
-            string allUserSettingPath = Common.LeftString(Param.Value["OutputPath"], "Pathway");
-            string allUserXmlPath = Common.PathCombine(allUserSettingPath, Common.PathCombine("Pathway", "StyleSettings.xml"));
-            if (!Directory.Exists(Path.GetDirectoryName(allUserXmlPath)))
+            string allUserSettingPath = Common.GetAllUserPath();
+            string allUserXmlPath = Common.PathCombine(allUserSettingPath, "StyleSettings.xml");
+            if (!Directory.Exists(allUserSettingPath))
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(allUserXmlPath));
+                Directory.CreateDirectory(allUserSettingPath);
             }
             if (!File.Exists(allUserXmlPath))
             {
@@ -2546,11 +2486,7 @@ namespace SIL.PublishingSolution
         public void ShowOthersSummaryBL()
         {
             var sb = new StringBuilder();
-            sb.Append(cTool.TxtBaseFontSize.Text);
-            sb.Append("pt Font, ");
-            sb.Append(cTool.TxtDefaultLineHeight.Text);
-            sb.Append("% Line Height, Alignment: ");
-            sb.Append(cTool.DdlDefaultAlignment.SelectedItem.ToString());
+            sb.Append((cTool.DdlEmbedFonts.Text.ToLower() == "yes")? "Embedded fonts" : "No embedded fonts");
 
             cTool.TxtCss.Text = sb.ToString();
         }
@@ -2652,37 +2588,36 @@ namespace SIL.PublishingSolution
             }
         }
 
-        //**EDB MOVE THIS**
-        //public void btnCoverImage_ClickBL()
-        //{
-        //    OpenFileDialog openFile = new OpenFileDialog();
-        //    openFile.Filter = "Image Files (*.png, *.jpg)|*.png;*.jpg";
-        //    openFile.ShowDialog();
+        public void btnCoverImage_ClickBL()
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "Image Files (*.png, *.jpg)|*.png;*.jpg";
+            openFile.ShowDialog();
 
-        //    string filename = openFile.FileName;
-        //    if (filename != "")
-        //    {
-        //        try
-        //        {
-        //            Image iconImage = Image.FromFile(filename);
-        //            double height = iconImage.Height;
-        //            double width = iconImage.Width;
-        //            if (height > 1000 || width > 1000)
-        //            {
-        //                MessageBox.Show("The selected image is too large. Please select an image with less that 1000 pixels in height and length.",
-        //                    _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //                return;
-        //            }
-        //            string userPath = (Param.Value["UserSheetPath"]);
-        //            string imgFileName = Path.GetFileName(filename);
-        //            string toPath = Path.Combine(userPath, imgFileName);
-        //            File.Copy(filename, toPath, true);
-        //            Param.UpdateOthersAtrrib("CoverImage", toPath, StyleName);
-        //            cTool.CoverImage.Image = iconImage;
-        //        }
-        //        catch { }
-        //    }
-        //}
+            string filename = openFile.FileName;
+            if (filename != "")
+            {
+                try
+                {
+                    Image iconImage = Image.FromFile(filename);
+                    double height = iconImage.Height;
+                    double width = iconImage.Width;
+                    if (height > 1000 || width > 1000)
+                    {
+                        MessageBox.Show("The selected image is too large. Please select an image with less that 1000 pixels in height and length.",
+                            _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                    string userPath = (Param.Value["UserSheetPath"]);
+                    string imgFileName = Path.GetFileName(filename);
+                    string toPath = Path.Combine(userPath, imgFileName);
+                    File.Copy(filename, toPath, true);
+                    Param.UpdateOthersAtrrib("CoverImage", toPath, StyleName);
+                    cTool.CoverImage.Image = iconImage;
+                }
+                catch { }
+            }
+        }
 
         public void ddlRedLetter_SelectedIndexChangedBL(object sender, EventArgs e)
         {
@@ -2716,6 +2651,29 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
+
+        public void ddlEmbedFonts_SelectedIndexChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                _embedFonts = cTool.DdlEmbedFonts.Text;
+                Param.UpdateOthersAtrrib("EmbedFonts", cTool.DdlEmbedFonts.Text, StyleName);
+                SetOthersSummary(sender, e);
+            }
+            catch { }
+        }
+
+        public void ddlIncludeFontVariants_SelectedIndexChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                _embedFonts = cTool.DdlEmbedFonts.Text;
+                Param.UpdateOthersAtrrib("IncludeFontVariants", cTool.DdlEmbedFonts.Text, StyleName);
+                SetOthersSummary(sender, e);
+            }
+            catch { }
+        }
+
         public void txtMaxImageWidth_ValidatedBL(object sender)
         {
             try
@@ -2725,209 +2683,104 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
-        public void txtBaseFontSize_ValidatedBL(object sender)
+        public void txtDescription_ValidatedBL(object sender)
         {
             try
             {
-                Param.UpdateOthersAtrrib("BaseFontSize", cTool.TxtBaseFontSize.Text, StyleName);
+                Param.UpdateOthersAtrrib("Information", cTool.TxtDescription.Text, StyleName);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
-        public void txtDefaultLineHeight_ValidatedBL(object sender)
+        public void txtPublisher_ValidatedBL(object sender)
         {
             try
             {
-                Param.UpdateOthersAtrrib("DefaultLineHeight", cTool.TxtDefaultLineHeight.Text, StyleName);
+                Param.UpdateOthersAtrrib("Publisher", cTool.TxtPublisher.Text, StyleName);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
-        public void ddlDefaultAlignment_SelectedIndexChangedBL(object sender, EventArgs e)
+        public void txtSource_ValidatedBL(object sender)
         {
             try
             {
-                Param.UpdateOthersAtrrib("DefaultAlignment", cTool.DdlDefaultAlignment.Text, StyleName);
-                SetOthersSummary(sender, e);
+                Param.UpdateOthersAtrrib("Source", cTool.TxtSource.Text, StyleName);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
-        public void ddlChapterNumbers_SelectedIndexChangedBL(object sender, EventArgs e)
+        public void txtFormat_ValidatedBL(object sender)
         {
             try
             {
-                Param.UpdateOthersAtrrib("ChapterNumbers", cTool.DdlChapterNumbers.Text, StyleName);
-                SetOthersSummary(sender, e);
+                Param.UpdateOthersAtrrib("Format", cTool.TxtFormat.Text, StyleName);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
-        public void ddlDefaultFont_SelectedIndexChangedBL(object sender, EventArgs e)
+        public void txtRelation_ValidatedBL(object sender)
         {
             try
             {
-                Param.UpdateOthersAtrrib("DefaultFont", cTool.DdlDefaultFont.Text, StyleName);
-                SetOthersSummary(sender, e);
+                Param.UpdateOthersAtrrib("Relation", cTool.TxtRelation.Text, StyleName);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
-        public void ddlMissingFont_SelectedIndexChangedBL(object sender, EventArgs e)
+        public void txtCoverage_ValidatedBL(object sender)
         {
             try
             {
-                Param.UpdateOthersAtrrib("MissingFont", cTool.DdlMissingFont.Text, StyleName);
-                SetOthersSummary(sender, e);
+                Param.UpdateOthersAtrrib("Coverage", cTool.TxtCoverage.Text, StyleName);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
-        public void ddlNonSILFont_SelectedIndexChangedBL(object sender, EventArgs e)
+        public void txtBookTitle_ValidatedBL(object sender)
         {
             try
             {
-                Param.UpdateOthersAtrrib("NonSILFont", cTool.DdlNonSILFont.Text, StyleName);
-                SetOthersSummary(sender, e);
+                Param.UpdateOthersAtrrib("Title", cTool.TxtBookTitle.Text, StyleName);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
-        //**EDB MOVE THIS**
-        //public void chkColophon_CheckedChangedBL(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        Param.UpdateOthersAtrrib("AddColophonPage", cTool.ChkColophon.Checked ? "Yes" : "No", StyleName);
-        //        SetOthersSummary(sender, e);
-        //    }
-        //    catch { }
-        //}
-
-        public void chkIncludeFontVariants_CheckedChangedBL(object sender, EventArgs e)
+        public void txtCreator_ValidatedBL(object sender)
         {
             try
             {
-                Param.UpdateOthersAtrrib("IncludeFontVariants", cTool.ChkIncludeFontVariants.Checked ? "Yes" : "No", StyleName);
-                SetOthersSummary(sender, e);
+                Param.UpdateOthersAtrrib("Creator", cTool.TxtCreator.Text, StyleName);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
-        public void chkEmbedFonts_CheckedChangedBL(object sender, EventArgs e)
+        public void txtRights_ValidatedBL(object sender)
         {
             try
             {
-                Param.UpdateOthersAtrrib("EmbedFonts", cTool.ChkEmbedFonts.Checked ? "Yes" : "No", StyleName);
-                bool bEnabled = cTool.ChkEmbedFonts.Checked;
-                cTool.ChkIncludeFontVariants.Enabled = bEnabled;
-                cTool.DdlDefaultFont.Enabled = bEnabled;
-                cTool.DdlMissingFont.Enabled = bEnabled;
-                cTool.DdlNonSILFont.Enabled = bEnabled;
-                SetOthersSummary(sender, e);
+                Param.UpdateOthersAtrrib("Copyright", cTool.TxtRights.Text, StyleName);
             }
-            catch { }
+            catch
+            {
+            }
         }
-
-        //**EDB MOVE THIS**
-        //public void txtDescription_ValidatedBL(object sender)
-        //{
-        //    try
-        //    {
-        //        Param.UpdateOthersAtrrib("Information", cTool.TxtDescription.Text, StyleName);
-        //    }
-        //    catch
-        //    {
-        //    }
-        //}
-
-        //public void txtPublisher_ValidatedBL(object sender)
-        //{
-        //    try
-        //    {
-        //        Param.UpdateOthersAtrrib("Publisher", cTool.TxtPublisher.Text, StyleName);
-        //    }
-        //    catch
-        //    {
-        //    }
-        //}
-
-        //public void txtSource_ValidatedBL(object sender)
-        //{
-        //    try
-        //    {
-        //        Param.UpdateOthersAtrrib("Source", cTool.TxtSource.Text, StyleName);
-        //    }
-        //    catch
-        //    {
-        //    }
-        //}
-
-        //public void txtFormat_ValidatedBL(object sender)
-        //{
-        //    try
-        //    {
-        //        Param.UpdateOthersAtrrib("Format", cTool.TxtFormat.Text, StyleName);
-        //    }
-        //    catch
-        //    {
-        //    }
-        //}
-
-        //public void txtRelation_ValidatedBL(object sender)
-        //{
-        //    try
-        //    {
-        //        Param.UpdateOthersAtrrib("Relation", cTool.TxtRelation.Text, StyleName);
-        //    }
-        //    catch
-        //    {
-        //    }
-        //}
-
-        //public void txtCoverage_ValidatedBL(object sender)
-        //{
-        //    try
-        //    {
-        //        Param.UpdateOthersAtrrib("Coverage", cTool.TxtCoverage.Text, StyleName);
-        //    }
-        //    catch
-        //    {
-        //    }
-        //}
-
-        //public void txtBookTitle_ValidatedBL(object sender)
-        //{
-        //    try
-        //    {
-        //        Param.UpdateOthersAtrrib("Title", cTool.TxtBookTitle.Text, StyleName);
-        //    }
-        //    catch
-        //    {
-        //    }
-        //}
-
-        //public void txtCreator_ValidatedBL(object sender)
-        //{
-        //    try
-        //    {
-        //        Param.UpdateOthersAtrrib("Creator", cTool.TxtCreator.Text, StyleName);
-        //    }
-        //    catch
-        //    {
-        //    }
-        //}
-
-        //public void txtRights_ValidatedBL(object sender)
-        //{
-        //    try
-        //    {
-        //        Param.UpdateOthersAtrrib("Copyright", cTool.TxtRights.Text, StyleName);
-        //    }
-        //    catch
-        //    {
-        //    }
-        //}
 
         public void txtCopyright_ValidatedBL(object sender)
         {
