@@ -435,7 +435,8 @@ div.pictureLeft > img.picture {
     @bottom-left   { content: ''; }
     @bottom-center { content: counter(page); }
     @bottom-right  { content: ''; }
-}/* scripture ruling lines */
+}
+/* scripture ruling lines */
 @page {
     @footnotes {
         border-top: thin solid black;
