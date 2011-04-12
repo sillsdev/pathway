@@ -71,11 +71,11 @@ namespace Builder7BTE
             BuilderBL.CopyFile(instPath, Readme, "../Files/ConfigurationTool");
             BuilderBL.CopyFile(instPath, Tutorial, "../Files/ConfigurationTool");
             BuilderBL.CopyFile(instPath, License, "../Files/ConfigurationTool");
+            BuilderBL.CopyTree(instPath, "../../PsSupport", "ConfigurationTool");
+            Directory.Delete(instPath + "../Files/ConfigurationTool/Template", true);
             Directory.Delete(instPath + "../Files/ConfigurationTool/Help", true);
             BuilderBL.CopyFile(instPath, HelpFile, "../Files/ConfigurationTool/Help");
             BuilderBL.CopyRelaseFiles(instPath, "PsExport", "ConfigurationTool", args[1]);
-            BuilderBL.CopyTree(instPath, "../../PsSupport", "ConfigurationTool");
-            Directory.Delete(instPath + "../Files/ConfigurationTool/Template", true);
             BuilderBL.RemoveFiles(instPath, "../NotPathway", "ConfigurationTool");
             if (args[1] == CORPORATE)
             {
