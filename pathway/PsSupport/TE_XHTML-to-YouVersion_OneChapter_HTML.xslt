@@ -13,9 +13,10 @@
 
 	<!-- Use the OSIS book code, not the TE book code. -->
 	<xsl:variable name="bookCode">
-		<xsl:call-template name="getOsisBookCode">
+		<xsl:value-of select="/xhtml:html/xhtml:body/xhtml:p[@class='scrBookCode']/text()"/>
+		<!-- xsl:call-template name="getOsisBookCode">
 			<xsl:with-param name="TEBookCode" select="/xhtml:html/xhtml:body/xhtml:p[@class='scrBookCode']/text()"/>
-		</xsl:call-template>
+		</xsl:call-template -->
 	</xsl:variable>
 
 	<xsl:variable name="bookName">
@@ -156,7 +157,7 @@
 	</xsl:template> <!-- xhtml:span[@class='Words_Of_Christ'] -->
 
 	<!-- Get the Osis book code that corresponds to the given TE book code. -->
-	<xsl:template name="getOsisBookCode">
+	<!-- xsl:template name="getOsisBookCode">
 		<xsl:param name="TEBookCode"/>
 		<xsl:choose>
 			<xsl:when test="$TEBookCode='MAT' ">Matt</xsl:when>
@@ -194,7 +195,7 @@
 				</xsl:comment>
 			</xsl:otherwise>
 		</xsl:choose>
-	</xsl:template> <!-- getOsisBookCode -->
+	</xsl:template --> <!-- getOsisBookCode -->
 
 	<!-- Skip the div if the class is 'Parallel_Passage_Reference' or 'pictureCenter'.
 		We see no evidence of these being used by YouVersion.com. -->
