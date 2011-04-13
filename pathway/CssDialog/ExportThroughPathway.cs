@@ -120,19 +120,70 @@ namespace SIL.PublishingSolution
         #endregion InterfaceMethods
 
         // Publication Info (dublin core metadata) tab
-        public string Title { get; set; }           // dc:title
-        public string Description { get; set; }     // dc:description
-        public string Creator { get; set; }         // dc:creator
-        public string Publisher { get; set; }       // dc:publisher
-        public string CopyrightHolder { get; set; } // dc:rights
+        public string Title // dc:title
+        {
+            get { return txtBookTitle.Text; }
+            set { txtBookTitle.Text = value; }
+        }
+        public string Description // dc:description
+        {
+            get { return txtDescription.Text; }
+            set { txtDescription.Text = value; }
+        }
+        public string Creator // dc:creator
+        {
+            get { return txtCreator.Text; }
+            set { txtCreator.Text = value; }
+        }
+        public string Publisher // dc:publisher
+        {
+            get { return txtPublisher.Text; }
+            set { txtPublisher.Text = value; }
+        }
+        public string CopyrightHolder // dc:rights
+        {
+            get { return txtRights.Text; }
+            set { txtRights.Text = value; }
+        } 
+        // DC properties that are not in the UI
+        public string Type { get; set; }
+        public string Source { get; set; }
+        public string DocFormat { get; set; } // really "Format" / dc:format
+        public string Contributor { get; set; }
+        public string Relation { get; set; }
+        public string Coverage { get; set; }
+        public string Subject { get; set; } // probably just copy over the default value for this
+        public string Date { get; set; } // date modified?
+        public string Language { get; set; } // main language for document
+        public string Identifier { get; set; } // unique ID
 
         // Front Matter tab
-        public bool CoverPage { get; set; }
+        public bool CoverPage
+        {
+            get { return chkCoverImage.Checked; }
+            set { chkCoverImage.Checked = value; }
+        }
         public string CoverPageImagePath { get; set; }
-        public bool CoverPageTitle { get; set; }
-        public bool TitlePage { get; set; }
-        public bool CopyrightPage { get; set; }
-        public string CopyrightPagePath { get; set; }
+        public bool CoverPageTitle
+        {
+            get { return chkCoverImageTitle.Checked; }
+            set { chkCoverImageTitle.Checked = value; }
+        }
+        public bool TitlePage
+        {
+            get { return chkTitlePage.Checked; }
+            set { chkTitlePage.Checked = value; }
+        }
+        public bool CopyrightPage
+        {
+            get { return chkColophon.Checked; }
+            set { chkColophon.Checked = value; }
+        }
+        public string CopyrightPagePath
+        {
+            get { return txtColophonFile.Text; }
+            set { txtColophonFile.Text = value; }
+        }
 
         // Processing Options tab
         public bool RunningHeader 
@@ -186,9 +237,9 @@ namespace SIL.PublishingSolution
             LoadAvailStylesheets();
             IsExpanded = false;
             ResizeDialog();
-            EnableUIElements();
             SetOkStatus();
             LoadProperty();
+            EnableUIElements();
             Common.PathwayHelpSetup();
             Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
             Common.HelpProv.SetHelpKeyword(this, _helpTopic);
@@ -224,7 +275,7 @@ namespace SIL.PublishingSolution
         {
             // Front Matter tab
             chkCoverImage.Enabled = (ddlLayout.Text.Contains("epub"));
-            chkCoverImageTitle.Enabled = (chkTitlePage.Enabled && chkTitlePage.Checked);
+            chkCoverImageTitle.Enabled = (chkCoverImage.Enabled && chkCoverImage.Checked);
             btnCoverImage.Enabled = chkCoverImageTitle.Enabled;
             imgCoverImage.Enabled = chkCoverImageTitle.Enabled;
 
@@ -405,11 +456,32 @@ namespace SIL.PublishingSolution
         {
             Format = Param.DefaultValue[Param.PrintVia];
 
-            // TODO: reimplement the persistence here
-            // Publication Information tab
-            // Front Matter tab
+            // publication info tab
+            Title = Param.GetMetadataValue(Param.Title, Organization);
+            Description = Param.GetMetadataValue(Param.Description, Organization);
+            Creator = Param.GetMetadataValue(Param.Creator, Organization);
+            Publisher = Param.GetMetadataValue(Param.Publisher, Organization);
+            CopyrightHolder = Param.GetMetadataValue(Param.CopyrightHolder, Organization);
+            Type = Param.GetMetadataValue(Param.Type, Organization);
+            Source = Param.GetMetadataValue(Param.Source, Organization);
+            Format = Param.GetMetadataValue(Param.Format, Organization);
+            Contributor = Param.GetMetadataValue(Param.Contributor, Organization);
+            Relation = Param.GetMetadataValue(Param.Relation, Organization);
+            Coverage = Param.GetMetadataValue(Param.Coverage, Organization);
+            Subject = Param.GetMetadataValue(Param.Subject, Organization);
+            Date = Param.GetMetadataValue(Param.Date, Organization);
+            Language = Param.GetMetadataValue(Param.Language, Organization);
+            Identifier = Param.GetMetadataValue(Param.Identifier, Organization);
 
-            // Processing Options tab
+            // front matter tab
+            CoverPage = Boolean.Parse(Param.GetMetadataValue(Param.CoverPage, Organization));
+            CoverPageImagePath = Param.GetMetadataValue(Param.CoverPageFilename, Organization);
+            CoverPageTitle = Boolean.Parse(Param.GetMetadataValue(Param.CoverPageTitle, Organization));
+            TitlePage = Boolean.Parse(Param.GetMetadataValue(Param.TitlePage, Organization));
+            CopyrightPage = Boolean.Parse(Param.GetMetadataValue(Param.CopyrightPage, Organization));
+            CopyrightPagePath = Param.GetMetadataValue(Param.CopyrightPageFilename, Organization);
+
+            // Processing Options tab)
             if (string.IsNullOrEmpty(InputType) || InputType == "Dictionary")
             {
                 ExportMain = Param.DefaultValue[Param.ConfigureDictionary] == "True";
@@ -423,19 +495,38 @@ namespace SIL.PublishingSolution
             Media = Param.DefaultValue[Param.Media];
         }
 
+        /// <summary>
+        /// Save the properties from the Export Through Pathway dialog to the appropriate StyleSettings xml file
+        /// </summary>
+        /// <param name="dlg"></param>
         private static void SaveProperty(ExportThroughPathway dlg)
         {
             Param.SetValue(Param.PrintVia, dlg.Format);
             // Publication Information tab
-            // TODO: reimplement the persistence here (these need to go in the Metadata block)
-            //Param.SetValue(Param.Title, dlg.txtBookTitle.Text);
-            //Param.SetValue(Param.Description, dlg.txtDescription.Text);
-            //Param.SetValue(Param.Creator, dlg.txtCreator.Text);
-            //Param.SetValue(Param.Publisher, dlg.txtPublisher.Text);
-            //Param.SetValue(Param.CopyrightHolder, dlg.txtRights.Text);
-            // TODO: also persist the other DC elements (10 of them - see Param.cs)
+            Param.UpdateMetadataValue(Param.Title, dlg.Title);
+            Param.UpdateMetadataValue(Param.Description, dlg.Description);
+            Param.UpdateMetadataValue(Param.Creator, dlg.Creator);
+            Param.UpdateMetadataValue(Param.Publisher, dlg.Publisher);
+            Param.UpdateMetadataValue(Param.CopyrightHolder, dlg.CopyrightHolder);
+            // also persist the other DC elements
+            Param.UpdateMetadataValue(Param.Type, dlg.Type);
+            Param.UpdateMetadataValue(Param.Source, dlg.Source);
+            Param.UpdateMetadataValue(Param.Format, dlg.Format);
+            Param.UpdateMetadataValue(Param.Contributor, dlg.Contributor);
+            Param.UpdateMetadataValue(Param.Relation, dlg.Relation);
+            Param.UpdateMetadataValue(Param.Coverage, dlg.Coverage);
+            Param.UpdateMetadataValue(Param.Subject, dlg.Subject);
+            Param.UpdateMetadataValue(Param.Date, dlg.Date);
+            Param.UpdateMetadataValue(Param.Language, dlg.Language);
+            Param.UpdateMetadataValue(Param.Identifier, dlg.Identifier);
 
             // Front Matter tab
+            Param.UpdateMetadataValue(Param.CoverPage, dlg.CoverPage.ToString());
+            Param.UpdateMetadataValue(Param.CoverPageFilename, dlg.CoverPageImagePath);
+            Param.UpdateMetadataValue(Param.CoverPageTitle, dlg.CoverPageTitle.ToString());
+            Param.UpdateMetadataValue(Param.TitlePage, dlg.TitlePage.ToString());
+            Param.UpdateMetadataValue(Param.CopyrightPage, dlg.CopyrightPage.ToString());
+            Param.UpdateMetadataValue(Param.CopyrightPageFilename, dlg.CopyrightPagePath);
 
             // Processing Options tab
             if (string.IsNullOrEmpty(dlg.InputType) || dlg.InputType == "Dictionary")

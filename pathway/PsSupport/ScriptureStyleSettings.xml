@@ -334,32 +334,27 @@
     <column name="4" width="46" />
   </column-width>
   <Organizations>
-    <Organization>SIl International</Organization>
+    <Organization>SIL International</Organization>
     <Organization>United Bible Societies</Organization>
     <Organization>Pioneer Bible Translators</Organization>
   </Organizations>
   <Metadata>
     <meta name="Title" outputTypes="all">
-      <currentValue></currentValue>
       <defaultValue></defaultValue>
     </meta>
     <meta name="Creator" outputTypes="all">
-      <currentValue></currentValue>
       <defaultValue></defaultValue>
     </meta>
     <meta name="Publisher" outputTypes="all">
-      <currentValue></currentValue>
       <defaultValue></defaultValue>
       <organizationDefault organizationName="SIL International" Locked="false">SIL International</organizationDefault>
     </meta>
     <meta name="Description" outputTypes="all">
-      <currentValue></currentValue>
       <defaultValue></defaultValue>
     </meta>
     <meta name="Copyright Holder" outputTypes="all">
-      <currentValue></currentValue>
       <defaultValue></defaultValue>
-      <organizationDefault organizationName="SIL International" Locked="false">/c /y /o. All Rights Reserved.</organizationDefault>
+      <organizationDefault organizationName="SIL International" Locked="false">© 2011 SIL International. All Rights Reserved.</organizationDefault>
     </meta>
     <meta name="Type" outputTypes="all">
       <defaultValue></defaultValue>
@@ -392,19 +387,19 @@
       <defaultValue></defaultValue>
     </meta>
     <meta name="Cover Page" outputTypes="epub">
-      <defaultValue>Yes</defaultValue>
+      <defaultValue>true</defaultValue>
     </meta>
     <meta name="Cover Page Filename" outputTypes="epub">
       <defaultValue></defaultValue>
     </meta>
     <meta name="Cover Page Title" outputTypes="epub">
-      <defaultValue>Yes</defaultValue>
+      <defaultValue>true</defaultValue>
     </meta>
     <meta name="Title Page" outputTypes="all">
-      <defaultValue>No</defaultValue>
+      <defaultValue>false</defaultValue>
     </meta>
     <meta name="Copyright Page" outputTypes="all">
-      <defaultValue>No</defaultValue>
+      <defaultValue>false</defaultValue>
     </meta>
     <meta name="Copyright Page Filename" outputTypes="all">
       <defaultValue></defaultValue>

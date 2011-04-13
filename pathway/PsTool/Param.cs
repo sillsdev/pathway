@@ -1191,6 +1191,58 @@ namespace SIL.PublishingSolution
             }
         }
 
+        /// <summary>
+        /// Returns the value of the specified Metadata element:
+        /// - if there is a current value, this method returns that value first
+        /// - if not, it will fall back on the default for the organization
+        /// - if there is no organization default, it will fall back on the defaultValue
+        /// - if there is no defaultValue (shouldn't happen), it will return null
+        /// </summary>
+        /// <param name="Name">meta name to retrieve</param>
+        /// <param name="Organization">user's publishing organization (SIL, etc.)</param>
+        /// <returns></returns>
+        public static string GetMetadataValue(string Name, string Organization)
+        {
+            XmlNode node = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/currentValue");
+            if (node == null)
+            {
+                // no current value - attempt to get the organization default
+                node = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/organizationDefault[@organizationName='" + Organization + "']");
+                if (node == null)
+                {
+                    // no organization default for this node - get the default value
+                    node = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/defaultValue");
+                    // test for null node is in the return value below
+                }
+            }
+            return (node == null) ? null : (node.InnerText);
+        }
+
+        /// <summary>
+        /// To set the properties for "metadata" branch items.
+        /// </summary>
+        /// <param name="Name">Name of metadata element to update</param>
+        /// <param name="Value">Value to set as Current Value</param>
+        public static void UpdateMetadataValue(string Name, string Value)
+        {
+            XmlNode node = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/currentValue");
+            if (node == null)
+            {
+                // currentValue node doesn't exist yet - create it now
+                XmlNode baseNode = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']");
+                var childNode = xmlMap.CreateNode(XmlNodeType.Element, "currentValue", "");
+                childNode.InnerText = Value;
+                baseNode.AppendChild(childNode);
+                Write();
+            }
+            else
+            {
+                // mode is there - just set the value
+                node.InnerText = Value;
+                Write();
+            }
+        }
+
         #region LoadImageList
         /// <summary>
         /// small images for the ListView controls
