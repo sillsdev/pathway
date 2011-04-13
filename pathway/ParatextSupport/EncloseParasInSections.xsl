@@ -32,7 +32,8 @@
 	<!-- Create section divisions -->
 	<xsl:template match="xhtml:h1">
 		<xsl:choose>
-			<xsl:when test="@class = 'Intro_Section_Head' or @class = 'Section_Head' or @class = 'Chapter_Head' or 
+			<xsl:when test="@class = 'Intro_Section_Head' or @class = 'Intro_Title_Main' or @class = 'Intro_Title_Secondary' or
+					@class = 'Intro_Title_Tertiary' or @class = 'Section_Head' or @class = 'Chapter_Head' or 
 					@class = 'Hebrew_Title' or @class = 'Parallel_Passage_Reference' or @class = 'Section_Head_Major' or 
 					@class = 'Section_Head_Minor' or @class = 'Section_Head_Series' or @class = 'Section_Range_Paragraph' or 
 					@class = 'Speech_Speaker' or @class = 'Variant_Section_Head'">

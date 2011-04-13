@@ -136,9 +136,12 @@
 	<!-- Convert all paragraph SFM style markers to styles understood by Pathway. -->
 	<xsl:template match="para">
 		<xsl:choose>
-			<!-- Remove 'h' and 'rem' paragraphs. -->
+			<!-- Remove unneeded paragraphs. -->
 			<xsl:when test="@style = 'h'"/>
 			<xsl:when test="@style = 'rem'"/>
+			<xsl:when test="@style = 'ide'"/>
+			<xsl:when test="@style = 'restore'"/>
+			<xsl:when test="@style = 'sts'"/>
 
 			<!-- Scripture title markers are converted elsewhere. They include the following markers:
 				mt, mt1, mt2, mt3, mt4
@@ -146,17 +149,17 @@
 			<xsl:when test="@style='mt' or @style='mt1' or @style='mt2' or @style='mt3' or @style='mt4'"/>
 			
 			<!-- Convert introduction styles. -->
-			<xsl:when test="@style = 'im' or @style = 'im1'">
+			<xsl:when test="@style = 'im' or @style = 'im1' or @style = 'imt' or @style = 'imt1'">
 				<h1 class="Intro_Title_Main" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</h1>
 			</xsl:when>
-			<xsl:when test="@style = 'im2'">
+			<xsl:when test="@style = 'im2' or @style = 'imt2'">
 				<h1 class="Intro_Title_Secondary" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</h1>
 			</xsl:when>
-			<xsl:when test="@style = 'im3'">
+			<xsl:when test="@style = 'im3' or @style = 'imt3'">
 				<h1 class="Intro_Title_Tertiary" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</h1>
