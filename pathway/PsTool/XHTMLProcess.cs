@@ -656,7 +656,8 @@ namespace SIL.PublishingSolution
             {
                 string ConcatContent = string.Empty;
                 string origContent = content;
-                if (origContent.IndexOf("counter") >= 0)
+                if (origContent.IndexOf("counter") >= 0 
+                    && origContent.IndexOf("|") >= 0)
                 {
                     string[] y = origContent.Split('|');
 
