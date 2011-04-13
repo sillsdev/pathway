@@ -39,8 +39,8 @@ namespace SIL.Tool
         // abs used to report progress
         public float abs(float n)
         {
-            if (Common.xsltProgressBar != null)
-                Common.xsltProgressBar.PerformStep();
+            if (Common.XsltProgressBar != null)
+                Common.XsltProgressBar.PerformStep();
             return Math.Abs(n);
         }
     }

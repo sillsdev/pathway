@@ -250,7 +250,7 @@ namespace SIL.PublishingSolution
                 // split the .XHTML into multiple files, as specified by the user
                 List<string> htmlFiles = new List<string>();
                 List<string> splitFiles = new List<string>();
-                Common.xsltProgressBar = inProcess.Bar();
+                Common.XsltProgressBar = inProcess.Bar();
                 if (projInfo.FileToProduce.ToLower() != "one")
                 {
                     splitFiles = SplitFile(preProcessor.ProcessedXhtml, projInfo);

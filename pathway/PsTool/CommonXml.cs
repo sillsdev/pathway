@@ -610,8 +610,9 @@ namespace SIL.Tool
         #endregion
 
         #region XsltProcess(string inputFile, string xsltFile, string ext)
-        public static ProgressBar xsltProgressBar = null;
-        public static Formatting xsltFormat = Formatting.None;
+        public static ProgressBar XsltProgressBar = null;
+        public static Formatting XsltFormat = Formatting.None;
+        public static bool IncludeUtf8BomIdentifier = true;
 
         public static string XsltProcess(string inputFile, string xsltFile, string ext)
         {
@@ -677,9 +678,28 @@ namespace SIL.Tool
                 //Transform the file. and writing to temporary File
                 var setting = new XmlReaderSettings {ProhibitDtd = false, XmlResolver = null};
                 XmlReader reader = XmlReader.Create(inputFile, setting);
-                var writer = new XmlTextWriter(result, Encoding.UTF8) { Namespaces = true};
-                writer.Formatting = xsltFormat;
-                xsltFormat = Formatting.None;
+                var writerSettings = new XmlWriterSettings();
+                if (!IncludeUtf8BomIdentifier || !ext.ToLower().Contains("xhtml"))
+                {
+                    writerSettings.ConformanceLevel = ConformanceLevel.Fragment;
+                }
+                if (IncludeUtf8BomIdentifier)
+                {
+                    writerSettings.Encoding = Encoding.UTF8;
+                }
+                else
+                {
+                    writerSettings.Encoding = new UTF8Encoding(IncludeUtf8BomIdentifier);
+                    IncludeUtf8BomIdentifier = true;   // reset to true for next time if it has been changed
+                }
+                if (XsltFormat == Formatting.Indented)
+                {
+                    writerSettings.Indent = true;
+                    XsltFormat = Formatting.None;       // reset to None for next time if it has been changed
+                }
+                var writer = XmlWriter.Create(result, writerSettings);
+                //var writer = new XmlTextWriter(result, Encoding.UTF8) {Namespaces = true};
+                //writer.Formatting = XsltFormat;
                 if (ext.ToLower().Contains("xhtml"))
                 {
                     writer.WriteStartDocument();

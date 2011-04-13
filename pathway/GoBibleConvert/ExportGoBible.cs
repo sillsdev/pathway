@@ -230,7 +230,7 @@ namespace SIL.PublishingSolution
             // Preprocess the xhtml file to replace image names, and link to the merged css file.
             string processedXhtmlFile = GetProcessedXhtml(projInfo);
 
-            Common.xsltProgressBar = inProcess.Bar();
+            Common.XsltProgressBar = inProcess.Bar();
             inProcess.AddToMaximum(Chapters(processedXhtmlFile));
 
             // Next, get the transformation (XSLT) file, which has been put in the folder
