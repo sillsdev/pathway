@@ -1,5 +1,11 @@
 <?xml version="1.0"?>
 <FileLibrary>
+	<File Path="Files\ConfigurationTool\xetexExe\share\texmf\fonts\type1\bluesky\cmr7.pfb" ComponentGuid="71BAE586-03A5-4629-960E-D78BF97AB3D2"/>
+	<File Path="Files\ConfigurationTool\xetexExe\share\texmf\fonts\type1\bluesky\cmmi10.pfb" ComponentGuid="1C576859-63E1-4965-8ED4-0C6C5331900D"/>
+	<File Path="Files\ConfigurationTool\xetexExe\share\texmf\fonts\type1\bluesky\cmb10.pfb" ComponentGuid="B3DB26C6-75B9-431D-A501-1784B1A7341F"/>
+	<File Path="Files\ConfigurationTool\xetexExe\share\texmf\fonts\tfm\cm\cmr7.tfm" ComponentGuid="ABA955C5-8CF0-4344-853A-397034E8AE84"/>
+	<File Path="Files\ConfigurationTool\xetexExe\share\texmf\fonts\tfm\cm\cmmi10.tfm" ComponentGuid="0CBD030E-080E-4A08-B329-693702429506"/>
+	<File Path="Files\ConfigurationTool\xetexExe\share\texmf\fonts\tfm\cm\cmb10.tfm" ComponentGuid="A09165AB-DBCC-49BF-9BEB-BFCE8B4BC82C"/>
 	<File Path="Files\ConfigurationTool\TE_XHTML-to-YouVersion_SQL_offline_unformatted.xslt" ComponentGuid="FD34D160-800A-49E3-A69F-B74E03541B3E"/>
 	<File Path="Files\ConfigurationTool\TE_XHTML-to-YouVersion_SQL_offline_html.xslt" ComponentGuid="690F4E45-0D86-42D0-81F1-B59D38D6F651"/>
 	<File Path="Files\ConfigurationTool\result" ComponentGuid="CA37F05E-FB75-42F3-8E8D-B20BBD8A85ED"/>
