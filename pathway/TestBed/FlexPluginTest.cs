@@ -237,6 +237,7 @@ namespace TestBed
       
         private void BtnFlexTest_Click(object sender, EventArgs e)
         {
+            // Lift Test
             //var rule = new string[1] { @"&B < b < A < a" };
             //string path = "c:\\lifttest\\buangverysmall.lift";
             //string outputPath = "c:\\lifttest\\output.lift";
@@ -247,13 +248,28 @@ namespace TestBed
             //ls.sort(lr,lw);
             //return;
 
+            //Validation 
             //MessageBox.Show(Common.ValidateStartsWithAlphabet(txtInputPath.Text).ToString());
             //return;
 
+            // One per section Test
             //string outputpath = "c:\\file1.xhtml";
             //string splitclass = "scrbook";
             //List<string> files = Common.SplitXhtmlFile(outputpath, splitclass);
             //return;
+
+
+            PrintVia printVia = new PrintVia();
+            printVia.InputType = "Dictionary";
+            printVia.ShowDialog();
+
+            string target = printVia.BackEnd; //"OpenOffice";
+            var tpe = new PsExport { Destination = target, DataType = printVia.InputType };
+            tpe.Export(txtInputPath.Text);
+
+
+
+
 
         }
 
