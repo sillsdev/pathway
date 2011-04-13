@@ -1,0 +1,181 @@
+;-----------------------------------------------------------------------------
+; Name:        googleRelease.py
+; Purpose:     The drives the Firefox GoogleCode website Downloads Page
+;              to release versions
+;
+; Author:      <greg_trihus@sil.org>
+;
+; Created:     2011/04/13
+; RCS-ID:      $Id: googleDeprecate.aut $
+; Copyright:   (c) 2011 Greg Trihus
+; Licence:     <MIT>
+;-----------------------------------------------------------------------------
+InputBox,myVersion,Enter Version,Please enter version to post (ex. 0.7.1)
+ifEqual,myVersion,,goto,abort
+InputBox,myDate,Enter Date,Please enter the date it was built (ex. 2011-04-3)
+ifEqual,myDate,,goto,abort
+InputBox,myRoot,Enter Root,Please enter the root folder for the branch of Pathway to post (ex. C:\\svn\\branches\\Pathway071)
+ifEqual,myRoot,,goto,abort
+
+;goto,start
+
+WinWaitActive, Downloads
+LeftClick,49,276
+Sleep,500
+Send,Pathway %myVersion% BTE for Fieldworks 7.0.1 & Paratext 7.1{TAB}{TAB}
+Send,{SPACE}
+Sleep,500
+Send,%myRoot%\\Build\\Installer\\SetupPw7BTE-%myVersion%-%myDate%.msi{ENTER}
+Send,{TAB}Release-Sprint
+Send,{TAB}Purpose-Recommended
+Send,{TAB}OpSys-Windows
+Send,{TAB}Type-Installer
+Send,{TAB}Featured
+LeftClick,61,698
+
+WinWaitActive, Downloads
+LeftClick,49,276
+Sleep,500
+Send,Pathway %myVersion% SE for Fieldworks 7.0.1{TAB}{TAB}
+Send,{SPACE}
+Sleep,500
+Send,%myRoot%\\Build\\Installer\\SetupPw7SE-%myVersion%-%myDate%.msi{ENTER}
+Send,{TAB}Release-Sprint
+Send,{TAB}Purpose-Recommended
+Send,{TAB}OpSys-Windows
+Send,{TAB}Type-Installer
+LeftClick,61,698
+
+;start:
+WinWaitActive, Downloads
+LeftClick,49,276
+Sleep,500
+Send,Pathway %myVersion% BTE (Testing) for Fieldworks 7.0.1 & Paratext 7.1{TAB}{TAB}
+Send,{SPACE}
+Sleep,500
+Send,%myRoot%\\Build\\Installer\\SetupPw7BTETest-%myVersion%-%myDate%.msi{ENTER}
+Send,{TAB}Release-Sprint
+Send,{TAB}Purpose-Experimental
+Send,{TAB}OpSys-Windows
+Send,{TAB}Type-Installer
+LeftClick,61,698
+
+WinWaitActive, Downloads
+LeftClick,49,276
+Sleep,500
+Send,ConTexT (for testing){TAB}{TAB}
+Send,{SPACE}
+Sleep,500
+Send,%myRoot%\\Build\\Installer\\SetupCtx-2.0-%myDate%.msi{ENTER}
+Send,{TAB}Release-Sprint
+Send,{TAB}Purpose-Experimental
+Send,{TAB}OpSys-Windows
+Send,{TAB}Type-Installer
+LeftClick,61,698
+
+WinWaitActive, Downloads
+LeftClick,49,276
+Sleep,500
+Send,Pathway %myVersion% BTE for Fieldworks 6.0.6{TAB}{TAB}
+Send,{SPACE}
+Sleep,500
+Send,%myRoot%\\Build\\Installer\\SetupPwBTE-%myVersion%-%myDate%-Fw6.0.6.msi{ENTER}
+Send,{TAB}Release-Sprint
+Send,{TAB}Purpose-Recommended
+Send,{TAB}OpSys-Windows
+Send,{TAB}Type-Installer
+LeftClick,61,698
+
+WinWaitActive, Downloads
+LeftClick,49,276
+Sleep,500
+Send,Pathway %myVersion% SE for Fieldworks 6.0.6{TAB}{TAB}
+Send,{SPACE}
+Sleep,500
+Send,%myRoot%\\Build\\Installer\\SetupPwSE-%myVersion%-%myDate%-Fw6.0.6.msi{ENTER}
+Send,{TAB}Release-Sprint
+Send,{TAB}Purpose-Recommended
+Send,{TAB}OpSys-Windows
+Send,{TAB}Type-Installer
+LeftClick,61,698
+
+WinWaitActive, Downloads
+LeftClick,49,276
+Sleep,500
+Send,PublishingSolution %myVersion% for Fieldworks 6.0.6{TAB}{TAB}
+Send,{SPACE}
+Sleep,500
+Send,%myRoot%\\Build\\Installer\\SetupPs-%myVersion%-%myDate%-Fw6.0.6.msi{ENTER}
+Send,{TAB}Release-Sprint
+Send,{TAB}Purpose-Experimental
+Send,{TAB}OpSys-Windows
+Send,{TAB}Type-Installer
+LeftClick,61,698
+
+WinWaitActive, Downloads
+LeftClick,49,276
+Sleep,500
+Send,Pathway %myVersion% BTE for Fieldworks 6.0.5{TAB}{TAB}
+Send,{SPACE}
+Sleep,500
+Send,%myRoot%\\Build\\Installer\\SetupPwBTE-%myVersion%-%myDate%-Fw6.0.5.msi{ENTER}
+Send,{TAB}Release-Sprint
+Send,{TAB}Purpose-Recommended
+Send,{TAB}OpSys-Windows
+Send,{TAB}Type-Installer
+LeftClick,61,698
+
+WinWaitActive, Downloads
+LeftClick,49,276
+Sleep,500
+Send,Pathway %myVersion% SE for Fieldworks 6.0.5{TAB}{TAB}
+Send,{SPACE}
+Sleep,500
+Send,%myRoot%\\Build\\Installer\\SetupPwSE-%myVersion%-%myDate%-Fw6.0.5.msi{ENTER}
+Send,{TAB}Release-Sprint
+Send,{TAB}Purpose-Recommended
+Send,{TAB}OpSys-Windows
+Send,{TAB}Type-Installer
+LeftClick,61,698
+
+WinWaitActive, Downloads
+LeftClick,49,276
+Sleep,500
+Send,Pathway %myVersion% BTE for Fieldworks 6.0.4{TAB}{TAB}
+Send,{SPACE}
+Sleep,500
+Send,%myRoot%\\Build\\Installer\\SetupPwBTE-%myVersion%-%myDate%-Fw6.0.4.msi{ENTER}
+Send,{TAB}Release-Sprint
+Send,{TAB}Purpose-Recommended
+Send,{TAB}OpSys-Windows
+Send,{TAB}Type-Installer
+LeftClick,61,698
+
+WinWaitActive, Downloads
+LeftClick,49,276
+Sleep,500
+Send,Pathway %myVersion% SE for Fieldworks 6.0.4{TAB}{TAB}
+Send,{SPACE}
+Sleep,500
+Send,%myRoot%\\Build\\Installer\\SetupPwSE-%myVersion%-%myDate%-Fw6.0.4.msi{ENTER}
+Send,{TAB}Release-Sprint
+Send,{TAB}Purpose-Recommended
+Send,{TAB}OpSys-Windows
+Send,{TAB}Type-Installer
+LeftClick,61,698
+
+WinWaitActive, Downloads
+LeftClick,49,276
+Sleep,500
+Send,Pathway %myVersion% BTE (Testing) for Fieldworks 6.0.4{TAB}{TAB}
+Send,{SPACE}
+Sleep,500
+Send,%myRoot%\\Build\\Installer\\SetupPwBTETest-%myVersion%-%myDate%-Fw6.0.4.msi{ENTER}
+Send,{TAB}Release-Sprint
+Send,{TAB}Purpose-Experimental
+Send,{TAB}OpSys-Windows
+Send,{TAB}Type-Installer
+LeftClick,61,698
+
+abort:
+Exit

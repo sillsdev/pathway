@@ -1,0 +1,37 @@
+;-----------------------------------------------------------------------------
+; Name:        googleDeprecate.py
+; Purpose:     The drives the Firefox GoogleCode website Downloads Page
+;              to remove old versions
+;
+; Author:      <greg_trihus@sil.org>
+;
+; Created:     2011/04/13
+; RCS-ID:      $Id: googleDeprecate.aut $
+; Copyright:   (c) 2011 Greg Trihus
+; Licence:     <MIT>
+;-----------------------------------------------------------------------------
+InputBox,version,Enter Version,Please enter version to delete
+ifEqual,version,,goto,abort
+WinWaitActive, Downloads
+LeftClick,467,276
+Send,%version%{TAB}{ENTER}
+InputBox,repeat,Repeat?,How many times would you like to repeat the deprecate?
+IfEqual,repeat,,goto,abort
+
+doNextOne:
+IfLessOrEqual,repeat,0,goto,abort
+
+WinWaitActive, Downloads
+LeftClick,467,276
+Send,+{HOME}%version%{TAB}{ENTER}
+Sleep,500
+LeftClick,603,360
+Sleep,500
+LeftClick,370,733
+Send,+{HOME}d{ENTER}
+LeftClick,73,772
+EnvSub,repeat,1
+goto,doNextOne
+
+abort:
+Exit
