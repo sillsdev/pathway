@@ -380,7 +380,7 @@
       <defaultValue></defaultValue>
     </meta>
     <meta name="Subject" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>Bible</defaultValue>
     </meta>
     <meta name="Date" outputTypes="all">
       <defaultValue></defaultValue>
