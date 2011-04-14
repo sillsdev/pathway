@@ -205,7 +205,9 @@ namespace Test.YouVersion
             const string xslt = "TE_XHTML-to-YouVersion_OneChapter_HTML.xslt";
             const string type = "Html";
             const string ext = ".html";
-            Convert(processFolder, outFolder, xslt, type, ext);
+            const bool eraseOutputFolder = true;
+            const bool includeBom = false;
+            Convert(processFolder, outFolder, xslt, type, ext, eraseOutputFolder, includeBom);
             string actualOutFolder = Path.Combine(outFolder, type);
             DirectoryInfo directoryInfo = new DirectoryInfo(actualOutFolder);
             Assert.AreEqual(6, directoryInfo.GetFiles().Length);
