@@ -369,7 +369,7 @@ namespace Test.InDesignConvert
             _input.Add("text-align", "justify");
             _output = _makeAttribute.IDProperty(_input);
             _expected.Clear();
-            _expected.Add("Justification", "FullyJustified");
+            _expected.Add("Justification", "LeftJustified");
             Assert.IsTrue(CompareDictionary(), "Justify Align test Failed");
         }
 

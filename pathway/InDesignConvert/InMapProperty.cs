@@ -612,7 +612,7 @@ namespace SIL.PublishingSolution
 
             if (propertyValue == "justify")
             {
-                propertyValue = "FullyJustified";
+                propertyValue = "LeftJustified";
             }
             else if (propertyValue == "center")
             {

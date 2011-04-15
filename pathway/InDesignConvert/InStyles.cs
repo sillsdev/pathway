@@ -111,8 +111,8 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("NextStyle", "ParagraphStyle/" + cssClass.Key);
                 _writer.WriteAttributeString("KeyboardShortcut", "0 0");
                 _IDProperty = mapProperty.IDProperty(cssClass.Value);
-                DeleteRelativeInFootnote(cssClass);
                 SuperscriptSubscriptIncreaseFontSize(false);
+                DeleteRelativeInFootnote(cssClass);
                 PositionProperty();
 
                 _IDClass = new Dictionary<string, string>(); // note: ToDo seperate the process
@@ -193,8 +193,9 @@ namespace SIL.PublishingSolution
                     _writer.WriteAttributeString("NextStyle", "CharacterStyle/" + cssClass.Key);
                     _writer.WriteAttributeString("KeyboardShortcut", "0 0");
                     _IDProperty = mapProperty.IDProperty(cssClass.Value);
-                    DeleteRelativeInFootnote(cssClass);
                     SuperscriptSubscriptIncreaseFontSize(true);
+                    DeleteRelativeInFootnote(cssClass);
+                    
                     _IDClass = new Dictionary<string, string>(); // note: ToDo seperate the process
                     _IDAllClass[cssClass.Key] = _IDClass;
 

@@ -244,7 +244,7 @@ namespace Test.InDesignConvert
         public void TextAlign2()
         {
             _input = Common.DirectoryPathReplace(_testFolderPath + "/input/TextAlign2.css");
-            _expected.Add("Justification", "FullyJustified");
+            _expected.Add("Justification", "LeftJustified");
             _className = "a";
             XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
             NodeTest(true);
