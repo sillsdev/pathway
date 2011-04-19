@@ -469,26 +469,6 @@ namespace SIL.PublishingSolution
             get { return label1; }
         }
 
-        public TextBox TxtCopyright
-        {
-            get { return txtCopyright; }
-        }
-
-        public TextBox TxtInformation
-        {
-            get { return txtInformation; }
-        }
-
-        public Label Label3
-        {
-            get { return label3; }
-        }
-
-        public Label Label6
-        {
-            get { return label6; }
-        }
-
         public ComboBox DdlRedLetter
         {
             get { return ddlRedLetter; }
@@ -518,12 +498,6 @@ namespace SIL.PublishingSolution
         {
             get { return mobileIcon; }
         }
-
-        //**EDB MOVE THIS**
-        //public PictureBox CoverImage
-        //{
-        //    get { return imgCoverImage; }
-        //}
 
         public ComboBox DdlFileProduceDict
         {
@@ -585,97 +559,6 @@ namespace SIL.PublishingSolution
         {
             get { return ddlNonSILFont; }
         }
-
-        //**EDB MOVE THIS**
-        //public TextBox TxtDescription
-        //{
-        //    get { return txtDescription; }
-        //}
-
-        //public Label LblDescription
-        //{
-        //    get { return lblDescription; }
-        //}
-
-        //public Label LblPublisher
-        //{
-        //    get { return lblPublisher; }
-        //}
-
-        //public TextBox TxtSource
-        //{
-        //    get { return txtSource; }
-        //}
-
-        //public Label LblSource
-        //{
-        //    get { return lblSource; }
-        //}
-
-        //public TextBox TxtPublisher
-        //{
-        //    get { return txtPublisher; }
-        //}
-
-        //public TextBox TxtCoverage
-        //{
-        //    get { return txtCoverage; }
-        //}
-
-        //public Label LblCoverage
-        //{
-        //    get { return lblCoverage; }
-        //}
-
-        //public TextBox TxtRelation
-        //{
-        //    get { return txtRelation; }
-        //}
-
-        //public Label LblRelation
-        //{
-        //    get { return lblRelation; }
-        //}
-
-        //public TextBox TxtFormat
-        //{
-        //    get { return txtFormat; }
-        //}
-
-        //public Label LblFormat
-        //{
-        //    get { return lblFormat; }
-        //}
-
-        //public TextBox TxtBookTitle
-        //{
-        //    get { return txtBookTitle; }
-        //}
-
-        //public Label LblBookTitle
-        //{
-        //    get { return lblBookTitle; }
-        //}
-
-        //public TextBox TxtCreator
-        //{
-        //    get { return txtCreator; }
-        //}
-
-        //public Label LblCreator
-        //{
-        //    get { return lblCreator; }
-        //}
-
-        //public TextBox TxtRights
-        //{
-        //    get { return txtRights; }
-        //}
-
-        //public Label LblRights
-        //{
-        //    get { return lblRights; }
-        //}
 
         public TextBox TxtMaxImageWidth
         {
@@ -886,18 +769,6 @@ namespace SIL.PublishingSolution
         private void tsPreview_Click(object sender, EventArgs e)
         {
             _CToolBL.tsPreview_ClickBL();
-        }
-
-        private void txtInformation_Validated(object sender, EventArgs e)
-        {
-            _CToolBL.txtInformation_ValidatedBL(sender);
-            EditMobileCSS(sender, e);
-        }
-
-        private void txtCopyright_Validated(object sender, EventArgs e)
-        {
-            _CToolBL.txtCopyright_ValidatedBL(sender);
-            EditMobileCSS(sender, e);
         }
 
         private void ddlRedLetter_SelectedIndexChanged(object sender, EventArgs e)

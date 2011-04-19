@@ -846,15 +846,6 @@ namespace SIL.PublishingSolution
                        {
                            cTool.DdlRedLetter.SelectedItem = attribValue;
                        }
-                       else if (attribName.ToLower() == "information")
-                       {
-                           cTool.TxtInformation.Text = attribValue;
-                       }
-                       else if (attribName.ToLower() == "copyright")
-                       {
-                           cTool.TxtCopyright.Text = attribValue;
-                       }
-
                    }  
                     SetMobileSummary(null, null);
                 }
@@ -1314,14 +1305,6 @@ namespace SIL.PublishingSolution
                         else if (attribName.ToLower() == "redletter")
                         {
                             cTool.DdlRedLetter.SelectedItem = attribValue;
-                        }
-                        else if (attribName.ToLower() == "information")
-                        {
-                            cTool.TxtInformation.Text = attribValue;
-                        }
-                        else if (attribName.ToLower() == "copyright")
-                        {
-                            cTool.TxtCopyright.Text = attribValue;
                         }
                     }
                     SetMobileSummary(null, null);
@@ -2652,38 +2635,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        //**EDB MOVE THIS**
-        //public void btnCoverImage_ClickBL()
-        //{
-        //    OpenFileDialog openFile = new OpenFileDialog();
-        //    openFile.Filter = "Image Files (*.png, *.jpg)|*.png;*.jpg";
-        //    openFile.ShowDialog();
-
-        //    string filename = openFile.FileName;
-        //    if (filename != "")
-        //    {
-        //        try
-        //        {
-        //            Image iconImage = Image.FromFile(filename);
-        //            double height = iconImage.Height;
-        //            double width = iconImage.Width;
-        //            if (height > 1000 || width > 1000)
-        //            {
-        //                MessageBox.Show("The selected image is too large. Please select an image with less that 1000 pixels in height and length.",
-        //                    _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //                return;
-        //            }
-        //            string userPath = (Param.Value["UserSheetPath"]);
-        //            string imgFileName = Path.GetFileName(filename);
-        //            string toPath = Path.Combine(userPath, imgFileName);
-        //            File.Copy(filename, toPath, true);
-        //            Param.UpdateOthersAtrrib("CoverImage", toPath, StyleName);
-        //            cTool.CoverImage.Image = iconImage;
-        //        }
-        //        catch { }
-        //    }
-        //}
-
         public void ddlRedLetter_SelectedIndexChangedBL(object sender, EventArgs e)
         {
             try
@@ -2793,17 +2744,6 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
-        //**EDB MOVE THIS**
-        //public void chkColophon_CheckedChangedBL(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        Param.UpdateOthersAtrrib("AddColophonPage", cTool.ChkColophon.Checked ? "Yes" : "No", StyleName);
-        //        SetOthersSummary(sender, e);
-        //    }
-        //    catch { }
-        //}
-
         public void chkIncludeFontVariants_CheckedChangedBL(object sender, EventArgs e)
         {
             try
@@ -2827,128 +2767,6 @@ namespace SIL.PublishingSolution
                 SetOthersSummary(sender, e);
             }
             catch { }
-        }
-
-        //**EDB MOVE THIS**
-        //public void txtDescription_ValidatedBL(object sender)
-        //{
-        //    try
-        //    {
-        //        Param.UpdateOthersAtrrib("Information", cTool.TxtDescription.Text, StyleName);
-        //    }
-        //    catch
-        //    {
-        //    }
-        //}
-
-        //public void txtPublisher_ValidatedBL(object sender)
-        //{
-        //    try
-        //    {
-        //        Param.UpdateOthersAtrrib("Publisher", cTool.TxtPublisher.Text, StyleName);
-        //    }
-        //    catch
-        //    {
-        //    }
-        //}
-
-        //public void txtSource_ValidatedBL(object sender)
-        //{
-        //    try
-        //    {
-        //        Param.UpdateOthersAtrrib("Source", cTool.TxtSource.Text, StyleName);
-        //    }
-        //    catch
-        //    {
-        //    }
-        //}
-
-        //public void txtFormat_ValidatedBL(object sender)
-        //{
-        //    try
-        //    {
-        //        Param.UpdateOthersAtrrib("Format", cTool.TxtFormat.Text, StyleName);
-        //    }
-        //    catch
-        //    {
-        //    }
-        //}
-
-        //public void txtRelation_ValidatedBL(object sender)
-        //{
-        //    try
-        //    {
-        //        Param.UpdateOthersAtrrib("Relation", cTool.TxtRelation.Text, StyleName);
-        //    }
-        //    catch
-        //    {
-        //    }
-        //}
-
-        //public void txtCoverage_ValidatedBL(object sender)
-        //{
-        //    try
-        //    {
-        //        Param.UpdateOthersAtrrib("Coverage", cTool.TxtCoverage.Text, StyleName);
-        //    }
-        //    catch
-        //    {
-        //    }
-        //}
-
-        //public void txtBookTitle_ValidatedBL(object sender)
-        //{
-        //    try
-        //    {
-        //        Param.UpdateOthersAtrrib("Title", cTool.TxtBookTitle.Text, StyleName);
-        //    }
-        //    catch
-        //    {
-        //    }
-        //}
-
-        //public void txtCreator_ValidatedBL(object sender)
-        //{
-        //    try
-        //    {
-        //        Param.UpdateOthersAtrrib("Creator", cTool.TxtCreator.Text, StyleName);
-        //    }
-        //    catch
-        //    {
-        //    }
-        //}
-
-        //public void txtRights_ValidatedBL(object sender)
-        //{
-        //    try
-        //    {
-        //        Param.UpdateOthersAtrrib("Copyright", cTool.TxtRights.Text, StyleName);
-        //    }
-        //    catch
-        //    {
-        //    }
-        //}
-
-        public void txtCopyright_ValidatedBL(object sender)
-        {
-            try
-            {
-                Param.UpdateMobileAtrrib("Copyright", cTool.TxtCopyright.Text, StyleName);
-            }
-            catch
-            {
-            }
-        }
-
-        public void txtInformation_ValidatedBL(object sender)
-        {
-            try
-            {
-                Param.UpdateMobileAtrrib("Information", cTool.TxtInformation.Text, StyleName);
-            }
-            catch
-            {
-            }
         }
 
         public void tsPreview_ClickBL()

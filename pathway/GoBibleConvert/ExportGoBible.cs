@@ -286,10 +286,15 @@ namespace SIL.PublishingSolution
             Dictionary<string, string> mobilefeature = Param.GetItemsAsDictionary("//stylePick/styles/mobile/style[@name='" + layout + "']/styleProperty");
             if (mobilefeature.ContainsKey("RedLetter") && mobilefeature["RedLetter"] == "Yes")
                 red = "true";
-            if (mobilefeature.ContainsKey("Information"))
-                info = mobilefeature["Information"].Trim();
-            if (mobilefeature.ContainsKey("Copyright"))
-                info += " " + mobilefeature["Copyright"].Trim();
+            // TD-2344: metadata block for dc metadata items
+            var organization = Param.Value["Organization"];
+            info = Param.GetMetadataValue(Param.Description, organization) ?? ""; // empty string if null / not found
+            info += " ";
+            info += Param.GetMetadataValue(Param.CopyrightHolder, organization) ?? ""; // empty string if null / not found
+            //if (mobilefeature.ContainsKey("Information"))
+            //    info = mobilefeature["Information"].Trim();
+            //if (mobilefeature.ContainsKey("Copyright"))
+            //    info += " " + mobilefeature["Copyright"].Trim();
             if (mobilefeature.ContainsKey("Icon"))
                 if (File.Exists(mobilefeature["Icon"]))
                     iconFullName = mobilefeature["Icon"];

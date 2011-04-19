@@ -94,10 +94,6 @@
             this.lblGoBibleDescription = new System.Windows.Forms.Label();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtCopyright = new System.Windows.Forms.TextBox();
-            this.txtInformation = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.ddlRedLetter = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.ddlFiles = new System.Windows.Forms.ComboBox();
@@ -211,7 +207,7 @@
             this.stylesGrid.ReadOnly = true;
             this.stylesGrid.RowHeadersVisible = false;
             this.stylesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.stylesGrid.Size = new System.Drawing.Size(540, 505);
+            this.stylesGrid.Size = new System.Drawing.Size(540, 478);
             this.stylesGrid.TabIndex = 5;
             this.stylesGrid.TabStop = false;
             this.stylesGrid.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.stylesGrid_RowEnter);
@@ -367,7 +363,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(292, 455);
+            this.tabControl1.Size = new System.Drawing.Size(292, 428);
             this.tabControl1.TabIndex = 6;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -388,7 +384,7 @@
             this.tabInfo.Location = new System.Drawing.Point(4, 22);
             this.tabInfo.Name = "tabInfo";
             this.tabInfo.Padding = new System.Windows.Forms.Padding(3);
-            this.tabInfo.Size = new System.Drawing.Size(284, 429);
+            this.tabInfo.Size = new System.Drawing.Size(284, 402);
             this.tabInfo.TabIndex = 0;
             this.tabInfo.Text = "Info";
             this.tabInfo.UseVisualStyleBackColor = true;
@@ -551,7 +547,7 @@
             this.tabDisplay.Location = new System.Drawing.Point(4, 22);
             this.tabDisplay.Name = "tabDisplay";
             this.tabDisplay.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDisplay.Size = new System.Drawing.Size(284, 429);
+            this.tabDisplay.Size = new System.Drawing.Size(284, 402);
             this.tabDisplay.TabIndex = 1;
             this.tabDisplay.Text = "Properties";
             this.tabDisplay.UseVisualStyleBackColor = true;
@@ -943,10 +939,6 @@
             this.tabMobile.Controls.Add(this.lblGoBibleDescription);
             this.tabMobile.Controls.Add(this.btnBrowse);
             this.tabMobile.Controls.Add(this.label1);
-            this.tabMobile.Controls.Add(this.txtCopyright);
-            this.tabMobile.Controls.Add(this.txtInformation);
-            this.tabMobile.Controls.Add(this.label3);
-            this.tabMobile.Controls.Add(this.label6);
             this.tabMobile.Controls.Add(this.ddlRedLetter);
             this.tabMobile.Controls.Add(this.label7);
             this.tabMobile.Controls.Add(this.ddlFiles);
@@ -956,7 +948,7 @@
             this.tabMobile.Location = new System.Drawing.Point(4, 22);
             this.tabMobile.Name = "tabMobile";
             this.tabMobile.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMobile.Size = new System.Drawing.Size(284, 429);
+            this.tabMobile.Size = new System.Drawing.Size(284, 402);
             this.tabMobile.TabIndex = 2;
             this.tabMobile.Text = "Properties";
             this.tabMobile.UseVisualStyleBackColor = true;
@@ -982,7 +974,7 @@
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(138, 246);
+            this.btnBrowse.Location = new System.Drawing.Point(138, 133);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(68, 23);
             this.btnBrowse.TabIndex = 10;
@@ -993,50 +985,12 @@
             // label1
             // 
             this.label1.AccessibleName = "lblPageColumn";
-            this.label1.Location = new System.Drawing.Point(19, 251);
+            this.label1.Location = new System.Drawing.Point(19, 138);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(87, 13);
             this.label1.TabIndex = 9;
             this.label1.Text = "Icon for Phone";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtCopyright
-            // 
-            this.txtCopyright.Location = new System.Drawing.Point(112, 220);
-            this.txtCopyright.Name = "txtCopyright";
-            this.txtCopyright.Size = new System.Drawing.Size(156, 20);
-            this.txtCopyright.TabIndex = 8;
-            this.txtCopyright.Validated += new System.EventHandler(this.txtCopyright_Validated);
-            // 
-            // txtInformation
-            // 
-            this.txtInformation.Location = new System.Drawing.Point(112, 133);
-            this.txtInformation.Multiline = true;
-            this.txtInformation.Name = "txtInformation";
-            this.txtInformation.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtInformation.Size = new System.Drawing.Size(156, 78);
-            this.txtInformation.TabIndex = 6;
-            this.txtInformation.Validated += new System.EventHandler(this.txtInformation_Validated);
-            // 
-            // label3
-            // 
-            this.label3.AccessibleName = "lblPageColumn";
-            this.label3.Location = new System.Drawing.Point(19, 223);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(87, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Copyright Holder";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label6
-            // 
-            this.label6.AccessibleName = "lblPageColumn";
-            this.label6.Location = new System.Drawing.Point(19, 136);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(87, 13);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Information";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // ddlRedLetter
             // 
@@ -1093,7 +1047,7 @@
             // mobileIcon
             // 
             this.mobileIcon.Image = ((System.Drawing.Image)(resources.GetObject("mobileIcon.Image")));
-            this.mobileIcon.Location = new System.Drawing.Point(112, 248);
+            this.mobileIcon.Location = new System.Drawing.Point(112, 135);
             this.mobileIcon.Name = "mobileIcon";
             this.mobileIcon.Size = new System.Drawing.Size(20, 20);
             this.mobileIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1134,7 +1088,7 @@
             this.tabOthers.Controls.Add(this.pictureBox1);
             this.tabOthers.Location = new System.Drawing.Point(4, 22);
             this.tabOthers.Name = "tabOthers";
-            this.tabOthers.Size = new System.Drawing.Size(284, 429);
+            this.tabOthers.Size = new System.Drawing.Size(284, 402);
             this.tabOthers.TabIndex = 3;
             this.tabOthers.Text = "Properties";
             this.tabOthers.UseVisualStyleBackColor = true;
@@ -1652,13 +1606,13 @@
             this.TLPanelOuter.Controls.Add(this.TLPanel3, 2, 1);
             this.TLPanelOuter.Controls.Add(this.lblType, 0, 0);
             this.TLPanelOuter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TLPanelOuter.Location = new System.Drawing.Point(0, 25);
+            this.TLPanelOuter.Location = new System.Drawing.Point(0, 52);
             this.TLPanelOuter.Margin = new System.Windows.Forms.Padding(1);
             this.TLPanelOuter.Name = "TLPanelOuter";
             this.TLPanelOuter.RowCount = 2;
             this.TLPanelOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             this.TLPanelOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TLPanelOuter.Size = new System.Drawing.Size(954, 537);
+            this.TLPanelOuter.Size = new System.Drawing.Size(954, 510);
             this.TLPanelOuter.TabIndex = 19;
             // 
             // TLPanel1
@@ -1804,7 +1758,7 @@
             this.TLPanel2.RowCount = 1;
             this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 505F));
-            this.TLPanel2.Size = new System.Drawing.Size(543, 505);
+            this.TLPanel2.Size = new System.Drawing.Size(543, 478);
             this.TLPanel2.TabIndex = 1;
             // 
             // TLPanel3
@@ -1820,7 +1774,7 @@
             this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
             this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 175F));
             this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TLPanel3.Size = new System.Drawing.Size(303, 505);
+            this.TLPanel3.Size = new System.Drawing.Size(303, 478);
             this.TLPanel3.TabIndex = 2;
             // 
             // panel3
@@ -1830,7 +1784,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 44);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(297, 458);
+            this.panel3.Size = new System.Drawing.Size(297, 431);
             this.panel3.TabIndex = 20;
             // 
             // lblType
@@ -2092,10 +2046,6 @@
         private System.Windows.Forms.TabPage tabMobile;
         private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtCopyright;
-        private System.Windows.Forms.TextBox txtInformation;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox ddlRedLetter;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox ddlFiles;
