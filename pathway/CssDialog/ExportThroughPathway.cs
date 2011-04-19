@@ -122,27 +122,27 @@ namespace SIL.PublishingSolution
         // Publication Info (dublin core metadata) tab
         public string Title // dc:title
         {
-            get { return txtBookTitle.Text; }
+            get { return txtBookTitle.Text.Trim(); }
             set { txtBookTitle.Text = value; }
         }
         public string Description // dc:description
         {
-            get { return txtDescription.Text; }
+            get { return txtDescription.Text.Trim(); }
             set { txtDescription.Text = value; }
         }
         public string Creator // dc:creator
         {
-            get { return txtCreator.Text; }
+            get { return txtCreator.Text.Trim(); }
             set { txtCreator.Text = value; }
         }
         public string Publisher // dc:publisher
         {
-            get { return txtPublisher.Text; }
+            get { return txtPublisher.Text.Trim(); }
             set { txtPublisher.Text = value; }
         }
         public string CopyrightHolder // dc:rights
         {
-            get { return txtRights.Text; }
+            get { return txtRights.Text.Trim(); }
             set { txtRights.Text = value; }
         } 
         // DC properties that are not in the UI
@@ -181,7 +181,7 @@ namespace SIL.PublishingSolution
         }
         public string CopyrightPagePath
         {
-            get { return txtColophonFile.Text; }
+            get { return txtColophonFile.Text.Trim(); }
             set { txtColophonFile.Text = value; }
         }
 
@@ -191,8 +191,15 @@ namespace SIL.PublishingSolution
             get { return chkRunningHeader.Checked; }
             set { chkRunningHeader.Checked = value; }
         }
-        public bool ReduceNumberOfStyles { get; set; }
-        public string OutputFolder { get; set; }
+        public bool ReduceNumberOfStyles
+        {
+            get { return chkOOReduceStyleNames.Checked; }
+            set { chkOOReduceStyleNames.Checked = value; }
+        }
+        public string OutputFolder { 
+            get { return txtSaveInFolder.Text; }
+            set { txtSaveInFolder.Text = value; }
+        }
         #endregion Properties
 
         private void ExportThroughPathway_Load(object sender, EventArgs e)
@@ -259,8 +266,8 @@ namespace SIL.PublishingSolution
 
             // Move the bottom UI elements where they need to go
             chkIP.Top = tabControl1.Top + ((IsExpanded) ? (tabControl1.Height + 10) : 0);
-            lnkIP.Top = chkIP.Top + chkIP.Height + 10;
-            btnOK.Top = lnkIP.Top + lnkIP.Height + 10;
+            lnkIP.Top = chkIP.Top + chkIP.Height + 3;
+            btnOK.Top = lnkIP.Top + lnkIP.Height + 15;
             btnCancel.Top = btnOK.Top;
             btnHelp.Top = btnOK.Top;
 

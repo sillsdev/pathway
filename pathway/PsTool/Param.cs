@@ -1215,7 +1215,7 @@ namespace SIL.PublishingSolution
                     // test for null node is in the return value below
                 }
             }
-            return (node == null) ? null : (node.InnerText);
+            return (node == null) ? null : (node.InnerText.Trim());
         }
 
         /// <summary>
@@ -1226,19 +1226,20 @@ namespace SIL.PublishingSolution
         public static void UpdateMetadataValue(string Name, string Value)
         {
             XmlNode node = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/currentValue");
+            var newValue = (Value.Trim().Length > 0) ? Value.Trim() : " ";
             if (node == null)
             {
                 // currentValue node doesn't exist yet - create it now
                 XmlNode baseNode = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']");
                 var childNode = xmlMap.CreateNode(XmlNodeType.Element, "currentValue", "");
-                childNode.InnerText = Value;
+                childNode.InnerText = newValue;
                 baseNode.AppendChild(childNode);
                 Write();
             }
             else
             {
                 // mode is there - just set the value
-                node.InnerText = Value;
+                node.InnerText = newValue;
                 Write();
             }
         }

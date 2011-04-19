@@ -1592,89 +1592,25 @@ namespace SIL.PublishingSolution
         {
             // Load User Interface Collection Parameters
             Param.LoadSettings();
+            var organization = Param.Value["Organization"];
             string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
             Dictionary<string, string> othersfeature = Param.GetItemsAsDictionary("//stylePick/styles/others/style[@name='" + layout + "']/styleProperty");
             // Title (book title in Configuration Tool UI / dc:title in metadata)
-            if (othersfeature.ContainsKey("Title"))
-            {
-                Title = othersfeature["Title"].Trim();
-            }
-            else
-            {
-                Title = "";
-            }
-            // Creator (dc:creator)
-            if (othersfeature.ContainsKey("Creator"))
-            {
-                Creator = othersfeature["Creator"].Trim();
-            }
-            else
-            {
-                Creator = "";
-            }
+            Title = Param.GetMetadataValue(Param.Title, organization) ?? ""; // empty string if null / not found
+            // Creator (dc:creator))
+            Creator = Param.GetMetadataValue(Param.Creator, organization) ?? ""; // empty string if null / not found
             // information
-            if (othersfeature.ContainsKey("Information"))
-            {
-                Description = othersfeature["Information"].Trim();
-            }
-            else
-            {
-                Description = "";
-            }
-            // copyright
-            if (othersfeature.ContainsKey("Copyright"))
-            {
-                Rights = othersfeature["Copyright"].Trim();
-            }
-            else
-            {
-                Rights = "";
-            }
+            Description = Param.GetMetadataValue(Param.Description, organization) ?? ""; // empty string if null / not found
             // Source
-            if (othersfeature.ContainsKey("Source"))
-            {
-                Source = othersfeature["Source"].Trim();
-            }
-            else
-            {
-                Source = "";
-            }
+            Source = Param.GetMetadataValue(Param.Source, organization) ?? ""; // empty string if null / not found
             // Format
-            if (othersfeature.ContainsKey("Format"))
-            {
-                Format = othersfeature["Format"].Trim();
-            }
-            else
-            {
-                Format = "";
-            }
+            Format = Param.GetMetadataValue(Param.Format, organization) ?? ""; // empty string if null / not found
             // Publisher
-            if (othersfeature.ContainsKey("Publisher"))
-            {
-                Publisher = othersfeature["Publisher"].Trim();
-            }
-            else
-            {
-                Publisher = "";
-            }
+            Publisher = Param.GetMetadataValue(Param.Publisher, organization) ?? ""; // empty string if null / not found
             // Coverage
-            if (othersfeature.ContainsKey("Coverage"))
-            {
-                Coverage = othersfeature["Coverage"].Trim();
-            }
-            else
-            {
-                Coverage = "";
-            }
-            // Rights
-            if (othersfeature.ContainsKey("Rights"))
-            {
-                Rights = othersfeature["Rights"].Trim();
-            }
-            else
-            {
-                Rights = "";
-            }
+            Coverage = Param.GetMetadataValue(Param.Coverage, organization) ?? ""; // empty string if null / not found
+            // Rights (dc:rights)
+            Rights = Param.GetMetadataValue(Param.CopyrightHolder, organization) ?? ""; // empty string if null / not found
             // embed fonts
             if (othersfeature.ContainsKey("EmbedFonts"))
             {
