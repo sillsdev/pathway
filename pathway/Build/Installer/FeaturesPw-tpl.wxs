@@ -9,7 +9,7 @@
 			<ComponentRef Id="LicenseShortcutApp"/>
 			%(ConfigurationToolFeatures)s
 		</Feature>
-		<Feature Id="PwPlugIn" Title="Fieldworks Pathway Utility" Description="Adds Pathway Print Via... dialog to utility menu in Language Explorer and the Export menu in the Translation Editor" Display="expand" Level="3" AllowAdvertise="no">
+		<Feature Id="PwPlugIn" Title="Fieldworks Pathway Utility" Description="Adds the Export Through Pathway dialog to the Export menu in Language Explorer and Translation Editor" Display="expand" Level="3" AllowAdvertise="no">
 			%(PsDllFeatures)s
 			%(SupportFeatures)s
 			%(PwCtxFeatures)s
