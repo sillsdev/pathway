@@ -232,5 +232,38 @@ namespace TestBed
             var i = line.IndexOf(':');
             return line.Substring(0, i);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if(treeView1.Nodes.Count > 0)
+            {
+                foreach (TreeNode treeNode in treeView1.Nodes)
+                {
+                    TreeNode tn = FindNode(treeNode);
+                    if(tn != null)
+                        tn.ExpandAll();
+                    break;
+                }
+            }
+        }
+
+        private TreeNode FindNode(TreeNode treeNode)
+        {
+            TreeNode currentNode = null;
+            foreach (TreeNode treeNodeChild in treeNode.Nodes)
+            {
+                if (treeNodeChild.Text == "CLASS")
+                {
+                    if (treeNodeChild.FirstNode.Text == txtSearch.Text)
+                    {
+                        currentNode = treeNodeChild;
+                        return currentNode;
+                        //break;
+                    }
+                }
+                FindNode(treeNodeChild);
+            }
+            return currentNode;
+        }
     }
 }

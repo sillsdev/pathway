@@ -75,13 +75,13 @@ namespace SIL.PublishingSolution
         {
             if (font.Count == 0) return;
 
-            var doc = new XmlDocument();
-            doc.Load(styleFilePath);
-            var nsmgr = new XmlNamespaceManager(doc.NameTable);
+            _styleXMLdoc = new XmlDocument();
+            _styleXMLdoc.Load(styleFilePath);
+            var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
             nsmgr.AddNamespace("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
             //office:font-face-decls
             // if new stylename exists
-            XmlElement root = doc.DocumentElement;
+            XmlElement root = _styleXMLdoc.DocumentElement;
             string style = "//office:font-face-decls";
             if (root != null)
             {
@@ -100,7 +100,7 @@ namespace SIL.PublishingSolution
                     attrColl["svg:font-family"].Value = s;
                 }
             }
-            doc.Save(styleFilePath);
+            _styleXMLdoc.Save(styleFilePath);
         }
 
         private void CreateFontLanguageMap()
@@ -160,13 +160,45 @@ namespace SIL.PublishingSolution
             _node.ParentNode.InsertAfter(styleNode, _node);
 
             _nameElement = (XmlElement)_node;
-            _nameElement.SetAttribute("style:name", newClassName);
-            _nameElement.SetAttribute("style:family", familyType);
-            _nameElement.SetAttribute("style:parent-style-name", parent_Type[0]); 
+
+            string attribute = "style:name";
+            SetAttribute(newClassName, attribute);
+
+            attribute = "style:family";
+            SetAttribute(familyType, attribute);
+
+            attribute = "style:parent-style-name";
+            SetAttribute(parent_Type[0], attribute);
+
             //style:family="paragraph" style:parent-style-name="none">
             SetTagProperty(className.Key);
             AddParaTextNode(className, _node, familyType);
         }
+
+        private void SetAttribute(string newClassName, string attibute)
+        {
+            string ns = "style";
+            SetAttributeNS(attibute, ns, newClassName);
+        }
+
+        private void SetAttributeNS(string attibute, string ns, string newClassName)
+        {
+            var nsmgr1 = new XmlNamespaceManager(_styleXMLdoc.NameTable);
+            nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+            nsmgr1.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+            nsmgr1.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
+
+            XmlAttribute xmlAttrib = _styleXMLdoc.CreateAttribute(attibute, nsmgr1.LookupNamespace(ns));
+
+            if (_nameElement.Attributes.GetNamedItem(attibute) != null)
+            {
+                XmlAttribute attibBackgroundColor = _nameElement.Attributes[attibute];
+                _nameElement.Attributes.Remove(attibBackgroundColor);
+            }
+            xmlAttrib.Value = newClassName;
+            _nameElement.Attributes.Append(xmlAttrib);
+        }
+
 
         /// <summary>
         /// Moves Background color to text property from para property if it is span
@@ -274,13 +306,14 @@ namespace SIL.PublishingSolution
                     node.AppendChild(paraNode);
                 }
 
-                XmlElement paraElement = (XmlElement)paraNode; ;
+                _nameElement = (XmlElement)paraNode; ;
                 foreach (KeyValuePair<string, string> para in _paragraphProperty)
                 {
                     string[] property = para.Key.Split(':');
                     string ns = property[0];
                     string prop = property[1];
-                    paraElement.SetAttribute(prop, nsmgr.LookupNamespace(ns), para.Value);
+                    //_nameElement.SetAttribute(prop, nsmgr.LookupNamespace(ns), para.Value);
+                    SetAttributeNS(prop,ns,para.Value);
                 }
             }
 
@@ -300,14 +333,15 @@ namespace SIL.PublishingSolution
                     node.AppendChild(textNode);
                 }
 
-                XmlElement textElement = (XmlElement)textNode;
+                _nameElement = (XmlElement)textNode;
                 foreach (KeyValuePair<string, string> para in _textProperty)
                 {
                     string[] property = para.Key.Split(':');
                     string ns = property[0];
                     //if (ns == "st") ns = "style";
                     string prop = property[1];
-                    textElement.SetAttribute(prop, nsmgr.LookupNamespace(ns), para.Value);
+                    //_nameElement.SetAttribute(prop, nsmgr.LookupNamespace(ns), para.Value);
+                    SetAttributeNS(prop, ns, para.Value);
                 }
             }
             if (_columnProperty.Count > 0) // create a value XML file for content.xml with column property.
@@ -580,15 +614,15 @@ namespace SIL.PublishingSolution
         public void CreateGraphicsStyle(string styleFilePath, string makeClassName, string parentName, string position, string side)
         {
             const string className = "Graphics";
-            var doc = new XmlDocument { XmlResolver = null };
-            doc.Load(styleFilePath);
+            _styleXMLdoc = new XmlDocument { XmlResolver = null };
+            _styleXMLdoc.Load(styleFilePath);
 
-            var nsmgr = new XmlNamespaceManager(doc.NameTable);
+            var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
             nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
             nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
 
             // if new stylename exists
-            XmlElement root = doc.DocumentElement;
+            XmlElement root = _styleXMLdoc.DocumentElement;
             string style = "//st:style[@st:name='" + makeClassName + "']";
             if (root != null)
             {
@@ -600,12 +634,13 @@ namespace SIL.PublishingSolution
                 style = "//st:style[@st:name='" + className + "']";
                 node = root.SelectSingleNode(style, nsmgr); // work
 
-                XmlDocumentFragment styleNode = doc.CreateDocumentFragment();
+                XmlDocumentFragment styleNode = _styleXMLdoc.CreateDocumentFragment();
                 styleNode.InnerXml = node.OuterXml;
                 node.ParentNode.InsertAfter(styleNode, node);
 
-                var nameElement = (XmlElement)node;
-                nameElement.SetAttribute("style:name", makeClassName);
+                _nameElement = (XmlElement)node;
+                //nameElement.SetAttribute("style:name", makeClassName);
+                SetAttribute(makeClassName, "style:name");
                 if (side == "none" || side == "NoClear")
                 {
                     if (position == "left")
@@ -624,70 +659,79 @@ namespace SIL.PublishingSolution
 
                 if (position == "right" || position == "left" || position == "center")
                 {
-                    var nameGraphicElement = (XmlElement)node.ChildNodes[0];
-                    nameGraphicElement.SetAttribute("style:run-through", "foreground");
+                    _nameElement = (XmlElement)node.ChildNodes[0];
+                    //nameGraphicElement.SetAttribute("style:run-through", "foreground");
+                    SetAttribute( "foreground","style:run-through");
                     if (side == "Invalid")
                     {
 
                     }
                     else if (side == "right" || side == "left")
                     {
-                        nameGraphicElement.SetAttribute("style:wrap", side);
+                        //nameGraphicElement.SetAttribute("style:wrap", side);
+                        SetAttribute("side","style:wrap");
                     }
                     else if (side == "center")
                     {
-                        nameGraphicElement.SetAttribute("style:wrap", "none");
+                        //nameGraphicElement.SetAttribute("style:wrap", "none");
+                        SetAttribute("none","style:wrap");
                     }
                     else
                     {
-                        nameGraphicElement.SetAttribute("style:wrap", "dynamic");
+                        //nameGraphicElement.SetAttribute("style:wrap", "dynamic");
+                        SetAttribute("dynamic","style:wrap");
                     }
-                    nameGraphicElement.SetAttribute("style:number-wrapped-paragraphs", "no-limit");
-                    nameGraphicElement.SetAttribute("style:wrap-contour", "false");
-                    nameGraphicElement.SetAttribute("style:vertical-pos", "from-top");
-                    nameGraphicElement.SetAttribute("style:vertical-rel", "paragraph");
-                    nameGraphicElement.SetAttribute("style:horizontal-pos", position);
-                    nameGraphicElement.SetAttribute("style:horizontal-rel", "paragraph");
+                    //nameGraphicElement.SetAttribute("style:number-wrapped-paragraphs", "no-limit");
+                    SetAttribute("no-limit","style:number-wrapped-paragraphs");
+                    //nameGraphicElement.SetAttribute("style:wrap-contour", "false");
+                    SetAttribute("false", "style:wrap-contour");
+                    //nameGraphicElement.SetAttribute("style:vertical-pos", "from-top");
+                    SetAttribute( "from-top","style:vertical-pos");
+                    //nameGraphicElement.SetAttribute("style:vertical-rel", "paragraph");
+                    SetAttribute("paragraph", "style:vertical-rel");
+                    //nameGraphicElement.SetAttribute("style:horizontal-pos", position);
+                    SetAttribute(position,"style:horizontal-pos" );
+                    //nameGraphicElement.SetAttribute("style:horizontal-rel", "paragraph");
                     // this is for text flow
                     //nameGraphicElement.SetAttribute("style:flow-with-text", "true");
                 }
                 else if (position == "both")
                 {
-                    var nameGraphicElement = (XmlElement)node.ChildNodes[0];
+                    _nameElement = (XmlElement)node.ChildNodes[0];
                     if (side != "")
                     {
-                        nameGraphicElement.SetAttribute("style:wrap", side);
+                        SetAttribute( side,"style:wrap");
                     }
                     else
                     {
-                        nameGraphicElement.SetAttribute("style:wrap", "none");
+                        SetAttribute("none","style:wrap");
                     }
-                    nameGraphicElement.SetAttribute("style:wrap-contour", "false");
-                    nameGraphicElement.SetAttribute("style:vertical-pos", "from-top");
-                    nameGraphicElement.SetAttribute("style:vertical-rel", "paragraph");
-                    nameGraphicElement.SetAttribute("style:horizontal-pos", "right");
-                    nameGraphicElement.SetAttribute("style:horizontal-rel", "paragraph");
+                    SetAttribute("false", "style:wrap-contour");
+                    SetAttribute("from-top", "style:vertical-pos");
+                    SetAttribute("paragraph", "style:vertical-rel");
+                    SetAttribute("right", "style:horizontal-pos");
+                    SetAttribute("paragraph", "style:horizontal-rel");
                 }
                 else if (position == "top")
                 {
-                    var nameGraphicElement = (XmlElement)node.ChildNodes[0];
-                    nameGraphicElement.SetAttribute("style:wrap", "none");
-                    nameGraphicElement.SetAttribute("style:wrap-contour", "false");
-                    nameGraphicElement.SetAttribute("style:vertical-pos", position);
-                    nameGraphicElement.SetAttribute("style:vertical-rel", "page-content");
-                    nameGraphicElement.SetAttribute("style:horizontal-pos", "center");
-                    nameGraphicElement.SetAttribute("style:horizontal-rel", "page-content");
+                    _nameElement = (XmlElement)node.ChildNodes[0];
+                    SetAttribute("none", "style:wrap");
+                    SetAttribute("false", "style:wrap-contour");
+                    SetAttribute(position, "style:vertical-pos");
+                    SetAttribute("page-content", "style:vertical-rel");
+                    SetAttribute("center", "style:horizontal-pos");
+                    SetAttribute("page-content", "style:horizontal-rel");
                 }
                 else
                 {
-                    var nameGraphicElement = (XmlElement)node.ChildNodes[0];
-                    nameGraphicElement.SetAttribute("style:vertical-pos", "top");
-                    nameGraphicElement.SetAttribute("style:vertical-rel", "baseline");
-                    nameGraphicElement.SetAttribute("style:horizontal-pos", "from-left");
-                    nameGraphicElement.SetAttribute("style:horizontal-rel", "paragraph");
+                    _nameElement = (XmlElement)node.ChildNodes[0];
+                    SetAttribute( "top","style:vertical-pos");
+                    SetAttribute("baseline", "style:vertical-rel");
+                    SetAttribute("from-left", "style:horizontal-pos");
+                    SetAttribute("paragraph","style:horizontal-rel");
                 }
             }
-            doc.Save(styleFilePath);
+            _styleXMLdoc.Save(styleFilePath);
         }
  
         /// <summary>
@@ -701,14 +745,14 @@ namespace SIL.PublishingSolution
         /// <param name="noOfChar">No of Character to be displayed as Drop Caps</param>
         public void CreateDropCapStyle(string styleFilePath, string className, string makeClassName, string parentName, int noOfChar)
         {
-            var doc = new XmlDocument();
-            doc.Load(styleFilePath);
-            var nsmgr = new XmlNamespaceManager(doc.NameTable);
+            _styleXMLdoc = new XmlDocument();
+            _styleXMLdoc.Load(styleFilePath);
+            var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
             nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
             nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
 
             // if new stylename exists
-            XmlElement root = doc.DocumentElement;
+            XmlElement root = _styleXMLdoc.DocumentElement;
             string style = "//st:style[@st:name='" + makeClassName + "']";
             if (root != null)
             {
@@ -755,16 +799,16 @@ namespace SIL.PublishingSolution
                         node.RemoveChild(childNode);
                     }
                 }
-                XmlDocumentFragment styleNode = doc.CreateDocumentFragment();
+                XmlDocumentFragment styleNode = _styleXMLdoc.CreateDocumentFragment();
                 styleNode.InnerXml = node.OuterXml;
                 node.ParentNode.InsertAfter(styleNode, node);
 
                 parentName = parentName.Replace("1", "");
-                var nameElement = (XmlElement)node;
-                nameElement.SetAttribute("style:name", makeClassName);
-                nameElement.SetAttribute("style:parent-style-name", parentName);
+                _nameElement = (XmlElement)node;
+                SetAttribute(makeClassName, "style:name");
+                SetAttribute(parentName, "style:parent-style-name");
             }
-            doc.Save(styleFilePath);
+            _styleXMLdoc.Save(styleFilePath);
         }
         #endregion
 
@@ -780,8 +824,8 @@ namespace SIL.PublishingSolution
         {
             var columnGap = new Dictionary<string, XmlNode>();
             var columnGapBuilder = new StringBuilder();
-            var xmlDoc = new XmlDocument();
-            var nsmgr = new XmlNamespaceManager(xmlDoc.NameTable);
+            _styleXMLdoc = new XmlDocument();
+            var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
             nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
             nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
             foreach (KeyValuePair<string, Dictionary<string, string>> kvp in columnGapEm)
@@ -795,7 +839,7 @@ namespace SIL.PublishingSolution
                 var columnCount = (int)Common.ConvertToInch(columnValue["columnCount"]);
                 float spacing = columnGapValue / 2;
                 float relWidth = (pageWidth - (spacing * (columnCount * 2))) / columnCount;
-                XmlNode parentNode = xmlDoc.CreateElement("dummy");
+                XmlNode parentNode = _styleXMLdoc.CreateElement("dummy");
                 for (int i = 1; i <= columnCount; i++)
                 {
                     float startIndent;
@@ -815,14 +859,14 @@ namespace SIL.PublishingSolution
                         startIndent = spacing;
                         endIndent = spacing;
                     }
-                    newChild = xmlDoc.CreateElement("style:column", nsmgr.LookupNamespace("st"));
-                    xmlAttrib = xmlDoc.CreateAttribute("style:rel-width", nsmgr.LookupNamespace("st"));
+                    newChild = _styleXMLdoc.CreateElement("style:column", nsmgr.LookupNamespace("st"));
+                    xmlAttrib = _styleXMLdoc.CreateAttribute("style:rel-width", nsmgr.LookupNamespace("st"));
                     xmlAttrib.Value = relWidth + "*";
                     newChild.Attributes.Append(xmlAttrib);
-                    xmlAttrib = xmlDoc.CreateAttribute("fo:start-indent", nsmgr.LookupNamespace("fo"));
+                    xmlAttrib = _styleXMLdoc.CreateAttribute("fo:start-indent", nsmgr.LookupNamespace("fo"));
                     xmlAttrib.Value = startIndent + "in";
                     newChild.Attributes.Append(xmlAttrib);
-                    xmlAttrib = xmlDoc.CreateAttribute("fo:end-indent", nsmgr.LookupNamespace("fo"));
+                    xmlAttrib = _styleXMLdoc.CreateAttribute("fo:end-indent", nsmgr.LookupNamespace("fo"));
                     xmlAttrib.Value = endIndent + "in";
                     newChild.Attributes.Append(xmlAttrib);
                     parentNode.AppendChild(newChild);
