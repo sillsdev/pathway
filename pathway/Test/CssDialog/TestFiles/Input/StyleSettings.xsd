@@ -146,9 +146,9 @@
   <xs:element name="meta">
     <xs:complexType>
       <xs:sequence maxOccurs="unbounded">
-        <xs:element name="currentValue" type="xs:string" minOccurs="0" />
-        <xs:element name="defaultValue" type="xs:string" />
         <xs:element ref="organizationDefault" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="defaultValue" type="xs:string" />
+        <xs:element name="currentValue" type="xs:string" minOccurs="0" />
       </xs:sequence>
       <xs:attribute name="name" type="xs:string" />
       <xs:attribute name="outputTypes" type="xs:string" />
