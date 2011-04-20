@@ -118,8 +118,8 @@ namespace Test.GoBibleConvert
             const string layout = "GoBible";
             Param.UpdateMobileAtrrib("FileProduced", "OneperBook", layout);
             Param.UpdateMobileAtrrib("RedLetter", "Yes", layout);
-            Param.UpdateMobileAtrrib("Information", "Sena 3", layout);
-            Param.UpdateMobileAtrrib("Copyright", "© 2010 SIL", layout);
+            Param.UpdateMetadataValue(Param.Description, "Sena 3");
+            Param.UpdateMetadataValue(Param.CopyrightHolder, "© 2010 SIL");
             Param.UpdateMobileAtrrib("Icon", @"C:\ProgramData\SIL\Pathway\Scripture\Icon.png", layout);
             Param.SetValue(Param.LayoutSelected, layout);
             Param.Write();
