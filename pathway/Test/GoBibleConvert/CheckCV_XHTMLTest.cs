@@ -115,6 +115,18 @@ namespace Test.GoBibleConvert
             Param.LoadSettings();
             Param.SetValue(Param.InputType, "Scripture");
             Param.LoadSettings();
+            // setup - ensure that there is a current organization in the StyleSettings xml
+            XmlNode node = Param.GetItem("//stylePick/settings/property[@name='Organization']");
+            if (node == null)
+            {
+                // node doesn't exist yet - create it now
+                XmlNode baseNode = Param.GetItem("//stylePick/settings");
+                var childNode = Param.xmlMap.CreateNode(XmlNodeType.Element, "property", "");
+                Param.AddAttrValue(childNode, "name", "Organization");
+                Param.AddAttrValue(childNode, "value", "SIL International");
+                baseNode.AppendChild(childNode);
+                Param.Write();
+            }
             const string layout = "GoBible";
             Param.UpdateMobileAtrrib("FileProduced", "OneperBook", layout);
             Param.UpdateMobileAtrrib("RedLetter", "Yes", layout);
