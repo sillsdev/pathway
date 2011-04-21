@@ -888,7 +888,6 @@ namespace SIL.PublishingSolution
                     if (dir == 'u')
                     {
                         repProperty = GetPropertyList(RuleNode);
-                        InsertInfoNode(repNode, repProperty);
                         foreach (TreeNode childNode in repNode.Nodes)
                         {
                             //if (childNode.Text == "PROPERTY")
@@ -914,15 +913,13 @@ namespace SIL.PublishingSolution
                     else
                     {
                         repProperty = GetPropertyList(repNode);
-                        InsertInfoNode(repNode, repProperty);
                         foreach (TreeNode childNode in RuleNode.Nodes)
                         {
                             if (childNode.Text == "PROPERTY")
                             {
                                 if (isSameClass || !repProperty.Contains(childNode.FirstNode.Text))
                                 {
-                                    //repNode.Nodes.Add(childNode);
-                                    repNode.Nodes.Add((TreeNode)childNode.Clone());
+                                    repNode.Nodes.Add(childNode);
                                 }
                             }
                         }
@@ -931,23 +928,6 @@ namespace SIL.PublishingSolution
             }
         }
 
-        /// <summary>
-        /// To insert the information node for the Pseudo class which has only content file but it's classname has styles
-        /// for example .definition{color:red; font-size:12pt;} .definition:before{content:'';}
-        /// </summary>
-        /// <param name="repNode"></param>
-        /// <param name="repProperty"></param>
-        private static void InsertInfoNode(TreeNode repNode, ArrayList repProperty)
-        {
-            if (repProperty.Count == 1 && repProperty.Contains("content"))
-            {
-                var node = new TreeNode();
-                node.Nodes.Add("PROPERTY");
-                node.Nodes[0].Nodes.Add("pathway");
-                node.Nodes[0].Nodes.Add("emptyPsuedo");
-                repNode.Nodes.Add(node.FirstNode);
-            }
-        }
         private string GetRuleClassname(TreeNode node)
         {
             string className = string.Empty;
