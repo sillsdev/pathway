@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2003/01/wi">
+	<Fragment Id="FilesFragment">
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder" SourceName="ProgramF" LongSource="Program Files">
+				<Directory Id="PFSIL" Name="SIL">
+					<Directory Id="INSTALLDIR" Name="Pathway7" >
+						%(ConfigurationToolFiles)s
+					</Directory>
+				</Directory>
+			</Directory>
+		</Directory>
+	</Fragment>
+</Wix>

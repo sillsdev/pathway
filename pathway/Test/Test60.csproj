@@ -236,9 +236,9 @@
       <Project>{8D0D307D-3785-4561-A923-FF3DDF6C2F14}</Project>
       <Name>InDesignConvert60</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LiftPrepare\LiftPrepare.csproj">
+    <ProjectReference Include="..\LiftPrepare\LiftPrepare60.csproj">
       <Project>{D38235F3-5B02-4835-B380-40E0BDCD5495}</Project>
-      <Name>LiftPrepare</Name>
+      <Name>LiftPrepare60</Name>
     </ProjectReference>
     <ProjectReference Include="..\LogosConvert\LogosConvert60.csproj">
       <Project>{E10D5643-1A82-4A3F-915B-92EC80C86815}</Project>

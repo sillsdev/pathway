@@ -95,6 +95,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\LiftPrepare\lib\PalasoLib\icu.net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="Microsoft.Build.Utilities" />
     <Reference Include="NMock2, Version=2.0.0.44, Culture=neutral, PublicKeyToken=37d3be0adc87c2b7">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdParty\NMock2.dll</HintPath>
@@ -119,6 +121,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Build\FileComponentsTest.cs" />
     <Compile Include="ConfigurationTool\ConfigurationToolBLTest.cs" />
     <Compile Include="ConfigurationTool\ConfigurationToolTest.cs" />
     <Compile Include="CssDialog\ContentsTest.cs">
@@ -214,6 +217,10 @@
     <Compile Include="YouVersion\ExportYouVersionTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BuildTasks\BuildTasks.csproj">
+      <Project>{B0B420FE-6E6C-421C-A6F2-A9E349FC3EA9}</Project>
+      <Name>BuildTasks</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ConfigurationTool\ConfigurationTool.csproj">
       <Project>{C1ED7E03-C92E-4223-909B-E9C35A4D98E2}</Project>
       <Name>ConfigurationTool</Name>
@@ -1280,6 +1287,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Build\TestFiles\Input\Files\ConfigurationTool\epubcheck-1.1\" />
     <Folder Include="Properties\" />
     <Folder Include="PsExport\TestFiles\Input\T5\Pictures\" />
     <Folder Include="PsExport\TestFiles\Input\T6\Pictures\" />

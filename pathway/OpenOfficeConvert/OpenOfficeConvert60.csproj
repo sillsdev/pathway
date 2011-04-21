@@ -170,9 +170,9 @@
       <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
       <Name>CssParser60</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LiftPrepare\LiftPrepare.csproj">
+    <ProjectReference Include="..\LiftPrepare\LiftPrepare60.csproj">
       <Project>{D38235F3-5B02-4835-B380-40E0BDCD5495}</Project>
-      <Name>LiftPrepare</Name>
+      <Name>LiftPrepare60</Name>
     </ProjectReference>
     <ProjectReference Include="..\PsTool\PsTool60.csproj">
       <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>

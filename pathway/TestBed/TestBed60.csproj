@@ -152,13 +152,17 @@
       <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
       <Name>CssParser60</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GoBibleConvert\GoBibleConvert60.csproj">
+      <Project>{C7A3F4E5-1F86-4D22-AB4F-5BEA0D923DDD}</Project>
+      <Name>GoBibleConvert60</Name>
+    </ProjectReference>
     <ProjectReference Include="..\InDesignConvert\InDesignConvert60.csproj">
       <Project>{8D0D307D-3785-4561-A923-FF3DDF6C2F14}</Project>
       <Name>InDesignConvert60</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LiftPrepare\LiftPrepare.csproj">
+    <ProjectReference Include="..\LiftPrepare\LiftPrepare60.csproj">
       <Project>{D38235F3-5B02-4835-B380-40E0BDCD5495}</Project>
-      <Name>LiftPrepare</Name>
+      <Name>LiftPrepare60</Name>
     </ProjectReference>
     <ProjectReference Include="..\LogosConvert\LogosConvert60.csproj">
       <Project>{E10D5643-1A82-4A3F-915B-92EC80C86815}</Project>
@@ -179,6 +183,10 @@
     <ProjectReference Include="..\PsTool\PsTool60.csproj">
       <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
       <Name>PsTool60</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XeTex\XeTex60.csproj">
+      <Project>{4A3228DD-1C35-4B4F-820A-B6959138B17F}</Project>
+      <Name>XeTex60</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
