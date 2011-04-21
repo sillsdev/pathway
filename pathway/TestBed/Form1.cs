@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using SIL.PublishingSolution;
@@ -237,11 +238,16 @@ namespace TestBed
         {
             if(treeView1.Nodes.Count > 0)
             {
+                treeView1.CollapseAll();
                 foreach (TreeNode treeNode in treeView1.Nodes)
                 {
                     TreeNode tn = FindNode(treeNode);
-                    if(tn != null)
-                        tn.ExpandAll();
+                    if (tn != null)
+                    {
+                        tn.ForeColor = Color.Red;
+                        tn.Expand();
+
+                    }
                     break;
                 }
             }
@@ -261,7 +267,7 @@ namespace TestBed
                         //break;
                     }
                 }
-                FindNode(treeNodeChild);
+                currentNode = FindNode(treeNodeChild);
             }
             return currentNode;
         }
