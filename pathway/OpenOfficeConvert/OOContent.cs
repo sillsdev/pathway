@@ -920,6 +920,8 @@ namespace SIL.PublishingSolution
 
         private void WriteFootNoteMarker(string footerClassName, string content, string marker)
         {
+
+            if (footCallSymb.Length == 0) return;
             string footerCall = footerClassName + "..footnote-call";
             string footerMarker = footerClassName + "..footnote-marker";
             if (IdAllClass.ContainsKey(footerCall) && String.IsNullOrEmpty(footCallSymb))
