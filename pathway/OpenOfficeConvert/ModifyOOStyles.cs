@@ -979,7 +979,7 @@ namespace SIL.PublishingSolution
             //targetFolder = Common.PathCombine(targetFolder, "Resources");
             //string styleFilePath = Common.PathCombine(targetFolder, "Styles.xml");
             string fileName = Path.GetFileNameWithoutExtension(_projectPath);
-            string styleFilePath = Common.PathCombine(targetFolder, fileName + "Styles.xml");
+            string styleFilePath = Common.PathCombine(targetFolder, fileName + "styles.xml");
 
             _styleXMLdoc = new XmlDocument();
             _styleXMLdoc.Load(styleFilePath);

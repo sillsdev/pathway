@@ -697,7 +697,7 @@ namespace SIL.PublishingSolution
             // BEGIN Generate Styles.Xml File
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
             OOStyles inStyles = new OOStyles();
-            idAllClass = inStyles.CreateStyles(projInfo, cssClass, "Styles.xml");
+            idAllClass = inStyles.CreateStyles(projInfo, cssClass, "styles.xml");
 
             //To set Constent variables for User Desire
             string fname = Common.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
