@@ -251,14 +251,14 @@
     <FileComponents FilesTemplate="Files$(ConfTag)-tpl.wxs" FeaturesTemplate="Features$(ConfTag)-tpl.wxs"/>
     <Copy SourceFiles="@(WixSoftware)"
       DestinationFiles="@(WixSoftware->'Wix\%(RecursiveDir)%(Filename)%(Extension)')"/>
-    <Exec Command="candle -nologo Features.wxs &gt;Features.wxs.log" WorkingDirectory="Wix"/>
-    <Exec Command="candle -nologo Install$(ConfTag)$(Edition).wxs &gt;Install$(ConfTag)$(Edition).wxs.log"
+    <Exec Command="candle -nologo Features.wxs" WorkingDirectory="Wix"/>
+    <Exec Command="candle -nologo Install$(ConfTag)$(Edition).wxs "
       WorkingDirectory="Wix"/>
-    <Exec Command="candle -nologo UserInterface.wxs &gt;UserInterface.wxs.log"
+    <Exec Command="candle -nologo UserInterface.wxs"
       WorkingDirectory="Wix"/>
-    <Exec Command="candle -nologo Files.wxs -sw1044 &gt;Files.wxs.log" WorkingDirectory="Wix"/>
+    <Exec Command="candle -nologo Files.wxs -sw1044" WorkingDirectory="Wix"/>
     <Exec
-      Command="light -nologo wixca.wixlib Features.wixobj Install$(ConfTag)$(Edition).wixobj Files.wixobj UserInterface.wixobj -out Setup$(ConfTag)$(Edition)$(Status).msi &gt;WixLink.log"
+      Command="light -nologo wixca.wixlib Features.wixobj Install$(ConfTag)$(Edition).wixobj Files.wixobj UserInterface.wixobj -out Setup$(ConfTag)$(Edition)$(Status).msi"
       WorkingDirectory="Wix"/>
   </Target>
   <Target Name="BeforeBuild">
