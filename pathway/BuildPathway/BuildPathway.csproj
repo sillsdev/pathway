@@ -243,6 +243,7 @@
   <Target Name="Build">
     <CallTarget Targets="BeforeBuild"/>
     <RemoveDir Directories="Wix"/>
+    <Message Text="BUILD_NUMBER: $(BUILD_NUMBER)" Importance="high"/>
     <UpdateVersion Product="Pathway $(Edition) " Version="0.7.2"
       Template="$(ProjectDir)Install$(ConfTag)$(Edition)-tpl.wxs"/>
     <UpdateReadme Readme="$(ProjectDir)ReadMePw.rtf" License="$(ProjectDir)License.rtf"
