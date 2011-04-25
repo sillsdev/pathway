@@ -262,6 +262,8 @@
       WorkingDirectory="Wix"/>
   </Target>
   <Target Name="BeforeBuild">
+    <Copy SourceFiles="@(ConfigurationTool)" DestinationFolder="Files\ConfigurationTool\"/>
+    <Copy SourceFiles="@(Plugin)" DestinationFolder="Files\ConfigurationTool\"/>
     <Copy SourceFiles="@(GhostScript)" DestinationFolder="Files\ConfigurationTool\"/>
     <Copy SourceFiles="@(Icu)" DestinationFolder="Files\ConfigurationTool\"/>
     <Copy SourceFiles="@(BatchProcess)" DestinationFolder="Files\ConfigurationTool\"/>
@@ -330,7 +332,8 @@
   </Target>
   <Target Name="AfterBuild"> </Target>
   <ItemGroup>
-    <AllBackend Include="..\ConfigurationTool\$(OutDir)\*.*"/>
+    <ConfigurationTool Include="..\ConfigurationTool\$(OutDir)\*.*"/>
+    <Plugin Include="..\PsExport\$(OutDir)\*.*"/>
     <GhostScript Include="..\ThirdParty\gsdll32.dll"/>
     <EpubCheck Include="..\ThirdParty\epubcheck-1.1\**\*.*" Exclude="..\ThirdParty\**\.svn\**\*.*"/>
     <Icu
