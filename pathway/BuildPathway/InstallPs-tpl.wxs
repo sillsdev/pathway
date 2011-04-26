@@ -37,7 +37,7 @@
 			<RegistrySearch Id="FindFwDate" Key="SOFTWARE\SIL\FieldWorks\CoreInstallation" Root="HKLM" Type="raw"/>
 		</Property>
 		
-		<FragmentRef Id='OosUI'/>
+		<FragmentRef Id='pathwayUI'/>
 		<FragmentRef Id='FilesFragment'/>
 		<FragmentRef Id='FeaturesFragment'/>
 

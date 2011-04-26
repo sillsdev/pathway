@@ -267,13 +267,13 @@
     <Copy SourceFiles="@(Plugin)" DestinationFolder="Files\ConfigurationTool\"/>
     <Copy SourceFiles="@(GhostScript)" DestinationFolder="Files\ConfigurationTool\"/>
     <Copy SourceFiles="@(Icu)" DestinationFolder="Files\ConfigurationTool\"/>
-    <Copy SourceFiles="@(BatchProcess)" DestinationFolder="Files\ConfigurationTool\"/>
-    <Copy SourceFiles="@(LiftPrepare)" DestinationFolder="Files\ConfigurationTool\"/>
-    <Copy SourceFiles="@(ParatextSupport)" DestinationFolder="Files\ConfigurationTool\"/>
-    <Copy SourceFiles="@(AllBackend)" DestinationFolder="Files\ConfigurationTool\"/>
-    <Copy SourceFiles="@(BteBackend)" DestinationFolder="Files\ConfigurationTool\"
+    <Copy SourceFiles="@(BatchProcess)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)"/>
+    <Copy SourceFiles="@(LiftPrepare)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)"/>
+    <Copy SourceFiles="@(ParatextSupport)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)"/>
+    <Copy SourceFiles="@(AllBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)"/>
+    <Copy SourceFiles="@(BteBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)"
       Condition=" '$(Edition)' == 'BTE' "/>
-    <Copy SourceFiles="@(TestBackend)" DestinationFolder="Files\ConfigurationTool\"
+    <Copy SourceFiles="@(TestBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)"
       Condition=" '$(Status)' == 'Testing' "/>
     <Copy SourceFiles="@(DicStyles)"
       DestinationFiles="@(DicStyles->'Files\ConfigurationTool\Styles\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')"/>
