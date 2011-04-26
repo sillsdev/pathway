@@ -252,6 +252,24 @@
       Properties="Configuration=CorporateSE606;Platform=x86"/>
     <Copy SourceFiles=".\BuildPathway\Wix\SetupPwSe.msi" DestinationFiles=".\Sprint\SetupPwSe-606.msi"/>
   </Target>
+  <Target Name="ReleaseBTE">
+    <MSBuild Projects="PublishingSolution60.sln"
+      Targets="Rebuild"
+      Properties="Configuration=ReleaseBTE;Platform=x86"/>
+    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwBteTesting.msi" DestinationFiles=".\Sprint\SetupPwBteTesting.msi"/>
+  </Target>
+  <Target Name="ReleaseBTE604">
+    <MSBuild Projects="PublishingSolution60.sln"
+      Targets="Rebuild"
+      Properties="Configuration=ReleaseBTE604;Platform=x86"/>
+    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwBteTesting.msi" DestinationFiles=".\Sprint\SetupPwBteTesting-604.msi"/>
+  </Target>
+  <Target Name="ReleaseBTE606">
+    <MSBuild Projects="PublishingSolution60.sln"
+      Targets="Rebuild"
+      Properties="Configuration=ReleaseBTE606;Platform=x86"/>
+    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwBteTesting.msi" DestinationFiles=".\Sprint\SetupPwBteTesting-606.msi"/>
+  </Target>
   <ItemGroup>
     <Dll606 Include=".\PsExport\Dlls606\*.dll"/>
     <Dll605 Include=".\PsExport\Dlls605\*.dll"/>

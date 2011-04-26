@@ -27,6 +27,7 @@
         <file name="../PrincessConvert/PrincessConvert.csproj"/>
         <file name="../PsExport/PsExport.csproj"/>
         <file name="../PsTool/PsTool.csproj"/>
+        <file name="../PublishingSolution.sln"/>
         <file name="../Test/Test.csproj"/>
         <file name="../TestBed/TestBed.csproj"/>
         <file name="../WordPressConvert/WordPressConvert.csproj"/>
