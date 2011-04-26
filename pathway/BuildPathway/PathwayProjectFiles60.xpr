@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <meta>
+        <filters directoryPatterns="" filePatterns=""
+            positiveFilePatterns="" showHiddenFiles="false"/>
+        <options/>
+    </meta>
+    <projectTree name="PathwayProjectFiles60.xpr">
+        <file name="BuildPathway60.csproj"/>
+        <file name="../BuildTasks/BuildTasks60.csproj"/>
+        <file name="../ConfigurationTool/ConfigurationTool60.csproj"/>
+        <file name="../CssDialog/CssDialog60.csproj"/>
+        <file name="../CssParser/CssParser60.csproj"/>
+        <file name="../epubConvert/epubConvert60.csproj"/>
+        <file name="../GoBibleConvert/GoBibleConvert60.csproj"/>
+        <file name="../InDesignConvert/InDesignConvert60.csproj"/>
+        <file name="../LiftPrepare/LiftPrepare60.csproj"/>
+        <file name="../LogosConvert/LogosConvert60.csproj"/>
+        <file name="../OpenOfficeConvert/OpenOfficeConvert60.csproj"/>
+        <file name="../PdfConvert/PdfConvert60.csproj"/>
+        <file name="../PrincessConvert/PrincessConvert60.csproj"/>
+        <file name="../PsExport/PsExport60.csproj"/>
+        <file name="../PsTool/PsTool60.csproj"/>
+        <file name="../PublishingSolution60.sln"/>
+        <file name="../Test/Test60.csproj"/>
+        <file name="../TestBed/TestBed60.csproj"/>
+        <file name="../WordPressConvert/WordPressConvert60.csproj"/>
+        <file name="../XeTex/XeTex60.csproj"/>
+        <file name="../XeTeXConvert/XeTeXConvert60.csproj"/>
+        <file name="../YouVersionConvert/YouVersionConvert60.csproj"/>
+    </projectTree>
+</project>

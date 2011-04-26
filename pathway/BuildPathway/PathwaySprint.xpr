@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <meta>
+        <filters directoryPatterns="" filePatterns=""
+            positiveFilePatterns="" showHiddenFiles="false"/>
+        <options/>
+    </meta>
+    <projectTree name="sprint.xpr">
+        <file name="BuildPathway.csproj"/>
+        <file name="BuildPathway60.csproj"/>
+        <file name="../BuildPathwaySprint.csproj"/>
+        <file name="../BuildTasks/BuildTasks.csproj"/>
+        <file name="../BuildTasks/BuildTasks60.csproj"/>
+        <file name="../ConfigurationTool/ConfigurationTool60.csproj"/>
+        <file name="../pathway.build"/>
+    </projectTree>
+</project>
