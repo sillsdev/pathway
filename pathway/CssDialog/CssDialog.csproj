@@ -147,7 +147,6 @@
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
   </PropertyGroup>
-  
   <ItemGroup>
     <Reference Include="PdfToImage, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\ThirdParty\PdfToImage.dll</HintPath>

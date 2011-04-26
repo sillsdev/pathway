@@ -6,12 +6,32 @@
         <options/>
     </meta>
     <projectTree name="PathwayProjectFiles.xpr">
-        <file name="../../../../hg/solid/build/build.proj"/>
+        <file name="../BookletBuilder/BookletBuilder.csproj"/>
         <file name="BuildPathway.csproj"/>
-        <file name="BuildPathway60.csproj"/>
-        <file name="../BuildPathwaySprint.csproj"/>
         <file name="../BuildTasks/BuildTasks.csproj"/>
         <file name="../ConfigurationTool/ConfigurationTool.csproj"/>
-        <file name="../ConfigurationTool/ConfigurationTool60.csproj"/>
+        <file name="../CssDialog/CssDialog.csproj"/>
+        <file name="../CssParser/CssParser.csproj"/>
+        <file name="../epubConvert/epubConvert.csproj"/>
+        <file name="../epubValidator/epubValidator.csproj"/>
+        <file name="../GoBibleConvert/GoBibleConvert.csproj"/>
+        <file name="../InDesignConvert/InDesignConvert.csproj"/>
+        <file name="../LiftPrepare/LiftPrepare.csproj"/>
+        <file name="../LogosConvert/LogosConvert.csproj"/>
+        <file name="../OpenOfficeConvert/OpenOfficeConvert.csproj"/>
+        <file
+            name="../OpenOfficeConvert_OLD/OpenOfficeConvert_OLD.csproj"/>
+        <file name="../ParatextSupport/ParatextSupport.csproj"/>
+        <file name="../PathwayB/PathwayB.csproj"/>
+        <file name="../PdfConvert/PdfConvert.csproj"/>
+        <file name="../PrincessConvert/PrincessConvert.csproj"/>
+        <file name="../PsExport/PsExport.csproj"/>
+        <file name="../PsTool/PsTool.csproj"/>
+        <file name="../Test/Test.csproj"/>
+        <file name="../TestBed/TestBed.csproj"/>
+        <file name="../WordPressConvert/WordPressConvert.csproj"/>
+        <file name="../XeTex/XeTex.csproj"/>
+        <file name="../XeTeXConvert/XeTeXConvert.csproj"/>
+        <file name="../YouVersionConvert/YouVersionConvert.csproj"/>
     </projectTree>
 </project>
