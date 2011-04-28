@@ -120,41 +120,86 @@ namespace SIL.PublishingSolution
         #endregion InterfaceMethods
 
         // Publication Info (dublin core metadata) tab
+        /// <summary>
+        /// dc:title element
+        /// </summary>
         public string Title // dc:title
         {
             get { return txtBookTitle.Text.Trim(); }
             set { txtBookTitle.Text = value; }
         }
+        /// <summary>
+        /// dc:description element
+        /// </summary>
         public string Description // dc:description
         {
             get { return txtDescription.Text.Trim(); }
             set { txtDescription.Text = value; }
         }
+        /// <summary>
+        /// dc:creator element
+        /// </summary>
         public string Creator // dc:creator
         {
             get { return txtCreator.Text.Trim(); }
             set { txtCreator.Text = value; }
         }
+        /// <summary>
+        /// dc:publisher element
+        /// </summary>
         public string Publisher // dc:publisher
         {
             get { return txtPublisher.Text.Trim(); }
             set { txtPublisher.Text = value; }
         }
+        /// <summary>
+        /// dc:rights element
+        /// </summary>
         public string CopyrightHolder // dc:rights
         {
             get { return txtRights.Text.Trim(); }
             set { txtRights.Text = value; }
         } 
         // DC properties that are not in the UI
+        /// <summary>
+        /// dc:type element. Not in the UI.
+        /// </summary>
         public string Type { get; set; }
+        /// <summary>
+        /// dc:source element. Not in the UI.
+        /// </summary>
         public string Source { get; set; }
+        /// <summary>
+        /// dc:format element. Not in the UI.
+        /// </summary>
         public string DocFormat { get; set; } // really "Format" / dc:format
+        /// <summary>
+        /// dc:contributor element. Not in the UI.
+        /// </summary>
         public string Contributor { get; set; }
+        /// <summary>
+        /// dc:relation element. Not in the UI.
+        /// </summary>
         public string Relation { get; set; }
+        /// <summary>
+        /// dc:coverage element. Not in the UI.
+        /// </summary>
         public string Coverage { get; set; }
+        /// <summary>
+        /// dc:subject element. Not in the UI.
+        /// </summary>
         public string Subject { get; set; } // probably just copy over the default value for this
+        /// <summary>
+        /// dc:date element. Not in the UI.
+        /// </summary>
         public string Date { get; set; } // date modified?
+        /// <summary>
+        /// dc:language element. Not in the UI.
+        /// </summary>
         public string Language { get; set; } // main language for document
+        /// <summary>
+        /// dc:identifier element. Not in the UI (uniquely identifies the document).
+        /// </summary>
         public string Identifier { get; set; } // unique ID
 
         // Front Matter tab
@@ -179,6 +224,9 @@ namespace SIL.PublishingSolution
             get { return chkColophon.Checked; }
             set { chkColophon.Checked = value; }
         }
+        /// <summary>
+        /// Full path and filename of the Copyright page (xhtml) file.
+        /// </summary>
         public string CopyrightPagePath
         {
             get { return txtColophonFile.Text.Trim(); }
@@ -285,6 +333,12 @@ namespace SIL.PublishingSolution
             chkCoverImageTitle.Enabled = (chkCoverImage.Enabled && chkCoverImage.Checked);
             btnCoverImage.Enabled = chkCoverImageTitle.Enabled;
             imgCoverImage.Enabled = chkCoverImageTitle.Enabled;
+
+            rdoCustomCopyright.Enabled = chkColophon.Checked;
+            rdoStandardCopyright.Enabled = chkColophon.Checked;
+            ddlCopyrightStatement.Enabled = (chkColophon.Checked) ? rdoStandardCopyright.Checked : false;
+            txtColophonFile.Enabled = (chkColophon.Checked) ? rdoCustomCopyright.Checked : false;
+            btnBrowseColophon.Enabled = (chkColophon.Checked) ? rdoCustomCopyright.Checked : false;
 
             // Processing Options tab
             chkRunningHeader.Enabled = (FindMedia() == "paper");
@@ -487,6 +541,42 @@ namespace SIL.PublishingSolution
             TitlePage = Boolean.Parse(Param.GetMetadataValue(Param.TitlePage, Organization));
             CopyrightPage = Boolean.Parse(Param.GetMetadataValue(Param.CopyrightPage, Organization));
             CopyrightPagePath = Param.GetMetadataValue(Param.CopyrightPageFilename, Organization);
+            // license agreement
+            XmlNode node;
+            try
+            {
+                // try to get the key
+                node = Param.GetItem("//features/feature[@name='Lic_" + Organization + "']");
+            }
+            catch (Exception)
+            {
+                // key not found - fall back on the generic licenses
+                node = Param.GetItem("//features/feature[@name='Lic_Other']");
+            }
+            if (node != null)
+            {
+                int index;
+                foreach (XmlNode subnode in node.ChildNodes)
+                {
+                    if (subnode.Attributes != null)
+                    {
+                        var value = subnode.Attributes["name"].Value;
+                        if (!ddlCopyrightStatement.Items.Contains(value))
+                        {
+                            // not currently in the list - add it now
+                            index = ddlCopyrightStatement.Items.Add(value);
+                            if (Path.GetFileName(CopyrightPagePath) == subnode.Attributes["file"].Value)
+                            {
+                                // this is the selected copyright statement - 
+                                // select it in the dropdown and check the standard radio button
+                                ddlCopyrightStatement.SelectedIndex = index;
+                                rdoStandardCopyright.Checked = true;
+                            }
+                        }
+                    }
+                }
+            }
+            rdoCustomCopyright.Checked = !(rdoStandardCopyright.Checked);
 
             // Processing Options tab)
             if (string.IsNullOrEmpty(InputType) || InputType == "Dictionary")
@@ -684,9 +774,12 @@ namespace SIL.PublishingSolution
         private void chkColophon_CheckedChanged(object sender, EventArgs e)
         {
             // enable / disable Colophon UI
-            lblColophonFile.Enabled = chkColophon.Checked;
-            txtColophonFile.Enabled = chkColophon.Checked;
-            btnBrowseColophon.Enabled = chkColophon.Checked;
+//            lblColophonFile.Enabled = chkColophon.Checked;
+            rdoStandardCopyright.Enabled = chkColophon.Checked;
+            rdoCustomCopyright.Enabled = chkColophon.Checked;
+            ddlCopyrightStatement.Enabled = (chkColophon.Checked) ? rdoStandardCopyright.Checked : false;
+            txtColophonFile.Enabled = (chkColophon.Checked) ? rdoCustomCopyright.Checked : false;
+            btnBrowseColophon.Enabled = (chkColophon.Checked) ? rdoCustomCopyright.Checked : false;
         }
 
         private void chkConfiguredDictionary_CheckedChanged(object sender, EventArgs e)
@@ -773,6 +866,62 @@ namespace SIL.PublishingSolution
             if (filename != "")
             {
                 txtColophonFile.Text = filename;
+            }
+        }
+
+        private void rdoStandardCopyright_CheckedChanged(object sender, EventArgs e)
+        {
+            // enable / disable Colophon UI
+            ddlCopyrightStatement.Enabled = rdoStandardCopyright.Checked;
+            txtColophonFile.Enabled = rdoCustomCopyright.Checked;
+            btnBrowseColophon.Enabled = rdoCustomCopyright.Checked;
+        }
+
+        private void rdoCustomCopyright_CheckedChanged(object sender, EventArgs e)
+        {
+            // enable / disable Colophon UI
+            ddlCopyrightStatement.Enabled = rdoStandardCopyright.Checked;
+            txtColophonFile.Enabled = rdoCustomCopyright.Checked;
+            btnBrowseColophon.Enabled = rdoCustomCopyright.Checked;
+        }
+
+        private void lnkChooseCopyright_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            // TODO: replace with correct help topic
+            _helpTopic = "Concepts/Intellectual_Property.htm";
+            btnHelp_Click(sender, e);
+        }
+
+        private void ddlCopyrightStatement_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // find the copyright file
+            XmlNode node;
+            try
+            {
+                // try to get the key
+                node = Param.GetItem("//features/feature[@name='Lic_" + Organization + "']");
+            }
+            catch (Exception)
+            {
+                // key not found - fall back on the generic licenses
+                node = Param.GetItem("//features/feature[@name='Lic_Other']");
+            }
+            if (node != null)
+            {
+                int index;
+                foreach (XmlNode subnode in node.ChildNodes)
+                {
+                    if (subnode.Attributes != null)
+                    {
+                        var value = subnode.Attributes["name"].Value;
+                        if (ddlCopyrightStatement.SelectedItem.Equals(value))
+                        {
+                            // this is our item - set the CopyrightFilename
+                            var copyrightDir = Path.Combine(Common.GetPSApplicationPath(), "Copyrights");
+                            CopyrightPagePath = Path.Combine(copyrightDir, subnode.Attributes["file"].Value);
+                        }
+                    }
+                }
             }
         }
 

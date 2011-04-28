@@ -53,13 +53,16 @@
             this.lblBookTitle = new System.Windows.Forms.Label();
             this.txtPublisher = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lnkChooseCopyright = new System.Windows.Forms.LinkLabel();
+            this.ddlCopyrightStatement = new System.Windows.Forms.ComboBox();
+            this.rdoCustomCopyright = new System.Windows.Forms.RadioButton();
+            this.rdoStandardCopyright = new System.Windows.Forms.RadioButton();
             this.chkCoverImageTitle = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.chkTitlePage = new System.Windows.Forms.CheckBox();
             this.chkCoverImage = new System.Windows.Forms.CheckBox();
             this.btnBrowseColophon = new System.Windows.Forms.Button();
             this.txtColophonFile = new System.Windows.Forms.TextBox();
-            this.lblColophonFile = new System.Windows.Forms.Label();
             this.chkColophon = new System.Windows.Forms.CheckBox();
             this.btnCoverImage = new System.Windows.Forms.Button();
             this.imgCoverImage = new System.Windows.Forms.PictureBox();
@@ -88,7 +91,7 @@
             this.btnMoreLessOptions.Location = new System.Drawing.Point(100, 68);
             this.btnMoreLessOptions.Name = "btnMoreLessOptions";
             this.btnMoreLessOptions.Size = new System.Drawing.Size(82, 23);
-            this.btnMoreLessOptions.TabIndex = 32;
+            this.btnMoreLessOptions.TabIndex = 5;
             this.btnMoreLessOptions.Text = "Less  ▲";
             this.btnMoreLessOptions.UseVisualStyleBackColor = true;
             this.btnMoreLessOptions.Click += new System.EventHandler(this.btnMoreLessOptions_Click);
@@ -96,10 +99,10 @@
             // lnkIP
             // 
             this.lnkIP.AutoSize = true;
-            this.lnkIP.Location = new System.Drawing.Point(116, 380);
+            this.lnkIP.Location = new System.Drawing.Point(116, 387);
             this.lnkIP.Name = "lnkIP";
             this.lnkIP.Size = new System.Drawing.Size(121, 13);
-            this.lnkIP.TabIndex = 31;
+            this.lnkIP.TabIndex = 8;
             this.lnkIP.TabStop = true;
             this.lnkIP.Text = "Intellectual Property Info";
             this.lnkIP.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkIP_LinkClicked);
@@ -107,10 +110,10 @@
             // chkIP
             // 
             this.chkIP.CheckAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.chkIP.Location = new System.Drawing.Point(100, 346);
+            this.chkIP.Location = new System.Drawing.Point(100, 354);
             this.chkIP.Name = "chkIP";
-            this.chkIP.Size = new System.Drawing.Size(286, 31);
-            this.chkIP.TabIndex = 30;
+            this.chkIP.Size = new System.Drawing.Size(286, 30);
+            this.chkIP.TabIndex = 7;
             this.chkIP.Text = "I have complied with my organization\'s Intellectual Property (copyright) and Arch" +
                 "iving policies.";
             this.chkIP.UseVisualStyleBackColor = true;
@@ -123,7 +126,7 @@
             this.ddlStyle.Location = new System.Drawing.Point(100, 39);
             this.ddlStyle.Name = "ddlStyle";
             this.ddlStyle.Size = new System.Drawing.Size(196, 21);
-            this.ddlStyle.TabIndex = 4;
+            this.ddlStyle.TabIndex = 3;
             this.ddlStyle.SelectedIndexChanged += new System.EventHandler(this.ddlStyle_SelectedIndexChanged);
             // 
             // label2
@@ -132,7 +135,7 @@
             this.label2.Location = new System.Drawing.Point(35, 42);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 13);
-            this.label2.TabIndex = 3;
+            this.label2.TabIndex = 2;
             this.label2.Text = "Stylesheet:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
@@ -143,7 +146,7 @@
             this.ddlLayout.Location = new System.Drawing.Point(100, 12);
             this.ddlLayout.Name = "ddlLayout";
             this.ddlLayout.Size = new System.Drawing.Size(196, 21);
-            this.ddlLayout.TabIndex = 2;
+            this.ddlLayout.TabIndex = 1;
             this.ddlLayout.SelectedIndexChanged += new System.EventHandler(this.ddlLayout_SelectedIndexChanged);
             // 
             // label1
@@ -152,16 +155,16 @@
             this.label1.Location = new System.Drawing.Point(31, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 13);
-            this.label1.TabIndex = 1;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Destination:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // btnHelp
             // 
-            this.btnHelp.Location = new System.Drawing.Point(311, 407);
+            this.btnHelp.Location = new System.Drawing.Point(311, 415);
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(75, 23);
-            this.btnHelp.TabIndex = 35;
+            this.btnHelp.TabIndex = 11;
             this.btnHelp.Text = "&Help";
             this.btnHelp.UseVisualStyleBackColor = true;
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
@@ -169,20 +172,20 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(230, 407);
+            this.btnCancel.Location = new System.Drawing.Point(230, 415);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 34;
+            this.btnCancel.TabIndex = 10;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(149, 407);
+            this.btnOK.Location = new System.Drawing.Point(149, 415);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 33;
+            this.btnOK.TabIndex = 9;
             this.btnOK.Text = "&OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOk_Click);
@@ -192,11 +195,11 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(12, 96);
+            this.tabControl1.Location = new System.Drawing.Point(12, 97);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(373, 244);
-            this.tabControl1.TabIndex = 5;
+            this.tabControl1.TabIndex = 6;
             // 
             // tabPage1
             // 
@@ -320,13 +323,16 @@
             // tabPage2
             // 
             this.tabPage2.AutoScroll = true;
+            this.tabPage2.Controls.Add(this.lnkChooseCopyright);
+            this.tabPage2.Controls.Add(this.ddlCopyrightStatement);
+            this.tabPage2.Controls.Add(this.rdoCustomCopyright);
+            this.tabPage2.Controls.Add(this.rdoStandardCopyright);
             this.tabPage2.Controls.Add(this.chkCoverImageTitle);
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.chkTitlePage);
             this.tabPage2.Controls.Add(this.chkCoverImage);
             this.tabPage2.Controls.Add(this.btnBrowseColophon);
             this.tabPage2.Controls.Add(this.txtColophonFile);
-            this.tabPage2.Controls.Add(this.lblColophonFile);
             this.tabPage2.Controls.Add(this.chkColophon);
             this.tabPage2.Controls.Add(this.btnCoverImage);
             this.tabPage2.Controls.Add(this.imgCoverImage);
@@ -337,6 +343,51 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Front Matter";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // lnkChooseCopyright
+            // 
+            this.lnkChooseCopyright.AutoSize = true;
+            this.lnkChooseCopyright.Location = new System.Drawing.Point(44, 189);
+            this.lnkChooseCopyright.Name = "lnkChooseCopyright";
+            this.lnkChooseCopyright.Size = new System.Drawing.Size(179, 13);
+            this.lnkChooseCopyright.TabIndex = 65;
+            this.lnkChooseCopyright.TabStop = true;
+            this.lnkChooseCopyright.Text = "Help me choose a rights statement...";
+            this.lnkChooseCopyright.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkChooseCopyright_LinkClicked);
+            // 
+            // ddlCopyrightStatement
+            // 
+            this.ddlCopyrightStatement.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlCopyrightStatement.FormattingEnabled = true;
+            this.ddlCopyrightStatement.Location = new System.Drawing.Point(190, 133);
+            this.ddlCopyrightStatement.Name = "ddlCopyrightStatement";
+            this.ddlCopyrightStatement.Size = new System.Drawing.Size(154, 21);
+            this.ddlCopyrightStatement.TabIndex = 64;
+            this.ddlCopyrightStatement.SelectedIndexChanged += new System.EventHandler(this.ddlCopyrightStatement_SelectedIndexChanged);
+            // 
+            // rdoCustomCopyright
+            // 
+            this.rdoCustomCopyright.AutoSize = true;
+            this.rdoCustomCopyright.Location = new System.Drawing.Point(29, 163);
+            this.rdoCustomCopyright.Name = "rdoCustomCopyright";
+            this.rdoCustomCopyright.Size = new System.Drawing.Size(63, 17);
+            this.rdoCustomCopyright.TabIndex = 63;
+            this.rdoCustomCopyright.TabStop = true;
+            this.rdoCustomCopyright.Text = "Custom:";
+            this.rdoCustomCopyright.UseVisualStyleBackColor = true;
+            this.rdoCustomCopyright.CheckedChanged += new System.EventHandler(this.rdoCustomCopyright_CheckedChanged);
+            // 
+            // rdoStandardCopyright
+            // 
+            this.rdoStandardCopyright.AutoSize = true;
+            this.rdoStandardCopyright.Location = new System.Drawing.Point(29, 134);
+            this.rdoStandardCopyright.Name = "rdoStandardCopyright";
+            this.rdoStandardCopyright.Size = new System.Drawing.Size(155, 17);
+            this.rdoStandardCopyright.TabIndex = 62;
+            this.rdoStandardCopyright.TabStop = true;
+            this.rdoStandardCopyright.Text = "Standard Rights Statement:";
+            this.rdoStandardCopyright.UseVisualStyleBackColor = true;
+            this.rdoStandardCopyright.CheckedChanged += new System.EventHandler(this.rdoStandardCopyright_CheckedChanged);
             // 
             // chkCoverImageTitle
             // 
@@ -382,31 +433,21 @@
             // btnBrowseColophon
             // 
             this.btnBrowseColophon.Enabled = false;
-            this.btnBrowseColophon.Location = new System.Drawing.Point(84, 156);
+            this.btnBrowseColophon.Location = new System.Drawing.Point(317, 160);
             this.btnBrowseColophon.Name = "btnBrowseColophon";
-            this.btnBrowseColophon.Size = new System.Drawing.Size(76, 23);
+            this.btnBrowseColophon.Size = new System.Drawing.Size(27, 23);
             this.btnBrowseColophon.TabIndex = 21;
-            this.btnBrowseColophon.Text = "&Browse...";
+            this.btnBrowseColophon.Text = "...";
             this.btnBrowseColophon.UseVisualStyleBackColor = true;
             this.btnBrowseColophon.Click += new System.EventHandler(this.btnBrowseColophon_Click);
             // 
             // txtColophonFile
             // 
             this.txtColophonFile.Enabled = false;
-            this.txtColophonFile.Location = new System.Drawing.Point(84, 130);
+            this.txtColophonFile.Location = new System.Drawing.Point(98, 162);
             this.txtColophonFile.Name = "txtColophonFile";
-            this.txtColophonFile.Size = new System.Drawing.Size(250, 20);
+            this.txtColophonFile.Size = new System.Drawing.Size(212, 20);
             this.txtColophonFile.TabIndex = 20;
-            // 
-            // lblColophonFile
-            // 
-            this.lblColophonFile.AutoSize = true;
-            this.lblColophonFile.Enabled = false;
-            this.lblColophonFile.Location = new System.Drawing.Point(26, 133);
-            this.lblColophonFile.Name = "lblColophonFile";
-            this.lblColophonFile.Size = new System.Drawing.Size(52, 13);
-            this.lblColophonFile.TabIndex = 55;
-            this.lblColophonFile.Text = "From File:";
             // 
             // chkColophon
             // 
@@ -559,7 +600,7 @@
             this.BtnBrwsLayout.Location = new System.Drawing.Point(302, 38);
             this.BtnBrwsLayout.Name = "BtnBrwsLayout";
             this.BtnBrwsLayout.Size = new System.Drawing.Size(24, 24);
-            this.BtnBrwsLayout.TabIndex = 36;
+            this.BtnBrwsLayout.TabIndex = 4;
             this.BtnBrwsLayout.UseVisualStyleBackColor = true;
             this.BtnBrwsLayout.Click += new System.EventHandler(this.BtnBrwsLayout_Click);
             // 
@@ -569,7 +610,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(398, 442);
+            this.ClientSize = new System.Drawing.Size(398, 450);
             this.Controls.Add(this.BtnBrwsLayout);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnMoreLessOptions);
@@ -631,7 +672,6 @@
         private System.Windows.Forms.CheckBox chkCoverImage;
         private System.Windows.Forms.Button btnBrowseColophon;
         private System.Windows.Forms.TextBox txtColophonFile;
-        private System.Windows.Forms.Label lblColophonFile;
         private System.Windows.Forms.CheckBox chkColophon;
         private System.Windows.Forms.Button btnCoverImage;
         private System.Windows.Forms.PictureBox imgCoverImage;
@@ -647,5 +687,9 @@
         private System.Windows.Forms.Label lblSelectData;
         private System.Windows.Forms.Button BtnBrwsLayout;
         private System.Windows.Forms.CheckBox chkCoverImageTitle;
+        private System.Windows.Forms.ComboBox ddlCopyrightStatement;
+        private System.Windows.Forms.RadioButton rdoCustomCopyright;
+        private System.Windows.Forms.RadioButton rdoStandardCopyright;
+        private System.Windows.Forms.LinkLabel lnkChooseCopyright;
     }
 }
