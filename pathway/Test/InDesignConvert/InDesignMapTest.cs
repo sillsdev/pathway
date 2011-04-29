@@ -140,7 +140,7 @@ namespace Test.InDesignConvert
             var inMasterSpread = new InMasterSpread();
             var masterPageNames = inMasterSpread.CreateIDMasterSpread(_outputMasterSpreads, _idAllClass, headwordStyles);
             ArrayList test = new ArrayList();
-            _designmapXML.CreateIDDesignMap(_outputPath, 4, masterPageNames, test, new ArrayList());
+            _designmapXML.CreateIDDesignMap(_outputPath, 4, masterPageNames, test, new ArrayList(), string.Empty);
             FileNameWithPath = Common.PathCombine(_outputPath, "designmap.xml");
             var result1 = Common.GetXmlNodeListInDesignNamespace(FileNameWithPath, XPath);
             foreach (XmlNode fileName in result1)
@@ -160,7 +160,7 @@ namespace Test.InDesignConvert
             var inMasterSpread = new InMasterSpread();
             var masterPageNames = inMasterSpread.CreateIDMasterSpread(_outputMasterSpreads, _idAllClass, headwordStyles);
             ArrayList test = new ArrayList();
-            _designmapXML.CreateIDDesignMap(_outputPath, 4, masterPageNames, test, new ArrayList());
+            _designmapXML.CreateIDDesignMap(_outputPath, 4, masterPageNames, test, new ArrayList(), string.Empty);
             FileNameWithPath = Common.PathCombine(_outputPath, "designmap.xml");
             XmlNodeList result = Common.GetXmlNodeListInDesignNamespace(FileNameWithPath, XPath);
             return result.Count;
@@ -172,7 +172,7 @@ namespace Test.InDesignConvert
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
             ArrayList test = new ArrayList();
             ArrayList test1 = new ArrayList();
-            _designmapXML.CreateIDDesignMap(_outputPath, 2, test, test1, new ArrayList());
+            _designmapXML.CreateIDDesignMap(_outputPath, 2, test, test1, new ArrayList(),string.Empty);
             FileNameWithPath = Common.PathCombine(_outputPath, "designmap.xml");
             bool result = IsNodeExists();
             return result;
@@ -184,7 +184,7 @@ namespace Test.InDesignConvert
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
             ArrayList test = new ArrayList();
             ArrayList test1 = new ArrayList();
-            _designmapXML.CreateIDDesignMap(_outputPath, 2, test, test1, new ArrayList());
+            _designmapXML.CreateIDDesignMap(_outputPath, 2, test, test1, new ArrayList(), string.Empty);
             FileNameWithPath = Common.PathCombine(_outputPath, "designmap.xml");
             XmlNodeList result = Common.GetXmlNodeListInDesignNamespace(FileNameWithPath, XPath);
             return result.Count;

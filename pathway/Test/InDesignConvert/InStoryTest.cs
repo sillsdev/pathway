@@ -1316,7 +1316,7 @@ namespace Test.InDesignConvert
 
             InDesignMap inDesignMap = new InDesignMap();
             inDesignMap.CreateIDDesignMap(projInfo.TempOutputFolder, StyleName["ColumnClass"].Count, masterPageNames,
-                                          StyleName["TextVariables"], StyleName["CrossRef"]);
+                                          StyleName["TextVariables"], StyleName["CrossRef"], string.Empty);
 
             InPreferences inPreferences = new InPreferences();
             inPreferences.CreateIDPreferences(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), idAllClass);
@@ -1890,7 +1890,7 @@ namespace Test.InDesignConvert
 
             ArrayList test = new ArrayList();
             InDesignMap _designmapXML = new InDesignMap();
-            _designmapXML.CreateIDDesignMap(_outputPath, 4, new ArrayList(), test, StyleName["CrossRef"]);
+            _designmapXML.CreateIDDesignMap(_outputPath, 4, new ArrayList(), test, StyleName["CrossRef"], string.Empty);
             classname = "Name_namenema3";
 
             FileNameWithPath = Path.Combine(_outputPath,"designmap.xml");
@@ -2023,7 +2023,7 @@ namespace Test.InDesignConvert
             inSpread.CreateIDSpread(Common.PathCombine(projInfo.TempOutputFolder, "Spreads"), idAllClass, StyleName["ColumnClass"]);
 
             InDesignMap inDesignMap = new InDesignMap();
-            inDesignMap.CreateIDDesignMap(projInfo.TempOutputFolder, StyleName["ColumnClass"].Count, masterPageNames, StyleName["TextVariables"], StyleName["CrossRef"]);
+            inDesignMap.CreateIDDesignMap(projInfo.TempOutputFolder, StyleName["ColumnClass"].Count, masterPageNames, StyleName["TextVariables"], StyleName["CrossRef"], string.Empty);
 
             InPreferences inPreferences = new InPreferences();
             inPreferences.CreateIDPreferences(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), idAllClass);
@@ -2137,7 +2137,7 @@ namespace Test.InDesignConvert
 
             InDesignMap inDesignMap = new InDesignMap();
             inDesignMap.CreateIDDesignMap(projInfo.TempOutputFolder, StyleName["ColumnClass"].Count, masterPageNames,
-                                          StyleName["TextVariables"], StyleName["CrossRef"]);
+                                          StyleName["TextVariables"], StyleName["CrossRef"], string.Empty);
 
             InPreferences inPreferences = new InPreferences();
             inPreferences.CreateIDPreferences(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), idAllClass);
@@ -2210,7 +2210,7 @@ namespace Test.InDesignConvert
 
             InDesignMap inDesignMap = new InDesignMap();
             inDesignMap.CreateIDDesignMap(projInfo.TempOutputFolder, StyleName["ColumnClass"].Count, masterPageNames,
-                                          StyleName["TextVariables"], StyleName["CrossRef"]);
+                                          StyleName["TextVariables"], StyleName["CrossRef"], string.Empty);
 
             InPreferences inPreferences = new InPreferences();
             inPreferences.CreateIDPreferences(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), idAllClass);
