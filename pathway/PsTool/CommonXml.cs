@@ -168,6 +168,46 @@ namespace SIL.Tool
         }
 
         /// <summary>
+        /// Get MetaData information from DictionaryStyleSettings.xml/ScriptureStyleSettings.xml
+        /// </summary>
+        /// <param name="_projectInputType">Dictionary / Scripture</param>
+        /// <returns>The metaDataList information</returns>
+        public static Dictionary<string,string> GetMetaData(string _projectInputType)
+        {
+            List<string> metaDataList = new List<string>();
+            metaDataList.Add("Title");
+            metaDataList.Add("Creator");
+            metaDataList.Add("Publisher");
+            metaDataList.Add("Description");
+            metaDataList.Add("Copyright Holder");
+            metaDataList.Add("Subject");
+
+            Dictionary<string, string> metaDataDic = new Dictionary<string, string>();
+            string metaData = _projectInputType.ToLower() == "scripture" ? "ScriptureStyleSettings.xml" : "DictionaryStyleSettings.xml";
+            string metaDataFull = Path.Combine(Path.Combine(Path.Combine(Path.Combine(GetAllUserAppPath(), "SIL"), "Pathway"), _projectInputType), metaData);
+
+            if (!File.Exists(metaDataFull)) return metaDataDic;
+
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.Load(metaDataFull);
+            XmlNode root = xmlDocument.DocumentElement;
+            if (root == null) return metaDataDic;
+            string xPath = "//Metadata/meta";
+            XmlNodeList returnNode = root.SelectNodes(xPath);
+
+            foreach (XmlNode node in returnNode)
+            {
+                string metaName = node.Attributes[0].Value;
+                if (metaDataList.Contains(metaName))
+                {
+                    metaDataDic[metaName] = node.ChildNodes[0].InnerText;
+                }
+            }
+
+            return metaDataDic;
+        }
+
+        /// <summary>
         /// Extracts the HTML img Tag from the Tag and returns it
         /// </summary>
         /// <param name="stringContent">The stringContent holds the string to be extracted</param>

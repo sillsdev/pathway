@@ -707,7 +707,7 @@ namespace SIL.PublishingSolution
             IncludeTextinMacro(strMacroPath, refFormat, macroFileName, projInfo.IsExtraProcessing);
 
             // BEGIN Generate Meta.Xml File
-            var metaXML = new OOMetaXML();
+            var metaXML = new OOMetaXML(projInfo.ProjectInputType);
             metaXML.CreateMeta(projInfo);
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             // BEGIN Generate Content.Xml File 

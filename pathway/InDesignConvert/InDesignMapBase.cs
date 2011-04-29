@@ -16,6 +16,7 @@
 
 using System;
 using System.IO;
+using System.Reflection;
 using System.Xml;
 using System.Collections.Generic;
 using System.Collections;
@@ -28,6 +29,7 @@ namespace SIL.PublishingSolution
     {
         #region Public Variables
         public XmlTextWriter _writer;
+        public string ProjectInputType;
         #endregion
 
         private ArrayList _textVariables;
@@ -50,6 +52,173 @@ namespace SIL.PublishingSolution
             CreateNamedGrid();
             CreateTextVariable();
             CreateTags();
+        }
+
+        private void CreateNamedGrid()
+        {
+            _writer.WriteStartElement("NamedGrid");
+            _writer.WriteAttributeString("Self", "NamedGrid/$ID/[Page Grid]");
+            _writer.WriteAttributeString("Name", "$ID/[Page Grid]");
+            _writer.WriteStartElement("GridDataInformation");
+            _writer.WriteAttributeString("FontStyle", "Regular");
+            _writer.WriteAttributeString("PointSize", "12");
+            _writer.WriteAttributeString("CharacterAki", "0");
+            _writer.WriteAttributeString("LineAki", "9");
+            _writer.WriteAttributeString("HorizontalScale", "100");
+            _writer.WriteAttributeString("VerticalScale", "100");
+            _writer.WriteAttributeString("LineAlignment", "LeftOrTopLineJustify");
+            _writer.WriteAttributeString("GridAlignment", "AlignEmCenter");
+            _writer.WriteAttributeString("CharacterAlignment", "AlignEmCenter");
+            _writer.WriteStartElement("Properties");
+            _writer.WriteStartElement("AppliedFont");
+            _writer.WriteAttributeString("type", "string");
+            _writer.WriteString("Times New Roman");
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("idPkg:Preferences");
+            _writer.WriteAttributeString("src", "Resources/Preferences.xml");
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("MetadataPacketPreference");
+            _writer.WriteStartElement("Properties");
+            _writer.WriteStartElement("Contents");
+            CreateMetaData();
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("ConditionalTextPreference");
+            _writer.WriteAttributeString("ShowConditionIndicators", "ShowIndicators");
+            _writer.WriteAttributeString("ActiveConditionSet", "n");
+            _writer.WriteEndElement();
+        }
+
+        private void CreateMetaData()
+        {
+            string createDate = DateTime.Now.ToString("s");
+            string[] assemblyInfo = Assembly.GetExecutingAssembly().FullName.Split(',');
+            string assemblyVersion = assemblyInfo[0] + assemblyInfo[1].Replace("Version=", "");
+
+            Dictionary<string, string> _metaDataDic = new Dictionary<string, string>();
+            _metaDataDic = Common.GetMetaData(ProjectInputType);
+            //metaDataList["Title"];
+            //metaDataList["Creator"];
+            //metaDataList["Publisher"];
+            //metaDataList["Description"];
+            //metaDataList["Copyright Holder"];
+            //metaDataList["Subject"];
+            _writer.WriteRaw("<![CDATA[<?xpacket begin=\"?\" id=\"W5M0MpCehiHzreSzNTczkc9d\"?>");
+            _writer.WriteStartElement("x:xmpmeta");
+            _writer.WriteAttributeString("xmlns:x", "adobe:ns:meta/");
+            _writer.WriteAttributeString("x:xmptk", "Adobe XMP Core 4.2.2-c063 53.352624, 2008/07/30-18:12:18        ");
+            _writer.WriteStartElement("rdf:RDF");
+            _writer.WriteAttributeString("xmlns:rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+            _writer.WriteStartElement("rdf:Description");
+            _writer.WriteAttributeString("rdf:about", "");
+            _writer.WriteAttributeString("xmlns:dc", "http://purl.org/dc/elements/1.1/");
+            _writer.WriteStartElement("dc:format");
+            _writer.WriteString("application/x-indesign");
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("dc:title");
+            _writer.WriteStartElement("rdf:Alt");
+            _writer.WriteStartElement("rdf:li");
+            _writer.WriteAttributeString("xml:lang", "x-default");
+            _writer.WriteString(_metaDataDic["Title"]);
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("dc:creator");
+            _writer.WriteStartElement("rdf:Seq");
+            _writer.WriteStartElement("rdf:li");
+            _writer.WriteString(_metaDataDic["Creator"]);
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("dc:description");
+            _writer.WriteStartElement("rdf:Alt");
+            _writer.WriteStartElement("rdf:li");
+            _writer.WriteAttributeString("xml:lang", "x-default");
+            _writer.WriteString(_metaDataDic["Description"]);
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+
+            _writer.WriteStartElement("dc:subject");
+            _writer.WriteStartElement("rdf:Bag");
+            _writer.WriteStartElement("rdf:li");
+            _writer.WriteString(_metaDataDic["Subject"]);
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("dc:rights");
+            _writer.WriteStartElement("rdf:Alt");
+            _writer.WriteStartElement("rdf:li");
+            _writer.WriteAttributeString("xml:lang", "x-default");
+            _writer.WriteString(_metaDataDic["Copyright Holder"]);
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("rdf:Description");
+            _writer.WriteAttributeString("rdf:about", "");
+            _writer.WriteAttributeString("xmlns:xmp", "http://ns.adobe.com/xap/1.0/");
+            _writer.WriteStartElement("xmp:CreateDate");
+            _writer.WriteString(createDate);
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("xmp:MetadataDate");
+            _writer.WriteString("2011-04-28T14:46:34+05:30");
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("xmp:ModifyDate");
+            _writer.WriteString("2011-04-28T14:46:34+05:30");
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("xmp:CreatorTool");
+            _writer.WriteString(assemblyVersion);
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("rdf:Description");
+            _writer.WriteAttributeString("rdf:about", "");
+            _writer.WriteAttributeString("xmlns:xmpMM", "http://ns.adobe.com/xap/1.0/mm/");
+            _writer.WriteAttributeString("xmlns:stEvt", "http://ns.adobe.com/xap/1.0/sType/ResourceEvent#");
+            _writer.WriteStartElement("xmpMM:InstanceID");
+            _writer.WriteString("xmp.iid:DF3268787771E01190B8BB7186BCAEA5");
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("xmpMM:OriginalDocumentID");
+            _writer.WriteString("xmp.did:DF3268787771E01190B8BB7186BCAEA5");
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("xmpMM:History");
+            _writer.WriteStartElement("rdf:Seq");
+            _writer.WriteStartElement("rdf:li");
+            _writer.WriteAttributeString("rdf:parseType", "Resource");
+            _writer.WriteStartElement("stEvt:action");
+            _writer.WriteString("created");
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("stEvt:instanceID");
+            _writer.WriteString("xmp.iid:DF3268787771E01190B8BB7186BCAEA5");
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("stEvt:when");
+            _writer.WriteString("2011-04-28T14:46:34+05:30");
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("stEvt:softwareAgent");
+            _writer.WriteString("Adobe InDesign 6.0");
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("xmpMM:DocumentID");
+            _writer.WriteString("xmp.did:DF3268787771E01190B8BB7186BCAEA5");
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("rdf:Description");
+            _writer.WriteAttributeString("rdf:about", "");
+            _writer.WriteAttributeString("xmlns:photoshop", "http://ns.adobe.com/photoshop/1.0/");
+            _writer.WriteStartElement("photoshop:AuthorsPosition");
+            _writer.WriteString("author title");
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+            _writer.WriteRaw("<?xpacket end=\"r\"?>]]>");
         }
 
         private void CreateAssignment()
@@ -506,44 +675,6 @@ namespace SIL.PublishingSolution
                 }
             }
             return styleName;
-        }
-
-        private void CreateNamedGrid()
-        {
-            _writer.WriteStartElement("NamedGrid");
-            _writer.WriteAttributeString("Self", "NamedGrid/$ID/[Page Grid]");
-            _writer.WriteAttributeString("Name", "$ID/[Page Grid]");
-            _writer.WriteStartElement("GridDataInformation");
-            _writer.WriteAttributeString("FontStyle", "Regular");
-            _writer.WriteAttributeString("PointSize", "12");
-            _writer.WriteAttributeString("CharacterAki", "0");
-            _writer.WriteAttributeString("LineAki", "9");
-            _writer.WriteAttributeString("HorizontalScale", "100");
-            _writer.WriteAttributeString("VerticalScale", "100");
-            _writer.WriteAttributeString("LineAlignment", "LeftOrTopLineJustify");
-            _writer.WriteAttributeString("GridAlignment", "AlignEmCenter");
-            _writer.WriteAttributeString("CharacterAlignment", "AlignEmCenter");
-            _writer.WriteStartElement("Properties");
-            _writer.WriteStartElement("AppliedFont");
-            _writer.WriteAttributeString("type", "string");
-            _writer.WriteString("Times New Roman");
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-            _writer.WriteStartElement("idPkg:Preferences");
-            _writer.WriteAttributeString("src", "Resources/Preferences.xml");
-            _writer.WriteEndElement();
-            _writer.WriteStartElement("MetadataPacketPreference");
-            _writer.WriteStartElement("Properties");
-            _writer.WriteStartElement("Contents");
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-            _writer.WriteStartElement("ConditionalTextPreference");
-            _writer.WriteAttributeString("ShowConditionIndicators", "ShowIndicators");
-            _writer.WriteAttributeString("ActiveConditionSet", "n");
-            _writer.WriteEndElement();
         }
 
         private void EndIDDesignMap()

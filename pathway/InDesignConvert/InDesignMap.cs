@@ -31,11 +31,12 @@ namespace SIL.PublishingSolution
         private ArrayList _crossRef = new ArrayList();
         #endregion
 
-        public bool CreateIDDesignMap(string projectPath, int noOfTextFrames, ArrayList masterPageList, ArrayList textVariable, ArrayList crossRef)
+        public bool CreateIDDesignMap(string projectPath, int noOfTextFrames, ArrayList masterPageList, ArrayList textVariable, ArrayList crossRef, string projectInputType)
         {
             try
             {
                 _crossRef = crossRef;
+                ProjectInputType = projectInputType;
                 _noOfTextFrames = noOfTextFrames;
                 _masterPageList = masterPageList;
                 StartIDDesignMap(projectPath);
