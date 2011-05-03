@@ -24,6 +24,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using SIL.Tool;
@@ -275,6 +276,7 @@ namespace SIL.PublishingSolution
 
             // Set Default Collection Parameters
             var red = "false";
+            var sbInfo = new StringBuilder();
             var info = "Bible text exported from FieldWorks Translation Editor.";
 			var iconFullName = Common.FromRegistry(Common.PathCombine("GoBible/GoBibleCore/Icon", "Icon.png"));
 
@@ -287,10 +289,22 @@ namespace SIL.PublishingSolution
             if (mobilefeature.ContainsKey("RedLetter") && mobilefeature["RedLetter"] == "Yes")
                 red = "true";
             // TD-2344: metadata block for dc metadata items
-            var organization = Param.Value["Organization"];
-            info = Param.GetMetadataValue(Param.Description, organization) ?? ""; // empty string if null / not found
-            info += " ";
-            info += Param.GetMetadataValue(Param.CopyrightHolder, organization) ?? ""; // empty string if null / not found
+            sbInfo.Append(GetInfo(Param.Title));
+            sbInfo.Append(GetInfo(Param.Creator));
+            sbInfo.Append(GetInfo(Param.Publisher));
+            sbInfo.Append(GetInfo(Param.Description));
+            sbInfo.Append(GetInfo(Param.CopyrightHolder));
+            sbInfo.Append(GetInfo(Param.Type));
+            sbInfo.Append(GetInfo(Param.Source));
+            sbInfo.Append(GetInfo(Param.Format));
+            sbInfo.Append(GetInfo(Param.Contributor));
+            sbInfo.Append(GetInfo(Param.Relation));
+            sbInfo.Append(GetInfo(Param.Coverage));
+            sbInfo.Append(GetInfo(Param.Subject));
+            sbInfo.Append(GetInfo(Param.Date));
+            sbInfo.Append(GetInfo(Param.Language));
+            sbInfo.Append(GetInfo(Param.Identifier));
+
             //if (mobilefeature.ContainsKey("Information"))
             //    info = mobilefeature["Information"].Trim();
             //if (mobilefeature.ContainsKey("Copyright"))
@@ -303,7 +317,7 @@ namespace SIL.PublishingSolution
             const bool overwrite = true;
             if (iconDirectory != processFolder)
                 File.Copy(iconFullName, Path.Combine(processFolder, _iconFile), overwrite);
-
+            info = sbInfo.ToString();
             // Write collection file
             TextWriter textWriter = new StreamWriter(collectionFullName);
             textWriter.WriteLine("Info: " + info);
@@ -318,6 +332,23 @@ namespace SIL.PublishingSolution
             }
             textWriter.Close();
             return true;
+        }
+
+        private string GetInfo(string metadataValue)
+        {
+            var organization = Param.Value["Organization"];
+            var sb = new StringBuilder();
+            var value = Param.GetMetadataValue(metadataValue, organization);
+            // check for null / empty values
+            if (value == null) return "";
+            if (value.Trim().Length < 1) return "";
+            // if we got here, there's a metadata value that can be pulled out and formatted
+            sb.Append(metadataValue);
+            sb.Append(": ");
+            sb.Append(value);
+            sb.Append(" / ");
+            // return the result)
+            return sb.ToString();
         }
 
         /// <summary>

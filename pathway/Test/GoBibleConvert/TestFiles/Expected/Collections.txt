@@ -1,4 +1,4 @@
-Info: Sena 3 © 2010 SIL
+Info: Publisher: SIL International / Description: Sena 3 / Copyright Holder: © 2010 SIL / Subject: Bible / 
 Phone-Icon-Filepath: Icon.png
 RedLettering: true
 Source-Text: 1pe_cv.xhtml
