@@ -58,34 +58,33 @@ namespace SIL.PublishingSolution
 
         private void CrossRef()
         {
- 
             int i = 1;
             foreach (string crossref in _crossRef)
             {
                 _writer.WriteStartElement("Hyperlink");
                 _writer.WriteAttributeString("Self", crossref);
                 _writer.WriteAttributeString("Name", crossref);
-                    _writer.WriteAttributeString("Source", "Hyperlink_" + crossref);
-                    _writer.WriteAttributeString("Visible", "true");
-                    _writer.WriteAttributeString("Highlight", "Outline");
-                    _writer.WriteAttributeString("Width", "Thin");
-                    _writer.WriteAttributeString("BorderStyle", "Dashed");
-                    _writer.WriteAttributeString("Hidden", "false");
-                    _writer.WriteAttributeString("DestinationUniqueKey", i.ToString());
+                _writer.WriteAttributeString("Source", "Hyperlink_" + crossref);
+                _writer.WriteAttributeString("Visible", "true");
+                _writer.WriteAttributeString("Highlight", "Outline");
+                _writer.WriteAttributeString("Width", "Thin");
+                _writer.WriteAttributeString("BorderStyle", "Dashed");
+                _writer.WriteAttributeString("Hidden", "false");
+                _writer.WriteAttributeString("DestinationUniqueKey", i.ToString());
 
-                    _writer.WriteStartElement("Properties");
-                        //Border
-                        _writer.WriteStartElement("BorderColor");
-                        _writer.WriteAttributeString("type", "enumeration");
-                        _writer.WriteString("LightBlue");
-                        _writer.WriteEndElement();
-                        //Destination
-                        _writer.WriteStartElement("Destination");
-                        _writer.WriteAttributeString("type", "object");
-                        _writer.WriteString("Name_" + crossref);
-                        _writer.WriteEndElement();
+                _writer.WriteStartElement("Properties");
+                //Border
+                _writer.WriteStartElement("BorderColor");
+                _writer.WriteAttributeString("type", "enumeration");
+                _writer.WriteString("LightBlue");
+                _writer.WriteEndElement();
+                //Destination
+                _writer.WriteStartElement("Destination");
+                _writer.WriteAttributeString("type", "object");
+                _writer.WriteString("Name_" + crossref);
+                _writer.WriteEndElement();
 
-                   _writer.WriteEndElement(); // Properties
+                _writer.WriteEndElement(); // Properties
                 _writer.WriteEndElement();
                 i++;
             }
@@ -112,7 +111,7 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("src", "MasterSpreads/MasterSpread_uc0.xml");
                 _writer.WriteEndElement();
             }
-            
+
             for (int i = 1; i <= 3; i++)
             {
                 _writer.WriteStartElement("idPkg:Spread");

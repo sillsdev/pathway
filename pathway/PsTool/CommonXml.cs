@@ -174,6 +174,9 @@ namespace SIL.Tool
         /// <returns>The metaDataList information</returns>
         public static Dictionary<string,string> GetMetaData(string _projectInputType)
         {
+            if (_projectInputType.Length == 0)
+                _projectInputType = "Dictionary";
+
             List<string> metaDataList = new List<string>();
             metaDataList.Add("Title");
             metaDataList.Add("Creator");
@@ -183,6 +186,12 @@ namespace SIL.Tool
             metaDataList.Add("Subject");
 
             Dictionary<string, string> metaDataDic = new Dictionary<string, string>();
+            foreach (string meta in metaDataList)
+            {
+                metaDataDic[meta] = string.Empty;
+            }
+
+            
             string metaData = _projectInputType.ToLower() == "scripture" ? "ScriptureStyleSettings.xml" : "DictionaryStyleSettings.xml";
             string metaDataFull = Path.Combine(Path.Combine(Path.Combine(Path.Combine(GetAllUserAppPath(), "SIL"), "Pathway"), _projectInputType), metaData);
 
@@ -203,6 +212,8 @@ namespace SIL.Tool
                     metaDataDic[metaName] = node.ChildNodes[0].InnerText;
                 }
             }
+
+
 
             return metaDataDic;
         }
