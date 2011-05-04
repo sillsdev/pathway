@@ -1373,7 +1373,7 @@ namespace SIL.PublishingSolution
                     sb.Append("#");
                     XmlNode val = node.Attributes["id"];
                     if(val != null)
-                        sb.Append(val);
+                        sb.Append(val.Value);
                     //sb.Append(node.Attributes["id"].Value);
                         
                     if (_inputType.Equals("dictionary"))
