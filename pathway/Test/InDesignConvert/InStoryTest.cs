@@ -1321,16 +1321,53 @@ namespace Test.InDesignConvert
             InPreferences inPreferences = new InPreferences();
             inPreferences.CreateIDPreferences(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), idAllClass);
 
-            // Compare files
-
-            string expectedFolder = Common.PathCombine(_testFolderPath, "Expected\\MultiLangHeader");
+            string classname = "dTextVariablenFirst1";
             string output = Common.PathCombine(projInfo.TempOutputFolder, "designmap.xml");
-            string expected = Common.PathCombine(expectedFolder, "designmap1.xml");
-            XmlAssert.AreEqual(output, expected, " designmap.xml is not matching");
+            string xPath = "//TextVariable[@Self = \"" + classname + "\"]";
+            XmlNode node = Common.GetXmlNodeInDesignNamespace(output, xPath);
+            string result = node.InnerXml;
+            string expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
 
-            //output = Common.PathCombine(projInfo.TempOutputFolder, "Stories\\Story_2.xml");
-            //expected = Common.PathCombine(expectedFolder, "Stories\\Story_2.xml");
-            //XmlAssert.AreEqual(output, expected, " Story_2.xml is not matching");
+            classname = "dTextVariablenFirst3";
+            output = Common.PathCombine(projInfo.TempOutputFolder, "designmap.xml");
+            xPath = "//TextVariable[@Self = \"" + classname + "\"]";
+            node = Common.GetXmlNodeInDesignNamespace(output, xPath);
+            result = node.InnerXml;
+            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-x-PIN\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
+
+            classname = "dTextVariablenFirst4";
+            output = Common.PathCombine(projInfo.TempOutputFolder, "designmap.xml");
+            xPath = "//TextVariable[@Self = \"" + classname + "\"]";
+            node = Common.GetXmlNodeInDesignNamespace(output, xPath);
+            result = node.InnerXml;
+            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-fonipa\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
+
+            classname = "dTextVariablenLast1";
+            output = Common.PathCombine(projInfo.TempOutputFolder, "designmap.xml");
+            xPath = "//TextVariable[@Self = \"" + classname + "\"]";
+            node = Common.GetXmlNodeInDesignNamespace(output, xPath);
+            result = node.InnerXml;
+            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
+
+            classname = "dTextVariablenLast3";
+            output = Common.PathCombine(projInfo.TempOutputFolder, "designmap.xml");
+            xPath = "//TextVariable[@Self = \"" + classname + "\"]";
+            node = Common.GetXmlNodeInDesignNamespace(output, xPath);
+            result = node.InnerXml;
+            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-x-PIN\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
+
+            classname = "dTextVariablenLast4";
+            output = Common.PathCombine(projInfo.TempOutputFolder, "designmap.xml");
+            xPath = "//TextVariable[@Self = \"" + classname + "\"]";
+            node = Common.GetXmlNodeInDesignNamespace(output, xPath);
+            result = node.InnerXml;
+            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-fonipa\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
         }
 
         [Test]
@@ -2142,16 +2179,21 @@ namespace Test.InDesignConvert
             InPreferences inPreferences = new InPreferences();
             inPreferences.CreateIDPreferences(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), idAllClass);
 
-            // Compare files
-
-            string expectedFolder = Common.PathCombine(_testFolderPath, "Expected\\MultiLangHeader");
+            string classname = "dTextVariablenFirst1";
             string output = Common.PathCombine(projInfo.TempOutputFolder, "designmap.xml");
-            string expected = Common.PathCombine(expectedFolder, "designmap2.xml");
-            XmlAssert.AreEqual(output, expected, " designmap.xml is not matching");
+            string xPath = "//TextVariable[@Self = \"" + classname + "\"]";
+            XmlNode node = Common.GetXmlNodeInDesignNamespace(output, xPath);
+            string result = node.InnerXml;
+            string expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/headword\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
 
-            //output = Common.PathCombine(projInfo.TempOutputFolder, "Stories\\Story_2.xml");
-            //expected = Common.PathCombine(expectedFolder, "Stories\\Story_2.xml");
-            //XmlAssert.AreEqual(output, expected, " Story_2.xml is not matching");
+            classname = "dTextVariablenLast1";
+            output = Common.PathCombine(projInfo.TempOutputFolder, "designmap.xml");
+            xPath = "//TextVariable[@Self = \"" + classname + "\"]";
+            node = Common.GetXmlNodeInDesignNamespace(output, xPath);
+            result = node.InnerXml;
+            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/headword\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
         }
 
         [Test]
@@ -2215,16 +2257,21 @@ namespace Test.InDesignConvert
             InPreferences inPreferences = new InPreferences();
             inPreferences.CreateIDPreferences(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), idAllClass);
 
-            // Compare files
-
-            string expectedFolder = Common.PathCombine(_testFolderPath, "Expected\\MultiLangHeader");
+            string classname = "dTextVariablenFirst1";
             string output = Common.PathCombine(projInfo.TempOutputFolder, "designmap.xml");
-            string expected = Common.PathCombine(expectedFolder, "designmap3.xml");
-            XmlAssert.AreEqual(output, expected, " designmap.xml is not matching");
+            string xPath = "//TextVariable[@Self = \"" + classname + "\"]";
+            XmlNode node = Common.GetXmlNodeInDesignNamespace(output, xPath);
+            string result = node.InnerXml;
+            string expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/headword\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
 
-            //output = Common.PathCombine(projInfo.TempOutputFolder, "Stories\\Story_2.xml");
-            //expected = Common.PathCombine(expectedFolder, "Stories\\Story_2.xml");
-            //XmlAssert.AreEqual(output, expected, " Story_2.xml is not matching");
+            classname = "dTextVariablenLast1";
+            output = Common.PathCombine(projInfo.TempOutputFolder, "designmap.xml");
+            xPath = "//TextVariable[@Self = \"" + classname + "\"]";
+            node = Common.GetXmlNodeInDesignNamespace(output, xPath);
+            result = node.InnerXml;
+            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/headword\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
         }
 
         [Test]

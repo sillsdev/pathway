@@ -140,6 +140,9 @@ namespace SIL.PublishingSolution
         private bool _isListBegin;
         private Dictionary<string, string> ListType;
         private string _anchorText = string.Empty;
+
+        private bool _isEmptyTitleExist;
+        private int _titleCounter=1;
         #endregion
 
         public OOContent()
@@ -920,8 +923,11 @@ namespace SIL.PublishingSolution
 
         private void WriteFootNoteMarker(string footerClassName, string content, string marker)
         {
-
-            if (footCallSymb.Length == 0) return;
+            if (footCallSymb.Length == 0)
+            {
+                footCallSymb = _titleCounter++.ToString();
+                _isEmptyTitleExist = true;
+            }
             string footerCall = footerClassName + "..footnote-call";
             string footerMarker = footerClassName + "..footnote-marker";
             if (IdAllClass.ContainsKey(footerCall) && String.IsNullOrEmpty(footCallSymb))
@@ -1105,6 +1111,15 @@ namespace SIL.PublishingSolution
             DropCaps();
             SetFootnote();
             FooterSetup();
+            ResetTitleCounter();
+        }
+
+        private void ResetTitleCounter()
+        {
+            if (_isEmptyTitleExist && _classNameWithLang == "scrBook")
+            {
+                _titleCounter = 1;
+            }
         }
 
         private void ListBegin()
