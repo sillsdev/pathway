@@ -217,6 +217,19 @@ namespace SIL.PublishingSolution
             
         }
 
+        /// <summary>
+        /// For Header/Footer variables, all entry shouldn't be partial on page end.
+        /// TD-2403
+        /// </summary>
+        /// <param name="className"></param>
+        private void InsertOrphansForEntry(string className)
+        {
+            if (className.IndexOf("entry") == 0)
+            {
+                SetAttributeNS("orphans", "fo", "9");
+            }
+        }
+
         private void AddParaTextNode(KeyValuePair<string, Dictionary<string, string>> className, XmlNode node, string familyType)
         {
             _paragraphProperty.Clear();
@@ -315,6 +328,7 @@ namespace SIL.PublishingSolution
                     //_nameElement.SetAttribute(prop, nsmgr.LookupNamespace(ns), para.Value);
                     SetAttributeNS(prop,ns,para.Value);
                 }
+                InsertOrphansForEntry(className.Key);
             }
 
             XmlNode textNode = null;
