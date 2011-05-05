@@ -717,7 +717,6 @@ namespace SIL.PublishingSolution
             content = ReplaceString(content);
             if (CollectFootNoteChapterVerse(content, Common.OutputType.ODT.ToString())) return;
             content = InsertSpaceInTextforMacro(content); //TD-2034
-            WriteGuidewordValueToVariable(content);
 
             // Psuedo Before
             foreach (ClassInfo psuedoBefore in _psuedoBefore)
@@ -748,34 +747,6 @@ namespace SIL.PublishingSolution
                 _isDropCap = false;
             }
             _psuedoBefore.Clear();
-        }
-
-        private void WriteGuidewordValueToVariable(string content)
-        {
-            if (_classNameWithLang.IndexOf("headword") == 0)
-            {
-                _writer.WriteStartElement("text:span");
-                _writer.WriteAttributeString("text:style-name", _classNameWithLang);
-                _writer.WriteStartElement("text:variable-set");
-                _writer.WriteAttributeString("text:name", "Left_Guideword");
-                _writer.WriteAttributeString("text:display", "none");
-                _writer.WriteAttributeString("text:formula", "ooow: " + content);
-                _writer.WriteAttributeString("office:value-type", "string");
-                _writer.WriteAttributeString("office:string-value", " " + content);
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
-
-                _writer.WriteStartElement("text:span");
-                _writer.WriteAttributeString("text:style-name", _classNameWithLang);
-                _writer.WriteStartElement("text:variable-set");
-                _writer.WriteAttributeString("text:name", "Right_Guideword");
-                _writer.WriteAttributeString("text:display", "none");
-                _writer.WriteAttributeString("text:formula", "ooow: " + content);
-                _writer.WriteAttributeString("office:value-type", "string");
-                _writer.WriteAttributeString("office:string-value", " " + content);
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
-            }
         }
 
         /// <summary>
@@ -950,7 +921,7 @@ namespace SIL.PublishingSolution
         private void WriteFootNoteMarker(string footerClassName, string content, string marker)
         {
 
-            //if (footCallSymb.Length == 0) return;
+            if (footCallSymb.Length == 0) return;
             string footerCall = footerClassName + "..footnote-call";
             string footerMarker = footerClassName + "..footnote-marker";
             if (IdAllClass.ContainsKey(footerCall) && String.IsNullOrEmpty(footCallSymb))
@@ -1483,31 +1454,6 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("style:master-page-name", "First_20_Page");
             _writer.WriteStartElement("style:paragraph-properties");
             _writer.WriteAttributeString("style:page-number", "auto");
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-
-            _writer.WriteStartElement("style:style");
-            _writer.WriteAttributeString("style:name", "P2");
-            _writer.WriteAttributeString("style:family", "paragraph");
-            _writer.WriteAttributeString("style:parent-style-name", "Frame_20_contents");
-            _writer.WriteStartElement("style:paragraph-properties");
-            _writer.WriteAttributeString("fo:text-align", "end");
-            _writer.WriteAttributeString("style:justify-single-word", "false");
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-
-            _writer.WriteStartElement("style:style");
-            _writer.WriteAttributeString("style:name", "fr1");
-            _writer.WriteAttributeString("style:family", "graphic");
-            _writer.WriteAttributeString("style:parent-style-name", "Frame");
-            _writer.WriteStartElement("style:graphic-properties");
-            _writer.WriteAttributeString("style:vertical-pos", "from-top");
-            _writer.WriteAttributeString("style:vertical-rel", "page");
-            _writer.WriteAttributeString("style:horizontal-pos", "right");
-            _writer.WriteAttributeString("style:horizontal-rel", "paragraph");
-            _writer.WriteAttributeString("fo:padding", "0pt");
-            _writer.WriteAttributeString("fo:border", "none");
-            _writer.WriteAttributeString("style:flow-with-text", "false");
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
@@ -2055,9 +2001,6 @@ namespace SIL.PublishingSolution
             //_writer.WriteAttributeString("form:apply-design-mode", "false");
             //_writer.WriteEndElement();
 
-            //2377
-            CreateVariable();
-
             _writer.WriteStartElement("text:sequence-decls");
             _writer.WriteStartElement("text:sequence-decl");
             _writer.WriteAttributeString("text:display-outline-level", "0");
@@ -2111,19 +2054,6 @@ namespace SIL.PublishingSolution
             //}
         }
 
-        private void CreateVariable()
-        {
-            _writer.WriteStartElement("text:variable-decls");
-            _writer.WriteStartElement("text:variable-decl");
-            _writer.WriteAttributeString("office:value-type", "string");
-            _writer.WriteAttributeString("text:name", "Left_Guideword");
-            _writer.WriteEndElement();
-            _writer.WriteStartElement("text:variable-decl");
-            _writer.WriteAttributeString("office:value-type", "string");
-            _writer.WriteAttributeString("text:name", "Right_Guideword");
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
-        }
 
         private void UpdateRelativeInStylesXML()
         {
