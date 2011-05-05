@@ -51,7 +51,10 @@ namespace SIL.PublishingSolution
                 ddlOrganization.Items.Add(node.FirstChild.Value);
             }
             // select the first item in the list
-            ddlOrganization.SelectedIndex = 0;
+            if (ddlOrganization.Items.Count > 0)
+            {
+                ddlOrganization.SelectedIndex = 0;
+            }
         }
 
         private void btnOK_Click(object sender, EventArgs e)

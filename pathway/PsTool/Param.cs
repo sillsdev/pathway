@@ -1203,7 +1203,17 @@ namespace SIL.PublishingSolution
         /// <returns></returns>
         public static string GetMetadataValue(string Name, string Organization)
         {
-            XmlNode node = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/currentValue");
+            XmlNode node;
+            try
+            {
+                node = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/currentValue");
+            }
+            catch (Exception e)
+            {
+                // Exception (key not found?) - bail out with a null value
+                Debug.WriteLine(e.ToString());
+                return null;
+            }
             if (node == null)
             {
                 // no current value - attempt to get the organization default

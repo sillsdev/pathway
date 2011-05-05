@@ -20,6 +20,16 @@ namespace SIL.PublishingSolution
         public ExportThroughPathway()
         {
             InitializeComponent();
+            _helpTopic = "User_Interface/Dialog_boxes/Print_via.htm";
+            _fromPlugIn = true;
+        }
+
+        public ExportThroughPathway(string mode)
+        {
+            InitializeComponent();
+            Text = mode;
+            _helpTopic = "User_Interface/Dialog_boxes/Set_Defaults_dialog_box.htm";
+            _fromPlugIn = false;
         }
 
         #region Properties
@@ -535,11 +545,11 @@ namespace SIL.PublishingSolution
             Identifier = Param.GetMetadataValue(Param.Identifier, Organization);
 
             // front matter tab
-            CoverPage = Boolean.Parse(Param.GetMetadataValue(Param.CoverPage, Organization));
+            CoverPage = (Param.GetMetadataValue(Param.CoverPage, Organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CoverPage, Organization));
             CoverPageImagePath = Param.GetMetadataValue(Param.CoverPageFilename, Organization);
-            CoverPageTitle = Boolean.Parse(Param.GetMetadataValue(Param.CoverPageTitle, Organization));
-            TitlePage = Boolean.Parse(Param.GetMetadataValue(Param.TitlePage, Organization));
-            CopyrightPage = Boolean.Parse(Param.GetMetadataValue(Param.CopyrightPage, Organization));
+            TitlePage = (Param.GetMetadataValue(Param.TitlePage, Organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.TitlePage, Organization));
+            CoverPageTitle = (Param.GetMetadataValue(Param.CoverPageTitle, Organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CoverPageTitle, Organization));
+            CopyrightPage = (Param.GetMetadataValue(Param.CopyrightPage, Organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CopyrightPage, Organization));
             CopyrightPagePath = Param.GetMetadataValue(Param.CopyrightPageFilename, Organization);
             // license agreement
             XmlNode node;
