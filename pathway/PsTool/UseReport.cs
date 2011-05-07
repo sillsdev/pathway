@@ -54,7 +54,7 @@ namespace SIL.Tool
         }
 
         /// <summary>WebSite - where to get updates</summary>
-        private static string _webSite = "http://code.google.com/p/typeset-dictionary/";
+        private static string _webSite = "http://pathway.sil.org/";
 
         public static string WebSite
         {
