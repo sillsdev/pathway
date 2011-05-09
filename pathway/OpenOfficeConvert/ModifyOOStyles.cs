@@ -747,7 +747,7 @@ namespace SIL.PublishingSolution
         {
             _styleXMLdoc = new XmlDocument();
             _styleXMLdoc.Load(styleFilePath);
-            var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
+            XmlNamespaceManager nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
             nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
             nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
 

@@ -180,7 +180,8 @@ namespace SIL.PublishingSolution
             OpenXhtmlFile(projInfo.DefaultXhtmlFileWithPath); //reader
             CreateFile(projInfo.TempOutputFolder); //writer
             CreateSection();
-            Preprocess(projInfo.DefaultXhtmlFileWithPath);
+            Preprocess();
+            //PreprocessAnchor(projInfo.DefaultXhtmlFileWithPath); // todo in linux
             CreateBody();
             ProcessXHTML(projInfo.ProgressBar, projInfo.DefaultXhtmlFileWithPath, projInfo.TempOutputFolder);
             UpdateRelativeInStylesXML();
@@ -190,14 +191,19 @@ namespace SIL.PublishingSolution
             return new Dictionary<string, ArrayList>();
         }
 
-        private void Preprocess(string xhtmlFile)
+        private void Preprocess()
         {
             PreExportProcess preProcessor = new PreExportProcess(_projInfo);
-            preProcessor.AnchorTagProcessing(xhtmlFile, ref _anchor);
             preProcessor.ReplaceInvalidTagtoSpan("CmPicture-publishStemPile-ThumbnailPub", "div");
 
         }
 
+        private void PreprocessAnchor(string xhtmlFile)
+        {
+            PreExportProcess preProcessor = new PreExportProcess(_projInfo);
+            preProcessor.AnchorTagProcessing(xhtmlFile, ref _anchor);
+
+        }
 
         private void ProcessProperty()
         {

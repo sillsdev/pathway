@@ -402,6 +402,9 @@ namespace SIL.Tool
                     }
                 }
             }
+
+            if (Testing) return string.Empty; // Linux Test, Registry error
+
             //For ParaText Path.
             if (fromPath == string.Empty)
             {
