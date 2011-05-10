@@ -336,7 +336,18 @@ namespace SIL.PublishingSolution
 
         private string GetInfo(string metadataValue)
         {
-            var organization = Param.Value["Organization"];
+            string organization;
+            try
+            {
+                // get the organization
+                organization = Param.Value["Organization"];
+            }
+            catch (Exception)
+            {
+                // shouldn't happen (ExportThroughPathway dialog forces the user to select an organization), 
+                // but just in case, specify a default org.
+                organization = "SIL International";
+            }
             var sb = new StringBuilder();
             var value = Param.GetMetadataValue(metadataValue, organization);
             // check for null / empty values

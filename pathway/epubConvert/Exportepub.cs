@@ -1592,7 +1592,18 @@ namespace SIL.PublishingSolution
         {
             // Load User Interface Collection Parameters
             Param.LoadSettings();
-            var organization = Param.Value["Organization"];
+            string organization;
+            try
+            {
+                // get the organization
+                organization = Param.Value["Organization"];
+            }
+            catch (Exception)
+            {
+                // shouldn't happen (ExportThroughPathway dialog forces the user to select an organization), 
+                // but just in case, specify a default org.
+                organization = "SIL International";
+            }
             string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
             Dictionary<string, string> othersfeature = Param.GetItemsAsDictionary("//stylePick/styles/others/style[@name='" + layout + "']/styleProperty");
             // Title (book title in Configuration Tool UI / dc:title in metadata)
