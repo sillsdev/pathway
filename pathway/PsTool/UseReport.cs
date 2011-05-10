@@ -70,7 +70,7 @@ namespace SIL.Tool
         }
 
         /// <summary>DiscussionGroup - where to get help from other users</summary>
-        private static string _discussionGroup = "http://tech.groups.yahoo.com/group/typesetdictionary/";
+        private static string _discussionGroup = "http://pathway.sil.org/support/";
 
         public static string DiscussionGroup
         {
