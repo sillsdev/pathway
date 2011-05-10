@@ -108,12 +108,12 @@ namespace SIL.PublishingSolution
 
         public bool ReversalExists
         {
-            set { throw new NotImplementedException(); }
+            set { chkReversalIndexes.Checked = value; }
         }
 
         public bool GrammarExists
         {
-            set { throw new NotImplementedException(); }
+            set { chkGrammarSketch.Checked = value; }
         }
 
         string IExportContents.OutputLocationPath
@@ -123,7 +123,8 @@ namespace SIL.PublishingSolution
 
         public bool ExistingDirectoryInput
         {
-            get { throw new NotImplementedException(); }
+            // EDB 5/10/2011 - code "cockroach" from PrintVia.cs - this doesn't appear to do anything.
+            get { return false; }
         }
 
         public bool ExportMain { get; set; }
@@ -272,11 +273,19 @@ namespace SIL.PublishingSolution
 
             if (this.Text != "Set Defaults")
             {
+                // not setting defaults, just opening the dialog:
+                // load the settings file and migrate it if necessary
+                Param.LoadSettings();
+                Param.SetValue(Param.InputType, InputType);
                 Param.LoadSettings();
                 ValidateXMLVersion(Param.SettingPath);
             }
-            Param.SetValue(Param.InputType, InputType);
-            Param.LoadSettings();
+            else
+            {
+                // setting defaults: just load the settings file (don't migrate)
+                Param.SetValue(Param.InputType, InputType);
+                Param.LoadSettings();
+            }
 
             // get the current organization
             try
