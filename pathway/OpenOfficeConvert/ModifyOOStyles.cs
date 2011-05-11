@@ -794,11 +794,22 @@ namespace SIL.PublishingSolution
                             }
                         }
                     }
+                }
+
+                XmlNode remNode = null;
+                foreach (XmlNode childNode in node.ChildNodes)
+                {
                     if (childNode.Name == "style:text-properties") // Removing all the Child properties of Text Node, to avoid in Paragraph property.
                     {
-                        node.RemoveChild(childNode);
+                        remNode = childNode;
                     }
                 }
+                if (remNode != null)
+                {
+                    node.RemoveChild(remNode);
+                }
+
+
                 XmlDocumentFragment styleNode = _styleXMLdoc.CreateDocumentFragment();
                 styleNode.InnerXml = node.OuterXml;
                 node.ParentNode.InsertAfter(styleNode, node);
