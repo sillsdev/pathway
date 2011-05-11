@@ -776,7 +776,7 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// Sets the chapterno, verseno and class names for footer
         /// </summary>
-        protected void FooterSetup()
+        protected void FooterSetup(string outputType)
         {
             string characterStyle = StackPeekCharStyle(_allCharacter);
             //if (characterStyle.ToLower().IndexOf("chapternumber") == 0)
@@ -801,14 +801,31 @@ namespace SIL.PublishingSolution
                 string footerMarkerClassName = _className + "..footnote-marker";
                 if (IdAllClass.ContainsKey(footerMarkerClassName))
                 {
-                    string a = string.Empty;
+                    string footnoteText = string.Empty;
                     if (!IdAllClass[footerMarkerClassName].ContainsKey("content")) return;
                     string content = IdAllClass[footerMarkerClassName]["content"];
                     if (content.IndexOf("string(chapter)") >= 0)
-                        a = content.ToLower().Replace("string(chapter)", _chapterNo);
+                        footnoteText = content.ToLower().Replace("string(chapter)", _chapterNo);
                     if (content.IndexOf("string(verse)") >= 0)
-                        a = a.Replace("string(verse)", _verseNo);
-                    footnoteContent.Append(a);
+                    {
+                        footnoteText = footnoteText.Replace("string(verse)", _verseNo);
+                    }
+                    if (outputType == Common.OutputType.ODT.ToString())
+                    {
+                        footnoteContent.Append("<text:span text:style-name=\"" + footerMarkerClassName + "\">" + footnoteText + "</text:span>");
+                    }
+                    else
+                    {
+                        footnoteContent.Append(footnoteText);
+                    }
+                    //else if (outputType == Common.OutputType.XETEX.ToString())
+                    //{
+                    //    footnoteContent.Append(footnoteText);
+                    //}
+                    //else
+                    //{
+                    //    footnoteContent.Append("<CharacterStyleRange AppliedCharacterStyle=\"" + "CharacterStyle/" + footerMarkerClassName + "\"><Content>" + footnoteText + "</Content></CharacterStyleRange>");
+                    //}
                 }
             }
 

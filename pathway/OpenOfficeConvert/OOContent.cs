@@ -931,7 +931,8 @@ namespace SIL.PublishingSolution
         {
             if (footCallSymb.Length == 0)
             {
-                footCallSymb = _titleCounter++.ToString();
+                //footCallSymb = _titleCounter++.ToString();
+                footCallSymb = " ";
                 _isEmptyTitleExist = true;
             }
             string footerCall = footerClassName + "..footnote-call";
@@ -1116,7 +1117,7 @@ namespace SIL.PublishingSolution
             VisibilityCheck();
             DropCaps();
             SetFootnote();
-            FooterSetup();
+            FooterSetup(Common.OutputType.ODT.ToString());
             ResetTitleCounter();
         }
 

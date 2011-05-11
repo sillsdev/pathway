@@ -942,7 +942,7 @@ namespace SIL.PublishingSolution
             Psuedo();
             DropCaps();
             SetHomographNumber(true);
-            FooterSetup();
+            FooterSetup(Common.OutputType.IDML.ToString());
 
             if (IdAllClass.ContainsKey(_classNameWithLang))
             {
