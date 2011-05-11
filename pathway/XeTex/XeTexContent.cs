@@ -813,7 +813,7 @@ namespace SIL.PublishingSolution
             Psuedo();
             DropCaps();
             SetHomographNumber(true);
-            FooterSetup();
+            //FooterSetup();
 
             if (IdAllClass.ContainsKey(_classNameWithLang))
             {
