@@ -357,6 +357,15 @@ namespace Test.Xetex
         }
 
         [Test]
+        public void Larger()
+        {
+            const string file = "Larger";
+            _projInfo.ProjectInputType = "Dictionary";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
         [Category("SkipOnTeamCity")]
         public void TextAlignJustifyTest()
         {

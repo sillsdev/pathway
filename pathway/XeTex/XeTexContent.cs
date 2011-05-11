@@ -55,6 +55,8 @@ namespace SIL.PublishingSolution
         private List<string> _mergedInlineStyle;
         private bool _IsHeadword = false;
         private bool _isDropCap = false;
+        private bool _xetexNewLine;
+        
         private string _dropCapStyle = string.Empty;
         private string _currentStoryName = string.Empty;
         Dictionary<string, List<string>> _classInlineStyle = new Dictionary<string, List<string>>();
@@ -81,7 +83,6 @@ namespace SIL.PublishingSolution
             OpenXhtmlFile(xhtmlFileWithPath);
             ProcessXHTML(xhtmlFileWithPath);
             //UpdateRelativeInStylesXML();
-            CloseFile();
             return _newProperty;
         }
 
@@ -119,29 +120,6 @@ namespace SIL.PublishingSolution
                 {
                     ContentCounterReset[className] = IdAllClass[className][searchKey];
                 }
-
-                //searchKey = "prince-text-replace";
-                //if (IdAllClass[className].ContainsKey(searchKey))
-                //{
-                //    _replaceSymbolToText.Clear();
-                //    string[] values = IdAllClass[className][searchKey].Split('\"');
-                //    if (values.Length <= 1)
-                //        values = IdAllClass[className][searchKey].Split('\'');
-                //    for (int i = 0; i < values.Length; i++)
-                //    {
-                //        if (values[i].Length > 0)
-                //        {
-                //            string key = values[i].Replace("\"", "");
-                //            //key = Common.ReplaceSymbolToText(key);
-                //            i++;
-                //            i++;
-                //            string value = values[i].Replace("\"", "");
-                //            value = Common.ReplaceSymbolToText(value);
-                //            CssParser cssParser = new CssParser();
-                //            _replaceSymbolToText[key] = cssParser.UnicodeConversion(value);
-                //        }
-                //    }
-                //}
 
                 //// Footnote process 
                 searchKey = "display";
@@ -215,13 +193,6 @@ namespace SIL.PublishingSolution
 
         private void Write()
         {
-            //_imageInserted = InsertImage(); // TODO
-
-            if (isFileCreated == false)
-            {
-                CreateFile();
-                _textFrameClass.Add(_childName);
-            }
 
             if (_isNewParagraph)
             {
@@ -239,12 +210,8 @@ namespace SIL.PublishingSolution
                 _paragraphName = null;
                 _isNewParagraph = false;
                 _isParagraphClosed = false;
+                _xetexNewLine = true;
             }
-            ////Note - for Xetex Added for Extra Line for Paragraph
-            //if (_tagType == "div")
-            //{
-            //    _xetexFile.Write("\r\n");
-            //}
 
             WriteText();
             isFileEmpty = false;
@@ -397,8 +364,8 @@ namespace SIL.PublishingSolution
                 
                 _xetexFile.Write(content);
                 _xetexFile.Write("}");
-                if(_tagType == "div")
-                    _xetexFile.Write("\r\n");
+                //if(_tagType == "div")
+                //    _xetexFile.Write("\r\n");
 
             }
             AnchorBookMark();
@@ -413,6 +380,14 @@ namespace SIL.PublishingSolution
             }
             else // regular style
             {
+
+                //Note - Xetex paragraph new line
+                if (_xetexNewLine)
+                {
+                    _xetexFile.Write("\r\n");
+                    _xetexNewLine = false;
+                }
+
                 string paraStyle;
                 
                 if (characterStyle.IndexOf("No character style") > 0)
@@ -838,7 +813,7 @@ namespace SIL.PublishingSolution
             Psuedo();
             DropCaps();
             SetHomographNumber(true);
-            FooterSetup(Common.OutputType.XETEX.ToString());
+            FooterSetup();
 
             if (IdAllClass.ContainsKey(_classNameWithLang))
             {
@@ -854,11 +829,6 @@ namespace SIL.PublishingSolution
                 }
                 if (isPageBreak || isColumnCount)
                 {
-                    if (!isFileEmpty)
-                    {
-                        CloseFile();
-                    }
-                    CreateFile();
                     _textFrameClass.Add(_childName);
                     _columnClass.Add(_childName);
                 }
@@ -951,7 +921,6 @@ namespace SIL.PublishingSolution
                 if (_closeChildName == _columnClass[_columnClass.Count - 1].ToString())
                 {
                     _columnClass.RemoveAt(_columnClass.Count - 1);
-                    CloseFile();
                 }
             }
             _classNameWithLang = StackPeek(_allStyle);
@@ -1100,18 +1069,6 @@ namespace SIL.PublishingSolution
 
             _isNewParagraph = false;
             _characterName = "$ID/[No character style]";// "[No character style]"; 
-        }
-
-        private void CreateFile()
-        {
-            string fileName = "Story_" + ++_storyNo + ".xml";
-            string storyXMLWithPath = Common.PathCombine(_projectPath, fileName);
-            
-        }
-
-        private void CloseFile()
-        {
- 
         }
         #endregion
     }
