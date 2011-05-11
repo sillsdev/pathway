@@ -234,9 +234,6 @@ namespace SIL.PublishingSolution
 
                 DoNotInheritClassStart();
 
-                _writer.WriteStartElement("ParagraphStyleRange");
-                // Note: Paragraph Start Element
-                _writer.WriteAttributeString("AppliedParagraphStyle", "ParagraphStyle/" + _paragraphName);
                 AddUsedStyleName(_paragraphName);
                 _previousParagraphName = _paragraphName;
                 _paragraphName = null;
@@ -379,7 +376,6 @@ namespace SIL.PublishingSolution
         {
             //_imageInserted = InsertImage();
             SetHomographNumber(false);
-            _writer.WriteStartElement("CharacterStyleRange");
 
             string footerClassName = WritePara(characterStyle);
 
@@ -391,7 +387,6 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                _writer.WriteStartElement("Content");
                 content = WriteCounter(content);
                 content = whiteSpacePre(content);
                 if (_isDropCap)
@@ -404,12 +399,9 @@ namespace SIL.PublishingSolution
                 _xetexFile.Write("}");
                 if(_tagType == "div")
                     _xetexFile.Write("\r\n");
-                _writer.WriteEndElement();
+
             }
             AnchorBookMark();
-            _writer.WriteEndElement();
-            //if (_tagType == "li")
-            //    _writer.WriteRaw("<Br/>");
         }
 
         private string WritePara(string characterStyle)
@@ -418,11 +410,9 @@ namespace SIL.PublishingSolution
             if (isFootnote)
             {
                 footerClassName = Common.LeftString(characterStyle, "_");
-                _writer.WriteAttributeString("AppliedCharacterStyle", "CharacterStyle/" + footerClassName + "..footnote-call");
             }
             else // regular style
             {
-                _writer.WriteAttributeString("AppliedCharacterStyle", "CharacterStyle/" + characterStyle);
                 string paraStyle;
                 
                 if (characterStyle.IndexOf("No character style") > 0)
@@ -525,23 +515,11 @@ namespace SIL.PublishingSolution
                 if (status == "href")
                 {
                     string bookMark = _anchorBookMarkName.Replace("href#", "");
-                    _writer.WriteStartElement("HyperlinkTextSource");
-                    _writer.WriteAttributeString("Self", "Hyperlink_" + bookMark);
-                    _writer.WriteAttributeString("Name", "Hyperlink " + bookMark);
-                    _writer.WriteAttributeString("Hidden", "false");
-                    _writer.WriteAttributeString("AppliedCharacterStyle", "n");
                     _anchorBookMarkName = "endbookmark";
                 }
                 else if (status == "name")
                 {
-                    _writer.WriteStartElement("HyperlinkTextDestination");
-                    _writer.WriteAttributeString("Self", "Name_" + _anchorBookMarkName);
-                    _writer.WriteAttributeString("Name", "Name_" + _anchorBookMarkName);
-                    _writer.WriteAttributeString("Hidden", "false");
-
-                    _writer.WriteAttributeString("DestinationUniqueKey", _crossRefCounter.ToString());
                     _crossRefCounter++;
-                    _writer.WriteEndElement();
                     string bookMark = _anchorBookMarkName.Replace("name", "");
                     if (!_crossRef.Contains(bookMark))
                         _crossRef.Add(bookMark);
@@ -549,7 +527,6 @@ namespace SIL.PublishingSolution
                 }
                 else if (status == "endb")
                 {
-                    _writer.WriteEndElement();
                     _anchorBookMarkName = string.Empty;
                 }
             }
@@ -1041,10 +1018,6 @@ namespace SIL.PublishingSolution
                 if (_closeChildName == _imageClass) // Without Caption
                 {
                     _allCharacter.Push(_imageClass); // temporarily storing to get width and position
-                    //_imageInserted = InsertImage();
-                    //_writer.WriteEndElement(); // for ParagraphStyle
-                    //_writer.WriteEndElement(); // for Textframe
-                    //_writer.WriteEndElement(); // for rectangle
                     _allCharacter.Pop();    // retrieving it again.
                     isImage = false;
                     imageClass = "";
@@ -1056,11 +1029,6 @@ namespace SIL.PublishingSolution
             {
                 if (imageClass.Length > 0 && _closeChildName == imageClass)
                 {
-
-                    //_writer.WriteEndElement();// for ParagraphStyle
-                    //_writer.WriteEndElement(); // for Textframe
-                    //_writer.WriteEndElement(); // for rectangle
-
                     isImage = false;
                     imageClass = "";
                     _isParagraphClosed = true;
@@ -1072,12 +1040,6 @@ namespace SIL.PublishingSolution
         {
             if (isHomographNumber)
             {
-                _writer.WriteStartElement("CharacterStyleRange");
-                _writer.WriteAttributeString("AppliedCharacterStyle", "CharacterStyle/xhomographnumber_headword_entry_letData_dicBody");
-                _writer.WriteStartElement("Content");
-                _writer.WriteString(" ");
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
                 isHomographNumber = false;
             }
         }
@@ -1144,47 +1106,12 @@ namespace SIL.PublishingSolution
         {
             string fileName = "Story_" + ++_storyNo + ".xml";
             string storyXMLWithPath = Common.PathCombine(_projectPath, fileName);
-            _writer = new XmlTextWriter(storyXMLWithPath, null)
-                          {
-                              Formatting = Formatting.Indented
-                          };
-            _writer.WriteStartDocument();
-
-            _writer.WriteStartElement("idPkg:Story");
-            _writer.WriteAttributeString("xmlns:idPkg", "http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging");
-            _writer.WriteAttributeString("DOMVersion", "6.0");
-            _writer.WriteStartElement("Story");
-            _writer.WriteAttributeString("Self", _storyNo.ToString());
-            _writer.WriteAttributeString("AppliedTOCStyle", "n");
-            _writer.WriteAttributeString("TrackChanges", "false");
-            _writer.WriteAttributeString("StoryTitle", "$ID/");
-            _writer.WriteAttributeString("AppliedNamedGrid", "n");
-            _writer.WriteStartElement("StoryPreference");
-            _writer.WriteAttributeString("OpticalMarginAlignment", "false");
-            _writer.WriteAttributeString("OpticalMarginSize", "12");
-            _writer.WriteAttributeString("FrameType", "TextFrameType");
-            _writer.WriteAttributeString("StoryOrientation", "Horizontal");
-            _writer.WriteAttributeString("StoryDirection", "LeftToRightDirection");
-            _writer.WriteEndElement();
-            _writer.WriteStartElement("InCopyExportOption");
-            _writer.WriteAttributeString("IncludeGraphicProxies", "true");
-            _writer.WriteAttributeString("IncludeAllResources", "false");
-            _writer.WriteEndElement();
-            isFileCreated = true;
-            isFileEmpty = true;
+            
         }
 
         private void CloseFile()
         {
-            if (isFileCreated)
-            {
-                _writer.Flush();
-                _writer.Close();
-            }
-            isFileCreated = false;
-            isFileEmpty = true;
-            _isParagraphClosed = true;
-            _isNewParagraph = true;
+ 
         }
         #endregion
     }
