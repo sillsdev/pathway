@@ -1,0 +1,9 @@
+.letter {
+    font-size: 28pt;
+    font-family: "Times New Roman", serif;	/* default Serif font */
+}
+
+.lettercm {
+    font-size: 1cm;
+    font-family: "Times New Roman", serif;	/* default Serif font */
+}

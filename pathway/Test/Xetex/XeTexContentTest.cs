@@ -143,6 +143,16 @@ namespace Test.Xetex
 
         [Test]
         [Category("SkipOnTeamCity")]
+        public void FontSizeCmToPointTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "FontSizeCmToPoint";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
         public void FontWeightBoldTest()
         {
             _projInfo.ProjectInputType = "Dictionary";
