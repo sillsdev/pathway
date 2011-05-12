@@ -29,8 +29,11 @@ namespace SIL.PublishingSolution
         {
             //Common.SupportFolder = "PathwaySupport";
 			Common.ProgBase = Common.GetPSApplicationPath();
-            _realClass = new PrintVia();
-            ((PrintVia)_realClass).InputType = "Dictionary";
+            // EDB - for testing only
+            _realClass = new ExportThroughPathway();
+            ((ExportThroughPathway)_realClass).InputType = "Dictionary";
+            //_realClass = new PrintVia();
+            //((PrintVia)_realClass).InputType = "Dictionary";
         }
 
         #region Properties

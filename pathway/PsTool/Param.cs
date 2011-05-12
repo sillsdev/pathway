@@ -1192,6 +1192,28 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
+        /// Override to GetMetadataValue. Returns the metadata value for the current organization.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static string GetMetadataValue (string name)
+        {
+            string organization;
+            try
+            {
+                // get the organization
+                organization = Param.Value["Organization"];
+            }
+            catch (Exception)
+            {
+                // shouldn't happen (ExportThroughPathway dialog forces the user to select an organization), 
+                // but just in case, specify a default org.
+                organization = "SIL International";
+            }
+            return GetMetadataValue(name, organization);
+        }
+
+        /// <summary>
         /// Returns the value of the specified Metadata element:
         /// - if there is a current value, this method returns that value first
         /// - if not, it will fall back on the default for the organization

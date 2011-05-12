@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using System.Data;
@@ -81,6 +82,12 @@ namespace SIL.PublishingSolution
                     {
                         Version1(GetDirectoryPath(settingsPath, appPath), projSchemaVersion);
                     }
+                    if (int.Parse(projSettingsVerNum) < 10)
+                    {
+                        Version10(GetDirectoryPath(settingsPath, appPath), installerPath, projSchemaVersion);
+                        // XML was updated - reload the values
+                        Param.LoadSettings();
+                    }
                     //Version2(GetDirectoryPath(settingsPath, appPath), appSettingsPath, projSchemaVersion);
                     string usrPath = GetDirectoryPath(settingsPath, appPath);
                     string insPath = Common.PathCombine(Path.GetDirectoryName(installerPath), Path.GetFileName(usrPath));
@@ -89,7 +96,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        
+
 
         /// <summary>
         /// Method to return the path combinations
@@ -152,7 +159,7 @@ namespace SIL.PublishingSolution
             XmlElement root = xdoc.DocumentElement;
             if (root != null)
             {
-                string sPath = "//stylePick/styles";
+                string sPath = "//stylePickstyles";
                 root.SetAttribute("version", versionNumber);
                 XmlNode searchNode = root.SelectSingleNode(sPath);
                 if (searchNode != null && searchNode.ChildNodes.Count != 0)
@@ -179,6 +186,49 @@ namespace SIL.PublishingSolution
                 }
             }
             xdoc.Save(path);
+        }
+
+        /// <summary>
+        /// Update to changes made for TD-2344 (publication info) schema. This consists of copying over the Organizations
+        /// and Metadata blocks from the StyleSettings.xml in the Program Files directory to the xml settings file in the
+        /// ProgramData directory.
+        /// </summary>
+        /// <param name="destSettingsFile"></param>
+        /// <param name="srcSettingsFile"></param>
+        /// <param name="projSchemaVersion"></param>
+        private void Version10(string destSettingsFile, string srcSettingsFile, string projSchemaVersion)
+        {
+            // load the source settings file (the one in Program Files) that has the <metadata> block
+            if (!File.Exists(srcSettingsFile)) { return; }
+            var srcDoc = new XmlDocument {XmlResolver = null};
+            srcDoc.Load(srcSettingsFile);
+            if (srcDoc.DocumentElement == null) {return;} // make sure we have something to copy over
+            // load the destination settings file (the one in ProgramData) that is missing the <metadata> block);
+            if (!File.Exists(destSettingsFile)) { return; }
+            var destDoc = new XmlDocument { XmlResolver = null };
+            destDoc.Load(destSettingsFile);
+            XmlElement root = destDoc.DocumentElement;
+            if (root != null)
+            {
+                root.SetAttribute("version", projSchemaVersion);
+                // Organizations block
+                string sPath = "//stylePick/Organizations";
+                XmlNode orgsNode = srcDoc.DocumentElement.SelectSingleNode(sPath);
+                if (orgsNode != null)
+                {
+                    XmlNode newOrgsNode = destDoc.ImportNode(orgsNode, true); // copy it into the ProgramData doc
+                    root.AppendChild(newOrgsNode); // set the parent
+                }
+                // Metadata block
+                sPath = "//stylePick/Metadata";
+                XmlNode metadataNode = srcDoc.DocumentElement.SelectSingleNode(sPath);
+                if (metadataNode != null)
+                {
+                    XmlNode newMetaNode = destDoc.ImportNode(metadataNode, true);
+                    root.AppendChild(newMetaNode);
+                }
+            }
+            destDoc.Save(destSettingsFile);
         }
 
         /// <summary>

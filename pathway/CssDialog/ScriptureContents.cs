@@ -31,8 +31,11 @@ namespace SIL.PublishingSolution
         {
             //Common.SupportFolder = "PathwaySupport";
 			Common.ProgBase = Common.GetPSApplicationPath();
-            _realClass = new PrintVia();
-            ((PrintVia) _realClass).InputType = "Scripture";
+            // EDB TEST only
+            //_realClass = new PrintVia();
+            //((PrintVia)_realClass).InputType = "Scripture";
+            _realClass = new ExportThroughPathway();
+            ((ExportThroughPathway)_realClass).InputType = "Scripture";
         }
 
 		#region Properties

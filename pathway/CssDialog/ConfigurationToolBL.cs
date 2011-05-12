@@ -877,35 +877,12 @@ namespace SIL.PublishingSolution
                             case "toclevel":
                                 cTool.DdlTocLevel.SelectedItem = attribValue;
                                 break;
-                            //**EDB MOVE THIS**
-                            //case "coverimage":
-                            //    if (File.Exists(attribValue))
-                            //    {
-                            //        try
-                            //        {
-                            //            cTool.CoverImage.Image = Image.FromFile(attribValue);
-                            //        }
-                            //        catch (Exception)
-                            //        {
-                            //            cTool.CoverImage.Image = cTool.CoverImage.InitialImage;
-                            //            throw;
-                            //        }
-                            //    }
-                            //    else
-                            //    {
-                            //        cTool.CoverImage.Image = cTool.CoverImage.InitialImage;
-                            //    }
-                            //    break;
                             case "basefontsize":
                                 cTool.TxtBaseFontSize.Text = attribValue;
                                 break;
                             case "defaultlineheight":
                                 cTool.TxtDefaultLineHeight.Text = attribValue;
                                 break;
-                            //**EDB MOVE THIS**
-                            //case "addcolophonpage":
-                            //    cTool.ChkColophon.Checked = (attribValue == "Yes") ? true : false;
-                            //    break;
                             case "defaultalignment":
                                 cTool.DdlDefaultAlignment.SelectedItem = attribValue;
                                 break;
@@ -921,34 +898,6 @@ namespace SIL.PublishingSolution
                             case "nonsilfont":
                                 cTool.DdlNonSILFont.SelectedItem = attribValue;
                                 break;
-                            //**EDB MOVE THIS**
-                            //case "information":
-                            //    cTool.TxtDescription.Text = attribValue;
-                            //    break;
-                            //case "publisher":
-                            //    cTool.TxtPublisher.Text = attribValue;
-                            //    break;
-                            //case "source":
-                            //    cTool.TxtSource.Text = attribValue;
-                            //    break;
-                            //case "format":
-                            //    cTool.TxtFormat.Text = attribValue;
-                            //    break;
-                            //case "relation":
-                            //    cTool.TxtRelation.Text = attribValue;
-                            //    break;
-                            //case "coverage":
-                            //    cTool.TxtCoverage.Text = attribValue;
-                            //    break;
-                            //case "copyright":
-                            //    cTool.TxtRights.Text = attribValue;
-                            //    break;
-                            //case "title":
-                            //    cTool.TxtBookTitle.Text = attribValue;
-                            //    break;
-                            //case "creator":
-                            //    cTool.TxtCreator.Text = attribValue;
-                            //    break;
                             default:
                                 break;
                         }
@@ -3398,7 +3347,9 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                var dlg = new PrintVia("Set Defaults");
+                // EDB (2 May 2011): TD-2344 / replace with Export Through Pathway dlg
+                var dlg = new ExportThroughPathway("Set Defaults");
+                //var dlg = new PrintVia("Set Defaults");
                 dlg.InputType = inputTypeBL;
                 dlg.DatabaseName = "{Project_Name}";
                 dlg.Media = MediaType;

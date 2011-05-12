@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -78,6 +80,194 @@ namespace SIL.Tool
         {
             get { return tempFolder; }
         }
+
+        #region Front Matter
+        public void CreateCoverImagePage(string outputFolder)
+        {
+            if (Param.GetMetadataValue(Param.CoverPage).Equals("false")) { return; }
+            var sb = new StringBuilder();
+            sb.AppendLine("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1//EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'>");
+            sb.AppendLine("<html xmlns='http://www.w3.org/1999/xhtml'>");
+            sb.AppendLine("<head><title>Cover</title><style type='text/css'> img { max-width: 100%; } </style></head>");
+            sb.AppendLine("<body><div id='cover-image'><img src='cover.png' alt='Cover image'/></div></body></html>");
+            string outFile = Path.Combine(outputFolder, "cover.xhtml");
+            if (File.Exists(outFile))
+            {
+                File.Delete(outFile);
+            }
+            using (var writer = new StreamWriter(outFile))
+            {
+                writer.Write(sb.ToString());
+                writer.Close();
+            }
+        }
+
+        /// <summary>
+        /// Creates a cover image that is optionally "badged" with a title string. The resulting file
+        /// is saved as "cover.png" in the specified output folder.
+        /// </summary>
+        /// <param name="outputFolder">Content folder the resulting file is saved to.</param>
+        private void CreateCoverImage(string outputFolder)
+        {
+            if (Param.GetMetadataValue(Param.CoverPage).Equals("false")) {return;}
+            // open up the appropriate image for processing
+            string strImageFile = Param.GetMetadataValue(Param.CoverPageFilename);
+            if (strImageFile.Length < 1)
+            {
+                // no image file specified -- use the default image in the Graphic directory
+                string strImageFolder = Common.PathCombine(Common.GetPSApplicationPath(), "Graphic");
+                strImageFile = Path.Combine(strImageFolder, "cover.png");
+            }
+            if (!File.Exists(strImageFile))
+            {
+                return;
+            }
+            // copy the image file to the destination folder as "cover.png"
+            string dest = Path.Combine(outputFolder, "cover.png");
+            var img = new Bitmap(strImageFile);
+            img.Save(dest);
+            // if we don't want a title, we're done
+            if (Param.GetMetadataValue(Param.CoverPageTitle).Equals("false") ||
+                Param.GetMetadataValue(Param.Title).Trim().Length < 1)
+            {
+                // nothing else to do -- return
+                return;
+            }
+
+            // if we got this far, we want to add a title "badge" to the cover image
+            var bmp = new Bitmap(strImageFile);
+            Graphics g = Graphics.FromImage(bmp);
+            // We're going to be "badging" the book image with a title - this consists of the database name
+            // and project name (split into multiple lines if from Paratext)
+            var sb = new StringBuilder();
+            sb.Append(Param.GetMetadataValue(Param.Title));
+            var strTitle = sb.ToString();
+            //var langCode = enumerator.Current.Key;
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+            var strFormat = new StringFormat
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
+            // figure out the dimensions of our rect based on the font info
+            Font badgeFont = new Font("Times New Roman", 48);
+            SizeF size = g.MeasureString(strTitle, badgeFont, 640);
+            int width = (int)Math.Ceiling(size.Width);
+            int height = (int)Math.Ceiling(size.Height);
+            Rectangle rect = new Rectangle((225 - (width / 2)), 100, width, height);
+            // draw the badge (rect and string)
+            g.FillRectangle(Brushes.Brown, rect);
+            g.DrawRectangle(Pens.Gold, rect);
+            g.DrawString(strTitle, badgeFont, Brushes.Gold,
+                    new RectangleF(new PointF((225f - (size.Width/2)), 100f), size), strFormat);
+            // save this puppy
+            string strCoverImageFile = Path.Combine(outputFolder, "cover.png");
+            bmp.Save(strCoverImageFile);
+        }
+
+        public void CreateTitlePage(string outputFolder)
+        {
+            if (Param.GetMetadataValue(Param.TitlePage).Equals("false")) {return;}
+            var sb = new StringBuilder();
+            sb.AppendLine("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1//EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'>");
+            sb.AppendLine("<html xmlns='http://www.w3.org/1999/xhtml'>");
+            sb.Append("<head><title>");
+            sb.Append(Param.GetMetadataValue(Param.Title));
+            sb.AppendLine("</title><style type='text/css'> img { max-width: 100%; } </style></head>");
+            sb.Append("<body><div id='title'><h1>");
+            sb.Append(Param.GetMetadataValue(Param.Title));
+            sb.AppendLine("</h1></div></body></html>");
+            string outFile = Path.Combine(outputFolder, "title.xhtml");
+            if (File.Exists(outFile))
+            {
+                File.Delete(outFile);
+            }
+            using (var writer = new StreamWriter(outFile))
+            {
+                writer.Write(sb.ToString());
+                writer.Close();
+            }
+        }
+
+        /// <summary>
+        /// Copies over the appropriate copyright / license page into the output folder, and fills in the details of
+        /// the language and copyright info in the resulting file.
+        /// </summary>
+        public void CreateCopyrightPage(string outputFolder)
+        {
+            if (Param.GetMetadataValue(Param.CopyrightPage).Equals("false") ||
+                Param.GetMetadataValue(Param.CopyrightPageFilename).Length < 1) { return; }
+            // first, copy over the appropriate copyright page to the output directory
+            string strCopyrightFolder = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
+            string strFilename = Param.GetMetadataValue(Param.CopyrightPageFilename);
+            if (strCopyrightFolder == null || strFilename == null)
+            {
+                return;
+            }
+            string strCopyrightFile = Path.Combine(strCopyrightFolder, strFilename);
+            if (!File.Exists(strCopyrightFile))
+            {
+                return; // something went wrong -- get out
+            }
+            string destFile = Path.Combine(outputFolder, "copyright.xhtml");
+            File.Copy(strCopyrightFile, destFile);
+            string path;
+            var sb = new StringBuilder();
+            sb.AppendLine("<body>");
+            // language info
+            Common.StreamReplaceInFile(destFile, "div id='langinfo'>", GetLanguageInfo());
+            // copyright info
+            Common.StreamReplaceInFile(destFile, "div id='OtherCopyrights'", GetCopyrightInfo());
+        }
+
+        // Returns the language information for this document as an XHTML snippet (not well formed). This is meant to be used
+        // in conjunction with the StreamReplaceInFile() call in CreateCopyrightPage().
+        private string GetLanguageInfo()
+        {
+            var sb = new StringBuilder();
+            sb.Append("div id='langinfo'>");
+            // append what we know about this language, including a hyperlink to the ethnologue.
+            string languageCode = GetLanguageCode();
+            if (languageCode.Length > 0)
+            {
+                sb.Append("<h1>About this document</h1>");
+                sb.Append("This document contains data written in ");
+                sb.Append(Common.GetLanguageName(languageCode));
+                sb.Append(". For more information about this language, visit <a href='http://www.ethnologue.com/show_language.asp?code=");
+                sb.Append(languageCode);
+                sb.Append("</a>.");
+            }
+            return sb.ToString();
+        }
+
+        // Returns the copyright information for this document as an XHTML snippet (not well formed). This is meant to be used
+        // in conjunction with the StreamReplaceInFile() call in CreateCopyrightPage().
+        private string GetCopyrightInfo()
+        {
+            var sb = new StringBuilder();
+            sb.Append("div id='OtherCopyrights'>");
+            // append any other copyright information to the list
+            sb.Append("<p>");
+            string contributors = Param.GetMetadataValue(Param.Contributor);
+            if (contributors.Trim().Length > 0)
+            {
+                sb.Append("(");
+                sb.Append(contributors);
+                sb.Append("), ");
+            }
+            string rights = Param.GetMetadataValue(Param.CopyrightHolder);
+            if (rights.Trim().Length > 0)
+            {
+                sb.Append(rights);
+                sb.Append("; and, &copy; named rights holders for materials used by permission as specified in the resource file description.");
+                
+            }
+            sb.Append("</p>");
+            //sb.Append("<p>Illustration) licenses?</p>");
+            return sb.ToString();
+        }
+
+        #endregion
 
         #region XHTML PreProcessor
         /// <summary>
@@ -226,6 +416,11 @@ namespace SIL.Tool
             // add a timestamp to the .css for troubleshooting purposes
             AddProductVersionToCSS();
 
+            // add the front matter pages to the temp folder as needed
+            CreateCoverImagePage(tempFolder);
+            CreateCoverImage(tempFolder);
+            CreateTitlePage(tempFolder);
+            CreateCopyrightPage(tempFolder);
         }
 
         public string InsertEmptyXHomographNumber(IDictionary<string, Dictionary<string, string>> cssClass)
@@ -493,6 +688,66 @@ namespace SIL.Tool
             return _xhtmlFileNameWithPath;
         }
 
+        /// <summary>
+        /// Returns the "main" language code in use by the document.
+        /// </summary>
+        /// <returns></returns>
+        public string GetLanguageCode()
+        {
+            var xDoc = new XmlDocument { XmlResolver = null };
+            xDoc.Load(_xhtmlFileNameWithPath);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
+            XmlNode node;
+            if (_projInfo.ProjectInputType == "dictionary")
+            {
+                // dictionary
+                try
+                {
+                    node = xDoc.SelectSingleNode("//x:div[@class='headword'][1]", namespaceManager);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                    node = null;
+                }
+                if (node != null)
+                {
+                    var atts = node.Attributes;
+                    if (atts != null)
+                    {
+                        return (atts["lang"].Value);
+                    }
+                }
+            }
+            else
+            {
+                // scripture
+                try
+                {
+                    node = xDoc.SelectSingleNode("//x:span[@class='Chapter_Number'][1]", namespaceManager);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                    node = null;
+                }
+                if (node != null)
+                {
+                    var atts = node.Attributes;
+                    if (atts != null)
+                    {
+                        return (atts["lang"].Value);
+                    }
+                }
+            }
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// For dictionary data, returns the language code for the definitions
+        /// </summary>
+        /// <returns></returns>
         public string GetDefinitionLanguage()
         {
             var xDoc = new XmlDocument { XmlResolver = null };
@@ -822,7 +1077,8 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        /// Appends a timestamp to the .css file for field troubleshooting
+        /// Appends the product / assembly version to the .css file for field troubleshooting
+        /// (this allows us to see what versions of the software the user has installed).
         /// </summary>
         private void AddProductVersionToCSS()
         {

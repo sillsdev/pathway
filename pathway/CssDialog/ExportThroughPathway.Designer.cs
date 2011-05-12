@@ -253,6 +253,7 @@
             // txtBookTitle
             // 
             this.txtBookTitle.Location = new System.Drawing.Point(110, 31);
+            this.txtBookTitle.MaxLength = 32;
             this.txtBookTitle.Name = "txtBookTitle";
             this.txtBookTitle.Size = new System.Drawing.Size(230, 20);
             this.txtBookTitle.TabIndex = 7;

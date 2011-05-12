@@ -25,7 +25,6 @@
     <property name="LayoutSelected" value="FieldWorksStyles" />
     <property name="ExtraProcessing" value="True" />
     <property name="Media" value="paper" />
-    <property name="Organization" value="SIL International" />
   </settings>
   <defaultSettings>
     <property name="PrintVia" value="OpenOffice" />
