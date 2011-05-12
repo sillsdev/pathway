@@ -562,12 +562,9 @@ namespace SIL.PublishingSolution
             CopyrightPagePath = Param.GetMetadataValue(Param.CopyrightPageFilename, Organization);
             // license agreement
             XmlNode node;
-            try
-            {
-                // try to get the key
-                node = Param.GetItem("//features/feature[@name='Lic_" + Organization + "']");
-            }
-            catch (Exception)
+            // try to get the key
+            node = Param.GetItem("//features/feature[@name='Lic_" + Organization + "']");
+            if (node == null)
             {
                 // key not found - fall back on the generic licenses
                 node = Param.GetItem("//features/feature[@name='Lic_Other']");
