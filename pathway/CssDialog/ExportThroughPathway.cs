@@ -634,6 +634,11 @@ namespace SIL.PublishingSolution
             Param.UpdateMetadataValue(Param.Identifier, dlg.Identifier);
 
             // Front Matter tab
+            if (dlg.chkCoverImage.Enabled == false)
+            {
+                // user can't create a cover image - make sure this isn't checked
+                dlg.CoverPage = false;
+            }
             Param.UpdateMetadataValue(Param.CoverPage, dlg.CoverPage.ToString());
             Param.UpdateMetadataValue(Param.CoverPageFilename, dlg.CoverPageImagePath);
             Param.UpdateMetadataValue(Param.CoverPageTitle, dlg.CoverPageTitle.ToString());
@@ -912,19 +917,15 @@ namespace SIL.PublishingSolution
         {
             // find the copyright file
             XmlNode node;
-            try
+            // try to get the key
+            node = Param.GetItem("//features/feature[@name='Lic_" + Organization + "']");
+            // key not found - fall back on the generic licenses
+            if (node == null)
             {
-                // try to get the key
-                node = Param.GetItem("//features/feature[@name='Lic_" + Organization + "']");
-            }
-            catch (Exception)
-            {
-                // key not found - fall back on the generic licenses
                 node = Param.GetItem("//features/feature[@name='Lic_Other']");
             }
             if (node != null)
             {
-                int index;
                 foreach (XmlNode subnode in node.ChildNodes)
                 {
                     if (subnode.Attributes != null)

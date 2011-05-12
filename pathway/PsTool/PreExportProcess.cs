@@ -84,7 +84,7 @@ namespace SIL.Tool
         #region Front Matter
         public void CreateCoverImagePage(string outputFolder)
         {
-            if (Param.GetMetadataValue(Param.CoverPage).Equals("false")) { return; }
+            if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("false")) { return; }
             var sb = new StringBuilder();
             sb.AppendLine("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1//EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'>");
             sb.AppendLine("<html xmlns='http://www.w3.org/1999/xhtml'>");
@@ -109,7 +109,7 @@ namespace SIL.Tool
         /// <param name="outputFolder">Content folder the resulting file is saved to.</param>
         private void CreateCoverImage(string outputFolder)
         {
-            if (Param.GetMetadataValue(Param.CoverPage).Equals("false")) {return;}
+            if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("false")) {return;}
             // open up the appropriate image for processing
             string strImageFile = Param.GetMetadataValue(Param.CoverPageFilename);
             if (strImageFile.Length < 1)
@@ -167,7 +167,7 @@ namespace SIL.Tool
 
         public void CreateTitlePage(string outputFolder)
         {
-            if (Param.GetMetadataValue(Param.TitlePage).Equals("false")) {return;}
+            if (Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("false")) { return; }
             var sb = new StringBuilder();
             sb.AppendLine("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1//EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'>");
             sb.AppendLine("<html xmlns='http://www.w3.org/1999/xhtml'>");
@@ -195,7 +195,7 @@ namespace SIL.Tool
         /// </summary>
         public void CreateCopyrightPage(string outputFolder)
         {
-            if (Param.GetMetadataValue(Param.CopyrightPage).Equals("false") ||
+            if (Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("false") ||
                 Param.GetMetadataValue(Param.CopyrightPageFilename).Length < 1) { return; }
             // first, copy over the appropriate copyright page to the output directory
             string strCopyrightFolder = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
@@ -211,11 +211,15 @@ namespace SIL.Tool
             }
             string destFile = Path.Combine(outputFolder, "copyright.xhtml");
             File.Copy(strCopyrightFile, destFile);
-            string path;
-            var sb = new StringBuilder();
-            sb.AppendLine("<body>");
+            // also copy over supporting files from the Copyright folder
+            File.Copy(Path.Combine(strCopyrightFolder, "by.png"), Path.Combine(outputFolder, "by.png"));
+            File.Copy(Path.Combine(strCopyrightFolder, "sa.png"), Path.Combine(outputFolder, "sa.png"));
+            File.Copy(Path.Combine(strCopyrightFolder, "nc.png"), Path.Combine(outputFolder, "nc.png"));
+            File.Copy(Path.Combine(strCopyrightFolder, "SIL-Logo-Black.gif"), Path.Combine(outputFolder, "SIL-Logo-Black.gif"));
+            File.Copy(Path.Combine(strCopyrightFolder, "Copy.css"), Path.Combine(outputFolder, "Copy.css"));
+            // Now insert language and copyright information into the file
             // language info
-            Common.StreamReplaceInFile(destFile, "div id='langinfo'>", GetLanguageInfo());
+            Common.StreamReplaceInFile(destFile, "div id='LanguageInformation'>", GetLanguageInfo());
             // copyright info
             Common.StreamReplaceInFile(destFile, "div id='OtherCopyrights'", GetCopyrightInfo());
         }
@@ -225,15 +229,18 @@ namespace SIL.Tool
         private string GetLanguageInfo()
         {
             var sb = new StringBuilder();
-            sb.Append("div id='langinfo'>");
+            sb.Append("div id='LanguageInformation'>");
             // append what we know about this language, including a hyperlink to the ethnologue.
             string languageCode = GetLanguageCode();
             if (languageCode.Length > 0)
             {
+                var languageName = Common.GetLanguageName(languageCode);
                 sb.Append("<h1>About this document</h1>");
                 sb.Append("This document contains data written in ");
-                sb.Append(Common.GetLanguageName(languageCode));
+                sb.Append(languageName.Length > 0 ? languageName : languageCode);
                 sb.Append(". For more information about this language, visit <a href='http://www.ethnologue.com/show_language.asp?code=");
+                sb.Append(languageCode);
+                sb.Append("'>http://www.ethnologue.com/show_language.asp?code=");
                 sb.Append(languageCode);
                 sb.Append("</a>.");
             }
