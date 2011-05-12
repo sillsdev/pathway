@@ -178,6 +178,11 @@
       <option name="Right" file="Rules_Yes.css" />
       <option name="Justify" file="Rules_Yes.css" />
     </feature>
+    <feature name="Lic_Other">
+      <option name="Draft" file="Draft.xhtml"/>
+      <option name="Non-Commercial Share Alike" file="CC-by-nc-sa.xhtml"/>
+      <option name="Intended for Sale" file="Selling.xhtml"/>
+    </feature>
     <feature name="Subject">
       <option name="Religion and Spirituality" file="Rules_Yes.css" />
       <option name="Reference" file="Rules_Yes.css" />
