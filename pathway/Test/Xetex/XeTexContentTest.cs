@@ -112,6 +112,17 @@ namespace Test.Xetex
 
         [Test]
         [Category("SkipOnTeamCity")]
+        public void FontStyleNormalTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "FontStyleNormal";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+
+        [Test]
+        [Category("SkipOnTeamCity")]
         public void FontVariantSmallCapTest()
         {
             _projInfo.ProjectInputType = "Dictionary";
