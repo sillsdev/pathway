@@ -72,7 +72,8 @@ namespace SIL.PublishingSolution
 
         private string RemoveBody(string paraStyle)
         {
-            if (paraStyle.IndexOf("_body") == -1 && paraStyle != "@page")
+            //if (paraStyle.IndexOf("_body") == -1 && paraStyle != "@page")
+            if (paraStyle.IndexOf("_") == -1 && paraStyle != "@page")
             {
                 return string.Empty;
             }

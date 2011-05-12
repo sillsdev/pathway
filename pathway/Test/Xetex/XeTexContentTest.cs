@@ -348,6 +348,15 @@ namespace Test.Xetex
         }
 
         [Test]
+        public void FontParent()
+        {
+            const string file = "FontParent";
+            _projInfo.ProjectInputType = "Dictionary";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
         [Category("SkipOnTeamCity")]
         public void ImageBaseTest()
         {
