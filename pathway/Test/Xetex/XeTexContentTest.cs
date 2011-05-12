@@ -153,6 +153,16 @@ namespace Test.Xetex
 
         [Test]
         [Category("SkipOnTeamCity")]
+        public void FontWeightNormalTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "FontWeightNormal";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
         public void FontWeight400Test()
         {
             _projInfo.ProjectInputType = "Dictionary";
