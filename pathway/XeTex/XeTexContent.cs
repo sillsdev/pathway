@@ -421,11 +421,7 @@ namespace SIL.PublishingSolution
                         _braceInlineClass.Push(getStyleName);
                     }
 
-                    if (mergedParaStyle.IndexOf(Common.SepPseudo) > 0)
-                        mergedParaStyle = mergedParaStyle.Replace(Common.SepPseudo, "");
-
-                    if (mergedParaStyle.IndexOf(Common.Space) > 0)
-                        mergedParaStyle = mergedParaStyle.Replace(Common.Space, "");
+                    mergedParaStyle = Common.ReplaceSeperators(mergedParaStyle);
 
                     _xetexFile.Write("\\" + mergedParaStyle + "{");
                     //_braceClass.Push(getStyleName);
@@ -459,6 +455,15 @@ namespace SIL.PublishingSolution
                         _mergedInlineStyle.Add(sty);
                     }
                 }
+                else if (parent.Length > 1 && _classInlineStyle.ContainsKey(parent[1]))
+                {
+                    foreach (string sty in _classInlineStyle[parent[1]])
+                    {
+                        if (!_mergedInlineStyle.Contains(sty))
+                            _mergedInlineStyle.Add(sty);
+                    }
+                }
+
                 //Merge
                 if (_classInlineStyle.ContainsKey(parentClass))
                 {
@@ -933,7 +938,7 @@ namespace SIL.PublishingSolution
         private void CloseBrace(string closeChildName)
         {
             string brace = StackPeek(_braceInlineClass);
-            if (brace.Length !=0 && closeChildName == brace)
+            if (brace.Length != 0 && closeChildName == brace && _braceInlineClassCount.ContainsKey(brace))
             {
                 int count = _braceInlineClassCount[brace];
                 for (int i = 0; i < count; i++)

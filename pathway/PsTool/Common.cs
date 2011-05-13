@@ -2300,6 +2300,21 @@ return FromProg(file);
             if (styleName.IndexOf(" ") > 0)
                 styleName = styleName.Replace(" ", "");
 
+            if (styleName.IndexOf(sepPrecede) > 0)
+                styleName = styleName.Replace(sepPrecede, "");
+
+            if (styleName.IndexOf(SepPseudo) > 0)
+                styleName = styleName.Replace(SepPseudo, "");
+
+            if (styleName.IndexOf(SepParent) > 0)
+                styleName = styleName.Replace(SepParent, "");
+
+            if (styleName.IndexOf(SepTag) > 0)
+                styleName = styleName.Replace(SepTag, "");
+
+            if (styleName.IndexOf("1") > 0)
+                styleName = styleName.Replace("1", "ONE");
+
             return styleName;
         }
 

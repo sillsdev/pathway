@@ -193,6 +193,16 @@ namespace Test.Xetex
 
         [Test]
         [Category("SkipOnTeamCity")]
+        public void FontBoldItalicTest()  // TD-2188()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "FontBoldItalic";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
         public void FontWeight400Test()
         {
             _projInfo.ProjectInputType = "Dictionary";
