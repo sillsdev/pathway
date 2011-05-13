@@ -183,6 +183,16 @@ namespace Test.Xetex
 
         [Test]
         [Category("SkipOnTeamCity")]
+        public void FontWeightBoldRegular()  // TD-2330()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "FontWeightBoldRegular";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
         public void FontWeight400Test()
         {
             _projInfo.ProjectInputType = "Dictionary";
