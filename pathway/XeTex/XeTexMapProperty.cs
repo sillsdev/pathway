@@ -713,7 +713,7 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            _IDProperty["FontStyle"] = propertyValue;
+            _IDProperty["FontStyleBold"] = propertyValue;
             _fontOption.Add(propertyValue);
         }
         public void TextAlign(string propertyValue)

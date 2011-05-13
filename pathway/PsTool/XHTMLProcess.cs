@@ -1041,6 +1041,16 @@ namespace SIL.PublishingSolution
             //{
             //    ParentClass[_matchedCssStyleName] = _parentStyleName + "||" + _tagType;
             //}
+            if (_outputType != Common.OutputType.XETEX)
+            {
+                _matchedCssStyleName.Replace(Common.sepPrecede, "");
+                _matchedCssStyleName.Replace(Common.SepParent, "");
+                _matchedCssStyleName.Replace(Common.SepPseudo, "");
+                _matchedCssStyleName.Replace(Common.SepTag, "");
+                _matchedCssStyleName.Replace(Common.SepAttrib, "");
+                _matchedCssStyleName.Replace(Common.Space, "");
+
+            }
             return _matchedCssStyleName;
         }
 

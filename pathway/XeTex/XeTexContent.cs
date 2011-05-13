@@ -424,6 +424,9 @@ namespace SIL.PublishingSolution
                     if (mergedParaStyle.IndexOf(Common.SepPseudo) > 0)
                         mergedParaStyle = mergedParaStyle.Replace(Common.SepPseudo, "");
 
+                    if (mergedParaStyle.IndexOf(Common.Space) > 0)
+                        mergedParaStyle = mergedParaStyle.Replace(Common.Space, "");
+
                     _xetexFile.Write("\\" + mergedParaStyle + "{");
                     //_braceClass.Push(getStyleName);
                 }
