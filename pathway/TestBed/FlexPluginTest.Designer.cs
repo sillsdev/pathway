@@ -44,6 +44,7 @@
             this.txtInputPath = new System.Windows.Forms.TextBox();
             this.Btn_InputPath = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button11 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.btnXeTex = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
@@ -61,7 +62,7 @@
             this.btnFileSizeZero = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
+            this.btnFlexTest2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -72,7 +73,7 @@
             // BtnFlexTest
             // 
             this.BtnFlexTest.AccessibleName = "BtnFlexTest";
-            this.BtnFlexTest.Location = new System.Drawing.Point(207, 184);
+            this.BtnFlexTest.Location = new System.Drawing.Point(207, 156);
             this.BtnFlexTest.Name = "BtnFlexTest";
             this.BtnFlexTest.Size = new System.Drawing.Size(75, 28);
             this.BtnFlexTest.TabIndex = 46;
@@ -91,13 +92,13 @@
             this.panel1.Controls.Add(this.button9);
             this.panel1.Location = new System.Drawing.Point(41, 28);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(513, 137);
+            this.panel1.Size = new System.Drawing.Size(513, 122);
             this.panel1.TabIndex = 47;
             // 
             // button10
             // 
             this.button10.AccessibleName = "button10";
-            this.button10.Location = new System.Drawing.Point(356, 64);
+            this.button10.Location = new System.Drawing.Point(357, 47);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(138, 20);
             this.button10.TabIndex = 17;
@@ -108,7 +109,7 @@
             // TxtOutput
             // 
             this.TxtOutput.AccessibleName = "TxtOutput";
-            this.TxtOutput.Location = new System.Drawing.Point(10, 64);
+            this.TxtOutput.Location = new System.Drawing.Point(11, 47);
             this.TxtOutput.Name = "TxtOutput";
             this.TxtOutput.Size = new System.Drawing.Size(321, 20);
             this.TxtOutput.TabIndex = 16;
@@ -116,7 +117,7 @@
             // BtnBrowse
             // 
             this.BtnBrowse.AccessibleName = "BtnBrowse";
-            this.BtnBrowse.Location = new System.Drawing.Point(356, 24);
+            this.BtnBrowse.Location = new System.Drawing.Point(356, 14);
             this.BtnBrowse.Name = "BtnBrowse";
             this.BtnBrowse.Size = new System.Drawing.Size(138, 20);
             this.BtnBrowse.TabIndex = 15;
@@ -127,7 +128,7 @@
             // TxtInput
             // 
             this.TxtInput.AccessibleName = "TxtInput";
-            this.TxtInput.Location = new System.Drawing.Point(10, 24);
+            this.TxtInput.Location = new System.Drawing.Point(11, 14);
             this.TxtInput.Name = "TxtInput";
             this.TxtInput.Size = new System.Drawing.Size(321, 20);
             this.TxtInput.TabIndex = 14;
@@ -135,7 +136,7 @@
             // button9
             // 
             this.button9.AccessibleName = "button9";
-            this.button9.Location = new System.Drawing.Point(356, 100);
+            this.button9.Location = new System.Drawing.Point(356, 84);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(138, 23);
             this.button9.TabIndex = 13;
@@ -156,7 +157,7 @@
             // BtnTETest
             // 
             this.BtnTETest.AccessibleName = "BtnFlexTest";
-            this.BtnTETest.Location = new System.Drawing.Point(290, 184);
+            this.BtnTETest.Location = new System.Drawing.Point(288, 156);
             this.BtnTETest.Name = "BtnTETest";
             this.BtnTETest.Size = new System.Drawing.Size(98, 28);
             this.BtnTETest.TabIndex = 48;
@@ -242,6 +243,17 @@
             this.groupBox1.TabIndex = 51;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Export";
+            // 
+            // button11
+            // 
+            this.button11.AccessibleName = "BtnGoBibleTest";
+            this.button11.Location = new System.Drawing.Point(40, 193);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(95, 28);
+            this.button11.TabIndex = 61;
+            this.button11.Text = "GoBible";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button8
             // 
@@ -376,6 +388,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnFlexTest2);
             this.groupBox2.Controls.Add(this.chkIncrease);
             this.groupBox2.Controls.Add(this.btnFileSizeZero);
             this.groupBox2.Controls.Add(this.button3);
@@ -393,7 +406,7 @@
             // chkIncrease
             // 
             this.chkIncrease.AutoSize = true;
-            this.chkIncrease.Location = new System.Drawing.Point(408, 213);
+            this.chkIncrease.Location = new System.Drawing.Point(393, 190);
             this.chkIncrease.Name = "chkIncrease";
             this.chkIncrease.Size = new System.Drawing.Size(109, 17);
             this.chkIncrease.TabIndex = 54;
@@ -403,7 +416,7 @@
             // btnFileSizeZero
             // 
             this.btnFileSizeZero.AccessibleName = "BtnFlexTest";
-            this.btnFileSizeZero.Location = new System.Drawing.Point(408, 184);
+            this.btnFileSizeZero.Location = new System.Drawing.Point(392, 156);
             this.btnFileSizeZero.Name = "btnFileSizeZero";
             this.btnFileSizeZero.Size = new System.Drawing.Size(109, 28);
             this.btnFileSizeZero.TabIndex = 51;
@@ -413,7 +426,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(40, 184);
+            this.button3.Location = new System.Drawing.Point(41, 156);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(82, 28);
             this.button3.TabIndex = 50;
@@ -424,7 +437,7 @@
             // button2
             // 
             this.button2.AccessibleName = "BtnFlexTest";
-            this.button2.Location = new System.Drawing.Point(128, 184);
+            this.button2.Location = new System.Drawing.Point(128, 156);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(73, 28);
             this.button2.TabIndex = 49;
@@ -432,16 +445,15 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button11
+            // btnFlexTest2
             // 
-            this.button11.AccessibleName = "BtnGoBibleTest";
-            this.button11.Location = new System.Drawing.Point(40, 193);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(95, 28);
-            this.button11.TabIndex = 61;
-            this.button11.Text = "GoBible";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
+            this.btnFlexTest2.Location = new System.Drawing.Point(41, 190);
+            this.btnFlexTest2.Name = "btnFlexTest2";
+            this.btnFlexTest2.Size = new System.Drawing.Size(96, 36);
+            this.btnFlexTest2.TabIndex = 55;
+            this.btnFlexTest2.Text = "Flex (&Export Through PW)";
+            this.btnFlexTest2.UseVisualStyleBackColor = true;
+            this.btnFlexTest2.Click += new System.EventHandler(this.btnFlexTest2_Click);
             // 
             // FlexPluginTest
             // 
@@ -507,5 +519,6 @@
         private System.Windows.Forms.Button btnXeTex;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button btnFlexTest2;
     }
 }

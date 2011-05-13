@@ -641,5 +641,18 @@ namespace TestBed
             projInfo.DictionaryPath = projInfo.ProjectPath;
             exportGoBible.Export(projInfo);
         }
+
+        private void btnFlexTest2_Click(object sender, EventArgs e)
+        {
+            ExportThroughPathway dlg = new ExportThroughPathway();
+            dlg.InputType = "Dictionary";
+            dlg.ShowDialog();
+
+            string target = dlg.Format; //"OpenOffice";
+            var tpe = new PsExport { Destination = target, DataType = dlg.InputType };
+            tpe.Export(txtInputPath.Text);
+
+        }
+
     }
 }
