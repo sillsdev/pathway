@@ -884,7 +884,7 @@ namespace SIL.PublishingSolution
                 fontName = fontName.Replace(">", "");
                 fontName = fontName.Replace("default", "").Trim();
 
-                if (genericFamilyList.Contains(fontName))
+                if (genericFamilyList.Contains(fontName.ToLower()))
                 {
                     //string xmlFileNameWithPath = Common.PathCombine(Common.GetPSApplicationPath(), "GenericFont.xml");
                     string xmlFileNameWithPath = Common.PathCombine(PsSupportPath, "GenericFont.xml");

@@ -425,6 +425,27 @@ namespace Test.Xetex
             FileCompare(file);
         }
 
+
+        [Test]
+        //TD-2302 font-family: Sans-Serif;
+        public void FontFamily2()
+        {
+            const string file = "FontFamily2";
+            _projInfo.ProjectInputType = "Dictionary";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        //TD-2302 font-family: Sans-Serif;
+        public void FontFamily4()
+        {
+            const string file = "FontFamily4";
+            _projInfo.ProjectInputType = "Dictionary";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void TextAlignJustifyTest()
