@@ -14,10 +14,10 @@ var margin=new Array("letHead", "1.5", "4.5", "1.666667", "4.5");//
 // Created By:   James Prabu 
 // Created On: Sep 10 2009   
 // Modified By:  James Prabu                        
-// Modified On:  Mar 01 2011 
-// Task Number : TD-1984(InDesign: InDesign gets Hung)
+// Modified On:  May 17 2011 
+// Task Number : TD-2347(hk00166b.tif picture missing)
 // <remarks> 
-// main changes in  BalancedColumn() for Footnote handling
+// Picture Caption Height, Width enlarged based on it's caption
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -159,6 +159,7 @@ function main()
 
 
 	//alert(times);
+	alert("Finished");
 }
 
 function SaveDocument()
@@ -208,7 +209,7 @@ function Settings()
 function ShowPicture()
 {
 	var myStory,pageHeight;
-	//alert(myFrames.length);
+	alert("ShowPicture");
 	for(var myStoryCounter=activePageNumber; myStoryCounter <= myFrames.length-1;myStoryCounter++)
 	{
 			myStory = myFrames[myStoryCounter];
@@ -424,7 +425,7 @@ function GetFirstParagraphStyle(myStory)
 		//elements = myStory.paragraphs[0].appliedParagraphStyle.name.toLowerCase().split("_");
 		//alert(elements[elements.length-1]);
 		//return elements[elements.length-1];
-		return myStory.paragraphs[0].appliedParagraphStyle.name.toLowerCase();
+ 		return myStory.paragraphs[0].appliedParagraphStyle.name.toLowerCase();
 	}
 	catch(myError)
 	{
@@ -921,6 +922,7 @@ function Grouping()
 {
 		var myStory, firstParagraphStyle;
 		var storyLength = myDocument.textFrames.length-1;	
+		//debugger;
 		for(; storyLength >= 0 ; storyLength--)
 		{
 			myStory = myDocument.textFrames[storyLength];
@@ -970,7 +972,6 @@ function Ungrouping()
 			{
 				for(; groupLength >= 0 ; groupLength--)
 				{
-					alert(groupLength);
 					myGroup = myDocument.groups[groupLength];
 					if(myGroup.parent.name  > activePageNumber)
 					myGroup.ungroup();
@@ -987,7 +988,8 @@ function Ungrouping()
 				//MoveToFirstPageAndCollectAllFrame();
 				//alert("Would you like to run the macro in case changes have been made that require the header to be updated?");
 				CollectAllFrame();
-				ShowPicture();
+				//debugger;
+				//ShowPicture();
 			}
 		}
 		catch(myError)
@@ -1165,15 +1167,17 @@ function DrawPictureCaption()
 	var pictures = myDocument.allGraphics;
 try
 {
+	//alert(pictures.length);
 	if(pictures.length > 0)
 	{
-		for(var count = 0; count <= pictures.length; count++)
+		for(var count = 0; count < pictures.length; count++)
 		{
 			picture = pictures[count];
 			//alert(picture.parent.name);	
 			//if(picture.parent.name  > activePageNumber)
 			//{
-				
+
+//debugger;
 				if(picture.parent.allPageItems.length > 0)
 				{
 					caption = picture.parent.textFrames[0];
@@ -1182,17 +1186,21 @@ try
 					{
 						
 						gbPicture = picture.geometricBounds;
+						//gbPicture.geometricBounds = [gbPicture[2] , gbPicture[1], gbPicture[2] , gbPicture[3]+5];
+						//gbPicture = picture.geometricBounds;
 						gbContainer = picture.parent.geometricBounds;
 						 pictureHeight = gbPicture[2] - gbPicture[0];
+						 //debugger;
 						caption.geometricBounds = [gbPicture[2] + 0.1, gbPicture[1], gbPicture[2] + 1, gbPicture[3]];
 						FitSingleFrameToContent(caption);
+						
 						gbCaption = caption.geometricBounds;
 						captionHeight = gbCaption[2] - gbCaption[0];
 						parentHeight = (pictureHeight + captionHeight);// + 0.5;//captionHeightUnit
 						if(gbContainer[1]==gbContainer[3])
 						gbContainer[3] += 0.5;
 						//alert(gbContainer[0] + "\n" + gbContainer[1] + "\n" +  gbContainer[0] + parentHeight + "\n" +  gbContainer[3])
-						picture.parent.geometricBounds = [gbContainer[0], gbContainer[1], gbContainer[0] + parentHeight , gbContainer[3]];
+						picture.parent.geometricBounds = [gbContainer[0], gbContainer[1], gbContainer[0] + parentHeight , gbCaption[3]];//gbContainer[3] +5
 					}
 				 }
 			//}
@@ -1214,10 +1222,12 @@ function FitSingleFrameToContent(myStory)
 		var fixedFrameBound, fitFrameBound;
 		fixedFrameBound = myStory.geometricBounds; 
 		//alert(myStory.contents)
+		//debugger;
+		//alert(fixedFrameBound[2] * 2);
 		for(unit=1;unit<=fixedFrameBound[2] * 2;unit++)
 		{
 			fitFrameBound = myStory.geometricBounds; 			
-			myStory.geometricBounds=[fitFrameBound[0], fitFrameBound[1], fitFrameBound[2] + 1 ,fitFrameBound[3]];//.5
+			myStory.geometricBounds=[fitFrameBound[0], fitFrameBound[1], fitFrameBound[2] + 1 ,fitFrameBound[3] + .5];//.5
 			if(!myStory.overflows)
 			{
 				break;

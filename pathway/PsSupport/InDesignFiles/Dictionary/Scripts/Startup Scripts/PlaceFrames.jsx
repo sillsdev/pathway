@@ -14,10 +14,10 @@ var indexTab = false;
 // Created By:   James Prabu 
 // Created On: Sep 10 2009   
 // Modified By:  James Prabu                        
-// Modified On:  Mar 01 2011 
-// Task Number : TD-1984(InDesign: InDesign gets Hung)
+// Modified On:  May 17 2011 
+// Task Number : TD-2347(hk00166b.tif picture missing)
 // <remarks> 
-// main changes in  BalancedColumn() for Footnote handling
+// Picture Caption Height, Width enlarged based on it's caption
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -260,7 +260,6 @@ function Settings()
 function ShowPicture()
 {
 	var myStory,pageHeight;
-	//alert(myFrames.length);
 	for(var myStoryCounter=activePageNumber; myStoryCounter <= myFrames.length-1;myStoryCounter++)
 	{
 			myStory = myFrames[myStoryCounter];
@@ -1155,7 +1154,7 @@ try
 {
 	if(pictures.length > 0)
 	{
-		for(var count = 0; count <= pictures.length; count++)
+		for(var count = 0; count < pictures.length; count++)
 		{
 			picture = pictures[count];
 			//alert(picture.parent.name);	
@@ -1180,7 +1179,7 @@ try
 						if(gbContainer[1]==gbContainer[3])
 						gbContainer[3] += 0.5;
 						//alert(gbContainer[0] + "\n" + gbContainer[1] + "\n" +  gbContainer[0] + parentHeight + "\n" +  gbContainer[3])
-						picture.parent.geometricBounds = [gbContainer[0], gbContainer[1], gbContainer[0] + parentHeight , gbContainer[3]];
+						picture.parent.geometricBounds = [gbContainer[0], gbContainer[1], gbContainer[0] + parentHeight ,  gbCaption[3]];//gbContainer[3] +5
 					}
 				 }
 			//}
@@ -1205,7 +1204,7 @@ function FitSingleFrameToContent(myStory)
 		for(unit=1;unit<=fixedFrameBound[2] * 2;unit++)
 		{
 			fitFrameBound = myStory.geometricBounds; 			
-			myStory.geometricBounds=[fitFrameBound[0], fitFrameBound[1], fitFrameBound[2] + 1 ,fitFrameBound[3]];//.5
+			myStory.geometricBounds=[fitFrameBound[0], fitFrameBound[1], fitFrameBound[2] + 1 ,fitFrameBound[3] + .5];//.5
 			if(!myStory.overflows)
 			{
 				break;
