@@ -441,6 +441,7 @@
     <Copy SourceFiles="@(AllPreview)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(BtePreview)" DestinationFolder="Files\ConfigurationTool\" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles->'Files\ConfigurationTool\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="@(copyrightFiles->'Files\ConfigurationTool\Copyrights\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles->'Files\ConfigurationTool\epub\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'Files\ConfigurationTool\epubcheck-1.1\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles->'Files\ConfigurationTool\GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
@@ -494,6 +495,7 @@
     <AllPreview Include="..\PsSupport\DictionaryPreview.xhtml" />
     <BtePreview Include="..\PsSupport\ScripturePreview.xhtml" />
     <OfficeFiles Include="..\PsSupport\OfficeFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <copyrightFiles Include="..\PsSupport\Copyrights\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <epubFiles Include="..\PsSupport\epub\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <AllBackend Include="..\epubValidator\$(OutDir)\epubValidator.*" />
     <GoBibleFiles Include="..\PsSupport\GoBible\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />

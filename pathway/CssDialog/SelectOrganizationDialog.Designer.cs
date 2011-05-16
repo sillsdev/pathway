@@ -35,12 +35,13 @@
             this.ddlOrganization = new System.Windows.Forms.ComboBox();
             this.lblOther = new System.Windows.Forms.Label();
             this.lblInstructions = new System.Windows.Forms.Label();
+            this.btnHelp = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(307, 127);
+            this.btnCancel.Location = new System.Drawing.Point(226, 127);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 6;
@@ -60,7 +61,7 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(226, 127);
+            this.btnOK.Location = new System.Drawing.Point(145, 127);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 5;
@@ -103,6 +104,16 @@
             this.lblInstructions.Text = "Select the organization you are representing, Pathway will automatically fill in " +
                 "copyright statements, etc. based on your selection.";
             // 
+            // btnHelp
+            // 
+            this.btnHelp.Location = new System.Drawing.Point(307, 127);
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(75, 23);
+            this.btnHelp.TabIndex = 7;
+            this.btnHelp.Text = "&Help";
+            this.btnHelp.UseVisualStyleBackColor = true;
+            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
+            // 
             // SelectOrganizationDialog
             // 
             this.AcceptButton = this.btnOK;
@@ -110,6 +121,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(394, 162);
+            this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOther);
             this.Controls.Add(this.btnOK);
@@ -137,5 +149,6 @@
         private System.Windows.Forms.ComboBox ddlOrganization;
         private System.Windows.Forms.Label lblOther;
         private System.Windows.Forms.Label lblInstructions;
+        private System.Windows.Forms.Button btnHelp;
     }
 }

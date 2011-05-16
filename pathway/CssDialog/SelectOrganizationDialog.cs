@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Xml;
+using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
     public partial class SelectOrganizationDialog : Form
     {
+        private static string _helpTopic = string.Empty;
         private XmlNodeList _organizations;
 
         public string Organization
@@ -18,6 +20,7 @@ namespace SIL.PublishingSolution
         public SelectOrganizationDialog()
         {
             InitializeComponent();
+            _helpTopic = "User_Interface/Dialog_boxes/Print_via.htm";
         }
 
         private void btnOther_Click(object sender, EventArgs e)
@@ -107,6 +110,15 @@ namespace SIL.PublishingSolution
             // Don't save anything - just close
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            Common.PathwayHelpSetup();
+            Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
+            Common.HelpProv.SetHelpKeyword(this, _helpTopic);
+            SendKeys.Send("{F1}");
+
         }
     }
 }
