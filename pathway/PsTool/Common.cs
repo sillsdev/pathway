@@ -1411,12 +1411,21 @@ namespace SIL.Tool
                     if (float.Parse(version.Substring(0, 3)) > 6.0)
                         continue; // latest version uses reflection and no longer requires precise version agreement
                     if (fileVersionInfo.FileVersion != version)
+                    {
+                        var sb = new StringBuilder();
+                        sb.AppendLine("isRightFieldworksVersion: file version mismatch -");
+                        sb.AppendLine(fullName + " / version: " + fileVersionInfo.FileVersion);
+                        sb.AppendLine("Expecting version: " + version);
+                        Debug.WriteLine(sb.ToString());
+                        //MessageBox.Show(sb.ToString()); // EDB troubleshooting only... remove
                         return false;
+                    }
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Debug.WriteLine(ex);
                 return false;
             }
         }

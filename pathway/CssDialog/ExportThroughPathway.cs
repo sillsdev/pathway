@@ -103,8 +103,16 @@ namespace SIL.PublishingSolution
                 return _publicationName;
             }
         }
-        public bool ExportReversal { get; set; }
-        public bool ExportGrammar { get; set; }
+        public bool ExportReversal
+        {
+            get { return chkReversalIndexes.Checked; }
+            set { chkReversalIndexes.Checked = value; }
+        }
+        public bool ExportGrammar
+        {
+            get { return chkGrammarSketch.Checked; }
+            set { chkGrammarSketch.Checked = value; }
+        }
 
         public bool ReversalExists
         {
@@ -127,7 +135,11 @@ namespace SIL.PublishingSolution
             get { return false; }
         }
 
-        public bool ExportMain { get; set; }
+        public bool ExportMain
+        {
+            get { return chkConfiguredDictionary.Checked; }
+            set { chkConfiguredDictionary.Checked = value; }
+        }
         #endregion InterfaceMethods
 
         // Publication Info (dublin core metadata) tab
@@ -285,6 +297,8 @@ namespace SIL.PublishingSolution
                 // setting defaults: just load the settings file (don't migrate)
                 Param.SetValue(Param.InputType, InputType);
                 Param.LoadSettings();
+                // add the input type (to give a little more information to the user)
+                Text += " - " + InputType;
             }
 
             // get the current organization
@@ -364,7 +378,7 @@ namespace SIL.PublishingSolution
             chkOOReduceStyleNames.Enabled = (ddlLayout.Text.Contains("OpenOffice"));
             if (InputType != "Dictionary")
             {
-                lblSelectData.Visible = false;
+               // lblSelectData.Visible = false;
                 chkConfiguredDictionary.Visible = false;
                 chkReversalIndexes.Visible = false;
                 chkGrammarSketch.Visible = false; // currently this is false anyways (it's not implemented)
@@ -519,14 +533,17 @@ namespace SIL.PublishingSolution
                 return;
             }
 
-            DialogResult = DialogResult.Yes;
-            SaveProperty(this);
-            if (Text.Contains("Default"))
-                SaveDefaultProperty(this);
-            _publicationName = Path.GetFileName(OutputFolder);
-            OutputFolder = Path.GetDirectoryName(OutputFolder);
-            Common.TimeStarted = DateTime.Now;
-            Close();
+            // attempt to save the properties - if it doesn't work, leave the dialog open
+            if (SaveProperty(this))
+            {
+                DialogResult = DialogResult.Yes;
+                if (Text.Contains("Default"))
+                    SaveDefaultProperty(this);
+                _publicationName = Path.GetFileName(OutputFolder);
+                OutputFolder = Path.GetDirectoryName(OutputFolder);
+                Common.TimeStarted = DateTime.Now;
+                Close();
+            }
         }
 
         #endregion Events
@@ -612,8 +629,9 @@ namespace SIL.PublishingSolution
         /// Save the properties from the Export Through Pathway dialog to the appropriate StyleSettings xml file
         /// </summary>
         /// <param name="dlg"></param>
-        private static void SaveProperty(ExportThroughPathway dlg)
+        private static bool SaveProperty(ExportThroughPathway dlg)
         {
+            bool success = true;
             Param.SetValue(Param.PrintVia, dlg.Format);
             // Publication Information tab
             Param.UpdateMetadataValue(Param.Title, dlg.Title);
@@ -649,6 +667,15 @@ namespace SIL.PublishingSolution
             // Processing Options tab
             if (string.IsNullOrEmpty(dlg.InputType) || dlg.InputType == "Dictionary")
             {
+                success = (dlg.ExportReversal || dlg.ExportMain || dlg.ExportGrammar);
+                if (!success)
+                {
+                    MessageBox.Show("Please select at least one item to include in the export.");
+                    dlg.IsExpanded = true;
+                    dlg.ResizeDialog();
+                    dlg.tabControl1.SelectedTab = dlg.tabPage3;
+                    dlg.chkConfiguredDictionary.Focus();
+                }
                 Param.SetValue(Param.ConfigureDictionary, dlg.ExportMain.ToString());
                 Param.SetValue(Param.ReversalIndex, dlg.ExportReversal.ToString());
                 Param.SetValue(Param.GrammarSketch, dlg.ExportGrammar.ToString());
@@ -658,6 +685,7 @@ namespace SIL.PublishingSolution
             Param.SetValue(Param.Media, _media);
             Param.SetValue(Param.PublicationLocation, dlg.OutputFolder);
             Param.Write();
+            return success;
         }
 
         private static void SaveDefaultProperty(ExportThroughPathway dlg)

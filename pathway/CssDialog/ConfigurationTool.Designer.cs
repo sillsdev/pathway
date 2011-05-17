@@ -1888,20 +1888,6 @@
             this.tsPreview.ToolTipText = "Preview the layout produced by the selected stylesheet (Alt+V)";
             this.tsPreview.Click += new System.EventHandler(this.tsPreview_Click);
             // 
-            // tsDefault
-            // 
-            this.tsDefault.AccessibleName = "tsHelp";
-            this.tsDefault.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.tsDefault.Image = ((System.Drawing.Image)(resources.GetObject("tsDefault.Image")));
-            this.tsDefault.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsDefault.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsDefault.Name = "tsDefault";
-            this.tsDefault.Size = new System.Drawing.Size(58, 49);
-            this.tsDefault.Text = "De&faults";
-            this.tsDefault.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsDefault.ToolTipText = "Select the Default Settings for the Print Via dialog (Alt+F)";
-            this.tsDefault.Click += new System.EventHandler(this.tsDefault_Click);
-            // 
             // tsSend
             // 
             this.tsSend.AccessibleName = "tsExport";

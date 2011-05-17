@@ -75,13 +75,14 @@
             this.chkGrammarSketch = new System.Windows.Forms.CheckBox();
             this.chkReversalIndexes = new System.Windows.Forms.CheckBox();
             this.chkConfiguredDictionary = new System.Windows.Forms.CheckBox();
-            this.lblSelectData = new System.Windows.Forms.Label();
             this.BtnBrwsLayout = new System.Windows.Forms.Button();
+            this.grpInclude = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgCoverImage)).BeginInit();
             this.tabPage3.SuspendLayout();
+            this.grpInclude.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnMoreLessOptions
@@ -488,15 +489,12 @@
             // tabPage3
             // 
             this.tabPage3.AutoScroll = true;
+            this.tabPage3.Controls.Add(this.grpInclude);
             this.tabPage3.Controls.Add(this.chkOOReduceStyleNames);
             this.tabPage3.Controls.Add(this.chkRunningHeader);
             this.tabPage3.Controls.Add(this.btnBrowseSaveInFolder);
             this.tabPage3.Controls.Add(this.txtSaveInFolder);
             this.tabPage3.Controls.Add(this.label8);
-            this.tabPage3.Controls.Add(this.chkGrammarSketch);
-            this.tabPage3.Controls.Add(this.chkReversalIndexes);
-            this.tabPage3.Controls.Add(this.chkConfiguredDictionary);
-            this.tabPage3.Controls.Add(this.lblSelectData);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(365, 218);
@@ -554,7 +552,7 @@
             // chkGrammarSketch
             // 
             this.chkGrammarSketch.AutoSize = true;
-            this.chkGrammarSketch.Location = new System.Drawing.Point(8, 153);
+            this.chkGrammarSketch.Location = new System.Drawing.Point(6, 65);
             this.chkGrammarSketch.Name = "chkGrammarSketch";
             this.chkGrammarSketch.Size = new System.Drawing.Size(105, 17);
             this.chkGrammarSketch.TabIndex = 29;
@@ -565,7 +563,7 @@
             // chkReversalIndexes
             // 
             this.chkReversalIndexes.AutoSize = true;
-            this.chkReversalIndexes.Location = new System.Drawing.Point(8, 130);
+            this.chkReversalIndexes.Location = new System.Drawing.Point(6, 42);
             this.chkReversalIndexes.Name = "chkReversalIndexes";
             this.chkReversalIndexes.Size = new System.Drawing.Size(108, 17);
             this.chkReversalIndexes.TabIndex = 28;
@@ -576,22 +574,13 @@
             // chkConfiguredDictionary
             // 
             this.chkConfiguredDictionary.AutoSize = true;
-            this.chkConfiguredDictionary.Location = new System.Drawing.Point(8, 107);
+            this.chkConfiguredDictionary.Location = new System.Drawing.Point(6, 19);
             this.chkConfiguredDictionary.Name = "chkConfiguredDictionary";
             this.chkConfiguredDictionary.Size = new System.Drawing.Size(127, 17);
             this.chkConfiguredDictionary.TabIndex = 27;
             this.chkConfiguredDictionary.Text = "Configured Dictionary";
             this.chkConfiguredDictionary.UseVisualStyleBackColor = true;
             this.chkConfiguredDictionary.CheckedChanged += new System.EventHandler(this.chkConfiguredDictionary_CheckedChanged);
-            // 
-            // lblSelectData
-            // 
-            this.lblSelectData.AutoSize = true;
-            this.lblSelectData.Location = new System.Drawing.Point(4, 87);
-            this.lblSelectData.Name = "lblSelectData";
-            this.lblSelectData.Size = new System.Drawing.Size(113, 13);
-            this.lblSelectData.TabIndex = 0;
-            this.lblSelectData.Text = "Select data to include:";
             // 
             // BtnBrwsLayout
             // 
@@ -604,6 +593,18 @@
             this.BtnBrwsLayout.TabIndex = 4;
             this.BtnBrwsLayout.UseVisualStyleBackColor = true;
             this.BtnBrwsLayout.Click += new System.EventHandler(this.BtnBrwsLayout_Click);
+            // 
+            // grpInclude
+            // 
+            this.grpInclude.Controls.Add(this.chkConfiguredDictionary);
+            this.grpInclude.Controls.Add(this.chkReversalIndexes);
+            this.grpInclude.Controls.Add(this.chkGrammarSketch);
+            this.grpInclude.Location = new System.Drawing.Point(8, 80);
+            this.grpInclude.Name = "grpInclude";
+            this.grpInclude.Size = new System.Drawing.Size(336, 94);
+            this.grpInclude.TabIndex = 30;
+            this.grpInclude.TabStop = false;
+            this.grpInclude.Text = "Select data to include:";
             // 
             // ExportThroughPathway
             // 
@@ -637,6 +638,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.imgCoverImage)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.grpInclude.ResumeLayout(false);
+            this.grpInclude.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -685,12 +688,12 @@
         private System.Windows.Forms.CheckBox chkGrammarSketch;
         private System.Windows.Forms.CheckBox chkReversalIndexes;
         private System.Windows.Forms.CheckBox chkConfiguredDictionary;
-        private System.Windows.Forms.Label lblSelectData;
         private System.Windows.Forms.Button BtnBrwsLayout;
         private System.Windows.Forms.CheckBox chkCoverImageTitle;
         private System.Windows.Forms.ComboBox ddlCopyrightStatement;
         private System.Windows.Forms.RadioButton rdoCustomCopyright;
         private System.Windows.Forms.RadioButton rdoStandardCopyright;
         private System.Windows.Forms.LinkLabel lnkChooseCopyright;
+        private System.Windows.Forms.GroupBox grpInclude;
     }
 }
