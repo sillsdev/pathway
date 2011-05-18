@@ -378,7 +378,7 @@ namespace SIL.PublishingSolution
             chkOOReduceStyleNames.Enabled = (ddlLayout.Text.Contains("OpenOffice"));
             if (InputType != "Dictionary")
             {
-               // lblSelectData.Visible = false;
+                grpInclude.Visible = false;
                 chkConfiguredDictionary.Visible = false;
                 chkReversalIndexes.Visible = false;
                 chkGrammarSketch.Visible = false; // currently this is false anyways (it's not implemented)

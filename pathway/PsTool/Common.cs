@@ -1408,7 +1408,8 @@ namespace SIL.Tool
                     if (!File.Exists(fullName))
                         continue;
                     FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(fullName);
-                    if (float.Parse(version.Substring(0, 3)) > 6.0)
+                    // parse FieldworksVersions.txt items using en-US (current locale could parse differently)
+                    if (float.Parse(version.Substring(0, 3), CultureInfo.GetCultureInfo("en-US")) > 6.0)
                         continue; // latest version uses reflection and no longer requires precise version agreement
                     if (fileVersionInfo.FileVersion != version)
                     {
