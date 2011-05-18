@@ -310,6 +310,11 @@ namespace SIL.PublishingSolution
             catch (Exception)
             {
                 var dlg = new SelectOrganizationDialog();
+                if (Text.Contains("Set Defaults"))
+                {
+                    // if we're setting defaults, provide a clue as to what they're setting the defaults for
+                    dlg.Text += " - " + InputType;
+                }
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     Organization = dlg.Organization;
