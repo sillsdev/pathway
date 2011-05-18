@@ -467,6 +467,7 @@ namespace Test.Xetex
         }
 
         [Test]
+        [Category("SkipOnTeamCity")]
         //TD-2303 font-family: Gentium
         public void FontFamily2a()
         {
@@ -477,6 +478,7 @@ namespace Test.Xetex
         }
 
         [Test]
+        [Category("SkipOnTeamCity")]
         //TD-2303 font-family: Gentium
         public void FontFamily3()
         {
@@ -497,6 +499,7 @@ namespace Test.Xetex
         }
 
         [Test]
+        [Category("SkipOnTeamCity")]
         //TD-2303 font-family: Gentium
         public void FontFamily5()
         {
