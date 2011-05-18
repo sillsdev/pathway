@@ -578,6 +578,18 @@ namespace SIL.PublishingSolution
             // front matter tab
             CoverPage = (Param.GetMetadataValue(Param.CoverPage, Organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CoverPage, Organization));
             CoverPageImagePath = Param.GetMetadataValue(Param.CoverPageFilename, Organization);
+            if (CoverPageImagePath.Trim().Length > 0)
+            {
+                try
+                {
+                    Image iconImage = Image.FromFile(CoverPageImagePath);
+                    imgCoverImage.Image = iconImage;
+                }
+                catch
+                {
+                    imgCoverImage.Image = imgCoverImage.InitialImage;
+                }
+            }
             TitlePage = (Param.GetMetadataValue(Param.TitlePage, Organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.TitlePage, Organization));
             CoverPageTitle = (Param.GetMetadataValue(Param.CoverPageTitle, Organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CoverPageTitle, Organization));
             CopyrightPage = (Param.GetMetadataValue(Param.CopyrightPage, Organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CopyrightPage, Organization));
@@ -882,10 +894,11 @@ namespace SIL.PublishingSolution
                             this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
-                    string userPath = (Param.Value["UserSheetPath"]);
-                    string imgFileName = Path.GetFileName(filename);
-                    string toPath = Path.Combine(userPath, imgFileName);
-                    File.Copy(filename, toPath, true);
+                    CoverPageImagePath = filename;
+                    //string userPath = (Param.Value["UserSheetPath"]);
+                    //string imgFileName = Path.GetFileName(filename);
+                    //string toPath = Path.Combine(userPath, imgFileName);
+                    //File.Copy(filename, toPath, true);
                     imgCoverImage.Image = iconImage;
                 }
                 catch { }
