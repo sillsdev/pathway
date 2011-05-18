@@ -457,6 +457,56 @@ namespace Test.Xetex
         }
 
         [Test]
+        //TD-2303 font-family: Gentium
+        public void FontFamily1()
+        {
+            const string file = "FontFamily1";
+            _projInfo.ProjectInputType = "Dictionary";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        //TD-2303 font-family: Gentium
+        public void FontFamily2a()
+        {
+            const string file = "FontFamily2a";
+            _projInfo.ProjectInputType = "Dictionary";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        //TD-2303 font-family: Gentium
+        public void FontFamily3()
+        {
+            const string file = "FontFamily3";
+            _projInfo.ProjectInputType = "Dictionary";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        //TD-2303 font-family: Gentium
+        public void FontFamily4a()
+        {
+            const string file = "FontFamily4a";
+            _projInfo.ProjectInputType = "Dictionary";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        //TD-2303 font-family: Gentium
+        public void FontFamily5()
+        {
+            const string file = "FontFamily5";
+            _projInfo.ProjectInputType = "Dictionary";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
         [Category("SkipOnTeamCity")]
         public void TextAlignJustifyTest()
         {

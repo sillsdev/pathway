@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -554,7 +555,19 @@ namespace SIL.PublishingSolution
         }
         public void FontFamily(string propertyValue)
         {
-            _fontName = propertyValue;
+            string fontName = "Times New Roman";
+            FontFamily[] systemFontList = System.Drawing.FontFamily.Families;
+            foreach (FontFamily systemFont in systemFontList)
+            {
+                if (propertyValue.ToLower() == systemFont.Name.ToLower())
+                {
+                    fontName = propertyValue;
+                    break;
+                }
+            }
+
+            _fontName = fontName;
+
             //_property = @"\font\" + _className + "=\"" + propertyValue + "\"";
             //_property += GetFontSize();
             // _IDProperty["AppliedFont"] = propertyValue;
