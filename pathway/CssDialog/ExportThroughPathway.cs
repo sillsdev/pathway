@@ -20,7 +20,7 @@ namespace SIL.PublishingSolution
         public ExportThroughPathway()
         {
             InitializeComponent();
-            _helpTopic = "User_Interface/Dialog_boxes/Print_via.htm";
+            _helpTopic = "User_Interface/Dialog_boxes/Export_Through_Pathway_dialog_box.htm";
             _fromPlugIn = true;
         }
 
@@ -937,7 +937,7 @@ namespace SIL.PublishingSolution
         private void lnkChooseCopyright_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // TODO: replace with correct help topic
-            _helpTopic = "Concepts/Intellectual_Property.htm";
+            _helpTopic = "Tasks/Basic_Tasks/Choosing_a_rights_statement.htm";
             btnHelp_Click(sender, e);
         }
 

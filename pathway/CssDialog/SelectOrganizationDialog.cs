@@ -20,7 +20,7 @@ namespace SIL.PublishingSolution
         public SelectOrganizationDialog()
         {
             InitializeComponent();
-            _helpTopic = "User_Interface/Dialog_boxes/Print_via.htm";
+            _helpTopic = "User_Interface/Dialog_boxes/Select_Your_Organization_dialog_box.htm";
         }
 
         private void btnOther_Click(object sender, EventArgs e)
