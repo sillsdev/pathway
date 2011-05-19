@@ -510,6 +510,16 @@ namespace Test.Xetex
         }
 
         [Test]
+        //TD-2059 font-family: "<default serif>", serif;
+        public void FontFamily6()
+        {
+            const string file = "FontFamily6";
+            _projInfo.ProjectInputType = "Dictionary";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
         [Category("SkipOnTeamCity")]
         public void TextAlignJustifyTest()
         {
