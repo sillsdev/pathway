@@ -560,6 +560,9 @@ namespace TestBed
 
         private void btnParaText_Click(object sender, EventArgs e)
         {
+            string os = Common.GetOsName();
+            MessageBox.Show(os);
+            return;
 #if !Not7
             ParatextPathwayLink paraText = new ParatextPathwayLink("NKOu1", "NKOu1", "en", "en", "Sankar");
             XmlDocument usfxDoc = new XmlDocument();

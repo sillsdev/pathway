@@ -2328,7 +2328,12 @@ return FromProg(file);
             return styleName;
         }
 
+	public static string GetOsName()
+{
+OperatingSystem osInfo = Environment.OSVersion;
+return osInfo.Platform.ToString();
 
+}
         ///// <summary>
         ///// If the user selected page style is "Every Page", this method will remove the "@Page:left" and 
         ///// "@page:right" tag from the  CSS file.
