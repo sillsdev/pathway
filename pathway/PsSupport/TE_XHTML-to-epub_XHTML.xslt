@@ -27,9 +27,19 @@
 	<xsl:variable name="lowercase" select="'abcdefghijklmnopqrstuvwxyz'" />
 	
 	<!--Straight copy for these elements. -->
-	<xsl:template match="xhtml:html | xhtml:head | xhtml:title | xhtml:link | xhtml:a">
+	<xsl:template match="xhtml:head | xhtml:title | xhtml:link | xhtml:a | xhtml:table | xhtml:tr | xhtml:td | xhtml:em | xhtml:br">
 		<xsl:copy>
 			<xsl:for-each select="@*">
+				<xsl:copy/>
+			</xsl:for-each>
+			<xsl:apply-templates/>
+		</xsl:copy>
+	</xsl:template>
+	
+	<!--Straight copy for these elements. -->
+	<xsl:template match="xhtml:html">
+		<xsl:copy>
+			<xsl:for-each select="@*[not(name() = 'lang' )]">
 				<xsl:copy/>
 			</xsl:for-each>
 			<xsl:apply-templates/>
@@ -195,6 +205,16 @@
 			<xsl:attribute name="class"><xsl:text>Title_Tertiary</xsl:text></xsl:attribute>
 			<xsl:value-of select="."/>
 		</xsl:element>
+	</xsl:template>
+	
+	<!-- Straight copy for front matter items -->
+	<xsl:template match="xhtml:div[@class='Front_Matter'] | xhtml:div[@class='Front_Matter']/xhtml:p | xhtml:div/xhtml:h1 | xhtml:div/xhtml:h2 | xhtml:div[@class='Cover'] | xhtml:div[@class='Title'] | xhtml:div[@class='Copyright']">
+		<xsl:copy>
+			<xsl:for-each select="@*">
+				<xsl:copy/>
+			</xsl:for-each>
+			<xsl:apply-templates/>
+		</xsl:copy>
 	</xsl:template>
 	
 	<!-- inner text for scriptures - they don't have a class, so we'll assign them to class "scrText" -->

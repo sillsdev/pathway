@@ -251,16 +251,26 @@ namespace SIL.PublishingSolution
                 List<string> htmlFiles = new List<string>();
                 List<string> splitFiles = new List<string>();
                 Common.XsltProgressBar = inProcess.Bar();
+
+                // insert the front matter items as separate files in the output folder
+                preProcessor.InsertFrontMatter(tempFolder, false);
+                splitFiles.Add(Path.Combine(tempFolder, "File0Cvr.xhtml"));
+                splitFiles.Add(Path.Combine(tempFolder, "File1Ttl.xhtml"));
+                splitFiles.Add(Path.Combine(tempFolder, "File2Cpy.xhtml"));
+                foreach(var file in splitFiles)
+                {
+                    Common.SetDefaultCSS(file, defaultCSS);
+                }
                 if (projInfo.FileToProduce.ToLower() != "one")
                 {
-                    splitFiles = SplitFile(preProcessor.ProcessedXhtml, projInfo);
+                    splitFiles.AddRange(SplitFile(preProcessor.ProcessedXhtml, projInfo));
                 }
                 else
                 {
                     splitFiles.Add(preProcessor.ProcessedXhtml);
                 }
 
-                // If we are working with a dictionary and have a reversal index, process it now
+                // If we are working with a dictionary and have a reversal index, process it now)
                 if (projInfo.IsReversalExist)
                 {
                     var revFile = Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
@@ -441,7 +451,7 @@ namespace SIL.PublishingSolution
                 // generate the toc / manifest files
                 CreateOpf(projInfo, contentFolder, bookId);
                 CreateNcx(projInfo, contentFolder, bookId);
-                CreateCoverImage(contentFolder, projInfo);
+                //CreateCoverImage(contentFolder, projInfo);
                 inProcess.PerformStep();
 
                 // Done adding content - now zip the whole thing up and name it
@@ -1203,6 +1213,19 @@ namespace SIL.PublishingSolution
         /// <returns>User-friendly book name (value of the scrBookName or letter element in the xhtml file).</returns>
         private string GetBookName(string xhtmlFileName)
         {
+            var fileNoPath = Path.GetFileName(xhtmlFileName);
+            if (fileNoPath.ToLower().StartsWith("file0cvr"))
+            {
+                return ("Cover Page");
+            }
+            if (fileNoPath.ToLower().StartsWith("file1ttl"))
+            {
+                return ("Title Page");
+            }
+            if (fileNoPath.ToLower().StartsWith("file2cpy"))
+            {
+                return ("Copyright Information");
+            }
             XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
@@ -2004,8 +2027,9 @@ namespace SIL.PublishingSolution
             opf.WriteStartElement("metadata");
             opf.WriteAttributeString("xmlns", "dc", null, "http://purl.org/dc/elements/1.1/");
             opf.WriteAttributeString("xmlns", "opf", null, "http://www.idpf.org/2007/opf");
-            opf.WriteElementString("dc", "title", null, (Title == "") ? (Common.databaseName + " " + projInfo.ProjectName) : Title);
-            opf.WriteStartElement("dc", "creator", null);       //<dc:creator opf:role="aut">[author]</dc:creator>
+            opf.WriteElementString("dc", "title", null,
+                                   (Title == "") ? (Common.databaseName + " " + projInfo.ProjectName) : Title);
+            opf.WriteStartElement("dc", "creator", null); //<dc:creator opf:role="aut">[author]</dc:creator>
             opf.WriteAttributeString("opf", "role", null, "aut");
             opf.WriteValue((Creator == "") ? Environment.UserName : Creator);
             opf.WriteEndElement();
@@ -2021,11 +2045,13 @@ namespace SIL.PublishingSolution
                 opf.WriteElementString("dc", "description", null, Description);
             if (Publisher.Length > 0)
                 opf.WriteElementString("dc", "publisher", null, Publisher);
-            opf.WriteStartElement("dc", "contributor", null);       // authoring program as a "contributor", e.g.:
-            opf.WriteAttributeString("opf", "role", null, "bkp");   // <dc:contributor opf:role="bkp">FieldWorks 7</dc:contributor>
+            opf.WriteStartElement("dc", "contributor", null); // authoring program as a "contributor", e.g.:
+            opf.WriteAttributeString("opf", "role", null, "bkp");
+                // <dc:contributor opf:role="bkp">FieldWorks 7</dc:contributor>
             opf.WriteValue(Common.GetProductName());
             opf.WriteEndElement();
-            opf.WriteElementString("dc", "date", null, DateTime.Today.ToString("yyyy-MM-dd")); // .epub standard date format (http://www.idpf.org/2007/opf/OPF_2.0_final_spec.html#Section2.2.7)
+            opf.WriteElementString("dc", "date", null, DateTime.Today.ToString("yyyy-MM-dd"));
+                // .epub standard date format (http://www.idpf.org/2007/opf/OPF_2.0_final_spec.html#Section2.2.7)
             opf.WriteElementString("dc", "type", null, "Text"); // 
             if (Format.Length > 0)
                 opf.WriteElementString("dc", "format", null, Format);
@@ -2043,11 +2069,14 @@ namespace SIL.PublishingSolution
             opf.WriteAttributeString("id", "BookId");
             opf.WriteValue(bookId.ToString());
             opf.WriteEndElement();
-            // meta elements
-            opf.WriteStartElement("meta");
-            opf.WriteAttributeString("name", "cover");
-            opf.WriteAttributeString("content", "cover-image");
-            opf.WriteEndElement(); // meta
+            // cover image (optional)
+            if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true"))
+            {
+                opf.WriteStartElement("meta");
+                opf.WriteAttributeString("name", "cover");
+                opf.WriteAttributeString("content", "cover-image");
+                opf.WriteEndElement(); // meta
+            }
             opf.WriteEndElement(); // metadata
             // manifest
             opf.WriteStartElement("manifest");
@@ -2057,16 +2086,16 @@ namespace SIL.PublishingSolution
             opf.WriteAttributeString("href", "toc.ncx");
             opf.WriteAttributeString("media-type", "application/x-dtbncx+xml");
             opf.WriteEndElement(); // item
-            opf.WriteStartElement("item");
-            opf.WriteAttributeString("id", "cover");
-            opf.WriteAttributeString("href", "cover.html");
-            opf.WriteAttributeString("media-type", "application/xhtml+xml");
-            opf.WriteEndElement(); // item
-            opf.WriteStartElement("item");
-            opf.WriteAttributeString("id", "cover-image");
-            opf.WriteAttributeString("href", "cover.png");
-            opf.WriteAttributeString("media-type", "image/png");
-            opf.WriteEndElement(); // item
+            //opf.WriteStartElement("item");
+            //opf.WriteAttributeString("id", "cover");
+            //opf.WriteAttributeString("href", "cover.html");
+            //opf.WriteAttributeString("media-type", "application/xhtml+xml");
+            //opf.WriteEndElement(); // item
+            //opf.WriteStartElement("item");
+            //opf.WriteAttributeString("id", "cover-image");
+            //opf.WriteAttributeString("href", "cover.png");
+            //opf.WriteAttributeString("media-type", "image/png");
+            //opf.WriteEndElement(); // item
 
             if (EmbedFonts)
             {
@@ -2118,6 +2147,17 @@ namespace SIL.PublishingSolution
                 string nameNoExt = Path.GetFileNameWithoutExtension(file);
                 if (name.EndsWith(".xhtml"))
                 {
+                    // is this the cover page?
+                    if (name.ToLower().StartsWith("file0cvr"))
+                    {
+                        // yup - write it out and go to the next item
+                        opf.WriteStartElement("item");
+                        opf.WriteAttributeString("id", "cover");
+                        opf.WriteAttributeString("href", name);
+                        opf.WriteAttributeString("media-type", "application/xhtml+xml");
+                        opf.WriteEndElement(); // item
+                        continue;
+                    }
                     // if we can, write out the "user friendly" book name in the TOC
                     string fileId = GetBookID(file); 
                     opf.WriteStartElement("item");
@@ -2173,12 +2213,20 @@ namespace SIL.PublishingSolution
             opf.WriteStartElement("spine");
             opf.WriteAttributeString("toc", "ncx");
             // a couple items for the cover image
-            opf.WriteStartElement("itemref"); 
-            opf.WriteAttributeString("idref", "cover");
-            opf.WriteAttributeString("linear", "yes");
-            opf.WriteEndElement(); // itemref
+            if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true"))
+            {
+                opf.WriteStartElement("itemref");
+                opf.WriteAttributeString("idref", "cover");
+                opf.WriteAttributeString("linear", "yes");
+                opf.WriteEndElement(); // itemref
+            }
             foreach (string file in files)
             {
+                // is this the cover page?
+                if (Path.GetFileName(file).ToLower().StartsWith("file0cvr"))
+                {
+                    continue;
+                }
                 // add an <itemref> for each xhtml file in the set
                 string name = Path.GetFileName(file);
                 if (name.EndsWith(".xhtml"))
@@ -2202,11 +2250,14 @@ namespace SIL.PublishingSolution
             // guide
             opf.WriteStartElement("guide");
             // cover image
-            opf.WriteStartElement("reference");
-            opf.WriteAttributeString("href", "cover.html");
-            opf.WriteAttributeString("type", "cover");
-            opf.WriteAttributeString("title", "Cover");
-            opf.WriteEndElement(); // reference
+            //if (Param.GetMetadataValue(Param.CoverPage).Trim().Equals("True"))
+            //{
+            //    opf.WriteStartElement("reference");
+            //    opf.WriteAttributeString("href", "cover.html");
+            //    opf.WriteAttributeString("type", "cover");
+            //    opf.WriteAttributeString("title", "Cover");
+            //    opf.WriteEndElement(); // reference
+            //}
             // first xhtml filename
             opf.WriteStartElement("reference");
             opf.WriteAttributeString("type", "text");

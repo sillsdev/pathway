@@ -296,3 +296,34 @@ content : "} ";
 .complexform-entry-type>.xitem + .xitem:before {
 content: "," 
 }
+.Front_Matter {
+text-indent : 12pt;
+margin-left : 48pt;
+margin-right: 48pt;
+text-align:left;
+}
+em {
+    font-weight: bold;
+    font-style: normal;
+}
+a {
+    white-space: nowrap;
+}
+table {
+    margin-bottom: 1em;
+}
+td {
+    vertical-align: center;
+    padding: 8px;
+}
+h1 {
+    font-size: 150%;
+    margin-top: 1em;
+    margin-bottom: .1em;
+    text-align: center;
+}
+h2 {
+    font-size: 125%;
+    margin-top: 1em;
+    margin-bottom: 0;
+}

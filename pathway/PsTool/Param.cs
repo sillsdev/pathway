@@ -1191,6 +1191,51 @@ namespace SIL.PublishingSolution
             }
         }
 
+        #region Metadata methods
+        /// <summary>
+        /// Returns the current organization specified by the Select Your Organization dialog. If none is specified,
+        /// this method returns an empty string.
+        /// </summary>
+        /// <returns>The current organization (string).</returns>
+        public static string GetOrganization()
+        {
+            string organization;
+            try
+            {
+                // get the organization
+                organization = Value["Organization"];
+            }
+            catch (Exception)
+            {
+                organization = "";
+            }
+            return organization;
+        }
+
+        public static string GetDefaultMetadataValue(string name, string organization)
+        {
+            XmlNode node;
+            // attempt to get the organization default
+            try
+            {
+                node =
+                    GetItem("//stylePick/Metadata/meta[@name='" + name + "']/organizationDefault[@organizationName='" +
+                            organization + "']");
+                if (node == null)
+                {
+                    // no organization default for this node - get the default value
+                    node = GetItem("//stylePick/Metadata/meta[@name='" + name + "']/defaultValue");
+                    // test for null node is in the return value below
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.ToString());
+                node = null;
+            }
+            return (node == null) ? null : (node.InnerText.Trim());            
+        }
+
         /// <summary>
         /// Override to GetMetadataValue. Returns the metadata value for the current organization.
         /// </summary>
@@ -1275,6 +1320,7 @@ namespace SIL.PublishingSolution
                 Write();
             }
         }
+        #endregion Metadata methods
 
         #region LoadImageList
         /// <summary>

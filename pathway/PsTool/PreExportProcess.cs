@@ -82,24 +82,120 @@ namespace SIL.Tool
         }
 
         #region Front Matter
-        public void CreateCoverImagePage(string outputFolder)
+        /// <summary>
+        /// Call to insert the front matter, with the option of either creating separate files in the outputFolder or merging the xhtml
+        /// into the preprocessed xhtml.
+        /// </summary>
+        /// <param name="outputFolder">temporary output folder</param>
+        /// <param name="mergeFiles">Specifies whether to merge the xhtml into the preprocessed xhtml file</param>
+        public void InsertFrontMatter(string outputFolder, bool mergeFiles)
         {
-            if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("false")) { return; }
+            // add the front matter pages to the temp folder as needed
+            if (Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("true") ||
+                Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true") ||
+                Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("true"))
+            {
+                // at least one front matter item selected
+                var sbPreamble = new StringBuilder();
+                sbPreamble.Append("<?xml version='1.0' encoding='utf-8'?><!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'[]>");
+                sbPreamble.Append("<html xmlns='http://www.w3.org/1999/xhtml'><head><title>");
+                sbPreamble.Append(_projInfo.ProjectName);
+                sbPreamble.Append("</title><link rel='stylesheet' href='");
+                sbPreamble.Append(Path.GetFileName(_cssFileNameWithPath));
+                sbPreamble.AppendLine("' type='text/css' /></head>");
+                sbPreamble.Append("<body class='scrBody'>"); 
+                var sb = new StringBuilder();
+                if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true"))
+                {
+                    // cover image and file
+                    CreateCoverImage(tempFolder);
+                    if (mergeFiles)
+                    {
+                        // add to stringbuilder (for merging)
+                        sb.Append(CoverImagePage());
+                    }
+                    else
+                    {
+                        // write to a separate file
+                        var outFile = new StreamWriter(Path.Combine(tempFolder, "File0Cvr.xhtml"));
+                        outFile.Write(sbPreamble.ToString());
+                        outFile.Write(CoverImagePage());
+                        outFile.WriteLine("</body></html>");
+                        outFile.Flush();
+                        outFile.Close();
+                    }
+                }
+                if (Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("true"))
+                {
+                    // title page
+                    if (mergeFiles)
+                    {
+                        sb.Append(TitlePage());
+                    }
+                    else
+                    {
+                        // write to a separate file
+                        var outFile = new StreamWriter(Path.Combine(tempFolder, "File1Ttl.xhtml"));
+                        outFile.Write(sbPreamble.ToString());
+                        outFile.Write(TitlePage());
+                        outFile.WriteLine("</body></html>");
+                        outFile.Flush();
+                        outFile.Close();
+                    }
+                }
+                if (Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("true"))
+                {
+                    // title page
+                    if (mergeFiles)
+                    {
+                        sb.Append(EmbedCopyrightPage(tempFolder));
+                    }
+                    else
+                    {
+                        // write to a separate file
+                        CopyCopyrightPage(tempFolder); // copyright page is a full xhtml file -- this method copies it over
+                    }
+                }
+
+                // if we're not merging, all our work is done -- just return
+                if (!mergeFiles)
+                {
+                    return; 
+                }
+
+                // Merging files...
+                // open the xhtml file and create a temporary copy for writing)
+                if (!File.Exists(_xhtmlFileNameWithPath)) return; // can't insert into the content
+                var sr = new StreamReader(_xhtmlFileNameWithPath);
+                var sw = new StreamWriter(_xhtmlFileNameWithPath + ".tmp");
+                var inData = sr.ReadToEnd();
+                var outData = new StringBuilder();
+                // search for the <body> element - we'll insert the front matter right after that
+                int start = inData.IndexOf("<body"); // start of <body>
+                int endIndex = inData.IndexOf(">", start); // end of <body>
+                outData.Append(inData.Substring(0, endIndex + 1));
+                outData.Append(sb.ToString());
+                outData.Append(inData.Substring(endIndex + 1));
+                sw.Write(outData.ToString());
+                sr.Close();
+                sw.Close();
+                // replace the original file with the new one
+                File.Delete(_xhtmlFileNameWithPath);
+                File.Move((_xhtmlFileNameWithPath + ".tmp"), _xhtmlFileNameWithPath);
+            }
+        }
+
+        /// <summary>
+        /// Returns a cover page xhtml snippet that will be inserted into the scripture or dictionary xhtml document
+        /// </summary>
+        /// <returns>XHTML snippet used to create a front image cover.</returns>
+        public string CoverImagePage()
+        {
+            if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("false")) { return string.Empty; }
             var sb = new StringBuilder();
-            sb.AppendLine("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1//EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'>");
-            sb.AppendLine("<html xmlns='http://www.w3.org/1999/xhtml'>");
-            sb.AppendLine("<head><title>Cover</title><style type='text/css'> img { max-width: 100%; } </style></head>");
-            sb.AppendLine("<body><div id='cover-image'><img src='cover.png' alt='Cover image'/></div></body></html>");
-            string outFile = Path.Combine(outputFolder, "cover.xhtml");
-            if (File.Exists(outFile))
-            {
-                File.Delete(outFile);
-            }
-            using (var writer = new StreamWriter(outFile))
-            {
-                writer.Write(sb.ToString());
-                writer.Close();
-            }
+            sb.AppendLine("<div id='CoverPage' class='Cover'><img src='cover.png' alt='Cover image'/></div>");
+            sb.AppendLine("<div class='Blank'></div>");
+            return sb.ToString();
         }
 
         /// <summary>
@@ -137,8 +233,7 @@ namespace SIL.Tool
             // if we got this far, we want to add a title "badge" to the cover image
             var bmp = new Bitmap(strImageFile);
             Graphics g = Graphics.FromImage(bmp);
-            // We're going to be "badging" the book image with a title - this consists of the database name
-            // and project name (split into multiple lines if from Paratext)
+            // We're going to be "badging" the book image with the Title metadata parameter
             var sb = new StringBuilder();
             sb.Append(Param.GetMetadataValue(Param.Title));
             var strTitle = sb.ToString();
@@ -165,40 +260,42 @@ namespace SIL.Tool
             bmp.Save(strCoverImageFile);
         }
 
-        public void CreateTitlePage(string outputFolder)
+        public string TitlePage()
         {
-            if (Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("false")) { return; }
+            if (Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("false")) { return string.Empty; }
             var sb = new StringBuilder();
-            sb.AppendLine("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1//EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'>");
-            sb.AppendLine("<html xmlns='http://www.w3.org/1999/xhtml'>");
-            sb.Append("<head><title>");
+            sb.Append("<div id='TitlePage' class='Title'><h1>");
             sb.Append(Param.GetMetadataValue(Param.Title));
-            sb.AppendLine("</title><style type='text/css'> img { max-width: 100%; } </style></head>");
-            sb.Append("<body><div id='title'><h1>");
-            sb.Append(Param.GetMetadataValue(Param.Title));
-            sb.AppendLine("</h1></div></body></html>");
-            string outFile = Path.Combine(outputFolder, "title.xhtml");
-            if (File.Exists(outFile))
-            {
-                File.Delete(outFile);
-            }
-            using (var writer = new StreamWriter(outFile))
-            {
-                writer.Write(sb.ToString());
-                writer.Close();
-            }
+            sb.AppendLine("</h1></div>");
+            return sb.ToString();
         }
 
         /// <summary>
-        /// Copies over the appropriate copyright / license page into the output folder, and fills in the details of
-        /// the language and copyright info in the resulting file.
+        /// Copies the Creative Commons images, etc. from the Copyrights folder into the temp output folder
         /// </summary>
-        public void CreateCopyrightPage(string outputFolder)
+        /// <param name="outputFolder"></param>
+        private void CopyCCResources(string outputFolder)
+        {
+            string strCopyrightFolder = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
+            // copy over supporting files from the Copyright folder
+            File.Copy(Path.Combine(strCopyrightFolder, "by.png"), Path.Combine(outputFolder, "by.png"));
+            File.Copy(Path.Combine(strCopyrightFolder, "sa.png"), Path.Combine(outputFolder, "sa.png"));
+            File.Copy(Path.Combine(strCopyrightFolder, "nc.png"), Path.Combine(outputFolder, "nc.png"));
+            File.Copy(Path.Combine(strCopyrightFolder, "SIL-Logo-Black.gif"), Path.Combine(outputFolder, "SIL-Logo-Black.gif"));
+            File.Copy(Path.Combine(strCopyrightFolder, "Copy.css"), Path.Combine(outputFolder, "Copy.css"));
+        }
+
+        public void CopyCopyrightPage(string outputFolder)
         {
             if (Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("false") ||
-                Param.GetMetadataValue(Param.CopyrightPageFilename).Length < 1) { return; }
-            // first, copy over the appropriate copyright page to the output directory
+                Param.GetMetadataValue(Param.CopyrightPageFilename).Length < 1)
+            {
+                return;
+            }
             string strCopyrightFolder = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
+            // copy over the CC images to the output folder
+            CopyCCResources(outputFolder);
+            // open up the copyright / license file
             string strFilename = Param.GetMetadataValue(Param.CopyrightPageFilename);
             if (strCopyrightFolder == null || strFilename == null)
             {
@@ -209,19 +306,53 @@ namespace SIL.Tool
             {
                 return; // something went wrong -- get out
             }
-            string destFile = Path.Combine(outputFolder, "copyright.xhtml");
+            string destFile = Path.Combine(outputFolder, "File2Cpy.xhtml");
+            if (File.Exists(destFile)) 
+            {
+                File.Delete(destFile);
+            }
             File.Copy(strCopyrightFile, destFile);
-            // also copy over supporting files from the Copyright folder
-            File.Copy(Path.Combine(strCopyrightFolder, "by.png"), Path.Combine(outputFolder, "by.png"));
-            File.Copy(Path.Combine(strCopyrightFolder, "sa.png"), Path.Combine(outputFolder, "sa.png"));
-            File.Copy(Path.Combine(strCopyrightFolder, "nc.png"), Path.Combine(outputFolder, "nc.png"));
-            File.Copy(Path.Combine(strCopyrightFolder, "SIL-Logo-Black.gif"), Path.Combine(outputFolder, "SIL-Logo-Black.gif"));
-            File.Copy(Path.Combine(strCopyrightFolder, "Copy.css"), Path.Combine(outputFolder, "Copy.css"));
-            // Now insert language and copyright information into the file
-            // language info
-            Common.StreamReplaceInFile(destFile, "div id='LanguageInformation'>", GetLanguageInfo());
-            // copyright info
-            Common.StreamReplaceInFile(destFile, "div id='OtherCopyrights'", GetCopyrightInfo());
+            Common.StreamReplaceInFile(destFile, "div id='LanguageInformation' class='Front_Matter'>", GetLanguageInfo());
+            Common.StreamReplaceInFile(destFile, "div id='OtherCopyrights' class='Front_Matter'>", GetCopyrightInfo());
+            Common.SetDefaultCSS(destFile, Path.GetFileName(_cssFileNameWithPath));
+        }
+
+        /// <summary>
+        /// Returns the string contents of the copyright / license xhtml for inserting into the dictionary / scripture data.
+        /// </summary>
+        public string EmbedCopyrightPage(string outputFolder)
+        {
+            if (Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("false") ||
+                Param.GetMetadataValue(Param.CopyrightPageFilename).Length < 1) { return string.Empty; }
+            string strCopyrightFolder = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
+            // copy over the CC images to the output folder
+            CopyCCResources(outputFolder);
+            // open up the copyright / license file
+            string strFilename = Param.GetMetadataValue(Param.CopyrightPageFilename);
+            if (strCopyrightFolder == null || strFilename == null)
+            {
+                return string.Empty;
+            }
+            string strCopyrightFile = Path.Combine(strCopyrightFolder, strFilename);
+            if (!File.Exists(strCopyrightFile))
+            {
+                return string.Empty; // something went wrong -- get out
+            }
+
+            var sr = new StreamReader(strCopyrightFile);
+            var inData = sr.ReadToEnd();
+            var outData = new StringBuilder();
+            // search for the <body> element - we're just interested in what's inside the element
+            int start = inData.IndexOf("<body"); // start of <body>
+            int startIndex = inData.IndexOf(">", start); // end of <body>
+            int endIndex = inData.IndexOf("</body>");
+            outData.Append("<div id='CopyrightPage' class='Copyright'>");
+            outData.Append(inData.Substring(startIndex + 1, (endIndex - (startIndex + 1))));
+            outData.Append("</div>");
+            sr.Close();
+            // add the language and copyright info and return the result as a string
+            var s1 = Regex.Replace(outData.ToString(), "div id='LanguageInformation' class='Front_Matter'>", GetLanguageInfo());
+            return (Regex.Replace(s1, "div id='OtherCopyrights' class='Front_Matter'>", GetCopyrightInfo()));
         }
 
         // Returns the language information for this document as an XHTML snippet (not well formed). This is meant to be used
@@ -229,7 +360,7 @@ namespace SIL.Tool
         private string GetLanguageInfo()
         {
             var sb = new StringBuilder();
-            sb.Append("div id='LanguageInformation'>");
+            sb.Append("div id='LanguageInformation' class='Front_Matter'>");
             // append what we know about this language, including a hyperlink to the ethnologue.
             string languageCode = GetLanguageCode();
             if (languageCode.Length > 0)
@@ -252,9 +383,8 @@ namespace SIL.Tool
         private string GetCopyrightInfo()
         {
             var sb = new StringBuilder();
-            sb.Append("div id='OtherCopyrights'>");
+            sb.Append("div id='OtherCopyrights' class='Front_Matter'>");
             // append any other copyright information to the list
-            sb.Append("<p>");
             string contributors = Param.GetMetadataValue(Param.Contributor);
             if (contributors.Trim().Length > 0)
             {
@@ -266,11 +396,9 @@ namespace SIL.Tool
             if (rights.Trim().Length > 0)
             {
                 sb.Append(rights);
-                sb.Append("; and, &copy; named rights holders for materials used by permission as specified in the resource file description.");
+                sb.Append("; © named rights holders for materials used by permission as specified in the resource file description.");
                 
             }
-            sb.Append("</p>");
-            //sb.Append("<p>Illustration) licenses?</p>");
             return sb.ToString();
         }
 
@@ -422,12 +550,6 @@ namespace SIL.Tool
             _cssFileNameWithPath = tempFile;
             // add a timestamp to the .css for troubleshooting purposes
             AddProductVersionToCSS();
-
-            // add the front matter pages to the temp folder as needed
-            CreateCoverImagePage(tempFolder);
-            CreateCoverImage(tempFolder);
-            CreateTitlePage(tempFolder);
-            CreateCopyrightPage(tempFolder);
         }
 
         public string InsertEmptyXHomographNumber(IDictionary<string, Dictionary<string, string>> cssClass)
