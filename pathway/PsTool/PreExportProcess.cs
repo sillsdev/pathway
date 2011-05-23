@@ -108,7 +108,7 @@ namespace SIL.Tool
                 if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true"))
                 {
                     // cover image and file
-                    CreateCoverImage(tempFolder);
+                    CreateCoverImage(outputFolder);
                     if (mergeFiles)
                     {
                         // add to stringbuilder (for merging)
@@ -117,7 +117,7 @@ namespace SIL.Tool
                     else
                     {
                         // write to a separate file
-                        var outFile = new StreamWriter(Path.Combine(tempFolder, "File0Cvr.xhtml"));
+                        var outFile = new StreamWriter(Path.Combine(outputFolder, "File0Cvr.xhtml"));
                         outFile.Write(sbPreamble.ToString());
                         outFile.Write(CoverImagePage());
                         outFile.WriteLine("</body></html>");
@@ -135,7 +135,7 @@ namespace SIL.Tool
                     else
                     {
                         // write to a separate file
-                        var outFile = new StreamWriter(Path.Combine(tempFolder, "File1Ttl.xhtml"));
+                        var outFile = new StreamWriter(Path.Combine(outputFolder, "File1Ttl.xhtml"));
                         outFile.Write(sbPreamble.ToString());
                         outFile.Write(TitlePage());
                         outFile.WriteLine("</body></html>");
@@ -148,12 +148,12 @@ namespace SIL.Tool
                     // title page
                     if (mergeFiles)
                     {
-                        sb.Append(EmbedCopyrightPage(tempFolder));
+                        sb.Append(EmbedCopyrightPage(outputFolder));
                     }
                     else
                     {
                         // write to a separate file
-                        CopyCopyrightPage(tempFolder); // copyright page is a full xhtml file -- this method copies it over
+                        CopyCopyrightPage(outputFolder); // copyright page is a full xhtml file -- this method copies it over
                     }
                 }
 

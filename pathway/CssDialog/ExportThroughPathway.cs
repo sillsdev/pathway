@@ -372,11 +372,12 @@ namespace SIL.PublishingSolution
             btnCoverImage.Enabled = chkCoverImageTitle.Enabled;
             imgCoverImage.Enabled = chkCoverImageTitle.Enabled;
 
-            rdoCustomCopyright.Enabled = chkColophon.Checked;
-            rdoStandardCopyright.Enabled = chkColophon.Checked;
-            ddlCopyrightStatement.Enabled = (chkColophon.Checked) ? rdoStandardCopyright.Checked : false;
-            txtColophonFile.Enabled = (chkColophon.Checked) ? rdoCustomCopyright.Checked : false;
-            btnBrowseColophon.Enabled = (chkColophon.Checked) ? rdoCustomCopyright.Checked : false;
+            chkColophon.Enabled = (!ddlLayout.Text.Contains("GoBible"));
+            rdoCustomCopyright.Enabled = (chkColophon.Checked && chkColophon.Enabled);
+            rdoStandardCopyright.Enabled = (chkColophon.Checked && chkColophon.Enabled);
+            ddlCopyrightStatement.Enabled = (chkColophon.Checked && chkColophon.Enabled) ? rdoStandardCopyright.Checked : false;
+            txtColophonFile.Enabled = (chkColophon.Checked && chkColophon.Enabled) ? rdoCustomCopyright.Checked : false;
+            btnBrowseColophon.Enabled = (chkColophon.Checked && chkColophon.Enabled) ? rdoCustomCopyright.Checked : false;
 
             // Processing Options tab
             chkRunningHeader.Enabled = (FindMedia() == "paper");
@@ -678,6 +679,11 @@ namespace SIL.PublishingSolution
             Param.UpdateMetadataValue(Param.CoverPageFilename, dlg.CoverPageImagePath);
             Param.UpdateMetadataValue(Param.CoverPageTitle, dlg.CoverPageTitle.ToString());
             Param.UpdateMetadataValue(Param.TitlePage, dlg.TitlePage.ToString());
+            if (dlg.chkColophon.Enabled == false)
+            {
+                // user can't create a copyright page - make sure this isn't checked
+                dlg.CopyrightPage = false;
+            }
             Param.UpdateMetadataValue(Param.CopyrightPage, dlg.CopyrightPage.ToString());
             Param.UpdateMetadataValue(Param.CopyrightPageFilename, dlg.CopyrightPagePath);
 

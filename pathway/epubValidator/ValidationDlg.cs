@@ -74,9 +74,12 @@ namespace epubValidator
             btnBrowse.Enabled = false;
             txtFilename.Enabled = false;
             lblStatus.Visible = true;
+            var myCursor = Cursor.Current;
+            Cursor = Cursors.WaitCursor;
             // launch the item
             var results = Program.ValidateFile(txtFilename.Text);
             // display the results
+            Cursor = myCursor;
             var dlg = new frmResults();
             dlg.ValidationResults = results;
             dlg.ShowDialog();
