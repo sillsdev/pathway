@@ -746,6 +746,12 @@ namespace SIL.PublishingSolution
 
         private void btnHelp_Click(object sender, EventArgs e)
         {
+            if (sender.GetType() == typeof(Button))
+            {
+                _helpTopic = (Text.Contains("Set Defaults"))
+                                 ? "User_Interface/Dialog_boxes/Set_Defaults_dialog_box.htm"
+                                 : "User_Interface/Dialog_boxes/Export_Through_Pathway_dialog_box.htm";
+            }
             Common.PathwayHelpSetup();
             Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
             Common.HelpProv.SetHelpKeyword(this, _helpTopic);
