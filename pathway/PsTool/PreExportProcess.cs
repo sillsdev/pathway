@@ -55,6 +55,10 @@ namespace SIL.Tool
         bool isNodeFound = false;
         XmlNode returnNode = null;
 
+        public const string CoverPageFilename = "File0Cvr.xhtml";
+        public const string TitlePageFilename = "File1Ttl.xhtml";
+        public const string CopyrightPageFilename = "File2Cpy.xhtml";
+
         public PreExportProcess()
         {
 
@@ -88,8 +92,9 @@ namespace SIL.Tool
         /// </summary>
         /// <param name="outputFolder">temporary output folder</param>
         /// <param name="mergeFiles">Specifies whether to merge the xhtml into the preprocessed xhtml file</param>
-        public void InsertFrontMatter(string outputFolder, bool mergeFiles)
+        public List<string> InsertFrontMatter(string outputFolder, bool mergeFiles)
         {
+            var files = new List<string>();
             // add the front matter pages to the temp folder as needed
             if (Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("true") ||
                 Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true") ||
@@ -117,12 +122,14 @@ namespace SIL.Tool
                     else
                     {
                         // write to a separate file
-                        var outFile = new StreamWriter(Path.Combine(outputFolder, "File0Cvr.xhtml"));
+                        var outFilename = Path.Combine(outputFolder, CoverPageFilename);
+                        var outFile = new StreamWriter(outFilename);
                         outFile.Write(sbPreamble.ToString());
                         outFile.Write(CoverImagePage());
                         outFile.WriteLine("</body></html>");
                         outFile.Flush();
                         outFile.Close();
+                        files.Add(outFilename);
                     }
                 }
                 if (Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("true"))
@@ -135,12 +142,14 @@ namespace SIL.Tool
                     else
                     {
                         // write to a separate file
-                        var outFile = new StreamWriter(Path.Combine(outputFolder, "File1Ttl.xhtml"));
+                        var outFilename = Path.Combine(outputFolder, TitlePageFilename);
+                        var outFile = new StreamWriter(outFilename);
                         outFile.Write(sbPreamble.ToString());
                         outFile.Write(TitlePage());
                         outFile.WriteLine("</body></html>");
                         outFile.Flush();
                         outFile.Close();
+                        files.Add(outFilename);
                     }
                 }
                 if (Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("true"))
@@ -153,19 +162,21 @@ namespace SIL.Tool
                     else
                     {
                         // write to a separate file
+                        var outFilename = Path.Combine(outputFolder, CopyrightPageFilename);
                         CopyCopyrightPage(outputFolder); // copyright page is a full xhtml file -- this method copies it over
+                        files.Add(outFilename);
                     }
                 }
 
                 // if we're not merging, all our work is done -- just return
                 if (!mergeFiles)
                 {
-                    return; 
+                    return files; 
                 }
 
                 // Merging files...
                 // open the xhtml file and create a temporary copy for writing)
-                if (!File.Exists(_xhtmlFileNameWithPath)) return; // can't insert into the content
+                if (!File.Exists(_xhtmlFileNameWithPath)) return files; // can't insert into the content
                 var sr = new StreamReader(_xhtmlFileNameWithPath);
                 var sw = new StreamWriter(_xhtmlFileNameWithPath + ".tmp");
                 var inData = sr.ReadToEnd();
@@ -182,7 +193,10 @@ namespace SIL.Tool
                 // replace the original file with the new one
                 File.Delete(_xhtmlFileNameWithPath);
                 File.Move((_xhtmlFileNameWithPath + ".tmp"), _xhtmlFileNameWithPath);
+                files.Add(_xhtmlFileNameWithPath);
             }
+
+            return files;
         }
 
         /// <summary>
@@ -278,11 +292,11 @@ namespace SIL.Tool
         {
             string strCopyrightFolder = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
             // copy over supporting files from the Copyright folder
-            File.Copy(Path.Combine(strCopyrightFolder, "by.png"), Path.Combine(outputFolder, "by.png"));
-            File.Copy(Path.Combine(strCopyrightFolder, "sa.png"), Path.Combine(outputFolder, "sa.png"));
-            File.Copy(Path.Combine(strCopyrightFolder, "nc.png"), Path.Combine(outputFolder, "nc.png"));
-            File.Copy(Path.Combine(strCopyrightFolder, "SIL-Logo-Black.gif"), Path.Combine(outputFolder, "SIL-Logo-Black.gif"));
-            File.Copy(Path.Combine(strCopyrightFolder, "Copy.css"), Path.Combine(outputFolder, "Copy.css"));
+            File.Copy(Path.Combine(strCopyrightFolder, "by.png"), Path.Combine(outputFolder, "by.png"), true);
+            File.Copy(Path.Combine(strCopyrightFolder, "sa.png"), Path.Combine(outputFolder, "sa.png"), true);
+            File.Copy(Path.Combine(strCopyrightFolder, "nc.png"), Path.Combine(outputFolder, "nc.png"), true);
+            File.Copy(Path.Combine(strCopyrightFolder, "SIL-Logo-Black.gif"), Path.Combine(outputFolder, "SIL-Logo-Black.gif"), true);
+            File.Copy(Path.Combine(strCopyrightFolder, "Copy.css"), Path.Combine(outputFolder, "Copy.css"), true);
         }
 
         public void CopyCopyrightPage(string outputFolder)

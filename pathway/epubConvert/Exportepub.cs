@@ -79,7 +79,6 @@ namespace SIL.PublishingSolution
         public string Source { get; set; }
         public bool EmbedFonts { get; set; }
         public bool IncludeFontVariants { get; set; }
-        public string CoverImage { get; set; }
         public string TocLevel { get; set; }
         public int MaxImageWidth { get; set; }
 
@@ -253,10 +252,7 @@ namespace SIL.PublishingSolution
                 Common.XsltProgressBar = inProcess.Bar();
 
                 // insert the front matter items as separate files in the output folder
-                preProcessor.InsertFrontMatter(tempFolder, false);
-                splitFiles.Add(Path.Combine(tempFolder, "File0Cvr.xhtml"));
-                splitFiles.Add(Path.Combine(tempFolder, "File1Ttl.xhtml"));
-                splitFiles.Add(Path.Combine(tempFolder, "File2Cpy.xhtml"));
+                splitFiles.AddRange(preProcessor.InsertFrontMatter(tempFolder, false));
                 foreach(var file in splitFiles)
                 {
                     Common.SetDefaultCSS(file, defaultCSS);
@@ -451,7 +447,6 @@ namespace SIL.PublishingSolution
                 // generate the toc / manifest files
                 CreateOpf(projInfo, contentFolder, bookId);
                 CreateNcx(projInfo, contentFolder, bookId);
-                //CreateCoverImage(contentFolder, projInfo);
                 inProcess.PerformStep();
 
                 // Done adding content - now zip the whole thing up and name it
@@ -1214,15 +1209,15 @@ namespace SIL.PublishingSolution
         private string GetBookName(string xhtmlFileName)
         {
             var fileNoPath = Path.GetFileName(xhtmlFileName);
-            if (fileNoPath.ToLower().StartsWith("file0cvr"))
+            if (fileNoPath.StartsWith(PreExportProcess.CoverPageFilename.Substring(0, 8)))
             {
                 return ("Cover Page");
             }
-            if (fileNoPath.ToLower().StartsWith("file1ttl"))
+            if (fileNoPath.StartsWith(PreExportProcess.TitlePageFilename.Substring(0, 8)))
             {
                 return ("Title Page");
             }
-            if (fileNoPath.ToLower().StartsWith("file2cpy"))
+            if (fileNoPath.StartsWith(PreExportProcess.CopyrightPageFilename.Substring(0, 8)))
             {
                 return ("Copyright Information");
             }
@@ -1280,81 +1275,6 @@ namespace SIL.PublishingSolution
             return (Image)b;
         }
 
-        /// <summary>
-        /// Creates a cover image based on the language code and type of project (dictionary or scripture). This
-        /// is saved as "cover.png" in the content (OEBPS) folder.
-        /// </summary>
-        /// <param name="contentFolder">Content folder the resulting file is saved to.</param>
-        /// <param name="projInfo"></param>
-        private void CreateCoverImage(string contentFolder, PublicationInformation projInfo)
-        {
-            // open up the appropriate image for processing
-            string strImageFile;
-            if (File.Exists(CoverImage))
-            {
-                // if the user has specified a custom cover image, use that instead of ours
-                // (copy it to the destination folder as "cover.png" and return)
-                // Note that we're not badging the file for custom cover images
-                strImageFile = CoverImage;
-                string dest = Path.Combine(contentFolder, "cover.png");
-                var img = new Bitmap(strImageFile);
-                img.Save(dest);
-                return;
-            }
-            // no custom cover image specified (or the file specified can't be found) -
-            // use our default cover image + the badging information
-            string strGraphicsFolder = Common.PathCombine(Common.GetPSApplicationPath(), "Graphic");
-            strImageFile = Path.Combine(strGraphicsFolder, "cover.png");
-            if (!File.Exists(strImageFile)) return;
-            var bmp = new Bitmap(strImageFile);
-            Graphics g = Graphics.FromImage(bmp);
-            // We're going to be "badging" the book image with a title - this consists of the database name
-            // and project name (split into multiple lines if from Paratext)
-            var enumerator = _langFontDictionary.GetEnumerator();
-            enumerator.MoveNext();
-            var sb = new StringBuilder();
-            if (Title != "")
-            {
-                sb.Append(Title);
-            }
-            else
-            {
-                // no title specified - create a default one based on the database name
-                sb.AppendLine(Common.databaseName);
-                if (projInfo.ProjectName.Contains("EBook (epub)"))
-                {
-                    // Paratext has a _really long_ project name - split out into multiple lines
-                    string[] parts = projInfo.ProjectName.Split('_');
-                    sb.AppendLine(parts[0]); // "EBook (epub)"
-                    sb.Append(parts[1]); // date of publication
-                }
-                else
-                {
-                    sb.Append(projInfo.ProjectName);
-                }
-            }
-            var strTitle = sb.ToString();
-            //var langCode = enumerator.Current.Key;
-            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
-            var strFormat = new StringFormat
-            {
-                Alignment = StringAlignment.Center,
-                LineAlignment = StringAlignment.Center
-            };
-            // figure out the dimensions of our rect based on the font info
-            Font badgeFont = new Font("Times New Roman", 48);
-            SizeF size = g.MeasureString(strTitle, badgeFont, 640);
-            int width = (int) Math.Ceiling(size.Width);
-            int height = (int) Math.Ceiling(size.Height);
-            Rectangle rect = new Rectangle((225 - (width / 2)), 100, width, height);
-            // draw the badge (rect and string)
-            g.FillRectangle(Brushes.Brown, rect);
-            g.DrawRectangle(Pens.Gold, rect);
-            g.DrawString(strTitle, badgeFont, Brushes.Gold, new RectangleF(new PointF((225f - (size.Width / 2)), 100f), size), strFormat);
-            // save this puppy
-            string strCoverImageFile = Path.Combine(contentFolder, "cover.png");
-            bmp.Save(strCoverImageFile);
-        }
 
         /// <summary>
         /// Writes the chapter links out to the specified XmlWriter (the .ncx file).
@@ -1677,15 +1597,6 @@ namespace SIL.PublishingSolution
             else
             {
                 MaxImageWidth = 600;
-            }
-            // Cover Image
-            if (othersfeature.ContainsKey("CoverImage"))
-            {
-                CoverImage = othersfeature["CoverImage"].Trim();
-            }
-            else
-            {
-                CoverImage = "";
             }
             // TOC Level
             if (othersfeature.ContainsKey("TOCLevel"))
@@ -2086,16 +1997,6 @@ namespace SIL.PublishingSolution
             opf.WriteAttributeString("href", "toc.ncx");
             opf.WriteAttributeString("media-type", "application/x-dtbncx+xml");
             opf.WriteEndElement(); // item
-            //opf.WriteStartElement("item");
-            //opf.WriteAttributeString("id", "cover");
-            //opf.WriteAttributeString("href", "cover.html");
-            //opf.WriteAttributeString("media-type", "application/xhtml+xml");
-            //opf.WriteEndElement(); // item
-            //opf.WriteStartElement("item");
-            //opf.WriteAttributeString("id", "cover-image");
-            //opf.WriteAttributeString("href", "cover.png");
-            //opf.WriteAttributeString("media-type", "image/png");
-            //opf.WriteEndElement(); // item
 
             if (EmbedFonts)
             {
@@ -2148,7 +2049,7 @@ namespace SIL.PublishingSolution
                 if (name.EndsWith(".xhtml"))
                 {
                     // is this the cover page?
-                    if (name.ToLower().StartsWith("file0cvr"))
+                    if (name.StartsWith(PreExportProcess.CoverPageFilename.Substring(0, 8)))
                     {
                         // yup - write it out and go to the next item
                         opf.WriteStartElement("item");
@@ -2223,7 +2124,7 @@ namespace SIL.PublishingSolution
             foreach (string file in files)
             {
                 // is this the cover page?
-                if (Path.GetFileName(file).ToLower().StartsWith("file0cvr"))
+                if (Path.GetFileName(file).StartsWith(PreExportProcess.CoverPageFilename.Substring(0, 8)))
                 {
                     continue;
                 }
@@ -2250,14 +2151,14 @@ namespace SIL.PublishingSolution
             // guide
             opf.WriteStartElement("guide");
             // cover image
-            //if (Param.GetMetadataValue(Param.CoverPage).Trim().Equals("True"))
-            //{
-            //    opf.WriteStartElement("reference");
-            //    opf.WriteAttributeString("href", "cover.html");
-            //    opf.WriteAttributeString("type", "cover");
-            //    opf.WriteAttributeString("title", "Cover");
-            //    opf.WriteEndElement(); // reference
-            //}
+            if (Param.GetMetadataValue(Param.CoverPage).Trim().Equals("True"))
+            {
+                opf.WriteStartElement("reference");
+                opf.WriteAttributeString("href", "File0Cvr00000_.xhtml");
+                opf.WriteAttributeString("type", "cover");
+                opf.WriteAttributeString("title", "Cover");
+                opf.WriteEndElement(); // reference
+            }
             // first xhtml filename
             opf.WriteStartElement("reference");
             opf.WriteAttributeString("type", "text");
