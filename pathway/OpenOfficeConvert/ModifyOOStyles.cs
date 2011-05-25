@@ -31,6 +31,7 @@ namespace SIL.PublishingSolution
         private Dictionary<string, ArrayList> _spellCheck = new Dictionary<string, ArrayList>();
         private List<string> _languageFont = new List<string>();
         private Dictionary<string, string> fontLangMap = new Dictionary<string, string>();
+        private bool karthi;
 
         public ArrayList ModifyStylesXML(string projectPath, Dictionary<string, Dictionary<string, string>> childStyle, List<string> usedStyleName, Dictionary<string, string> languageStyleName, string baseStyle, bool isHeadword, Dictionary<string, string> parentClass)
         {
@@ -315,6 +316,8 @@ namespace SIL.PublishingSolution
                     //_nameElement.SetAttribute(prop, nsmgr.LookupNamespace(ns), para.Value);
                     SetAttributeNS(prop,ns,para.Value);
                 }
+
+                InsertOrphansForEntry(className.Key);
             }
 
             XmlNode textNode = null;
@@ -349,6 +352,21 @@ namespace SIL.PublishingSolution
                 CreateColumnXMLFile(className.Key);
             }
         }
+
+        
+        /// <summary>
+        /// For Header/Footer variables, all entry shouldn't be partial on page end.
+        /// TD-2403
+        /// </summary>
+        /// <param name="className"></param>
+        private void InsertOrphansForEntry(string className)
+        {
+            if (className.IndexOf("entry") == 0)
+            {
+                SetAttributeNS("orphans", "fo", "9");
+            }
+        }
+
 
         private void DropCaps(Dictionary<string, string> paragraphProperty, Dictionary<string, string> textProperty)
         {

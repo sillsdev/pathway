@@ -11,23 +11,22 @@
     <style:font-face style:name="Latha" svg:font-family="'Latha'" />
   </office:font-face-decls>
   <office:styles>
-    <style:style style:name="letter_letHead" style:family="paragraph" style:parent-style-name="letHead" />
-    <style:style style:name="entry_letData" style:family="paragraph" style:parent-style-name="letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="senses_entry_letData" style:family="paragraph" style:parent-style-name="entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="senses_entry_letData" style:family="text" style:parent-style-name="entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="sense_senses_entry_letData" style:family="text" style:parent-style-name="senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="partofspeech_.en_sense_senses_entry_letData" style:family="text" style:parent-style-name="sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
+    <style:style style:name="letHead_dicBody" style:family="paragraph" style:parent-style-name="dicBody" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letter_letHead_dicBody" style:family="paragraph" style:parent-style-name="letHead_dicBody" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letData_dicBody" style:family="paragraph" style:parent-style-name="dicBody" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="entry_letData_dicBody" style:family="paragraph" style:parent-style-name="letData_dicBody" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="senses_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="senses_entry_letData_dicBody" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeech_.en_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody">
+      <style:text-properties fo:language="en" fo:country="US" />
     </style:style>
-    <style:style style:name="definition_.en_sense_senses_entry_letData" style:family="text" style:parent-style-name="sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="definition_.en_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody">
+      <style:text-properties fo:language="en" fo:country="US" />
     </style:style>
-    <style:style style:name="blue_senses_entry_letData" style:family="text" style:parent-style-name="senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="gram_sense_senses_entry_letData" style:family="paragraph" style:parent-style-name="sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="gram_sense_senses_entry_letData" style:family="text" style:parent-style-name="sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
-    <style:style style:name="partofspeech_.en_gram_sense_senses_entry_letData" style:family="text" style:parent-style-name="gram_sense_senses_entry_letData" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:text-properties fo:language="en" fo:country="US" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="blue_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="senses_entry_letData_dicBody" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="gram_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeech_.en_gram_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="gram_sense_senses_entry_letData_dicBody">
+      <style:text-properties fo:language="en" fo:country="US" />
     </style:style>
     <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="hide" style:family="paragraph" style:parent-style-name="Heading_20_9" style:class="text">
@@ -40,6 +39,33 @@
       <style:text-properties text:display="true" />
     </style:style>
     <style:style style:name="Header" style:family="paragraph" style:parent-style-name="Standard" style:class="extra" />
+    <style:style style:name="h1" style:family="paragraph" style:parent-style-name="none">
+      <style:paragraph-properties fo:padding-top="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:text-properties fo:font-weight="700" fo:font-size="24pt" />
+    </style:style>
+    <style:style style:name="h2" style:family="paragraph" style:parent-style-name="none">
+      <style:paragraph-properties fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:text-properties fo:font-weight="700" fo:font-size="18pt" />
+    </style:style>
+    <style:style style:name="h3" style:family="paragraph" style:parent-style-name="none">
+      <style:paragraph-properties fo:padding-top="7pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:text-properties fo:font-weight="700" fo:font-size="14pt" />
+    </style:style>
+    <style:style style:name="h4" style:family="paragraph" style:parent-style-name="none">
+      <style:paragraph-properties fo:padding-top="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:text-properties fo:font-weight="700" fo:font-size="12pt" />
+    </style:style>
+    <style:style style:name="h5" style:family="paragraph" style:parent-style-name="none">
+      <style:paragraph-properties fo:padding-top="5.5pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:text-properties fo:font-weight="700" fo:font-size="10pt" />
+    </style:style>
+    <style:style style:name="h6" style:family="paragraph" style:parent-style-name="none">
+      <style:paragraph-properties fo:padding-top="5.5pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:text-properties fo:font-weight="700" fo:font-size="8pt" />
+    </style:style>
+    <style:style style:name="p" style:family="paragraph" style:parent-style-name="none">
+      <style:paragraph-properties fo:padding-top="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="12pt" />
+    </style:style>
     <style:style style:name="h1" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:margin-top="0.1in" fo:margin-bottom="0.1in" style:line-spacing="100%" />
       <style:text-properties fo:font-weight="700" fo:font-size="24pt" />
@@ -115,16 +141,16 @@
     <style:style style:name="Header" style:family="paragraph" style:parent-style-name="Standard" style:next-style-name="Text_20_body" style:class="text">
       <style:paragraph-properties fo:margin-top="0.0005in" fo:margin-bottom="0.0835in" fo:keep-with-next="always" fo:border-bottom="1pt solid #000000" text:number-lines="false" text:line-number="0">
         <style:tab-stops>
-          <style:tab-stop style:position="3.4626in" style:type="center" />
-          <style:tab-stop style:position="6.9252in" style:type="right" />
+          <style:tab-stop style:position="3.4625in" style:type="center" />
+          <style:tab-stop style:position="6.925in" style:type="right" />
         </style:tab-stops>
       </style:paragraph-properties>
     </style:style>
     <style:style style:name="Footer" style:family="paragraph" style:parent-style-name="Standard" style:next-style-name="Text_20_body" style:class="text">
       <style:paragraph-properties fo:margin-top="0.0005in" fo:margin-bottom="0.0835in" fo:keep-with-next="always" text:number-lines="false" text:line-number="0">
         <style:tab-stops>
-          <style:tab-stop style:position="3.4626in" style:type="center" />
-          <style:tab-stop style:position="6.9252in" style:type="right" />
+          <style:tab-stop style:position="3.4625in" style:type="center" />
+          <style:tab-stop style:position="6.925in" style:type="right" />
         </style:tab-stops>
       </style:paragraph-properties>
     </style:style>
@@ -142,8 +168,12 @@
       <style:paragraph-properties text:number-lines="false" text:line-number="0" />
       <style:text-properties style:font-name-asian="Yi plus Phonetics" style:font-name-complex="Tahoma1" />
     </style:style>
+    <style:style style:name="Frame_20_contents" style:display-name="Frame contents" style:family="paragraph" style:parent-style-name="Text_20_body" style:class="extra" />
     <style:style style:name="Graphics" style:family="graphic">
       <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" style:mirror="none" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" style:wrap="none" style:vertical-pos="top" style:vertical-rel="paragraph" style:horizontal-pos="center" style:horizontal-rel="paragraph" />
+    </style:style>
+    <style:style style:name="Frame" style:family="graphic">
+      <style:graphic-properties text:anchor-type="paragraph" svg:x="0pt" svg:y="0pt" fo:margin-left="5.7pt" fo:margin-right="5.7pt" fo:margin-bottom="5.7pt" fo:margin-top="5.7pt" style:wrap="parallel" style:number-wrapped-paragraphs="no-limit" style:wrap-contour="false" style:vertical-pos="top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph-content" fo:padding="4.25pt" fo:border="0.06pt solid #000000" />
     </style:style>
     <text:outline-style>
       <text:outline-level-style text:level="1" style:num-format="">
@@ -177,7 +207,6 @@
         <style:list-level-properties text:min-label-distance="0.15in" />
       </text:outline-level-style>
     </text:outline-style>
-    <text:notes-configuration text:note-class="footnote" text:citation-style-name="Footnote Symbol" text:citation-body-style-name="Footnote anchor" style:num-format="1" text:start-value="0" text:footnotes-position="page" text:start-numbering-at="document" />
     <text:notes-configuration text:note-class="endnote" style:num-format="i" text:start-value="0" />
     <text:linenumbering-configuration text:number-lines="false" text:offset="0.1965in" style:num-format="1" text:number-position="left" text:increment="5" />
   </office:styles>
@@ -236,65 +265,49 @@
     <style:style style:name="PageHeaderFooter23" style:family="text">
       <style:text-properties />
     </style:style>
+    <style:style style:name="MP1" style:family="paragraph" style:parent-style-name="Frame_20_contents">
+      <style:paragraph-properties fo:text-align="end" style:justify-single-word="false" />
+    </style:style>
+    <style:style style:name="Mfr1" style:family="graphic" style:parent-style-name="Frame">
+      <style:graphic-properties style:vertical-pos="from-top" style:vertical-rel="page" style:horizontal-pos="right" style:horizontal-rel="paragraph" fo:background-color="transparent" style:background-transparency="100%" fo:padding="0in" fo:border="none" style:shadow="none" style:flow-with-text="false">
+        <style:background-image />
+        <style:columns fo:column-count="1" fo:column-gap="0in" />
+      </style:graphic-properties>
+    </style:style>
     <style:page-layout style:name="pm1">
       <style:page-layout-properties>
-        <style:footnote-sep style:width="0.0071in" style:distance-before-sep="0.0398in" style:distance-after-sep="0.0398in" style:adjustment="left" style:rel-width="25%" style:color="#000000" />
+        <style:footnote-sep style:distance-before-sep="0.0398in" style:distance-after-sep="0.0398in" style:color="#000000" style:adjustment="centre" style:rel-width="100%" />
       </style:page-layout-properties>
       <style:header-style />
       <style:footer-style />
     </style:page-layout>
     <style:page-layout style:name="pm2">
-      <style:page-layout-properties fo:page-width="8.5in" fo:page-height="11in" style:num-format="1" style:print-orientation="portrait" fo:margin-top="0.7874in" fo:margin-right="0.7874in" fo:margin-bottom="0.7874in" fo:margin-left="0.7874in" style:writing-mode="lr-tb" style:footnote-max-height="0in">
+      <style:page-layout-properties fo:page-height="792pt" fo:page-width="612pt" fo:margin-left="56.7pt" fo:margin-right="56.7pt" fo:margin-top="56.7pt" fo:margin-bottom="56.7pt">
         <style:background-image />
       </style:page-layout-properties>
       <style:header-style>
         <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:header-style>
       <style:footer-style>
-        <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
+        <style:header-footer-properties fo:margin-bottom="0.0pt" fo:min-height="0.0pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:footer-style>
     </style:page-layout>
     <style:page-layout style:name="pm3">
-      <style:page-layout-properties fo:page-width="8.5in" fo:page-height="11in" style:num-format="1" style:print-orientation="portrait" fo:margin-top="0.7874in" fo:margin-right="0.7874in" fo:margin-bottom="0.7874in" fo:margin-left="0.7874in" style:writing-mode="lr-tb" style:footnote-max-height="0in">
+      <style:page-layout-properties fo:page-height="792pt" fo:page-width="612pt" fo:margin-left="56.7pt" fo:margin-right="56.7pt" fo:margin-top="56.7pt" fo:margin-bottom="56.7pt">
         <style:background-image />
-        <style:footnote-sep style:width="0.0071in" style:distance-before-sep="0.0398in" style:distance-after-sep="0.0398in" style:adjustment="left" style:rel-width="25%" style:color="#000000" />
+        <style:footnote-sep style:distance-before-sep="0.0398in" style:distance-after-sep="0.0398in" style:color="#000000" style:adjustment="centre" style:rel-width="100%" />
       </style:page-layout-properties>
       <style:header-style>
         <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:header-style>
       <style:footer-style>
-        <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
-      </style:footer-style>
-    </style:page-layout>
-    <style:page-layout style:name="pm4" style:page-usage="left">
-      <style:page-layout-properties fo:page-width="8.5in" fo:page-height="11in" style:num-format="1" style:print-orientation="portrait" fo:margin-top="0.7874in" fo:margin-right="0.7874in" fo:margin-bottom="0.7874in" fo:margin-left="0.7874in" style:writing-mode="lr-tb" style:footnote-max-height="0in">
-        <style:background-image />
-        <style:footnote-sep style:width="0.0071in" style:distance-before-sep="0.0398in" style:distance-after-sep="0.0398in" style:adjustment="left" style:rel-width="25%" style:color="#000000" />
-      </style:page-layout-properties>
-      <style:header-style>
-        <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
-      </style:header-style>
-      <style:footer-style>
-        <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
-      </style:footer-style>
-    </style:page-layout>
-    <style:page-layout style:name="pm5" style:page-usage="right">
-      <style:page-layout-properties fo:page-width="8.5in" fo:page-height="11in" style:num-format="1" style:print-orientation="portrait" fo:margin-top="0.7874in" fo:margin-right="0.7874in" fo:margin-bottom="0.7874in" fo:margin-left="0.7874in" style:writing-mode="lr-tb" style:footnote-max-height="0in">
-        <style:background-image />
-        <style:footnote-sep style:width="0.0071in" style:distance-before-sep="0.0398in" style:distance-after-sep="0.0398in" style:adjustment="left" style:rel-width="25%" style:color="#000000" />
-      </style:page-layout-properties>
-      <style:header-style>
-        <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
-      </style:header-style>
-      <style:footer-style>
-        <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
+        <style:header-footer-properties fo:margin-bottom="0.0pt" fo:min-height="0.0pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:footer-style>
     </style:page-layout>
   </office:automatic-styles>
   <office:master-styles>
     <style:master-page style:name="Standard" style:page-layout-name="pm1" />
-    <style:master-page style:name="XHTML" style:page-layout-name="pm2" style:next-style-name="Right_20_Page" />
-    <style:master-page style:name="First_20_Page" style:display-name="First Page" style:next-style-name="Left_20_Page" style:page-layout-name="pm3">
+    <style:master-page style:name="First_20_Page" style:display-name="First Page" style:next-style-name="XHTML" style:page-layout-name="pm3">
       <style:header>
         <text:p text:style-name="Header">
           <text:tab />
@@ -308,21 +321,7 @@
         </text:p>
       </style:footer>
     </style:master-page>
-    <style:master-page style:name="Left_20_Page" style:display-name="Left Page" style:page-layout-name="pm4" style:next-style-name="Right_20_Page">
-      <style:header>
-        <text:p text:style-name="Header">
-          <text:tab />
-          <text:tab />
-        </text:p>
-      </style:header>
-      <style:footer>
-        <text:p text:style-name="Footer">
-          <text:tab />
-          <text:tab />
-        </text:p>
-      </style:footer>
-    </style:master-page>
-    <style:master-page style:name="Right_20_Page" style:display-name="Right Page" style:page-layout-name="pm5" style:next-style-name="Left_20_Page">
+    <style:master-page style:name="XHTML" style:page-layout-name="pm2" style:next-style-name="XHTML">
       <style:header>
         <text:p text:style-name="Header">
           <text:tab />
