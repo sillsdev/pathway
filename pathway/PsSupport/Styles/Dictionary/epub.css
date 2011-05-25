@@ -297,10 +297,10 @@ content : "} ";
 content: "," 
 }
 .Front_Matter {
-text-indent : 12pt;
 margin-left : 48pt;
 margin-right: 48pt;
-text-align:left;
+text-align: justified;
+
 }
 em {
     font-weight: bold;
@@ -319,11 +319,23 @@ td {
 h1 {
     font-size: 150%;
     margin-top: 1em;
-    margin-bottom: .1em;
+    margin-bottom: 0;
+}
+#TitlePage h1 {
+    font-size: 250%;
+    margin-top: 2em;
     text-align: center;
 }
 h2 {
     font-size: 125%;
     margin-top: 1em;
     margin-bottom: 0;
+}
+.ccimg {
+    width: 32px;
+    height: 32px;
+}
+p {
+    margin-top: .5em;
+    margin-bottom: 1em;
 }

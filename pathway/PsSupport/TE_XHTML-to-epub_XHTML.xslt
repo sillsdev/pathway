@@ -116,6 +116,9 @@
 			<xsl:attribute name="src"><xsl:value-of select="@src"/></xsl:attribute>
 			<xsl:attribute name="alt"><xsl:value-of select="@src"/></xsl:attribute>
 			<xsl:attribute name="longdesc"><xsl:value-of select="@src"/></xsl:attribute>
+			<xsl:if test="@class!=''">
+				<xsl:attribute name="class"><xsl:value-of select="@class"/></xsl:attribute>
+			</xsl:if>
 			<xsl:apply-templates/>
 		</xsl:copy>
 	</xsl:template>

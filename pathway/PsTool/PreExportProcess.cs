@@ -381,13 +381,13 @@ namespace SIL.Tool
             {
                 var languageName = Common.GetLanguageName(languageCode);
                 sb.Append("<h1>About this document</h1>");
-                sb.Append("This document contains data written in ");
+                sb.Append("<p>This document contains data written in ");
                 sb.Append(languageName.Length > 0 ? languageName : languageCode);
                 sb.Append(". For more information about this language, visit <a href='http://www.ethnologue.com/show_language.asp?code=");
                 sb.Append(languageCode);
                 sb.Append("'>http://www.ethnologue.com/show_language.asp?code=");
                 sb.Append(languageCode);
-                sb.Append("</a>.");
+                sb.Append("</a>.</p>  ");
             }
             return sb.ToString();
         }
@@ -397,7 +397,7 @@ namespace SIL.Tool
         private string GetCopyrightInfo()
         {
             var sb = new StringBuilder();
-            sb.Append("div id='OtherCopyrights' class='Front_Matter'>");
+            sb.Append("div id='OtherCopyrights' class='Front_Matter'><p>");
             // append any other copyright information to the list
             string contributors = Param.GetMetadataValue(Param.Contributor);
             if (contributors.Trim().Length > 0)
@@ -410,7 +410,7 @@ namespace SIL.Tool
             if (rights.Trim().Length > 0)
             {
                 sb.Append(rights);
-                sb.Append("; © named rights holders for materials used by permission as specified in the resource file description.");
+                sb.Append("; © named rights holders for materials used by permission as specified in the resource file description.</p>  ");
                 
             }
             return sb.ToString();
