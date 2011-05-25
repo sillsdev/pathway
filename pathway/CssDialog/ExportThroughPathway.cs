@@ -367,17 +367,40 @@ namespace SIL.PublishingSolution
         private void EnableUIElements()
         {
             // Front Matter tab
-            chkCoverImage.Enabled = (ddlLayout.Text.Contains("epub"));
-            chkCoverImageTitle.Enabled = (chkCoverImage.Enabled && chkCoverImage.Checked);
-            btnCoverImage.Enabled = chkCoverImageTitle.Enabled;
-            imgCoverImage.Enabled = chkCoverImageTitle.Enabled;
+            // edb - temporary / remove as exports are implemented
+            if (!ddlLayout.Text.Contains("epub"))
+            {
+                tabPage2.Enabled = false;
+                chkCoverImage.Enabled = false;
+                chkCoverImageTitle.Enabled = false;
+                btnCoverImage.Enabled = false;
+                imgCoverImage.Enabled = false;
+                chkColophon.Enabled = false;
+                rdoCustomCopyright.Enabled = false;
+                rdoStandardCopyright.Enabled = false;
+                txtColophonFile.Enabled = false;
+                btnBrowseColophon.Enabled = false;
+                chkTitlePage.Enabled = false;
+                ddlCopyrightStatement.Enabled = false;
+                lnkChooseCopyright.Enabled = false;
+            }
+            else
+            {
+                tabPage2.Enabled = true;
+                chkTitlePage.Enabled = true;
+                chkCoverImage.Enabled = (ddlLayout.Text.Contains("epub"));
+                chkCoverImageTitle.Enabled = (chkCoverImage.Enabled && chkCoverImage.Checked);
+                btnCoverImage.Enabled = chkCoverImageTitle.Enabled;
+                imgCoverImage.Enabled = chkCoverImageTitle.Enabled;
 
-            chkColophon.Enabled = (!ddlLayout.Text.Contains("GoBible"));
-            rdoCustomCopyright.Enabled = (chkColophon.Checked && chkColophon.Enabled);
-            rdoStandardCopyright.Enabled = (chkColophon.Checked && chkColophon.Enabled);
-            ddlCopyrightStatement.Enabled = (chkColophon.Checked && chkColophon.Enabled) ? rdoStandardCopyright.Checked : false;
-            txtColophonFile.Enabled = (chkColophon.Checked && chkColophon.Enabled) ? rdoCustomCopyright.Checked : false;
-            btnBrowseColophon.Enabled = (chkColophon.Checked && chkColophon.Enabled) ? rdoCustomCopyright.Checked : false;
+                chkColophon.Enabled = (!ddlLayout.Text.Contains("GoBible"));
+                rdoCustomCopyright.Enabled = (chkColophon.Checked && chkColophon.Enabled);
+                rdoStandardCopyright.Enabled = (chkColophon.Checked && chkColophon.Enabled);
+                ddlCopyrightStatement.Enabled = (chkColophon.Checked && chkColophon.Enabled) ? rdoStandardCopyright.Checked : false;
+                txtColophonFile.Enabled = (chkColophon.Checked && chkColophon.Enabled) ? rdoCustomCopyright.Checked : false;
+                btnBrowseColophon.Enabled = (chkColophon.Checked && chkColophon.Enabled) ? rdoCustomCopyright.Checked : false;
+                lnkChooseCopyright.Enabled = true;
+            }
 
             // Processing Options tab
             chkRunningHeader.Enabled = (FindMedia() == "paper");
