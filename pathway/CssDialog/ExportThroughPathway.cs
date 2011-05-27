@@ -345,7 +345,7 @@ namespace SIL.PublishingSolution
         private void ResizeDialog()
         {
             // Resize the dialog
-            Height = (IsExpanded) ? 480 : 225;
+            Height = (IsExpanded) ? 587 : 265;
 
             // Show / hide the tab control
             tabControl1.Visible = IsExpanded;
