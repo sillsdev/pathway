@@ -580,8 +580,9 @@ namespace SIL.PublishingSolution
         #region LoadProperty & SaveProperty
         private void LoadProperty()
         {
+            // format (destination) and style
             Format = Param.DefaultValue[Param.PrintVia];
-
+            Style = Param.DefaultValue[Param.LayoutSelected];
             // publication info tab
             Title = Param.GetMetadataValue(Param.Title, Organization);
             Description = Param.GetMetadataValue(Param.Description, Organization);
@@ -590,7 +591,7 @@ namespace SIL.PublishingSolution
             CopyrightHolder = Param.GetMetadataValue(Param.CopyrightHolder, Organization);
             Type = Param.GetMetadataValue(Param.Type, Organization);
             Source = Param.GetMetadataValue(Param.Source, Organization);
-            Format = Param.GetMetadataValue(Param.Format, Organization);
+            DocFormat = Param.GetMetadataValue(Param.Format, Organization);
             Contributor = Param.GetMetadataValue(Param.Contributor, Organization);
             Relation = Param.GetMetadataValue(Param.Relation, Organization);
             Coverage = Param.GetMetadataValue(Param.Coverage, Organization);
@@ -664,6 +665,7 @@ namespace SIL.PublishingSolution
             DictionaryName = Param.DefaultValue[Param.LayoutSelected];
             RunningHeader = Param.DefaultValue[Param.ExtraProcessing] == "True";
             Media = Param.DefaultValue[Param.Media];
+
         }
 
         /// <summary>
@@ -674,6 +676,7 @@ namespace SIL.PublishingSolution
         {
             bool success = true;
             Param.SetValue(Param.PrintVia, dlg.Format);
+            Param.SetValue(Param.LayoutSelected, dlg.Style);
             // Publication Information tab
             Param.UpdateMetadataValue(Param.Title, dlg.Title);
             Param.UpdateMetadataValue(Param.Description, dlg.Description);
@@ -683,7 +686,7 @@ namespace SIL.PublishingSolution
             // also persist the other DC elements
             Param.UpdateMetadataValue(Param.Type, dlg.Type);
             Param.UpdateMetadataValue(Param.Source, dlg.Source);
-            Param.UpdateMetadataValue(Param.Format, dlg.Format);
+            Param.UpdateMetadataValue(Param.Format, dlg.DocFormat);
             Param.UpdateMetadataValue(Param.Contributor, dlg.Contributor);
             Param.UpdateMetadataValue(Param.Relation, dlg.Relation);
             Param.UpdateMetadataValue(Param.Coverage, dlg.Coverage);
@@ -726,7 +729,6 @@ namespace SIL.PublishingSolution
                 Param.SetValue(Param.ReversalIndex, dlg.ExportReversal.ToString());
                 Param.SetValue(Param.GrammarSketch, dlg.ExportGrammar.ToString());
             }
-            Param.SetValue(Param.LayoutSelected, dlg.DictionaryName);
             Param.SetValue(Param.ExtraProcessing, dlg.RunningHeader.ToString());
             Param.SetValue(Param.Media, _media);
             Param.SetValue(Param.PublicationLocation, dlg.OutputFolder);
@@ -737,6 +739,7 @@ namespace SIL.PublishingSolution
         private static void SaveDefaultProperty(ExportThroughPathway dlg)
         {
             Param.SetDefaultValue(Param.PrintVia, dlg.Format);
+            Param.SetDefaultValue(Param.LayoutSelected, dlg.Style);
             // TODO: reimplement the persistence here
             // Publication Information tab
             // Front Matter tab
@@ -748,7 +751,6 @@ namespace SIL.PublishingSolution
                 Param.SetDefaultValue(Param.ReversalIndex, dlg.ExportReversal.ToString());
                 Param.SetDefaultValue(Param.GrammarSketch, dlg.ExportGrammar.ToString());
             }
-            Param.SetDefaultValue(Param.LayoutSelected, dlg.DictionaryName);
             Param.SetDefaultValue(Param.ExtraProcessing, dlg.RunningHeader.ToString());
             Param.SetDefaultValue(Param.Media, _media);
             if (Common.CustomSaveInFolder(dlg.OutputFolder))

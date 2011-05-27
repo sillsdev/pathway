@@ -295,6 +295,7 @@ namespace SIL.Tool
             File.Copy(Path.Combine(strCopyrightFolder, "by.png"), Path.Combine(outputFolder, "by.png"), true);
             File.Copy(Path.Combine(strCopyrightFolder, "sa.png"), Path.Combine(outputFolder, "sa.png"), true);
             File.Copy(Path.Combine(strCopyrightFolder, "nc.png"), Path.Combine(outputFolder, "nc.png"), true);
+            File.Copy(Path.Combine(strCopyrightFolder, "nd.png"), Path.Combine(outputFolder, "nd.png"), true);
             File.Copy(Path.Combine(strCopyrightFolder, "SIL-Logo-Black.gif"), Path.Combine(outputFolder, "SIL-Logo-Black.gif"), true);
             File.Copy(Path.Combine(strCopyrightFolder, "Copy.css"), Path.Combine(outputFolder, "Copy.css"), true);
         }
