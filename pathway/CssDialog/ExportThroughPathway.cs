@@ -344,9 +344,6 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void ResizeDialog()
         {
-            // Resize the dialog
-            Height = (IsExpanded) ? 587 : 265;
-
             // Show / hide the tab control
             tabControl1.Visible = IsExpanded;
 
@@ -356,6 +353,9 @@ namespace SIL.PublishingSolution
             btnOK.Top = lnkIP.Top + lnkIP.Height + 15;
             btnCancel.Top = btnOK.Top;
             btnHelp.Top = btnOK.Top;
+
+            // Resize the dialog
+            Height = SystemInformation.CaptionHeight + btnOK.Bottom + 15;//(IsExpanded) ? 587 : 265;
 
             // Set the text on the More / Less Options button
             btnMoreLessOptions.Text = (IsExpanded) ? "Less  ▲" : "More  ▼";
