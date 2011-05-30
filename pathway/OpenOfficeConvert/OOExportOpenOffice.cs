@@ -49,6 +49,9 @@ namespace SIL.PublishingSolution
             return returnValue;
         }
 
+        public string RefFormat = string.Empty;
+
+
         private static PublicationInformation publicationInfo;
         Dictionary<string, string> _dictLexiconPrepStepsFilenames = new Dictionary<string, string>();
         Dictionary<string, string> _dictSectionNames = new Dictionary<string, string>();
@@ -702,9 +705,8 @@ namespace SIL.PublishingSolution
             //To set Constent variables for User Desire
             string fname = Common.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             string macroFileName = Common.PathCombine(projInfo.DictionaryPath, fname);
-            string refFormat = string.Empty;
-            refFormat = GetReferenceFormat(idAllClass, refFormat);
-            IncludeTextinMacro(strMacroPath, refFormat, macroFileName, projInfo.IsExtraProcessing);
+            RefFormat = GetReferenceFormat(idAllClass, RefFormat);
+            IncludeTextinMacro(strMacroPath, RefFormat, macroFileName, projInfo.IsExtraProcessing);
 
             // BEGIN Generate Meta.Xml File
             var metaXML = new OOMetaXML(projInfo.ProjectInputType);
@@ -721,6 +723,7 @@ namespace SIL.PublishingSolution
             preProcessor.PreserveSpace();
             projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
             projInfo.TempOutputFolder += Path.DirectorySeparatorChar;
+            cXML.RefFormat = this.RefFormat;
             cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
             if (projInfo.FileSequence != null && projInfo.FileSequence.Count > 1)
