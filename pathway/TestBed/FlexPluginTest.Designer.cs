@@ -58,11 +58,12 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnFlexTest2 = new System.Windows.Forms.Button();
             this.chkIncrease = new System.Windows.Forms.CheckBox();
             this.btnFileSizeZero = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.btnFlexTest2 = new System.Windows.Forms.Button();
+            this.btnXeLaTex = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -224,6 +225,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnXeLaTex);
             this.groupBox1.Controls.Add(this.button11);
             this.groupBox1.Controls.Add(this.button8);
             this.groupBox1.Controls.Add(this.btnXeTex);
@@ -403,6 +405,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Flex and TE Test";
             // 
+            // btnFlexTest2
+            // 
+            this.btnFlexTest2.Location = new System.Drawing.Point(41, 190);
+            this.btnFlexTest2.Name = "btnFlexTest2";
+            this.btnFlexTest2.Size = new System.Drawing.Size(96, 36);
+            this.btnFlexTest2.TabIndex = 55;
+            this.btnFlexTest2.Text = "Flex (&Export Through PW)";
+            this.btnFlexTest2.UseVisualStyleBackColor = true;
+            this.btnFlexTest2.Click += new System.EventHandler(this.btnFlexTest2_Click);
+            // 
             // chkIncrease
             // 
             this.chkIncrease.AutoSize = true;
@@ -445,15 +457,16 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // btnFlexTest2
+            // btnXeLaTex
             // 
-            this.btnFlexTest2.Location = new System.Drawing.Point(41, 190);
-            this.btnFlexTest2.Name = "btnFlexTest2";
-            this.btnFlexTest2.Size = new System.Drawing.Size(96, 36);
-            this.btnFlexTest2.TabIndex = 55;
-            this.btnFlexTest2.Text = "Flex (&Export Through PW)";
-            this.btnFlexTest2.UseVisualStyleBackColor = true;
-            this.btnFlexTest2.Click += new System.EventHandler(this.btnFlexTest2_Click);
+            this.btnXeLaTex.AccessibleName = "BtnFlexTest";
+            this.btnXeLaTex.Location = new System.Drawing.Point(142, 192);
+            this.btnXeLaTex.Name = "btnXeLaTex";
+            this.btnXeLaTex.Size = new System.Drawing.Size(67, 28);
+            this.btnXeLaTex.TabIndex = 62;
+            this.btnXeLaTex.Text = "XeLaTex";
+            this.btnXeLaTex.UseVisualStyleBackColor = true;
+            this.btnXeLaTex.Click += new System.EventHandler(this.btnXeLaTex_Click);
             // 
             // FlexPluginTest
             // 
@@ -520,5 +533,6 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button btnFlexTest2;
+        private System.Windows.Forms.Button btnXeLaTex;
     }
 }
