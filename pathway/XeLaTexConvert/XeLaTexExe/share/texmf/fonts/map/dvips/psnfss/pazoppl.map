@@ -1,0 +1,9 @@
+fplmr PazoMath <fplmr.pfb
+pplr8r Palatino-Roman <8r.enc <pplr8a.pfb " TeXBase1Encoding ReEncodeFont "
+fplmri PazoMath-Italic <fplmri.pfb
+pplri8r Palatino-Italic <8r.enc <pplri8a.pfb " TeXBase1Encoding ReEncodeFont "
+fplmb PazoMath-Bold <fplmb.pfb
+pplb8r Palatino-Bold <8r.enc <pplb8a.pfb " TeXBase1Encoding ReEncodeFont "
+fplmbi PazoMath-BoldItalic <fplmbi.pfb
+pplbi8r Palatino-BoldItalic <8r.enc <pplbi8a.pfb " TeXBase1Encoding ReEncodeFont "
+fplmbb PazoMathBlackboardBold <fplmbb.pfb

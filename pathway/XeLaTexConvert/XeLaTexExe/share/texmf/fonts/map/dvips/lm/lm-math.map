@@ -1,0 +1,27 @@
+% This file belongs to the Latin Modern package. The work is released under
+% the GUST Font License. See the MANIFEST.txt and README.eng files
+% for the details. For the most recent version of this license see
+% http://www.gust.org.pl/fonts/licenses/GUST-FONT-LICENSE.txt or
+% http://tug.org/fonts/licenses/GUST-FONT-LICENSE.txt
+
+lmbsy5   LMMathSymbols5-BoldItalic    "enclmmathsy ReEncodeFont"  <lm-mathsy.enc  <lmbsy5.pfb
+lmbsy7   LMMathSymbols7-BoldItalic    "enclmmathsy ReEncodeFont"  <lm-mathsy.enc  <lmbsy7.pfb
+lmbsy10  LMMathSymbols10-BoldItalic   "enclmmathsy ReEncodeFont"  <lm-mathsy.enc  <lmbsy10.pfb
+lmsy5    LMMathSymbols5-Italic        "enclmmathsy ReEncodeFont"  <lm-mathsy.enc  <lmsy5.pfb
+lmsy6    LMMathSymbols6-Italic        "enclmmathsy ReEncodeFont"  <lm-mathsy.enc  <lmsy6.pfb
+lmsy7    LMMathSymbols7-Italic        "enclmmathsy ReEncodeFont"  <lm-mathsy.enc  <lmsy7.pfb
+lmsy8    LMMathSymbols8-Italic        "enclmmathsy ReEncodeFont"  <lm-mathsy.enc  <lmsy8.pfb
+lmsy9    LMMathSymbols9-Italic        "enclmmathsy ReEncodeFont"  <lm-mathsy.enc  <lmsy9.pfb
+lmsy10   LMMathSymbols10-Italic       "enclmmathsy ReEncodeFont"  <lm-mathsy.enc  <lmsy10.pfb
+lmex10   LMMathExtension10-Regular    "enclmmathex ReEncodeFont"  <lm-mathex.enc  <lmex10.pfb
+lmmi5    LMMathItalic5-Italic         "enclmmathit ReEncodeFont"  <lm-mathit.enc  <lmmi5.pfb
+lmmi6    LMMathItalic6-Italic         "enclmmathit ReEncodeFont"  <lm-mathit.enc  <lmmi6.pfb
+lmmi7    LMMathItalic7-Italic         "enclmmathit ReEncodeFont"  <lm-mathit.enc  <lmmi7.pfb
+lmmi8    LMMathItalic8-Italic         "enclmmathit ReEncodeFont"  <lm-mathit.enc  <lmmi8.pfb
+lmmi9    LMMathItalic9-Italic         "enclmmathit ReEncodeFont"  <lm-mathit.enc  <lmmi9.pfb
+lmmi10   LMMathItalic10-Italic        "enclmmathit ReEncodeFont"  <lm-mathit.enc  <lmmi10.pfb
+lmmi12   LMMathItalic12-Italic        "enclmmathit ReEncodeFont"  <lm-mathit.enc  <lmmi12.pfb
+lmmib5   LMMathItalic5-BoldItalic     "enclmmathit ReEncodeFont"  <lm-mathit.enc  <lmmib5.pfb
+lmmib7   LMMathItalic7-BoldItalic     "enclmmathit ReEncodeFont"  <lm-mathit.enc  <lmmib7.pfb
+lmmib10  LMMathItalic10-BoldItalic    "enclmmathit ReEncodeFont"  <lm-mathit.enc  <lmmib10.pfb
+

@@ -1,0 +1,36 @@
+% These entries are just examples!
+
+arials           arial.ttf     Slant=0.25
+arial            arial.ttf     Slant=0     Extend=1    Pid = 1     Eid = 0
+arialx           arial.ttf     Slant=0     Extend=1.5
+
+times            times.ttf     Encoding=T1-WGL4.enc \
+                               .g0xc7=ring .g0xc9=caron .g0xc4=dotlessi
+times95          times95.ttf   Encoding=T1-WGL4.enc
+
+ntukai@Big5@     ntu_kai.ttf   Pid = 3 Eid = 4
+cyberb@Unicode@  cyberbit.ttf
+
+mspmin@Unicode@	msmincho.ttc	Fontindex = 1
+
+msmin@Unicode@	msmincho.ttc	Fontindex = 0
+msgoth@Unicode@	msgothic.ttc	Fontindex = 0
+ugt01-@Unicode@ gt200001.ttf    Fontindex = 0
+ugt02-@Unicode@ gt200002.ttf    Fontindex = 0
+ugt03-@Unicode@ gt200003.ttf    Fontindex = 0
+ugt04-@Unicode@ gt200004.ttf    Fontindex = 0
+ugt05-@Unicode@ gt200005.ttf    Fontindex = 0
+ugt06-@Unicode@ gt200006.ttf    Fontindex = 0
+ugt07-@Unicode@ gt200007.ttf    Fontindex = 0
+ugt08-@Unicode@ gt200008.ttf    Fontindex = 0
+ugt09-@Unicode@ gt200009.ttf    Fontindex = 0
+ugt10-@Unicode@ gt200010.ttf    Fontindex = 0
+ugt11-@Unicode@ gt200011.ttf    Fontindex = 0
+ugtk1-@Unicode@ gt2000k1.ttf    Fontindex = 0
+ugtk2-@Unicode@ gt2000k2.ttf    Fontindex = 0
+
+% the next entry maps the Unicode encoded font to Big 5 encoding; thus you
+% can say \begin{CJK}{Big5}{...} (this is an environment from the CJK
+% package for LaTeX).
+
+mingli@UBig5@    mingliu.ttc   Fontindex = 0

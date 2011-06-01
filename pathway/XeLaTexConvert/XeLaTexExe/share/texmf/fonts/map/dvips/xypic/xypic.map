@@ -1,0 +1,66 @@
+%% $Id: xypic.map,v 3.7 1999/02/16 15:12:50 krisrose Exp krisrose $
+%%
+%% Xy-pic PostScript type 1 font map for DVIPS.
+%% Copyright (c) 1995-1997	Ross Moore	<ross@mpce.mq.edu.au>
+%%
+%% This file is part of the Xy-pic package for graphs and diagrams in TeX.
+%% See the companion README and INSTALL files for further information.
+%% Copyright (c) 1991-1997	Kristoffer H. Rose	<krisrose@brics.dk>
+%%
+%% The Xy-pic package is free software; you can redistribute it and/or modify
+%% it under the terms of the GNU General Public License as published by the
+%% Free Software Foundation; either version 2 of the License, or (at your
+%% option) any later version.
+%%
+%% The Xy-pic package is distributed in the hope that it will be useful, but
+%% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+%% or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU General Public License
+%% for more details.
+%%
+%% You should have received a copy of the GNU General Public License along
+%% with this package; if not, write to the Free Software Foundation, Inc.,
+%% 675 Mass Ave, Cambridge, MA 02139, USA.
+%%
+%% As a special exception, you may use this file and all files derived
+%% from it without restrictions.  This special exception was added with
+%% version 3.7 of Xy-pic.
+
+% USAGE: 
+%	Put this line in your DVIPS (and/or other PS driver) header
+%	file directory (uncommented, starting in column 1):
+%
+%	p+ xypic.map
+%
+% THANKS to Y&Y Inc. for making the much improved PFB fonts available to
+% TeX community.
+
+
+xydash10 XYDASH10 <xydash10.pfb
+xyatip10 XYATIP10 <xyatip10.pfb
+xyatip11 XYATIP10 "1.1 ExtendFont" <xyatip10.pfb
+xyatip12 XYATIP10 "1.2 ExtendFont" <xyatip10.pfb
+xybtip10 XYBTIP10 <xybtip10.pfb
+xybtip11 XYBTIP10 "1.1 ExtendFont" <xybtip10.pfb
+xybtip12 XYBTIP10 "1.2 ExtendFont" <xybtip10.pfb
+
+xybsql10 XYBSQL10 <xybsql10.pfb
+xycirc10 XYCIRC10 <xycirc10.pfb
+
+xycmat10 XYCMAT10 <xycmat10.pfb
+xycmat11 XYCMAT10 "1.1 ExtendFont" <xycmat10.pfb
+xycmat12 XYCMAT10 "1.2 ExtendFont" <xycmat10.pfb
+xycmbt10 XYCMBT10 <xycmbt10.pfb
+xycmbt11 XYCMBT10 "1.1 ExtendFont" <xycmbt10.pfb
+xycmbt12 XYCMBT10 "1.2 ExtendFont" <xycmbt10.pfb
+
+xyeuat10 XYEUAT10 <xyeuat10.pfb
+xyeuat11 XYEUAT10 "1.1 ExtendFont" <xyeuat10.pfb
+xyeuat12 XYEUAT10 "1.2 ExtendFont" <xyeuat10.pfb
+xyeubt10 XYEUBT10 <xyeubt10.pfb
+xyeubt11 XYEUBT10 "1.1 ExtendFont" <xyeubt10.pfb
+xyeubt12 XYEUBT10 "1.2 ExtendFont" <xyeubt10.pfb
+
+% Obsolete fonts not included by default (and not available for PDF).
+%xyline10 XYLINE10 <xyline10.pfa
+%xyqc10   XYQC10   <xyqc10.pfa
+%xymisc10 XYMISC10 <xymisc10.pfa

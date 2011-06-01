@@ -1,0 +1,6 @@
+%
+% Belleek (for mathtime : y&y) (I comment out this section.)
+%
+mtex BLEX "MTEXEncoding ReEncodeFont" <blex.pfb <mtex.enc
+mtsy BLSY <blsy.pfb
+rmtmi RBLMI <rblmi.pfb

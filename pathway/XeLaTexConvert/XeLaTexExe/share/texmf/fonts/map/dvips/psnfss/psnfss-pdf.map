@@ -1,0 +1,74 @@
+% dvips font map file for the Base35 fonts [PSNFSS 8.1 (WaS)]
+%
+eurmo10 EURM10 " .167 SlantFont " <eurm10.pfb
+eurbo10 EURB10 " .167 SlantFont " <eurb10.pfb
+%
+%
+pagd8r URWGothicL-Demi "TeXBase1Encoding ReEncodeFont " <8r.enc <uagd8a.pfb 
+pagdo8r URWGothicL-DemiObli "TeXBase1Encoding ReEncodeFont " <8r.enc <uagdo8a.pfb 
+pagk8r URWGothicL-Book "TeXBase1Encoding ReEncodeFont " <8r.enc <uagk8a.pfb 
+pagko8r URWGothicL-BookObli "TeXBase1Encoding ReEncodeFont " <8r.enc <uagko8a.pfb 
+pbkd8r URWBookmanL-DemiBold "TeXBase1Encoding ReEncodeFont " <8r.enc <ubkd8a.pfb
+pbkdi8r URWBookmanL-DemiBoldItal "TeXBase1Encoding ReEncodeFont " <8r.enc <ubkdi8a.pfb 
+pbkdo8r  URWBookmanL-DemiBold " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <ubkd8a.pfb
+pbkl8r URWBookmanL-Ligh "TeXBase1Encoding ReEncodeFont " <8r.enc <ubkl8a.pfb 
+pbkli8r URWBookmanL-LighItal "TeXBase1Encoding ReEncodeFont " <8r.enc <ubkli8a.pfb 
+pbklo8r URWBookmanL-Ligh " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <ubkl8a.pfb
+%
+%
+pcrb8r Courier-Bold "TeXBase1Encoding ReEncodeFont " <8r.enc 
+pcrbo8r Courier-BoldOblique "TeXBase1Encoding ReEncodeFont " <8r.enc 
+pcrr8r Courier "TeXBase1Encoding ReEncodeFont " <8r.enc 
+pcrro8r Courier-Oblique "TeXBase1Encoding ReEncodeFont " <8r.enc 
+phvb8r Helvetica-Bold "TeXBase1Encoding ReEncodeFont " <8r.enc 
+phvb8rn Helvetica-Narrow-Bold "TeXBase1Encoding ReEncodeFont " <8r.enc 
+phvbo8r Helvetica-BoldOblique "TeXBase1Encoding ReEncodeFont " <8r.enc 
+phvbo8rn Helvetica-Narrow-BoldOblique "TeXBase1Encoding ReEncodeFont " <8r.enc 
+phvr8r Helvetica "TeXBase1Encoding ReEncodeFont " <8r.enc 
+phvr8rn Helvetica-Narrow "TeXBase1Encoding ReEncodeFont " <8r.enc 
+phvro8r Helvetica-Oblique "TeXBase1Encoding ReEncodeFont " <8r.enc 
+phvro8rn Helvetica-Narrow-Oblique "TeXBase1Encoding ReEncodeFont " <8r.enc 
+%
+%
+pncb8r CenturySchL-Bold "TeXBase1Encoding ReEncodeFont " <8r.enc <uncb8a.pfb 
+pncbi8r CenturySchL-BoldItal "TeXBase1Encoding ReEncodeFont " <8r.enc <uncbi8a.pfb 
+pncbo8r CenturySchL-Bold " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <uncb8a.pfb
+pncr8r CenturySchL-Roma "TeXBase1Encoding ReEncodeFont " <8r.enc <uncr8a.pfb 
+pncri8r CenturySchL-Ital "TeXBase1Encoding ReEncodeFont " <8r.enc <uncri8a.pfb 
+pncro8r CenturySchL-Roma " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <uncr8a.pfb
+pplb8r URWPalladioL-Bold "TeXBase1Encoding ReEncodeFont " <8r.enc <uplb8a.pfb 
+pplbi8r URWPalladioL-BoldItal "TeXBase1Encoding ReEncodeFont " <8r.enc <uplbi8a.pfb
+pplbo8r URWPalladioL-Bold " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <uplb8a.pfb
+pplr8r URWPalladioL-Roma "TeXBase1Encoding ReEncodeFont " <8r.enc <uplr8a.pfb 
+pplri8r URWPalladioL-Ital "TeXBase1Encoding ReEncodeFont " <8r.enc <uplri8a.pfb 
+pplro8r URWPalladioL-Roma " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <uplr8a.pfb
+%
+%
+psyr Symbol 
+psyro Symbol " .167 SlantFont "
+ptmb8r Times-Bold "TeXBase1Encoding ReEncodeFont " <8r.enc 
+ptmbi8r Times-BoldItalic "TeXBase1Encoding ReEncodeFont " <8r.enc 
+ptmbo8r Times-Bold " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc
+ptmr8r Times-Roman "TeXBase1Encoding ReEncodeFont " <8r.enc 
+ptmri8r Times-Italic "TeXBase1Encoding ReEncodeFont " <8r.enc 
+ptmro8r Times-Roman " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc
+pzcmi8r ZapfChancery-MediumItalic "TeXBase1Encoding ReEncodeFont " <8r.enc 
+pzdr ZapfDingbats
+%
+%
+%
+bchb8r CharterBT-Bold " TeXBase1Encoding ReEncodeFont " <8r.enc <bchb8a.pfb
+bchbi8r CharterBT-BoldItalic " TeXBase1Encoding ReEncodeFont " <8r.enc <bchbi8a.pfb
+bchbo8r CharterBT-Bold " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <bchb8a.pfb
+bchr8r CharterBT-Roman " TeXBase1Encoding ReEncodeFont " <8r.enc <bchr8a.pfb
+bchri8r CharterBT-Italic " TeXBase1Encoding ReEncodeFont " <8r.enc <bchri8a.pfb
+bchro8r CharterBT-Roman " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <bchr8a.pfb
+%
+%
+%
+putb8r Utopia-Bold " TeXBase1Encoding ReEncodeFont " <8r.enc <putb8a.pfb
+putbi8r Utopia-BoldItalic " TeXBase1Encoding ReEncodeFont " <8r.enc <putbi8a.pfb
+putbo8r Utopia-Bold " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <putb8a.pfb
+putr8r Utopia-Regular " TeXBase1Encoding ReEncodeFont " <8r.enc <putr8a.pfb
+putri8r Utopia-Italic " TeXBase1Encoding ReEncodeFont " <8r.enc <putri8a.pfb
+putro8r Utopia-Regular " .167 SlantFont TeXBase1Encoding ReEncodeFont " <8r.enc <putr8a.pfb
