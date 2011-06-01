@@ -1,0 +1,68 @@
+% AMS Symbols (msam) (Bakoma) encoding file (Bob Howlett 1/9/97). Not guaranteed!
+%
+/TeXAMS1Encoding [
+%
+/squaredot /squareplus /squaremultiply /square /squaresolid /squaresmallsolid /diamond /diamondsolid  
+%
+/clockwise /anticlockwise /harpoonleftright /harpoonrightleft /squareminus /forces /forcesbar /satisfies  
+%
+/dblarrowheadright /dblarrowheadleft /dblarrowleft /dblarrowright /dblarrowup /dblarrowdwn /harpoonupright /harpoondownright  
+%
+/harpoonupleft /harpoondownleft /arrowtailright /arrowtailleft /arrowparrleftright /arrowparrrightleft /shiftleft /shiftright  
+%
+/squiggleright /squiggleleftright /curlyleft /curlyright /circleequal /followsorequal /greaterorsimilar /greaterorapproxeql  
+%
+/multimap /therefore /because /equalsdots /defines /precedesorequal /lessorsimilar /lessorapproxeql  
+%
+/equalorless /equalorgreater /equalorprecedes /equalorfollows /precedesorcurly /lessdblequal /lessorequalslant /lessorgreater  
+%
+/primereverse /axisshort /equaldotrightleft /equaldotleftright /followsorcurly /greaterdblequal /greaterorequalslant /greaterorless  
+%
+/squareimage /squareoriginal /triangleright /triangleleft /trianglerightequal /triangleleftequal /star /between  
+%
+/triangledownsld /trianglerightsld /triangleleftsld /arrowaxisright /arrowaxisleft /triangle /trianglesolid /triangleinv  
+%
+/ringinequal /lessequalgreater /greaterlessequal /lessdbleqlgreater /greaterdbleqlless /Yen /arrowtripleright /arrowtripleleft  
+%
+/check /orunderscore /nand /perpcorrespond /angle /measuredangle /sphericalangle /proportional  
+%
+/smile /frown /subsetdbl /supersetdbl /uniondbl /intersectiondbl /uprise /downfall  
+%
+/multiopenleft /multiopenright /subsetdblequal /supersetdblequal /difference /geomequivalent /muchless /muchgreater  
+%
+/rightanglenw /rightanglene /circleR /circleS /fork /dotplus /revsimilar /revasymptequal  
+%
+/rightanglesw /rightanglese /maltesecross /complement /intercal /circlering /circleasterisk /circleminus  
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+] def

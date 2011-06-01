@@ -1,0 +1,90 @@
+% @@psencodingfile@{
+%   author = "A. Tsolomitis",
+%   version = "1.0",
+%   date = "December 2002",
+%   filename = "gpkerkisc.enc",
+%   email = "atsol@aegean.gr",
+%   docstring = "Encoding for the (polytonic) SmallCaps kerkis fontfamily"
+% @}
+%
+%
+/gpkerkisc [
+% 0x00 (encoded characters from Babel's standard format)
+	/endash /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+	 /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+% 0x10
+	 /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+	 /.notdef /perthousand  /.notdef /.notdef /quoteleft /quoteright /.notdef /.notdef
+% 0x20 
+	/.notdef /exclam /dieresis /dieresistonos /.notdef /percent /.notdef /tonos
+	/parenleft /parenright /asterisk /plus /comma /hyphen /period /slash 
+% 0x30
+	/zerosuperior /onesuperior /twosuperior /threesuperior /foursuperior /fivesuperior 
+	/sixsuperior /sevensuperior /eightsuperior /ninesuperior /colon /anoteleia 
+	/.notdef /equal /quotesingle /semicolon
+% 0x40
+	/.notdef /Alpha /Beta /.notdef /Delta /Epsilon /Phi /Gamma
+	/Eta /Iota /Theta /Kappa /Lambda /Mu /Nu /Omicron
+% 0x50
+	/Pi /Chi /Rho /Sigma /Tau /Upsilon /.notdef /Omega
+	/Xi /Psi /Zeta /bracketleft /.notdef /bracketright /.notdef /notdef
+% 0x60
+	/.notdef /alpha /beta /sigma1 /delta /epsilon /phi /gamma
+	/eta /iota /theta /kappa /lambda /mu /nu /omicron
+% 0x70
+	/pi /chi /rho /sigma /tau /upsilon /.notdef /omega
+	/xi /psi /zeta /guillemotleft /period /guillemotright /.notdef /emdash
+% 0x80
+	/Alphatonos /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+	/alphatonos /.notdef  /.notdef  /.notdef  /.notdef  /.notdef  /.notdef  /.notdef 
+% 0x90
+	 /.notdef  /.notdef  /.notdef  /.notdef  /.notdef  /.notdef  /.notdef  /.notdef 
+	 /Etatonos /.notdef  /.notdef  /.notdef  /.notdef  /.notdef  /.notdef  /.notdef 
+% 0xA0
+	/etatonos /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+	 /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+% 0xB0
+	/Omegatonos /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+	/omegatonos /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+% 0xC0
+	/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+	/Iotatonos /.notdef /.notdef /.notdef /Upsilontonos /.notdef /.notdef /.notdef
+% 0xD0
+	/iotatonos /.notdef /.notdef /.notdef /upsilontonos /.notdef /.notdef /.notdef
+	/.notdef /.notdef /.notdef /Iotadieresis /.notdef /.notdef /.notdef /Upsilondieresis
+% 0xE0
+	/Epsilontonos /.notdef /.notdef /.notdef /Omicrontonos /.notdef /.notdef /.notdef 
+	/epsilontonos /.notdef /.notdef /.notdef /omicrontonos /.notdef /.notdef /.notdef 
+% 0xF0
+	/iotadieresis /.notdef /iotadieresistonos /.notdef /upsilondieresis /.notdef /upsilondieresistonos /.notdef
+	/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+] def
+% LIGKERN hyphen hyphen =: endash ; endash hyphen =: emdash ;           
+% LIGKERN parenleft parenleft =: guillemotleft ;			
+% LIGKERN parenright parenright =: guillemotright ;	
+% LIGKERN dieresis tonos =: dieresistonos
+% LIGKERN tonos dieresis =: dieresistonos
+% LIGKERN tonos alpha =: alphatonos ; tonos Alpha =: Alphatonos ;
+% LIGKERN tonos epsilon =: epsilontonos ; tonos Epsilon =: Epsilontonos ;
+% LIGKERN tonos eta =: etatonos ; tonos Eta =: Etatonos ;
+% LIGKERN tonos iota =: iotatonos ; tonos Iota =: Iotatonos ;
+% LIGKERN tonos omicron =: omicrontonos ; tonos Omicron =: Omicrontonos ;
+% LIGKERN tonos upsilon =: upsilontonos ; tonos Upsilon =: Upsilontonos ;
+% LIGKERN tonos omega =: omegatonos ; tonos Omega =: Omegatonos ;
+% LIGKERN dieresis iota =: iotadieresis ; dieresis Iota =: Iotadieresis ;
+% LIGKERN dieresis upsilon =: upsilondieresis ;
+% LIGKERN dieresis Upsilon =: Upsilondieresis ;
+% LIGKERN dieresistonos iota =: iotadieresistonos ; 
+% LIGKERN dieresistonos upsilon =: upsilondieresistonos ;
+% LIGKERN tonos tonos =: quoteright ; uni1FEF uni1FEF =: quoteleft ;
+
+
+%% Copy the following LIGKERN lines uncommented if you have an initial beta 
+%% (remove only one percent symbol) immediately after the above ligtable:
+%% LIGKERN || beta =: beta-initial ;
+%% LIGKERN bracketleft beta |=: beta-initial ;
+%% LIGKERN parenleft beta |=: beta-initial ;
+%% LIGKERN braceleft beta |=: beta-initial ;
+%% LIGKERN guillemotleft beta |=: beta-initial ;
+%% It is also assumed that the position of beta-initial is defined in the above encoding
+%% i.e. you should do this yourself.

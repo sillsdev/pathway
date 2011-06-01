@@ -1,0 +1,86 @@
+dotaccent {} * ; * {} dotaccent ;
+grave {} * ; * {} grave ;
+acute {} * ; * {} acute ;
+caron {} * ; * {} caron ;
+breve {} * ; * {} breve ;
+macron {} * ; * {} macron ;
+ring {} * ; * {} ring ;
+cedilla {} * ; * {} cedilla ;
+dieresis {} * ; * {} dieresis ;
+circumflex {} * ; * {} circumflex ;
+asciicircum {} * ; * {} asciicircum ;
+hungarumlaut {} * ; * {} hungarumlaut ;
+ogonek {} * ; * {} ogonek ;
+tilde {} * ; * {} tilde ;
+asciitilde {} * ; * {} asciitilde ;
+space {} * ; * {} space ;
+nbspace {} * ; * {} nbspace ;
+
+ff {} * ; * {} ff ;
+fi {} * ; * {} fi ;
+fl {} * ; * {} fl ;
+ffi {} * ; * {} ffi ;
+ffl {} * ; * {} ffl ;
+
+dagger {} * ; * {} dagger ;
+daggerdbl {} * ; * {} daggerdbl ;
+section {} * ; * {} section ;
+paragraph {} * ; * {} paragraph ;
+ampersand {} * ; * {} ampersand ;
+backslash {} * ; * {} backslash ;
+cwm {} * ; * {} cwm ;
+
+periodcentered {} * ; * {} periodcentered ;
+fraction {} * ; * {} fraction ;
+plusminus {} * ; * {} plusminus ;
+onequarter {} * ; * {} onequarter ;
+onehalf {} * ; * {} onehalf ;
+threequarters {} * ; * {} threequarters ;
+ordfeminine {} * ; * {} ordfeminine ;
+ordmasculine {} * ; * {} ordmasculine ;
+brokenbar {} * ; * {} brokenbar ;
+bar {} * ; * {} bar ;
+mu {} * ; * {} mu ;
+sfthyphen {} * ; * {} sfthyphen ;
+underscore {} * ; * {} underscore ;
+less {} * ; * {} less ;
+equal {} * ; * {} equal ;
+greater {} * ; * {} greater ;
+logicalnot {} * ; * {} logicalnot ;
+
+exclam {} * ;
+comma {} * ;
+semicolon {} * ;
+question {} * ;
+percent {} * ;
+perthousand {} * ;
+parenright {} * ;
+bracketright {} * ;
+braceright {} * ;
+guilsinglright {} * ;
+guillemotright {} * ;
+
+degree {} * ;
+onesuperior {} * ;
+twosuperior {} * ;
+threesuperior {} * ;
+trademark {} * ;
+registered {} * ;
+
+cent {} * ; * {} cent ;
+dollar {} * ; * {} dollar ;
+florin {} * ; * {} florin ;
+sterling {} * ; * {} sterling ;
+yen {} * ; * {} yen ;
+currency {} * ; * {} currency ;
+
+* {} exclamdown ;
+* {} questiondown ;
+* {} numbersign ;
+* {} parenleft ;
+* {} bracketleft ;
+* {} braceleft ;
+* {} guilsinglleft ;
+* {} guillemotleft ;
+* {} quoteleft ;
+* {} quotedblleft ;

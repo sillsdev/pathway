@@ -1,0 +1,101 @@
+suppress l =: lslash
+suppress L =: Lslash
+question quoteleft =: questiondown
+exclam quoteleft =: exclamdown
+hyphen hyphen =: endash
+endash hyphen =: emdash
+quoteleft quoteleft =: quotedblleft
+quoteright quoteright =: quotedblright
+
+# destroy a lot of kerning pairs (*: any char)
+space {} *
+* {} space
+zero {} *
+* {} zero
+one {} *
+* {} one
+two {} *
+* {} two
+three {} *
+* {} three
+four {} *
+* {} four
+five {} *
+* {} five
+six {} *
+* {} six
+seven {} *
+* {} seven
+eight {} *
+* {} eight
+nine {} *
+* {} nine
+
+# kern accented chars like their base chars
+Aacute <> A
+aacute <> a
+Acircumflex <> A
+acircumflex <> a
+Adieresis <> A
+adieresis <> a
+Agrave <> A
+agrave <> a
+Aring <> A
+aring <> a
+Atilde <> A
+atilde <> a
+Ccedilla <> C
+ccedilla <> c
+Eacute <> E
+eacute <> e
+Ecircumflex <> E
+ecircumflex <> e
+Edieresis <> E
+edieresis <> e
+Egrave <> E
+egrave <> e
+Iacute <> I
+iacute <> i
+Icircumflex <> I
+icircumflex <> i
+Idieresis <> I
+idieresis <> i
+Igrave <> I
+igrave <> i
+Ntilde <> N
+ntilde <> n
+Oacute <> O
+oacute <> o
+Ocircumflex <> O
+ocircumflex <> o
+Odieresis <> O
+odieresis <> o
+Ograve <> O
+ograve <> o
+Oslash <> O
+oslash <> o
+Otilde <> O
+otilde <> o
+Scaron <> S
+scaron <> s
+Uacute <> U
+uacute <> u
+Ucircumflex <> U
+ucircumflex <> u
+Udieresis <> U
+udieresis <> u
+Ugrave <> U
+ugrave <> u
+Yacute <> Y
+yacute <> y
+Ydieresis <> Y
+ydieresis <> y
+Zcaron <> Z
+zcaron <> z
+
+# include these ligs just in case
+f i =: fi
+f l =: fl
+f f =: ff
+ff i =: ffi
+ff l =: ffl

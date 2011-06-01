@@ -1,0 +1,68 @@
+% Euler math extension (Bakoma) encoding file (Bob Howlett 1/9/97). Not guaranteed!
+%
+/Bakoma_euex_Encoding [
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/braceleftbig /bracerightbig /braceleftBig /bracerightBig /braceleftbigg /bracerightbigg /braceleftBigg /bracerightBigg 
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/arrowlefttophalf /arrowleftbothalf /arrowrighttophalf /arrowrightbothalf /.notdef /.notdef /.notdef /.notdef 
+%
+/arrowleft /arrowright /arrowup /arrowdown /arrowboth /arrownortheast /arrowsoutheast /.notdef 
+%
+/arrowdblleft /arrowdblright /arrowdblup /arrowdbldown /arrowdblboth /arrownorthwest /arrowsouthwest /.notdef 
+%
+/.notdef /infinity /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+% 
+/bracelefttp /bracerighttp /braceleftbt /bracerightbt /braceleftmid /bracerightmid /braceex /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/contintegraltext /contintegraldisplay /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+% 
+/summationtext /producttext /integraltext /.notdef /.notdef /.notdef /.notdef /.notdef  
+%
+/summationdisplay /productdisplay /integraldisplay /.notdef /.notdef /.notdef /.notdef /.notdef 
+%
+/coproducttext /coproductdisplay /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+%
+/.notdef /.notdef /.notdef /.notdef /arrowbothv /arrowdblbothv /.notdef /.notdef  
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /bracehtipdownleft /bracehtipdownright /bracehtipupleft /bracehtipupright /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+] def

@@ -1,0 +1,234 @@
+% @@psencodingfile@{
+%   author = "A. Tsolomitis",
+%   version = "0.1",
+%   date = "30 August 2000",
+%   filename = "gkerkis.enc",
+%   email = "atsol@aegean.gr",
+%   docstring = "Encoding for the kerkis fontfamily"
+% @}
+%
+%
+/gkerkis [
+% 0x00 (encoded characters from Babel's standard format)
+	/endash /.notdef /Deltanum /Etanum /Chinum /Munum /stigma /Stigma
+	 /cy /u1FBC /u1FCC /u1FFC /theta1 /zeta1 /epsilon1 /phi1
+% 0x10
+	 /beta1 /pi1 /qoppa /Qoppa /rho1 /.notdef /.notdef /.notdef
+	 /Euro /perthousand  /.notdef /sampi /quoteleft /quoteright /braxy /macron
+% 0x20 
+	/u1FC1 /exclam /dieresis /dieresistonos /u1FED /percent /middot /tonos
+	/parenleft /parenright /asterisk /plus /comma /hyphen /period /slash 
+% 0x30
+	/zero /one /two /three /four /five 
+	/six /seven /eight /nine /colon /anoteleia 
+	/u1FBF /equal /u1FBD /semicolon
+% 0x40
+	/u1FDF /Alpha /Beta /u1FDD /Delta /Epsilon /Phi /Gamma
+	/Eta /Iota /Theta /Kappa /Lambda /Mu /Nu /Omicron
+% 0x50
+	/Pi /Chi /Rho /Sigma /Tau /Upsilon /u1FDE /Omega
+	/Xi /Psi /Zeta /bracketleft /u1FCF /bracketright /u1FCE /u1FCD
+% 0x60
+	/u1FEF /alpha /beta /sigma1 /delta /epsilon /phi /gamma
+	/eta /iota /theta /kappa /lambda /mu /nu /omicron
+% 0x70
+	/pi /chi /rho /sigma /tau /upsilon /.notdef /omega
+	/xi /psi /zeta /guillemotleft /u1FBE /guillemotright /u1FC0 /emdash
+% 0x80
+	/u1F70 /u1F01 /u1F00 /u1F03 /u1FB2 /u1F81 /u1F80 /u1F83 
+	/alphatonos /u1F05 /u1F04 /u1F02 /u1FB4 /u1F85 /u1F84 /u1F82
+% 0x90
+	 /u1FB6 /u1F07 /u1F06 /digamma /u1FB7 /u1F87 /u1F86 /.notdef 
+	 /u1F74 /u1F21 /u1F20 /.notdef /u1FC2 /u1F91 /u1F90 /.notdef 
+% 0xA0
+	/etatonos /u1F25 /u1F24 /u1F23 /u1FC4 /u1F95 /u1F94 /u1F93
+	 /u1FC6 /u1F27 /u1F26 /u1F22 /u1FC7 /u1F97 /u1F96 /u1F92
+% 0xB0
+	/u1F7C /u1F61 /u1F60 /u1F63 /u1FF2 /u1FA1 /u1FA0 /u1FA3
+	/omegatonos /u1F65 /u1F64 /u1F62 /u1FF4 /u1FA5 /u1FA4 /u1FA2 
+% 0xC0
+	/u1FF6 /u1F67 /u1F66 /Digamma /u1FF7 /u1FA7 /u1FA6 /.notdef 
+	/u1F76 /u1F31 /u1F30 /u1F33 /u1F7A /u1F51 /u1F50 /u1F53
+% 0xD0
+	/iotatonos /u1F35 /u1F34 /u1F32 /upsilontonos /u1F55 /u1F54 /u1F52
+	/u1FD6 /u1F37 /u1F36 /Iotadieresis /u1FE6 /u1F57 /u1F56 /Upsilondieresis
+% 0xE0
+	/u1F72 /u1F11 /u1F10 /u1F13 /u1F78 /u1F41 /u1F40 /u1F43 
+	/epsilontonos /u1F15 /u1F14 /u1F12 /omicrontonos /u1F45 /u1F44 /u1F42 
+% 0xF0
+	/iotadieresis /u1FD2 /iotadieresistonos /u1FD7 
+	/upsilondieresis /u1FE2 /upsilondieresistonos /u1FE7
+	/u1FB3 /u1FC3 /u1FF3 /u1FE5 /u1FE4 /.notdef /tonos /katotonos
+] def
+% LIGKERN || = 39 ;
+% LIGKERN hyphen hyphen =: endash ; endash hyphen =: emdash ;           
+% LIGKERN parenleft parenleft =: guillemotleft ;			
+% LIGKERN parenright parenright =: guillemotright ;	
+% LIGKERN dieresis tonos =: dieresistonos
+% LIGKERN tonos dieresis =: dieresistonos
+% LIGKERN tonos alpha =: alphatonos ;
+% LIGKERN tonos epsilon =: epsilontonos ;
+% LIGKERN tonos eta =: etatonos ;       
+% LIGKERN tonos iota =: iotatonos ; 
+% LIGKERN tonos omicron =: omicrontonos ;
+% LIGKERN tonos upsilon =: upsilontonos ;
+% LIGKERN tonos omega =: omegatonos ;
+% LIGKERN dieresis iota =: iotadieresis ; dieresis Iota =: Iotadieresis ;
+% LIGKERN dieresis upsilon =: upsilondieresis ;
+% LIGKERN dieresis Upsilon =: Upsilondieresis ;
+% LIGKERN dieresistonos iota =: iotadieresistonos ; 
+% LIGKERN dieresistonos upsilon =: upsilondieresistonos ;
+% LIGKERN || beta =: beta1 ;
+% LIGKERN bracketleft beta |=: beta1 ;
+% LIGKERN parenleft beta |=: beta1 ;
+% LIGKERN braceleft beta |=: beta1 ;
+% LIGKERN guillemotleft beta |=: beta1 ;          
+% LIGKERN endash beta |=: beta1 ;
+% LIGKERN emdash beta |=: beta1 ;
+% LIGKERN hyphen beta |=: beta1 ;
+% LIGKERN tonos tonos =: quoteright ;
+% LIGKERN || theta =: theta1 ;
+% LIGKERN bracketleft theta |=: theta1 ;
+% LIGKERN parenleft theta |=: theta1 ;
+% LIGKERN braceleft theta |=: theta1 ;
+% LIGKERN guillemotleft theta |=: theta1 ;          
+% LIGKERN endash theta |=: theta1 ;
+% LIGKERN emdash theta |=: theta1 ;
+% LIGKERN hyphen theta |=: theta1 ;
+% LIGKERN || zeta =: zeta1 ;
+% LIGKERN bracketleft zeta |=: zeta1 ;
+% LIGKERN parenleft zeta |=: zeta1 ;
+% LIGKERN braceleft zeta |=: zeta1 ;
+% LIGKERN guillemotleft zeta |=: zeta1 ;          
+% LIGKERN endash zeta |=: zeta1 ;
+% LIGKERN emdash zeta |=: zeta1 ;
+% LIGKERN hyphen zeta |=: zeta1 ;
+% LIGKERN || phi =: phi1 ;
+% LIGKERN bracketleft phi |=: phi1 ;
+% LIGKERN parenleft phi |=: phi1 ;
+% LIGKERN braceleft phi |=: phi1 ;
+% LIGKERN guillemotleft phi |=: phi1 ;          
+% LIGKERN endash phi |=: phi1 ;
+% LIGKERN emdash phi |=: phi1 ;
+% LIGKERN hyphen phi |=: phi1 ;
+% LIGKERN || rho =: rho1 ;
+% LIGKERN bracketleft rho |=: rho1 ;
+% LIGKERN parenleft rho |=: rho1 ;
+% LIGKERN braceleft rho |=: rho1 ;
+% LIGKERN guillemotleft rho |=: rho1 ;          
+% LIGKERN endash rho |=: rho1 ;
+% LIGKERN emdash rho |=: rho1 ;
+% LIGKERN hyphen rho |=: rho1 ;
+% LIGKERN u1FBD tonos =: u1FCE ; u1FBD u1FEF =: u1FCD ;
+% LIGKERN u1FBD u1FC0 =: u1FCF ; u1FC0 u1FBD =: u1FCF ;
+% LIGKERN u1FBF tonos =: u1FDE ; u1FBF u1FEF =: u1FDD ;
+% LIGKERN u1FBF u1FC0 =: u1FDF ; u1FC0 u1FBF =: u1FDF ;
+% LIGKERN dieresis u1FC0 =: u1FC1 ; u1FC0 dieresis =: u1FC1 ;
+% LIGKERN dieresis u1FEF =: u1FED ; u1FEF dieresis =: u1FED ;
+% LIGKERN u1FCE alpha =: u1F04 ; u1FCF alpha =: u1F06 ; u1FBD alpha =: u1F00 ;
+% LIGKERN u1FCD alpha =: u1F02 ; u1FDF alpha =: u1F07 ; u1FBF alpha =: u1F01 ;
+% LIGKERN u1FDE alpha =: u1F05 ; u1FEF alpha =: u1F70 ; 
+% LIGKERN u1FDD alpha =: u1F03 ; u1FC0 alpha =: u1FB6 ;
+% LIGKERN alpha u1FBE =: u1FB3 ; alphatonos u1FBE =: u1FB4 ;
+% LIGKERN Alpha u1FBE =: u1FBC ;
+% LIGKERN u1F00 u1FBE =: u1F80 ; u1F01 u1FBE =: u1F81 ;
+% LIGKERN u1F02 u1FBE =: u1F82 ; u1F03 u1FBE =: u1F83 ;
+% LIGKERN u1F04 u1FBE =: u1F84 ; u1F05 u1FBE =: u1F85 ;
+% LIGKERN u1F06 u1FBE =: u1F86 ; u1F07 u1FBE =: u1F87 ;
+% LIGKERN u1F70 u1FBE =: u1FB2 ; u1FB6 u1FBE =: u1FB7 ;
+% LIGKERN u1FCE epsilon =: u1F14 ; u1FBD epsilon =: u1F10 ;
+% LIGKERN u1FCD epsilon =: u1F12 ; u1FBF epsilon =: u1F11 ;
+% LIGKERN u1FDE epsilon =: u1F15 ; u1FEF epsilon =: u1F72 ; 
+% LIGKERN u1FDD epsilon =: u1F13 ;
+% LIGKERN u1FCE eta =: u1F24 ; u1FCF eta =: u1F26 ; u1FBD eta =: u1F20 ;
+% LIGKERN u1FCD eta =: u1F22 ; u1FDF eta =: u1F27 ; u1FBF eta =: u1F21 ;
+% LIGKERN u1FDE eta =: u1F25 ; u1FEF eta =: u1F74 ; 
+% LIGKERN u1FDD eta =: u1F23 ; u1FC0 eta =: u1FC6 ;
+% LIGKERN eta u1FBE =: u1FC3 ; etatonos u1FBE =: u1FC4 ;
+% LIGKERN Eta u1FBE =: u1FCC ;
+% LIGKERN u1F20 u1FBE =: u1F90 ; u1F21 u1FBE =: u1F91 ;
+% LIGKERN u1F22 u1FBE =: u1F92 ; u1F23 u1FBE =: u1F93 ;
+% LIGKERN u1F24 u1FBE =: u1F94 ; u1F25 u1FBE =: u1F95 ;
+% LIGKERN u1F26 u1FBE =: u1F96 ; u1F27 u1FBE =: u1F97 ;
+% LIGKERN u1F74 u1FBE =: u1FC2 ; u1FC6 u1FBE =: u1FC7 ;
+% LIGKERN u1FCE iota =: u1F34 ; u1FBD iota =: u1F30 ;
+% LIGKERN u1FCD iota =: u1F32 ; u1FBF iota =: u1F31 ;
+% LIGKERN u1FDE iota =: u1F35 ; u1FEF iota =: u1F76 ;
+% LIGKERN u1FDD iota =: u1F33 ; u1FED iota =: u1FD2 ;
+% LIGKERN u1FC1 iota =: u1FD7 ; u1FC0 iota =: u1FD6 ;
+% LIGKERN u1FCF iota =: u1F36 ; u1FDF iota =: u1F37 ;
+% LIGKERN u1FCE omicron =: u1F44 ; u1FBD omicron =: u1F40 ;
+% LIGKERN u1FCD omicron =: u1F42 ; u1FBF omicron =: u1F41 ;
+% LIGKERN u1FDE omicron =: u1F45 ; u1FEF omicron =: u1F78 ; 
+% LIGKERN u1FDD omicron =: u1F43 ;
+% LIGKERN u1FCE upsilon =: u1F54 ; u1FBD upsilon =: u1F50 ;
+% LIGKERN u1FCD upsilon =: u1F52 ; u1FBF upsilon =: u1F51 ;
+% LIGKERN u1FDE upsilon =: u1F55 ; u1FEF upsilon =: u1F7A ;
+% LIGKERN u1FDD upsilon =: u1F53 ; u1FED upsilon =: u1FE2 ;
+% LIGKERN u1FC1 upsilon =: u1FE7 ; u1FC0 upsilon =: u1FE6 ;
+% LIGKERN u1FCF upsilon =: u1F56 ; u1FDF upsilon =: u1F57 ;
+% LIGKERN u1FCE omega =: u1F64 ; u1FCF omega =: u1F66 ; u1FBD omega =: u1F60 ;
+% LIGKERN u1FCD omega =: u1F62 ; u1FDF omega =: u1F67 ; u1FBF omega =: u1F61 ;
+% LIGKERN u1FDE omega =: u1F65 ; u1FEF omega =: u1F7C ; 
+% LIGKERN u1FDD omega =: u1F63 ; u1FC0 omega =: u1FF6 ;
+% LIGKERN omega u1FBE =: u1FF3 ; omegatonos u1FBE =: u1FF4 ;
+% LIGKERN Omega u1FBE =: u1FFC ;
+% LIGKERN u1F60 u1FBE =: u1FA0 ; u1F61 u1FBE =: u1FA1 ;
+% LIGKERN u1F62 u1FBE =: u1FA2 ; u1F63 u1FBE =: u1FA3 ;
+% LIGKERN u1F64 u1FBE =: u1FA4 ; u1F65 u1FBE =: u1FA5 ;
+% LIGKERN u1F66 u1FBE =: u1FA6 ; u1F67 u1FBE =: u1FA7 ;
+% LIGKERN u1F7C u1FBE =: u1FF2 ; u1FF6 u1FBE =: u1FF7 ;
+% LIGKERN u1FBD rho =: u1FE4 ; u1FBF rho =: u1FE5 ;
+% LIGKERN u1FDD || =:| Sigma ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%% LIGKERN epsilon iota =:| epsilon1 ;
+%% LIGKERN epsilon iotatonos =:| epsilon1 ;
+%% LIGKERN epsilon tonos =:| epsilon1 ;
+%% Copy the following LIGKERN lines uncommented if you have an initial beta 
+%% (remove only one percent symbol) immediately after the above ligtable:
+%% LIGKERN || beta =: beta-initial ;
+%% LIGKERN bracketleft beta |=: beta-initial ;
+%% LIGKERN parenleft beta |=: beta-initial ;
+%% LIGKERN braceleft beta |=: beta-initial ;
+%% LIGKERN guillemotleft beta |=: beta-initial ;
+%% It is also assumed that the position of beta-initial is defined in the above encoding
+%% i.e. you should do this yourself.
+%% tonos Epsilon =: Epsilontonos ;
+%%  tonos Alpha =: Alphatonos ;
+%%  tonos Eta =: Etatonos ;        
+%%  tonos Iota =: Iotatonos ;      
+%%  tonos Omicron =: Omicrontonos ;
+%%  tonos Upsilon =: Upsilontonos ;
+%%  tonos Omega =: Omegatonos ;    
