@@ -33,7 +33,7 @@
 
 body {
     font-family: "Doulos SIL", serif;	/* default Serif font */
-    font-size: 11pt;	/* cascaded environment */
+    font-size: 12pt;	/* cascaded environment */
     text-indent: 0pt;
     margin-left: 36pt;
     margin-right: 36pt;
@@ -68,7 +68,7 @@ td {
 h1 {
     font-size: 150%;
     margin-top: 1em;
-    margin-bottom: .1em;
+    margin-bottom: 0em;
 }
 h2 {
     font-size: 125%;
@@ -76,7 +76,11 @@ h2 {
     margin-bottom: 0;
 }
 p {
-    margin-top: .1em;
+    margin-top: .5em;
     margin-bottom: .5em;
+}
+.ccimg {
+    width: 32px;
+    height: 32px;
 }
 
