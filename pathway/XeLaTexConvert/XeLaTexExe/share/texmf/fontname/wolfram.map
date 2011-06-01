@@ -1,0 +1,30 @@
+@c @mapfile{
+@c   email = "tex-fonts@tug.org",
+@c   version = "2.2",
+@c   date = "1 July 1998",
+@c   url = "http://tug.org/fontname/wolfram.map",
+@c   supported = "yes",
+@c   docstring = "Wolfram fonts."
+@c }
+@c
+@c From Ulrik.
+wpi001r         Math1
+wpi002r         Math2
+wpi003r         Math3
+wpi004r         Math4
+wpi005r         Math5
+wpi001b         Math1-Bold
+wpi002b         Math2-Bold
+wpi003b         Math3-Bold
+wpi004b         Math4-Bold
+wpi005b         Math5-Bold
+wpi001rt        Math1Mono
+wpi002rt        Math2Mono
+wpi003rt        Math3Mono
+wpi004rt        Math4Mono
+wpi005rt        Math5Mono
+wpi001bt        Math1Mono-Bold
+wpi002bt        Math2Mono-Bold
+wpi003bt        Math3Mono-Bold
+wpi004bt        Math4Mono-Bold
+wpi005bt        Math5Mono-Bold

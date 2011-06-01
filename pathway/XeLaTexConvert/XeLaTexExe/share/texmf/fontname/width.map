@@ -1,0 +1,21 @@
+@c @mapfile{
+@c   email = "tex-fonts@tug.org",
+@c   version = "2.2",
+@c   date = "1 July 1998",
+@c   url = "http://tug.org/fontname/width.map",
+@c   supported = "yes",
+@c   docstring = "Width abbreviations for TeX font names."
+@c }
+@c
+c Condensed Cond
+e Expanded
+n Narrow
+o UltraCondensed
+p Compressed Compact
+q ExtraCompressed ExtraCondensed
+r Normal Medium Regular @r{(usually omitted)}
+t Thin
+u UltraCompressed
+v ExtraExpanded @r{more than @t{Expanded}, less than @t{Wide}}
+w Wide
+x Extended Elongated
