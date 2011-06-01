@@ -181,6 +181,7 @@
     <feature name="Lic_Other">
       <option name="Draft" file="Draft.xhtml"/>
       <option name="Non-Commercial Share Alike" file="CC-by-nc-sa.xhtml"/>
+      <option name="Non-Commercial No Derivatives" file="CC-by-nc-sa.xhtml"/>
       <option name="Intended for Sale" file="Selling.xhtml"/>
     </feature>
     <feature name="Subject">
