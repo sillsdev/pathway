@@ -1,0 +1,83 @@
+  *************************************************************************
+
+        Copyright (c) 1989 by N. N. Billawala
+        The following file contains information about the Pandora
+        Family of fonts. The fonts were developed using Metafont.
+        These fonts should be considered as in a beta state.
+
+  *************************************************************************
+
+        
+
+        The files are set up according to the following scheme:
+
+        <general font file>
+                Contains all the parameters for varying the font.
+		pnb10.mf, pnr10.mf, pnsl10.mf, pnss10.mf, pnssb10.mf,
+		pnssi10.mf, pntt9.mf 
+          <general macros file> 
+                Macros used in the various characters. 
+                pandor.mf
+          <character set file> 
+                Determines which set of characters will be in the font.
+                rotext.mf, tttext.mf
+            <width information file>
+                Determines the widths of the characters. Note that
+                width values will change according to the individual
+                shape of the character. 
+                width.mf
+            <individual character files>
+                The actual character descriptions are here.         
+                panlowers.mf, caps.mf, number.mf, pangreeku.mf, panaccent.mf,
+                panpunct.mf, punctr.mf, puncts.mf, fligs.mf, ttchar.mf, 
+                punctt.mf
+            <ligature and kerning information file>
+                ligs.mf
+
+        In order to create a font, you need only invoke Metafont, set 
+        a mode for a device, and input one of the general font files. 
+                % mf
+                ** \mode=yourchoice; input pntt9 
+
+        
+           The intent of the Pandora project is to test the ideas and
+        power of Metafont in a design context. The starting point
+        came from broad ideas about type, rather than trying to
+        create a specific predetermined typeface. 
+           One strong driving force was the idea to create a generalized
+        description of the visual relationship between characters in a
+        typeface. This is far from saying that similar characters use
+        parts that are "cut and pasted" directly from one to another.
+        This is how a "straight arm" and "curved arm" came to be in the
+        same macro, though they are visually quite different.
+           Many parameters create an endless variety of possibilities.
+        The concern was to create a basis from which a "reasonable"
+        and readable set of fonts might be derived. It's not important 
+        that all variations work, rather, that it's possible to find 
+        a reasonable set within the basis. A rich description allows
+        a designer to quickly look at a number of possibilities.         
+           The character sets for the fixed width font and for the 
+        variable width fonts correspond to those which Don Knuth used
+        in the Computer Modern family of fonts. This was done 
+        intentionally so that we would have compatible and 
+        interchangeable character sets. The compatibility ends there. 
+           All of the fonts are currently set for 10 pt type,
+        except pntt9.mf, which is set for 9 pt type. Pntt9.mf (Pandora
+        Single Pitch 9 works out to 15 characters per inch). Hooks
+        have been put in for point size changes as well as for
+        boldness. 
+                        
+
+
+        Comments, criticisms and suggestions are welcome.
+        Please send them to me at 
+        {decwrl, seismo, ihnp4, ucbvax ...} !sun!metamarks!nb
+
+        N. N. Billawala
+        
+
+
+
+
+
+

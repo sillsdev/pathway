@@ -1,0 +1,10 @@
+% to generate xbmc10 (i.e., reflected cmbx10) use a file
+% xbmc10.mf containing:
+%+++++++++++++++++++++++++++++++++++++++++++++++++
+     if unknown cmbase: input cmbase fi
+     extra_endchar := extra_endchar &
+       "currentpicture:=currentpicture " &
+       "reflectedabout((.5[l,r],0),(.5[l,r],1));";
+     input cmbx10
+%+++++++++++++++++++++++++++++++++++++++++++++++++
+

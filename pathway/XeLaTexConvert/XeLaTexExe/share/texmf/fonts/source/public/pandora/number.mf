@@ -1,0 +1,468 @@
+%*****************************************************************************
+%        Copyright (c) 1989 by N. N. Billawala
+%*****************************************************************************
+
+
+% number.mf numerals
+% 10 characters
+
+
+iff OK "0":  "The number 0";  
+  beginchar("0",num_width_c#+c_mono#,cap#,0);	  
+  if mono<>0:save circ; circ1=circ2=circ3=1.05; fi
+
+  top z1=(h_stress*w,h+ov_t.uc)//;
+  lft z2=(0,(1-v_stress)*h)//;
+  bot z3=((1-h_stress)*w,-ov_b.uc)//;
+  rt z4=(w,v_stress*h)//;
+
+  circular_shape(y1,y3,x2,x4,minor_curve.uc,bowlstem.uc); 
+
+ showpoints(1,2,3,4);
+adjust(.5num_fit_c#+m_a*c_mfit#,.5num_fit_c#+m_a*c_mfit#); 
+show_character; endchar;
+
+
+iff OK "1":  "The number 1";  
+  beginchar("1",num_width_a#+b_mono#,cap#,0); 
+
+  save_num(terminal_thickness)=max(.75thin_stem.uc,.3stem.uc);
+  bot z40=(.5w,0);        multpos(1,4,40)(stem.uc,0);  	
+  lft x4l=round x40l;     bot y4=0;   
+  top z1=(x4,h)//; 
+  onaline(1l,4l)(2l,3l);  y3l=y3r=cap_bracket_h;           
+  onaline(1r,4r)(2r,3r);  y2r=y2l=max(h-cap_bracket_h,y3l); 
+  y2l:=min(y2l,h-terminal_thickness-(stem.uc*sind max(25-.5oblique,0)));
+
+  p1=fullserif(z4,z1,z3l,z3r,1.25hs,1.25hs)--
+     terminalserif.l(z1,z4,z2l,z2r,1.5pt,max(25-.5oblique,0))--cycle;
+
+  showpoints(1,2,3,4);
+adjust(.5num_fit_a#+m_a*b_mfit#,.5num_fit_a#+m_a*b_mfit#);
+show_character; endchar;
+
+
+
+
+def character_points=
+iff OK "2":  "The number 2"; 
+  beginchar(50+alt8,num_width_b#+b_mono#,cap#,0); 
+
+  twotension:=10;
+  z1=(.05w,.9h)//;
+  rt z3r=(w,if inflection_two:.75h else:.7h fi)//;lft z3l=(z3r-(bowlstem.uc,0));
+  top y2r=bot y2l+max(1,major_curve.uc)=h+ov_t.uc; 
+  good_x_for(2r)(z1,z3r,.5)a; good_x_for(2l)(z1+(bulb_thickness,0),z3l,.5)b;
+  top lft z5l=(0,max(1,.9stem.uc))//;   
+  z4l=.5[z5l,z3l];                      
+  bot lft z6l=(0,0); z6r=z6l+(0,apex.uc)//;  
+  bot rt z8=(.95w,0);
+  bot y7l=top y7r-max(1,.9stem.uc)=0;
+  good_x_for(7l)(z6l,z8,.5)c; good_x_for(7r)(z5r,z8-(tip_thickness,0),.5)d;
+
+  ref1=(z6r-(0,max(1,.8thin_stem.uc)))
+        ..tension atleast twotension and 1..z3r{upward};
+  ref2=z3l{downward}..tension atleast 1 and twotension..z6r; 
+  ref3=(-1,y7r)--(w,y7r);
+  ref4=z3l{downward}...z4l...z6r{downward}...z6l; 
+ 
+  if inflection_two: 
+    rt z5r=ref4 intersectionpoint ref3+(1.3thin_stem.uc,0);  z4r=.5[z5r,z3r]; 
+    p1=(bulb.tl(z1,z2l,z2r,cs,bulb_thickness,90)soft i_t 
+        ref4 if softpath:)softjoin(z6l fi
+       --arm.br(z8,z7r,z7l,.5as,.75tip_thickness,90-arm_angle+.5oblique)soft--
+        z5r  if softpath:)softjoin(z5r fi 
+       {upward}..z4r...z3r{upward} o_t z2r{left})--cycle;
+   else:
+     rt z5r=ref1 intersectionpoint ref3; 
+     (t1,t2)=ref1 intersectiontimes ref3;
+     p1=(bulb.tl(z1,z2l,z2r,cs,bulb_thickness,90)soft i_t 
+        ref2 soften(z6r,z6l) 
+        arm.br(z8,z7r,z7l,.5as,.75tip_thickness,90-arm_angle+.5oblique)soft--z5r
+        if softpath:)softjoin(z5r fi
+      --subpath(t1,infinity)of ref1 o_t z2r{left})--cycle;
+   fi
+  showpoints(1,2,3,4,5,6,7,8);
+  adjust(.5num_fit_b#+m_a*b_mfit#,.5num_fit_b#+m_a*b_mfit#); 
+  show_character; endchar;
+ enddef;
+
+ def number_two=save a,b;
+  vardef a=condition(inflection_two)t; testing_codes; character_points; enddef; 
+  vardef b=condition(inflection_two)f; testing_codes; character_points; enddef;
+  if test_all_characters:a;b;else:if inflection_two:a;else:b;fi fi
+ enddef;
+
+ number_two;  save number_two;
+
+
+
+ def three_diagonal_top(expr addtocode)=
+iff OK "3":  "The number 3"; 
+  beginchar(51+alt6+addtocode,num_width_b#+b_mono#,cap#,0);
+
+  top z1=(0w,h)//;
+  lft z9=(0,.05h)//;  
+  bot lft z10r=(.05w,-ov_b.uc)//; 
+  pos10(minor_curve.uc,-90-oblique); 
+  z5=if open_tail:(.2w,.57h)//;else:(.3w,.55h)//; fi
+  z3r=(round(.97w),h-apex.uc)//;      
+  z40=(.97w,h)//;
+  x5r=x5+.45thin_stem.uc*(cosd (90-oblique));
+  x5l=x5r-.9thin_stem.uc*(cosd (90-oblique));
+  top y2r=bot y2l+max(1,.9stem.uc)=h;
+  top y6r=top y5r=round(y5+.45thin_stem.uc);
+  bot y6l=bot y5l=y5r-max(1,.9thin_stem.uc);
+  bot y8r=top y8l-minor_curve.uc=-ov_b.uc;  
+  z4l=z5r;
+  if open_tail:rt z7r=(w,.65[y8r,y6r])//; 
+               lft z7l=(x7r-stem.uc,.65[y8l,y6l]);
+          else:rt z7r=(w,v_stress[y8r,y6r])//;
+               lft z7l=(x7r-stem.uc,v_stress[y8l,y6l]);    fi
+
+  numeric theta[],phi[],d[]; 
+    d1=thin_stem.uc;   
+    theta1=angle(length(z3r-z5r) +-+ d1,d1);  
+    phi1=angle(z3r-z5r)-theta1;
+  multpos(3,4)(thin_stem.uc,phi1-90);  
+
+  onaline(3l,4l)(41); y41=y2l;
+  onaline(3r,4r)(42); y42=y5r;
+  good_x_for(2r)(z1,z40,.4)a;  good_x_for(2l)(z1+(bulb_thickness,0),z41,.4)b;
+  good_x_for(6r)(z42,z7r,.2)c; good_x_for(6l)(z5l,z7l,.3)d;                
+  good_x_for(8r)(z9,z7r,.4)e;  good_x_for(8l)(z9+(bulb_thickness,0),z7l,.4)f;  
+
+  p1=(arm.tl(z1,z2l,z2r,.5as,.5tip_thickness,90)soft
+      soften(z41,z5r,z5l) z6l{right} i_t z7l{downward} i_t 
+      if open_tail:{-(dir (7*h/w))}z10l--z10r{dir(7*h/w)} 
+              else:bulb.bl(z9,z8l,z8r,.75cs,.75bulb_thickness,90)      fi
+      o_t z7r{upward} o_t z6r{left} soften(z42,z3r,z40) z2r)--cycle;
+
+  showpoints(1,2,3,4,5,6,7,8,9,10,40,41,42);
+  adjust(.5num_fit_b#+m_a*b_mfit#,.5num_fit_b#+m_a*b_mfit#); 
+  show_character; endchar;
+ enddef;
+
+ def three_round_top(expr addtocode)=
+iff OK "3":  "The number 3"; 
+  beginchar(51+alt6+addtocode,num_width_b#+b_mono#,cap#,0);
+
+  z1=(.05w,.95h)//;  
+  lft  z9=(0,.05h)//;
+  bot lft z10r=(.05w,-ov_b.uc)//; 
+  pos10(minor_curve.uc,-90-oblique); 
+  z5=(.3w,.55h)//;  
+  x5r=x5+.45thin_stem.uc*(cosd (90-oblique));
+  x5l=x5r-.9thin_stem.uc*(cosd (90-oblique));
+  top y2r=bot y2l+minor_curve.uc=h+ov_t.uc;
+  top y4r=top y5r=round(y5+.45thin_stem.uc);
+  bot y4l=bot y5l=y5r-max(1,.9thin_stem.uc);
+  y6=.75[y5l,y5r];
+  bot y8r=top y8l-major_curve.uc=-ov_b.uc;  
+  rt z3r=(round(.97w),v_stress[y6,y2r])//;
+  lft z3l=(x3r-stem.uc,v_stress[y5r,y2l]);
+  if open_tail:rt z7r=(w,.65[y8r,y6])//; 
+                    lft z7l=(x7r-stem.uc,.65[y8l,y4l]);
+               else:rt z7r=(w,v_stress[y8r,y6])//;
+                    lft z7l=(x7r-stem.uc,v_stress[y8l,y4l]);    fi
+  z3=.5[z3l,z3r];     
+
+  good_x_for(2r)(z1,z3r,.5)a;  good_x_for(2l)(z1+(bulb_thickness,0),z3l,.5)b;
+  good_x_for(4r)(z5r,z3l,.4)c; good_x_for(4l)(z5l,z7l,.4)d;                
+  good_x_for(6)(z5,z3,.6)e;                                  
+  good_x_for(8r)(z9,z7r,.4)g;  good_x_for(8l)(z9+(bulb_thickness,0),z7l,.4)f;  
+ 
+  p1=(bulb.tl(z1,z2l,z2r,1.2cs,.75bulb_thickness,90)soft i_t
+      z3l{downward} i_t z4r{left} soften(z5r,z5l) z4l{right} i_t z7l{downward}
+      i_t  if open_tail:{-(dir (7*h/w))}z10l--z10r{dir(7*h/w)} 
+       else:bulb.bl(z9,z8l,z8r,.75cs,.75bulb_thickness,90)      fi
+      o_t z7r{upward} o_t 
+      z6{left}--(z6+(0,epsilon){right} o_t z3r{upward} o_t z2r{left}))--cycle;
+ 
+  showpoints(1,2,3,4,5,6,7,8,9);
+  adjust(.5num_fit_b#+m_a*b_mfit#,.5num_fit_b#+m_a*b_mfit#); 
+  show_character; endchar;
+ enddef;	
+
+
+ vardef number_three=save first,second,third,fourth,addtocode;
+  addtocode:=-1;
+  vardef first=condition(diagonal_three)t; condition(open_tail)t; 
+           testing_codes; three_diagonal_top(0); enddef;
+  vardef second=condition(diagonal_three)t; condition(open_tail)f; 
+           testing_codes; three_diagonal_top(incr addtocode); enddef;
+  vardef third=condition(diagonal_three)f; condition(open_tail)t; 
+           testing_codes; three_round_top(incr addtocode+alt7); enddef;
+  vardef fourth=condition(diagonal_three)f; condition(open_tail)f; 
+           testing_codes; three_round_top(incr addtocode); enddef;
+
+  if test_all_characters:first;second;third;fourth;
+   elseif diagonal_three and open_tail:first;
+   elseif diagonal_three and (not open_tail):second;  
+   elseif (not diagonal_three) and open_tail:third;
+   elseif (not diagonal_three) and (not open_tail):fourth;    fi
+ enddef;
+ 
+ number_three;  save number_three,three_diagonal_top,three_round_top;
+
+
+
+iff OK "4":  "The number 4"; 
+  beginchar(52+alt10,num_width_e#+.5*(d_mono#+e_mono#),cap#,0);
+
+  min_limit(join_radius)(.5minor_curve.uc); 
+  top rt z11r=(round(.82w),h)//;     multpos(11,13)(max(1,stem.uc),0);
+  rt z13r=(round(.82w),0);      
+  bot lft z4l=(0,round(.2h))//;      pos4(apex.uc,90-apex_angle);
+  onaline(11r,13r)(10r,12r,23,25);   
+  onaline(11l,13l)(12l,20,22,24,26,27); 
+  y12l=y12r=min(cap_bracket_h,y4l); y20=y11r-max(thin_stem.uc,.3stem.uc,1);
+  y10=if open_four:.75h else:h fi;  y27=y10+thin_stem.uc-stem.uc;
+  y24=y25=y4l; top y23=bot y24+max(1,.9thin_stem.uc); 
+  pos10(apex.uc,0-oblique);
+  z3l=z4r; 
+  z1r=if open_four:(x13l,h-.5thin_stem.uc)// else:z20 fi; %z1r controls top of 4
+  multpos(1,2,3)(thin_stem.uc,constant_angle(z1r,z3l,thin_stem.uc));
+  onaline(1r,3r)(2r,21);            y21=y22=y23; y2r=notch_pos[y20,y21]; 
+  onaline(2l,3l)(28);               y28=y11r; y26=.8[y22,y20];
+  rt z5=(w,y4l)//;                   
+  ref1=z26--z20--z2r;
+
+  if open_four:
+     p1=(z27--fullserif(z13,z11,z12l,z12r,.75hs,.75hs) 
+         soften (z10r,z10) z27)--cycle;
+     p2=(arm.br(z5,z23,z25,.15as,.25tip_thickness,90-arm_angle+.5oblique)
+         soften(z21,z1r,z1l,z4r,z4l) z25)--cycle;
+    else:
+     p1=(z2l soften(z4r,z4l,z24) fullserif(z13,z11,z12l,z12r,.75hs,.75hs)--z25
+          if softpath:)softjoin(z25 fi
+        --arm.br(z5,z23,z25,.15as,.25tip_thickness,90-arm_angle+.5oblique)
+        soften(z23,z11r,z28) z2l)--cycle;
+     p1'=(upnotch(ref1,angle(z20-z22),notch_length.uc) soften(z21,z22) z26)
+         --cycle;
+    fi
+  showpoints(1,2,3,4,5,10,11,12,13,20,21,22,23,24,25,26,27,28);
+adjust(.5num_fit_e#+m_f*.5(d_mfit#+e_mfit#),
+       .5num_fit_e#+m_ff*.5(d_mfit#+e_mfit#)); 
+show_character; endchar;
+
+
+
+ def character_points=
+iff OK "5":  "The number 5"; 
+  beginchar(53+alt6,num_width_b#+b_mono#,cap#,0);
+
+  top z1=(.9w,h)//;
+  top z3l=(round .05w,h)//;  multpos(3,5)(thin_stem.uc,0-oblique);
+  z5l=(round .05w,if open_tail:.6h else:.55h fi)//; 
+  lft z9=(0,.05h)//;  
+  bot lft z10r=(.05w,-ov_b.uc)//; 
+  pos10(minor_curve.uc,-90-oblique);
+
+  top y2r=bot y2l+max(1,.9stem.uc)=h;
+  bot y4l=top y4r-max(1,.9thin_stem.uc)=bot y5l;
+  bot y8r=top y8l-minor_curve.uc=-ov_b.uc;  
+  if open_tail:rt z7r=(w,.65[y8r,y4r])//;lft z7l=(x7r-stem.uc,.65[y8l,y4l]);
+   else:rt z7r=(w,v_stress[y8r,y4r])//;
+        lft z7l=(x7r-stem.uc,v_stress[y8l,y4l]);     fi
+  onaline(3r,5r)(40,41); y40=y2l; y41=y4r;
+
+  good_x_for(2r)(z3l,z1,.5)a;   good_x_for(2l)(z40,z1-(tip_thickness,0),.5)b;
+  good_x_for(4r)(z41,z7r,.4)c;  good_x_for(4l)(z5l,z7l,.55)d;                
+  good_x_for(8r)(z9,z7r,.4)e;   good_x_for(8l)(z9+(bulb_thickness,0),z7l,.4)f;  
+
+  if open_tail:
+     p1=(arm.tr(z1,z2l,z2r,.5as,.5tip_thickness,90)soft soften(z3l,z5l)
+        z4l{right} i_t z7l{downward} i_t 
+        {-(dir (7*h/w))}z10l--z10r{dir(7*h/w)} o_t
+        z7r{upward} o_t z4r{left} soften(z41,z40) z2l)--cycle;
+   else:
+     p1=(arm.tr(z1,z2l,z2r,.5as,.5tip_thickness,90)soft soften(z3l,z5l)
+        z4l{right} i_t z7l{downward} i_t z8l{left} i_t
+        bulb.bl(z9,z8l,z8r,.75cs,.75bulb_thickness,90) 
+        o_t z7r{upward} o_t z4r{left} soften(z41,z40) z2l)--cycle;
+   fi
+  showpoints(1,2,3,4,5,7,8,9,10,40,41);
+  adjust(.5num_fit_b#+m_a*b_mfit#,.5num_fit_b#+m_a*b_mfit#); 
+  show_character; endchar;
+ enddef;
+
+ vardef number_five= save a,b;
+  vardef a=condition(open_tail)t; testing_codes; character_points; enddef;
+  vardef b=condition(open_tail)f; testing_codes; character_points; enddef; 
+  if test_all_characters:a;b; else:if open_tail:a; else:b; fi fi
+ enddef;
+ 
+ number_five;  save number_five;
+
+
+
+ def character_points=
+iff OK "6":  "The number 6"; 
+  beginchar(54+alt6,num_width_c#+c_mono#,cap#,0);   
+
+  save_pairs(good_dir);
+  top z0r=(.9w,h+ov_t.uc)//;  pos0(max(1,.9minor_curve.uc),90+taper_angle);   
+  z1=(.85w,.98h)//;
+  lft z3r=(0,(1-v_stress)*h)//;  rt z3l=z3r+(stem.uc,0);  
+  top y2r=bot y2l+minor_curve.uc=h+ov_t.uc; 
+  good_x_for(2l)(z3l,z1-(bulb_thickness,0),.7)a; good_x_for(2r)(z3r,z1,.7)b;
+  bot y4r=top y4l-minor_curve.uc=-ov_b.uc;
+  y6r=y6l+max(1,round(.9minor_curve.uc))=.7h;   
+  rt z5r=(w,v_stress[y4r,y6r])//;
+  lft z5l=(x5r-stem.uc,v_stress[y4r,y6r]);
+  good_x_for(4l)(z3l,z5l,.5)c; good_x_for(4r)(z3r,z5r,.5)d;
+  y100=(.5ductal)[y6l,y3l]; 
+
+  ref1=z4l{left} i_t z3l{upward} i_t if open_tail:z0l else: z2l{right} fi;
+  z7l=ref1 intersectionpoint ((0,y5r)..(w,y5r)//);
+  z7r=ref1 intersectionpoint ((0,y100)..(w,y100)//);
+  (t1,t2)=ref1 intersectiontimes ((0,y100)..(w,y100)//);
+  good_x_for(6l)(z7l,z5l,.52)e; good_x_for(6r)(z7r,z5r,.5)f;
+
+  ref2=z6r{left}...z7r; 
+    if (angle(direction 1 of ref2)<=-90-oblique)and 
+       (angle(direction 1 of ref2)>=-180-oblique):good_dir7=(0,0);
+      else: good_dir7=dir(-90-oblique);fi
+
+  p1'=z6l{left} i_t z7l{downward} i_t z4l{right} i_t z5l{upward} i_t cycle;
+  p1=if open_tail:(z7r+(0,eps){upward} i_t z0l--z0r 
+             else:(subpath(t1,infinity) of ref1--
+                   bulb.tr(z1,z2l,z2r,.75cs,.75bulb_thickness,90)soft    fi
+     o_t z3r{downward} o_t 
+     z4r{right} o_t z5r{upward} o_t z6r{left}...z7r{good_dir7})--cycle;
+
+  showpoints(0,1,2,3,4,5,6,7);
+  adjust(.5num_fit_c#+m_a*c_mfit#,.5num_fit_c#+m_a*c_mfit#); 
+  show_character; endchar;
+ enddef;
+
+ def number_six=save a,b;
+  vardef a=condition(open_tail)t; testing_codes; character_points; enddef; 
+  vardef b=condition(open_tail)f; testing_codes; character_points; enddef;
+  if test_all_characters:a;b;else:if open_tail:a;else:b;fi fi
+ enddef;
+
+ number_six;  save number_six;
+
+
+
+iff OK "7":  "The number 7"; 
+  beginchar("7",num_width_b#+b_mono#,cap#,0);
+
+  top z1=(0,h)//;
+  z3r=(w,h-apex.uc)//;      
+  z40=(w,h)//;
+  z5l=(.05w,0);
+  z6=(x5l+bowlstem.uc,0);
+  top y2r=bot y2l+max(1,.9stem.uc)=h;
+
+  numeric theta[],phi[],d[]; 
+    d1=thin_stem.uc;   
+    theta1=angle(length(z3r-z5l) +-+ d1,d1);  
+    phi1=angle(z3r-z5l)-theta1;
+  multpos(3,5)(thin_stem.uc,phi1-90);  
+  
+  onaline(3l,5l)(4l,41);  y41=y2l; y4l=.5[y5l,y41];
+  z4r=.5[z3r,z5r];
+  good_x_for(2r)(z1,z40,.5)a;  good_x_for(2l)(z1+(tip_thickness,0),z41,.5)b;
+
+  p1=(arm.tl(z1,z2l,z2r,.5as,.75tip_thickness,90-arm_angle+oblique)soft--z41
+       if softpath:)softjoin( else:--fi 
+     flex(z41,(z4l-(.05w,0)),z5l))softjoin(z5l--z6)softjoin
+     (flex(z6,(z4r-(.05w,0)),z3r))
+       if softpath:softjoin(z3r--z40)softjoin else:--fi (z40--z2r)--cycle;  
+
+  showpoints(1,2,3,4,5,6,40,41);
+adjust(.7num_fit_b#+m_e*b_mfit#,.3num_fit_b#+m_ee*b_mfit#); 
+show_character; endchar;
+
+
+iff OK "8":  "The number 8";
+  beginchar("8",num_width_c#+d_mono#,cap#,0);
+
+  bot z6r=(.5w,-ov_b.uc);      top y6l=bot y6r+thin_stem.lc;
+  top z2l=(x6r,h+ov_t.uc)//;   bot y2r=top y2l-thin_stem.lc;
+  z4=z8=.55[z6r,z2l];                 
+  rt z1l=(round(.95w),.5[y4,y2l])//; lft z1r=rt z1l-(thin_stem.lc,0);
+  lft z3l=(round(.05w),.5[y4,y2l])//; rt z3r=lft z3l+(stem.lc,0);  
+  z1=.5[z1l,z1r]; z3=.5[z3l,z3r];
+  rt z5r=(w,.5[y6r,y4])//;     lft z5l=rt z5r-(stem.lc,0);      z5=.5[z5l,z5r];
+  lft z7r=(0,.5[y6r,y4])//;    rt z7l=lft z7r+(thin_stem.lc,0); z7=.5[z7l,z7r];
+  good_x_for(2r)(z3r,z1r,.5)a;  
+  good_x_for(6l)(z7l,z5l,.5)b;
+
+  ref5=z3..z4..z5; ref6=z1..z8..z7; 
+  pos4(max(1,.95stem.lc),
+      (angle(postcontrol 1 of ref5-precontrol 1 of ref5))+90);
+  pos8(max(1,thin_stem.lc),
+      (angle(postcontrol 1 of ref6-precontrol 1 of ref6))+90);
+
+  ref1=z2r{left}  i_t z3r{downward} i_t z4r o_t z5r{downward} o_t z6r{left};
+  ref2=z6r{left}  o_t z7r{upward}   o_t z8l i_t z1r{upward}   i_t z2r{left};
+  ref3=z2l{right} o_t z1l{downward} o_t z8r i_t z7l{downward} i_t z6l{right};
+  ref4=z6l{right} i_t z5l{upward}   i_t z4l o_t z3l{upward}   o_t z2l{right};
+  (t1,t2)=ref1 intersectiontimes ref2; (t3,t4)=ref1 intersectiontimes ref3;
+  (t5,t6)=ref3 intersectiontimes ref4; (t7,t8)=ref2 intersectiontimes ref4;
+
+  p1 =(subpath(0,t4-eps)of ref3)--(subpath(t3+eps,infinity)of ref1)--
+      (subpath(0,t7-eps)of ref2)--(subpath(t8+eps,infinity)of ref4)--cycle;
+  p1'=(subpath(0,t1-eps)of ref1)--(subpath(t2+eps,infinity)of ref2)--cycle;
+  p2'=(subpath(0,t6-eps)of ref4)--(subpath(t5+eps,infinity)of ref3)--cycle;
+
+  showpoints(1,2,3,5,6,7,41,42,43,44);
+adjust(.5num_fit_c#+m_a*d_mfit#,.5num_fit_c#+m_a*d_mfit#); 
+show_character; endchar;
+
+
+
+ def character_points=.
+iff OK "9":  "The number 9"; 
+  beginchar(57+alt6,num_width_c#+c_mono#,cap#,0);
+
+  save_pairs(good_dir);
+  bot z0r=(.1w,-ov_b.uc)//; pos0(max(1,.9minor_curve.uc),-90+taper_angle); 
+  z1=(.15w,.02h)//;
+  rt z3r=(w,v_stress*h)//;  lft z3l=z3r-(stem.uc,0);
+  bot y2r=top y2l-minor_curve.uc=-ov_b.uc;
+  good_x_for(2l)(z3l,z1+(bulb_thickness,0),.7)a; good_x_for(2r)(z3r,z1,.7)b;
+  top y4r=bot y4l+minor_curve.uc=h+ov_t.uc; 
+  y6r=y6l-max(1,round(.9minor_curve.uc))=.3h;   
+  lft z5r=(0,(1-v_stress)[y4r,y6r])//;
+  rt z5l=(x5r+stem.uc,(1-v_stress)[y4r,y6r]);
+  good_x_for(4l)(z3l,z5l,.5)c; good_x_for(4r)(z3r,z5r,.5)d;
+  y100=(.5ductal)[y6l,y3l]; 
+
+  ref1=z4l{right} i_t z3l{downward} i_t if open_tail:z0l else:z2l{left} fi;
+  z7l=ref1 intersectionpoint ((0,y5r)..(w,y5r)//);
+  z7r=ref1 intersectionpoint ((0,y100)..(w,y100)//);
+  (t1,t2)=ref1 intersectiontimes ((0,y100)..(w,y100)//);
+  good_x_for(6l)(z7l,z5l,.52)e; good_x_for(6r)(z7r,z5r,.5)f;
+
+  ref2=z6r{right}...z7r; 
+    if (angle(direction 1 of ref2)<=90-oblique)and 
+       (angle(direction 1 of ref2)>=-oblique):good_dir7=(0,0);
+      else: good_dir7=dir(90-oblique);fi
+
+  p1'=z6l{right} i_t z7l{upward} i_t z4l{left} i_t z5l{downward} i_t cycle;
+  p1 =if open_tail:(z7r-(0,eps){downward} i_t z0l--z0r
+              else:(subpath(t1,infinity) of ref1--
+                    bulb.bl(z1,z2l,z2r,.75cs,.75bulb_thickness,90)soft     fi
+      o_t z3r{upward} o_t 
+      z4r{left} o_t z5r{downward} o_t z6r{right}...z7r{good_dir7})--cycle;
+
+  showpoints(0,1,2,3,4,5,6,7);
+  adjust(.5num_fit_c#+m_a*c_mfit#,.5num_fit_c#+m_a*c_mfit#); 
+  show_character; endchar;
+ enddef;
+
+ def number_nine=save a,b;
+  vardef a=condition(open_tail)t; testing_codes; character_points; enddef; 
+  vardef b=condition(open_tail)f; testing_codes; character_points; enddef;
+  if test_all_characters:a;b;else:if open_tail:a;else:b;fi fi
+ enddef;
+
+ number_nine;  save number_nine;
+
+
+

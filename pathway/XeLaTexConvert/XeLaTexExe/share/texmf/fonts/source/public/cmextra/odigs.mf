@@ -1,0 +1,11 @@
+% Computer Modern Oldstyle Digits Only
+
+font_coding_scheme:="Numerals only";
+mode_setup; font_setup;
+
+font_slant slant;  font_x_height x_height#;
+font_quad 18u#+4letter_fit#;
+
+input olddig;  % oldstyle numerals
+
+bye.

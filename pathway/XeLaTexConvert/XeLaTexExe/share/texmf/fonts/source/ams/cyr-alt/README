@@ -1,0 +1,60 @@
+Virtual font files for use with WNCY* fonts:
+
+These virtual font files are provided in response to requests from
+users in the TeX community. The encoding and ligatures included in the
+University of Washington Cyrillic (WNCY) fonts were designed to
+support the transliteration scheme used for keying Mathematical
+Reviews (MR). The ligatures prevent proper hyphenation when the fonts
+are used in cyrillic text, and the encoding is not compatible with
+other existing encodings for keying Russian text.  The enclosed
+virtual font files eliminate the ligatures whose purpose was to enable
+MR transliteration, while retaining the kerning information, and also
+provide alternate encodings to allow direct keying of Russian text.
+
+One set of virtual fonts uses the name WLCY*. This set does not
+re-encode the characters in the fonts. It simply removes the ligatures
+which prevent correct hyphenation of Russian text.
+
+The other two sets of virtual fonts re-encode the characters to
+conform to the other existing Cyrillic encoding conventions. The two
+most common encodings are KOI-8 and Alternativnyj Variant (AV), and we
+have included files to generate virtual fonts remapping the WNCY fonts
+to each of these encodings.  Both KOI-8 and AV encodings map the
+Cyrillic characters into the upper 128 character locations of the
+356-character font. In non-TeX environments, the Cyrillic characters
+are commonly accessed by turning on the eighth bit for input from the
+keyboard, thus allowing keying of Roman or Cyrillic characters from
+the same keyboard. In these virtual fonts, we have imitated this
+convention by mapping the standard CM characters to the lower 128
+locations and some of the WNCY characters to the upper 128 locations
+in the virtual fonts.
+
+The files for KOI-8 encoding are called WKCY*, and those for AV encoding
+are called WVCY*.
+
+These virtual font files are provided as is without any macro support,
+as the AMS does not use the alternative encodings in-house and does not
+have the expertise in-house to do an adequate job of providing such
+macro support. If volunteers in the user community can provide such
+macro support (e.g. a LaTeX package) and wish to contribute their work
+to the AMSFonts distribution we would of course be glad to incorporate
+it, to make it more easily available to other users.
+
+Similarly, support for (system-dependent) conveniences like keyboard
+remapping for typing Russian is beyond the resources of the AMS and must
+be obtained elsewhere.
+
+It is also assumed that the user understands about the use of virtual
+fonts in TeX. Those who wish to use these virtual fonts but are
+unfamiliar with the use of virtual fonts in TeX are referred to the
+documentation for their own local implementation of TeX. Any current
+implementation of TeX is capable of using virtual fonts, and includes
+documentation for their use. A complete description of virutal fonts by
+Donald Knuth is available in TUGBoat, the journal of the TeX Users Group,
+Volume 11, No. 1, pages 13-23.
+
+For this initial release, we provide only the 10-point virtual font
+for each font family.  These will serve the needs of the majority of
+users, and we shall develop and release the remaining sizes in the 
+near future.
+

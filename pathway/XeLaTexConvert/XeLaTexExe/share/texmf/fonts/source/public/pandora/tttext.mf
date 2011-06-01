@@ -1,0 +1,34 @@
+%*****************************************************************************
+%        Copyright (c) 1989 by N. N. Billawala
+%*****************************************************************************
+
+
+% tttext.mf     Typewriter Text character set
+
+font_coding_scheme:="TeX typewriter text";
+
+inv_exclamation:=oct"016"; inv_question_mark:=oct"017";
+
+font_slant oblique;                 % TeX fontdimen 1 slant
+font_normal_space mono#+.3width#;   % TeX fontdimen 2 normal word space
+font_normal_stretch .15width#;      % TeX fontdimen 3 interword stretch
+font_normal_shrink .1width#;        % TeX fontdimen 4 interword shrink
+font_x_height xheight#;             % Tex fontdinem 5 for accents
+font_quad width#;                   % TeX fontdimen 6 quad width
+font_extra_space width#;            % TeX fontdimen 7 extra space(period)
+
+ input widths                       % reference width and fitting infor
+ input panlowers                    % (26) lowercase roman alphabet
+ input caps                         % (26) uppercase roman alphabet
+ input number                       % (10) numerals
+ input pangreeku                    % (11) uppercase greek
+ input panaccent                    % (19) accents and ligatures common in sets
+ input panpunct                     % (21) punctuation: common in all char sets
+ input puncts                       % ( 2) punctuation: Spanish inverted ?!
+ input punctt                       % ( 8) punctuation: for roman text set
+ input ttchar                       % ( 5) ligatures with "f"
+
+ligtable "?": "`"=:inv_question_mark;
+ligtable "!": "`"=:inv_exclamation;
+
+bye

@@ -1,0 +1,136 @@
+%*****************************************************************************
+%        Copyright (c) 1989 by N. N. Billawala
+%*****************************************************************************
+
+
+% widths.mf a file containing width calculation information for the chars
+
+% Essentially all width information is contained in this file to eliminate
+% the need to alter the individual character files if width changes are desired.
+
+% Parts of characters are separated so that amounts can be altered as shapes 
+% change for the lowercase, the stems are all generally of the same weight,
+%  with possible variation in diagonals.
+% The uppercase has more variation in combination of thin/thick vertical
+%  stems, so the method for choosing widths was changed to depend on
+%  stem weights and an idea of proportions
+% Fixed width characters and numbers have a constant total width,
+%  but reference and fitting proportions vary within this space
+% Punctuation was partly based on uc/lc widths, but otherwise 
+%  independent amounts given.
+
+vardef variable_character_reference_widths=
+ save thick,thin,thickk,thinn,bowll;
+
+  thick=stem.uc#/max(width#,1);         uc:=.35*boldness; 
+     uc1=.35*boldness;  uc4=.35; % always=.35;
+     uc2:=1+if boldness<1:.25 else:0 fi; % uc2 for diagonals
+  thin=thin_stem.uc#/max(width#,1);     lc.arch_space:=.21*boldness;
+  thickk=stem.lc#/max(width#,1);        lc.bowl_space:=.24*boldness; 
+  thinn=thin_stem.lc#/max(width#,1);    lc.o_space:=.27*boldness;
+  bowll=bowlstem.lc#/max(width#,1);     lc.diagonal_space:=.3*boldness;
+
+  i_w=thickk;                               % i l    the |_w| is for "width"
+  j_w=thickk+.55*lc.arch_space;             % j
+  s_w=uc2*(thickk+lc.o_space);              % s t z ***
+  c_w=uc2*(bowll+lc.o_space);               % c ***
+  a_w=thickk+bowll+lc.arch_space;           % a(halfbowl)
+  b_w=thickk+bowll+lc.bowl_space;           % b a d e g p q k ss-lig
+  r_w=2thickk+.5*lc.arch_space;             % r f
+  n_w=2thickk+lc.arch_space;                % n h u
+  m_w=3thickk+2*lc.arch_space;              % m
+  o_w=2bowll+lc.bowl_space;                 % g(halfbowl)
+  oo_w=2bowll+lc.o_space;                   % o 
+  v_w=(uc2)*(thickk+thinn)+lc.diagonal_space; % v x y ***
+  w_w=(uc2)*(thickk+thinn)+thickk+1.5lc.diagonal_space; % w ***
+  oe_w=oo_w+o_w-bowll;                      % oe
+  ae_w=2b_w-bowll;                          % ae
+  accent_w=.8n_w;                           % accents
+
+  I_w=thick;                % I
+  J_w=thick+.5uc;           % J
+  E_w=thick+.85uc4;         % E F L GAMMA  ****
+  T_w=thick+1.25uc1;        % T     ****
+  B_w=2thick+.75uc;         % B P 
+  R_w=2thick+.85uc1;        % R PI XI K ****SIGMA
+  H_w=2thick+uc;            % H C 
+  D_w=2thick+1.1uc;         % D G 
+  O_w=2thick+1.25uc;        % O Q DELTA THETA
+  N_w=H_w;                  % N
+  S_w=thick+thin+.75uc;     % S Z  ****
+  U_w=thick+thin+uc;        % U   ****
+  A_w=(uc2)*(thick+thin)+1.25uc1; % A V Y LAMBDA X ****
+  M_w=(uc2)*2(thick+thin)+1.25uc; % M
+  W_w=(uc2)*(2thick+thin)+1.5uc1; % W    ****
+  AE_w=E_w+2/3*A_w;         % AEligature
+  OE_w=E_w+O_w-thick;       % OEligature
+                                         
+  v_a=.50;                  % for straight strokes  the |v_| is for "variable"
+  v_b=.42;                  % for arches
+  v_c=.28;                  % for bowls
+  v_d=.24;                  % for thick diagonals 
+  v_e=v_d-(thickk-thinn);   % for thin diagonals 
+  v_f=.20;                  % for half open shapes
+  v_g=.10;                  % for open strokes
+  v_h=.08;                  % for open strokes
+
+  v_A=.5;                   % for thick straight
+  v_B=v_A-(thick-thin);     % for thin straight 
+  v_C=.2;                   % for bowls
+  v_D=.16;                  % for thick diagonals
+  v_E=v_D-(thick-thin);     % for thin diagonals
+  v_F=.2;                   % for half open sides 
+  v_G=.16;                  % for half-very open sides 
+  v_H=.12;                  % for very open sides
+  v_I=.1;                   % for the L
+
+enddef;
+
+variable_character_reference_widths;  
+
+%***** for numbers *****
+
+num_width_a#=.2width#;  num_fit_a#+num_width_a#=.55width#;    % 1
+num_width_b#=.4width#;  num_fit_b#+num_width_b#=.55width#;    % 2 3 5 7 \$
+num_width_c#=.44width#; num_fit_c#+num_width_c#=.55width#;    % 6 9 0
+num_width_d#=.47width#; num_fit_d#+num_width_d#=.55width#;    % 8  
+num_width_e#=.50width#; num_fit_e#+num_width_e#=.55width#;    % 4
+
+%***** for single pitch fonts *****
+
+% |*_*mono#| gives the character reference width within the total per char width
+% |*_mfit#|  is the amount of space left after the reference width is taken away
+% |*_*mono#+*_mfit#| give the total width of the character
+% In the case of single pitch fonts, the total width is always the same.
+% In cases where, e.g., three instead of only one width is desired, the
+%   value of |1*mono#| can be changed
+
+ a_mono#:=.6mono#;  a_mfit#+a_mono#=mono#;     % fjrJ',.:;
+ b_mono#:=.7mono#;  b_mfit#+b_mono#=mono#;     % "mid" width
+ c_mono#:=.75mono#; c_mfit#+c_mono#=mono#;     % abdgkpq069
+ d_mono#:=.8mono#;  d_mfit#+d_mono#=mono#;     % eotvxyz4689CDGKOQ%&*^
+ e_mono#:=.9mono#;  e_mfit#+e_mono#=mono#;     % AVXY4
+ f_mono#:=.9mono#;  f_mfit#+f_mono#=mono#;     % mwMW@ ae oe AE OE
+
+define_pixels(a_mono,b_mono,c_mono,d_mono,e_mono,f_mono,
+              a_mfit,b_mfit,c_mfit,d_mfit,e_mfit,f_mfit); 
+                           
+% The following give fit adjustments for single pitch characters
+
+ m_a=.5;                   % this amt is always .5
+ m_b=.55; m_bb+m_b=1;      % BDEFGKPR7
+ m_c=.55; m_cc+m_c=1;      % abdghkmnpqu()
+ m_d=.6;  m_dd+m_d=1;      % C
+ m_e=.65; m_ee+m_e=1;      % cflrt AE []
+ m_f=.75; m_ff+m_f=1;      % JL
+
+%**********
+
+% need to account for serifs
+% recognizing that a straight ascender may carry different visual value as
+% straight of x-height
+
+%**********
+
+
+

@@ -1,0 +1,10 @@
+% Gray font for ljfour; proofsheet resolution is 75 pixels per inch.
+% Each pixel is represented by a 4x4 square, with 4/16 of the dots on.
+
+if mode<>ljfour: errmessage "This file is for ljfour only"; fi
+
+font_identifier "GRAYLJFOUR";
+
+boolean lightweight;
+
+input grayf

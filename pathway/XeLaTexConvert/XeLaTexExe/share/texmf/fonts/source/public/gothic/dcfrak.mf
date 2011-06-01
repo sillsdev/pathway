@@ -1,0 +1,8 @@
+% yfrak transformed to dcfrak by D. Taupin March 1994
+if unknown cmbase: input cmbase fi
+input cmfrabase;               % -sl   15-3-1991  25-3-1994 D.T.
+
+font_identifier:="dcfrak"; font_size 10pt#;
+numeric dc_layout; dc_layout:=1;
+
+input xxfrak.mf

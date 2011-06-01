@@ -1,0 +1,992 @@
+%*****************************************************************************
+%        Copyright (c) 1989 by N. N. Billawala
+%*****************************************************************************
+
+
+% caps.mf  uppercase roman alphabet
+
+% 26 characters
+
+
+
+iff OK "A":  "The letter A"; 
+  beginchar("A",A_w*width#+e_mono#,cap#,0);
+
+  min_limit(join_radius)(.5apex.uc);
+  top z20=(.5w,h+ov_apex.uc)//; pos20(apex.uc,0-apex_angle);
+  bot y3=0; z3l=whatever[z20l,(0,0)];
+  bot y6=0; z6r=whatever[z20r,(w,0)];
+  z20l=z1l; z20r=z4r;
+  multpos(1,3)(thin_stem.uc,constant_angle(z20l,(0,0),0));
+  multpos(4,6)(stem.uc,constant_angle(z20r,(w,0),0));
+
+  onaline(1l,3l)(2l);          y2l=y5r=cap_bracket_h; 
+  onaline(1r,3r)(2r,40,41,44); 
+  onaline(4l,6l)(5l,40,42,43); 
+  y41=y42=round(.45[serif_thickness,y40]-.35thin_stem.uc);        % bar bottom
+  y43=y44=y41+max(1,.7thin_stem.uc);
+  onaline(4r,6r)(5r);          y2r=y5l=min(y41,cap_bracket_h); 
+  ref1=z43--z40--z44; 
+
+  p1 =(fullserif.l(z3,z1,z2l,z2r,.5hs,.5hs) soften(z41,z42)
+       fullserif.r(z6,z4,z5l,z5r,.5hs,.5hs) soften(z20r,z20l) z2l)--cycle;
+  p1'=upnotch(ref1,angle(z20-z40),notch_length.uc)--cycle;
+
+  showpoints(1,2,3,4,5,6,20,40,41,42,43,44);
+adjust(v_E*fitbasis.uc#+m_a*e_mfit#,v_D*fitbasis.uc#+m_a*e_mfit#); 
+show_character; endchar;
+
+
+
+iff OK "B":  "The letter B"; 
+  beginchar("B",B_w*width#+b_mono#,cap#,0);
+
+  top lft z11l=(0,h)//;           multpos(11,14)(stem.uc,0);
+  bot lft z14l=(0,0);     
+  onaline(11l,14l)(12l,13l);      y13l=cap_bracket_h;
+  onaline(11r,14r)(1,5,5l,5r,9);  y12l=max(h-cap_bracket_h,y13l);
+   
+  top y2r=h;
+  bot y1=bot y2l=top y2r-minor_curve.uc;
+  y5=.55h;
+  top y4r=top y5r=round(y5+.45thin_stem.uc);
+  bot y4l=bot y5l=top y5r-max(1,.9thin_stem.uc);
+  y6=.75[y5l,y5r];
+  bot y8r=0; top y8l=top y9=bot y8r+minor_curve.uc;    
+  rt z3r=(round(.9w),v_stress[y6,y2r])//;
+  lft z3l=(rt x3r-max(1,.9bowlstem.uc),v_stress[y5r,y2l]);
+  rt z7r=(w,v_stress[y8r,y6])//; lft z7l=(rt x7r-bowlstem.uc,v_stress[y8l,y4l]);
+  z3=.5[z3l,z3r];
+
+  good_x_for(2r)(z1,z3r,.4)a;   good_x_for(2l)(z1,z3l,.4)b;
+  good_x_for(4r)(z5r,z3l,.4)c;  good_x_for(4l)(z5l,z7l,.4)d;                
+  good_x_for(6)(z5,z3,.6)e;                                 
+  good_x_for(8l)(z9,z7l,.4)f;   good_x_for(8r)(z9,z7r,.4)g;  
+
+  p1 =leftserif(z11,z14,z12l,z14r,.5hs)--leftserif(z14,z11,z13l,z11r,.5hs)
+      ...z8r{right} o_t z7r{upward} o_t z6{left}--
+      z6+(0,epsilon){right} o_t z3r{upward} o_t z2r{left}...cycle;
+  p1'=z4r{right} i_t z3l{upward} i_t z2l{left}...z1--z5r...cycle; 
+  p2'=z8l{right} i_t z7l{upward} i_t z4l{left}...z5l--z9...cycle;
+
+  showpoints(1,2,3,4,5,6,7,8,9,11,12,13,14);
+adjust(v_A*fitbasis.uc#+m_b*b_mfit#,v_F*fitbasis.uc#+m_bb*b_mfit#); 
+show_character; endchar;
+
+
+iff OK "C":  "The letter C"; 
+  beginchar("C",H_w*width#+d_mono#,cap#,0);
+
+  save_num(term_length)=if bulb_taper:c_and_s.uc else:cs fi;
+  rt z1=(.95w,.9h)//;
+  lft z3l=(0,(1-v_stress)*h)//;  rt z3r=lft z3l+(bowlstem.uc,0);  
+  rt z5l=(w,major_curve.uc-ov_t.uc+.05h)//;            
+  top y2l=bot y2r+minor_curve.uc=h+ov_t.uc; 
+  bot y4l=top y4r-major_curve.uc=-ov_t.uc; 
+  good_x_for(2l)(z3l,z1,.6)a;  good_x_for(2r)(z3r,z1-(bulb_thickness,0),.6)b; 
+  good_x_for(4l)(z3l,z5l,.5)c;
+  ref1=z4l{right}...z5l;
+  pos5(max(1,.7major_curve.lc),angle(direction 1 of ref1)+90);
+  good_x_for(4r)(z3r,z5r,.5)d; 
+  x4r:=min(x4r,x4l+minor_curve.uc);
+ 
+  p1=(bulb.tr(z1,z2r,z2l,term_length,bulb_thickness,90) o_t
+     z3l{downward} o_t z4l{right} o_t z5l 
+     if softpath:)softjoin(z5l--z5r)softjoin(else:--fi 
+     z5r i_t z4r{left} i_t z3r{upward} i_t z2r{right})--cycle;
+  
+  showpoints(1,2,3,4,5);
+adjust(v_C*fitbasis.uc#+m_d*d_mfit#,v_H*fitbasis.uc#+m_dd*d_mfit#); 
+show_character; endchar;
+
+
+iff OK "D":  "The letter D"; 
+  beginchar("D",D_w*width#+d_mono#,cap#,0);
+
+  top lft z11l=(0,h)//;      multpos(11,14)(stem.uc,0);
+  bot lft z14l=(0,0);       
+  onaline(11l,14l)(12l,13l); y13l=cap_bracket_h; 
+  onaline(11r,14r)(1,5);     y12l=max(h-cap_bracket_h,y13l);
+
+  top y2r=h;
+  bot y1=bot y2l=top y2r-major_curve.uc;
+  bot y4r=0;
+  top y5=top y4l=bot y4r+minor_curve.uc;
+  rt z3r=(w,v_stress*h)//; lft z3l=(rt x3r-bowlstem.uc,v_stress*h);  
+ 
+  good_x_for(2r)(z1,z3r,.4)a;  good_x_for(2l)(z1,z3l,.4)b;
+  good_x_for(4r)(z5,z3r,.3)c;  good_x_for(4l)(z5,z3l,.3)d;                
+
+  p1 =leftserif(z11,z14,z12l,z14r,.5hs)--leftserif(z14,z11,z13l,z11r,.5hs)
+      ...z4r{right} o_t z3r{upward} o_t z2r{left}...cycle;
+  p1'=(z4l{right} i_t z3l{upward} i_t z2l{left} soften(z1,z5)z4l{right})--cycle;
+
+  showpoints(1,2,3,4,5,11,12,13,14);
+adjust(v_A*fitbasis.uc#+m_b*d_mfit#,v_C*fitbasis.uc#+m_bb*d_mfit#); 
+show_character; endchar;
+
+
+iff OK "E":  "The letter E"; 
+  beginchar("E",E_w*width#+b_mono#,cap#,0);
+
+  top lft z11l=(0,h)//;           multpos(11,14)(stem.uc,0);
+  bot lft z14l=(0,0);             
+  onaline(11l,14l)(12l,13l);      y13l=cap_bracket_h; 
+  onaline(11r,14r)(1,4,4l,4r,6);  y12l=max(h-cap_bracket_h,y13l);
+  
+  top y2r=h; 
+  bot y1=bot y2l=top y2r-max(1,.95thin_stem.uc);
+  top rt z3=(.95w,h)//;
+  bot y7l=0; 
+  bot rt z8=(w,0);
+  top y6=top y7r=bot y7l+max(1,.97thin_stem.uc); 
+  y4=.55h; 
+  top y4r=bot y4l+max(1,.9thin_stem.uc)=top y5r=round(y4+.45thin_stem.uc);
+  
+  good_x_for(2r)(z1,z3,.6)a;  good_x_for(2l)(z1,z3,.6)b;
+  good_x_for(7r)(z6,z8,.6)c;  good_x_for(7l)(z6,z8,.6)d;                
+  good_x_for(5r)(z4,z3,.8)e;
+
+  p1=(leftserif(z14,z11,z13l,z11r,.5hs)..
+      arm.br(z8,z7r,z7l,.5as,.75tip_thickness,90-arm_angle)soft soften(z6,z4l)
+      arm.tr(z5r,z4l,z4r,.15as,.25tip_thickness,90) soften(z4r,z1)
+      arm.tr(z3,z2l,z2r,.4as,.75tip_thickness,90)soft...
+      leftserif(z11,z14,z12l,z14r,.75hs))--cycle;
+ 
+  showpoints(1,2,3,4,5,6,7,11,12,13,14);
+adjust(v_A*fitbasis.uc#+m_b*b_mfit#,v_F*fitbasis.uc#+m_bb*b_mfit#); 
+show_character; endchar;
+
+
+iff OK "F":  "The letter F"; 
+  beginchar("F",E_w*width#+b_mono#,cap#,0);
+
+  top y2r=h; 
+  bot y1=bot y2l=top y2r-max(1,.95thin_stem.uc);
+  top rt z3=(w,h)//;
+  top y4r=bot y4l+max(1,.9thin_stem.uc)=top y5r=round(.52h);
+
+  top lft z11l=(0,h)//;           multpos(11,14)(stem.uc,0);
+  bot lft z14l=(0,0);         
+  onaline(11l,14l)(12l,13l);      y13l=cap_bracket_h; y13r=min(y13l,y4l);  
+  onaline(11r,14r)(1,4l,4r,13r);  y12l=max(h-cap_bracket_h,y13l);
+
+  good_x_for(2r)(z1,z3,.6)a;  good_x_for(2l)(z1,z3,.6)b;
+  good_x_for(5r)(z4r,z3,.8)c;
+
+  p1=(fullserif(z14,z11,z13l,z13r,.5hs,.75hs)..z4l 
+        if softpath:)softjoin(else:--fi
+      arm.tr(z5r,z4l,z4r,.15as,.25tip_thickness,90) soften(z4r,z1)
+      arm.tr(z3,z2l,z2r,.4as,.75tip_thickness,90)soft...
+      leftserif(z11,z14,z12l,z14r,.75hs))--cycle;
+
+  showpoints(1,2,3,4,5,11,12,13,14);
+adjust(v_A*fitbasis.uc#+m_b*b_mfit#,v_G*fitbasis.uc#+m_bb*b_mfit#); 
+show_character; endchar;
+
+
+
+ def character_points=
+iff OK "G":  "The letter G";    
+  beginchar(71+alt9,D_w*width#+d_mono#,cap#,0);
+  save_num(term_length)=if bulb_taper:c_and_s.uc else:cs fi;
+  rt z1=(w-.25stem.uc,.9h)//;
+  lft z3l=(0,(1-v_stress)*h)//; rt z3r=(lft x3l+bowlstem.uc,(1-v_stress)*h);
+  top y2l=bot y2r+minor_curve.uc=h+ov_t.uc; 
+  bot y4l=top y4r-major_curve.uc=-ov_t.uc; 
+  good_x_for(2l)(z3l,z1,.6)a;  good_x_for(2r)(z3r,z1-(bulb_thickness,0),.6)b;
+  good_x_for(4l)(z3l,z5l,.5)c; good_x_for(4r)(z3r,z5r,.5)d; 
+  rt z5l=(w,.15h)//;           pos5(max(1,.75minor_curve.uc),130-oblique);  
+  z11r=(w,min(.45h,y1-as))//;  multpos(11,13)(stem.uc,0);
+  rt z13r=(w,0);
+    z20=(z5l--z5r i_t z4r{left})intersectionpoint(z11l--z13l);
+  onaline(11r,13r)(12r);
+   y12r=inlimit(y11r-cap_bracket_h)(y5l,y11r-serif_thickness);
+  onaline(11l,13l)(12l);        y12l=inlimit(y12r)(y20,y11l);
+  ref1=z4l{right} o_t z5l; ref2=z13--z20;       % pts added for terminal finish
+  z21=ref1 intersectionpoint ref2; 
+  (t1,t2)=ref1 intersectiontimes ref2;
+
+  p1=(bulb.tr(z1,z2r,z2l,term_length,bulb_thickness,90) o_t z3l{downward} o_t  
+     if G_spur:subpath (0,t1) of ref1 soften(z21,z13,z13r)        % spur option
+        else:z4l{right} o_t z5l if softpath:)softjoin( else:--fi fi
+      z5l--fullserif.r(z11,z13,z12l,z12r,.75hs,.25hs)--z20 
+        if softpath:)softjoin( else:--fi
+      z20 i_t z4r{left} i_t z3r{upward} i_t z2r{right})--cycle;
+  showpoints(1,2,3,4,5,11,12,13,20,21);
+  adjust(v_C*fitbasis.uc#+m_b*d_mfit#,v_F*fitbasis.uc#+m_bb*d_mfit#); 
+  show_character; endchar;
+ enddef;
+
+ vardef letter_G= save a,b;
+  vardef a=condition(G_spur)t; testing_codes; character_points; enddef; % spur
+  vardef b=condition(G_spur)f; testing_codes; character_points; enddef; % nospur
+  if test_all_characters:a;b; else:if G_spur:a; else:b; fi fi
+ enddef;
+ 
+ letter_G;  save letter_G;
+
+
+iff OK "H":  "The letter H"; 
+  beginchar("H",H_w*width#+b_mono#,cap#,0);
+
+  top lft z1l=(0,h)//;        multpos(1,4,11,14)(stem.uc,0);
+  bot lft z4l=(0,0);         
+  top rt z11r=(w,h)//;
+  bot rt z14r=(w,0);
+  onaline(1r,4r)(5l,5r);      top y5r=top y15r=round(.55h+.45thin_stem.uc);
+  onaline(11l,14l)(15l,15r);  bot y5l=bot y15l=top y5r-max(1,.9thin_stem.uc);
+  onaline(1l,4l)(2l,3l);      y3l=y13r=cap_bracket_h;   
+  onaline(1r,4r)(2r,3r);      y3r=y13l=min(cap_bracket_h,y5l);
+  onaline(11r,14r)(12r,13r);  y2r=y12l=max(h-cap_bracket_h,y5r);
+  onaline(11l,14l)(12l,13l);  y2l=y12r=max(h-cap_bracket_h,y3l);
+
+  p1=(fullserif(z4,z1,z3l,z3r,.5hs,.75hs) soften(z5l,z15l)
+      fullserif(z14,z11,z13l,z13r,.5hs,.75hs)--
+      fullserif(z11,z14,z12l,z12r,.75hs,.5hs) soften(z15r,z5r)
+      fullserif(z1,z4,z2l,z2r,.75hs,.5hs))--cycle;
+
+  showpoints(1,2,3,4,5,11,12,13,14,15);
+adjust(v_A*fitbasis.uc#+m_a*b_mfit#,v_A*fitbasis.uc#+m_a*b_mfit#); 
+show_character; endchar;
+
+
+iff OK "I":  "The letter I"; 
+  beginchar("I",I_w*width#+a_mono#,cap#,0);
+ 
+  bot lft z4l=(if singlepitch:round(.5(w-stem.uc)) else:0 fi,0)//;    
+  top lft z1l=(if singlepitch:round(.5(w-stem.uc)) else:0 fi,h)//;    
+  multpos(1,4)(stem.uc,0);
+  onaline(1l,4l)(2l,3l);  y3l=y3r=cap_bracket_h; 
+  onaline(1r,4r)(2r,3r);  y2l=y2r=max(h-cap_bracket_h,y3l);
+
+  p1=fullserif(z1,z4,z2l,z2r,.75hs,.5hs)--
+     fullserif(z4,z1,z3l,z3r,.5hs,.75hs)--cycle;
+
+  if singlepitch:pickup pencircle yscaled thin_stem.uc rotated -oblique;
+    lft top z11=(0,h); rt top z12=(w,h); lft bot z13=(0,0); rt bot z14=(w,0);
+    draw z11--z12; draw z13--z14; showpoints(11,12,13,14);
+    fi  
+
+  showpoints(1,2,3,4);
+adjust(v_A*fitbasis.uc#+m_a*a_mfit#,v_A*fitbasis.uc#+m_a*a_mfit#); 
+show_character; endchar;
+
+
+iff OK "J":  "The letter J";  
+  beginchar("J",J_w*width#+a_mono#,cap#,descender#);
+
+  rt z40r=(w,0);           multpos(1,40)(stem.uc,0);
+  top rt z1r=(w,h)//;
+  save_num(knob)=min(bulb_thickness,.6x40l);            
+  onaline(1r,40r)(2r,3r);  y3l=.25h; y3r=y3l-.1h; 
+  onaline(1l,40l)(2l,3l);  y2l=y2r=max(h-cap_bracket_h,y3l,y3r);  
+  bot y4r=top y4l-minor_curve.uc=-.5d-ov_b.uc;
+    good_x_for(4r)(z5,z3r,.4)a;                  
+    good_x_for(4l)(z5+(knob,0),z3l,.4)b;
+  lft z5=(0,.5[y4r,y4l])//;   
+
+  p1=terminalserif.l(z1,z40,z2l,z2r,ts,0) o_t z3l{downward} o_t 
+     bulb.bl(z5,z4l,z4r,.75cs,knob,90) i_t z3r{upward} i_t cycle;
+
+  if singlepitch:pickup pencircle yscaled thin_stem.uc rotated -oblique;
+    lft top z11=(.25w,h); rt top z12=(x1,h);
+    draw z11--z12; showpoints(11,12);
+    fi  
+
+  showpoints(1,2,3,4,5,40);
+adjust(m_dd*a_mfit#,.9v_A*fitbasis.uc#+m_d*a_mfit#); 
+show_character; endchar;
+
+
+
+ def K_without_beveled_join=
+iff OK "K":  "The letter K"; 
+  beginchar(75+alt5,R_w*width#+d_mono#,cap#,0); 
+  top lft z11l=(0,h)//;             multpos(11,14)(stem.uc,0);
+  bot lft z14l=(0,0);               
+  onaline(11r,14r)(12r,13r,3r,41);  y3r=.4h; y13l=cap_bracket_h;
+  onaline(11l,14l)(12l,13l);        y13r=max(y3r,y13l);
+                                    y12l=max(h-cap_bracket_h,y13l);
+  top rt z1r=(.95w,h)//; 
+  multpos(1,3)(max(1,.9thin_stem.uc),constant_angle(z1r,z3r,0));   
+  onaline(1,3)(44);                 top y44=h;
+  onaline(1l,3l)(2l,4l,41);         y12r=y2l=max(h-cap_bracket_h,y41);
+  onaline(1r,3r)(2r,40,42);         
+  y4l=.1[y41,y44];                 % y4l places bot/right arm
+  z6r=(w,0);
+  multpos(4,6)(max(1,.9stem.uc),constant_angle(z4l,z6r,max(1,.9stem.uc))lr); 
+  onaline(4r,6r)(5r,42);  y2r=max(h-cap_bracket_h,y42); 
+  onaline(4l,6l)(5l,40);  y5l=y5r=min(cap_bracket_h,y4l,y40);
+  onaline(4,6)(43);       bot y43=0;
+
+  p1=(fullserif(z14,z11,z13l,z13r,.5hs,.5hs) soften(z3r,z40)
+      fullserif.r(z43,z4,z5l,z5r,.5hs,.5hs)--z42 
+        if softpath:)softjoin(z42 fi--
+      fullserif.r(z44,z3,z2l,z2r,.5hs,.5hs)--z41
+        if softpath:)softjoin(z41 fi--
+      fullserif(z11,z14,z12l,z12r,.75hs,.5hs))--cycle; 
+
+  showpoints(1,2,3,4,5,6,11,12,13,14,40,41,42,43,44);
+  adjust(v_A*fitbasis.uc#+m_b*d_mfit#,v_G*fitbasis.uc#+m_bb*d_mfit#); 
+  show_character; endchar;
+ enddef;
+
+ def K_with_beveled_join= 
+iff OK "K":  "The letter K"; 
+  beginchar(75+alt5,T_w*width#+d_mono#,cap#,0);
+  top lft z11l=(0,h)//;       multpos(11,14)(stem.uc,0);
+  bot lft z14l=(0,0);         
+  onaline(11l,14l)(12l,13l);  y13l=y13r=cap_bracket_h; 
+  onaline(11r,14r)(12r,13r);  y12l=y12r=max(h-cap_bracket_h,y13l);
+  ref1=rightserif(z14,z11,z13l,z13r,.5hs)--rightserif(z11,z14,z12l,z12r,.5hs);
+  top rt z1r=(.95w,h)//;   
+  z3l=z4l=ref1 intersectionpoint ((0,.55h)--(w,.55h));
+  z6r=(w,0);
+
+  multpos(4,6)(max(1,.9stem.uc),constant_angle(z4l,z6r,max(1,.9stem.uc))lr);
+  multpos(1,3)(max(1,.9thin_stem.uc),constant_angle(z1r,z4l,thin_stem.uc));     
+
+  onaline(1l,3l)(2l);   
+  onaline(1r,3r)(2r,42);   
+  onaline(1,3)(44);       top y44=h;
+  onaline(4r,6r)(5r,42);  y2l=y2r=max(h-cap_bracket_h,y4l,y42); 
+  onaline(4l,6l)(5l);     y5l=y5r=min(cap_bracket_h,y4l,y42);
+  onaline(4,6)(43);       bot y43=0;
+
+  p1=fullserif(z14,z11,z13l,z13r,.5hs,.5hs)--
+     fullserif(z11,z14,z12l,z12r,.75hs,.5hs)--cycle; 
+  p2=(terminalserif.r(z43,z4,z5l,z5r,.5ts,base_terminal_angle)--z42 
+       if softpath:)softjoin(z42 fi--
+     fullserif.r(z44,z3,z2l,z2r,.5hs,.5hs)--z4l)--cycle;
+
+  showpoints(1,2,3,4,5,6,11,12,13,14,42,43,44);
+  adjust(v_A*fitbasis.uc#+m_b*d_mfit#,v_G*fitbasis.uc#+m_bb*d_mfit#); 
+  show_character; endchar;
+ enddef;
+
+ vardef letter_K= save a,b;
+  vardef a=condition(beveled_join)t;testing_codes;K_with_beveled_join;enddef;
+  vardef b=condition(beveled_join)f;testing_codes;K_without_beveled_join;enddef;
+  if test_all_characters:a;b;else:if beveled_join:a; else:b; fi fi
+ enddef;
+
+ letter_K;  save letter_K,K_with_beveled_join,K_without_beveled_join;
+
+
+
+iff OK "L":  "The letter L"; 
+  beginchar("L",E_w*width#+b_mono#,cap#,0);
+
+  top lft z11l=(0,h)//;       multpos(11,14)(stem.uc,0);
+  bot lft z14l=(0,0);        
+  onaline(11l,14l)(12l,13l);  y13l=cap_bracket_h;
+  onaline(11r,14r)(1,12r);    y12l=y12r=max(h-cap_bracket_h,y13l);
+  bot y2l=0; 
+  bot rt z3=(w,0);
+  top y1=top y2r=bot y2l+max(1,.95thin_stem.uc);
+  z0=z1-(0*stem.uc,0);
+  good_x_for(2r)(z1,z3,.6)a;  good_x_for(2l)(z1,z3,.6)b;                
+
+  p1=(leftserif(z14,z11,z13l,z11r,.5hs)...
+      arm.br(z3,z2r,z2l,.5as,.75tip_thickness,90-arm_angle)soft
+        if softpath:...z1)softjoin(z1--
+         else:...z0{left}--(z0+(0,eps)){right}... fi
+      fullserif(z11,z14,z12l,z12r,.5hs,.75hs))--cycle;
+
+  showpoints(0,1,2,3,11,12,13,14);
+adjust(v_A*fitbasis.uc#+m_f*b_mfit#,v_I*fitbasis.uc#+m_ff*b_mfit#); 
+show_character; endchar;
+
+
+
+iff OK "M":  "The letter M"; 
+  beginchar("M",M_w*width#+f_mono#,cap#,0);
+
+  save_bool(nonotch):=if(cap<40):true else:false fi;      % if real low res
+  min_limit(join_radius)(.5apex.uc);
+  lft x3l=0; bot y3=0; 
+  rt x12r=w; bot y12=0;
+  top z31l=(.0w,h+ov_apex.uc)//;multpos(21,22,23,31,33)(apex.uc,0-apex_angle);
+  top z33r=(1w,h+ov_apex.uc)//;
+  multpos(1,3)(thin_stem.uc,constant_angle(z31l,(0,0),0)); 
+  multpos(10,12)(if narrow_condition:w_narrow_amt
+                  else:1 fi[thin_stem.uc,stem.uc],constant_angle(z33r,(w,0),0));
+  onaline(3l,31l)(2l,21l);   y21=y23=h+ov_apex.uc;
+  onaline(12r,33r)(11r,23r);
+  good_x_for(22)(z3r,z12l,.5)a;  y22=if singlepitch:.25 else:.07 fi *y21;
+
+  z1l=z21l; z4r=z21r; z6l=z22l; z9r=z22r; z7l=z23l; z10r=z23r;
+  multpos(4,6)(if narrow_condition:w_narrow_amt else:1 fi[thin_stem.uc,stem.uc],
+               constant_angle(z21r,z22l,stem.uc));     
+  multpos(7,9)(thin_stem.uc,constant_angle(z23l,z22r,thin_stem.uc)lr);       
+
+  onaline(1r,3r)(2r,41);       
+  onaline(4l,6l)(5l,41); 
+  onaline(4r,6r)(5r,42);           
+  onaline(7l,9l)(8l,42);    y5r=y8l=notch_pos[y42,y1];
+  onaline(7r,9r)(8r,43);   
+  onaline(10l,12l)(11l,43); y5l=y8r=notch_pos[min(y41,y43),y6]; 
+  y2l=y2r=y11l=y11r=min(cap_bracket_h,y41,y43); 
+  ref1=z5l--z41--z2r; ref2=z11l--z43--z8r; ref3=z5r--z42--z8l; 
+
+  p1=(fullserif.l(z3,z1,z2l,z2r,.5hs,.75hs)..
+      upnotch.r(ref1,angle upward,notch_length.uc)etchright soften(z22l,z22r)
+      upnotch.r(ref2,angle upward,notch_length.uc)etchright..
+      fullserif.r(z12,z10,z11l,z11r,.5hs,.5hs) soften(z23r,z23l) 
+      downnotch.r(ref3,angle(z22-z42),notch_length.uc) 
+      soften(z21r,z21l) z2l)--cycle;
+
+  showpoints(1,2,3,4,5,6,7,8,9,10,11,12,21,22,23,31,33,41,42,43);
+adjust(v_B*fitbasis.uc#+m_a*f_mfit#,v_A*fitbasis.uc#+m_a*f_mfit#);
+show_character;endchar;
+
+
+
+iff OK "N":  "The letter N"; 
+  beginchar("N",N_w*width#+b_mono#,cap#,0);
+
+  save_bool(nonotch):=if(cap<40):true else:false fi;      % if real low res
+  min_limit(join_radius)(.5apex.uc);
+  bot lft z3l=(0,0);                 multpos(1,3,7,9)(thin_stem.uc,0); 
+  top rt z7r=(w,h)//;
+  top lft z31l=(0,h+ov_apex.uc)//;   multpos(21,22,31,32)(apex.uc,0-apex_angle);
+  bot rt z32r=(w,0-ov_apex.uc);
+  onaline(3l,31l)(2l,21l);  y21=h+ov_apex.uc;
+  onaline(7r,32r)(8r,22r);  y22=-ov_apex.uc;
+  z1l=z21l; z4r=z21r; z6l=z22l; z9r=z22r; 
+
+  multpos(4,6)(stem.uc,constant_angle(z21r,z22l,stem.uc));       
+  onaline(1r,3r)(2r,41);  
+  onaline(4l,6l)(5l,41);    
+  onaline(4r,6r)(5r,42);  y5l=notch_pos[y41,y9];
+  onaline(7l,9l)(8l,42);  y5r=notch_pos[y42,y1];
+  y2l=y2r=h-y8l=h-y8r=min(cap_bracket_h,y41);
+
+  ref1=z5l--z41--z2r; ref2=z5r--z42--z8l; 
+
+  p1=(fullserif(z3,z1,z2l,z2r,.5hs,.75hs)..
+      upnotch.r(ref1,angle upward,notch_length.uc)etchright 
+      soften(z22l,z22r) fullserif(z7,z9,z8l,z8r,.75hs,.5hs)..
+      downnotch.r(ref2,angle downward,notch_length.uc)etchleft 
+      soften(z21r,z21l) z2l)--cycle;
+
+ showpoints(1,2,3,4,5,6,7,8,9,21,22,31,32,41,42);
+adjust(v_B*fitbasis.uc#+m_a*b_mfit#,v_B*fitbasis.uc#+m_a*b_mfit#); 
+show_character; endchar;
+
+
+
+
+iff OK "O":  "The letter O"; 
+  beginchar("O",O_w*width#+d_mono#,cap#,0);
+
+  if singlepitch:save circ; circ1=circ2=circ3=.75; fi
+  top z1=(h_stress*w,h+ov_t.uc)//;
+  lft z2=(0,(1-v_stress)*h)//;
+  bot z3=((1-h_stress)*w,-ov_b.uc)//;
+  rt z4=(w,v_stress*h)//;
+
+  circular_shape(y1,y3,x2,x4,minor_curve.uc,bowlstem.uc); 
+
+ showpoints(1,2,3,4);
+adjust(v_C*fitbasis.uc#+m_a*d_mfit#,v_C*fitbasis.uc#+m_a*d_mfit#); 
+show_character; endchar;
+
+
+iff OK "P": "The letter P"; 
+  beginchar("P",B_w*width#+b_mono#,cap#,0);
+ 
+  top y2r=h;
+  bot y1=bot y2l=top y2r-minor_curve.uc;
+  y4=.45h; y5=.46h;
+  top y4r=top y5r=round(y4+.45minor_curve.uc);
+  bot y4l=top y4r-max(1,.9minor_curve.uc);
+  bot y5l=top y5r-max(1,.86minor_curve.uc);
+  rt z3r=(w,v_stress[y4l,y2r])//; 
+  lft z3l=(rt x3r-bowlstem.uc,v_stress[y4r,y2l]);
+ 
+  top lft z11l=(0,h)//;           multpos(11,14)(stem.uc,0);
+  bot lft z14l=(0,0);             y13l=cap_bracket_h; 
+  onaline(11l,14l)(12l,13l);      y12l=max(h-cap_bracket_h,y13l);
+  onaline(11r,14r)(1,5l,5r,13r);  y13r=min(cap_bracket_h,y5l);
+
+  good_x_for(2r)(z1,z3r,.4)a;  good_x_for(2l)(z1,z3l,.4)b;
+  good_x_for(4r)(z5r,z3l,.4)c; good_x_for(4l)(z5l,z3r,.4)d;                
+
+  p1=(fullserif(z14,z11,z13l,z13r,.5hs,.75hs)--z5l if softpath:)softjoin(z5l fi 
+     ...z4l{right} o_t z3r{upward} o_t z2r{left}...
+     leftserif(z11,z14,z12l,z14r,.5hs))--cycle;
+  p1'=z5r...z4r{right} i_t z3l{upward} i_t z2l{left}...z1--cycle;
+
+ showpoints(1,2,3,4,5,11,12,13,14);
+adjust(v_A*fitbasis.uc#+m_b*b_mfit#,v_G*fitbasis.uc#+m_bb*b_mfit#); 
+show_character; endchar;
+
+
+iff OK "Q":  "The letter Q";  
+  beginchar("Q",O_w*width#+d_mono#,cap#,0);	
+                         
+  if singlepitch:save circ; circ1=circ2=circ3=.75; fi
+  top z1=(h_stress*w,h+ov_t.uc)//;
+  lft z2=(0,(1-v_stress)*h)//;
+  bot z3r=((1-h_stress)*w,-ov_b.uc)//; pos3(minor_curve.uc,-90);
+  rt z4=(w,v_stress*h)//;
+
+  z11r=(.4x3l,y3r);        pos11(minor_curve.uc,60);
+  z12l=z3r-(.05w,0);       pos12(max(1,.8minor_curve.uc),90);  
+  z13r=(w,y12l)//;         pos13(max(1,.95stem.uc),60-.5oblique);     
+
+  circular_shape(y1,y3r,x2,x4,minor_curve.uc,bowlstem.uc);   
+  p2 =z11l{1,.4}..z12l{right}..z13l{1,.7}--               
+      z13r{-1,-.7}..z12r{left}..z11r{-1,-.4}--cycle;
+
+ showpoints(1,2,3,4,11,12,13);
+adjust(v_C*fitbasis.uc#+m_a*d_mfit#,v_C*fitbasis.uc#+m_a*d_mfit#); 
+show_character; endchar;
+
+
+
+
+ def R_without_beveled_join=
+iff OK "R":  "The letter R"; 
+  beginchar(82+alt5,R_w*width#+b_mono#,cap#,0); 
+  top y2r=h;
+  bot y1=bot y2l=top y2r-minor_curve.uc;
+  y5=.5h;
+  top y4r=top y5r=round(y5+.45minor_curve.uc);
+  bot y4l=bot y5l=top y5r-max(1,.9minor_curve.uc);
+  rt z3r=(if narrow_condition:w else:round(.9w)fi,v_stress[y4l,y2r])//;  
+  lft z3l=(rt x3r-bowlstem.uc,v_stress[y4r,y2l]);
+  top lft z11l=(0,h)//;            multpos(11,14)(stem.uc,0);  
+  bot lft z14l=(0,0);              y13l=cap_bracket_h; 
+  onaline(11l,14l)(12l,13l);       y12l=max(h-cap_bracket_h,y13l);
+  onaline(11r,14r)(1,5l,5r,13r);   y13r=min(cap_bracket_h,y5l);
+  good_x_for(2r)(z1,z3r,.4)a;   good_x_for(2l)(z1,z3l,.4)b;
+  good_x_for(4r)(z5r,z3l,.5)c;  good_x_for(4l)(z5l,z3r,.4)d;                
+  y20=y5l;
+
+  ref1=z5l{right}...z4l o_t z3r{upward}; good_x_for(20)(z5l,z3r,.3)e;
+  z7l=ref1 intersectionpoint ((x20,0)--(x20,h));
+  bot rt z9r=(w,0);
+  multpos(7,9)(max(1,.9stem.uc),constant_angle(z7l,(x9r,0),stem.uc)lr);        
+  onaline(7l,9l)(8l);     y8l=min(cap_bracket_h,y7l);
+  onaline(7r,9r)(8r,21);  y21=h;
+  onaline(7,9)(22);       y22=0;
+  z40=ref1 intersectionpoint (z21--z9r);  
+  (t1,t2)=ref1 intersectiontimes (z21--z9r);
+  y8r=min(cap_bracket_h,y40); 
+
+   p1 =(fullserif(z14,z11,z13l,z13r,.5hs,.75hs) soften(z5l,z7l)
+       terminalserif(z22,z7,z8l,z8r,.25ts,0)--z40 
+         if softpath:)softjoin(z40 fi
+       --subpath (t1,3) of ref1 o_t z2r{left}...
+       leftserif(z11,z14,z12l,z14r,.5hs))--cycle;
+   p1'=z4r{right} i_t z3l{upward} i_t z2l{left}...z1--z5r--cycle;
+
+  showpoints(1,2,3,4,5,7,8,9,11,12,13,14,20,21,22,40);
+  adjust(v_A*fitbasis.uc#+m_b*b_mfit#,v_F*fitbasis.uc#+m_bb*b_mfit#); 
+  show_character; endchar;
+ enddef;
+
+ def R_with_beveled_join=
+iff OK "R":  "The letter R"; 
+  beginchar(82+alt5,R_w*width#+b_mono#,cap#,0); 
+  top y2r=h;
+  bot y1=bot y2l=top y2r-minor_curve.uc;
+  y5=.5h;
+  top y4r=top y5r=round(y5+.35minor_curve.uc);
+  bot y4l=bot y5l=top y5r-max(1,.7minor_curve.uc);
+  rt z3r=(if narrow_condition:w else:round(.9w)fi,v_stress[y4l,y2r])//;  
+  lft z3l=(rt x3r-bowlstem.uc,v_stress[y4r,y2l]);
+  top lft z11l=(0,h)//;            multpos(11,14)(stem.uc,0);
+  bot lft z14l=(0,0);              y13l=cap_bracket_h; 
+  onaline(11l,14l)(12l,13l);       y12l=max(h-cap_bracket_h,y13l);
+  onaline(11r,14r)(1,5l,5r,13r);   y13r=min(cap_bracket_h,y5l);
+  good_x_for(2r)(z1,z3r,.4)a;   good_x_for(2l)(z1,z3l,.4)b;
+  good_x_for(4r)(z5r,z3l,.5)c;  good_x_for(4l)(z5l,z3r,.4)d;                
+  y20=y5r;
+
+  ref1=z5l...z4l{right} o_t z3r{upward}; 
+  ref2=z3l{downward} i_t z4r{left}...z5r; good_x_for(20)(z5r,z3l,.1)e; 
+  z7l=ref2 intersectionpoint ((x20,0)--(x20,h));
+  (t3,t4)=ref2 intersectiontimes ((x20,0)--(x20,h));
+
+  bot rt z9r=(w,0);
+  multpos(7,9)(max(1,.9stem.uc),constant_angle(z7l,(x9r,0),stem.uc)lr);        
+  onaline(7l,9l)(8l);     y8l=min(cap_bracket_h,y7l);
+  onaline(7r,9r)(8r,21);  y21=h;
+  onaline(7,9)(22);       y22=0;
+  z40=ref1 intersectionpoint (z21--z9r);
+  (t1,t2)=ref1 intersectiontimes (z21--z9r);
+  y8r=min(cap_bracket_h,y40); 
+ 
+  p1=(subpath(0,t3) of ref2--z7l                   if softpath:)softjoin(z7l fi
+      --terminalserif(z22,z7,z8l,z8r,.25ts,base_terminal_angle)--z40 
+          if softpath:)softjoin(z40 fi
+      --(subpath (t1,infinity) of ref1 o_t z2r{left}...
+      leftserif(z11,z14,z12l,z14r,.5hs)--
+      fullserif(z14,z11,z13l,z13r,.5hs,.75hs)--
+      z1--z2l{right} i_t z3l{downward}))--cycle;
+
+  showpoints(1,2,3,4,5,7,8,9,11,12,13,14,20,21,22,40);
+  adjust(v_A*fitbasis.uc#+m_b*b_mfit#,v_F*fitbasis.uc#+m_bb*b_mfit#); 
+  show_character; endchar;
+ enddef;
+
+ vardef letter_R= save a,b;
+  vardef a=condition(beveled_join)t;testing_codes;R_with_beveled_join; enddef;
+  vardef b=condition(beveled_join)f;testing_codes;R_without_beveled_join;enddef;
+  if test_all_characters:a;b;else:if beveled_join:a; else:b; fi fi
+ enddef;
+
+ letter_R;  save letter_R,R_with_beveled_join,R_without_beveled_join;
+
+
+
+iff OK "S":  "The letter S"; 
+  beginchar("S",S_w*width#+b_mono#,cap#,0);
+
+  save_num(term_length)=if bulb_taper:c_and_s.uc else:.9cs fi;
+  rt z1=(.93w,.95h)//;                 
+  lft z7=(0,.07h)//;     
+  top y2l=bot y2r+minor_curve.uc=h+ov_t.uc;  
+  bot y6r=top y6l-minor_curve.uc=-ov_b.uc;   
+  z4=(.5w,.52h)//;
+  lft z3l=(round(.05w),.5[y4,y2l])//; 
+  rt z5r=(w,.5[y6r,y4])//; 
+  good_x_for(2l)(z3l,z1,.5)a;  good_x_for(2r)(z3r,z1-(bulb_thickness,0),.4)b;
+  good_x_for(6r)(z7,z5r,.5)c;  good_x_for(6l)(z7+(bulb_thickness,0),z5l,.6)d;
+
+  z3=z3l+(.5stem.uc,0); z5=z5r-(.5stem.uc,0);
+  ref1=z3..z4..z5;
+  pos4(stem.uc,(angle(postcontrol 1 of ref1-precontrol 1 of ref1))+90);
+  rt z3r=(lft x3l+stem.uc,(1-v_stress)[y4r,y2r]); 
+  lft z5l=(rt x5r-stem.uc,v_stress[y6l,y4l]);
+
+  p1=bulb.tr(z1,z2r,z2l,term_length,bulb_thickness,90) 
+     o_t z3l{downward} o_t z4l i_t z5l i_t 
+     bulb.bl(z7,z6l,z6r,1.1term_length,bulb_thickness,90)
+     o_t z5r{upward} o_t z4r i_t z3r i_t cycle;
+
+ showpoints(1,2,3,4,5,6,7,8);
+adjust(v_F*fitbasis.uc#+m_a*b_mfit#,v_F*fitbasis.uc#+m_a*b_mfit#); 
+show_character; endchar;
+
+
+
+iff OK "T":  "The letter T"; 
+  beginchar("T",T_w*width#+b_mono#,cap#,0);
+
+  bot z40=(.5w,0); pos40(stem.uc,0);
+  bot y14=0; lft x14l=round x40l; multpos(11,14)(stem.uc,0);
+  w:=2*x14l+stem.uc; 
+  top z11=(x14,h)//;
+  onaline(11l,14l)(13l,12l);  y13l=y13r=cap_bracket_h;
+  onaline(11r,14r)(13r,12r);  
+
+  top lft z1=(0,h)//;
+  top rt z4=(w,h)//; 
+  top y2r=top y3r=h; x2r-x1=x4-x3r=.25w; x2r:=min(x2r,x11); x3r:=max(x3r,x11); 
+  bot y2l=bot y3l=bot y12l=bot y12r=top y2r-max(1,.95thin_stem.uc);
+  
+  good_x_for(2l)(z1+(tip_thickness,0),z12l,.6)a;  x2l:=min(x2l,x12l); 
+  good_x_for(3l)(z4-(tip_thickness,0),z12r,.6)b;  x3l:=max(x3l,x12r);
+
+  p1=(fullserif(z14,z11,z13l,z13r,.75hs,.75hs)--z12r 
+        if softpath:)softjoin(z12r fi
+      --arm.tr(z4,z3l,z3r,.4as,.75tip_thickness,90)soft--
+      arm.tl(z1,z2l,z2r,.4as,.75tip_thickness,90)soft--z12l
+        if softpath:)softjoin(z12l fi--z13l)--cycle;
+
+ showpoints(1,2,3,4,11,12,13,14,40);
+adjust(v_H*fitbasis.uc#+m_a*b_mfit#,v_H*fitbasis.uc#+m_a*b_mfit#); 
+show_character; endchar;
+
+
+
+
+ def U_like_lowercase=            % the letter U as a version of the lowercase u
+iff OK "U":  "The letter U"; 
+  beginchar(85+alt3,H_w*width#+b_mono#,cap#,0);
+  y5=ductal[arch_thickness.uc,h-serif_thickness];
+
+  bot lft z1l=(0,0);           multpos(1,4,11,14)(stem.uc,0);
+  top lft z4l=(0,h)//;        
+  top rt z11r=(w,h)//;              
+  bot rt z14r=(w,0);          y13r=cap_bracket_h; y12l=max(h-cap_bracket_h,y5);
+  onaline(11l,14l)(5,12l);    y12r=max(h-cap_bracket_h,y13r);
+  onaline(11r,14r)(12r,13r);  y2r=max((.95-r_arch)*h,arch_thickness.uc);
+  onaline(1l,4l)(2l,3l);      y2l=(.95-l_arch)*h; y3l=max(h-cap_bracket_h,y2l);
+  onaline(1r,4r)(2r,3r);      y3r=max(h-cap_bracket_h,y2r);
+
+  ref1=z12l..terminalserif.r(z14,z11,z12l,z13r,.75ts,x_terminal_angle);
+  ref2=arch.bl(z5,-ov_b.uc,z2r,z2l)uc; 
+  p1=terminalserif.l(z11,z14,z12l,z12r,.5ts,0)--softenit(ref1,ref2)--
+     terminalserif.l(z4,z1,z3l,z3r,.75ts,0)--
+     outer_juncture_path.br(ref2,ref1,2)--cycle;
+  showpoints(1,2,3,4,5,11,12,13,14);
+  adjust(.9v_A*fitbasis.uc#+m_a*b_mfit#,v_A*fitbasis.uc#+m_a*b_mfit#); 
+  show_character; endchar;
+ enddef;
+
+ def U_like_trajan=
+iff OK "U":  "The letter U"; 
+  beginchar(85+alt3,U_w*width#+b_mono#,cap#,0);
+  top lft z11l=(0,h)//;  multpos(11,14)(stem.uc,0);
+  lft z14l=(0,0);
+  top rt z1r=(w,h)//;    multpos(1,4)(thin_stem.uc,0);
+  rt z4r=(w,0);
+  y13l=y13r-.5major_curve.uc=.3[major_curve.uc,h-serif_thickness];
+  y3r=y3l=.3[minor_curve.uc,h-serif_thickness];
+  onaline(11l,14l)(12l,13l);   y12l=max(h-cap_bracket_h,y13l); 
+  onaline(11r,14r)(12r,13r);   y12r=max(h-cap_bracket_h,y13r);
+  onaline(11,14)(40);   
+  onaline(1l,4l)(2l,3l);       y2l=max(h-cap_bracket_h,y3l);
+  onaline(1r,4r)(2r,3r);       y2r=max(h-cap_bracket_h,y3r);
+  onaline(1,4)(41);            y40=y41=h;
+  bot y5l=top y5r-major_curve.uc=-ov_b.uc;     
+  good_x_for(5l)(z11l,z1r,.5)a;  good_x_for(5r)(z11r,z1l,.5)b;
+
+  p1=fullserif(z40,z14,z12l,z12r,.75hs,.75hs)...
+     z13l{downward} o_t z5l{right} o_t z3r{upward}...
+     fullserif(z41,z4,z2l,z2r,.75hs,.5hs)...
+     z3l{downward} i_t z5r{left} i_t z13r{upward}...cycle;
+
+  showpoints(1,2,3,4,5,11,12,13,14,40,41);
+  adjust(.9v_A*fitbasis.uc#+m_a*b_mfit#,.9v_B*fitbasis.uc#+m_a*b_mfit#); 
+  show_character; endchar;
+ enddef; 
+
+ vardef letter_U= save a,b;
+  vardef a=condition(like_lowercase)t; testing_codes;U_like_lowercase; enddef; 
+  vardef b=condition(like_lowercase)f; testing_codes;U_like_trajan;  enddef;
+  if test_all_characters:a;b; else:if like_lowercase:a;else:b; fi fi
+ enddef;
+ 
+ letter_U;  save letter_U,U_like_lowercase,U_like_trajan;
+
+
+
+ def character_points= 
+iff OK "V":  "The letter V"; 
+  beginchar(86+alt4,A_w*width#+e_mono#,cap#,0);
+  min_limit(join_radius)(.5apex.uc);
+  bot z20=(.5w,-ov_apex.uc); pos20(apex.uc,0-apex_angle);
+  lft z1l=(0,h)//;        multpos(1,3)(stem.uc,constant_angle(z1l,z20l,0));
+  rt z4r=(w,h)//;         multpos(4,6)(thin_stem.uc,constant_angle(z4r,z20r,0));
+  onaline(1l,20l)(2l,3l);   y3l=y20l;  
+  onaline(1r,3r)(2r,40);     
+  onaline(4r,20r)(5r,6r);   y6r=y20r;
+  onaline(4l,6l)(5l,40);    y2l=y2r=y5l=y5r=max(h-cap_bracket_h,y40);
+  onaline(1,3)(41);         top y41=top y42=h; 
+  onaline(4,6)(42);  
+  ref1=notch_pos[z40,z2r]--z40--notch_pos[z40,z5l];
+
+  if flat_diagonal_endings: 
+        p1=(fullserif.l(z41,z3,z2l,z2r,.5hs,.5hs) soften(z20l,z20r)
+            fullserif.r(z42,z6,z5l,z5r,.5hs,.5hs)..
+            downnotch.r(ref1,angle(z20-z40),notch_length.uc))..cycle;
+   else:p1=(terminalserif.l(z41,z3,z2l,z2r,.75ts,20)soft soften(z20l,z20r)
+            terminalserif.l(z42,z6,z5l,z5r,.75ts,0)soft..
+            downnotch.r(ref1,angle(z20-z40),notch_length.uc))..cycle;
+   fi
+  showpoints(1,2,3,4,5,6,20,40,41,42);
+  adjust(v_D*fitbasis.uc#+m_a*e_mfit#,v_E*fitbasis.uc#+m_a*e_mfit#); 
+  show_character; endchar;
+ enddef;
+
+ vardef letter_V= save a,b;
+  vardef a=condition(flat_diagonal_endings)t; testing_codes; 
+           character_points; enddef;
+  vardef b=condition(flat_diagonal_endings)f; testing_codes; 
+           character_points; enddef;
+  if test_all_characters:a;b; else:if flat_diagonal_endings:a; else:b; fi fi
+ enddef;
+ 
+ letter_V;  save letter_V;
+
+
+
+ def character_points= 
+iff OK "W":  "The letter W with flat diagonals"; 
+  beginchar(87+alt4,W_w*width#+f_mono#,cap#,0);
+  min_limit(join_radius)(.5apex.uc);
+  lft z1l=(0,h)//; 
+  rt z10r=(w,h)//;
+  bot z21=(.22w,-ov_apex.uc);   multpos(21,22,23)(apex.uc,0-apex_angle);
+  bot z23=(w-x21,-ov_apex.uc);
+
+  z3l=z21l; z6r=z21r; z9l=z23l; z12r=z23r;
+  multpos(1,3)(if narrow_condition:w_narrow_amt else:1 fi[thin_stem.uc,stem.uc],
+               constant_angle(z1l,z21l,0)); 
+  multpos(10,12)(thin_stem.uc,constant_angle(z10r,z23r,0));
+  onaline(1r,3r)(2r,41,46);    onaline(1l,3l)(2l);    onaline(1,3)(44);  
+  onaline(10l,12l)(11l,43,47); onaline(10r,12r)(11r); onaline(10,12)(45);
+
+  top y44=h;y45=y46=y47=y44; 
+  x22=.5[x46,x47];  y22=if singlepitch:.75h else:h+ov_apex.uc fi;
+  z4l=z22l; z7r=z22r;
+  multpos(4,6)(thin_stem.uc,constant_angle(z22l,z21r,thin_stem.uc)lr);        
+  multpos(7,9)(if narrow_condition:w_narrow_amt else:1 fi[thin_stem.uc,stem.uc],
+               constant_angle(z22r,z23l,stem.lc));       
+  onaline(4l,6l)(5l,41);    onaline(4r,6r)(5r,42);  
+  onaline(7l,9l)(8l,42);    onaline(7r,9r)(8r,43); 
+  y5l=y8r=notch_pos[max(y41,y43),y22]; y5r=y8l=notch_pos[y42,y3l]; 
+  y2l=y2r=y11l=y11r=max(h-cap_bracket_h,y41,y43);  
+
+  ref1=notch_pos[z41,z2r]--z41--z5l;
+  ref2=z8l--z42--z5r;
+  ref3=z8r--z43--notch_pos[z43,z11l];
+ 
+  if flat_diagonal_endings:
+    p1=(fullserif.l(z44,z3,z2l,z2r,.5hs,.5hs) soften(z21l,z21r) 
+        upnotch.r(ref2,angle(z22-z42),notch_length.uc)
+        soften(z23l,z23r) fullserif.r(z45,z12,z11l,z11r,.5hs,.5hs)..
+        downnotch.r(ref3,angle(z23-z43),notch_length.uc) soften(z22r,z22l) 
+        downnotch.r(ref1,angle(z21-z41),notch_length.uc))..cycle;
+    else:p1=(terminalserif.l(z44,z3,z2l,z2r,.75ts,20)soft soften(z21l,z21r) 
+        upnotch.r(ref2,angle(z22-z42),notch_length.uc)
+        soften(z23l,z23r) terminalserif.l(z45,z12,z11l,z11r,.5ts,0)soft..
+        downnotch.r(ref3,angle(z23-z43),notch_length.uc) soften(z22r,z22l) 
+        downnotch.r(ref1,angle(z21-z41),notch_length.uc))..cycle;
+    fi
+  showpoints(1,2,3,4,5,6,7,8,9,10,11,12,21,22,23,41,42,43,44,45,46,47);
+  adjust(.25[v_D,v_A]*fitbasis.uc#+m_a*f_mfit#,
+         .25[v_E,v_A]*fitbasis.uc#+m_a*f_mfit#);
+  show_character;endchar;
+ enddef;
+
+ vardef letter_W= save a,b;
+  vardef a=condition(flat_diagonal_endings)t; testing_codes;
+           character_points; enddef;
+  vardef b=condition(flat_diagonal_endings)f; testing_codes;
+           character_points; enddef;
+  if test_all_characters:a;b; else:if flat_diagonal_endings:a; else:b; fi fi
+ enddef;
+ 
+ letter_W;  save letter_W;
+
+
+
+
+ def character_points=
+iff OK "X":  "The letter X"; 
+  beginchar(88+alt4,A_w*width#+e_mono#,cap#,0);
+  top z1l=(.05w,h)//; top z11r=(.95w,h)//;
+  bot z4r=(w,0);      bot z14l=(0,0); 
+  multpos(1,4)(stem.uc,constant_angle(z1l,z4r,stem.uc)lr);        
+  multpos(11,14)(thin_stem.uc,constant_angle(z11r,z14l,thin_stem.uc));        
+  onaline(1l,4l)(2l,3l,42,43);   
+  onaline(1r,4r)(2r,3r,40,41);   
+  onaline(1,4)(21,22);             top y21=top y23=h;
+  onaline(11l,14l)(12l,13l,40,43); 
+  onaline(11r,14r)(12r,13r,41,42); 
+  onaline(11,14)(23,24);           bot y22=bot y24=0;
+  y2l=y2r=y12l=y12r=max(h-serif_thickness-.5cap_bracket_h,y40);
+  y3l=y3r=y13l=y13r=min(serif_thickness+.5cap_bracket_h,y42);
+
+  ref1=notch_pos[z40,z2r]--z40--notch_pos[z40,z12l];
+  ref2=notch_pos[z42,z3l]--z42--notch_pos[z42,z13r];
+
+  if flat_diagonal_endings:p1=fullserif(z21,z4,z2l,z2r,.5hs,.25hs)--z43--
+      fullserif(z24,z11,z13l,z13r,.5hs,.5hs)--
+      upnotch.r(ref2,angle(z40-z42),notch_length.uc)--
+      fullserif(z22,z1,z3l,z3r,.5hs,.5hs)--z41--
+      fullserif(z23,z14,z12l,z12r,.25hs,.5hs)-- 
+      downnotch.r(ref1,angle(z42-z40),notch_length.uc)--cycle;
+    else:p1=terminalserif.l(z21,z4,z2l,z2r,.5ts,0)soft--z43--
+      terminalserif.r(z24,z11,z13l,z13r,.5ts,0)soft--
+      upnotch.r(ref2,angle(z40-z42),notch_length.uc)--
+      terminalserif.r(z22,z1,z3l,z3r,.5ts,diag_terminal_angle)soft--z41--
+      terminalserif.l(z23,z14,z12l,z12r,.5ts,0)soft--
+      downnotch.r(ref1,angle(z42-z40),notch_length.uc)--cycle;
+    fi
+  showpoints(1,2,3,4,11,12,13,14,21,22,23,24,40,41,42,43);
+  adjust(v_G*fitbasis.uc#+m_a*e_mfit#,v_G*fitbasis.uc#+m_a*e_mfit#); 
+  show_character; endchar;
+ enddef;
+
+ vardef letter_X= save a,b;
+  vardef a=condition(flat_diagonal_endings)t; testing_codes; 
+           character_points; enddef;
+  vardef b=condition(flat_diagonal_endings)f; testing_codes;
+           character_points; enddef;
+  if test_all_characters:a;b; else:if flat_diagonal_endings:a; else:b; fi fi
+ enddef;
+ 
+ letter_X;  save letter_X;
+
+
+
+iff OK "Y":  "The letter Y"; 
+  beginchar("Y",A_w*width#+e_mono#,cap#,0);
+ 
+  bot z20=(.5w,0); multpos(15,20,42)(stem.uc,0);
+  bot y15=0; lft x15l=round x20l; 
+  w:=2*x15l+stem.uc; 
+
+  top lft z11l=(0,h)//; 
+  top rt z1r=(w,h)//; 
+  z42r=whatever[z15r,z15r+dir(90-oblique)]; y42r=.45[y15,y11l];
+  multpos(11,13)(stem.uc,constant_angle(z11l,z42r,stem.uc)lr);        
+  multpos(1,3)(thin_stem.uc,constant_angle(z1r,z42r,0));
+
+  z3r=z13r=z42r; 
+  onaline(1r,3r)(2r);        
+  onaline(1l,3l)(2l,40);     y2r=max(h-.5cap_bracket_h,y42r);
+  onaline(1,3)(45);          top y44=top y45=h;
+  onaline(11l,13l)(12l,41);  z41=whatever[z15l,z15l+dir(90-oblique)];
+  onaline(15l,41)(14l);      y14l=min(.3serif_thickness+.7cap_bracket_h,y41);
+  onaline(11r,13r)(12r,40);  y2l=y12r=max(h-.5cap_bracket_h,y40);
+  onaline(11,13)(44);        y12l=max(h-.5cap_bracket_h,y41);
+  onaline(15r,42r)(14r);     y14r=min(.3serif_thickness+.7cap_bracket_h,y42r);
+
+  ref1=notch_pos[z40,z12r]--z40--notch_pos[z40,z2l];
+
+  p1=(fullserif.l(z44,z13,z12l,z12r,.5hs,.25hs)--
+      z41 if softpath:)softjoin(z41 fi--
+      fullserif(z15,.5[z14l,z14r],z14l,z14r,.75hs,.75hs)--
+      z42r if softpath:)softjoin(z42r fi--
+      fullserif.r(z45,z42,z2l,z2r,.25hs,.5hs)--
+      downnotch.r(ref1,angle downward,notch_length.uc))--cycle; 
+
+  showpoints(1,2,3,11,12,13,14,15,20,40,41,42,44,45);
+adjust(v_H*fitbasis.uc#+m_a*e_mfit#,v_H*fitbasis.uc#+m_a*e_mfit#); 
+show_character; endchar;
+
+
+
+iff OK "Z":  "The letter Z"; 
+  beginchar("Z",S_w*width#+b_mono#,cap#,0);
+  
+  min_limit(join_radius)(.5apex.uc);
+  top rt z1r=(w,h-apex.uc)//; 
+  bot lft z3l=(0,apex.uc);        
+  multpos(1,3)(max(1,.98stem.uc),constant_angle(z1r,z3l,max(1,.98stem.uc)));
+
+  z43=(x1r,h);
+  z41=(x3l,0);
+  rt z14=(w,0); 
+  lft z11=(.05w,h)//;
+  top y12r=h; bot y12l=bot y40=top y12r-max(1,.95thin_stem.uc);
+  bot y13l=0; top y13r=top y42=bot y13l+max(1,.95thin_stem.uc);
+  onaline(1l,3l)(2l,40);  y2l=notch_pos[y40,y3l];
+  onaline(1r,3r)(2r,42);  y2r=notch_pos[y42,y1r];  
+  good_x_for(12r)(z11,z43,.5)a;good_x_for(12l)(z11+(tip_thickness,0),z40,.5)b;
+  good_x_for(13l)(z41,z14,.5)c;good_x_for(13r)(z42,z14-(tip_thickness,0),.5)d;
+ 
+  ref1=z2l--z40--z12l; ref2=z2r--z42--z13r;
+
+  p1=(arm.tl(z11,z12l,z12r,.4as,tip_thickness,90)soft--
+      rightnotch.r(ref1,angle right,notch_length.uc)etchdown
+      soften(z2l,z3l,z41,z13l)
+      arm.br(z14,z13r,z13l,.5as,tip_thickness,90-arm_angle)soft--
+      leftnotch.r(ref2,angle left,notch_length.uc)etchup
+      soften(z2r,z1r,z43) z12r)--cycle;
+
+  showpoints(1,2,3,11,12,13,40,41,42,43);
+adjust(v_H*fitbasis.uc#+m_a*b_mfit#,v_H*fitbasis.uc#+m_a*b_mfit#); 
+show_character; endchar; 
+
+

@@ -1,0 +1,356 @@
+%*****************************************************************************
+%        Copyright (c) 1989 by N. N. Billawala
+%*****************************************************************************
+
+
+% greeku.mf  uppercase Greek characters not coinciding with uppercase roman
+
+% 11 characters; iff OK "g": for testing
+
+
+iff OK "g":  "The uppercase Greek Gamma"; 
+  beginchar(0,E_w*width#+b_mono#,cap#,0);
+
+  top lft z11l=(0,h)//;       multpos(11,14)(stem.uc,0);
+  bot lft z14l=(0,0);        
+  onaline(11l,14l)(12l,13l);  y13l=y13r=cap_bracket_h;
+  onaline(11r,14r)(1,13r);    y12l=max(h-cap_bracket_h,y13l);
+  top y2r=h; 
+  top rt z3=(w,h)//;
+  bot y1=bot y2l=top y2r-max(1,.95thin_stem.uc);
+  z0=z1-(0*stem.uc,0);
+  good_x_for(2l)(z1,z3,.6)a;  good_x_for(2r)(z1,z3,.6)b;                
+
+  p1=(leftserif(z11,z14,z12l,z11r,.5hs)--
+      fullserif(z14,z11,z13l,z13r,.5hs,.75hs)
+        if softpath:--z1)softjoin(z1...
+         else:...(z0-(0,eps)){left}--z0{right}... fi
+      arm.tr(z3,z2l,z2r,.5as,.75tip_thickness,90+arm_angle))--cycle;
+
+  showpoints(0,1,2,3,11,12,13,14);
+adjust(v_A*fitbasis.uc#+m_f*b_mfit#,v_I*fitbasis.uc#+m_ff*b_mfit#); 
+show_character; endchar;
+
+
+
+iff OK "g":  "The uppercase Greek Delta";
+  beginchar(1,O_w*width#+e_mono#,cap#,0);
+  min_limit(join_radius)(.5apex.uc);
+
+  bot lft z21l=(0,0);         multpos(21,22)(apex.uc,90-apex_angle);
+  bot rt z22l=(w,0);
+  top z23=(.5[x21,x22],h)//;  pos23(apex.uc,0-apex_angle);
+  z1l=z23l; z2l=z21r; z3l=z21l; z4l=z22l; z5r=z22r; z6r=z23r;
+  multpos(1,2)(thin_stem.uc,constant_angle(z23l,z21r,0));
+  multpos(3,4)(major_curve.uc,90);
+  multpos(5,6)(stem.uc,constant_angle(z23r,z22r,0));
+  onaline(1r,2r)(41,43,51,52);  
+  onaline(3r,4r)(41,42,53,54);     
+  onaline(5l,6l)(42,43,55,56);
+  y51=y56=max(notch_pos,.5)[y43,y41]; 
+  y52=y55=max(notch_pos,.5)[y41,y43]; 
+  x53=max(notch_pos,.5)[x41,x42]; x54=max(notch_pos,.5)[x42,x41];
+
+  p1=(.5[z23l,z21r] soften(z21r,z21l,z22l,z22r,z23r,z23l) .5[z23l,z21r])--cycle;
+  p1'=leftnotch((z52--z41--z53),angle(z21-z41),notch_length.uc)--
+      rightnotch((z54--z42--z55),angle(z22-z42),notch_length.uc)--
+      upnotch((z56--z43--z51),angle(z23-z43),notch_length.uc)--cycle;
+
+  showpoints(1,2,3,4,5,6,21,22,23,41,42,43,51,52,53,54,55,56);
+adjust(v_E*fitbasis.uc#+m_a*e_mfit#,v_D*fitbasis.uc#+m_a*e_mfit#); 
+show_character; endchar;
+
+
+
+iff OK "g":  "The uppercase Greek Theta";
+  beginchar(2,O_w*width#+d_mono#,cap#,0);
+     
+  top z1=(h_stress*w,h+ov_t.uc)//;                                   % circle 
+  lft z2=(0,(1-v_stress)*h)//;
+  bot z3=((1-h_stress)*w,-ov_b.uc)//;  
+  rt z4=(w,v_stress*h)//;      
+
+  z10=(.5w,round(.52h))//;  pos10(round max(1,.75stem.uc),0);        % bar
+  z13=(0,.35*(abs(x4-x2)-2bowlstem.uc));
+  top z11=(z10+z13);
+  bot z12=(z10-z13);
+  ref1=fullserif(z11,z10,z10l,z10r,.2hs,.2hs)--
+       fullserif(z12,z10,z10l,z10r,.2hs,.2hs)--cycle;
+
+  p1=ref1 rotatedaround(z10,90);                                     % bar
+  circular_shape(y1,y3,x2,x4,minor_curve.uc,bowlstem.uc);            % circle
+ 
+ showpoints(1,2,3,4,10,11,12,13);
+adjust(v_C*fitbasis.uc#+m_a*d_mfit#,v_C*fitbasis.uc#+m_a*d_mfit#); 
+show_character; endchar;
+
+% Only y1/y3 and x2/x4 values actually used; the points are put in for proofs
+
+
+iff OK "g":  "The uppercase Greek Lambda";
+  beginchar(3,A_w*width#+e_mono#,cap#,0);
+
+  min_limit(join_radius)(.5apex.uc);
+  top z20=(.5w,h+ov_apex.uc)//; pos20(apex.uc,0-apex_angle);
+  bot y3=0; z3l=whatever[z20l,(0,0)];
+  bot y6=0; z6r=whatever[z20r,(w,0)];
+  z20l=z1l; z20r=z4r;
+  multpos(1,3)(thin_stem.uc,constant_angle(z20l,(0,0),0));
+  multpos(4,6)(stem.uc,constant_angle(z20r,(w,0),0));
+
+  onaline(1l,3l)(2l);          
+  onaline(1r,3r)(2r,40);
+  onaline(4l,6l)(5l,40);  y2l=y2r=y5l=y5r=min(cap_bracket_h,y40); 
+  onaline(4r,6r)(5r);     
+  ref1=notch_pos[z40,z5l]--z40--notch_pos[z40,z2r];
+
+  p1 =(fullserif.l(z3,z1,z2l,z2r,.5hs,.5hs)--
+       upnotch.r(ref1,angle(z20-z40),notch_length.uc)--
+       fullserif.r(z6,z4,z5l,z5r,.5hs,.5hs) soften(z20r,z20l) z2l)--cycle;
+
+  showpoints(1,2,3,4,5,6,20,40);
+adjust(v_E*fitbasis.uc#+m_a*e_mfit#,v_D*fitbasis.uc#+m_a*e_mfit#); 
+show_character; endchar;
+
+
+iff OK "g":  "The uppercase Greek Xi"; 
+  beginchar(4,R_w*width#+d_mono#,cap#,0);
+
+  top lft z1=(.02w,h)//;                                          % top arm
+  top rt z4=(.98w,h)//; 
+  onaline(1,4)(2r,3r); x2r=.25[x1,x4]; x3r=.75[x1,x4];
+  bot lft z5=(0,0);                                               % bottom arm
+  bot rt z8=(w,0); 
+  onaline(5,8)(6l,7l); x6l=.25[x5,x8]; x7l=.75[x5,x8];
+  multpos(2,3,6,7)(max(1,.9stem.uc),90-oblique);  
+
+  z10=(.5w,round(.52h))//;  pos10(max(1,.9stem.uc),0);            % middle arm
+  z11=z10+(0,.35*abs(x4-x1)); 
+  z12=z10-(0,.35*abs(x4-x1));
+  ref1=fullserif(z11,z10,z10l,z10r,.2hs,.2hs)--
+       fullserif(z12,z10,z10l,z10r,.2hs,.2hs)--cycle;
+
+  p1=arm.tl(z1,z2l,z2r,.5as,.75tip_thickness,90-arm_angle)--      % top arm
+     arm.tr(z4,z3l,z3r,.5as,.75tip_thickness,90+arm_angle)--cycle;
+  p2=arm.bl(z5,z6r,z6l,.5as,.75tip_thickness,90+arm_angle)--      % bottom arm
+     arm.br(z8,z7r,z7l,.5as,.75tip_thickness,90-arm_angle)--cycle;
+  p3=ref1 rotatedaround(z10,90);                                  % middle arm
+
+ showpoints(1,2,3,4,5,6,7,8,10,11,12);
+adjust(v_F*fitbasis.uc#+m_a*b_mfit#,v_F*fitbasis.uc#+m_a*b_mfit#); 
+show_character; endchar;
+
+
+iff OK "g":  "The uppercase Greek Pi"; 
+  beginchar(5,R_w*width#+b_mono#,cap#,0);
+
+  top lft z1l=(0,h)//;        multpos(1,4,11,14)(stem.uc,0);
+  bot lft z4l=(0,0);         
+  top rt z11r=(w,h)//;
+  bot rt z14r=(w,0);
+  onaline(1l,4l)(2l,3l);      y3l=y3r=y13l=y13r=cap_bracket_h;   
+  onaline(1r,4r)(2r,3r); 
+  onaline(11r,14r)(12r,13r);  y2r=y12l=h-max(1,.7thin_stem.uc);
+  onaline(11l,14l)(12l,13l);  y2l=y12r=max(h-cap_bracket_h,y3l);
+
+  p1=(fullserif(z4,z1,z3l,z3r,.5hs,.75hs)--z2r 
+        if softpath:)softjoin(z2r--z12l)softjoin( else:-- fi z12l--
+      fullserif(z14,z11,z13l,z13r,.5hs,.75hs)--
+      rightserif(z11,z14,z12l,z12r,.625hs)--
+      leftserif(z1,z4,z2l,z2r,.625hs))--cycle;
+
+  showpoints(1,2,3,4,11,12,13,14);
+adjust(v_A*fitbasis.uc#+m_a*b_mfit#,v_A*fitbasis.uc#+m_a*b_mfit#); 
+show_character; endchar;
+
+
+
+
+iff OK "g":  "The uppercase Greek Sigma"; 
+  beginchar(6,R_w*width#+b_mono#,cap#,0);
+
+  save_bool(nonotch):=if(cap<40):true else:false fi;      % if real low res
+  min_limit(join_radius)(.5apex.uc);
+  bot lft z1l=(0,0);      multpos(1,3)(max(1,.75stem.uc),90);
+  bot rt z3l=(w,0);
+  top lft z10r=(0,h)//;   multpos(10,12)(max(1,.95thin_stem.uc),90);
+  top rt z12r=(.95w,h)//;
+  lft z21l=(0,0);         multpos(21,23)(apex.uc,90-apex_angle);
+  lft z23r=(0,h)//;       pos22(max(1,.5apex.uc),90-apex_angle);
+  z22=(.75[x1l,x3l],.52h)//;
+
+  z4l=z21r; z6r=z22l; z9r=z22r; z7l=z23l; 
+  multpos(4,6)(thin_stem.uc,constant_angle(z22l,z21r,0));     
+  multpos(7,9)(stem.uc,constant_angle(z23l,z22r,0));       
+
+  onaline(1r,3r)(2r,41);    onaline(1l,3l)(2l);     x2l=.5[x1l,x3l];  
+  onaline(4l,6l)(5l,42);    onaline(4r,6r)(5r,41); 
+  onaline(7l,9l)(8l,42);    onaline(7r,9r)(8r,43); 
+  onaline(10l,12l)(11l,43); onaline(10r,12r)(11r); 
+  y5l=notch_pos[y42,y4l]; y5r=notch_pos[y41,y22l];
+  y8l=notch_pos[y42,y7l]; y8r=notch_pos[y43,y22r];
+  good_x_for(2r)(z41,z3r,.5)a;                     
+  x11r=.5[x10r,x12r];  good_x_for(11l)(z43,z12r,.5)b; 
+  ref1=z5r--z41--z2r; ref2=z11l--z43--z8r; ref3=z5l--z42--z8l;
+
+  p1=(arm.br(z3l,z2r,z2l,.5as,.75tip_thickness,90-arm_angle)soft--
+     leftnotch.r(ref1,angle(z21-z41),notch_length.uc)etchdown
+     --z22l if softpath:)softjoin(z22l--z22r)--( else:-- fi z22r--     
+     leftnotch.r(ref2,angle(z23-z43),notch_length.uc)etchdown
+     --arm.tr(z12r,z11l,z11r,.4as,.75tip_thickness,90+arm_angle)soft--
+     z23r if softpath:)softjoin(z23r--z23l)--( else:-- fi z23l--
+     rightnotch.r(ref3,angle(z22-z42),notch_length.uc)--
+     z21r if softpath:)softjoin(z21r--z21l)--( else:-- fi z21l--z2l)--cycle;
+
+  showpoints(1,2,3,4,5,6,7,8,9,10,11,12,21,22,23,41,42,43);
+adjust(v_G*fitbasis.uc#+m_b*b_mfit#,v_H*fitbasis.uc#+m_bb*b_mfit#); 
+show_character;endchar;
+
+iff OK "g":  "The uppercase Greek Upsilon"; 
+  beginchar(7,O_w*width#+f_mono#,cap#,0);
+ 
+  save_pairs(dir_limit);
+  bot z40=(.5w,0); pos40(stem.uc,0);
+  bot y14=0; lft x14l=round x40l; multpos(11,14)(stem.uc,0);
+  w:=2*x14l+stem.uc; 
+  top z11=(x14,.65h)//;
+  onaline(11l,14l)(13l);  y13l=y13r=min(cap_bracket_h,y11);
+  onaline(11r,14r)(13r); 
+                         
+  z1r=(0,.85h)//;  pos1(max(1,.5major_curve.uc),90-oblique);
+  z4r=(w,.85h)//;  pos4(max(1,.5major_curve.uc),90-oblique);
+  good_x_for(2r)(z1r,z11l,.5)a; top y2r=h; 
+  good_x_for(2l)(z1l,z11l,.5)c; y2l=y5l=y2r-major_curve.uc;
+  good_x_for(5r)(z11r,z4r,.5)b; top y5r=h; 
+  good_x_for(5l)(z11r,z4l,.5)d;  
+
+  dir_limit1=if abs(y5l-y4l)>abs(x5l-x4l):downward else:(0,0) fi;
+  dir_limit2=if abs(y5r-y4r)>abs(x5r-x4r):downward else:(0,0) fi;
+
+  p1=fullserif(z14,z11,z13l,z13r,.75hs,.75hs)...z11r{upward}...z5l{right}...
+     {dir_limit1}z4l--z4r{-dir_limit2}...z5r{left}...{downward}z11+(eps,0)--
+     z11{upward}...z2r{left}...{dir_limit2}z1r--
+     z1l{-dir_limit1}...z2l{right}...z11l{downward}...cycle;
+
+  showpoints(1,2,4,5,11,12,13,14,40);
+adjust(v_H*fitbasis.uc#+m_a*f_mfit#,v_H*fitbasis.uc#+m_a*f_mfit#); 
+show_character; endchar;
+
+
+
+iff OK "g":  "The uppercase Greek Phi"; 
+  beginchar(8,O_w*width#+e_mono#,cap#,0); 
+
+  save_num(stem_thickness)=round(if narrow_condition:
+    narrow_amt[thin_stem.uc,stem.uc] else:max(1,.8stem.uc) fi);
+  bot z40=(.5w,0); multpos(11,14,40)(stem_thickness,0);                % stem
+  z14l=round z40l; 
+  w:=2*x14l+stem_thickness; 
+  top z11=(x14,h)//;
+  onaline(11l,14l)(13l,12l,1l,1r,3l,3r); 
+  onaline(11r,14r)(13r,12r,4l,4r,6l,6r); 
+  y13l=y13r=.5cap_bracket_h;
+  y12l=y12r=max(h-.5cap_bracket_h,y13l);
+  top y1r=.85[y14+serif_thickness,y11-serif_thickness];
+  y6r=y1r; bot y1l=top y1r-max(1,.9minor_curve.uc); y6l=y1l;
+  bot y3r=.15[y14+serif_thickness,y11-serif_thickness];
+  y4r=y3r; top y3l=bot y3r+max(1,.9minor_curve.uc); y4l=y3l;
+  lft z2r=(0,(1-v_stress)*h)//; 
+  pos2(bowlstem.uc,180);
+  rt z5r=(w,v_stress*h)//; 
+  pos5(bowlstem.uc,0);
+
+  p1 =fullserif(z11,z14,z12l,z12r,.75hs,.75hs)--                       % stem
+      fullserif(z14,z11,z13l,z13r,.75hs,.75hs)--cycle;
+  p2 =z1r{left} o_t z2r{downward} o_t z3r{right} o_t z4r{right} o_t 
+      z5r{upward} o_t z6r{left} o_t cycle;
+  p1'=z1l{left} i_t z2l{downward} i_t z3l{right} i_t z4l{right} i_t 
+      z5l{upward} i_t z6l{left} i_t cycle;
+
+  showpoints(1,2,3,4,5,6,11,12,13,14);
+adjust(v_G*fitbasis.uc#+m_a*b_mfit#,v_G*fitbasis.uc#+m_a*b_mfit#); 
+show_character; endchar;
+
+% Only y1/y3 and x2/x4 values actually used; the points are put in for proofs
+
+
+iff OK "g":  "The uppercase Greek Psi"; 
+  beginchar(9,O_w*width#+f_mono#,cap#,0);
+
+  save_num(stem_thickness)=if narrow_condition:
+    narrow_amt[thin_stem.uc,stem.uc] else:max(1,.8stem.uc) fi; 
+  bot z40=(.5w,0); multpos(11,14,40)(stem_thickness,0);                % stem
+  z14l=round z40l; 
+  w:=2*x14l+stem_thickness; 
+  top z11=(x14,h)//;
+  save_num(ht)=round(y11-y14-serif_thickness);   % length of stem between serifs
+  onaline(11l,14l)(13l,12l);  y13l=y13r=cap_bracket_h;
+  onaline(11r,14r)(13r,12r);  y12l=y12r=max(h-cap_bracket_h,y13l);
+  onaline(11,14)(3l,3r);
+                                                                       % lute
+  lft z2l=(.05w,.5ht)//;
+  multpos(2,4)(if narrow_condition:narrow_amt else:.8 fi
+                  [thin_stem.uc,bowlstem.uc],0);
+  rt z4r=(.95w,y2l)//;  
+  multpos(0,1,5,6)(if narrow_condition:narrow_amt else:.7fi
+                      [thin_stem.uc,bowlstem.uc],0);
+  rt z0r=(abs(x2r-x2l),.85ht)//; 
+  lft z6l=(w-abs(x2r-x2l),y0l)//;  
+  z1r=.75[z2r,z0r-(0,tip_thickness)];     
+  z5l=.75[z4l,z6l-(0,tip_thickness)];
+  bot y3r=serif_thickness+.2ht;
+  top y3l=bot y3r+thin_stem.uc;  
+
+  p1=terminalserif.l(z0,z1,z1l,z1r,.5ts,0)soft...                      % lute
+     z2l o_t z3r{right} o_t z4r...
+     terminalserif.r(z6,z5,z5l,z5r,.5ts,0)soft...
+     z4l i_t z3l{left} i_t z2r...cycle;
+  p2=fullserif(z11,z14,z12l,z12r,.75hs,.75hs)--                        % stem
+     fullserif(z14,z11,z13l,z13r,.75hs,.75hs)--cycle;
+
+  showpoints(0,1,2,3,4,5,6,11,12,13,14);
+adjust(v_G*fitbasis.uc#+m_a*f_mfit#,v_G*fitbasis.uc#+m_a*f_mfit#); 
+show_character; endchar;
+
+
+
+iff OK "g":  "The uppercase Greek Omega";
+  beginchar(10,O_w*width#+d_mono#,cap#,0);
+  twotension:=3;
+  
+  bot lft z1=(0,0);                    bot rt z11=(w,0);
+  bot y2l=top y2r-max(1,.8stem.uc)=0;  bot y12l=top y12r-max(1,.8stem.uc)=0;
+   good_x_for(2l)(z1,z3l,.5)a;          good_x_for(12l)(z11,z13l,.5)b; 
+   good_x_for(2r)(z1,z4,.75)c;           good_x_for(12r)(z11,z14,.75)d;
+  bot z3l=(.4w,0);                     bot z13l=(.6w,0);
+  z3r=z3l+(0,min(2apex.uc,stem.uc))//; z13r=z13l+(0,min(2apex.uc,stem.uc))//;
+  z3=.5[z3l,z3r];                      z13=.5[z13l,z13r];   
+  lft z5r=(0,.55h)//;                  rt z15r=(w,.55h)//;
+  pos5(bowlstem.uc,180);               pos15(bowlstem.uc,0);
+  top y10r=bot y10l+minor_curve.uc=h+ov_t.uc; 
+  good_x_for(10r)(z5r,z15r,.53)e;     
+  good_x_for(10l)(z5l,z15l,.47)f;     
+  z10=.5[z10l,z10r]; save_num(amt)=.5*abs(y10r-y10l);    
+  x10r:=inlimit(x10r)(x10-amt,x10+amt);
+  x10l:=inlimit(x10l)(x10-amt,x10+amt); 
+
+  ref1=z10r{left}...z5r{downward}..tension atleast 1 and twotension..z3;
+  ref2=z13..tension atleast twotension and 1..z15r{upward}...z10r{left};
+  ref3=(-1,y2r)//--(w,y2r)//;
+  ref4=z3r..tension atleast twotension and 1..z5l{upward} i_t z10l{right} i_t 
+       z15l{downward}..tension atleast 1 and twotension..z13r; 
+ 
+  z4 =ref3 intersectionpoint ref1;      
+  z14=ref3 intersectionpoint ref2;      
+  (t1,t2)=ref3 intersectiontimes ref1;  
+  (t3,t4)=ref3 intersectiontimes ref2;  
+
+  p1=(arm.bl(z1,z2r,z2l,.5as,.5tip_thickness,90+arm_angle+.5oblique)soft
+     soften(z3l,z3r) ref4 soften(z13r,z13l)
+     arm.br(z11,z12r,z12l,.5as,.5tip_thickness,90-arm_angle+.5oblique)soft--
+     z14--subpath(t4,infinity)of ref2--subpath(0,t2)of ref1--z4)--cycle;
+
+  showpoints(1,2,3,4,5,10,11,12,13,14,15);
+adjust(.5num_fit_b#+m_a*d_mfit#,.5num_fit_b#+m_a*d_mfit#); 
+show_character; endchar;
+

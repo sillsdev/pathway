@@ -1,0 +1,6 @@
+% This is eccr10.mf in text format as of March, 4,  1997
+if unknown exbase: input exbase fi;
+
+
+gensize:=10;
+generate eccr

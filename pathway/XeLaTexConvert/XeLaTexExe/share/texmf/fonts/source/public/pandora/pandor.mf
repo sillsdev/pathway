@@ -1,0 +1,770 @@
+%*****************************************************************************
+%        Copyright (c) 1989 by N. N. Billawala
+%*****************************************************************************
+
+
+% pandor.mf  a base file which contains the macros used for creating Pandora
+
+
+%*****MAJOR CHARACTER PART MACROS**************************************
+
+
+boolean its_a_leftserif;                % in horizontal serif macro 
+
+vardef full_serif_points@#(expr A,B,Bl,Br,leftlength,rightlength)=
+  min_limit(join_radius)(.5serif_thickness);
+  (z1-B)=whatever*(A@#-B@#);            % makes center ref line
+  (z1l-Bl)=whatever*(A@#-B@#);          % makes parallel ref line on left
+  (z1r-Br)=whatever*(A@#-B@#);          % makes parallel ref line on right
+
+  y2=y2l=y2r=ypart A;                   % base of serif 
+  y1=y1l=y1r=y3=y4=ypart A if ypart A>ypart B:-else:+fi serif_thickness;
+                                        % puts |serif_thickness| between A and B
+  x5=x2=.5[x1l,x1r];                    % puts entasis at mid-base and makes it
+  y5=entasis[y2l,y1l];                  %   a proportion of the |serif_thickness|
+
+  if its_a_leftserif:x3=x2l=x1l-round(leftlength+serif_constant_amt); 
+   else:x4=x2r=x1r+round(rightlength+serif_constant_amt); fi
+enddef;                      
+
+vardef leftserif@#(expr A,B,Bl,Br,alength)=its_a_leftserif:=true;  % left serif
+  save x,y,p; path p[]; 
+  full_serif_points@#(A,B,Bl,Br,alength,0);                
+  p0:=Bl{z1l-Bl} if ctrls:..controls(onstem[z1l,Bl])and(onbase[z1l,z3])..
+     else:...fi {z3-z1l}z3;                        % the bracket curve
+  if midbracket_pull<>0: 
+    z3'l=z1l; pos3'(alength+5pt,.5[angle(B-A),if ypart A>ypart B:-fi 180]);
+    z8'=p0 intersectionpoint (z3'l--z3'r);         % z3'l--z3'r bisects bracket
+    z8=(midbracket_pull-eps)[z8',z1l];fi           % bracket pulled in at z8
+  if ypart A>ypart B:reverse fi   
+  ((if midbracket_pull=0:p0 else:Bl{z1l-Bl}...z8...{z3-z1l}z3 fi 
+   if softpath:)softjoin(z3--z2l)softjoin(else:--fi z2l..z5{right}))
+enddef;
+ 
+vardef rightserif@#(expr A,B,Bl,Br,alength)=its_a_leftserif:=false;% right serif
+  save x,y,p; path p[]; 
+  full_serif_points@#(A,B,Bl,Br,0,alength);
+  p4:=z4{z1r-z4} if ctrls:..controls(onbase[z1r,z4])and(onstem[z1r,Br])..
+     else:...fi {Br-z1r}Br;                        % the bracket curve
+  if midbracket_pull<>0:
+    z4'l=z1r; pos4'(alength+5pt,.5[angle(B-A),0]);
+    z9'=p4 intersectionpoint (z4'l--z4'r);         % z4'l--z4'r bisects bracket
+    z9=(midbracket_pull-eps)[z9',z1r];fi           % bracket pulled in at z9
+  if ypart A>ypart B:reverse fi
+   ((z5{right}..z2r if softpath:)softjoin(z2r--z4)softjoin(else:--fi
+    if midbracket_pull=0:p4 else:z4{z1r-z4}...z9...{Br-z1r}Br fi))
+enddef;
+                            
+vardef fullserif@#(expr A,B,Bl,Br,leftlength,rightlength)=         % full serif
+  save x,y,p; path p[];
+  p1=rightserif(A,B,Bl,Br,rightlength); p2=leftserif(A,B,Bl,Br,leftlength);
+  if ypart A>ypart B:(p1--p2)else:(p2--p1)fi
+enddef;
+
+
+
+vardef terminalserif@#(expr A,B,Bl,Br,tip_length,base_angle)suffix$=
+
+  save x,y,join_radius,aleft,atop,arc,ball,heel,midbracket_point,tip,p; 
+  boolean aleft,atop; pair arc,ball,heel,midbracket_point,tip; path p[];
+  aleft=(str@#="l"); atop=(ypart A>ypart B);
+
+  heel- if aleft:Br else:Bl fi =whatever*(A-B);  
+  heel=A+(whatever,0)rotated(if not aleft:180+ fi base_angle);
+  ball- if aleft:Bl else:Br fi =whatever*(A-B); ball=whatever[heel,A]; 
+
+  z0=A if atop:-else:+fi(0,terminal_thickness) rotated base_angle;
+                    % z0 added for cases of small |terminal_thickness| and length
+  z2=whatever[ball,if aleft:Bl else:Br fi]; (z0-z2)=whatever*(ball-A);
+                    % |terminal_thickness| and stem intersection when no bracket
+  z1=z2+(tip_length+serif_constant_amt,0)rotated angle(ball-A);
+                    % z1 is an inner tip point
+  tip=whatever[heel,ball]; z1-tip=whatever*(z0-A);
+                    % places tip on base by an amount past the stem
+  z3=heel if str$="soft":+(terminal_softness+1,0)rotated angle(tip-heel)fi;
+  arc=.5[z3,tip]+(terminal_entasis*terminal_thickness,0)rotated angle(B-A);
+
+  if aleft:z5=Bl; z6=Br; else:z5=Br; z6=Bl;fi
+  p1=z5{ball-z5} if ctrls:
+       ..controls(onstem[z2,z5])and(onbase[z2,(-eps)[z1,tip]])..
+         else:...fi {z1-z2}(-eps)[z1,tip]--z1;
+  join_radius:=min(terminal_softness,abs(heel-z3),.5abs(heel-z6));
+  p2=(arc{heel-tip}...z3{heel-tip}...{heel-tip}heel 
+     if str$="soft":)softjoin(heel fi --z6);
+  min_limit(join_radius)(.5terminal_thickness);
+
+  if midbracket_pull<>0:
+    bisecting_angle:=if aleft and(sign(angle(B-A))<>sign(angle(ball-A))):
+                    180+fi .5[angle(B-A),angle(ball-A)];
+                    % this angle bisects the inner angle/area of the bracket
+    z4=z2+(tip_length+5pt+serif_constant_amt,0)rotated bisecting_angle;
+                    % sets point z4 for a reference path along bisecting angle
+    midbracket_point=(z2--z4)intersectionpoint p1;
+                    % |midbracket_point| intersects the reference path along the 
+                    % bisecting angle and the reference path of the bracket
+    z9=(midbracket_pull-eps)[midbracket_point,z2];   
+                    % the final path goes through z9, which gives the amount of
+                    % "pull" toward the point where the stem meets the terminal
+    fi              % base with no bracketing
+
+  if atop=aleft:reverse fi
+   ((if midbracket_pull=0:p1
+      else:z5{ball-z5}...z9...{z1-z2}(-eps)[z1,z2]--z1 fi
+    if softpath:)softjoin(z1--tip)softjoin(else:--fi
+    tip..arc{heel-tip}--p2))
+enddef;
+	
+
+vardef arm@#                                 % uses |@#| strings of tl,tr,bl,br
+  (expr heel,inner_ref,outer_ref,tip_length,tipthickness,base_angle)suffix$=
+ 
+  save x,y,innertip,outertip,toward,control_point,tip_direction,midbase,section;
+  pair innertip,outertip,toward,control_point,tip_direction,midbase; 
+  path section[];             % separate parts of path for different |join_radii|
+  save_bool(atop)=((str@#="tr")or(str@#="tl"));
+  save_bool(curvedarm)=(atop and (ypart outer_ref>ypart heel))  or 
+                       ((not atop) and (ypart outer_ref<ypart heel)); 
+
+  toward=(xpart heel-xpart outer_ref,0);       % direction going toward the heel
+  tip_direction=dir(base_angle if atop:+180 fi-oblique); 
+  z0=whatever[heel,heel+eps*tip_direction]; y0=ypart inner_ref;
+  outertip=if not curvedarm:z0+(tip_length,0) 
+    else:heel+(max(tip_length,abs(z0-heel)),0) fi  rotated angle tip_direction;
+  midbase=.5[outertip,heel];
+  innertip=outertip+tipthickness*           
+           dir(base_angle+if((str@#="tl")or(str@#="bl")):- else:+fi 90-oblique);
+  control_point-innertip=whatever*(heel-outertip);
+  control_point=whatever[inner_ref,z0];
+  save_num(join_radius)=
+    min(.5abs(outertip-heel),abs(heel-outer_ref),arm_softness);
+  section1=(midbase--heel)softjoin(heel...outer_ref{-toward});
+  section2=
+   (inner_ref{toward}
+      if curvedarm:...
+          if abs(innertip-control_point)>abs(inner_ref-control_point):
+          if atop:{downward} else:{upward} fi fi
+        else:..controls(onstem[control_point,inner_ref])and
+                       (onbase[control_point,innertip])..{outertip-heel} fi 
+    innertip if softpath:)softjoin(innertip--outertip)softjoin( else:--fi
+    outertip--midbase);
+
+  if ((str@#="tl")or(str@#="br")):reverse fi  (section2--section1)
+enddef;
+
+vardef bulb@#                                                      % like arm
+ (expr heel,inner_ref,outer_ref,tip_length,tipthickness,base_angle)suffix$=
+ save x,y,athickness,alength,bulb_taper_angle; z0=heel;
+ if bulbs: save_bool(softpath)=true; fi 
+ if bulb_taper:athickness=1; bulb_thickness:=athickness;
+    bulb_taper_angle=base_angle 
+      if((str@#="tr")or(str@#="bl")):-else:+fi taper_angle;
+    alength=if (c_and_s.lc<>0)or(c_and_s.uc<>0):max else:min fi
+            (abs(ypart outer_ref-ypart inner_ref),tip_length);
+  else:athickness=tipthickness;alength=tip_length;bulb_taper_angle=base_angle;fi
+ arm@#(z0,inner_ref,outer_ref,alength,athickness,bulb_taper_angle)$
+enddef;
+
+
+vardef shortarm@#(expr AA,BB,CC,D,E,F)suffix$=  % short form inspired by DEK
+  save x,y,GG,HH,II,JJ,KK,LL,M; pair GG,HH,II,JJ,KK,LL; path M[];
+  save_bool(N)=((str@#="tr")or(str@#="tl"));
+  save_bool(O)=(N and(ypart CC>ypart AA))or((not N)and(ypart CC<ypart AA));
+  II=(xpart AA-xpart CC,0);       % direction going II the AA
+  KK=dir(F if N:+180 fi-oblique); 
+  z0=whatever[AA,AA+eps*KK]; y0=ypart BB;
+  HH=if not O:z0+(D,0)else:AA+(max(D,abs(z0-AA)),0)rotated angle KK;
+  LL=.5[HH,AA];
+  GG=HH+E*dir(F+if((str@#="tl")or(str@#="bl")):- else:+fi 90-oblique);
+  JJ-GG=whatever*(AA-HH); JJ=whatever[BB,z0];
+  join_radius:=min(.5abs(HH-AA),abs(AA-CC),arm_softness);
+  M1=(LL--AA)softjoin(AA...CC{-II});
+  min_limit(join_radius)(.5E);
+  M2=(BB{II} if O:...if abs(GG-JJ)>abs(BB-JJ):if N:{downward}else:{upward} fi fi
+        else:..controls(onstem[JJ,BB])and(onbase[JJ,GG])..{HH-AA} fi 
+    GG if softpath:)softjoin(GG--HH)softjoin( else:-- fi HH--LL);
+  if ((str@#="tl")or(str@#="br")):reverse fi  (M2--M1)
+enddef;
+
+
+
+
+% limiting directions for the joining point of the arch to the assumed stem
+
+vardef archlimit@#(expr p)= % limits dir at point 1 of path upward or downward
+ save a,b; pair b; b=(direction 1 of p); a=angle(b)+oblique; 
+   if (tr and((a<-180)or(-90<a)))or(tl and((a<-90)or(0<a))):downward
+    elseif (bl and((a<0)or(90<a)))or(br and((a<90)or(180<a))):upward  
+    else: b fi
+ enddef;
+vardef neg_archlimit@#(expr p)=dir(180+angle(archlimit@#(p))) enddef;
+
+vardef arch@#(expr inner_tip_pt,yy,inner_stem_pt,outer_stem_pt)suffix$=
+  save x,y,tl,bl,tr,br,pp; boolean tl,bl,tr,br; path pp[];
+  tl=(str@#="tl"); tr=(str@#="tr"); bl=(str@#="bl"); br=(str@#="br");
+  save_bool(ontop)=tl or tr;
+  save_pair(stem_dir)=if ontop:upward else:downward fi;    % joining dir at stem
+  save_pair(toward)=(xpart(inner_tip_pt-inner_stem_pt),0); % dir right or left
+  pickup pencircle scaled minimum_linethickness;
+ 
+  y0r=yy;                                       % connects extreme y-value
+  pos0(arch_thickness$,if ontop:+ else:-fi 90); %   to reference pts
+  good_x_for(0)(inner_tip_pt,inner_stem_pt,arch_reference)a;
+  z1l=inner_tip_pt;                             % placement of the "tip" of 
+  pos1(arch_tip$,if ontop:+ else:-fi90-oblique);%   the arch 
+  y2l=y0l; y2r=y0r;                             % z2l/z2r are actual arch points
+  good_x_for(2l)(inner_tip_pt,z0l,arch_inner_amt)b; 
+   if abs(x0l-x2l)>.5*arch_thickness$:x2l:=x0l 
+    if tl or bl:+else:-fi .5*arch_thickness$;fi
+  onaline(0,2l)(2r);            
+  onaline(1l,1r)(11); y11=if ontop:min else:max fi (.75[y0l,y0r],y1r);
+  if (tr or br):rt else:lft fi z10=.5[inner_tip_pt,z11];
+
+  pp0=z0r{toward}...z1r;                        % ref paths for direction limits
+  pp1=z0l{toward}...z1l;      
+  pp2=z0{toward}...z1;
+  pp3=outer_stem_pt{stem_dir} o_t z2r{toward}...z11{archlimit@#(pp0)}--
+      inner_tip_pt{neg_archlimit@#(pp1)}...z2l{-toward} o_t 
+      inner_stem_pt{-stem_dir};
+  if ensure_min_archthickness:                     % path ensures min thickness
+    for n:=1,2:draw z0{toward}...z10{archlimit@#(pp2)};endfor   fi
+
+  if (tr or br)<>ontop:reverse fi pp3
+enddef; 
+
+
+
+vardef outer_juncture_path@#(expr arch_path,stem_path,atime)=     % for |tr_bl|
+  save x,y,t,tl,bl,tr,br,atop,aleft,pp,angle_limit;  
+  boolean tl,bl,tr,br,atop,aleft; path pp[];
+  tl=(str@#="tl"); tr=(str@#="tr"); bl=(str@#="bl"); br=(str@#="br");  
+  atop=tl or tr;  aleft=tl or bl;
+  if softjuncture=false:save join_radius; join_radius:=eps;fi
+
+  z10=point atime of arch_path; 
+  z11=point (atime-1) of arch_path;
+  z12=z10+(eps,0)rotated angle(z10-precontrol atime of arch_path);
+  pp1=subpath (0,atime) of arch_path--z12;
+  z1=pp1 intersectionpoint stem_path;
+  (t1,t2)=pp1 intersectiontimes stem_path;
+  z2=z1+(juncture_opening,0)rotated(if aleft:180 else:0 fi-oblique);
+  angle_limit1=max(if atop:0,else:-179,-fi 90-oblique-stemcut_angle);
+  z3=z2 if juncture_opening>0:+(abs(z11-z10)+2,0)rotated angle_limit1 fi;
+  z4=(z2--z3) intersectionpoint reverse stem_path;
+  (t3,t4)=(z2--z3) intersectiontimes reverse stem_path;
+  (t5,t6)=z4 intersectiontimes stem_path;
+
+  if archcut_angle<>0:
+     angle_limit2=if tl or br:max else:min fi 
+      (angle(z11-z10),angle(precontrol atime of arch_path-z10)-archcut_angle);
+     z5=z1+(abs(z11-z10)+2,0)rotated angle_limit2;
+     z6=(z5--z1) intersectionpoint pp1;    
+     (t7,t8)=(z5--z1) intersectiontimes pp1; 
+     (subpath(0,t8)of arch_path soften(z6,z1,z2,z4)       % indent into arch 
+  else:(subpath(0,t1)of arch_path soften(z1,z2,z4)        % indent into stem 
+  fi    (subpath(t4,0)of reverse stem_path))
+enddef; 
+
+
+% Only used in the lower case characters
+
+vardef bowl@#(expr major_tip,yy,minor_tip,yyy,inner_bowl,outer_bowl)=
+ save arch_thickness,arch_tip,arch_reference,arch_inner_amt;
+ save major,minor; path major,minor;
+  arch_thickness.lc:=   minor_curve.lc;
+  arch_tip.lc:=         minor_bowl_tip.lc;
+  arch_reference:=      minor_bowl_reference;
+  arch_inner_amt:=      minor_bowl_inner_amt;
+   minor=arch if str@#="r":br else:tl fi(minor_tip,yyy,inner_bowl,outer_bowl)lc;
+  arch_thickness.lc:=   major_curve.lc;
+  arch_tip.lc:=	        major_bowl_tip.lc;
+  arch_reference:=      major_bowl_reference;
+  arch_inner_amt:=      major_bowl_inner_amt;
+   major=arch if str@#="r":tr else:bl fi (major_tip,yy,inner_bowl,outer_bowl)lc;
+  major--minor
+enddef;
+
+vardef bowl_counter(expr bowlpath)=      % returns the counter of a bowl path
+  save x,y;
+  z1=point 3 of bowlpath; z2=point 8 of bowlpath; z3=.5[z1,z2];
+  min_limit(join_radius)(.5*abs(z1-z2));
+  if softpath:(z3--z1)softjoin(z1--subpath(3,8)of bowlpath--z2)softjoin(z2--z3)
+   else:subpath(3,8)of bowlpath
+   fi
+enddef;
+vardef outer_bowlpath(expr p)=subpath(9,11)of p--subpath(0,2)of p enddef;  
+                          % return the major and minor outer paths of a bowl
+
+
+vardef circular_shape(expr ytop,ybot,xleft,xright,topstroke,sidestroke)=
+  save x,y,amt,ref; path ref[],ref[]';    
+  top y1r=ytop;  bot y1l=top y1r-topstroke;  
+  bot y3r=ybot;  top y3l=bot y3r+topstroke;  
+  lft z2r=(xleft,(1-v_stress)*h);    rt z2l=(lft x2r+sidestroke,(1-v_stress)*h);
+  rt z4r=(xright,v_stress*h);        lft z4l=(rt x4r-sidestroke,v_stress*h);  
+  good_x_for(1r)(z2r,z4r,h_stress)a;     good_x_for(1l)(z2l,z4l,(1-h_stress))b;
+  good_x_for(3r)(z2r,z4r,(1-h_stress))c; good_x_for(3l)(z2l,z4l,h_stress)d; 
+  z1=.5[z1l,z1r]; amt1=.5*abs(y1r-y1l);  
+  z3=.5[z3l,z3r]; amt3=.5*abs(y3r-y3l);
+  x1r:=inlimit(x1r)(x1-amt1,x1+amt1);  x1l:=inlimit(x1l)(x1-amt1,x1+amt1); 
+  x3r:=inlimit(x3r)(x3-amt3,x3+amt3);  x3l:=inlimit(x3l)(x3-amt3,x3+amt3);
+  ref1=z1r{left} o_t_c z2r{downward} o_t_c z3r{right} o_t_c 
+       z4r{upward} o_t_c cycle;
+  ref1'=z1l{left} i_t z2l{downward} i_t z3l{right} i_t z4l{upward} i_t cycle;
+
+  if mode<>proof:fill ref1; unfill ref1'; 
+   else:pickup pencircle; draw ref1; draw ref1'; fi
+enddef;
+
+def o_t=..tension atleast circ1.. enddef;    % outer curve tensions
+def i_t=..tension atleast circ2.. enddef;    % inner curve tensions
+def o_t_c=..tension atleast circ3.. enddef;  % outer |circular_shape| tensions
+
+	
+%***** SOME ACCENT AND PUNCTUATION CHARACTER PART MACROS *****************
+%*****
+% The dot macro specifies a round path of diameter <size> to be placed from
+%   a reference point. 
+% Note that this dot does not slant with any obliqueness.
+% tension given the same as that for the circular shapes, since the actual
+%   "roundness" of the dot isn't very important; more important is that there
+%   is a mark there for distinguishing the character.
+% Used mostly in punctuation and accent characters
+
+vardef dot@#(expr ref_pt,size)=
+  save x,y;
+      if str@#="b":z1l=ref_pt;          % dot placed above reference point
+  elseif str@#="t":z1r=ref_pt;          % dot placed below reference point 
+  elseif str@#="l":z2l=ref_pt;          % dot placed to right of reference point
+  elseif str@#="r":z2r=ref_pt;          % dot placed to left of reference point 
+              else:z1=ref_pt;  fi       % reference point is in center of dot
+  z2=z1; pos1(size,90); pos2(size,0);
+  z1r{left} o_t z2l{down} o_t z1l{right} o_t z2r{up} o_t cycle 
+enddef;
+
+
+%*****
+
+% The |prime_accent| macro makes a four-sided polygon. 
+% It assumes that the top end is as thick or thicker than the bottom 
+%   end and rounds the thicker end.
+% Theta is the angle at the ends; flattened in bold chars,
+%   but theta could be an arbitrary value.
+% Used in grave/acute/long Hungarian accents
+
+vardef prime_accent(expr top_pt,bot_pt,top_thickness,bot_thickness)=
+  save x,y,theta,adjustment;
+  z1=top_pt; z3=bot_pt;
+  if y3=y1: x1:=x1+eps; fi      % keeps from division by 0 error on next line
+  if bold:theta=0;adjustment=1/cosd (angle(z3-z1)+90);
+    else:theta=angle(z3-z1)+90; adjustment=1;fi
+  pos1(top_thickness*adjustment,theta);
+  pos3(bot_thickness*adjustment,theta);
+  z2r=z1r+(min(.5top_thickness,.5*abs(z3-z1)),0)rotated angle(z3r-z1r);
+  z2l=z1l+(min(.5top_thickness,.5*abs(z3-z1)),0)rotated angle(z3l-z1l);
+  onaline(1l,3l)(6l,7l);
+  onaline(1r,3r)(6r,7r); 
+  if x1>x3:y6l=y1r; y7r=y3l; else:y6r=y1l; y7l=y3r; fi
+  if realsoft_accents:
+     (z2r{z1r-z3r}...z1{z1l-z1r}...z2l{z3l-z1l} soften(z3l,z3r) z2r)--cycle
+    elseif x1>x3:z6l--z3l--z7r--z1r--cycle
+    else:z1l--z7l--z3r--z6r--cycle     fi
+enddef;
+
+%*****
+		
+% The comma macro makes a dot-like figure with a tail.
+% The reference point is placed in the center of the <head> or <dot part>.
+% The <size> is the diameter of the <head>.
+% The tail extends past the head by |<tail_length>|. 
+% The thickness at the tip of the tail is |<tail_tip>|.
+% The |<tail_placement>| positions the |tail_tip| in relation to the head.
+% And the |<comma_dot_indent>| affects the transition from |tail_tip| to head.
+% Used in comma/semi-colon/left and right, single and double quotes
+
+vardef comma(expr pt,size,tail_length,tail_tip,tail_placement)=
+  save x,y,ref; path ref;
+  save_num(tail)=if prime:.5 else:tail_placement fi;
+  z1=z2=pt;  pos1(size,90-oblique);  pos2(size,0-oblique);
+  good_x_for(3)(z2l,z2r,comma_dot_indent)a; y3=y1l;
+  z4=(tail[x2l,x2r],y1l-tail_length) rotatedaround (pt,-oblique);
+  ref=pt{downward}...z4;
+  pos4(tail_tip,angle(direction 1 of ref)+90);
+
+  if prime:z1r{left} o_t {downward}z2l--z4l--z4r--z2r{upward}...cycle
+     else:z1r{left} o_t z2l{downward} o_t z3...z4l{direction 1 of ref}-- 
+          z4r{-direction 1 of ref}...z2r{upward}...cycle     fi
+enddef;
+
+% *****
+
+% The arrowhead macro makes an arrowhead which is then rotated around its tip
+% point to the desired direction. 
+% It points when |@#|=t:up,|@#|=b:down,|@#|=r:right,|@#|=l:left.
+% The |head_width| is the widest (horizontal) span of the arrowhead.
+% The |head_depth| is the perpendicular distance from the tip to widest part
+
+vardef arrow@#(expr tip,head_width,head_depth)=
+ save x,y,p; path p[];
+ z1=tip;
+ y2=y3=y1+head_depth; 
+ round x1=x2+.5head_width=x3-.5head_width;    
+ z4=(x2,y1-1.5head_depth);
+ z5=(x3,y4);
+ penpos1(head_thickness,90); 
+ penpos2(head_thickness,angle(z2-z1)-90);
+ penpos3(head_thickness,angle(z3-z1)+90);
+ p1=z1l--z2l--z2r--z1r--z1r-(eps,0)--z3r--z3l--z1l-(eps,0)--cycle;
+ p2=z1l--z2l--z4--z5--z3l--z1l--cycle;
+ save_num(turn)=if str@#="b":0-oblique elseif str@#="r":90 
+                 elseif str@#="t":180-oblique elseif str@#="l":270 fi;
+ fill p1 rotatedaround (tip,turn); unfill p2 rotatedaround (tip,turn);
+enddef; 
+
+
+%*** SHOW\_CHARACTER macros ***********************************************
+
+% These macros show the characters for different stages of development.
+% |<fill_all>|                  fill p[1-4]     unfill p'[1-4]
+% |<draw_outlines>|              draw p[1-4]     draw   p'[1-4]
+% |<outline_and_fill>|           does |<draw_outlines>| and |<fill_all>| shifted
+% |<draw_with_reference_paths>|  does |<draw_outlines>| and draw ref[1-6]
+% <openit> fixes size of terminalscreen window (altered from plain.mf)
+% <makebox> makes a reference box for screen/proof chars (altered from plain.mf)
+% <showpoints> shows point positions on screen while working on char
+
+def fill_all= 
+  for n=1 upto 6:if known p[n]:fill p[n];fi if known p[n]':unfill p[n]';fi 
+   endfor enddef;           
+def draw_outlines=  pickup pencircle;
+  for n=1 upto 6:if known p[n]:draw p[n];fi if known p[n]':draw p[n]';fi endfor 
+  enddef;
+def outline_and_fill= pickup pencircle;
+  for n=1 upto 6: 
+  if known p[n]: draw p[n]; fill p[n] shifted (0,-(h+d+100)); fi
+  if known p[n]':draw p[n]'; unfill p[n]' shifted (0,-(h+d+100)); fi  
+  endfor enddef;
+def draw_with_reference_paths= 
+  draw_outlines;
+  pickup pencircle scaled .15pt; 
+  for=1 upto 6:if known p[n]: draw ref[n]; fi endfor  
+  enddef;
+
+def openit = openwindow currentwindow   % fixes size of terminalscreen window
+ from (0,0) to (1.5screen_rows,screen_cols) at (-100,300) enddef;
+
+def makebox(text rule)= % makes a reference box for screen and proof characters	
+ for y=0,h.o_,-d.o_: rule((l,y),(r,y));  endfor % horizontals
+ for x=l,r:    rule((x,-d.o_),(x,h.o_)); endfor % outer verticals
+ for x=0,wsaved: rule((x,0),(x,.2h.o_)); endfor % inner verticals
+ if charic<>0: rule((wsaved+charic*hppp,h.o_),(wsaved+charic*hppp,.5h.o_));fi
+enddef;
+
+def showpoints(text t)= % Shows point positions on screen while working on char
+ if mode=proof:pickup pencircle scaled 3;
+ forsuffixes $:=t:forsuffixes s:=l,,r:if known z$.s:draw z$s;fi endfor endfor 
+ pickup pencircle scaled 1; penlabels(t); fi
+enddef;
+
+
+%*****EXTRA***********************************************************
+
+
+%*****VARIATIONS on some PLAIN.MF macros
+  
+%***** 
+% This allows a selection of chars to be tested, w/o losing memory to defs
+% An extra line [iff OK "<character>":] must be added before each char
+
+let semi_ = ;; let colon_ = :; let endchar_ = endchar;
+def iff expr b = if b:let next_=use_it else:let next_=lose_it fi; next_ enddef;
+def use_it = let : = restore_colon; enddef;
+def restore_colon = let : = colon_; enddef;
+def lose_it = let endchar=fi; let ;=restore_endchar semi_ if false enddef;
+def restore_endchar=let ;=semi_; let endchar=endchar_; enddef;
+def always_iff expr b = use_it enddef;
+boolean wanted[];
+
+% To use this bit of magic, include the following commented-out lines
+ % for x:="I":
+ %   wanted[byte x]:=true; endfor 
+          % this allows specifying only those characters which are to be shown
+          % the chars can be specified inside of quotes("c") or as a number(23)
+def OK expr x=known wanted[byte x] enddef;
+ %  let iff=|always_iff|;               % allows testing of all chars in the file
+
+%*****
+% This allows adjustments to left and right sidebearings of characters, 
+%   so that the space in which the character sits can be different from
+%   the space in which the reference points for the character are given.
+
+letter_fit#:=letter_fit:=0;
+def adjust(expr left_adjustment,right_adjustment) =
+   l:=-round(left_adjustment*hppp)-letter_fit;
+   interim xoffset:=-l;
+   charwd:=charwd+2letter_fit#+left_adjustment+right_adjustment;
+   r:=l+round(charwd*hppp);
+   w:=r-round(right_adjustment*hppp)-letter_fit; 
+ enddef;
+           
+%*****
+
+% Changes <penpos> to <pos> and makes <multpos> for multiple reference positions
+%   with the same length and angle arguments
+
+vardef pos@#(expr b,d) =
+ (x@#r-x@#l,y@#r-y@#l)=(b,0)rotated d;x@#=.5(x@#l+x@#r);y@#=.5(y@#l+y@#r)enddef;
+vardef multpos(text t)(expr b,d)=forsuffixes $=t:pos$(b,d); endfor enddef;
+
+%*****
+
+% A takeoff on flex, allows softening of paths if softpath is true.
+% This takes a list of points and softens the path between the straight
+%   lines connecting these points; a <point> or <path> must follow this
+%   macro, i.e., not a <pathjoin>.
+
+def soften(text t)=                                     % t is a list of pairs
+ hide(n_:=0; for z=t: z_[incr n_]:=z; endfor;)           
+ if softpath:
+    --z_1)for k=2 upto n_:softjoin(z_[k-1]--z_[k]) endfor softjoin(z_[n_]--
+    else: --z_1 for k=2 upto n_-1: --z_[k] endfor --z_[n_]-- fi
+enddef;
+newinternal n_; pair z_[],dz_;
+
+%*****
+
+
+%*****MISCELLANEOUS 
+
+%**** fitbasis *****
+% If the basis for figuring the sidebearings or fitting has not been set
+% to 0 by the |fixed_pitch_characters| macro, then this gives values to the
+% upper and lower case <fitbasis>
+
+def makeknown(text t)(expr value)=
+  forsuffixes $=t:if unknown $:$=value;fi endfor enddef;
+
+%***** booleans
+
+% These macros shorten the code
+def bool(text t)=boolean t; t enddef;
+def save_bool(text t)=save t;bool(t) enddef;
+def save_pair(text t)=save t;pair t; t enddef;
+def save_pairs(text t)=save t;pair t[]; enddef;
+def save_num(text t)=save t;t enddef;
+
+% The condition macro localizes a boolean and gives it a true or false value
+
+def condition(text t)suffix $$=
+  save_bool(t):=if(str$$="t"):true else:false; fi enddef;
+
+%*****
+
+% The softenit macro softens the join for two paths that are always to 
+%   have some softness
+
+vardef softenit(expr path_one,path_two)=
+  save x,y,t;
+  (t1,t2)=path_one intersectiontimes reverse path_two;
+  z1=path_one intersectionpoint reverse path_two;
+  (subpath(0,t1)of path_one--z1)softjoin(z1--subpath(t2,0)of reverse path_two)
+enddef;
+
+%***** 
+
+% The |define_minimums| macro makes minimum stroke amount of one pixel
+def define_minimums(text t)=forsuffixes $=t: $:=max($,minimum_linethickness); 
+  endfor enddef; 
+
+%*****
+% For turning off overshoots when the resolution is too low
+def lowres_fix(text t)=forsuffixes $=t: $:=0; endfor enddef; 
+%*****
+
+% The |fixed_pt| macro increases the length of the stem measurement dependent
+%   on the obliqueness to maintain stem widths 
+% Used only in global |bowlstem/stem/thin_stem| specs
+
+if unknown scale_factor:scale_factor=1; fi 
+def fixed_pt=(scale_factor*1/(pt#*cosd oblique)) enddef; 
+
+%*****
+
+% In the inlimit macro, the first <text> argument gives the value, 
+%   and places this value between the <expr> arguments
+% The lower and upper bound values are just recommended values thought
+%   to maintain "reasonable" shapes
+vardef inlimit(text amt)(expr lowerlimit,upperlimit)=save this;
+ this:=max(amt,lowerlimit); this:=min(this,upperlimit);this
+enddef;
+
+% The |min_limit| macro maintains a minimum limit
+def min_limit(text this)(expr limit)=if this>limit:save this;this=limit;fi 
+enddef;
+
+%*****
+
+% Gives value to the <sign> used in terminalserif def
+def sign(expr a)=if a<=0:0 else:1 fi enddef;
+
+%*****
+
+% The onaline macro allows thinking that a point be on a particular line;
+%  an x or y value must be supplemented
+
+vardef onaline(suffix a,b)(text t)=forsuffixes $=t:z$=whatever[z.a,z.b]; endfor
+ enddef;
+
+%*****
+% The |good_x_for| macro gives reference points horizontal placement, 
+%   and moves them appropriately, according to vertical height and obliqueness
+
+vardef good_x_for(text t)(expr leftpoint,rightpoint,amt)suffix$=
+  z1$=(xpart leftpoint,y.t-ypart leftpoint)//; 
+  z2$=(xpart rightpoint,y.t-ypart rightpoint)//;
+  x.t=amt[x1$,x2$];
+enddef;
+
+%*****
+
+% The |constant_angle| macro keeps a constant angle so that the thickness
+%  of the line can remain constant as the line may change, e.g., as width,
+%  obliqueness changes.
+% The stem value should be zero if the reference points are on the same
+%  side of the stem, and the value of the stem otherwise.
+% The suffix lr is used when the reference points are diagonally opposite
+%  each other and the |top_pt| is on the left of the stem
+%  and the |bot_pt| on the right.
+% This could probably be made more efficient, but it works as is... *** FIX
+
+vardef constant_angle(expr top_pt,bot_pt,stem)suffix $=
+  save theta;   
+  theta=if str$="lr":-else:+fi (angle(length(top_pt-bot_pt) +-+ stem,stem)); 
+  angle(top_pt-bot_pt)+theta-90
+enddef;
+
+%*****
+
+% The notch macro makes an indentation to compensate for filling in at junctures
+% Variation in the length and width or thickness of the cut can be specified
+% Ideally one might tailor the length of the cut dependent on the angle 
+% of the two stems at the juncture, however, here they are all considered 
+% together
+% The notch macros:upnotch,downnotch,leftnotch,rightnotch all assume
+% A three point counterclockwise path with the notching occuring at the 
+% middle point; the points connect as straight lines and the notching 
+% begins at a point .5 of the way from the endpoints to the apex
+
+vardef notch@#(expr apath,notch_direction,notch_length)=
+ save a; def a=(max(notch_length,eps),0)rotated notch_direction; enddef;
+ z0=point 1 of apath; z2=z1+a; z3=z6+a; z4=z5+a; z6=.5[z1,z5];
+ if str@#="r":reverse fi
+  (point 0 of apath--point .5 of apath
+   if nonotch:--z0--else: ..controls z1..z2--z4..controls z5.. fi
+  point 1.5 of apath--point 2 of apath)
+enddef; 
+
+vardef rightnotch@#(expr one,n_dir,n_l)suffix $=
+ save x,y,a; def a(expr n)=(n*notch_width,0)rotated(n_dir+90); enddef;
+ if center_notch:          z6=z0; z1=z0-a(.5);
+   elseif str$="etchup":   z1=z0; z5=z0+a(1); 
+   elseif str$="etchdown": z5=z0; z1=z0-a(1);else:z6=z0; z1=z0-a(.5); fi
+ notch@#(one,n_dir,n_l) enddef;
+vardef leftnotch@#(expr one,n_dir,n_l)suffix $=
+ save x,y,a; def a(expr n)=(n*notch_width,0)rotated(n_dir-90); enddef;
+ if center_notch:          z6=z0; z5=z0-a(.5);
+   elseif str$="etchup":   z5=z0; z1=z0+a(1); 
+   elseif str$="etchdown": z1=z0; z5=z0-a(1);else:z6=z0; z5=z0-a(.5); fi
+ notch@#(one,n_dir,n_l) enddef;
+vardef upnotch@#(expr one,n_dir,n_l)suffix $=
+ save x,y,a; def a(expr n)=(n*notch_width,0)rotated(n_dir-90); enddef;
+ if center_notch:          z6=z0; z1=z0+a(.5);
+   elseif str$="etchleft": z1=z0; z5=z0-a(1);
+   elseif str$="etchright":z5=z0; z1=z0+a(1); else:z6=z0; z1=z0+a(.5); fi
+ notch@#(one,n_dir,n_l) enddef;
+vardef downnotch@#(expr one,n_dir,n_l)suffix $=
+ save x,y,a; def a(expr n)=(n*notch_width,0)rotated(n_dir+90); enddef;
+ if center_notch:          z6=z0; z5=z0+a(.5);
+   elseif str$="etchleft": z5=z0; z1=z0-a(1);
+   elseif str$="etchright":z1=z0; z5=z0+a(1); else:z6=z0; z5=z0+a(.5); fi
+ notch@#(one,n_dir,n_l) enddef;
+
+%*****
+
+%*****
+
+% The |fixed_pitch_characters| macro takes a true/false(or otherwise)
+%   and number of |characters_per_inch| arguments. 
+% This macro sets the often used <mono> value and other values for 
+%   single pitch, where all characters have the same width.
+% Note that a slight alteration made to |mono#| will allow
+%   the character width to be specified arbitrarily, e.g., setting
+%   |mono#:=10.7pt#| makes a single pitch width of 10.7 points.
+
+def fixed_pitch_characters(text t)(expr characters_per_inch)=
+ boolean narrow_condition;       % are characters especially narrow?
+ boolean singlepitch;            % affects character shapes for ijlwIJMWO0
+ if t=true:mono#:=(72.27/characters_per_inch)*pt#;
+           width#:=0;
+           fitbasis.lc#:=fitbasis.uc#:=0; 
+           singlepitch:=true; 
+      else:mono#:=0;
+           singlepitch:=false;      fi
+ define_pixels(mono,width);
+ narrow_condition:=if (mono<>0)and(characters_per_inch>12):true else:false fi;
+enddef;
+
+%*****
+
+vardef testing_codes=
+  % There are a number of alternate characters. The "alt[]" scheme gives these
+  % alternate characters a different code number than the one they would 
+  % normally have, if used, for the purpose of testing.  
+
+  if test_all_characters:
+     alt0:=if a_full_bowl:128 else:0 fi;           % characters: a
+     alt1:=if g_full_bowl:128 else:0 fi;           % characters: g
+     alt2:=if spur:0 else:128 fi;                  % characters: G,b,q (a,g)
+     alt3:=if like_lowercase:128 else:0 fi;        % characters: U
+     alt4:=if flat_diagonal_endings:0 else:128 fi; % characters: v,w,x,y,V,W,X
+     alt5:=if beveled_join:128 else:0 fi;          % characters: R,K,k
+     alt6:=if open_tail:0 else:128 fi;             % characters: 3,5,6,9
+     alt7:=if diagonal_three:0 else:128 fi;        % characters: 3
+     alt8:=if inflection_two:0 else:128 fi;        % characters: 2
+     alt9:=if G_spur:128 else:0 fi;                % characters: G
+     alt10:=if open_four:0 else:128 fi;            % characters: 4
+
+   else:alt0:=alt1:=alt2:=alt3:=alt4:=alt5:=alt6:=alt7:=alt8:=alt9:=alt10:=0; fi
+enddef;
+
+%*******************************
+makeknown(minimum_linethickness)(1);
+
+
+def vpix(text t)(text tt)= t:=tt; t:=vround(tt.#*hppp); enddef;   % whole v pix
+def hpix(text t)(text tt)= t:=tt; t:=hround(tt.#*hppp); enddef;   % whole h pix
+
+
+def define_pixels(text t) =
+ forsuffixes $=t: $:=$.#*hppp; endfor enddef;
+def define_whole_pixels(text t) =
+ forsuffixes $=t: $:=hround($.#*hppp); endfor enddef;
+def define_whole_vertical_pixels(text t) =
+ forsuffixes $=t: $:=vround($.#*hppp); endfor enddef;
+def define_good_x_pixels(text t) =
+ forsuffixes $=t: $:=good.x($.#*hppp); endfor enddef;
+def define_good_y_pixels(text t) =
+ forsuffixes $=t: $:=good.y($.#*hppp); endfor enddef;
+def define_blacker_pixels(text t) =
+ forsuffixes $=t: $:=$.#*hppp+blacker; endfor enddef;
+def define_whole_blacker_pixels(text t) =
+ forsuffixes $=t: $:=hround($.#*hppp+blacker);
+  if $<=0: $:=1; fi endfor enddef;
+def define_whole_vertical_blacker_pixels(text t) =
+ forsuffixes $=t: $:=vround($.#*hppp+blacker);
+  if $<=0: $:=1_o_; fi endfor enddef;
+def define_corrected_pixels(text t) =
+ forsuffixes $=t: $:=vround($.#*hppp*o_correction)+eps; endfor enddef;
+def define_horizontal_corrected_pixels(text t) =
+ forsuffixes $=t: $:=hround($.#*hppp*o_correction)+eps; endfor enddef;
+ 
+

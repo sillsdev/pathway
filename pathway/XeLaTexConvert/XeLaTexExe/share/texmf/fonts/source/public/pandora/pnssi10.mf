@@ -1,0 +1,199 @@
+%*****************************************************************************
+%        Copyright (c) 1989 by N. N. Billawala
+%*****************************************************************************
+
+
+% pnssi10.mf   Pandora Sans Serif Oblique 10 point
+
+font_identifier:="PNSSI";
+
+mode_setup;                             % general setup
+input pandor                            % general definitions used in pandora
+
+designsize:= 10pt#;                     % intended "ideal" size for parameters
+width#:=     10pt#;                     % width of an em
+maxheight#:= 7.75pt#;                   % max height for delimiters,e.g., [,{,(
+ascender#:=  7.5pt#;                    % height of ascenders, e.g., on l,h,k
+cap#:=       7pt#;                      % height of uppercase, e.g., B,H,L
+xheight#:=   5pt#;                      % xheight of lowercase, e.g., x,n,o
+descender#:= 2pt#;                      % depth of descenders, e.g., on j,p,q
+maxdepth#:=  2.25pt#;                   % max depth for delimiters,e.g., [,{,(
+math_axis#:= .5[maxheight#,-maxdepth#]; % vertical alignment for math 
+
+accent_height#:=.3(ascender#-xheight#); % places bottom of accents 
+accent_depth#:=min(.5xheight#,.7(ascender#-xheight#)); % character ref box depth
+
+define_whole_vertical_pixels(width,maxheight,ascender,cap,xheight,descender,
+  maxdepth,math_axis,accent_depth);
+
+fixed_pitch_characters(false)(0);       % true/false, number of characters per inch
+oblique:=10;                            % slant of character reference points
+
+bowlstem.uc#:=1.05    *fixed_pt;        % uppercase (uc) bowl width
+bowlstem.lc#:=1       *fixed_pt;        % lowercase (lc) bowl width
+stem.uc#:=1           *fixed_pt;        % uppercase stem width
+stem.lc#:=.95         *fixed_pt;        % lowercase stem width
+thin_stem.uc#:=.75    *fixed_pt;        % width of thin uppercase stems
+thin_stem.lc#:=.7     *fixed_pt;        % width of thin lowercase stems
+define_pixels
+  (bowlstem.uc,bowlstem.lc,stem.uc,stem.lc,thin_stem.uc,thin_stem.lc);
+
+boldness:=1;
+makeknown(fitbasis.lc#)(.19*width#);
+makeknown(fitbasis.uc#)(.27*width#);
+
+apex.uc:=inlimit(.5stem.uc)(0,stem.uc); % apex flatness in uppercase
+apex.lc:=inlimit(.5stem.lc)(0,stem.lc); % apex flatness in lowercase
+ov_t.uc:=.02cap;                        % top curve overshoot for uppercase
+ov_t.lc:=.02xheight;                    % top curve overshoot for lowercase
+ov_b.uc:=.02cap;                        % bottom curve overshoot for uppercase
+ov_b.lc:=.02xheight;                    % bottom curve overshoot for lowercase
+ov_apex.uc:=.02cap;                     % apex overshoot for uppercase
+ov_apex.lc:=.02xheight;                 % apex overshoot for lowercase   
+apex_angle:=oblique;                    % for changing the angle at apex 
+if xheight<25:lowres_fix(ov_t.lc,ov_b.lc,ov_apex.lc); fi
+if cap<70:lowres_fix(ov_t.uc,ov_b.uc,ov_apex.uc); fi
+
+                                        % for SERIFS and ARMS
+serif_thickness:=inlimit(eps)(eps,.5xheight); % base thickness of h-serifs
+terminal_thickness:=serif_thickness;    % base thickness of terminal serifs
+tip_thickness:=     serif_thickness;    % base thickness of arms
+bulb_thickness:=    .2pt;               % (base) thickness of bulbs
+x_bracket_h:=inlimit(.2xheight)(serif_thickness,.5xheight); % lc bracket join
+cap_bracket_h:=inlimit(.2cap)(serif_thickness,.5cap);       % uc bracket join
+bool(ctrls):=false;                     % for explicit placement of control pts
+onbase:=inlimit(0)(0,1);                % places control pt along base of serif
+onstem:=inlimit(0)(0,1);                % places control pt along stem of serif
+midbracket_pull:=    inlimit(.4)(0,1);  % pulls brackets in on arms and serifs
+entasis:=            inlimit(.1)(0,1);  % amount of arc in horizontal serif base
+terminal_entasis:=   inlimit(.1)(0,1);  % amount of arc in terminal serif base
+arm_angle:=          inlimit(10)(0,60); % global angle off of 90 degrees
+asc_terminal_angle:= inlimit(0)(0,60);  % at ascender height: from 0 deg...h,k,l
+x_terminal_angle:=   inlimit(0)(0,60);  % at x-height: from 0 deg...m,n,r
+base_terminal_angle:=inlimit(0)(0,60);  % at base line: from 0 deg...u
+diag_terminal_angle:=inlimit(0)(0,60);  % on diagonals: from 0 deg...k,v,w,y
+hs:=.6pt;                               % global horizontal serif length
+ts:=.6pt;                               % global terminal serif length
+as:=.6pt;                               % global arm length
+cs:=.65pt;                              % global curvedarm length
+serif_constant_amt:=0pt;                % adds same length amount to all serifs
+bool(bulbs):=false;                     % arms become bulbs if true
+bool(bulb_taper):=true;                 % changes bulbs to tapering shape
+taper_angle:=if bulb_taper:10 else:0 fi;% if |bulb_taper|, adjusts angle at end
+bulb_taper_amt:=1;                      % taper length as a % of limb thickness
+c_and_s.lc:=.75stem.lc;                 % c,s bulb length if |bulb_taper|=true
+c_and_s.uc:=.85stem.uc;                 % C,G,S bulb length if |bulb_taper|=true
+terminal_softness:=.2stem.lc;           % softness in heel of the terminal serif
+arm_softness:=.2thin_stem.lc;           % softness in the heel of the arm
+
+                                        % ARCHES
+arch_thickness.uc:=.6stem.uc;           % uppercase arch thickness
+arch_thickness.lc:=.6stem.lc;           % lowercase arch thickness
+arch_tip.uc:=.8stem.uc;                 % thinnest part of the uc arch
+arch_tip.lc:=.8stem.lc;                 % thinnest part of the lc arch
+arch_reference:=inlimit(.7)(.4,.95);    % puts ref pts between tip/stem
+arch_inner_amt:=inlimit(.8)(.4,.95);    % puts arch pts between tip/ref pts
+r_arch:=l_arch:=inlimit(.6)(0,1);       % y-value of max outer stress on |r_arch|
+bool(ensure_min_archthickness):=true;   % guarantees minimum thickness
+
+                                        % BOWLS
+major_curve.uc:=thin_stem.uc;           % uppercase major bowl curve thickness
+major_curve.lc:=arch_thickness.lc;      % lowercase major bowl curve thickness
+minor_curve.uc:=.9thin_stem.uc;         % uppercase minor bowl curve thickness
+minor_curve.lc:=.9arch_thickness.lc;    % lowercase minor bowl curve thickness
+major_bowl_tip.lc:=arch_tip.lc;         % lowercase major bowl tip thickness
+minor_bowl_tip.lc:=.8minor_curve.lc;    % lowercase minor bowl tip thickness
+major_bowl_reference:=inlimit(.6)(.4,.95); % puts ref pts between tip/bowlstem
+minor_bowl_reference:=inlimit(.5)(.4,.95); % puts ref pts between tip/bowlstem
+major_bowl_inner_amt:=inlimit(.7)(.4,.95); % puts arch pts between tip/ref pts 
+minor_bowl_inner_amt:=inlimit(.7)(.4,.95); % puts arch pts between tip/ref pts
+
+define_minimums(                        % these values keep a one pixel minimum
+  bowlstem.lc,stem.lc,thin_stem.lc,apex.lc,arch_thickness.lc,arch_tip.lc,
+  bowlstem.uc,stem.uc,thin_stem.uc,apex.uc,arch_thickness.uc,arch_tip.uc,
+  major_curve.lc,minor_curve.lc,major_bowl_tip.lc,minor_bowl_tip.lc,
+  major_curve.uc,minor_curve.uc);
+
+                                        % ARCHES and BOWLS and CIRCULAR SHAPES
+v_stress:=.52;                          % places point of vert stress on bowl
+h_stress:=.51;                          % places horzstress on circular shapes
+ductal:=inlimit(.25)(0,1);              % for more ductal strokes: value of 1
+minor_ductal.lc:=.1*(xheight-minor_curve.lc-major_curve.lc); % minor curve join
+circ1:=inlimit(1)(.75,1.5);             % tension of outer curve shapes
+circ2:=inlimit(1)(.75,1.5);             % tension of inner curve shapes
+circ3:=inlimit(circ1-.07)(.75,1.5);     % tension of outer |circular_shapes|
+                          
+                                        % JUNCTURES and NOTCHES
+bool(softjuncture):=false;              % are junctures soft? in junct macro
+juncture_opening:=inlimit(.05stem.lc)(0,stem.lc);% indent into stem at juncture
+stemcut_angle:=-2;                      % cut into stem at angle off of 90
+archcut_angle:=0;                       % cuts into regular arch path
+notch_length.uc:=.05stem.uc;            % length of corrective notching (uc)
+notch_length.lc:=.05stem.lc;            % length of corrective notching (lc)
+notch_width:=1;                         % width of corrective notching in pixels
+notch_pos:=.3;                          % positions the beginning of the notch
+bool(center_notch):=                    % centers all notches
+ if(thin_stem.lc/stem.lc)>=.75:true else:false fi;
+bool(nonotch):=if(xheight<15)           % if real low resolution
+ or(xheight#>15pt#)                     % or large character size
+ or(thin_stem.uc/stem.uc<.5):true       % or small thin/thick ratio
+ else:false fi;                         %   this overrides notching
+
+                                        % PUNCTUATION, ACCENTS, MATH and PENS
+round_dot_diameter:=1.1stem.uc;         % diameter of dots on ;:    
+accent_dot_diameter:=stem.lc;           % diameter of dots(!?") and dot accents
+comma_dot_indent=inlimit(.25)(0,1);     % indent in the comma macro for the dot 
+bool(prime):=false;                     % changes commas to prime 
+prime_angle:=-20;                       % angle of prime-like comma
+bool(realsoft_accents):=true;           % make accents soft as possible
+accent_thin_end:=max(1,.5thin_stem.lc); % thinnest end of accents
+accent_thick_end:=max(1,.75stem.lc);    % thickest end of accents
+mathlines:=max(1,.45pt);                % thickness of lines in math characters
+head_thickness:=max(1,.9mathlines);     % arrowhead thickness
+def mathpen=pensquare scaled mathlines enddef;              % for []/=+\#%-\<\>\_|^
+blank_space_thickness:=max(1,.7mathlines);                  % for space char
+def slashpen=pensquare scaled max(1,.5thin_stem.lc) enddef; % in O-slash chars
+def dashpen=pensquare scaled max(1,.75mathlines) enddef;    % for en em
+
+                                        % MISCELLANEOUS
+join_radius:=.1pt;                      % global softness for use with softjoin
+bool(softpath):=true;                   % softens paths in macros
+narrow_amt:=inlimit(.7)(0,1);           % thins strokes if narrow condition=true
+w_narrow_amt:=inlimit(.3)(0,1);         % thins strokes especially for eMwW oe
+ebar_angle:=0;                          % used on the lowercase e
+bool(bold):=false;                      % changes accent shapes if bold
+
+rulepen:=pensquare scaled 1;            % makes screenrules 1 pixel thick
+if oblique=0:let //=relax               % lets // do nothing if needed otherwise
+  else:def //=slanted sind(oblique/cosd oblique) enddef fi; % // slants ref pts
+pair upward,downward; 
+ upward=dir(90-oblique);                % "up" along oblique angle
+ downward=dir(-90-oblique);             % "down" along oblique angle
+
+                                        % ALTERNATE character specs
+bool(test_all_characters):=false;       % allows testing of alternate characters
+ alt0:=0; bool(a_full_bowl):=false;     % for half/double bowls on a
+ alt1:=0; bool(g_full_bowl):=true;      % for half/double bowls on g
+ alt2:=0; bool(spur):=true;             % for pronged terminals on G,a,b,g,q
+ alt3:=0; bool(like_lowercase):=false;  % alternate U
+ alt4:=0; bool(flat_diagonal_endings):=true; % else teminalserif k,v,w,x,y,V,W,X
+ alt5:=0; bool(beveled_join):=true;     % on R,K,k
+ alt6:=0; bool(open_tail):=true;        % for 3,5,6,9
+ alt7:=0; bool(diagonal_three):=true;   % for diagonal as opposed to round top 3
+ alt8:=0; bool(inflection_two):=false;  % for 2 with inflection
+ alt9:=0; bool(G_spur):=true;           % spur on G
+ alt10:=0;bool(open_four):=true;        % for top of 4 
+
+extra_beginchar:=extra_beginchar&"save t,p,ref; path p[],p[]',ref[];";
+extra_beginchar:=extra_beginchar&"w#:=charwd;";          % for adjust def
+extra_endchar:=extra_endchar&"wsaved:=w; w:=r-l;";       % for adjust def
+
+for x:="a":
+ wanted[byte x]:=true; endfor           % test these characters
+let iff=always_iff;                     % tests all chars in the file
+  let show_character=draw_outlines; 
+  if (mode<>proof):let show_character=fill_all;fi
+
+input rotext                            % Roman Text character set
+
+

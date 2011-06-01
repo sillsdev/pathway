@@ -1,0 +1,77 @@
+%*****************************************************************************
+%        Copyright (c) 1989 by N. N. Billawala
+%*****************************************************************************
+
+
+% puncts.mf  punctuation: Spanish inverted !?
+
+% 2 characters
+
+
+iff OK "!":  "Inverted exclamation point (Spanish)";
+  beginchar(inv_exclamation,I_w*width#+a_mono#,cap#,.5descender#);
+
+  min_limit(join_radius)(.5thin_stem.uc);
+  bot z1=(round(.5w),0);
+  z0=bot z1+(0,.5accent_dot_diameter);
+  top z3=(x1,h)//;  pos3(stem.uc,-oblique);
+  onaline(0,3)(2);  bot y2=max(bot y1+accent_dot_diameter+2,.3y3);
+  pos2(thin_stem.uc,-oblique);
+
+  ref1=dot.b(z1,accent_dot_diameter);
+  ref2=(z3--z3l)softjoin(z3l--z2l)softjoin(z2l--z2r)softjoin(z2r--z3r)
+      softjoin(z3r--z3)--cycle;
+  
+  z10=(.5w,.5(cap-d));
+  p1=ref1 rotatedaround (z10,180);
+  p2=ref2 rotatedaround (z10,180);
+
+  showpoints(0,1,2,3);
+adjust(v_a*fitbasis.uc#+m_a*a_mfit#,v_a*fitbasis.uc#+m_a*a_mfit#); 
+show_character; endchar;
+
+% rotation of shape and slant of position with obliqueness
+
+% Shape taken exactly from the exclamation point character, but rotated by 180
+% degrees and shifted. This does throw the labels off though.
+% Done this way, so that changes to one are more easily
+% transferred to the other. Could also have altered reference points, which
+% may still need to be done if the rounding turns out bad
+
+
+
+iff OK "?":  "Inverted question mark (Spanish)"; 
+  beginchar(inv_question_mark,.35width#+b_mono#,cap#,.5descender#);   %.4width
+  min_limit(join_radius)(.5thin_stem.uc);
+  lft z1=(0,.9h)//;
+  rt z3r=(w,.75h)//; lft z3l=z3r-(stem.uc,0);
+  top y2r=bot y2l+max(1,major_curve.uc)=h+ov_t.uc; 
+  good_x_for(2r)(z1,z3r,.5)a; good_x_for(2l)(z1+(bulb_thickness,0),z3l,.5)b;
+  bot z7=(.35w,0);
+  z8=bot z7+(0,.5accent_dot_diameter);
+  bot z6=(bot z7+(0,max(bot y7+accent_dot_diameter+2,.3y2r)))//;
+  multpos(5,6)(thin_stem.uc,-oblique);  
+  onaline(6,8)(5); y5=max(y7+accent_dot_diameter+2,.35y2r);   
+  z4l=.4[z5l,z3l]; z4r=.4[z5r,z3r]; 
+
+  ref1=(bulb.tl(z1,z2l,z2r,cs,max(1,.75bulb_thickness),90)soft i_t 
+       z3l{downward} i_t z4l o_t z5l{downward}--z6l)softjoin(z6l--z6r)
+       softjoin(z6r-- z5r{upward} i_t z4r o_t z3r{upward} o_t z2r{left})--cycle;
+  ref2=dot.b(z7,accent_dot_diameter);
+  
+  z10=(.5w,.5(cap-d));
+  p1=ref1 rotatedaround (z10,180);
+  p2=ref2 rotatedaround (z10,180);
+
+  showpoints(1,2,3,4,5,6,7,8,10);
+adjust(v_C*fitbasis.uc#+m_a*b_mfit#,v_C*fitbasis.uc#+m_a*b_mfit#);
+show_character; endchar;
+
+% Shape taken exactly from the question mark character, but rotated by 180
+% degrees and shifted. Fitting on left and right was switched.
+% This does throw the labels off though.
+% Done this way, so that changes to one are more easily
+% transferred to the other. Could also have altered reference points, which
+% may still need to be done if the rounding turns out bad
+
+

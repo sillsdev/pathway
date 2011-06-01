@@ -1,0 +1,83 @@
+%*****************************************************************************
+%        Copyright (c) 1989 by N. N. Billawala
+%*****************************************************************************
+
+
+% ligs.mf ligatures and kerning information
+
+ligtable "'":"'"=:oct"042";                % single closed quote
+ligtable oct"140":oct"140"=:oct"134";      % single open quote
+ligtable "-":"-"=:oct"173";                % -- makes en dash
+ligtable oct"173":"-"=:oct"174";           % (en dash)+(-) makes em dash
+ligtable "f":"f"=:oct"013", "i"=:oct"014", "l"=:oct"015"; % fi,ff,fl ligatures
+ligtable oct"013":"i"=:oct"016", "l"=:oct"017";           % ffi,ffl ligatures
+
+k#:=-.08fitbasis.lc#; kk#:=-.16fitbasis.lc#; kkk#:=-.24fitbasis.lc#;
+K#:=-.08fitbasis.uc#; KK#:=-.16fitbasis.uc#; KKK#:=-.2fitbasis.uc#;
+
+% *** lowercase and lowercase ***
+ligtable "b":"o":"p":oct"034":        "v" kern k#, "y" kern k#, "x" kern kk#;
+ligtable "e":"s":oct"032":oct"033":   "v" kern k#, "y" kern k#, "x" kern kk#;
+ligtable "c":"r":"t":    "a" kern k#, "c" kern k#, "d" kern k#, "e" kern k#,
+                         "g" kern k#, "o" kern k#, "q" kern k#, "s" kern k#,
+                         "v" kern k#, "x" kern k#, "y" kern k#, 
+                         oct"032" kern k#, oct"033" kern k#, oct"034" kern k#;
+ligtable "k":"v":"x":"y":"a" kern k#, "c" kern k#, "d" kern k#, "e" kern k#,
+                         "g" kern k#, "o" kern k#, "q" kern k#, 
+                         oct"032" kern k#, oct"033" kern k#, oct"034" kern k#;
+
+ligtable "A":         "U" kern K#, "X" kern K#,
+                      "T" kern KK#, "V" kern KKK#, "Y" kern KKK#,
+                      "w" kern k#, "v" kern kk#, "y" kern kk#;
+ligtable "C":         "T" kern K#, "V" kern K#, "X" kern K#, "Y" kern K#,
+                      oct"035" kern KK#, "v" kern k#, "y" kern k#;
+ligtable "D":"O":"Q":oct"037":
+                      "T" kern K#, oct"035" kern KK#, 
+                      "A" kern K#, "V" kern KK#, "X" kern KK#, "Y" kern K#; 
+ligtable "F":"U":     "T" kern KK#, oct"035" kern KKK#;
+ligtable "L":         "T" kern KK#, "V" kern KK#, "Y" kern KK#;
+ligtable "K":         "C" kern K#, "G" kern K#, "O" kern K#, "Q" kern K#, 
+                      oct"036" kern K#, oct"037" kern K#, 
+                      "A" kern KK#, oct"035" kern KK#,
+                      "a" kern k#, "c" kern k#, "d" kern k#, "e" kern k#,
+                      "g" kern k#, "o" kern k#, "q" kern k#,
+                      oct"032" kern k#, oct"033" kern k#, oct"034" kern k#;
+ligtable "P":         "V" kern K#, "X" kern K#, "Y" kern K#, "A" kern KK#, 
+                      "." kern KK#, "," kern KK#, oct"035" kern KK#,
+                      "a" kern kk#, "c" kern kk#, "d" kern kk#, "e" kern kk#,
+                      "g" kern kk#, "o" kern kk#, "q" kern kk#, "s" kern kk#,
+                      oct"032" kern kk#, oct"033" kern kk#, oct"034" kern kk#;
+ligtable "R":         "a" kern k#, "c" kern k#, "d" kern k#, "e" kern k#,
+                      "g" kern k#, "o" kern k#, "q" kern k#, "s" kern kk#,
+                      oct"032" kern k#, oct"033" kern k#, oct"034" kern k#,
+                      oct"035" kern KK#;
+ligtable "S":"W":     oct"035" kern KKK#,
+                      "v" kern kk#, "y" kern kk#;
+ligtable "T":"A" kern K#, "C" kern K#, "G" kern K#, "O" kern K#,
+            "Q" kern K#, "X" kern K#, "Y" kern K#, oct"035" kern KK#,
+            "m" kern k#, "n" kern k#, "p" kern k#, "r" kern k#, "u" kern k#,
+            "v" kern k#, "w" kern k#, "x" kern k#, "y" kern k#, "z" kern k#,
+            "a" kern kk#, "c" kern kk#, "d" kern kk#, "e" kern kk#, 
+            "g" kern kk#, "o" kern kk#, "q" kern kk#, "s" kern kk#,
+            oct"032" kern kk#, oct"033" kern kk#, oct"034" kern kk#,
+            "." kern KK#, "," kern KK#;
+ligtable "V":"O" kern KK#, "Q" kern KK#, "A" kern KKK#,
+            oct"035" kern KKK#, oct"036" kern KK#, oct"037" kern KK#,
+            "m" kern k#, "n" kern k#, "p" kern k#, "r" kern k#, "u" kern k#,
+            "v" kern k#, "w" kern k#, "x" kern k#, "y" kern k#, "z" kern k#,
+            "a" kern kk#, "c" kern kk#, "d" kern kk#, "e" kern kk#, 
+            "g" kern kk#, "o" kern kk#, "q" kern kk#, "s" kern kk#,
+            oct"032" kern kk#, oct"033" kern kk#, oct"034" kern kk#;
+ligtable "X":"C" kern K#, "G" kern K#, "O" kern K#, "Q" kern K#, 
+            oct"036" kern K#, oct"037" kern K#, "A" kern KK#, oct"035" kern KK#;
+ligtable "Y":"C" kern KK#, "G" kern KK#, "O" kern KK#, "Q" kern KK#,
+             oct"036" kern KK#, oct"037" kern KK#,
+            "A" kern KKK#, oct"035" kern KKK#, 
+            "a" kern kkk#, "c" kern kkk#, "d" kern kkk#, "e" kern kkk#,
+            "g" kern kkk#, "m" kern kkk#, "n" kern kkk#, "o" kern kkk#,
+            "p" kern kkk#, "q" kern kkk#, "r" kern kkk#, "s" kern kkk#,
+            "u" kern kkk#, "v" kern kkk#, "w" kern kkk#, "x" kern kkk#,
+            "y" kern kkk#, "z" kern kkk#,
+            oct"032" kern kkk#, oct"033" kern kkk#, oct"034" kern kkk#,
+            "i" kern kk#, "j" kern kk#, oct"020" kern kk#, oct"022" kern kk#;
+
