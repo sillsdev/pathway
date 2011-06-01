@@ -1,0 +1,50 @@
+% The file ttimes.tex (C) Petr Olsak, 2000
+% This file allows to use the Times fonts family in T1 encoding (*8t).
+% Use (for example):  %&csplain -translate-file=il2-t1
+%                     \input ttimes
+%                     \chyph
+% at first three lines in your document. 
+
+% Warning1: This works only in web2c implementations of TeX and derivatives.
+% Warning2: Use this file fonts only for experimental or special reason. The
+%           "\input ctimes" is more natural for csplain. 
+% Warning3: The \v t and \v d letters are horrible implemented in 8t metrics!
+
+% The "\rm", "\it", "\tt" and "\bf" will work with the new fonts.
+% Use "\setsimplemath" command to set Times fonts family in very
+% simple math formulas (without greek letters).
+
+\input t1code
+
+\font\tenrm=ptmr8t at 10pt
+\font\tenbf=ptmb8t at 10pt
+\font\tenit=ptmri8t at 10pt
+\font\tentt=pcrr8t at 10pt
+\let\tensl=\tenit
+\tenrm
+\def\setsimplemath{%
+  \font\sevenrm ptmr8t  at7pt
+  \font\fiverm  ptmr8t  at5pt
+  \font\sevenit ptmri8t at7pt
+  \font\fiveit  ptmri8t at5pt
+  \font\sevenbf ptmb8t  at7pt 
+  \font\fivebf  ptmb8t  at5pt
+  \message{\string\setsimplemath\space WARNING:
+     Greek symbols may be loss, see Missing char in .log!}
+  \textfont0=\tenrm \scriptfont0=\sevenrm \scriptscriptfont0=\fiverm
+  \textfont1=\tenit \scriptfont1=\sevenit \scriptscriptfont1=\fiveit
+  \textfont\itfam=\tenit \scriptfont\itfam=\sevenit 
+                         \scriptscriptfont\itfam=\fiveit
+  \textfont\slfam=\tensl
+  \textfont\bffam=\tenbf \scriptfont\bffam=\sevenbf 
+                         \scriptscriptfont\bffam=\fivebf
+  \textfont\ttfam=\tentt }
+
+% The \setsimplemath command sets the new family of fonts for math
+% formulas. Cf. the usage of "2" (digit in text mode is in a new font) 
+% but $-2$ is in Computer Modern if \setsimplemath is not used.
+% WARNING: The \setsimplemath is usable for very siple math
+% formulas only! It may crash some more complicated formulas because
+% math symbols are still used from Computer Modern and all greek 
+% symbols are missing in new fonts.
+

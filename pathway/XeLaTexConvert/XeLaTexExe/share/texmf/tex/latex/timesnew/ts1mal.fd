@@ -1,0 +1,40 @@
+%Filename: ts1mal.fd
+%Created by: tex t
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{ts1mal.fd}
+   [2000/12/05 Fontinst v1.801 font definitions for TS1/mal.]
+
+\DeclareFontFamily{TS1}{mal}{}
+
+\DeclareFontShape{TS1}{mal}{m}{n}{
+   <-> malr8c
+}{}
+
+\DeclareFontShape{TS1}{mal}{m}{sl}{
+   <-> malro8c
+}{}
+
+\DeclareFontShape{TS1}{mal}{m}{it}{
+   <-> malri8c
+}{}
+
+\DeclareFontShape{TS1}{mal}{b}{n}{
+   <-> malb8c
+}{}
+
+\DeclareFontShape{TS1}{mal}{b}{sl}{
+   <-> malbo8c
+}{}
+
+\DeclareFontShape{TS1}{mal}{b}{it}{
+   <-> malbi8c
+}{}
+
+\DeclareFontShape{TS1}{mal}{bx}{n}{<->ssub * mal/b/n}{}
+\DeclareFontShape{TS1}{mal}{bx}{sl}{<->ssub * mal/b/sl}{}
+\DeclareFontShape{TS1}{mal}{bx}{it}{<->ssub * mal/b/it}{}
+
+\endinput

@@ -1,0 +1,26 @@
+ % This file is public domain
+\documentclass{article}
+
+\usepackage[acronym,smallcaps]{glossaries-accsupp}
+
+\makeglossaries
+
+\newglossaryentry{dr}{name=Dr,description={Doctor},access={Doctor}}
+
+\newacronym[shortaccess=S V M]{svm}{svm}{support vector machine}
+
+\newacronym{eg}{e.g.}{for example}
+
+\begin{document}
+\gls{dr}~Jones.
+\gls{dr}~Jones.
+
+\Gls{eg}, \gls{eg}, \acrshort{eg}, \acrlong{eg}, \acrfull{eg}.
+
+\Acrshort{eg}, \ACRshort{eg}. \Acrlong{eg}, \ACRlong{eg}.
+\Acrfull{eg}, \ACRfull{eg}.
+
+\gls{svm}. \gls{svm}, \acrshort{svm}, \acrlong{svm}, \acrfull{svm}.
+
+\printglossaries
+\end{document}

@@ -1,0 +1,20 @@
+xfor change log:
+
+v1.05 (5 February 2009):
+ changed \@forloop to \@xforloop to avoid conflict caused
+ by new syntax.
+
+v1.04 (25 January 2009):
+ rewrite of internals to improve loop efficiency
+ (code provided by Morten H\o gholm)
+
+v1.03 (21 August 2007):
+ fixed license text
+
+v1.02 (16 August 2007):
+ added look ahead facility
+
+v1.01 (11 July 2007):
+ made \@iforgatherrest and \@forgatherrest \long
+
+v1.0 (27 June 2007): Initial release

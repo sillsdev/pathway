@@ -1,0 +1,39 @@
+%File name ot1kfn.fd
+%University of the Aegean
+%Department of Mathematics
+%Copyright Feb 2000
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY    
+
+
+
+\DeclareFontShape{OT1}{kfn}{m}{n}{<-> s * [0.90] kfn7t}{}
+\DeclareFontShape{OT1}{kfn}{m}{it}{<-> s * [0.90] kfno7t}{}
+\DeclareFontShape{OT1}{kfn}{m}{sl}{<-> s * [0.90] kfno7t}{}
+
+
+\endinput
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

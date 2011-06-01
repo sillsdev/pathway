@@ -1,0 +1,323 @@
+%%
+%% This is file `backref.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% backref.dtx  (with options: `package')
+%% 
+%% File: backref.dtx Copyright (C) 1995-2005 David Carlisle, Sebastian Rahtz, Heiko Oberdiek
+%% This file is part of the `Hyperref Bundle'.
+%% -------------------------------------------
+%%
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%%
+%% The list of all files belonging to the `Hyperref Bundle' is
+%% given in the file `manifest.txt'.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{backref}
+  [2006/09/05 v1.28 Bibliographical back referencing]%
+\newif\ifBR@verbose
+\@ifundefined{ifHy@verbose}{%
+  \BR@verbosefalse
+}{%
+  \let\ifBR@verbose\ifHy@verbose
+}
+\DeclareOption{verbose}{\BR@verbosetrue}
+\long\def\page@backref#1#2#3{#1}
+\long\def\section@backref#1#2#3{#2}
+\long\def\hyper@section@backref#1#2#3{\hyperlink{#3}{#2}}
+\long\def\hyper@page@backref#1#2#3{\hyperlink{page.#1}{#1}}
+\DeclareOption{pageref}{%
+  \def\backref{\backrefpagesname\ }%
+  \let\backrefxxx\page@backref
+}
+\DeclareOption{ref}{%
+  \def\backref{\backrefsectionsname\ }%
+  \let\backrefxxx\section@backref
+}
+\DeclareOption{hyperref}{%
+  \def\backref{}\let\backrefxxx\hyper@section@backref
+}
+\DeclareOption{hyperpageref}{%
+  \def\backref{}\let\backrefxxx\hyper@page@backref
+}
+\def\backrefenglish{%
+  \def\backrefpagesname{pages}%
+  \def\backrefsectionsname{sections}%
+  \def\backrefsep{, }%
+  \def\backreftwosep{ and~}%
+  \def\backreflastsep{, and~}%
+}
+\def\backrefgerman{%
+  \def\backrefpagesname{Seiten}%
+  \def\backrefsectionsname{Abschnitte}%
+  \def\backrefsep{, }%
+  \def\backreftwosep{ und~}%
+  \def\backreflastsep{ und~}%
+}
+\def\backreffrench{%
+  \def\backrefpagesname{pages}%
+  \def\backrefsectionsname{sections}%
+  \def\backrefsep{, }%
+  \def\backreftwosep{ et~}%
+  \def\backreflastsep{ et~}%
+}
+\def\backrefspanish{%
+  \def\backrefpagesname{p\'aginas}%
+  \def\backrefsectionsname{secciones}%
+  \def\backrefsep{, }%
+  \def\backreftwosep{ y~}%
+  \def\backreflastsep{ y~}%
+}
+\def\backrefafrikaans{%
+  \def\backrefpagesname{bladsye}%
+  \def\backrefsectionsname{afdelings}%
+  \def\backrefsep{, }%
+  \def\backreftwosep{ en~}%
+  \def\backreflastsep{ en~}%
+}%
+\def\BR@addto#1#2{%
+  #2%
+  \@temptokena{#2}%
+  \ifx#1\relax
+    \let#1\@empty
+  \fi
+  \ifx#1\undefined
+     \edef#1{\the\@temptokena}%
+  \else
+     \toks@\expandafter{#1}%
+     \edef#1{\the\toks@\the\@temptokena}%
+  \fi
+  \@temptokena{}\toks@\@temptokena
+}
+\def\BR@DeclareLang#1#2{%
+  \begingroup
+    \edef\x##1##2{%
+      \noexpand\ifx##2\relax
+        \errmessage{No definitions for language `#2' found!}%
+      \noexpand\fi
+      \endgroup
+      \noexpand\DeclareOption{#1}{%
+        \noexpand\BR@addto{\noexpand##1}{\noexpand##2}%
+      }%
+    }%
+  \expandafter\x\csname extras#1\expandafter\endcsname
+                \csname backref#2\expandafter\endcsname
+}
+\BR@DeclareLang{english}{english}
+\BR@DeclareLang{UKenglish}{english}
+\BR@DeclareLang{USenglish}{english}
+\BR@DeclareLang{british}{english}
+\BR@DeclareLang{german}{german}
+\BR@DeclareLang{ngerman}{german}
+\BR@DeclareLang{austrian}{german}
+\BR@DeclareLang{naustrian}{german}
+\BR@DeclareLang{french}{french}
+\BR@DeclareLang{frenchb}{french}
+\BR@DeclareLang{francais}{french}
+\BR@DeclareLang{spanish}{spanish}
+\BR@DeclareLang{afrikaans}{afrikaans}
+\backrefenglish
+\ExecuteOptions{pageref}
+\ProcessOptions*\relax
+\newif\ifbackrefparscan
+\backrefparscantrue
+\def\BR@bibitem{%
+  \ifbackrefparscan
+    \expandafter\@ifnextchar\expandafter[\expandafter
+    \BR@@lbibitem\expandafter\BR@@bibitem
+  \else
+    \expandafter\@ifnextchar\expandafter[\expandafter
+    \BR@@@lbibitem\expandafter\BR@@@bibitem
+  \fi
+}
+\def\BR@@lbibitem[#1]#2#3\par{%
+  \let\backrefprint\BR@backrefprint
+  \BRorg@bibitem[{#1}]{#2}#3%
+  \BR@backref{#2}%
+}%
+\def\BR@@bibitem#1#2\par{%
+  \let\backrefprint\BR@backrefprint
+  \BRorg@bibitem{#1}#2%
+  \BR@backref{#1}%
+}
+\def\BR@@@lbibitem[#1]#2{%
+  \def\backrefprint{\BR@backref{#2}}%
+  \BRorg@bibitem[{#1}]{#2}%
+}
+\def\BR@@@bibitem#1{%
+  \def\backrefprint{\BR@backref{#1}}%
+  \BRorg@bibitem{#1}%
+}
+\def\BR@backrefprint{%
+    \PackageError{backref}{%
+      \string\backrefprint\space is only available after \string\bibitem
+      \MessageBreak
+      with setting \string\backrefparscanfalse
+    }\@ehc
+}
+\let\backrefprint\BR@backrefprint
+\def\BR@backref#1{%
+  \newblock
+  \begingroup
+    \csname @safe@activestrue\endcsname
+    \expandafter\providecommand\csname brc@#1\endcsname{0}%
+    \expandafter\providecommand\csname brcd@#1\endcsname{0}%
+    \csname @safe@activesfalse\expandafter\endcsname
+    \expandafter\backref\csname br@#1\expandafter\endcsname
+    \expandafter\backrefalt\csname brc@#1\expandafter\endcsname
+                         \csname brl@#1\expandafter\endcsname
+                         \csname brcd@#1\expandafter\endcsname
+                         \csname brld@#1\endcsname
+  \endgroup
+  \par
+}
+\@ifundefined{newblock}{\def\newblock{\par}}{}
+\providecommand*{\backrefalt}[4]{}
+\def\backcite#1#2{%
+  \@for\x:=#1\do{%
+    \begingroup
+      \csname @safe@activestrue\endcsname
+      \edef\x{\endgroup
+        \def\noexpand\x{\expandafter\@firstofone\x\@empty}%
+      }%
+    \x
+    \expandafter\ifx\csname br@\x\endcsname\relax
+      \expandafter\protected@xdef\csname br@\x\endcsname{%
+        \protect\backrefxxx#2%
+      }%
+      \global\expandafter\let\csname brl@\x\expandafter\endcsname
+                      \csname br@\x\endcsname
+      \global\expandafter\let\csname brld@\x\expandafter\endcsname
+                      \csname br@\x\endcsname
+      \expandafter\gdef\csname brc@\x\endcsname{1}%
+      \expandafter\gdef\csname brcd@\x\endcsname{1}%
+    \else
+      \begingroup
+        \@ifundefined{backrefxxxdupe}{}{\let\backrefxxx\backrefxxxdupe}%
+        \expandafter\def\expandafter\reserved@a\expandafter{%
+          \backrefxxx#2%
+        }%
+        \let\BRorg@backrefxxx\backrefxxx
+        \global\let\BR@found=N%
+        \long\def\backrefxxx##1##2##3{%
+          \expandafter\def\expandafter\reserved@b\expandafter{%
+            \BRorg@backrefxxx{##1}{##2}{##3}%
+          }%
+          \ifx\reserved@a\reserved@b
+            \global\let\BR@found=Y%
+          \fi
+        }%
+        \setbox\@tempboxa\hbox{\csname br@\x\endcsname}%
+      \endgroup
+      \let\backrefsep\relax
+      \def\backreftwosep{\backrefsep}%
+      \def\backreflastsep{\backrefsep}%
+      \if N\BR@found
+        \expandafter\protected@xdef\csname br@\x\endcsname{%
+          \csname br@\x\endcsname, %
+          \protect\backrefxxx#2%
+        }%
+        \expandafter\protected@xdef\csname brl@\x\endcsname{%
+          \csname brl@\x\endcsname
+          \ifnum\@nameuse{brc@\x}=1 %
+            \noexpand\backreftwosep
+          \else
+            \noexpand\backreflastsep
+          \fi
+          \protect\backrefxxx#2%
+        }%
+        \count@=\@nameuse{brc@\x}\relax
+        \advance\count@ by 1 %
+        \expandafter\xdef\csname brc@\x\endcsname{\the\count@}%
+      \fi
+      \expandafter\protected@xdef\csname brld@\x\endcsname{%
+        \csname brld@\x\endcsname
+        \ifnum\@nameuse{brcd@\x}=1 %
+          \noexpand\backreftwosep
+        \else
+          \noexpand\backreflastsep
+        \fi
+        \protect\backrefxxx#2%
+      }%
+      \count@=\@nameuse{brcd@\x}\relax
+      \advance\count@ by 1 %
+      \expandafter\xdef\csname brcd@\x\endcsname{\the\count@}%
+    \fi
+  }%
+}
+\def\@currentHref{}
+\AtBeginDocument{%
+  \let\BRorg@bibitem\bibitem
+  \let\bibitem\BR@bibitem
+  \let\BRorg@thebibliography\thebibliography
+  \def\thebibliography{%
+    \BR@starttoc
+    \BRorg@thebibliography
+  }%
+  \@ifundefined{NAT@parse}{%
+    \global\let\BRorg@citex\@citex
+    \global\let\@citex\BR@citex
+  }{%
+    \@ifpackageloaded{hyperref}{}{%
+      \def\hyper@natlinkstart#1{\Hy@backout{#1}}%
+    }%
+    \PackageInfo{backref}{** backref set up for natbib **}%
+  }%
+}
+\def\BR@starttoc{%
+  \begingroup
+    \makeatletter
+    \@input{\jobname.brf}%
+    \if@filesw
+      \@ifundefined{tf@brf}{%
+        \expandafter\newwrite\csname tf@brf\endcsname
+      }{}%
+      \@ifundefined{tf@brf@open}{%
+        \immediate\openout\csname tf@brf\endcsname\jobname.brf\relax
+        \gdef\tf@brf@open{}%
+      }{}%
+    \fi
+    \@nobreakfalse
+  \endgroup
+}
+\def\BR@citex[#1]#2{%
+  \BRorg@citex[{#1}]{#2}%
+  \ifBR@verbose
+    \PackageInfo{backref}{back cite \string`#2\string'}%
+  \fi
+  \Hy@backout{#2}%
+}
+\@ifpackageloaded{chicago}{%
+  \let\BRorg@citedatax\@citedatax
+  \def\@citedatax[#1]#2{%
+    \BRorg@citedatax[{#1}]{#2}%
+    \Hy@backout{#2}%
+  }%
+}{}
+\def\Hy@backout#1{%
+  \@bsphack
+  \ifx\@empty\@currentlabel
+    \protected@write\@auxout{}{%
+      \string\@writefile{brf}{%
+        \string\backcite{#1}{{\thepage}{(document)}{Doc-Start}}%
+      }%
+    }%
+  \else
+   \protected@write\@auxout{}{%
+     \string\@writefile{brf}{%
+       \string\backcite{#1}{{\thepage}{\@currentlabel}{\@currentHref}}%
+     }%
+   }%
+  \fi
+  \@esphack
+}
+\endinput
+%%
+%% End of file `backref.sty'.

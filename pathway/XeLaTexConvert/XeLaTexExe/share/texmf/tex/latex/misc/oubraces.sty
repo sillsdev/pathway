@@ -1,0 +1,92 @@
+% oubraces.sty: Interleave \overbrace with \underbrace
+%                Donald Arseneau, 1993
+%
+% \overunderbraces{upper_braces}{main_formula}{lower_braces}
+%
+% Instructions are given below, after \endinput.
+%
+%  First, set catcode of @ in case it isn't a "letter" already
+\expandafter\edef\csname REST@catcode\endcsname
+  {\catcode`\noexpand\@=\the\catcode`\@
+  \let \csname SREST@catcode\endcsname \noexpand\UnDefinedButNoAt}
+\catcode`\@=11
+
+\def\overunderbraces #1#2#3{{%
+ \baselineskip\z@skip \lineskip4\p@ \lineskiplimit4\p@
+ \displaystyle % deliberately generate error if not in math mode!
+% first, do the top half of the alignment in a save-box ...
+ \setbox\z@\vbox{\ialign{&\hfil${}##{}$\hfil\cr
+   \global\let\br\br@label #1\cr % upper labels
+   \global\let\br\br@down #1\cr  % upper braces
+   #2\cr % main line of the formula
+ }}% finished partial alignment and \vbox.
+ \dimen@-\ht\z@ %   Measure height of partial alignment --
+% ... it is the height we want for the whole.
+% Now do the whole alignment (notice the repetition from above)
+ \setbox\z@\vbox{\ialign{&\hfil${}##{}$\hfil\cr
+   \global\let\br\br@label #1\cr % upper labels
+   \global\let\br\br@down #1\cr  % upper braces
+   #2\cr % main line of the formula
+   \global\let\br\br@up #3\cr    % lower braces
+   \global\let\br\br@label #3\cr % lower labels
+ }}% finished whole alignment and \vbox.
+ \advance\dimen@\ht\z@ % calc. the necessary lowering
+ \lower\dimen@\hbox{\box\z@}% shift to get the desired height
+}}
+
+% Three aliases for \br.
+% #1=number of spanned columns,  #2=label
+\def\br@up#1#2{\multispan{#1}\upbracefill}
+\def\br@down#1#2{\multispan{#1}\downbracefill}
+\def\br@label#1#2{\multispan{#1}\hidewidth $#2$\hidewidth}
+
+\REST@catcode
+
+\endinput
+%
+%-----------------------------------------------------------------
+%
+% oubraces.sty: Interleave \overbrace with \underbrace
+%                Donald Arseneau, 1993
+%
+% The syntax is:
+%
+%   \overunderbraces{upper_braces}{main_formula}{lower_braces}
+%
+% Suppose we want the equation:
+%                x               y
+%          ,-----^-----.   ,-----^-----.
+%  a + b + c + d + e + f + g + h + i + j + k + l + m = \pi r^2
+%                  `-----v-----'
+%                        z
+% There are seven segments:
+%                x               y
+%          ,-----^-----.   ,-----^-----.
+%  a + b + c + d + e + f + g + h + i + j + k + l + m = \pi r^2
+%  11111111222222223333344455555666666667777777777...
+%                  `-----v-----'
+%                        z
+% Insert & between each segment (where the tips of the braces point)
+% to type the main_formula:
+%                x               y
+%          ,-----^-----.   ,-----^-----.
+%  a + b +&c + d +&e + f&+&g + h&+ i + j&+ k + l + m
+%                  `-----v-----'
+%                        z
+% Each brace should be specified by typing
+%
+%    \br{number_of_segments}{label},
+%
+% separated by  &  to indicate which segment to start at; and
+% where  & &  skips a segment that has no brace.  For our
+% example formula, the upper and lower brace specifiers are:
+%
+% top row:  &\br{2}{x}& &\br{2}{y}
+% bot row:  & &\br{3}{z}
+%
+% Now put them all together:
+%
+% \overunderbraces{&\br{2}{x}& &\br{2}{y}}%
+%    {a + b +&c + d +&e + f&+&g + h&+ i + j&+ k + l + m}%
+%    {& &\br{3}{z}}
+%  = \pi r^2

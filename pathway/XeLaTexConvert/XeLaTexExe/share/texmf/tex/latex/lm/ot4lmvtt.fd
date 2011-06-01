@@ -1,0 +1,36 @@
+% This file belongs to the Latin Modern package. The work is released under
+% the GUST Font License. See the MANIFEST.txt and README.eng files
+% for the details. For the most recent version of this license see
+% http://www.gust.org.pl/fonts/licenses/GUST-FONT-LICENSE.txt or
+% http://tug.org/fonts/licenses/GUST-FONT-LICENSE.txt
+
+\ProvidesFile{ot4lmvtt.fd}[2007/01/14 v1.3 Font defs for Latin Modern]
+\DeclareFontFamily{OT4}{lmvtt}{\hyphenchar \font\m@ne}
+\DeclareFontShape{OT4}{lmvtt}{m}{n}
+     {<-> rm-lmvtt10}{}
+\DeclareFontShape{OT4}{lmvtt}{m}{sl}
+     {<-> rm-lmvtto10}{}
+\DeclareFontShape{OT4}{lmvtt}{m}{it}
+     {<->sub*lmvtt/m/sl}{}
+%%%%%%%% light (l) and dark (b) variants:
+\DeclareFontShape{OT4}{lmvtt}{l}{n}
+     {<-> rm-lmvtl10}{}
+\DeclareFontShape{OT4}{lmvtt}{l}{sl}
+     {<-> rm-lmvtlo10}{}
+\DeclareFontShape{OT4}{lmvtt}{l}{it}
+     {<->sub*lmvtt/l/sl}{}
+\DeclareFontShape{OT4}{lmvtt}{b}{n}
+     {<-> rm-lmvtk10}{}
+\DeclareFontShape{OT4}{lmvtt}{b}{sl}
+     {<-> rm-lmvtko10}{}
+\DeclareFontShape{OT4}{lmvtt}{b}{it}
+     {<->sub*lmvtt/b/sl}{}
+\DeclareFontShape{OT4}{lmvtt}{bx}{n}
+     {<->ssub*lmvtt/b/n}{}
+\DeclareFontShape{OT4}{lmvtt}{bx}{sl}
+     {<->ssub*lmvtt/b/sl}{}
+\DeclareFontShape{OT4}{lmvtt}{bx}{it}
+     {<->sub*lmvtt/b/sl}{}
+\endinput
+%%
+%% End of file `ot4lmvtt.fd'.

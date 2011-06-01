@@ -1,0 +1,112 @@
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% This is file `acromake.sty', written on 
+%% on <1995/7/16> by Paul A. Thompson, Ph.D.
+%% 
+%% Copyright (C) 1995 Paul A. Thompson
+%% All rights reserved. 
+%%
+%% Advice and suggestions of D. Carlisle, D. Arseneau and P. Schmitt noted.
+%% Errors responsibility of author.
+%%
+%% This file requires LaTeX2e. 
+%% --------------------------- 
+%% 
+%% No permission is granted to modify this file. 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% This algorithm is presented and discussed in TeX and TUG News, V4, #1.
+%% The algorithm as presented there has several small problems, which are
+%% solved here.
+%% 
+%% This file generates acronyms.  There are three parameters which may be
+%% set by the user
+%% 1. To generate an acronym
+%%    \acromk{ANSA}{{\tt ANSA}}{another nasty stupid acronym}
+%%
+%%    The first argument is the name used in text to implement the acronym.
+%%    The second argument is the name printed in the text when the acronym
+%%    is used.  The final argument is the full, non-acronymized version.
+%%
+%%    So, if there was an acronym 
+%%    \acromake{ANSA}{{\tt ANSA}}{another nasty stupid acronym}
+%%    it could be used as 
+%%
+%%    \ANSA is a new approach to the use of \ANSA, where \ANSA is ...
+%% 
+%%    This would result in
+%%
+%%    another nasty stupid acronym ({\tt ANSA}) is a new approach to 
+%%    the use of {\tt ANSA}, where {\tt ANSA} is ...
+%%    
+%% 2. To use the acronym
+%%    here \ANSA whatever {foo}lish use of acronym you wish
+%%    This will generate the following:
+%%      Usage number           Resolved text
+%%           1              another nasty stupid acronym (ANSA) 
+%%           2              ANSA (page 2) 
+%%           3 (and beyond) ANSA
+%%
+%% 3. The following may be set by the user:
+%%    ACRcnta  - count of uses of acronym macro which will be in full form  
+%%               (default is 1)
+%%    ACRcntb  - count of uses of acronym macro which will include page of
+%%               acronym def (default is 1 reference, or ACRcntb-ACRcnta)
+%%    useACRlb - should the page reference be used - 1-yes, 0-no
+%%
+%% For every acronym, the macro generates the acronym macro and a macro which
+%% acts like a counter for acronym use.  Since counters are quite rare, it is
+%% not responsible to use a counter for every acronym - rather, a macro is
+%% generated which fills this function.  The acronym macro is called \foo,
+%% while the counter macro is called \fooz.  Thus, I would avoid calling any
+%% acronym fooz, as this may be confoozing.
+%% 
+%% The .sty file generates 1 counter if it is included.  For each acronym
+%% specified, the .sty file generates two macros, 1 for the acronym, and 1 for
+%% the count of acronym use
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+\NeedsTeXFormat{LaTeX2e}%                                         % 1
+\RequirePackage{xspace}
+\newcommand{\pv}{}     \newcounter{util}
+\newcommand{\ACRcnta}{1}%  full acronym generations
+\newcommand{\ACRcntb}{2}%  ACRcntb - ACRcnta = acronym + page number
+\newcommand{\addtomacro}[2]{% % like \addtocounter, but for a macro
+   \setcounter{util}{#1}\addtocounter{util}{#2}\xdef#1{\theutil}}%
+\newcommand{\acromake}[3]{%
+   \ifnum\ACRcnta<1\renewcommand{\ACRcnta}{1}\fi%
+   \expandafter\gdef\csname#1z\endcsname{0}% count occurrences
+   \expandafter\newcommand\csname#1\endcsname{%
+      \ifnum\csname#1z\endcsname=0\label{acro:#1}\fi%
+      \expandafter\addtomacro\expandafter{\csname#1z\endcsname}{1}%
+      #3 (#2)% expansion and acronym printed here   
+      \ifnum\csname#1z\endcsname=\ACRcnta%
+        \expandafter\renewcommand\csname#1\endcsname{%
+          \expandafter\addtomacro\expandafter{\csname#1z\endcsname}{1}%
+          \renewcommand{\pv}{ (see Page \pageref{acro:#1})}%
+          \ifnum\csname#1z\endcsname>\ACRcntb%
+            \renewcommand{\pv}{#2}%
+          \else%
+            \ifnum\ACRcntb=0%
+              \renewcommand{\pv}{#2}%
+            \else%
+              \ifnum\thepage=0\pageref{acro:#1}%
+                \renewcommand{\pv}{#2}%
+              \else%
+                \renewcommand{\pv}{#2\ (see Page \pageref{acro:#1})}%
+              \fi%
+            \fi%
+          \fi%
+          \pv\xspace%
+        }%
+      \fi%
+      \xspace}%
+}
+
+   

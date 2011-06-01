@@ -1,0 +1,12 @@
+\glossaryentry{1.0> =General:>Initial version}{1}
+\glossaryentry{2.22> =General:>added makeglos.bat file}{2}
+\glossaryentry{2.0> =General:>Hyper page formats: \texttt  {'hypersf}, \texttt  {'hypertt}, \texttt  {'hyperbf} and \texttt  {'hyperbf}}{3}
+\glossaryentry{2.12> =General:>Hyper page format: \texttt  {'hyperrm}}{3}
+\glossaryentry{2.4> =General:>Hyper page formats updated to take two arguments. Additional formats also provided}{3}
+\glossaryentry{2.14> =General:>'xglossary added}{4}
+\glossaryentry{2.17> =General:>'storeglosentry added}{4}
+\glossaryentry{2.14> =General:>'useglosentry added}{4}
+\glossaryentry{2.14> =General:>'useGlosentry added}{4}
+\glossaryentry{2.18> =General:>'gls added}{4}
+\glossaryentry{2.19> =General:>fixed bug in 'storeglosentry}{4}
+\glossaryentry{2.14> =General:>makeglos -m switch added}{6}

@@ -1,0 +1,36 @@
+% This file belongs to the Latin Modern package. The work is released under
+% the GUST Font License. See the MANIFEST.txt and README.eng files
+% for the details. For the most recent version of this license see
+% http://www.gust.org.pl/fonts/licenses/GUST-FONT-LICENSE.txt or
+% http://tug.org/fonts/licenses/GUST-FONT-LICENSE.txt
+
+\ProvidesFile{t1lmvtt.fd}[2007/01/14 v1.3 Font defs for Latin Modern]
+\DeclareFontFamily{T1}{lmvtt}{\hyphenchar \font\m@ne}
+\DeclareFontShape{T1}{lmvtt}{m}{n}
+     {<-> ec-lmvtt10}{}
+\DeclareFontShape{T1}{lmvtt}{m}{sl}
+     {<-> ec-lmvtto10}{}
+\DeclareFontShape{T1}{lmvtt}{m}{it}
+     {<->sub*lmvtt/m/sl}{}
+%%%%%%%% light (l) and dark (b) variants:
+\DeclareFontShape{T1}{lmvtt}{l}{n}
+     {<-> ec-lmvtl10}{}
+\DeclareFontShape{T1}{lmvtt}{l}{sl}
+     {<-> ec-lmvtlo10}{}
+\DeclareFontShape{T1}{lmvtt}{l}{it}
+     {<->sub*lmvtt/l/sl}{}
+\DeclareFontShape{T1}{lmvtt}{b}{n}
+     {<-> ec-lmvtk10}{}
+\DeclareFontShape{T1}{lmvtt}{b}{sl}
+     {<-> ec-lmvtko10}{}
+\DeclareFontShape{T1}{lmvtt}{b}{it}
+     {<->sub*lmvtt/b/sl}{}
+\DeclareFontShape{T1}{lmvtt}{bx}{n}
+     {<->ssub*lmvtt/b/n}{}
+\DeclareFontShape{T1}{lmvtt}{bx}{sl}
+     {<->ssub*lmvtt/b/sl}{}
+\DeclareFontShape{T1}{lmvtt}{bx}{it}
+     {<->sub*lmvtt/b/sl}{}
+\endinput
+%%
+%% End of file `t1lmvtt.fd'.

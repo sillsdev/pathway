@@ -1,0 +1,48 @@
+%File name ot1maksf.fd
+%A. Tsolomitis
+%University of the Aegean
+%Department of Mathematics
+%Copyright Dec 2002
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY    
+
+
+
+\DeclareFontShape{OT1}{maksf}{m}{n}{<-> s * [0.90] ksf8a}{}
+\DeclareFontShape{OT1}{maksf}{m}{it}{<-> s * [0.90] ksfi8a}{}
+\DeclareFontShape{OT1}{maksf}{m}{sl}{<-> s * [0.90] ksfi8a}{}
+\DeclareFontShape{OT1}{maksf}{m}{sc}{<-> s * [0.90] ksfsc8a}{}
+\DeclareFontShape{OT1}{maksf}{b}{n}{<-> s * [0.90] ksfb8a}{}
+\DeclareFontShape{OT1}{maksf}{b}{it}{<-> s * [0.90] ksfbi8a}{}
+\DeclareFontShape{OT1}{maksf}{b}{sl}{<-> s * [0.90] ksfbi8a}{}
+
+\DeclareFontShape{OT1}{maksf}{bx}{n}{ <-> s * [0.90] ksfb8a}{}
+\DeclareFontShape{OT1}{maksf}{bx}{it}{ <-> s * [0.90] ksfbi8a}{}
+\DeclareFontShape{OT1}{maksf}{bx}{sl}{ <-> s * [0.90] ksfbi8a}{}
+
+
+\endinput
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

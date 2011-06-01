@@ -1,0 +1,176 @@
+\ProvidesFile{kerkis.sty}
+[2000/02/25 v1.5 Package `kerkis.sty']
+\NeedsTeXFormat{LaTeX2e}
+\message{ }\MessageBreak
+\message{***********************************************}\MessageBreak
+\message{******** Loading The Kerkis FontFamily ********}\MessageBreak
+\message{********** Department of Mathematics **********}\MessageBreak                    
+\message{*********** University of the Aegean **********}\MessageBreak
+\message{***********************************************}\MessageBreak
+\renewcommand{\rmdefault}{mak}
+\renewcommand{\sfdefault}{maksf}
+\renewcommand{\ttdefault}{pcr}
+\newcommand{\calshape}{\fontshape{cal}\selectfont}
+\newcommand{\textcal}[1]{{\fontshape{cal}\selectfont #1}}
+\newcommand{\uishape}{\fontshape{ui}\selectfont}
+\newcommand{\textui}[1]{{\fontshape{ui}\selectfont #1}}
+\newcommand{\scslshape}{\fontshape{sco}\selectfont}
+\newcommand{\textscsl}[1]{{\fontshape{sco}\selectfont #1}}
+\newcommand{\sbseries}{\fontseries{sb}\selectfont}
+\newcommand{\textsb}[1]{{\fontseries{sb}\selectfont #1}}
+\def\stigma{\ddigamma}
+\def\Stigma{\Digamma}
+\DeclareTextCommand{\anwtonos}{LGR}{\char'047\relax}
+%\let\katwtonos\relax
+%\let\qoppa\relax
+%\let\sampi\relax
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareTextAccent{\`}{OT1}{30}
+\DeclareTextAccent{\'}{OT1}{180}
+\DeclareTextAccent{\^}{OT1}{25} 
+\DeclareTextAccent{\~}{OT1}{152}
+\DeclareTextAccent{\"}{OT1}{168}
+\def\"#1{\accent168#1}   
+%\@ifpackagewith{fontenc}{T1}{}{\def\"#1{\accent168#1}}
+\DeclareTextAccent{\H}{OT1}{5}
+\DeclareTextAccent{\r}{OT1}{9}
+\DeclareTextAccent{\t}{OT1}{10}
+\DeclareTextAccent{\v}{OT1}{16}
+\DeclareTextAccent{\u}{OT1}{11}
+\DeclareTextAccent{\=}{OT1}{175}
+\DeclareTextAccent{\.}{OT1}{1}
+\DeclareTextCommand{\b}{OT1}[1]
+   {{\o@lign{\relax#1\crcr\hidewidth\sh@ft{29}%
+     \vbox to.2ex{\hbox{\char175}\vss}\hidewidth}}} %%% error
+\DeclareTextCommand{\c}{OT1}[1]
+   {\leavevmode\setbox\z@\hbox{#1}\ifdim\ht\z@=1ex\accent11 #1%
+     \else{\ooalign{\hidewidth\char184\hidewidth
+        \crcr\unhbox\z@}}\fi}
+\DeclareTextCommand{\d}{OT1}[1]
+   {{\o@lign{\relax#1\crcr\hidewidth\sh@ft{10}.\hidewidth}}}
+\DeclareTextCommand{\t}{OT1}[1]
+   {\leavevmode\setbox\z@\hbox{#1}%
+     {\ooalign{\hidewidth\char10\hidewidth
+        \crcr\unhbox\z@}}}
+\DeclareTextCommand{\k}{OT1}[1]
+   {\leavevmode\setbox\z@\hbox{#1}\ifdim\ht\z@=1ex\accent11 #1%
+     \else{\ooalign{\hidewidth\char8\hidewidth
+        \crcr\unhbox\z@}}\fi}
+\DeclareTextSymbol{\textperthousand}{OT1}{137}
+\DeclareTextSymbol{\textsterling}{OT1}{163}
+\DeclareTextSymbol{\L}{OT1}{6}
+\DeclareTextSymbol{\i}{OT1}{17}
+\DeclareTextSymbol{\j}{OT1}{18}
+\DeclareTextSymbol{\l}{OT1}{7}
+\DeclareTextSymbol{\textexclamdown}{OT1}{161}
+\DeclareTextSymbol{\textgreater}{OT1}{`\>}
+\DeclareTextSymbol{\textless}{OT1}{`\<}
+\DeclareTextSymbol{\textquestiondown}{OT1}{191}
+\DeclareTextSymbol{\textasciicircum}{OT1}{94}
+\DeclareTextComposite{\'}{OT1}{!}{161}
+\DeclareTextComposite{\'}{OT1}{?}{191}
+\DeclareTextComposite{\"}{OT1}{e}{235}
+\DeclareTextComposite{\"}{OT1}{o}{246}
+\DeclareTextSymbol{\trademark}{OT1}{153}
+\DeclareTextSymbol{\textregistered}{OT1}{174}
+\DeclareTextSymbol{\AA}{OT1}{197}
+\DeclareTextSymbol{\aa}{OT1}{229}
+\DeclareTextSymbol{\AE}{OT1}{198}
+\DeclareTextSymbol{\ae}{OT1}{230}
+\DeclareTextSymbol{\O}{OT1}{216}
+\DeclareTextSymbol{\o}{OT1}{248}
+\DeclareTextSymbol{\OE}{OT1}{140}
+\DeclareTextSymbol{\oe}{OT1}{156}
+\DeclareTextSymbol{\ss}{OT1}{223}
+\DeclareTextSymbol{\textcopyright}{OT1}{169}
+\DeclareTextSymbol{\textdagger}{OT1}{134}
+\DeclareTextSymbol{\textdaggerdbl}{OT1}{135}
+\DeclareTextSymbol{\textparagraph}{OT1}{182}
+\DeclareTextSymbol{\textsection}{OT1}{167}
+\DeclareTextSymbolDefault{\textbackslash}{OT1}
+\DeclareTextSymbol{\textbackslash}{OT1}{92}
+\DeclareTextCommandDefault{\textvisiblespace}{%
+   \mbox{\kern.06em\vrule \@height.3ex}%
+   \vbox{\hrule \@width.3em}%
+   \hbox{\vrule \@height.3ex}}
+\DeclareTextSymbolDefault{\textbraceleft}{OT1}
+\DeclareTextSymbol{\textbraceleft}{OT1}{123}
+\DeclareTextSymbolDefault{\textbraceright}{OT1}
+\DeclareTextSymbol{\textbraceright}{OT1}{125}
+\DeclareTextAccentDefault{\textcircled}{OT1}
+\DeclareTextSymbolDefault{\textunderscore}{OT1}
+\DeclareTextSymbol{\textunderscore}{OT1}{95}
+\DeclareTextCommand{\textcircled}{OT1}[1]{{%
+   \ooalign{%
+      \hfil \raise .24ex\hbox {\upshape#1}\hfil \crcr
+      \char 136 % "0D
+   }%
+}}
+
+%%%%%%%%%%% C-S %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\@ifpackagewith{inputenc}{iso-8859-7}{%
+      \DeclareInputText{242}{c}
+}{}
+
+%\@ifpackagewith{babel}{greek}{%
+%  \@ifpackagewith{babel}{polutonikogreek}{%
+%     \DeclareInputText{242}{c}
+%}}
+
+%%%\DeclareInputText{242}{c}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\@ifpackagewith{babel}{greek}{%
+%%%% from grsymb package %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareTextCommand{\Digamma}{LGR}{\char"C3\relax}
+\DeclareTextCommand{\ddigamma}{LGR}{\char"93\relax}
+\DeclareTextCommand{\tao}{LGR}{\char"01\relax}
+\DeclareTextCommand{\Qoppa}{LGR}{\char"14\relax}
+\DeclareTextCommand{\varqoppa}{LGR}{\char"13\relax}
+\DeclareTextCommand{\Sampi}{LGR}{\char"1A\relax}
+\DeclareTextCommand{\vardigamma}{LGR}{\char"07\relax}
+\DeclareTextCommand{\Stigma}{LGR}{\textlatin{\char"43\relax}}
+\DeclareTextCommand{\VarQoppa}{LGR}{\textlatin{\char"47\relax}}
+\DeclareTextCommand{\euro}{LGR}{\textgreek{\char'030\relax}}
+%\DeclareTextCommand{\permill}{LGR}{\char"19\relax}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+}{%
+\@ifpackagewith{babel}{polutonikogreek}{
+%%%% from grsymb package %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareTextCommand{\Digamma}{LGR}{\char"C3\relax}
+\DeclareTextCommand{\ddigamma}{LGR}{\char"93\relax}
+\DeclareTextCommand{\tao}{LGR}{\char"01\relax}
+\DeclareTextCommand{\Qoppa}{LGR}{\char"14\relax}
+\DeclareTextCommand{\varqoppa}{LGR}{\char"13\relax}
+\DeclareTextCommand{\Sampi}{LGR}{\char"1A\relax}
+\DeclareTextCommand{\vardigamma}{LGR}{\char"07\relax}
+\DeclareTextCommand{\Stigma}{LGR}{\textlatin{\char"43\relax}}
+\DeclareTextCommand{\VarQoppa}{LGR}{\textlatin{\char"47\relax}}
+\DeclareTextCommand{\euro}{LGR}{\textgreek{\char'030\relax}}
+%\DeclareTextCommand{\permill}{LGR}{\char"19\relax}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+}{}}
+
+%%% Fix LaTeX logos %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareRobustCommand{\LaTeX}{{\fontencoding{OT1}\fontfamily{mak}\selectfont L\kern-.27em%
+        {\sbox\z@ T%
+         \vbox to\ht\z@{\hbox{\check@mathfonts
+                     %         \fontsize\sf@size\z@
+                              \math@fontsfalse\selectfont
+                              \textsc{a}}%
+                        \vss}%
+        }%
+        \kern.02em%
+        \TeX}}
+\DeclareRobustCommand{\LaTeXe}{\mbox{\m@th
+  \if b\expandafter\@car\f@series\@nil\boldmath\fi
+  \LaTeX\kern.05em2\kern-.1em%
+ \raisebox{-.4ex}{\fontencoding{LGR}\selectfont\textit{e}}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\endinput
+
+
+

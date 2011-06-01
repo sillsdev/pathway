@@ -1,0 +1,116 @@
+%% Save file as: CEA.STY          Source: CTAN/macros/latex209/contrib/misc/
+% Name: cea.sty
+% Description: LaTeX style for Computers and Electronics in Agriculture
+%              Submissions
+% Keywords: LaTeX, style-option
+% Author: James Darrell McCauley <jdm5548@diamond.tamu.edu>
+% Latest Version: Version 0.1a <30 Mar 2000>
+% Note: This is a hack and not official by Elsevier Sci Pub.
+%       It requires doublespace.sty and endfloat.sty from CTAN.
+%       See CHANGE LOG below.
+% See also: cea.bst, doublespace.sty, endfloat.sty
+%
+% USAGE: \documentstyle[cea]{article}
+%        ....
+%        \begin{document}
+%        \bibliographystyle{cea}
+%        \maketitle
+%
+% CHANGE LOG
+% Date          Ver  Changes
+% <30 Mar 2000> 0.1a \input endfloat.sty instead of \input endfloat11.sty.
+%                    The former exists on CTAN but the later doesn't.
+%                    Also, change niord.shsu.edu to CTAN in the comments.
+%                    G. Pearson <gpearson@hipnt.com>
+% <13 Mar 1992> 0.1  Built late one night <jdm5548@diamond.tamu.edu>
+%
+% Variations from the general article.sty:
+% 1. You should list correspondence address in \date. For example:
+%       \date{James Darrell McCauley\\
+%       Department of Agricultural Engineering\\
+%       Purdue University\\
+%       1146 Agricultural Engineering Building\\
+%       West Lafayette, Indiana 47907--1146\\
+%       USA}
+% 2. At the beginning of the abstract (after \begin{abstract}), you should
+%    provide the complete bibliographic entry by which the paper will be
+%    referenced.
+% 3. The singlespace environment may be very helpful for typesetting
+%    math (see doublespace.sty).
+% 4. Read the ``Guide for Authors,'' included once a year in ``Computers
+%    and Electronics Agriculture.''
+
+\input doublespace.sty % available from CTAN
+\input endfloat.sty    % available from CTAN
+
+% put page number in upper right corner
+\pagestyle{myheadings}
+\markboth{}{}
+
+%
+% changes to maketitle
+\def\@maketitle{\newpage
+ \null
+ \vskip 2em \begin{center} \begin{singlespace}
+ {\LARGE \@title \par} \vskip 1.5em {%\large \lineskip .5em
+\begin{tabular}[t]{c}\@author
+ \end{tabular}\par}
+ \vskip 1em {{\bf Direct Correspondence to:}\\ \@date}
+ \end{singlespace}\end{center}
+ \par
+ \vskip 1.5em}
+\def\abstract{\if@twocolumn
+\section*{Abstract}
+\else %\small
+\begin{center}
+{\bf Abstract\vspace{-.5em}\vspace{0pt}}
+\end{center}
+%\quotation
+\fi}
+\def\endabstract{\if@twocolumn\else\endquotation\fi}
+
+%
+% Use parens instead of brackets for \cite, and no label in the bibliography
+%
+\def\@cite#1#2{(#1\if@tempswa , #2\fi)}
+\def\@biblabel#1{}
+
+%
+% following borrowed from apalike.sty
+%
+% Set length of hanging indentation for bibliography entries
+%
+\newlength{\bibhang}
+\setlength{\bibhang}{2em}
+
+% \thebibliography environment depends on whether or not `chapter's can exist
+%
+\@ifundefined{chapter}{\def\thebibliography#1{\section*{References\@mkboth
+  {REFERENCES}{REFERENCES}}\list
+  {\relax}{\setlength{\labelsep}{0em}
+        \setlength{\itemindent}{-\bibhang}
+        \setlength{\leftmargin}{\bibhang}}
+    \def\newblock{\hskip .11em plus .33em minus .07em}
+    \sloppy\clubpenalty4000\widowpenalty4000
+    \sfcode`\.=1000\relax}}%
+{\def\thebibliography#1{\chapter*{Bibliography\@mkboth
+  {BIBLIOGRAPHY}{BIBLIOGRAPHY}}\list
+  {\relax}{\setlength{\labelsep}{0em}
+        \setlength{\itemindent}{-\bibhang}
+        \setlength{\leftmargin}{\bibhang}}
+    \def\newblock{\hskip .11em plus .33em minus .07em}
+    \sloppy\clubpenalty4000\widowpenalty4000
+    \sfcode`\.=1000\relax}}
+
+% `; ' goes between cites, and there's no \hbox around individual cites
+%
+\def\@citex[#1]#2{\if@filesw\immediate\write\@auxout{\string\citation{#2}}\fi
+  \def\@citea{}\@cite{\@for\@citeb:=#2\do
+    {\@citea\def\@citea{; }\@ifundefined
+       {b@\@citeb}{{\bf ?}\@warning
+       {Citation `\@citeb' on page \thepage \space undefined}}%
+{\csname b@\@citeb\endcsname}}}{#1}}
+%
+% end of stuff from apalike.sty
+%
+\endinput

@@ -1,0 +1,22 @@
+%%
+%% This is file `umtms.fd',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% mtfonts.fdd  (with options: `Umtms')
+%% 
+%% Copyright 1996 1997 Frank Mittelbach and David Carlisle.
+%%
+%% Development of this package was commissioned by Y&Y Inc.
+%% http://www.yandy.com
+\ProvidesFile{umtms.fd}
+ [2001/05/30 v1.0c
+  Mathtime Plus Script (Unknown encoding)
+  (FMi)]
+\DeclareFontFamily{U}{mtms}{\skewchar\font42}
+\DeclareFontShape{U}{mtms}{m}{n}{<->mtms}{}
+\DeclareFontShape{U}{mtms}{b}{n}{<->mtmsb}{}
+\endinput
+%%
+%% End of file `umtms.fd'.

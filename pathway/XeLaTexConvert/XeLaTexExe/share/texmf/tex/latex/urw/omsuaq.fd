@@ -1,0 +1,19 @@
+\ProvidesFile{omsuaq.fd}
+\DeclareFontFamily{OMS}{uaq}{\skewchar\font48}
+\DeclareFontShape{OMS}{uaq}{m}{n}
+   {<-> ssub * cmsy/m/n}{}
+\DeclareFontShape{OMS}{uaq}{m}{it}
+   {<-> ssub * cmsy/m/n}{}
+\DeclareFontShape{OMS}{uaq}{m}{sl}
+   {<-> ssub * cmsy/m/n}{}
+\DeclareFontShape{OMS}{uaq}{m}{sc}
+   {<-> ssub * cmsy/m/n}{}
+\DeclareFontShape{OMS}{uaq}{b}{n}
+   {<-> ssub * cmsy/b/n}{}
+\DeclareFontShape{OMS}{uaq}{b}{it}
+   {<-> ssub * cmsy/b/n}{}
+\DeclareFontShape{OMS}{uaq}{b}{sl}
+   {<-> ssub * cmsy/b/n}{}
+\DeclareFontShape{OMS}{uaq}{b}{sc}
+   {<-> ssub * cmsy/b/n}{}
+\endinput

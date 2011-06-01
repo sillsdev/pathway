@@ -1,0 +1,25 @@
+LaTeX Package : xfor
+
+Last Modified : 5 February 2009
+Version       : 1.05
+Author        : Nicola Talbot
+
+This package redefines \@for so that it is possible to
+prematurely terminate the loop. There is also a look ahead
+facility to access the next element before moving on to the
+next iteration.
+
+The package is supplied using the TeX Directory Structure (TDS).
+Files in texmf directory should go in the corresponding
+$LOCALTEXMF directories.
+
+*Remember to refresh TeX's database*
+
+The package and documentation source code is also supplied as a
+dtx and ins file located in texmf/source.
+
+This material is subject to the LaTeX Project Public License. 
+See  http://www.ctan.org/tex-archive/help/Catalogue/licenses.lppl.html for the details of that license.
+
+http://theoval.cmp.uea.ac.uk/~nlct/
+

@@ -1,0 +1,42 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{circle}[1998/07/15 LaTeX package for circles in math mode]
+%\Author{Klaus G. Barthelmann, barthel@informatik.uni-mainz.de}
+%\ProvidesCommands{\Circle[1][n]}
+
+% As the name says, \Circle gives a circle in math mode. Its size lies between
+% that of the binary operator \circ and that of the unary operator \bigcirc.
+% It can be used as the nextstep operator of temporal logic in conjunction with
+% \Box and \Diamond (latexsym) or \square and \lozenge (amssymb). \Circle[f]
+% gives a filled circle.
+% As you probably know, L. Lamport discouraged the use of the nextstep
+% operator for program verification. This could be the reason that he did not
+% provide a symbol for it in \LaTeX.
+% The circles are taken from the lcircle10 font. We try to choose the
+% appropriate size. If you need a high quality output, this solution will not
+% suit you.
+
+\newcommand*\Circle[1][n]{%
+  \mathchoice{\@Circle{#1}{\tf@size}}{\@Circle{#1}{\tf@size}}%
+             {\@Circle{#1}{\sf@size}}{\@Circle{#1}{\ssf@size}}%
+}
+
+% Bugs: circles have size n at fontsize 2n-1 and 2n; they do not scale linearly
+%       depending on the fontsize
+
+\newcommand*\@Circle[2]{{%
+  \dimen0=#2pt \advance\dimen0by.5pt \dimen1=1pt \divide\dimen0by\dimen1
+  \count255=\dimen0 \ifodd\count255 \advance\count255by1 \fi\divide\count255by2
+  \ifnum\count255=0 {}\else\ifnum\count255>15 {}\else
+    \dimen0=\count255pt
+    \edef\circfont{tencirc\ifnum\count255>8 w\fi}
+    \advance\count255by\if #1f111\else 95\fi
+    \dimen2=.82\dimen0 \advance\dimen2by.4pt
+    \raisebox{.625\dimen0}[\dimen2]{\makebox[1.2\dimen0]{%
+      \hspace*{.9\dimen0}%
+      \csname\circfont\endcsname
+      \char\count255 %
+    }}%
+  \fi\fi
+}}
+
+\endinput

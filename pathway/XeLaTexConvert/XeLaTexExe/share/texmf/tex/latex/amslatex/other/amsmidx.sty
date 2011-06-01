@@ -1,0 +1,82 @@
+% amsmidx.sty
+% 2001/09/26
+% preliminary version
+% 
+%  Package for use with AMS document classes to produce multiple indexes
+% 
+%  Adapted from multind.sty (version 1.1b, 31 August 1991), by F.W. Long
+
+%  Modified \makeindex and \index commands to allow multiple indexes
+%  The first argument of \makeindex and \index is the index file name.
+%  These commands now work more like \@starttoc and \addcontentsline.
+%  \index is no longer defined inside \makeindex but determines whether
+%  the appropriate file is defined before writing to it.
+
+\def\makeindex#1{\begingroup
+  \makeatletter
+  \if@filesw \expandafter\newwrite\csname #1@idxfile\endcsname
+  \expandafter\immediate\openout \csname #1@idxfile\endcsname #1.idx\relax
+  \typeout{Writing index file #1.idx }\fi \endgroup}
+
+\def\index#1{\@bsphack
+  \begingroup
+  \def\protect##1{\string##1\space}\@sanitize
+  \@wrindex{#1}}
+
+%  \@wrindex now checks that the appropriate file is defined.
+
+\def\@wrindex#1#2{\let\thepage\relax
+  \xdef\@gtempa{\@ifundefined{#1@idxfile}{}{%
+    \expandafter\write\csname #1@idxfile\endcsname
+      {\string\indexentry{#2}{\thepage}}}}%
+  \endgroup\@gtempa
+  \if@nobreak \ifvmode\nobreak\fi\fi
+  \@esphack}
+
+%  Modified \printindex command to accept the name of an index file.
+
+\renewcommand{\printindex}[1]{\@input{#1.ind}}
+
+%  Alternate command with new name:
+%  \Printindex locally modifies some formatting commands for an improved
+%  appearance, sets the index title and reads in the requested index file.
+%  #1 = file name, #2 = index title
+
+\newcommand\Printindex[2]{%
+  \begingroup
+    \cleardoublepage
+    \def\indexname{#2}%
+    \raggedright
+    \hyphenpenalty=10000
+    \renewcommand{\seename}{see~also}
+    \renewcommand{\subitem}{\par\hangindent 3em\hspace*{1em}}
+    \@input{#1.ind}%
+  \endgroup
+}
+
+\endinput
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Instructions for using amsmidx.sty
+
+Put these commands in the preamble:
+
+     \usepackage{amsmidx}
+     \makeindex{filename-a}
+     \makeindex{filename-b}
+
+To identify the index entries in the text:
+
+     \index{filename-a}{index term}
+     \index{filename-b}{index term}
+
+In the backmatter, where the indexes are to appear:
+
+     \Printindex{filename-a}{First Index}
+     \Printindex{filename-b}{Second Index}
+
+Two files of index terms, filename-a.idx and filename-b.idx, will be
+generated.  To sort the index terms, process the two .idx files
+separately with Makeindex; this will create the files filename-a.ind
+and filename-b.ind, which will in turn be input by \Printindex.

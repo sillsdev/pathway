@@ -1,0 +1,8 @@
+#!/usr/bin/perl -n
+
+if (/^\\patterns{/) { $p=1; print; next; }
+if (/^}/) { $p=0; print; next; }
+if (!$p) { print; next; }
+
+$p=$_; chomp; y/0-9//d; s/^\./^/; s/\.$/\$/;
+print $p if (!system "grep", "-q", "$_", "/tmp/.wl-lc-cyryo");

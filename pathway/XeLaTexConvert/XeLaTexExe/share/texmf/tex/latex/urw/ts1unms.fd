@@ -1,0 +1,22 @@
+%Filename: ts1unms.fd
+%Created by: tex Fam_29817
+%Created using fontinst v1.7
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{ts1unms.fd}
+   [1998/05/28 Fontinst v1.7 font definitions for TS1/unms.]
+
+\DeclareFontFamily{TS1}{unms}{}
+
+\DeclareFontShape{TS1}{unms}{m}{n}{
+   <-> unmrs8c
+}{}
+
+\DeclareFontShape{TS1}{unms}{m}{sl}{
+   <-> unmros8c
+}{}
+
+\DeclareFontShape{TS1}{unms}{m}{it}{<->ssub * unms/m/sl}{}
+
+\endinput

@@ -1,0 +1,74 @@
+%% BEGIN: pstricks.con (for VTeX)
+%%
+%% Configuration file for PSTricks 97
+%%
+%% Version 97 patch 4 (11-17-99)
+%%
+%% For use with VTeX PostScript driver v 6.61+
+%% [MV, MK, special thanks to Denis Girou for help]
+%%
+%% Requires vtex.def 6.61 or newer
+%%
+%% For support and possible updates, check
+%%      http://www.micropress-inc.com
+%%
+
+\def\pstdriver{VTeX}
+{\catcode`\"=12\gdef
+\pstverb#1{%
+\ifnum\OpMode=1
+ \special{pS*#1}%            //Raw: PDFmode only.
+\else
+ \special{pS: GS }%
+ \special{pS: #1}%
+ \special{pS: GR }%
+\fi
+ }}
+\def\pstunit{1bp}%
+\def\pstVerb#1{\special{pS: #1}}
+\def\pstVerb#1{%
+ \special{pS: #1}%
+ }
+\def\pstverbscale{SDict begin normalscale end}
+\ifx\textsuperscript\@undefined
+   \def\pstheader#1{\special{header=#1}}
+\else
+  \ifx\Gin@PS@file@header\@undefined
+    \def\pstheader#1{\AtBeginDvi{\special{header=#1}}}
+  \else
+    \let\pstheader\Gin@PS@file@header
+  \fi
+\fi
+\def\pstrotate{CP CP translate 3 -1 roll neg rotate \tx@NET}
+%%
+%% ****************** END VTeX *****************************
+
+%%%%%%%%%%%%%%%%%%% !! CUSTOMIZATION STUFF GOES HERE: !! %%%%%%%%%%%%%%%%%%
+%% If you want to include your own customizations to pstricks.tex, then
+%% uncomment the \pstcustomize command, and include your modifications
+%% after \pstcustomize. These will be read in after pstricks.tex.
+%
+%  Some customization needed for VTeX since the coordinate system
+%  is different.
+\newif\if@colorstack
+\ifnum\OpMode>-1
+\ifnum\OpMode<3
+\@colorstacktrue
+% D.G. modification begin - Nov. 17, 1999
+\let\vtex@pspicture=\pspicture
+\def\pspicture{\@colorstackfalse\vtex@pspicture}
+\let\vtex@endpspicture=\endpspicture
+\def\endpspicture{\vtex@endpspicture\@colorstacktrue}
+% D.G. modification end
+\fi
+\fi
+
+\pstcustomize
+\def\tx@RotBegin{neg RotBegin }
+% D.G. modification begin - Oct.  6, 1999
+\def\tx@Rot{neg Rot }
+% D.G. modification end
+
+\endinput
+%%
+%% END: pstricks.con

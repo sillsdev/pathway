@@ -1,0 +1,189 @@
+%%
+%% This is file `rkeyval.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% rkeyval.dtx 
+%% 
+%%% ====================================================================
+%%% @LaTeX-doc-source-file{
+%%%   filename  = "rkeyval.dtx",
+%%%   version   = "1.02",
+%%%   date      = "2000/04/07",
+%%%   time      = "12:01:25 EDT",
+%%%   author    = "Michael J Downes",
+%%%   address   = "American Mathematical Society,
+%%%                Publications Technical Group,
+%%%                PO Box 6248,
+%%%                Providence, RI 02940,
+%%%                USA",
+%%%   email     = "tech-support@ams.org",
+%%%   URL       = "http://www.ams.org/",
+%%%   abstract  = "Key-value scanning functions with more restrictive
+%%%                syntax than the standard keyval package. This permits
+%%%                some improvements in the error-checking.",
+%%%   checksum  = "41751 427 1502 13407",
+%%%   docstring = "The checksum field, produced by Robert Solovay's
+%%%                checksum utility, gives CRC-16 checksum, lines,
+%%%                words, and characters.",
+%%%  }
+%%% ====================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{rkvbeta}[2000/04/07 v1.02]
+\let\@xp\expandafter \let\@nx\noexpand
+\def\@append#1#2#3{\@xp\def\@xp#2\@xp{#2#1{#3}}}
+\edef\@tempa{%
+  \@nx\AtEndOfPackage{\catcode\number`\'=\number\catcode`\'\relax}%
+}
+\@tempa
+\catcode`\'=12
+\def\fsa@l{\futurelet\@let@token\fsa@t}
+\def\fsa@b{\afterassignment\fsa@l \let\@let@token= }
+\def\fsa@c#1{\aftergroup#1\futurelet\@let@token\fsa@t}
+\let\fsa@n\@empty
+\let\fsa@t\@empty
+\def\rkvIfEmpty#1#2{%
+  \@xp\ifx\csname#1'#2\endcsname\@empty \@xp\@firstoftwo
+  \else\@xp\@secondoftwo
+  \fi
+}
+\def\rkv@DSAK#1#2{%
+  \ifx\relax#1\global\let#1\@empty\fi
+  \g@addto@macro#1{\let#2\@empty}%
+  \def#2%
+}
+\def\rkv@DDK#1#2{%
+  \ifx\relax#1\global\let#1\@empty\fi
+  \g@addto@macro#1{\def#2{\@empty}}%
+  \def#2%
+}
+\newcommand{\DefineSimpleKey}[2]{%
+  \@xp\rkv@DSAK\csname #1@init\@xp\endcsname
+    \csname #1'#2\endcsname{\DSK@def}%
+}
+\newcommand{\DefineSupersedingKey}[2]{%
+  \@xp\rkv@DSAK\csname #1@init\@xp\endcsname
+    \csname #1'#2\endcsname{\def}%
+}
+\def\DSK@def#1{%
+  \ifx#1\@empty\else
+    \PackageWarningNoLine{rkeyval}%
+      {Key \string#1 should not be repeated}%
+  \fi
+  \def#1%
+}
+\newcommand{\DefineAdditiveKey}[3]{%
+  \@xp\rkv@DSAK\csname #1@init\@xp\endcsname \csname #1'#2\endcsname
+    {\@append#3}%
+}
+\newcommand{\DefineDummyKey}[2]{%
+  \@xp\rkv@DDK\csname #1@init\@xp\endcsname \csname #1'#2\endcsname{\def}%
+}
+\newcommand{\RestrictedSetKeys}[3][\NoCommaWarning]{%
+  \global\rsk@toks\@xp{\csname #2@init\endcsname}%
+  \gdef\rsk@set{\@xp\rsk@set@a\csname#2'}%
+  \def\rsk@finish{#3}%
+  \def\rsk@nocomma{#1}%
+  \begingroup \aftergroup\rsk@set
+  \let\fsa@t\rsk@z \fsa@l
+}
+\def\rsk@unknown@key#1{%
+  \PackageWarning{rkeyval}{Unknown key: \string#1}%
+  \def#1{\def}%
+}
+\newtoks\rsk@toks
+\def\rsk@set@a#1#2{%
+  \ifx\relax#1\rsk@unknown@key#1\fi
+  \toks@\@xp{#1#1{#2}}%
+  \edef\@tempa{%
+    \global\rsk@toks{\the\rsk@toks \the\toks@}%
+  }%
+  \@tempa
+  \rsk@resume
+}
+\def\rsk@z{%
+  \ifx\bgroup\@let@token \let\fsa@t\rsk@b \let\fsa@n\fsa@b
+  \else\ifx\@sptoken\@let@token \let\fsa@n\fsa@b
+  \else \rsk@errf
+  \fi\fi
+  \fsa@n
+}
+\def\rsk@a{%
+  \ifx,\@let@token \endgroup \let\fsa@t\rsk@b \let\fsa@n\fsa@b
+  \else\rsk@ab\fi
+  \fsa@n
+}
+\def\rsk@ab{%
+  \ifx\@sptoken\@let@token \let\fsa@n\fsa@b
+  \else\ifx\bgroup\@let@token \endgroup
+    \let\@let@token\bgroup \let\fsa@n\rsk@erra
+  \else\ifx\egroup\@let@token \endgroup \let\fsa@n\rsk@end
+  \else\ifx\par\@let@token \endgroup \let\fsa@n\rsk@erraa
+  \else \endgroup \let\fsa@n\rsk@erraa
+  \fi\fi\fi\fi
+}
+\def\rsk@lc@letter#1{\lowercase{\fsa@c{#1}}}
+\def\rsk@b{%
+  \ifcat\@nx\@let@token A\let\fsa@t\rsk@c \let\fsa@n\rsk@lc@letter
+  \else\ifx\@sptoken\@let@token \let\fsa@n\fsa@b
+  \else\rsk@bb\fi\fi
+  \fsa@n
+}
+\def\rsk@bb{%
+  \ifx,\@let@token \let\fsa@n\fsa@b
+  \else\ifx\bgroup\@let@token \let\fsa@n\rsk@errb
+  \else\ifx\egroup\@let@token \let\fsa@n\rsk@end
+  \else \let\fsa@n\rsk@errc
+  \fi\fi\fi
+}
+\def\rsk@c{%
+  \ifcat\@nx\@let@token A\let\fsa@n\rsk@lc@letter
+  \else\ifx\@sptoken\@let@token \let\fsa@t\rsk@d \let\fsa@n\fsa@b
+  \else\ifx=\@let@token \let\fsa@t\rsk@d \let\fsa@n\fsa@b
+  \else\rsk@cb\fi\fi\fi
+  \fsa@n
+}
+\def\rsk@cb{%
+  \ifx,\@let@token \let\fsa@n\rsk@errc
+  \else\ifcat\@nx\@let@token .\let\fsa@n\fsa@c
+  \else\ifx\bgroup\@let@token \let\fsa@n\rsk@errd
+  \else\ifx\egroup\@let@token \let\fsa@n\rsk@errd
+  \else \let\fsa@n\rsk@errc
+  \fi\fi\fi\fi
+}
+\def\rsk@d{%
+  \ifx\bgroup\@let@token \aftergroup\endcsname \let\fsa@n\endgroup
+  \else\ifx\@sptoken\@let@token \let\fsa@n\fsa@b
+  \else\ifx=\@let@token \let\fsa@n\fsa@b
+  \else\let\fsa@n\rsk@erre\fi\fi\fi
+  \fsa@n
+}
+\def\rsk@resume{\begingroup \aftergroup\rsk@set
+  \let\fsa@t\rsk@a
+  \begingroup
+  \catcode\endlinechar=\active \lccode`\~=\endlinechar
+  \lowercase{\let~\par}%
+  \fsa@l}
+\def\rsk@end{%
+  \global\let\rsk@set\@gobble
+  \endgroup \endcsname
+  \afterassignment\rsk@finish
+  \toks@\bgroup
+}
+\def\NoCommaWarning{\PackageWarning{rkeyval}{Missing comma}}%
+\def\NoCommaError{\rsk@err{Missing comma}\@ehc}
+\def\rsk@nocomma{\NoCommaWarning}
+\def\rsk@err{\PackageError{rkeyval}}
+\def\rsk@errf{\rsk@err{Missing open brace}\@ehc\rsk@b}
+\def\rsk@erra{\rsk@nocomma\rsk@b}
+\long\def\rsk@erraa#1{\rsk@nocomma \let\fsa@t\rsk@b \fsa@l}
+\def\rsk@errb{\rsk@err{Missing key name}\@ehc\rsk@d}
+\def\rsk@errc{\rsk@err{Invalid key name character}\@ehc\fsa@b}
+\def\rsk@errd{\rsk@err{Missing equal sign}\@ehc\rsk@d}
+\def\rsk@erre#1,{\rsk@err{Missing open brace for key value}\@ehc
+  \endgroup \endcsname{#1},%
+}
+\endinput
+%%
+%% End of file `rkeyval.sty'.

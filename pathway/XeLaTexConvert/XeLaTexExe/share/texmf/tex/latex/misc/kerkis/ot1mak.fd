@@ -1,0 +1,62 @@
+%File name ot1mak.fd
+%University of the Aegean
+%Department of Mathematics
+%Copyright Feb 2000
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY    
+
+
+
+\DeclareFontShape{OT1}{mak}{m}{n}{<-> s * [0.90] k8a}{}
+\DeclareFontShape{OT1}{mak}{m}{it}{<-> s * [0.90] ki8a}{}
+\DeclareFontShape{OT1}{mak}{m}{sl}{<-> s * [0.90] ko8a}{}
+\DeclareFontShape{OT1}{mak}{m}{sc}{<-> s * [0.90] ksc8a}{}
+\DeclareFontShape{OT1}{mak}{m}{ui}{<-> s * [0.90] kui8a}{}
+\DeclareFontShape{OT1}{mak}{b}{n}{<-> s * [0.90] kb8a}{}
+\DeclareFontShape{OT1}{mak}{b}{it}{<-> s * [0.90] kbi8a}{}
+\DeclareFontShape{OT1}{mak}{b}{sl}{<-> s * [0.90] kbo8a}{}
+\DeclareFontShape{OT1}{mak}{b}{ui}{<-> s * [0.90] kbui8a}{}
+\DeclareFontShape{OT1}{mak}{sb}{n}{<-> s * [0.90] ksb8a}{}
+\DeclareFontShape{OT1}{mak}{sb}{it}{<-> s * [0.90] ksbi8a}{}
+\DeclareFontShape{OT1}{mak}{sb}{sl}{<-> s * [0.90] ksbo8a}{}
+\DeclareFontShape{OT1}{mak}{sb}{ui}{<-> s * [0.90] ksbui8a}{}
+\DeclareFontShape{OT1}{mak}{m}{sco}{<-> s * [0.90] ksco8a}{}
+\DeclareFontShape{OT1}{mak}{m}{cal}{<-> s * [0.90] kcal8a}{}
+
+
+\DeclareFontShape{OT1}{mak}{m}{kfn}{<-> s * [0.90] kfn8a}{}
+
+\DeclareFontShape{OT1}{mak}{b}{sc}{ <-> s * [0.90] ksc8a}{}
+\DeclareFontShape{OT1}{mak}{bx}{n}{ <-> s * [0.90] kb8a}{}
+\DeclareFontShape{OT1}{mak}{bx}{it}{ <-> s * [0.90] kbi8a}{}
+\DeclareFontShape{OT1}{mak}{bx}{sl}{ <-> s * [0.90] kbo8a}{}
+\DeclareFontShape{OT1}{mak}{bx}{ui}{ <-> s * [0.90] kbui8a}{}
+\DeclareFontShape{OT1}{mak}{bx}{sc}{ <-> s * [0.90] ksc8a}{}        
+
+
+
+\endinput
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

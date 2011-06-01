@@ -1,0 +1,30 @@
+
+\ProvidesFile{ly1lbt.fd}
+   [1997/02/26  LY1/lbt with Y&Y file names. (LV)]
+
+\DeclareFontFamily{LY1}{lbt}{\hyphenchar \font\m@ne}
+
+\DeclareLucidaFontShape{LY1}{lbt}{m}{n}{lstr}{}
+\DeclareLucidaFontShape{LY1}{lbt}{m}{sl}{lsto}{}
+\DeclareLucidaFontShape{LY1}{lbt}{b}{n}{lstb}{}
+\DeclareLucidaFontShape{LY1}{lbt}{b}{sl}{lstbo}{}
+
+% We silently treat italic as slanted
+
+\DeclareFontShape{LY1}{lbt}{m}{it}{<->ssub * lbt/m/sl}{}
+\DeclareFontShape{LY1}{lbt}{b}{it}{<->ssub * lbt/b/sl}{}
+
+% We treat smallcap as normal
+
+\DeclareFontShape{LY1}{lbt}{m}{sc}{<-> sub * lbt/m/n}{}
+\DeclareFontShape{LY1}{lbt}{b}{sc}{<-> sub * lbt/b/n}{}
+
+% We silently treat bold extended as bold 
+
+\DeclareFontShape{LY1}{lbt}{bx}{n}{<->ssub * lbt/b/n}{}
+\DeclareFontShape{LY1}{lbt}{bx}{sl}{<->ssub * lbt/b/sl}{}
+\DeclareFontShape{LY1}{lbt}{bx}{it}{<->ssub * lbt/b/it}{}
+\DeclareFontShape{LY1}{lbt}{bx}{sc}{<->ssub * lbt/b/sc}{}
+
+\endinput
+

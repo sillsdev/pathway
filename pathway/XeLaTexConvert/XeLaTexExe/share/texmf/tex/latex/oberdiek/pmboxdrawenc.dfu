@@ -1,0 +1,82 @@
+%%
+%% This is file `pmboxdrawenc.dfu',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% pmboxdraw.dtx  (with options: `utf8')
+%% 
+%% This is a generated file.
+%% 
+%% Copyright (C) 2006 by Heiko Oberdiek <oberdiek@uni-freiburg.de>
+%% 
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3 of this license or (at your option) any later
+%% version. The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of
+%% LaTeX version 2005/12/01 or later.
+%% 
+%% This work has the LPPL maintenance status "maintained".
+%% 
+%% This Current Maintainer of this work is Heiko Oberdiek.
+%% 
+%% This work consists of the main source file pmboxdraw.dtx
+%% and the derived files
+%%    pmboxdraw.sty, pmboxdraw.pdf, pmboxdraw.ins, pmboxdraw.drv,
+%%    pmboxdrawenc.dfu.
+%% 
+\ProvidesFile{pmboxdrawenc.dfu}%
+  [2006/05/03 v1.0 UTF-8 support for box drawing characters]%
+\DeclareUnicodeCharacter{2500}{\textSFx}
+\DeclareUnicodeCharacter{2502}{\textSFxi}
+\DeclareUnicodeCharacter{250C}{\textSFi}
+\DeclareUnicodeCharacter{2510}{\textSFiii}
+\DeclareUnicodeCharacter{2514}{\textSFii}
+\DeclareUnicodeCharacter{2518}{\textSFiv}
+\DeclareUnicodeCharacter{251C}{\textSFviii}
+\DeclareUnicodeCharacter{2524}{\textSFix}
+\DeclareUnicodeCharacter{252C}{\textSFvi}
+\DeclareUnicodeCharacter{2534}{\textSFvii}
+\DeclareUnicodeCharacter{253C}{\textSFv}
+\DeclareUnicodeCharacter{2550}{\textSFxliii}
+\DeclareUnicodeCharacter{2551}{\textSFxxiv}
+\DeclareUnicodeCharacter{2552}{\textSFli}
+\DeclareUnicodeCharacter{2553}{\textSFlii}
+\DeclareUnicodeCharacter{2554}{\textSFxxxix}
+\DeclareUnicodeCharacter{2555}{\textSFxxii}
+\DeclareUnicodeCharacter{2556}{\textSFxxi}
+\DeclareUnicodeCharacter{2557}{\textSFxxv}
+\DeclareUnicodeCharacter{2558}{\textSFl}
+\DeclareUnicodeCharacter{2559}{\textSFxlix}
+\DeclareUnicodeCharacter{255A}{\textSFxxxviii}
+\DeclareUnicodeCharacter{255B}{\textSFxxviii}
+\DeclareUnicodeCharacter{255C}{\textSFxxvii}
+\DeclareUnicodeCharacter{255D}{\textSFxxvi}
+\DeclareUnicodeCharacter{255E}{\textSFxxxvi}
+\DeclareUnicodeCharacter{255F}{\textSFxxxvii}
+\DeclareUnicodeCharacter{2560}{\textSFxlii}
+\DeclareUnicodeCharacter{2561}{\textSFxix}
+\DeclareUnicodeCharacter{2562}{\textSFxx}
+\DeclareUnicodeCharacter{2563}{\textSFxxiii}
+\DeclareUnicodeCharacter{2564}{\textSFxlvii}
+\DeclareUnicodeCharacter{2565}{\textSFxlviii}
+\DeclareUnicodeCharacter{2566}{\textSFxli}
+\DeclareUnicodeCharacter{2567}{\textSFxlv}
+\DeclareUnicodeCharacter{2568}{\textSFxlvi}
+\DeclareUnicodeCharacter{2569}{\textSFxl}
+\DeclareUnicodeCharacter{256A}{\textSFliv}
+\DeclareUnicodeCharacter{256B}{\textSFliii}
+\DeclareUnicodeCharacter{256C}{\textSFxliv}
+\DeclareUnicodeCharacter{2580}{\textupblock}
+\DeclareUnicodeCharacter{2584}{\textdnblock}
+\DeclareUnicodeCharacter{2588}{\textblock}
+\DeclareUnicodeCharacter{258C}{\textlfblock}
+\DeclareUnicodeCharacter{2590}{\textrtblock}
+\DeclareUnicodeCharacter{2591}{\textltshade}
+\DeclareUnicodeCharacter{2592}{\textshade}
+\DeclareUnicodeCharacter{2593}{\textdkshade}
+\endinput
+%%
+%% End of file `pmboxdrawenc.dfu'.

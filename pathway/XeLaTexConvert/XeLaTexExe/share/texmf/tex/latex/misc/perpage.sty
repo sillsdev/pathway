@@ -1,0 +1,33 @@
+% $Id: perpage.sty,v 1.2 2002/12/20 19:25:34 dak Exp $
+% The following package adds the ability to reset counters per page.
+% Usage example:
+% \MakePerPage[2]{footnote}
+% will start footnote numbers with 2 on each page (the optional
+% argument defaults to 1).  2 might be a strange number, unless
+% you have \renewcommand\thefootnote{\fnsymbol{footnote}} and
+% want to start off with a dagger.  This may need multiple passes
+% to work: LaTeX will complain about changed labels if you need
+% another pass.
+% Copyright 2002 David Kastrup, <David.Kastrup@t-online.de>
+% distributable under the LPPL
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{perpage}[2002/12/20 v1.0 Reset counters per page]
+\newcommand*\MakePerPage[2][\@ne]{%
+  \expandafter\def\csname c@pchk@#2\endcsname{\c@pchk@{#2}{#1}}%
+  \newcounter{pcabs@#2}%
+  \@addtoreset{pchk@#2}{#2}}
+
+\def\new@pagectr#1{\@newl@bel{pchk@#1}}
+
+\def\c@pchk@#1#2{\z@=\z@
+  \begingroup
+  \expandafter\let\expandafter\next\csname pchk@#1@\arabic{pcabs@#1}\endcsname
+  \addtocounter{pcabs@#1}\@ne
+  \expandafter\ifx\csname pchk@#1@\arabic{pcabs@#1}\endcsname\next
+  \else \setcounter{#1}{#2}\fi
+  \protected@edef\next{%
+    \string\new@pagectr{#1}{\arabic{pcabs@#1}}{\noexpand\thepage}}%
+  \protected@write\@auxout{}{\next}%
+  \endgroup\global\z@}
+\endinput

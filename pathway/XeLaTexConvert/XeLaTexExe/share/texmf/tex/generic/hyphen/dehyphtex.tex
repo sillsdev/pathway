@@ -1,0 +1,876 @@
+% dehyphtex.tex
+%
+% Errata f^^fcr dehypht.tex 1999-03-03
+%
+% kompiliert 2005-03-09 von Werner Lemberg <wl@gnu.org>
+%
+% Achtung: Diese Datei mu^^df *nach* german.sty geladen werden!
+% Attention: This file must be loaded *after* german.sty!
+%
+% In web2c-basierten TeX-Implementationen ist es notwendig, die
+% Variable `hyph_size' (in texmf.cnf) auf einen gr^^f6^^dferen Wert wie
+% z.B. 5000 zu setzen, um einen Kapazit^^e4ts^^fcberlauf der
+% Trennstellenausnahmen zu vermeiden.
+% Web2c based TeX implementations need to increase the value of
+% `hyph_size' (in texmf.cnf) to, say, 5000 to avoid an overflow
+% of TeX's exception dictionary.
+%
+
+\begingroup
+
+\catcode `\^^e4=11 \catcode `\^^c4=11
+\catcode `\^^f6=11 \catcode `\^^d6=11
+\catcode `\^^fc=11 \catcode `\^^dc=11
+\catcode `\^^ff=11 \catcode `\^^Y=11 % ^^df
+
+\lccode `\^^c4=`\^^e4 \lccode `\^^e4=`\^^e4
+\lccode `\^^d6=`\^^f6 \lccode `\^^f6=`\^^f6
+\lccode `\^^dc=`\^^fc \lccode `\^^fc=`\^^fc
+\lccode `\^^ff=`\^^ff \lccode `\^^Y=`\^^Y
+
+\hyphenation{
+%
+%
+% falsche Trennungen einfacher W^^f6rter
+%
+  AIDS % AI-DS
+  ang-le % an-gle
+  ano-mal % an-omal
+  ano-ma-le % an-oma-le
+  ano-ma-len % an-oma-len
+  ano-ma-ler % an-oma-ler
+  ano-ma-le-re % an-oma-le-re
+  ano-ma-le-rem % an-oma-le-rem
+  ano-ma-le-rer % an-oma-ler-er
+  ano-ma-le-res % an-oma-le-res
+  ano-ma-les % an-oma-les
+  Ano-ma-lie % An-oma-lie
+  ano-mal-stem % an-omal-stem
+  ano-mal-sten % an-omal-sten
+  ano-mal-ster % an-omal-ster
+  Deal % De-al
+  eif-re % ei-fre
+  eit-le-rer % eit-ler-er
+  Fa-sans % Fas-ans
+  fau-le-rer % fau-ler-er
+  Fer-nan-do % Fer-n-an-do
+  Freaks % Fre-aks
+  funkst % funk-st
+  Gar-ni-so-nen % Gar-ni-so-n-en
+  ge-d^^f6st % ge-d-^^f6st
+  ge-eggt % ge-e-ggt
+  ge-egg-ten % ge-e-gg-ten
+  Ge-hir-nen % Ge-hir-n-en
+  ge-kne-belt % ge-k-ne-belt
+  ge-kne-bel-tem % ge-k-ne-bel-tem
+  ge-kne-bel-ter % ge-k-ne-bel-ter
+  ge-kne-bel-tes % ge-k-ne-bel-tes
+  ge-kneift % ge-k-neift
+  ge-kne-tet % ge-k-ne-tet
+  ge-kne-te-te % ge-k-ne-te-te
+  ge-kne-te-ten % ge-k-ne-te-ten
+  ge-kne-te-ter % ge-k-ne-te-ter
+  ge-kne-te-tes % ge-k-ne-te-tes
+  ge-lobst % ge-l-obst
+  ge-neckt % gen-eckt
+  ge-reckt % ge-r-eckt
+  ge-schah % ge-sch-ah
+  ge-scha-hen % ge-sch-a-hen
+  ge-spei-set % ge-speis-et
+  ge-starrt % ge-st-arrt
+  ge-star-te-te % ge-st-ar-te-te
+  ge-star-te-tem % ge-st-ar-te-tem
+  ge-star-te-ten % ge-st-ar-te-ten
+  ge-star-te-tes % ge-st-ar-te-tes
+  ge-streun-ter % ge-stre-un-ter
+  gr^^fcb-le % gr^^fc-b-le
+  hal-bem % hal-b-em
+  hal-ben % hal-b-en
+  hal-bes % hal-b-es
+  heik-lem % hei-klem
+  her-in-nen % he-rin-nen
+  hinkt % hin-kt
+  Hir-nen % Hir-n-en
+  Ita-lie-ne-rin % Ita-li-e-ne-rin
+  Ita-lie-nern % Ita-li-e-nern
+  Ita-lie-ners % Ita-li-e-ners
+  Ka-tarrhs % Ka-tarr-hs
+  keg-le % ke-gle
+  Khmer % Kh-mer
+  kre-iert % kre-i-ert
+  kre-ier-te % kre-i-er-te
+  kre-ier-tem % kre-i-er-tem
+  kre-ier-ter % kre-i-er-ter
+  kre-ier-tes % kre-i-er-tes
+  kre-ier-test % kre-i-er-test
+  kur-zem % kur-z-em
+  kur-zen % kur-z-en
+  kur-zer % kur-z-er
+  kur-zes % kur-z-es
+  Le-nins % Len-ins
+  Le-se-rin-nen % Le-se-r-in-nen
+  Lob-by-isten % Lob-by-i-sten
+  Lon-dons % Lon-d-ons
+  l^^f6-ste % l^^f6s-te
+  l^^f6-sten % l^^f6s-ten
+  Lu-nas % Lu-n-as
+  Mat-thi-as % Matt-hi-as
+  mo-dern-ste % mo-d-ern-ste
+  mo-dern-stem % mo-d-ern-stem
+  mo-dern-ster % mo-d-ern-ster
+  mo-dern-ste % mo-d-ern-ste
+  mog-le % mo-gle
+  neun-ter % ne-un-ter
+  n^^fcch-tern-ste % n^^fcch-t-ern-ste
+  n^^fcch-tern-stem % n^^fcch-t-ern-stem
+  n^^fcch-tern-ster % n^^fcch-t-ern-ster
+  n^^fcch-tern-stes % n^^fcch-t-ern-stes
+  Ok-to-bers % Ok-t-obers
+  Pa-l^^e4-sti-nen-se-rin-nen % Pa-l^^e4-sti-nen-se-r-in-nen
+  pa-na-me-si-sche % pan-a-me-si-sche
+  pa-na-me-si-schen % pan-a-me-si-schen
+  Pen-ta-gons % Pen-ta-g-ons
+  rass-le % ras-sle
+  reich-sten % reichs-ten
+  Re-kruts % Re-k-ruts
+  r^^fc-ste-te % r^^fcs-te-te
+  r^^fc-ste-ten % r^^fcs-te-ten
+  r^^fc-ste-test % r^^fcs-te-test
+  r^^fc-ste-tet % r^^fcs-te-tet
+  Saa-les % Saa-l-es
+  Sau-nas % Sau-n-as
+  Scha-fot-te % Schaf-ot-te
+  Scha-fot-ten % Schaf-ot-ten
+  schien % schi-en
+  schnee-ig % schne-eig
+  schnee-ige % schne-ei-ge
+  schnee-igem % schne-ei-gem
+  schnee-igen % schne-ei-gen
+  schnee-iger % schne-ei-ger
+  schnieg-le % schnie-gle
+  Schreins % Schr-eins
+  sch^^fcch-tern-stem % sch^^fcch-t-ern-stem
+  sch^^fcch-tern-sten % sch^^fcch-t-ern-sten
+  sch^^fcch-tern-ster % sch^^fcch-t-ern-ster
+  schw^^e4r-mend % schw^^e4r-me-nd
+  schw^^e4r-men-den % schw^^e4r-me-n-den
+  schw^^e4r-men-der % schw^^e4r-me-n-der
+  schw^^e4r-men-des % schw^^e4r-me-n-des
+  Schw^^e4r-mern % Schw^^e4r-me-rn
+  Schw^^e4r-mers % Schw^^e4r-me-rs
+  Schwei-^^ffers % Schwei^^df-ers
+  Schwei-^^Yers
+  seg-le % se-gle
+  Se-rums % Ser-ums
+  Skalps % Skal-ps
+  spieg-le % spie-gle
+  spon-tan-stem % spon-t-an-stem
+  spon-tan-sten % spon-t-an-sten
+  spon-tan-ster % spon-t-an-ster
+  ster-be % st-er-be
+  stu-rer % stur-er
+  stu-re-rem % stur-e-rem
+  Tam-bu-rins % Tam-bu-r-ins
+  Ti-tans % Ti-t-ans
+  To-re-ros % To-re-r-os
+  tr^^fc-be-rem % tr^^fcber-em
+  tr^^fc-be-rer % tr^^fcber-er
+  tr^^fc-be-res % tr^^fcber-es
+  tunkst % tunk-st
+  Ty-po-graphs % Ty-po-gra-phs
+  Ty-ran-nin-nen % Ty-rann-in-nen
+  ^^fcb-le-rer % ^^fcb-ler-er
+  Urans % Ur-ans
+  Urins % Ur-ins
+  va-ria-ble-rer % va-ria-bler-er
+  Viet-nam % Vi-et-nam
+  Wag-gons % Wag-g-ons
+  w^^e4r-mend % w^^e4r-me-nd
+  w^^e4r-men-de % w^^e4r-me-n-de
+  w^^e4r-men-den % w^^e4r-me-n-den
+  w^^e4r-men-der % w^^e4r-me-n-der
+  w^^e4r-men-des % w^^e4r-me-n-des
+  Wien % Wi-en
+  woh-le-res % wohl-e-res
+  z^^fcg-le % z^^fc-g-le
+%
+%
+% falsche Trennungen von zusammengesetzten W^^f6rtern
+%
+  ab-geht % ab-ge-ht
+  auf-w^^e4r-mend % auf-w^^e4r-me-nd
+  auf-w^^e4r-men-den % auf-w^^e4r-me-n-den
+  auf-w^^e4r-men-der % auf-w^^e4r-me-n-der
+  auf-w^^e4r-men-des % auf-w^^e4r-me-n-des
+  aus-zu-tau-schen % aus-zut-au-schen
+  da-blieb % da-b-lieb
+  da-von-schlei-chen % da-v-on-schlei-chen
+  da-von-schlei-chen-de % da-v-on-schlei-chen-de
+  da-von-schlei-chen-den % da-v-on-schlei-chen-den
+  da-von-schlei-chen-der % da-v-on-schlei-chen-der
+  ein-ge-fl^^f6^^fft % ein-ge-fl^^f6-^^dft
+  ein-ge-fl^^f6^^Yt
+  ein-schli-chen % ein-sch-li-chen
+  ein-schlief % ein-sch-lief
+  ein-zu-tau-schen % ein-zut-au-schen
+  ent-bl^^f6^^ff-te % ent-bl^^f6-^^dfte
+  ent-bl^^f6^^Y-te
+  ent-bl^^f6^^ff-ten % ent-bl^^f6-^^dften
+  ent-bl^^f6^^Y-ten
+  ent-bl^^f6^^ff-ter % ent-bl^^f6-^^dfter
+  ent-bl^^f6^^Y-ter
+  ent-bl^^f6^^ff-test % ent-bl^^f6-^^dftest
+  ent-bl^^f6^^Y-test
+  ent-bl^^f6^^ff-tet % ent-bl^^f6-^^dftet
+  ent-bl^^f6^^Y-tet
+  ent-er-be % en-t-er-be
+  ent-schlief % ent-sch-lief
+  er-blas-se % erb-las-se
+  er-blas-sen % erb-las-sen
+  er-blas-sen-de % erb-las-sen-de
+  er-blas-sen-den % erb-las-sen-den
+  er-blas-sen-der % erb-las-sen-der
+  er-hal-ten-ge-blie-ben % er-halt-en-ge-blie-ben
+  er-hal-ten-ge-blie-be-nen % er-halt-en-ge-blie-be-nen
+  er-klirr-te % er-k-lirr-te
+  er-klun-ge-nen % er-k-lun-ge-nen
+  er-w^^e4r-mend % er-w^^e4r-me-nd
+  er-w^^e4r-men-de % er-w^^e4r-me-n-de
+  er-w^^e4r-men-der % er-w^^e4r-me-n-der
+  er-w^^e4r-men-des % er-w^^e4r-me-n-des
+  fest-zu-ma-chen % festz-u-ma-chen
+  flott-zu-ma-chen % flottz-u-ma-chen
+  Gate-way % Ga-te-way
+  gut-zu-ma-chen-den % gutz-u-ma-chen-den
+  halt-zu-ma-chen % haltz-u-ma-chen
+  her-an-gin-gen % he-r-an-gin-gen
+  High-tech % Hight-ech
+  hoch-ge-reckt % hoch-ge-r-eckt
+  ho-mo-ero-tisch % ho-moe-ro-tisch
+  Hot-line % Hot-li-ne
+  In-kauf-nah-me % In-k-auf-nah-me
+  in-ter-viewst % in-ter-view-st
+  ir-gend-et-was % ir-gen-det-was
+  lang-an-hal-ten-de % lan-gan-hal-ten-de
+  lang-an-hal-ten-den % lan-gan-hal-ten-den
+  mit-zu-ma-chen % mitz-u-ma-chen
+  nie-der-saust % nie-ders-aust
+  On-line % On-li-ne
+  Pent-house % Penthou-se
+  sit-zen-ge-las-sen % sitz-en-ge-las-sen
+  sit-zen-ge-las-se-nen % sitz-en-ge-las-se-nen
+  sit-zen-ge-las-se-ner % sitz-en-ge-las-se-ner
+  sit-zen-ge-las-se-nes % sitz-en-ge-las-se-nes
+  ^^fcber-a^^ffen % ^^fcbera-^^dfen
+  ^^fcber-a^^Yen
+  ^^fcber-a^^ffest % ^^fcbera-^^dfest
+  ^^fcber-a^^Yest
+  ^^fcber-fl^^fcg-le % ^^fcber-fl^^fc-g-le
+  ^^fcber-win-te-re % ^^fcber-w-in-te-re
+  un-ent-halt-sa-me % un-en-t-halt-sa-me
+  un-ent-halt-sa-mem % un-en-t-halt-sa-mem
+  un-ent-halt-sa-men % un-en-t-halt-sa-men
+  un-ent-halt-sa-me-re % un-en-t-halt-sa-me-re
+  un-ent-halt-sa-me-rem % un-en-t-halt-sa-me-rem
+  un-ent-halt-sa-me-ren % un-en-t-halt-sa-me-ren
+  un-ent-halt-sa-me-res % un-en-t-halt-sa-me-res
+  un-ent-halt-sa-mes % un-en-t-halt-sa-mes
+  Un-ent-halt-sam-keit % Un-en-t-halt-sam-keit
+  un-ent-halt-sam-ste % un-en-t-halt-sam-ste
+  un-ent-halt-sam-sten % un-en-t-halt-sam-sten
+  un-ent-halt-sam-ster % un-en-t-halt-sam-ster
+  un-ent-halt-sam-stes % un-en-t-halt-sam-stes
+  un-rein-ste % unr-ein-ste
+  un-rein-ster % unr-ein-ster
+  un-rein-stes % unr-ein-stes
+  ver-arz-tend % ver-arzt-end
+  ver-arz-ten-de % ver-arzt-en-de
+  ver-arz-ten-der % ver-arzt-en-der
+  ver-arz-ten-des % ver-arzt-en-des
+  ver-darb % verd-arb
+  ver-dar-ben % verd-ar-ben
+  ver-darbst % verd-arbst
+  ver-daust % verd-aust
+  ver-klun-gen % ver-k-lun-gen
+  ver-klun-ge-ne % ver-k-lun-ge-ne
+  ver-klun-ge-nen % ver-k-lun-ge-nen
+  ver-klun-ge-ner % ver-k-lun-ge-ner
+  ver-klun-ge-nes % ver-k-lun-ge-nes
+  ver-lernst % ver-l-ernst
+  ver-lobst % ver-l-obst
+  ver-saust % vers-aust
+  weg-sein % weg-s-ein
+  wund-rei-ben % wun-drei-ben
+  zu-r^^fcck-blieb % zu-r^^fcck-b-lieb
+%
+%
+% falsche Trennungen ausgew^^e4hlter Komposita
+%
+  Eber-esche % Ebe-re-sche
+  Fi-nanz-^^e4m-ter % Fi-nan-z^^e4m-ter
+  Fi-nanz-^^e4m-tern % Fi-nan-z^^e4m-tern
+  Frisch-obst % Fri-sch-obst
+  fuchs-teu-fels-wild % fuch-steu-fels-wild
+  fuchs-teu-fels-wil-de % fuch-steu-fels-wil-de
+  fuchs-teu-fels-wil-der % fuch-steu-fels-wil-der
+  fuchs-teu-fels-wil-des % fuch-steu-fels-wil-des
+  f^^fcnf-ak-ti-ge % f^^fcn-fak-ti-ge
+  Gas-^^f6fen % Gas^^f6-fen
+  Grund-ein-heit % Gr-und-ein-heit
+  Heiz-^^f6ls % Hei-z^^f6ls
+  Hof-rat % Ho-frat
+  kampf-er-fah-ren % kamp-fer-fah-ren
+  kampf-er-fah-re-nem % kamp-fer-fah-re-nem
+  kampf-er-fah-re-nen % kamp-fer-fah-re-nen
+  kampf-er-fah-re-ner % kamp-fer-fah-re-ner
+  Kampf-er-fah-rung % Kamp-fer-fah-rung
+  Kampf-er-fah-run-gen % Kamp-fer-fah-run-gen
+  kampf-er-prob-ten % kamp-fer-prob-ten
+  Mu-sik-no-ten % Mu-si-kno-ten
+  Post-^^e4m-ter % Po-st^^e4m-ter
+  Pro-zent-zahl % Pro-z-ent-zahl
+  So-wjet-uni-on % So-wje-tu-ni-on
+  Tat-or-te % Ta-tor-te
+%
+%
+% fehlende Trennstellen einfacher W^^f6rter
+%
+  Am-ne-stie % Amne-stie
+  am^^fc-sant % am^^fcsant
+  am^^fc-san-te % am^^fcsan-te
+  am^^fc-san-ten % am^^fcsan-ten
+  am^^fc-san-ter % am^^fcsan-ter
+  am^^fc-san-tes % am^^fcsan-tes
+  An-h^^e4ng-seln % An-h^^e4ngseln
+  An-h^^e4ng-sels % An-h^^e4ngsels
+  be-ehrst % beehrst
+  be-k^^e4-men % be-k^^e4men
+  Dien-stes % Dienstes
+  dien-te % diente
+  dien-ten % dienten
+  dien-tet % dientet
+  doo-fe % doofe
+  doo-fen % doofen
+  doo-fer % doofer
+  doo-fe-ren % doofe-ren
+  doo-fe-rer % doofe-rer
+  doo-fe-res % doofe-res
+  dunk-le % dunkle
+  dunk-lem % dunklem
+  dunk-len % dunklen
+  dunk-les % dunkles
+  ei-nen % einen
+  eli-t^^e4-re % eli-t^^e4re
+  Eu-tha-na-sie % Eutha-na-sie
+  fa-de-rem % fa-derem
+  fa-de-ren % fa-deren
+  fa-de-rer % fa-derer
+  fa-de-ste % fa-deste
+  fa-de-stem % fa-destem
+  fa-de-ster % fa-dester
+  fa-de-stes % fa-destes
+  fal-schen % falschen
+  fal-scher % falscher
+  fal-sche-re % falsche-re
+  fal-sche-ren % falsche-ren
+  fal-sche-rer % falsche-rer
+  fal-sche-res % falsche-res
+  fal-sche-ste % falsche-ste
+  fal-sche-stem % falsche-stem
+  fal-sche-sten % falsche-sten
+  fal-sche-stes % falsche-stes
+  fa-ta-le-rer % fa-ta-ler-er
+  furch-te % furchte
+  furch-ten % furchten
+  Gal-li-ers % Gal-liers
+  ge-an-gelt % gean-gelt
+  ge-an-gel-tem % gean-gel-tem
+  ge-an-gel-ten % gean-gel-ten
+  ge-an-gel-ter % gean-gel-ter
+  ge-an-kert % gean-kert
+  ge-an-ker-te % gean-ker-te
+  ge-an-ker-tem % gean-ker-tem
+  ge-an-ker-ter % gean-ker-ter
+  ge-an-ker-tes % gean-ker-tes
+  ge-ant-wor-tet % geant-wor-tet
+  ge-char-ter-ten % gechar-ter-ten
+  ge-char-ter-ter % gechar-ter-ter
+  ge-fau-lenzt % gefau-lenzt
+  ge-fault % gefault
+  ge-faul-te % gefaul-te
+  ge-faul-ter % gefaul-ter
+  ge-faul-tes % gefaul-tes
+  ge-fopp-te % gefopp-te
+  ge-fopp-ten % gefopp-ten
+  ge-fopp-ter % gefopp-ter
+  ge-h^^fcllt % geh^^fcllt
+  ge-h^^fcll-ten % geh^^fcll-ten
+  ge-h^^fcll-ter % geh^^fcll-ter
+  Ge-kni-sters % Ge-knisters
+  ge-kni-stert % ge-knistert
+  Ge-ne-r^^e4-len % Ge-ner^^e4-len
+  ge-nie-^^ffest % ge-nie^^dfest
+  ge-nie-^^Yest
+  Ge-n^^fcs-se % Gen^^fcs-se
+  Ge-n^^fcs-sen % Gen^^fcs-sen
+  ge-ohr-feigt % geohr-feigt
+  Ge-r^^e4u-sche % Ge-r^^e4usche
+  Ge-r^^e4u-schen % Ge-r^^e4uschen
+  Ge-r^^e4u-sches % Ge-r^^e4usches
+  ge-r^^f6-chelt % ge-r^^f6chelt
+  ge-r^^f6-stet % ge-r^^f6stet
+  ge-r^^f6-ste-te % ge-r^^f6ste-te
+  ge-r^^f6-ste-ten % ge-r^^f6ste-ten
+  ge-r^^f6-ste-ter % ge-r^^f6ste-ter
+  ge-r^^f6-ste-tes % ge-r^^f6ste-tes
+  ge-r^^f6-tet % ge-r^^f6tet
+  ge-r^^f6-te-ter % ge-r^^f6te-ter
+  ge-r^^f6-te-tes % ge-r^^f6te-tes
+  Ge-r^^fc-stes % Ge-r^^fcstes
+  ge-saust % gesaust
+  ge-sau-stem % gesau-stem
+  ge-sau-sten % gesau-sten
+  ge-sau-ster % gesau-ster
+  ge-schef-felt % geschef-felt
+  ge-schef-fel-tem % geschef-fel-tem
+  ge-schef-fel-ten % geschef-fel-ten
+  ge-schef-fel-ter % geschef-fel-ter
+  ge-staf-felt % gestaf-felt
+  ge-staf-fel-te % gestaf-fel-te
+  ge-staf-fel-ten % gestaf-fel-ten
+  ge-staf-fel-ter % gestaf-fel-ter
+  ge-staf-fel-tes % gestaf-fel-tes
+  ge-ulkt % geulkt
+  ge-ulk-te % geulk-te
+  ge-ulk-ten % geulk-ten
+  ge-ulk-tes % geulk-tes
+  gro-^^ffe % gro^^dfe
+  gro-^^Ye
+  gro-^^ffer % gro^^dfer
+  gro-^^Yer
+  gro-^^ffes % gro^^dfes
+  gro-^^Yes
+  h^^e4k-le % h^^e4kle
+  H^^e4l-se % H^^e4lse
+  hau-te % haute
+  hei-^^ffem % hei^^dfem
+  hei-^^Yem
+  hier-an % hieran
+  hier-aus % hieraus
+  hie-^^ffest % hie^^dfest
+  hie-^^Yest
+  hilf-lo-se % hilflo-se
+  hint-an % hintan
+  Hir-sche % Hirsche
+  hoh-le-re % hohle-re
+  Ho-stes-sen % Hostes-sen
+  Ide-als % Ideals
+  Idi-ots % Idiots
+  Im-pre-sa-ri-os % Im-presa-ri-os
+  In-gang-set-zung % In-gangset-zung
+  in-ji-zie-ren % inji-zie-ren
+  in-ji-zier-te % inji-zier-te
+  Ja-gu-ars % Ja-guars
+  jahr-aus % jahraus
+  jahr-ein % jahrein
+  jon-glie-ren % jonglie-ren
+  Ju-ris-pru-denz % Ju-rispru-denz
+  k^^e4-me % k^^e4me
+  k^^e4-men % k^^e4men
+  Ka-plan % Kaplan
+  Kar-di-n^^e4-le % Kar-din^^e4le
+  Kar-di-n^^e4-len % Kar-din^^e4len
+  Ka-vi-ars % Ka-viars
+  ka-vi-t^^f6-se % ka-vit^^f6-se
+  ka-vi-t^^f6-sem % ka-vit^^f6-sem
+  ka-vi-t^^f6-sen % ka-vit^^f6-sen
+  ka-vi-t^^f6-ses % ka-vit^^f6-ses
+  Kof-fe-ins % Koffe-ins
+  Ko-ka-in % Ko-kain
+  kom-pe-ten-tem % kom-pe-tentem
+  kom-pe-ten-ten % kom-pe-tenten
+  kom-pe-ten-ter % kom-pe-tenter
+  kom-pe-ten-te-rem % kom-pe-tente-rem
+  kom-pe-ten-te-ren % kom-pe-tente-ren
+  kom-pe-ten-te-rer % kom-pe-tente-rer
+  kom-pe-ten-tes % kom-pe-tentes
+  kom-pe-ten-te-ste % kom-pe-tente-ste
+  kom-pe-ten-te-stem % kom-pe-tente-stem
+  kom-pe-ten-te-ster % kom-pe-tente-ster
+  kom-pe-ten-te-stes % kom-pe-tente-stes
+  knosp-ten % knospten
+  k^^fcr-ze-ste % k^^fcr-zeste
+  k^^fcr-ze-stem % k^^fcr-zestem
+  k^^fcr-ze-sten % k^^fcr-zesten
+  k^^fcr-ze-ster % k^^fcr-zester
+  k^^fcr-ze-stes % k^^fcr-zestes
+  lie-^^ffest % lie^^dfest
+  lie-^^Yest
+  Ma-gi-er % Ma-gier
+  mi^^ff-trau-isch-ste % mi^^df-trauisch-ste
+  mi^^Y-trau-isch-ste
+  mi^^ff-trau-isch-stem % mi^^df-trauisch-stem
+  mi^^Y-trau-isch-stem
+  mi^^ff-trau-isch-ster % mi^^df-trauisch-ster
+  mi^^Y-trau-isch-ster
+  mi^^ff-trau-isch-stes % mi^^df-trauisch-stes
+  mi^^Y-trau-isch-stes
+  Mit-ta-gen % Mit-tagen
+  Nach-mit-ta-ge % Nach-mit-tage
+  omi-n^^f6-ses % omi-n^^f6ses
+  or-di-n^^e4-rem % or-di-n^^e4rem
+  or-di-n^^e4-ren % or-di-n^^e4ren
+  or-di-n^^e4-rer % or-di-n^^e4rer
+  or-di-n^^e4-re-rem % or-di-n^^e4re-rem
+  or-di-n^^e4-re-ren % or-di-n^^e4re-ren
+  or-di-n^^e4-re-rer % or-di-n^^e4re-rer
+  or-di-n^^e4-res % or-di-n^^e4res
+  pri-m^^e4-ren % pri-m^^e4ren
+  pu-bli-kes % pu-blikes
+  qu^^e4-lend-stem % qu^^e4lend-stem
+  qu^^e4-lend-sten % qu^^e4lend-sten
+  qu^^e4-lend-ster % qu^^e4lend-ster
+  Rau-me % Raume
+  R^^e4u-sche % R^^e4usche
+  rui-n^^f6-se % rui-n^^f6se
+  rui-n^^f6-sen % rui-n^^f6sen
+  run-der % runder
+  r^^fc-stest % r^^fcstest
+  r^^fc-stet % r^^fcstet
+  schauk-le % schaukle
+  scheff-le % scheffle
+  schlaf-lo-se % schlaflo-se
+  schlaf-lo-sem % schlaflo-sem
+  schlaf-lo-ser % schlaflo-ser
+  schlaf-lo-ses % schlaflo-ses
+  schlie-^^ffest % schlie^^dfest
+  schlie-^^Yest
+  schwef-le % schwefle
+  schwel-te % schwelte
+  schwel-test % schweltest
+  se-kun-d^^e4-re % se-kun-d^^e4re
+  se-kun-d^^e4-ren % se-kun-d^^e4ren
+  Se-ni-ors % Se-niors
+  sen-si-ble-rer % sen-si-bler-er
+  sieg-le % sie-gle
+  Ski-er % Skier
+  Spa-ghet-ti % Spaghet-ti
+  Spie-^^ffes % Spie^^dfes
+  Spie-^^Yes
+  spie-^^ffest % spie^^dfest
+  spie-^^Yest
+  sprenk-le % sprenkle
+  sprie-^^ffest % sprie^^dfest
+  sprie-^^Yest
+  staff-le % staffle
+  stah-len % stahlen
+  stap-le % staple
+  stie-^^ffest % stie^^dfest
+  stie-^^Yest
+  stu-re-ren % sture-ren
+  stu-re-rer % sture-rer
+  s^^fc-^^ffem % s^^fc^^dfem
+  s^^fc-^^Yem
+  taf-le % tafle
+  tag-ein % tagein
+  tak-le % takle
+  Tam-tam % Tamtam
+  Tam-tams % Tamtams
+  t^^e4tsch-le % t^^e4tschle
+  Te-le-fo-nat % Te-le-fonat
+  Te-le-fo-na-te % Te-le-fona-te
+  Te-n^^f6-re % Ten^^f6-re
+  tie-fer % tiefer
+  tie-fe-re % tiefe-re
+  tie-fe-rem % tiefe-rem
+  tie-fe-ren % tiefe-ren
+  tie-fe-rer % tiefe-rer
+  tie-fe-res % tiefe-res
+  tork-le % torkle
+  trocke-nem % trockenem
+  trocke-nen % trockenen
+  trocke-ner % trockener
+  trocke-ne-re % trockene-re
+  trocke-ne-ren % trockene-ren
+  trocke-ne-rer % trockene-rer
+  trocke-ne-res % trockene-res
+  tr^^fc-ber % tr^^fcber
+  tr^^fc-be-re % tr^^fcbe-re
+  voll-ends % vollends
+  Wah-len % Wahlen
+  wa-rum % warum
+  watsch-le % watschle
+  We-ges % Weges
+  wei-^^ffem % wei^^dfem
+  wei-^^Yem
+  weit-aus % weitaus
+  Wie-de-hop-fe % Wie-dehop-fe
+  Wie-de-hop-fen % Wie-dehop-fen
+  Wie-de-hopfs % Wie-dehopfs
+  woh-le-re % wohle-re
+  woh-le-ren % wohle-ren
+  wor-in % worin
+  wor-um % worum
+  w^^fch-lend-ste % w^^fchlend-ste
+  w^^fch-lend-sten % w^^fchlend-sten
+  w^^fch-lend-stes % w^^fchlend-stes
+  w^^fcrf-le % w^^fcrfle
+  w^^fc-stes % w^^fcstes
+  w^^fc-ste-ste % w^^fcste-ste
+  w^^fc-ste-sten % w^^fcste-sten
+  w^^fc-ste-ster % w^^fcste-ster
+  w^^fc-ste-stes % w^^fcste-stes
+  zirk-le % zirkle
+  zisch-le % zischle
+  Zu-tat % Zutat
+  Zu-ta-ten % Zuta-ten
+  zwei-fels-oh-ne % zwei-felsoh-ne
+  zweif-le % zweifle
+%
+%
+% fehlende Trennungen von zusammengesetzten W^^f6rtern
+%
+  ab-lie^^ff % ablie^^df
+  ab-lie^^Y
+  bei-pflich-ten % beipflich-ten
+  bei-pflich-tend % beipflich-tend
+  bei-pflich-ten-de % beipflich-ten-de
+  bei-pflich-ten-den % beipflich-ten-den
+  bei-pflich-ten-der % beipflich-ten-der
+  bei-pflich-ten-des % beipflich-ten-des
+  Bei-pflich-tung % Beipflich-tung
+  Bei-pflich-tun-gen % Beipflich-tun-gen
+  berg-ab % bergab
+  berg-an % bergan
+  da-bei-blei-ben % da-beiblei-ben
+  da-bei-blei-bend % da-beiblei-bend
+  da-bei-blei-ben-de % da-beiblei-ben-de
+  da-bei-blei-ben-der % da-beiblei-ben-der
+  da-bei-blei-ben-des % da-beiblei-ben-des
+  da-hin-glei-ten % da-hinglei-ten
+  da-hin-ve-ge-tie-ren-den % da-hinve-ge-tie-ren-den
+  da-lag % dalag
+  da-la-gen % dala-gen
+  dem-ent-spre-chend % dement-spre-chend
+  dem-ent-spre-chen-de % dement-spre-chen-de
+  dem-ent-spre-chen-den % dement-spre-chen-den
+  dem-ent-spre-chen-des % dement-spre-chen-des
+  dem-je-ni-gen % demje-ni-gen
+  Dom-pfaff % Dompfaff
+  eben-er-dig % ebener-dig
+  eben-er-di-ge % ebener-di-ge
+  eben-er-di-gen % ebener-di-gen
+  eben-er-di-ges % ebener-di-ges
+  ein-en-gen % einen-gen
+  Ein-en-gung % Einen-gung
+  ein-ge-h^^fcllt % ein-geh^^fcllt
+  ein-ge-h^^fcll-te % ein-geh^^fcll-te
+  ein-ge-h^^fcll-ten % ein-geh^^fcll-ten
+  ein-ge-h^^fcll-tes % ein-geh^^fcll-tes
+  ein-zu-eb-nen % ein-zueb-nen
+  ein-zu-en-gen % ein-zuen-gen
+  ent-ei-len % entei-len
+  ent-eil-ten % enteil-ten
+  ent-er-ben % enter-ben
+  ent-er-ben-de % enter-ben-de
+  ent-er-ben-den % enter-ben-den
+  ent-er-ben-der % enter-ben-der
+  ent-erbst % enterbst
+  ent-lie^^ff % entlie^^df
+  ent-lie^^Y
+  er-ah-nen % erah-nen
+  er-bla^^fft % erbla^^dft
+  er-bla^^Yt
+  er-bla^^ff-te % erbla^^df-te
+  er-bla^^Y-te
+  er-bla^^ff-ten % erbla^^df-ten
+  er-bla^^Y-ten
+  er-bla^^ff-ter % erbla^^df-ter
+  er-bla^^Y-ter
+  er-bla^^ff-tes % erbla^^df-tes
+  er-bla^^Y-tes
+  er-bla^^ff-tet % erbla^^df-tet
+  er-bla^^Y-tet
+  er-schrick % erschrick
+  er-schrickst % erschrickst
+  er-schrickt % erschrickt
+  Fern-ost % Fernost
+  fern-^^f6st-lich % fern^^f6st-lich
+  fern-^^f6st-li-che % fern^^f6st-li-che
+  fern-^^f6st-li-chen % fern^^f6st-li-chen
+  fort-ho-len % fortho-len
+  froh-locke % frohlocke
+  froh-locken % frohlocken
+  froh-lockend % frohlockend
+  froh-locken-den % frohlocken-den
+  froh-locken-der % frohlocken-der
+  froh-locken-des % frohlocken-des
+  froh-lockt % frohlockt
+  froh-lock-te % frohlock-te
+  froh-lock-ten % frohlock-ten
+  froh-lock-tet % frohlock-tet
+  furcht-er-re-gend % furchter-re-gend
+  furcht-er-re-gen-dem % furchter-re-gen-dem
+  furcht-er-re-gen-den % furchter-re-gen-den
+  furcht-er-re-gen-der % furchter-re-gen-der
+  ge-h^^fcpft % geh^^fcpft
+  ge-nau-so-schnell % ge-nau-soschnell
+  gro-^^ffen-teils % gro^^dfen-teils
+  gro-^^Yen-teils
+  her-aus-lie-^^ffe % her-auslie-^^dfe
+  her-aus-lie-^^Ye
+  her-aus-trat % her-austrat
+  hin-aus-trat % hin-austrat
+  hin-weg-dreht % hin-wegdreht
+  letzt-hin % letzthin
+  los-ei-sen % losei-sen
+  los-lie^^ff % loslie^^df
+  los-lie^^Y
+  los-lie-^^ffen % loslie-^^dfen
+  los-lie-^^Yen
+  nach-lie-^^ffen % nachlie-^^dfen
+  nach-lie-^^Yen
+  Nach-ruhm % Nachruhm
+  nach-zu-ah-men % nach-zuah-men
+  Nah-ost % Nahost
+  Nichts-tun % Nichtstun
+  non-plus-ul-tra % non-plusul-tra
+  Rat-schl^^e4-ge % Ratschl^^e4-ge
+  Rat-schl^^e4-gen % Ratschl^^e4-gen
+  re-in-ve-stiert % rein-ve-stiert
+  ^^fcber-a^^ff % ^^fcbera^^df
+  ^^fcber-a^^Y
+  ^^fcber-dachst % ^^fcberdachst
+  ^^fcber-gab % ^^fcbergab
+  ^^fcber-ge-blie-be-nen % ^^fcber-geblie-be-nen
+  ^^fcber-lie-^^ffest % ^^fcber-lie^^dfest
+  ^^fcber-lie-^^Yest
+  ^^fcber-t^^f6lp-le % ^^fcber-t^^f6lple
+  un-ab-l^^e4s-sig % un-abl^^e4s-sig
+  un-ab-l^^e4s-si-ge % un-abl^^e4s-si-ge
+  un-ab-l^^e4s-si-gem % un-abl^^e4s-si-gem
+  un-ab-l^^e4s-si-gen % un-abl^^e4s-si-gen
+  un-ab-l^^e4s-si-ges % un-abl^^e4s-si-ges
+  un-fein-sten % unfein-sten
+  un-fein-ster % unfein-ster
+  un-fein-stes % unfein-stes
+  un-pa-trio-tisch % un-patrio-tisch
+  un-pa-trio-ti-sche % un-patrio-ti-sche
+  un-pa-trio-ti-schen % un-patrio-ti-schen
+  un-pa-trio-ti-scher % un-patrio-ti-scher
+  un-pa-trio-ti-sches % un-patrio-ti-sches
+  un-ser-ei-ner % un-serei-ner
+  un-ter-h^^f6hl-te % unter-h^^f6hlte
+  un-ter-h^^f6hl-tem % unter-h^^f6hltem
+  un-ter-h^^f6hl-ter % unter-h^^f6hlter
+  un-ter-h^^f6hl-tes % unter-h^^f6hltes
+  un-ter-h^^f6hl-test % unter-h^^f6hltest
+  un-tie-fer % un-tiefer
+  ur-^^e4l-te-sten % ur^^e4l-te-sten
+  ver-dirbt % verdirbt
+  ver-dunk-le % ver-dunkle
+  ver-flie-^^ffest % ver-flie^^dfest
+  ver-flie-^^Yest
+  ver-gie-^^ffest % ver-gie^^dfest
+  ver-gie-^^Yest
+  ver-hie-^^ffest % ver-hie^^dfest
+  ver-hie-^^Yest
+  ver-lie-^^ffest % ver-lie^^dfest
+  ver-lie-^^Yest
+  ver-lort % verlort
+  ver-schie-^^ffest % ver-schie^^dfest
+  ver-schie-^^Yest
+  ver-schlie-^^ffest % ver-schlie^^dfest
+  ver-schlie-^^Yest
+  ver-starb % verstarb
+  ver-staust % verstaust
+  Ve-te-ran % Ve-teran
+  voll-auf % vollauf
+  voll-en-de % vollen-de
+  voll-en-den % vollen-den
+  voll-en-dend % vollen-dend
+  voll-en-den-der % vollen-den-der
+  voll-en-dest % vollen-dest
+  voll-en-det % vollen-det
+  voll-en-de-te % vollen-de-te
+  voll-en-de-tem % vollen-de-tem
+  voll-en-de-ten % vollen-de-ten
+  voll-en-de-tes % vollen-de-tes
+  voll-en-de-test % vollen-de-test
+  voll-en-de-tet % vollen-de-tet
+  voll-en-det-sten % vollen-det-sten
+  Voll-en-dung % Vollen-dung
+  Voll-en-dun-gen % Vollen-dun-gen
+  vor-aus-zu-ah-nen % vor-aus-zuah-nen
+  vor-ge-stri-ge % vor-gestri-ge
+  vor-ge-stri-gem % vor-gestri-gem
+  vor-ge-stri-gen % vor-gestri-gen
+  vor-ge-stri-ges % vor-gestri-ges
+  weg-strei-chen % wegstrei-chen
+  weg-strei-chend % wegstrei-chend
+  weg-strei-chen-den % wegstrei-chen-den
+  weg-strei-chen-der % wegstrei-chen-der
+  weg-strei-chen-des % wegstrei-chen-des
+  wei-ter-zu-ma-chen % wei-terzu-ma-chen
+  Welt-all % Weltall
+  Welt-alls % Weltalls
+  zer-fah-ren-ste % zer-fah-renste
+  zer-fah-ren-stem % zer-fah-renstem
+  zer-fah-ren-ster % zer-fah-renster
+  zer-fah-ren-stes % zer-fah-renstes
+  zer-flie-^^ffest % zer-flie^^dfest
+  zer-flie-^^Yest
+  zer-schie-^^ffest % zer-schie^^dfest
+  zer-schie-^^Yest
+  zer-stie-^^ffest % zer-stie^^dfest
+  zer-stie-^^Yest
+  zu-in-nerst % zuin-nerst
+  zu-lie^^ff % zulie^^df
+  zu-lie^^Y
+  zu-lie-^^ffen % zulie-^^dfen
+  zu-lie-^^Yen
+  zu-n^^e4-hen % zun^^e4-hen
+  zu-n^^e4-hend % zun^^e4-hend
+  zu-n^^e4-hen-den % zun^^e4-hen-den
+  zu-n^^e4-hen-der % zun^^e4-hen-der
+  zu-n^^e4-hen-des % zun^^e4-hen-des
+  zwei-h^^e4n-dig % zweih^^e4n-dig
+  zwei-h^^e4n-di-gen % zweih^^e4n-di-gen
+  zwei-h^^e4n-di-ger % zweih^^e4n-di-ger
+  zwei-h^^e4n-di-ges % zweih^^e4n-di-ges
+%
+%
+% fehlende Trennungen ausgew^^e4hlter Komposita
+%
+  Arz-nei-schrank % Arzneischrank
+  Ei-er-uhr % Eier-uhr
+  Ei-er-uh-ren % Eier-uh-ren
+  Fach-^^e4rz-te % Fach^^e4rz-te
+  Fern-gl^^e4-ser % Ferngl^^e4-ser
+  Froh-na-tur % Frohna-tur
+  f^^fcnf-ein-halb % f^^fcnfein-halb
+  Glatt-ei-ses % Glattei-ses
+  Ha-sel-n^^fcs-sen % Ha-seln^^fcs-sen
+  Haupt-ein-gang % Hauptein-gang
+  him-mel-blaue % him-melblaue
+  Kehr-sei-te % Kehrsei-te
+  Kehr-sei-ten % Kehrsei-ten
+  Kraft-akt % Kraftakt
+  Lehr-^^e4m-ter % Lehr^^e4m-ter
+  Mai-gl^^f6ck-chen % Maigl^^f6ck-chen
+  Mai-gl^^f6ck-chens % Maigl^^f6ck-chens
+  Maul-eseln % Mauleseln
+  Maul-esels % Maulesels
+  Meer-en-gen % Meeren-gen
+  Wal-n^^fcs-se % Waln^^fcs-se
+  Wal-n^^fcs-sen % Waln^^fcs-sen
+}
+
+\endgroup
+
+\endinput
+
+%%% Local Variables:
+%%% mode: tex
+%%% coding: latin-1
+%%% End:

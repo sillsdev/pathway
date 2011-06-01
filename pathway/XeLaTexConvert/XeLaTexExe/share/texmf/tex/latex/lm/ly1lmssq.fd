@@ -1,0 +1,19 @@
+% This file belongs to the Latin Modern package. The work is released under
+% the GUST Font License. See the MANIFEST.txt and README.eng files
+% for the details. For the most recent version of this license see
+% http://www.gust.org.pl/fonts/licenses/GUST-FONT-LICENSE.txt or
+% http://tug.org/fonts/licenses/GUST-FONT-LICENSE.txt
+
+\ProvidesFile{ly1lmssq.fd}[[2007/01/14 v1.3 Font defs for Latin Modern]
+\DeclareFontFamily{LY1}{lmssq}{\hyphenchar \font\m@ne}
+\DeclareFontShape{LY1}{lmssq}{m}{n}
+     {<-> texnansi-lmssq8}{}
+\DeclareFontShape{LY1}{lmssq}{m}{sl}
+     {<-> texnansi-lmssqo8}{}
+\DeclareFontShape{LY1}{lmssq}{bx}{n}
+     {<-> texnansi-lmssqbx8}{}
+\DeclareFontShape{LY1}{lmssq}{bx}{sl}
+     {<-> texnansi-lmssqbo8}{}
+\endinput
+%%
+%% End of file `ly1lmssq.fd'.

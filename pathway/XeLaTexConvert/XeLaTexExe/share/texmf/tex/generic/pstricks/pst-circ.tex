@@ -1,0 +1,1738 @@
+%%
+%% This is file `pst-circ.tex',
+%%
+%% IMPORTANT NOTICE:
+%%
+%% Package `pst-circ.tex'
+%%
+%% Original idea: A.Premoli I.Maio, M.Luque,
+%%
+%% Christophe Jorssen <Jorssen.lerraincy _at_ free.fr>
+%% Herbert Voss <voss _at_ pstricks.de>
+%%
+%% This program can be redistributed and/or modified under the terms
+%% of the LaTeX Project Public License Distributed from CTAN archives
+%% in directory CTAN:/macros/latex/base/lppl.txt.
+%%
+%% DESCRIPTION:
+%%   `pst-circ' is a PSTricks package to draw electric circuits
+%%
+%% For a ChangeLog go the the end
+%%
+\csname PSTcircLoaded\endcsname
+\let\PSTcircLoaded\endinput
+%
+% Require PSTricks and pst-node packages
+%
+\ifx\PSTMultidoLoaded\endinput\else\input multido.tex\fi
+\ifx\PSTricksLoaded\endinput\else\input pstricks.tex\fi
+\ifx\PSTnodeLoaded\endinput\else\input pst-node.tex\fi
+\ifx\PSTXKeyLoaded\endinput\else\input pst-xkey \fi
+%
+\def\fileversion{1.39}
+\def\filedate{2005/04/03}
+\message{`pst-circ' v\fileversion (CJ,hv)}
+%
+\edef\PstAtCode{\the\catcode`\@} \catcode`\@=11\relax
+\pst@addfams{pst-circ}
+%
+\pstheader{pst-circ.pro}
+\SpecialCoor
+%
+\newdimen\Pst@position
+%
+\newcount\pst@count@i
+\newcount\pst@count@ii
+\newcount\pst@count@iii
+%
+\newif\ifPst@intensity
+\newif\ifPst@tension
+\newif\ifPst@Dconvention
+\newif\ifPst@direct@convention
+\newif\ifPst@parallel
+\newif\ifPst@parallel@node
+\newif\ifPst@wire@intersect
+\newif\ifPst@OA@perfect
+\newif\ifPst@OA@power
+\newif\ifPst@OA@invert
+\newif\ifPst@OA@iplus
+\newif\ifPst@OA@iminus
+\newif\ifPst@OA@iout
+\newif\ifPst@T@circle% hv 2003-07-23
+\newif\ifPst@T@invert
+\newif\ifPst@T@iB
+\newif\ifPst@T@iC
+\newif\ifPst@T@iE
+\newif\ifPst@T@changeLR
+\newif\ifPst@Ttype
+\newif\ifPst@Trafo@iprimary
+\newif\ifPst@Trafo@isecondary
+\newif\ifPst@variable
+%
+\newif\ifPst@logic@showDot % hv
+\newif\ifPst@logic@showNode % hv
+\newif\ifPst@logic@changeLR % hv
+%
+\def\pst@Dconvention@receptor{receptor}
+\def\pst@Dconvention@generator{generator}
+\def\pst@Ttype@PNP{PNP}
+\def\pst@Ttype@NPN{NPN}
+% start  Herbert 2003-07-17
+\def\pst@Dstyle@thyristor{thyristor}
+\def\pst@Dstyle@GTO{GTO}
+\def\pst@Dstyle@triac{triac}
+\def\pst@Dstyle@Z{Z}
+% end  Herbert 2003-07-17
+\def\pst@Dstyle@normal{normal}
+\def\pst@Dstyle@chemical{chemical}
+\def\pst@Dstyle@elektor{elektor}
+\def\pst@Dstyle@elektorchemical{elektorchemical}
+\def\pst@Dstyle@elektorcurved{elektorcurved}
+\def\pst@Dstyle@curved{curved}
+\def\pst@Dstyle@rectangle{rectangle}
+\def\pst@Dstyle@open{open}
+\def\pst@Dstyle@close{close}
+\def\pst@Dstyle@zigzag{zigzag}
+\def\pst@Dstyle@diamond{diamond}
+\def\pst@tripole@style@left{left}
+\def\pst@tripole@style@right{right}
+\def\pst@tripole@style@center{center}
+\def\pst@tripole@style@french{french}
+%
+\define@key[psset]{pst-circ}{intensity}[true]{\@nameuse{Pst@intensity#1}}
+\define@key[psset]{pst-circ}{intensitylabel}{\def\psk@I@label{#1}}
+\define@key[psset]{pst-circ}{intensitylabelcolor}{\def\psk@I@labelcolor{#1}}
+\define@key[psset]{pst-circ}{intensitylabeloffset}{\def\psk@I@label@offset{#1}}
+\define@key[psset]{pst-circ}{intensitycolor}{\def\psk@I@color{#1}}
+\define@key[psset]{pst-circ}{intensitywidth}{\def\psk@I@width{#1}}
+\define@key[psset]{pst-circ}{tension}[true]{\@nameuse{Pst@tension#1}}
+\define@key[psset]{pst-circ}{tensionlabel}{\def\psk@tension@label{#1}}
+\define@key[psset]{pst-circ}{tensionlabelcolor}{\def\psk@tension@labelcolor{#1}}
+\define@key[psset]{pst-circ}{tensionoffset}{\def\psk@tension@offset{#1}}
+\define@key[psset]{pst-circ}{tensionlabeloffset}{\def\psk@tension@label@offset{#1}}
+\define@key[psset]{pst-circ}{tensioncolor}{\def\psk@tension@color{#1}}
+\define@key[psset]{pst-circ}{tensionwidth}{\def\psk@tension@width{#1}}
+\define@key[psset]{pst-circ}{labeloffset}{\def\psk@label@offset{#1}}
+\define@key[psset]{pst-circ}{labelangle}{\def\psk@label@angle{#1}}
+\define@key[psset]{pst-circ}{labelInside}{\def\psk@labelInside{#1}}
+\define@key[psset]{pst-circ}{dipoleconvention}{\def\psk@Dconvention{#1}}
+\define@key[psset]{pst-circ}{directconvention}[true]{\@nameuse{Pst@direct@convention#1}}
+\define@key[psset]{pst-circ}{dipolestyle}{\def\psk@Dstyle{#1}}
+\define@key[psset]{pst-circ}{parallel}[true]{\@nameuse{Pst@parallel#1}}
+\define@key[psset]{pst-circ}{parallelarm}{\def\psk@parallel@arm{#1}}
+\define@key[psset]{pst-circ}{parallelsep}{\def\psk@parallel@sep{#1}}
+\define@key[psset]{pst-circ}{parallelnode}[true]{\@nameuse{Pst@parallel@node#1}}
+\define@key[psset]{pst-circ}{intersect}[true]{\@nameuse{Pst@wire@intersect#1}}
+\define@key[psset]{pst-circ}{intersectA}{\def\psk@wire@intersectA{#1}}
+\define@key[psset]{pst-circ}{intersectB}{\def\psk@wire@intersectB{#1}}
+\define@key[psset]{pst-circ}{OAperfect}[true]{\@nameuse{Pst@OA@perfect#1}}
+\define@key[psset]{pst-circ}{OApower}[true]{\@nameuse{Pst@OA@power#1}}
+\define@key[psset]{pst-circ}{OAinvert}[true]{\@nameuse{Pst@OA@invert#1}}
+\define@key[psset]{pst-circ}{OAiplus}[true]{\@nameuse{Pst@OA@iplus#1}}
+\define@key[psset]{pst-circ}{OAiminus}[true]{\@nameuse{Pst@OA@iminus#1}}
+\define@key[psset]{pst-circ}{OAiout}[true]{\@nameuse{Pst@OA@iout#1}}
+\define@key[psset]{pst-circ}{OAipluslabel}{\def\psk@label@OA@iplus{#1}}
+\define@key[psset]{pst-circ}{OAiminuslabel}{\def\psk@label@OA@iminus{#1}}
+\define@key[psset]{pst-circ}{OAioutlabel}{\def\psk@label@OA@iout{#1}}
+\define@key[psset]{pst-circ}{transistorcircle}[true]{\@nameuse{Pst@T@circle#1}}% hv 2003-07-23
+\define@key[psset]{pst-circ}{transistorinvert}[true]{\@nameuse{Pst@T@invert#1}}
+\define@key[psset]{pst-circ}{transistoribase}[true]{\@nameuse{Pst@T@iB#1}}
+\define@key[psset]{pst-circ}{transistoricollector}[true]{\@nameuse{Pst@T@iC#1}}
+\define@key[psset]{pst-circ}{transistoriemitter}[true]{\@nameuse{Pst@T@iE#1}}
+\define@key[psset]{pst-circ}{transistoribaselabel}{\def\psk@labelT@iB{#1}}
+\define@key[psset]{pst-circ}{transistoricollectorlabel}{\def\psk@labelT@iC{#1}}
+\define@key[psset]{pst-circ}{transistoriemitterlabel}{\def\psk@labelT@iE{#1}}
+\define@key[psset]{pst-circ}{transistortype}{\def\psk@Ttype{#1}}
+\newdimen\Pst@basesep
+\define@key[psset]{pst-circ}{basesep}{\pst@getlength{#1}\Pst@basesep}
+\define@key[psset]{pst-circ}{TRot}{\pst@checknum{#1}\Pst@TRot}
+\define@key[psset]{pst-circ}{edge}{%
+    \def\psedge{#1}%
+    \ifx\psedge\@none\def\psedge##1##2{}\fi%
+}
+%
+\define@key[psset]{pst-circ}{primarylabel}{\def\psk@Trafo@primary@label{#1}}
+\define@key[psset]{pst-circ}{secondarylabel}{\def\psk@Trafo@secondary@label{#1}}
+\define@key[psset]{pst-circ}{transformeriprimary}[true]{\@nameuse{Pst@Trafo@iprimary#1}}
+\define@key[psset]{pst-circ}{transformerisecondary}[true]{\@nameuse{Pst@Trafo@isecondary#1}}
+\define@key[psset]{pst-circ}{transformeriprimarylabel}{\def\psk@Trafo@iprimary@label{#1}}
+\define@key[psset]{pst-circ}{transformerisecondarylabel}{\def\psk@Trafo@isecondary@label{#1}}
+\define@key[psset]{pst-circ}{tripolestyle}{\def\psk@tripole@style{#1}}
+\define@key[psset]{pst-circ}{variable}[true]{\@nameuse{Pst@variable#1}}
+%
+\define@key[psset]{pst-circ}{logicChangeLR}[false]{\@nameuse{Pst@logic@changeLR#1}}% hv
+\define@key[psset]{pst-circ}{logicShowDot}[false]{\@nameuse{Pst@logic@showDot#1}}% hv
+\define@key[psset]{pst-circ}{logicShowNode}[false]{\@nameuse{Pst@logic@showNode#1}}% hv
+%\define@key[psset]{pst-circ}{logicOrigin}{\def\psk@logic@origin{#1}}% hv
+\define@key[psset]{pst-circ}{logicWidth}{\def\psk@logic@width{#1}}% hv
+\define@key[psset]{pst-circ}{logicHeight}{\def\psk@logic@height{#1}}% hv
+\define@key[psset]{pst-circ}{logicType}{\def\psk@logic@type{#1}}% hv
+\define@key[psset]{pst-circ}{logicNInput}{\def\psk@logic@nInput{#1}}% hv
+\define@key[psset]{pst-circ}{logicJInput}{\def\psk@logic@JInput{#1}}% hv
+\define@key[psset]{pst-circ}{logicKInput}{\def\psk@logic@KInput{#1}}% hv
+\define@key[psset]{pst-circ}{logicWireLength}{\def\psk@logic@wireLength{#1}}% hv
+\define@key[psset]{pst-circ}{logicLabelstyle}{\def\psk@logic@labelstyle{#1}}% hv
+\define@key[psset]{pst-circ}{logicSymbolstyle}{\def\psk@logic@symbolstyle{#1}}% hv
+\define@key[psset]{pst-circ}{logicSymbolpos}{\def\psk@logic@symbolpos{#1}}% hv
+\define@key[psset]{pst-circ}{logicNodestyle}{\def\psk@logic@nodestyle{#1}}% hv
+%
+\def\pst@logic@type@and{and}
+\def\pst@logic@type@or{or}
+\def\pst@logic@type@nand{nand}
+\def\pst@logic@type@nor{nor}
+\def\pst@logic@type@not{not}
+\def\pst@logic@type@exor{exor}
+\def\pst@logic@type@exnor{exnor}
+%
+\def\pst@logic@type@RS{RS}
+\def\pst@logic@type@D{D}
+\def\pst@logic@type@JK{JK}
+%
+\psset{%
+  labelInside=0,%
+  intensity=false,intensitylabel=\@empty,intensitylabeloffset=0.5,
+  intensitycolor=black,intensitylabelcolor=black,intensitywidth=\pslinewidth,
+  tension=false,tensionlabel=\@empty,tensionoffset=1,tensionlabeloffset=1.2,
+  tensioncolor=black,tensionlabelcolor=black,tensionwidth=\pslinewidth,
+  labeloffset=0.7,labelangle=0,dipoleconvention=receptor,directconvention=true,dipolestyle=normal
+  parallel=false,parallelarm=1.5,parallelsep=0,parallelnode=false,
+  intersect=false,OAperfect=true,OAinvert=true,
+  OAiplus=false,OAiminus=false,OAiout=false,OAipluslabel=\@empty,
+  OAiminuslabel=\@empty,OAioutlabel=\@empty,OApower=false,%
+  transistorcircle=true, transistorinvert=false, % hv 2003-07-23
+  transistoribase=false,transistoricollector=false,transistoriemitter=false,%
+  transistoribaselabel=\@empty,basesep=0pt,edge=\pcangle,%
+  transistoricollectorlabel=\@empty,transistoriemitterlabel=\@empty,
+  transistortype=NPN,TRot=0,%
+  primarylabel=\@empty,secondarylabel=\@empty,transformeriprimary=false,transformerisecondary=false,
+  transformeriprimarylabel=\@empty,transformerisecondarylabel=\@empty,
+  tripolestyle=normal,variable=false,%
+  logicShowDot=false, logicShowNode=false, logicChangeLR=false,% hv
+  logicWireLength=0.5, logicWidth=1.5, logicHeight=2.5, % hv
+  logicNInput=2, logicJInput=2, logicKInput=2, logicType=and,% hv
+  logicLabelstyle=\small, logicSymbolstyle=\large,
+  logicSymbolpos=0.5,logicNodestyle=\footnotesize}% hv
+%
+\newpsstyle{baseOpt}{edge=\pcline,arrows=-,arm=.5,angleA=0,angleB=180}
+\newpsstyle{emitterOpt}{arrows=-,arm=.5,angleA=180,angleB=-90}%
+\newpsstyle{collectorOpt}{arrows=-,arm=.5,angleA=180,angleB=90}
+%
+\def\wire{\@ifnextchar[{\pst@draw@wire}{\pst@draw@wire[]}}
+%
+\def\tension{\@ifnextchar[{\pst@draw@tension@}{\pst@draw@tension@[]}}
+%
+\def\resistor{\@ifnextchar[{\pst@resistor}{\pst@resistor[]}}
+\def\pst@resistor[#1](#2)(#3)#4{{%
+  \pst@draw@dipole{#1}{#2}{#3}{#4}\pst@draw@resistor%
+  }\ignorespaces}
+%
+\def\capacitor{\@ifnextchar[{\pst@capacitor}{\pst@capacitor[]}}
+\def\pst@capacitor[#1](#2)(#3)#4{{%
+  \pst@draw@dipole{#1}{#2}{#3}{#4}\pst@draw@capacitor%
+  }\ignorespaces}
+%
+\def\battery{\@ifnextchar[{\pst@battery}{\pst@battery[]}}
+\def\pst@battery[#1](#2)(#3)#4{{%
+  \pst@draw@dipole{#1}{#2}{#3}{#4}\pst@draw@battery%
+  }\ignorespaces}
+%
+\def\coil{\@ifnextchar[{\pst@coil}{\pst@coil[]}}
+\def\pst@coil[#1](#2)(#3)#4{{%
+  \pst@draw@dipole{#1}{#2}{#3}{#4}\pst@draw@coil%
+  }\ignorespaces}
+%
+\def\Ucc{\@ifnextchar[{\pst@Ucc}{\pst@Ucc[]}}
+\def\pst@Ucc[#1](#2)(#3)#4{{%
+  \pst@draw@dipole{#1}{#2}{#3}{#4}\pst@draw@Ucc
+  }\ignorespaces}
+%
+\def\Icc{\@ifnextchar[{\pst@Icc}{\pst@Icc[]}}
+\def\pst@Icc[#1](#2)(#3)#4{{%
+  \pst@draw@dipole{#1}{#2}{#3}{#4}\pst@draw@Icc
+  }\ignorespaces}
+%
+\def\switch{\@ifnextchar[{\pst@switch}{\pst@switch[]}}
+\def\pst@switch[#1](#2)(#3)#4{{%
+  \pst@draw@dipole{#1}{#2}{#3}{#4}\pst@draw@switch
+  }\ignorespaces}
+%
+\def\diode{\@ifnextchar[{\pst@diode}{\pst@diode[]}}
+\def\pst@diode[#1](#2)(#3)#4{{%
+  \pst@draw@dipole{#1}{#2}{#3}{#4}\pst@draw@diode
+  }\ignorespaces}
+%
+\def\Zener{\@ifnextchar[{\pst@Zener}{\pst@Zener[]}}
+\def\pst@Zener[#1](#2)(#3)#4{{%
+  \pst@draw@dipole{#1}{#2}{#3}{#4}\pst@draw@Zener
+  }\ignorespaces}
+%
+\def\lamp{\@ifnextchar[{\pst@lamp}{\pst@lamp[]}}
+\def\pst@lamp[#1](#2)(#3)#4{{%
+  \pst@draw@dipole{#1}{#2}{#3}{#4}\pst@draw@lamp
+  }\ignorespaces}
+%
+\def\circledipole{\@ifnextchar[{\pst@circledipole}{\pst@circledipole[]}}
+\def\pst@circledipole[#1](#2)(#3)#4{{%
+  \pst@draw@dipole{#1}{#2}{#3}{#4}\pst@draw@circledipole
+  }\ignorespaces}
+%
+\def\LED{\@ifnextchar[{\pst@LED}{\pst@LED[]}}
+\def\pst@LED[#1](#2)(#3)#4{{%
+  \pst@draw@dipole{#1}{#2}{#3}{#4}\pst@draw@LED
+  }\ignorespaces}
+%
+\def\OA{\pst@object{OA}}
+\def\OA@i(#1)(#2)(#3){%
+  \addbefore@par{dimen=middle}%
+  \begin@ClosedObj%
+  \if\psk@label@OA@iplus\@empty\else\psset{OAiplus=true}\fi%
+  \if\psk@label@OA@iminus\@empty\else\psset{OAiminus=true}\fi%
+  \if\psk@label@OA@iout\@empty\else\psset{OAiout=true}\fi%
+  \ifPst@intensity\psset{OAiplus=true,OAiminus=true,OAiout=true}\fi%
+  \pst@getcoor{#1}\pst@tempa
+  \pst@getcoor{#2}\pst@tempb
+  \pst@getcoor{#3}\pst@tempc
+  \pnode(!%
+    \pst@tempa /Y1 exch \pst@number\psyunit div def
+    /X1 exch \pst@number\psxunit div def
+    \pst@tempb /Y2 exch \pst@number\psyunit div def
+    /X2 exch \pst@number\psxunit div def
+    \pst@tempc /Y3 exch \pst@number\psyunit div def
+    /X3 exch \pst@number\psxunit div def
+    /XC X1 X2 lt {X3 X2} {X3 X1} ifelse add 2 div def
+    /YC Y1 Y2 add 2 div def
+    XC YC){C@}
+  \rput(C@){\pst@draw@OA}
+  \ncangle[arrows=-,arm=.5,angleA=0,angleB=180]{#1}{\ifPst@OA@invert Minus@\else Plus@\fi}
+  \ncput[npos=2]{\pnode{\ifPst@OA@invert Minus@@\else Plus@@\fi}}
+  \ifPst@OA@iplus
+    \ifPst@OA@invert\else
+      \ncput[npos=2.5]{%
+        \psline[linecolor=\psk@I@color,
+          linewidth=\psk@I@width,arrowinset=0]{->}(-.1,0)(.1,0)}
+      \naput[npos=2.5]{\csname\psk@I@labelcolor\endcsname\psk@label@OA@iplus}
+    \fi
+  \fi
+  \ifPst@OA@iminus
+    \ifPst@OA@invert
+      \ncput[npos=2.5]{%
+        \psline[linecolor=\psk@I@color,
+          linewidth=\psk@I@width,arrowinset=0]{->}(-.1,0)(.1,0)}
+      \naput[npos=2.5]{\csname\psk@I@labelcolor\endcsname\psk@label@OA@iminus}
+    \fi
+  \fi
+  \ncangle[arrows=-,arm=.5,angleA=0,angleB=180]{#2}{\ifPst@OA@invert Plus@\else Minus@\fi}
+  \ncput[npos=2]{\pnode{\ifPst@OA@invert Plus@@\else Minus@@\fi}}
+  \ifPst@OA@iplus
+    \ifPst@OA@invert
+      \ncput[npos=2.5]{%
+        \psline[linecolor=\psk@I@color,
+          linewidth=\psk@I@width,arrowinset=0]{->}(-.1,0)(.1,0)}
+      \nbput[npos=2.5]{\csname\psk@I@labelcolor\endcsname\psk@label@OA@iplus}
+    \fi
+  \fi
+  \ifPst@OA@iminus
+    \ifPst@OA@invert\else
+      \ncput[npos=2.5]{%
+        \psline[linecolor=\psk@I@color,
+          linewidth=\psk@I@width,arrowinset=0]{->}(-.1,0)(.1,0)}
+      \nbput[npos=2.5]{\csname\psk@I@labelcolor\endcsname\psk@label@OA@iminus}
+    \fi
+  \fi
+  \ncangle[arrows=-,arm=.5,angleA=180,angleB=0]{#3}{S@}
+  \ncput[npos=2]{\pnode{S@@}}
+  \ifPst@OA@iout
+    \ncput[npos=2.5]{%
+      \psline[linecolor=\psk@I@color,
+        linewidth=\psk@I@width,arrowinset=0]{->}(-.1,0)(.1,0)}
+    \naput[npos=2.5]{\csname\psk@I@labelcolor\endcsname\psk@label@OA@iout}
+  \fi
+  \psline[linestyle=none](#1)(#2)% for the end arrows
+  \psline[linestyle=none](#1)(#3)% for the end arrows
+  \end@ClosedObj
+  \ignorespaces%
+}
+%
+\newif\ifPst@temp
+\def\transistor{\@ifnextchar[{\transistor@i}{\transistor@i[]}}
+\def\transistor@i[#1](#2){%
+  \begingroup
+  \psset{#1}
+  \@ifnextchar({\transistor@iii(#2)}{\Pst@tempfalse\transistor@ii(#2)}}
+%
+\def\transistor@ii(#1)#2#3{% with one node, the base
+  \pst@killglue%
+  \ifPst@temp\pnode(#1){TBaseNode}%
+  \else%
+    \pst@getcoor{#1}\pst@tempa%
+    \pnode(! 
+      \pst@tempa /YB exch \pst@number\psyunit div def
+      /XB exch \pst@number\psxunit div def 
+      /basesep \Pst@basesep\space \pst@number\psxunit div def 
+      XB basesep \Pst@TRot\space cos mul add 
+      YB basesep \Pst@TRot\space sin mul add){TBaseNode}% base node 
+  \fi%
+  \rput{\Pst@TRot}(TBaseNode){%
+    \ifPst@T@circle\pscircle(0.3,0){0.7}\fi
+    \psline[arrows=-,linewidth=4\pslinewidth](0,0.4)(0,-0.4)
+    \ifnum180=\Pst@TRot\relax%
+      \ifPst@T@invert\pnode(0.5,-0.5){#2}\else\pnode(0.5,-0.5){#3}\fi%
+      \ifPst@T@invert\pnode(0.5,0.5){#3}\else\pnode(0.5,0.5){#2}\fi%
+    \else%
+      \ifPst@T@invert\pnode(0.5,0.5){#2}\else\pnode(0.5,0.5){#3}\fi%
+      \ifPst@T@invert\pnode(0.5,-0.5){#3}\else\pnode(0.5,-0.5){#2}\fi%
+    \fi%
+    \psline[arrows=-](0.5,0.5)(0,0)(0.5,-0.5)
+  }%
+  \ifx\psk@Ttype\pst@Ttype@PNP\relax%
+    \psline[arrowinset=0,arrowsize=8\pslinewidth]{->}(#3)(TBaseNode)\else%
+    \psline[arrowinset=0,arrowsize=8\pslinewidth]{->}(TBaseNode)(#2)\fi%
+  \ifPst@temp\else\endgroup\fi%
+  \ignorespaces%
+}
+%
+\def\transistor@iii(#1)(#2)(#3){% with three nodes
+  \pst@getcoor{#1}\pst@tempa%
+  \pst@getcoor{#2}\pst@tempb%
+  \pst@getcoor{#3}\pst@tempc%
+  \pnode(!%
+    \pst@tempa /Y1 exch \pst@number\psyunit div def
+    /X1 exch \pst@number\psxunit div def
+    \pst@tempb /Y2 exch \pst@number\psyunit div def
+    /X2 exch \pst@number\psxunit div def
+    \pst@tempc /Y3 exch \pst@number\psyunit div def
+    /X3 exch \pst@number\psxunit div def
+    /LR X1 X2 lt { false }{ true } ifelse def % change left-right 
+    /basesep \Pst@basesep\space \pst@number\psxunit div def 
+    /XBase X1 basesep \Pst@TRot\space cos mul add def
+    /YBase Y1 basesep \Pst@TRot\space sin mul add def
+    XBase YBase ){@@base}% base node 
+%    
+  \Pst@temptrue%
+  \transistor@ii(@@base){@@emitter}{@@collector}%
+%
+  \if\psk@labelT@iB\@empty\else\psset{transistoribase=true}\fi%
+  \if\psk@labelT@iE\@empty\else\psset{transistoriemitter=true}\fi%
+  \if\psk@labelT@iC\@empty\else\psset{transistoricollector=true}\fi%
+  \ifPst@intensity\psset{transistoribase=true,transistoriemitter=true,transistoricollector=true}\fi%
+% 
+  \bgroup\psset{style=baseOpt}\psedge(#1)(TBaseNode)\egroup%
+  \ifPst@T@iB% base current?
+    \ncput[npos=0.5,nrot=\Pst@TRot]{%
+      \psline[linecolor=\psk@I@color,linewidth=\psk@I@width,%
+        arrowsize=6\pslinewidth,arrowinset=0]{->}(-.1,0)(.1,0)}%
+    \naput[npos=0.5]{\csname\psk@I@labelcolor\endcsname\psk@labelT@iB}%
+  \fi%
+  \bgroup%
+    \psset{style=collectorOpt}%
+  \ifPst@T@invert\psedge(#3)(@@emitter)\else\psedge(#3)(@@collector)\fi%
+  \egroup%
+  \ncput[npos=2]{\pnode{\ifPst@T@invert @@emitter\else @@collector\fi}}%
+  \ifPst@T@iE% emitter current?
+    \ifPst@T@invert% emitter/collector changed?
+      \ncput[npos=1.5,nrot=:U]{%
+        \psline[linecolor=\psk@I@color,linewidth=\psk@I@width,%
+	arrowsize=6\pslinewidth,arrowinset=0]{->}(-0.1,0)(0.1,0)}
+      \nbput[npos=1.5]{\csname\psk@I@labelcolor\endcsname\psk@labelT@iE}
+    \fi\fi%
+  \ifPst@T@iC% collector current?
+    \ifPst@T@invert\else% emitter/collector changed?
+      \ncput[npos=1.5,nrot=:U]{%
+        \psline[linecolor=\psk@I@color,linewidth=\psk@I@width,%
+	arrowsize=6\pslinewidth,arrowinset=0]{->}(-.1,0)(.1,0)}
+      \nbput[npos=1.5]{\csname\psk@I@labelcolor\endcsname\psk@labelT@iC}
+    \fi\fi%
+  \bgroup
+  \psset{style=emitterOpt}
+  \ifPst@T@invert\psedge(#2)(@@collector)\else\psedge(#2)(@@emitter)\fi
+  \egroup
+  \ncput[npos=2]{\pnode{\ifPst@T@invert @@collector\else @@emitter\fi}}
+  \ifPst@T@iE
+    \ifPst@T@invert\else
+      \ncput[npos=1.5,nrot=:U]{%
+        \psline[linecolor=\psk@I@color,linewidth=\psk@I@width,
+	arrowsize=6\pslinewidth,arrowinset=0]{<-}(-.1,0)(.1,0)}
+      \naput[npos=1.5]{\csname\psk@I@labelcolor\endcsname\psk@labelT@iE}
+    \fi\fi%
+  \ifPst@T@iC% collector current?
+    \ifPst@T@invert% emitter/collector changed?
+      \ncput[npos=1.5,nrot=:U]{%
+        \psline[linecolor=\psk@I@color,linewidth=\psk@I@width,
+	arrowsize=6\pslinewidth,arrowinset=0]{<-}(-.1,0)(.1,0)}
+      \naput[npos=1.5]{\csname\psk@I@labelcolor\endcsname\psk@labelT@iC}
+    \fi\fi
+  \psline[linestyle=none](#1)(#2)% for the end arrows
+  \psline[linestyle=none](#1)(#3)% for the end arrows
+  \endgroup
+  \ignorespaces%
+}
+%
+\def\Tswitch{\pst@object{Tswitch}}
+\def\Tswitch@i(#1)(#2)(#3)#4{%
+  \addbefore@par{dimen=middle}%
+  \begin@ClosedObj
+  \pst@getcoor{#1}\pst@tempa
+  \pst@getcoor{#2}\pst@tempb
+  \pst@getcoor{#3}\pst@tempc
+  \pnode(!%
+    \pst@tempa /Y1 exch \pst@number\psyunit div def
+    /X1 exch \pst@number\psxunit div def
+    \pst@tempb /Y2 exch \pst@number\psyunit div def
+    /X2 exch \pst@number\psxunit div def
+    \pst@tempc /Y3 exch \pst@number\psyunit div def
+    /X3 exch \pst@number\psxunit div def
+    /XC X1 X2 add 2 div def
+    /YC Y2 def
+    XC YC){C@}
+  \rput(C@){\pst@draw@Tswitch}
+  \ncangle[arrows=-,arm=0.5,angleB=180]{#1}{Tswi@left}
+  \ncangle[arrows=-,arm=0.5,angleB=0]{#2}{Tswi@right}
+  \ncangle[arrows=-,arm=0.5,angleB=-90]{#3}{Tswi@center}
+  \ncline[arrows=-,linestyle=none,fillstyle=none]{Tswi@left}{Tswi@right}
+  \naput{#4}
+  \pcline[linestyle=none](#1)(#2)% for the endarrows
+  \pcline[linestyle=none](#2)(#3)% for the endarrows
+  \end@ClosedObj
+  \ignorespaces%
+}
+%
+% 20030830 hv
+%
+\def\potentiometer{\pst@object{potentiometer}}
+\def\potentiometer@i(#1)(#2)(#3)#4{%
+  \begin@ClosedObj
+    \resistor(#1)(#2){#4}
+    \pst@getcoor{#1}\pst@tempa
+    \pst@getcoor{#2}\pst@tempb
+    \pst@getcoor{#3}\pst@tempc
+    \pnode(!%
+        \pst@tempa /Y1 exch \pst@number\psyunit div def
+        /X1 exch \pst@number\psxunit div def
+        \pst@tempb /Y2 exch \pst@number\psyunit div def
+        /X2 exch \pst@number\psxunit div def
+        \pst@tempc /Y3 exch \pst@number\psyunit div def
+        /X3 exch \pst@number\psxunit div def
+        /dx X2 X1 sub def
+        /dy Y2 Y1 sub def
+        dx 2 div X1 add
+        dy 2 div Y1 add ){Center@}
+    \pst@getcoor{Center@}\pst@tempd
+    \pnode(!%
+        \pst@tempd /Y4 exch \pst@number\psyunit div def
+        /X4 exch \pst@number\psxunit div def
+        dx abs 0.01 lt{
+            X3 Y4
+        }{dy abs 0.01 lt {
+            X4 Y3
+            }{/m dy dx div def
+                /x Y4 Y3 sub m X3 mul add X4 m div add m 1 m div add div def
+                x dup X3 sub m mul Y3 add
+            } ifelse
+        }ifelse){@tempNodeB}
+    \pnode(!%
+        /Alpha dy dx atan def
+        /dx Alpha sin 0.25 mul def
+        /dy Alpha cos 0.25 mul def
+        Y3 Y2 gt {X4 dx sub Y4 dy add}{X4 dx add Y4 dy sub}ifelse ){@tempNodeC}
+    \psline[arrows=->,arrowsize=0.2](#3)(@tempNodeB)(@tempNodeC)
+    \pcline[linestyle=none](#1)(#3)% for the endarrows
+  \end@ClosedObj%
+  \ignorespaces%
+}
+%
+% quadrupoles
+%
+\def\transformer{\pst@object{transformer}}
+\def\transformer@i(#1)(#2)(#3)(#4)#5{%
+  \addbefore@par{dimen=middle,arm=0}%
+  \begin@ClosedObj%
+  \if\psk@Trafo@iprimary@label\@empty\else
+    \psset{transformeriprimary=true}%
+  \fi
+  \if\psk@Trafo@isecondary@label\@empty\else
+    \psset{transformerisecondary=true}%
+  \fi
+  \ifPst@intensity
+    \psset{transformeriprimary=true,transformerisecondary=true}%
+  \fi
+  \pst@getcoor{#1}\pst@tempa
+  \pst@getcoor{#2}\pst@tempb
+  \pst@getcoor{#3}\pst@tempc
+  \pst@getcoor{#4}\pst@tempd
+  \pnode(!%
+    \pst@tempa /Y1 exch \pst@number\psyunit div def
+    /X1 exch \pst@number\psxunit div def
+    \pst@tempb /Y2 exch \pst@number\psyunit div def
+    /X2 exch \pst@number\psxunit div def
+    \pst@tempc /Y3 exch \pst@number\psyunit div def
+    /X3 exch \pst@number\psxunit div def
+    \pst@tempc /Y4 exch \pst@number\psyunit div def
+    /X4 exch \pst@number\psxunit div def
+    /XC X1 X2 lt {X2} {X1} ifelse X3 X4 lt {X3} {X4} ifelse add 2 div def
+    /YC Y1 Y3 lt {Y1} {Y3} ifelse Y2 Y4 lt {Y2} {Y4} ifelse add 2 div def
+    XC YC){C@}
+  \rput(C@){\pst@draw@transformer}
+  \ncangle[arrows=-,arm=0.5,angleB=90]{#1}{inup@}
+  \ifPst@Trafo@iprimary
+    \ncput[npos=2.5,nrot=:U]{\psline[linecolor=\psk@I@color,
+      linewidth=\psk@I@width,arrowinset=0]{->}(-.1,0)(.1,0)}
+    \nbput[npos=2.5]{\csname\psk@I@labelcolor\endcsname\psk@Trafo@iprimary@label}
+  \fi
+  \ncangle[arrows=-,arm=0.5,angleB=-90]{#2}{indown@}
+  \ncangle[arrows=-,arm=0.5,angleB=90]{#3}{outup@}
+  \ifPst@Trafo@iprimary
+    \ncput[npos=2.5,nrot=:U]{\psline[linecolor=\psk@I@color,
+      linewidth=\psk@I@width,arrowinset=0]{->}(-.1,0)(.1,0)}
+    \naput[npos=2.5]{\csname\psk@I@labelcolor\endcsname\psk@Trafo@isecondary@label}
+  \fi
+  \ncangle[arrows=-,arm=0.5,angleB=-90]{#4}{outdown@}
+  \ncline[arrows=-,linestyle=none,fillstyle=none]{indown@}{inup@}
+  \naput{\psk@Trafo@primary@label}
+  \ncline[arrows=-,linestyle=none,fillstyle=none]{outdown@}{outup@}
+  \nbput{\psk@Trafo@secondary@label}
+  \ncline[arrows=-,linestyle=none,fillstyle=none]{indown@}{outdown@}
+  \nbput{#5}
+  \pcline[linestyle=none](#1)(#3)% for the end arrows
+  \pcline[linestyle=none](#2)(#4)% for the end arrows
+  \end@ClosedObj%
+  \ignorespaces%
+}
+%
+% Start hv 2003-07-23
+\def\optoCoupler{\pst@object{optoCoupler}}
+\def\optoCoupler@i(#1)(#2)(#3)(#4)#5{%
+  \addbefore@par{dimen=middle,arm=0}%
+  \begin@ClosedObj%
+  \pst@getcoor{#1}\pst@tempa
+  \pst@getcoor{#2}\pst@tempb
+  \pst@getcoor{#3}\pst@tempc
+  \pst@getcoor{#4}\pst@tempd
+  \pnode(!%
+    \pst@tempa /Y1 exch \pst@number\psyunit div def
+    /X1 exch \pst@number\psxunit div def
+    \pst@tempb /Y2 exch \pst@number\psyunit div def
+    /X2 exch \pst@number\psxunit div def
+    \pst@tempc /Y3 exch \pst@number\psyunit div def
+    /X3 exch \pst@number\psxunit div def
+    \pst@tempc /Y4 exch \pst@number\psyunit div def
+    /X4 exch \pst@number\psxunit div def
+    /XC X1 X2 lt {X2} {X1} ifelse X3 X4 lt {X3} {X4} ifelse add 2 div def
+    /YC Y1 Y3 lt {Y1} {Y3} ifelse Y2 Y4 lt {Y2} {Y4} ifelse add 2 div def
+    XC YC){C@}
+  \rput(C@){\pst@draw@optoCoupler}
+  \ncangle[arrows=-,arm=0.5,angleB=90]{#1}{inup@}
+  \ncangle[arrows=-,arm=0.5,angleB=-90]{#2}{indown@}
+  \ncangle[arrows=-,arm=0.5,angleB=90]{#3}{outup@}
+  \ncangle[arrows=-,arm=0.5,angleB=-90]{#4}{outdown@}
+  \ncline[arrows=-,linestyle=none,fillstyle=none]{indown@}{outdown@}
+  \nbput{#5}
+  \pcline[linestyle=none](#1)(#3)% for the end arrows
+  \pcline[linestyle=none](#2)(#4)% for the end arrows
+  \end@ClosedObj%
+  \ignorespaces%
+}
+%
+% The logical circuits part
+%
+\def\logic{\@ifnextchar[{\pst@draw@logic}{\pst@draw@logic[]}}
+%
+\def\ground{\@ifnextchar[{\pst@ground}{\pst@ground[]}}
+\def\pst@ground[#1]{%
+    \@ifnextchar({\pst@groundi[#1]{0}}{\pst@groundi[#1]}%
+}
+\def\pst@groundi[#1]#2(#3){{%
+    \psset{#1}%
+    \rput{#2}(#3){%
+        \psframe[fillstyle=vlines,%
+            linestyle=none,%
+            fillstyle=none,%
+            hatchwidth=0.5\pslinewidth](-0.5,-0.7)(0.5,-0.5)
+        \psline[linewidth=1.5\pslinewidth](-0.5,-0.5)(0.5,-0.5)
+        \psline(0,0)(0,-0.5)
+        \pscircle*(#3){2\pslinewidth}%
+    }
+    \ignorespaces%
+}}
+%
+% end hv 2003-08-29
+%
+%%%%%%%%%%%%%
+\def\multidipole{\@ifnextchar[{\pst@multidipole}{\pst@multidipole[]}}
+%
+\def\pst@multidipole[#1](#2)(#3)#4{%
+  \psset{#1}%
+  \pst@getcoor{#2}\pst@tempa
+  \pst@getcoor{#3}\pst@tempb
+  \pst@Verb{%
+    gsave
+      STV CP T
+      \pst@tempa /Ybegin@ exch \pst@number\psyunit div def
+      /Xbegin@ exch \pst@number\psxunit div def
+      \pst@tempb /Yend@ exch \pst@number\psyunit div def
+      /Xend@ exch \pst@number\psxunit div def
+      /Xbegin Xbegin@ Xend@ lt {Xbegin@} {Xend@} ifelse def
+      /Xend Xbegin@ Xend@ lt {Xend@} {Xbegin@} ifelse def
+      /Ybegin Ybegin@ Yend@ lt {Ybegin@} {Yend@} ifelse def
+      /Yend Ybegin@ Yend@ lt {Yend@} {Ybegin@} ifelse def
+      /@angle Yend Ybegin sub Xend Xbegin sub Atan def
+      /X@length Xend Xbegin sub Yend Ybegin sub Pyth @angle cos mul Xend@ Xbegin@ lt {neg} if def
+      /Y@length Xend Xbegin sub Yend Ybegin sub Pyth @angle sin mul Yend@ Ybegin@ lt {neg} if def
+    grestore}%
+  \pst@count@i=\z@
+  \let\pst@multidipole@output\@empty
+  \ifx\resistor #4%
+    \let\next\pst@multidipole@resistor
+  \else
+    \ifx\capacitor #4%
+      \let\next\pst@multidipole@capacitor
+    \else
+      \ifx\battery #4%
+        \let\next\pst@multidipole@battery
+      \else
+        \ifx\coil #4%
+          \let\next\pst@multidipole@coil
+        \else
+          \ifx\Ucc #4%
+            \let\next\pst@multidipole@Ucc
+          \else
+            \ifx\Icc #4%
+              \let\next\pst@multidipole@Icc
+            \else
+              \ifx\switch #4%
+                \let\next\pst@multidipole@switch
+              \else
+                \ifx\diode #4%
+                  \let\next\pst@multidipole@diode
+                \else
+                  \ifx\Zener #4%
+                    \let\next\pst@multidipole@Zener
+                  \else
+                    \ifx\wire #4%
+                      \let\next\pst@multidipole@wire
+                    \else
+                      \ifx\lamp #4%
+                        \let\next\pst@multidipole@lamp
+                      \else
+                        \ifx\circledipole #4%
+                          \let\next\pst@multidipole@circledipole
+                        \else
+                          \ifx\LED #4%
+                            \let\next\pst@multidipole@LED
+                          \else
+                            \let\next\ignorespaces
+                          \fi
+                        \fi
+                      \fi
+                    \fi
+                  \fi
+                \fi
+              \fi
+            \fi
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi
+  \advance\pst@count@i\@ne
+  \advance\pst@count@iii\@ne
+  \next
+}
+%
+\def\pst@multidipole@#1{%
+  \ifx\resistor #1%
+      \let\next\pst@multidipole@resistor
+  \else
+    \ifx\capacitor #1%
+      \let\next\pst@multidipole@capacitor
+    \else
+      \ifx\battery #1%
+        \let\next\pst@multidipole@battery
+      \else
+        \ifx\coil #1%
+          \let\next\pst@multidipole@coil
+        \else
+          \ifx\Ucc #1%
+            \let\next\pst@multidipole@Ucc
+          \else
+            \ifx\Icc #1%
+              \let\next\pst@multidipole@Icc
+            \else
+              \ifx\switch #1%
+                \let\next\pst@multidipole@switchoff
+              \else
+                \ifx\diode #1%
+                  \let\next\pst@multidipole@diode
+                \else
+                  \ifx\Zener #1%
+                    \let\next\pst@multidipole@Zener
+                  \else
+                    \ifx\wire #1%
+                      \let\next\pst@multidipole@wire
+                    \else
+                      \ifx\lamp #1%
+                        \let\next\pst@multidipole@lamp
+                      \else
+                        \ifx\circledipole #1%
+                          \let\next\pst@multidipole@circledipole
+                        \else
+                          \ifx\LED #1%
+                            \let\next\pst@multidipole@LED
+                          \else
+                            \let\next\ignorespaces
+                            \pst@multidipole@output
+                          \fi
+                        \fi
+                      \fi
+                    \fi
+                  \fi
+                \fi
+              \fi
+            \fi
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi
+  \advance\pst@count@i\@ne
+  \advance\pst@count@iii\@ne
+  \next
+}
+%
+\def\pst@multidipole@resistor{\@ifnextchar[{\pst@multidipole@resistor@}{\pst@multidipole@resistor@[]}}
+%
+\def\pst@multidipole@resistor@[#1]#2{%
+  \expandafter\def\csname pst@tmp@\number\pst@count@iii\endcsname{#2}%
+  {\psset{#1}%
+  \ifPst@parallel\aftergroup\advance\aftergroup\pst@count@i\aftergroup\m@ne\fi}%
+  \pst@count@ii=\pst@count@i%
+  \advance\pst@count@ii\@ne%
+  \toks0\expandafter{\pst@multidipole@output}%
+  \edef\pst@multidipole@output{%
+    \the\toks0%
+    \pst@multidipole@def@coor%
+    \noexpand\resistor[#1]%
+  (! X@\the\pst@count@i\space Y@\the\pst@count@i)%
+  (! X@\the\pst@count@ii\space Y@\the\pst@count@ii)%
+      {\noexpand\csname pst@tmp@\number\pst@count@iii\endcsname}%
+  }%
+  \pst@multidipole@
+}
+%
+\def\pst@multidipole@capacitor{\@ifnextchar[{\pst@multidipole@capacitor@}{\pst@multidipole@capacitor@[]}}
+%
+\def\pst@multidipole@capacitor@[#1]#2{%
+  \expandafter\def\csname pst@tmp@\number\pst@count@iii\endcsname{#2}%
+  {\psset{#1}%
+  \ifPst@parallel\aftergroup\advance\aftergroup\pst@count@i\aftergroup\m@ne\fi}%
+  \pst@count@ii=\pst@count@i
+  \advance\pst@count@ii\@ne
+  \toks0\expandafter{\pst@multidipole@output}%
+  \edef\pst@multidipole@output{%
+    \the\toks0
+    \pst@multidipole@def@coor
+    \noexpand\capacitor[#1]%
+  (! X@\the\pst@count@i\space Y@\the\pst@count@i)%
+  (! X@\the\pst@count@ii\space Y@\the\pst@count@ii)%
+      {\noexpand\csname pst@tmp@\number\pst@count@iii\endcsname}
+  }%
+  \pst@multidipole@
+}
+%
+\def\pst@multidipole@battery{\@ifnextchar[{\pst@multidipole@battery@}{\pst@multidipole@battery@[]}}
+%
+\def\pst@multidipole@battery@[#1]#2{%
+  \expandafter\def\csname pst@tmp@\number\pst@count@iii\endcsname{#2}%
+  {\psset{#1}%
+  \ifPst@parallel\aftergroup\advance\aftergroup\pst@count@i\aftergroup\m@ne\fi}%
+  \pst@count@ii=\pst@count@i
+  \advance\pst@count@ii\@ne
+  \toks0\expandafter{\pst@multidipole@output}%
+  \edef\pst@multidipole@output{%
+    \the\toks0
+    \pst@multidipole@def@coor
+    \noexpand\battery[#1]%
+  (! X@\the\pst@count@i\space Y@\the\pst@count@i)%
+  (! X@\the\pst@count@ii\space Y@\the\pst@count@ii)%
+      {\noexpand\csname pst@tmp@\number\pst@count@iii\endcsname}
+  }%
+  \pst@multidipole@
+}
+%
+\def\pst@multidipole@coil{\@ifnextchar[{\pst@multidipole@coil@}{\pst@multidipole@coil@[]}}
+%
+\def\pst@multidipole@coil@[#1]#2{%
+  \expandafter\def\csname pst@tmp@\number\pst@count@iii\endcsname{#2}%
+  {\psset{#1}%
+  \ifPst@parallel\aftergroup\advance\aftergroup\pst@count@i\aftergroup\m@ne\fi}%
+  \pst@count@ii=\pst@count@i
+  \advance\pst@count@ii\@ne
+  \toks0\expandafter{\pst@multidipole@output}%
+  \edef\pst@multidipole@output{%
+    \the\toks0
+    \pst@multidipole@def@coor
+    \noexpand\coil[#1]%
+  (! X@\the\pst@count@i\space Y@\the\pst@count@i)%
+  (! X@\the\pst@count@ii\space Y@\the\pst@count@ii)%
+      {\noexpand\csname pst@tmp@\number\pst@count@iii\endcsname}
+  }%
+  \pst@multidipole@
+}
+%
+\def\pst@multidipole@Ucc{\@ifnextchar[{\pst@multidipole@Ucc@}{\pst@multidipole@Ucc@[]}}
+%
+\def\pst@multidipole@Ucc@[#1]#2{%
+  \expandafter\def\csname pst@tmp@\number\pst@count@iii\endcsname{#2}%
+  {\psset{#1}%
+  \ifPst@parallel\aftergroup\advance\aftergroup\pst@count@i\aftergroup\m@ne\fi}%
+  \pst@count@ii=\pst@count@i
+  \advance\pst@count@ii\@ne
+  \toks0\expandafter{\pst@multidipole@output}%
+  \edef\pst@multidipole@output{%
+    \the\toks0
+    \pst@multidipole@def@coor
+    \noexpand\Ucc[#1]%
+  (! X@\the\pst@count@i\space Y@\the\pst@count@i)%
+  (! X@\the\pst@count@ii\space Y@\the\pst@count@ii)%
+      {\noexpand\csname pst@tmp@\number\pst@count@iii\endcsname}
+  }%
+  \pst@multidipole@
+}
+%
+\def\pst@multidipole@Icc{\@ifnextchar[{\pst@multidipole@Icc@}{\pst@multidipole@Icc@[]}}
+%
+\def\pst@multidipole@Icc@[#1]#2{%
+  \expandafter\def\csname pst@tmp@\number\pst@count@iii\endcsname{#2}%
+  {\psset{#1}%
+  \ifPst@parallel\aftergroup\advance\aftergroup\pst@count@i\aftergroup\m@ne\fi}%
+  \pst@count@ii=\pst@count@i
+  \advance\pst@count@ii\@ne
+  \toks0\expandafter{\pst@multidipole@output}%
+  \edef\pst@multidipole@output{%
+    \the\toks0
+    \pst@multidipole@def@coor
+    \noexpand\Icc[#1]%
+  (! X@\the\pst@count@i\space Y@\the\pst@count@i)%
+  (! X@\the\pst@count@ii\space Y@\the\pst@count@ii)%
+      {\noexpand\csname pst@tmp@\number\pst@count@iii\endcsname}
+  }%
+  \pst@multidipole@
+}
+%
+\def\pst@multidipole@switch{\@ifnextchar[{\pst@multidipole@switch@}{\pst@multidipole@switch@[]}}
+%
+\def\pst@multidipole@switch@[#1]#2{%
+  \expandafter\def\csname pst@tmp@\number\pst@count@iii\endcsname{#2}%
+  {\psset{#1}%
+  \ifPst@parallel\aftergroup\advance\aftergroup\pst@count@i\aftergroup\m@ne\fi}%
+  \pst@count@ii=\pst@count@i
+  \advance\pst@count@ii\@ne
+  \toks0\expandafter{\pst@multidipole@output}%
+  \edef\pst@multidipole@output{%
+    \the\toks0
+    \pst@multidipole@def@coor
+    \noexpand\switch[#1]%
+  (! X@\the\pst@count@i\space Y@\the\pst@count@i)%
+  (! X@\the\pst@count@ii\space Y@\the\pst@count@ii)%
+      {\noexpand\csname pst@tmp@\number\pst@count@iii\endcsname}
+  }%
+  \pst@multidipole@
+}
+%
+\def\pst@multidipole@diode{\@ifnextchar[{\pst@multidipole@diode@}{\pst@multidipole@diode@[]}}
+%
+\def\pst@multidipole@diode@[#1]#2{%
+  \expandafter\def\csname pst@tmp@\number\pst@count@iii\endcsname{#2}%
+  {\psset{#1}%
+  \ifPst@parallel\aftergroup\advance\aftergroup\pst@count@i\aftergroup\m@ne\fi}%
+  \pst@count@ii=\pst@count@i
+  \advance\pst@count@ii\@ne
+  \toks0\expandafter{\pst@multidipole@output}%
+  \edef\pst@multidipole@output{%
+    \the\toks0
+    \pst@multidipole@def@coor
+    \noexpand\diode[#1]%
+  (! X@\the\pst@count@i\space Y@\the\pst@count@i)%
+  (! X@\the\pst@count@ii\space Y@\the\pst@count@ii)%
+      {\noexpand\csname pst@tmp@\number\pst@count@iii\endcsname}
+  }%
+  \pst@multidipole@
+}
+%
+\def\pst@multidipole@Zener{\@ifnextchar[{\pst@multidipole@Zener@}{\pst@multidipole@Zener@[]}}
+\def\pst@multidipole@Zener@[#1]#2{%
+  \expandafter\def\csname pst@tmp@\number\pst@count@iii\endcsname{#2}%
+  {\psset{#1}%
+  \ifPst@parallel\aftergroup\advance\aftergroup\pst@count@i\aftergroup\m@ne\fi}%
+  \pst@count@ii=\pst@count@i
+  \advance\pst@count@ii\@ne
+  \toks0\expandafter{\pst@multidipole@output}%
+  \edef\pst@multidipole@output{%
+    \the\toks0
+    \pst@multidipole@def@coor
+    \noexpand\Zener[#1]%
+  (! X@\the\pst@count@i\space Y@\the\pst@count@i)%
+  (! X@\the\pst@count@ii\space Y@\the\pst@count@ii)%
+      {\noexpand\csname pst@tmp@\number\pst@count@iii\endcsname}
+  }%
+  \pst@multidipole@
+}
+%
+\def\pst@multidipole@lamp{\@ifnextchar[{\pst@multidipole@lamp@}{\pst@multidipole@lamp@[]}}
+%
+\def\pst@multidipole@lamp@[#1]#2{%
+  \expandafter\def\csname pst@tmp@\number\pst@count@iii\endcsname{#2}%
+  {\psset{#1}%
+  \ifPst@parallel\aftergroup\advance\aftergroup\pst@count@i\aftergroup\m@ne\fi}%
+  \pst@count@ii=\pst@count@i
+  \advance\pst@count@ii\@ne
+  \toks0\expandafter{\pst@multidipole@output}%
+  \edef\pst@multidipole@output{%
+    \the\toks0
+    \pst@multidipole@def@coor
+    \noexpand\lamp[#1]%
+  (! X@\the\pst@count@i\space Y@\the\pst@count@i)%
+  (! X@\the\pst@count@ii\space Y@\the\pst@count@ii)%
+      {\noexpand\csname pst@tmp@\number\pst@count@iii\endcsname}
+  }%
+  \pst@multidipole@
+}
+%
+\def\pst@multidipole@circledipole{\@ifnextchar[{\pst@multidipole@circledipole@}{\pst@multidipole@circledipole@[]}}
+%
+\def\pst@multidipole@circledipole@[#1]#2{%
+  \expandafter\def\csname pst@tmp@\number\pst@count@iii\endcsname{#2}%
+  {\psset{#1}%
+  \ifPst@parallel\aftergroup\advance\aftergroup\pst@count@i\aftergroup\m@ne\fi}%
+  \pst@count@ii=\pst@count@i
+  \advance\pst@count@ii\@ne
+  \toks0\expandafter{\pst@multidipole@output}%
+  \edef\pst@multidipole@output{%
+    \the\toks0
+    \pst@multidipole@def@coor
+    \noexpand\circledipole[#1]%
+  (! X@\the\pst@count@i\space Y@\the\pst@count@i)%
+  (! X@\the\pst@count@ii\space Y@\the\pst@count@ii)%
+      {\noexpand\csname pst@tmp@\number\pst@count@iii\endcsname}
+  }%
+  \pst@multidipole@
+}
+%
+\def\pst@multidipole@LED{\@ifnextchar[{\pst@multidipole@LED@}{\pst@multidipole@LED@[]}}
+%
+\def\pst@multidipole@LED@[#1]#2{%
+  \expandafter\def\csname pst@tmp@\number\pst@count@iii\endcsname{#2}%
+  {\psset{#1}%
+  \ifPst@parallel\aftergroup\advance\aftergroup\pst@count@i\aftergroup\m@ne\fi}%
+  \pst@count@ii=\pst@count@i
+  \advance\pst@count@ii\@ne
+  \toks0\expandafter{\pst@multidipole@output}%
+  \edef\pst@multidipole@output{%
+    \the\toks0
+    \pst@multidipole@def@coor
+    \noexpand\LED[#1]%
+  (! X@\the\pst@count@i\space Y@\the\pst@count@i)%
+  (! X@\the\pst@count@ii\space Y@\the\pst@count@ii)%
+      {\noexpand\csname pst@tmp@\number\pst@count@iii\endcsname}
+  }%
+  \pst@multidipole@
+}
+%
+\def\pst@multidipole@wire{\@ifnextchar[{\pst@multidipole@wire@}{\pst@multidipole@wire@[]}}
+%
+\def\pst@multidipole@wire@[#1]{%
+  {\psset{#1}%
+  \ifPst@parallel\aftergroup\advance\aftergroup\pst@count@i\aftergroup\m@ne\fi}%
+  \pst@count@ii=\pst@count@i
+  \advance\pst@count@ii\@ne
+  \toks0\expandafter{\pst@multidipole@output}%
+  \edef\pst@multidipole@output{%
+    \the\toks0
+    \pst@multidipole@def@coor
+    \noexpand\wire[#1](! X@\the\pst@count@i\space Y@\the\pst@count@i)(! X@\the\pst@count@ii\space Y@\the\pst@count@ii)
+  }%
+  \pst@multidipole@
+}
+%
+\def\pst@multidipole@def@coor{%
+  \noexpand\pst@Verb{%
+    /X@\the\pst@count@i\space \the\pst@count@i\space 1 sub X@length \noexpand\the\pst@count@i\space div mul Xbegin@ add def
+    /Y@\the\pst@count@i\space \the\pst@count@i\space 1 sub Y@length \noexpand\the\pst@count@i\space div mul Ybegin@ add def
+    /X@\the\pst@count@ii\space \the\pst@count@i\space X@length \noexpand\the\pst@count@i\space div mul Xbegin@ add def
+    /Y@\the\pst@count@ii\space \the\pst@count@i\space Y@length \noexpand\the\pst@count@i\space div mul Ybegin@ add def
+    }%
+\ignorespaces}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\def\pst@draw@dipole#1#2#3#4#5{%
+  \psset{dimen=middle}%
+  \psset{#1}%
+  \if\psk@I@label\@empty\else\psset{intensity=true}\fi
+  \if\psk@tension@label\@empty\else\psset{tension=true}\fi
+  \ifx\psk@Dconvention\pst@Dconvention@generator
+    \Pst@Dconventiontrue
+  \else
+    \ifx\psk@Dconvention\pst@Dconvention@receptor
+      \Pst@Dconventionfalse
+    \fi
+  \fi
+  \pcline[arrows=-,linestyle=none,fillstyle=none](#2)(#3)
+  \ncput[nrot=:U]{\pnode{dipole@M}}
+  \ifPst@parallel
+    \pcline[arrows=-,linestyle=none,fillstyle=none](#2)(dipole@M)
+    \ncput[npos=\psk@parallel@sep]{\pnode{dipole@@1}}
+    \pcline[arrows=-,linestyle=none,fillstyle=none](#3)(dipole@M)
+    \ncput[npos=\psk@parallel@sep]{\pnode{dipole@@2}}
+    \pcline[arrows=-,linestyle=none,fillstyle=none,offset=\psk@parallel@arm](dipole@@1)(dipole@@2)
+    \ncput[npos=0]{\pnode{dipole@@@1}}
+    \ncput[npos=1]{\pnode{dipole@@@2}}
+    \ncput[nrot=:U]{#5}
+    \pcline[arrows=-](dipole@@1)(dipole@@@1)
+    \pcline[arrows=-](dipole@@@1)(dipole@1)
+    \pcline[arrows=-](dipole@2)(dipole@@@2)
+    \pcline[arrows=-](dipole@@@2)(dipole@@2)
+    \ifPst@parallel@node
+      \pscircle*(dipole@@1){2\pslinewidth}
+      \pscircle*(dipole@@2){2\pslinewidth}
+    \fi
+    \pcline[arrows=-,linestyle=none,fillstyle=none,offset=\psk@label@offset](dipole@@@1)(dipole@@@2)
+    \ncput[nrot=\psk@label@angle]{#4}
+    \pst@intensity{dipole@@@1}{dipole@@@2}
+    \pst@tension{dipole@@@1}{dipole@@@2}
+  \else
+    \ncput[nrot=:U]{#5}
+    \pcline[arrows=-,linestyle=none,fillstyle=none,offset=\psk@label@offset](#2)(#3)
+    \ncput[nrot=\psk@label@angle]{#4}
+    \pcline[arrows=-](#2)(dipole@1)
+    \pcline[arrows=-](dipole@2)(#3)
+    \pcline[linestyle=none](#2)(#3)
+    \pst@intensity{#2}{#3}
+    \pst@tension{#2}{#3}
+  \fi
+  }
+%
+\def\pst@intensity#1#2{%
+  \ifPst@intensity
+    \ifPst@direct@convention
+      \pcline[arrows=-,linestyle=none,fillstyle=none](#1)(dipole@1)
+      \ncput[nrot=:U]{%
+        \psline[linecolor=\psk@I@color,
+          linewidth=\psk@I@width,arrowinset=0]{->}(-.1,0)(.1,0)}
+      \pcline[arrows=-,linestyle=none,fillstyle=none,offset=\psk@I@label@offset](#1)(dipole@1)
+      \ncput[nrot=\psk@label@angle]{\csname\psk@I@labelcolor\endcsname\psk@I@label}
+    \else
+      \pcline[arrows=-,linestyle=none,fillstyle=none](dipole@2)(#2)
+      \ncput[nrot=:U]{%
+        \psline[linecolor=\psk@I@color,linewidth=\psk@I@width]{<-}(-.1,0)(.1,0)}
+      \pcline[arrows=-,linestyle=none,fillstyle=none,offset=\psk@I@label@offset](dipole@2)(#2)
+      \ncput[nrot=\psk@label@angle]{\csname\psk@I@labelcolor\endcsname\psk@I@label}
+    \fi
+  \fi
+}
+%
+\def\pst@tension#1#2{%
+  \ifPst@tension
+    \pcline[arrows=-,linestyle=none,fillstyle=none,%
+      offset=\psk@tension@offset](#1)(dipole@1)
+    \ncput[npos=.5]{\pnode{tension@1}}
+    \pcline[arrows=-,linestyle=none,fillstyle=none,
+      offset=-\psk@tension@offset](#2)(dipole@2)
+    \ncput[npos=.5]{\pnode{tension@2}}
+    \ifPst@direct@convention
+      \ifPst@Dconvention
+        \pcline[linecolor=\psk@tension@color,
+          linewidth=\psk@tension@width,arrowinset=0]{<-}(tension@1)(tension@2)
+      \else
+        \pcline[linecolor=\psk@tension@color,
+          linewidth=\psk@tension@width,arrowinset=0]{->}(tension@1)(tension@2)
+      \fi
+    \else
+      \ifPst@Dconvention
+        \pcline[linecolor=\psk@tension@color,
+          linewidth=\psk@tension@width,arrowinset=0]{->}(tension@1)(tension@2)
+      \else
+        \pcline[linecolor=\psk@tension@color,
+          linewidth=\psk@tension@width,arrowinset=0]{<-}(tension@1)(tension@2)
+      \fi
+    \fi
+    \pcline[arrows=-,linestyle=none,fillstyle=none,%
+      offset=\psk@tension@label@offset](dipole@1)(dipole@2)
+    \ncput[nrot=\psk@label@angle]{%
+  \csname\psk@tension@labelcolor\endcsname\psk@tension@label}
+  \fi
+}
+%
+\def\pst@draw@resistor{%
+  \ifx\psk@Dstyle\pst@Dstyle@zigzag
+    \pnode(-0.75,0){dipole@1}
+    \pnode(0.75,0){dipole@2}
+    \multips(-0.75,0)(0.5,0){3}%
+      {\psline[arrows=-,linewidth=1.5\pslinewidth]%
+          (0,0)(0.125,0.25)(0.375,-0.25)(0.5,0)}%
+  \else
+    \pnode(-0.5,0){dipole@1}
+    \pnode(0.5,0){dipole@2}
+    \psframe[linewidth=1.5\pslinewidth](-0.5,-0.25)(0.5,0.25)
+  \fi
+  \ifPst@variable%
+    \psline{->}(-0.5,-0.55)(0.5,0.55)%
+  \fi
+}
+%
+\def\pst@draw@capacitor{%
+  \bgroup
+  \psset{linewidth=1.5\pslinewidth}%
+  \ifx\psk@Dstyle\pst@Dstyle@chemical
+    \psline[arrows=-](-0.2,-0.5)(-0.2,0.5)
+    \psarc[arrows=-](1.1875,0){1.0625}{154.8}{205.2}
+    \pnode(-0.2,0){dipole@1}
+    \pnode(0.125,0){dipole@2}
+  \else
+    \ifx\psk@Dstyle\pst@Dstyle@elektorchemical
+      \psframe[framearc=0.01,dimen=outer](-0.2284123,0.2743733)(-0.0557103,-0.2743733)
+      \psframe[framearc=0.01,dimen=outer,fillstyle=solid,fillcolor=black](0.0557103,0.2743733)(0.2284123,-0.2743733)
+      \pnode(-0.2284123,0){dipole@1}
+      \pnode(0.2284123,0){dipole@2}
+    \else
+      \ifx\psk@Dstyle\pst@Dstyle@elektor
+        \psframe[framearc=0.01,dimen=outer,fillstyle=solid,fillcolor=black](-0.2284123,0.2743733)(-0.0557103,-0.2743733)
+        \psframe[framearc=0.01,dimen=outer,fillstyle=solid,fillcolor=black](0.0557103,0.2743733)(0.2284123,-0.2743733)
+        \pnode(-0.2284123,0){dipole@1}
+        \pnode(0.2284123,0){dipole@2}
+      \else
+        \psline[arrows=-](-0.2,-0.5)(-0.2,0.5)
+        \psline[arrows=-](0.2,-0.5)(0.2,0.5)
+        \pnode(-0.2,0){dipole@1}
+        \pnode(0.2,0){dipole@2}
+      \fi
+    \fi
+  \fi
+  \ifPst@variable%
+    \psline[arrows=->](-0.5,-0.55)(0.5,0.55)%
+  \fi
+  \egroup
+}
+%
+\def\pst@draw@OA{%
+  \ifx\psk@tripole@style\pst@tripole@style@french
+    \psframe[linewidth=1.5\pslinewidth](-1,-0.75)(1,0.75)
+    \pspolygon(-0.4,-0.2)(-0.4,0.2)(-0.05,0)
+  \else
+    \pspolygon[arrows=-](-1,-0.75)(-1,0.75)(1,0)(-1,-0.75)
+    \ifPst@OA@power
+      \psline{-o}(0,0.375)(0,0.75)\uput[90](0,0.75){$+$}
+      \psline{-o}(0,-0.375)(0,-0.75)\uput[-90](0,-0.75){$-$}
+    \fi
+  \fi
+  \pnode(-1,0.25){\ifPst@OA@invert Minus@\else Plus@\fi}
+  \pnode(-1,-0.25){\ifPst@OA@invert Plus@\else Minus@\fi}
+  \pnode(1,0){S@}
+  \uput{0.1}[0](-1,0.25){\ifPst@OA@invert$-$\else$+$\fi}
+  \uput{0.1}[0](-1,-0.25){\ifPst@OA@invert$+$\else$-$\fi}
+  \ifPst@OA@perfect\rput(0.25,0){$\infty$}\fi%
+}
+%
+\def\pst@draw@battery{%
+  \psline[arrows=-,linewidth=1.5\pslinewidth](-0.10,-0.5)(-0.10,0.5)
+  \psline[arrows=-,linewidth=3\pslinewidth](0.10,-0.25)(0.10,0.25)
+  \pnode(-0.1,0){dipole@1}
+  \pnode(0.1,0){dipole@2}
+  \ifPst@variable%
+    \psline{->}(-0.75,-0.5)(0.75,0.5)%
+  \fi
+  }
+%
+\def\pst@draw@coil{%
+  \ifx\psk@Dstyle\pst@Dstyle@curved
+    \pscurve[arrows=-](-0.7,0)(-0.6,0.3)(-0.35,0)(-0.4,-0.2)
+      (-0.5,0)(-0.4,0.3)(-0.15,0)(-0.2,-0.2)(-0.3,0)
+      (-0.2,0.3)(0.05,0)(0,-0.2)(-0.1,0)
+      (0,0.3)(0.25,0)(0.2,-0.2)(0.1,0)
+      (0.2,0.3)(0.45,0)(0.4,-0.2)(0.3,0)
+      (0.4,0.3)(0.65,0)(0.6,-0.2)(0.5,0)
+    \pnode(-0.7,0){dipole@1}
+    \pnode(0.5,0){dipole@2}
+  \else
+    \ifx\psk@Dstyle\pst@Dstyle@elektor
+      \psarcn[arrows=c-](-0.3885794,0){0.1295265}{-180}{0}
+      \psarcn(-0.1295265,0){0.1295265}{-180}{0}
+      \psarcn(0.1295265,0){0.1295265}{-180}{0}
+      \psarcn[arrows=-c](0.3885794,0){0.1295265}{-180}{0}
+      \pnode(-0.5181058,0){dipole@1}
+      \pnode(0.5181058,0){dipole@2}
+    \else
+      \ifx\psk@Dstyle\pst@Dstyle@elektorcurved
+        \psarcn[arrows=c-c](-0.408167,0.089453){0.211665}{-155}{-410}
+        \psarcn[arrows=-c](-0.136056,0.089453){0.211665}{-130}{-410}
+        \psarcn[arrows=-c](0.136055,0.089453){0.211665}{-130}{-410}
+        \psarcn[arrows=-c](0.408167,0.089453){0.211665}{-130}{-385}
+        \pnode(-0.6,0){dipole@1}
+        \pnode(0.6,0){dipole@2}
+    \else
+      \ifx\psk@Dstyle\pst@Dstyle@rectangle
+        \pnode(-0.5,0){dipole@1}
+        \pnode(0.5,0){dipole@2}
+        \psframe[linewidth=1.5\pslinewidth,fillstyle=solid,fillcolor=black](-0.5,-0.25)(0.5,0.25)
+    \else
+      \pscurve[arrows=-,linewidth=1.5\pslinewidth](-1,0)(-0.75,0.5)(-0.5,0)
+      \pscurve[arrows=-,linewidth=1.5\pslinewidth](-0.5,0)(-0.25,0.5)(0,0)
+      \pscurve[arrows=-,linewidth=1.5\pslinewidth](0,0)(0.25,0.5)(0.5,0)
+      \pscurve[arrows=-,linewidth=1.5\pslinewidth](0.5,0)(0.75,0.5)(1,0)
+      \pnode(-1,0){dipole@1}
+      \pnode(1,0){dipole@2}
+    \fi\fi\fi\fi%
+  \ifPst@variable\psline{->}(-0.75,-0.5)(0.75,0.5)\fi%
+  }
+%
+\def\pst@draw@Ucc{%
+  \pnode(-0.5,0){dipole@1}
+  \pnode(0.5,0){dipole@2}
+  \ifx\psk@Dstyle\pst@Dstyle@diamond
+    \pspolygon[linewidth=1.5\pslinewidth](-0.5,0)(0,0.5)(0.5,0)(0,-0.5)
+  \else
+    \pscircle[linewidth=1.5\pslinewidth](0,0){0.5}
+  \fi
+  \ifcase\psk@labelInside\or% do nothing
+    \psline[arrows=-,linewidth=2\pslinewidth]{->}(-0.35,0)(0.35,0)\or% case 1
+    \uput{0.1}[0]{90}(-0.5,0){$-$}% case 2
+    \uput{0.1}[0]{90}(0,0){$+$}\or% case 3
+    \rput(0,0){\large\bf =}
+  \fi
+}
+%
+\def\pst@draw@Icc{%
+  \pnode(-0.5,0){dipole@1}
+  \pnode(0.5,0){dipole@2}
+  \pscircle[linewidth=1.5\pslinewidth](0,0){0.5}
+  \psline[arrows=-,linewidth=1.5\pslinewidth](0,-0.5)(0,0.5)
+  }
+%
+\def\pst@draw@switch{%
+  \ifx\psk@Dstyle\pst@Dstyle@close
+    \pnode(-0.5,0){dipole@1}
+    \pnode(0.5,0){dipole@2}
+    \qdisk(-0.5,0){1.5pt}
+    \qdisk(0.5,0){1.5pt}
+    \psline[arrows=-,linewidth=2\pslinewidth](-0.5,0.05)(0.5,0.05)
+  \else
+    \pnode(-0.55,0){dipole@1}
+    \pnode(0.5,0){dipole@2}
+    \psline[arrows=-,linewidth=2\pslinewidth](-0.5,0)(0.5,0.5)
+    \psarcn[arrowinset=0]{->}(-0.5,0){0.75}{45}{-45}
+    \pscircle[fillstyle=solid](-0.5,0){0.07}
+    \qdisk(0.5,0){1.5pt}
+  \fi
+}
+%
+\def\pst@draw@diode{%
+  \ifx\psk@Dstyle\pst@Dstyle@triac
+    \pspolygon[linewidth=1.5\pslinewidth](-0.25,-0.4)(-0.25,0)(0.25,-0.2)
+    \pspolygon[linewidth=1.5\pslinewidth](0.25,0)(-0.25,0.2)(0.25,0.4)
+    \psline[arrows=-,linewidth=1.5\pslinewidth](-0.25,-0.4)(-0.25,0.4)
+    \psline[arrows=-,linewidth=1.5\pslinewidth](0.25,-0.4)(0.25,0.4)
+    \psline[arrows=-,linewidth=\pslinewidth](0.25,-0.2)(0.5,-0.3)(0.5,-0.6)
+  \else
+    \pspolygon[arrows=-,linewidth=1.5\pslinewidth](-0.25,-0.2)(-0.25,0.2)(0.25,0)
+    \psline[arrows=-,linewidth=1.5\pslinewidth](0.25,0.2)(0.25,-0.2)
+    \ifx\psk@Dstyle\pst@Dstyle@thyristor
+      \psline[arrows=-,linewidth=1.5\pslinewidth](0,-0.1)(0,-0.35)
+    \fi
+    \ifx\psk@Dstyle\pst@Dstyle@GTO
+      \psline[arrows=-,linewidth=1.5\pslinewidth](-0.1,-0.12)(-0.1,-0.35)
+      \psline[arrows=-,linewidth=1.5\pslinewidth](0,-0.1)(0,-0.35)
+    \fi
+  \fi
+  \pnode(-0.25,0){dipole@1}
+  \pnode(0.25,0){dipole@2}
+  }
+%
+\def\pst@draw@Zener{%
+  \pspolygon[linewidth=1.5\pslinewidth](-0.25,-0.2)(-0.25,0.2)(0.25,0)
+  \ifx\psk@Dstyle\pst@Dstyle@Z
+    \psline[arrows=-,linewidth=1.5\pslinewidth](0.1,0.35)(0.25,0.25)(0.25,-0.25)(0.4,-0.35)
+  \else
+    \psline[arrows=-,linewidth=1.5\pslinewidth](0.25,0.25)(0.25,-0.25)(0,-0.25)
+  \fi
+  \pnode(-0.25,0){dipole@1}
+  \pnode(0.25,0){dipole@2}
+}
+%
+\def\pst@draw@lamp{%
+  \pscircle[linewidth=1.5\pslinewidth]{0.5}
+  \psline[arrows=-,linewidth=1.5\pslinewidth](0.5;45)(0.5;225)
+  \psline[arrows=-,linewidth=1.5\pslinewidth](0.5;135)(0.5;315)
+  \pnode(-0.5,0){dipole@1}
+  \pnode(0.5,0){dipole@2}
+}
+%
+\def\pst@draw@circledipole{%
+  \pscircle[linewidth=1.5\pslinewidth]{0.5}
+  \pnode(-0.5,0){dipole@1}
+  \pnode(0.5,0){dipole@2}
+}
+%
+\def\pst@draw@LED{%
+  \pspolygon[arrows=-,linewidth=1.5\pslinewidth](-0.25,-0.2)(-0.25,0.2)(0.25,0)
+  \psline[arrows=-,linewidth=1.5\pslinewidth](0.25,0.2)(0.25,-0.2)
+  \pnode(-0.25,0){dipole@1}
+  \pnode(0.25,0){dipole@2}
+  \multips(-0.25,0.3)(0.25,0){3}{\psline[arrows=->](0.25,0.22)}%
+}
+%
+\def\pst@draw@Tswitch{%
+  \ifx\psk@tripole@style\pst@tripole@style@right
+    \psline[arrows=-,linewidth=2\pslinewidth](0.5,0)(0,-1)
+    \psarcn[arrowinset=0]{<-}(0,-1){0.75}{135}{45}
+  \else
+    \ifx\psk@tripole@style\pst@tripole@style@left
+      \psline[arrows=-,linewidth=2\pslinewidth](-0.5,0)(0,-1)
+      \psarcn[arrowinset=0]{->}(0,-1){0.75}{135}{45}
+    \else
+      \psline[arrows=-,linewidth=2\pslinewidth](0,0.1)(0,-1)
+      \psarcn[linewidth=1pt,arrowinset=0]{<->}(0,-1){0.75}{135}{45}
+    \fi
+  \fi
+  \qdisk(-0.5,0){1.5pt}
+  \qdisk(0.5,0){1.5pt}
+  \pscircle[fillstyle=solid](0,-1){0.07}
+  \pnode(-0.5,0){Tswi@left}
+  \pnode(0.5,0){Tswi@right}
+  \pnode(0,-1.05){Tswi@center}
+}
+%
+\def\pst@draw@transformer{
+  \ifx\psk@Dstyle\pst@Dstyle@rectangle
+    \psframe[fillstyle=solid,fillcolor=black](-0.7,-0.75)(-0.2,0.75)
+    \psframe[fillstyle=solid,fillcolor=black](0.7,-0.75)(0.2,0.75)
+    \psline[arrows=-,linewidth=0.1cm](0,-0.75)(0,0.75)
+    \pnode(-0.5,0.75){inup@}
+    \pnode(-0.5,-0.75){indown@}
+  \else
+    \pscurve[arrows=-](-0.5,0.9)(-0.2,0.8)(-0.5,0.7)(-0.7,0.8)(-0.5,0.82)(-0.2,0.6)
+      (-0.5,0.5)(-0.7,0.6)(-0.5,0.62)(-0.2,0.4)
+      (-0.5,0.3)(-0.7,0.4)(-0.5,0.42)(-0.2,0.2)
+      (-0.5,0.1)(-0.7,0.2)(-0.5,0.22)(-0.2,0)
+      (-0.5,-0.1)(-0.7,0)(-0.5,0.02)(-0.2,-0.2)
+      (-0.5,-0.3)(-0.7,-0.2)(-0.5,-0.18)(-0.2,-0.4)
+      (-0.5,-0.5)(-0.7,-0.4)(-0.5,-0.38)(-0.2,-0.6)
+      (-0.5,-0.7)(-0.7,-0.6)(-0.5,-0.58)(-.2,-0.8)(-0.5,-0.9)
+    \pscurve[arrows=-](0.5,0.7)(0.2,0.6)(0.5,0.5)(0.7,0.6)(0.5,0.62)
+      (0.2,0.4)(0.5,0.3)(0.7,0.4)(0.5,0.42)
+      (0.2,0.2)(0.5,0.1)(0.7,0.2)(0.5,0.22)
+      (0.2,0.)(0.5,-0.1)(0.7,0)(0.5,0.02)
+      (0.2,-0.2)(0.5,-0.3)(0.7,-0.2)(0.5,-0.18)
+      (0.2,-0.4)(0.5,-0.5)(0.7,-0.4)(0.5,-0.38)
+      (0.2,-0.6)(0.5,-0.7)
+    \psline[arrows=-](-0.1,0.7)(-0.1,-0.7)
+    \psline[arrows=-](0,0.7)(0,-0.7)
+    \psline[arrows=-](0.1,0.7)(0.1,-0.7)
+    \pnode(-0.5,0.9){inup@}
+    \pnode(-0.5,-0.9){indown@}
+  \fi
+  \pnode(0.5,-0.7){outdown@}
+  \pnode(0.5,0.7){outup@}
+}
+% start hv 2003-07-23
+\def\pst@draw@optoCoupler{%
+% diode
+  \pspolygon[linewidth=1.5\pslinewidth](-0.5,-0.25)(-0.7,0.25)(-0.3,0.25)
+  \psline[arrows=-,linewidth=1.5\pslinewidth](-0.7,-0.25)(-0.3,-0.25)
+  \psline{->}(-0.2,0.2)(0,0.1)
+  \psline{->}(-0.2,0)(0,-0.1)
+% transistor
+  \psline[arrows=-,linewidth=4\pslinewidth](0.25,-0.3)(0.25,0.3)
+  \psline[arrows=-,linewidth=1.5\pslinewidth](0.25,0)(0.75,0.5)
+  \psline[arrows=-,linewidth=1.5\pslinewidth](0.25,0)(0.75,-0.5)
+  \pnode(0.75,-0.5){d@1}
+  \pnode(0.25,0){d@2}
+  \ifx\psk@Ttype\pst@Ttype@PNP
+    \ncline[arrows=-,linestyle=none,fillstyle=none]{d@1}{d@2}
+  \else
+    \ncline[arrows=-,linestyle=none,fillstyle=none]{d@2}{d@1}
+  \fi
+  \ncput[nrot=:U]{\psline[arrowinset=0,arrowscale=2]{->}(0,0)(.2,0)}
+  \pnode(-0.5,0.25){inup@}
+  \pnode(-0.5,-0.25){indown@}
+  \pnode(0.75,-0.5){outdown@}
+  \pnode(0.75,0.5){outup@}
+}
+%
+\def\pst@draw@logic[#1]{\@ifnextchar({\pst@draw@logici[#1]}{\pst@draw@logici[#1](0,0)}}
+%
+\def\pst@draw@logici[#1](#2)#3{{%
+  \psset{#1}%
+  \rput[lb](#2){%
+    \psframe[linewidth=2\pslinewidth](0,0)(\psk@logic@width,\psk@logic@height)%
+  }
+  \pst@getcoor{#2}\pst@tempa
+  \ifPst@logic@changeLR\def\logic@LR{true}\else\def\logic@LR{false}\fi%
+  \pstVerb{
+    /YA \pst@tempa exch pop \pst@number\psyunit div def
+    /YB YA \psk@logic@height\space add def
+    \logic@LR {%
+      /XB \pst@tempa pop \pst@number\psxunit div def
+      /XA XB \psk@logic@width\space add def
+    }{%
+      /XA \pst@tempa pop \pst@number\psxunit div def
+      /XB XA \psk@logic@width\space add def
+    } ifelse
+    /dy YB YA sub def
+  }
+  \ifx\psk@logic@type\pst@logic@type@RS%---------------- RS -----------------
+    \pnode(! XA YA dy 4 div add){#3S}
+    \pnode(! XA YA dy 4 div 3 mul add){#3R}
+    \psline(#3R)(! XA 0.5 \logic@LR {add}{sub} ifelse YA dy 4 div 3 mul add)
+    \psline(#3S)(! XA 0.5 \logic@LR {add}{sub} ifelse YA dy 4 div add)
+    \uput[\ifPst@logic@changeLR 180\else 0\fi](#3R){\psk@logic@nodestyle R}
+    \uput[\ifPst@logic@changeLR 180\else 0\fi](#3S){\psk@logic@nodestyle S}
+    \pnode(! XB 0.2 \logic@LR {sub}{add} ifelse YA dy 4 div add){#3Qneg}
+    \pscircle[linewidth=0.5pt](! XB 0.1 \logic@LR {sub}{add} ifelse YA dy 4 div add){0.1}
+    \pnode(! XB YA dy 4 div 3 mul add){#3Q}
+    \psline(#3Q)(! XB \psk@logic@wireLength\space \logic@LR {sub}{add} ifelse YA dy 4 div 3 mul add)
+    \psline(#3Qneg)(! XB \psk@logic@wireLength\space \logic@LR {sub}{add} ifelse YA dy 4 div add)
+    \uput[\ifPst@logic@changeLR 0\else 180\fi](#3Q){\psk@logic@nodestyle Q}
+    \uput{0.4}[\ifPst@logic@changeLR 0\else 180\fi](#3Qneg){\psk@logic@nodestyle $\mathrm{\overline{Q}}$}
+    \ifPst@logic@showDot
+      \qdisk(! XA \psk@logic@wireLength\space \logic@LR {add}{sub} ifelse YA dy 4 div 3 mul add){3pt}
+      \qdisk(! XA \psk@logic@wireLength\space \logic@LR {add}{sub} ifelse YA dy 4 div add){3pt}
+      \qdisk(! XB \psk@logic@wireLength\space \logic@LR {sub}{add} ifelse YA dy 4 div 3 mul add){3pt}
+      \qdisk(! XB \psk@logic@wireLength\space \logic@LR {sub}{add} ifelse YA dy 4 div add){3pt}
+    \fi
+    \rput[b](!%
+      /dx XB XA sub 2 div def
+      XA dx add YA 0.1 add){\psk@logic@labelstyle #3}
+  \else
+    \ifx\psk@logic@type\pst@logic@type@D%---------------- D -----------------
+      \pnode(! XA YA dy 2 div add){#3C}
+      \pnode(! XA YA dy 4 div 3 mul add){#3D}
+      \psline(#3D)(! XA 0.5 \logic@LR {add}{sub} ifelse YA dy 4 div 3 mul add)
+      \psline(#3C)(! XA 0.5 \logic@LR {add}{sub} ifelse YA dy 2 div add)
+      \psline[linewidth=0.5pt](! XA YA dy 2 div add 0.15 add)
+        (! XA 0.4 \logic@LR {sub}{add} ifelse YA dy 2 div add)(! XA YA dy 2 div add 0.15 sub)
+      \uput[\ifPst@logic@changeLR 180\else 0\fi](#3D){\psk@logic@nodestyle D}
+      \uput{0.5}[\ifPst@logic@changeLR 180\else 0\fi](#3C){\psk@logic@nodestyle C}
+      \pnode(! XB 0.2 \logic@LR {sub}{add} ifelse YA dy 4 div add){#3Qneg}
+      \pscircle[linewidth=0.5pt](! XB 0.1 \logic@LR {sub}{add} ifelse YA dy 4 div add){0.1}
+      \pnode(! XB YA dy 4 div 3 mul add){#3Q}
+      \psline(#3Q)(! XB 0.5 \logic@LR {sub}{add} ifelse YA dy 4 div 3 mul add)
+      \psline(#3Qneg)(! XB 0.5 \logic@LR {sub}{add} ifelse YA dy 4 div add)
+      \uput[\ifPst@logic@changeLR 0\else 180\fi](#3Q){\psk@logic@nodestyle Q}
+      \uput{0.4}[\ifPst@logic@changeLR 0\else 180\fi](#3Qneg){\psk@logic@nodestyle $\mathrm{\overline{Q}}$}
+      \ifPst@logic@showDot
+        \qdisk(! XA 0.5 \logic@LR {add}{sub} ifelse YA dy 4 div 3 mul add){3pt}
+        \qdisk(! XA 0.5 \logic@LR {add}{sub} ifelse YA dy 2 div add){3pt}
+        \qdisk(! XB 0.5 \logic@LR {sub}{add} ifelse YA dy 4 div 3 mul add){3pt}
+        \qdisk(! XB 0.5 \logic@LR {sub}{add} ifelse YA dy 4 div add){3pt}
+      \fi
+      \rput[b](!%
+        /dx XB XA sub 2 div def
+        XA dx add YA 0.1 add){\psk@logic@labelstyle #3}
+    \else
+      \ifx\psk@logic@type\pst@logic@type@JK%---------------- JK -----------------
+        \multido{\n=1+1}{\psk@logic@JInput}{%
+          \pnode(!%
+            /Step dy 2 div \psk@logic@JInput\space div def
+            /yNew Step \n\space mul def
+            XA YA yNew add Step 2 div sub){#3J\n}
+          \pst@getcoor{#3J\n}\pst@tempc
+          \uput[\ifPst@logic@changeLR 180\else 0\fi](#3J\n){\psk@logic@nodestyle J\n}
+          \pnode(!
+            /YC \pst@tempc exch pop \pst@number\psyunit div def
+            /XC \pst@tempc pop \pst@number\psxunit div def
+            XC 0.5 \logic@LR {add}{sub} ifelse YC){tempJ\n}
+          \psline(#3J\n)(tempJ\n)% input
+          \ifPst@logic@showDot
+            \qdisk(tempJ\n){3pt}
+          \fi
+        }
+        \multido{\n=1+1}{\psk@logic@KInput}{%
+          \pnode(!%
+            /Step dy 2 div \psk@logic@KInput\space div def
+            /yNew Step \n\space mul def
+            XA YB yNew sub Step 2 div add){#3K\n}
+          \pst@getcoor{#3K\n}\pst@tempc
+          \uput[\ifPst@logic@changeLR 180\else 0\fi](#3K\n){\psk@logic@nodestyle K\n}
+          \pnode(!
+            /YC \pst@tempc exch pop \pst@number\psyunit div def
+            /XC \pst@tempc pop \pst@number\psxunit div def
+            XC 0.5 \logic@LR {add}{sub} ifelse YC){tempK\n}
+          \psline(#3K\n)(tempK\n)% input
+          \ifPst@logic@showDot
+            \qdisk(tempK\n){3pt}
+          \fi
+        }
+        \psline[linewidth=0.5pt](! XA YA dy 2 div add 0.15 add)
+          (! XA 0.4 \logic@LR {sub}{add} ifelse YA dy 2 div add)(! XA YA dy 2 div add 0.15 sub)
+        \pnode(! XA YA dy 2 div add){#3C}
+        \psline(#3C)(! XA 0.5 \logic@LR {add}{sub} ifelse YA dy 2 div add)
+        \uput{0.5}[\ifPst@logic@changeLR 180\else 0\fi](#3C){\psk@logic@nodestyle C}
+        \pnode(! XB 0.2 \logic@LR {sub}{add} ifelse YA dy 4 div add){#3Qneg}
+        \pscircle[linewidth=0.5pt](! XB 0.1 \logic@LR {sub}{add} ifelse YA dy 4 div add){0.1}
+        \pnode(! XB YA dy 4 div 3 mul add){#3Q}
+        \psline(#3Q)(! XB 0.5 \logic@LR {sub}{add} ifelse YA dy 4 div 3 mul add)
+        \psline(#3Qneg)(! XB 0.5 \logic@LR {sub}{add} ifelse YA dy 4 div add)
+        \uput[\ifPst@logic@changeLR 0\else 180\fi](#3Q){\psk@logic@nodestyle Q}
+        \uput{0.4}[\ifPst@logic@changeLR 0\else 180\fi](#3Qneg){\psk@logic@nodestyle $\mathrm{\overline{Q}}$}
+        \ifPst@logic@showDot
+          \qdisk(! XB 0.5 \logic@LR {sub}{add} ifelse YA dy 4 div 3 mul add){3pt}
+          \qdisk(! XB 0.5 \logic@LR {sub}{add} ifelse YA dy 4 div add){3pt}
+          \qdisk(! XA 0.5 \logic@LR {add}{sub} ifelse YA dy 2 div add){3pt}
+    \fi
+        \rput[b](!%
+          /dx XB XA sub 2 div def
+          XA dx add YA 0.1 add){\psk@logic@labelstyle #3}
+      \else%---------------- default AND/NAND/OR/NOR/NOT/EXOR/ENOR -----------------
+        \ifx\psk@logic@type\pst@logic@type@not
+          \def\@nMax{1}
+    \else
+      \def\@nMax{\psk@logic@nInput}
+    \fi
+        \multido{\n=1+1}{\@nMax}{%
+          \pnode(!%
+            /Step dy \psk@logic@nInput\space div def
+            /yNew Step \n\space mul def
+            XA YA yNew add \@nMax\space 1 gt {Step 2 div sub} if){#3\n}
+          \pst@getcoor{#3\n}\pst@tempc
+          \pnode(!
+            /YC \pst@tempc exch pop \pst@number\psyunit div def
+            /XC \pst@tempc pop \pst@number\psxunit div def
+            XC \psk@logic@wireLength\space \logic@LR {add}{sub} ifelse YC){temp#3\n}
+          \psline(#3\n)(temp#3\n)% input
+          \ifPst@logic@showDot
+            \qdisk(temp#3\n){3pt}
+          \fi
+          \ifPst@logic@showNode
+            \uput[\ifPst@logic@changeLR 180\else 0\fi](#3\n){\psk@logic@nodestyle\n}
+          \fi
+        }
+        \ifx\psk@logic@type\pst@logic@type@not\else
+          \ifx\psk@logic@type\pst@logic@type@nand\else
+            \ifx\psk@logic@type\pst@logic@type@nor\else
+              \ifx\psk@logic@type\pst@logic@type@exnor\else
+                \pnode(! XB YA dy 2 div add){#3Q}
+                \psline(#3Q)(! XB \psk@logic@wireLength\space \logic@LR {sub}{add} ifelse YA dy 2 div add)% output
+                \ifPst@logic@showDot
+                  \qdisk(! XB \psk@logic@wireLength\space \logic@LR {sub}{add} ifelse YA dy 2 div add){3pt}
+                \fi
+                \ifPst@logic@showNode
+                  \uput[\ifPst@logic@changeLR 0\else 180\fi](#3Q){\psk@logic@nodestyle Q}
+                \fi
+          \fi
+        \fi
+      \fi
+    \fi
+        \ifx\psk@logic@type\pst@logic@type@and\else%  NotX output
+          \ifx\psk@logic@type\pst@logic@type@or\else
+            \ifx\psk@logic@type\pst@logic@type@exor\else
+              \pnode(! XB 0.2 \logic@LR {sub}{add} ifelse YA dy 2 div add){#3Q}
+              \pscircle[linewidth=0.5pt](! XB 0.1 \logic@LR {sub}{add} ifelse YA dy 2 div add){0.1}
+              \psline(#3Q)(! XB \psk@logic@wireLength\space \logic@LR {sub}{add} ifelse YA dy 2 div add)% output
+              \ifPst@logic@showDot
+                \qdisk(! XB \psk@logic@wireLength\space \logic@LR {sub}{add} ifelse YA dy 2 div add){3pt}
+              \fi
+              \ifPst@logic@showNode
+                \uput{0.4}[\ifPst@logic@changeLR 0\else 180\fi](#3Q){\psk@logic@nodestyle Q}
+              \fi
+            \fi
+          \fi
+    \fi
+        \ifx\psk@logic@type\pst@logic@type@or
+          \def\logic@type{$\ge\kern-5pt 1$}
+        \else
+          \ifx\psk@logic@type\pst@logic@type@not
+            \def\logic@type{1}
+          \else
+            \ifx\psk@logic@type\pst@logic@type@nand
+              \def\logic@type{\&}
+            \else
+              \ifx\psk@logic@type\pst@logic@type@nor
+                \def\logic@type{$\ge\kern-5pt 1$}
+              \else
+                \ifx\psk@logic@type\pst@logic@type@exor
+                  \def\logic@type{=1}
+                \else
+                  \ifx\psk@logic@type\pst@logic@type@exnor
+                    \def\logic@type{=}
+                  \else
+                    \def\logic@type{\&}
+          \fi
+        \fi
+          \fi
+            \fi
+      \fi
+        \fi
+        \rput(!%
+          /dx XB XA sub \psk@logic@symbolpos\space mul def
+          XA dx add YB 0.3 sub){\psk@logic@symbolstyle\textbf{\logic@type}}
+        \rput[b](!%
+          /dx XB XA sub 2 div def
+          XA dx add YA 0.1 add){\psk@logic@labelstyle #3}
+      \fi
+    \fi
+  \fi% end of no special RS/JK/D
+}\ignorespaces}
+%
+% end hv 2003-07-28
+%
+\def\pst@draw@wire[#1](#2)(#3){{%
+  \psset{#1}%
+  \ifx\psk@I@label\@empty\else\psset{intensity=true}\fi
+  \ifx\psk@Dconvention\pst@Dconvention@generator
+    \Pst@Dconventiontrue
+  \else\ifx\psk@Dconvention\pst@Dconvention@receptor\Pst@Dconventionfalse\fi
+  \fi
+  \bgroup
+  \pnode(#2){Inter@1}
+  \pnode(#3){Inter@2}
+  \psset{arrows=-}
+  \ifPst@wire@intersect
+    \rput(!
+     /N@Inter@1 GetNode /N@Inter@2 GetNode /N@\psk@wire@intersectA\space
+     GetNode /N@\psk@wire@intersectB\space GetNode InterLines
+     \pst@number\psyunit div exch \pst@number\psxunit div exch){\pnode{@M}}%
+    \ncline[linestyle=none,fillstyle=none]{Inter@1}{@M}
+    \ncput[nrot=:U,npos=.85]{\pnode{@M1}}
+    \ncline[linestyle=none,fillstyle=none]{@M}{Inter@2}
+    \ncput[nrot=:U,npos=.15]{\pnode{@M2}}
+    \psline(Inter@1)(@M1)
+    \psline(@M2)(Inter@2)
+    \ncarc[arcangle=90]{@M1}{@M2}
+  \else
+    \pcline(#2)(#3)
+    \ifPst@intensity
+      \ifPst@direct@convention
+        \ncput[nrot=:U]{%
+          \psline[linecolor=\psk@I@color,
+            linewidth=\psk@I@width,arrowinset=0]{->}(-.1,0)(.1,0)}
+        \pcline[linestyle=none,fillstyle=none,offset=\psk@I@label@offset](#2)(#3)
+        \ncput[nrot=\psk@label@angle]{\csname\psk@I@labelcolor\endcsname\psk@I@label}
+      \else
+        \ncput[nrot=:U]{%
+          \psline[linecolor=\psk@I@color,linewidth=\psk@I@width]{<-}(-.1,0)(.1,0)}
+        \pcline[linestyle=none,fillstyle=none,offset=\psk@I@label@offset](#2)(#3)
+        \ncput[nrot=\psk@label@angle]{\csname\psk@I@labelcolor\endcsname\psk@I@label}
+      \fi
+    \fi
+  \fi
+  \egroup
+  \ncline[linestyle=none]{Inter@1}{Inter@2}
+}\ignorespaces}
+%
+%
+\def\pst@draw@tension@[#1](#2)(#3)#4{{%
+  \psset{#1}%
+  \pnode(#2){pst@tempa} % hv
+  \pnode(#3){pst@tempb} % hv
+  \ncline[linestyle=none,fillstyle=none]{pst@tempa}{pst@tempb}
+  \ncput[nrot=:U,npos=0.05]{\pnode{@M1}}
+  \ncput[nrot=:U,npos=0.95]{\pnode{@M2}}
+  \ncline[arrowinset=0,linecolor=\psk@tension@color]{->}{@M1}{@M2}
+  \pcline[arrows=-,linestyle=none,fillstyle=none,offset=\psk@label@offset](@M1)(@M2)
+  \ncput[nrot=\psk@label@angle]{\csname\psk@tension@labelcolor\endcsname #4}
+}\ignorespaces}
+%
+\def\node(#1){%
+\pscircle*(#1){2\pslinewidth}}
+%
+\endinput
+%

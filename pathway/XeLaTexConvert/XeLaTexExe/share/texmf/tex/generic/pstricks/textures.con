@@ -1,0 +1,29 @@
+%% BEGIN pstricks.con (for Textures 1.7 and 1.8 driver)
+%%
+%% Configuration file for PSTricks 97: must be renamed `pstricks.con'
+%%
+%% Version 97 (1997/03/01)
+%%
+%% For use with Textures, v1.7 and v1.8.
+
+\def\pstdriver{Textures-V1.7}
+%\def\pstdriver{Textures-V1.8}
+\def\pstunit{1bp}
+\def\pstverb#1{\special{postscript #1 }}
+\def\pstVerb#1{\special{rawpostscript #1}}
+\def\pstverbscale{Mag 72.27 72 div mul dup neg scale}
+\def\pstrotate{CP CP translate 3 -1 roll neg rotate \tx@NET}
+\def\pstheader#1{\special{prePostScriptfile #1}}%
+
+\pstcustomize
+
+\special{prePostScript
+  tx@Dict begin /sps {moveto /Mag ED pop tx@Dict begin} def /eps {} def end}
+\def\pst@Verb#1{%
+  \special{rawpostscript tx@Dict begin}%
+  \special{postscript #1}%
+  \special{rawpostscript end}}
+
+\endinput
+%%
+%% END: pstricks.con

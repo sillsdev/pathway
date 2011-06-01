@@ -1,0 +1,365 @@
+\documentclass{nlctdoc}
+
+\usepackage[utf8]{inputenc}
+\ifpdf
+\usepackage[T1]{fontenc}
+\usepackage{mathpazo}
+\usepackage[scaled=.88]{helvet}
+\usepackage{courier}
+\usepackage{xr-hyper}
+\fi
+\usepackage[colorlinks,pdfauthor={Nicola L.C. Talbot},
+            pdftitle={The glossaries package: a guide for beginners}]{hyperref}
+
+\title{The glossaries package: a guide for beginners}
+\author{Nicola L.C. Talbot}
+\date{2011-04-12}
+
+\newcommand*{\igloskey}[2][newglossaryentry]{\icsopt{#1}{#2}}
+\newcommand*{\gloskey}[2][newglossaryentry]{\csopt{#1}{#2}}
+
+\ifpdf\externaldocument{glossaries-user}\fi
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This document is a brief guide to the \styfmt{glossaries} package for
+beginners who find the size of the main user manual daunting and, as
+such, it only covers the basics. For more advanced topics, see the
+\docref{main user manual}{glossaries-user}.
+\end{abstract}
+
+\tableofcontents
+
+\section{What Do I Need?}
+\label{requirements}
+
+You need to have the \styfmt{glossaries} package installed. You also
+need to have the following packages installed: \sty{ifthen},
+\sty{xkeyval} (at least version 2.5f), \sty{xfor}, \sty{amsgen} and
+\sty{etoolbox}.
+You may also need \sty{longtable}, \sty{supertabular} and
+\sty{array}, depending on what glossary style you want to use. All
+these packages can be downloaded from CTAN if you don't have them
+installed. See
+\urlfootref{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=installthings}{\qt{Installing
+things on a (La)TeX System}} for further assistance.
+
+In addition, you need an indexing application. The \sty{glossaries}
+package is configured to use either \app{makeindex} or \app{xindy}.
+\app{Makeindex} should be available on all \TeX\ systems. It's
+possible you may not have \app{xindy} installed, but it can be
+downloaded from the \urlfootref{http://www.xindy.org/}{xindy home
+page}. MiKTeX users may find the
+\urlfootref{http://www.latex-community.org/forum/viewtopic.php?f=51&t=5383}{Xindy for MiKTeX} thread on the LaTeX Community Forum helpful.
+
+The \sty{glossaries} package provides a helper Perl script
+called \app{makeglossaries} which will act as an interface to
+\app{makeindex} or \app{xindy}. If you want to use
+\app{makeglossaries} or \app{xindy}, you need to have Perl
+installed. If you don't have Perl installed, you can still use
+\styfmt{glossaries} but you can only use it with \app{makeindex}.
+
+\section{Getting Started}
+\label{start}
+
+The most obvious things to do is to remember to load the 
+\sty{glossaries} package:
+\begin{verbatim}
+\usepackage{glossaries}
+\end{verbatim}
+\begin{important}
+Note that the \styfmt{glossaries} package must be loaded \emph{after}
+the \sty{hyperref} package (contrary to the general advice that
+\sty{hyperref} should be loaded last). The \sty{glossaries} package 
+should also be loaded after \sty{html}, \sty{inputenc},
+\sty{babel} and \sty{ngerman}.
+\end{important}
+
+If you want to use \app{xindy} rather than \app{makeindex} to sort the
+glossaries, you need to specify this in the package options:
+\begin{verbatim}
+\usepackage[xindy]{glossaries}
+\end{verbatim}
+Other package options are described in 
+\xrsectionref{sec:pkgopts}{glossaries-user}{Package Options}
+in the main \sty{glossaries} user manual.
+
+Next, you need to enable the creation of the various external
+files that are required by the indexing application. This is done using:
+\begin{definition}
+\cs{makeglossaries}
+\end{definition}
+
+\section{Defining a Term or Symbol}
+\label{defterm}
+
+You must define terms or symbols before you can use them in the
+document. This is best done in the preamble. Each term is defined
+using:
+\begin{definition}
+\cs{newglossaryentry}\marg{label}\marg{settings}
+\end{definition}
+where \meta{label} is a unique label used to identify the term.
+The second argument, \meta{settings}, is a key=value comma 
+separated list that is used to set the required information for
+the term. A full list of available keys can be found in 
+\xrsectionref{sec:newglosentry}{glossaries-user}{Defining Glossary
+Entries}
+in the main \sty{glossaries} user manual. The principle keys are
+\gloskey{name} and \gloskey{description}.
+
+For example, to define the term \qt{electrolyte}:
+\begin{verbatim}
+\newglossaryentry{electrolyte}{name=electrolyte,
+description={solution able to conduct electric current}}
+\end{verbatim}
+In the above example, the label and the name happen to be the same.
+In the next example, the name contains a ligature but the label
+doesn't:
+\begin{verbatim}
+\newglossaryentry{oesophagus}{name=\oe sophagus,
+description={canal from mouth to stomach},
+plural=\oe sophagi}
+\end{verbatim}
+In this case the label is \texttt{oesophagus}. Note that in this
+case, the plural has to be specified using the \gloskey{plural} key
+since it isn't formed by simply appending the letter \qt{s}. 
+
+When you define terms, it is important to remember that they will
+be sorted by an external application that doesn't interpret \LaTeX\
+commands. \app{Xindy} is a little more \TeX-aware than \app{makeindex}, but
+for this example they will both mis-sort \verb|\oe sophagus|.
+Xindy will ignore the \verb*|\oe | part and will sort it according
+to \texttt{sophagus}, so it will be placed with the terms starting
+with an \qt{s}. \app{Makeindex}, on the other hand, will sort it according
+to \verb*|\oe sophagus| which starts with a symbol (the backslash),
+so it will end up in the symbol group. You therefore need to 
+specify how to sort the term:
+\begin{verbatim}
+\newglossaryentry{oesophagus}{name=\oe sophagus,
+description={canal from mouth to stomach},
+plural=\oe sophagi,
+sort=oesophagus}
+\end{verbatim}
+Note, however, that if you use the \sty{inputenc} package and
+\app{xindy}, you can use the encoded character \texttt{œ} rather than
+\cs{oe} and \app{xindy} will sort it correctly:
+\begin{verbatim}
+\newglossaryentry{oesophagus}{name=œsophagus,
+description={canal from mouth to stomach},
+plural=œsophagi}
+\end{verbatim}
+
+If the name starts with an accented character, the first character
+must be grouped:
+\begin{verbatim}
+\newglossaryentry{elite}{name={\'e}lite,
+description={select group of people},
+sort=elite}
+\end{verbatim}
+or
+\begin{verbatim}
+\newglossaryentry{elite}{name={é}lite,
+description={select group of people}}
+\end{verbatim}
+
+The name can also be a symbol, but you will also need to specify
+the sort key. For example:
+\begin{verbatim}
+\newglossaryentry{pi}{name={\ensuremath{\pi}},
+description={ratio of circumference of circle to its 
+diameter},sort=pi}
+\end{verbatim}
+It's also possible to have a name and a symbol. For example:
+\begin{verbatim}
+\newglossaryentry{set}{name=set,
+description={a collection of objects},
+symbol={\ensuremath{\mathcal{S}}}}
+\end{verbatim}
+Note, however, that not all glossary styles display the symbol
+in the glossary.
+
+\section{Using a Term}
+\label{usingterm}
+
+Once you have defined a term, you can use it in the document. The
+\sty{glossaries} package provides a number of commands that are
+described in \xrsectionref{sec:glslink}{glossaries-user}{Links to
+Glossary Entries} in the main \sty{glossaries} user manual.
+Here, I shall just cover the main commands:
+\begin{definition}
+\cs{gls}\marg{label}
+\end{definition}
+This prints the term associated with \meta{label}. Using the
+example in the previous section, \verb|\gls{oesophagus}|
+will display \oe sophagus. If the \sty{hyperref} package has also
+been loaded, the term will also be hyperlinked to the relevant
+entry in the glossary.
+\begin{definition}
+\cs{glspl}\marg{label}
+\end{definition}
+This prints the plural of the term associated with \meta{label},
+so \verb|\glspl{oesophagus}| will display \oe sophagi. Again, the
+text will be a hyperlink to the relevant entry in the glossary, if
+hyperlinks are defined.
+
+There are also versions that convert the first character to upper
+case if you need to start a sentence with a term:
+\begin{definition}
+\cs{Gls}\marg{label}
+\end{definition}
+and
+\begin{definition}
+\cs{Glspl}\marg{label}
+\end{definition}
+For example:
+\begin{verbatim}
+\Glspl{electrolyte} usually exist as solutions of salts, 
+bases or acids.
+\end{verbatim}
+
+Note that these commands all have two optional arguments that aren't
+discussed here, but they are described in
+\xrsectionref{sec:glslink}{glossaries-user}{Links to Glossary
+Entries} in the main \sty{glossaries} user manual.
+
+\begin{important}
+Don't use these commands in moving arguments, such
+as those used by \cs{chapter}, \cs{section} and \cs{caption}.
+\end{important}
+You can, instead, use commands such as
+\begin{definition}
+\cs{glsentrytext}\marg{label}
+\end{definition}
+See \xrsectionref{sec:glsnolink}{glossaries-user}{Using Glossary
+Terms Without Links} in the main \sty{glossaries} user manual.
+
+\section{Acronyms}
+\label{acronyms}
+
+The \sty{glossaries} package also allows you to define acronyms.
+By default, acronyms will be added to the main glossary, but if
+you use the \pkgopt{acronym} package option, acronyms will be
+placed in a separate list of acronyms:
+\begin{verbatim}
+\usepackage[acronym]{glossaries}
+\end{verbatim}
+There are other options that govern how acronyms appear. For further
+details, see \xrsectionref{sec:acronyms}{glossaries-user}{Acronyms}
+in the main \sty{glossaries} user manual.
+
+Acronyms must be defined before use and are defined using:
+\begin{definition}
+\cs{newacronym}\marg{label}\marg{abbrv}\marg{full}
+\end{definition}
+where \meta{label} is the label identifying the acronym, \meta{abbrv}
+is the abbreviated form and \meta{full} is the fully expanded text.
+For example:
+\begin{verbatim}
+\newacronym{label}{svm}{support vector machine}
+\end{verbatim}
+
+Once the acronym is defined, it can be used in the same way as 
+any other glossary term with commands such as \cs{gls} and
+\cs{glspl}. On first use, the default will display \meta{full}
+(\meta{abbrv}). On subsequent use, only the abbreviation will
+appear. For example:
+\begin{verbatim}
+A \gls{svm} was implemented.
+\end{verbatim}
+If this is the first time this term has been used, the above would 
+produce:
+\begin{display}
+A support vector machine (svm) was implemented.
+\end{display}
+otherwise it would produce:
+\begin{display}
+A svm was implemented.
+\end{display}
+You can reset an acronym so that the next use fully 
+expands it again using:
+\begin{definition}
+\cs{glsreset}\marg{label}
+\end{definition}
+or you can reset all acronyms using
+\begin{definition}
+\cs{glsresetall}
+\end{definition}
+For further details on resetting and unsetting acronyms, see
+\xrsectionref{sec:glsunset}{glossaries-user}{Unsetting and
+Resetting Entry Flags}
+in the main \sty{glossaries} user manual.
+
+\section{Displaying the Glossary or List of Acronyms}
+\label{printglossaries}
+
+In order to display the sorted list of terms, you first need to
+use
+\begin{definition}
+\cs{printglossaries}
+\end{definition}
+at the place where you want the glossary and list of acronyms to
+appear.  Note that \cs{printglossaries} won't produce any text the
+first time you create your document, as an external indexing
+application needs to be used to sort and collate the entries.
+Creating the completed document is therefore \emph{at least} a three
+step process.
+
+Suppose your document is called \texttt{myDoc.tex}, then you need
+to:
+\begin{enumerate}
+\item Build/\LaTeX\ your document, either by clicking on an
+appropriate button in your front-end/text editor or by typing the
+following at a terminal/command prompt:
+\begin{verbatim}
+latex myDoc
+\end{verbatim}
+
+\item Run the indexing application on the external file(s) created
+by the \sty{glossaries} package. If you have used the \pkgopt{xindy}
+package option, you must use \app{xindy}, otherwise you must use 
+\app{makeindex}. The \sty{glossaries} package comes with a convenient
+Perl wrapper that calls the appropriate indexing application the
+required number of times with the required options. If you have Perl
+installed, all you need to do is type
+\begin{verbatim}
+makeglossaries myDoc
+\end{verbatim}
+in a terminal or command prompt. If you are using a front-end (such
+as WinEdt or TeXnicCenter) and you want it to automatically run
+makeglossaries when you build your document, you will need to
+consult the front-end's documentation.
+
+If you don't have Perl installed, you will need to call
+\app{makeindex} or \app{xindy} explicitly. This is more complicated
+and is described in
+\xrsectionref{sec:makeglossaries}{glossaries-user}{Generating the
+Associated Glossary Files} in the main \sty{glossaries} user manual.
+
+\item Once you have successfully run the indexing application, you
+need to build/\LaTeX\ your document again (see step~1).
+\end{enumerate}
+Note that sometimes you may have to repeat steps~2 and~3.
+
+The appearance of the glossary depends on the glossary style in
+use. The default style uses the \env{description} environment, 
+but there are many other styles available. These are described
+in \xrsectionref{sec:styles}{glossaries-user}{Glossary Styles}
+in the main \sty{glossaries} user manual.
+By default, a number or list of numbers will appear after each entry 
+in the glossary. This indicates the page (or pages)
+on which the term was used. This list can be suppressed using
+the \pkgopt{nonumberlist} package option:
+\begin{verbatim}
+\usepackage[nonumberlist]{glossaries}
+\end{verbatim}
+
+Further information can be found in the main \sty{glossaries}
+\docref{user manual}{glossaries-user}
+and there is also an
+\href{http://www.latex-community.org/index.php?option=com_content&view=article&id=263:glossaries-nomenclature-lists-of-symbols-and-acronyms&catid=55:latex-general&Itemid=114}{article on the glossaries package}
+on the \urlfootref{http://www.latex-community.org/}{\LaTeX\ Community's}
+Know How section.
+\end{document}

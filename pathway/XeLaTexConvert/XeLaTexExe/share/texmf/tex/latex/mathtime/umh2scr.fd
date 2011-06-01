@@ -1,0 +1,21 @@
+%%
+%% This is file `umh2scr.fd',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% mtfonts.fdd  (with options: `Umh2Scr')
+%% 
+%% Copyright 1996 1997 Frank Mittelbach and David Carlisle.
+%%
+%% Development of this package was commissioned by Y&Y Inc.
+%% http://www.yandy.com
+\ProvidesFile{umh2scr.fd}
+ [2001/05/30 v1.0c
+ Adobe Math Pi 2 Script (Unknown encoding)
+  (FMi)]
+\DeclareFontFamily{U}{mh2scr}{}
+\DeclareFontShape{U}{mh2scr}{m}{n}{<->s * [0.95]mh2scr}{}
+\endinput
+%%
+%% End of file `umh2scr.fd'.

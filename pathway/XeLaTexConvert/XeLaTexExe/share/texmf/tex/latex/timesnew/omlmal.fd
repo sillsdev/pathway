@@ -1,0 +1,19 @@
+\ProvidesFile{omlmal.fd}
+\DeclareFontFamily{OML}{mal}{\skewchar\font127}
+\DeclareFontShape{OML}{mal}{m}{n}
+   {<-> ssub * cmm/m/it}{}
+\DeclareFontShape{OML}{mal}{m}{it}
+   {<-> ssub * cmm/m/it}{}
+\DeclareFontShape{OML}{mal}{m}{sl}
+   {<-> ssub * cmm/m/it}{}
+\DeclareFontShape{OML}{mal}{m}{sc}
+   {<-> ssub * cmm/m/it}{}
+\DeclareFontShape{OML}{mal}{b}{n}
+   {<-> ssub * cmm/b/it}{}
+\DeclareFontShape{OML}{mal}{b}{it}
+   {<-> ssub * cmm/b/it}{}
+\DeclareFontShape{OML}{mal}{b}{sl}
+   {<-> ssub * cmm/b/it}{}
+\DeclareFontShape{OML}{mal}{b}{sc}
+   {<-> ssub * cmm/b/it}{}
+\endinput

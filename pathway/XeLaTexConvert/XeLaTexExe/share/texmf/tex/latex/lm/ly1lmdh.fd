@@ -1,0 +1,19 @@
+% This file belongs to the Latin Modern package. The work is released under
+% the GUST Font License. See the MANIFEST.txt and README.eng files
+% for the details. For the most recent version of this license see
+% http://www.gust.org.pl/fonts/licenses/GUST-FONT-LICENSE.txt or
+% http://tug.org/fonts/licenses/GUST-FONT-LICENSE.txt
+
+\ProvidesFile{ly1lmdh.fd}[2007/01/14 v1.3 Font defs for Latin Modern]
+\DeclareFontFamily{LY1}{lmdh}{\hyphenchar\font45 }
+\DeclareFontShape{LY1}{lmdh}{m}{n}{%
+      <-> ec-lmdunh10
+    }{}
+\DeclareFontShape{LY1}{lmdh}{m}{it}
+      {<->sub*lmdh/m/sl}{}
+\DeclareFontShape{LY1}{lmdh}{m}{sl}{%
+      <-> ec-lmduno10
+    }{}
+\endinput
+%%
+%% End of file `ly1lmdh.fd'.

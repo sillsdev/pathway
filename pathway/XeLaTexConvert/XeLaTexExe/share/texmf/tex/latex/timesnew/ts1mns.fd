@@ -1,0 +1,40 @@
+%Filename: ts1mns.fd
+%Created by: tex t
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{ts1mns.fd}
+   [2000/12/05 Fontinst v1.801 font definitions for TS1/mns.]
+
+\DeclareFontFamily{TS1}{mns}{}
+
+\DeclareFontShape{TS1}{mns}{m}{n}{
+   <-> mnsr8c
+}{}
+
+\DeclareFontShape{TS1}{mns}{m}{sl}{
+   <-> mnsro8c
+}{}
+
+\DeclareFontShape{TS1}{mns}{m}{it}{
+   <-> mnsri8c
+}{}
+
+\DeclareFontShape{TS1}{mns}{b}{n}{
+   <-> mnsb8c
+}{}
+
+\DeclareFontShape{TS1}{mns}{b}{sl}{
+   <-> mnsbo8c
+}{}
+
+\DeclareFontShape{TS1}{mns}{b}{it}{
+   <-> mnsbi8c
+}{}
+
+\DeclareFontShape{TS1}{mns}{bx}{n}{<->ssub * mns/b/n}{}
+\DeclareFontShape{TS1}{mns}{bx}{sl}{<->ssub * mns/b/sl}{}
+\DeclareFontShape{TS1}{mns}{bx}{it}{<->ssub * mns/b/it}{}
+
+\endinput

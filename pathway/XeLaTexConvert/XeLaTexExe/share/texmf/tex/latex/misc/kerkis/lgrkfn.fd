@@ -1,0 +1,34 @@
+%File name lgrkfn.fd
+%University of the Aegean
+%Department of Mathematics
+%Copyright Feb 2000
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY    
+
+
+\DeclareFontShape{LGR}{kfn}{m}{n}{<-> s * [0.90] gkfn7t}{}
+\DeclareFontShape{LGR}{kfn}{m}{it}{<-> s * [0.90] gkfno7t}{}  
+\DeclareFontShape{LGR}{kfn}{m}{sl}{<-> s * [0.90] gkfno7t}{}
+
+\endinput
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

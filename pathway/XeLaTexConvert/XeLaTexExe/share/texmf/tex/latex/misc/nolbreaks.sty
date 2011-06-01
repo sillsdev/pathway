@@ -1,0 +1,68 @@
+%  nolbreaks.sty  by Donald Arseneau
+%  Public domain software -- please improve and submit to CTAN
+
+\ProvidesPackage{nolbreaks}[2002/09/19 \space v 1.0 \space 
+   - no linebreaks in text]
+
+%  Use \nolbreaks{some text} to prevent linebreaks in "some text".
+%  This has the advantage over \mbox{} that glue (rubber space) 
+%  remains flexible.  It has the disadvantage of not working in 
+%  all cases!  Most common cases are handled here (\linebreak is 
+%  disabled, for example) but spaces hidden in macros or { }
+%  can still create break-points.
+%
+%  Large pieces of text with no breaks can cause problems with
+%  paragraph justification.  Giving the package option [ragged]
+%  allows a line before the unbreakable text to be cut short.
+%  
+%  You should declare \sloppy in your document.
+
+\let\nb@ragged\relax
+
+\DeclareOption{ragged}{
+  \def\nb@ragged{%
+    \skip@\lastskip \unskip
+    \nb@counter \lastpenalty
+    \hskip \z@ plus 2cm\relax
+    \penalty\nb@counter
+    \advance\skip@ \z@ plus -2cm\relax
+    \hskip\skip@
+  }}
+\ProcessOptions
+
+\let\nb@@iwspace=\ %
+\let\nb@@hskip=\hskip
+\let\nb@@penalty=\penalty
+\newcount\nb@counter
+\ifx\langwohyphens\undefined
+ \newlanguage\nb@lang
+\else
+ \let\nb@lang\langwohyphens
+\fi
+
+\DeclareRobustCommand{\nolbreaks}[1]{%
+  \leavevmode
+  \begingroup
+    %  Apply flexible lead-in
+    \nb@ragged
+    %  Prevent hyphenation
+    \language\nb@lang
+    %  Disable commands that give breakpoints
+    \let\ \nb@iwspace
+    \let\hskip\nb@hskip
+    \let\penalty\nb@penalty
+    \let\language\nb@counter
+    %  Prevent breaks in math
+    \relpenalty\@M
+    \binoppenalty\@M
+    %  Prevent breaks at spaces (only outermost visible spaces)
+    \@PreserveSpaces \@empty #1 \@PreserveSpaces
+  \endgroup
+}
+
+\def\@PreserveSpaces#1 {#1\@ifnextchar\@PreserveSpaces{\@gobble}%
+ {\@firstofone{\nb@@penalty\@M} \@PreserveSpaces\@empty}}
+
+\def\nb@iwspace{\nb@@penalty\@M \nb@@iwspace}
+\def\nb@hskip  {\nb@@penalty\@M \nb@@hskip}
+\def\nb@penalty{\nb@@penalty\@M \nb@counter}

@@ -1,0 +1,63 @@
+%%
+%% This is file `umsa57.fd',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% amsfonts.fdd  (with options: `57,msa')
+%% 
+%%% ====================================================================
+%%% @LaTeX-file{
+%%%   filename        = "amsfonts.fdd",
+%%%   version         = "2.2g",
+%%%   date            = "2002/01/19",
+%%%   time            = "15:53:03 EST",
+%%%   checksum        = "48117 274 1109 9935",
+%%%   author          = "American Mathematical Society",
+%%%   copyright       = "Copyright 2001 American Mathematical Society,
+%%%                      all rights reserved.  Copying of this file is
+%%%                      authorized only if either:
+%%%                      (1) you make absolutely no changes to your copy,
+%%%                      including name; OR
+%%%                      (2) if you do make changes, you first rename it
+%%%                      to some other name.",
+%%%   address         = "American Mathematical Society,
+%%%                      Technical Support,
+%%%                      Publications Technical Group,
+%%%                      P. O. Box 6248,
+%%%                      Providence, RI 02940,
+%%%                      USA",
+%%%   telephone       = "401-455-4080 or (in the USA and Canada)
+%%%                      800-321-4AMS (321-4267)",
+%%%   FAX             = "401-331-3842",
+%%%   email           = "tech-support@ams.org (Internet)",
+%%%   codetable       = "ISO/ASCII",
+%%%   keywords        = "latex, amslatex, ams-latex, amsfonts, msam,
+%%%                      msbm, eufm, blackboard bold, euler",
+%%%   supported       = "yes",
+%%%   abstract        = "This file is part of the AMSFonts distribution.
+%%%                      It provides \LaTeX{} font definitions for the
+%%%                      the fonts in the AMSFonts collection
+%%%                      including two math symbol fonts and four
+%%%                      Euler fonts. See the AMSFonts user's guide
+%%%                      for more information.",
+%%%   docstring       = "The checksum field above contains a CRC-16
+%%%                      checksum as the first value, followed by the
+%%%                      equivalent of the standard UNIX wc (word
+%%%                      count) utility output of lines, words, and
+%%%                      characters.  This is produced by Robert
+%%%                      Solovay's checksum utility.",
+%%% }
+%%% ====================================================================
+\ProvidesFile{umsa57.fd}
+  [2002/01/19 v2.2g %
+    AMS font definitions%
+   (for Y&Y/BSR PS AMSFonts set)%
+  ]
+\DeclareFontFamily{U}{msa}{}
+\DeclareFontShape{U}{msa}{m}{n}{%
+  <-6>msam5<6-8>msam7<8->msam10%
+  }{}
+\endinput
+%%
+%% End of file `umsa57.fd'.

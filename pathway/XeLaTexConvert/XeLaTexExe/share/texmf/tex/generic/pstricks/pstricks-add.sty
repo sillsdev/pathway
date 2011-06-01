@@ -1,0 +1,10 @@
+\RequirePackage{pstricks}
+\ProvidesPackage{pstricks-add}[2005/03/03 package wrapper for 
+  pstricks-add.tex (hv)]
+\input{pstricks-add.tex}
+\ProvidesFile{pstricks-add.tex}
+  [\filedate\space v\fileversion\space `PSTricks-add' (hv)]
+\InputIfFileExists{pstricks-add.cfg}{%
+    \PackageInfo{pstricks-add}{Local config file pstricks-add.cfg used}
+}{}
+\endinput

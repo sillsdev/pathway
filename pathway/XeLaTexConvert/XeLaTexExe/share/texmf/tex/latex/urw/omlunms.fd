@@ -1,0 +1,19 @@
+\ProvidesFile{omlunms.fd}
+\DeclareFontFamily{OML}{unms}{\skewchar\font127}
+\DeclareFontShape{OML}{unms}{m}{n}
+   {<-> ssub * cmm/m/it}{}
+\DeclareFontShape{OML}{unms}{m}{it}
+   {<-> ssub * cmm/m/it}{}
+\DeclareFontShape{OML}{unms}{m}{sl}
+   {<-> ssub * cmm/m/it}{}
+\DeclareFontShape{OML}{unms}{m}{sc}
+   {<-> ssub * cmm/m/it}{}
+\DeclareFontShape{OML}{unms}{b}{n}
+   {<-> ssub * cmm/b/it}{}
+\DeclareFontShape{OML}{unms}{b}{it}
+   {<-> ssub * cmm/b/it}{}
+\DeclareFontShape{OML}{unms}{b}{sl}
+   {<-> ssub * cmm/b/it}{}
+\DeclareFontShape{OML}{unms}{b}{sc}
+   {<-> ssub * cmm/b/it}{}
+\endinput

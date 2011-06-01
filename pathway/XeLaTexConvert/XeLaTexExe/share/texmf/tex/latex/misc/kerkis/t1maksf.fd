@@ -1,0 +1,50 @@
+%File name t1maksf.fd
+%A.Tsolomitis
+%University of the Aegean
+%Department of Mathematics
+%Copyright Dec 2002
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY    
+
+
+
+\DeclareFontShape{T1}{maksf}{m}{n}{<-> s * [0.90] eksf8a}{}
+\DeclareFontShape{T1}{maksf}{m}{it}{<-> s * [0.90] eksfi8a}{}
+\DeclareFontShape{T1}{maksf}{m}{sl}{<-> s * [0.90] eksfi8a}{}
+\DeclareFontShape{T1}{maksf}{m}{sc}{<-> s * [0.90] eksfsc8a}{}
+\DeclareFontShape{T1}{maksf}{b}{n}{<-> s * [0.90] eksfb8a}{}
+\DeclareFontShape{T1}{maksf}{b}{it}{<-> s * [0.90] eksfbi8a}{}
+\DeclareFontShape{T1}{maksf}{b}{sl}{<-> s * [0.90] eksfbi8a}{}
+
+\DeclareFontShape{T1}{maksf}{bx}{n}{ <-> s * [0.90] eksfb8a}{}
+\DeclareFontShape{T1}{maksf}{bx}{it}{ <-> s * [0.90] eksfbi8a}{}
+\DeclareFontShape{T1}{maksf}{bx}{sl}{ <-> s * [0.90] eksfbi8a}{}
+
+
+
+
+\endinput
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

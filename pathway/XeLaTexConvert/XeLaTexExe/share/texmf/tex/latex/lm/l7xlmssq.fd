@@ -1,0 +1,19 @@
+% This file belongs to the Latin Modern package. The work is released under
+% the GUST Font License. See the MANIFEST.txt and README.eng files
+% for the details. For the most recent version of this license see
+% http://www.gust.org.pl/fonts/licenses/GUST-FONT-LICENSE.txt or
+% http://tug.org/fonts/licenses/GUST-FONT-LICENSE.txt
+
+\ProvidesFile{l7xlmssq.fd}[2007/01/14 v1.3 Font defs for Latin Modern]
+\DeclareFontFamily{L7x}{lmssq}{\hyphenchar \font\m@ne}
+\DeclareFontShape{L7x}{lmssq}{m}{n}
+     {<-> l7x-lmssq8}{}
+\DeclareFontShape{L7x}{lmssq}{m}{sl}
+     {<-> l7x-lmssqo8}{}
+\DeclareFontShape{L7x}{lmssq}{bx}{n}
+     {<-> l7x-lmssqbx8}{}
+\DeclareFontShape{L7x}{lmssq}{bx}{sl}
+     {<-> l7x-lmssqbo8}{}
+\endinput
+%%
+%% End of file `l7xlmssq.fd'.

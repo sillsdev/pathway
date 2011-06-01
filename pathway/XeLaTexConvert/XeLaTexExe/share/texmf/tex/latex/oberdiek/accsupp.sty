@@ -1,0 +1,244 @@
+%%
+%% This is file `accsupp.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% accsupp.dtx  (with options: `package')
+%% 
+%% This is a generated file.
+%% 
+%% Copyright (C) 2007 by Heiko Oberdiek <oberdiek@uni-freiburg.de>
+%% 
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3 of this license or (at your option) any later
+%% version. The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of
+%% LaTeX version 2005/12/01 or later.
+%% 
+%% This work has the LPPL maintenance status "maintained".
+%% 
+%% This Current Maintainer of this work is Heiko Oberdiek.
+%% 
+%% This work consists of the main source file accsupp.dtx
+%% and the derived files
+%%    accsupp.sty, accsupp.pdf, accsupp.ins, accsupp.drv,
+%%    accsupp-pdftex.def, accsupp-dvipdfm.def, accsupp-dvips.def,
+%%    accsupp-example.tex.
+%% 
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{accsupp}%
+  [2007/03/21 v0.1 Accessibility support by marked content (HO)]%
+\edef\ACCSUPP@end{%
+  \catcode39 \the\catcode39 % '
+  \catcode40 \the\catcode40 % (
+  \catcode41 \the\catcode41 % )
+  \catcode60 \the\catcode60 % <
+  \catcode61 \the\catcode61 % =
+  \catcode62 \the\catcode62 % >
+  \catcode94 \the\catcode94 % ^
+  \catcode96 \the\catcode96 % `
+  \catcode254 \the\catcode254 % ^^FE
+  \catcode255 \the\catcode255 % ^^FF
+}
+\@makeother\(
+\@makeother\)
+\@makeother\'
+\@makeother\<
+\@makeother\=
+\@makeother\>
+\catcode94 = 7 %
+\@makeother\`
+\@makeother\^^fe
+\@makeother\^^ff
+\RequirePackage{pdfescape}[2007/02/25]
+\RequirePackage{ifpdf}
+\RequirePackage{ifxetex}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{%
+  family=ACCSUPP,%
+  prefix=ACCSUPP@%
+}
+\def\ACCSUPP@DefineDriverKey{%
+  \@dblarg\ACCSUPP@@DefineDriverKey
+}
+\def\ACCSUPP@@DefineDriverKey[#1]#2{%
+  \define@key{ActTxt}{#2}[]{%
+    \def\ACCSUPP@driver{#1}%
+  }%
+  \g@addto@macro\ACCSUPP@DisableOptions{%
+    \DisableKeyvalOption{ActTxt}{#2}%
+  }%
+}
+\let\ACCSUPP@DisableOptions\@empty
+\ACCSUPP@DefineDriverKey{pdftex}
+\ACCSUPP@DefineDriverKey{dvips}
+\ACCSUPP@DefineDriverKey[dvips]{dvipsone}
+\ACCSUPP@DefineDriverKey{dvipdfm}
+\ACCSUPP@DefineDriverKey[dvipdfm]{dvipdfmx}
+\ACCSUPP@DefineDriverKey[dvipdfm]{xetex}
+\InputIfFileExists{accsupp.cfg}{}{}
+\providecommand*{\ActualTextDriverDefault}{dvips}
+\ifpdf
+  \def\ACCSUPP@driver{pdftex}%
+\else
+  \ifxetex
+    \def\ACCSUPP@driver{dvipdfm}%
+  \else
+    \let\ACCSUPP@driver\BookmarkDriverDefault
+  \fi
+\fi
+\ProcessKeyvalOptions*
+\ACCSUPP@DisableOptions
+\def\ACCSUPP@temp{pdftex}%
+\ifpdf
+  \ifx\ACCSUPP@temp\ACCSUPP@driver
+  \else
+    \PackageWarningNoLine{accsupp}{%
+      Wrong driver `\ACCSUPP@driver', using `pdftex' instead%
+    }%
+    \let\ACCSUPP@driver\ACCSUPP@temp
+  \fi
+\else
+  \ifx\ACCSUPP@temp\ACCSUPP@driver
+    \PackageError{accsupp}{%
+      Wrong driver, pdfTeX is not running in PDF mode.\MessageBreak
+      Package loading is aborted%
+    }\@ehc
+    \expandafter\expandafter\expandafter\endinput
+  \fi
+  \def\ACCSUPP@temp{dvipdfm}%
+  \ifxetex
+    \ifx\ACCSUPP@temp\ACCSUPP@driver
+    \else
+      \PackageWarningNoLine{accsupp}{%
+        Wrong driver `\ACCSUPP@driver',\MessageBreak
+        using `dvipdfm' for XeTeX instead%
+      }%
+      \let\ACCSUPP@driver\ACCSUPP@temp
+    \fi
+  \fi
+\fi
+\InputIfFileExists{accsupp-\ACCSUPP@driver.def}{}{%
+  \PackageError{accsupp}{%
+    Unsupported driver `\ACCSUPP@driver'.\MessageBreak
+    Package loading is aborted%
+  }\@ehc
+  \endinput
+}
+\DeclareBoolOption{unicode}
+\DeclareStringOption[page]{pdfliteral}
+\DeclareStringOption{Lang}
+\def\ACCSUPP@method{escape}
+\define@key{ACCSUPP}{method}{%
+  \@ifundefined{ACCSUPP@method@#1}{%
+    \PackageError{accsupp}{%
+      Ignoring unknown method `#1'%
+    }\@ehc
+  }{%
+    \edef\ACCSUPP@method{#1}%
+  }%
+}
+\let\ACCSUPP@Lang\relax
+\def\ACCSUPP@temp#1{%
+  \expandafter\ACCSUPP@@temp\csname ACCSUPP@#1\endcsname{#1}%
+}
+\def\ACCSUPP@@temp#1#2{%
+  \let#1\relax
+  \define@key{ACCSUPP}{#2}{%
+    \def#1{##1}%
+    \ifx#1\@empty
+      \def#1{()}%
+    \else
+      \csname ACCSUPP@method@\ACCSUPP@method\endcsname#1%
+    \fi
+  }%
+}
+\ACCSUPP@temp{Alt}
+\ACCSUPP@temp{ActualText}
+\ACCSUPP@temp{E}
+\newcommand*{\BeginAccSupp}[1]{%
+  \begingroup
+    \setkeys{ACCSUPP}{#1}%
+    \edef\ACCSUPP@span{%
+      /Span<<%
+        \ifx\ACCSUPP@Lang\relax
+        \else
+          /Lang\ACCSUPP@Lang
+        \fi
+        \ifx\ACCSUPP@Alt\relax
+        \else
+          /Alt\ACCSUPP@Alt
+        \fi
+        \ifx\ACCSUPP@ActualText\relax
+        \else
+          /ActualText\ACCSUPP@ActualText
+        \fi
+        \ifx\ACCSUPP@E\relax
+        \else
+          /E\ACCSUPP@E
+        \fi
+      >>%
+    }%
+    \ACCSUPP@bdc
+  \endgroup
+}
+\newcommand*{\EndAccSupp}[1]{%
+  \begingroup
+    \setkeys{ACCSUPP}{#1}%
+    \ACCSUPP@emc
+  \endgroup
+}
+\def\ACCSUPP@method@plain#1{%
+  \csname @safe@activestrue\endcsname
+  \edef#1{%
+    (%
+    \ifACCSUPP@unicode
+      \string\376\string\377%
+    \fi
+    #1%
+    )%
+  }%
+  \@onelevel@sanitize#1%
+}
+\def\ACCSUPP@method@escape#1{%
+  \EdefEscapeString#1{%
+    \ifACCSUPP@unicode
+      ^^fe^^ff%
+    \fi
+    #1%
+  }%
+  \edef#1{(#1)}%
+}%
+\def\ACCSUPP@method@hex#1{%
+  \edef#1{%
+    <%
+    \ifACCSUPP@unicode
+      FEFF%
+    \fi
+    #1%
+    >%
+  }%
+}
+\def\ACCSUPP@method@pdfstringdef#1{%
+  \ifActText@unicode
+    \@ifundefined{hypersetup}{}{%
+      \hypersetup{unicode}%
+    }%
+  \fi
+  \@ifundefined{pdfstringdef}{%
+    \PackageError{accsupp}{%
+      Method `pdfstringdef' requires package `hyperref'%
+    }\@ehc
+    \let\ACCSUPP@temp\@empty
+  }{%
+    \pdfstringdef\ACCSUPP@temp#1%
+  }%
+  \edef#1{(\ACCSUPP@temp)}%
+}
+\ACCSUPP@end
+\endinput
+%%
+%% End of file `accsupp.sty'.

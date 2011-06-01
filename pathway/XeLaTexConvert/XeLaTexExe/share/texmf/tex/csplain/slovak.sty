@@ -1,0 +1,258 @@
+%%
+%% This is file `slovak.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% cslatex.dtx  (with options: `slovak')
+%% 
+%% Tento soubor je soucasti baliku CsLaTeX a je vygenerovan z
+%% distribucniho souboru cslatex.dtx.
+%% 
+%% Copyright (c) 1994--98, 2002
+%% Jaroslav Snajdr, Zdenek Wagner, Jiri Zlatuska a The LaTeX3 Project
+%% 
+%% Tento soubor NENI soucasti systemu LaTeX2e
+%% ------------------------------------------
+%% 
+%% Dalsi informace naleznete na www.cstug.cz/cslatex.
+%% 
+\ifx\dateslovak\undefined\else\endinput\fi
+\ifx\addlanguage\undefined\else
+  \ifx\LdfInit\@undefined
+    \def\LdfInit{%
+      \chardef\atcatcode=\catcode`\@
+      \catcode`\@=11\relax
+      \input babel.def\relax
+      \catcode`\@=\atcatcode \let\atcatcode\relax
+      \LdfInit}
+  \fi
+\input slovak.ldf
+\endinput\fi
+\newif\iflte
+\ifx\documentclass\undefined\else\ltetrue\fi
+\iflte
+  \NeedsTeXFormat{LaTeX2e}
+  \ProvidesPackage{slovak}[2002/07/19 v2.4 CSTeX slovak style]
+\else
+  \message{Document Style Option `slovak' ver. 2.4 <July 2002>.}
+  \edef\origcatcodeat{\the\catcode`\@}\catcode`\@=11
+  \let\providecommand=\def
+  \let\protect=\relax
+\fi
+\iflte
+  \def\defaultcsoption{IL2}
+  \DeclareOption{IL2}{\def\encodingdefault{IL2}}
+  \DeclareOption {T1}{\def\encodingdefault {T1}}
+  \DeclareOption{OT1}{\def\encodingdefault{OT1}}
+  \DeclareOption{nosplit}{\standardhyphens}
+  \DeclareOption{split}{\splithyphens}
+  \DeclareOption{nocaptions}{\let\cap@unchgd=\relax}
+  \DeclareOption{olduv}{\let\cs@olduv=\relax}
+  \DeclareOption{cstex}{\relax} % Removed, lasts for compatibility
+  \ExecuteOptions{IL2}
+  \ProcessOptions
+  \def\dms#1#2{\DeclareMathSymbol{#1}{\mathalpha}{letters}{#2}}
+  \ifx\encodingdefault\defaultcsoption
+    \let\cs@warn=\@font@warning \let\@font@warning=\@gobble
+    \let\cs@info=\@font@info    \let\@font@info=\@gobble
+    \SetSymbolFont{operators}{normal}{IL2}{cmr}{m}{n}
+    \SetSymbolFont{operators}{bold}{IL2}{cmr}{bx}{n}
+    \SetMathAlphabet\mathbf{normal}{IL2}{cmr}{bx}{n}
+    \SetMathAlphabet\mathit{normal}{IL2}{cmr}{m}{it}
+    \SetMathAlphabet\mathrm{normal}{IL2}{cmr}{m}{n}
+    \SetMathAlphabet\mathsf{normal}{IL2}{cmss}{m}{n}
+    \SetMathAlphabet\mathtt{normal}{IL2}{cmtt}{m}{n}
+    \SetMathAlphabet\mathbf{bold}{IL2}{cmr}{bx}{n}
+    \SetMathAlphabet\mathit{bold}{IL2}{cmr}{bx}{it}
+    \SetMathAlphabet\mathrm{bold}{IL2}{cmr}{bx}{n}
+    \SetMathAlphabet\mathsf{bold}{IL2}{cmss}{bx}{n}
+    \SetMathAlphabet\mathtt{bold}{IL2}{cmtt}{m}{n}
+    \let\@font@warning=\cs@warn \let\cs@warn=\undefined
+    \let\@font@info=\cs@info    \let\cs@info=\undefined
+    \dms{^^e1}{"E1}\dms{^^c1}{"C1}\dms{^^e8}{"E8}\dms{^^c8}{"C8}
+    \dms{^^ef}{"EF}\dms{^^cf}{"CF}\dms{^^e9}{"E9}\dms{^^c9}{"C9}
+    \dms{^^ec}{"EC}\dms{^^cc}{"CC}\dms{^^ed}{"ED}\dms{^^cd}{"CD}
+    \dms{^^b5}{"B5}\dms{^^a5}{"A5}\dms{^^f2}{"F2}\dms{^^d2}{"D2}
+    \dms{^^f3}{"F3}\dms{^^d3}{"D3}\dms{^^f8}{"F8}\dms{^^d8}{"D8}
+    \dms{^^b9}{"B9}\dms{^^a9}{"A9}\dms{^^bb}{"BB}\dms{^^ab}{"AB}
+    \dms{^^fa}{"FA}\dms{^^da}{"DA}\dms{^^f9}{"F9}\dms{^^d9}{"D9}
+    \dms{^^fd}{"FD}\dms{^^dd}{"DD}\dms{^^be}{"BE}\dms{^^ae}{"AE}
+  \fi
+\else
+  \def\gobble#1{}
+  \def\DeclareRobustCommand#1#2{\expandafter\def
+    \csname @\expandafter\gobble\string#1\endcsname{#2}
+    \edef#1{\noexpand\protect\expandafter\noexpand
+      \csname @\expandafter\gobble\string#1\endcsname}}
+  \ifx\ou\undefined \def\ou{\accent23u} \fi
+  \def\temp#1#2#3:{#1#2}
+  \edef\tempa{\string c\string s}
+  \edef\tempb{\expandafter\temp\fontname\tenrm:}
+  \ifx\tempa\tempb
+    \chardef\clqq=254  \sfcode254=0 \lccode254=0
+    \chardef\crqq=255  \sfcode255=0 \lccode255=0
+    \chardef\flqq=158  \sfcode158=0 \lccode158=0
+    \chardef\frqq=159  \sfcode159=0 \lccode159=0
+    \def\ogonek #1{\setbox0\hbox{#1}\ifdim\ht0=1ex\accent157 #1%
+       \else{\ooalign{\unhbox0\crcr\hss\char157}}\fi}
+    \chardef\promile=141
+    \def\DeclareTextCommandDefault#1#2{}
+  \else
+    \let\DeclareTextCommandDefault=\DeclareRobustCommand
+  \fi
+\fi
+\def\captionsslovak{%
+\def\prefacename{Predhovor}%
+\def\refname{Literat\'ura}%
+\def\appendixname{Dodatok}%
+\def\listfigurename{Zoznam obr\'azkov}%
+\def\listtablename {Zoznam tabuliek}%
+\def\indexname{Register}%
+\def\tablename{Tabu\v{l}ka}%
+\def\partname{\v{C}as\v{t}}%
+\def\enclname{Pr\'{\i}loha}%
+\def\headtoname{Pre}%
+\def\alsoname{vi\v{d} tie\v{z}}%
+\def\abstractname{Abstrakt}%
+\let\bibname\refname
+\def\chaptername{Kapitola}%
+\def\contentsname{Obsah}%
+\def\figurename{Obr.}%
+\def\ccname{cc.}%
+\def\pagename{Str.}%
+\def\seename{vi\v{d}}}
+\providecommand\captionsenglish{%
+  \def\prefacename{Preface}%
+  \def\refname{References}%
+  \def\abstractname{Abstract}%
+  \def\bibname{Bibliography}%
+  \def\chaptername{Chapter}%
+  \def\appendixname{Appendix}%
+  \def\contentsname{Contents}%
+  \def\listfigurename{List of Figures}%
+  \def\listtablename{List of Tables}%
+  \def\indexname{Index}%
+  \def\figurename{Figure}%
+  \def\tablename{Table}%
+  \def\partname{Part}%
+  \def\enclname{encl}%
+  \def\ccname{cc}%
+  \def\headtoname{To}%
+  \def\pagename{Page}%
+  \def\headpagename{Page}%
+  \def\prefacename{Preface}%
+  \def\seename{see}%
+  \def\alsoname{see also}}
+\def\dateslovak{\def\today{\number\day.~\ifcase\month\or
+  janu\'ara\or febru\'ara\or marca\or apr\'{\i}la\or m\'aja\or j\'una\or
+  j\'ula\or augusta\or septembra\or okt\'obra\or
+  novembra\or decembra\fi
+  \space\number\year}}
+\iflte\ifx\cap@unchgd\undefined\captionsslovak\dateslovak\fi\fi
+\providecommand\dateUSenglish{\def\today{\ifcase\month\or
+    January\or February\or March\or April\or May\or June\or July\or
+    August\or September\or October\or November\or December\fi
+    \space\number\day, \number\year}}
+\providecommand\dateenglish{\def\today{\ifcase\day\or 1st\or 2nd\or
+    3rd\or 4th\or 5th\or 6th\or 7th\or 8th\or 9th\or 10th\or 11th\or
+    12th\or 13th\or 14th\or 15th\or 16th\or 17th\or 18th\or 19th\or
+    20th\or 21st\or 22nd\or 23rd\or 24th\or 25th\or 26th\or 27th\or
+    28th\or 29th\or 30th\or 31st\fi ~\ifcase\month\or January\or
+    February\or March\or April\or May\or June\or July\or August\or
+    September\or October\or November\or December\fi \space
+    \number\year}}
+\DeclareTextCommandDefault\clqq{\leavevmode
+  \set@low@box{''}%
+  \setbox1=\hbox{l\/}\dimen1=\wd1
+  \setbox1=\hbox{l}\advance\dimen1 by -\wd1
+  \ifdim\dimen1>0pt\kern-.1em\box0\kern.1em
+    \else\kern.1em\box0\kern-.1em\fi\nobreak\hskip0pt}
+\DeclareTextCommandDefault\crqq{\edef\@SF{\spacefactor\the\spacefactor}%
+  \nobreak\kern-.07em\hbox{``}\kern.07em\@SF\relax}
+\def\set@low@box#1{\setbox2=\hbox{,}\setbox0=\hbox{#1}%
+  \dimen0=\ht0 \advance\dimen0 by -\ht2
+  \setbox0=\hbox{\lower\dimen0 \box0}\ht0=\ht2\dp0=\dp2}
+\DeclareRobustCommand\clq{\leavevmode\set@low@box{\char'047 }%
+  \box0 \kern.04em\nobreak\hskip0pt\relax}
+\DeclareRobustCommand\crq{{\edef\@SF{\spacefactor\the\spacefactor}%
+  \nobreak\char'140 \kern.17em\@SF\relax}}
+\iflte
+  \DeclareTextCommand{\clqq}{T1}{\leavevmode\kern.1em
+    \char18 \kern-.0158em\nobreak\hskip0pt}
+  \DeclareTextCommand{\crqq}{T1}
+    {{\edef\@SF{\spacefactor\the\spacefactor}%
+      \nobreak\kern.06em \char16 \kern.024em \@SF\relax}}
+\fi
+\iflte\else\let\if@compatibility=\iffalse{\let\fi=\fi}\fi
+\ifx\cs@olduv\undefined
+  \iflte
+    \if@compatibility
+      \DeclareRobustCommand\uv{\bgroup\aftergroup\closequotes
+        \leavevmode\clqq\let\next=}
+    \else
+      \DeclareRobustCommand\uv[1]{{\leavevmode\clqq#1\crqq}}
+    \fi
+  \else
+    \ifx\uv\undefined
+      \def\uv{\bgroup\aftergroup\closequotes
+        \leavevmode\clqq\let\next=}
+    \fi
+  \fi
+\else
+  \DeclareRobustCommand\uv{\bgroup\aftergroup\closequotes
+    \leavevmode\clqq\let\next=}
+\fi
+\def\closequotes{\unskip\crqq\relax}
+\def\prim@s{\prime\futurelet\next\pr@m@s}
+{\catcode`\'=\active
+\gdef\csprimeson{\catcode96=\active \catcode39=\active
+  \def\pr@m@s{\ifx'\next\let\nxt\pr@@@s \else\ifx^\next\let\nxt\pr@@@t
+    \else\let\nxt\egroup\fi\fi \nxt}}}
+\def\csprimesoff{\catcode96=12 \catcode39=12
+  \def\pr@m@s{\ifx'\next\let\nxt\pr@@@s \else\ifx^\next\let\nxt\pr@@@t
+    \else\let\nxt\egroup\fi\fi \nxt}}
+{\csprimeson
+  \gdef'{\ifmmode\let\n@xt=\mathprim@\else\let\n@xt=\textprim@\fi\n@xt}%
+  \gdef\mathprim@{^\bgroup\prim@s}%
+  \gdef\textprim@{\futurelet\nxt\rightprim@}%
+  \gdef\rightprim@{\ifx'\nxt\let\next=\douvr@
+    \else\let\next\crq\fi\next}%
+  \gdef`{\futurelet\nxt\leftprim@}%
+  \gdef\leftprim@{\ifx`\nxt\let\next=\douvl@
+    \else\let\next=\clq\fi\next}}
+\def\douvr@{\crqq\let\next= }%
+\def\douvl@{\clqq\let\next= }%
+\csprimesoff
+\def\cstieon{\def~{\ifmmode\else\penalty\@M\ \fi}}
+\def\cstieoff{\def~{\penalty\@M \ }}
+\iflte
+\AtBeginDocument{\slovak}
+  \frenchspacing
+\else
+  \def\setthisl@nguage#1#2#3#4{%
+  \ifx#2\undefined \immediate\write\sixt@@n
+    {Warning: I do not speak #1, (the style is not inputted)}
+  \else
+  \ifx#4\undefined \immediate\write\sixt@@n
+    {Warning: I do not speak #1,
+      (the hyphenation patterns are not included)}
+  \else#2#3#4\fi\fi}
+\def\selectlanguage#1{\language #1\relax
+  \ifcase #1\relax          \dateUSenglish\captionsenglish\ehyph\or
+  \setthisl@nguage{german}  \dategerman   \captionsgerman \ghyph\or
+  \setthisl@nguage{austrian}\dateaustrian \captionsgerman \ahyph\or
+  \setthisl@nguage{french}  \datefrench   \captionsfrench \fhyph\or
+  \setthisl@nguage{english} \dateenglish  \captionsenglish\ehyph\or
+  \setthisl@nguage{czech}   \dateczech    \captionsczech  \chyph\or
+  \setthisl@nguage{slovak}  \dateslovak   \captionsslovak \shyph\fi}
+\def\originalTeX{\selectlanguage{\USenglish}
+  \csname cmaccents\endcsname}
+\def\czechTeX{\selectlanguage{\czech}\csname csaccents\endcsname}
+\def\slovakTeX{\selectlanguage{\slovak}\csname csaccents\endcsname}
+\catcode`\@=\origcatcodeat
+\slovakTeX
+\fi
+\endinput
+%%
+%% End of file `slovak.sty'.

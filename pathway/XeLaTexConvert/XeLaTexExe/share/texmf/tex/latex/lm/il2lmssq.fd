@@ -1,0 +1,19 @@
+% This file belongs to the Latin Modern package. The work is released under
+% the GUST Font License. See the MANIFEST.txt and README.eng files
+% for the details. For the most recent version of this license see
+% http://www.gust.org.pl/fonts/licenses/GUST-FONT-LICENSE.txt or
+% http://tug.org/fonts/licenses/GUST-FONT-LICENSE.txt
+
+\ProvidesFile{il2lmssq.fd}[2007/01/14 v1.3 Font defs for Latin Modern]
+\DeclareFontFamily{IL2}{lmssq}{\hyphenchar \font\m@ne}
+\DeclareFontShape{IL2}{lmssq}{m}{n}
+     {<-> cs-lmssq8}{}
+\DeclareFontShape{IL2}{lmssq}{m}{sl}
+     {<-> cs-lmssqo8}{}
+\DeclareFontShape{IL2}{lmssq}{bx}{n}
+     {<-> cs-lmssqbx8}{}
+\DeclareFontShape{IL2}{lmssq}{bx}{sl}
+     {<-> cs-lmssqbo8}{}
+\endinput
+%%
+%% End of file `il2lmssq.fd'.

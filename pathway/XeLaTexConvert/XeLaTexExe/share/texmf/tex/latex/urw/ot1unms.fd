@@ -1,0 +1,41 @@
+%Filename: ot1unms.fd
+%Created by: tex fonturw
+%Created using fontinst v1.6
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{ot1unms.fd}
+   [1997/12/31 Fontinst v1.6 font definitions for OT1/unms.]
+
+\DeclareFontFamily{OT1}{unms}{}
+
+\DeclareFontShape{OT1}{unms}{m}{n}{
+   <-> unmrs7t
+}{}
+
+\DeclareFontShape{OT1}{unms}{m}{it}{
+   <-> unmros7t
+}{}
+
+\DeclareFontShape{OT1}{unms}{m}{sc}{
+   <-> unmrcs7t
+}{}
+
+\DeclareFontShape{OT1}{unms}{m}{sl}{
+   <-> unmrcos7t
+}{}
+
+\DeclareFontShape{OT1}{unms}{l}{n}{<->ssub * unms/m/n}{}
+\DeclareFontShape{OT1}{unms}{l}{it}{<->ssub * unms/m/it}{}
+\DeclareFontShape{OT1}{unms}{l}{sc}{<->ssub * unms/m/sc}{}
+\DeclareFontShape{OT1}{unms}{l}{sl}{<->ssub * unms/m/sl}{}
+\DeclareFontShape{OT1}{unms}{b}{n}{<->sub * unms/m/n}{}
+\DeclareFontShape{OT1}{unms}{b}{it}{<->sub * unms/m/it}{}
+\DeclareFontShape{OT1}{unms}{b}{sc}{<->sub * unms/m/sc}{}
+\DeclareFontShape{OT1}{unms}{b}{sl}{<->sub * unms/m/sl}{}
+\DeclareFontShape{OT1}{unms}{bx}{n}{<->sub * unms/m/n}{}
+\DeclareFontShape{OT1}{unms}{bx}{it}{<->sub * unms/m/it}{}
+\DeclareFontShape{OT1}{unms}{bx}{sc}{<->sub * unms/m/sc}{}
+\DeclareFontShape{OT1}{unms}{bx}{sl}{<->sub * unms/m/sl}{}
+
+\endinput

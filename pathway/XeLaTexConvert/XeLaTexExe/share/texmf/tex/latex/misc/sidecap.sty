@@ -1,0 +1,239 @@
+%%
+%% This is file `sidecap.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% sidecap.dtx  (with options: `package')
+%% 
+%% Copyright  1999 Rolf Niepraschk  (niepraschk@ptb.de) and
+%% Hubert G"a"slein (Hubert.Gaesslein@VirtualPhotonics.COM)
+%% This program can be redistributed and/or modified under the terms
+%% of the LaTeX Project Public License Distributed from CTAN
+%% archives in directory macros/latex/base/lppl.txt; either
+%% version 1 of the License, or any later version.
+%% 
+%% Error Reports in case of UNCHANGED versions to
+%% 
+%%                         Rolf Niepraschk
+%%             Internet:  <niepraschk@ptb.de>
+%% or
+%%                         Hubert.Gaesslein
+%%             Internet:  <Hubert.Gaesslein@VirtualPhotonics.COM>
+%% 
+%% 
+%% File: sidecap.dtx
+%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{sidecap}
+         [2000/02/04 v1.5d SideCap Package (RN/HjG)]
+%% \CharacterTable
+%% {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%  Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%  Digits        \0\1\2\3\4\5\6\7\8\9
+%%  Exclamation   \!     Double quote  \"     Hash (number) \#
+%%  Dollar        \$     Percent       \%     Ampersand     \&
+%%  Acute accent  \'     Left paren    \(     Right paren   \)
+%%  Asterisk      \*     Plus          \+     Comma         \,
+%%  Minus         \-     Point         \.     Solidus       \/
+%%  Colon         \:     Semicolon     \;     Less than     \<
+%%  Equals        \=     Greater than  \>     Question mark \?
+%%  Commercial at \@     Left bracket  \[     Backslash     \\
+%%  Right bracket \]     Circumflex    \^     Underscore    \_
+%%  Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%  Right brace   \}     Tilde         \~}
+%%
+%% \iffalse meta-comment
+%% ===================================================================
+%%  @LaTeX-package-file{
+%%     author          = {Rolf Niepraschk, Hubert G\"{a}\ss{}lein}
+%%     version         = "1.5d",
+%%     date            = "04 February 2000",
+%%     filename        = "sidecap.sty",
+%%     email           = "niepraschk@ptb.de (INTERNET)",
+%%     codetable       = "ISO/ASCII",
+%%     keywords        = "LaTeX2e, sideways caption, \SCfigure, \SCtable",
+%%     supported       = "yes",
+%%     docstring       = "LaTeX package which defines new environments
+%%                        for easy typesetting sideways captions and
+%%                        wide floats".
+%%  }
+%% ===================================================================
+%% \fi
+
+
+\RequirePackage{ifthen}
+
+\newlength{\SC@BOXWD} \newlength{\SC@CAPWD} \newlength{\SC@tempdim}
+\newcounter{SC@C} \newsavebox{\SC@BOX} \newcommand*{\SC@FLOAT}{}
+\newcommand*{\SC@IDENT}{SC@\number\value{SC@C}}
+
+\newcommand*{\isSC@WIDEi}[2]{#2}  %default: false
+\newcommand*{\isSC@WIDEii}[2]{#2} %default: false
+
+\let\SC@caption=\caption \let\SC@label=\label%
+
+\let\SC@justify=\relax
+%% From Heiko Oberdiek, 2000/01/24
+\newcommand*\@getsecondarg{}% LaTeX-check if already defined
+\long\def\@getsecondarg#1#2#3\@nil{#2}
+
+\providecommand*{\getpagenumber}[1]{%
+  \expandafter\@getpagenumber\csname r@#1\endcsname{#1}%
+}
+
+\newcommand*{\@getpagenumber}[2]{%
+  \ifx#1\relax
+    \protect\G@refundefinedtrue % LaTeX: rerun warning
+    \@latex@warning{Reference `#2' on page \thepage\space
+      undefined}%
+    0%
+  \else
+    \expandafter\@getsecondarg#1\@nil
+  \fi
+}
+%%---------------------------------------
+\newcommand*{\isSC@ODD}[2]{%
+ \ifthenelse{\isodd{\getpagenumber{\SC@IDENT}}}{#1}{#2}}
+\DeclareOption{innercaption}{\renewcommand*{\SC@FLOAT}[2]{%
+  \isSC@ODD{{#1}\hspace{\columnsep}{#2}} {{#2}\hspace{\columnsep}{#1}}}}
+
+\DeclareOption{outercaption}{%
+  \renewcommand*{\SC@FLOAT}[2]{%
+  \isSC@ODD{{#2}\hspace{\columnsep}{#1}} {{#1}\hspace{\columnsep}{#2}}}}
+
+\DeclareOption{rightcaption}{%
+  \renewcommand*{\SC@FLOAT}[2]{{#2}\hspace{\columnsep}{#1}}}
+
+\DeclareOption{leftcaption}{%
+  \renewcommand*{\SC@FLOAT}[2]{{#1}\hspace{\columnsep}{#2}}}
+
+\DeclareOption{wide}{%
+   \renewcommand*{\isSC@WIDEi}[2]{\if@twocolumn #2\else #1\fi}
+   \renewcommand*{\isSC@WIDEii}[2]{#1}}
+
+\DeclareOption{raggedright}{%
+   \let\SC@justify=\raggedright}
+
+\ExecuteOptions{outercaption}
+
+\ProcessOptions
+
+\ifx\SC@justify\raggedright
+  \IfFileExists{ragged2e.sty}{%
+    \RequirePackage[OriginalCommands]{ragged2e}%
+    \let\SC@justify=\RaggedRight
+    }{}
+\fi
+
+
+\newenvironment{SCfigure}{\SC@float[b]{figure}}{\endSC@float}
+\newenvironment{SCfigure*}{\SC@dblfloat[b]{figure}}{\endSC@dblfloat}
+
+
+\newenvironment{SCtable}{\SC@float[t]{table}}{\endSC@float}
+\newenvironment{SCtable*}{\SC@dblfloat[t]{table}}{\endSC@dblfloat}
+
+
+\newenvironment{wide}%
+{%
+  \setlength{\@tempdima}{\linewidth}
+  \addtolength{\@tempdima}{\marginparwidth}%
+  \addtolength{\@tempdima}{\marginparsep}%
+  \begin{lrbox}{\SC@BOX}% ???
+    \begin{minipage}{\@tempdima}% ???
+}%
+{%
+    \end{minipage}% ???
+  \end{lrbox}% ???
+  \stepcounter{SC@C}\SC@label{\SC@IDENT}%
+  \isSC@ODD{\def\SC@hpos{l}}{\def\SC@hpos{r}}%
+  \noindent\makebox[\linewidth][\SC@hpos]{\usebox{\SC@BOX}}%
+}
+
+\def\SC@float{\@ifnextchar[\SC@xfloat{\SC@xfloat[c]}}
+\def\SC@xfloat[#1]#2{\@ifnextchar[%
+  {\SC@yfloat{#1}{#2}}%
+  {\SC@zfloat{#1}{#2}{1.0}[\@nameuse{fps@#2}]}}
+\def\SC@yfloat#1#2[#3]{\@ifnextchar[%
+  {\SC@zfloat{#1}{#2}{#3}}%
+  {\SC@zfloat{#1}{#2}{#3}[\@nameuse{fps@#2}]}}
+\def\SC@zfloat#1#2#3[#4]{%
+  \def\SC@vpos{#1}%
+  \expandafter\edef\csname fps@#2\endcsname{#4}%
+  \def\SC@captype{#2}%
+  \ifx#3\@empty\def\SC@fraction{1}\else\def\SC@fraction{#3}\fi%
+  \let\SC@CAPtext\@empty \let\SC@OPTCAPtext\@empty \let\SC@LABtext\@empty%
+  \renewcommand\caption[2][]{\gdef\SC@OPTCAPtext{##1}%
+  \gdef\SC@CAPtext{\SC@justify##2}}%
+  \renewcommand\label[1]{\gdef\SC@LABtext{##1}}%
+  \@namedef{fnum@#2}{\mbox{\@nameuse{#2name}~\@nameuse{the#2}}}%
+  \begin{lrbox}{\SC@BOX}%
+}%
+
+\def\SC@dblfloat{%
+  \if@twocolumn\let\reserved@a\SC@dbflt\else\let\reserved@a\SC@float\fi
+  \reserved@a}
+\def\SC@dbflt{\SC@float}
+\def\endSC@float{%
+  \end{lrbox}%
+  \let\isSC@WIDE\isSC@WIDEi%
+  \def\@FLOAT{\@float}\def\end@FLOAT{\end@float}%
+  \isSC@WIDE%
+    {\setlength{\@tempdima}{\textwidth}%
+     \addtolength{\@tempdima}{\marginparwidth}%
+     \addtolength{\@tempdima}{\marginparsep}}%
+    {\setlength{\@tempdima}{\columnwidth}}
+  \endSC@FLOAT{\@tempdima}}%
+\def\endSC@dblfloat{%
+  \end{lrbox}%
+  \let\isSC@WIDE\isSC@WIDEii%
+  \def\@FLOAT{\@dblfloat}\def\end@FLOAT{\end@dblfloat}%
+  \isSC@WIDE%
+    {\setlength{\@tempdima}{\textwidth}%
+     \addtolength{\@tempdima}{\marginparwidth}%
+     \addtolength{\@tempdima}{\marginparsep}}%
+    {\setlength{\@tempdima}{\textwidth}}
+  \endSC@FLOAT{\@tempdima}}%
+\def\endSC@FLOAT#1{%
+  \setlength\SC@tempdim{#1}%
+  % Kann man auf dieses Laengenregister verzichten? (RN) <****>
+  \settowidth\SC@BOXWD{\usebox\SC@BOX}%
+  \setlength\SC@CAPWD{\SC@fraction\SC@BOXWD}%
+  \setlength\@tempdima{\SC@BOXWD}%
+  \addtolength\@tempdima{\SC@CAPWD}%
+  \addtolength\@tempdima{\columnsep}%
+  \ifthenelse{\lengthtest{\@tempdima>\SC@tempdim}}%
+    {\addtolength\SC@CAPWD{-\@tempdima}\addtolength\SC@CAPWD{\SC@tempdim}}{}%
+  \@FLOAT{\SC@captype}%
+    \abovecaptionskip\z@skip
+    \belowcaptionskip\z@skip
+    \stepcounter{SC@C}\SC@label{\SC@IDENT}%
+    \isSC@WIDE%
+      {\ifthenelse{\lengthtest{\@tempdima>\textwidth}}%
+        {\isSC@ODD{\def\SC@hpos{l}}{\def\SC@hpos{r}}}%
+        {\def\SC@hpos{c}}%
+       \setlength{\@tempdimc}{\textwidth}}%
+      {\setlength{\@tempdimc}{\SC@tempdim}\def\SC@hpos{c}}%
+    \makebox[\@tempdimc][\SC@hpos]{%
+      \SC@FLOAT%
+        {\begin{minipage}[\SC@vpos]{\SC@CAPWD}%
+           \ifthenelse{\equal{\SC@OPTCAPtext}{\@empty}}%
+             {\SC@caption{\expandafter\protect\SC@CAPtext}}%
+             {\SC@caption[\expandafter\protect\SC@OPTCAPtext]%
+                            {\expandafter\protect\SC@CAPtext}}%
+           \unskip%
+           \ifthenelse{\equal{\SC@LABtext}{\@empty}}%
+             {}{\SC@label{\expandafter\protect\SC@LABtext}}%
+         \end{minipage}}%
+        {\begin{minipage}[\SC@vpos]{\SC@BOXWD}%
+           \offinterlineskip%
+           \kern0pt\relax
+           \usebox{\SC@BOX}%
+         \end{minipage}}%
+    }%
+  \end@FLOAT%
+}
+\endinput
+%%
+%% End of file `sidecap.sty'.

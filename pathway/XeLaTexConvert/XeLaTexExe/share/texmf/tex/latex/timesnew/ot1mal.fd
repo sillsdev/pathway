@@ -1,0 +1,49 @@
+%Filename: ot1mal.fd
+%Created by: tex t
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{ot1mal.fd}
+   [2000/12/05 Fontinst v1.801 font definitions for OT1/mal.]
+
+\DeclareFontFamily{OT1}{mal}{}
+
+\DeclareFontShape{OT1}{mal}{m}{n}{
+   <-> malr7t
+}{}
+
+\DeclareFontShape{OT1}{mal}{m}{sc}{
+   <-> malrc7t
+}{}
+
+\DeclareFontShape{OT1}{mal}{m}{sl}{
+   <-> malro7t
+}{}
+
+\DeclareFontShape{OT1}{mal}{m}{it}{
+   <-> malri7t
+}{}
+
+\DeclareFontShape{OT1}{mal}{b}{n}{
+   <-> malb7t
+}{}
+
+\DeclareFontShape{OT1}{mal}{b}{sc}{
+   <-> malbc7t
+}{}
+
+\DeclareFontShape{OT1}{mal}{b}{sl}{
+   <-> malbo7t
+}{}
+
+\DeclareFontShape{OT1}{mal}{b}{it}{
+   <-> malbi7t
+}{}
+
+\DeclareFontShape{OT1}{mal}{bx}{n}{<->ssub * mal/b/n}{}
+\DeclareFontShape{OT1}{mal}{bx}{sc}{<->ssub * mal/b/sc}{}
+\DeclareFontShape{OT1}{mal}{bx}{sl}{<->ssub * mal/b/sl}{}
+\DeclareFontShape{OT1}{mal}{bx}{it}{<->ssub * mal/b/it}{}
+
+\endinput

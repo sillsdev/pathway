@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Kerkis for LaTeX</title>
+                 
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-7">
+</head>
+<body>
+<h1 align="center">The <i>Kerkis</i> Font Family </h1>
+<h1 align="center">For LaTeX</h1>
+<p>Among other features, Kerkis for LaTeX makes wide use of double forms for
+several letters according to the hellenic typographic tradition that now
+tends to be lost. In particular the letters beta, zeta, theta, rho and phi
+have an initial and a different middle-word form.</p>
+<p>Old style numbers (known as <i>lower case numbers</i> as well) are included
+in the small caps font. Thus they are accessible with the \textsc or \scshape
+command.</p>
+<p>The fonts contain a full set of latin characters with accents that support
+properly all latin-based languages (common like German, French etc and less
+common like Icelandic). Special ligatures for "northern" languages like ij
+and fj etc (try the word fiji or fjord) are also included and tested to work.
+</p>
+<p>Kerkis is especially usefull for the creation of pdf files due to the fact
+that the fonts are in Type1 format.<br>
+</p>
+<p align="center"><big><font color="#660000"><big>Download<big><br>
+</big></big></font></big></p>
+<p align="left"><big><font color="#660000"><big><big><small><small><font
+ color="#000000"><small>Download the following zip file:</small> <a
+ href="Kerkis_for_LaTeX.zip"><small>Kerkis_for_LaTeX.zip</small></a></font></small><a
+ href="Kerkis.zip"><br>
+</a></small></big></big></font></big></p>
+<div align="left"><br>
+<big> </big></div>
+<center><font color="#660000"><big><big>Installation</big></big></font></center>
+<br>
+<br>
+<br>
+If you have the previous version of kerkis installed you <b><font
+ color="#660000">must</font></b> first remove it<small> <big>or overwrite
+it</big></small>. To do this or just to install it do the following steps:<br>
+<ol>
+  <li>Replace or place the type1 files: locate the old files named <small><tt>k.pfb</tt></small>,
+    <small><tt>ki.pfb</tt></small>, <small><tt>kb.pfb</tt></small> etc and
+delete them. Place the new files in the same place you had the old ones probably
+in <small><tt>texmf/fonts/type1/kerkis or in this directory (create it!) if
+you did not had kerkis before.</tt></small></li>
+  <li>Replace or place the afm files: locate the files <small><tt>k.afm</tt></small>,
+    <small><tt>ki.afm</tt></small>,<small><tt>kb.afm</tt></small> etc and
+delete them. Place the new afm files in the same place you had the old ones
+probably in <small><tt>texmf/fonts/afm/kerkis or in this directory (create
+it!) if you did not had kerkis before.</tt></small><br>
+  </li>
+  <li>Replace or place the tfm and vf files (<small><tt>k8a.tfm</tt></small>,
+    <small><tt>ek8a.tfm</tt></small>, <small><tt>gk7a.tfm</tt></small> etc),
+in <small><tt>texmf/fonts/tfm/kerkis </tt><big>and</big><tt> </tt></small><small><tt>texmf/fonts/vf/kerkis.</tt></small></li>
+  <li>Replace or place the old kerkis.sty, .fd files from the tex subdirectory
+of the distribution in <small><tt>texmf/tex/latex/kerkis</tt></small>.</li>
+  <li>Replace or place the .enc files from the dvips subdirectory of the distribution
+in <small><tt>texmf/dvips/base</tt></small>/kerkis (old ones might be in
+    <small><tt>texmf/dvips/base</tt></small>/).</li>
+  <li>Place the all html files from the doc subdirectory in <small><tt>texmf/doc/latex/kerkis</tt></small>.</li>
+  <li>Place the kerkis.map file in <small><tt>texmf/dvips/base</tt></small>/kerkis.
+If you had kerkis before edit the file psfonts.map (found in texmf/dvips/config
+and/or texmf/dvips/base) and delete all entries relating to kerkis.</li>
+  <li>Run texhash (on unix) or refresh the filename database (in MikTeX).</li>
+  <li>Find the file <small><tt>updmap.cfg</tt></small> open it in an editor
+and add the line: Map kerkis.map</li>
+  <li>Run updmap (on MikTeX I am not sure how to do this. Alternatively you
+may append the contents of the file kerkis.map of the distribution to psfonts.map
+after step 7 above, refresh the filename database (step 8) and skip steps
+9 and 10).</li>
+  <li>Remove all bitmaps you may have from older kerkis instalations (remove
+all .pk files in /var/lib/texmf/pk teTeX (on unix) texmf-var/fonts/pk in TeXLive
+and localtexmf\fonts\pk in MikTeX.</li>
+</ol>
+<b><font color="#660000">You are ready to use the fonts now.</font></b> Just
+note the following:
+<ol>
+1. Load the kerkis.sty package <i>after</i> you load the inputenc package
+with the iso-8859-7 option
+</ol>
+<ol>
+2. The -j option of dvips (which is usually the default) may not work properly
+with older TeX installations (it works with modern ones). If you run into
+such problems with dvips, either turn it off by issuing dvips -j0 file.dvi
+or use the bitmap generation utility gfstopk by issuing dvips -V file.dvi
+</ol>
+<ol>
+        
+  <center><font color="#660000"><big>Stylistic issues<br>
+  <br>
+  </big></font></center>
+Kerkis is a Neoclassical font. We believe that its strictly rationalist axis
+makes it ideal for scientific typesetting. Moreover its moderate contrast
+and apperture makes it perfectly readable. Its serifs are adnate so that
+it guides your eyes smoothly on the line.               
+  <p>Kerkis is a calm and quiet face that does not interfere with the expression
+of important ideas in your documents.</p>
+        
+<p>The latin part of the Kerkis font is URW Bookman (except some characters
+that were missing from Bookman). URW has kindly allowed us to re-distribute
+their Bookman inside Kerkis.</p>
+
+<p></p>
+<p> A. Tsolomitis, atsol at aegean dot gr
+
+  <center></center>
+  
+  <ul>
+        
+  </ul>
+        
+  <center>              
+  <p><img src="http://iris.math.aegean.gr/software/kerkis/kerkispoly.gif"
+ height="192" width="627"></p>
+  </center>
+        
+  <p><br>
+  </p>
+        
+  <center><img src="http://iris.math.aegean.gr/software/kerkis/kerkis.gif"></center>
+</ol>
+<br>
+<br>
+<br>
+</body>
+</html>

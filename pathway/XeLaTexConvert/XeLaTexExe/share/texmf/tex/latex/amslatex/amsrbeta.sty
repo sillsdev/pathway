@@ -1,0 +1,901 @@
+%%
+%% This is file `amsrefs.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% amsrefs.dtx  (with options: `pkg')
+%% 
+%%% ====================================================================
+%%% @LaTeX-doc-source-file{
+%%%   filename  = "amsrefs.dtx",
+%%%   version   = "1.01",
+%%%   date      = "2000/04/07",
+%%%   time      = "14:13:41 EDT",
+%%%   author    = "Michael J Downes",
+%%%   address   = "American Mathematical Society,
+%%%                Publications Technical Group,
+%%%                PO Box 6248,
+%%%                Providence, RI 02940,
+%%%                USA",
+%%%   email     = "tech-support@ams.org",
+%%%   URL       = "http://www.ams.org/",
+%%%   abstract  = "A LaTeX package that permits bibliography style
+%%%                to be controlled completely from the LaTeX side
+%%%                instead of being determined chiefly by the BibTeX
+%%%                style file.",
+%%%   checksum  = "13215 2240 8648 73862",
+%%%   docstring = "The checksum field, produced by Robert Solovay's
+%%%                checksum utility, gives CRC-16 checksum, lines,
+%%%                words, and characters.",
+%%%  }
+%%% ====================================================================
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+%\ProvidesPackage{amsrefs}[2000/04/07 v1.03]
+\ProvidesPackage{amsrbeta}[2000/04/07 v1.03]
+\begingroup
+\edef\c{\number\catcode\string`\`}
+\catcode\string`\`=12
+\edef\c{%
+  \endgroup
+  \noexpand\AtEndOfPackage{%
+    \catcode\number`\==\number\catcode`\=
+    \catcode\number`\:=\number\catcode`\:
+    \catcode\number`\`=\c\relax
+  }%
+  \catcode\number`\`=12
+}
+\c \catcode`\'12 \catcode`\=12 \catcode`\:12
+\let\@xp=\expandafter
+\let\@nx=\noexpand
+\long\def\@ifempty#1{\@xifempty#1@@..\@nil}
+\long\def\@xifempty#1#2@#3#4#5\@nil{%
+  \ifx#3#4\@xp\@firstoftwo\else\@xp\@secondoftwo\fi}
+\long\def\@ifnotempty#1{\@ifempty{#1}{}}
+\@ifundefined{@emptytoks}{\csname newtoks\endcsname\@emptytoks}{}
+\def\addto@macro#1#2{\@xp\def\@xp#1\@xp{#1#2}}
+\let\star@char=*
+\def\star@#1#2{%
+  \def\star@a##1{#1}\def\star@b{#1{#2}}%
+  \futurelet\@let@token\star@test
+}
+\def\star@test{%
+  \ifx\@let@token\star@char \let\star@b\star@a\fi
+  \star@b
+}
+\RequirePackage{ifoption}[2000/02/15]
+\DeclareExclusiveOptions{*sorted,*citation-order}
+\DeclareExclusiveOptions{alphabetic,author-year,numeric}
+\DeclareBooleanOption{short-journals}
+\DeclareBooleanOption{short-months}
+\DeclareBooleanOption{initials}
+\DeclareExclusiveOptions{traditional-quotes,logical-quotes}
+\DeclareExclusiveOptions{sorted-cites,non-sorted-cites}
+\DeclareExclusiveOptions{non-compressed-cites,compressed-cites}
+\DeclareBooleanOption{jpa}
+\DeclareBooleanOption{backrefs}
+\def\amsrefs@verbose{01}
+\DeclareOption{?}{\def\amsrefs@verbose{00}}
+\DeclareOption{beta}{}
+\ExecuteOptions{numeric,*sorted,traditional-quotes,%
+  sorted-cites,compressed-cites}
+\ProcessOptions\relax
+\ProcessExclusiveOptions
+\IfOption{beta}{}{%
+  \PackageWarningNoLine{amsrefs}{%
+    Option `beta' should be used with this beta release}%
+}
+%\RequirePackage{rkeyval}[2000/02/02]
+\RequirePackage{rkvbeta}[2000/02/02]
+\RequirePackage{inicap}[2000/02/02]
+\newenvironment{biblist}[1][]{%
+  \normalfont \footnotesize \labelsep .5em\relax
+  \list{\@biblabel{\thebib}}{%
+    \resetbiblist{00}%
+    \usecounter{bib}}%
+    \sloppy
+  \interlinepenalty\@m  \clubpenalty\@M \widowpenalty\clubpenalty
+  \frenchspacing
+  #1\relax
+}{%
+  \def\@noitemerr{\@latex@warning{Empty bibliography list}}%
+  \endlist
+}
+\def\@biblabel#1{[#1]}
+\newcommand{\resetbiblist}[1]{%
+  \settowidth\labelwidth{\@biblabel{#1}}%
+  \leftmargin\labelwidth \advance\leftmargin\labelsep
+}
+\def\bib@start#1{%
+  \begingroup
+  \let\@elt\relax % work around a LaTeX output routine bug
+  \item\leavevmode
+}
+\def\bib@end{\relax
+  \par\endgroup
+}
+\providecommand{\name}{}
+\DefineAdditiveKey{bib}{author}{\name}
+\DefineAdditiveKey{bib}{editor}{\name}
+\DefineSimpleKey{bib}{title}
+\DefineSimpleKey{bib}{subtitle}
+\DefineSimpleKey{bib}{booktitle}
+\DefineSimpleKey{bib}{series}
+\DefineSimpleKey{bib}{conference}
+\DefineSimpleKey{bib}{publisher}
+\DefineSimpleKey{bib}{organization}
+\DefineSimpleKey{bib}{institution}
+\DefineSimpleKey{bib}{address}
+\DefineSimpleKey{bib}{place}
+\DefineSimpleKey{bib}{year}
+\DefineSimpleKey{bib}{date}
+\DefineSimpleKey{bib}{journal}
+\DefineSimpleKey{bib}{volume}
+\DefineSimpleKey{bib}{number}
+\DefineSimpleKey{bib}{pages}
+\DefineSimpleKey{bib}{part}
+\DefineAdditiveKey{bib}{isbn}{\isbn}
+\DefineSimpleKey{bib}{issn}
+\DefineSimpleKey{bib}{doi}
+\DefineAdditiveKey{bib}{review}{\review}
+\DefineSimpleKey{bib}{status}
+\DefineSimpleKey{bib}{eprint}
+\DefineSimpleKey{bib}{preprint}
+\DefineSimpleKey{bib}{language}
+\DefineSimpleKey{bib}{note}
+\DefineSimpleKey{bib}{xid}
+\DefineSimpleKey{bib}{label}
+\DefineSimpleKey{bib}{type}
+\DefineSimpleKey{bib}{edition}
+\DefineSimpleKey{bib}{setup}
+\DefineDummyKey{bib}{transition}
+\newcommand{\bib}[3][]{%
+  \begingroup
+  \toks@{#1}%
+  \def\@tempa{#2}%
+  \edef\@tempb{%
+    \@nx\@bibdef\@xp\@nx\csname setbib@#3\endcsname{\the\toks@}{#3}%
+      {\@xp\strip@prefix\meaning\@tempa}%
+  }%
+  \@tempb
+}
+\let\biblio@list\@empty
+\newcounter{bib}
+\def\amsrefs@nocomma{\PackageWarning{amsrefs}{%
+  Missing comma: some text might print incorrectly\MessageBreak}}
+\def\@bibdef#1#2#3#4{%
+  \ifx\relax#1%
+    \PackageError{amsrefs}{Undefined entry type: #3}\@ehc
+    \let#1\setbib@misc
+  \fi
+  \RestrictedSetKeys[\amsrefs@nocomma]{bib}%
+    {\bib@exec{#4}{\the\rsk@toks}{#1}{#2}\endgroup}%
+}
+\begingroup \catcode`\'=11
+\gdef\bib@field@patches{%
+  \let\bib@author\bib'author
+  \let\bib@editor\bib'editor
+  \let\bib@date\bib'date
+  \ifx\bib@date\@empty \let\bib@date\bib'year \fi
+  \bib@parsedate
+  \let\bib@language\bib'language
+  \ifx\bib@language\@empty \let\bib@language\biblanguagedefault \fi
+  \ifx\bib'place\@empty \let\bib'place\bib'address\fi
+  \bib'setup
+}
+\endgroup
+\def\bib@bibcite#1#2#3{%
+  \@cons\biblio@list{{#1}}%
+  \if\numeric@refs
+    \stepcounter{bib}%
+    \protected@edef\@currentlabel{\@nx\@nx\@nx\cite@x{\thebib}{}}%
+  \else
+    #2% execute definitions locally
+    \bib@field@patches
+    \def\@currentlabel{\@nx\cite@x{\bib@year}{\bib@author}}%
+    \let\name\relax
+  \fi
+  \protected@edef\@tempa{\protect\bibcite{#1}{\@currentlabel}}%
+  \@tempa
+}
+\def\bib@print#1#2#3#4{%
+  \alpha@label{#4}%
+  \bib@start{#1}%
+  #2\bib@field@patches
+  \bib@cite{#1}\kern\@ne sp\relax
+  #3%
+  \bib@end
+}
+\let\bib@exec\bib@bibcite
+\AtBeginDocument{\let\bib@exec\bib@print}
+\IfOption{author-year}{%
+  \def\cite@label{%
+    \ifx\bib@author\@empty \bib@editor \else \bib@author \fi
+  }%
+}{%
+  \def\cite@label{\@currentlabel}%
+}
+
+\IfOption{alphabetic}{%
+  \def\alpha@label{\def\thebib}%
+}{%
+  \let\alpha@label\@gobble
+}
+\def\bib@cite@check#1#2#3#4#5#6\@nil#7{%
+  \ifodd0#2\relax
+    \PackageWarning{amsrefs}{%
+      Duplicate use of \protect\bib\space key `#7'\MessageBreak}%
+  \else
+    \@xp\gdef\csname b@#7\endcsname{\citeselect #11{#3}{#4}{#5}}%
+  \fi
+}
+\def\bib@cite#1{%
+  \protected@write\@auxout {\def\name{\protect\name}}{%
+    \protect\bibcite{#1}{%
+      \protect\citeselect 00{\cite@label}{\bib@year}{}}%
+  }%
+  \@ifundefined{b@#1}{%
+    \protected@edef\@tempa{%
+      \gdef\@xp\@nx\csname b@#1\endcsname{%
+        \protect\citeselect  01{\cite@label}{\bib@year}%
+      }%
+    }
+    \@tempa
+  }{%
+    \begingroup
+    \let\citeselect\bib@cite@check
+    \csname b@#1\endcsname 00xxx\@nil{#1}%
+    \endgroup
+  }%
+}
+\let\@@testdef\@testdef
+\def\@testdef #1{%
+  \if b\@car#1x\@nil \@xp\test@bibcite
+  \else \@xp\@@testdef
+  \fi
+  {#1}%
+}
+\def\test@bibcite#1#2#3{%
+  \@xp\@xp\@xp\test@bibcite@a\csname b@#2\endcsname #3\@nil
+}
+\def\test@bibcite@a#1#2#3#4\citeselect#5#6#7\@nil{%
+  \def\reserved@a{#4}\def\reserved@b{#7}%
+  \ifx\reserved@a\reserved@b \else\@tempswatrue \fi
+}
+\def\printbibliography{%
+  \bibsection
+  \begin{biblist}%
+  \let\@elt\bib@print
+  \biblio@list
+  \end{biblist}%
+}
+\renewenvironment{thebibliography}[1]{%
+  \bibsection
+  \biblist[\resetbiblist{#1}]%
+}{%
+  \endbiblist
+}
+\providecommand{\bibname}{Bibliography}
+\@ifundefined{chapter}{%
+  \newcommand{\bibsection}{\section*{\bibname}}%
+}{%
+  \newcommand{\bibsection}{\chapter*{\bibname}}%
+}
+\def\SwapBreak#1{%
+  \@tempcnta\@MM
+  \ifhmode
+    \unskip
+    \ifnum\lastpenalty=\z@
+    \else \@tempcnta\lastpenalty \unpenalty
+    \fi
+  \fi
+  \toks@{#1}%
+  \edef\@tempa{%
+    \@nx\deferredquoteslogical
+    \ifnum\lastkern=\@ne
+    \else
+      \ifnum\spacefactor=\sfcode\@xp\@xp\@xp`\@xp\@car\string#1)\@nil
+      \else \the\toks@
+      \fi
+    \fi
+    \@nx\deferredquotes
+    \ifnum\@tempcnta=\@MM \else \penalty\number\@tempcnta\space\fi
+    \ifnum\lastkern=\@ne \ignorespaces \fi
+  }%
+  \@tempa
+}
+\newcount\series@index
+\def\PrintSeries#1#2#3#4#5#6#7#8{%
+  \begingroup
+  \def\series@add@a{#2}%
+  \def\series@add@b{\SwapBreak{#3}#4}%
+  \def\series@add@c{\SwapBreak{#5}#6}%
+  \def\series@add@d{\SwapBreak{#7}#8}%
+  \PrintSeries@a{#1}%
+}
+\newcommand{\SingularPlural}[2]{#1}
+\newcommand{\Plural}{\SingularPlural{}}
+\def\PrintSeries@a#1#2#3#4{%
+  \series@index\z@ \def#1{\advance\series@index\@ne \@gobble}%
+  #3\relax
+  \ifnum\series@index=\@ne \let\SingularPlural\@firstoftwo
+  \else \let\SingularPlural\@secondoftwo
+  \fi
+  \chardef\series@total=\series@index \series@index=\z@
+  \let#1\series@add
+  #2#3#4\relax
+  \endgroup
+}
+\def\series@add#1{%
+  \advance\series@index\@ne
+  \let\@tempa\relax
+  \ifcase\series@index
+  \or % material before name 1
+    \let\@tempa\series@add@a
+  \or % material before name 2
+    \ifnum\series@total<\thr@@ \let\@tempa\series@add@b
+    \else \let\@tempa\series@add@c
+    \fi
+  \else % material before name 3, 4, 5, ...
+    \ifnum\series@index<\series@total \let\@tempa\series@add@c
+    \else \let\@tempa\series@add@d
+    \fi
+  \fi
+  \@tempa{#1}%
+}
+\def\bib@append#1#2#3{%
+  \ifx\@empty#3\relax
+  \else
+    \ifx\relax#2\errmessage{#3=\relax}\fi
+    \@temptokena{\SwapBreak{#1}#2}\toks@\@xp{#3}%
+    \edef\@tempa{\the\@temptokena{\the\toks@}}%
+    \@xp\@tempa
+  \fi
+  \relax
+}
+\let\endbracket\@empty
+\let\bracket@stack\@empty
+\def\push@bracket#1{%
+  \xdef\bracket@stack{#1\bracket@stack}%
+}
+\def\pop@bracket{\iffalse{\fi
+  \@xp\pop@bracket@a\bracket@stack \@empty}}
+\def\pop@bracket@a#1{\leavevmode\/\upn{#1}\xdef\bracket@stack{\iffalse}\fi}
+\providecommand{\upn}[1]{#1}
+\newcommand{\parenthesize}[1]{%
+  \leavevmode\push@bracket)\upn{(}#1\pop@bracket
+}
+\let\deferredquotes\@empty
+\IfOption{logical-quotes}{%
+  \def\deferredquoteslogical{\deferredquotes}%
+}{%
+  \let\deferredquoteslogical\relax
+}
+\newcommand{\bibquotes}[1]{%
+  \textquotedblleft#1%
+  \gdef\deferredquotes{%
+    \global\let\deferredquotes\@empty \textquotedblright
+  }%
+}
+\providecommand{\mdash}{\textemdash}
+\providecommand{\ndash}{\textendash}
+\providecommand{\MRhref}[1]{}
+\@ifundefined{@addpunct}{%
+  \def\@addpunct#1{%
+    \relax\ifhmode\unskip\ifnum\spacefactor>\@m \else#1\fi\fi
+  }
+  \def\frenchspacing{\sfcode`\.1006\sfcode`\?1005\sfcode`\!1004%
+    \sfcode`\:1003\sfcode`\;1002\sfcode`\,1001 }
+}{}
+\providecommand{\nopunct}{\spacefactor 1005 }
+\def\bibspec@scan#1#2#3#4{%
+  \toks@\@xp{\the\toks@\bib@append{#1}{#2}}%
+  \edef\@tempa{%
+    \toks@{\the\toks@ \@xp\@nx\csname bib'#3\endcsname}%
+  }%
+  \@tempa
+  \ifx\@empty#4\@xp\@gobble % end the recursion
+  \else \ifx +#4\else\bibspec@scan@error\fi
+  \fi
+  \bibspec@scan
+}
+\newcommand{\bibspec}[2]{%
+  \toks@\@emptytoks
+  \@ifnextchar{+}{\@xp\bibspec@scan\@gobble}{\bibspec@scan}#2%
+    \@empty\@empty\@empty\@empty
+  \@xp\edef\csname setbib@#1\endcsname{\the\toks@}%
+}
+\IfOption{initials}{%
+  \def\set@forenames#1#2 #3{%
+    \ignorespaces#1. \ifx\@empty#3\@xp\@gobbletwo\fi \set@forenames#3%
+  }
+}{%
+  \def\set@forenames{\ignorespaces}
+}
+\def\uninvertName#1{\rnscan@a#1,,,\@nil}
+\def\rnscan@a#1,#2,#3,#4\@nil{%
+  \set@forenames#2 \@empty#1\unskip
+  \@ifnotempty{#3}{, \ignorespaces #3}}
+\def\UninvertedNames{%
+  \PrintSeries{\name}%
+    {\uninvertName}%
+    {}{ and \uninvertName}%
+    {,}{ \uninvertName}%
+    {,}{ and \uninvertName}%
+}
+\newcommand{\aulist}[1]{\UninvertedNames{}{#1}{}}
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\newcommand{\sameauthors}[1]{\bysame}
+\def\PreviousAuthors{\relax}
+\newcommand{\PrintAuthors}{%
+  \ifx\PreviousAuthors\bib@author \@xp\sameauthors
+  \else
+    \global\let\PreviousAuthors\bib@author
+    \@xp\aulist
+  \fi
+}
+\newcommand{\PrintEditorsA}[1]{%
+  \UninvertedNames{}{#1}{ (ed\Plural{s}.)}%
+}
+\newcommand{\PrintEditorsB}[1]{%
+  \UninvertedNames{(}{#1}{\SwapBreak{,} ed\Plural{s}.)}%
+}
+\newcommand{\ReviewList}[1]{%
+  \PrintSeries{\review}{}{,}{ }{,}{ }{,}{ }{}{#1}{}%
+}
+\newcommand{\voltext}{vol.~}
+\newcommand{\pptext}[1]{%
+  p\pp@scan@a#1@\ndash p@\ndash{\pp@scan#1@-p@-{}\@nil}\@nil.~#1%
+}
+\def\pp@scan#1-#2@-#3#4\@nil{#3}
+\def\pp@scan@a#1\ndash#2@\ndash#3#4\@nil{#3}
+\newcommand{\eprintpages}[1]{%
+  #1\IfEmptyBibField{eprint}{}{\IfEmptyBibField{journal}{ pp.}{}}%
+}
+\def\ISSNlookup#1{%
+  \@ifnotempty{#1}{%
+    \ISSN@lu#1\@nil{#1}%
+  }%
+}
+\def\ISSN@lu#1#2\@nil#3{%
+  \def\@tempa{#3}%
+  \ifcat A\@nx#1%
+    \lowercase{\if#1}#1%
+        \def\@tempb##1<#3>##2##3\@nil{\def\@tempc{##2}}%
+      \@xp\@tempb\ISSN@list<#3>{}\@nil
+      \ifx\@tempc\@empty \arf@unknown{journal}{#3}%
+      \else \let\@tempa\@tempc
+      \fi
+    \fi
+  \fi
+  \@tempa
+}
+\def\arf@unknown#1#2{%
+  \toks@{#2}%
+  \PackageWarning{amsrefs}{Unknown #1 abbreviation '\the\toks@'}%
+}
+\def\PublisherLookup#1{\Publ@LU#1?\@nil{#1}}
+\def\Publ@LU#1#2\@nil#3{%
+  \ifcat A\@nx#1%
+    \lowercase{\if#1}#1%
+      \lowercase{\uppercase{\csname PN}.#3}\endcsname
+    \else
+      #3%
+    \fi
+  \fi
+}
+\def\biblanguageEnglish{English}
+\let\biblanguagedefault\biblanguageEnglish
+\edef\amsrefs@tmp{\catcode\number`\'=\number\catcode`\'\relax}
+\catcode`\'=11
+\newcommand{\EnglishInitialCaps}[1]{%
+  \ifx\@empty\bib'language \let\bib'language\biblanguagedefault\fi
+  \ifx\bib'language\biblanguageEnglish \inicap{#1}\fi
+}
+\amsrefs@tmp
+\def\PrintThesisType#1{%
+  \thesis@type#1?\@nil{#1}%
+}
+\def\thesis@type#1#2\@nil#3{%
+  \ifx p#1Ph.D. Thesis%
+  \else\ifx m#1Master's Thesis%
+  \else #3\fi\fi
+}
+\newcommand{\BibField}[1]{\csname bib'#1\endcsname}
+\newcommand{\IfEmptyBibField}{\rkvIfEmpty{bib}}
+\newcommand{\PrintDOI}[1]{%
+  DOI #1%
+  \IfEmptyBibField{volume}{, (to appear in print)}{}%
+}
+\def\bib@parsedate{%
+  \@xp\bib@parsedate@a\bib@date ---\@nil
+}
+\let\bib@year\@empty
+\let\bib@month\@empty
+\let\bib@day\@empty
+\begingroup \catcode`\'=11
+\gdef\bib@parsedate@a#1-#2-#3-#4\@nil{%
+  \def\bib@year{#1}\def\bib@month{#2}\def\bib@day{#3}%
+  \ifx\@empty\bib@month \let\bib'date\bib@year
+  \else \def\bib'date{#1-#2-#3}%
+  \fi
+}
+\endgroup
+\newcommand{\PrintDatePV}[1]{%
+  \IfEmptyBibField{doi}{\let\@tempa\PrintDate}{%
+    \IfEmptyBibField{volume}{\let\@tempa\PrintDatePosted}{%
+      \let\@tempa\PrintDate}}%
+  \@tempa{#1}%
+}
+\newcommand{\PrintDate}[1]{(\print@date)}
+\def\print@date{%
+  \ifx\bib@month\@empty \else\print@month@day \fi
+  \bib@year
+}
+\def\print@month@day{%
+  \ifcase 0\bib@month\ignorespaces
+  \or January\or February\or March\or April\or May\or June\or
+      July\or August\or September\or October\or November\or December\or
+      Winter\or Spring\or Summer\or Fall\else Unknown Month%
+  \fi
+  \ifx\@empty\bib@day \else \space\number 0\bib@day,\fi
+  \space
+}
+\newcommand{\PrintYear}[1]{\bib@year}
+\newcommand{\PrintDatePosted}[1]{\unskip,  posted on \print@date}
+\newcommand{\CardinalNumeric}[1]{%
+  \number#1\relax
+  \if\ifnum#1<14 \ifnum#1>\thr@@ T\else F\fi\else F\fi T%
+    th%
+  \else
+    \@xp\keep@last@digit\@xp#1\number#1\relax
+    \ifcase#1th\or st\or nd\or rd\else th\fi
+  \fi
+}
+\def\keep@last@digit#1#2{%
+  \ifx\relax#2\@xp\@gobbletwo
+  \else #1=#2\relax
+  \fi
+  \keep@last@digit#1%
+}
+\newcommand{\PrintEdition}[1]{%
+  \afterassignment\print@edition
+  \count@ 0#1\relax\@nil
+}
+\newcommand{\editiontext}{ed.}
+\def\print@edition#1#2\@nil{%
+  \ifx\relax#1\relax
+    \ifnum\count@>\z@ \CardinalNumeric\count@
+    \else ??th%
+    \fi
+    \ \editiontext
+  \else \ifnum\count@>\z@\number\count@\fi #1#2\relax
+  \fi
+}
+\newcommand{\intersentencespace}{{\spacefactor3000} }
+\newcommand{\eprint}[1]{#1}
+\bibspec{article}{%
+  +{}{\PrintAuthors}       {author}
+  +{,}{ \textit}      {title}
+  +{:}{ \textit}      {subtitle}
+  +{.}{ }             {part}
+  +{,}{ \ISSNlookup}  {journal}
+  +{} { \textbf}      {volume}
+  +{} { \PrintDatePV} {date}
+  +{,}{ \PrintDOI}    {doi}
+  +{,}{ \eprint}      {eprint}
+  +{} { \parenthesize}{status}
+  +{,}{ \eprintpages} {pages}
+  +{,}{ }             {note}
+  +{.}{}              {transition}
+  +{} {\intersentencespace \ReviewList}   {review}
+}
+\bibspec{book}{%
+  +{}{\PrintAuthors}{author}
+  +{}{\PrintEditorsA}{editor}
+  +{,}{ \textit}{title}
+  +{:}{ \textit}{subtitle}
+  +{,}{ }{type}
+  +{,}{ \EnglishInitialCaps}{booktitle}
+  +{,}{ \PrintEdition}{edition}
+  +{,}{ }{series}
+  +{,}{ vol.~}{volume}
+  +{,}{ part~}{part}
+  +{,}{ \PublisherLookup}{publisher}
+  +{,}{ }{organization}
+  +{,}{ }{place}
+  +{,}{ }{date}
+  +{,}{ ISBN }{isbn}
+  +{}{ \parenthesize}{status}
+  +{,}{ }{note}
+  +{.}{}{transition}
+  +{}{\intersentencespace \ReviewList}{review}
+}
+\bibspec{incollection}{%
+  +{}{\PrintAuthors}{author}
+  +{,}{ \textit}{title}
+  +{:}{ \textit}{subtitle}
+  +{,}{ }{type}
+  +{,}{ \EnglishInitialCaps}{booktitle}
+  +{,}{ \PrintEdition}{edition}
+  +{}{ \PrintEditorsB}{editor}
+  +{,}{ Proc.\ }{conference}
+  +{,}{ }{series}
+  +{,}{ vol.~}{volume}
+  +{,}{ part~}{part}
+  +{,}{ \PublisherLookup}{publisher}
+  +{,}{ }{organization}
+  +{,}{ }{place}
+  +{,}{ }{date}
+  +{,}{ \pptext}{pages}
+  +{,}{ ISBN }{isbn}
+  +{}{ \parenthesize}{status}
+  +{,}{ }{note}
+  +{.}{}{transition}
+  +{}{\intersentencespace \ReviewList}{review}
+}
+\let\setbib@inproceedings\setbib@incollection
+\let\setbib@booktitle\setbib@incollection
+\let\setbib@misc\setbib@book
+\let\setbib@unpublished\setbib@book
+\bibspec{techreport}{%
+  +{}{\PrintAuthors}{author}
+  +{}{\PrintEditorsA}{editor}
+  +{,}{ \textit}{title}
+  +{:}{ \textit}{subtitle}
+  +{,}{ }{type}
+  +{,}{ \EnglishInitialCaps}{booktitle}
+  +{,}{ Technical Report }{number}
+  +{,}{ }{series}
+  +{,}{ vol.~}{volume}
+  +{,}{ part~}{part}
+  +{,}{ \PublisherLookup}{publisher}
+  +{,}{ }{organization}
+  +{,}{ }{institution}
+  +{,}{ }{place}
+  +{,}{ }{date}
+  +{,}{ ISBN }{isbn}
+  +{,}{ \eprint}      {eprint}
+  +{}{ \parenthesize}{status}
+  +{,}{ }{note}
+  +{.}{}{transition}
+  +{}{\intersentencespace \ReviewList}{review}
+}
+\bibspec{thesis}{%
+  +{}{\PrintAuthors}{author}
+  +{}{\PrintEditorsA}{editor}
+  +{,}{ \textit}{title}
+  +{:}{ \textit}{subtitle}
+  +{,}{ \PrintThesisType}{type}
+  +{,}{ part~}{part}
+  +{,}{ }{organization}
+  +{,}{ }{institution}
+  +{,}{ }{place}
+  +{,}{ }{date}
+  +{}{ \parenthesize}{status}
+  +{,}{ }{note}
+  +{.}{}{transition}
+  +{}{\intersentencespace \ReviewList}{review}
+}
+\DeclareRobustCommand{\tsup}[1]{%
+  \leavevmode\raise.9ex\hbox{\fontsize\sf@size\z@\selectfont #1}%
+}
+\DeclareRobustCommand{\tsub}[1]{%
+  \leavevmode\lower.6ex\hbox{\fontsize\sf@size\z@\selectfont #1}%
+}
+\DeclareRobustCommand{\tprime}{\tsup{\usefont{OMS}{cmsy}{m}{n}\char48 }}
+\def\citeleft{[}
+\def\citeright{]}
+\def\citemid{,\penalty9999 \space}
+\def\citepunct{,\penalty9999 \hskip.13em plus.1em minus.05em\relax}
+\let\citeform\@iden
+\def\@citeleft{\citeleft}
+\def\citeselect@author#1#2#3#4#5{\UninvertedNames{#3}}
+\def\citeselect@authoryear#1#2#3#4#5{\UninvertedNames{#3}, #4}
+\def\citeselect@object#1#2#3#4#5{\UninvertedNames{#3} \citeleft#4}
+\def\citeselect@year#1#2#3#4#5{#4}
+\def\citeselect@key#1#2#3#4#5{#3}
+\let\citeselect\citeselect@key
+\DeclareRobustCommand{\cite}[1]{\star@{\cite@a\citeselect{#1}}{}}
+\def\cite@multiple#1,#2#3\@nil{\ifx\relax#2F\else T\fi T}
+\def\MultipleCiteKeyWarning#1{%
+  \PackageWarning{amsrefs}{%
+    Use of \string\cites\space is recommended\MessageBreak
+    instead of \string\cite\space for multiple cites '#1'}%
+  \global\let\MultipleCiteKeyWarning\@gobble
+}
+\def\cite@a#1#2{%
+  \begingroup
+  \def\@tempa{#2}%
+  \toks@{\endgroup \cite@b#1}%
+  \edef\@tempa{\the\toks@{\@xp\strip@prefix\meaning\@tempa}}%
+  \@tempa
+}
+\def\cite@b#1#2#3{%
+  \if\cite@multiple#2,\relax\@nil
+    \MultipleCiteKeyWarning{#2}%
+    \cites{#2}%
+  \else
+    \cite@c#1{#2}{#3}%
+  \fi
+}
+\@ifundefined{@extra@b@citeb}{\let\@extra@b@citeb\@empty}{}
+\def\cite@lookup#1{\csname b@#1\@extra@b@citeb\endcsname}
+\def\undefined@cite#1{%
+  \PackageWarning{amsrefs}{Undefined citation '#1'}%
+  \texttt{#1}}
+\newcommand{\citedest}[2]{}
+\def\cite@c#1#2#3{%
+  \begingroup
+  \let\citeselect#1\relax
+  \@citeleft
+  \@xp\@xp\@xp\ifx\cite@lookup{#2}\relax \undefined@cite{#2}%
+  \else \cite@lookup{#2}%
+  \fi
+  \if@filesw\immediate\write\@auxout{\string\citation{#2}}\fi
+  \write\@auxout{\string\citedest{#2}{\thepage}}%
+  \@ifnotempty{#3}{\citemid #3}%
+  \citeright
+  \endgroup
+}
+\newcommand{\cites}[1]{}
+\def\cites#1{\begingroup
+  \edef\@tempa{\zap@space#1 \@empty}%
+  \edef\@tempa{\@xp\strip@prefix\meaning\@tempa}%
+  \edef\@tempa{\endgroup
+    \@nx\citelist@a{}{sorted}{%
+      \@xp\cites@a\@tempa,{@\csname fi\@car\endcsname},\@nil
+    }%
+  }%
+  \@tempa
+}
+\def\cites@a#1,{%
+  \ifx @#1@\else \@nx\cite@c\@nx\citeselect{#1}{}\fi \cites@a
+}
+\newcommand{\citelist}{\@ifnextchar <{\citelist@a}{\citelist@a <{sorted}}}%
+\def\NonNumericCiteWarning{%
+  \PackageWarning{amsrefs}{%
+    Unable to confirm that cite keys are numeric: not sorting%
+  }%
+}
+\def\citelist@a#1#2#3{%
+  \leavevmode
+  \citeleft\nopunct % suppress first \citepunct
+  \begingroup
+  \def\citeleft{\@addpunct{\citepunct}}\let\citeright\ignorespaces
+  \ifx\cite@sorted\relax #3\relax
+  \else
+    \@xp\ifx\csname cite@#2\endcsname\cite@sorted
+      \ifx\citeselect\citeselect@key
+        \cite@sorted@s #3\cite@sorted@e
+      \else \NonNumericCiteWarning#3\relax
+      \fi
+    \else #3\relax
+    \fi
+  \fi
+  \endgroup
+  \citeright
+}
+\let\cite@das\@empty
+\def\cite@sorted@s{%
+  \begingroup \let\cite@print\cite@c
+    \let\cite@c\cite@compress
+    \begingroup \let\cite@c\cite@sorted \ignorespaces}
+\def\cite@sorted@e{%
+  \relax \@xp\endgroup\the\cite@toks \last@cite \endgroup
+}
+\newtoks\cite@toks
+\def\cite@sorted#1#2#3{%
+  \@tempcnta 0\cite@lookup{#2}\relax % highest number so far
+  \cite@toks{\cite@c#1{#2}{#3}}%
+  \edef\sort@cite@temp{\the\cite@toks}%
+  \let\cite@c\sort@cite@b
+  \ignorespaces
+}
+\def\sort@cite@b#1#2#3{%
+  \@tempcntb 0\cite@lookup{#2}\relax
+  \ifnum\@tempcntb>\@tempcnta
+    \cite@toks\@xp{\the\cite@toks \cite@c#1{#2}{#3}}%
+  \else
+    \let\cite@c\sort@cite@c \cite@toks\@emptytoks
+    \def\@tempb{\cite@toks\@xp{\the\cite@toks\cite@c#1{#2}{#3}}}%
+    \sort@cite@temp \@tempb \let\cite@c\sort@cite@b
+  \fi
+  \edef\sort@cite@temp{\the\cite@toks}%
+  \ignorespaces
+}
+\def\sort@cite@c#1#2#3{%
+  \ifnum\@tempcntb<0\cite@lookup{#2}%
+    \@tempb \let\@tempb\@empty
+  \fi
+  \cite@toks\@xp{\the\cite@toks \cite@c#1{#2}{#3}}%
+  \ignorespaces
+}
+\let\last@cite\@empty
+\def\cite@compress#1#2#3{%
+  \cite@print#1{#2}{#3}\@tempcnta 0\cite@lookup{#2}\relax
+  \let\cite@c\cite@compress@a
+}
+\def\cite@compress@a#1#2#3{%
+  \advance\@tempcnta\@ne \@tempcntb 0\cite@lookup{#2}\relax
+  \ifnum\@tempcnta=\@tempcntb
+    \def\cite@dash{\textendash \nopunct \let\cite@dash\@empty}%
+    \def\last@cite{\cite@print#1{#2}{#3}}%
+    \let\cite@c\cite@compress@b
+  \else
+    \cite@print#1{#2}{#3}\@tempcnta\@tempcntb
+  \fi
+}
+\def\cite@compress@b#1#2#3{%
+  \advance\@tempcnta\@ne \@tempcntb 0\cite@lookup{#2}\relax
+  \ifnum\@tempcnta=\@tempcntb
+    \cite@dash
+    \def\last@cite{\cite@print#1{#2}{#3}}%
+  \else
+    \last@cite \let\last@cite\@empty
+    \cite@print#1{#2}{#3}\@tempcnta\@tempcntb
+    \let\cite@c\cite@compress@a
+  \fi
+}
+\IfOption{unsorted-cites}{\let\cite@sorted\relax}{}
+\DeclareRobustCommand{\ycite}[1]{%
+  \star@{\cite@a\citeselect@year{#1}}{}%
+}
+\DeclareRobustCommand{\ycites}{\cites}% not done yet
+\DeclareRobustCommand{\ocite}[1]{%
+  \star@{\cite@a\citeselect@object{#1}}{}%
+}
+\DeclareRobustCommand{\ocites}{\cites}% not done yet
+\IfOption{author-year}{%
+  \let\citeselect\citeselect@authoryear
+  \def\citeleft{(}\def\citeright{)}%
+  \def\@citeleft{\ifx\citeselect\citeselect@object\else\citeleft\fi}%
+  \let\@biblabel\@gobble
+}{%
+  \let\ycite\cite \let\ocite\cite
+  \let\ycites\cites \let\ocites\cites
+}
+\let\ISSN@list=\@empty
+\newcommand{\DefineJournal}[1]{\lowercase{\DefJrn@a{#1}}}
+\def\DefJrn@a#1#2#3#4{%
+  \def\@tempa##1<#1>##2##3\@nil{%
+    \ifx\@empty##3\@empty
+    \else
+      \PackageWarning{amsrefs}{Redefining journal '#1'->'#2'}%
+    \fi
+    \toks@{##1<#1>}\@temptokena{##3}%
+    \xdef\ISSN@list{%
+      \the\toks@\@xp\@nx\csname SN.#2\endcsname\the\@temptokena
+    }%
+  }%
+  \edef\@tempb{%
+    \@nx\@xp\@nx\@tempa\@nx\ISSN@list
+      <#1>\@xp\@nx\csname SN.#2\endcsname\@nx\@nil
+  }%
+  \@tempb
+  \global\@namedef{SN.#2}{\SerialISSNName{#1}{#3}{#4}}%
+  \if\amsrefs@verbose
+    \toks@{Journal #1 -> #2 / #3^^J = #4}\typeout{\the\toks@}%
+  \fi
+}
+\newcommand{\SerialName}[3]{#2}
+\let\SerialISSNName\SerialName
+\newcommand{\DefinePublisher}[1]{%
+  \lowercase{\uppercase{\expandafter\DefPub@a\csname PN}.#1}\endcsname{#1}%
+}
+\def\DefPub@a#1#2#3#4#5{%
+  \ifx\relax#1\else
+    \PackageWarning{amsrefs}{Redefining publisher '#2'}%
+  \fi
+  \gdef#1{\PublisherNameAddress{#3}{#4}{#5}}%
+  \if\amsrefs@verbose
+    \toks@{Publisher #2 -> #3 / #5^^J = #4}\typeout{\the\toks@}%
+  \fi
+}
+\newcommand{\PublisherNameAddress}[3]{%
+  #1\IfEmptyBibField{place}{\SwapBreak{,} #3}{}%
+}
+\IfOption{jpa}{\RequirePackage{amsjpa}[2000/02/02]}{}
+\endinput
+%%
+%% End of file `amsrefs.sty'.

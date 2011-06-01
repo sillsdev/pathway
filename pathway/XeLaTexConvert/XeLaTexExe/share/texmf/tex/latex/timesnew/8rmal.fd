@@ -1,0 +1,40 @@
+%Filename: 8rmal.fd
+%Created by: tex t
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{8rmal.fd}
+   [2000/12/05 Fontinst v1.801 font definitions for 8r/mal.]
+
+\DeclareFontFamily{8r}{mal}{}
+
+\DeclareFontShape{8r}{mal}{m}{n}{
+   <-> malr8r
+}{}
+
+\DeclareFontShape{8r}{mal}{m}{sl}{
+   <-> malro8r
+}{}
+
+\DeclareFontShape{8r}{mal}{m}{it}{
+   <-> malri8r
+}{}
+
+\DeclareFontShape{8r}{mal}{b}{n}{
+   <-> malb8r
+}{}
+
+\DeclareFontShape{8r}{mal}{b}{sl}{
+   <-> malbo8r
+}{}
+
+\DeclareFontShape{8r}{mal}{b}{it}{
+   <-> malbi8r
+}{}
+
+\DeclareFontShape{8r}{mal}{bx}{n}{<->ssub * mal/b/n}{}
+\DeclareFontShape{8r}{mal}{bx}{sl}{<->ssub * mal/b/sl}{}
+\DeclareFontShape{8r}{mal}{bx}{it}{<->ssub * mal/b/it}{}
+
+\endinput

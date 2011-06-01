@@ -1,0 +1,36 @@
+% This file belongs to the Latin Modern package. The work is released under
+% the GUST Font License. See the MANIFEST.txt and README.eng files
+% for the details. For the most recent version of this license see
+% http://www.gust.org.pl/fonts/licenses/GUST-FONT-LICENSE.txt or
+% http://tug.org/fonts/licenses/GUST-FONT-LICENSE.txt
+
+\ProvidesFile{ly1lmvtt.fd}[[2007/01/14 v1.3 Font defs for Latin Modern]
+\DeclareFontFamily{LY1}{lmvtt}{\hyphenchar \font\m@ne}
+\DeclareFontShape{LY1}{lmvtt}{m}{n}
+     {<-> texnansi-lmvtt10}{}
+\DeclareFontShape{LY1}{lmvtt}{m}{sl}
+     {<-> texnansi-lmvtto10}{}
+\DeclareFontShape{LY1}{lmvtt}{m}{it}
+     {<->sub*lmvtt/m/sl}{}
+%%%%%%%% light (l) and dark (b) variants:
+\DeclareFontShape{LY1}{lmvtt}{l}{n}
+     {<-> texnansi-lmvtl10}{}
+\DeclareFontShape{LY1}{lmvtt}{l}{sl}
+     {<-> texnansi-lmvtlo10}{}
+\DeclareFontShape{LY1}{lmvtt}{l}{it}
+     {<->sub*lmvtt/l/sl}{}
+\DeclareFontShape{LY1}{lmvtt}{b}{n}
+     {<-> texnansi-lmvtk10}{}
+\DeclareFontShape{LY1}{lmvtt}{b}{sl}
+     {<-> texnansi-lmvtko10}{}
+\DeclareFontShape{LY1}{lmvtt}{b}{it}
+     {<->sub*lmvtt/b/sl}{}
+\DeclareFontShape{LY1}{lmvtt}{bx}{n}
+     {<->ssub*lmvtt/b/n}{}
+\DeclareFontShape{LY1}{lmvtt}{bx}{sl}
+     {<->ssub*lmvtt/b/sl}{}
+\DeclareFontShape{LY1}{lmvtt}{bx}{it}
+     {<->sub*lmvtt/b/sl}{}
+\endinput
+%%
+%% End of file `ly1lmvtt.fd'.

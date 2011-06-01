@@ -1,0 +1,519 @@
+%%
+%% This is file `hdviwind.def',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% hyperref.dtx  (with options: `dviwindo,pdfmarkbase')
+%% 
+%% File: hyperref.dtx Copyright 1995-2001 Sebastian Rahtz,
+%% with portions written by David Carlisle and Heiko Oberdiek,
+%% 2001-2007 Heiko Oberdiek.
+%%
+%% This file is part of the `Hyperref Bundle'.
+%% -------------------------------------------
+%%
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%%
+%% The list of all files belonging to the `Hyperref Bundle' is
+%% given in the file `manifest.txt'.
+%%
+\ProvidesFile{hdviwind.def}
+  [2007/10/30 v6.77b
+  Hyperref driver for dviwindo]
+\def\Hy@PutCatalog#1{%
+  \pdfmark{pdfmark=/PUT,Raw={\string{Catalog\string} << #1 >>}}%
+}
+\ifHy@pagelabels
+  \def\HyPL@StorePageLabel#1{%
+    \if@filesw
+      \begingroup
+        \edef\Hy@tempa{\the\Hy@abspage<<#1>>}%
+        \immediate\write\@mainaux{%
+          \string\HyPL@Entry{\Hy@tempa}%
+        }%
+      \endgroup
+    \fi
+  }%
+  \AfterBeginDocument{%
+    \if@filesw
+      \immediate\write\@mainaux{%
+        \string\providecommand\string*\string\HyPL@Entry[1]{}%
+      }%
+    \fi
+    \ifx\HyPL@Labels\@empty
+      \Hy@WarningNoLine{Rerun to get /PageLabels entry}%
+    \else
+      \HyPL@SetPageLabels
+    \fi
+    \let\HyPL@Entry\@gobble
+  }%
+  \def\HyPL@Entry#1{%
+    \expandafter\gdef\expandafter\HyPL@Labels\expandafter{%
+      \HyPL@Labels
+      #1%
+    }%
+  }%
+\fi
+\begingroup\expandafter\expandafter\expandafter\endgroup
+\expandafter\ifx\csname pdfescapestring\endcsname\relax
+  \begingroup
+    \catcode`\|=0 %
+    \@makeother\\%
+  |@firstofone{|endgroup
+    |def|Hy@pstringdef#1#2{%
+      |edef#1{#2}%
+      |@onelevel@sanitize#1%
+      |edef#1{|expandafter|Hy@ExchangeBackslash#1\|@nil}%
+      |edef#1{|expandafter|Hy@ExchangeLeftParenthesis#1(|@nil}%
+      |edef#1{|expandafter|Hy@ExchangeRightParenthesis#1)|@nil}%
+    }%
+    |def|Hy@ExchangeBackslash#1\#2|@nil{%
+      #1%
+      |ifx|\#2|\%%
+      |else
+        \\%
+        |Hy@ReturnAfterFi{%
+          |Hy@ExchangeBackslash#2|@nil
+        }%
+      |fi
+    }%
+  }%
+  \def\Hy@ExchangeLeftParenthesis#1(#2\@nil{%
+    #1%
+    \ifx\\#2\\%
+    \else
+      \@backslashchar(%
+      \Hy@ReturnAfterFi{%
+        \Hy@ExchangeLeftParenthesis#2\@nil
+      }%
+    \fi
+  }%
+  \def\Hy@ExchangeRightParenthesis#1)#2\@nil{%
+    #1%
+    \ifx\\#2\\%
+    \else
+      \@backslashchar)%
+      \Hy@ReturnAfterFi{%
+        \Hy@ExchangeRightParenthesis#2\@nil
+      }%
+    \fi
+  }%
+\else
+  \def\Hy@pstringdef#1#2{%
+    \edef#1{\pdfescapestring{#2}}%
+  }%
+\fi
+\providecommand*\wwwbrowser{c:\string\netscape\string\netscape}
+\def\hyper@anchor#1{%
+  \Hy@SaveLastskip
+  \begingroup
+    \let\protect=\string
+    \special{mark: #1}%
+  \endgroup
+  \Hy@activeanchortrue
+  \Hy@colorlink\@anchorcolor\anchor@spot\Hy@endcolorlink
+  \Hy@activeanchorfalse
+  \Hy@RestoreLastskip
+}
+\def\hyper@anchorstart#1{%
+  \Hy@SaveLastskip
+  \special{mark: #1}%
+  \Hy@activeanchortrue
+}
+\def\hyper@anchorend{%
+  \Hy@activeanchorfalse
+  \Hy@RestoreLastskip
+}
+\def\hyper@linkstart#1#2{%
+  \expandafter\Hy@colorlink\csname @#1color\endcsname
+  \special{button: %
+    10000000 %
+    \number\baselineskip\space
+    #2%
+  }%
+}
+\def\hyper@linkend{%
+  \Hy@endcolorlink
+}
+\def\hyper@link#1#2#3{%
+  \setbox\@tempboxa=\color@hbox #3\color@endbox
+  \leavevmode
+  \ifHy@raiselinks
+    \@linkdim\dp\@tempboxa
+    \lower\@linkdim\hbox{%
+      \special{button: %
+        \number\wd\@tempboxa\space
+        \number\ht\@tempboxa\space
+        #2%
+      }%
+      \expandafter\Hy@colorlink\csname @#1color\endcsname#3%
+      \Hy@endcolorlink
+    }%
+    \@linkdim\ht\@tempboxa
+    \advance\@linkdim by -6.5\p@
+    \raise\@linkdim\hbox{}%
+  \else
+    \special{button: %
+      \number\wd\@tempboxa\space
+      \number\ht\@tempboxa\space
+      #2%
+    }%
+    \exandafter\Hy@colorlink\csname @#1color\endcsname#3\Hy@endcolorlink
+  \fi
+}
+\def\hyper@linkurl#1#2{%
+  \begingroup
+    \hyper@chars
+    \leavevmode
+    \setbox\@tempboxa=\color@hbox #1\color@endbox
+    \ifHy@raiselinks
+      \@linkdim\dp\@tempboxa
+      \lower\@linkdim\hbox{%
+        \special{button: %
+          \number\wd\@tempboxa\space
+          \number\ht\@tempboxa\space
+          launch: \wwwbrowser\space
+          #2%
+        }%
+        \Hy@colorlink\@urlcolor#1\Hy@endcolorlink
+      }%
+      \@linkdim\ht\@tempboxa
+      \advance\@linkdim by -6.5\p@
+      \raise\@linkdim\hbox{}%
+    \else
+      \special{button: %
+        \number\wd\@tempboxa\space
+        \number\ht\@tempboxa\space
+        launch: \wwwbrowser\space
+        #2%
+      }%
+      \Hy@colorlink\@urlcolor#1\Hy@endcolorlink
+    \fi
+  \endgroup
+}
+\def\hyper@linkfile#1#2#3{%
+  \begingroup
+    \hyper@chars
+    \leavevmode
+    \setbox\@tempboxa=\color@hbox #1\color@endbox
+    \ifHy@raiselinks
+      \@linkdim\dp\@tempboxa
+      \lower\@linkdim\hbox{%
+        \special{button: %
+          \number\wd\@tempboxa\space
+          \number\ht\@tempboxa\space
+          #3,%
+          file: #2%
+        }%
+        \Hy@colorlink\@filecolor#1\Hy@endcolorlink
+      }%
+      \@linkdim\ht\@tempboxa
+      \advance\@linkdim by -6.5\p@
+      \raise\@linkdim\hbox{}%
+    \else
+      \special{button: %
+        \number\wd\@tempboxa\space
+        \number\ht\@tempboxa\space
+        #3,%
+        file: #2%
+      }%
+      \Hy@colorlink\@filecolor#1\Hy@endcolorlink
+    \fi
+  \endgroup
+}
+\ifx\@pdfproducer\relax
+  \def\@pdfproducer{dviwindo + Distiller}%
+\fi
+\def\PDF@FinishDoc{%
+  \Hy@UseMaketitleInfos
+  \special{PDF: Keywords \@pdfkeywords}%
+  \special{PDF: Title \@pdftitle}%
+  \special{PDF: Creator \@pdfcreator}%
+  \ifx\@pdfcreationdate\@empty
+  \else
+    \special{PDF: CreationDate \@pdfcreationdate}%
+  \fi
+  \ifx\@pdfmoddate\@empty
+  \else
+    \special{PDF: ModDate \@pdfmoddate}%
+  \fi
+  \special{PDF: Author \@pdfauthor}%
+  \ifx\@pdfproducer\relax
+  \else
+    \special{PDF: Producer \@pdfproducer}%
+  \fi
+  \special{PDF: Subject \@pdfsubject}%
+  \Hy@DisableOption{pdfauthor}%
+  \Hy@DisableOption{pdftitle}%
+  \Hy@DisableOption{pdfsubject}%
+  \Hy@DisableOption{pdfcreator}%
+  \Hy@DisableOption{pdfcreationdate}%
+  \Hy@disableOption{pdfmoddate}%
+  \Hy@DisableOption{pdfproducer}%
+  \Hy@DisableOption{pdfkeywords}%
+}
+\def\PDF@SetupDoc{%
+  \ifx\@baseurl\@empty
+  \else
+    \special{PDF: Base \@baseurl}%
+  \fi
+  \ifx\@pdfpagescrop\@empty\else
+    \special{PDF: BBox \@pdfpagescrop}%
+  \fi
+  \pdfmark{pdfmark=/DOCVIEW,%
+    Page=\@pdfstartpage,%
+    View=\@pdfstartview,%
+    PageMode=/\@pdfpagemode
+  }%
+  \ifx\@pdfpagescrop\@empty
+  \else
+    \pdfmark{pdfmark=/PAGES,CropBox=\@pdfpagescrop}%
+  \fi
+  \edef\Hy@temp{%
+    \ifHy@toolbar\else /HideToolbar true\fi
+    \ifHy@menubar\else /HideMenubar true\fi
+    \ifHy@windowui\else /HideWindowUI true\fi
+    \ifHy@fitwindow /FitWindow true\fi
+    \ifHy@centerwindow /CenterWindow true\fi
+    \ifHy@displaydoctitle /DisplayDocTitle true\fi
+    \Hy@UseNameKey{NonFullScreenPageMode}\@pdfnonfullscreenpagemode
+    \Hy@UseNameKey{Direction}\@pdfdirection
+    \Hy@UseNameKey{ViewArea}\@pdfviewarea
+    \Hy@UseNameKey{ViewClip}\@pdfviewclip
+    \Hy@UseNameKey{PrintArea}\@pdfprintarea
+    \Hy@UseNameKey{PrintClip}\@pdfprintclip
+    \Hy@UseNameKey{PrintScaling}\@pdfprintscaling
+    \Hy@UseNameKey{Duplex}\@pdfduplex
+    \ifx\@pdfpicktraybypdfsize\@empty
+    \else
+      /PickTrayByPDFSize \@pdfpicktraybypdfsize
+    \fi
+    \ifx\@pdfprintpagerange\@empty
+    \else
+      /PrintPageRange[\@pdfprintpagerange]%
+    \fi
+    \ifx\@pdfnumcopies\@empty
+    \else
+      /NumCopies \@pdfnumcopies
+    \fi
+  }%
+  \pdfmark{pdfmark=/PUT,%
+    Raw={%
+      \string{Catalog\string}<<%
+        \ifx\Hy@temp\@empty
+        \else
+          /ViewerPreferences<<\Hy@temp>>%
+        \fi
+        \Hy@UseNameKey{PageLayout}\@pdfpagelayout
+        \ifx\@pdflang\@empty
+        \else
+          /Lang(\@pdflang)%
+        \fi
+      >>%
+    }%
+  }%
+}
+\def\literalps@out#1{\special{ps:#1}}%
+\def\Hy@DistillerDestFix{%
+  \begingroup
+    \let\x\literalps@out
+    \ifnum \@ifundefined{OpMode}{0}{%
+           \@ifundefined{gexmode}{0}{%
+           \ifnum\gexmode>0 \OpMode\else 0\fi
+           }}>1 %
+      \def\x##1{%
+        \immediate\special{!=##1}%
+      }%
+    \fi
+    \x{%
+      /product where{%
+        pop %
+        product(Distiller)search{%
+          pop pop pop %
+          version(.)search{%
+            exch pop exch pop%
+            (3011)eq{%
+              gsave %
+              newpath 0 0 moveto closepath clip%
+              /Courier findfont 10 scalefont setfont %
+              72 72 moveto(.)show %
+              grestore%
+            }if%
+          }{pop}ifelse%
+        }{pop}ifelse%
+      }if%
+    }%
+  \endgroup
+}
+\newif\ifHy@pdfmarkerror
+\def\pdfmark{\@ifnextchar[{\pdfmark@}{\pdfmark@[]}}
+\def\pdfmark@[#1]#2{%
+  \Hy@pdfmarkerrorfalse
+  \edef\@processme{\noexpand\pdf@toks={\the\pdf@defaulttoks}}%
+  \@processme
+  \let\pdf@type\relax
+  \setkeys{PDF}{#2}%
+  \ifHy@pdfmarkerror
+  \else
+    \ifx\pdf@type\relax
+       \Hy@WarningNoLine{no pdfmark type specified in #2!!}%
+       \ifx\\#1\\\relax\else\pdf@rect{#1}\fi
+    \else
+       \ifx\\#1\\\relax
+  \literalps@out{[\the\pdf@toks\space\pdf@type\space pdfmark}%
+       \else
+         \@ifundefined{@\pdf@linktype color}{%
+           \Hy@colorlink\@linkcolor
+         }{%
+           \expandafter\Hy@colorlink
+                       \csname @\pdf@linktype color\endcsname
+         }%
+         \pdf@rect{#1}%
+  \literalps@out{[\the\pdf@toks\space\pdf@type\space pdfmark}%
+         \Hy@endcolorlink
+       \fi
+    \fi
+  \fi
+}
+\newsavebox{\pdf@box}
+\providecommand*{\Hy@setouterhbox}{\sbox}
+\providecommand*{\Hy@breaklinksunhbox}{\unhbox}
+\def\Hy@DEST{/DEST}
+\def\pdf@rect#1{%
+  \leavevmode
+  \ifHy@breaklinks
+    \Hy@setouterhbox\pdf@box{#1}%
+  \else
+    \sbox\pdf@box{#1}%
+  \fi
+  \dimen@\ht\pdf@box
+  \ifdim\dp\pdf@box=\z@
+    \literalps@out{H.S}%
+  \else
+    \lower\dp\pdf@box\hbox{\literalps@out{H.S}}%
+  \fi
+  \ifHy@breaklinks
+    \expandafter\Hy@breaklinksunhbox
+  \else
+    \expandafter\box
+  \fi
+  \pdf@box
+  \ifdim\dimen@=\z@
+    \literalps@out{H.R}%
+  \else
+    \raise\dimen@\hbox{\literalps@out{H.R}}%
+  \fi
+  \ifx\pdf@type\Hy@DEST
+  \else
+    \pdf@addtoksx{H.B}%
+  \fi
+}
+\newtoks\pdf@toks
+\newtoks\pdf@defaulttoks
+\pdf@defaulttoks={}%
+\def\pdf@addtoks#1#2{%
+  \edef\@processme{\pdf@toks{\the\pdf@toks\space /#2 #1}}%
+  \@processme
+}
+\def\pdf@addtoksx#1{%
+  \edef\@processme{\pdf@toks{\the\pdf@toks\space #1}}%
+  \@processme
+}
+\def\PDFdefaults#1{%
+  \pdf@defaulttoks={#1}%
+}
+\define@key{PDF}{pdfmark}{\def\pdf@type{#1}}
+\define@key{PDF}{linktype}{\def\pdf@linktype{#1}}
+\def\pdf@linktype{link}
+\define@key{PDF}{Raw}{\pdf@addtoksx{#1}}
+\define@key{PDF}{Action}{\pdf@addtoks{#1}{Action}}
+\define@key{PDF}{Border}{%
+  \edef\Hy@temp{#1}%
+  \ifx\Hy@temp\@empty
+  \else
+    \pdf@addtoks{[#1]\Hy@BorderArrayPatch}{Border}% hash-ok
+  \fi
+}
+\let\Hy@BorderArrayPatch\@empty
+\define@key{PDF}{BorderStyle}{%
+  \edef\Hy@temp{#1}%
+  \ifx\Hy@temp\@empty
+  \else
+    \pdf@addtoks{<<#1>>}{BS}%
+  \fi
+}
+\define@key{PDF}{Color}{%
+  \ifx\relax#1\relax
+  \else
+    \pdf@addtoks{[#1]}{Color}% hash-ok
+  \fi
+}
+\define@key{PDF}{Contents}{\pdf@addtoks{(#1)}{Contents}}
+\define@key{PDF}{Count}{\pdf@addtoks{#1}{Count}}
+\define@key{PDF}{CropBox}{\pdf@addtoks{[#1]}{CropBox}}% hash-ok
+\define@key{PDF}{DOSFile}{\pdf@addtoks{(#1)}{DOSFile}}
+\define@key{PDF}{DataSource}{\pdf@addtoks{(#1)}{DataSource}}
+\define@key{PDF}{Dest}{%
+  \Hy@pstringdef\Hy@pstringDest{#1}%
+  \ifx\Hy@pstringDest\@empty
+    \Hy@pdfmarkerrortrue
+    \Hy@Warning{Destination with empty name ignored}%
+  \else
+    \pdf@addtoks{(\Hy@pstringDest) cvn}{Dest}%
+  \fi
+}
+\define@key{PDF}{DestAnchor}{%
+  \Hy@pstringdef\Hy@pstringDest{#1}%
+  \ifx\Hy@pstringDest\@empty
+    \Hy@pdfmarkerrortrue
+    \Hy@Warning{Destination with empty name ignored}%
+  \else
+    \pdf@addtoks{(\Hy@pstringDest) cvn}{Dest}%
+  \fi
+}
+\define@key{PDF}{Dir}{\pdf@addtoks{(#1)}{Dir}}
+\define@key{PDF}{File}{\pdf@addtoks{(#1)}{File}}
+\define@key{PDF}{Flags}{\pdf@addtoks{#1}{Flags}}
+\define@key{PDF}{AcroHighlight}{%
+  \begingroup
+    \edef\x{#1}%
+  \expandafter\endgroup\ifx\x\@empty
+  \else
+    \pdf@addtoks{#1}{H}%
+  \fi
+}
+\define@key{PDF}{ID}{\pdf@addtoks{[#1]}{ID}}% hash-ok
+\define@key{PDF}{MacFile}{\pdf@addtoks{(#1)}{MacFile}}
+\define@key{PDF}{ModDate}{\pdf@addtoks{(#1)}{ModDate}}
+\define@key{PDF}{Op}{\pdf@addtoks{(#1)}{Op}}
+\define@key{PDF}{Open}{\pdf@addtoks{#1}{Open}}
+\define@key{PDF}{Page}{\pdf@addtoks{#1}{Page}}
+\define@key{PDF}{PageMode}{\pdf@addtoks{#1}{PageMode}}
+\define@key{PDF}{Params}{\pdf@addtoks{(#1)}{Params}}
+\define@key{PDF}{Rect}{\pdf@addtoks{[#1]}{Rect}}% hash-ok
+\define@key{PDF}{SrcPg}{\pdf@addtoks{#1}{SrcPg}}
+\define@key{PDF}{Subtype}{\pdf@addtoks{#1}{Subtype}}
+\define@key{PDF}{Title}{\pdf@addtoks{(#1)}{Title}}
+\define@key{PDF}{Unix}{\pdf@addtoks{(#1)}{Unix}}
+\define@key{PDF}{UnixFile}{\pdf@addtoks{(#1)}{UnixFile}}
+\define@key{PDF}{View}{\pdf@addtoks{[#1]}{View}}% hash-ok
+\define@key{PDF}{WinFile}{\pdf@addtoks{(#1)}{WinFile}}
+\define@key{PDF}{Author}{\pdf@addtoks{(#1)}{Author}}
+\define@key{PDF}{Creator}{\pdf@addtoks{(#1)}{Creator}}
+\define@key{PDF}{CreationDate}{\pdf@addtoks{(#1)}{CreationDate}}
+\define@key{PDF}{ModDate}{\pdf@addtoks{(#1)}{ModDate}}
+\define@key{PDF}{Producer}{\pdf@addtoks{(#1)}{Producer}}
+\define@key{PDF}{Subject}{\pdf@addtoks{(#1)}{Subject}}
+\define@key{PDF}{Keywords}{\pdf@addtoks{(#1)}{Keywords}}
+\define@key{PDF}{ModDate}{\pdf@addtoks{(#1)}{ModDate}}
+\define@key{PDF}{Base}{\pdf@addtoks{(#1)}{Base}}
+\define@key{PDF}{URI}{\pdf@addtoks{#1}{URI}}
+\endinput
+%%
+%% End of file `hdviwind.def'.

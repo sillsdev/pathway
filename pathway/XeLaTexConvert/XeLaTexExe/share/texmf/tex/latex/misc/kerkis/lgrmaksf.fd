@@ -1,0 +1,45 @@
+%File name lgrmaksf.fd
+%A. Tsolomitis
+%University of the Aegean
+%Department of Mathematics
+%Copyright Dec 2002
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY    
+
+
+\DeclareFontShape{LGR}{maksf}{m}{n}{<-> s * [0.90] gksf7t}{}
+\DeclareFontShape{LGR}{maksf}{m}{it}{<-> s * [0.90] gksfi7t}{}  
+\DeclareFontShape{LGR}{maksf}{m}{sl}{<-> s * [0.90] gksfi7t}{}
+\DeclareFontShape{LGR}{maksf}{m}{sc}{<-> s * [0.90] gksfsc7t}{}
+\DeclareFontShape{LGR}{maksf}{b}{n}{<-> s * [0.90] gksfb7t}{}  
+\DeclareFontShape{LGR}{maksf}{b}{it}{<-> s * [0.90] gksfbi7t}{}
+\DeclareFontShape{LGR}{maksf}{b}{sl}{<-> s * [0.90] gksfbi7t}{}  
+
+\DeclareFontShape{LGR}{maksf}{bx}{n}{ <-> s * [0.90] gksfb7t}{}
+\DeclareFontShape{LGR}{maksf}{bx}{it}{ <-> s * [0.90] gksfbi7t}{}
+\DeclareFontShape{LGR}{maksf}{bx}{sl}{ <-> s * [0.90] gksfbi7t}{}
+
+
+
+\endinput
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

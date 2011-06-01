@@ -1,0 +1,15 @@
+%
+% To use kerkis.sty in non LGR text
+%
+\DeclareFontEncoding{LGR}{}{}
+\DeclareFontSubstitution{LGR}{mak}{m}{n}
+\DeclareErrorFont{LGR}{mak}{m}{n}{10}
+\ProvideTextCommand{\textcopyright}{LGR}{%
+  \textcircled{\textlatin{c}}}
+\ProvideTextCommand{\textregistered}{LGR}{%
+  \textcircled{\textlatin{\textsc r}}}
+\ProvideTextCommand{\texttrademark}{LGR}{%
+  \textsuperscript{\textlatin{TM}}}
+\ProvideTextCommand{\SS}{LGR}{%
+  \textlatin{SS}}
+\endinput

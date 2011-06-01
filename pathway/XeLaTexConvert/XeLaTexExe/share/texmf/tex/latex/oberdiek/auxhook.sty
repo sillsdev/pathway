@@ -1,0 +1,110 @@
+%%
+%% This is file `auxhook.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% auxhook.dtx  (with options: `package')
+%% 
+%% This is a generated file.
+%% 
+%% Copyright (C) 2006, 2007 by Heiko Oberdiek <oberdiek@uni-freiburg.de>
+%% 
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3 of this license or (at your option) any later
+%% version. The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of
+%% LaTeX version 2005/12/01 or later.
+%% 
+%% This work has the LPPL maintenance status "maintained".
+%% 
+%% This Current Maintainer of this work is Heiko Oberdiek.
+%% 
+%% This work consists of the main source file auxhook.dtx
+%% and the derived files
+%%    auxhook.sty, auxhook.pdf, auxhook.ins, auxhook.drv.
+%% 
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{auxhook}%
+  [2007/04/06 v1.1 Hooks for auxiliary files (HO)]%
+\providecommand*{\@beginmainauxhook}{}
+\providecommand*{\@beginpartauxhook}{}
+\newcommand{\AddLineBeginMainAux}[1]{%
+  \g@addto@macro\@beginmainauxhook{%
+    \immediate\write\@mainaux{#1}%
+  }%
+}
+\newcommand{\AddLineBeginPartAux}[1]{%
+  \g@addto@macro\@beginpartauxhook{%
+    \immediate\write\@partaux{#1}%
+  }%
+}
+\newcommand{\AddLineBeginAux}[1]{%
+  \AddLineBeginMainAux{#1}%
+  \AddLineBeginPartAux{#1}%
+}
+\begingroup
+  \@ifundefined{beamer@origdocument}{%
+    \def\auxhook@document{\document}%
+  }{%
+    \def\auxhook@document{\beamer@origdocument}%
+  }%
+  \long\def\y#1\immediate\write\@mainaux#2#3\auxhook@nil{%
+    \toks@{%
+      #1\immediate\write\@mainaux{#2}%
+      \@beginmainauxhook
+      #3%
+    }%
+    \expandafter\xdef\auxhook@document{\the\toks@}%
+    \endgroup
+  }%
+  \long\def\x#1\immediate\write\@mainaux#2#3\auxhook@nil{%
+    \toks@{#3}%
+    \edef\x{\the\toks@}%
+    \ifx\x\@empty
+      \PackageWarningNoLine{auxhook}{%
+        Cannot patch \expandafter\string\auxhook@document,%
+        \MessageBreak
+        using \string\AtBeginDocument\space instead%
+      }%
+      \endgroup
+      \AtBeginDocument{%
+        \if@filesw
+          \@beginmainauxhook
+        \fi
+      }%
+    \else
+      \expandafter\expandafter\expandafter\y\auxhook@document
+          \auxhook@nil
+    \fi
+  }%
+\expandafter\expandafter\expandafter\x\auxhook@document
+    \immediate\write\@mainaux{}\auxhook@nil
+\begingroup
+  \long\def\y#1\immediate\write\@partaux#2#3\auxhook@nil{%
+    \endgroup
+    \def\@include##1 {%
+      #1\immediate\write\@partaux{#2}%
+      \@beginpartauxhook
+      #3%
+    }%
+  }%
+  \long\def\x#1\immediate\write\@partaux#2#3\auxhook@nil{%
+    \toks@{#3}%
+    \edef\x{\the\toks@}%
+    \ifx\x\@empty
+      \PackageWarningNoLine{auxhook}{%
+        Cannot patch \string\@include,\MessageBreak
+        patch dropped%
+      }%
+      \endgroup
+    \else
+      \expandafter\y\@include{##1} \auxhook@nil
+    \fi
+  }%
+\expandafter\x\@include{#1} \immediate\write\@partaux{}\auxhook@nil
+\endinput
+%%
+%% End of file `auxhook.sty'.

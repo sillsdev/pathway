@@ -1,0 +1,99 @@
+%%
+%% This is file `rotfloat.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% rotfloat.dtx  (with options: `package')
+%% 
+%% Copyright (c) 1995-2002 Axel Sommerfeldt (rotfloat@sommerfeldt.net)
+%% 
+%% This file is part of the rotfloat package.
+%% ------------------------------------------
+%% 
+%% It may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.2
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+\NeedsTeXFormat{LaTeX2e}[1994/12/01]
+\ProvidesPackage{rotfloat}[2002/02/02 v1.1 rotfloat package (AS)]
+\typeout{Package: rotfloat v1.1 <2002/02/02> (Axel Sommerfeldt)}
+\DeclareOption*{\PassOptionsToPackage{\CurrentOption}{rotating}}
+\ProcessOptions
+\RequirePackage{float}[1994/06/20]      % >= version 1.2
+\RequirePackage{rotating}%[1995/01/06]  % >= version 2.6
+\let\rotfloat@xoftwo\@firstoftwo
+\ifx\@float@HH\undefined
+  \wlog{rotfloat package: v1.2 of float detected}
+  \let\rotfloat@HH\@HHfloat
+  \let\rotfloat@restyle\restylefloat
+  \def\@HHfloat#1[H]{%
+    \rotfloat@xoftwo{\rotfloat@HH{#1}[H]}{\@Hxfloat{#1}[!ht]}}
+  \renewcommand*\restylefloat[1]{%
+    \rotfloat@restyle{#1}%
+    \@namedef{sideways#1}{%
+      \let\rotfloat@xoftwo\@secondoftwo\columnwidth\textheight
+      \@nameuse{fst@#1}\@float{#1}}%
+    \expandafter\let\csname endsideways#1\endcsname\rotfloat@end
+    \ifx\@rotdblfloat\undefined
+      \@namedef{sideways#1*}{%
+        \PackageError{rotfloat}{%
+          You need rotating version 2.10 or newer to do this}{\@ehd}%
+        \@nameuse{sideways#1}}%
+      \expandafter\let\csname endsideways#1*\endcsname\rotfloat@end
+    \else
+      \@namedef{sideways#1*}{%
+        \let\rotfloat@xoftwo\@secondoftwo\columnwidth\textheight
+        \@nameuse{fst@#1}\@dblfloat{#1}}%
+      \expandafter\let\csname endsideways#1*\endcsname\rotfloat@dblend
+    \fi}
+  \newcommand*\rotfloat@end{%
+    \egroup%
+    \global\setbox\@currbox\vbox\bgroup%
+    \def\@float##1[##2]{}\let\@xfloat\@float\@rotfloat{}%
+    \float@makebox\end@rotfloat}
+  \newcommand*\rotfloat@dblend{%
+    \egroup%
+    \global\setbox\@currbox\vbox\bgroup%
+    \def\@float##1[##2]{}\let\@xfloat\@float\@rotdblfloat{}%
+    \float@makebox\end@rotdblfloat}
+\else
+  \wlog{rotfloat package: v1.3 of float detected}
+  \let\rotfloat@HH\@float@HH
+  \let\rotfloat@restyle\float@restyle
+  \def\@float@HH#1[H]{%
+    \rotfloat@xoftwo{\rotfloat@HH{#1}[H]}{\@float@Hx{#1}[!ht]}}
+  \renewcommand*\float@restyle[1]{%
+    \rotfloat@restyle{#1}%
+    \@namedef{sideways#1}{%
+      \let\rotfloat@xoftwo\@secondoftwo\columnwidth\textheight
+      \@nameuse{fst@#1}\@float@setevery{#1}\@float{#1}}%
+    \expandafter\let\csname endsideways#1\endcsname\rotfloat@end
+    \ifx\@rotdblfloat\undefined
+      \@namedef{sideways#1*}{%
+        \PackageError{rotfloat}{%
+          You need rotating version 2.10 or newer to do this}{\@ehd}%
+        \@nameuse{sideways#1}}%
+      \expandafter\let\csname endsideways#1*\endcsname\rotfloat@end
+    \else
+      \@namedef{sideways#1*}{%
+        \let\rotfloat@xoftwo\@secondoftwo\columnwidth\textheight
+        \@nameuse{fst@#1}\@float@setevery{#1}\@dblfloat{#1}}%
+      \expandafter\let\csname endsideways#1*\endcsname\rotfloat@dblend
+    \fi}
+  \newcommand*\rotfloat@end{\@endfloatbox
+    \global\setbox\@currbox\vbox\bgroup%
+    \def\@float##1[##2]{}\let\@xfloat\@float\@rotfloat{}%
+    \float@makebox\columnwidth\end@rotfloat}
+  \newcommand*\rotfloat@dblend{\@endfloatbox
+    \global\setbox\@currbox\vbox\bgroup%
+    \def\@float##1[##2]{}\let\@xfloat\@float\@rotdblfloat{}%
+    \float@makebox\textwidth\end@rotdblfloat}
+\fi
+\endinput
+%%
+%% End of file `rotfloat.sty'.

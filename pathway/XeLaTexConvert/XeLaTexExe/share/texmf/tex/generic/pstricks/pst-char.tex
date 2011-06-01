@@ -1,0 +1,91 @@
+%% BEGIN pst-char.tex
+%%
+%% Stroking and filling characters with line and fill styles with PSTricks 97.
+%% See the PSTricks User's Guide for description.
+%% See chartest.tex for sample input.
+%%
+\def\fileversion{97 patch 3}
+\def\filedate{1999/03/11}
+%%
+%% COPYRIGHT 1993, 1994, 1999 by Timothy Van Zandt, tvz@nwu.edu.
+%%
+%% This program can be redistributed and/or modified under the terms
+%% of the LaTeX Project Public License Distributed from CTAN
+%% archives in directory macros/latex/base/lppl.txt.
+%%
+\message{ v\fileversion, \filedate}
+
+\csname PSTcharpathLoaded\endcsname
+\let\PSTcharpathLoaded\endinput
+
+\ifx\PSTricksLoaded\endinput\else
+  \def\next{\input pstricks.tex}
+  \expandafter\next
+\fi
+
+\edef\TheAtCode{\the\catcode`\@}
+\catcode`\@=11
+
+\def\tx@CharPathShow{%
+  /tx@CharPathSavedShow /show load def
+  /show {
+    % These 3 lines check whether charpath yields anything interesting.
+    dup gsave newpath 0 0 moveto
+    true charpath pathbbox grestore
+    3 -1 roll eq 3 1 roll eq and
+    % If not, just use show.
+    { tx@CharPathSavedShow }
+    % Otherwise, use charpath.
+    { true charpath }
+    ifelse }
+  def }
+
+\def\pscharpath{\def\pst@par{}\pst@object{pscharpath}}
+\def\pscharpath@i{\pst@makebox\pscharpath@ii}
+\def\pscharpath@ii{%
+  \leavevmode\hbox{%
+    \pstVerb{\tx@CharPathShow}%
+    \box\pst@hbox
+    \pstVerb{/show /tx@CharPathSavedShow load def}%
+% DG/SR modification begin - Nov. 26, 1998 - Patch 2
+% \if@star is true but \solid@star must not be executed in \begin@ClosedObj !
+%    \begin@ClosedObj
+    \let\solid@starOLD\solid@star
+    \let\solid@star\relax
+    \begin@ClosedObj
+    \let\solid@star\solid@starOLD
+% DG/SR modification end
+      \def\pst@linetype{1}%
+      \psdashadjustfalse
+      \showpointsfalse
+      \let\pst@newpath\@empty
+      \def\use@pscode{%
+        \pst@Verb{%
+          gsave
+            \tx@STV
+            \pst@code
+          grestore
+% DG/SR modification begin - Jul.  3, 1998 / Mar. 11, 1999 - Patches 1 and 3
+%          \if@star\else CP newpath moveto \fi}}%
+          \if@star\else CP newpath moveto \fi}%
+        \gdef\pst@code{}}%
+% DG/SR modification end
+    \end@ClosedObj}}
+
+\def\pscharclip{\def\pst@par{}\pst@object{pscharclip}}
+\def\pscharclip@i{\pst@makebox\pscharclip@ii}
+\def\pscharclip@ii{%
+  \leavevmode
+  \begingroup
+    \begin@psclip
+    {\@startrue\pscharpath@ii}%
+    \pstVerb{clip \if@star\else currentpoint newpath moveto\fi}%
+    \def\endpscharclip{\end@psclip\endgroup}%
+    \ignorespaces}
+\def\endpscharclip{\pst@misplaced\endpscharclip}
+
+\catcode`\@=\TheAtCode\relax
+
+\endinput
+%%
+%% END pst-char.tex

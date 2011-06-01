@@ -1,0 +1,44 @@
+% BGHYPHEN package, version 1.0, June 2000.
+%
+% I used the files in the ruhyphen bundle as templates 
+% in preparing this wrapper for Bulgarian hyphenation patterns. 
+%      Happy BG TeXing: Georgi Boshnakov               
+%
+% Copyright 1998-1999 Werner Lemberg, Vladimir Volovich, Georgi Boshnakov
+% and any individual authors listed elsewhere in package files.
+% See the README file for more information.
+%
+% This package can be redistributed and/or modified under the terms
+% of the LaTeX Project Public License distributed from CTAN
+% archives in directory macros/latex/base/lppl.txt; either
+% version 1 of the License, or (at your option) any later version.
+
+\begingroup
+
+\message{Bulgarian hyphenation patterns}
+
+%
+% Specify the internal (La)TeX cyrillic coding here. 
+% (Do nothing if you do not understand or bother about this.) 
+%
+\ifx\InternalCyrEnc\undefined
+\def\InternalCyrEnc{t2}
+\fi
+
+%
+% Specify which Bulagrian patterns to read.
+% (Do nothing if you do not understand or bother about this.) 
+%
+\ifx\PatternCyrEnc\undefined
+\def\PatternCyrEnc{si}
+\fi
+
+\input catmik
+\input mik2\InternalCyrEnc
+\input bghyph\PatternCyrEnc
+
+\endgroup
+
+\lefthyphenmin2
+\righthyphenmin2
+

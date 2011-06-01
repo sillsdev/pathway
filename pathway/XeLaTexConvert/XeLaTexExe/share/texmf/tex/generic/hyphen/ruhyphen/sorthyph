@@ -1,0 +1,9 @@
+#!/usr/bin/perl
+# sort a hyphenation file
+$| = 1;
+while (<>) { print; last if /^\\patterns{/ }
+open (SORT, "| sh sortkoi8 | awk '{print \$2}'");
+while (<>) { last if /^}/; chomp; $temp=$_; s/[0-9.]//g; print SORT "$_\t$temp\n" }
+close (SORT);
+print;
+while (<>) { print }

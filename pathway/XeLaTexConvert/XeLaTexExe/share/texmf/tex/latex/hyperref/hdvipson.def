@@ -1,0 +1,181 @@
+%%
+%% This is file `hdvipson.def',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% hyperref.dtx  (with options: `dvipsone')
+%% 
+%% File: hyperref.dtx Copyright 1995-2001 Sebastian Rahtz,
+%% with portions written by David Carlisle and Heiko Oberdiek,
+%% 2001-2007 Heiko Oberdiek.
+%%
+%% This file is part of the `Hyperref Bundle'.
+%% -------------------------------------------
+%%
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%%
+%% The list of all files belonging to the `Hyperref Bundle' is
+%% given in the file `manifest.txt'.
+%%
+\ProvidesFile{hdvipson.def}
+  [2007/10/30 v6.77b
+  Hyperref driver for dvipsone]
+\providecommand*\@pdfborder{0 0 1}
+\providecommand*\@pdfborderstyle{}
+\input{pdfmark.def}%
+\ifx\@pdfproducer\relax
+  \def\@pdfproducer{dvipsone + Distiller}%
+\fi
+\def\literalps@out#1{\special{ps:#1}}%
+\def\headerps@out#1{\special{! #1}}%
+\def\PDF@FinishDoc{%
+  \Hy@UseMaketitleInfos
+  \special{PDF: Keywords \@pdfkeywords}%
+  \special{PDF: Title \@pdftitle}%
+  \special{PDF: Creator \@pdfcreator}%
+  \ifx\@pdfcreationdate\@empty
+  \else
+    \special{PDF: CreationDate \@pdfcreationdate}%
+  \fi
+  \ifx\@pdfmoddate\@empty
+  \else
+    \special{PDF: ModDate \@pdfmoddate}%
+  \fi
+  \special{PDF: Author \@pdfauthor}%
+  \ifx\@pdfproducer\relax
+  \else
+    \special{PDF: Producer \@pdfproducer}%
+  \fi
+  \special{PDF: Subject \@pdfsubject}%
+  \Hy@DisableOption{pdfauthor}%
+  \Hy@DisableOption{pdftitle}%
+  \Hy@DisableOption{pdfsubject}%
+  \Hy@DisableOption{pdfcreator}%
+  \Hy@DisableOption{pdfcreationdate}%
+  \Hy@DisableOption{pdfmoddate}%
+  \Hy@DisableOption{pdfproducer}%
+  \Hy@DisableOption{pdfkeywords}%
+}
+\def\PDF@SetupDoc{%
+  \pdfmark{%
+    pdfmark=/DOCVIEW,%
+    Page=\@pdfstartpage,%
+    View=\@pdfstartview,%
+    PageMode=/\@pdfpagemode
+  }%
+  \ifx\@pdfpagescrop\@empty
+  \else
+    \pdfmark{pdfmark=/PAGES,CropBox=\@pdfpagescrop}%
+  \fi
+  \edef\Hy@temp{%
+    \ifHy@toolbar\else /HideToolbar true\fi
+    \ifHy@menubar\else /HideMenubar true\fi
+    \ifHy@windowui\else /HideWindowUI true\fi
+    \ifHy@fitwindow /FitWindow true\fi
+    \ifHy@centerwindow /CenterWindow true\fi
+    \ifHy@displaydoctitle /DisplayDocTitle true\fi
+    \Hy@UseNameKey{NonFullScreenPageMode}\@pdfnonfullscreenpagemode
+    \Hy@UseNameKey{Direction}\@pdfdirection
+    \Hy@UseNameKey{ViewArea}\@pdfviewarea
+    \Hy@UseNameKey{ViewClip}\@pdfviewclip
+    \Hy@UseNameKey{PrintArea}\@pdfprintarea
+    \Hy@UseNameKey{PrintClip}\@pdfprintclip
+    \Hy@UseNameKey{PrintScaling}\@pdfprintscaling
+    \Hy@UseNameKey{Duplex}\@pdfduplex
+    \ifx\@pdfpicktraybypdfsize\@empty
+    \else
+      /PickTrayByPDFSize \@pdfpicktraybypdfsize
+    \fi
+    \ifx\@pdfprintpagerange\@empty
+    \else
+      /PrintPageRange[\@pdfprintpagerange]%
+    \fi
+    \ifx\@pdfnumcopies\@empty
+    \else
+      /NumCopies \@pdfnumcopies
+    \fi
+  }%
+  \Hy@pstringdef\Hy@pstringB{\@baseurl}%
+  \pdfmark{%
+    pdfmark=/PUT,%
+    Raw={%
+      \string{Catalog\string}<<%
+        \ifx\Hy@temp\@empty
+        \else
+          /ViewerPreferences<<\Hy@temp>>%
+        \fi
+        \Hy@UseNameKey{PageLayout}\@pdfpagelayout
+        \ifx\@pdflang\@empty
+        \else
+          /Lang(\@pdflang)%
+        \fi
+        \ifx\@baseurl\@empty
+        \else
+          /URI<</Base(\Hy@pstringB)>>%
+        \fi
+      >>%
+    }%
+  }%
+}
+\providecommand*\@pdfview{XYZ}
+\providecommand*\@pdfviewparams{ %
+  gsave revscl currentpoint grestore %
+  72 add exch pop null exch null%
+}
+\def\Hy@BorderArrayPatch{BorderArrayPatch}
+\special{headertext=%
+  /DvipsToPDF { 65781 div  } def%
+  /PDFToDvips { 65781 mul } def%
+  /BPToDvips{65781 mul}def%
+  /HyperBorder  { 1 PDFToDvips } def%
+  /H.B {/Rect[pdf@llx pdf@lly pdf@urx pdf@ury]} def%
+    /BorderArrayPatch{%
+      [exch{%
+        dup dup type/integertype eq exch type/realtype eq or%
+        {BPToDvips}if%
+      }forall]%
+    }def%
+  /H.S {%
+    currentpoint %
+    HyperBorder add /pdf@lly exch def %
+    dup DvipsToPDF 72 add /pdf@hoff exch def %
+    HyperBorder sub /pdf@llx exch def%
+  } def%
+  /H.L {%
+    2 sub %
+    PDFToDvips /HyperBase exch def %
+    currentpoint %
+    HyperBase sub /pdf@ury exch def%
+    /pdf@urx exch def%
+  } def%
+  /H.A {%
+    H.L %
+    currentpoint exch pop %
+    HyperBase sub % baseline skip
+    DvipsToPDF /pdf@voff exch def%
+  } def%
+  /H.R {%
+    currentpoint %
+    HyperBorder sub /pdf@ury exch def %
+    HyperBorder add /pdf@urx exch def %
+    currentpoint exch pop DvipsToPDF /pdf@voff exch def%
+  } def %
+  systemdict%
+  /pdfmark known%
+  {%
+    userdict /?pdfmark /exec load put%
+  }{%
+    userdict /?pdfmark /pop load put %
+    userdict /pdfmark systemdict /cleartomark get put%
+  }%
+  ifelse%
+}
+\endinput
+%%
+%% End of file `hdvipson.def'.

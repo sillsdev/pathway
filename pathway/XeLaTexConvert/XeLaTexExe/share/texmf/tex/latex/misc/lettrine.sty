@@ -1,0 +1,171 @@
+%%
+%% This is file `lettrine.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% lettrine.dtx  (with options: `code')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from lettrine.sty.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file lettrine.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+\ProvidesFile{lettrine.sty}
+        [2002/10/26 v1.4 (D. Flipo)]
+%% Please report errors to: Daniel.Flipo@univ-lille1.fr
+%%
+\NeedsTeXFormat{LaTeX2e}[1995/12/01] \RequirePackage{keyval}
+\newcounter{DefaultLines}
+\setcounter{DefaultLines}{2}
+\newcommand{\DefaultLoversize}{0}
+\newcommand{\DefaultLraise}{0}
+\newcommand{\DefaultLhang}{0}
+\newdimen\DefaultFindent
+\setlength{\DefaultFindent}{\z@}
+\newdimen\DefaultNindent
+\setlength{\DefaultNindent}{0.5em}
+\newdimen\DefaultSlope
+\setlength{\DefaultSlope}{\z@}
+\newsavebox{\L@lbox}
+\newsavebox{\L@tbox}
+\newcounter{L@lines}
+\newdimen\L@Pindent
+\newdimen\L@Findent
+\newdimen\L@Nindent
+\newdimen\L@lraise
+\newdimen\L@first
+\newdimen\L@next
+\newdimen\L@slope
+\newdimen\L@height
+\newcommand{\L@hang}{}
+\newcommand{\L@oversize}{}
+\newcommand{\L@raise}{}
+\newcommand{\L@ante}{}
+\newcommand{\LettrineTextFont}{\scshape}
+\def\Lettrine@height{%
+   \@tempdima=\baselineskip
+   \setlength{\L@height}{\theL@lines\@tempdima}%
+   \ifnum\theL@lines>1%
+     \addtolength{\L@height}{-\@tempdima}%
+   \fi
+   \sbox{\L@tbox}{\LettrineTextFont x}%
+   \addtolength{\L@height}{\ht\L@tbox}%
+   \addtolength{\L@height}{\L@oversize\L@height}}
+\newcommand{\LettrineFontHook}{}
+\newcommand{\LettrineFont}{%
+   \Lettrine@height
+   \sbox{\L@tbox}{\LettrineFontHook\fontsize{\L@height}{\L@height}%
+                  \selectfont X}%
+   \@tempcntb=\ht\L@tbox
+   \@tempcnta=\L@height
+   \multiply\@tempcnta by 100%
+   \divide\@tempcntb by 100%
+   \divide\@tempcnta by \@tempcntb
+   \advance\@tempcnta by -9999%
+   \ifnum\@tempcnta>0%
+     \def\@tempa{1.\the\@tempcnta}%
+   \else
+     \def\@tempa{1}%
+   \fi
+   \LettrineFontHook
+   \fontsize{\@tempa\L@height}{\@tempa\L@height}%
+   \selectfont}
+\newcommand{\LettrineFontEPS}{%
+   \Lettrine@height
+   \includegraphics[height=\L@height]}
+\define@key{L}{lines}{\setcounter{L@lines}{#1}}
+\define@key{L}{lhang}{\renewcommand{\L@hang}{#1}}
+\define@key{L}{loversize}{\renewcommand{\L@oversize}{#1}}
+\define@key{L}{lraise}{\renewcommand{\L@raise}{#1}}
+\define@key{L}{ante}{\renewcommand{\L@ante}{#1}}
+\define@key{L}{findent}{\setlength{\L@Findent}{#1}}
+\define@key{L}{nindent}{\setlength{\L@Nindent}{#1}}
+\define@key{L}{slope}{\setlength{\L@slope}{#1}}
+\def\lettrine{\@ifnextchar[\@lettrine{\@lettrine[]}}
+\def\@lettrine[#1]#2#3{%
+  \setcounter{L@lines}{\theDefaultLines}%
+  \renewcommand{\L@hang}{\DefaultLhang}%
+  \renewcommand{\L@oversize}{\DefaultLoversize}%
+  \renewcommand{\L@raise}{\DefaultLraise}%
+  \renewcommand{\L@ante}{}%
+  \setlength{\L@Findent}{\DefaultFindent}%
+  \setlength{\L@Nindent}{\DefaultNindent}%
+  \setlength{\L@slope}{\DefaultSlope}%
+  \setkeys{L}{#1}%
+  \sbox{\L@lbox}{\LettrineFont #2}%
+  \sbox{\L@tbox}{\LettrineTextFont #3}%
+   \@tempdima=\baselineskip
+   \ifnum\theL@lines=1%
+     \setlength{\L@first}{\ht\L@lbox}%
+     \addtolength{\L@first}{-\ht\L@tbox}%
+     \setlength{\L@lraise}{\z@}%
+   \else
+     \setlength{\L@first}{-\theL@lines\@tempdima}%
+     \addtolength{\L@first}{\@tempdima}%
+     \sbox{\@tempboxa}{\LettrineTextFont x}%
+     \addtolength{\L@first}{-\ht\@tempboxa}%
+     \setlength{\L@lraise}{-\L@raise\L@first}%
+     \addtolength{\L@first}{\L@lraise}%
+     \addtolength{\L@first}{\ht\L@lbox}%
+     \addtolength{\L@lraise}{-\theL@lines\@tempdima}%
+     \addtolength{\L@lraise}{\@tempdima}%
+   \fi
+   \par
+   \ifdim\L@first>0.2\p@\vskip\L@first\fi
+  \setlength{\L@Pindent}{\wd\L@lbox}%
+  \addtolength{\L@Pindent}{-\L@hang\wd\L@lbox}%
+  \settowidth{\L@first}{\L@ante}%
+  \addtolength{\L@Pindent}{\L@first}%
+  \addtolength{\L@Pindent}{\L@Findent}%
+  \setlength{\L@first}{\linewidth}%
+  \addtolength{\L@first}{-\L@Pindent}%
+  \addtolength{\L@Nindent}{\L@Pindent}%
+  \setlength{\L@next}{\linewidth}%
+  \addtolength{\L@next}{-\L@Nindent}%
+  \addtolength{\L@Pindent}{\rightmargin}%
+  \addtolength{\L@Nindent}{\rightmargin}%
+  \addtocounter{L@lines}{1}%
+  \def\L@parshape{\c@L@lines \the\L@Pindent \the\L@first}%
+  \@tempcnta=\tw@
+  \@whilenum \@tempcnta<\c@L@lines\do{%
+     \edef\L@parshape{\L@parshape \the\L@Nindent \the\L@next}%
+     \addtolength{\L@Nindent}{\L@slope}%
+     \addtolength{\L@next}{-\L@slope}%
+     \advance\@tempcnta\@ne}%
+  \edef\L@parshape{\L@parshape \rightmargin \the\linewidth}%
+  \noindent\leavevmode
+  \parshape=\L@parshape
+  $\smash{\llap{\mbox{\L@ante}\raisebox{\L@lraise}{\usebox{\L@lbox}}%
+          \hskip \the\L@Findent}}$%
+  \usebox{\L@tbox}}
+\InputIfFileExists{lettrine.cfg}{}{}
+%%
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%
+\endinput
+%%
+%% End of file `lettrine.sty'.

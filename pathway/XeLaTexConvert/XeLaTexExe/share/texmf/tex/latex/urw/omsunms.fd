@@ -1,0 +1,19 @@
+\ProvidesFile{omsunms.fd}
+\DeclareFontFamily{OMS}{unms}{\skewchar\font48}
+\DeclareFontShape{OMS}{unms}{m}{n}
+   {<-> ssub * cmsy/m/n}{}
+\DeclareFontShape{OMS}{unms}{m}{it}
+   {<-> ssub * cmsy/m/n}{}
+\DeclareFontShape{OMS}{unms}{m}{sl}
+   {<-> ssub * cmsy/m/n}{}
+\DeclareFontShape{OMS}{unms}{m}{sc}
+   {<-> ssub * cmsy/m/n}{}
+\DeclareFontShape{OMS}{unms}{b}{n}
+   {<-> ssub * cmsy/b/n}{}
+\DeclareFontShape{OMS}{unms}{b}{it}
+   {<-> ssub * cmsy/b/n}{}
+\DeclareFontShape{OMS}{unms}{b}{sl}
+   {<-> ssub * cmsy/b/n}{}
+\DeclareFontShape{OMS}{unms}{b}{sc}
+   {<-> ssub * cmsy/b/n}{}
+\endinput

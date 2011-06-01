@@ -1,0 +1,112 @@
+%% A test of LY1 (TeX 'n ANSI) encoding setup for LaTeX 2e
+
+\documentclass{article}
+
+% times.sty or mathtime.sty does this anyway (advantage of using
+% same names inside LaTeX, even if using other names externally)
+% \def\familydefault{ptm}
+% \def\bfdefault{b}
+% \def\rmdefault{ptm}
+% \def\sfdefault{phv}
+% \def\ttdefault{pcr}
+
+% Choose one of these
+
+\usepackage[LY1]{fontenc}
+%%\usepackage[T1]{fontenc}
+
+\usepackage[LY1]{mathtime}
+%%\usepackage[T1]{mathtime}
+%%\usepackage[mtbold,LY1]{mathtime}
+
+%%\usepackage{bm}
+
+\scrollmode
+
+\begin{document}
+
+\texttt{tt text \textsl{sl text} \textit{it text}}
+
+\textbf{\texttt{tt text \textsl{sl text} \textit{it text}}}
+
+
+\textsf{sf text \textsl{sl text} \textit{it text}}
+
+\textbf{\textsf{sf text \textsl{sl text} \textit{it text}}}
+
+
+
+\textrm{rm text \textsl{sl text} \textit{it text}}
+
+\textbf{\textrm{rm text \textsl{sl text}  \textit{it text}}}
+
+
+Extras: \TH \th \DH \dh  \AA \aa 
+
+Extras: \L \l \pounds \copyright\ \textregistered\ \texttrademark 
+ 
+Accented: \"A \`A \'A \^A \"a \`a \'a \^a
+
+Accented: \"E \`E \'E \^E \"e \`e \'e \^e
+
+Accented: \"I \`I \'I \^I \"i \`i \'i \^i  \"\i\ \`\i\ \'\i\ \^\i
+
+Accented: \"O \`O \'O \^O \"o \`o \'o \^o
+
+Accented: \"U \`U \'U \^U \"u \`u \'u \^u
+
+Accented: \"Y \'Y \"y \'y \v S \v s \v Z \v z
+
+Accented: \r A \r a \~A \~a \~N \~n \~O \~o \c C \c c
+
+Constructed:  \c S \c s \c T \c t  \`Y  \~Y \^Y  \`y  \~y \^y
+
+% The ogoneks don't work too well...
+
+Constructed:  \k S \k s \k T \k t (\verb|\k|)
+
+Constructed: \v T \v t \~E \~e  \~U \~u \~\i\ \~i
+
+% Mostly reconsitituted in `LY1'
+
+\r{a} \r{e} \r{A} \r{E}
+
+\v{s} \v{z} \v{S} \v{Z}
+
+\r{a} \r{e} \r{A} \r{E}
+
+\H{a} \H{u} 
+
+\L \l
+
+\.{s} \.{z} \.{S} \.{Z}
+
+\u{s} \u{z} \u{S} \u{Z}
+
+
+
+\verb|\r{a}| \r{a} \r{A} \verb|\aa| \aa \AA
+
+Expect error message next.  
+
+LY1 encoding does have position for dotlessj.  
+
+But most fonts do not have this glyph. So output warning.
+
+\dh \th  \i \j
+
+`quotes' and ``double quotes''
+
+TEXT: abc \dag \ddag \S \P  \pounds \_
+
+
+1\textordmasculine\ 2\textordfeminine 
+
+MATH: $ abc \dagger  \ddagger  \S \P \pounds \_ $
+
+accents: \^{} \~{} 
+
+ascii: \textasciicircum\ \textasciitilde
+
+\end{document}
+

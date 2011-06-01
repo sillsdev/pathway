@@ -1,0 +1,205 @@
+%%
+%% This is file `telprint.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% telprint.dtx  (with options: `package')
+%% 
+%% This is a generated file.
+%% 
+%% Copyright (C) 1996, 1997, 2004, 2005, 2006, 2007 by
+%%    Heiko Oberdiek <oberdiek@uni-freiburg.de>
+%% 
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3 of this license or (at your option) any later
+%% version. The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of
+%% LaTeX version 2005/12/01 or later.
+%% 
+%% This work has the LPPL maintenance status "maintained".
+%% 
+%% This Current Maintainer of this work is Heiko Oberdiek.
+%% 
+%% This work consists of the main source file telprint.dtx
+%% and the derived files
+%%    telprint.sty, telprint.pdf, telprint.ins, telprint.drv,
+%%    telprint-test1.tex.
+%% 
+\begingroup
+  \catcode44 12 % ,
+  \catcode45 12 % -
+  \catcode46 12 % .
+  \catcode58 12 % :
+  \catcode64 11 % @
+  \expandafter\let\expandafter\x\csname ver@telprint.sty\endcsname
+  \ifcase 0%
+    \ifx\x\relax % plain
+    \else
+      \ifx\x\empty % LaTeX
+      \else
+        1%
+      \fi
+    \fi
+  \else
+    \expandafter\ifx\csname PackageInfo\endcsname\relax
+      \def\x#1#2{%
+        \immediate\write-1{Package #1 Info: #2.}%
+      }%
+    \else
+      \def\x#1#2{\PackageInfo{#1}{#2, stopped}}%
+    \fi
+    \x{telprint}{The package is already loaded}%
+    \endgroup
+    \expandafter\endinput
+  \fi
+\endgroup
+\begingroup
+  \catcode40 12 % (
+  \catcode41 12 % )
+  \catcode44 12 % ,
+  \catcode45 12 % -
+  \catcode46 12 % .
+  \catcode47 12 % /
+  \catcode58 12 % :
+  \catcode64 11 % @
+  \expandafter\ifx\csname ProvidesPackage\endcsname\relax
+    \def\x#1#2#3[#4]{\endgroup
+      \immediate\write-1{Package: #3 #4}%
+      \xdef#1{#4}%
+    }%
+  \else
+    \def\x#1#2[#3]{\endgroup
+      #2[{#3}]%
+      \ifx#1\relax
+        \xdef#1{#3}%
+      \fi
+    }%
+  \fi
+\expandafter\x\csname ver@telprint.sty\endcsname
+\ProvidesPackage{telprint}%
+  [2007/09/09 v1.9 Formatting of German phone numbers (HO)]
+\expandafter\edef\csname TELAtEnd\endcsname{%
+  \catcode64 \the\catcode64\relax
+}
+\catcode64 11 % @
+\def\TMP@EnsureCode#1#2{%
+  \edef\TELAtEnd{%
+    \TELAtEnd
+    \catcode#1 \the\catcode#1\relax
+  }%
+  \catcode#1 #2\relax
+}
+\TMP@EnsureCode{33}{12}% !
+\TMP@EnsureCode{36}{3}% $
+\TMP@EnsureCode{40}{12}% (
+\TMP@EnsureCode{41}{12}% )
+\TMP@EnsureCode{42}{12}% *
+\TMP@EnsureCode{43}{12}% +
+\TMP@EnsureCode{44}{12}% ,
+\TMP@EnsureCode{45}{12}% -
+\TMP@EnsureCode{46}{12}% .
+\TMP@EnsureCode{47}{12}% /
+\TMP@EnsureCode{61}{12}% =
+\TMP@EnsureCode{126}{13}% ~ (active)
+\ifx\DeclareRobustCommand\UnDeFiNeD
+  \def\DeclareRobustCommand*#1[1]{\def#1##1}%
+  \def\TELreset{\let\DeclareRobustCommand=\UnDeFiNeD}%
+  \input infwarerr.sty\relax
+  \@PackageInfo{telprint}{%
+    Macros are not robust!%
+  }%
+\else
+  \let\TELreset=\relax
+\fi
+\DeclareRobustCommand*{\telspace}[1]{\def\TELspace{#1}}
+\telspace{{}$\,${}}
+\DeclareRobustCommand*{\telhyphen}[1]{\def\TELhyphen{#1}}
+\telhyphen{\leavevmode\hbox{-}}% \hbox zur Verhinderung der Trennung
+\DeclareRobustCommand*{\telslash}[1]{\def\TELslash{#1}}
+\telslash{/}%
+\DeclareRobustCommand*{\telleftparen}[1]{\def\TELleftparen{#1}}
+\telleftparen{(}%
+\DeclareRobustCommand*{\telrightparen}[1]{\def\TELrightparen{#1}}
+\telrightparen{)}%
+\DeclareRobustCommand*{\telplus}[1]{\def\TELplus{#1}}
+\telplus{+}%
+\DeclareRobustCommand*{\teltilde}[1]{\def\TELtilde{#1}}
+\teltilde{~}%
+\newtoks\TELtoks
+\def\TELnumber#1#2\TELnumberEND{%
+  \begingroup
+  \def\0{#2}%
+  \expandafter\endgroup
+  \ifx\0\empty
+    \TELtoks=\expandafter{\the\TELtoks#1}%
+    \ifnum\TELswitch=0 %
+      \def\TELx{\TELspace}\def\TELy{}%
+    \else
+      \def\TELx{}\def\TELy{\TELspace}%
+    \fi
+    \the\TELtoks
+  \else
+    \ifnum\TELswitch=0 %
+      \TELtoks=\expandafter{\the\TELtoks#1\TELx}%
+      \def\TELswitch{1}%
+    \else
+      \TELtoks=\expandafter{\the\TELtoks#1\TELy}%
+      \def\TELswitch{0}%
+    \fi
+    \TELnumber#2\TELnumberEND
+  \fi
+}
+\DeclareRobustCommand*{\telnumber}[1]{%
+  \TELtoks={}%
+  \def\TELswitch{0}%
+  \TELnumber#1{}\TELnumberEND
+}
+\def\TELsplit{\futurelet\TELfuture\TELdosplit}
+\def\TELdosplit#1#2\TELsplitEND
+{%
+  \def\TELsp{ }%
+  \expandafter\ifx\TELsp\TELfuture
+    \let\TELfuture=\relax
+    \expandafter\telnumber\expandafter{\the\TELtoks}~%
+    \telprint{#1#2}% Das Leerzeichen kann nicht #1 sein!
+  \else
+    \def\TELfirst{#1}%
+    \ifx\TELfirst\empty
+      \expandafter\telnumber\expandafter{\the\TELtoks}%
+      \TELtoks={}%
+    \else\if-\TELfirst
+      \expandafter\telnumber\expandafter{\the\TELtoks}\TELhyphen
+      \telprint{#2}%
+    \else\if/\TELfirst
+      \expandafter\telnumber\expandafter{\the\TELtoks}\TELslash
+      \telprint{#2}%
+    \else\if(\TELfirst
+      \expandafter\telnumber\expandafter{\the\TELtoks}\TELleftparen
+      \telprint{#2}%
+    \else\if)\TELfirst
+      \expandafter\telnumber\expandafter{\the\TELtoks}\TELrightparen
+      \telprint{#2}%
+    \else\if+\TELfirst
+      \expandafter\telnumber\expandafter{\the\TELtoks}\TELplus
+      \telprint{#2}%
+    \else\def\TELtemp{~}\ifx\TELtemp\TELfirst
+      \expandafter\telnumber\expandafter{\the\TELtoks}\TELtilde
+      \telprint{#2}%
+    \else
+      \TELtoks=\expandafter{\the\TELtoks#1}%
+      \TELsplit#2{}\TELsplitEND
+    \fi\fi\fi\fi\fi\fi\fi
+  \fi
+}
+\DeclareRobustCommand*{\telprint}[1]{%
+  \TELtoks={}%
+  \TELsplit#1{}\TELsplitEND
+}
+\TELreset\let\TELreset=\UnDeFiNeD
+\TELAtEnd
+\endinput
+%%
+%% End of file `telprint.sty'.

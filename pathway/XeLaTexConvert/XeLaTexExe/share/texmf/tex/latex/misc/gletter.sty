@@ -1,0 +1,768 @@
+
+%*****************************************************************************
+%
+%  Modul           : gletter.sty
+%  Author          : Olaf Buckow, EMail: falo@uni-paderborn.de
+%  Date            :  4.06.93
+%
+%  Contents        : Dokumentenstil f"ur Briefe
+%		     entwickelt aus letter.sty vom 25. M"arz 1992 (L. Lamport)
+%		     und dinbrief.sty vom 11. Mai 1992 (R. Sengerling)
+%
+%  Last Modified   : siehe \filedate
+%
+%*****************************************************************************
+
+\def\fileversion{1.3}
+\def\filedate{25. November 1993}
+
+\typeout{Document Style `gletter' von O. Buckow, 
+	 Version \fileversion\space vom \filedate}
+
+%% Der Befehlssatz gliedert sich in Standardbefehle, modifizierte Befehle
+%% und zus"atzliche Befehle, wobei erstere nat"urlich auch (intern)
+%% modifiziert sind!
+%
+% \location{raum_nr}  ist nicht implementiert.
+% \name{absendername} ist nicht implementiert.
+%
+% Standardbefehle:
+% ~~~~~~~~~~~~~~~~
+%
+% \makelabels			% zur Erzeugung von Adre"saufklebern.
+% \signature{absendername}	% "Kaiser Wilhelm" in Klarschrift.
+% \address{absenderanschrift}
+% \telephone{tel_nr}
+% \opening{anrede}		% Hi Folks
+% \closing{gru"sformel}		% und tsch"u"s. \opening und \closing sind wie
+%	\begin{document}, \end{document}, \begin{letter} sowie \end{letter}
+%	zwingend notwendig!
+% \ps				% erm"oglicht weiteren Text nach dem
+%	\closing Befehl. Ein "PS:" mu"s ggf. selbst hinzugef"ugt werden.
+% \encl{anlagenliste}		% KEINE Ausgabe von \enclname!
+%	\encl kann/mu"s VOR dem \closing Befehl auftreten, da \encl "uber
+%	diesen ausgegeben wird.
+% \cc{verteilerliste}		% \underline{\ccname:}\\[.3ex] wird vor
+%	der `verteilerliste' ausgegeben. Ausgabe erfolgt an der Definition-
+%	stelle. \cc darf als Parameter f"ur `anschrift_ohne_ort' verwendet
+%	werden.
+%
+% modifizierte Befehle:
+% ~~~~~~~~~~~~~~~~~~~~~
+%
+% \begin{letter}[postvermerk][anrede]{empf"angeranschrift_ohne_ort}{ort}
+%    brieftext \end{letter}
+%	zus"atzliche Parameter `postvermerk', `anrede' (optional) und `ort'.
+%	`postvermerk' ist f"ur Eintr"age der Art Einschreiben oder
+%	Eilbrief, `anrede' f"ur Eintr"age der Art Firma/Frau/Herr gedacht.
+%	
+%
+% zus"atzliche Befehle (bzw. Optionen, Ma"se etc.):
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%
+% \window			% f"ur Fensterbriefumschl"age.
+% \nowindow			% f"ur normale Briefe; Voreinstellung.
+% \phonesymbol			% statt \phonename wird ein Telefonsymbol
+%	verwendet. Setzt den wasy-Zeichensatz voraus!
+% \nophonesymbol		% Voreinstellung.
+% \citytodate{text}		% f"ur Ortsangaben zum Datum, z.B. `Ort, den'.
+% \yref{ihr_zeichen}
+% \ymail{ihre_nachricht_vom}
+% \myref{unser_zeichen}
+% \subject{betreff_text}
+% \enclright			% plaziert die Anlagen rechts in H"ohe 
+%	der `gru"sformel'.
+% \noenclright			% Anlagen unter den Text; Voreinstellung.
+% \info{infotext}		% Der `infotext' wird auf der 1. Seite im
+%	Fu"s abgelegt; z.B. Bankverbindung.
+% \labelhight			% legt die H"ohe des Adre"saufklebers fest.
+%	\labelhight ist mit 4.1cm vordefiniert.
+%
+%	Die Dokumentenstiloption `norm'    wird unterst"utzt.
+
+
+%*****************************************************************************
+%
+% i.a. werden nur deutsche Briefe geschrieben
+%
+\newif\if@german\@germantrue
+\def\ds@german{\typeout{}%
+  \typeout{Explizite Angabe der Option `german' nicht erforderlich!}%
+  \typeout{}}
+\input german.sty
+
+\let\german@save=\captionsgerman
+\def\captionsgerman{\german@save 
+   \def\phonename{Tel.}			% neue Namensbefehle zur Erg"anzung der
+   \def\yrefname{Ihr Zeichen}		% \captions_SPRACHE Befehle
+   \def\ymailname{Ihre Nachricht vom}
+   \def\myrefname{Unser Zeichen}
+   \def\subjectname{}}			% wer will: "Betreff"
+
+\let\english@save=\captionsenglish
+\def\captionsenglish{\english@save
+   \def\phonename{Phone}
+   \def\yrefname{Your Ref.}
+   \def\ymailname{Your letter from}
+   \def\myrefname{Our Ref.}
+   \def\subjectname{}}			% wer will "Subject"
+
+\let\french@save=\captionsfrench
+\def\captionsfrench{\french@save
+   \def\phonename{T\'el\'ephone}
+   \def\yrefname{Votre r\'ef\'erence}
+   \def\ymailname{Votre courrier en date du}
+   \def\myrefname{Notre r\'ef\'erence}
+   \def\subjectname{}}			% wer will: "Objet"
+
+\let\captionsaustrian=\captionsgerman
+\let\captionsUSenglish=\captionsenglish
+
+\captionsgerman
+
+
+%*****************************************************************************
+%
+\def\@ptsize{0}				% default 10pt-Schrift
+\@namedef{ds@11pt}{\def\@ptsize{1}}	% 11pt-Schrift
+\@namedef{ds@12pt}{\def\@ptsize{2}}	% 12pt-Schrift
+\@namedef{ds@norm}{\def\@ptsize{3}}	% Norm-Schrift (11pt spezial)
+
+\def\ds@twoside{\@twosidetrue}
+
+\def\ds@draft{\overfullrule 5\p@}
+
+\@options
+
+
+%*****************************************************************************
+%
+\lineskip 1pt
+\normallineskip 1pt
+\def\baselinestretch{1}
+
+% Grundzeilenabstand 1/6in = 4,23mm (DIN 2107, 2142)
+\newdimen\GZA
+\GZA=1in \divide\GZA by 6
+
+
+\ifcase \@ptsize\relax		% 10pt-Schrift
+
+\def\@normalsize{\@setsize\normalsize{12pt}\xpt\@xpt
+\abovedisplayskip 10\p@ plus2\p@ minus5\p@
+\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip  \z@ plus3\p@
+\belowdisplayshortskip  6\p@ plus3\p@ minus3\p@
+\let\@listi\@listI}
+
+\def\small{\@setsize\small{11pt}\ixpt\@ixpt
+\abovedisplayskip 8.5\p@ plus3\p@ minus4\p@
+\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip \z@ plus2\p@
+\belowdisplayshortskip 4\p@ plus2\p@ minus2\p@
+\def\@listi{\leftmargin\leftmargini
+\topsep 4\p@ plus2\p@ minus2\p@\parsep 2\p@ plus\p@ minus\p@
+\itemsep \parsep}}
+
+\def\footnotesize{\@setsize\footnotesize{9.5pt}\viiipt\@viiipt
+\abovedisplayskip 6\p@ plus2\p@ minus4\p@
+\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip \z@ plus\p@
+\belowdisplayshortskip 3\p@ plus\p@ minus2\p@
+\def\@listi{\leftmargin\leftmargini
+\topsep 3\p@ plus\p@ minus\p@\parsep 2\p@ plus\p@ minus\p@
+\itemsep \parsep}}
+
+\def\scriptsize{\@setsize\scriptsize{8pt}\viipt\@viipt}
+\def\tiny{\@setsize\tiny{6pt}\vpt\@vpt}
+\def\large{\@setsize\large{14pt}\xiipt\@xiipt}
+\def\Large{\@setsize\Large{18pt}\xivpt\@xivpt}
+\def\LARGE{\@setsize\LARGE{22pt}\xviipt\@xviipt}
+\def\huge{\@setsize\huge{25pt}\xxpt\@xxpt}
+\def\Huge{\@setsize\Huge{30pt}\xxvpt\@xxvpt}
+
+\or				% 11pt-Schrift
+
+\def\@normalsize{\@setsize\normalsize{13.6pt}\xipt\@xipt
+\abovedisplayskip 11\p@ plus3\p@ minus6\p@
+\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip  \z@ plus3\p@
+\belowdisplayshortskip  6.5\p@ plus3.5\p@ minus3\p@
+\let\@listi\@listI}
+
+\def\small{\@setsize\small{12pt}\xpt\@xpt
+\abovedisplayskip 10\p@ plus2\p@ minus5\p@
+\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip  \z@ plus3\p@
+\belowdisplayshortskip  6\p@ plus3\p@ minus3\p@
+\def\@listi{\leftmargin\leftmargini
+\topsep 6\p@ plus2\p@ minus2\p@\parsep 3\p@ plus2\p@ minus\p@
+\itemsep \parsep}}
+
+\def\footnotesize{\@setsize\footnotesize{11pt}\ixpt\@ixpt
+\abovedisplayskip 8\p@ plus2\p@ minus4\p@
+\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip \z@ plus\p@
+\belowdisplayshortskip 4\p@ plus2\p@ minus2\p@
+\def\@listi{\leftmargin\leftmargini
+\topsep 4\p@ plus2\p@ minus2\p@\parsep 2\p@ plus\p@ minus\p@
+\itemsep \parsep}}
+
+\def\scriptsize{\@setsize\scriptsize{9.5pt}\viiipt\@viiipt}
+\def\tiny{\@setsize\tiny{7pt}\vipt\@vipt}
+\def\large{\@setsize\large{14pt}\xiipt\@xiipt}
+\def\Large{\@setsize\Large{18pt}\xivpt\@xivpt}
+\def\LARGE{\@setsize\LARGE{22pt}\xviipt\@xviipt}
+\def\huge{\@setsize\huge{25pt}\xxpt\@xxpt}
+\def\Huge{\@setsize\Huge{30pt}\xxvpt\@xxvpt}
+
+\or				% 12pt-Schrift
+
+\def\@normalsize{\@setsize\normalsize{14.5pt}\xiipt\@xiipt
+\abovedisplayskip 12\p@ plus3\p@ minus7\p@
+\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip  \z@ plus3\p@
+\belowdisplayshortskip  6.5\p@ plus3.5\p@ minus3\p@
+\let\@listi\@listI}
+
+\def\small{\@setsize\small{13.6pt}\xipt\@xipt
+\abovedisplayskip 11\p@ plus3\p@ minus6\p@
+\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip  \z@ plus3\p@
+\belowdisplayshortskip  6.5\p@ plus3.5\p@ minus3\p@
+\def\@listi{\leftmargin\leftmargini
+\parsep 4.5\p@ plus2\p@ minus\p@
+            \itemsep \parsep
+            \topsep 9\p@ plus3\p@ minus5\p@}}
+
+\def\footnotesize{\@setsize\footnotesize{12pt}\xpt\@xpt
+\abovedisplayskip 10\p@ plus2\p@ minus5\p@
+\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip  \z@ plus3\p@
+\belowdisplayshortskip  6\p@ plus3\p@ minus3\p@
+\def\@listi{\leftmargin\leftmargini
+\topsep 6\p@ plus2\p@ minus2\p@\parsep 3\p@ plus2\p@ minus\p@
+\itemsep \parsep}}
+
+\def\scriptsize{\@setsize\scriptsize{9.5pt}\viiipt\@viiipt}
+\def\tiny{\@setsize\tiny{7pt}\vipt\@vipt}
+\def\large{\@setsize\large{18pt}\xivpt\@xivpt}
+\def\Large{\@setsize\Large{22pt}\xviipt\@xviipt}
+\def\LARGE{\@setsize\LARGE{25pt}\xxpt\@xxpt}
+\def\huge{\@setsize\huge{30pt}\xxvpt\@xxvpt}
+\let\Huge=\huge
+
+\or				% Norm-Option (DIN 2107, 2142)
+
+\def\@normalsize{\@setsize\normalsize{\GZA}\xipt\@xipt
+\abovedisplayskip 11\p@ plus3\p@ minus6\p@
+\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip \z@ plus3\p@
+\belowdisplayshortskip 6.5\p@ plus3.5\p@ minus3\p@
+\let\@listi\@listI}
+
+\def\small{\@setsize\small{12pt}\xpt\@xpt
+\abovedisplayskip 10\p@ plus2\p@ minus5\p@
+\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip \z@ plus3\p@
+\belowdisplayshortskip 6\p@ plus3\p@ minus3\p@
+\def\@listi{\leftmargin\leftmargini
+\topsep 6\p@ plus2\p@ minus2\p@\parsep 3\p@ plus2\p@ minus\p@
+\itemsep \parsep}}
+
+\def\footnotesize{\@setsize\footnotesize{11pt}\ixpt\@ixpt
+\abovedisplayskip 8\p@ plus 2\p@ minus 4\p@
+\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip \z@ plus1\p@
+\belowdisplayshortskip 4\p@ plus2\p@ minus2\p@
+\def\@listi{\leftmargin\leftmargini
+\topsep 4\p@ plus2\p@ minus2\p@\parsep 2\p@ plus\p@ minus\p@
+\itemsep \parsep}}
+
+\def\scriptsize{\@setsize\scriptsize{9.5pt}\viiipt\@viiipt}
+\def\tiny{\@setsize\tiny{7pt}\vipt\@vipt}
+\def\large{\@setsize\large{14pt}\xiipt\@xiipt}
+\def\Large{\@setsize\Large{18pt}\xivpt\@xivpt}
+\def\LARGE{\@setsize\LARGE{22pt}\xviipt\@xviipt}
+\def\huge{\@setsize\huge{25pt}\xxpt\@xxpt}
+\def\Huge{\@setsize\Huge{30pt}\xxvpt\@xxvpt}
+\fi
+
+
+\def\label@size{\@setsize\xipt{13.6pt}\xipt\@xipt}	% feste Schriften
+\def\retaddr@size{\@setsize\scriptsize{9.5pt}\viiipt\@viiipt}
+\let\info@size\retaddr@size
+
+\normalsize
+\raggedbottom
+
+
+%*****************************************************************************
+%
+% Page Layout
+%
+\oddsidemargin	  0pt
+\evensidemargin	  0pt
+\marginparwidth	 90pt
+\marginparsep	 11pt
+\marginparpush	  5pt
+\topmargin     -2\GZA
+
+\headheight	 \GZA
+\headsep	2\GZA
+\topskip	 \GZA
+
+\footheight	 12pt
+\footskip	 25pt
+
+\textheight    56\GZA
+\textwidth       16cm
+
+\columnsep	 10pt
+\columnseprule	  0pt
+
+\footnotesep	 12pt
+\skip\footins	 10pt plus 2pt minus 4pt
+
+\floatsep	 12pt plus 2pt minus 2pt
+\textfloatsep	 20pt plus 2pt minus 4pt
+\intextsep	 12pt plus 2pt minus 2pt
+\dblfloatsep	 12pt plus 2pt minus 2pt
+\dbltextfloatsep 20pt plus 2pt minus 4pt
+\@maxsep	 20pt
+\@dblmaxsep	 20pt
+\@fptop		  0pt plus 1fil
+\@fpsep		  8pt plus 2fil
+\@fpbot		  0pt plus 1fil
+\@dblfptop	  0pt plus 1fil
+\@dblfpsep	  8pt plus 2fil
+\@dblfpbot	  0pt plus 1fil
+
+
+%******************************************************************************
+%
+% \opening
+%
+% Absender und Empf"anger werden mit Hilfe der picture-Umgebung plaziert. Der
+% Nullpunkt (linke untere Ecke) des Bildes befindet sich ABSOLUT an der Stelle
+%	x = \hoffset und
+%	y = \voffset+\headsep+\topskip
+% Hier also bei (x,y) = (25.4mm,38.1mm), wobei standardm"a"sig 
+% \hoffset=\voffset=1in angenommen wird.
+%
+\def\opening#1{\thispagestyle{firstpage}%
+   \unitlength1mm
+   \begin{picture}(0,0)
+      \put(\if@window5\else0\fi,-55){%			% Empf"anger
+	 \makebox(80,40)[l]{\parbox[t]{80\unitlength}{\@tocompaddress}}}
+      \if@window%
+	 \put(-20,-70){\line(-1,0){3}}			% Faltmarke oben
+	 \put(-18,-115){\line(-1,0){5}}			% Lochermarkierung
+	 \put(-20,-175){\line(-1,0){3}}			% Faltmarke unten
+%	 \multiput(0,-10)(90,0){2}{\rule{.5mm}{.5mm}}	% Fenstereckpunkte oben
+	 \multiput(0,-55)(90,0){2}{\rule{.5mm}{.5mm}}	% Fenstereckpunkte unten
+	 \put(0,-15){\@returnaddress}			% Absender einzeilig
+      \else%
+	 \put(0,11){\makebox[\textwidth][l]{%
+	    \parbox[t]{3in}{%				% Absender mehrzeilig
+	       \ifx\@empty\@fromaddress\else%
+		  \@fromaddress\xpar[1mm]\@telephone{\tenwy}\fi}
+	    \@emptyrefmail{\hfill\@citytodate~\@date}{}}}%
+      \fi
+   \end{picture}
+   \xpar[60mm]
+   \@emptyrefmail{\if@window\mbox{}\hfill\@citytodate~\@date\xpar[\GZA]\fi}{%
+      \@refmaildate\xpar[\GZA]}%
+   \ifx\@empty\@subject\else\@subject\fi\xpar%
+   \vspace{\parskip} #1\xpar\nobreak}			% Ende \opening
+
+
+\def\@returnaddress{\underline{\makebox[90mm]{%
+   \def\\{~$\cdot$~}\retaddr@size\sf\@fromaddress}}}
+
+\def\@tocompaddress{\ifx\@empty\topost\else\underline{\topost}\par\fi 
+   \vspace{\GZA}\totitle\xpar\toname\par\toaddress\xpar[\GZA]\tocity}
+
+\def\@emptyrefmail#1#2{\ifx\@empty\@ymail\ifx\@empty\@myref\ifx\@empty\@yref #1
+   \else #2 \fi \else #2 \fi \else #2 \fi}
+
+\def\xpar{\@ifnextchar [{\@xpart}{\@xparf}}
+\def\@xpart[#1]{\@xparf\vspace{#1}}
+\def\@xparf{\par\vspace{-\baselineskip}\vspace{\GZA}}
+
+\def\@refmaildate{%
+   \ifx\@empty\@yref\else\@yref\hfill\fi%
+   \ifx\@empty\@ymail\else\@ymail\hfill\fi%
+   \ifx\@empty\@myref\else\@myref\hfill\fi%
+   \parbox[t]{1.4in}{\ifx\@empty\@citytodate\raggedleft\fi{%
+      \small\@citytodate}\mbox{}\par\@date}\xpar[\GZA]}
+
+
+%******************************************************************************
+%
+% \closing
+%
+\long\def\closing#1{\par\nobreak%
+   \stopbreaks
+   \noindent
+   \parbox[t]{3.5in}{\raggedright\ignorespaces #1\xpar[3\GZA]
+      \@fromsig\strut}
+   \if@enclright\hfill\parbox[t]{2in}{\@encl} 
+   \else\xpar[\GZA]\@encl\fi}				% Ende \closing
+
+
+\def\stopbreaks{\interlinepenalty \@M
+   \def\par{\@@par\nobreak}\let\\=\@nobreakcr
+   \let\vspace\@nobreakvspace}
+
+\def\@nobreakvspace{\@ifstar{\@nobreakvspacex}{\@nobreakvspacex}}
+
+\def\@nobreakvspacex#1{\ifvmode\nobreak\vskip #1\relax\else
+   \@bsphack\vadjust{\nobreak\vskip #1}\@esphack\fi}
+
+\def\@nobreakcr{\vadjust{\penalty\@M}\@ifstar{\@xnewline}{\@xnewline}}
+
+
+%******************************************************************************
+%
+% \letter
+%
+% #1=postvermerk, #2=anrede, #3=anschrift_ohne_ort, #4=ort
+%
+\long\def\letter{\@ifnextchar [{\@letterA}{\@letterA[]}}
+\long\def\@letterA[#1]{\@ifnextchar [{\@letterB[#1]}{\@letterB[#1][]}}
+\long\def\@letterB[#1][#2]#3#4{\newpage%
+   \c@page\@ne \interlinepenalty=200%
+   \gdef\topost{#1} \gdef\totitle{#2} \gdef\tocity{#4}%
+   \@processto{\leavevmode\ignorespaces #3}}		% Ende \letter
+
+
+\long\def\@processto#1{\@xproc #1\\@@@\ifx\toaddress\@empty
+    \else \@yproc #1@@@\fi}
+\long\def\@xproc #1\\#2@@@{\gdef\toname{#1}\gdef\toaddress{#2}}
+\long\def\@yproc #1\\#2@@@{\gdef\toaddress{#2}}
+
+
+%******************************************************************************
+%
+% \endletter
+%
+\def\endletter{\stopletter\@@par\pagebreak\@@par
+   \if@filesw
+      \begingroup
+      \let\\=\relax
+      \def\protect##1{\string##1\space}%
+      \immediate\write\@auxout{\string\mlabel{\protect\@returnaddress}{%
+	 \protect\@tocompaddress}}%
+      \endgroup
+   \fi}							% Ende \endletter
+
+
+\def\mlabel#1#2{\setbox0\vbox{#1\\[3mm]\hspace*{5mm}%
+   \parbox[b]{80mm}{\strut\ignorespaces #2}}%
+   \vbox to \labelhight{\vss \box0 \vss}}
+
+\def\stopletter{}
+
+\def\startbreaks{\let\\=\@normalcr
+   \interlinepenalty 200\def\par{\@@par\penalty 200\relax}}
+
+
+%******************************************************************************
+%
+% Benutzerbefehle
+%
+\def\makelabels{\@fileswtrue}
+
+\def\signature#1{\def\@fromsig{#1}}
+\def\@fromsig{}
+
+\long\def\address#1{\def\@fromaddress{#1}}
+\def\@fromaddress{}
+
+\def\telephone#1{\def\@test{#1}
+   \ifx\@empty\@test\def\@telephone##1{}\else
+      \def\@telephone##1{\if@phonesymbol{##1\symbol{7}}\else
+			 \phonename:\fi~#1}
+   \fi}
+\def\@telephone#1{}
+
+\newif\if@phonesymbol \@phonesymbolfalse
+\def\phonesymbol{\@phonesymboltrue
+   \font\egtwy = wasy8
+   \font\tenwy = wasy10}
+\def\nophonesymbol{\@phonesymbolfalse}
+
+\def\citytodate#1{\def\@citytodate{#1}}
+\def\@citytodate{}
+
+\def\info#1{\def\@info{#1}}
+\def\@info{}
+
+\def\subject#1{\def\@test{#1}
+   \ifx\@empty\@test\def\@subject{}\else\def\@subject{%
+      \ifx\@empty\subjectname\else\underline{\subjectname:} \fi {#1}}
+   \fi}
+\def\@subject{}
+
+\def\yref#1{\def\@test{#1}
+   \ifx\@empty\@test\def\@yref{}\else\def\@yref{%
+      \parbox[t]{1in}{{\small\sl\yrefname}\mbox{}\par #1}}
+   \fi}
+\def\@yref{}
+
+\def\ymail#1{\def\@test{#1}
+   \ifx\@empty\@test\def\@ymail{}\else\def\@ymail{%
+      \parbox[t]{1.5in}{{\small\sl\ymailname}\mbox{}\par #1}}
+   \fi}
+\def\@ymail{}
+
+\def\myref#1{\def\@test{#1}
+   \ifx\@empty\@test\def\@myref{}\else\def\@myref{%
+      \parbox[t]{1in}{{\small\sl\myrefname}\mbox{}\par #1}}
+   \fi}
+\def\@myref{}
+
+\newif\if@window \@windowfalse
+\def\window{\@windowtrue}
+\def\nowindow{\@windowfalse}
+
+\def\ps{\par\startbreaks}
+
+\newif\if@enclright \@enclrightfalse
+\def\enclright{\@enclrighttrue}
+\def\noenclright{\@enclrightfalse}
+
+\def\cc#1{\@hangfrom{\reset@font}\rm\underline{\ccname:}\\[.3ex]%
+   \hspace*{3mm}\parbox[t]{77mm}{\ignorespaces #1\strut}\par}
+
+\def\encl#1{\def\@encl{\@hangfrom{\reset@font}\ignorespaces #1\strut\par}}
+\def\@encl{}
+
+
+%******************************************************************************
+%
+% \document
+%
+\def\document{\endgroup
+   \@colht\textheight  \@colroom\textheight \vsize\textheight
+   \columnwidth\textwidth \@clubpenalty\clubpenalty
+   \if@twocolumn
+      \advance\columnwidth -\columnsep
+      \divide\columnwidth\tw@ \hsize\columnwidth \@firstcolumntrue
+   \fi
+   \hsize\columnwidth \linewidth\hsize
+   \begingroup\@floatplacement\@dblfloatplacement\endgroup
+   \if@filesw
+      \immediate\openout\@mainaux=\jobname.aux
+      \immediate\write\@mainaux{\string\startlabels\string\@startlabels}
+   \fi
+   \csname process@table\endcsname
+   \let\glb@currsize\@empty
+   \def\do##1{\let ##1\@notprerr}%
+   \@preamblecmds
+   \let\do\noexpand
+   \@normalsize\everypar{}\@noskipsecfalse}		% Ende \document
+
+
+\newcount\labelcount
+\newdimen\labelhight \labelhight 4.1cm
+
+\def\startlabels{\pagestyle{empty}
+   \labelcount	 \z@
+   \topmargin	 2.23cm
+   \headsep 	 \z@
+   \oddsidemargin  -2cm
+   \evensidemargin -2cm
+   \textheight	 5\labelhight
+   \advance \textheight by .05cm
+   \@colht\textheight  \@colroom\textheight \vsize\textheight
+   \textwidth	19.8cm
+   \columnsep	 1.2cm
+   \label@size
+   \baselineskip \z@
+   \lineskip	 \z@
+   \boxmaxdepth	 \z@
+   \parindent	 \z@
+   \twocolumn\relax}
+
+\def\@startlabels{}
+
+
+%******************************************************************************
+%
+% \enddocument
+%
+\def\enddocument{\@checkend{document}\newpage\begingroup
+   \if@filesw
+      \immediate\closeout\@mainaux
+      \makeatletter\input \jobname.aux\clearpage
+   \fi\endgroup\deadcycles\z@\@@end}			% Ende \enddocument
+
+
+%******************************************************************************
+%
+% Seitenstile
+%
+\def\ps@headings{\def\@oddhead{\sl \headtoname{} \ignorespaces\toname
+   \hfil \@date \hfil \pagename{} \thepage}\def\@oddfoot{}
+   \let\@evenhead\@oddhead\def\@oddfoot{}}
+
+\def\ps@empty{\def\@oddhead{}\def\@oddfoot{}
+   \def\@evenhead{}\def\@evenfoot{}}
+
+\def\ps@firstpage{\def\@oddfoot{\raisebox{-20\p@}[\z@]{%
+   \hbox to\textwidth{\info@size\sf\@info
+      \if@window \ifx\@empty\@info\hfill\else\space\fi
+         \@telephone{\egtwy}\fi\hss}}}
+   \def\@oddhead{}\def\@evenhead{}\def\@evenfoot{}}
+
+\def\ps@plain{\def\@oddhead{\rm\hfil -- \thepage\ --\hfil}\def\@oddfoot{}
+   \def\@evenfoot{}\let\@evenhead\@oddhead}
+
+
+%******************************************************************************
+%
+\parskip	  \baselineskip
+\parindent	  0pt
+\partopsep	  0pt
+
+\@lowpenalty	   51
+\@medpenalty	  151
+\@highpenalty	  301
+
+\@beginparpenalty -\@lowpenalty
+\@endparpenalty   -\@lowpenalty
+\@itempenalty     -\@lowpenalty
+
+\leftmargini	2.5em
+\leftmarginii	2.2em
+\leftmarginiii	1.87em
+\leftmarginiv	1.7em
+\leftmarginv	1em
+\leftmarginvi	1em
+
+\labelsep	.5em
+\parsep		0pt
+\leftmargin\leftmargini
+\labelwidth\leftmargini\advance\labelwidth-\labelsep
+
+\def\@listI{\leftmargin\leftmargini
+%   \parsep 4.5\p@ plus2\p@ minus\p@
+   \topsep 9\p@ plus3\p@ minus5\p@
+   \itemsep 4.5\p@ plus2\p@ minus\p@}
+
+\let\@listi\@listI
+\@listi
+
+\def\@listii{\leftmargin\leftmarginii
+   \labelwidth\leftmarginii\advance\labelwidth-\labelsep
+   \topsep 4.5\p@ plus2\p@ minus\p@
+%   \parsep 2\p@ plus\p@ minus\p@
+   \itemsep \parsep}
+
+\def\@listiii{\leftmargin\leftmarginiii
+   \labelwidth\leftmarginiii\advance\labelwidth-\labelsep
+   \topsep 2\p@ plus\p@ minus\p@
+%   \parsep \z@ \partopsep\p@ plus\z@ minus\p@
+   \itemsep \topsep}
+
+\def\@listiv{\leftmargin\leftmarginiv
+   \labelwidth\leftmarginiv\advance\labelwidth-\labelsep}
+
+\def\@listv{\leftmargin\leftmarginv
+   \labelwidth\leftmarginv\advance\labelwidth-\labelsep}
+
+\def\@listvi{\leftmargin\leftmarginvi
+   \labelwidth\leftmarginvi\advance\labelwidth-\labelsep}
+
+\def\labelenumi{\theenumi.}
+\def\theenumi{\arabic{enumi}}
+
+\def\labelenumii{(\theenumii)}
+\def\theenumii{\alph{enumii}}
+\def\p@enumii{\theenumi}
+
+\def\labelenumiii{\theenumiii.}
+\def\theenumiii{\roman{enumiii}}
+\def\p@enumiii{\theenumi(\theenumii)}
+
+\def\labelenumiv{\theenumiv.}
+\def\theenumiv{\Alph{enumiv}}
+\def\p@enumiv{\p@enumiii\theenumiii}
+
+\def\labelitemi{$\m@th\bullet$}
+\def\labelitemii{\bf --}
+\def\labelitemiii{$\m@th\ast$}
+\def\labelitemiv{$\m@th\cdot$}
+
+\def\verse{\let\\=\@centercr
+   \list{}{\itemsep\z@ \itemindent -15\p@\listparindent \itemindent
+           \rightmargin\leftmargin\advance\leftmargin 15\p@}\item[]}
+\let\endverse\endlist
+
+\def\quotation{\list{}{\listparindent 1.5em
+   \itemindent\listparindent \rightmargin\leftmargin}\item[]}
+\let\endquotation=\endlist
+
+\def\quote{\list{}{\rightmargin\leftmargin}\item[]}
+\let\endquote=\endlist
+
+\def\descriptionlabel#1{\hspace\labelsep \bf #1}
+\def\description{\list{}{\labelwidth\z@ \itemindent-\leftmargin
+   \let\makelabel\descriptionlabel}}
+\let\enddescription\endlist
+
+\def\theequation{\arabic{equation}}
+
+\arraycolsep	  5pt
+\tabcolsep	  6pt
+
+\arrayrulewidth  .4pt
+\doublerulesep	  2pt
+
+\tabbingsep \labelsep
+
+\skip\@mpfootins = \skip\footins
+
+\fboxsep  =  3pt
+\fboxrule = .4pt
+
+\def\footnoterule{\kern-\p@
+   \hrule width .4\columnwidth \kern .6\p@}
+
+\long\def\@makefntext#1{\noindent
+   \hangindent 5\p@\hbox to5\p@{\hss $\m@th^{\@thefnmark}$}#1}
+
+\c@topnumber=2
+\def\topfraction{.7}
+\c@bottomnumber=1
+\def\bottomfraction{.3}
+\c@totalnumber=3
+\def\textfraction{.2}
+\def\floatpagefraction{.5}
+\c@dbltopnumber=2
+\def\dbltopfraction{.7}
+\def\dblfloatpagefraction{.5}
+
+
+%******************************************************************************
+%
+% Voreinstellungen
+%
+\smallskipamount=.5\parskip
+\medskipamount=\parskip
+\bigskipamount=2\parskip
+
+\@twosidefalse
+\ps@plain
+\pagenumbering{arabic}
+\onecolumn
+\@fileswfalse
+
+
+\endinput
+
+
+%******************************************************************************
+%******************************************************************************

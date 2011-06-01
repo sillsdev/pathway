@@ -1,0 +1,38 @@
+--- fancybox.sty
+1.4  2010/05/15  - small changes to the code
+1.3, September 19, 2000 (D.G./S.R.)
+  - Corrections of the output routine for \LaTeX{} 2e compatibility
+    (from Marcin Wolinski and Heiko Oberdiek).
+  - Add a "\ProvidesPackage" command (from Heiko Oberdiek).
+1.2, February 27, 1998 (D.G./S.R.)
+  - Other adaptations for \LaTeX{} 2e.
+1.1, 1997 (D.G./S.R.)
+  - Minimal adaptations for \LaTeX{} 2e compatibility (macros
+    "\fancypage", "\thisfancypage", "\fancyput", "\thisfancyput",
+    "\@Landscape", "\LandScape").
+1.0, February 10, 1993
+  - Fixed bugs in "\boxput".
+  - New "Beqnarray" environment.
+0.93, January 20, 1993
+  - New "\EndVerbatimTokens" for tokens that precede "\end{Verbatim}".
+  - New "\AltGetVerbatim", to allow any tokens to precede "\end{Verbatim}".
+  - Fixed bug in "\BVerbatimInput" that caused second line to be repeated.
+  - New "LandScape" environment, for rotating pages without rotating
+    headers and footers.
+  - Slide frames "Oval", "oval", "shadow" and "double" are defined when
+    "seminar.sty" v0.93 (and maybe later) is loaded.
+0.92, December 20, 1992
+  - New "\boxput" command for superimposing boxes.
+  - New "\VerbatimFootnotes" command.
+  - New "\VerbBox" command for verbatim boxes.
+  - New "Sbox" environment. Makes "\beginsbox" and "\endsbox"
+    obsolete, but the latter have been retained for compatibility.
+0.91, November 25, 1992 
+  - "\shadowsize" is now a length, to be set 
+    with "\setlength" or  "\addtolength".
+  - "\fancypage" split into "\fancypage" and "\fancyput"
+0.9  November 23, 1992} First release.
+
+
+--- fancybox-doc.sty
+2010/05/15 - revised documentation

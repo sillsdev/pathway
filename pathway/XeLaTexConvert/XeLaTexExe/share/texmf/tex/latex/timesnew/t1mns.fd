@@ -1,0 +1,49 @@
+%Filename: t1mns.fd
+%Created by: tex t
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{t1mns.fd}
+   [2000/12/05 Fontinst v1.801 font definitions for T1/mns.]
+
+\DeclareFontFamily{T1}{mns}{}
+
+\DeclareFontShape{T1}{mns}{m}{n}{
+   <-> mnsr8t
+}{}
+
+\DeclareFontShape{T1}{mns}{m}{sc}{
+   <-> mnsrc8t
+}{}
+
+\DeclareFontShape{T1}{mns}{m}{sl}{
+   <-> mnsro8t
+}{}
+
+\DeclareFontShape{T1}{mns}{m}{it}{
+   <-> mnsri8t
+}{}
+
+\DeclareFontShape{T1}{mns}{b}{n}{
+   <-> mnsb8t
+}{}
+
+\DeclareFontShape{T1}{mns}{b}{sc}{
+   <-> mnsbc8t
+}{}
+
+\DeclareFontShape{T1}{mns}{b}{sl}{
+   <-> mnsbo8t
+}{}
+
+\DeclareFontShape{T1}{mns}{b}{it}{
+   <-> mnsbi8t
+}{}
+
+\DeclareFontShape{T1}{mns}{bx}{n}{<->ssub * mns/b/n}{}
+\DeclareFontShape{T1}{mns}{bx}{sc}{<->ssub * mns/b/sc}{}
+\DeclareFontShape{T1}{mns}{bx}{sl}{<->ssub * mns/b/sl}{}
+\DeclareFontShape{T1}{mns}{bx}{it}{<->ssub * mns/b/it}{}
+
+\endinput

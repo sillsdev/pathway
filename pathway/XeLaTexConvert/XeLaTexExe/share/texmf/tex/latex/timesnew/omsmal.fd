@@ -1,0 +1,19 @@
+\ProvidesFile{omsmal.fd}
+\DeclareFontFamily{OMS}{mal}{\skewchar\font48}
+\DeclareFontShape{OMS}{mal}{m}{n}
+   {<-> ssub * cmsy/m/n}{}
+\DeclareFontShape{OMS}{mal}{m}{it}
+   {<-> ssub * cmsy/m/n}{}
+\DeclareFontShape{OMS}{mal}{m}{sl}
+   {<-> ssub * cmsy/m/n}{}
+\DeclareFontShape{OMS}{mal}{m}{sc}
+   {<-> ssub * cmsy/m/n}{}
+\DeclareFontShape{OMS}{mal}{b}{n}
+   {<-> ssub * cmsy/b/n}{}
+\DeclareFontShape{OMS}{mal}{b}{it}
+   {<-> ssub * cmsy/b/n}{}
+\DeclareFontShape{OMS}{mal}{b}{sl}
+   {<-> ssub * cmsy/b/n}{}
+\DeclareFontShape{OMS}{mal}{b}{sc}
+   {<-> ssub * cmsy/b/n}{}
+\endinput

@@ -1,0 +1,71 @@
+%%
+%% This is file `eufrak.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% eufrak.dtx 
+%% 
+%%% ====================================================================
+%%% @LaTeX-file{
+%%%   filename        = "eufrak.dtx",
+%%%   version         = "2.2e",
+%%%   date            = "2001/10/01",
+%%%   time            = "11:41:09 EDT",
+%%%   checksum        = "52811 195 873 7580",
+%%%   author          = "American Mathematical Society",
+%%%   copyright       = "Copyright 2001 American Mathematical Society,
+%%%                      all rights reserved.  Copying of this file is
+%%%                      authorized only if either:
+%%%                      (1) you make absolutely no changes to your copy,
+%%%                      including name; OR
+%%%                      (2) if you do make changes, you first rename it
+%%%                      to some other name.",
+%%%   address         = "American Mathematical Society,
+%%%                      Technical Support,
+%%%                      Publications Technical Group,
+%%%                      P. O. Box 6248,
+%%%                      Providence, RI 02940,
+%%%                      USA",
+%%%   telephone       = "401-455-4080 or (in the USA and Canada)
+%%%                      800-321-4AMS (321-4267)",
+%%%   FAX             = "401-331-3842",
+%%%   email           = "tech-support@ams.org (Internet)",
+%%%   codetable       = "ISO/ASCII",
+%%%   keywords        = "latex, amslatex, ams-latex, amsfonts, eufm,
+%%%                      euler, fraktur",
+%%%   supported       = "yes",
+%%%   abstract        = "This is part of the AMSFonts distribution.
+%%%                      It is a \LaTeX{} package that sets up some
+%%%                      font shape definitions to use the Euler
+%%%                      Fraktur alphabet in math mode. These fonts are
+%%%                      part of the AMSFonts font collection.",
+%%%   docstring       = "The checksum field above contains a CRC-16
+%%%                      checksum as the first value, followed by the
+%%%                      equivalent of the standard UNIX wc (word
+%%%                      count) utility output of lines, words, and
+%%%                      characters.  This is produced by Robert
+%%%                      Solovay's checksum utility.",
+%%% }
+%%% ====================================================================
+\NeedsTeXFormat{LaTeX2e}% LaTeX 2.09 can't be used (nor non-LaTeX)
+[1994/12/01]% LaTeX date must be December 1994 or later
+\@ifpackageloaded{amsfonts}{%
+  \PackageWarning{eufrak}{The eufrak package is redundant if the
+    amsfonts package is used}%
+  \def\EuFrak{\mathfrak}% for bulletproofing
+  \endinput
+}{}%
+\ProvidesPackage{eufrak}[2001/10/01 v2.2e Euler Fraktur fonts]
+\DeclareMathAlphabet\EuFrak{U}{euf}{m}{n}
+\SetMathAlphabet\EuFrak{bold}{U}{euf}{b}{n}
+\DeclareOption{psamsfonts}{%
+  \DeclareFontFamily{U}{euf}{}%
+  \DeclareFontShape{U}{euf}{m}{n}{<-6>eufm5<6-8>eufm7<8->eufm10}{}%
+  \DeclareFontShape{U}{euf}{b}{n}{<-6>eufb5<6-8>eufb7<8->eufb10}{}%
+}
+\newcommand{\mathfrak}{\EuFrak}
+\ProcessOptions
+\endinput
+%%
+%% End of file `eufrak.sty'.

@@ -1,0 +1,123 @@
+%%
+%% This is file `textcmds.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% textcmds.dtx  (with options: `pkg')
+%% 
+%%% ====================================================================
+%%% @LaTeX-doc-source-file{
+%%%   filename  = "textcmds.dtx",
+%%%   version   = "1.05",
+%%%   date      = "2002/04/16",
+%%%   time      = "08:47:47 EDT",
+%%%   author    = "Michael J Downes",
+%%%   address   = "American Mathematical Society,
+%%%                Publications Technical Group,
+%%%                PO Box 6248,
+%%%                Providence, RI 02940,
+%%%                USA",
+%%%   email     = "tech-support@ams.org",
+%%%   URL       = "http://www.ams.org/",
+%%%   abstract  = "Short forms for textemdash and the other LaTeX
+%%%                commands that correspond to ligatures of
+%%%                convenience.",
+%%%   checksum  = "55773 283 1136 10227",
+%%%   docstring = "The checksum field, produced by Robert Solovay's
+%%%                checksum utility, gives CRC-16 checksum, lines,
+%%%                words, and characters.",
+%%%  }
+%%% ====================================================================
+\ProvidesPackage{textcmds}[2002/04/16 v1.05]
+\providecommand{\mdash}{\textemdash\penalty\exhyphenpenalty}
+\providecommand{\ndash}{\textendash\penalty\exhyphenpenalty}
+\newcommand{\qd}{\textquestiondown}
+\newcommand{\xd}{\textexclamdown}
+\newcommand{\ldq}{\textquotedblleft}
+\newcommand{\rdq}{\textquotedblright}
+\newcommand{\lsq}{\textquoteleft}
+\newcommand{\rsq}{\textquoteright}
+\newcommand{\bul}{\textbullet}%
+\newcommand{\vsp}{\textvisiblespace}%
+\newcommand{\pdc}{\textperiodcentered}%
+\newcommand{\vrt}{\textbar}%
+\newcommand{\cir}{\textasciicircum}%
+\newcommand{\til}{\textasciitilde}%
+\newcommand{\bsl}{\textbackslash}%
+\newcommand{\cwm}{\textcompwordmark}%
+\providecommand{\qq}[1]{\ldq#1\/\rdq}
+\newcommand{\supsize}{%
+  \expandafter\ifx\csname S@\f@size\endcsname\relax
+    \calculate@math@sizes
+  \fi
+  \csname S@\f@size\endcsname
+  \fontsize\sf@size\z@\selectfont
+}
+\DeclareRobustCommand{\tsup}[1]{%
+  \leavevmode\raise.9ex\hbox{\supsize #1}%
+}
+\DeclareRobustCommand{\tsub}[1]{%
+  \leavevmode\lower.6ex\hbox{\supsize #1}%
+}
+\DeclareTextSymbolDefault{\textprimechar}{OMS}
+\DeclareTextSymbol{\textprimechar}{OMS}{48}
+\DeclareRobustCommand{\tprime}{\tsup{\textprimechar}}
+\@ifundefined{textlangle}{%
+  \DeclareTextSymbolDefault{\textlangle}{OMS}
+  \DeclareTextSymbolDefault{\textrangle}{OMS}
+}{}
+\DeclareTextSymbol{\textlangle}{OMS}{"68}
+\DeclareTextSymbol{\textrangle}{OMS}{"69}
+\DeclareRobustCommand{\lara}[1]{\textlangle#1\/\textrangle}
+\csname endinput\endcsname
+<*emacs>
+(defvar latex-ndash-command "\\ndash"
+  "*String to insert for an n-dash in LaTeX mode.")
+
+(defvar latex-mdash-command "\\mdash"
+  "*String to insert for an m-dash in LaTeX mode.")
+
+(defvar latex-quote-command "\\qq"
+  "*String to insert for quotes in LaTeX mode.")
+
+(defun latex-maybe-start-quotes (arg)
+  "Insert the beginning of a \\qq{...} structure if the preceding char is
+a left quote."
+  (interactive "*p")
+  (if (= (preceding-char) ?\`)
+      (progn
+        (delete-backward-char 1)
+        (insert-and-inherit (concat latex-quote-command "\{")))
+    (self-insert-command arg)))
+
+(defun latex-maybe-end-quotes (arg)
+  "Insert the end of a \\qq{...} structure if appropriate."
+  (interactive "*p")
+  (if (= (preceding-char) ?\')
+      (progn
+        (delete-backward-char 1)
+        (insert-and-inherit "\}"))
+    (self-insert-command arg)))
+
+(defun latex-maybe-dash (arg)
+  "Convert two or three hyphens to \\mdash or \\ndash."
+  (interactive "*p")
+  (cond
+   ((re-search-backward
+     (concat (regexp-quote latex-ndash-command) " *\\=") nil t)
+    (replace-match (concat (regexp-quote latex-mdash-command) " ")))
+   ((= (preceding-char) ?-)
+    (delete-backward-char 1)
+    (insert-and-inherit (concat latex-ndash-command " ")))
+   (t (self-insert-command arg))))
+
+(add-hook 'TeX-mode-hook
+  '(lambda
+    (define-key LaTeX-mode-map "\`" 'latex-maybe-start-quotes)
+    (define-key LaTeX-mode-map "\'" 'latex-maybe-end-quotes)
+    (define-key LaTeX-mode-map "-" 'latex-maybe-dash)))
+</emacs>
+\endinput
+%%
+%% End of file `textcmds.sty'.

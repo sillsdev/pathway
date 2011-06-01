@@ -1,0 +1,5 @@
+\ProvidesFile{uusy.fd}
+  [1998/05/28 font definitions for U/usy.]
+\DeclareFontFamily{U}{usy}{}
+\DeclareFontShape{U}{usy}{m}{n}{<->usyr}{}
+\endinput

@@ -1,0 +1,59 @@
+%File name t1mak.fd
+%University of the Aegean
+%Department of Mathematics
+%Copyright Feb 2000
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY    
+
+
+
+\DeclareFontShape{T1}{mak}{m}{n}{<-> s * [0.90] ek8a}{}
+\DeclareFontShape{T1}{mak}{m}{it}{<-> s * [0.90] eki8a}{}
+\DeclareFontShape{T1}{mak}{m}{sl}{<-> s * [0.90] eko8a}{}
+\DeclareFontShape{T1}{mak}{m}{sc}{<-> s * [0.90] eksc8a}{}
+\DeclareFontShape{T1}{mak}{m}{ui}{<-> s * [0.90] ekui8a}{}
+\DeclareFontShape{T1}{mak}{b}{n}{<-> s * [0.90] ekb8a}{}
+\DeclareFontShape{T1}{mak}{b}{it}{<-> s * [0.90] ekbi8a}{}
+\DeclareFontShape{T1}{mak}{b}{sl}{<-> s * [0.90] ekbo8a}{}
+\DeclareFontShape{T1}{mak}{b}{ui}{<-> s * [0.90] ekbui8a}{}
+\DeclareFontShape{T1}{mak}{sb}{n}{<-> s * [0.90] eksb8a}{}
+\DeclareFontShape{T1}{mak}{sb}{it}{<-> s * [0.90] eksbi8a}{}
+\DeclareFontShape{T1}{mak}{sb}{sl}{<-> s * [0.90] eksbo8a}{}
+\DeclareFontShape{T1}{mak}{sb}{ui}{<-> s * [0.90] eksbui8a}{}
+\DeclareFontShape{T1}{mak}{m}{sco}{<-> s * [0.90] eksco8a}{}
+		  
+		  
+\DeclareFontShape{T1}{mak}{b}{sc}{ <-> s * [0.90] eksc8a}{}
+\DeclareFontShape{T1}{mak}{bx}{n}{ <-> s * [0.90] ekb8a}{}
+\DeclareFontShape{T1}{mak}{bx}{it}{ <-> s * [0.90] ekbi8a}{}
+\DeclareFontShape{T1}{mak}{bx}{sl}{ <-> s * [0.90] ekbo8a}{}
+\DeclareFontShape{T1}{mak}{bx}{ui}{ <-> s * [0.90] ekbui8a}{}
+\DeclareFontShape{T1}{mak}{bx}{sc}{ <-> s * [0.90] eksc8a}{}        
+
+
+
+\endinput
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

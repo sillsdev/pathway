@@ -1,0 +1,41 @@
+%Filename: ot4uaq.fd
+%Created by: tex fonturw
+%Created using fontinst v1.6
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{ot4uaq.fd}
+   [1997/12/31 Fontinst v1.6 font definitions for OT4/uaq.]
+
+\DeclareFontFamily{OT4}{uaq}{}
+
+\DeclareFontShape{OT4}{uaq}{m}{n}{
+   <-> uaqr8p
+}{}
+
+\DeclareFontShape{OT4}{uaq}{m}{it}{
+   <-> uaqro8p
+}{}
+
+\DeclareFontShape{OT4}{uaq}{m}{sc}{
+   <-> uaqrc8p
+}{}
+
+\DeclareFontShape{OT4}{uaq}{m}{sl}{
+   <-> uaqrco8p
+}{}
+
+\DeclareFontShape{OT4}{uaq}{l}{n}{<->ssub * uaq/m/n}{}
+\DeclareFontShape{OT4}{uaq}{l}{it}{<->ssub * uaq/m/it}{}
+\DeclareFontShape{OT4}{uaq}{l}{sc}{<->ssub * uaq/m/sc}{}
+\DeclareFontShape{OT4}{uaq}{l}{sl}{<->ssub * uaq/m/sl}{}
+\DeclareFontShape{OT4}{uaq}{b}{n}{<->sub * uaq/m/n}{}
+\DeclareFontShape{OT4}{uaq}{b}{it}{<->sub * uaq/m/it}{}
+\DeclareFontShape{OT4}{uaq}{b}{sc}{<->sub * uaq/m/sc}{}
+\DeclareFontShape{OT4}{uaq}{b}{sl}{<->sub * uaq/m/sl}{}
+\DeclareFontShape{OT4}{uaq}{bx}{n}{<->sub * uaq/m/n}{}
+\DeclareFontShape{OT4}{uaq}{bx}{it}{<->sub * uaq/m/it}{}
+\DeclareFontShape{OT4}{uaq}{bx}{sc}{<->sub * uaq/m/sc}{}
+\DeclareFontShape{OT4}{uaq}{bx}{sl}{<->sub * uaq/m/sl}{}
+
+\endinput

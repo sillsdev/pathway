@@ -1,0 +1,17 @@
+
+\ProvidesFile{ly1ppl.fd}
+   [1997/02/26  LY1/ppl (Palatino) with Karl Berry file names. (LV)]
+
+\DeclareFontFamily{LY1}{ppl}{}
+
+\DeclareFontShape{LY1}{ppl}{m}{n}{<->pplr8y}{}
+\DeclareFontShape{LY1}{ppl}{m}{it}{<->pplri8y}{}
+\DeclareFontShape{LY1}{ppl}{b}{n}{<->pplb8y}{}
+\DeclareFontShape{LY1}{ppl}{b}{it}{<->pplbi8y}{}
+
+% We silently treat bold extended as bold
+
+\DeclareFontShape{LY1}{ppl}{bx}{n}{<->ssub * ppl/b/n}{}
+\DeclareFontShape{LY1}{ppl}{bx}{it}{<->ssub * ppl/b/it}{}
+
+\endinput

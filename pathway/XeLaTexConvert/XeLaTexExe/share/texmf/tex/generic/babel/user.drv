@@ -1,0 +1,172 @@
+%%
+%% This is file `user.drv',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% babel.dtx  (with options: `driver,user')
+%% 
+%% This file was generated from file(s) of the Babel system.
+%% ---------------------------------------------------------
+%% 
+%% Copyright (C) 2005 Johannes Braams. All rights reserved.
+%% 
+%% To produce the documentation in the way you like you are allowed
+%% to change this driver file.
+%% 
+%%
+%% File 'babel.dtx'
+%%\ProvidesFile{babel.dtx}[2005/11/23 v3.8h The Babel package]
+%% Babel package for LaTeX2e.
+%% Copyright (C) 1989 -- 2005 by Johannes Braams,
+%%                            TeXniek
+%%                            all rights reserved.
+%% Please report errors to: J.L. Braams
+%%                          babel at braams.cistron.nl
+\ifx\ProvidesFile\@undefined
+  \def\ProvidesFile#1[#2 #3 #4]{%
+    \wlog{File: #1 #4 #3 <#2>}%
+    \let\ProvidesFile\@undefined
+    }
+\fi
+\ProvidesFile{user.drv}
+                [2005/11/23 v3.8h %
+]
+\documentclass{ltxdoc}
+\usepackage{url,t1enc,supertabular}
+\usepackage[icelandic,english]{babel}
+\DoNotIndex{\!,\',\,,\.,\-,\:,\;,\?,\/,\^,\`,\@M}
+\DoNotIndex{\@,\@ne,\@m,\@afterheading,\@date,\@endpart}
+\DoNotIndex{\@hangfrom,\@idxitem,\@makeschapterhead,\@mkboth}
+\DoNotIndex{\@oddfoot,\@oddhead,\@restonecolfalse,\@restonecoltrue}
+\DoNotIndex{\@starttoc,\@unused}
+\DoNotIndex{\accent,\active}
+\DoNotIndex{\addcontentsline,\advance,\Alph,\arabic}
+\DoNotIndex{\baselineskip,\begin,\begingroup,\bf,\box,\c@secnumdepth}
+\DoNotIndex{\catcode,\centering,\char,\chardef,\clubpenalty}
+\DoNotIndex{\columnsep,\columnseprule,\crcr,\csname}
+\DoNotIndex{\day,\def,\dimen,\discretionary,\divide,\dp,\do}
+\DoNotIndex{\edef,\else,\@empty,\end,\endgroup,\endcsname,\endinput}
+\DoNotIndex{\errhelp,\errmessage,\expandafter,\fi,\filedate}
+\DoNotIndex{\fileversion,\fmtname,\fnum@figure,\fnum@table,\fontdimen}
+\DoNotIndex{\gdef,\global}
+\DoNotIndex{\hbox,\hidewidth,\hfil,\hskip,\hspace,\ht,\Huge,\huge}
+\DoNotIndex{\ialign,\if@twocolumn,\ifcase,\ifcat,\ifhmode,\ifmmode}
+\DoNotIndex{\ifnum,\ifx,\immediate,\ignorespaces,\input,\item}
+\DoNotIndex{\kern}
+\DoNotIndex{\labelsep,\Large,\large,\labelwidth,\lccode,\leftmargin}
+\DoNotIndex{\lineskip,\leavevmode,\let,\list,\ll,\long,\lower}
+\DoNotIndex{\m@ne,\mathchar,\mathaccent,\markboth,\month,\multiply}
+\DoNotIndex{\newblock,\newbox,\newcount,\newdimen,\newif,\newwrite}
+\DoNotIndex{\nobreak,\noexpand,\noindent,\null,\number}
+\DoNotIndex{\onecolumn,\or}
+\DoNotIndex{\p@,par, \parbox,\parindent,\parskip,\penalty}
+\DoNotIndex{\protect,\ps@headings}
+\DoNotIndex{\quotation}
+\DoNotIndex{\raggedright,\raise,\refstepcounter,\relax,\rm,\setbox}
+\DoNotIndex{\section,\setcounter,\settowidth,\scriptscriptstyle}
+\DoNotIndex{\sfcode,\sl,\sloppy,\small,\space,\spacefactor,\strut}
+\DoNotIndex{\string}
+\DoNotIndex{\textwidth,\the,\thechapter,\thefigure,\thepage,\thepart}
+\DoNotIndex{\thetable,\thispagestyle,\titlepage,\tracingmacros}
+\DoNotIndex{\tw@,\twocolumn,\typeout,\uppercase,\usecounter}
+\DoNotIndex{\vbox,\vfil,\vskip,\vspace,\vss}
+\DoNotIndex{\widowpenalty,\write,\xdef,\year,\z@,\z@skip}
+\makeatletter
+\gdef\dlqq{{\setbox\tw@=\hbox{,}\setbox\z@=\hbox{''}%
+  \dimen\z@=\ht\z@ \advance\dimen\z@-\ht\tw@
+  \setbox\z@=\hbox{\lower\dimen\z@\box\z@}\ht\z@=\ht\tw@
+  \dp\z@=\dp\tw@ \box\z@\kern-.04em}}
+\makeatother
+\font\manual=logo10 % font used for the METAFONT logo, etc.
+\newcommand*\MF{{\manual META}\-{\manual FONT}}
+\newcommand*\TeXhax{\TeX hax}
+\newcommand*\babel{\textsf{babel}}
+\newcommand*\Babel{\textsf{Babel}}
+\newcommand*\m[1]{\mbox{$\langle$\it#1\/$\rangle$}}
+\newcommand*\langvar{\m{lang}}
+\newcommand*\note[1]{}
+\newcommand*\bsl{\protect\bslash}
+\newcommand*\Lopt[1]{\textsf{#1}}
+\newcommand*\Lenv[1]{\textsf{#1}}
+\newcommand*\file[1]{\texttt{#1}}
+\newcommand*\cls[1]{\texttt{#1}}
+\newcommand*\pkg[1]{\texttt{#1}}
+\newcommand*\langdeffile[1]{%
+  \DocInput{#1}}
+\DisableCrossrefs
+\setcounter{StandardModuleDepth}{1}
+\OnlyDescription
+\begin{document}
+\DocInput{babel.dtx}
+^^A% \changes{babel~3.6i}{1997/02/22}{Added kannada}
+\clearpage
+\langdeffile{esperanto.dtx}
+\langdeffile{interlingua.dtx}
+\langdeffile{dutch.dtx}
+\langdeffile{english.dtx}
+\langdeffile{germanb.dtx}
+\langdeffile{ngermanb.dtx}
+\langdeffile{breton.dtx}
+\langdeffile{welsh.dtx}
+\langdeffile{irish.dtx}
+\langdeffile{scottish.dtx}
+\langdeffile{greek.dtx}
+\langdeffile{frenchb.dtx}
+\langdeffile{italian.dtx}
+\langdeffile{latin.dtx}
+\langdeffile{portuges.dtx}
+\langdeffile{spanish.dtx}
+\langdeffile{catalan.dtx}
+\langdeffile{galician.dtx}
+\langdeffile{basque.dtx}
+\langdeffile{romanian.dtx}
+\langdeffile{danish.dtx}
+\langdeffile{icelandic.dtx}
+\langdeffile{norsk.dtx}
+\langdeffile{swedish.dtx}
+\langdeffile{samin.dtx}
+\langdeffile{finnish.dtx}
+\langdeffile{magyar.dtx}
+\langdeffile{estonian.dtx}
+\langdeffile{albanian.dtx}
+\langdeffile{croatian.dtx}
+\langdeffile{czech.dtx}
+\langdeffile{polish.dtx}
+\langdeffile{serbian.dtx}
+\langdeffile{slovak.dtx}
+\langdeffile{slovene.dtx}
+\langdeffile{russianb.dtx}
+\langdeffile{bulgarian.dtx}
+\langdeffile{ukraineb.dtx}
+\langdeffile{lsorbian.dtx}
+\langdeffile{usorbian.dtx}
+\langdeffile{turkish.dtx}
+\langdeffile{hebrew.dtx}
+\DocInput{hebinp.dtx}
+\DocInput{hebrew.fdd}
+\DocInput{heb209.dtx}
+\langdeffile{bahasa.dtx}
+\langdeffile{bahasam.dtx}
+\clearpage
+\DocInput{bbplain.dtx}
+\end{document}
+%%
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+\endinput
+%%
+%% End of file `user.drv'.

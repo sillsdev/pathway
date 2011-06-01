@@ -1,0 +1,13 @@
+%Filename: ts1uaq.fd
+%Created by: tex Fam_29660
+%Created using fontinst v1.7
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{ts1uaq.fd}
+   [1998/05/28 Fontinst v1.7 font definitions for TS1/uaq.]
+
+\DeclareFontFamily{TS1}{uaq}{}
+
+
+\endinput

@@ -1,0 +1,213 @@
+%
+%                  ********** LAHYPH7.TEX *************
+%
+% Patterns for the latin language in modern spelling (u when u is needed
+% and v when v is needed; ligatures \ae and \oe tolerated).
+% Character encoding OT1 with a 128-character set. If you use character
+% encoding T1 with a 256-character set, load LAHYPH8.TEX instead.
+%
+% Prepared by  Claudio Beccari
+%              Politecnico di Torino
+%              Torino, Italy
+%              e-mail beccari@polito.it
+%
+% Copyright  1999 Claudio Beccari
+%
+% This program can be redistributed and/or modified under the terms
+% of the LaTeX Project Public License Distributed from CTAN
+% archives in directory macros/latex/base/lppl.txt; either
+% version 1 of the License, or any later version.
+%
+% \versionnumber{2.0}   \versiondate{1999/03/09}
+%
+% Information at after \endinput.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%---------------------------------------------------------------------------
+%
+\begingroup             % So that declarations and assignments remain local
+%
+%
+% Ligatures \ae e \oe
+%
+% \ae = 26 = ^^Z = ^^1a      %  128-character sets only!!!!
+% \AE = 29 = ^^] = ^^1d      %
+% \oe = 27 = ^^[ = ^^1b      %
+% \OE = 30 = ^^^ = ^^1e      %
+%
+\def\catcodeAE{\catcode 26  =11  \catcode 29  =11  \lccode 29 = 26
+               \uccode  26 = 29  \lccode  26 = 26  \uccode 29 = 29
+               \catcode 27  =11  \catcode 30  =11  \lccode 30 = 27
+               \uccode  27 = 30  \lccode  27 = 27  \uccode 30 = 30}
+%
+\catcodeAE
+%                    %
+\let\ae=^^1a        % Shorhand for the medieval latin ligatures
+\let\oe=^^1b        % 128 char. set
+                    %
+\lccode`\'=`\'      % in case this file is used to hyphenate both latin and
+                    % italian; for italian you should prefer ITHYPH.TEX
+%
+\patterns{% patterns are global anyway and are not affected by \begingroup
+2'2
+.ab2s3  .a2b3l
+.anti1  .anti3m2n
+.ca4p3s
+.circu2m1
+.co2n1iun
+.di2s3cine
+.e2x1
+.o2b3                                       % .o2b3l  .o2b3r .o2b3s
+.para1i  .para1u
+.pre1i   .pro1i
+.su2b3lu .su2b3r
+2s3que.  2s3dem.
+3p2sic   3p2neu
+\ae1     \oe1                              % Ligatures ae and oe
+a1ia a1ie  a1io  a1iu ae1a ae1o ae1u
+e1iu
+io1i
+o1ia o1ie  o1io  o1iu
+u1u  uo3u
+1b   2bb   2bd   b2l   2bm  2bn  b2r  2bt  2bs  2b.
+1c   2cc   c2h2  c2l   2cm  2cn  2cq  c2r  2cs  2ct  2cz  2c.
+1d   2dd   2dg   2dm   d2r  2ds  2dv  2d.
+1f   2ff   f2l   2fn   f2r  2ft  2f.
+1g   2gg   2gd   2gf   g2l  2gm  g2n  g2r  2gs  2gv  2g.
+1h   2hp   2ht   2h.
+1j
+1k   2kk   k2h2
+1l   2lb   2lc   2ld   2lf  l3f2t 2lg 2lk  2ll  2lm  2ln  2lp  2lq  2lr
+     2ls   2lt   2lv   2l.
+1m   2mm   2mb   2mp   2ml  2mn  2mq  2mr  2mv  2m.
+1n   2nb   2nc   2nd   2nf  2ng  2nl  2nm  2nn  2np  2nq  2nr  2ns
+     n2s3m n2s3f 2nt   2nv  2nx  2n.
+1p   p2h   p2l   2pn   2pp  p2r  2ps  2pt  2pz  2php 2pht 2p.
+1q
+1r   2rb   2rc   2rd   2rf  2rg  r2h  2rl  2rm  2rn  2rp  2rq  2rr  2rs  2rt
+     2rv   2rz   2r.
+1s2  2s3ph 2s3s  2stb  2stc 2std 2stf 2stg 2st3l     2stm 2stn 2stp 2stq
+     2sts  2stt  2stv  2s.  2st.
+1t   2tb   2tc   2td   2tf  2tg  t2h  t2l  t2r  2tm  2tn  2tp  2tq  2tt
+     2tv   2t.
+1v   v2l   v2r   2vv
+1x   2xt   2xx   2x.
+1z   2z.
+}
+\endgroup
+%
+\endinput
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ For documentation see:
+ C. Beccari, "Computer aided hyphenation for Italian and Modern
+       Latin", TUG vol. 13, n. 1, pp. 23-33 (1992)
+
+ see also
+
+ C. Beccari, "Typesetting of ancient languages",
+             TUG vol.15, n.1, pp. 9-16 (1994)
+
+ In the preceding paper the code is described as file ITALAT.TEX; this is
+ substantially the same code, but the file ha been renamed LAHYPH7.TEX
+ in accordance with the ISO name for latin and the convention that all
+ hyphenation pattern file names should be formed by the agglutination of
+ two letter language ISO code and the abbreviation HYPH. The digit 7
+ reminds that the patterns assume 7-bit character codes according to the
+ OT1 encoding. If you use T1 encoding, please make use of LAHYPH8.TEX.
+
+ A corresponding file (ITHYPH.TEX) has been extracted in order to eliminate
+ the (few) patterns specific to latin and leave those specific to italian;
+ ITHYPH.TEX has been further extended with many new patterns in order to
+ cope with the many neologisms and technical terms with a foreign root.
+ Nonetheless this file hyphenates both languages as described in the above
+ paper.
+
+ Should you find any word that gets hyphenated in a wrong way, please, AFTER
+ CHECKING ON A RELIABLE MODERN DICTIONARY, report to the author, preferably
+ by e-mail. In particular remember that these patterns are for latin in
+ modern spelling, not for medieval latin. If you have to deal with medieval
+ latin you'd better get the hyphenation patterns prepared by Yannis
+ Haralambous (TUGboat, vol.13 n.4 (1992)).
+
+ LOADING THE PATTERNS
+
+ Use BABEL !
+
+ BABEL implies a new hyphen.tex file that substitutes the default one; in
+ the new hyphen.tex file new definitions are given for selecting different
+ languages and typesetting styles. During the initialization of LaTeX,
+ babel reads another  file, language.dat, which contains the names of
+ the desired languages and the corresponding pattern files. During
+ document compilation babel seeks a language definition file such as
+ french.ldf, italian.ldf, or the like, where programming shortcuts and
+ typesetting style parameters and definitions are established. Up to now
+ there is no file named latin.ldf, because it is assumed that latin
+ is not used to typeset a whole document in this language from the title
+ page to the index; instead it is supposed that latin is used to typeset
+ some text within a document whose main language is a modern one.
+ Therefore no shortcuts are available for latin as they are for german,
+ for example, where the double quote is made active and the sequence "- is
+ used for inserting a soft discretionary in order to divide compound words
+ on the compound word boundary. The same trick might be useful in latin in
+ place of the hack that is proposed in the following section.
+
+ Edit language.dat by adding a line such as this:
+
+ latin lahyph7.tex
+
+ Run the initializer and rebuild the format file latex.ltx. If you use
+ MiKTeX  this is as simple as giving the line command
+
+ makefmt latex
+
+ If you use another TeX/LaTeX system rebuild the format file latex.fmt
+ according to the documentation of your system.
+
+
+ PREFIXES AND SUFFIXES
+
+ For what concern prefixes and suffixes, the latter are generally separated
+ according to "natural" syllabification, while the former are generally
+ divided etimologically. In order to avoid an excessive number of patterns,
+ care has been paid to some prefixes, especially "ex", "trans",
+ "circum", "prae", etc., but this set of patterns is NOT capable of
+ separating the prefixes in all circumstances.
+
+ In order to allow the composer to introduce soft discretionary hyphens, this
+ file contains the redefinition of the underscore character (_) to be used
+ as a soft discretionary hyphen, in contrast to \- that inserts a hard one;
+ this means that, e.g., trans_ierat corresponds to the possible hyphenation
+ trans-ie-rat, while trans\-ierat corresponds to trans-ierat.
+
+ Since the underscore is used (outside TeX math mode) quite often, for
+ example in file names, in  labels, and other cross references,
+ according to the composer's habits, the definition of the underscore with
+ its discretionary hyphen very easily breaks apart, giving raise to
+ uncontrollable TeX errors. Therefore the underscore redefinition is
+ clearly marked in the following, but if you know what you are doing, you
+ may extract it and use it.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+        Soft discretionary hyphens by means of the underscore
+
+ ----> EXTRACT THE FOLLOWING 10 LINES IF YOU WANT THIS FACILITY <-----
+ ---->            BE SURE YOU KNOW WHAT YOU ARE DOING           <-----
+
+\toks255=\expandafter{\the\catcode`\@}
+\catcode`\@=11
+\def\allowhyphens{\penalty\@M\hskip\z@
+                  \discretionary{-}{}{}\penalty\@M\hskip\z@}
+\let\sb@=_
+\catcode`\_=13
+\def\psb@{\ifmmode\sb@\else\allowhyphens\fi}
+\def_{\protect\psb@}
+\catcode`\@=\the\toks255
+
+ P.S. move the above code to the preamble of your document
+ or to a personal extension (.sty) file.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

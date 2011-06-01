@@ -1,0 +1,12 @@
+\ProvidesFile{omsmak.fd}
+\DeclareFontFamily{OMS}{mak}{\skewchar\font48}
+\DeclareFontShape{OMS}{mak}{m}{it}
+   {<-> s * [0.90] ktsy8a}{}
+\DeclareFontShape{OMS}{mak}{m}{n}
+   {<-> s * [0.90] ktsy8a}{}
+\DeclareFontShape{OMS}{mak}{m}{sl}
+   {<-> s * [0.90] ktsy8a}{}
+\DeclareFontShape{OMS}{mak}{m}{sc}
+   {<-> s * [0.90] ktsy8a}{}
+
+\endinput

@@ -1,0 +1,41 @@
+%Filename: t1unm.fd
+%Created by: tex fonturw
+%Created using fontinst v1.6
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{t1unm.fd}
+   [1997/12/31 Fontinst v1.6 font definitions for T1/unm.]
+
+\DeclareFontFamily{T1}{unm}{}
+
+\DeclareFontShape{T1}{unm}{m}{n}{
+   <-> unmr8t
+}{}
+
+\DeclareFontShape{T1}{unm}{m}{it}{
+   <-> unmro8t
+}{}
+
+\DeclareFontShape{T1}{unm}{m}{sc}{
+   <-> unmrc8t
+}{}
+
+\DeclareFontShape{T1}{unm}{m}{sl}{
+   <-> unmrco8t
+}{}
+
+\DeclareFontShape{T1}{unm}{l}{n}{<->ssub * unm/m/n}{}
+\DeclareFontShape{T1}{unm}{l}{it}{<->ssub * unm/m/it}{}
+\DeclareFontShape{T1}{unm}{l}{sc}{<->ssub * unm/m/sc}{}
+\DeclareFontShape{T1}{unm}{l}{sl}{<->ssub * unm/m/sl}{}
+\DeclareFontShape{T1}{unm}{b}{n}{<->sub * unm/m/n}{}
+\DeclareFontShape{T1}{unm}{b}{it}{<->sub * unm/m/it}{}
+\DeclareFontShape{T1}{unm}{b}{sc}{<->sub * unm/m/sc}{}
+\DeclareFontShape{T1}{unm}{b}{sl}{<->sub * unm/m/sl}{}
+\DeclareFontShape{T1}{unm}{bx}{n}{<->sub * unm/m/n}{}
+\DeclareFontShape{T1}{unm}{bx}{it}{<->sub * unm/m/it}{}
+\DeclareFontShape{T1}{unm}{bx}{sc}{<->sub * unm/m/sc}{}
+\DeclareFontShape{T1}{unm}{bx}{sl}{<->sub * unm/m/sl}{}
+
+\endinput

@@ -1,0 +1,16 @@
+\ProvidesFile{ly1lbf.fd}
+   [1997/02/26  LY1/lbf with Y&Y file names. (LV)]
+
+\DeclareFontFamily{LY1}{lbf}{}
+
+\DeclareLucidaFontShape{LY1}{lbf}{m}{n}{lfr}{}
+\DeclareLucidaFontShape{LY1}{lbf}{m}{it}{lfi}{}
+\DeclareLucidaFontShape{LY1}{lbf}{b}{n}{lfd}{}
+\DeclareLucidaFontShape{LY1}{lbf}{b}{it}{lfdi}{}
+
+% Treat silently bold extended as bold
+
+\DeclareLucidaFontShape{LY1}{lbf}{bx}{n}{<-> ssub * lbf/b/n}{}
+\DeclareLucidaFontShape{LY1}{lbf}{bx}{it}{<-> ssub * lbf/b/it}{}
+
+\endinput

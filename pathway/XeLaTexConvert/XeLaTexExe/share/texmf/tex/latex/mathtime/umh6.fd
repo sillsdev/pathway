@@ -1,0 +1,21 @@
+%%
+%% This is file `umh6.fd',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% mtfonts.fdd  (with options: `Umh6')
+%% 
+%% Copyright 1996 1997 Frank Mittelbach and David Carlisle.
+%%
+%% Development of this package was commissioned by Y&Y Inc.
+%% http://www.yandy.com
+\ProvidesFile{umh6.fd}
+ [2001/05/30 v1.0c
+ Adobe Math Pi 6 (Unknown encoding)
+  (FMi)]
+\DeclareFontFamily{U}{mh6}{}
+\DeclareFontShape{U}{mh6}{m}{n}{<->s * [0.95]mh6}{}
+\endinput
+%%
+%% End of file `umh6.fd'.

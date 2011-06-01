@@ -1,0 +1,19 @@
+\ProvidesFile{omluaq.fd}
+\DeclareFontFamily{OML}{uaq}{\skewchar\font127}
+\DeclareFontShape{OML}{uaq}{m}{n}
+   {<-> ssub * cmm/m/it}{}
+\DeclareFontShape{OML}{uaq}{m}{it}
+   {<-> ssub * cmm/m/it}{}
+\DeclareFontShape{OML}{uaq}{m}{sl}
+   {<-> ssub * cmm/m/it}{}
+\DeclareFontShape{OML}{uaq}{m}{sc}
+   {<-> ssub * cmm/m/it}{}
+\DeclareFontShape{OML}{uaq}{b}{n}
+   {<-> ssub * cmm/b/it}{}
+\DeclareFontShape{OML}{uaq}{b}{it}
+   {<-> ssub * cmm/b/it}{}
+\DeclareFontShape{OML}{uaq}{b}{sl}
+   {<-> ssub * cmm/b/it}{}
+\DeclareFontShape{OML}{uaq}{b}{sc}
+   {<-> ssub * cmm/b/it}{}
+\endinput

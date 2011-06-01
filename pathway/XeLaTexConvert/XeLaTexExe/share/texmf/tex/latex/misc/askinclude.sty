@@ -1,0 +1,103 @@
+% askinclude.sty - interactive asking of included files 
+%
+% VERSION 1.2e   November 11, 1994
+%
+% (c) 1991 by Pablo A. Straub.  Permission is granted to copy and use this
+% in any way and for any purpose, except direct commercial advantage,
+% provided that you retain this copyright notice.
+%
+% HISTORY
+%
+% 0.95  11/05/91   First beta-test version (asked two questions)
+% 0.99  11/05/91   Second beta-test version (asks one question; uses * and -.)
+% 1.0   11/07/91   Changed prompts (sent to comp.text.tex)
+% 1.2e  11/02/94   Two small changes to run under LaTeX2e [RF];
+%                  additional documentation [TRS]
+%
+% Please send enhancements and corrections to straub@cs.umd.edu.
+%
+% USAGE
+%
+% Here's an example root file (see pp.72--74 in the LaTeX book):
+%
+%    % File:  main.tex
+%    %
+%      \documentclass[...]{book}
+%      \usepackage{askinclude}
+%    %             ^^^^^^^^^^
+%    % Initialization:
+%      \input{preamble}
+%    %
+%      \begin{document}
+%    %
+%    %   Title page:
+%        \include{titlepg}
+%    %
+%    %   Chapters:
+%        \include{chapter0}
+%        \include{chapter1}
+%        \include{chapter2}
+%        ...
+%    %
+%      \end{document}
+%
+% Each \include causes a page break and so askinclude probably only makes 
+% sense in the context of larger documents such as books.
+%
+% HOW IT WORKS
+%
+% The askinclude package asks the user which files to include.  If
+% the user presses return, the files from the previous run are included
+% automatically (except on the first run, in which case all files are
+% included); if the answer is  *  all files are included; if the answer
+% is  -  no files are included; otherwise the specified files (separated
+% by commas, with no embedded spaces) are included.
+% 
+% RESTRICTIONS
+%
+% This file redefines \document, the command executed with \begin{document}.
+% It may be incompatible with other styles that also redefine \document.
+%
+% The user's input is not validated.  Anything that is not a * or a - or an
+% empty line is passed to \includeonly.
+%
+% ACKNOWLEDGEMENT
+%
+% Tom Scavo (scavo@cie.uoregon.edu) suggested saving the include file list
+% from the previous run and a simplified user interface.
+
+
+\def\@includeonly{\@gobble} % assume we do not include from last run
+\def\@inputs{*}             % assume all files included
+
+% determine which files to include
+
+\def\@star{*}           % constant for comparison purposes
+\def\@minussign{-}      %    "      "      "         "
+
+\typeout { }
+\typeout {Enter file(s) to include (separated by commas and no spaces),}
+\typeout {or enter * for all files, or enter - for none, or}
+\typein  [\inputfiles]{press Return if this run is the same as the last.}
+
+\ifx\inputfiles\@star           % all files included
+   % do nothing
+\else \ifx\inputfiles\@minussign    % no files included
+   \includeonly{}
+   \def\@inputs{}
+\else \ifx\inputfiles\empty     % include according to previous run
+   \def\@includeonly#1{%
+     \gdef\@inputs{#1}
+     \ifx\@inputs\@star \else \global\@partswtrue\global\edef\@partlist{#1}\fi}
+\else
+   \def\@inputs{\inputfiles}    % include these files
+   \includeonly{\inputfiles}
+\fi\fi\fi
+
+
+\AtBeginDocument{\if@filesw
+                 \immediate\write\@mainaux{\string\@includeonly\string{\@inputs
+                                                               \string}}%
+                 \def\@includeonly{}\fi}
+
+% END OF FILE askinclude.sty

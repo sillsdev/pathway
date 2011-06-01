@@ -1,0 +1,41 @@
+%%
+%% IMPORTANT NOTE
+%% ==============
+%% Please respect the LaTeX copyright and distribution conditions
+%% as specified in legal.txt and do NOT distribute LaTeX with
+%% the standard t1enc.def replaced by this file. However individual
+%% users may wish to rename this file and  place it in a directory 
+%% that is earlier in the TEXINPUT path than the standard LaTeX directory.
+%%
+%%=====================================================================
+%%
+%% Fake t1enc.def file so that a document that has
+%% \usepackage[T1]{fontenc}
+%% uses LY1 encoding instead.
+%%
+%% If this file is placed as t1enc.def in the TEXINPUT path
+%% then a LaTeX document that specifies T1 in the arguments to
+%% the fontenc package will act exactly as if `T1' had been replaced
+%% by `LY1'. Note in particular that any explicit calls to 
+%% \fontencoding{T1} within the body of the document will not be
+%% changed, and will therefore generate an error if T1 encoded fonts
+%% are not set up. However it is very rare for any document to need
+%% such explicit encoding changes mid-document, and a document using
+%% such will probably need checking carefully by hand to see if it
+%% can easily be switched to another encoding.
+%% This file should correctly translate the vast majority of documents
+%% calling for Cork encoded fonts to use texnansi encoded fonts.
+
+\ProvidesFile{t1enc.def}[1997/01/26 v0.1 T1 to LY1 substitution (Y\&Y)]
+
+% Issue a warning.
+\PackageWarningNoLine{fontenc}{Substituting LY1 encoding for T1}
+
+% Set the default encoding.
+\def\encodingdefault{LY1}
+
+% Input the LY1 encoding definition file instead of
+% the `real' T1 encoding definition.
+\input{ly1enc.def}
+
+

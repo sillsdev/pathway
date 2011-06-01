@@ -1,0 +1,20 @@
+             kerkis フォント用 kerkis パッケージ使用について
+
+
+\usepackage{kerkis,kmath}
+では、\LaTeX などはエラーになります。ギリシャ語 encoding LGR
+が必要だからです。
+\usepackage{deflgr,kerkis,kmath}
+でエラーが出なくなると思います。
+
+また \section コマンド内に \LaTeX などがあると、これが kerkis パッケージ
+で再定義してあることが原因で、エラーになります。このような場合は \protect
+にしておくとエラーが回避できるようです。( \protect\LaTeX )。
+
+日本語と共に使用する場合、
+(I search font definition file: . . . . . . . . )
+なるメッセージが出て、動作が遅くなる場合があります。この場合には
+mktexlsr によって ls-R データベースを作っておくと、あまり遅くなく
+なります。 ls-R データベースを消去したくなったら、deltexlsr とします。
+--------------------
+A. Kakuto <kakuto@fuk.kindai.ac.jp>

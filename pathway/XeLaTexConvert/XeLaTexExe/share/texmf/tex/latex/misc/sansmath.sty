@@ -1,0 +1,172 @@
+% LaTeX package sansmath: typeset sans-serif math using `text' fonts.
+%
+\ProvidesPackage{sansmath}[2002/02/25 \space ver 0.4  Donald Arseneau]
+% 
+% Donald Arseneau,  asnd@triumf.ca,  Vancouver, Canada.
+%
+% This package is released to the public domain by the original
+% author, who does not support it, and requests that it be adopted
+% and supported by someone who actually knows something about math
+% font issues in LaTeX.
+%
+% The author was persuaded to use the name `sansmath' in hopes of
+% working with various text sans fonts (indicated by \sfdefault)
+% but the only good results seen were with Computer Modern and cmss.
+% (Helvetica with the `pslatex' package was very poor!)
+%
+% INSTRUCTIONS
+% ~~~~~~~~~~~~
+% Load this package by inserting `\usepackage{sansmath}' in the
+% document preamble.  This will define a new math version `sans'
+% and a command `\sansmath', much like `\boldmath'.  Note that
+% NO `\unsansmath' is defined, so if math is to be sans-serif for
+% just part of a document, one should declare `\sansmath' in a local
+% group (perhaps with \begin{sansmath}...\end{sansmath}).  
+% Within the scope of the \sansmath declaration, math characters
+% will be taken from the text sans-serif family as much as possible.
+% The actual sans fonts are OT1 encodings of those indicated by the 
+% meaning of  \sfdefault WHEN THE PACKAGE WAS LOADED -- not the 
+% meaning at each math environment!
+% 
+% Since the (OT1) text fonts do not provide the lower-case greek 
+% letters, there is a package option [eulergreek] to take the 
+% lowercase greek from the Euler math fonts.
+% Since some (many) sans fonts have no uppercase greek letters either
+% (missing characters from the OT1 encoding), there is an option 
+% [EULERGREEK] to take ALL greek letters from the euler fonts.
+% One should also investigate using Euler for ALL MATH in the document,
+% using package `euler' instead of this one!
+%
+% This package achieves math-italic by reloading the slanted version
+% of the text sans-serif font, and changing a fontdimen parameter 
+% (spaceskip).  This causes the italic correction to be applied between
+% letters (good) but does not break up the `fi' and `fl' ligatures (bad)
+% (Why does a sans font have these ligatures anyway?)  At this point,
+% nothing is done about this bug.
+
+\DeclareMathAlphabet{\mathsfsl}{OT1}{\sfdefault}{m}{sl}
+\DeclareOldFontCommand{\sfsl}{\normalfont\sffamily\slshape}{\mathsfsl}
+\DeclareMathAlphabet{\mathsfbf}{OT1}{\sfdefault}{bx}{sl}
+\DeclareOldFontCommand{\sfbf}{\normalfont\sffamily\bfseries}{\mathsfbf}
+
+\DeclareMathVersion{sans}
+\SetMathAlphabet{\mathrm} {sans}{OT1}{\sfdefault}{m}{n}
+\SetMathAlphabet{\mathsfsl}{sans}{OT1}{\sfdefault}{m}{sl}
+\SetSymbolFont {operators}{sans}{OT1}{\sfdefault}{m}{n}
+
+% The cmm and cmsy are too light for cmss.  I tried {b} for the next
+% two lines, but it did not work well (unbold +, bold greek, bad \neq)
+\SetSymbolFont {letters}  {sans}{OML}{cmm} {m}{it}
+\SetSymbolFont {symbols}  {sans}{OMS}{cmsy}{m}{n}
+
+\SetMathAlphabet{\mathsfbf}{sans}{OT1}{\sfdefault}{bx}{n}
+
+\DeclareMathSymbol{0}{\mathord}{operators}{`0}
+\DeclareMathSymbol{1}{\mathord}{operators}{`1}
+\DeclareMathSymbol{2}{\mathord}{operators}{`2}
+\DeclareMathSymbol{3}{\mathord}{operators}{`3}
+\DeclareMathSymbol{4}{\mathord}{operators}{`4}
+\DeclareMathSymbol{5}{\mathord}{operators}{`5}
+\DeclareMathSymbol{6}{\mathord}{operators}{`6}
+\DeclareMathSymbol{7}{\mathord}{operators}{`7}
+\DeclareMathSymbol{8}{\mathord}{operators}{`8}
+\DeclareMathSymbol{9}{\mathord}{operators}{`9}
+\DeclareMathSymbol{!}{\mathclose}{operators}{"21}
+\DeclareMathSymbol{,}{\mathpunct}{operators}{`\,}
+\DeclareMathSymbol{.}{\mathord}{operators}{`\.}
+\DeclareMathSymbol{:}{\mathrel}{operators}{`\:}
+\DeclareMathSymbol{;}{\mathpunct}{operators}{`\;}
+\DeclareMathSymbol{?}{\mathclose}{operators}{`\?}
+%\DeclareMathSymbol{+}{\mathbin}{operators}{"2B}
+%\DeclareMathSymbol{=}{\mathrel}{operators}{`\=}
+
+
+\let\EulGreek\relax
+\let\EuUCGreek\relax
+\DeclareOption{EULERGREEK}{
+  \ExecuteOptions{eulergreek}
+  \def\EuUCGreek{%
+    \@euG\Gamma \@euG\Delta \@euG\Theta \@euG\Lambda \@euG\Xi \@euG\Pi
+    \@euG\Sigma \@euG\Upsilon \@euG\Phi \@euG\Psi \@euG\Omega
+}}
+\DeclareOption{eulergreek}{
+ \def\EulGreek{%
+  \ifnum\alpha<\@eugreekOffset
+    \@eug\alpha \@eug\beta \@eug\gamma \@eug\delta \@eug\epsilon
+    \@eug\zeta \@eug\eta \@eug\theta \@eug\iota \@eug\kappa \@eug\lambda
+    \@eug\mu \@eug\nu \@eug\xi \@eug\pi \@eug\rho \@eug\sigma \@eug\tau
+    \@eug\upsilon \@eug\phi \@eug\chi \@eug\psi \@eug\omega
+    \@eug\varepsilon \@eug\vartheta \@eug\varpi \@eug\varrho
+    \@eug\varsigma \@eug\varphi
+    \EuUCGreek
+  \fi
+}}
+\ProcessOptions
+
+\ifx\EulGreek\relax\else
+ \DeclareSymbolFont{EulerGreek}{U}{eur}{m}{n}
+ \SetSymbolFont{EulerGreek}{sans}{U}{eur}{m}{n}
+ \DeclareSymbolFontAlphabet\matheug{EulerGreek}
+
+ \newcount\@eugreekOffset
+ \DeclareMathSymbol{\@tempa}{\mathord}{EulerGreek}{"0B}
+ \@eugreekOffset\@tempa
+ \advance\@eugreekOffset-\alpha
+
+ \def\@eug#1{\@tempcnta#1\advance\@tempcnta\@eugreekOffset
+    \mathchardef#1\@tempcnta}
+
+ \ifx\EuUCGreek\relax\else
+
+  \newcount\@euGREEKOffset
+  \DeclareMathSymbol{\@tempa}{\mathord}{EulerGreek}{1}
+  \@euGREEKOffset\@tempa
+  \advance\@euGREEKOffset-\Delta
+
+  \def\@euG#1{\@tempcnta#1\advance\@tempcnta\@euGREEKOffset
+     \mathchardef#1\@tempcnta}
+ \fi
+\fi
+
+\def\sfMathSwitch{\sfsl
+  \make@math@version@font \textfont \fam \tf@size
+  \make@math@version@font \scriptfont \fam \sf@size
+  \make@math@version@font \scriptscriptfont \fam \ssf@size
+}
+
+\def\make@math@version@font #1#2#3{%
+  \begingroup
+    \escapechar\m@ne
+    \xdef\sansm@name{\expandafter\string\the#1#2+}%
+  \endgroup
+  \@ifundefined{\sansm@name}{%
+      \@load@variant@font \sansm@name{#1#2}{#3\p@}}{}%
+  #1#2\csname \sansm@name\endcsname
+}
+
+\begingroup
+\catcode`\A=12 \catcode`\T=12
+\lowercase{% necessary because \fontname\font produces "at" in catcode 12.
+\endgroup
+%
+\def\@load@variant@font #1#2#3{\expandafter\@do@load@varfont
+     \csname #1\expandafter\endcsname \fontname#2 AT #3 AT \relax }
+%
+\def\@do@load@varfont #1#2 AT #3 AT #4\relax{%
+  \dimen@#3\advance\dimen@ 1sp
+  \global\font #1=#2 at \dimen@
+  \fontdimen\tw@#1=\z@}
+}
+
+\def\sansmath{%
+  \mathversion{sans}%
+  \let\mathbf\mathsfbf
+  \let\sansm@every@math\sfMathSwitch
+  \EulGreek
+}
+
+\expandafter\def\expandafter\check@mathfonts\expandafter{\check@mathfonts
+   \sansm@every@math}
+
+\let\sansm@every@math\relax
+

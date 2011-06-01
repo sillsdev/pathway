@@ -1,0 +1,18 @@
+\input noprefnt % re-defines primitive \font, \font\preloaded is ignored
+\input plain    % format Plain
+\restorefont    % original meaning of primitive \font
+\input dcfonts  % loads text-style dc fonts
+\input il2-t1   % input: ISO8859-2, internal TeX: Cork
+\input hyphen.lan  % czech / slovak hyphenation pattern (may be others too)
+\input plaina4  % \hsize and \vsize for A4
+\everyjob=\expandafter{\the\everyjob
+   \message{The format: plain-il2-dc <Sep. 1997>.}
+   \message{The cm+dc-fonts are preloaded and A4 size predefined.}}
+\dump
+
+
+
+
+
+
+

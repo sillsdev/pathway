@@ -1,0 +1,332 @@
+%%
+%% This is file `tst-poly.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% pst-poly.dtx  (with options: `tst-poly')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from tst-poly.tex.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file pst-poly.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+%%
+%% Package `pst-poly.dtx'
+%%
+%% Denis Girou (CNRS/IDRIS - France) <Denis.Girou@idris.fr>
+%% Herbert Voss <voss _at_ pstricks.de>
+%%
+%% Novermber 20, 2004
+%%
+%% This program can be redistributed and/or modified under the terms
+%% of the LaTeX Project Public License Distributed from CTAN archives
+%% in directory macros/latex/base/lppl.txt.
+%%
+%% DESCRIPTION:
+%%   `pst-poly' is a PSTricks package to draw easily various kinds of regular
+%%   or non regular polygons, with various customizations.
+%%
+%% `pst-poly' test file.
+%%
+\documentclass{article}
+
+\usepackage{fancyvrb}
+\usepackage[width=18cm]{geometry}
+\usepackage{pstricks}
+\usepackage{pst-poly}
+
+
+\makeatletter
+
+
+\def\HLEmphasize#1{\textit{#1}}
+\newcommand{\BS}{\texttt{\symbol{`\\}}}
+\def\HLMacro#1{\BS{}def\HLMacro@i#1\@nil}
+\def\HLMacro@i#1def#2\@nil{\HLReverse{#2}}
+\def\HLReverse#1{{\setlength{\fboxsep}{1pt}\HLReverse@i{#1}}}
+\def\HLReverse@i#1{\colorbox{black}{\textcolor{white}{\textbf{#1}}}}
+
+\def\Example{\FV@Environment{}{Example}}
+\def\endExample{%
+\end{VerbatimOut}
+\Below@Example{\jobname.tmp}
+\endgroup}
+
+\def\CenterExample{\FV@Environment{}{Example}}
+\def\endCenterExample{%
+\end{VerbatimOut}
+\begin{center}
+\Below@Example{\jobname.tmp}
+\end{center}
+\endgroup}
+
+\def\SideBySideExample{\FV@Environment{}{Example}}
+\def\endSideBySideExample{%
+\end{VerbatimOut}
+\SideBySide@Example{\jobname.tmp}
+\endgroup}
+
+\def\FVB@Example{%
+\begingroup
+\FV@UseKeyValues
+\parindent=0pt
+\multiply\topsep by 2
+\VerbatimEnvironment
+\begin{VerbatimOut}[gobble=2,codes={\catcode`\Z=12}]{\jobname.tmp}}
+
+\def\Below@Example#1{%
+\VerbatimInput[commentchar=Z,commandchars=/?_,frame=single,
+               numbers=left,numbersep=3pt]{#1}
+\catcode`\%=14\relax
+\catcode`\Z=9\relax
+\catcode`/=0\relax
+\catcode`?=1\relax
+\catcode`_=2\relax
+\def\HLEmphasize##1{##1}%
+\def\HLMacro##1{##1}%
+\def\HLReverse##1{##1}%
+\input{#1}\par}
+
+\def\SideBySide@Example#1{%
+\vskip 1mm
+\@tempdimb=\FV@XRightMargin
+\advance\@tempdimb -5mm
+\begin{minipage}[c]{\@tempdimb}
+  \fvset{xrightmargin=0pt}
+  \catcode`\%=14\relax
+  \catcode`\Z=9\relax
+  % We suppress the effect of the highlighting macros
+  \catcode`/=0\relax
+  \catcode`?=1\relax
+  \catcode`_=2\relax
+  \def\HLEmphasize##1{##1}%
+  \def\HLMacro##1{##1}%
+  \def\HLReverse##1{##1}%
+  \input{#1}
+\end{minipage}%
+\@tempdimb=\textwidth
+\advance\@tempdimb -\FV@XRightMargin
+\advance\@tempdimb 5mm
+\begin{minipage}[c]{\@tempdimb}
+  \VerbatimInput[commentchar=Z,commandchars=/?_,
+                 frame=single,numbers=left,numbersep=3pt,
+                 xleftmargin=5mm,xrightmargin=0pt]{#1}
+\end{minipage}
+\vskip 1mm}
+
+\makeatother
+
+
+\begin{document}
+
+
+\begin{CenterExample}
+  \multido{\i=3+1}{6}{%
+    \PstPolygon[PolyNbSides=\i]\hspace{5mm}}
+  \PstPolygon[PolyNbSides=30]
+\end{CenterExample}
+
+\begin{CenterExample}
+  \multido{\i=3+2}{6}{%
+    \PstPolygon[PolyOffset=2,PolyNbSides=\i]\hspace{5mm}}
+  \PstPolygon[PolyOffset=2,PolyNbSides=31]
+\end{CenterExample}
+
+\begin{CenterExample}
+  \multido{\i=3+1}{7}{%
+    \PstPolygon[PolyOffset=3,PolyNbSides=\i]\hspace{5mm}}
+\end{CenterExample}
+
+\begin{CenterExample}
+  \multido{\i=5+1}{7}{%
+    \PstPolygon[PolyOffset=4,PolyNbSides=\i]\hspace{5mm}}
+\end{CenterExample}
+
+\begin{CenterExample}
+  \multido{\i=5+2}{7}{%
+    \PstPolygon[PolyOffset=5,PolyNbSides=\i]\hspace{5mm}}
+\end{CenterExample}
+
+\clearpage
+\begin{CenterExample}
+  \multido{\i=5+2}{7}{%
+    \PstPolygon[PolyOffset=7,PolyNbSides=\i]\hspace{5mm}}
+\end{CenterExample}
+
+\begin{CenterExample}
+  \multido{\i=5+2}{7}{%
+    \PstPolygon[PolyOffset=8,PolyNbSides=\i]\hspace{5mm}}
+\end{CenterExample}
+
+\begin{CenterExample}
+  \multido{\i=1+1}{7}{%
+    \PstPolygon[PolyOffset=\i,PolyNbSides=5]\hspace{5mm}}
+\end{CenterExample}
+
+\begin{CenterExample}
+  \multido{\i=1+1}{7}{%
+    \PstPolygon[PolyOffset=\i,PolyNbSides=7]\hspace{5mm}}
+\end{CenterExample}
+
+\begin{CenterExample}
+  \multido{\i=5+1}{7}{%
+    \PstPolygon[PolyCurves,PolyIntermediatePoint=0.1,PolyNbSides=\i]
+    \hspace{5mm}}
+\end{CenterExample}
+
+\clearpage
+\begin{CenterExample}
+  \multido{\i=5+1}{7}{%
+    \PstPolygon[PolyCurves,PolyIntermediatePoint=0.2,
+                PolyOffset=2,PolyNbSides=\i]\hspace{5mm}}
+\end{CenterExample}
+
+\begin{CenterExample}
+  \multido{\i=5+2}{7}{%
+    \PstPolygon[PolyCurves,PolyIntermediatePoint=0.1,
+                PolyOffset=3,PolyNbSides=\i]\hspace{5mm}}
+\end{CenterExample}
+
+
+\begin{CenterExample}
+  \multido{\n=-1.4+0.5}{7}{%
+    \PstPolygon[PolyNbSides=3,PolyOffset=2,PolyIntermediatePoint=\n]
+    \hspace{5mm}}
+\end{CenterExample}
+
+\begin{CenterExample}
+  \multido{\n=-1.4+0.5}{7}{%
+    \PstPolygon[PolyNbSides=5,PolyOffset=2,PolyIntermediatePoint=\n]
+    \hspace{5mm}}
+\end{CenterExample}
+
+\begin{CenterExample}
+  \multido{\n=-1.4+0.5}{7}{%
+    \PstPolygon[PolyNbSides=13,PolyOffset=2,PolyIntermediatePoint=\n]
+    \hspace{5mm}}
+\end{CenterExample}
+
+\begin{CenterExample}
+  \multido{\n=-1.4+0.5}{7}{%
+    \PstPolygon[PolyNbSides=21,PolyOffset=2,PolyIntermediatePoint=\n]
+    \hspace{5mm}}
+\end{CenterExample}
+
+
+\begin{CenterExample}
+  \psset{unit=1.4,linewidth=0.001,PolyNbSides=72,PolyEpicycloid}
+  \multido{\i=2+1}{4}{%
+    % Epicycloid of factor 1 is cardioid and of factor 2 nephroid
+    \PstPolygon[PolyOffset=\i]\hspace{5mm}}
+\end{CenterExample}
+
+\begin{SideBySideExample}[xrightmargin=5cm]
+  % Epicycloid of factor 10
+  \PstPolygon[unit=2,linewidth=0.003,
+              PolyEpicycloid,PolyNbSides=72,PolyOffset=11]
+\end{SideBySideExample}
+
+\begin{SideBySideExample}[xrightmargin=5cm]
+  % Epicycloid of factor 22
+  \PstPolygon[unit=2,linewidth=0.003,
+              PolyEpicycloid,PolyNbSides=72,PolyOffset=23]
+\end{SideBySideExample}
+
+\clearpage
+\begin{CenterExample}
+  \psset{unit=1.9,linewidth=0.001,PolyNbSides=72,PolyEpicycloid}
+  \multido{\i=71+1}{3}{%
+    \PstPolygon[PolyOffset=\i]\hspace{5mm}}
+\end{CenterExample}
+
+\fvset{xrightmargin=5cm} % 5cm reserved for the graphic
+
+\begin{SideBySideExample}
+  % Epicycloid of factor 100
+  \PstPolygon[unit=2,linewidth=0.003,
+              PolyEpicycloid,PolyNbSides=72,PolyOffset=101]
+\end{SideBySideExample}
+
+\begin{SideBySideExample}[xrightmargin=5cm]
+  % Epicycloid of factor 153
+  \PstPolygon[unit=2,linewidth=0.003,
+              PolyEpicycloid,PolyNbSides=72,PolyOffset=154]
+\end{SideBySideExample}
+
+\clearpage
+
+
+\begin{SideBySideExample}
+  \providecommand{\PstPolygonNode}{%
+    \psdots[dotsize=0.2,linecolor=cyan](1;\INode)}
+  \PstPentagon[unit=2]
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  \providecommand{\PstPolygonNode}{%
+    \rput{*0}(1.2;\INode){\small\the\multidocount}}
+  \PstPolygon[unit=2,PolyNbSides=7,PolyOffset=2]
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  \providecommand{\PstPolygonNode}{%
+    \rput*{*0}(1;\INode){\small\the\multidocount}}
+  \PstHeptagon[unit=2,PolyOffset=2]
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  \newcounter{Letter}
+  \providecommand{\PstPolygonNode}{%
+    \setcounter{Letter}{\the\multidocount}%
+    \rput*{*0}(1;\INode){\small\Alph{Letter}}}
+  \PstHeptagon[unit=2,PolyOffset=3]
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  \providecommand{\PstPolygonNode}{%
+    \SpecialCoor
+    \degrees[3]
+    \rput{0.5}(0.5;\INode){%
+      \pspolygon*(0.5;0.5)(0.5;1.5)(0.5;2.5)}}
+  \PstTriangle
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  \providecommand{\PstPolygonNode}{%
+    \psdots[dotstyle=o,dotsize=0.2](1;\INode)
+    \psline[linecolor=red]{->}(0.9;\INode)}
+  \PstPolygon[unit=2,PolyNbSides=8]
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  \providecommand{\PstPolygonNode}{%
+    \psline[linewidth=0.1mm,doubleline=true,
+            linecolor=green]{<->}(0;0)(1;\INode)}
+  \PstHexagon[unit=2]
+\end{SideBySideExample}
+
+\begin{SideBySideExample}
+  \newbox{\Star}
+  \savebox{\Star}{%
+    \PstStarFive*[unit=0.15,linecolor=red]}
+  \providecommand{\PstPolygonNode}{%
+    \rput{*0}(1;\INode){\usebox{\Star}}}
+  \shortstack{%
+    \PstNonagon\\[5mm]
+    \PstDodecagon[linestyle=none]}
+\end{SideBySideExample}
+
+\end{document}
+\endinput
+%%
+%% End of file `tst-poly.tex'.

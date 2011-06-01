@@ -1,0 +1,41 @@
+%Filename: 8ruaq.fd
+%Created by: tex fonturw
+%Created using fontinst v1.6
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{8ruaq.fd}
+   [1997/12/31 Fontinst v1.6 font definitions for 8r/uaq.]
+
+\DeclareFontFamily{8r}{uaq}{}
+
+\DeclareFontShape{8r}{uaq}{m}{n}{
+   <-> uaqr8r
+}{}
+
+\DeclareFontShape{8r}{uaq}{m}{it}{
+   <-> uaqro8r
+}{}
+
+\DeclareFontShape{8r}{uaq}{m}{sc}{
+   <-> uaqrc8r
+}{}
+
+\DeclareFontShape{8r}{uaq}{m}{sl}{
+   <-> uaqrco8r
+}{}
+
+\DeclareFontShape{8r}{uaq}{l}{n}{<->ssub * uaq/m/n}{}
+\DeclareFontShape{8r}{uaq}{l}{it}{<->ssub * uaq/m/it}{}
+\DeclareFontShape{8r}{uaq}{l}{sc}{<->ssub * uaq/m/sc}{}
+\DeclareFontShape{8r}{uaq}{l}{sl}{<->ssub * uaq/m/sl}{}
+\DeclareFontShape{8r}{uaq}{b}{n}{<->sub * uaq/m/n}{}
+\DeclareFontShape{8r}{uaq}{b}{it}{<->sub * uaq/m/it}{}
+\DeclareFontShape{8r}{uaq}{b}{sc}{<->sub * uaq/m/sc}{}
+\DeclareFontShape{8r}{uaq}{b}{sl}{<->sub * uaq/m/sl}{}
+\DeclareFontShape{8r}{uaq}{bx}{n}{<->sub * uaq/m/n}{}
+\DeclareFontShape{8r}{uaq}{bx}{it}{<->sub * uaq/m/it}{}
+\DeclareFontShape{8r}{uaq}{bx}{sc}{<->sub * uaq/m/sc}{}
+\DeclareFontShape{8r}{uaq}{bx}{sl}{<->sub * uaq/m/sl}{}
+
+\endinput

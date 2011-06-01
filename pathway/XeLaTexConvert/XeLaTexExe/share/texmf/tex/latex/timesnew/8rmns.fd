@@ -1,0 +1,40 @@
+%Filename: 8rmns.fd
+%Created by: tex t
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{8rmns.fd}
+   [2000/12/05 Fontinst v1.801 font definitions for 8r/mns.]
+
+\DeclareFontFamily{8r}{mns}{}
+
+\DeclareFontShape{8r}{mns}{m}{n}{
+   <-> mnsr8r
+}{}
+
+\DeclareFontShape{8r}{mns}{m}{sl}{
+   <-> mnsro8r
+}{}
+
+\DeclareFontShape{8r}{mns}{m}{it}{
+   <-> mnsri8r
+}{}
+
+\DeclareFontShape{8r}{mns}{b}{n}{
+   <-> mnsb8r
+}{}
+
+\DeclareFontShape{8r}{mns}{b}{sl}{
+   <-> mnsbo8r
+}{}
+
+\DeclareFontShape{8r}{mns}{b}{it}{
+   <-> mnsbi8r
+}{}
+
+\DeclareFontShape{8r}{mns}{bx}{n}{<->ssub * mns/b/n}{}
+\DeclareFontShape{8r}{mns}{bx}{sl}{<->ssub * mns/b/sl}{}
+\DeclareFontShape{8r}{mns}{bx}{it}{<->ssub * mns/b/it}{}
+
+\endinput

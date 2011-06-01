@@ -1,0 +1,17 @@
+
+\ProvidesFile{ly1pbk.fd}
+   [1997/02/26  LY1/pbk (Bookman) with Karl Berry file names. (LV)]
+
+\DeclareFontFamily{LY1}{pbk}{}
+
+\DeclareFontShape{LY1}{pbk}{m}{n}{<-> pbkl8y}{}
+\DeclareFontShape{LY1}{pbk}{m}{it}{<-> pbkli8y}{}
+\DeclareFontShape{LY1}{pbk}{b}{n}{<-> pbkd8y}{}
+\DeclareFontShape{LY1}{pbk}{b}{it}{<-> pbkdi8y}{}
+
+% We silently treat bold extended as bold
+
+\DeclareFontShape{LY1}{pbk}{bx}{n}{<->ssub * pbk/b/n}{}
+\DeclareFontShape{LY1}{pbk}{bx}{it}{<->ssub * pbk/b/it}{}
+
+\endinput

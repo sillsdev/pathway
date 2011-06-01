@@ -1,0 +1,221 @@
+%%
+%% This is file `pst-func.tex',
+%%
+%% IMPORTANT NOTICE:
+%%
+%% Package `pst-func.tex'
+%%
+%% Herbert Voss <voss@pstricks.de>
+%%
+%% This program can be redistributed and/or modified under the terms
+%% of the LaTeX Project Public License Distributed from CTAN archives
+%% in directory macros/latex/base/lppl.txt.
+%%
+%% DESCRIPTION:
+%%   `pst-func' is a PSTricks package to plot special functions
+%%
+%% For a ChangeLog go the the end
+%%
+\csname PSTfuncLoaded\endcsname
+\let\PSTfuncLoaded\endinput
+% Requires PSTricks, pst-node
+\ifx\PSTricksLoaded\endinput\else\input pstricks.tex\fi
+\ifx\PSTnodesLoaded\endinput\else\input pst-plot.tex\fi
+\ifx\PSTXKeyLoaded\endinput\else\input pst-xkey.tex \fi
+%
+\edef\PstAtCode{\the\catcode`\@} \catcode`\@=11\relax
+% interface to the `xkeyval' package
+\pst@addfams{pst-func}
+
+\def\fileversion{0.40}
+\def\filedate{2005/04/09}
+\message{`PST-func' v\fileversion, \filedate\space (Herbert Voss)}
+%
+\pstheader{pst-func.pro}
+%\def\pst@funcdict{tx@FuncDict begin }
+%\def\tx@saveCoor{\pst@3ddict saveCoor end }
+%\def\tx@ConvertTo2D{\pst@3ddict ConvertTo2D end }
+%
+\define@key[psset]{pst-func}{xShift}{\def\psk@xShift{#1}}
+\psset[pst-func]{xShift=0}
+%
+\define@key[psset]{pst-func}{cosCoeff}{\def\psk@cosCoeff{#1}}
+\define@key[psset]{pst-func}{sinCoeff}{\def\psk@sinCoeff{#1}}
+\psset[pst-func]{cosCoeff=0,sinCoeff=1} % coeff=a0 a1 a2 a3 ...
+%
+\def\psFourier{\@ifnextchar[{\psFourier@i}{\psFourier@i[]}}
+\def\psFourier@i[#1]#2#3{{%
+  \pst@killglue
+  \psset{#1}
+  \psplot{#2}{#3}{%
+      /type (cos) def
+      /Fourier {
+        aload length /n exch def
+        n -1 roll 2 div n 1 roll % a0/2
+        n 1 sub -1 0 {
+          /i exch def
+          i x mul 180 mul 3.141592 div
+          type (sin) eq {sin}{cos} ifelse
+          mul n 1 roll
+        } for
+        n 1 sub -1 1 { pop add } for
+      } def
+      [\psk@cosCoeff] Fourier
+      /type (sin) def
+      [0 \psk@sinCoeff] Fourier add
+    }%
+}\ignorespaces}
+%
+\define@key[psset]{pst-func}{coeff}{\def\psk@coeff{#1}}
+\define@key[psset]{pst-func}{Abbreviation}{\def\psk@Deriviation{#1}}% compatibility
+\define@key[psset]{pst-func}{Derivation}{\def\psk@Derivation{#1}}
+\newif\ifPst@markZeros%	
+\define@key[psset]{pst-func}{markZeros}[true]{\@nameuse{Pst@markZeros#1}}
+\define@key[psset]{pst-func}{epsZero}{\def\psk@epsZero{#1}}
+\define@key[psset]{pst-func}{dZero}{\def\psk@dZero{#1}}
+\define@key[psset]{pst-func}{zeroLineTo}{\def\psk@zeroLineTo{#1}}
+\define@key[psset]{pst-func}{zeroLineColor}{\pst@getcolor{#1}\psk@zeroLineColor}
+\newdimen\psk@zeroLineWidth
+\define@key[psset]{pst-func}{zeroLineWidth}{\pssetlength\psk@zeroLineWidth{#1}}
+\define@key[psset]{pst-func}{zeroLineStyle}{%
+  \@ifundefined{psls@#1}%
+    {\@pstrickserr{Line style `#1' not defined}\@eha}%
+    {\edef\psk@zeroLineStyle{#1}}%
+}
+\psset[pst-func]{%
+       coeff=0 1,      % coeff=a0 a1 a2 a3 ...
+       Derivation=0, % 0 is the original function
+       markZeros=false,% no dots for the zeros
+       epsZero=0.1,    % the distance between two zero points   
+       dZero=0.1,      % the distance of the x value for scanning the function
+       zeroLineTo=-1,  % a line to the value of the lineTo's Derivation (-1= none)
+       zeroLineStyle=dashed,%
+       zeroLineWidth=0.5\pslinewidth,%
+       zeroLineColor=black}%
+%
+\def\psPolynomial{\pst@object{psPolynomial}}
+\def\psPolynomial@i#1#2{{%
+  \begin@OpenObj
+  \@nameuse{beginplot@\psplotstyle}%
+  \gdef\psplot@init{}%
+  \@nameuse{testqp@\psplotstyle}%
+  \addto@pscode{%
+    tx@FuncDict begin
+    /coeff [ \psk@coeff ] def
+    /x0 #1 def /x1 #2 def
+    /dx x1 x0 sub \psk@plotpoints\space div def
+    /Derivation \psk@Derivation\space def
+    \ifPst@markZeros 
+      gsave
+      \pst@number\psk@zeroLineWidth SLW
+      \pst@usecolor\psk@zeroLineColor
+      \psk@epsZero\space \psk@dZero\space FindZeros 
+      pstZeros aload length {
+        /xZero exch def
+        xZero \pst@number\psxunit mul /xPixel exch def
+        \psk@dotsize
+        \@nameuse{psds@\psk@dotstyle}%
+        xPixel 0 Dot 
+        \psk@zeroLineTo\space 0 ge { % line to function \psk@lineTo
+          xPixel 0 moveto
+          xZero coeff \psk@zeroLineTo\space FuncValue 
+          \pst@number\psyunit mul xPixel exch L
+          \@nameuse{psls@\psk@zeroLineStyle}
+        } if
+      } repeat
+      grestore
+    \fi
+    /x x0 def
+    /xy {
+      x \psk@xShift\space sub coeff Derivation FuncValue \pst@number\psyunit mul 
+      x \pst@number\psxunit mul exch
+    } def
+    xy moveto
+  }%
+  \if@pst%	lines and dots
+    \psPolynomial@ii%
+  \else%	curves
+    \psPolynomial@iii%
+  \fi%
+  \end@OpenObj
+}\ignorespaces}
+%
+\def\psPolynomial@ii{%
+  \addto@pscode{%
+     xy \@nameuse{beginqp@\psplotstyle}
+    \psk@plotpoints {
+      xy \@nameuse{doqp@\psplotstyle}
+      /x x dx add def
+    } repeat
+    xy \@nameuse{doqp@\psplotstyle}
+    end
+  }%
+  \@nameuse{endqp@\psplotstyle}%
+}
+\def\psPolynomial@iii{%    curves
+  \addto@pscode{%
+    mark
+    /n 2 def
+    \psk@plotpoints {
+      xy 
+      n 2 roll
+      /n n 2 add def
+      /x x dx add def
+    } repeat
+    /x x1 def
+    xy
+    n 2 roll
+    end
+  }%
+  \@nameuse{endplot@\psplotstyle}%
+}
+%
+% Bessel 2004-06-08
+% Manuel Luque, Herbert Voss
+% Look at the end for some more documentation about the algorithm
+%
+\define@key[psset]{pst-func}{constI}{\edef\psk@constI{#1}}
+\define@key[psset]{pst-func}{constII}{\edef\psk@constII{#1}}
+\psset{constI=1,constII=0}
+%
+\def\psBessel{\@ifnextchar[{\psBessel@i}{\psBessel@i[]}}
+\def\psBessel@i[#1]#2#3#4{{%%%  #2 = n
+  \pst@killglue
+  \psset{plotpoints=500}%
+  \psset{#1}%
+  \parametricplot{#3}{#4}{%
+    /J1 0 def
+    /k { 57.29577951 mul } def
+    /xBessel t k def
+    0 0.1 180 {
+      /tB exch k def
+      /J1 J1 0.1 xBessel
+        tB sin mul tB #2\space mul sub cos mul add def
+    } for
+    t J1 180 div \psk@constI\space mul \psk@constII\space add
+  }%
+}\ignorespaces}
+%
+\define@key[psset]{pst-func}{sigma}{\def\psk@sigma{#1}}
+\psset[pst-func]{sigma=0.5}
+%
+\def\psGauss{\@ifnextchar[{\psGauss@i}{\psGauss@i[]}}
+\def\psGauss@i[#1]#2#3{{%
+    \pst@killglue%
+    \psset{plotpoints=200}%
+    \psset{#1}%
+    \pstVerb{%
+        /euler 2.718282 def
+        /Const 1 \psk@sigma\space div 6.2831 sqrt div def
+	/x0 \psk@xShift\space def
+    }%
+    \psplot{#2}{#3}{%
+        euler x x0 sub dup mul 2 div \psk@sigma\space dup mul div neg exp Const mul%
+    }%
+}\ignorespaces}
+%
+\catcode`\@=\PstAtCode\relax
+%
+%% END: pst-abspos.tex
+\endinput
+%

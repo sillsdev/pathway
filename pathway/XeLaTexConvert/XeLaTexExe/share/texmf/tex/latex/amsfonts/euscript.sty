@@ -1,0 +1,70 @@
+%%
+%% This is file `euscript.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% euscript.dtx  (with options: `euscript')
+%% 
+%%% ====================================================================
+%%% @LaTeX-file{
+%%%   filename        = "euscript.dtx",
+%%%   version         = "2.2d",
+%%%   date            = "2001/10/01",
+%%%   time            = "11:53:06 EDT",
+%%%   checksum        = "51492 201 926 8086",
+%%%   author          = "American Mathematical Society",
+%%%   copyright       = "Copyright 2001 American Mathematical Society,
+%%%                      all rights reserved.  Copying of this file is
+%%%                      authorized only if either:
+%%%                      (1) you make absolutely no changes to your copy,
+%%%                      including name; OR
+%%%                      (2) if you do make changes, you first rename it
+%%%                      to some other name.",
+%%%   address         = "American Mathematical Society,
+%%%                      Technical Support,
+%%%                      Publications Technical Group,
+%%%                      P. O. Box 6248,
+%%%                      Providence, RI 02940,
+%%%                      USA",
+%%%   telephone       = "401-455-4080 or (in the USA and Canada)
+%%%                      800-321-4AMS (321-4267)",
+%%%   FAX             = "401-331-3842",
+%%%   email           = "tech-support@ams.org (Internet)",
+%%%   codetable       = "ISO/ASCII",
+%%%   keywords        = "latex, amslatex, ams-latex, amsfonts, euscript,
+%%%                      eucal, mathcal",
+%%%   supported       = "yes",
+%%%   abstract        = "This is part of the AMSFonts distribution.
+%%%                      It is a \LaTeX{} package that sets up some
+%%%                      font shape definitions to use the Euler
+%%%                      script symbols in math mode. These fonts are
+%%%                      part of the AMSFonts font collection.",
+%%%   docstring       = "The checksum field above contains a CRC-16
+%%%                      checksum as the first value, followed by the
+%%%                      equivalent of the standard UNIX wc (word
+%%%                      count) utility output of lines, words, and
+%%%                      characters.  This is produced by Robert
+%%%                      Solovay's checksum utility.",
+%%% }
+%%% ====================================================================
+\NeedsTeXFormat{LaTeX2e}% LaTeX 2.09 can't be used (nor non-LaTeX)
+[1994/12/01]% LaTeX date must be December 1994 or later
+\ProvidesPackage{euscript}[2001/10/01 v2.2d Euler Script fonts]
+\DeclareMathAlphabet\EuScript{U}{eus}{m}{n}
+\SetMathAlphabet\EuScript{bold}{U}{eus}{b}{n}
+\newcommand{\CMcal}{}
+\let\CMcal=\mathcal
+\DeclareOption{psamsfonts}{%
+  \DeclareFontFamily{U}{eus}{\skewchar\font'60}%
+  \DeclareFontShape{U}{eus}{m}{n}{<-6>eusm5<6-8>eusm7<8->eusm10}{}%
+  \DeclareFontShape{U}{eus}{b}{n}{<-6>eusb5<6-8>eusb7<8->eusb10}{}%
+}
+\DeclareOption{mathcal}{\renewcommand{\mathcal}{\EuScript}}
+\DeclareOption{mathscr}{%
+  \providecommand{\mathscr}{}\renewcommand{\mathscr}{\EuScript}%
+}
+\ProcessOptions
+\endinput
+%%
+%% End of file `euscript.sty'.

@@ -1,0 +1,19 @@
+% This file belongs to the Latin Modern package. The work is released under
+% the GUST Font License. See the MANIFEST.txt and README.eng files
+% for the details. For the most recent version of this license see
+% http://www.gust.org.pl/fonts/licenses/GUST-FONT-LICENSE.txt or
+% http://tug.org/fonts/licenses/GUST-FONT-LICENSE.txt
+
+\ProvidesFile{ot4lmdh.fd}[2007/01/14 v1.3 Font defs for Latin Modern]
+\DeclareFontFamily{OT4}{lmdh}{\hyphenchar\font45 }
+\DeclareFontShape{OT4}{lmdh}{m}{n}{%
+      <-> rm-lmdunh10
+    }{}
+\DeclareFontShape{OT4}{lmdh}{m}{it}
+      {<->sub*lmdh/m/sl}{}
+\DeclareFontShape{OT4}{lmdh}{m}{sl}{%
+      <-> rm-lmduno10
+    }{}
+\endinput
+%%
+%% End of file `ot4lmdh.fd'.

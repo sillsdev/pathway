@@ -1,0 +1,103 @@
+%%
+%% This is file `pst-slpe.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% pst-slpe.dtx  (with options: `texfile')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from pst-slpe.tex.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file pst-slpe.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+\def\pstslpefileversion{1.0}
+\def\pstslpefiledate{98/09/15}
+\message{ v\pstslpefileversion, \pstslpefiledate}
+\csname PstSlopeLoaded\endcsname
+\let\PstSlopeLoaded\endinput
+\ifx\PSTricksLoaded\endinput\else
+  \def\next{\input pstricks.tex }\expandafter\next
+\fi
+\edef\TheAtCode{\the\catcode`\@}
+\catcode`\@=11
+\pstheader{pst-slpe.pro}
+\newrgbcolor{slopebegin}{0.9 1 0}
+\def\psset@slopebegin#1{\pst@getcolor{#1}\psslopebegin}
+\psset@slopebegin{slopebegin}
+
+\newrgbcolor{slopeend}{0 0 1}
+\def\psset@slopeend#1{\pst@getcolor{#1}\psslopeend}
+\psset@slopeend{slopeend}
+
+\def\psset@slopesteps#1{\pst@getint{#1}\psslopesteps}
+\psset@slopesteps{100}
+
+\def\psset@slopeangle#1{\pst@getangle{#1}\psx@slopeangle}
+\psset@slopeangle{0}
+\def\psset@slopecolors#1{\def\psx@slopecolors{#1}}
+\def\psx@slopecolors{
+0.0 1 0 0
+0.4 0 1 0
+0.8 0 0 1
+1.0 1 0 1
+4}
+\def\psset@slopecenter#1{\def\psx@slopecenter{#1}}
+\def\psx@slopecenter{0.5 0.5}
+\def\psset@sloperadius#1{\pst@getlength{#1}\psx@sloperadius}
+\def\psx@sloperadius{0}
+\def\psfs@slopes{%
+ \addto@pscode{
+  \psx@slopecolors\space
+  \psslopesteps
+  \psx@slopeangle
+  tx@PstSlopeDict begin SlopesFill end}}
+\def\psfs@slope{%
+ \addto@pscode{%
+  gsave
+    0 \pst@usecolor\psslopebegin currentrgbcolor
+    1 \pst@usecolor\psslopeend currentrgbcolor
+    2
+  grestore
+  \psslopesteps \psx@slopeangle tx@PstSlopeDict begin SlopesFill end}}
+\def\psfs@ccslopes{%
+ \addto@pscode{%
+  \psx@slopecolors\space
+  \psslopesteps \psx@slopecenter\space \psx@sloperadius\space
+  tx@PstSlopeDict begin CcSlopesFill end}}
+\def\psfs@ccslope{%
+ \addto@pscode{%
+  gsave 0 \pst@usecolor\psslopebegin currentrgbcolor
+    1 \pst@usecolor\psslopeend currentrgbcolor
+    2 grestore
+  \psslopesteps \psx@slopecenter\space \psx@sloperadius\space
+  tx@PstSlopeDict begin CcSlopesFill end}}
+\def\psfs@radslopes{%
+ \addto@pscode{%
+  \psx@slopecolors\space
+  \psslopesteps\psx@slopecenter\space\psx@sloperadius\space\psx@slopeangle
+  tx@PstSlopeDict begin RadSlopesFill end}}
+\def\psfs@radslope{%
+ \addto@pscode{%
+  gsave 0 \pst@usecolor\psslopebegin currentrgbcolor
+    1 \pst@usecolor\psslopeend currentrgbcolor
+    2 \pst@usecolor\psslopebegin currentrgbcolor
+    3 \pst@usecolor\psslopeend currentrgbcolor
+    4 \pst@usecolor\psslopebegin currentrgbcolor
+    5 grestore
+  \psslopesteps\psx@slopecenter\space\psx@sloperadius\space\psx@slopeangle
+  tx@PstSlopeDict begin RadSlopesFill end}}
+
+\catcode`\@=\TheAtCode\relax
+\endinput
+%%
+%% End of file `pst-slpe.tex'.

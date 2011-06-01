@@ -1,0 +1,8 @@
+\RequirePackage{pstricks}
+\ProvidesPackage{pst-fill}[2004/07/15 package wrapper for pst-fill.tex]
+\DeclareOption{tiling}{\def\PstTiling{true}}
+\ProcessOptions\relax
+\input{pst-fill.tex}
+\ProvidesFile{pst-fill.tex}
+  [\filedate\space \fileversion\space `pst-fill' (tvz)]
+\endinput

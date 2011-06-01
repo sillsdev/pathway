@@ -1,0 +1,836 @@
+% S H A P E P A R . S T Y
+%
+% Typeset paragraphs in various shapes.
+%
+% Version 1.01  (March 1993)
+%
+% Copyright (c) 1993    Donald Arseneau
+% These definitions may be freely transmitted, reproduced, or modified for
+% non-commercial purposes provided that this notice is left intact.
+%
+% \shapepar: a macro to typeset paragraphs in a specific shape. The
+% size is adjusted automatically so that the entire shape is filled
+% with text. There can be no displayed math, and no "\vadjust"
+% material (no "\vspace").  These macros work for both LaTeX and plain
+% TeX.  For LaTeX, specify \documentstyle[...shapepar...], or for
+% either, \input shapepar.sty .  Instructions for use are given after
+% \endinput below.
+%
+%---------------------
+% make file load whatever status of @
+\expandafter\edef\csname SH@catcode\endcsname
+  {\catcode`\noexpand\@=\the\catcode`\@
+   \catcode`\noexpand\$=\the\catcode`\$
+   \let \csname SH@catcode\endcsname \noexpand\UnDefinedButNoAt}
+\catcode`\@=11  \catcode`\$=11
+
+% Define variables.  Use LaTeX names for some.
+
+\def\@empty{}
+\ifx\@tempdima\@und@fined \csname newdimen\endcsname \@tempdima \fi
+\ifx\@tempdimb\@und@fined \csname newdimen\endcsname \@tempdimb \fi
+\ifx\@tempcnta\@und@fined \csname newcount\endcsname \@tempcnta \fi
+\ifx\@tempcntb\@und@fined \csname newcount\endcsname \@tempcntb \fi
+\ifx\@tempboxa\@und@fined \csname newbox\endcsname \@tempboxa \fi
+
+% Most are defined as aliases for previously-allocated registers.
+% In the future, the descriptive names may disappear altogether.
+
+\def\@tempa#1#2#3{%  {"count"|"dimen"|"box"|"skip"}{\myname}{\realname}
+  \ifx\@und@fined#3\csname new#1\endcsname#2% allocate new one
+  \else\let#2#3\fi % alias is defined, so use it
+ }
+
+\@tempa{box}\SH@boxa\rootbox
+\newbox\SH@boxb                   % global
+\@tempa{dimen}\SH@pd\@savsk
+\@tempa{count}\SH@ntries\@cla     % global
+\@tempa{dimen}\spec@bot\p@renwd
+\@tempa{dimen}\spec@top\jot
+\@tempa{dimen}\spec@height\@wholewidth
+\@tempa{dimen}\spec@incr\@halfwidth
+\@tempa{dimen}\spec@position\@picht
+\@tempa{dimen}\spec@nextpos\@ovxx
+\@tempa{dimen}\spec@prevpos\@ovyy
+\@tempa{dimen}\spec@hcenter\@xdim
+\@tempa{dimen}\SH@scale\@ydim
+\@tempa{dimen}\SH@dscale\dimen@i   % global
+\@tempa{dimen}\SH@tottext\@toproom % global
+\@tempa{dimen}\SH@posseg\@ovro
+\@tempa{dimen}\SH@widseg\@ovri
+\@tempa{dimen}\SH@posold\@ovdx
+\@tempa{dimen}\SH@widold\@ovdy
+\@tempa{dimen}\SH@weight\@dashdim
+\@tempa{count}\SH@npslines\interdisplaylinepenalty
+\@tempa{count}\SH@nline\@savsf
+
+% How many times will \shapepar try to get the size of the paragraph?
+\chardef\SH@maxtries=9
+
+\def\Shapepar{\let\SH@usebox\box \shapepar}
+\let\SH@usebox\unvbox
+
+\def\shapepar#1{% #1 = shape specification.  May be a macro.
+ \begingroup
+  \par \endgraf
+  \edef\SH@restog{\global\SH@ntries\the\SH@ntries
+   \global\SH@dscale\the\SH@dscale \global\SH@tottext\the\SH@tottext}
+  \SH@pd\prevdepth
+  \let\\\relax \edef\SH@spec{#1}%
+  \hyphenpenalty10 \exhyphenpenalty10 % optimise
+  \doublehyphendemerits10 \adjdemerits10
+  \hfuzz\maxdimen
+  \setbox\SH@boxa\vbox\bgroup % set whole text on one line
+   \parindent\z@ \leftskip\z@skip % \rightskip set below
+   \spaceskip .333333emplus.8emminus.15em % optimise stretch
+   \parfillskip\z@ plus\@ne fil
+   \begingroup
+    \linepenalty\@m
+    \def\\{\unskip\penalty-200 \hskip1em plus\@m\p@ \penalty-60 }%
+    \let\par\SH@endpar \hsize\maxdimen \rightskip\spaceskip
+    \pretolerance\m@ne \hyphenpenalty 9000 % make discretionaries
+    \ifx\textwidth\@undefined\else \textwidth\hsize
+      \linewidth\hsize \columnwidth\hsize \fi
+    \def\vadjust{{\def\SH@dm{special vertical material}\the\everydisplay}}%
+    \everydisplay{\errhelp{Press RETURN, and hope.}\errmessage
+     {Shaped Paragraph Error: \SH@dm\space is illegal in a shaped paragraph}}%
+    \noindent \penalty\@M \hskip\z@skip % allow hyphenation of first word
+    \ignorespaces}
+
+\def\SH@endpar{%
+    \endgraf \endgroup % still inside \vbox and \begingroup
+   \global\SH@dscale\z@
+   \expandafter\SH@checkspec\SH@spec $% check height of spec.
+%  get tottext = total length / 256 because total length may be > \maxdimen
+   \setbox\@tempboxa\box\voidb@x \global\SH@tottext\z@
+   \SH@sumlines % combine multiple lines -> \@tempboxa; width/256 ->\SH@tottext
+%%%\message{total length = 256 * \the\SH@tottext; 
+%%%\string\baselineskip=\the\baselineskip;
+%%%and spec height = \pointless\spec@height. }%
+   \unskip\unkern\unpenalty\unskip\unkern\unpenalty
+   \setbox\SH@boxa\box\@tempboxa % all the text
+   \@tempdima1.4\SH@tottext % optimise
+   \@tempdima\pointless\@tempdima\baselineskip
+   \sqrtcount\@tempdima  \sqrtofcount
+   \multiply\sqrtcount 4096 % * sqrt(256) * 256
+%  scale_guess = sqrt(2 * 256*[text_length/256] * baselineskip) / spec_ht
+   \SH@scale\sqrtcount sp \fpdivide\SH@scale\spec@height
+   \global\SH@ntries\z@ % real initialization
+   \lineskiplimit-99\p@ \linepenalty\thr@@
+   \ifx\emergencystretch\@undefined \tolerance9999 %\@M  % TeX 2
+   \else \tolerance600 \emergencystretch 2em\relax % TeX 3
+   \fi \pretolerance\m@ne \hbadness\@MM % avoid error messages
+   \rightskip\z@ plus.1emminus.2em % optimise stretch/shrink
+   \SH@tryparshape}
+
+% \tryparshape: try a parshape with scale factor \SH@scale for \SH@spec
+% For a given scale, it would take x lines of text to cover the shape,
+% but only an integer number of lines (counted by \SH@nline) will be
+% used.  The excess is evenly distributed at the top and bottom to preserve
+% the symmetry of shapes.  The starting point is thus:
+%
+% spec_top + 1/2 * { spec_height - floor[ (spec_height-delta)/incr ]*incr }
+%
+\def\SH@tryparshape{%
+  \advance\SH@scale\SH@dscale % shift scale factor by delta
+  \message{(\the\SH@ntries) Try shape with scale \pointless\SH@scale\space
+    (Delta = \pointless\SH@dscale).}%% <--more \message
+  \def\SH@parshape{}\def\SH@lines{}\let\@elt\relax \SH@npslines\z@
+  \spec@incr\baselineskip \fpdivide\spec@incr\SH@scale
+  \spec@position\spec@height \advance\spec@position-.4\spec@incr % height-delta
+  \SH@nline\spec@position \divide\SH@nline\spec@incr % number of lines
+  \spec@position-\SH@nline\spec@incr % - height of n lines
+  \advance\spec@position\spec@height % difference from desired height
+  \divide\spec@position\tw@ % half the excess
+  \advance\spec@position\spec@top % starting position
+  \advance\spec@position-\spec@incr % pre-decrement
+  \SH@nline\z@ % initialize counter for lines
+%%\message{Parsing spec.}%
+  \expandafter \SH@doaline \SH@spec \\$}
+% this macro ends instead of continuing with \SH@done so TeX will use
+% tail-recursion as \SH@tryparshape is iterated.
+  
+\def\SH@doaline{\SH@updps \SH@widold-\maxdimen
+  \advance\SH@nline\@ne \advance\spec@position\spec@incr
+  \ifdim\spec@position<\spec@bot
+    \let\\\SH@findpos
+  \else
+    \let\\\SH@dopara
+  \fi \\}
+
+\def\SH@findpos#1#2\\{\ifdim#1\p@>\spec@position
+     \def\SH@nextspec{#2{}}\spec@nextpos#1\p@ \def\\{\SH@found{#1}#2\\}%
+     \expandafter\def\expandafter\SH@prevspec\expandafter{\SH@Prevspec}%
+  \else
+     \def\SH@Prevspec{#2{}}\spec@prevpos#1\p@
+  \fi \\}
+
+\def\SH@found{% calculate weights to interpolate
+  \SH@weight\spec@position \advance\SH@weight-\spec@prevpos
+  \@tempdimb\spec@nextpos  \advance\@tempdimb-\spec@prevpos
+  \fpdivide\SH@weight\@tempdimb % weight = interpolation factor
+  \let\next \SH@dosegment  \SH@dosegment}
+
+% Get the position and width of a segment of text by taking the weighted
+% average of the specifications from above and below (weighted by nearness).
+% Most of the confusing bits here are hueristics to deal with narrow gaps.
+% If a gap between two texts is less than a space, the texts are joined
+% over the gap.  If the gap is less than 1em, the gap is increased to the
+% average of 1em and the given gap.
+
+\def\SH@dosegment{% do a segment of text on this line
+  \SH@posseg\z@ \SH@widseg\z@
+  \advance\SH@weight-\p@ \SH@weight-\SH@weight % w1 = 1 - w2
+  \SH@getseg A\SH@prevspec % Above
+  \advance\SH@weight-\p@ \SH@weight-\SH@weight % w2 = 1 - w1
+  \SH@getseg B\SH@nextspec % Below
+  \ifdim\SH@widseg>\z@
+     \SH@widseg\pointless\SH@scale\SH@widseg
+     \advance\SH@posseg-\spec@hcenter
+     \SH@posseg\pointless\SH@scale\SH@posseg
+     \advance\SH@posseg.5\hsize
+%    Here are the small-gap heuristics.  \@tempdima is the gap and the shift
+     \ifdim\SH@widold>\z@
+        \@tempdima\SH@posseg
+        \advance\@tempdima-\SH@posold \advance\@tempdima-\SH@widold %gap
+        \ifdim\@tempdima<\spaceskip % gap too small; eliminate
+%%%%       \message{Gap is \the\@tempdima--eliminate. }%
+           \advance\SH@widold\@tempdimb \advance\SH@widold\SH@widseg % no update
+        \else
+           \ifdim\@tempdima<1em % gap small; enlarge it if text not too small
+              \ifdim\SH@widold>1em \ifdim\SH@widseg>1em
+%%%%                \message{Gap is \the\@tempdima--enlarge}%
+                    \@tempdima-.25\@tempdima \advance\@tempdima.25em
+%%%%                \message{by 2 x \the\@tempdima. }%
+                    \advance\SH@widold-\@tempdima
+                    \advance\SH@widseg-\@tempdima
+                    \advance\SH@posseg \@tempdima
+           \fi\fi\fi
+           \SH@updps
+        \fi
+     \else % no previous, so no update.  Just hold.
+        \SH@widold\SH@widseg \SH@posold\SH@posseg
+  \fi\fi
+  \ifx\SH@prevspec\@empty \let\next\SH@doaline \fi
+  \ifx\SH@nextspec\@empty \let\next\SH@doaline \fi
+  \next}
+
+\def\SH@updps{% Update parshape with `new' info
+\ifdim\SH@widold>\z@
+%%\message{.}%
+  \edef\SH@parshape{\SH@parshape\the\SH@posold\the\SH@widold\space}%
+  \edef\SH@lines{\@elt{\the\SH@nline}{\the\SH@posold}{\the\SH@widold}\SH@lines}%
+  \advance\SH@npslines\@ne
+\fi \SH@widold\SH@widseg \SH@posold\SH@posseg}
+   
+\def\SH@getseg#1#2{% A/B, spec
+  \ifx#2\@empty \SH@specerror \fi
+  \expandafter \SH@GetseG #2$#1#2}
+
+\def\SH@GetseG#1#2$#3#4{% command, rest of spec, $, A/B, spec
+   \expandafter \ifx\csname spec#3$#1\endcsname \relax 
+     \SH@specerror
+   \else
+     \csname spec#3$#1\endcsname #2$#4%
+   \fi}
+
+\def\SH@redefine#1$#2{\def#2{#1}}
+
+\def\SH@dopara#1\\${% eat remaining spec and test parshape
+\global\setbox\SH@boxb\vbox{%
+  \advance\SH@npslines\@ne
+  \parshape\the\SH@npslines\space \SH@parshape \z@ \maxdimen
+  \advance\SH@npslines\m@ne
+%%\message{Formatting. }%
+  \noindent \unhcopy\SH@boxa \endgraf
+  \message{Expected \the\SH@npslines\space lines;
+    got \the\prevgraf\space lines}% <--more \message
+  \ifnum\prevgraf=\SH@npslines % maybe right size; check last line
+     \ifdim\SH@widseg>\z@ % yes, we can check
+        \ifnum\SH@ntries<\SH@maxtries % safe to screw around with \SH@npslines
+           \SH@grablast \@tempdima\wd\SH@boxa \advance\@tempdima 20\p@
+           \ifdim\@tempdima<.8\SH@widseg % final line underfull % optimise
+              \message{but the last line is too empty. }%
+              \advance\SH@npslines\@ne % flag underfullness
+  \fi\fi\fi\fi
+  \ifnum\prevgraf=\SH@npslines % right size, done
+     \aftergroup\SH@done \global\SH@dscale\z@
+  \else % Try a new scale factor
+     \ifdim\SH@dscale=\z@ % no previous step.  Try to guess a good one
+        \ifnum\prevgraf<\SH@npslines % underfull
+%%%        \message{First underfull. }%
+           \@tempdima\prevgraf\p@ 
+           \divide\@tempdima\SH@npslines
+        \else % overfull
+%%%        \message{First overfull. }%
+           \SH@grablast 
+           \@tempdimb-\wd\SH@boxa \advance\@tempdimb-20\p@
+           \divide\@tempdimb\@cclvi
+           \@tempdima\SH@tottext \advance\@tempdimb\@tempdima
+           \fpdivide\@tempdima\@tempdimb 
+%%%      \message{overfullness: \the\wd\SH@boxa; ratio: \pointless\@tempdima}%
+        \fi
+        \sqrtcount\@tempdima \sqrtofcount \multiply\sqrtcount\@cclvi
+        \@tempdima\sqrtcount sp
+        \advance\@tempdima-\p@
+        \global\SH@dscale\pointless\@tempdima\SH@scale
+        \gdef\SH@fac{1}% % optimise
+     \else % Not first step, scale from previous
+        \ifnum\prevgraf>\SH@npslines % overflow now
+           \ifdim\SH@dscale>\z@  % previous Overflow
+              \global\SH@dscale \SH@fac\SH@dscale
+           \else % overflow now, but previous underflow
+              \gdef\SH@fac{.53}% % optimise
+              \global\SH@dscale -\SH@fac\SH@dscale
+           \fi
+        \else  % underflow now
+           \ifdim\SH@dscale>\z@  % previous Overflow
+              \gdef\SH@fac{.54}% % optimise
+              \global\SH@dscale -\SH@fac\SH@dscale
+           \else % overflow now, but previous underflow
+              \global\SH@dscale \SH@fac\SH@dscale
+           \fi
+        \fi 
+     \fi
+     \ifdim-\SH@dscale>.6\SH@scale
+          \global\SH@dscale -.6\SH@scale  % avoid scale --> 0 !
+     \fi
+     \global\advance\SH@ntries\@ne
+     \ifdim\AbsVal\SH@dscale <.005\p@ \global\SH@ntries\@cclv \fi
+     \ifnum \SH@ntries>\SH@maxtries \aftergroup\SH@done
+     \else \aftergroup\SH@tryparshape
+  \fi\fi
+}}% end \vbox,  end macro.  Must not insert anything between braces!
+
+% Get last hbox off list; rebox it into \SH@boxa, omitting final glue
+%
+\def\SH@grablast{\unskip\unkern\unskip\unpenalty
+  \setbox\SH@boxa\lastbox
+  \ifhbox\SH@boxa
+    \setbox\SH@boxa\hbox{\unhbox\SH@boxa\unskip\unskip\unpenalty}%
+  \fi}
+
+
+\def\SH@done{\skip@ 1spplus\p@ minus\p@
+  \tolerance9999
+  \rightskip\z@ plus.05emminus.1em % optimise, but should be same as above?
+  \parfillskip.5\maxdimen % this will drag text to the bottom point.
+  \advance\SH@npslines\@ne
+  \SH@reform % reformat paragraph with new parfillskip
+  \SH@nline\m@ne \let\@elt\SH@restack
+  \message{Restacking.}%
+  \global\setbox\SH@boxb\vbox{%  % re-stack segments and re-justify lines.
+     \setbox\SH@boxa\vbox{}\leftskip\z@ plus55sp minus5\p@ % optimise
+     \unvbox\SH@boxb
+     \SH@lines \unvbox\SH@boxa}%
+  \egroup % end original \setbox\SH@boxa\vbox\bgroup; but \SH@boxa is useless
+ \SH@restog % restore global registers
+ \SH@pd\dp\SH@boxb \SH@usebox\SH@boxb \prevdepth\SH@pd
+ \endgroup % \prevdepth is global
+\let\SH@usebox\unvbox % completely finished!
+}
+
+\def\SH@reform{\global\setbox\SH@boxb\vbox\bgroup
+  \message{Reformat paragraph with \string\rightskip = \the\rightskip.}%
+  \advance\parfillskip-\rightskip \advance\parfillskip-\leftskip
+  \parshape\the\SH@npslines\space \SH@parshape \z@ .5\maxdimen
+  %% get prevdepth from outside, penalty puts \parskip and favors breaks
+  \prevdepth\SH@pd \ifdim\SH@pd>-\@m\p@ \penalty-50 \fi
+  \noindent \unhcopy\SH@boxa \unskip\unskip\unpenalty\strut
+  \penalty-\@M\hbox{\kern\hfuzz}\endgraf
+  \ifnum\prevgraf=\SH@npslines % good, it worked.
+    \setbox\SH@boxa\lastbox \unskip\unpenalty % remove mongo last box
+    \egroup
+  \else % something wrong, increase flexibility and try again
+    \egroup %
+    \ifnum\skip@<64 % try again
+       \advance\rightskip\skip@
+       \multiply\skip@\tw@
+       \expandafter\expandafter\expandafter \SH@reform
+  \fi\fi}
+
+\def\SH@restack#1#2#3{% line num, shift, width
+  \skip@\lastskip \unskip \advance\skip@\lastskip \unskip
+  \@tempcnta\lastpenalty \unpenalty\unpenalty
+  \setbox\@tempboxa\lastbox
+%%\message{.}%
+  \setbox\SH@boxa\vbox{%
+     \ifhbox\@tempboxa
+        \moveright#2\hbox to#3{\hskip\leftskip \unhbox\@tempboxa
+        \unskip \hskip\leftskip}%
+     \fi
+     \ifnum\@tempcnta=\z@\else \penalty\@tempcnta \fi
+     \vskip\skip@
+     \ifnum\SH@nline=#1\relax \vskip-\baselineskip \fi
+     \unvbox\SH@boxa}%
+  \SH@nline#1\relax}
+
+\def\SH@checkspec#1#2#3#4${% h-center, v-origin, "b", rest of spec
+   \ifx b#3\else \SH@specerror \fi
+   \spec@hcenter#1\p@ \spec@top#2\p@ \spec@bot-\maxdimen
+   \def\SH@spec{{#2}b#4}%
+   \let\\\SH@CheckSpec
+   \\{#2}b#4\\{-1234.5}\\[$%
+   \ifdim\spec@bot<-\@m\p@ \SH@specerror \fi
+   \spec@height\spec@bot \advance\spec@height-\spec@top
+}
+
+\def\SH@CheckSpec#1#2\\{\ifdim#1\p@<-\@m\p@ % finished
+     \def\\[${}%
+  \else \ifdim#1\p@<\spec@bot \SH@specerror
+           \spec@bot-\p@ \def\\##1[${}%eat rest
+        \else \spec@bot#1\p@
+  \fi   \fi \\}
+
+% b{pos}         begin text at a point at horizontal position pos.
+% e{pos}         end text at a point at horizontal position pos.
+% t{pos}{len}    make a block of text at position pos with length len
+% s              split text (begin whitespace)
+% j              join two text blocks (end a gap)
+
+% Behavior of specs above:
+\def\specA$b#1{\specA$t{#1}{0}}%  b(pos) -> t(pos)(0)
+\def\specA$e#1#2{\csname specA$#2\endcsname}%  e(pos) ignore
+\def\specA$s#1{\csname specA$#1\endcsname}%  s ignore % should never happen
+\def\specA$t#1{\advance\SH@posseg#1\SH@weight \@spec$t jt{#1}}
+
+\def\specB$e#1{\specB$t{#1}{0}}
+\def\specB$b#1#2{\csname specB$#2\endcsname}
+\def\specB$j#1{\csname specB$#1\endcsname}
+\def\specB$t#1{\advance\SH@posseg#1\SH@weight \@spec$t st{#1}}
+
+\def\@spec$t#1#2#3#4#5{% j|s  t  pos  wid  next
+      \if t#2\else \SH@specerror \fi
+      \advance\SH@widseg#4\SH@weight
+      \if#1#5\relax % next is s (below) or j (above): unite two t
+        \let\@tempa\@spec$t \else \let\@tempa\SH@redefine \fi
+      \@tempa #5}
+
+% Grab all the hboxes in the preceding list, combine their contents in
+% \@tempboxa (removing \rightskip, separating with space), and give 
+% SH@tottext = total_width / 256 (note that the total width may be 
+% greater than \maxdimen)
+%
+\def\SH@sumlines{\SH@grablast 
+\ifhbox\SH@boxa
+  \@tempdima\wd\SH@boxa \divide\@tempdima\@cclvi 
+  \global\advance\SH@tottext\@tempdima
+  \setbox\@tempboxa\hbox{%
+     \ifvoid\@tempboxa\else \unhbox\@tempboxa\space \fi
+     \unhbox\SH@boxa}%
+  \expandafter\SH@sumlines
+\fi}
+
+\def\SH@specerror{\errhelp{It would be amazing if you can continue after
+  this error.}\errmessage
+  {Shaped Paragraph Error:  Error in specification.  Check carefully! }}%
+
+
+% Take a square root of counter \sqrtcount using Newton's method.
+% Assign a number to \sqrtcount, then do \sqrtofcount.
+% To take sqrt of a dimen, do:
+%       \sqrtcount=\thedimen \sqrtofcount
+%       \multiply\sqrtcount by 256 \thedimen=\sqrtcount sp
+% (\@tempcnta and \@tempcntb are used and modified.)
+\newcount\sqrtcount
+\def\sqrtofcount{\relax\ifnum\sqrtcount>\z@
+  \@tempcnta\sqrtcount \sqrtcount\@ne
+  \expandafter\squinitial\the\@tempcnta\relax\relax\relax
+  \squiterate
+\else
+  \sqrtcount\@ne 
+\fi}
+\def\squinitial#1#2{\ifx#1\relax \else
+    \ifx #2\relax \multiply\sqrtcount \thr@@ % 3 ~ sqrt(10)
+    \else    \multiply\sqrtcount 10
+    \fi   \expandafter \squinitial
+  \fi}
+\def\squiterate{\@tempcntb\@tempcnta \divide\@tempcntb\sqrtcount
+%%%\message{sqrt(\the\@tempcnta) guess: \the\sqrtcount. }%
+   \advance\sqrtcount\@tempcntb \divide\sqrtcount\tw@
+   \advance \@tempcntb -\sqrtcount
+   \ifnum \AbsVal\@tempcntb>\thr@@ % approximate, use 1 for exact
+   \expandafter \squiterate \fi}% expandafter to avoid stack overflows
+
+\newcount\FPD@hi \FPD@hi=67108863
+
+% Approximate Fixed Point Division of two dimensions
+% 3.14159/2.71828 = 1.15573
+% Two parameters: Numerator and denominator.  The answer is returned
+% in the numerator (which must be a register).  The denominator is
+% unchanged, but it should also be a dimen register. (It may be given 
+% as an explicit *integer* string, "123", which is treated as 0.001877
+% = 123/65536.)   % \@tempcntb is used and altered.
+% 
+\def\fpdivide#1#2{\let\FPD@nume#1\@tempcntb#2\relax
+  \FPD@scale\FPD@scale\FPD@scale\FPD@scale
+  \divide#1\@tempcntb}
+
+% Rescale numbers to preserve accuracy.  The number 16 is the level of
+% uncertainty. Use a lower power of 2 for more accuracy (2 is most precise).
+% But if you change it, you must change the repetions of \FPD@scale in
+% \fpdivide above: magic_number^repetitions = 65536 (16^4 = 65536).
+%
+\def\FPD@scale{\ifnum\AbsVal\FPD@nume<\FPD@hi
+    \multiply\FPD@nume\sixt@@n
+  \else
+    \divide\@tempcntb\sixt@@n
+  \fi}
+
+% take absolute value of TeX number or dimension
+\def\AbsVal#1{\ifnum#1<\z@-\fi#1}
+
+\def\pointless#1{\expandafter\remove@PT\the#1}
+{\catcode`p=12 \catcode`t=12 \gdef\remove@PT#1pt{#1}}
+
+\SH@catcode % restore catcodes
+
+% If you have (computer) memory problems, the following shape
+% definitions can be eliminated.
+
+\def\diamondpar#1{\shapepar\diamondshape $\diamondsuit$ #1 $\diamondsuit$\par}
+\def\diamondshape{{1}{0}b{1}\\{1}t{0}{2}\\{2}e{1}}
+
+\def\squarepar#1{\shapepar{%
+  {1}%            centerline at x=1
+  {0}b{0}\\%      begin at (0,0)
+  {0}t{0}{2}\\%   text at y=0, width=2
+  {2}t{0}{2}\\%   text at y=2, width=2
+  {2}e{1}%        end at (1,2)
+}#1\par}
+
+\def\heartpar#1{\shapepar{\heartshape}#1\unskip\unskip\penalty-300
+\ \ $\heartsuit$\par}
+
+\def\heartshape{%
+{20}{0}b{13.32}b{26.68}%
+\\{.14}t{10.12}{4.42}t{25.46}{4.42}%
+\\{.7}t{9.14}{7.16}t{23.7}{7.16}%
+\\{1.4}t{8.4}{9.02}t{22.58}{9.02}%
+\\{2.1}t{7.82}{10.42}t{21.76}{10.42}%
+\\{2.8}t{7.36}{11.58}t{21.06}{11.58}%
+\\{3.5}t{6.98}{12.56}t{20.46}{12.56}%
+\\{4.2}t{6.68}{13.32}jt{20}{13.32}%
+\\{4.9}t{6.48}{27.04}%
+\\{5.6}t{6.34}{27.32}%
+\\{6.3}t{6.28}{27.44}%
+\\{7}t{6.26}{27.48}%
+\\{7.7}t{6.27}{27.46}%
+\\{8.4}t{6.32}{27.36}%
+\\{9.1}t{6.4}{27.2}%
+\\{9.8}t{6.52}{26.96}%
+\\{10.5}t{6.68}{26.64}%
+\\{11.9}t{7.12}{25.76}%
+\\{13.3}t{7.72}{24.56}%
+\\{14.7}t{8.51}{22.98}%
+\\{16.1}t{9.5}{21}%
+\\{17.5}t{10.69}{18.62}%
+\\{18.9}t{12.08}{15.84}%
+\\{20.3}t{13.7}{12.6}%
+\\{21.7}t{15.62}{8.76}%
+\\{22.4}t{16.7}{6.6}%
+\\{23.1}t{17.87}{4.26}%
+\\{24.6}e{20}%
+}
+
+\def\nutshape{%
+{0}%
+{0}b{0}\\%
+{0}t{-12.5}{25}\\%
+{11.65}t{-19.23}{19.23}st{0}{19.23}\\%
+{11.99}t{-19.42}{16.835}t{2.59}{16.835}\\%
+{12.99}t{-20}{15}t{5}{15}\\%
+{14.58}t{-20.92}{13.85}t{7.07}{13.85}\\%
+{16.65}t{-22.11}{13.45}t{8.66}{13.45}\\%
+{19.06}t{-23.51}{13.85}t{9.66}{13.85}\\%
+{21.65}t{-25}{15}t{10}{15}\\%
+{24.24}t{-23.51}{13.85}t{9.66}{13.85}\\%
+{26.65}t{-22.11}{13.45}t{8.66}{13.45}\\%
+{28.72}t{-20.92}{13.85}t{7.07}{13.85}\\%
+{30.31}t{-20}{15}t{5}{15}\\%
+{31.31}t{-19.42}{16.835}t{2.59}{16.835}\\%
+{31.65}t{-19.23}{19.23}jt{0}{19.23}\\%
+{43.3}t{-12.5}{25}\\%
+{43.3}e{0}%
+}
+\endinput
+%-------------------------------------------------------------------
+
+       S H A P E P A R . S T Y    --   Instructions
+
+\shapepar is a macro to typeset paragraphs of a specified shape.
+The total size is adjusted automatically so that the entire shape is
+filled with text.  This is distinct from the normal \parshape command
+which specifies a shape *and* a size, which may be only partially
+filled, or over-filled, from top to bottom.  In a \shapepar there
+can be no displayed math, and no "\vadjust" material, (including
+"\vspace"). \Shapepar (capital S) is just like \shapepar except the
+paragraph is boxed so it cannot be split over two pages.  Shaping
+paragraphs this way is a slow process, so this style is mainly
+intended for cards, invitations etc., not for whole books!  Although
+short paragraphs process much faster, only long paragraphs accurately
+fill complex shapes.
+
+These macros work for both LaTeX and plain TeX.  For LaTeX, specify
+\documentstyle[...shapepar...], or for either, \input shapepar.sty.
+
+The command \shapepar should be used at the beginning of a paragraph,
+and it applies to the entire paragraph.  There is one parameter: a
+description of the shape, <shape_spec>.
+
+\shapepar {<shape_spec>} Text of the paragraph...
+
+The <shape_spec> parameter is very complex, but there are a few
+shapes predefined as macros in this file: \diamondshape, \heartshape
+and \nutshape, which are used as examples in the instructions below.
+There are also commands to use these shapes: \diamondpar, \squarepar
+and \heartpar; for example, \heartpar begins \shapepar{\heartshape}#1
+so you can use it like: 
+
+\heartpar{This paragraph is too short to be recognized as a heart.}
+
+The syntax rules for <shape_spec> are very specific, and must be
+followed closely.  (In these rules, { } mean explicit braces, [ ]
+denote optional parts, < > surround a keyword that is defined (perhaps
+loosely), and | means "or"; do not type [ ] < > or |, but do type { }.)
+
+<shape_spec> = {<h_center>} <lines>
+
+<lines> = <line_spec> [\\<lines>]
+
+That is, the shape is specified as a single number in braces, followed
+by the specifications for the lines, with the lines separated by \\. The
+final paragraph will have its <h_center> position centered on the page.
+<h_center> is a number (like 10.5) of arbitrary units; whatever units
+are used for lengths and positions in the <lines>, they just need to be
+consistent. 
+
+The lines in the spec are not lines of text; nor are they the lines
+that you would use to draw the shape itself.  They are horizontal
+scans across the shape at irregular intervals.  Curved shapes need
+many scan lines for accurate rendering while simple shapes need only
+a few.  To determine the line specifications, start by drawing the
+shape on paper, then draw a series of horizontal lines across it,
+including lines that just touch the top and the bottom of the figure.  
+Each line crosses over pieces of the figure in some region.  These 
+intersections of line and figure define a <line_spec>.
+
+<line_spec> = {<v_pos>} <segment> [ other <segment>s ]
+
+The <v_pos> is the vertical position of the line.  Each <line_spec> must
+have a position greater than or equal to that of the previous line, and
+with all <v_pos> > -1000. Position is measured from top to bottom, and
+always moving down. Each <segment> represents a region where text will
+go in the final paragraph; it is the segment of the horizontal scan line
+that overlaps the body of the figure.  There are five types of segment:
+
+<segment> = t{pos}{len} | b{pos} | e{pos} | s | j
+
+  b{pos}         begin text at a point at horizontal position pos
+  e{pos}         end text at a point at horizontal position pos
+  t{pos}{len}    make a block of text at position pos with length len
+  s              split text (begin whitespace)
+  j              join two text blocks (end a gap)
+
+The most common type of segment is t (text).  The other types are
+degenerate in that they are single points rather than finite segments.
+Types s and j have no explicit position, but they must appear between
+text segments, and those texts should abut; e.g.,  t{3}{2}st{5}{4}
+(text from 3 to 5 and text from 5 to 9).
+
+Let's jump right into a simple example, and the meanings will be
+clearer.  A "diamond" shape can have the four vertices:
+
+                   (x=1,y=0)
+                       .
+  +---> x
+  !          (0,1) .       . (2,1)
+  !
+  V y                  .
+                     (1,2)
+
+
+This shape can be exactly specified by just three scan lines passing
+through the vertices.  The specification is:
+
+{1}%            h_center: x = 1
+{0}b{1}\\%      text block begins at point y=0, x=1
+{1}t{0}{2}\\%   this scan (at y=1) crosses text (len=2) starting at x=0
+{2}e{1}         text block ends at point y=2, x=1
+
+Other specification lines, like
+
+{1.5}t{0.5}{1}\\%
+
+could be inserted, but would make no difference--the shape is
+interpolated linearly between scan lines.
+
+Every block of text must start with a b specifier and end with an e
+spec on some line below.  Every segment specified by t must have a
+length greater than zero. If two blocks of text merge to form one (like
+at the notch of a heart shape) there should be a j spec at the point of
+junction.  If one block bifurcates (like at the top of a hole in a
+doughnut) there should be an s spec.
+
+Thus, the first line for any valid shape description must consist
+of only b segment descriptors; the last line can only have e type
+descriptors.  Although the definition of the units is arbitrary, the
+numbers should range in magnitude from ~.1 - 100 to avoid numeric 
+overflows and underflows.
+
+If there are errors in the format of the specification, \shapepar
+might complain with the error message
+
+ Shaped Paragraph Error:  Error in specification.  Check carefully!
+
+At this point you may as well type x or e, as there is very little
+chance that TeX will continue successfully.  You might also get one
+of TeX's regular error messages, like
+
+        Illegal unit of measure (pt inserted).
+or
+        Missing number, treated as zero.
+
+or you might get no error message at all, just ridiculous formatting.
+Check shape syntax carefully against the rules and the examples before
+running them through TeX.
+
+What to do if the figure does not start at a point--if it has a flat
+top?  It can start at a single point, but have the next scan line at
+the same vertical position!  A square paragraph is specified by:
+
+  {1}%            centerline at x=1 (x=1 is horizontally centered on page)
+  {0}b{0}\\%      begin at (0,0)
+  {0}t{0}{2}\\%   text at y=0, width=2
+  {2}t{0}{2}\\%   text at y=2, width=2
+  {2}e{1}%        end at (1,2)
+
+Both \diamondpar and \squarepar are defined above as paragraphs with
+these shapes.
+
+Now let's get more ambitious.  A heart shape must have two simultaneous
+beginnings, a short stretch of separate text, ending with a join,
+whereafter there is just one stretch of text leading to the final
+bottom point.  This shape has many scan lines so that the smooth
+flowing curves are preserved.
+
+\def\heartshape{%
+{20}{0}b{13.32}b{26.68}%
+\\{.14}t{10.12}{4.42}t{25.46}{4.42}%
+\\{.7}t{9.14}{7.16}t{23.7}{7.16}%
+\\{1.4}t{8.4}{9.02}t{22.58}{9.02}%
+\\{2.1}t{7.82}{10.42}t{21.76}{10.42}%
+\\{2.8}t{7.36}{11.58}t{21.06}{11.58}%
+\\{3.5}t{6.98}{12.56}t{20.46}{12.56}%
+\\{4.2}t{6.68}{13.32}jt{20}{13.32}%
+\\{4.9}t{6.48}{27.04}%
+\\{5.6}t{6.34}{27.32}%
+\\{6.3}t{6.28}{27.44}%
+\\{7}t{6.26}{27.48}%
+\\{7.7}t{6.27}{27.46}%
+\\{8.4}t{6.32}{27.36}%
+\\{9.1}t{6.4}{27.2}%
+\\{9.8}t{6.52}{26.96}%
+\\{10.5}t{6.68}{26.64}%
+\\{11.9}t{7.12}{25.76}%
+\\{13.3}t{7.72}{24.56}%
+\\{14.7}t{8.51}{22.98}%
+\\{16.1}t{9.5}{21}%
+\\{17.5}t{10.69}{18.62}%
+\\{18.9}t{12.08}{15.84}%
+\\{20.3}t{13.7}{12.6}%
+\\{21.7}t{15.62}{8.76}%
+\\{22.4}t{16.7}{6.6}%
+\\{23.1}t{17.87}{4.26}%
+\\{24.6}e{20}%
+}
+
+Look at \heartshape and find the two b specifiers at the beginning; find
+the j a few lines below. Notice that above the j there are two segments
+per line, but only one below it; the text to the left and right of the
+join meet at the join point: 20.  I drew this heart freehand, and  measured
+lengths from the sketch, so you should be able to do better!
+
+Text can have holes.  For example, a doughnut-shape would have a  b on
+the first line, followed by some lines with a single t,  then a line with
+t s t at the start of the hole. The hole is represented by lines with two
+t specs--the gap between them is the hole.  A line with  t j t ends the
+hole.  There are more lines with single t, and then an e line to end
+with.  Our final example is a nut.  Not a doughnut, but a hex-nut (for a
+machine screw) -- a regular hexagon with a circular hole in the center.
+The hexagon is flat on top and bottom so the specification begins and
+ends like the square shape. The circle is rendered as a 24-gon, beginning
+with a split (s) of the surrounding text and ending with a join (j).  If
+the spacing of the scan lines looks odd, it is because the hexagon alone
+would need few scans, but the circle needs many; the points on the circle
+are at 15 degree intervals.
+
+\def\nutshape{%
+{0}%
+{0}b{0}\\%
+{0}t{-12.5}{25}\\%
+{11.65}t{-19.23}{19.23}st{0}{19.23}\\%
+{11.99}t{-19.42}{16.835}t{2.59}{16.835}\\%
+{12.99}t{-20}{15}t{5}{15}\\%
+{14.58}t{-20.92}{13.85}t{7.07}{13.85}\\%
+{16.65}t{-22.11}{13.45}t{8.66}{13.45}\\%
+{19.06}t{-23.51}{13.85}t{9.66}{13.85}\\%
+{21.65}t{-25}{15}t{10}{15}\\%
+{24.24}t{-23.51}{13.85}t{9.66}{13.85}\\%
+{26.65}t{-22.11}{13.45}t{8.66}{13.45}\\%
+{28.72}t{-20.92}{13.85}t{7.07}{13.85}\\%
+{30.31}t{-20}{15}t{5}{15}\\%
+{31.31}t{-19.42}{16.835}t{2.59}{16.835}\\%
+{31.65}t{-19.23}{19.23}jt{0}{19.23}\\%
+{43.3}t{-12.5}{25}\\%
+{43.3}e{0}%
+}
+
+\shapepar cheats a bit when the horizontal gap between two bits of text
+is small (like down in the notch of \heartpar).  When the gap is less
+than an interword space it is eliminated, and the texts are joined; when
+it is somewhat larger it is expanded to give it more visibility.  If you
+want to eliminate this behavior, move the following definitions up into
+the main part of the file.
+
+%---- cut ----
+
+\def\SH@dosegment{% do a segment of text on this line
+  \SH@posseg\z@ \SH@widseg\z@
+  \advance\SH@weight-\p@ \SH@weight-\SH@weight % w1 = 1 - w2
+  \SH@getseg A\SH@prevspec % Above
+  \advance\SH@weight-\p@ \SH@weight-\SH@weight % w2 = 1 - w1
+  \SH@getseg B\SH@nextspec % Below
+  \ifdim\SH@widseg>\z@
+     \SH@widseg\pointless\SH@scale\SH@widseg
+     \advance\SH@posseg-\spec@hcenter
+     \SH@posseg\pointless\SH@scale\SH@posseg
+     \advance\SH@posseg.5\hsize
+     \edef\SH@parshape{\SH@parshape\the\SH@posseg\the\SH@widseg\space}%
+     \edef\SH@lines{\@elt{\the\SH@nline}{\the\SH@posseg}{\the\SH@widseg}\SH@lines}%
+     \advance\SH@npslines\@ne
+  \fi
+  \ifx\SH@prevspec\@empty \let\next\SH@doaline \fi
+  \ifx\SH@nextspec\@empty \let\next\SH@doaline \fi
+  \next}
+
+  \let\SH@updps\relax
+
+%---- cut ----
+
+Since the processing is slow, there are some messages to say how
+things are going.  These can be eliminated to save space (Put a % at
+the start of every \message line.)  Or you can get even more verbose
+messages by *removing* the % that precedes many other \message commands.
+
+There are also a number of parameters which can be changed to affect
+the size-optimisation procedure. Search for the word "optimise"
+
+%-----------------------------------------
+Version 1.01 (March 1993)  Small changes from initial release.
+
+%
+%  Test integrity of file:
+%  brackets: round, square, curly, angle:   () [] {} <>
+%  backslash, slash, vertical, at, dollar, and: \ / | @ $ &
+%  hat, grave, acute (apostrophe), quote, tilde:   ^ ` ' " ~

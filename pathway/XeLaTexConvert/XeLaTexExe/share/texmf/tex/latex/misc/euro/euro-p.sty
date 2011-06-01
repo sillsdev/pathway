@@ -1,0 +1,95 @@
+\ProvidesFile{euro-p.sty}
+   [2002/03/25]
+\DeclareFontFamily{U}{pe7}{}
+\DeclareFontShape{U}{pe7}{m}{n}{
+   <-> pe7r
+}{}
+
+\DeclareFontShape{U}{pe7}{m}{sl}{
+   <-> pe7ri
+}{}
+
+\DeclareFontShape{U}{pe7}{m}{it}{
+   <-> pe7ri
+}{}
+
+\DeclareFontShape{U}{pe7}{b}{n}{
+   <-> pe7b
+}{}
+
+\DeclareFontShape{U}{pe7}{b}{sl}{
+   <-> pe7bi
+}{}
+
+\DeclareFontShape{U}{pe7}{b}{it}{
+   <-> pe7bi
+}{}
+
+\DeclareFontShape{U}{pe7}{bx}{n}{<->ssub * pe7/b/n}{}
+\DeclareFontShape{U}{pe7}{bx}{sl}{<->ssub * pe7/b/sl}{}
+\DeclareFontShape{U}{pe7}{bx}{it}{<->ssub * pe7/b/it}{}
+
+\DeclareFontFamily{U}{pe8}{}
+\DeclareFontShape{U}{pe8}{m}{n}{
+   <-> pe8r
+}{}
+
+\DeclareFontShape{U}{pe8}{m}{sl}{
+   <-> pe8ri
+}{}
+
+\DeclareFontShape{U}{pe8}{m}{it}{
+   <-> pe8ri
+}{}
+
+\DeclareFontShape{U}{pe8}{b}{n}{
+   <-> pe8b
+}{}
+
+\DeclareFontShape{U}{pe8}{b}{sl}{
+   <-> pe8bi
+}{}
+
+\DeclareFontShape{U}{pe8}{b}{it}{
+   <-> pe8bi
+}{}
+
+\DeclareFontShape{U}{pe8}{bx}{n}{<->ssub * pe8/b/n}{}
+\DeclareFontShape{U}{pe8}{bx}{sl}{<->ssub * pe8/b/sl}{}
+\DeclareFontShape{U}{pe8}{bx}{it}{<->ssub * pe8/b/it}{}
+
+
+\DeclareFontFamily{U}{pe9}{}
+\DeclareFontShape{U}{pe9}{m}{n}{
+   <-> pe9r
+}{}
+
+\DeclareFontShape{U}{pe9}{m}{sl}{
+   <-> pe9ri
+}{}
+
+\DeclareFontShape{U}{pe9}{m}{it}{
+   <-> pe9ri
+}{}
+
+\DeclareFontShape{U}{pe9}{b}{n}{
+   <-> pe9b
+}{}
+
+\DeclareFontShape{U}{pe9}{b}{sl}{
+   <-> pe9bi
+}{}
+
+\DeclareFontShape{U}{pe9}{b}{it}{
+   <-> pe9bi
+}{}
+
+\DeclareFontShape{U}{pe9}{bx}{n}{<->ssub * pe9/b/n}{}
+\DeclareFontShape{U}{pe9}{bx}{sl}{<->ssub * pe9/b/sl}{}
+\DeclareFontShape{U}{pe9}{bx}{it}{<->ssub * pe9/b/it}{}
+
+\newcommand{\euromono}{{\fontfamily{pe8}\fontencoding{U}\selectfont\char128}}
+\newcommand{\eurosans}{{\fontfamily{pe7}\fontencoding{U}\selectfont\char128}}
+\newcommand{\euroserif}{{\fontfamily{pe9}\fontencoding{U}\selectfont\char128}}
+\newcommand{\euro}{\euromono}
+\endinput

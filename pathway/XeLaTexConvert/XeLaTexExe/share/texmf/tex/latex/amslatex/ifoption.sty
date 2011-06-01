@@ -1,0 +1,79 @@
+%%
+%% This is file `ifoption.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% ifoption.dtx 
+%% 
+%%% ====================================================================
+%%% @LaTeX-doc-source-file{
+%%%   filename  = "ifoption.dtx",
+%%%   version   = "1.02",
+%%%   date      = "2002/03/04",
+%%%   time      = "16:33:16 EST",
+%%%   author    = "Michael J Downes",
+%%%   address   = "American Mathematical Society,
+%%%                Publications Technical Group,
+%%%                PO Box 6248,
+%%%                Providence, RI 02940,
+%%%                USA",
+%%%   email     = "tech-support@ams.org",
+%%%   URL       = "http://www.ams.org/",
+%%%   abstract  = "",
+%%%   checksum  = "06695 170 563 5432",
+%%%   docstring = "The checksum field, produced by Robert Solovay's
+%%%                checksum utility, gives CRC-16 checksum, lines,
+%%%                words, and characters.",
+%%%  }
+%%% ====================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ifoption}[2002/03/04 v1.02]
+\let\@xp\expandafter \let\@nx\noexpand
+\def\@True{00}
+\def\@False{01}
+\def\CurrentPackage{\@currname}
+\let\CurrentClass\CurrentPackage
+\newcommand{\IfOption}{}
+\def\IfPackageOption{\@ifpackagewith}
+\def\IfClassOption{\@ifclasswith}
+\def\IfOption{%
+  \ifx\@currext\@pkgextension \@xp\IfPackageOption
+  \else \@xp\IfClassOption
+  \fi
+  \@currname
+}
+\newcommand{\DeclareExclusiveOptions}[1]{%
+  \xdef\@declaredoptions{\@declaredoptions,#1}%
+  \gdef\ProcessExclusiveOptions{\relax}%
+  \@for\CurrOption:=#1\do{%
+    \@xp\deo@a\csname ds@\CurrOption\@xp\endcsname\@xp{\CurrOption}{#1}%
+  }%
+}
+\def\DeclareBooleanOption{\DeclareExclusiveOptions}
+\def\deo@a#1#2#3{%
+  \def#1{%
+    \g@addto@macro\ProcessExclusiveOptions{\OptionsFalseTrue{#3}{#2}}%
+  }%
+}
+\def\cull@options#1,{%
+  \@xp\ifx\csname ds@#1\@gobble\@percentchar\@empty\endcsname\@False
+  \else #1,\fi
+  \cull@options
+}
+
+\newcommand{\OptionsFalseTrue}[2]{%
+  \begingroup
+  \@for\CurrentOption:=#1\do{%
+    \@xp\let\csname ds@\CurrentOption\endcsname\@False
+  }%
+  \let\ds@\@False
+  \@xp\xdef\csname opt@\@currname.\@currext\endcsname{%
+    \@xp\@xp\@xp\cull@options\csname opt@\@currname.\@currext\endcsname
+      ,\@firstoftwo\@firstoftwo,#2%
+  }%
+  \endgroup
+}
+\endinput
+%%
+%% End of file `ifoption.sty'.

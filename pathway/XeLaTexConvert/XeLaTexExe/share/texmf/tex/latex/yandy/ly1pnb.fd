@@ -1,0 +1,17 @@
+
+\ProvidesFile{ly1pnc.fd}
+   [1997/02/26  LY1/pnc (NewBaskerville) with Karl Berry file names. (LV)]
+
+\DeclareFontFamily{LY1}{pnb}{}
+
+\DeclareFontShape{LY1}{pnb}{m}{n}{<-> pnbr8y}{}
+\DeclareFontShape{LY1}{pnb}{m}{it}{<-> pnbri8y}{}
+\DeclareFontShape{LY1}{pnb}{b}{n}{<-> pnbb8y}{}
+\DeclareFontShape{LY1}{pnb}{b}{it}{<-> pnbbi8y}{}
+
+% We silently treat bold extended as bold
+
+\DeclareFontShape{LY1}{pnb}{bx}{n}{<->ssub * pnb/b/n}{}
+\DeclareFontShape{LY1}{pnb}{bx}{it}{<->ssub * pnb/b/it}{}
+
+\endinput

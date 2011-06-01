@@ -1,0 +1,36 @@
+% This file belongs to the Latin Modern package. The work is released under
+% the GUST Font License. See the MANIFEST.txt and README.eng files
+% for the details. For the most recent version of this license see
+% http://www.gust.org.pl/fonts/licenses/GUST-FONT-LICENSE.txt or
+% http://tug.org/fonts/licenses/GUST-FONT-LICENSE.txt
+
+\ProvidesFile{il2lmvtt.fd}[2007/01/14 v1.3 Font defs for Latin Modern]
+\DeclareFontFamily{IL2}{lmvtt}{\hyphenchar \font\m@ne}
+\DeclareFontShape{IL2}{lmvtt}{m}{n}
+     {<-> cs-lmvtt10}{}
+\DeclareFontShape{IL2}{lmvtt}{m}{sl}
+     {<-> cs-lmvtto10}{}
+\DeclareFontShape{IL2}{lmvtt}{m}{it}
+     {<->sub*lmvtt/m/sl}{}
+%%%%%%%% light (l) and dark (b) variants:
+\DeclareFontShape{IL2}{lmvtt}{l}{n}
+     {<-> cs-lmvtl10}{}
+\DeclareFontShape{IL2}{lmvtt}{l}{sl}
+     {<-> cs-lmvtlo10}{}
+\DeclareFontShape{IL2}{lmvtt}{l}{it}
+     {<->sub*lmvtt/l/sl}{}
+\DeclareFontShape{IL2}{lmvtt}{b}{n}
+     {<-> cs-lmvtk10}{}
+\DeclareFontShape{IL2}{lmvtt}{b}{sl}
+     {<-> cs-lmvtko10}{}
+\DeclareFontShape{IL2}{lmvtt}{b}{it}
+     {<->sub*lmvtt/b/sl}{}
+\DeclareFontShape{IL2}{lmvtt}{bx}{n}
+     {<->ssub*lmvtt/b/n}{}
+\DeclareFontShape{IL2}{lmvtt}{bx}{sl}
+     {<->ssub*lmvtt/b/sl}{}
+\DeclareFontShape{IL2}{lmvtt}{bx}{it}
+     {<->sub*lmvtt/b/sl}{}
+\endinput
+%%
+%% End of file `il2lmvtt.fd'.

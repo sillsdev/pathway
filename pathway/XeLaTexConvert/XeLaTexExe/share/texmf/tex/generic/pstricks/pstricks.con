@@ -1,0 +1,44 @@
+%% BEGIN: pstricks.con (for dvips driver)
+%%
+%% Configuration file for PSTricks 97
+%%
+%% Version 97 patch 2 (1997/04/28)
+%%
+%% For use with Rokicki's dvips (tested with v5.74 and older)
+
+\def\pstdriver{Rokicki's dvips}
+{\catcode`\"=12\gdef\pstverb#1{\special{" #1}}}  % Check catcode of "
+\def\pstunit{1bp}%
+\def\pstVerb#1{\special{ps: #1}}
+\def\pstverbscale{SDict begin normalscale end}
+% DG/SR modification begin  - Apr. 28, 1997 (D. Carlisle + S. Rahtz)
+% \def\pstheader#1{\special{header=#1}}
+% We used to check for |\AtBeginDvi|, but that was broken in early release
+% so we now check for the existence of |\textsuperscript| (added 1995/05/16)
+\ifx\textsuperscript\@undefined
+   \def\pstheader#1{\special{header=#1}}
+\else
+  \ifx\Gin@PS@file@header\@undefined
+    \def\pstheader#1{\AtBeginDvi{\special{header=#1}}}
+  \else
+    \let\pstheader\Gin@PS@file@header
+  \fi
+\fi
+% DG/SR modification end
+%%
+%% In the following, CP is short for currentpoint.
+%% The neg is necessary because dvips scales the coordinates by 1 -1.
+%% \tx@NET means neg exch neg exch translate.
+\def\pstrotate{CP CP translate 3 -1 roll neg rotate \tx@NET}
+%%
+%% ****************** END Rokicki's dvips *****************************
+
+%%%%%%%%%%%%%%%%%%% !! CUSTOMIZATION STUFF GOES HERE: !! %%%%%%%%%%%%%%%%%%
+%% If you want to include your own customizations to pstricks.tex, then
+%% uncomment the \pstcustomize command, and include your modifications
+%% after \pstcustomize. These will be read in after pstricks.tex.
+%\pstcustomize
+
+\endinput
+%%
+%% END: pstricks.con

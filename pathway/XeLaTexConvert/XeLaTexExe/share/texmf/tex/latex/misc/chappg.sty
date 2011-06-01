@@ -1,0 +1,191 @@
+%  Define \thepage to output chapter-page (such as 1-3, 5-2, etc.)
+%  and have each chapter's page number begin on 1.
+%
+% Largely reimplemented for use as a LaTeX2e package, taking account
+% of \mainmatter, etc., and providing various extra capabilities,
+% Robin Fairbairns <rf@cl.cam.ac.uk>, from an original by
+% Max Hailperin <max@nic.gac.edu>, who asserted that the original
+% source was TeXMaG Vol. 5, No. 3 (part 1)
+%
+% See documentation after \endinput
+%
+% This program may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.1
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.1 or later is part of all distributions of LaTeX 
+% version 1999/06/01 or later.
+%
+% This program consists of the file chappg.sty
+
+\NeedsTeXFormat{LaTeX2e}% Seems to work with any version
+\ProvidesPackage{chappg}[2000/05/24 v2.0d page numbering by chapter]
+
+%
+% reset page number when chapter number is stepped
+\@addtoreset{page}{chapter}
+
+\renewcommand\pagenumbering[2][\@chappg@thechapter]{%
+  \global\c@page\@ne
+  \protected@xdef\thepage{%
+    \expandafter\noexpand\csname @#2\endcsname
+      \noexpand\c@page
+  }%
+  \gdef\@chappg@prefix{#1}%
+}
+
+% This is the command used by \pagenumbering{bychapter} to actually
+% create the page number
+\newcommand\@bychapter[1]{%
+  \@chappg@prefix\chappgsep\@arabic#1%
+  \ifx\@chappg@prefix\@chappg@surprise
+    \if@chappgsurprised\else
+      \xdef\@chappg@surprise@line{\the\inputlineno}%
+      \global\@chappgsurprisedtrue
+    \fi
+  \fi  
+}
+
+% output a chapter number if there have been any chapters; otherwise
+% gobble the following thing, which will be \chappgsep
+\def\@chappg@thechapter{%
+  \ifnum\c@chapter=0
+    \expandafter\@gobble
+  \else
+    \thechapter
+  \fi
+}
+
+% separator in the above
+\providecommand\chappgsep{-}
+
+%
+% select default: this will be hacked by \frontmatter if the author
+% uses it
+\pagenumbering{bychapter}
+
+%
+% Hack at \mainmatter so that it restores bychapter numbering if
+% there's been a \frontmatter command
+\let\@@mainmatter\mainmatter
+\def\mainmatter{\@@mainmatter
+  \pagenumbering{bychapter}%
+}
+
+%
+% Hack at \backmatter so that it warns the user of possibly surprising
+% results if \pagenumbering[whatever]{bychapter} hasn't been used
+\let\@@backmatter\backmatter
+\def\backmatter{\@@backmatter
+  \let\@chappg@prefix\@chappg@surprise
+}
+\def\@chappg@surprise{\textbf{??}}
+\newif\if@chappgsurprised  \@chappgsurprisedfalse
+
+\AtEndDocument{\if@chappgsurprised
+  \PackageWarningNoLine{chappg}{Possibly surprising page numbering in
+    \string\backmatter
+    \MessageBreak
+    Use \string\pagenumbering[prefix]{bychapter}%
+    \MessageBreak
+    to select alternative before line \@chappg@surprise@line
+  }
+  \fi
+}
+
+%%
+%% command to hack at an environment to cause it to behave prettily
+%% #1->environment name, #2->prefix for page numbers
+%\newcommand\bychapterenv[2]{%
+%  \@ifundefined{@@#1}{%
+%    \expandafter\let\csname @@#1\expandafter\endcsname
+%      \csname#1\endcsname
+%  }{}%
+%  \expandafter\edef\csname#1\endcsname{%
+%    \expandafter\noexpand\csname @@#1\endcsname
+%    \global\let\noexpand\@@bychapter\noexpand\@bychapter
+%    \noexpand\pagenumbering[\noexpand#2]{bychapter}%
+%  }%
+%  \@ifundefined{@@end#1}{%
+%    \expandafter\let\csname @@end#1\expandafter\endcsname
+%      \csname end#1\endcsname
+%  }{}%
+%  \expandafter\edef\csname end#1\endcsname{%
+%    \expandafter\noexpand\csname @@end#1\endcsname
+%    \global\let\noexpand\@bychapter\noexpand\@@bychapter
+%  }%
+%}
+%
+%%
+%% Specific cases: set up for dealing with bibliography, index, and (if
+%% it's defined) glossary
+%\bychapterenv{thebibliography}\bibname
+%\bychapterenv{theindex}\indexname
+%\@ifundefined{theglossary}{}{%
+%  \bychapterenv{theglossary}{Glossary}%
+%}
+
+%
+% The next magic makes the page counter be reset to one rather than zero
+\renewcommand\@stpelt[1]{%
+  \global\csname c@#1\endcsname
+    \expandafter\ifx \csname c@#1\endcsname \c@page
+      \@ne
+    \else
+      \z@
+    \fi
+}
+\endinput
+
+chappg.sty: number pages by chapter
+
+Basic operation of the package is to redefine \thepage to be
+\thechapter-\arabic{page}, and to cause the page number to be reset
+(to 1) at the start of each chapter.  So the pages of chapter 3 will
+be numbered 3-1, 3-2, ..., and the pages of appendix B will be
+numbered B-1, B-2, ...
+
+The package assumes the environment of the standard report or book
+classes (or classes derived from them by inclusion or copying).
+
+The package's effect is achieved by defining a new \pagenumbering
+style `bychapter', and using it.  The package changes \pagenumbering
+to take an optional argument, which is the `prefix' to the page
+number.  Ordinarily, this will be the chapter number, but a user may
+care to say (for example):
+
+  \chapter*{Preface}
+  \pagenumbering[Preface]{bychapter}
+
+in her document somewhere, and the pages of the preface will be
+numbered Preface-1, Preface-2, ...
+
+The separator between the chapter and page numbers (hyphen above, but
+I can imagine people wanting it to be an en-dash) is \chappgsep, which
+en-dash-lovers may redefine (after loading the package); for example:
+
+  \renewcommand{\chappgsep}{--}%
+
+Havoc is wreaked with this structure in the LaTeX \frontmatter and
+\mainmatter commands (which both explicitly use \pagenumbering and
+therefore destroy the changed definition of \thepage
+
+My design decision was to assume that \frontmatter is indeed to be in
+\pagenumbering{roman}, and to restore the chapter-numbering in
+\mainmatter.  Chapters in the frontmatter can not be numbered `by'
+their chapters, since the chapters don't actually have numbers.  If
+the author wishes to have some special treatment of part of the
+frontmatter, the analogue of the above is
+
+  \chapter{Preface}
+  \pagenumbering[Preface]{bychapter}
+
+The conception breaks down again in \backmatter; again, the \chapter
+commands don't number the chapters, so that the pages will all be
+numbered as if they were `within' the last real chapter.  Therefore,
+if by-chapter page numbering is still enabled while in the backmatter,
+and the user hasn't issued a new \pagenumbering[prefix]{bychapter}
+since the \backmatter command, the package rewrites the prefix as
+{\bf??}, and produces a warning at the end of the document.
+

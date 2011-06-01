@@ -1,0 +1,21 @@
+%%
+%% This is file `umh2.fd',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% mtfonts.fdd  (with options: `Umh2')
+%% 
+%% Copyright 1996 1997 Frank Mittelbach and David Carlisle.
+%%
+%% Development of this package was commissioned by Y&Y Inc.
+%% http://www.yandy.com
+\ProvidesFile{umh2.fd}
+ [2001/05/30 v1.0c
+ Adobe Math Pi 2 (Unknown encoding)
+  (FMi)]
+\DeclareFontFamily{U}{mh2}{}
+\DeclareFontShape{U}{mh2}{m}{n}{<->s * [0.95]mh2}{}
+\endinput
+%%
+%% End of file `umh2.fd'.

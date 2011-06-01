@@ -1,0 +1,143 @@
+% File HYPHEN.LAN does:
+%   (1) defines new languages
+%   (2) incorporates their hyphenation tables (except of US english)
+%       during the \csaccents is active (see il2code.tex file).
+%   (3) incorporates their exceptions of hyphenation rules.
+%
+%  Created by Oldrich Ulrych,            January 5, 1993
+%  Some changes by Petr Olsak            April 1995, February 2000
+%
+% The TeX version >= 3.0 is required.
+
+% ======== Pattern Input / English, Czech, Slovakian (French, German) ======
+
+% USenglish hyphenation patterns and hyphenation exceptions
+
+\newcount\USenglish  \USenglish=0
+
+\begingroup          \language=\USenglish
+%\input hyphen.tex \relax   % read by plain.tex
+\input hyphen.ex \relax
+\endgroup
+
+% german hyphenation patterns and hyphenation exceptions
+
+\newcount\german     \german=1
+
+% \begingroup        \language=\german
+% \input gehyphen.tex \relax
+% \input gehyphen.ex \relax
+% \endgroup
+
+% austrian hyphenation patterns and hyphenation exceptions
+
+\newcount\austrian   \austrian=2
+
+% \begingroup        \language=\german
+% \input auhyphen.tex \relax
+% \input auhyphen.ex \relax
+% \endgroup
+
+\newcount\french     \french=3
+
+%% french hyphenation patterns
+% \begingroup        \language=\french
+% \input frhyphen.tex \relax
+% \input frhyphen.ex \relax
+% \endgroup
+
+% USenglish hyphenation patterns and hyphenation exceptions
+
+\newcount\english    \english=4
+
+%\begingroup          \language=\english
+%\input enhyphen.tex  \relax
+%\input enhyphen.ex \relax
+%\endgroup
+
+% Czech hyphenation patterns and hyphenation exceptions in ISO-8859-2
+
+\chardef\iltwoczech=5
+\newcount\czech      \czech=\iltwoczech
+
+\begingroup          \language=\czech
+\csaccents
+\message{Loading Czech patterns in ISO-8859-2 encoding, 
+         \string\language=\the\language.}
+\let\global=\relax
+\input czhyphen.tex \relax
+\input czhyphen.ex \relax
+\endgroup
+
+% Slovak hyphenation patterns and hyphenation exceptions in ISO-8859-2
+
+\chardef\iltwoslovak=6
+\newcount\slovak     \slovak=\iltwoslovak
+
+\begingroup          \language=\slovak
+\csaccents
+\message{Loading Slovak patterns in ISO-8859-2 encoding, 
+         \string\language=\the\language.}
+\let\global=\relax
+\input skhyphen.tex \relax
+\input skhyphen.ex \relax
+\endgroup
+
+\ifx\Cork\undefined  % You can suppress the T1 encoded hyphen patterns by:
+                     % tex -ini \let\Cork=\relax \input csplain.ini
+
+\chardef\toneczech=15
+\chardef\toneslovak=16
+
+% Czech hyphenation patterns and hyphenation exceptions in Cork
+
+\begingroup 
+\input t1code        \language=\toneczech
+\csaccents
+\message{Loading Czech patterns in Cork encoding, 
+         \string\language=\the\language.}
+\let\global=\relax
+\input czhyphen.tex \relax
+\input czhyphen.ex \relax
+\endgroup
+
+% Slovak hyphenation patterns and hyphenation exceptions in Cork
+
+\begingroup 
+\input t1code        \language=\toneslovak
+\csaccents
+\message{Loading Slovak patterns in Cork encoding, 
+         \string\language=\the\language.}
+\let\global=\relax
+\input skhyphen.tex \relax
+\input skhyphen.ex \relax
+\endgroup
+
+\fi %% of \ifx\Cork\undefined
+
+% ======= definitions for fast hyphenations =====
+
+\def\ehyph{\language=\USenglish \lccode`\'=0        \nonfrenchspacing
+        \lefthyphenmin=2       \righthyphenmin=3
+        \message{English hyphenation used (\string\language=\the\language).
+                 \string\nonfrenchspacing\space is set on.}}
+%\def\ahyph{\language=\german     \lccode`\'=`\'      \frenchspacing
+%           \lefthyphenmin=2      \righthyphenmin=2                     }
+%\def\ghyph{\language=\german     \lccode`\'=`\'      \frenchspacing
+%           \lefthyphenmin=2      \righthyphenmin=2                     }
+%\def\fhyph{\language=\french     \lccode`\'=`\'      \frenchspacing
+%           \lefthyphenmin=2      \righthyphenmin=2                     }
+
+\def\chyph{\language=\czech       \lccode`\'=`\'      \frenchspacing
+        \lefthyphenmin=2       \righthyphenmin=3
+        \message{Czech hyphenation used (\string\language=\the\language).
+                    \string\frenchspacing\space is set on.}}
+\def\shyph{\language=\slovak      \lccode`\'=`\'      \frenchspacing
+        \lefthyphenmin=2       \righthyphenmin=3
+        \message{Slovakian hyphenation used (\string\language=\the\language).
+                    \string\frenchspacing\space is set on.}}
+
+\message{Defaults: \string\language=\the\language,
+        \string\cmaccents, \string\nofrenchspacing,
+        ISO-8859-2 font encoding}
+

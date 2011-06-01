@@ -1,0 +1,97 @@
+%%
+%% This is file `ppvtex.def',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% pdfpages.dtx  (with options: `ppvtexdef')
+%% 
+%% This file is part of the pdfpages package.
+%% 
+%% Copyright (C) 2001-2006 Andreas MATTHIAS
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any
+%% later version. The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is Andreas Matthias <amat@kabsi.at>.
+%%
+%% Please send error reports and suggestions for improvements to
+%%   Andreas MATTHIAS <amat@kabsi.at>.
+%%
+\def\AM@fileversion{v0.4a}
+\def\AM@SVN@Date@i#1-#2-#3\END{\def\AM@filedate{#1/#2/#3}}
+\def\AM@SVN@Date$Date: #1 #2${\AM@SVN@Date@i#1\END}
+\AM@SVN@Date$Date: 2006-08-12 01:13:35 +0200 (Sat, 12 Aug 2006) $
+\ProvidesFile{ppvtex.def}
+   [\AM@filedate\space\AM@fileversion\space
+    Pdfpages driver for VTeX (AM)]
+\ifnum\VTeXversion<822
+  \PackageError{pdfpages}
+         {Package pdfpages requires at least\MessageBreak
+          VTeX version 8.22}
+         {Update your VTeX distribution.}%
+  \let\AM@endinput\relax
+\fi
+\AM@ifdriverlater{vtex}{2003/06/16}{}{%
+  \PackageError{pdfpages}{%
+       Your version of `vtex.def' is too old}
+       {Please, update your `vtex.def'!}%
+  \let\AM@endinput\relax
+  \expandafter\endinput
+}
+\def\AM@getpagecount{%
+  \getpagecount\count@ \AM@currentdocname\relax
+  \edef\AM@pagecount{\the\count@}%
+}
+\let\AM@pagewidth\mediawidth
+\let\AM@pageheight\mediaheight
+\def\AM@setpagedimen{%
+  \setlength{\mediawidth}{\the\wd\@tempboxa}%
+  \setlength{\mediaheight}{\the\ht\@tempboxa}%
+}
+\def\AM@setlscape{\special{pS:
+    [{ThisPage}\string<\string</Rotate 90\string>\string>%]
+    /PUT pdfmark}%
+}
+\def\AM@fitpaper@special{%
+  \immediate\xspecial{option updatemediasizes="on"}}
+\def\AM@findfile#1{%
+  \AM@findfile@i{#1}{pdf}%
+  \ifx\AM@currentdocname\relax
+    \AM@findfile@i{#1}{ps}%
+  \fi
+  \AM@findfile@ii{#1}%
+}
+\def\AM@linktodoc@special@begin{%
+  \special{!aref <\ifAM@newwindow n\fi
+           f=\AM@linkfilename>!\AM@linktodoc@page;
+           a=</Border [0 0 0]>}%
+}
+\def\AM@linktodoc@special@end{%
+  \special{!endaref}%
+}
+\def\AM@survey@special@begin{%
+  \special{!aref pdfpages.\AM@linktodoc@page@m@ne; a=</Border [0 0 0]>}%
+}
+\def\AM@survey@special@end{%
+  \special{!endaref}%
+}
+\def\AM@thread@special@begin{%
+  \special{!thread <\threadinfodict> \AM@threadname}%
+}
+\def\AM@thread@special@end{\special{!endthread}}
+\def\AM@dest@special{\special{!aname \AM@linkname.\AM@page}}
+\def\AM@anchor@special{\special{!aname pdfpages.\the\count1}}
+\edef\AM@linkfit@special{fit}%r width\the\wd\@tempboxa\space
+                             % height0pt depth\the\@tempdima}
+\let\AM@disable@includegraphics\relax
+\endinput
+%%
+%% End of file `ppvtex.def'.

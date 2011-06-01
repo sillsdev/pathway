@@ -1,0 +1,214 @@
+% 10 January 2004, John Frampton (frampton@neu.edu)
+% Users should feel free to modify this file in any way they
+% see fit.  If these modification go beyond your personal
+% use, please send me a careful description of the
+% modifications that have been made and the reasons that
+% they were made.
+% 13 Jan, 2004 - error message if no root node defined in \jftree
+
+\csname JFTreeLoaded\endcsname
+\let\JFTreeLoaded\endinput
+\ifx\PSTricksLoaded\endinput \else \input pstricks \fi\relax
+\ifx\PSTnodesLoaded\endinput \else \input pst-node \fi\relax
+\edef\TheAtCode{\the\catcode`\@}
+\catcode`\@=11
+%%%%%%%%%%%%%%%%%%%%%%%
+%% register resources
+\newtoks\jfteverynode
+\newdimen\jft@xpos
+\newdimen\jft@ypos
+\newdimen\m@xl
+\newdimen\m@xr
+\newdimen\m@xb
+\newbox\jft@treebox
+%%%%%%%%%%%%%%%%%%%%%%%
+%% new PSTricks parameters
+\def\psset@nodetopgap#1{\pssetlength\pst@dima{#1}%
+   \edef\n@detopgap{\the\pst@dima}}
+\def\psset@nodebotgap#1{\pssetlength\pst@dima{#1}%
+   \edef\n@debotgap{\the\pst@dima}}
+\def\psset@everynode#1{\jfteverynode={#1}}
+\def\psset@triratio#1{\edef\jft@triratio{#1}}
+\def\psset@scaleby#1{\edef\jft@scaleby{#1}}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\jftpsset#1{\ifx#1\relax\relax
+   \else \psset{#1}\fi \ignorespaces}
+\def\jftpsset#1{\edef\temp{#1}\ifx\temp\@empty
+   \else \expandafter\psset\expandafter{\temp}\fi \ignorespaces}
+
+%
+\def\jft@getpars#1{\def\k@@p{#1}\futurelet\temp\jft@getparsA}
+\def\jft@getparsA{\ifx\temp[\let\next\jft@getparsB
+   \else \def\jft@pars{}\let\next=\k@@p \fi\next}
+\def\jft@getparsB[#1]{\def\jft@pars{#1}\k@@p}
+%\jft@getparsC}
+%\def\jft@getparsC{\futurelet\temp\jft@getparsD}
+%\def\jft@getparsD{\k@@p}
+
+% define a branch
+\def\defbranch{\jft@getpars\d@fbranch}
+\def\d@fbranch#1#2(#3)#4(#5){%
+   \edef#1{\noexpand\bgroup
+      \edef\noexpand\@hleg{#5}%
+      \edef\noexpand\@vleg{#3}%
+      \edef\noexpand\m@kelevelpars{\jft@pars}%
+      \noexpand\jft@getpars\noexpand\dr@wbranch}}
+\def\dr@wbranch{\jftpsset{\m@kelevelpars}
+   {\jftpsset{\jft@pars}
+   \pssetxlength\pst@dima{\@vleg}
+   \pst@dima=-\jft@scaleby\pst@dima
+   \@scalebyslope\pst@dima{\@hleg}\pst@dima
+   \edef\@hleg{\the\pst@dima}%
+   \pssetylength\pst@dima{\@vleg}
+   \pst@dima=\jft@scaleby\pst@dima
+   \edef\@vleg{\the\pst@dima}%
+   \pst@dima=\jft@xpos \pst@dimb=\jft@ypos
+   \advance\jft@xpos by \@hleg
+   \advance\jft@ypos by -\@vleg
+   \psline(\pst@dima,\pst@dimb)(\jft@xpos,\jft@ypos)
+   \xdef\temp{\noexpand\jft@xpos=\the\jft@xpos
+      \noexpand\jft@ypos=\the\jft@ypos}%
+   \aftergroup\temp}%
+   \ev@ltarget}
+%
+\def\ev@ltarget{\futurelet\temp\ev@ltargetA}
+\def\ev@ltargetA{\ifx\temp\bgroup\let\next\ev@ltargetB \else
+   \let\next\ev@ltargetC \fi \next}
+\def\ev@ltargetB#1{\setbox0=\hbox{{\jft@testnode #1}}%
+   \d@@fnode \setn@de \egroup\ignorespaces}
+\def\ev@ltargetC#1{#1\egroup\ignorespaces}
+
+% use \@scalebyslope\pst@dima{3/4}\pst@dimb
+%   \pst@dima is the height to be scaled,
+%   the result is put in \pst@dimb
+\def\@scalebyslope#1#2#3{#3=#1\expandafter
+   \@@scalebyslope\expandafter#3#2//}
+\def\@@scalebyslope#1#2/#3/{\pst@divide{#1}{#2pt}\temp
+   #1=\temp pt \def\temp{#3}%
+   \ifx\temp\@empty \let\next=\relax
+      \else \multiply#1 by #3 \let\next=\@gobble\fi \next}
+
+\def\deftriangle{\jft@getpars\d@ftriangle}
+\def\d@ftriangle#1#2(#3)#4(#5)#6(#7){%
+   \edef#1{\noexpand\bgroup
+      \edef\noexpand\@leftleg{#5}%
+      \edef\noexpand\@rightleg{#7}%
+      \edef\noexpand\@upleg{#3}%
+      \edef\noexpand\m@kelevelpars{\jft@pars}%
+      \noexpand\jft@getpars\noexpand\dr@wtriangle}}
+\def\dr@wtriangle{\jftpsset{\m@kelevelpars}
+   {\jftpsset{\jft@pars}
+   \pssetxlength\pst@dima{\@upleg}
+   \pst@dima=\jft@scaleby\pst@dima
+   \pst@dimb=-\pst@dima
+   \@scalebyslope\pst@dima{\@leftleg}\pst@dima
+   \@scalebyslope\pst@dimb{\@rightleg}\pst@dimb
+   \edef\@leftleg{\the\pst@dima}%
+   \edef\@rightleg{\the\pst@dimb}%
+   \pssetylength\pst@dima{\@upleg}
+   \pst@dima=\jft@scaleby\pst@dima
+   \edef\@upleg{\the\pst@dima}%
+   \pst@dima=\jft@xpos \pst@dimb=\jft@ypos  % save old
+   \pst@dimc=\jft@xpos \advance\pst@dimc by \@rightleg % right edge
+   \advance\jft@xpos by -\@leftleg   % left edge
+   \advance\jft@ypos by -\@upleg     % new bottom edge
+   \pspolygon(\jft@xpos,\jft@ypos)(\pst@dimc,\jft@ypos)(\pst@dima,\pst@dimb)
+   \ifdim\pst@dimc>\m@xr \global\m@xr=\pst@dimc \fi
+   \ifdim\jft@xpos<\m@xl \global\m@xl=\jft@xpos \fi
+   \pst@dimc=\@leftleg \advance\pst@dimc by \@rightleg
+   \xdef\jfttriwd{\the\pst@dimc}%
+   \advance\jft@xpos by \jft@triratio\pst@dimc
+   \xdef\temp{\noexpand\jft@xpos=\the\jft@xpos
+      \noexpand\jft@ypos=\the\jft@ypos
+      \noexpand\def\noexpand\jfttriwd{\the\pst@dimc}}%
+   \aftergroup\temp}%
+   \ev@ltarget}
+\def\triline#1{\hbox to\jfttriwd{#1}}
+
+% define a variable width triangle
+\def\defvartriangle{\jft@getpars\d@fvartriangle}
+\def\d@fvartriangle#1#2(#3){%
+   \edef#1{\noexpand\bgroup
+      \edef\noexpand\@upleg{#3}%
+      \edef\noexpand\m@kelevelpars{\jft@pars}%
+      \noexpand\jft@getpars\noexpand\dr@wvartriangle}}
+\def\dr@wvartriangle#1{\jftpsset{\m@kelevelpars}
+   \jftpsset{\jft@pars}
+   \setbox0=\hbox{{\jft@testnode #1}}%
+   \pst@dima=\jft@xpos \pst@dimb=\jft@ypos  % save old
+   \advance\jft@xpos by -\jft@triratio\wd0
+   \pst@dimc=\jft@xpos
+   \advance\pst@dimc by \wd0
+   \pssetylength\pst@dimd{\@upleg}
+   \pst@dimd=\jft@scaleby\pst@dimd
+   \advance\jft@ypos by -\pst@dimd
+   \pspolygon(\jft@xpos,\jft@ypos)(\pst@dimc,\jft@ypos)(\pst@dima,\pst@dimb)
+   \ifdim\pst@dimc>\m@xr \global\m@xr=\pst@dimc \fi
+   \ifdim\jft@xpos<\m@xl \global\m@xl=\jft@xpos \fi
+   \advance\jft@xpos by .5\wd0
+   \d@@fnode \setn@de \egroup}
+
+% disposition of the {stuff} associated with a node
+\def\d@fnode#1#2#3\cr{%
+   \if@rootnode \def\@startnode{#1}\@rootnodefalse\fi
+   \def#1{%
+   \setbox0=\hbox{{\jft@testnode #2}}%
+   \d@@fnode
+   \def\temp{#1}\ifx\temp\@startnode
+      \xdef\adj@stht{-\the\jft@ypos}\fi
+   \setn@de #3}}
+\def\d@@fnode{%
+   \ifn@degaps \else  \pssetylength\pst@dimg{\n@detopgap}
+      \advance\jft@ypos by -\pst@dimg \fi
+   {\advance\jft@xpos by-.5\wd0
+      \ifdim\jft@xpos<\m@xl \global\m@xl=\jft@xpos \fi
+    \advance\jft@xpos by\wd0
+      \ifdim\jft@xpos>\m@xr \global\m@xr=\jft@xpos \fi}%
+   \advance\jft@ypos by -\ht0}
+\def\setn@de{%
+   \pst@dima=-\dp0
+   \rput[B](\jft@xpos,\jft@ypos){\copy0}
+   \advance\jft@ypos by\pst@dima
+   \ifdim\jft@ypos<\m@xb \global\m@xb=\jft@ypos \fi
+   \ifn@degaps \else \pssetlength\pst@dimg{\n@debotgap}
+      \advance\jft@ypos by -\pst@dimg \fi \ignorespaces}
+
+% look for \omit and take appropriate action
+\newif\ifn@degaps
+\def\jft@testnode{\futurelet\temp\jft@testn@de}
+\def\jft@testn@de{\ifx\temp\omit
+      \global\n@degapstrue \let\next=\@gobble
+   \else \global\n@degapsfalse
+      \edef\next{\the\jfteverynode}\fi \next}
+
+\newif\if@rootnode
+\def\jftree{\jft@getpars\jft@tree}
+\def\jft@tree{\setbox\jft@treebox=\hbox\bgroup \let\!=\d@fnode
+   \let\@startnode=\@empty
+   \jftpsset{\jft@pars}
+   \jft@xpos=0pt \jft@ypos=0pt \m@xl=0pt \m@xr=0pt \m@xb=0pt
+   \@rootnodetrue
+   \ignorespaces}
+\def\endjftree{\ifx\@startnode\@empty
+   \errmessage{JFTree Error: Root node definition is missing}\fi
+   \@startnode\egroup
+   \dp\jft@treebox=-\m@xb
+   \leavevmode\kern-\m@xl\raise\adj@stht\box\jft@treebox\kern\m@xr}
+
+\let\defnode=\d@fnode
+
+%% set defaults
+\newpsstyle{jftreedefault}{arrows=c-c,linewidth=.6pt,scaleby=1,
+   nodetopgap=3pt,nodebotgap=3pt,triratio=.5,everynode=\strut}
+\psset{style=jftreedefault}
+%% provide a minimal complement of branches and triangles
+\defbranch\medleft(1)(1)
+\defbranch\medright(1)(-1)
+\defbranch\medvert(1)(1/0)
+\deftriangle\medtri(1)(1)(-1)
+\defvartriangle\medvar(1)
+
+\catcode`\@=\TheAtCode\relax
+\endinput
+

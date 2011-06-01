@@ -1,0 +1,471 @@
+%% BEGIN pst-fill.tex
+%%
+%% Filling and tiling with PSTricks 97.
+%%
+%%
+%% COPYRIGHT 1993, 1994, 1999 by Timothy Van Zandt, tvz@nwu.edu.
+%%
+%% This program can be redistributed and/or modified under the terms
+%% of the LaTeX Project Public License Distributed from CTAN
+%% archives in directory macros/latex/base/lppl.txt.
+%%
+%%
+%% Note (hv - August 17, 04 ): 
+%%   merge the VTeX and TeX versions (patch 4)
+%% Note (hv - June 22, 04 ): 
+%% * delete the Pst@Debug option and use the
+%%   the one from pstricks to prevent a clash with pst-gr3d
+%% * Patched by MV 09-10-2001 to make it work with VTeX.
+%% Note (D.G. - April 8, 97 and November / December 97):
+%% * With a \PstTiling macro defined (or "tiling" optional parameter
+%%   on \usepackage[tiling]{pst-fill}), this file run exactly as
+%%   the original boxfill.tex file from Timothy, version 0.94,
+%%   except a correction in \pst@ManualFillCycle to avoid a division by 0.
+%%   It's the default.
+%% * With a \PstTiling macro defined (or "tiling" optional parameter
+%%   on \usepackage[tiling]{pst-fill}) there are several add-ons
+%%   and changes to do `tiling' rather than `filling' in "automatic" mode :
+%%     - we fix the position of the beginning of tiling,
+%%     - we allow normally the framing of the area as expected, using
+%%       the line.... parameters
+%%     - we define move parameters fillmovex, fillmovey and fillmove,
+%%     - we define fillcyclex as previous fillcycle parameter, and add the
+%%       fillcycley and fillcycle (both fillcyclex and fillcycley) ones
+%%     - we can extend the tiling area using fillloopaddx, fillloopaddy and
+%%       fillloopadd parameters,
+%%     - we can debug and see the whole tiling area without clipping using
+%%       PstDebug parameter,
+%%     - for names consistancy, we can use fillangle in place of boxfillangle
+%%       and fillsize in place of boxfillsize,
+%%     - default value for fillsep is 0 and for fillsize is auto.
+
+% Preliminaries:
+
+\csname PSTboxfillLoaded\endcsname
+\let\PSTboxfillLoaded\endinput
+
+\ifx\PSTricksLoaded\endinput\else
+  \def\next{\input pstricks.tex}
+  \expandafter\next
+\fi
+
+\def\fileversion{97 patch 4}
+\def\filedate{2004/08/18}
+\message{ v\fileversion, \filedate}
+
+\edef\TheAtCode{\the\catcode`\@}
+\catcode`\@=11
+
+% The box:
+
+\newbox\pst@fillbox
+\def\psboxfill{\pst@killglue\pst@makebox\psboxfill@i}
+\def\psboxfill@i{\setbox\pst@fillbox\box\pst@hbox\ignorespaces}
+
+% Parameters:
+
+\def\psset@boxfillsize#1{%
+  \def\pst@tempg{#1}\def\pst@temph{auto}%
+  \ifx\pst@tempg\pst@temph
+    \let\psk@boxfillsize\relax
+  \else
+    \psset@@boxfillsize#1(\z@,\z@)\@empty(\z@,\z@)(\@nil
+  \fi}
+\def\psset@@boxfillsize#1(#2,#3)#4(#5,#6)#7(#8\@nil{%
+  \begingroup
+    \ifx\@empty#7\relax
+      \pst@dima\z@
+      \pst@dimb\z@
+      \pssetxlength\pst@dimc{#2}%
+      \pssetylength\pst@dimd{#3}%
+    \else
+      \pssetxlength\pst@dima{#2}%
+      \pssetylength\pst@dimb{#3}%
+      \pssetxlength\pst@dimc{#5}%
+      \pssetylength\pst@dimd{#6}%
+    \fi
+    \xdef\pst@tempg{%
+      \pst@dima=\number\pst@dima sp
+      \pst@dimb=\number\pst@dimb sp
+      \pst@dimc=\number\pst@dimc sp
+      \pst@dimd=\number\pst@dimd sp }%
+  \endgroup
+  \let\psk@boxfillsize\pst@tempg}
+
+\psset{boxfillsize={(-15cm,-15cm)(15cm,15cm)}}
+
+\def\psset@boxfillcolor#1{\pst@getcolor{#1}\psboxfillcolor}
+%\def\psboxfillcolor{\black}
+\psset@boxfillcolor{black}% hv
+
+\def\psset@boxfillangle#1{\pst@getangle{#1}\psk@boxfillangle}
+\psset@boxfillangle{0}
+
+\def\psset@fillsepx#1{\pst@getlength{#1}\psk@fillsepx}
+\def\psset@fillsepy#1{\pst@getlength{#1}\psk@fillsepy}
+\def\psset@fillsep#1{\psset@fillsepx{#1}\let\psk@fillsepy\psk@fillsepx}
+\psset@fillsep{2pt}
+
+% DG addition begin - Apr. 8, 1997 and Nov. 1997 - Patch 2
+\ifx\PstTiling\@undefined
+    \def\psset@fillcycle#1{\pst@getint{#1}\psk@fillcycle}
+    \psset@fillcycle{0}
+\else
+% For consistancy, use "fill" as prefix for angle and size
+    \def\psset@fillangle#1{\psset@boxfillangle{#1}}
+    \def\psset@fillsize#1{\psset{boxfillsize={#1}}}
+% Change some default values with better ones for tilings
+    \psset@fillsep{0}
+    \psset{fillsize=auto}
+% Define fillcyclex (previously fillcycle), fillcycley and fillcycle for both
+    \def\psset@fillcyclex#1{\pst@getint{#1}\psk@fillcyclex}
+    \def\psset@fillcycley#1{\pst@getint{#1}\psk@fillcycley}
+    \def\psset@fillcycle#1{%
+    \psset@fillcyclex{#1}\let\psk@fillcycley\psk@fillcyclex}
+    \psset@fillcycle{0}
+% Define fillmove, fillmovex and fillmovey parameters
+    \def\psset@fillmovex#1{\pst@getlength{#1}\psk@fillmovex}
+    \def\psset@fillmovey#1{\pst@getlength{#1}\psk@fillmovey}
+    \def\psset@fillmove#1{\psset@fillmovex{#1}\psset@fillmovey{#1}}
+    \psset@fillmove{0pt}
+% Define fillloopaddx, fillloopaddy and fillloopadd parameters
+% if tiling is not complete
+    \def\psset@fillloopaddx#1{\pst@getint{#1}\psk@fillloopaddx}
+    \def\psset@fillloopaddy#1{\pst@getint{#1}\psk@fillloopaddy}
+    \def\psset@fillloopadd#1{%
+    \psset@fillloopaddx{#1}\let\psk@fillloopaddy\psk@fillloopaddx}
+    \psset@fillloopadd{0}
+% For debugging (to debug, set PstDebug=1)
+% we now use the one from pstricks to prevent a clash with package
+% pst-gr3d                        2004-06-22
+%    \def\psset@PstDebug#1{\pst@getint{#1}\psk@PstDebug}
+    \psset@PstDebug{0}
+\fi
+% DG addition end
+
+% Main macro:
+
+\def\psfs@boxfill{%
+  \ifvoid\pst@fillbox
+    \@pstrickserr{Fill box is empty. Use \string\psboxfill\space first.}\@ehpa
+  \else
+    \ifx\psk@boxfillsize\relax
+      \pst@AutoBoxFill
+    \else
+      \pst@ManualBoxFill
+    \fi
+  \fi}
+
+% Manual box fill:
+
+\def\pst@ManualBoxFill{%
+  \leavevmode
+  \begingroup
+    \pst@FlushCode
+    \begin@psclip
+    \pstVerb{clip}%
+    \expandafter\pst@AddFillBox\psk@boxfillsize
+    \end@psclip
+  \endgroup}
+
+\def\pst@FlushCode{%
+  \pst@Verb{%
+    /mtrxc CM def
+    CP CP T
+    \tx@STV
+    \psk@origin
+    \psk@swapaxes
+    \pst@newpath
+    \pst@code
+    mtrxc setmatrix
+    moveto
+    0 setgray}%
+  \gdef\pst@code{}}
+
+\def\pst@AddFillBox#1 #2 #3 #4 {%
+  \begingroup
+    \setbox\pst@fillbox=\vbox{%
+      \hbox{\unhcopy\pst@fillbox\kern\psk@fillsepx\p@}%
+      \vskip\psk@fillsepy\p@}%
+    \psk@boxfillsize
+    \pst@cnta=\pst@dimc
+    \advance\pst@cnta-\pst@dima
+    \divide\pst@cnta\wd\pst@fillbox
+    \pst@cntb=\pst@dimd
+    \advance\pst@cntb-\pst@dimb
+    \pst@dimd=\ht\pst@fillbox
+    \divide\pst@cntb\pst@dimd
+    \def\pst@tempa{%
+      \pst@tempg
+      \copy\pst@fillbox
+      \advance\pst@cntc\@ne
+      \ifnum\pst@cntc<\pst@cntd\expandafter\pst@tempa\fi}%
+    \let\pst@tempg\relax
+    \pst@cntc-\tw@
+    \pst@cntd\pst@cnta
+    \setbox\pst@fillbox=\hbox to \z@{%
+      \kern\pst@dima
+      \kern-\wd\pst@fillbox
+      \pst@tempa
+      \hss}%
+    \pst@cntd\pst@cntb
+% DG modification begin - Dec. 11, 1997 - Patch 2
+    \ifx\PstTiling\@undefined
+      \ifnum\psk@fillcycle=\z@\pst@ManualFillCycle\fi
+    \else
+      \ifnum\psk@fillcyclex=\z@\pst@ManualFillCycle\fi
+    \fi
+% DG modification end
+    \global\setbox\pst@boxg=\vbox to\z@{%
+      \offinterlineskip
+      \vss
+      \pst@tempa
+      \vskip\pst@dimb}%
+  \endgroup
+  \setbox\pst@fillbox\box\pst@boxg
+  \pst@rotate\psk@boxfillangle\pst@fillbox
+  \box\pst@fillbox}
+
+\def\pst@ManualFillCycle{%
+% DG modification begin - Dec. 11, 1997 - Patch 2
+  \ifx\PstTiling\@undefined
+    \pst@cntg=\psk@fillcycle
+  \else
+    \pst@cntg=\psk@fillcyclex
+  \fi
+% DG modification end
+  \pst@dimg=\wd\pst@fillbox
+% DG modification begin - Mar. 20, 1997 - Patch 1 (to avoid division by 0)
+%  \divide\pst@dimg\pst@cntg
+  \ifnum\pst@cntg=\z@
+  \else
+  \divide\pst@dimg\pst@cntg
+  \fi
+% DG modification end
+  \ifnum\pst@cntg<\z@\pst@cntg=-\pst@cntg\fi
+  \advance\pst@cntg\m@ne
+  \pst@cnth=\pst@cntg
+  \def\pst@tempg{%
+    \ifnum\pst@cnth<\pst@cntg\advance\pst@cnth\@ne\else\pst@cnth\z@\fi
+    \moveright\pst@cnth\pst@dimg}}
+
+% Auto box fill:        !! Fix dictionary
+
+% DG addition begin - Apr. 8, 1997 and Dec. 1997 - Patch 2
+\ifx\PstTiling\@undefined
+% DG addition end
+% Original version
+\pst@def{AutoFillCycle}<%
+  /c ED
+  /n 0 def
+  /s {
+    /x x w c div n mul add def
+    /n n c abs 1 sub lt { n 1 add } { 0 } ifelse def
+  } def>
+
+\pst@def{BoxFill}<%
+  gsave
+    gsave \tx@STV CM grestore dtransform CM idtransform
+    abs /h ED abs /w ED
+    pathbbox
+    h div round 2 add cvi /y2 ED
+    w div round 2 add cvi /x2 ED
+    h div round 2 sub cvi /y1 ED
+    w div round 2 sub cvi /x1 ED
+    /y2 y2 y1 sub def
+    /x2 x2 x1 sub def
+    CP
+    y1 h mul sub neg /y1 ED
+    x1 w mul sub neg /x1 ED
+    clip
+    y2 {
+      /x x1 def
+      s
+      x2 {
+        save CP x y1 
+% patch 4   hv --------------
+        \ifx\VTeXversion\undefined
+        \else
+%============ mv: 09-10-01 ??? this is likely to be a right change
+        neg
+%============
+        \fi
+% end patch 4
+	T moveto Box restore
+        /x x w add def
+      } repeat
+      /y1 y1 h add def
+    } repeat
+    % Next line not useful... To see that, suppress clipping (DG)
+    CP x y1 T moveto Box
+  currentpoint currentfont grestore setfont moveto>
+\else
+% DG modification begin - Apr. 8, 1997 and Nov. / Dec. 1997 - Patch 2
+\pst@def{AutoFillCycleX}<%
+  /cX ED
+  /nX 0 def
+  /CycleX {
+    /x x w cX div nX mul add def
+    /nX nX cX abs 1 sub lt { nX 1 add } { 0 } ifelse def
+  } def>
+\pst@def{AutoFillCycleY}<%
+  /cY ED
+  /mY 0 def
+  /nY 0 def
+  /CycleY {
+    /y1 y1 h cY div mY mul sub def
+    nY cY abs 1 sub lt { /nY nY 1 add def /mY 1 def }
+                       { /nY 0 def        /mY cY abs 1 sub neg def } ifelse
+  } def>
+
+\pst@def{BoxFill}<%
+  gsave
+    gsave \tx@STV CM grestore dtransform CM idtransform
+    abs /h ED abs /w ED
+    pathbbox
+    h div round 2 add cvi /y2 ED
+    w div round 2 add cvi /x2 ED
+    h div round 2 sub cvi /y1 ED
+    w div round 2 sub cvi /x1 ED
+% We must enlarge the area if fillangle, fillcycle, fillmove or fillsep are used
+    /CoefLoopX 0 def
+    /CoefLoopY 0 def
+    /CoefMoveX 0 def
+    /CoefMoveY 0 def
+    \psk@boxfillangle 0 ne {/CoefLoopX 8 def /CoefLoopY 8 def} if
+    \psk@fillcyclex 0 ne {/CoefLoopX CoefLoopX 1 add def} if
+    \psk@fillcycley 0 ne {/CoefLoopY CoefLoopY 1 add def} if
+    \psk@fillmovex 0 ne
+      {/CoefLoopX CoefLoopX 2 add def
+       \psk@fillmovex 0 gt {/CoefMoveX CoefLoopX def}
+                           {/CoefMoveX CoefLoopX neg def} ifelse} if
+    \psk@fillmovey 0 ne
+      {/CoefLoopY CoefLoopY 2 add def
+       \psk@fillmovey 0 gt {/CoefMoveY CoefLoopY def}
+                           {/CoefMoveY CoefLoopY neg def} ifelse} if
+    \psk@fillsepx 0 ne {/CoefLoopX CoefLoopX 1 add def} if
+    \psk@fillsepy 0 ne {/CoefLoopY CoefLoopY 1 add def} if
+    /CoefLoopX CoefLoopX \psk@fillloopaddx add def
+    /CoefLoopY CoefLoopY \psk@fillloopaddy add def
+%
+    /x2 x2 x1 sub 4 sub CoefLoopX 2 mul add def
+    /y2 y2 y1 sub 4 sub CoefLoopY 2 mul add def
+% We must fix the origin of tiling, as it must not vary according other stuff
+% in the page!
+    w x1 CoefLoopX add CoefMoveX add mul
+      h y1 y2 add 1 sub CoefLoopY sub CoefMoveY sub mul moveto
+%
+    CP
+    y1 h mul sub neg /y1 ED
+    x1 w mul sub neg /x1 ED
+%  hv 2004-06-22   to prevent clash with pst-gr3d
+%    \psk@PstDebug 0 eq {clip} if
+    \Pst@Debug 0 eq {clip} if
+% end hv
+    \psk@fillmovex \psk@fillmovey
+    gsave \tx@STV CM grestore dtransform CM idtransform
+    /hmove ED /wmove ED
+%
+    /row 0 def
+   y2 {
+       /row row 1 add def
+       /column 0 def
+       /x x1 def
+       CycleX
+       save
+       x2 {
+          /column column 1 add def
+          CycleY
+          save CP x y1 
+% patch 4   hv --------------
+          \ifx\VTeXversion\undefined
+          \else
+%============ mv: 09-10-01 ??? this is likely to be a right change
+          neg
+%============
+          \fi
+% end patch 4
+	  T moveto Box restore
+          /x x w add def
+          0 hmove translate
+          } repeat
+       restore
+       /y1 y1 h add def
+       wmove 0 translate
+       } repeat
+  currentpoint currentfont grestore setfont moveto>
+\fi
+% DG modification end
+
+\def\pst@AutoBoxFill{%
+  \leavevmode
+  \begingroup
+% DG addition begin - Dec. 2, 1997 - Patch 2
+    \pst@stroke
+% DG addition end
+    \pst@FlushCode
+    \pst@Verb{\psk@boxfillangle \tx@RotBegin}%
+    \pstVerb{\pst@dict /Box \pslbrace end}%
+% DG addition begin - Apr. 8, 1997 and Nov. 5, 1997 - Patch 2
+% Useful when the starting point is not (0,0)
+    \ifx\PstTiling\@undefined
+    \else
+      \ifx\pst@tempa\@undefined % Undefined for instance for \pscharpath
+      \else
+        \def\pst@temph{0}%
+        \ifx\pst@tempa\pst@temph
+        \else
+          \pstVerb{/TR {pop pop currentpoint translate \pst@tempa\space translate } def}%
+        \fi
+      \fi
+    \fi
+% DG addition end
+    \hbox to \z@{\vbox to\z@{\vss\copy\pst@fillbox\vskip-\dp\pst@fillbox}\hss}%
+% DG addition begin - Dec. 8, 1997 - Patch 2
+    \ifx\PstTiling\@undefined
+% DG addition end
+      \pstVerb{%
+        tx@Dict begin \psrbrace def
+        \ifnum\psk@fillcycle=\z@
+          /s {} def
+        \else
+          \psk@fillcycle \tx@AutoFillCycle
+        \fi
+        \pst@number{\wd\pst@fillbox}%
+        \psk@fillsepx add
+        \pst@number{\ht\pst@fillbox}%
+        \pst@number{\dp\pst@fillbox}%
+        \psk@fillsepy add add
+        \tx@BoxFill
+        end}%
+% DG modification begin - Dec. 8, 1997 - Patch 2
+      \else
+      \pstVerb{%
+        tx@Dict begin \psrbrace def
+        \ifnum\psk@fillcyclex=\z@
+          /CycleX {} def
+        \else
+          \psk@fillcyclex \tx@AutoFillCycleX
+        \fi
+        \ifnum\psk@fillcycley=\z@
+          /CycleY {} def
+        \else
+          \psk@fillcycley \tx@AutoFillCycleY
+        \fi
+        \pst@number{\wd\pst@fillbox}%
+        \psk@fillsepx add
+        \pst@number{\ht\pst@fillbox}%
+        \pst@number{\dp\pst@fillbox}%
+        \psk@fillsepy add add
+        \tx@BoxFill
+        end}%
+      \fi
+% DG modification end
+    \pst@Verb{\tx@RotEnd}%
+  \endgroup}
+
+\catcode`\@=\TheAtCode\relax
+
+\endinput
+%%
+%% END pst-fill.tex

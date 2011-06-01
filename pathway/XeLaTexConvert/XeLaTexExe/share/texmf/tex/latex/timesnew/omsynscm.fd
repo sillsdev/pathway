@@ -1,0 +1,17 @@
+%Filename: omsynscm.fd
+%Created by: tex fontptcmx
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{omsynscm.fd}
+   [2000/01/03 Fontinst v1.801 font definitions for OMS/ynscm.]
+
+\DeclareFontFamily{OMS}{ynscm}{\skewchar \font =48}
+
+\DeclareFontShape{OMS}{ynscm}{m}{n}{
+   <-> ymnscm7y
+}{}
+
+
+\endinput

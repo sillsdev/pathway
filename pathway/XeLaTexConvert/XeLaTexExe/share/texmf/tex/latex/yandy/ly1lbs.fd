@@ -1,0 +1,28 @@
+\ProvidesFile{ly1lbs.fd}
+   [1997/02/26  LY1/lbs with Y&Y file names. (LV)]
+
+\DeclareFontFamily{LY1}{lbs}{}
+
+\DeclareLucidaFontShape{LY1}{lbs}{m}{n}{lsr}{}
+\DeclareLucidaFontShape{LY1}{lbs}{m}{it}{lsi}{}
+\DeclareLucidaFontShape{LY1}{lbs}{b}{n}{lsd}{}
+\DeclareLucidaFontShape{LY1}{lbs}{b}{it}{lsdi}{}
+
+% We silently treat slanted as italic 
+
+\DeclareFontShape{LY1}{lbs}{m}{sl}{<->ssub * lbs/m/it}{}
+\DeclareFontShape{LY1}{lbs}{b}{sl}{<->ssub * lbs/b/it}{}
+
+% We silently treat bold extended as bold
+
+\DeclareFontShape{LY1}{lbs}{bx}{n}{<->ssub * lbs/b/n}{}
+\DeclareFontShape{LY1}{lbs}{bx}{it}{<->ssub * lbs/b/it}{}
+\DeclareFontShape{LY1}{lbs}{bx}{sl}{<->ssub * lbs/b/sl}{}
+
+% We treat smallcaps as normal, since there isn't a sans serif smallcaps
+
+\DeclareFontShape{LY1}{lbs}{m}{sc}{<-> sub * lbs/m/n}{}
+\DeclareFontShape{LY1}{lbs}{b}{sc}{<-> sub * lbs/b/sc}{}
+\DeclareFontShape{LY1}{lbs}{bx}{sc}{<-> sub * lbs/b/sc}{}
+
+\endinput

@@ -1,0 +1,252 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%% -*- Mode: Latex -*- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% seminar.bg2 --- Corrections for compatibility problems and new bugs
+%%                 found in the Seminar package, waiting Seminar 98
+%%                 (see also the seminar.bug file in Seminar distribution)
+%%
+%%                 Disclaimer: this file is mine and doesn't engage TVZ!
+%% 
+%% Note: insert this file after \usepackage{graphicx} if you use Graphicx
+%%       and after \usepackage{longtable} if you use LongTable
+%% 
+%% Author          : Denis GIROU (CNRS/IDRIS - France) <Denis.Girou@idris.fr>
+%% Created the     : 1995
+%% Last mod. by    : Denis GIROU (CNRS/IDRIS - France) <Denis.Girou@idris.fr>
+%% Last mod. the   : Fri Jan  9 10:31:26 1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\fileversion{1.6}
+\def\filedate{November 20, 1997}
+\typeout{seminar.bg2: various corrections for the Seminar document class added
+since seminar.bug (waiting Seminar 98)^^J%
+(Version \fileversion\space of <\filedate> (D.G.))}
+
+\edef\TheAtCode{\the\catcode`\@}
+\catcode`\@=11
+
+% 1 - To correct a bug in the note environment
+%     (reported by Denis Girou (CNRS/IDRIS) - <Denis.Girou@idris.fr> - 1995)
+\@savsf=1
+
+% 2 - To correct several bugs to generate a list of slides with subsection
+%     entries
+%     (reported by Denis Girou (CNRS/IDRIS) - <Denis.Girou@idris.fr> - Jul. 18, 1995)
+%   - To clear the subheading when a new heading is defined
+%     (reported by Axel Thimm - <thimm@physik.fu-berlin.de> - June 5, 1997)
+%   - To assure coherence between heading and subheading when used in header/footer,
+%     for article mode
+%     (reported by Axel Thimm - <thimm@physik.fu-berlin.de> - June 5, 1997)
+%   - Improvements (\refstepcounter and \@addtoreset) by Jeremy Gibbons
+%     <jgibbons@brookes.ac.uk> - Sep. 30, 1997
+
+% Used by the \slide@subheading macro but undefined
+\def\theslidesubsection{\theslidesection.\arabic{slidesubsection}}
+
+\def\slide@heading[#1]#2{%
+% Modification D.G. begin - Oct. 15, 1997
+%  \stepcounter{slidesection}%
+  \refstepcounter{slidesection}%
+  \@addtoreset{slidesubsection}{slidesection}
+% Modification D.G. end
+  \addtocontents{los}{\protect\l@slide
+    {\the\c@slidesection}{\ignorespaces#1}{\@SCTR}}%
+% Modification D.G. begin - May 30, 1997
+%  \gdef\theslideheading{#1}%
+% Modification D.G. end
+  \def\@tempa{#2}%
+  \ifx\@tempa\@empty\else
+    {\edef\@currentlabel{\csname p@slidesection\endcsname\theslidesection}%
+      \makeslideheading{#2}}%
+  \fi
+% Modification D.G. begin - May 30, 1997
+  \gdef\theslideheading{#1}%
+% Modification D.G. end
+% Modification D.G. begin - Aug. 1, 1997
+  \gdef\theslidesubheading{}%
+% Modification D.G. end
+}
+
+\def\slide@subheading[#1]#2{%
+% Modification D.G. begin - Oct. 15, 1997
+%  \stepcounter{slidesection}%
+  \refstepcounter{slidesubsection}%
+% Modification D.G. end
+  \addtocontents{los}{\protect\l@subslide
+    {\the\c@slidesubsection}{\ignorespaces#1}{\@SCTR}}%
+% Modification D.G. begin - May 30, 1997
+%  \gdef\theslidesubheading{#1}%
+% Modification D.G. end
+  \def\@tempa{#2}%
+  \ifx\@tempa\@empty\else
+    {\edef\@currentlabel{\csname p@slidesubsection\endcsname
+% Modification D.G. begin - Jul. 18, 1995
+%      \theslidesubsection}\makeslideheading{#2}}%
+      \theslidesubsection}\makeslidesubheading{#2}}%
+% Modification D.G. end
+  \fi
+% Modification D.G. begin - May 30, 1997
+  \gdef\theslidesubheading{#1}%
+% Modification D.G. end
+}
+
+% 3 - To correct a bug in the \slidecontents macro
+%     (reported by Denis Roegel (LORIA) - <Denis.Roegel@loria.fr> - Sep. 22, 1996)
+
+\long\def\@gobblethree #1#2#3{}
+
+\def\slide@contents{%
+  \def\l@slide##1##2##3{%
+% Modification Denis Roegel begin - Sep. 22, 1996
+%    \slide@cline{\slidenumberline{$\bullet$}{##2}}{##3}}%
+%  \let\l@subslide\@gobbletwo
+% Modification Denis Roegel end
+    \slide@cline{\slidenumberline{##1}{##2}}{##3}}%
+  \let\l@subslide\@gobblethree
+  \@startlos}
+
+% 4 - To solve incompatibily between the Graphicx package and Seminar.
+%     The \espfslidesize Seminar macro work only with the old version of
+%     the EpsFig package, so with \includegraphics the PostScript files are
+%     always scaled without the possibility to leave them to there natural
+%     size. And also these files are not correctly scaled when we switch
+%     from normal to article mode under Seminar. So, we must redefined the
+%     \epsfslidesize macro of Seminar and modify few internal macros of
+%     Graphicx.
+%     (Note: I consider only the GraphicX package, not the GraphicS one)
+%     (reported by Karl Tombre (LORIA) - <Karl.Tombre@loria.fr> - and Denis Roegel
+%                  (LORIA) - <Denis.Roegel@loria.fr> - Jan. 16, 1997)
+
+\def\GraphicsNotScaled{%
+\ifx\Gin@viewport\undefined
+\else                           % Graphicx package detected
+\def\Gin@i{%
+ \def\Gin@req@sizes{%
+% Modification Denis Girou begin - May 16, 1997
+   \Gin@nat@height=\inverseslidesmag\Gin@nat@height
+   \Gin@nat@width=\inverseslidesmag\Gin@nat@width
+% Modification Denis Girou end
+   \Gin@req@height\Gin@nat@height
+   \Gin@req@width\Gin@nat@width}%
+ \@ifnextchar[\Gin@ii{\Gin@ii[]}}
+% Modification Denis Girou begin - Feb. 19, 1997
+%\define@key{Gin}{width}{\def\Gin@ewidth{#1}}
+%\define@key{Gin}{height}{\def\Gin@eheight{#1}}
+%\define@key{Gin}{totalheight}{%
+%\def\Gin@eresize{\totalheight}\def\Gin@eheight{#1}}
+\define@key{Gin}{width}{%
+\@tempdima=##1\@tempdima=\inverseslidesmag\@tempdima\def\Gin@ewidth{\@tempdima}}
+\define@key{Gin}{height}{%
+\@tempdima=##1\@tempdima=\inverseslidesmag\@tempdima\def\Gin@eheight{\@tempdima}}
+\define@key{Gin}{totalheight}{%
+\def\Gin@eresize{\totalheight}%
+\@tempdima=##1\@tempdima=\inverseslidesmag\@tempdima\def\Gin@eheight{\@tempdima}}
+% Modification Denis Girou end
+\fi}
+
+\def\epsfslidesize{%
+\let\epsfsize\slide@epsfsize
+% Modification Denis Girou begin - Feb. 19, 1997
+\GraphicsNotScaled}
+% Modification Denis Girou end
+
+% 5 - To solve incompatibily between the LongTable package and Seminar
+%     (reported by Bhaskar Manda (UIUC) - <bhaskar@or4.me.uiuc.edu> - May 7, 1997)
+%   - Problem in article format seen later
+%     (reported by Axel Thimm - <thimm@physik.fu-berlin.de> - June 5, 1997)
+
+% From seminar.cls
+\def\slide@outputLT{% (from \slide@output)
+  \@makeslide
+  \@testfalse
+  \ifnotesonly\else
+    \iflandscape
+      \ifnum\@landscapeonly>-1 \os@test\fi
+    \else
+      \ifnum\@landscapeonly<1 \os@test\fi
+    \fi
+  \fi
+  \if@test
+    \reset@slideoutput
+% Modification Denis Girou begin - May 13, 1997
+%    \@@makeslide
+    \@@makeslideLT
+% Modification D.G. end
+    \process@slide
+  \fi
+  \refstepcounter{slide}}
+\def\@@makeslideLT{% (from \@@makeslide)
+  \overfullslide@warning
+  \setbox\@slidebox\hbox{%
+    \vfuzz=\slidefuzz\relax
+    \vbox to\slide@vsize{%
+% Modification Denis Girou begin - May 13, 1997
+    \box\@outputbox
+% Modification D.G. end
+    \ifcenterslides\vskip\z@ plus .0001fil \fi
+    \unvbox\@slidebox
+    \vskip\z@ plus .0001fil}%
+    \the\after@slidepage}%
+  \wd\@slidebox\textwidth}
+
+% From LongTable
+\def\LT@output{%
+  \ifnum\outputpenalty <-\@Mi
+    \ifnum\outputpenalty > -\LT@end@pen
+      \LT@err{floats and marginpars not allowed in a longtable}\@ehc
+    \else
+      \setbox\z@\vbox{\unvbox\@cclv}%
+      \ifdim \ht\LT@lastfoot>\ht\LT@foot
+        \dimen@\pagegoal
+        \advance\dimen@-\ht\LT@lastfoot
+        \ifdim\dimen@<\ht\z@
+          \setbox\@cclv\vbox{\unvbox\z@\copy\LT@foot\vss}%
+          \@makecol
+% Modification Denis Girou begin - May 13, 1997
+%          \@outputpage
+          \slide@outputLT
+% Modification D.G. end
+          \setbox\z@\vbox{\box\LT@head}%
+        \fi
+      \fi
+      \global\@colroom\@colht
+      \global\vsize\@colht
+      \vbox
+        {\unvbox\z@\box\ifvoid\LT@lastfoot\LT@foot\else\LT@lastfoot\fi}%
+    \fi
+  \else
+    \setbox\@cclv\vbox{\unvbox\@cclv\copy\LT@foot\vss}%
+    \@makecol
+% Modification Denis Girou begin - May 13, 1997
+%    \@outputpage
+%    \global\vsize\@colroom % Work for slides, but not for notes...
+    \slide@outputLT
+% Modification D.G. end
+    \copy\LT@head
+  \fi}
+
+% We must adjust \textheight. Sometimes, you must increase it a little by
+% something like \addtolength{\textheight}{5mm}
+% But if you use slides like \begin{slide*}[15cm,10cm]
+% you must define locally \textheight=15cm
+\addtolength{\textheight}{-\headheight}
+
+% 6 - To allow automatic changes of language dependant labels,
+%     for instance by loading french.sty after Seminar
+%     (suggested by Bernard Gaulle (IDRIS) - <gaulle@idris.fr> - Nov. 20, 1997)
+% Modification Denis Girou begin - Nov. 20, 1997
+% From seminar.cls
+\def\slidename{Slide}
+\def\slidelabel{\bf\slidename{} \theslide}
+% From slidesec.sty
+\def\listslidename{List of Slides}%
+\def\listofslides{\section*{\listslidename%
+\@mkboth{\expandafter\MakeUppercase\listslidename}%
+        {\expandafter\MakeUppercase\listslidename}}%
+  \def\l@slide##1##2##3{%
+    \slide@undottedcline{\slidenumberline{##3}{##2}}{}}%
+  \let\l@subslide\l@slide
+  \@startlos}
+% Modification Denis Girou end
+
+\catcode`\@=\TheAtCode\relax
+\endinput
+%% END seminar.bg2

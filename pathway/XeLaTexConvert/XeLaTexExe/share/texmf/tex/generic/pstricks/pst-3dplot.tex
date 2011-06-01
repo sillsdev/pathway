@@ -1,0 +1,1663 @@
+%%
+%% This is file `pst-3dplot.tex',
+%%
+%% IMPORTANT NOTICE:
+%%
+%% Package `pst-3dplot.tex'
+%%
+%% Herbert Voss <voss _at_ perce.de>
+%%
+%% This program can be redistributed and/or modified under the terms
+%% of the LaTeX Project Public License Distributed from CTAN archives
+%% in directory macros/latex/base/lppl.txt.
+%%
+%% DESCRIPTION:
+%%   `pst-3dplot' is a PSTricks package to draw 3d curves,
+%%       data and different graphical objects
+%%
+\csname PSTThreeDplotLoaded\endcsname
+\let\PSTThreeDplotLoaded\endinput
+% Requires PSTricks, pst-node, pst-plot, multido packages
+\ifx\PSTricksLoaded\endinput\else\input pstricks.tex\fi
+\ifx\PSTnodesLoaded\endinput\else\input pst-3d.tex\fi
+\ifx\PSTnodesLoaded\endinput\else\input pst-node.tex\fi
+\ifx\PSTplotLoaded\endinput\else\input pst-plot.tex\fi% plotpoints
+\ifx\PSTVueTroisDLoaded\endinput\else\input pst-vue3d.tex\fi
+\ifx\PSTMultidoLoaded\endinput\else\input multido.tex\fi
+%
+\def\fileversion{1.66}
+\def\filedate{2005/06/07}
+\message{`PST-3dplot' v\fileversion, \filedate\space (HV)}
+%
+\edef\PstAtCode{\the\catcode`\@} \catcode`\@=11\relax
+\ifx\PSTXKeyLoaded\endinput\else\input pst-xkey \fi
+\pst@addfams{pst-3dplot}
+\SpecialCoor
+%
+%%%%%%%%%%%%%%%%%% Macrolist %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% \def\pstThreeDPut
+% \def\pstThreeDLine
+% \def\pstThreeDDot
+% \def\pstThreeDNode
+% \def\pstUThreeDPut
+% \def\pstThreeDSquare
+% \def\pstThreeDBox
+% \def\pstThreeDSphere
+% \def\pstThreeDEllipse
+% \def\pstThreeDPlotFunc
+% \def\psplotThreeD
+% \def\parametricplotThreeD
+% \def\psThreeDPlot
+% \def\pstThreeDCoor
+% \def\fileplotThreeD
+% \def\dataplotThreeD
+% \def\listplotThreeD
+%
+%
+\newdimen\pst@dimf
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% ---------------- the if's -----------------
+%
+\newif\ifPst@drawing%			draw the coordinates?
+\define@key[psset]{pst-3dplot}{drawing}[true]{\@nameuse{Pst@drawing#1}}
+\newif\ifPst@drawCoor%		draw the coordinates of a dot?
+\define@key[psset]{pst-3dplot}{drawCoor}[false]{\@nameuse{Pst@drawCoor#1}}
+\newif\ifPst@hiddenLine%	emulate hidden line surface?
+\define@key[psset]{pst-3dplot}{hiddenLine}[false]{\@nameuse{Pst@hiddenLine#1}}
+\newif\ifPst@SphericalCoor% 	(r,phi,theta)
+\define@key[psset]{pst-3dplot}{SphericalCoor}[true]{\@nameuse{Pst@SphericalCoor#1}}
+\psset{SphericalCoor=false}
+%
+% ------- the global definitions for the pspicture frame ------
+%
+\define@key[psset]{pst-3dplot}{xMin}{\def\psk@ThreeDplot@xMin{#1}}
+\define@key[psset]{pst-3dplot}{xMax}{\def\psk@ThreeDplot@xMax{#1}}
+\define@key[psset]{pst-3dplot}{yMin}{\def\psk@ThreeDplot@yMin{#1}}
+\define@key[psset]{pst-3dplot}{yMax}{\def\psk@ThreeDplot@yMax{#1}}
+\define@key[psset]{pst-3dplot}{zMin}{\def\psk@ThreeDplot@zMin{#1}}
+\define@key[psset]{pst-3dplot}{zMax}{\def\psk@ThreeDplot@zMax{#1}}
+\define@key[psset]{pst-3dplot}{xThreeDunit}{\def\psk@ThreeDplot@xThreeDunit{#1}}
+\define@key[psset]{pst-3dplot}{yThreeDunit}{\def\psk@ThreeDplot@yThreeDunit{#1}}
+\define@key[psset]{pst-3dplot}{zThreeDunit}{\def\psk@ThreeDplot@zThreeDunit{#1}}
+%
+% -------------- the angles and the plotpoints -------------
+%
+\define@key[psset]{pst-3dplot}{Alpha}{\def\psk@ThreeDplot@Alpha{#1}} %	Horizontal turn
+\define@key[psset]{pst-3dplot}{Beta}{\def\psk@ThreeDplot@Beta{#1}}%	Vertical turn
+\define@key[psset]{pst-3dplot}{RotX}{\def\psk@ThreeD@RotX{#1}}% x rotation 
+\define@key[psset]{pst-3dplot}{RotY}{\def\psk@ThreeD@RotY{#1}}% y rotation
+\define@key[psset]{pst-3dplot}{RotZ}{\def\psk@ThreeD@RotZ{#1}}% z 
+\define@key[psset]{pst-3dplot}{RotSequence}{\def\psk@ThreeD@RotS{#1}}%
+\def\drawStyle@xLines{xLines}% 0
+\def\drawStyle@yLines{yLines}% 1
+\def\drawStyle@xyLines{xyLines}% 2
+\def\drawStyle@yxLines{yxLines}% 3
+\define@key[psset]{pst-3dplot}{drawStyle}{%			how to draw 3D functions
+  \def\pst@tempa{#1}%
+  \ifx\pst@tempa\drawStyle@xLines\let\psk@ThreeDplot@drawStyle\z@\else%
+    \ifx\pst@tempa\drawStyle@yLines\let\psk@ThreeDplot@drawStyle\@ne\else%
+      \ifx\pst@tempa\drawStyle@xyLines\let\psk@ThreeDplot@drawStyle\tw@\else%
+         \ifx\pst@tempa\drawStyle@yxLines\let\psk@ThreeDplot@drawStyle\thr@@\else%
+            \@pstrickserr{Bad draw style: `\pst@tempa'}\@ehpa%
+  \fi\fi\fi\fi%
+%  \typeout{drawStyle: \the\psk@ThreeDplot@drawStyle}
+  }
+\psset[pst-3dplot]{drawStyle=xLines}
+%
+\define@key[psset]{pst-3dplot}{xPlotpoints}{\def\psk@ThreeDplot@xPlotpoints{#1}}
+\define@key[psset]{pst-3dplot}{yPlotpoints}{\def\psk@ThreeDplot@yPlotpoints{#1}}
+\define@key[psset]{pst-3dplot}{beginAngle}{%		for ellipse/circle arc
+  \def\psk@ThreeDplot@beginAngle{#1}}
+\define@key[psset]{pst-3dplot}{endAngle}{%			for ellipse/circle arc
+  \def\psk@ThreeDplot@endAngle{#1}}
+\define@key[psset]{pst-3dplot}{linejoin}{%		how lines come together 0,1,2
+  \def\psk@ThreeDplot@linejoin{#1}}
+\define@key[psset]{pst-3dplot}{plane}{%			xy,xz,yz
+  \def\psk@ThreeDplot@plane{#1}}
+\define@key[psset]{pst-3dplot}{pOrigin}{%			combination of (lr)(tBb)
+  \def\psk@ThreeDplot@pOrigin{#1}}
+\def\ThreeDplot@planeXY{xy}
+\def\ThreeDplot@planeXZ{xz}
+\def\ThreeDplot@planeYZ{yz}
+%
+% -------------- the length and node definitions -------------
+%
+\define@key[psset]{pst-3dplot}{XO}{%			the X-offset
+  \def\psk@ThreeDplot@XO{#1}}
+\define@key[psset]{pst-3dplot}{YO}{%			the y-offset
+  \def\psk@ThreeDplot@YO{#1}}
+\define@key[psset]{pst-3dplot}{angleStep}{%		for circles
+  \def\psk@ThreeDplot@angleStep{#1}}
+\define@key[psset]{pst-3dplot}{posStart}{%		where the arrows start
+  \def\psk@ThreeDplot@posStart{#1}}
+\define@key[psset]{pst-3dplot}{length}{%		the length of the before|outlines
+  \def\psk@ThreeDplot@length{#1}}
+\define@key[psset]{pst-3dplot}{arrowOffset}{%	offset for \arrowLine
+  \def\psk@ThreeDplot@arrowOffset{#1}}
+\define@key[psset]{pst-3dplot}{visibleLineStyle}{%	offset for \arrowLine
+  \def\psk@ThreeDplot@visibleLineStyle{#1}}
+\define@key[psset]{pst-3dplot}{invisibleLineStyle}{%	offset for \arrowLine
+  \def\psk@ThreeDplot@invisibleLineStyle{#1}}
+%
+\newif\if@IIIDticks%          draw the ticks?
+\define@key[psset]{pst-3dplot}{IIIDticks}[true]{\@nameuse{@IIIDticks#1}}
+\define@key[psset]{pst-3dplot}{Dz}{\def\psk@Dz{#1}}
+\define@key[psset]{pst-3dplot}{IIIDxTicksPlane}{\def\psk@IIIDxTicksPlane{#1}}
+\define@key[psset]{pst-3dplot}{IIIDyTicksPlane}{\def\psk@IIIDyTicksPlane{#1}}
+\define@key[psset]{pst-3dplot}{IIIDzTicksPlane}{\def\psk@IIIDzTicksPlane{#1}}
+\define@key[psset]{pst-3dplot}{IIIDticksize}{\def\psk@IIIDticksize{#1}}
+\define@key[psset]{pst-3dplot}{IIIDxticksep}{\def\psk@IIIDxticksep{#1}}
+\define@key[psset]{pst-3dplot}{IIIDyticksep}{\def\psk@IIIDyticksep{#1}}
+\define@key[psset]{pst-3dplot}{IIIDzticksep}{\def\psk@IIIDzticksep{#1}}
+\define@key[psset]{pst-3dplot}{nameX}{%		start of the object arrow
+	\def\psk@ThreeDplot@nameX{#1}}
+\define@key[psset]{pst-3dplot}{spotX}{%		where to draw the label
+	\def\psk@ThreeDplot@spotX{#1}}
+\define@key[psset]{pst-3dplot}{nameY}{\def\psk@ThreeDplot@nameY{#1}}
+\define@key[psset]{pst-3dplot}{spotY}{\def\psk@ThreeDplot@spotY{#1}}
+\define@key[psset]{pst-3dplot}{nameZ}{\def\psk@ThreeDplot@nameZ{#1}}
+\define@key[psset]{pst-3dplot}{spotZ}{\def\psk@ThreeDplot@spotZ{#1}}
+%
+% ###   begin Torsten Suhling
+\define@key[psset]{pst-3dplot}{planecorr}{%			make plane tags readable 
+	\def\psk@ThreeDplot@planecorr{#1}} 
+\def\ThreeDplot@planecorrOff{off}	% default
+\def\ThreeDplot@planecorrNormal{normal}	% make planes readable 
+\def\ThreeDplot@planecorrXYrot{xyrot}	% and put tag for xy-plane 
+% 					% parallel to the y-axis 
+% ###   end Torsten Suhling
+%
+\def\psds@none{\pst@gdot{}}% define none for the dotstyle
+%
+\newpsstyle{hiddenStyle}{fillstyle=solid,fillcolor=white}
+\newcount\pst@cntx\newcount\pst@cnty\newcount\pst@cntz
+\newdimen\pst@dimx\newdimen\pst@dimy\newdimen\pst@dimz
+%
+\define@key[psset]{pst-3dplot}{planeGrid}{\def\psk@planeGrid{#1}}
+\define@key[psset]{pst-3dplot}{planeGridOffset}{\def\psk@planeGridOffset{#1}}
+\define@key[psset]{pst-3dplot}{subticks}{\def\psk@xsubticks{#1}\def\psk@ysubticks{#1}}
+\define@key[psset]{pst-3dplot}{xsubticks}{\def\psk@xsubticks{#1}}
+\define@key[psset]{pst-3dplot}{ysubticks}{\def\psk@ysubticks{#1}}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                              %
+%                        B A S I C S	                       %
+%                                                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\pstheader{pst-3dplot.pro}
+% ---- only shortcuts -------
+\def\pst@3ddict{tx@3DPlotDict begin }
+\def\tx@saveCoor{\pst@3ddict saveCoor end }
+\def\tx@X{\pst@3ddict x end }
+\def\tx@Y{\pst@3ddict y end }
+\def\tx@Z{\pst@3ddict z end }
+\def\tx@xIID{\pst@3ddict x2D end }
+\def\tx@yIID{\pst@3ddict y2D end }
+\def\tx@ConvertToIID{\pst@3ddict ConvertTo2D end }
+\def\tx@SphericalCoor{\pst@3ddict SphericalCoor end }
+\def\tx@ConvertToCartesian{\pst@3ddict ConvertToCartesian end }
+%
+\def\setDefaults{%
+  \psset[pst-3dplot]{%
+  drawing=true,hiddenLine=false,xMin=-1,xMax=4,yMin=-1,yMax=4,zMin=-1,zMax=4,%
+  xThreeDunit=1.0,yThreeDunit=1.0,zThreeDunit=1.0,Alpha=45,Beta=30,%
+  RotX=0,RotY=0,RotZ=0,RotSequence=xyz,%
+  drawStyle=xLines,xPlotpoints=25,yPlotpoints=25,beginAngle=0,endAngle=360,%
+  linejoin=1,XO=0,YO=0,angleStep=1,posStart=0,length=2,arrowOffset=0,%
+  visibleLineStyle=solid,invisibleLineStyle=dashed,nameX=$x$,spotX=180,%
+  nameY=$y$,spotY=0,nameZ=$z$,spotZ=90,plane=xy,pOrigin=c,SphericalCoor=false,%
+  Dz=1,IIIDticks=false,IIIDxTicksPlane=xy,IIIDyTicksPlane=yz,IIIDzTicksPlane=yz,%
+  IIIDticksize=0.1,IIIDxticksep=-0.4,IIIDyticksep=-0.2,IIIDzticksep=0.2,
+  planecorr=off,%
+  planeGrid=xy,planeGridOffset=0,subticks=10%
+  }%
+  \def\pst@linetype{2}%  to prevent an unknown linetyp with dash
+}
+\setDefaults
+%
+\def\variablesIIID{
+%  0 0 translate
+  /RotX \psk@ThreeD@RotX\space def
+  /RotY \psk@ThreeD@RotY\space def
+  /RotZ \psk@ThreeD@RotZ\space def
+  /dxUnit \psk@ThreeDplot@xThreeDunit\space def
+  /dyUnit \psk@ThreeDplot@yThreeDunit\space def
+  /dzUnit \psk@ThreeDplot@zThreeDunit\space def
+  /RotSequence (\psk@ThreeD@RotS) def
+  /Alpha \psk@ThreeDplot@Alpha\space def
+  /Beta \psk@ThreeDplot@Beta\space def
+  /Sin1 Beta sin def
+  /Sin2 Alpha sin def
+  /Cos1 Beta cos def
+  /Cos2 Alpha cos def
+  /Cos1Sin2 Cos1 Sin2 mul def
+  /Sin1Sin2 Sin1 Sin2 mul def
+  /Cos1Cos2 Cos1 Cos2 mul def
+  /Sin1Cos2 Sin1 Cos2 mul def
+  /M11 RotZ cos RotY cos mul def
+  /M12 RotZ cos RotY sin mul RotX sin mul RotZ sin RotX cos mul sub def
+  /M13 RotZ cos RotY sin mul RotX cos mul RotZ sin RotX sin mul add def
+  /M21 RotZ sin RotY cos mul def
+  /M22 RotZ sin RotY sin RotX sin mul mul RotZ cos RotX cos mul add def
+  /M23 RotZ sin RotY sin mul RotX cos mul RotZ cos RotX sin mul sub def
+  /M31 RotY sin neg def
+  /M32 RotX sin RotY cos mul def
+  /M33 RotX cos RotY cos mul def
+}%
+%
+% (#1) -> #1 #2 #3
+\def\getThreeDCoor#1#2{\pst@getThreeDcoor(#1)\let#2\pst@coorIIID}
+\def\pst@getThreeDcoor(#1,#2,#3){%
+  \edef\pst@coorIIID{#1\space #2\space #3\space}%
+}
+\def\pst@addThreeDVec(#1)(#2)#3#4#5{%
+  \pst@calcThreeDVec(#1)(#2)%
+  \let#3\pst@getValueX%
+  \let#4\pst@getValueY%
+  \let#5\pst@getValueZ%
+}
+\def\pst@subThreeDVec(#1)(#2,#3,#4)#5#6#7{%
+  \pst@calcThreeDVec(#1)(-#2,-#3,-#4)%
+  \let#5\pst@getValueX%
+  \let#6\pst@getValueY%
+  \let#7\pst@getValueZ%
+}
+\def\pst@calcThreeDVec(#1,#2,#3)(#4,#5,#6){{%
+    \pst@dima=#1 pt%
+    \pst@dimb=#2 pt%
+    \pst@dimc=#3 pt%
+    \pst@dimf=#4 pt%
+    \pst@dimg=#5 pt%
+    \pst@dimh=#6 pt%
+    \advance\pst@dima by \pst@dimf%
+    \advance\pst@dimb by \pst@dimg%
+    \advance\pst@dimc by \pst@dimh%
+    \xdef\pst@getValueX{\pst@number\pst@dima}%
+    \xdef\pst@getValueY{\pst@number\pst@dimb}%
+    \xdef\pst@getValueZ{\pst@number\pst@dimc}%
+}}%
+%
+% the ThreeD coordinate system
+%
+\def\psxyzlabel#1{\bgroup\footnotesize\textsf{#1}\egroup}
+%
+\def\pstThreeDCoor{\pst@object{pstThreeDCoor}}
+\def\pstThreeDCoor@i{%
+  \pst@killglue%
+  \begingroup%
+  \addbefore@par{linewidth=0.5pt,linecolor=red,arrows=->,dotstyle=|}%
+  \use@par%
+  \pstThreeDNode(\psk@ThreeDplot@xMin,0,0){xMin}%
+  \pstThreeDNode(\psk@ThreeDplot@xMax,0,0){xMax}%
+  \pstThreeDNode(0,\psk@ThreeDplot@yMin,0){yMin}%
+  \pstThreeDNode(0,\psk@ThreeDplot@yMax,0){yMax}%
+  \pstThreeDNode(0,0,\psk@ThreeDplot@zMin){zMin}%
+  \pstThreeDNode(0,0,\psk@ThreeDplot@zMax){zMax}%
+  \ifPst@drawing% ThreeDplot axes
+    \psline(xMin)(xMax)%
+    \psline(yMin)(yMax)%
+    \psline(zMin)(zMax)%
+    \uput[\psk@ThreeDplot@spotX](xMax){\psk@ThreeDplot@nameX}%
+    \uput[\psk@ThreeDplot@spotY](yMax){\psk@ThreeDplot@nameY}%
+    \uput[\psk@ThreeDplot@spotZ](zMax){\psk@ThreeDplot@nameZ}%
+  \if@IIIDticks%
+%    \ifnum\psk@ThreeDplot@Alpha=90\else
+    \pst@dimx=\psk@ThreeDplot@xMax\p@%
+    \pst@dima=\psk@ThreeDplot@xThreeDunit\p@%
+    \divide\pst@dimx by \pst@dima%
+    \pst@cntx=\number\pst@dimx\advance\pst@cntx by -1%
+    \multido{%
+      \rA=\psk@Dx+\psk@Dx,%
+      \rB=\psk@ThreeDplot@xThreeDunit+\psk@ThreeDplot@xThreeDunit}{\pst@cntx}{%
+      \pstThreeDLine[arrows=-](\rB,-\psk@IIIDticksize,0)(\rB,\psk@IIIDticksize,0)%
+      \pstPlanePut[plane=\psk@IIIDxTicksPlane]%
+         (\rB,\psk@IIIDxticksep,0){\psxyzlabel{\rA}}%
+    }%
+    \pst@dimx=\psk@ThreeDplot@xMin\p@%
+    \pst@dima=\psk@ThreeDplot@xThreeDunit\p@%
+    \divide\pst@dimx by \pst@dima%
+    \ifnum\psk@ThreeDplot@xMin<\z@\pst@cntx=-\number\pst@dimx%
+    \else\pst@cntx=\number\pst@dimx%
+    \fi%
+    \multido{\rA=-\psk@Dx+-\psk@Dx,%
+       \rB=-\psk@ThreeDplot@xThreeDunit+-\psk@ThreeDplot@xThreeDunit}{\pst@cntx}{%
+      \pstThreeDLine[arrows=-](\rB,-\psk@IIIDticksize,0)(\rB,\psk@IIIDticksize,0)%
+      \pstPlanePut[plane=\psk@IIIDxTicksPlane](\rB,\psk@IIIDxticksep,0){\psxyzlabel{\rA}}%
+    }%
+%    \fi%
+%    \ifnum\psk@ThreeDplot@Alpha=0\else
+    \pst@dimy=\psk@ThreeDplot@yMax\p@%
+    \pst@dima=\psk@ThreeDplot@yThreeDunit\p@%
+    \divide\pst@dimy by \pst@dima%
+    \pst@cnty=\number\pst@dimy\advance\pst@cnty by -1%
+    \mmultido{\rA=0.0+\psk@Dy,\rB=0.0+\psk@ThreeDplot@yThreeDunit}{\pst@cnty}{%
+      \pstThreeDLine[arrows=-](-\psk@IIIDticksize,\rB,0)(\psk@IIIDticksize,\rB,0)%
+      \pstPlanePut[plane=\psk@IIIDyTicksPlane](\psk@IIIDyticksep,\rB,0){\psxyzlabel{\rA}}%
+    }%
+    \pst@dimy=\psk@ThreeDplot@yMin\p@%
+    \pst@dima=\psk@ThreeDplot@yThreeDunit\p@%
+    \divide\pst@dimy by \pst@dima%
+    \ifnum\psk@ThreeDplot@yMin<\z@\pst@cnty=-\number\pst@dimy%
+    \else\pst@cnty=\number\pst@dimy%
+    \fi%
+    \multido{\rA=-\psk@Dy+-\psk@Dy,%
+        \rB=-\psk@ThreeDplot@yThreeDunit+-\psk@ThreeDplot@yThreeDunit}{\pst@cnty}{%
+      \pstThreeDLine[arrows=-](-\psk@IIIDticksize,\rB,0)(\psk@IIIDticksize,\rB,0)%
+      \pstPlanePut[plane=\psk@IIIDyTicksPlane](\psk@IIIDyticksep,\rB,0){\psxyzlabel{\rA}}%
+    }%
+%    \fi%
+    \pst@dimz=\psk@ThreeDplot@zMax\p@%
+    \pst@dima=\psk@ThreeDplot@zThreeDunit\p@%
+    \divide\pst@dimz by \pst@dima%
+    \pst@cntz=\number\pst@dimz\advance\pst@cntz by -1%
+    \mmultido{\rA=0.0+\psk@Dz,\rB=0.0+\psk@ThreeDplot@zThreeDunit}{\pst@cntz}{%
+      \pstThreeDLine[arrows=-](0,-\psk@IIIDticksize,\rB)(0,\psk@IIIDticksize,\rB)%
+      \pstPlanePut[plane=\psk@IIIDzTicksPlane](0,\psk@IIIDzticksep,\rB){\psxyzlabel{\rA}}%
+    }%
+    \pst@dimz=\psk@ThreeDplot@zMin\p@%
+    \pst@dima=\psk@ThreeDplot@zThreeDunit\p@%
+    \divide\pst@dimz by \pst@dima%
+    \ifnum\psk@ThreeDplot@zMin<\z@\pst@cntz=-\number\pst@dimz%
+    \else\pst@cntz=\number\pst@dimz%
+    \fi%
+    \multido{\rA=-\psk@Dz+-\psk@Dz,%
+       \rB=-\psk@ThreeDplot@zThreeDunit+-\psk@ThreeDplot@zThreeDunit}{\pst@cntz}{%
+      \pstThreeDLine[arrows=-](0,-\psk@IIIDticksize,\rB)(0,\psk@IIIDticksize,\rB)%
+      \pstPlanePut[plane=\psk@IIIDzTicksPlane](0,\psk@IIIDzticksep,\rB){\psxyzlabel{\rA}}%
+    }%
+  \fi\fi%
+  \endgroup%
+  \ignorespaces%
+}
+%
+% planeGrids
+%
+\newdimen\pst@dx\newdimen\pst@dy
+\def\pstThreeDPlaneGrid{\pst@object{pstThreeDPlaneGrid}}
+\def\pstThreeDPlaneGrid@i(#1,#2)(#3,#4){{%
+  \pst@killglue
+  \use@par
+  \pssetxlength\pst@dima{#1}
+  \pssetxlength\pst@dimb{#3}
+  \advance\pst@dimb by -\pst@dima
+  \divide\pst@dimb by \psk@xsubticks
+  \pst@dx=\pst@dimb
+%  
+  \pssetylength\pst@dima{#2}
+  \pssetylength\pst@dimb{#4}
+  \advance\pst@dimb by -\pst@dima
+  \divide\pst@dimb by \psk@ysubticks
+  \pst@dy=\pst@dimb
+%  
+  \pssetylength\pst@dimx{#2}
+  \pssetylength\pst@dimy{#4}
+  \pssetylength\pst@dimz{#1}
+  \pssetylength\pst@dimf{#3}
+  \pst@getlength\psk@planeGridOffset\pst@dima
+  \pst@cntx=\psk@xsubticks\advance\pst@cntx by \@ne
+  \pst@cnty=\psk@ysubticks\advance\pst@cnty by \@ne
+  \psset{unit=1pt,planeGridOffset=\pst@dima}% we need everything in pt
+  \ifx\psk@planeGrid\ThreeDplot@planeXY
+    \multido{\rA=\strip@pt\pst@dimz+\strip@pt\pst@dx}{\pst@cntx}{%
+      \pstThreeDLine(\rA,\strip@pt\pst@dimx,\psk@planeGridOffset)%
+                    (\rA,\strip@pt\pst@dimy,\psk@planeGridOffset)}
+    \multido{\rA=\strip@pt\pst@dimx+\strip@pt\pst@dy}{\pst@cnty}{%
+      \pstThreeDLine(\strip@pt\pst@dimz,\rA,\psk@planeGridOffset)%
+                    (\strip@pt\pst@dimf,\rA,\psk@planeGridOffset)}
+  \else
+    \ifx\psk@planeGrid\ThreeDplot@planeXZ
+      \multido{\rA=\strip@pt\pst@dimz+\strip@pt\pst@dx}{\pst@cntx}{%
+        \pstThreeDLine(\rA,\psk@planeGridOffset,\strip@pt\pst@dimx)%
+	              (\rA,\psk@planeGridOffset,\strip@pt\pst@dimy)}
+      \multido{\rA=\strip@pt\pst@dimx+\strip@pt\pst@dy}{\pst@cnty}{%
+        \pstThreeDLine(\strip@pt\pst@dimz,\psk@planeGridOffset,\rA)%
+	              (\strip@pt\pst@dimf,\psk@planeGridOffset,\rA)}
+    \else
+      \multido{\rA=\strip@pt\pst@dimz+\strip@pt\pst@dx}{\pst@cntx}{%
+        \pstThreeDLine(\psk@planeGridOffset,\rA,\strip@pt\pst@dimx)%
+	              (\psk@planeGridOffset,\rA,\strip@pt\pst@dimy)}
+      \multido{\rA=\strip@pt\pst@dimx+\strip@pt\pst@dy}{\pst@cnty}{%
+        \pstThreeDLine(\psk@planeGridOffset,\strip@pt\pst@dimz,\rA)%
+	              (\psk@planeGridOffset,\strip@pt\pst@dimf,\rA)}
+    \fi 
+  \fi%
+}\ignorespaces}
+%
+% put anything at (#2,#3,#4)
+%
+\def\pstThreeDPut{\@ifnextchar[{\pst@ThreeDPut}{\pst@ThreeDPut[]}}
+\def\pst@ThreeDPut[#1](#2,#3,#4)#5{{%
+  \pst@killglue%
+  \psset{#1}%
+  \pstThreeDNode(#2,#3,#4){temp@pstNode}%
+%	\def\@tempa{c}
+%	\ifx\pst@ThreeDplot@pOrigin\@tempa%
+%	    \rput(temp@pstNode){#5}%
+%	\else%
+  \rput[\psk@ThreeDplot@pOrigin](temp@pstNode){#5}%
+%	\fi%
+}\ignorespaces}
+%
+% draws a 3d line
+%
+\def\cartesianIIID@coor#1,#2,#3,#4\@nil{\edef\pst@coor{#1 #2 #3 }}
+\def\NormalIIIDCoor{%
+  \def\pst@@getcoor##1{\pst@expandafter\cartesianIIID@coor{##1}, ,\@nil}%
+  \def\pst@@getangle##1{%
+    \pst@checknum{##1}\pst@angle%
+    \edef\pst@angle{\pst@angle \pst@angleunit}%
+  }%
+  \def\psput@##1{\pst@@getcoor{##1}\leavevmode\psput@cartesian}%
+}%
+
+\def\pstThreeDLine{\NormalIIIDCoor\pst@object{lineIIID}}
+\def\lineIIID@i{%
+  \pst@killglue%
+  \pst@getarrows{%
+    \begin@OpenObj%
+      \pst@getcoors[\lineIIID@ii%
+  }%
+}
+\def\lineIIID@ii{%
+  \addto@pscode{%
+    \pst@3ddict
+      \variablesIIID
+      /dxUnit \psk@ThreeDplot@xThreeDunit\space def
+      /dyUnit \psk@ThreeDplot@yThreeDunit\space def
+      /dzUnit \psk@ThreeDplot@zThreeDunit\space def 
+      \ifPst@SphericalCoor /SphericalCoor true def 
+      \else /SphericalCoor false def
+      \fi %
+      /xUnit { \pst@number\psxunit\space mul } def
+      /yUnit { \pst@number\psyunit\space mul } def
+      convertStackTo2D
+    end
+    \pst@cp\space \psline@iii\space \tx@Line
+  }%
+  \end@OpenObj%
+  \SpecialCoor%
+  \ignorespaces
+}
+%
+% set a 3d dot
+%
+\def\pstThreeDDot{\pst@object{pst@ThreeDDot}}
+\def\pst@ThreeDDot@i(#1,#2,#3){{%
+  \pst@killglue
+  \addbefore@par{linestyle=dashed,linewidth=0.5pt}% default
+  \use@par%
+  \pstThreeDNode(#1,#2,#3){A}%
+  \ifx\psk@dotstyle\@none\else\psdots(A)\fi%
+  \ifPst@drawCoor%  
+    \addto@pscode{
+       \pst@3ddict
+       \variablesIIID
+       \ifPst@SphericalCoor
+          #1\space #2\space #3\space
+          ConvertToCartesian
+       \else
+         /x #1\space\psk@ThreeDplot@xThreeDunit\space mul def
+         /y #2\space\psk@ThreeDplot@yThreeDunit\space mul def 
+         /z #3\space\psk@ThreeDplot@zThreeDunit\space mul def
+       \fi
+       ConvertTo2D 
+       x2D \pst@number\psxunit\space mul 
+       y2D \pst@number\psyunit\space mul 
+       moveto /RotX 0 def /RotY 0 def /RotZ 0 def
+       /z 0 def 
+       ConvertTo2D /x2DOld x2D def /y2DOld y2D def 
+       x2D \pst@number\psxunit\space mul 
+       y2D \pst@number\psyunit\space mul 
+       lineto
+       /y@i y def /y 0 def
+       ConvertTo2D 
+       x2D \pst@number\psxunit\space mul 
+       y2D \pst@number\psyunit\space mul 
+       lineto 
+       x2DOld \pst@number\psxunit\space mul 
+       y2DOld \pst@number\psyunit\space mul 
+       moveto 
+       /y y@i def /x 0 def
+       ConvertTo2D 
+       x2D \pst@number\psxunit\space mul 
+       y2D \pst@number\psyunit\space mul 
+       lineto 
+       \ifx\pslinestyle\@none\else
+         gsave
+         \pst@number\pslinewidth SLW
+         \pst@usecolor\pslinecolor
+         \@nameuse{psls@\pslinestyle}
+         grestore
+       \fi
+     end
+   }%
+   \use@pscode%
+ \fi%
+}\ignorespaces}
+%
+% transform the 3d coordinates of the node (#1,#2,#3)
+% into a 2d node with the name #4
+%
+\def\pstThreeDNode{\@ifnextchar[{\pst@ThreeDNode}{\pst@ThreeDNode[]}}
+\def\pst@ThreeDNode[#1](#2,#3,#4)#5{{%
+  \psset{#1}%
+  \pnode(!%
+    \pst@3ddict
+    \variablesIIID
+    \ifPst@SphericalCoor
+      #2\space #3\space #4\space
+      ConvertToCartesian
+    \else
+      /x #2\space\psk@ThreeDplot@xThreeDunit\space mul def 
+      /y #3\space\psk@ThreeDplot@yThreeDunit\space mul def 
+      /z #4\space\psk@ThreeDplot@zThreeDunit\space mul def
+    \fi
+    ConvertTo2D x2D y2D end ){#5}%
+}\ignorespaces}
+%
+% a 3d uput[](){}
+%
+\def\pstUThreeDPut{\@ifnextchar[{\pst@UThreeDPut}{\pst@UThreeDPut[]}}
+\def\pst@UThreeDPut[#1](#2,#3,#4)#5{{%
+  \uput[#1](!%
+    \pst@3ddict
+      \variablesIIID
+      \ifPst@SphericalCoor
+        #2\space #3\space #4\space
+        ConvertToCartesian
+      \else
+        /x #2\space\psk@ThreeDplot@xThreeDunit\space mul def 
+        /y #3\space\psk@ThreeDplot@yThreeDunit\space mul def 
+        /z #4\space\psk@ThreeDplot@zThreeDunit\space mul def
+      \fi
+      ConvertTo2D x2D y2D 
+    end ){#5}%
+}\ignorespaces}
+%
+% Trangle [options](Point1)(Point2)(Point3)
+%
+\def\pstThreeDTriangle{\@ifnextchar[{\do@ThreeDTriangle}{\do@ThreeDTriangle[]}}
+\def\do@ThreeDTriangle[#1](#2)(#3)(#4){{%
+  \ifx#1\empty\else\psset{#1}\fi%
+  \ifPst@drawCoor%
+    \pstThreeDDot[drawCoor=true](#2)%
+    \pstThreeDDot[drawCoor=true](#3)%
+    \pstThreeDDot[drawCoor=true](#4)%
+  \fi%
+  \pstThreeDNode(#2){A}%
+  \pstThreeDNode(#3){B}%
+  \pstThreeDNode(#4){C}%
+  \ifx\psk@fillstyle\@none%
+  \else%
+    \pscustom{%
+      \code{\psk@ThreeDplot@linejoin\space setlinejoin}%
+  \fi%
+  \psline[#1](A)(B)(C)(A)(B)%
+  \ifx\psk@fillstyle\@none\else}\fi%
+}\ignorespaces}
+%
+% draws a threeD square as a polygon
+%
+% [#1] options
+% (#2) starting vector ax,ay,az
+% (#3) first direction vector ux,uy,uz
+% (#4) second direction vector wx,wy,wz
+%
+\def\pstThreeDSquare{\pst@object{squareIIID}}
+\def\squareIIID@i{\squareIIID@ii}
+\def\squareIIID@ii(#1)(#2)(#3){%
+  \ifPst@drawCoor%
+    {%
+    \psset{linestyle=dashed,linewidth=0.5pt}%
+    \pstThreeDDot(#1)%
+    \pst@addThreeDVec(#1)(#2)\pst@tempa\pst@tempb\pst@tempc%
+    \pstThreeDDot(\pst@tempa,\pst@tempb,\pst@tempc)%
+    \pst@addThreeDVec(#1)(#3)\pst@tempa\pst@tempb\pst@tempc
+    \pstThreeDDot(\pst@tempa,\pst@tempb,\pst@tempc)%
+    \pst@addThreeDVec(\pst@tempa,\pst@tempb,\pst@tempc)%
+      (#2)\pst@tempa\pst@tempb\pst@tempc%
+    \pstThreeDDot(\pst@tempa,\pst@tempb,\pst@tempc)%
+    }%
+  \fi%
+  \getThreeDCoor{#1}\pst@tempa%
+  \getThreeDCoor{#2}\pst@tempb%
+  \getThreeDCoor{#3}\pst@tempc%
+  \begin@OpenObj
+    \addto@pscode{%
+      \pst@3ddict
+        \variablesIIID
+        /P1 { \pst@tempa\space } def % x y z or Radius longitude lattitude
+        /P2 { \pst@tempb\space } def %
+        /P3 { \pst@tempc\space } def %
+        /SphericalCoor \ifPst@SphericalCoor true \else false \fi def %
+        /xUnit { \pst@number\psxunit\space mul } def
+        /yUnit { \pst@number\psyunit\space mul } def
+        P1 saveCoor
+	SphericalCoor { ConvertToCartesian } if
+        ConvertTo2D
+        /x0 x2D xUnit def /y0 y2D yUnit def
+        P2 saveCoor
+        SphericalCoor { ConvertToCartesian } if
+        ConvertTo2D
+        /x1 x2D xUnit x0 add def /y1 y2D yUnit y0 add def
+        P3 saveCoor
+        SphericalCoor { ConvertToCartesian } if
+        ConvertTo2D
+        /x2 x2D xUnit x1 add def /y2 y2D yUnit y1 add def
+        P2 saveCoor
+        SphericalCoor { ConvertToCartesian } if
+        ConvertTo2D
+        /x3 x2D xUnit neg x2 add def /y3 y2D yUnit neg y2 add def
+        [ x0 y0 x1 y1 x2 y2 x3 y3 x0 y0
+        \pst@cp\space \psline@iii\space \tx@Line\space
+      end
+    }%
+  \end@OpenObj%
+}
+
+%
+% draws a threeD Box
+% [#1] options
+% (#2) first direction vector ux,uy,uz
+% (#3) second direction vector vx,vy,vz
+% (#4) third direction vector wx,wy,wz
+%
+\def\pstThreeDBox{\@ifnextchar[{\pstThreeDBox@i}{\pstThreeDBox@i[]}}
+\def\pstThreeDBox@i[#1](#2)(#3)(#4)(#5){%
+  \pst@killglue%
+  \begingroup%
+  \psset{linestyle=\psk@ThreeDplot@invisibleLineStyle}%
+  \psset{#1}%
+  \pstVerb{ 
+    \pst@3ddict
+      \variablesIIID
+    end
+  }%
+  \pstThreeDSquare[#1](#2)(#4)(#5) % 	lower square
+  \pstThreeDSquare(#2)(#3)(#4)% 	back square
+%
+  \psset{linestyle=\psk@ThreeDplot@visibleLineStyle}%
+  \pst@addThreeDVec(#2)(#4)\pst@tempa\pst@tempb\pst@tempc
+  \pstThreeDSquare[#1](\pst@tempa,\pst@tempb,\pst@tempc)(#3)(#5)% left square
+  \pst@addThreeDVec(#2)(#3)\pst@tempa\pst@tempb\pst@tempc
+  \pstThreeDSquare[#1](\pst@tempa,\pst@tempb,\pst@tempc)(#4)(#5)% top square
+  \pst@addThreeDVec(#2)(#5)\pst@tempa\pst@tempb\pst@tempc
+  \pstThreeDSquare[#1](\pst@tempa,\pst@tempb,\pst@tempc)(#3)(#4)% front square
+  \endgroup%
+  \ignorespaces%
+}
+%
+% Sphere
+%
+\def\pstThreeDSphere{\@ifnextchar[{\pst@ThreeDSphere}{\pst@ThreeDSphere[]}}
+\def\pst@ThreeDSphere[#1](#2,#3,#4)#5{{%
+  \psset{THETA=\psk@ThreeDplot@Beta,PHI=\psk@ThreeDplot@Beta,Dobs=10,Decran=10}%
+  \psset{#1}%
+  \pstThreeDNode(#2,#3,#4){SphereCenter}%
+  \rput(SphereCenter){\SphereThreeD(0,0,0){#5}}%
+}\ignorespaces}
+%
+% set a 3d ellipse/circle
+%
+% #1 options
+% #2 center cx,cy,cz
+% #3 radius ax,ay,az
+% #4 radius bx,by,bz
+%
+\def\pstThreeDEllipse{\pst@object{pstThreeDEllipse}}
+\def\pstThreeDEllipse@i(#1)(#2)(#3){%
+  \addbefore@par{plotstyle=curve}%
+  \@nameuse{beginplot@\psplotstyle}%
+  \getThreeDCoor{#1}\pst@tempc%  center
+  \getThreeDCoor{#2}\pst@tempa%  a
+  \getThreeDCoor{#3}\pst@tempb%  b
+  \addto@pscode{%
+    \pst@3ddict \variablesIIID end
+    \ifPst@SphericalCoor 
+      \pst@tempc\space \tx@ConvertToCartesian 
+        /zM \tx@Z def /yM \tx@Y def /xM \tx@X def % center
+      \pst@tempa\space \tx@ConvertToCartesian  
+        /zA \tx@Z def /yA \tx@Y def /xA \tx@X def % a
+      \pst@tempb\space \tx@ConvertToCartesian 
+        /zB \tx@Z def /yB \tx@Y def /xB \tx@X def % b 
+    \else
+      \pst@tempc\space /zM exch def /yM exch def /xM exch def % center
+      \pst@tempa\space /zA exch def /yA exch def /xA exch def % a
+      \pst@tempb\space /zB exch def /yB exch def /xB exch def % b
+    \fi
+    /aStart \psk@ThreeDplot@beginAngle\space def
+    /aEnd \psk@ThreeDplot@endAngle\space dup aStart lt { 360 add } if def
+    /da aEnd aStart sub \psk@plotpoints\space div abs def
+    /xyz {
+      xM xA angle cos mul add xB angle sin mul add 
+      yM yA angle cos mul add yB angle sin mul add 
+      zM zA angle cos mul add zB angle sin mul add 
+      \pst@3ddict saveCoor ConvertTo2D 
+      x2D \pst@number\psxunit mul y2D \pst@number\psyunit mul end
+    } def
+    /angle aStart def
+  }%
+  \gdef\psplot@init{}%
+  \@pstfalse%
+  \@nameuse{testqp@\psplotstyle}%
+  \if@pst\pstThreeDEllipse@ii\else\pstThreeDEllipse@iii\fi%
+  \ignorespaces}
+%
+\def\pstThreeDEllipse@ii{%
+    \addto@pscode{%
+      xyz \@nameuse{beginqp@\psplotstyle}
+      \psk@plotpoints 1 sub {
+        /angle angle da add def
+        xyz \@nameuse{doqp@\psplotstyle}
+      } repeat
+      /angle aEnd def
+      xyz \@nameuse{doqp@\psplotstyle}}%
+  \@nameuse{endqp@\psplotstyle}}
+    
+\def\pstThreeDEllipse@iii{%
+  \addto@pscode{%
+      mark
+      /n 2 def
+      \psk@plotpoints {
+        xyz
+        n 2 roll
+        /n n 2 add def
+        /angle angle da add def
+      } repeat
+      /angle aEnd def
+      xyz
+      n 2 roll}%
+  \@nameuse{endplot@\psplotstyle}}
+%
+\def\pstThreeDCircle{\pstThreeDEllipse}
+\def\pstThreeDPlotFunc{\psplotThreeD}%	only for compatibility
+%
+%
+% cone[options](center){radius}{height}
+%
+\def\pstThreeDCone{\pst@object{pstThreeDCone}}
+\def\pstThreeDCone@i(#1)(#2)(#3)#4{{%
+  \pst@usepar
+  \pstThreeDEllipse(#1)(#2)(#3)%
+  \begin@OpenObj%
+  \getThreeDCoor{#1}\pst@tempa%
+  \getThreeDCoor{#2}\pst@tempb%
+  \getThreeDCoor{#3}\pst@tempc%
+  \addto@pscode{
+    \pst@3ddict
+    \variablesIIID
+    /xUnit { \pst@number\psxunit\space mul } def
+    /yUnit { \pst@number\psyunit\space mul } def
+    /SphericalCoor \ifPst@SphericalCoor true \else false \fi def %
+    /Center [ \pst@tempa\space SphericalCoor { ConvertToCartesian } if ] def % x y z or Radius longitude lattitude
+    Center aload pop saveCoor ConvertTo2D /xC x2D def /yC y2D def
+    /rA [ \pst@tempb \space SphericalCoor { ConvertToCartesian } if ] def
+    /rB [ \pst@tempc \space SphericalCoor { ConvertToCartesian } if ] def
+    rA rB AxB UnitVec #4 AmulC Center AaddB aload pop saveCoor ConvertTo2D /x2 x2D xUnit def /y2 y2D yUnit def
+    [ xC rA VecNorm add 90 Beta sub sin sub xUnit yC Beta sin add yUnit 
+      x2 y2
+      xC rA VecNorm sub xUnit yC yUnit
+      \pst@cp\space \psline@iii\space \tx@Line\space }%
+  \end@OpenObj%
+}\ignorespaces}
+%
+\def\pstRotNodeIIID{\pst@object{RotNodeIIID}}
+\def\RotNodeIIID@i(#1,#2,#3)(#4,#5,#6)#7{%
+  \pst@killglue
+  \begingroup%
+  \use@par%
+  \def\pst@ThreeDplot@ThetaX{#4}%    rotating angle
+  \def\pst@ThreeDplot@ThetaY{#5}%    rotating angle
+  \def\pst@ThreeDplot@ThetaZ{#6}%    rotating angle
+  \pnode(!%
+    \pst@3ddict
+      \variablesIIID
+      \ifPst@SphericalCoor
+        #1\space #2\space #3\space
+        ConvertToCartesian
+      \else
+        /x #1\space\psk@ThreeDplot@xThreeDunit\space mul def 
+        /y #2\space\psk@ThreeDplot@yThreeDunit\space mul def 
+        /z #3\space\psk@ThreeDplot@zThreeDunit\space mul def
+      \fi
+      ConvertTo2D x2D y2D 
+    end ){#7}%
+  \endgroup%
+  \ignorespaces}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\def\psplotinit#1{\xdef\psplot@init{#1 }}
+\def\psplot@init{}
+%
+%\def\psplotThreeD{\@ifnextchar[{\ps@plotThreeD}{\ps@plotThreeD[]}}
+\def\psplotThreeD{\def\pst@par{}\pst@object{psplotThreeD}}
+\def\psplotThreeD@i(#1,#2)(#3,#4)#5{{%
+  \pst@killglue
+  \use@par%
+  \ifcase\psk@ThreeDplot@drawStyle%
+    \psplotThreeD@xLines(#1,#2)(#3,#4){#5}\or%
+    \psplotThreeD@yLines(#1,#2)(#3,#4){#5}\or    
+    \psplotThreeD@xLines(#1,#2)(#3,#4){#5}%
+    \psplotThreeD@yLines(#1,#2)(#3,#4){#5}\or%
+    \psplotThreeD@yLines(#1,#2)(#3,#4){#5}%
+    \psplotThreeD@xLines(#1,#2)(#3,#4){#5}%
+  \fi%
+}\ignorespaces}
+%
+%\def\doPlotThreeD@xLines{\pst@object{psplotThreeD@xLines}}
+%\def\doPlotThreeD@yLines{\pst@object{psplotThreeD@yLines}}
+%
+\def\psplotThreeD@xLines(#1,#2)(#3,#4)#5{%
+  \pst@killglue%
+  \begingroup%
+%    \use@par%
+    \@pstfalse%
+    \@nameuse{beginplot@\psplotstyle}%
+    \gdef\psplot@init{}%
+    \@nameuse{testqp@\psplotstyle}%
+    \if@pst%	lines and dots
+      \addto@pscode{
+        \variablesIIID
+        /xMin #1 def
+        /x xMin def
+        /x1 #2 def
+        /y #3 def
+        /y1 #4 def
+        /dx x1 x sub \psk@ThreeDplot@xPlotpoints\space dup 0 gt {div}{pop} ifelse def
+        /dy y1 y sub \psk@ThreeDplot@yPlotpoints\space dup 0 gt {div}{pop} ifelse def
+        /func {#5} def
+        /xyz {
+          x neg Alpha cos mul y Alpha sin mul add \pst@number\psxunit mul
+          x Alpha sin mul y Alpha cos mul add neg Beta sin mul
+          func Beta cos mul add \pst@number\psyunit mul} def
+        }%
+        \psplotThreeD@xLines@ii
+    \else%	curves
+  \endgroup%
+  \multido{\n@Y=0+1}{\psk@ThreeDplot@yPlotpoints}{%
+    \ifPst@hiddenLine\pscustom[style=hiddenStyle]{\fi%
+    \@nameuse{beginplot@\psplotstyle}%
+    \addto@pscode{
+      \variablesIIID
+      /xMin #1 def
+      /x xMin def
+      /x1 #2 def
+      /dx x1 x sub \psk@ThreeDplot@xPlotpoints\space dup 0 gt {div}{pop} ifelse def
+      /dy #4\space #3\space sub \psk@ThreeDplot@yPlotpoints\space dup 0 gt {div}{pop} ifelse def
+      /y #3\space \n@Y\space dy mul add def
+      /func {#5} def
+      /xyz {
+        x neg Alpha cos mul y Alpha sin mul add \pst@number\psxunit mul
+        x Alpha sin mul y Alpha cos mul add neg Beta sin mul
+        func Beta cos mul add \pst@number\psyunit mul} def
+    }%
+    \psplotThreeD@xLines@iii%
+    \ifPst@hiddenLine }\fi%
+  }%
+  \fi%
+  \endgroup%
+  \ignorespaces%
+}
+%
+\def\psplotThreeD@xLines@ii{%
+  \addto@pscode{%
+    xyz \@nameuse{beginqp@\psplotstyle}
+   \psk@ThreeDplot@yPlotpoints\space 1 add {
+     /x xMin def
+     xyz moveto
+     \psk@ThreeDplot@xPlotpoints\space 1 add {
+       xyz \@nameuse{doqp@\psplotstyle}
+       /x x dx add def
+     } repeat
+     /y y dy add def
+   } repeat
+   /x x1 def
+   /y y1 def
+   xyz \@nameuse{doqp@\psplotstyle}
+  }%
+  \@nameuse{endqp@\psplotstyle}%
+}
+\def\psplotThreeD@xLines@iii{%    curves
+  \addto@pscode{%
+    /x xMin def
+    mark
+    /n 2 def
+    \psk@ThreeDplot@xPlotpoints {
+      xyz
+      n 2 roll
+      /n n 2 add def
+      /x x dx add def
+    } repeat
+    /x x1 def
+    xyz
+    n 2 roll
+  }%
+  \@nameuse{endplot@\psplotstyle}%
+}
+%
+\def\psplotThreeD@yLines(#1,#2)(#3,#4)#5{%
+  \pst@killglue
+  \begingroup
+%  \use@par%
+  \@pstfalse
+  \@nameuse{beginplot@\psplotstyle}%
+  \gdef\psplot@init{}%
+  \@nameuse{testqp@\psplotstyle}%
+  \if@pst%	lines and dots
+    \addto@pscode{%
+      \variablesIIID
+      /x #1 def
+      /x1 #2 def
+      /yMin #3 def
+      /y yMin def
+      /y1 #4 def
+      /dx x1 x sub \psk@ThreeDplot@xPlotpoints\space dup 0 gt {div}{pop} ifelse def
+      /dy y1 y sub \psk@ThreeDplot@yPlotpoints\space dup 0 gt {div}{pop} ifelse def
+      /func {#5} def
+      /xyz {
+        x neg Alpha cos mul y Alpha sin mul add \pst@number\psxunit mul
+        x Alpha sin mul y Alpha cos mul add neg Beta sin mul
+        func Beta cos mul add \pst@number\psyunit mul} def
+    }%
+    \psplotThreeD@yLines@ii
+  \else%	curves
+    \endgroup
+    \multido{\n@X=0+1}{\psk@ThreeDplot@xPlotpoints}{%
+      \ifPst@hiddenLine\pscustom[style=hiddenStyle]{\fi
+      \@nameuse{beginplot@\psplotstyle}%
+      \addto@pscode{%
+        \variablesIIID
+        /yMin #3 def
+        /y yMin def
+        /y1 #4 def
+        /dy y1 y sub \psk@ThreeDplot@yPlotpoints\space dup 0 gt {div}{pop} ifelse def
+        /dx #2\space #1\space sub \psk@ThreeDplot@xPlotpoints\space dup 0 gt {div}{pop} ifelse def
+        /x #1\space \n@X\space dx mul add def
+        /func {#5} def
+        /xyz {
+        x neg Alpha cos mul y Alpha sin mul add \pst@number\psxunit mul
+        x Alpha sin mul y Alpha cos mul add neg Beta sin mul
+        func Beta cos mul add \pst@number\psyunit mul} def
+      }%
+      \psplotThreeD@yLines@iii%
+      \ifPst@hiddenLine }\fi%
+    }%
+  \fi
+  \endgroup
+  \ignorespaces%
+}
+\def\psplotThreeD@yLines@ii{%
+  \addto@pscode{%
+    xyz \@nameuse{beginqp@\psplotstyle}
+    \psk@ThreeDplot@xPlotpoints\space 1 add {
+      /y yMin def
+      xyz moveto
+      \psk@ThreeDplot@yPlotpoints\space 1 add {
+        xyz \@nameuse{doqp@\psplotstyle}
+        /y y dy add def
+      } repeat
+      /x x dx add def
+    } repeat
+    /x x1 def
+    /y y1 def
+    xyz \@nameuse{doqp@\psplotstyle}
+  }%
+  \@nameuse{endqp@\psplotstyle}%
+}
+\def\psplotThreeD@yLines@iii{%    curves
+  \addto@pscode{%
+    /y yMin def
+    mark
+    /n 2 def
+    \psk@ThreeDplot@yPlotpoints {
+      xyz
+      n 2 roll
+      /n n 2 add def
+      /y y dy add def
+    } repeat
+    /y y1 def
+    xyz
+    n 2 roll
+  }%
+    \@nameuse{endplot@\psplotstyle}%
+}
+%
+% parametricplot ----------------------------------------------------------------
+%
+\def\parametricplotThreeD{\def\pst@par{}\pst@object{parametricPlotThreeD}}
+\def\parametricPlotThreeD@i(#1){%
+  \@ifnextchar({\parametricPlotThreeD@ii(#1)}{\parametricPlotThreeD@ii(#1)(0,0)}%
+}
+\def\parametricPlotThreeD@ii(#1,#2)(#3,#4)#5{{%
+  \pst@killglue%
+  \use@par%
+  \@pstfalse%
+  \@nameuse{beginplot@\psplotstyle}%
+  \@nameuse{testqp@\psplotstyle}% quick plot or something special
+  \pstVerb{%
+      /3D2DConv {
+        3 -1 roll               % y z x
+        \psk@ThreeDplot@xThreeDunit\space mul
+        dup                     % y z x x
+        neg Alpha cos mul       % y z x (x)
+        4 -1 roll               % z x (x) y
+       \psk@ThreeDplot@yThreeDunit\space mul
+       dup                     % z x (x) y y
+       5 1 roll                % y z x (x) y
+       Alpha sin mul add \pst@number\psxunit mul       % y z x (x2)
+       4 1 roll                % (x2) y z x
+       Alpha sin mul           % (x2) y z (x)
+       3 -1 roll               % (x2) z (x) y
+       Alpha cos mul add neg Beta sin mul % (x2) z (x)
+       exch                    % (x2) (x) z
+       \psk@ThreeDplot@zThreeDunit\space mul
+       Beta cos mul add \pst@number\psyunit mul        % (x2) (y2)
+      } def
+  }%
+  \if@pst%
+    \def\pslinetype{0}%
+    \addto@pscode{%
+      \variablesIIID
+      /tMin #1 def
+      /t tMin def
+      /t1 #2 def
+      /u #3 def
+      /u1 #4 def
+      /dt t1 t sub \psk@ThreeDplot@xPlotpoints\space dup 1 gt %
+        { 1 sub div }{ pop pop 0 } ifelse def % step for t
+      /du u1 u sub \psk@ThreeDplot@yPlotpoints\space dup 1 gt %
+        { 1 sub div }{ pop pop 0 } ifelse def % step for u
+      /xyz { #5 3D2DConv } def
+   }%
+   \parametricPlotThreeD@iii%
+  \else%
+    \def\pslinetype{-3}%
+    \endgroup%
+    \pst@dima=#3pt\pst@dimb=#4pt
+    \ifdim\pst@dima=\pst@dimb\psset{yPlotpoints=1}\fi% #3=#4 ??
+    \multido{\n@Y=0+1}{\psk@ThreeDplot@yPlotpoints}{%
+      \@nameuse{beginplot@\psplotstyle}%
+      \addto@pscode{%
+        \variablesIIID
+        /tMin #1 def
+        /t tMin def
+        /t1 #2 def
+	/u1 #2 def
+        /dt t1 t sub \psk@ThreeDplot@xPlotpoints\space dup 1 gt %
+          { 1 sub div }{ pop pop 0 } ifelse def % step for t
+        /du #4\space #3\space sub \psk@ThreeDplot@yPlotpoints\space dup 1 gt %
+          { 1 sub div }{ pop pop 0 } ifelse def % step for t
+        /u #3\space \n@Y\space du mul add def
+        /xyz { #5 3D2DConv } def
+     }%
+     \parametricPlotThreeD@iv%
+    }%
+  \fi%
+}\ignorespaces}
+\def\parametricPlotThreeD@iii{%   without arrows (quickplot)
+  \addto@pscode{%
+    \psk@ThreeDplot@yPlotpoints\space {
+      /t tMin def
+      xyz \@nameuse{beginqp@\psplotstyle}
+      \psk@ThreeDplot@xPlotpoints {
+        xyz \@nameuse{doqp@\psplotstyle}
+        /t t dt add def
+      } repeat
+      /u u du add def
+    } repeat
+  }%
+  \@nameuse{endqp@\psplotstyle}%
+}
+\def\parametricPlotThreeD@iv{%    with arrows or curve
+  \addto@pscode{%
+%	    /t tMin def
+    mark
+    /n 0 def
+    \psk@ThreeDplot@xPlotpoints\space {
+      xyz
+      /n n 2 add def
+      n 2 roll
+      /t t dt add def
+    } repeat
+%    /t t1 def
+%    /u u1 def
+%    xyz
+%    n 2 roll
+  }%
+  \@nameuse{endplot@\psplotstyle}%
+}
+%
+% Plot 3D data
+%
+\def\fileplotThreeD{\def\pst@par{}\pst@object{fileplotThreeD}}
+\def\fileplotThreeD@i#1{%
+    \pst@killglue%
+    \begingroup%
+	\use@par%
+	\@pstfalse%
+	\@nameuse{testqp@\psplotstyle}%%
+	\if@pst
+	    \dataplotThreeD@ii{\pst@readfile{#1}}%
+	\else
+	    \listplotThreeD@ii{\pst@altreadfile{#1}}%
+	\fi
+    \endgroup%
+    \ignorespaces%
+}
+%
+% dataplot
+%
+\def\dataplotThreeD{\def\pst@par{}\pst@object{dataplotThreeD}}
+\def\dataplotThreeD@i#1{%
+  \pst@killglue
+  \begingroup
+    \use@par
+    \@pstfalse
+    \@nameuse{testqp@\psplotstyle}%
+    \if@pst
+      \dataplotThreeD@ii{\addto@pscode{#1}}%
+    \else
+      \listplot@ii{\addto@pscode{#1}}%
+    \fi
+  \endgroup
+  \ignorespaces%
+}
+\def\dataplotThreeD@ii#1{%
+  \@nameuse{beginplot@\psplotstyle}%
+    \addto@pscode{%
+      \variablesIIID
+      /Dx { /D { Dy } def } def
+      /Dy { /D { Dz } def } def
+      /Dz { 			% now we have x y z
+	3 -1 roll		% y z x
+        \psk@ThreeDplot@xThreeDunit\space div
+	dup			% y z x x
+	neg Alpha cos mul	% y z x (x)
+	4 -1 roll		% z x (x) y
+	\psk@ThreeDplot@yThreeDunit\space div
+	dup			% z x (x) y y
+	5 1 roll		% y z x (x) y
+	Alpha sin mul add \pst@number\psxunit mul % y z x (x2)
+	4 1 roll		% (x2) y z x
+	Alpha sin mul		% (x2) y z (x)
+	3 -1 roll		% (x2) z (x) y
+	Alpha cos mul add neg Beta sin mul % (x2) z (x)
+	exch			% (x2) (x) z
+	\psk@ThreeDplot@zThreeDunit\space div
+	Beta cos mul add \pst@number\psyunit mul % (x2) (y2)
+	Do /D { Dx } def } def
+      /D { /D { Dx } def } def
+      /Do {
+        \@nameuse{beginqp@\psplotstyle}%
+        /Do { \@nameuse{doqp@\psplotstyle}} def
+      } def}%
+    #1%
+    \addto@pscode{D}%
+  \@nameuse{endqp@\psplotstyle}%
+}
+%
+%
+\pst@def{ScalePointsThreeD}<%
+	counttomark dup dup cvi eq not { exch pop } if
+	/m exch def /n m 3 div cvi def
+	n { 				% now we have x y z
+		3 -1 roll		% y z x
+		\psk@ThreeDplot@xThreeDunit\space div
+		dup			% y z x x
+		neg Alpha cos mul	% y z x (x)
+		4 -1 roll		% z x (x) y
+		\psk@ThreeDplot@yThreeDunit\space div
+		dup			% z x (x) y y
+		5 1 roll		% y z x (x) y
+		Alpha sin mul add \pst@number\psxunit mul	% y z x (x2)
+		4 1 roll		% (x2) y z x
+		Alpha sin mul		% (x2) y z (x)
+		3 -1 roll		% (x2) z (x) y
+		Alpha cos mul add neg Beta sin mul % (x2) z (x)
+		exch			% (x2) (x) z
+		\psk@ThreeDplot@zThreeDunit\space div
+		Beta cos mul add \pst@number\psyunit mul 	% (x2) (y2)
+		m 1 sub 1 roll m 1 sub 1 roll /m m 3 sub def } repeat>
+%
+% listplotThreeD
+%
+\def\listplotThreeD{\def\pst@par{}\pst@object{listplotThreeD}}
+\def\listplotThreeD@i#1{\listplotThreeD@ii{\addto@pscode{#1}}}
+\def\listplotThreeD@ii#1{%
+  \@nameuse{beginplot@\psplotstyle}%
+  \addto@pscode{%
+    \variablesIIID
+    /D {} def mark %
+  }%
+  #1%
+  \addto@pscode{\tx@ScalePointsThreeD}%
+  \@nameuse{endplot@\psplotstyle}%
+}
+%
+% adopted from pst-3d
+%
+\pst@def{TMSave}<%
+  tx@Dict /TMatrix known not { /TMatrix { } def /RAngle { 0 } def } if
+  /TMatrix [ TMatrix CM ] cvx def>
+%
+\pst@def{TMRestore}<%
+  CP /TMatrix [ TMatrix setmatrix ] cvx def moveto>
+%
+\pst@def{TMChange}<%
+  \tx@TMSave
+  /cp [ currentpoint ] cvx def
+  CM
+  CP T \tx@STV
+  CM matrix invertmatrix 
+  matrix concatmatrix
+  exch exec
+  concat cp moveto>
+%
+\def\pstPlanePut{\@ifnextchar[{\pst@PlanePut}{\pst@PlanePut[]}}
+\def\pst@PlanePut[#1](#2)#3{{%
+  \pst@killglue%
+  \psset{pOrigin=lB}%
+  \psset{#1}%
+  \pstThreeDPut[#1](#2){\ps@Plane{#3}}%
+}}
+%
+\def\ps@Plane{\pst@makebox{\psPlane@}}
+\def\psPlane@{%
+  \begingroup
+  \leavevmode%
+  \hbox{%
+%	    \kern\wd\pst@hbox%
+    \pst@Verb{%
+      { [ 1 0
+        \variablesIIID
+%
+% ###  begin Torsten Suhling
+% ------------------------------------------------------------------------
+% ===================================================================
+% How should 'Alpha' be for planes, if real Alpha and Beta are:
+% Alpha	Beta	xy 	    xy (par. y-axis)  yz	  xz
+% -------------------------------------------------------------------
+% 75	> 0[1]	180 + Alpha 	90 +  Alpha  Alpha	  Alpha + 180 		
+% 165	> 0	Alpha 		90 +  Alpha  Alpha	  Alpha 
+% 255	> 0	Alpha		270 + Alpha  Alpha + 180  Alpha
+% 345	> 0	180 + Alpha 	270 + Alpha  Alpha + 180  Alpha + 180 
+% -------------------------------------------------------------------
+% 75	< 0	180 - Alpha 	270 - Alpha  Alpha  	  Alpha + 180  
+% 165	< 0	-Alpha 		270 - Alpha  Alpha  	  Alpha
+%
+% 255	< 0	-Alpha 		90 -  Alpha  Alpha + 180  Alpha
+%
+% 345	< 0	180 -Alpha 	90 -  Alpha  Alpha + 180  Alpha + 180 
+% ------------------------------------------------------------------
+% How should 'Beta' be for planes, if real Alpha and Beta are:
+% Alpha	Beta	xy 	      xy (par. y-axis)	yz		xz
+% -------------------------------------------------------------------
+% 75 	> 0 	Beta 		Beta 		Beta[2] 	Beta 
+% 165	> 0 	Beta 		Beta 		Beta 		Beta 
+% 255	> 0 	Beta 		Beta 		Beta 		Beta 
+% 345	> 0 	Beta 		Beta 		Beta 		Beta 
+% ...................................................................
+% 75 	< 0 	-Beta 		-Beta 		Beta 		Beta 
+% 165	< 0 	-Beta 		-Beta 		Beta 		Beta 
+% 255	< 0 	-Beta 		-Beta 		Beta 		Beta 
+% 345	< 0 	-Beta 		-Beta 		Beta 		Beta 
+% ================================================================
+        \ifx\psk@ThreeDplot@planecorr\ThreeDplot@planecorrOff
+		/SignFlag 	1 def
+		/AlphaOffset 	0 def
+	\else%
+          \ifx\psk@ThreeDplot@plane\ThreeDplot@planeXY 			% XY-layer's tag
+            \ifx\psk@ThreeDplot@planecorr\ThreeDplot@planecorrXYrot 	% Tag written parallel y-axis
+	        Beta  sin 0 lt {/SignFlag  -1}{/SignFlag    1}ifelse def
+                Alpha sin 0 gt {/AlphaOffset 180 -90 SignFlag mul add}
+		               {/AlphaOffset 180  90 SignFlag mul add} ifelse def 
+	    \else% 							% Normal (par. x-axis)
+	        Beta  sin 0 gt {/SignFlag      1}{/SignFlag     -1}ifelse def
+	        Alpha cos 0 gt {/AlphaOffset 180}{/AlphaOffset   0}ifelse def
+	    \fi%
+	  \else 							% Vertical layers 
+            \ifx\psk@ThreeDplot@plane\ThreeDplot@planeYZ 		% YZ-layer's tag 
+		/SignFlag 1 def 
+	        Alpha sin 0 gt {/AlphaOffset   0}{/AlphaOffset 180}ifelse def
+	    \else% 							% XZ-layer's tag 
+		/SignFlag 1 def 
+	        Alpha cos 0 gt {/AlphaOffset 180}{/AlphaOffset   0}ifelse def
+	    \fi% which vert. layer's tag 
+	  \fi% vert. or xy-layer's tag 
+	\fi% planecorr or not 
+% ------------------------------------------------------------------ Ende
+% ------------------------------------------------------------------------
+% ###   Aenderung --> es werden die Operatoren SignFlag und AlphaOffset
+%	eingefuegt
+% ------------------------------------------------------------------------
+%       /Delta Beta sin Alpha sin mul Alpha cos atan neg 90 add def 
+%       /Gamma Beta sin Alpha cos mul neg Alpha sin atan def 
+% ------------------------------------------------------------------------
+        /Delta Beta SignFlag mul sin Alpha SignFlag mul AlphaOffset add sin mul Alpha SignFlag mul AlphaOffset add cos atan neg 90 add def 
+        /Gamma Beta SignFlag mul sin Alpha SignFlag mul AlphaOffset add cos mul neg Alpha SignFlag mul AlphaOffset add sin atan def 
+% ------------------------------------------------------------------- Ende
+        \ifx\psk@ThreeDplot@plane\ThreeDplot@planeXY
+          270 Delta sub rotate
+          /Rho 90 Gamma add Delta add def
+        \else%
+          \ifx\psk@ThreeDplot@plane\ThreeDplot@planeXZ
+            270 Delta sub rotate
+            /Rho 180 Delta add def
+          \else%
+            Gamma rotate
+            /Rho 90 Gamma sub def
+          \fi%
+        \fi%
+        Rho cos Rho sin 0 0 ] concat} \tx@TMChange%
+    }%
+    \box\pst@hbox%
+    \pst@Verb{\tx@TMRestore}%
+%	    \kern\ht\pst@hbox%
+  }%
+  \endgroup%
+}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Utility stuff
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% posStart=Starting point
+% length=  Arrow length.
+\def\Arrows{\@ifnextchar[{\pst@Arrows}{\pst@Arrows[]}}
+\def\pst@Arrows[#1](#2)(#3){{%
+	\psset{#1}%
+	\pst@getcoor{#2}\pst@tempa
+	\pst@getcoor{#3}\pst@tempb
+	\pnode(!%
+		/StartArrow \psk@ThreeDplot@posStart\space def
+		/LengthArrow \psk@ThreeDplot@length\space def
+		\pst@tempa /YA exch \pst@number\psyunit div def
+		/XA exch \pst@number\psxunit div def
+		\pst@tempb /YB exch \pst@number\psyunit div def
+		/XB exch \pst@number\psxunit div def
+		/denominateur XB XA sub def
+		/numerateur YB YA sub def
+		/angleDirectionAB numerateur denominateur Atan def
+		/XD StartArrow angleDirectionAB cos mul XA add def
+		/YD StartArrow angleDirectionAB sin mul YA add def
+		/XF XD LengthArrow angleDirectionAB cos mul add def
+		/YF YD LengthArrow angleDirectionAB sin mul add def
+		XD YD ){ArrowStart}
+	\pnode(! XF YF){ArrowEnd}
+	\psset{arrows=->}%
+	\psline[#1](ArrowStart)(ArrowEnd)%
+}\ignorespaces}
+%
+% draw a line (===) outside: #2-----#3=======#4
+%
+\def\psOutLine{\@ifnextchar[{\pst@ToDrawOut}{\pst@ToDrawOut[]}}
+\def\pst@ToDrawOut[#1](#2)(#3)#4{{%
+	\psset{#1}%
+	\pst@getcoor{#2}\pst@tempa
+	\pst@getcoor{#3}\pst@tempb
+	\pnode(!%
+		/LengthArrow \psk@ThreeDplot@length\space def
+		\pst@tempa /YA exch \pst@number\psyunit div def
+		/XA exch \pst@number\psxunit div def
+		\pst@tempb /YB exch \pst@number\psyunit div def
+		/XB exch \pst@number\psxunit div def
+		/denominateur XB XA sub def
+		/numerateur YB YA sub def
+		/angleDirectionAB numerateur denominateur Atan def
+		/Xend XB LengthArrow angleDirectionAB cos mul add def
+		/Yend YB LengthArrow angleDirectionAB sin mul add def
+		Xend Yend){#4}
+	\psline[#1](#3)(#4)
+}\ignorespaces}
+%
+% draw a line (===) before: #4========#2-----#3
+%
+\def\psBeforeLine{\@ifnextchar[{\pst@BeforeLine}{\pst@BeforeLine[]}}
+\def\pst@BeforeLine[#1](#2)(#3)#4{{%
+	\psset{#1}%
+	\pst@getcoor{#2}\pst@tempa
+	\pst@getcoor{#3}\pst@tempb
+	\pnode(!%
+		/LengthArrow \psk@ThreeDplot@length\space def
+		\pst@tempa /YA exch \pst@number\psyunit div def
+		/XA exch \pst@number\psxunit div def
+		\pst@tempb /YB exch \pst@number\psyunit div def
+		/XB exch \pst@number\psxunit div def
+		/denominateur XB XA sub def
+		/numerateur YB YA sub def
+		/angleDirectionAB numerateur denominateur Atan def
+		/Xstart XA LengthArrow angleDirectionAB cos mul sub def
+		/Ystart YA LengthArrow angleDirectionAB sin mul sub def
+		Xstart Ystart){#4}
+	\psline[#1](#4)(#2)%
+}\ignorespaces}
+%
+% intersection de deux droites
+% 2 juillet 2001/ rewritten 2003-01-27 Herbert
+%
+\def\ABinterCD(#1)(#2)(#3)(#4)#5{%
+    \pst@getcoor{#1}\pst@tempa
+    \pst@getcoor{#2}\pst@tempb
+    \pst@getcoor{#3}\pst@tempc
+    \pst@getcoor{#4}\pst@tempd
+\pnode(!%
+    /YA \pst@tempa exch pop \pst@number\psyunit div def
+    /XA \pst@tempa pop \pst@number\psxunit div def
+    /YB \pst@tempb exch pop \pst@number\psyunit div def
+    /XB \pst@tempb pop \pst@number\psxunit div def
+    /YC \pst@tempc exch pop \pst@number\psyunit div def
+    /XC \pst@tempc pop \pst@number\psxunit div def
+    /YD \pst@tempd exch pop \pst@number\psyunit div def
+    /XD \pst@tempd pop \pst@number\psxunit div def
+    /dY1 YB YA sub def
+    /dX1 XB XA sub def
+    /dY2 YD YC sub def
+    /dX2 XD XC sub def
+    dX1 abs 0.01 lt {
+	/m2 dY2 dX2 div def
+	XA dup XC sub m2 mul YC add 
+    }{
+	dX2 abs 0.01 lt {
+	    /m1 dY1 dX1 div def
+	    XC dup XA sub m1 mul YA add 
+	}{%
+	    /m1 dY1 dX1 div def
+	    /m2 dY2 dX2 div def
+	    m1 XA mul m2 XC mul sub YA sub YC add m1 m2 sub div dup
+	    XA sub m1 mul YA add 
+	} ifelse
+    } ifelse ){#5}
+}
+%
+% draw a parallel line
+%     #2---------#3
+%         #4----------#5(new)  
+\def\Parallel{\@ifnextchar[{\pst@Parallel}{\pst@Parallel[]}}
+\def\pst@Parallel[#1](#2)(#3)(#4)#5{{%
+	\psset{#1}%
+	\pst@getcoor{#2}\pst@tempa
+	\pst@getcoor{#3}\pst@tempb
+	\pst@getcoor{#4}\pst@tempc
+	\pnode(!%
+		/LengthArrow \psk@ThreeDplot@length\space def
+		\pst@tempa /YA exch \pst@number\psyunit div def
+		/XA exch \pst@number\psxunit div def
+		\pst@tempb /YB exch \pst@number\psyunit div def
+		/XB exch \pst@number\psxunit div def
+		\pst@tempc /YC exch \pst@number\psyunit div def
+		/XC exch \pst@number\psxunit div def
+		/denominateur XB XA sub def
+		/numerateur YB YA sub def
+		/angleDirectionAB numerateur denominateur Atan def
+		/XstartParallel XC LengthArrow angleDirectionAB cos mul add def
+		/YstartParallel YC LengthArrow angleDirectionAB sin mul add def
+		XstartParallel YstartParallel){#5}
+	\psline[#1](#4)(#5)
+}\ignorespaces}
+%
+% arrowLine[options](A)(B){n}
+% #2---->---->---->---->----#3  #4-arrows inside
+\def\arrowLine{\@ifnextchar[{\pst@arrowLine}{\pst@arrowLine[]}}
+\def\pst@arrowLine[#1](#2)(#3)#4{{%
+  \psset{arrowsize=4pt,arrows=->}% the defaults
+  \psset{#1}%
+  \def\pst@ThreeDplot@n{#4}%
+  \pst@getcoor{#2}\pst@tempa
+  \pst@getcoor{#3}\pst@tempb
+  \pnode(!%
+    /YA \pst@tempa exch pop \pst@number\psyunit div def
+    /XA \pst@tempa pop \pst@number\psxunit div def
+    /YB \pst@tempb exch pop \pst@number\psyunit div def
+    /XB \pst@tempb pop \pst@number\psxunit div def
+    /dY YB YA sub \pst@ThreeDplot@n\space 1 add div def
+    /dX XB XA sub \pst@ThreeDplot@n\space 1 add div def
+    /Alpha dY dX atan def
+    /dYOffset \psk@ThreeDplot@arrowOffset\space Alpha sin mul def
+    /dXOffset \psk@ThreeDplot@arrowOffset\space Alpha cos mul def
+    XA YA ){tempArrowC}
+  \multido{\i=1+1}{#4}{%
+    \pnode(!%
+      XA dX \i\space mul add dXOffset add
+      YA dY \i\space mul add dYOffset add ){tempArrowB}
+    \psline(tempArrowC)(tempArrowB)
+    \pnode(tempArrowB){tempArrowC}
+  }
+  \psline[arrows=-](tempArrowB)(#3)
+}\ignorespaces}
+%
+%   #1------#3------#2
+\def\nodeBetween(#1)(#2)#3{%    Herbert 2003/01/05
+  \pst@getcoor{#1}\pst@tempa
+  \pst@getcoor{#2}\pst@tempb
+  \pnode(!%
+    /XA \pst@tempa pop \pst@number\psxunit div def
+    /YA \pst@tempa exch pop \pst@number\psyunit div def
+    /XB \pst@tempb pop \pst@number\psxunit div def
+    /YB \pst@tempb exch pop \pst@number\psyunit div def
+    XB XA add 2 div YB YA add 2 div){#3}
+}
+%
+% rotateNode(A)
+% (A) the node
+% #2  the angle
+% Herbert Voss <voss@perce.de> 2003-01-26
+\def\rotateNode{\pst@rotateNode}
+\def\pst@rotateNode(#1)#2{{%
+    \pst@getcoor{#1}\pst@tempa%
+    \def\pst@ThreeDplot@angle{#2}%        the rotating angle
+    \pnode(!%
+    	/YA \pst@tempa exch pop \pst@number\psyunit div def
+	/XA \pst@tempa pop \pst@number\psxunit div def
+	YA 0 eq XA 0 eq and {0 0}{
+	    /r XA dup mul YA dup mul add sqrt def
+	    /AlphaOld YA XA atan def
+	    /AlphaNew AlphaOld \pst@ThreeDplot@angle\space add def
+	    r AlphaNew cos mul r AlphaNew sin mul
+	} ifelse ){temp}%
+    \pnode(temp){#1}%
+}\ignorespaces}
+%
+\def\rotateTriangle{\pst@rotateTriangle}
+\def\pst@rotateTriangle(#1)(#2)(#3)#4{{%
+    \rotateNode(#1){#4}%
+    \rotateNode(#2){#4}%
+    \rotateNode(#3){#4}%
+}\ignorespaces}
+%
+\def\rotateFrame{\pst@rotateFrame}
+\def\pst@rotateFrame(#1)(#2)(#3)(#4)#5{{%
+    \rotateNode(#1){#5}%
+    \rotateNode(#2){#5}%
+    \rotateNode(#3){#5}%
+    \rotateNode(#4){#5}%
+}\ignorespaces}
+%
+% An add macro for integer values
+% \pstAdd{34}{6}\value ==> \value is 30
+%
+\def\pstAdd#1#2#3{%
+  \begingroup%
+  \pst@dima=#1pt
+  \advance\pst@dima by #2pt
+  \edef\pst@value{\endgroup\def\noexpand#3{\pst@number\pst@dima}}\pst@value%
+}
+\def\pstSub#1#2#3{%
+  \begingroup%
+  \pst@dima=#1pt\relax
+  \pst@dimb=#2pt\relax
+  \advance\pst@dima by -\pst@dimb
+  \edef\pst@value{\endgroup%
+  \def\noexpand#3{\pst@number\pst@dima}}\pst@value%
+}
+% An mul macro for real values
+% \pstmul{2.5}{1,5}\value ==> \value is 6.25
+%
+\def\pstMul#1#2#3{%
+  \begingroup%
+  \pst@dima=#1pt\relax
+  \pst@dimb=#2\pst@dima\relax
+  \edef\pst@value{\endgroup
+  \def\noexpand#3{\pst@number\pst@dimb}}\pst@value%
+}
+%
+\let\pstDiv\pst@divide
+%
+% A macro for sin cos values
+% \pstSinCos{30}\SinVal\CosVal ==> \SinVal 0.5 \CosVal 0.86
+ %
+\def\pstSinCos#1#2#3{%
+\begingroup%
+  \pst@getsinandcos{#1}
+  \edef\pst@values{\endgroup%
+    \def\noexpand#2{\ifcase\pst@quadrant\or\or-\or-\fi\pst@sin}%
+    \def\noexpand#3{\ifcase\pst@quadrant\or-\or-\or\fi\pst@cos}}\pst@values%
+}
+\def\pstRotPointIIID{\pst@object{RotPointIIID}}% A real TeX solution
+\def\RotPointIIID@i(#1,#2,#3)#4#5#6{%
+  \pst@killglue%
+  \begingroup%
+  \use@par%
+% x- axis
+  \pstSinCos{\psk@ThreeD@RotX}\pst@sinTheta\pst@cosTheta
+  \def\pst@xVala{#1}
+  \pstMul{#2}{\pst@cosTheta}\pst@tempA
+  \pstMul{#3}{\pst@sinTheta}\pst@tempB
+  \pstSub{\pst@tempA}{\pst@tempB}\pst@yVala
+  \pstMul{#2}{\pst@sinTheta}\pst@tempA
+  \pstMul{#3}{\pst@cosTheta}\pst@tempB
+  \pstAdd{\pst@tempA}{\pst@tempB}\pst@zVala
+% y- axis
+  \pstSinCos{\psk@ThreeD@RotY}\pst@sinTheta\pst@cosTheta
+  \pstMul{\pst@xVala}{\pst@cosTheta}\pst@tempA
+  \pstMul{\pst@zVala}{\pst@sinTheta}\pst@tempB
+  \pstSub{\pst@tempA}{\pst@tempB}\pst@xValb
+  \let\pst@yValb\pst@yVala
+  \pstMul{\pst@xVala}{\pst@sinTheta}\pst@tempA
+  \pstMul{\pst@zVala}{\pst@cosTheta}\pst@tempB
+  \pstAdd{\pst@tempA}{\pst@tempB}\pst@zValb
+% z- axis
+  \pstSinCos{\psk@ThreeD@RotZ}\pst@sinTheta\pst@cosTheta
+  \pstMul{\pst@xValb}{\pst@cosTheta}\pst@tempA
+  \pstMul{\pst@yValb}{\pst@sinTheta}\pst@tempB
+  \pstSub{\pst@tempA}{\pst@tempB}\pst@xValc
+  \pstMul{\pst@xValb}{\pst@sinTheta}\pst@tempA
+  \pstMul{\pst@yValb}{\pst@cosTheta}\pst@tempB
+  \pstAdd{\pst@tempA}{\pst@tempB}\pst@yValc
+  \let\pst@zValc\pst@zValb
+  %  
+  \edef\pst@values{\endgroup%
+    \def\noexpand#4{\pst@xValc}%
+    \def\noexpand#5{\pst@yValc}%
+    \def\noexpand#6{\pst@zValc}}\pst@values%
+  \ignorespaces%
+}
+%
+\catcode`\@=\PstAtCode\relax
+%
+%% END: pst-3dplot.tex
+\endinput
+

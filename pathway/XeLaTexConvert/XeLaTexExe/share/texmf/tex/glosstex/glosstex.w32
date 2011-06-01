@@ -1,0 +1,6 @@
+Original documents of glosstex describe that the directory for .gdf files
+is texmf/glosstex. However in the version for W32TeX, please save your own
+permanent .gdf files for glosstex in this directory (texmf/tex/glosstex),
+because glosstex for W32TeX searches .gdf files as TeX input files.
+------------------
+A. Kakuto <kakuto@fuk.kindai.ac.jp>

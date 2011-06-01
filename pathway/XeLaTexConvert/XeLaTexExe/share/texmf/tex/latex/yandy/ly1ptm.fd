@@ -1,0 +1,37 @@
+
+\ProvidesFile{ly1ptm.fd}
+   [1997/01/26  LY1/ptm (Times-Roman) with Karl Berry file names. (DPC)]
+
+\DeclareFontFamily{LY1}{ptm}{}
+
+\DeclareFontShape{LY1}{ptm}{m}{n}{<-> ptmr8y}{}
+\DeclareFontShape{LY1}{ptm}{m}{it}{<-> ptmri8y}{}
+\DeclareFontShape{LY1}{ptm}{b}{n}{<-> ptmb8y}{}
+\DeclareFontShape{LY1}{ptm}{b}{it}{<-> ptmbi8y}{}
+
+% Slanted times is faked using PostScript trickery
+
+\DeclareFontShape{LY1}{ptm}{m}{sl}{<-> ptmro8y}{}
+\DeclareFontShape{LY1}{ptm}{b}{sl}{<-> ptmbo8y}{}
+
+% There are real Times Smallcaps and OldStyleFigures from Adobe
+
+\DeclareFontShape{LY1}{ptm}{m}{sc}{<-> ptmrc8y}{}
+\DeclareFontShape{LY1}{ptm}{b}{sc}{<-> ptmbc8y}{}
+
+% We silently treat bold extended as bold
+
+\DeclareFontShape{LY1}{ptm}{bx}{n}{<->ssub * ptm/b/n}{}
+\DeclareFontShape{LY1}{ptm}{bx}{sl}{<->ssub * ptm/b/sl}{}
+\DeclareFontShape{LY1}{ptm}{bx}{it}{<->ssub * ptm/b/it}{}
+\DeclareFontShape{LY1}{ptm}{bx}{sc}{<->ssub * ptm/b/sc}{}
+
+% We treat lite as medium
+
+\DeclareFontShape{LY1}{ptm}{l}{n}{<-> sub * ptm/m/n}{}
+\DeclareFontShape{LY1}{ptm}{l}{sl}{<-> sub * ptm/m/sl}{}
+\DeclareFontShape{LY1}{ptm}{l}{it}{<-> sub * ptm/m/it}{}
+\DeclareFontShape{LY1}{ptm}{l}{sc}{<-> sub * ptm/m/sc}{}
+
+\endinput
+

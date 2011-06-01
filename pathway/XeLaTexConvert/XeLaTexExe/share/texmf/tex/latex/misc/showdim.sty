@@ -1,0 +1,81 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{showdim}[1998/07/29 v1.1 (Michael J Downes)]
+
+%    Print a dimen value in points, rounded to the nearesth tenth
+%
+\newcommand{\tenthpt}[1]{\dimen@#1\relax
+%      Round up to the nearest tenth, by half-adding:
+  \advance\dimen@ \ifdim\dimen@<\z@-\fi .05\p@
+  \expandafter\tenth@extract\the\dimen@ pt}
+
+%    Print a dimen value in picas, rounded to the nearesth tenth
+%
+\newcommand{\tenthpc}[1]{\dimen@#1\relax
+%    Round up to the nearest tenth
+  \advance\dimen@ \ifdim\dimen@<\z@-\fi .05pc%
+  \divide\dimen@ 12 \expandafter\tenth@extract\the\dimen@ pc}
+
+%    Print a dimen value in picas, rounded to the nearesth hundredth
+%
+\newcommand{\hundredthpc}[1]{\dimen@#1\relax
+%    Round up to the nearest hundredth
+  \advance\dimen@ \ifdim\dimen@<\z@-\fi .005pc%
+  \divide\dimen@ 12 \expandafter\hundredth@extract\the\dimen@ pc}
+
+%    Print a value in tenths of a pica and whole points.
+%
+\newcommand{\tenthpcpt}[1]{\tenthpc{#1} (\points{#1})}
+
+%    Print a value in points and tenths of a pica.
+%
+\newcommand{\pttenthpc}[1]{\points{#1} (\tenthpc{#1})}
+
+%    Print a value in points followed by the equivalent in picas (to
+%    two decimal places).
+%
+\newcommand{\pthundredthpc}[1]{\points{#1} (\hundredthpc{#1})}
+
+%    Print a value truncated to one place after the decimal point
+%    (maximum).
+%
+\edef\@tempa#1pt{#1\string p\string t}\@tempa
+\def\tenth@extract#1.#2#3pt{#1\ifnum#2=\z@ \else.#2\fi}
+
+%    Print a value truncated to two places after the decimal point
+%    (maximum).
+%
+\edef\@tempa#1pt{#1\string p\string t}\@tempa
+\def\hundredth@extract#1.#2#3pt{#1\h@extract#2#300\@nil}
+
+%    Extract a hundredths value: .0 is converted to "", .1 and .10 are both
+%    converted to ".1", and .03 or .93 are printed as is.
+%
+\def\h@extract#1#2#3\@nil{%
+   \ifnum#1#2=\z@ \else.#1\ifnum#2=\z@ \else#2\fi\fi}
+
+%    Print a dimen value rounded to the nearest whole point.
+%
+\newcommand{\points}[1]{\dimen@#1\relax
+  \advance\dimen@ \ifdim\dimen@<\z@-\fi .5\p@
+  \expandafter\wholepart@extract\the\dimen@\@nil pt}
+
+%    Convert a negative point value to a positive value, for use in
+%    messages such as "height of box A is \negpoints{\dimen@} less
+%    than height of box B", where the negativity is conveyed by the
+%    word "less" and therefore the minus sign should be removed from
+%    the actual value that is printed in order not to be redundant.
+%
+\newcommand{\negpoints}[1]{\points{-#1}}
+
+%    Print a dimen value converted to the nearest whole pica.
+%
+\newcommand{\picas}[1]{\dimen@#1\relax
+  \advance\dimen@ \ifdim\dimen@<\z@-\fi .5pc%
+  \divide\dimen@ 12 \expandafter\wholepart@extract\the\dimen@\@nil pc}
+
+%    Extract the whole part of a decimal number (i.e. the part before
+%    the decimal point.)
+%
+\def\wholepart@extract#1.#2\@nil{#1}
+
+\endinput %

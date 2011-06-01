@@ -1,0 +1,67 @@
+%%
+%% This is file `pst-math.tex',
+%%
+%% IMPORTANT NOTICE:
+%%
+%% Package `pst-math.tex'
+%%
+%% Christophe Jorssen <christophe.jorssen@libre.fr.invalid>
+%%                   ('libre' is the french word for 'free', to contact me)
+%%
+%% This program can be redistributed and/or modified under the terms
+%% of the LaTeX Project Public License Distributed from CTAN archives
+%% in directory CTAN:/macros/latex/base/lppl.txt.
+%%
+%% DESCRIPTION:
+%%   `pst-math' is a PSTricks package to enhance math in PSTricks
+%%
+%%
+\def\RCS$#1: #2 ${\expandafter\def\csname RCS#1\endcsname{#2}}
+\RCS$Revision: 1.1 $ \RCS$Date: 2004-07-06 23:43:03+02 $
+
+\def\fileversion{0.2}
+
+\message{`pst-math' v\fileversion\space (Rev \RCSRevision, \RCSDate), C.Jorssen}
+
+\csname PSTmathLoaded\endcsname
+\let\PSTmathLoaded\endinput
+%
+% Require PSTricks
+%
+\ifx\PSTricksLoaded\endinput\else\input pstricks.tex\fi
+
+\ifx\DeclareNewPSOperator\undefined
+\else
+  \DeclareNewPSOperator{DegToRad}
+  \DeclareNewPSOperator{RadToDeg}
+  \DeclareNewPSOperator{COS}
+  \DeclareNewPSOperator{SIN}
+  \DeclareNewPSOperator{TAN}
+  \DeclareNewPSOperator{tan}
+  \DeclareNewPSOperator{ATAN}
+  \DeclareNewPSOperator{ACOS}
+  \DeclareNewPSOperator{acos}
+  \DeclareNewPSOperator{ASIN}
+  \DeclareNewPSOperator{asin}
+  \DeclareNewPSOperator{EXP}
+  \DeclareNewPSOperator{COSH}
+  \DeclareNewPSOperator{SINH}
+  \DeclareNewPSOperator{TANH}
+  \DeclareNewPSOperator{ACOSH}
+  \DeclareNewPSOperator{ASINH}
+  \DeclareNewPSOperator{ATANH}
+  \DeclareNewPSOperator{SINC}
+  \DeclareNewPSOperator{GAUSS}
+  \DeclareNewPSOperator{GAMMALN}
+  \DeclareNewPSOperator{BETA}
+  \DeclareNewPSOperator{BESSEL_J0}
+  \DeclareNewPSOperator{BESSEL_Y0}
+  \DeclareNewPSOperator{BESSEL_J1}
+  \DeclareNewPSOperator{BESSEL_Y1}
+\fi
+
+\pstheader{pst-math.pro}
+%
+\def\pstPI#1{\ifcase#1\or3.141593\or1.570796\or1.047198\fi}
+%
+\endinput
