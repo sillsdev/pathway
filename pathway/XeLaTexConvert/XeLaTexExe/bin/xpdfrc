@@ -1,0 +1,10 @@
+# xpdfrc (for pdftotext xpdf-WIN32)
+# Change the name of the Resource directory
+# D:/Resource into your own one, if it differs.
+#
+cidToUnicode	Adobe-Japan1	D:/Resource/Adobe-Japan1.cidToUnicode
+unicodeMap	ISO-2022-JP	D:/Resource/ISO-2022-JP.unicodeMap
+unicodeMap	EUC-JP		D:/Resource/EUC-JP.unicodeMap
+unicodeMap	Shift-JIS	D:/Resource/Shift-JIS.unicodeMap
+cMapDir		Adobe-Japan1	D:/Resource/CMap
+toUnicodeDir			D:/Resource/CMap

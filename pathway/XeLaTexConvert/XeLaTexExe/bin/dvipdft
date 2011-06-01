@@ -1,0 +1,49 @@
+#!/bin/sh
+TMP=.
+# Process command line args
+# This script isn't very smart.  It assumes
+# the last thing is the file name and ignores
+# everything else.
+
+usage() {
+  echo No file name specified.
+  exit 1
+}
+
+# Must have at least one argumen (the DVI filename)
+if [ $# -eq 0 ]
+then
+  usage
+fi
+
+# Loop over all arguments except the last one
+USERARGS=$@
+ARGS=
+PDFFILENAME=
+while [ $# -ne 1 ]
+do
+   ARGS="$ARGS $1"
+   if [ "$1" = "-o" ]
+   then
+      PDFFILENAME=`echo $2 | sed -e's/\.pdf//g'`
+      ARGS="$ARGS $2"
+      shift
+   fi
+   shift
+done
+FILENAME=$1
+if [ -z "$PDFFILENAME" ] 
+then
+  PDFFILENAME=$FILENAME
+fi
+
+# Run dvipdfm with the fastest options for the first pass
+if dvipdfm $ARGS -e -z0 $FILENAME
+then
+   if gswin32c -r10 -dNOPAUSE -dBATCH -sDEVICE=png256 -sOutputFile=$TMP/$PDFFILENAME.%d $PDFFILENAME.pdf
+   then
+#  Run dvipdfm with the users specified options for the last pass
+      echo dvipdfm -dt $USERARGS;
+      dvipdfm -dt $USERARGS;
+   fi   
+fi   
