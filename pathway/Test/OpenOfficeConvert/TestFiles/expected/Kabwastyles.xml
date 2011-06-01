@@ -244,7 +244,7 @@
     </style:style>
     <style:style style:name="Frame_20_contents" style:display-name="Frame contents" style:family="paragraph" style:parent-style-name="Text_20_body" style:class="extra" />
     <style:style style:name="Graphics" style:family="graphic">
-      <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" style:mirror="none" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" style:wrap="none" style:vertical-pos="top" style:vertical-rel="paragraph" style:horizontal-pos="center" style:horizontal-rel="paragraph" />
+      <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" style:wrap="none" style:vertical-pos="top" style:vertical-rel="paragraph" style:horizontal-pos="center" style:horizontal-rel="paragraph" />
     </style:style>
     <style:style style:name="Frame" style:family="graphic">
       <style:graphic-properties text:anchor-type="paragraph" svg:x="0pt" svg:y="0pt" fo:margin-left="5.7pt" fo:margin-right="5.7pt" fo:margin-bottom="5.7pt" fo:margin-top="5.7pt" style:wrap="parallel" style:number-wrapped-paragraphs="no-limit" style:wrap-contour="false" style:vertical-pos="top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph-content" fo:padding="4.25pt" fo:border="0.06pt solid #000000" />
@@ -339,14 +339,23 @@
     <style:style style:name="PageHeaderFooter23" style:family="text">
       <style:text-properties content="" />
     </style:style>
-    <style:page-layout style:name="pm1">
-      <style:page-layout-properties>
+    <style:style style:name="MP1" style:family="paragraph" style:parent-style-name="Frame_20_contents">
+      <style:paragraph-properties fo:text-align="end" style:justify-single-word="false" />
+    </style:style>
+    <style:style style:name="Mfr1" style:family="graphic" style:parent-style-name="Frame">
+      <style:graphic-properties style:vertical-pos="from-top" style:vertical-rel="page" style:horizontal-pos="right" style:horizontal-rel="paragraph" fo:background-color="transparent" style:background-transparency="100%" fo:padding="0in" fo:border="none" style:shadow="none" style:flow-with-text="false">
+        <style:background-image />
+        <style:columns fo:column-count="1" fo:column-gap="0in" />
+      </style:graphic-properties>
+    </style:style>
+    <style:page-layout style:name="pm1" style:page-usage="mirrored">
+      <style:page-layout-properties fo:margin-top="72pt" fo:margin-right="72pt" fo:margin-bottom="72pt" fo:margin-left="72pt" fo:page-height="792pt" fo:page-width="612pt">
         <style:footnote-sep style:width="0.0071in" style:line-style="solid" style:distance-before-sep="30%" style:distance-after-sep="30%" style:color="#000000" style:adjustment="centre" style:rel-width="100%" />
       </style:page-layout-properties>
       <style:header-style />
       <style:footer-style />
     </style:page-layout>
-    <style:page-layout style:name="pm2">
+    <style:page-layout style:name="pm2" style:page-usage="mirrored">
       <style:page-layout-properties fo:margin-top="72pt" fo:margin-right="72pt" fo:margin-bottom="72pt" fo:margin-left="72pt" fo:page-height="792pt" fo:page-width="612pt">
         <style:background-image />
       </style:page-layout-properties>
@@ -354,7 +363,7 @@
         <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:header-style>
       <style:footer-style>
-        <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
+        <style:header-footer-properties fo:margin-bottom="0.0pt" fo:min-height="0.0pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:footer-style>
     </style:page-layout>
     <style:page-layout style:name="pm3">
@@ -366,10 +375,10 @@
         <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:header-style>
       <style:footer-style>
-        <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
+        <style:header-footer-properties fo:margin-bottom="0.0pt" svg:height="14.21pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:footer-style>
     </style:page-layout>
-    <style:page-layout style:name="pm4" style:page-usage="left">
+    <style:page-layout style:name="pm4" style:page-usage="mirrored">
       <style:page-layout-properties fo:margin-top="72pt" fo:margin-right="72pt" fo:margin-bottom="72pt" fo:margin-left="72pt" fo:page-height="792pt" fo:page-width="612pt">
         <style:background-image />
         <style:footnote-sep style:width="0.0071in" style:line-style="solid" style:distance-before-sep="30%" style:distance-after-sep="30%" style:color="#000000" style:adjustment="centre" style:rel-width="100%" />
@@ -378,10 +387,10 @@
         <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:header-style>
       <style:footer-style>
-        <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
+        <style:header-footer-properties fo:margin-bottom="0.0pt" fo:min-height="0.0pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:footer-style>
     </style:page-layout>
-    <style:page-layout style:name="pm5" style:page-usage="right">
+    <style:page-layout style:name="pm5" style:page-usage="mirrored">
       <style:page-layout-properties fo:margin-top="72pt" fo:margin-right="72pt" fo:margin-bottom="72pt" fo:margin-left="72pt" fo:page-height="792pt" fo:page-width="612pt">
         <style:background-image />
         <style:footnote-sep style:width="0.0071in" style:line-style="solid" style:distance-before-sep="30%" style:distance-after-sep="30%" style:color="#000000" style:adjustment="centre" style:rel-width="100%" />
@@ -390,13 +399,12 @@
         <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:header-style>
       <style:footer-style>
-        <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
+        <style:header-footer-properties fo:margin-bottom="0.0pt" fo:min-height="0.0pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:footer-style>
     </style:page-layout>
   </office:automatic-styles>
   <office:master-styles>
     <style:master-page style:name="Standard" style:page-layout-name="pm1" />
-    <style:master-page style:name="XHTML" style:page-layout-name="pm2" style:next-style-name="Right_20_Page" />
     <style:master-page style:name="First_20_Page" style:display-name="First Page" style:next-style-name="Left_20_Page" style:page-layout-name="pm3">
       <style:header>
         <text:p text:style-name="Header">
