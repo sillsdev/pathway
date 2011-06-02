@@ -41,36 +41,36 @@
             <font>Mangal</font>
         </language>
     </font-language-mapping>
-    
-    <font-language-unicode-map>
+
+<font-language-unicode-map>
         <UnicodeMap Language="Assamese" From="0x0980" To="0x09FF">
             <font>Bangla</font>
         </UnicodeMap>
-        <UnicodeMap Language="Hindi" From="0x2304" To="0x2431">
+        <UnicodeMap Language="Hindi" From="0x0900" To="0x097F">
             <font>Mangal</font>
         </UnicodeMap>
-        <UnicodeMap Language="Hindi Extended" From="0x43232" To="0x43263">
+        <UnicodeMap Language="Hindi Extended" From="0xA8E0" To="0xA8FF">
             <font>Mangal</font>
         </UnicodeMap>
-        <UnicodeMap Language="Gujarati" From="0x2688" To="0x2815">
+        <UnicodeMap Language="Gujarati" From="0x0A80" To="0x0AFF">
             <font>Shruti</font>
         </UnicodeMap>
-        <UnicodeMap Language="Oriya" From="0x2816" To="0x2943">
+        <UnicodeMap Language="Oriya" From="0x0B00" To="0x0B7F">
             <font>Mangal</font>
         </UnicodeMap>
-        <UnicodeMap Language="Tamil" From="0x2944" To="0x3071">
+        <UnicodeMap Language="Tamil" From="0x0B80" To="0x0BFF">
             <font>Latha</font>
         </UnicodeMap>
-        <UnicodeMap Language="Telugu" From="0x3072" To="0x3199">
+        <UnicodeMap Language="Telugu" From="0x0C00" To="0x0C7F">
             <font>Gautami</font>
         </UnicodeMap>
-        <UnicodeMap Language="Kannada" From="0x3200" To="0x3327">
+        <UnicodeMap Language="Kannada" From="0x0C80" To="0x0CFF">
             <font>Tunga</font>
         </UnicodeMap>
-        <UnicodeMap Language="Malayalam" From="0x3328" To="0x3455">
+        <UnicodeMap Language="Malayalam" From="0x0D00" To="0x0D7F">
             <font>Kartika</font>
         </UnicodeMap>
-        <UnicodeMap Language="Thai" From="0x3584" To="0x3711">
+        <UnicodeMap Language="Thai" From="0xE00" To="0xE7F">
             <font>Mangal</font>
         </UnicodeMap>     
     </font-language-unicode-map>
