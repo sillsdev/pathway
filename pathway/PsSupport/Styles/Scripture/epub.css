@@ -43,27 +43,19 @@ text-indent: 0pt;
 margin-left: 0pt;
 }
 .Chapter_Number {
+line-height: 85%;
 /* NOTE: elements filled in by the epub export based on
 the user's preferences from the Configuration Tool:
    font-size: -->  from ChapterNumbers
-   padding-top: --> from (BaseFontSize / 2)
    width: --> if ChapterNumbers is set to left margin
-   height: --> if ChapterNumbers is set to left margin
-   padding-right: --> from ChapterNumbers
+   padding-right, padding-left: --> from ChapterNumbers
 */
-font-weight : normal;
-font-style : normal;
-margin-left : 0;
-padding-left: 0;
-padding-right: 4pt;
-padding-bottom: 1pt;
 }
 .Paragraph1 {
 /* NOTE: elements filled in by the epub export based on
 the user's preferences from the Configuration Tool:
    margin-left: --> from ChapterNumbers
 */
-margin-right: 48pt;
 text-align:left;
 }
 .Paragraph {
@@ -189,14 +181,23 @@ margin-bottom : .5%;
 text-indent : 0.2in;
 margin-left : 0;
 }
-.Intro_List_Item1 {
-text-indent : -30pt;
+.Quoted_Text {
+font-style: italic;
+}
+.Intro_List_Item1, .List_Item1 {
+text-indent : -12pt;
 margin-left : 60pt;
-margin-right: 48pt;
+margin-right: 60pt;
+}
+.Intro_List_Item2, .List_Item2 {
+text-indent : 0pt;
+margin-left : 60pt;
+margin-right: 60pt;
 }
 .Intro_Paragraph {
-text-indent : 0.2in;
-margin-left : 0;
+text-indent : 12pt;
+margin-left : 48pt;
+margin-right: 48pt;
 }
 .Intro_Section_Head {
 font-weight : bold;
@@ -207,22 +208,19 @@ margin-left : 0;
 margin-top : 3pt;
 margin-bottom : 3pt;
 }
-.REVERSE_SOLIDUSCitation_Line1, .Line1 {
-text-align : left;
+.REVERSE_SOLIDUSCitation_Line1, .Citation_Line1, .Line1 {
 margin-left : 72pt;
 margin-right: 48pt;
 text-indent : -12pt;
 padding-left : 0;
 }
-.REVERSE_SOLIDUSCitation_Line2, .Line2 {
-text-align : left;
+.REVERSE_SOLIDUSCitation_Line2, .Citation_Line2, .Line2 {
 margin-left : 72pt;
 margin-right: 48pt;
 text-indent : -12pt;
 padding-left : 0;
 }
-.REVERSE_SOLIDUSCitation_Line3, .Line3 {
-text-align : left;
+.REVERSE_SOLIDUSCitation_Line3, .Citation_Line3, .Line3 {
 margin-left : 72pt;
 margin-right: 48pt;
 text-indent : 0;
@@ -255,7 +253,8 @@ font-weight : bold;
 font-style : normal;
 text-align : center;
 text-indent : 0;
-margin-left : 0;
+margin-left : 48pt;
+margin-right: 48pt;
 margin-top : 8pt;
 }
 .Section_Head_Minor {
@@ -263,7 +262,8 @@ font-weight : bold;
 font-style : normal;
 text-align : center;
 text-indent : 0;
-margin-left : 0;
+margin-left : 48pt;
+margin-right: 48pt;
 margin-top : 8pt;
 }
 .Stanza_Break {

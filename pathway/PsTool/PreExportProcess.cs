@@ -263,12 +263,13 @@ namespace SIL.Tool
             SizeF size = g.MeasureString(strTitle, badgeFont, 640);
             int width = (int)Math.Ceiling(size.Width);
             int height = (int)Math.Ceiling(size.Height);
-            Rectangle rect = new Rectangle((225 - (width / 2)), 100, width, height);
+            // create the bounding rect, centered horizontally on the image
+            Rectangle rect = new Rectangle(((bmp.Size.Width / 2) - (width / 2)), 100, width, height);
             // draw the badge (rect and string)
             g.FillRectangle(Brushes.Brown, rect);
             g.DrawRectangle(Pens.Gold, rect);
             g.DrawString(strTitle, badgeFont, Brushes.Gold,
-                    new RectangleF(new PointF((225f - (size.Width/2)), 100f), size), strFormat);
+                    new RectangleF(new PointF(((bmp.Size.Width / 2) - (size.Width/2)), 100f), size), strFormat);
             // save this puppy
             string strCoverImageFile = Path.Combine(outputFolder, "cover.png");
             bmp.Save(strCoverImageFile);

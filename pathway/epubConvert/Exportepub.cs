@@ -88,7 +88,6 @@ namespace SIL.PublishingSolution
         /// Fallback font (if the embedded font is missing or non-SIL)
         /// </summary>
         public string DefaultFont { get; set; }
-        public bool AddColophon { get; set; }
         public string DefaultAlignment { get; set; }
         public string ChapterNumbers { get; set; }
         public FontHandling MissingFont { get; set; } // note that this doesn't use all the enum values
@@ -979,14 +978,33 @@ namespace SIL.PublishingSolution
             var writer = new StreamWriter(cssFile);
             writer.Write(sb.ToString());
             writer.Close();
-            // one more - specify the chapter number float side
-            // reset the stringbuilder
-            sb.Length = 0;
-            sb.AppendLine(".Chapter_Number {");
-            sb.Append("float: ");
-            sb.Append(mainTextDirection);
-            sb.AppendLine(";");
-            Common.ReplaceInFile(cssFile, ".Chapter_Number {", sb.ToString());
+            // Now that we know the text direction, we can add some padding info for the chapter numbers
+            // (Scripture only)
+            if (_inputType == "scripture")
+            {
+                sb.Length = 0; // reset the stringbuilder
+                sb.AppendLine(".Chapter_Number {");
+                sb.Append("float: ");
+                sb.Append(mainTextDirection.ToLower().Equals("ltr") ? "left" : "right");
+                sb.AppendLine(";");
+                sb.AppendLine(mainTextDirection.ToLower().Equals("ltr") ? "padding-right: 5pt;" : "padding-leftt: 5pt;");
+                Common.ReplaceInFile(cssFile, ".Chapter_Number {", sb.ToString());
+                sb.Length = 0; // reset the stringbuilder
+                sb.AppendLine(".Paragraph1 {");
+                if (ChapterNumbers != "Drop Cap")
+                {
+                    // leading chapter number is in the margin
+                    sb.AppendLine(mainTextDirection.ToLower().Equals("ltr")
+                                      ? "margin-left: 0pt; margin-right: 48pt;"
+                                      : "margin-left: 48pt; margin-right: 0pt;");
+                }
+                else
+                {
+                    // leading chapter number is a drop cap
+                    sb.AppendLine("margin-left: 48pt; margin-right: 48pt;");
+                }
+                Common.StreamReplaceInFile(cssFile, ".Paragraph1 {", sb.ToString());
+            }
         }
 
         /// <summary>
@@ -1502,23 +1520,24 @@ namespace SIL.PublishingSolution
                 //sb.AppendLine((ChapterNumbers == "Drop Cap") ? "text-indent: 0;" : "text-indent: -48pt;");
                 sb.Append("font-size: ");
                 sb.AppendLine((ChapterNumbers == "Drop Cap") ? "250%;" : "24pt;");
+                //sb.Append("padding-top: ");
+                //sb.Append(BaseFontSize / 2);
+                //sb.AppendLine("pt;");
                 // vertical alignment of Cap specified by setting the padding-top to (defaultlineheight / 2)
-                sb.Append("padding-top: ");
-                sb.Append(BaseFontSize / 2);
-                sb.AppendLine("pt;");
                 if (ChapterNumbers != "Drop Cap")
                 {
+                    sb.AppendLine("display: table-cell;");
                     sb.AppendLine("width: 48pt;");
-                    sb.AppendLine("height: 500pt;");
                 }
-                sb.Append("padding-right: ");
-                sb.AppendLine((ChapterNumbers == "Drop Cap") ? "4pt;" : "0;");
                 Common.StreamReplaceInFile(cssFile, ".Chapter_Number {", sb.ToString());
-                sb.Length = 0; // reset the stringbuilder
-                sb.AppendLine(".Paragraph1 {");
-                sb.Append("margin-left: ");
-                sb.AppendLine((ChapterNumbers == "Drop Cap") ? "48pt;" : "0pt;");
-                Common.StreamReplaceInFile(cssFile, ".Paragraph1 {", sb.ToString());
+                // changes for chapter #s in the margin (only)
+                if (ChapterNumbers != "Drop Cap")
+                {
+                    sb.Length = 0; // reset the stringbuilder
+                    sb.AppendLine(".Paragraph1 {");
+                    sb.AppendLine("display:table;");
+                    Common.StreamReplaceInFile(cssFile, ".Paragraph1 {", sb.ToString());
+                }
             }
             // DefaultAlignment - several spots in the css file
             sb.Length = 0; // reset the stringbuilder
@@ -1665,15 +1684,6 @@ namespace SIL.PublishingSolution
             else
             {
                 DefaultLineHeight = 125;
-            }
-            // Colophon
-            if (othersfeature.ContainsKey("Colophon"))
-            {
-                AddColophon = (othersfeature["Colophon"].Trim().Equals("Yes")) ? true : false;
-            }
-            else
-            {
-                AddColophon = true;
             }
             // Missing Font
             // Note that the Embed Font enum value doesn't apply here (if it were to appear, we'd fall to the Default
