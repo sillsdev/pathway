@@ -2395,5 +2395,62 @@ return osInfo.Platform.ToString();
         //        }
         //    }
         //}
+
+
+        /// <summary>
+        /// To get the font name based on the unicode value of the character.
+        /// </summary>
+        /// <param name="unicodeString">String to find the relevant font</param>
+        /// <returns>font name</returns>
+        public static string GetLanguageUnicode(string unicodeString)
+        {
+            if (unicodeString.Length <= 0) return "";
+            int unicodeDecimal = 0;
+            unicodeString = unicodeString.Trim();
+            unicodeDecimal = (int)unicodeString[0];
+            string fontName = string.Empty;
+            string PsSupportPath = GetPSApplicationPath();
+            string xmlFileNameWithPath = PathCombine(PsSupportPath, "GenericFont.xml");
+            string xPath = "//font-language-unicode-map";
+            XmlNodeList fontList = GetXmlNodes(xmlFileNameWithPath, xPath);
+            if (fontList != null && fontList.Count > 0)
+            {
+                foreach (XmlNode xmlNode in fontList)
+                {
+                    if (xmlNode.Attributes != null)
+                    {
+                        int hexFrom = 0;
+                        int hexTo = 0;
+                        string rangeFrom = xmlNode.Attributes["From"].Value;
+                        if(rangeFrom.IndexOf("0x") == 0)
+                        {
+                            rangeFrom = rangeFrom.Replace("0x", "");
+                            hexFrom = int.Parse(rangeFrom, NumberStyles.HexNumber);
+                        }
+                        else
+                        {
+                            hexFrom = int.Parse(rangeFrom);
+                        }
+                        string rangeTo = xmlNode.Attributes["To"].Value;
+                        if (rangeTo.IndexOf("0x") == 0)
+                        {
+                            rangeTo = rangeTo.Replace("0x", "");
+                            hexTo = int.Parse(rangeTo, NumberStyles.HexNumber);
+                        }
+                        else
+                        {
+                            hexTo = int.Parse(rangeTo);
+                        }
+                        if (unicodeDecimal >= hexFrom && unicodeDecimal <= hexTo)
+                        {
+                            fontName = xmlNode.InnerText;
+                            break;
+                        }
+                    }
+                }
+            }
+            return fontName;
+        }
+
     }
 }
