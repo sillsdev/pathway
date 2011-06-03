@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Mar-09-2011 for TD-2021(No header on page number 2)
+
+'Changed On Jun-03-2011 for TD-2482(OpenOffice: Remove the Guidewords related Macros)
 
 &apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -28,6 +29,54 @@ Dim oFrame As Object
 Dim oSubFrame As Object
 Dim ProgressValue As Integer
 Dim PageCount as Integer
+
+&apos;This procedure set the dialgue to correct Update References 
+Sub StartDontForget
+
+	TurnOffNonPrintingCharacters() 
+	
+	AlingOverlappingImages()
+	
+	oDoc = ThisComponent 
+	oDoc.store() 
+	
+	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; Then
+		ExportToDOC_PDF
+	End IF
+
+End Sub
+
+
+Function GetBookCodeName2()
+dim myList, count
+&apos;ParaString = &quot;Peta&quot;
+&apos;ParaString = &quot;1 Peta&quot;
+&apos;ParaString = &quot;Peter Pet&quot;
+ParaString = &quot;1 Peter 1 Pet&quot;
+	If Len(ParaString) &gt; 0 Then
+		myList = split(Trim(ParaString),&quot; &quot;)
+		count = UBound(myList) + 1
+		If count = 1 Then
+			GetBookCodeName = ParaString
+		ElseIf count = 2 Then
+		   If(val(mid(trim(ParaString),1,1)) = 0) Then
+				If Mid(ReferenceFormat,1,4) = &quot;Gen &quot; Then
+					GetBookCodeName = myList(1)
+				Else
+					GetBookCodeName = myList(0)
+				End If	
+		   Else
+		   		GetBookCodeName = ParaString
+		   End If
+		ElseIf  count = 4 Then
+			If Mid(ReferenceFormat,1,4) = &quot;Gen &quot; Then
+				GetBookCodeName = myList(2) &amp; &quot; &quot; &amp; myList(3)
+			Else
+				GetBookCodeName = myList(0) &amp; &quot; &quot; &amp; myList(1)
+			End If		
+		End If
+	End If
+End Function
 
 &apos;Set Picture Position based on Reference Location
 Sub PicturePosition
@@ -204,7 +253,7 @@ lclNo = 0
 End Sub
 
 &apos;This procedure set the dialgue to correct Update References 
-Sub StartDontForget
+Sub StartDontForget2482
 
 	&apos;Msgbox &quot;Please NOTE: Use the Update References menu item or tool bar item to correct the references before printing.&quot; , 0 + 64,  &quot;Reference Reminder&quot;
 	TurnOffNonPrintingCharacters() 
@@ -335,6 +384,7 @@ PageCount = TotalPages
 Dim isProgressClosed As Boolean
 
 	oDoc = ThisComponent 
+
 	oContWindow = oDoc.CurrentController.Frame.ContainerWindow 
 	
 	&apos;msgbox &quot;The Open Office window will be hidden while the headers are updated since this cuts the time required for the update in half.&quot;,,&quot;Update References&quot;

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Feb-22-2011 for TD-1916(Paratext Open Office even header missing)
+
+&apos;Changed On Jun-03-2011 for TD-2482(OpenOffice: Remove the Guidewords related Macros)
 
 &apos;Define the values to Constant Variables for First Guide word, Last Guide word ,Headword Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -22,6 +23,22 @@ Dim oFrame As Object
 Dim oSubFrame As Object
 Dim ProgressValue As Integer
 Dim PageCount as Integer
+
+
+Sub StartDontForget
+
+	TurnOffNonPrintingCharacters() 
+	
+	AlingOverlappingImages()
+	
+	oDoc = ThisComponent 
+	oDoc.store() 
+	
+	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; Then
+		ExportToDOC_PDF
+	End IF
+
+End Sub
 
 &apos;Create Progress bar
 Sub ShowProcessingDialog() 
@@ -173,7 +190,7 @@ lclNo = 0
 End Sub
 	
 &apos;This procedure set the dialgue to correct Update Guide Words 
-Sub StartDontForget
+Sub StartDontForget2482
 	&apos;Msgbox &quot;Please NOTE: Use the Update Guide Words menu item or tool bar item to correct the guide words before printing.&quot; , 0 + 64,  &quot;Guide Word Reminder&quot;
 	TurnOffNonPrintingCharacters()
 	dim clicked as byte

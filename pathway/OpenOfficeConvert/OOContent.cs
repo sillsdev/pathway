@@ -1424,18 +1424,18 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("script:event-name", "dom:load");
                 _writer.WriteAttributeString("xlink:href", "vnd.sun.star.script:Standard.Module1.StartDontForget?language=Basic&location=document");
                 _writer.WriteEndElement();
-                _writer.WriteStartElement("script:event-listener");
-                _writer.WriteAttributeString("script:language", "ooo:script");
-                _writer.WriteAttributeString("script:event-name", "office:print");
-                if (string.Compare(_projectType, "Scripture") == 0)
-                {
-                    _writer.WriteAttributeString("xlink:href", "vnd.sun.star.script:Standard.Module1.IsReferenceCorrected?language=Basic&location=document");
-                }
-                else
-                {
-                    _writer.WriteAttributeString("xlink:href", "vnd.sun.star.script:Standard.Module1.IsGuidewordsCorrected?language=Basic&location=document");
-                }
-                _writer.WriteEndElement();
+                //_writer.WriteStartElement("script:event-listener");
+                //_writer.WriteAttributeString("script:language", "ooo:script");
+                //_writer.WriteAttributeString("script:event-name", "office:print");
+                //if (string.Compare(_projectType, "Scripture") == 0)
+                //{
+                //    _writer.WriteAttributeString("xlink:href", "vnd.sun.star.script:Standard.Module1.IsReferenceCorrected?language=Basic&location=document");
+                //}
+                //else
+                //{
+                //    _writer.WriteAttributeString("xlink:href", "vnd.sun.star.script:Standard.Module1.IsGuidewordsCorrected?language=Basic&location=document");
+                //}
+                //_writer.WriteEndElement();
                 _writer.WriteEndElement();
             }
             _writer.WriteEndElement();
