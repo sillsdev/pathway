@@ -76,6 +76,8 @@ namespace SIL.PublishingSolution
                 var myCursor = Cursor.Current;
                 Cursor.Current = Cursors.WaitCursor;
                 UpdateGUID(projInfo);
+                var pe = new PreExportProcess(projInfo);
+                pe.InsertFrontMatter(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), true);
                 CreateMetadata(projInfo);
                 CreateStylesheet(projInfo);
                 CreatePopups(projInfo);

@@ -52,6 +52,7 @@ namespace SIL.PublishingSolution
             preProcessor.GetTempFolderPath();
             preProcessor.PreserveSpace();
             preProcessor.ImagePreprocess();
+            preProcessor.InsertFrontMatter(preProcessor.GetCreatedTempFolderPath, true);
             preProcessor.ReplaceInvalidTagtoSpan("_AllComplexFormEntryBackRefs|LexEntryRef_PrimaryLexemes", "span");
             preProcessor.InsertHiddenChapterNumber();
             preProcessor.InsertHiddenVerseNumber();
