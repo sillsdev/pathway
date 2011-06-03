@@ -307,14 +307,56 @@ namespace SIL.Tool
         /// <returns>Language Name</returns>
         public static string GetLanguageName(string languageCode)
         {
+            if (string.IsNullOrEmpty(languageCode)) return string.Empty;
             string _languageName = string.Empty;
-            if (!string.IsNullOrEmpty(languageCode))
+            Dictionary<string, string> LanguageCollection = LanguageCodeAndName();
+            if (LanguageCollection.ContainsKey(languageCode.ToUpper()))
             {
-                Dictionary<string, string> LanguageCollection = LanguageCodeAndName();
-                if (LanguageCollection.ContainsKey(languageCode.ToUpper()))
+                _languageName = LanguageCollection[languageCode.ToUpper()];
+            }
+            if (string.IsNullOrEmpty(_languageName))
+            {
+                // 2-digit lookup didn't return anything - look at the <palaso:languageName> element
+                // in the .ldml file
+                string[] langCoun = languageCode.Split('-');
+
+                try
                 {
-                    _languageName = LanguageCollection[languageCode.ToUpper()];
+                    string wsPath;
+                    if (langCoun.Length < 2)
+                    {
+                        // try the language (no country code) (e.g, "en" for "en-US")
+                        wsPath = PathCombine(GetAllUserAppPath(), "SIL/WritingSystemStore/" + langCoun[0] + ".ldml");
+                    }
+                    else
+                    {
+                        // try the whole language expression (e.g., "ggo-Telu-IN")
+                        wsPath = PathCombine(GetAllUserAppPath(), "SIL/WritingSystemStore/" + languageCode + ".ldml");
+                    }
+                    if (File.Exists(wsPath))
+                    {
+                        var ldml = new XmlDocument { XmlResolver = null };
+                        ldml.Load(wsPath);
+                        var nsmgr = new XmlNamespaceManager(ldml.NameTable);
+                        nsmgr.AddNamespace("palaso", "urn://palaso.org/ldmlExtensions/v1");
+                        var node = ldml.SelectSingleNode("//palaso:languageName/@value", nsmgr);
+                        if (node != null)
+                        {
+                            // found it! Set the return value
+                            _languageName = node.Value; 
+                        }
+                    }
+                    else
+                    {
+                        // Paratext case (no .ldml file) - return a null string
+                        return string.Empty;
+                    }
                 }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e);
+                }
+
             }
             return _languageName;
         }
