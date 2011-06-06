@@ -299,6 +299,62 @@ namespace SIL.Tool
         }
         #endregion
 
+        #region GetTextDirection(string languageCode)
+        /// <summary>
+        /// Looks up the text direction for the specified language code in the appropriate .ldml file.
+        /// This lookup will not work with Paratext, which does not yet use an .ldml file.
+        /// </summary>
+        /// <param name="language">ISO 639 language code.</param>
+        /// <returns>Text direction (ltr or rtl), or ltr if not found.</returns>
+        public static string GetTextDirection(string language)
+        {
+            string[] langCoun = language.Split('-');
+            string direction;
+
+            try
+            {
+                string wsPath;
+                if (langCoun.Length < 2)
+                {
+                    // try the language (no country code) (e.g, "en" for "en-US")
+                    wsPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/WritingSystemStore/" + langCoun[0] + ".ldml");
+                }
+                else
+                {
+                    // try the whole language expression (e.g., "ggo-Telu-IN")
+                    wsPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/WritingSystemStore/" + language + ".ldml");
+                }
+                if (File.Exists(wsPath))
+                {
+                    var ldml = new XmlDocument { XmlResolver = null };
+                    ldml.Load(wsPath);
+                    var nsmgr = new XmlNamespaceManager(ldml.NameTable);
+                    nsmgr.AddNamespace("palaso", "urn://palaso.org/ldmlExtensions/v1");
+                    var node = ldml.SelectSingleNode("//orientation/@characters", nsmgr);
+                    if (node != null)
+                    {
+                        // get the text direction specified by the .ldml file
+                        direction = (node.Value.ToLower().Equals("right-to-left")) ? "rtl" : "ltr";
+                    }
+                    else
+                    {
+                        direction = "ltr";
+                    }
+                }
+                else
+                {
+                    direction = "ltr";
+                }
+            }
+            catch
+            {
+                direction = "ltr";
+            }
+
+            return direction;
+        }
+        #endregion
+
         #region GetLanguageName(string languageCode)
         /// <summary>
         /// This method returns Language Name for particular Language Code

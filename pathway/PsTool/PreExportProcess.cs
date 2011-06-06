@@ -297,7 +297,7 @@ namespace SIL.Tool
             File.Copy(Path.Combine(strCopyrightFolder, "sa.png"), Path.Combine(outputFolder, "sa.png"), true);
             File.Copy(Path.Combine(strCopyrightFolder, "nc.png"), Path.Combine(outputFolder, "nc.png"), true);
             File.Copy(Path.Combine(strCopyrightFolder, "nd.png"), Path.Combine(outputFolder, "nd.png"), true);
-            File.Copy(Path.Combine(strCopyrightFolder, "SIL-Logo-Black.gif"), Path.Combine(outputFolder, "SIL-Logo-Black.gif"), true);
+            File.Copy(Path.Combine(strCopyrightFolder, "SIL-Logo-No-Tag-Color.gif"), Path.Combine(outputFolder, "SIL-Logo-No-Tag-Color.gif"), true);
             File.Copy(Path.Combine(strCopyrightFolder, "Copy.css"), Path.Combine(outputFolder, "Copy.css"), true);
         }
 
@@ -412,7 +412,7 @@ namespace SIL.Tool
             if (rights.Trim().Length > 0)
             {
                 sb.Append(rights);
-                sb.Append("; © named rights holders for materials used by permission as specified in the resource file description.</p>  ");
+                sb.Append("; and, © named rights holders for materials used by permission as specified in the resource file description.</p>  ");
                 
             }
             return sb.ToString();

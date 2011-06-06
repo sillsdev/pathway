@@ -45,6 +45,9 @@ using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
+    /// <summary>
+    /// Possible values for the MissingFont and NonSilFont properties.
+    /// </summary>
     public enum FontHandling
     {
         EmbedFont,
@@ -241,7 +244,7 @@ namespace SIL.PublishingSolution
                 Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "</LexSense_VariantFormEntryBackRefs", "</span");
                 Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "</LexSense_RefsFrom_LexReference_Targets", "</span");
                 // end EDB 10/29/2010
-                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html", string.Format("<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'", langArray[0], getTextDirection(langArray[0])));
+                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html", string.Format("<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'", langArray[0], Common.GetTextDirection(langArray[0])));
                 // end EDB 10/22/2010
                 inProcess.PerformStep();
 
@@ -275,7 +278,7 @@ namespace SIL.PublishingSolution
                     // EDB 10/29/2010 FWR-2697 - remove when fixed in FLEx
                     Common.StreamReplaceInFile(revFile, "<ReversalIndexEntry_Self", "<span class='ReversalIndexEntry_Self'");
                     Common.StreamReplaceInFile(revFile, "</ReversalIndexEntry_Self", "</span");
-                    Common.StreamReplaceInFile(revFile, "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"utf-8\" lang=\"utf-8\"", string.Format("<html  xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'", langArray[0], getTextDirection(langArray[0])));
+                    Common.StreamReplaceInFile(revFile, "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"utf-8\" lang=\"utf-8\"", string.Format("<html  xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'", langArray[0], Common.GetTextDirection(langArray[0])));
                     // now split out the html as needed
                     List<string> fileNameWithPath = new List<string>();
                     fileNameWithPath = Common.SplitXhtmlFile(revFile, "letHead", "RevIndex", true);
@@ -296,16 +299,6 @@ namespace SIL.PublishingSolution
                     }
                     inProcess.PerformStep();
                 }
-                //// split the .XHTML into multiple files, as specified by the user
-                //List<string> htmlFiles = new List<string>();
-                //if (projInfo.FileToProduce.ToLower() != "one")
-                //{
-                //    htmlFiles = SplitFile(temporaryCvFullName, projInfo);
-                //}
-                //else
-                //{
-                //    htmlFiles.Add(temporaryCvFullName);
-                //}
                 // create the "epub" directory structure and copy over the boilerplate files
                 sb.Append(tempFolder);
                 sb.Append(Path.DirectorySeparatorChar);
@@ -721,6 +714,7 @@ namespace SIL.PublishingSolution
                     sb.Append(Path.GetFileName(embeddedFont.Filename));
                     sb.AppendLine(");");
                     sb.AppendLine("}");
+                    // if we're also embedding the font variants (bold, italic), reference them now
                     if (IncludeFontVariants)
                     {
                         // Italic version
@@ -739,6 +733,7 @@ namespace SIL.PublishingSolution
                             sb.AppendLine(");");
                             sb.AppendLine("}");
                         }
+                        // Bold version
                         if (embeddedFont.HasBold)
                         {
                             sb.AppendLine("@font-face {");
@@ -782,8 +777,8 @@ namespace SIL.PublishingSolution
                     }
                     // also insert the text direction for this language
                     sb.Append("direction: ");
-                    mainTextDirection = getTextDirection(language.Key);
-                    sb.Append(getTextDirection(language.Key));
+                    mainTextDirection = Common.GetTextDirection(language.Key);
+                    sb.Append(Common.GetTextDirection(language.Key));
                     sb.AppendLine(";");
                     sb.AppendLine("}");
                     if (IncludeFontVariants)
@@ -859,7 +854,7 @@ namespace SIL.PublishingSolution
                 }
                 // also insert the text direction for this language
                 sb.Append("direction: ");
-                sb.Append(getTextDirection(language.Key));
+                sb.Append(Common.GetTextDirection(language.Key));
                 sb.AppendLine(";");
                 sb.AppendLine("}");
 
@@ -1064,59 +1059,6 @@ namespace SIL.PublishingSolution
         #endregion
 
         #region Language Handling
-        /// <summary>
-        /// Returns the text direction specified by the writing system, or "ltr" if not found
-        /// </summary>
-        /// <param name="language"></param>
-        /// <returns></returns>
-        private string getTextDirection(string language)
-        {
-            string[] langCoun = language.Split('-');
-            string direction;
-
-            try
-            {
-                string wsPath;
-                if (langCoun.Length < 2)
-                {
-                    // try the language (no country code) (e.g, "en" for "en-US")
-                    wsPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/WritingSystemStore/" + langCoun[0] + ".ldml");
-                }
-                else
-                {
-                    // try the whole language expression (e.g., "ggo-Telu-IN")
-                    wsPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/WritingSystemStore/" + language + ".ldml");
-                }
-                if (File.Exists(wsPath))
-                {
-                    var ldml = new XmlDocument { XmlResolver = null };
-                    ldml.Load(wsPath);
-                    var nsmgr = new XmlNamespaceManager(ldml.NameTable);
-                    nsmgr.AddNamespace("palaso", "urn://palaso.org/ldmlExtensions/v1");
-                    var node = ldml.SelectSingleNode("//orientation/@characters", nsmgr);
-                    if (node != null)
-                    {
-                        // get the text direction specified by the .ldml file
-                        direction = (node.Value.ToLower().Equals("right-to-left")) ? "rtl" : "ltr"; 
-                    }
-                    else
-                    {
-                        direction = "ltr";
-                    }
-                }
-                else
-                {
-                    direction = "ltr";
-                }
-            }
-            catch
-            {
-                direction = "ltr";
-            }
-
-            return direction;
-        }
-
         /// <summary>
         /// Parses the specified file and sets the internal languages list to all the languages found in the file.
         /// </summary>
@@ -2250,7 +2192,6 @@ namespace SIL.PublishingSolution
                     index++;
                     RevIndex = true;
                 }
-//              string nameNoExt = Path.GetFileNameWithoutExtension(file);
                 if (!Path.GetFileNameWithoutExtension(file).EndsWith("_"))
                 {
                     // this is a split file - is it the first one?
