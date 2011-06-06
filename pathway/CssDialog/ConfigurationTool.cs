@@ -1034,5 +1034,10 @@ namespace SIL.PublishingSolution
             _CToolBL.ddlTocLevel_SelectedIndexChangedBL(sender, e);
             EditOthersCSS(sender, e);
         }
+
+        private void ConfigurationTool_HelpButtonClicked(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _CToolBL.HelpButton_Clicked();
+        }
      }
 }

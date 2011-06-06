@@ -3521,10 +3521,7 @@ namespace SIL.PublishingSolution
                 }
                 else if (e.KeyCode == Keys.F1)
                 {
-                    Common.PathwayHelpSetup();
-                    Common.HelpProv.SetHelpNavigator(cTool, HelpNavigator.Topic);
-                    Common.HelpProv.SetHelpKeyword(cTool, "Overview.htm");
-                    SendKeys.Send("{F1}");
+                    CallHelp();
                 }
 
                 //Show Version when Ctrl+F12
@@ -3534,6 +3531,19 @@ namespace SIL.PublishingSolution
                 }
             }
             catch { }
+        }
+
+        public void HelpButton_Clicked()
+        {
+            CallHelp();
+        }
+
+        private void CallHelp()
+        {
+            Common.PathwayHelpSetup();
+            Common.HelpProv.SetHelpNavigator(cTool, HelpNavigator.Topic);
+            Common.HelpProv.SetHelpKeyword(cTool, "Introduction.htm");
+            SendKeys.Send("{F1}");
         }
 
         public void tsDelete_ClickBL()
