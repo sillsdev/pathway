@@ -33,7 +33,7 @@
 
 body {
     font-family: "Doulos SIL", serif;	/* default Serif font */
-    font-size: 12pt;	/* cascaded environment */
+    font-size: 11pt;	/* cascaded environment */
     text-indent: 0pt;
     margin-left: 36pt;
     margin-right: 36pt;
@@ -46,10 +46,7 @@ body {
 #OtherCopyrights {
 }
 #Logo {
-    position: absolute;
-    bottom: 24pt;
-    left: 36pt;
-    margin-top: 1em;
+    padding-top: 3em;
 }
 em {
     font-weight: bold;
@@ -59,7 +56,7 @@ a {
     white-space: nowrap;
 }
 table {
-    margin-bottom: 1em;
+    margin-bottom: 0em;
 }
 td {
     vertical-align: center;

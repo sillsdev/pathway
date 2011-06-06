@@ -27,7 +27,7 @@
 	<xsl:variable name="lowercase" select="'abcdefghijklmnopqrstuvwxyz'" />
 	
 	<!--Straight copy for these elements. -->
-	<xsl:template match="xhtml:head | xhtml:title | xhtml:link | xhtml:a | xhtml:table | xhtml:tr | xhtml:td | xhtml:em | xhtml:br">
+	<xsl:template match="xhtml:head | xhtml:title | xhtml:link | xhtml:a | xhtml:table | xhtml:tr | xhtml:td | xhtml:em | xhtml:br | xhtml:ul | xhtml:li">
 		<xsl:copy>
 			<xsl:for-each select="@*">
 				<xsl:copy/>
