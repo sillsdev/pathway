@@ -949,23 +949,6 @@ namespace SIL.PublishingSolution
             return footnoteStyle;
         }
 
-        private void LanguageFontCheck(string content,string styleName)
-        {
-            if (LanguageFontStyleName.Contains(styleName) == false)
-            {
-                if (Common.GetLanguageUnicode(content) != string.Empty) // Is telugu/assamese?
-                {
-                    if (_newProperty.ContainsKey(styleName)==false)
-                    {
-                        Dictionary<string, string> newStyle = new Dictionary<string, string>();
-                        _newProperty[styleName] = newStyle;
-                    }
-                    _newProperty[styleName]["font-family"] = Common.GetLanguageUnicode(content);
-                    _newProperty[styleName]["font-family-complex"] = Common.GetLanguageUnicode(content);
-                }
-            }
-        }
-
         private void WriteFootNoteMarker(string footerClassName, string content, string marker)
         {
             if (footCallSymb.Length == 0)
@@ -2304,6 +2287,7 @@ namespace SIL.PublishingSolution
                 _writer.WriteStartElement("text:span");
                 _writer.WriteEndElement();
                 //_writer.WriteRaw(" ");
+                LanguageFontCheck(content, "headerFontStyleName");
             }
         }
 

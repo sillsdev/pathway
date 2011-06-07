@@ -150,6 +150,8 @@ namespace SIL.PublishingSolution
         protected bool _imageInserted;
         protected bool _overWriteParagraph;
 
+        protected List<string> LanguageFontStyleName = new List<string>();
+
         #endregion
 
         #region Constructor
@@ -256,7 +258,24 @@ namespace SIL.PublishingSolution
                 _allStyle.Push(_childName);
         }
 
-
+        public void LanguageFontCheck(string content, string styleName)
+        {
+            if (LanguageFontStyleName.Contains(styleName) == false)
+            {
+                if (Common.GetLanguageUnicode(content) != string.Empty) // Is telugu/assamese?
+                {
+                    if (_newProperty.ContainsKey(styleName) == false)
+                    {
+                        Dictionary<string, string> newStyle = new Dictionary<string, string>();
+                        _newProperty[styleName] = newStyle;
+                        AddUsedStyleName(styleName);
+                        ParentClass[styleName] = "Standard|div";
+                    }
+                    _newProperty[styleName]["font-family"] = Common.GetLanguageUnicode(content);
+                    _newProperty[styleName]["font-family-complex"] = Common.GetLanguageUnicode(content);
+                }
+            }
+        }
 
         public virtual void CreateSectionClass(string name)
         {
@@ -711,6 +730,7 @@ namespace SIL.PublishingSolution
             if (isFootnote)
             {
                 if (string.IsNullOrEmpty(_characterName)) return false;
+                LanguageFontCheck(content, _characterName);
                 AddUsedStyleName(_characterName);
                 StringBuilder footnoteFormat = new StringBuilder();
                 if (outputType == Common.OutputType.ODT.ToString())
