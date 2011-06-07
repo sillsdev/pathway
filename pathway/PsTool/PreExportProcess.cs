@@ -69,6 +69,7 @@ namespace SIL.Tool
             _baseXhtmlFileNameWithPath = projInfo.DefaultXhtmlFileWithPath;
             _cssFileNameWithPath = projInfo.DefaultCssFileWithPath;
             _projInfo = projInfo;
+            _projInfo.ProjectInputType = Param.Value[Param.InputType];
         }
         public string ProcessedXhtml
         {
@@ -237,7 +238,7 @@ namespace SIL.Tool
             var img = new Bitmap(strImageFile);
             img.Save(dest);
             // if we don't want a title, we're done
-            if (Param.GetMetadataValue(Param.CoverPageTitle).Equals("false") ||
+            if (Param.GetMetadataValue(Param.CoverPageTitle).ToLower().Equals("false") ||
                 Param.GetMetadataValue(Param.Title).Trim().Length < 1)
             {
                 // nothing else to do -- return
@@ -297,7 +298,17 @@ namespace SIL.Tool
             File.Copy(Path.Combine(strCopyrightFolder, "sa.png"), Path.Combine(outputFolder, "sa.png"), true);
             File.Copy(Path.Combine(strCopyrightFolder, "nc.png"), Path.Combine(outputFolder, "nc.png"), true);
             File.Copy(Path.Combine(strCopyrightFolder, "nd.png"), Path.Combine(outputFolder, "nd.png"), true);
-            File.Copy(Path.Combine(strCopyrightFolder, "SIL-Logo-No-Tag-Color.gif"), Path.Combine(outputFolder, "SIL-Logo-No-Tag-Color.gif"), true);
+            if (Param.GetOrganization().StartsWith("SIL"))
+            {
+                if (_projInfo.ProjectInputType == "dictionary")
+                {
+                    File.Copy(Path.Combine(strCopyrightFolder, "SIL-Logo-No-Tag-Color.gif"), Path.Combine(outputFolder, "SIL-Logo-No-Tag-Color.gif"), true);
+                }
+                else
+                {
+                    File.Copy(Path.Combine(strCopyrightFolder, "WBT_H_RGB_red.png"), Path.Combine(outputFolder, "WBT_H_RGB_red.png"), true);
+                }
+            }
             File.Copy(Path.Combine(strCopyrightFolder, "Copy.css"), Path.Combine(outputFolder, "Copy.css"), true);
         }
 
@@ -330,6 +341,11 @@ namespace SIL.Tool
             File.Copy(strCopyrightFile, destFile);
             Common.StreamReplaceInFile(destFile, "div id='LanguageInformation' class='Front_Matter'>", GetLanguageInfo());
             Common.StreamReplaceInFile(destFile, "div id='OtherCopyrights' class='Front_Matter'>", GetCopyrightInfo());
+            if (_projInfo.ProjectInputType != "dictionary")
+            {
+                Common.StreamReplaceInFile(destFile, "src='SIL-Logo-No-Tag-Color.gif' alt='SIL International logo'",
+                    "src='WBT_H_RGB_red.png' alt='Wycliffe logo'  ");
+            }
             Common.SetDefaultCSS(destFile, Path.GetFileName(_cssFileNameWithPath));
         }
 
@@ -367,7 +383,17 @@ namespace SIL.Tool
             outData.Append("</div>");
             sr.Close();
             // add the language and copyright info and return the result as a string
-            var s1 = Regex.Replace(outData.ToString(), "div id='LanguageInformation' class='Front_Matter'>", GetLanguageInfo());
+            string s0;
+            if (_projInfo.ProjectInputType != "dictionary")
+            {
+                s0 = Regex.Replace(outData.ToString(), "src='SIL-Logo-No-Tag-Color.gif' alt='SIL International logo'",
+                    "src='WBT_H_RGB_red.png' alt='Wycliffe logo'  ");
+            }
+            else
+            {
+                s0 = outData.ToString();
+            }
+            var s1 = Regex.Replace(s0, "div id='LanguageInformation' class='Front_Matter'>", GetLanguageInfo());
             return (Regex.Replace(s1, "div id='OtherCopyrights' class='Front_Matter'>", GetCopyrightInfo()));
         }
 

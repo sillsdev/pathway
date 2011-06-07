@@ -927,7 +927,7 @@ namespace SIL.PublishingSolution
                     double width = iconImage.Width;
                     if (height > 1000 || width > 1000)
                     {
-                        MessageBox.Show("The selected image is too large. Please select an image with less that 1000 pixels in height and length.",
+                        MessageBox.Show("The selected image is too large. Please select an image that is smaller than 1000 x 1000 pixels.",
                             this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
