@@ -1988,6 +1988,8 @@ namespace Test.InDesignConvert
             FileComparisionTest("B1peExpect", "2");
         }
 
+        [Ignore]
+        // Sankar
         [Test]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]

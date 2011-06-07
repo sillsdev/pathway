@@ -888,7 +888,12 @@ namespace SIL.PublishingSolution
             //string newStyleName = styleName + Common.SepParent + parentStyle;
             string newStyleName = GetStyleNumber(styleName);
 
-            _newProperty[newStyleName] = _tempStyle;
+            //_newProperty[newStyleName] = _tempStyle;
+            if (_newProperty.ContainsKey(newStyleName) == false)
+            {
+                _newProperty[newStyleName] = _tempStyle;
+            }
+
             IdAllClass[newStyleName] = _tempStyle;
             string tagType = _tagType;
             if (divType.Contains(_tagType)) tagType = "div";

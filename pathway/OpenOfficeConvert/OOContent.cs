@@ -115,6 +115,8 @@ namespace SIL.PublishingSolution
         private List<string> _unUsedParagraphStyle = new List<string>();
         string footCallSymb = string.Empty;
 
+        List<string> LanguageFontStyleName = new List<string>();
+
         #endregion
         #region Private Variable
         private int _storyNo = 0;
@@ -920,7 +922,8 @@ namespace SIL.PublishingSolution
             bool isAnchorTagOpen = AnchorBookMark();
             content = WriteCounter(content);
             whiteSpacePre(content, pseudo); // TODO -2000 - SignificantSpace() - IN OO convert
-            
+            LanguageFontCheck(content,_childName);
+
             if(isAnchorTagOpen)
             {
                 _writer.WriteEndElement();
@@ -944,6 +947,23 @@ namespace SIL.PublishingSolution
             //footnoteStyle.Append("</text:span>");
             footnoteStyle.Append(footnoteContent);
             return footnoteStyle;
+        }
+
+        private void LanguageFontCheck(string content,string styleName)
+        {
+            if (LanguageFontStyleName.Contains(styleName) == false)
+            {
+                if (Common.GetLanguageUnicode(content) != string.Empty) // Is telugu/assamese?
+                {
+                    if (_newProperty.ContainsKey(styleName)==false)
+                    {
+                        Dictionary<string, string> newStyle = new Dictionary<string, string>();
+                        _newProperty[styleName] = newStyle;
+                    }
+                    _newProperty[styleName]["font-family"] = Common.GetLanguageUnicode(content);
+                    _newProperty[styleName]["font-family-complex"] = Common.GetLanguageUnicode(content);
+                }
+            }
         }
 
         private void WriteFootNoteMarker(string footerClassName, string content, string marker)

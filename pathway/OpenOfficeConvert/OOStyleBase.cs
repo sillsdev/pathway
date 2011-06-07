@@ -523,10 +523,27 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("style:name", "Scheherazade Graphite Alpha");
                 _writer.WriteAttributeString("svg:font-family", "'Scheherazade Graphite Alpha'");
                 _writer.WriteEndElement();
-                _writer.WriteStartElement("style:font-face");
-                _writer.WriteAttributeString("style:name", "Latha");
-                _writer.WriteAttributeString("svg:font-family", "'Latha'");
-                _writer.WriteEndElement();
+                string fontName = string.Empty;
+                string PsSupportPath = Common.GetPSApplicationPath();
+                string xmlFileNameWithPath = Common.PathCombine(PsSupportPath, "GenericFont.xml");
+                string xPath = "//font-language-unicode-map";
+                XmlNodeList fontList = Common.GetXmlNodes(xmlFileNameWithPath, xPath);
+                if (fontList != null && fontList.Count > 0)
+                {
+                    foreach (XmlNode xmlNode in fontList)
+                    {
+                        if (xmlNode.Attributes != null)
+                        {
+                            fontName = xmlNode.InnerText;
+                            _writer.WriteStartElement("style:font-face");
+                            _writer.WriteAttributeString("style:name", fontName);
+                            fontName = "'" + xmlNode.InnerText + "'";
+                            _writer.WriteAttributeString("svg:font-family", fontName);
+                            _writer.WriteAttributeString("style:font-pitch", "variable");
+                            _writer.WriteEndElement();
+                        }
+                    }
+                }
                 _writer.WriteEndElement();
 
                 //office:styles Attributes.

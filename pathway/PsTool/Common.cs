@@ -2505,7 +2505,7 @@ return osInfo.Platform.ToString();
             if (unicodeString.Length <= 0) return "";
             int unicodeDecimal = 0;
             unicodeString = unicodeString.Trim();
-            unicodeDecimal = (int)unicodeString[0];
+            //unicodeDecimal = (int)unicodeString[0];
             string fontName = string.Empty;
             string PsSupportPath = GetPSApplicationPath();
             string xmlFileNameWithPath = PathCombine(PsSupportPath, "GenericFont.xml");
@@ -2513,37 +2513,49 @@ return osInfo.Platform.ToString();
             XmlNodeList fontList = GetXmlNodes(xmlFileNameWithPath, xPath);
             if (fontList != null && fontList.Count > 0)
             {
-                foreach (XmlNode xmlNode in fontList)
+                bool isLanguageFound = false;
+                int numberOfCharCheck = 1;
+                foreach (char ch in unicodeString)
                 {
-                    if (xmlNode.Attributes != null)
+                    //if (numberOfCharCheck++ > 5) break;
+                    unicodeDecimal = (int)ch;
+                    foreach (XmlNode xmlNode in fontList)
                     {
-                        int hexFrom = 0;
-                        int hexTo = 0;
-                        string rangeFrom = xmlNode.Attributes["From"].Value;
-                        if(rangeFrom.IndexOf("0x") == 0)
+                        if (xmlNode.Attributes != null)
                         {
-                            rangeFrom = rangeFrom.Replace("0x", "");
-                            hexFrom = int.Parse(rangeFrom, NumberStyles.HexNumber);
+                            int hexFrom = 0;
+                            int hexTo = 0;
+                            string rangeFrom = xmlNode.Attributes["From"].Value;
+                            if (rangeFrom.IndexOf("0x") == 0)
+                            {
+                                rangeFrom = rangeFrom.Replace("0x", "");
+                                hexFrom = int.Parse(rangeFrom, NumberStyles.HexNumber);
+                            }
+                            else
+                            {
+                                hexFrom = int.Parse(rangeFrom);
+                            }
+                            string rangeTo = xmlNode.Attributes["To"].Value;
+                            if (rangeTo.IndexOf("0x") == 0)
+                            {
+                                rangeTo = rangeTo.Replace("0x", "");
+                                hexTo = int.Parse(rangeTo, NumberStyles.HexNumber);
+                            }
+                            else
+                            {
+                                hexTo = int.Parse(rangeTo);
+                            }
+                            if (unicodeDecimal >= hexFrom && unicodeDecimal <= hexTo)
+                            {
+                                fontName = xmlNode.InnerText;
+                                isLanguageFound = true;
+                                break;
+                            }
                         }
-                        else
-                        {
-                            hexFrom = int.Parse(rangeFrom);
-                        }
-                        string rangeTo = xmlNode.Attributes["To"].Value;
-                        if (rangeTo.IndexOf("0x") == 0)
-                        {
-                            rangeTo = rangeTo.Replace("0x", "");
-                            hexTo = int.Parse(rangeTo, NumberStyles.HexNumber);
-                        }
-                        else
-                        {
-                            hexTo = int.Parse(rangeTo);
-                        }
-                        if (unicodeDecimal >= hexFrom && unicodeDecimal <= hexTo)
-                        {
-                            fontName = xmlNode.InnerText;
-                            break;
-                        }
+                    }
+                    if (isLanguageFound)
+                    {
+                        break;
                     }
                 }
             }
