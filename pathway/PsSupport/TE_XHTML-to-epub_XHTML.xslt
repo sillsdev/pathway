@@ -211,7 +211,7 @@
 	</xsl:template>
 	
 	<!-- Straight copy for front matter items -->
-	<xsl:template match="xhtml:div[@class='Front_Matter'] | xhtml:div[@class='Front_Matter']/xhtml:p | xhtml:div/xhtml:h1 | xhtml:div/xhtml:h2 | xhtml:div[@class='Cover'] | xhtml:div[@class='Title'] | xhtml:div[@class='Copyright']">
+	<xsl:template match="xhtml:div[@class='Front_Matter'] | xhtml:div[@class='Front_Matter']/xhtml:p | xhtml:div/xhtml:h1 | xhtml:div/xhtml:h2 | xhtml:div[@class='Cover'] | xhtml:div[@class='Title'] | xhtml:div[@class='Title']/xhtml:p | xhtml:div[@class='Copyright']">
 		<xsl:copy>
 			<xsl:for-each select="@*">
 				<xsl:copy/>

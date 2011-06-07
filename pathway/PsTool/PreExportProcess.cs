@@ -110,6 +110,12 @@ namespace SIL.Tool
                 sbPreamble.Append(Path.GetFileName(_cssFileNameWithPath));
                 sbPreamble.AppendLine("' type='text/css' /></head>");
                 sbPreamble.Append("<body class='scrBody'>"); 
+                // copy over image resources if needed
+                if (Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("true") ||
+                    Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("true"))
+                {
+                    CopyCCResources(outputFolder);
+                }
                 var sb = new StringBuilder();
                 if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true"))
                 {
@@ -282,7 +288,27 @@ namespace SIL.Tool
             var sb = new StringBuilder();
             sb.Append("<div id='TitlePage' class='Title'><h1>");
             sb.Append(Param.GetMetadataValue(Param.Title));
-            sb.AppendLine("</h1></div>");
+            sb.AppendLine("</h1>");
+            sb.Append("<p class='Publisher'>");
+            sb.Append(Param.GetMetadataValue(Param.Publisher));
+            sb.AppendLine("</p>");
+            // logo stuff
+            sb.Append("<p class='logo'>");
+            if (Param.GetOrganization().StartsWith("SIL"))
+            {
+                if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+                {
+                    // dictionary - SIL logo
+                    sb.Append("<img src='SIL-Logo-No-Tag-Color.gif' alt='SIL International Logo'/>");
+                }
+                else
+                {
+                    // Scripture - WBT logo
+                    sb.Append("<img src='WBT_H_RGB_red.png' alt='Wycliffe Logo'/>");
+                }
+            }
+            sb.AppendLine("</p>");
+            sb.AppendLine("</div>");
             return sb.ToString();
         }
 
@@ -294,13 +320,18 @@ namespace SIL.Tool
         {
             string strCopyrightFolder = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
             // copy over supporting files from the Copyright folder
-            File.Copy(Path.Combine(strCopyrightFolder, "by.png"), Path.Combine(outputFolder, "by.png"), true);
-            File.Copy(Path.Combine(strCopyrightFolder, "sa.png"), Path.Combine(outputFolder, "sa.png"), true);
-            File.Copy(Path.Combine(strCopyrightFolder, "nc.png"), Path.Combine(outputFolder, "nc.png"), true);
-            File.Copy(Path.Combine(strCopyrightFolder, "nd.png"), Path.Combine(outputFolder, "nd.png"), true);
+            // rights logos - copyright page only
+            if (Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("true"))
+            {
+                File.Copy(Path.Combine(strCopyrightFolder, "by.png"), Path.Combine(outputFolder, "by.png"), true);
+                File.Copy(Path.Combine(strCopyrightFolder, "sa.png"), Path.Combine(outputFolder, "sa.png"), true);
+                File.Copy(Path.Combine(strCopyrightFolder, "nc.png"), Path.Combine(outputFolder, "nc.png"), true);
+                File.Copy(Path.Combine(strCopyrightFolder, "nd.png"), Path.Combine(outputFolder, "nd.png"), true);
+            }
+            // logo - both Title and Copyright page
             if (Param.GetOrganization().StartsWith("SIL"))
             {
-                if (_projInfo.ProjectInputType == "dictionary")
+                if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
                     File.Copy(Path.Combine(strCopyrightFolder, "SIL-Logo-No-Tag-Color.gif"), Path.Combine(outputFolder, "SIL-Logo-No-Tag-Color.gif"), true);
                 }
@@ -320,8 +351,6 @@ namespace SIL.Tool
                 return;
             }
             string strCopyrightFolder = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
-            // copy over the CC images to the output folder
-            CopyCCResources(outputFolder);
             // open up the copyright / license file
             string strFilename = Param.GetMetadataValue(Param.CopyrightPageFilename);
             if (strCopyrightFolder == null || strFilename == null)
@@ -357,8 +386,6 @@ namespace SIL.Tool
             if (Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("false") ||
                 Param.GetMetadataValue(Param.CopyrightPageFilename).Length < 1) { return string.Empty; }
             string strCopyrightFolder = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
-            // copy over the CC images to the output folder
-            CopyCCResources(outputFolder);
             // open up the copyright / license file
             string strFilename = Param.GetMetadataValue(Param.CopyrightPageFilename);
             if (strCopyrightFolder == null || strFilename == null)

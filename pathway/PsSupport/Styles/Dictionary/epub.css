@@ -342,3 +342,16 @@ p {
 #Logo {
     padding-top: 3em;
 }
+
+.Publisher {
+    padding-top: 6em;
+    font-size: 80%;
+    text-align: center;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+.logo {
+    text-align: center;
+    padding-top: .5em;
+    margin-top: 0;
+}
