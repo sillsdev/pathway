@@ -236,7 +236,7 @@ namespace SIL.Tool
             // copy the image file to the destination folder as "cover.png"
             string dest = Path.Combine(outputFolder, "cover.png");
             var img = new Bitmap(strImageFile);
-            img.Save(dest);
+            img.Save(dest, System.Drawing.Imaging.ImageFormat.Png);
             // if we don't want a title, we're done
             if (Param.GetMetadataValue(Param.CoverPageTitle).ToLower().Equals("false") ||
                 Param.GetMetadataValue(Param.Title).Trim().Length < 1)
