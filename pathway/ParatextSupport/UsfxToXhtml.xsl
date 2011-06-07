@@ -10,6 +10,8 @@
 	<xsl:param name="stylesheet" select="'usfm.sty'"/>	<!-- Paratext stylesheet name -->
 	<xsl:param name="figurePath"/> <!-- Path to figures folder with a final directory separator character -->
 	<xsl:param name="altFigurePath"/> <!-- Alternate path to figures folder with a final directory separator character -->
+	<xsl:param name="fontName" select="'Charis SIL'"/>	<!-- Font used for the vernacular in the Paratext project -->
+	<xsl:param name="fontSize" select="12"/>	<!-- Font size for the vernacular in the Paratext project -->
 
 	<!-- The templates matching * and @* match and copy unhandled elements/attributes. -->
 	<xsl:template match="*">
@@ -34,6 +36,8 @@
 				<meta name="description" content="{$projName} exported by {$user} on {$dateTime}"/>
 				<meta name="filename" content="{$projName}.xhtml"/>
 				<meta name="stylesheet" content="{$stylesheet}"/>
+				<meta name="fontName" content="{$fontName}"/>
+				<meta name="fontSize" content="{$fontSize}"/>
 			</head>
 			<body class="scrBody">
 				<xsl:apply-templates/>
