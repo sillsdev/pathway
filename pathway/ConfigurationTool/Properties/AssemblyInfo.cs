@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ConfigurationTool")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Create stylesheets and set default values and meta data for Pathway")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("sudyk")]
+[assembly: AssemblyCompany("SIL International")]
 [assembly: AssemblyProduct("ConfigurationTool")]
 [assembly: AssemblyCopyright("Copyright © SIL 2010")]
 [assembly: AssemblyTrademark("")]

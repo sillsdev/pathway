@@ -3542,8 +3542,14 @@ namespace SIL.PublishingSolution
         {
             Common.PathwayHelpSetup();
             Common.HelpProv.SetHelpNavigator(cTool, HelpNavigator.Topic);
-            Common.HelpProv.SetHelpKeyword(cTool, "Introduction.htm");
+            Common.HelpProv.SetHelpKeyword(cTool, "Overview.htm");
             SendKeys.Send("{F1}");
+        }
+
+        public void AboutDialog()
+        {
+            var aboutPw = new AboutPw();
+            aboutPw.ShowDialog();
         }
 
         public void tsDelete_ClickBL()

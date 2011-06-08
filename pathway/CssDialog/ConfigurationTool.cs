@@ -1039,5 +1039,15 @@ namespace SIL.PublishingSolution
         {
             _CToolBL.HelpButton_Clicked();
         }
+
+        private void contentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _CToolBL.HelpButton_Clicked();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _CToolBL.AboutDialog();
+        }
      }
 }
