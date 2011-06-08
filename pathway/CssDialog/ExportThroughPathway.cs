@@ -992,7 +992,7 @@ namespace SIL.PublishingSolution
         private void lnkChooseCopyright_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // TODO: replace with correct help topic
-            _helpTopic = "Tasks/Basic_Tasks/Choosing_a_rights_statement.htm";
+            _helpTopic = "Tasks/Basic_Tasks/Choosing_a_rights_statement_overview.htm";
             btnHelp_Click(sender, e);
         }
 
