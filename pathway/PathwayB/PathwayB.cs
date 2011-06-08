@@ -87,6 +87,9 @@ namespace SIL.PublishingSolution
                     backendPath = Common.GetPSApplicationPath();
                 }
 
+                Common.ProgBase = Common.GetPSApplicationPath();
+                Param.LoadSettings();
+                
                 Backend.Load(backendPath);
 
                 Common.ShowMessage = false;
