@@ -393,7 +393,7 @@ namespace SIL.PublishingSolution
                 btnCoverImage.Enabled = chkCoverImageTitle.Enabled;
                 imgCoverImage.Enabled = chkCoverImageTitle.Enabled;
 
-                chkColophon.Enabled = (!ddlLayout.Text.Contains("GoBible"));
+                chkColophon.Enabled = (!ddlLayout.Text.Contains("Go Bible"));
                 rdoCustomCopyright.Enabled = (chkColophon.Checked && chkColophon.Enabled);
                 rdoStandardCopyright.Enabled = (chkColophon.Checked && chkColophon.Enabled);
                 ddlCopyrightStatement.Enabled = (chkColophon.Checked && chkColophon.Enabled) ? rdoStandardCopyright.Checked : false;
@@ -834,7 +834,7 @@ namespace SIL.PublishingSolution
             string backend = ddlLayout.Text.ToLower();
             string media;
 
-            if (backend == "gobible")
+            if (backend == "go bible")
             {
                 media = "mobile";
             }

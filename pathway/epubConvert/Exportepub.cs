@@ -243,6 +243,10 @@ namespace SIL.PublishingSolution
                 Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<LexSense_RefsFrom_LexReference_Targets", "<span class='LexSense_RefsFrom_LexReference_Targets'");
                 Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "</LexSense_VariantFormEntryBackRefs", "</span");
                 Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "</LexSense_RefsFrom_LexReference_Targets", "</span");
+
+                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<LexEntryLink_HeadWordRef", "<span class='LexEntryLink_HeadWordRef'");
+                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "</LexEntryLink_HeadWordRef", "</span");
+                
                 // end EDB 10/29/2010
                 Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html", string.Format("<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'", langArray[0], Common.GetTextDirection(langArray[0])));
                 // end EDB 10/22/2010

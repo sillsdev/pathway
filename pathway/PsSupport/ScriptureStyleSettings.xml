@@ -286,7 +286,7 @@
         </style -->
     </paper>
     <mobile>
-      <style name="GoBible" file="GoBible.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg">
+      <style name="Go Bible" file="GoBible.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg">
         <description>Text only, no section heads or cross references</description>
         <styleProperty name="FileProduced" value="One" />
         <styleProperty name="RedLetter" value="No" />
@@ -336,7 +336,7 @@
     <task name="Trial print" style="5.25x8.25in Cols 10pt Left" icon="Graphic/trialPrint.png" />
     <task name="Final print" style="5.25x8.25in 11pt Left" icon="Graphic/final.png" />
     <task name="Web publish" style="Web 11pt" icon="Graphic/web.png" />
-    <task name="Cell publish" style="GoBible" icon="Graphic/cell.png" />
+    <task name="Cell publish" style="Go Bible" icon="Graphic/cell.png" />
   </tasks>
   <column-width>
     <column name="0" width="85" />

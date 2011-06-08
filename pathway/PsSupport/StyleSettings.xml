@@ -64,7 +64,7 @@
             </style>
         </paper>
         <mobile>
-            <style name="GoBible" file="GoBible.css" approvedBy="GPS">
+            <style name="Go Bible" file="GoBible.css" approvedBy="GPS">
                 <description>Text only, no section heads or cross references</description>
             </style>
         </mobile>

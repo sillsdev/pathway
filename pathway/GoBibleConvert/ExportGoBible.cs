@@ -47,7 +47,7 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                return "GoBible";
+                return "Go Bible";
             }
         }
 
@@ -104,7 +104,7 @@ namespace SIL.PublishingSolution
                 foreach (string name in DuplicateBooks)
                     errMsg += "\t" + name + "\r\n";
                 errMsg += "Please correct names in Translation Editor: File: Properties: Book Properties.";
-                MessageBox.Show(errMsg, "GoBible Export Dpulicate Book(s) Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(errMsg, "Go Bible Export Dpulicate Book(s) Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Cursor.Current = myCursor;
                 inProcess.Close();
                 return false;
@@ -119,7 +119,7 @@ namespace SIL.PublishingSolution
             if (SubProcess.ExitCode != ExitOk)
             {
                 string msg = string.Format("The conversion has exited with an error. Do you want to display additional details on the error?");
-                DialogResult dialogResult = MessageBox.Show(msg, "GoBible Export", MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2);
+                DialogResult dialogResult = MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2);
                 if (dialogResult == DialogResult.Yes)
                 {
                     string redirectDirectory = Path.GetDirectoryName(collectionFullName);
@@ -133,13 +133,13 @@ namespace SIL.PublishingSolution
                             errMsg += line + "\r\n";
                     }
                     streamReader.Close();
-                    MessageBox.Show(errMsg, "GoBible Export Error Details", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(errMsg, "Go Bible Export Error Details", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else if (projInfo.IsOpenOutput)
             {
                 string msg = string.Format("Please copy the file {0} to your phone", result);
-                MessageBox.Show(msg, "GoBible Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             // clean up
             Common.CleanupOutputDirectory(processFolder, result); // keep the .jar file only

@@ -127,7 +127,7 @@ namespace Test.GoBibleConvert
                 baseNode.AppendChild(childNode);
                 Param.Write();
             }
-            const string layout = "GoBible";
+            const string layout = "Go Bible";
             Param.UpdateMobileAtrrib("FileProduced", "OneperBook", layout);
             Param.UpdateMobileAtrrib("RedLetter", "Yes", layout);
             Param.UpdateMetadataValue(Param.Description, "Sena 3");

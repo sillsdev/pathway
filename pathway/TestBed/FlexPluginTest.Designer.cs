@@ -253,7 +253,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(95, 28);
             this.button11.TabIndex = 61;
-            this.button11.Text = "GoBible";
+            this.button11.Text = "Go Bible";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 

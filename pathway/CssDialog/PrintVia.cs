@@ -607,7 +607,7 @@ namespace SIL.PublishingSolution
             string backend = cmbPrintVia.Text.ToLower();
             string media;
 
-            if (backend == "gobible")
+            if (backend == "go bible")
             {
                 media = "mobile";
             }
