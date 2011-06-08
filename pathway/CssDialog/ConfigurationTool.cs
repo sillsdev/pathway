@@ -1035,11 +1035,6 @@ namespace SIL.PublishingSolution
             EditOthersCSS(sender, e);
         }
 
-        private void ConfigurationTool_HelpButtonClicked(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            _CToolBL.HelpButton_Clicked();
-        }
-
         private void contentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _CToolBL.HelpButton_Clicked();
@@ -1048,6 +1043,11 @@ namespace SIL.PublishingSolution
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _CToolBL.AboutDialog();
+        }
+
+        private void toolStripSplitButton1_ButtonClick(object sender, EventArgs e)
+        {
+            _CToolBL.HelpButton_Clicked();
         }
      }
 }

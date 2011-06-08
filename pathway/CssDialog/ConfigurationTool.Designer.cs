@@ -32,6 +32,17 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigurationTool));
             this.stylesGrid = new System.Windows.Forms.DataGridView();
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
+            this.tsNew = new System.Windows.Forms.ToolStripButton();
+            this.tsSaveAs = new System.Windows.Forms.ToolStripButton();
+            this.tsDelete = new System.Windows.Forms.ToolStripButton();
+            this.tsUndo = new System.Windows.Forms.ToolStripButton();
+            this.tsRedo = new System.Windows.Forms.ToolStripButton();
+            this.tsPreview = new System.Windows.Forms.ToolStripButton();
+            this.tsDefault = new System.Windows.Forms.ToolStripButton();
+            this.tsSend = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
+            this.contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabInfo = new System.Windows.Forms.TabPage();
             this.txtApproved = new System.Windows.Forms.TextBox();
@@ -90,7 +101,11 @@
             this.label7 = new System.Windows.Forms.Label();
             this.ddlFiles = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.mobileIcon = new System.Windows.Forms.PictureBox();
             this.tabOthers = new System.Windows.Forms.TabPage();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.ddlNonSILFont = new System.Windows.Forms.ComboBox();
             this.lblEpubFontsSection = new System.Windows.Forms.Label();
             this.ddlMissingFont = new System.Windows.Forms.ComboBox();
@@ -117,9 +132,11 @@
             this.txtDefaultLineHeight = new System.Windows.Forms.TextBox();
             this.lblChapterNumbers = new System.Windows.Forms.Label();
             this.lblPct = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabPreview = new System.Windows.Forms.TabPage();
             this.btnPrevious = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
+            this.picPreview = new System.Windows.Forms.PictureBox();
             this.tabPicture = new System.Windows.Forms.TabPage();
             this.ChkDontPicture = new System.Windows.Forms.CheckBox();
             this.LblPicPosition = new System.Windows.Forms.Label();
@@ -141,40 +158,29 @@
             this.btnScripture = new System.Windows.Forms.Button();
             this.btnDictionary = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnOthers = new System.Windows.Forms.Button();
+            this.btnWeb = new System.Windows.Forms.Button();
+            this.btnMobile = new System.Windows.Forms.Button();
+            this.btnPaper = new System.Windows.Forms.Button();
             this.TLPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.TLPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblType = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnOthers = new System.Windows.Forms.Button();
-            this.btnWeb = new System.Windows.Forms.Button();
-            this.btnMobile = new System.Windows.Forms.Button();
-            this.btnPaper = new System.Windows.Forms.Button();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.mobileIcon = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.picPreview = new System.Windows.Forms.PictureBox();
-            this.tsNew = new System.Windows.Forms.ToolStripButton();
-            this.tsSaveAs = new System.Windows.Forms.ToolStripButton();
-            this.tsDelete = new System.Windows.Forms.ToolStripButton();
-            this.tsUndo = new System.Windows.Forms.ToolStripButton();
-            this.tsRedo = new System.Windows.Forms.ToolStripButton();
-            this.tsPreview = new System.Windows.Forms.ToolStripButton();
-            this.tsDefault = new System.Windows.Forms.ToolStripButton();
-            this.tsSend = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
-            this.contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.stylesGrid)).BeginInit();
             this.toolStripMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabInfo.SuspendLayout();
             this.tabDisplay.SuspendLayout();
             this.tabMobile.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mobileIcon)).BeginInit();
             this.tabOthers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPreview.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
             this.tabPicture.SuspendLayout();
             this.GrpPicture.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SpinPicWidth)).BeginInit();
@@ -185,12 +191,6 @@
             this.TLPanel2.SuspendLayout();
             this.TLPanel3.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mobileIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
             this.SuspendLayout();
             // 
             // stylesGrid
@@ -236,6 +236,151 @@
             this.toolStripMain.TabIndex = 5;
             this.toolStripMain.Text = "New";
             this.toolStripMain.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripMain_ItemClicked);
+            // 
+            // tsNew
+            // 
+            this.tsNew.AccessibleName = "tsNew";
+            this.tsNew.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.tsNew.Image = ((System.Drawing.Image)(resources.GetObject("tsNew.Image")));
+            this.tsNew.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.tsNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsNew.Name = "tsNew";
+            this.tsNew.Size = new System.Drawing.Size(43, 53);
+            this.tsNew.Text = "&New";
+            this.tsNew.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.tsNew.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
+            this.tsNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsNew.ToolTipText = "Add a brand new stylesheet (Alt+N) ";
+            this.tsNew.Click += new System.EventHandler(this.tsNew_Click);
+            // 
+            // tsSaveAs
+            // 
+            this.tsSaveAs.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.tsSaveAs.Image = ((System.Drawing.Image)(resources.GetObject("tsSaveAs.Image")));
+            this.tsSaveAs.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsSaveAs.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsSaveAs.Name = "tsSaveAs";
+            this.tsSaveAs.Size = new System.Drawing.Size(66, 53);
+            this.tsSaveAs.Text = "Save &As";
+            this.tsSaveAs.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsSaveAs.ToolTipText = "Copy the selected stylesheet into a new stylesheet (Alt+A)";
+            this.tsSaveAs.Click += new System.EventHandler(this.tsSaveAs_Click);
+            // 
+            // tsDelete
+            // 
+            this.tsDelete.AccessibleName = "tsClose";
+            this.tsDelete.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.tsDelete.Image = ((System.Drawing.Image)(resources.GetObject("tsDelete.Image")));
+            this.tsDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsDelete.Name = "tsDelete";
+            this.tsDelete.Size = new System.Drawing.Size(55, 53);
+            this.tsDelete.Text = "De&lete";
+            this.tsDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsDelete.ToolTipText = "Delete the selected stylesheet (Alt+L)";
+            this.tsDelete.Click += new System.EventHandler(this.tsDelete_Click);
+            // 
+            // tsUndo
+            // 
+            this.tsUndo.AccessibleName = "tsPreview";
+            this.tsUndo.Enabled = false;
+            this.tsUndo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.tsUndo.Image = ((System.Drawing.Image)(resources.GetObject("tsUndo.Image")));
+            this.tsUndo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsUndo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsUndo.Name = "tsUndo";
+            this.tsUndo.Size = new System.Drawing.Size(53, 53);
+            this.tsUndo.Text = " &Undo";
+            this.tsUndo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsUndo.ToolTipText = "Undo the last change (Alt+U)";
+            this.tsUndo.Click += new System.EventHandler(this.tsUndo_Click);
+            // 
+            // tsRedo
+            // 
+            this.tsRedo.AccessibleName = "tsPreview";
+            this.tsRedo.Enabled = false;
+            this.tsRedo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.tsRedo.Image = ((System.Drawing.Image)(resources.GetObject("tsRedo.Image")));
+            this.tsRedo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsRedo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsRedo.Name = "tsRedo";
+            this.tsRedo.Size = new System.Drawing.Size(52, 53);
+            this.tsRedo.Text = " &Redo";
+            this.tsRedo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsRedo.ToolTipText = "Redo the last change (Alt+R)";
+            this.tsRedo.Click += new System.EventHandler(this.tsRedo_Click);
+            // 
+            // tsPreview
+            // 
+            this.tsPreview.AccessibleName = "tsEdit";
+            this.tsPreview.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.tsPreview.Image = ((System.Drawing.Image)(resources.GetObject("tsPreview.Image")));
+            this.tsPreview.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsPreview.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsPreview.Name = "tsPreview";
+            this.tsPreview.Size = new System.Drawing.Size(66, 53);
+            this.tsPreview.Text = "Pre&view";
+            this.tsPreview.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsPreview.ToolTipText = "Preview the layout produced by the selected stylesheet (Alt+V)";
+            this.tsPreview.Click += new System.EventHandler(this.tsPreview_Click);
+            // 
+            // tsDefault
+            // 
+            this.tsDefault.AccessibleName = "tsHelp";
+            this.tsDefault.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.tsDefault.Image = ((System.Drawing.Image)(resources.GetObject("tsDefault.Image")));
+            this.tsDefault.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsDefault.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsDefault.Name = "tsDefault";
+            this.tsDefault.Size = new System.Drawing.Size(68, 53);
+            this.tsDefault.Text = "De&faults";
+            this.tsDefault.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsDefault.ToolTipText = "Select the Default Settings for the Print Via dialog (Alt+F)";
+            this.tsDefault.Click += new System.EventHandler(this.tsDefault_Click);
+            // 
+            // tsSend
+            // 
+            this.tsSend.AccessibleName = "tsExport";
+            this.tsSend.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.tsSend.Image = ((System.Drawing.Image)(resources.GetObject("tsSend.Image")));
+            this.tsSend.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsSend.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsSend.Name = "tsSend";
+            this.tsSend.Size = new System.Drawing.Size(47, 53);
+            this.tsSend.Text = "S&end";
+            this.tsSend.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsSend.ToolTipText = "Send the stylesheets and settings to someone else (Alt+E)";
+            this.tsSend.Click += new System.EventHandler(this.tsSend_Click);
+            // 
+            // toolStripSplitButton1
+            // 
+            this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contentsToolStripMenuItem,
+            this.aboutToolStripMenuItem});
+            this.toolStripSplitButton1.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
+            this.toolStripSplitButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
+            this.toolStripSplitButton1.Size = new System.Drawing.Size(55, 53);
+            this.toolStripSplitButton1.Text = "&Help";
+            this.toolStripSplitButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripSplitButton1.ButtonClick += new System.EventHandler(this.toolStripSplitButton1_ButtonClick);
+            // 
+            // contentsToolStripMenuItem
+            // 
+            this.contentsToolStripMenuItem.Name = "contentsToolStripMenuItem";
+            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.contentsToolStripMenuItem.Text = "&Contents";
+            this.contentsToolStripMenuItem.Click += new System.EventHandler(this.contentsToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Text = "&About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // tabControl1
             // 
@@ -450,7 +595,7 @@
             this.tabDisplay.Margin = new System.Windows.Forms.Padding(4);
             this.tabDisplay.Name = "tabDisplay";
             this.tabDisplay.Padding = new System.Windows.Forms.Padding(4);
-            this.tabDisplay.Size = new System.Drawing.Size(381, 507);
+            this.tabDisplay.Size = new System.Drawing.Size(382, 507);
             this.tabDisplay.TabIndex = 1;
             this.tabDisplay.Text = "Properties";
             this.tabDisplay.UseVisualStyleBackColor = true;
@@ -887,7 +1032,7 @@
             this.tabMobile.Margin = new System.Windows.Forms.Padding(4);
             this.tabMobile.Name = "tabMobile";
             this.tabMobile.Padding = new System.Windows.Forms.Padding(4);
-            this.tabMobile.Size = new System.Drawing.Size(381, 507);
+            this.tabMobile.Size = new System.Drawing.Size(382, 507);
             this.tabMobile.TabIndex = 2;
             this.tabMobile.Text = "Properties";
             this.tabMobile.UseVisualStyleBackColor = true;
@@ -981,6 +1126,28 @@
             this.label8.Text = "Files Produced";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // pictureBox4
+            // 
+            this.pictureBox4.BackgroundImage = global::SIL.PublishingSolution.Properties.Resources.cell;
+            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox4.Location = new System.Drawing.Point(9, 9);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(43, 43);
+            this.pictureBox4.TabIndex = 67;
+            this.pictureBox4.TabStop = false;
+            // 
+            // mobileIcon
+            // 
+            this.mobileIcon.Image = ((System.Drawing.Image)(resources.GetObject("mobileIcon.Image")));
+            this.mobileIcon.Location = new System.Drawing.Point(149, 166);
+            this.mobileIcon.Margin = new System.Windows.Forms.Padding(4);
+            this.mobileIcon.Name = "mobileIcon";
+            this.mobileIcon.Size = new System.Drawing.Size(27, 25);
+            this.mobileIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.mobileIcon.TabIndex = 65;
+            this.mobileIcon.TabStop = false;
+            // 
             // tabOthers
             // 
             this.tabOthers.AutoScroll = true;
@@ -1016,10 +1183,32 @@
             this.tabOthers.Location = new System.Drawing.Point(4, 25);
             this.tabOthers.Margin = new System.Windows.Forms.Padding(4);
             this.tabOthers.Name = "tabOthers";
-            this.tabOthers.Size = new System.Drawing.Size(381, 507);
+            this.tabOthers.Size = new System.Drawing.Size(382, 507);
             this.tabOthers.TabIndex = 3;
             this.tabOthers.Text = "Properties";
             this.tabOthers.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.BackgroundImage")));
+            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox3.Location = new System.Drawing.Point(9, 330);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(43, 36);
+            this.pictureBox3.TabIndex = 38;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackgroundImage = global::SIL.PublishingSolution.Properties.Resources.DocumentTools;
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox2.Location = new System.Drawing.Point(9, 96);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(43, 44);
+            this.pictureBox2.TabIndex = 37;
+            this.pictureBox2.TabStop = false;
             // 
             // ddlNonSILFont
             // 
@@ -1298,6 +1487,17 @@
             this.lblPct.TabIndex = 4;
             this.lblPct.Text = "%";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = global::SIL.PublishingSolution.Properties.Resources.epub_logo_color;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Location = new System.Drawing.Point(9, 9);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(43, 48);
+            this.pictureBox1.TabIndex = 32;
+            this.pictureBox1.TabStop = false;
+            // 
             // tabPreview
             // 
             this.tabPreview.AutoScroll = true;
@@ -1307,7 +1507,7 @@
             this.tabPreview.Location = new System.Drawing.Point(4, 25);
             this.tabPreview.Margin = new System.Windows.Forms.Padding(4);
             this.tabPreview.Name = "tabPreview";
-            this.tabPreview.Size = new System.Drawing.Size(381, 507);
+            this.tabPreview.Size = new System.Drawing.Size(382, 507);
             this.tabPreview.TabIndex = 4;
             this.tabPreview.Text = "Preview";
             this.tabPreview.UseVisualStyleBackColor = true;
@@ -1336,6 +1536,15 @@
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
+            // picPreview
+            // 
+            this.picPreview.Location = new System.Drawing.Point(4, 30);
+            this.picPreview.Margin = new System.Windows.Forms.Padding(4);
+            this.picPreview.Name = "picPreview";
+            this.picPreview.Size = new System.Drawing.Size(347, 433);
+            this.picPreview.TabIndex = 0;
+            this.picPreview.TabStop = false;
+            // 
             // tabPicture
             // 
             this.tabPicture.AutoScroll = true;
@@ -1346,7 +1555,7 @@
             this.tabPicture.Location = new System.Drawing.Point(4, 25);
             this.tabPicture.Margin = new System.Windows.Forms.Padding(4);
             this.tabPicture.Name = "tabPicture";
-            this.tabPicture.Size = new System.Drawing.Size(381, 507);
+            this.tabPicture.Size = new System.Drawing.Size(382, 507);
             this.tabPicture.TabIndex = 5;
             this.tabPicture.Text = "Pictures";
             this.tabPicture.UseVisualStyleBackColor = true;
@@ -1615,63 +1824,6 @@
             this.panel2.Size = new System.Drawing.Size(113, 346);
             this.panel2.TabIndex = 20;
             // 
-            // TLPanel2
-            // 
-            this.TLPanel2.BackColor = System.Drawing.SystemColors.Control;
-            this.TLPanel2.ColumnCount = 1;
-            this.TLPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TLPanel2.Controls.Add(this.stylesGrid, 0, 0);
-            this.TLPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TLPanel2.Location = new System.Drawing.Point(129, 34);
-            this.TLPanel2.Margin = new System.Windows.Forms.Padding(4);
-            this.TLPanel2.Name = "TLPanel2";
-            this.TLPanel2.RowCount = 1;
-            this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 597F));
-            this.TLPanel2.Size = new System.Drawing.Size(724, 597);
-            this.TLPanel2.TabIndex = 1;
-            // 
-            // TLPanel3
-            // 
-            this.TLPanel3.ColumnCount = 1;
-            this.TLPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TLPanel3.Controls.Add(this.panel3, 0, 1);
-            this.TLPanel3.Controls.Add(this.txtCss, 0, 0);
-            this.TLPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TLPanel3.Location = new System.Drawing.Point(862, 34);
-            this.TLPanel3.Margin = new System.Windows.Forms.Padding(4);
-            this.TLPanel3.Name = "TLPanel3";
-            this.TLPanel3.RowCount = 2;
-            this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 215F));
-            this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.TLPanel3.Size = new System.Drawing.Size(405, 597);
-            this.TLPanel3.TabIndex = 2;
-            // 
-            // panel3
-            // 
-            this.panel3.AutoScroll = true;
-            this.panel3.Controls.Add(this.tabControl1);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(4, 54);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(397, 539);
-            this.panel3.TabIndex = 20;
-            // 
-            // lblType
-            // 
-            this.lblType.BackColor = System.Drawing.Color.RoyalBlue;
-            this.lblType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblType.ForeColor = System.Drawing.Color.White;
-            this.lblType.Location = new System.Drawing.Point(1, 1);
-            this.lblType.Margin = new System.Windows.Forms.Padding(0);
-            this.lblType.Name = "lblType";
-            this.lblType.Size = new System.Drawing.Size(121, 28);
-            this.lblType.TabIndex = 19;
-            this.lblType.Text = "Dictionary";
-            this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // btnOthers
             // 
             this.btnOthers.Dock = System.Windows.Forms.DockStyle.Top;
@@ -1744,213 +1896,62 @@
             this.btnPaper.UseVisualStyleBackColor = true;
             this.btnPaper.Click += new System.EventHandler(this.btnPaper_Click);
             // 
-            // pictureBox4
+            // TLPanel2
             // 
-            this.pictureBox4.BackgroundImage = global::SIL.PublishingSolution.Properties.Resources.cell;
-            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox4.Location = new System.Drawing.Point(9, 9);
-            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(43, 43);
-            this.pictureBox4.TabIndex = 67;
-            this.pictureBox4.TabStop = false;
+            this.TLPanel2.BackColor = System.Drawing.SystemColors.Control;
+            this.TLPanel2.ColumnCount = 1;
+            this.TLPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TLPanel2.Controls.Add(this.stylesGrid, 0, 0);
+            this.TLPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TLPanel2.Location = new System.Drawing.Point(129, 34);
+            this.TLPanel2.Margin = new System.Windows.Forms.Padding(4);
+            this.TLPanel2.Name = "TLPanel2";
+            this.TLPanel2.RowCount = 1;
+            this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 597F));
+            this.TLPanel2.Size = new System.Drawing.Size(724, 597);
+            this.TLPanel2.TabIndex = 1;
             // 
-            // mobileIcon
+            // TLPanel3
             // 
-            this.mobileIcon.Image = ((System.Drawing.Image)(resources.GetObject("mobileIcon.Image")));
-            this.mobileIcon.Location = new System.Drawing.Point(149, 166);
-            this.mobileIcon.Margin = new System.Windows.Forms.Padding(4);
-            this.mobileIcon.Name = "mobileIcon";
-            this.mobileIcon.Size = new System.Drawing.Size(27, 25);
-            this.mobileIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.mobileIcon.TabIndex = 65;
-            this.mobileIcon.TabStop = false;
+            this.TLPanel3.ColumnCount = 1;
+            this.TLPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TLPanel3.Controls.Add(this.panel3, 0, 1);
+            this.TLPanel3.Controls.Add(this.txtCss, 0, 0);
+            this.TLPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TLPanel3.Location = new System.Drawing.Point(862, 34);
+            this.TLPanel3.Margin = new System.Windows.Forms.Padding(4);
+            this.TLPanel3.Name = "TLPanel3";
+            this.TLPanel3.RowCount = 2;
+            this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 215F));
+            this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.TLPanel3.Size = new System.Drawing.Size(405, 597);
+            this.TLPanel3.TabIndex = 2;
             // 
-            // pictureBox3
+            // panel3
             // 
-            this.pictureBox3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.BackgroundImage")));
-            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox3.Location = new System.Drawing.Point(9, 330);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(43, 36);
-            this.pictureBox3.TabIndex = 38;
-            this.pictureBox3.TabStop = false;
+            this.panel3.AutoScroll = true;
+            this.panel3.Controls.Add(this.tabControl1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(4, 54);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(397, 539);
+            this.panel3.TabIndex = 20;
             // 
-            // pictureBox2
+            // lblType
             // 
-            this.pictureBox2.BackgroundImage = global::SIL.PublishingSolution.Properties.Resources.DocumentTools;
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox2.Location = new System.Drawing.Point(9, 96);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(43, 44);
-            this.pictureBox2.TabIndex = 37;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = global::SIL.PublishingSolution.Properties.Resources.epub_logo_color;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(9, 9);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(43, 48);
-            this.pictureBox1.TabIndex = 32;
-            this.pictureBox1.TabStop = false;
-            // 
-            // picPreview
-            // 
-            this.picPreview.Location = new System.Drawing.Point(4, 30);
-            this.picPreview.Margin = new System.Windows.Forms.Padding(4);
-            this.picPreview.Name = "picPreview";
-            this.picPreview.Size = new System.Drawing.Size(347, 433);
-            this.picPreview.TabIndex = 0;
-            this.picPreview.TabStop = false;
-            // 
-            // tsNew
-            // 
-            this.tsNew.AccessibleName = "tsNew";
-            this.tsNew.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.tsNew.Image = ((System.Drawing.Image)(resources.GetObject("tsNew.Image")));
-            this.tsNew.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.tsNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsNew.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsNew.Name = "tsNew";
-            this.tsNew.Size = new System.Drawing.Size(43, 53);
-            this.tsNew.Text = "&New";
-            this.tsNew.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.tsNew.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
-            this.tsNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsNew.ToolTipText = "Add a brand new stylesheet (Alt+N) ";
-            this.tsNew.Click += new System.EventHandler(this.tsNew_Click);
-            // 
-            // tsSaveAs
-            // 
-            this.tsSaveAs.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.tsSaveAs.Image = ((System.Drawing.Image)(resources.GetObject("tsSaveAs.Image")));
-            this.tsSaveAs.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsSaveAs.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsSaveAs.Name = "tsSaveAs";
-            this.tsSaveAs.Size = new System.Drawing.Size(66, 53);
-            this.tsSaveAs.Text = "Save &As";
-            this.tsSaveAs.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsSaveAs.ToolTipText = "Copy the selected stylesheet into a new stylesheet (Alt+A)";
-            this.tsSaveAs.Click += new System.EventHandler(this.tsSaveAs_Click);
-            // 
-            // tsDelete
-            // 
-            this.tsDelete.AccessibleName = "tsClose";
-            this.tsDelete.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.tsDelete.Image = ((System.Drawing.Image)(resources.GetObject("tsDelete.Image")));
-            this.tsDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsDelete.Name = "tsDelete";
-            this.tsDelete.Size = new System.Drawing.Size(55, 53);
-            this.tsDelete.Text = "De&lete";
-            this.tsDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsDelete.ToolTipText = "Delete the selected stylesheet (Alt+L)";
-            this.tsDelete.Click += new System.EventHandler(this.tsDelete_Click);
-            // 
-            // tsUndo
-            // 
-            this.tsUndo.AccessibleName = "tsPreview";
-            this.tsUndo.Enabled = false;
-            this.tsUndo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.tsUndo.Image = ((System.Drawing.Image)(resources.GetObject("tsUndo.Image")));
-            this.tsUndo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsUndo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsUndo.Name = "tsUndo";
-            this.tsUndo.Size = new System.Drawing.Size(53, 53);
-            this.tsUndo.Text = " &Undo";
-            this.tsUndo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsUndo.ToolTipText = "Undo the last change (Alt+U)";
-            this.tsUndo.Click += new System.EventHandler(this.tsUndo_Click);
-            // 
-            // tsRedo
-            // 
-            this.tsRedo.AccessibleName = "tsPreview";
-            this.tsRedo.Enabled = false;
-            this.tsRedo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.tsRedo.Image = ((System.Drawing.Image)(resources.GetObject("tsRedo.Image")));
-            this.tsRedo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsRedo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsRedo.Name = "tsRedo";
-            this.tsRedo.Size = new System.Drawing.Size(52, 53);
-            this.tsRedo.Text = " &Redo";
-            this.tsRedo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsRedo.ToolTipText = "Redo the last change (Alt+R)";
-            this.tsRedo.Click += new System.EventHandler(this.tsRedo_Click);
-            // 
-            // tsPreview
-            // 
-            this.tsPreview.AccessibleName = "tsEdit";
-            this.tsPreview.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.tsPreview.Image = ((System.Drawing.Image)(resources.GetObject("tsPreview.Image")));
-            this.tsPreview.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsPreview.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsPreview.Name = "tsPreview";
-            this.tsPreview.Size = new System.Drawing.Size(66, 53);
-            this.tsPreview.Text = "Pre&view";
-            this.tsPreview.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsPreview.ToolTipText = "Preview the layout produced by the selected stylesheet (Alt+V)";
-            this.tsPreview.Click += new System.EventHandler(this.tsPreview_Click);
-            // 
-            // tsDefault
-            // 
-            this.tsDefault.AccessibleName = "tsHelp";
-            this.tsDefault.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.tsDefault.Image = ((System.Drawing.Image)(resources.GetObject("tsDefault.Image")));
-            this.tsDefault.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsDefault.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsDefault.Name = "tsDefault";
-            this.tsDefault.Size = new System.Drawing.Size(68, 53);
-            this.tsDefault.Text = "De&faults";
-            this.tsDefault.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsDefault.ToolTipText = "Select the Default Settings for the Print Via dialog (Alt+F)";
-            this.tsDefault.Click += new System.EventHandler(this.tsDefault_Click);
-            // 
-            // tsSend
-            // 
-            this.tsSend.AccessibleName = "tsExport";
-            this.tsSend.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.tsSend.Image = ((System.Drawing.Image)(resources.GetObject("tsSend.Image")));
-            this.tsSend.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsSend.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsSend.Name = "tsSend";
-            this.tsSend.Size = new System.Drawing.Size(47, 53);
-            this.tsSend.Text = "S&end";
-            this.tsSend.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsSend.ToolTipText = "Send the stylesheets and settings to someone else (Alt+E)";
-            this.tsSend.Click += new System.EventHandler(this.tsSend_Click);
-            // 
-            // toolStripSplitButton1
-            // 
-            this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.contentsToolStripMenuItem,
-            this.aboutToolStripMenuItem});
-            this.toolStripSplitButton1.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
-            this.toolStripSplitButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
-            this.toolStripSplitButton1.Size = new System.Drawing.Size(55, 53);
-            this.toolStripSplitButton1.Text = "&Help";
-            this.toolStripSplitButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // contentsToolStripMenuItem
-            // 
-            this.contentsToolStripMenuItem.Name = "contentsToolStripMenuItem";
-            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.contentsToolStripMenuItem.Text = "&Contents";
-            this.contentsToolStripMenuItem.Click += new System.EventHandler(this.contentsToolStripMenuItem_Click);
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.aboutToolStripMenuItem.Text = "&About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.lblType.BackColor = System.Drawing.Color.RoyalBlue;
+            this.lblType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblType.ForeColor = System.Drawing.Color.White;
+            this.lblType.Location = new System.Drawing.Point(1, 1);
+            this.lblType.Margin = new System.Windows.Forms.Padding(0);
+            this.lblType.Name = "lblType";
+            this.lblType.Size = new System.Drawing.Size(121, 28);
+            this.lblType.TabIndex = 19;
+            this.lblType.Text = "Dictionary";
+            this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // ConfigurationTool
             // 
@@ -1966,7 +1967,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pathway Configuration Tool";
             this.Load += new System.EventHandler(this.ConfigurationTool_Load);
-            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.ConfigurationTool_HelpButtonClicked);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ConfigurationTool_KeyUp);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConfigurationTool_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.stylesGrid)).EndInit();
@@ -1978,9 +1978,15 @@
             this.tabDisplay.ResumeLayout(false);
             this.tabDisplay.PerformLayout();
             this.tabMobile.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mobileIcon)).EndInit();
             this.tabOthers.ResumeLayout(false);
             this.tabOthers.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPreview.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picPreview)).EndInit();
             this.tabPicture.ResumeLayout(false);
             this.tabPicture.PerformLayout();
             this.GrpPicture.ResumeLayout(false);
@@ -1994,12 +2000,6 @@
             this.TLPanel3.ResumeLayout(false);
             this.TLPanel3.PerformLayout();
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mobileIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPreview)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
