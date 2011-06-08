@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("ConfigurationTool")]
 [assembly: AssemblyDescription("Create stylesheets and set default values and meta data for Pathway")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("SIL International")]
+[assembly: AssemblyCompany("SIL International in Collaboration with EC Group Datasoft Private Limited")]
 [assembly: AssemblyProduct("ConfigurationTool")]
-[assembly: AssemblyCopyright("Copyright © SIL 2010")]
+[assembly: AssemblyCopyright("Copyright © SIL 2008-2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
