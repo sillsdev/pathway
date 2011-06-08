@@ -7,6 +7,7 @@
 			<ComponentRef Id="ReadMeShortcutApp"/>
 			<ComponentRef Id="TutorialShortcutApp"/>
 			<ComponentRef Id="LicenseShortcutApp"/>
+			<ComponentRef Id="HelpShortcut"/>
 			<ComponentRef Id="RegistryEntries"/>
 			%(ConfigurationToolFeatures)s
 		</Feature>

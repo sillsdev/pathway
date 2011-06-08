@@ -262,6 +262,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutPw.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutPw.Designer.cs">
+      <DependentUpon>AboutPw.cs</DependentUpon>
+    </Compile>
     <Compile Include="Categories.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -434,6 +440,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AboutPw.resx">
+      <DependentUpon>AboutPw.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Categories.resx">
       <DependentUpon>Categories.cs</DependentUpon>
       <SubType>Designer</SubType>

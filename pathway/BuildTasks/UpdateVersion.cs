@@ -42,14 +42,24 @@ namespace BuildTasks
         #endregion Version
 
         #region Template
-        private string _Template;
+        private string _template;
         [Required]
         public string Template
         {
-            get { return _Template; }
-            set { _Template = value; }
+            get { return _template; }
+            set { _template = value; }
         }
         #endregion Template
+
+        #region HelpFile
+        private string _helpFile;
+        [Required]
+        public string HelpFile
+        {
+            get { return _helpFile; }
+            set { _helpFile = value; }
+        }
+        #endregion HelpFile
         #endregion Properties
 
         public override bool Execute()
@@ -59,8 +69,9 @@ namespace BuildTasks
             var map = new Dictionary<string, string>();
             map["Product"] = _product;
             map["PwVer"] = _version;
-            sub.FileSubstitute(_Template, map);
-            FileData.MoveToWix(_Template.Replace("-tpl", ""));
+            map["HelpFile"] = _helpFile;
+            sub.FileSubstitute(_template, map);
+            FileData.MoveToWix(_template.Replace("-tpl", ""));
             return true;
         }
     }

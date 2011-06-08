@@ -7,6 +7,7 @@
 			<ComponentRef Id="ReadMeShortcutApp"/>
 			<ComponentRef Id="TutorialShortcutApp"/>
 			<ComponentRef Id="LicenseShortcutApp"/>
+			<ComponentRef Id="HelpShortcut"/>
 			%(ConfigurationToolFeatures)s
 		</Feature>
 		<Feature Id="PwPlugIn" Title="Fieldworks Pathway Utility" Description="Adds the Export Through Pathway dialog to the Export menu in Language Explorer and Translation Editor" Display="expand" Level="3" AllowAdvertise="no">
