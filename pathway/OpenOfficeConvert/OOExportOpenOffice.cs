@@ -699,7 +699,7 @@ namespace SIL.PublishingSolution
 
             // BEGIN Generate Styles.Xml File
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
-            OOStyles inStyles = new OOStyles();
+            LOStyles inStyles = new LOStyles();
             idAllClass = inStyles.CreateStyles(projInfo, cssClass, "styles.xml");
 
             //To set Constent variables for User Desire
@@ -709,11 +709,11 @@ namespace SIL.PublishingSolution
             IncludeTextinMacro(strMacroPath, RefFormat, macroFileName, projInfo.IsExtraProcessing);
 
             // BEGIN Generate Meta.Xml File
-            var metaXML = new OOMetaXML(projInfo.ProjectInputType);
+            var metaXML = new LOMetaXML(projInfo.ProjectInputType);
             metaXML.CreateMeta(projInfo);
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             // BEGIN Generate Content.Xml File 
-            var cXML = new OOContent();
+            var cXML = new LOContent();
             preProcessor.GetTempFolderPath();
             preProcessor.GetfigureNode();
             preProcessor.ImagePreprocess();
@@ -755,7 +755,7 @@ namespace SIL.PublishingSolution
             {
                 if (ex.NativeErrorCode == 1155)
                 {
-                    var msg = new[] { "OpenOffice application from http://www.openoffice.org site.\nAfter downloading and installing Open Office, please consult release notes about how to change the macro security setting to enable the macro that creates the headers." };
+                    var msg = new[] { "LibreOffice application from http://www.libreoffice.org site.\nAfter downloading and installing Libre Office, please consult release notes about how to change the macro security setting to enable the macro that creates the headers." };
                     LocDB.Message("errInstallFile", "Please install " + msg, msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
                     return false;
                 }

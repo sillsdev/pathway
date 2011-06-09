@@ -624,7 +624,7 @@ namespace SIL.PublishingSolution
 
         private void ShowAvoidOdtCrash()
         {
-            if(cmbPrintVia.Text.ToLower().IndexOf("openoffice") >= 0 )
+            if(cmbPrintVia.Text.ToLower().IndexOf("libreoffice") >= 0 )
             {
                 chkAvoidOdtCrash.Visible = true;
             }

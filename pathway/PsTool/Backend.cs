@@ -74,7 +74,7 @@ namespace SIL.PublishingSolution
             {
                 if (process.Handle(inputDataType))
                 {
-                    if (process.ExportType.ToLower() == "openoffice")
+                    if (process.ExportType.ToLower() == "libreoffice")
                     {
                         //_exportType.Add("Word (Using OpenOffice)");  // TD-1818 
                         _exportType.Add("Pdf (Using OpenOffice) ");
@@ -93,7 +93,7 @@ namespace SIL.PublishingSolution
             {
                 foreach (IExportProcess process in _backend)
                 {
-                    if (process.ExportType.ToLower() == "openoffice")
+                    if (process.ExportType.ToLower() == "libreoffice")
                         type = OpenOfficeClassifier(publicationInformation, type); // Cross checking for OpenOffice
 
                     if (process.ExportType.ToLower() == type.ToLower())
@@ -131,7 +131,7 @@ namespace SIL.PublishingSolution
 
         private static string OpenOfficeClassifier(PublicationInformation publicationInformation, string type)
         {
-            if (type.ToLower().IndexOf("openoffice") >= 0)
+            if (type.ToLower().IndexOf("libreoffice") >= 0)
             {
                 publicationInformation.FinalOutput = "odt";
                 //if(type.ToLower().IndexOf("word") >= 0)   // TD-1818 
@@ -142,7 +142,7 @@ namespace SIL.PublishingSolution
                 {
                     publicationInformation.FinalOutput = "pdf";
                 }
-                type = "openoffice";
+                type = "libreoffice";
             }
             return type;
         }

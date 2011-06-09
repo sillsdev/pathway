@@ -34,7 +34,7 @@ using SIL.Tool.Localization;
 #endregion Using
 namespace SIL.PublishingSolution
 {
-    public class OOContent : XHTMLProcess
+    public class LOContent : XHTMLProcess
     {
         #region Private Variable
         public OldStyles _oldStyles = new OldStyles();
@@ -151,7 +151,7 @@ namespace SIL.PublishingSolution
 
         public string RefFormat = "Genesis 1";
 
-        public OOContent()
+        public LOContent()
         {
             _outputType = Common.OutputType.ODT;
         }
@@ -268,7 +268,7 @@ namespace SIL.PublishingSolution
                     }
                 }
 
-                // avoid white background color for pdf thru openoffice - TD-1573
+                // avoid white background color for pdf thru libreoffice - TD-1573
                 searchKey = "background-color";
                 if (IdAllClass[className].ContainsKey(searchKey) && IdAllClass[className][searchKey].ToLower() == "#ffffff")
                 {
@@ -721,7 +721,7 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("text:p");
             int noOfChar = _reader.Value.Length;
             string currentStyle = _className + noOfChar;
-            ModifyOOStyles oom = new ModifyOOStyles();
+            ModifyLOStyles oom = new ModifyLOStyles();
             oom.CreateDropCapStyle(_styleFilePath, _className, currentStyle, currentParentStyle, noOfChar);
             _writer.WriteAttributeString("text:style-name", currentStyle);
         }
@@ -1936,7 +1936,7 @@ namespace SIL.PublishingSolution
 
                 _frameCount++;
 
-                ModifyOOStyles modifyIDStyles = new ModifyOOStyles();
+                ModifyLOStyles modifyIDStyles = new ModifyLOStyles();
                 modifyIDStyles.CreateGraphicsStyle(_styleFilePath, strFrameCount, _util.ParentName, HoriAlignment, wrapSide);
 
                 _writer.WriteStartElement("draw:frame");
@@ -2151,7 +2151,7 @@ namespace SIL.PublishingSolution
 
         private void UpdateRelativeInStylesXML()
         {
-            ModifyOOStyles modifyIDStyles = new ModifyOOStyles();
+            ModifyLOStyles modifyIDStyles = new ModifyLOStyles();
             _textVariables = modifyIDStyles.ModifyStylesXML(_projectPath, _newProperty, _usedStyleName, _languageStyleName, "", _IsHeadword, ParentClass);
         }
 
@@ -2220,7 +2220,7 @@ namespace SIL.PublishingSolution
                     xmlDoc.Load(targetFile);
                     XmlElement root = xmlDoc.DocumentElement;
 
-                    ModifyOOStyles modifyIDStyles = new ModifyOOStyles();
+                    ModifyLOStyles modifyIDStyles = new ModifyLOStyles();
                     Dictionary<string, XmlNode> ColumnGap = modifyIDStyles.SetColumnGap(targetFile, _dictColumnGapEm);
                     foreach (KeyValuePair<string, XmlNode> secName in ColumnGap)
                     {

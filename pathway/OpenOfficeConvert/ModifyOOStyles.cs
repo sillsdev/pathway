@@ -11,7 +11,7 @@ using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
-    class ModifyOOStyles : OOStyles
+    class ModifyLOStyles : LOStyles
     {
         private XmlDocument _styleXMLdoc;
         private XmlNode _node;

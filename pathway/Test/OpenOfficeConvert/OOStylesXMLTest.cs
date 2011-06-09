@@ -32,10 +32,10 @@ namespace Test.OpenOfficeConvert
 {
     [TestFixture]
     [Category("BatchTest")]
-    public class OOStylesXMLTest
+    public class LOStylesXMLTest
     {
         #region Private Variables
-        OOStyles _stylesXML;
+        LOStyles _stylesXML;
         string _errorFile;
         private string _inputPath;
         private string _outputPath;
@@ -49,7 +49,7 @@ namespace Test.OpenOfficeConvert
         [TestFixtureSetUp]
         protected void SetUp()
         {
-            _stylesXML = new OOStyles();
+            _stylesXML = new LOStyles();
             _errorFile = Common.PathCombine(Path.GetTempPath(), "temp.odt");
             Common.Testing = true;
             returnValue = false;
@@ -67,7 +67,7 @@ namespace Test.OpenOfficeConvert
             //cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
 
             //Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
-            //OOStyles inStyles = new OOStyles();
+            //LOStyles inStyles = new LOStyles();
             //idAllClass = inStyles.CreateStyles(projInfo, cssClass);
         }
         #endregion Setup
@@ -126,9 +126,9 @@ namespace Test.OpenOfficeConvert
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
 
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
-            OOStyles ooStyles = new OOStyles();
+            LOStyles loStyles = new LOStyles();
 
-            idAllClass = ooStyles.CreateStyles(projInfo, cssClass);
+            idAllClass = loStyles.CreateStyles(projInfo, cssClass);
 
 
             //_stylesXML.CreateStyles(input, output, _errorFile, true);
@@ -451,7 +451,7 @@ namespace Test.OpenOfficeConvert
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
 
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
-            OOStyles ooStyles = new OOStyles();
+            LOStyles ooStyles = new LOStyles();
 
             idAllClass = ooStyles.CreateStyles(projInfo, cssClass, output);
             return cssClass;

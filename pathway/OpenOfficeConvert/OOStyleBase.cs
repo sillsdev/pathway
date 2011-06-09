@@ -9,7 +9,7 @@ using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
-    public class OOStyleBase
+    public class LOStyleBase
     {
         #region Private Variable
 
