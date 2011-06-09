@@ -15,6 +15,7 @@ using System;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace BuildTasks
 {
@@ -40,6 +41,16 @@ namespace BuildTasks
             set { _version = value; }
         }
         #endregion Version
+
+        #region BuildVersion
+        private string _buildVersion;
+        [Required]
+        public string BuildVersion
+        {
+            get { return _buildVersion; }
+            set { _buildVersion = value; }
+        }
+        #endregion BuildVersion
 
         #region Template
         private string _template;
@@ -67,8 +78,13 @@ namespace BuildTasks
             var instPath = Environment.CurrentDirectory;
             var sub = new Substitution { TargetPath = instPath };
             var map = new Dictionary<string, string>();
+            var exp = new Regex(@"([0-9]+\.[0-9]+\.[0-9]+)\.[0-9]+");
+            var match = exp.Match(_buildVersion);
+            if (match.Success)
+                map["PwVer"] = match.Groups[1].Value;
+            else                
+                map["PwVer"] = _version;
             map["Product"] = _product;
-            map["PwVer"] = _version;
             map["HelpFile"] = _helpFile;
             sub.FileSubstitute(_template, map);
             FileData.MoveToWix(_template.Replace("-tpl", ""));

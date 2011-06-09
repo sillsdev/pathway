@@ -157,14 +157,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="XeLaTexWriter, Version=0.7.3.1168, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\XeLaTexConvert\bin\Debug\XeLaTexWriter.dll</HintPath>
-    </Reference>
-    <Reference Include="XeTeXConvert, Version=0.7.3.1168, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\XeTeXConvert\bin\Debug\XeTeXConvert.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ANTLR.cs">
