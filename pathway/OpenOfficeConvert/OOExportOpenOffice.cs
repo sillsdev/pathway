@@ -726,6 +726,7 @@ namespace SIL.PublishingSolution
             projInfo.TempOutputFolder += Path.DirectorySeparatorChar;
             cXML.RefFormat = this.RefFormat;
             cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
+            InsertChapterNumber(projInfo.TempOutputFolder);
 
             if (projInfo.FileSequence != null && projInfo.FileSequence.Count > 1)
             {
@@ -773,6 +774,70 @@ namespace SIL.PublishingSolution
                 }
             }
             return returnValue;
+        }
+
+
+        /// <summary>
+        /// TD-2488
+        /// </summary>
+        /// <param name="tempFolder">Temp folder path</param>
+        private static void InsertChapterNumber(string tempFolder)
+        {
+
+            string filename = Path.Combine(tempFolder, "content.xml");
+            XmlDocument xdoc = new XmlDocument();
+            xdoc.Load(filename);
+
+            var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
+            nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+            nsmgr1.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+            nsmgr1.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
+
+            string xpath = "//text:p[@text:style-name=\"IntroListItem1_scrIntroSection_scrBook_scrBody\"]";
+            XmlNodeList list = xdoc.SelectNodes(xpath, nsmgr1);
+            if (list.Count > 0)
+            {
+                foreach (XmlNode VARIABLE in list)
+                {
+                    string xpath1 = "//text:span/text:variable-set[@text:name=\"Left_Guideword\"]";
+                    XmlNodeList list1 = xdoc.SelectNodes(xpath1, nsmgr1);
+                    if (list1.Count > 0)
+                    {
+                        VARIABLE.AppendChild(list1[0].CloneNode(true));
+                        break;
+                    }
+                }
+            }
+
+            //xpath = "//text:p[@text:style-name=\"ChapterNumber1\"]|//text:p[@text:style-name=\"ChapterNumber2\"]";
+            //list = xdoc.SelectNodes(xpath, nsmgr1);
+            //if (list.Count > 0)
+            //{
+            //    int j = 0;
+            //    foreach (XmlNode VARIABLE in list)
+            //    {
+            //        string xpath1 = "//text:span/text:variable-set[@text:name=\"Left_Guideword\"]";
+            //        XmlNodeList list1 = xdoc.SelectNodes(xpath1, nsmgr1);
+            //        if (list1.Count > 0)
+            //        {
+            //            for (int i = j; i < list1.Count; i++)
+            //            {
+            //                //VARIABLE.PreviousSibling.PreviousSibling.AppendChild(list1[j].CloneNode(true));
+            //                if (VARIABLE.PreviousSibling.PreviousSibling.PreviousSibling != null)
+            //                {
+            //                    VARIABLE.PreviousSibling.PreviousSibling.PreviousSibling.InsertBefore(list1[j].CloneNode(true), VARIABLE.PreviousSibling.PreviousSibling.PreviousSibling.LastChild);
+            //                }
+            //                else
+            //                {
+            //                    VARIABLE.PreviousSibling.PreviousSibling.InsertBefore(list1[j].CloneNode(true), VARIABLE.PreviousSibling.PreviousSibling.FirstChild);
+            //                }
+            //                j++;
+            //                break;
+            //            }
+            //        }
+            //    }
+            //}
+            xdoc.Save(filename);
         }
 
         private string GetReferenceFormat(Dictionary<string, Dictionary<string, string>> idAllClass, string refFormat)
