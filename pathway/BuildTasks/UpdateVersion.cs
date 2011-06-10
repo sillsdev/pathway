@@ -44,7 +44,6 @@ namespace BuildTasks
 
         #region BuildVersion
         private string _buildVersion;
-        [Required]
         public string BuildVersion
         {
             get { return _buildVersion; }
@@ -78,12 +77,14 @@ namespace BuildTasks
             var instPath = Environment.CurrentDirectory;
             var sub = new Substitution { TargetPath = instPath };
             var map = new Dictionary<string, string>();
-            var exp = new Regex(@"([0-9]+\.[0-9]+\.[0-9]+)\.[0-9]+");
-            var match = exp.Match(_buildVersion);
-            if (match.Success)
-                map["PwVer"] = match.Groups[1].Value;
-            else                
-                map["PwVer"] = _version;
+            map["PwVer"] = _version;
+            if (!string.IsNullOrEmpty(_buildVersion))
+            {
+                var exp = new Regex(@"([0-9]+\.[0-9]+\.[0-9]+)\.[0-9]+");
+                var match = exp.Match(_buildVersion);
+                if (match.Success)
+                    map["PwVer"] = match.Groups[1].Value;
+            }
             map["Product"] = _product;
             map["HelpFile"] = _helpFile;
             sub.FileSubstitute(_template, map);
