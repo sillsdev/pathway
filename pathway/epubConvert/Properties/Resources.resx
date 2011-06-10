@@ -156,4 +156,7 @@
   <data name="ExportComplete" xml:space="preserve">
     <value>Export Complete</value>
   </data>
+	<data name="Exportepub_Export_Exporting__epub_file">
+		<value xml:space="preserve">Exporting .epub file</value>
+	</data>
 </root>

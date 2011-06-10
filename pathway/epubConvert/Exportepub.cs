@@ -145,6 +145,7 @@ namespace SIL.PublishingSolution
                 // basic setup
                 DateTime dt1 = DateTime.Now;    // time this thing
                 var inProcess = new InProcess(0, 9); // create a progress bar with 7 steps (we'll add more below)
+                inProcess.Text = Resources.Exportepub_Export_Exporting__epub_file;
                 inProcess.Show();
                 inProcess.PerformStep();
                 var sb = new StringBuilder();
@@ -361,6 +362,8 @@ namespace SIL.PublishingSolution
                         }
                     }
                 }
+                // fix any relative hyperlinks that might have broken when we split the .xhtml up
+                FixRelativeHyperlinks(contentFolder, inProcess);
                 inProcess.PerformStep();
 
                 // copy over the image files
@@ -1360,6 +1363,129 @@ namespace SIL.PublishingSolution
                     playOrder++;
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns the list of "broken" relative hyperlink hrefs in the given file (i.e.,
+        /// relative hyperlinks that don't have a target within the file). This can happen when
+        /// the xhtml file gets split out into multiple pieces, and the target for an href ends up
+        /// in a different file.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        private List<string> FindBrokenRelativeHrefIds(string filePath)
+        {
+            if (!File.Exists(filePath)) return null;
+            const string searchText = "a href=\"#"; // denotes a relative href
+            var brokenRelativeHrefIds = new List<string>();
+            var reader = new StreamReader(filePath);
+            var content = reader.ReadToEnd();
+            reader.Close();
+            int index = 0;
+            int start = content.IndexOf(searchText, index);
+            int stop = 0;
+            while (start != -1)
+            {
+                // next instance of a relative hyperlink ref - read until the closing quote
+                stop = (content.IndexOf("\"", start) - start);
+                if (stop == -1) {break;}
+                var hrefID = content.Substring((start + searchText.Length), (stop + 1));
+                // We now have the href target id. Does the target exist in this file?
+                if (content.IndexOf("id=\"" + hrefID) == -1)
+                {
+                    // not found -- this link is broken
+                    brokenRelativeHrefIds.Add(hrefID);
+                }
+                start = content.IndexOf(searchText, (start + searchText.Length + stop));
+            }
+            return brokenRelativeHrefIds;
+        }
+
+        private bool IsStringInFile(string filePath, string searchText)
+        {
+            if (!File.Exists(filePath)) return false;
+            var reader = new FileStream(filePath, FileMode.Open);
+            int next;
+            while ((next = reader.ReadByte()) != -1)
+            {
+                byte b = (byte)next;
+                if (b == searchText[0]) // first char in search text?
+                {
+                    // yes - searchText.Length chars into a buffer and compare them
+                    int len = searchText.Length;
+                    long pos = reader.Position;
+                    byte[] buf = new byte[len];
+                    buf[0] = b;
+                    if (reader.Read(buf, 1, (len - 1)) == -1)
+                    {
+                        // reached the end of file - write out what we hit and jump out of the while loop
+                        //                        writer.Write(new string(buf));
+                        continue;
+                    }
+                    string data = Encoding.UTF8.GetString(buf);
+                    if (String.Compare(searchText, data, true) == 0)
+                    {
+                        // found an instance of our search text
+                        reader.Close();
+                        return true;
+                    }
+                    else
+                    {
+                        // not what we're looking for
+                        reader.Position = pos;
+                    }
+                }
+            }
+            reader.Close();
+            return false;
+        }
+
+        /// <summary>
+        /// When the preprocessed xhtml gets split out into chunks the epub reader can understand, the
+        /// targets for the relative links within the xhtml file might get moved into a separate file. This method
+        /// locates each relative link within the content folder and replaces it with an absolute one (i.e., one containing
+        /// the filename and id anchor).
+        /// </summary>
+        /// <param name="contentFolder">Folder containing the xhtml to be parsed</param>
+        /// <param name="inProcess">progress bar (this is a potentially long-running process)</param>
+        private void FixRelativeHyperlinks (string contentFolder, InProcess inProcess)
+        {
+            string[] files = Directory.GetFiles(contentFolder, "*.xhtml");
+            inProcess.AddToMaximum(files.Length);
+            var sbID = new StringBuilder();
+            var startTime = DateTime.Now;
+            bool bFound = false;
+            foreach (string sourceFile in files)
+            {
+                var relativeIDs = FindBrokenRelativeHrefIds(sourceFile);
+                Debug.WriteLine(sourceFile + ": " + relativeIDs.Count + " broken hrefs:");
+                foreach (var relativeID in relativeIDs)
+                {
+                    //    find [id="<n>] in the xhtml file list
+                    sbID.Length = 0; // reset the stringbuilder
+                    sbID.Append("id=\"");
+                    sbID.Append(relativeID);
+                    bFound = false;
+                    foreach (var targetFile in files)
+                    {
+                        if (IsStringInFile(targetFile, sbID.ToString()))
+                        {
+                            //    replace [a href="#<n>] with [a href="<filename>#<n>]
+                            Debug.WriteLine("- href id:" + relativeID + " found in " + targetFile);
+                            Common.StreamReplaceInFile(sourceFile, ("a href=\"#" + relativeID), ("a href=\"" + Path.GetFileName(targetFile) + "#" + relativeID));
+                            bFound = true;
+                        }
+                    }
+                    if (bFound == false)
+                    {
+                        Debug.WriteLine(">> Target ID for " + relativeID + " not found - this link is broken!");
+                    }
+                }
+                // show our progress
+                inProcess.PerformStep();
+            }
+            TimeSpan tsTotal = DateTime.Now - startTime;
+            Debug.WriteLine("Exportepub: time spent in FixRelativeHyperlinks: " + tsTotal);
         }
 
         /// <summary>

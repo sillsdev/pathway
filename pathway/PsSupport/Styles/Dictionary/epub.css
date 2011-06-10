@@ -205,7 +205,7 @@ font-weight : bold;
 .crossref-headword:before,
 .crossref-headword>.xitem + .xitem:before,
 .reversal-form:after {
-content : " ";
+content : "  ";
 }
 LexEntryType-publishStemSenseVariantType-ReverseAbbrPub {
 padding-right: 5px;
@@ -252,6 +252,9 @@ content : ", ";
 .complexformref-headword {
 font-size : 90%;
 }
+.variantref-form:after {
+content: " ";
+}
 .grammatical-info,
 .lexref-type {
 font-size : 90%;
@@ -266,6 +269,7 @@ content : ": ";
 .variantrefs-minor:before {
 content : "(";
 }
+.xsensenumber:after,
 .primaryrefs:after,
 .sense-variantrefs:after,
 .variantrefs:after,
