@@ -300,11 +300,15 @@ content : "} ";
 .complexform-entry-type>.xitem + .xitem:before {
 content: "," 
 }
+.pronunciation-minor:before { content: "[" }
+.pronunciation-minor:after { content: "]" }
+.pronunciation-minor>.xitem + .xitem:before { content: " " }
+.pronunciations-minor:after { content: " " }
+.pronunciations-minor>.xitem + .xitem:before { content: ", " }
 .Front_Matter {
 margin-left : 48pt;
 margin-right: 48pt;
 text-align: justified;
-
 }
 em {
     font-weight: bold;
