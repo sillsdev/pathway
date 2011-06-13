@@ -692,6 +692,12 @@ namespace SIL.PublishingSolution
                 }
             }
 
+            PreExportProcess preProcessor = new PreExportProcess(projInfo);
+            preProcessor.GetTempFolderPath();
+            preProcessor.GetfigureNode();
+            preProcessor.InsertKeepWithNextOnStyles(projInfo.DefaultCssFileWithPath);
+
+
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
             cssTree.OutputType = Common.OutputType.ODT; 
@@ -711,17 +717,20 @@ namespace SIL.PublishingSolution
             // BEGIN Generate Meta.Xml File
             var metaXML = new LOMetaXML(projInfo.ProjectInputType);
             metaXML.CreateMeta(projInfo);
-            PreExportProcess preProcessor = new PreExportProcess(projInfo);
+            //PreExportProcess preProcessor = new PreExportProcess(projInfo);
             // BEGIN Generate Content.Xml File 
             var cXML = new LOContent();
-            preProcessor.GetTempFolderPath();
-            preProcessor.GetfigureNode();
+            //preProcessor.GetTempFolderPath();
+            //preProcessor.GetfigureNode();
             preProcessor.ImagePreprocess();
             preProcessor.InsertFrontMatter(preProcessor.GetCreatedTempFolderPath, true);
             preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
             if (projInfo.SwapHeadword)
                 preProcessor.SwapHeadWordAndReversalForm();
             preProcessor.PreserveSpace();
+            //preProcessor.InsertKeepWithNextOnStyles();
+
+
             projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
             projInfo.TempOutputFolder += Path.DirectorySeparatorChar;
             cXML.RefFormat = this.RefFormat;

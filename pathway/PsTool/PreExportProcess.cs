@@ -1274,6 +1274,33 @@ namespace SIL.Tool
             tw.Close();
         }
 
+        public void InsertKeepWithNextOnStyles(string _cssFileNameWithPath)
+        {
+            TextWriter tw = new StreamWriter(_cssFileNameWithPath, true);
+            tw.WriteLine(".Section_Head {");
+            tw.WriteLine("page-break-after:avoid;");
+            tw.WriteLine("}");
+
+            tw.WriteLine(".Chapter_Number {");
+            tw.WriteLine("page-break-after:avoid;");
+            tw.WriteLine("}");
+
+            //tw.WriteLine(".Chapter_Number1 {");
+            //tw.WriteLine("page-break-after:avoid;");
+            //tw.WriteLine("}");
+
+            //tw.WriteLine(".Paragraph {");
+            //tw.WriteLine("page-break-after:avoid;");
+            //tw.WriteLine("}");
+
+            tw.WriteLine(".Parallel_Passage_Reference {");
+            tw.WriteLine("page-break-after:avoid;");
+            tw.WriteLine("}");
+
+
+            tw.Close();
+        }
+
         /// <summary>
         /// Appends the product / assembly version to the .css file for field troubleshooting
         /// (this allows us to see what versions of the software the user has installed).
