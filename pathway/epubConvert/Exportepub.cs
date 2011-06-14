@@ -239,15 +239,17 @@ namespace SIL.PublishingSolution
                 // so we can't use it.)
                 // TODO: remove this line when TE provides valid XHTML output.
                 //
-                // EDB 10/29/2010 FWR-2697 - remove when fixed in FLEx
-                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<LexSense_VariantFormEntryBackRefs", "<span class='LexSense_VariantFormEntryBackRefs'");
-                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<LexSense_RefsFrom_LexReference_Targets", "<span class='LexSense_RefsFrom_LexReference_Targets'");
-                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "</LexSense_VariantFormEntryBackRefs", "</span");
-                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "</LexSense_RefsFrom_LexReference_Targets", "</span");
 
+                // EDB 6/14/2011: workaround for FWR 3903 (remove when fixed)
                 Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<LexEntryLink_HeadWordRef", "<span class='LexEntryLink_HeadWordRef'");
                 Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "</LexEntryLink_HeadWordRef", "</span");
-                
+                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<AStr ws", "<span lang");
+                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "</AStr", "</span");
+                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<Run ws", "<span lang");
+                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "namedStyle", "class");
+                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "</Run", "</span");
+                // end EDB 6/14/2011 (FWR-3903)
+
                 // end EDB 10/29/2010
                 Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html", string.Format("<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'", langArray[0], Common.GetTextDirection(langArray[0])));
                 // end EDB 10/22/2010
