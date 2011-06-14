@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="9">
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="11">
   <settings>
     <property name="InputPath" value="" />
     <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Dictionary" />
@@ -165,6 +165,28 @@
       <option name="2 - Letter and Entry" file="Rules_Yes.css" />
       <option name="3 - Letter, Entry and Sense" file="Rules_Yes.css" />
     </feature>
+    <feature name="MissingFont">
+      <option name="Use Fallback Font" file="Rules_Yes.css" />
+      <option name="Prompt User" file="Rules_Yes.css" />
+      <option name="Cancel Export" file="Rules_Yes.css" />
+    </feature>
+    <feature name="NonSILFont">
+      <option name="Embed Font Anyway" file="Rules_Yes.css" />
+      <option name="Use Fallback Font" file="Rules_Yes.css" />
+      <option name="Prompt User" file="Rules_Yes.css" />
+      <option name="Cancel Export" file="Rules_Yes.css" />
+    </feature>
+    <feature name="DefaultAlignment">
+      <option name="Left" file="Rules_Yes.css" />
+      <option name="Right" file="Rules_Yes.css" />
+      <option name="Justify" file="Rules_Yes.css" />
+    </feature>
+    <feature name="Lic_Other">
+      <option name="Draft" file="Draft.xhtml"/>
+      <option name="Non-Commercial Share Alike" file="CC-by-nc-sa.xhtml"/>
+      <option name="Non-Commercial No Derivatives" file="CC-by-nc-nd.xhtml"/>
+      <option name="Intended for Sale" file="Selling.xhtml"/>
+    </feature>
     <feature name="Subject">
       <option name="Religion and Spirituality" file="Rules_Yes.css" />
       <option name="Reference" file="Rules_Yes.css" />
@@ -307,7 +329,7 @@
       </style>
     </paper>
     <mobile>
-      <style name="GoBible" file="GoBible.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg">
+      <style name="Go Bible" file="GoBible.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg">
         <description>Text only, no section heads or cross references</description>
       </style>
     </mobile>
@@ -319,9 +341,20 @@
     <others>
       <style name="EBook (epub)" file="epub.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg">
         <description>1 column flowed text, left aligned, default font for each writing system</description>
-        <styleProperty name="EmbedFonts" value="Yes" />
-        <styleProperty name="CoverImage" value="cover.png" />
-        <styleProperty name="TOCLevel" value="2 - Letter and Entry" />
+        <styleProperty name="CoverImage" value="cover.png"/>
+        <styleProperty name="TOCLevel" value="2 - Letter and Entry"/>
+        <styleProperty name="AddColophonPage" value="Yes" />
+        <styleProperty name="BaseFontSize" value="13" />
+        <styleProperty name="DefaultLineHeight" value="125" />
+        <styleProperty name="DefaultAlignment" value="Justify" />
+        <styleProperty name="ChapterNumbers" value="Drop Cap" />
+        <styleProperty name="MaxImageWidth" value="600" />
+        <styleProperty name="EmbedFonts" value="Yes"/>
+        <styleProperty name="IncludeFontVariants" value="Yes" />
+        <styleProperty name="DefaultFont" value="Charis SIL" />
+        <styleProperty name="MissingFont" value="Prompt User"/>
+        <styleProperty name="NonSILFont" value="Prompt User" />
+        <styleProperty name="Title" value=" "/>
         <styleProperty name="Creator" value=" " />
         <styleProperty name="Publisher" value=" " />
         <styleProperty name="Type" value=" " />
@@ -344,7 +377,7 @@
     <task name="Trial print" style="LikeBuangPNG" icon="Graphic/trialPrint.png" />
     <task name="Final print" style="TwoColumn" icon="Graphic/final.png" />
     <task name="Web publish" style="OneColumn" icon="Graphic/web.png" />
-    <task name="Cell publish" style="GoBible" icon="Graphic/cell.png" />
+    <task name="Cell publish" style="Go Bible" icon="Graphic/cell.png" />
   </tasks>
   <column-width>
     <column name="0" width="85" />
@@ -353,4 +386,80 @@
     <column name="3" width="52" />
     <column name="4" width="46" />
   </column-width>
+  <Organizations>
+    <Organization>SIL International</Organization>
+    <Organization>United Bible Societies</Organization>
+    <Organization>Pioneer Bible Translators</Organization>
+  </Organizations>
+  <Metadata>
+    <meta name="Title" outputTypes="all">
+      <defaultValue></defaultValue>
+    </meta>
+    <meta name="Creator" outputTypes="all">
+      <defaultValue></defaultValue>
+    </meta>
+    <meta name="Publisher" outputTypes="all">
+      <organizationDefault organizationName="SIL International" Locked="false">SIL International</organizationDefault>
+      <organizationDefault organizationName="United Bible Societies" Locked="false">United Bible Societies</organizationDefault>
+      <organizationDefault organizationName="Pioneer Bible Translators" Locked="false">Pioneer Bible Translators</organizationDefault>
+      <defaultValue></defaultValue>
+    </meta>
+    <meta name="Description" outputTypes="all">
+      <defaultValue></defaultValue>
+    </meta>
+    <meta name="Copyright Holder" outputTypes="all">
+      <organizationDefault organizationName="SIL International" Locked="false">� 2011 SIL International. All Rights Reserved.</organizationDefault>
+      <organizationDefault organizationName="United Bible Societies" Locked="false">� 2011 United Bible Societies. All Rights Reserved.</organizationDefault>
+      <organizationDefault organizationName="Pioneer Bible Translators" Locked="false">� 2011 Pioneer Bible Translators. All Rights Reserved.</organizationDefault>
+      <defaultValue>>� 2011. All Rights Reserved.</defaultValue>
+    </meta>
+    <meta name="Type" outputTypes="all">
+      <defaultValue></defaultValue>
+    </meta>
+    <meta name="Source" outputTypes="all">
+      <defaultValue></defaultValue>
+    </meta>
+    <meta name="Format" outputTypes="all">
+      <defaultValue></defaultValue>
+    </meta>
+    <meta name="Contributor" outputTypes="all">
+      <defaultValue></defaultValue>
+    </meta>
+    <meta name="Relation" outputTypes="all">
+      <defaultValue></defaultValue>
+    </meta>
+    <meta name="Coverage" outputTypes="all">
+      <defaultValue></defaultValue>
+    </meta>
+    <meta name="Subject" outputTypes="all">
+      <defaultValue>Foreign Literatures and Linguistics; Language Documentation; Dictionary; Reference</defaultValue>
+    </meta>
+    <meta name="Date" outputTypes="all">
+      <defaultValue></defaultValue>
+    </meta>
+    <meta name="Language" outputTypes="all">
+      <defaultValue></defaultValue>
+    </meta>
+    <meta name="Identifier" outputTypes="all">
+      <defaultValue></defaultValue>
+    </meta>
+    <meta name="Cover Page" outputTypes="epub">
+      <defaultValue>true</defaultValue>
+    </meta>
+    <meta name="Cover Page Filename" outputTypes="epub">
+      <defaultValue></defaultValue>
+    </meta>
+    <meta name="Cover Page Title" outputTypes="epub">
+      <defaultValue>true</defaultValue>
+    </meta>
+    <meta name="Title Page" outputTypes="all">
+      <defaultValue>false</defaultValue>
+    </meta>
+    <meta name="Copyright Page" outputTypes="all">
+      <defaultValue>false</defaultValue>
+    </meta>
+    <meta name="Copyright Page Filename" outputTypes="all">
+      <defaultValue></defaultValue>
+    </meta>
+  </Metadata>
 </stylePick>
