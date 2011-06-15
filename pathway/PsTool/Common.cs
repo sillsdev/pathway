@@ -1279,7 +1279,8 @@ namespace SIL.Tool
                     if (String.Compare(searchText, data, true) == 0)
                     {
                         // found an instance of our search text - replace it with our replaceText
-                        writer.Write(Encoding.UTF8.GetBytes(replaceText), 0, replaceText.Length);
+                        Byte[] bytes = Encoding.UTF8.GetBytes(replaceText);
+                        writer.Write(bytes, 0, bytes.Length);
                     }
                     else
                     {
