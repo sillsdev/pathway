@@ -71,6 +71,7 @@ namespace SIL.Tool
             _projInfo = projInfo;
             if (Param.Value.Count > 0)
                 _projInfo.ProjectInputType = Param.Value[Param.InputType];
+            FixInvalidXhtml();
         }
         public string ProcessedXhtml
         {
@@ -280,7 +281,7 @@ namespace SIL.Tool
                     new RectangleF(new PointF(((bmp.Size.Width / 2) - (size.Width/2)), 100f), size), strFormat);
             // save this puppy
             string strCoverImageFile = Path.Combine(outputFolder, "cover.png");
-            bmp.Save(strCoverImageFile);
+            bmp.Save(strCoverImageFile, System.Drawing.Imaging.ImageFormat.Png);
         }
 
         public string TitlePage()
@@ -671,6 +672,27 @@ namespace SIL.Tool
                 _xhtmlFileNameWithPath = OutputFile;
             }
             return _xhtmlFileNameWithPath;
+        }
+
+        /// <summary>
+        /// Replaces known bad xhtml emitted by the host applications (FW, PT) with valid xhtml.
+        /// This method is a workaround "holding bin" -- if you come across an error in the xhtml,
+        /// write up the defect and add a temporary workaround here, noting the defect number for tracking.
+        /// Once the defects are fixed, the workaround blocks can be removed from this method.
+        /// </summary>
+        public void FixInvalidXhtml()
+        {
+            if (!File.Exists(_xhtmlFileNameWithPath)) return;
+            // FWR-3903
+            Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "<LexEntryLink_HeadWordRef", "<span class='LexEntryLink_HeadWordRef'");
+            Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "</LexEntryLink_HeadWordRef", "</span");
+            Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "<AStr ws", "<span lang");
+            Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "</AStr", "</span");
+            Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "<Run ws", "<span lang");
+            Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "namedStyle", "class");
+            Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "</Run", "</span");
+            // FWR-3903
+            
         }
 
         public string ReplaceInvalidTagtoSpan(string pattern, string tagType)

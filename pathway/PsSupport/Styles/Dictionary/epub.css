@@ -145,54 +145,8 @@ margin-bottom : .5%;
 font-size : 90%;
 font-weight : bold;
 }
-.complexformrefs > .xitem + .xitem:before,
-.crossref > .xitem + .xitem:before,
-.definition > .xitem + .xitem:before,
-.encyclopedic-info > .xitem + .xitem:before,
-.examples > .xitem + .xitem:before,
-.headword > .xitem + .xitem:before,
-.headword-minor > .xitem + .xitem:before,
-.LexEntry-publishStemComponentTarget-MLHeadWordPub > .xitem + .xitem:before,
-.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub > .xitem + .xitem:before,
-.LexEntry-publishStemMinorPrimaryTarget-SummaryDefinitionPub:before,
-.LexSense-publishStemComponentTarget-GlossPub > .xitem + .xitem:before,
-.LexSense-publishStemComponentTarget-OwnerOutlinePub > .xitem + .xitem:before,
-.LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub > .xitem + .xitem:before,
-.sense-complexformrefs > .xitem + .xitem:before,
-.sense-crossref > .xitem + .xitem:before,
-.senses > .sense + .sense:before,
-.translation > .xitem + .xitem:before,
-.complexformrefs>.xitem + .xitem:before
-.crossref-headword>.xitem + .xitem:before {
-content : "  ";
-}
 LexEntryType-publishStemSenseVariantType-ReverseAbbrPub {
 padding-right: 5px;
-}
-.crossrefs > .xitem + .xitem:before,
-.relations > .xitem + .xitem:before,
-.variantrefs > .xitem + .xitem:before,
-.variantrefs-minor > .xitem + .xitem:before,
-.sense-variantrefs > .xitem + .xitem:before {
-content : "; ";
-}
-.entryref-component > .xitem + .xitem:before,
-.entryref-primary-minor > .xitem + .xitem:before,
-.entryref-type > .xitem + .xitem:before,
-.entryref-type-minor > .xitem + .xitem:before,
-.crossref-targets > .xitem + .xitem:before,
-.lexref-targets > .xitem + .xitem:before,
-.primaryrefs > .xitem + .xitem:before,
-.primaryrefs-minor > .xitem + .xitem:before,
-.semantic-domains > .xitem + .xitem:before,
-.sense-variantref-entry-type > .xitem + .xitem:before,
-.sense-variantref-form > .xitem + .xitem:before,
-.usage-types > .xitem + .xitem:before,
-.variantref-entry-type > .xitem + .xitem:before,
-.variantref-entry-type-minor > .xitem + .xitem:before,
-.variantref-form > .xitem + .xitem:before,
-.variantref-form-minor > .xitem + .xitem:before {
-content : ", ";
 }
 .etymology-form,
 .sense-complexform-form,
@@ -207,12 +161,6 @@ font-size : 90%;
 font-size : 90%;
 font-style : italic;
 }
-.complexform-components>.xitem + .xitem:before,
-.complexform-entry-type>.xitem + .xitem:before {
-content: "," 
-}
-.pronunciation-minor>.xitem + .xitem:before { content: " " }
-.pronunciations-minor>.xitem + .xitem:before { content: ", " }
 .Front_Matter {
 margin-left : 48pt;
 margin-right: 48pt;
@@ -372,5 +320,59 @@ content: "} ";
 .pronunciation-minor:before { content: "[" }
 .pronunciation-minor:after { content: "]" }
 .pronunciations-minor:after { content: " " }
+
+
+.crossrefs > .xitem + .xitem:before,
+.relations > .xitem + .xitem:before,
+.variantrefs > .xitem + .xitem:before,
+.variantrefs-minor > .xitem + .xitem:before,
+.sense-variantrefs > .xitem + .xitem:before {
+content : "; ";
+}
+.complexform-components>.xitem + .xitem:before,
+.complexform-entry-type>.xitem + .xitem:before {
+content: "," 
+}
+.complexformrefs > .xitem + .xitem:before,
+.crossref > .xitem + .xitem:before,
+.definition > .xitem + .xitem:before,
+.encyclopedic-info > .xitem + .xitem:before,
+.examples > .xitem + .xitem:before,
+.headword > .xitem + .xitem:before,
+.headword-minor > .xitem + .xitem:before,
+.LexEntry-publishStemComponentTarget-MLHeadWordPub > .xitem + .xitem:before,
+.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub > .xitem + .xitem:before,
+.LexEntry-publishStemMinorPrimaryTarget-SummaryDefinitionPub:before,
+.LexSense-publishStemComponentTarget-GlossPub > .xitem + .xitem:before,
+.LexSense-publishStemComponentTarget-OwnerOutlinePub > .xitem + .xitem:before,
+.LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub > .xitem + .xitem:before,
+.sense-complexformrefs > .xitem + .xitem:before,
+.sense-crossref > .xitem + .xitem:before,
+.senses > .sense + .sense:before,
+.translation > .xitem + .xitem:before,
+.complexformrefs>.xitem + .xitem:before
+.crossref-headword>.xitem + .xitem:before {
+content : "  ";
+}
+.pronunciation-minor>.xitem + .xitem:before { content: " " }
+.entryref-component > .xitem + .xitem:before,
+.entryref-primary-minor > .xitem + .xitem:before,
+.entryref-type > .xitem + .xitem:before,
+.entryref-type-minor > .xitem + .xitem:before,
+.crossref-targets > .xitem + .xitem:before,
+.lexref-targets > .xitem + .xitem:before,
+.primaryrefs > .xitem + .xitem:before,
+.primaryrefs-minor > .xitem + .xitem:before,
+.semantic-domains > .xitem + .xitem:before,
+.sense-variantref-entry-type > .xitem + .xitem:before,
+.sense-variantref-form > .xitem + .xitem:before,
+.usage-types > .xitem + .xitem:before,
+.variantref-entry-type > .xitem + .xitem:before,
+.variantref-entry-type-minor > .xitem + .xitem:before,
+.variantref-form > .xitem + .xitem:before,
+.variantref-form-minor > .xitem + .xitem:before {
+content : ", ";
+}
+.pronunciations-minor>.xitem + .xitem:before { content: ", " }
 
 */

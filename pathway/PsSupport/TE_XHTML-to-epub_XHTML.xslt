@@ -293,6 +293,23 @@
 				<xsl:if test="@class='crossrefs' or @class='relations' ">
 					<xsl:text>. </xsl:text>
 				</xsl:if>
+				<xsl:if test="following-sibling::xhtml:span[@class='xitem'] and @class='xitem' ">
+					<!-- These are for the most part separators between items -->
+					<xsl:choose>
+						<xsl:when test="parent::xhtml:span[@class='crossrefs'] or parent::xhtml:span[@class='relations'] or parent::xhtml:span[@class='variantrefs'] or parent::xhtml:span[@class='variantrefs-minor'] or parent::xhtml:span[@class='sense-variantrefs'] ">							
+							<xsl:text>; </xsl:text>
+						</xsl:when>
+						<xsl:when test="parent::xhtml:span[@class='complexform-components'] or parent::xhtml:span[@class='complexform-entry-type'] ">							
+							<xsl:text>,</xsl:text>
+						</xsl:when>
+						<xsl:when test="parent::xhtml:span[@class='complexformrefs'] or parent::xhtml:span[@class='pronunciation-minor'] or parent::xhtml:span[@class='crossref'] or parent::xhtml:span[@class='definition'] or parent::xhtml:span[@class='encyclopedic-info'] or parent::xhtml:span[@class='examples'] or parent::xhtml:span[@class='headword'] or parent::xhtml:span[@class='deadword-minor'] or parent::xhtml:span[@class='LexEntry-publishStemComponentTarget-MLHeadwordPub'] or parent::xhtml:span[@class='LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub'] or parent::xhtml:span[@class='LexEntry-publishStemMinorPrimaryTarget-SummaryDefinitionPub'] or parent::xhtml:span[@class='LexSense-publishStemComponentTarget-GlossPub'] or parent::xhtml:span[@class='LexSense-publishStemComponentTarget-OwnerOutlinePub'] or parent::xhtml:span[@class='LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub'] or parent::xhtml:span[@class='sense-complexformrefs'] or parent::xhtml:span[@class='sense-crossref'] or parent::xhtml:span[@class='senses'] or parent::xhtml:span[@class='translation'] or parent::xhtml:span[@class='complexformrefs'] or parent::xhtml:span[@class='crossref-headword'] ">							
+							<xsl:text>  </xsl:text>
+						</xsl:when>
+						<xsl:when test="parent::xhtml:span[@class='entryref-component'] or parent::xhtml:span[@class='entryref-primary-minor'] or parent::xhtml:span[@class='entryref-type'] or parent::xhtml:span[@class='entryref-type-minor'] or parent::xhtml:span[@class='crossref-targets'] or parent::xhtml:span[@class='lexref-targets'] or parent::xhtml:span[@class='primaryrefs'] or parent::xhtml:span[@class='primaryrefs-minor'] or parent::xhtml:span[@class='semantic-domains'] or parent::xhtml:span[@class='sense-variantref-entry-type'] or parent::xhtml:span[@class='sense-variantref-form'] or parent::xhtml:span[@class='usage-types'] or parent::xhtml:span[@class='variantref-entry-type'] or parent::xhtml:span[@class='variantref-entry-type-minor'] or parent::xhtml:span[@class='variantref-form'] or parent::xhtml:span[@class='variantref-form-minor'] or parent::xhtml:span[@class='pronunciations-minor'] ">							
+							<xsl:text>, </xsl:text>
+						</xsl:when>
+					</xsl:choose>
+				</xsl:if>
 				<xsl:if test="@class='lexref-type' ">
 					<xsl:text>: </xsl:text>
 				</xsl:if>
