@@ -533,7 +533,7 @@ namespace SIL.PublishingSolution
                         rectHeight = "36";
                     }
                 }
-
+               rectWidth = rectWidth.Replace("%","");
                 double x = double.Parse(rectWidth) / 2;
                 double y = double.Parse(rectHeight) / 2;
 
@@ -607,23 +607,45 @@ namespace SIL.PublishingSolution
                 _writer.WriteEndElement();
 
 
+                //_writer.WriteStartElement("AnchoredObjectSetting");
+                //// Anchored, InlinePosition, AboveLine
+                //_writer.WriteAttributeString("AnchoredPosition", "Anchored");
+                //_writer.WriteAttributeString("SpineRelative", "false");
+                //_writer.WriteAttributeString("LockPosition", "false");
+                //_writer.WriteAttributeString("PinPosition", "true");
+                //_writer.WriteAttributeString("AnchorPoint", AnchorPoint);
+                ////CenterAlign, RightAlign , LeftAlign
+                //_writer.WriteAttributeString("HorizontalAlignment", HoriAlignment);
+                //_writer.WriteAttributeString("HorizontalReferencePoint", HoriRefPoint);
+                //_writer.WriteAttributeString("VerticalAlignment", VertAlignment);
+                //_writer.WriteAttributeString("VerticalReferencePoint", VertRefPoint);
+                ////InLIne  //AboveLine
+                //_writer.WriteAttributeString("AnchorXoffset", "0");
+                //_writer.WriteAttributeString("AnchorYoffset", "25");
+                //_writer.WriteAttributeString("AnchorSpaceAbove", "4");
+                //_writer.WriteEndElement();
+
+
+                //Task TD-2346 By Samdoss - 2
                 _writer.WriteStartElement("AnchoredObjectSetting");
-                // Anchored, InlinePosition, AboveLine
                 _writer.WriteAttributeString("AnchoredPosition", "Anchored");
                 _writer.WriteAttributeString("SpineRelative", "false");
                 _writer.WriteAttributeString("LockPosition", "false");
-                _writer.WriteAttributeString("PinPosition", "true");
-                _writer.WriteAttributeString("AnchorPoint", AnchorPoint);
+                _writer.WriteAttributeString("PinPosition", "false");
+                _writer.WriteAttributeString("AnchorPoint", "TopCenterAnchor");
                 //CenterAlign, RightAlign , LeftAlign
-                _writer.WriteAttributeString("HorizontalAlignment", HoriAlignment);
-                _writer.WriteAttributeString("HorizontalReferencePoint", HoriRefPoint);
-                _writer.WriteAttributeString("VerticalAlignment", VertAlignment);
-                _writer.WriteAttributeString("VerticalReferencePoint", VertRefPoint);
+                _writer.WriteAttributeString("HorizontalAlignment", "CenterAlign");
+                _writer.WriteAttributeString("HorizontalReferencePoint", "ColumnEdge");
+                _writer.WriteAttributeString("VerticalAlignment", "CenterAlign");
+                _writer.WriteAttributeString("VerticalReferencePoint", "LineBaseline");
                 //InLIne  //AboveLine
                 _writer.WriteAttributeString("AnchorXoffset", "0");
-                _writer.WriteAttributeString("AnchorYoffset", "25");
+                _writer.WriteAttributeString("AnchorYoffset", "0");
                 _writer.WriteAttributeString("AnchorSpaceAbove", "4");
+
                 _writer.WriteEndElement();
+
+
                 _writer.WriteStartElement("TextWrapPreference");
                 _writer.WriteAttributeString("Inverse", "false");
                 _writer.WriteAttributeString("ApplyToMasterPageOnly", "false");

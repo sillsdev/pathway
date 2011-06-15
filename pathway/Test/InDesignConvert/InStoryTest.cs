@@ -1416,10 +1416,10 @@ namespace Test.InDesignConvert
             XmlAttributeCollection attrb = node.Attributes;
 
             string result = attrb["AnchorPoint"].Value;
-            Assert.AreEqual(result, "TopRightAnchor", "Float Property failed");
+            Assert.AreEqual(result, "TopCenterAnchor", "Float Property failed");
 
             result = attrb["HorizontalAlignment"].Value;
-            Assert.AreEqual(result, "RightAlign", "Float Property failed");
+            Assert.AreEqual(result, "CenterAlign", "Float Property failed");
         }
 
         [Test]
@@ -1629,19 +1629,19 @@ namespace Test.InDesignConvert
             node = nodesList[0];
             attrb = node.Attributes;
             string result = attrb["AnchorPoint"].Value;
-            Assert.AreEqual(result, "TopLeftAnchor", "Case1 ItemTransform Property failed");
+            Assert.AreEqual(result, "TopCenterAnchor", "Case1 ItemTransform Property failed");
 
             result = attrb["HorizontalAlignment"].Value;
-            Assert.AreEqual(result, "LeftAlign", "Case1 ItemTransform Property failed");
+            Assert.AreEqual(result, "CenterAlign", "Case1 ItemTransform Property failed");
 
             result = attrb["HorizontalReferencePoint"].Value;
             Assert.AreEqual(result, "ColumnEdge", "Case1 ItemTransform Property failed");
 
             result = attrb["VerticalAlignment"].Value;
-            Assert.AreEqual(result, "TopAlign", "Case1 ItemTransform Property failed");
+            Assert.AreEqual(result, "CenterAlign", "Case1 ItemTransform Property failed");
 
             result = attrb["VerticalReferencePoint"].Value;
-            Assert.AreEqual(result, "PageMargins", "Case1 ItemTransform Property failed");
+            Assert.AreEqual(result, "LineBaseline", "Case1 ItemTransform Property failed");
         }
 
         [Test]
@@ -1661,19 +1661,19 @@ namespace Test.InDesignConvert
             node = nodesList[0];
             attrb = node.Attributes;
             string result = attrb["AnchorPoint"].Value;
-            Assert.AreEqual(result, "BottomLeftAnchor", "Case1 ItemTransform Property failed");
+            Assert.AreEqual(result, "TopCenterAnchor", "Case1 ItemTransform Property failed");
 
             result = attrb["HorizontalAlignment"].Value;
-            Assert.AreEqual(result, "LeftAlign", "Case1 ItemTransform Property failed");
+            Assert.AreEqual(result, "CenterAlign", "Case1 ItemTransform Property failed");
 
             result = attrb["HorizontalReferencePoint"].Value;
             Assert.AreEqual(result, "ColumnEdge", "Case1 ItemTransform Property failed");
 
             result = attrb["VerticalAlignment"].Value;
-            Assert.AreEqual(result, "BottomAlign", "Case1 ItemTransform Property failed");
+            Assert.AreEqual(result, "CenterAlign", "Case1 ItemTransform Property failed");
 
             result = attrb["VerticalReferencePoint"].Value;
-            Assert.AreEqual(result, "PageMargins", "Case1 ItemTransform Property failed");
+            Assert.AreEqual(result, "LineBaseline", "Case1 ItemTransform Property failed");
         }
         [Test]
         public void DropCaps()

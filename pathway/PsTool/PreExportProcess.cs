@@ -69,7 +69,8 @@ namespace SIL.Tool
             _baseXhtmlFileNameWithPath = projInfo.DefaultXhtmlFileWithPath;
             _cssFileNameWithPath = projInfo.DefaultCssFileWithPath;
             _projInfo = projInfo;
-            _projInfo.ProjectInputType = Param.Value[Param.InputType];
+            if (Param.Value.Count > 0)
+                _projInfo.ProjectInputType = Param.Value[Param.InputType];
         }
         public string ProcessedXhtml
         {

@@ -993,20 +993,40 @@ namespace SIL.PublishingSolution
 
         public void CreateAnchoredObjectSetting()
         {
+            //_writer.WriteStartElement("AnchoredObjectSetting");
+            //_writer.WriteAttributeString("AnchoredPosition", "InlinePosition");
+            //_writer.WriteAttributeString("SpineRelative", "false");
+            //_writer.WriteAttributeString("LockPosition", "false");
+            //_writer.WriteAttributeString("PinPosition", "true");
+            //_writer.WriteAttributeString("AnchorPoint", "BottomRightAnchor");
+            //_writer.WriteAttributeString("HorizontalAlignment", "LeftAlign");
+            //_writer.WriteAttributeString("HorizontalReferencePoint", "TextFrame");
+            //_writer.WriteAttributeString("VerticalAlignment", "TopAlign");
+            //_writer.WriteAttributeString("VerticalReferencePoint", "LineBaseline");
+            //_writer.WriteAttributeString("AnchorXoffset", "0");
+            //_writer.WriteAttributeString("AnchorYoffset", "0");
+            //_writer.WriteAttributeString("AnchorSpaceAbove", "0");
+            //_writer.WriteEndElement();
+
+            //Task TD-2346 By Samdoss
             _writer.WriteStartElement("AnchoredObjectSetting");
-            _writer.WriteAttributeString("AnchoredPosition", "InlinePosition");
+            _writer.WriteAttributeString("AnchoredPosition", "Anchored");
             _writer.WriteAttributeString("SpineRelative", "false");
             _writer.WriteAttributeString("LockPosition", "false");
-            _writer.WriteAttributeString("PinPosition", "true");
-            _writer.WriteAttributeString("AnchorPoint", "BottomRightAnchor");
-            _writer.WriteAttributeString("HorizontalAlignment", "LeftAlign");
-            _writer.WriteAttributeString("HorizontalReferencePoint", "TextFrame");
-            _writer.WriteAttributeString("VerticalAlignment", "TopAlign");
+            _writer.WriteAttributeString("PinPosition", "false");
+            _writer.WriteAttributeString("AnchorPoint", "TopCenterAnchor");
+            //CenterAlign, RightAlign , LeftAlign
+            _writer.WriteAttributeString("HorizontalAlignment", "CenterAlign");
+            _writer.WriteAttributeString("HorizontalReferencePoint", "ColumnEdge");
+            _writer.WriteAttributeString("VerticalAlignment", "CenterAlign");
             _writer.WriteAttributeString("VerticalReferencePoint", "LineBaseline");
+            //InLIne  //AboveLine
             _writer.WriteAttributeString("AnchorXoffset", "0");
             _writer.WriteAttributeString("AnchorYoffset", "0");
-            _writer.WriteAttributeString("AnchorSpaceAbove", "0");
+            _writer.WriteAttributeString("AnchorSpaceAbove", "4");
+
             _writer.WriteEndElement();
+
         }
 
         public void CreateAnchoredObjectDefault()
@@ -1042,7 +1062,7 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("AutoLeading", "120");
             _writer.WriteAttributeString("DropCapLines", "0");
             _writer.WriteAttributeString("DropCapCharacters", "0");
-            _writer.WriteAttributeString("KeepLinesTogether", "false");
+            _writer.WriteAttributeString("KeepLinesTogether", "true"); //samdoss
             _writer.WriteAttributeString("KeepAllLinesTogether", "false");
             _writer.WriteAttributeString("KeepWithNext", "0");
             _writer.WriteAttributeString("KeepFirstLines", "2");
