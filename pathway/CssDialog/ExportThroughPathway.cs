@@ -553,7 +553,6 @@ namespace SIL.PublishingSolution
             {
                 Directory.CreateDirectory(OutputFolder);
                 Directory.Delete(OutputFolder);
-                btnOK.Enabled = false;
             }
             catch (Exception)
             {
@@ -686,11 +685,12 @@ namespace SIL.PublishingSolution
             // also persist the other DC elements
             Param.UpdateMetadataValue(Param.Type, dlg.Type);
             Param.UpdateMetadataValue(Param.Source, dlg.Source);
-            Param.UpdateMetadataValue(Param.Format, dlg.DocFormat);
+            Param.UpdateMetadataValue(Param.Format, GetFormatMimeType(dlg.Format));
             Param.UpdateMetadataValue(Param.Contributor, dlg.Contributor);
             Param.UpdateMetadataValue(Param.Relation, dlg.Relation);
             Param.UpdateMetadataValue(Param.Coverage, dlg.Coverage);
             Param.UpdateMetadataValue(Param.Subject, dlg.Subject);
+            dlg.Date = DateTime.Today.ToString("yyyy-MM-dd"); // Date gets today's date
             Param.UpdateMetadataValue(Param.Date, dlg.Date);
             Param.UpdateMetadataValue(Param.Language, dlg.Language);
             Param.UpdateMetadataValue(Param.Identifier, dlg.Identifier);
@@ -705,6 +705,17 @@ namespace SIL.PublishingSolution
             Param.UpdateMetadataValue(Param.CoverPageFilename, dlg.CoverPageImagePath);
             Param.UpdateMetadataValue(Param.CoverPageTitle, dlg.CoverPageTitle.ToString());
             Param.UpdateMetadataValue(Param.TitlePage, dlg.TitlePage.ToString());
+            if ((dlg.CoverPageTitle || dlg.TitlePage) && (dlg.Title.Trim().Length < 1))
+            {
+                // User wants a title page or a cover page with a title, but they haven't told us the title.
+                // Make them enter one now.
+                MessageBox.Show("Please enter a title for this publication.", dlg.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                dlg.IsExpanded = true;
+                dlg.ResizeDialog();
+                dlg.tabControl1.SelectedTab = dlg.tabPage1;
+                dlg.txtBookTitle.Focus();
+                return false;
+            }
             if (dlg.chkColophon.Enabled == false)
             {
                 // user can't create a copyright page - make sure this isn't checked
@@ -719,7 +730,8 @@ namespace SIL.PublishingSolution
                 success = (dlg.ExportReversal || dlg.ExportMain || dlg.ExportGrammar);
                 if (!success)
                 {
-                    MessageBox.Show("Please select at least one item to include in the export.");
+                    // Dictionary with nothing to export. Make them export something.
+                    MessageBox.Show("Please select at least one item to include in the export.", dlg.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     dlg.IsExpanded = true;
                     dlg.ResizeDialog();
                     dlg.tabControl1.SelectedTab = dlg.tabPage3;
@@ -758,6 +770,53 @@ namespace SIL.PublishingSolution
             Param.Write();
         }
         #endregion LoadProperty & SaveProperty
+
+        /// <summary>
+        /// Returns the IANA media type used in the dc:format element for the given export type.
+        /// If you create a new export type, look up the format's mime type and add it to the case statement below.
+        /// <see cref="http://www.iana.org/assignments/media-types/index.html"/>
+        /// </summary>
+        /// <param name="exportType">Export type string to look up</param>
+        /// <returns>corresponding IANA mime type, to be used in the dc:format element field.</returns>
+        public static string GetFormatMimeType(string exportType)
+        {
+            var value = string.Empty;
+            switch (exportType)
+            {
+                case "E-Book (.epub)":
+                    value = "application/epub+zip";
+                    break;
+                case "Go Bible":
+                    // generic archive
+                    value = "application/x-java-archive";
+                    break;
+                case "InDesign":
+                    value = "application/x-indesign";
+                    break;
+                case "Logos Alpha":
+                    // generic archive
+                    value = "application/zip";
+                    break;
+                case "OpenOffice":
+                    value = "application/vnd.oasis.opendocument.text";
+                    break;
+                case "Pdf (using Prince)":
+                    value = "application/pdf";
+                    break;
+                case "WordPress Alpha":
+                    // not sure about this -- using html
+                    value = "text/html";
+                    break;
+                case "XeLaTex":
+                case "XeTex":
+                case "XeTeX Alpha":
+                    value = "application/x-latex";
+                    break;
+                case "YouVersion":
+                    break;
+            }
+            return value;
+        }
 
         #region SetOkStatus
         private void SetOkStatus()
@@ -880,6 +939,14 @@ namespace SIL.PublishingSolution
 //            lblColophonFile.Enabled = chkColophon.Checked;
             rdoStandardCopyright.Enabled = chkColophon.Checked;
             rdoCustomCopyright.Enabled = chkColophon.Checked;
+            if (txtColophonFile.Text.Trim().Length < 1 && ddlCopyrightStatement.Items.Count > 0)
+            {
+                // no custom colophon file set (most likely this is an uninitialized install) -
+                // select the first standard rights agreement in the list and the standard rights
+                // statement radio button
+                rdoStandardCopyright.Checked = true;
+                ddlCopyrightStatement.SelectedIndex = 0;
+            }
             ddlCopyrightStatement.Enabled = (chkColophon.Checked) ? rdoStandardCopyright.Checked : false;
             txtColophonFile.Enabled = (chkColophon.Checked) ? rdoCustomCopyright.Checked : false;
             btnBrowseColophon.Enabled = (chkColophon.Checked) ? rdoCustomCopyright.Checked : false;

@@ -630,6 +630,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "ExportThroughPathway";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Export Through Pathway";
             this.Load += new System.EventHandler(this.ExportThroughPathway_Load);
             this.tabControl1.ResumeLayout(false);

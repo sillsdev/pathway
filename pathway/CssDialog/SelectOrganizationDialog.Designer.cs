@@ -133,6 +133,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SelectOrganizationDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select Your Organization";
             this.Load += new System.EventHandler(this.SelectOrganizationDialog_Load);
             this.ResumeLayout(false);

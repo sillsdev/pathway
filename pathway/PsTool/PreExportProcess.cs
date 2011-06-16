@@ -269,7 +269,7 @@ namespace SIL.Tool
             };
             // figure out the dimensions of our rect based on the font info
             Font badgeFont = new Font("Times New Roman", 48);
-            SizeF size = g.MeasureString(strTitle, badgeFont, 640);
+            SizeF size = g.MeasureString(strTitle, badgeFont, bmp.Width);
             int width = (int)Math.Ceiling(size.Width);
             int height = (int)Math.Ceiling(size.Height);
             // create the bounding rect, centered horizontally on the image
@@ -284,6 +284,10 @@ namespace SIL.Tool
             bmp.Save(strCoverImageFile, System.Drawing.Imaging.ImageFormat.Png);
         }
 
+        /// <summary>
+        /// Returns the xhtml for a title page, containing the book title, publisher name and publisher logo.
+        /// </summary>
+        /// <returns></returns>
         public string TitlePage()
         {
             if (Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("false")) { return string.Empty; }

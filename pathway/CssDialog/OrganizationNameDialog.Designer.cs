@@ -86,6 +86,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "OrganizationNameDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Organization Name";
             this.Load += new System.EventHandler(this.OrganizationNameDialog_Load);
             this.ResumeLayout(false);

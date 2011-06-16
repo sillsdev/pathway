@@ -109,6 +109,7 @@
             this.MinimizeBox = false;
             this.Name = "frmResults";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Validation Results";
             this.Load += new System.EventHandler(this.frmResults_Load);
             this.ResumeLayout(false);

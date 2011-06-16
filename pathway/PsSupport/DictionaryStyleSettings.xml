@@ -408,10 +408,10 @@
       <defaultValue></defaultValue>
     </meta>
     <meta name="Copyright Holder" outputTypes="all">
-      <organizationDefault organizationName="SIL International" Locked="false">� 2011 SIL International. All Rights Reserved.</organizationDefault>
-      <organizationDefault organizationName="United Bible Societies" Locked="false">� 2011 United Bible Societies. All Rights Reserved.</organizationDefault>
-      <organizationDefault organizationName="Pioneer Bible Translators" Locked="false">� 2011 Pioneer Bible Translators. All Rights Reserved.</organizationDefault>
-      <defaultValue>>� 2011. All Rights Reserved.</defaultValue>
+      <organizationDefault organizationName="SIL International" Locked="false">© 2011 SIL International. All Rights Reserved.</organizationDefault>
+      <organizationDefault organizationName="United Bible Societies" Locked="false">© 2011 United Bible Societies. All Rights Reserved.</organizationDefault>
+      <organizationDefault organizationName="Pioneer Bible Translators" Locked="false">© 2011 Pioneer Bible Translators. All Rights Reserved.</organizationDefault>
+      <defaultValue>© 2011. All Rights Reserved.</defaultValue>
     </meta>
     <meta name="Type" outputTypes="all">
       <defaultValue></defaultValue>
