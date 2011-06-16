@@ -102,6 +102,15 @@ namespace SIL.PublishingSolution.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+
+        internal static System.Drawing.Bitmap SIL_Logo_No_Tag_Color
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("SIL-Logo-No-Tag-Color", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
         
     }
 }

@@ -479,6 +479,9 @@
     <None Include="Resources\draw-text.png" />
     <None Include="Resources\cell.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SIL-Logo-No-Tag-Color.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
