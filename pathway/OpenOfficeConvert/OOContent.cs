@@ -146,7 +146,7 @@ namespace SIL.PublishingSolution
 
         private bool _isEmptyTitleExist;
         private int _titleCounter=1;
-
+        private int _pageWidth;
         #endregion
 
         public string RefFormat = "Genesis 1";
@@ -174,10 +174,10 @@ namespace SIL.PublishingSolution
             return mat.Count;
         }
 
-        public Dictionary<string, ArrayList> CreateStory(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
+        public Dictionary<string, ArrayList> CreateStory(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder, int pageWidth)
         {
             OldStyles styleInfo = new OldStyles();
-
+            _pageWidth = pageWidth;
             _structStyles = styleInfo;
             _structStyles.IsMacroEnable = true;
             string _inputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
@@ -213,6 +213,8 @@ namespace SIL.PublishingSolution
 
         private void ProcessProperty()
         {
+            Common.ColumnWidth = 0.0;
+
             foreach (string className in IdAllClass.Keys)
             {
                 string searchKey = "column-count";
@@ -367,6 +369,11 @@ namespace SIL.PublishingSolution
                 //}
 
 
+            }
+            
+            if (Common.ColumnWidth == 0.0)
+            {
+                Common.ColumnWidth = _pageWidth;
             }
         }
 
@@ -1650,6 +1657,8 @@ namespace SIL.PublishingSolution
                         string wd = string.Empty;
                         ht = GetPropertyValue(clsName, "height");
                         wd = GetPropertyValue(clsName, "width");
+
+                        
                         if (ht.Length > 0 || wd.Length > 0)
                         {
                             if (ht.Length > 0)
@@ -1814,19 +1823,19 @@ namespace SIL.PublishingSolution
                 {
                     if (rectWidth == "0")
                     {
-                        rectWidth = Common.CalcDimension(fromPath, rectHeight, 'W');
+                        rectWidth = Common.CalcDimension(fromPath, ref rectHeight, 'W');
                     }
 
                 }
                 else if (rectWidth != "0" && rectWidth != "72") // 72 = auto width
                 {
-                    rectHeight = Common.CalcDimension(fromPath, rectWidth, 'H');
+                    rectHeight = Common.CalcDimension(fromPath, ref rectWidth, 'H');
                 }
                 else
                 {
                     //Default value is 72 
                     rectHeight = "72"; // fixed the width as 1 in = 72pt;
-                    rectWidth = Common.CalcDimension(fromPath, rectHeight, 'W');
+                    rectWidth = Common.CalcDimension(fromPath, ref rectHeight, 'W');
                 }
                 if (rectWidth == "0")
                 {

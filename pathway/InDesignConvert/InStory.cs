@@ -515,12 +515,12 @@ namespace SIL.PublishingSolution
                 {
                     if (rectWidth == "0")
                     {
-                        rectWidth = Common.CalcDimension(fileName1, rectHeight, 'W');
+                        rectWidth = Common.CalcDimension(fileName1, ref rectHeight, 'W');
                     }
                 }
                 else if (rectWidth != "0")
                 {
-                    rectHeight = Common.CalcDimension(fileName1, rectWidth, 'H');
+                    rectHeight = Common.CalcDimension(fileName1, ref rectWidth, 'H');
                 }
                 else
                 {

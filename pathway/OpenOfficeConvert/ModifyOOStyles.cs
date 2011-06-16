@@ -31,7 +31,7 @@ namespace SIL.PublishingSolution
         private Dictionary<string, ArrayList> _spellCheck = new Dictionary<string, ArrayList>();
         private List<string> _languageFont = new List<string>();
         private Dictionary<string, string> fontLangMap = new Dictionary<string, string>();
-        private bool karthi;
+
 
         public ArrayList ModifyStylesXML(string projectPath, Dictionary<string, Dictionary<string, string>> childStyle, List<string> usedStyleName, Dictionary<string, string> languageStyleName, string baseStyle, bool isHeadword, Dictionary<string, string> parentClass)
         {

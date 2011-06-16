@@ -703,6 +703,14 @@ namespace SIL.PublishingSolution
             cssTree.OutputType = Common.OutputType.ODT; 
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
 
+            int pageWidth = 325;
+            if (cssClass.ContainsKey("@page"))
+            {
+                if (cssClass["@page"].ContainsKey("page-width"))
+                    pageWidth = Convert.ToInt32(Convert.ToDouble(cssClass["@page"]["page-width"]));
+            }
+
+
             // BEGIN Generate Styles.Xml File
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
             LOStyles inStyles = new LOStyles();
@@ -734,7 +742,7 @@ namespace SIL.PublishingSolution
             projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
             projInfo.TempOutputFolder += Path.DirectorySeparatorChar;
             cXML.RefFormat = this.RefFormat;
-            cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
+            cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, pageWidth);
             InsertChapterNumber(projInfo.TempOutputFolder);
 
             if (projInfo.FileSequence != null && projInfo.FileSequence.Count > 1)

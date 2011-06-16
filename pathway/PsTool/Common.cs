@@ -2155,7 +2155,7 @@ return FromProg(file);
         /// <param> </param>
         /// <returns> </returns>
         /// -------------------------------------------------------------------------------------------
-        public static string CalcDimension(string fromPath, string imgDimension, char Type)
+        public static string CalcDimension(string fromPath, ref string imgDimension, char Type)
         {
             double retValue = 0.0;
             bool result;
@@ -2168,7 +2168,7 @@ return FromProg(file);
                     double width = fullimage.Width;
                     fullimage.Dispose();
 
-                    if (Type == 'W')
+                    if (Type == 'W') // Find width
                     {
                         retValue = width / height * double.Parse(imgDimension);
                         if (ColumnWidth > 0 && retValue > ColumnWidth)
@@ -2176,14 +2176,19 @@ return FromProg(file);
                             retValue = ColumnWidth * .9;
                         }
                     }
-                    else if (Type == 'H')
+                    else if (Type == 'H') // Find height
                     {
                         if (imgDimension.IndexOf("%") > 0)
                         {
                             int counter;
                             string retValue1 = GetNumericChar(imgDimension, out counter);
-                            double width1 = double.Parse(retValue1) / 100 * ColumnWidth;
-                            retValue = height / width * width1;
+                            double widthInPt = double.Parse(retValue1) / 100 * width;
+                            if (widthInPt > ColumnWidth)
+                            {
+                                widthInPt = ColumnWidth;
+                            }
+                            imgDimension = widthInPt.ToString();
+                            retValue = height / width * widthInPt;
                         }
                         else
                             retValue = height / width * double.Parse(imgDimension);
