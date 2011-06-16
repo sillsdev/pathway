@@ -702,15 +702,7 @@ namespace SIL.PublishingSolution
             CssTree cssTree = new CssTree();
             cssTree.OutputType = Common.OutputType.ODT; 
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
-
-            int pageWidth = 325;
-            if (cssClass.ContainsKey("@page"))
-            {
-                if (cssClass["@page"].ContainsKey("page-width"))
-                    pageWidth = Convert.ToInt32(Convert.ToDouble(cssClass["@page"]["page-width"]));
-            }
-
-
+            int pageWidth = GetPictureWidth(cssClass);
             // BEGIN Generate Styles.Xml File
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
             LOStyles inStyles = new LOStyles();
@@ -791,6 +783,36 @@ namespace SIL.PublishingSolution
                 }
             }
             return returnValue;
+        }
+
+        private int GetPictureWidth(Dictionary<string, Dictionary<string, string>> cssClass)
+        {
+            double pageMarginLeft = 0;
+            double pageMarginRight = 0;
+            double pageWidth = 325;
+            int pictureWidth = 325;
+            if (cssClass.ContainsKey("@page"))
+            {
+                try
+                {
+                    if (cssClass["@page"].ContainsKey("page-width"))
+                        pageWidth = Convert.ToDouble(cssClass["@page"]["page-width"]);
+
+                    if (cssClass["@page"].ContainsKey("margin-left"))
+                        pageMarginLeft = Convert.ToDouble(cssClass["@page"]["margin-left"]);
+
+                    if (cssClass["@page"].ContainsKey("margin-right"))
+                        pageMarginRight = Convert.ToDouble(cssClass["@page"]["margin-right"]);
+
+                    pageWidth = pageWidth - (pageMarginLeft + pageMarginRight);
+                    pictureWidth = Convert.ToInt32(pageWidth);
+                }
+                catch (Exception)
+                {
+                    pictureWidth = 325;
+                }
+            }
+            return pictureWidth;
         }
 
 
