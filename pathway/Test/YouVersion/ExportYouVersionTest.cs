@@ -15,6 +15,8 @@
 // --------------------------------------------------------------------------------------------
 
 #region Using
+
+using System;
 using System.IO;
 using SIL.PublishingSolution;
 using System.Xml;
@@ -283,6 +285,207 @@ namespace Test.YouVersion
             chapterFile.WriteTo(xmlWriter);
             xmlWriter.Close();
             FileAssert.AreEqual(_testFiles.Expected(fullName), fullName);
+        }
+
+        /// <summary>
+        /// tests that join broken verses removes all broken verses
+        /// </summary>
+        [Test]
+        public void JoinBrokenVersesTest()
+        {
+            string inputFullName = _testFiles.Copy("acc_ospc.xhtml");
+            string actual = JoinBrokenVerses(inputFullName);
+            Assert.AreEqual(inputFullName, actual);
+            var doc = GetXmlDocument(inputFullName);
+            var ns = GetXmlNamespaceManager(doc);
+            var brokenNodes = doc.SelectNodes("//xhtml:div[not(@class='Section_Head')]/xhtml:span[not(@class) and position()=1]", ns);
+            Assert.AreEqual(0,brokenNodes.Count);
+        }
+
+        /// <summary>
+        /// Parent class should return Paragraph for this simple data
+        /// </summary>
+        [Test]
+        public void GetBrokenNodeParentClassTest()
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(@"<div class=""Paragraph""><span lang=""zxx"">—A-Jose, chi </span></div>");
+            var brokenVerseNode = doc.SelectSingleNode("//span");
+            var actual = GetBrokenNodeParentClass(brokenVerseNode);
+            Assert.AreEqual("Paragraph", actual);
+            doc.RemoveAll();
+        }
+
+        /// <summary>
+        /// Returns Verse node for broken node
+        /// </summary>
+        [Test]
+        public void GetVerseNodeTest()
+        {
+            var doc = new XmlDocument();
+            doc.LoadXml(@"
+<root>
+<div class='Paragraph'>
+<span class='Verse_Number'>19</span>
+<span>I ma Jose </span>
+<span class='Verse_Number'>20</span>
+<span>Are ca tijin: </span>
+</div>
+<div class='Paragraph'>
+<span>—A-Jose, chi </span>
+</div>
+</root>");
+            var brokenVerse = doc.SelectSingleNode("//div[2]/span");
+            XmlNode actual = GetVerseNode(brokenVerse as XmlElement);
+            var verseNode = doc.SelectSingleNode("//div/span[3]");
+            Assert.AreEqual(verseNode, actual);
+        }
+
+        /// <summary>
+        /// Returns Verse node for broken node
+        /// </summary>
+        [Test]
+        public void GetVerseNodeWithFootnoteTest()
+        {
+            var doc = new XmlDocument();
+            doc.LoadXml(@"
+<root>
+<div class='Paragraph'>
+<span class='Verse_Number'>5</span>
+<span>Cha bij:<br/>I atol. </span>
+<span class='scrFootnoteMarker'>
+<a href='#Footnote-MAT-32' />
+</span>
+<span class='Note_General_Paragraph' id='Footnote-MAT-32' title='af'>
+<span class='Note_Target_Reference'>21.5 </span>
+<span>I tinimit </span>
+</span>
+</div>
+<div class='Line1'>
+<span>Ire nu, </span>
+</div>
+</root>");
+            var verse1 = doc.SelectSingleNode("//div/span");
+            var brokenVerse2 = doc.SelectSingleNode("//div[2]/span");
+            XmlNode actual = GetVerseNode(brokenVerse2 as XmlElement);
+            Assert.AreEqual(verse1, actual);
+        }
+
+        /// <summary>
+        /// Tests the Parent is given as previous node when no siblings
+        /// </summary>
+        [Test]
+        public void PreviousElementParentTest()
+        {
+            var doc = new XmlDocument();
+            doc.LoadXml(@"
+<root>
+<div class='Paragraph'>
+<span>—A-Jose, chi </span>
+</div>
+</root>");
+            var brokenVerse = doc.SelectSingleNode("//span");
+            XmlNode actual = PreviousElement(brokenVerse as XmlElement);
+            var verseNode = doc.SelectSingleNode("//div");
+            Assert.AreEqual(verseNode, actual);
+        }
+
+        /// <summary>
+        /// Tests that previous siblings last child is given as previous
+        /// </summary>
+        [Test]
+        public void PreviousElementLastChildTest()
+        {
+            var doc = new XmlDocument();
+            doc.LoadXml(@"
+<root>
+<div class='Paragraph'>
+<span class='Verse_Number'>20</span>
+<span>Are ca tijin: </span>
+</div>
+<div class='Paragraph'>
+<span>—A-Jose, chi </span>
+</div>
+</root>");
+            var brokenVerse = doc.SelectSingleNode("//div[2]");
+            XmlNode actual = PreviousElement(brokenVerse as XmlElement);
+            var verseNode = doc.SelectSingleNode("//div/span[2]");
+            Assert.AreEqual(verseNode, actual);
+        }
+
+        /// <summary>
+        /// Add broken verse section to verse node test
+        /// </summary>
+        [Test]
+        public void AddToVerseTest()
+        {
+            var doc = new XmlDocument();
+            doc.LoadXml(@"
+<root>
+<div class='Paragraph'>
+<span class='Verse_Number'>19</span>
+<span>I ma Jose </span>
+<span class='Verse_Number'>20</span>
+<span>Are ca tijin: </span>
+</div>
+<div class='Paragraph'>
+<span>—A-Jose, chi </span>
+</div>
+</root>");
+            var verseNode = doc.SelectSingleNode("//div/span[3]");
+            var brokenVerse = doc.SelectSingleNode("//div[2]/span");
+            AddToVerse(verseNode, "Paragraph", brokenVerse);
+            var verseText = doc.SelectSingleNode("//div/span[4]");
+            Assert.AreEqual(3, verseText.ChildNodes.Count);
+            Assert.AreEqual(verseText.ChildNodes[2].InnerText, "—A-Jose, chi ");
+        }
+
+        /// <summary>
+        /// Remove broken node from document
+        /// </summary>
+        [Test]
+        public void RemoveBrokenNodeTest()
+        {
+            var doc = new XmlDocument();
+            doc.LoadXml(@"
+<root>
+<div class='Paragraph'>
+<span class='Verse_Number'>19</span>
+<span>I ma Jose </span>
+<span class='Verse_Number'>20</span>
+<span>Are ca tijin: <br/>—A-Jose, chi </span>
+</div>
+<div class='Paragraph'>
+<span>—A-Jose, chi </span>
+</div>
+</root>");
+            var brokenVerse = doc.SelectSingleNode("//div[2]/span");
+            RemoveBrokenNode(brokenVerse);
+            Assert.AreEqual(1, doc.ChildNodes.Count);
+        }
+
+        /// <summary>
+        /// tests that join broken verses removes all broken verses
+        /// </summary>
+        [Test]
+        public void JoinHtmlTest()
+        {
+            const string kind = "xhtml";
+            const string name = "accMatt.1.xhtml";
+            const bool overwrite = true;
+            File.Copy(_testFiles.Input(name), _testFiles.SubOutput(kind, name), overwrite);
+            var zipFolder = _testFiles.Output("Zip");
+            SetupOutputFolder(zipFolder);
+            const bool eraseOutputFolder = true;
+            const bool includeBom = false;
+            const string ext = ".html";
+            Convert(_testFiles.Output(kind), zipFolder, "TE_XHTML-to-YouVersion_OneChapter_HTML.xslt", "HtmlWeb", ext, eraseOutputFolder, includeBom);
+            var outputPath = Path.Combine(zipFolder, "HtmlWeb");
+            var sourceHtml = Path.Combine(outputPath, name.Replace(".xhtml", ext));
+            var doc = GetXmlDocument(sourceHtml);
+            var ns = GetXmlNamespaceManager(doc);
+            var joinedText = doc.SelectSingleNode("//span[@class='verse Matt__23']", ns);
+            Assert.AreEqual(239, joinedText.InnerText.Length);
         }
 
         private void LoadParam(string outputName)

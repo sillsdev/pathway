@@ -35,7 +35,7 @@
 	<!-- Skip the head element. -->
 	<xsl:template match="xhtml:head"/>
 
-    <xsl:template match="xhtml:body">
+	<xsl:template match="xhtml:body">
 		<xsl:element name="div">
 			<xsl:element name="h1">
 				<xsl:attribute name="class">
@@ -115,10 +115,15 @@
 	</xsl:template> <!-- xhtml:div[@class='Paragraph' or @class='Paragraph_Continuation' or @class='Line1'] -->
 
 	<xsl:template match="xhtml:div[@class='Paragraph' or @class='Line1' or @class='Line2' or @class='Paragraph_Continuation']/xhtml:span[not(@class)]">
-		<xsl:value-of select="text()"/>
+		<xsl:for-each select="text()">
+			<xsl:copy/>
+			<xsl:if test="not(position()=last())">
+				<xsl:element name="br"/>
+			</xsl:if>
+		</xsl:for-each>
 	</xsl:template>
 
-    <xsl:template match="xhtml:span[@class='Verse_Number']">
+	<xsl:template match="xhtml:span[@class='Verse_Number']">
 		<xsl:variable name="this-id" select="generate-id(.)"/>
 		<xsl:element name="span">
 			<xsl:attribute name="class">
@@ -140,7 +145,7 @@
     </xsl:template> <!-- xhtml:span[@class='Verse_Number'] -->
 
 	<xsl:template match="xhtml:span[@class='scrFootnoteMarker']">
-		<xsl:element name="span">
+		<xsl:element name="span" namespace="http://www.w3.org/1999/xhtml">
 			<xsl:attribute name="class">trans</xsl:attribute>
 			<xsl:attribute name="title">
 				<xsl:value-of select="following-sibling::xhtml:span[@class='Note_General_Paragraph'][1]/xhtml:span/text()"/>

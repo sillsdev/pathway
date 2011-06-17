@@ -149,7 +149,12 @@ INSERT INTO "</xsl:text>
     </xsl:template> <!-- xhtml:span[@class='Verse_Number'] -->
 
 	<xsl:template match="xhtml:span" mode="unformatted">
-		<xsl:value-of select="text()"/>
+		<xsl:for-each select="text()">
+			<xsl:copy/>
+			<xsl:if test="not(position()=last())">
+				<xsl:element name="br"/>
+			</xsl:if>
+		</xsl:for-each>
 		<!-- If this is the end of the section, but not the end of the file, add a carriage return. -->
 		<xsl:if test="not(following-sibling::xhtml:span[not(@class)]) and
 						not(parent::xhtml:div/following-sibling::xhtml:div) and
@@ -178,7 +183,12 @@ INSERT INTO "</xsl:text>
 				<xsl:text>&lt;/h2&gt;</xsl:text>
 			</xsl:when>
 		</xsl:choose>
-		<xsl:value-of select="text()"/>
+		<xsl:for-each select="text()">
+			<xsl:copy/>
+			<xsl:if test="not(position()=last())">
+				<xsl:element name="br"/>
+			</xsl:if>
+		</xsl:for-each>
 		<!-- If this is the end of the section, but not the end of the file, add a carriage return. -->
 		<xsl:if test="not(following-sibling::xhtml:span[not(@class)]) and
 						not(parent::xhtml:div/following-sibling::xhtml:div) and

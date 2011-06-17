@@ -179,7 +179,12 @@ insert into verses_html (book, verse, html) values ('</xsl:text>
 				<xsl:text disable-output-escaping="yes">&lt;/h2&gt;</xsl:text>
 			</xsl:when>
 		</xsl:choose>
-		<xsl:value-of select="text()"/>
+		<xsl:for-each select="text()">
+			<xsl:copy/>
+			<xsl:if test="not(position()=last())">
+				<xsl:element name="br"/>
+			</xsl:if>
+		</xsl:for-each>
 		<!-- If this is the end of the section, but not the end of the file, add a carriage return. -->
 		<xsl:if
 			test="not(following-sibling::xhtml:span[not(@class)]) and
