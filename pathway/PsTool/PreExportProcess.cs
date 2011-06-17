@@ -376,7 +376,7 @@ namespace SIL.Tool
             File.Copy(strCopyrightFile, destFile);
             Common.StreamReplaceInFile(destFile, "div id='LanguageInformation' class='Front_Matter'>", GetLanguageInfo());
             Common.StreamReplaceInFile(destFile, "div id='OtherCopyrights' class='Front_Matter'>", GetCopyrightInfo());
-            if (_projInfo.ProjectInputType != "dictionary")
+            if (_projInfo.ProjectInputType.ToLower() != "dictionary")
             {
                 Common.StreamReplaceInFile(destFile, "src='SIL-Logo-No-Tag-Color.gif' alt='SIL International logo'",
                     "src='WBT_H_RGB_red.png' alt='Wycliffe logo'  ");
@@ -924,12 +924,12 @@ namespace SIL.Tool
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
             XmlNode node;
-            if (_projInfo.ProjectInputType == "dictionary")
+            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
             {
                 // dictionary
                 try
                 {
-                    node = xDoc.SelectSingleNode("//x:div[@class='headword'][1]", namespaceManager);
+                    node = xDoc.SelectSingleNode("//x:span[@class='headword'][1]", namespaceManager);
                 }
                 catch (Exception ex)
                 {

@@ -187,6 +187,9 @@
       <option name="Non-Commercial No Derivatives" file="CC-by-nc-nd.xhtml"/>
       <option name="Intended for Sale" file="Selling.xhtml"/>
     </feature>
+    <feature name="Lic_United Bible Societies">
+      <option name="Draft" file="UBS_Draft.xhtml"/>
+    </feature>
     <feature name="Subject">
       <option name="Religion and Spirituality" file="Rules_Yes.css" />
       <option name="Reference" file="Rules_Yes.css" />
