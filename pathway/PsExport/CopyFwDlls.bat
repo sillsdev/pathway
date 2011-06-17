@@ -45,7 +45,7 @@ xcopy %base%\InDesignConvert\%cfg%\InDesignConvert.* . /y
 xcopy %base%\epubConvert\%cfg%\epubConvert.* . /y
 xcopy %base%\epubValidator\%cfg%\epubValidator.* . /y
 rem the epubcheck subdir needs to be copied alongside the epubValidator files
-xcopy %base%\ThirdParty\epubcheck-1.1\* .\epubcheck-1.1  /i /s /q /y
+xcopy %base%\ThirdParty\epubcheck-1.2\* .\epubcheck-1.2  /i /s /q /y
 
 xcopy %base%\PathwayB\%cfg%\PathwayB.* . /y
 if "%1" == "CorporateBTE" goto justgobible

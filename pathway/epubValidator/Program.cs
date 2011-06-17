@@ -99,9 +99,9 @@ namespace epubValidator
                         sb.Append(strAppDir.Substring(6)); // Remove the leading file:/ from the CodeBase result
                         //sb.Append(".");
                         sb.Append(Path.DirectorySeparatorChar);
-                        sb.Append("epubcheck-1.1");
+                        sb.Append("epubcheck-1.2");
                         sb.Append(Path.DirectorySeparatorChar);
-                        sb.Append("epubcheck-1.1.jar");
+                        sb.Append("epubcheck-1.2.jar");
                         sb.Append("\" ");
                         sb.Append("\"");
                         sb.Append(Filename);
