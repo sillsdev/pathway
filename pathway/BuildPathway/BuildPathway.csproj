@@ -324,7 +324,7 @@
     <Copy SourceFiles="@(epubFiles)"
       DestinationFiles="@(epubFiles->'Files\ConfigurationTool\epub\%(RecursiveDir)%(Filename)%(Extension)')"/>
     <Copy SourceFiles="@(EpubCheck)"
-      DestinationFiles="@(EpubCheck->'Files\ConfigurationTool\epubcheck-1.1\%(RecursiveDir)%(Filename)%(Extension)')"/>
+      DestinationFiles="@(EpubCheck->'Files\ConfigurationTool\epubcheck-1.2\%(RecursiveDir)%(Filename)%(Extension)')"/>
     <Copy SourceFiles="@(GoBibleFiles)"
       DestinationFiles="@(GoBibleFiles->'Files\ConfigurationTool\GoBible\%(RecursiveDir)%(Filename)%(Extension)')"
       Condition=" '$(Edition)' == 'BTE' "/>
@@ -350,7 +350,7 @@
     <ConfigurationTool Include="..\ConfigurationTool\$(OutDir)\*.*"/>
     <Plugin Include="..\PsExport\$(OutDir)\*.*"/>
     <GhostScript Include="..\ThirdParty\gsdll32.dll"/>
-    <EpubCheck Include="..\ThirdParty\epubcheck-1.1\**\*.*" Exclude="..\ThirdParty\**\.svn\**\*.*"/>
+    <EpubCheck Include="..\ThirdParty\epubcheck-1.2\**\*.*" Exclude="..\ThirdParty\**\.svn\**\*.*"/>
     <Icu
       Include="..\LiftPrepare\Lib\PalasoLib\icudt40.dll;..\LiftPrepare\Lib\PalasoLib\icuin40.dll;..\LiftPrepare\Lib\PalasoLib\icuuc40.dll;"/>
     <BatchProcess Include="..\PathwayB\$(OutDir)\PathwayB.*"/>
