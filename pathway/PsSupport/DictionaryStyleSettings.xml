@@ -22,7 +22,7 @@
     <property name="ConfigureDictionary" value="True" />
     <property name="ReversalIndexes" value="True" />
     <property name="GrammerSketch" value="False" />
-    <property name="LayoutSelected" value="XItem2" />
+	<property name="LayoutSelected" value="FieldWorksStyles" />
     <property name="ExtraProcessing" value="True" />
     <property name="Media" value="paper" />
   </settings>
@@ -315,21 +315,6 @@
     <style name="FW-Letter" file="Layout_11.css">
       <description>Letter Double Column with Flex formatting</description>
     </style -->
-      <style name="CustomSheet-1" file="CustomSheet-1.css" shown="Yes" type="Custom">
-        <description>5.25x8.25in - 1 Col - Left aligned - Charis 11 on 13</description>
-      </style>
-      <style name="CustomSheet-5" file="CustomSheet-5.css" shown="Yes" type="Custom">
-        <description>5.25x8.25in - 1 Col - Left aligned - Charis 11 on 13</description>
-      </style>
-      <style name="XItem1" file="XItem1.css" shown="Yes" type="Custom">
-        <description>5.25x8.25in - 1 Col - Left aligned - Charis 11 on 13</description>
-      </style>
-      <style name="CustomSheet-7" file="CustomSheet-7.css" shown="Yes" type="Custom">
-        <description>5.25x8.25in - 1 Col - Left aligned - Charis 11 on 13</description>
-      </style>
-      <style name="XItem2" file="XItem2.css" shown="Yes" type="Custom" previewfile1="" previewfile2="">
-        <description>5.25x8.25in - 1 Col - Left aligned - Charis 11 on 13</description>
-      </style>
     </paper>
     <mobile>
       <style name="Go Bible" file="GoBible.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg">

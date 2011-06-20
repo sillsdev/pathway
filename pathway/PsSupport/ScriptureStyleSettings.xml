@@ -19,7 +19,7 @@
     <property name="MissingIcon" value="Graphic/missing.png" />
     <property name="Help" value="PsDoc.chm" />
     <property name="PrintVia" value="OpenOffice" />
-    <property name="LayoutSelected" value="XItem3" />
+	<property name="LayoutSelected" value="C5 Cols ApplicationStyles" />
     <property name="ExtraProcessing" value="True" />
     <property name="Media" value="mobile" />
   </settings>
@@ -289,18 +289,6 @@
         <style name="QuickLet" file="Layout_13.css">
             <description> Two column Letter with TE font and size choices. </description>
         </style -->
-      <style name="CustomSheet-2" file="CustomSheet-2.css" shown="Yes" type="Custom">
-        <description>5.25x8.25in - 1 Col - Justified - Charis 11 on 13</description>
-      </style>
-      <style name="CustomSheet-3" file="CustomSheet-3.css" shown="Yes" type="Custom">
-        <description> Two column C5 output format. </description>
-      </style>
-      <style name="CustomSheet-6" file="CustomSheet-6.css" shown="Yes" type="Custom">
-        <description>5.25x8.25in - 1 Col - Justified - Charis 11 on 13</description>
-      </style>
-      <style name="XItem3" file="XItem3.css" shown="Yes" type="Custom" previewfile1="" previewfile2="">
-        <description>5.25x8.25in - 1 Col - Justified - Charis 11 on 13</description>
-      </style>
     </paper>
     <mobile>
       <style name="Go Bible" file="GoBible.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg">
