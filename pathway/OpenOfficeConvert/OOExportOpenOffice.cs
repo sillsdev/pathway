@@ -61,6 +61,7 @@ namespace SIL.PublishingSolution
         string _endQuote = ")";
         string _singleQuote = "'";
         string _comma = ",";
+        private bool isMultiLanguageHeader = false;
 
   
 
@@ -696,7 +697,7 @@ namespace SIL.PublishingSolution
             preProcessor.GetTempFolderPath();
             preProcessor.GetfigureNode();
             preProcessor.InsertKeepWithNextOnStyles(projInfo.DefaultCssFileWithPath);
-
+            isMultiLanguageHeader = preProcessor.GetMultiLanguageHeader();
 
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
@@ -706,6 +707,7 @@ namespace SIL.PublishingSolution
             // BEGIN Generate Styles.Xml File
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
             LOStyles inStyles = new LOStyles();
+            inStyles._multiLanguageHeader = isMultiLanguageHeader;
             idAllClass = inStyles.CreateStyles(projInfo, cssClass, "styles.xml");
 
             //To set Constent variables for User Desire
@@ -733,6 +735,7 @@ namespace SIL.PublishingSolution
 
             projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
             projInfo.TempOutputFolder += Path.DirectorySeparatorChar;
+            cXML._multiLanguageHeader = isMultiLanguageHeader;
             cXML.RefFormat = this.RefFormat;
             cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, pageWidth);
             InsertChapterNumber(projInfo.TempOutputFolder);
@@ -838,8 +841,16 @@ namespace SIL.PublishingSolution
             {
                 foreach (XmlNode VARIABLE in list)
                 {
-                    string xpath1 = "//text:span/text:variable-set[@text:name=\"Left_Guideword\"]";
+                    string xpath1 = "//text:span/text:variable-set[@text:name=\"Left_Guideword_L\"]";
                     XmlNodeList list1 = xdoc.SelectNodes(xpath1, nsmgr1);
+                    if (list1.Count > 0)
+                    {
+                        VARIABLE.AppendChild(list1[0].CloneNode(true));
+                        //break;
+                    }
+
+                    xpath1 = "//text:span/text:variable-set[@text:name=\"Left_Guideword_R\"]";
+                    list1 = xdoc.SelectNodes(xpath1, nsmgr1);
                     if (list1.Count > 0)
                     {
                         VARIABLE.AppendChild(list1[0].CloneNode(true));

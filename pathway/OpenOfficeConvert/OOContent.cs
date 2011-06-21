@@ -38,7 +38,9 @@ namespace SIL.PublishingSolution
     {
         #region Private Variable
         public OldStyles _oldStyles = new OldStyles();
-        string _strBook = string.Empty; 
+        string _strBook = string.Empty;
+        string _strBook2ndBook = string.Empty;
+        private bool _is1stBookFound = false;
         readonly Stack _styleStack = new Stack();
         readonly Stack _allSpanStack = new Stack();
         readonly Stack _allDivStack = new Stack();
@@ -114,11 +116,7 @@ namespace SIL.PublishingSolution
         private bool _imageParaForCaption = false;
         private List<string> _unUsedParagraphStyle = new List<string>();
         string footCallSymb = string.Empty;
-
         List<string> LanguageFontStyleName = new List<string>();
-
-        #endregion
-        #region Private Variable
         private int _storyNo = 0;
         private int _hyperLinkNo = 0;
         private bool isFileEmpty = true;
@@ -148,13 +146,16 @@ namespace SIL.PublishingSolution
         private int _titleCounter=1;
         private int _pageWidth;
         #endregion
-
+        #region Public Variable
+        public bool _multiLanguageHeader = false;
         public string RefFormat = "Genesis 1";
-
         public LOContent()
         {
             _outputType = Common.OutputType.ODT;
         }
+        #endregion
+       
+
         #region Public Methods
 
         public bool IsNewLine
@@ -799,13 +800,31 @@ namespace SIL.PublishingSolution
                 //}
                 if (_allCharacter.Peek().IndexOf("scrBookName") == 0 && RefFormat == "Genesis 1")
                 {
+                    //_strBook = content;
                     content = content.TrimEnd() + " ";
-                    _strBook = content;
+                    if (_strBook.Length > 0 && _is1stBookFound)
+                    {
+                        _strBook2ndBook = content;
+                        _is1stBookFound = false;
+                    }
+                    else
+                    {
+                        _strBook = content;
+                        _is1stBookFound = true;
+                    }
                 }
                 else if (_allCharacter.Peek().IndexOf("scrBookCode") == 0 && RefFormat == "Gen 1")
                 {
+                    //_strBook = content;
                     content = content.TrimEnd() + " ";
-                    _strBook = content;
+                    if (_strBook.Length > 0)
+                    {
+                        _strBook2ndBook = content;
+                    }
+                    else
+                    {
+                        _strBook = content;
+                    }
                 }
                 else if (_allCharacter.Peek().ToLower().IndexOf("versenumber") == 0 || _allCharacter.Peek().ToLower().IndexOf("versenumber1") == 0)
                 {
@@ -2148,11 +2167,22 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("text:variable-decls");
             _writer.WriteStartElement("text:variable-decl");
             _writer.WriteAttributeString("office:value-type", "string");
-            _writer.WriteAttributeString("text:name", "Left_Guideword");
+            _writer.WriteAttributeString("text:name", "Left_Guideword_L");
             _writer.WriteEndElement();
             _writer.WriteStartElement("text:variable-decl");
             _writer.WriteAttributeString("office:value-type", "string");
-            _writer.WriteAttributeString("text:name", "Right_Guideword");
+            _writer.WriteAttributeString("text:name", "Right_Guideword_L");
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+
+            _writer.WriteStartElement("text:variable-decls");
+            _writer.WriteStartElement("text:variable-decl");
+            _writer.WriteAttributeString("office:value-type", "string");
+            _writer.WriteAttributeString("text:name", "Left_Guideword_R");
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("text:variable-decl");
+            _writer.WriteAttributeString("office:value-type", "string");
+            _writer.WriteAttributeString("text:name", "Right_Guideword_R");
             _writer.WriteEndElement();
             _writer.WriteEndElement();
         }
@@ -2268,13 +2298,26 @@ namespace SIL.PublishingSolution
             if ((_classNameWithLang.IndexOf("headword") == 0 && _previousParagraphName.IndexOf("entry_") == 0) || _classNameWithLang.ToLower().IndexOf("chapternumber") == 0)
             {
 
+                string chapterNo = content;
+
                 if (_strBook.Length > 0)
-                    content = _strBook + content;
+                    content = _strBook + chapterNo;
 
                 _writer.WriteStartElement("text:span");
                 _writer.WriteAttributeString("text:style-name", _classNameWithLang);
                 _writer.WriteStartElement("text:variable-set");
-                _writer.WriteAttributeString("text:name", "Left_Guideword");
+                _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+                _writer.WriteAttributeString("text:display", "none");
+                _writer.WriteAttributeString("text:formula", "ooow: " + content);
+                _writer.WriteAttributeString("office:value-type", "string");
+                _writer.WriteAttributeString("office:string-value", " " + content);
+                _writer.WriteEndElement();
+                _writer.WriteEndElement();
+                
+                _writer.WriteStartElement("text:span");
+                _writer.WriteAttributeString("text:style-name", _classNameWithLang);
+                _writer.WriteStartElement("text:variable-set");
+                _writer.WriteAttributeString("text:name", "Right_Guideword_R");
                 _writer.WriteAttributeString("text:display", "none");
                 _writer.WriteAttributeString("text:formula", "ooow: " + content);
                 _writer.WriteAttributeString("office:value-type", "string");
@@ -2282,16 +2325,33 @@ namespace SIL.PublishingSolution
                 _writer.WriteEndElement();
                 _writer.WriteEndElement();
 
-                _writer.WriteStartElement("text:span");
-                _writer.WriteAttributeString("text:style-name", _classNameWithLang);
-                _writer.WriteStartElement("text:variable-set");
-                _writer.WriteAttributeString("text:name", "Right_Guideword");
-                _writer.WriteAttributeString("text:display", "none");
-                _writer.WriteAttributeString("text:formula", "ooow: " + content);
-                _writer.WriteAttributeString("office:value-type", "string");
-                _writer.WriteAttributeString("office:string-value", " " + content);
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
+                if (_multiLanguageHeader)
+                {
+                    if (_strBook2ndBook.Length > 0)
+                        content = _strBook2ndBook + chapterNo;
+
+                    _writer.WriteStartElement("text:span");
+                    _writer.WriteAttributeString("text:style-name", _classNameWithLang);
+                    _writer.WriteStartElement("text:variable-set");
+                    _writer.WriteAttributeString("text:name", "Left_Guideword_R");
+                    _writer.WriteAttributeString("text:display", "none");
+                    _writer.WriteAttributeString("text:formula", "ooow: " + content);
+                    _writer.WriteAttributeString("office:value-type", "string");
+                    _writer.WriteAttributeString("office:string-value", " " + content);
+                    _writer.WriteEndElement();
+                    _writer.WriteEndElement();
+                
+                    _writer.WriteStartElement("text:span");
+                    _writer.WriteAttributeString("text:style-name", _classNameWithLang);
+                    _writer.WriteStartElement("text:variable-set");
+                    _writer.WriteAttributeString("text:name", "Right_Guideword_L");
+                    _writer.WriteAttributeString("text:display", "none");
+                    _writer.WriteAttributeString("text:formula", "ooow: " + content);
+                    _writer.WriteAttributeString("office:value-type", "string");
+                    _writer.WriteAttributeString("office:string-value", " " + content);
+                    _writer.WriteEndElement();
+                    _writer.WriteEndElement();
+                }
 
                 _writer.WriteStartElement("text:span");
                 _writer.WriteEndElement();

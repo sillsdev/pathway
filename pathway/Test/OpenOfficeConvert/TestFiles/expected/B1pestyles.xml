@@ -575,7 +575,7 @@
     <style:master-page style:name="Left_20_Page" style:display-name="Left Page" style:page-layout-name="pm4" style:next-style-name="Right_20_Page">
       <style:header>
         <text:p text:style-name="Header">
-          <text:variable-get text:name="Left_Guideword" office:value-type="string" />
+          <text:variable-get text:name="Left_Guideword_L" office:value-type="string" />
           <text:tab />
           <text:page-number text:select-page="current">4</text:page-number>
           <text:tab />
@@ -601,7 +601,7 @@
           <draw:frame draw:style-name="Mfr1" draw:name="Frame1" text:anchor-type="paragraph" svg:y="36pt" fo:min-width="35pt" svg:height="14.14pt" draw:z-index="1">
             <draw:text-box>
               <text:p text:style-name="MP1">
-                <text:variable-get text:name="Right_Guideword" office:value-type="string" />
+                <text:variable-get text:name="Right_Guideword_R" office:value-type="string" />
               </text:p>
             </draw:text-box>
           </draw:frame>

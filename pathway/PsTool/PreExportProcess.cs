@@ -111,7 +111,7 @@ namespace SIL.Tool
                 sbPreamble.Append("</title><link rel='stylesheet' href='");
                 sbPreamble.Append(Path.GetFileName(_cssFileNameWithPath));
                 sbPreamble.AppendLine("' type='text/css' /></head>");
-                sbPreamble.Append("<body class='scrBody'>"); 
+                sbPreamble.Append("<body class='scrBody'>");
                 // copy over image resources if needed
                 if (Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("true") ||
                     Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("true"))
@@ -180,7 +180,7 @@ namespace SIL.Tool
                 // if we're not merging, all our work is done -- just return
                 if (!mergeFiles)
                 {
-                    return files; 
+                    return files;
                 }
 
                 // Merging files...
@@ -228,7 +228,7 @@ namespace SIL.Tool
         /// <param name="outputFolder">Content folder the resulting file is saved to.</param>
         private void CreateCoverImage(string outputFolder)
         {
-            if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("false")) {return;}
+            if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("false")) { return; }
             // open up the appropriate image for processing
             string strImageFile = Param.GetMetadataValue(Param.CoverPageFilename);
             if (strImageFile.Length < 1)
@@ -269,7 +269,7 @@ namespace SIL.Tool
             };
             // figure out the dimensions of our rect based on the font info
             Font badgeFont = new Font("Times New Roman", 48);
-            SizeF size = g.MeasureString(strTitle, badgeFont, bmp.Width);
+            SizeF size = g.MeasureString(strTitle, badgeFont, 640);
             int width = (int)Math.Ceiling(size.Width);
             int height = (int)Math.Ceiling(size.Height);
             // create the bounding rect, centered horizontally on the image
@@ -278,16 +278,12 @@ namespace SIL.Tool
             g.FillRectangle(Brushes.Brown, rect);
             g.DrawRectangle(Pens.Gold, rect);
             g.DrawString(strTitle, badgeFont, Brushes.Gold,
-                    new RectangleF(new PointF(((bmp.Size.Width / 2) - (size.Width/2)), 100f), size), strFormat);
+                    new RectangleF(new PointF(((bmp.Size.Width / 2) - (size.Width / 2)), 100f), size), strFormat);
             // save this puppy
             string strCoverImageFile = Path.Combine(outputFolder, "cover.png");
             bmp.Save(strCoverImageFile, System.Drawing.Imaging.ImageFormat.Png);
         }
 
-        /// <summary>
-        /// Returns the xhtml for a title page, containing the book title, publisher name and publisher logo.
-        /// </summary>
-        /// <returns></returns>
         public string TitlePage()
         {
             if (Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("false")) { return string.Empty; }
@@ -369,14 +365,14 @@ namespace SIL.Tool
                 return; // something went wrong -- get out
             }
             string destFile = Path.Combine(outputFolder, "File2Cpy.xhtml");
-            if (File.Exists(destFile)) 
+            if (File.Exists(destFile))
             {
                 File.Delete(destFile);
             }
             File.Copy(strCopyrightFile, destFile);
             Common.StreamReplaceInFile(destFile, "div id='LanguageInformation' class='Front_Matter'>", GetLanguageInfo());
             Common.StreamReplaceInFile(destFile, "div id='OtherCopyrights' class='Front_Matter'>", GetCopyrightInfo());
-            if (_projInfo.ProjectInputType.ToLower() != "dictionary")
+            if (_projInfo.ProjectInputType != "dictionary")
             {
                 Common.StreamReplaceInFile(destFile, "src='SIL-Logo-No-Tag-Color.gif' alt='SIL International logo'",
                     "src='WBT_H_RGB_red.png' alt='Wycliffe logo'  ");
@@ -472,7 +468,7 @@ namespace SIL.Tool
             {
                 sb.Append(rights);
                 sb.Append("; and, © named rights holders for materials used by permission as specified in the resource file description.</p>  ");
-                
+
             }
             return sb.ToString();
         }
@@ -550,52 +546,52 @@ namespace SIL.Tool
             {
                 xmldoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
                 xmldoc.Load(tempFile);
-            
-            const string tag = "img";
-            XmlNodeList nodeList = xmldoc.GetElementsByTagName(tag);
-            if (nodeList.Count > 0)
-            {
-                var counter = 1;
-                foreach (XmlNode item in nodeList)
+
+                const string tag = "img";
+                XmlNodeList nodeList = xmldoc.GetElementsByTagName(tag);
+                if (nodeList.Count > 0)
                 {
-                    var name = item.Attributes.GetNamedItem("src");
-                    if (name != null)
+                    var counter = 1;
+                    foreach (XmlNode item in nodeList)
                     {
-                        var src = name.Value;
-                        if (src.Length > 0)
+                        var name = item.Attributes.GetNamedItem("src");
+                        if (name != null)
                         {
-                            string fromFileName = Common.GetPictureFromPath(src, metaname, sourcePicturePath);
-                            if (File.Exists(fromFileName))
+                            var src = name.Value;
+                            if (src.Length > 0)
                             {
-                                string ext = Path.GetExtension(fromFileName);
-                                string toFileName = Common.PathCombine(tempFolder, counter + ext);
-                                File.Copy(fromFileName, toFileName, true);
+                                string fromFileName = Common.GetPictureFromPath(src, metaname, sourcePicturePath);
+                                if (File.Exists(fromFileName))
+                                {
+                                    string ext = Path.GetExtension(fromFileName);
+                                    string toFileName = Common.PathCombine(tempFolder, counter + ext);
+                                    File.Copy(fromFileName, toFileName, true);
 
-                                XmlAttribute xa = xmldoc.CreateAttribute("longdesc");
-                                xa.Value = name.Value;
-                                item.Attributes.Append(xa);
+                                    XmlAttribute xa = xmldoc.CreateAttribute("longdesc");
+                                    xa.Value = name.Value;
+                                    item.Attributes.Append(xa);
 
-                                name.Value = counter + ext;
+                                    name.Value = counter + ext;
 
+                                }
                             }
                         }
+                        counter++;
                     }
-                    counter++;
                 }
-            }
-            try
-            {
-                ParagraphVerserSetUp(xmldoc); // TODO - Seperate it from this method.
-            }
-            catch (Exception ex)
-            {
-               Console.Write(ex.Message);
-            } 
+                try
+                {
+                    ParagraphVerserSetUp(xmldoc); // TODO - Seperate it from this method.
+                }
+                catch (Exception ex)
+                {
+                    Console.Write(ex.Message);
+                }
                 xmldoc.Save(tempFile);
             }
             catch
             {
-            } 
+            }
             return tempFile;
         }
 
@@ -696,7 +692,7 @@ namespace SIL.Tool
             Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "namedStyle", "class");
             Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "</Run", "</span");
             // FWR-3903
-            
+
         }
 
         public string ReplaceInvalidTagtoSpan(string pattern, string tagType)
@@ -924,12 +920,12 @@ namespace SIL.Tool
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
             XmlNode node;
-            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+            if (_projInfo.ProjectInputType == "dictionary")
             {
                 // dictionary
                 try
                 {
-                    node = xDoc.SelectSingleNode("//x:span[@class='headword'][1]", namespaceManager);
+                    node = xDoc.SelectSingleNode("//x:div[@class='headword'][1]", namespaceManager);
                 }
                 catch (Exception ex)
                 {
@@ -968,6 +964,47 @@ namespace SIL.Tool
             }
             return string.Empty;
         }
+
+        /// <summary>
+        /// For dictionary data, returns the language code for the definitions
+        /// </summary>
+        /// <returns></returns>
+        public bool GetMultiLanguageHeader()
+        {
+            bool isFound = false;
+            var xDoc = new XmlDocument { XmlResolver = null };
+            xDoc.Load(_xhtmlFileNameWithPath);
+            XmlNodeList nodeList = xDoc.GetElementsByTagName("div");
+            if (nodeList.Count > 0)
+            {
+                foreach (XmlNode node in nodeList)
+                {
+                    if (node == null || node.Attributes["class"] == null)
+                        continue;
+                    string className = node.Attributes["class"].Value;
+                    if (className.ToLower() == "scrbook")
+                    {
+                        string pattern = "<span class=\"scrBookName\" ([^>]+)>[^<]*</[^>]+>";
+                        MatchCollection matchs = Regex.Matches(node.InnerXml, pattern);
+                        if (matchs.Count > 1)
+                        {
+                            isFound = true;
+                            break;
+                        }
+                        //string xPath = "//span[@class=\"scrBookName\"]";
+                        //XmlNodeList bookList = node.SelectNodes(xPath);
+                        //if (bookList != null)
+                        //    if (bookList.Count >= 2)
+                        //    {
+                        //        isFound = true;
+                        //        break;
+                        //    }
+                    }
+                }
+            }
+            return isFound;
+        }
+
 
         /// <summary>
         /// For dictionary data, returns the language code for the definitions
