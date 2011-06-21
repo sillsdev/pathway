@@ -260,9 +260,14 @@ namespace SIL.PublishingSolution
 
         public void LanguageFontCheck(string content, string styleName)
         {
+            if (_newProperty.ContainsKey(styleName) && _newProperty[styleName].ContainsKey("font-family"))
+            {
+                return;
+            }
             if (LanguageFontStyleName.Contains(styleName) == false)
             {
-                if (Common.GetLanguageUnicode(content) != string.Empty) // Is telugu/assamese?
+                string font = Common.GetLanguageUnicode(content);
+                if (font != string.Empty) // Is telugu/assamese?
                 {
                     if (_newProperty.ContainsKey(styleName) == false)
                     {
@@ -271,8 +276,8 @@ namespace SIL.PublishingSolution
                         AddUsedStyleName(styleName);
                         ParentClass[styleName] = "Standard|div";
                     }
-                    _newProperty[styleName]["font-family"] = Common.GetLanguageUnicode(content);
-                    _newProperty[styleName]["font-family-complex"] = Common.GetLanguageUnicode(content);
+                    _newProperty[styleName]["font-family"] = font;
+                    _newProperty[styleName]["font-family-complex"] = font;
                 }
             }
         }
