@@ -16,6 +16,7 @@ namespace SIL.PublishingSolution
         private static string _helpTopic = string.Empty;
         public bool _fromPlugIn;
         private static string _media = "paper";
+        private SettingsHelper _settingsHelper;
 
         public ExportThroughPathway()
         {
@@ -283,6 +284,10 @@ namespace SIL.PublishingSolution
                 Close();
             }
 
+            // Load the .ssf or .ldml as appropriate
+            _settingsHelper = new SettingsHelper(DatabaseName);
+            _settingsHelper.LoadValues();
+
             if (this.Text != "Set Defaults")
             {
                 // not setting defaults, just opening the dialog:
@@ -318,6 +323,7 @@ namespace SIL.PublishingSolution
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     Organization = dlg.Organization;
+                    PopulateFromSettings();
                 }
                 else
                 {
@@ -337,6 +343,26 @@ namespace SIL.PublishingSolution
             Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
             Common.HelpProv.SetHelpKeyword(this, _helpTopic);
             Common.databaseName = DatabaseName;
+        }
+
+        /// <summary>
+        /// Attempts to pull in values from the Settings helper (either from the .ldml or
+        /// .ssf file) that should override the StyleSettings.xml defaults. There are only
+        /// a couple values that fall in this category.
+        /// </summary>
+        private void PopulateFromSettings()
+        {
+            string valueFromSettings;
+            // title / full name
+            if (_settingsHelper.Value.TryGetValue("FullName", out valueFromSettings))
+            {
+                Title = valueFromSettings;
+            }
+            // copyright holder
+            if (_settingsHelper.Value.TryGetValue("Copyright", out valueFromSettings))
+            {
+                CopyrightHolder = valueFromSettings;
+            }
         }
 
         /// <summary>
@@ -570,6 +596,7 @@ namespace SIL.PublishingSolution
                 _publicationName = Path.GetFileName(OutputFolder);
                 OutputFolder = Path.GetDirectoryName(OutputFolder);
                 Common.TimeStarted = DateTime.Now;
+                _settingsHelper.ClearValues();
                 Close();
             }
         }
@@ -583,11 +610,17 @@ namespace SIL.PublishingSolution
             Format = Param.DefaultValue[Param.PrintVia];
             Style = Param.DefaultValue[Param.LayoutSelected];
             // publication info tab
-            Title = Param.GetMetadataValue(Param.Title, Organization);
+            if (Title.Trim().Length < 1)
+            {
+                Title = Param.GetMetadataValue(Param.Title, Organization);
+            }
             Description = Param.GetMetadataValue(Param.Description, Organization);
             Creator = Param.GetMetadataValue(Param.Creator, Organization);
             Publisher = Param.GetMetadataValue(Param.Publisher, Organization);
-            CopyrightHolder = Param.GetMetadataValue(Param.CopyrightHolder, Organization);
+            if (CopyrightHolder.Trim().Length < 1)
+            {
+                CopyrightHolder = Param.GetMetadataValue(Param.CopyrightHolder, Organization);
+            }
             Type = Param.GetMetadataValue(Param.Type, Organization);
             Source = Param.GetMetadataValue(Param.Source, Organization);
             DocFormat = Param.GetMetadataValue(Param.Format, Organization);

@@ -159,6 +159,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -182,6 +183,7 @@
       <DependentUpon>PleaseWait.cs</DependentUpon>
     </Compile>
     <Compile Include="RegistryHelperLite.cs" />
+    <Compile Include="SettingsHelper.cs" />
     <Compile Include="StyleCategories.cs">
       <SubType>Form</SubType>
     </Compile>
