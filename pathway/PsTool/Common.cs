@@ -849,6 +849,15 @@ namespace SIL.Tool
             {
                 if (parameter.Length > 0)
                 {
+                    //if (parameter.Trim() == "\"\'\"" || parameter.Trim() == "\" \'\"")
+                    //{
+                    //    return parameter.Replace();
+                    //}
+                    if (parameter.Trim() == "\"\'\"" || parameter.Trim() == "\" \'\"" || parameter.Trim() == "\"\' \""
+                            || parameter.Trim() == @"'" || parameter.Trim() == @" '" || parameter.Trim() == @"' ")
+                    {
+                        return parameter.Replace("\"", "");
+                    }
                     if (!(parameter[0] == '\"' || parameter[0] == '\''))
                     {
                         parameter = "'" + parameter + "'";
