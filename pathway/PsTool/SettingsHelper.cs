@@ -99,7 +99,23 @@ namespace SIL.Tool
             }
             if (_hostProgram == HostProgram.FieldWorks)
             {
-                // TODO: implement?   
+                // For Fieldworks, the <databasename>.fwdata file contains the list of writing systems
+                // in use, in a format like this:
+                //<AnalysisWss>                 << not in use
+                //<Uni>en pt</Uni>
+                //</AnalysisWss>
+                //<CurVernWss>                  << in use
+                //<Uni>seh</Uni>
+                //</CurVernWss>
+                //<CurAnalysisWss>              << in use
+                //<Uni>pt en</Uni>
+                //</CurAnalysisWss>
+                //<CurPronunWss>                << in use (but I don't think this is exported?)
+                //<Uni>seh-fonipa-x-etic</Uni>
+                //</CurPronunWss>
+                //<VernWss>                     << not in use
+                //<Uni>seh seh-fonipa-x-etic</Uni>
+                //</VernWss>
             }
             if (_hostProgram == HostProgram.Other)
             {
