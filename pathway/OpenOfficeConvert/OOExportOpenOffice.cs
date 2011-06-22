@@ -828,6 +828,7 @@ namespace SIL.PublishingSolution
 
             string filename = Path.Combine(tempFolder, "content.xml");
             XmlDocument xdoc = new XmlDocument();
+            xdoc.PreserveWhitespace = false;
             xdoc.Load(filename);
 
             var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
@@ -887,6 +888,7 @@ namespace SIL.PublishingSolution
             //        }
             //    }
             //}
+            xdoc.PreserveWhitespace = true;
             xdoc.Save(filename);
         }
 

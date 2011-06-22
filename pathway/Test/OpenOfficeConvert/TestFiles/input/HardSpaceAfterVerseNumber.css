@@ -1,0 +1,50 @@
+.scrBody {
+}
+
+.scrSection {
+    text-align: left;
+}
+
+.Paragraph
+{
+font-size: 12pt;
+text-indent: 12pt;
+margin-left: 0pt;
+}
+
+.Chapter_Number
+{
+font-weight: bold;
+font-size: 18pt;
+padding-top: 8pt;
+padding-bottom: 4pt;
+vertical-align: top;
+text-indent: 0pt;
+margin-left: 0pt;
+padding-right: 2pt;
+}
+
+.Verse_Number
+{
+font-size: 12pt;
+vertical-align: super;
+text-indent: 0pt;
+margin-left: 0pt;
+}
+
+.Verse_Number1 {
+    display: none;
+}
+
+span {
+    prince-text-replace: "<<" "\201C" ">>" "\201D" "<" "\2018" ">" "\2019";
+}
+.Section_Head {
+page-break-after:avoid;
+}
+.Chapter_Number {
+page-break-after:avoid;
+}
+.Parallel_Passage_Reference {
+page-break-after:avoid;
+}

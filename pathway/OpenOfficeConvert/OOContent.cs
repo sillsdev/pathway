@@ -134,6 +134,10 @@ namespace SIL.PublishingSolution
         private ArrayList _crossRef = new ArrayList();
         private int _crossRefCounter = 1;
         private bool _isWhiteSpace = true;
+        private bool _isVerseNumberContent = false;
+        private StringBuilder _verseContent = new StringBuilder();
+
+
 
         private PublicationInformation _projInfo;
         private bool _IsHeadword = false;
@@ -853,6 +857,12 @@ namespace SIL.PublishingSolution
             }
             else
             {
+                if (_isVerseNumberContent == false && _verseContent.Length > 0)
+                {
+                    _writer.WriteRaw(_verseContent.ToString());
+                    _verseContent.Remove(0, _verseContent.Length);
+                }
+
                 content = SignificantSpace(content);
                 if (_imageClass.Length > 0)
                 {
@@ -870,6 +880,10 @@ namespace SIL.PublishingSolution
                 else if (pseudo)
                 {
                     _writer.WriteRaw(content);
+                }
+                else if (_isVerseNumberContent)
+                {
+                    _verseContent.Append(content);
                 }
                 else if (!VisibleHidden())
                 {
@@ -890,6 +904,8 @@ namespace SIL.PublishingSolution
 
         private void WriteCharacterStyle(string content, string characterStyle, bool pseudo)
         {
+            _isVerseNumberContent = characterStyle.ToLower().IndexOf("versenumber") == 0;
+                
             //_imageInserted = InsertImage();
             if (_imageClass.Length > 0)
             {
@@ -930,8 +946,15 @@ namespace SIL.PublishingSolution
                 //    _writer.WriteStartElement("text:p");
                 //    _writer.WriteAttributeString("text:style-name", _paragraphName); //_divClass
                 //}
-                _writer.WriteStartElement("text:span");
-                _writer.WriteAttributeString("text:style-name", characterStyle); //_util.ChildName
+                if (_isVerseNumberContent == false)
+                {
+                    _writer.WriteStartElement("text:span");
+                    _writer.WriteAttributeString("text:style-name", characterStyle); //_util.ChildName
+                }
+                else
+                {
+                    _verseContent.Append(" <text:span text:style-name=\"" + characterStyle + "\">");
+                }
             }
 
             AddUsedStyleName(characterStyle);
@@ -958,7 +981,16 @@ namespace SIL.PublishingSolution
 
             if ((_tagType == "span" || _tagType == "a" || pseudo) && characterStyle != "none" || (_tagType == "img" && _imageInserted))  // span end
             {
-                _writer.WriteEndElement();
+                if(_isVerseNumberContent == false)
+                {
+                    _writer.WriteEndElement();
+                }
+                else
+                {
+                    _verseContent.Append("</text:span>");
+                    _isVerseNumberContent = false;
+                }
+                
             }
             if(_imageClass.Length <= 0)
                     _textWritten = true;
@@ -2173,9 +2205,6 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("office:value-type", "string");
             _writer.WriteAttributeString("text:name", "Right_Guideword_L");
             _writer.WriteEndElement();
-            _writer.WriteEndElement();
-
-            _writer.WriteStartElement("text:variable-decls");
             _writer.WriteStartElement("text:variable-decl");
             _writer.WriteAttributeString("office:value-type", "string");
             _writer.WriteAttributeString("text:name", "Left_Guideword_R");
