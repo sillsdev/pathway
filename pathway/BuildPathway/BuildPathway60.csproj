@@ -145,7 +145,7 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <FwVer>604</FwVer>
+    <FwVer>6.0.4</FwVer>
     <Edition>BTE</Edition>
     <ConfTag>Pw</ConfTag>
   </PropertyGroup>
@@ -155,7 +155,7 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <FwVer>604</FwVer>
+    <FwVer>6.0.4</FwVer>
     <Edition>BTE</Edition>
     <ConfTag>Pw</ConfTag>
   </PropertyGroup>
@@ -165,7 +165,7 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <FwVer>605</FwVer>
+    <FwVer>6.0.5</FwVer>
     <Edition>BTE</Edition>
     <ConfTag>Pw</ConfTag>
   </PropertyGroup>
@@ -175,7 +175,7 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <FwVer>605</FwVer>
+    <FwVer>6.0.5</FwVer>
     <Edition>BTE</Edition>
     <ConfTag>Pw</ConfTag>
   </PropertyGroup>
@@ -185,7 +185,7 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <FwVer>606</FwVer>
+    <FwVer>6.0.6</FwVer>
     <Edition>BTE</Edition>
     <ConfTag>Pw</ConfTag>
   </PropertyGroup>
@@ -195,7 +195,7 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <FwVer>606</FwVer>
+    <FwVer>6.0.6</FwVer>
     <Edition>BTE</Edition>
     <ConfTag>Pw</ConfTag>
   </PropertyGroup>
@@ -205,7 +205,7 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <FwVer>604</FwVer>
+    <FwVer>6.0.4</FwVer>
     <Edition>SE</Edition>
     <ConfTag>Pw</ConfTag>
   </PropertyGroup>
@@ -215,7 +215,7 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <FwVer>604</FwVer>
+    <FwVer>6.0.4</FwVer>
     <Edition>SE</Edition>
     <ConfTag>Pw</ConfTag>
   </PropertyGroup>
@@ -225,7 +225,7 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <FwVer>605</FwVer>
+    <FwVer>6.0.5</FwVer>
     <Edition>SE</Edition>
     <ConfTag>Pw</ConfTag>
   </PropertyGroup>
@@ -235,7 +235,7 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <FwVer>605</FwVer>
+    <FwVer>6.0.5</FwVer>
     <Edition>SE</Edition>
     <ConfTag>Pw</ConfTag>
   </PropertyGroup>
@@ -245,7 +245,7 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <FwVer>606</FwVer>
+    <FwVer>6.0.6</FwVer>
     <Edition>SE</Edition>
     <ConfTag>Pw</ConfTag>
   </PropertyGroup>
@@ -255,7 +255,7 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <FwVer>606</FwVer>
+    <FwVer>6.0.6</FwVer>
     <Edition>SE</Edition>
     <ConfTag>Pw</ConfTag>
   </PropertyGroup>
@@ -265,7 +265,7 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <FwVer>604</FwVer>
+    <FwVer>6.0.4</FwVer>
     <Edition>BTE</Edition>
     <ConfTag>Pw</ConfTag>
     <Status>Testing</Status>
@@ -276,7 +276,7 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <FwVer>604</FwVer>
+    <FwVer>6.0.4</FwVer>
     <Edition>BTE</Edition>
     <ConfTag>Pw</ConfTag>
     <Status>Testing</Status>
@@ -287,7 +287,7 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <FwVer>606</FwVer>
+    <FwVer>6.0.6</FwVer>
     <Edition>BTE</Edition>
     <ConfTag>Pw</ConfTag>
     <Status>Testing</Status>
@@ -298,7 +298,7 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <FwVer>604</FwVer>
+    <FwVer>6.0.6</FwVer>
     <Edition>BTE</Edition>
     <ConfTag>Pw</ConfTag>
     <Status>Testing</Status>
@@ -399,7 +399,7 @@
     <CallTarget Targets="BeforeBuild"/>
     <RemoveDir Directories="Wix"/>
     <Message Text="BUILD_NUMBER: $(BUILD_NUMBER)" Importance="high"/>
-    <UpdateVersion Product="Pathway $(Edition) " Version="0.7.5"
+    <UpdateVersion Product="Pathway $(Edition) " Version="0.7.5" FieldworksVersion="$(FwVer)"
       HelpFile="Pathway_Configuration_Tool_$(Edition).chm"
       Template="$(ProjectDir)Install$(ConfTag)$(Edition)-tpl.wxs"/>
     <UpdateReadme Readme="$(ProjectDir)ReadMePw.rtf" License="$(ProjectDir)License.rtf"
@@ -456,11 +456,11 @@
       Condition=" '$(Edition)' == 'BTE' "/>
     <Copy SourceFiles="@(MiscSupport)" DestinationFolder="Files\ConfigurationTool\"/>
     <Copy SourceFiles="@(Fw604)" DestinationFolder="Files\ConfigurationTool\"
-      Condition=" '$(FwVer)' == '604' "/>
+      Condition=" '$(FwVer)' == '6.0.4' "/>
     <Copy SourceFiles="@(Fw605)" DestinationFolder="Files\ConfigurationTool\"
-      Condition=" '$(FwVer)' == '605' "/>
+      Condition=" '$(FwVer)' == '6.0.5' "/>
     <Copy SourceFiles="@(Fw606)" DestinationFolder="Files\ConfigurationTool\"
-      Condition=" '$(FwVer)' != '604' and '$(FwVer)' != '605'"/>
+      Condition=" '$(FwVer)' != '6.0.4' and '$(FwVer)' != '6.0.5'"/>
     <Copy SourceFiles="@(BteHelpFile)" DestinationFolder="Files\ConfigurationTool\Help"
       Condition=" '$(Edition)' == 'BTE' "/>
     <Copy SourceFiles="@(SeHelpFile)" DestinationFolder="Files\ConfigurationTool\Help"

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Sprint Release Steps</title>
+  <link rev="made" href="mailto:greg_trihus@sil.org" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="author" content="Greg Trihus" />
+  <meta name="description" content="list of steps to do a sprint release" />
+  <meta name="keywords" content="team city, " />
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<h1>Pathway Sprint Release Steps</h1>
+
+<ol>
+  <li>Make sure Debug build works and tests pass</li>
+  <li>Make sure CorporateBTE7 build works and install it and run through at least one test pass</li>
+  <li>Look at Team city sprint build (<a href="http://build.palaso.org">build.palaso.org</a>) to find the svn checkin number of the last sprint</li>
+  <li>Look at svn log to compile a list of changes the user will see</li>
+  <li>Update the BuildPathway/ReadmePw.rtf file with the new version # and list of changes</li>
+  <li>Update BuildPathway/BuildPathway.csproj and BuildPathway60.csproj with new version #</li>
+  <li>Update the version number in Team city sprint build configuration</li>
+  <li>Launch Team City Sprint Build</li>
+  <li>Examine the URL of the artifacts produced. Edit the URLs on the pathway.sil.org sprint download page so they will download the artifacts.</li>
+  <li>Add a post to pathway.sil.org web site with the list of changes and a link to the sprint build page.</li>
+  <li>Mark the post of the last step category as "Release" so it is picked up by lingtransoft.info</li>
+</ol>
+
+<p>Instead of launching the Team city build, you can also build locally and post to the pathway.sil.org web site.</p>
+
+<ol>
+<li>Use Visual Studio to do a Debug build of Pathway. This creates BuildTasks.dll</li>
+<li>From the command prompt at the root of your local copy of the svn type:<br/>
+<code>PathwaySprint</code></br>
+This command sets up the path so that msbuild for dot net 3.5 is used.</li>
+<li>Then type:<br/>
+<code>msbuild BuildPathwaySprint.csproj /p:BUILD_NUMBER=x.x.x.x</code><br/>
+where x.x.x.x is replaced with the version number (0.7.5.1289 for example).</li>
+<li>Use ftp to transfer the .msi files in the sprint folder to the wp-content/sprint folder on the web site.<br/>
+(The latest sprint build page on the site currently points to these download packages.)</li>
+
+<hr />
+<p><small>Created on ... June 22, 2011</small></p>
+</body>
+</html>

@@ -42,6 +42,15 @@ namespace BuildTasks
         }
         #endregion Version
 
+        #region FieldworksVersion
+        private string _fieldworksVersion;
+        public string FieldworksVersion
+        {
+            get { return _fieldworksVersion; }
+            set { _fieldworksVersion = value; }
+        }
+        #endregion FieldworksVersion
+
         #region BuildVersion
         private string _buildVersion;
         public string BuildVersion
@@ -85,6 +94,8 @@ namespace BuildTasks
                 if (match.Success)
                     map["PwVer"] = match.Groups[1].Value;
             }
+            if (!string.IsNullOrEmpty(_fieldworksVersion))
+                map["FwVer"] = _fieldworksVersion;
             map["Product"] = _product;
             map["HelpFile"] = _helpFile;
             sub.FileSubstitute(_template, map);
