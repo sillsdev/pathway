@@ -77,7 +77,7 @@ namespace SIL.PublishingSolution
                     if (process.ExportType.ToLower() == "libreoffice")
                     {
                         //_exportType.Add("Word (Using OpenOffice)");  // TD-1818 
-                        _exportType.Add("Pdf (Using OpenOffice) ");
+                        _exportType.Add("Pdf (Using LibreOffice) ");
                     }
                     _exportType.Add(process.ExportType);
                 }

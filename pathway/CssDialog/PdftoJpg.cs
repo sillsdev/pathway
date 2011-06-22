@@ -52,7 +52,7 @@ namespace SIL.PublishingSolution
             ps.DictionaryPath = Path.GetDirectoryName(xhtmlPreviewFilePath);
             ps.ProjectInputType = loadType;
          
-            ExportOpenOffice openOffice = new ExportOpenOffice();
+            ExportLibreOffice openOffice = new ExportLibreOffice();
             openOffice.Export(ps);
 
             //Pdf pdf = new Pdf(xhtmlPreviewFilePath, cssMergeFullFileName);

@@ -445,7 +445,7 @@ namespace TestBed
                 return;
             }
 
-            ExportOpenOffice exportOdt = new ExportOpenOffice();
+            ExportLibreOffice exportOdt = new ExportLibreOffice();
             //ExportOdt exportOdt = new ExportOdt();
             PublicationInformation projInfo = new PublicationInformation();
 
