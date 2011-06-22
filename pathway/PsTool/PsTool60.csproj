@@ -273,6 +273,7 @@
       <DependentUpon>PleaseWait.cs</DependentUpon>
     </Compile>
     <Compile Include="RegistryHelperLite.cs" />
+    <Compile Include="SettingsHelper.cs" />
     <Compile Include="StyleCategories.cs">
       <SubType>Form</SubType>
     </Compile>
