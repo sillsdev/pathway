@@ -142,7 +142,8 @@ namespace SIL.PublishingSolution
                 MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             // clean up
-            Common.CleanupOutputDirectory(processFolder, result); // keep the .jar file only
+            string keepJad = Common.PathCombine(processFolder, Sanitize(collectionName) + ".jad");
+            Common.CleanupOutputDirectory(processFolder, result, keepJad); // keep the .jar & .jad file only
             // if the icon file has an older date, it won't get picked up by CleanupOutputDirectory - 
             // clean it out manually if needed
             if (File.Exists(Path.Combine(processFolder, _iconFile)))

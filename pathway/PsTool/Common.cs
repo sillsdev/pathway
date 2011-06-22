@@ -1908,6 +1908,14 @@ return FromProg(file);
             CleanupOutputDirectory(outputFolder, al);
         }
 
+        public static void CleanupOutputDirectory(string outputFolder, string keepFilename, string keepJad)
+        {
+            var al = new ArrayList();
+            al.Add(keepFilename);
+            al.Add(keepJad);
+            CleanupOutputDirectory(outputFolder, al);
+        }
+
         /// <summary>
         /// Cleans up the output directory of all "temporary" files created during the export process.
         /// This is determined by comparing the timestamp on each file to the DateTime we stored in the
