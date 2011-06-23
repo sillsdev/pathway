@@ -1,0 +1,99 @@
+/** imported styles from from epub_FontSize.css **/
+
+/*
+*  For the .epub format, each style is based on a percentage of the
+*  body element (which is set programmatically in the epubExport. Setting
+*  these values explicitly allows us to override the merged settings.
+*/
+
+.columns {
+    font-size: 100%;	/* cascaded environment */
+}
+.Chapter_Head {
+    font-size:150%;
+}
+.Chapter_Number {
+    font-size: 250%;
+}
+.Endnote_General_Paragraph,
+.Note_General_Paragraph {
+    font-size : 80%;
+}
+.footnotes {
+    font-size: 85%;
+}
+.Inscription {
+    font-size: 95%;
+}
+.Inscription_Paragraph {
+    font-size: 95%;
+}
+.Intro_List_Item1, .List_Item1 {
+    font-size: 95%;
+}
+.Intro_List_Item2, .List_Item2 {
+    font-size: 95%;
+}
+.Intro_Paragraph {
+    font-size: 95%;
+    line-height: inherit;
+}
+.Intro_Section_Head {
+    font-size: 95%;
+}
+.Citation_Line1, .Line1 {
+    font-size: 100%;
+}
+.Citation_Line2, .Line2 {
+    font-size: 100%;
+}
+.Note_CrossHYPHENReference_Paragraph {
+    font-size: 90%;
+}
+.Note_General_Paragraph {
+    font-size: 90%;
+}
+.Paragraph {
+    font-size: 100%;
+}
+.Paragraph_Continuation {
+    font-size: 100%;
+}
+.Paragraph1 {
+    font-size: 100%;
+}
+.parallel_passage_reference {
+    font-size: 100%;
+}
+.REVERSE_SOLIDUS2, .REVERSE_SOLIDUScom, .REVERSE_SOLIDUSCom, .REVERSE_SOLIDUSEllaFULL_STOP,
+.REVERSE_SOLIDUSsl, .REVERSE_SOLIDUSv1, .REVERSE_SOLIDUSv14, .REVERSE_SOLIDUSv15,
+.REVERSE_SOLIDUSv19, .REVERSE_SOLIDUSv20, .REVERSE_SOLIDUSv8 {
+    font-size: 90%;
+}
+.Section_Head {
+    font-size: 95%;
+}
+.Section_Head_Major {
+    font-size: 100%;
+}
+.Section_Head_Minor {
+    font-size: 100%;
+}
+.Stanza_Break {
+    font-size: 100%;
+}
+.Title_Main {
+    font-size: 250%;
+}
+.Title_Secondary {
+    font-size: 125%;
+}
+.Title_Tertiary {
+    font-size: 100%;
+}
+.Verse_Number {
+    font-size: 80%;
+}
+.Verse_Number_In_Note {
+    font-size: 80%;
+}

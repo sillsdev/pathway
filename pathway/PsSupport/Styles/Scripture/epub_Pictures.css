@@ -1,0 +1,55 @@
+/** imported styles from epub_Pictures.css **/
+
+.pictureRight {
+    float : right;
+    text-align : center;
+    margin: 0px 0px 5px 5px;
+    text-indent: 0px;
+}
+.pictureLeft {
+    float : left;
+    position : relative;
+    left : -2pc;
+    text-align : center;
+    margin: 0px 5px 5px 0px;
+    text-indent: 0px;
+}
+.pictureCenter {
+    clear : both;
+    text-align : center;
+    margin-top : 1%;
+    margin: 0px 5px 5px 0px;
+    text-indent: 0px;
+}
+.pictureCaption {
+    font-size : 80%;
+    font-weight : normal;
+    font-style : italic;
+    display : block;
+    text-align : center;
+    text-transform : capitalize;
+    margin-bottom : .5%;
+}
+.pictureColumn {
+    float: right;
+    width: 100%;
+    margin: 0px 0px 5px 5px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.picturePage {
+    float: top;
+    clear: both;
+    width: 100%;
+    margin: 0px 5px 5px 0px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+span.reference :before {
+	content: "(";
+}
+span.reference :after {
+	content: ")";
+}
