@@ -183,7 +183,7 @@ namespace SIL.PublishingSolution
         {
             get { return txtRights.Text.Trim(); }
             set { txtRights.Text = value; }
-        } 
+        }
         // DC properties that are not in the UI
         /// <summary>
         /// dc:type element. Not in the UI.
@@ -258,7 +258,7 @@ namespace SIL.PublishingSolution
         }
 
         // Processing Options tab
-        public bool RunningHeader 
+        public bool RunningHeader
         {
             get { return chkRunningHeader.Checked; }
             set { chkRunningHeader.Checked = value; }
@@ -268,7 +268,8 @@ namespace SIL.PublishingSolution
             get { return chkOOReduceStyleNames.Checked; }
             set { chkOOReduceStyleNames.Checked = value; }
         }
-        public string OutputFolder { 
+        public string OutputFolder
+        {
             get { return txtSaveInFolder.Text; }
             set { txtSaveInFolder.Text = value; }
         }
@@ -430,7 +431,7 @@ namespace SIL.PublishingSolution
 
             // Processing Options tab
             chkRunningHeader.Enabled = (FindMedia() == "paper");
-            chkOOReduceStyleNames.Enabled = (ddlLayout.Text.Contains("OpenOffice"));
+            chkOOReduceStyleNames.Enabled = (ddlLayout.Text.Contains("LibreOffice"));
             if (InputType != "Dictionary")
             {
                 grpInclude.Visible = false;
@@ -438,7 +439,7 @@ namespace SIL.PublishingSolution
                 chkReversalIndexes.Visible = false;
                 chkGrammarSketch.Visible = false; // currently this is false anyways (it's not implemented)
             }
-            
+
         }
 
         #region ValidateXMLVersion
@@ -635,7 +636,7 @@ namespace SIL.PublishingSolution
             // front matter tab
             CoverPage = (Param.GetMetadataValue(Param.CoverPage, Organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CoverPage, Organization));
             CoverPageImagePath = Param.GetMetadataValue(Param.CoverPageFilename, Organization);
-            if (CoverPageImagePath.Trim().Length > 0)
+            if (!string.IsNullOrEmpty(CoverPageImagePath) && CoverPageImagePath.Trim().Length > 0)
             {
                 try
                 {
@@ -830,7 +831,7 @@ namespace SIL.PublishingSolution
                     // generic archive
                     value = "application/zip";
                     break;
-                case "OpenOffice":
+                case "LibreOffice":
                     value = "application/vnd.oasis.opendocument.text";
                     break;
                 case "Pdf (using Prince)":
@@ -969,7 +970,7 @@ namespace SIL.PublishingSolution
         private void chkColophon_CheckedChanged(object sender, EventArgs e)
         {
             // enable / disable Colophon UI
-//            lblColophonFile.Enabled = chkColophon.Checked;
+            //            lblColophonFile.Enabled = chkColophon.Checked;
             rdoStandardCopyright.Enabled = chkColophon.Checked;
             rdoCustomCopyright.Enabled = chkColophon.Checked;
             if (txtColophonFile.Text.Trim().Length < 1 && ddlCopyrightStatement.Items.Count > 0)

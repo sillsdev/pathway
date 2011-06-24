@@ -150,6 +150,7 @@ namespace SIL.PublishingSolution
         private int _titleCounter=1;
         private int _pageWidth;
         #endregion
+
         #region Public Variable
         public bool _multiLanguageHeader = false;
         public string RefFormat = "Genesis 1";
@@ -158,7 +159,6 @@ namespace SIL.PublishingSolution
             _outputType = Common.OutputType.ODT;
         }
         #endregion
-       
 
         #region Public Methods
 

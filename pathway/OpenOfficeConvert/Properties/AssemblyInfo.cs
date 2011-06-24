@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OpenOfficeWriter")]
+[assembly: AssemblyTitle("LibreOfficeConvert")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("sudyk")]
-[assembly: AssemblyProduct("OpenOfficeWriter")]
-[assembly: AssemblyCopyright("Copyright © sudyk 2010")]
+[assembly: AssemblyCompany("EC Group")]
+[assembly: AssemblyProduct("LibreOfficeConvert")]
+[assembly: AssemblyCopyright("Copyright © EC Group 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------
-// <copyright file="ExportOpenOffice.cs" from='2009' to='2009' company='SIL International'>
+// <copyright file="ExportLibreOffice.cs" from='2009' to='2009' company='SIL International'>
 //      Copyright © 2009, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
@@ -547,7 +547,7 @@ namespace SIL.PublishingSolution
             ExportODT(publicationInfo);
         }
 
-        private void XslProcess(KeyValuePair<string, string> subSection, string fileName, string xslFileName, ExportLibreOffice exportOpenOffice, ProgressBar statusProgressBar)
+        private void XslProcess(KeyValuePair<string, string> subSection, string fileName, string xslFileName, ExportLibreOffice exportLibreOffice, ProgressBar statusProgressBar)
         {
             bool generated;
             if (_dictStepFilenames.ContainsKey(subSection.Key))
@@ -573,7 +573,7 @@ namespace SIL.PublishingSolution
 
             if (returnFileName != "")
             {
-                //generated = exportOpenOffice.Export(statusProgressBar, projectInfo.DictionaryPath, returnFileName, projectInfo.DefaultCssFileWithPath, false, null, projectInfo.ProjectInputType);
+                //generated = exportLibreOffice.Export(statusProgressBar, projectInfo.DictionaryPath, returnFileName, projectInfo.DefaultCssFileWithPath, false, null, projectInfo.ProjectInputType);
                 publicationInfo.ProgressBar = statusProgressBar;
                 publicationInfo.IsOpenOutput = false;
                 generated = ExportODT(publicationInfo);
