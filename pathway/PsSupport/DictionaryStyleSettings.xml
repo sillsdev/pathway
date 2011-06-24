@@ -153,33 +153,33 @@
       <option name="No" file="Rules_No.css" />
     </feature>
     <feature name="FileProduced">
-      <option name="One" file="Rules_Yes.css" />
-      <option name="One Per Letter" file="Rules_Yes.css" />
+      <option name="One" file="Empty.css" />
+      <option name="One Per Letter" file="Empty.css" />
     </feature>
     <feature name="EmbedFonts">
-      <option name="Yes" file="Rules_Yes.css" />
-      <option name="No" file="Rules_Yes.css" />
+      <option name="Yes" file="Empty.css" />
+      <option name="No" file="Empty.css" />
     </feature>
     <feature name="TOCLevel">
-      <option name="1 - Letter Only" file="Rules_Yes.css" />
-      <option name="2 - Letter and Entry" file="Rules_Yes.css" />
-      <option name="3 - Letter, Entry and Sense" file="Rules_Yes.css" />
+      <option name="1 - Letter Only" file="Empty.css" />
+      <option name="2 - Letter and Entry" file="Empty.css" />
+      <option name="3 - Letter, Entry and Sense" file="Empty.css" />
     </feature>
     <feature name="MissingFont">
-      <option name="Use Fallback Font" file="Rules_Yes.css" />
-      <option name="Prompt User" file="Rules_Yes.css" />
-      <option name="Cancel Export" file="Rules_Yes.css" />
+      <option name="Use Fallback Font" file="Empty.css" />
+      <option name="Prompt User" file="Empty.css" />
+      <option name="Cancel Export" file="Empty.css" />
     </feature>
     <feature name="NonSILFont">
-      <option name="Embed Font Anyway" file="Rules_Yes.css" />
-      <option name="Use Fallback Font" file="Rules_Yes.css" />
-      <option name="Prompt User" file="Rules_Yes.css" />
-      <option name="Cancel Export" file="Rules_Yes.css" />
+      <option name="Embed Font Anyway" file="Empty.css" />
+      <option name="Use Fallback Font" file="Empty.css" />
+      <option name="Prompt User" file="Empty.css" />
+      <option name="Cancel Export" file="Empty.css" />
     </feature>
     <feature name="DefaultAlignment">
-      <option name="Left" file="Rules_Yes.css" />
-      <option name="Right" file="Rules_Yes.css" />
-      <option name="Justify" file="Rules_Yes.css" />
+      <option name="Left" file="Empty.css" />
+      <option name="Right" file="Empty.css" />
+      <option name="Justify" file="Empty.css" />
     </feature>
     <feature name="Lic_Other">
       <option name="Draft" file="Draft.xhtml"/>
@@ -191,8 +191,8 @@
       <option name="Draft" file="UBS_Draft.xhtml"/>
     </feature>
     <feature name="Subject">
-      <option name="Religion and Spirituality" file="Rules_Yes.css" />
-      <option name="Reference" file="Rules_Yes.css" />
+      <option name="Religion and Spirituality" file="Empty.css" />
+      <option name="Reference" file="Empty.css" />
     </feature>
   </features>
   <categories>

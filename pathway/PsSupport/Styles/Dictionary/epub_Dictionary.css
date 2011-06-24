@@ -1,0 +1,187 @@
+/** imported styles from from epub_Dictionary.css **/
+
+body {
+/* NOTE: elements filled in by the epub export based on
+the user's preferences from the Configuration Tool:
+   font-size: --> from BaseFontSize
+   line-height: --> from DefaultLineHeight
+*/
+font-weight: normal;
+font-style: normal;
+}
+
+.complexentryform {
+        font-weight: bold;
+}
+.complexform-form,
+.crossref,
+.crossref-headword,
+.LexEntry-publishStemComponentTarget-MLHeadWordPub,
+.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub,
+.LexSense-publishStemComponentTarget-OwnerOutlinePub,
+.LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub,
+.sense-crossref,
+.sensecomplexentryform,
+.sensecrossref,
+.sense-crossref-sub,
+.sensemainentryref
+.reversal-form {
+    font-weight : bold;
+}
+.crossref > .xitem + .xitem :before {
+        font-weight: bold;
+}
+.crossreftype :after {
+        content: ": ";
+        font-style: italic;
+        font-weight: bold;
+}
+.crossreftype {
+        font-style: italic;
+        font-weight: bold;
+}
+.crossref-type :after {
+        content: ": ";
+        font-style: italic;
+        font-weight: bold;
+}
+.crossref-type {
+        font-style: italic;
+        font-weight: bold;
+}
+.entry {
+    margin-left : 12pt;
+    padding-bottom: 1%;
+}
+.example {
+        font-weight: bold;
+}
+.example-minor {
+        font-weight: bold;
+}
+.example-sub {
+        font-weight: bold;
+}
+.grammatical-info-minor,
+.grammatical-info-sub,
+.grammaticalinfo,
+.grammatical-info,
+.lexref-type {
+    font-style : italic;
+}
+.headwordminor, .headword, .headword-minor {
+    font-weight: bold;
+    font-style: normal;
+    margin-right: 10px;
+}
+.LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub, 
+.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub,
+.LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub,
+.xsensenumber {
+    font-weight: bold;
+    font-style: normal;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.letData {
+    column-count : 2;
+    column-gap : 1.5em;
+    column-fill : balance;
+    text-align : left;
+} 
+.letHead {
+        border-bottom: .5pt solid #a00;
+        clear: both;
+        font-style: normal;
+        font-weight: bold;
+        margin: 18pt 9pt;
+        margin-left: .75in;
+        margin-right: .75in;
+        text-align: center;
+}
+.letter {
+    font-size : 250%;
+    font-weight : normal;
+    font-style : normal;
+    text-align : center;
+    text-indent : 0;
+    margin-left : 0;
+    padding-bottom : 2%;
+    padding-top : 2%;
+}
+.LexEntrypublishStemParaHomographNumber {
+        font-size: 8pt;
+        vertical-align: super;
+}
+.LexEntry-publishStemParaHomographNumber {
+        font-size: 8pt;
+        vertical-align: super;
+}
+.lexreftype,
+.lexref-type,
+.lexref-type-sub {
+        font-style: italic;
+        font-weight: bold;
+}
+.mainentryref-minor,
+.mainentryref,
+.mainentryrefminor {
+        font-weight: bold;
+}
+.revData {
+        column-count: 1;
+        column-fill: balance;
+        column-gap: 1.5em;
+        column-rule: none;
+        text-align: left;
+}
+.revEntry {
+        font-size: 10pt;
+        margin-left: 1pc;
+        text-indent: -1pc;
+}
+.revHeader {
+        font-size: 18pt;
+        font-weight: bold;
+        text-align: center;
+}
+.revhomographnumber {
+        vertical-align: sub;
+}
+.revsensenumber {
+        font-weight: bold;
+}
+.sense {
+        font-weight: normal;
+}
+.subentry {
+        text-indent: -12pt;
+        margin-left: 18pt;
+        padding-left: 12pt;
+        padding-bottom: 2pt;
+        padding-top: 1pt;
+}
+.translation {
+        font-style: italic;
+}
+.translation-minor {
+        font-style: italic;
+}
+.translation-sub {
+        font-style: italic;
+}
+.variantrefform {
+        font-weight: bold;
+}
+.xhomographnumber {
+    font-weight: normal;
+    font-style: normal;
+    vertical-align : -33%;
+    text-indent : 0;
+    margin-left : 0;
+    padding-right: 2px;
+    line-height: 80%;
+}
+.xlanguagetag {
+        display: none;
+}

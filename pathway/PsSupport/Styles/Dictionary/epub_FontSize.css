@@ -1,0 +1,150 @@
+/** imported styles from from epub_FontSize.css **/
+
+/*
+*  For the .epub format, each style is based on a percentage of the
+*  body element (which is set programmatically in the epubExport. Setting
+*  these values explicitly allows us to override the merged settings.
+*/
+
+.letData, .revData   { font-size: 100%; }
+.CmPossibility-publishDomainTypeForReversal-AbbreviationPub,
+.CmPossibility-publishDomainTypeForReversal-NamePub,
+.CmPossibility-publishSenseTypeForReversal-AbbreviationPub,
+.CmPossibility-publishUsageTypeForReversal-AbbreviationPub,
+.CmSemanticDomain-publishSemDomForReversal-AbbreviationPub,
+.CmSemanticDomain-publishSemDomForReversal-NamePub,
+.complexform,
+.complexform-entry-type,
+.complexform-form,
+.complexform-summarydef,
+.complexform-type,
+.crossref-headword,
+.crossref-type-abbr,
+.domain-type-abbr,
+.domain-type-name,
+.encyclopedic-info,
+.entryref-component,
+.entryref-summary,
+.entryref-summary-minor,
+.entryref-type,
+.etymology,
+.etymology-comment,
+.etymology-form,
+.etymology-gloss,
+.LexEntry-publishStemComponentTarget-MLHeadWordPub,
+.LexEntry-publishStemMinorPrimaryTarget-SummaryDefinitionPub,
+.LexEntryType-publishAbbreviationForReversal-AbbreviationPub,
+.LexEntryType-publishStemComplexFormType-ReverseAbbrPub,
+.LexEntryType-publishStemEntryType-AbbreviationPub,
+.LexEntryType-publishStemVariantType-ReverseAbbrPub,
+.lexref,
+.lexref-type-abbr,
+.pictureLabel,
+.pronunciation-form,
+.reversal-form,
+.semantic-domain-abbr,
+.semantic-domain-name,
+.sense-crossref-headword,
+.sense-type,
+.sense-type-abbr,
+.slot,
+.summarydef-minor,
+.usage-type-abbr,
+.variant-headword,
+.variant-summary,
+.variantref,
+.variantref-entry-type,
+.variantref-form,
+.complexentryform    { font-size: 100%; }
+.crossref            { font-size: 100%; }
+.crossref > .xitem + .xitem :before { font-size: 100%; }
+.crossref-targets    { font-size: 100%; }
+.crossref-targets > .xitem + .xitem :before { font-size: 100%; }
+.crossref-type       { font-size: 100%; }
+.crossref-type > .xitem + .xitem :before { font-size: 100%; }
+.crossrefs		   { font-size: 100%; }
+.crossreftype        { font-size: 100%; }
+.crossreftype :after { font-size: 100%; }
+.definition-minor	   { font-size: 100%; }
+.definition-sub	   { font-size: 100%; }
+.definition          { font-size: 100%; }
+.entry-type-abbr-sub { font-size: 100%; }
+.entry               { font-size: 100%; }
+.entryref-primary-minor { font-size: 100%; }
+.entryref-type-minor { font-size: 100%; }
+.example-minor	   { font-size: 95%; }
+.example-sub	   { font-size: 95%; }
+.example             { font-size: 95%; }
+.example :after      { font-size: 95%; }
+.example :before     { font-size: 95%; }
+.example > .xitem + .xitem :before { font-size: 95%; }
+.grammatical-info	   { font-size: 100%; }
+.grammatical-info-minor { font-size: 100%; }
+.grammatical-info-sub { font-size: 100%; }
+.grammaticalinfo     { font-size: 100%; }
+.grammaticalinfo :after { font-size: 100%; }
+.headword-minor	   { font-size: 100%; }
+.headword-sub	   { font-size: 100%; }
+.headword            { font-size: 100%; }
+.headword :after     { font-size: 100%; }
+.headword > .xitem + .xitem :before { font-size: 100%; }
+.headwordminor       { font-size: 100%; }
+.headwordminor :after { font-size: 100%; }
+.headwordminor > .xitem + .xitem :before { font-size: 100%; }
+.letHead             { font-size: 14pt; }
+.letter              { font-size: 14pt; }
+.LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub { font-size: 100%; }
+.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub { font-size: 100%; }
+.LexEntrypublishStemParaHomographNumber :after { font-size: 100%; }
+.LexEntrypublishStemParaHomographNumber {font-size: 100%; }
+.LexEntryRef-publishRootSubEntryType-RootSubEntryType { font-size: 100%; }
+.LexEntryType-publishRootMinorEntryType-AbbreviationPub { font-size: 100%; }
+.LexEntryType-publishStemMinorEntryType-AbbreviationPub { font-size: 100%; }
+.lexref-targets 	   { font-size: 95%; }
+.lexref-targets-sub  { font-size: 95%; }
+.lexref-type	   { font-size: 100%; }
+.lexref-type-sub	   { font-size: 100%; }
+.lexreftype          { font-size: 100%; }
+.lexreftype :after   { font-size: 100%; }
+.mainentryref        { font-size: 100%; }
+.mainentryref > .xitem + .xitem :before { font-size: 100%; }
+.mainentryrefminor   { font-size: 100%; }
+.mainentryrefminor > .xitem + .xitem :before { font-size: 100%; }
+.partofspeech        { font-size: 100%; }
+.partofspeech-minor  { font-size: 100%; }
+.partofspeech-sub    { font-size: 100%; }
+.pictureCaption      { font-size: 100%; }
+.primaryrefs-minor   { font-size: 100%; }
+.pronunciation-minor { font-size: 100%; }
+.pronunciation-sub   { font-size: 100%; }
+.pronunciation       { font-size: 100%; }
+.pronunciationminor  { font-size: 100%; }
+.pronunciationminor > .xitem + .xitem :before { font-size: 100%; }
+.revEntry            { font-size: 100%; }
+.revHeader           { font-size: 100%; }
+.scientific-name     { font-size: 100%; }
+.semantic-domain-abbr-sub { font-size: 100%; }
+.semantic-domain-name-sub { font-size: 100%; }
+.semantic-domains-sub { font-size: 100%; }
+.sense-crossref      { font-size: 100%; }
+.sense-crossref-sub  { font-size: 100%; }
+.sense               { font-size: 100%; }
+.sensecomplexentryform { font-size: 100%; }
+.sensecrossref       { font-size: 95%; }
+.sensecrossref > .xitem + .xitem :before { font-size: 95%; }
+.sensemainentryref   { font-size: 100%; }
+.sensemainentryref > .xitem + .xitem :before { font-size: 100%; }
+.slot-name           { font-size: 100%; }
+.subentry            { font-size: 100%; }
+.subentry-type       { font-size: 100%; }
+.translation-minor   { font-size: 100%; }
+.translation-sub     { font-size: 100%; }
+.translation         { font-size: 100%; }
+.translation :after  { font-size: 100%; }
+.translation > .xitem + .xitem :before { font-size: 100%; }
+.variantrefform      { font-size: 100%; }
+.xsensenumber     { font-size: 95%; }
+.xhomographnumber {
+    font-size : 67%;
+}
+
