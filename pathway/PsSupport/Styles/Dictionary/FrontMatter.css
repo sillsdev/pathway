@@ -1,0 +1,60 @@
+/** imported styles from from FrontMatter.css **/
+
+.Front_Matter {
+margin-left : 48pt;
+margin-right: 48pt;
+text-align: justify;
+
+}
+em {
+    font-weight: bold;
+    font-style: normal;
+}
+a {
+    white-space: nowrap;
+}
+table {
+    margin-bottom: 1em;
+}
+td {
+    vertical-align: middle;
+    padding: 8px;
+}
+h1 {
+    font-size: 150%;
+    margin-top: 1em;
+    margin-bottom: 0;
+}
+#TitlePage h1 {
+    font-size: 250%;
+    margin-top: 2em;
+    text-align: center;
+}
+h2 {
+    font-size: 125%;
+    margin-top: 1em;
+    margin-bottom: 0;
+}
+.ccimg {
+    width: 32px;
+    height: 32px;
+}
+p {
+    margin-top: .5em;
+    margin-bottom: 1em;
+}
+#Logo {
+    padding-top: 3em;
+}
+.Publisher {
+    padding-top: 6em;
+    font-size: 80%;
+    text-align: center;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+.logo {
+    text-align: center;
+    padding-top: .5em;
+    margin-top: 0;
+}
