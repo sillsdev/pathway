@@ -6,6 +6,10 @@
 *  these values explicitly allows us to override the merged settings.
 */
 
+.letter              
+{
+     font-size : 250%;
+}
 .letData, .revData   { font-size: 100%; }
 .CmPossibility-publishDomainTypeForReversal-AbbreviationPub,
 .CmPossibility-publishDomainTypeForReversal-NamePub,
@@ -91,8 +95,7 @@
 .headwordminor       { font-size: 100%; }
 .headwordminor :after { font-size: 100%; }
 .headwordminor > .xitem + .xitem :before { font-size: 100%; }
-.letHead             { font-size: 14pt; }
-.letter              { font-size: 14pt; }
+.letHead             { font-size: 125%; }
 .LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub { font-size: 100%; }
 .LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub { font-size: 100%; }
 .LexEntrypublishStemParaHomographNumber :after { font-size: 100%; }

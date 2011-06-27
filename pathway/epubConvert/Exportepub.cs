@@ -168,61 +168,34 @@ namespace SIL.PublishingSolution
                 BuildLanguagesList(projInfo.DefaultXhtmlFileWithPath);
                 var langArray = new string[_langFontDictionary.Keys.Count];
                 _langFontDictionary.Keys.CopyTo(langArray, 0);
+
                 // CSS preprocessing
                 string tempFolder = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
-
-                // EDB 10/20/2010 - TD-1629
-                // HACK: Currently the merged CSS file fails validation; this is causing Adobe's epub reader
-                // to toss ALL formatting. I'm working around the issue for now by relying solely on the
-                // epub.css file.
-                // TODO: replace this with the merged CSS file block (below) when our merging process passes validation.
-                string mergedCSS;
-                var appPath = Common.GetPSApplicationPath();
-                var sbPath = new StringBuilder(appPath);
-                if (!appPath.EndsWith(Path.DirectorySeparatorChar.ToString()))
-                    sbPath.Append(Path.DirectorySeparatorChar);
-                sbPath.Append("Styles");
-                sbPath.Append(Path.DirectorySeparatorChar);
-                // EDB - try not messing with the CSS file
-                if (_inputType.Equals("scripture"))
-                {
-                    sbPath.Append("Scripture");
-                    sbPath.Append(Path.DirectorySeparatorChar);
-                    sbPath.Append("epub.css");
-                    mergedCSS = sbPath.ToString();
-                }
-                else
-                {
-                    sbPath.Append("Dictionary");
-                    sbPath.Append(Path.DirectorySeparatorChar);
-                    sbPath.Append("epub.css");
-                    mergedCSS = sbPath.ToString();
-                }
-//                string tempFolderName = Path.GetFileName(tempFolder);
-//                var mc = new MergeCss { OutputLocation = tempFolderName };
-//                string mergedCSS = mc.Make(projInfo.DefaultCssFileWithPath);
-//                preProcessor.ReplaceStringInCss(mergedCSS);
-//                preProcessor.SetDropCapInCSS(mergedCSS);
-//                string defaultCSS = Path.GetFileName(mergedCSS);
+                string tempFolderName = Path.GetFileName(tempFolder);
+                var mc = new MergeCss { OutputLocation = tempFolderName };
+                string mergedCSS = mc.Make(projInfo.DefaultCssFileWithPath, "book.css");
+                preProcessor.ReplaceStringInCss(mergedCSS);
+                preProcessor.SetDropCapInCSS(mergedCSS);
+                string defaultCSS = Path.GetFileName(mergedCSS);
                 // rename the CSS file to something readable
-//                string niceNameCSS = Path.Combine(Path.GetDirectoryName(mergedCSS), "book.css");
-                // end EDB 10/20/2010
-
                 string niceNameCSS = Path.Combine(tempFolder, "book.css");
                 projInfo.DefaultCssFileWithPath = niceNameCSS;
-                string defaultCSS = Path.GetFileName(niceNameCSS);
                 if (File.Exists(niceNameCSS))
                 {
                     File.Delete(niceNameCSS);
                 }
                 File.Copy(mergedCSS, niceNameCSS); 
                 mergedCSS = niceNameCSS;
+                defaultCSS = Path.GetFileName(niceNameCSS);
+                // get rid of styles that don't work with .epub
+                RemovePagedStylesFromCss(niceNameCSS);
                 Common.SetDefaultCSS(projInfo.DefaultXhtmlFileWithPath, defaultCSS);
                 Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCSS);
                 // pull in the style settings
                 LoadPropertiesFromSettings();
                 // customize the CSS file based on the settings
                 CustomizeCSS(mergedCSS);
+
                 // transform the XHTML content with our XSLT. Currently this does the following:
                 // - strips out "lang" tags from <span> elements (.epub doesn't like them there)
                 // - strips out <meta> tags (.epub chokes on the filename IIRC.  TODO: verify the problem here)
@@ -473,6 +446,94 @@ namespace SIL.PublishingSolution
         }
 
         #region Private Functions
+
+        #region MergedCSSHandling
+        /// <summary>
+        /// Removes stylings that don't work with e-book readers from the specified .css file.
+        /// </summary>
+        /// <param name="cssFile"></param>
+        private void RemovePagedStylesFromCss (string cssFile)
+        {
+            if (!File.Exists(cssFile)) {return;}
+            // open the file
+            var reader = new StreamReader(cssFile);
+            var writer = new StreamWriter(cssFile + ".tmp");
+            bool done = false;
+            string oneLine = null;
+            while (!done)
+            {
+                oneLine = reader.ReadLine();
+                if (oneLine == null)
+                {
+                    done = true;
+                    continue;
+                }
+                if (oneLine.Contains("/** imported"))
+                {
+                    writer.WriteLine(oneLine);
+                    done = true;
+                    continue;
+                }
+                // font family and size are specified elsewhere in the css - remove from the merged part
+                if (oneLine.Contains("font-family") || oneLine.Contains("font-size"))
+                {
+                    continue;
+                }
+                // epub doesn't work with footnote, prince-footnote, columns or string-set
+                if (oneLine.Contains("display: footnote") || oneLine.Contains("display: prince-footnote") ||
+                    oneLine.Contains("position: footnote") || oneLine.Contains("column-count") || oneLine.Contains("column-gap") ||
+                    oneLine.Contains("string-set"))
+                {
+                    continue;
+                }
+                // These are blocks that we need to remove completely:
+                // - The @page and ::<something> pseudo-elements are also not supported, at least in the way they are
+                //   generated by the xhtml export (i.e., for paged media).
+                // - The .entry element from the merged dictionary CSS has some wacky indents that need to be 
+                //   replaced by our styling
+                if (oneLine.Contains("@page") || oneLine.Contains("::") || oneLine.Contains(".entry "))
+                {
+                    // match the bracket count until we get back to 0 -- this will mark the end of the css block
+                    int bracketCount = 1;
+                    while (bracketCount != 0)
+                    {
+                        var nextChar = (char)reader.Read();
+                        switch (nextChar)
+                        {
+                            case '{':
+                                // found a sub-element - make sure we have a matching pair
+                                bracketCount++;
+                                break;
+                            case '}':
+                                // closed out an element (or sub-element) - decrement the bracket count
+                                bracketCount--;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    // the entire CSS should now be dropped -- continue on to the next line of data
+                    continue;
+                }
+                // if we got here, the line is good - write it out
+                writer.WriteLine(oneLine);
+            }
+            // there's nothing more we're interested in - read the rest of the file out
+            if (oneLine != null)
+            {
+                writer.Write(reader.ReadToEnd());
+            }
+            writer.Close();
+            reader.Close();
+            // now copy over our changes
+            if (File.Exists(cssFile))
+            {
+                // should always be the case
+                File.Delete(cssFile);
+            }
+            File.Move(cssFile + ".tmp", cssFile);
+        }
+        #endregion
 
         #region Font Handling
         /// <summary>
