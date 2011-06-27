@@ -14,16 +14,16 @@ var indexTab = false;
 // Created By:   James Prabu 
 // Created On: Sep 10 2009   
 // Modified By:  James Prabu                        
-// Modified On:  May 17 2011 
-// Task Number : TD-2347(hk00166b.tif picture missing)
+// Modified On:  June 27 2011 
+// Task Number : TD-2510(InDesign startup script causing problems for Publishing Assistant) (changes in function())
 // <remarks> 
-// Picture Caption Height, Width enlarged based on it's caption
+// Startup Macro should work for Pathway Document only 
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
 //$.level = 1; 
 //debugger;
-	
+
 #target indesign
 #targetengine "session"
 #targetengine 'afterOpen'
@@ -67,6 +67,14 @@ myEventListener = mySampleScriptAction.eventListeners.add("onInvoke",partialMacr
 	var myGroup;
 
 	myDocument = app.documents[app.documents.length-1];
+	
+	//TD-2510
+	//alert(myDocument.masterSpreads.item(0).name);
+	if(myDocument.masterSpreads.item(0).name != "F-FirstPage")
+	return;
+	//alert("Welcome to Pathway document");
+	//if(myDocument.pages.item(0).appliedMaster.name ==) 
+	
 	var groupLength = myDocument.groups.length -1;
 	if(groupLength >= 0)
 	{	
