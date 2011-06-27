@@ -273,6 +273,7 @@
 					<xsl:attribute name="id"><xsl:text>id</xsl:text><xsl:value-of select="../../../../xhtml:span[@class='scrBookCode']"/><xsl:text>_</xsl:text><xsl:value-of select="preceding::xhtml:span[@class='Chapter_Number'][1]"/><xsl:text>_</xsl:text><xsl:value-of select="."/></xsl:attribute>
 				</xsl:if>
 				<!-- Add any OPENING lexical punctuation -->
+				<!--
 				<xsl:if test="@class='pronunciation-minor' or @class='encyclopedic-info' ">
 					<xsl:text>[</xsl:text>
 				</xsl:if>
@@ -282,8 +283,10 @@
 				<xsl:if test="@class='usage-types' ">
 					<xsl:text>{</xsl:text>
 				</xsl:if>
+				-->
 				<xsl:apply-templates/>
 				<!-- Add any CLOSING lexical punctuation -->
+				<!--
 				<xsl:if test="@class='pronunciation-minor' or @class='encyclopedic-info' ">
 					<xsl:text>] </xsl:text>
 				</xsl:if>
@@ -294,7 +297,7 @@
 					<xsl:text>. </xsl:text>
 				</xsl:if>
 				<xsl:if test="following-sibling::xhtml:span[@class='xitem'] and @class='xitem' ">
-					<!-- These are for the most part separators between items -->
+					// These are for the most part separators between items 
 					<xsl:choose>
 						<xsl:when test="parent::xhtml:span[@class='crossrefs'] or parent::xhtml:span[@class='relations'] or parent::xhtml:span[@class='variantrefs'] or parent::xhtml:span[@class='variantrefs-minor'] or parent::xhtml:span[@class='sense-variantrefs'] ">							
 							<xsl:text>; </xsl:text>
@@ -325,6 +328,7 @@
 				<xsl:if test="@class='LexSense-publishStemComponentTarget-OwnerOutlinePub' or @class='variant-primary-minor' or @class='complexform-form' or @class='complexformrefs' or @class='complexform-type' or @class='definition' or @class='entryref-primary-minor' or @class='entryref-summary-minor' or @class='entryref-type' or @class='entryref-type-minor' or @class='etymology' or @class='etymology-form' or @class='etymology-gloss' or @class='examples' or @class='grammatical-info' or @class='headword' or @class='headword-minor' or @class='LexEntry-publishStemComponentTarget-SummaryDefinitionPub' or @class='LexEntry-publishStemMinorPrimaryTarget-SummaryDefinitionPub' or @class='LexEntryType-publishStemEntryType-AbbreviationPub' or @class='LexEntryType-publishStemMinorEntryType-AbbreviationPub' or @class='LexEntryType-publishStemMinorVariantType-ReverseAbbrPub' or @class='LexEntryType-publishStemSenseVariantType-ReverseAbbrPub' or @class='LexEntryType-publishStemVariantType-ReverseAbbrPub' or @class='LexSense-publishStemComponentTarget-GlossPub' or @class='partofspeech' or @class='pictureSense' or @class='primaryrefs-minor' or @class='info'or @class='scientific-name' or @class='sense-complexformrefs' or @class='sense-complexform-type' or @class='sense-variantref-entry-type' or @class='translation' or @class='variantref-entry-type' or @class='variantref-entry-type-minor' or @class='CmSemanticDomain-publishSemDomForReversal-AbbreviationPub' or @class='CmSemanticDomain-publishSemDomForReversal-NamePub' or @class='complexformref-entry-type' or @class='complexformref-headword' or @class='complexformrefs' or @class='crossref-headword' or @class='reversal-form' or @class='variantref-form' or @class='pronunciations-minor' ">
 					<xsl:text> </xsl:text>
 				</xsl:if>
+				-->
 			</xsl:copy>
 		</xsl:if>
 	</xsl:template>
