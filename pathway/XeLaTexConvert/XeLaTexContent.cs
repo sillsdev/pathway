@@ -1052,9 +1052,7 @@ namespace SIL.PublishingSolution
         }
 
         #region Private Methods
-
-
-
+        
         private void InitializeData(string projectPath, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
         {
             _outputType = Common.OutputType.XETEX;

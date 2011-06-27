@@ -14,6 +14,7 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,7 +25,7 @@ using Test;
 
 namespace SIL.PublishingSolution
 {
-    public class ExportXeLaTexConvert : IExportProcess  
+    public class ExportXeLaTexConvert : IExportProcess
     {
         #region Public Functions
         public string ExportType
@@ -44,7 +45,7 @@ namespace SIL.PublishingSolution
             }
             return returnValue;
 
-        }   
+        }
 
         /// <summary>
         /// Convert XHTML to ODT
@@ -59,7 +60,7 @@ namespace SIL.PublishingSolution
             //preProcessor.InsertHiddenChapterNumber();
             //preProcessor.InsertHiddenVerseNumber();
             //preProcessor.GetDefinitionLanguage();
-
+            
             string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
             projInfo.DefaultCssFileWithPath = preProcessor.ProcessedCss;
@@ -67,94 +68,92 @@ namespace SIL.PublishingSolution
 
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
-            cssTree.OutputType = Common.OutputType.XETEX; 
+            cssTree.OutputType = Common.OutputType.XELATEX;
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
 
-            string xetexFullFile = Path.Combine(projInfo.ProjectPath, fileName + ".tex");
-            StreamWriter xetexFile = new StreamWriter(xetexFullFile);
+            string xeLatexFullFile = Path.Combine(projInfo.ProjectPath, fileName + ".tex");
+            StreamWriter xeLatexFile = new StreamWriter(xeLatexFullFile);
+
+            OpenDocument(xeLatexFile);
 
             Dictionary<string, List<string>> classInlineStyle = new Dictionary<string, List<string>>();
             Dictionary<string, Dictionary<string, string>> xeTexAllClass = new Dictionary<string, Dictionary<string, string>>();
             XeLaTexStyles xeLaTexStyles = new XeLaTexStyles();
-            classInlineStyle = xeLaTexStyles.CreateXeTexStyles(projInfo.ProjectPath, xetexFile, cssClass);
+            classInlineStyle = xeLaTexStyles.CreateXeTexStyles(projInfo.ProjectPath, xeLatexFile, cssClass);
 
             XeLaTexContent xeLaTexContent = new XeLaTexContent();
-            Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo.ProjectPath,cssClass, xetexFile, projInfo.DefaultXhtmlFileWithPath, classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder);
+            Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo.ProjectPath, cssClass, xeLatexFile, projInfo.DefaultXhtmlFileWithPath, classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
-            CloseFile(xetexFile);
+            CloseDocument(xeLatexFile);
 
             ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
-            modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xetexFile, newProperty, cssClass, xetexFullFile);
+            modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexFullFile);
 
-            //CallXeTex(Path.GetFileName(xetexFullFile));
+            //CallXeTex(Path.GetFileName(xeLatexFullFile));
             Dictionary<string, string> imgPath = new Dictionary<string, string>();
             if (newProperty.ContainsKey("ImagePath"))
             {
                 imgPath = newProperty["ImagePath"];
             }
-            CallXeTex(xetexFullFile, true, imgPath);
+            CallXeLaTex(xeLatexFullFile, true, imgPath);
             return true;
         }
-
-        public void CallXeTex(string xetexFullFile,bool openFile,Dictionary<string, string> ImageFilePath)
+        
+        public void CallXeLaTex(string xeLatexFullFile, bool openFile, Dictionary<string, string> ImageFilePath)
         {
-            string workingXetex = Common.GetTempCopy("xelatexExe");
-            string instPath = Common.PathCombine(workingXetex, "bin");
-            string dest = Common.PathCombine(instPath,Path.GetFileName(xetexFullFile));
-            const bool overwrite = true;
-            File.Copy(xetexFullFile, dest, overwrite);
+            
+            string str = Common.PathCombine(Common.GetApplicationPath(), "XeLaTexExe");
 
-
-            foreach (KeyValuePair<string, string> keyValuePair in ImageFilePath)
-            {
-
-                string filePath = keyValuePair.Value;
-                string toPath = Path.Combine(instPath, Path.GetFileName(filePath));
-                File.Copy(filePath, toPath, true);
-            }
-
-            if (!File.Exists(dest))
-            {
-                MessageBox.Show("File is not copied");
-                return;
-            }
-
+            string instPath = Common.PathCombine(str, "bin");
             string originalDirectory = Directory.GetCurrentDirectory();
+            string dest = Common.PathCombine(instPath, Path.GetFileName(xeLatexFullFile));
+            File.Copy(xeLatexFullFile, dest, true);
+
             Directory.SetCurrentDirectory(instPath);
             const string name = "xelatex.exe";
             //string p1Output = string.Empty;
             string p1Error = string.Empty;
             using (Process p1 = new Process())
             {
-            p1.StartInfo.FileName = name;
-            if (xetexFullFile != null)
-                    p1.StartInfo.Arguments = "-interaction=batchmode \"" + Path.GetFileName(xetexFullFile) + "\"";
+                p1.StartInfo.FileName = name;
+                if (xeLatexFullFile != null)
+                    p1.StartInfo.Arguments = "-interaction=batchmode \"" + Path.GetFileName(xeLatexFullFile) + "\"";
                 p1.StartInfo.RedirectStandardOutput = true;
-            p1.StartInfo.RedirectStandardError = p1.StartInfo.RedirectStandardOutput;
-            p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
-            p1.Start();
+                p1.StartInfo.RedirectStandardError = p1.StartInfo.RedirectStandardOutput;
+                p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
+                p1.Start();
                 p1.WaitForExit();
                 //p1Output = p1.StandardOutput.ReadToEnd();
                 p1Error = p1.StandardError.ReadToEnd();
             }
             Directory.SetCurrentDirectory(originalDirectory);
-            string texNameOnly = Path.GetFileNameWithoutExtension(xetexFullFile);
-            string userFolder = Path.GetDirectoryName(xetexFullFile);
+            string texNameOnly = Path.GetFileNameWithoutExtension(xeLatexFullFile);
+            string userFolder = Path.GetDirectoryName(xeLatexFullFile);
             string logFullName = CopyProcessResult(instPath, texNameOnly, ".log", userFolder);
             string pdfFullName = CopyProcessResult(instPath, texNameOnly, ".pdf", userFolder);
+
             if (openFile && File.Exists(pdfFullName))
             {
                 Common.OpenOutput(pdfFullName);
             }
-            //MessageBox.Show(p1Output, "XeTex output");
-            MessageBox.Show(p1Error, "XeTex errors");
-            MessageBox.Show(string.Format("Review {0} for conversion results.", logFullName), "XeTex log");
+            MessageBox.Show(pdfFullName, "XeLaTex output");
+            MessageBox.Show(p1Error, "XeLaTex errors");
+            MessageBox.Show(string.Format("Review {0} for conversion results.", logFullName), "XeLaTex log");
             const bool recursive = true;
-            Directory.Delete(workingXetex, recursive);
+
+            try
+            {
+                File.Delete(Common.PathCombine(instPath, texNameOnly + ".log"));
+                File.Delete(Common.PathCombine(instPath, texNameOnly + ".pdf"));
+                File.Delete(Common.PathCombine(instPath, texNameOnly + ".aux"));
+                File.Delete(dest);
+            }
+            catch{}
+            
         }
 
         protected static string CopyProcessResult(string instPath, string texNameOnly, string ext, string userFolder)
-                {
+        {
             const bool overwrite = true;
             string logName = texNameOnly + ext;
             string tmpLogFullName = Path.Combine(instPath, logName);
@@ -164,13 +163,20 @@ namespace SIL.PublishingSolution
             return logFullName;
         }
 
-
-        private void CloseFile(StreamWriter xetexFile)
+        private void OpenDocument(StreamWriter xeLatexFile)
         {
-            xetexFile.WriteLine();
-            xetexFile.WriteLine(@"\bye");
-            xetexFile.Flush();
-            xetexFile.Close();
+            xeLatexFile.WriteLine();
+            //xeLatexFile.WriteLine(@"\documentclass{article}");
+            //xeLatexFile.WriteLine(@"\begin{document}");
+        }
+
+        private void CloseDocument(StreamWriter xeLatexFile)
+        {
+            xeLatexFile.WriteLine();
+            //xetexFile.WriteLine(@"\bye");
+            xeLatexFile.WriteLine(@"\end{document}");
+            xeLatexFile.Flush();
+            xeLatexFile.Close();
         }
 
 

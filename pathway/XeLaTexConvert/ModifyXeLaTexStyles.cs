@@ -46,28 +46,25 @@ namespace SIL.PublishingSolution
 
         private void MapProperty()
         {
+            string xeTexProperty ="";
             foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _cssClass)
             {
                 if (cssClass.Key.IndexOf("h1") >= 0 ||
                     cssClass.Key.IndexOf("h2") >= 0 || cssClass.Key.IndexOf("h3") >= 0 ||
                     cssClass.Key.IndexOf("h4") >= 0 || cssClass.Key.IndexOf("h5") >= 0 ||
                     cssClass.Key.IndexOf("h6") >= 0) continue;
-
                 List<string> _inlineStyle = new List<string>();
-                
                 string className = RemoveBody(cssClass.Key);
                 if (className.Length == 0 ) continue; 
-
-                string xeTexProperty = mapProperty.XeTexProperty(cssClass.Value, className, _inlineStyle);
-
+                xeTexProperty = mapProperty.XeTexProperty(cssClass.Value, className, _inlineStyle);
                 if (xeTexProperty.Trim().Length > 0)
                 {
                     Common.FileInsertText(_xetexFullFile, xeTexProperty);
                     //_xetexFile.WriteLine(xeTexProperty);
                 }
-
-
             }
+            Common.FileInsertText(_xetexFullFile, @"\documentclass{article} ");
+            Common.FileInsertText(_xetexFullFile, @"\begin{document} ");
         }
 
         private string RemoveBody(string paraStyle)

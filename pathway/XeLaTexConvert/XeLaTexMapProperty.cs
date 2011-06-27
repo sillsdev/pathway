@@ -604,9 +604,10 @@ namespace SIL.PublishingSolution
         {
             if (propertyValue == string.Empty)
             {
-                return;
+                return; 
             }
-            string color = "textcolor[RGB]" + propertyValue.Replace("#", "");   //:color=880000
+            //string color = "textcolor[RGB]" + propertyValue.Replace("#", "");   //:color=880000
+            string color = ":color=" + propertyValue.Replace("#", "");   //:color=880000
             _fontStyle.Add(color);
             //_IDProperty["FillColor"] = "Color/" + propertyValue;
         }
