@@ -191,6 +191,7 @@
     <Compile Include="Build\FileComponentsTest.cs" />
     <Compile Include="ConfigurationTool\ConfigurationToolBLTest.cs" />
     <Compile Include="ConfigurationTool\ConfigurationToolTest.cs" />
+    <Compile Include="XeLatex\XeLaTexContentTest.cs" />
     <Compile Include="CssDialog\ContentsTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -339,6 +340,10 @@
     <ProjectReference Include="..\WordPressConvert\WordPressConvert.csproj">
       <Project>{12FE8988-5957-427D-BA6C-B4C601F5A558}</Project>
       <Name>WordPressConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XeLaTexConvert\XeLaTexConvert.csproj">
+      <Project>{65D64C80-2AA4-4BD0-AC87-B4C2B3720012}</Project>
+      <Name>XeLaTexConvert</Name>
     </ProjectReference>
     <ProjectReference Include="..\XeTeXConvert\XeTeXConvert.csproj">
       <Project>{310E4B50-F423-46B1-AD72-740CC859E4C3}</Project>
@@ -1361,6 +1366,9 @@
     <Folder Include="PsExport\TestFiles\Input\T7\Pictures\" />
     <Folder Include="WordPressConvert\TestFiles\Expected\" />
     <Folder Include="WordPressConvert\TestFiles\Input\" />
+    <Folder Include="XeLatex\TestFiles\Expected\" />
+    <Folder Include="XeLatex\TestFiles\input\" />
+    <Folder Include="XeLatex\TestFiles\output\" />
     <Folder Include="Xetex\TestFiles\Expected\" />
     <Folder Include="Xetex\TestFiles\input\" />
     <Folder Include="Xetex\TestFiles\output\" />

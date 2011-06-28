@@ -1,0 +1,13 @@
+.letHead {
+    font-size:25pt;
+}
+.letHead:after {
+    content: "***";
+    color:orange;
+    font-size:18pt;
+}
+.letHeadb:after {
+content: "\2666";
+    color:orange;
+    font-size:18pt;
+}

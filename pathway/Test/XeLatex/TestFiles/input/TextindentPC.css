@@ -1,0 +1,13 @@
+.a {
+    font-size: 15pt;
+    text-indent:3pc;
+}
+
+.b {
+    font-size: 15pt;
+    text-indent:-3pc;
+}
+
+.c {
+    font-size: 15pt;
+}

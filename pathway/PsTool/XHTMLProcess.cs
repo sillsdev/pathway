@@ -495,7 +495,12 @@ namespace SIL.PublishingSolution
             {
                 _isNewParagraph = true;
                 _isParagraphClosed = true;
-                if (_outputType == Common.OutputType.XETEX)
+                
+				if (_outputType == Common.OutputType.XELATEX)
+                {
+                    _xetexFile.WriteLine();
+                }
+                else if (_outputType == Common.OutputType.XETEX)
                 {
                     _xetexFile.WriteLine();
                 }

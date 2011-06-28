@@ -73,9 +73,7 @@ namespace SIL.PublishingSolution
 
             string xeLatexFullFile = Path.Combine(projInfo.ProjectPath, fileName + ".tex");
             StreamWriter xeLatexFile = new StreamWriter(xeLatexFullFile);
-
-            OpenDocument(xeLatexFile);
-
+            
             Dictionary<string, List<string>> classInlineStyle = new Dictionary<string, List<string>>();
             Dictionary<string, Dictionary<string, string>> xeTexAllClass = new Dictionary<string, Dictionary<string, string>>();
             XeLaTexStyles xeLaTexStyles = new XeLaTexStyles();
@@ -136,10 +134,10 @@ namespace SIL.PublishingSolution
             {
                 Common.OpenOutput(pdfFullName);
             }
-            MessageBox.Show(pdfFullName, "XeLaTex output");
-            MessageBox.Show(p1Error, "XeLaTex errors");
-            MessageBox.Show(string.Format("Review {0} for conversion results.", logFullName), "XeLaTex log");
-            const bool recursive = true;
+            //MessageBox.Show(pdfFullName, "XeLaTex output");
+            //MessageBox.Show(p1Error, "XeLaTex errors");
+            //MessageBox.Show(string.Format("Review {0} for conversion results.", logFullName), "XeLaTex log");
+            //const bool recursive = true;
 
             try
             {
@@ -163,16 +161,11 @@ namespace SIL.PublishingSolution
             return logFullName;
         }
 
-        private void OpenDocument(StreamWriter xeLatexFile)
-        {
-            xeLatexFile.WriteLine();
-            //xeLatexFile.WriteLine(@"\documentclass{article}");
-            //xeLatexFile.WriteLine(@"\begin{document}");
-        }
-
+        
         private void CloseDocument(StreamWriter xeLatexFile)
         {
             xeLatexFile.WriteLine();
+//          xeLatexFile.WriteLine(@"\end{multicols}");
             //xetexFile.WriteLine(@"\bye");
             xeLatexFile.WriteLine(@"\end{document}");
             xeLatexFile.Flush();

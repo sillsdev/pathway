@@ -1,0 +1,10 @@
+\font\picturepictureRightentrydicBody="Times New Roman" at 12pt
+\font\pictureRightentrydicBody="Times New Roman" at 12pt
+\font\entrydicBody="Times New Roman" at 12pt
+
+
+\def\leftpicpar#1{\setbox0=\hbox{\XeTeXpicfile #1}\dimen0=\wd0 \advance\dimen0 by 3pt\count255=\ht0 \advance\count255 by \baselineskip\divide\count255 by \baselineskip\hangindent\dimen0 \hangafter-\count255\noindent\llap{\vbox to 0pt{\kern-0.7\baselineskip\box0\vss}\kern3pt}\indent\ignorespaces}
+\leftpicpar{"c.jpg" scaled 400}
+
+
+\bye
