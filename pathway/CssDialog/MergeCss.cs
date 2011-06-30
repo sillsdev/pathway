@@ -15,10 +15,12 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -89,7 +91,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         /// <param name="name">name of css file to read</param>
         /// <param name="sw">output stream to write contents</param>
-        public void ImportFile(string name, TextWriter sw)
+        public void ImportFile1(string name, TextWriter sw)
         {
             StreamReader sr;
             var validName = name;
@@ -116,7 +118,7 @@ namespace SIL.PublishingSolution
                 Match m = Regex.Match(line, "@import \"(.*)\";", RegexOptions.IgnoreCase);
                 if (m.Success)
                 {
-                    ImportFile(m.Groups[1].Value, sw);
+                    ImportFile1(m.Groups[1].Value, sw);
                     continue;
                 }
                 sw.WriteLine(line);
@@ -124,6 +126,94 @@ namespace SIL.PublishingSolution
             }
             sr.Close();
         }
+
+        /// <summary>
+        /// Read a css file into the temporary file
+        /// </summary>
+        /// <param name="name">name of css file to read</param>
+        /// <param name="sw">output stream to write contents</param>
+        public void ImportFile(string name, TextWriter sw)
+        {
+            ArrayList arrayCssFile = new ArrayList();
+            string validName = Common.PathCombine(_cssPath, name);
+            arrayCssFile = GetCssNameList(validName, arrayCssFile);
+            //if(arrayCSSFile.Count == 0) return validName; //
+            //if (arrayCssFile.Contains(validName))
+            //{
+            //    arrayCssFile.RemoveAt(arrayCssFile.IndexOf(validName));
+            //    arrayCssFile.Add(validName);
+            //}
+            Common.RemovePreviousMirroredPage(arrayCssFile);
+            for (int i = 0; i <= arrayCssFile.Count - 1; i++)
+            {
+                StreamReader sr = new StreamReader(arrayCssFile[i].ToString());
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    Match m = Regex.Match(line, "@import \"(.*)\";", RegexOptions.IgnoreCase);
+                    if (m.Success)
+                    {
+                        continue;
+                    }
+                    sw.WriteLine(line);
+                }
+                sr.Close();
+            }
+        }
+
+        #region FillName(string cssFileWithPath)
+        /// -------------------------------------------------------------------------------------------
+        /// <summary>
+        /// This method collects css files names into ArrayList based on base CSS File.
+        /// <param name="cssFileWithPath">Its gets the file path of the CSS File</param>
+        /// <returns>ArrayList contains CSS filenames which are used</returns>
+        /// -------------------------------------------------------------------------------------------
+        public ArrayList GetCssNameList(string name, ArrayList arrayCssFile)
+        {
+            StreamReader sr;
+            var validName = name;
+            if (!File.Exists(name))
+            {
+                validName = Common.PathCombine(_cssPath, Path.GetFileName(name));
+                if (!File.Exists(validName))
+                {
+                    try
+                    {
+                        validName = Param.StylePath(Path.GetFileName(name));
+                        if (File.Exists(validName))
+                        {
+                            arrayCssFile.Add(validName);
+                        }
+                    }
+                    catch (KeyNotFoundException ex)
+                    {
+                        return arrayCssFile;
+                    }
+                    if (!File.Exists(validName)) return arrayCssFile;
+                }
+            }
+            
+            sr = new StreamReader(validName);
+            while (!sr.EndOfStream)
+            {
+                string line = sr.ReadLine();
+                Match m = Regex.Match(line, "@import \"(.*)\";", RegexOptions.IgnoreCase);
+                if (m.Success)
+                {
+                    GetCssNameList(Common.PathCombine(_cssPath, m.Groups[1].Value), arrayCssFile);
+                    continue;
+                }
+                if (!arrayCssFile.Contains(validName))
+                {
+                    arrayCssFile.Add(validName);
+                }
+            }
+            sr.Close();
+            return arrayCssFile;
+        }
+        #endregion
+
+
         #endregion Private Methods
     }
 }

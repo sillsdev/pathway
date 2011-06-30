@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="11">
+    xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="12">
     <settings>
         <property name="InputPath" value="%(AppData)s/SIL/Pathway"/>
         <property name="OutputPath" value="%(AppData)s/SIL/Pathway"/>
@@ -20,7 +20,7 @@
         <property name="SelectedIcon" value="Graphic/arrow.png"/>
         <property name="MissingIcon" value="Graphic/missing.png"/>
         <property name="Help" value="PsDoc.chm"/>
-        <property name="PrintVia" value="OpenOffice"/>
+        <property name="PrintVia" value="LibreOffice"/>
         <property name="ConfigureDictionary" value="True"/>
         <property name="ReversalIndexes" value="True"/>
         <property name="GrammerSketch" value="False"/>
@@ -28,7 +28,7 @@
         <property name="ExtraProcessing" value="True"/>
     </settings>
     <defaultSettings>
-        <property name="PrintVia" value="OpenOffice"/>
+        <property name="PrintVia" value="LibreOffice"/>
         <property name="ConfigureDictionary" value="True"/>
         <property name="ReversalIndexes" value="True"/>
         <property name="GrammerSketch" value="False"/>
@@ -64,7 +64,7 @@
             </style>
         </paper>
         <mobile>
-            <style name="GoBible" file="GoBible.css" approvedBy="GPS">
+            <style name="Go Bible" file="GoBible.css" approvedBy="GPS">
                 <description>Text only, no section heads or cross references</description>
             </style>
         </mobile>
@@ -104,6 +104,54 @@
             <defaultValue></defaultValue>
         </meta>
         <meta name="Copyright Holder" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Type" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Source" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Format" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Contributor" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Relation" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Coverage" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Subject" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Date" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Language" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Identifier" outputTypes="all">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Cover Page" outputTypes="epub">
+            <defaultValue>Yes</defaultValue>
+        </meta>
+        <meta name="Cover Page Filename" outputTypes="epub">
+            <defaultValue></defaultValue>
+        </meta>
+        <meta name="Cover Page Title" outputTypes="epub">
+            <defaultValue>Yes</defaultValue>
+        </meta>
+        <meta name="Title Page" outputTypes="all">
+            <defaultValue>No</defaultValue>
+        </meta>
+        <meta name="Copyright Page" outputTypes="all">
+            <defaultValue>No</defaultValue>
+        </meta>
+        <meta name="Copyright Page Filename" outputTypes="all">
             <defaultValue></defaultValue>
         </meta>
     </Metadata>

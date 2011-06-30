@@ -74,7 +74,7 @@
             <font>Mangal</font>
         </UnicodeMap>
 		<UnicodeMap Language="Default" From="0x0080" To="0xFFEE">
-            <font>Charis SIL</font>
+            <font>Charis SIL Compact</font>
         </UnicodeMap>
     </font-language-unicode-map>
 

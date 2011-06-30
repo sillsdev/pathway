@@ -91,7 +91,7 @@ namespace SIL.PublishingSolution
         string _divClass = string.Empty;
         string _allDiv = string.Empty;
         string _class = string.Empty;
-        bool _divOpen;
+        private bool _pseudoSingleSpace = false;
         //bool _isWhiteSpace;
         bool _isNewLine = true;
         string _prevLang = string.Empty;
@@ -666,6 +666,10 @@ namespace SIL.PublishingSolution
             content = content.Replace("\t", "");
             Char[] charac = content.ToCharArray();
             StringBuilder builder = new StringBuilder();
+            if (charac.Length == 1)
+            {
+                return content;
+            }
             foreach (char var in charac)
             {
                 if (var == ' ' || var == '\b')
@@ -850,7 +854,8 @@ namespace SIL.PublishingSolution
 
         private void whiteSpacePre(string content, bool pseudo)
         {
-            string whiteSpacePre = GetPropertyValue(_classNameWithLang, "white-space", string.Empty);
+            //string whiteSpacePre = GetPropertyValue(_classNameWithLang, "white-space", string.Empty);
+            string whiteSpacePre = GetPropertyValue(_classNameWithLang, "white-space", content);
             if (whiteSpacePre == "pre")
             {
                 WhiteSpace(content, _classNameWithLang);
@@ -879,7 +884,17 @@ namespace SIL.PublishingSolution
                 }
                 else if (pseudo)
                 {
-                    _writer.WriteRaw(content);
+                    if (content == " " && (_pseudoSingleSpace == false))
+                    {
+                        _writer.WriteStartElement("text:s");
+                        _writer.WriteAttributeString("text:c", "1");
+                        _writer.WriteEndElement();
+                        _pseudoSingleSpace = true;
+                    }
+                    else
+                    {
+                        _writer.WriteRaw(content);
+                    }
                 }
                 else if (_isVerseNumberContent)
                 {
@@ -888,6 +903,7 @@ namespace SIL.PublishingSolution
                 else if (!VisibleHidden())
                 {
                     _writer.WriteString(content);
+                    _pseudoSingleSpace = false;
                 }
             }
         }

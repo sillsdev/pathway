@@ -143,8 +143,8 @@ namespace SIL.PublishingSolution
             {
                 CopyCustomStyles(fileNamewithPath);
                 CopySettingsFile(FileName.DictionaryStyleSettings.ToString(), inputtype, fileNamewithPath);
-                if (isProcessSucess)
-                    RestoreCustomStyles(fileNamewithPath);
+                //if (isProcessSucess)
+                    //RestoreCustomStyles(fileNamewithPath);
             }
         }
 

@@ -725,7 +725,7 @@ namespace SIL.PublishingSolution
             //preProcessor.GetTempFolderPath();
             //preProcessor.GetfigureNode();
             preProcessor.ImagePreprocess();
-            preProcessor.InsertFrontMatter(preProcessor.GetCreatedTempFolderPath, true);
+            //preProcessor.InsertFrontMatter(preProcessor.GetCreatedTempFolderPath, true);
             preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
             if (projInfo.SwapHeadword)
                 preProcessor.SwapHeadWordAndReversalForm();

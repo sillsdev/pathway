@@ -405,16 +405,26 @@ namespace Test.PsExport
 
 
         #region T6
-#if OutOfDateTests
-    /// <summary>
-    /// Simple test where no changes are made to the settings.
-    /// </summary>
+        #if OutOfDateTests
         [Test]
         public void AcquireUserSettingsT6()
         {
             AcquireUserSettingsTest("T6", "main-util1.css", "T6: Url blank", true);
         }
-#endif
+        #endif
         #endregion T6
+
+        #region T11
+        /// <summary>
+        /// Test ODT export
+        /// </summary>
+        [Test]
+        [Ignore]
+        public void PsExportT11()
+        {
+            ExportTest("T11", "main.xhtml", "Dictionary", "OpenOffice", "T11: Flex ODT Export Test");
+            //DeExportTest("T11", "main.xhtml", "A4Setting.css", "LibreOffice", "T11: ODT Export Test");
+        }
+        #endregion T11
     }
 }

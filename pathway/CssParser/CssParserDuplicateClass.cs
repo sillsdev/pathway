@@ -100,6 +100,7 @@ namespace SIL.PublishingSolution
                 string BaseCssFileWithPath = inputCSSPath;
                 ArrayList arrayCSSFile = Common.GetCSSFileNames(inputCSSPath, BaseCssFileWithPath);
                 arrayCSSFile.Add(BaseCssFileWithPath);
+                Common.RemovePreviousMirroredPage(arrayCSSFile);
                 try
                 {
                     GetErrorReport(inputCSSPath);
