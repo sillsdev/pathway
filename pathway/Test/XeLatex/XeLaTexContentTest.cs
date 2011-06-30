@@ -90,7 +90,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void TextColorTest()
@@ -191,7 +191,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontBoldItalicTest()  // TD-2188()
@@ -241,7 +241,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void DisplayBlockTest()
@@ -351,7 +351,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
         #endregion
-        [Ignore]
+        
         [Test]
         public void EMTest1()
         {
@@ -360,7 +360,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         public void Font1()
         {
@@ -438,7 +438,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        [Ignore]
+        
         [Test]
         //TD-2302 font-family: Sans-Serif;
         public void FontFamily2()
@@ -448,7 +448,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         //TD-2302 font-family: Sans-Serif;
         public void FontFamily4()
@@ -458,7 +458,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         //TD-2303 font-family: Gentium
         public void FontFamily1()
@@ -468,7 +468,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         //TD-2303 font-family: Gentium
@@ -479,7 +479,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         //TD-2303 font-family: Gentium
@@ -490,7 +490,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         //TD-2303 font-family: Gentium
         public void FontFamily4a()
@@ -500,7 +500,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         //TD-2303 font-family: Gentium
@@ -511,7 +511,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         //TD-2059 font-family: "<default serif>", serif;
         public void FontFamily6()
@@ -532,7 +532,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void Counter1Test()
@@ -542,7 +542,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void Counter2Test()
@@ -552,7 +552,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void Counter3Test()

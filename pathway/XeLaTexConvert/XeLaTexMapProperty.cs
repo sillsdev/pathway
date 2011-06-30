@@ -22,7 +22,7 @@ namespace SIL.PublishingSolution
 
 
         //TextInfo _titleCase = CultureInfo.CurrentCulture.TextInfo;
-        public string XeTexProperty(Dictionary<string, string> cssProperty,string className, List<string> inlineStyle)
+        public string XeLaTexProperty(Dictionary<string, string> cssProperty,string className, List<string> inlineStyle)
         {
             Initialize(className, cssProperty, inlineStyle);
             foreach (KeyValuePair<string, string> property in cssProperty)
@@ -119,7 +119,7 @@ namespace SIL.PublishingSolution
                     //    ColumnGap(property.Value);
                     //    break;
                     //case "display":
-                    //     Display(property.Value);
+                    //    Display(property.Value);
                     //    break;
                     //case "page-break-before":
                     //    PageBreakBefore(property.Value);
@@ -631,6 +631,15 @@ namespace SIL.PublishingSolution
             _IDProperty["backgroundColor"] = rgb2cmyk(red,green,blue);
 
         }
+        public void Display(string propertyValue)
+        {
+            if (propertyValue == string.Empty)
+            {
+                return;
+            }
+          //  _fontStyle.Add(propertyValue);
+            _IDProperty["display"] = propertyValue;
+        }     
         public void ColumnCount(string propertyValue)
         {
             if (propertyValue == string.Empty || Common.ValidateAlphabets(propertyValue)
@@ -761,6 +770,7 @@ namespace SIL.PublishingSolution
             _IDProperty["Justification"] = propertyValue;
             _inlineStyle.Add(propertyValue);
         }
+
         public void FontSize(string propertyValue)
         {
             if (propertyValue == "larger" || propertyValue == "smaller")
@@ -841,13 +851,6 @@ namespace SIL.PublishingSolution
             return cmyk;
         }
 
-        public void Display(string propertyValue)
-        {
-            if (propertyValue == string.Empty)
-            {
-                return;
-            }
-            _IDProperty["display"] = propertyValue;
-        }        
+           
     }
 }

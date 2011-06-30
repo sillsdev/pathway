@@ -69,13 +69,13 @@ namespace SIL.PublishingSolution
                     cssClass.Key.IndexOf("h6") >= 0) continue;
 
                 _inlineStyle = new List<string>();
-                string xeTexProperty = mapProperty.XeTexProperty(cssClass.Value, cssClass.Key, _inlineStyle);
+                string xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, cssClass.Key, _inlineStyle);
 
                 //if (_inlineStyle.Count > 0)
                 {
                     _classInlineStyle[cssClass.Key] = _inlineStyle;
                 }
-                if (xeTexProperty.Trim().Length > 0 && Common.Testing)
+                if (xeLaTexProperty.Trim().Length > 0 && Common.Testing)
                 {
                     //_xetexFile.WriteLine(xeTexProperty);
                 }

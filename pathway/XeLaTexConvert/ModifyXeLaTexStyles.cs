@@ -46,7 +46,7 @@ namespace SIL.PublishingSolution
 
         private void MapProperty()
         {
-            string xeTexProperty ="";
+            string xeLaTexProperty = "";
             foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _cssClass)
             {
                 if (cssClass.Key.IndexOf("h1") >= 0 ||
@@ -56,10 +56,10 @@ namespace SIL.PublishingSolution
                 List<string> _inlineStyle = new List<string>();
                 string className = RemoveBody(cssClass.Key);
                 if (className.Length == 0 ) continue; 
-                xeTexProperty = mapProperty.XeTexProperty(cssClass.Value, className, _inlineStyle);
-                if (xeTexProperty.Trim().Length > 0)
+                xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, className, _inlineStyle);
+                if (xeLaTexProperty.Trim().Length > 0)
                 {
-                    Common.FileInsertText(_xetexFullFile, xeTexProperty);
+                    Common.FileInsertText(_xetexFullFile, xeLaTexProperty);
                     //_xetexFile.WriteLine(xeTexProperty);
                 }
             }

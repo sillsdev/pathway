@@ -1148,7 +1148,7 @@ namespace SIL.PublishingSolution
                         }
                         _tempStyle[property.Key] = property.Value;
                     }
-                    else if (_outputType == Common.OutputType.XETEX)
+                    else if (_outputType == Common.OutputType.XETEX || _outputType == Common.OutputType.XELATEX)
                     {
                         if (_tempStyle.ContainsKey(property.Key) == false)
                         {
