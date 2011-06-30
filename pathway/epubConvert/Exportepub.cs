@@ -254,6 +254,10 @@ namespace SIL.PublishingSolution
                 // add the total file count (so far) to the progress bar, so it's a little more accurate
                 inProcess.AddToMaximum(splitFiles.Count);
 
+                //if (_inputType.Equals("dictionary"))
+                //{
+                //    ContentCssToXhtml(niceNameCSS, splitFiles);
+                //}
                 foreach (string file in splitFiles)
                 {
                     if (File.Exists(file))
@@ -266,6 +270,7 @@ namespace SIL.PublishingSolution
                     }
                     inProcess.PerformStep();
                 }
+
                 // create the "epub" directory structure and copy over the boilerplate files
                 sb.Append(tempFolder);
                 sb.Append(Path.DirectorySeparatorChar);
@@ -448,6 +453,132 @@ namespace SIL.PublishingSolution
         #region Private Functions
 
         #region MergedCSSHandling
+        /// <summary>
+        /// This method addresses an ugly problem in e-book readers, where the :before and :after pseudo-items in the CSS aren't
+        /// recognized (causing some bad spacing / punctuation). We work around the issue by moving the properties into an XSLT
+        /// file and running it on the given list of xhtmlFiles -- moving the characters into the XHTML so it will render
+        /// in all readers.
+        /// </summary>
+        /// <param name="cssFile">CSS file containing content properties that need to be moved into the XHTML</param>
+        /// <param name="xhtmlFiles">List of XHTML files that will get the content characters inserted via our generated XSLT.</param>
+        private void ContentCssToXhtml (string cssFile, List<string> xhtmlFiles)
+        {
+            if (!File.Exists(cssFile)) {return;}
+            string xsltFullName = Common.FromRegistry("punct_XHTML.xslt");
+            if (!File.Exists(xsltFullName)) {return;}
+            var tempXslt = Path.Combine(Path.GetTempPath(), Path.GetFileName(xsltFullName));
+            File.Copy(xsltFullName, tempXslt, true);
+
+            // copy the CSS rules into a Dictionary and iterate through it
+            var sbBefore = new StringBuilder();
+            var sbAfter = new StringBuilder();
+            var sbBetween = new StringBuilder();
+            Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
+            CssTree cssTree = new CssTree();
+            cssTree.OutputType = Common.OutputType.MOBILE;
+            cssClass = cssTree.CreateCssProperty2(cssFile, true);
+            int startIndex = 0;
+            // iterate through the Dictionary. We're looking for instances of :before, :after and .xitem + xitem:before
+            // that have "content" properties -- when we find one, we'll convert the CSS into an XSLT rule that will insert
+            // the content text into XHTML.
+            foreach (string key in cssClass.Keys)
+            {
+                if (key.Contains("..after"))
+                {
+                    if (cssClass[key].ContainsKey("content"))
+                    {
+                        // found an item - is it the first?
+                        if (sbAfter.Length == 0)
+                        {
+                            // first item - write out the comment
+                            sbAfter.AppendLine("<!-- CLOSING lexical punctuation-->");
+                        }
+                        // write out the rule - if you come across the class, add the content text to the xhtml
+                        sbAfter.Append("<xsl:if test = \"@class = '");
+                        sbAfter.Append(key.Substring(0, key.Length - 7));
+                        sbAfter.Append("'\"><xsl:text>");
+                        sbAfter.Append(cssClass[key]["content"]);
+                        sbAfter.AppendLine("</xsl:text></xsl:if>");
+                    }
+                }
+                else if (key.Contains("..before"))
+                {
+                    // this could be either a :before or <class> + <class>:before (i.e., between items) -
+                    // figure out which it is
+                    if (key.Contains("-"))
+                    {
+                        if (cssClass[key].ContainsKey("content"))
+                        {
+                            // found an item - is it the first?
+                            if (sbBetween.Length == 0)
+                            {
+                                // first item - write out the opening rule:
+                                // for the <class> + <class>:before case, we're using an <xsl:choose> statement
+                                sbBetween.AppendLine("<xsl:if test=\"following-sibling::xhtml:span[@class='xitem'] and @class='xitem' \">");
+                                sbBetween.AppendLine("<!-- These are for the most part separators between items -->");
+                                sbBetween.AppendLine("<xsl:choose>");
+                            }
+                            // write out the rule - if you come across the class, add the content text to the xhtml
+                            sbBetween.Append("<xsl:when test = \"parent::xhtml:span[@class = '");
+                            startIndex = key.IndexOf("_") + 1;
+                            sbBetween.Append(key.Substring(startIndex, key.Length - 8 - startIndex));
+                            sbBetween.Append("']\"><xsl:text>");
+                            sbBetween.Append(cssClass[key]["content"]);
+                            sbBetween.AppendLine("</xsl:text></xsl:when>");
+                        }
+                    }
+                    else
+                    {
+                        if (cssClass[key].ContainsKey("content"))
+                        {
+                            // found an item - is it the first?
+                            if (sbBefore.Length == 0)
+                            {
+                                // first item - write out the comment
+                                sbBefore.AppendLine("<!-- OPENING lexical punctuation-->");
+                            }
+                            // write out the rule - if you come across the class, add the content text to the xhtml
+                            sbBefore.Append("<xsl:if test = \"@class = '");
+                            sbBefore.Append(key.Substring(0, key.Length - 8));
+                            sbBefore.Append("'\"><xsl:text>");
+                            sbBefore.Append(cssClass[key]["content"]);
+                            sbBefore.AppendLine("</xsl:text></xsl:if>");
+                        }
+                    }
+                }
+            }
+            // close out the StringBuilders
+            sbBetween.AppendLine("</xsl:choose></xsl:if>");
+
+            // for each (character to add)
+            // --> add to a stringbuilder like this:
+            var sb = new StringBuilder();
+            sb.AppendLine("<!-- OPENING lexical punctuation -->");
+            sb.Append("<xsl:if test = \"");
+            // add the class tests
+            sb.Append("\"><xsl:text>");
+            // add the character
+            sb.Append("</xsl:text></xsl:if>");
+            /*
+            // replace the before block with this item
+            Common.StreamReplaceInFile(tempXslt, "<!-- OPENING lexical punctuation -->", sbBefore.ToString());
+            Common.StreamReplaceInFile(tempXslt, "<!-- CLOSING lexical punctuation -->", sbAfter.ToString() + sbBetween.ToString());
+
+            // final step - run the updated xslt file);)
+            foreach (var xhtmlFile in xhtmlFiles)
+            {
+                Common.XsltProcess(xhtmlFile, tempXslt, Path.GetExtension(xhtmlFile) + ".tmp");
+                // replace the original file
+                if (File.Exists(xhtmlFile))
+                {
+                    File.Delete(xhtmlFile);
+                }
+                File.Move(xhtmlFile + ".tmp", xhtmlFile);
+            }
+             */
+        }
+
+
         /// <summary>
         /// Removes stylings that don't work with e-book readers from the specified .css file.
         /// </summary>
@@ -1430,22 +1561,29 @@ namespace SIL.PublishingSolution
             var reader = new StreamReader(filePath);
             var content = reader.ReadToEnd();
             reader.Close();
-            int index = 0;
-            int start = content.IndexOf(searchText, index);
+            int start = content.IndexOf(searchText, 0);
+            if (start != -1)
+            {
+                start += searchText.Length;
+            }
             int stop = 0;
             while (start != -1)
             {
                 // next instance of a relative hyperlink ref - read until the closing quote
                 stop = (content.IndexOf("\"", start) - start);
-                if (stop == -1) {break;}
-                var hrefID = content.Substring((start + searchText.Length), (stop + 1));
+                if (stop == -1) { break; }
+                var hrefID = content.Substring(start, (stop));
                 // We now have the href target id. Does the target exist in this file?
                 if (content.IndexOf("id=\"" + hrefID) == -1)
                 {
                     // not found -- this link is broken
                     brokenRelativeHrefIds.Add(hrefID);
                 }
-                start = content.IndexOf(searchText, (start + searchText.Length + stop));
+                start = content.IndexOf(searchText, (start + stop));
+                if (start != -1)
+                {
+                    start += searchText.Length;
+                }
             }
             return brokenRelativeHrefIds;
         }

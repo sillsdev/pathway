@@ -48,6 +48,23 @@ namespace SIL.PublishingSolution
             return _cssClass;
         }
 
+        /// <summary>
+        /// Similar to CreateCssProperty, but does not add any page elements into the mix
+        /// </summary>
+        /// <param name="cssSourceFile"></param>
+        /// <param name="setDefaultPageValue"></param>
+        /// <returns></returns>
+        public Dictionary<string, Dictionary<string, string>> CreateCssProperty2(string cssSourceFile, bool setDefaultPageValue)
+        {
+            var cssTree = new CssParserDuplicateClass();
+            cssTree.OutputType = OutputType;
+            Common._outputType = OutputType;
+            TreeNode node = cssTree.BuildTree(cssSourceFile);
+            _cssClass.Clear();
+            ProcessCSSTree(node);
+            return _cssClass;
+        }
+
         private void SetDefaultTagProperty()
         {
             Dictionary<string, Dictionary<string, string>> defaultTagProperty =
@@ -266,7 +283,7 @@ namespace SIL.PublishingSolution
         /// <param name="node">Antlr XMLNode</param>
         /// <returns></returns>
         /// -------------------------------------------------------------------------------------------
-        private void ProcessCSSTree(TreeNode node)
+        public void ProcessCSSTree(TreeNode node)
         {
             try
             {
