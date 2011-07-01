@@ -13,12 +13,12 @@ echo.         uses environment variables and a parameter (debug or release) to
 echo.         control the input and output directories.
 echo. 
 echo. System environment vars:
-echo.         SVN_DIR -> Subversion directory for the PublishingSolution \
-echo.                    project, e.g., c:\svn\btai\PublishingSolution
+echo.         SVN_DIR -> Subversion directory for the Pathway \
+echo.                    project, e.g., c:\svn\pathway
 echo.         FW_HOME -> Fieldworks installation directory, 
 echo.                    e.g., C:\Program Files\SIL\FieldWorks 7
 echo.         PW_HOME -> Pathway installation directory, 
-echo.                    e.g., c:\Program Files\SIL\Pathway 7
+echo.                    e.g., c:\Program Files\SIL\Pathway7
 echo.
 echo. Batch Parameters:
 echo. 
@@ -156,23 +156,16 @@ xcopy %BASE%\PsSupport\InDesignFiles\Dictionary\Scripts "%USERPROFILE%\AppData\R
 
 :not7
 :done
-rem ** post-msbuild changes. 
-rem ** ----------------------------------------------------------------
-rem ** The .reg file is no longer in the build directory; the following
-rem ** code no longer gets called.
-rem ** ----------------------------------------------------------------
+echo.
+echo. Registering path...
+echo.--------------------------------------------------------------------------
+set pathext=.reg;%pathext%
+if not "%PROCESSOR_ARCHITECTURE%" == "AMD64" goto win32reg
+%BASE%\BuildPathway\Pathway7-64.reg
 goto regdone
 
-rem echo.
-rem echo. Registering path...
-rem echo.--------------------------------------------------------------------------
-rem set pathext=.reg;%pathext%
-rem if not "%PROCESSOR_ARCHITECTURE%" == "AMD64" goto win32reg
-rem %BASE%\BuildPathway\Pathway7-64.reg
-rem goto regdone
-
-rem :win32reg
-rem %BASE%\BuildPathway\Pathway7.reg
+:win32reg
+%BASE%\BuildPathway\Pathway7.reg
 
 :regdone
 echo.--------------------------------------------------------------------------
