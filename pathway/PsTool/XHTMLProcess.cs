@@ -37,6 +37,7 @@ namespace SIL.PublishingSolution
         protected XmlTextWriter _writer;
         protected XmlTextReader _reader;
         protected StreamWriter _xetexFile;
+        protected PublicationInformation _projInfo;
 
         protected Stack<string> _allStyle;
         protected Stack<string> _allParagraph;
@@ -1515,7 +1516,7 @@ namespace SIL.PublishingSolution
         {
             // TODO find from the current style ex: font-size:20pt; line-height: 1em;
             string[] ancestorStyleName = _allStyle.ToArray();
-            float fontSize = 12F;
+            float fontSize = _projInfo.DefaultFontSize;
 
             string fontPointSize = "font-size";
             if (_outputType == Common.OutputType.IDML)

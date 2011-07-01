@@ -65,7 +65,8 @@ namespace SIL.Tool
         public string FileToProduce = string.Empty;
         public bool MoveStyleToContent = false;
         public bool JpgPreview = false;
-
+        public string DefaultFontName = "Times New Roman";
+        public float DefaultFontSize = 12;
 
         #endregion
 

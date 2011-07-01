@@ -35,6 +35,7 @@ namespace SIL.PublishingSolution
         InMapProperty mapProperty = new InMapProperty();
         //public InDesignStyles InDesignStyles;
         //public ArrayList _FootNote;
+
         #endregion
 
 

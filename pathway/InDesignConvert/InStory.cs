@@ -58,13 +58,14 @@ namespace SIL.PublishingSolution
         private string _currentStoryName = string.Empty;
         #endregion
 
-        public Dictionary<string, ArrayList> CreateStory(string projectPath, string xhtmlFileWithPath, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
+        public Dictionary<string, ArrayList> CreateStory(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
         {
-            _inputPath = Path.GetDirectoryName(xhtmlFileWithPath);
-            InitializeData(projectPath, idAllClass, classFamily, cssClassOrder);
+            _projInfo = projInfo;
+            _inputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+            InitializeData(Common.PathCombine(projInfo.TempOutputFolder, "Stories"), idAllClass, classFamily, cssClassOrder);
             ProcessCounterProperty();
-            OpenXhtmlFile(xhtmlFileWithPath);
-            ProcessXHTML(xhtmlFileWithPath);
+            OpenXhtmlFile(projInfo.DefaultXhtmlFileWithPath);
+            ProcessXHTML(projInfo.DefaultXhtmlFileWithPath);
             UpdateRelativeInStylesXML();
             CloseFile();
             SetColumnValue();

@@ -11,8 +11,8 @@ namespace SIL.PublishingSolution
 {
     public class LOStyleBase
     {
-        #region Private Variable
-
+        #region protected Variable
+        protected PublicationInformation _projInfo;
         protected XmlTextWriter _writer;
         public OldStyles _styleName = new OldStyles();
         protected Dictionary<string, string> _allParagraphProperty;
@@ -486,8 +486,8 @@ namespace SIL.PublishingSolution
                 //office:font-face-decls Attributes.
                 _writer.WriteStartElement("office:font-face-decls");
                 _writer.WriteStartElement("style:font-face");
-                _writer.WriteAttributeString("style:name", "Times New Roman");
-                _writer.WriteAttributeString("svg:font-family", "'Times New Roman'");
+                _writer.WriteAttributeString("style:name", _projInfo.DefaultFontName);
+                _writer.WriteAttributeString("svg:font-family", "'" + _projInfo.DefaultFontName + "'");
                 _writer.WriteAttributeString("style:font-family-generic", "roman");
                 _writer.WriteAttributeString("style:font-pitch", "variable");
                 _writer.WriteEndElement();

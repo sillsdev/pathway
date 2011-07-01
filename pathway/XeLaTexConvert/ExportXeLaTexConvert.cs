@@ -80,7 +80,7 @@ namespace SIL.PublishingSolution
             classInlineStyle = xeLaTexStyles.CreateXeTexStyles(projInfo.ProjectPath, xeLatexFile, cssClass);
 
             XeLaTexContent xeLaTexContent = new XeLaTexContent();
-            Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo.ProjectPath, cssClass, xeLatexFile, projInfo.DefaultXhtmlFileWithPath, classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder);
+            Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
             CloseDocument(xeLatexFile);
 

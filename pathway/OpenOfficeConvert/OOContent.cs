@@ -137,9 +137,6 @@ namespace SIL.PublishingSolution
         private bool _isVerseNumberContent = false;
         private StringBuilder _verseContent = new StringBuilder();
 
-
-
-        private PublicationInformation _projInfo;
         private bool _IsHeadword = false;
         private bool _significant;
         private bool _isListBegin;

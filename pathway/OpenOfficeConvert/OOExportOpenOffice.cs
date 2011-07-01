@@ -696,6 +696,7 @@ namespace SIL.PublishingSolution
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             preProcessor.GetTempFolderPath();
             preProcessor.GetfigureNode();
+            preProcessor.GetDefaultLanguage(projInfo);
             preProcessor.InsertKeepWithNextOnStyles(projInfo.DefaultCssFileWithPath);
             isMultiLanguageHeader = preProcessor.GetMultiLanguageHeader();
 

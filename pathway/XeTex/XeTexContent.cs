@@ -70,18 +70,19 @@ namespace SIL.PublishingSolution
         
         #endregion
 
-        public Dictionary<string, Dictionary<string, string>> CreateContent(string projectPath, Dictionary<string, Dictionary<string, string>> cssClass, StreamWriter xetexFile, string xhtmlFileWithPath, Dictionary<string, List<string>> classInlineStyle, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
+        public Dictionary<string, Dictionary<string, string>> CreateContent(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> cssClass, StreamWriter xetexFile, Dictionary<string, List<string>> classInlineStyle, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
         {
+            _projInfo = projInfo;
             _xetexFile = xetexFile;
             _classInlineStyle = classInlineStyle;
-            _inputPath = Path.GetDirectoryName(xhtmlFileWithPath);
-            xhtmlFile = xhtmlFileWithPath;
+            _inputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+            xhtmlFile = projInfo.DefaultXhtmlFileWithPath;
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
-            InitializeData(projectPath, cssClass, classFamily, cssClassOrder);
+            InitializeData(projInfo.ProjectPath, cssClass, classFamily, cssClassOrder);
             InitializeMathStyle();
             ProcessCounterProperty();
-            OpenXhtmlFile(xhtmlFileWithPath);
-            ProcessXHTML(xhtmlFileWithPath);
+            OpenXhtmlFile(projInfo.DefaultXhtmlFileWithPath);
+            ProcessXHTML(projInfo.DefaultXhtmlFileWithPath);
             //UpdateRelativeInStylesXML();
             return _newProperty;
         }

@@ -1156,6 +1156,44 @@ namespace SIL.Tool
             return returnNode;
         }
 
+        /// <summary>
+        /// For dictionary data, returns the language code for the definitions
+        /// </summary>
+        /// <returns></returns>
+        public void GetDefaultLanguage(PublicationInformation projInfo)
+        {
+            try
+            {
+                var xDoc = new XmlDocument {XmlResolver = null};
+                xDoc.Load(_xhtmlFileNameWithPath);
+                XmlNodeList nodeList = xDoc.GetElementsByTagName("meta");
+                if (nodeList.Count > 0)
+                {
+                    for (int i = 0; i < nodeList.Count; i++)
+                    {
+                        isNodeFound = false;
+                        XmlNode node = nodeList[i];
+                        if (node.Attributes != null)
+                        {
+                            string className = node.Attributes["name"].Value;
+                            if (className == "fontName")
+                            {
+                                projInfo.DefaultFontName = node.Attributes["content"].Value;
+                            }
+                            else if (className == "fontSize")
+                            {
+                                projInfo.DefaultFontSize = float.Parse(node.Attributes["content"].Value);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         #endregion
 
         #region XML PreProcessor
