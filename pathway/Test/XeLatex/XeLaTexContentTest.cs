@@ -101,7 +101,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontStyleItalicTest()
@@ -111,7 +111,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontStyleNormalTest()
@@ -132,7 +132,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontSizePointTest()
@@ -142,7 +142,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontSizeCmToPointTest()
@@ -152,7 +152,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontSizeXXSmallTest()
@@ -162,7 +162,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontWeightBoldTest()
@@ -172,7 +172,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontWeightNormalTest()
@@ -182,7 +182,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontWeightBoldRegular()  // TD-2330()
@@ -202,7 +202,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontWeight400Test()
@@ -212,7 +212,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontWeight700Test()
@@ -370,7 +370,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         public void FontParent()
         {
@@ -623,7 +623,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void FootNoteTest()
@@ -633,7 +633,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void FootNoteUnicodeTest()

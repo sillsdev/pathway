@@ -178,8 +178,19 @@ namespace SIL.PublishingSolution
             _property = string.Empty;
             _cssProperty = cssProperty;
             _inlineStyle = inlineStyle;
+            
+            if (className.IndexOf("scrBookName") == -1)
+                _fontName = "Times New Roman";
+            
+            foreach (KeyValuePair<string, string> property in cssProperty)
+            {
+                if (property.Key.ToLower() == "font-family")
+                {
+                    _fontName = FontFamily(property.Value);
+                    break;
+                }
+            }
 
-            _fontName = "Times New Roman";
             _fontOption.Clear();
             _fontStyle.Clear();
             _fontSize = " at 12pt";
@@ -553,7 +564,7 @@ namespace SIL.PublishingSolution
             }
             _IDProperty["Margin-Bottom"] = propertyValue;
         }
-        public void FontFamily(string propertyValue)
+        public string FontFamily(string propertyValue)
         {
             string fontName = "Times New Roman";
             FontFamily[] systemFontList = System.Drawing.FontFamily.Families;
@@ -568,6 +579,7 @@ namespace SIL.PublishingSolution
 
             _fontName = fontName;
 
+            return _fontName;
             //_property = @"\font\" + _className + "=\"" + propertyValue + "\"";
             //_property += GetFontSize();
             // _IDProperty["AppliedFont"] = propertyValue;
@@ -591,7 +603,7 @@ namespace SIL.PublishingSolution
             }
             if (propertyValue == "0")
             {
-                propertyValue = "\noindent";
+                propertyValue = "\\noindent";
             }
             else
             {
@@ -783,7 +795,13 @@ namespace SIL.PublishingSolution
                 return;
             }
             _IDProperty["PointSize"] = propertyValue;
-            _fontSize = " at " + propertyValue + "pt";
+
+            if (propertyValue == "larger")
+                _fontSize = " at 20pt";
+            else if(propertyValue == "smaller")
+                _fontSize = " at 10pt";
+            else
+                _fontSize = " at " + propertyValue + "pt";
 
         }
         /// <summary>
