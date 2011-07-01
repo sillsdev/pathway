@@ -35,6 +35,7 @@ namespace Test.InDesignConvert
         private Dictionary<string, Dictionary<string, string>> _idAllClass = new Dictionary<string, Dictionary<string, string>>();
         private Dictionary<string, Dictionary<string, string>> _cssProperty;
         private ArrayList _columnClass = new ArrayList();
+        PublicationInformation projInfo = new PublicationInformation();
         #endregion
 
         #region Setup
@@ -48,6 +49,7 @@ namespace Test.InDesignConvert
             _outputStyles = Common.PathCombine(_outputPath, "Resources");
             _outputStory = Common.PathCombine(_outputPath, "Stories");
             _outputSpread = Common.PathCombine(_outputPath, "Spreads");
+            projInfo.TempOutputFolder = _outputPath;
             _cssProperty = new Dictionary<string, Dictionary<string, string>>();
             _cssTree = new CssTree();
 
@@ -328,7 +330,8 @@ namespace Test.InDesignConvert
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/ColumnGap1.css");
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
-            _storyXML.CreateStory(_outputStory, _inputXHTML, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
+            projInfo.DefaultXhtmlFileWithPath = _inputXHTML;
+            _storyXML.CreateStory(projInfo, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
             _spreadXML.CreateIDSpread(_outputSpread, _idAllClass, _columnClass);
             _xPath = "//TextFrame[@Self=\"TF2\"]/TextFramePreference";
             _fileNameWithPath = Common.PathCombine(_outputSpread, "Spread_1.xml");
@@ -349,7 +352,8 @@ namespace Test.InDesignConvert
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/ColumnGap1.css");
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
-            _storyXML.CreateStory(_outputStory, _inputXHTML, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
+            projInfo.DefaultXhtmlFileWithPath = _inputXHTML;
+            _storyXML.CreateStory(projInfo, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
             _spreadXML.CreateIDSpread(_outputSpread, _idAllClass, _columnClass);
             _xPath = "//TextFrame[@Self=\"TF2\"]/TextFramePreference";
             _fileNameWithPath = Common.PathCombine(_outputSpread, "Spread_1.xml");
@@ -370,7 +374,8 @@ namespace Test.InDesignConvert
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/ColumnGap2.css");
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
-            Dictionary<string, ArrayList> stylename = _storyXML.CreateStory(_outputStory, _inputXHTML, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
+            projInfo.DefaultXhtmlFileWithPath = _inputXHTML;
+            Dictionary<string, ArrayList> stylename = _storyXML.CreateStory(projInfo, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
             _spreadXML.CreateIDSpread(_outputSpread, _idAllClass, stylename["ColumnClass"]);
             _xPath = "//TextFrame[@Self=\"TF2\"]/TextFramePreference";
             _fileNameWithPath = Common.PathCombine(_outputSpread, "Spread_1.xml");

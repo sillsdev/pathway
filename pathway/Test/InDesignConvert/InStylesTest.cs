@@ -41,6 +41,7 @@ namespace Test.InDesignConvert
         private string _outputStyles;
         private string _fileNameWithPath;
         private Dictionary<string, Dictionary<string, string>> _idAllClass = new Dictionary<string, Dictionary<string, string>>();
+        PublicationInformation projInfo = new PublicationInformation();
         #endregion
 
         #region Public Variables
@@ -61,7 +62,7 @@ namespace Test.InDesignConvert
             _outputPath = Common.PathCombine(_testFolderPath, "output");
             _outputStyles = Common.PathCombine(_outputPath, "Resources");
             _outputStory = Common.PathCombine(_outputPath, "Stories");
-
+            projInfo.TempOutputFolder = _outputPath;
             _cssProperty = new Dictionary<string, Dictionary<string, string>>();
             _cssTree = new CssTree();
         }
@@ -429,7 +430,8 @@ namespace Test.InDesignConvert
             string _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/Visibility.css");
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
-            _storyXML.CreateStory(_outputStory, _inputXHTML, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
+            projInfo.DefaultXhtmlFileWithPath = _inputXHTML;
+            _storyXML.CreateStory(projInfo, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
             const string classname = "a_1";
             XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + classname + "\"]";
             string fileNameWithPath = Common.PathCombine(_outputStyles, "styles.xml");
@@ -655,7 +657,8 @@ namespace Test.InDesignConvert
             string _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/LineHeight.css");
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
-            _storyXML.CreateStory(_outputStory, _inputXHTML, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
+            projInfo.DefaultXhtmlFileWithPath = _inputXHTML;
+            _storyXML.CreateStory(projInfo, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
 
             string classname = "entry1_1";
             string _xPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[@Name = \"" + classname + "\"]/Properties[1]/Leading[1]";
@@ -700,7 +703,8 @@ namespace Test.InDesignConvert
             string _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/LineHeight.css");
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
-            _storyXML.CreateStory(_outputStory, _inputXHTML, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
+            projInfo.DefaultXhtmlFileWithPath = _inputXHTML;
+            _storyXML.CreateStory(projInfo, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
 
             string classname = "entry6_1";
             string _xPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[@Name = \"" + classname + "\"]/Properties[1]/Leading[1]";
@@ -720,7 +724,8 @@ namespace Test.InDesignConvert
             string _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/RemoveRelativeInFootnote.css");
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
-            _storyXML.CreateStory(_outputStory, _inputXHTML, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
+            projInfo.DefaultXhtmlFileWithPath = _inputXHTML;
+            _storyXML.CreateStory(projInfo, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
             FileNameWithPath = Common.PathCombine(_output, "Styles.xml");
 
             string classname = "NoteGeneralParagraph..footnote-call";

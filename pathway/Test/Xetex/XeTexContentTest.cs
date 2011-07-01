@@ -49,6 +49,7 @@ namespace Test.Xetex
             _inputPath = Common.PathCombine(_testFolderPath, "input");
             _outputPath = Common.PathCombine(_testFolderPath, "output");
             _expectedPath = Common.PathCombine(_testFolderPath, "expected");
+            _projInfo.ProjectPath = _testFolderPath;
             _cssProperty = new Dictionary<string, Dictionary<string, string>>();
             Common.SupportFolder = "";
             Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
@@ -677,7 +678,7 @@ namespace Test.Xetex
             _classInlineStyle = styles.CreateXeTexStyles(_outputPath,xetexFile, cssClass);
 
             XeTexContent content = new XeTexContent();
-            Dictionary<string, Dictionary<string, string>> newProperty = content.CreateContent(_outputPath, cssClass, xetexFile, _projInfo.DefaultXhtmlFileWithPath,
+            Dictionary<string, Dictionary<string, string>> newProperty = content.CreateContent(_projInfo, cssClass, xetexFile, 
                                   _classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
             CloseFile(xetexFile);

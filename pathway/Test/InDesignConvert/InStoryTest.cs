@@ -27,6 +27,7 @@ namespace Test.InDesignConvert
         private InStyles _stylesXML;
         private InStory _storyXML;
         private readonly ArrayList headwordStyles = new ArrayList();
+        PublicationInformation projInfo =  new PublicationInformation();
         #endregion
 
         #region Public Variables
@@ -48,6 +49,7 @@ namespace Test.InDesignConvert
             _expectedPath = Common.PathCombine(_expectedPath, "BuangExpect");
             _outputStyles = Common.PathCombine(_outputPath, "Resources");
             _outputStory = Common.PathCombine(_outputPath, "Stories");
+            projInfo.TempOutputFolder = _outputPath;
             _cssProperty = new Dictionary<string, Dictionary<string, string>>();
             Common.SupportFolder = "";
             Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
@@ -73,6 +75,7 @@ namespace Test.InDesignConvert
             _storyXML = new InStory();
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/MultiParent.css");
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/MultiParent.xhtml");
+            projInfo.DefaultXhtmlFileWithPath = _inputXHTML;
             ExportProcess();
 
             _expected.Clear();
@@ -1301,9 +1304,7 @@ namespace Test.InDesignConvert
 
             InStory inStory = new InStory();
             Dictionary<string, ArrayList> StyleName =
-                inStory.CreateStory(Common.PathCombine(projInfo.TempOutputFolder, "Stories"),
-                                    projInfo.DefaultXhtmlFileWithPath, idAllClass, cssTree.SpecificityClass,
-                                    cssTree.CssClassOrder);
+                inStory.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
             InMasterSpread inMasterSpread = new InMasterSpread();
             ArrayList masterPageNames =
@@ -1887,7 +1888,8 @@ namespace Test.InDesignConvert
             _idAllClass.Clear();
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
-            var StyleName = _storyXML.CreateStory(_outputStory, _inputXHTML, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
+            projInfo.DefaultXhtmlFileWithPath = _inputXHTML;
+            var StyleName = _storyXML.CreateStory(projInfo, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
 
             string classname = "Hyperlink nema1";
             XPath = "//HyperlinkTextSource[@Name = \"" + classname + "\"]";
@@ -2053,7 +2055,7 @@ namespace Test.InDesignConvert
             //projInfo.DefaultXhtmlFileWithPath = Common.ImagePreprocess(fileName);
 
             InStory inStory = new InStory();
-            Dictionary<string, ArrayList> StyleName = inStory.CreateStory(Common.PathCombine(projInfo.TempOutputFolder, "Stories"), projInfo.DefaultXhtmlFileWithPath, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
+            Dictionary<string, ArrayList> StyleName = inStory.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
             InMasterSpread inMasterSpread = new InMasterSpread();
             ArrayList masterPageNames = inMasterSpread.CreateIDMasterSpread(Common.PathCombine(projInfo.TempOutputFolder, "MasterSpreads"), idAllClass, headwordStyles);
@@ -2161,9 +2163,7 @@ namespace Test.InDesignConvert
 
             InStory inStory = new InStory();
             Dictionary<string, ArrayList> StyleName =
-                inStory.CreateStory(Common.PathCombine(projInfo.TempOutputFolder, "Stories"),
-                                    projInfo.DefaultXhtmlFileWithPath, idAllClass, cssTree.SpecificityClass,
-                                    cssTree.CssClassOrder);
+                inStory.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
             InMasterSpread inMasterSpread = new InMasterSpread();
             ArrayList masterPageNames =
@@ -2239,9 +2239,7 @@ namespace Test.InDesignConvert
 
             InStory inStory = new InStory();
             Dictionary<string, ArrayList> StyleName =
-                inStory.CreateStory(Common.PathCombine(projInfo.TempOutputFolder, "Stories"),
-                                    projInfo.DefaultXhtmlFileWithPath, idAllClass, cssTree.SpecificityClass,
-                                    cssTree.CssClassOrder);
+                inStory.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
             InMasterSpread inMasterSpread = new InMasterSpread();
             ArrayList masterPageNames =
@@ -2287,7 +2285,8 @@ namespace Test.InDesignConvert
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/EmptyTextNode.css");
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
-            _storyXML.CreateStory(_outputStory, _inputXHTML, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
+            projInfo.DefaultXhtmlFileWithPath = _inputXHTML;
+            _storyXML.CreateStory(projInfo, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
             XPath = "//ParagraphStyleRange[@AppliedParagraphStyle = \"ParagraphStyle/letter_2\"]/CharacterStyleRange";
             string _fileNameWithPath = Common.PathCombine(_outputStory, "Story_3.xml");
             XmlNodeList nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, XPath);
@@ -2311,7 +2310,7 @@ namespace Test.InDesignConvert
 
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
-            _storyXML.CreateStory(_outputStory, _inputXHTML, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
+            _storyXML.CreateStory(projInfo, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
 
             XmlNodeList nodesList = Common.GetXmlNodeListInDesignNamespace(Common.PathCombine(_outputStory, "Story_1.xml"), XPath);
             XmlNode node = nodesList[0];
@@ -2360,7 +2359,8 @@ namespace Test.InDesignConvert
             _idAllClass.Clear();
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
-            _storyXML.CreateStory(_outputStory, _inputXHTML, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
+            projInfo.DefaultXhtmlFileWithPath = _inputXHTML;
+            _storyXML.CreateStory(projInfo, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
         }
 
         #endregion
