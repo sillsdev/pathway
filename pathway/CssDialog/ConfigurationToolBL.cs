@@ -101,6 +101,7 @@ namespace SIL.PublishingSolution
 
         //protected string _previousStyleName = string.Empty;
         protected Color _selectedColor = SystemColors.InactiveBorder; //Color.FromArgb(255, 204, 102);
+        protected Color _selectedInputTypeColor = Color.Orange;
         protected Color _deSelectedColor = SystemColors.Control;
         protected string _styleName;
         protected string _previousStyleName;
@@ -434,7 +435,7 @@ namespace SIL.PublishingSolution
             Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationTool: SetInputTypeButton");
             if (inputTypeBL.ToLower() == "scripture")
             {
-                cTool.BtnScripture.BackColor = _selectedColor;
+                cTool.BtnScripture.BackColor = _selectedInputTypeColor;
                 cTool.BtnDictionary.BackColor = _deSelectedColor;
                 cTool.BtnScripture.Focus();
                 cTool.LblSenseLayout.Visible = false;
@@ -446,7 +447,7 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                cTool.BtnDictionary.BackColor = _selectedColor;
+                cTool.BtnDictionary.BackColor = _selectedInputTypeColor;
                 cTool.BtnScripture.BackColor = _deSelectedColor;
                 cTool.BtnDictionary.Focus();
                 cTool.LblSenseLayout.Visible = true;
