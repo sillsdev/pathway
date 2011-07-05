@@ -71,7 +71,7 @@ namespace Test.XeLatex
         /// Multi Parent Test - .subsenses > .sense > .xsensenumber { font-size:10pt;}
         /// Parent comes as multiple times
         /// </summary>
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void TextAlignTest()
@@ -81,7 +81,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void TextIndentTest()
@@ -222,7 +222,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void TextAlignCenterTest()
@@ -232,7 +232,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void MarginTopTest()
@@ -252,7 +252,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void TextAlignRightTest()
@@ -262,7 +262,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void PseudoAfterTest()
@@ -295,7 +295,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        [Ignore]
+        
         [Test]
         public void NestedDiv2()
         {
@@ -304,7 +304,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         public void NestedDiv3()
         {
@@ -314,7 +314,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        [Ignore]
+        
         [Test]
         public void NestedDiv4()
         {
@@ -323,7 +323,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         public void NestedDiv5()
         {
@@ -332,7 +332,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         public void NestedDiv6()
         {
@@ -342,7 +342,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        [Ignore]
+        
         [Test]
         public void NestedSpan1()
         {
@@ -389,7 +389,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void TextIndentPcTest()
@@ -399,7 +399,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
        [Test]
         [Category("SkipOnTeamCity")]
         public void MarginRightTest()
@@ -410,7 +410,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        [Ignore]
+        
        [Test]
        [Category("SkipOnTeamCity")]
        public void UnderlineTest()
@@ -429,7 +429,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         public void Larger()
         {
@@ -522,7 +522,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void TextAlignJustifyTest()
@@ -563,7 +563,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void LetterspaceTest()
@@ -573,7 +573,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void LineHeightNoneTest()
@@ -603,7 +603,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void PageBGColorTest()
@@ -613,7 +613,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void PageSizeTest()
@@ -633,7 +633,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+        [Ignore]
         [Test]
         [Category("SkipOnTeamCity")]
         public void FootNoteUnicodeTest()
