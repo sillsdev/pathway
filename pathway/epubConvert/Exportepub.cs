@@ -187,14 +187,10 @@ namespace SIL.PublishingSolution
                 File.Copy(mergedCSS, niceNameCSS); 
                 mergedCSS = niceNameCSS;
                 defaultCSS = Path.GetFileName(niceNameCSS);
-                // get rid of styles that don't work with .epub
-                RemovePagedStylesFromCss(niceNameCSS);
                 Common.SetDefaultCSS(projInfo.DefaultXhtmlFileWithPath, defaultCSS);
                 Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCSS);
                 // pull in the style settings
                 LoadPropertiesFromSettings();
-                // customize the CSS file based on the settings
-                CustomizeCSS(mergedCSS);
 
                 // transform the XHTML content with our XSLT. Currently this does the following:
                 // - strips out "lang" tags from <span> elements (.epub doesn't like them there)
@@ -254,10 +250,15 @@ namespace SIL.PublishingSolution
                 // add the total file count (so far) to the progress bar, so it's a little more accurate
                 inProcess.AddToMaximum(splitFiles.Count);
 
-                //if (_inputType.Equals("dictionary"))
-                //{
-                //    ContentCssToXhtml(niceNameCSS, splitFiles);
-                //}
+                if (_inputType.Equals("dictionary"))
+                {
+                    ContentCssToXhtml(niceNameCSS, splitFiles);
+                }
+                // get rid of styles that don't work with .epub
+                RemovePagedStylesFromCss(niceNameCSS);
+                // customize the CSS file based on the settings
+                CustomizeCSS(mergedCSS);
+
                 foreach (string file in splitFiles)
                 {
                     if (File.Exists(file))
@@ -472,11 +473,12 @@ namespace SIL.PublishingSolution
             // copy the CSS rules into a Dictionary and iterate through it
             var sbBefore = new StringBuilder();
             var sbAfter = new StringBuilder();
-            var sbBetween = new StringBuilder();
+            var sbBetweenXItem = new StringBuilder();
+            var sbBetweenSense = new StringBuilder();
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
-            cssTree.OutputType = Common.OutputType.MOBILE;
-            cssClass = cssTree.CreateCssProperty2(cssFile, true);
+            cssTree.OutputType = Common.OutputType.EPUB;
+            cssClass = cssTree.CreateCssProperty(cssFile, true);
             int startIndex = 0;
             // iterate through the Dictionary. We're looking for instances of :before, :after and .xitem + xitem:before
             // that have "content" properties -- when we find one, we'll convert the CSS into an XSLT rule that will insert
@@ -505,26 +507,48 @@ namespace SIL.PublishingSolution
                 {
                     // this could be either a :before or <class> + <class>:before (i.e., between items) -
                     // figure out which it is
-                    if (key.Contains("-"))
+                    if (key.Contains("xitem-xitem"))
                     {
                         if (cssClass[key].ContainsKey("content"))
                         {
                             // found an item - is it the first?
-                            if (sbBetween.Length == 0)
+                            if (sbBetweenXItem.Length == 0)
                             {
                                 // first item - write out the opening rule:
                                 // for the <class> + <class>:before case, we're using an <xsl:choose> statement
-                                sbBetween.AppendLine("<xsl:if test=\"following-sibling::xhtml:span[@class='xitem'] and @class='xitem' \">");
-                                sbBetween.AppendLine("<!-- These are for the most part separators between items -->");
-                                sbBetween.AppendLine("<xsl:choose>");
+                                sbBetweenXItem.AppendLine("<xsl:if test=\"following-sibling::xhtml:span[@class='xitem'] and @class='xitem' \">");
+                                sbBetweenXItem.AppendLine("<!-- These are for the most part separators between items -->");
+                                sbBetweenXItem.AppendLine("<xsl:choose>");
                             }
                             // write out the rule - if you come across the class, add the content text to the xhtml
-                            sbBetween.Append("<xsl:when test = \"parent::xhtml:span[@class = '");
+                            sbBetweenXItem.Append("<xsl:when test = \"parent::xhtml:span[@class = '");
                             startIndex = key.IndexOf("_") + 1;
-                            sbBetween.Append(key.Substring(startIndex, key.Length - 8 - startIndex));
-                            sbBetween.Append("']\"><xsl:text>");
-                            sbBetween.Append(cssClass[key]["content"]);
-                            sbBetween.AppendLine("</xsl:text></xsl:when>");
+                            sbBetweenXItem.Append(key.Substring(startIndex, key.Length - 8 - startIndex));
+                            sbBetweenXItem.Append("']\"><xsl:text>");
+                            sbBetweenXItem.Append(cssClass[key]["content"]);
+                            sbBetweenXItem.AppendLine("</xsl:text></xsl:when>");
+                        }
+                    }
+                    else if (key.Contains("sense-sense"))
+                    {
+                        if (cssClass[key].ContainsKey("content"))
+                        {
+                            // found an item - is it the first?
+                            if (sbBetweenSense.Length == 0)
+                            {
+                                // first item - write out the opening rule:
+                                // for the <class> + <class>:before case, we're using an <xsl:choose> statement
+                                sbBetweenSense.AppendLine("<xsl:if test=\"following-sibling::xhtml:span[@class='xitem'] and @class='xitem' \">");
+                                sbBetweenSense.AppendLine("<!-- These are for the most part separators between items -->");
+                                sbBetweenSense.AppendLine("<xsl:choose>");
+                            }
+                            // write out the rule - if you come across the class, add the content text to the xhtml
+                            sbBetweenSense.Append("<xsl:when test = \"parent::xhtml:span[@class = '");
+                            startIndex = key.IndexOf("_") + 1;
+                            sbBetweenSense.Append(key.Substring(startIndex, key.Length - 8 - startIndex));
+                            sbBetweenSense.Append("']\"><xsl:text>");
+                            sbBetweenSense.Append(cssClass[key]["content"]);
+                            sbBetweenSense.AppendLine("</xsl:text></xsl:when>");
                         }
                     }
                     else
@@ -539,7 +563,14 @@ namespace SIL.PublishingSolution
                             }
                             // write out the rule - if you come across the class, add the content text to the xhtml
                             sbBefore.Append("<xsl:if test = \"@class = '");
-                            sbBefore.Append(key.Substring(0, key.Length - 8));
+                            if (key.Contains("span."))
+                            {
+                                sbBefore.Append(key.Substring(5, key.Length - 13));
+                            }
+                            else
+                            {
+                                sbBefore.Append(key.Substring(0, key.Length - 8));
+                            }
                             sbBefore.Append("'\"><xsl:text>");
                             sbBefore.Append(cssClass[key]["content"]);
                             sbBefore.AppendLine("</xsl:text></xsl:if>");
@@ -548,23 +579,17 @@ namespace SIL.PublishingSolution
                 }
             }
             // close out the StringBuilders
-            sbBetween.AppendLine("</xsl:choose></xsl:if>");
+            sbBetweenXItem.AppendLine("</xsl:choose></xsl:if>");
+            sbBetweenSense.AppendLine("</xsl:choose></xsl:if>");
+            // append the two "between" cases to the after case
+            sbAfter.AppendLine(sbBetweenSense.ToString());
+            sbAfter.AppendLine(sbBetweenXItem.ToString());
 
-            // for each (character to add)
-            // --> add to a stringbuilder like this:
-            var sb = new StringBuilder();
-            sb.AppendLine("<!-- OPENING lexical punctuation -->");
-            sb.Append("<xsl:if test = \"");
-            // add the class tests
-            sb.Append("\"><xsl:text>");
-            // add the character
-            sb.Append("</xsl:text></xsl:if>");
-            /*
-            // replace the before block with this item
+            // replace the before and after blocks in the XSLT
             Common.StreamReplaceInFile(tempXslt, "<!-- OPENING lexical punctuation -->", sbBefore.ToString());
-            Common.StreamReplaceInFile(tempXslt, "<!-- CLOSING lexical punctuation -->", sbAfter.ToString() + sbBetween.ToString());
+            Common.StreamReplaceInFile(tempXslt, "<!-- CLOSING lexical punctuation -->", sbAfter.ToString());
 
-            // final step - run the updated xslt file);)
+            // final step - run the updated xslt file
             foreach (var xhtmlFile in xhtmlFiles)
             {
                 Common.XsltProcess(xhtmlFile, tempXslt, Path.GetExtension(xhtmlFile) + ".tmp");
@@ -575,7 +600,6 @@ namespace SIL.PublishingSolution
                 }
                 File.Move(xhtmlFile + ".tmp", xhtmlFile);
             }
-             */
         }
 
 
@@ -603,6 +627,12 @@ namespace SIL.PublishingSolution
                 {
                     writer.WriteLine(oneLine);
                     done = true;
+                    continue;
+                }
+                // epub readers vary in their support for :before and :after (which FLEx uses to insert content: punctuation) -
+                // we've already transformed the text to include these items in ContentCssToXhtml(); remove them from the css now.
+                if (oneLine.Contains("content:"))
+                {
                     continue;
                 }
                 // font family and size are specified elsewhere in the css - remove from the merged part

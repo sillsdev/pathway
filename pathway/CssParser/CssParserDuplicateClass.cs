@@ -956,7 +956,10 @@ namespace SIL.PublishingSolution
             {
                 if (childNode.Text == "CLASS")
                 {
-                    childNode.FirstNode.Text = childNode.FirstNode.Text.Replace("_", "").Replace("-", "");
+                    if (OutputType != Common.OutputType.EPUB)
+                    {
+                        childNode.FirstNode.Text = childNode.FirstNode.Text.Replace("_", "").Replace("-", "");
+                    }
                     className += "." + childNode.FirstNode.Text;
                     if (childNode.Nodes.Count > 1)
                     {
@@ -1259,7 +1262,10 @@ namespace SIL.PublishingSolution
             {
                 if (childNode.Text == "CLASS")
                 {
-                    childNode.FirstNode.Text = childNode.FirstNode.Text.Replace("_", "").Replace("-", "");
+                    if (OutputType != Common.OutputType.EPUB)
+                    {
+                        childNode.FirstNode.Text = childNode.FirstNode.Text.Replace("_", "").Replace("-", "");
+                    }
                     getRuleInfo.ClassName += "." + childNode.FirstNode.Text;
                     if (childNode.Nodes.Count > 1)
                     {

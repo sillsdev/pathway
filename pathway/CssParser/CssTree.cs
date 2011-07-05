@@ -42,26 +42,15 @@ namespace SIL.PublishingSolution
             //node = CssErrorHandler(cssTree, cssSourceFile, node);  // Error Handling.
             _cssClass.Clear();
             ProcessCSSTree(node);
-            SetLeftRightFirstPage(setDefaultPageValue);
+            if (OutputType != Common.OutputType.EPUB)
+            {
+                SetLeftRightFirstPage(setDefaultPageValue);
+            }
             cssBorderColor = _mapProperty.CssBorderColor;
-            SetDefaultTagProperty();
-            return _cssClass;
-        }
-
-        /// <summary>
-        /// Similar to CreateCssProperty, but does not add any page elements into the mix
-        /// </summary>
-        /// <param name="cssSourceFile"></param>
-        /// <param name="setDefaultPageValue"></param>
-        /// <returns></returns>
-        public Dictionary<string, Dictionary<string, string>> CreateCssProperty2(string cssSourceFile, bool setDefaultPageValue)
-        {
-            var cssTree = new CssParserDuplicateClass();
-            cssTree.OutputType = OutputType;
-            Common._outputType = OutputType;
-            TreeNode node = cssTree.BuildTree(cssSourceFile);
-            _cssClass.Clear();
-            ProcessCSSTree(node);
+            if (OutputType != Common.OutputType.EPUB)
+            {
+                SetDefaultTagProperty();
+            }
             return _cssClass;
         }
 
@@ -568,8 +557,11 @@ namespace SIL.PublishingSolution
             {
                 if (string.Compare(classAttrib.AttributeSeperator, "HASVALUE") == 0)
                 {
-                    classAttrib.AttributeValue = classAttrib.AttributeValue.Replace("-", "");
-                    classAttrib.AttributeValue = classAttrib.AttributeValue.Replace("_", "");
+                    if (OutputType != Common.OutputType.EPUB)
+                    {
+                        classAttrib.AttributeValue = classAttrib.AttributeValue.Replace("-", "");
+                        classAttrib.AttributeValue = classAttrib.AttributeValue.Replace("_", "");
+                    }
                     className = className + Common.SepAncestor + classAttrib.AttributeValue;
                     _baseClassName = _baseClassName + Common.Space + classAttrib.AttributeValue;
                     _baseClassName = Common.SortMutiClass(_baseClassName);
