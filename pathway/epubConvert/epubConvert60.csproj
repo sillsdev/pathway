@@ -304,6 +304,10 @@
       <Project>{1A58ECC5-75FE-4FE2-B133-8605B382B7C0}</Project>
       <Name>CssDialog60</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CssParser\CssParser60.csproj">
+      <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
+      <Name>CssParser60</Name>
+    </ProjectReference>
     <ProjectReference Include="..\epubValidator\epubValidator60.csproj">
       <Project>{C789DC85-2A06-4425-BA3C-A51E28E9626E}</Project>
       <Name>epubValidator60</Name>
