@@ -41,7 +41,7 @@ namespace SIL.Tool
         #region Public variable
         public enum Action { New, Delete, Edit, Copy };
         public enum ProjType { Dictionary, Scripture };
-        public enum OutputType { ODT, IDML , PDF , MOBILE, XETEX, XELATEX};
+        public enum OutputType { ODT, ODM, IDML , PDF , MOBILE, XETEX, XELATEX};
         public static string SamplePath = string.Empty;
         #endregion
 
@@ -1746,8 +1746,9 @@ return FromProg(file);
                     Process.Start(outputPathWithFileName);
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                throw ex;
             }
         }
 
