@@ -20,9 +20,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
+using JWTools;
 using SIL.PublishingSolution;
 using SIL.PublishingSolution.Sort;
 using SIL.Tool;
+using SIL.Tool.Localization;
 using Test;
 
 namespace TestBed
@@ -456,7 +458,7 @@ namespace TestBed
                 ProjType = "Scripture";
             }
 
-
+           
             projInfo.FinalOutput = "odt";
             
             projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
@@ -546,6 +548,7 @@ namespace TestBed
         {
             var supportFolder = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
             FolderTree.Copy(supportFolder, ".");
+            LocalizationSetup();
         }
 
         private void button6_Click_1(object sender, EventArgs e)
@@ -556,6 +559,21 @@ namespace TestBed
             projInfo.DefaultCssFileWithPath = txtCSSInput.Text;
 
             var actual = target.Export(projInfo);
+        }
+
+        protected static void LocalizationSetup()
+        {
+            JW_Registry.RootKey = @"SOFTWARE\The Seed Company\Dictionary Express!";
+            LocDB.SetAppTitle();
+            LocDB.BaseName = "PsLocalization.xml";
+            var folderPath = Common.PathCombine(Common.GetAllUserAppPath(), @"SIL\Pathway\Dictionary");
+            var localizationPath = Common.PathCombine(folderPath, "Loc");
+            if (!Directory.Exists(localizationPath))
+            {
+                Directory.CreateDirectory(localizationPath);
+                File.Copy(Common.FromRegistry(@"Loc/" + LocDB.BaseName), Common.PathCombine(localizationPath, LocDB.BaseName));
+            }
+            LocDB.Initialize(folderPath);
         }
 
         private void btnParaText_Click(object sender, EventArgs e)
