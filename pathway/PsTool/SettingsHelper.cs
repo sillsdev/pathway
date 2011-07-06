@@ -191,6 +191,7 @@ namespace SIL.Tool
                             break;
                     }
                 }
+                _isLoaded = true;
             }
 
             finally

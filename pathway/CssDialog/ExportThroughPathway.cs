@@ -831,7 +831,7 @@ namespace SIL.PublishingSolution
                     // generic archive
                     value = "application/zip";
                     break;
-                case "LibreOffice":
+                case "OpenOffice/LibreOffice":
                     value = "application/vnd.oasis.opendocument.text";
                     break;
                 case "Pdf (using Prince)":

@@ -1043,6 +1043,22 @@ A method of getting the book code for a given reference, provided the reference 
 			<xsl:attribute name="name">bible</xsl:attribute>			
 		</xsl:element>
 	</xsl:template> <!-- span -->
+	
+	<!-- Front matter elements - title page and copyright -->
+	<xsl:template match="xhtml:div[@class='Title'] | xhtml:div[@class='Cover'] | xhtml:div[@class='Blank'] | xhtml:div[@class='Copyright']">
+		<xsl:apply-templates/>
+	</xsl:template>
+
+	<!-- div[@class='Front_Matter'] -->
+	<xsl:template match="xhtml:div[@class='Front_Matter']">
+		<xsl:element name="p">
+			<xsl:attribute name="class">Paragraph</xsl:attribute>
+			<xsl:attribute name="xml:lang">
+				<xsl:value-of select="$lang"/>
+			</xsl:attribute>
+			<xsl:apply-templates/>
+		</xsl:element>
+	</xsl:template> <!-- div[@class='Front_Matter'] -->
 
 	<!-- div[@class='Paragraph'] -->
 	<xsl:template match="xhtml:div[@class='Paragraph']">

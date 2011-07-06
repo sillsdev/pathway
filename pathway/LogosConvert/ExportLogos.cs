@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using SIL.Tool;
@@ -216,6 +217,14 @@ namespace SIL.PublishingSolution
 
         private void CreateMetadata(PublicationInformation projInfo)
         {
+            string processedXhtmlFile = projInfo.DefaultXhtmlFileWithPath;
+            processFolder = Path.GetDirectoryName(processedXhtmlFile);
+            // create a copy of the metadata transform and add our rules to it
+            string tmpXslt = Path.Combine(processFolder, "TE_XHTML-to-Libronix_Metadata.xslt");
+            string srcXsltFullName = Common.FromRegistry("TE_XHTML-to-Libronix_Metadata.xslt");
+            File.Copy(srcXsltFullName, tmpXslt, true); 
+            Common.StreamReplaceInFile(tmpXslt, "<!-- Generated XSLT nodes -->", GetXsltMetadataRules());
+            // run the modified transform
             ApplyTransform(projInfo, "TE_XHTML-to-Libronix_Metadata.xslt", "");
         }
 
@@ -238,6 +247,46 @@ namespace SIL.PublishingSolution
             }
             var xsltParam = new Dictionary<string, string> {{"currentYear", DateTime.Now.Year.ToString()}};
             Common.XsltProcess(processedXhtmlFile, xsltFullName, ending + ".xml", xsltParam);
+        }
+
+        /// <summary>
+        /// This method pulls the metadata information we've collected in the Export Through Pathway dialog and
+        /// creates XSLT rules out of them to insert into the TE_XHTML_to_Libronix_Metadata.xslt file.
+        /// </summary>
+        private string GetXsltMetadataRules()
+        {
+            var sb = new StringBuilder();
+            // dc.subject
+            sb.AppendLine("<!-- Generated XSLT nodes -->");
+            sb.AppendLine("<!-- dc.subject -->");
+            sb.Append(
+                "<xsl:element name=\"dc-element\"><xsl:attribute name=\"xml:lang\"><xsl:text>en</xsl:text></xsl:attribute>");
+            sb.Append("<xsl:attribute name=\"name\">dc.subject</xsl:attribute><xsl:text>");
+            sb.Append(Param.GetMetadataValue(Param.Subject));
+            sb.AppendLine("</xsl:text></xsl:element>");
+            // dc.publisher
+            sb.AppendLine("<!-- dc.publisher -->");
+            sb.Append(
+                "<xsl:element name=\"dc-element\"><xsl:attribute name=\"xml:lang\"><xsl:text>en</xsl:text></xsl:attribute>");
+            sb.Append("<xsl:attribute name=\"name\"><xsl:text>dc.publisher</xsl:text></xsl:attribute><xsl:text>");
+            sb.Append(Param.GetMetadataValue(Param.Publisher));
+            sb.AppendLine("</xsl:text></xsl:element>");
+            // dc.creator.corporatename
+            sb.AppendLine("<!-- dc.creator.corporatename -->");
+            sb.Append(
+                "<xsl:element name=\"dc-element\"><xsl:attribute name=\"xml:lang\"><xsl:text>en</xsl:text></xsl:attribute>");
+            sb.Append(
+                "<xsl:attribute name=\"name\"><xsl:text>dc.creator.corporatename</xsl:text></xsl:attribute><xsl:text>");
+            sb.Append(Param.GetMetadataValue(Param.Publisher));
+            sb.AppendLine("</xsl:text></xsl:element>");
+            // dc.rights
+            sb.AppendLine("<!-- dc.rights -->");
+            sb.Append(
+                "<xsl:element name=\"dc-element\"><xsl:attribute name=\"xml:lang\"><xsl:text>en</xsl:text></xsl:attribute>");
+            sb.Append("<xsl:attribute name=\"name\"><xsl:text>dc.rights</xsl:text></xsl:attribute><xsl:text>");
+            sb.Append(Param.GetMetadataValue(Param.CopyrightHolder));
+            sb.AppendLine("</xsl:text></xsl:element>");
+            return sb.ToString();
         }
     }
 }

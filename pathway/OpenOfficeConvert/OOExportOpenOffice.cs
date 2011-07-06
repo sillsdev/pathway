@@ -35,7 +35,7 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                return "LibreOffice";
+                return "OpenOffice/LibreOffice";
             }
         }
 

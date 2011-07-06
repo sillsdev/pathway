@@ -18,13 +18,13 @@
     <property name="SelectedIcon" value="Graphic/arrow.png" />
     <property name="MissingIcon" value="Graphic/missing.png" />
     <property name="Help" value="PsDoc.chm" />
-    <property name="PrintVia" value="LibreOffice" />
+    <property name="PrintVia" value="OpenOffice/LibreOffice" />
 	<property name="LayoutSelected" value="C5 Cols ApplicationStyles" />
     <property name="ExtraProcessing" value="True" />
     <property name="Media" value="mobile" />
   </settings>
   <defaultSettings>
-    <property name="PrintVia" value="LibreOffice" />
+    <property name="PrintVia" value="OpenOffice/LibreOffice" />
     <property name="LayoutSelected" value="C5 Cols ApplicationStyles" />
     <property name="ExtraProcessing" value="True" />
     <property name="PublicationLocation" value="$(Documents)s/$(Base)s/$(CurrentProject)s/Scripture/$(StyleSheet)s_$(DateTime)s" />

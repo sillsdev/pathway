@@ -87,6 +87,7 @@ namespace Test.LogosConvert
         ///A test for Export
         ///</summary>
         [Test]
+        [Ignore("Rework - metadata is dependent on ScriptureStyleSettings.xml")]
         public void ExportPassTest()
         {
             const string XhtmlName = "Bughotu-gospels.xhtml";

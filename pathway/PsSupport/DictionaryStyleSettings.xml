@@ -18,7 +18,7 @@
     <property name="SelectedIcon" value="Graphic/arrow.png" />
     <property name="MissingIcon" value="Graphic/missing.png" />
     <property name="Help" value="PsDoc.chm" />
-    <property name="PrintVia" value="LibreOffice" />
+    <property name="PrintVia" value="OpenOffice/LibreOffice" />
     <property name="ConfigureDictionary" value="True" />
     <property name="ReversalIndexes" value="True" />
     <property name="GrammerSketch" value="False" />
@@ -27,7 +27,7 @@
     <property name="Media" value="paper" />
   </settings>
   <defaultSettings>
-    <property name="PrintVia" value="LibreOffice" />
+    <property name="PrintVia" value="OpenOffice/LibreOffice" />
     <property name="ConfigureDictionary" value="True" />
     <property name="ReversalIndexes" value="True" />
     <property name="GrammerSketch" value="False" />

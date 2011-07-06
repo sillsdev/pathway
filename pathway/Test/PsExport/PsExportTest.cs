@@ -422,7 +422,7 @@ namespace Test.PsExport
         [Ignore]
         public void PsExportT11()
         {
-            ExportTest("T11", "main.xhtml", "Dictionary", "OpenOffice", "T11: Flex ODT Export Test");
+            ExportTest("T11", "main.xhtml", "Dictionary", "OpenOffice/LibreOffice", "T11: Flex ODT Export Test");
             //DeExportTest("T11", "main.xhtml", "A4Setting.css", "LibreOffice", "T11: ODT Export Test");
         }
         #endregion T11

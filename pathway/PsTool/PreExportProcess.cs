@@ -98,114 +98,123 @@ namespace SIL.Tool
         public List<string> InsertFrontMatter(string outputFolder, bool mergeFiles)
         {
             var files = new List<string>();
-            // add the front matter pages to the temp folder as needed
-            if (Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("true") ||
-                Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true") ||
-                Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("true"))
+            try
             {
-                // at least one front matter item selected
-                var sbPreamble = new StringBuilder();
-                sbPreamble.Append("<?xml version='1.0' encoding='utf-8'?><!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'[]>");
-                sbPreamble.Append("<html xmlns='http://www.w3.org/1999/xhtml'><head><title>");
-                sbPreamble.Append(_projInfo.ProjectName);
-                sbPreamble.Append("</title><link rel='stylesheet' href='");
-                sbPreamble.Append(Path.GetFileName(_cssFileNameWithPath));
-                sbPreamble.AppendLine("' type='text/css' /></head>");
-                sbPreamble.Append("<body class='scrBody'>");
-                // copy over image resources if needed
-                if (Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("true") ||
-                    Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("true"))
+                // add the front matter pages to the temp folder as needed
+                if (Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("true") ||
+                    Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true") ||
+                    Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("true"))
                 {
-                    CopyCCResources(outputFolder);
-                }
-                var sb = new StringBuilder();
-                if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true"))
-                {
-                    // cover image and file
-                    CreateCoverImage(outputFolder);
-                    if (mergeFiles)
+                    // at least one front matter item selected
+                    var sbPreamble = new StringBuilder();
+                    sbPreamble.Append("<?xml version='1.0' encoding='utf-8'?><!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'[]>");
+                    sbPreamble.Append("<html xmlns='http://www.w3.org/1999/xhtml'><head><title>");
+                    sbPreamble.Append(_projInfo.ProjectName);
+                    sbPreamble.Append("</title><link rel='stylesheet' href='");
+                    sbPreamble.Append(Path.GetFileName(_cssFileNameWithPath));
+                    sbPreamble.AppendLine("' type='text/css' /></head>");
+                    sbPreamble.Append("<body class='scrBody'>");
+                    // copy over image resources if needed
+                    if (Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("true") ||
+                        Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("true"))
                     {
-                        // add to stringbuilder (for merging)
-                        sb.Append(CoverImagePage());
+                        CopyCCResources(outputFolder);
                     }
-                    else
+                    var sb = new StringBuilder();
+                    if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true"))
                     {
-                        // write to a separate file
-                        var outFilename = Path.Combine(outputFolder, CoverPageFilename);
-                        var outFile = new StreamWriter(outFilename);
-                        outFile.Write(sbPreamble.ToString());
-                        outFile.Write(CoverImagePage());
-                        outFile.WriteLine("</body></html>");
-                        outFile.Flush();
-                        outFile.Close();
-                        files.Add(outFilename);
+                        // cover image and file
+                        CreateCoverImage(outputFolder);
+                        if (mergeFiles)
+                        {
+                            // add to stringbuilder (for merging)
+                            sb.Append(CoverImagePage());
+                        }
+                        else
+                        {
+                            // write to a separate file
+                            var outFilename = Path.Combine(outputFolder, CoverPageFilename);
+                            var outFile = new StreamWriter(outFilename);
+                            outFile.Write(sbPreamble.ToString());
+                            outFile.Write(CoverImagePage());
+                            outFile.WriteLine("</body></html>");
+                            outFile.Flush();
+                            outFile.Close();
+                            files.Add(outFilename);
+                        }
                     }
-                }
-                if (Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("true"))
-                {
-                    // title page
-                    if (mergeFiles)
+                    if (Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("true"))
                     {
-                        sb.Append(TitlePage());
+                        // title page
+                        if (mergeFiles)
+                        {
+                            sb.Append(TitlePage());
+                        }
+                        else
+                        {
+                            // write to a separate file
+                            var outFilename = Path.Combine(outputFolder, TitlePageFilename);
+                            var outFile = new StreamWriter(outFilename);
+                            outFile.Write(sbPreamble.ToString());
+                            outFile.Write(TitlePage());
+                            outFile.WriteLine("</body></html>");
+                            outFile.Flush();
+                            outFile.Close();
+                            files.Add(outFilename);
+                        }
                     }
-                    else
+                    if (Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("true"))
                     {
-                        // write to a separate file
-                        var outFilename = Path.Combine(outputFolder, TitlePageFilename);
-                        var outFile = new StreamWriter(outFilename);
-                        outFile.Write(sbPreamble.ToString());
-                        outFile.Write(TitlePage());
-                        outFile.WriteLine("</body></html>");
-                        outFile.Flush();
-                        outFile.Close();
-                        files.Add(outFilename);
+                        // title page
+                        if (mergeFiles)
+                        {
+                            sb.Append(EmbedCopyrightPage(outputFolder));
+                        }
+                        else
+                        {
+                            // write to a separate file
+                            var outFilename = Path.Combine(outputFolder, CopyrightPageFilename);
+                            CopyCopyrightPage(outputFolder); // copyright page is a full xhtml file -- this method copies it over
+                            files.Add(outFilename);
+                        }
                     }
-                }
-                if (Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("true"))
-                {
-                    // title page
-                    if (mergeFiles)
+
+                    // if we're not merging, all our work is done -- just return
+                    if (!mergeFiles)
                     {
-                        sb.Append(EmbedCopyrightPage(outputFolder));
+                        return files;
                     }
-                    else
-                    {
-                        // write to a separate file
-                        var outFilename = Path.Combine(outputFolder, CopyrightPageFilename);
-                        CopyCopyrightPage(outputFolder); // copyright page is a full xhtml file -- this method copies it over
-                        files.Add(outFilename);
-                    }
+
+                    // Merging files...
+                    // open the xhtml file and create a temporary copy for writing)
+                    if (!File.Exists(_xhtmlFileNameWithPath)) return files; // can't insert into the content
+                    var sr = new StreamReader(_xhtmlFileNameWithPath);
+                    var sw = new StreamWriter(_xhtmlFileNameWithPath + ".tmp");
+                    var inData = sr.ReadToEnd();
+                    var outData = new StringBuilder();
+                    // search for the <body> element - we'll insert the front matter right after that
+                    int start = inData.IndexOf("<body"); // start of <body>
+                    int endIndex = inData.IndexOf(">", start); // end of <body>
+                    outData.Append(inData.Substring(0, endIndex + 1));
+                    outData.Append(sb.ToString());
+                    outData.Append(inData.Substring(endIndex + 1));
+                    sw.Write(outData.ToString());
+                    sr.Close();
+                    sw.Close();
+                    // replace the original file with the new one
+                    File.Delete(_xhtmlFileNameWithPath);
+                    File.Move((_xhtmlFileNameWithPath + ".tmp"), _xhtmlFileNameWithPath);
+                    files.Add(_xhtmlFileNameWithPath);
                 }
 
-                // if we're not merging, all our work is done -- just return
-                if (!mergeFiles)
-                {
-                    return files;
-                }
+                return files;
 
-                // Merging files...
-                // open the xhtml file and create a temporary copy for writing)
-                if (!File.Exists(_xhtmlFileNameWithPath)) return files; // can't insert into the content
-                var sr = new StreamReader(_xhtmlFileNameWithPath);
-                var sw = new StreamWriter(_xhtmlFileNameWithPath + ".tmp");
-                var inData = sr.ReadToEnd();
-                var outData = new StringBuilder();
-                // search for the <body> element - we'll insert the front matter right after that
-                int start = inData.IndexOf("<body"); // start of <body>
-                int endIndex = inData.IndexOf(">", start); // end of <body>
-                outData.Append(inData.Substring(0, endIndex + 1));
-                outData.Append(sb.ToString());
-                outData.Append(inData.Substring(endIndex + 1));
-                sw.Write(outData.ToString());
-                sr.Close();
-                sw.Close();
-                // replace the original file with the new one
-                File.Delete(_xhtmlFileNameWithPath);
-                File.Move((_xhtmlFileNameWithPath + ".tmp"), _xhtmlFileNameWithPath);
-                files.Add(_xhtmlFileNameWithPath);
             }
-
-            return files;
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                return files;
+            }
         }
 
         /// <summary>
