@@ -63,10 +63,14 @@ namespace SIL.PublishingSolution
                     //_xetexFile.WriteLine(xeTexProperty);
                 }
             }
+
             Common.FileInsertText(_xetexFullFile, @"\begin{document} ");
+            
+            //Common.FileInsertText(_xetexFullFile, @"\usepackage{fancyhdr}");
             //Common.FileInsertText(_xetexFullFile, @"\usepackage{multicol}");
             Common.FileInsertText(_xetexFullFile, @"\documentclass{article} ");
-            //\usepackage{fancyhdr}
+            //Common.FileInsertText(_xetexFullFile, @"\documentclass[10pt,psfig,letterpaper,twocolumn]{article} ");
+            
         }
 
         private string RemoveBody(string paraStyle)
