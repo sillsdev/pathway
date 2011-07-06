@@ -30,7 +30,7 @@ namespace SIL.PublishingSolution
                                       ProjectName = "main",
                                   };
             var backendPath = Common.ProgInstall;
-            var exportType = "OpenOffice";
+            var exportType = "OpenOffice/LibreOffice";
             try
             {
                 int i = 0;
@@ -108,7 +108,7 @@ namespace SIL.PublishingSolution
             var msg = "Usage PathwayB [Options]\r\n";
             msg += "--xhtml -x\tconent file name (required)\r\n";
             msg += "--css -c\tlayout file name (required)\r\n";
-            msg += "--target -t\tTarget: [OpenOffice], InDesign alpha, etc.\r\n";
+            msg += "--target -t\tTarget: [OpenOffice/LibreOffice], InDesign alpha, etc.\r\n";
             msg += "--input -i\t[Dictionary] or Scripture\r\n";
             msg += "--launch -l\tlaunch resulting output in target back end.\r\n";
             msg += "--name -n\t[main] Project name\r\n";

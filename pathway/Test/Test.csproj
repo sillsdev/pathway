@@ -1383,7 +1383,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>call $(ProjectDir)PostTestBuild.bat</PostBuildEvent>
   </PropertyGroup>
 </Project>

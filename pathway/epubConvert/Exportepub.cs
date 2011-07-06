@@ -180,12 +180,15 @@ namespace SIL.PublishingSolution
                 // rename the CSS file to something readable
                 string niceNameCSS = Path.Combine(tempFolder, "book.css");
                 projInfo.DefaultCssFileWithPath = niceNameCSS;
-                if (File.Exists(niceNameCSS))
+                if (niceNameCSS != mergedCSS)
                 {
-                    File.Delete(niceNameCSS);
+                    if (File.Exists(niceNameCSS))
+                    {
+                        File.Delete(niceNameCSS);
+                    }
+                    File.Copy(mergedCSS, niceNameCSS);
+                    mergedCSS = niceNameCSS;
                 }
-                File.Copy(mergedCSS, niceNameCSS); 
-                mergedCSS = niceNameCSS;
                 defaultCSS = Path.GetFileName(niceNameCSS);
                 Common.SetDefaultCSS(projInfo.DefaultXhtmlFileWithPath, defaultCSS);
                 Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCSS);

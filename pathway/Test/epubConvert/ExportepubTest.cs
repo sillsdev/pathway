@@ -38,6 +38,7 @@ namespace Test.epubConvert
             Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../PsSupport");
             Common.SupportFolder = "";
             Common.ProgBase = Common.ProgInstall;
+            Common.Testing = true;
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/epubConvert/TestFiles");
             _inputPath = Common.PathCombine(testPath, "Input");
             _outputPath = Common.PathCombine(testPath, "Output");
@@ -85,7 +86,8 @@ namespace Test.epubConvert
         }
 
         [Test]
-        [Ignore("Hangs Team City")]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
         public void ExportDictionaryPassTest()
         {
             const string XhtmlName = "main.xhtml";
@@ -103,7 +105,8 @@ namespace Test.epubConvert
         }
 
         [Test]
-        [Ignore("Hangs Team City")]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
         public void ExportScripturePassTest()
         {
             const string XhtmlName = "Scripture Draft.xhtml";

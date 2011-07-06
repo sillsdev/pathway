@@ -226,7 +226,7 @@ namespace Test.XhtmlExport
         [Category("SkipOnTeamCity")]
         public void GondwanaSampleOpenOfficeTest()
         {
-            PathawyB("Gondwana Sample", "Gondwana Sample", "Dictionary", "OpenOffice");
+            PathawyB("Gondwana Sample", "Gondwana Sample", "Dictionary", "OpenOffice/LibreOffice");
         }
         #endregion Gondwana Sample Open Office
 
@@ -239,7 +239,7 @@ namespace Test.XhtmlExport
         [Category("SkipOnTeamCity")]
         public void NkonyaSampleOpenOfficeTest()
         {
-            PathawyB("Nkonya Sample", "Scripture Draft", "Scripture", "OpenOffice");
+            PathawyB("Nkonya Sample", "Scripture Draft", "Scripture", "OpenOffice/LibreOffice");
         }
         #endregion Nkonya Sample Open Office
 
@@ -252,7 +252,7 @@ namespace Test.XhtmlExport
         [Category("SkipOnTeamCity")]
         public void NKOu3OpenOfficeTest()
         {
-            PathawyB("NKOu3", "NKOu3", "Scripture", "OpenOffice");
+            PathawyB("NKOu3", "NKOu3", "Scripture", "OpenOffice/LibreOffice");
         }
         #endregion Nkonya Sample Open Office
 
