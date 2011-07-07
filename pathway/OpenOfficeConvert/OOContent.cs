@@ -2337,7 +2337,7 @@ namespace SIL.PublishingSolution
         {
 
             string bookname = _strBook;
-            if ((_classNameWithLang.IndexOf("headword") == 0 && _previousParagraphName.IndexOf("entry_") == 0) || _classNameWithLang.ToLower().IndexOf("chapternumber") == 0)
+            if (((_classNameWithLang.IndexOf("headword") == 0 || _classNameWithLang.IndexOf("reversalform") == 0) && _previousParagraphName.IndexOf("entry_") == 0) || _classNameWithLang.ToLower().IndexOf("chapternumber") == 0)
             {
 
                 string chapterNo = content;
