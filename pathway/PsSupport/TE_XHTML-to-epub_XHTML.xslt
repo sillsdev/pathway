@@ -58,13 +58,13 @@
 	</xsl:template>
 	
 	<!-- FWR -2550 workaround: convert these markers to uppercase (the cross-refs use upper case) -->
-	<xsl:template match="xhtml:a[../@class='scrFootnoteMarker']" >
+	<!-- <xsl:template match="xhtml:a[../@class='scrFootnoteMarker']" >
 		<xsl:copy>
 			<xsl:attribute name="href"><xsl:value-of select="translate(@href, $lowercase, $uppercase)"/></xsl:attribute>
 			<xsl:apply-templates />
 		</xsl:copy>
 	</xsl:template>
-	
+	-->
 
 	<!-- Special processing for a couple divs -->
 	<xsl:template match="xhtml:div">
