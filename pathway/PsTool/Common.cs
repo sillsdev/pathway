@@ -1265,6 +1265,7 @@ namespace SIL.Tool
         static public void StreamReplaceInFile(string filePath, string searchText, string replaceText)
         {
             if (!File.Exists(filePath)) return;
+            bool foundString = false;
             var reader = new FileStream(filePath,FileMode.Open);
             var writer = new FileStream(filePath + ".tmp", FileMode.Create);
             int next;
@@ -1288,6 +1289,7 @@ namespace SIL.Tool
                     if (String.Compare(searchText, data, true) == 0)
                     {
                         // found an instance of our search text - replace it with our replaceText
+                        foundString = true;
                         Byte[] bytes = Encoding.UTF8.GetBytes(replaceText);
                         writer.Write(bytes, 0, bytes.Length);
                     }
@@ -1306,8 +1308,13 @@ namespace SIL.Tool
             reader.Close();
             writer.Close();
             // replace the original file with the new one
-            File.Delete(filePath);
-            File.Move((filePath + ".tmp"), filePath);
+            if (foundString)
+            {
+                // at least one instance of the string was found - replace
+                File.Copy(filePath + ".tmp", filePath, true);
+            }
+            // delete the temp file
+            File.Delete(filePath + ".tmp");
         }
         #endregion
 
