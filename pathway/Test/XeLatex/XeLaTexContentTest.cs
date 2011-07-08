@@ -644,6 +644,15 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void ReplaceStringTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "ReplaceString";
+            ExportProcess(file);
+            FileCompare(file);
+        }
 
         #endregion
 
