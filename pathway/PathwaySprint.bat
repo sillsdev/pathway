@@ -7,6 +7,6 @@ msbuild BuildPathwaySprint.csproj /p:BUILD_NUMBER=%1 /t:%2
 goto end
 
 :fullSprint
-msbuild BuildPathwaySprint.csproj /p:BUILD_NUMBER=%1 /t:%2
+msbuild BuildPathwaySprint.csproj /p:BUILD_NUMBER=%1
 
 :end

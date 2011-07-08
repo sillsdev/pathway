@@ -301,24 +301,24 @@
   <Target Name="AfterBuild">
   </Target>
   <ItemGroup>
-    <ConfigurationTool Include="..\ConfigurationTool\$(OutDir)\*.*" />
-    <Plugin Include="..\PsExport\$(OutDir)\*.*" />
+    <ConfigurationTool Include="..\ConfigurationTool\$(OutputPath)\*.*" />
+    <Plugin Include="..\PsExport\$(OutputPath)\*.*" />
     <GhostScript Include="..\ThirdParty\gsdll32.dll" />
     <EpubCheck Include="..\ThirdParty\epubcheck-1.2\**\*.*" Exclude="..\ThirdParty\**\.svn\**\*.*" />
     <Icu Include="..\LiftPrepare\Lib\PalasoLib\icudt40.dll;..\LiftPrepare\Lib\PalasoLib\icuin40.dll;..\LiftPrepare\Lib\PalasoLib\icuuc40.dll;" />
-    <BatchProcess Include="..\PathwayB\$(OutDir)\PathwayB.*" />
-    <LiftPrepare Include="..\LiftPrepare\$(OutDir)\LiftPrepare.*" />
-    <ParatextSupport Include="..\ParatextSupport\$(OutDir)\ParatextSupport.*" />
-    <AllBackend Include="..\InDesignConvert\$(OutDir)\InDesignConvert.*" />
-    <AllBackend Include="..\epubConvert\$(OutDir)\epubConvert.*" />
-    <TestBackend Include="..\OpenOfficeConvert_OLD\$(OutDir)\OpenOfficeConvert_OLD.*" />
-    <TestBackend Include="..\PdfConvert\$(OutDir)\PdfConvert.*" />
-    <TestBackend Include="..\WordPressConvert\$(OutDir)\WordPressConvert.*" />
-    <TestBackend Include="..\XeTexConvert\$(OutDir)\XeTexConvert.*" />
-    <TestBackend Include="..\XeTex\$(OutDir)\XeTexWriter.*" />
-    <BteBackend Include="..\GoBibleConvert\$(OutDir)\GoBibleConvert.*" />
-    <BteBackend Include="..\YouVersionConvert\$(OutDir)\YouVersionConvert.*" />
-    <BteBackend Include="..\LogosConvert\$(OutDir)\LogosConvert.*" />
+    <BatchProcess Include="..\PathwayB\$(OutputPath)\PathwayB.*" />
+    <LiftPrepare Include="..\LiftPrepare\$(OutputPath)\LiftPrepare.*" />
+    <ParatextSupport Include="..\ParatextSupport\$(OutputPath)\ParatextSupport.*" />
+    <AllBackend Include="..\InDesignConvert\$(OutputPath)\InDesignConvert.*" />
+    <AllBackend Include="..\epubConvert\$(OutputPath)\epubConvert.*" />
+    <TestBackend Include="..\OpenOfficeConvert_OLD\$(OutputPath)\OpenOfficeConvert_OLD.*" />
+    <TestBackend Include="..\PdfConvert\$(OutputPath)\PdfConvert.*" />
+    <TestBackend Include="..\WordPressConvert\$(OutputPath)\WordPressConvert.*" />
+    <TestBackend Include="..\XeTexConvert\$(OutputPath)\XeTexConvert.*" />
+    <TestBackend Include="..\XeTex\$(OutputPath)\XeTexWriter.*" />
+    <BteBackend Include="..\GoBibleConvert\$(OutputPath)\GoBibleConvert.*" />
+    <BteBackend Include="..\YouVersionConvert\$(OutputPath)\YouVersionConvert.*" />
+    <BteBackend Include="..\LogosConvert\$(OutputPath)\LogosConvert.*" />
     <DicStyles Include="..\PsSupport\Styles\Dictionary\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Hyphenation Include="..\PsSupport\Hyphenation_Languages\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
@@ -344,7 +344,7 @@
     <OfficeFiles Include="..\PsSupport\OfficeFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <copyrightFiles Include="..\PsSupport\Copyrights\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <epubFiles Include="..\PsSupport\epub\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <AllBackend Include="..\epubValidator\$(OutDir)\epubValidator.*" />
+    <AllBackend Include="..\epubValidator\$(OutputPath)\epubValidator.*" />
     <GoBibleFiles Include="..\PsSupport\GoBible\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <InDesignFiles Include="..\PsSupport\InDesignFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <LiftFiles Include="..\PsSupport\LiftSupport\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
@@ -358,6 +358,6 @@
   </ItemGroup>
   <Target Name="Clean">
     <RemoveDir Directories="Files" />
-    <RemoveDir Directories="$(OutDir)" />
+    <RemoveDir Directories="$(OutputPath)" />
   </Target>
 </Project>
