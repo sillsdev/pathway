@@ -1,19 +1,35 @@
 <?xml version='1.0'?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2003/01/wi">
-	<Product UpgradeCode="74173B43-8B0C-499e-99B0-759A6C8EBDD2"
-		Id="7F47A1B7-AA90-40dd-96D7-E9432D90DF4E" Name="%(Product)s%(PwVer)s" Language="1033"
-		Version="%(PwVer)s" Manufacturer="SIL International">
-		<Package Id="????????-????-????-????-????????????" Manufacturer="SIL International"
-			InstallerVersion="200" Compressed="yes"/>
+	<?define Version="%(PwVer)s"?>
+	<?define UpgradeCode="74173B43-8B0C-499e-99B0-759A6C8EBDD2"?>
+	<Product UpgradeCode="$(var.UpgradeCode)" Id="????????-????-????-????-????????????" 
+		Name="%(Product)s$(var.Version)" Language="1033"
+		Version="$(var.Version)" Manufacturer="SIL International">
+		<Package Id="????????-????-????-????-????????????" 
+			Manufacturer="SIL International" InstallerVersion="200" Compressed="yes"/>
 		<Condition Message="You need to be an administrator to install this product.">Privileged</Condition>
-		<Condition
-			Message="[ProductName] will only run on Windows 2000 or better. You cannot intall it on this machine.">
+		<Condition Message="[ProductName] will only run on Windows 2000 or better. You cannot intall it on this machine.">
 			<![CDATA[(NOT Version9X) OR (NOT VersionNT OR (VersionNT >= 500))]]>
 		</Condition>
 		<!--Condition Message="[ProductName] will only run with SIL FieldWorks 5.4 or later. You must first install a suitable version of FieldWorks.">
 			<![CDATA[FWDATE >= "2008-09-30"]]>
 		</Condition-->
 
+		<Upgrade Id="$(var.UpgradeCode)">
+			<!--  Detext any newer version of this product -->
+			<UpgradeVersion Minimum="$(var.Version)"
+				IncludeMinimum="no"
+				OnlyDetect="yes"
+				Language="1033"
+				Property="NEWPRODUCTFOUND" />
+			<!--  Detect and remove any older version of this product -->
+			<UpgradeVersion Maximum="$(var.Version)"
+				IncludeMaximum="yes"
+				OnlyDetect="no"
+				Language="1033"
+				Property="OLDPRODUCTFOUND" />
+		</Upgrade>
+		
 		<Media Id="1" Cabinet="pathway.cab" EmbedCab="yes" CompressionLevel="high"/>
 
 		<Property Id="FWDIR60" Value="null">
@@ -28,10 +44,20 @@
 			<RegistrySearch Id="FindFwInstallDir80" Key="SOFTWARE\SIL\FieldWorks\8.0"
 				Name="RootCodeDir" Root="HKLM" Type="directory"/>
 		</Property>
+		
+		<CustomAction Id="PreventDowngrading" Error="Newer version already installed." />
+		
 		<CustomAction Id="SetFwDir60" Property="FWDIR" Value="[FWDIR60]"/>
 		<CustomAction Id="SetFwDir70" Property="FWDIR" Value="[FWDIR70]"/>
 		<CustomAction Id="SetFwDir80" Property="FWDIR" Value="[FWDIR80]"/>
+		
+		<InstallExecuteSequence>
+			<Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+			<RemoveExistingProducts After="InstallFinalize" />
+		</InstallExecuteSequence>
+		
 		<InstallUISequence>
+			<Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
 			<Custom Action="SetFwDir60" After="AppSearch"><![CDATA[FWDIR60 <> "null"]]></Custom>
 			<Custom Action="SetFwDir70" After="SetFwDir60"><![CDATA[FWDIR70 <> "null"]]></Custom>
 			<Custom Action="SetFwDir80" After="SetFwDir70"><![CDATA[FWDIR80 <> "null"]]></Custom>
