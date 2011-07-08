@@ -634,65 +634,70 @@ namespace SIL.PublishingSolution
                 if (!string.IsNullOrEmpty(importStatement))
                     writeCss.WriteLine(importStatement);
 
-                var value = new Dictionary<string, string>();
-                string attribute = "Justified";
-                string key = cTool.DdlJustified.Text;
-                WriteAtImport(writeCss, attribute, key);
-
-                attribute = "VerticalJustify";
-                key = cTool.DdlVerticalJustify.Text;
-                WriteAtImport(writeCss, attribute, key);
-
-                attribute = "Page Size";
-                key = cTool.DdlPagePageSize.Text;
-                WriteAtImport(writeCss, attribute, key);
-
-                attribute = "Columns";
-                key = cTool.DdlPageColumn.Text;
-                WriteAtImport(writeCss, attribute, key);
-
-                attribute = "Font Size";
-                key = cTool.DdlFontSize.Text;
-                WriteAtImport(writeCss, attribute, key);
-
-                attribute = "Leading";
-                key = cTool.DdlLeading.Text;
-                WriteAtImport(writeCss, attribute, key);
-
-                attribute = "Pictures";
-                key = cTool.DdlPicture.Text;
-                WriteAtImport(writeCss, attribute, key);
-
-                attribute = "Running Head";
-                key = cTool.DdlRunningHead.Text;
-                WriteAtImport(writeCss, attribute, key);
-
-                attribute = "Page Number";
-                key = cTool.DdlPageNumber.Text;
-                WriteAtImport(writeCss, attribute, key);
-
-                attribute = "Rules";
-                key = cTool.DdlRules.Text;
-                WriteAtImport(writeCss, attribute, key);
-
-                attribute = "Sense";
-                key = cTool.DdlSense.Text;
-                WriteAtImport(writeCss, attribute, key);
-
-                //Writing TextBox Values into Css
-                if (cTool.TxtPageGutterWidth.Text.Length > 0)
+                // changes for paper media
+                if (MediaType == "paper")
                 {
-                    value["column-gap"] = cTool.TxtPageGutterWidth.Text;
-                    WriteCssClass(writeCss, "letData", value);
-                }
+                    var value = new Dictionary<string, string>();
+                    string attribute = "Justified";
+                    string key = cTool.DdlJustified.Text;
+                    WriteAtImport(writeCss, attribute, key);
 
-                value.Clear();
-                value["margin-top"] = cTool.TxtPageTop.Text;
-                value["margin-right"] = cTool.TxtPageOutside.Text;
-                value["margin-bottom"] = cTool.TxtPageBottom.Text;
-                value["margin-left"] = cTool.TxtPageInside.Text;
-                value["-ps-fileproduce"] = "\"" + _fileProduce + "\"";
-                WriteCssClass(writeCss, "page", value);
+                    attribute = "VerticalJustify";
+                    key = cTool.DdlVerticalJustify.Text;
+                    WriteAtImport(writeCss, attribute, key);
+
+                    attribute = "Page Size";
+                    key = cTool.DdlPagePageSize.Text;
+                    WriteAtImport(writeCss, attribute, key);
+
+                    attribute = "Columns";
+                    key = cTool.DdlPageColumn.Text;
+                    WriteAtImport(writeCss, attribute, key);
+
+                    attribute = "Font Size";
+                    key = cTool.DdlFontSize.Text;
+                    WriteAtImport(writeCss, attribute, key);
+
+                    attribute = "Leading";
+                    key = cTool.DdlLeading.Text;
+                    WriteAtImport(writeCss, attribute, key);
+
+                    attribute = "Pictures";
+                    key = cTool.DdlPicture.Text;
+                    WriteAtImport(writeCss, attribute, key);
+
+                    attribute = "Running Head";
+                    key = cTool.DdlRunningHead.Text;
+                    WriteAtImport(writeCss, attribute, key);
+
+                    attribute = "Page Number";
+                    key = cTool.DdlPageNumber.Text;
+                    WriteAtImport(writeCss, attribute, key);
+
+                    attribute = "Rules";
+                    key = cTool.DdlRules.Text;
+                    WriteAtImport(writeCss, attribute, key);
+
+                    attribute = "Sense";
+                    key = cTool.DdlSense.Text;
+                    WriteAtImport(writeCss, attribute, key);
+
+                    //Writing TextBox Values into Css
+                    if (cTool.TxtPageGutterWidth.Text.Length > 0)
+                    {
+                        value["column-gap"] = cTool.TxtPageGutterWidth.Text;
+                        WriteCssClass(writeCss, "letData", value);
+                    }
+
+                    value.Clear();
+                    value["margin-top"] = cTool.TxtPageTop.Text;
+                    value["margin-right"] = cTool.TxtPageOutside.Text;
+                    value["margin-bottom"] = cTool.TxtPageBottom.Text;
+                    value["margin-left"] = cTool.TxtPageInside.Text;
+                    value["-ps-fileproduce"] = "\"" + _fileProduce + "\"";
+                    WriteCssClass(writeCss, "page", value);
+                }
+                // write out the changes
                 writeCss.Flush();
                 writeCss.Close();
 

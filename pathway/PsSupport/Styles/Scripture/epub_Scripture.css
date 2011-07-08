@@ -150,6 +150,8 @@ the user's preferences from the Configuration Tool:
    margin-left: --> from ChapterNumbers
 */
     text-align:left;
+    margin-left: 48pt;
+    margin-right: 48pt;
 }
 
 .parallel_passage_reference, .Parallel_Passage_Reference {
@@ -204,6 +206,7 @@ the user's preferences from the Configuration Tool:
 }
 .See_In_Glossary {
     color: blue;
+    background-color:inherit;
 }
 .Stanza_Break {
     text-indent : 0;

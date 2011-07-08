@@ -1202,23 +1202,16 @@ namespace SIL.PublishingSolution
                 sb.Append("float: ");
                 sb.Append(mainTextDirection.ToLower().Equals("ltr") ? "left" : "right");
                 sb.AppendLine(";");
-                sb.AppendLine(mainTextDirection.ToLower().Equals("ltr") ? "padding-right: 5pt;" : "padding-leftt: 5pt;");
-                Common.ReplaceInFile(cssFile, ".Chapter_Number {", sb.ToString());
-                sb.Length = 0; // reset the stringbuilder
-                sb.AppendLine(".Paragraph1 {");
-                if (ChapterNumbers != "Drop Cap")
+                if (mainTextDirection.ToLower().Equals("ltr"))
                 {
-                    // leading chapter number is in the margin
-                    sb.AppendLine(mainTextDirection.ToLower().Equals("ltr")
-                                      ? "margin-left: 0pt; margin-right: 48pt;"
-                                      : "margin-left: 48pt; margin-right: 0pt;");
+                    sb.Append("padding-right: 5pt; padding-left: ");
                 }
                 else
                 {
-                    // leading chapter number is a drop cap
-                    sb.AppendLine("margin-left: 48pt; margin-right: 48pt;");
+                    sb.Append("padding-left: 5pt; padding-right: ");
                 }
-                Common.StreamReplaceInFile(cssFile, ".Paragraph1 {", sb.ToString());
+                sb.Append((ChapterNumbers == "Drop Cap") ? "48pt;" : "5pt;");
+                Common.ReplaceInFile(cssFile, ".Chapter_Number {", sb.ToString());
             }
         }
 
@@ -1809,27 +1802,20 @@ namespace SIL.PublishingSolution
                 // ChapterNumbers (drop cap or in margin) - .Chapter_Number and .Paragraph1 class elements
                 sb.Length = 0;  // reset the stringbuilder
                 sb.AppendLine(".Chapter_Number {");
-                //sb.AppendLine((ChapterNumbers == "Drop Cap") ? "text-indent: 0;" : "text-indent: -48pt;");
                 sb.Append("font-size: ");
-                sb.AppendLine((ChapterNumbers == "Drop Cap") ? "250%;" : "24pt;");
-                //sb.Append("padding-top: ");
-                //sb.Append(BaseFontSize / 2);
-                //sb.AppendLine("pt;");
-                // vertical alignment of Cap specified by setting the padding-top to (defaultlineheight / 2)
-                if (ChapterNumbers != "Drop Cap")
+                if (ChapterNumbers == "Drop Cap")
                 {
-                    sb.AppendLine("display: table-cell;");
-                    sb.AppendLine("width: 48pt;");
+                    sb.AppendLine("250%;");
+                    // vertical alignment of Cap specified by setting the padding-top to (defaultlineheight / 2)
+                    sb.Append("padding-top: ");
+                    sb.Append(BaseFontSize / 2);
+                    sb.AppendLine("pt;");
+                }
+                else
+                {
+                    sb.AppendLine("24pt;");
                 }
                 Common.StreamReplaceInFile(cssFile, ".Chapter_Number {", sb.ToString());
-                // changes for chapter #s in the margin (only)
-                if (ChapterNumbers != "Drop Cap")
-                {
-                    sb.Length = 0; // reset the stringbuilder
-                    sb.AppendLine(".Paragraph1 {");
-                    sb.AppendLine("display:table;");
-                    Common.StreamReplaceInFile(cssFile, ".Paragraph1 {", sb.ToString());
-                }
             }
             // DefaultAlignment - several spots in the css file
             sb.Length = 0; // reset the stringbuilder
