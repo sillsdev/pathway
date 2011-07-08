@@ -15,6 +15,7 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
+using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using JWTools;
@@ -70,6 +71,17 @@ namespace SIL.PublishingSolution
                 }
                 return ((AssemblyFileVersionAttribute) attributes[0]).Version;
                 //return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Gets AssemblyFileDate set by builder
+        /// </summary>
+        public string AssemblyFileDate
+        {
+            get
+            {
+                return File.GetCreationTime(Application.ExecutablePath).ToShortDateString();
             }
         }
 
@@ -152,7 +164,7 @@ namespace SIL.PublishingSolution
 
             Text = String.Format("About {0}", AssemblyProduct);
             labelProductName.Text = AssemblyProduct;
-            labelVersion.Text = String.Format("Version {0}", AssemblyFileVersion);
+            labelVersion.Text = String.Format("Version {0} ({1})", AssemblyFileVersion, AssemblyFileDate);
             labelCopyright.Text = AssemblyCopyright;
             labelCompanyName.Text = AssemblyCompany;
             textBoxDescription.Text = AssemblyDescription;
