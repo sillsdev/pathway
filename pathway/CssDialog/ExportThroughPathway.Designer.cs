@@ -554,9 +554,9 @@
             this.chkOOReduceStyleNames.AutoSize = true;
             this.chkOOReduceStyleNames.Location = new System.Drawing.Point(8, 57);
             this.chkOOReduceStyleNames.Name = "chkOOReduceStyleNames";
-            this.chkOOReduceStyleNames.Size = new System.Drawing.Size(266, 17);
+            this.chkOOReduceStyleNames.Size = new System.Drawing.Size(319, 17);
             this.chkOOReduceStyleNames.TabIndex = 26;
-            this.chkOOReduceStyleNames.Text = "Replace styles with direct formatting in Open Office";
+            this.chkOOReduceStyleNames.Text = "Replace styles with direct formatting in OpenOffice/LibreOffice";
             this.chkOOReduceStyleNames.UseVisualStyleBackColor = true;
             // 
             // chkRunningHeader
