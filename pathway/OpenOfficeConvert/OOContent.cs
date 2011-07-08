@@ -1025,9 +1025,10 @@ namespace SIL.PublishingSolution
             if (footCallSymb.Length == 0)
             {
                 //footCallSymb = _titleCounter++.ToString();
-                footCallSymb = " ";
+                //footCallSymb = " ";
                 _isEmptyTitleExist = true;
             }
+            footCallSymb = footCallSymb.Trim() + " ";
             string footerCall = footerClassName + "..footnote-call";
             string footerMarker = footerClassName + "..footnote-marker";
             if (IdAllClass.ContainsKey(footerCall) && String.IsNullOrEmpty(footCallSymb))
