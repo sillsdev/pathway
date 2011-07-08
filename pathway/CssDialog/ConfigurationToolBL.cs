@@ -1789,7 +1789,19 @@ namespace SIL.PublishingSolution
             int startPos = preferedName.IndexOf('(');
             int endPos = preferedName.IndexOf(')');
             if (startPos > 0)
-                oldValue = int.Parse(preferedName.Substring(startPos + 1, ((endPos - 1) - (startPos))));
+            {
+                if (!int.TryParse(preferedName.Substring(startPos + 1, ((endPos - 1) - (startPos))), out oldValue))
+                {
+                    // We wanted a stylesheet name with a parenthesis in it, but just the first copy -
+                    // change it to Copy (2) of...
+                    preferedName = preferedName.Replace("Copy of", "Copy(2) of");
+                    if (!cssNames.Contains(preferedName))
+                    {
+                        return preferedName;
+                    }
+                    oldValue = 1;
+                }
+            }
             int newValue = oldValue + 1;
             preferedName = preferedName.Replace(oldValue.ToString(), newValue.ToString());
             if (cssNames.Contains(preferedName))
