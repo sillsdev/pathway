@@ -80,6 +80,7 @@ namespace SIL.PublishingSolution
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
             InitializeData(projInfo.ProjectPath, cssClass, classFamily, cssClassOrder);
             InitializeMathStyle();
+            ProcessProperty();
             ProcessCounterProperty();
             OpenXhtmlFile(projInfo.DefaultXhtmlFileWithPath);
             ProcessXHTML(projInfo.DefaultXhtmlFileWithPath);
