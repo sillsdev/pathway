@@ -87,6 +87,173 @@ namespace SIL.PublishingSolution
             return _newProperty;
         }
 
+        private void ProcessProperty()
+        {
+            Common.ColumnWidth = 0.0;
+
+            foreach (string className in IdAllClass.Keys)
+            {
+                string searchKey = "column-count";
+                //if (IdAllClass[className].ContainsKey(searchKey))
+                //{
+                //    if (!_sectionName.Contains(className))
+                //    {
+                //        _sectionName.Add(className);
+                //    }
+
+                //}
+
+                if (className.IndexOf("Sect_") >= 0)
+                {
+                    _dictColumnGapEm[className] = IdAllClass[className];
+                }
+                string colWidth = string.Empty;
+                if (className.IndexOf("SectColumnWidth_") >= 0)
+                {
+                    colWidth = IdAllClass[className]["ColumnWidth"];
+                    Common.ColumnWidth = double.Parse(colWidth);
+                }
+
+                searchKey = "visibility";
+                if (IdAllClass[className].ContainsKey(searchKey) && IdAllClass[className][searchKey] == "hidden")
+                {
+                    if (!_visibilityClassName.Contains(className))
+                    {
+                        _visibilityClassName.Add(className);
+                    }
+
+                }
+
+                searchKey = "prince-text-replace";
+                if (IdAllClass[className].ContainsKey(searchKey))
+                {
+                    _replaceSymbolToText.Clear();
+                    string[] values = IdAllClass[className][searchKey].Split('\"');
+                    if (values.Length <= 1)
+                        values = IdAllClass[className][searchKey].Split('\'');
+                    for (int i = 0; i < values.Length; i++)
+                    {
+                        if (values[i].Length > 0)
+                        {
+                            string key = values[i].Replace("\"", "");
+                            //key = Common.ReplaceSymbolToText(key);
+                            i++;
+                            i++;
+                            string value = values[i].Replace("\"", "");
+                            value = Common.ReplaceSymbolToText(value);
+                            _replaceSymbolToText[key] = Common.UnicodeConversion(value);
+                        }
+                    }
+                }
+
+                // avoid white background color for pdf thru libreoffice - TD-1573
+                searchKey = "background-color";
+                if (IdAllClass[className].ContainsKey(searchKey) && IdAllClass[className][searchKey].ToLower() == "#ffffff")
+                {
+                    IdAllClass[className].Remove(searchKey);
+                }
+
+                searchKey = "list-style-type";
+                if (IdAllClass[className].ContainsKey(searchKey))
+                {
+                    _listTypeDictionary[className] = IdAllClass[className][searchKey];
+                }
+
+                // Drop caps starts
+                bool dropCap = false;
+                searchKey = "float";
+                if (IdAllClass[className].ContainsKey(searchKey))
+                {
+                    dropCap = true;
+                }
+                searchKey = "vertical-align";
+                if (IdAllClass[className].ContainsKey(searchKey))
+                {
+                    if (dropCap)
+                    {
+                        _dropCap.Add(className);
+                    }
+                }
+                // Drop caps ends
+
+
+                searchKey = "counter-increment";
+                if (IdAllClass[className].ContainsKey(searchKey))
+                {
+                    var key = new Dictionary<string, string>();
+                    string value = IdAllClass[className][searchKey];
+                    if (value.IndexOf(',') > 0)
+                    {
+                        string[] splitcomma = value.Split(',');
+                        if (splitcomma.Length > 1)
+                        {
+                            key[splitcomma[0]] = splitcomma[1];
+                            contentCounterIncrement[className] = key;
+                            ContentCounter[splitcomma[0]] = 0;
+                        }
+                    }
+                    else
+                    {
+                        key[value] = "1";
+                        contentCounterIncrement[className] = key;
+                        ContentCounter[value] = 0;
+                    }
+
+                }
+
+                searchKey = "counter-reset";
+                if (IdAllClass[className].ContainsKey(searchKey))
+                {
+                    ContentCounterReset[className] = IdAllClass[className][searchKey];
+                }
+
+                // Footnote process 
+                searchKey = "display";
+                if (IdAllClass[className].ContainsKey(searchKey) && className.IndexOf("..footnote") > 0)
+                {
+                    string footnoteClsName = Common.LeftString(className, "..");
+                    if (IdAllClass[footnoteClsName][searchKey] == "footnote" || IdAllClass[footnoteClsName][searchKey] == "prince-footnote")
+                    {
+                        if (!_FootNote.Contains(footnoteClsName))
+                            _FootNote.Add(footnoteClsName);
+                    }
+                }
+                searchKey = "..footnote-call";
+                if (className.IndexOf(searchKey) >= 0)
+                {
+                    if (!_footnoteCallContent.Contains(className))
+                        _footnoteCallContent.Add(className);
+                }
+                searchKey = "..footnote-marker";
+                if (className.IndexOf(searchKey) >= 0)
+                {
+                    if (!_footnoteMarkerContent.Contains(className))
+                    {
+                        _footnoteMarkerContent.Add(className);
+                        if (IdAllClass[className].ContainsKey("content"))
+                        {
+                            _footNoteMarker[className] = IdAllClass[className]["content"];
+                        }
+                    }
+
+                }
+
+                //searchKey = "list-style-type";
+                //if (IdAllClass[className].ContainsKey(searchKey))
+                //{
+                //    ListType[className] = IdAllClass[className][searchKey];
+                //}
+
+
+            }
+
+            //if (Common.ColumnWidth == 0.0)
+            //{
+            //    Common.ColumnWidth = _pageWidth;
+            //}
+        }
+
+
         private void ProcessCounterProperty()
         {
             _FootNote.Clear();
