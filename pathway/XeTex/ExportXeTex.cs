@@ -60,8 +60,10 @@ namespace SIL.PublishingSolution
             //preProcessor.InsertHiddenVerseNumber();
             //preProcessor.GetDefinitionLanguage();
 
+            preProcessor.GetTempFolderPath();
             string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
+            preProcessor.InsertFrontMatter(preProcessor.GetCreatedTempFolderPath, true);
             projInfo.DefaultCssFileWithPath = preProcessor.ProcessedCss;
             projInfo.ProjectPath = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
 
