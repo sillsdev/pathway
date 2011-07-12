@@ -379,9 +379,9 @@ namespace SIL.Tool
                 File.Delete(destFile);
             }
             File.Copy(strCopyrightFile, destFile);
-            Common.StreamReplaceInFile(destFile, "div id='LanguageInformation' class='Front_Matter'>", GetLanguageInfo());
-            Common.StreamReplaceInFile(destFile, "div id='OtherCopyrights' class='Front_Matter'>", GetCopyrightInfo());
-            if (_projInfo.ProjectInputType != "dictionary")
+            Common.StreamReplaceInFile(destFile, "div id='LanguageInformation' class='Front_Matter' dir='ltr'>", GetLanguageInfo());
+            Common.StreamReplaceInFile(destFile, "div id='OtherCopyrights' class='Front_Matter' dir='ltr'>", GetCopyrightInfo());
+            if (_projInfo.ProjectInputType.ToLower() != "dictionary")
             {
                 Common.StreamReplaceInFile(destFile, "src='SIL-Logo-No-Tag-Color.gif' alt='SIL International logo'",
                     "src='WBT_H_RGB_red.png' alt='Wycliffe logo'  ");
@@ -422,7 +422,7 @@ namespace SIL.Tool
             sr.Close();
             // add the language and copyright info and return the result as a string
             string s0;
-            if (_projInfo.ProjectInputType != "dictionary")
+            if (_projInfo.ProjectInputType.ToLower() != "dictionary")
             {
                 s0 = Regex.Replace(outData.ToString(), "src='SIL-Logo-No-Tag-Color.gif' alt='SIL International logo'",
                     "src='WBT_H_RGB_red.png' alt='Wycliffe logo'  ");
@@ -440,7 +440,7 @@ namespace SIL.Tool
         private string GetLanguageInfo()
         {
             var sb = new StringBuilder();
-            sb.Append("div id='LanguageInformation' class='Front_Matter'>");
+            sb.Append("div id='LanguageInformation' class='Front_Matter' dir='ltr'>");
             // append what we know about this language, including a hyperlink to the ethnologue.
             string languageCode = GetLanguageCode();
             if (languageCode.Length > 0)
@@ -463,7 +463,7 @@ namespace SIL.Tool
         private string GetCopyrightInfo()
         {
             var sb = new StringBuilder();
-            sb.Append("div id='OtherCopyrights' class='Front_Matter'><p>");
+            sb.Append("div id='OtherCopyrights' class='Front_Matter' dir='ltr'><p>");
             // append any other copyright information to the list
             string contributors = Param.GetMetadataValue(Param.Contributor);
             if (contributors.Trim().Length > 0)
@@ -929,12 +929,12 @@ namespace SIL.Tool
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
             XmlNode node;
-            if (_projInfo.ProjectInputType == "dictionary")
+            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
             {
                 // dictionary
                 try
                 {
-                    node = xDoc.SelectSingleNode("//x:div[@class='headword'][1]", namespaceManager);
+                    node = xDoc.SelectSingleNode("//x:span[@class='headword'][1]", namespaceManager);
                 }
                 catch (Exception ex)
                 {

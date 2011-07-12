@@ -13,7 +13,7 @@
 	<xsl:strip-space elements="*"/>
 	
 	<!--Straight copy for these elements. -->
-	<xsl:template match="xhtml:html | xhtml:body | xhtml:head | xhtml:meta | xhtml:title | xhtml:link | xhtml:a | xhtml:table | xhtml:tr | xhtml:td | xhtml:em | xhtml:br | xhtml:ol | xhtml:ul | xhtml:img | xhtml:div | xhtml:li">
+	<xsl:template match="xhtml:html | xhtml:body | xhtml:head | xhtml:meta | xhtml:title | xhtml:link | xhtml:a | xhtml:table | xhtml:tr | xhtml:td | xhtml:em | xhtml:br | xhtml:ol | xhtml:ul | xhtml:img | xhtml:h1 | xhtml:p | xhtml:h2 | xhtml:h3 | xhtml:div | xhtml:li">
 		<xsl:copy>
 			<xsl:for-each select="@*">
 				<xsl:copy/>
