@@ -133,7 +133,7 @@ namespace SIL.PublishingSolution
         //private Dictionary<string, ArrayList> _styleName = new Dictionary<string, ArrayList>();
         private ArrayList _crossRef = new ArrayList();
         private int _crossRefCounter = 1;
-        private bool _isWhiteSpace = true;
+        private bool _isWhiteSpace = false;
         private bool _isVerseNumberContent = false;
         private StringBuilder _verseContent = new StringBuilder();
 
@@ -146,6 +146,7 @@ namespace SIL.PublishingSolution
         private bool _isEmptyTitleExist;
         private int _titleCounter=1;
         private int _pageWidth;
+
         #endregion
 
         #region Public Variable
@@ -620,14 +621,12 @@ namespace SIL.PublishingSolution
                             break;
                         case XmlNodeType.EndElement:
                             EndElement();
-
                             break;
                         case XmlNodeType.Text: // Text.Write
                             Write();
                             break;
                         case XmlNodeType.SignificantWhitespace:
-                            string data = SignificantSpace(_reader.Value);
-                            _writer.WriteString(data);
+                            InsertWhiteSpace();
                             break;
 
                     }
@@ -652,6 +651,19 @@ namespace SIL.PublishingSolution
                     pb.Value = pb.Maximum;
                     pb.Visible = false;
                 }
+            }
+        }
+
+        private void InsertWhiteSpace()
+        {
+            string data = SignificantSpace(_reader.Value);
+            //_writer.WriteString(data);
+            if (!_isWhiteSpace)
+            {
+                _writer.WriteStartElement("text:s");
+                _writer.WriteAttributeString("text:c", "1");
+                _writer.WriteEndElement();
+                _isWhiteSpace = true;
             }
         }
 
@@ -726,6 +738,7 @@ namespace SIL.PublishingSolution
             }
             WriteText();
             isFileEmpty = false;
+            _isWhiteSpace = false;
         }
 
         private void DropCapsParagraph()
