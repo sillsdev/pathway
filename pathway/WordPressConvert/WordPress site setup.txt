@@ -1,6 +1,7 @@
 If you don't already have a web site, you can set up a site at one of these links:
 http://000space.com/ (paid for by advertizing)
 http://www.000webhost.com/ (paid for by advertizing)
+http://www.hostgator.com/shared.shtml (as low as $3.96/mo)
 http://www.godaddy.com/hosting/web-hosting.aspx (charges a nominal fee)
 
 (If you would rather set it up on a local machine (not on the internet) or set up a Windows machine to serve the pages in a local area network, you could use XAMPP from http://sourceforge.net/projects/xampp/
