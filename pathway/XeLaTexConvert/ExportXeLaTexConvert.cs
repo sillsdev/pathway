@@ -39,12 +39,16 @@ namespace SIL.PublishingSolution
         public bool Handle(string inputDataType)
         {
             bool returnValue = false;
-            if (inputDataType.ToLower() == "dictionary" || inputDataType.ToLower() == "scripture")
+            string dataType = inputDataType.ToLower();
+            if (dataType == "dictionary" || dataType == "scripture")
             {
                 returnValue = true;
             }
+            if (string.IsNullOrEmpty(PathwayPath.GetXeLaTexDir()))
+            {
+                returnValue = false;
+            }
             return returnValue;
-
         }
 
         /// <summary>

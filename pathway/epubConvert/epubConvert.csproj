@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{B19037F2-26F7-48A2-9301-B5CA335C6824}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -158,6 +158,16 @@
     <PlatformTarget>x86</PlatformTarget>
     <Edition>BTE</Edition>
     <ConfTag>Pw7</ConfTag>
+    <Status>Testing</Status>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
+    <OutputPath>bin\PathwayXeLaTeX\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Status>Testing</Status>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|x86' ">
+    <OutputPath>bin\x86\PathwayXeLaTeX\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
     <Status>Testing</Status>
   </PropertyGroup>
   <ItemGroup>

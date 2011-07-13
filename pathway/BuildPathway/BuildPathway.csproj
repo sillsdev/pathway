@@ -26,6 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Edition>BTE</Edition>
+    <ProductName>Pathway $(Edition) Debug</ProductName>
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
   </PropertyGroup>
@@ -38,6 +39,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Edition>BTE</Edition>
+    <ProductName>Pathway $(Edition) Testing</ProductName>
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
   </PropertyGroup>
@@ -50,6 +52,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Edition>SE</Edition>
+    <ProductName>Pathway $(Edition) Testing</ProductName>
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
   </PropertyGroup>
@@ -62,6 +65,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Edition>BTE</Edition>
+    <ProductName>Pathway $(Edition)</ProductName>
     <ConfTag>Pw7</ConfTag>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|AnyCPU' ">
@@ -73,13 +77,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Edition>SE</Edition>
+    <ProductName>Pathway $(Edition)</ProductName>
     <ConfTag>Pw7</ConfTag>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwCtx|AnyCPU' ">
     <OutputPath>bin\PwCtx\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <Edition>BTE</Edition>
-    <ConfTag>Pw7</ConfTag>
+    <Edition/>
+    <ProductName>Pathway mini-ConTeXt</ProductName>
+    <ConfTag>PwCtx</ConfTag>
     <Status>Testing</Status>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -91,6 +97,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Edition>BTE</Edition>
+    <ProductName>Pathway $(Edition) Debug</ProductName>
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
   </PropertyGroup>
@@ -103,6 +110,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Edition>BTE</Edition>
+    <ProductName>Pathway $(Edition) Testing</ProductName>
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
   </PropertyGroup>
@@ -115,6 +123,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Edition>SE</Edition>
+    <ProductName>Pathway $(Edition) Testing</ProductName>
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
   </PropertyGroup>
@@ -127,6 +136,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Edition>BTE</Edition>
+    <ProductName>Pathway $(Edition)</ProductName>
     <ConfTag>Pw7</ConfTag>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|x86' ">
@@ -138,13 +148,31 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Edition>SE</Edition>
+    <ProductName>Pathway $(Edition)</ProductName>
     <ConfTag>Pw7</ConfTag>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwCtx|x86' ">
     <OutputPath>bin\x86\PwCtx\</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
-    <Edition>BTE</Edition>
-    <ConfTag>Pw7</ConfTag>
+    <Edition/>
+    <ProductName>Pathway mini-ConTeXt</ProductName>
+    <ConfTag>PwCtx</ConfTag>
+    <Status>Testing</Status>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
+    <OutputPath>bin\PathwayXeLaTeX\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Edition/>
+    <ProductName>Pathway XeLaTeX</ProductName>
+    <ConfTag>XeLaTeX</ConfTag>
+    <Status>Testing</Status>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|x86' ">
+    <OutputPath>bin\x86\PathwayXeLaTeX\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <Edition/>
+    <ProductName>Pathway XeLaTeX</ProductName>
+    <ConfTag>XeLaTeX</ConfTag>
     <Status>Testing</Status>
   </PropertyGroup>
   <ItemGroup>
@@ -240,10 +268,11 @@
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets. -->
   <Target Name="Build">
-    <CallTarget Targets="BeforeBuild" />
-    <RemoveDir Directories="Wix" />
+    <CallTarget Targets="BeforeBuild" Condition=" '$(ConfTag)' != 'XeLaTeX' " />
+    <CallTarget Targets="XeLaTeXBeforeBuild" Condition=" '$(ConfTag)' == 'XeLaTeX' " />
     <Message Text="BUILD_NUMBER: $(BUILD_NUMBER)" Importance="high" />
-    <UpdateVersion Product="Pathway $(Edition) " Version="0.7.6" BuildVersion="$(BUILD_NUMBER)" HelpFile="Pathway_Configuration_Tool_$(Edition).chm" Template="$(ProjectDir)Install$(ConfTag)$(Edition)-tpl.wxs" />
+    <RemoveDir Directories="Wix" />
+    <UpdateVersion Product="$(ProductName) " Version="0.7.6" BuildVersion="$(BUILD_NUMBER)" HelpFile="Pathway_Configuration_Tool_$(Edition).chm" Template="$(ProjectDir)Install$(ConfTag)$(Edition)-tpl.wxs" />
     <UpdateReadme Readme="$(ProjectDir)ReadMePw.rtf" License="$(ProjectDir)License.rtf" Template="$(ProjectDir)UserInterface-tpl.wxs" />
     <ZeroCheck />
     <FileComponents FilesTemplate="Files$(ConfTag)-tpl.wxs" FeaturesTemplate="Features$(ConfTag)-tpl.wxs" />
@@ -300,6 +329,10 @@
   </Target>
   <Target Name="AfterBuild">
   </Target>
+  <Target Name="Clean">
+    <RemoveDir Directories="Files" />
+    <RemoveDir Directories="$(OutputPath)" />
+  </Target>
   <ItemGroup>
     <ConfigurationTool Include="..\ConfigurationTool\$(OutputPath)\*.*" />
     <Plugin Include="..\PsExport\$(OutputPath)\*.*" />
@@ -315,6 +348,7 @@
     <TestBackend Include="..\PdfConvert\$(OutputPath)\PdfConvert.*" />
     <TestBackend Include="..\WordPressConvert\$(OutputPath)\WordPressConvert.*" />
     <TestBackend Include="..\XeTexConvert\$(OutputPath)\XeTexConvert.*" />
+    <TestBackend Include="..\XeLaTexConvert\$(OutputPath)\XeLaTexWriter.*" />
     <TestBackend Include="..\XeTex\$(OutputPath)\XeTexWriter.*" />
     <BteBackend Include="..\GoBibleConvert\$(OutputPath)\GoBibleConvert.*" />
     <BteBackend Include="..\YouVersionConvert\$(OutputPath)\YouVersionConvert.*" />
@@ -356,8 +390,10 @@
     <XetexFiles Include="..\PsSupport\xetexPathway\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <WixSoftware Include="WixSoftware\**\*.*" Exclude="WixSoftware\**\.svn\**\*.*" />
   </ItemGroup>
-  <Target Name="Clean">
-    <RemoveDir Directories="Files" />
-    <RemoveDir Directories="$(OutputPath)" />
+  <Target Name="XeLaTexBeforeBuild">
+    <Copy SourceFiles="@(XeLaTexExe)" DestinationFiles="@(XeLaTexExe->'Files\XeLaTeX\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
+  <ItemGroup>
+    <XeLaTexExe Include="..\XeLaTexConvert\XeLaTexExe\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\**\.svn\**\*.*" />
+  </ItemGroup>
 </Project>

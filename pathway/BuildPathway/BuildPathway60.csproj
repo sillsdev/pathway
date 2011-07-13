@@ -522,6 +522,7 @@
     <TestBackend Include="..\PdfConvert\$(OutputPath)\PdfConvert.*"/>
     <TestBackend Include="..\WordPressConvert\$(OutputPath)\WordPressConvert.*"/>
     <TestBackend Include="..\XeTexConvert\$(OutputPath)\XeTexConvert.*"/>
+    <TestBackend Include="..\XeLaTexConvert\$(OutputPath)\XeLaTexConvert.*"/>
     <TestBackend Include="..\XeTex\$(OutputPath)\XeTexWriter.*"/>
     <BteBackend Include="..\GoBibleConvert\$(OutputPath)\GoBibleConvert.*"/>
     <BteBackend Include="..\YouVersionConvert\$(OutputPath)\YouVersionConvert.*"/>

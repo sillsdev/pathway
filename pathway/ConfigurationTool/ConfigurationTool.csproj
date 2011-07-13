@@ -161,7 +161,16 @@
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
   </PropertyGroup>
-  
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
+    <OutputPath>bin\PathwayXeLaTeX\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Status>Testing</Status>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|x86' ">
+    <OutputPath>bin\x86\PathwayXeLaTeX\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <Status>Testing</Status>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PdfToImage, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

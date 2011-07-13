@@ -1,0 +1,68 @@
+<?xml version='1.0'?>
+<Wix xmlns='http://schemas.microsoft.com/wix/2003/01/wi'>
+	<?define Version="%(PwVer)s"?>
+	<?define UpgradeCode="474DE565-D67B-4042-9012-40A4663B0AE1"?>
+	<Product UpgradeCode="$(var.UpgradeCode)" Id="????????-????-????-????-????????????"
+		Name='Pathway XeLaTeX %(PwVer)s' Language='1033' Version='$(var.Version)' Manufacturer='SIL International'>
+		<Package Id='????????-????-????-????-????????????' Manufacturer='SIL International' InstallerVersion='200' Compressed='yes' />
+		<Condition Message="You need to be an administrator to install this product.">Privileged</Condition>
+		<Condition Message="[ProductName] will only run on Windows 2000 or better. You cannot intall it on this machine.">
+			<![CDATA[(NOT Version9X) OR (NOT VersionNT OR (VersionNT >= 500))]]>
+		</Condition>
+
+		<Upgrade Id="$(var.UpgradeCode)">
+			<!--  Detext any newer version of this product -->
+			<UpgradeVersion Minimum="$(var.Version)"
+				IncludeMinimum="no"
+				OnlyDetect="yes"
+				Language="1033"
+				Property="NEWPRODUCTFOUND" />
+			<!--  Detect and remove any older version of this product -->
+			<UpgradeVersion Maximum="$(var.Version)"
+				IncludeMaximum="yes"
+				OnlyDetect="no"
+				Language="1033"
+				Property="OLDPRODUCTFOUND" />
+		</Upgrade>
+		
+		<Media Id='1' Cabinet='XeLaTeX.cab' EmbedCab='yes' CompressionLevel='high'/>
+
+		<CustomAction Id="PreventDowngrading" Error="Newer version already installed." />
+		
+		<InstallExecuteSequence>
+			<Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+			<RemoveExistingProducts After="InstallFinalize" />
+		</InstallExecuteSequence>
+		
+		<InstallUISequence>
+			<Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+		</InstallUISequence>
+		
+		<FragmentRef Id='pathwayUI'/>
+		<FragmentRef Id='FilesFragment'/>
+		<FragmentRef Id='FeaturesFragment'/>
+
+		<DirectoryRef Id="TARGETDIR">
+			<Directory Id="StartMenuFolder" SourceName="StartMen" LongSource="Start Menu">
+				<Directory Id="ProgramMenuFolder" SourceName="Programs">
+					<Directory Id="XeLaTexMenu" LongName="Pathway XeLaTeX" Name="PwXeLaTx">
+						<Component Id="ReadMeShortcutApp" Guid="55E9E949-A652-4f44-A431-B02605F420D9">
+							<Shortcut Id="ReadMeShortcutApp" Directory="XeLaTexMenu" Name="ReadMe" LongName="ReadMe" Target="[#ReadMePw.rtf]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="INSTALLDIR" />
+						</Component>
+						<Component Id="LicenseShortcutApp" Guid="EB5EAB65-073C-4779-83ED-367438C1115A">
+							<Shortcut Id="LicenseShortcutApp" Directory="XeLaTexMenu" Name="License" LongName="License" Target="[#License.rtf]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="INSTALLDIR" />
+						</Component>
+					</Directory>
+				</Directory>
+			</Directory>
+		</DirectoryRef>
+		<DirectoryRef Id="TARGETDIR">
+			<Component Id="RegistryEntries" Guid="C9158C86-20E8-43eb-80AC-0FDE500CFC2E">
+				<Registry Root="HKLM" Action="createKeyAndRemoveKeyOnUninstall" 
+					Key="Software\SIL\PathwayXeLaTeX" />
+				<Registry Root="HKLM" Action="write" 
+					Key="Software\SIL\PathwayXeLaTeX" Name="XeLaTexDir" Type="string" Value="[INSTALLDIR]" />
+			</Component>
+		</DirectoryRef>
+	</Product>
+</Wix>

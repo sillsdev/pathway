@@ -141,6 +141,16 @@
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
+    <OutputPath>bin\PathwayXeLaTeX\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Status>Testing</Status>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|x86' ">
+    <OutputPath>bin\x86\PathwayXeLaTeX\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <Status>Testing</Status>
+  </PropertyGroup>
   
   
   <ItemGroup>
@@ -170,6 +180,7 @@
     <CallTarget Targets="CorporateBTE606"/>
     <CallTarget Targets="CorporateSE606"/>
     <CallTarget Targets="ReleaseBTE606"/>
+    <CallTarget Targets="PathwayXeLaTeX"/>
   </Target>
   <Target Name="Daily">
     <RemoveDir Directories="Sprint"/>
@@ -210,6 +221,12 @@
       Targets="Rebuild"
       Properties="Configuration=PwCtx;Platform=x86"/>
     <Copy SourceFiles=".\BuildPathway\Wix\SetupCtx.msi" DestinationFiles=".\Sprint\SetupCtx.msi"/>
+  </Target>
+  <Target Name="PathwayXeLaTeX">
+    <MSBuild Projects="PublishingSolution.sln"
+      Targets="Rebuild"
+      Properties="Configuration=PathwayXeLaTeX;Platform=x86"/>
+    <Copy SourceFiles=".\BuildPathway\Wix\SetupXeLaTeXTesting.msi" DestinationFiles=".\Sprint\SetupXeLaTeXTesting.msi"/>
   </Target>
   <Target Name="CorporateBTE">
     <MSBuild Projects="PublishingSolution60.sln"

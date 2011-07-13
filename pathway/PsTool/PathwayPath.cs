@@ -95,5 +95,25 @@ namespace SIL.Tool
             }
             return "";
         }
+
+        /// ------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets the directory for the XeLaTeX software for the XeTeX back end.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// name or the directory or string.Empty if the directory name isn't in the registry.
+        /// </returns>
+        /// ------------------------------------------------------------------------------------
+        public static string GetXeLaTexDir()
+        {
+            object regObj;
+            if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.CompanyKeyLocalMachine,
+                                                  "PathwayXeLaTeX", "XeLaTexDir", out regObj))
+            {
+                return (string)regObj;
+            }
+            return "";
+        }
     }
 }
