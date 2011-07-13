@@ -25,7 +25,7 @@ using Test;
 
 namespace SIL.PublishingSolution
 {
-    public class ExportXeLaTexConvert : IExportProcess
+    public class ExportXeLaTex : IExportProcess
     {
         #region Public Functions
         public string ExportType
@@ -103,8 +103,8 @@ namespace SIL.PublishingSolution
         
         public void CallXeLaTex(string xeLatexFullFile, bool openFile, Dictionary<string, string> ImageFilePath)
         {
-            
-            string str = Common.PathCombine(Common.GetApplicationPath(), "XeLaTexExe");
+
+            string str = PathwayPath.GetXeLaTexDir();
 
             string instPath = Common.PathCombine(str, "bin");
             string originalDirectory = Directory.GetCurrentDirectory();

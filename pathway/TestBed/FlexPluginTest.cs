@@ -688,7 +688,7 @@ namespace TestBed
                 MessageBox.Show("Please enter the valid CSS path");
                 return;
             }
-            ExportXeLaTexConvert exportXeLaTex = new ExportXeLaTexConvert();
+            ExportXeLaTex exportXeLaTex = new ExportXeLaTex();
             PublicationInformation projInfo = new PublicationInformation();
 
             projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
