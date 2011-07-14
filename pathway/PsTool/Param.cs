@@ -94,6 +94,7 @@ namespace SIL.PublishingSolution
         public const string TitlePage = "Title Page";
         public const string CopyrightPage = "Copyright Page";
         public const string CopyrightPageFilename = "Copyright Page Filename";
+        public const string TableOfContents = "Table of Contents";
 
         // Other constants
         private const string DefaultSettingsFileName = "StyleSettings.xml";
