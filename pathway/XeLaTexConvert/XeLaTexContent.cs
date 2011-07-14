@@ -39,6 +39,7 @@ namespace SIL.PublishingSolution
         private bool isFileCreated;
         private bool isImage;
         private bool isHomographNumber =  false;
+        private string columnCount = string.Empty;
         private string imageClass = string.Empty;
         private string _inputPath;
         private ArrayList _textFrameClass = new ArrayList();
@@ -431,6 +432,13 @@ namespace SIL.PublishingSolution
 
             if (CollectFootNoteChapterVerse(content, Common.OutputType.XETEX.ToString())) return;
 
+            if (columnCount != string.Empty) 
+            {
+                string columnProperty = "\\begin{multicols}{" + columnCount + "}";
+                _xetexFile.Write(columnProperty);
+                columnCount = string.Empty;
+            }
+            
             // Psuedo Before
             foreach (ClassInfo psuedoBefore in _psuedoBefore)
             {
@@ -995,16 +1003,15 @@ namespace SIL.PublishingSolution
             if (IdAllClass.ContainsKey(_classNameWithLang))
             {
                 bool isPageBreak = false;
-                bool isColumnCount = false;
                 if (IdAllClass[_classNameWithLang].ContainsKey("PageBreakBefore"))
                 {
                     isPageBreak = IdAllClass[_classNameWithLang]["PageBreakBefore"] == "always";
                 }
-                if (IdAllClass[_classNameWithLang].ContainsKey("TextColumnCount"))
+                if (IdAllClass[_classNameWithLang].ContainsKey("column-count"))
                 {
-                    isColumnCount = int.Parse(IdAllClass[_classNameWithLang]["TextColumnCount"]) > 1;
+                    columnCount = IdAllClass[_classNameWithLang]["column-count"];
                 }
-                if (isPageBreak || isColumnCount)
+                if (isPageBreak || columnCount != string.Empty)
                 {
                     _textFrameClass.Add(_childName);
                     _columnClass.Add(_childName);
@@ -1093,12 +1100,11 @@ namespace SIL.PublishingSolution
             }
 
             EndElementBase(false);
-            if (_columnClass.Count > 0)
+            if (_columnClass.Count > 0 && _closeChildName == _columnClass[_columnClass.Count - 1].ToString())
             {
-                if (_closeChildName == _columnClass[_columnClass.Count - 1].ToString())
-                {
-                    _columnClass.RemoveAt(_columnClass.Count - 1);
-                }
+                _columnClass.RemoveAt(_columnClass.Count - 1);
+                string columnProperty = "\\end{multicols}";
+                _xetexFile.Write(columnProperty);
             }
             _classNameWithLang = StackPeek(_allStyle);
             _classNameWithLang = Common.LeftString(_classNameWithLang, "_");
