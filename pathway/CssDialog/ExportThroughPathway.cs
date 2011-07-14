@@ -248,6 +248,11 @@ namespace SIL.PublishingSolution
             get { return chkColophon.Checked; }
             set { chkColophon.Checked = value; }
         }
+        public bool TableOfContents
+        {
+            get { return chkTOC.Checked; }
+            set { chkTOC.Checked = value; }
+        }
         /// <summary>
         /// Full path and filename of the Copyright page (xhtml) file.
         /// </summary>
@@ -652,6 +657,7 @@ namespace SIL.PublishingSolution
             CoverPageTitle = (Param.GetMetadataValue(Param.CoverPageTitle, Organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CoverPageTitle, Organization));
             CopyrightPage = (Param.GetMetadataValue(Param.CopyrightPage, Organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CopyrightPage, Organization));
             CopyrightPagePath = Param.GetMetadataValue(Param.CopyrightPageFilename, Organization);
+            TableOfContents = (Param.GetMetadataValue(Param.TableOfContents, Organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.TableOfContents, Organization));
             // license agreement
             XmlNode node;
             // try to get the key
@@ -757,6 +763,7 @@ namespace SIL.PublishingSolution
             }
             Param.UpdateMetadataValue(Param.CopyrightPage, dlg.CopyrightPage.ToString());
             Param.UpdateMetadataValue(Param.CopyrightPageFilename, dlg.CopyrightPagePath);
+            Param.UpdateMetadataValue(Param.TableOfContents, dlg.TableOfContents.ToString());
 
             // Processing Options tab
             if (string.IsNullOrEmpty(dlg.InputType) || dlg.InputType == "Dictionary")

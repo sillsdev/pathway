@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="12">
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="13">
   <settings>
     <property name="InputPath" value="%(AppData)s/SIL/Pathway" />
     <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Scripture" />
@@ -424,6 +424,9 @@
     </meta>
     <meta name="Copyright Page Filename" outputTypes="all">
       <defaultValue></defaultValue>
+    </meta>
+    <meta name="Table of Contents" outputTypes="all">
+      <defaultValue>false</defaultValue>
     </meta>
   </Metadata>
 </stylePick>

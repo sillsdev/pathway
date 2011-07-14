@@ -77,6 +77,7 @@ namespace SIL.PublishingSolution
                     //{
                     //    appSettingsPath = GetDirectoryPath("appProjSettingsPath", appPath);
                     //}
+                    bool copiedMetadataBlock = false;
 
                     if(projSettingsVerNum == "0")
                     {
@@ -85,7 +86,13 @@ namespace SIL.PublishingSolution
                     if (int.Parse(projSettingsVerNum) < 10)
                     {
                         Version10(GetDirectoryPath(settingsPath, appPath), installerPath, projSchemaVersion);
+                        copiedMetadataBlock = true;
                         // XML was updated - reload the values
+                        Param.LoadSettings();
+                    }
+                    if (int.Parse(projSettingsVerNum) < 13 && !copiedMetadataBlock)
+                    {
+                        Version13(GetDirectoryPath(settingsPath, appPath), projSchemaVersion);
                         Param.LoadSettings();
                     }
                     //Version2(GetDirectoryPath(settingsPath, appPath), appSettingsPath, projSchemaVersion);
@@ -226,6 +233,39 @@ namespace SIL.PublishingSolution
                 {
                     XmlNode newMetaNode = destDoc.ImportNode(metadataNode, true);
                     root.AppendChild(newMetaNode);
+                    
+                }
+            }
+            destDoc.Save(destSettingsFile);
+        }
+
+        /// <summary>
+        /// Update to change made in version 13 of the XML. Here there is only one change - adding a TOC element.
+        /// </summary>
+        /// <param name="destSettingsFile"></param>
+        /// <param name="projSchemaVersion"></param>
+        private void Version13(string destSettingsFile, string projSchemaVersion)
+        {
+            // load the destination settings file (the one in ProgramData) that is missing the <meta> block for the TOC);
+            if (!File.Exists(destSettingsFile)) { return; }
+            var destDoc = new XmlDocument { XmlResolver = null };
+            destDoc.Load(destSettingsFile);
+            XmlElement root = destDoc.DocumentElement;
+            if (root != null)
+            {
+                root.SetAttribute("version", projSchemaVersion);
+                // Metadata block
+                const string sPath = "//stylePick/Metadata";
+                XmlNode metadataNode = root.SelectSingleNode(sPath);
+                if (metadataNode != null)
+                {
+                    XmlElement newMetaNode = destDoc.CreateElement("meta");
+                    newMetaNode.SetAttribute("name", "Table of Contents");
+                    newMetaNode.SetAttribute("outputTypes", "all");
+                    XmlElement defaultValueNode = destDoc.CreateElement("defaultValue");
+                    defaultValueNode.InnerText = "false";
+                    metadataNode.AppendChild(newMetaNode);
+                    newMetaNode.AppendChild(defaultValueNode);
                 }
             }
             destDoc.Save(destSettingsFile);

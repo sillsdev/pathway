@@ -1291,36 +1291,12 @@ namespace SIL.PublishingSolution
                             case "maximagewidth":
                                 cTool.TxtMaxImageWidth.Text = attribValue;
                                 break;
-                            //**EDB MOVE THIS**
-                            //case "coverimage":
-                            //    if (File.Exists(attribValue))
-                            //    {
-                            //        try
-                            //        {
-                            //            cTool.CoverImage.Image = Image.FromFile(attribValue);
-                            //        }
-                            //        catch (Exception)
-                            //        {
-                            //            // problem loading the file - put up the initial image
-                            //            cTool.CoverImage.Image = cTool.CoverImage.InitialImage;
-                            //        }
-                            //    }
-                            //    else
-                            //    {
-                            //        // no file specified - assume the default
-                            //        cTool.CoverImage.Image = cTool.CoverImage.InitialImage;
-                            //    }                        
-                            //    break;
                             case "basefontsize":
                                 cTool.TxtBaseFontSize.Text = attribValue;
                                 break;
                             case "defaultlineheight":
                                 cTool.TxtDefaultLineHeight.Text = attribValue;
                                 break;
-                            //**EDB MOVE THIS**
-                            //case "addcolophonpage":
-                            //    cTool.ChkColophon.Checked = (attribValue == "Yes") ? true : false;
-                            //    break;
                             case "defaultalignment":
                                 cTool.DdlDefaultAlignment.SelectedItem = attribValue;
                                 break;
@@ -1336,34 +1312,6 @@ namespace SIL.PublishingSolution
                             case "nonsilfont":
                                 cTool.DdlNonSILFont.SelectedItem = attribValue;
                                 break;
-                            //**EDB MOVE THIS**
-                            //case "information":
-                            //    cTool.TxtDescription.Text = attribValue;
-                            //    break;
-                            //case "publisher":
-                            //    cTool.TxtPublisher.Text = attribValue;
-                            //    break;
-                            //case "source":
-                            //    cTool.TxtSource.Text = attribValue;
-                            //    break;
-                            //case "format":
-                            //    cTool.TxtFormat.Text = attribValue;
-                            //    break;
-                            //case "relation":
-                            //    cTool.TxtRelation.Text = attribValue;
-                            //    break;
-                            //case "coverage":
-                            //    cTool.TxtCoverage.Text = attribValue;
-                            //    break;
-                            //case "title":
-                            //    cTool.TxtBookTitle.Text = attribValue;
-                            //    break;
-                            //case "creator":
-                            //    cTool.TxtCreator.Text = attribValue;
-                            //    break;
-                            //case "rights":
-                            //    cTool.TxtRights.Text = attribValue;
-                            //    break;
                             default:
                                 break;
                         }

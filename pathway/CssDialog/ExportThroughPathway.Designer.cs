@@ -53,6 +53,7 @@
             this.lblBookTitle = new System.Windows.Forms.Label();
             this.txtPublisher = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.chkTOC = new System.Windows.Forms.CheckBox();
             this.lnkChooseCopyright = new System.Windows.Forms.LinkLabel();
             this.ddlCopyrightStatement = new System.Windows.Forms.ComboBox();
             this.rdoCustomCopyright = new System.Windows.Forms.RadioButton();
@@ -100,7 +101,7 @@
             // lnkIP
             // 
             this.lnkIP.AutoSize = true;
-            this.lnkIP.Location = new System.Drawing.Point(116, 387);
+            this.lnkIP.Location = new System.Drawing.Point(115, 400);
             this.lnkIP.Name = "lnkIP";
             this.lnkIP.Size = new System.Drawing.Size(121, 13);
             this.lnkIP.TabIndex = 8;
@@ -111,7 +112,7 @@
             // chkIP
             // 
             this.chkIP.CheckAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.chkIP.Location = new System.Drawing.Point(100, 354);
+            this.chkIP.Location = new System.Drawing.Point(99, 367);
             this.chkIP.Name = "chkIP";
             this.chkIP.Size = new System.Drawing.Size(286, 30);
             this.chkIP.TabIndex = 7;
@@ -162,7 +163,7 @@
             // 
             // btnHelp
             // 
-            this.btnHelp.Location = new System.Drawing.Point(311, 415);
+            this.btnHelp.Location = new System.Drawing.Point(310, 428);
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(75, 23);
             this.btnHelp.TabIndex = 11;
@@ -173,7 +174,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(230, 415);
+            this.btnCancel.Location = new System.Drawing.Point(229, 428);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 10;
@@ -183,7 +184,7 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(149, 415);
+            this.btnOK.Location = new System.Drawing.Point(148, 428);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 9;
@@ -199,7 +200,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 97);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(373, 244);
+            this.tabControl1.Size = new System.Drawing.Size(373, 264);
             this.tabControl1.TabIndex = 6;
             // 
             // tabPage1
@@ -219,7 +220,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(365, 218);
+            this.tabPage1.Size = new System.Drawing.Size(365, 238);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Publication Info";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -325,6 +326,7 @@
             // tabPage2
             // 
             this.tabPage2.AutoScroll = true;
+            this.tabPage2.Controls.Add(this.chkTOC);
             this.tabPage2.Controls.Add(this.lnkChooseCopyright);
             this.tabPage2.Controls.Add(this.ddlCopyrightStatement);
             this.tabPage2.Controls.Add(this.rdoCustomCopyright);
@@ -341,10 +343,21 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(365, 218);
+            this.tabPage2.Size = new System.Drawing.Size(365, 238);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Front Matter";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // chkTOC
+            // 
+            this.chkTOC.AutoSize = true;
+            this.chkTOC.Location = new System.Drawing.Point(10, 210);
+            this.chkTOC.Name = "chkTOC";
+            this.chkTOC.Size = new System.Drawing.Size(110, 17);
+            this.chkTOC.TabIndex = 66;
+            this.chkTOC.Text = "Table of Contents";
+            this.chkTOC.UseVisualStyleBackColor = true;
+            this.chkTOC.Visible = false;
             // 
             // lnkChooseCopyright
             // 
@@ -497,7 +510,7 @@
             this.tabPage3.Controls.Add(this.label8);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(365, 218);
+            this.tabPage3.Size = new System.Drawing.Size(365, 238);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Processing Options";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -614,7 +627,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(398, 450);
+            this.ClientSize = new System.Drawing.Size(398, 463);
             this.Controls.Add(this.BtnBrwsLayout);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnMoreLessOptions);
@@ -698,5 +711,6 @@
         private System.Windows.Forms.RadioButton rdoStandardCopyright;
         private System.Windows.Forms.LinkLabel lnkChooseCopyright;
         private System.Windows.Forms.GroupBox grpInclude;
+        private System.Windows.Forms.CheckBox chkTOC;
     }
 }
