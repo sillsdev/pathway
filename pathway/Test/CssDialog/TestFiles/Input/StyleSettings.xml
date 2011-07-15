@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="12">
+    xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="13">
     <settings>
         <property name="InputPath" value="%(AppData)s/SIL/Pathway"/>
         <property name="OutputPath" value="%(AppData)s/SIL/Pathway"/>
@@ -20,7 +20,7 @@
         <property name="SelectedIcon" value="Graphic/arrow.png"/>
         <property name="MissingIcon" value="Graphic/missing.png"/>
         <property name="Help" value="PsDoc.chm"/>
-        <property name="PrintVia" value="LibreOffice"/>
+        <property name="PrintVia" value="OpenOffice/LibreOffice"/>
         <property name="ConfigureDictionary" value="True"/>
         <property name="ReversalIndexes" value="True"/>
         <property name="GrammerSketch" value="False"/>
@@ -28,7 +28,7 @@
         <property name="ExtraProcessing" value="True"/>
     </settings>
     <defaultSettings>
-        <property name="PrintVia" value="LibreOffice"/>
+        <property name="PrintVia" value="OpenOffice/LibreOffice"/>
         <property name="ConfigureDictionary" value="True"/>
         <property name="ReversalIndexes" value="True"/>
         <property name="GrammerSketch" value="False"/>
@@ -153,6 +153,9 @@
         </meta>
         <meta name="Copyright Page Filename" outputTypes="all">
             <defaultValue></defaultValue>
+        </meta>
+        <meta name="Table of Contents" outputTypes="all">
+            <defaultValue>false</defaultValue>
         </meta>
     </Metadata>
 </stylePick>
