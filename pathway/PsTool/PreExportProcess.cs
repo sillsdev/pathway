@@ -58,6 +58,7 @@ namespace SIL.Tool
         public const string CoverPageFilename = "File0Cvr.xhtml";
         public const string TitlePageFilename = "File1Ttl.xhtml";
         public const string CopyrightPageFilename = "File2Cpy.xhtml";
+        public const string TableOfContentsFilename = "File3TOC.xhtml";
 
         public PreExportProcess()
         {
@@ -103,7 +104,8 @@ namespace SIL.Tool
                 // add the front matter pages to the temp folder as needed
                 if (Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("true") ||
                     Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true") ||
-                    Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("true"))
+                    Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("true") ||
+                    Param.GetMetadataValue(Param.TableOfContents).ToLower().Equals("true"))
                 {
                     // at least one front matter item selected
                     var sbPreamble = new StringBuilder();
@@ -175,6 +177,26 @@ namespace SIL.Tool
                             // write to a separate file
                             var outFilename = Path.Combine(outputFolder, CopyrightPageFilename);
                             CopyCopyrightPage(outputFolder); // copyright page is a full xhtml file -- this method copies it over
+                            files.Add(outFilename);
+                        }
+                    }
+                    if (Param.GetMetadataValue(Param.TableOfContents).ToLower().Equals("true"))
+                    {
+                        // title page
+                        if (mergeFiles)
+                        {
+                            sb.Append(TableOfContents());
+                        }
+                        else
+                        {
+                            // write to a separate file
+                            var outFilename = Path.Combine(outputFolder, TableOfContentsFilename);
+                            var outFile = new StreamWriter(outFilename);
+                            outFile.Write(sbPreamble.ToString());
+                            outFile.Write(TableOfContents());
+                            outFile.WriteLine("</body></html>");
+                            outFile.Flush();
+                            outFile.Close();
                             files.Add(outFilename);
                         }
                     }
@@ -479,6 +501,83 @@ namespace SIL.Tool
                 sb.Append("; and, © named rights holders for materials used by permission as specified in the resource file description.</p>  ");
 
             }
+            return sb.ToString();
+        }
+
+        private string TableOfContents ()
+        {
+            // sanity checks
+            if (Param.GetMetadataValue(Param.TableOfContents).ToLower().Equals("false")) { return string.Empty; }
+            if (!File.Exists(_xhtmlFileNameWithPath)) return string.Empty; // can't obtain list of books / letters
+            // load the xhtml file we're working with
+            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            XmlReader xmlReader = XmlReader.Create(_xhtmlFileNameWithPath, xmlReaderSettings);
+            xmlDocument.Load(xmlReader);
+            xmlReader.Close();
+            var sb = new StringBuilder();
+            sb.AppendLine("<!-- Contents page -->");
+            sb.AppendLine("<div id='TOCPage' class='Contents'><h1>Contents</h1>");
+            // collect book names
+            sb.AppendLine("<ul>");
+            XmlNodeList bookIDs, bookNames;
+            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+            {
+                // for dictionaries, the letter is used both for the ID and name
+                bookIDs = xmlDocument.SelectNodes("//xhtml:div[@class='letter']", namespaceManager);
+                bookNames = bookIDs;
+            }
+            else
+            {
+                // for scripture, scrBookCode contains the preferred ID while the Title_Main contains the preferred / localized name
+                // 1. Book ID: start out with the book code (e.g., 2CH for 2 Chronicles)
+                bookIDs = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookCode']", namespaceManager);
+                if (bookIDs == null || bookIDs.Count == 0)
+                {
+                    // no book code - try scrBookName
+                    bookIDs = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
+                }
+                if (bookIDs == null || bookIDs.Count == 0)
+                {
+                    // no scrBookName - try Title_Main
+                    bookIDs = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']/span", namespaceManager);
+                }
+                // 2. Book Name: start out with Title_Main
+                bookNames = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']/span", namespaceManager);
+                if (bookNames == null || bookNames.Count == 0)
+                {
+                    // nothing there - check on the scrBookName span
+                    bookNames = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
+                }
+                if (bookNames == null || bookNames.Count == 0)
+                {
+                    // nothing there - check on the scrBookCode span
+                    bookNames = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookCode']", namespaceManager);
+                }
+            }
+            if (bookIDs != null && bookIDs.Count > 0)
+            {
+                int index = 0;
+                foreach (XmlNode bookId in bookIDs)
+                {
+                    // each entry should look something like this:
+                    //    <li><a href="#idMRK">Das Evangelium nach Markus</a></li>
+                    sb.Append("<li><a href='#id");
+                    // remove whitespace
+                    sb.Append(new Regex(@"\s*").Replace(bookId.InnerText, string.Empty));
+                    sb.Append("'>");
+                    sb.Append(bookNames[index].InnerText);
+                    sb.AppendLine("</a></li>");
+                    index++;
+                }
+            }
+
+            // close out
+            sb.AppendLine("</ul>");
+            sb.AppendLine("</div>");
+
             return sb.ToString();
         }
 

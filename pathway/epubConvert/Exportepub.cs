@@ -1332,7 +1332,6 @@ namespace SIL.PublishingSolution
         /// <returns></returns>
         private string GetBookID (string xhtmlFileName)
         {
-            xhtmlFileName.GetHashCode();
             XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
