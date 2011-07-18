@@ -225,13 +225,18 @@ namespace SIL.PublishingSolution
                 {
                     Common.SetDefaultCSS(file, defaultCSS);
                 }
-                if (projInfo.FileToProduce.ToLower() != "one")
+
+                if ((_inputType.ToLower().Equals("dictionary") && projInfo.IsLexiconSectionExist)  ||
+                    (_inputType.ToLower().Equals("scripture")))
                 {
-                    splitFiles.AddRange(SplitFile(preProcessor.ProcessedXhtml, projInfo));
-                }
-                else
-                {
-                    splitFiles.Add(preProcessor.ProcessedXhtml);
+                    if (projInfo.FileToProduce.ToLower() != "one")
+                    {
+                        splitFiles.AddRange(SplitFile(preProcessor.ProcessedXhtml, projInfo));
+                    }
+                    else
+                    {
+                        splitFiles.Add(preProcessor.ProcessedXhtml);
+                    }
                 }
 
                 // If we are working with a dictionary and have a reversal index, process it now)
@@ -253,7 +258,7 @@ namespace SIL.PublishingSolution
                 // add the total file count (so far) to the progress bar, so it's a little more accurate
                 inProcess.AddToMaximum(splitFiles.Count);
 
-                if (_inputType.Equals("dictionary"))
+                if (_inputType.ToLower().Equals("dictionary"))
                 {
                     ContentCssToXhtml(niceNameCSS, splitFiles);
                 }
