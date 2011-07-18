@@ -506,6 +506,31 @@ namespace SIL.Tool
             }
             return value;
         }
+
+        /// <summary>
+        /// To replace the symbol to text
+        /// </summary>
+        /// <param name="value">input symbol</param>
+        /// <returns>Replaced text</returns>
+        public static string ReplaceSymbolToXelatexText(string value)
+        {
+            //Task TD-2666 (Unicode value is 2260 = ?)
+
+            if (value.IndexOf("2260") >= 0)
+            {
+                value = value.Replace("2260", "$\\neq$");
+            }
+            if (value.IndexOf("†") >= 0)
+            {
+                value = value.Replace("†", "$\\dagger$");
+            }
+            if (value.IndexOf("‡") >= 0)
+            {
+                value = value.Replace("‡", "$\\ddagger$");
+            }
+            return value;
+        }
+
         #endregion
 
         #region RightRemove(string fullString, string splitString)
@@ -916,10 +941,10 @@ namespace SIL.Tool
                                 }
                                 count++;
                             }
-                            if (_outputType == OutputType.XETEX)
+                            if (_outputType == OutputType.XELATEX)
                             {
                                 result += unicode;
-                                result = "\\char \"" + result;
+                                //result = "\\char \"" + result;
 
                             }
                             else

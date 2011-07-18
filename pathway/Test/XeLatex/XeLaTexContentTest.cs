@@ -654,6 +654,27 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void VerticalAlignTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "VerticalAlign";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void UnicodeSymbolTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "UnicodeSymbol";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+
         #endregion
 
 

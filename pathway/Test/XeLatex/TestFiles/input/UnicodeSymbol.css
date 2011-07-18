@@ -1,0 +1,4 @@
+.relation-antonym::before
+{
+	content: "\2260 "; /*not equal to*/
+}

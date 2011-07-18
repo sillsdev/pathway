@@ -1,0 +1,84 @@
+
+.letHead {
+    column-count: 1;
+    clear: both;
+}
+
+.letData {
+    column-count: 2;
+    column-gap: 1em;
+    column-fill: auto;
+    text-align: left;
+}
+.entry {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: 12pt;	/* inherited */
+    color: rgb(0,0,0);	/* inherited */
+    background-color: rgb(255,255,255);	/* inherited */
+    text-indent: -36pt;
+    margin-left: 36pt;
+    padding-left: 9pt;
+    padding-bottom: 2pt;
+    padding-top: 1pt;
+    clear: both;
+}
+.xhomographnumber {
+    font-weight: bold;
+    font-size: 55%;
+    vertical-align: sub;
+}
+.sense {
+    font-weight: normal;
+}
+.xsensenumber {
+    font-weight: bold;
+	vertical-align: super;
+}
+.xlanguagetag {
+    font-size: 8pt;
+    color: rgb(47,96,255);
+}
+.xitem {
+    /* placeholder for adding list separators */
+}
+.xitem[lang='tpi'] {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: 12pt;	/* cascaded environment */
+    color: rgb(0,0,0);	/* cascaded environment */
+    background-color: rgb(255,255,255);	/* cascaded environment */
+}
+.xitem[lang='bzh-fonipa'] {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: 12pt;	/* cascaded environment */
+    color: rgb(0,0,0);	/* cascaded environment */
+    background-color: rgb(255,255,255);	/* cascaded environment */
+}
+
+.headword {
+    /* lang = 'bzh' */
+    /* explicit FieldWorks style = 'Dictionary-Headword' */
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: 12pt;	/* cascaded environment */
+    font-weight: bold;
+    color: rgb(0,0,0);	/* cascaded environment */
+    background-color: rgb(255,255,255);	/* cascaded environment */
+}
+.headword:after { content: "  " }
+.headword>.xitem + .xitem:before { content: " " }
+
+.examples:after { content: " " }
+.examples>.xitem + .xitem:before { content: "  " }
+.example {
+    /* lang = 'bzh' */
+    /* explicit FieldWorks style = 'Dictionary-Vernacular' */
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: 12pt;	/* cascaded environment */
+    font-style: italic;
+    color: rgb(0,0,0);	/* cascaded environment */
+    background-color: rgb(255,255,255);	/* cascaded environment */
+}
+.example:after { content: " " }
+.example>.xitem + .xitem:before { content: " " }
+
+.slots:before { content: ": " }
+.slots>.xitem + .xitem:before { content: ", " }

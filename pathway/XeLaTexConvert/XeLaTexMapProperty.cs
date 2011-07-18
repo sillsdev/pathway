@@ -127,9 +127,9 @@ namespace SIL.PublishingSolution
                     //case "text-transform":
                     //    TextTransform(property.Value);
                     //    break;
-                    //case "vertical-align":
-                    //    VerticalAlign(property.Value);
-                    //    break;
+                    case "vertical-align":
+                        VerticalAlign(property.Value);
+                        break;
                     case "line-height":
                         LineHeight(property.Value);
                         break;
@@ -417,41 +417,15 @@ namespace SIL.PublishingSolution
                 return;
             }
 
-            switch (propertyValue.ToLower())
+            if (propertyValue.ToLower() == "super")
             {
-                case "baseline":
-                    _IDProperty["Position"] = "Normal";
-                    break;
-                case "super":
-                    _IDProperty["Position"] = "Superscript";
-                    break;
-                case "sub":
-                    _IDProperty["Position"] = "Subscript";
-                    break;
-                case "text-top":
-                case "top":
-                    _IDProperty["BaselineShift"] = "50%";
-                    break;
-                case "middle":
-                    _IDProperty["BaselineShift"] = "0%";
-                    break;
-                case "text-bottom":
-                case "bottom":
-                    _IDProperty["BaselineShift"] = "-50%";
-                    break;
-                default:
-                    if (propertyValue.IndexOf("%") == (propertyValue.Length - 1))
-                    {
-                        _IDProperty["BaselineShift"] = propertyValue;
-                    }
-                    else
-                    {
-                        string pointValue = Common.UnitConverter(propertyValue);
-                        if (pointValue.Length > 0)
-                            _IDProperty["BaselineShift"] = Common.UnitConverter(propertyValue);
-                    }
-                    break;
+                propertyValue = "^";
             }
+            else if (propertyValue.ToLower() == "sub")
+            {
+                propertyValue = "_";
+            }
+            _inlineStyle.Add(propertyValue);
 
         }
         public void TextTransform(string propertyValue)

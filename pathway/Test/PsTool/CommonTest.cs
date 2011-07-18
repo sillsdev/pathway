@@ -525,6 +525,22 @@ namespace Test.PsTool
         ///A test for ConvertUnicodeToString
         ///</summary>
         [Test]
+        public void ConvertUnicodeToStringTest7()
+        {
+            string parameter = "\"\\2666h";// Double quote is wrong
+            string expected = "";
+            string actual = Common.ConvertUnicodeToString(parameter);
+            Assert.AreEqual(expected, actual);
+
+            parameter = "''\\2666'";// Single quote is wrong
+            actual = Common.ConvertUnicodeToString(parameter);
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        ///A test for ConvertUnicodeToString
+        ///</summary>
+        [Test]
         public void ConvertUnicodeToStringTestNullEmpty()
         {
             string parameter = "";// Double quote is wrong

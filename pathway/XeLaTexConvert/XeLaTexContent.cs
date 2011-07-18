@@ -538,7 +538,7 @@ namespace SIL.PublishingSolution
                     content = _chapterNo;
                     _isDropCap = false;
                 }
-                
+                content = Common.ReplaceSymbolToXelatexText(content);
                 _xetexFile.Write(content);
                 _xetexFile.Write("}");
                 //if(_tagType == "div")
