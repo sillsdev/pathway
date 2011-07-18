@@ -582,8 +582,14 @@ namespace SIL.PublishingSolution
                 }
             }
             // close out the StringBuilders
-            sbBetweenXItem.AppendLine("</xsl:choose></xsl:if>");
-            sbBetweenSense.AppendLine("</xsl:choose></xsl:if>");
+            if (sbBetweenXItem.Length > 0)
+            {
+                sbBetweenXItem.AppendLine("</xsl:choose></xsl:if><!-- between xitems -->");
+            }
+            if (sbBetweenSense.Length > 0)
+            {
+                sbBetweenSense.AppendLine("</xsl:choose></xsl:if><!-- between senses -->");
+            }
             // append the two "between" cases to the after case
             sbAfter.AppendLine(sbBetweenSense.ToString());
             sbAfter.AppendLine(sbBetweenXItem.ToString());
