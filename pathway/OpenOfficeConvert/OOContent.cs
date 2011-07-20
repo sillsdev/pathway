@@ -2186,11 +2186,17 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("text:name", "Drawing");
             _writer.WriteEndElement();
             _writer.WriteEndElement();
-            _writer.WriteStartElement("text:p");
-            _writer.WriteAttributeString("text:style-name", "P4");
-            _writer.WriteEndElement();
 
-            //if (_fileType == "odm" && _odtFiles != null)  // ODM - ODT files
+
+            //TD-2567 - We avoid below coding for ODM
+            if (_projInfo.FileSequence == null)
+            {
+                _writer.WriteStartElement("text:p");
+                _writer.WriteAttributeString("text:style-name", "P4");
+                _writer.WriteEndElement();
+            }
+
+        //if (_fileType == "odm" && _odtFiles != null)  // ODM - ODT files
             //{
             //    int MainPosition = 0;
             //    if (_odtFiles.Contains("Main"))
