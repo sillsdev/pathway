@@ -116,7 +116,7 @@ namespace SIL.PublishingSolution
             Cursor.Current = myCursor;
             const int ExitOk = 0;
             string result = Common.PathCombine(processFolder, Sanitize(collectionName) + ".jar");
-            if (SubProcess.ExitCode != ExitOk)
+            if (SubProcess.ExitCode != ExitOk || SubProcess.LastError.Length > 0)
             {
                 string msg = string.Format("The conversion has exited with an error. Do you want to display additional details on the error?");
                 DialogResult dialogResult = MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2);

@@ -168,6 +168,7 @@
 	<xsl:template match="xhtml:div[@class='scrIntroSection']"/>
 	<xsl:template match="xhtml:div[@class='Parallel_Passage_Reference']"/>
 	<xsl:template match="xhtml:div[@class='pictureCenter']"/>
+	<xsl:template match="xhtml:div[@class='pictureColumn']"/>
 	<xsl:template match="xhtml:div[@class='pictureCaption']/xhtml:span"/>
 	<xsl:template match="xhtml:img"/>
 	<!-- 30Apr2010 - skip span for Section_Head and Section_Head_Major ... -->

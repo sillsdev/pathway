@@ -28,6 +28,7 @@ namespace SIL.Tool
     {
         public static int ExitCode;
         public static string RedirectOutput;
+        public static string LastError;
 
         #region RunProcess
         /// <summary>
@@ -64,7 +65,8 @@ namespace SIL.Tool
             if (!string.IsNullOrEmpty(RedirectOutput))
             {
                 string result = p1.StandardOutput.ReadToEnd();
-                result += p1.StandardError.ReadToEnd();
+                LastError = p1.StandardError.ReadToEnd();
+                result += LastError;
                 StreamWriter streamWriter = new StreamWriter(RedirectOutput);
                 streamWriter.Write(result);
                 streamWriter.Close();
