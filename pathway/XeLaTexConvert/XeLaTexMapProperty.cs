@@ -19,12 +19,13 @@ namespace SIL.PublishingSolution
         private List<string> _fontStyle = new List<string>();
         private string _fontSize;
         private List<string> _inlineStyle;
+        private List<string> _includePackageList;
 
 
         //TextInfo _titleCase = CultureInfo.CurrentCulture.TextInfo;
-        public string XeLaTexProperty(Dictionary<string, string> cssProperty,string className, List<string> inlineStyle)
+        public string XeLaTexProperty(Dictionary<string, string> cssProperty, string className, List<string> inlineStyle, List<string> includePackageList)
         {
-            Initialize(className, cssProperty, inlineStyle);
+            Initialize(className, cssProperty, inlineStyle, includePackageList);
             foreach (KeyValuePair<string, string> property in cssProperty)
             {
                 switch (property.Key.ToLower())
@@ -124,9 +125,9 @@ namespace SIL.PublishingSolution
                     //case "page-break-before":
                     //    PageBreakBefore(property.Value);
                     //    break;
-                    //case "text-transform":
-                    //    TextTransform(property.Value);
-                    //    break;
+                    case "text-transform":
+                        TextTransform(property.Value);
+                        break;
                     case "vertical-align":
                         VerticalAlign(property.Value);
                         break;
@@ -163,6 +164,9 @@ namespace SIL.PublishingSolution
                     //case "-ps-vertical-justification":
                     //    VerticalJustification(property.Value);
                     //    break;
+                    case "marks":
+                        Marks(property.Value);
+                        break;
                     //default:
                     //    SimpleProperty(property);
                     //    break;
@@ -172,12 +176,32 @@ namespace SIL.PublishingSolution
             return style;
         }
 
-        private void Initialize(string className, Dictionary<string, string> cssProperty, List<string> inlineStyle)
+        public string XeLaTexPageProperty(Dictionary<string, string> cssProperty, string className, List<string> inlineStyle, List<string> includePackageList)
+        {
+            Initialize(className, cssProperty, inlineStyle, includePackageList);
+            foreach (KeyValuePair<string, string> property in cssProperty)
+            {
+                switch (property.Key.ToLower())
+                {
+                    case "marks":
+                        Marks(property.Value);
+                        break;
+                    //default:
+                    //    SimpleProperty(property);
+                    //    break;
+                }
+            }
+            string style = ComposeStyle();
+            return style;
+        }
+
+        private void Initialize(string className, Dictionary<string, string> cssProperty, List<string> inlineStyle, List<string> includePackageList)
         {
             _className = className;
             _property = string.Empty;
             _cssProperty = cssProperty;
             _inlineStyle = inlineStyle;
+            _includePackageList = includePackageList;
             
             if (className.IndexOf("scrBookName") == -1)
                 _fontName = "Times New Roman";
@@ -391,6 +415,20 @@ namespace SIL.PublishingSolution
             }
         }
 
+        public void Marks(string propertyValue)
+        {
+            if (propertyValue == string.Empty)
+            {
+                return;
+            }
+
+            if (propertyValue == "crop")
+            {
+                if (!_includePackageList.Contains("\\usepackage[croplength=10mm,cropgap=3mm, cropmarks]{zwpagelayout}"))
+                    _includePackageList.Add("\\usepackage[croplength=10mm,cropgap=3mm, cropmarks]{zwpagelayout}");
+            }
+        }
+
         public void LineHeight(string propertyValue)
         {
             if (propertyValue == string.Empty)
@@ -425,6 +463,10 @@ namespace SIL.PublishingSolution
             {
                 propertyValue = "_";
             }
+            else if (propertyValue.ToLower() == "baseline")
+            {
+                propertyValue = "";
+            }
             _inlineStyle.Add(propertyValue);
 
         }
@@ -434,7 +476,19 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            _IDProperty["TextTransform"] = propertyValue;
+            if (propertyValue.ToLower() == "uppercase")
+            {
+                propertyValue = "\\uppercase";
+            }
+            else if (propertyValue.ToLower() == "lowercase")
+            {
+                propertyValue = "\\lowercase";
+            }
+            else if (propertyValue.ToLower() == "capitalize")
+            {
+                propertyValue = "\\textsc";
+            }
+            _inlineStyle.Add(propertyValue);
         }
         public void PageBreakBefore(string propertyValue)
         {

@@ -47,6 +47,7 @@ namespace SIL.PublishingSolution
         private void MapProperty()
         {
             string xeLaTexProperty = "";
+            List<string> _includePackageList = new List<string>();
             foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _cssClass)
             {
                 if (cssClass.Key.IndexOf("h1") >= 0 ||
@@ -56,7 +57,7 @@ namespace SIL.PublishingSolution
                 List<string> _inlineStyle = new List<string>();
                 string className = RemoveBody(cssClass.Key);
                 if (className.Length == 0 ) continue; 
-                xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, className, _inlineStyle);
+                xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, className, _inlineStyle, _includePackageList);
                 if (xeLaTexProperty.Trim().Length > 0)
                 {
                     Common.FileInsertText(_xetexFullFile, xeLaTexProperty);
@@ -65,9 +66,13 @@ namespace SIL.PublishingSolution
             }
 
             Common.FileInsertText(_xetexFullFile, @"\begin{document} ");
-            
+            //setmainfont{Arial} //Default Font 
             //Common.FileInsertText(_xetexFullFile, @"\usepackage{fancyhdr}");
             //Common.FileInsertText(_xetexFullFile, @"\usepackage{multicol}");
+            foreach (var package in _includePackageList)
+            {
+                Common.FileInsertText(_xetexFullFile, package);
+            }
             Common.FileInsertText(_xetexFullFile, @"\documentclass{article} ");
             //Common.FileInsertText(_xetexFullFile, @"\documentclass[10pt,psfig,letterpaper,twocolumn]{article} ");
             

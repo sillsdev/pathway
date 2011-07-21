@@ -36,6 +36,7 @@ namespace Test.XeLatex
         private Dictionary<string, List<string>> _classInlineStyle;
 
         #endregion
+
         #region Setup
         [TestFixtureSetUp]
         protected void SetUpAll()

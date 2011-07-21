@@ -752,7 +752,10 @@ namespace SIL.PublishingSolution
                 {
                     footnoteFormat.Append(Common.ReplaceSymbolToText(content));
                 }
-
+                else if (outputType == Common.OutputType.XELATEX.ToString())
+                {
+                    footnoteFormat.Append(Common.ReplaceSymbolToText(content));
+                }
                 else
                 {
                     footnoteFormat.Append("<CharacterStyleRange AppliedCharacterStyle=\"" + "CharacterStyle/" + _characterName + "\"><Content>" + Common.ReplaceSymbolToText(content) + "</Content></CharacterStyleRange>");
@@ -849,7 +852,17 @@ namespace SIL.PublishingSolution
                     {
                         footnoteContent.Append(footnoteText);
                     }
-                    //else if (outputType == Common.OutputType.XETEX.ToString())
+                    
+                    //if (outputType == Common.OutputType.XETEX.ToString())
+                    //{
+                    //    footnoteContent.Append(footnoteText);
+                    //}
+                    //else
+                    //{
+                    //    footnoteContent.Append("<CharacterStyleRange AppliedCharacterStyle=\"" + "CharacterStyle/" + footerMarkerClassName + "\"><Content>" + footnoteText + "</Content></CharacterStyleRange>");
+                    //}
+                    
+                    //if (outputType == Common.OutputType.XELATEX.ToString())
                     //{
                     //    footnoteContent.Append(footnoteText);
                     //}

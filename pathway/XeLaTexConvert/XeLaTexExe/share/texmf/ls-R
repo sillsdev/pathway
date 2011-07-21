@@ -11204,6 +11204,9 @@ caption3.sty
 ./tex/latex/colortbl:
 colortbl.sty
 
+./tex/latex/zwpagelayout:
+zwpagelayout.sty
+
 ./tex/latex/config:
 color.cfg
 elatex.ini

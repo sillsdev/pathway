@@ -36,6 +36,7 @@ namespace SIL.PublishingSolution
         XeLaTexMapProperty mapProperty = new XeLaTexMapProperty();
         private StreamWriter _xetexFile;
         private List<string> _inlineStyle;
+        private List<string> _includePackageList;
         Dictionary<string, List<string>> _classInlineStyle = new Dictionary<string, List<string>>();
         //public InDesignStyles InDesignStyles;
         //public ArrayList _FootNote;
@@ -60,6 +61,17 @@ namespace SIL.PublishingSolution
 
         private void CreateStyle()
         {
+            //foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _cssProperty)
+            //{
+            //    if (cssClass.Key.IndexOf("@page") >= 0 && (cssClass.Key.IndexOf("@page-") == -1 && cssClass.Key.IndexOf("@page:") == -1))
+            //    {
+            //        _inlineStyle = new List<string>();
+            //        _includePackageList = new List<string>();
+            //        string xeLaTexProperty = mapProperty.XeLaTexPageProperty(cssClass.Value, cssClass.Key, _inlineStyle, _includePackageList);
+            //        _classInlineStyle[cssClass.Key] = _includePackageList;
+            //    }
+
+            //}
             //\font\hoefler="Hoefler Text/B:Letter Case=Small Caps" at 12pt
             foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _cssProperty)
             {
@@ -69,7 +81,7 @@ namespace SIL.PublishingSolution
                     cssClass.Key.IndexOf("h6") >= 0) continue;
 
                 _inlineStyle = new List<string>();
-                string xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, cssClass.Key, _inlineStyle);
+                string xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, cssClass.Key, _inlineStyle, _includePackageList);
 
                 //if (_inlineStyle.Count > 0)
                 {

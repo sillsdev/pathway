@@ -430,7 +430,7 @@ namespace SIL.PublishingSolution
             string content = _reader.Value;
             content = ReplaceString(content);
 
-            if (CollectFootNoteChapterVerse(content, Common.OutputType.XETEX.ToString())) return;
+            if (CollectFootNoteChapterVerse(content, Common.OutputType.XELATEX.ToString())) return;
 
             if (columnCount != string.Empty) 
             {
@@ -998,7 +998,7 @@ namespace SIL.PublishingSolution
             Psuedo();
             DropCaps();
             SetHomographNumber(true);
-            FooterSetup(Common.OutputType.XETEX.ToString());
+            FooterSetup(Common.OutputType.XELATEX.ToString());
 
             if (IdAllClass.ContainsKey(_classNameWithLang))
             {
@@ -1056,7 +1056,7 @@ namespace SIL.PublishingSolution
                 _isDropCap = true;
                 string lines = "2";
                 _allStyle.Pop();
-                CollectFootNoteChapterVerse(_chapterNo, Common.OutputType.XETEX.ToString());
+                CollectFootNoteChapterVerse(_chapterNo, Common.OutputType.XELATEX.ToString());
                 
                 try
                 {
