@@ -2189,7 +2189,7 @@ namespace SIL.PublishingSolution
 
 
             //TD-2567 - We avoid below coding for ODM
-            if (_projInfo.FileSequence == null)
+            if (_projInfo.FileSequence == null || _projInfo.FileSequence.Count == 1)
             {
                 _writer.WriteStartElement("text:p");
                 _writer.WriteAttributeString("text:style-name", "P4");
