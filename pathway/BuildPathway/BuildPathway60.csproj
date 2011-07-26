@@ -399,7 +399,7 @@
     <CallTarget Targets="BeforeBuild"/>
     <RemoveDir Directories="Wix"/>
     <Message Text="BUILD_NUMBER: $(BUILD_NUMBER)" Importance="high"/>
-    <UpdateVersion Product="Pathway $(Edition) " Version="0.7.6" FieldworksVersion="$(FwVer)"
+    <UpdateVersion Product="Pathway $(Edition) " Version="0.7.7" FieldworksVersion="$(FwVer)"
       HelpFile="Pathway_Configuration_Tool_$(Edition).chm"
       Template="$(ProjectDir)Install$(ConfTag)$(Edition)-tpl.wxs"/>
     <UpdateReadme Readme="$(ProjectDir)ReadMePw.rtf" License="$(ProjectDir)License.rtf"

@@ -13,6 +13,8 @@
             <fileset>
                 <include name="*/bin/**" />
                 <include name="*/obj/**" />
+				<include name="BuildPathway/Files/**" />
+				<include name="BuildPathway/Wix/**" />
                 <include name="Build/*/bin/**" />
                 <include name="Build/*/obj/**" />
                 <include name="WordPressConvert/build/**" />
