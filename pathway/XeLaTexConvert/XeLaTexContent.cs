@@ -432,7 +432,7 @@ namespace SIL.PublishingSolution
 
             if (CollectFootNoteChapterVerse(content, Common.OutputType.XELATEX.ToString())) return;
 
-            if (columnCount != string.Empty) 
+            if (columnCount == "2") 
             {
                 string columnProperty = "\\begin{multicols}{" + columnCount + "}";
                 _xetexFile.Write(columnProperty);
@@ -521,7 +521,7 @@ namespace SIL.PublishingSolution
             //_imageInserted = InsertImage();
             SetHomographNumber(false);
 
-            string footerClassName = WritePara(characterStyle);
+            string footerClassName = WritePara(characterStyle, content);
 
             AnchorBookMark();
 
@@ -539,11 +539,11 @@ namespace SIL.PublishingSolution
                     _isDropCap = false;
                 }
                 //content = Common.ReplaceSymbolToXelatexText(content);
-                if (_classNameWithLang.IndexOf("headword_") == 0 && content.Trim().Length > 0)
-                {
-                    string headerFormat = "\\markright{" + content + "} \\markboth{" + content + "}";
-                    _xetexFile.Write(headerFormat);
-                }
+                //if (_classNameWithLang.IndexOf("headword_") == 0 && content.Trim().Length > 0)
+                //{
+                //    string headerFormat = "\\markright{" + content + "} \\markboth{" + content + "}";
+                //    _xetexFile.Write(headerFormat);
+                //}
                 _xetexFile.Write(content);
                 _xetexFile.Write("}");
                 //if(_tagType == "div")
@@ -553,7 +553,7 @@ namespace SIL.PublishingSolution
             AnchorBookMark();
         }
 
-        private string WritePara(string characterStyle)
+        private string WritePara(string characterStyle, string content)
         {
             string footerClassName = string.Empty;
             if (isFootnote)
@@ -604,6 +604,12 @@ namespace SIL.PublishingSolution
                     }
 
                     mergedParaStyle = Common.ReplaceSeperators(mergedParaStyle);
+
+                    if(mergedParaStyle.IndexOf("headword") == 0 && content.Trim().Length > 0)
+                    {
+                        string headerFormat = "\\markright{" + content + "} \\markboth{" + content + "}";
+                        _xetexFile.Write(headerFormat);
+                    }
 
                     _xetexFile.Write("\\" + mergedParaStyle + "{");
                     //_braceClass.Push(getStyleName);
@@ -1015,11 +1021,14 @@ namespace SIL.PublishingSolution
                 if (IdAllClass[_classNameWithLang].ContainsKey("column-count"))
                 {
                     columnCount = IdAllClass[_classNameWithLang]["column-count"];
+                    if (!_columnClass.Contains(_childName))
+                        _columnClass.Add(_childName);
                 }
                 if (isPageBreak || columnCount != string.Empty)
                 {
                     _textFrameClass.Add(_childName);
-                    _columnClass.Add(_childName);
+                    //if (!_columnClass.Contains(_childName))
+                    //    _columnClass.Add(_childName);
                 }
             }
         }
@@ -1032,8 +1041,6 @@ namespace SIL.PublishingSolution
                 _headwordStyles = true;
             }
         }
-
-
 
         private void SetHomographNumber(bool defValue)
         {
@@ -1105,12 +1112,12 @@ namespace SIL.PublishingSolution
             }
 
             EndElementBase(false);
-            if (_columnClass.Count > 0 && _closeChildName == _columnClass[_columnClass.Count - 1].ToString())
+            //if (_columnClass.Count > 0 && _closeChildName == _columnClass[_columnClass.Count - 1].ToString())
+            if (_columnClass.Count == 2 && _closeChildName == _columnClass[_columnClass.Count - 1].ToString())
             {
                 _columnClass.RemoveAt(_columnClass.Count - 1);
                 string columnProperty = "\\end{multicols}";
-                if (_columnClass.Count != 0)
-                    _xetexFile.Write(columnProperty);
+                _xetexFile.Write(columnProperty);
             }
             _classNameWithLang = StackPeek(_allStyle);
             _classNameWithLang = Common.LeftString(_classNameWithLang, "_");

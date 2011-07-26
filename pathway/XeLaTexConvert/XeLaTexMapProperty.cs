@@ -457,11 +457,11 @@ namespace SIL.PublishingSolution
 
             if (propertyValue.ToLower() == "super")
             {
-                propertyValue = "^";
+                propertyValue = "$^$";
             }
             else if (propertyValue.ToLower() == "sub")
             {
-                propertyValue = "_";
+                propertyValue = "$_$";
             }
             else if (propertyValue.ToLower() == "baseline")
             {

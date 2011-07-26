@@ -1291,7 +1291,7 @@ namespace SIL.Tool
         {
             if (!File.Exists(filePath)) return;
             bool foundString = false;
-            var reader = new FileStream(filePath,FileMode.Open);
+            var reader = new FileStream(filePath,FileMode.Open,FileAccess.Read,FileShare.Read,4080,false);
             var writer = new FileStream(filePath + ".tmp", FileMode.Create);
             int next;
             while ((next = reader.ReadByte()) != -1)
@@ -1331,7 +1331,9 @@ namespace SIL.Tool
                 }
             }
             reader.Close();
+            reader.Dispose();
             writer.Close();
+            writer.Dispose();
             // replace the original file with the new one
             if (foundString)
             {

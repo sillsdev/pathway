@@ -67,8 +67,9 @@ namespace SIL.PublishingSolution
                 }
             }
 
-            Common.FileInsertText(_xetexFullFile, _pageStyleFormat);
+            Common.FileInsertText(_xetexFullFile, @"\thispagestyle{empty} ");
             Common.FileInsertText(_xetexFullFile, @"\begin{document} ");
+            Common.FileInsertText(_xetexFullFile, _pageStyleFormat);
             //setmainfont{Arial} //Default Font 
             //Common.FileInsertText(_xetexFullFile, @"\usepackage{fancyhdr}");
             Common.FileInsertText(_xetexFullFile, @"\usepackage{multicol}");
