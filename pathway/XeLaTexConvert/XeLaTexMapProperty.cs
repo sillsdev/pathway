@@ -467,7 +467,9 @@ namespace SIL.PublishingSolution
             {
                 propertyValue = "";
             }
-            _inlineStyle.Add(propertyValue);
+
+            if (propertyValue.Trim().Length > 0)
+                _inlineStyle.Add(propertyValue);
 
         }
         public void TextTransform(string propertyValue)
@@ -721,7 +723,9 @@ namespace SIL.PublishingSolution
                 propertyValue = ":+c2sc,+smcp";
             }
             _IDProperty["Capitalization"] = propertyValue;
-            _fontOption.Add(propertyValue);
+
+            if (propertyValue.Trim().Length > 0)
+                _fontOption.Add(propertyValue);
         }
         public void TextDecoration(string propertyValue)
         {
@@ -729,11 +733,18 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-
+            if (propertyValue == "underline")
+            {
+                propertyValue = "\\underbar";
+            }
+            else if (propertyValue == "none")
+            {
+                propertyValue = "";
+            }
             //propertyValue = "$\\underline{" + propertyValue + "}$";
-            propertyValue = "\\underbar";
-            _IDProperty["Underline"] = propertyValue;
-            _inlineStyle.Add(propertyValue);
+            //_IDProperty["Underline"] = propertyValue;
+            if (propertyValue.Trim().Length > 0)
+                _inlineStyle.Add(propertyValue);
         }
 
         public void FontWeight(Dictionary<string, string> cssProperty)
@@ -777,7 +788,8 @@ namespace SIL.PublishingSolution
                 return;
             }
             _IDProperty["FontStyleBold"] = propertyValue;
-            _fontOption.Add(propertyValue);
+            if (propertyValue.Trim().Length > 0)
+                _fontOption.Add(propertyValue);
         }
         public void TextAlign(string propertyValue)
         {

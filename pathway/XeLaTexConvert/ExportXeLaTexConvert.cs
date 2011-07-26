@@ -88,8 +88,9 @@ namespace SIL.PublishingSolution
 
             CloseDocument(xeLatexFile);
 
+            string include = xeLaTexStyles.PageStyle.ToString();
             ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
-            modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexFullFile);
+            modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexFullFile, include);
 
             //CallXeTex(Path.GetFileName(xeLatexFullFile));
             Dictionary<string, string> imgPath = new Dictionary<string, string>();

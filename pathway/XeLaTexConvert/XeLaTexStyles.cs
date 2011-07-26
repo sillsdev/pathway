@@ -18,6 +18,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -40,6 +41,13 @@ namespace SIL.PublishingSolution
         Dictionary<string, List<string>> _classInlineStyle = new Dictionary<string, List<string>>();
         //public InDesignStyles InDesignStyles;
         //public ArrayList _FootNote;
+        protected bool IsMirrored = false;
+        public StringBuilder PageStyle = new StringBuilder();
+        readonly Dictionary<string, string> _pageStyleFormat = new Dictionary<string, string>();
+
+
+
+
         #endregion
 
 
@@ -47,8 +55,11 @@ namespace SIL.PublishingSolution
         {
             try
             {
+                _includePackageList = new List<string>();
                 _xetexFile = xetexFile;
                 _cssProperty = cssProperty;
+                LoadPageStyleFormat();
+                CreatePageStyle();
                 CreateStyle();  // CODE HERE
             }
             catch (Exception ex)
@@ -57,6 +68,180 @@ namespace SIL.PublishingSolution
             }
             //return _IDAllClass;
             return _classInlineStyle;
+        }
+
+        private void LoadPageStyleFormat()
+        {
+            _pageStyleFormat.Add("@page-top-left","\\lhead");
+            _pageStyleFormat.Add("@page-top-center", "\\chead");
+            _pageStyleFormat.Add("@page-top-right", "\\rhead");
+            _pageStyleFormat.Add("@page-bottom-left", "\\lfoot");
+            _pageStyleFormat.Add("@page-bottom-center", "\\cfoot");
+            _pageStyleFormat.Add("@page-bottom-right", "\\rfoot");
+        }
+
+        private void CreatePageStyle()   // PageHeaderFooter() in odt conversion 
+        {
+            CreateHeaderFooter();
+            CreatePageFirstPage();
+        }
+
+        private void CreateHeaderFooter()
+        {
+            PageStyle.Append("\\pagestyle{plain}");
+            PageStyle.AppendLine("\\pagestyle{fancy}");
+            if (_cssProperty.ContainsKey("@page:left") || _cssProperty.ContainsKey("@page:right"))
+            {
+                IsMirrored = true;
+            }
+
+            string pageName = "@page";
+            SetPageHeaderFooter(pageName);
+
+            pageName = "@page:first";
+            SetPageHeaderFooter(pageName);
+
+            if (IsMirrored)
+            {
+                pageName = "@page:left";
+                SetPageHeaderFooter(pageName);
+
+                pageName = "@page:right";
+                SetPageHeaderFooter(pageName);
+            }
+
+        }
+
+        private void SetPageHeaderFooter(string pageName)
+        {
+            string[] searchKey = { "top-left", "top-center", "top-right", "bottom-left", "bottom-center", "bottom-right" };
+            for (int i = 0; i < 6; i++)
+            {
+                string currentPagePosition = pageName + "-" + searchKey[i];   // Ex: page:first-topleft
+                if (_cssProperty.ContainsKey(currentPagePosition))
+                {
+                    Dictionary<string, string> cssProp = _cssProperty[currentPagePosition];
+                    
+
+                    //_LOProperty = mapProperty.IDProperty(cssProp););
+                    foreach (KeyValuePair<string, string> para in cssProp)
+                    {
+                        if (para.Key == "content")
+                        {
+                            string writingString = para.Value.Replace("\"", "").Replace("'", "");
+                            if (writingString.IndexOf("guidewordfirst") >= 0)
+                            {
+                                PageStyle.AppendLine(_pageStyleFormat[currentPagePosition] + "{\\rightmark}");
+                            }
+                            else if (writingString.IndexOf("guidewordlast") >= 0)
+                            {
+                                PageStyle.AppendLine(_pageStyleFormat[currentPagePosition] + "{\\leftmark}");
+                            }
+                            else if (writingString.IndexOf("counter(page)") >= 0)
+                            {
+                                PageStyle.AppendLine(_pageStyleFormat[currentPagePosition] + "{\\thepage}");
+                            }
+
+                            if (!_includePackageList.Contains("fancyhdr"))
+                                _includePackageList.Add("fancyhdr");
+                        }
+                    }
+
+
+                }
+            }
+            PageStyle.AppendLine("\\renewcommand{\\headrulewidth}{0.4pt} \\renewcommand{\\footrulewidth}{0.4pt}");
+        }
+
+        private void CreatePageFirstPage()
+        {
+            string pageName = "@page";
+            _pageLayoutProperty = ProcessPageProperty(pageName);
+
+            pageName = "@page:first";
+            _firstPageLayoutProperty = ProcessPageProperty(pageName);
+
+            pageName = "@page:left";
+            _leftPageLayoutProperty = ProcessPageProperty(pageName);
+
+            pageName = "@page:right";
+            _rightPageLayoutProperty = ProcessPageProperty(pageName);
+
+            pageName = "@page-footnotes";
+            Dictionary<string, string> FootNoteSeperator = ProcessPageProperty(pageName);
+
+            if (_leftPageLayoutProperty.Count > 0 || _rightPageLayoutProperty.Count > 0)
+            {
+                isMirrored = true;
+            }
+        }
+
+        private Dictionary<string, string> ProcessPageProperty(string pageName)
+        {
+            Dictionary<string, string> pageLayoutProperty = new Dictionary<string, string>();
+            if (_cssProperty.ContainsKey(pageName))
+            {
+                Dictionary<string, string> cssClass1 = _cssProperty[pageName];
+                //_LOProperty = mapProperty.IDProperty(cssClass1);
+                //foreach (KeyValuePair<string, string> para in _LOProperty)
+                //    if (para.Key.ToLower() == "-ps-referenceformat-string")
+                //    {
+                //        _styleName.ReferenceFormat = para.Value.Replace("\"", "");
+                //    }
+                //    else if (para.Key == "border-top"
+                //             || para.Key == "border-top-style"
+                //             || para.Key == "border-top-width"
+                //             || para.Key == "border-top-color"
+                //             || para.Key == "border-bottom"
+                //             || para.Key == "border-left"
+                //             || para.Key == "border-right"
+                //             || para.Key == "margin-top"
+                //             || para.Key == "margin-bottom"
+                //             || para.Key == "margin-left"
+                //             || para.Key == "margin-right"
+                //             || para.Key == "padding-top"
+                //             || para.Key == "padding-bottom"
+                //             || para.Key == "padding-left"
+                //             || para.Key == "padding-right"
+                //             || para.Key == "visibility")
+                //    {
+                //        pageLayoutProperty[_allPageLayoutProperty[para.Key].ToString() + para.Key] =
+
+                //            para.Value;
+                //    }
+                //    else if (para.Key == "size" || para.Key == "page-width" || para.Key == "page-height")
+                //    {
+                //        if (para.Value.ToLower() == "landscape" || para.Value.ToLower() == "portrait" ||
+                //            para.Value.ToLower() == "auto")
+                //        {
+                //            pageLayoutProperty["style:print-orientation"] = para.Value.ToLower();
+                //        }
+                //        else
+                //        {
+                //            pageLayoutProperty[_allPageLayoutProperty[para.Key].ToString() + para.Key] = para.Value;
+                //        }
+                //    }
+                //    else if (para.Key == "color" || para.Key == "background-color")
+                //    {
+                //        pageLayoutProperty[_allPageLayoutProperty[para.Key].ToString() + para.Key] = para.Value;
+                //    }
+                //    else if (para.Key == "marks" && para.Value == "crop")
+                //    {
+                //        //StylesXML.IsCropMarkChecked = true;
+                //    }
+                //    else if (para.Key.ToLower() == "dictionary")
+                //    {
+                //        if (para.Value == "true")
+                //        {
+                //            //_isDictionary = true;
+                //        }
+                //    }
+                //    else
+                //    {
+                //        //styleAttributeInfo = _mapProperty.MapSingleValue(styleAttributeInfo);
+                //    }
+            }
+            return pageLayoutProperty;
         }
 
         private void CreateStyle()

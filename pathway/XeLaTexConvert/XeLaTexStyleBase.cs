@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using SIL.Tool;
@@ -12,6 +13,11 @@ namespace SIL.PublishingSolution
 
         ArrayList _allParagraphProperty;
         ArrayList _allCharacterProperty;
+        protected Dictionary<string, string> _pageLayoutProperty;
+        protected Dictionary<string, string> _firstPageLayoutProperty;
+        protected Dictionary<string, string> _leftPageLayoutProperty;
+        protected Dictionary<string, string> _rightPageLayoutProperty;
+        protected bool isMirrored = false;
 
         /// -------------------------------------------------------------------------------------------
         /// <summary>
@@ -27,6 +33,8 @@ namespace SIL.PublishingSolution
             // Inialize style properties
             _allParagraphProperty = new ArrayList();
             _allCharacterProperty = new ArrayList();
+            _pageLayoutProperty = new Dictionary<string, string>();
+            _firstPageLayoutProperty = new Dictionary<string, string>();
             try
             {
                 _allParagraphProperty.Add("Imported");

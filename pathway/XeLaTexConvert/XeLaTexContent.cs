@@ -538,7 +538,12 @@ namespace SIL.PublishingSolution
                     content = _chapterNo;
                     _isDropCap = false;
                 }
-                content = Common.ReplaceSymbolToXelatexText(content);
+                //content = Common.ReplaceSymbolToXelatexText(content);
+                if (_classNameWithLang.IndexOf("headword_") == 0 && content.Trim().Length > 0)
+                {
+                    string headerFormat = "\\markright{" + content + "} \\markboth{" + content + "}";
+                    _xetexFile.Write(headerFormat);
+                }
                 _xetexFile.Write(content);
                 _xetexFile.Write("}");
                 //if(_tagType == "div")
@@ -1104,7 +1109,8 @@ namespace SIL.PublishingSolution
             {
                 _columnClass.RemoveAt(_columnClass.Count - 1);
                 string columnProperty = "\\end{multicols}";
-                _xetexFile.Write(columnProperty);
+                if (_columnClass.Count != 0)
+                    _xetexFile.Write(columnProperty);
             }
             _classNameWithLang = StackPeek(_allStyle);
             _classNameWithLang = Common.LeftString(_classNameWithLang, "_");

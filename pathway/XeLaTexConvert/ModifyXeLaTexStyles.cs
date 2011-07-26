@@ -20,6 +20,7 @@ namespace SIL.PublishingSolution
         private string _xPath;
         private XmlElement _nameElement;
         private string _tagName;
+        private string _pageStyleFormat;
         private string _xetexFullFile;
         private bool _isHeadword;
         private ArrayList _textVariables = new ArrayList();
@@ -32,11 +33,12 @@ namespace SIL.PublishingSolution
         XeLaTexMapProperty mapProperty = new XeLaTexMapProperty();
 
         public void ModifyStylesXML(string projectPath, StreamWriter xetexFile, Dictionary<string, Dictionary<string, string>> newProperty, 
-            Dictionary<string, Dictionary<string, string>> cssClass, string xetexFullFile)
+            Dictionary<string, Dictionary<string, string>> cssClass, string xetexFullFile, string pageStyleFormat)
         {
             _projectPath = projectPath;
             _cssClass = cssClass;
             _xetexFullFile = xetexFullFile;
+            _pageStyleFormat = pageStyleFormat;
             //foreach (KeyValuePair<string, Dictionary<string, string>> cssStyle in newProperty)
             //{
             //    MergeCssStyle(cssStyle.Key);
@@ -65,10 +67,13 @@ namespace SIL.PublishingSolution
                 }
             }
 
+            Common.FileInsertText(_xetexFullFile, _pageStyleFormat);
             Common.FileInsertText(_xetexFullFile, @"\begin{document} ");
             //setmainfont{Arial} //Default Font 
             //Common.FileInsertText(_xetexFullFile, @"\usepackage{fancyhdr}");
-            //Common.FileInsertText(_xetexFullFile, @"\usepackage{multicol}");
+            Common.FileInsertText(_xetexFullFile, @"\usepackage{multicol}");
+            Common.FileInsertText(_xetexFullFile, @"\usepackage{fancyhdr}");
+            Common.FileInsertText(_xetexFullFile, @"\usepackage{fontspec}");
             foreach (var package in _includePackageList)
             {
                 Common.FileInsertText(_xetexFullFile, package);
