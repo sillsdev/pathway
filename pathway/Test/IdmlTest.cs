@@ -33,7 +33,8 @@ namespace Test
                 var outFl = new ZipFile(outputFullName);                
                 foreach (ZipEntry zipEntry in expFl)
                 {
-                    if (!CheckFile(zipEntry.Name,"designmap.xml,Stories,Spreads,Resources,MasterSpreads"))
+                    //TODO: designmap.xml should be tested but \\MetadataPacketPreference should be ignored as it contains the creation date.
+                    if (!CheckFile(zipEntry.Name,"Stories,Spreads,Resources,MasterSpreads"))
                         continue;
                     if (Path.GetExtension(zipEntry.Name) != ".xml")
                         continue;

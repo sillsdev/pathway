@@ -17,6 +17,10 @@ IfEqual,OutputPath,,SetEnv,OutputPath,C:\\svn\\XhtmlData
 ifExist,%FW_HOME%\\FieldWorks.exe, Goto, GotHome
 RegRead,FW_HOME,REG_SZ,HKEY_LOCAL_MACHINE,Software\\SIL\\Fieldworks\\7.0,RootCodeDir
 ifExist,%FW_HOME%\\FieldWorks.exe, Goto, GotHome
+RegRead,FW_HOME,REG_SZ,HKEY_LOCAL_MACHINE,Software\\Wow6432Node\\SIL\\Fieldworks\\7.0,RootCodeDir
+ifExist,%FW_HOME%\\FieldWorks.exe, Goto, GotHome
+SetEnv,FW_HOME,%FW_HOME%\\..\\Output\\Debug
+ifExist,%FW_HOME%\\FieldWorks.exe, Goto, GotHome
 MsgBox, 48, Missing FieldWorks 7, Unable to find location of FieldWorks 7
 Goto, denied
 
