@@ -657,7 +657,18 @@ namespace SIL.PublishingSolution
                 {
                     foreach (string sty in _classInlineStyle[parentClass])
                     {
-                        if (!_mergedInlineStyle.Contains(sty))
+                        string parentProp = Common.LeftString(sty, " ");
+                        bool IsContains = false;
+                        foreach (string styl in _mergedInlineStyle)
+                        {
+                            string ChildProp = Common.LeftString(styl, " ");
+                            if (parentProp == ChildProp)
+                            {
+                                IsContains = true;
+                                break;
+                            }
+                        }
+                        if (!IsContains)
                             _mergedInlineStyle.Add(sty);
                     }
                 }

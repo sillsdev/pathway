@@ -143,7 +143,17 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void WordSpace()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "WordSpace";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontSizeCmToPointTest()

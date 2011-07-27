@@ -149,9 +149,9 @@ namespace SIL.PublishingSolution
                     case "letter-spacing":
                         LetterSpacing(property.Value);
                         break;
-                    //case "word-spacing":
-                    //    WordSpacing(property.Value);
-                    //    break;
+                    case "word-spacing":
+                        WordSpacing(property.Value);
+                        break;
                     //case "orphans":
                     //    Orphans(property.Value);
                     //    break;
@@ -336,9 +336,10 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            _IDProperty["MinimumWordSpacing"] = "0";
-            _IDProperty["DesiredWordSpacing"] = propertyValue;
-            _IDProperty["MaximumWordSpacing"] = propertyValue;
+
+            propertyValue = "\\spaceskip " + propertyValue + "pt";
+            _inlineStyle.Add(propertyValue);
+            _IDProperty["WordSpacing"] = propertyValue;
         }
         public void LetterSpacing(string propertyValue)
         {
