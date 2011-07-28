@@ -146,12 +146,12 @@ namespace SIL.PublishingSolution
         private bool _isEmptyTitleExist;
         private int _titleCounter=1;
         private int _pageWidth;
-
         #endregion
 
         #region Public Variable
         public bool _multiLanguageHeader = false;
         public string RefFormat = "Genesis 1";
+        public bool IsMirrorPage;
         public LOContent()
         {
             _outputType = Common.OutputType.ODT;
@@ -2234,14 +2234,20 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("office:value-type", "string");
             _writer.WriteAttributeString("text:name", "Left_Guideword_L");
             _writer.WriteEndElement();
-            _writer.WriteStartElement("text:variable-decl");
-            _writer.WriteAttributeString("office:value-type", "string");
-            _writer.WriteAttributeString("text:name", "Right_Guideword_L");
-            _writer.WriteEndElement();
-            _writer.WriteStartElement("text:variable-decl");
-            _writer.WriteAttributeString("office:value-type", "string");
-            _writer.WriteAttributeString("text:name", "Left_Guideword_R");
-            _writer.WriteEndElement();
+
+            //TD-2575 to avoid Mirror page Variables for Normal Page
+            if (IsMirrorPage)
+            {
+                _writer.WriteStartElement("text:variable-decl");
+                _writer.WriteAttributeString("office:value-type", "string");
+                _writer.WriteAttributeString("text:name", "Right_Guideword_L");
+                _writer.WriteEndElement();
+                _writer.WriteStartElement("text:variable-decl");
+                _writer.WriteAttributeString("office:value-type", "string");
+                _writer.WriteAttributeString("text:name", "Left_Guideword_R");
+                _writer.WriteEndElement();
+            }
+
             _writer.WriteStartElement("text:variable-decl");
             _writer.WriteAttributeString("office:value-type", "string");
             _writer.WriteAttributeString("text:name", "Right_Guideword_R");

@@ -738,6 +738,7 @@ namespace SIL.PublishingSolution
             projInfo.TempOutputFolder += Path.DirectorySeparatorChar;
             cXML._multiLanguageHeader = isMultiLanguageHeader;
             cXML.RefFormat = this.RefFormat;
+            cXML.IsMirrorPage = inStyles.isMirrored;
             cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, pageWidth);
             InsertChapterNumber(projInfo.TempOutputFolder);
 

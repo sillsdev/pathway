@@ -54,9 +54,6 @@ namespace SIL.PublishingSolution
         protected string _styleFilePath;
         string _attribClassName = string.Empty;
         protected ArrayList _firstPageContentNone = new ArrayList();
-        protected bool isMirrored = false; //TD-410
-
-
         #endregion
 
         #region public Variable
@@ -64,6 +61,7 @@ namespace SIL.PublishingSolution
         //public static StreamWriter ErrorFile = null;
         //public static bool ErrorWritten = false;
         //private static string fileName;
+        public bool isMirrored = false; //TD-410
         public bool IsPosition = false;
         public static bool IsCropMarkChecked; // TD-190(marks:crop)
         public static bool IsMarginChanged; // TD-190(marks:crop)
