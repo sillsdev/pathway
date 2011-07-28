@@ -109,7 +109,7 @@ namespace SIL.PublishingSolution
                 pageName = "@page:right";
                 SetPageHeaderFooter(pageName);
             }
-
+            PageStyle.AppendLine("\\renewcommand{\\headrulewidth}{0.4pt} \\renewcommand{\\footrulewidth}{0.4pt}");
         }
 
         private void SetPageHeaderFooter(string pageName)
@@ -126,7 +126,7 @@ namespace SIL.PublishingSolution
                     //_LOProperty = mapProperty.IDProperty(cssProp););
                     foreach (KeyValuePair<string, string> para in cssProp)
                     {
-                        if (para.Key == "content")
+                        if (para.Key == "content" && _pageStyleFormat.ContainsKey(currentPagePosition))
                         {
                             string writingString = para.Value.Replace("\"", "").Replace("'", "");
                             if (writingString.IndexOf("guidewordfirst") >= 0)
@@ -150,7 +150,7 @@ namespace SIL.PublishingSolution
 
                 }
             }
-            PageStyle.AppendLine("\\renewcommand{\\headrulewidth}{0.4pt} \\renewcommand{\\footrulewidth}{0.4pt}");
+           // PageStyle.AppendLine("\\renewcommand{\\headrulewidth}{0.4pt} \\renewcommand{\\footrulewidth}{0.4pt}");
         }
 
         private void CreatePageFirstPage()
@@ -266,11 +266,12 @@ namespace SIL.PublishingSolution
                     cssClass.Key.IndexOf("h6") >= 0) continue;
 
                 _inlineStyle = new List<string>();
-                string xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, cssClass.Key, _inlineStyle, _includePackageList);
+                string replaceNumberInStyle = Common.ReplaceCSSClassName(cssClass.Key);
+                string xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, replaceNumberInStyle, _inlineStyle, _includePackageList);
 
                 //if (_inlineStyle.Count > 0)
                 {
-                    _classInlineStyle[cssClass.Key] = _inlineStyle;
+                    _classInlineStyle[replaceNumberInStyle] = _inlineStyle;
                 }
                 if (xeLaTexProperty.Trim().Length > 0 && Common.Testing)
                 {

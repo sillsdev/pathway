@@ -190,6 +190,10 @@ namespace SIL.PublishingSolution
 
             ClassInfo classInfo = new ClassInfo();
             _classNameWithLang = GetTagInfo();
+            if (_outputType == Common.OutputType.XELATEX)
+            {
+                _classNameWithLang = Common.ReplaceCSSClassName(_classNameWithLang);
+            }
             _xhtmlClassAttrib.SetClassAttrib(_className, _xhtmlAttribute);
             classInfo.CoreClass = _xhtmlClassAttrib;
             classInfo.Precede = _precedeClassAttrib;
@@ -390,6 +394,7 @@ namespace SIL.PublishingSolution
                         _className = _className.Replace("_", "");
                         _className = _className.Replace("-", "");
                         _className = Common.SortMutiClass(_className);
+                        _className = Common.ReplaceCSSClassName(_className);
                     }
                     else if (_reader.Name == "lang")
                     {

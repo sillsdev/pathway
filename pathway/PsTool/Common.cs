@@ -41,7 +41,7 @@ namespace SIL.Tool
         #region Public variable
         public enum Action { New, Delete, Edit, Copy };
         public enum ProjType { Dictionary, Scripture };
-        public enum OutputType { ODT, ODM, IDML , PDF , MOBILE, EPUB, XETEX, XELATEX};
+        public enum OutputType { ODT, ODM, IDML, PDF, MOBILE, EPUB, XETEX, XELATEX };
         public static string SamplePath = string.Empty;
         #endregion
 
@@ -399,7 +399,7 @@ namespace SIL.Tool
                         if (node != null)
                         {
                             // found it! Set the return value
-                            _languageName = node.Value; 
+                            _languageName = node.Value;
                         }
                     }
                     else
@@ -439,6 +439,34 @@ namespace SIL.Tool
         }
         #endregion
 
+        #region ReplaceCSSClassName(string cssClassName)
+        /// <summary>
+        /// Example: ReplaceCSSClassName("Entry_string1") returns "Entry_stringb"
+        /// </summary>
+        /// <param name="cssClassName">CSS Class Name</param>
+        /// <returns>Replace CSS Class Name</returns>
+        public static string ReplaceCSSClassName(string cssClassName)
+        {
+            string result = string.Empty;
+            foreach (char changeToChar in cssClassName)
+            {
+                char c = ' ';
+                if (char.IsNumber(changeToChar))
+                {
+                    int charValue = Convert.ToInt32(changeToChar) + 49;
+                    c = (char)charValue;
+                }
+                else
+                {
+                    c = changeToChar;
+                }
+                result = result + c.ToString();
+            }
+            return result;
+        }
+
+        #endregion
+        
         #region PublishingSolutionsEnvironmentReset()
         /// <summary>
         /// Remove all files saved in All Users\AppData, 
@@ -951,7 +979,7 @@ namespace SIL.Tool
                             {
                                 // unicode convertion
                                 int decimalvalue = Convert.ToInt32(unicode, 16);
-                                var c = (char) decimalvalue;
+                                var c = (char)decimalvalue;
                                 result += c.ToString();
                             }
                         }
@@ -1291,7 +1319,7 @@ namespace SIL.Tool
         {
             if (!File.Exists(filePath)) return;
             bool foundString = false;
-            var reader = new FileStream(filePath,FileMode.Open,FileAccess.Read,FileShare.Read,4080,false);
+            var reader = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, 4080, false);
             var writer = new FileStream(filePath + ".tmp", FileMode.Create);
             int next;
             while ((next = reader.ReadByte()) != -1)
@@ -1715,12 +1743,12 @@ namespace SIL.Tool
                 ProgBase = PathwayPath.GetPathwayDir();
                 if (string.IsNullOrEmpty(ProgBase))
                 {
-                    if(!Testing)
+                    if (!Testing)
                     {
-                    Debug.Fail(@"Pathway directory is not specified in the registry (HKEY_LOCAL_MACHINE/SOFTWARE/SIL/PATHWAY/PathwayDir)");
-return FromProg(file);
+                        Debug.Fail(@"Pathway directory is not specified in the registry (HKEY_LOCAL_MACHINE/SOFTWARE/SIL/PATHWAY/PathwayDir)");
+                        return FromProg(file);
                     }
-                    
+
                 }
             }
             return Path.Combine(ProgBase, file);
@@ -1759,10 +1787,10 @@ return FromProg(file);
         /// <returns>Field Works Path</returns>
         public static string GetFiledWorksPathVersion()
         {
-        string executablePath = Path.GetDirectoryName(Application.ExecutablePath);
-        if (executablePath.Contains("FieldWorks 7"))
-            return Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"/SIL/FieldWorks 7/";
-        
+            string executablePath = Path.GetDirectoryName(Application.ExecutablePath);
+            if (executablePath.Contains("FieldWorks 7"))
+                return Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"/SIL/FieldWorks 7/";
+
             return GetFiledWorksPath();
         }
         #endregion
@@ -2004,7 +2032,7 @@ return FromProg(file);
                     Directory.Delete(directoryPath, true);
                     deleted = true;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.Write(ex.Message);
                 }
@@ -2484,12 +2512,12 @@ return FromProg(file);
             return styleName;
         }
 
-	public static string GetOsName()
-{
-OperatingSystem osInfo = Environment.OSVersion;
-return osInfo.Platform.ToString();
+        public static string GetOsName()
+        {
+            OperatingSystem osInfo = Environment.OSVersion;
+            return osInfo.Platform.ToString();
 
-}
+        }
         ///// <summary>
         ///// If the user selected page style is "Every Page", this method will remove the "@Page:left" and 
         ///// "@page:right" tag from the  CSS file.
