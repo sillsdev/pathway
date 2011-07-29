@@ -28,6 +28,8 @@ namespace SIL.PublishingSolution
             Initialize(className, cssProperty, inlineStyle, includePackageList);
             foreach (KeyValuePair<string, string> property in cssProperty)
             {
+                string propertyValue = PercentageToEM(property.Value);
+
                 switch (property.Key.ToLower())
                 {
                     case "font-weight":
@@ -35,74 +37,74 @@ namespace SIL.PublishingSolution
                         FontWeight(cssProperty);
                         break;
                     case "text-align":
-                        TextAlign(property.Value);
+                        TextAlign(propertyValue);
                         break;
                     case "font-size":
-                        FontSize(property.Value);
+                        FontSize(propertyValue);
                         break;
                     case "text-decoration":
                     case "class-text-decoration":
-                        TextDecoration(property.Value);
+                        TextDecoration(propertyValue);
                         break;
                     case "font-variant":
-                        FontVariant(property.Value);
+                        FontVariant(propertyValue);
                         break;
                     case "text-indent":
-                        TextIndent(property.Value);
+                        TextIndent(propertyValue);
                         break;
                     case "margin-left":
                     case "class-margin-left":
-                        MarginLeft(property.Value);
+                        MarginLeft(propertyValue);
                         break;
                     case "margin-right":
                     case "class-margin-right":
-                        MarginRight(property.Value);
+                        MarginRight(propertyValue);
                         break;
                     case "margin-top":
                     case "class-margin-top":
-                        MarginTop(property.Value);
+                        MarginTop(propertyValue);
                         break;
                     //case "margin-bottom":
-                    //    MarginBottom(property.Value);
+                    //    MarginBottom(propertyValue);
                     //    break;
                     case "font-family":
-                        FontFamily(property.Value);
+                        FontFamily(propertyValue);
                         break;
                         //\special{papersize=5in,8in}
                     case "page-width":
-                        PageWidth(property.Value);
+                        PageWidth(propertyValue);
                         break;
                     case "page-height":
-                        PageHeight(property.Value);
+                        PageHeight(propertyValue);
                         break;
                     //case "mirror":
-                    //    Mirror(property.Value);
+                    //    Mirror(propertyValue);
                     //    break;
                     //case "padding-left":
                     //case "class-margin-left":
-                    //    PaddingLeft(property.Value);
+                    //    PaddingLeft(propertyValue);
                     //    break;
                     //case "padding-right":
                     //case "class-margin-right":
-                    //    PaddingRight(property.Value);
+                    //    PaddingRight(propertyValue);
                     //    break;
                     //case "padding-top":
                     //case "class-margin-top":
-                    //    PaddingTop(property.Value);
+                    //    PaddingTop(propertyValue);
                     //    break;
                     //case "padding-bottom":
                     //case "class-margin-bottom":
-                    //    PaddingBottom(property.Value);
+                    //    PaddingBottom(propertyValue);
                     //    break;
                     //case "padding":
                     //case "margin":
                     //    //Margin(styleAttributeInfo);
                     //    break;
                     case "color":
-                        Color(property.Value);
+                        Color(propertyValue);
                         break;
                     case "background-color":
-                        BGColor(property.Value);
+                        BGColor(propertyValue);
                         break;
                     //case "size":
                     //    //Size(styleAttributeInfo);
@@ -114,58 +116,58 @@ namespace SIL.PublishingSolution
                     //    //Border(styleAttributeInfo);
                     //    break;
                     //case "column-count":
-                    //    ColumnCount(property.Value);
+                    //    ColumnCount(propertyValue);
                     //    break;
                     //case "column-gap":
-                    //    ColumnGap(property.Value);
+                    //    ColumnGap(propertyValue);
                     //    break;
                     //case "display":
-                    //    Display(property.Value);
+                    //    Display(propertyValue);
                     //    break;
                     //case "page-break-before":
-                    //    PageBreakBefore(property.Value);
+                    //    PageBreakBefore(propertyValue);
                     //    break;
                     case "text-transform":
-                        TextTransform(property.Value);
+                        TextTransform(propertyValue);
                         break;
                     case "vertical-align":
-                        VerticalAlign(property.Value);
+                        VerticalAlign(propertyValue);
                         break;
                     case "line-height":
-                        LineHeight(property.Value);
+                        LineHeight(propertyValue);
                         break;
                     //case "hyphens":
-                    //    Hyphens(property.Value);
+                    //    Hyphens(propertyValue);
                     //    break;
                     //case "hyphenate-before":
-                    //    HyphenateBefore(property.Value);
+                    //    HyphenateBefore(propertyValue);
                     //    break;
                     //case "hyphenate-after":
-                    //    HyphenateAfter(property.Value);
+                    //    HyphenateAfter(propertyValue);
                     //    break;
                     //case "hyphenate-lines":
-                    //    HyphenateLines(property.Value);
+                    //    HyphenateLines(propertyValue);
                     //    break;
                     case "letter-spacing":
-                        LetterSpacing(property.Value);
+                        LetterSpacing(propertyValue);
                         break;
                     case "word-spacing":
-                        WordSpacing(property.Value);
+                        WordSpacing(propertyValue);
                         break;
                     //case "orphans":
-                    //    Orphans(property.Value);
+                    //    Orphans(propertyValue);
                     //    break;
                     //case "widows":
-                    //    Widows(property.Value);
+                    //    Widows(propertyValue);
                     //    break;
                     //case "direction":
-                    //    Direction(property.Value);
+                    //    Direction(propertyValue);
                     //    break;
                     //case "-ps-vertical-justification":
-                    //    VerticalJustification(property.Value);
+                    //    VerticalJustification(propertyValue);
                     //    break;
                     case "marks":
-                        Marks(property.Value);
+                        Marks(propertyValue);
                         break;
                     //default:
                     //    SimpleProperty(property);
@@ -336,11 +338,11 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-
-            propertyValue = "\\spaceskip " + propertyValue + "pt";
+            propertyValue = SetPropertyValue("\\spaceskip", propertyValue);
             _inlineStyle.Add(propertyValue);
             _IDProperty["WordSpacing"] = propertyValue;
         }
+
         public void LetterSpacing(string propertyValue)
         {
             if (propertyValue == string.Empty)
@@ -436,16 +438,7 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-
-            if (propertyValue == "100%")
-            {
-                propertyValue = "\\baselineskip=0pt";
-            }
-            else
-            {
-                propertyValue = "\\baselineskip=" + propertyValue + "pt";
-            }
-            
+            propertyValue = SetPropertyValue("\\baselineskip", propertyValue);
             _inlineStyle.Add(propertyValue);
             _IDProperty["Leading"] = propertyValue;
         }
@@ -563,7 +556,7 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            propertyValue = "\\leftskip " + propertyValue + "pt";
+            propertyValue = SetPropertyValue("\\leftskip", propertyValue);
             _IDProperty["Margin-Left"] = propertyValue;
             _inlineStyle.Add(propertyValue);
         }
@@ -573,7 +566,7 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            propertyValue = "\\rightskip=" + propertyValue + "pt";
+            propertyValue = SetPropertyValue("\\rightskip", propertyValue);
             _IDProperty["Margin-Right"] = propertyValue;
             _inlineStyle.Add(propertyValue);
         }
@@ -583,7 +576,7 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            propertyValue = "\\topskip=" + propertyValue + "pt";
+            propertyValue = SetPropertyValue("\\topskip", propertyValue);
             _inlineStyle.Add(propertyValue);
             _IDProperty["Margin-Top"] = propertyValue;
         }
@@ -598,6 +591,7 @@ namespace SIL.PublishingSolution
         public string FontFamily(string propertyValue)
         {
             string fontName = "Times New Roman";
+            //string fontName = "Gautami";
             FontFamily[] systemFontList = System.Drawing.FontFamily.Families;
             foreach (FontFamily systemFont in systemFontList)
             {
@@ -607,13 +601,8 @@ namespace SIL.PublishingSolution
                     break;
                 }
             }
-
             _fontName = fontName;
-
             return _fontName;
-            //_property = @"\font\" + _className + "=\"" + propertyValue + "\"";
-            //_property += GetFontSize();
-            // _IDProperty["AppliedFont"] = propertyValue;
         }
 
         public string GetFontSize()
@@ -638,9 +627,8 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                propertyValue = "\\parindent=" + propertyValue + "pt";
+                propertyValue = SetPropertyValue("\\parindent", propertyValue);
             }
-            //_IDProperty["FirstLineIndent"] = propertyValue;
             _inlineStyle.Add(propertyValue);
         }
         public void Color(string propertyValue)
@@ -789,7 +777,7 @@ namespace SIL.PublishingSolution
                 return;
             }
             _IDProperty["FontStyleBold"] = propertyValue;
-            if (propertyValue.Trim().Length > 0)
+            if (propertyValue.Trim().Length > 0 && !_fontOption.Contains(propertyValue))
                 _fontOption.Add(propertyValue);
         }
         public void TextAlign(string propertyValue)
@@ -818,7 +806,7 @@ namespace SIL.PublishingSolution
             }
             else if (propertyValue == "justify")
             {
-                propertyValue = "\\line";
+                propertyValue = "\\filcenter";
             }
             _IDProperty["Justification"] = propertyValue;
             _inlineStyle.Add(propertyValue);
@@ -842,8 +830,7 @@ namespace SIL.PublishingSolution
             else if(propertyValue == "smaller")
                 _fontSize = " at 10pt";
             else
-                _fontSize = " at " + propertyValue + "pt";
-
+                _fontSize = " at " + SetPropertyValue(string.Empty, propertyValue);
         }
         /// <summary>
         /// 
@@ -908,6 +895,31 @@ namespace SIL.PublishingSolution
             computedK = minCMY;
             string cmyk = computedC + " " + computedM + " " + computedY + " " + computedK;
             return cmyk;
+        }
+        private string PercentageToEM(string propertyValue)
+        {
+            if(propertyValue.IndexOf("%") > 0)
+            {
+                propertyValue = propertyValue.Replace("%", "");
+                float numericValue = Convert.ToInt32(propertyValue);
+                numericValue = numericValue/100;
+                propertyValue = numericValue + "em";
+            }
+            return propertyValue;
+        }
+
+        private string SetPropertyValue(string propertyName, string propertyValue)
+        {
+            if(propertyName == "")
+                propertyValue = propertyName + propertyValue;
+            else
+                propertyValue = propertyName + " " + propertyValue;
+
+            if (propertyValue.IndexOf("em") == -1)
+            {
+                propertyValue = propertyValue + "pt";
+            } 
+            return propertyValue;
         }
 
            

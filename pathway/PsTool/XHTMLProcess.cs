@@ -394,7 +394,10 @@ namespace SIL.PublishingSolution
                         _className = _className.Replace("_", "");
                         _className = _className.Replace("-", "");
                         _className = Common.SortMutiClass(_className);
-                        _className = Common.ReplaceCSSClassName(_className);
+                        if (_outputType == Common.OutputType.XELATEX)
+                        {
+                            _className = Common.ReplaceCSSClassName(_className);
+                        }
                     }
                     else if (_reader.Name == "lang")
                     {

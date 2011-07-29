@@ -429,7 +429,7 @@ namespace SIL.PublishingSolution
         {
             string content = _reader.Value;
             content = ReplaceString(content);
-
+            content = content + " ";
             if (CollectFootNoteChapterVerse(content, Common.OutputType.XELATEX.ToString())) return;
 
             if (columnCount == "2")

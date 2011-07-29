@@ -57,7 +57,8 @@ namespace SIL.PublishingSolution
                     cssClass.Key.IndexOf("h4") >= 0 || cssClass.Key.IndexOf("h5") >= 0 ||
                     cssClass.Key.IndexOf("h6") >= 0) continue;
                 List<string> _inlineStyle = new List<string>();
-                string className = RemoveBody(cssClass.Key);
+                string replaceNumberInStyle = Common.ReplaceCSSClassName(cssClass.Key);
+                string className = RemoveBody(replaceNumberInStyle);
                 if (className.Length == 0 ) continue; 
                 xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, className, _inlineStyle, _includePackageList);
                 if (xeLaTexProperty.Trim().Length > 0)
