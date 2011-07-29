@@ -599,7 +599,7 @@ namespace SIL.PublishingSolution
 
                     if (inlineStyle.Count > 0)
                     {
-                        _braceInlineClassCount[_childName] = inlineStyle.Count;
+                        _braceInlineClassCount[getStyleName] = inlineStyle.Count;
                         _braceInlineClass.Push(getStyleName);
                     }
 
@@ -1140,6 +1140,7 @@ namespace SIL.PublishingSolution
             if (brace.Length != 0 && closeChildName == brace && _braceInlineClassCount.ContainsKey(brace))
             {
                 int count = _braceInlineClassCount[brace];
+                _braceInlineClassCount[brace] = 0;
                 for (int i = 0; i < count; i++)
                 {
                     _xetexFile.Write("}");
