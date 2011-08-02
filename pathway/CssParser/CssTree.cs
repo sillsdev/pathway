@@ -542,6 +542,10 @@ namespace SIL.PublishingSolution
             ArrayList classCollection = new ArrayList();
 
             string className = GetFirstChild(classNode);
+            if (OutputType == Common.OutputType.XELATEX)
+            {
+                className  = Common.ReplaceCSSClassName(className);
+            }
             _baseClassName = className;
 
             foreach (TreeNode node in classNode.Nodes)
