@@ -888,7 +888,7 @@ namespace SIL.PublishingSolution
                 {
                     //string xmlFileNameWithPath = Common.PathCombine(Common.GetPSApplicationPath(), "GenericFont.xml");
                     string xmlFileNameWithPath = Common.PathCombine(PsSupportPath, "GenericFont.xml");
-                    string xPath = "//font-preference/generic-family [@name = \"" + fontName + "\"]";
+                    string xPath = "//font-preference/generic-family [@name = \"" + fontName.ToLower() + "\"]";
                     ArrayList fontList = new ArrayList();
                     fontList = Common.GetXmlNodeList(xmlFileNameWithPath, xPath);
                     if (fontList.Count > 0)
