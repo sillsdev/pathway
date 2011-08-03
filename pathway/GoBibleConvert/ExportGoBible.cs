@@ -23,12 +23,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using SIL.Tool;
 using System.Threading;
+
 
 namespace SIL.PublishingSolution
 {
@@ -138,8 +140,48 @@ namespace SIL.PublishingSolution
             }
             else if (projInfo.IsOpenOutput)
             {
-                string msg = string.Format("Please copy the file {0} to your phone", result);
-                MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Try to open the Send To Bluetooth device wizard, if it exists on this machine
+                // (requires a bluetooth driver to be installed)
+                bool autoSync = false;
+                var sendToDir = Environment.GetFolderPath(Environment.SpecialFolder.System);
+                if (File.Exists(Path.Combine(sendToDir, "fsquirt.exe")))
+                {
+                    try
+                    {
+                        using (Process exeProcess = Process.Start(Path.Combine(sendToDir, "fsquirt.exe")))
+                        {
+                            exeProcess.WaitForExit();
+                            autoSync = (exeProcess.ExitCode == ExitOk);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(e.ToString());
+                    }
+                }
+                //foreach (string target in sendToTargets)
+                //{
+                //    if (target.ToLower().Contains("bluetooth"))
+                //    {
+                //        // found a candidate -- try to launch it
+                //        try
+                //        {
+                //            Process.Start(target, result);
+                //            autoSync = true;
+                //        }
+                //        catch(Exception e)
+                //        {
+                //            MessageBox.Show(e.ToString());
+                //        }
+                //        break;
+                //    }
+                //}
+                if (autoSync == false)
+                {
+                    // Failed to send the .jar to a bluetooth device. Tell the user to do it manually.
+                    string msg = string.Format("Please copy the file {0} to your phone", result);
+                    MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             // clean up
             string keepJad = Common.PathCombine(processFolder, Sanitize(collectionName) + ".jad");
@@ -507,5 +549,6 @@ namespace SIL.PublishingSolution
         {
             return GetProjectName(projInfo) + "_" + GetBookCode(projInfo);
         }
+
     }
 }
