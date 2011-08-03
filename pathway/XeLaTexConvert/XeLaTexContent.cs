@@ -533,6 +533,9 @@ namespace SIL.PublishingSolution
             {
                 content = WriteCounter(content);
                 content = whiteSpacePre(content);
+
+                LanguageFontCheck(content, _childName);
+
                 if (_isDropCap)
                 {
                     content = _chapterNo;
