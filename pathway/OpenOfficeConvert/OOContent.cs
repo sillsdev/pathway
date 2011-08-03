@@ -134,6 +134,7 @@ namespace SIL.PublishingSolution
         private ArrayList _crossRef = new ArrayList();
         private int _crossRefCounter = 1;
         private bool _isWhiteSpace = false;
+        private bool _isForcedWhiteSpace = false;
         private bool _isVerseNumberContent = false;
         private StringBuilder _verseContent = new StringBuilder();
 
@@ -146,12 +147,13 @@ namespace SIL.PublishingSolution
         private bool _isEmptyTitleExist;
         private int _titleCounter=1;
         private int _pageWidth;
+
         #endregion
 
         #region Public Variable
         public bool _multiLanguageHeader = false;
         public string RefFormat = "Genesis 1";
-        public bool IsMirrorPage;
+        public string _ChapterNo = "1";
         public LOContent()
         {
             _outputType = Common.OutputType.ODT;
@@ -268,7 +270,7 @@ namespace SIL.PublishingSolution
                             i++;
                             string value = values[i].Replace("\"", "");
                             value = Common.ReplaceSymbolToText(value);
-                            _replaceSymbolToText[key] = Common.UnicodeConversion(value);
+                            _replaceSymbolToText[key] = Common.ConvertUnicodeToString(value);
                         }
                     }
                 }
@@ -621,6 +623,7 @@ namespace SIL.PublishingSolution
                             break;
                         case XmlNodeType.EndElement:
                             EndElement();
+
                             break;
                         case XmlNodeType.Text: // Text.Write
                             Write();
@@ -658,7 +661,7 @@ namespace SIL.PublishingSolution
         {
             string data = SignificantSpace(_reader.Value);
             //_writer.WriteString(data);
-            if (!_isWhiteSpace)
+            if (!_isWhiteSpace && !_pseudoSingleSpace)
             {
                 _writer.WriteStartElement("text:s");
                 _writer.WriteAttributeString("text:c", "1");
@@ -701,6 +704,10 @@ namespace SIL.PublishingSolution
         }
         private void Write()
         {
+            if (!_isWhiteSpace && (_characterName != null) && _characterName.IndexOf("xhomographnumber") != 0)
+            {
+                InsertWhiteSpace();
+            }
             if (_isDisplayNone)
             {
                 CollectFootNoteChapterVerse(ReplaceString(_reader.Value), Common.OutputType.ODT.ToString());
@@ -738,7 +745,6 @@ namespace SIL.PublishingSolution
             }
             WriteText();
             isFileEmpty = false;
-            _isWhiteSpace = false;
         }
 
         private void DropCapsParagraph()
@@ -894,14 +900,15 @@ namespace SIL.PublishingSolution
                 }
                 else if (pseudo)
                 {
-                    if (content == " " && (_pseudoSingleSpace == false))
+                    if (content == " " && _pseudoSingleSpace == false && _isWhiteSpace == false)
                     {
                         _writer.WriteStartElement("text:s");
                         _writer.WriteAttributeString("text:c", "1");
                         _writer.WriteEndElement();
                         _pseudoSingleSpace = true;
+                        _isWhiteSpace = true;
                     }
-                    else
+                    else if (content.Trim().Length > 0)
                     {
                         _writer.WriteRaw(content);
                     }
@@ -912,8 +919,13 @@ namespace SIL.PublishingSolution
                 }
                 else if (!VisibleHidden())
                 {
-                    _writer.WriteString(content);
                     _pseudoSingleSpace = false;
+                    _isWhiteSpace = false;
+                    _writer.WriteString(content);
+                    if(content.LastIndexOf(" ") == content.Length - 1)
+                    {
+                        _pseudoSingleSpace = true;
+                    }
                 }
             }
         }
@@ -2186,17 +2198,11 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("text:name", "Drawing");
             _writer.WriteEndElement();
             _writer.WriteEndElement();
+            _writer.WriteStartElement("text:p");
+            _writer.WriteAttributeString("text:style-name", "P4");
+            _writer.WriteEndElement();
 
-
-            //TD-2567 - We avoid below coding for ODM
-            if (_projInfo.FileSequence == null || _projInfo.FileSequence.Count == 1)
-            {
-                _writer.WriteStartElement("text:p");
-                _writer.WriteAttributeString("text:style-name", "P4");
-                _writer.WriteEndElement();
-            }
-
-        //if (_fileType == "odm" && _odtFiles != null)  // ODM - ODT files
+            //if (_fileType == "odm" && _odtFiles != null)  // ODM - ODT files
             //{
             //    int MainPosition = 0;
             //    if (_odtFiles.Contains("Main"))
@@ -2234,20 +2240,14 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("office:value-type", "string");
             _writer.WriteAttributeString("text:name", "Left_Guideword_L");
             _writer.WriteEndElement();
-
-            //TD-2575 to avoid Mirror page Variables for Normal Page
-            if (IsMirrorPage)
-            {
-                _writer.WriteStartElement("text:variable-decl");
-                _writer.WriteAttributeString("office:value-type", "string");
-                _writer.WriteAttributeString("text:name", "Right_Guideword_L");
-                _writer.WriteEndElement();
-                _writer.WriteStartElement("text:variable-decl");
-                _writer.WriteAttributeString("office:value-type", "string");
-                _writer.WriteAttributeString("text:name", "Left_Guideword_R");
-                _writer.WriteEndElement();
-            }
-
+            _writer.WriteStartElement("text:variable-decl");
+            _writer.WriteAttributeString("office:value-type", "string");
+            _writer.WriteAttributeString("text:name", "Right_Guideword_L");
+            _writer.WriteEndElement();
+            _writer.WriteStartElement("text:variable-decl");
+            _writer.WriteAttributeString("office:value-type", "string");
+            _writer.WriteAttributeString("text:name", "Left_Guideword_R");
+            _writer.WriteEndElement();
             _writer.WriteStartElement("text:variable-decl");
             _writer.WriteAttributeString("office:value-type", "string");
             _writer.WriteAttributeString("text:name", "Right_Guideword_R");

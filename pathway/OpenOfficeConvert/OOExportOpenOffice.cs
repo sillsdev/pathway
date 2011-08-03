@@ -49,7 +49,7 @@ namespace SIL.PublishingSolution
             return returnValue;
         }
 
-        public string RefFormat = string.Empty;
+        public string _refFormat = "Genesis 1";
 
 
         private static PublicationInformation publicationInfo;
@@ -714,8 +714,8 @@ namespace SIL.PublishingSolution
             //To set Constent variables for User Desire
             string fname = Common.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             string macroFileName = Common.PathCombine(projInfo.DictionaryPath, fname);
-            RefFormat = GetReferenceFormat(idAllClass, RefFormat);
-            IncludeTextinMacro(strMacroPath, RefFormat, macroFileName, projInfo.IsExtraProcessing);
+            _refFormat = GetReferenceFormat(idAllClass, _refFormat);
+            IncludeTextinMacro(strMacroPath, _refFormat, macroFileName, projInfo.IsExtraProcessing);
 
             // BEGIN Generate Meta.Xml File
             var metaXML = new LOMetaXML(projInfo.ProjectInputType);
@@ -737,8 +737,7 @@ namespace SIL.PublishingSolution
             projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
             projInfo.TempOutputFolder += Path.DirectorySeparatorChar;
             cXML._multiLanguageHeader = isMultiLanguageHeader;
-            cXML.RefFormat = this.RefFormat;
-            cXML.IsMirrorPage = inStyles.isMirrored;
+            cXML.RefFormat = this._refFormat;
             cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, pageWidth);
             InsertChapterNumber(projInfo.TempOutputFolder);
 

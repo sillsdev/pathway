@@ -3,6 +3,7 @@
   <office:font-face-decls>
     <style:font-face style:name="Times New Roman" svg:font-family="'Times New Roman'" style:font-family-generic="roman" style:font-pitch="variable" />
     <style:font-face style:name="Yi plus Phonetics" svg:font-family="'Yi plus Phonetics'" />
+    <style:font-face style:name="Gautami1" svg:font-family="'Gautami'" style:font-pitch="variable" />
     <style:font-face style:name="GenericFont" svg:font-family="'Arial Unicode MS'" style:font-pitch="variable" />
     <style:font-face style:name="Arial" svg:font-family="'Arial'" style:font-family-generic="swiss" style:font-pitch="variable" />
     <style:font-face style:name="Lucida Sans Unicode" svg:font-family="'Lucida Sans Unicode'" style:font-family-generic="system" style:font-pitch="variable" />
@@ -332,7 +333,7 @@
       <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" style:wrap="none" style:vertical-pos="top" style:vertical-rel="paragraph" style:horizontal-pos="center" style:horizontal-rel="paragraph" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" />
     </style:style>
     <style:style style:name="Frame" style:family="graphic">
-      <style:graphic-properties text:anchor-type="paragraph" svg:x="0pt" svg:y="0pt" fo:margin-left="5.7pt" fo:margin-right="5.7pt" fo:margin-bottom="5.7pt" fo:margin-top="5.7pt" style:wrap="parallel" style:number-wrapped-paragraphs="no-limit" style:wrap-contour="false" style:vertical-pos="top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph-content" fo:padding="4.25pt" fo:border="0.06pt solid #000000" />
+      <style:graphic-properties text:anchor-type="paragraph" svg:x="0pt" svg:y="0pt" fo:margin-left="0pt" fo:margin-right="0pt" fo:margin-bottom="0pt" fo:margin-top="0pt" style:wrap="parallel" style:number-wrapped-paragraphs="no-limit" style:wrap-contour="false" style:vertical-pos="top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph-content" fo:padding="4.25pt" fo:border="0.06pt solid #000000" />
     </style:style>
     <text:outline-style>
       <text:outline-level-style text:level="1" style:num-format="">
@@ -426,6 +427,9 @@
     </style:style>
     <style:style style:name="MP1" style:family="paragraph" style:parent-style-name="Frame_20_contents">
       <style:paragraph-properties fo:text-align="end" style:justify-single-word="false" />
+    </style:style>
+    <style:style style:name="MT1" style:family="text">
+      <style:text-properties style:font-name-complex="Gautami1" />
     </style:style>
     <style:style style:name="MT1" style:family="text">
       <style:text-properties style:font-name-complex="GenericFont" />
