@@ -496,13 +496,6 @@ namespace SIL.PublishingSolution
 
                 //TD-2566
                 //<style:font-face style:name="Gautami1" svg:font-family="Gautami" style:font-pitch="variable"/>
-
-                _writer.WriteStartElement("style:font-face");
-                _writer.WriteAttributeString("style:name", "Gautami1");
-                _writer.WriteAttributeString("svg:font-family", "'Gautami'");
-                _writer.WriteAttributeString("style:font-pitch", "variable");
-                _writer.WriteEndElement();
-
                 _writer.WriteStartElement("style:font-face");
                 _writer.WriteAttributeString("style:name", "GenericFont");
                 _writer.WriteAttributeString("svg:font-family", "'Arial Unicode MS'");
