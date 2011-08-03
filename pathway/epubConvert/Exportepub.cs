@@ -261,6 +261,10 @@ namespace SIL.PublishingSolution
                 if (_inputType.ToLower().Equals("dictionary"))
                 {
                     ContentCssToXhtml(niceNameCSS, splitFiles);
+                    if (projInfo.IsReversalExist)
+                    {
+                        ContentCssToXhtml(Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.css"), splitFiles);
+                    }
                 }
                 // get rid of styles that don't work with .epub
                 RemovePagedStylesFromCss(niceNameCSS);
