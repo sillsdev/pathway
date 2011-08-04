@@ -3,6 +3,7 @@
   <office:font-face-decls>
     <style:font-face style:name="Times New Roman" svg:font-family="'Times New Roman'" style:font-family-generic="roman" style:font-pitch="variable" />
     <style:font-face style:name="Yi plus Phonetics" svg:font-family="'Yi plus Phonetics'" />
+    <style:font-face style:name="Gautami1" svg:font-family="'Gautami'" style:font-pitch="variable" />
     <style:font-face style:name="GenericFont" svg:font-family="'Arial Unicode MS'" style:font-pitch="variable" />
     <style:font-face style:name="Arial" svg:font-family="'Arial'" style:font-family-generic="swiss" style:font-pitch="variable" />
     <style:font-face style:name="Lucida Sans Unicode" svg:font-family="'Lucida Sans Unicode'" style:font-family-generic="system" style:font-pitch="variable" />
@@ -258,7 +259,7 @@
       <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" style:wrap="none" style:vertical-pos="top" style:vertical-rel="paragraph" style:horizontal-pos="center" style:horizontal-rel="paragraph" />
     </style:style>
     <style:style style:name="Frame" style:family="graphic">
-      <style:graphic-properties text:anchor-type="paragraph" svg:x="0pt" svg:y="0pt" fo:margin-left="5.7pt" fo:margin-right="5.7pt" fo:margin-bottom="5.7pt" fo:margin-top="5.7pt" style:wrap="parallel" style:number-wrapped-paragraphs="no-limit" style:wrap-contour="false" style:vertical-pos="top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph-content" fo:padding="4.25pt" fo:border="0.06pt solid #000000" />
+      <style:graphic-properties text:anchor-type="paragraph" svg:x="0pt" svg:y="0pt" fo:margin-left="0pt" fo:margin-right="0pt" fo:margin-bottom="0pt" fo:margin-top="0pt" style:wrap="parallel" style:number-wrapped-paragraphs="no-limit" style:wrap-contour="false" style:vertical-pos="top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph-content" fo:padding="4.25pt" fo:border="0.06pt solid #000000" />
     </style:style>
     <text:outline-style>
       <text:outline-level-style text:level="1" style:num-format="">
@@ -362,6 +363,12 @@
         <style:columns fo:column-count="1" fo:column-gap="0in" />
       </style:graphic-properties>
     </style:style>
+    <style:style style:name="Mfr3" style:family="graphic" style:parent-style-name="Frame">
+      <style:graphic-properties style:vertical-pos="from-top" style:vertical-rel="page" style:horizontal-pos="center" style:horizontal-rel="paragraph" fo:background-color="transparent" style:background-transparency="100%" fo:padding="0in" fo:border="none" style:shadow="none" style:flow-with-text="false">
+        <style:background-image />
+        <style:columns fo:column-count="1" fo:column-gap="0in" />
+      </style:graphic-properties>
+    </style:style>
     <style:page-layout style:name="pm1" style:page-usage="mirrored">
       <style:page-layout-properties fo:margin-top="72pt" fo:margin-right="72pt" fo:margin-bottom="72pt" fo:margin-left="72pt" fo:page-height="792pt" fo:page-width="612pt">
         <style:footnote-sep style:width="0.0071in" style:line-style="solid" style:distance-before-sep="30%" style:distance-after-sep="30%" style:color="#000000" style:adjustment="centre" style:rel-width="100%" />
@@ -429,7 +436,6 @@
       <style:footer>
         <text:p text:style-name="Footer">
           <text:tab />
-          <text:page-number text:select-page="current">4</text:page-number>
           <text:tab />
         </text:p>
       </style:footer>
@@ -437,7 +443,11 @@
     <style:master-page style:name="Left_20_Page" style:display-name="Left Page" style:page-layout-name="pm4" style:next-style-name="Right_20_Page">
       <style:header>
         <text:p text:style-name="Header">
+          <text:page-number text:select-page="current">4</text:page-number>
           <text:tab />
+          <text:span text:style-name="MT1">
+            <text:variable-get text:name="Left_Guideword_L" office:value-type="string" />
+          </text:span>
           <text:tab />
         </text:p>
       </style:header>
@@ -452,13 +462,26 @@
       <style:header>
         <text:p text:style-name="Header">
           <text:tab />
+          <text:span text:style-name="MT1">
+            <text:variable-get text:name="Right_Guideword_R" office:value-type="string" />
+          </text:span>
           <text:tab />
+          <text:page-number text:select-page="current">4</text:page-number>
         </text:p>
       </style:header>
       <style:footer>
         <text:p text:style-name="Footer">
           <text:tab />
           <text:tab />
+          <draw:frame draw:style-name="Mfr3" draw:name="Frame1" text:anchor-type="paragraph" svg:x="0pt" svg:y="72pt" fo:min-width="135pt" draw:z-index="1">
+            <draw:text-box fo:min-height="14.14pt">
+              <text:p text:style-name="MP1">
+                <text:span text:style-name="MT1">
+                  <text:variable-get text:name="Right_Guideword_R" office:value-type="string" />
+                </text:span>
+              </text:p>
+            </draw:text-box>
+          </draw:frame>
         </text:p>
       </style:footer>
     </style:master-page>

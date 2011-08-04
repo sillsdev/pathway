@@ -134,6 +134,7 @@ namespace SIL.PublishingSolution
         private ArrayList _crossRef = new ArrayList();
         private int _crossRefCounter = 1;
         private bool _isWhiteSpace = false;
+        private bool _isForcedWhiteSpace = false;
         private bool _isVerseNumberContent = false;
         private StringBuilder _verseContent = new StringBuilder();
 
@@ -152,6 +153,7 @@ namespace SIL.PublishingSolution
         public bool _multiLanguageHeader = false;
         public string RefFormat = "Genesis 1";
         public bool IsMirrorPage;
+        public string _ChapterNo = "1";
         public LOContent()
         {
             _outputType = Common.OutputType.ODT;
@@ -268,7 +270,7 @@ namespace SIL.PublishingSolution
                             i++;
                             string value = values[i].Replace("\"", "");
                             value = Common.ReplaceSymbolToText(value);
-                            _replaceSymbolToText[key] = Common.UnicodeConversion(value);
+                            _replaceSymbolToText[key] = Common.ConvertUnicodeToString(value);
                         }
                     }
                 }
@@ -658,12 +660,13 @@ namespace SIL.PublishingSolution
         {
             string data = SignificantSpace(_reader.Value);
             //_writer.WriteString(data);
-            if (!_isWhiteSpace)
+            if (!_isWhiteSpace && !_pseudoSingleSpace)
             {
-                _writer.WriteStartElement("text:s");
-                _writer.WriteAttributeString("text:c", "1");
-                _writer.WriteEndElement();
-                _isWhiteSpace = true;
+                //_writer.WriteStartElement("text:s");
+                //_writer.WriteAttributeString("text:c", "1");
+                //_writer.WriteEndElement();
+                //_isWhiteSpace = true;
+                _writer.WriteString("");
             }
         }
 
@@ -701,6 +704,10 @@ namespace SIL.PublishingSolution
         }
         private void Write()
         {
+            if (!_isWhiteSpace && (_characterName != null) && _characterName.IndexOf("xhomographnumber") != 0)
+            {
+                InsertWhiteSpace();
+            }
             if (_isDisplayNone)
             {
                 CollectFootNoteChapterVerse(ReplaceString(_reader.Value), Common.OutputType.ODT.ToString());
@@ -738,7 +745,6 @@ namespace SIL.PublishingSolution
             }
             WriteText();
             isFileEmpty = false;
-            _isWhiteSpace = false;
         }
 
         private void DropCapsParagraph()
@@ -894,14 +900,15 @@ namespace SIL.PublishingSolution
                 }
                 else if (pseudo)
                 {
-                    if (content == " " && (_pseudoSingleSpace == false))
+                    if (content == " " && _pseudoSingleSpace == false && _isWhiteSpace == false)
                     {
                         _writer.WriteStartElement("text:s");
                         _writer.WriteAttributeString("text:c", "1");
                         _writer.WriteEndElement();
                         _pseudoSingleSpace = true;
+                        _isWhiteSpace = true;
                     }
-                    else
+                    else if (content.Trim().Length > 0)
                     {
                         _writer.WriteRaw(content);
                     }
@@ -912,8 +919,13 @@ namespace SIL.PublishingSolution
                 }
                 else if (!VisibleHidden())
                 {
-                    _writer.WriteString(content);
                     _pseudoSingleSpace = false;
+                    _isWhiteSpace = false;
+                    _writer.WriteString(content);
+                    if(content.LastIndexOf(" ") == content.Length - 1)
+                    {
+                        _pseudoSingleSpace = true;
+                    }
                 }
             }
         }
@@ -2186,6 +2198,9 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("text:name", "Drawing");
             _writer.WriteEndElement();
             _writer.WriteEndElement();
+            //_writer.WriteStartElement("text:p");
+            //_writer.WriteAttributeString("text:style-name", "P4");
+            //_writer.WriteEndElement();
 
 
             //TD-2567 - We avoid below coding for ODM
