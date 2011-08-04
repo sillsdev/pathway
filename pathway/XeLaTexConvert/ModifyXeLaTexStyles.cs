@@ -49,18 +49,19 @@ namespace SIL.PublishingSolution
         private void MapProperty()
         {
             string xeLaTexProperty = "";
-            List<string> _includePackageList = new List<string>();
+            List<string> includePackageList = new List<string>();
             foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _cssClass)
             {
                 if (cssClass.Key.IndexOf("h1") >= 0 ||
                     cssClass.Key.IndexOf("h2") >= 0 || cssClass.Key.IndexOf("h3") >= 0 ||
                     cssClass.Key.IndexOf("h4") >= 0 || cssClass.Key.IndexOf("h5") >= 0 ||
                     cssClass.Key.IndexOf("h6") >= 0) continue;
-                List<string> _inlineStyle = new List<string>();
+                List<string> inlineStyle = new List<string>();
+                List<string> inlineInnerStyle = new List<string>();
                 string replaceNumberInStyle = Common.ReplaceCSSClassName(cssClass.Key);
                 string className = RemoveBody(replaceNumberInStyle);
-                if (className.Length == 0 ) continue; 
-                xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, className, _inlineStyle, _includePackageList);
+                if (className.Length == 0 ) continue;
+                xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, className, inlineStyle, includePackageList, inlineInnerStyle);
                 if (xeLaTexProperty.Trim().Length > 0)
                 {
                     Common.FileInsertText(_xetexFullFile, xeLaTexProperty);
@@ -76,7 +77,7 @@ namespace SIL.PublishingSolution
             Common.FileInsertText(_xetexFullFile, @"\usepackage{multicol}");
             Common.FileInsertText(_xetexFullFile, @"\usepackage{fancyhdr}");
             Common.FileInsertText(_xetexFullFile, @"\usepackage{fontspec}");
-            foreach (var package in _includePackageList)
+            foreach (var package in includePackageList)
             {
                 Common.FileInsertText(_xetexFullFile, package);
             }

@@ -61,6 +61,7 @@ namespace SIL.PublishingSolution
         private string _dropCapStyle = string.Empty;
         private string _currentStoryName = string.Empty;
         Dictionary<string, List<string>> _classInlineStyle = new Dictionary<string, List<string>>();
+        Dictionary<string, List<string>> _classInlineInnerStyle = new Dictionary<string, List<string>>();
         private string xhtmlFile;
 
         protected Stack<string> _braceClass = new Stack<string>();
@@ -71,11 +72,12 @@ namespace SIL.PublishingSolution
 
         #endregion
 
-        public Dictionary<string, Dictionary<string, string>> CreateContent(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> cssClass, StreamWriter xetexFile, Dictionary<string, List<string>> classInlineStyle, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
+        public Dictionary<string, Dictionary<string, string>> CreateContent(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> cssClass, StreamWriter xetexFile, Dictionary<string, List<string>> classInlineStyle, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder, Dictionary<string, List<string>> classInlineText)
         {
             _projInfo = projInfo;
             _xetexFile = xetexFile;
             _classInlineStyle = classInlineStyle;
+            _classInlineInnerStyle = classInlineText;
             _inputPath = Path.GetDirectoryName(projInfo.ProjectPath);
             xhtmlFile = projInfo.DefaultXhtmlFileWithPath;
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
@@ -542,18 +544,58 @@ namespace SIL.PublishingSolution
                     _isDropCap = false;
                 }
                 //content = Common.ReplaceSymbolToXelatexText(content);
-                //if (_classNameWithLang.IndexOf("headword_") == 0 && content.Trim().Length > 0)
-                //{
-                //    string headerFormat = "\\markright{" + content + "} \\markboth{" + content + "}";
-                //    _xetexFile.Write(headerFormat);
-                //}
+                
+                List<string> value = CreateInlineInnerStyle(characterStyle);
                 _xetexFile.Write(content);
+                CloseInlineInnerStyle(value);
                 _xetexFile.Write("}");
-                //if(_tagType == "div")
-                //    _xetexFile.Write("\r\n");
-
             }
             AnchorBookMark();
+        }
+
+        private void CloseInlineInnerStyle(List<string> value)
+        {
+            if (value.Count > 0)
+            {
+                for (int i = 0; i < value.Count; i++)
+                {
+                    _xetexFile.Write("}");
+                }
+            }
+        }
+
+        private List<string> CreateInlineInnerStyle(string characterStyle)
+        {
+            
+            List<string> value = new List<string>();
+            if (characterStyle.IndexOf("_") > 0)
+            {
+                string className = characterStyle.Substring(0, characterStyle.IndexOf("_"));
+                if (_classInlineInnerStyle.ContainsKey(className))
+                {
+                    value = _classInlineInnerStyle[className];
+                    for (int i = 0; i < value.Count; i++)
+                    {
+                        _xetexFile.Write(value[i]);
+                        _xetexFile.Write("{");
+                    }
+                    
+                }
+            }
+            //else if (_previousParagraphName.IndexOf("_") > 0)
+            //{
+            //    string className = _previousParagraphName.Substring(0, _previousParagraphName.IndexOf("_"));
+            //    if (_classInlineText.ContainsKey(className))
+            //    {
+            //        value = _classInlineText[className];
+            //        for (int i = 0; i < value.Count; i++)
+            //        {
+            //            _xetexFile.Write(value[i]);
+            //        }
+            //        isInlineText = true;
+            //    }
+            //}
+            return value;
         }
 
         private string WritePara(string characterStyle, string content)
@@ -611,6 +653,7 @@ namespace SIL.PublishingSolution
                     if (mergedParaStyle.IndexOf("headword") == 0 && content != null)
                     {
                         string headerFormat = "\\markright{" + content + "} \\markboth{" + content + "}";
+                        //string headerFormat = "\\markboth{" + content + "}{" + content + "}" ;
                         _xetexFile.Write(headerFormat);
                     }
 

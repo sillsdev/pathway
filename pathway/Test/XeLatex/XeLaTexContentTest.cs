@@ -723,7 +723,7 @@ namespace Test.XeLatex
             _classInlineStyle = styles.CreateXeTexStyles(_outputPath,xetexFile, cssClass);
 
             XeLaTexContent content = new XeLaTexContent();
-            Dictionary<string, Dictionary<string, string>> newProperty = content.CreateContent(_projInfo, cssClass, xetexFile, _classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder);
+            Dictionary<string, Dictionary<string, string>> newProperty = content.CreateContent(_projInfo, cssClass, xetexFile, _classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder, new Dictionary<string, List<string>>());
 
             CloseFile(xetexFile);
 

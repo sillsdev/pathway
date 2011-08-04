@@ -37,8 +37,10 @@ namespace SIL.PublishingSolution
         XeLaTexMapProperty mapProperty = new XeLaTexMapProperty();
         private StreamWriter _xetexFile;
         private List<string> _inlineStyle;
+        private List<string> _inlineText;
         private List<string> _includePackageList;
         Dictionary<string, List<string>> _classInlineStyle = new Dictionary<string, List<string>>();
+        public Dictionary<string, List<string>> _classInlineText = new Dictionary<string, List<string>>();
         //public InDesignStyles InDesignStyles;
         //public ArrayList _FootNote;
         protected bool IsMirrored = false;
@@ -56,6 +58,7 @@ namespace SIL.PublishingSolution
             try
             {
                 _includePackageList = new List<string>();
+                _inlineText = new List<string>();
                 _xetexFile = xetexFile;
                 _cssProperty = cssProperty;
                 LoadPageStyleFormat();
@@ -266,12 +269,15 @@ namespace SIL.PublishingSolution
                     cssClass.Key.IndexOf("h6") >= 0) continue;
 
                 _inlineStyle = new List<string>();
+                _inlineText = new List<string>();
                 string replaceNumberInStyle = Common.ReplaceCSSClassName(cssClass.Key);
-                string xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, replaceNumberInStyle, _inlineStyle, _includePackageList);
+                string xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, replaceNumberInStyle, _inlineStyle, _includePackageList, _inlineText);
 
                 //if (_inlineStyle.Count > 0)
                 {
                     _classInlineStyle[replaceNumberInStyle] = _inlineStyle;
+                    if (_inlineText.Count > 0)
+                        _classInlineText[replaceNumberInStyle] = _inlineText;
                 }
                 if (xeLaTexProperty.Trim().Length > 0 && Common.Testing)
                 {

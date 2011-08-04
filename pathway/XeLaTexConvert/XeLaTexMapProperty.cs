@@ -8,7 +8,7 @@ namespace SIL.PublishingSolution
     public class XeLaTexMapProperty
     {
         private Dictionary<string, string> _IDProperty = new Dictionary<string, string>();
-        private string _property; 
+        private string _property;
         private Dictionary<string, string> _cssProperty = new Dictionary<string, string>();
         private bool _IsKeepLineWrittern = false;
 
@@ -20,12 +20,13 @@ namespace SIL.PublishingSolution
         private string _fontSize;
         private List<string> _inlineStyle;
         private List<string> _includePackageList;
+        private List<string> _inlineInnerStyle;
 
 
         //TextInfo _titleCase = CultureInfo.CurrentCulture.TextInfo;
-        public string XeLaTexProperty(Dictionary<string, string> cssProperty, string className, List<string> inlineStyle, List<string> includePackageList)
+        public string XeLaTexProperty(Dictionary<string, string> cssProperty, string className, List<string> inlineStyle, List<string> includePackageList, List<string> inlineInnerStyle)
         {
-            Initialize(className, cssProperty, inlineStyle, includePackageList);
+            Initialize(className, cssProperty, inlineStyle, includePackageList, inlineInnerStyle);
             foreach (KeyValuePair<string, string> property in cssProperty)
             {
                 string propertyValue = PercentageToEM(property.Value);
@@ -70,7 +71,7 @@ namespace SIL.PublishingSolution
                     case "font-family":
                         FontFamily(propertyValue);
                         break;
-                        //\special{papersize=5in,8in}
+                    //\special{papersize=5in,8in}
                     case "page-width":
                         PageWidth(propertyValue);
                         break;
@@ -174,13 +175,13 @@ namespace SIL.PublishingSolution
                     //    break;
                 }
             }
-            string  style = ComposeStyle();
+            string style = ComposeStyle();
             return style;
         }
 
-        public string XeLaTexPageProperty(Dictionary<string, string> cssProperty, string className, List<string> inlineStyle, List<string> includePackageList)
+        public string XeLaTexPageProperty(Dictionary<string, string> cssProperty, string className, List<string> inlineStyle, List<string> includePackageList, List<string> inlineText)
         {
-            Initialize(className, cssProperty, inlineStyle, includePackageList);
+            Initialize(className, cssProperty, inlineStyle, includePackageList, inlineText);
             foreach (KeyValuePair<string, string> property in cssProperty)
             {
                 switch (property.Key.ToLower())
@@ -197,17 +198,18 @@ namespace SIL.PublishingSolution
             return style;
         }
 
-        private void Initialize(string className, Dictionary<string, string> cssProperty, List<string> inlineStyle, List<string> includePackageList)
+        private void Initialize(string className, Dictionary<string, string> cssProperty, List<string> inlineStyle, List<string> includePackageList, List<string> inlineText)
         {
             _className = className;
             _property = string.Empty;
             _cssProperty = cssProperty;
             _inlineStyle = inlineStyle;
             _includePackageList = includePackageList;
-            
+            _inlineInnerStyle = inlineText;
+
             if (className.IndexOf("scrBookName") == -1)
                 _fontName = "Times New Roman";
-            
+
             foreach (KeyValuePair<string, string> property in cssProperty)
             {
                 if (property.Key.ToLower() == "font-family")
@@ -232,7 +234,7 @@ namespace SIL.PublishingSolution
                 //\special{papersize=5in,8in}
                 //style = @"\special{papersize=" + _IDProperty["Page-Height"] + "pt ," + _IDProperty["Page-Width"] + "pt} \\r\\n";
                 //cmyk 0.1 0.9 0.5 0
-                if(_IDProperty.ContainsKey("backgroundColor"))
+                if (_IDProperty.ContainsKey("backgroundColor"))
                     style += @"\special{background cmyk " + _IDProperty["backgroundColor"] + "}";
             }
             else
@@ -354,6 +356,9 @@ namespace SIL.PublishingSolution
             //_IDProperty["MaximumLetterSpacing"] = propertyValue;
 
             string space = ":letterspace=" + propertyValue;
+
+            //string space = SetPropertyValue(":letterspace=", propertyValue);
+
             _fontStyle.Add(space);
 
         }
@@ -607,7 +612,7 @@ namespace SIL.PublishingSolution
 
         public string GetFontSize()
         {
-            string fontSize = string.Empty;  
+            string fontSize = string.Empty;
             if (_cssProperty.ContainsKey("font-size"))
             {
                 fontSize = " at " + _cssProperty["font-size"] + "pt";
@@ -635,7 +640,7 @@ namespace SIL.PublishingSolution
         {
             if (propertyValue == string.Empty)
             {
-                return; 
+                return;
             }
             //string color = "textcolor[RGB]" + propertyValue.Replace("#", "");   //:color=880000
             string color = ":color=" + propertyValue.Replace("#", "");   //:color=880000
@@ -659,7 +664,7 @@ namespace SIL.PublishingSolution
             int blue = int.Parse(cVal.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
 
 
-            _IDProperty["backgroundColor"] = rgb2cmyk(red,green,blue);
+            _IDProperty["backgroundColor"] = rgb2cmyk(red, green, blue);
 
         }
         public void Display(string propertyValue)
@@ -668,9 +673,9 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-          //  _fontStyle.Add(propertyValue);
+            //  _fontStyle.Add(propertyValue);
             _IDProperty["display"] = propertyValue;
-        }     
+        }
         public void ColumnCount(string propertyValue)
         {
             if (propertyValue == string.Empty || Common.ValidateAlphabets(propertyValue)
@@ -680,7 +685,7 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                _IDProperty["TextColumnCount"] = propertyValue;    
+                _IDProperty["TextColumnCount"] = propertyValue;
             }
         }
         public void ColumnGap(string propertyValue)
@@ -707,14 +712,13 @@ namespace SIL.PublishingSolution
             {
                 propertyValue = "";
             }
-            else if (propertyValue == "small-caps")
+            else if (propertyValue.ToLower() == "small-caps")
             {
-                propertyValue = ":+c2sc,+smcp";
+                propertyValue = "\\textsc";
             }
             _IDProperty["Capitalization"] = propertyValue;
-
-            if (propertyValue.Trim().Length > 0)
-                _fontOption.Add(propertyValue);
+            //_inlineStyle.Add(propertyValue);
+            _inlineInnerStyle.Add(propertyValue);
         }
         public void TextDecoration(string propertyValue)
         {
@@ -781,17 +785,31 @@ namespace SIL.PublishingSolution
                 _fontOption.Add(propertyValue);
         }
         public void TextAlign(string propertyValue)
-        {
+        {           
+            ////http://en.wikibooks.org/wiki/LaTeX/Formatting
+            //if (propertyValue == "center")
+            //{
+            //    propertyValue = "\\centering";
+            //}
+            //else if (propertyValue == "left")
+            //{
+            //    propertyValue = "\\raggedright";
+            //}
+            //else if (propertyValue == "right")
+            //{
+            //    propertyValue = "\\raggedleft";
+            //}
+
+            //if (propertyValue != "justify")
+            //{
+            //    _IDProperty["Justification"] = propertyValue;
+            //    _inlineStyle.Add(propertyValue);
+            //}
             if (propertyValue == string.Empty || propertyValue == "inherit")
             {
                 return;
             }
-
-            //if (propertyValue == "justify")
-            //{
-            //    propertyValue = "FullyJustified";
-            //}
-            //else 
+            
             if (propertyValue == "center")
             {
                 propertyValue = "\\centerline";
@@ -804,12 +822,15 @@ namespace SIL.PublishingSolution
             {
                 propertyValue = "\\rightline";
             }
-            else if (propertyValue == "justify")
+            //else if (propertyValue == "justify")
+            //{
+            //    propertyValue = "\\filcenter";
+            //}
+            if (propertyValue != "justify")
             {
-                propertyValue = "\\filcenter";
+                _IDProperty["Justification"] = propertyValue;
+                _inlineStyle.Add(propertyValue);
             }
-            _IDProperty["Justification"] = propertyValue;
-            _inlineStyle.Add(propertyValue);
         }
 
         public void FontSize(string propertyValue)
@@ -827,7 +848,7 @@ namespace SIL.PublishingSolution
 
             if (propertyValue == "larger")
                 _fontSize = " at 20pt";
-            else if(propertyValue == "smaller")
+            else if (propertyValue == "smaller")
                 _fontSize = " at 10pt";
             else
                 _fontSize = " at " + SetPropertyValue(string.Empty, propertyValue);
@@ -883,26 +904,26 @@ namespace SIL.PublishingSolution
                 return "0 0 0 1";
             }
 
-            computedC = 1 - (r/255);
-            computedM = 1 - (g/255);
-            computedY = 1 - (b/255);
+            computedC = 1 - (r / 255);
+            computedM = 1 - (g / 255);
+            computedY = 1 - (b / 255);
 
             var minCMY = Math.Min(computedC, Math.Min(computedM, computedY));
 
-            computedC = (computedC - minCMY)/(1 - minCMY);
-            computedM = (computedM - minCMY)/(1 - minCMY);
-            computedY = (computedY - minCMY)/(1 - minCMY);
+            computedC = (computedC - minCMY) / (1 - minCMY);
+            computedM = (computedM - minCMY) / (1 - minCMY);
+            computedY = (computedY - minCMY) / (1 - minCMY);
             computedK = minCMY;
             string cmyk = computedC + " " + computedM + " " + computedY + " " + computedK;
             return cmyk;
         }
         private string PercentageToEM(string propertyValue)
         {
-            if(propertyValue.IndexOf("%") > 0)
+            if (propertyValue.IndexOf("%") > 0)
             {
                 propertyValue = propertyValue.Replace("%", "");
                 float numericValue = Convert.ToInt32(propertyValue);
-                numericValue = numericValue/100;
+                numericValue = numericValue / 100;
                 propertyValue = numericValue + "em";
             }
             return propertyValue;
@@ -910,7 +931,7 @@ namespace SIL.PublishingSolution
 
         private string SetPropertyValue(string propertyName, string propertyValue)
         {
-            if(propertyName == "")
+            if (propertyName == "")
                 propertyValue = propertyName + propertyValue;
             else
                 propertyValue = propertyName + " " + propertyValue;
@@ -918,10 +939,10 @@ namespace SIL.PublishingSolution
             if (propertyValue.IndexOf("em") == -1)
             {
                 propertyValue = propertyValue + "pt";
-            } 
+            }
             return propertyValue;
         }
 
-           
+
     }
 }
