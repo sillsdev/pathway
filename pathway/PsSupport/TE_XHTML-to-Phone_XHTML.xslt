@@ -24,7 +24,7 @@
 	<xsl:key name="verses-by-chapter" match="xhtml:span[@class='Verse_Number']"
 			use="generate-id(preceding::xhtml:span[@class='Chapter_Number'][1])" />
 	<!-- Use a key to speed up the processing of the spans for each verse. -->
-	<xsl:key name="spans-by-verse" match="xhtml:span[not(@class) or @class='Inscription']"
+	<xsl:key name="spans-by-verse" match="xhtml:span[not(@class) or @class='Inscription' or @class='Quoted_Text' or @class='Words_Of_Christ']"
 			use="generate-id(preceding::xhtml:span[@class='Verse_Number'][1])" />
 
     <!-- Process the top element. -->
