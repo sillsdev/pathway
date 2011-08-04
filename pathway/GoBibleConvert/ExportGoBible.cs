@@ -146,36 +146,31 @@ namespace SIL.PublishingSolution
                 var sendToDir = Environment.GetFolderPath(Environment.SpecialFolder.System);
                 if (File.Exists(Path.Combine(sendToDir, "fsquirt.exe")))
                 {
-                    try
+                    // There is a bluetooth file transfer wizard on this machine - ask the user if they
+                    // want to run it.
+                    var sb = new StringBuilder();
+                    sb.AppendLine("Pathway has successfully exported the file to the Go Bible format.");
+                    sb.AppendLine("Do you want to start the Bluetooth file transfer wizard now?");
+                    sb.AppendLine();
+                    sb.Append("(When prompted for the file to transfer, select the file: ");
+                    sb.Append(result);
+                    sb.AppendLine(")");
+                    if (MessageBox.Show(sb.ToString(), "Pathway", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        using (Process exeProcess = Process.Start(Path.Combine(sendToDir, "fsquirt.exe")))
+                        try
                         {
-                            exeProcess.WaitForExit();
-                            autoSync = (exeProcess.ExitCode == ExitOk);
+                            using (Process exeProcess = Process.Start(Path.Combine(sendToDir, "fsquirt.exe")))
+                            {
+                                exeProcess.WaitForExit();
+                                autoSync = (exeProcess.ExitCode == ExitOk);
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show(e.ToString());
                         }
                     }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show(e.ToString());
-                    }
                 }
-                //foreach (string target in sendToTargets)
-                //{
-                //    if (target.ToLower().Contains("bluetooth"))
-                //    {
-                //        // found a candidate -- try to launch it
-                //        try
-                //        {
-                //            Process.Start(target, result);
-                //            autoSync = true;
-                //        }
-                //        catch(Exception e)
-                //        {
-                //            MessageBox.Show(e.ToString());
-                //        }
-                //        break;
-                //    }
-                //}
                 if (autoSync == false)
                 {
                     // Failed to send the .jar to a bluetooth device. Tell the user to do it manually.
