@@ -542,11 +542,13 @@ namespace SIL.Tool
         /// <returns>Replaced text</returns>
         public static string ReplaceSymbolToXelatexText(string value)
         {
-            //Task TD-2666 (Unicode value is 2260 = ?)
+            //Task TD-2666 (Unicode value is 2260 = ?) 
+            /* \char"03A9 */
 
             if (value.IndexOf("2260") >= 0)
             {
                 value = value.Replace("2260", "$\\neq$");
+                //value = value.Replace("2260", "\\char\"2260");
             }
             if (value.IndexOf("†") >= 0)
             {
@@ -555,6 +557,26 @@ namespace SIL.Tool
             if (value.IndexOf("‡") >= 0)
             {
                 value = value.Replace("‡", "$\\ddagger$");
+            }
+            if (value.IndexOf("201C") >= 0)
+            {
+                value = value.Replace("201C", "$“$");
+                //value = value.Replace("201C", "$\\textquotedblleft$");
+            }
+            if (value.IndexOf("201D") >= 0)
+            {
+                value = value.Replace("201D", "$”$");
+                //value = value.Replace("201D", "$\\textquotedblright$");
+            }
+            if (value.IndexOf("2018") >= 0)
+            {
+                value = value.Replace("2018", "$‘$");
+                //value = value.Replace("2018", "$\\textquoteleft$");
+            }
+            if (value.IndexOf("2019") >= 0)
+            {
+                value = value.Replace("2019", "$’$");
+                //value = value.Replace("2019", "$\\textquoteright$");
             }
             return value;
         }

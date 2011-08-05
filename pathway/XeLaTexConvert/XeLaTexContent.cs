@@ -543,7 +543,7 @@ namespace SIL.PublishingSolution
                     content = _chapterNo;
                     _isDropCap = false;
                 }
-                //content = Common.ReplaceSymbolToXelatexText(content);
+                content = Common.ReplaceSymbolToXelatexText(content);
                 
                 List<string> value = CreateInlineInnerStyle(characterStyle);
                 _xetexFile.Write(content);
