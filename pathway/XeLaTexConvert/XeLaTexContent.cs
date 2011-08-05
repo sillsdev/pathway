@@ -68,7 +68,9 @@ namespace SIL.PublishingSolution
         protected Stack<string> _braceInlineClass = new Stack<string>();
         protected Dictionary<string, int> _braceInlineClassCount = new Dictionary<string, int>();
         protected Stack<string> _mathStyleClass = new Stack<string>();
-        private List<string> _mathStyle = new List<string>();
+        private List<string> _mathStyle = new List<string>(); 
+        private int _inlineCount;
+
 
         #endregion
 
@@ -548,6 +550,10 @@ namespace SIL.PublishingSolution
                 List<string> value = CreateInlineInnerStyle(characterStyle);
                 _xetexFile.Write(content);
                 CloseInlineInnerStyle(value);
+                for (int i = 1; i <= _inlineCount; i++) // close braces for inline style
+                {
+                    _xetexFile.Write("}");
+                }
                 _xetexFile.Write("}");
             }
             AnchorBookMark();
@@ -641,7 +647,7 @@ namespace SIL.PublishingSolution
                         _xetexFile.Write(property);
                         _xetexFile.Write("{");
                     }
-
+                    _inlineCount = inlineStyle.Count;
                     if (inlineStyle.Count > 0)
                     {
                         _braceInlineClassCount[getStyleName] = inlineStyle.Count;
@@ -1187,19 +1193,12 @@ namespace SIL.PublishingSolution
             {
                 int count = _braceInlineClassCount[brace];
                 _braceInlineClassCount[brace] = 0;
-                for (int i = 0; i < count; i++)
-                {
-                    _xetexFile.Write("}");
-                }
+                //for (int i = 0; i < count; i++)
+                //{
+                //    _xetexFile.Write("}");
+                //}
                 StackPop(_braceInlineClass);
             }
-
-            //string clsbrace = StackPeek(_braceClass);
-            //if (clsbrace.Length != 0 && closeChildName == clsbrace)
-            //{
-            //    _xetexFile.Write("}");
-            //    StackPop(_braceClass);
-            //}
 
             string dollar = StackPeek(_mathStyleClass);
             if (dollar.Length != 0 && closeChildName == dollar)
