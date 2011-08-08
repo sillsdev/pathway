@@ -498,6 +498,9 @@
       <style:paragraph-properties fo:text-align="end" style:justify-single-word="false" />
     </style:style>
     <style:style style:name="MT1" style:family="text">
+      <style:text-properties style:font-name-complex="Gautami1" />
+    </style:style>
+    <style:style style:name="MT1" style:family="text">
       <style:text-properties style:font-name-complex="GenericFont" />
     </style:style>
     <style:style style:name="Mfr1" style:family="graphic" style:parent-style-name="Frame">
