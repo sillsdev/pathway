@@ -68,9 +68,9 @@ namespace SIL.PublishingSolution
         protected Stack<string> _braceInlineClass = new Stack<string>();
         protected Dictionary<string, int> _braceInlineClassCount = new Dictionary<string, int>();
         protected Stack<string> _mathStyleClass = new Stack<string>();
-        private List<string> _mathStyle = new List<string>(); 
+        private List<string> _mathStyle = new List<string>();
         private int _inlineCount;
-
+        private string _headerContent = string.Empty;
 
         #endregion
 
@@ -546,7 +546,6 @@ namespace SIL.PublishingSolution
                     _isDropCap = false;
                 }
                 content = Common.ReplaceSymbolToXelatexText(content);
-                
                 List<string> value = CreateInlineInnerStyle(characterStyle);
                 _xetexFile.Write(content);
                 CloseInlineInnerStyle(value);
@@ -575,7 +574,6 @@ namespace SIL.PublishingSolution
 
         private List<string> CreateInlineInnerStyle(string characterStyle)
         {
-            
             List<string> value = new List<string>();
             if (characterStyle.IndexOf("_") > 0)
             {
@@ -589,7 +587,6 @@ namespace SIL.PublishingSolution
                         if (value[i].IndexOf("$") == -1)
                             _xetexFile.Write("{");
                     }
-                    
                 }
             }
             //else if (_previousParagraphName.IndexOf("_") > 0)
