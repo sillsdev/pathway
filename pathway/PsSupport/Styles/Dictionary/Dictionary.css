@@ -301,6 +301,7 @@
         margin-top: 18pt;
         text-align: center;
         width: 100%;
+		page-break-after:avoid;
 }
 .LexEntrypublishStemParaHomographNumber :after {
         content: " ";
