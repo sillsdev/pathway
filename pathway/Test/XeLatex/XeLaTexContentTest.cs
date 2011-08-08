@@ -112,6 +112,16 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void Inherit()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "inherit";
+            ExportProcess(file);
+            FileCompare(file);
+        }
         
         [Test]
         [Category("SkipOnTeamCity")]

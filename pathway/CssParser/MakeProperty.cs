@@ -419,6 +419,7 @@ namespace SIL.PublishingSolution
 
         private void Numeric(StyleAttribute styleAttributeInfo)
         {
+            if (styleAttributeInfo.StringValue == "inherit") return;
             string attrValue = DeleteSeperator(styleAttributeInfo.StringValue);
 
             if (_dictFontSize.ContainsKey(attrValue))
@@ -515,7 +516,7 @@ namespace SIL.PublishingSolution
         {
             string attrValue = styleAttributeInfo.StringValue;
 
-            if (attrValue == "normal" || attrValue == "italic" || attrValue == "inherit")
+            if (attrValue == "normal" || attrValue == "italic")
             {
                 _cssProperty["font-style"] = attrValue;
             }

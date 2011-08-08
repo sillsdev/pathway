@@ -1,0 +1,21 @@
+.ta
+{
+    font-family: "Arial";
+	font-size: 20pt;
+	font-style: italic;
+	color: red;
+}
+.tb
+{
+	font-family: inherit;
+	font-size: inherit;
+	font-style: inherit;
+    color: blue;
+}
+.tc
+{
+    font: 200% "Times New Roman", serif;
+    color: green;
+}
+
+
