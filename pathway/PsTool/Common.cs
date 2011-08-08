@@ -39,11 +39,12 @@ namespace SIL.Tool
     public static partial class Common
     {
         #region Public variable
+
         public enum Action { New, Delete, Edit, Copy };
         public enum ProjType { Dictionary, Scripture };
         public enum OutputType { ODT, ODM, IDML, PDF, MOBILE, EPUB, XETEX, XELATEX };
         public static string SamplePath = string.Empty;
-        #endregion
+        
 
         //public static string SepParent = "-";
         //public static string SepAncestor = "--";
@@ -229,6 +230,7 @@ namespace SIL.Tool
         public static bool ShowMessage; // Show or Suppress MessageBox in Creating Zip Folder.
         public static bool fromPlugin; // To differentiate between Plugin or from UI
 
+        #endregion
 
         #region FillName(string cssFileWithPath)
         /// -------------------------------------------------------------------------------------------
@@ -417,6 +419,7 @@ namespace SIL.Tool
             return _languageName;
         }
         #endregion
+
         #region LeftString(string fullString, string splitString)
         /// <summary>
         /// Example: LeftString("Entry_Letdata", "_Letdata") returns "Entry"
@@ -1816,6 +1819,7 @@ namespace SIL.Tool
             return GetFiledWorksPath();
         }
         #endregion
+
         public static string GetProductName()
         {
             return Application.ProductName;

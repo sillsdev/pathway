@@ -565,7 +565,10 @@ namespace SIL.PublishingSolution
             {
                 for (int i = 0; i < value.Count; i++)
                 {
-                    _xetexFile.Write("}");
+                    if (value[i].IndexOf("$") == -1)
+                        _xetexFile.Write("}");
+                    else
+                        _xetexFile.Write("$}");
                 }
             }
         }
@@ -583,7 +586,8 @@ namespace SIL.PublishingSolution
                     for (int i = 0; i < value.Count; i++)
                     {
                         _xetexFile.Write(value[i]);
-                        _xetexFile.Write("{");
+                        if (value[i].IndexOf("$") == -1)
+                            _xetexFile.Write("{");
                     }
                     
                 }
@@ -732,13 +736,15 @@ namespace SIL.PublishingSolution
         private void WriteFootNoteMarker(string footerClassName, string content)
         {
             string markerClassName = footerClassName + "..footnote-marker";
-            string marker = string.Empty;
+            //string marker = string.Empty;
             if (_footnoteMarkerClass.StyleName == markerClassName)
-                marker = _footnoteMarkerClass.Content;
-            _xetexFile.Write("  \\footnote {" + marker + "} ");
-            _xetexFile.Write("{");
-            _xetexFile.Write(content);
-            _xetexFile.Write("}");
+            {
+                //marker = _footnoteMarkerClass.Content;
+                _xetexFile.Write("  \\footnote {" + content + "} ");
+            }
+            //_xetexFile.Write("{");
+            //_xetexFile.Write(content);
+            //_xetexFile.Write("}");
         }
 
         private void AnchorBookMark()

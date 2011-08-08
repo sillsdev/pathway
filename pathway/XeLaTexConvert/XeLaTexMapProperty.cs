@@ -456,19 +456,23 @@ namespace SIL.PublishingSolution
 
             if (propertyValue.ToLower() == "super")
             {
-                propertyValue = "$^$";
+                propertyValue = "$^{";                
             }
             else if (propertyValue.ToLower() == "sub")
             {
-                propertyValue = "$_$";
+                propertyValue = "$_{";
             }
             else if (propertyValue.ToLower() == "baseline")
             {
                 propertyValue = "";
             }
-
+            else
+            {
+                propertyValue = "";
+            }
             if (propertyValue.Trim().Length > 0)
-                _inlineStyle.Add(propertyValue);
+                //_inlineStyle.Add(propertyValue);
+                _inlineInnerStyle.Add(propertyValue);
 
         }
         public void TextTransform(string propertyValue)
