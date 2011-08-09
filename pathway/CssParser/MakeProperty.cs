@@ -502,10 +502,10 @@ namespace SIL.PublishingSolution
             {
                 _cssProperty["font-weight"] = "bold";
             }
-            else if (attrValue == "inherit")
-            {
-                _cssProperty["font-weight"] = "inherit";
-            }
+            //else if (attrValue == "inherit")
+            //{
+            //    _cssProperty["font-weight"] = "inherit";
+            //}
 
             //if (attrValue == "normal" || attrValue == "bold" || attrValue == "inherit")
             //{

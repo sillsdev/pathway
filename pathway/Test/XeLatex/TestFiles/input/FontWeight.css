@@ -1,0 +1,23 @@
+.ta
+{
+    font-family: "Arial";
+	font-size: 20pt;
+	font-weight:normal;
+	color: red;
+}
+.tb
+{
+	font-weight:bold;
+    color: blue;
+}
+.tc
+{
+	font-weight:lighter;
+    color: green;
+}
+
+.td
+{
+	font-weight:inherit;
+    color: brown;
+}

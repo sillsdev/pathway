@@ -133,6 +133,16 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void FontWeight()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "FontWeight";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         [Ignore]
         [Test]
         [Category("SkipOnTeamCity")]
