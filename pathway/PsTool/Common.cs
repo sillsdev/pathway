@@ -2674,5 +2674,35 @@ namespace SIL.Tool
             return fontName;
         }
 
+        public static string SetPropertyValue(string propertyName, string propertyValue)
+        {
+            if (propertyName == "")
+                propertyValue = propertyName + propertyValue;
+            else
+                propertyValue = propertyName + " " + propertyValue;
+
+            if (propertyValue.IndexOf("em") == -1)
+            {
+                propertyValue = propertyValue + "pt";
+            }
+
+            return propertyValue;
+        }
+
+        public static string PercentageToEm(string propertyValue)
+        {
+            if (propertyValue.IndexOf("%") > 0)
+            {
+                propertyValue = propertyValue.Replace("%", "");
+                float numericValue = Convert.ToInt32(propertyValue);
+                numericValue = numericValue / 100;
+                propertyValue = numericValue + "em";
+            }
+            else
+            {
+                propertyValue = propertyValue + "pt";
+            }
+            return propertyValue;
+        }
     }
 }

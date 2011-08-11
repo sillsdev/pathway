@@ -340,7 +340,7 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            propertyValue = SetPropertyValue("\\spaceskip", propertyValue);
+            propertyValue = Common.SetPropertyValue("\\spaceskip", propertyValue);
             _inlineStyle.Add(propertyValue);
             _IDProperty["WordSpacing"] = propertyValue;
         }
@@ -443,7 +443,7 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            propertyValue = SetPropertyValue("\\baselineskip", propertyValue);
+            propertyValue = Common.SetPropertyValue("\\baselineskip", propertyValue);
             _inlineStyle.Add(propertyValue);
             _IDProperty["Leading"] = propertyValue;
         }
@@ -471,7 +471,6 @@ namespace SIL.PublishingSolution
                 propertyValue = "";
             }
             if (propertyValue.Trim().Length > 0)
-                //_inlineStyle.Add(propertyValue);
                 _inlineInnerStyle.Add(propertyValue);
 
         }
@@ -565,7 +564,7 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            propertyValue = SetPropertyValue("\\leftskip", propertyValue);
+            propertyValue = Common.SetPropertyValue("\\leftskip", propertyValue);
             _IDProperty["Margin-Left"] = propertyValue;
             _inlineStyle.Add(propertyValue);
         }
@@ -575,7 +574,7 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            propertyValue = SetPropertyValue("\\rightskip", propertyValue);
+            propertyValue = Common.SetPropertyValue("\\rightskip", propertyValue);
             _IDProperty["Margin-Right"] = propertyValue;
             _inlineStyle.Add(propertyValue);
         }
@@ -585,7 +584,7 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            propertyValue = SetPropertyValue("\\topskip", propertyValue);
+            propertyValue = Common.SetPropertyValue("\\topskip", propertyValue);
             _inlineStyle.Add(propertyValue);
             _IDProperty["Margin-Top"] = propertyValue;
         }
@@ -636,7 +635,7 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                propertyValue = SetPropertyValue("\\parindent", propertyValue);
+                propertyValue = Common.SetPropertyValue("\\parindent", propertyValue);
             }
             _inlineStyle.Add(propertyValue);
         }
@@ -694,15 +693,23 @@ namespace SIL.PublishingSolution
         }
         public void ColumnGap(string propertyValue)
         {
-            if (propertyValue == string.Empty || Common.ValidateAlphabets(propertyValue)
-                || propertyValue.IndexOf('-') > -1)
+            //if (propertyValue == string.Empty || Common.ValidateAlphabets(propertyValue)
+            //    || propertyValue.IndexOf('-') > -1)
+            //{
+            //    _IDProperty["TextColumnGutter"] = "12";
+            //}
+            //else
+            //{
+            //    _IDProperty["TextColumnGutter"] = propertyValue;
+            //}
+
+            if (propertyValue == string.Empty)
             {
-                _IDProperty["TextColumnGutter"] = "12";
+                return;
             }
-            else
-            {
-                _IDProperty["TextColumnGutter"] = propertyValue;
-            }
+            propertyValue = "\\setlength\\columnseprule{" + propertyValue + "}";
+            _inlineStyle.Add(propertyValue);
+            _IDProperty["TextColumnGutter"] = propertyValue;
         }
 
         public void FontVariant(string propertyValue)
@@ -836,7 +843,7 @@ namespace SIL.PublishingSolution
             else if (propertyValue == "smaller")
                 _fontSize = " at 10pt";
             else
-                _fontSize = " at " + SetPropertyValue(string.Empty, propertyValue);
+                _fontSize = " at " + Common.SetPropertyValue(string.Empty, propertyValue);
         }
         /// <summary>
         /// 
@@ -910,24 +917,8 @@ namespace SIL.PublishingSolution
                 float numericValue = Convert.ToInt32(propertyValue);
                 numericValue = numericValue / 100;
                 propertyValue = numericValue + "em";
-            }
+            }            
             return propertyValue;
         }
-
-        private string SetPropertyValue(string propertyName, string propertyValue)
-        {
-            if (propertyName == "")
-                propertyValue = propertyName + propertyValue;
-            else
-                propertyValue = propertyName + " " + propertyValue;
-
-            if (propertyValue.IndexOf("em") == -1)
-            {
-                propertyValue = propertyValue + "pt";
-            }
-            return propertyValue;
-        }
-
-
     }
 }

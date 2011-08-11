@@ -438,6 +438,12 @@ namespace SIL.PublishingSolution
 
             if (columnCount == "2")
             {
+                if (IdAllClass["letData"]["column-gap"] != null)
+                {
+                    string propertyValue = Common.PercentageToEm(IdAllClass["letData"]["column-gap"]);
+                    _xetexFile.Write("\\setlength{\\columnsep}{" + propertyValue + "}");
+                    _xetexFile.Write("\\setlength\\columnseprule{" + "0.4pt" + "}");
+                }
                 string columnProperty = "\\begin{multicols}{" + columnCount + "}";
                 _xetexFile.Write(columnProperty);
                 columnCount = string.Empty;
@@ -659,9 +665,11 @@ namespace SIL.PublishingSolution
 
                     if (mergedParaStyle.IndexOf("headword") == 0 && content != null)
                     {
-                        //string headerFormat = "\\markright{" + content + "} \\markboth{" + content + "}";
-                        string headerFormat = "\\markboth{" + content + "} {" + content + "}" ;
+                        if (_headerContent.Trim().Length == 0)
+                            _headerContent = content;
+                        string headerFormat = "\\markboth{" + _headerContent + "}{" + _headerContent + "}";
                         _xetexFile.Write(headerFormat);
+                        _headerContent = content;
                     }
 
                     _xetexFile.Write("\\" + mergedParaStyle + "{");
@@ -865,18 +873,18 @@ namespace SIL.PublishingSolution
                 _xetexFile.WriteLine("");
                 _xetexFile.WriteLine("");
 
-                string p1 = @"\def\leftpicpar#1{\setbox0=\hbox{\XeTeXpicfile #1}";
-                string p2 = @"\dimen0=\wd0 \advance\dimen0 by 3pt";
-                string p3 = @"\count255=\ht0 \advance\count255 by \baselineskip";
-                string p4 = @"\divide\count255 by \baselineskip";
-                string p5 = @"\hangindent\dimen0 \hangafter-\count255";
-                string p6 = @"\noindent\llap{\vbox to 0pt{\kern-0.7\baselineskip\box0\vss}\kern3pt}";
-                string p7 = @"\indent\ignorespaces}";
+                //string p1 = @"\def\leftpicpar#1{\setbox0=\hbox{\XeTeXpicfile #1}";
+                //string p2 = @"\dimen0=\wd0 \advance\dimen0 by 3pt";
+                //string p3 = @"\count255=\ht0 \advance\count255 by \baselineskip";
+                //string p4 = @"\divide\count255 by \baselineskip";
+                //string p5 = @"\hangindent\dimen0 \hangafter-\count255";
+                //string p6 = @"\noindent\llap{\vbox to 0pt{\kern-0.7\baselineskip\box0\vss}\kern3pt}";
+                //string p7 = @"\indent\ignorespaces}";
 
-                _xetexFile.Write(p1 + p2 + p3 + p4 + p5 + p6 + p7);
-                _xetexFile.WriteLine("");
-                string wp = "\\leftpicpar{\"" + picFile + "\" scaled 400}";
-                _xetexFile.Write(wp);
+                //_xetexFile.Write(p1 + p2 + p3 + p4 + p5 + p6 + p7);
+                //_xetexFile.WriteLine("");
+                //string wp = "\\leftpicpar{\"" + picFile + "\" scaled 400}";
+                //_xetexFile.Write(wp);
                 _xetexFile.WriteLine("");
                 _xetexFile.WriteLine("");
                 _imageInsert = false;
