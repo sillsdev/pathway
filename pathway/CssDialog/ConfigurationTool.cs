@@ -545,14 +545,49 @@ namespace SIL.PublishingSolution
             get { return ddlChapterNumbers; }
         }
 
+        public Label LblReferences
+        {
+            get { return lblReferences; }
+        }
+
+        public ComboBox DdlReferences
+        {
+            get { return ddlReferences; }
+        }
+
+        public Label LblEpubFontsSection
+        {
+            get { return lblEpubFontsSection; }
+        }
+
+        public PictureBox PicFonts
+        {
+            get { return picFonts; }
+        }
+
+        public Label LblDefaultFont
+        {
+            get { return lblDefaultFont; }
+        }
+
         public ComboBox DdlDefaultFont
         {
             get { return ddlDefaultFont; }
         }
 
+        public Label LblMissingFont
+        {
+            get { return lblMissingFont; }
+        }
+
         public ComboBox DdlMissingFont
         {
             get { return ddlMissingFont; }
+        }
+
+        public Label LblNonSILFont
+        {
+            get { return lblNonSILFont; }
         }
 
         public ComboBox DdlNonSILFont
@@ -905,6 +940,12 @@ namespace SIL.PublishingSolution
         private void ddlChapterNumbers_SelectedIndexChanged(object sender, EventArgs e)
         {
             _CToolBL.ddlChapterNumbers_SelectedIndexChangedBL(sender, e);
+            EditOthersCSS(sender, e);
+        }
+
+        private void ddlReferences_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _CToolBL.ddlReferences_SelectedIndexChangedBL(sender, e);
             EditOthersCSS(sender, e);
         }
 

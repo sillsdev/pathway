@@ -858,8 +858,9 @@ namespace SIL.PublishingSolution
                 else if (MediaType.ToLower() == "others")
                 {
                     XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
-                    cTool.LblChapterNumbers.Visible = (inputTypeBL == "Scripture");
-                    cTool.DdlChapterNumbers.Visible = (inputTypeBL == "Scripture");
+                    // show/hide epub UI controls based on the input type
+                    SetEpubUIControls(inputTypeBL == "Scripture");
+                    
                     foreach (XmlNode VARIABLE in baseNode1)
                     {
                         string attribName = VARIABLE.Attributes["name"].Value.ToLower();
@@ -894,6 +895,9 @@ namespace SIL.PublishingSolution
                                 break;
                             case "chapternumbers":
                                 cTool.DdlChapterNumbers.SelectedItem = attribValue;
+                                break;
+                            case "references":
+                                cTool.DdlReferences.SelectedItem = attribValue;
                                 break;
                             case "defaultfont":
                                 cTool.DdlDefaultFont.SelectedItem = attribValue;
@@ -1086,6 +1090,11 @@ namespace SIL.PublishingSolution
                                     cTool.DdlChapterNumbers.Items.Add(ctn.Text);
                                 break;
 
+                            case "References":
+                                if (!cTool.DdlReferences.Items.Contains(ctn.Text))
+                                    cTool.DdlReferences.Items.Add(ctn.Text);
+                                break;
+
                             case "DefaultAlignment":
                                 if (!cTool.DdlDefaultAlignment.Items.Contains(ctn.Text))
                                     cTool.DdlDefaultAlignment.Items.Add(ctn.Text);
@@ -1269,8 +1278,9 @@ namespace SIL.PublishingSolution
                     cTool.TabControl1.TabPages.Insert(1, tabothers);
                     
                     XmlNodeList baseNode = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
-                    cTool.LblChapterNumbers.Visible = (inputTypeBL == "Scripture");
-                    cTool.DdlChapterNumbers.Visible = (inputTypeBL == "Scripture");
+                    // show/hide chapter numbers and references UI
+                    SetEpubUIControls(inputTypeBL == "Scripture");
+
                     foreach (XmlNode VARIABLE in baseNode)
                     {
                         string attribName = VARIABLE.Attributes["name"].Value.ToLower();
@@ -1303,6 +1313,9 @@ namespace SIL.PublishingSolution
                             case "chapternumbers":
                                 cTool.DdlChapterNumbers.SelectedItem = attribValue;
                                 break;
+                            case "references":
+                                cTool.DdlReferences.SelectedItem = attribValue;
+                                break;
                             case "defaultfont":
                                 cTool.DdlDefaultFont.SelectedItem = attribValue;
                                 break;
@@ -1325,6 +1338,31 @@ namespace SIL.PublishingSolution
                     ShowCssSummary();
                     break;
             }
+        }
+
+        /// <summary>
+        /// Helper method to show or hide elements on the epub properties tab based on
+        /// whether or not the user is editing a scripture stylesheet.
+        /// </summary>
+        /// <param name="showScriptureControls"></param>
+        private void SetEpubUIControls(bool showScriptureControls)
+        {
+            // show/hide chapter numbers and references UI
+            cTool.LblChapterNumbers.Visible = showScriptureControls;
+            cTool.DdlChapterNumbers.Visible = showScriptureControls;
+            cTool.LblReferences.Visible = showScriptureControls;
+            cTool.DdlReferences.Visible = showScriptureControls;
+            // set position for embedded font controls (they need to move up if the other items are hidden)
+            cTool.LblEpubFontsSection.Top = (showScriptureControls) ? cTool.DdlReferences.Bottom + 10 : cTool.DdlTocLevel.Bottom + 10;
+            cTool.PicFonts.Top = cTool.LblEpubFontsSection.Bottom + 3;
+            cTool.ChkEmbedFonts.Top = cTool.PicFonts.Top;
+            cTool.ChkIncludeFontVariants.Top = cTool.ChkEmbedFonts.Bottom + 6;
+            cTool.DdlMissingFont.Top = cTool.ChkIncludeFontVariants.Bottom + 6;
+            cTool.LblMissingFont.Top = cTool.DdlMissingFont.Top + 3;
+            cTool.DdlNonSILFont.Top = cTool.DdlMissingFont.Bottom + 6;
+            cTool.LblNonSILFont.Top = cTool.DdlNonSILFont.Top + 3;
+            cTool.DdlDefaultFont.Top = cTool.DdlNonSILFont.Bottom + 6;
+            cTool.LblDefaultFont.Top = cTool.DdlDefaultFont.Top + 3;
         }
 
         //Note - Check This
@@ -2624,6 +2662,16 @@ namespace SIL.PublishingSolution
             try
             {
                 Param.UpdateOthersAtrrib("ChapterNumbers", cTool.DdlChapterNumbers.Text, StyleName);
+                SetOthersSummary(sender, e);
+            }
+            catch { }
+        }
+
+        public void ddlReferences_SelectedIndexChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                Param.UpdateOthersAtrrib("References", cTool.DdlReferences.Text, StyleName);
                 SetOthersSummary(sender, e);
             }
             catch { }

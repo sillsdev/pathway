@@ -157,6 +157,10 @@
       <option name="Drop Cap" file="Empty.css" />
       <option name="Left Margin" file="Empty.css" />
     </feature>
+    <feature name="References">
+      <option name="After Each Section" file="Empty.css" />
+      <option name="At End of Document" file="Empty.css" />
+    </feature>
     <feature name="Lic_Other">
       <option name="Draft" file="Draft.xhtml"/>
       <option name="Non-Commercial Share Alike" file="CC-by-nc-sa.xhtml"/>
@@ -315,6 +319,7 @@
         <styleProperty name="DefaultLineHeight" value="125" />
         <styleProperty name="DefaultAlignment" value="Justify" />
         <styleProperty name="ChapterNumbers" value="Drop Cap" />
+        <styleProperty name="References" value="After Each Section" />
         <styleProperty name="MaxImageWidth" value="600" />
         <styleProperty name="EmbedFonts" value="Yes"/>
         <styleProperty name="IncludeFontVariants" value="Yes" />
