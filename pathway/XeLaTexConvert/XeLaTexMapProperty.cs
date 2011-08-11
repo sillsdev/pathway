@@ -790,25 +790,6 @@ namespace SIL.PublishingSolution
         }
         public void TextAlign(string propertyValue)
         {           
-            ////http://en.wikibooks.org/wiki/LaTeX/Formatting
-            //if (propertyValue == "center")
-            //{
-            //    propertyValue = "\\centering";
-            //}
-            //else if (propertyValue == "left")
-            //{
-            //    propertyValue = "\\raggedright";
-            //}
-            //else if (propertyValue == "right")
-            //{
-            //    propertyValue = "\\raggedleft";
-            //}
-
-            //if (propertyValue != "justify")
-            //{
-            //    _IDProperty["Justification"] = propertyValue;
-            //    _inlineStyle.Add(propertyValue);
-            //}
             if (propertyValue == string.Empty || propertyValue == "inherit")
             {
                 return;

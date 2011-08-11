@@ -567,7 +567,7 @@ namespace SIL.PublishingSolution
                     if (value[i].IndexOf("$") == -1)
                         _xetexFile.Write("}");
                     else
-                        _xetexFile.Write("$}");
+                        _xetexFile.Write("}$");
                 }
             }
         }
@@ -659,8 +659,8 @@ namespace SIL.PublishingSolution
 
                     if (mergedParaStyle.IndexOf("headword") == 0 && content != null)
                     {
-                        string headerFormat = "\\markright{" + content + "} \\markboth{" + content + "}";
-                        //string headerFormat = "\\markboth{" + content + "}{" + content + "}" ;
+                        //string headerFormat = "\\markright{" + content + "} \\markboth{" + content + "}";
+                        string headerFormat = "\\markboth{" + content + "} {" + content + "}" ;
                         _xetexFile.Write(headerFormat);
                     }
 

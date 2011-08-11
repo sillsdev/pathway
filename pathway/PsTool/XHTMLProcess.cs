@@ -505,11 +505,7 @@ namespace SIL.PublishingSolution
                 _isNewParagraph = true;
                 _isParagraphClosed = true;
                 
-				if (_outputType == Common.OutputType.XELATEX)
-                {
-                    _xetexFile.WriteLine();
-                }
-                else if (_outputType == Common.OutputType.XETEX)
+                if (_outputType == Common.OutputType.XETEX || _outputType == Common.OutputType.XELATEX)
                 {
                     _xetexFile.WriteLine();
                 }
@@ -1098,7 +1094,7 @@ namespace SIL.PublishingSolution
             //{
             //    ParentClass[_matchedCssStyleName] = _parentStyleName + "||" + _tagType;
             //}
-            if (_outputType != Common.OutputType.XETEX)
+            if (_outputType != Common.OutputType.XETEX && _outputType != Common.OutputType.XELATEX)
             {
                 _matchedCssStyleName.Replace(Common.sepPrecede, "");
                 _matchedCssStyleName.Replace(Common.SepParent, "");
