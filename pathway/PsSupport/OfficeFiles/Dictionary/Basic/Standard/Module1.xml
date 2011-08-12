@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Jun-27-2011 for TD-2521(Exporting Gondwana data with default options crashes Libre Office)
+&apos;Changed On Aug-12-2011 for TD-2582(Reversal guide words wrong)
 
 &apos;Define the values to Constant Variables for First Guide word, Last Guide word ,Headword Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -30,14 +30,41 @@ Sub StartDontForget
 	
 	AlingOverlappingImages()
 	
+	HideODMVariable()
+	
 	oDoc = ThisComponent 
 	oDoc.store() 
-	
+		
 	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; And Len(Trim(OutputFormat)) &gt; 0 Then
 		ExportToDOC_PDF
 	End IF
-
 End Sub
+
+Sub HideODMVariable
+PageCount = TotalPages
+ThisComponent.currentController.getViewCursor().jumpToPage(PageCount)
+
+
+dim document   as object
+dim dispatcher as object
+
+document   = ThisComponent.CurrentController.Frame
+dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
+
+dim args1(0) as new com.sun.star.beans.PropertyValue
+args1(0).Name = "Text"
+args1(0).Value = " "
+
+dispatcher.executeDispatch(document, ".uno:InsertText", "", 0, args1())
+
+dispatcher.executeDispatch(document, ".uno:SwBackspace", "", 0, Array())
+
+'msgbox PageCount
+
+'oDoc = ThisComponent 
+'LGuide = oDoc.getTextFieldMasters().getByName("com.sun.star.text.fieldmaster.SetExpression.Right_Guideword_R")
+'LGuide.DependentTextFields(1).Content = "Changed"
+end sub
 
 &apos;Create Progress bar
 Sub ShowProcessingDialog() 
