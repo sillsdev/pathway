@@ -337,7 +337,8 @@ namespace SIL.PublishingSolution
             }
             else if (value.ToLower() == "none")
             {
-                _isDisplayNone = true;
+                if (_outputType != Common.OutputType.ODT)
+                    _isDisplayNone = true;
                 _displayNoneStyle = Common.LeftString(_classNameWithLang, Common.SepParent);
             }
         }

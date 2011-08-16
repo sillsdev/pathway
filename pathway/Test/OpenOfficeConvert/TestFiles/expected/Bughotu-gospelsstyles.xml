@@ -25,7 +25,7 @@
   <office:styles>
     <style:style style:name="scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="scrBookName_scrBook_scrBody" style:family="text" style:parent-style-name="scrBook_scrBody">
-      <style:text-properties text:display="true" fo:language="none" fo:country="none" />
+      <style:text-properties text:display="none" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="TitleMain_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrBook_scrBody">
       <style:paragraph-properties fo:text-align="center" fo:text-indent="0pt" fo:margin-left="0pt" style:line-spacing="2pt" fo:padding-bottom="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="36pt" />
@@ -291,7 +291,7 @@
     </style:style>
     <style:style style:name="scrBook" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="scrBookName" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties text:display="true" />
+      <style:text-properties text:display="none" />
     </style:style>
     <style:style style:name="scrIntroSection" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-align="left" />
