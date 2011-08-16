@@ -1,0 +1,80 @@
+.Chapter_Number
+{
+font-weight: bold;
+font-size: 18pt;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+
+.Verse_Number
+{
+font-size: 12pt;
+vertical-align: super;
+}
+
+.Paragraph
+{
+font-size: 12pt;
+text-indent: .125pt;
+}
+
+.See_In_Glossary
+{
+font-size: 12pt;
+color: #ff00ff;
+font-weight: bold;
+font-style: italic;
+}
+
+.Chapter_Number {
+    font-weight: bolder;
+    vertical-align: top;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    padding-right: 2pt;
+    float: left;
+    string-set: chapter content() ":";
+}
+
+.Paragraph {
+    text-indent: 12pt;
+    margin-left: 0pt;
+}
+
+.Paragraph1 {
+    margin-left: 0pt;
+}
+
+.See_In_Glossary {
+    color: blue;
+}
+
+span {
+    prince-text-replace: "<<" "\201C" ">>" "\201D" "<" "\2018" ">" "\2019";
+}
+
+
+.Verse_Number {
+    vertical-align: super;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    string-set: verse content();
+}
+.Verse_Number_In_Note {
+    vertical-align: super;
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.Verse_Number1 {
+    display: none;
+}
+.Section_Head {
+page-break-after:avoid;
+}
+.Chapter_Number {
+page-break-after:avoid;
+}
+.Parallel_Passage_Reference {
+page-break-after:avoid;
+}

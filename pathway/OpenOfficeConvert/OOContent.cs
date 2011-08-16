@@ -662,11 +662,11 @@ namespace SIL.PublishingSolution
             //_writer.WriteString(data);
             if (!_isWhiteSpace && !_pseudoSingleSpace)
             {
-                //_writer.WriteStartElement("text:s");
-                //_writer.WriteAttributeString("text:c", "1");
-                //_writer.WriteEndElement();
-                //_isWhiteSpace = true;
-                _writer.WriteString("");
+                _writer.WriteStartElement("text:s");
+                _writer.WriteAttributeString("text:c", "1");
+                _writer.WriteEndElement();
+                _isWhiteSpace = true;
+                //_writer.WriteString(" ");
             }
         }
 
