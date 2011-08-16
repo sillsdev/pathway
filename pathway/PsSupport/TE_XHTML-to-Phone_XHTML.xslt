@@ -24,8 +24,41 @@
 	<xsl:key name="verses-by-chapter" match="xhtml:span[@class='Verse_Number']"
 			use="generate-id(preceding::xhtml:span[@class='Chapter_Number'][1])" />
 	<!-- Use a key to speed up the processing of the spans for each verse. -->
-	<xsl:key name="spans-by-verse" match="xhtml:span[not(@class) or @class='Inscription' or @class='Quoted_Text' or @class='Words_Of_Christ']"
-			use="generate-id(preceding::xhtml:span[@class='Verse_Number'][1])" />
+	<!-- Note that this key needs to incorporate all the character-level markup that appears inside a verse. I've done the following from the USFM reference:
+		\add... > "Supplied"
+		\bk... > "Book_Title_In_Text"
+		\dc... > "dc"
+		\k... > "Key_Word"
+		\nd... > "Name_Of_God"
+		\ord... > "Ordinal_Number_Ending"
+		\pn... > "pn"
+		\qt... > "Quoted_Text"
+		\sig... > "Hand"
+		\sls... > "sls"
+		\tl... > "Foreign"
+		\wj... > "Words_Of_Christ"
+		(and the following poetry styles)
+		\qac... > "qac"
+	There is also an Inscription class that was already listed; this could be a class in TE. If you come across other missing text elements, 
+	it could be that they are using a style that isn't listed here, and you'll need to add them with another "or" case in the match exptession.
+	-->
+	<xsl:key name="spans-by-verse" 
+		match="xhtml:span[not(@class) 
+			or @class='Inscription' 
+			or @class='Quoted_Text'
+			or @class='Supplied' 
+			or @class='Book_Title_In_Text' 
+			or @class='dc' 
+			or @class='Name_Of_God'
+			or @class='Ordinal_Number_Ending'
+			or @class='Key_Word' 
+			or @class='Hand' 
+			or @class='Foreign' 
+			or @class='qac' 
+			or @class='sls' 
+			or @class='pn' 
+			or @class='Words_Of_Christ']"
+		use="generate-id(preceding::xhtml:span[@class='Verse_Number'][1])" />
 
     <!-- Process the top element. -->
     <xsl:template match="xhtml:html">
