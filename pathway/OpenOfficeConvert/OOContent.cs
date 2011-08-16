@@ -2004,6 +2004,8 @@ namespace SIL.PublishingSolution
                     if (HoriAlignment.Length > 0)
                     {
                         anchorType = "paragraph";
+                        if (HoriAlignment == "top" || HoriAlignment == "bottom")
+                            anchorType = "page";
                         _writer.WriteAttributeString("text:anchor-type", anchorType);
                         _writer.WriteAttributeString("draw:z-index", "1");
                     }
