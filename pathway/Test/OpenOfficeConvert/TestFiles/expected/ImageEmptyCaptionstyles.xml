@@ -330,33 +330,7 @@
   </office:automatic-styles>
   <office:master-styles>
     <style:master-page style:name="Standard" style:page-layout-name="pm1" />
-    <style:master-page style:name="First_20_Page" style:display-name="First Page" style:next-style-name="XHTML" style:page-layout-name="pm3">
-      <style:header>
-        <text:p text:style-name="Header">
-          <text:tab />
-          <text:tab />
-        </text:p>
-      </style:header>
-      <style:footer>
-        <text:p text:style-name="Footer">
-          <text:tab />
-          <text:tab />
-        </text:p>
-      </style:footer>
-    </style:master-page>
-    <style:master-page style:name="XHTML" style:page-layout-name="pm2" style:next-style-name="XHTML">
-      <style:header>
-        <text:p text:style-name="Header">
-          <text:tab />
-          <text:tab />
-        </text:p>
-      </style:header>
-      <style:footer>
-        <text:p text:style-name="Footer">
-          <text:tab />
-          <text:tab />
-        </text:p>
-      </style:footer>
-    </style:master-page>
+    <style:master-page style:name="First_20_Page" style:display-name="First Page" style:next-style-name="XHTML" style:page-layout-name="pm3" />
+    <style:master-page style:name="XHTML" style:page-layout-name="pm2" style:next-style-name="XHTML" />
   </office:master-styles>
 </office:document-styles>
