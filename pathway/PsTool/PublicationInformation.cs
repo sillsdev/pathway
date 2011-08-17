@@ -264,7 +264,8 @@ namespace SIL.Tool
             XmlNode returnNode = null;
             try
             {
-                returnNode = GetRootNode().SelectSingleNode(xPath);
+                if (GetRootNode() != null)
+                    returnNode = GetRootNode().SelectSingleNode(xPath);
             }
             catch
             {
@@ -534,6 +535,7 @@ namespace SIL.Tool
         /// <param name="dictionaryExplorer">The Solution Explorer</param>
         public void PopulateDicExplorer(TreeView dictionaryExplorer)
         {
+            if (dictionaryExplorer == null) return;
             dictionaryExplorer.Nodes.Clear();
             var projNode = new TreeNode
                                {
