@@ -581,6 +581,10 @@ namespace SIL.Tool
                 value = value.Replace("2019", "$’$");
                 //value = value.Replace("2019", "$\\textquoteright$");
             }
+            if (value.IndexOf("#") >= 0)
+            {
+                value = value.Replace("#", "$\\sharp$");
+            }
             return value;
         }
 

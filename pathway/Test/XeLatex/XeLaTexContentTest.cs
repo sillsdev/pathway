@@ -706,6 +706,16 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void HashSymbolTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "HashSymbol";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
 
         #endregion
 

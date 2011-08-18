@@ -1,0 +1,38 @@
+
+.letter {
+     direction: ltr;
+     font-family: "Gautami",serif;
+     font-size: 24pt;
+     font-weight: bold;
+     margin-bottom: 18pt;
+     margin-top: 18pt;
+     text-align: center;
+     width: 100%;
+}
+
+
+
+.entry {
+     counter-reset: sense;
+     font-family: "Times New Roman",serif;
+     font-size: 10pt;
+     margin-left: 36pt;
+     padding-bottom: 2pt;
+     padding-left: 9pt;
+     padding-top: 1pt;
+     text-indent: -36pt;
+}
+
+.letData {
+     -moz-column-count: 2;
+     -moz-column-gap: 12pt;
+}
+
+.revData {
+     -moz-column-count: 2;
+     -moz-column-gap: 12pt;
+}
+
+
+
+
