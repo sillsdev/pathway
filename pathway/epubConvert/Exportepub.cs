@@ -70,6 +70,8 @@ namespace SIL.PublishingSolution
 //        protected static PostscriptLanguage _postscriptLanguage = new PostscriptLanguage();
         protected string _inputType = "dictionary";
 
+        public const string ReferencesFilename = "zzReferences.xhtml";
+
         // property implementations
         public string Title { get; set; }
         public string Creator { get; set; }
@@ -93,6 +95,7 @@ namespace SIL.PublishingSolution
         public string DefaultFont { get; set; }
         public string DefaultAlignment { get; set; }
         public string ChapterNumbers { get; set; }
+        public string References { get; set; }
         public FontHandling MissingFont { get; set; } // note that this doesn't use all the enum values
         public FontHandling NonSilFont { get; set; }
 
@@ -195,14 +198,8 @@ namespace SIL.PublishingSolution
                 // pull in the style settings
                 LoadPropertiesFromSettings();
 
-                // transform the XHTML content with our XSLT. Currently this does the following:
-                // - strips out "lang" tags from <span> elements (.epub doesn't like them there)
-                // - strips out <meta> tags (.epub chokes on the filename IIRC.  TODO: verify the problem here)
-                // - adds an "id" in each Chapter_Number span, so we can link to it from the TOC
-                string cvFileName = Path.GetFileNameWithoutExtension(preProcessor.ProcessedXhtml) + "_";
-                string xsltFullName = Common.FromRegistry("TE_XHTML-to-epub_XHTML.xslt");
-//                string temporaryCvFullName = Common.PathCombine(tempFolder, cvFileName + ".xhtml");
-                restructuredFullName = Path.Combine(outputFolder, cvFileName + ".xhtml");
+                // Make a local copy of the epub xslt. 
+                string xsltFullName = GetXsltFile();
 
                 // EDB 10/22/2010
                 // HACK: we need the preprocessed image file names (preprocessor.imageprocess()), but
@@ -301,6 +298,13 @@ namespace SIL.PublishingSolution
                 }
                 inProcess.PerformStep();
 
+                // extract references file if specified
+                if (References.Contains("End") && _inputType.ToLower().Equals("scripture"))
+                {
+                    CreateReferencesFile(contentFolder, preProcessor.ProcessedXhtml);
+                    splitFiles.Add(Path.Combine(contentFolder, ReferencesFilename));
+                }
+
                 // -- Font handling --
                 // First, get the list of fonts used in this project
                 BuildFontsList();
@@ -346,81 +350,8 @@ namespace SIL.PublishingSolution
                 FixRelativeHyperlinks(contentFolder, inProcess);
                 inProcess.PerformStep();
 
-                // copy over the image files
-                string[] imageFiles = Directory.GetFiles(tempFolder);
-                bool renamedImages = false;
-                Image image;
-                foreach (string file in imageFiles)
-                {
-                    switch (Path.GetExtension(file) == null ? "" : Path.GetExtension(file).ToLower())
-                    {
-                        case ".jpg":
-                        case ".jpeg":
-                        case ".gif":
-                        case ".png":
-                            // .epub supports this image format - just copy the thing over
-                            string name = Path.GetFileName(file);
-                            string dest = Common.PathCombine(contentFolder, name);
-                            // sanity check - if the image is gigantic, scale it
-                            image = Image.FromFile(file);
-                            if (image.Width > MaxImageWidth)
-                            {
-                                // need to scale image
-                                var img = ResizeImage(image);
-                                switch (Path.GetExtension(file).ToLower())
-                                {
-                                    case ".jpg": 
-                                    case ".jpeg":
-                                        img.Save(dest, System.Drawing.Imaging.ImageFormat.Jpeg);
-                                        break;
-                                    case ".gif":
-                                        img.Save(dest, System.Drawing.Imaging.ImageFormat.Gif);
-                                        break;
-                                    default:
-                                        img.Save(dest, System.Drawing.Imaging.ImageFormat.Png);
-                                        break;
-                                }
-                            }
-                            else
-                            {
-                                File.Copy(file, dest);
-                            }
-                            break;
-                        case ".bmp":
-                        case ".tif":
-                        case ".tiff":
-                        case ".ico":
-                        case ".wmf":
-                        case ".pcx":
-                        case ".cgm":
-                            // TE (and others?) support these file types, but .epub doesn't -
-                            // convert them to .png if we can
-                            var imageName = Path.GetFileNameWithoutExtension(file) + ".png";
-                            using (var fileStream = new FileStream(Common.PathCombine(contentFolder, imageName), FileMode.CreateNew))
-                            {
-                                image = Image.FromFile(file);
-                                if (image.Width > MaxImageWidth)
-                                {
-                                    var img = ResizeImage(image);
-                                    img.Save(fileStream, System.Drawing.Imaging.ImageFormat.Png);
-                                }
-                                else
-                                {
-                                    image.Save(fileStream, System.Drawing.Imaging.ImageFormat.Png);
-                                }
-                            }
-                            renamedImages = true;
-                            break;
-                        default:
-                            // not an image file (or not one we recognize) - skip
-                            break;
-                    }
-                }
-                // be sure to clean up any hyperlink references to the old file types
-                if (renamedImages)
-                {
-                    CleanupImageReferences(contentFolder);
-                }
+                // process and copy over the image files
+                ProcessImages(tempFolder, contentFolder);
                 inProcess.PerformStep();
 
                 // generate the toc / manifest files
@@ -464,8 +395,346 @@ namespace SIL.PublishingSolution
         }
 
         #region Private Functions
+        #region Property persistence
+        /// <summary>
+        /// Loads the settings file and pulls out the values we look at.
+        /// </summary>
+        private void LoadPropertiesFromSettings()
+        {
+            // Load User Interface Collection Parameters
+            Param.LoadSettings();
+            string organization;
+            try
+            {
+                // get the organization
+                organization = Param.Value["Organization"];
+            }
+            catch (Exception)
+            {
+                // shouldn't happen (ExportThroughPathway dialog forces the user to select an organization), 
+                // but just in case, specify a default org.
+                organization = "SIL International";
+            }
+            string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
+            Dictionary<string, string> othersfeature = Param.GetItemsAsDictionary("//stylePick/styles/others/style[@name='" + layout + "']/styleProperty");
+            // Title (book title in Configuration Tool UI / dc:title in metadata)
+            Title = Param.GetMetadataValue(Param.Title, organization) ?? ""; // empty string if null / not found
+            // Creator (dc:creator))
+            Creator = Param.GetMetadataValue(Param.Creator, organization) ?? ""; // empty string if null / not found
+            // information
+            Description = Param.GetMetadataValue(Param.Description, organization) ?? ""; // empty string if null / not found
+            // Source
+            Source = Param.GetMetadataValue(Param.Source, organization) ?? ""; // empty string if null / not found
+            // Format
+            Format = Param.GetMetadataValue(Param.Format, organization) ?? ""; // empty string if null / not found
+            // Publisher
+            Publisher = Param.GetMetadataValue(Param.Publisher, organization) ?? ""; // empty string if null / not found
+            // Coverage
+            Coverage = Param.GetMetadataValue(Param.Coverage, organization) ?? ""; // empty string if null / not found
+            // Rights (dc:rights)
+            Rights = Param.GetMetadataValue(Param.CopyrightHolder, organization) ?? ""; // empty string if null / not found
+            // embed fonts
+            if (othersfeature.ContainsKey("EmbedFonts"))
+            {
+                EmbedFonts = (othersfeature["EmbedFonts"].Trim().Equals("Yes")) ? true : false;
+            }
+            else
+            {
+                // default - we're more concerned about accurate font rendering than size
+                EmbedFonts = true;
+            }
+            if (othersfeature.ContainsKey("IncludeFontVariants"))
+            {
+                IncludeFontVariants = (othersfeature["IncludeFontVariants"].Trim().Equals("Yes")) ? true : false;
+            }
+            else
+            {
+                IncludeFontVariants = true;
+            }
+            if (othersfeature.ContainsKey("MaxImageWidth"))
+            {
+                try
+                {
+                    MaxImageWidth = int.Parse(othersfeature["MaxImageWidth"].Trim());
+                }
+                catch (Exception)
+                {
+                    MaxImageWidth = 600;
+                }
+            }
+            else
+            {
+                MaxImageWidth = 600;
+            }
+            // TOC Level
+            if (othersfeature.ContainsKey("TOCLevel"))
+            {
+                TocLevel = othersfeature["TOCLevel"].Trim();
+            }
+            else
+            {
+                TocLevel = "";
+            }
+            // Default Font
+            if (othersfeature.ContainsKey("DefaultFont"))
+            {
+                DefaultFont = othersfeature["DefaultFont"].Trim();
+            }
+            else
+            {
+                DefaultFont = "Charis SIL";
+            }
+            // Default Alignment
+            if (othersfeature.ContainsKey("DefaultAlignment"))
+            {
+                DefaultAlignment = othersfeature["DefaultAlignment"].Trim();
+            }
+            else
+            {
+                DefaultAlignment = "Justified";
+            }
+            // Chapter Numbers
+            if (othersfeature.ContainsKey("ChapterNumbers"))
+            {
+                ChapterNumbers = othersfeature["ChapterNumbers"].Trim();
+            }
+            else
+            {
+                ChapterNumbers = "Drop Cap"; // default
+            }
 
-        #region MergedCSSHandling
+            // Chapter Numbers
+            if (othersfeature.ContainsKey("References"))
+            {
+                References = othersfeature["References"].Trim();
+            }
+            else
+            {
+                References = "After Each Section"; // default
+            }
+
+            // base font size
+            if (othersfeature.ContainsKey("BaseFontSize"))
+            {
+                try
+                {
+                    BaseFontSize = int.Parse(othersfeature["BaseFontSize"].Trim());
+                }
+                catch (Exception)
+                {
+                    BaseFontSize = 13;
+                }
+            }
+            else
+            {
+                BaseFontSize = 13;
+            }
+            // default line height
+            if (othersfeature.ContainsKey("DefaultLineHeight"))
+            {
+                try
+                {
+                    DefaultLineHeight = int.Parse(othersfeature["DefaultLineHeight"].Trim());
+                }
+                catch (Exception)
+                {
+                    DefaultLineHeight = 125;
+                }
+            }
+            else
+            {
+                DefaultLineHeight = 125;
+            }
+            // Missing Font
+            // Note that the Embed Font enum value doesn't apply here (if it were to appear, we'd fall to the Default
+            // "Prompt user" case
+            if (othersfeature.ContainsKey("MissingFont"))
+            {
+                switch (othersfeature["MissingFont"].Trim())
+                {
+                    case "Use Fallback Font":
+                        MissingFont = FontHandling.SubstituteDefaultFont;
+                        break;
+                    case "Cancel Export":
+                        MissingFont = FontHandling.CancelExport;
+                        break;
+                    default: // "Prompt User" case goes here
+                        MissingFont = FontHandling.PromptUser;
+                        break;
+                }
+            }
+            else
+            {
+                MissingFont = FontHandling.PromptUser;
+            }
+            // Non SIL Font
+            if (othersfeature.ContainsKey("NonSILFont"))
+            {
+                switch (othersfeature["NonSILFont"].Trim())
+                {
+                    case "Embed Font Anyway":
+                        NonSilFont = FontHandling.EmbedFont;
+                        break;
+                    case "Use Fallback Font":
+                        NonSilFont = FontHandling.SubstituteDefaultFont;
+                        break;
+                    case "Cancel Export":
+                        NonSilFont = FontHandling.CancelExport;
+                        break;
+                    default: // "Prompt User" case goes here
+                        NonSilFont = FontHandling.PromptUser;
+                        break;
+                }
+            }
+            else
+            {
+                NonSilFont = FontHandling.PromptUser;
+            }
+        }
+        #endregion
+
+        #region xslt processing
+        /// <summary>
+        /// Helper method that copies the epub xslt file into the temp directory, optionally inserts some
+        /// processing commands, then returns the path to the modified file.
+        /// </summary>
+        /// <returns>Full path / filename of the xslt file</returns>
+        private string GetXsltFile()
+        {
+            string xsltFullName = Common.FromRegistry("TE_XHTML-to-epub_XHTML.xslt");
+            var tempXslt = Path.Combine(Path.GetTempPath(), Path.GetFileName(xsltFullName));
+            File.Copy(xsltFullName, tempXslt, true);
+            xsltFullName = tempXslt;
+
+            // Modify the local XSLT for the following conditions:
+            // - TE: add code to change the case of anchor GUIDs (this is a workaround for FWR 2550)
+            // - Scriptures with a inline footnotes (References == "After Each Section"):
+            //   adds the 
+            if (_inputType.ToLower().Equals("scripture") && (Application.ProductName.Contains("FieldWorks")))
+            {
+                // TE workaround for FWR-2550 -- remove when this defect is fixed
+                const string searchText = "<!-- FWR -2550 workaround: convert these markers to uppercase (the cross-refs use upper case) -->";
+                var sbFWR = new StringBuilder();
+                sbFWR.AppendLine(searchText);
+                sbFWR.AppendLine("<xsl:template match=\"xhtml:a[../@class='scrFootnoteMarker']\" >");
+                sbFWR.AppendLine("<xsl:copy>");
+                sbFWR.AppendLine("<xsl:attribute name=\"href\"><xsl:value-of select=\"translate(@href, $lowercase, $uppercase)\"/></xsl:attribute>");
+                sbFWR.AppendLine("<xsl:apply-templates /></xsl:copy></xsl:template>");
+                Common.StreamReplaceInFile(xsltFullName, searchText, sbFWR.ToString());
+            }
+            if (_inputType.ToLower().Equals("scripture") && References.Contains("Section"))
+            {
+                // add references inline, after each section (first change)
+                const string searchText = "<!-- Section div reference processing -->";
+                var sbRef = new StringBuilder();
+                sbRef.AppendLine(searchText);
+                sbRef.AppendLine("<xsl:if test=\"@class = 'scrSection'\">");
+                sbRef.Append("<xsl:if test=\"(count(descendant::xhtml:span[@class='Note_General_Paragraph']) +");
+                sbRef.AppendLine(" count(descendant::xhtml:span[@class='Note_CrossHYPHENReference_Paragraph'])) > 0\">");
+                sbRef.AppendLine("<xsl:element name=\"ul\">");
+                sbRef.AppendLine("<xsl:attribute name=\"class\"><xsl:text>footnotes</xsl:text></xsl:attribute>");
+                sbRef.AppendLine("<!-- general notes - use the note title for the list bullet -->");
+                sbRef.AppendLine("<xsl:for-each select=\"descendant::xhtml:span[@class='Note_General_Paragraph']\">");
+                sbRef.AppendLine("<xsl:element name=\"li\">");
+                sbRef.AppendLine("<xsl:attribute name=\"id\"><xsl:text>FN_</xsl:text><xsl:value-of select=\"@id\"/></xsl:attribute>");
+                sbRef.AppendLine("<xsl:element name=\"a\">");
+                sbRef.AppendLine("<xsl:attribute name=\"href\"><xsl:text>#</xsl:text><xsl:value-of select=\"@id\"/></xsl:attribute>");
+                sbRef.AppendLine("<xsl:text>[</xsl:text><xsl:value-of select=\"@title\"/><xsl:text>]</xsl:text>");
+                sbRef.AppendLine("</xsl:element><xsl:text> </xsl:text><xsl:value-of select=\".\"/></xsl:element>");
+                sbRef.AppendLine("</xsl:for-each>");
+                sbRef.AppendLine("<!-- cross-references - use) the verse number for the list bullet -->");
+                sbRef.AppendLine("<xsl:for-each select=\"descendant::xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']\">");
+                sbRef.AppendLine("<xsl:element name=\"li\">");
+                sbRef.AppendLine("<xsl:attribute name=\"id\"><xsl:text>FN_</xsl:text><xsl:value-of select=\"@id\"/></xsl:attribute>");
+                sbRef.AppendLine("<xsl:element name=\"a\">");
+                sbRef.AppendLine("<xsl:attribute name=\"href\"><xsl:text>#</xsl:text><xsl:value-of select=\"@id\"/></xsl:attribute>");
+                sbRef.AppendLine("<xsl:value-of select=\"preceding::xhtml:span[@class='Chapter_Number'][1]\"/><xsl:text>:</xsl:text>");
+                sbRef.AppendLine("<xsl:value-of select=\"preceding::xhtml:span[@class='Verse_Number'][1]\"/>");
+                sbRef.AppendLine("</xsl:element><xsl:text> </xsl:text><xsl:value-of select=\".\"/></xsl:element></xsl:for-each>");
+                sbRef.AppendLine("</xsl:element></xsl:if></xsl:if>");
+                Common.StreamReplaceInFile(xsltFullName, searchText, sbRef.ToString());
+                // add references inline (second change)
+                sbRef.Length = 0;
+                const string searchText2 = "<!-- secondary Section div reference processing -->";
+                sbRef.AppendLine(searchText2);
+                sbRef.Append("<xsl:if test=\"(count(descendant::xhtml:span[@class='Note_General_Paragraph']) + ");
+                sbRef.AppendLine("count(descendant::xhtml:span[@class='Note_CrossHYPHENReference_Paragraph'])) > 0\">");
+                sbRef.AppendLine("<xsl:element name=\"ul\">");
+                sbRef.AppendLine("<xsl:attribute name=\"class\"><xsl:text>footnotes</xsl:text></xsl:attribute>");
+                sbRef.AppendLine("<!-- general) notes - use the note title for the list bullet -->");
+                sbRef.AppendLine("<xsl:for-each select=\"descendant::xhtml:span[@class='Note_General_Paragraph']\">");
+                sbRef.AppendLine("<xsl:element name=\"li\">");
+                sbRef.AppendLine("<xsl:attribute name=\"id\"><xsl:text>FN_</xsl:text><xsl:value-of select=\"@id\"/></xsl:attribute>");
+                sbRef.AppendLine("<xsl:element name=\"a\">");
+                sbRef.AppendLine("<xsl:attribute name=\"href\"><xsl:text>#</xsl:text><xsl:value-of select=\"@id\"/></xsl:attribute>");
+                sbRef.AppendLine("<xsl:text>[</xsl:text><xsl:value-of select=\"@title\"/><xsl:text>]</xsl:text>");
+                sbRef.AppendLine("</xsl:element><xsl:text> </xsl:text><xsl:value-of select=\".\"/></xsl:element></xsl:for-each>");
+                sbRef.AppendLine("<!-- cross-references - use the verse number for the list bullet -->");
+                sbRef.AppendLine("<xsl:for-each select=\"descendant::xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']\">");
+                sbRef.AppendLine("<xsl:element name=\"li\">");
+                sbRef.AppendLine("<xsl:attribute name=\"id\"><xsl:text>FN_</xsl:text><xsl:value-of select=\"@id\"/></xsl:attribute>");
+                sbRef.AppendLine("<xsl:element name=\"a\">");
+                sbRef.AppendLine("<xsl:attribute name=\"href\"><xsl:text>#</xsl:text><xsl:value-of select=\"@id\"/></xsl:attribute>");
+                sbRef.AppendLine("<xsl:value-of select=\"preceding::xhtml:span[@class='Chapter_Number'][1]\"/><xsl:text>:</xsl:text>");
+                sbRef.AppendLine("<xsl:value-of select=\"preceding::xhtml:span[@class='Verse_Number'][1]\"/>");
+                sbRef.AppendLine("</xsl:element><xsl:text> </xsl:text><xsl:value-of select=\".\"/></xsl:element>");
+                sbRef.AppendLine("</xsl:for-each></xsl:element></xsl:if>");
+                Common.StreamReplaceInFile(xsltFullName, searchText2, sbRef.ToString());
+            }
+            return xsltFullName;
+        }
+        #endregion
+
+        #region CSS processing
+        /// <summary>
+        /// Modifies the CSS based on the parameters from the Configuration Tool:
+        /// - BaseFontSize
+        /// - DefaultLineHeight
+        /// - DefaultAlignment
+        /// - ChapterNumbers
+        /// </summary>
+        /// <param name="cssFile"></param>
+        private void CustomizeCSS(string cssFile)
+        {
+            if (!File.Exists(cssFile)) return;
+            // BaseFontSize and DefaultLineHeight - body element only
+            var sb = new StringBuilder();
+            sb.AppendLine("body {");
+            sb.Append("font-size: ");
+            sb.Append(BaseFontSize);
+            sb.AppendLine("pt;");
+            sb.Append("line-height: ");
+            sb.Append(DefaultLineHeight);
+            sb.AppendLine("%;");
+            Common.StreamReplaceInFile(cssFile, "body {", sb.ToString());
+            // ChapterNumbers - scripture only
+            if (_inputType == "scripture")
+            {
+                // ChapterNumbers (drop cap or in margin) - .Chapter_Number and .Paragraph1 class elements
+                sb.Length = 0;  // reset the stringbuilder
+                sb.AppendLine(".Chapter_Number {");
+                sb.Append("font-size: ");
+                if (ChapterNumbers == "Drop Cap")
+                {
+                    sb.AppendLine("250%;");
+                    // vertical alignment of Cap specified by setting the padding-top to (defaultlineheight / 2)
+                    sb.Append("padding-top: ");
+                    sb.Append(BaseFontSize / 2);
+                    sb.AppendLine("pt;");
+                }
+                else
+                {
+                    sb.AppendLine("24pt;");
+                }
+                Common.StreamReplaceInFile(cssFile, ".Chapter_Number {", sb.ToString());
+            }
+            // DefaultAlignment - several spots in the css file
+            sb.Length = 0; // reset the stringbuilder
+            sb.Append("text-align: ");
+            sb.Append(DefaultAlignment.ToLower());
+            sb.AppendLine(";");
+            Common.StreamReplaceInFile(cssFile, "text-align:left;", sb.ToString());
+        }
         /// <summary>
         /// This method addresses an ugly problem in e-book readers, where the :before and :after pseudo-items in the CSS aren't
         /// recognized (causing some bad spacing / punctuation). We work around the issue by moving the properties into an XSLT
@@ -1339,6 +1608,7 @@ namespace SIL.PublishingSolution
 
         #endregion
 
+        #region Book ID and Name
         /// <summary>
         /// Returns a book ID to be used in the .opf file. This is similar to the GetBookName call, but here
         /// we're wanting something that (1) doesn't start with a numeric value and (2) is unique.
@@ -1444,147 +1714,9 @@ namespace SIL.PublishingSolution
             // fall back on just the file name
             return Path.GetFileName(xhtmlFileName);
         }
+        #endregion
 
-        /// <summary>
-        /// Resizes the given image down to MaxImageWidth pixels and returns the result.
-        /// </summary>
-        /// <param name="image">File to resize</param>
-        private Image ResizeImage(Image image)
-        {
-            float nPercent = ((float)MaxImageWidth / (float)image.Width);
-            int destW = (int) (image.Width * nPercent);
-            int destH = (int) (image.Height*nPercent);
-            var b = new Bitmap(destW, destH);
-            var g = Graphics.FromImage((Image) b);
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            g.DrawImage(image, 0, 0, destW, destH);
-            g.Dispose();
-            return (Image)b;
-        }
-
-
-        /// <summary>
-        /// Writes the chapter links out to the specified XmlWriter (the .ncx file).
-        /// </summary>
-        /// <returns>List of url strings</returns>
-        private void WriteChapterLinks(string xhtmlFileName, ref int playOrder, XmlWriter ncx, ref int chapnum)
-        {
-            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
-            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
-            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
-            XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
-            xmlDocument.Load(xmlReader);
-            xmlReader.Close();
-            XmlNodeList nodes;
-            if (_inputType.Equals("dictionary"))
-            {
-                if (xhtmlFileName.Contains("RevIndex"))
-                {
-                    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='ReversalIndexEntry_Self']", namespaceManager);
-                }
-                else
-                {
-                    nodes = xmlDocument.SelectNodes("//xhtml:div[@class='entry']", namespaceManager);
-                }
-            }
-            else
-            {
-                nodes = xmlDocument.SelectNodes("//xhtml:span[@class='Chapter_Number']", namespaceManager);
-            }
-            if (nodes != null && nodes.Count > 0)
-            {
-                var sb = new StringBuilder();
-                string name = Path.GetFileName(xhtmlFileName);
-                foreach(XmlNode node in nodes)
-                {
-                    string textString;
-                    sb.Append(name);
-                    sb.Append("#");
-                    XmlNode val = node.Attributes["id"];
-                    if(val != null)
-                        sb.Append(val.Value);
-                    //sb.Append(node.Attributes["id"].Value);
-                        
-                    if (_inputType.Equals("dictionary"))
-                    {
-                        // for a dictionary, the headword / headword-minor is the label
-                        if (!node.HasChildNodes)
-                        {
-                            // reset the stringbuilder
-                            sb.Length = 0;
-                            // This entry doesn't have any information - skip it
-                            continue;
-                        }
-                        textString = node.FirstChild.InnerText;
-                    }
-                    else
-                    {
-                        // for scriptures, we'll keep a running chapter number count for the label
-                        textString = chapnum.ToString();
-                        chapnum++;
-                    }
-                    // write out the node
-                    ncx.WriteStartElement("navPoint");
-                    ncx.WriteAttributeString("id", "dtb:uid");
-                    ncx.WriteAttributeString("playOrder", playOrder.ToString());
-                    ncx.WriteStartElement("navLabel");
-                    ncx.WriteElementString("text", textString);
-                    ncx.WriteEndElement(); // navlabel
-                    ncx.WriteStartElement("content");
-                    ncx.WriteAttributeString("src", sb.ToString());
-                    ncx.WriteEndElement(); // meta
-                    // If this is a dictionary with TOC level 3, gather the senses for this entry
-                    if (_inputType.Equals("dictionary") && TocLevel.StartsWith("3"))
-                    {
-                        // see if there are any senses to add to this entry
-                        XmlNodeList childNodes = node.SelectNodes(".//xhtml:span[@class='sense']", namespaceManager);
-                        if (childNodes != null)
-                        {
-                            sb.Length = 0;
-                            foreach (XmlNode childNode in childNodes)
-                            {
-                                // for a dictionary, the grammatical-info//partofspeech//span is the label
-                                if (!childNode.HasChildNodes)
-                                {
-                                    // reset the stringbuilder
-                                    sb.Length = 0;
-                                    // This entry doesn't have any information - skip it
-                                    continue;
-                                }
-                                playOrder++;
-                                textString = childNode.FirstChild.FirstChild.InnerText;
-
-                                sb.Append(name);
-                                sb.Append("#");
-                                if (childNode.Attributes != null)
-                                {
-                                    sb.Append(childNode.Attributes["id"].Value);
-                                }
-                                // write out the node
-                                ncx.WriteStartElement("navPoint");
-                                ncx.WriteAttributeString("id", "dtb:uid");
-                                ncx.WriteAttributeString("playOrder", playOrder.ToString());
-                                ncx.WriteStartElement("navLabel");
-                                ncx.WriteElementString("text", textString);
-                                ncx.WriteEndElement(); // navlabel
-                                ncx.WriteStartElement("content");
-                                ncx.WriteAttributeString("src", sb.ToString());
-                                ncx.WriteEndElement(); // meta
-                                ncx.WriteEndElement(); // navPoint
-                                // reset the stringbuilder
-                                sb.Length = 0;
-                            }
-                        }
-                    }
-                    ncx.WriteEndElement(); // navPoint
-                    // reset the stringbuilder
-                    sb.Length = 0;
-                    playOrder++;
-                }
-            }
-        }
-
+        #region Relative Hyperlink processing
         /// <summary>
         /// Returns the list of "broken" relative hyperlink hrefs in the given file (i.e.,
         /// relative hyperlinks that don't have a target within the file). This can happen when
@@ -1686,6 +1818,7 @@ namespace SIL.PublishingSolution
             {
                 var relativeIDs = FindBrokenRelativeHrefIds(sourceFile);
                 Debug.WriteLine(sourceFile + ": " + relativeIDs.Count + " broken hrefs:");
+                inProcess.AddToMaximum(relativeIDs.Count);
                 foreach (var relativeID in relativeIDs)
                 {
                     //    find [id="<n>] in the xhtml file list
@@ -1707,12 +1840,116 @@ namespace SIL.PublishingSolution
                     {
                         Debug.WriteLine(">> Target ID for " + relativeID + " not found - this link is broken!");
                     }
+                    inProcess.PerformStep();
                 }
                 // show our progress
                 inProcess.PerformStep();
             }
             TimeSpan tsTotal = DateTime.Now - startTime;
             Debug.WriteLine("Exportepub: time spent in FixRelativeHyperlinks: " + tsTotal);
+        }
+        #endregion
+
+        #region Image processing
+        /// <summary>
+        /// This method handles the images for the .epub file. Each image is resized and renamed (to .png) if necessary, then
+        /// copied to the .epub folder. Any references to the image files from the .xhtml are also updated if needed.
+        /// </summary>
+        /// <param name="tempFolder"></param>
+        /// <param name="contentFolder"></param>
+        private void ProcessImages(string tempFolder, string contentFolder)
+        {
+            string[] imageFiles = Directory.GetFiles(tempFolder);
+            bool renamedImages = false;
+            Image image;
+            foreach (string file in imageFiles)
+            {
+                switch (Path.GetExtension(file) == null ? "" : Path.GetExtension(file).ToLower())
+                {
+                    case ".jpg":
+                    case ".jpeg":
+                    case ".gif":
+                    case ".png":
+                        // .epub supports this image format - just copy the thing over
+                        string name = Path.GetFileName(file);
+                        string dest = Common.PathCombine(contentFolder, name);
+                        // sanity check - if the image is gigantic, scale it
+                        image = Image.FromFile(file);
+                        if (image.Width > MaxImageWidth)
+                        {
+                            // need to scale image
+                            var img = ResizeImage(image);
+                            switch (Path.GetExtension(file).ToLower())
+                            {
+                                case ".jpg":
+                                case ".jpeg":
+                                    img.Save(dest, System.Drawing.Imaging.ImageFormat.Jpeg);
+                                    break;
+                                case ".gif":
+                                    img.Save(dest, System.Drawing.Imaging.ImageFormat.Gif);
+                                    break;
+                                default:
+                                    img.Save(dest, System.Drawing.Imaging.ImageFormat.Png);
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            File.Copy(file, dest);
+                        }
+                        break;
+                    case ".bmp":
+                    case ".tif":
+                    case ".tiff":
+                    case ".ico":
+                    case ".wmf":
+                    case ".pcx":
+                    case ".cgm":
+                        // TE (and others?) support these file types, but .epub doesn't -
+                        // convert them to .png if we can
+                        var imageName = Path.GetFileNameWithoutExtension(file) + ".png";
+                        using (var fileStream = new FileStream(Common.PathCombine(contentFolder, imageName), FileMode.CreateNew))
+                        {
+                            image = Image.FromFile(file);
+                            if (image.Width > MaxImageWidth)
+                            {
+                                var img = ResizeImage(image);
+                                img.Save(fileStream, System.Drawing.Imaging.ImageFormat.Png);
+                            }
+                            else
+                            {
+                                image.Save(fileStream, System.Drawing.Imaging.ImageFormat.Png);
+                            }
+                        }
+                        renamedImages = true;
+                        break;
+                    default:
+                        // not an image file (or not one we recognize) - skip
+                        break;
+                }
+            }
+            // be sure to clean up any hyperlink references to the old file types
+            if (renamedImages)
+            {
+                CleanupImageReferences(contentFolder);
+            }
+        }
+
+        /// <summary>
+        /// Resizes the given image down to MaxImageWidth pixels and returns the result.
+        /// </summary>
+        /// <param name="image">File to resize</param>
+        private Image ResizeImage(Image image)
+        {
+            float nPercent = ((float)MaxImageWidth / (float)image.Width);
+            int destW = (int)(image.Width * nPercent);
+            int destH = (int)(image.Height * nPercent);
+            var b = new Bitmap(destW, destH);
+            var g = Graphics.FromImage((Image)b);
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            g.DrawImage(image, 0, 0, destW, destH);
+            g.Dispose();
+            return (Image)b;
         }
 
         /// <summary>
@@ -1788,243 +2025,168 @@ namespace SIL.PublishingSolution
                 File.Move((file + ".tmp"), file);
             }
         }
-
-        /// <summary>
-        /// Modifies the CSS based on the parameters from the Configuration Tool:
-        /// - BaseFontSize
-        /// - DefaultLineHeight
-        /// - DefaultAlignment
-        /// - ChapterNumbers
-        /// </summary>
-        /// <param name="cssFile"></param>
-        private void CustomizeCSS(string cssFile)
-        {
-            if (!File.Exists(cssFile)) return;
-            // BaseFontSize and DefaultLineHeight - body element only
-            var sb = new StringBuilder();
-            sb.AppendLine("body {");
-            sb.Append("font-size: ");
-            sb.Append(BaseFontSize);
-            sb.AppendLine("pt;");
-            sb.Append("line-height: ");
-            sb.Append(DefaultLineHeight);
-            sb.AppendLine("%;");
-            Common.StreamReplaceInFile(cssFile, "body {", sb.ToString());
-            // ChapterNumbers - scripture only
-            if (_inputType == "scripture")
-            {
-                // ChapterNumbers (drop cap or in margin) - .Chapter_Number and .Paragraph1 class elements
-                sb.Length = 0;  // reset the stringbuilder
-                sb.AppendLine(".Chapter_Number {");
-                sb.Append("font-size: ");
-                if (ChapterNumbers == "Drop Cap")
-                {
-                    sb.AppendLine("250%;");
-                    // vertical alignment of Cap specified by setting the padding-top to (defaultlineheight / 2)
-                    sb.Append("padding-top: ");
-                    sb.Append(BaseFontSize / 2);
-                    sb.AppendLine("pt;");
-                }
-                else
-                {
-                    sb.AppendLine("24pt;");
-                }
-                Common.StreamReplaceInFile(cssFile, ".Chapter_Number {", sb.ToString());
-            }
-            // DefaultAlignment - several spots in the css file
-            sb.Length = 0; // reset the stringbuilder
-            sb.Append("text-align: ");
-            sb.Append(DefaultAlignment.ToLower());
-            sb.AppendLine(";");
-            Common.StreamReplaceInFile(cssFile, "text-align:left;", sb.ToString());
-        }
-
-        /// <summary>
-        /// Loads the settings file and pulls out the values we look at.
-        /// </summary>
-        private void LoadPropertiesFromSettings()
-        {
-            // Load User Interface Collection Parameters
-            Param.LoadSettings();
-            string organization;
-            try
-            {
-                // get the organization
-                organization = Param.Value["Organization"];
-            }
-            catch (Exception)
-            {
-                // shouldn't happen (ExportThroughPathway dialog forces the user to select an organization), 
-                // but just in case, specify a default org.
-                organization = "SIL International";
-            }
-            string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
-            Dictionary<string, string> othersfeature = Param.GetItemsAsDictionary("//stylePick/styles/others/style[@name='" + layout + "']/styleProperty");
-            // Title (book title in Configuration Tool UI / dc:title in metadata)
-            Title = Param.GetMetadataValue(Param.Title, organization) ?? ""; // empty string if null / not found
-            // Creator (dc:creator))
-            Creator = Param.GetMetadataValue(Param.Creator, organization) ?? ""; // empty string if null / not found
-            // information
-            Description = Param.GetMetadataValue(Param.Description, organization) ?? ""; // empty string if null / not found
-            // Source
-            Source = Param.GetMetadataValue(Param.Source, organization) ?? ""; // empty string if null / not found
-            // Format
-            Format = Param.GetMetadataValue(Param.Format, organization) ?? ""; // empty string if null / not found
-            // Publisher
-            Publisher = Param.GetMetadataValue(Param.Publisher, organization) ?? ""; // empty string if null / not found
-            // Coverage
-            Coverage = Param.GetMetadataValue(Param.Coverage, organization) ?? ""; // empty string if null / not found
-            // Rights (dc:rights)
-            Rights = Param.GetMetadataValue(Param.CopyrightHolder, organization) ?? ""; // empty string if null / not found
-            // embed fonts
-            if (othersfeature.ContainsKey("EmbedFonts"))
-            {
-                EmbedFonts = (othersfeature["EmbedFonts"].Trim().Equals("Yes")) ? true : false;
-            }
-            else
-            {
-                // default - we're more concerned about accurate font rendering than size
-                EmbedFonts = true;
-            }
-            if (othersfeature.ContainsKey("IncludeFontVariants"))
-            {
-                IncludeFontVariants = (othersfeature["IncludeFontVariants"].Trim().Equals("Yes")) ? true : false;
-            }
-            else
-            {
-                IncludeFontVariants = true;
-            }
-            if (othersfeature.ContainsKey("MaxImageWidth"))
-            {
-                try
-                {
-                    MaxImageWidth = int.Parse(othersfeature["MaxImageWidth"].Trim());
-                }
-                catch (Exception)
-                {
-                    MaxImageWidth = 600;
-                }
-            }
-            else
-            {
-                MaxImageWidth = 600;
-            }
-            // TOC Level
-            if (othersfeature.ContainsKey("TOCLevel"))
-            {
-                TocLevel = othersfeature["TOCLevel"].Trim();
-            }
-            else
-            {
-                TocLevel = "";
-            }
-            // Default Font
-            if (othersfeature.ContainsKey("DefaultFont"))
-            {
-                DefaultFont = othersfeature["DefaultFont"].Trim();
-            }
-            else
-            {
-                DefaultFont = "Charis SIL";
-            }
-            // Default Alignment
-            if (othersfeature.ContainsKey("DefaultAlignment"))
-            {
-                DefaultAlignment = othersfeature["DefaultAlignment"].Trim();
-            }
-            else
-            {
-                DefaultAlignment = "Justified";
-            }
-            // Chapter Numbers
-            if (othersfeature.ContainsKey("ChapterNumbers"))
-            {
-                ChapterNumbers = othersfeature["ChapterNumbers"].Trim();
-            }
-            else
-            {
-                ChapterNumbers = "Drop Cap"; // default
-            }
-            // base font size
-            if (othersfeature.ContainsKey("BaseFontSize"))
-            {
-                try
-                {
-                    BaseFontSize = int.Parse(othersfeature["BaseFontSize"].Trim());
-                }
-                catch (Exception)
-                {
-                    BaseFontSize = 13;
-                }
-            }
-            else
-            {
-                BaseFontSize = 13;
-            }
-            // default line height
-            if (othersfeature.ContainsKey("DefaultLineHeight"))
-            {
-                try
-                {
-                    DefaultLineHeight = int.Parse(othersfeature["DefaultLineHeight"].Trim());
-                }
-                catch (Exception)
-                {
-                    DefaultLineHeight = 125;
-                }
-            }
-            else
-            {
-                DefaultLineHeight = 125;
-            }
-            // Missing Font
-            // Note that the Embed Font enum value doesn't apply here (if it were to appear, we'd fall to the Default
-            // "Prompt user" case
-            if (othersfeature.ContainsKey("MissingFont"))
-            {
-                switch (othersfeature["MissingFont"].Trim())
-                {
-                    case "Use Fallback Font":
-                        MissingFont = FontHandling.SubstituteDefaultFont;
-                        break;
-                    case  "Cancel Export":
-                        MissingFont = FontHandling.CancelExport;
-                        break;
-                    default: // "Prompt User" case goes here
-                        MissingFont = FontHandling.PromptUser;
-                        break;
-                }
-            }
-            else
-            {
-                MissingFont = FontHandling.PromptUser;
-            }
-            // Non SIL Font
-            if (othersfeature.ContainsKey("NonSILFont"))
-            {
-                switch(othersfeature["NonSILFont"].Trim())
-                {
-                    case "Embed Font Anyway":
-                        NonSilFont = FontHandling.EmbedFont;
-                        break;
-                    case "Use Fallback Font":
-                        NonSilFont = FontHandling.SubstituteDefaultFont;
-                        break;
-                    case  "Cancel Export":
-                        NonSilFont = FontHandling.CancelExport;
-                        break;
-                    default: // "Prompt User" case goes here
-                        NonSilFont = FontHandling.PromptUser;
-                        break;
-                }
-            }
-            else
-            {
-                NonSilFont = FontHandling.PromptUser;
-            }
-        }
+        #endregion
 
         #region File Processing Methods
+        /// <summary>
+        /// Creates a separate references file at the end of the xhtml files in scripture content, for both footnotes and cross-references.
+        /// Each reference links back relatively to the source xhtml, so that the links can be updated when the content is split into
+        /// smaller chunks.
+        /// </summary>
+        /// <param name="outputFolder"></param>
+        /// <param name="xhtmlFileName"></param>
+        private void CreateReferencesFile(string outputFolder, string xhtmlFileName)
+        {
+            // sanity check - return if the references are to be left in the text
+            if (References.Contains("Section")) { return; }
+            // collect all cross-references and footnotes in the content file
+            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
+            xmlDocument.Load(xmlReader);
+            xmlReader.Close();
+            // pick your nodes
+            var crossRefNodes = xmlDocument.SelectNodes("//xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']", namespaceManager);
+            var footnoteNodes = xmlDocument.SelectNodes("//xhtml:span[@class='Note_General_Paragraph']", namespaceManager);
+            if (crossRefNodes == null && footnoteNodes == null)
+            {
+                // nothing to pull out -- just exit
+                return;
+            }
+            // file preamble
+            var sbPreamble = new StringBuilder();
+            sbPreamble.Append("<?xml version='1.0' encoding='utf-8'?><!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'[]>");
+            sbPreamble.Append("<html xmlns='http://www.w3.org/1999/xhtml'><head><title>");
+            //sbPreamble.Append(projInfo.ProjectName);
+            sbPreamble.AppendLine("</title><link rel='stylesheet' href='book.css' type='text/css' /></head>");
+            sbPreamble.Append("<body class='scrBody'><div class='Front_Matter'>");
+            var outFilename = Path.Combine(outputFolder, ReferencesFilename);
+            var outFile = new StreamWriter(outFilename);
+            outFile.WriteLine(sbPreamble.ToString());
+            // iterate through the files and pull out each reference hyperlink
+            if (footnoteNodes != null && footnoteNodes.Count > 0)
+            {
+                outFile.WriteLine("<h1>Endnotes</h1>");
+                outFile.WriteLine("<ul>");
+                foreach (XmlNode footnoteNode in footnoteNodes)
+                {
+                    outFile.Write("<li id=\"FN_");
+                    try
+                    {
+                        outFile.Write(footnoteNode.Attributes["id"].Value);
+                    }
+                    catch(NullReferenceException e)
+                    {
+                        Debug.WriteLine(e);
+                    }
+                    outFile.Write("\"><a href=\"");
+                    outFile.Write("#");
+                    try
+                    {
+                        outFile.Write(footnoteNode.Attributes["id"].Value);
+                    }
+                    catch (NullReferenceException e)
+                    {
+                        Debug.WriteLine(e);
+                    }
+                    outFile.Write("\">[");
+                    try
+                    {
+                        outFile.Write(footnoteNode.Attributes["title"].Value);
+                    }
+                    catch (NullReferenceException e)
+                    {
+                        Debug.WriteLine(e);
+                    }
+                    outFile.Write("] ");
+                    XmlNode bookNode = footnoteNode.SelectSingleNode("preceding::xhtml:div[@class='Title_Main'][1]", namespaceManager);
+                    if (bookNode != null)
+                    {
+                        outFile.Write(bookNode.InnerText);
+                    }
+                    outFile.Write(" ");
+                    XmlNode chapterNode = footnoteNode.SelectSingleNode("preceding::xhtml:span[@class='Chapter_Number'][1]", namespaceManager);
+                    if (chapterNode != null)
+                    {
+                        outFile.Write(chapterNode.InnerText);
+                    }
+                    outFile.Write(":");
+                    XmlNode verseNode = footnoteNode.SelectSingleNode("preceding::xhtml:span[@class='Verse_Number'][1]", namespaceManager);
+                    if (verseNode != null)
+                    {
+                        outFile.Write(verseNode.InnerText);
+                    }
+                    outFile.Write("</a> ");
+                    outFile.Write(CleanupSpans(footnoteNode.InnerXml));
+                    outFile.WriteLine("</li>");
+                }
+                outFile.WriteLine("</ul>");
+            }
+            if (crossRefNodes != null && crossRefNodes.Count > 0)
+            {
+                outFile.WriteLine("<h1>References</h1>");
+                outFile.WriteLine("<ul>");
+                foreach (XmlNode crossRefNode in crossRefNodes)
+                {
+                    outFile.Write("<li id=\"FN_");
+                    try
+                    {
+                        outFile.Write(crossRefNode.Attributes["id"].Value);
+                    }
+                    catch (NullReferenceException e)
+                    {
+                        Debug.WriteLine(e);
+                    }
+                    outFile.Write("\"><a href=\"");
+                    outFile.Write("#");
+                    try
+                    {
+                        outFile.Write(crossRefNode.Attributes["id"].Value);
+                    }
+                    catch (NullReferenceException e)
+                    {
+                        Debug.WriteLine(e);
+                    }
+                    outFile.Write("\">");
+                    XmlNode bookNode = crossRefNode.SelectSingleNode("preceding::xhtml:span[@class='Title_Main'][1]", namespaceManager);
+                    if (bookNode != null)
+                    {
+                        outFile.Write(bookNode.InnerText);
+                    }
+                    outFile.Write(" ");
+                    XmlNode chapterNode = crossRefNode.SelectSingleNode("preceding::xhtml:span[@class='Chapter_Number'][1]", namespaceManager);
+                    if (chapterNode != null)
+                    {
+                        outFile.Write(chapterNode.InnerText);
+                    }
+                    outFile.Write(":");
+                    XmlNode verseNode = crossRefNode.SelectSingleNode("preceding::xhtml:span[@class='Verse_Number'][1]", namespaceManager);
+                    if (verseNode != null)
+                    {
+                        outFile.Write(verseNode.InnerText);
+                    }
+                    outFile.Write("</a> ");
+                    outFile.Write(CleanupSpans(crossRefNode.InnerXml));
+                    outFile.WriteLine("</li>");
+                }
+                outFile.WriteLine("</ul>");
+            }
+
+            outFile.WriteLine("</div></body></html>");
+            outFile.Flush();
+            outFile.Close();
+        }
+
+        private string CleanupSpans(string text)
+        {
+            var sb = new StringBuilder(text);
+            sb.Replace("lang", "xml:lang");
+            sb.Replace("xmlns=\"http://www.w3.org/1999/xhtml\"", "");
+            return sb.ToString();
+        }
+
         /// <summary>
         /// Splits the specified xhtml file out into multiple files, either based on letter (dictionary) or book (scripture). 
         /// This method was adapted from ExportOpenOffice.cs.
@@ -2470,6 +2632,7 @@ namespace SIL.PublishingSolution
             {
                 index++;
             }
+            if (index == files.Length) index--; // edge case
             opf.WriteAttributeString("href", Path.GetFileName(files[index]));
             opf.WriteEndElement(); // reference
             opf.WriteEndElement(); // guide
@@ -2538,6 +2701,20 @@ namespace SIL.PublishingSolution
                     ncx.WriteEndElement(); // navlabel
                     ncx.WriteStartElement("content");
                     ncx.WriteAttributeString("src", name + "#body");
+                    ncx.WriteEndElement(); // meta
+                    index++;
+                    RevIndex = true;
+                }
+                if (name.Contains(ReferencesFilename))
+                {
+                    ncx.WriteStartElement("navPoint");
+                    ncx.WriteAttributeString("id", "dtb:uid");
+                    ncx.WriteAttributeString("playOrder", index.ToString());
+                    ncx.WriteStartElement("navLabel");
+                    ncx.WriteElementString("text", "References");
+                    ncx.WriteEndElement(); // navlabel
+                    ncx.WriteStartElement("content");
+                    ncx.WriteAttributeString("src", name);
                     ncx.WriteEndElement(); // meta
                     index++;
                     RevIndex = true;
@@ -2619,6 +2796,128 @@ namespace SIL.PublishingSolution
             ncx.WriteEndElement(); // ncx
             ncx.WriteEndDocument();
             ncx.Close();
+        }
+
+        /// <summary>
+        /// Writes the chapter links out to the specified XmlWriter (the .ncx file).
+        /// </summary>
+        /// <returns>List of url strings</returns>
+        private void WriteChapterLinks(string xhtmlFileName, ref int playOrder, XmlWriter ncx, ref int chapnum)
+        {
+            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
+            xmlDocument.Load(xmlReader);
+            xmlReader.Close();
+            XmlNodeList nodes;
+            if (_inputType.Equals("dictionary"))
+            {
+                if (xhtmlFileName.Contains("RevIndex"))
+                {
+                    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='ReversalIndexEntry_Self']", namespaceManager);
+                }
+                else
+                {
+                    nodes = xmlDocument.SelectNodes("//xhtml:div[@class='entry']", namespaceManager);
+                }
+            }
+            else
+            {
+                nodes = xmlDocument.SelectNodes("//xhtml:span[@class='Chapter_Number']", namespaceManager);
+            }
+            if (nodes != null && nodes.Count > 0)
+            {
+                var sb = new StringBuilder();
+                string name = Path.GetFileName(xhtmlFileName);
+                foreach (XmlNode node in nodes)
+                {
+                    string textString;
+                    sb.Append(name);
+                    sb.Append("#");
+                    XmlNode val = node.Attributes["id"];
+                    if (val != null)
+                        sb.Append(val.Value);
+                    //sb.Append(node.Attributes["id"].Value);
+
+                    if (_inputType.Equals("dictionary"))
+                    {
+                        // for a dictionary, the headword / headword-minor is the label
+                        if (!node.HasChildNodes)
+                        {
+                            // reset the stringbuilder
+                            sb.Length = 0;
+                            // This entry doesn't have any information - skip it
+                            continue;
+                        }
+                        textString = node.FirstChild.InnerText;
+                    }
+                    else
+                    {
+                        // for scriptures, we'll keep a running chapter number count for the label
+                        textString = chapnum.ToString();
+                        chapnum++;
+                    }
+                    // write out the node
+                    ncx.WriteStartElement("navPoint");
+                    ncx.WriteAttributeString("id", "dtb:uid");
+                    ncx.WriteAttributeString("playOrder", playOrder.ToString());
+                    ncx.WriteStartElement("navLabel");
+                    ncx.WriteElementString("text", textString);
+                    ncx.WriteEndElement(); // navlabel
+                    ncx.WriteStartElement("content");
+                    ncx.WriteAttributeString("src", sb.ToString());
+                    ncx.WriteEndElement(); // meta
+                    // If this is a dictionary with TOC level 3, gather the senses for this entry
+                    if (_inputType.Equals("dictionary") && TocLevel.StartsWith("3"))
+                    {
+                        // see if there are any senses to add to this entry
+                        XmlNodeList childNodes = node.SelectNodes(".//xhtml:span[@class='sense']", namespaceManager);
+                        if (childNodes != null)
+                        {
+                            sb.Length = 0;
+                            foreach (XmlNode childNode in childNodes)
+                            {
+                                // for a dictionary, the grammatical-info//partofspeech//span is the label
+                                if (!childNode.HasChildNodes)
+                                {
+                                    // reset the stringbuilder
+                                    sb.Length = 0;
+                                    // This entry doesn't have any information - skip it
+                                    continue;
+                                }
+                                playOrder++;
+                                textString = childNode.FirstChild.FirstChild.InnerText;
+
+                                sb.Append(name);
+                                sb.Append("#");
+                                if (childNode.Attributes != null)
+                                {
+                                    sb.Append(childNode.Attributes["id"].Value);
+                                }
+                                // write out the node
+                                ncx.WriteStartElement("navPoint");
+                                ncx.WriteAttributeString("id", "dtb:uid");
+                                ncx.WriteAttributeString("playOrder", playOrder.ToString());
+                                ncx.WriteStartElement("navLabel");
+                                ncx.WriteElementString("text", textString);
+                                ncx.WriteEndElement(); // navlabel
+                                ncx.WriteStartElement("content");
+                                ncx.WriteAttributeString("src", sb.ToString());
+                                ncx.WriteEndElement(); // meta
+                                ncx.WriteEndElement(); // navPoint
+                                // reset the stringbuilder
+                                sb.Length = 0;
+                            }
+                        }
+                    }
+                    ncx.WriteEndElement(); // navPoint
+                    // reset the stringbuilder
+                    sb.Length = 0;
+                    playOrder++;
+                }
+            }
         }
 
         #endregion

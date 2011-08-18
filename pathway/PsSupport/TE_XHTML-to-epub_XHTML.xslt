@@ -58,13 +58,6 @@
 	</xsl:template>
 	
 	<!-- FWR -2550 workaround: convert these markers to uppercase (the cross-refs use upper case) -->
-	<!-- <xsl:template match="xhtml:a[../@class='scrFootnoteMarker']" >
-		<xsl:copy>
-			<xsl:attribute name="href"><xsl:value-of select="translate(@href, $lowercase, $uppercase)"/></xsl:attribute>
-			<xsl:apply-templates />
-		</xsl:copy>
-	</xsl:template>
-	-->
 
 	<!-- Special processing for a couple divs -->
 	<xsl:template match="xhtml:div">
@@ -73,39 +66,8 @@
 				<xsl:copy/>
 			</xsl:for-each>
 			<xsl:apply-templates/>
-			<xsl:if test="@class = 'scrSection'">
-				<xsl:if test="(count(descendant::xhtml:span[@class='Note_General_Paragraph']) +
-					count(descendant::xhtml:span[@class='Note_CrossHYPHENReference_Paragraph'])) > 0">
-					<xsl:element name="ul">
-						<xsl:attribute name="class"><xsl:text>footnotes</xsl:text></xsl:attribute>
-						<!-- general notes - use the note title for the list bullet -->
-						<xsl:for-each select="descendant::xhtml:span[@class='Note_General_Paragraph']">
-							<xsl:element name="li">
-								<xsl:attribute name="id"><xsl:text>FN_</xsl:text><xsl:value-of select="@id"/></xsl:attribute>
-								<xsl:element name="a">
-									<xsl:attribute name="href"><xsl:text>#</xsl:text><xsl:value-of select="@id"/></xsl:attribute>
-									<xsl:text>[</xsl:text><xsl:value-of select="@title"/><xsl:text>]</xsl:text>
-								</xsl:element>
-								<xsl:text> </xsl:text>
-								<xsl:value-of select="."/>
-							</xsl:element>
-						</xsl:for-each>
-						<!-- cross-references - use the verse number for the list bullet -->
-						<xsl:for-each select="descendant::xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']">
-							<xsl:element name="li">
-								<xsl:attribute name="id"><xsl:text>FN_</xsl:text><xsl:value-of select="@id"/></xsl:attribute>
-								<xsl:element name="a">
-									<xsl:attribute name="href"><xsl:text>#</xsl:text><xsl:value-of select="@id"/></xsl:attribute>
-									<xsl:value-of select="preceding::xhtml:span[@class='Chapter_Number'][1]"/><xsl:text>:</xsl:text>
-									<xsl:value-of select="preceding::xhtml:span[@class='Verse_Number'][1]"/>
-								</xsl:element>
-								<xsl:text> </xsl:text>
-								<xsl:value-of select="."/>
-							</xsl:element>
-						</xsl:for-each>
-					</xsl:element>
-				</xsl:if>
-			</xsl:if>
+			<!-- Section div reference processing -->
+			<!-- end section reference processing -->
 		</xsl:copy>
 	</xsl:template>
 
@@ -177,37 +139,8 @@
 	<!-- write out the contents of these elements, but not the elements themselves -->
 	<xsl:template match="xhtml:div[@class='scrSection']">
 		<xsl:apply-templates/>
-		<xsl:if test="(count(descendant::xhtml:span[@class='Note_General_Paragraph']) +
-		count(descendant::xhtml:span[@class='Note_CrossHYPHENReference_Paragraph'])) > 0">
-			<xsl:element name="ul">
-				<xsl:attribute name="class"><xsl:text>footnotes</xsl:text></xsl:attribute>
-				<!-- general notes - use the note title for the list bullet -->
-				<xsl:for-each select="descendant::xhtml:span[@class='Note_General_Paragraph']">
-					<xsl:element name="li">
-						<xsl:attribute name="id"><xsl:text>FN_</xsl:text><xsl:value-of select="@id"/></xsl:attribute>
-						<xsl:element name="a">
-							<xsl:attribute name="href"><xsl:text>#</xsl:text><xsl:value-of select="@id"/></xsl:attribute>
-							<xsl:text>[</xsl:text><xsl:value-of select="@title"/><xsl:text>]</xsl:text>
-						</xsl:element>
-						<xsl:text> </xsl:text>
-						<xsl:value-of select="."/>
-					</xsl:element>
-				</xsl:for-each>
-				<!-- cross-references - use the verse number for the list bullet -->
-				<xsl:for-each select="descendant::xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']">
-					<xsl:element name="li">
-						<xsl:attribute name="id"><xsl:text>FN_</xsl:text><xsl:value-of select="@id"/></xsl:attribute>
-						<xsl:element name="a">
-							<xsl:attribute name="href"><xsl:text>#</xsl:text><xsl:value-of select="@id"/></xsl:attribute>
-							<xsl:value-of select="preceding::xhtml:span[@class='Chapter_Number'][1]"/><xsl:text>:</xsl:text>
-							<xsl:value-of select="preceding::xhtml:span[@class='Verse_Number'][1]"/>
-						</xsl:element>
-						<xsl:text> </xsl:text>
-						<xsl:value-of select="."/>
-					</xsl:element>
-				</xsl:for-each>
-			</xsl:element>
-		</xsl:if>
+		<!-- secondary Section div reference processing -->
+		<!-- end secondary section reference processing -->
 	</xsl:template>
 	<xsl:template match="xhtml:div[@class='columns']" >
 		<xsl:apply-templates />

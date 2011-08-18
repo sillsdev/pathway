@@ -32,14 +32,23 @@ namespace SIL.PublishingSolution
     public class InvalidStyleSettingsException : Exception
     {
         public string FullFilePath { get; set; }
+        public string ErrorMessage { get; set; }
 
         public override string ToString()
         {
+            var sb = new StringBuilder();
             if (FullFilePath == null)
             {
                 return "No filepath set for settings file.";
             }
-            return String.Format("'{0}' is not a valid settings file.", FullFilePath);
+            sb.Append(FullFilePath);
+            sb.AppendLine(" is not a valid settings file.");
+            if (ErrorMessage != null)
+            {
+                sb.AppendLine("Validation error details:");
+                sb.AppendLine(ErrorMessage);
+            }
+            return sb.ToString();
         }
     }
 
@@ -215,8 +224,8 @@ namespace SIL.PublishingSolution
             reader.Close();
             if (!_validateXmlSuccess)
             {
-                //MessageBox.Show(_validateXmlError.ToString());
                 InvalidStyleSettingsException err = new InvalidStyleSettingsException();
+                err.ErrorMessage = _validateXmlError.ToString();
                 err.FullFilePath = path;
                 throw err;
             }

@@ -92,7 +92,12 @@ namespace SIL.PublishingSolution
                     }
                     if (int.Parse(projSettingsVerNum) < 13 && !copiedMetadataBlock)
                     {
-                        Version13(GetDirectoryPath(settingsPath, appPath), projSchemaVersion);
+                        Version13(GetDirectoryPath(settingsPath, appPath));
+                        Param.LoadSettings();
+                    }
+                    if (int.Parse(projSettingsVerNum) < 14)
+                    {
+                        Version14(GetDirectoryPath(settingsPath, appPath));
                         Param.LoadSettings();
                     }
                     //Version2(GetDirectoryPath(settingsPath, appPath), appSettingsPath, projSchemaVersion);
@@ -243,8 +248,7 @@ namespace SIL.PublishingSolution
         /// Update to change made in version 13 of the XML. Here there is only one change - adding a TOC element.
         /// </summary>
         /// <param name="destSettingsFile"></param>
-        /// <param name="projSchemaVersion"></param>
-        private void Version13(string destSettingsFile, string projSchemaVersion)
+        private void Version13(string destSettingsFile)
         {
             // load the destination settings file (the one in ProgramData) that is missing the <meta> block for the TOC);
             if (!File.Exists(destSettingsFile)) { return; }
@@ -253,7 +257,7 @@ namespace SIL.PublishingSolution
             XmlElement root = destDoc.DocumentElement;
             if (root != null)
             {
-                root.SetAttribute("version", projSchemaVersion);
+                root.SetAttribute("version", "13");
                 // Metadata block
                 const string sPath = "//stylePick/Metadata";
                 XmlNode metadataNode = root.SelectSingleNode(sPath);
@@ -266,6 +270,44 @@ namespace SIL.PublishingSolution
                     defaultValueNode.InnerText = "false";
                     metadataNode.AppendChild(newMetaNode);
                     newMetaNode.AppendChild(defaultValueNode);
+                }
+            }
+            destDoc.Save(destSettingsFile);
+        }
+
+        /// <summary>
+        /// Update to change made in version 14 of the XML. The change here is a References feature block for epub / scriptures (only).
+        /// </summary>
+        /// <param name="destSettingsFile"></param>
+        private void Version14(string destSettingsFile)
+        {
+            // load the destination settings file (the one in ProgramData) that is missing the <meta> block for the TOC);
+            if (!File.Exists(destSettingsFile)) { return; }
+            var destDoc = new XmlDocument { XmlResolver = null };
+            destDoc.Load(destSettingsFile);
+            XmlElement root = destDoc.DocumentElement;
+            if (root != null)
+            {
+                root.SetAttribute("version", "14");
+                // Metadata block
+                const string referencesPath = "//stylePick/features/feature[@name=\"References\"]";
+                const string featuresPath = "//stylePick/features";
+                XmlNode referencesNode = root.SelectSingleNode(referencesPath);
+                XmlNode featuresNode = root.SelectSingleNode(featuresPath);
+                if (featuresNode == null) {return;}
+                if (referencesNode != null)
+                {
+                    XmlElement newNode = destDoc.CreateElement("feature");
+                    newNode.SetAttribute("name", "References");
+                    XmlElement optionNode1 = destDoc.CreateElement("option");
+                    optionNode1.SetAttribute("name", "After Each Section");
+                    optionNode1.SetAttribute("file", "Empty.css");
+                    XmlElement optionNode2 = destDoc.CreateElement("option");
+                    optionNode2.SetAttribute("name", "At End of Document");
+                    optionNode2.SetAttribute("file", "Empty.css");
+                    newNode.AppendChild(optionNode1);
+                    newNode.AppendChild(optionNode2);
+                    featuresNode.AppendChild(newNode);
                 }
             }
             destDoc.Save(destSettingsFile);
