@@ -464,7 +464,7 @@
         <text:p text:style-name="Footer">
           <text:tab />
           <text:tab />
-          <draw:frame draw:style-name="Mfr3" draw:name="Frame1" text:anchor-type="paragraph" svg:x="0pt" svg:y="72pt" fo:min-width="135pt" draw:z-index="1">
+          <draw:frame draw:style-name="Mfr3" draw:name="Frame1" text:anchor-type="paragraph" svg:x="0pt" svg:y="71.3pt" fo:min-width="135pt" draw:z-index="1">
             <draw:text-box fo:min-height="14.14pt">
               <text:p text:style-name="MP1">
                 <text:span text:style-name="MT1">
