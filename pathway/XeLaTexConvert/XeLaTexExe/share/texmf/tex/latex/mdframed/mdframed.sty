@@ -1,0 +1,918 @@
+%%==================================================%%
+%%========Is based on the idea of framed.sty========%%
+%%==================================================%%
+%%===== Currently the package has a beta-Status ====%%
+%%==================================================%%
+%% WITH THANKS TO (alphabetically):
+%% ROLF NIEPRASCHK
+%% HEIKO OBERDIEK
+%% HERBERT VOSS
+
+%% Copyright (c) 2010 Marco Daniel
+%
+%% This package may be distributed under the terms of the LaTeX Project
+%% Public License, as described in lppl.txt in the base LaTeX distribution.
+%% Either version 1.0 or, at your option, any later version.
+%%
+%%
+%%==================================================%%
+%% Erstellung eines Rahmens, der am Seitenende keine
+%% horizontale Linie einfuegt
+%%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>%%
+%%      _______________                            %%
+%%      |    page 1   |                            %%  
+%%      |    Text     |                            %%
+%%      |  __Text__   |                            %%
+%%      |  | Text |   |                            %%
+%%     P A G E B R E A K                           %%
+%%      |  | Text |   |                            %%
+%%      |  |_Text_|   |                            %%
+%%      |    Text     |                            %%
+%%      |____page 2___|                            %%
+%%                                                 %%
+%%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>%%
+
+
+%%$Id: mdframed.sty 103 2010-12-22 16:46:10Z marco $
+%%$Rev: 103 $
+%%$Author: marco $
+%%$Date: 2010-12-22 17:46:10 +0100 (Mi, 22. Dez 2010) $
+
+%% Allgemeine Angaben
+\def\mdversion{v0.6a}
+\def\mdframedpackagename{mdframed}
+\def\md@maindate@svn$#1: #2 #3 #4-#5-#6 #7 #8${#4/#5/#6\space }
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mdframed}[\md@maindate@svn$Id: mdframed.sty 103 2010-12-22 16:46:10Z marco $ \mdversion: \mdframedpackagename]
+
+%%==================================================%%
+%%=============== Benoetigte Pakete ================%%
+%%==================================================%%
+
+\newcommand*\md@PackageWarning[1]{\PackageWarning{\mdframedpackagename}{#1}}
+\newcommand*\md@PackageInfo[1]{\PackageInfo{\mdframedpackagename}{#1}}
+\newcommand*\md@LoadFile@IfExist[1]{%
+ \IfFileExists{#1.sty}{%
+          \RequirePackage{#1}%
+        }{%
+        \md@PackageWarning{The package #1 does not exist\MessageBreak
+                           but it is required by \mdframedpackagename}%
+       }
+}
+\md@LoadFile@IfExist{kvoptions}
+
+\md@LoadFile@IfExist{etex}
+
+\md@LoadFile@IfExist{calc}
+
+\md@LoadFile@IfExist{color}
+
+
+%Eingearbeitet in Optionen
+%\md@LoadFile@IfExist{pstricks}
+%\md@LoadFile@IfExist{pstricks}
+
+\md@LoadFile@IfExist{etoolbox}
+
+\SetupKeyvalOptions{family=mdf,prefix=mdf@}
+
+%%==================================================%%
+%%========Hilfsmakro zur Bestimmung ob Laenge=======%%
+%%============= IDEE: Martin Scharrer ==============%%
+%%==================================================%%
+
+%%%\md@iflength{<EINGABE>}{<IST LAENGE>}{<IST KEINE LAENGE>}
+\newlength{\md@templength}
+\def\md@iflength#1{%
+  \afterassignment\md@iflength@check%
+  \md@templength=#1\mdf@defaultunit\relax\relax
+  \expandafter\endgroup\next
+}
+\def\md@iflength@check#1{%
+  \begingroup
+  \ifx\relax#1\@empty
+    \def\next{\@secondoftwo}
+  \else
+    \def\next{\@firstoftwo}
+    \expandafter\md@iflength@cleanup
+  \fi
+}
+\def\md@iflength@cleanup#1\relax{}
+
+%%\def\md@@iflength#1{
+%%       \begingroup
+%%       \def\@tempa{#1}
+%%       \md@iflength{\@tempa}{%
+%%             \expandafter\global\expandafter%
+%%             \edef\csname #1\endcsname{\the\md@templength}%
+%%            }{%
+%%             \expandafter\global\expandafter%
+%%             \edef\csname #1\endcsname{\the\md@templength}%
+%%            }%
+%%       \endgroup%
+%%}
+
+%%==================================================%%
+%%==================== Optionen ====================%%
+%%==================================================%%
+
+
+%Festlegung welcher Stildatei
+%% 0 := tex-Kommandos -- rule
+%% 1 := tikz
+%% 2 := tikz-erweitert
+%% 3 := pstricks-einfach
+%% 4 := pstricks-erweitert
+
+\DeclareStringOption[0]{style}
+
+\define@key{mdf}{globalstyle}[\mdf@style]{%
+      \renewcommand*{\do}[1]{%
+          \def\@tempa{##1}
+          \ifcase\number\@tempa\relax
+             %0 <- kein Grafikpaket
+          \or
+             \md@LoadFile@IfExist{tikz}
+             %1 <- tikz wird benoetigt
+          \or
+             \md@LoadFile@IfExist{tikz}
+             %2 <- tikz wird benoetigt
+          \or
+             \md@LoadFile@IfExist{pstricks-add}
+             %3 <- pstricks wird benoetigt
+          \or
+             \md@LoadFile@IfExist{pstricks-add}
+             %4 <- pstricks wird benoetigt
+          \else
+            \md@PackageWarning{Unknown global style \@tempa}
+          \fi
+      }%
+      \docsvlist{\mdf@style,#1}%
+ }
+
+%%%%Optionen mit Laengen
+
+\newcommand*\mdf@skipabove{\z@}
+\newcommand*\mdfl@skipabove{}
+\newlength\mdf@skipabove@length
+\deflength\mdf@skipabove@length{\z@}
+\define@key{mdf}{skipabove}[\z@]{%
+       \def\@tempa{#1}
+        \md@iflength{\@tempa}%
+            {\global\edef\mdfl@skipabove{\the\md@templength}}%
+            {\global\edef\mdfl@skipabove{\the\md@templength}}
+\let\mdf@skipabove\mdfl@skipabove
+\setlength\mdf@skipabove@length{\mdf@skipabove}
+}
+
+\newcommand*\mdf@skipbelow{\z@}
+\newcommand*\mdfl@skipbelow{}
+\newlength\mdf@skipbelow@length
+\deflength\mdf@skipbelow@length{\z@}
+\define@key{mdf}{skipbelow}[\z@]{%
+       \def\@tempa{#1}
+        \md@iflength{\@tempa}%
+            {\global\edef\mdfl@skipbelow{\the\md@templength}}%
+            {\global\edef\mdfl@skipbelow{\the\md@templength}}
+\let\mdf@skipbelow\mdfl@skipbelow
+\setlength\mdf@skipbelow@length{\mdf@skipbelow}
+}
+
+\newcommand*\mdf@leftmargin{\z@}
+\newcommand*\mdfl@leftmargin{}
+\newlength\mdf@leftmargin@length
+\deflength\mdf@leftmargin@length{\z@}
+\define@key{mdf}{leftmargin}[\z@]{%
+       \def\@tempa{#1}
+        \md@iflength{\@tempa}%
+            {\global\edef\mdfl@leftmargin{\the\md@templength}}%
+            {\global\edef\mdfl@leftmargin{\the\md@templength}}
+\let\mdf@leftmargin\mdfl@leftmargin
+\setlength\mdf@leftmargin@length{\mdf@leftmargin}
+}
+
+\newcommand*\mdf@rightmargin{\z@}
+\newcommand*\mdfl@rightmargin{}
+\newlength\mdf@rightmargin@length
+\deflength\mdf@rightmargin@length{\z@}
+\define@key{mdf}{rightmargin}[\z@]{%
+       \def\@tempa{#1}
+        \md@iflength{\@tempa}%
+            {\global\edef\mdfl@rightmargin{\the\md@templength}}%
+            {\global\edef\mdfl@rightmargin{\the\md@templength}}
+\let\mdf@rightmargin\mdfl@rightmargin
+\setlength\mdf@rightmargin@length{\mdf@rightmargin}
+}
+
+\newcommand*\mdf@margin{20pt}
+\newcommand*\mdfl@margin{}
+\newlength\mdf@margin@length
+\deflength\mdf@margin@length{20pt}
+\define@key{mdf}{margin}[20pt]{%
+     \md@PackageWarning{The option margin is obsolote and no longer used\MessageBreak
+                        use instead innerleftmargin and innerrightmargin\MessageBreak
+                        For more details look at the documentation \mdframedpackagename}%
+       \def\@tempa{#1}
+        \md@iflength{\@tempa}%
+            {\global\edef\mdfl@margin{\the\md@templength}}%
+            {\global\edef\mdfl@margin{\the\md@templength}}
+\let\mdf@margin\mdfl@margin
+\setlength\mdf@margin@length{\mdf@margin}
+}
+
+\newcommand*\mdf@innerleftmargin{10pt}
+\newcommand*\mdfl@innerleftmargin{}
+\newlength\mdf@innerleftmargin@length
+\deflength\mdf@innerleftmargin@length{10pt}
+\define@key{mdf}{innerleftmargin}[10pt]{%
+       \def\@tempa{#1}
+        \md@iflength{\@tempa}%
+            {\global\edef\mdfl@innerleftmargin{\the\md@templength}}%
+            {\global\edef\mdfl@innerleftmargin{\the\md@templength}}
+\let\mdf@innerleftmargin\mdfl@innerleftmargin
+\setlength\mdf@innerleftmargin@length{\mdf@innerleftmargin}
+}
+
+\newcommand*\mdf@innerrightmargin{10pt}
+\newcommand*\mdfl@innerrightmargin{}
+\newlength\mdf@innerrightmargin@length
+\deflength\mdf@innerrightmargin@length{10pt}
+\define@key{mdf}{innerrightmargin}[10pt]{%
+       \def\@tempa{#1}
+        \md@iflength{\@tempa}%
+            {\global\edef\mdfl@innerrightmargin{\the\md@templength}}%
+            {\global\edef\mdfl@innerrightmargin{\the\md@templength}}
+\let\mdf@innerrightmargin\mdfl@innerrightmargin
+\setlength\mdf@innerrightmargin@length{\mdf@innerrightmargin}
+}
+
+
+
+\newcommand*\mdf@innertopmargin{0.4\baselineskip}
+\newcommand*\mdfl@innertopmargin{}
+\newlength\mdf@innertopmargin@length
+\deflength\mdf@innertopmargin@length{0.4\baselineskip}
+\define@key{mdf}{innertopmargin}[0.4\baselineskip]{%
+       \def\@tempa{#1}
+        \md@iflength{\@tempa}%
+            {\global\edef\mdfl@innertopmargin{\the\md@templength}}%
+            {\global\edef\mdfl@innertopmargin{\the\md@templength}}
+\let\mdf@innertopmargin\mdfl@innertopmargin
+\setlength\mdf@innertopmargin@length{\mdf@innertopmargin}
+}
+
+\newcommand*\mdf@innerbottommargin{0.4\baselineskip}
+\newcommand*\mdfl@innerbottommargin{}
+\newlength\mdf@innerbottommargin@length
+\deflength\mdf@innerbottommargin@length{0.4\baselineskip}
+\define@key{mdf}{innerbottommargin}[0.4\baselineskip]{%
+       \def\@tempa{#1}
+        \md@iflength{\@tempa}%
+            {\global\edef\mdfl@innerbottommargin{\the\md@templength}}%
+            {\global\edef\mdfl@innerbottommargin{\the\md@templength}}
+\let\mdf@innerbottommargin\mdfl@innerbottommargin
+\setlength\mdf@innerbottommargin@length{\mdf@innerbottommargin}
+}
+
+
+\newcommand*\mdf@splittopskip{\z@}
+\newcommand*\mdfl@splittopskip{}
+\newlength\mdf@splittopskip@length
+\deflength\mdf@splittopskip@length{\z@}
+\define@key{mdf}{splittopskip}[\z@]{%
+       \def\@tempa{#1}
+        \md@iflength{\@tempa}%
+            {\global\edef\mdfl@splittopskip{\the\md@templength}}%
+            {\global\edef\mdfl@splittopskip{\the\md@templength}}
+\let\mdf@splittopskip\mdfl@splittopskip
+\setlength\mdf@splittopskip@length{\mdf@splittopskip}
+}
+
+
+
+\newcommand*\mdf@splitbottomskip{\z@}
+\newcommand*\mdfl@splitbottomskip{}
+\newlength\mdf@splitbottomskip@length
+\deflength\mdf@splitbottomskip@length{\z@}
+\define@key{mdf}{splitbottomskip}[\z@]{%
+       \def\@tempa{#1}
+        \md@iflength{\@tempa}%
+            {\global\edef\mdfl@splitbottomskip{\the\md@templength}}%
+            {\global\edef\mdfl@splitbottomskip{\the\md@templength}}
+\let\mdf@splitbottomskip\mdfl@splitbottomskip
+\setlength\mdf@splitbottomskip@length{\mdf@splitbottomskip}
+}
+
+
+%% Linienstaerken
+\newcommand*\mdf@linewidth{0.4pt}
+\newcommand*\mdfl@linewidth{}
+\newlength\mdf@linewidth@length
+\deflength\mdf@linewidth@length{0.4pt}
+\define@key{mdf}{linewidth}[0.4pt]{%
+       \def\@tempa{#1}
+        \md@iflength{\@tempa}%
+            {\global\edef\mdfl@linewidth{\the\md@templength}}%
+            {\global\edef\mdfl@linewidth{\the\md@templength}}
+\let\mdf@linewidth\mdfl@linewidth
+\setlength\mdf@linewidth@length{\mdf@linewidth}%
+\ifnumequal{\mdf@style}{1}{%
+\deflength\mdf@middlelinewidth@length{\mdf@linewidth@length}%
+}{}%
+}
+
+\newcommand*\mdf@innerlinewidth{\z@}
+\newcommand*\mdfl@innerlinewidth{}
+\newlength\mdf@innerlinewidth@length
+\deflength\mdf@innerlinewidth@length{\z@}
+\define@key{mdf}{innerlinewidth}[\z@]{%
+       \def\@tempa{#1}
+        \md@iflength{\@tempa}%
+            {\global\edef\mdfl@innerlinewidth{\the\md@templength}}%
+            {\global\edef\mdfl@innerlinewidth{\the\md@templength}}
+\let\mdf@innerlinewidth\mdfl@innerlinewidth
+\setlength\mdf@innerlinewidth@length{\mdf@innerlinewidth}
+}
+
+\newcommand*\mdf@middlelinewidth{\mdf@linewidth}
+\newcommand*\mdfl@middlelinewidth{}
+\newlength\mdf@middlelinewidth@length
+\deflength\mdf@middlelinewidth@length{\mdf@linewidth@length}
+\define@key{mdf}{middlelinewidth}[\mdf@linewidth]{%
+       \def\@tempa{#1}
+        \md@iflength{\@tempa}%
+            {\global\edef\mdfl@middlelinewidth{\the\md@templength}}%
+            {\global\edef\mdfl@middlelinewidth{\the\md@templength}}
+\let\mdf@middlelinewidth\mdfl@middlelinewidth
+\setlength\mdf@middlelinewidth@length{\mdf@middlelinewidth}
+}
+
+\newcommand*\mdf@outerlinewidth{\z@}
+\newcommand*\mdfl@outerlinewidth{}
+\newlength\mdf@outerlinewidth@length
+\deflength\mdf@outerlinewidth@length{\z@}
+\define@key{mdf}{outerlinewidth}[\z@]{%
+       \def\@tempa{#1}
+        \md@iflength{\@tempa}%
+            {\global\edef\mdfl@outerlinewidth{\the\md@templength}}%
+            {\global\edef\mdfl@outerlinewidth{\the\md@templength}}
+\let\mdf@outerlinewidth\mdfl@outerlinewidth
+\setlength\mdf@outerlinewidth@length{\mdf@outerlinewidth}
+}
+
+\newcommand*\mdf@roundcorner{\z@}
+\newcommand*\mdfl@roundcorner{}
+\newlength\mdf@roundcorner@length
+\deflength\mdf@roundcorner@length{\z@}
+\define@key{mdf}{roundcorner}[\z@]{%
+       \def\@tempa{#1}
+        \md@iflength{\@tempa}%
+            {\global\edef\mdfl@roundcorner{\the\md@templength}}%
+            {\global\edef\mdfl@roundcorner{\the\md@templength}}
+\let\mdf@roundcorner\mdfl@roundcorner
+\setlength\mdf@roundcorner@length{\mdf@roundcorner}
+}
+
+%Unterstuetzung der Optionen fuer pstricks
+\def\mdf@psset@local{}
+\define@key{mdf}{pstrickssetting}{%
+  \def\mdf@psset@local{#1}
+}
+
+
+%%Defaulunit
+\DeclareStringOption[pt]{defaultunit}
+
+%%mdframed umfasst ntheorem-Umgebung ja/nein
+\DeclareBoolOption{ntheorem}
+
+\DeclareBoolOption[true]{topline}
+\DeclareBoolOption[true]{leftline}
+\DeclareBoolOption[true]{bottomline}
+\DeclareBoolOption[true]{rightline}
+
+
+%%FARBEN
+\DeclareStringOption[none]{xcolor}
+\DeclareStringOption[black]{linecolor}
+\DeclareStringOption[white]{backgroundcolor}
+\DeclareStringOption[black]{fontcolor}
+\DeclareStringOption[\mdf@linecolor]{innerlinecolor}
+\DeclareStringOption[\mdf@linecolor]{outerlinecolor}
+\DeclareStringOption[\mdf@backgroundcolor]{middlelinecolor}
+
+
+\DeclareDefaultOption{%
+   \md@PackageWarning{Unknown Option '\CurrentOption' for mdframed}}
+
+
+%%==================================================%%
+%%========== ENDE DER OPTIONENDEKLARATION ==========%%
+%%==================================================%%
+
+\ProcessKeyvalOptions*
+\newcommand*{\mdfsetup}{\setkeys{mdf}}
+%%\mdfsetup{globalstyle=0}%%
+
+%%==================================================%%
+%%========Sicherstellen der key-value-Syntax========%%
+%%==================================================%%
+\AtBeginDocument{
+ \@ifpackageloaded{xcolor}{%
+    \let\mdf@xcolor\@empty %ignoriere die Eingabe der Optionen
+    }{%
+     \def\@tempa{none}
+    \ifx\mdf@xcolor\@tempa
+    \else
+     \PassOptionsToPackage{\mdf@xcolor}{xcolor}
+     \RequirePackage{xcolor}
+   \fi
+ }
+}
+
+
+
+%%Farbabkuerzungen:
+\newcommand*\mdf@@linecolor{\color{\mdf@linecolor}}
+\newcommand*\mdf@@backgroundcolor{
+    \ifx\mdf@backgroundcolor\@empty
+    \else
+         \color{\mdf@backgroundcolor}
+    \fi}
+\newcommand*\mdf@@fontcolor{\color{\mdf@fontcolor}}
+\newcommand*\mdf@@innerlinecolor{\color{\mdf@innerlinecolor}}
+\newcommand*\mdf@@outerlinecolor{\color{\mdf@outerlinecolor}}
+\newcommand*\mdf@@middlelinecolor{\color{\mdf@middlelinecolor}}
+
+%%==================================================%%
+%%======= Laden der gewuenschten Style-Datei =======%%
+%%==================================================%%
+\ifcase\mdf@style\relax%
+        \input{md-frame-0.mdf}%
+      \or%
+        \input{md-frame-1.mdf}%
+      \or%        
+        \md@PackageWarning{The style number\mdf@style does not exist\MessageBreak
+                           mdframed ues instead style=0 \mdframedpackagename}%
+        \input{md-frame-1.mdf}%
+      \or% 
+        \input{md-frame-3.mdf}%
+      \else%
+       \IfFileExists{md-frame-\mdf@style.mdf}{%
+             \input{md-frame-\mdf@style.mdf}%
+           }{%
+            \input{md-frame-1.mdf}%
+            \md@PackageWarning{The style number \mdf@style does not exist\MessageBreak
+                           mdframed ues instead style=0 \mdframedpackagename}%
+          }%
+\fi%
+
+
+%%==================================================%%
+%%===Globale Umgebung -- noch keine Modifikation ===%%
+%%==================================================%%
+\def\md@margin@startenv{% latex.ltx -> \@startsection
+    \if@noskipsec \leavevmode  \fi
+    \par%\kern-\lastskip%
+    \@tempskipa -\mdf@skipabove@length\relax
+    \@afterindenttrue
+    \ifdim \@tempskipa < \z@
+      \@tempskipa -\@tempskipa \@afterindentfalse%
+    \fi
+    \if@nobreak
+      \everypar{}%
+    \else
+      \addpenalty\@secpenalty\addvspace\@tempskipa%
+      \par\kern-\ht\strutbox
+    \fi%
+}%
+
+
+\def\mdframed{%
+   \@ifnextchar[%]
+       \mdframed@i\mdframed@ii}%
+
+\def\mdframed@ii{\mdframed@i[]}%
+\def\mdframed@i[#1]{% default-Umgebung
+   \mdfsetup{#1}%%
+   \md@margin@startenv%
+   \ifmdf@ntheorem%       %%% Pruefen ob ntheorem gesetzt ist
+   \ifundef{\theorempreskipamount}%
+          {\md@PackageWarning{You have not loaded ntheorem yet}}%
+          {\setlength{\theorempreskipamount}{0pt}%
+           \setlength{\theorempostskipamount}{0pt}}%
+   \fi%
+   \ifnumequal{\mdf@style}{0}% 
+   {\deflength{\mdf@innerlinewidth@length}{\z@}%
+    \deflength{\mdf@middlelinewidth@length}{\mdf@linewidth@length}%
+    \deflength{\mdf@outerlinewidth@length}{\z@}%
+    \let\mdf@innerlinecolor\mdf@linecolor%
+    \let\mdf@middlelinecolor\mdf@linecolor%
+    \let\mdf@outerlinecolor\mdf@linecolor%
+   }{}%
+   \ifnumequal{\mdf@style}{3}% 
+   {\deflength{\mdf@innerlinewidth@length}{\z@}%
+   \deflength{\mdf@middlelinewidth@length}{\mdf@linewidth}%
+    \deflength{\mdf@outerlinewidth@length}{\z@}%
+    \let\mdf@innerlinecolor\mdf@linecolor%
+   }{}%
+   \mdframed@global@env%
+   }%
+
+\def\endmdframed{\endmdframed@global@env\endtrivlist%
+\vspace{\mdf@skipbelow@length}}%
+
+%%==================================================%%
+%%==Deklaration diverser Eingabe und Hilfsparameter=%%
+%%==================================================%%
+
+\newskip\md@temp@skip@a      \md@temp@skip@a\z@    %% Hilfslaenge
+
+\newlength\md@verticalmarginwhole@length
+
+\newlength\mdf@xmargin@length%
+\newlength\mdf@ymargin@length%
+\newlength\mdfboxheight%                            %% Berechnungsvariable tikz
+\newlength\mdfboxwidth%                             %% Berechnungsvariable tikz
+
+
+\newlength\mdfboundingboxheight
+\newlength\mdfboundingboxwidth
+\newlength\mdfpositionx
+\newlength\mdfpositiony
+
+
+
+\providecommand*\ptTps{}
+
+
+%%==================================================%%
+%%=================== Kommentare ===================%%
+%%==================================================%%
+
+\chardef\md@arrayparboxrestore=\catcode`\|   % for debug
+\catcode`\|=\catcode`\%                      % (debug: insert space after backslash)
+%% Kommentare werden im Code mit | gekennzeichnet
+
+
+%%==================================================%%
+%%================= Platz auf Seite ================%%
+%%==================================================%%
+\newlength\md@freevspace@length
+\def\md@freepagevspace{%
+     \ifdimequal{\pagegoal}{\maxdimen}%
+          {%
+            \setlength{\md@freevspace@length}{\vsize}%
+          }{
+            \setlength{\md@freevspace@length}{\pagegoal}%
+            \addtolength{\md@freevspace@length}{-\pagetotal}%
+          }%
+}
+
+%%==================================================%%
+%================= Breite der BOX =================%%
+%%==================================================%%
+
+% edge-leftmargin-outerlinewith-middlelinewidth-innerlinewidth-innerleftmargin-TEXTBREITE-
+% innerrightmargin-innerlinewidth-middlelinewidth-outelinewith-edge
+\newlength\md@horizontalspaceofbox
+\def\md@horizontalmargin@equation{%
+    \setlength{\md@horizontalspaceofbox}{\hsize}
+    \addtolength{\md@horizontalspaceofbox}{%
+                         -\mdf@leftmargin@length%
+                         -\mdf@outerlinewidth@length%
+                         -\mdf@middlelinewidth@length%
+                         -\mdf@innerlinewidth@length%
+                         -\mdf@innerleftmargin@length%
+                         -\mdf@innerrightmargin@length%
+                         -\mdf@innerlinewidth@length%
+                         -\mdf@middlelinewidth@length%      
+                         -\mdf@outerlinewidth@length%
+                         -\mdf@rightmargin@length%
+                        }%
+  \ifboolexpr{ test {\ifnumequal{\mdf@style}{0}} or test {\ifnumequal{\mdf@style}{3}}}%
+           {
+           \notbool{mdf@leftline}{\addtolength{\md@horizontalspaceofbox}{%
+                                    \mdf@innerlinewidth@length%
+                                    +\mdf@middlelinewidth@length%      
+                                    +\mdf@outerlinewidth@length%
+                                 }}{}%
+           \notbool{mdf@rightline}{\addtolength{\md@horizontalspaceofbox}{%
+                                    \mdf@innerlinewidth@length%
+                                    +\mdf@middlelinewidth@length%      
+                                    +\mdf@outerlinewidth@length%
+                                  }}{}%
+    }{}%
+    \advance\md@horizontalspaceofbox by - \width\md@arrayparboxrestore%
+    %%% Beruecksichtigung, dass Auszaehlung bzw. list-Umgebung enthalten
+    \ifdimless{\md@horizontalspaceofbox}{3cm}{\md@PackageWarning{You have only a width of 3cm}}{}
+    \hsize=\md@horizontalspaceofbox%
+}
+
+
+
+
+%%==================================================%%
+%%========= Seitenparameter und Strafpunkte ========%%
+%%==================================================%%
+\def\md@penalty@startenv{%
+ \begingroup%
+   \skip@\lastskip%                             %%% lastskip nur ungleich null nach section, list, figure, usw.
+   \if@nobreak%
+   \else 
+      \penalty9999 % updates \page parameters <-pruefen
+      \ifdim\pagefilstretch=\z@                 %%% pagefilstretch ist ein internes Register fuer den
+                                                %%% Seitenumbruch. Es entaehlt den akkumulierten (gespeicherten) fil-Anteil
+                                                %%% auf der aktuellen Seite
+         \ifdim\pagefillstretch=\z@             %%% pagefillstretch ist ein internes Register fuer den
+                                                %%% Seitenumbruch. Es entaehlt den akkumulierten (gespeicherten) fill-Anteil
+                                                %%% auf der aktuellen Seite
+            %%% nicht unendlich dehnbar, so hier foerdern eines Seitenumbruches
+            \edef\@tempa{\the\skip@}%
+            \edef\@tempb{\the\z@skip}%
+            \ifx\@tempa\@tempb                  %%% ???????
+                  \penalty-30%
+            \else
+                  \vskip-\skip@%
+                  \penalty-30%
+                  \vskip\skip@%
+            \fi
+         \fi
+      \fi
+    \penalty\z@%
+    % Give a stretchy breakpoint that will always be taken in preference
+    % to the \penalty 9999 used to update page parameters.  The cube root
+    % of 10000/100 indicates a multiplier of 0.21545, but the maximum 
+    % calculated badness is really 8192, not 10000, so the multiplier
+    % is 0.2301. 
+    \advance\skip@ \z@ plus-.5\baselineskip%
+    \advance\skip@ \z@ plus-.231\height%
+    \advance\skip@ \z@ plus-.231\skip@%
+    \advance\skip@ \z@ plus-.231\topsep%
+    \vskip-\skip@ \penalty 1800 \vskip\skip@%
+  \fi
+ \addvspace{\topsep}%
+ \endgroup%
+ % clear out pending page break
+ \nobreak \vskip 2\baselineskip \vskip\height%     %%%\@M=10000
+ \penalty9999 \vskip -2\baselineskip \vskip-\height%
+ \penalty9999 % updates \pagetotal
+}%
+
+
+%%==================================================%%
+%%============Start der globalen Umgebung===========%%
+%%==================================================%%
+\newskip\md@temp@frame@hsize \md@temp@frame@hsize=0pt%
+\newskip\md@temp@frame@vsize \md@temp@frame@vsize=0pt%
+
+\def\mdframed@global@env{\relax%
+   \let\width\z@%
+   \let\height\z@%
+   \md@penalty@startenv%
+   \def\@doendpe{\@endpetrue%                      %%% SIEHE LATEX.ltx -- ersten Absatz ignorieren
+                 \def\par{\@restorepar\par\@endpefalse}%
+                 \everypar{{\setbox\z@\lastbox}\everypar{}\@endpefalse}%
+                }%
+   \md@horizontalmargin@equation%
+   \setbox\@tempboxa%
+       \vbox\bgroup\@doendpe%
+                 \begingroup%                %%% zweites begingroup noetig, dass fontcolor gesetzt werden kann
+                 \mdf@@fontcolor%            %%% Setzen der Schriftfarbe
+                 \textwidth\md@horizontalspaceofbox \columnwidth\md@horizontalspaceofbox%
+}%
+
+\def\endmdframed@global@env{\par%
+     \kern\z@%
+     \hrule\@width\md@horizontalspaceofbox\@height\z@%   
+     \penalty-100 % put depth into height
+   \endgroup%
+ \egroup%
+ \begingroup%
+  \mdf@@fontcolor%
+  \setbox\@tempboxa\vbox{\unvbox\@tempboxa}
+  \md@put@frame%
+ \endgroup%
+}
+
+%%==================================================%%
+%%===========Ausgaberoutine -> Berechnung===========%%
+%%==================================================%%
+
+%% \md@put@frame nimmt den Inhalt der \@tempboxa und packt alles oder nur einen Teil
+%% auf die Seite mit dem Rahmen.
+%% Es ist rekursiv, solange alles von der \@tempboxa aufgebraucht ist (\@tempboxa muss die Tiefe 0 haben.)
+%% Erste Iteration: Versuche alles in einen Rahmen zu bekommen. Falls es nicht passt, 
+%% splitte es fuer die erste Rahmenumgebung
+%% Spaetere Iteration: Versuche alles in den letzten Rahmen zu bekommen. Falls es nicht passt,
+%% splitte es erneut. (Versuchsstadium -- Da bisher nur Anfang und Ende enthalten)
+
+
+
+\def\md@put@frame{\relax%
+   \md@freepagevspace
+   \ifdimless{\md@freevspace@length}{1.999\baselineskip}
+             {\md@PackageInfo{Not enough space on this page}%die Seite hat nur noch minimal Platz
+              \clearpage%
+              \md@put@frame
+             }{%
+               %Hier berechnung Box-Inhalt+Rahmen oben und unten
+              \setlength{\md@verticalmarginwhole@length}{\ht\@tempboxa+\dp\@tempboxa}%
+              \addtolength{\md@verticalmarginwhole@length}{%
+                 \mdf@outerlinewidth@length%
+                +\mdf@middlelinewidth@length%
+                +\mdf@innerlinewidth@length%
+                +\mdf@innertopmargin@length%
+                +\mdf@innerbottommargin@length%
+                +\mdf@innerlinewidth@length%
+                +\mdf@middlelinewidth@length%
+                +\mdf@outerlinewidth@length%
+                }%
+                \ifnumequal{\mdf@style}{0}%
+                {\ifbool{mdf@topline}{}%
+                   {\addtolength{\md@verticalmarginwhole@length}{-\mdf@middlelinewidth@length}%
+                   }%
+                 \ifbool{mdf@bottomline}{}%
+                   {\addtolength{\md@verticalmarginwhole@length}{-\mdf@middlelinewidth@length}%
+                   }%
+                }{}              
+                \ifnumequal{\mdf@style}{3}%
+                {\ifbool{mdf@topline}{}%
+                   {\addtolength{\md@verticalmarginwhole@length}{-\mdf@middlelinewidth@length}%
+                   }%
+                 \ifbool{mdf@bottomline}{}%
+                   {\addtolength{\md@verticalmarginwhole@length}{-\mdf@middlelinewidth@length}%
+                   }%
+                }{}
+                \ifdimless{\md@verticalmarginwhole@length}{\md@freevspace@length}%
+                {\md@putbox@single}%passt auf Seite
+                {\md@put@frame@i}%passt nicht auf Seite
+             }
+}
+
+\def\md@put@frame@i{%Box muss gesplittet werden -- Ausgabe der ersten Teilbox
+      %Berechnung der Splittgroesse -- Linien und Abstand oben
+      \md@freepagevspace
+      \setlength{\dimen@}{\md@freevspace@length}%
+      \addtolength{\dimen@}{%
+                -\mdf@outerlinewidth@length%
+                -\mdf@middlelinewidth@length%
+                -\mdf@innerlinewidth@length%
+                -\mdf@innertopmargin@length%
+                -\mdf@splitbottomskip@length%
+                }%
+      \ifnumequal{\mdf@style}{0}%
+                {\ifbool{mdf@topline}{}%
+                   {\addtolength{\dimen@}{+\mdf@middlelinewidth@length}%
+                   }%
+                }{}
+       \ifnumequal{\mdf@style}{3}%
+                {\ifbool{mdf@topline}{}%
+                   {\addtolength{\dimen@}{\mdf@middlelinewidth@length}%
+                   }%
+                }{}
+       \ifdimless{\ht\@tempboxa+\dp\@tempboxa}{\dimen@}%
+         {\md@PackageWarning{You got a bad break\MessageBreak
+                             you have to change it manually\MessageBreak
+                             by changing the text, the space\MessageBreak
+                             or something else}%
+         \addtolength{\dimen@}{-1.8\baselineskip}
+         }{}%
+         \addtolength{\dimen@}{-\pageshrink}%Box darf nicht zu Groß werden.
+         \boxmaxdepth\z@ \splittopskip\mdf@splittopskip@length%
+         \setbox\tw@\vsplit\@tempboxa to \dimen@
+         \setbox\tw@\vbox{\unvbox\tw@}%
+         \ifdimgreater{\ht\tw@+\dp\tw@}{\dimen@}{%Falsch gesplittet
+             \setlength\dimen@i{\dimen@}
+             \addtolength{\dimen@}{-\ht\tw@-\dp\tw@}
+             \addtolength\dimen@i{0.5\dimen@}
+             \boxmaxdepth\z@ \splittopskip\z@%
+             \setbox\@tempboxa\vbox{\unvbox\tw@\unvbox\@tempboxa}
+             \boxmaxdepth\z@ \splittopskip\mdf@splittopskip@length%
+             \setbox\tw@\vsplit\@tempboxa to \dimen@i
+             \setbox\tw@\vbox{\unvbox\tw@}%
+             }{}%
+         \setbox\@tempboxa\vbox{\unvbox\@tempboxa}%PRUEFEN!!!!
+         \ifvoid\@tempboxa
+           \md@PackageWarning{You got a bad break\MessageBreak
+                               because the splittet box is empty\MessageBreak
+                               You have to change the page settings\MessageBreak
+                               like enlargethispage or something else}%
+         \fi
+         \ifdimequal{\wd\tw@}{0pt}%%pruefe, ob erste Box leer ist
+            {\clearpage%
+             \md@put@frame}%
+          {\md@putbox@first%%Groesse des Splittens passt
+           \eject%\clearpage%
+           \md@put@frame@ii}%
+}
+
+
+\def\md@put@frame@ii{%Ausgabe der mittleren Box(en) wenn vorhanden
+  \setlength{\md@freevspace@length}{\vsize}%
+  \setlength{\dimen@}{\ht\@tempboxa+\dp\@tempboxa}%
+  \addtolength{\dimen@}{%%Addition der Linien unten
+                 \mdf@outerlinewidth@length%
+                +\mdf@middlelinewidth@length%
+                +\mdf@innerlinewidth@length%
+                +\mdf@innerbottommargin@length%
+                }%
+   \ifboolexpr{( bool {mdf@bottomline} )
+               and
+               (  test {\ifnumequal{\mdf@style}{0}} 
+                  or
+                  test {\ifnumequal{\mdf@style}{3}}
+              )
+              }%
+              {}{\addtolength{\dimen@}{-\mdf@middlelinewidth@length}}%
+    \ifdimgreater{\dimen@}{\md@freevspace@length}%
+    {%
+        \addtolength{\md@freevspace@length}{%%Abzug der Linien unten
+                    -\mdf@splitbottomskip@length%
+                    }%
+        \boxmaxdepth\z@ \splittopskip\mdf@splittopskip@length%
+        \setbox\tw@\vsplit\@tempboxa to \md@freevspace@length%
+        \setbox\tw@\vbox{\unvbox\tw@}%PRUEFEN!!!
+        \setbox\@tempboxa\vbox{\unvbox\@tempboxa}%PRUEFEN!!!!
+        \ifvoid\@tempboxa\relax%
+           \md@PackageWarning{You got a bad break\MessageBreak
+                               because the splittet box is empty\MessageBreak
+                               You have to change the settings}%
+         \fi%
+        \md@putbox@middle%
+        \clearpage\md@put@frame@ii%
+     }%Hier die Ausgabe der mittleren Box
+     {\ifdimequal{\wd\@tempboxa}{\z@}{\md@PackageWarning{You got a bad break\MessageBreak
+                               because the splittet box is empty\MessageBreak
+                               You have to change the settings}%
+                   }{}%
+      \md@putbox@second}%Hier kommt die Ausgabe der letzten Box
+}
+
+
+
+
+\catcode`\|=\md@arrayparboxrestore  %%%????
+
+
+
+
+% \md@arrayparboxrestore has parts of \@parboxrestore, performing a similar but 
+% less complete restoration of a default layout.  See how it is used in the 
+% "settings" argument of \MakeFrame.  Though not a parameter, \hsize 
+% should be set to the desired total line width available inside the
+% frame before invoking \md@arrayparboxrestore.  
+\def\md@arrayparboxrestore{%
+   %%%AUS ltboxes.dtx -> \@arrayparboxrestore
+   \let\if@nobreak\iffalse
+   \let\if@noskipsec\iffalse  
+   \let\-\@dischyph                         %%%Default \let\@dischyph=\-
+   \let\'\@acci\let\`\@accii\let\=\@acciii  %%%Default: \let\@acci\' \let\@accii\` \let\@acciii\= <- Sicher gehen
+                                            %%%dass Defaultwerte erhalten sind
+                                            %%%Scheinen Mathesymbole zu sein ???
+   % Test ob Listenumgebung enthalten ist
+   \ifnum \ifdim\@totalleftmargin>\z@ 1\fi  %%%In latex.ltx->totalleftmargin=\z@, ausser in list-Umgebung:
+                                            %%%\advance\@totalleftmargin \leftmargin
+          \ifdim\rightmargin     >\z@ 1\fi  %%%Default \rightmargin=\z@, Ausnahme: quote usw.
+          \ifnum\@listdepth      >0   1\fi  %%%Zaehler fuer Listentiefe -> Keine Liste \@listdepth=0 sonst, je Ebene +1
+           0>\z@                            %%%Ist ein Parameter erfuellt, dann ist es eine Listenumgebung
+     \@setminipage                          %%%Passform rund um das Element
+     % Nun wird versucht, Aenderungen der Breite von \hsize entsprechend der Listenparameter zu uebergeben.
+     % Dies ist defizitaer, denn eine erweiterte Moeglichkeit, Aenderungen der Textdimension anzugegeben
+     % ist (noch) nicht vorgesehen, insbesondere keine getrennte linke / rechte Einstellung.
+     \advance\linewidth-\columnwidth \advance\linewidth\md@horizontalspaceofbox
+     \parshape\@ne \@totalleftmargin \linewidth %%% parshape definiert das Aussehen  eines Absatzes Zeile fuer Zeile.
+                                                %%% Seine Parameterversorgung geschieht mittels der folgenden Syntax:
+                                                %%% \parshape = n i1 l1 i2 l2 ... in ln.
+                                                %%% Dabei gibt der Parameter n an, fuer wieviele Zeilen Definitionspaare folgen.
+                                                %%% Jedes Definitionspaar besteht aus der Angabe i_j fuer den Einzug und
+                                                %%% der Laengenangabe l_j fuer die entsprechende Zeile. Sind mehr als n Zeilen
+                                                %%% vorhanden, so wird die letzte Angabe stets weiter verwendet
+   \else % Not in list
+     \linewidth=\md@horizontalspaceofbox
+   \fi
+   \sloppy
+}
+
+%%==================================================%%
+%%= Sicherstellen, dass Optionen nur global setzbar=%%
+%%==================================================%%
+
+\DisableKeyvalOption[%  
+  action=warning,  
+  package=mdframed,    
+]{mdf}{globalstyle}%
+
+
+\DisableKeyvalOption[%  
+  action=warning,  
+  package=mdframed,    
+]{mdf}{xcolor}%
+
+
+\endinput
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+EOF
+EOF
+EOF
+

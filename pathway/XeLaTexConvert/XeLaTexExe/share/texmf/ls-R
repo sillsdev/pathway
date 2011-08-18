@@ -10967,6 +10967,7 @@ cyrillic
 dvilj
 dvips
 etex
+etoolbox
 foiltex
 fourier
 glosstex
@@ -10976,6 +10977,7 @@ jknappen
 leftidx
 lm
 mathtime
+mdframed
 mdwtools
 mfnfss
 microtype
@@ -10997,6 +10999,7 @@ txr
 uaq
 ugq
 urw
+xcolor
 yandy
 
 ./tex/latex/amsfonts:
@@ -11204,9 +11207,6 @@ caption3.sty
 ./tex/latex/colortbl:
 colortbl.sty
 
-./tex/latex/zwpagelayout:
-zwpagelayout.sty
-
 ./tex/latex/config:
 color.cfg
 elatex.ini
@@ -11218,6 +11218,10 @@ ltxdoc.cfg
 ltxguide.cfg
 pdflatex.ini
 texsys.cfg
+
+./tex/latex/etoolbox:
+etoolbox.def
+etoolbox.sty
 
 ./tex/latex/cyrillic:
 cp1251.def
@@ -12213,6 +12217,12 @@ utxsyb.fd
 utxsyc.fd
 utxtt.fd
 
+./tex/latex/mdframed:
+md-frame-0.mdf
+md-frame-1.mdf
+md-frame-3.mdf
+mdframed.sty
+
 ./tex/latex/uaq:
 ot1uaq.fd
 t1uaq.fd
@@ -12306,6 +12316,11 @@ ts1uzc.fd
 urw.sty
 uusy.fd
 uuzd.fd
+
+./tex/latex/xcolor:
+svgnam.def
+x11nam.def
+xcolor.sty
 
 ./tex/latex/yandy:
 ly1.txt

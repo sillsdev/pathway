@@ -1,0 +1,193 @@
+%%==================================================%%
+%%= Ausgabe der Box nach Vorgabe der Ausgaberoutine=%%
+%%==================================================%%
+%% Styledatei fuer das Paket mdframed erstellt durch
+%% Marco Daniel und Elke Schubert
+%% 
+%% This package may be distributed under the terms of the LaTeX Project
+%% Public License, as described in lppl.txt in the base LaTeX distribution.
+%% Either version 1.0 or, at your option, any later version.
+
+%%$Id: md-frame-1.mdf 105 2010-12-22 16:50:44Z marco $
+%%$Rev: 105 $
+%%$Author: marco $
+%%$Date: 2010-12-22 17:50:44 +0100 (Mi, 22. Dez 2010) $
+
+\def\mdversion{v0.6a}
+\def\mdframedIpackagename{md-frame-1}
+\def\md@frameIdate@svn$#1: #2 #3 #4-#5-#6 #7 #8${#4/#5/#6\space }
+
+\ProvidesFile{md-frame-1.mdf}[\md@frameIdate@svn$Id: md-frame-1.mdf 105 2010-12-22 16:50:44Z marco $ \mdversion: \mdframedIpackagename]
+
+%%Allgemeine Einstellungen fuer tikz
+
+\def\md@tikz@settings{%
+          %wenn das Innere der Doppellinie 0pt breit ist,
+          %muss Grenze zwischen innerer und aeusserer Linie
+          %einer Farbe zugeordnet werden
+          \ifdimequal{\mdf@middlelinewidth@length}{\z@}%
+                       {\ifdimequal{\mdf@innerlinewidth@length}{\z@}%
+                            {\ifdimequal{\mdf@outerlinewidth@length}{\z@}%
+                              {\let\mdf@middlelinecolor\mdf@backgroundcolor}%
+                              {\let\mdf@middlelinecolor\mdf@outerlinecolor}%
+                            }%
+                            {\let\mdf@middlelinecolor\mdf@innerlinecolor}%
+                        }{}%
+          \ifdimequal{\mdf@innerlinewidth@length}{\z@}%
+                       {\ifdimequal{\mdf@outerlinewidth@length}{\z@}%
+                            {\ifdimequal{\mdf@middlelinewidth@length}{\z@}%
+                              {}%
+                              {\let\mdf@middlelinecolor\mdf@linecolor}%
+                            }%
+                            {}%
+                        }{}%
+        \tikzset{mdftext/.style={inner sep=0pt,outer sep=0pt}}%
+        \tikzset{mdfcorners/.style={rounded corners=\mdf@roundcorner@length}}%
+        \tikzset{mdfbackground/.style={fill=\mdf@backgroundcolor}}%
+        \ifdimgreater{\mdf@outerlinewidth@length}{\z@}%
+            {\tikzset{mdfborderA/.style={%
+                         draw=\mdf@outerlinecolor,%
+                         line width=2\mdf@outerlinewidth@length+\mdf@middlelinewidth@length%
+                         }%
+                     }%
+            }%
+            {\tikzset{mdfborderA/.style={}}}%
+        \ifdimgreater{\mdf@innerlinewidth@length}{\z@}%
+            {\tikzset{mdfborderI/.style={%
+                         draw=\mdf@innerlinecolor,%
+                         line width=2\mdf@innerlinewidth@length+\mdf@middlelinewidth@length%
+                         }%
+                     }%
+            }%
+            {\tikzset{mdfborderI/.style={}}}%
+       \tikzset{mdfmiddle/.style={draw=\mdf@middlelinecolor,line width=\mdf@middlelinewidth@length}}%
+}%
+
+
+
+\def\md@putbox@single{%
+   \leftline{\null\hspace*{\mdf@leftmargin@length}%%
+       \md@tikz@settings%
+        \setlength\mdfboxwidth{\wd\@tempboxa}%
+        \setlength\mdfboxheight{\ht\@tempboxa+\dp\@tempboxa}%
+        \begin{tikzpicture}
+	         \coordinate(O)at(0,0);
+                 \pgfmathsetlengthmacro\x{\mdfboxwidth+\mdf@innerrightmargin@length%
+                                          +\mdf@innerleftmargin@length+%
+                                          2\mdf@innerlinewidth@length+\mdf@middlelinewidth@length}
+                 \pgfmathsetlengthmacro\xp{\mdf@innerleftmargin@length+%
+                                          1*\mdf@innerlinewidth@length+0.5*\mdf@middlelinewidth@length}
+                 \pgfmathsetlengthmacro\y{\mdfboxheight+\mdf@innertopmargin@length%
+                                          +\mdf@innerbottommargin@length%
+                                          +2*\mdf@innerlinewidth@length+\mdf@middlelinewidth@length}
+                 \pgfmathsetlengthmacro\yp{\mdf@innerbottommargin@length%
+                                          +1*\mdf@innerlinewidth@length+0.5*\mdf@middlelinewidth@length}
+                 \coordinate(P)at(\x,\y);
+                 \begin{scope}
+		      \clip[preaction=mdfborderA]%
+                           [postaction={mdfbackground,mdfborderI}]%
+                           [mdfcorners](O)--(O|-P)--(P)--(P|-O)--cycle;
+	         \end{scope}
+                 \path[mdfmiddle,mdfcorners](O)--(O|-P)--(P)--(P|-O)--cycle;
+                 \node[mdftext,anchor=south west]at(\xp,\yp){\box\@tempboxa};
+       \end{tikzpicture}%
+     }%
+}%
+
+\def\md@putbox@first{%
+   \leftline{\null\hspace*{\mdf@leftmargin@length}%%
+       \md@tikz@settings%
+        \setlength\mdfboxwidth{\wd\tw@}%
+        \setlength\mdfboxheight{\ht\tw@+\dp\tw@}%
+        \ifdimequal{\pagegoal}{\maxdimen}{\enlargethispage{\baselineskip}}{}%
+        \begin{tikzpicture}
+	         \coordinate(O) at (0,0);
+                 \pgfmathsetlengthmacro\x{\mdfboxwidth+\mdf@innerrightmargin@length%
+                                          +\mdf@innerleftmargin@length+%
+                                          2*\mdf@innerlinewidth@length+1*\mdf@middlelinewidth@length}
+                 \pgfmathsetlengthmacro\xp{\mdf@innerleftmargin@length+%
+                                          1*\mdf@innerlinewidth@length+0.5*\mdf@middlelinewidth@length}
+                 \pgfmathsetlengthmacro\y{-\mdfboxheight-\mdf@innertopmargin@length%
+                                          -1*\mdf@innerlinewidth@length-0.5*\mdf@middlelinewidth@length+0.0cm}
+                 \pgfmathsetlengthmacro\yp{-\mdf@innertopmargin@length%
+                                           -1*\mdf@innerlinewidth@length-0.5*\mdf@middlelinewidth@length%
+                                           -0.5\mdfboxheight}
+                 \coordinate(P)at(\x,\y);
+                 \clip(-\mdf@outerlinewidth@length-0.5*\mdf@middlelinewidth@length,%
+                       \mdf@outerlinewidth@length+0.5*\mdf@middlelinewidth@length)%
+                      rectangle(\x+\mdf@outerlinewidth@length+0.5*\mdf@middlelinewidth@length,\y);
+                 \begin{scope}
+                     \clip[preaction=mdfborderA]%
+                          [postaction={mdfbackground,mdfborderI}]%
+                          [mdfcorners](O|-P)--(O)--(P|-O)--(P);
+                 \end{scope}
+                 \path[mdfmiddle,mdfcorners,](O|-P)--(O)--(P|-O)--(P);
+                 \node[mdftext,anchor=west,inner sep=0pt,outer sep=0pt]at(\xp,\yp){\box\tw@};
+%                 \draw[fill] (0,0) circle (.1cm);
+%                 \draw[fill,yellow] (\x,\y) circle (.1cm);
+%                 \draw[fill,orange] (\xp,\yp) circle (.05cm);
+     \end{tikzpicture}%
+     }%
+}%
+
+
+\def\md@putbox@middle{%
+   \leftline{\null\hspace*{\mdf@leftmargin@length}%%
+        \md@tikz@settings%
+        \setlength\mdfboxwidth{\wd\tw@}%
+        \setlength\mdfboxheight{\ht\tw@}%
+        \setlength{\mdf@ymargin@length}{0.4\baselineskip}%
+        \begin{tikzpicture}
+	         \coordinate(O)at(0,0);
+                 \pgfmathsetlengthmacro\x{\mdfboxwidth+\mdf@innerrightmargin@length%
+                                          +\mdf@innerleftmargin@length+%
+                                          2*\mdf@innerlinewidth@length+1*\mdf@middlelinewidth@length}
+                 \pgfmathsetlengthmacro\xp{\mdf@innerleftmargin@length+%
+                                          1*\mdf@innerlinewidth@length+0.5*\mdf@middlelinewidth@length}
+                 \pgfmathsetlengthmacro\y{\mdfboxheight}
+                 \pgfmathsetlengthmacro\yp{0cm}
+                 \coordinate(P)at(\x,\y);
+                 \clip(-\mdf@outerlinewidth@length-0.5*\mdf@middlelinewidth@length,0)%
+                       rectangle(\x+\mdf@outerlinewidth@length+0.5*\mdf@middlelinewidth@length,\y);
+                 \begin{scope}
+                 	\path[mdfborderA](O)--(O|-P)(P)--(P|-O);
+                        \clip[postaction=mdfbackground](O)--(O|-P)--(P)--(P|-O);
+                        \path[mdfborderI](O)--(O|-P)(P)--(P|-O);
+                 \end{scope}
+                 \path[mdfmiddle](O)--(O|-P)(P)--(P|-O);
+                 \node[mdftext,anchor=south west]at(\xp,\yp){\box\tw@};
+       \end{tikzpicture}%
+     }
+}
+
+\def\md@putbox@second{%
+   \leftline{\null\hspace*{\mdf@leftmargin@length}%%
+       \md@tikz@settings%
+        \setlength\mdfboxwidth{\wd\@tempboxa}%
+        \setlength\mdfboxheight{\ht\@tempboxa}%
+        \begin{tikzpicture}
+                 \coordinate(O)at(0,0);
+                 \pgfmathsetlengthmacro\x{\mdfboxwidth+\mdf@innerrightmargin@length%
+                                          +\mdf@innerleftmargin@length+%
+                                          2*\mdf@innerlinewidth@length+1*\mdf@middlelinewidth@length}
+                 \pgfmathsetlengthmacro\xp{\mdf@innerleftmargin@length+%
+                                          1*\mdf@innerlinewidth@length+0.5*\mdf@middlelinewidth@length}
+                 \pgfmathsetlengthmacro\y{\mdfboxheight%
+                                          +\mdf@innerbottommargin@length%
+                                          +1*\mdf@innerlinewidth@length+0.5*\mdf@middlelinewidth@length}
+                 \pgfmathsetlengthmacro\yp{\mdf@innerbottommargin@length%
+                                          +1*\mdf@innerlinewidth@length+0.5*\mdf@middlelinewidth@length}
+                 \coordinate(P)at(\x,\y);
+                 \clip(-\mdf@outerlinewidth@length-0.5*\mdf@middlelinewidth@length,%
+                       -\mdf@outerlinewidth@length-0.5*\mdf@middlelinewidth@length)%
+                      rectangle(\x+\mdf@outerlinewidth@length+0.5*\mdf@middlelinewidth@length,\y);
+                 \begin{scope}
+                      \clip[preaction=mdfborderA]%
+                      [postaction={mdfbackground,mdfborderI}]%
+                      [mdfcorners](P-|O)--(O)--(O-|P)--(P);
+                 \end{scope}
+                 \path[mdfmiddle,mdfcorners](P-|O)--(O)--(O-|P)--(P);
+                 \node[mdftext,anchor=south west] at (\xp,\yp){\box\@tempboxa};
+       \end{tikzpicture}%
+     }
+}

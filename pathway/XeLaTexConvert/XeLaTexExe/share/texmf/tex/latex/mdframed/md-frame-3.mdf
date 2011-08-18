@@ -1,0 +1,943 @@
+%%==================================================%%
+%%= Ausgabe der Box nach Vorgabe der Ausgaberoutine=%%
+%%==================================================%%
+%% Styledatei fuer das Paket mdframed erstellt durch
+%% Marco Daniel 
+
+%% This package may be distributed under the terms of the LaTeX Project
+%% Public License, as described in lppl.txt in the base LaTeX distribution.
+%% Either version 1.0 or, at your option, any later version.
+
+%%$Id: md-frame-3.mdf 105 2010-12-22 16:50:44Z marco $
+%%$Rev: 105 $
+%%$Author: marco $
+%%$Date: 2010-12-22 17:50:44 +0100 (Mi, 22. Dez 2010) $
+
+
+%%Allgemeine Einstellungen fuer pstricks
+%%Hier nur einfacher Rahmen mit Einstellungen
+
+\def\mdversion{v0.6a}
+\def\mdframedIIIpackagename{md-frame-3}
+\def\md@frameIIIdate@svn$#1: #2 #3 #4-#5-#6 #7 #8${#4/#5/#6\space }
+
+\ProvidesFile{md-frame-3.mdf}[\md@frameIIIdate@svn$Id: md-frame-3.mdf 105 2010-12-22 16:50:44Z marco $ \mdversion: \mdframedIIIpackagename]
+
+\def\md@ptlength@to@pscode#1{\pst@number{#1} \pst@number\psxunit div}
+\let\ptTps\md@ptlength@to@pscode\relax
+
+
+\def\md@putbox@single{%
+   \leftline{\null\hspace*{\mdf@leftmargin@length}%%
+        \setlength\mdfboxwidth{\wd\@tempboxa}%
+        \setlength\mdfboxheight{\ht\@tempboxa+\dp\@tempboxa}%
+        \setlength{\mdfboundingboxheight}{%
+                     \mdfboxheight%
+                    +\mdf@innertopmargin@length%
+                    +\mdf@innerbottommargin@length%
+%                    +\mdf@middlelinewidth@length%
+%                    +\mdf@middlelinewidth@length%
+                  }%
+         \ifbool{mdf@topline}{\addtolength{\mdfboundingboxheight}{\mdf@middlelinewidth@length}}{}%
+         \ifbool{mdf@bottomline}{\addtolength{\mdfboundingboxheight}{\mdf@middlelinewidth@length}}{}%
+         \setlength{\mdfboundingboxwidth}{%
+                     \mdfboxwidth%
+                    +\mdf@innerleftmargin@length%
+                    +\mdf@innerrightmargin@length%
+%                    +\mdf@middlelinewidth@length%
+%                    +\mdf@middlelinewidth@length%
+                  }%
+       \ifbool{mdf@leftline}{\addtolength{\mdfboundingboxwidth}{\mdf@middlelinewidth@length}}{}%
+       \ifbool{mdf@rightline}{\addtolength{\mdfboundingboxwidth}{\mdf@middlelinewidth@length}}{}%
+       \psset{linearc=\mdf@roundcorner@length,cornersize=absolute,}%
+       \expandafter\psset\expandafter{\mdf@psset@local}%
+        \psset{unit=1truecm}%
+        \begin{pspicture}(0,0)(\mdfboundingboxwidth,\mdfboundingboxheight)
+             \ifboolexpr{     bool {mdf@topline} and bool {mdf@bottomline}
+                          and bool {mdf@leftline} and bool {mdf@rightline}
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (\mdf@middlelinewidth@length,\mdf@middlelinewidth@length)%
+                                (! \ptTps{\mdfboundingboxwidth}
+                                   \ptTps{\mdf@middlelinewidth@length} neg add  %X-Koord
+                                   \ptTps{\mdfboundingboxheight}
+                                   \ptTps{\mdf@middlelinewidth@length} neg add  %Y-Koord
+                                )
+                      \psframe[linewidth=\mdf@middlelinewidth@length,
+                               linecolor=\mdf@linecolor,
+                                cornersize=absolute,
+                                fillstyle=none,]%
+                          (0,0)(\mdfboundingboxwidth,\mdfboundingboxheight)%
+                       \rput(! \ptTps{\mdf@middlelinewidth@length}
+                              \ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add add %X-Koord
+                              \ptTps{\mdf@middlelinewidth@length} 
+                              \ptTps{\mdf@innerbottommargin@length}
+                              \ptTps{\mdfboxheight} 0.5 mul add add %Y-Koord
+                           ){\box\@tempboxa}
+                     }{}%
+             \ifboolexpr{     bool {mdf@topline} and bool {mdf@bottomline}
+                          and not (bool {mdf@leftline}) and bool {mdf@rightline}
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (0,\mdf@middlelinewidth@length)%
+                                (! \ptTps{\mdfboundingboxwidth}
+                                   \ptTps{\mdf@middlelinewidth@length} neg add  %X-Koord
+                                   \ptTps{\mdfboundingboxheight}
+                                   \ptTps{\mdf@middlelinewidth@length} neg add  %Y-Koord
+                                )
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! 0  %X-Koord
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul %Y-Koord
+                       )%
+                       (! \ptTps{\mdfboundingboxwidth}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul %Y-Koord
+                       )%
+                       (! \ptTps{\mdfboundingboxwidth}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                          \ptTps{\mdfboundingboxheight} 
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %Y-Koord
+                       )%
+                       (! 0  %X-Koord
+                          \ptTps{\mdfboundingboxheight} 
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %Y-Koord
+                       )%
+                       \rput(!\ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add  %X-Koord
+                              \ptTps{\mdf@middlelinewidth@length} 
+                              \ptTps{\mdf@innerbottommargin@length}
+                              \ptTps{\mdfboxheight} 0.5 mul add add %Y-Koord
+                           ){\box\@tempboxa}
+                      }{}%
+              \ifboolexpr{     bool {mdf@topline} and bool {mdf@bottomline}
+                          and bool {mdf@leftline} and not( bool {mdf@rightline})
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (\mdf@middlelinewidth@length,\mdf@middlelinewidth@length)%
+                                (! \ptTps{\mdfboundingboxwidth} %X-Koord
+                                   \ptTps{\mdfboundingboxheight}
+                                   \ptTps{\mdf@middlelinewidth@length} neg add  %Y-Koord
+                                )
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! \ptTps{\mdfboundingboxwidth} %X-Koord
+                          \ptTps{\mdfboundingboxheight}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %Y-Koord
+                       )%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                          \ptTps{\mdfboundingboxheight}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %Y-Koord
+                       )%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul %Y-Koord
+                       )%
+                       (! \ptTps{\mdfboundingboxwidth} %X-Koord
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul %Y-Koord
+                       )%
+                       \rput(! \ptTps{\mdf@middlelinewidth@length}
+                              \ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add add %X-Koord
+                              \ptTps{\mdf@middlelinewidth@length} 
+                              \ptTps{\mdf@innerbottommargin@length}
+                              \ptTps{\mdfboxheight} 0.5 mul add add %Y-Koord
+                           ){\box\@tempboxa}
+                     }{}% 
+               \ifboolexpr{   not(  bool {mdf@topline}) and bool {mdf@bottomline}
+                          and bool {mdf@leftline} and  bool {mdf@rightline}
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (\mdf@middlelinewidth@length,\mdf@middlelinewidth@length)%
+                                (! \ptTps{\mdfboundingboxwidth}
+                                   \ptTps{\mdf@middlelinewidth@length} neg add %X-Koord
+                                   \ptTps{\mdfboundingboxheight} %Y-Koord
+                                )
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                          \ptTps{\mdfboundingboxheight} %Y-Koord
+                       )%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul %Y-Koord
+                       )%
+                       (! \ptTps{\mdfboundingboxwidth}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul %Y-Koord
+                       )%
+                       (! \ptTps{\mdfboundingboxwidth} 
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                          \ptTps{\mdfboundingboxheight} %Y-Koord
+                       )%  
+                      \rput(! \ptTps{\mdf@middlelinewidth@length}
+                              \ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add add %X-Koord
+                              \ptTps{\mdf@middlelinewidth@length} 
+                              \ptTps{\mdf@innerbottommargin@length}
+                              \ptTps{\mdfboxheight} 0.5 mul add add %Y-Koord
+                           ){\box\@tempboxa}
+                     }{}%     
+                \ifboolexpr{  bool {mdf@topline} and not (bool {mdf@bottomline})
+                          and bool {mdf@leftline} and  bool {mdf@rightline}
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (\mdf@middlelinewidth@length,0)%
+                                (! \ptTps{\mdfboundingboxwidth}
+                                   \ptTps{\mdf@middlelinewidth@length} neg add %X-Koord
+                                   \ptTps{\mdfboundingboxheight}
+                                   \ptTps{\mdf@middlelinewidth@length} neg add %Y-Koord
+                                )
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                           0 %Y-Koord
+                       )%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                          \ptTps{\mdfboundingboxheight}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add  %Y-Koord
+                       )%
+                       (! \ptTps{\mdfboundingboxwidth} 
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                          \ptTps{\mdfboundingboxheight}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add  %Y-Koord
+                       )%  
+                       (! \ptTps{\mdfboundingboxwidth} 
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                           0 %Y-Koord
+                       )%
+                      \rput(! \ptTps{\mdf@middlelinewidth@length}
+                              \ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add add %X-Koord
+                              \ptTps{\mdf@innerbottommargin@length}
+                              \ptTps{\mdfboxheight} 0.5 mul add %Y-Koord
+                           ){\box\@tempboxa}
+                     }{}% 
+                 \ifboolexpr{ not( bool {mdf@topline}) and not (bool {mdf@bottomline})
+                          and bool {mdf@leftline} and  bool {mdf@rightline}
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (\mdf@middlelinewidth@length,0)%
+                                (! \ptTps{\mdfboundingboxwidth}
+                                   \ptTps{\mdf@middlelinewidth@length} neg add %X-Koord
+                                   \ptTps{\mdfboundingboxheight} %Y-Koord
+                                )
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                           0 %Y-Koord
+                       )%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                          \ptTps{\mdfboundingboxheight}
+                       )%
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! \ptTps{\mdfboundingboxwidth} 
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                          \ptTps{\mdfboundingboxheight} %Y-Koord
+                       )%  
+                       (! \ptTps{\mdfboundingboxwidth} 
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                           0 %Y-Koord
+                       )%
+                      \rput(! \ptTps{\mdf@middlelinewidth@length}
+                              \ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add add %X-Koord
+                              \ptTps{\mdf@innerbottommargin@length}
+                              \ptTps{\mdfboxheight} 0.5 mul add %Y-Koord
+                           ){\box\@tempboxa}
+                     }{}%    
+             \ifboolexpr{     bool {mdf@topline} and bool {mdf@bottomline}
+                          and not (bool {mdf@leftline}) and not(bool {mdf@rightline})
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (0,\mdf@middlelinewidth@length)%
+                                (! \ptTps{\mdfboundingboxwidth} %X-Koord
+                                   \ptTps{\mdfboundingboxheight}
+                                   \ptTps{\mdf@middlelinewidth@length} neg add  %Y-Koord
+                                )
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! 0  %X-Koord
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul %Y-Koord
+                       )%
+                       (! \ptTps{\mdfboundingboxwidth} %X-Koord
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul %Y-Koord
+                       )%
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! \ptTps{\mdfboundingboxwidth}  %X-Koord
+                          \ptTps{\mdfboundingboxheight} 
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %Y-Koord
+                       )%
+                       (! 0  %X-Koord
+                          \ptTps{\mdfboundingboxheight} 
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %Y-Koord
+                       )%
+                       \rput(!\ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add  %X-Koord
+                              \ptTps{\mdf@middlelinewidth@length} 
+                              \ptTps{\mdf@innerbottommargin@length}
+                              \ptTps{\mdfboxheight} 0.5 mul add add %Y-Koord
+                           ){\box\@tempboxa}
+                      }{}%
+              \ifboolexpr{ not( bool {mdf@topline}) and not (bool {mdf@bottomline})
+                          and bool {mdf@leftline} and  not( bool {mdf@rightline})
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (\mdf@middlelinewidth@length,0)%
+                                (! \ptTps{\mdfboundingboxwidth}  %X-Koord
+                                   \ptTps{\mdfboundingboxheight} %Y-Koord
+                                )
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                           0 %Y-Koord
+                       )%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                          \ptTps{\mdfboundingboxheight}
+                       )%
+                      \rput(! \ptTps{\mdf@middlelinewidth@length}
+                              \ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add add %X-Koord
+                              \ptTps{\mdf@innerbottommargin@length}
+                              \ptTps{\mdfboxheight} 0.5 mul add %Y-Koord
+                           ){\box\@tempboxa}
+                     }{}%    
+              \ifboolexpr{ not( bool {mdf@topline}) and not (bool {mdf@bottomline})
+                          and not(bool {mdf@leftline}) and  bool {mdf@rightline}
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (!0 0)%
+                                (! \ptTps{\mdfboundingboxwidth}
+                                   \ptTps{\mdf@middlelinewidth@length} neg add %X-Koord
+                                   \ptTps{\mdfboundingboxheight} %Y-Koord
+                                )
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! \ptTps{\mdfboundingboxwidth} 
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                          \ptTps{\mdfboundingboxheight} %Y-Koord
+                       )%  
+                       (! \ptTps{\mdfboundingboxwidth} 
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                           0 %Y-Koord
+                       )%
+                      \rput(! \ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add %X-Koord
+                              \ptTps{\mdf@innerbottommargin@length}
+                              \ptTps{\mdfboxheight} 0.5 mul add %Y-Koord
+                           ){\box\@tempboxa}
+                     }{}% 
+             \ifboolexpr{    not( bool {mdf@topline}) and bool {mdf@bottomline}
+                          and not (bool {mdf@leftline}) and not(bool {mdf@rightline})
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (0,\mdf@middlelinewidth@length)%
+                                (! \ptTps{\mdfboundingboxwidth} %X-Koord
+                                   \ptTps{\mdfboundingboxheight} %Y-Koord
+                                )
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! 0  %X-Koord
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul %Y-Koord
+                       )%
+                       (! \ptTps{\mdfboundingboxwidth} %X-Koord
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul %Y-Koord
+                       )%
+                       \rput(!\ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add  %X-Koord
+                              \ptTps{\mdf@middlelinewidth@length} 
+                              \ptTps{\mdf@innerbottommargin@length}
+                              \ptTps{\mdfboxheight} 0.5 mul add add %Y-Koord
+                           ){\box\@tempboxa}
+                      }{}%
+              \ifboolexpr{     bool {mdf@topline} and not (bool {mdf@bottomline})
+                          and not (bool {mdf@leftline}) and not(bool {mdf@rightline})
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (0,0)%
+                                (! \ptTps{\mdfboundingboxwidth} %X-Koord
+                                   \ptTps{\mdfboundingboxheight}
+                                   \ptTps{\mdf@middlelinewidth@length} neg add  %Y-Koord
+                                )
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! \ptTps{\mdfboundingboxwidth}  %X-Koord
+                          \ptTps{\mdfboundingboxheight} 
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %Y-Koord
+                       )%
+                       (! 0  %X-Koord
+                          \ptTps{\mdfboundingboxheight} 
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %Y-Koord
+                       )%
+                       \rput(!\ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add  %X-Koord
+                              \ptTps{\mdf@innerbottommargin@length}
+                              \ptTps{\mdfboxheight} 0.5 mul add %Y-Koord
+                           ){\box\@tempboxa}
+                      }{}%  \psgrid
+        \end{pspicture}%
+     }%
+}
+
+
+
+
+
+
+\def\md@putbox@first{%
+   \leftline{\null\hspace*{\mdf@leftmargin@length}%%
+        \setlength\mdfboxwidth{\wd\tw@}%
+        \setlength\mdfboxheight{\ht\tw@+\dp\tw@}%
+        \setlength{\mdfboundingboxheight}{%
+                    +\mdfboxheight%
+                    +\mdf@innertopmargin@length%
+                    +\mdf@splitbottomskip@length%
+                  }%
+         \ifbool{mdf@topline}{\addtolength{\mdfboundingboxheight}{\mdf@middlelinewidth@length}}{}%
+         \setlength{\mdfboundingboxwidth}{%
+                    +\mdf@innerleftmargin@length%
+                    +\mdfboxwidth
+                    +\mdf@innerrightmargin@length%
+                  }%
+         \ifbool{mdf@leftline}{\addtolength{\mdfboundingboxwidth}{\mdf@middlelinewidth@length}}{}%
+         \ifbool{mdf@rightline}{\addtolength{\mdfboundingboxwidth}{\mdf@middlelinewidth@length}}{}%
+         \psset{linearc=\mdf@roundcorner@length}%
+         \expandafter\psset\expandafter{\mdf@psset@local}%
+         \psset{unit=1truecm}%
+         \ifdimgreater{\mdfboundingboxheight}{\vsize}
+                {\begin{pspicture}(0,0)(\mdfboundingboxwidth,\vsize)}
+                {\begin{pspicture}(0,0)(\mdfboundingboxwidth,\mdfboundingboxheight)}
+              \ifboolexpr{     bool {mdf@topline} and bool {mdf@rightline}
+                          and bool {mdf@leftline} 
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (\mdf@middlelinewidth@length,0)%
+                                (! \ptTps{\mdfboundingboxwidth} 
+                                   \ptTps{\mdf@middlelinewidth@length} neg add %X-Koord
+                                   \ptTps{\mdfboundingboxheight}
+                                   \ptTps{\mdf@middlelinewidth@length} neg add  %Y-Koord
+                                )
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                          0 %Y-Koord
+                       )%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                          \ptTps{\mdfboundingboxheight}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %Y-Koord
+                       )%
+                       (! \ptTps{\mdfboundingboxwidth}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                          \ptTps{\mdfboundingboxheight}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %Y-Koord
+                       )%
+                       (! \ptTps{\mdfboundingboxwidth}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                          0 %Y-Koord
+                       )%
+                       \rput(! \ptTps{\mdf@middlelinewidth@length}
+                              \ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add add %X-Koord
+                              \ptTps{\mdf@splitbottomskip@length}
+                              \ptTps{\mdfboxheight} 0.5 mul  add %Y-Koord
+                           ){\box\tw@}
+                     }{}%
+              \ifboolexpr{    not( bool {mdf@topline}) and bool {mdf@rightline}
+                          and bool {mdf@leftline} 
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (\mdf@middlelinewidth@length,0)%
+                                (! \ptTps{\mdfboundingboxwidth} 
+                                   \ptTps{\mdf@middlelinewidth@length} neg add %X-Koord
+                                   \ptTps{\mdfboundingboxheight} %Y-Koord
+                                )
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                          0 %Y-Koord
+                       )%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                          \ptTps{\mdfboundingboxheight} %Y-Koord
+                       )%
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! \ptTps{\mdfboundingboxwidth}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                          \ptTps{\mdfboundingboxheight} %Y-Koord
+                       )%
+                       (! \ptTps{\mdfboundingboxwidth}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                          0 %Y-Koord
+                       )%
+                       \rput(! \ptTps{\mdf@middlelinewidth@length}
+                              \ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add add %X-Koord
+                              \ptTps{\mdf@splitbottomskip@length}
+                              \ptTps{\mdfboxheight} 0.5 mul  add %Y-Koord
+                           ){\box\tw@}
+                     }{}%       
+               \ifboolexpr{    not( bool {mdf@topline}) and not(bool {mdf@rightline})
+                          and bool {mdf@leftline} 
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (\mdf@middlelinewidth@length,0)%
+                                (! \ptTps{\mdfboundingboxwidth} %X-Koord
+                                   \ptTps{\mdfboundingboxheight} %Y-Koord
+                                )
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                          0 %Y-Koord
+                       )%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                          \ptTps{\mdfboundingboxheight} %Y-Koord
+                       )%
+                       \rput(! \ptTps{\mdf@middlelinewidth@length}
+                              \ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add add %X-Koord
+                              \ptTps{\mdf@splitbottomskip@length}
+                              \ptTps{\mdfboxheight} 0.5 mul  add %Y-Koord
+                           ){\box\tw@}
+                     }{}%  
+               \ifboolexpr{    not( bool {mdf@topline}) and bool {mdf@rightline}
+                          and not( bool {mdf@leftline} )
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (0,0)%
+                                (! \ptTps{\mdfboundingboxwidth} 
+                                   \ptTps{\mdf@middlelinewidth@length} neg add %X-Koord
+                                   \ptTps{\mdfboundingboxheight} %Y-Koord
+                                )
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! \ptTps{\mdfboundingboxwidth}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                          \ptTps{\mdfboundingboxheight} %Y-Koord
+                       )%
+                       (! \ptTps{\mdfboundingboxwidth}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                          0 %Y-Koord
+                       )%
+                       \rput(!\ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add %X-Koord
+                              \ptTps{\mdf@splitbottomskip@length}
+                              \ptTps{\mdfboxheight} 0.5 mul  add %Y-Koord
+                           ){\box\tw@}
+                     }{}%              
+               \ifboolexpr{     bool {mdf@topline} and not(bool {mdf@rightline})
+                          and not(bool {mdf@leftline} )
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (0,0)%
+                                (! \ptTps{\mdfboundingboxwidth} %X-Koord
+                                   \ptTps{\mdfboundingboxheight}
+                                   \ptTps{\mdf@middlelinewidth@length} neg add  %Y-Koord
+                                )
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! 0 %X-Koord
+                          \ptTps{\mdfboundingboxheight}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %Y-Koord
+                       )%
+                       (! \ptTps{\mdfboundingboxwidth} %X-Koord
+                          \ptTps{\mdfboundingboxheight}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %Y-Koord
+                       )%
+                       \rput(! \ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add %X-Koord
+                              \ptTps{\mdf@splitbottomskip@length}
+                              \ptTps{\mdfboxheight} 0.5 mul  add %Y-Koord
+                           ){\box\tw@}
+                     }{}% 
+                \ifboolexpr{    not(bool {mdf@topline}) and not(bool {mdf@rightline})
+                          and not(bool {mdf@leftline} )
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (0,0)%
+                                (! \ptTps{\mdfboundingboxwidth} %X-Koord
+                                   \ptTps{\mdfboundingboxheight} %Y-Koord
+                                )
+                       \rput(! \ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add %X-Koord
+                              \ptTps{\mdf@splitbottomskip@length}
+                              \ptTps{\mdfboxheight} 0.5 mul  add %Y-Koord
+                           ){\box\tw@}
+                     }{}%  
+           \end{pspicture}%
+     }%
+}
+
+
+
+\def\md@putbox@middle{%
+   \leftline{\null\hspace*{\mdf@leftmargin@length}%%
+        \setlength\mdfboxwidth{\wd\tw@}%
+        \setlength\mdfboxheight{\ht\tw@+\dp\tw@}%
+        \setlength{\mdfboundingboxheight}{%
+                    +\mdfboxheight%
+                    +\mdf@splitbottomskip@length%
+                  }%
+         \setlength{\mdfboundingboxwidth}{%
+                    +\mdf@innerleftmargin@length%
+                    +\mdfboxwidth%
+                    +\mdf@innerrightmargin@length%
+                  }%
+         \ifbool{mdf@leftline}{\addtolength{\mdfboundingboxwidth}{\mdf@middlelinewidth@length}}{}%
+         \ifbool{mdf@rightline}{\addtolength{\mdfboundingboxwidth}{\mdf@middlelinewidth@length}}{}%
+         \expandafter\psset\expandafter{\mdf@psset@local}%
+         \psset{linearc=\mdf@roundcorner@length}%
+         \psset{unit=1truecm}%
+         \ifdimgreater{\mdfboundingboxheight}{\vsize}
+                {\begin{pspicture}(0,0)(\mdfboundingboxwidth,\vsize)}
+                {\begin{pspicture}(0,0)(\mdfboundingboxwidth,\mdfboundingboxheight)}
+              \ifboolexpr{    bool {mdf@rightline} and bool {mdf@leftline} 
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (\mdf@middlelinewidth@length,0)%
+                                (! \ptTps{\mdfboundingboxwidth} 
+                                   \ptTps{\mdf@middlelinewidth@length} neg add %X-Koord
+                                   \ptTps{\mdfboundingboxheight} %Y-Koord
+                                )
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                          0 %Y-Koord
+                       )%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                          \ptTps{\mdfboundingboxheight}  %Y-Koord
+                       )%
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! \ptTps{\mdfboundingboxwidth}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                          0 %Y-Koord
+                       )%
+                       (! \ptTps{\mdfboundingboxwidth}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                          \ptTps{\mdfboundingboxheight} %Y-Koord
+                       )%
+                       \rput(! \ptTps{\mdf@middlelinewidth@length}
+                              \ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add add %X-Koord
+                              \ptTps{\mdf@splitbottomskip@length}
+                              \ptTps{\mdfboxheight} 0.5 mul add %Y-Koord
+                           ){\box\tw@}
+                     }{}%
+               \ifboolexpr{    bool {mdf@rightline} and not(bool {mdf@leftline})
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (0,0)%
+                                (! \ptTps{\mdfboundingboxwidth} 
+                                   \ptTps{\mdf@middlelinewidth@length} neg add %X-Koord
+                                   \ptTps{\mdfboundingboxheight} %Y-Koord
+                                )
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! \ptTps{\mdfboundingboxwidth}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                          0 %Y-Koord
+                       )%
+                       (! \ptTps{\mdfboundingboxwidth}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                          \ptTps{\mdfboundingboxheight} %Y-Koord
+                       )%
+                       \rput(! \ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add %X-Koord
+                              \ptTps{\mdf@splitbottomskip@length}
+                              \ptTps{\mdfboxheight} 0.5 mul add %Y-Koord
+                           ){\box\tw@}
+                     }{}%  
+               \ifboolexpr{   not( bool {mdf@rightline})  and bool {mdf@leftline} 
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (\mdf@middlelinewidth@length,0)%
+                                (! \ptTps{\mdfboundingboxwidth} %X-Koord
+                                   \ptTps{\mdfboundingboxheight} %Y-Koord
+                                )
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                          0 %Y-Koord
+                       )%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                          \ptTps{\mdfboundingboxheight}  %Y-Koord
+                       )%
+                       \rput(! \ptTps{\mdf@middlelinewidth@length}
+                              \ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add add %X-Koord
+                              \ptTps{\mdf@splitbottomskip@length}
+                              \ptTps{\mdfboxheight} 0.5 mul add %Y-Koord
+                           ){\box\tw@}
+                     }{}%                    
+                \ifboolexpr{(
+                             not(bool {mdf@rightline}) and not(bool {mdf@leftline})
+                             and bool {mdf@topline} and not( bool {mdf@bottomline})
+                             )
+                             or
+                             (
+                             not(bool {mdf@rightline}) and not(bool {mdf@leftline})
+                             and not (bool {mdf@topline}) and not( bool {mdf@bottomline})
+                             )
+                             or
+                             (
+                             not(bool {mdf@rightline}) and not(bool {mdf@leftline})
+                             and not (bool {mdf@topline}) and bool {mdf@bottomline}
+                             )
+                              or
+                             (
+                             not(bool {mdf@rightline}) and not(bool {mdf@leftline})
+                             and bool {mdf@topline} and bool {mdf@bottomline}
+                             )  
+                       }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (0,0)%
+                                (! \ptTps{\mdfboundingboxwidth}  %X-Koord
+                                   \ptTps{\mdfboundingboxheight} %Y-Koord
+                                )
+                       \rput(! \ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add %X-Koord
+                              \ptTps{\mdf@splitbottomskip@length}
+                              \ptTps{\mdfboxheight} 0.5 mul add %Y-Koord
+                           ){\box\tw@}
+                     }{}%  
+       \end{pspicture}%
+     }%
+}
+
+\def\md@putbox@second{
+   \leftline{\null\hspace*{\mdf@leftmargin@length}%%
+        \setlength\mdfboxwidth{\wd\@tempboxa}%
+        \setlength\mdfboxheight{\ht\@tempboxa+\dp\@tempboxa}%
+        \setlength{\mdfboundingboxheight}{%
+                    +\mdfboxheight%
+                    +\mdf@innerbottommargin@length%
+                  }%
+         \ifbool{mdf@bottomline}{\addtolength{\mdfboundingboxheight}{\mdf@middlelinewidth@length}}{}%
+         \setlength{\mdfboundingboxwidth}{%
+                    +\mdf@innerleftmargin@length%
+                    +\mdfboxwidth
+                    +\mdf@innerrightmargin@length%
+                  }%
+         \ifbool{mdf@leftline}{\addtolength{\mdfboundingboxwidth}{\mdf@middlelinewidth@length}}{}%
+         \ifbool{mdf@rightline}{\addtolength{\mdfboundingboxwidth}{\mdf@middlelinewidth@length}}{}%
+         \expandafter\psset\expandafter{\mdf@psset@local}
+         \psset{linearc=\mdf@roundcorner@length}%
+         \psset{unit=1truecm}%
+         \begin{pspicture}(0,0)(\mdfboundingboxwidth,\mdfboundingboxheight)
+              \ifboolexpr{     bool {mdf@bottomline} and bool {mdf@rightline}
+                          and bool {mdf@leftline} 
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (\mdf@middlelinewidth@length,\mdf@middlelinewidth@length)%
+                                (! \ptTps{\mdfboundingboxwidth} 
+                                   \ptTps{\mdf@middlelinewidth@length} neg add %X-Koord
+                                   \ptTps{\mdfboundingboxheight} %Y-Koord
+                                )
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                          \ptTps{\mdfboundingboxheight} %Y-Koord
+                       )%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul %Y-Koord
+                       )%
+                       (! \ptTps{\mdfboundingboxwidth}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul %Y-Koord
+                       )%
+                       (! \ptTps{\mdfboundingboxwidth}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                          \ptTps{\mdfboundingboxheight} %Y-Koord
+                       )%
+                       \rput(! \ptTps{\mdf@middlelinewidth@length}
+                              \ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add add %X-Koord
+                              \ptTps{\mdf@middlelinewidth@length} 
+                              \ptTps{\mdf@innerbottommargin@length}
+                              \ptTps{\mdfboxheight} 0.5 mul add add %Y-Koord
+                           ){\box\@tempboxa}
+                     }{}%
+               \ifboolexpr{   not( bool {mdf@bottomline}) and bool {mdf@rightline}
+                          and bool {mdf@leftline} 
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (\mdf@middlelinewidth@length,0)%
+                                (! \ptTps{\mdfboundingboxwidth} 
+                                   \ptTps{\mdf@middlelinewidth@length} neg add %X-Koord
+                                   \ptTps{\mdfboundingboxheight} %Y-Koord
+                                )
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                          \ptTps{\mdfboundingboxheight} %Y-Koord
+                       )%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                          0 %Y-Koord
+                       )%
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! \ptTps{\mdfboundingboxwidth}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                          0 %Y-Koord
+                       )%
+                       (! \ptTps{\mdfboundingboxwidth}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                          \ptTps{\mdfboundingboxheight} %Y-Koord
+                       )%
+                       \rput(! \ptTps{\mdf@middlelinewidth@length}
+                              \ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add add %X-Koord
+                              \ptTps{\mdf@innerbottommargin@length}
+                              \ptTps{\mdfboxheight} 0.5 mul  add %Y-Koord
+                           ){\box\@tempboxa}
+                     }{}%                    
+               \ifboolexpr{   not( bool {mdf@bottomline}) and not(bool {mdf@rightline})
+                          and bool {mdf@leftline} 
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (\mdf@middlelinewidth@length,0)%
+                                (! \ptTps{\mdfboundingboxwidth} %X-Koord
+                                   \ptTps{\mdfboundingboxheight} %Y-Koord
+                                )
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                          \ptTps{\mdfboundingboxheight} %Y-Koord
+                       )%
+                       (! \ptTps{\mdf@middlelinewidth@length} 0.5 mul %X-Koord
+                          0 %Y-Koord
+                       )%
+                       \rput(! \ptTps{\mdf@middlelinewidth@length}
+                              \ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add add %X-Koord
+                              \ptTps{\mdf@innerbottommargin@length}
+                              \ptTps{\mdfboxheight} 0.5 mul  add %Y-Koord
+                           ){\box\@tempboxa}
+                     }{}%  
+               \ifboolexpr{   not( bool {mdf@bottomline}) and bool {mdf@rightline}
+                          and not(bool {mdf@leftline})
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (0,0)%
+                                (! \ptTps{\mdfboundingboxwidth} 
+                                   \ptTps{\mdf@middlelinewidth@length} neg add %X-Koord
+                                   \ptTps{\mdfboundingboxheight} %Y-Koord
+                                )
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! \ptTps{\mdfboundingboxwidth}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                          0 %Y-Koord
+                       )%
+                       (! \ptTps{\mdfboundingboxwidth}
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul neg add %X-Koord
+                          \ptTps{\mdfboundingboxheight} %Y-Koord
+                       )%
+                       \rput(! \ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add %X-Koord
+                              \ptTps{\mdf@innerbottommargin@length}
+                              \ptTps{\mdfboxheight} 0.5 mul  add %Y-Koord
+                           ){\box\@tempboxa}
+                     }{}%  
+               \ifboolexpr{  bool {mdf@bottomline} and not(bool {mdf@rightline})
+                          and not(bool {mdf@leftline})
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (0,\mdf@middlelinewidth@length)%
+                                (! \ptTps{\mdfboundingboxwidth}  %X-Koord
+                                   \ptTps{\mdfboundingboxheight} %Y-Koord
+                                )
+                       \psline[linewidth=\mdf@middlelinewidth,
+                                linecolor=\mdf@linecolor,fillstyle=none,]%
+                       (! 0 %X-Koord
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul %Y-Koord
+                       )%
+                       (! \ptTps{\mdfboundingboxwidth} %X-Koord
+                          \ptTps{\mdf@middlelinewidth@length} 0.5 mul %Y-Koord
+                       )%
+                       \rput(! \ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add %X-Koord
+                              \ptTps{\mdf@middlelinewidth@length}
+                              \ptTps{\mdf@innerbottommargin@length}
+                              \ptTps{\mdfboxheight} 0.5 mul add add %Y-Koord
+                           ){\box\@tempboxa}
+                     }{}%  
+                \ifboolexpr{  not(bool {mdf@bottomline}) and not(bool {mdf@rightline})
+                          and not(bool {mdf@leftline})
+                        }%
+                      {\psframe[linecolor=\mdf@backgroundcolor,fillstyle=solid,%
+                                fillcolor=\mdf@backgroundcolor,linestyle=solid,
+                                linewidth=\mdf@middlelinewidth@length]%
+                                (0,0)%
+                                (! \ptTps{\mdfboundingboxwidth}  %X-Koord
+                                   \ptTps{\mdfboundingboxheight} %Y-Koord
+                                )
+                       \rput(! \ptTps{\mdf@innerleftmargin@length}
+                              \ptTps{\mdfboxwidth} 0.5 mul add %X-Koord
+                              \ptTps{\mdf@innerbottommargin@length}
+                              \ptTps{\mdfboxheight} 0.5 mul add %Y-Koord
+                           ){\box\@tempboxa}
+                     }{}%  
+       \end{pspicture}%
+     }%
+}
+
+\endinput
+%eof
+%eof
+%eof
+%eof
+%eof

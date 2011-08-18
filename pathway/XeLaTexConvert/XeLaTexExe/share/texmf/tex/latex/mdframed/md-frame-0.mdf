@@ -1,0 +1,436 @@
+%%==================================================%%
+%%= Ausgabe der Box nach Vorgabe der Ausgaberoutine=%%
+%%==================================================%%
+%% Styledatei fuer das Paket mdframed erstellt durch
+%% Marco Daniel und Elke Schubert
+%% 
+%% This package may be distributed under the terms of the LaTeX Project
+%% Public License, as described in lppl.txt in the base LaTeX distribution.
+%% Either version 1.0 or, at your option, any later version.
+
+%%$Id: md-frame-0.mdf 105 2010-12-22 16:50:44Z marco $
+%%$Rev: 105 $
+%%$Author: marco $
+%%$Date: 2010-12-22 17:50:44 +0100 (Mi, 22. Dez 2010) $
+
+\def\mdversion{v0.6a}
+\def\mdframedOpackagename{md-frame-0}
+\def\md@frameOdate@svn$#1: #2 #3 #4-#5-#6 #7 #8${#4/#5/#6\space }
+
+\ProvidesFile{md-frame-3.mdf}[\md@frameOdate@svn$Id: md-frame-0.mdf 105 2010-12-22 16:50:44Z marco $ \mdversion: \mdframedOpackagename]
+
+
+\let\md@textwidth\textwidth
+
+
+
+
+%%=single=%%
+\def\md@frame@background@single{%
+        \rlap{\color{\mdf@backgroundcolor}%
+             \setlength{\mdfboundingboxheight}{\ht\@tempboxa+\dp\@tempboxa}%
+             \addtolength{\mdfboundingboxheight}{%
+                   \mdf@innertopmargin@length%
+                  +\mdf@innerbottommargin@length%
+                  }%
+              \rule[-\mdf@innerbottommargin@length]%
+                     {\wd\@tempboxa%
+                    +\mdf@innerleftmargin@length%
+                    +\mdf@innerrightmargin@length%
+                   }{\mdfboundingboxheight}%
+              }%
+}%
+% 
+\def\md@frame@leftandbottomandtopline@single{%
+           \setlength{\mdfboundingboxheight}{\ht\@tempboxa+\dp\@tempboxa}%
+           \addtolength{\mdfboundingboxheight}{%
+                           \mdf@innertopmargin@length%
+                          +\mdf@innerbottommargin@length%
+                          +\mdf@middlelinewidth@length%
+                          +\mdf@middlelinewidth@length%
+                         }%
+           \rlap{\color{\mdf@middlelinecolor}%
+                 \ifbool{mdf@leftline}%
+                     {\rule[-\mdf@innerbottommargin@length]%
+                         {\mdf@middlelinewidth}{\mdfboundingboxheight-2\mdf@middlelinewidth@length}%
+                     }{}%
+               }%
+           \rlap{\color{\mdf@middlelinecolor}%
+                 \ifmdf@bottomline%
+                     \ifboolexpr{ bool {mdf@leftline} and bool  {mdf@rightline} }%
+                       {%\hspace*{\mdf@middlelinewidth@length}%
+                       \rule[-\mdf@innerbottommargin@length-\mdf@middlelinewidth@length]%
+                        {\wd\@tempboxa%
+                         +\mdf@innerleftmargin@length%
+                         +\mdf@innerrightmargin@length%
+                         +\mdf@middlelinewidth@length%
+                         +\mdf@middlelinewidth@length%
+                      }{\mdf@linewidth}% 
+                       }{}%
+                     \ifboolexpr{ bool {mdf@leftline} and not( bool  {mdf@rightline}) }%
+                       {%\hspace*{\mdf@middlelinewidth@length}%
+                       \rule[-\mdf@innerbottommargin@length-\mdf@middlelinewidth@length]%
+                        {\wd\@tempboxa%
+                         +\mdf@innerleftmargin@length%
+                         +\mdf@innerrightmargin@length%
+                         +\mdf@middlelinewidth@length%
+   %                      +\mdf@middlelinewidth@length%
+                      }{\mdf@linewidth}% 
+                       }{}%
+                      \ifboolexpr{ not(bool {mdf@leftline}) and bool  {mdf@rightline} }%
+                       {%\hspace*{\mdf@middlelinewidth@length}%
+                     \rule[-\mdf@innerbottommargin@length-\mdf@middlelinewidth@length]%
+                      {\wd\@tempboxa%
+                       +\mdf@innerleftmargin@length%
+                       +\mdf@innerrightmargin@length%
+                       +\mdf@middlelinewidth@length%
+   %                    +\mdf@middlelinewidth@length%
+                      }{\mdf@linewidth}% 
+                       }{}%                
+                       \ifboolexpr{ not(bool {mdf@leftline}) and not( bool {mdf@rightline}) }%
+                       {%\hspace*{\mdf@middlelinewidth@length}%
+                        \rule[-\mdf@innerbottommargin@length-\mdf@middlelinewidth@length]%
+                         {\wd\@tempboxa%
+                         +\mdf@innerleftmargin@length%
+                         +\mdf@innerrightmargin@length%
+   %                      +\mdf@middlelinewidth@length%
+   %                      +\mdf@middlelinewidth@length%
+                        }{\mdf@linewidth}% 
+                       }{}%  
+                 \fi%
+               }%
+          \rlap{\color{\mdf@middlelinecolor}%
+                \ifmdf@topline%
+                  \ifboolexpr{ bool {mdf@leftline} and bool  {mdf@rightline} }%
+                    {%\hspace*{\mdf@middlelinewidth@length}%
+                     \rule[%
+                       \mdf@innertopmargin@length
+                       +\ht\@tempboxa+\dp\@tempboxa]%
+                       {\wd\@tempboxa%
+                        +\mdf@innerleftmargin@length%
+                        +\mdf@innerrightmargin@length%
+                        +\mdf@middlelinewidth@length%
+                        +\mdf@middlelinewidth@length%
+                       }{\mdf@linewidth}%
+                    }{}%
+                  \ifboolexpr{ bool {mdf@leftline} and not( bool  {mdf@rightline}) }%
+                    {%\hspace*{\mdf@middlelinewidth@length}%
+                     \rule[%
+                       \mdf@innertopmargin@length
+                       +\ht\@tempboxa+\dp\@tempboxa]%
+                       {\wd\@tempboxa%
+                        +\mdf@innerleftmargin@length%
+                        +\mdf@innerrightmargin@length%
+%                        +\mdf@middlelinewidth@length%
+                        +\mdf@middlelinewidth@length%
+                       }{\mdf@linewidth}%
+                    }{}%
+                   \ifboolexpr{ not(bool {mdf@leftline}) and bool  {mdf@rightline} }%
+                    {%\hspace*{\mdf@middlelinewidth@length}%
+                     \rule[%
+                       \mdf@innertopmargin@length
+                       +\ht\@tempboxa+\dp\@tempboxa]%
+                       {\wd\@tempboxa%
+                        +\mdf@innerleftmargin@length%
+                        +\mdf@innerrightmargin@length%
+%                        +\mdf@middlelinewidth@length%
+                        +\mdf@middlelinewidth@length%
+                       }{\mdf@linewidth}%
+                    }{}%                
+                    \ifboolexpr{ not(bool {mdf@leftline}) and not( bool {mdf@rightline}) }%
+                    {%\hspace*{\mdf@middlelinewidth@length}%
+                     \rule[%
+                       \mdf@innertopmargin@length
+                       +\ht\@tempboxa+\dp\@tempboxa]%
+                       {\wd\@tempboxa%
+                        +\mdf@innerleftmargin@length%
+                        +\mdf@innerrightmargin@length%
+%                        +\mdf@middlelinewidth@length%
+%                        +\mdf@middlelinewidth@length%
+                       }{\mdf@linewidth}%
+                    }{}%  
+                \fi%
+              }%
+}%
+
+\def\md@frame@rightline@single{%
+         \llap{\color{\mdf@middlelinecolor}
+               \ifmdf@rightline%
+                \rule[-\mdf@innerbottommargin@length]%
+                     {\mdf@linewidth}%
+                     {\mdfboundingboxheight-2\mdf@middlelinewidth@length}%
+               \fi%
+              }%
+}%
+
+
+\def\md@putbox@single{%%%%% Ausgabe der ungesplitteten Gesamtbox
+  \ifvoid\@tempboxa
+  \else
+      \leftline{%
+        \null\hspace*{\mdf@leftmargin@length}%
+        \md@frame@leftandbottomandtopline@single%
+        \ifbool{mdf@leftline}%
+        {\hspace*{\mdf@middlelinewidth@length}}{}%
+        \md@frame@background@single%
+        \hspace*{\mdf@innerleftmargin@length}%
+        {\box\@tempboxa}%
+        \hspace*{\mdf@innerrightmargin@length}%
+        \hspace*{\mdf@middlelinewidth@length}%
+        \md@frame@rightline@single%
+        }%
+  \fi
+}
+
+
+%%=first=%%
+
+\def\md@frame@background@first{%
+       \setlength{\mdfboundingboxheight}{\ht\tw@+\dp\tw@}%
+       \addtolength{\mdfboundingboxheight}{%
+                           \mdf@innertopmargin@length%
+                           +\mdf@splitbottomskip@length%
+                         }%
+       \rlap{\color{\mdf@backgroundcolor}%
+              \rule[-\dp\tw@-\mdf@splitbottomskip@length]%
+                   {\wd\tw@+\mdf@innerleftmargin@length+\mdf@innerrightmargin@length}%
+                   {\mdfboundingboxheight}%
+              }%
+}%
+ 
+\def\md@frame@topandleftline@first{%
+           \setlength{\mdfboundingboxheight}{\ht\tw@+\dp\tw@}%
+           \addtolength{\mdfboundingboxheight}{%
+                           1\mdf@innertopmargin@length%
+                          +1\mdf@middlelinewidth@length%
+                          +\mdf@splitbottomskip@length%
+                         }%
+            \rlap{\color{\mdf@middlelinecolor}
+               \ifbool{mdf@leftline}%
+                   {%
+                     \rule[-\dp\tw@-\mdf@splitbottomskip@length]%
+                            {\mdf@middlelinewidth@length}%
+                               {\mdfboundingboxheight-\mdf@middlelinewidth@length}%
+                   }{}%
+             }%
+            \rlap{\color{\mdf@middlelinecolor}%
+             \ifmdf@topline
+                 \ifboolexpr{ bool {mdf@leftline} and bool {mdf@rightline}}%
+                    {\rule[\mdfboundingboxheight-\mdf@middlelinewidth@length-\dp\tw@-\mdf@splitbottomskip@length]%
+                        {\wd\tw@%
+                          +\mdf@innerleftmargin@length%
+                          +\mdf@innerrightmargin@length%
+                          +\mdf@middlelinewidth@length%
+                          +\mdf@middlelinewidth@length%
+                         }{\mdf@linewidth@length}%
+                    }{}%
+                 \ifboolexpr{ bool {mdf@leftline} and not(bool {mdf@rightline}) }%
+                    {\rule[\mdfboundingboxheight-\mdf@middlelinewidth@length-\dp\tw@-\mdf@splitbottomskip@length]%
+                        {\wd\tw@%
+                          +\mdf@innerleftmargin@length%
+                          +\mdf@innerrightmargin@length%
+                          +\mdf@middlelinewidth@length%
+%                          +\mdf@middlelinewidth@length%
+                         }{\mdf@linewidth@length}%
+                    }{}%
+                 \ifboolexpr{ not (bool {mdf@leftline}) and bool {mdf@rightline} }%
+                    {%\hspace*{\mdf@middlelinewidth@length}%
+                     \rule[\mdfboundingboxheight-\mdf@middlelinewidth@length-\dp\tw@-\mdf@splitbottomskip@length]%
+                        {\wd\tw@%
+                          +\mdf@innerleftmargin@length%
+                          +\mdf@innerrightmargin@length%
+                          +\mdf@middlelinewidth@length%
+%                          +\mdf@middlelinewidth@length%
+                         }{\mdf@linewidth@length}%
+                    }{}%
+                 \ifboolexpr{ not (bool {mdf@leftline}) and not( bool {mdf@rightline}) }%
+                    {%\hspace*{\mdf@middlelinewidth@length}%
+                     \rule[\mdfboundingboxheight-\mdf@middlelinewidth@length-\dp\tw@-\mdf@splitbottomskip@length]%
+                        {\wd\tw@%
+                          +\mdf@innerleftmargin@length%
+                          +\mdf@innerrightmargin@length%
+%                          +\mdf@middlelinewidth@length%
+%                          +\mdf@middlelinewidth@length%
+                         }{\mdf@linewidth@length}%
+                    }{}%
+              \fi%
+              \ifmdf@rightline
+               \ifmdf@topline\else%
+                 \deflength\@tempskipb{\wd\tw@%
+                          +\mdf@innerleftmargin@length%
+                          +\mdf@innerrightmargin@length%
+                          +2\mdf@middlelinewidth@length%
+                         }%
+                 \hspace*{\@tempskipb}%
+               \fi%
+                  \llap{\color{\mdf@middlelinecolor}%
+                         \rule[-\dp\tw@-\mdf@splitbottomskip@length]{\mdf@middlelinewidth@length}%
+                                {\mdfboundingboxheight-\mdf@middlelinewidth@length}%
+                    }%
+              \fi%
+            }%
+}%
+
+
+
+
+\def\md@putbox@first{%%%% Ausgabe der Teilbox 1
+      \leftline{%
+           \null\hspace*{\mdf@leftmargin@length}%
+           \md@frame@topandleftline@first%
+           \ifbool{mdf@leftline}%
+           {\hspace*{\mdf@middlelinewidth@length}}{}%
+           \md@frame@background@first%
+           \hspace*{\mdf@innerleftmargin@length}%
+           {\box\tw@}%
+         }%
+}
+
+%%=second=%%
+
+\def\md@frame@background@second{%
+         \setlength{\mdfboundingboxheight}{\ht\@tempboxa+\dp\@tempboxa}%
+         \addtolength{\mdfboundingboxheight}{%
+                    +\mdf@innerbottommargin@length%
+                }%
+        \rlap{\color{\mdf@backgroundcolor}%
+               \rule[\dp\@tempboxa-\mdf@innerbottommargin@length]%
+                    {\wd\@tempboxa+\mdf@innerleftmargin@length%
+                      +\mdf@innerrightmargin@length}%
+                   {\mdfboundingboxheight}%
+               }%
+}%
+ 
+\def\md@frame@lines@second{%
+         \setlength{\mdfboundingboxheight}{\ht\@tempboxa+\dp\@tempboxa}%
+         \addtolength{\mdfboundingboxheight}{%
+                    +\mdf@innerbottommargin@length%
+                    +\mdf@middlelinewidth@length%
+                }%
+          \rlap{\color{\mdf@middlelinecolor}%
+               \ifbool{mdf@leftline}%
+                 {\rule[\dp\@tempboxa-\mdf@innerbottommargin@length]%
+                        {\mdf@middlelinewidth@length}%
+                        {\mdfboundingboxheight-\mdf@middlelinewidth@length}%
+                 }{}%
+               }%
+          \rlap{\color{\mdf@middlelinecolor}%
+                \ifbool{mdf@bottomline}%
+                 {%
+                   \ifboolexpr{ bool {mdf@leftline} and bool {mdf@rightline} }%
+                        {\rule[\dp\@tempboxa-\mdf@innerbottommargin@length-\mdf@middlelinewidth@length]%
+                           {\wd\@tempboxa+\mdf@innerleftmargin@length%
+                            +\mdf@innerrightmargin@length+2\mdf@middlelinewidth@length}%
+                           {\mdf@middlelinewidth@length}%
+                       }{}%
+                   \ifboolexpr{ not (bool {mdf@leftline}) and not(bool {mdf@rightline}) }%
+                        {%
+                          \rule[\dp\@tempboxa-\mdf@innerbottommargin@length-\mdf@middlelinewidth@length]%
+                           {\wd\@tempboxa+\mdf@innerleftmargin@length%
+                            +\mdf@innerrightmargin@length}%
+                           {\mdf@middlelinewidth@length}%
+                       }{}%
+                    \ifboolexpr{ bool {mdf@leftline} and not( bool {mdf@rightline}) }%
+                        {%
+                          \rule[\dp\@tempboxa-\mdf@innerbottommargin@length-\mdf@middlelinewidth@length]%
+                           {\wd\@tempboxa+\mdf@innerleftmargin@length%
+                            +\mdf@innerrightmargin@length+\mdf@middlelinewidth@length}%
+                           {\mdf@middlelinewidth@length}%
+                       }{}%
+                    \ifboolexpr{ not(bool {mdf@leftline}) and bool {mdf@rightline} }%
+                        {%
+                          \rule[\dp\@tempboxa-\mdf@innerbottommargin@length-\mdf@middlelinewidth@length]%
+                           {\wd\@tempboxa+\mdf@innerleftmargin@length%
+                            +\mdf@innerrightmargin@length+\mdf@middlelinewidth@length}%
+                           {\mdf@middlelinewidth@length}%
+                       }{}%
+                 }{}%
+               \llap{\color{\mdf@middlelinecolor}%
+                     \ifbool{mdf@rightline}%
+                       {\rule[\dp\@tempboxa-\mdf@innerbottommargin@length]%
+                             {\mdf@middlelinewidth@length}%
+                             {\mdfboundingboxheight-\mdf@middlelinewidth@length}%
+                        \ifbool{mdf@bottomline}{}%
+                             {\deflength\@tempskipb{\wd\@tempboxa%
+                                      +\mdf@innerleftmargin@length%
+                                      +\mdf@innerrightmargin@length%
+                                      +2\mdf@middlelinewidth@length%
+                                     }%
+                             \hspace*{-\@tempskipb}%
+                            }%
+                      }{}%
+                    }%
+               }%       
+}%
+
+
+\def\md@putbox@second{%%%%% Ausgabe der mittleren Teilbox
+  \ifvoid\@tempboxa%
+  \else
+      \leftline{%
+         \null\hspace*{\mdf@leftmargin@length}%
+         \md@frame@lines@second%
+         \ifbool{mdf@leftline}%
+         {\hspace*{\mdf@middlelinewidth@length}}{}%
+         \md@frame@background@second%
+         \hspace*{\mdf@innerleftmargin@length}%
+         {\box\@tempboxa}%
+        }%
+  \fi%
+}%
+
+
+%%=middle=%%
+
+\def\md@frame@background@middle{%
+         \setlength{\mdfboundingboxheight}{\ht\tw@+\dp\tw@}%
+         \addtolength{\mdfboundingboxheight}{%
+                  \mdf@splitbottomskip@length%
+                  }%
+        \rlap{\color{\mdf@backgroundcolor}%
+              \rule[-\dp\tw@-\mdf@splitbottomskip@length]%
+                    {\wd\tw@+\mdf@innerleftmargin@length+\mdf@innerrightmargin@length}%
+                    {\mdfboundingboxheight}%
+              }%
+}%
+ 
+\def\md@frame@lines@middle{%
+         \setlength{\mdfboundingboxheight}{\ht\tw@+\dp\tw@}%
+         \addtolength{\mdfboundingboxheight}{%
+                  \mdf@splitbottomskip@length%
+                  }%
+        \rlap{\color{\mdf@middlelinecolor}%
+            \ifbool{mdf@leftline}%
+              {%
+              \rule[-\dp\tw@-\mdf@splitbottomskip@length]{\mdf@middlelinewidth@length}{\mdfboundingboxheight}%
+              }{}%
+            \ifbool{mdf@rightline}%
+                   {%
+                   \deflength{\mdfpositionx}{\wd\tw@%
+                                     +\mdf@innerleftmargin@length%
+                                     +\mdf@innerrightmargin@length%
+                                     +\mdf@middlelinewidth@length%
+                                    }%
+                   \hspace*{\mdfpositionx}%
+                   \llap{\color{\mdf@middlelinecolor}%
+                        \rule[-\dp\tw@-\mdf@splitbottomskip@length]{\mdf@middlelinewidth@length}{\mdfboundingboxheight}%
+                        \ifbool{mdf@leftline}{}{}%
+                        }%
+                   }{}%
+          }%
+}%
+
+
+
+
+\def\md@putbox@middle{%%%% Ausgabe der Teilbox 1
+      \leftline{%
+           \null\hspace*{\mdf@leftmargin@length}%
+           \md@frame@lines@middle%
+           \ifbool{mdf@leftline}%
+           {\hspace*{\mdf@middlelinewidth@length}}{}%
+           \md@frame@background@middle%
+           \hspace*{\mdf@innerleftmargin@length}%
+           {\box\tw@}%
+        }%
+}
