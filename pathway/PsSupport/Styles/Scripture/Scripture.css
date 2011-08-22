@@ -200,7 +200,8 @@
     padding-bottom: 0pt;
     padding-top: 0pt;
     margin-top: 12pt;
-    margin-bottom:6pt;
+    //margin-bottom:6pt;
+    margin-bottom:0pt;
 }
 .Section_Head_Major {
     font-weight: bold;	/* cascaded environment */

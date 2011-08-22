@@ -439,6 +439,8 @@ namespace SIL.PublishingSolution
                     }
                 }
 
+
+
                 writerCol.WriteAttributeString("fo:column-count", columnCount.ToString());
                 float pageWidth = 0;
                 float relWidth = 0;

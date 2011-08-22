@@ -1842,7 +1842,7 @@ namespace SIL.PublishingSolution
                             HoriAlignment = "right";
                             break;
                     }
-                    wrapSide = GetPropertyValue("clear", clsName, wrapSide);
+                    wrapSide = GetPropertyValue(clsName, "clear", wrapSide);
                     if (HoriAlignment != "left")
                         break;
                 }
@@ -1893,7 +1893,10 @@ namespace SIL.PublishingSolution
                     File.Copy(fromPath, toPath, true);
 
                 }
-                if (srcFilrLongDesc.Length > 0 && IdAllClass.ContainsKey(srcFilrLongDesc))
+
+                string clsName = _allStyle.Peek();
+                GetAlignment(ref wrapSide, ref HoriAlignment);
+                if (srcFilrLongDesc.Length > 0 && IdAllClass.ContainsKey(clsName) && (HoriAlignment == "left" || HoriAlignment == "right"))
                 {
                     //img[src='Thomsons-gazelle1.jpg'] 
                     rectHeight = GetPropertyValue(srcFilrLongDesc, "height", rectHeight);
@@ -1904,7 +1907,7 @@ namespace SIL.PublishingSolution
                 {
                     GetHeightandWidth(ref rectHeight, ref rectWidth);
                     //GetAlignment(alignment, ref wrapSide, ref HoriAlignment, ref AnchorPoint, ref VertRefPoint, ref VertAlignment, ref wrapMode);
-                    GetAlignment(ref wrapSide, ref HoriAlignment);
+                    //GetAlignment(ref wrapSide, ref HoriAlignment);
                     GetWrapSide(ref wrapSide, ref wrapMode);
                 }
 
@@ -2015,6 +2018,21 @@ namespace SIL.PublishingSolution
                         _writer.WriteAttributeString("text:anchor-type", anchorType);
                         _writer.WriteAttributeString("draw:z-index", "0");
                     }
+
+                if (HoriAlignment == "left" || HoriAlignment == "right")
+                {
+                    // = (Column width - column-gap)/2 - Left Margin
+
+                    //string pageWidth = Common.ConvertToInch(_pageLayoutProperty["fo:page-width"]);
+                    //string spacing = Common.ConvertToInch(columnGap) / 2;
+                    //string relWidth = (pageWidth - (spacing * (columnCount * 2))) / columnCount;
+                    //double halfWidth = double.Parse(rectWidth) / 2;
+                    ////double halfWidth = double.Parse(Common.ColumnWidth.ToString()) / 2;
+                    //double halfHeight = double.Parse(rectHeight) / 2;
+                    //rectWidth = halfWidth.ToString();
+                    //rectHeight = halfHeight.ToString();
+                }
+
                 string width = rectWidth;
                 if (rectWidth.IndexOf("%") == -1)
                     width = rectWidth + imgWUnit;
