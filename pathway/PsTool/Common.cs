@@ -1344,9 +1344,10 @@ namespace SIL.Tool
         /// <param name="filePath"></param>
         /// <param name="searchText"></param>
         /// <param name="replaceText"></param>
-        static public void StreamReplaceInFile(string filePath, string searchText, string replaceText)
+        /// <returns>true if an instance of the search string was found / replaced.</returns>
+        static public bool StreamReplaceInFile(string filePath, string searchText, string replaceText)
         {
-            if (!File.Exists(filePath)) return;
+            if (!File.Exists(filePath)) return false;
             bool foundString = false;
             var reader = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, 4080, false);
             var writer = new FileStream(filePath + ".tmp", FileMode.Create);
@@ -1399,6 +1400,7 @@ namespace SIL.Tool
             }
             // delete the temp file
             File.Delete(filePath + ".tmp");
+            return foundString;
         }
         #endregion
 

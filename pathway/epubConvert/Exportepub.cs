@@ -347,6 +347,10 @@ namespace SIL.PublishingSolution
                     }
                 }
                 // fix any relative hyperlinks that might have broken when we split the .xhtml up
+                if (_inputType == "scripture" && References.Contains("End"))
+                {
+                    UpdateReferenceHyperlinks(contentFolder, inProcess);
+                }
                 FixRelativeHyperlinks(contentFolder, inProcess);
                 inProcess.PerformStep();
 
@@ -1760,45 +1764,6 @@ namespace SIL.PublishingSolution
             return brokenRelativeHrefIds;
         }
 
-        private bool IsStringInFile(string filePath, string searchText)
-        {
-            if (!File.Exists(filePath)) return false;
-            var reader = new FileStream(filePath, FileMode.Open);
-            int next;
-            while ((next = reader.ReadByte()) != -1)
-            {
-                byte b = (byte)next;
-                if (b == searchText[0]) // first char in search text?
-                {
-                    // yes - searchText.Length chars into a buffer and compare them
-                    int len = searchText.Length;
-                    long pos = reader.Position;
-                    byte[] buf = new byte[len];
-                    buf[0] = b;
-                    if (reader.Read(buf, 1, (len - 1)) == -1)
-                    {
-                        // reached the end of file - write out what we hit and jump out of the while loop
-                        //                        writer.Write(new string(buf));
-                        continue;
-                    }
-                    string data = Encoding.UTF8.GetString(buf);
-                    if (String.Compare(searchText, data, true) == 0)
-                    {
-                        // found an instance of our search text
-                        reader.Close();
-                        return true;
-                    }
-                    else
-                    {
-                        // not what we're looking for
-                        reader.Position = pos;
-                    }
-                }
-            }
-            reader.Close();
-            return false;
-        }
-
         /// <summary>
         /// When the preprocessed xhtml gets split out into chunks the epub reader can understand, the
         /// targets for the relative links within the xhtml file might get moved into a separate file. This method
@@ -1809,9 +1774,10 @@ namespace SIL.PublishingSolution
         /// <param name="inProcess">progress bar (this is a potentially long-running process)</param>
         private void FixRelativeHyperlinks (string contentFolder, InProcess inProcess)
         {
-            string[] files = Directory.GetFiles(contentFolder, "*.xhtml");
+            string[] files = Directory.GetFiles(contentFolder, "PartFile*.xhtml");
             inProcess.AddToMaximum(files.Length);
             var sbID = new StringBuilder();
+            var books = new StringBuilder();
             var startTime = DateTime.Now;
             bool bFound = false;
             foreach (string sourceFile in files)
@@ -1821,23 +1787,58 @@ namespace SIL.PublishingSolution
                 inProcess.AddToMaximum(relativeIDs.Count);
                 foreach (var relativeID in relativeIDs)
                 {
+                    // Try 1: Footnotes and cross-references -
+                    // Footnotes and cross-references are the most common relative hyperlinks. Before going through the 
+                    // trouble of searching through all the files, see if the target ended up in our references file.
+                    if (References.Contains("End") && _inputType == "scripture")
+                    {
+                        if (IsStringInFile(Path.Combine(contentFolder, ReferencesFilename), relativeID))
+                        {
+                            Common.StreamReplaceInFile(sourceFile, ("a href=\"#" + relativeID), ("a href=\"" + ReferencesFilename + "#" + relativeID));
+                            inProcess.PerformStep();
+                            continue;
+                        }
+                    }
                     //    find [id="<n>] in the xhtml file list
                     sbID.Length = 0; // reset the stringbuilder
                     sbID.Append("id=\"");
                     sbID.Append(relativeID);
                     bFound = false;
-                    foreach (var targetFile in files)
+                    // Try 2: localize the search to the split books (e.g., PartFile0002_01, _02, _03 ...)
+                    int split = Path.GetFileName(sourceFile).IndexOf("_");
+                    books.Length = 0;
+                    if (split > 0)
                     {
-                        if (IsStringInFile(targetFile, sbID.ToString()))
+                        books.Append(Path.GetFileName(sourceFile).Substring(0, Path.GetFileName(sourceFile).IndexOf("_")));
+                        books.Append("*.xhtml");
+                    }
+                    string[] bookFiles = Directory.GetFiles(contentFolder, books.ToString());
+                    foreach (var targetBookFile in bookFiles)
+                    {
+                        if (IsStringInFile(targetBookFile, relativeID))
                         {
-                            //    replace [a href="#<n>] with [a href="<filename>#<n>]
-                            Debug.WriteLine("- href id:" + relativeID + " found in " + targetFile);
-                            Common.StreamReplaceInFile(sourceFile, ("a href=\"#" + relativeID), ("a href=\"" + Path.GetFileName(targetFile) + "#" + relativeID));
+                            Common.StreamReplaceInFile(sourceFile, ("a href=\"#" + relativeID), ("a href=\"" + Path.GetFileName(targetBookFile) + "#" + relativeID));
                             bFound = true;
+                            break;
+                        }
+                    }
+                    if (!bFound)
+                    {
+                        // Try 3: the entire content folder
+                        // Not found in the local (split) book. Try casting a wider net -- look at all the xhtml files in the directory
+                        foreach (var targetFile in files)
+                        {
+                            if (IsStringInFile(targetFile, relativeID))
+                            {
+                                Common.StreamReplaceInFile(sourceFile, ("a href=\"#" + relativeID), ("a href=\"" + Path.GetFileName(targetFile) + "#" + relativeID));
+                                bFound = true;
+                                break;
+                            }
                         }
                     }
                     if (bFound == false)
                     {
+                        // Still not found -- give up
                         Debug.WriteLine(">> Target ID for " + relativeID + " not found - this link is broken!");
                     }
                     inProcess.PerformStep();
@@ -2028,6 +2029,101 @@ namespace SIL.PublishingSolution
         #endregion
 
         #region File Processing Methods
+        /// <summary>
+        /// Returns true if the specified search text string is found in the given file.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="searchText"></param>
+        /// <returns></returns>
+        private bool IsStringInFile(string filePath, string searchText)
+        {
+            if (!File.Exists(filePath)) return false;
+            var reader = new FileStream(filePath, FileMode.Open);
+            int next;
+            while ((next = reader.ReadByte()) != -1)
+            {
+                byte b = (byte)next;
+                if (b == searchText[0]) // first char in search text?
+                {
+                    // yes - searchText.Length chars into a buffer and compare them
+                    int len = searchText.Length;
+                    long pos = reader.Position;
+                    byte[] buf = new byte[len];
+                    buf[0] = b;
+                    if (reader.Read(buf, 1, (len - 1)) == -1)
+                    {
+                        // reached the end of file - write out what we hit and jump out of the while loop
+                        //                        writer.Write(new string(buf));
+                        continue;
+                    }
+                    string data = Encoding.UTF8.GetString(buf);
+                    if (String.Compare(searchText, data, true) == 0)
+                    {
+                        // found an instance of our search text
+                        reader.Close();
+                        return true;
+                    }
+                    else
+                    {
+                        // not what we're looking for
+                        reader.Position = pos;
+                    }
+                }
+            }
+            reader.Close();
+            return false;
+        }
+
+        /// <summary>
+        /// Helper method to change the relative hyperlinks in the references file to absolute ones. 
+        /// This is done after the scripture files are split out into individual books of 100K or less in size.
+        /// </summary>
+        /// <param name="contentFolder"></param>
+        /// <param name="inProcess"></param>
+        private void UpdateReferenceHyperlinks(string contentFolder, InProcess inProcess)
+        {
+            var outFilename = Path.Combine(contentFolder, ReferencesFilename);
+            var hrefs = FindBrokenRelativeHrefIds(outFilename);
+            inProcess.AddToMaximum(hrefs.Count + 1); 
+            var reader = new StreamReader(outFilename);
+            var content = new StringBuilder();
+            content.Append(reader.ReadToEnd());
+            reader.Close();
+            string[] files = Directory.GetFiles(contentFolder, "PartFile*.xhtml");
+            int index = 0;
+            bool looped = false;
+            foreach (var href in hrefs)
+            {
+                // find where the target is for this reference -
+                // since the lists are sequential in the references file, we're using an index instead
+                // of a foreach loop (so the search continues in the same file the last href left off on).
+                while (true)
+                {
+                    // search the current file in the list
+                    if (IsStringInFile(files[index], href))
+                    {
+                        content.Replace(("a href=\"#" + href + "\""),
+                                        ("a href=\"" + Path.GetFileName(files[index]) + "#" + href + "\""));
+                        break;
+                    }
+                    // update the index and try again
+                    index++;
+                    if (index == files.Length)
+                    {
+                        if (looped) break; // already searched through the list -- this item isn't found, get out
+                        index = 0;
+                        looped = true;
+                    }
+                }
+                inProcess.PerformStep();
+                looped = false;
+            }
+            var writer = new StreamWriter(outFilename);
+            writer.Write(content);
+            writer.Close();
+            inProcess.PerformStep();
+        }
+
         /// <summary>
         /// Creates a separate references file at the end of the xhtml files in scripture content, for both footnotes and cross-references.
         /// Each reference links back relatively to the source xhtml, so that the links can be updated when the content is split into
