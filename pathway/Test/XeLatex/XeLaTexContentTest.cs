@@ -411,7 +411,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void ImageBaseTest()

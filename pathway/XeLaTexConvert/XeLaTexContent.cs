@@ -33,6 +33,7 @@ namespace SIL.PublishingSolution
     public class XeLaTexContent : XHTMLProcess
     {
         #region Private Variable
+
         private int _storyNo = 0;
         private int _hyperLinkNo = 0;
         private bool isFileEmpty = true;
@@ -57,7 +58,6 @@ namespace SIL.PublishingSolution
         private bool _IsHeadword = false;
         private bool _isDropCap = false;
         private bool _xetexNewLine;
-
         private string _dropCapStyle = string.Empty;
         private string _currentStoryName = string.Empty;
         Dictionary<string, List<string>> _classInlineStyle = new Dictionary<string, List<string>>();
@@ -80,7 +80,9 @@ namespace SIL.PublishingSolution
             _xetexFile = xetexFile;
             _classInlineStyle = classInlineStyle;
             _classInlineInnerStyle = classInlineText;
-            _inputPath = Path.GetDirectoryName(projInfo.ProjectPath);
+            //_inputPath = Path.GetDirectoryName(projInfo.ProjectPath);
+            _inputPath = projInfo.ProjectPath;
+
             xhtmlFile = projInfo.DefaultXhtmlFileWithPath;
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
             InitializeData(projInfo.ProjectPath, cssClass, classFamily, cssClassOrder);
@@ -249,8 +251,6 @@ namespace SIL.PublishingSolution
                 //{
                 //    ListType[className] = IdAllClass[className][searchKey];
                 //}
-
-
             }
 
             //if (Common.ColumnWidth == 0.0)
@@ -258,8 +258,7 @@ namespace SIL.PublishingSolution
             //    Common.ColumnWidth = _pageWidth;
             //}
         }
-
-
+        
         private void ProcessCounterProperty()
         {
             _FootNote.Clear();
@@ -314,8 +313,7 @@ namespace SIL.PublishingSolution
                 }
             }
         }
-
-
+        
         private void ProcessXHTML(string xhtmlFileWithPath)
         {
             try
@@ -438,7 +436,7 @@ namespace SIL.PublishingSolution
 
             if (columnCount == "2")
             {
-                if (IdAllClass["letData"]["column-gap"] != null)
+                if (IdAllClass.ContainsKey("letData") && IdAllClass["letData"]["column-gap"] != null)
                 {
                     string propertyValue = Common.PercentageToEm(IdAllClass["letData"]["column-gap"]);
                     _xetexFile.Write("\\setlength{\\columnsep}{" + propertyValue + "}");
@@ -858,7 +856,16 @@ namespace SIL.PublishingSolution
                 {
                     picFile = Path.GetFileName(fileName1);
                     string toPath = Path.Combine(_inputPath, picFile);
-                    File.Copy(fileName1, toPath, true);
+                    string str = PathwayPath.GetXeLaTexDir();
+                    string instPath = Common.PathCombine(str, "bin");
+
+                    string dest = Common.PathCombine(instPath, Path.GetFileName(picFile));
+
+                    if (!File.Exists(dest))
+                    {
+
+                        File.Copy(toPath, dest, true);
+                    }                    
                     //Dictionary<string, Dictionary<string, string>>() 
                     Dictionary<string, string> prop = new Dictionary<string, string>();
                     prop.Add("filePath", fileName1);
@@ -873,6 +880,23 @@ namespace SIL.PublishingSolution
                 _xetexFile.WriteLine("");
                 _xetexFile.WriteLine("");
 
+                //string p1 = @"\begin{figure*}[ht!] ";
+                //string p2 = @"\centering ";
+                //string p3 = @"\includegraphics[scale=0.5]{" + picFile +"} " ;
+                //string p4 = @"\caption{caption text} ";
+                //string p5 = @"\label{fig:image} ";
+                //string p6 = @"\end{figure*} ";
+                
+
+                string p1 = @"\begin{wrapfigure}";
+                string p2 = @"\begin{center}";
+                //string p3 = @"\includegraphics{" + picFile +"} " ;
+                string p3 = @"{\includegraphics[natwidth=1bp,natheight=1bp, width=150bp]{" + picFile + "}} ";
+                string p4 = @"\caption{}";
+                string p5 = @"\end{center}";
+                string p6 = @"\end{wrapfigure}";
+
+
                 //string p1 = @"\def\leftpicpar#1{\setbox0=\hbox{\XeTeXpicfile #1}";
                 //string p2 = @"\dimen0=\wd0 \advance\dimen0 by 3pt";
                 //string p3 = @"\count255=\ht0 \advance\count255 by \baselineskip";
@@ -885,6 +909,14 @@ namespace SIL.PublishingSolution
                 //_xetexFile.WriteLine("");
                 //string wp = "\\leftpicpar{\"" + picFile + "\" scaled 400}";
                 //_xetexFile.Write(wp);
+
+                _xetexFile.WriteLine(p1);
+                _xetexFile.WriteLine(p2);
+                _xetexFile.WriteLine(p3);
+                _xetexFile.WriteLine(p4);
+                _xetexFile.WriteLine(p5);
+                _xetexFile.WriteLine(p6);
+
                 _xetexFile.WriteLine("");
                 _xetexFile.WriteLine("");
                 _imageInsert = false;
@@ -1123,8 +1155,6 @@ namespace SIL.PublishingSolution
                 isHomographNumber = defValue;
             }
         }
-
-
 
         private void DropCaps()
         {

@@ -77,6 +77,9 @@ namespace SIL.PublishingSolution
             Common.FileInsertText(_xetexFullFile, @"\usepackage{multicol}");
             Common.FileInsertText(_xetexFullFile, @"\usepackage{fancyhdr}");
             Common.FileInsertText(_xetexFullFile, @"\usepackage{fontspec}");
+            Common.FileInsertText(_xetexFullFile, @"\usepackage{amssymb}");
+            Common.FileInsertText(_xetexFullFile, @"\usepackage{graphicx}");
+            Common.FileInsertText(_xetexFullFile, @"\usepackage{float}");
             foreach (var package in includePackageList)
             {
                 Common.FileInsertText(_xetexFullFile, package);
