@@ -1283,6 +1283,7 @@ namespace SIL.Tool
                         XmlNode node = nodeList[i];
                         if (node.Attributes != null)
                         {
+                            if (node.Attributes["name"] == null) continue;
                             string className = node.Attributes["name"].Value;
                             if (className == "fontName")
                             {
