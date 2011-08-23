@@ -28,7 +28,7 @@ GotHome:
 Run, "%FW_HOME%\\Fieldworks.exe" -app Te -db "%proj%" -restore "%InputPath%\\%Backup%" -include %IncOpt%
 WinWaitActive, %proj% - Translation Editor
 Sleep, 500
-Send, !fe{DOWN 4}{ENTER}
+Send, !fe{DOWN 5}{ENTER}
 WinWaitActive, Export XHTML
 Sleep, 500
 Send, !f+{HOME}
