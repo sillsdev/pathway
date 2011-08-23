@@ -376,10 +376,6 @@
       <Project>{D1ACC574-32FD-4EF3-B993-79D18B759B77}</Project>
       <Name>XeTex</Name>
     </ProjectReference>
-    <ProjectReference Include="..\YouVersionConvert\YouVersionConvert.csproj">
-      <Project>{92364016-A6BF-4C15-8106-8C7F57F5C172}</Project>
-      <Name>YouVersionConvert</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="License.rtf"/>
@@ -525,7 +521,6 @@
     <TestBackend Include="..\XeLaTexConvert\$(OutputPath)\XeLaTexConvert.*"/>
     <TestBackend Include="..\XeTex\$(OutputPath)\XeTexWriter.*"/>
     <BteBackend Include="..\GoBibleConvert\$(OutputPath)\GoBibleConvert.*"/>
-    <BteBackend Include="..\YouVersionConvert\$(OutputPath)\YouVersionConvert.*"/>
     <BteBackend Include="..\LogosConvert\$(OutputPath)\LogosConvert.*"/>
     <DicStyles Include="..\PsSupport\Styles\Dictionary\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*"/>
     <ScrStyles Include="..\PsSupport\Styles\Scripture\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*"/>

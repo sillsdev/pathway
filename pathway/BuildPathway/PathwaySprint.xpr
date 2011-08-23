@@ -34,5 +34,6 @@
         <file name="InstallXeLaTeX-tpl.wxs"/>
         <file name="../pathway.build"/>
         <file name="UserInterface-tpl.wxs"/>
+        <file name="Wix/UserInterface.wxs"/>
     </projectTree>
 </project>

@@ -292,7 +292,6 @@
     <Compile Include="epubConvert\ExportepubTest.cs" />
     <Compile Include="GoBibleConvert\CheckCV_XHTMLTest.cs" />
     <Compile Include="GoBibleConvert\GoBibleTest.cs" />
-    <Compile Include="YouVersion\ExportYouVersionTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BuildTasks\BuildTasks.csproj">
@@ -362,10 +361,6 @@
     <ProjectReference Include="..\XeTex\XeTex.csproj">
       <Project>{D1ACC574-32FD-4EF3-B993-79D18B759B77}</Project>
       <Name>XeTex</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\YouVersionConvert\YouVersionConvert.csproj">
-      <Project>{92364016-A6BF-4C15-8106-8C7F57F5C172}</Project>
-      <Name>YouVersionConvert</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

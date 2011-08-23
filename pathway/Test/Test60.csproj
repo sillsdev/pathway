@@ -289,7 +289,6 @@
     <Compile Include="XmlAssert.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="YouVersion\ExportYouVersionTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConfigurationTool\ConfigurationTool60.csproj">
@@ -351,10 +350,6 @@
     <ProjectReference Include="..\XeTeXConvert\XeTeXConvert60.csproj">
       <Project>{4DBF7F5A-F8A6-4B3D-B0B4-24DFBDFBAF56}</Project>
       <Name>XeTeXConvert60</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\YouVersionConvert\YouVersionConvert60.csproj">
-      <Project>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Project>
-      <Name>YouVersionConvert60</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
