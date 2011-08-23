@@ -1382,6 +1382,7 @@ namespace SIL.Tool
                         reader.Position = pos;
                         writer.WriteByte(b);
                     }
+                    data = null;
                 }
                 else // not what we're looking for - just write it out
                 {

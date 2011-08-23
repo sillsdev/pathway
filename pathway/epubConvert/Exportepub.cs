@@ -614,7 +614,7 @@ namespace SIL.PublishingSolution
             // - TE: add code to change the case of anchor GUIDs (this is a workaround for FWR 2550)
             // - Scriptures with a inline footnotes (References == "After Each Section"):
             //   adds the 
-            if (_inputType.ToLower().Equals("scripture") && (Application.ProductName.Contains("FieldWorks")))
+            if (_inputType.ToLower().Equals("scripture") && (Application.ProductName.Contains("FieldWorks") || (Common.Testing)))
             {
                 // TE workaround for FWR-2550 -- remove when this defect is fixed
                 const string searchText = "<!-- FWR -2550 workaround: convert these markers to uppercase (the cross-refs use upper case) -->";
@@ -2724,8 +2724,12 @@ namespace SIL.PublishingSolution
             opf.WriteAttributeString("type", "text");
             opf.WriteAttributeString("title", Common.databaseName + " " + projInfo.ProjectName);
             int index = 0;
-            while (!files[index].EndsWith(".xhtml") && index < files.Length)
+            while (index < files.Length)
             {
+                if (files[index].EndsWith(".xhtml"))
+                {
+                    break;
+                }
                 index++;
             }
             if (index == files.Length) index--; // edge case

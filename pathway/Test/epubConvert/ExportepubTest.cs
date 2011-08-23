@@ -96,6 +96,7 @@ namespace Test.epubConvert
             File.Copy(FileInput("FlexRev.xhtml"), FileOutput("FlexRev.xhtml"), true);
             File.Copy(FileInput("FlexRev.css"), FileOutput("FlexRev.css"), true);
             projInfo.IsReversalExist = true;
+            projInfo.IsLexiconSectionExist = true;
             projInfo.DefaultRevCssFileWithPath = Path.Combine(_inputPath, "FlexRev.css");
             projInfo.ProjectName = "EBook (epub)_" + DateTime.Now.Date.ToShortDateString() + "_" +
                                    DateTime.Now.Date.ToShortTimeString();
