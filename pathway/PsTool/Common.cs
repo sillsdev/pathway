@@ -87,6 +87,19 @@ namespace SIL.Tool
         {
             Dictionary, Scripture
         }
+		
+		/// <summary>
+		/// Returns whether this program is running under the mono VM environment. 
+		/// ONLY USE THIS IF YOU ABSOLUTELY NEED CONDITIONAL CODE. 
+		/// </summary>
+		public static bool UsingMonoVM 
+		{
+			get 
+			{
+				Type t = Type.GetType ("Mono.Runtime");
+				return (t != null);
+			}
+		}
 
         #region LanguageCodeAndName()
         /// <summary>

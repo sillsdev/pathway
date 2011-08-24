@@ -446,6 +446,10 @@ namespace SIL.PublishingSolution
 			var creatorFullPath = Common.FromRegistry(creatorPath);
             var progFolder = SubProcess.GetLocation(prog);
             var progFullName = Common.PathCombine(progFolder, prog);
+            if (progFullName.EndsWith(".exe"))
+            {
+                progFullName = progFullName.Substring(0, progFullName.Length - 4);
+			}
             var args = string.Format(@"-Xmx128m -jar ""{0}"" ""{1}""", creatorFullPath, collectionFullName);
             SubProcess.RedirectOutput = RedirectOutputFileName;
             SubProcess.Run(processFolder, progFullName, args, true);

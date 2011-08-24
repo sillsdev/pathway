@@ -93,6 +93,10 @@ namespace epubValidator
                     var progFullName = GetJavaExe();
                     if (progFullName.Length > 0)
                     {
+                        if (progFullName.EndsWith(".exe"))
+                        {
+                            progFullName = progFullName.Substring(0, progFullName.Length - 4);
+                        }
                         sb.Append("-jar");
                         sb.Append(" \"");
                         var strAppDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
