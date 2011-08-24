@@ -863,18 +863,28 @@ namespace SIL.PublishingSolution
 
                     if (!File.Exists(dest))
                     {
-
+                        if (toPath.IndexOf(".tif") >= 0)
+                        {
+                            toPath = Common.ConvertTifftoImage(toPath, "jpg");
+                            if (picFile != null) picFile = picFile.Replace(".tif", ".jpg");
+                            if (dest != null) dest = dest.Replace(".tif", ".jpg");
+                        }
                         File.Copy(toPath, dest, true);
-                    }                    
-                    //Dictionary<string, Dictionary<string, string>>() 
+                    }
+                    else
+                    {
+                        if (toPath.IndexOf(".tif") >= 0)
+                        {
+                            if (picFile != null) picFile = picFile.Replace(".tif", ".jpg");
+                        }
+                    }
                     Dictionary<string, string> prop = new Dictionary<string, string>();
                     prop.Add("filePath", fileName1);
                     _newProperty["ImagePath"] = prop;
 
-                    Image fullimage = Image.FromFile(fileName1);
-                    height = fullimage.Height;
-                    width = fullimage.Width;
-
+                    //Image fullimage = Image.FromFile(fileName1);
+                    //height = fullimage.Height;
+                    //width = fullimage.Width;
                 }
 
                 _xetexFile.WriteLine("");
