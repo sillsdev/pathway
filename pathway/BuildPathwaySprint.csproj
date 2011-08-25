@@ -163,7 +163,7 @@
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets. -->
   <Target Name="Build">
-    <RemoveDir Directories="Sprint"/>
+    <CallTarget Targets="Clean"/>
     <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>
     <CallTarget Targets="Corporate7BTE"/>
     <CallTarget Targets="Corporate7SE"/>
@@ -191,7 +191,27 @@
   <Target Name="AfterBuild"/> 
   <Target Name="Clean">
     <RemoveDir Directories="Sprint"/>
+    <Delete Files="@(Binaries)"/>
+    <Delete Files="@(Objects)"/>
+    <Delete Files="@(StagedFiles)"/>
+    <Delete Files="@(MyInstaller)"/>
+    <Delete Files="@(wpBinaries)"/>
+    <Delete Files="@(wpDist)"/>
+    <Delete Files="@(TxExBinaries)"/>
+    <Delete Files="@(TxExDist)"/>
+    <Delete Files="@(TestOutput)"/>
   </Target>
+  <ItemGroup>
+    <Binaries Include="*\bin\**"/>
+    <Objects Include="*\obj\**"/>
+    <StagedFiles Include="BuildPathway\Files\**"/>
+    <MyInstaller Include="BuildPathway\Wix\**"/>
+    <wpBinaries Include="WordPressConvert\build\**"/>
+    <wpDist Include="WordPressConvert\dist\**"/>
+    <TxExBinaries Include="PwTxEx\build\**"/>
+    <TxExDist Include="PwTxEx\dist\**"/>
+    <TestOutput Include="**\TestFiles\output\**"/>
+  </ItemGroup>
   <Target Name="Corporate7BTE">
     <MSBuild Projects="PublishingSolution.sln"
       Targets="Rebuild"
