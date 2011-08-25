@@ -155,6 +155,9 @@ namespace SIL.PublishingSolution
                     case "word-spacing":
                         WordSpacing(propertyValue);
                         break;
+                    case "visibility":
+                        Visibility(propertyValue);
+                        break;
                     //case "orphans":
                     //    Orphans(propertyValue);
                     //    break;
@@ -177,6 +180,25 @@ namespace SIL.PublishingSolution
             }
             string style = ComposeStyle();
             return style;
+        }
+
+        private void Visibility(string propertyValue)
+        {
+            if (propertyValue == string.Empty || propertyValue == "visible")
+            {
+                return;
+            }
+
+            if (propertyValue.ToLower() == "hidden")
+            {
+                propertyValue = "\\censor";
+                if (!_includePackageList.Contains("\\usepackage{censor}"))
+                    _includePackageList.Add("\\usepackage{censor}");
+            }
+            
+            if (propertyValue.Trim().Length > 0)
+                _inlineInnerStyle.Add(propertyValue);
+
         }
 
         public string XeLaTexPageProperty(Dictionary<string, string> cssProperty, string className, List<string> inlineStyle, List<string> includePackageList, List<string> inlineText)
