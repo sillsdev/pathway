@@ -78,6 +78,7 @@ namespace BuildTasks
             sub.FileSubstitute(_featuresTemplate, map, "Features.wxs");
             FileData.MoveToWix(Path.Combine(path,"Files.wxs"));
             FileData.MoveToWix(Path.Combine(path, "Features.wxs"));
+            SaveGuids(Path.Combine(path, "FileLibrary.xml"));
             return true;
         }
 
@@ -143,6 +144,7 @@ namespace BuildTasks
         {
             XmlDocument GuidStore = new XmlDocument();
             GuidStore.Load(libraryPath);
+            ResetIds();
             foreach (XmlNode child in GuidStore.DocumentElement.ChildNodes)
                 Guids[child.Attributes.GetNamedItem("Path").Value] =
                     child.Attributes.GetNamedItem("ComponentGuid").Value;
@@ -230,6 +232,7 @@ namespace BuildTasks
 
         protected void ResetIds()
         {
+            Guids.Clear();
             AllIds.Clear();
             CompIds.Clear();
         }

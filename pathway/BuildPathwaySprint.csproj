@@ -151,8 +151,8 @@
     <PlatformTarget>x86</PlatformTarget>
     <Status>Testing</Status>
   </PropertyGroup>
-  
-  
+
+
   <ItemGroup>
     <Reference Include="BuildTasks, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -166,31 +166,23 @@
     <CallTarget Targets="Clean"/>
     <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>
     <CallTarget Targets="Corporate7BTE"/>
-    <CallTarget Targets="Clean"/>
     <CallTarget Targets="Corporate7SE"/>
-    <CallTarget Targets="Clean"/>
     <CallTarget Targets="Release7BTE"/>
     <!-- CallTarget Targets="PwCtx"/ -->
-    <CallTarget Targets="Clean"/>
-    <Copy SourceFiles="@(Dll604)" DestinationFiles=".\PsExport\Dlls601\%(Filename)%(Extension)" OverwriteReadOnlyFiles="true"/>
+    <Copy SourceFiles="@(Dll604)" DestinationFiles=".\PsExport\Dlls601\%(Filename)%(Extension)"
+      OverwriteReadOnlyFiles="true"/>
     <CallTarget Targets="CorporateBTE604"/>
-    <CallTarget Targets="Clean"/>
     <CallTarget Targets="CorporateSE604"/>
-    <CallTarget Targets="Clean"/>
     <CallTarget Targets="ReleaseBTE604"/>
-    <CallTarget Targets="Clean"/>
-    <Copy SourceFiles="@(Dll605)" DestinationFiles=".\PsExport\Dlls601\%(Filename)%(Extension)" OverwriteReadOnlyFiles="true"/>
+    <Copy SourceFiles="@(Dll605)" DestinationFiles=".\PsExport\Dlls601\%(Filename)%(Extension)"
+      OverwriteReadOnlyFiles="true"/>
     <CallTarget Targets="CorporateBTE605"/>
-    <CallTarget Targets="Clean"/>
     <CallTarget Targets="CorporateSE605"/>
-    <CallTarget Targets="Clean"/>
-    <Copy SourceFiles="@(Dll606)" DestinationFiles=".\PsExport\Dlls601\%(Filename)%(Extension)" OverwriteReadOnlyFiles="true"/>
+    <Copy SourceFiles="@(Dll606)" DestinationFiles=".\PsExport\Dlls601\%(Filename)%(Extension)"
+      OverwriteReadOnlyFiles="true"/>
     <CallTarget Targets="CorporateBTE606"/>
-    <CallTarget Targets="Clean"/>
     <CallTarget Targets="CorporateSE606"/>
-    <CallTarget Targets="Clean"/>
     <CallTarget Targets="ReleaseBTE606"/>
-    <CallTarget Targets="Clean"/>
     <CallTarget Targets="PathwayXeLaTeX"/>
   </Target>
   <Target Name="Daily">
@@ -198,8 +190,8 @@
     <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>
     <CallTarget Targets="Release7BTE"/>
   </Target>
-  <Target Name="BeforeBuild"/> 
-  <Target Name="AfterBuild"/> 
+  <Target Name="BeforeBuild"/>
+  <Target Name="AfterBuild"/>
   <Target Name="Clean">
     <RemoveDir Directories="Sprint"/>
     <Delete Files="@(Binaries"/>
@@ -224,106 +216,105 @@
     <TestOutput Include="**\TestFiles\output\**"/>
   </ItemGroup>
   <Target Name="Corporate7BTE">
-    <MSBuild Projects="PublishingSolution.sln"
-      Targets="Rebuild"
+    <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
       Properties="Configuration=Corporate7BTE;Platform=x86"/>
-    <Copy SourceFiles=".\BuildPathway\Wix\SetupPw7Bte.msi" DestinationFiles=".\Sprint\SetupPw7Bte.msi"/>
+    <Copy SourceFiles=".\BuildPathway\Wix\SetupPw7Bte.msi"
+      DestinationFiles=".\Sprint\SetupPw7Bte.msi"/>
   </Target>
   <Target Name="Corporate7SE">
-    <MSBuild Projects="PublishingSolution.sln"
-      Targets="Rebuild"
+    <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
       Properties="Configuration=Corporate7SE;Platform=x86"/>
-    <Copy SourceFiles=".\BuildPathway\Wix\SetupPw7Se.msi" DestinationFiles=".\Sprint\SetupPw7Se.msi"/>
+    <Copy SourceFiles=".\BuildPathway\Wix\SetupPw7Se.msi" DestinationFiles=".\Sprint\SetupPw7Se.msi"
+    />
   </Target>
   <Target Name="Release7BTE">
-    <MSBuild Projects="PublishingSolution.sln"
-      Targets="Rebuild"
+    <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
       Properties="Configuration=Release7BTE;Platform=x86"/>
-    <Copy SourceFiles=".\BuildPathway\Wix\SetupPw7BteTesting.msi" DestinationFiles=".\Sprint\SetupPw7BteTesting.msi"/>
+    <Copy SourceFiles=".\BuildPathway\Wix\SetupPw7BteTesting.msi"
+      DestinationFiles=".\Sprint\SetupPw7BteTesting.msi"/>
   </Target>
   <Target Name="Release7SE">
-    <MSBuild Projects="PublishingSolution.sln"
-      Targets="Rebuild"
+    <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
       Properties="Configuration=Release7SE;Platform=x86"/>
-    <Copy SourceFiles=".\BuildPathway\Wix\SetupPw7SeTesting.msi" DestinationFiles=".\Sprint\SetupPw7SeTesting.msi"/>
+    <Copy SourceFiles=".\BuildPathway\Wix\SetupPw7SeTesting.msi"
+      DestinationFiles=".\Sprint\SetupPw7SeTesting.msi"/>
   </Target>
   <Target Name="PwCtx">
-    <MSBuild Projects="PublishingSolution.sln"
-      Targets="Rebuild"
+    <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
       Properties="Configuration=PwCtx;Platform=x86"/>
     <Copy SourceFiles=".\BuildPathway\Wix\SetupCtx.msi" DestinationFiles=".\Sprint\SetupCtx.msi"/>
   </Target>
   <Target Name="PathwayXeLaTeX">
-    <MSBuild Projects="PublishingSolution.sln"
-      Targets="Rebuild"
+    <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
       Properties="Configuration=PathwayXeLaTeX;Platform=x86"/>
-    <Copy SourceFiles=".\BuildPathway\Wix\SetupXeLaTeXTesting.msi" DestinationFiles=".\Sprint\SetupXeLaTeXTesting.msi"/>
+    <Copy SourceFiles=".\BuildPathway\Wix\SetupXeLaTeXTesting.msi"
+      DestinationFiles=".\Sprint\SetupXeLaTeXTesting.msi"/>
   </Target>
   <Target Name="CorporateBTE">
-    <MSBuild Projects="PublishingSolution60.sln"
-      Targets="Rebuild"
+    <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
       Properties="Configuration=CorporateBTE;Platform=x86"/>
-    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwBte.msi" DestinationFiles=".\Sprint\SetupPwBte$(FwVer).msi"/>
+    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwBte.msi"
+      DestinationFiles=".\Sprint\SetupPwBte$(FwVer).msi"/>
   </Target>
   <Target Name="CorporateSE">
-    <MSBuild Projects="PublishingSolution60.sln"
-      Targets="Rebuild"
+    <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
       Properties="Configuration=CorporateSE;Platform=x86"/>
-    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwSe.msi" DestinationFiles=".\Sprint\SetupPwSe$(FwVer).msi"/>
+    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwSe.msi"
+      DestinationFiles=".\Sprint\SetupPwSe$(FwVer).msi"/>
   </Target>
   <Target Name="CorporateBTE604">
-    <MSBuild Projects="PublishingSolution60.sln"
-      Targets="Rebuild"
+    <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
       Properties="Configuration=CorporateBTE604;Platform=x86"/>
-    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwBte.msi" DestinationFiles=".\Sprint\SetupPwBte-604.msi"/>
+    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwBte.msi"
+      DestinationFiles=".\Sprint\SetupPwBte-604.msi"/>
   </Target>
   <Target Name="CorporateSE604">
-    <MSBuild Projects="PublishingSolution60.sln"
-      Targets="Rebuild"
+    <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
       Properties="Configuration=CorporateSE604;Platform=x86"/>
-    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwSe.msi" DestinationFiles=".\Sprint\SetupPwSe-604.msi"/>
+    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwSe.msi"
+      DestinationFiles=".\Sprint\SetupPwSe-604.msi"/>
   </Target>
   <Target Name="CorporateBTE605">
-    <MSBuild Projects="PublishingSolution60.sln"
-      Targets="Rebuild"
+    <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
       Properties="Configuration=CorporateBTE605;Platform=x86"/>
-    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwBte.msi" DestinationFiles=".\Sprint\SetupPwBte-605.msi"/>
+    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwBte.msi"
+      DestinationFiles=".\Sprint\SetupPwBte-605.msi"/>
   </Target>
   <Target Name="CorporateSE605">
-    <MSBuild Projects="PublishingSolution60.sln"
-      Targets="Rebuild"
+    <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
       Properties="Configuration=CorporateSE605;Platform=x86"/>
-    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwSe.msi" DestinationFiles=".\Sprint\SetupPwSe-605.msi"/>
+    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwSe.msi"
+      DestinationFiles=".\Sprint\SetupPwSe-605.msi"/>
   </Target>
   <Target Name="CorporateBTE606">
-    <MSBuild Projects="PublishingSolution60.sln"
-      Targets="Rebuild"
+    <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
       Properties="Configuration=CorporateBTE606;Platform=x86"/>
-    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwBte.msi" DestinationFiles=".\Sprint\SetupPwBte-606.msi"/>
+    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwBte.msi"
+      DestinationFiles=".\Sprint\SetupPwBte-606.msi"/>
   </Target>
   <Target Name="CorporateSE606">
-    <MSBuild Projects="PublishingSolution60.sln"
-      Targets="Rebuild"
+    <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
       Properties="Configuration=CorporateSE606;Platform=x86"/>
-    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwSe.msi" DestinationFiles=".\Sprint\SetupPwSe-606.msi"/>
+    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwSe.msi"
+      DestinationFiles=".\Sprint\SetupPwSe-606.msi"/>
   </Target>
   <Target Name="ReleaseBTE">
-    <MSBuild Projects="PublishingSolution60.sln"
-      Targets="Rebuild"
+    <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
       Properties="Configuration=ReleaseBTE;Platform=x86"/>
-    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwBteTesting.msi" DestinationFiles=".\Sprint\SetupPwBteTesting.msi"/>
+    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwBteTesting.msi"
+      DestinationFiles=".\Sprint\SetupPwBteTesting.msi"/>
   </Target>
   <Target Name="ReleaseBTE604">
-    <MSBuild Projects="PublishingSolution60.sln"
-      Targets="Rebuild"
+    <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
       Properties="Configuration=ReleaseBTE604;Platform=x86"/>
-    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwBteTesting.msi" DestinationFiles=".\Sprint\SetupPwBteTesting-604.msi"/>
+    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwBteTesting.msi"
+      DestinationFiles=".\Sprint\SetupPwBteTesting-604.msi"/>
   </Target>
   <Target Name="ReleaseBTE606">
-    <MSBuild Projects="PublishingSolution60.sln"
-      Targets="Rebuild"
+    <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
       Properties="Configuration=ReleaseBTE606;Platform=x86"/>
-    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwBteTesting.msi" DestinationFiles=".\Sprint\SetupPwBteTesting-606.msi"/>
+    <Copy SourceFiles=".\BuildPathway\Wix\SetupPwBteTesting.msi"
+      DestinationFiles=".\Sprint\SetupPwBteTesting-606.msi"/>
   </Target>
   <ItemGroup>
     <Dll606 Include=".\PsExport\Dlls606\*.dll"/>
