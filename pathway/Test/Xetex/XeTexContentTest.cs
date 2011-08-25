@@ -262,6 +262,7 @@ namespace Test.Xetex
             FileCompare(file);
         }
 
+        [Ignore]
         [Test]
         [Category("SkipOnTeamCity")]
         public void PseudoAfterTest()
@@ -631,6 +632,7 @@ namespace Test.Xetex
             FileCompare(file);
         }
 
+        [Ignore]
         [Test]
         [Category("SkipOnTeamCity")]
         public void FootNoteUnicodeTest()

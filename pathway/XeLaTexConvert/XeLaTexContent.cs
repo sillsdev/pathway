@@ -800,7 +800,7 @@ namespace SIL.PublishingSolution
                 srcFile = _imageSource.ToLower();
                 string fileName = "file:" + Common.GetPictureFromPath(srcFile, "", _inputPath);
                 string fileName1 = Common.GetPictureFromPath(srcFile, "", _inputPath);
-                if (IdAllClass.ContainsKey(srcFile))
+                if (IdAllClass.ContainsKey(cc[0]))
                 {
                     rectHeight = GetPropertyValue(srcFile, "height", rectHeight);
                     rectWidth = GetPropertyValue(srcFile, "width", rectWidth);
@@ -887,17 +887,21 @@ namespace SIL.PublishingSolution
                     //width = fullimage.Width;
                 }
 
-                _xetexFile.WriteLine("");
-                _xetexFile.WriteLine("");
+                WriteImage(picFile);
 
-                //string p1 = @"\begin{figure*}[ht!] ";
-                //string p2 = @"\centering ";
-                //string p3 = @"\includegraphics[scale=0.5]{" + picFile +"} " ;
-                //string p4 = @"\caption{caption text} ";
-                //string p5 = @"\label{fig:image} ";
-                //string p6 = @"\end{figure*} ";
+                _imageInsert = false;
+                _imageSource = string.Empty;
+                _isNewParagraph = false;
+            }
+            return inserted;
+        }
+
+        private void WriteImage(string picFile)
+        {
+            if (!string.IsNullOrEmpty(picFile))
+            {
+                _xetexFile.WriteLine("");
                 
-
                 string p1 = @"\begin{wrapfigure}";
                 string p2 = @"\begin{center}";
                 //string p3 = @"\includegraphics{" + picFile +"} " ;
@@ -906,6 +910,12 @@ namespace SIL.PublishingSolution
                 string p5 = @"\end{center}";
                 string p6 = @"\end{wrapfigure}";
 
+                //string p1 = @"\begin{figure*}[ht!] ";
+                //string p2 = @"\centering ";
+                //string p3 = @"\includegraphics[scale=0.5]{" + picFile +"} " ;
+                //string p4 = @"\caption{caption text} ";
+                //string p5 = @"\label{fig:image} ";
+                //string p6 = @"\end{figure*} ";
 
                 //string p1 = @"\def\leftpicpar#1{\setbox0=\hbox{\XeTeXpicfile #1}";
                 //string p2 = @"\dimen0=\wd0 \advance\dimen0 by 3pt";
@@ -926,14 +936,8 @@ namespace SIL.PublishingSolution
                 _xetexFile.WriteLine(p4);
                 _xetexFile.WriteLine(p5);
                 _xetexFile.WriteLine(p6);
-
                 _xetexFile.WriteLine("");
-                _xetexFile.WriteLine("");
-                _imageInsert = false;
-                _imageSource = string.Empty;
-                _isNewParagraph = false;
             }
-            return inserted;
         }
 
         private void GetHeightandWidth(ref string height, ref string width)

@@ -171,8 +171,6 @@ namespace SIL.PublishingSolution
         private void CloseDocument(StreamWriter xeLatexFile)
         {
             xeLatexFile.WriteLine();
-//          xeLatexFile.WriteLine(@"\end{multicols}");
-            //xetexFile.WriteLine(@"\bye");
             xeLatexFile.WriteLine(@"\end{document}");
             xeLatexFile.Flush();
             xeLatexFile.Close();

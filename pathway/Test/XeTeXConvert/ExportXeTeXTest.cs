@@ -379,9 +379,11 @@ namespace Test.XeTeXConvert
             Assert.AreEqual(expected, actual);
         }
 
+
         /// <summary>
         ///A test for Launch
         ///</summary>
+        [Ignore]
         [Test]
         [Category("SkipOnTeamCity")]
         public void LaunchTest()

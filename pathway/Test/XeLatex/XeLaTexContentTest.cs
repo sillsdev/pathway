@@ -417,6 +417,7 @@ namespace Test.XeLatex
         public void ImageBaseTest()
         {
             _projInfo.ProjectInputType = "Dictionary";
+            _projInfo.ProjectPath = _inputPath;
             const string file = "ImageBase";
             ExportProcess(file);
             FileCompare(file);
@@ -711,6 +712,7 @@ namespace Test.XeLatex
         public void HashSymbolTest()
         {
             _projInfo.ProjectInputType = "Dictionary";
+            _projInfo.ProjectPath = _inputPath;
             const string file = "HashSymbol";
             ExportProcess(file);
             FileCompare(file);
@@ -753,7 +755,7 @@ namespace Test.XeLatex
 
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
-            cssTree.OutputType = Common.OutputType.XETEX;
+            cssTree.OutputType = Common.OutputType.XELATEX;
             cssClass = cssTree.CreateCssProperty(input, true);
 
             string xetexFullFile = Path.Combine(_outputPath, file + ".tex");

@@ -1095,7 +1095,7 @@ namespace SIL.PublishingSolution
             //{
             //    ParentClass[_matchedCssStyleName] = _parentStyleName + "||" + _tagType;
             //}
-            if (_outputType != Common.OutputType.XETEX && _outputType != Common.OutputType.XELATEX)
+            if (_outputType != Common.OutputType.XETEX || _outputType != Common.OutputType.XELATEX)
             {
                 _matchedCssStyleName.Replace(Common.sepPrecede, "");
                 _matchedCssStyleName.Replace(Common.SepParent, "");
