@@ -166,24 +166,35 @@
     <CallTarget Targets="Clean"/>
     <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>
     <CallTarget Targets="Corporate7BTE"/>
+    <CallTarget Targets="Clean"/>
     <CallTarget Targets="Corporate7SE"/>
+    <CallTarget Targets="Clean"/>
     <CallTarget Targets="Release7BTE"/>
     <!-- CallTarget Targets="PwCtx"/ -->
+    <CallTarget Targets="Clean"/>
     <Copy SourceFiles="@(Dll604)" DestinationFiles=".\PsExport\Dlls601\%(Filename)%(Extension)" OverwriteReadOnlyFiles="true"/>
     <CallTarget Targets="CorporateBTE604"/>
+    <CallTarget Targets="Clean"/>
     <CallTarget Targets="CorporateSE604"/>
+    <CallTarget Targets="Clean"/>
     <CallTarget Targets="ReleaseBTE604"/>
+    <CallTarget Targets="Clean"/>
     <Copy SourceFiles="@(Dll605)" DestinationFiles=".\PsExport\Dlls601\%(Filename)%(Extension)" OverwriteReadOnlyFiles="true"/>
     <CallTarget Targets="CorporateBTE605"/>
+    <CallTarget Targets="Clean"/>
     <CallTarget Targets="CorporateSE605"/>
+    <CallTarget Targets="Clean"/>
     <Copy SourceFiles="@(Dll606)" DestinationFiles=".\PsExport\Dlls601\%(Filename)%(Extension)" OverwriteReadOnlyFiles="true"/>
     <CallTarget Targets="CorporateBTE606"/>
+    <CallTarget Targets="Clean"/>
     <CallTarget Targets="CorporateSE606"/>
+    <CallTarget Targets="Clean"/>
     <CallTarget Targets="ReleaseBTE606"/>
+    <CallTarget Targets="Clean"/>
     <CallTarget Targets="PathwayXeLaTeX"/>
   </Target>
   <Target Name="Daily">
-    <RemoveDir Directories="Sprint"/>
+    <CallTarget Targets="Clean"/>
     <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>
     <CallTarget Targets="Release7BTE"/>
   </Target>
@@ -191,7 +202,7 @@
   <Target Name="AfterBuild"/> 
   <Target Name="Clean">
     <RemoveDir Directories="Sprint"/>
-    <Delete Files="@(Binaries)"/>
+    <Delete Files="@(Binaries"/>
     <Delete Files="@(Objects)"/>
     <Delete Files="@(StagedFiles)"/>
     <Delete Files="@(MyInstaller)"/>
