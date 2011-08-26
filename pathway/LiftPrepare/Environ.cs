@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
 using System.Text;
 using System.Xml;
 using System.Xml.Schema;
+using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
@@ -13,12 +14,12 @@ namespace SIL.PublishingSolution
         private static string currentDir = Environment.CurrentDirectory;
         private static int binFolderPart = currentDir.IndexOf(Path.DirectorySeparatorChar + "bin" + Path.DirectorySeparatorChar);
         private static string baseDir =  currentDir.Substring(0, binFolderPart);
-        public static string pathToFilterTemplates = baseDir + @"\LiftPrepare\TestFiles\Input\";
-        public static string pathToTransformTemplate = baseDir + @"\LiftPrepare\TestFiles\Input\";
+        public static string pathToFilterTemplates =  Common.PathCombine(baseDir, @"\LiftPrepare\TestFiles\Input\");
+        public static string pathToTransformTemplate = Common.PathCombine(baseDir, @"\LiftPrepare\TestFiles\Input\");
         public const string defaultIcuRules = @"[alternate shifted]";
         private static XmlSchema _liftXMLSchema = new XmlSchema();
 
-        private static string pathToLiftSchema = baseDir + @"\LiftPrepare\TestFiles\Input\lift.xsd";
+        private static string pathToLiftSchema = Common.PathCombine(baseDir, @"\LiftPrepare\TestFiles\Input\lift.xsd");
         private static string _pathToLiftSchema = pathToLiftSchema;
         public static string PathToLiftSchema
         {
