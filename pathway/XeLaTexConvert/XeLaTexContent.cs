@@ -869,7 +869,8 @@ namespace SIL.PublishingSolution
                             if (picFile != null) picFile = picFile.Replace(".tif", ".jpg");
                             if (dest != null) dest = dest.Replace(".tif", ".jpg");
                         }
-                        File.Copy(toPath, dest, true);
+                        if(!string.IsNullOrEmpty(toPath))
+                            File.Copy(toPath, dest, true);
                     }
                     else
                     {
