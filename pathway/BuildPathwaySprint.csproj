@@ -250,6 +250,12 @@
     <Copy SourceFiles=".\BuildPathway\Wix\SetupXeLaTeXTesting.msi"
       DestinationFiles=".\Sprint\SetupXeLaTeXTesting.msi"/>
   </Target>
+  <Target Name="Checking">
+    <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
+      Properties="Configuration=Checking;Platform=x86"/>
+    <Copy SourceFiles=".\BuildPathway\Wix\SetupCheckingTesting.msi"
+      DestinationFiles=".\Sprint\SetupCheckingTesting.msi"/>
+  </Target>
   <Target Name="CorporateBTE">
     <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
       Properties="Configuration=CorporateBTE;Platform=x86"/>

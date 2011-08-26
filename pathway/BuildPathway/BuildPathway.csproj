@@ -175,6 +175,14 @@
     <ConfTag>XeLaTeX</ConfTag>
     <Status>Testing</Status>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Checking|x86' ">
+    <OutputPath>bin\x86\xmlMarkup\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <Edition/>
+    <ProductName>DBL bundle checking tools</ProductName>
+    <ConfTag>Checking</ConfTag>
+    <Status>Testing</Status>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConfigurationTool\ConfigurationTool.csproj">
       <Project>{C1ED7E03-C92E-4223-909B-E9C35A4D98E2}</Project>
@@ -264,8 +272,9 @@
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets. -->
   <Target Name="Build">
-    <CallTarget Targets="BeforeBuild" Condition=" '$(ConfTag)' != 'XeLaTeX' " />
+    <CallTarget Targets="BeforeBuild" Condition=" '$(ConfTag)' != 'XeLaTeX' and '$(ConfTag)' != 'Checking' " />
     <CallTarget Targets="XeLaTeXBeforeBuild" Condition=" '$(ConfTag)' == 'XeLaTeX' " />
+    <CallTarget Targets="CheckingBeforeBuild" Condition=" '$(ConfTag)' == 'Checking' " />
     <Message Text="BUILD_NUMBER: $(BUILD_NUMBER)" Importance="high" />
     <RemoveDir Directories="Wix" />
     <UpdateVersion Product="$(ProductName) " Version="0.7.9" BuildVersion="$(BUILD_NUMBER)" HelpFile="Pathway_Configuration_Tool_$(Edition).chm" Template="$(ProjectDir)Install$(ConfTag)$(Edition)-tpl.wxs" />
@@ -390,5 +399,13 @@
   </Target>
   <ItemGroup>
     <XeLaTexExe Include="..\XeLaTexConvert\XeLaTexExe\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\**\.svn\**\*.*" />
+  </ItemGroup>
+  <Target Name="CheckingBeforeBuild">
+    <Copy SourceFiles="@(CheckingExe)" DestinationFiles="@(CheckingExe->'Files\PathwayChecking\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+  <ItemGroup>
+    <CheckingExe Include="..\usxChars\dist\**\*.*" Exclude="..\usxChars\dist\**\.svn\**\*.*" />
+    <CheckingExe Include="..\usxVerseWordCount\dist\**\*.*" Exclude="..\usxVerseWordCount\dist\**\.svn\**\*.*" />
+    <CheckingExe Include="..\xmlMarkup\dist\**\*.*" Exclude="..\xmlMarkup\dist\**\.svn\**\*.*" />
   </ItemGroup>
 </Project>
