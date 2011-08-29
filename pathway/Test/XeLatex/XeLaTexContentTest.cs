@@ -214,7 +214,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
         
-        [Test]
+        [Ignore]
         [Category("SkipOnTeamCity")]
         public void FontWeightBoldRegular()  // TD-2330()
         {
@@ -225,7 +225,7 @@ namespace Test.XeLatex
         }
 
         
-        [Test]
+        [Ignore]
         [Category("SkipOnTeamCity")]
         public void FontBoldItalicTest()  // TD-2188()
         {
@@ -677,7 +677,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        [Test]
+        [Ignore]
         [Category("SkipOnTeamCity")]
         public void ReplaceStringTest()
         {
@@ -707,7 +707,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        [Test]
+        [Ignore]
         [Category("SkipOnTeamCity")]
         public void HashSymbolTest()
         {

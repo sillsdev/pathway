@@ -826,15 +826,15 @@ namespace SIL.PublishingSolution
             
             if (propertyValue == "center")
             {
-                propertyValue = "\\centerline";
+                propertyValue = "text-align center";
             }
             else if (propertyValue == "left")
             {
-                propertyValue = "\\leftline";
+                propertyValue = "text-align left";
             }
             else if (propertyValue == "right")
             {
-                propertyValue = "\\rightline";
+                propertyValue = "text-align right";
             }
             //else if (propertyValue == "justify")
             //{

@@ -63,6 +63,7 @@ namespace SIL.PublishingSolution
         Dictionary<string, List<string>> _classInlineStyle = new Dictionary<string, List<string>>();
         Dictionary<string, List<string>> _classInlineInnerStyle = new Dictionary<string, List<string>>();
         private string xhtmlFile;
+        private Dictionary<string, string> _endParagraphStringDic = new Dictionary<string, string>();
 
         protected Stack<string> _braceClass = new Stack<string>();
         protected Stack<string> _braceInlineClass = new Stack<string>();
@@ -642,8 +643,15 @@ namespace SIL.PublishingSolution
                 if (_classInlineStyle.ContainsKey(mergedParaStyle))
                 {
                     List<string> inlineStyle = _classInlineStyle[mergedParaStyle];
+                    int paraStyleCount = 0;
                     foreach (string property in inlineStyle)
                     {
+                        string propName = Common.LeftString(property, " ");
+                        if (_paragraphPropertyList.ContainsValue(propName))
+                        {
+                            paraStyleCount++;
+                            continue;
+                        }
                         if (_mathStyle.Contains(property))
                         {
                             _xetexFile.Write("$");
@@ -652,7 +660,7 @@ namespace SIL.PublishingSolution
                         _xetexFile.Write(property);
                         _xetexFile.Write("{");
                     }
-                    _inlineCount = inlineStyle.Count;
+                    _inlineCount = inlineStyle.Count - paraStyleCount;
                     if (inlineStyle.Count > 0)
                     {
                         _braceInlineClassCount[getStyleName] = inlineStyle.Count;
@@ -717,6 +725,7 @@ namespace SIL.PublishingSolution
                     foreach (string sty in _classInlineStyle[parentClass])
                     {
                         string parentProp = Common.LeftString(sty, " ");
+                        if (_paragraphPropertyList.ContainsKey(parentProp)) continue; // skip parent paragraph property 
                         bool IsContains = false;
                         foreach (string styl in _mergedInlineStyle)
                         {
@@ -1132,6 +1141,8 @@ namespace SIL.PublishingSolution
             SetHomographNumber(true);
             FooterSetup(Common.OutputType.XELATEX.ToString());
 
+            WriteParagraphInline();
+
             if (IdAllClass.ContainsKey(_classNameWithLang))
             {
                 bool isPageBreak = false;
@@ -1150,6 +1161,46 @@ namespace SIL.PublishingSolution
                     _textFrameClass.Add(_childName);
                     //if (!_columnClass.Contains(_childName))
                     //    _columnClass.Add(_childName);
+                }
+            }
+        }
+
+        private void WriteParagraphInline()
+        {
+            string paraStyle = _childName.Replace("_body", ""); ;
+            string childClass = Common.LeftString(paraStyle, "_");
+            if (_classInlineStyle.ContainsKey(childClass))
+            {
+                string endParagraphString = string.Empty;
+                foreach (string property in _classInlineStyle[childClass])
+                {
+                    string propName = Common.LeftString(property, " ");
+                    if (_paragraphPropertyList.ContainsValue(propName))
+                    {
+                        if (propName == "text-align")
+                        {
+                            string prop = "{\\begin{" + Common.RightString(property, " ") + "}";
+                            _xetexFile.Write(prop);
+                            endParagraphString += "\\end{" + Common.RightString(property, " ") + "}}";
+                        }
+                        else
+                        {
+                            _xetexFile.Write(property);
+                            _xetexFile.Write("{");
+                            endParagraphString += "}";
+
+                        }
+                    }
+                }
+
+                if (endParagraphString != string.Empty)
+                {
+                    string getStyleName = StackPeek(_allStyle);
+                    _braceInlineClassCount[getStyleName] = _classInlineStyle[childClass].Count;
+                    _braceInlineClass.Push(getStyleName);
+
+                    if (_endParagraphStringDic.ContainsKey(getStyleName) == false)
+                        _endParagraphStringDic[getStyleName] = endParagraphString;
                 }
             }
         }
@@ -1244,15 +1295,16 @@ namespace SIL.PublishingSolution
 
         private void CloseBrace(string closeChildName)
         {
-            string brace = StackPeek(_braceInlineClass);
-            if (brace.Length != 0 && closeChildName == brace && _braceInlineClassCount.ContainsKey(brace))
+            string closeStyle = StackPeek(_braceInlineClass);
+            if (closeChildName == closeStyle && _endParagraphStringDic.ContainsKey(closeStyle))
             {
-                int count = _braceInlineClassCount[brace];
-                _braceInlineClassCount[brace] = 0;
+                //int count = _braceInlineClassCount[brace];
+                //_braceInlineClassCount[brace] = 0;
                 //for (int i = 0; i < count; i++)
                 //{
                 //    _xetexFile.Write("}");
                 //}
+                _xetexFile.Write(_endParagraphStringDic[closeStyle]);
                 StackPop(_braceInlineClass);
             }
 
@@ -1376,6 +1428,33 @@ namespace SIL.PublishingSolution
 
             _isNewParagraph = false;
             _characterName = "$ID/[No character style]";// "[No character style]"; 
+
+
+            _paragraphPropertyList = new Dictionary<string, string>();
+            //Padding
+            _paragraphPropertyList["\\innertopmargin"] ="\\innertopmargin";
+            _paragraphPropertyList["\\innerbottommargin"] ="\\innerbottommargin";
+            _paragraphPropertyList["\\innerleftmargin"] ="\\innerleftmargin";
+            _paragraphPropertyList["\\innerrightmargin"] ="\\innerrightmargin";
+            //Margin
+            _paragraphPropertyList["\\leftmargin"] ="\\leftmargin";
+            _paragraphPropertyList["\\rightmargin"] ="\\rightmargin";
+            _paragraphPropertyList["\\skipabove"] ="\\skipabove";
+            _paragraphPropertyList["\\skipbelow"] ="\\skipbelow";
+
+            //Margin
+            _paragraphPropertyList["\\leftskip"] ="\\leftskip";
+            _paragraphPropertyList["\\rightskip"] ="\\rightskip";
+            _paragraphPropertyList["\\topskip"] ="\\topskip";
+            _paragraphPropertyList["\\bottomskip"] ="\\bottomskip";
+
+            //TextAlign
+            _paragraphPropertyList["center"] = "text-align";
+            _paragraphPropertyList["left"] = "text-align";
+            _paragraphPropertyList["right"] = "text-align";
+            //_paragraphPropertyList.Add("\\centerline");
+            //_paragraphPropertyList.Add("\\leftline");
+            //_paragraphPropertyList.Add("\\rightline");
         }
         #endregion
     }
