@@ -739,8 +739,7 @@ namespace SIL.PublishingSolution
             cXML._multiLanguageHeader = isMultiLanguageHeader;
             cXML.RefFormat = this._refFormat;
             cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, pageWidth);
-            InsertChapterNumber(projInfo.TempOutputFolder);
-            InsertVariableOnLetHead(projInfo.TempOutputFolder);
+            PostProcess(projInfo);
 
             if (projInfo.FileSequence != null && projInfo.FileSequence.Count > 1)
             {
@@ -788,6 +787,88 @@ namespace SIL.PublishingSolution
                 }
             }
             return returnValue;
+        }
+
+        private static void PostProcess(PublicationInformation projInfo)
+        {
+            InsertChapterNumber(projInfo.TempOutputFolder);
+            InsertVariableOnLetHead(projInfo.TempOutputFolder);
+            InsertKeepWithNextForEntryOnCondition(projInfo.TempOutputFolder);
+        }
+
+        private static void InsertKeepWithNextForEntryOnCondition(string tempOutputFolder)
+        {
+            DuplicateEntryStyle(tempOutputFolder);
+            RenameContentStyleOnCondition(tempOutputFolder);
+        }
+
+        private static void RenameContentStyleOnCondition(string tempFolder)
+        {
+            string filename = Path.Combine(tempFolder, "content.xml");
+            XmlDocument xdoc = new XmlDocument();
+            xdoc.PreserveWhitespace = false;
+            xdoc.Load(filename);
+
+            var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
+            nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+            nsmgr1.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+            nsmgr1.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
+
+            string xpath = "//text:p[@text:style-name='DictionarySubentry_a_subentries_entry_letData_dicBody']";
+            XmlNodeList list = xdoc.SelectNodes(xpath, nsmgr1);
+            if (list != null)
+            {
+                foreach (XmlNode xmlNode in list)
+                {
+                    XmlNode prevEntryNode = xmlNode.PreviousSibling;
+                    if (prevEntryNode.Attributes != null)
+                    {
+                        string copyAttr = prevEntryNode.Attributes["text:style-name"].Value;
+                        prevEntryNode.Attributes["text:style-name"].Value = copyAttr.Replace("entry", "entry1");
+                    }
+                }
+            }
+            xdoc.PreserveWhitespace = true;
+            xdoc.Save(filename);
+        }
+
+        /// <summary>
+        /// TD-2488
+        /// </summary>
+        /// <param name="tempFolder">Temp folder path</param>
+        private static void DuplicateEntryStyle(string tempFolder)
+        {
+
+            string filename = Path.Combine(tempFolder, "styles.xml");
+            XmlDocument xdoc = new XmlDocument();
+            xdoc.PreserveWhitespace = false;
+            xdoc.Load(filename);
+
+            var nsmgr1 = new XmlNamespaceManager(xdoc.NameTable);
+            nsmgr1.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+            nsmgr1.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+            nsmgr1.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
+
+            string xpath = "//style:style[@style:name='entry_letData_dicBody']";
+            XmlNodeList list = xdoc.SelectNodes(xpath, nsmgr1);
+            if (list.Count > 0)
+            {
+                XmlNode copyNode = list[0].Clone();
+                if (copyNode.Attributes != null)
+                {
+                    string copyAttr = copyNode.Attributes["style:name"].Value;
+                    copyNode.Attributes["style:name"].Value = copyAttr.Replace("entry", "entry1");
+                }
+                string xPath = "//style:paragraph-properties";
+                XmlAttribute attribute = xdoc.CreateAttribute("keep-with-next", nsmgr1.LookupNamespace("fo"));
+                attribute.Value = "always";
+                XmlNode paraAttriblist = copyNode.SelectSingleNode(xPath, nsmgr1);
+                if (paraAttriblist != null && paraAttriblist.Attributes != null)
+                    paraAttriblist.Attributes.Append(attribute);
+                list[0].ParentNode.AppendChild(copyNode);
+            }
+            xdoc.PreserveWhitespace = true;
+            xdoc.Save(filename);
         }
 
         private int GetPictureWidth(Dictionary<string, Dictionary<string, string>> cssClass)
