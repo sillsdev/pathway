@@ -154,8 +154,7 @@ namespace SIL.PublishingSolution
         protected List<string> LanguageFontStyleName = new List<string>();
 
         //Xetex
-        protected Dictionary<string, string> _paragraphPropertyList;
-
+        protected List<string> _paragraphPropertyList;
         #endregion
 
         #region Constructor
@@ -1172,7 +1171,7 @@ namespace SIL.PublishingSolution
                     }
                     else if (_outputType == Common.OutputType.XETEX || _outputType == Common.OutputType.XELATEX)
                     {
-                        if (_paragraphPropertyList.ContainsValue(property.Key)) continue;
+                        if (_paragraphPropertyList.Contains(property.Key)) continue;
                         if (_tempStyle.ContainsKey(property.Key) == false)
                         {
                             _tempStyle[property.Key] = property.Value;

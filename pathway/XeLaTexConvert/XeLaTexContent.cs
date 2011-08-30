@@ -647,7 +647,7 @@ namespace SIL.PublishingSolution
                     foreach (string property in inlineStyle)
                     {
                         string propName = Common.LeftString(property, " ");
-                        if (_paragraphPropertyList.ContainsValue(propName))
+                        if (_paragraphPropertyList.Contains(propName))
                         {
                             paraStyleCount++;
                             continue;
@@ -725,7 +725,7 @@ namespace SIL.PublishingSolution
                     foreach (string sty in _classInlineStyle[parentClass])
                     {
                         string parentProp = Common.LeftString(sty, " ");
-                        if (_paragraphPropertyList.ContainsKey(parentProp)) continue; // skip parent paragraph property 
+                        if (_paragraphPropertyList.Contains(parentProp)) continue; // skip parent paragraph property 
                         bool IsContains = false;
                         foreach (string styl in _mergedInlineStyle)
                         {
@@ -1175,7 +1175,7 @@ namespace SIL.PublishingSolution
                 foreach (string property in _classInlineStyle[childClass])
                 {
                     string propName = Common.LeftString(property, " ");
-                    if (_paragraphPropertyList.ContainsValue(propName))
+                    if (_paragraphPropertyList.Contains(propName))
                     {
                         if (propName == "text-align")
                         {
@@ -1430,28 +1430,53 @@ namespace SIL.PublishingSolution
             _characterName = "$ID/[No character style]";// "[No character style]"; 
 
 
-            _paragraphPropertyList = new Dictionary<string, string>();
+
+            _paragraphPropertyList = new List<string>();
             //Padding
-            _paragraphPropertyList["\\innertopmargin"] ="\\innertopmargin";
-            _paragraphPropertyList["\\innerbottommargin"] ="\\innerbottommargin";
-            _paragraphPropertyList["\\innerleftmargin"] ="\\innerleftmargin";
-            _paragraphPropertyList["\\innerrightmargin"] ="\\innerrightmargin";
+            _paragraphPropertyList.Add("\\innertopmargin");
+            _paragraphPropertyList.Add("\\innerbottommargin");
+            _paragraphPropertyList.Add("\\innerleftmargin");
+            _paragraphPropertyList.Add("\\innerrightmargin");
             //Margin
-            _paragraphPropertyList["\\leftmargin"] ="\\leftmargin";
-            _paragraphPropertyList["\\rightmargin"] ="\\rightmargin";
-            _paragraphPropertyList["\\skipabove"] ="\\skipabove";
-            _paragraphPropertyList["\\skipbelow"] ="\\skipbelow";
+            _paragraphPropertyList.Add("\\leftmargin");
+            _paragraphPropertyList.Add("\\rightmargin");
+            _paragraphPropertyList.Add("\\skipabove");
+            _paragraphPropertyList.Add("\\skipbelow");
 
             //Margin
-            _paragraphPropertyList["\\leftskip"] ="\\leftskip";
-            _paragraphPropertyList["\\rightskip"] ="\\rightskip";
-            _paragraphPropertyList["\\topskip"] ="\\topskip";
-            _paragraphPropertyList["\\bottomskip"] ="\\bottomskip";
+            _paragraphPropertyList.Add("\\leftskip");
+            _paragraphPropertyList.Add("\\rightskip");
+            _paragraphPropertyList.Add("\\topskip");
+            _paragraphPropertyList.Add("\\bottomskip");
 
             //TextAlign
-            _paragraphPropertyList["center"] = "text-align";
-            _paragraphPropertyList["left"] = "text-align";
-            _paragraphPropertyList["right"] = "text-align";
+            _paragraphPropertyList.Add("text-align");
+
+
+
+
+            //_paragraphPropertyList = new Dictionary<string, string>();
+            ////Padding
+            //_paragraphPropertyList["\\innertopmargin"] ="\\innertopmargin";
+            //_paragraphPropertyList["\\innerbottommargin"] ="\\innerbottommargin";
+            //_paragraphPropertyList["\\innerleftmargin"] ="\\innerleftmargin";
+            //_paragraphPropertyList["\\innerrightmargin"] ="\\innerrightmargin";
+            ////Margin
+            //_paragraphPropertyList["\\leftmargin"] ="\\leftmargin";
+            //_paragraphPropertyList["\\rightmargin"] ="\\rightmargin";
+            //_paragraphPropertyList["\\skipabove"] ="\\skipabove";
+            //_paragraphPropertyList["\\skipbelow"] ="\\skipbelow";
+
+            ////Margin
+            //_paragraphPropertyList["\\leftskip"] ="\\leftskip";
+            //_paragraphPropertyList["\\rightskip"] ="\\rightskip";
+            //_paragraphPropertyList["\\topskip"] ="\\topskip";
+            //_paragraphPropertyList["\\bottomskip"] ="\\bottomskip";
+
+            ////TextAlign
+            //_paragraphPropertyList["center"] = "text-align";
+            //_paragraphPropertyList["left"] = "text-align";
+            //_paragraphPropertyList["right"] = "text-align";
             //_paragraphPropertyList.Add("\\centerline");
             //_paragraphPropertyList.Add("\\leftline");
             //_paragraphPropertyList.Add("\\rightline");
