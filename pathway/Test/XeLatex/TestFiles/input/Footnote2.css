@@ -1,0 +1,87 @@
+.Verse_Number
+{
+font-size: 12pt;
+vertical-align: super;
+}
+
+.Paragraph
+{
+font-size: 12pt;
+text-indent: .125pt;
+}
+
+.Alternate_Reading
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.Endnote_General_Paragraph,
+.Note_General_Paragraph {
+    text-indent: 0pt;
+    margin-left: 0pt;
+    display: inline;
+    display: footnote;
+    display: prince-footnote;
+    position: footnote;
+    list-style-position: inside;
+}
+.Endnote_General_Paragraph::footnote-call,
+.Note_General_Paragraph::footnote-call {
+    color: purple;
+    content: attr(title);
+    vertical-align: super;
+    vertical-align: top;
+    line-height: none;
+}
+/*.Note_General_Paragraph::footnote-marker {
+    font-weight: bold;
+    content: string(chapter) string(verse) ' ';
+    /* content: string(footnoteMarker); font-size: 6pt; vertical-align: super; color: purple;
+    text-align: left;
+} */
+.Note_Target_Reference::footnote-marker {
+    font-weight: bold;
+}
+.Endnote_General_Paragraph::footnote-call,
+.Note_General_Paragraph::footnote-call {
+    color: purple;
+    content: attr(title);
+    vertical-align: super;
+    vertical-align: top;
+    line-height: none;
+}
+.scrFootnoteMarker {
+}
+.Paragraph {
+    text-indent: 12pt;
+    margin-left: 0pt;
+}
+
+.Paragraph1 {
+    margin-left: 0pt;
+}
+
+
+span {
+    prince-text-replace: "<<" "\201C" ">>" "\201D" "<" "\2018" ">" "\2019";
+}
+
+
+.Verse_Number {
+    vertical-align: super;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    string-set: verse content();
+}
+
+.Verse_Number1 {
+    display: none;
+}
+
+span.reference :before {
+	content: "(";
+}
+span.reference :after {
+	content: ")";
+}

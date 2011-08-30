@@ -659,13 +659,24 @@ namespace Test.XeLatex
         
         [Test]
         [Category("SkipOnTeamCity")]
-        public void FootNoteTest()
+        public void FootNote1Test()
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "FootNote";
             ExportProcess(file);
             FileCompare(file);
         }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void FootNote2Test()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "FootNote2";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         [Ignore]
         [Test]
         [Category("SkipOnTeamCity")]
