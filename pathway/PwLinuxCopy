@@ -1,9 +1,22 @@
 #!/bin/bash
 # PWLinuxCopy
+# Authors: Erik Brommers, taken from an earlier script from Greg Trihus
+# Notes:  This utility script copies the build output for Pathway from the
+#         build directory to /usr/lib/pathway. It makes use of one environment
+#         variable, SRCDIR, that is set to a default value of 
+#         /media/sf_svn/pathway/pathway (personal bias :-)  ). To set this
+#         value, add the following line to your .bashrc, replacing "mypath"
+#         with your path to the subversion source directory.
+#
+#         export SRCDIR=mypath
+#
+#         Currently the utility can copy over the Debug, Release7BTE, 
+#         Corporate7BTE or Corporate7SE outputs. More can be added to the
+#         case statement below as needed.
 
 function usage
 {
-    echo "usage: PWLinuxCopy [-dbg | -bte | -se | -h]"
+    echo "usage: PwLinuxCopy [-dbg | -test | -bte | -se | -h]"
 }
 
 case $1 in
