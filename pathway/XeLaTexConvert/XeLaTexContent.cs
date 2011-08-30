@@ -536,6 +536,8 @@ namespace SIL.PublishingSolution
 
             if (isFootnote)
             {
+                footerClassName = Common.LeftString(characterStyle, "_");
+                //StringBuilder footnoteStyle = MakeFootnoteStyle(characterStyle);
                 WriteFootNoteMarker(footerClassName, content);
             }
             else
@@ -747,7 +749,7 @@ namespace SIL.PublishingSolution
 
         private void WriteFootNoteMarker(string footerClassName, string content)
         {
-            string markerClassName = footerClassName + "..footnote-marker";
+            string markerClassName = footerClassName + "..footnote-call";
             //string marker = string.Empty;
             if (_footnoteMarkerClass.StyleName == markerClassName)
             {

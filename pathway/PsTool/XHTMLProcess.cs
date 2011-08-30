@@ -761,7 +761,8 @@ namespace SIL.PublishingSolution
                 }
                 else if (outputType == Common.OutputType.XELATEX.ToString())
                 {
-                    footnoteFormat.Append(Common.ReplaceSymbolToText(content));
+                    string xelatexContent = Common.ReplaceSymbolToXelatexText(content);
+                    footnoteFormat.Append(Common.ReplaceSymbolToText(xelatexContent));
                 }
                 else
                 {
@@ -1038,7 +1039,7 @@ namespace SIL.PublishingSolution
 
                 foreach (ClassInfo cssClassInfo in cssClassDetail)
                 {
-                    if (cssClassInfo.Pseudo == "footnote-marker")
+                    if (cssClassInfo.Pseudo == "footnote-call")
                         _footnoteMarkerClass = cssClassInfo;
 
                     if (cssClassInfo.Pseudo != psuedo) continue;
@@ -1171,13 +1172,12 @@ namespace SIL.PublishingSolution
                     }
                     else if (_outputType == Common.OutputType.XETEX || _outputType == Common.OutputType.XELATEX)
                     {
-                        if (_paragraphPropertyList.Contains(property.Key)) continue;
+                        if (_paragraphPropertyList != null) if (_paragraphPropertyList.Contains(property.Key)) continue;
                         if (_tempStyle.ContainsKey(property.Key) == false)
                         {
                             _tempStyle[property.Key] = property.Value;
                         }
                     }
-                    
                 }
             }
         }
