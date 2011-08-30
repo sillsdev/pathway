@@ -663,11 +663,11 @@ namespace SIL.PublishingSolution
                         _xetexFile.Write("{");
                     }
                     _inlineCount = inlineStyle.Count - paraStyleCount;
-                    if (inlineStyle.Count > 0)
-                    {
-                        _braceInlineClassCount[getStyleName] = inlineStyle.Count;
-                        _braceInlineClass.Push(getStyleName);
-                    }
+                    //if (inlineStyle.Count > 0)
+                    //{
+                    //    _braceInlineClassCount[getStyleName] = inlineStyle.Count;
+                    //    _braceInlineClass.Push(getStyleName);
+                    //}
 
                     mergedParaStyle = Common.ReplaceSeperators(mergedParaStyle);
 
@@ -1174,6 +1174,9 @@ namespace SIL.PublishingSolution
             if (_classInlineStyle.ContainsKey(childClass))
             {
                 string endParagraphString = string.Empty;
+
+                bool isMdFrame = false;
+                string mdFrame = string.Empty;
                 foreach (string property in _classInlineStyle[childClass])
                 {
                     string propName = Common.LeftString(property, " ");
@@ -1185,14 +1188,21 @@ namespace SIL.PublishingSolution
                             _xetexFile.Write(prop);
                             endParagraphString += "\\end{" + Common.RightString(property, " ") + "}}";
                         }
-                        else
+                        else if (propName == "padding" || propName == "margin")
                         {
-                            _xetexFile.Write(property);
-                            _xetexFile.Write("{");
-                            endParagraphString += "}";
-
+                            mdFrame += ", " + Common.RightString(property, " ");
+                            isMdFrame = true;
                         }
                     }
+                }
+
+                if (isMdFrame)
+                {
+                    string prop = "{\\begin{mdframed}[ntheorem=true, linecolor=white";
+                    _xetexFile.Write(prop);
+                    _xetexFile.Write(mdFrame);
+                    _xetexFile.Write("]");
+                    endParagraphString = "\\end{mdframed}}" + endParagraphString;
                 }
 
                 if (endParagraphString != string.Empty)
@@ -1431,57 +1441,22 @@ namespace SIL.PublishingSolution
             _isNewParagraph = false;
             _characterName = "$ID/[No character style]";// "[No character style]"; 
 
-
-
             _paragraphPropertyList = new List<string>();
             //Padding
-            _paragraphPropertyList.Add("\\innertopmargin");
-            _paragraphPropertyList.Add("\\innerbottommargin");
-            _paragraphPropertyList.Add("\\innerleftmargin");
-            _paragraphPropertyList.Add("\\innerrightmargin");
+            _paragraphPropertyList.Add("padding");
+            _paragraphPropertyList.Add("padding-left");
+            _paragraphPropertyList.Add("padding-right");
+            _paragraphPropertyList.Add("padding-top");
+            _paragraphPropertyList.Add("padding-bottom");
             //Margin
-            _paragraphPropertyList.Add("\\leftmargin");
-            _paragraphPropertyList.Add("\\rightmargin");
-            _paragraphPropertyList.Add("\\skipabove");
-            _paragraphPropertyList.Add("\\skipbelow");
-
-            //Margin
-            _paragraphPropertyList.Add("\\leftskip");
-            _paragraphPropertyList.Add("\\rightskip");
-            _paragraphPropertyList.Add("\\topskip");
-            _paragraphPropertyList.Add("\\bottomskip");
+            _paragraphPropertyList.Add("margin");
+            _paragraphPropertyList.Add("margin-left");
+            _paragraphPropertyList.Add("margin-right");
+            _paragraphPropertyList.Add("margin-top");
+            _paragraphPropertyList.Add("margin-bottom");
 
             //TextAlign
             _paragraphPropertyList.Add("text-align");
-
-
-
-
-            //_paragraphPropertyList = new Dictionary<string, string>();
-            ////Padding
-            //_paragraphPropertyList["\\innertopmargin"] ="\\innertopmargin";
-            //_paragraphPropertyList["\\innerbottommargin"] ="\\innerbottommargin";
-            //_paragraphPropertyList["\\innerleftmargin"] ="\\innerleftmargin";
-            //_paragraphPropertyList["\\innerrightmargin"] ="\\innerrightmargin";
-            ////Margin
-            //_paragraphPropertyList["\\leftmargin"] ="\\leftmargin";
-            //_paragraphPropertyList["\\rightmargin"] ="\\rightmargin";
-            //_paragraphPropertyList["\\skipabove"] ="\\skipabove";
-            //_paragraphPropertyList["\\skipbelow"] ="\\skipbelow";
-
-            ////Margin
-            //_paragraphPropertyList["\\leftskip"] ="\\leftskip";
-            //_paragraphPropertyList["\\rightskip"] ="\\rightskip";
-            //_paragraphPropertyList["\\topskip"] ="\\topskip";
-            //_paragraphPropertyList["\\bottomskip"] ="\\bottomskip";
-
-            ////TextAlign
-            //_paragraphPropertyList["center"] = "text-align";
-            //_paragraphPropertyList["left"] = "text-align";
-            //_paragraphPropertyList["right"] = "text-align";
-            //_paragraphPropertyList.Add("\\centerline");
-            //_paragraphPropertyList.Add("\\leftline");
-            //_paragraphPropertyList.Add("\\rightline");
         }
         #endregion
     }

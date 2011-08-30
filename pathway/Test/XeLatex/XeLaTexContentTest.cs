@@ -667,7 +667,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        [Test]
+        [Ignore]
         [Category("SkipOnTeamCity")]
         public void FootNote2Test()
         {
@@ -698,7 +698,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        [Test]
+        [Ignore]
         [Category("SkipOnTeamCity")]
         public void VerticalAlignTest()
         {

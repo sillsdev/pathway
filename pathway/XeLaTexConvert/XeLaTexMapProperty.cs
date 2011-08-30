@@ -81,22 +81,18 @@ namespace SIL.PublishingSolution
                     //case "mirror":
                     //    Mirror(propertyValue);
                     //    break;
-                    //case "padding-left":
-                    //case "class-margin-left":
-                    //    PaddingLeft(propertyValue);
-                    //    break;
-                    //case "padding-right":
-                    //case "class-margin-right":
-                    //    PaddingRight(propertyValue);
-                    //    break;
-                    //case "padding-top":
-                    //case "class-margin-top":
-                    //    PaddingTop(propertyValue);
-                    //    break;
-                    //case "padding-bottom":
-                    //case "class-margin-bottom":
-                    //    PaddingBottom(propertyValue);
-                    //    break;
+                    case "padding-left":
+                        PaddingLeft(propertyValue);
+                        break;
+                    case "padding-right":
+                        PaddingRight(propertyValue);
+                        break;
+                    case "padding-top":
+                        PaddingTop(propertyValue);
+                        break;
+                    case "padding-bottom":
+                        PaddingBottom(propertyValue);
+                        break;
                     //case "padding":
                     //case "margin":
                     //    //Margin(styleAttributeInfo);
@@ -531,6 +527,13 @@ namespace SIL.PublishingSolution
                 return;
             }
             _IDProperty["LeftIndent"] = propertyValue;
+            propertyValue = Common.SetPropertyValue("padding innerleftmargin=", propertyValue);
+            _IDProperty["padding-left"] = propertyValue;
+            _inlineStyle.Add(propertyValue);
+
+            propertyValue = "\\usepackage{mdframed,xcolor}";
+            if (!_includePackageList.Contains(propertyValue))
+                _includePackageList.Add(propertyValue);
         }
         public void PaddingRight(string propertyValue)
         {
@@ -539,6 +542,13 @@ namespace SIL.PublishingSolution
                 return;
             }
             _IDProperty["RightIndent"] = propertyValue;
+            propertyValue = Common.SetPropertyValue("padding innerrightmargin=", propertyValue);
+            _IDProperty["padding-right"] = propertyValue;
+            _inlineStyle.Add(propertyValue);
+
+            propertyValue = "\\usepackage{mdframed,xcolor}";
+            if (!_includePackageList.Contains(propertyValue))
+                _includePackageList.Add(propertyValue);
         }
         public void PaddingTop(string propertyValue)
         {
@@ -547,6 +557,13 @@ namespace SIL.PublishingSolution
                 return;
             }
             _IDProperty["SpaceBefore"] = propertyValue;
+            propertyValue = Common.SetPropertyValue("padding innertopmargin=", propertyValue);
+            _IDProperty["padding-top"] = propertyValue;
+            _inlineStyle.Add(propertyValue);
+
+            propertyValue = "\\usepackage{mdframed,xcolor}";
+            if (!_includePackageList.Contains(propertyValue))
+                _includePackageList.Add(propertyValue);
         }
         public void PaddingBottom(string propertyValue)
         {
@@ -555,6 +572,13 @@ namespace SIL.PublishingSolution
                 return;
             }
             _IDProperty["SpaceAfter"] = propertyValue;
+            propertyValue = Common.SetPropertyValue("padding innerbottommargin=", propertyValue);
+            _IDProperty["padding-bottom"] = propertyValue;
+            _inlineStyle.Add(propertyValue);
+
+            propertyValue = "\\usepackage{mdframed,xcolor}";
+            if (!_includePackageList.Contains(propertyValue))
+                _includePackageList.Add(propertyValue);
         }
         public void Mirror(string propertyValue)
         {
@@ -586,9 +610,14 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            propertyValue = Common.SetPropertyValue("\\leftskip", propertyValue);
             _IDProperty["Margin-Left"] = propertyValue;
+            propertyValue = Common.SetPropertyValue("margin leftmargin=", propertyValue);
+            _IDProperty["margin-left"] = propertyValue;
             _inlineStyle.Add(propertyValue);
+
+            propertyValue = "\\usepackage{mdframed,xcolor}";
+            if (!_includePackageList.Contains(propertyValue))
+                _includePackageList.Add(propertyValue);
         }
         public void MarginRight(string propertyValue)
         {
@@ -596,9 +625,16 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            propertyValue = Common.SetPropertyValue("\\rightskip", propertyValue);
+
             _IDProperty["Margin-Right"] = propertyValue;
+            propertyValue = Common.SetPropertyValue("margin rightmargin=", propertyValue);
+            _IDProperty["margin-right"] = propertyValue;
             _inlineStyle.Add(propertyValue);
+
+            propertyValue = "\\usepackage{mdframed,xcolor}";
+            if (!_includePackageList.Contains(propertyValue))
+                _includePackageList.Add(propertyValue);
+
         }
         public void MarginTop(string propertyValue)
         {
@@ -606,9 +642,14 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            propertyValue = Common.SetPropertyValue("\\topskip", propertyValue);
-            _inlineStyle.Add(propertyValue);
             _IDProperty["Margin-Top"] = propertyValue;
+            propertyValue = Common.SetPropertyValue("margin skipabove=", propertyValue);
+            _IDProperty["margin-top"] = propertyValue;
+            _inlineStyle.Add(propertyValue);
+
+            propertyValue = "\\usepackage{mdframed,xcolor}";
+            if (!_includePackageList.Contains(propertyValue))
+                _includePackageList.Add(propertyValue);
         }
         public void MarginBottom(string propertyValue)
         {
@@ -617,6 +658,13 @@ namespace SIL.PublishingSolution
                 return;
             }
             _IDProperty["Margin-Bottom"] = propertyValue;
+            propertyValue = Common.SetPropertyValue("margin skipbelow=", propertyValue);
+            _IDProperty["margin-bottom"] = propertyValue;
+            _inlineStyle.Add(propertyValue);
+
+            propertyValue = "\\usepackage{mdframed,xcolor}";
+            if (!_includePackageList.Contains(propertyValue))
+                _includePackageList.Add(propertyValue);
         }
         public string FontFamily(string propertyValue)
         {
