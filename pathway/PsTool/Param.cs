@@ -111,12 +111,12 @@ namespace SIL.PublishingSolution
         public static string MediaType = "paper";
 
 		#region Public properties
-		private static string _LoadType = string.Empty;
+        private static string _loadType = "Dictionary";
         public static string SettingPath
         {
             get
             {
-				return Common.FromRegistry(_LoadType + DefaultSettingsFileName);
+				return Common.FromRegistry(_loadType + DefaultSettingsFileName);
             }
         }
 
@@ -125,7 +125,7 @@ namespace SIL.PublishingSolution
             get
             {
                 Debug.Assert(Value.ContainsKey(OutputPath), "Settings not loaded");
-                return Common.PathCombine(Value[OutputPath], _LoadType + DefaultSettingsFileName);
+                return Common.PathCombine(Value[OutputPath], _loadType + DefaultSettingsFileName);
             }
         }
 
@@ -133,7 +133,7 @@ namespace SIL.PublishingSolution
         {
             set
             {
-                _LoadType = value;
+                _loadType = value;
             }
         }
         public static string UiSettingPath
@@ -160,7 +160,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         public static void LoadSettings()
         {
-            _LoadType = Value.ContainsKey(InputType) ? Value[InputType] : "";
+            _loadType = Value.ContainsKey(InputType) ? Value[InputType] : "Dictionary";
             if (LoadValues(SettingPath) == null) return;
             if (!Directory.Exists(Value[OutputPath]))
             {

@@ -44,7 +44,7 @@ namespace SIL.PublishingSolution
         public string AttribPreviewFile1 = "previewfile1";
         public string AttribPreviewFile2 = "previewfile2";
 
-        public string inputTypeBL = string.Empty;
+        public string inputTypeBL = "Dictionary";
 
         public string ElementDesc = "description";
         public string ElementComment = "comment";
@@ -1611,7 +1611,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         public string LoadInputType()
         {
-            string inputType = string.Empty;
+            string inputType = "Dictionary";
             string settingPath = Common.LeftString(Param.Value["OutputPath"], "Pathway");
             string xmlPath = Common.PathCombine(settingPath, Common.PathCombine("Pathway", "StyleSettings.xml"));
             if (!File.Exists(xmlPath))
