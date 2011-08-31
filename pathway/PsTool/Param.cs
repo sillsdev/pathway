@@ -111,7 +111,7 @@ namespace SIL.PublishingSolution
         public static string MediaType = "paper";
 
 		#region Public properties
-        private static string _loadType = "Dictionary";
+        private static string _loadType = string.Empty;//"Dictionary";
         public static string SettingPath
         {
             get
