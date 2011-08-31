@@ -26,6 +26,19 @@ namespace epubValidator
 {
     public static class Program
     {
+		/// <summary>
+		/// Returns whether this program is running under the mono VM environment. 
+		/// ONLY USE THIS IF YOU ABSOLUTELY NEED CONDITIONAL CODE. 
+		/// </summary>
+		public static bool UsingMonoVM 
+		{
+			get 
+			{
+				Type t = Type.GetType ("Mono.Runtime");
+				return (t != null);
+			}
+		}
+		
         public static String[] args;
         /// <summary>
         /// The main entry point for the application.
@@ -97,16 +110,22 @@ namespace epubValidator
                         {
                             progFullName = progFullName.Substring(0, progFullName.Length - 4);
                         }
-                        sb.Append("-jar");
-                        sb.Append(" \"");
                         var strAppDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
+						// jar file to execute (epubcheck)
+						sb.Append("-jar");
+                        sb.Append(" \"");
+						// if we're in linux-land, add a leading slash
+						if (UsingMonoVM) 
+						{
+							sb.Append(Path.DirectorySeparatorChar);
+						}
                         sb.Append(strAppDir.Substring(6)); // Remove the leading file:/ from the CodeBase result
-                        //sb.Append(".");
                         sb.Append(Path.DirectorySeparatorChar);
                         sb.Append("epubcheck-1.2");
                         sb.Append(Path.DirectorySeparatorChar);
                         sb.Append("epubcheck-1.2.jar");
                         sb.Append("\" ");
+						// filename to run it against (the .epub file)
                         sb.Append("\"");
                         sb.Append(Filename);
                         sb.Append("\"");
