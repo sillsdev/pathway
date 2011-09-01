@@ -669,6 +669,7 @@ namespace Test.XeLatex
         }
 
         [Ignore]
+        [Test]
         [Category("SkipOnTeamCity")]
         public void FootNote2Test()
         {
@@ -679,6 +680,7 @@ namespace Test.XeLatex
         }
 
         [Ignore]
+        [Test]
         [Category("SkipOnTeamCity")]
         public void FootNoteUnicodeTest()
         {
@@ -689,6 +691,7 @@ namespace Test.XeLatex
         }
 
         [Ignore]
+        [Test]
         [Category("SkipOnTeamCity")]
         public void ReplaceStringTest()
         {
@@ -699,6 +702,7 @@ namespace Test.XeLatex
         }
 
         [Ignore]
+        [Test]
         [Category("SkipOnTeamCity")]
         public void VerticalAlignTest()
         {
@@ -719,6 +723,7 @@ namespace Test.XeLatex
         }
 
         [Ignore]
+        [Test]
         [Category("SkipOnTeamCity")]
         public void HashSymbolTest()
         {
