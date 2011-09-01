@@ -213,8 +213,9 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
         [Ignore]
+        [Test]
         [Category("SkipOnTeamCity")]
         public void FontWeightBoldRegular()  // TD-2330()
         {
@@ -224,8 +225,8 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        
         [Ignore]
+        [Test]
         [Category("SkipOnTeamCity")]
         public void FontBoldItalicTest()  // TD-2188()
         {
@@ -678,7 +679,6 @@ namespace Test.XeLatex
         }
 
         [Ignore]
-        [Test]
         [Category("SkipOnTeamCity")]
         public void FootNoteUnicodeTest()
         {

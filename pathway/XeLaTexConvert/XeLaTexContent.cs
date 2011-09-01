@@ -1171,7 +1171,7 @@ namespace SIL.PublishingSolution
         {
             string paraStyle = _childName.Replace("_body", ""); ;
             string childClass = Common.LeftString(paraStyle, "_");
-            if (_classInlineStyle.ContainsKey(childClass))
+            if (_divType.Contains(_tagType) && _classInlineStyle.ContainsKey(childClass))
             {
                 string endParagraphString = string.Empty;
 

@@ -85,7 +85,7 @@ namespace SIL.PublishingSolution
         protected string _closeChildName = string.Empty;
         protected bool _isNewParagraph;
         protected bool _isParagraphClosed = true;
-        protected List<string> divType;
+        protected List<string> _divType;
 
         #region Footnote
         protected bool _chapterNoStart;
@@ -207,8 +207,8 @@ namespace SIL.PublishingSolution
             _allStyleInfo.Push(classInfo);
 
             string[] divTypeList = new[] { "div", "ol", "ul", "li", "p", "body", "h1", "h2", "h3", "h4", "h5", "h6" };
-            divType = new List<string>(divTypeList);
-            if (divType.Contains(_tagType))
+            _divType = new List<string>(divTypeList);
+            if (_divType.Contains(_tagType))
             {
                 _paragraphName = _childName;
                 _allParagraph.Push(_paragraphName);
@@ -948,7 +948,7 @@ namespace SIL.PublishingSolution
 
             IdAllClass[newStyleName] = _tempStyle;
             string tagType = _tagType;
-            if (divType.Contains(_tagType)) tagType = "div";
+            if (_divType.Contains(_tagType)) tagType = "div";
             ParentClass[newStyleName] = _parentStyleName + "|" + tagType;
 
             _psuedoBeforeStyle = _psuedoAfterStyle = _psuedoContainsStyle = null;
