@@ -435,18 +435,33 @@ namespace SIL.PublishingSolution
             content = content + " ";
             if (CollectFootNoteChapterVerse(content, Common.OutputType.XELATEX.ToString())) return;
 
-            if (columnCount == "2")
-            {
-                if (IdAllClass.ContainsKey("letData") && IdAllClass["letData"]["column-gap"] != null)
-                {
-                    string propertyValue = Common.PercentageToEm(IdAllClass["letData"]["column-gap"]);
-                    _xetexFile.Write("\\setlength{\\columnsep}{" + propertyValue + "}");
-                    _xetexFile.Write("\\setlength\\columnseprule{" + "0.4pt" + "}");
-                }
-                string columnProperty = "\\begin{multicols}{" + columnCount + "}";
-                _xetexFile.Write(columnProperty);
-                columnCount = string.Empty;
-            }
+            //if (columnCount == "2")
+            //{
+            //    if (IdAllClass.ContainsKey("letData") && IdAllClass["letData"]["column-gap"] != null)
+            //    {
+            //        string propertyValue = Common.PercentageToEm(IdAllClass["letData"]["column-gap"]);
+            //        _xetexFile.Write("\\setlength{\\columnsep}{" + propertyValue + "}");
+            //        _xetexFile.Write("\\setlength\\columnseprule{" + "0.4pt" + "}");
+            //    }
+            //    string columnProperty = "\\begin{multicols}{" + columnCount + "}";
+
+            //    _xetexFile.Write(columnProperty);
+            //    columnCount = string.Empty;
+
+
+            //    string getStyleName = StackPeek(_allStyle);
+            //    _braceInlineClass.Push(getStyleName);
+
+            //    if (_endParagraphStringDic.ContainsKey(getStyleName))
+            //    {
+            //        _endParagraphStringDic[getStyleName] = "\\end{multicols} " + _endParagraphStringDic[getStyleName] ;
+            //    }
+            //    else
+            //    {
+            //        _endParagraphStringDic[getStyleName] = "\\end{multicols}";
+            //    }
+
+            //}
 
             // Psuedo Before
             foreach (ClassInfo psuedoBefore in _psuedoBefore)
@@ -1155,8 +1170,8 @@ namespace SIL.PublishingSolution
                 if (IdAllClass[_classNameWithLang].ContainsKey("column-count"))
                 {
                     columnCount = IdAllClass[_classNameWithLang]["column-count"];
-                    if (!_columnClass.Contains(_childName))
-                        _columnClass.Add(_childName);
+                    //if (!_columnClass.Contains(_childName))
+                    //    _columnClass.Add(_childName);
                 }
                 if (isPageBreak || columnCount != string.Empty)
                 {
@@ -1175,34 +1190,56 @@ namespace SIL.PublishingSolution
             {
                 string endParagraphString = string.Empty;
 
-                bool isMdFrame = false;
-                string mdFrame = string.Empty;
+                string mdFrameStart = string.Empty;
+                string txtAlignStart = string.Empty;
+                string txtAlignEnd = string.Empty;
+                string columnStart = string.Empty;
                 foreach (string property in _classInlineStyle[childClass])
                 {
                     string propName = Common.LeftString(property, " ");
                     if (_paragraphPropertyList.Contains(propName))
                     {
-                        if (propName == "text-align")
+                        if (propName == "column-count" && property != "column-count 1")
                         {
-                            string prop = "{\\begin{" + Common.RightString(property, " ") + "}";
-                            _xetexFile.Write(prop);
-                            endParagraphString += "\\end{" + Common.RightString(property, " ") + "}}";
+                            if (IdAllClass[childClass].ContainsKey("column-gap") && IdAllClass[childClass]["column-gap"] != null)
+                            {
+                                string propertyValue = Common.PercentageToEm(IdAllClass[childClass]["column-gap"]);
+                                columnStart = "\\setlength{\\columnsep}{" + propertyValue + "} \r\n" ;
+                                columnStart = columnStart + "\\setlength\\columnseprule{" + "0.4pt" + "} \r\n";
+                            }
+                             columnStart = columnStart + "\\begin{multicols}{" + Common.RightString(property, " ") + "}";
                         }
                         else if (propName == "padding" || propName == "margin")
                         {
-                            mdFrame += ", " + Common.RightString(property, " ");
-                            isMdFrame = true;
+                            mdFrameStart += ", " + Common.RightString(property, " ");
+                        }
+                        else if (propName == "text-align")
+                        {
+                            txtAlignStart = "{\\begin{" + Common.RightString(property, " ") + "}";
+                            txtAlignEnd = "\\end{" + Common.RightString(property, " ") + "}}";
                         }
                     }
                 }
-
-                if (isMdFrame)
+                // column -> mdframe -> text-align
+                if (columnStart != string.Empty)
+                {
+                    _xetexFile.Write(columnStart);
+                    endParagraphString = "\\end{multicols}";
+                }
+                if (mdFrameStart != string.Empty)
                 {
                     string prop = "{\\begin{mdframed}[ntheorem=true, linecolor=white";
+
                     _xetexFile.Write(prop);
-                    _xetexFile.Write(mdFrame);
+                    _xetexFile.Write(mdFrameStart);
                     _xetexFile.Write("]");
-                    endParagraphString = "\\end{mdframed}}" + endParagraphString;
+                    endParagraphString = endParagraphString+ "\\end{mdframed}}";
+                }
+
+                if (txtAlignStart != string.Empty)
+                {
+                    _xetexFile.Write(txtAlignStart);
+                    endParagraphString = txtAlignEnd + endParagraphString;
                 }
 
                 if (endParagraphString != string.Empty)
@@ -1295,12 +1332,12 @@ namespace SIL.PublishingSolution
 
             EndElementBase(false);
             //if (_columnClass.Count > 0 && _closeChildName == _columnClass[_columnClass.Count - 1].ToString())
-            if (_columnClass.Count == 2 && _closeChildName == _columnClass[_columnClass.Count - 1].ToString())
-            {
-                _columnClass.RemoveAt(_columnClass.Count - 1);
-                string columnProperty = "\\end{multicols}";
-                _xetexFile.Write(columnProperty);
-            }
+            //if (_columnClass.Count == 2 && _closeChildName == _columnClass[_columnClass.Count - 1].ToString())
+            //{
+            //    _columnClass.RemoveAt(_columnClass.Count - 1);
+            //    string columnProperty = "\\end{multicols}";
+            //    _xetexFile.Write(columnProperty);
+            //}
             _classNameWithLang = StackPeek(_allStyle);
             _classNameWithLang = Common.LeftString(_classNameWithLang, "_");
         }
@@ -1317,6 +1354,7 @@ namespace SIL.PublishingSolution
                 //    _xetexFile.Write("}");
                 //}
                 _xetexFile.Write(_endParagraphStringDic[closeStyle]);
+                _endParagraphStringDic[closeStyle] = string.Empty; 
                 StackPop(_braceInlineClass);
             }
 
@@ -1457,6 +1495,8 @@ namespace SIL.PublishingSolution
 
             //TextAlign
             _paragraphPropertyList.Add("text-align");
+            _paragraphPropertyList.Add("column-count");
+            
         }
         #endregion
     }

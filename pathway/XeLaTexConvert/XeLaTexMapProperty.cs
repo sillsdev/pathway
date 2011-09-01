@@ -112,9 +112,9 @@ namespace SIL.PublishingSolution
                     //case "border":
                     //    //Border(styleAttributeInfo);
                     //    break;
-                    //case "column-count":
-                    //    ColumnCount(propertyValue);
-                    //    break;
+                    case "column-count":
+                        ColumnCount(propertyValue);
+                        break;
                     //case "column-gap":
                     //    ColumnGap(propertyValue);
                     //    break;
@@ -760,6 +760,16 @@ namespace SIL.PublishingSolution
             {
                 _IDProperty["TextColumnCount"] = propertyValue;
             }
+
+            _IDProperty["column-count"] = propertyValue;
+            propertyValue = "column-count "+ propertyValue;
+            _IDProperty["column-count"] = propertyValue;
+            _inlineStyle.Add(propertyValue);
+
+            propertyValue = "\\usepackage{multicol}";
+            if (!_includePackageList.Contains(propertyValue))
+                _includePackageList.Add(propertyValue);
+
         }
         public void ColumnGap(string propertyValue)
         {
