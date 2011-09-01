@@ -888,11 +888,11 @@ namespace SIL.PublishingSolution
             }
             else if (propertyValue == "left")
             {
-                propertyValue = "text-align left";
+                propertyValue = "text-align flushleft";
             }
             else if (propertyValue == "right")
             {
-                propertyValue = "text-align right";
+                propertyValue = "text-align flushright";
             }
             //else if (propertyValue == "justify")
             //{

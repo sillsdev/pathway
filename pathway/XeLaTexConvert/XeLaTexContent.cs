@@ -1215,8 +1215,8 @@ namespace SIL.PublishingSolution
                         }
                         else if (propName == "text-align")
                         {
-                            txtAlignStart = "{\\begin{" + Common.RightString(property, " ") + "}";
-                            txtAlignEnd = "\\end{" + Common.RightString(property, " ") + "}}";
+                            txtAlignStart = "\\begin{" + Common.RightString(property, " ") + "}";
+                            txtAlignEnd = "\\end{" + Common.RightString(property, " ") + "}";
                         }
                     }
                 }
@@ -1228,7 +1228,7 @@ namespace SIL.PublishingSolution
                 }
                 if (mdFrameStart != string.Empty)
                 {
-                    string prop = "{\\begin{mdframed}[ntheorem=true, linecolor=white";
+                    string prop = "{\\begin{mdframed}[linecolor=white";
 
                     _xetexFile.Write(prop);
                     _xetexFile.Write(mdFrameStart);
