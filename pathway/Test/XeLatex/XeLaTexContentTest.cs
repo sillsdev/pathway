@@ -744,6 +744,25 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void ColumnCount()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "ColumnCount";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void ColumnGap()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "ColumnGap";
+            ExportProcess(file);
+            FileCompare(file);
+        }
 
         #endregion
 

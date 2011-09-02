@@ -1,0 +1,28 @@
+.letData {
+    column-count: 2; -moz-column-count: 2;
+    column-gap: 1.5em; -moz-column-gap: 1.5em;
+    column-rule: red 10pt solid;
+    column-fill: balance;
+	
+	margin-left: 5pt;
+}
+.xitem {
+    column-count: 3; -moz-column-count: 3;
+    column-gap: 3em; -moz-column-gap: 3em;
+    column-rule: blue 6pt solid;
+    column-fill: auto;
+	padding-left: 8pt;
+}
+.let {
+    text-align: left;
+    font-size: 20pt;
+}
+.Section_Head {
+page-break-after:avoid;
+}
+.Chapter_Number {
+page-break-after:avoid;
+}
+.Parallel_Passage_Reference {
+page-break-after:avoid;
+}

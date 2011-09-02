@@ -1,0 +1,62 @@
+.dicBody {
+}
+.letHead {
+    column-count: 1;
+    clear: both;
+}
+.letData {
+    column-count: 4;   
+    column-gap: 1.5em;
+    column-fill: auto;
+    text-align: left;
+}
+
+.headword {
+    font-family: "Charis SIL", serif;	
+    font-size: 11pt;	/* cascaded environment */
+    font-weight: bold;
+    background-color: rgb(255,255,255);
+    string-set: guideword content();
+}
+
+.revAppendix { }
+
+.revHeader {
+    font-family: "Charis SIL", serif;
+    font-size: 18pt;
+    text-align: center;
+    font-weight: bold;
+}
+
+.revData {
+	column-count: 3;
+    		column-fill: balance;
+    		text-align: left;
+	column-gap: 1.5em;
+	column-rule: solid 1pt #aa0000;;
+	}
+
+.revEntry {
+    text-indent: -2pc;
+    margin-left: 2pc;
+    font-size: 10pt;
+    font-family: "Charis SIL", serif;
+}
+.revsensenumber { }.Section_Head {
+page-break-after:avoid;
+}
+.Chapter_Number {
+page-break-after:avoid;
+}
+.Parallel_Passage_Reference {
+page-break-after:avoid;
+}
+.Section_Head {
+page-break-after:avoid;
+}
+.Chapter_Number {
+page-break-after:avoid;
+}
+.Parallel_Passage_Reference {
+page-break-after:avoid;
+}

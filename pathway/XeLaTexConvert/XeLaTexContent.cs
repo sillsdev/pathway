@@ -1184,6 +1184,8 @@ namespace SIL.PublishingSolution
 
         private void WriteParagraphInline()
         {
+            string getStyleName = StackPeek(_allStyle);
+
             string paraStyle = _childName.Replace("_body", ""); ;
             string childClass = Common.LeftString(paraStyle, "_");
             if (_divType.Contains(_tagType) && _classInlineStyle.ContainsKey(childClass))
@@ -1233,7 +1235,7 @@ namespace SIL.PublishingSolution
                     _xetexFile.Write(prop);
                     _xetexFile.Write(mdFrameStart);
                     _xetexFile.Write("]");
-                    endParagraphString = endParagraphString+ "\\end{mdframed}}";
+                    endParagraphString = "\\end{mdframed}}" + endParagraphString;
                 }
 
                 if (txtAlignStart != string.Empty)
@@ -1244,11 +1246,10 @@ namespace SIL.PublishingSolution
 
                 if (endParagraphString != string.Empty)
                 {
-                    string getStyleName = StackPeek(_allStyle);
                     _braceInlineClassCount[getStyleName] = _classInlineStyle[childClass].Count;
                     _braceInlineClass.Push(getStyleName);
 
-                    if (_endParagraphStringDic.ContainsKey(getStyleName) == false)
+                    //if (_endParagraphStringDic.ContainsKey(getStyleName) == false)
                         _endParagraphStringDic[getStyleName] = endParagraphString;
                 }
             }
