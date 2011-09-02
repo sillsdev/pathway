@@ -8,9 +8,9 @@ namespace epubConvert
     {
         private string _name, _filename, _italicFontname, _boldFontname;
         private bool _serif, _silFont, _hasItalic, _hasBold;
-
+		
         /// <summary>
-        /// Name of the font file, not including the path.
+        /// Name of the font file, including the path.
         /// </summary>
         public string Filename
         {
@@ -26,7 +26,7 @@ namespace epubConvert
             protected set { _name = value; }
         }
         /// <summary>
-        /// Name of the italic variant font file, not including the path.
+        /// Name of the italic variant font file, including the path.
         /// </summary>
         public string ItalicFilename
         {
@@ -34,7 +34,7 @@ namespace epubConvert
             protected set { _italicFontname = value; }
         }
         /// <summary>
-        /// Name of the bold variant font file, not including the path.
+        /// Name of the bold variant font file, including the path.
         /// </summary>
         public string BoldFilename
         {
@@ -99,7 +99,7 @@ namespace epubConvert
             // need a way to query the font for its generic serif/sans-serif characteristics
             // this works for SIL fonts only because there's currently one sans-serif font (Andika)
             Serif = (name.Contains("Andika")? false: true);
-            Filename = FontInternals.GetFontFileName(name, "normal");
+			Filename = FontInternals.GetFontFileName(name, "normal");
             ItalicFilename = FontInternals.GetFontFileName(name, "Italic");
             HasItalic = (ItalicFilename == null) ? false : true;
             BoldFilename = FontInternals.GetFontFileName(name, "Bold");
@@ -109,40 +109,8 @@ namespace epubConvert
                 // this font isn't installed
                 return;
             }
-            SILFont = FontInternals.IsSILFont(Path.Combine(FontInternals.GetFontFolderPath(), Filename));
+            SILFont = FontInternals.IsSILFont(Filename);
         }
-
-        #region static_methods
-        /// <summary>
-        /// Returns whether the given font is installed on this system. This can either be the
-        /// font Filename (e.g., "Arial.ttf") or the font family / user friendly name of a font.
-        /// (The filename lookup is faster.)
-        /// </summary>
-        /// <param name="font">Font family or font filename</param>
-        /// <returns>true if font is installed</returns>
-        public static bool IsInstalled (string font)
-        {
-            if (font.EndsWith(".ttf") || font.EndsWith(".otf"))
-            {
-                // quick check - this font should reside in the fonts folder
-                String fullFilename = Path.Combine(FontInternals.GetFontFolderPath(), font);
-                return (File.Exists(fullFilename));
-            }
-            else
-            {
-                // longer check - instantiate an embedded font and test the filename
-                var embeddedFont = new EmbeddedFont(font);
-                if (embeddedFont.Filename == null)
-                {
-                    // not an SIL font, not on the system
-                    return false;
-                }
-                String fullFilename = Path.Combine(FontInternals.GetFontFolderPath(), embeddedFont.Filename);
-                return (File.Exists(fullFilename));
-            }
-        }
-
-        #endregion
     }
 
 

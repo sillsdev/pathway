@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -81,6 +81,9 @@
     <Edition>BTE</Edition>
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
+    <DebugType>none</DebugType>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -93,6 +96,7 @@
     <Edition>BTE</Edition>
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|x86' ">
     <OutputPath>bin\x86\Release7BTE\</OutputPath>
@@ -146,21 +150,27 @@
     <Edition>BTE</Edition>
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
+    <DebugType>none</DebugType>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
     <OutputPath>bin\PathwayXeLaTeX\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Status>Testing</Status>
+    <DebugType>none</DebugType>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|x86' ">
     <OutputPath>bin\x86\PathwayXeLaTeX\</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <Status>Testing</Status>
+    <DebugType>none</DebugType>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PdfToImage, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\ThirdParty\PdfToImage.dll</HintPath>
-    </Reference>
     <Reference Include="Prince, Version=1.0.3835.23744, Culture=neutral, PublicKeyToken=8d9b0a8b53aaa3c7">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdParty\Prince.dll</HintPath>
@@ -170,6 +180,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="PdfToImage, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\ThirdParty\PdfToImage.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AboutPw.cs">

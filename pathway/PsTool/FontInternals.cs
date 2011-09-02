@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
 // <copyright file="FontInternals.cs" from='2010' to='2010' company='SIL International'>
 //      Copyright © 2009, SIL International. All Rights Reserved.   
 // </copyright> 
@@ -17,6 +17,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Text;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Text;
@@ -112,13 +114,7 @@ namespace SIL.Tool
         public static string GetPostscriptName(string familyName, string style)
         {
             string fontName = GetFontFileName(familyName, style);
-            string fontRoot = GetFontFolderPath();
-            if (fontRoot == null)
-            {
-                return string.Empty;
-            }
-            string fontFullName = Path.Combine(fontRoot, fontName);
-            return GetPostscriptName(fontFullName);
+            return GetPostscriptName(fontName);
         }
 
         public static string GetPostscriptName(string fontFullName)
@@ -254,11 +250,27 @@ namespace SIL.Tool
         private static TT_TABLE_DIRECTORY GetNameTable(BinaryReader r)
         {
             TT_TABLE_DIRECTORY tbName;
-            byte[] bNameTable = r.ReadBytes(Marshal.SizeOf(tblDir));
-            IntPtr ptrName = Marshal.AllocHGlobal(bNameTable.Length);
-            Marshal.Copy(bNameTable, 0x0, ptrName, bNameTable.Length);
-            tbName = (TT_TABLE_DIRECTORY)Marshal.PtrToStructure(ptrName, typeof(TT_TABLE_DIRECTORY));
-            Marshal.FreeHGlobal(ptrName);
+			if (Common.UsingMonoVM)
+			{
+				// char size is 1 byte in TTF file for Mono?
+				// try copying the structure over manually
+    	        byte[] bNameTable = r.ReadBytes(4); // chars
+				tbName.szTag1 = Convert.ToChar(bNameTable[0]);
+				tbName.szTag2 = Convert.ToChar(bNameTable[1]);
+				tbName.szTag3 = Convert.ToChar(bNameTable[2]);
+				tbName.szTag4 = Convert.ToChar(bNameTable[3]);
+				tbName.uCheckSum = r.ReadUInt32();
+				tbName.uOffset = r.ReadUInt32();
+				tbName.uLength = r.ReadUInt32();
+			}
+			else 
+			{
+	            byte[] bNameTable = r.ReadBytes(Marshal.SizeOf(tblDir));
+				IntPtr ptrName = Marshal.AllocHGlobal(bNameTable.Length);
+	            Marshal.Copy(bNameTable, 0x0, ptrName, bNameTable.Length);
+	            tbName = (TT_TABLE_DIRECTORY)Marshal.PtrToStructure(ptrName, typeof(TT_TABLE_DIRECTORY));
+	            Marshal.FreeHGlobal(ptrName);
+			}
             return tbName;
         }
 
@@ -366,8 +378,59 @@ namespace SIL.Tool
 
         //}
 
+        public static string[] GetInstalledFontFiles()
+        {
+            string fontFolder = GetFontFolderPath();
+            return Directory.GetFiles(fontFolder, "*.ttf", SearchOption.AllDirectories);
+        }
+
         public static string GetFontFileName(string familyName, string style)
         {
+			// Linux lookup
+			if (Common.UsingMonoVM)
+			{
+				// Linux fonts are not listed in the registry; instead, linux (and mono) use the fontconfig library to
+				// provide support. 
+				// To find the font, we'll make a call to fc-list (one of the fontconfig commands) for the font, and parse the
+				// results for the filename
+            	const string prog = "fc-list";
+				var args = new StringBuilder();
+				args.Append("-v \"");
+				args.Append(familyName);
+				if (style.Length == 0 || style.ToLower().Equals("normal"))
+				{
+					args.Append(":style=Regular\"");
+				}
+				else
+				{
+					args.Append(":style=");
+					args.Append(style);
+					args.Append("\"");
+				}
+			    string stdOut = string.Empty;
+			    string stdErr = string.Empty;
+            	SubProcess.Run(Directory.GetCurrentDirectory(), prog, args.ToString(), out stdOut, out stdErr);
+	            if (stdOut.Length < 1)
+				{
+					return string.Empty;
+				}
+				// call returned successfully -- read the results
+                var start = stdOut.IndexOf("file: \"");
+				if (start > 0) 
+				{
+					start += 7;
+                    var stop = stdOut.IndexOf("\"", start);
+					if (stop > 0) 
+					{
+                        return stdOut.Substring(start, (stop - start));
+					}
+					return string.Empty;
+				}
+				
+				return string.Empty;
+			}
+			
+			// Windows lookup
             RegistryKey fontsKey;
             Dictionary<string, string> fontFileNames = new Dictionary<string, string>();
             try
@@ -404,7 +467,7 @@ namespace SIL.Tool
                     resultFileName = SearchFontFileNames(familyName, fontFileNames);
                     break;
             }
-            return resultFileName;
+            return Path.Combine(GetFontFolderPath(), resultFileName);
         }
 
         private static string SearchFontFileNames(string partialName, Dictionary<string, string> fontFileNames)
@@ -420,13 +483,7 @@ namespace SIL.Tool
         public static bool IsGraphite(string familyName, string style)
         {
             string fontName = GetFontFileName(familyName, style);
-            string fontRoot = GetFontFolderPath();
-            if (fontRoot == null)
-            {
-                return false;
-            }
-            string fontFullName = Path.Combine(fontRoot, fontName);
-            return IsGraphite(fontFullName);
+            return IsGraphite(fontName);
         }
 
         public static bool IsGraphite(string fontFullName)
@@ -547,25 +604,60 @@ namespace SIL.Tool
             return false;
         }
 
-        #region Windows_Interop_Methods
-        // older call
-        [DllImport("shell32.dll")]
-        private static extern int SHGetFolderPath(IntPtr hwndOwner, int nFolder, IntPtr hToken,
-            uint dwFlags, [Out] StringBuilder pszPath);
-
-        // newer (Vista and later) call to get a known folder
-        [DllImport("shell32.dll")]
-        static extern int SHGetKnownFolderPath([MarshalAs(UnmanagedType.LPStruct)] Guid rfid, uint dwFlags,
-            IntPtr hToken, out IntPtr pszPath);
+        /// <summary>
+        /// Returns whether the given font is installed on this system. This can either be the
+        /// font Filename (e.g., "Arial.ttf") or the font family / user friendly name of a font.
+        /// (The filename lookup is faster.)
+        /// </summary>
+        /// <param name="font">Font family or font filename</param>
+        /// <returns>true if font is installed</returns>
+        public static bool IsInstalled(string font)
+        {
+            // first check - filename lookup in the font folder
+            if (font.EndsWith(".ttf") || font.EndsWith(".otf"))
+            {
+                if (Common.UsingMonoVM)
+                {
+                    // mono - find the font filename using linux "find"
+                    var args = new StringBuilder();
+                    args.Append("-name \"");
+                    args.Append(font);
+                    args.Append("\"");
+                    string stdOut = string.Empty;
+                    string stdErr = string.Empty;
+                    SubProcess.Run("/", "find", args.ToString(), out stdOut, out stdErr);
+                    // if stdOut returns something, the file is installed
+                    return (stdOut.Length > 0);
+                }
+                // Windows / first check - this font should reside in the fonts folder
+                String fullFilename = Path.Combine(GetFontFolderPath(), font);
+                return (File.Exists(fullFilename));
+            }
+            // second check - look up the filename and see if the file exists
+            string filename = GetFontFileName(font, "normal");
+            if (filename != null)
+            {
+                if (File.Exists(filename)) return true;
+            }
+            // third check - look through the InstalledFontCollection
+            var ifc = new InstalledFontCollection();
+            foreach (FontFamily family in ifc.Families)
+            {
+                if (family.Name.Contains(font)) return true;
+            }
+            return false;
+        }
 
         /// <summary>
-        /// Returns the font folder path for this workstation, even on non-US locales. This currently
-        /// is a Windows-only method that calls interop methods to get its work done; I'm not sure
-        /// what sort of work needs to be done to get it to work under Mono.
+        /// Returns the font folder path for this workstation, even on non-US locales. 
         /// </summary>
         /// <returns></returns>
         public static string GetFontFolderPath()
         {
+            if (Common.UsingMonoVM)
+            {
+                return "/usr/share/fonts/truetype";
+            }
             OperatingSystem osInfo = Environment.OSVersion;
             if (osInfo.Platform == PlatformID.Win32NT && osInfo.Version.Major >= 6)
             {
@@ -594,6 +686,17 @@ namespace SIL.Tool
                 return sb.ToString();
             }
         }
+
+        #region Windows_Interop_Methods
+        // older call
+        [DllImport("shell32.dll")]
+        private static extern int SHGetFolderPath(IntPtr hwndOwner, int nFolder, IntPtr hToken,
+            uint dwFlags, [Out] StringBuilder pszPath);
+
+        // newer (Vista and later) call to get a known folder
+        [DllImport("shell32.dll")]
+        static extern int SHGetKnownFolderPath([MarshalAs(UnmanagedType.LPStruct)] Guid rfid, uint dwFlags,
+            IntPtr hToken, out IntPtr pszPath);
         #endregion
     }
 }

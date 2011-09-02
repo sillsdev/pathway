@@ -1141,28 +1141,27 @@ namespace SIL.PublishingSolution
                     Debug.WriteLine("ERROR: embedded font " + embeddedFont.Name + " is not installed - skipping");
                     continue;
                 }
-                string dest = Common.PathCombine(contentFolder, embeddedFont.Filename);
-                File.Copy(Path.Combine(FontInternals.GetFontFolderPath(), embeddedFont.Filename), dest);
+                string dest = Common.PathCombine(contentFolder, Path.GetFileName(embeddedFont.Filename));
+                File.Copy(embeddedFont.Filename, dest, true);
                 if (IncludeFontVariants)
                 {
                     // italic
                     if (embeddedFont.HasItalic && embeddedFont.ItalicFilename != embeddedFont.Filename)
                     {
-                        dest = Common.PathCombine(contentFolder, embeddedFont.ItalicFilename);
+                        dest = Common.PathCombine(contentFolder, Path.GetFileName(embeddedFont.ItalicFilename));
                         if (!File.Exists(dest))
                         {
-                            File.Copy(Path.Combine(FontInternals.GetFontFolderPath(), embeddedFont.ItalicFilename),
-                                      dest);
+                            File.Copy(embeddedFont.ItalicFilename, dest, true);
                         }
                     }
                     // bold
                     if (embeddedFont.HasBold && embeddedFont.BoldFilename != embeddedFont.Filename)
                     {
-                        dest = Common.PathCombine(contentFolder, embeddedFont.BoldFilename);
+                        dest = Common.PathCombine(contentFolder, Path.GetFileName(embeddedFont.BoldFilename));
                         if (!File.Exists(dest))
                         {
-                            File.Copy(Path.Combine(FontInternals.GetFontFolderPath(), embeddedFont.BoldFilename),
-                                      dest);
+                            File.Copy(embeddedFont.BoldFilename,
+                                      dest, true);
                         }
                     }
                 }
@@ -2570,7 +2569,7 @@ namespace SIL.PublishingSolution
                     }
                     opf.WriteStartElement("item"); // item (charis embedded font)
                     opf.WriteAttributeString("id", "epub.embedded.font" + fontNum);
-                    opf.WriteAttributeString("href", embeddedFont.Filename);
+                    opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.Filename));
                     opf.WriteAttributeString("media-type", "font/opentype/"); 
                     opf.WriteEndElement(); // item
                     fontNum++;
@@ -2581,7 +2580,7 @@ namespace SIL.PublishingSolution
                         {
                             opf.WriteStartElement("item"); // item (charis embedded font)
                             opf.WriteAttributeString("id", "epub.embedded.font_i_" + fontNum);
-                            opf.WriteAttributeString("href", embeddedFont.ItalicFilename);
+                            opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.ItalicFilename));
                             opf.WriteAttributeString("media-type", "font/opentype/");
                             opf.WriteEndElement(); // item
                             fontNum++;
@@ -2591,7 +2590,7 @@ namespace SIL.PublishingSolution
                         {
                             opf.WriteStartElement("item"); // item (charis embedded font)
                             opf.WriteAttributeString("id", "epub.embedded.font_b_" + fontNum);
-                            opf.WriteAttributeString("href", embeddedFont.BoldFilename);
+                            opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.BoldFilename));
                             opf.WriteAttributeString("media-type", "font/opentype/");
                             opf.WriteEndElement(); // item
                             fontNum++;

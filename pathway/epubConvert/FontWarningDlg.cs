@@ -80,8 +80,7 @@ namespace epubConvert
         /// </summary>
         public int BuildSILFontList()
         {
-            string fontFolder = FontInternals.GetFontFolderPath();
-            string[] files = Directory.GetFiles(fontFolder, "*.ttf");
+            string[] files = FontInternals.GetInstalledFontFiles();
             foreach (var file in files)
             {
                 if (FontInternals.IsSILFont(file))

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <UsingTask TaskName="UpdateReadme" AssemblyFile="BuildTasks.dll" />
   <UsingTask TaskName="UpdateVersion" AssemblyFile="BuildTasks.dll" />
@@ -83,10 +83,13 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwCtx|AnyCPU' ">
     <OutputPath>bin\PwCtx\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <Edition/>
+    <Edition />
     <ProductName>Pathway mini-ConTeXt</ProductName>
     <ConfTag>PwCtx</ConfTag>
     <Status>Testing</Status>
+    <DebugType>none</DebugType>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -100,6 +103,7 @@
     <ProductName>Pathway $(Edition) Debug</ProductName>
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|x86' ">
     <OutputPath>bin\x86\Release7BTE\</OutputPath>
@@ -154,34 +158,46 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwCtx|x86' ">
     <OutputPath>bin\x86\PwCtx\</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
-    <Edition/>
+    <Edition />
     <ProductName>Pathway mini-ConTeXt</ProductName>
     <ConfTag>PwCtx</ConfTag>
     <Status>Testing</Status>
+    <DebugType>none</DebugType>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
     <OutputPath>bin\PathwayXeLaTeX\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <Edition/>
+    <Edition />
     <ProductName>Pathway XeLaTeX</ProductName>
     <ConfTag>XeLaTeX</ConfTag>
     <Status>Testing</Status>
+    <DebugType>none</DebugType>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|x86' ">
     <OutputPath>bin\x86\PathwayXeLaTeX\</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
-    <Edition/>
+    <Edition />
     <ProductName>Pathway XeLaTeX</ProductName>
     <ConfTag>XeLaTeX</ConfTag>
     <Status>Testing</Status>
+    <DebugType>none</DebugType>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Checking|x86' ">
     <OutputPath>bin\x86\xmlMarkup\</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
-    <Edition/>
+    <Edition />
     <ProductName>DBL bundle checking tools</ProductName>
     <ConfTag>Checking</ConfTag>
     <Status>Testing</Status>
+    <DebugType>none</DebugType>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConfigurationTool\ConfigurationTool.csproj">
@@ -263,12 +279,13 @@
     <None Include="ReadMePw.rtf" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="BuildTasks, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="BuildTasks, Version=0.7.9.1507, Culture=neutral, PublicKeyToken=null">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\BuildTasks.dll</HintPath>
+      <HintPath>BuildTasks.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets. -->
   <Target Name="Build">
@@ -281,7 +298,7 @@
     <UpdateReadme Readme="$(ProjectDir)ReadMePw.rtf" License="$(ProjectDir)License.rtf" Template="$(ProjectDir)UserInterface-tpl.wxs" />
     <ZeroCheck />
     <FileComponents FilesTemplate="Files$(ConfTag)-tpl.wxs" FeaturesTemplate="Features$(ConfTag)-tpl.wxs" />
-    <Copy SourceFiles="@(WixSoftware)" DestinationFiles="@(WixSoftware->'Wix\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(WixSoftware)" DestinationFiles="@(WixSoftware-&gt;'Wix\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Exec Command="candle -nologo Features.wxs" WorkingDirectory="Wix" />
     <Exec Command="candle -nologo Install$(ConfTag)$(Edition).wxs " WorkingDirectory="Wix" />
     <Exec Command="candle -nologo UserInterface.wxs" WorkingDirectory="Wix" />
@@ -299,14 +316,14 @@
     <Copy SourceFiles="@(AllBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
     <Copy SourceFiles="@(BteBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(TestBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Status)' == 'Testing' " />
-    <Copy SourceFiles="@(DicStyles)" DestinationFiles="@(DicStyles->'Files\ConfigurationTool\Styles\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(ScrStyles)" DestinationFiles="@(ScrStyles->'Files\ConfigurationTool\Styles\Scripture\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(Hyphenation)" DestinationFiles="@(Hyphenation->'Files\ConfigurationTool\Hyphenation_Languages\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(Icons)" DestinationFiles="@(Icons->'Files\ConfigurationTool\Icons\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(Graphic)" DestinationFiles="@(Graphic->'Files\ConfigurationTool\Graphic\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(Loc)" DestinationFiles="@(Loc->'Files\ConfigurationTool\Loc\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(DicSamples)" DestinationFiles="@(DicSamples->'Files\ConfigurationTool\Samples\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(ScrSamples)" DestinationFiles="@(ScrSamples->'Files\ConfigurationTool\Samples\Scripture\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(DicStyles)" DestinationFiles="@(DicStyles-&gt;'Files\ConfigurationTool\Styles\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(ScrStyles)" DestinationFiles="@(ScrStyles-&gt;'Files\ConfigurationTool\Styles\Scripture\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(Hyphenation)" DestinationFiles="@(Hyphenation-&gt;'Files\ConfigurationTool\Hyphenation_Languages\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Icons)" DestinationFiles="@(Icons-&gt;'Files\ConfigurationTool\Icons\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Graphic)" DestinationFiles="@(Graphic-&gt;'Files\ConfigurationTool\Graphic\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Loc)" DestinationFiles="@(Loc-&gt;'Files\ConfigurationTool\Loc\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(DicSamples)" DestinationFiles="@(DicSamples-&gt;'Files\ConfigurationTool\Samples\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(ScrSamples)" DestinationFiles="@(ScrSamples-&gt;'Files\ConfigurationTool\Samples\Scripture\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(MiscSupport)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(FwVersion)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(BteHelpFile)" DestinationFolder="Files\ConfigurationTool\Help" Condition=" '$(Edition)' == 'BTE' " />
@@ -319,18 +336,18 @@
     <Copy SourceFiles="@(BteSettings)" DestinationFolder="Files\ConfigurationTool\" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(AllPreview)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(BtePreview)" DestinationFolder="Files\ConfigurationTool\" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles->'Files\ConfigurationTool\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="@(copyrightFiles->'Files\ConfigurationTool\Copyrights\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles->'Files\ConfigurationTool\epub\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'Files\ConfigurationTool\epubcheck-1.2\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles->'Files\ConfigurationTool\GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles->'Files\ConfigurationTool\InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(LiftFiles)" DestinationFiles="@(LiftFiles->'Files\ConfigurationTool\LiftSupport\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles-&gt;'Files\ConfigurationTool\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="@(copyrightFiles-&gt;'Files\ConfigurationTool\Copyrights\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles-&gt;'Files\ConfigurationTool\epub\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck-&gt;'Files\ConfigurationTool\epubcheck-1.2\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles-&gt;'Files\ConfigurationTool\GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles-&gt;'Files\ConfigurationTool\InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(LiftFiles)" DestinationFiles="@(LiftFiles-&gt;'Files\ConfigurationTool\LiftSupport\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(AllTransform)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(BteTransform)" DestinationFolder="Files\ConfigurationTool\" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(WordpressFiles)" DestinationFiles="@(WordpressFiles->'Files\ConfigurationTool\Wordpress\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
-    <Copy SourceFiles="@(XeTexExe)" DestinationFiles="@(XeTexExe->'Files\ConfigurationTool\xetexExe\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
-    <Copy SourceFiles="@(XetexFiles)" DestinationFiles="@(XetexFiles->'Files\ConfigurationTool\xetexPathway\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
+    <Copy SourceFiles="@(WordpressFiles)" DestinationFiles="@(WordpressFiles-&gt;'Files\ConfigurationTool\Wordpress\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
+    <Copy SourceFiles="@(XeTexExe)" DestinationFiles="@(XeTexExe-&gt;'Files\ConfigurationTool\xetexExe\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
+    <Copy SourceFiles="@(XetexFiles)" DestinationFiles="@(XetexFiles-&gt;'Files\ConfigurationTool\xetexPathway\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
   </Target>
   <Target Name="AfterBuild">
   </Target>
@@ -339,33 +356,7 @@
     <RemoveDir Directories="$(OutputPath)" />
   </Target>
   <ItemGroup>
-    <ConfigurationTool Include="..\ConfigurationTool\$(OutputPath)\*.*" />
-    <Plugin Include="..\PsExport\$(OutputPath)\*.*" />
     <GhostScript Include="..\ThirdParty\gsdll32.dll" />
-    <EpubCheck Include="..\ThirdParty\epubcheck-1.2\**\*.*" Exclude="..\ThirdParty\**\.svn\**\*.*" />
-    <Icu Include="..\LiftPrepare\Lib\PalasoLib\icudt40.dll;..\LiftPrepare\Lib\PalasoLib\icuin40.dll;..\LiftPrepare\Lib\PalasoLib\icuuc40.dll;" />
-    <BatchProcess Include="..\PathwayB\$(OutputPath)\PathwayB.*" />
-    <LiftPrepare Include="..\LiftPrepare\$(OutputPath)\LiftPrepare.*" />
-    <ParatextSupport Include="..\ParatextSupport\$(OutputPath)\ParatextSupport.*" />
-    <AllBackend Include="..\InDesignConvert\$(OutputPath)\InDesignConvert.*" />
-    <AllBackend Include="..\epubConvert\$(OutputPath)\epubConvert.*" />
-    <TestBackend Include="..\OpenOfficeConvert_OLD\$(OutputPath)\OpenOfficeConvert_OLD.*" />
-    <TestBackend Include="..\PdfConvert\$(OutputPath)\PdfConvert.*" />
-    <TestBackend Include="..\WordPressConvert\$(OutputPath)\WordPressConvert.*" />
-    <TestBackend Include="..\XeTexConvert\$(OutputPath)\XeTexConvert.*" />
-    <TestBackend Include="..\XeLaTexConvert\$(OutputPath)\XeLaTexWriter.*" />
-    <TestBackend Include="..\XeTex\$(OutputPath)\XeTexWriter.*" />
-    <BteBackend Include="..\GoBibleConvert\$(OutputPath)\GoBibleConvert.*" />
-    <BteBackend Include="..\LogosConvert\$(OutputPath)\LogosConvert.*" />
-    <DicStyles Include="..\PsSupport\Styles\Dictionary\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <ScrStyles Include="..\PsSupport\Styles\Scripture\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <Hyphenation Include="..\PsSupport\Hyphenation_Languages\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <Icons Include="..\PsSupport\Icons\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <Graphic Include="..\PsSupport\Graphic\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <Loc Include="..\PsSupport\Loc\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <DicSamples Include="..\PsSupport\Samples\Dictionary\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <ScrSamples Include="..\PsSupport\Samples\Scripture\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <MiscSupport Include="..\PsSupport\FileGuids.xml;..\PsSupport\GenericFont.xml" />
     <FwVersion Include="FieldworksVersions.txt" />
     <BteHelpFile Include="Pathway_Configuration_Tool_BTE.chm" />
     <SeHelpFile Include="Pathway_Configuration_Tool_SE.chm" />
@@ -379,33 +370,59 @@
     <BteSettings Include="..\PsSupport\ScriptureStyleSettings.xml" />
     <AllPreview Include="..\PsSupport\DictionaryPreview.xhtml" />
     <BtePreview Include="..\PsSupport\ScripturePreview.xhtml" />
-    <OfficeFiles Include="..\PsSupport\OfficeFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <copyrightFiles Include="..\PsSupport\Copyrights\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <epubFiles Include="..\PsSupport\epub\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <AllBackend Include="..\epubValidator\$(OutputPath)\epubValidator.*" />
-    <GoBibleFiles Include="..\PsSupport\GoBible\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <InDesignFiles Include="..\PsSupport\InDesignFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <LiftFiles Include="..\PsSupport\LiftSupport\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <AllTransform Include="..\PsSupport\pxhtml2xpw-dict.xsl" />
-    <BteTransform Include="..\PsSupport\*.xslt" />
     <BteTransform Include="..\PsSupport\pxhtml2xpw-scr.xsl" />
-    <WordpressFiles Include="..\PsSupport\Icons\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <XeTexExe Include="..\XeTex\xetexExe\**\*.*" Exclude="..\XeTex\xetexExe\**\.svn\**\*.*" />
-    <XetexFiles Include="..\PsSupport\xetexPathway\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <WixSoftware Include="WixSoftware\**\*.*" Exclude="WixSoftware\**\.svn\**\*.*" />
+    <ConfigurationTool Include="..\ConfigurationTool\%24%28OutputPath%29\%2A.%2A" />
+    <Plugin Include="..\PsExport\%24%28OutputPath%29\%2A.%2A" />
+    <EpubCheck Include="..\ThirdParty\epubcheck-1.2\%2A%2A\%2A.%2A" />
+    <Icu Include="..\LiftPrepare\lib\PalasoLib\icudt40.dll%3B..\LiftPrepare\Lib\PalasoLib\icuin40.dll%3B..\LiftPrepare\Lib\PalasoLib\icuuc40.dll%3B" />
+    <BatchProcess Include="..\PathwayB\%24%28OutputPath%29\PathwayB.%2A" />
+    <LiftPrepare Include="..\LiftPrepare\%24%28OutputPath%29\LiftPrepare.%2A" />
+    <ParatextSupport Include="..\ParatextSupport\%24%28OutputPath%29\ParatextSupport.%2A" />
+    <AllBackend Include="..\InDesignConvert\%24%28OutputPath%29\InDesignConvert.%2A" />
+    <AllBackend Include="..\epubConvert\%24%28OutputPath%29\epubConvert.%2A" />
+    <TestBackend Include="..\OpenOfficeConvert_OLD\%24%28OutputPath%29\OpenOfficeConvert_OLD.%2A" />
+    <TestBackend Include="..\PdfConvert\%24%28OutputPath%29\PdfConvert.%2A" />
+    <TestBackend Include="..\WordPressConvert\%24%28OutputPath%29\WordPressConvert.%2A" />
+    <TestBackend Include="..\XeTeXConvert\%24%28OutputPath%29\XeTexConvert.%2A" />
+    <TestBackend Include="..\XeLaTexConvert\%24%28OutputPath%29\XeLaTexWriter.%2A" />
+    <TestBackend Include="..\XeTex\%24%28OutputPath%29\XeTexWriter.%2A" />
+    <BteBackend Include="..\GoBibleConvert\%24%28OutputPath%29\GoBibleConvert.%2A" />
+    <BteBackend Include="..\LogosConvert\%24%28OutputPath%29\LogosConvert.%2A" />
+    <DicStyles Include="..\PsSupport\Styles\Dictionary\%2A%2A\%2A.%2A" />
+    <ScrStyles Include="..\PsSupport\Styles\Scripture\%2A%2A\%2A.%2A" />
+    <Hyphenation Include="..\PsSupport\Hyphenation_Languages\%2A%2A\%2A.%2A" />
+    <Icons Include="..\PsSupport\Icons\%2A%2A\%2A.%2A" />
+    <Graphic Include="..\PsSupport\Graphic\%2A%2A\%2A.%2A" />
+    <Loc Include="..\PsSupport\Loc\%2A%2A\%2A.%2A" />
+    <DicSamples Include="..\PsSupport\Samples\Dictionary\%2A%2A\%2A.%2A" />
+    <ScrSamples Include="..\PsSupport\Samples\Scripture\%2A%2A\%2A.%2A" />
+    <MiscSupport Include="..\PsSupport\FileGuids.xml%3B..\PsSupport\GenericFont.xml" />
+    <OfficeFiles Include="..\PsSupport\OfficeFiles\%2A%2A\%2A.%2A" />
+    <copyrightFiles Include="..\PsSupport\Copyrights\%2A%2A\%2A.%2A" />
+    <epubFiles Include="..\PsSupport\epub\%2A%2A\%2A.%2A" />
+    <AllBackend Include="..\epubValidator\%24%28OutputPath%29\epubValidator.%2A" />
+    <GoBibleFiles Include="..\PsSupport\GoBible\%2A%2A\%2A.%2A" />
+    <InDesignFiles Include="..\PsSupport\InDesignFiles\%2A%2A\%2A.%2A" />
+    <LiftFiles Include="..\PsSupport\LiftSupport\%2A%2A\%2A.%2A" />
+    <BteTransform Include="..\PsSupport\%2A.xslt" />
+    <WordpressFiles Include="..\PsSupport\Icons\%2A%2A\%2A.%2A" />
+    <XeTexExe Include="..\XeTex\xetexExe\%2A%2A\%2A.%2A" />
+    <XetexFiles Include="..\PsSupport\xetexPathway\%2A%2A\%2A.%2A" />
+    <WixSoftware Include="WixSoftware\%2A%2A\%2A.%2A" />
   </ItemGroup>
   <Target Name="XeLaTexBeforeBuild">
-    <Copy SourceFiles="@(XeLaTexExe)" DestinationFiles="@(XeLaTexExe->'Files\XeLaTeX\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexExe)" DestinationFiles="@(XeLaTexExe-&gt;'Files\XeLaTeX\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
   <ItemGroup>
-    <XeLaTexExe Include="..\XeLaTexConvert\XeLaTexExe\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\**\.svn\**\*.*" />
+    <XeLaTexExe Include="..\XeLaTexConvert\XeLaTexExe\%2A%2A\%2A.%2A" />
   </ItemGroup>
   <Target Name="CheckingBeforeBuild">
-    <Copy SourceFiles="@(CheckingExe)" DestinationFiles="@(CheckingExe->'Files\PathwayChecking\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(CheckingExe)" DestinationFiles="@(CheckingExe-&gt;'Files\PathwayChecking\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
   <ItemGroup>
-    <CheckingExe Include="..\usxChars\dist\**\*.*" Exclude="..\usxChars\dist\**\.svn\**\*.*" />
-    <CheckingExe Include="..\usxVerseWordCount\dist\**\*.*" Exclude="..\usxVerseWordCount\dist\**\.svn\**\*.*" />
-    <CheckingExe Include="..\xmlMarkup\dist\**\*.*" Exclude="..\xmlMarkup\dist\**\.svn\**\*.*" />
+    <CheckingExe Include="..\usxChars\dist\%2A%2A\%2A.%2A" />
+    <CheckingExe Include="..\usxVerseWordCount\dist\%2A%2A\%2A.%2A" />
+    <CheckingExe Include="..\xmlMarkup\dist\%2A%2A\%2A.%2A" />
   </ItemGroup>
 </Project>

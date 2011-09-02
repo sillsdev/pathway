@@ -14,6 +14,7 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 using System;
+using System.IO;
 using SIL.Tool;
 using NUnit.Framework;
 
@@ -134,7 +135,7 @@ namespace Test.PsTool
             string style = "Regular";
             string actual = FontInternals.GetFontFileName(familyName, style);
             string expected = "CharisSILR.ttf";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, Path.GetFileName(actual));
         }
 
 
@@ -146,7 +147,7 @@ namespace Test.PsTool
             string style = "Bold";
             string actual = FontInternals.GetFontFileName(familyName, style);
             string expected = "CharisSILB.ttf";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, Path.GetFileName(actual));
         }
 
 
@@ -158,7 +159,7 @@ namespace Test.PsTool
             string style = "Regular";
             string actual = FontInternals.GetFontFileName(familyName, style);
             string expected = "sch_gr_alpha9.ttf";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, Path.GetFileName(actual));
         }
 
 
@@ -170,7 +171,7 @@ namespace Test.PsTool
             string style = "Bold";
             string actual = FontInternals.GetFontFileName(familyName, style);
             string expected = "sch_gr_alpha9.ttf";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, Path.GetFileName(actual));
         }
 
 
@@ -182,7 +183,7 @@ namespace Test.PsTool
             string style = "Bold";
             string actual = FontInternals.GetFontFileName(familyName, style);
             string expected = "YI_PLUS.ttf";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, Path.GetFileName(actual));
         }
         
         
@@ -199,43 +200,44 @@ namespace Test.PsTool
 
 
         /// <summary>
-        ///A test Arial Postscript font name
+        ///Test whether Arial is a Graphite font (should be false)
         ///</summary>
         [Test]
-        public void TimesGraphiteTest()
+        public void ArialGraphiteTest()
         {
-            var root = Environment.GetEnvironmentVariable("SystemRoot");
-            var fontFullName = Common.PathCombine(root, "Fonts/timesbd.ttf");
+            string familyName = "Arial";
+            string style = "Regular";
+            string fontFullName = FontInternals.GetFontFileName(familyName, style);
             var actual = FontInternals.IsGraphite(fontFullName);
             Assert.IsFalse(actual);
         }
 
         /// <summary>
-        ///A test Arial Postscript font name
+        ///Test whether Charis is a Graphite font (should be true)
         ///</summary>
         [Test]
         [Category("SkipOnTeamCity")]
         public void CharisGraphiteTest()
         {
-            var root = Environment.GetEnvironmentVariable("SystemRoot");
-            var fontFullName = Common.PathCombine(root, "Fonts/CharisSILR.ttf");
+            string familyName = "Charis SIL";
+            string style = "Regular";
+            string fontFullName = FontInternals.GetFontFileName(familyName, style);
             var actual = FontInternals.IsGraphite(fontFullName);
             Assert.IsTrue(actual);
         }
 
         /// <summary>
-        ///A test Arial Postscript font name
+        ///Test whether Scheherazade is a Graphite font (should be true)
         ///</summary>
         [Test]
         [Category("SkipOnTeamCity")]
         public void ScheherazadeGraphiteTest()
         {
-            var root = Environment.GetEnvironmentVariable("SystemRoot");
-            var fontFullName = Common.PathCombine(root, "Fonts/sch_gr_alpha9.ttf");
+            string familyName = "Scheherazade";
+            string style = "Regular";
+            string fontFullName = FontInternals.GetFontFileName(familyName, style);
             var actual = FontInternals.IsGraphite(fontFullName);
             Assert.IsTrue(actual);
         }
-
-
     }
 }

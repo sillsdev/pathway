@@ -148,9 +148,7 @@ namespace epubValidator
 
                         proc.WaitForExit
                             (
-                                (timeout <= 0)
-                                ? int.MaxValue : timeout * 100 *
-                                   60
+                                timeout * 100 * 60
                             );
 
                         errorMessage = proc.StandardError.ReadToEnd();

@@ -992,8 +992,7 @@ namespace SIL.PublishingSolution
             // populate the font drop-down if needed
             if (cTool.DdlDefaultFont.Items.Count == 0)
             {
-                string fontFolder = FontInternals.GetFontFolderPath();
-                string[] files = Directory.GetFiles(fontFolder, "*.ttf");
+                string[] files = FontInternals.GetInstalledFontFiles();
                 PrivateFontCollection pfc = new PrivateFontCollection();
                 foreach (var file in files)
                 {
