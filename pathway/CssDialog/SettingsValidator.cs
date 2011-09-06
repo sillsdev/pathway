@@ -286,7 +286,10 @@ namespace SIL.PublishingSolution
             if (!ValidateSamplePath(parentNode)) return false;
             if (!ValidateDefaultIcon(parentNode)) return false;
             if (!ValidateLastTask(parentNode)) return false;
-            if (!ValidateCssEditor(parentNode)) return false;
+            // edb 9/6/2011 (mono) -- CssEditor contains a Windows path. The editor looks like it only gets called from
+            // ModifyOptions, which looks like a PublishingSolutions dialog (at least, I can't see any place to
+            // get to it from the ConfigurationTool or ExportThroughPathway dialog). Removing the validation for now.
+            //if (!ValidateCssEditor(parentNode)) return false;
             if (!ValidateSelectedIcon(parentNode)) return false;
             if (!ValidateMisingIcon(parentNode)) return false;
             if (!ValidatePrintVia(parentNode)) return false;

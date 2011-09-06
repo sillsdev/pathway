@@ -75,7 +75,8 @@ namespace SIL.PublishingSolution
         public int ColumnDescription = 1;
         public int ColumnComment = 2;
         public int ColumnType = 3;
-        public int ColumnShown = 4;  // 5 is used for approved by
+        public int ColumnShown = 4;  
+		public int ColumnApprovedBy = 5;
         public int ColumnFile = 6;
         public int PreviewFile1 = 7;
         public int PreviewFile2 = 8;
@@ -762,7 +763,7 @@ namespace SIL.PublishingSolution
                 cTool.TxtComment.Text = cTool.StylesGrid[ColumnComment, SelectedRowIndex].Value.ToString();
                 bool check = cTool.StylesGrid[ColumnShown, SelectedRowIndex].Value.ToString().ToLower() == "yes" ? true : false;
                 cTool.ChkAvailable.Checked = check;
-                cTool.TxtApproved.Text = cTool.StylesGrid[AttribApproved, SelectedRowIndex].Value.ToString();
+                cTool.TxtApproved.Text = cTool.StylesGrid[ColumnApprovedBy, SelectedRowIndex].Value.ToString();
                 string type = cTool.StylesGrid[ColumnType, SelectedRowIndex].Value.ToString();
                 if (type == TypeStandard)
                 {
