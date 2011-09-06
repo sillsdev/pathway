@@ -161,6 +161,8 @@ namespace SIL.PublishingSolution
         public static void LoadSettings()
         {
             _loadType = Value.ContainsKey(InputType) ? Value[InputType] : "Dictionary";
+            // mono check -- the Value[] slot for InputType might be initialized to an empty string.
+			if (_loadType.Length < 1) _loadType = "Dictionary";
             if (LoadValues(SettingPath) == null) return;
             if (!Directory.Exists(Value[OutputPath]))
             {
@@ -175,7 +177,7 @@ namespace SIL.PublishingSolution
             }
             catch (Exception)
             {
-                LoadValues(SettingPath);
+                if (LoadValues(SettingPath) == null) return;
             }
             MediaType = GetAttrByName("//categories/category", "Media", "select").ToLower();
             LoadDictionary(StyleFile, "styles//style", "file");
@@ -219,31 +221,55 @@ namespace SIL.PublishingSolution
                 return null;
             }
             UnLoadValues();
-            var reader = validatexml(path);
-            xmlMap.Load(reader);
-            reader.Close();
-            if (!_validateXmlSuccess)
-            {
-                InvalidStyleSettingsException err = new InvalidStyleSettingsException();
-                err.ErrorMessage = _validateXmlError.ToString();
-                err.FullFilePath = path;
-                throw err;
-            }
-            XmlNode root = xmlMap.DocumentElement;
-            if (root != null)
-            {
-                LoadDictionary(Value, "settings/property", "value");
-                LoadDictionary(DefaultValue, "defaultSettings/property", "value");
-                ApplyVariables();
-                ArrayList keys = new ArrayList();
-                foreach (string key in Value.Keys)
-                    keys.Add(key);
-                foreach (string key in keys)
-                {
-                    Value[key] = Common.DirectoryPathReplace(Value[key]);
-                }
-            }
-            return root;
+
+			try 
+			{
+				var xmlReaderSettings = new XmlReaderSettings();
+				xmlReaderSettings.ValidationType = ValidationType.Schema;
+				var resolver = new XmlUrlResolver();
+				resolver.Credentials = System.Net.CredentialCache.DefaultCredentials;
+				xmlReaderSettings.XmlResolver = resolver;
+				xmlReaderSettings.ValidationEventHandler += new ValidationEventHandler (ValidationCallBack);
+	            _validateXmlSuccess = true;
+	            var reader = XmlReader.Create(path, xmlReaderSettings);
+	
+				xmlMap.Load(reader);
+	            reader.Close();
+	            if (!_validateXmlSuccess)
+	            {
+	                InvalidStyleSettingsException err = new InvalidStyleSettingsException();
+	                err.ErrorMessage = _validateXmlError.ToString();
+	                err.FullFilePath = path;
+	                throw err;
+	            }
+	            XmlNode root = xmlMap.DocumentElement;
+	            if (root != null)
+	            {
+	                LoadDictionary(Value, "settings/property", "value");
+	                LoadDictionary(DefaultValue, "defaultSettings/property", "value");
+	                ApplyVariables();
+	                ArrayList keys = new ArrayList();
+	                foreach (string key in Value.Keys)
+	                    keys.Add(key);
+	                foreach (string key in keys)
+	                {
+	                    Value[key] = Common.DirectoryPathReplace(Value[key]);
+	                }
+	            }
+	            return root;
+			} 
+			catch (Exception ex) 
+			{
+				var sb = new StringBuilder();
+				sb.Append("Unable to Load file: ");
+				sb.Append(path);
+				sb.AppendLine(".");
+				sb.AppendLine("The full exception encountered is shown below.");
+				sb.AppendLine();
+				sb.AppendLine(ex.ToString());
+				MessageBox.Show(sb.ToString(), "Fatal Error");
+				return null;
+			}
         }
 
         /// <summary>
@@ -263,21 +289,21 @@ namespace SIL.PublishingSolution
         /// </summary>
         /// <param name="inputFile">The Input Xml File</param>
         /// <returns>true/false based on the validation</returns>
-        private static XmlValidatingReader validatexml(string inputFile)
-        {
+//        private static XmlValidatingReader validatexml(string inputFile)
+//        {
             //First we create the xmltextreader 
-            var xmlr = new XmlTextReader(inputFile);
+//            var xmlr = new XmlTextReader(inputFile);
             //We pass the xmltextreader into the xmlvalidatingreader 
             //This will validate the xml doc with the schema file 
             //NOTE the xml file it self points to the schema file 
-            var xmlvread = new XmlValidatingReader(xmlr);
+//            var xmlvread = new XmlValidatingReader(xmlr);
 
             // Set the validation event handler 
-            xmlvread.ValidationEventHandler += ValidationCallBack;
-            _validateXmlSuccess = true;
+//            xmlvread.ValidationEventHandler += ValidationCallBack;
+//            _validateXmlSuccess = true;
 
-            return xmlvread;
-        }
+//            return xmlvread;
+//        }
 
         /// <summary>
         /// Validation Event Argument added to the Validate Xml Method

@@ -5,6 +5,7 @@ using System.Xml;
 using System.Data;
 using System.Collections;
 using SIL.Tool;
+using System.Text;
 
 namespace SIL.PublishingSolution
 {
@@ -38,12 +39,23 @@ namespace SIL.PublishingSolution
         public void UpdateSettingsFile(string appPath)
         {
             _xmlFileWithPath = appPath;
-            string allUserPath = Path.Combine(Path.Combine(Common.GetAllUserAppPath(),"SIL\\Pathway"), Path.GetFileName(appPath));
+			var sbFile = new StringBuilder();
+			sbFile.Append(Common.GetAllUserAppPath());
+			sbFile.Append(Path.DirectorySeparatorChar);
+			sbFile.Append("SIL");
+			sbFile.Append(Path.DirectorySeparatorChar);
+			sbFile.Append("Pathway");
+			sbFile.Append(Path.DirectorySeparatorChar);
+			sbFile.Append(Path.GetFileName(appPath));
+            string allUserPath = sbFile.ToString();
             if (File.Exists(allUserPath))
             {
                 _xmlFileWithPath = allUserPath;
             }
-            Param.LoadValues(_xmlFileWithPath);
+            if (Param.LoadValues(_xmlFileWithPath) == null) 
+			{
+				return;
+			}
 
             //MigrateProjectSettingsFile(_xmlFileWithPath, "sSchemaPath", "sSettingsPath", appPath);
             MigrateProjectSettingsFile(_xmlFileWithPath, "projSchemaPath", "projSettingsPath", appPath);
@@ -127,15 +139,32 @@ namespace SIL.PublishingSolution
                               };
 
             string projFile = Param.Value["InputType"].ToLower() == "scripture" ? xmlFile[2].ToString() : xmlFile[1].ToString();
-
             string path = string.Empty;
+			var sbPath = new StringBuilder();
+			
             switch (DirectoryName)
             {
                 case "sSchemaPath":
-                    path = Path.Combine(Common.PathCombine(Common.GetAllUserAppPath(), "SIL\\Pathway"), xmlFile[3].ToString());
+					sbPath.Append(Common.GetAllUserAppPath());
+					sbPath.Append(Path.DirectorySeparatorChar);
+					sbPath.Append("SIL");
+					sbPath.Append(Path.DirectorySeparatorChar);
+					sbPath.Append("Pathway");
+					sbPath.Append(Path.DirectorySeparatorChar);
+					sbPath.Append(xmlFile[3].ToString());
+					path = sbPath.ToString();
+                    //path = Path.Combine(Common.PathCombine(Common.GetAllUserAppPath(), "SIL\\Pathway"), xmlFile[3].ToString());
                     break;
                 case "sSettingsPath":
-                    path = Path.Combine(Common.PathCombine(Common.GetAllUserAppPath(), "SIL\\Pathway"), xmlFile[0].ToString());
+					sbPath.Append(Common.GetAllUserAppPath());
+					sbPath.Append(Path.DirectorySeparatorChar);
+					sbPath.Append("SIL");
+					sbPath.Append(Path.DirectorySeparatorChar);
+					sbPath.Append("Pathway");
+					sbPath.Append(Path.DirectorySeparatorChar);
+					sbPath.Append(xmlFile[0].ToString());
+					path = sbPath.ToString();
+                    //path = Path.Combine(Common.PathCombine(Common.GetAllUserAppPath(), "SIL\\Pathway"), xmlFile[0].ToString());
                     break;
                 case "projSchemaPath":
                     path = Path.Combine(Path.GetDirectoryName(Param.SettingOutputPath), xmlFile[3].ToString());

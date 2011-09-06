@@ -193,8 +193,8 @@ namespace SIL.PublishingSolution
                 //    }
                 //}
 
-                FileStream[] f = assembly.GetFiles();
-                Type[] t =  assembly.GetExportedTypes();
+                //FileStream[] f = assembly.GetFiles();
+                //Type[] t =  assembly.GetExportedTypes();
 
                 //make the object
                 //Object thing = assembly.CreateInstance(className);
