@@ -33,8 +33,7 @@ namespace Test.PsTool
         [Test]
         public void ArialTest()
         {
-            var root = Environment.GetEnvironmentVariable("SystemRoot");
-            var fontFullName = Common.PathCombine(root, "Fonts/Arial.ttf");
+			var fontFullName = FontInternals.GetFontFileName("Arial", "normal");
             var actual = FontInternals.GetPostscriptName(fontFullName);
             var expected = "ArialMT";
             Assert.AreEqual(expected,actual);
@@ -46,10 +45,9 @@ namespace Test.PsTool
         [Test]
         public void TimesTest()
         {
-            var root = Environment.GetEnvironmentVariable("SystemRoot");
-            var fontFullName = Common.PathCombine(root, "Fonts/timesbd.ttf");
+			var fontFullName = FontInternals.GetFontFileName("Times", "normal");
             var actual = FontInternals.GetPostscriptName(fontFullName);
-            var expected = "TimesNewRomanPS-BoldMT";
+            var expected = "TimesNewRomanPSMT";
             Assert.AreEqual(expected, actual);
         }
 
@@ -60,8 +58,7 @@ namespace Test.PsTool
         [Category("SkipOnTeamCity")]
         public void YiTest()
         {
-            var root = Environment.GetEnvironmentVariable("SystemRoot");
-            var fontFullName = Common.PathCombine(root, "Fonts/YI_PLUS.ttf");
+			var fontFullName = FontInternals.GetFontFileName("Yi", "normal");
             var actual = FontInternals.GetPostscriptName(fontFullName);
             var expected = "YiplusPhonetics";
             Assert.AreEqual(expected, actual);
@@ -74,8 +71,7 @@ namespace Test.PsTool
         [Category("SkipOnTeamCity")]
         public void ScheherazadeTest()
         {
-            var root = Environment.GetEnvironmentVariable("SystemRoot");
-            var fontFullName = Common.PathCombine(root, "Fonts/sch_gr_alpha9.ttf");
+			var fontFullName = FontInternals.GetFontFileName("Scheherazade", "normal");
             var actual = FontInternals.GetPostscriptName(fontFullName);
             var expected = "Scheherazade";
             Assert.AreEqual(expected, actual);
@@ -89,8 +85,7 @@ namespace Test.PsTool
         [Category("SkipOnTeamCity")]
         public void SimSunTest()
         {
-            var root = Environment.GetEnvironmentVariable("SystemRoot");
-            var fontFullName = Common.PathCombine(root, "Fonts/SimSun18030.ttc");
+			var fontFullName = FontInternals.GetFontFileName("SimSun-18030", "normal");
             var actual = FontInternals.GetPostscriptName(fontFullName);
             var expected = "SimSun-18030";
             Assert.AreEqual(expected, actual);
@@ -98,7 +93,7 @@ namespace Test.PsTool
 
 
         /// <summary>
-        ///A test Arial Postscript font name
+        ///Myriad Pro Postscript font name
         ///</summary>
         [Test]
         [Category("SkipOnTeamCity")]
@@ -119,8 +114,7 @@ namespace Test.PsTool
         [Category("SkipOnTeamCity")]
         public void SimSun2Test()
         {
-            var root = Environment.GetEnvironmentVariable("SystemRoot");
-            var fontFullName = Common.PathCombine(root, "Fonts/SimSunb.ttf");
+			var fontFullName = FontInternals.GetFontFileName("SimSun-ExtB", "normal");
             var actual = FontInternals.GetPostscriptName(fontFullName);
             var expected = "SimSun-ExtB";
             Assert.AreEqual(expected, actual);
@@ -155,10 +149,10 @@ namespace Test.PsTool
         [Category("SkipOnTeamCity")]
         public void GetFontFileNameTest3()
         {
-            string familyName = "Scheherazade Graphite Alpha";
+            string familyName = "Doulos SIL";
             string style = "Regular";
             string actual = FontInternals.GetFontFileName(familyName, style);
-            string expected = "sch_gr_alpha9.ttf";
+            string expected = "DoulosSILR.ttf";
             Assert.AreEqual(expected, Path.GetFileName(actual));
         }
 
@@ -167,10 +161,10 @@ namespace Test.PsTool
         [Category("SkipOnTeamCity")]
         public void GetFontFileNameTest4()
         {
-            string familyName = "Scheherazade Graphite Alpha";
+            string familyName = "Doulos SIL";
             string style = "Bold";
             string actual = FontInternals.GetFontFileName(familyName, style);
-            string expected = "sch_gr_alpha9.ttf";
+            string expected = "DoulosSILR.ttf";
             Assert.AreEqual(expected, Path.GetFileName(actual));
         }
 
@@ -233,9 +227,7 @@ namespace Test.PsTool
         [Category("SkipOnTeamCity")]
         public void ScheherazadeGraphiteTest()
         {
-            string familyName = "Scheherazade";
-            string style = "Regular";
-            string fontFullName = FontInternals.GetFontFileName(familyName, style);
+			var fontFullName = FontInternals.GetFontFileName("Scheherazade", "normal");
             var actual = FontInternals.IsGraphite(fontFullName);
             Assert.IsTrue(actual);
         }

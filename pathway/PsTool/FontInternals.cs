@@ -119,6 +119,8 @@ namespace SIL.Tool
 
         public static string GetPostscriptName(string fontFullName)
         {
+			if (!File.Exists(fontFullName)) return string.Empty;
+			
             FileStream fs = new FileStream(fontFullName, FileMode.Open, FileAccess.Read);
             BinaryReader r = new BinaryReader(fs);
             TT_OFFSET_TABLE ttResult = GetOffsetTable(r);
