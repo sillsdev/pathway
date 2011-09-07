@@ -1815,7 +1815,7 @@
             this.TLPanel2.Name = "TLPanel2";
             this.TLPanel2.RowCount = 1;
             this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 493F));
+            this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 498F));
             this.TLPanel2.Size = new System.Drawing.Size(542, 498);
             this.TLPanel2.TabIndex = 1;
             // 
