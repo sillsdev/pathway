@@ -441,10 +441,10 @@ namespace SIL.PublishingSolution
         protected void BuildApplication()
         {
             const string Creator = "GoBibleCreator.jar";
-            const string prog = "java.exe";
+            const string prog = "java";
             var creatorPath = Common.PathCombine("GoBible", Creator);
 			var creatorFullPath = Common.FromRegistry(creatorPath);
-            var progFolder = SubProcess.GetLocation(prog);
+           var progFolder = SubProcess.GetLocation(prog);
             var progFullName = Common.PathCombine(progFolder, prog);
             if (progFullName.EndsWith(".exe"))
             {

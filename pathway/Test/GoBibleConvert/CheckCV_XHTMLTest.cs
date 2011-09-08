@@ -165,7 +165,13 @@ namespace Test.GoBibleConvert
             BuildApplication();
             string actualFullName = _testFiles.Output(jarFile);
             string exepectedFullName = _testFiles.Expected(jarFile);
-            GoBibleTest.AreEqual(exepectedFullName, actualFullName);
+			Assert.IsTrue(File.Exists(actualFullName));
+			// TODO: for mono, FastZip is not creating subdirectories correctly when unpacking
+			// (see http://community.sharpdevelop.net/forums/p/9187/25577.aspx)
+			if (!Common.UsingMonoVM)
+			{
+            	GoBibleTest.AreEqual(exepectedFullName, actualFullName);
+			}
         }
 
         [Test]
@@ -190,7 +196,13 @@ namespace Test.GoBibleConvert
             BuildApplication();
             string actualFullName = Path.Combine(folderWithSpace, jarFile);
             string exepectedFullName = _testFiles.Expected(jarFile);
-            GoBibleTest.AreEqual(exepectedFullName, actualFullName);
+			Assert.IsTrue(File.Exists(actualFullName));
+			// TODO: for mono, FastZip is not creating subdirectories correctly when unpacking
+			// (see http://community.sharpdevelop.net/forums/p/9187/25577.aspx)
+			if (!Common.UsingMonoVM)
+			{
+            	GoBibleTest.AreEqual(exepectedFullName, actualFullName);
+			}
         }
 
         [Test]

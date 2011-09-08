@@ -25,7 +25,11 @@ namespace Test
         {
             // File names
             Assert.IsTrue(SIL.Tool.FileUtils.IsPathNameValid("regularFilename.test"));
-            Assert.IsFalse(SIL.Tool.FileUtils.IsPathNameValid("|BadFilename|.test"));
+			if (!Common.UsingMonoVM)
+			{
+				// Pipes (|) are invalid in Windows
+				Assert.IsFalse(SIL.Tool.FileUtils.IsPathNameValid("|BadFilename|.test"));
+			}
 
             // Absolute and relative path names
             Assert.IsTrue(SIL.Tool.FileUtils.IsPathNameValid(@"\Tmp\Pictures\books.gif"));
@@ -33,7 +37,11 @@ namespace Test
 
             // Path names with device
             Assert.IsTrue(SIL.Tool.FileUtils.IsPathNameValid(@"C:\Tmp\Pictures\books.gif"));
-            Assert.IsFalse(SIL.Tool.FileUtils.IsPathNameValid(@"C\:Tmp\Pictures\books.gif"));
+			if (!Common.UsingMonoVM)
+			{
+				// this is interpreted as a "rootless" path in mono
+				Assert.IsFalse(SIL.Tool.FileUtils.IsPathNameValid(@"C\:Tmp\Pictures\books.gif"));
+			}
         }
 
         #region ActualFilePath tests
@@ -106,9 +114,23 @@ namespace Test
         {
             MockFileOS fileOs = new MockFileOS();
             fileOs.AddExistingFile("AbC");
-            fileOs.m_existingDirectories.Add(@"c:\My Documents");
+			if (Common.UsingMonoVM)
+			{
+				fileOs.m_existingDirectories.Add(@"~/Documents");
+			}
+			else
+			{
+            	fileOs.m_existingDirectories.Add(@"c:\My Documents");
+			}
             ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
-            Assert.AreEqual(@"c:\My Documents\AbC", SIL.Tool.FileUtils.ActualFilePath(@"c:\My Documents\abc"));
+			if (Common.UsingMonoVM)
+			{
+	            Assert.AreEqual(@"~/Documents/AbC", SIL.Tool.FileUtils.ActualFilePath(@"~/Documents/abc"));
+			}
+			else
+			{
+	            Assert.AreEqual(@"c:\My Documents\AbC", SIL.Tool.FileUtils.ActualFilePath(@"c:\My Documents\abc"));
+			}
         }
 
         /// ------------------------------------------------------------------------------------
@@ -122,9 +144,23 @@ namespace Test
         {
             MockFileOS fileOs = new MockFileOS();
             fileOs.AddExistingFile("AbC");
-            fileOs.m_existingDirectories.Add("c:\\My Docum\u00e9nts");
+			if (Common.UsingMonoVM)
+			{
+				fileOs.m_existingDirectories.Add("~/Docum\u00e9nts");
+			}
+			else
+			{
+            	fileOs.m_existingDirectories.Add("c:\\My Docum\u00e9nts");
+			}
             ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
-            Assert.AreEqual("c:\\My Docum\u00e9nts\\AbC", SIL.Tool.FileUtils.ActualFilePath("c:\\My Docum\u0065\u0301nts\\abc"));
+			if (Common.UsingMonoVM)
+			{
+            	Assert.AreEqual("~/Docum\u00e9nts/AbC", SIL.Tool.FileUtils.ActualFilePath("~/Docum\u0065\u0301nts/abc"));
+			}
+			else
+			{
+            	Assert.AreEqual("c:\\My Docum\u00e9nts\\AbC", SIL.Tool.FileUtils.ActualFilePath("c:\\My Docum\u0065\u0301nts\\abc"));
+			}
         }
 
         /// ------------------------------------------------------------------------------------
@@ -138,9 +174,23 @@ namespace Test
         {
             MockFileOS fileOs = new MockFileOS();
             fileOs.AddExistingFile("AbC");
-            fileOs.m_existingDirectories.Add("c:\\My Docum\u0065\u0301nts");
+			if (Common.UsingMonoVM)
+			{
+				fileOs.m_existingDirectories.Add("~/Docum\u0065\u0301nts");
+			}
+			else
+			{
+            	fileOs.m_existingDirectories.Add("c:\\My Docum\u0065\u0301nts");
+			}
             ReflectionHelperLite.SetField(typeof(SIL.Tool.FileUtils), "s_fileos", fileOs);
-            Assert.AreEqual("c:\\My Docum\u0065\u0301nts\\AbC", SIL.Tool.FileUtils.ActualFilePath("c:\\My Docum\u00e9nts\\abc"));
+			if (Common.UsingMonoVM)
+			{
+            	Assert.AreEqual("~/Docum\u0065\u0301nts/AbC", SIL.Tool.FileUtils.ActualFilePath("~/Docum\u00e9nts/abc"));
+			}
+			else
+			{
+	            Assert.AreEqual("c:\\My Docum\u0065\u0301nts\\AbC", SIL.Tool.FileUtils.ActualFilePath("c:\\My Docum\u00e9nts\\abc"));
+			}
         }
         #endregion
 
