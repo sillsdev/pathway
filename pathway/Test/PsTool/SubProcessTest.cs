@@ -68,32 +68,15 @@ namespace Test.PsTool
         public void RunTest()
         {
             string instPath = Path.GetTempPath();
-            string name = "Find.exe";
-            string arg = "/?";
+            string name = "java";
+            string arg = "-version";
             bool wait = true;
-            const string EchoLog = "Find.log";
+            const string EchoLog = "JavaVersion.log";
             SubProcess.RedirectOutput = EchoLog;
             SubProcess.Run(instPath, name, arg, wait);
-            Assert.AreNotEqual(0, SubProcess.ExitCode);
             string logFullName = Path.Combine(instPath, EchoLog);
             Assert.IsTrue(File.Exists(logFullName));
-            StreamReader streamReader = new StreamReader(logFullName);
-            string result = streamReader.ReadToEnd();
-            streamReader.Close();
             File.Delete(logFullName);
-        }
-
-        /// <summary>
-        ///A test for ExistsOnPath
-        ///</summary>
-        [Test]
-        public void NotepadExistsOnPathTest()
-        {
-            string name = "Notepad.exe";
-            bool expected = true;
-            bool actual;
-            actual = SubProcess.ExistsOnPath(name);
-            Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
@@ -103,7 +86,16 @@ namespace Test.PsTool
         [Category("SkipOnTeamCity")]
         public void ExistsOnPathTest()
         {
-            string name = "candle.exe";
+            string name;
+            // pick something that is likely to exist on the path of each OS
+            if (Common.UsingMonoVM)
+            {
+                name = "java";
+            }
+            else
+            {
+                name = "Notepad.exe";
+            }
             bool expected = true;
             bool actual;
             actual = SubProcess.ExistsOnPath(name);

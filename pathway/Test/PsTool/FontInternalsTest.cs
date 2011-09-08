@@ -45,7 +45,7 @@ namespace Test.PsTool
         [Test]
         public void TimesTest()
         {
-			var fontFullName = FontInternals.GetFontFileName("Times", "normal");
+			var fontFullName = FontInternals.GetFontFileName("Times New Roman", "normal");
             var actual = FontInternals.GetPostscriptName(fontFullName);
             var expected = "TimesNewRomanPSMT";
             Assert.AreEqual(expected, actual);
@@ -56,11 +56,11 @@ namespace Test.PsTool
         ///</summary>
         [Test]
         [Category("SkipOnTeamCity")]
-        public void YiTest()
+        public void AbyssinicaTest()
         {
-			var fontFullName = FontInternals.GetFontFileName("Yi", "normal");
+			var fontFullName = FontInternals.GetFontFileName("Abyssinica SIL", "normal");
             var actual = FontInternals.GetPostscriptName(fontFullName);
-            var expected = "YiplusPhonetics";
+            var expected = "AbyssinicaSIL";
             Assert.AreEqual(expected, actual);
         }
 
@@ -74,49 +74,6 @@ namespace Test.PsTool
 			var fontFullName = FontInternals.GetFontFileName("Scheherazade", "normal");
             var actual = FontInternals.GetPostscriptName(fontFullName);
             var expected = "Scheherazade";
-            Assert.AreEqual(expected, actual);
-        }
-
-
-        /// <summary>
-        ///A test Arial Postscript font name
-        ///</summary>
-        [Test]
-        [Category("SkipOnTeamCity")]
-        public void SimSunTest()
-        {
-			var fontFullName = FontInternals.GetFontFileName("SimSun-18030", "normal");
-            var actual = FontInternals.GetPostscriptName(fontFullName);
-            var expected = "SimSun-18030";
-            Assert.AreEqual(expected, actual);
-        }
-
-
-        /// <summary>
-        ///Myriad Pro Postscript font name
-        ///</summary>
-        [Test]
-        [Category("SkipOnTeamCity")]
-        public void MyriadProTest()
-        {
-            var root = Environment.GetEnvironmentVariable("SystemRoot");
-            var fontFullName = Common.PathCombine(root, "Fonts/MyriadPro-Regular.otf");
-            var actual = FontInternals.GetPostscriptName(fontFullName);
-            var expected = "MyriadPro-Regular";
-            Assert.AreEqual(expected, actual);
-        }
-
-
-        /// <summary>
-        ///A test Arial Postscript font name
-        ///</summary>
-        [Test]
-        [Category("SkipOnTeamCity")]
-        public void SimSun2Test()
-        {
-			var fontFullName = FontInternals.GetFontFileName("SimSun-ExtB", "normal");
-            var actual = FontInternals.GetPostscriptName(fontFullName);
-            var expected = "SimSun-ExtB";
             Assert.AreEqual(expected, actual);
         }
 
@@ -156,34 +113,10 @@ namespace Test.PsTool
             Assert.AreEqual(expected, Path.GetFileName(actual));
         }
 
-
-        [Test]
-        [Category("SkipOnTeamCity")]
-        public void GetFontFileNameTest4()
-        {
-            string familyName = "Doulos SIL";
-            string style = "Bold";
-            string actual = FontInternals.GetFontFileName(familyName, style);
-            string expected = "DoulosSILR.ttf";
-            Assert.AreEqual(expected, Path.GetFileName(actual));
-        }
-
-
-        [Test]
-        [Category("SkipOnTeamCity")]
-        public void GetFontFileNameTest5()
-        {
-            string familyName = "Yi plus Phonetics";
-            string style = "Bold";
-            string actual = FontInternals.GetFontFileName(familyName, style);
-            string expected = "YI_PLUS.ttf";
-            Assert.AreEqual(expected, Path.GetFileName(actual));
-        }
-        
         
         [Test]
         [Category("SkipOnTeamCity")]
-        public void CharisBoldTest2()
+        public void CharisBoldTest()
         {
             string familyName = "Charis SIL";
             string style = "Bold";
@@ -221,7 +154,7 @@ namespace Test.PsTool
         }
 
         /// <summary>
-        ///Test whether Scheherazade is a Graphite font (should be true)
+        ///Test whether Scheherazade is a Graphite font (should be false)
         ///</summary>
         [Test]
         [Category("SkipOnTeamCity")]
@@ -229,7 +162,7 @@ namespace Test.PsTool
         {
 			var fontFullName = FontInternals.GetFontFileName("Scheherazade", "normal");
             var actual = FontInternals.IsGraphite(fontFullName);
-            Assert.IsTrue(actual);
+            Assert.IsFalse(actual);
         }
     }
 }

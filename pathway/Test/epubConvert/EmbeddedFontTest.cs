@@ -37,8 +37,8 @@ namespace Test.epubConvert
             Assert.IsTrue(FontInternals.IsInstalled("Arial"));
             var arialFont = new EmbeddedFont("Arial");
             Assert.IsFalse(arialFont.SILFont);
-            const string fontFilename = "arial.ttf";
-            Assert.AreEqual(fontFilename, Path.GetFileName(arialFont.Filename));
+            const string fontFilename = "Arial.ttf";
+            Assert.IsTrue(fontFilename.ToLower().Equals(Path.GetFileName(arialFont.Filename).ToLower()));
         }
 
         /// <summary>
@@ -48,8 +48,8 @@ namespace Test.epubConvert
         [Category("SkipOnTeamCity")]
         public void AbyssinicaTest()
         {
-            Assert.IsTrue(FontInternals.IsInstalled("Abyssinica"));
-            var silFont = new EmbeddedFont("Abyssinica");
+            Assert.IsTrue(FontInternals.IsInstalled("Abyssinica SIL"));
+            var silFont = new EmbeddedFont("Abyssinica SIL");
             Assert.IsTrue(silFont.SILFont);
             Assert.IsTrue(silFont.Serif);
         }
@@ -61,24 +61,12 @@ namespace Test.epubConvert
         [Category("SkipOnTeamCity")]
         public void AndikaTest()
         {
-            var silFont = new EmbeddedFont("Andika");
-            Assert.IsTrue(FontInternals.IsInstalled("Andika"));
+            var silFont = new EmbeddedFont("Andika Basic");
+            Assert.IsTrue(FontInternals.IsInstalled("Andika Basic"));
             Assert.IsTrue(silFont.SILFont);
             Assert.IsFalse(silFont.Serif);
         }
 
-        /// <summary>
-        /// Test the Apparatus SIL font
-        /// </summary>
-        [Test]
-        [Category("SkipOnTeamCity")]
-        public void ApparatusTest()
-        {
-            var silFont = new EmbeddedFont("Apparatus SIL");
-            Assert.IsTrue(FontInternals.IsInstalled("Apparatus SIL"));
-            Assert.IsTrue(silFont.SILFont);
-            Assert.IsTrue(silFont.Serif);
-        }
         /// <summary>
         /// Test the Charis SIL font
         /// </summary>
@@ -98,8 +86,8 @@ namespace Test.epubConvert
         [Category("SkipOnTeamCity")]
         public void DaiBannaTest()
         {
-            var silFont = new EmbeddedFont("Dai Banna");
-            Assert.IsTrue(FontInternals.IsInstalled("Dai Banna"));
+            var silFont = new EmbeddedFont("Dai Banna SIL Book");
+            Assert.IsTrue(FontInternals.IsInstalled("Dai Banna SIL Book"));
             Assert.IsTrue(silFont.SILFont);
             Assert.IsTrue(silFont.Serif);
         }
@@ -146,44 +134,8 @@ namespace Test.epubConvert
         [Category("SkipOnTeamCity")]
         public void GentiumTest()
         {
-            var silFont = new EmbeddedFont("Gentium Basic");
-            Assert.IsTrue(FontInternals.IsInstalled("Gentium Basic"));
-            Assert.IsTrue(silFont.SILFont);
-            Assert.IsTrue(silFont.Serif);
-        }
-        /// <summary>
-        /// Test the SIL Lateef font
-        /// </summary>
-        [Test]
-        [Category("SkipOnTeamCity")]
-        public void LateefTest()
-        {
-            var silFont = new EmbeddedFont("Lateef");
-            Assert.IsTrue(FontInternals.IsInstalled("Lateef"));
-            Assert.IsTrue(silFont.SILFont);
-            Assert.IsTrue(silFont.Serif);
-        }
-        /// <summary>
-        /// Test the SIL Nuosu (Yi) font
-        /// </summary>
-        [Test]
-        [Category("SkipOnTeamCity")]
-        public void NuosuTest()
-        {
-            var silFont = new EmbeddedFont("Nuosu");
-            Assert.IsTrue(FontInternals.IsInstalled("Nuosu"));
-            Assert.IsTrue(silFont.SILFont);
-            Assert.IsTrue(silFont.Serif);
-        }
-        /// <summary>
-        /// Test the SIL Padauk font
-        /// </summary>
-        [Test]
-        [Category("SkipOnTeamCity")]
-        public void PadaukTest()
-        {
-            var silFont = new EmbeddedFont("Padauk");
-            Assert.IsTrue(FontInternals.IsInstalled("Padauk"));
+            var silFont = new EmbeddedFont("Gentium");
+            Assert.IsTrue(FontInternals.IsInstalled("Gentium"));
             Assert.IsTrue(silFont.SILFont);
             Assert.IsTrue(silFont.Serif);
         }
@@ -211,18 +163,5 @@ namespace Test.epubConvert
             Assert.IsTrue(silFont.SILFont);
             Assert.IsTrue(silFont.Serif);
         }
-        /// <summary>
-        /// Test the SIL Tai Heritage Pro font
-        /// </summary>
-        [Test]
-        [Category("SkipOnTeamCity")]
-        public void TaiHeritageProTest()
-        {
-            var silFont = new EmbeddedFont("Tai Heritage Pro");
-            Assert.IsTrue(FontInternals.IsInstalled("Tai Heritage Pro"));
-            Assert.IsTrue(silFont.SILFont);
-            Assert.IsTrue(silFont.Serif);
-        }
-
     }
 }

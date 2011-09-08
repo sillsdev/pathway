@@ -145,10 +145,20 @@ namespace SIL.Tool
         public static bool ExistsOnPath(string name)
         {
             Location = "";
-            var currentPath = Environment.GetEnvironmentVariable("path");
-            if (String.IsNullOrEmpty(currentPath))
-                return false;
-            string [] directories = currentPath.Split(new [] { ';' });
+            string [] directories;
+			string currentPath;
+            if (Common.UsingMonoVM)
+			{
+				currentPath = Environment.GetEnvironmentVariable("PATH");
+				if (String.IsNullOrEmpty(currentPath)) return false;
+				directories = currentPath.Split(new [] { ':' });
+			}
+			else
+			{
+				currentPath = Environment.GetEnvironmentVariable("path");
+				if (String.IsNullOrEmpty(currentPath)) return false;
+				directories = currentPath.Split(new [] { ';' });
+			}
             foreach (string directory in directories)
                 try
                 {
