@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Drawing.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using SIL.Tool;
@@ -877,6 +878,10 @@ namespace SIL.PublishingSolution
             }
         }
 
+		/// <summary>
+		/// Parses through the fonts mentioned in the CSS file and attempts to find the font files that
+	    /// match.
+		/// </summary>
         public ArrayList GetFontList(string cssFileWithPath)
         {
             ArrayList fontName = new ArrayList();
@@ -892,26 +897,65 @@ namespace SIL.PublishingSolution
                         fontName.Add(cssClass[className.Key]["font-family"]);
                 }
             }
-            RegistryKey fontsKey;
-            try
-            {
-                fontsKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\Fonts\");
-
-                string[] fontNames = fontsKey.GetValueNames();
-                foreach (string font in fontName)
-                {
-                    for (int i = 0; i < fontNames.Length; i++)
-                    {
-                        if (fontNames[i].IndexOf(font) < 0) continue;
-                        Object fName = fontsKey.GetValue(fontNames[i]);
-                        fontList.Add(fName);
-                    }
-                }
-                fontList.Sort();
-            }
-            catch (Exception)
-            {
-            }
+			if (Common.UsingMonoVM)
+			{
+				// mono / linux -
+				// The idea here is to iterate through the font family names in the InstalledFontCollection
+				// looking for our font name (e.g., "Arial" inside "Arial" and "Arial Black"). Once we find a match,
+				// we'll do a filename lookup for each possible style of the font.
+				var ifc = new InstalledFontCollection();
+				var fontFamilies = ifc.Families;
+				foreach (string font in fontName)
+				{
+					foreach(var family in fontFamilies)
+					{
+						if (family.Name.ToLower().Contains(font.ToLower()))
+						{
+							// found a possible match -- try to get each possible font style's file name that's installed
+							// on the local machine
+							string[] styles = 
+							{
+								"Regular",
+								"Bold",
+								"Italic",
+								"Bold Italic"
+							};
+							for (int style = 0; style < 4; style++)
+							{
+								var fullName = FontInternals.GetFontFileName(family.Name, styles[style]);
+								if (fullName.Length > 0) // if length > 0, it's installed
+								{
+									// this style is installed on the machine - add it to the list
+									fontList.Add(Path.GetFileName(fullName));
+								}
+							}
+						}
+					}
+				}
+			}
+			else // windows
+			{
+				// go looking through the registry for matches for our font list
+	            RegistryKey fontsKey;
+	            try
+	            {
+	                fontsKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\Fonts\");
+	
+	                string[] fontNames = fontsKey.GetValueNames();                foreach (string font in fontName)
+	                {
+	                    for (int i = 0; i < fontNames.Length; i++)
+	                    {
+	                        if (fontNames[i].IndexOf(font) < 0) continue;
+	                        Object fName = fontsKey.GetValue(fontNames[i]);
+	                        fontList.Add(fName);
+	                    }
+	                }
+	                fontList.Sort();
+	            }
+	            catch (Exception)
+	            {
+	            }
+			}
             return fontList;
         }
 

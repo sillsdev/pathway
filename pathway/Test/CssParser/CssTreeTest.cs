@@ -41,22 +41,40 @@ namespace Test.CssParserTest
             for (int i = 0; i < fontList.Count; i += 1)
                 fontList[i] = fontList[i].ToString().ToUpper();
             ArrayList expectedFontList = new ArrayList();
-            expectedFontList.Add("ARIAL.TTF");
-            expectedFontList.Add("ARIALBD.TTF");
-            expectedFontList.Add("ARIALBI.TTF");
-            expectedFontList.Add("ARIALI.TTF");
-            expectedFontList.Add("ARIBLK.TTF");
-            expectedFontList.Add("ARIALN.TTF");
-            expectedFontList.Add("ARLRDBD.TTF");
-            expectedFontList.Add("ARIALNB.TTF");
-            expectedFontList.Add("ARIALNBI.TTF");
-            expectedFontList.Add("ARIALNI.TTF");
-            expectedFontList.Add("ARIALUNI.TTF");
-            expectedFontList.Add("TIMES.TTF");
-            expectedFontList.Add("TIMESBD.TTF");
-            expectedFontList.Add("TIMESBI.TTF");
-            expectedFontList.Add("TIMESI.TTF");
+			if (Common.UsingMonoVM)
+			{
+				// Microsoft font packaging for linux has some different file names (and less choices)
+	            expectedFontList.Add("ARIAL.TTF");
+	            expectedFontList.Add("ARIAL_BLACK.TTF");
+	            expectedFontList.Add("ARIAL_BOLD.TTF");
+	            expectedFontList.Add("ARIAL_BOLD_ITALIC.TTF");
+	            expectedFontList.Add("ARIALI.TTF");
+	            expectedFontList.Add("TIMES.TTF");
+	            expectedFontList.Add("TIMES_NEW_ROMAN_BOLD_ITALIC.TTF");
+	            expectedFontList.Add("TIMESBD.TTF");
+	            expectedFontList.Add("TIMESI.TTF");
+			}
+			else 
+			{
+	            expectedFontList.Add("ARIAL.TTF");
+	            expectedFontList.Add("ARIALBD.TTF");
+	            expectedFontList.Add("ARIALBI.TTF");
+	            expectedFontList.Add("ARIALI.TTF");
+	            expectedFontList.Add("ARIBLK.TTF");
+	            expectedFontList.Add("ARIALN.TTF");
+	            expectedFontList.Add("ARLRDBD.TTF");
+	            expectedFontList.Add("ARIALNB.TTF");
+	            expectedFontList.Add("ARIALNBI.TTF");
+	            expectedFontList.Add("ARIALNI.TTF");
+	            expectedFontList.Add("ARIALUNI.TTF");
+	            expectedFontList.Add("TIMES.TTF");
+	            expectedFontList.Add("TIMESBD.TTF");
+	            expectedFontList.Add("TIMESBI.TTF");
+	            expectedFontList.Add("TIMESI.TTF");
+			}
+			// sort both lists to line them up
             expectedFontList.Sort();
+			fontList.Sort();
             CollectionAssert.AreEqual(expectedFontList, fontList, "GetFontList Error");
         }
 
