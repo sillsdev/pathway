@@ -93,6 +93,13 @@ sudo cp $SRCDIR/XeTex/$builddir/* $outdir
 sudo cp $SRCDIR/XeTeXConvert/$builddir/* $outdir
 # YouVersion is no longer supported
 #sudo cp $SRCDIR/YouVersionConvert/$builddir/* $outdir
+echo Setting permissions...
+sudo chmod 777 $outdir/*
+sudo chmod 777 $outdir/Icons/*
+sudo chmod 777 $outdir/Graphic/*
+sudo chmod 777 $outdir/Copyrights/*
+sudo chmod 777 $outdir/Style*
+sudo chmod 777 $outdir/*StyleSettings.*
 echo --------------------------------------------------------------------------
 right_now=$(date +"%x %r %Z")
 time_stamp="Process finished on $right_now by $USER"
