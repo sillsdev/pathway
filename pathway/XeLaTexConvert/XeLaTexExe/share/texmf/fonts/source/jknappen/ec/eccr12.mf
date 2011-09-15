@@ -1,6 +1,0 @@
-% This is eccr12.mf in text format as of March, 4,  1997
-if unknown exbase: input exbase fi;
-
-
-gensize:=12;
-generate eccr
