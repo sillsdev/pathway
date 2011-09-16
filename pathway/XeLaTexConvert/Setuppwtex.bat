@@ -12,7 +12,7 @@ echo TEXMFLOCAL %idir%/texmf-local>>tlpw.profile
 echo TEXMFSYSCONFIG %idir%/texmf-config>>tlpw.profile
 echo TEXMFSYSVAR %idir%/texmf-var>>tlpw.profile
 type tlpw2.pro>>tlpw.profile
-call install-tl-advanced -gui perltk -profile tlpw.profile
+call install-tl-advanced -profile tlpw.profile
 cd %idir%
 cd bin\win32
 call tlmgr install latex l3kernel l3packages etoolbox

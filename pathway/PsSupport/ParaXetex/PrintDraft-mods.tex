@@ -1,0 +1,111 @@
+%%%%% Page Setup %%%%%
+
+%\CropMarkstrue
+
+%% Margins
+%\BindingGutter=4mm
+%\BindingGuttertrue
+%\def\TopMarginFactor{1.4}
+%\def\BottomMarginFactor{0.8}
+%\def\SideMarginFactor{0.8}
+
+%% Columns
+%\def\ColumnGutterFactor{15.0}
+
+%%%%% Text Spacing %%%%%
+
+%\def\LineSpacingFactor{1.0}
+%\def\VerticalSpaceFactor{1.0}
+
+%%%%% Fonts %%%%%
+%% Faces
+% This example shows a method for producing fake bold and italic faces.
+% Replace "My Font" and "..." with real values (and remove script and/or mapping parameters as needed)
+%\def\regular{"My Font:script=...;mapping=..."}
+%\def\bold{"My Font:script=...;mapping=...;embolden=2"}
+%\def\italic{"My Font:script=...;mapping=...;slant=0.2"}
+%\def\bolditalic{"My Font:script=...;mapping=...;embolden=2;slant=0.2"}
+
+%%%%% Layout %%%%%
+
+% Specify ISO 639-1 language code.
+% XeTeX will use ICU line break info (useful for scripts which do not use word spaces).
+%\XeTeXlinebreaklocale ""
+% Introduce some stretchability (glue) at each potential break
+%\XeTeXlinebreakskip=0em plus 0.1em minus 0.01em
+
+%%% Chapters & Verses %%%
+
+%\OmitVerseNumberOnetrue
+%\def\AfterChapterSpaceFactor{10}
+
+%%%%% Running Header/Footer %%%%%
+
+%\def\HeaderPosition{0.6}
+%\def\FooterPosition{0.6}
+
+% Set the items to print at left/center/right of odd and even pages separately
+% Possible contents:
+%   \rangeref = Scripture reference of the range of text on the page;
+%   \firstref = reference of the first verse on the page
+%   \lastref = reference of the last verse on the page
+%   \pagenumber = the page number
+%   \empty = print nothing in this position
+
+%% Even Header
+%\def\RHevenleft{\firstref}
+%\def\RHevencenter{\empty}
+%\def\RHevenright{\pagenumber}
+
+%% Odd Header
+%\def\RHoddleft{\pagenumber}
+%\def\RHoddcenter{\empty}
+%\def\RHoddright{\lastref} 
+
+%% Footer
+%\def\RFoddcenter{\empty}
+%\def\RFevencenter{\empty}
+%\def\RFtitlecenter{\empty}
+
+%% Other Header Setup
+%\RHruleposition=6pt
+%\def\RangeSeparator{\kern.1em\char"2013\kern.1em} % what to put between first - last of a reference range
+%\def\ChapterVerseSeparator{\kern.02em.\kern.02em} % what to put between chapter:verse
+
+%%%%% Notes %%%%%
+
+%\AutoCallerStartChar=97
+%\AutoCallerNumChars=26
+%\AutoCallers{f}{}
+%\AutoCallers{x}{}
+%\NumericCallers{f}
+%\NumericCallers{x}
+%\PageResetCallers{f}
+%\PageResetCallers{x}
+%\OmitCallerInNote{f}
+%\OmitCallerInNote{x}
+
+%% Disable footnote rule
+%\def\footnoterule{}
+
+\ParagraphedNotes{x}
+
+%%%%% Illustrations %%%%%
+
+%\PicPath={c:/My Paratext Projects/<ProjectName>/figures}
+
+%%%%% Hyphenation %%%%%
+
+% Allocating and using a new language without any hyphenation rules defined effectively disables hyphenation.
+% Hyphenation support is provided through hyphenatedWords.txt.
+\newlanguage\printDraftLanguage
+\language\printDraftLanguage
+
+%%%%% Hooks %%%%%
+
+%\sethook{location}{marker}{insert}
+
+%% before -- prior to the start of the par containing the selected style text (before its definition is applied)
+%% after -- after the end of the par containing the selected style text (after its definition is terminated)
+%% start -- before the start of the selected style text (but after the style par definition is applied)
+%% end -- after the end of the selected style text (but before the style par definition is terminated)

@@ -17,6 +17,7 @@ xcopy %idir%\bin\win32\fc-list.exe %dst%\bin\win32
 xcopy %idir%\bin\win32\fc-match.exe %dst%\bin\win32
 xcopy %idir%\bin\win32\icudt*.dll %dst%\bin\win32
 xcopy %idir%\bin\win32\kpathsea*.dll %dst%\bin\win32
+xcopy %idir%\bin\win32\mktexlsr.exe %dst%\bin\win32
 xcopy %idir%\bin\win32\teckit_compile.exe %dst%\bin\win32
 xcopy %idir%\bin\win32\tex.dll %dst%\bin\win32
 xcopy %idir%\bin\win32\tex.exe %dst%\bin\win32
@@ -24,3 +25,13 @@ xcopy %idir%\bin\win32\xdvipdfmx.exe %dst%\bin\win32
 xcopy %idir%\bin\win32\xelatex.exe %dst%\bin\win32
 xcopy %idir%\bin\win32\xetex.exe %dst%\bin\win32
 del %dst%\texmf-var\fonts\cache\*.cache-3
+
+rem Add ptx2pdf Paratext conversion
+xcopy Paratexmf %dst%\texmf /i /s /q /y
+set path=%dst%\bin\win32;%path%
+mktexlsr %dst%\texmf
+mktexlsr %dst%\texmf-config
+mktexlsr %dst%\texmf-dist
+mktexlsr %dst%\texmf-local
+mktexlsr %dst%\texmf-var
+
