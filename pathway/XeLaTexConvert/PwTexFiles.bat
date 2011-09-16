@@ -1,5 +1,5 @@
 rem PwTexFiles.bat 9/15/2011 gt - after using setuppwtl.bat this batch creates the files to install
-set idir=c:\pwtex
+set idir=XeLaTexExe
 if not "%1"=="" set idir=%1
 set dst=..\BuildPathway\Files\pwtex
 if not "%2"=="" set dst=%2
