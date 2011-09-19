@@ -49,7 +49,7 @@ namespace Test.XeLatex
             _testFolderPath = PathPart.Bin(Environment.CurrentDirectory, "/XeLatex/TestFiles");
             _inputPath = Common.PathCombine(_testFolderPath, "input");
             _outputPath = Common.PathCombine(_testFolderPath, "output");
-            _expectedPath = Common.PathCombine(_testFolderPath, "expected");
+            _expectedPath = Common.PathCombine(_testFolderPath, "Expected");
             _projInfo.ProjectPath = _testFolderPath;
             _cssProperty = new Dictionary<string, Dictionary<string, string>>();
             Common.SupportFolder = "";
@@ -774,7 +774,7 @@ namespace Test.XeLatex
         {
             string texOutput = FileOutput(file + ".tex");
             string texExpected = FileExpected(file + ".tex");
-            FileAssert.AreEqual(texOutput, texExpected, file + " in tex ");
+            TextFileAssert.AreEqual(texOutput, texExpected, file + " in tex ");
         }
 
         private void ExportProcess(string file)
