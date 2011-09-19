@@ -48,13 +48,5 @@ namespace Test.PsTool
             string actual = PathwayPath.GetPathwayDir();
             Assert.IsTrue(actual.Replace(" (x86)", "").Substring(1) == @":\Program Files\SIL\Pathway7\" || actual.Contains("ReSharper") || actual.Contains("NUnit"));
         }
-
-        [Test]
-        [Category("SkipOnTeamCity")]
-        public void GetCtxTest()
-        {
-            string actual = PathwayPath.GetCtxDir();
-            Assert.IsFalse(string.IsNullOrEmpty(actual), "Pathway ConTeXt not installed!");
-        }
     }
 }
