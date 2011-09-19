@@ -5,7 +5,7 @@
 			<ComponentRef Id="ReadMeShortcutApp"/>
 			<ComponentRef Id="LicenseShortcutApp"/>
 			<ComponentRef Id="RegistryEntries"/>
-			%(XeLaTeXFeatures)s
+			%(pwtexFeatures)s
 		</Feature>
 	</Fragment>
 </Wix>

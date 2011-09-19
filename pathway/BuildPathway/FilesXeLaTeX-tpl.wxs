@@ -3,8 +3,8 @@
 	<Fragment Id="FilesFragment">
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="XELATEXTARGETDIR">
-				<Directory Id="INSTALLDIR" LongName="Pathway XeLaTeX" Name="PwXeLaTx">
-					%(XeLaTeXFiles)s
+				<Directory Id="INSTALLDIR" Name="pwtex">
+					%(pwtexFiles)s
 				</Directory>
 			</Directory>
 		</Directory>

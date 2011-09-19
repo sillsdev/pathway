@@ -62,6 +62,8 @@
 					Key="Software\SIL\PathwayXeLaTeX" />
 				<Registry Root="HKLM" Action="write" 
 					Key="Software\SIL\PathwayXeLaTeX" Name="XeLaTexDir" Type="string" Value="[INSTALLDIR]" />
+				<Registry Root="HKLM" Action="write" 
+					Key="Software\SIL\PathwayXeLaTeX" Name="XeLaTexVer" Type="string" Value="1.0" />
 			</Component>
 		</DirectoryRef>
 	</Product>
