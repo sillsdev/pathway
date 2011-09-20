@@ -244,6 +244,7 @@
     </Compile>
     <Compile Include="UndoRedo.cs" />
     <Compile Include="VerboseClass.cs" />
+    <Compile Include="XeLaTexInstallation.cs" />
     <Compile Include="XmlFun.cs" />
     <Compile Include="FileData.cs" />
     <Compile Include="FileUtils.cs" />

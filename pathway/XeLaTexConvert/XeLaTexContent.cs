@@ -882,7 +882,7 @@ namespace SIL.PublishingSolution
                 {
                     picFile = Path.GetFileName(fileName1);
                     string toPath = Path.Combine(_inputPath, picFile);
-                    string str = PathwayPath.GetXeLaTexDir();
+                    string str = XeLaTexInstallation.GetXeLaTexDir();
                     string instPath = Common.PathCombine(str, "bin");
 
                     string dest = Common.PathCombine(instPath, Path.GetFileName(picFile));

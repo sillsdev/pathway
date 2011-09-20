@@ -44,7 +44,7 @@ namespace SIL.PublishingSolution
             {
                 returnValue = true;
             }
-            if (string.IsNullOrEmpty(PathwayPath.GetXeLaTexDir()))
+            if (string.IsNullOrEmpty(XeLaTexInstallation.GetXeLaTexDir()))
             {
                 returnValue = false;
             }
@@ -106,7 +106,7 @@ namespace SIL.PublishingSolution
         public void CallXeLaTex(string xeLatexFullFile, bool openFile, Dictionary<string, string> ImageFilePath)
         {
 
-            string str = PathwayPath.GetXeLaTexDir();
+            string str = XeLaTexInstallation.GetXeLaTexDir();
 
             string instPath = Common.PathCombine(str, "bin");
             string originalDirectory = Directory.GetCurrentDirectory();

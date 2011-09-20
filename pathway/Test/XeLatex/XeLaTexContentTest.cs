@@ -764,6 +764,24 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
+        [Test]
+        public void XeLaTexPath()
+        {
+            Assert.AreEqual(@"C:\pwtex\", XeLaTexInstallation.GetXeLaTexDir()); 
+        }
+
+        [Test]
+        public void XeLaTexVersion()
+        {
+            Assert.IsTrue(XeLaTexInstallation.CheckXeLaTexVersion());
+        }
+
+        [Test]
+        public void XeLaTexFontCount()
+        {
+            XeLaTexInstallation.SetXeLaTexFontCount(1);
+            Assert.AreEqual(1, XeLaTexInstallation.GetXeLaTexFontCount());
+        }
         #endregion
 
 

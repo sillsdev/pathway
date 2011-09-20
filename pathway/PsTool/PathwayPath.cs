@@ -75,45 +75,5 @@ namespace SIL.Tool
             catch { }
             return pathwayDir;
         }
-
-        /// ------------------------------------------------------------------------------------
-        /// <summary>
-        /// Gets the directory for the ConTeXt software for the XeTeX back end.
-        /// </summary>
-        /// 
-        /// <returns>
-        /// name or the directory or string.Empty if the directory name isn't in the registry.
-        /// </returns>
-        /// ------------------------------------------------------------------------------------
-        public static string GetCtxDir()
-        {
-            object regObj;
-            if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.CompanyKeyLocalMachine,
-                                                  "PwCtx", "ConTeXtDir", out regObj))
-            {
-                return (string)regObj;
-            }
-            return "";
-        }
-
-        /// ------------------------------------------------------------------------------------
-        /// <summary>
-        /// Gets the directory for the XeLaTeX software for the XeTeX back end.
-        /// </summary>
-        /// 
-        /// <returns>
-        /// name or the directory or string.Empty if the directory name isn't in the registry.
-        /// </returns>
-        /// ------------------------------------------------------------------------------------
-        public static string GetXeLaTexDir()
-        {
-            object regObj;
-            if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.CompanyKeyLocalMachine,
-                                                  "PathwayXeLaTeX", "XeLaTexDir", out regObj))
-            {
-                return (string)regObj;
-            }
-            return "";
-        }
     }
 }
