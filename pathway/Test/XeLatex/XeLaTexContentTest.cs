@@ -765,12 +765,14 @@ namespace Test.XeLatex
         }
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void XeLaTexPath()
         {
             Assert.AreEqual(@"C:\pwtex\", XeLaTexInstallation.GetXeLaTexDir()); 
         }
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void XeLaTexVersion()
         {
             Assert.IsTrue(XeLaTexInstallation.CheckXeLaTexVersion());
