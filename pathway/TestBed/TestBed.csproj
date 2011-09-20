@@ -320,10 +320,6 @@
       <Project>{65D64C80-2AA4-4BD0-AC87-B4C2B3720012}</Project>
       <Name>XeLaTexConvert</Name>
     </ProjectReference>
-    <ProjectReference Include="..\XeTex\XeTex.csproj">
-      <Project>{D1ACC574-32FD-4EF3-B993-79D18B759B77}</Project>
-      <Name>XeTex</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

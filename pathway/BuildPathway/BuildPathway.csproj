@@ -301,10 +301,6 @@
       <Project>{12FE8988-5957-427D-BA6C-B4C601F5A558}</Project>
       <Name>WordPressConvert</Name>
     </ProjectReference>
-    <ProjectReference Include="..\XeTex\XeTex.csproj">
-      <Project>{D1ACC574-32FD-4EF3-B993-79D18B759B77}</Project>
-      <Name>XeTex</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="License.rtf" />
@@ -451,11 +447,11 @@
     <Copy SourceFiles="@(XeLaTexVar)" DestinationFiles="@(XeLaTexVar->'Files\pwtex\texmf-var\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(XeLaTexBin)" DestinationFiles="@(XeLaTexBin->'Files\pwtex\bin\win32\%(Filename)%(Extension)')" />
     <MakeDir Directories="Files\pwtex\temp" />
-    <Exec Command="echo This file is a place holder>Files\pwtex\temp\readme.txt" />
+    <Exec Command="echo This file is a place holder&gt;Files\pwtex\temp\readme.txt" />
     <Delete Files="@(XeLaTexCache)" />
     <Copy SourceFiles="@(Paratexmf)" DestinationFiles="@(Paratexmf->'Files\pwtex\texmf\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Exec Command="mktexlsr ..\..\texmf" WorkingDirectory="Files\pwtex\bin\win32"/>
-    <Exec Command="mktexlsr ..\..\texmf-var" WorkingDirectory="Files\pwtex\bin\win32"/>
+    <Exec Command="mktexlsr ..\..\texmf" WorkingDirectory="Files\pwtex\bin\win32" />
+    <Exec Command="mktexlsr ..\..\texmf-var" WorkingDirectory="Files\pwtex\bin\win32" />
   </Target>
   <ItemGroup>
     <XeLaTexExe Include="..\XeLaTexConvert\XeLaTexExe\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\**\.svn\**\*.*" />

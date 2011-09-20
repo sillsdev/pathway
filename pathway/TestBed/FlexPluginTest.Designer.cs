@@ -257,28 +257,6 @@
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
-            // button8
-            // 
-            this.button8.AccessibleName = "BtnFlexTest";
-            this.button8.Location = new System.Drawing.Point(222, 159);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(94, 28);
-            this.button8.TabIndex = 60;
-            this.button8.Text = "Direct Tex File";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
-            // btnXeTex
-            // 
-            this.btnXeTex.AccessibleName = "BtnFlexTest";
-            this.btnXeTex.Location = new System.Drawing.Point(142, 159);
-            this.btnXeTex.Name = "btnXeTex";
-            this.btnXeTex.Size = new System.Drawing.Size(67, 28);
-            this.btnXeTex.TabIndex = 59;
-            this.btnXeTex.Text = "XeTex";
-            this.btnXeTex.UseVisualStyleBackColor = true;
-            this.btnXeTex.Click += new System.EventHandler(this.btnXeTex_Click);
-            // 
             // button7
             // 
             this.button7.AccessibleName = "BtnFlexTest";
