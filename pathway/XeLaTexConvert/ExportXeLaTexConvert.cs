@@ -18,6 +18,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using SIL.Tool;
@@ -99,8 +100,30 @@ namespace SIL.PublishingSolution
             {
                 imgPath = newProperty["ImagePath"];
             }
+            UpdateXeLaTexFontCacheIfNecessary();
             CallXeLaTex(xeLatexFullFile, true, imgPath);
             return true;
+        }
+
+        protected void UpdateXeLaTexFontCacheIfNecessary()
+        {
+            Debug.Assert(XeLaTexInstallation.GetXeLaTexDir() != "");
+            var systemFontList = FontFamily.Families;
+            if (systemFontList.Length != XeLaTexInstallation.GetXeLaTexFontCount())
+            {
+                using (var p2 = new Process())
+                {
+                    var xelatexPath = XeLaTexInstallation.GetXeLaTexDir();
+                    xelatexPath = Path.Combine(xelatexPath, "bin");
+                    xelatexPath = Path.Combine(xelatexPath, "win32");
+                    p2.StartInfo.WorkingDirectory = xelatexPath;
+                    p2.StartInfo.FileName = "fc-cache";
+                    p2.StartInfo.Arguments = "-v -r";
+                    p2.Start();
+                    p2.WaitForExit();
+                }
+                XeLaTexInstallation.SetXeLaTexFontCount(systemFontList.Length);
+            }
         }
         
         public void CallXeLaTex(string xeLatexFullFile, bool openFile, Dictionary<string, string> ImageFilePath)

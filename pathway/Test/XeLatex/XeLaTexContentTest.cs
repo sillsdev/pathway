@@ -12,7 +12,7 @@ using Test;
 namespace Test.XeLatex
 {
     [TestFixture]
-    public class XeLaTexContentTest
+    public class XeLaTexContentTest : ExportXeLaTex
     {
         #region Private Variables
         private string _inputCSS;
@@ -783,6 +783,15 @@ namespace Test.XeLatex
         {
             XeLaTexInstallation.SetXeLaTexFontCount(1);
             Assert.AreEqual(1, XeLaTexInstallation.GetXeLaTexFontCount());
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void XeLaTexUpdateCache()
+        {
+            UpdateXeLaTexFontCacheIfNecessary();
+            var systemFontList = System.Drawing.FontFamily.Families;
+            Assert.AreEqual(systemFontList.Length, XeLaTexInstallation.GetXeLaTexFontCount());
         }
         #endregion
 
