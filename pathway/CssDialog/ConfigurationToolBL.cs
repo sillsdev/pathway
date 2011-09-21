@@ -252,7 +252,7 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                string defaultValue = "None";
+                string defaultValue = "Top Center";
                 foreach (string srchKey in pageDict.Keys)
                 {
                     const string key = "content";
@@ -1927,6 +1927,8 @@ namespace SIL.PublishingSolution
             }
             catch{}
             return "PageNumber_None.css";
+
+           // return "PageNumber_TopCenter.css";
         }
 
 
