@@ -183,7 +183,6 @@
     <CallTarget Targets="CorporateBTE606"/>
     <CallTarget Targets="CorporateSE606"/>
     <CallTarget Targets="ReleaseBTE606"/>
-    <CallTarget Targets="PathwayXeLaTeX"/>
   </Target>
   <Target Name="Daily">
     <CallTarget Targets="Clean"/>
