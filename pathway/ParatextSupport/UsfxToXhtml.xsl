@@ -28,7 +28,7 @@
 		<xsl:apply-templates/>
 	</xsl:template>
 
-	<xsl:template match="usfm">
+	<xsl:template match="usfm|usx">
 		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="utf-8" lang="utf-8">
 			<head>
 				<title/>
@@ -47,7 +47,17 @@
 
 	<!-- Define the book. -->
 	<xsl:template match="book">
-		<xsl:variable name="bookCode" select="@id"/>
+		<xsl:variable name="bookCode">
+			<xsl:choose>
+				<xsl:when test="@code">
+					<xsl:value-of select="@code"/>
+				</xsl:when>
+				<xsl:when test="@id">
+					<!-- Support old format for USX -->
+					<xsl:value-of select="@id"/>
+				</xsl:when>
+			</xsl:choose>
+		</xsl:variable>
 		<xsl:variable name="bookInToc" select="normalize-space(para[@style='toc2'])"/>
 		<xsl:variable name="bookHeading" select="normalize-space(para[@style='h'])"/>
 		<xsl:variable name="bookTitle" select="normalize-space(para[@style='mt'])"/>
@@ -451,8 +461,30 @@
 
 	<!-- Handle figure element -->
 	<xsl:template match="figure">
-		<xsl:variable name="bookCode" select="ancestor::book/@id"/>
-		<xsl:variable name="figureNumber" select="count(preceding::figure[ancestor::book[@id=$bookCode]])+1"/>
+		<xsl:variable name="bookCode">
+			<xsl:choose>
+				<xsl:when test="ancestor::book/@code">
+					<xsl:value-of select="ancestor::book/@code"/>
+				</xsl:when>
+				<xsl:when test="ancestor::book/@id">
+					<!-- Support old format for USX -->
+					<xsl:value-of select="ancestor::book/@id"/>
+				</xsl:when>
+			</xsl:choose>
+		</xsl:variable>
+		
+		<xsl:variable name="figureNumber">
+			<xsl:choose>
+				<xsl:when test="ancestor::book/@code">
+					<xsl:value-of select="count(preceding::figure[ancestor::book[@code=$bookCode]])+1"/>
+				</xsl:when>
+				<xsl:when test="ancestor::book/@id">
+					<!-- Support old format for USX -->
+					<xsl:value-of select="count(preceding::figure[ancestor::book[@id=$bookCode]])+1"/>
+				</xsl:when>
+			</xsl:choose>
+			
+		</xsl:variable> 
 		
 		<xsl:variable name="pictureLoc">
 			<xsl:choose>
@@ -486,13 +518,13 @@
 	</xsl:template>
 
 	<!-- Enclose text that can occur under <body> that is not yet within a writing system. -->
-	<xsl:template match="usfm/text()">
+	<xsl:template match="usfm/text()|usx/text()">
 		<span lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
 			<xsl:value-of select="."/>
 		</span>
 	</xsl:template>
 
-	<!-- Convert character styles from SFM to styles understood by Pathway. -->
+  <!-- Convert character styles from SFM to styles understood by Pathway. -->
 	<xsl:template match="char">
 		<xsl:call-template name="char"/>
 	</xsl:template>
@@ -705,15 +737,44 @@
 	<!-- Convert footnotes, cross references and end notes. -->
 	<xsl:template match="note">
 		<!-- Number of footnotes thus far of all styles (used to make unique footnote reference) -->
-		<xsl:variable name="bookCode" select="ancestor::book/@id"/>
-		<xsl:variable name="footnoteNumber" select="count(preceding::note[ancestor::book[@id=$bookCode]])+1"/>
+		<xsl:variable name="bookCode">
+			<xsl:choose>
+				<xsl:when test="ancestor::book/@code">
+					<xsl:value-of select="ancestor::book/@code"/>
+				</xsl:when>
+				<xsl:when test="ancestor::book/@id">
+					<!-- Support old format for USX -->
+					<xsl:value-of select="ancestor::book/@id"/>
+				</xsl:when>
+			</xsl:choose>
+		</xsl:variable>
+		<xsl:variable name="footnoteNumber">
+			<xsl:choose>
+				<xsl:when test="ancestor::book/@code">
+					<xsl:value-of select="count(preceding::note[ancestor::book[@code=$bookCode]])+1"/>
+				</xsl:when>
+				<xsl:when test="ancestor::book/@id">
+					<xsl:value-of select="count(preceding::note[ancestor::book[@id=$bookCode]])+1"/>
+				</xsl:when>
+			</xsl:choose>
+		</xsl:variable>
 		<xsl:variable name="footnoteCaller">
 			<xsl:choose>
 				<!-- Only set a footnote caller for footnotes and endnotes, not cross-references. -->
 				<xsl:when test="@caller = '+'">
 					<xsl:variable name="footnoteStyle" select="@style"/>
 					<!-- For calculating the index, only count notes with the same style so they can have different numbering systems. -->
-					<xsl:variable name="footnoteIndex" select="count(preceding::note[ancestor::book[@id=$bookCode]][@style=$footnoteStyle])+1"/>
+					<xsl:variable name="footnoteIndex">
+						<xsl:choose>
+							<xsl:when test="ancestor::book/@code">
+								<xsl:value-of select="count(preceding::note[ancestor::book[@code=$bookCode]][@style=$footnoteStyle])+1"/>
+							</xsl:when>
+							<xsl:when test="ancestor::book/@id">
+								<!-- Support old format for USX -->
+								<xsl:value-of select="count(preceding::note[ancestor::book[@id=$bookCode]][@style=$footnoteStyle])+1"/>
+							</xsl:when>
+						</xsl:choose>
+					</xsl:variable>
 					<xsl:number format="a" value="$footnoteIndex"/>
 				</xsl:when>
 				<xsl:when test="not(@caller = '+' or @caller = '-')">

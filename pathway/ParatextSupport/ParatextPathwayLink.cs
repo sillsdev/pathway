@@ -233,9 +233,13 @@ namespace SIL.PublishingSolution
 
 			for (int iDoc = 1; iDoc < usxBooksToExport.Count; iDoc++)
 			{
-				foreach (XmlNode nodeToAdd in usxBooksToExport[iDoc].SelectSingleNode("/usfm").ChildNodes)
+                //bool usxRootNode
+                //XmlNode bookUsx = usxBooksToExport[iDoc].SelectSingleNode("/usfm") ??
+                //    usxBooksToExport[iDoc].SelectSingleNode("/usx");
+
+                foreach (XmlNode nodeToAdd in usxBooksToExport[iDoc].SelectSingleNode("/usfm|/usx").ChildNodes)
 				{
-					XmlNode prevNode = allBooks.SelectSingleNode("usfm").LastChild;
+					XmlNode prevNode = allBooks.SelectSingleNode("usfm|usx").LastChild;
 					XmlNode commonParent = prevNode.ParentNode;
 					commonParent.InsertAfter(allBooks.ImportNode(nodeToAdd, true), prevNode);
 				}

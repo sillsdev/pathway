@@ -8,7 +8,7 @@
 
     <xsl:template match = "*"/>
     
-    <xsl:template match = "usfm">
+    <xsl:template match = "usfm|usx">
         <xsl:copy>
             <xsl:apply-templates select = "@*|node()"/>
         </xsl:copy>
