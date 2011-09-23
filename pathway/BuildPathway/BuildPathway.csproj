@@ -443,7 +443,6 @@
     <Copy SourceFiles="@(XeLaTexTexmf)" DestinationFiles="@(XeLaTexTexmf->'Files\pwtex\texmf\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(XeLaTexConfig)" DestinationFiles="@(XeLaTexConfig->'Files\pwtex\texmf-config\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(XeLaTexDist)" DestinationFiles="@(XeLaTexDist->'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(XeLaTexLocal)" DestinationFiles="@(XeLaTexLocal->'Files\pwtex\texmf-local\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(XeLaTexVar)" DestinationFiles="@(XeLaTexVar->'Files\pwtex\texmf-var\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(XeLaTexBin)" DestinationFiles="@(XeLaTexBin->'Files\pwtex\bin\win32\%(Filename)%(Extension)')" />
     <MakeDir Directories="Files\pwtex\temp" />
@@ -458,7 +457,6 @@
     <XeLaTexTexmf Include="..\XeLaTexConvert\XeLaTexExe\texmf\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\texmf\**\.svn\**\*.*" />
     <XeLaTexConfig Include="..\XeLaTexConvert\XeLaTexExe\texmf-config\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\texmf-config\**\.svn\**\*.*" />
     <XeLaTexDist Include="..\XeLaTexConvert\XeLaTexExe\texmf-dist\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\texmf-dist\**\.svn\**\*.*" />
-    <XeLaTexLocal Include="..\XeLaTexConvert\XeLaTexExe\texmf-local\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\texmf-local\**\.svn\**\*.*" />
     <XeLaTexVar Include="..\XeLaTexConvert\XeLaTexExe\texmf-var\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\texmf-var\**\.svn\**\*.*" />
     <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-cache.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-cat.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-list.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-match.exe" />
     <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\icudt*.dll" />

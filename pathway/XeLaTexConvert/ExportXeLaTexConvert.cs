@@ -132,6 +132,7 @@ namespace SIL.PublishingSolution
             string str = XeLaTexInstallation.GetXeLaTexDir();
 
             string instPath = Common.PathCombine(str, "bin");
+            instPath = Common.PathCombine(instPath, "win32");
             string originalDirectory = Directory.GetCurrentDirectory();
             string dest = Common.PathCombine(instPath, Path.GetFileName(xeLatexFullFile));
             File.Copy(xeLatexFullFile, dest, true);

@@ -1,0 +1,11 @@
+\def\censor#1{\censorloopword#1 \nil}
+\def\censorloopword#1 #2\nil{%
+  \phantom{#1} % <- Note the space!
+  \ifx&#2&% #2 is empty, then & equals &
+    \let\next\relax
+  \else
+    \def\next{\censorloopword#2\nil}% iterate
+  \fi
+  \next\ignorespaces}
+
+\def\do#1{#1}

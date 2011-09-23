@@ -50,11 +50,15 @@ namespace Test.XeLatex
             _inputPath = Common.PathCombine(_testFolderPath, "input");
             _outputPath = Common.PathCombine(_testFolderPath, "output");
             _expectedPath = Common.PathCombine(_testFolderPath, "Expected");
+            const bool recursive = true;
+            if (Directory.Exists(_outputPath))
+                Directory.Delete(_outputPath, recursive);
+            Directory.CreateDirectory(_outputPath);
             _projInfo.ProjectPath = _testFolderPath;
             _cssProperty = new Dictionary<string, Dictionary<string, string>>();
             Common.SupportFolder = "";
             Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
-            Common.CopyOfficeFolder(_expectedPath, _outputPath);
+            //Common.CopyOfficeFolder(_expectedPath, _outputPath);
         }
 
         [SetUp]
@@ -742,6 +746,22 @@ namespace Test.XeLatex
             const string file = "Visibility";
             ExportProcess(file);
             FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void VisibilityCensorPackageTest()
+        {
+            const string testFileName = "VisibilityPackage";
+            var inputname = testFileName + ".tex";
+            var xeLatexFullFile = FileOutput(inputname);
+            const bool overwrite = true;
+            File.Copy(FileInput(inputname), xeLatexFullFile, overwrite);
+            var imgPath = new Dictionary<string, string>();
+            UpdateXeLaTexFontCacheIfNecessary();
+            CallXeLaTex(xeLatexFullFile, true, imgPath);
+            var outname = testFileName + ".log";
+            TextFileAssert.AreEqualEx(FileExpected(outname), FileOutput(outname), new ArrayList { 1 });
         }
 
         [Test]
