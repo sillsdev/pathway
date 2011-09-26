@@ -690,6 +690,10 @@ namespace SIL.PublishingSolution
                     {
                         if (_headerContent.Trim().Length == 0)
                             _headerContent = content;
+
+                        //string hangparaFormat = "\\hangpara{" + "36pt" + "}{" + "1" + "}";
+                        //_xetexFile.Write(hangparaFormat);
+
                         string headerFormat = "\\markboth{" + _headerContent + "}{" + _headerContent + "}";
                         _xetexFile.Write(headerFormat);
                         _headerContent = content;
@@ -1217,8 +1221,25 @@ namespace SIL.PublishingSolution
                         }
                         else if (propName == "text-align")
                         {
-                            txtAlignStart = "\\begin{" + Common.RightString(property, " ") + "}";
-                            txtAlignEnd = "\\end{" + Common.RightString(property, " ") + "}";
+
+                            if (property.IndexOf("center") > 0)
+                            {
+                                txtAlignStart = "\\begin{" + Common.RightString(property, " ") + "}";
+                                txtAlignEnd = "\\end{" + Common.RightString(property, " ") + "}";
+                            }
+                            else
+                            {
+                                txtAlignStart = "{\\" + Common.RightString(property, " ") + "} ";
+                                txtAlignEnd = " "; 
+                            }
+                        }
+                        else if (propName == "text-indent")
+                        {
+                            if (property.IndexOf("hangpara") > 0)
+                            {
+                                txtAlignStart = "\\begin{hanglist}" + "[12pt] \\item ";
+                                txtAlignEnd = "\\end{hanglist} ";
+                            }
                         }
                     }
                 }
@@ -1481,22 +1502,26 @@ namespace SIL.PublishingSolution
             _characterName = "$ID/[No character style]";// "[No character style]"; 
 
             _paragraphPropertyList = new List<string>();
-            //Padding
-            _paragraphPropertyList.Add("padding");
-            _paragraphPropertyList.Add("padding-left");
-            _paragraphPropertyList.Add("padding-right");
-            _paragraphPropertyList.Add("padding-top");
-            _paragraphPropertyList.Add("padding-bottom");
-            //Margin
-            _paragraphPropertyList.Add("margin");
-            _paragraphPropertyList.Add("margin-left");
-            _paragraphPropertyList.Add("margin-right");
-            _paragraphPropertyList.Add("margin-top");
-            _paragraphPropertyList.Add("margin-bottom");
+            ////Padding
+            //_paragraphPropertyList.Add("padding");
+            //_paragraphPropertyList.Add("padding-left");
+            //_paragraphPropertyList.Add("padding-right");
+            //_paragraphPropertyList.Add("padding-top");
+            //_paragraphPropertyList.Add("padding-bottom");
+            ////Margin
+            //_paragraphPropertyList.Add("margin");
+            //_paragraphPropertyList.Add("margin-left");
+            //_paragraphPropertyList.Add("margin-right");
+            //_paragraphPropertyList.Add("margin-top");
+            //_paragraphPropertyList.Add("margin-bottom");
+
+            //Text-Indent
+            _paragraphPropertyList.Add("text-indent");
 
             //TextAlign
             _paragraphPropertyList.Add("text-align");
             _paragraphPropertyList.Add("column-count");
+            
             
         }
         #endregion

@@ -13,7 +13,7 @@ namespace SIL.PublishingSolution
         private bool _IsKeepLineWrittern = false;
 
         private string _className;
-
+        private Int32 _hangparaPropertyValue;
         private string _fontName;
         private List<string> _fontOption = new List<string>();
         private List<string> _fontStyle = new List<string>();
@@ -51,7 +51,7 @@ namespace SIL.PublishingSolution
                         FontVariant(propertyValue);
                         break;
                     case "text-indent":
-                        TextIndent(propertyValue);
+                        TextIndent(propertyValue, className);
                         break;
                     case "margin-left":
                     case "class-margin-left":
@@ -526,6 +526,8 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
+            return;
+
             _IDProperty["LeftIndent"] = propertyValue;
             propertyValue = Common.SetPropertyValue("padding innerleftmargin=", propertyValue);
             _IDProperty["padding-left"] = propertyValue;
@@ -541,6 +543,8 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
+            return;
+
             _IDProperty["RightIndent"] = propertyValue;
             propertyValue = Common.SetPropertyValue("padding innerrightmargin=", propertyValue);
             _IDProperty["padding-right"] = propertyValue;
@@ -556,6 +560,8 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
+            return;
+
             _IDProperty["SpaceBefore"] = propertyValue;
             propertyValue = Common.SetPropertyValue("padding innertopmargin=", propertyValue);
             _IDProperty["padding-top"] = propertyValue;
@@ -571,6 +577,8 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
+            return;
+
             _IDProperty["SpaceAfter"] = propertyValue;
             propertyValue = Common.SetPropertyValue("padding innerbottommargin=", propertyValue);
             _IDProperty["padding-bottom"] = propertyValue;
@@ -611,7 +619,10 @@ namespace SIL.PublishingSolution
                 return;
             }
             _IDProperty["Margin-Left"] = propertyValue;
-            propertyValue = Common.SetPropertyValue("margin leftmargin=", propertyValue);
+            
+            propertyValue = Common.SetPropertyValue("\\leftmargin", propertyValue);
+
+            //propertyValue = Common.SetPropertyValue("margin leftmargin=", propertyValue);
             _IDProperty["margin-left"] = propertyValue;
             _inlineStyle.Add(propertyValue);
 
@@ -627,7 +638,10 @@ namespace SIL.PublishingSolution
             }
 
             _IDProperty["Margin-Right"] = propertyValue;
-            propertyValue = Common.SetPropertyValue("margin rightmargin=", propertyValue);
+            
+            propertyValue = Common.SetPropertyValue("\\rightmargin", propertyValue);
+
+            //propertyValue = Common.SetPropertyValue("margin rightmargin=", propertyValue);
             _IDProperty["margin-right"] = propertyValue;
             _inlineStyle.Add(propertyValue);
 
@@ -643,7 +657,10 @@ namespace SIL.PublishingSolution
                 return;
             }
             _IDProperty["Margin-Top"] = propertyValue;
-            propertyValue = Common.SetPropertyValue("margin skipabove=", propertyValue);
+
+            propertyValue = Common.SetPropertyValue("\\topskip", propertyValue);
+
+            //propertyValue = Common.SetPropertyValue("margin skipabove=", propertyValue);
             _IDProperty["margin-top"] = propertyValue;
             _inlineStyle.Add(propertyValue);
 
@@ -657,8 +674,14 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
+            return;
+
             _IDProperty["Margin-Bottom"] = propertyValue;
-            propertyValue = Common.SetPropertyValue("margin skipbelow=", propertyValue);
+
+            //propertyValue = Common.SetPropertyValue("margin skipbelow=", propertyValue);
+
+            propertyValue = Common.SetPropertyValue("\\baseskip", propertyValue);
+
             _IDProperty["margin-bottom"] = propertyValue;
             _inlineStyle.Add(propertyValue);
 
@@ -693,21 +716,34 @@ namespace SIL.PublishingSolution
             return fontSize;
         }
 
-        public void TextIndent(string propertyValue)
+        public void TextIndent(string propertyValue, string className)
         {
             if (propertyValue == string.Empty)
             {
                 return;
             }
+            
+            if (propertyValue != "0" && className == "entry")
+            {
+                propertyValue = "text-indent hangpara";
+            }
+
             if (propertyValue == "0")
             {
-                propertyValue = "\\noindent";
+                return;
+                //propertyValue = "\\noindent";
             }
-            else
+
+            if (propertyValue.IndexOf("hangpara") > 0)
             {
-                propertyValue = Common.SetPropertyValue("\\parindent", propertyValue);
+                _inlineStyle.Add(propertyValue);
+                //propertyValue = Common.SetPropertyValue("\\parindent", propertyValue);
             }
-            _inlineStyle.Add(propertyValue);
+
+            propertyValue = "\\usepackage{texthanglist}";
+            if (!_includePackageList.Contains(propertyValue))
+                _includePackageList.Add(propertyValue);
+
         }
         public void Color(string propertyValue)
         {
@@ -876,8 +912,9 @@ namespace SIL.PublishingSolution
                 _fontOption.Add(propertyValue);
         }
         public void TextAlign(string propertyValue)
-        {           
-            if (propertyValue == string.Empty || propertyValue == "inherit")
+        {
+            if (propertyValue == string.Empty || propertyValue == "inherit" 
+                || (_className.ToLower() == "entry" || _className.ToLower() == "subentry" || _className.ToLower() == "reventry"))
             {
                 return;
             }
@@ -888,15 +925,15 @@ namespace SIL.PublishingSolution
             }
             else if (propertyValue == "left")
             {
-                propertyValue = "text-align flushleft";
+                propertyValue = "text-align raggedright";
             }
             else if (propertyValue == "right")
             {
-                propertyValue = "text-align flushright";
+                propertyValue = "text-align raggedleft";
             }
             //else if (propertyValue == "justify")
             //{
-            //    propertyValue = "\\filcenter";
+            //    propertyValue = "\\justifying";
             //}
             if (propertyValue != "justify")
             {
