@@ -1,5 +1,5 @@
 rem Setuppwtex.bat 9/15/2011 gt - use with install-tl (TexLive) to create the Pathway TexLive installation
-set idir=XeLaTexExe
+set idir=%SVN_DIR%\XeLaTexConvert\XeLaTexExe
 if not "%1"=="" set idir=%1
 echo # texlive.profile written on Tue Sep 13 10:00:58 2011 UTC>tlpw.profile
 echo # It will NOT be updated and reflects only the>>tlpw.profile

@@ -1,0 +1,39 @@
+Adding XeLaTeX packages:
+
+If a new XeLaTeX package is needed and you know the file it contains you can use the Tex Live Manager to search for the package. For example you might use:
+
+tlmgr search --file file.ext
+
+You can also search by a keyword or part of a word:
+
+tlmgr search --keyword *what*
+
+These commands should work from the XeLaTexExe folder if the bin folder is on the path. If you are in that folder, you can add it to the path by typing:
+
+set path=%cd%\bin\win32;%path%
+
+If you don't know how to launch a command processor at the XeLaTexExe folder, you can point at the folder, hold the shift, right click and choose Open a command processor here.
+
+To get help you can try
+
+tlmgr --help
+
+for complete help
+
+tlmgr --help search
+
+or for help on the search command.
+
+tlmgr show package
+
+where package is replaced by a package name will give help on that package
+
+tlmgr list
+
+will give a list of the packages with an i in front of those that are currently installed
+
+Once you have identified the package you need, you use
+
+tlmgr install *package*
+
+where *package* is replaced by the package you have identified to be added.
