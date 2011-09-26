@@ -1,0 +1,9 @@
+\newenvironment{hanglist}[1][\parindent]{%
+    \begin{list}{}{%
+        \setlength{\leftmargin}{#1}
+        \setlength{\labelwidth}{0pt}
+        \setlength{\labelsep}{0pt}
+        \setlength{\itemindent}{-#1}}
+    }{%
+        \end{list}
+    }
