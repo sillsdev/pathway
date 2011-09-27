@@ -807,6 +807,7 @@ namespace SIL.PublishingSolution
 
         public bool InsertImage()
         {
+            isImage = true;
             bool inserted = false;
             if (_imageInsert)
             {
@@ -888,7 +889,7 @@ namespace SIL.PublishingSolution
                     string toPath = Path.Combine(_inputPath, picFile);
                     string str = XeLaTexInstallation.GetXeLaTexDir();
                     string instPath = Common.PathCombine(str, "bin");
-
+                    instPath = Common.PathCombine(instPath, "win32");
                     string dest = Common.PathCombine(instPath, Path.GetFileName(picFile));
 
                     if (!File.Exists(dest))
@@ -900,7 +901,7 @@ namespace SIL.PublishingSolution
                             if (dest != null) dest = dest.Replace(".tif", ".jpg");
                         }
                         if(!string.IsNullOrEmpty(toPath))
-                            File.Copy(toPath, dest, true);
+                            File.Copy(fileName1, dest, true);
                     }
                     else
                     {
@@ -1226,6 +1227,12 @@ namespace SIL.PublishingSolution
                             {
                                 txtAlignStart = "\\begin{" + Common.RightString(property, " ") + "}";
                                 txtAlignEnd = "\\end{" + Common.RightString(property, " ") + "}";
+
+                                if (isImage)
+                                {
+                                    txtAlignEnd = txtAlignEnd + " \\item ";
+                                    isImage = false;
+                                }
                             }
                             else
                             {
@@ -1235,10 +1242,15 @@ namespace SIL.PublishingSolution
                         }
                         else if (propName == "text-indent")
                         {
-                            if (property.IndexOf("hangpara") > 0)
+                            if (property.IndexOf("hanglist") > 0)
                             {
-                                txtAlignStart = "\\begin{hanglist}" + "[12pt] \\item ";
+
+                                //propertyValue = "text-indent hanglist} " + "[" + hangParaValue + "pt]";
+                                txtAlignStart = "\\begin"+ Common.RightString(property," ") +" \\item ";
                                 txtAlignEnd = "\\end{hanglist} ";
+
+                                //txtAlignStart = "\\begin{hanglist}" + "[12pt] \\item ";
+                                //txtAlignEnd = "\\end{hanglist} ";
                             }
                         }
                     }

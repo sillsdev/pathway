@@ -725,7 +725,12 @@ namespace SIL.PublishingSolution
             
             if (propertyValue != "0" && className == "entry")
             {
-                propertyValue = "text-indent hangpara";
+                //propertyValue = "text-indent hangpara";
+
+                int hangParaValue = 0;
+                hangParaValue = -(Convert.ToInt32(propertyValue));
+
+                propertyValue = "text-indent {hanglist}" + "[" + hangParaValue + "pt]";
             }
 
             if (propertyValue == "0")
@@ -734,7 +739,7 @@ namespace SIL.PublishingSolution
                 //propertyValue = "\\noindent";
             }
 
-            if (propertyValue.IndexOf("hangpara") > 0)
+            if (propertyValue.IndexOf("hanglist") > 0)
             {
                 _inlineStyle.Add(propertyValue);
                 //propertyValue = Common.SetPropertyValue("\\parindent", propertyValue);
