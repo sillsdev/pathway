@@ -56,8 +56,7 @@ sudo rm -r -f $outdir
 sudo mkdir $outdir
 sudo mkdir $outdir/Copyrights
 sudo mkdir $outdir/epub
-sudo mkdir $outdir/epubcheck-1.2
-sudo mkdir $outdir/epubcheck-1.2/lib
+sudo mkdir -p $outdir/epubcheck-1.2/lib
 sudo mkdir $outdir/GoBible
 sudo mkdir $outdir/Graphic
 sudo mkdir $outdir/Help
@@ -74,7 +73,8 @@ sudo cp -r $SRCDIR/ConfigurationTool/$builddir/* $outdir
 sudo cp $SRCDIR/CssDialog/$builddir/* $outdir
 sudo cp $SRCDIR/CssParser/$builddir/* $outdir
 sudo cp $SRCDIR/epubConvert/$builddir/* $outdir
-sudo cp -r $SRCDIR/epubValidator/$builddir/* $outdir
+sudo cp $SRCDIR/epubValidator/$builddir/* $outdir
+sudo cp -r $SRCDIR/ThirdParty/epubcheck-1.2/* $outdir
 sudo cp $SRCDIR/GoBibleConvert/$builddir/* $outdir
 sudo cp $SRCDIR/InDesignConvert/$builddir/* $outdir
 sudo cp $SRCDIR/LiftPrepare/$builddir/* $outdir
@@ -82,26 +82,23 @@ sudo cp $SRCDIR/LogosConvert/$builddir/* $outdir
 sudo cp $SRCDIR/OpenOfficeConvert/$builddir/* $outdir
 sudo cp $SRCDIR/ParatextSupport/$builddir/* $outdir
 sudo cp $SRCDIR/PathwayB/$builddir/* $outdir
-sudo cp $SRCDIR/PdfConvert/$builddir/* $outdir
-sudo cp $SRCDIR/PrincessConvert/$builddir/* $outdir
+# sudo cp $SRCDIR/PdfConvert/$builddir/* $outdir
+# sudo cp $SRCDIR/PrincessConvert/$builddir/* $outdir
 sudo cp $SRCDIR/PsExport/$builddir/* $outdir
 sudo cp -r $SRCDIR/PsSupport/* $outdir
 sudo cp $SRCDIR/PsTool/$builddir/* $outdir
 sudo cp $SRCDIR/WordPressConvert/$builddir/* $outdir
 sudo cp $SRCDIR/XeLaTexConvert/$builddir/* $outdir
-sudo cp $SRCDIR/XeTex/$builddir/* $outdir
-sudo cp $SRCDIR/XeTeXConvert/$builddir/* $outdir
+# sudo cp $SRCDIR/XeTex/$builddir/* $outdir
+# sudo cp $SRCDIR/XeTeXConvert/$builddir/* $outdir
 # YouVersion is no longer supported
 #sudo cp $SRCDIR/YouVersionConvert/$builddir/* $outdir
 echo Setting permissions...
 sudo chmod 777 $outdir/*
 sudo chmod 777 $outdir/*StyleSettings.*
 sudo chmod 777 $outdir/Copyrights/*
-sudo chmod 777 $outdir/epub/*
-sudo chmod 777 $outdir/epub/META-INF/*
-sudo chmod 777 $outdir/epub/OEBPS/*
-sudo chmod 777 $outdir/epubcheck-1.2/*
-sudo chmod 777 $outdir/epubcheck-1.2/lib/*
+sudo chmod -R 777 $outdir/epub/*
+sudo chmod -R 777 $outdir/epubcheck-1.2/*
 sudo chmod 777 $outdir/GoBible/*
 sudo chmod 777 $outdir/GoBible/GoBibleCore/*
 sudo chmod 777 $outdir/Graphic/*
@@ -115,6 +112,16 @@ sudo chmod 777 $outdir/Styles/Scripture/*
 sudo chmod 777 $outdir/Template/*
 sudo chmod 777 $outdir/Template/Dictionary/*
 sudo chmod 777 $outdir/Template/Scripture/*
+echo Creating registry keys
+cd ~
+mkdir -p .mono/registry/CurrentUser/software/sil/pathway
+#echo <values><value name="PathwayDir" type="string">/usr/lib/pathway</value></values> >values.xml
+sudo mkdir -p /etc/mono/registry/LocalMachine/software/sil
+echo creating execution scripts
+echo mono /usr/lib/pathway/ConfigurationTool.exe >~/ConfigurationTool
+sudo cp ~/ConfigurationTool /usr/bin/ConfigurationTool
+sudo chmod 755 /usr/bin/ConfigurationTool
+rm ~/ConfigurationTool
 echo --------------------------------------------------------------------------
 right_now=$(date +"%x %r %Z")
 time_stamp="Process finished on $right_now by $USER"
