@@ -807,7 +807,7 @@ namespace SIL.PublishingSolution
 
         public bool InsertImage()
         {
-            isImage = true;
+            
             bool inserted = false;
             if (_imageInsert)
             {
@@ -890,18 +890,19 @@ namespace SIL.PublishingSolution
                     string str = XeLaTexInstallation.GetXeLaTexDir();
                     string instPath = Common.PathCombine(str, "bin");
                     instPath = Common.PathCombine(instPath, "win32");
+                    toPath = instPath;
                     string dest = Common.PathCombine(instPath, Path.GetFileName(picFile));
 
                     if (!File.Exists(dest))
                     {
-                        if (toPath.IndexOf(".tif") >= 0)
+                        if (fileName1.IndexOf(".tif") >= 0)
                         {
-                            toPath = Common.ConvertTifftoImage(toPath, "jpg");
+                            toPath = Common.ConvertTifftoImage(fileName1, "jpg");
                             if (picFile != null) picFile = picFile.Replace(".tif", ".jpg");
                             if (dest != null) dest = dest.Replace(".tif", ".jpg");
                         }
                         if(!string.IsNullOrEmpty(toPath))
-                            File.Copy(fileName1, dest, true);
+                            File.Copy(toPath, dest, true);
                     }
                     else
                     {
@@ -911,7 +912,7 @@ namespace SIL.PublishingSolution
                         }
                     }
                     Dictionary<string, string> prop = new Dictionary<string, string>();
-                    prop.Add("filePath", fileName1);
+                    prop.Add("filePath", toPath);
                     _newProperty["ImagePath"] = prop;
 
                     //Image fullimage = Image.FromFile(fileName1);
@@ -930,21 +931,26 @@ namespace SIL.PublishingSolution
 
         private void WriteImage(string picFile)
         {
+
+            isImage = true;
+
             if (!string.IsNullOrEmpty(picFile))
             {
                 _xetexFile.WriteLine("");
-                
+
                 string p1 = @"\begin{wrapfigure}";
                 string p2 = @"\begin{center}";
-                //string p3 = @"\includegraphics{" + picFile +"} " ;
-                string p3 = @"{\includegraphics[natwidth=1bp,natheight=1bp, width=150bp]{" + picFile + "}} ";
+                //string p3 = @"{\includegraphics[natwidth=2bp,natheight=2bp, width=1bp]{" + picFile + "}} ";
+                //string p3 = @"\includegraphics[width=1in,height=1in,%keepaspectratio]{" + picFile + "} ";
+                string p3 = @"\includegraphics[angle=0,width=52mm]{" + picFile + "} ";
                 string p4 = @"\caption{}";
+                //string p3 = @"{\includegraphics[natwidth=1bp,natheight=1bp, width=150bp]{" + picFile + "}} ";                
                 string p5 = @"\end{center}";
                 string p6 = @"\end{wrapfigure}";
 
                 //string p1 = @"\begin{figure*}[ht!] ";
                 //string p2 = @"\centering ";
-                //string p3 = @"\includegraphics[scale=0.5]{" + picFile +"} " ;
+                //string p3 = @"\includegraphics[scale=0.5]{" + picFile + "} ";
                 //string p4 = @"\caption{caption text} ";
                 //string p5 = @"\label{fig:image} ";
                 //string p6 = @"\end{figure*} ";
