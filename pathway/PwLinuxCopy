@@ -115,13 +115,15 @@ sudo chmod 777 $outdir/Template/Scripture/*
 echo Creating registry keys
 cd ~
 mkdir -p .mono/registry/CurrentUser/software/sil/pathway
-#echo <values><value name="PathwayDir" type="string">/usr/lib/pathway</value></values> >values.xml
+gawk 'BEGIN {print "<values><value name=\"PathwayDir\" type=\"string\">/usr/lib/pathway</value></values>"}' >values.xml
+sudo cp values.xml .mono/registry/CurrentUser/software/sil/pathway/values.xml
+rm values.xml
 sudo mkdir -p /etc/mono/registry/LocalMachine/software/sil
 echo creating execution scripts
-echo mono /usr/lib/pathway/ConfigurationTool.exe >~/ConfigurationTool
-sudo cp ~/ConfigurationTool /usr/bin/ConfigurationTool
+echo mono /usr/lib/pathway/ConfigurationTool.exe >ct
+sudo cp ct /usr/bin/ConfigurationTool
+rm ct
 sudo chmod 755 /usr/bin/ConfigurationTool
-rm ~/ConfigurationTool
 echo --------------------------------------------------------------------------
 right_now=$(date +"%x %r %Z")
 time_stamp="Process finished on $right_now by $USER"
