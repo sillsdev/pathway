@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.3-0.9997.5 (Web2C 2011) (format=xelatex 2011.9.15)  29 SEP 2011 17:48
+This is XeTeX, Version 3.1415926-2.3-0.9997.5 (Web2C 2011) (format=xelatex 2011.9.15)  29 SEP 2011 19:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -7,9 +7,9 @@ entering extended mode
 LaTeX2e <2011/06/27>
 Babel <v3.8l-luatex-1.4> and hyphenation patterns for english, dumylang, nohyph
 enation, ukenglish, usenglishmax, loaded.
-(f:/pwtex/texmf-dist/tex/latex/base/article.cls
+(c:/pwtex/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
-(f:/pwtex/texmf-dist/tex/latex/base/size10.clo
+(c:/pwtex/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count80
@@ -23,7 +23,7 @@ File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \abovecaptionskip=\skip41
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
-) (f:/pwtex/texmf/tex/censor/censor.sty)
+) (c:/pwtex/texmf/tex/censor/censor.sty)
 No file VisibilityPackage.aux.
 \openout1 = `VisibilityPackage.aux'.
 

@@ -902,7 +902,7 @@ namespace SIL.PublishingSolution
                             if (dest != null) dest = dest.Replace(".tif", ".jpg");
                         }
                         if(!string.IsNullOrEmpty(toPath))
-                            File.Copy(toPath, dest, true);
+                            File.Copy(fileName1, Common.PathCombine(toPath, Path.GetFileName(fileName1)), true);
                     }
                     else
                     {
@@ -1207,6 +1207,12 @@ namespace SIL.PublishingSolution
                 string txtAlignStart = string.Empty;
                 string txtAlignEnd = string.Empty;
                 string columnStart = string.Empty;
+                string paddingLeft = string.Empty;
+                string paddingRight = string.Empty;
+                string paddingTop = string.Empty;
+                string paddingBottom = string.Empty;
+                
+
                 foreach (string property in _classInlineStyle[childClass])
                 {
                     string propName = Common.LeftString(property, " ");
@@ -1214,15 +1220,16 @@ namespace SIL.PublishingSolution
                     {
                         if (propName == "column-count" && property != "column-count 1")
                         {
-                            if (IdAllClass[childClass].ContainsKey("column-gap") && IdAllClass[childClass]["column-gap"] != null)
+                            if (IdAllClass[childClass].ContainsKey("column-gap") &&
+                                IdAllClass[childClass]["column-gap"] != null)
                             {
                                 string propertyValue = Common.PercentageToEm(IdAllClass[childClass]["column-gap"]);
-                                columnStart = "\\setlength{\\columnsep}{" + propertyValue + "} \r\n" ;
+                                columnStart = "\\setlength{\\columnsep}{" + propertyValue + "} \r\n";
                                 columnStart = columnStart + "\\setlength\\columnseprule{" + "0.4pt" + "} \r\n";
                             }
-                             columnStart = columnStart + "\\begin{multicols}{" + Common.RightString(property, " ") + "}";
+                            columnStart = columnStart + "\\begin{multicols}{" + Common.RightString(property, " ") + "}";
                         }
-                        else if (propName == "padding" || propName == "margin")
+                        else if (propName == "margin")
                         {
                             mdFrameStart += ", " + Common.RightString(property, " ");
                         }
@@ -1243,7 +1250,7 @@ namespace SIL.PublishingSolution
                             else
                             {
                                 txtAlignStart = "{\\" + Common.RightString(property, " ") + "} ";
-                                txtAlignEnd = " "; 
+                                txtAlignEnd = " ";
                             }
                         }
                         else if (propName == "text-indent")
@@ -1252,21 +1259,67 @@ namespace SIL.PublishingSolution
                             {
 
                                 //propertyValue = "text-indent hanglist} " + "[" + hangParaValue + "pt]";
-                                txtAlignStart = "\\begin"+ Common.RightString(property," ") +" \\item ";
+                                txtAlignStart = "\\begin" + Common.RightString(property, " ") + " \\item ";
                                 txtAlignEnd = "\\end{hanglist} ";
 
                                 //txtAlignStart = "\\begin{hanglist}" + "[12pt] \\item ";
                                 //txtAlignEnd = "\\end{hanglist} ";
                             }
                         }
+                        else if (propName == "padding-left")
+                        {
+                            paddingLeft = Common.RightString(property, " ");
+                        }
+                        else if (propName == "padding-right")
+                        {
+                            paddingRight = Common.RightString(property, " ");
+                        }
+                        else if (propName == "padding-top")
+                        {
+                            paddingTop = Common.RightString(property, " ");
+                        }
+                        else if (propName == "padding-bottom")
+                        {
+                            paddingBottom = Common.RightString(property, " ");
+                        }
                     }
                 }
+
+
                 // column -> mdframe -> text-align
                 if (columnStart != string.Empty)
                 {
                     _xetexFile.Write(columnStart);
                     endParagraphString = "\\end{multicols}";
                 }
+
+                if (paddingLeft.Length > 0 || paddingRight.Length > 0 || paddingTop.Length > 0 || paddingBottom.Length > 0)
+                {
+                    if (paddingLeft.Length == 0)
+                    {
+                        paddingLeft = "0pt";
+                    }
+                    if (paddingRight.Length == 0)
+                    {
+                        paddingRight = "0pt";
+                    }
+                    if (paddingTop.Length == 0)
+                    {
+                        paddingTop = "0pt";
+                    }
+                    if (paddingBottom.Length == 0)
+                    {
+                        paddingBottom = "0pt";
+                    }
+
+                    //\begin{adjustwidth}{ 9pt}{ 9pt}
+                    string paddingStart = "\\begin{adjustwidth}{" + paddingTop + "}{" + paddingRight + "}{" + paddingBottom + "}{" + paddingLeft + "}";
+                    _xetexFile.Write(paddingStart);
+                    endParagraphString = "\\end{adjustwidth} " + endParagraphString;
+                }
+               
+
+
                 if (mdFrameStart != string.Empty)
                 {
                     string prop = "{\\begin{mdframed}[linecolor=white";
@@ -1521,11 +1574,11 @@ namespace SIL.PublishingSolution
 
             _paragraphPropertyList = new List<string>();
             ////Padding
-            //_paragraphPropertyList.Add("padding");
-            //_paragraphPropertyList.Add("padding-left");
-            //_paragraphPropertyList.Add("padding-right");
-            //_paragraphPropertyList.Add("padding-top");
-            //_paragraphPropertyList.Add("padding-bottom");
+            _paragraphPropertyList.Add("padding");
+            _paragraphPropertyList.Add("padding-left");
+            _paragraphPropertyList.Add("padding-right");
+            _paragraphPropertyList.Add("padding-top");
+            _paragraphPropertyList.Add("padding-bottom");
             ////Margin
             //_paragraphPropertyList.Add("margin");
             //_paragraphPropertyList.Add("margin-left");
