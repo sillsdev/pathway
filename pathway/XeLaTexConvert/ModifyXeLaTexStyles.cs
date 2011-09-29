@@ -79,6 +79,7 @@ namespace SIL.PublishingSolution
             Common.FileInsertText(_xetexFullFile, @"\usepackage{fontspec}");
             Common.FileInsertText(_xetexFullFile, @"\usepackage{amssymb}");
             Common.FileInsertText(_xetexFullFile, @"\usepackage{graphicx}");
+            Common.FileInsertText(_xetexFullFile, @"\usepackage{grffile}");
             Common.FileInsertText(_xetexFullFile, @"\usepackage{float}");
             foreach (var package in includePackageList)
             {
