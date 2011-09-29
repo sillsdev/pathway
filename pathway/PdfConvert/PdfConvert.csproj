@@ -200,7 +200,9 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Prince, Version=1.0.3835.23744, Culture=neutral, PublicKeyToken=8d9b0a8b53aaa3c7" />
+    <Reference Include="Prince">
+      <HintPath>..\ThirdParty\Prince.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
   </ItemGroup>
