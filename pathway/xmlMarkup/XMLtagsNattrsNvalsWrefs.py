@@ -44,7 +44,9 @@ def setRef(name, attrs):
     '''Sets the global reference values based on the element name and attributes'''
     global book, chap, vers
     if name == 'book':
-        book = attrs['id']
+        book = ''
+        if attrs.has_key('code'):
+            book = attrs['code']
         chap = ''
         vers = ''
     if name == 'chapter':
