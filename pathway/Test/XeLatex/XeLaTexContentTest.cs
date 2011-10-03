@@ -641,7 +641,17 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void PaddingLeftTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "PaddingLeft";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void PageBGColorTest()
