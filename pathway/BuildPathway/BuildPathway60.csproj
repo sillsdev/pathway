@@ -444,7 +444,7 @@
     <CallTarget Targets="BeforeBuild" />
     <RemoveDir Directories="Wix" />
     <Message Text="BUILD_NUMBER: $(BUILD_NUMBER)" Importance="high" />
-    <UpdateVersion Product="Pathway $(Edition) " Version="0.7.10" FieldworksVersion="$(FwVer)" HelpFile="Pathway_Configuration_Tool_$(Edition).chm" Template="$(ProjectDir)Install$(ConfTag)$(Edition)-tpl.wxs" />
+    <UpdateVersion Product="Pathway $(Edition) " Version="0.7.11" FieldworksVersion="$(FwVer)" HelpFile="Pathway_Configuration_Tool_$(Edition).chm" Template="$(ProjectDir)Install$(ConfTag)$(Edition)-tpl.wxs" />
     <UpdateReadme Readme="$(ProjectDir)ReadMePw.rtf" License="$(ProjectDir)License.rtf" Template="$(ProjectDir)UserInterface-tpl.wxs" />
     <ZeroCheck />
     <FileComponents FilesTemplate="Files$(ConfTag)-tpl.wxs" FeaturesTemplate="Features$(ConfTag)-tpl.wxs" />
