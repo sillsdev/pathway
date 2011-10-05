@@ -1814,7 +1814,8 @@ namespace SIL.PublishingSolution
                     string[] bookFiles = Directory.GetFiles(contentFolder, books.ToString());
                     foreach (var targetBookFile in bookFiles)
                     {
-                        if (IsStringInFile(targetBookFile, relativeID))
+                        //if (IsStringInFile(targetBookFile, relativeID))
+                        if (IsStringInFile(targetBookFile, sbID.ToString()))
                         {
                             Common.StreamReplaceInFile(sourceFile, ("a href=\"#" + relativeID), ("a href=\"" + Path.GetFileName(targetBookFile) + "#" + relativeID));
                             bFound = true;
@@ -1827,7 +1828,8 @@ namespace SIL.PublishingSolution
                         // Not found in the local (split) book. Try casting a wider net -- look at all the xhtml files in the directory
                         foreach (var targetFile in files)
                         {
-                            if (IsStringInFile(targetFile, relativeID))
+                            if (IsStringInFile(targetFile, sbID.ToString()))
+                            //if (IsStringInFile(targetFile, relativeID))
                             {
                                 Common.StreamReplaceInFile(sourceFile, ("a href=\"#" + relativeID), ("a href=\"" + Path.GetFileName(targetFile) + "#" + relativeID));
                                 bFound = true;
