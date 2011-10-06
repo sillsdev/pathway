@@ -601,6 +601,7 @@ namespace SIL.PublishingSolution
                     SaveDefaultProperty(this);
                 _publicationName = Path.GetFileName(OutputFolder);
                 OutputFolder = Path.GetDirectoryName(OutputFolder);
+                DictionaryName = _publicationName;
                 Common.TimeStarted = DateTime.Now;
                 _settingsHelper.ClearValues();
                 Close();
