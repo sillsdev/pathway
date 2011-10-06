@@ -89,7 +89,6 @@
             // btnMoreLessOptions
             // 
             this.btnMoreLessOptions.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnMoreLessOptions.Font = new System.Drawing.Font("Arial Unicode MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMoreLessOptions.Location = new System.Drawing.Point(100, 68);
             this.btnMoreLessOptions.Name = "btnMoreLessOptions";
             this.btnMoreLessOptions.Size = new System.Drawing.Size(82, 23);
