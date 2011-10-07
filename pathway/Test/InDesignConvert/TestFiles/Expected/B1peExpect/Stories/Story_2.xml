@@ -101,7 +101,7 @@
           <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteGeneralParagraph..footnote-marker">
             <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
               <Content><?ACE 4?> 1:7 = </Content>
-            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_13"><Content>Imarea kena kukia na gol kori joto, mi                                                 kori vido na gol ke bea na komi garu itagna kena                                                 tatave mena hati aua eigna na pukuni gol vamua keda                                                 mono. Vaghagna iangeni, na komi papara ke padaghita                                                 ke hatheghita na auagna na komi fata ke dika kori                                                 havida eigna keda pukuni heta nida na                                           vaututuni.</Content></CharacterStyleRange></ParagraphStyleRange>
+            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_13"><Content>Imarea kena kukia na gol kori joto, mi                                                kori vido na gol ke bea na komi garu itagna kena                                                tatave mena hati aua eigna na pukuni gol vamua keda                                                mono. Vaghagna iangeni, na komi papara ke padaghita                                                ke hatheghita na auagna na komi fata ke dika kori                                                havida eigna keda pukuni heta nida na                                          vaututuni.</Content></CharacterStyleRange></ParagraphStyleRange>
         </Footnote>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_14">
@@ -415,7 +415,7 @@
           <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteGeneralParagraph..footnote-marker">
             <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
               <Content><?ACE 4?> 2:4 = </Content>
-            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_1"><Content>Na naghoi ghahira kori                                                 hidigna na vathe:</Content></CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_30"><Content> Reghia kori Diksonari.</Content></CharacterStyleRange></ParagraphStyleRange>
+            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_1"><Content>Na naghoi ghahira kori                                                hidigna na vathe:</Content></CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_30"><Content> Reghia kori Diksonari.</Content></CharacterStyleRange></ParagraphStyleRange>
         </Footnote>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_31">
@@ -1586,7 +1586,7 @@
           <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteGeneralParagraph..footnote-marker">
             <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
               <Content><?ACE 4?> 5:14 = </Content>
-            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_50"><Content>Kori haghore Grik “Oti                                                 veikisighi.” Na puhi kena eia mara i                                                 hau bali tateli aua nidia na dotho, imarea kena                                                 kisia na bakodia ara kuladia kiloau. Ikageeni, tadia                                                 sethe na meleha, na puhi kubae ke tughua na puhi                                                 kisi iangeni. Keana, tadia kekeha meleha imarea kena                                                 talu leghua na puhi kisi iangeni.</Content></CharacterStyleRange></ParagraphStyleRange>
+            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_50"><Content>Kori haghore Grik “Oti                                                veikisighi.” Na puhi kena eia mara i                                                hau bali tateli aua nidia na dotho, imarea kena                                                kisia na bakodia ara kuladia kiloau. Ikageeni, tadia                                                sethe na meleha, na puhi kubae ke tughua na puhi                                                kisi iangeni. Keana, tadia kekeha meleha imarea kena                                                talu leghua na puhi kisi iangeni.</Content></CharacterStyleRange></ParagraphStyleRange>
         </Footnote>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_39">
