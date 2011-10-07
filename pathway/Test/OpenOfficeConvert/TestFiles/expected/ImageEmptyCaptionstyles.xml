@@ -20,6 +20,7 @@
     <style:font-face style:name="Tunga" svg:font-family="'Tunga'" style:font-pitch="variable" />
     <style:font-face style:name="Kartika" svg:font-family="'Kartika'" style:font-pitch="variable" />
     <style:font-face style:name="Mangal" svg:font-family="'Mangal'" style:font-pitch="variable" />
+    <style:font-face style:name="Charis SIL Compact" svg:font-family="'Charis SIL Compact'" style:font-pitch="variable" />
   </office:font-face-decls>
   <office:styles>
     <style:style style:name="letHead_dicBody" style:family="paragraph" style:parent-style-name="dicBody" />

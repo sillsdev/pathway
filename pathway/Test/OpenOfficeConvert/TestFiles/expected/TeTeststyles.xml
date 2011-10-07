@@ -20,6 +20,7 @@
     <style:font-face style:name="Tunga" svg:font-family="'Tunga'" style:font-pitch="variable" />
     <style:font-face style:name="Kartika" svg:font-family="'Kartika'" style:font-pitch="variable" />
     <style:font-face style:name="Mangal" svg:font-family="'Mangal'" style:font-pitch="variable" />
+    <style:font-face style:name="Charis SIL Compact" svg:font-family="'Charis SIL Compact'" style:font-pitch="variable" />
   </office:font-face-decls>
   <office:styles>
     <style:style style:name="scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrBody" />
@@ -31,7 +32,7 @@
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="20pt" style:font-size-complex="20pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.x-kal_TitleMain_scrBook_scrBody" style:family="text" style:parent-style-name="TitleMain_scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL Compact" style:font-name-complex="Charis SIL Compact" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="scrIntroSection_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrBook_scrBody">
       <style:paragraph-properties fo:text-align="left" />
@@ -48,7 +49,7 @@
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="9pt" style:font-size-complex="9pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.x-kal_IntroParagraph_scrIntroSection_scrBook_scrBody" style:family="text" style:parent-style-name="IntroParagraph_scrIntroSection_scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL Compact" style:font-name-complex="Charis SIL Compact" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="scrSection_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrBook_scrBody">
       <style:paragraph-properties fo:text-align="left" />
@@ -58,7 +59,7 @@
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="9pt" style:font-size-complex="9pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.x-kal_SectionHead_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="SectionHead_scrSection_scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL Compact" style:font-name-complex="Charis SIL Compact" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="Paragraph_scrSection_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrSection_scrBook_scrBody">
       <style:paragraph-properties fo:text-indent="12pt" fo:margin-left="0pt" />
@@ -75,7 +76,7 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" style:text-position="super 55%" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL Compact" style:font-name-complex="Charis SIL Compact" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
@@ -86,7 +87,7 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-weight="700" style:font-weight-complex="700" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.x-kal_NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL Compact" style:font-name-complex="Charis SIL Compact" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NameOfGod_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
@@ -117,7 +118,7 @@
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.x-kal_Line1_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Line1_scrSection_scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL Compact" style:font-name-complex="Charis SIL Compact" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NameOfGod_Line1_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Line1_scrSection_scrBook_scrBody">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
@@ -140,7 +141,7 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" style:text-position="super 55%" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.x-kal_ParagraphContinuation_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="ParagraphContinuation_scrSection_scrBook_scrBody">
-      <style:text-properties fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL Compact" style:font-name-complex="Charis SIL Compact" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NameOfGod_ParagraphContinuation_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="ParagraphContinuation_scrSection_scrBook_scrBody">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
@@ -559,6 +560,7 @@
         <text:p text:style-name="Footer">
           <text:tab />
           <text:tab />
+          <text:page-number text:select-page="current">4</text:page-number>
         </text:p>
       </style:footer>
     </style:master-page>
@@ -588,7 +590,6 @@
       <style:footer>
         <text:p text:style-name="Footer">
           <text:tab />
-          <text:tab />
           <draw:frame draw:style-name="Mfr3" draw:name="Frame1" text:anchor-type="paragraph" svg:x="0pt" svg:y="71.3pt" fo:min-width="135pt" draw:z-index="1">
             <draw:text-box fo:min-height="14.14pt">
               <text:p text:style-name="MP1">
@@ -597,6 +598,8 @@
                 </text:span>
               </text:p>
             </draw:text-box>
+            <text:tab />
+            <text:page-number text:select-page="current">4</text:page-number>
           </draw:frame>
         </text:p>
       </style:footer>

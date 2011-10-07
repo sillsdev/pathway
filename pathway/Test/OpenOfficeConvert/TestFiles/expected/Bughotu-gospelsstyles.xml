@@ -20,6 +20,7 @@
     <style:font-face style:name="Tunga" svg:font-family="'Tunga'" style:font-pitch="variable" />
     <style:font-face style:name="Kartika" svg:font-family="'Kartika'" style:font-pitch="variable" />
     <style:font-face style:name="Mangal" svg:font-family="'Mangal'" style:font-pitch="variable" />
+    <style:font-face style:name="Charis SIL Compact" svg:font-family="'Charis SIL Compact'" style:font-pitch="variable" />
   </office:font-face-decls>
   <office:styles>
     <style:style style:name="scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrBody" />
@@ -808,6 +809,7 @@
         <text:p text:style-name="Footer">
           <text:tab />
           <text:tab />
+          <text:page-number text:select-page="current">4</text:page-number>
         </text:p>
       </style:footer>
     </style:master-page>
@@ -837,7 +839,6 @@
       <style:footer>
         <text:p text:style-name="Footer">
           <text:tab />
-          <text:tab />
           <draw:frame draw:style-name="Mfr3" draw:name="Frame1" text:anchor-type="paragraph" svg:x="0pt" svg:y="71.3pt" fo:min-width="135pt" draw:z-index="1">
             <draw:text-box fo:min-height="14.14pt">
               <text:p text:style-name="MP1">
@@ -846,6 +847,8 @@
                 </text:span>
               </text:p>
             </draw:text-box>
+            <text:tab />
+            <text:page-number text:select-page="current">4</text:page-number>
           </draw:frame>
         </text:p>
       </style:footer>
