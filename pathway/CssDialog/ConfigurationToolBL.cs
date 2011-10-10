@@ -1214,7 +1214,9 @@ namespace SIL.PublishingSolution
                 string layoutName = cTool.TxtName.Text;
                 if (layoutName.Length == 0)
                     layoutName = _lastSelectedLayout;
-                Param.SetValue(Param.LayoutSelected, layoutName); // last layout
+
+                StyleEXE = _lastSelectedLayout;
+                Param.SetValue(Param.LayoutSelected, StyleEXE); // last layout
                 Param.Write();
 
             }
@@ -2028,15 +2030,17 @@ namespace SIL.PublishingSolution
 
             if (Param.Value.ContainsKey(Param.LayoutSelected))
             {
-                lastLayout = Param.Value[Param.LayoutSelected];
-                if (SelectRow(grid, lastLayout))
+                lastLayout = StyleEXE; //Param.Value[Param.LayoutSelected];				
+                
+				if (SelectRow(grid, lastLayout))
                 {
                     selectedNotExist = false;
                 }
             }
             if (selectedNotExist && Param.DefaultValue.ContainsKey(Param.LayoutSelected))
             {
-                lastLayout = Param.DefaultValue[Param.LayoutSelected];
+                //lastLayout = Param.DefaultValue[Param.LayoutSelected];
+                lastLayout = StyleEXE;
                 SelectRow(grid, lastLayout);
             }
             return lastLayout;
@@ -3258,6 +3262,7 @@ namespace SIL.PublishingSolution
                 setDefaultInputType();
                 SaveInputType(inputTypeBL);
                 WriteCss();
+                StyleEXE = cTool.TxtName.Text;
             }
             catch { }
         }
@@ -3457,7 +3462,7 @@ namespace SIL.PublishingSolution
         public void ConfigurationTool_LoadBL()
         {
             _screenMode = ScreenMode.Load;
-
+            _lastSelectedLayout = StyleEXE;
             Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool_Load");
             //tabDisplay = cTool.TabControl1.TabPages[1];
             tabDisplay = cTool.TabControl1.TabPages["tabdisplay"];

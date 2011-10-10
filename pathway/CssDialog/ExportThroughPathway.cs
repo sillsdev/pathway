@@ -894,11 +894,16 @@ namespace SIL.PublishingSolution
             PreviewPrintVia previewPrintVia = new PreviewPrintVia(_media, stylenamePath, EnableEdit());
             previewPrintVia.SelectedStyle = ddlStyle.Text;
             previewPrintVia.InputType = InputType;
+            string selectedStyle = ddlStyle.Text;
             previewPrintVia.ShowDialog();
             LoadAvailStylesheets();
             if (previewPrintVia.DialogResult == DialogResult.OK)
             {
                 ddlStyle.Text = previewPrintVia.SelectedStyle;
+            }
+            else
+            {
+                ddlStyle.Text = selectedStyle;
             }
         }
 

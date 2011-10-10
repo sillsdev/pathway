@@ -44,11 +44,7 @@ namespace SIL.PublishingSolution
         {
             Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool Constructor");
             InitializeComponent();
-            _CToolBL.inputTypeBL = InputType;
-            _CToolBL.MediaTypeEXE = MediaType;
-            _CToolBL.StyleEXE = Style.Replace('&', ' ');
-            _CToolBL.SetClassReference(this);
-            _CToolBL.CreateToolTip();
+           
         }
         #endregion
 
@@ -632,6 +628,12 @@ namespace SIL.PublishingSolution
         #region Event Method
         private void ConfigurationTool_Load(object sender, EventArgs e)
         {
+            _CToolBL = new ConfigurationToolBL();
+            _CToolBL.inputTypeBL = InputType;
+            _CToolBL.MediaTypeEXE = MediaType;
+            _CToolBL.StyleEXE = Style.Replace('&', ' '); //
+            _CToolBL.SetClassReference(this);
+            _CToolBL.CreateToolTip();
             _CToolBL.ConfigurationTool_LoadBL();
         }
 
@@ -683,6 +685,8 @@ namespace SIL.PublishingSolution
         private void ConfigurationTool_FormClosing(object sender, FormClosingEventArgs e)
         {
             _CToolBL.ConfigurationTool_FormClosingBL();
+            Style = _CToolBL.StyleEXE.ToString();
+
         }
 
         private void btnDictionary_Click(object sender, EventArgs e)
