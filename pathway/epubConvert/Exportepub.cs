@@ -2356,6 +2356,12 @@ namespace SIL.PublishingSolution
                 }
                 if (realMax == -1)
                 {
+                    if (startIndex == 0)
+                    {
+                        // can't split this file (no section breaks after the soft limit) - just return it
+                        fileNames.Add(xhtmlFilename);
+                        return fileNames;
+                    }
                     // no more section heads - just pull in the rest of the content
                     // write out head + substring(startIndex to the end)
                     sb.Append(head);
