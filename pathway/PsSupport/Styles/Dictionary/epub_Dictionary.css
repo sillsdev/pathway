@@ -37,7 +37,7 @@ font-style: normal;
         font-weight: bold;
 }
 .entry {
-    margin-left : 36pt;
+    margin-left : 3%;
     padding-bottom: 1%;
 }
 .example,
@@ -122,9 +122,9 @@ padding-right: 5px;
     font-weight: normal;
 }
 .subentry {
-        text-indent: -12pt;
-        margin-left: 18pt;
-        padding-left: 12pt;
+        text-indent: -1%
+        margin-left: 1.5%;
+        padding-left: 1%;
         padding-bottom: 2pt;
         padding-top: 1pt;
 }

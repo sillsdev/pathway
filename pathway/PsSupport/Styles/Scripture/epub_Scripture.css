@@ -46,8 +46,8 @@ the user's preferences from the Configuration Tool:
     padding-top: 1%;
     margin-top: 1%;
     padding-left: 0;
-    margin-left : 48pt;
-    margin-right: 48pt;
+    margin-left : 4%;
+    margin-right: 4%;
     list-style: none;
 }
 .Inscription {
@@ -66,19 +66,19 @@ the user's preferences from the Configuration Tool:
     margin-left: 0pt;
 }
 .Intro_List_Item1, .List_Item1 {
-    text-indent : -12pt;
-    margin-left : 60pt;
-    margin-right: 60pt;
+    text-indent : -1%;
+    margin-left : 5%;
+    margin-right: 5%;
 }
 .Intro_List_Item2, .List_Item2 {
     text-indent : 0pt;
-    margin-left : 60pt;
-    margin-right: 60pt;
+    margin-left : 5%;
+    margin-right: 5%;
 }
 .Intro_Paragraph {
-    text-indent : 12pt;
-    margin-left : 48pt;
-    margin-right: 48pt;
+    text-indent : 1%;
+    margin-left : 4%;
+    margin-right: 4%;
 }
 .Intro_Section_Head {
     font-weight : bold;
@@ -90,20 +90,20 @@ the user's preferences from the Configuration Tool:
     margin-bottom : 3pt;
 }
 .REVERSE_SOLIDUSCitation_Line1, .Citation_Line1, .Line1 {
-    margin-left : 72pt;
-    margin-right: 48pt;
-    text-indent : -12pt;
+    margin-left : 6%;
+    margin-right: 4%;
+    text-indent : -1%;
     padding-left : 0;
 }
 .REVERSE_SOLIDUSCitation_Line2, .Citation_Line2, .Line2 {
-    margin-left : 72pt;
-    margin-right: 48pt;
-    text-indent : -12pt;
+    margin-left : 6%;
+    margin-right: 4%;
+    text-indent : -1%;
     padding-left : 0;
 }
 .REVERSE_SOLIDUSCitation_Line3, .Citation_Line3, .Line3 {
-    margin-left : 72pt;
-    margin-right: 48pt;
+    margin-left : 6%;
+    margin-right: 4%;
     text-indent : 0;
     padding-left : 0;
 }
@@ -111,7 +111,8 @@ the user's preferences from the Configuration Tool:
 .REVERSE_SOLIDUSsl, .REVERSE_SOLIDUSv1, .REVERSE_SOLIDUSv14, .REVERSE_SOLIDUSv15,
 .REVERSE_SOLIDUSv19, .REVERSE_SOLIDUSv20, .REVERSE_SOLIDUSv8 {
     text-indent: 0pt;
-    margin-left: 0pt;
+    margin-left: 4%;
+    margin-right: 4%;
 }
 .Note_CrossHYPHENReference_Paragraph {
     text-indent : 0;
@@ -134,15 +135,15 @@ the user's preferences from the Configuration Tool:
     visibility: hidden;
 }
 .Paragraph {
-    text-indent : 12pt;
-    margin-left : 48pt;
-    margin-right: 48pt;
+    text-indent : 1%;
+    margin-left : 4%;
+    margin-right: 4%;
     text-align:left;
 }
 .Paragraph_Continuation {
     text-indent : 0;
-    margin-left : 48pt;
-    margin-right: 48pt;
+    margin-left : 4%;
+    margin-right: 4%;
 }
 .Paragraph1 {
 /* NOTE: elements filled in by the epub export based on
@@ -150,8 +151,8 @@ the user's preferences from the Configuration Tool:
    margin-left: --> from ChapterNumbers
 */
     text-align:left;
-    margin-left: 48pt;
-    margin-right: 48pt;
+    margin-left: 4%;
+    margin-right: 4%;
 }
 
 .parallel_passage_reference, .Parallel_Passage_Reference {
@@ -191,8 +192,8 @@ the user's preferences from the Configuration Tool:
     font-style : normal;
     text-align : center;
     text-indent : 0;
-    margin-left : 48pt;
-    margin-right: 48pt;
+    margin-left : 4%;
+    margin-right: 4%;
     margin-top : 8pt;
 }
 .Section_Head_Minor {
@@ -200,8 +201,8 @@ the user's preferences from the Configuration Tool:
     font-style : normal;
     text-align : center;
     text-indent : 0;
-    margin-left : 48pt;
-    margin-right: 48pt;
+    margin-left : 4%;
+    margin-right: 4%;
     margin-top : 8pt;
 }
 .See_In_Glossary {
