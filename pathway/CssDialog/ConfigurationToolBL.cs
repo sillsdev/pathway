@@ -1913,8 +1913,14 @@ namespace SIL.PublishingSolution
 
         public string GetPageNumberImport(string pageType, string pos)
         {
+            string xPath = string.Empty;
             Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationTool: PopulatePageNumberFeature");
-            string xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";
+            if (inputTypeBL.ToLower() == "scripture")
+                xPath = "//features/feature[@name='Page Number']/option[@name!='']";
+            else
+            {
+                xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";
+            }
             XmlNodeList pageNumList = Param.GetItems(xPath);
             try
             {
@@ -3035,8 +3041,16 @@ namespace SIL.PublishingSolution
 
         public void DdlRunningHeadSelectedIndexChangedBl(string pageType)
         {
+            string xPath = string.Empty;
             Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationTool: PopulatePageNumberFeature");
-            string xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";
+            if (inputTypeBL.ToLower() == "scripture")
+                xPath = "//features/feature[@name='Page Number']/option[@name!='']";
+            else
+            {
+                xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";    
+            }
+            
+            
             XmlNodeList pageNumList = Param.GetItems(xPath);
             cTool.DdlPageNumber.Items.Clear();
             try
