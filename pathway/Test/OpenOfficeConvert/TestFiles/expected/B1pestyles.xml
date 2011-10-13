@@ -20,7 +20,6 @@
     <style:font-face style:name="Tunga" svg:font-family="'Tunga'" style:font-pitch="variable" />
     <style:font-face style:name="Kartika" svg:font-family="'Kartika'" style:font-pitch="variable" />
     <style:font-face style:name="Mangal" svg:font-family="'Mangal'" style:font-pitch="variable" />
-    <style:font-face style:name="Charis SIL Compact" svg:font-family="'Charis SIL Compact'" style:font-pitch="variable" />
   </office:font-face-decls>
   <office:styles>
     <style:style style:name="scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrBody" />
@@ -74,7 +73,7 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="11pt" style:font-size-complex="11pt" style:text-position="super 55%" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
-      <style:text-properties fo:font-family="Charis SIL Compact" style:font-name-complex="Charis SIL Compact" fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="SectionHeadMajor_scrSection_columns_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrSection_columns_scrBook_scrBody">
       <style:paragraph-properties style:line-spacing="0.5pt" fo:text-align="center" fo:text-indent="0pt" fo:margin-left="0pt" fo:margin-top="8pt" />
@@ -88,7 +87,7 @@
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="8pt" style:font-size-complex="8pt" text:display="prince-footnote" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody">
-      <style:text-properties fo:font-family="Charis SIL Compact" style:font-name-complex="Charis SIL Compact" fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
@@ -102,7 +101,7 @@
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="11pt" style:font-size-complex="11pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_Line1_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Line1_scrSection_columns_scrBook_scrBody">
-      <style:text-properties fo:font-family="Charis SIL Compact" style:font-name-complex="Charis SIL Compact" fo:language="none" fo:country="none" />
+      <style:text-properties fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumber_Line1_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Line1_scrSection_columns_scrBook_scrBody">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />

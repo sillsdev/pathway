@@ -85,7 +85,15 @@ namespace SIL.PublishingSolution
                 }
                 string cssFullName = GetCssFullName(outDir, mainFullName);
                 if (cssFullName == null) return;
-                string fluffedCssFullName = GetFluffedCssFullName(outFullName, outDir, cssFullName);
+                string fluffedCssFullName;
+                if (Path.GetFileNameWithoutExtension(outFullName) == "main")
+                {
+                    fluffedCssFullName = GetFluffedCssFullName(outFullName, outDir, cssFullName);
+                }
+                else
+                {
+                    fluffedCssFullName = GetFluffedCssFullName(GetRevFullName(outDir), outDir, cssFullName);
+                }
                 string revFileName = GetRevFullName(outDir);
                 string revCSS = string.Empty;
                 if (revFileName.Length > 0)
@@ -111,14 +119,16 @@ namespace SIL.PublishingSolution
             }
             catch (UnauthorizedAccessException err)
             {
-                var msg = new[] { "Sorry! You might not have permission to use this resource." };
-                LocDB.Message("errUnauthorized", err.ToString(), msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
+                MessageBox.Show(string.Format(err.ToString(), "Sorry! You might not have permission to use this resource."), @"Pathway Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //var msg = new[] { "Sorry! You might not have permission to use this resource." };
+                //LocDB.Message("errUnauthorized", err.ToString(), msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
                 return;
             }
             catch (Exception ex)
             {
-                var msg = new[] { ex.ToString() };
-                LocDB.Message("defErrMsg", ex.ToString(), msg, LocDB.MessageTypes.Warning, LocDB.MessageDefault.First);
+                MessageBox.Show(ex.ToString(), @"Pathway Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //var msg = new[] { ex.ToString() };
+                //LocDB.Message("defErrMsg", ex.ToString(), msg, LocDB.MessageTypes.Warning, LocDB.MessageDefault.First);
                 return;
             }
         }
