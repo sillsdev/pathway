@@ -133,6 +133,12 @@ namespace Test.UIConfigurationToolBLTest
             SetUp();
             CopyFile();
             LoadParam();
+            cTool._CToolBL = new ConfigurationToolBL();
+            cTool._CToolBL.inputTypeBL = "Dictionary";
+            cTool._CToolBL.MediaTypeEXE = "paper";
+            cTool._CToolBL.StyleEXE = "OneColumn"; //
+            cTool._CToolBL.SetClassReference(cTool);
+            cTool._CToolBL.CreateToolTip();
             cTool._CToolBL.ConfigurationTool_LoadBL();
             cTool._CToolBL.tsNew_ClickBL();
             cTool.TabControl1.SelectedIndex = 1;
@@ -191,6 +197,12 @@ namespace Test.UIConfigurationToolBLTest
             SetUp();
             CopyFile();
             LoadParam();
+            cTool._CToolBL = new ConfigurationToolBL();
+            cTool._CToolBL.inputTypeBL = "Dictionary";
+            cTool._CToolBL.MediaTypeEXE = "paper";
+            cTool._CToolBL.StyleEXE = "OneColumn"; //
+            cTool._CToolBL.SetClassReference(cTool);
+            cTool._CToolBL.CreateToolTip();
             cTool._CToolBL.ConfigurationTool_LoadBL();
             cTool._CToolBL.tsSaveAs_ClickBL();
             cTool.TabControl1.SelectedIndex = 1;
@@ -247,6 +259,12 @@ namespace Test.UIConfigurationToolBLTest
             SetUp();
             CopyFile();
             LoadParam();
+            cTool._CToolBL = new ConfigurationToolBL();
+            cTool._CToolBL.inputTypeBL = "Dictionary";
+            cTool._CToolBL.MediaTypeEXE = "paper";
+            cTool._CToolBL.StyleEXE = "Draft"; //
+            cTool._CToolBL.SetClassReference(cTool);
+            cTool._CToolBL.CreateToolTip();
             cTool._CToolBL.ConfigurationTool_LoadBL();
             cTool._CToolBL.tsNew_ClickBL();
             int afterNew = cTool.StylesGrid.RowCount;

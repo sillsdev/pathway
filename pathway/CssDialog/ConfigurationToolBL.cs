@@ -65,7 +65,7 @@ namespace SIL.PublishingSolution
         public string PreviewFileName2 = string.Empty;
 
         public bool AddMode1;
-        public enum ScreenMode { Load, New, View, Edit, Delete, SaveAs,Modify };
+        public enum ScreenMode { Load, New, View, Edit, Delete, SaveAs, Modify };
         public ScreenMode _screenMode;
 
         CssTree cssTree = new CssTree();
@@ -75,8 +75,8 @@ namespace SIL.PublishingSolution
         public int ColumnDescription = 1;
         public int ColumnComment = 2;
         public int ColumnType = 3;
-        public int ColumnShown = 4;  
-		public int ColumnApprovedBy = 5;
+        public int ColumnShown = 4;
+        public int ColumnApprovedBy = 5;
         public int ColumnFile = 6;
         public int PreviewFile1 = 7;
         public int PreviewFile2 = 8;
@@ -718,10 +718,10 @@ namespace SIL.PublishingSolution
                 MessageBox.Show("Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '" + ex.Message + "'", _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                 //writeCss.Close();
             }
-            _screenMode = ScreenMode.Edit;  
+            _screenMode = ScreenMode.Edit;
         }
 
-        
+
 
         //private void UpdateMobileAtrrib(string attribName, string attribValue)
         //{
@@ -832,28 +832,28 @@ namespace SIL.PublishingSolution
                 if (inputTypeBL.ToLower() == "scripture" && MediaType.ToLower() == "mobile")
                 {
                     string filePath = string.Empty;
-                   if(File.Exists(Param.SettingOutputPath))
-                   {
-                       filePath = Param.SettingOutputPath;
-                   }
-                   else if (File.Exists(Param.SettingPath))
-                   {
-                       filePath = Param.SettingPath;
-                   }
-                   XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
-                   foreach (XmlNode VARIABLE in baseNode1)
-                   {
-                       string attribName = VARIABLE.Attributes["name"].Value;
-                       string attribValue = VARIABLE.Attributes["value"].Value;
-                       if (attribName.ToLower() == "fileproduced")
-                       {
-                           cTool.DdlFiles.SelectedItem = attribValue;
-                       }
-                       else if (attribName.ToLower() == "redletter")
-                       {
-                           cTool.DdlRedLetter.SelectedItem = attribValue;
-                       }
-                   }  
+                    if (File.Exists(Param.SettingOutputPath))
+                    {
+                        filePath = Param.SettingOutputPath;
+                    }
+                    else if (File.Exists(Param.SettingPath))
+                    {
+                        filePath = Param.SettingPath;
+                    }
+                    XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
+                    foreach (XmlNode VARIABLE in baseNode1)
+                    {
+                        string attribName = VARIABLE.Attributes["name"].Value;
+                        string attribValue = VARIABLE.Attributes["value"].Value;
+                        if (attribName.ToLower() == "fileproduced")
+                        {
+                            cTool.DdlFiles.SelectedItem = attribValue;
+                        }
+                        else if (attribName.ToLower() == "redletter")
+                        {
+                            cTool.DdlRedLetter.SelectedItem = attribValue;
+                        }
+                    }
                     SetMobileSummary(null, null);
                 }
                 else if (MediaType.ToLower() == "others")
@@ -861,7 +861,7 @@ namespace SIL.PublishingSolution
                     XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
                     // show/hide epub UI controls based on the input type
                     SetEpubUIControls(inputTypeBL == "Scripture");
-                    
+
                     foreach (XmlNode VARIABLE in baseNode1)
                     {
                         string attribName = VARIABLE.Attributes["name"].Value.ToLower();
@@ -1099,7 +1099,7 @@ namespace SIL.PublishingSolution
                                 if (!cTool.DdlDefaultAlignment.Items.Contains(ctn.Text))
                                     cTool.DdlDefaultAlignment.Items.Add(ctn.Text);
                                 break;
-                            
+
                             case "MissingFont":
                                 if (!cTool.DdlMissingFont.Items.Contains(ctn.Text))
                                     cTool.DdlMissingFont.Items.Add(ctn.Text);
@@ -1223,7 +1223,7 @@ namespace SIL.PublishingSolution
             catch
             {
             }
-           
+
         }
 
         public void SideBar()
@@ -1258,7 +1258,7 @@ namespace SIL.PublishingSolution
                 case "mobile":
                     //cTool.TabControl1.TabPages.Add(tabmob);
                     cTool.TabControl1.TabPages.Insert(1, tabmob);
-                    
+
                     XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
                     foreach (XmlNode VARIABLE in baseNode1)
                     {
@@ -1278,7 +1278,7 @@ namespace SIL.PublishingSolution
                 case "others":
                     //cTool.TabControl1.TabPages.Add(tabothers);
                     cTool.TabControl1.TabPages.Insert(1, tabothers);
-                    
+
                     XmlNodeList baseNode = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
                     // show/hide chapter numbers and references UI
                     SetEpubUIControls(inputTypeBL == "Scripture");
@@ -1336,7 +1336,7 @@ namespace SIL.PublishingSolution
                 default:
                     // web, paper
                     //cTool.TabControl1.TabPages.Add(tabDisplay);
-                    cTool.TabControl1.TabPages.Insert(1,tabDisplay);
+                    cTool.TabControl1.TabPages.Insert(1, tabDisplay);
                     ShowCssSummary();
                     break;
             }
@@ -1680,7 +1680,7 @@ namespace SIL.PublishingSolution
         {
             if (_cssClass.ContainsKey(task) && _cssClass[task].ContainsKey(key))
             {
-                string result = _cssClass[task][key].Replace("'","");
+                string result = _cssClass[task][key].Replace("'", "");
                 //if (result.Length == 0)
                 //    result = "true";
                 return result;
@@ -1823,7 +1823,7 @@ namespace SIL.PublishingSolution
                         grid[ColumnShown, SelectedRowIndex].Value = checkBox.Checked ? "Yes" : "No";
                         break;
                 }
-                _screenMode = ScreenMode.Modify;   
+                _screenMode = ScreenMode.Modify;
             }
         }
 
@@ -1933,10 +1933,10 @@ namespace SIL.PublishingSolution
                         }
                 }
             }
-            catch{}
+            catch { }
             return "PageNumber_None.css";
 
-           // return "PageNumber_TopCenter.css";
+            // return "PageNumber_TopCenter.css";
         }
 
 
@@ -2006,7 +2006,7 @@ namespace SIL.PublishingSolution
             Param.SetNodeText(copyNode, ElementDesc, ""); // description
             Param.SetNodeText(copyNode, ElementComment, ""); // comment
             baseNode.ParentNode.AppendChild(copyNode);
-            
+
             Param.Write();
             //AddMode = false;
         }
@@ -2037,8 +2037,8 @@ namespace SIL.PublishingSolution
             if (Param.Value.ContainsKey(Param.LayoutSelected))
             {
                 lastLayout = StyleEXE; //Param.Value[Param.LayoutSelected];				
-                
-				if (SelectRow(grid, lastLayout))
+
+                if (SelectRow(grid, lastLayout))
                 {
                     selectedNotExist = false;
                 }
@@ -2046,7 +2046,12 @@ namespace SIL.PublishingSolution
             if (selectedNotExist && Param.DefaultValue.ContainsKey(Param.LayoutSelected))
             {
                 //lastLayout = Param.DefaultValue[Param.LayoutSelected];
-                lastLayout = StyleEXE;
+                if (StyleEXE != null)
+                    lastLayout = StyleEXE;
+                else
+                {
+                    lastLayout = Param.DefaultValue[Param.LayoutSelected];
+                }
                 SelectRow(grid, lastLayout);
             }
             return lastLayout;
@@ -2068,7 +2073,7 @@ namespace SIL.PublishingSolution
         public bool WriteAttrib(string key, object sender)
         {
             bool result = false;
-            
+
             string file;
             string attribValue = Common.GetTextValue(sender, out file);
             if (PreviousValue == attribValue)
@@ -2107,7 +2112,7 @@ namespace SIL.PublishingSolution
         {
             bool result = false;
             if (PreviousValue.ToLower() == styleName.ToLower()) return result;
-            string selectedGridName = string.Empty;  
+            string selectedGridName = string.Empty;
             styleName = styleName.Trim().ToLower();
             for (int row = 0; row < grid.Rows.Count - 1; row++)
             {
@@ -2122,7 +2127,9 @@ namespace SIL.PublishingSolution
                 }
             }
 
-            if (cTool.TabControl1.SelectedIndex != 0) return result;
+            if (cTool != null)
+                if (cTool.TabControl1.SelectedIndex != 0)
+                    return result;
 
             XmlNodeList xmlNodeList = Param.GetItems("//styles//style");
             if (xmlNodeList != null)
@@ -2482,7 +2489,7 @@ namespace SIL.PublishingSolution
                 //    _redoundo.Set(Common.Action.Edit, StyleName, _currentControl, PreviousValue);
                 //}
                 PreviousValue = Common.GetTextValue(sender, out control);
-               _redoUndoBufferValue = PreviousValue;
+                _redoUndoBufferValue = PreviousValue;
                 _redoundo.PreviousControl = _redoundo.CurrentControl;
                 _redoundo.CurrentControl = control;
                 _previousStyleName = PreviousValue;
@@ -2802,12 +2809,12 @@ namespace SIL.PublishingSolution
                     //String imageFile1 = Common.PathCombine(stylenamePath, PreviewFileName2);
                     //if (!(File.Exists(imageFile) && File.Exists(imageFile1)) || IsPropertyModified())
                     //{
-                        String imageFile = Common.PathCombine(Common.GetAllUserPath(),
-                                                       Path.GetFileNameWithoutExtension(fileName) + ".pdf1.jpg");
-                        PreviewFileName1 = imageFile;
-                        String imageFile1 = Common.PathCombine(Common.GetAllUserPath(),
-                                                        Path.GetFileNameWithoutExtension(fileName) + ".pdf2.jpg");
-                        PreviewFileName2 = imageFile1;
+                    String imageFile = Common.PathCombine(Common.GetAllUserPath(),
+                                                   Path.GetFileNameWithoutExtension(fileName) + ".pdf1.jpg");
+                    PreviewFileName1 = imageFile;
+                    String imageFile1 = Common.PathCombine(Common.GetAllUserPath(),
+                                                    Path.GetFileNameWithoutExtension(fileName) + ".pdf2.jpg");
+                    PreviewFileName2 = imageFile1;
                     //}
 
                     cTool.StylesGrid[PreviewFile1, SelectedRowIndex].Value = PreviewFileName1;
@@ -2838,8 +2845,8 @@ namespace SIL.PublishingSolution
         /// <returns></returns>
         private bool IsPropertyModified()
         {
-            if (_propertyValue.Count == 0 )
-                    return false;
+            if (_propertyValue.Count == 0)
+                return false;
 
             bool propertyModified = false;
             int i = 0;
@@ -2849,7 +2856,7 @@ namespace SIL.PublishingSolution
                 if (control.GetType().Name == "Label") continue;
 
                 string val = control.Text;
-                
+
                 if (_propertyValue[i++] != val)
                 {
                     propertyModified = true;
@@ -2976,7 +2983,7 @@ namespace SIL.PublishingSolution
                 //_screenMode = ScreenMode.Edit;
                 //if (_screenMode == ScreenMode.Modify || _screenMode == ScreenMode.Edit) // Add
                 //{
-                    
+
                 //    ShowInfoValue();
                 //    //WriteCss();
                 //    _screenMode = ScreenMode.Edit;
@@ -3047,10 +3054,10 @@ namespace SIL.PublishingSolution
                 xPath = "//features/feature[@name='Page Number']/option[@name!='']";
             else
             {
-                xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";    
+                xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";
             }
-            
-            
+
+
             XmlNodeList pageNumList = Param.GetItems(xPath);
             cTool.DdlPageNumber.Items.Clear();
             try
@@ -3069,7 +3076,7 @@ namespace SIL.PublishingSolution
             catch
             {
             }
-            
+
         }
 
         public void tsUndo_ClickBL(object sender, EventArgs e)
@@ -3185,7 +3192,7 @@ namespace SIL.PublishingSolution
                     SelectRow(cTool.StylesGrid, PreviousValue);
                     ShowInfoValue();
                 }
-                else if(_screenMode == ScreenMode.Modify)
+                else if (_screenMode == ScreenMode.Modify)
                 {
                     if (PreviousValue == styleName)
                     {
@@ -3479,7 +3486,10 @@ namespace SIL.PublishingSolution
             _lastSelectedLayout = StyleEXE;
             Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool_Load");
             //tabDisplay = cTool.TabControl1.TabPages[1];
+
+
             tabDisplay = cTool.TabControl1.TabPages["tabdisplay"];
+
             if (cTool.TabControl1.TabPages.Count > 2)
             {
                 //tabmob = cTool.TabControl1.TabPages[2];
@@ -3510,7 +3520,7 @@ namespace SIL.PublishingSolution
             if (!File.Exists(Common.FromRegistry("ScriptureStyleSettings.xml")))
             {
                 // select the dictionary styles
-                btnDictionary_ClickBL(); 
+                btnDictionary_ClickBL();
                 // hide the Scripture / Dictionary buttons (they don't apply)
                 cTool.BtnScripture.Enabled = false;
                 cTool.BtnScripture.Visible = false;
@@ -3609,7 +3619,7 @@ namespace SIL.PublishingSolution
                 if (SelectedRowIndex >= 0)
                 {
                     string selectedTypeValue = cTool.StylesGrid[ColumnType, SelectedRowIndex].Value.ToString();
-                    
+
                     if (selectedTypeValue != TypeStandard)
                     {
                         _cssNames.Remove(StyleName);
@@ -3637,7 +3647,7 @@ namespace SIL.PublishingSolution
             PreviousStyleName = cTool.StylesGrid.Rows[SelectedRowIndex].Cells[0].Value.ToString();
             //cTool.LblInfoCaption.Text = PreviousStyleName;
             WriteCss();
-            
+
         }
 
         public void tabControl1_SelectedIndexChangedBL()
@@ -3688,7 +3698,7 @@ namespace SIL.PublishingSolution
                     ShowInfoValue();
                     cTool.TxtName.Select();
                 }
-                
+
                 //_screenMode = ScreenMode.Add;
                 //AddStyleInXML(cTool.StylesGrid, _cssNames);
                 //ShowStyleInGrid(cTool.StylesGrid, _cssNames);
