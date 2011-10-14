@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="13">
   <settings>
     <property name="InputPath" value="%(AppData)s/SIL/Pathway" />
     <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Scripture" />
@@ -19,7 +19,7 @@
     <property name="MissingIcon" value="Graphic/missing.png" />
     <property name="Help" value="PsDoc.chm" />
     <property name="PrintVia" value="OpenOffice/LibreOffice" />
-	<property name="LayoutSelected" value="C5 Cols ApplicationStyles" />
+    <property name="LayoutSelected" value="C5 Cols ApplicationStyles" />
     <property name="ExtraProcessing" value="True" />
     <property name="Media" value="mobile" />
   </settings>
@@ -130,8 +130,8 @@
       <option name="No" file="Empty.css" />
     </feature>
     <feature name="EmbedFonts">
-        <option name="Yes" file="Empty.css" />
-        <option name="No" file="Empty.css" />
+      <option name="Yes" file="Empty.css" />
+      <option name="No" file="Empty.css" />
     </feature>
     <feature name="TOCLevel">
       <option name="1 - Book Only" file="Empty.css" />
@@ -162,23 +162,23 @@
       <option name="At End of Document" file="Empty.css" />
     </feature>
     <feature name="Lic_Other">
-      <option name="Draft" file="Draft.xhtml"/>
-      <option name="Non-Commercial Share Alike" file="CC-by-nc-sa.xhtml"/>
-      <option name="Non-Commercial No Derivatives" file="CC-by-nc-nd.xhtml"/>
-      <option name="Intended for Sale" file="Selling.xhtml"/>
+      <option name="Draft" file="Draft.xhtml" />
+      <option name="Non-Commercial Share Alike" file="CC-by-nc-sa.xhtml" />
+      <option name="Non-Commercial No Derivatives" file="CC-by-nc-nd.xhtml" />
+      <option name="Intended for Sale" file="Selling.xhtml" />
     </feature>
     <feature name="Lic_SIL International">
-      <option name="Draft" file="SIL_Draft.xhtml"/>
-      <option name="Non-Commercial Share Alike" file="SIL_CC-by-nc-sa.xhtml"/>
-      <option name="Non-Commercial No Derivatives" file="SIL_CC-by-nc-nd.xhtml"/>
-      <option name="Intended for Sale" file="SIL_Selling.xhtml"/>
+      <option name="Draft" file="SIL_Draft.xhtml" />
+      <option name="Non-Commercial Share Alike" file="SIL_CC-by-nc-sa.xhtml" />
+      <option name="Non-Commercial No Derivatives" file="SIL_CC-by-nc-nd.xhtml" />
+      <option name="Intended for Sale" file="SIL_Selling.xhtml" />
     </feature>
     <feature name="Lic_United Bible Societies">
-      <option name="Draft" file="UBS_Draft.xhtml"/>
+      <option name="Draft" file="UBS_Draft.xhtml" />
     </feature>
     <feature name="Subject">
-        <option name="Religion and Spirituality" file="Empty.css" />
-        <option name="Reference" file="Empty.css" />
+      <option name="Religion and Spirituality" file="Empty.css" />
+      <option name="Reference" file="Empty.css" />
     </feature>
   </features>
   <categories>
@@ -312,8 +312,8 @@
     <others>
       <style name="EBook (epub)" file="epub.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p2.jpg">
         <description>1 column flowed text, for use in e-books</description>
-        <styleProperty name="CoverImage" value="cover.png"/>
-        <styleProperty name="TOCLevel" value="2 - Book and Chapter"/>
+        <styleProperty name="CoverImage" value="cover.png" />
+        <styleProperty name="TOCLevel" value="2 - Book and Chapter" />
         <styleProperty name="AddColophonPage" value="Yes" />
         <styleProperty name="BaseFontSize" value="13" />
         <styleProperty name="DefaultLineHeight" value="125" />
@@ -321,12 +321,12 @@
         <styleProperty name="ChapterNumbers" value="Drop Cap" />
         <styleProperty name="References" value="After Each Section" />
         <styleProperty name="MaxImageWidth" value="600" />
-        <styleProperty name="EmbedFonts" value="Yes"/>
+        <styleProperty name="EmbedFonts" value="Yes" />
         <styleProperty name="IncludeFontVariants" value="Yes" />
         <styleProperty name="DefaultFont" value="Charis SIL" />
-        <styleProperty name="MissingFont" value="Prompt User"/>
+        <styleProperty name="MissingFont" value="Prompt User" />
         <styleProperty name="NonSILFont" value="Prompt User" />
-        <styleProperty name="Title" value=" "/>
+        <styleProperty name="Title" value=" " />
         <styleProperty name="Creator" value=" " />
         <styleProperty name="Publisher" value=" " />
         <styleProperty name="Type" value=" " />
@@ -362,19 +362,23 @@
   </Organizations>
   <Metadata>
     <meta name="Title" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
     </meta>
     <meta name="Creator" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
     </meta>
     <meta name="Publisher" outputTypes="all">
       <organizationDefault organizationName="SIL International" Locked="false">Wycliffe Bible Translators, Inc.</organizationDefault>
       <organizationDefault organizationName="United Bible Societies" Locked="false">United Bible Societies</organizationDefault>
       <organizationDefault organizationName="Pioneer Bible Translators" Locked="false">Pioneer Bible Translators</organizationDefault>
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
     </meta>
     <meta name="Description" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
     </meta>
     <meta name="Copyright Holder" outputTypes="all">
       <organizationDefault organizationName="SIL International" Locked="false">© 2011 Wycliffe Bible Translators, Inc. All Rights Reserved.</organizationDefault>
@@ -383,40 +387,50 @@
       <defaultValue>© 2011. All Rights Reserved.</defaultValue>
     </meta>
     <meta name="Type" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
     </meta>
     <meta name="Source" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
     </meta>
     <meta name="Format" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
     </meta>
     <meta name="Contributor" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
     </meta>
     <meta name="Relation" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
     </meta>
     <meta name="Coverage" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
     </meta>
     <meta name="Subject" outputTypes="all">
       <defaultValue>Bible</defaultValue>
     </meta>
     <meta name="Date" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
     </meta>
     <meta name="Language" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
     </meta>
     <meta name="Identifier" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
     </meta>
     <meta name="Cover Page" outputTypes="epub">
       <defaultValue>true</defaultValue>
     </meta>
     <meta name="Cover Page Filename" outputTypes="epub">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
     </meta>
     <meta name="Cover Page Title" outputTypes="epub">
       <defaultValue>true</defaultValue>
@@ -428,7 +442,8 @@
       <defaultValue>false</defaultValue>
     </meta>
     <meta name="Copyright Page Filename" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
     </meta>
     <meta name="Table of Contents" outputTypes="all">
       <defaultValue>false</defaultValue>
