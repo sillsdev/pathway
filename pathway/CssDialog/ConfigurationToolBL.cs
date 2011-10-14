@@ -2785,7 +2785,7 @@ namespace SIL.PublishingSolution
             if (selectedTypeValue != TypeStandard)
             {
                 bool isPreviewFileExist = false;
-                if (File.Exists(PreviewFileName1) && File.Exists(PreviewFileName2))
+                if (File.Exists(PreviewFileName1) || File.Exists(PreviewFileName2))
                 {
                     isPreviewFileExist = true;
                 }
@@ -3714,12 +3714,26 @@ namespace SIL.PublishingSolution
 
         public void ShowPreview(int page)
         {
-            CreatePreviewFile();
-            cTool.PicPreview.Visible = false;
             string preview;
+            if(!File.Exists(PreviewFileName1) || !File.Exists(PreviewFileName2))
+            {
+                CreatePreviewFile();
+                cTool.PicPreview.Visible = false;
+                
+                //cTool.BtnPrevious.Visible = true;
+                //cTool.BtnNext.Visible = true;
+            }
             cTool.PicPreview.SizeMode = PictureBoxSizeMode.StretchImage;
-            //cTool.BtnPrevious.Visible = true;
-            //cTool.BtnNext.Visible = true;
+            if(File.Exists(PreviewFileName1) && File.Exists(PreviewFileName2))
+            {
+                cTool.BtnPrevious.Visible = true;
+                cTool.BtnNext.Visible = true;
+            }
+            else
+            {
+                cTool.BtnPrevious.Visible = false;
+                cTool.BtnNext.Visible = false;
+            }
 
             if (page == 1)
             {
