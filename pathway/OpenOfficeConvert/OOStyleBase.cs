@@ -494,6 +494,15 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("svg:font-family", "'Yi plus Phonetics'");
                 _writer.WriteEndElement();
 
+
+                ////TD-2682
+                _writer.WriteStartElement("style:font-face");
+                _writer.WriteAttributeString("style:name", "Charis SIL");
+                _writer.WriteAttributeString("svg:font-family", "'Charis SIL'");
+                _writer.WriteAttributeString("style:font-adornments", "Regular");
+                _writer.WriteAttributeString("style:font-pitch", "variable");
+                _writer.WriteEndElement();
+
                 //TD-2566
                 //<style:font-face style:name="Gautami1" svg:font-family="Gautami" style:font-pitch="variable"/>
 
