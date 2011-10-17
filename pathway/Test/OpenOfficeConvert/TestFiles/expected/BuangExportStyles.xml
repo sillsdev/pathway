@@ -3,7 +3,6 @@
   <office:font-face-decls>
     <style:font-face style:name="Times New Roman" svg:font-family="'Times New Roman'" style:font-family-generic="roman" style:font-pitch="variable" />
     <style:font-face style:name="Yi plus Phonetics" svg:font-family="'Yi plus Phonetics'" />
-    <style:font-face style:name="Charis SIL" svg:font-family="'Charis SIL'" style:font-adornments="Regular" style:font-pitch="variable" />
     <style:font-face style:name="Gautami1" svg:font-family="'Gautami'" style:font-pitch="variable" />
     <style:font-face style:name="GenericFont" svg:font-family="'Arial Unicode MS'" style:font-pitch="variable" />
     <style:font-face style:name="Arial" svg:font-family="'Arial'" style:font-family-generic="swiss" style:font-pitch="variable" />
@@ -707,7 +706,6 @@
           <style:tab-stop style:position="6.925197in" style:type="right" />
         </style:tab-stops>
       </style:paragraph-properties>
-      <style:text-properties style:font-name="Times New Roman" />
     </style:style>
     <style:style style:name="Footer" style:family="paragraph" style:parent-style-name="Standard" style:next-style-name="Text_20_body" style:class="text">
       <style:paragraph-properties fo:margin-top="0.0005in" fo:margin-bottom="0.0835in" fo:keep-with-next="always" text:number-lines="false" text:line-number="0">
@@ -731,9 +729,7 @@
       <style:paragraph-properties text:number-lines="false" text:line-number="0" />
       <style:text-properties style:font-name-asian="Yi plus Phonetics" style:font-name-complex="Tahoma1" />
     </style:style>
-    <style:style style:name="Frame_20_contents" style:display-name="Frame contents" style:family="paragraph" style:parent-style-name="headerFontStyleName" style:class="extra">
-      <style:text-properties style:font-name="Times New Roman" />
-    </style:style>
+    <style:style style:name="Frame_20_contents" style:display-name="Frame contents" style:family="paragraph" style:parent-style-name="headerFontStyleName" style:class="extra" />
     <style:style style:name="Graphics" style:family="graphic">
       <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" style:mirror="none" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" style:wrap="none" style:vertical-pos="top" style:vertical-rel="paragraph" style:horizontal-pos="center" style:horizontal-rel="paragraph" />
     </style:style>
