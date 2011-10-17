@@ -92,6 +92,8 @@ namespace SIL.PublishingSolution
             ProcessCounterProperty();
             OpenXhtmlFile(projInfo.DefaultXhtmlFileWithPath);
             ProcessXHTML(projInfo.DefaultXhtmlFileWithPath);
+
+            CloseFile();
             //UpdateRelativeInStylesXML();
             return _newProperty;
         }
@@ -1372,9 +1374,10 @@ namespace SIL.PublishingSolution
             string inner = string.Empty; //_reader.ReadString();
 
             if (classNameWOLang == "ChapterNumber")
-                _chapterNo = _reader.ReadString();
-
-            if (IdAllClass.ContainsKey(classNameWOLang) && IdAllClass[classNameWOLang].ContainsKey("float") && IdAllClass[classNameWOLang].ContainsKey("BaselineShift"))
+            {
+                _chapterNo = _reader.ReadString();                
+            }
+            if (IdAllClass.ContainsKey(classNameWOLang) && IdAllClass[classNameWOLang].ContainsKey("float") && IdAllClass[classNameWOLang].ContainsKey("vertical-align"))
             {
                 Dictionary<string, string> mystyle = new Dictionary<string, string>();
                 _isDropCap = true;
@@ -1592,8 +1595,23 @@ namespace SIL.PublishingSolution
             //TextAlign
             _paragraphPropertyList.Add("text-align");
             _paragraphPropertyList.Add("column-count");
-            
-            
+
+
+        }
+
+        /// -------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Close the Xhtml and CSS files.
+        /// 
+        /// <list> 
+        /// </list>
+        /// </summary>
+        /// <returns> </returns>
+        /// -------------------------------------------------------------------------------------------
+        private void CloseFile()
+        {
+            if (_reader != null)
+                _reader.Close();
         }
         #endregion
     }
