@@ -114,7 +114,7 @@ namespace SIL.PublishingSolution
 
             switch (word)
             {
-                case "\\Name":
+                case "\\Marker":
                     CreateClass(line);
                     break;
                 case "\\FontSize":
@@ -181,33 +181,24 @@ namespace SIL.PublishingSolution
 
 		/// ------------------------------------------------------------
 		/// <summary>
-		/// Creates CSS style.
+		/// Creates CSS style from the \Marker line.
 		/// </summary>
 		/// <param name="line">A line from the sty file which should
 		/// contain the name of the style.</param>
         /// ------------------------------------------------------------
 		private void CreateClass(string line)
         {
-            if (line.IndexOf("DEPRECATED ") >= 0 || line.IndexOf("OBSOLETE ") >= 0)
-                line = line.Replace("DEPRECATED ", "").Replace("OBSOLETE ", "");
             int start = line.IndexOf(" ") + 1;
 			int iSecondSpace = line.IndexOf(" ", start);
             int end = (iSecondSpace > start) ? iSecondSpace : line.Length;
             string className = line.Substring(start, end - start);
 
-            if (className.IndexOf("...") > 0)
-            {
-                className = Common.LeftString(className, "...");
-            }
-
             string mapClassName = className;
             if (_mapClassName.ContainsKey(className))
-            {
                 mapClassName = _mapClassName[className];
-            }
+
             _cssProp = new Dictionary<string, string>();
             _styleInfo[mapClassName] = _cssProp;
-
         }
 
 		/// ------------------------------------------------------------
