@@ -106,7 +106,17 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void ChapterNumberTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "ChapterNumber";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontStyleItalicTest()
