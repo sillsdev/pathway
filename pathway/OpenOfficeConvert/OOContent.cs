@@ -1061,7 +1061,7 @@ namespace SIL.PublishingSolution
                     _writer.WriteAttributeString("text:ref-name", anchorName.ToLower());
                     //_writer.WriteString(data);
                     //_writer.WriteEndElement(); // for Anchor Ends
-
+                    StackPop(_referenceCloseStyleStack);
                     isAnchorTagOpen = true;
                 }
                 else if (status == "name")
