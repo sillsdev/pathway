@@ -2429,7 +2429,8 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("text:display", "none");
                 _writer.WriteAttributeString("text:formula", "ooow: " + content);
                 _writer.WriteAttributeString("office:value-type", "string");
-                _writer.WriteAttributeString("office:string-value", " " + content);
+                //_writer.WriteAttributeString("office:string-value", " " + content);//TD-2688
+                _writer.WriteAttributeString("office:string-value", content);
                 _writer.WriteEndElement();
                 _writer.WriteEndElement();
                 
@@ -2440,7 +2441,8 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("text:display", "none");
                 _writer.WriteAttributeString("text:formula", "ooow: " + content);
                 _writer.WriteAttributeString("office:value-type", "string");
-                _writer.WriteAttributeString("office:string-value", " " + content);
+                //_writer.WriteAttributeString("office:string-value", " " + content);
+                _writer.WriteAttributeString("office:string-value", content);
                 _writer.WriteEndElement();
                 _writer.WriteEndElement();
 
@@ -2456,7 +2458,8 @@ namespace SIL.PublishingSolution
                     _writer.WriteAttributeString("text:display", "none");
                     _writer.WriteAttributeString("text:formula", "ooow: " + content);
                     _writer.WriteAttributeString("office:value-type", "string");
-                    _writer.WriteAttributeString("office:string-value", " " + content);
+                    //_writer.WriteAttributeString("office:string-value", " " + content);
+                    _writer.WriteAttributeString("office:string-value", content);
                     _writer.WriteEndElement();
                     _writer.WriteEndElement();
                 
@@ -2467,7 +2470,8 @@ namespace SIL.PublishingSolution
                     _writer.WriteAttributeString("text:display", "none");
                     _writer.WriteAttributeString("text:formula", "ooow: " + content);
                     _writer.WriteAttributeString("office:value-type", "string");
-                    _writer.WriteAttributeString("office:string-value", " " + content);
+                    //_writer.WriteAttributeString("office:string-value", " " + content);
+                    _writer.WriteAttributeString("office:string-value", content);
                     _writer.WriteEndElement();
                     _writer.WriteEndElement();
                 }
