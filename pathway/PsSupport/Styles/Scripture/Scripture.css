@@ -259,4 +259,9 @@ span {
 .Verse_Number1 {
     display: none;
 }
+.Front_Matter {
+margin-left : 48pt;
+margin-right: 48pt;
+text-align: justify;
+}
 

@@ -753,3 +753,8 @@
 .xsensenumber {
         font-weight: bold;
 }
+.Front_Matter {
+margin-left : 48pt;
+margin-right: 48pt;
+text-align: justify;
+}
