@@ -413,7 +413,7 @@ namespace SIL.PublishingSolution
                     else if (!(_reader.Name == "id" || _reader.Name == "xml:space"))
                     {
                         _xhtmlAttribute.Add(_reader.Name + _reader.Value);
-                        if (_reader.Name == "id")
+                        if (_reader.Name == "href")
                             _anchorIdValue = _reader.Value;
                     }
                     else if (_reader.Name == "id")

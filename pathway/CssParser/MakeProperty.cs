@@ -653,6 +653,7 @@ namespace SIL.PublishingSolution
                 case "-ps-fixed-line-height":
                 case "string-set":
                 case "unicode-bidi":
+                case "pathway":
                     break;
                 default:
                     throw new Exception("Not a valid CSS Command");

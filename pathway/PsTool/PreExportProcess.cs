@@ -1303,6 +1303,58 @@ namespace SIL.Tool
             }
         }
 
+        //public ArrayList GetReferenceList()
+        //{
+        //    ArrayList refList = new ArrayList();
+        //    ArrayList tempRefList = new ArrayList();
+        //    var xDoc = new XmlDocument { XmlResolver = null };
+        //    xDoc.Load(_xhtmlFileNameWithPath);
+        //    XmlNodeList nodeList = xDoc.GetElementsByTagName("a");
+        //    foreach (XmlNode node in nodeList)
+        //    {
+        //        if (node.Attributes != null && node.Attributes["href"] != null)
+        //        {
+        //            string value = node.Attributes["href"].Value.Replace("#", "");
+        //            if (value != null && !tempRefList.Contains(value))
+        //            {
+        //                tempRefList.Add(value);
+        //            }
+        //        }
+        //    }
+
+        //    for (int i = 0; i <= tempRefList.Count - 1; i++)
+        //    {
+        //        string pattern = "id=\"" + tempRefList[i] + "\"";
+        //        MatchCollection matchs = Regex.Matches(_fileContent.ToString(), pattern);
+        //        if (matchs.Count > 0 && !refList.Contains(tempRefList[i]))
+        //        {
+        //            refList.Add(tempRefList[i]);
+        //        }
+        //    }
+
+        //    return refList;
+        //}
+
+        public ArrayList GetReferenceList()
+        {
+            ArrayList refList = new ArrayList();
+            MatchCollection m1 = Regex.Matches(_fileContent.ToString(), "<a\\shref.*?>");
+            foreach (Match m in m1)
+            {
+                string value = m.Value;
+                string st = Common.RightRemove(value, "\"");
+                st = Common.LeftRemove(st, "#").Replace("#","");
+
+                string pattern = "id=\"" + st + "\"|name=\"" + st + "\"";
+                MatchCollection matchs = Regex.Matches(_fileContent.ToString(), pattern, RegexOptions.IgnoreCase);
+                if (matchs.Count > 0 && !refList.Contains(st))
+                {
+                    refList.Add(st);
+                }
+            }
+            return refList;
+        }
+
         #endregion
 
         #region XML PreProcessor

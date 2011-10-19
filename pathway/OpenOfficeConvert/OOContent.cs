@@ -142,8 +142,12 @@ namespace SIL.PublishingSolution
         private bool _significant;
         private bool _isListBegin;
         private Dictionary<string, string> ListType;
-        private string _anchorText = string.Empty;
-        private string _referenceCloseStyle = string.Empty;
+        //private string _anchorText = string.Empty;
+        private bool _anchorWrite;
+        private ArrayList _referenceIDList = new ArrayList();
+
+        private Stack<string> _referenceCloseStyleStack = new Stack<string>();
+        
         
         private bool _isEmptyTitleExist;
         private int _titleCounter=1;
@@ -207,6 +211,7 @@ namespace SIL.PublishingSolution
         {
             PreExportProcess preProcessor = new PreExportProcess(_projInfo);
             preProcessor.ReplaceInvalidTagtoSpan("CmPicture-publishStemPile-ThumbnailPub", "div");
+            _referenceIDList = preProcessor.GetReferenceList();
 
         }
 
@@ -1004,8 +1009,8 @@ namespace SIL.PublishingSolution
             //    whiteSpacePre(content, pseudo); // TODO -2000 - SignificantSpace() - IN OO convert
             //}
 
-            if (_anchorStart)
-                _anchorText = content;
+            //if (_anchorStart)
+            //    _anchorText = content;
 
             bool isAnchorTagOpen = AnchorBookMark(pseudo);
             content = WriteCounter(content);
@@ -1042,7 +1047,8 @@ namespace SIL.PublishingSolution
             if (pseudo) return false;
             
             bool isAnchorTagOpen = false;
-            if (_anchorStart)
+            
+            if (_anchorWrite)
             {
                 string status = _anchorBookMarkName.Substring(0, 4);
 
@@ -1064,23 +1070,27 @@ namespace SIL.PublishingSolution
                     _writer.WriteStartElement("text:reference-mark");
                     _writer.WriteAttributeString("text:name", anchorName.ToLower());
                     _writer.WriteEndElement();
-                    _referenceCloseStyle = string.Empty;
+                    StackPop(_referenceCloseStyleStack);
+                    //_referenceCloseStyle = string.Empty;
                 }
 
                 _anchorBookMarkName = string.Empty;
                 _anchorIdValue = string.Empty;
                 _anchor.Clear();
-                _anchorStart = false;
+                _anchorWrite = false;
             }
-            else if (_anchorIdValue.Length > 0)
+            else if (_anchorIdValue.Length > 0 && _referenceIDList.Contains(_anchorIdValue.Replace("#", "")))
             {
                 _writer.WriteStartElement("text:reference-mark");
                 _writer.WriteAttributeString("text:name", _anchorIdValue.ToLower());
                 _writer.WriteEndElement();
                 _anchorIdValue = string.Empty;
-                _referenceCloseStyle = string.Empty;
+                StackPop(_referenceCloseStyleStack);
+                //_referenceCloseStyle = string.Empty;
             }
 
+
+            
             return isAnchorTagOpen;
         }
 
@@ -1153,10 +1163,16 @@ namespace SIL.PublishingSolution
 
         private void IsAnchorBookMark()
         {
-            bool isAnchorTagOpen = false;
             if (_anchorStart)
             {
-                _referenceCloseStyle = _childName;
+                if (!_referenceIDList.Contains(_anchorIdValue.Replace("#", "")))
+                {
+                    _anchorStart = false;
+                    return;
+                }
+                _referenceCloseStyleStack.Push(_childName);
+                _anchorStart = false;
+                _anchorWrite = true;
             }
             //else
             //{
@@ -1320,8 +1336,8 @@ namespace SIL.PublishingSolution
        
         private void EndElement()
         {
-            if (_reader.Name == "a" && _anchorText.Length == 0)
-                _anchorStart = false;
+            //if (_reader.Name == "a" && _anchorText.Length == 0)
+            //    _anchorStart = false;
 
             _characterName = null;
             _closeChildName = StackPop(_allStyle);
@@ -1392,10 +1408,11 @@ namespace SIL.PublishingSolution
 
         private void ReferenceClose(string closeChild)
         {
-            if (closeChild.Length > 0 && _referenceCloseStyle == closeChild)
+            if (closeChild.Length > 0 && StackPeek(_referenceCloseStyleStack) == closeChild)
             {
                 _writer.WriteEndElement();
-                _referenceCloseStyle = string.Empty;
+                StackPop(_referenceCloseStyleStack);
+                //_referenceCloseStyle = string.Empty;
             }
         }
 
