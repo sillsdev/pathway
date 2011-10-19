@@ -1023,8 +1023,8 @@ namespace SIL.PublishingSolution
             }
 
 
-            //if ((_tagType == "span" || _tagType == "a" || pseudo) && characterStyle != "none" || (_tagType == "img" && _imageInserted))  // span end
-            if ((_tagType == "span" || pseudo) && characterStyle != "none" || (_tagType == "img" && _imageInserted))  // span end
+            if ((_tagType == "span" || _tagType == "a" || pseudo) && characterStyle != "none" || (_tagType == "img" && _imageInserted))  // span end
+            //if ((_tagType == "span" || pseudo) && characterStyle != "none" || (_tagType == "img" && _imageInserted))  // span end
             {
                 if(_isVerseNumberContent == false)
                 {
