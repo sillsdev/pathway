@@ -38,8 +38,9 @@ font-style: normal;
 }
 .entry {
     margin-left : 3%;
-    margin-right: -3%;
+    margin-right: 3%;
     padding-bottom: 1%;
+    text-indent: -3%;
 }
 .example,
 .grammatical-info-minor,
@@ -118,6 +119,24 @@ padding-right: 5px;
 }
 .revhomographnumber {
     vertical-align: sub;
+}
+.senses {
+    margin-left: 0;
+    padding-left: 0;
+}
+.semantic-domains, 
+.examples, 
+.translations, 
+.primaryrefs,
+.entryref-component, 
+.primaryrefs-minor, 
+.variant-primary-minor, 
+.relations, 
+.lexref-targets, 
+.variantrefs, 
+.variantref-form {
+    margin-left: 0;
+    text-indent: 0;
 }
 .sense {
     font-weight: normal;
