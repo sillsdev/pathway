@@ -363,7 +363,7 @@ namespace SIL.PublishingSolution
         {
             if (className.IndexOf("entry") == 0)
             {
-                SetAttributeNS("orphans", "fo", "9");
+                SetAttributeNS("orphans", "fo", "4");
             }
         }
 

@@ -3410,9 +3410,12 @@ namespace SIL.PublishingSolution
                 SelectRow(cTool.StylesGrid, NewStyleName);
                 WriteCss();
                 cTool.TabControl1.SelectedIndex = 0;
+                
+                cTool.PicPreview.Visible = false;
+                cTool.BtnPrevious.Visible = false;
+                cTool.BtnNext.Visible = false;
                 ShowInfoValue();
                 cTool.TxtName.Select();
-
                 //EnableToolStripButtons(true);
                 ////AddNewRow();
                 ////SetFocusToName();
@@ -3643,7 +3646,10 @@ namespace SIL.PublishingSolution
                     MessageBox.Show("Please select a style sheet to delete", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            catch { }
+            catch {
+                _screenMode = ScreenMode.Edit;
+                ShowInfoValue();
+            }
             PreviousStyleName = cTool.StylesGrid.Rows[SelectedRowIndex].Cells[0].Value.ToString();
             //cTool.LblInfoCaption.Text = PreviousStyleName;
             WriteCss();
@@ -3715,7 +3721,7 @@ namespace SIL.PublishingSolution
         public void ShowPreview(int page)
         {
             string preview;
-            if(!File.Exists(PreviewFileName1) || !File.Exists(PreviewFileName2))
+            if(!File.Exists(PreviewFileName1))
             {
                 CreatePreviewFile();
                 cTool.PicPreview.Visible = false;
@@ -3724,7 +3730,7 @@ namespace SIL.PublishingSolution
                 //cTool.BtnNext.Visible = true;
             }
             cTool.PicPreview.SizeMode = PictureBoxSizeMode.StretchImage;
-            if(File.Exists(PreviewFileName1) && File.Exists(PreviewFileName2))
+            if(File.Exists(PreviewFileName1))
             {
                 cTool.BtnPrevious.Visible = true;
                 cTool.BtnNext.Visible = true;

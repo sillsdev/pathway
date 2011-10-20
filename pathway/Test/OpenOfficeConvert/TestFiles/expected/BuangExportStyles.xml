@@ -32,7 +32,7 @@
       <style:paragraph-properties fo:text-align="left" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="entry_letData_dicBody" style:family="paragraph" style:parent-style-name="letData_dicBody">
-      <style:paragraph-properties fo:text-indent="-36pt" fo:margin-left="36pt" fo:padding-left="9pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" fo:padding-top="1pt" fo:orphans="9" />
+      <style:paragraph-properties fo:text-indent="-36pt" fo:margin-left="36pt" fo:padding-left="9pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" fo:padding-top="1pt" fo:orphans="4" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" style:font-size-complex="12pt" fo:color="#000000" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody">
