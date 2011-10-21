@@ -147,7 +147,7 @@ namespace SIL.PublishingSolution
         private ArrayList _referenceIDList = new ArrayList();
 
         private Stack<string> _referenceCloseStyleStack = new Stack<string>();
-        
+        private bool _isPictureDisplayNone = false;
         
         private bool _isEmptyTitleExist;
         private int _titleCounter=1;
@@ -769,6 +769,10 @@ namespace SIL.PublishingSolution
             string content = _reader.Value;
             content = ReplaceString(content);
             if (CollectFootNoteChapterVerse(content, Common.OutputType.ODT.ToString())) return;
+            if (_isPictureDisplayNone)
+            {
+                return;
+            }
             content = InsertSpaceInTextforMacro(content); //TD-2034
             //TD-2448
             //if (_projInfo.ProjectInputType.ToLower() == "dictionary")
@@ -1873,6 +1877,15 @@ namespace SIL.PublishingSolution
             bool inserted = false;
             if (_imageInsert)
             {
+                GetPictureDisplay();
+                if (_isPictureDisplayNone)
+                {
+                    string ccc = _imageClass;
+                    _imageInsert = false;
+                    _imageSource = string.Empty;
+                    _imageParaForCaption = true;
+                    return false;
+                }
                 //1 inch = 72 PostScript points
                 //string alignment = "left";
                 string wrapSide = string.Empty;
@@ -2111,12 +2124,38 @@ namespace SIL.PublishingSolution
             return inserted;
         }
 
+
+        private void GetPictureDisplay()
+        {
+            string className = Common.RightString(_childName, "_");
+            if (IdAllClass.ContainsKey(className) && IdAllClass[className].ContainsKey("display"))
+            {
+                if (IdAllClass[className]["display"] == "none")
+                {
+                    _isPictureDisplayNone = true;
+                }
+            }
+        }
+
         /// <summary>
         /// Closing all the tages for Image
         /// </summary>
         private bool EndElementForImage()
         {
             bool isImageEnd = false;
+            if(_isPictureDisplayNone)
+            {
+                if (_imageClass.Length > 0 && _closeChildName == _imageClass)
+                {
+                    _isPictureDisplayNone = false;
+                    isImage = false;
+                    _imageClass = string.Empty;
+                    _isParagraphClosed = true;
+                    isImageEnd = true;
+                    return false;
+                }
+            }
+
             if (_imageInsert && !_imageInserted)
             {
                 if (_closeChildName == _imageClass) // Without Caption
