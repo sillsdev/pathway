@@ -125,12 +125,12 @@
       <style:paragraph-properties fo:text-align="center" />
       <style:text-properties fo:font-family="Charis SIL" fo:font-size="20pt" fo:font-weight="700" fo:font-style="normal" />
     </style:style>
-    <style:style style:family="paragraph" style:name="ChapterNumber1" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody">
+    <style:style style:family="paragraph" style:name="ChapterNumber1" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody" style:master-page-name="">
       <style:paragraph-properties>
         <style:drop-cap style:lines="2" style:distance="0.20cm" style:length="1" />
       </style:paragraph-properties>
     </style:style>
-    <style:style style:family="paragraph" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ChapterNumber2" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody">
+    <style:style style:family="paragraph" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ChapterNumber2" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody" style:master-page-name="">
       <style:paragraph-properties>
         <style:drop-cap style:lines="2" style:distance="0.20cm" style:length="2" />
       </style:paragraph-properties>

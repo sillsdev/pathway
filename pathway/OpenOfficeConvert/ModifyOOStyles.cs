@@ -363,7 +363,7 @@ namespace SIL.PublishingSolution
         {
             if (className.IndexOf("entry") == 0)
             {
-                SetAttributeNS("orphans", "fo", "4");
+                SetAttributeNS("orphans", "fo", "2");
             }
         }
 
@@ -838,6 +838,7 @@ namespace SIL.PublishingSolution
                 _nameElement = (XmlElement)node;
                 SetAttribute(makeClassName, "style:name");
                 SetAttribute(parentName, "style:parent-style-name");
+                SetAttribute("", "style:master-page-name");
             }
             _styleXMLdoc.Save(styleFilePath);
         }
