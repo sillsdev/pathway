@@ -781,7 +781,7 @@ namespace Test.XeLatex
             UpdateXeLaTexFontCacheIfNecessary();
             CallXeLaTex(xeLatexFullFile, true, imgPath);
             var outname = testFileName + ".log";
-            TextFileAssert.AreEqualEx(FileExpected(outname), FileOutput(outname), new ArrayList { 1 });
+            TextFileAssert.AreEqualEx(FileExpected(outname), FileOutput(outname), new ArrayList { 1, 55, 56, 57, 58, 60 });
         }
 
         [Test]
