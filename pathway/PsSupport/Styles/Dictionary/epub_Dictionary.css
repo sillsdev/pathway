@@ -124,6 +124,16 @@ padding-right: 5px;
     margin-left: 0;
     padding-left: 0;
 }
+.entryref-type,
+.variant-type-minor {
+    padding-right: 0.5%;
+}
+.xitem + .xitem,
+.LexSense-publishStemComponentTarget-GlossPub,
+.LexEntry-publishStemComponentTarget-SummaryDefinitionPub {
+    padding-left: 0.5%;
+}
+.sense-variantref-form,
 .semantic-domains, 
 .examples, 
 .translations, 
