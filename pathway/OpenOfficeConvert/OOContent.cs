@@ -146,7 +146,7 @@ namespace SIL.PublishingSolution
         private bool _anchorWrite;
         private ArrayList _referenceIDList = new ArrayList();
 
-        private Stack<string> _referenceCloseStyleStack = new Stack<string>();
+        //private Stack<string> _referenceCloseStyleStack = new Stack<string>();
         private bool _isPictureDisplayNone = false;
         
         private bool _isEmptyTitleExist;
@@ -193,10 +193,11 @@ namespace SIL.PublishingSolution
             string _inputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             InitializeData(projInfo, idAllClass, classFamily, cssClassOrder);
             ProcessProperty();
+            Preprocess();
             OpenXhtmlFile(projInfo.DefaultXhtmlFileWithPath); //reader
             CreateFile(projInfo.TempOutputFolder); //writer
             CreateSection();
-            Preprocess();
+            //Preprocess();
             //PreprocessAnchor(projInfo.DefaultXhtmlFileWithPath); // todo in linux
             CreateBody();
             ProcessXHTML(projInfo.ProgressBar, projInfo.DefaultXhtmlFileWithPath, projInfo.TempOutputFolder);
@@ -1065,7 +1066,7 @@ namespace SIL.PublishingSolution
                     _writer.WriteAttributeString("text:ref-name", anchorName.ToLower());
                     //_writer.WriteString(data);
                     //_writer.WriteEndElement(); // for Anchor Ends
-                    StackPop(_referenceCloseStyleStack);
+                    //StackPop(_referenceCloseStyleStack);
                     isAnchorTagOpen = true;
                 }
                 else if (status == "name")
@@ -1074,7 +1075,7 @@ namespace SIL.PublishingSolution
                     _writer.WriteStartElement("text:reference-mark");
                     _writer.WriteAttributeString("text:name", anchorName.ToLower());
                     _writer.WriteEndElement();
-                    StackPop(_referenceCloseStyleStack);
+                    //StackPop(_referenceCloseStyleStack);
                     //_referenceCloseStyle = string.Empty;
                 }
 
@@ -1089,7 +1090,7 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("text:name", _anchorIdValue.ToLower());
                 _writer.WriteEndElement();
                 _anchorIdValue = string.Empty;
-                StackPop(_referenceCloseStyleStack);
+                //StackPop(_referenceCloseStyleStack);
                 //_referenceCloseStyle = string.Empty;
             }
 
@@ -1174,7 +1175,7 @@ namespace SIL.PublishingSolution
                     _anchorStart = false;
                     return;
                 }
-                _referenceCloseStyleStack.Push(_childName);
+                //_referenceCloseStyleStack.Push(_childName);
                 _anchorStart = false;
                 _anchorWrite = true;
             }
@@ -1340,8 +1341,10 @@ namespace SIL.PublishingSolution
        
         private void EndElement()
         {
-            //if (_reader.Name == "a" && _anchorText.Length == 0)
-            //    _anchorStart = false;
+            if (_reader.Name == "a" && _anchorWrite)
+            {
+                _anchorWrite = false;
+            }
 
             _characterName = null;
             _closeChildName = StackPop(_allStyle);
@@ -1412,12 +1415,14 @@ namespace SIL.PublishingSolution
 
         private void ReferenceClose(string closeChild)
         {
-            if (closeChild.Length > 0 && StackPeek(_referenceCloseStyleStack) == closeChild)
-            {
-                _writer.WriteEndElement();
-                StackPop(_referenceCloseStyleStack);
-                //_referenceCloseStyle = string.Empty;
-            }
+            //string type1 = _tagType;
+            //if (closeChild.Length > 0 && StackPeek(_referenceCloseStyleStack) == closeChild)
+            //{
+            //    _writer.WriteEndElement();
+            //    StackPop(_referenceCloseStyleStack);
+            //    string type = _tagType;
+            //}
+           
         }
 
         #endregion
