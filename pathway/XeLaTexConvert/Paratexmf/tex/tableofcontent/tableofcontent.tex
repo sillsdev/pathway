@@ -1,0 +1,25 @@
+\documentclass{article}
+\def\bibTeX{\textsc{bib}\TeX}
+\begin{document}
+\title{\LaTeX{} Guide}
+\author{TUG India}
+\date{}
+\maketitle
+\tableofcontents
+\addtocontents{toc}{\protect\rule{\textwidth}{.2pt}\par}
+\section{Moving Information Around}
+
+\vspace{24pt}
+
+\verb+\tableofcontents+ command produces table of contents.......
+\section{Bibliography and Citation}
+A citation is a cross-reference to another publication, such......
+\subsection{Using \bibTeX}
+\bibTeX\ is a separate program that produces the source list ......
+\subsection{Doing it yourself}
+A source list is created with the thebibliography ......
+\addcontentsline{toc}{section}{\numberline{}Splitting Your \emph{Input}}
+\section*{Splitting Your Input}
+\addtocontents{toc}{\noindent\protect\rule{\textwidth}{.2pt}\par}
+A large document requires a lot of input. Rather than .......
+\end{document}

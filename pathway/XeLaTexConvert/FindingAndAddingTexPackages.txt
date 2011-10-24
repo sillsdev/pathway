@@ -2,11 +2,11 @@ Adding XeLaTeX packages:
 
 If a new XeLaTeX package is needed and you know the file it contains you can use the Tex Live Manager to search for the package. For example you might use:
 
-tlmgr search --file file.ext
+tlmgr search --global --file file.ext
 
 You can also search by a keyword or part of a word:
 
-tlmgr search --keyword *what*
+tlmgr search --global --keyword *what*
 
 These commands should work from the XeLaTexExe folder if the bin folder is on the path. If you are in that folder, you can add it to the path by typing:
 

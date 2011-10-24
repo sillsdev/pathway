@@ -17,5 +17,7 @@ cd %idir%
 cd bin\win32
 call tlmgr install latex l3kernel l3packages etoolbox
 call tlmgr install lm fontspec euenc tipa xkeyval xunicode
-call tlmgr install fancyhdr float graphics hanging mdframed oberdiek tools xcolor
+call tlmgr install fancyhdr float graphics hanging mdframed oberdiek 
+call tlmgr install setspace tools xcolor
 call tlmgr install xetex xetex-def
+call %SVN_DIR%\XeLaTexConvert\hyplst.bat

@@ -4,7 +4,7 @@ In order to build the installer for XeLaTeX:
 3. If you haven't set the SVN_DIR environment variable, set that to point to where you have the Pathway repository
 4. Then you should be able to double click the Setuppwtex script.
 5. From the %SVN_DIR% you use the
-PathwaySprint.bat #.#.#.# XeLaTeX
+PathwaySprint.bat #.#.#.# PathwayXeLaTeX
 command where #.#.#.# is replaced with the version number (ie. 0.7.10.1607 for example)
 
 When the process is finished the .msi file will be in the Sprint folder.
