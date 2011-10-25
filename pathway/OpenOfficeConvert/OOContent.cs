@@ -2157,6 +2157,7 @@ namespace SIL.PublishingSolution
                     _imageClass = string.Empty;
                     _isParagraphClosed = true;
                     isImageEnd = true;
+                    _paragraphName = null;
                     return false;
                 }
             }

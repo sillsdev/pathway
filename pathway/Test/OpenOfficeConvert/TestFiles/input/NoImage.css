@@ -1,0 +1,85 @@
+.dicBody {
+}
+.letHead {
+    column-count: 1;
+    clear: both;
+}
+.letter {
+    text-align: center;
+    width: 100%;
+    margin-top: 18pt;
+    margin-bottom: 18pt;
+    direction: ltr;
+    font-family: "Doulos SIL", serif;	/* default Serif font */
+    font-weight: bold;
+    font-size: 24pt;
+}
+.letData {
+    column-count: 2;   -moz-column-count: 2;
+    column-gap: 1.5em; -moz-column-gap: 1.5em;
+    column-fill: balance;
+    text-align: left;
+}
+.entry {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: 10pt;	/* inherited */
+    padding-left: 9pt;
+    text-indent: -36pt;
+    margin-left: 36pt;
+    padding-bottom: 2pt;
+    padding-top: 1pt;
+    counter-reset: sense;
+}
+
+.pictureRight {
+    float: right;
+    margin: 0pt 0pt 4pt 4pt;
+    padding: 2pt;
+    text-indent: 0pt;
+    text-align: center;
+}
+.picture {
+    height: 1.0in;
+}
+.pictureCaption {
+}
+
+.grammatical-info {
+    /* explicit FieldWorks style = 'Dictionary-Contrasting' */
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: 10pt;	/* cascaded environment */
+    font-style: italic;
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.grammatical-info:after { content: " " }
+.headword {
+    /* lang = 'seh' */
+    /* explicit FieldWorks style = 'Dictionary-Headword' */
+    font-family: "Doulos SIL", serif;	/* default Serif font */
+    font-size: 10pt;	/* cascaded environment */
+    font-weight: bold;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    string-set: guideword content();
+}
+
+.pictureRight {
+    display: none;
+}
+.pictureLeft {
+    display: none;
+}
+.pictureCenter {
+    display: none;
+}
+
+.Section_Head {
+page-break-after:avoid;
+}
+.Chapter_Number {
+page-break-after:avoid;
+}
+.Parallel_Passage_Reference {
+page-break-after:avoid;
+}
