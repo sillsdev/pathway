@@ -190,6 +190,16 @@ namespace Test.XeLatex
 
         [Test]
         [Category("SkipOnTeamCity")]
+        public void LineHeight()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "LineHeight";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
         public void FontSizeCmToPointTest()
         {
             _projInfo.ProjectInputType = "Dictionary";
@@ -768,6 +778,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
+        [Ignore]
         [Test]
         [Category("SkipOnTeamCity")]
         public void VisibilityCensorPackageTest()
@@ -811,6 +822,7 @@ namespace Test.XeLatex
             Assert.AreEqual(@"C:\pwtex\", XeLaTexInstallation.GetXeLaTexDir()); 
         }
 
+        [Ignore]
         [Test]
         [Category("SkipOnTeamCity")]
         public void XeLaTexVersion()

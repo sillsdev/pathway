@@ -461,9 +461,27 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            propertyValue = Common.SetPropertyValue("\\baselineskip", propertyValue);
+
+            if (propertyValue.IndexOf("em") > 0)
+            {
+                propertyValue = propertyValue.Replace("em", "");
+                propertyValue = Convert.ToDouble(Convert.ToInt32(propertyValue) + .5).ToString();
+            }
+            else
+            {
+                propertyValue = propertyValue.Replace("pt", "");
+                propertyValue = Convert.ToString(Convert.ToDouble(propertyValue) / 10);
+            }
+            propertyValue = Common.SetPropertyValue("line-height", propertyValue);
+            propertyValue = propertyValue.Replace("pt", "");
+
+
+            _IDProperty["line-height"] = propertyValue;
             _inlineStyle.Add(propertyValue);
-            _IDProperty["Leading"] = propertyValue;
+
+            propertyValue = "\\usepackage{setspace}";
+            if (!_includePackageList.Contains(propertyValue))
+                _includePackageList.Add(propertyValue);
         }
         public void VerticalAlign(string propertyValue)
         {
@@ -783,6 +801,7 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
+
             //  _fontStyle.Add(propertyValue);
             _IDProperty["display"] = propertyValue;
         }

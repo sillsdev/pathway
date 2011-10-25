@@ -261,7 +261,7 @@ namespace SIL.PublishingSolution
             //    Common.ColumnWidth = _pageWidth;
             //}
         }
-        
+
         private void ProcessCounterProperty()
         {
             _FootNote.Clear();
@@ -316,7 +316,7 @@ namespace SIL.PublishingSolution
                 }
             }
         }
-        
+
         private void ProcessXHTML(string xhtmlFileWithPath)
         {
             try
@@ -809,7 +809,7 @@ namespace SIL.PublishingSolution
 
         public bool InsertImage()
         {
-            
+
             bool inserted = false;
             if (_imageInsert)
             {
@@ -903,7 +903,7 @@ namespace SIL.PublishingSolution
                             if (picFile != null) picFile = picFile.Replace(".tif", ".jpg");
                             if (dest != null) dest = dest.Replace(".tif", ".jpg");
                         }
-                        if(!string.IsNullOrEmpty(toPath))
+                        if (!string.IsNullOrEmpty(toPath))
                             File.Copy(fileName1, Common.PathCombine(toPath, Path.GetFileName(fileName1)), true);
                     }
                     else
@@ -1208,12 +1208,14 @@ namespace SIL.PublishingSolution
                 string mdFrameStart = string.Empty;
                 string txtAlignStart = string.Empty;
                 string txtAlignEnd = string.Empty;
+                string txtLineSpaceStart = string.Empty;
+                string txtLineSpaceEnd = string.Empty;
                 string columnStart = string.Empty;
                 string paddingLeft = string.Empty;
                 string paddingRight = string.Empty;
                 string paddingTop = string.Empty;
                 string paddingBottom = string.Empty;
-                
+
 
                 foreach (string property in _classInlineStyle[childClass])
                 {
@@ -1234,6 +1236,13 @@ namespace SIL.PublishingSolution
                         else if (propName == "margin")
                         {
                             mdFrameStart += ", " + Common.RightString(property, " ");
+                        }
+                        else if (propName == "line-height")
+                        {
+
+                            txtLineSpaceStart = "\\begin{spacing}{" + Common.RightString(property, " ") + "}";
+                            txtLineSpaceEnd = "\\end{spacing}";
+
                         }
                         else if (propName == "text-align")
                         {
@@ -1319,7 +1328,7 @@ namespace SIL.PublishingSolution
                     _xetexFile.Write(paddingStart);
                     endParagraphString = "\\end{adjustwidth} " + endParagraphString;
                 }
-               
+
 
 
                 if (mdFrameStart != string.Empty)
@@ -1330,6 +1339,12 @@ namespace SIL.PublishingSolution
                     _xetexFile.Write(mdFrameStart);
                     _xetexFile.Write("]");
                     endParagraphString = "\\end{mdframed}}" + endParagraphString;
+                }
+
+                if (txtLineSpaceStart != string.Empty)
+                {
+                    _xetexFile.Write(txtLineSpaceStart);
+                    endParagraphString = txtLineSpaceEnd + endParagraphString;
                 }
 
                 if (txtAlignStart != string.Empty)
@@ -1344,7 +1359,7 @@ namespace SIL.PublishingSolution
                     _braceInlineClass.Push(getStyleName);
 
                     //if (_endParagraphStringDic.ContainsKey(getStyleName) == false)
-                        _endParagraphStringDic[getStyleName] = endParagraphString;
+                    _endParagraphStringDic[getStyleName] = endParagraphString;
                 }
             }
         }
@@ -1375,7 +1390,7 @@ namespace SIL.PublishingSolution
 
             if (classNameWOLang == "ChapterNumber")
             {
-                _chapterNo = _reader.ReadString();                
+                _chapterNo = _reader.ReadString();
             }
             if (IdAllClass.ContainsKey(classNameWOLang) && IdAllClass[classNameWOLang].ContainsKey("float") && IdAllClass[classNameWOLang].ContainsKey("vertical-align"))
             {
@@ -1450,7 +1465,7 @@ namespace SIL.PublishingSolution
                 //    _xetexFile.Write("}");
                 //}
                 _xetexFile.Write(_endParagraphStringDic[closeStyle]);
-                _endParagraphStringDic[closeStyle] = string.Empty; 
+                _endParagraphStringDic[closeStyle] = string.Empty;
                 StackPop(_braceInlineClass);
             }
 
@@ -1591,6 +1606,8 @@ namespace SIL.PublishingSolution
 
             //Text-Indent
             _paragraphPropertyList.Add("text-indent");
+
+            _paragraphPropertyList.Add("line-height");
 
             //TextAlign
             _paragraphPropertyList.Add("text-align");

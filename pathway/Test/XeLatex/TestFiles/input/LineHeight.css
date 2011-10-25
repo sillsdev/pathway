@@ -1,0 +1,57 @@
+.Title_Main {
+    font-family: "Charis SIL", serif;	/* default Serif font */
+    font-size: 20pt;	/* cascaded environment */
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    line-height: 24pt;
+    padding-bottom: 12pt;
+    padding-top: 36pt;
+}
+.Title_Main_None {
+    font-family: "Charis SIL", serif;	/* default Serif font */
+    font-size: 20pt;	/* cascaded environment */
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    line-height: 0pt;
+    padding-bottom: 12pt;
+    padding-top: 36pt;
+}
+
+.Title_Main_Normal {
+    font-family: "Charis SIL", serif;	/* default Serif font */
+    font-size: 20pt;	/* cascaded environment */
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    line-height: normal;
+    padding-bottom: 12pt;
+    padding-top: 36pt;
+}
+.Title_Secondary {
+    font-family: "Charis SIL", serif;	/* default Serif font */
+    font-size: 14pt;	/* cascaded environment */
+    text-indent: 0pt;
+    margin-left: 0pt;	
+}
+
+.Title_Main {
+    font-size: 18pt;
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    padding-bottom: 12pt;
+    padding-top: 36pt;
+}
+.Title_Secondary {
+    display: block;
+}
