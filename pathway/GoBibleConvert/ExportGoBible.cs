@@ -124,18 +124,27 @@ namespace SIL.PublishingSolution
                 DialogResult dialogResult = MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    string redirectDirectory = Path.GetDirectoryName(collectionFullName);
-                    string redirectFullName = Path.Combine(redirectDirectory, RedirectOutputFileName);
-                    StreamReader streamReader = new StreamReader(redirectFullName);
-                    string errMsg = "";
-                    while (!streamReader.EndOfStream)
+                    if (SubProcess.LastError.Length > 0)
                     {
-                        string line = streamReader.ReadLine();
-                        if (!char.IsWhiteSpace(line[0]))
-                            errMsg += line + "\r\n";
+                        // work off the string error results
+                        MessageBox.Show(SubProcess.LastError, "Go Bible Export Error Details", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    streamReader.Close();
-                    MessageBox.Show(errMsg, "Go Bible Export Error Details", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                    {
+                        // work off the results file
+                        string redirectDirectory = Path.GetDirectoryName(collectionFullName);
+                        string redirectFullName = Path.Combine(redirectDirectory, RedirectOutputFileName);
+                        StreamReader streamReader = new StreamReader(redirectFullName);
+                        string errMsg = "";
+                        while (!streamReader.EndOfStream)
+                        {
+                            string line = streamReader.ReadLine();
+                            if (!char.IsWhiteSpace(line[0]))
+                                errMsg += line + "\r\n";
+                        }
+                        streamReader.Close();
+                        MessageBox.Show(errMsg, "Go Bible Export Error Details", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
             else if (projInfo.IsOpenOutput)
@@ -444,7 +453,7 @@ namespace SIL.PublishingSolution
             const string prog = "java";
             var creatorPath = Common.PathCombine("GoBible", Creator);
 			var creatorFullPath = Common.FromRegistry(creatorPath);
-           var progFolder = SubProcess.GetLocation(prog);
+            var progFolder = SubProcess.GetLocation(prog);
             var progFullName = Common.PathCombine(progFolder, prog);
             if (progFullName.EndsWith(".exe"))
             {

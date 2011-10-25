@@ -103,6 +103,10 @@ namespace SIL.Tool
 
         public static void Run(string instPath, string name, string arg, bool wait)
         {
+            // clean out the results of any previous runs
+            LastError = String.Empty;
+            ExitCode = 0;
+            // set the current directory
             string theCurrent = Directory.GetCurrentDirectory();
             Directory.SetCurrentDirectory(instPath);
             Process p1 = new Process();
