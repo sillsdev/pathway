@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Jun-27-2011 for TD-2521(Exporting Gondwana data with default options crashes Libre Office)
+&apos;Changed On Oct-25-2011 for TD-2696(FlexRev.odt takes time to open)
 
 &apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -28,6 +28,7 @@ Dim oFrame As Object
 Dim oSubFrame As Object
 Dim ProgressValue As Integer
 Dim PageCount as Integer
+Dim CanSave as Boolean
 
 &apos;This procedure set the dialgue to correct Update References 
 Sub StartDontForget
@@ -36,8 +37,10 @@ Sub StartDontForget
 	
 	AlingOverlappingImages()
 	
-	oDoc = ThisComponent 
-	oDoc.store() 
+	If CanSave Then
+		oDoc = ThisComponent 
+		oDoc.store() 
+	End If
 	
 	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; And Len(Trim(OutputFormat)) &gt; 0 Then
 		ExportToDOC_PDF
@@ -246,6 +249,8 @@ lclNo = 0
 				 	nxt.HoriOrient = 1	
 				End If
 				if lclNo = 3 Then lclNo = 0
+				
+				CanSave = True
 			End If
 		End If
   Next    

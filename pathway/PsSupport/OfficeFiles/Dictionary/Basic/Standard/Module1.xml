@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Aug-12-2011 for TD-2582(Reversal guide words wrong)
+&apos;Changed On Oct-25-2011 for TD-2696(FlexRev.odt takes time to open)
 
 &apos;Define the values to Constant Variables for First Guide word, Last Guide word ,Headword Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -22,19 +22,20 @@ Dim oFrame As Object
 Dim oSubFrame As Object
 Dim ProgressValue As Integer
 Dim PageCount as Integer
-
+Dim CanSave as Boolean
 
 Sub StartDontForget
-
 	TurnOffNonPrintingCharacters() 
 	
 	AlingOverlappingImages()
 	
 	HideODMVariable()
 	
-	oDoc = ThisComponent 
-	oDoc.store() 
-	&apos;ShowProcessingDialog() 	
+	If CanSave Then
+		oDoc = ThisComponent 
+		oDoc.store() 
+	End If
+	
 	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; And Len(Trim(OutputFormat)) &gt; 0 Then
 		ExportToDOC_PDF
 	End IF
@@ -49,21 +50,21 @@ dim document   as object
 dim dispatcher as object
 
 document   = ThisComponent.CurrentController.Frame
-dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
+dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;)
 
 dim args1(0) as new com.sun.star.beans.PropertyValue
-args1(0).Name = "Text"
-args1(0).Value = " "
+args1(0).Name = &quot;Text&quot;
+args1(0).Value = &quot; &quot;
 
-dispatcher.executeDispatch(document, ".uno:InsertText", "", 0, args1())
+dispatcher.executeDispatch(document, &quot;.uno:InsertText&quot;, &quot;&quot;, 0, args1())
 
-dispatcher.executeDispatch(document, ".uno:SwBackspace", "", 0, Array())
+dispatcher.executeDispatch(document, &quot;.uno:SwBackspace&quot;, &quot;&quot;, 0, Array())
 
-'msgbox PageCount
+&apos;msgbox PageCount
 
-'oDoc = ThisComponent 
-'LGuide = oDoc.getTextFieldMasters().getByName("com.sun.star.text.fieldmaster.SetExpression.Right_Guideword_R")
-'LGuide.DependentTextFields(1).Content = "Changed"
+&apos;oDoc = ThisComponent 
+&apos;LGuide = oDoc.getTextFieldMasters().getByName(&quot;com.sun.star.text.fieldmaster.SetExpression.Right_Guideword_R&quot;)
+&apos;LGuide.DependentTextFields(1).Content = &quot;Changed&quot;
 end sub
 
 &apos;Create Progress bar
@@ -210,6 +211,8 @@ lclNo = 0
 				 	nxt.HoriOrient = 1	
 				End If
 				if lclNo = 3 Then lclNo = 0
+				
+				CanSave = True
 			End If
 		End If
   Next    
