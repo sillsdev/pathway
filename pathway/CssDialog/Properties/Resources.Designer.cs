@@ -94,6 +94,24 @@ namespace SIL.PublishingSolution.Properties {
             }
         }
 
+        internal static System.Drawing.Bitmap go_down
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("go-down", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        internal static System.Drawing.Bitmap go_up
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("go-up", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
         internal static System.Drawing.Bitmap cell
         {
             get

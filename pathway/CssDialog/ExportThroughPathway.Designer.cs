@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExportThroughPathway));
-            this.btnMoreLessOptions = new System.Windows.Forms.Button();
             this.lnkIP = new System.Windows.Forms.LinkLabel();
             this.chkIP = new System.Windows.Forms.CheckBox();
             this.ddlStyle = new System.Windows.Forms.ComboBox();
@@ -78,6 +77,7 @@
             this.txtSaveInFolder = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.BtnBrwsLayout = new System.Windows.Forms.Button();
+            this.btnMoreLessOptions = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -86,21 +86,10 @@
             this.grpInclude.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnMoreLessOptions
-            // 
-            this.btnMoreLessOptions.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnMoreLessOptions.Location = new System.Drawing.Point(100, 68);
-            this.btnMoreLessOptions.Name = "btnMoreLessOptions";
-            this.btnMoreLessOptions.Size = new System.Drawing.Size(82, 23);
-            this.btnMoreLessOptions.TabIndex = 5;
-            this.btnMoreLessOptions.Text = "Less  ▲";
-            this.btnMoreLessOptions.UseVisualStyleBackColor = true;
-            this.btnMoreLessOptions.Click += new System.EventHandler(this.btnMoreLessOptions_Click);
-            // 
             // lnkIP
             // 
             this.lnkIP.AutoSize = true;
-            this.lnkIP.Location = new System.Drawing.Point(115, 400);
+            this.lnkIP.Location = new System.Drawing.Point(115, 407);
             this.lnkIP.Name = "lnkIP";
             this.lnkIP.Size = new System.Drawing.Size(121, 13);
             this.lnkIP.TabIndex = 8;
@@ -111,7 +100,7 @@
             // chkIP
             // 
             this.chkIP.CheckAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.chkIP.Location = new System.Drawing.Point(99, 367);
+            this.chkIP.Location = new System.Drawing.Point(99, 374);
             this.chkIP.Name = "chkIP";
             this.chkIP.Size = new System.Drawing.Size(286, 30);
             this.chkIP.TabIndex = 7;
@@ -162,7 +151,7 @@
             // 
             // btnHelp
             // 
-            this.btnHelp.Location = new System.Drawing.Point(310, 428);
+            this.btnHelp.Location = new System.Drawing.Point(310, 435);
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(75, 23);
             this.btnHelp.TabIndex = 11;
@@ -173,7 +162,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(229, 428);
+            this.btnCancel.Location = new System.Drawing.Point(229, 435);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 10;
@@ -183,7 +172,7 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(148, 428);
+            this.btnOK.Location = new System.Drawing.Point(148, 435);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 9;
@@ -196,7 +185,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(12, 97);
+            this.tabControl1.Location = new System.Drawing.Point(12, 104);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(373, 264);
@@ -620,13 +609,26 @@
             this.BtnBrwsLayout.UseVisualStyleBackColor = true;
             this.BtnBrwsLayout.Click += new System.EventHandler(this.BtnBrwsLayout_Click);
             // 
+            // btnMoreLessOptions
+            // 
+            this.btnMoreLessOptions.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnMoreLessOptions.Image = global::SIL.PublishingSolution.Properties.Resources.go_up;
+            this.btnMoreLessOptions.Location = new System.Drawing.Point(99, 66);
+            this.btnMoreLessOptions.Name = "btnMoreLessOptions";
+            this.btnMoreLessOptions.Size = new System.Drawing.Size(75, 32);
+            this.btnMoreLessOptions.TabIndex = 5;
+            this.btnMoreLessOptions.Text = "Less";
+            this.btnMoreLessOptions.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnMoreLessOptions.UseVisualStyleBackColor = true;
+            this.btnMoreLessOptions.Click += new System.EventHandler(this.btnMoreLessOptions_Click);
+            // 
             // ExportThroughPathway
             // 
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(398, 463);
+            this.ClientSize = new System.Drawing.Size(398, 473);
             this.Controls.Add(this.BtnBrwsLayout);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnMoreLessOptions);

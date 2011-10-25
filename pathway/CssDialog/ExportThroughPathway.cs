@@ -389,8 +389,9 @@ namespace SIL.PublishingSolution
             // Resize the dialog
             Height = SystemInformation.CaptionHeight + btnOK.Bottom + 15;//(IsExpanded) ? 587 : 265;
 
-            // Set the text on the More / Less Options button
-            btnMoreLessOptions.Text = (IsExpanded) ? "Less  ▲" : "More  ▼";
+            // Set the text and image on the More / Less Options button
+            btnMoreLessOptions.Text = (IsExpanded) ? "Less" : "More";
+            btnMoreLessOptions.Image = (IsExpanded) ? Properties.Resources.go_up : Properties.Resources.go_down;
         }
 
         /// <summary>
