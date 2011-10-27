@@ -230,6 +230,7 @@ namespace Test
         /// Runs PathwayB.exe with the -h parameter, to get the usage info back
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void UsageTest()
         {
             // Because we haven't supplied the parameters, we should get the usage string back from PathwayB
@@ -238,6 +239,7 @@ namespace Test
         }
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void xhtmlTest()
         {
             RunPathwayB(InputFormat.XHTML, "Sena 3-01", "Scripture Draft", "Scripture", "E-Book (.epub)");
