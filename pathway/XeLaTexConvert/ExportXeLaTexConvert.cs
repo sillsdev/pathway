@@ -67,9 +67,10 @@ namespace SIL.PublishingSolution
             //preProcessor.GetDefinitionLanguage();
             
             string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
-            projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
+            //projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
             projInfo.DefaultCssFileWithPath = preProcessor.ProcessedCss;
             projInfo.ProjectPath = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
+            projInfo.DefaultXhtmlFileWithPath = preProcessor.PreserveSpace(); 
 
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();

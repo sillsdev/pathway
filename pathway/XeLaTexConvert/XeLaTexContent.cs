@@ -352,10 +352,11 @@ namespace SIL.PublishingSolution
                             EndElement();
                             break;
                         case XmlNodeType.SignificantWhitespace:
-                            if (_reader.Value.Replace(" ", "") == "")
-                            {
-                                Write();
-                            }
+                            InsertWhiteSpace();
+                            //if (_reader.Value.Replace(" ", "") == "")
+                            //{
+                            //    Write();
+                            //}
                             break;
                     }
                 }
@@ -434,7 +435,7 @@ namespace SIL.PublishingSolution
         {
             string content = _reader.Value;
             content = ReplaceString(content);
-            content = content + " ";
+            //content = content + " ";
             if (CollectFootNoteChapterVerse(content, Common.OutputType.XELATEX.ToString())) return;
 
             //if (columnCount == "2")
@@ -1609,6 +1610,16 @@ namespace SIL.PublishingSolution
         private void InitializeMathStyle()
         {
             //_mathStyle.Add("\\underline");
+        }
+
+        private void InsertWhiteSpace()
+        {
+            //if (!_isWhiteSpace && !_pseudoSingleSpace)
+            if (!_isWhiteSpace)
+            {
+                _xetexFile.Write(" ");
+                _isWhiteSpace = true;
+            }
         }
 
         #region Private Methods
