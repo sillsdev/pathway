@@ -118,9 +118,9 @@ namespace SIL.PublishingSolution
                     //case "column-gap":
                     //    ColumnGap(propertyValue);
                     //    break;
-                    //case "display":
-                    //    Display(propertyValue);
-                    //    break;
+                    case "display":
+                        Display(propertyValue);
+                        break;
                     //case "page-break-before":
                     //    PageBreakBefore(propertyValue);
                     //    break;
@@ -802,8 +802,20 @@ namespace SIL.PublishingSolution
                 return;
             }
 
+            if (propertyValue.ToLower() == "none")
+            {
+                propertyValue = "display-none %comment";
+                _inlineStyle.Add(propertyValue);
+            }
+            else
+            {
+                return;
+            }
             //  _fontStyle.Add(propertyValue);
             _IDProperty["display"] = propertyValue;
+            propertyValue = "\\usepackage{verbatim} ";
+            if (!_includePackageList.Contains(propertyValue))
+                _includePackageList.Add(propertyValue);
         }
         public void ColumnCount(string propertyValue)
         {

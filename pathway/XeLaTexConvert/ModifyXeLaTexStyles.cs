@@ -68,7 +68,11 @@ namespace SIL.PublishingSolution
                     //_xetexFile.WriteLine(xeTexProperty);
                 }
             }
-
+            //%\singlespacing
+            //\onehalfspacing
+            //%\doublespacing
+            //%\setstretch{1.1}
+            //Common.FileInsertText(_xetexFullFile, @"\setstretch{1.1} ");
             Common.FileInsertText(_xetexFullFile, @"\thispagestyle{empty} ");
             Common.FileInsertText(_xetexFullFile, @"\begin{document} ");
             Common.FileInsertText(_xetexFullFile, _pageStyleFormat);

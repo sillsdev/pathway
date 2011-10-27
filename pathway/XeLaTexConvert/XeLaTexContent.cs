@@ -1215,7 +1215,8 @@ namespace SIL.PublishingSolution
                 string paddingRight = string.Empty;
                 string paddingTop = string.Empty;
                 string paddingBottom = string.Empty;
-
+                string displayNoneStart = string.Empty;
+                string displayNoneEnd = string.Empty;
 
                 foreach (string property in _classInlineStyle[childClass])
                 {
@@ -1276,6 +1277,11 @@ namespace SIL.PublishingSolution
                                 //txtAlignStart = "\\begin{hanglist}" + "[12pt] \\item ";
                                 //txtAlignEnd = "\\end{hanglist} ";
                             }
+                        }
+                        else if (propName == "display-none")
+                        {
+                            displayNoneStart = "\\begin{comment}";
+                            displayNoneEnd = "\\end{comment}\r\n";
                         }
                         else if (propName == "padding-left")
                         {
@@ -1352,7 +1358,46 @@ namespace SIL.PublishingSolution
                     _xetexFile.Write(txtAlignStart);
                     endParagraphString = txtAlignEnd + endParagraphString;
                 }
+                if (displayNoneStart != string.Empty)
+                {
+                    _xetexFile.WriteLine(displayNoneStart);
+                    endParagraphString = displayNoneEnd + " " + endParagraphString;
+                }
+                if (endParagraphString != string.Empty)
+                {
+                    _braceInlineClassCount[getStyleName] = _classInlineStyle[childClass].Count;
+                    _braceInlineClass.Push(getStyleName);
 
+                    //if (_endParagraphStringDic.ContainsKey(getStyleName) == false)
+                    _endParagraphStringDic[getStyleName] = endParagraphString;
+                }
+
+            }
+            else if ((_tagType == "span") && _classInlineStyle.ContainsKey(childClass))
+            {
+                string endParagraphString = string.Empty;
+                string displayNoneStart = string.Empty;
+                string displayNoneEnd = string.Empty;
+
+                foreach (string property in _classInlineStyle[childClass])
+                {
+                    string propName = Common.LeftString(property, " ");
+                    if (_paragraphPropertyList.Contains(propName))
+                    {
+                        if (propName == "display-none")
+                        {
+                            displayNoneStart = "\\begin{comment}";
+                            displayNoneEnd = "\\end{comment}\r\n";
+                        }
+                    }
+                }
+
+                if (displayNoneStart != string.Empty)
+                {
+
+                    _xetexFile.WriteLine(displayNoneStart);
+                    endParagraphString = displayNoneEnd + " " + endParagraphString;
+                }
                 if (endParagraphString != string.Empty)
                 {
                     _braceInlineClassCount[getStyleName] = _classInlineStyle[childClass].Count;
@@ -1362,6 +1407,7 @@ namespace SIL.PublishingSolution
                     _endParagraphStringDic[getStyleName] = endParagraphString;
                 }
             }
+
         }
 
         private void SetHeadwordTrue()
@@ -1606,6 +1652,8 @@ namespace SIL.PublishingSolution
 
             //Text-Indent
             _paragraphPropertyList.Add("text-indent");
+            //Display-None
+            _paragraphPropertyList.Add("display-none");
 
             _paragraphPropertyList.Add("line-height");
 

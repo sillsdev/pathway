@@ -478,11 +478,11 @@ namespace Test.XeLatex
            ExportProcess(file);
            FileCompare(file);
        }
-        [Ignore]
+        
  		[Test]
         public void DisplayNone()
         {
-            const string file = "DiplayNone";
+            const string file = "DisplayNone";
             _projInfo.ProjectInputType = "Dictionary";
             ExportProcess(file);
             FileCompare(file);
