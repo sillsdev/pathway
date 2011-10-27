@@ -61,7 +61,6 @@ font-style: normal;
 .partofspeech {
 font-weight: normal;
 font-style: italic;
-margin-right: 10px;
 }
 .example,
 .LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub, 
@@ -124,14 +123,16 @@ padding-right: 5px;
     margin-left: 0;
     padding-left: 0;
 }
+.senses,
+.grammatical-info,
 .entryref-type,
 .variant-type-minor {
-    padding-right: 0.5%;
+    padding-right: 0.5em;
 }
 .xitem + .xitem,
 .LexSense-publishStemComponentTarget-GlossPub,
 .LexEntry-publishStemComponentTarget-SummaryDefinitionPub {
-    padding-left: 0.5%;
+    padding-left: 0.5em;
 }
 .sense-variantref-form,
 .semantic-domains, 
