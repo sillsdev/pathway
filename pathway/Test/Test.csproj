@@ -245,6 +245,7 @@
     <Compile Include="Build\FileComponentsTest.cs" />
     <Compile Include="ConfigurationTool\ConfigurationToolBLTest.cs" />
     <Compile Include="ConfigurationTool\ConfigurationToolTest.cs" />
+    <Compile Include="PathwayB\PathwayBTest.cs" />
     <Compile Include="XeLatex\XeLaTexContentTest.cs" />
     <Compile Include="CssDialog\ContentsTest.cs">
       <SubType>Form</SubType>
@@ -354,6 +355,10 @@
     <ProjectReference Include="..\epubConvert\epubConvert.csproj">
       <Project>{B19037F2-26F7-48A2-9301-B5CA335C6824}</Project>
       <Name>epubConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\epubValidator\epubValidator.csproj">
+      <Project>{403F8C54-4154-4D79-AED7-326B976875B4}</Project>
+      <Name>epubValidator</Name>
     </ProjectReference>
     <ProjectReference Include="..\GoBibleConvert\GoBibleConvert.csproj">
       <Project>{C7A3F4E5-1F86-4D22-AB4F-5BEA0D923DDD}</Project>

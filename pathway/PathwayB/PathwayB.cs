@@ -13,14 +13,23 @@
 // ---------------------------------------------------------------------------------------------
 using System;
 using System.IO;
+using System.Xml;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
     class Program
     {
+        public enum InputFormat
+        {
+            XHTML,
+            USFM,
+            USX
+        }
+
         static void Main(string[] args)
         {
+            InputFormat inFormat = InputFormat.XHTML;
             var projectInfo = new PublicationInformation
                                   {
                                       ProjectInputType = "Dictionary",
@@ -38,8 +47,27 @@ namespace SIL.PublishingSolution
                 {
                     switch (args[i++])
                     {
+                        case "--directory":
+                        case "-d":
+                            projectInfo.ProjectPath = args[i++];
+                            break;
+                        case "--usx":
+                        case "-u":
+                            inFormat = InputFormat.USX;
+                            if (args[1 + 1] == "*")
+                            {
+                            }
+                            else 
+                            { 
+                            }
+                            break;
+                        case "--usfm":
+                        case "-m":
+                            inFormat = InputFormat.USFM;
+                            break;
                         case "--xhtml":
                         case "-x":
+                            inFormat = InputFormat.XHTML;
                             projectInfo.DefaultXhtmlFileWithPath = args[i++];
                             break;
                         case "--css":
@@ -63,13 +91,31 @@ namespace SIL.PublishingSolution
                         case "-n":
                             projectInfo.ProjectName = args[i++];
                             break;
+                        case "-?":
+                        case "-h":
+                            Usage();
+                            Environment.Exit(0);
+                            break;
                         default:
                             Usage();
                             throw new ArgumentException("Invalid Command Line Argument");
                     }
                 }
-                Common.Testing = false;
+                // run headless from the command line
+                Common.Testing = true;
                 //_projectInfo.ProgressBar = null;
+
+                if (inFormat == InputFormat.USFM)
+                {
+                    // convert from USFM to USX
+                    // convert from USX to xhtml
+                    projectInfo.DefaultXhtmlFileWithPath = args[i++];
+                }
+                else if (inFormat == InputFormat.USX)
+                {
+                    // convert from USX to xhtml
+                    projectInfo.DefaultXhtmlFileWithPath = args[i++];
+                }
 
                 if (projectInfo.DefaultXhtmlFileWithPath == null || projectInfo.DefaultCssFileWithPath == null)
                 {
@@ -114,5 +160,23 @@ namespace SIL.PublishingSolution
             msg += "--name -n\t[main] Project name\r\n";
             Console.Write(msg);
         }
+        /// <summary>
+        /// Converts USFM to USX.
+        /// </summary>
+        /// <param name="usfm">The standard format for a book.</param>
+        /// <returns></returns>
+        private XmlDocument ConvertUsfmToUsfx(string usfm, int bookNum)
+        {
+            XmlDocument doc = new XmlDocument();
+            //using (XmlWriter xmlw = doc.CreateNavigator().AppendChild())
+            //{
+            //    // Convert to XML
+            //    UsfmToUsx converter = new UsfmToUsx(xmlw, usfm, scrText.ScrStylesheet(bookNum), false);
+            //    converter.Convert();
+            //    xmlw.Flush();
+            //}
+            return doc;
+        }
+
     }
 }

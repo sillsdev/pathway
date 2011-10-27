@@ -16,6 +16,7 @@ using System.IO;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
+using epubValidator;
 
 namespace Test.epubConvert
 {
@@ -120,6 +121,13 @@ namespace Test.epubConvert
             Assert.IsTrue(actual);
         }
 
+        public static void IsValid(string filename, string msg)
+        {
+            Assert.IsTrue(File.Exists(filename), string.Format("{0}: {1} does not exist", msg, filename));
+            // Running the unit test - just run the validator and return the result
+            var validationResults = epubValidator.Program.ValidateFile(filename);
+            Assert.IsTrue(validationResults.Contains("No errors or warnings detected"), string.Format("{0}: Validation Errors: {1}", msg, validationResults));
+        }
 
         #region Private Functions
         private string FileProg(string fileName)
