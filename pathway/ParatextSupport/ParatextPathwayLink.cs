@@ -145,7 +145,9 @@ namespace SIL.PublishingSolution
 					result = MessageBox.Show(string.Format("{0}" + Environment.NewLine +
 						" already exists. Overwrite?", fileName), string.Empty,
 					    MessageBoxButtons.YesNo);
-					if (result == DialogResult.No)
+                    if (result == DialogResult.Yes)
+                        fileName = Path.Combine(outputLocationPath, pubName + "-" + DateTime.Now.Second + ".xhtml");
+					else if (result == DialogResult.No)
 						return;
 				}
 
@@ -189,15 +191,17 @@ namespace SIL.PublishingSolution
 				StyToCSS styToCss = new StyToCSS();
 				styToCss.ConvertStyToCSS(m_projectName, cssFullPath);
 				string fileName = Path.Combine(outputLocationPath, pubName + ".xhtml");
-
+                
 				if (File.Exists(fileName))
 				{
 					// TODO: Localize string
 					result = MessageBox.Show(string.Format("{0}" + Environment.NewLine +
 						" already exists. Overwrite?", fileName), string.Empty,
 						MessageBoxButtons.YesNo);
-					if (result == DialogResult.No)
-						return;
+                    if (result == DialogResult.Yes)
+                        fileName = Path.Combine(outputLocationPath, pubName + "-" + DateTime.Now.Second + ".xhtml");
+                    else if (result == DialogResult.No)
+                        return;
 				}
 
 				XmlDocument scrBooksDoc = CombineUsxDocs(usxBooksToExport);
