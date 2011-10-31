@@ -277,7 +277,7 @@ namespace Test
 
         [Test]
         [Category("SkipOnTeamCity")]
-        public void MainAndRevTest()
+        public void XhtmlDictionaryMainAndRevTest()
         {
             // clean out old files
             foreach (var file in Directory.GetFiles(_outputPath))
@@ -294,7 +294,7 @@ namespace Test
 
         [Test]
         [Category("SkipOnTeamCity")]
-        public void xhtmlTest()
+        public void XhtmlScriptureTest()
         {
             // clean out old files
             foreach (var file in Directory.GetFiles(_outputPath))
@@ -310,7 +310,7 @@ namespace Test
 
         [Test]
         [Category("SkipOnTeamCity")]
-        public void usfmTest()
+        public void UsfmTest()
         {
             //// clean out old files
             //foreach (var file in Directory.GetFiles(_outputPath))
@@ -335,7 +335,7 @@ namespace Test
 
         [Test]
         [Category("SkipOnTeamCity")]
-        public void usxTest()
+        public void UsxTest()
         {
             // clean out old files
             foreach (var file in Directory.GetFiles(_outputPath))

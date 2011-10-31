@@ -66,7 +66,6 @@ namespace SIL.PublishingSolution
                                 i++;
                             }
                             files.Add(args[i++]);
-                            Debug.WriteLine(files.ToString());
                             break;
                         case "--inputformat":
                         case "-if":
@@ -142,11 +141,42 @@ namespace SIL.PublishingSolution
                 }
                 else if (inFormat == InputFormat.XHTML)
                 {
-                    projectInfo.DefaultXhtmlFileWithPath = Path.Combine(projectInfo.ProjectPath, files[0]);
+                    if (projectInfo.ProjectInputType == "Dictionary")
+                    {
+                        // dictionary
+                        // main - if there's a file name of "main" in the list, we'll use it as the default xhtml; 
+                        // if not, we'll use the first item in the list
+                        int index = files.FindIndex(
+                            something => (something.ToLower().Equals("main.xhtml"))
+                            );
+                        projectInfo.DefaultXhtmlFileWithPath = (index >= 0) ? 
+                            Path.Combine(projectInfo.ProjectPath, files[index]) :
+                            Path.Combine(projectInfo.ProjectPath, files[0]);
+                        // reversal index - needs to be named "flexrev.xhtml" 
+                        // (for compatibility with transforms in Pathway)
+                        index = files.FindIndex(
+                            something => (something.ToLower().Equals("flexrev.xhtml"))
+                            );
+                        projectInfo.IsReversalExist = (index >= 0);
+
+                        projectInfo.IsLexiconSectionExist = File.Exists(projectInfo.DefaultXhtmlFileWithPath);
+                        projectInfo.ProjectFileWithPath = projectInfo.DefaultXhtmlFileWithPath;
+                        projectInfo.SwapHeadword = false;
+                        projectInfo.FromPlugin = true;
+                        projectInfo.DefaultRevCssFileWithPath = Path.Combine(Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath), "FlexRev.css");
+                        projectInfo.DictionaryPath = Path.GetDirectoryName(projectInfo.ProjectPath);
+
+                    }
+                    else if (projectInfo.ProjectInputType == "Scripture")
+                    {
+                        projectInfo.DefaultXhtmlFileWithPath = Path.Combine(projectInfo.ProjectPath, files[0]);
+                    }
                 }
 
-                Debug.WriteLine("xhtml: " + projectInfo.DefaultXhtmlFileWithPath);
-                Debug.WriteLine("css: " + projectInfo.DefaultCssFileWithPath);
+                // troubleshooting... remove
+                Console.WriteLine("xhtml: " + projectInfo.DefaultXhtmlFileWithPath);
+                Console.WriteLine("css: " + projectInfo.DefaultCssFileWithPath);
+                Console.WriteLine("Reversal:" + projectInfo.IsReversalExist);
 
                 if (projectInfo.DefaultXhtmlFileWithPath == null || projectInfo.DefaultCssFileWithPath == null)
                 {
@@ -166,16 +196,20 @@ namespace SIL.PublishingSolution
 
                 Common.ProgBase = Common.GetPSApplicationPath();
                 Param.LoadSettings();
-                
-                Backend.Load(backendPath);
 
+                Backend.Load(backendPath);
                 Common.ShowMessage = false;
                 projectInfo.DictionaryOutputName = projectInfo.ProjectName;
                 Backend.Launch(exportType, projectInfo);
+
             }
             catch (Exception err)
             {
-                Console.Write(err.Message);
+                Console.WriteLine("PathwayB encountered an error while processing: " + err.Message);
+                if (err.StackTrace != null)
+                {
+                    Console.WriteLine(err.StackTrace);
+                }
                 Environment.Exit(-1);
             }
             Environment.Exit(0);
@@ -207,11 +241,17 @@ namespace SIL.PublishingSolution
             Console.Write("                             \"InDesign\"                 .idml format.\r\n");
             Console.Write("                             \"OpenOffice/LibreOffice\"   .odt format.\r\n");
             Console.Write("                             \"XeLaTex\"                  .tex format.\r\n");
-            Console.Write("                             Note: not all output types may be available,\r\n");
-            Console.Write("                                   depending on your installation package.\r\n");
             Console.Write("   --css | -c                stylesheet file name (required for xhtml only).\r\n");
             Console.Write("   --launch | -l             launch resulting output in target back end.\r\n");
-            Console.Write("   --name | -n               [main] Project name.\r\n");
+            Console.Write("   --name | -n               [main] Project name.\r\n\r\n");
+            Console.Write("Notes:\r\n");
+            Console.Write("- Not all output types may be available, depending on your installation\r\n");
+            Console.Write("  Package. To verify the available output types, open the Configuration\r\n");
+            Console.Write("  Tool, click the Defaults button and click on the Destination drop-down.\r\n");
+            Console.Write("  The available outputs match the selections in this list.\r\n");
+            Console.Write("- For dictionary output, the reversal index file needs to be named\r\n");
+            Console.Write("  \"FlexRev.xhtml\". this is to maintain consistency with the file naming\r\n");
+            Console.Write("  convention used in Pathway.\r\n");
         }
 
         /// <summary>

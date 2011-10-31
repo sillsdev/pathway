@@ -49,7 +49,7 @@ namespace SIL.PublishingSolution
         /// <summary>Gets or sets data type (Scripture, Dictionary)</summary>
         public string DataType { get; set; }
 
-        /// <summary>Gets or sets data type (Scripture, Dictionary)</summary>
+        /// <summary>UI progress bar</summary>
         public ProgressBar ProgressBar { get; set; }
         #endregion Properties
 
@@ -112,21 +112,43 @@ namespace SIL.PublishingSolution
             }
             catch (InvalidStyleSettingsException err)
             {
-                MessageBox.Show(string.Format(err.ToString(), err.FullFilePath), "Pathway Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (_fromNUnit)
+                {
+                    Console.WriteLine(string.Format(err.ToString(), err.FullFilePath), "Pathway Export");
+                }
+                else
+                {
+                    MessageBox.Show(string.Format(err.ToString(), err.FullFilePath), "Pathway Export",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 //var msg = new[] { err.FullFilePath };
                 //LocDB.Message("errNotValidXml", err.ToString(), msg, LocDB.MessageTypes.Warning, LocDB.MessageDefault.First);
                 return;
             }
             catch (UnauthorizedAccessException err)
             {
-                MessageBox.Show(string.Format(err.ToString(), "Sorry! You might not have permission to use this resource."), @"Pathway Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (_fromNUnit)
+                {
+                    Console.WriteLine(string.Format(err.ToString(), "Sorry! You might not have permission to use this resource."));
+                }
+                else
+                {
+                    MessageBox.Show(string.Format(err.ToString(), "Sorry! You might not have permission to use this resource."), @"Pathway Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 //var msg = new[] { "Sorry! You might not have permission to use this resource." };
                 //LocDB.Message("errUnauthorized", err.ToString(), msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
                 return;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), @"Pathway Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (_fromNUnit)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+                else
+                {
+                    MessageBox.Show(ex.ToString(), @"Pathway Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 //var msg = new[] { ex.ToString() };
                 //LocDB.Message("defErrMsg", ex.ToString(), msg, LocDB.MessageTypes.Warning, LocDB.MessageDefault.First);
                 return;
