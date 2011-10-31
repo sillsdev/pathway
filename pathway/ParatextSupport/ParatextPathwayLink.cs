@@ -227,7 +227,7 @@ namespace SIL.PublishingSolution
 		/// <param name="usxBooksToExport">The Scripture books in USX format to export.</param>
 		/// <returns>a single XmlDocument containing all books.</returns>
 		/// ------------------------------------------------------------------------------------
-		private XmlDocument CombineUsxDocs(List<XmlDocument> usxBooksToExport)
+		public XmlDocument CombineUsxDocs(List<XmlDocument> usxBooksToExport)
 		{
 			Debug.Assert(usxBooksToExport != null && usxBooksToExport.Count > 0);
 
@@ -259,7 +259,7 @@ namespace SIL.PublishingSolution
 		/// <param name="usx">The XML document representation of the USFM file.</param>
 		/// <param name="fileName">file name with full path where xhtml file will be written</param>
 		/// ------------------------------------------------------------------------------------
-		private void ConvertUsxToPathwayXhtmlFile(string usx, string fileName)
+		public void ConvertUsxToPathwayXhtmlFile(string usx, string fileName)
 		{
 			// Create argument list
 			XsltArgumentList args = new XsltArgumentList();

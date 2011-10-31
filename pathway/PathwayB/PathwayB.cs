@@ -12,9 +12,11 @@
 // Responsibility: Greg Trihus
 // ---------------------------------------------------------------------------------------------
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using SIL.Tool;
+using System.Collections.Generic;
 
 namespace SIL.PublishingSolution
 {
@@ -24,7 +26,8 @@ namespace SIL.PublishingSolution
         {
             XHTML,
             USFM,
-            USX
+            USX,
+            PTBUNDLE
         }
 
         static void Main(string[] args)
@@ -40,9 +43,11 @@ namespace SIL.PublishingSolution
                                   };
             var backendPath = Common.ProgInstall;
             var exportType = "OpenOffice/LibreOffice";
+            var files = new List<string>();
             try
             {
                 int i = 0;
+                int fileNum = 0;
                 while (i < args.Length)
                 {
                     switch (args[i++])
@@ -51,22 +56,40 @@ namespace SIL.PublishingSolution
                         case "-d":
                             projectInfo.ProjectPath = args[i++];
                             break;
-                        case "--usx":
-                        case "-u":
-                            inFormat = InputFormat.USX;
-                            if (args[1 + 1] == "*")
+                        case "--files":
+                        case "-f":
+                            // store the files in our internal list for now 
+                            // (single filenames and * will end up as a single element in the list)
+                            while (args[i].EndsWith(","))
                             {
+                                files.Add(args[i].Substring(0, args[i].Length - 1));
+                                i++;
                             }
-                            else 
-                            { 
-                            }
+                            files.Add(args[i++]);
+                            Debug.WriteLine(files.ToString());
                             break;
-                        case "--usfm":
-                        case "-m":
-                            inFormat = InputFormat.USFM;
+                        case "--inputformat":
+                        case "-if":
+                            var format = args[i++];
+                            switch (format)
+                            {
+                                case "xhtml":
+                                    inFormat = InputFormat.XHTML;
+                                    break;
+                                case "usfm":
+                                    inFormat = InputFormat.USFM;
+                                    break;
+                                case "usx":
+                                    inFormat = InputFormat.USX;
+                                    break;
+                                case "ptb":
+                                    inFormat = InputFormat.PTBUNDLE;
+                                    break;
+                            }
                             break;
                         case "--xhtml":
                         case "-x":
+                            // retained for backwards compatibility (not documented)
                             inFormat = InputFormat.XHTML;
                             projectInfo.DefaultXhtmlFileWithPath = args[i++];
                             break;
@@ -98,7 +121,7 @@ namespace SIL.PublishingSolution
                             break;
                         default:
                             Usage();
-                            throw new ArgumentException("Invalid Command Line Argument");
+                            throw new ArgumentException("Invalid Command Line Argument: " + args[i]);
                     }
                 }
                 // run headless from the command line
@@ -109,13 +132,21 @@ namespace SIL.PublishingSolution
                 {
                     // convert from USFM to USX
                     // convert from USX to xhtml
-                    projectInfo.DefaultXhtmlFileWithPath = args[i++];
+//                    projectInfo.DefaultXhtmlFileWithPath = args[i++];
                 }
                 else if (inFormat == InputFormat.USX)
                 {
                     // convert from USX to xhtml
-                    projectInfo.DefaultXhtmlFileWithPath = args[i++];
+                    ConvertUsxToXhtml(projectInfo, files);
+//                    projectInfo.DefaultXhtmlFileWithPath = args[i++];
                 }
+                else if (inFormat == InputFormat.XHTML)
+                {
+                    projectInfo.DefaultXhtmlFileWithPath = Path.Combine(projectInfo.ProjectPath, files[0]);
+                }
+
+                Debug.WriteLine("xhtml: " + projectInfo.DefaultXhtmlFileWithPath);
+                Debug.WriteLine("css: " + projectInfo.DefaultCssFileWithPath);
 
                 if (projectInfo.DefaultXhtmlFileWithPath == null || projectInfo.DefaultCssFileWithPath == null)
                 {
@@ -151,21 +182,44 @@ namespace SIL.PublishingSolution
         }
         static void Usage()
         {
-            var msg = "Usage PathwayB [Options]\r\n";
-            msg += "--xhtml -x\tconent file name (required)\r\n";
-            msg += "--css -c\tlayout file name (required)\r\n";
-            msg += "--target -t\tTarget: [OpenOffice/LibreOffice], InDesign alpha, etc.\r\n";
-            msg += "--input -i\t[Dictionary] or Scripture\r\n";
-            msg += "--launch -l\tlaunch resulting output in target back end.\r\n";
-            msg += "--name -n\t[main] Project name\r\n";
-            Console.Write(msg);
+            Console.Write("Usage: PathwayB [Options]\r\n\r\n");
+            Console.Write("where options include:\r\n");
+            Console.Write("   --input | -i <type>       (required) type of content. Can be one of:\r\n");
+            Console.Write("                             Dictionary   Dictionary content.\r\n");
+            Console.Write("                             Scripture    Scripture content.\r\n");
+            Console.Write("   --inputformat | -if <format>\r\n");
+            Console.Write("                             (required) content input format. Can be one of:\r\n");
+            Console.Write("                             usfm   Unified Standard Format Marker content.\r\n");
+            Console.Write("                             usx    USX content from Paratext 7.x.\r\n");
+            Console.Write("                             xhtml  XHTML from FieldWorks (FLEX or TE).\r\n");
+            Console.Write("                             ptb    Paratext bundle from Paratext 7.3.\r\n");
+            Console.Write("   --directory | -d <path>   (required) full path to the content.\r\n");
+            Console.Write("   --files | -f {<file>[, <file>] | *}\r\n");
+            Console.Write("                             (required) files to process, or * for all files in\r\n");
+            Console.Write("                             the directory specified by the -d flag.\r\n");
+            Console.Write("   --target | -t <format>    (required) desired output format. Can be one of:\r\n");
+            Console.Write("                             \"E-Book (.epub)\"           .epub format.\r\n");
+            Console.Write("                             \"Go Bible\"                 Go Bible .jar format.\r\n");
+            Console.Write("                             \"Logos Alpha\"              Libronix format.\r\n");
+            Console.Write("                             \"PDF (using OpenOffice/LibreOffice)\" \r\n");
+            Console.Write("                                                          .pdf format.\r\n");
+            Console.Write("                             \"PDF (using Prince)\"       .pdf format.\r\n");
+            Console.Write("                             \"InDesign\"                 .idml format.\r\n");
+            Console.Write("                             \"OpenOffice/LibreOffice\"   .odt format.\r\n");
+            Console.Write("                             \"XeLaTex\"                  .tex format.\r\n");
+            Console.Write("                             Note: not all output types may be available,\r\n");
+            Console.Write("                                   depending on your installation package.\r\n");
+            Console.Write("   --css | -c                stylesheet file name (required for xhtml only).\r\n");
+            Console.Write("   --launch | -l             launch resulting output in target back end.\r\n");
+            Console.Write("   --name | -n               [main] Project name.\r\n");
         }
+
         /// <summary>
         /// Converts USFM to USX.
         /// </summary>
-        /// <param name="usfm">The standard format for a book.</param>
+        /// <param name="files">List of files to convert. This can be a single file or wildcard (*) as well.</param>
         /// <returns></returns>
-        private XmlDocument ConvertUsfmToUsfx(string usfm, int bookNum)
+        private static XmlDocument ConvertUsfmToUsx(List<string> files)
         {
             XmlDocument doc = new XmlDocument();
             //using (XmlWriter xmlw = doc.CreateNavigator().AppendChild())
@@ -176,6 +230,66 @@ namespace SIL.PublishingSolution
             //    xmlw.Flush();
             //}
             return doc;
+        }
+
+        /// <summary>
+        /// Converts USX file(s) to a single XHTML file.
+        /// </summary>
+        /// <param name="projInfo"></param>
+        /// <param name="files">List of files to convert. This can be a single file or wildcard (*) as well.</param>
+        private static void ConvertUsxToXhtml(PublicationInformation projInfo, List<string> files)
+        {
+            string cssFullPath = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
+            StyToCSS styToCss = new StyToCSS();
+            styToCss.ConvertStyToCSS(projInfo.ProjectName, cssFullPath);
+            projInfo.DefaultCssFileWithPath = cssFullPath;
+            string fileName = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml");
+            ParatextPathwayLink paratextPathwayLink = new ParatextPathwayLink(projInfo.ProjectName, projInfo.ProjectName, "zxx", "zxx", "PathwayB");
+
+            XmlDocument scrBooksDoc;
+            if (files[0] == "*")
+            {
+                // wildcard - need to expand the file count to include all .sfm files in this directory
+                var usxFiles = Directory.GetFiles(projInfo.ProjectPath, "*.sfm");
+                files.Clear(); // should only be 1 item, but just in case...
+                foreach (var usxFile in usxFiles)
+                {
+                    files.Add(Path.GetFileName(usxFile)); // relative file names (no path)
+                }
+            }
+            if (files.Count > 1)
+            {
+                var docs = new List<XmlDocument>();
+                foreach (var file in files)
+                {
+                    if (File.Exists(Path.Combine(projInfo.ProjectPath, file)))
+                    {
+                        var xmlDoc = new XmlDocument { XmlResolver = null };
+                        xmlDoc.Load(Path.Combine(projInfo.ProjectPath, file));
+                        docs.Add(xmlDoc);
+                    }
+                }
+                // need to merge the documents before converting
+                scrBooksDoc = paratextPathwayLink.CombineUsxDocs(docs);
+            }
+            else if (files.Count == 1)
+            {
+                scrBooksDoc = new XmlDocument { XmlResolver = null };
+                scrBooksDoc.Load(Path.Combine(projInfo.ProjectPath, files[0]));
+            }
+            else
+            {
+                Console.WriteLine("Unable to convert from USX - no files specified.");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(scrBooksDoc.InnerText))
+            {
+                Console.WriteLine("The current book has no content to export.");
+                return;
+            }
+            paratextPathwayLink.ConvertUsxToPathwayXhtmlFile(scrBooksDoc.InnerXml, fileName);
+            
         }
 
     }

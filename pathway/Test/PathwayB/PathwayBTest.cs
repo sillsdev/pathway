@@ -56,15 +56,7 @@ namespace Test
         /// <summary>
         /// Runs PathwayB on the data and applies the back end
         /// </summary>
-        private string RunPathwayB(InputFormat inFormat, string project, string layout, string inputType, string backend)
-        {
-            return RunPathwayB(inFormat, project, layout, inputType, backend, "");
-        }
-
-        /// <summary>
-        /// Runs PathwayB on the data and applies the back end
-        /// </summary>
-        private string RunPathwayB(InputFormat inFormat, string project, string layout, string inputType, string backend, string message)
+        private string RunPathwayB(InputFormat inFormat, string files, string project, string layout, string inputType, string backend, string message)
         {
             const bool overwrite = true;
             var arg = new StringBuilder();
@@ -77,53 +69,41 @@ namespace Test
             switch (inFormat)
             {
                 case InputFormat.XHTML:
-                    // "-x .../TestFiles/Output/<layout>.xhtml"
-                    arg.Append("-x \"");
+                    // "-d .../TestFiles/Output"
+                    arg.Append("-d \"");
                     arg.Append(_outputPath);
-                    arg.Append(Path.DirectorySeparatorChar);
-                    arg.Append(layout);
-                    arg.Append(".xhtml\"");
+                    // "-if xhtml"
+                    arg.Append("\" -if xhtml");
                     // "-c .../TestFiles/Output/<layout>.css"
                     arg.Append(" -c \"");
                     arg.Append(_outputPath);
                     arg.Append(Path.DirectorySeparatorChar);
                     arg.Append(layout);
                     arg.Append(".css\"");
-                    // make a copy of the xhtml and CSS files
-                    if (File.Exists(Path.Combine(inPath, project + ".xhtml")))
-                    {
-                        File.Copy(Path.Combine(inPath, project + ".xhtml"), Path.Combine(_outputPath, layout + ".xhtml"),
-                                  overwrite);
-                    }
-                    if (File.Exists(Path.Combine(inPath, project + ".css")))
-                    {
-                        File.Copy(Path.Combine(inPath, project + ".css"), Path.Combine(_outputPath, layout + ".css"),
-                                  overwrite);
-                    }
                     arg.Append(" ");
                     break;
                 case InputFormat.USFM:
-                    // "-d .../TestFiles/Output/<project>"
+                    // "-d .../TestFiles/Output"
                     arg.Append("-d \"");
                     arg.Append(_outputPath);
-                    // "-m *"
-                    arg.Append("\" -m *"); // take all the files in the project directory
-                    File.Copy(Path.Combine(inPath, "*.*"), Path.Combine(_outputPath, "*.*"), overwrite);
+                    // "-if usfm"
+                    arg.Append("\" -if usfm");
                     arg.Append(" ");
                     break;
                 case InputFormat.USX:
-                    // "-u .../TestFiles/Output/<project>"
-                    arg.Append("-u \"");
+                    // "-u .../TestFiles/Output"
+                    arg.Append("-d \"");
                     arg.Append(_outputPath);
-                    // "-m *"
-                    arg.Append("\" -m *"); // take all the files in the project directory
-                    File.Copy(Path.Combine(inPath, "*.*"), Path.Combine(_outputPath, "*.*"), overwrite);
+                    // "-if usx"
+                    arg.Append("\" -if usx");
                     arg.Append(" ");
                     break;
                 default:
                     break;
             }
-            arg.Append("-t \"");
+            arg.Append("-f ");
+            arg.Append(files);
+            arg.Append(" -t \"");
             arg.Append(backend);
             arg.Append("\" -i \"");
             arg.Append(inputType);
@@ -174,6 +154,8 @@ namespace Test
                 }
                 errorMessage = sb.ToString();
             }
+            if (errorMessage.Length > 0) Debug.WriteLine(errorMessage);
+            if (outputMessage.Length > 0) Debug.WriteLine(outputMessage);
             // check the results
             switch (backend)
             {
@@ -192,6 +174,61 @@ namespace Test
             if (errorMessage.Length > 0) return errorMessage;
             if (outputMessage.Length > 0) return outputMessage;
             return null;
+        }
+
+        /// <summary>
+        /// Copy an entire directory.
+        /// Code from http://msdn.microsoft.com/en-us/library/bb762914.aspx.
+        /// </summary>
+        /// <param name="sourceDirName"></param>
+        /// <param name="destDirName"></param>
+        /// <param name="copySubDirs"></param>
+        private static void DirectoryCopy(
+                string sourceDirName, string destDirName, bool copySubDirs)
+        {
+            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
+            DirectoryInfo[] dirs = dir.GetDirectories();
+
+            // If the source directory does not exist, throw an exception.
+            if (!dir.Exists)
+            {
+                throw new DirectoryNotFoundException(
+                    "Source directory does not exist or could not be found: "
+                    + sourceDirName);
+            }
+
+            // If the destination directory does not exist, create it.
+            if (!Directory.Exists(destDirName))
+            {
+                Directory.CreateDirectory(destDirName);
+            }
+
+
+            // Get the file contents of the directory to copy.
+            FileInfo[] files = dir.GetFiles();
+
+            foreach (FileInfo file in files)
+            {
+                // Create the path to the new copy of the file.
+                string temppath = Path.Combine(destDirName, file.Name);
+
+                // Copy the file.
+                file.CopyTo(temppath, false);
+            }
+
+            // If copySubDirs is true, copy the subdirectories.
+            if (copySubDirs)
+            {
+
+                foreach (DirectoryInfo subdir in dirs)
+                {
+                    // Create the subdirectory.
+                    string temppath = Path.Combine(destDirName, subdir.Name);
+
+                    // Copy the subdirectories.
+                    DirectoryCopy(subdir.FullName, temppath, copySubDirs);
+                }
+            }
         }
 
         /// <summary>
@@ -234,16 +271,86 @@ namespace Test
         public void UsageTest()
         {
             // Because we haven't supplied the parameters, we should get the usage string back from PathwayB
-            var result = RunPathwayB(InputFormat.XHTML, "", "", "", "", "Usage test");
+            var result = RunPathwayB(InputFormat.XHTML, "", "", "", "", "", "Usage test");
             Assert.IsTrue(result.Contains("Usage"), result);
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void MainAndRevTest()
+        {
+            // clean out old files
+            foreach (var file in Directory.GetFiles(_outputPath))
+            {
+                File.Delete(file);
+            }
+            // make a copy of the xhtml and CSS files
+            File.Copy(Path.Combine(Path.Combine(_inputPath, "Sena 3-01"), "main.xhtml"), Path.Combine(_outputPath, "main.xhtml"), true);
+            File.Copy(Path.Combine(Path.Combine(_inputPath, "Sena 3-01"), "FlexRev.xhtml"), Path.Combine(_outputPath, "FlexRev.xhtml"), true);
+            File.Copy(Path.Combine(Path.Combine(_inputPath, "Sena 3-01"), "main.css"), Path.Combine(_outputPath, "main.css"), true);
+            // run the test
+            RunPathwayB(InputFormat.XHTML, "\"main.xhtml\", \"FlexRev.xhtml\"", "Sena 3-01", "main", "Dictionary", "E-Book (.epub)", "MainAndRevTest");
         }
 
         [Test]
         [Category("SkipOnTeamCity")]
         public void xhtmlTest()
         {
-            RunPathwayB(InputFormat.XHTML, "Sena 3-01", "Scripture Draft", "Scripture", "E-Book (.epub)");
+            // clean out old files
+            foreach (var file in Directory.GetFiles(_outputPath))
+            {
+                File.Delete(file);
+            } 
+            // make a copy of the xhtml and CSS files
+            File.Copy(Path.Combine(Path.Combine(_inputPath, "Sena 3-01"), "Sena 3-01.xhtml"), Path.Combine(_outputPath, "Scripture Draft.xhtml"), true);
+            File.Copy(Path.Combine(Path.Combine(_inputPath, "Sena 3-01"), "Sena 3-01.css"), Path.Combine(_outputPath, "Scripture Draft.css"), true);
+            // run the test
+            RunPathwayB(InputFormat.XHTML, "\"Scripture Draft.xhtml\"", "Sena 3-01", "Scripture Draft", "Scripture", "E-Book (.epub)", "xhtmlTest");
         }
 
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void usfmTest()
+        {
+            //// clean out old files
+            //foreach (var file in Directory.GetFiles(_outputPath))
+            //{
+            //    File.Delete(file);
+            //}
+            //if (Directory.Exists(Path.Combine(_outputPath, "gather")))
+            //{
+            //    // delete the gather subdirectory files as well
+            //    foreach (var file in Directory.GetFiles(Path.Combine(_outputPath, "gather")))
+            //    {
+            //        File.Delete(file);
+            //    }
+            //}
+            //// Copy the files
+            //var projPath = Path.Combine(_inputPath, "KFY");
+            ////if (Directory.Exists(Path.Combine(projPath, "gather")))
+            //DirectoryCopy(projPath, _outputPath, true);
+            //// run the test
+            //RunPathwayB(InputFormat.USFM, "*", "KFY", "Scripture Draft", "Scripture", "E-Book (.epub)", "usfmTest");
+        }
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void usxTest()
+        {
+            // clean out old files
+            foreach (var file in Directory.GetFiles(_outputPath))
+            {
+                File.Delete(file);
+            }
+            if (Directory.Exists(Path.Combine(_outputPath, "gather")))
+            {
+                // delete the gather subdirectory files as well
+                foreach (var file in Directory.GetFiles(Path.Combine(_outputPath, "gather")))
+                {
+                    File.Delete(file);
+                }
+            }
+            // TODO: implement test
+        }
     }
 }
