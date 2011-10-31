@@ -111,7 +111,7 @@ namespace SIL.PublishingSolution
         protected string _embedFonts = "Yes";
         protected string _includeFontVariants = "Yes";
         public string MediaTypeEXE;
-        public string StyleEXE;
+        public string StyleEXE = string.Empty;
         protected string _lastSelectedLayout = string.Empty;
         //protected string StyleName;
         protected string _selectedStyle;
@@ -1215,7 +1215,8 @@ namespace SIL.PublishingSolution
                 if (layoutName.Length == 0)
                     layoutName = _lastSelectedLayout;
 
-                StyleEXE = _lastSelectedLayout;
+                //StyleEXE = _lastSelectedLayout;
+                StyleEXE = layoutName;
                 Param.SetValue(Param.LayoutSelected, StyleEXE); // last layout
                 Param.Write();
 
@@ -1568,7 +1569,8 @@ namespace SIL.PublishingSolution
                 {
                     MediaType = MediaTypeEXE.ToLower();
                     SideBar();
-                    SelectRow(cTool.StylesGrid, StyleEXE);
+                    //SelectRow(cTool.StylesGrid, StyleEXE);
+                    SelectRow(cTool.StylesGrid, _lastSelectedLayout);
                 }
                 else
                 {
@@ -2036,7 +2038,12 @@ namespace SIL.PublishingSolution
 
             if (Param.Value.ContainsKey(Param.LayoutSelected))
             {
-                lastLayout = StyleEXE; //Param.Value[Param.LayoutSelected];				
+                lastLayout = StyleEXE.Length == 0 ? Param.Value[Param.LayoutSelected] : StyleEXE;
+                	
+	            if(lastLayout.Trim().Length == 0)
+	            {
+                    lastLayout = Param.Value[Param.LayoutSelected];	
+	            }
 
                 if (SelectRow(grid, lastLayout))
                 {
@@ -2046,12 +2053,8 @@ namespace SIL.PublishingSolution
             if (selectedNotExist && Param.DefaultValue.ContainsKey(Param.LayoutSelected))
             {
                 //lastLayout = Param.DefaultValue[Param.LayoutSelected];
-                if (StyleEXE != null)
-                    lastLayout = StyleEXE;
-                else
-                {
-                    lastLayout = Param.DefaultValue[Param.LayoutSelected];
-                }
+                lastLayout = StyleEXE.Length > 0 ? StyleEXE : Param.DefaultValue[Param.LayoutSelected];
+
                 SelectRow(grid, lastLayout);
             }
             return lastLayout;
