@@ -156,8 +156,7 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontVariantSmallCapTest()
@@ -167,7 +166,17 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void FontVariantNormalTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "FontVariantNormal";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontSizePointTest()

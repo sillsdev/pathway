@@ -599,6 +599,10 @@ namespace SIL.PublishingSolution
 
         private List<string> CreateInlineInnerStyle(string characterStyle)
         {
+            if (characterStyle == "$ID/[No character style]")
+            {
+                characterStyle = StackPeek(_allStyle);
+            }
             List<string> value = new List<string>();
             if (characterStyle.IndexOf("_") > 0)
             {
