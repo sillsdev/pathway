@@ -34,6 +34,19 @@ namespace SIL.PublishingSolution
             WriteCSS();
         }
 
+        /// <summary>
+        /// Override to convert the sty file to CSS, assuming the
+        /// sty file is already set for this class.
+        /// </summary>
+        /// <param name="cssFullPath"></param>
+        public void ConvertStyToCSS(string cssFullPath)
+        {
+            _cssFullPath = cssFullPath;
+            MapClassName();
+            ParseFile();
+            WriteCSS();
+        }
+
 		/// ------------------------------------------------------------
 		/// <summary>
 		/// Finds the sty file for a Paratext project.
@@ -230,7 +243,7 @@ namespace SIL.PublishingSolution
 		/// from the Paratext sty file.
 		/// </summary>
         /// ------------------------------------------------------------
-		private void WriteCSS()
+		public void WriteCSS()
         {
             TextWriter cssFile = new StreamWriter(_cssFullPath);
 

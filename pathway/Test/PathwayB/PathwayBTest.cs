@@ -189,6 +189,10 @@ namespace Test
             DirectoryInfo dir = new DirectoryInfo(sourceDirName);
             DirectoryInfo[] dirs = dir.GetDirectories();
 
+            if (destDirName.Contains(".svn"))
+            {
+                return;
+            }
             // If the source directory does not exist, throw an exception.
             if (!dir.Exists)
             {
@@ -292,6 +296,14 @@ namespace Test
             RunPathwayB(InputFormat.XHTML, "\"main.xhtml\", \"FlexRev.xhtml\"", "Sena 3-01", "main", "Dictionary", "E-Book (.epub)", "MainAndRevTest");
         }
 
+        /// <summary>
+        /// EDB 11/1/2011 -
+        /// Note: The validation on this test is currently failing due to a bug in TE (FWR 2550 - mismatched cases in hyperlink IDs). There is
+        /// a workaround to this for normal TE output (see GetXsltFile() in Exportepub.cs), but it relies on the calling app and whether the export
+        /// is running in "testing" mode (i.e., headless output). I haven't found a way to distinguish between scripture from TE and Paratext, so
+        /// I've let the logic in GetXsltFile() work properly for Paratext output -- USFM from the command line should be our primary use case.
+        /// Export from TE itself is not affected by this code.
+        /// </summary>
         [Test]
         [Category("SkipOnTeamCity")]
         public void XhtmlScriptureTest()
@@ -308,29 +320,33 @@ namespace Test
             RunPathwayB(InputFormat.XHTML, "\"Scripture Draft.xhtml\"", "Sena 3-01", "Scripture Draft", "Scripture", "E-Book (.epub)", "xhtmlTest");
         }
 
+        /// <summary>
+        /// Tests USFM conversion from the command line. Currently the PathwayB module uses reflection to call into ParatextShared.dll. For this
+        /// to pass, you need to have ParatextShared.dll and NetLoc.dll in your Pathway installation directory.
+        /// </summary>
         [Test]
         [Category("SkipOnTeamCity")]
         public void UsfmTest()
         {
-            //// clean out old files
-            //foreach (var file in Directory.GetFiles(_outputPath))
-            //{
-            //    File.Delete(file);
-            //}
-            //if (Directory.Exists(Path.Combine(_outputPath, "gather")))
-            //{
-            //    // delete the gather subdirectory files as well
-            //    foreach (var file in Directory.GetFiles(Path.Combine(_outputPath, "gather")))
-            //    {
-            //        File.Delete(file);
-            //    }
-            //}
-            //// Copy the files
-            //var projPath = Path.Combine(_inputPath, "KFY");
-            ////if (Directory.Exists(Path.Combine(projPath, "gather")))
-            //DirectoryCopy(projPath, _outputPath, true);
-            //// run the test
-            //RunPathwayB(InputFormat.USFM, "*", "KFY", "Scripture Draft", "Scripture", "E-Book (.epub)", "usfmTest");
+            // clean out old files
+            foreach (var file in Directory.GetFiles(_outputPath))
+            {
+                File.Delete(file);
+            }
+            if (Directory.Exists(Path.Combine(_outputPath, "gather")))
+            {
+                // delete the gather subdirectory files as well
+                foreach (var file in Directory.GetFiles(Path.Combine(_outputPath, "gather")))
+                {
+                    File.Delete(file);
+                }
+            }
+            // Copy the files
+            var projPath = Path.Combine(_inputPath, "KFY");
+            //if (Directory.Exists(Path.Combine(projPath, "gather")))
+            DirectoryCopy(projPath, _outputPath, true);
+            // run the test
+            RunPathwayB(InputFormat.USFM, "*", "KFY", "KFY", "Scripture", "E-Book (.epub)", "usfmTest");
         }
 
         [Test]

@@ -12,9 +12,9 @@
 // Responsibility: Greg Trihus
 // ---------------------------------------------------------------------------------------------
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Xml;
+using System.Reflection;
 using SIL.Tool;
 using System.Collections.Generic;
 
@@ -48,6 +48,11 @@ namespace SIL.PublishingSolution
             {
                 int i = 0;
                 int fileNum = 0;
+                if (args.Length == 0)
+                {
+                    Usage();
+                    Environment.Exit(0);                    
+                }
                 while (i < args.Length)
                 {
                     switch (args[i++])
@@ -129,15 +134,13 @@ namespace SIL.PublishingSolution
 
                 if (inFormat == InputFormat.USFM)
                 {
-                    // convert from USFM to USX
-                    // convert from USX to xhtml
-//                    projectInfo.DefaultXhtmlFileWithPath = args[i++];
+                    // convert from USFM to xhtml
+                    UsfmToXhtml(projectInfo, files);
                 }
                 else if (inFormat == InputFormat.USX)
                 {
                     // convert from USX to xhtml
-                    ConvertUsxToXhtml(projectInfo, files);
-//                    projectInfo.DefaultXhtmlFileWithPath = args[i++];
+                    UsxToXhtml(projectInfo, files);
                 }
                 else if (inFormat == InputFormat.XHTML)
                 {
@@ -174,14 +177,19 @@ namespace SIL.PublishingSolution
                 }
 
                 // troubleshooting... remove
-                Console.WriteLine("xhtml: " + projectInfo.DefaultXhtmlFileWithPath);
-                Console.WriteLine("css: " + projectInfo.DefaultCssFileWithPath);
-                Console.WriteLine("Reversal:" + projectInfo.IsReversalExist);
+                //Console.WriteLine("xhtml: " + projectInfo.DefaultXhtmlFileWithPath);
+                //Console.WriteLine("css: " + projectInfo.DefaultCssFileWithPath);
+                //Console.WriteLine("Reversal:" + projectInfo.IsReversalExist);
 
-                if (projectInfo.DefaultXhtmlFileWithPath == null || projectInfo.DefaultCssFileWithPath == null)
+                if (projectInfo.DefaultXhtmlFileWithPath == null)
                 {
                     Usage();
-                    throw new ArgumentException("Missing required option.");
+                    throw new ArgumentException("Missing required option: (DefaultXhtmlFileWithPath).");
+                }
+                if (projectInfo.DefaultCssFileWithPath == null)
+                {
+                    Usage();
+                    throw new ArgumentException("Missing required option: (DefaultCssFileWithPath).");
                 }
                 if (!File.Exists(projectInfo.DefaultXhtmlFileWithPath))
                     throw new ArgumentException(string.Format("Missing {0}", projectInfo.DefaultXhtmlFileWithPath));
@@ -200,8 +208,15 @@ namespace SIL.PublishingSolution
                 Backend.Load(backendPath);
                 Common.ShowMessage = false;
                 projectInfo.DictionaryOutputName = projectInfo.ProjectName;
-                Backend.Launch(exportType, projectInfo);
-
+                bool result = Backend.Launch(exportType, projectInfo);
+                if (result == true)
+                {
+                    Console.WriteLine("PathwayB: export process succeeded at " + DateTime.Now);
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
             }
             catch (Exception err)
             {
@@ -257,36 +272,32 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// Converts USFM to USX.
         /// </summary>
-        /// <param name="files">List of files to convert. This can be a single file or wildcard (*) as well.</param>
+        /// <param name="files">List of files to convert. This can be a single file or wildcard (*).</param>
         /// <returns></returns>
-        private static XmlDocument ConvertUsfmToUsx(List<string> files)
+        private static void UsfmToXhtml(PublicationInformation projInfo, List<string> files)
         {
-            XmlDocument doc = new XmlDocument();
-            //using (XmlWriter xmlw = doc.CreateNavigator().AppendChild())
-            //{
-            //    // Convert to XML
-            //    UsfmToUsx converter = new UsfmToUsx(xmlw, usfm, scrText.ScrStylesheet(bookNum), false);
-            //    converter.Convert();
-            //    xmlw.Flush();
-            //}
-            return doc;
-        }
-
-        /// <summary>
-        /// Converts USX file(s) to a single XHTML file.
-        /// </summary>
-        /// <param name="projInfo"></param>
-        /// <param name="files">List of files to convert. This can be a single file or wildcard (*) as well.</param>
-        private static void ConvertUsxToXhtml(PublicationInformation projInfo, List<string> files)
-        {
-            string cssFullPath = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
+            var docs = new List<XmlDocument>();
+            // try to find the stylesheet associated with this project (*.sty)
+            var tmpFiles = Directory.GetFiles(projInfo.ProjectPath, "*.sty");
+            string styFile;
+            if (tmpFiles.Length == 0)
+            {
+                // not here - check in the "gather" subdirectory
+                tmpFiles = Directory.GetFiles(Path.Combine(projInfo.ProjectPath, "gather"), "*.sty");
+                styFile = Path.Combine(Path.Combine(projInfo.ProjectPath, "gather"), tmpFiles[0]);
+            }
+            else
+            {
+                styFile = Path.Combine(projInfo.ProjectPath, tmpFiles[0]);
+            }
+            // Convert the stylesheet to css
             StyToCSS styToCss = new StyToCSS();
-            styToCss.ConvertStyToCSS(projInfo.ProjectName, cssFullPath);
-            projInfo.DefaultCssFileWithPath = cssFullPath;
-            string fileName = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml");
-            ParatextPathwayLink paratextPathwayLink = new ParatextPathwayLink(projInfo.ProjectName, projInfo.ProjectName, "zxx", "zxx", "PathwayB");
+            styToCss.StyFullPath = styFile;
+            styToCss.ConvertStyToCSS(Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".css"));
+            projInfo.DefaultCssFileWithPath = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
 
-            XmlDocument scrBooksDoc;
+            // Now work on the USFM data
+            // first convert to USX
             if (files[0] == "*")
             {
                 // wildcard - need to expand the file count to include all .sfm files in this directory
@@ -297,39 +308,143 @@ namespace SIL.PublishingSolution
                     files.Add(Path.GetFileName(usxFile)); // relative file names (no path)
                 }
             }
-            if (files.Count > 1)
+            if (files.Count == 0)
             {
-                var docs = new List<XmlDocument>();
-                foreach (var file in files)
+                throw new Exception("No files found to convert.");
+            }
+            foreach (var file in files)
+            {
+                string filename = Path.Combine(projInfo.ProjectPath, file);
+                if (File.Exists(filename))
                 {
-                    if (File.Exists(Path.Combine(projInfo.ProjectPath, file)))
+                    var streamReader = new StreamReader(filename);
+                    string usfm = string.Empty;
+                    try
                     {
-                        var xmlDoc = new XmlDocument { XmlResolver = null };
-                        xmlDoc.Load(Path.Combine(projInfo.ProjectPath, file));
-                        docs.Add(xmlDoc);
+                        usfm = streamReader.ReadToEnd();
                     }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Console.Write(ex.Message);
+                    }
+                    streamReader.Close(); 
+                    XmlDocument doc = new XmlDocument();
+                    using (XmlWriter xmlw = doc.CreateNavigator().AppendChild())
+                    {
+                        // Convert to USX. Uses reflection to find the ParatextShared DLL (dynamically loaded).
+                        try
+                        {
+                            Assembly asm = Assembly.LoadFrom(Path.Combine(PathwayPath.GetPathwayDir(), "ParatextShared.dll"));
+                            // new ScrStylesheet(styFile)
+                            Type tScrStylesheet = asm.GetType("Paratext.ScrStylesheet");
+                            Object oScrStylesheet = null;
+                            if (tScrStylesheet != null)
+                            {
+                                Object[] args = new object[1];
+                                args[0] = styFile;
+                                oScrStylesheet = Activator.CreateInstance(tScrStylesheet, args);
+                            }
+                            // UsfmToUsx.Convert
+                            Type tUsfmToUsx = asm.GetType("Paratext.UsfmToUsx");
+                            if (tUsfmToUsx != null)
+                            {
+                                Object[] args = new object[4];
+                                args[0] = xmlw;
+                                args[1] = usfm;
+                                args[2] = oScrStylesheet;
+                                args[3] = false;
+                                Object oClass = Activator.CreateInstance(tUsfmToUsx, args);
+                                Object oResult = tUsfmToUsx.InvokeMember("Convert", BindingFlags.Default | BindingFlags.InvokeMethod, null, oClass, null);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                        }
+                        // this code can replace the entire block above, if we want to directly link instead of dynamically loading the
+                        // ParatextShared dll.
+                        //UsfmToUsx converter = new UsfmToUsx(xmlw, usfm, new ScrStylesheet(styFile), false);
+                        //converter.Convert();
+                        xmlw.Flush();
+                    }
+                    docs.Add(doc);
                 }
-                // need to merge the documents before converting
-                scrBooksDoc = paratextPathwayLink.CombineUsxDocs(docs);
             }
-            else if (files.Count == 1)
-            {
-                scrBooksDoc = new XmlDocument { XmlResolver = null };
-                scrBooksDoc.Load(Path.Combine(projInfo.ProjectPath, files[0]));
-            }
-            else
-            {
-                Console.WriteLine("Unable to convert from USX - no files specified.");
-                return;
-            }
+            // now convert to xhtml
+            ParatextPathwayLink link = new ParatextPathwayLink(projInfo.ProjectName, projInfo.ProjectName, "zxx", "zxx", "PathwayB");
+            XmlDocument scrBooksDoc = link.CombineUsxDocs(docs);
 
             if (string.IsNullOrEmpty(scrBooksDoc.InnerText))
             {
-                Console.WriteLine("The current book has no content to export.");
-                return;
+                throw new Exception("No content found to convert.");
             }
-            paratextPathwayLink.ConvertUsxToPathwayXhtmlFile(scrBooksDoc.InnerXml, fileName);
-            
+            link.ConvertUsxToPathwayXhtmlFile(scrBooksDoc.InnerXml, Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml"));
+            projInfo.DefaultXhtmlFileWithPath = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml");
+        }
+
+        /// <summary>
+        /// Converts USX file(s) to a single XHTML file.
+        /// </summary>
+        /// <param name="projInfo"></param>
+        /// <param name="files">List of files to convert. This can be a single file or wildcard (*).</param>
+        private static void UsxToXhtml(PublicationInformation projInfo, List<string> files)
+        {
+            // try to find the stylesheet associated with this project (*.sty)
+            var tmpFiles = Directory.GetFiles(projInfo.ProjectPath, "*.sty");
+            string styFile;
+            if (tmpFiles.Length == 0)
+            {
+                // not here - check in the "gather" subdirectory
+                tmpFiles = Directory.GetFiles(Path.Combine(projInfo.ProjectPath, "gather"), "*.sty");
+                styFile = Path.Combine(Path.Combine(projInfo.ProjectPath, "gather"), tmpFiles[0]);
+            }
+            else
+            {
+                styFile = Path.Combine(projInfo.ProjectPath, tmpFiles[0]);
+            }
+            // Convert the stylesheet to css
+            StyToCSS styToCss = new StyToCSS();
+            styToCss.StyFullPath = styFile;
+            styToCss.ConvertStyToCSS(Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".css"));
+            projInfo.DefaultCssFileWithPath = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
+
+            if (files[0] == "*")
+            {
+                // wildcard - need to expand the file count to include all .sfm files in this directory
+                var usxFiles = Directory.GetFiles(projInfo.ProjectPath, "*.sfm");
+                files.Clear(); // should only be 1 item, but just in case...
+                foreach (var usxFile in usxFiles)
+                {
+                    files.Add(Path.GetFileName(usxFile)); // relative file names (no path)
+                }
+            }
+            if (files.Count == 0)
+            {
+                throw new Exception("No files found to convert.");
+            }
+            var docs = new List<XmlDocument>();
+            foreach (var file in files)
+            {
+                if (File.Exists(Path.Combine(projInfo.ProjectPath, file)))
+                {
+                    var xmlDoc = new XmlDocument {XmlResolver = null};
+                    xmlDoc.Load(Path.Combine(projInfo.ProjectPath, file));
+                    docs.Add(xmlDoc);
+                }
+            }
+            // convert to xhtml
+            ParatextPathwayLink link = new ParatextPathwayLink(projInfo.ProjectName, projInfo.ProjectName, "zxx",
+                                                                "zxx", "PathwayB");
+            XmlDocument scrBooksDoc = link.CombineUsxDocs(docs);
+
+            if (string.IsNullOrEmpty(scrBooksDoc.InnerText))
+            {
+                throw new Exception("No content found to convert.");
+            }
+            link.ConvertUsxToPathwayXhtmlFile(scrBooksDoc.InnerXml,
+                                                Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml"));
+            projInfo.DefaultXhtmlFileWithPath = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml");
+
         }
 
     }
