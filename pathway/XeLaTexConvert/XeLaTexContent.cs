@@ -72,6 +72,28 @@ namespace SIL.PublishingSolution
         private List<string> _mathStyle = new List<string>();
         private int _inlineCount;
         private string _headerContent = string.Empty;
+        private bool _dictionaryStarting = false;
+        public bool _dictionaryEnding = false;
+        private string _tocStartingPage;
+        private string _tocEndingPage;
+
+        private Dictionary<string, string> _toc = new Dictionary<string, string>();
+
+        #endregion
+
+        #region Private Variables
+
+        public string TocStartingPage
+        {
+            get { return _tocStartingPage; }
+            set { _tocStartingPage = value; }
+        }
+
+        public string TocEndingPage
+        {
+            get { return _tocEndingPage; }
+            set { _tocEndingPage = value; }
+        }
 
         #endregion
 
@@ -95,7 +117,15 @@ namespace SIL.PublishingSolution
 
             CloseFile();
             //UpdateRelativeInStylesXML();
+            GetTableofContent();
             return _newProperty;
+        }
+
+        private void GetTableofContent()
+        {
+            _toc.Add("first", TocStartingPage);
+            _toc.Add("last", TocEndingPage);
+            _newProperty.Add("TableofContent", _toc);
         }
 
         private void ProcessProperty()
@@ -570,15 +600,55 @@ namespace SIL.PublishingSolution
                     content = _chapterNo;
                     _isDropCap = false;
                 }
+
+                _childName = Common.ReplaceSeperators(_childName);
+               
                 content = Common.ReplaceSymbolToXelatexText(content);
                 List<string> value = CreateInlineInnerStyle(characterStyle);
+
+                if (_childName.IndexOf("scrBookName") == 0 && content != null)
+                {
+                    content = "\r\n \\section{" + content + "} ";
+                }
+
                 _xetexFile.Write(content);
+
                 CloseInlineInnerStyle(value);
                 for (int i = 1; i <= _inlineCount; i++) // close braces for inline style
                 {
                     _xetexFile.Write("}");
                 }
                 _xetexFile.Write("}");
+
+                
+                if (_childName.IndexOf("letterletHead") == 0 && content != null)
+                {
+
+                    if (!_dictionaryStarting)
+                    {
+                        _tocStartingPage = content.Substring(2).ToString();
+                        _xetexFile.Write("\r\n \\label{first_page" + _tocStartingPage + "} ");
+
+                        //_xetexFile.Write("\r\n \\section*{} \\label{first_page" + _tocStartingPage + "} ");
+                    }
+                    else
+                    {
+                        _dictionaryEnding = true;
+                        //_tocEndingPage = content.Substring(2).ToString();
+                        //  _xetexFile.Write("\r\n \\section*{} \\label{last_page} ");
+                        if (content == TocEndingPage)
+                        {
+                            _tocEndingPage = content.Substring(2).ToString();
+
+                            _xetexFile.WriteLine("\r\n \\label{last_page" + _tocEndingPage + "} ");
+                        }
+                        //_xetexFile.WriteLine("\r\n \\section*{} \\label{last_page" + _tocEndingPage + "} ");
+                    }
+
+                    if (!_dictionaryStarting)
+                        _dictionaryStarting = true;
+                    //content = "\\section{" + content + "}";
+                }
             }
             AnchorBookMark();
         }
@@ -601,7 +671,7 @@ namespace SIL.PublishingSolution
         {
             if (characterStyle == "$ID/[No character style]")
             {
-                characterStyle = StackPeek(_allStyle);
+                characterStyle =  StackPeek(_allStyle);
             }
             List<string> value = new List<string>();
             if (characterStyle.IndexOf("_") > 0)

@@ -21,6 +21,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Xml;
 using SIL.Tool;
 using Test;
 
@@ -28,6 +29,10 @@ namespace SIL.PublishingSolution
 {
     public class ExportXeLaTex : IExportProcess
     {
+
+        private Dictionary<string, string> _langFontDictionary; // languages and font names in use for this export
+        protected string _inputType = "dictionary";
+        private string tableOfContent;
         #region Public Functions
         public string ExportType
         {
@@ -57,6 +62,8 @@ namespace SIL.PublishingSolution
         /// </summary>
         public bool Export(PublicationInformation projInfo)
         {
+            _langFontDictionary = new Dictionary<string, string>();
+
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             //preProcessor.GetTempFolderPath();
             //preProcessor.PreserveSpace();
@@ -65,6 +72,22 @@ namespace SIL.PublishingSolution
             //preProcessor.InsertHiddenChapterNumber();
             //preProcessor.InsertHiddenVerseNumber();
             //preProcessor.GetDefinitionLanguage();
+            Param.LoadSettings();
+            string organization;
+            try
+            {
+                // get the organization
+                organization = Param.Value["Organization"];
+            }
+            catch (Exception)
+            {
+                // shouldn't happen (ExportThroughPathway dialog forces the user to select an organization), 
+                // but just in case, specify a default org.
+                organization = "SIL International";
+            }
+            tableOfContent = Param.GetMetadataValue(Param.TableOfContents, organization) ?? ""; // empty string if null / not found
+
+            BuildLanguagesList(projInfo.DefaultXhtmlFileWithPath);
             
             string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             //projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
@@ -87,12 +110,15 @@ namespace SIL.PublishingSolution
 
             XeLaTexContent xeLaTexContent = new XeLaTexContent();
             Dictionary<string, List<string>> classInlineText = xeLaTexStyles._classInlineText;
+            xeLaTexContent.TocEndingPage = preProcessor.GetDictionaryLetterCount();
             Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText);
 
             CloseDocument(xeLatexFile);
 
             string include = xeLaTexStyles.PageStyle.ToString();
             ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
+            modifyXeLaTexStyles.ProjectType = _inputType;
+            modifyXeLaTexStyles.TocChecked = tableOfContent;
             modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexFullFile, include);
 
             //CallXeTex(Path.GetFileName(xeLatexFullFile));
@@ -155,6 +181,39 @@ namespace SIL.PublishingSolution
                 //p1Output = p1.StandardOutput.ReadToEnd();
                 p1Error = p1.StandardError.ReadToEnd();
             }
+            
+            if(Convert.ToBoolean(tableOfContent))
+            {
+                using (Process p1 = new Process())
+                {
+                    p1.StartInfo.FileName = name;
+                    if (xeLatexFullFile != null)
+                        p1.StartInfo.Arguments = "-interaction=batchmode \"" + Path.GetFileName(xeLatexFullFile) + "\"";
+                    p1.StartInfo.RedirectStandardOutput = true;
+                    p1.StartInfo.RedirectStandardError = p1.StartInfo.RedirectStandardOutput;
+                    p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
+                    p1.Start();
+                    p1.WaitForExit();
+                    //p1Output = p1.StandardOutput.ReadToEnd();
+                    p1Error = p1.StandardError.ReadToEnd();
+                }
+
+                using (Process p1 = new Process())
+                {
+                    p1.StartInfo.FileName = name;
+                    if (xeLatexFullFile != null)
+                        p1.StartInfo.Arguments = "-interaction=batchmode \"" + Path.GetFileName(xeLatexFullFile) + "\"";
+                    p1.StartInfo.RedirectStandardOutput = true;
+                    p1.StartInfo.RedirectStandardError = p1.StartInfo.RedirectStandardOutput;
+                    p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
+                    p1.Start();
+                    p1.WaitForExit();
+                    //p1Output = p1.StandardOutput.ReadToEnd();
+                    p1Error = p1.StandardError.ReadToEnd();
+                }
+
+            }
+
             Directory.SetCurrentDirectory(originalDirectory);
             string texNameOnly = Path.GetFileNameWithoutExtension(xeLatexFullFile);
             string userFolder = Path.GetDirectoryName(xeLatexFullFile);
@@ -216,6 +275,59 @@ namespace SIL.PublishingSolution
                 }
             }
         }
+
+        #region Language Handling
+        /// <summary>
+        /// Parses the specified file and sets the internal languages list to all the languages found in the file.
+        /// </summary>
+        /// <param name="xhtmlFileName">File name to parse</param>
+        private void BuildLanguagesList(string xhtmlFileName)
+        {
+            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
+            xmlDocument.Load(xmlReader);
+            xmlReader.Close();
+            // should only be one of these after splitting out the chapters.
+            XmlNodeList nodes;
+            nodes = xmlDocument.SelectNodes("//@lang", namespaceManager);
+            if (nodes.Count > 0)
+            {
+                foreach (XmlNode node in nodes)
+                {
+                    string value;
+                    if (_langFontDictionary.TryGetValue(node.Value, out value))
+                    {
+                        // already have this item in our list - continue
+                        continue;
+                    }
+                    if (node.Value.ToLower() == "utf-8")
+                    {
+                        // TE-9078 "utf-8" showing up as language in html tag - remove when fixed
+                        continue;
+                    }
+                    // add an entry for this language in the list (the * gets overwritten in BuildFontsList())
+                    _langFontDictionary.Add(node.Value, "*");
+                }
+            }
+            // now go check to see if we're working on scripture or dictionary data
+            nodes = xmlDocument.SelectNodes("//xhtml:span[@class='headword']", namespaceManager);
+            if (nodes.Count == 0)
+            {
+                // not in this file - this might be scripture?
+                nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
+                if (nodes.Count > 0)
+                    _inputType = "scripture";
+            }
+            else
+            {
+                _inputType = "dictionary";
+            }
+        }
+
+        #endregion
 
         #endregion
     }

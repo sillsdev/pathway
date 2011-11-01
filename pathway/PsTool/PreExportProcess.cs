@@ -1113,6 +1113,7 @@ namespace SIL.Tool
             return isFound;
         }
 
+        
 
         /// <summary>
         /// For dictionary data, returns the language code for the definitions
@@ -1460,6 +1461,32 @@ namespace SIL.Tool
                     item.ParentNode.RemoveChild(item);
                 }
             }
+        }
+
+        /// <summary>
+        /// For dictionary data, returns the first and last letter count
+        /// </summary>
+        /// <returns></returns>
+        public string GetDictionaryLetterCount()
+        {
+            string lastLetterString = string.Empty;
+            var xDoc = new XmlDocument { XmlResolver = null };
+            xDoc.Load(_xhtmlFileNameWithPath);
+            XmlNodeList nodeList = xDoc.GetElementsByTagName("div");
+            if (nodeList.Count > 0)
+            {
+                foreach (XmlNode node in nodeList)
+                {
+                    if (node == null || node.Attributes["class"] == null)
+                        continue;
+                    string className = node.Attributes["class"].Value;
+                    if (className.ToLower() == "letter")
+                    {
+                        lastLetterString = node.InnerText;
+                    }
+                }
+            }
+            return lastLetterString;
         }
 
 

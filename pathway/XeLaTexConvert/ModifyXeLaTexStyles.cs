@@ -10,6 +10,8 @@ namespace SIL.PublishingSolution
 {
     public class ModifyXeLaTexStyles
     {
+        #region Private Variables
+
         private XmlDocument _styleXMLdoc;
         private XmlNode _node;
         private XmlElement _root;
@@ -23,6 +25,7 @@ namespace SIL.PublishingSolution
         private string _pageStyleFormat;
         private string _xetexFullFile;
         private bool _isHeadword;
+        private string _projectType;
         private ArrayList _textVariables = new ArrayList();
         private List<string> _mergedClass = new List<string>();
         Dictionary<string, string> _languageStyleName = new Dictionary<string, string>();
@@ -31,8 +34,24 @@ namespace SIL.PublishingSolution
         Dictionary<string, Dictionary<string, string>> mergedStyle = new Dictionary<string, Dictionary<string, string>>();
         Dictionary<string, Dictionary<string, string>> _cssClass = new Dictionary<string, Dictionary<string, string>>();
         XeLaTexMapProperty mapProperty = new XeLaTexMapProperty();
+        string _firstString = string.Empty;
+        string _lastString = string.Empty;
+        private string _tocChecked = "false";
+        public string ProjectType
+        {
+            get { return _projectType; }
+            set { _projectType = value; }
+        }
 
-        public void ModifyStylesXML(string projectPath, StreamWriter xetexFile, Dictionary<string, Dictionary<string, string>> newProperty, 
+        public string TocChecked
+        {
+            get { return _tocChecked; }
+            set { _tocChecked = value; }
+        }
+
+        #endregion
+
+        public void ModifyStylesXML(string projectPath, StreamWriter xetexFile, Dictionary<string, Dictionary<string, string>> newProperty,
             Dictionary<string, Dictionary<string, string>> cssClass, string xetexFullFile, string pageStyleFormat)
         {
             _projectPath = projectPath;
@@ -43,7 +62,18 @@ namespace SIL.PublishingSolution
             //{
             //    MergeCssStyle(cssStyle.Key);
             //}
+            GetTableofContent(newProperty);
             MapProperty();
+        }
+
+        private void GetTableofContent(Dictionary<string, Dictionary<string, string>> newProperty)
+        {
+            if (newProperty.ContainsKey("TableofContent"))
+            {
+                _firstString = newProperty["TableofContent"]["first"];
+                _lastString = newProperty["TableofContent"]["last"];
+                newProperty.Remove("TableofContent");
+            }
         }
 
         private void MapProperty()
@@ -60,7 +90,7 @@ namespace SIL.PublishingSolution
                 List<string> inlineInnerStyle = new List<string>();
                 string replaceNumberInStyle = Common.ReplaceCSSClassName(cssClass.Key);
                 string className = RemoveBody(replaceNumberInStyle);
-                if (className.Length == 0 ) continue;
+                if (className.Length == 0) continue;
                 xeLaTexProperty = mapProperty.XeLaTexProperty(cssClass.Value, className, inlineStyle, includePackageList, inlineInnerStyle);
                 if (xeLaTexProperty.Trim().Length > 0)
                 {
@@ -73,6 +103,10 @@ namespace SIL.PublishingSolution
             //%\doublespacing
             //%\setstretch{1.1}
             //Common.FileInsertText(_xetexFullFile, @"\setstretch{1.1} ");
+
+            if (Convert.ToBoolean(TocChecked))
+                InsertTableOfContent();
+
             Common.FileInsertText(_xetexFullFile, @"\thispagestyle{empty} ");
             Common.FileInsertText(_xetexFullFile, @"\begin{document} ");
             Common.FileInsertText(_xetexFullFile, _pageStyleFormat);
@@ -91,7 +125,42 @@ namespace SIL.PublishingSolution
             }
             Common.FileInsertText(_xetexFullFile, @"\documentclass{article} ");
             //Common.FileInsertText(_xetexFullFile, @"\documentclass[10pt,psfig,letterpaper,twocolumn]{article} ");
-            
+
+        }
+
+        private void InsertTableOfContent()
+        {
+            String tableOfContent = string.Empty;
+
+            ////Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("true") ||
+            ////        Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true") ||
+            ////        Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("true") ||
+            ////        Param.GetMetadataValue(Param.TableOfContents).ToLower().Equals("true"))
+
+            //tableOfContent += "\\title{" + Param.GetMetadataValue(Param.TitlePage) + "} \r\n";
+            //tableOfContent += "\\author{" + Param.GetMetadataValue(Param.CopyrightHolder) + "} \r\n";
+
+            //tableOfContent += "\\maketitle \r\n";
+
+            //tableOfContent += "\\pagebreak[1] \r\n";
+            if (_projectType.ToLower() == "dictionary")
+            {
+                if (_firstString != null)
+                    tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} Words  " +
+                                      _firstString.ToUpper() + " - " + _lastString.ToUpper() + "}{\\pageref{" +
+                                      "first_page" + _firstString + "}--\\pageref{" + "last_page" + _lastString +
+                                      "}}{}} ";
+
+
+                tableOfContent += "\r\n";
+                tableOfContent += "\\newpage \r\n";
+            }
+
+            tableOfContent += "\\tableofcontents \r\n";
+            //tableOfContent += "\\pagebreak[2] \r\n";
+            tableOfContent += "\\newpage \r\n";
+
+            Common.FileInsertText(_xetexFullFile, tableOfContent);
         }
 
         private string RemoveBody(string paraStyle)
