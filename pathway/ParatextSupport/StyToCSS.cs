@@ -9,7 +9,7 @@ namespace SIL.PublishingSolution
 {
 	public class StyToCSS
 	{
-	    public string StyFullPath;
+	    public string StyFullPath { get; set; }
         private string _cssFullPath;
         private Dictionary<string, Dictionary<string, string>> _styleInfo = new Dictionary<string, Dictionary<string, string>>();
 		private Dictionary<string, string> _cssProp;
