@@ -20,6 +20,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Resources;
+using System.Text;
+using ICSharpCode.SharpZipLib.Zip;
 using Microsoft.Win32;
 using System.IO;
 using NUnit.Framework;
@@ -61,6 +63,9 @@ namespace Test.XhtmlExport
             }
             _scriptPath = PathPart.Bin(Environment.CurrentDirectory, "/XhtmlExport");
             _tf = new TestFiles("XhtmlExport");
+            var pwf = Path.Combine(Common.GetAllUserAppPath(), "SIL");
+            var zf = new FastZip();
+            zf.ExtractZip(_tf.Input("Pathway.zip"), pwf, ".*");
         }
         #endregion Setup
 
@@ -96,7 +101,8 @@ namespace Test.XhtmlExport
             var xhtmlExpect = _tf.Expected(xhtmlName);
             var xhtmlOutput = _tf.Output(xhtmlName);
             var ns = new Dictionary<string, string> {{"x", "http://www.w3.org/1999/xhtml"}};
-            XmlAssert.Ignore(xhtmlOutput,"/x:html/x:head/x:meta[@name='description']/@content", ns);
+            XmlAssert.Ignore(xhtmlOutput, "/x:html/x:head/x:meta[@name='description']/@content", ns);
+            XmlAssert.Ignore(xhtmlOutput, "//@id", ns);
             XmlAssert.AreEqual(xhtmlExpect, xhtmlOutput, message + ": " + xhtmlName);
             var cssName = proj + ".css";
             var cssExpect = _tf.Expected(cssName);
@@ -128,12 +134,14 @@ namespace Test.XhtmlExport
             File.Copy(cssInput, cssOutput, overwrite);
             var p1 = new Process();
             p1.StartInfo.UseShellExecute = false;
-            string arg = string.Format("-x \"{0}\" ", xhtmlOutput);
-            arg += string.Format("-c \"{0}\" ", cssOutput);
-            arg += string.Format("-t \"{0}\" ", backend);
-            arg += string.Format("-i {0} ", inputType);
-            arg += string.Format("-n \"{0}\" ", project);
-            p1.StartInfo.Arguments = arg;
+            StringBuilder arg = new StringBuilder(string.Format("-f \"{0}\" ", xhtmlOutput)); 
+            arg.Append(string.Format("-c \"{0}\" ", cssOutput));
+            arg.Append(string.Format("-t \"{0}\" ", backend));
+            arg.Append(string.Format("-i {0} ", inputType));
+            arg.Append(string.Format("-n \"{0}\" ", project));
+            arg.Append("-if xhtml ");
+            arg.Append(string.Format("-d \"{0}\" ", Path.GetDirectoryName(xhtmlInput)));
+            p1.StartInfo.Arguments = arg.ToString();
             p1.StartInfo.WorkingDirectory = _tf.Output(null);
             p1.StartInfo.FileName = Common.PathCombine(PathwayPath.GetPathwayDir(), "PathwayB.exe");
             p1.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;

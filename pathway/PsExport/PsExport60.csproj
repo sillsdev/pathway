@@ -286,7 +286,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FwUtils, Version=6.0.1.21083, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="FwUtils, Version=6.0.6.31746, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Dlls601\FwUtils.dll</HintPath>
     </Reference>

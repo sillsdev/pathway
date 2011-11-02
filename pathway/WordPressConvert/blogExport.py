@@ -372,7 +372,10 @@ class BlogExport:
                 for curType in self.subentryorder:
                     for subentry in subentries:
                         if self.ProcessSubentry(subentry, curType, includeExample, map):
-                            subentrytext += subentrytpl % map
+                            try:
+                                subentrytext += subentrytpl % map
+                            except KeyError:
+                                continue
                 for subentry in subentries:
                     if self.ProcessSubentry(subentry, "", includeExample, map):
                         subentrytext += subentrytpl % map

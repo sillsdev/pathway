@@ -326,10 +326,6 @@
       <Project>{E225E5AF-B603-41D1-BB58-E3AAE05C59FD}</Project>
       <Name>OpenOfficeConvert60</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PsTool\PsTool60.csproj">
-      <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
-      <Name>PsTool60</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="myIcon.ico" />

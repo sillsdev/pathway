@@ -54,11 +54,13 @@ namespace Test
                 foreach (string key in nameSpaces.Keys)
                     ns.AddNamespace(key, nameSpaces[key]);
             xmlDocument.Load(path);
-            XmlNode xmlNode = xmlDocument.SelectSingleNode(xpath, ns);
-            if (xmlNode != null)
+            XmlNodeList xmlNodes = xmlDocument.SelectNodes(xpath, ns);
+            if (xmlNodes != null)
             {
-                xmlNode.InnerText = "Ignore";
-                xmlDocument.Save(path);
+                foreach (XmlNode xmlNode in xmlNodes)
+                    xmlNode.InnerText = "Ignore";
+                if (xmlNodes.Count > 0)
+                    xmlDocument.Save(path);
             }
             xmlDocument.RemoveAll();
         }
