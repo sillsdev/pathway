@@ -58,7 +58,7 @@ namespace SIL.PublishingSolution
             //Pdf pdf = new Pdf(xhtmlPreviewFilePath, cssMergeFullFileName);
             //pdf.Create(outputPdfFile);
             //string outputPdfFile = Path.Combine(ps.DictionaryPath, Path.GetFileNameWithoutExtension(fileName) + ".pdf");
-            string outputPdfFile = Path.Combine(ps.DictionaryPath, Path.GetFileNameWithoutExtension(xhtmlPreviewFilePath) + ".pdf");
+            string outputPdfFile = Path.Combine(ps.DictionaryPath, Path.GetFileNameWithoutExtension(openOffice.GeneratedPdfFileName) + ".pdf");
 
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();

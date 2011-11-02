@@ -50,6 +50,7 @@ namespace SIL.PublishingSolution
         }
 
         public string _refFormat = "Genesis 1";
+        public string GeneratedPdfFileName = string.Empty;
 
 
         private static PublicationInformation publicationInfo;
@@ -593,6 +594,7 @@ namespace SIL.PublishingSolution
         {
             publicationInfo = projInfo;
             string defaultXhtml = projInfo.DefaultXhtmlFileWithPath;
+            GeneratedPdfFileName = defaultXhtml;
             projInfo.OutputExtension = "odt";
             Common.OdType = Common.OdtType.OdtChild;
             bool returnValue = false;
@@ -642,6 +644,7 @@ namespace SIL.PublishingSolution
 
             if (dictSecName.Count > 0)
             {
+                GeneratedPdfFileName = dictSecName["Main"];
                 ExportODM(publicationInfo.ProgressBar);
             }
             else
@@ -649,6 +652,7 @@ namespace SIL.PublishingSolution
                 publicationInfo.DictionaryOutputName = publicationInfo.ProjectName;
                 ExportODT(publicationInfo);
             }
+            
             return returnValue;
         }
 
