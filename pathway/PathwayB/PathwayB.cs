@@ -333,7 +333,9 @@ namespace SIL.PublishingSolution
                         // Convert to USX. Uses reflection to find the ParatextShared DLL (dynamically loaded).
                         try
                         {
-                            Assembly asm = Assembly.LoadFrom(Path.Combine(PathwayPath.GetPathwayDir(), "ParatextShared.dll"));
+                            var asmLoc = ParatextInstallDir();
+                            Assembly asm = Assembly.LoadFrom(Path.Combine((asmLoc.Length == 0 ? PathwayPath.GetPathwayDir() : asmLoc), "ParatextShared.dll"));
+                            //Assembly asm = Assembly.LoadFrom(Path.Combine(PathwayPath.GetPathwayDir(), "ParatextShared.dll"));
                             // new ScrStylesheet(styFile)
                             Type tScrStylesheet = asm.GetType("Paratext.ScrStylesheet");
                             Object oScrStylesheet = null;
@@ -378,17 +380,10 @@ namespace SIL.PublishingSolution
                 }
             }
 
-            Assembly asmPTSupport = null;
-
             try
             {
-
                 // load the ParatextSupport DLL dynamically
-                asmPTSupport = Assembly.LoadFrom(Path.Combine(PathwayPath.GetPathwayDir(), "ParatextSupport.dll"));
-
-                //StyToCSS styToCss = new StyToCSS();
-                //styToCss.StyFullPath = styFile;
-                //styToCss.ConvertStyToCSS(Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".css"));
+                Assembly asmPTSupport = Assembly.LoadFrom(Path.Combine(PathwayPath.GetPathwayDir(), "ParatextSupport.dll"));
 
                 // Convert the stylesheet to css
                 // new ScrStylesheet(styFile)
@@ -432,15 +427,7 @@ namespace SIL.PublishingSolution
                     argsConvert[1] = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml");
                     var oRet = tPPL.InvokeMember("ConvertUsxToPathwayXhtmlFile", BindingFlags.Default | BindingFlags.InvokeMethod, null, oPPL, argsConvert);
                 }
-                // ParatextPathwayLink link = new ParatextPathwayLink(projInfo.ProjectName, projInfo.ProjectName, "zxx", "zxx", "PathwayB");
-                // XmlDocument scrBooksDoc = link.CombineUsxDocs(docs);
-                // if (string.IsNullOrEmpty(scrBooksDoc.InnerText))
-                // {
-                //     throw new Exception("No content found to convert.");
-                // }
-                // link.ConvertUsxToPathwayXhtmlFile(scrBooksDoc.InnerXml, Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml"));
                 projInfo.DefaultXhtmlFileWithPath = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml");
-
             }
             catch (FileNotFoundException ex)
             {
@@ -464,80 +451,136 @@ namespace SIL.PublishingSolution
         /// <param name="files">List of files to convert. This can be a single file or wildcard (*).</param>
         private static void UsxToXhtml(PublicationInformation projInfo, List<string> files)
         {
-            //// try to find the stylesheet associated with this project (*.sty)
-            //var tmpFiles = Directory.GetFiles(projInfo.ProjectPath, "*.sty");
-            //string styFile;
-            //if (tmpFiles.Length == 0)
-            //{
-            //    // not here - check in the "gather" subdirectory
-            //    tmpFiles = Directory.GetFiles(Path.Combine(projInfo.ProjectPath, "gather"), "*.sty");
-            //    styFile = Path.Combine(Path.Combine(projInfo.ProjectPath, "gather"), tmpFiles[0]);
-            //}
-            //else
-            //{
-            //    styFile = Path.Combine(projInfo.ProjectPath, tmpFiles[0]);
-            //}
-            //// Convert the stylesheet to css
-            //StyToCSS styToCss = new StyToCSS();
-            //styToCss.StyFullPath = styFile;
-            //styToCss.ConvertStyToCSS(Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".css"));
-            //projInfo.DefaultCssFileWithPath = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
+            // try to find the stylesheet associated with this project (*.sty)
+            var tmpFiles = Directory.GetFiles(projInfo.ProjectPath, "*.sty");
+            string styFile;
+            if (tmpFiles.Length == 0)
+            {
+                // not here - check in the "gather" subdirectory
+                tmpFiles = Directory.GetFiles(Path.Combine(projInfo.ProjectPath, "gather"), "*.sty");
+                styFile = Path.Combine(Path.Combine(projInfo.ProjectPath, "gather"), tmpFiles[0]);
+            }
+            else
+            {
+                styFile = Path.Combine(projInfo.ProjectPath, tmpFiles[0]);
+            }
 
-            //if (files[0] == "*")
-            //{
-            //    // wildcard - need to expand the file count to include all .sfm files in this directory
-            //    var usxFiles = Directory.GetFiles(projInfo.ProjectPath, "*.sfm");
-            //    files.Clear(); // should only be 1 item, but just in case...
-            //    foreach (var usxFile in usxFiles)
-            //    {
-            //        files.Add(Path.GetFileName(usxFile)); // relative file names (no path)
-            //    }
-            //}
-            //if (files.Count == 0)
-            //{
-            //    throw new Exception("No files found to convert.");
-            //}
-            //var docs = new List<XmlDocument>();
-            //foreach (var file in files)
-            //{
-            //    if (File.Exists(Path.Combine(projInfo.ProjectPath, file)))
-            //    {
-            //        var xmlDoc = new XmlDocument {XmlResolver = null};
-            //        xmlDoc.Load(Path.Combine(projInfo.ProjectPath, file));
-            //        docs.Add(xmlDoc);
-            //    }
-            //}
-            //// convert to xhtml
-            //ParatextPathwayLink link = new ParatextPathwayLink(projInfo.ProjectName, projInfo.ProjectName, "zxx",
-            //                                                    "zxx", "PathwayB");
-            //XmlDocument scrBooksDoc = link.CombineUsxDocs(docs);
+            try
+            {
+                // load the ParatextSupport DLL dynamically
+                Assembly asm = Assembly.LoadFrom(Path.Combine(PathwayPath.GetPathwayDir(), "ParatextSupport.dll"));
 
-            //if (string.IsNullOrEmpty(scrBooksDoc.InnerText))
-            //{
-            //    throw new Exception("No content found to convert.");
-            //}
-            //link.ConvertUsxToPathwayXhtmlFile(scrBooksDoc.InnerXml,
-            //                                    Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml"));
-            //projInfo.DefaultXhtmlFileWithPath = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml");
+                // Convert the .sty stylesheet to css
+                // new ScrStylesheet(styFile)
+                Type tStyToCSS = asm.GetType("SIL.PublishingSolution.StyToCSS");
+                Object oScrStylesheet = null;
+                if (tStyToCSS != null)
+                {
+                    // new styToCss
+                    oScrStylesheet = Activator.CreateInstance(tStyToCSS);
+                    // styToCss.StyFullPath = styFile
+                    PropertyInfo piStyFullPath = tStyToCSS.GetProperty("StyFullPath", BindingFlags.Public | BindingFlags.Instance);
+                    piStyFullPath.SetValue(oScrStylesheet, styFile, null);
+                    // styToCss.ConvertStyToCSS(Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".css"));
+                    Object[] args = new object[1];
+                    args[0] = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
+                    Object oResult = tStyToCSS.InvokeMember("ConvertStyToCSS", BindingFlags.Default | BindingFlags.InvokeMethod, null, oScrStylesheet, args);
+                }
+                projInfo.DefaultCssFileWithPath = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
+
+                // collect the files and convert them to XmlDocuments
+                if (files[0] == "*")
+                {
+                    // wildcard - need to expand the file count to include all .sfm files in this directory
+                    var usxFiles = Directory.GetFiles(projInfo.ProjectPath, "*.sfm");
+                    files.Clear(); // should only be 1 item, but just in case...
+                    foreach (var usxFile in usxFiles)
+                    {
+                        files.Add(Path.GetFileName(usxFile)); // relative file names (no path)
+                    }
+                }
+                if (files.Count == 0)
+                {
+                    throw new Exception("No files found to convert.");
+                }
+                var docs = new List<XmlDocument>();
+                foreach (var file in files)
+                {
+                    if (File.Exists(Path.Combine(projInfo.ProjectPath, file)))
+                    {
+                        var xmlDoc = new XmlDocument { XmlResolver = null };
+                        xmlDoc.Load(Path.Combine(projInfo.ProjectPath, file));
+                        docs.Add(xmlDoc);
+                    }
+                }
+
+                // now convert them to xhtml
+                Type tPPL = asm.GetType("SIL.PublishingSolution.ParatextPathwayLink");
+                if (tPPL != null)
+                {
+                    Object[] args = new object[5];
+                    args[0] = projInfo.ProjectName;
+                    args[1] = projInfo.ProjectName;
+                    args[2] = "zxx";
+                    args[3] = "zxx";
+                    args[4] = "PathwayB";
+                    Object oPPL = Activator.CreateInstance(tPPL, args);
+                    Object[] argsCombine = new object[1];
+                    argsCombine[0] = docs;
+                    XmlDocument scrBooksDoc = (XmlDocument)tPPL.InvokeMember
+                        ("CombineUsxDocs", BindingFlags.Default | BindingFlags.InvokeMethod, null, oPPL, argsCombine);
+                    if (string.IsNullOrEmpty(scrBooksDoc.InnerText))
+                    {
+                        throw new Exception("No content found to convert.");
+                    }
+                    Object[] argsConvert = new object[2];
+                    argsConvert[0] = scrBooksDoc.InnerXml;
+                    argsConvert[1] = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml");
+                    var oRet = tPPL.InvokeMember("ConvertUsxToPathwayXhtmlFile", BindingFlags.Default | BindingFlags.InvokeMethod, null, oPPL, argsConvert);
+                }
+                projInfo.DefaultXhtmlFileWithPath = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml");
+
+            }
+            catch (FileNotFoundException ex)
+            {
+                throw new ArgumentException("USFM output depends on ParatextSupport.DLL. Please make sure this library is in the Pathway installation directory.");
+            }
+            catch (FileLoadException ex)
+            {
+                throw new ArgumentException("Unable to load a needed library for USFM output. Details: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
 
         }
 
-        //private string ParatextInstallDir()
-        //{
-        //    const string PTWUpdateFile = @"PtwUpdateFile";
-        //    using (var key = Registry.CurrentUser.OpenSubKey(PTWUpdateFile))
-        //    {
-        //        using (RegistryKey subkey = key.OpenSubKey(@"shell\Open\command"))
-        //        {
-        //            if (subkey.GetValue())
-        //            if (subkey.GetValue("ProductName").ToString().ToLower().IndexOf(ExecutableName.ToLower()) != -1)
-        //            {
-        //                return true;
-        //            }
-        //        }
-        //    }
+        private static string ParatextInstallDir()
+        {
+            const string PTWUpdateFile = @"Software\Classes\PtwUpdateFile";
+            try
+            {
+                using (var key = Registry.CurrentUser.OpenSubKey(PTWUpdateFile))
+                {
+                    if (key != null)
+                    {
+                        using (RegistryKey subkey = key.OpenSubKey(@"shell\Open\command"))
+                        {
+                            string sValue = subkey.GetValue("").ToString();
+                            return (string.IsNullOrEmpty(sValue)) ? "" : sValue.Substring(1, (sValue.LastIndexOf("\\") - 1));
+                        }
+                    }
+                    return "";
+                }
 
-        //}
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                return "";
+            }
+        }
 
     }
 }
