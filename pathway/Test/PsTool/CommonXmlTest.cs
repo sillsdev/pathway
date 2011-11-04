@@ -88,7 +88,7 @@ namespace Test.PsTool
             Dictionary<string, string> _metaDataDic = new Dictionary<string, string>();
             string projectInputType = string.Empty;
             projectInputType = "Dictionary";
-            string metaDataFull = GetFileNameWithPath("DictionaryStyleSettings.xml");
+            string metaDataFull = GetFileNameWithPath("MetaData.xml");
             _metaDataDic = Common.GetMetaData(projectInputType, metaDataFull);
 
             List<string> metaDataList = new List<string>();

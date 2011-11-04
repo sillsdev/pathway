@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="13">
   <settings>
     <property name="InputPath" value="" />
@@ -22,9 +22,10 @@
     <property name="ConfigureDictionary" value="True" />
     <property name="ReversalIndexes" value="True" />
     <property name="GrammerSketch" value="False" />
-    <property name="LayoutSelected" value="FieldWorksStyles" />
+	<property name="LayoutSelected" value="FieldWorksStyles" />
     <property name="ExtraProcessing" value="True" />
     <property name="Media" value="paper" />
+    <property name="Organization" value="sams international" />
   </settings>
   <defaultSettings>
     <property name="PrintVia" value="OpenOffice/LibreOffice" />
@@ -182,13 +183,13 @@
       <option name="Justify" file="Empty.css" />
     </feature>
     <feature name="Lic_Other">
-      <option name="Draft" file="Draft.xhtml" />
-      <option name="Non-Commercial Share Alike" file="CC-by-nc-sa.xhtml" />
-      <option name="Non-Commercial No Derivatives" file="CC-by-nc-nd.xhtml" />
-      <option name="Intended for Sale" file="Selling.xhtml" />
+      <option name="Draft" file="Draft.xhtml"/>
+      <option name="Non-Commercial Share Alike" file="CC-by-nc-sa.xhtml"/>
+      <option name="Non-Commercial No Derivatives" file="CC-by-nc-nd.xhtml"/>
+      <option name="Intended for Sale" file="Selling.xhtml"/>
     </feature>
     <feature name="Lic_United Bible Societies">
-      <option name="Draft" file="UBS_Draft.xhtml" />
+      <option name="Draft" file="UBS_Draft.xhtml"/>
     </feature>
     <feature name="Subject">
       <option name="Religion and Spirituality" file="Empty.css" />
@@ -329,20 +330,20 @@
     <others>
       <style name="EBook (epub)" file="epub.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg">
         <description>1 column flowed text, left aligned, default font for each writing system</description>
-        <styleProperty name="CoverImage" value="cover.png" />
-        <styleProperty name="TOCLevel" value="2 - Letter and Entry" />
+        <styleProperty name="CoverImage" value="cover.png"/>
+        <styleProperty name="TOCLevel" value="2 - Letter and Entry"/>
         <styleProperty name="AddColophonPage" value="Yes" />
         <styleProperty name="BaseFontSize" value="13" />
         <styleProperty name="DefaultLineHeight" value="125" />
         <styleProperty name="DefaultAlignment" value="Justify" />
         <styleProperty name="ChapterNumbers" value="Drop Cap" />
         <styleProperty name="MaxImageWidth" value="600" />
-        <styleProperty name="EmbedFonts" value="Yes" />
+        <styleProperty name="EmbedFonts" value="Yes"/>
         <styleProperty name="IncludeFontVariants" value="Yes" />
         <styleProperty name="DefaultFont" value="Charis SIL" />
-        <styleProperty name="MissingFont" value="Prompt User" />
+        <styleProperty name="MissingFont" value="Prompt User"/>
         <styleProperty name="NonSILFont" value="Prompt User" />
-        <styleProperty name="Title" value=" " />
+        <styleProperty name="Title" value=" "/>
         <styleProperty name="Creator" value=" " />
         <styleProperty name="Publisher" value=" " />
         <styleProperty name="Type" value=" " />
@@ -375,15 +376,18 @@
     <Organization>SIL International</Organization>
     <Organization>United Bible Societies</Organization>
     <Organization>Pioneer Bible Translators</Organization>
+    <Organization>sams international</Organization>
   </Organizations>
   <Metadata>
     <meta name="Title" outputTypes="all">
       <defaultValue>
       </defaultValue>
+      <currentValue>sams</currentValue>
     </meta>
     <meta name="Creator" outputTypes="all">
       <defaultValue>
       </defaultValue>
+      <currentValue>sams creator</currentValue>
     </meta>
     <meta name="Publisher" outputTypes="all">
       <organizationDefault organizationName="SIL International" Locked="false">SIL International</organizationDefault>
@@ -391,78 +395,98 @@
       <organizationDefault organizationName="Pioneer Bible Translators" Locked="false">Pioneer Bible Translators</organizationDefault>
       <defaultValue>
       </defaultValue>
+      <currentValue>sams publisher</currentValue>
     </meta>
     <meta name="Description" outputTypes="all">
       <defaultValue>
       </defaultValue>
+      <currentValue>sams book</currentValue>
     </meta>
     <meta name="Copyright Holder" outputTypes="all">
       <organizationDefault organizationName="SIL International" Locked="false">© 2011 SIL International. All Rights Reserved.</organizationDefault>
       <organizationDefault organizationName="United Bible Societies" Locked="false">© 2011 United Bible Societies. All Rights Reserved.</organizationDefault>
       <organizationDefault organizationName="Pioneer Bible Translators" Locked="false">© 2011 Pioneer Bible Translators. All Rights Reserved.</organizationDefault>
       <defaultValue>© 2011. All Rights Reserved.</defaultValue>
+      <currentValue>sams international © 2011. All Rights Reserved.</currentValue>
     </meta>
     <meta name="Type" outputTypes="all">
       <defaultValue>
       </defaultValue>
+      <currentValue> </currentValue>
     </meta>
     <meta name="Source" outputTypes="all">
       <defaultValue>
       </defaultValue>
+      <currentValue> </currentValue>
     </meta>
     <meta name="Format" outputTypes="all">
       <defaultValue>
       </defaultValue>
+      <currentValue>application/vnd.oasis.opendocument.text</currentValue>
     </meta>
     <meta name="Contributor" outputTypes="all">
       <defaultValue>
       </defaultValue>
+      <currentValue> </currentValue>
     </meta>
     <meta name="Relation" outputTypes="all">
       <defaultValue>
       </defaultValue>
+      <currentValue> </currentValue>
     </meta>
     <meta name="Coverage" outputTypes="all">
       <defaultValue>
       </defaultValue>
+      <currentValue> </currentValue>
     </meta>
     <meta name="Subject" outputTypes="all">
       <defaultValue>Foreign Literatures and Linguistics; Language Documentation; Dictionary; Reference</defaultValue>
+      <currentValue>Foreign Literatures and Linguistics; Language Documentation; Dictionary; Reference</currentValue>
     </meta>
     <meta name="Date" outputTypes="all">
       <defaultValue>
       </defaultValue>
+      <currentValue>2011-11-04</currentValue>
     </meta>
     <meta name="Language" outputTypes="all">
       <defaultValue>
       </defaultValue>
+      <currentValue> </currentValue>
     </meta>
     <meta name="Identifier" outputTypes="all">
       <defaultValue>
       </defaultValue>
+      <currentValue> </currentValue>
     </meta>
     <meta name="Cover Page" outputTypes="epub">
       <defaultValue>true</defaultValue>
+      <currentValue>False</currentValue>
     </meta>
     <meta name="Cover Page Filename" outputTypes="epub">
       <defaultValue>
       </defaultValue>
+      <currentValue> </currentValue>
     </meta>
     <meta name="Cover Page Title" outputTypes="epub">
       <defaultValue>true</defaultValue>
+      <currentValue>True</currentValue>
     </meta>
     <meta name="Title Page" outputTypes="all">
       <defaultValue>false</defaultValue>
+      <currentValue>False</currentValue>
     </meta>
     <meta name="Copyright Page" outputTypes="all">
       <defaultValue>false</defaultValue>
+      <currentValue>False</currentValue>
     </meta>
     <meta name="Copyright Page Filename" outputTypes="all">
       <defaultValue>
       </defaultValue>
+      <currentValue> </currentValue>
     </meta>
     <meta name="Table of Contents" outputTypes="all">
       <defaultValue>false</defaultValue>
+      <currentValue>False</currentValue>
     </meta>
   </Metadata>
 </stylePick>
