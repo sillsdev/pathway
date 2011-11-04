@@ -78,6 +78,38 @@ namespace Test.PsTool
             Assert.AreEqual(expected, pb.Maximum);
         }
 
+
+        /// <summary>
+        ///A test for GetMetaDataTest
+        ///</summary>
+        [Test]
+        public void GetMetaDataTest()
+        {
+            Dictionary<string, string> _metaDataDic = new Dictionary<string, string>();
+            string projectInputType = string.Empty;
+            projectInputType = "Dictionary";
+            string metaDataFull = GetFileNameWithPath("DictionaryStyleSettings.xml");
+            _metaDataDic = Common.GetMetaData(projectInputType, metaDataFull);
+
+            List<string> metaDataList = new List<string>();
+            metaDataList.Add("Title");
+            metaDataList.Add("Creator");
+            metaDataList.Add("Publisher");
+            metaDataList.Add("Description");
+            metaDataList.Add("Copyright Holder");
+            metaDataList.Add("Subject");
+
+            Dictionary<string, string> metaDataDicExpected = new Dictionary<string, string>();
+            metaDataDicExpected["Title"] = "sams";
+            metaDataDicExpected["Creator"] = "sams creator";
+            metaDataDicExpected["Publisher"] = "sams publisher";
+            metaDataDicExpected["Description"] = "sams book";
+            metaDataDicExpected["Copyright Holder"] = "sams international © 2011. All Rights Reserved.";
+            metaDataDicExpected["Subject"] = "Foreign Literatures and Linguistics; Language Documentation; Dictionary; Reference";
+
+            Assert.AreEqual(_metaDataDic,metaDataDicExpected);
+        }
+
         /// <summary>
         ///A test for GetXmlNodeList
         ///</summary>
@@ -88,11 +120,10 @@ namespace Test.PsTool
             string genericFamily = "cursive";
             string xPath = "//font-preference/generic-family [@name = \"" + genericFamily + "\"]";
             ArrayList actual = Common.GetXmlNodeList(xmlFileNameWithPath, xPath);
-            ArrayList expected  = new ArrayList();
+            ArrayList expected = new ArrayList();
             expected.Add("Comic Sans MS");
             expected.Add("Lydian Cursive ");
             Assert.AreEqual(expected, actual);
-
         }
 
         /// <summary>
@@ -105,7 +136,7 @@ namespace Test.PsTool
                 LoadXmlDocument(
                     "<generic-family name=\"cursive\"><font>Comic Sans MS</font><font>Lydian Cursive </font></generic-family>",
                     false);
-            
+
             string xmlFileNameWithPath = GetFileNameWithPath("GenericFont.xml");
             string genericFamily = "cursive";
             string xPath = "//font-preference/generic-family [@name = \"" + genericFamily + "\"]";
@@ -119,10 +150,10 @@ namespace Test.PsTool
         [Test]
         public void XsltProcessTest1()
         {
-            string inputFile = GetFileNameWithPath("FlexRev.xml"); 
-            string xsltFile = GetFileNameWithPath("FlexRev.xsl"); 
-            string ext = ".xhtml"; 
-            string expected = GetFileNameWithExpectedPath("FlexRev.xhtml"); 
+            string inputFile = GetFileNameWithPath("FlexRev.xml");
+            string xsltFile = GetFileNameWithPath("FlexRev.xsl");
+            string ext = ".xhtml";
+            string expected = GetFileNameWithExpectedPath("FlexRev.xhtml");
             string actual = Common.XsltProcess(inputFile, xsltFile, ext);
             XmlAssert.AreEqual(expected, actual, "FlexRev.xhtml different");
         }
@@ -307,7 +338,7 @@ namespace Test.PsTool
         [Test]
         public void GetLanguageNameTest()
         {
-            string languageCode = "TA"; 
+            string languageCode = "TA";
             string expected = "Tamil";
             string actual = Common.GetLanguageName(languageCode);
             Assert.AreEqual(expected, actual);
@@ -336,11 +367,11 @@ namespace Test.PsTool
         [Test]
         public void GetCountryCodeTest()
         {
-            string language; 
-            string languageExpected = "en"; 
-            string country; 
-            string countryExpected = "GB"; 
-            string langCountry = "en-GB"; 
+            string language;
+            string languageExpected = "en";
+            string country;
+            string countryExpected = "GB";
+            string langCountry = "en-GB";
 
             Dictionary<string, ArrayList> spellCheck = new Dictionary<string, ArrayList>();
             ArrayList arrayList = new ArrayList();
@@ -359,14 +390,14 @@ namespace Test.PsTool
         [Test]
         public void GetPictureFromPathTest()
         {
-            string src = "Pictures/Ax1.jpg"; 
-            string metaName = string.Empty; 
-            string sourcePicturePath = Common.PathCombine(GetTestPath(),"InputFiles");
-            string expected = Common.PathCombine(sourcePicturePath, src); 
+            string src = "Pictures/Ax1.jpg";
+            string metaName = string.Empty;
+            string sourcePicturePath = Common.PathCombine(GetTestPath(), "InputFiles");
+            string expected = Common.PathCombine(sourcePicturePath, src);
             string actual = Common.GetPictureFromPath(src, metaName, sourcePicturePath);
             Assert.AreEqual(expected, actual);
 
         }
- 
+
     }
 }

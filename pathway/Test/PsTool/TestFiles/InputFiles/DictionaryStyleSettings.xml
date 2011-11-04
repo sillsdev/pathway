@@ -25,6 +25,7 @@
 	<property name="LayoutSelected" value="FieldWorksStyles" />
     <property name="ExtraProcessing" value="True" />
     <property name="Media" value="paper" />
+    <property name="Organization" value="sams international" />
   </settings>
   <defaultSettings>
     <property name="PrintVia" value="OpenOffice/LibreOffice" />
@@ -375,79 +376,117 @@
     <Organization>SIL International</Organization>
     <Organization>United Bible Societies</Organization>
     <Organization>Pioneer Bible Translators</Organization>
+    <Organization>sams international</Organization>
   </Organizations>
   <Metadata>
     <meta name="Title" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
+      <currentValue>sams</currentValue>
     </meta>
     <meta name="Creator" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
+      <currentValue>sams creator</currentValue>
     </meta>
     <meta name="Publisher" outputTypes="all">
       <organizationDefault organizationName="SIL International" Locked="false">SIL International</organizationDefault>
       <organizationDefault organizationName="United Bible Societies" Locked="false">United Bible Societies</organizationDefault>
       <organizationDefault organizationName="Pioneer Bible Translators" Locked="false">Pioneer Bible Translators</organizationDefault>
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
+      <currentValue>sams publisher</currentValue>
     </meta>
     <meta name="Description" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
+      <currentValue>sams book</currentValue>
     </meta>
     <meta name="Copyright Holder" outputTypes="all">
       <organizationDefault organizationName="SIL International" Locked="false">© 2011 SIL International. All Rights Reserved.</organizationDefault>
       <organizationDefault organizationName="United Bible Societies" Locked="false">© 2011 United Bible Societies. All Rights Reserved.</organizationDefault>
       <organizationDefault organizationName="Pioneer Bible Translators" Locked="false">© 2011 Pioneer Bible Translators. All Rights Reserved.</organizationDefault>
       <defaultValue>© 2011. All Rights Reserved.</defaultValue>
+      <currentValue>sams international © 2011. All Rights Reserved.</currentValue>
     </meta>
     <meta name="Type" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
+      <currentValue> </currentValue>
     </meta>
     <meta name="Source" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
+      <currentValue> </currentValue>
     </meta>
     <meta name="Format" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
+      <currentValue>application/vnd.oasis.opendocument.text</currentValue>
     </meta>
     <meta name="Contributor" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
+      <currentValue> </currentValue>
     </meta>
     <meta name="Relation" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
+      <currentValue> </currentValue>
     </meta>
     <meta name="Coverage" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
+      <currentValue> </currentValue>
     </meta>
     <meta name="Subject" outputTypes="all">
       <defaultValue>Foreign Literatures and Linguistics; Language Documentation; Dictionary; Reference</defaultValue>
+      <currentValue>Foreign Literatures and Linguistics; Language Documentation; Dictionary; Reference</currentValue>
     </meta>
     <meta name="Date" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
+      <currentValue>2011-11-04</currentValue>
     </meta>
     <meta name="Language" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
+      <currentValue> </currentValue>
     </meta>
     <meta name="Identifier" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
+      <currentValue> </currentValue>
     </meta>
     <meta name="Cover Page" outputTypes="epub">
       <defaultValue>true</defaultValue>
+      <currentValue>False</currentValue>
     </meta>
     <meta name="Cover Page Filename" outputTypes="epub">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
+      <currentValue> </currentValue>
     </meta>
     <meta name="Cover Page Title" outputTypes="epub">
       <defaultValue>true</defaultValue>
+      <currentValue>True</currentValue>
     </meta>
     <meta name="Title Page" outputTypes="all">
       <defaultValue>false</defaultValue>
+      <currentValue>False</currentValue>
     </meta>
     <meta name="Copyright Page" outputTypes="all">
       <defaultValue>false</defaultValue>
+      <currentValue>False</currentValue>
     </meta>
     <meta name="Copyright Page Filename" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>
+      </defaultValue>
+      <currentValue> </currentValue>
     </meta>
     <meta name="Table of Contents" outputTypes="all">
       <defaultValue>false</defaultValue>
+      <currentValue>False</currentValue>
     </meta>
   </Metadata>
 </stylePick>

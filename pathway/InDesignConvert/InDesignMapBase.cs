@@ -100,7 +100,7 @@ namespace SIL.PublishingSolution
             string assemblyVersion = assemblyInfo[0] + assemblyInfo[1].Replace("Version=", "");
 
             Dictionary<string, string> _metaDataDic = new Dictionary<string, string>();
-            _metaDataDic = Common.GetMetaData(ProjectInputType);
+            _metaDataDic = Common.GetMetaData(ProjectInputType, string.Empty);
             //metaDataList["Title"];
             //metaDataList["Creator"];
             //metaDataList["Publisher"];

@@ -13,7 +13,7 @@ using Microsoft.Win32;
 
 namespace SIL.Tool
 {
-    public static partial class Common 
+    public static partial class Common
     {
         #region SetProgressBarValue(ProgressBar pb, string sourcefile)
         /// <summary>
@@ -36,8 +36,8 @@ namespace SIL.Tool
                 }
                 catch (OutOfMemoryException ex)
                 {
-                  Console.Write(ex.Message);  
-                } 
+                    Console.Write(ex.Message);
+                }
                 streamReader.Close();
                 var reg = new Regex("</", RegexOptions.Multiline);
                 MatchCollection mat = reg.Matches(text);
@@ -171,8 +171,9 @@ namespace SIL.Tool
         /// Get MetaData information from DictionaryStyleSettings.xml/ScriptureStyleSettings.xml
         /// </summary>
         /// <param name="_projectInputType">Dictionary / Scripture</param>
+        /// <param name="path"></param>
         /// <returns>The metaDataList information</returns>
-        public static Dictionary<string,string> GetMetaData(string _projectInputType)
+        public static Dictionary<string, string> GetMetaData(string _projectInputType, string metaDataFull)
         {
             if (_projectInputType.Length == 0)
                 _projectInputType = "Dictionary";
@@ -191,10 +192,13 @@ namespace SIL.Tool
                 metaDataDic[meta] = string.Empty;
             }
 
-            
             string metaData = _projectInputType.ToLower() == "scripture" ? "ScriptureStyleSettings.xml" : "DictionaryStyleSettings.xml";
-            string metaDataFull = Path.Combine(Path.Combine(Path.Combine(Path.Combine(GetAllUserAppPath(), "SIL"), "Pathway"), _projectInputType), metaData);
-
+            
+            if (metaDataFull == string.Empty)
+            {
+                metaDataFull = Path.Combine(Path.Combine(Path.Combine(Path.Combine(GetAllUserAppPath(), "SIL"), "Pathway"), _projectInputType), metaData);
+            }
+            
             if (!File.Exists(metaDataFull)) return metaDataDic;
 
             XmlDocument xmlDocument = new XmlDocument();
@@ -209,12 +213,9 @@ namespace SIL.Tool
                 string metaName = node.Attributes[0].Value;
                 if (metaDataList.Contains(metaName))
                 {
-                    metaDataDic[metaName] = node.ChildNodes[0].InnerText;
+                    metaDataDic[metaName] = node.LastChild.InnerText;
                 }
             }
-
-
-
             return metaDataDic;
         }
 
@@ -436,9 +437,9 @@ namespace SIL.Tool
                         fromPath = flexJPGPath;
                     }
                     else
-                    {  
+                    {
                         // para + database + local(folder) + figures(folder) + fileName
-                        flexPict = PathCombine(dataPath,PathCombine("local", PathCombine("figures", fileName)));
+                        flexPict = PathCombine(dataPath, PathCombine("local", PathCombine("figures", fileName)));
                         if (File.Exists(flexPict))
                         {
                             fromPath = flexPict;
@@ -460,7 +461,7 @@ namespace SIL.Tool
             return fromPath;
         }
 
-        private static string ImageSource(string src,int designatorLength, string dictPath)
+        private static string ImageSource(string src, int designatorLength, string dictPath)
         {
             string fileName = string.Empty;
             string fromPath = string.Empty;
@@ -617,7 +618,7 @@ namespace SIL.Tool
             //return resultNode;
             XmlNodeList resultNodeList = null;
             XmlNode resultNode = GetXmlNode(xmlFileNameWithPath, xPath);
-            if(resultNode != null)
+            if (resultNode != null)
             {
                 resultNodeList = resultNode.ChildNodes;
             }
@@ -635,8 +636,7 @@ namespace SIL.Tool
         /// <returns>Returns XmlTextWriter</returns>
         public static XmlTextWriter CreateXMLFile(string xmlFileNameWithPath)
         {
-            XmlTextWriter writer = new XmlTextWriter(xmlFileNameWithPath, null)
-            { Formatting = Formatting.Indented };
+            XmlTextWriter writer = new XmlTextWriter(xmlFileNameWithPath, null) { Formatting = Formatting.Indented };
             return writer;
         }
         #endregion
@@ -710,7 +710,7 @@ namespace SIL.Tool
                 namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
                 namespaceManager.AddNamespace("fn", "http://www.w3.org/2005/xpath-functions");
                 var xslt = new XslCompiledTransform();
-                var xsltTransformSettings = new XsltSettings {EnableDocumentFunction = true};
+                var xsltTransformSettings = new XsltSettings { EnableDocumentFunction = true };
                 xslt.Load(xsltReader, xsltTransformSettings, null);
                 xsltReader.Close();
 
@@ -722,7 +722,7 @@ namespace SIL.Tool
                 var fun = new XmlFun(); // string-length replaed with stringLength
                 xslArg.AddExtensionObject("urn:reversal-conv", obj);
                 xslArg.AddExtensionObject("http://www.w3.org/2005/xpath-functions", fun);
-                
+
                 if (myParams != null)
                     foreach (string param in myParams.Keys)
                     {
@@ -730,7 +730,7 @@ namespace SIL.Tool
                     }
 
                 //Transform the file. and writing to temporary File
-                var setting = new XmlReaderSettings {ProhibitDtd = false, XmlResolver = null};
+                var setting = new XmlReaderSettings { ProhibitDtd = false, XmlResolver = null };
                 XmlReader reader = XmlReader.Create(inputFile, setting);
                 var writerSettings = new XmlWriterSettings();
                 if (!IncludeUtf8BomIdentifier || !ext.ToLower().Contains("xhtml"))
@@ -1081,7 +1081,7 @@ namespace SIL.Tool
             Dictionary<string, XmlWriter> writers = new Dictionary<string, XmlWriter>();
 
             //string allUserPath = GetAllUserPath();
-            string allUserPath = Path.GetTempPath(); 
+            string allUserPath = Path.GetTempPath();
             for (int i = 0; i < counter; i++)
             {
                 string fileName = Path.Combine(allUserPath, filenamePrefix + (i + 1) + ".xhtml");
@@ -1093,7 +1093,7 @@ namespace SIL.Tool
                 }
                 catch (Exception ex)
                 {
-                    
+
                     Console.Write(ex.Message);
                 }
                 writers[fileName] = writer;
@@ -1128,7 +1128,7 @@ namespace SIL.Tool
         /// <param name="reader"></param>
         /// <param name="writers"></param>
         /// <param name="bookSplitterClass"></param>
-        static void SplitXhtmlFileAdjacent(XmlReader reader, Dictionary<string, XmlWriter> writers, string bookSplitterClass,bool adjacentClass)
+        static void SplitXhtmlFileAdjacent(XmlReader reader, Dictionary<string, XmlWriter> writers, string bookSplitterClass, bool adjacentClass)
         {
 
             int srcCount = 0;
@@ -1177,7 +1177,7 @@ namespace SIL.Tool
                                 writerCount++;
                             }
                             goto srcWritten;  // Note - The reader already points to next node.
-                                              // Note - so need of reading again. start process the node.
+                            // Note - so need of reading again. start process the node.
                         }
                         {
                             foreach (KeyValuePair<string, XmlWriter> pair in writers)
