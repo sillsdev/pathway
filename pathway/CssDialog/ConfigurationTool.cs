@@ -881,26 +881,71 @@ namespace SIL.PublishingSolution
 
         private void txtPageGutterWidth_KeyUp(object sender, KeyEventArgs e)
         {
+            if (!RangeCheck(txtPageGutterWidth.Text))
+            {
+                txtPageGutterWidth.Text = "";
+            }
             _CToolBL.SetModifyMode(true);
         }
 
         private void txtPageInside_KeyUp(object sender, KeyEventArgs e)
         {
+            if (!RangeCheck(txtPageInside.Text))
+            {
+                txtPageInside.Text = "";
+            }
             _CToolBL.SetModifyMode(true);
+        }
+
+        private bool RangeCheck(string txtValue)
+        {
+            bool isValid = true;
+            try
+            {
+                if (txtValue.Trim().Length == 0 || txtValue.Trim() == "-" ||
+                    txtValue.Trim() == "+")
+                    return isValid;
+
+                string numValue = txtValue.Replace("pt", "");
+                numValue = numValue.Replace("p", "");
+                float value = float.Parse(numValue);
+                if (value < -200 || value > 200)
+                {
+                    isValid = false;
+                }
+            }
+            catch (Exception)
+            {
+                isValid = false;
+            }
+            return isValid;
+
         }
 
         private void txtPageOutside_KeyUp(object sender, KeyEventArgs e)
         {
+            if (!RangeCheck(txtPageOutside.Text))
+            {
+                txtPageOutside.Text = "";
+            }
             _CToolBL.SetModifyMode(true);
         }
 
         private void txtPageTop_KeyUp(object sender, KeyEventArgs e)
         {
+            if (!RangeCheck(txtPageTop.Text))
+            {
+                txtPageTop.Text = "";
+            }
             _CToolBL.SetModifyMode(true);
         }
 
         private void txtPageBottom_KeyUp(object sender, KeyEventArgs e)
         {
+            if (!RangeCheck(txtPageBottom.Text))
+            {
+                txtPageBottom.Text = "";
+            }
             _CToolBL.SetModifyMode(true);
         }
 
