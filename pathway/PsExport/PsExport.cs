@@ -19,6 +19,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using JWTools;
+using RevHomographNum;
 using SIL.Tool;
 using SIL.Tool.Localization;
 
@@ -172,6 +173,7 @@ namespace SIL.PublishingSolution
                 Common.StreamReplaceInFile(revFullName, "class=\"headword\"", "class=\"headref\"");
                 string revCssFullName = revFullName.Substring(0, revFullName.Length - 6) + ".css";
                 Common.StreamReplaceInFile(revCssFullName, ".headword", ".headref");
+                AddHomographAndSenseNumClassNames.Execute(revFullName, revFullName);
             }
             return revFullName;
         }

@@ -557,6 +557,8 @@
         text-align: center;
 }
 .revhomographnumber {
+        font-size: 55%;
+        font-weight: bold;
         vertical-align: sub;
 }
 .revSense { }
