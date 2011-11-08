@@ -63,7 +63,7 @@ namespace Test.XhtmlExport
             }
             _scriptPath = PathPart.Bin(Environment.CurrentDirectory, "/XhtmlExport");
             _tf = new TestFiles("XhtmlExport");
-            var pwf = Path.Combine(Common.GetAllUserAppPath(), "SIL");
+            var pwf = Path.Combine(Common.GetAllUserAppLocalPath(), "SIL");
             var zf = new FastZip();
             zf.ExtractZip(_tf.Input("Pathway.zip"), pwf, ".*");
         }

@@ -55,7 +55,8 @@ namespace Test.UIConfigurationToolBLTest
             cTool._fromNunit = true;
             cToolBL = new ConfigurationToolBL();
 
-            _pathwayPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/Pathway");
+            //_pathwayPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/Pathway");
+            _pathwayPath = Common.GetAllUserLocalPath();
 
             stylename = new ArrayList
                             {
@@ -300,7 +301,7 @@ namespace Test.UIConfigurationToolBLTest
             cToolBL.SaveInputType("Scripture");
             const string expected = "Scripture";
             var xdoc = new XmlDocument();
-            xdoc.Load(Common.PathCombine(Common.GetAllUserPath(), "StyleSettings.xml"));
+            xdoc.Load(Common.PathCombine(Common.GetAllUserLocalPath(), "StyleSettings.xml"));
             XmlNode node = xdoc.SelectSingleNode("//stylePick/settings/property[@name='InputType']");
             if (node != null)
                 if (node.Attributes != null)

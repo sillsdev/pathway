@@ -85,11 +85,11 @@ namespace SIL.PublishingSolution
         {
             _fromPlugin = fromPlugin;
             string fileName = Path.GetFileName(settingsFilewithPath);
-            allUserSettingsPath = Path.Combine(Common.GetAllUserPath(), fileName);
+            allUserSettingsPath = Path.Combine(Common.GetAllUserLocalPath(), fileName);
 
             if (File.Exists(allUserSettingsPath)) ProcessSettingsFile(allUserSettingsPath);
             string inputtype = GetInputType(allUserSettingsPath);
-            string allUsersPathWithoutFileName = Path.Combine(Common.GetAllUserPath(), inputtype);
+            string allUsersPathWithoutFileName = Path.Combine(Common.GetAllUserLocalPath(), inputtype);
 
             if (inputtype == Common.ProjectType.Dictionary.ToString())
             {

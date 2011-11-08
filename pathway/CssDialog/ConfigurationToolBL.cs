@@ -1642,7 +1642,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         public void SaveInputType(string inputType)
         {
-            string allUserSettingPath = Common.GetAllUserPath();
+            string allUserSettingPath = Common.GetAllUserLocalPath();
             string allUserXmlPath = Common.PathCombine(allUserSettingPath, "StyleSettings.xml");
             if (!Directory.Exists(allUserSettingPath))
             {
@@ -2812,10 +2812,10 @@ namespace SIL.PublishingSolution
                     //String imageFile1 = Common.PathCombine(stylenamePath, PreviewFileName2);
                     //if (!(File.Exists(imageFile) && File.Exists(imageFile1)) || IsPropertyModified())
                     //{
-                    String imageFile = Common.PathCombine(Common.GetAllUserPath(),
+                    String imageFile = Common.PathCombine(Common.GetAllUserLocalPath(),
                                                    Path.GetFileNameWithoutExtension(fileName) + ".pdf1.jpg");
                     PreviewFileName1 = imageFile;
-                    String imageFile1 = Common.PathCombine(Common.GetAllUserPath(),
+                    String imageFile1 = Common.PathCombine(Common.GetAllUserLocalPath(),
                                                     Path.GetFileNameWithoutExtension(fileName) + ".pdf2.jpg");
                     PreviewFileName2 = imageFile1;
                     //}

@@ -321,7 +321,8 @@ namespace SIL.PublishingSolution
         private static void ApplyVariables()
         {
             var map = new Dictionary<string, string>();
-            map["AppData"] = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            //map["AppData"] = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            map["AppData"] = Common.GetAllUserAppLocalPath();
             var deleg = new Substitution.MyDelegate(map);
             var mySub = new Substitution();
             var startValue = new Dictionary<string, string>(Value);

@@ -53,7 +53,7 @@ namespace Test.PsTool
             _target = new PublicationInformation();
             actualDocument = new XmlDocument { XmlResolver = null };
             LoadInputDocument("Dictionary1.de");
-            _allUserPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            _allUserPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             Common.SupportFolder = "";
             _outputBasePath = Common.PathCombine(GetTestPath(), "Output");
             _inputBasePath = Common.PathCombine(GetTestPath(), "InputFiles");
@@ -360,10 +360,10 @@ namespace Test.PsTool
         [Test]
         public void GetAllUserPathWithSilPs()
         {
-            string allUserPath = Common.DirectoryPathReplace(_allUserPath + "/SIL/Pathway");
-
+            //string allUserPath = Common.DirectoryPathReplace(_allUserPath + "/SIL/Pathway");
+            string allUserPath = Common.GetAllUserLocalPath();
             string expected = allUserPath;
-            string actual = Common.GetAllUserPath();
+            string actual = Common.GetAllUserLocalPath();
             Assert.AreEqual(expected, actual);
         }
 
