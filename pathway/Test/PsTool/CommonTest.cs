@@ -374,7 +374,9 @@ namespace Test.PsTool
         public void GetFiledWorksPathTest()
         {
             string allUserPath = _allUserPath;
-            allUserPath += @"/SIL/FieldWorks/";
+            allUserPath += Path.DirectorySeparatorChar + "SIL" +
+                           Path.DirectorySeparatorChar + "FieldWorks" +
+                           Path.DirectorySeparatorChar;
 
             string expected = allUserPath;
             string actual = Common.GetFiledWorksPath();
