@@ -22,6 +22,7 @@ namespace SIL.Tool
         {
             Paratext,
             FieldWorks,
+            PathwayB,
             Other
         }
 
@@ -42,6 +43,10 @@ namespace SIL.Tool
             else if (executablePath.Contains("Paratext 7"))
             {
                 _hostProgram = HostProgram.Paratext;
+            }
+            else if (executablePath.Contains("PathwayB"))
+            {
+                _hostProgram = HostProgram.PathwayB;
             }
             else
             {
@@ -72,9 +77,10 @@ namespace SIL.Tool
             {
                 return string.Empty;
             }
-            // Paratext
-            if (_hostProgram == HostProgram.Paratext)
+            // Paratext (or PathwayB)
+            if (_hostProgram == HostProgram.Paratext || _hostProgram == HostProgram.PathwayB)
             {
+                // (Note that PathwayB _might_ have a project file we can poke at - no guarantee)
                 string ssfFile = database + ".ssf";
                 const string ptProjectDir = "My Paratext Projects";
                 var sb = new StringBuilder();

@@ -13,6 +13,7 @@
 // ---------------------------------------------------------------------------------------------
 using System;
 using System.IO;
+using System.Windows.Forms;
 using System.Xml;
 using System.Reflection;
 using Microsoft.Win32;
@@ -45,6 +46,7 @@ namespace SIL.PublishingSolution
             var backendPath = Common.ProgInstall;
             var exportType = "OpenOffice/LibreOffice";
             var files = new List<string>();
+            bool bShowDialog = false;
             try
             {
                 int i = 0;
@@ -98,6 +100,10 @@ namespace SIL.PublishingSolution
                             inFormat = InputFormat.XHTML;
                             projectInfo.DefaultXhtmlFileWithPath = args[i++];
                             break;
+                        case "--showdialog":
+                        case "-s":
+                            bShowDialog = true;
+                            break;
                         case "--css":
                         case "-c":
                             projectInfo.DefaultCssFileWithPath = args[i++];
@@ -129,6 +135,27 @@ namespace SIL.PublishingSolution
                             throw new ArgumentException("Invalid Command Line Argument: " + args[i]);
                     }
                 }
+
+                Common.ProgBase = Common.GetPSApplicationPath();
+                Param.LoadSettings();
+
+                // if the caller wants to display the Export Through Pathway dialog, do it now.
+                if (bShowDialog)
+                {
+                    var dlg = new ExportThroughPathway();
+                    dlg.InputType = projectInfo.ProjectInputType;
+                    dlg.DatabaseName = projectInfo.ProjectName;
+                    if (dlg.ShowDialog() == DialogResult.Yes)
+                    {
+                        exportType = dlg.Format;
+                    }
+                    else
+                    {
+                        // cancel export and exit out of PathwayB
+                        Environment.Exit(0);
+                    }
+                }
+
                 // run headless from the command line
                 Common.Testing = true;
                 //_projectInfo.ProgressBar = null;
@@ -198,25 +225,26 @@ namespace SIL.PublishingSolution
                     throw new ArgumentException(string.Format("Missing {0}", projectInfo.DefaultCssFileWithPath));
                 projectInfo.DictionaryPath = Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath);
 
-                if (backendPath.Length == 0)
-                {
-                    backendPath = Common.GetPSApplicationPath();
-                }
+                //if (backendPath.Length == 0)
+                //{
+                //    backendPath = Common.GetPSApplicationPath();
+                //}
 
-                Common.ProgBase = Common.GetPSApplicationPath();
-                Param.LoadSettings();
+                //Common.ProgBase = Common.GetPSApplicationPath();
+                //Param.LoadSettings();
 
-                //var tpe = new PsExport { Destination = exportType, DataType = projectInfo.ProjectInputType };
-                //tpe.Export(projectInfo.ProjectPath);
+                var tpe = new PsExport { Destination = exportType, DataType = projectInfo.ProjectInputType };
+                tpe.ProgressBar = null;
+                tpe.Export(projectInfo.DefaultXhtmlFileWithPath);
 
-                Backend.Load(backendPath);
-                Common.ShowMessage = false;
-                projectInfo.DictionaryOutputName = projectInfo.ProjectName;
-                bool result = Backend.Launch(exportType, projectInfo);
-                if (result == true)
-                {
-                    Console.WriteLine("PathwayB: export process succeeded at " + DateTime.Now);
-                }
+                //Backend.Load(backendPath);
+                //Common.ShowMessage = false;
+                //projectInfo.DictionaryOutputName = projectInfo.ProjectName;
+                //bool result = Backend.Launch(exportType, projectInfo);
+                //if (result == true)
+                //{
+                //    Console.WriteLine("PathwayB: export process succeeded at " + DateTime.Now);
+                //}
             }
             catch (ArgumentException ex)
             {
@@ -261,16 +289,33 @@ namespace SIL.PublishingSolution
             Console.Write("                             \"OpenOffice/LibreOffice\"   .odt format.\r\n");
             Console.Write("                             \"XeLaTex\"                  .tex format.\r\n");
             Console.Write("   --css | -c                stylesheet file name (required for xhtml only).\r\n");
+            Console.Write("   --showdialog | -s         Show the Export Through Pathway dialog, and take\r\n");
+            Console.Write("                             the values for target format, style, etc. from\r\n");
+            Console.Write("                             the user's input on the dialog.\r\n");
             Console.Write("   --launch | -l             launch resulting output in target back end.\r\n");
-            Console.Write("   --name | -n               [main] Project name.\r\n\r\n");
-            Console.Write("Notes:\r\n");
-            Console.Write("- Not all output types may be available, depending on your installation\r\n");
-            Console.Write("  Package. To verify the available output types, open the Configuration\r\n");
-            Console.Write("  Tool, click the Defaults button and click on the Destination drop-down.\r\n");
-            Console.Write("  The available outputs match the selections in this list.\r\n");
-            Console.Write("- For dictionary output, the reversal index file needs to be named\r\n");
-            Console.Write("  \"FlexRev.xhtml\". this is to maintain consistency with the file naming\r\n");
-            Console.Write("  convention used in Pathway.\r\n");
+            Console.Write("   --name | -n               [main] Project name.\r\n\r\n\r\n");
+            Console.Write("Examples:\r\n\r\n");
+            Console.Write("   PathwayB.exe -d \"D:\\MyProject\" -if usfm -f * -t \"E-Book (.epub)\" \r\n");
+            Console.Write("                             -i \"Scripture\" -n \"SEN\" \r\n");
+            Console.Write("      Creates an .epub file from the USFM project found in D:\\MyProject.\r\n\r\n");
+            Console.Write("   PathwayB.exe -d \"D:\\MyDict\" -if xhtml -c \"D:\\MyDict\\main.css\" \r\n");
+            Console.Write("                             -f \"main.xhtml\", \"FlexRev.xhtml\" \r\n");
+            Console.Write("                             -t \"E-Book (.epub)\" -i \"Dictionary\" \r\n");
+            Console.Write("                             -n \"Sena 3-01\" \r\n");
+            Console.Write("      Creates an .epub file from the xhtml dictionary found in D:\\MyDict.\r\n");
+            Console.Write("      Both main and reversal index files are included in the output.\r\n\r\n");
+            Console.Write("   PathwayB.exe -d \"D:\\Project2\" -if usfm -f * -i \"Scripture\" -n \"SEN\"-s\r\n");
+            Console.Write("      Displays the Export Through Pathway dialog, then generates output from\r\n");
+            Console.Write("      the USFM project found in D:\\Project2 to the user-specified output \r\n");
+            Console.Write("      format and style.\r\n\r\n");
+            Console.Write("Notes:\r\n\r\n");
+            Console.Write("-  Not all output types may be available, depending on your installation\r\n");
+            Console.Write("   Package. To verify the available output types, open the Configuration\r\n");
+            Console.Write("   Tool, click the Defaults button and click on the Destination drop-down.\r\n");
+            Console.Write("   The available outputs match the selections in this list.\r\n\r\n");
+            Console.Write("-  For dictionary output, the reversal index file needs to be named\r\n");
+            Console.Write("   \"FlexRev.xhtml\". this is to maintain consistency with the file naming\r\n");
+            Console.Write("   convention used in Pathway.\r\n\r\n");
         }
 
         /// <summary>
