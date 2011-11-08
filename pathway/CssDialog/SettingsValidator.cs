@@ -57,7 +57,7 @@ namespace SIL.PublishingSolution
         #region Constructor
         public SettingsValidator()
         {
-            replaceString["%(AppData)s"] = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            replaceString["%(AppData)s"] = Common.GetAllUserAppLocalPath();
             replaceString["%(Documents)s"] = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             replaceString["$(Base)s"] = "Publications";
             replaceString["%(CurrentProject)s"] = "sena3";
@@ -144,7 +144,7 @@ namespace SIL.PublishingSolution
                 CopyCustomStyles(fileNamewithPath);
                 CopySettingsFile(FileName.DictionaryStyleSettings.ToString(), inputtype, fileNamewithPath);
                 //if (isProcessSucess)
-                    //RestoreCustomStyles(fileNamewithPath);
+                //RestoreCustomStyles(fileNamewithPath);
             }
         }
 
@@ -167,19 +167,19 @@ namespace SIL.PublishingSolution
                     {
                         if (media == "paper" && customPaper.Count > 0)
                         {
-                            foreach (XmlNode node in customPaper){AppendChildNode(settingsXML, childNode, node);}
+                            foreach (XmlNode node in customPaper) { AppendChildNode(settingsXML, childNode, node); }
                         }
                         else if (media == "mobile" && customMobile.Count > 0)
                         {
-                            foreach (XmlNode node in customMobile){AppendChildNode(settingsXML, childNode, node);}
+                            foreach (XmlNode node in customMobile) { AppendChildNode(settingsXML, childNode, node); }
                         }
                         else if (media == "web" && customWeb.Count > 0)
                         {
-                            foreach (XmlNode node in customWeb){AppendChildNode(settingsXML, childNode, node);}
+                            foreach (XmlNode node in customWeb) { AppendChildNode(settingsXML, childNode, node); }
                         }
                         else if (media == "others" && customOther.Count > 0)
                         {
-                            foreach (XmlNode node in customOther){AppendChildNode(settingsXML, childNode, node);}
+                            foreach (XmlNode node in customOther) { AppendChildNode(settingsXML, childNode, node); }
                         }
                     }
                 }
@@ -218,10 +218,10 @@ namespace SIL.PublishingSolution
                     XmlNodeList childNode = parentNode.SelectNodes(xPathMStyles);
                     if (childNode != null)
                     {
-                        if (media == "paper"){customPaper = childNode;}
-                        else if (media == "mobile"){customMobile = childNode;}
-                        else if (media == "web"){customWeb = childNode;}
-                        else if (media == "others"){customOther = childNode;}
+                        if (media == "paper") { customPaper = childNode; }
+                        else if (media == "mobile") { customMobile = childNode; }
+                        else if (media == "web") { customWeb = childNode; }
+                        else if (media == "others") { customOther = childNode; }
                     }
                 }
             }
@@ -712,8 +712,8 @@ namespace SIL.PublishingSolution
             string path = Path.GetDirectoryName(Param.SettingPath);
             if (path.Contains("PathwaySupport"))
                 path = path.Replace("PathwaySupport", "");
-			//string path = Common.ProgInstall;
-			//string path = Common.PathCombine(Common.GetApplicationPath(), "PathwaySupport\\BackEnds");
+            //string path = Common.ProgInstall;
+            //string path = Common.PathCombine(Common.GetApplicationPath(), "PathwaySupport\\BackEnds");
             var _backend = new List<IExportProcess>();
             var directoryInfo = new DirectoryInfo(path);
             _backend.Clear();
@@ -742,7 +742,7 @@ namespace SIL.PublishingSolution
                 const string methodname = "ConfigureDictionary";
                 const string xPath = "//stylePick/settings/property[@name=\"ConfigureDictionary\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
-                if(childNode.Attributes["value"] == null) return false;
+                if (childNode.Attributes["value"] == null) return false;
                 string result = childNode.Attributes["value"].Value;
                 if (!boolValue.Contains(result))
                 {
