@@ -711,10 +711,10 @@ namespace SIL.PublishingSolution
         }
         private void Write()
         {
-            if (!_isWhiteSpace && (_characterName != null) && _characterName.IndexOf("xhomographnumber") != 0)
-            {
-                InsertWhiteSpace();
-            }
+            //if (!_isWhiteSpace && (_characterName != null) && _characterName.IndexOf("xhomographnumber") != 0)
+            //{
+            //    InsertWhiteSpace();
+            //}
             if (_isDisplayNone)
             {
                 CollectFootNoteChapterVerse(ReplaceString(_reader.Value), Common.OutputType.ODT.ToString());
