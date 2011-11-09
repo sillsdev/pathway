@@ -26,7 +26,6 @@
         <property name="GrammerSketch" value="False"/>
         <property name="LayoutSelected" value="Draft"/>
         <property name="ExtraProcessing" value="True"/>
-		<property name="Organization" value="SIL International" />
     </settings>
     <defaultSettings>
         <property name="PrintVia" value="OpenOffice/LibreOffice"/>
@@ -87,9 +86,9 @@
         <font name="Microsoft Sans Serif" size="9"/>
     </customize>
     <Organizations>
-        <Organization>SIl International</Organization>
-        <Organization>United Bible Societies</Organization>
-        <Organization>Pioneer Bible Translators</Organization>
+        <Organization>SIl_x0020_International</Organization>
+        <Organization>United_x0020_Bible_x0020_Societies</Organization>
+        <Organization>Pioneer_x0020_Bible_x0020_Translators</Organization>
     </Organizations>
     <Metadata>
         <meta name="Title" outputTypes="all">

@@ -313,30 +313,11 @@ namespace SIL.PublishingSolution
             }
 
             // get the current organization
-            try
-            {
-                Organization = Param.Value["Organization"];
+            Organization = Param.GetOrganization();
 
-                var dlg = new SelectOrganizationDialog();
-                if (Text.Contains("Set Defaults"))
-                {
-                    // if we're setting defaults, provide a clue as to what they're setting the defaults for
-                    dlg.Text += " - " + InputType;
-                }
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    Organization = dlg.Organization;
-                    PopulateFromSettings();
-                }
-                else
-                {
-                    // User pressed cancel - exit out of the export process altogether
-                    DialogResult = DialogResult.Cancel;
-                    Close();
-                }
-            }
-            catch (Exception)
+            if (Organization == "") 
             {
+                // no organization set yet -- display the Select Organization dialog
                 var dlg = new SelectOrganizationDialog();
                 if (Text.Contains("Set Defaults"))
                 {
@@ -680,7 +661,7 @@ namespace SIL.PublishingSolution
             // license agreement
             XmlNode node;
             // try to get the key
-            node = Param.GetItem("//features/feature[@name='Lic_" + Organization + "']");
+            node = Param.GetItem("//features/feature[@name='Lic_" + XmlConvert.EncodeName(Organization) + "']");
             if (node == null)
             {
                 // key not found - fall back on the generic licenses
@@ -1133,7 +1114,7 @@ namespace SIL.PublishingSolution
             // find the copyright file
             XmlNode node;
             // try to get the key
-            node = Param.GetItem("//features/feature[@name='Lic_" + Organization + "']");
+            node = Param.GetItem("//features/feature[@name='Lic_" + XmlConvert.EncodeName(Organization) + "']");
             // key not found - fall back on the generic licenses
             if (node == null)
             {

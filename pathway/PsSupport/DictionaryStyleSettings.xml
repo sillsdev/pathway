@@ -25,7 +25,6 @@
 	<property name="LayoutSelected" value="FieldWorksStyles" />
     <property name="ExtraProcessing" value="True" />
     <property name="Media" value="paper" />
-	<property name="Organization" value="SIL International" />
   </settings>
   <defaultSettings>
     <property name="PrintVia" value="OpenOffice/LibreOffice" />
@@ -385,19 +384,19 @@
       <defaultValue></defaultValue>
     </meta>
     <meta name="Publisher" outputTypes="all">
-      <organizationDefault organizationName="SIL International" Locked="false">SIL International</organizationDefault>
-      <organizationDefault organizationName="United Bible Societies" Locked="false">United Bible Societies</organizationDefault>
-      <organizationDefault organizationName="Pioneer Bible Translators" Locked="false">Pioneer Bible Translators</organizationDefault>
+      <organizationDefault organizationName="SIL_x0020_International" Locked="false">SIL_x0020_International</organizationDefault>
+      <organizationDefault organizationName="United_x0020_Bible_x0020_Societies" Locked="false">United_x0020_Bible_x0020_Societies</organizationDefault>
+      <organizationDefault organizationName="Pioneer_x0020_Bible_x0020_Translators" Locked="false">Pioneer_x0020_Bible_x0020_Translators</organizationDefault>
       <defaultValue></defaultValue>
     </meta>
     <meta name="Description" outputTypes="all">
       <defaultValue></defaultValue>
     </meta>
     <meta name="Copyright Holder" outputTypes="all">
-      <organizationDefault organizationName="SIL International" Locked="false">© 2011 SIL International. All Rights Reserved.</organizationDefault>
-      <organizationDefault organizationName="United Bible Societies" Locked="false">© 2011 United Bible Societies. All Rights Reserved.</organizationDefault>
-      <organizationDefault organizationName="Pioneer Bible Translators" Locked="false">© 2011 Pioneer Bible Translators. All Rights Reserved.</organizationDefault>
-      <defaultValue>© 2011. All Rights Reserved.</defaultValue>
+      <organizationDefault organizationName="SIL_x0020_International" Locked="false">_x00A9__x0020_2011_x0020_SIL_x0020_International._x0020_All_x0020_Rights_x0020_Reserved.</organizationDefault>
+      <organizationDefault organizationName="United_x0020_Bible_x0020_Societies" Locked="false">_x00A9__x0020_2011_x0020_United_x0020_Bible_x0020_Societies._x0020_All_x0020_Rights_x0020_Reserved.</organizationDefault>
+      <organizationDefault organizationName="Pioneer_x0020_Bible_x0020_Translators" Locked="false">_x00A9__x0020_2011_x0020_Pioneer_x0020_Bible_x0020_Translators._x0020_All_x0020_Rights_x0020_Reserved.</organizationDefault>
+      <defaultValue>_x00A9__x0020_2011._x0020_All_x0020_Rights_x0020_Reserved.</defaultValue>
     </meta>
     <meta name="Type" outputTypes="all">
       <defaultValue></defaultValue>
@@ -418,7 +417,7 @@
       <defaultValue></defaultValue>
     </meta>
     <meta name="Subject" outputTypes="all">
-      <defaultValue>Foreign Literatures and Linguistics; Language Documentation; Dictionary; Reference</defaultValue>
+      <defaultValue>Foreign_x0020_Literatures_x0020_and_x0020_Linguistics_x003B__x0020_Language_x0020_Documentation_x003B__x0020_Dictionary_x003B__x0020_Reference</defaultValue>
     </meta>
     <meta name="Date" outputTypes="all">
       <defaultValue></defaultValue>

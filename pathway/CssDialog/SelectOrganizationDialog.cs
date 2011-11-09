@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
@@ -30,7 +29,6 @@ namespace SIL.PublishingSolution
             var dlg = new OrganizationNameDialog();
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                // TODO: save this organization in the settings file
                 // add the organization if it's not already in the list
                 if (!ddlOrganization.Items.Contains(dlg.Organization))
                 {
@@ -45,6 +43,14 @@ namespace SIL.PublishingSolution
             }
         }
 
+        /// <summary>
+        /// Displays the Select Organization dialog.
+        /// This dialog is designed to only come up once, when the user first runs Pathway. The
+        /// Organization value in this case is assumed to be empty, since they haven't specified
+        /// their organization yet.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectOrganizationDialog_Load(object sender, EventArgs e)
         {
             // Do we want to show all orgs?
@@ -66,13 +72,6 @@ namespace SIL.PublishingSolution
             if (ddlOrganization.Items.Count > 0)
             {
                 ddlOrganization.SelectedIndex = 0;
-
-                try
-                {
-                    string organizationLastSelected = Param.Value["Organization"].ToString();
-                    ddlOrganization.SelectedItem = organizationLastSelected;
-                }
-                catch { }
             }
         }
 

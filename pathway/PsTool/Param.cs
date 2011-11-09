@@ -675,9 +675,10 @@ namespace SIL.PublishingSolution
             var folder = Path.GetDirectoryName(SettingOutputPath);
             if (!Directory.Exists(folder))
                 Directory.CreateDirectory(folder);
-            TextWriter textWriter = new StreamWriter(SettingOutputPath);
-            xmlMap.Save(textWriter);
-            textWriter.Close();
+            var writer = new XmlTextWriter(SettingOutputPath, Encoding.Unicode);
+            writer.Formatting = Formatting.Indented;
+            xmlMap.Save(writer);
+            writer.Close();
             CopySchemaIfNecessary();
         }
 
@@ -1227,6 +1228,8 @@ namespace SIL.PublishingSolution
             }
         }
 
+        // note that the organization name and metadata values are stored encode on the user's machine. This is to sanitize
+        // input from users on text fields.
         #region Metadata methods
         /// <summary>
         /// Returns the current organization specified by the Select Your Organization dialog. If none is specified,
@@ -1245,7 +1248,7 @@ namespace SIL.PublishingSolution
             {
                 organization = "";
             }
-            return organization;
+            return XmlConvert.DecodeName(organization);
         }
 
         public static string GetDefaultMetadataValue(string name, string organization)
@@ -1256,7 +1259,7 @@ namespace SIL.PublishingSolution
             {
                 node =
                     GetItem("//stylePick/Metadata/meta[@name='" + name + "']/organizationDefault[@organizationName='" +
-                            organization + "']");
+                            XmlConvert.EncodeName(organization) + "']");
                 if (node == null)
                 {
                     // no organization default for this node - get the default value
@@ -1269,7 +1272,7 @@ namespace SIL.PublishingSolution
                 Debug.WriteLine(e.ToString());
                 node = null;
             }
-            return (node == null) ? null : (node.InnerText.Trim());            
+            return (node == null) ? null : (XmlConvert.DecodeName(node.InnerText.Trim()));            
         }
 
         /// <summary>
@@ -1279,18 +1282,7 @@ namespace SIL.PublishingSolution
         /// <returns></returns>
         public static string GetMetadataValue (string name)
         {
-            string organization;
-            try
-            {
-                // get the organization
-                organization = Param.Value["Organization"];
-            }
-            catch (Exception)
-            {
-                // shouldn't happen (ExportThroughPathway dialog forces the user to select an organization), 
-                // but just in case, specify a default org.
-                organization = "SIL International";
-            }
+            string organization = GetOrganization();
             return GetMetadataValue(name, organization);
         }
 
@@ -1320,7 +1312,7 @@ namespace SIL.PublishingSolution
             if (node == null)
             {
                 // no current value - attempt to get the organization default
-                node = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/organizationDefault[@organizationName='" + Organization + "']");
+                node = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/organizationDefault[@organizationName='" + XmlConvert.EncodeName(Organization) + "']");
                 if (node == null)
                 {
                     // no organization default for this node - get the default value
@@ -1328,7 +1320,7 @@ namespace SIL.PublishingSolution
                     // test for null node is in the return value below
                 }
             }
-            return (node == null) ? null : (node.InnerText.Trim());
+            return (node == null) ? null : (XmlConvert.DecodeName(node.InnerText.Trim()));
         }
 
         /// <summary>
@@ -1345,14 +1337,14 @@ namespace SIL.PublishingSolution
                 // currentValue node doesn't exist yet - create it now
                 XmlNode baseNode = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']");
                 var childNode = xmlMap.CreateNode(XmlNodeType.Element, "currentValue", "");
-                childNode.InnerText = newValue;
+                childNode.InnerText = XmlConvert.EncodeName(newValue);
                 baseNode.AppendChild(childNode);
                 Write();
             }
             else
             {
                 // mode is there - just set the value
-                node.InnerText = newValue;
+                node.InnerText = XmlConvert.EncodeName(newValue);
                 Write();
             }
         }
