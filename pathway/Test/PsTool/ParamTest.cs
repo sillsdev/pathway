@@ -57,7 +57,7 @@ namespace Test.CssDialog
             string currentFolder = PathPart.Bin(Environment.CurrentDirectory, "/CssDialog/TestFiles");
             _inputBasePath = Common.PathCombine(currentFolder, "Input");
             _supportPath = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
-            _publishingSolutionsData = Common.GetAllUserLocalPath();
+            _publishingSolutionsData = Common.GetAllUserPath();
         }
 
         [SetUp]

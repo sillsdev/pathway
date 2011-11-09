@@ -57,7 +57,7 @@ namespace SIL.PublishingSolution
         #region Constructor
         public SettingsValidator()
         {
-            replaceString["%(AppData)s"] = Common.GetAllUserAppLocalPath();
+            replaceString["%(AppData)s"] = Common.GetAllUserAppPath();
             replaceString["%(Documents)s"] = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             replaceString["$(Base)s"] = "Publications";
             replaceString["%(CurrentProject)s"] = "sena3";
@@ -85,11 +85,11 @@ namespace SIL.PublishingSolution
         {
             _fromPlugin = fromPlugin;
             string fileName = Path.GetFileName(settingsFilewithPath);
-            allUserSettingsPath = Path.Combine(Common.GetAllUserLocalPath(), fileName);
+            allUserSettingsPath = Path.Combine(Common.GetAllUserPath(), fileName);
 
             if (File.Exists(allUserSettingsPath)) ProcessSettingsFile(allUserSettingsPath);
             string inputtype = GetInputType(allUserSettingsPath);
-            string allUsersPathWithoutFileName = Path.Combine(Common.GetAllUserLocalPath(), inputtype);
+            string allUsersPathWithoutFileName = Path.Combine(Common.GetAllUserPath(), inputtype);
 
             if (inputtype == Common.ProjectType.Dictionary.ToString())
             {

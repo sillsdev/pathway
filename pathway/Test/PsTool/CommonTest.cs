@@ -361,9 +361,9 @@ namespace Test.PsTool
         public void GetAllUserPathWithSilPs()
         {
             //string allUserPath = Common.DirectoryPathReplace(_allUserPath + "/SIL/Pathway");
-            string allUserPath = Common.GetAllUserLocalPath();
+            string allUserPath = Common.GetAllUserPath();
             string expected = allUserPath;
-            string actual = Common.GetAllUserLocalPath();
+            string actual = Common.GetAllUserPath();
             Assert.AreEqual(expected, actual);
         }
 
