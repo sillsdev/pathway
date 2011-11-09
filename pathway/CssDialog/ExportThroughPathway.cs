@@ -317,6 +317,23 @@ namespace SIL.PublishingSolution
             {
                 Organization = Param.Value["Organization"];
 
+                var dlg = new SelectOrganizationDialog();
+                if (Text.Contains("Set Defaults"))
+                {
+                    // if we're setting defaults, provide a clue as to what they're setting the defaults for
+                    dlg.Text += " - " + InputType;
+                }
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    Organization = dlg.Organization;
+                    PopulateFromSettings();
+                }
+                else
+                {
+                    // User pressed cancel - exit out of the export process altogether
+                    DialogResult = DialogResult.Cancel;
+                    Close();
+                }
             }
             catch (Exception)
             {

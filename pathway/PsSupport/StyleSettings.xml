@@ -26,6 +26,7 @@
         <property name="GrammerSketch" value="False"/>
         <property name="LayoutSelected" value="Draft"/>
         <property name="ExtraProcessing" value="True"/>
+		<property name="Organization" value="SIL International" />
     </settings>
     <defaultSettings>
         <property name="PrintVia" value="OpenOffice/LibreOffice"/>

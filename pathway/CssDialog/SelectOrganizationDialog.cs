@@ -15,7 +15,7 @@ namespace SIL.PublishingSolution
 
         public string Organization
         {
-            get { return ddlOrganization.Text; } 
+            get { return ddlOrganization.Text; }
             set { ddlOrganization.Text = value; }
         }
 
@@ -66,6 +66,13 @@ namespace SIL.PublishingSolution
             if (ddlOrganization.Items.Count > 0)
             {
                 ddlOrganization.SelectedIndex = 0;
+
+                try
+                {
+                    string organizationLastSelected = Param.Value["Organization"].ToString();
+                    ddlOrganization.SelectedItem = organizationLastSelected;
+                }
+                catch { }
             }
         }
 
