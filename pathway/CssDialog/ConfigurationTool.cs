@@ -726,12 +726,12 @@ namespace SIL.PublishingSolution
 
         private void tsUndo_Click(object sender, EventArgs e)
         {
-            _CToolBL.tsUndo_ClickBL(sender, e);
+            //_CToolBL.tsUndo_ClickBL(sender, e);
         }
 
         private void tsRedo_Click(object sender, EventArgs e)
         {
-            _CToolBL.tsRedo_ClickBL(sender, e);
+            //_CToolBL.tsRedo_ClickBL(sender, e);
         }
 
         private void txtApproved_Validated(object sender, EventArgs e)

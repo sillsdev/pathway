@@ -90,7 +90,7 @@ namespace SIL.PublishingSolution
         ErrorProvider _errProvider = new ErrorProvider();
         DictionarySetting _ds = new DictionarySetting();
         //DataSet _dataSet = new DataSet();
-        UndoRedo _redoundo;
+        //UndoRedo _redoundo;
         protected bool _isCreatePreview1;
         protected string _caption = string.Empty;
         //protected string _caption = Caption;
@@ -1237,7 +1237,7 @@ namespace SIL.PublishingSolution
                 SetSideBar();
                 ShowDataInGrid();
                 SetPropertyTab();
-                _redoundo.Reset();
+                //_redoundo.Reset();
             }
             catch
             {
@@ -2493,8 +2493,8 @@ namespace SIL.PublishingSolution
                 //}
                 PreviousValue = Common.GetTextValue(sender, out control);
                 _redoUndoBufferValue = PreviousValue;
-                _redoundo.PreviousControl = _redoundo.CurrentControl;
-                _redoundo.CurrentControl = control;
+                //_redoundo.PreviousControl = _redoundo.CurrentControl;
+                //_redoundo.CurrentControl = control;
                 _previousStyleName = PreviousValue;
 
             }
@@ -2931,7 +2931,7 @@ namespace SIL.PublishingSolution
             try
             {
                 UpdateGrid(cTool.TxtName, cTool.StylesGrid);
-                _redoundo.Set(Common.Action.Edit, StyleName, "txtName", _redoUndoBufferValue, cTool.TxtName.Text);
+                //_redoundo.Set(Common.Action.Edit, StyleName, "txtName", _redoUndoBufferValue, cTool.TxtName.Text);
                 _redoUndoBufferValue = cTool.TxtName.Text;
             }
             catch { }
@@ -2942,7 +2942,7 @@ namespace SIL.PublishingSolution
             try
             {
                 UpdateGrid(cTool.TxtComment, cTool.StylesGrid);
-                _redoundo.Set(Common.Action.Edit, StyleName, "txtComment", _redoUndoBufferValue, cTool.TxtComment.Text);
+                //_redoundo.Set(Common.Action.Edit, StyleName, "txtComment", _redoUndoBufferValue, cTool.TxtComment.Text);
                 _redoUndoBufferValue = cTool.TxtComment.Text;
             }
             catch { }
@@ -2953,7 +2953,7 @@ namespace SIL.PublishingSolution
             try
             {
                 UpdateGrid(cTool.TxtDesc, cTool.StylesGrid);
-                _redoundo.Set(Common.Action.Edit, StyleName, "txtDesc", _redoUndoBufferValue, cTool.TxtDesc.Text);
+                //_redoundo.Set(Common.Action.Edit, StyleName, "txtDesc", _redoUndoBufferValue, cTool.TxtDesc.Text);
                 _redoUndoBufferValue = cTool.TxtDesc.Text;
 
             }
@@ -3023,30 +3023,30 @@ namespace SIL.PublishingSolution
 
         public void tsRedo_ClickBL(object sender, EventArgs e)
         {
-            try
-            {
-                ModifyData control = _redoundo.Redo();
-                if (control.Action != Common.Action.Edit) // Add or Delete
-                {
-                    LoadParam();
-                    ClearPropertyTab(cTool.TabDisplay);
-                    PopulateFeatureSheet();
-                    SetPreviousLayoutSelect(cTool.StylesGrid);
-                    ShowDataInGrid();
-                    SelectRow(cTool.StylesGrid, control.EditStyleName);
-                }
-                else // Edit
-                {
-                    bool success = SetUI(control);
-                    if (!success)
-                    {
-                        // Ignore Recent modification. Ex: 123 - ignores 3 and gives 12 
-                        tsRedo_ClickBL(sender, e);
-                    }
-                }
+            //try
+            //{
+            //    ModifyData control = _redoundo.Redo();
+            //    if (control.Action != Common.Action.Edit) // Add or Delete
+            //    {
+            //        LoadParam();
+            //        ClearPropertyTab(cTool.TabDisplay);
+            //        PopulateFeatureSheet();
+            //        SetPreviousLayoutSelect(cTool.StylesGrid);
+            //        ShowDataInGrid();
+            //        SelectRow(cTool.StylesGrid, control.EditStyleName);
+            //    }
+            //    else // Edit
+            //    {
+            //        bool success = SetUI(control);
+            //        if (!success)
+            //        {
+            //            // Ignore Recent modification. Ex: 123 - ignores 3 and gives 12 
+            //            tsRedo_ClickBL(sender, e);
+            //        }
+            //    }
 
-            }
-            catch { }
+            //}
+            //catch { }
         }
 
         public void DdlRunningHeadSelectedIndexChangedBl(string pageType)
@@ -3084,30 +3084,30 @@ namespace SIL.PublishingSolution
 
         public void tsUndo_ClickBL(object sender, EventArgs e)
         {
-            try
-            {
-                ModifyData control = _redoundo.Undo(Common.Action.Edit, _styleName, _redoundo.CurrentControl, PreviousValue);
-                PreviousValue = string.Empty;
-                if (control.Action != Common.Action.Edit) // Add or Delete
-                {
-                    LoadParam();
-                    ClearPropertyTab(cTool.TabDisplay);
-                    PopulateFeatureSheet();
-                    SetPreviousLayoutSelect(cTool.StylesGrid);
-                    ShowDataInGrid();
-                    SelectRow(cTool.StylesGrid, control.EditStyleName);
-                }
-                else // Edit
-                {
-                    bool success = SetUI(control);
-                    if (!success)
-                    {
-                        // Ignore Recent modification. Ex: 123 - ignores 3 and gives 12 
-                        tsUndo_ClickBL(sender, e);
-                    }
-                }
-            }
-            catch { }
+            //try
+            //{
+            //    ModifyData control = _redoundo.Undo(Common.Action.Edit, _styleName, _redoundo.CurrentControl, PreviousValue);
+            //    PreviousValue = string.Empty;
+            //    if (control.Action != Common.Action.Edit) // Add or Delete
+            //    {
+            //        LoadParam();
+            //        ClearPropertyTab(cTool.TabDisplay);
+            //        PopulateFeatureSheet();
+            //        SetPreviousLayoutSelect(cTool.StylesGrid);
+            //        ShowDataInGrid();
+            //        SelectRow(cTool.StylesGrid, control.EditStyleName);
+            //    }
+            //    else // Edit
+            //    {
+            //        bool success = SetUI(control);
+            //        if (!success)
+            //        {
+            //            // Ignore Recent modification. Ex: 123 - ignores 3 and gives 12 
+            //            tsUndo_ClickBL(sender, e);
+            //        }
+            //    }
+            //}
+            //catch { }
         }
 
         public void chkAvailable_CheckedChangedBL()
@@ -3246,7 +3246,7 @@ namespace SIL.PublishingSolution
                 SetSideBar();
                 ShowDataInGrid();
                 SetPropertyTab();
-                _redoundo.Reset();
+                //_redoundo.Reset();
             }
             catch
             {
@@ -3271,7 +3271,7 @@ namespace SIL.PublishingSolution
                 SetSideBar();
                 ShowDataInGrid();
                 SetPropertyTab();
-                _redoundo.Reset();
+                //_redoundo.Reset();
             }
             catch
             {
@@ -3507,7 +3507,7 @@ namespace SIL.PublishingSolution
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabothers"]);
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPicture"]);
             }
-            _redoundo = new UndoRedo(cTool.TsUndo, cTool.TsRedo);
+            //_redoundo = new UndoRedo(cTool.TsUndo, cTool.TsRedo);
             cTool.MinimumSize = new Size(497, 183);
             cTool.LoadSettings();
             SetInputTypeButton();
