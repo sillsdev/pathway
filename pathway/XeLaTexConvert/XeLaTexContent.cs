@@ -626,7 +626,7 @@ namespace SIL.PublishingSolution
 
                     if (!_dictionaryStarting)
                     {
-                        _tocStartingPage = content.ToCharArray(0,1) .ToString();
+                        _tocStartingPage = content.Substring(0,1) .ToString();
                         _xetexFile.Write("\r\n \\label{first_page" + _tocStartingPage + "} ");
 
                         //_xetexFile.Write("\r\n \\section*{} \\label{first_page" + _tocStartingPage + "} ");
@@ -638,7 +638,7 @@ namespace SIL.PublishingSolution
                         //  _xetexFile.Write("\r\n \\section*{} \\label{last_page} ");
                         if (content == TocEndingPage)
                         {
-                            _tocEndingPage = content.ToCharArray(0, 1).ToString();
+                            _tocEndingPage = content.Substring(0, 1).ToString();
 
                             _xetexFile.WriteLine("\r\n \\label{last_page" + _tocEndingPage + "} ");
                         }
