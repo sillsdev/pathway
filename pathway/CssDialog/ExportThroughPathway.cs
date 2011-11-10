@@ -149,7 +149,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         public string Title // dc:title
         {
-            get { return txtBookTitle.Text.Trim(); }
+            get { return CleanText(txtBookTitle.Text); }
             set { txtBookTitle.Text = value; }
         }
         /// <summary>
@@ -157,7 +157,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         public string Description // dc:description
         {
-            get { return txtDescription.Text.Trim(); }
+            get { return CleanText(txtDescription.Text); }
             set { txtDescription.Text = value; }
         }
         /// <summary>
@@ -165,7 +165,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         public string Creator // dc:creator
         {
-            get { return txtCreator.Text.Trim(); }
+            get { return CleanText(txtCreator.Text); }
             set { txtCreator.Text = value; }
         }
         /// <summary>
@@ -173,7 +173,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         public string Publisher // dc:publisher
         {
-            get { return txtPublisher.Text.Trim(); }
+            get { return CleanText(txtPublisher.Text); }
             set { txtPublisher.Text = value; }
         }
         /// <summary>
@@ -181,7 +181,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         public string CopyrightHolder // dc:rights
         {
-            get { return txtRights.Text.Trim(); }
+            get { return CleanText(txtRights.Text); }
             set { txtRights.Text = value; }
         }
         // DC properties that are not in the UI
@@ -868,6 +868,13 @@ namespace SIL.PublishingSolution
             btnOK.Enabled = chkIP.Checked;
         }
         #endregion SetOkStatus
+
+        private string CleanText(string text)
+        {
+            string newText = text.Replace("<", "");
+            newText = newText.Replace(">", "");
+            return newText.Trim();
+        }
 
         private void btnHelp_Click(object sender, EventArgs e)
         {

@@ -12,7 +12,12 @@ namespace SIL.PublishingSolution
     {
         public string Organization
         {
-            get { return txtOrganization.Text; }
+            get
+            {
+                string newText = txtOrganization.Text.Replace("<", "");
+                newText = newText.Replace(">", "");
+                return newText.Trim();
+            }
             set { txtOrganization.Text = value; }
         }
 
@@ -40,5 +45,6 @@ namespace SIL.PublishingSolution
             DialogResult = DialogResult.Cancel;
             Close();
         }
+
     }
 }
