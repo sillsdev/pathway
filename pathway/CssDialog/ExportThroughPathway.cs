@@ -1,4 +1,32 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------
+// <copyright file="ExportThroughPathway.cs" from='2009' to='2011' company='SIL International'>
+//      Copyright © 2009, 2011 SIL International. All Rights Reserved.
+//
+//      Distributable under the terms specified in the LICENSING.txt file.
+// </copyright>
+// <author>Erik Brommers</author>
+// <email>erik_brommers@sil.org</email>
+// Last reviewed:
+// 
+// <remarks>
+// Export Through Pathway dialog (replacement for the PrintVia dialog).
+// This dialog is designed to be a simple-to-complex dialog for exporting to the
+// various Pathway output formats and stylesheets.
+//
+// When the user displays this dialog, it checks the <>StyleSettings.xml file
+// for the user's Organization. If not found (which will be the case for first launch
+// after installation and when the user holds the shift key down to clean out the
+// settings), the dialog will display the SelectOrganizationDialog to select one. 
+// Each organization can have its own default values for publisher, copyright, etc.;
+// specifying an organization allows an organization to pre-fill some of the dialog
+// fields for the user. These fields can be overridden by the user.
+//
+// A fuller description of this dialog can be found in the JIRA issue attachments
+// for TD-2344: https://www.jira.insitehome.org/secure/attachment/27139/PubInfo_Proposal_v5.docx
+// </remarks>
+// --------------------------------------------------------------------------------------
+
+using System;
 using System.Collections;
 using System.Drawing;
 using System.IO;
