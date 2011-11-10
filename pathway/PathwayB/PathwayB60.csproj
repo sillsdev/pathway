@@ -287,7 +287,12 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FwUtils, Version=6.0.6.31746, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PsExport\Dlls601\FwUtils.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -312,9 +317,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ParatextSupport\ParatextSupport60.csproj">
-      <Project>{E9E86AC5-EC9E-40C4-A386-64A77C48034B}</Project>
-      <Name>ParatextSupport60</Name>
+    <ProjectReference Include="..\CssDialog\CssDialog60.csproj">
+      <Project>{1A58ECC5-75FE-4FE2-B133-8605B382B7C0}</Project>
+      <Name>CssDialog60</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PsExport\PsExport60.csproj">
+      <Project>{DCD48287-7F36-4DBB-94CF-4FF617BF1F78}</Project>
+      <Name>PsExport60</Name>
     </ProjectReference>
     <ProjectReference Include="..\PsTool\PsTool60.csproj">
       <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
