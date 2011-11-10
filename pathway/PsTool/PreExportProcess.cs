@@ -498,7 +498,7 @@ namespace SIL.Tool
             if (rights.Trim().Length > 0)
             {
                 sb.Append(rights);
-                sb.Append("; and, © named rights holders for materials used by permission as specified in the resource file description.</p>  ");
+                sb.Append("</p>  ");
 
             }
             return sb.ToString();
