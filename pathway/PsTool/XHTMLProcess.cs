@@ -414,7 +414,7 @@ namespace SIL.PublishingSolution
                     {
                         _xhtmlAttribute.Add(_reader.Name + _reader.Value);
                         if (_reader.Name == "href")
-                            _anchorIdValue = _reader.Value;
+                            _anchorBookMarkName = _reader.Value;
                     }
                     else if (_reader.Name == "id")
                     {

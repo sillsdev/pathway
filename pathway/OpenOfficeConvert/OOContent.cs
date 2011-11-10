@@ -144,7 +144,8 @@ namespace SIL.PublishingSolution
         private Dictionary<string, string> ListType;
         //private string _anchorText = string.Empty;
         private bool _anchorWrite;
-        private ArrayList _referenceIDList = new ArrayList();
+        private List<string> _sourceList = new List<string>();
+        private List<string> _targetList = new List<string>();
 
         //private Stack<string> _referenceCloseStyleStack = new Stack<string>();
         private bool _isPictureDisplayNone = false;
@@ -212,7 +213,7 @@ namespace SIL.PublishingSolution
         {
             PreExportProcess preProcessor = new PreExportProcess(_projInfo);
             preProcessor.ReplaceInvalidTagtoSpan("CmPicture-publishStemPile-ThumbnailPub", "div");
-            _referenceIDList = preProcessor.GetReferenceList();
+            preProcessor.GetReferenceList(_sourceList, _targetList);
 
         }
 
@@ -1084,7 +1085,7 @@ namespace SIL.PublishingSolution
                 _anchor.Clear();
                 _anchorWrite = false;
             }
-            else if (_anchorIdValue.Length > 0 && _referenceIDList.Contains(_anchorIdValue.Replace("#", "")))
+            else if (_anchorIdValue.Length > 0 && _sourceList.Contains(_anchorIdValue.Replace("#", "").ToLower()) && _targetList.Contains(_anchorIdValue.Replace("#", "").ToLower())) //search in source for writing target
             {
                 _writer.WriteStartElement("text:reference-mark");
                 _writer.WriteAttributeString("text:name", _anchorIdValue.ToLower());
@@ -1170,14 +1171,13 @@ namespace SIL.PublishingSolution
         {
             if (_anchorStart)
             {
-                if (!_referenceIDList.Contains(_anchorIdValue.Replace("#", "")))
+                string val = _anchorBookMarkName.Replace("href#", "").Replace("name", "");
+                //if (!_referenceIDList.Contains(_anchorIdValue.Replace("#", "")))
+                if ((_sourceList.Contains(val.ToLower()) && _targetList.Contains(val.ToLower())))
                 {
-                    _anchorStart = false;
-                    return;
+                    _anchorWrite = true;
                 }
-                //_referenceCloseStyleStack.Push(_childName);
-                _anchorStart = false;
-                _anchorWrite = true;
+                    _anchorStart = false;
             }
             //else
             //{

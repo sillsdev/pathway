@@ -1336,24 +1336,43 @@ namespace SIL.Tool
         //    return refList;
         //}
 
-        public ArrayList GetReferenceList()
+        public void GetReferenceList(List<string> sourceList, List<string> targetList)
         {
-            ArrayList refList = new ArrayList();
+            Dictionary<string, string> dicMatch = new Dictionary<string, string>();
             MatchCollection m1 = Regex.Matches(_fileContent.ToString(), "<a\\shref.*?>");
+            string st;
             foreach (Match m in m1)
             {
-                string value = m.Value;
-                string st = Common.RightRemove(value, "\"");
-                st = Common.LeftRemove(st, "#").Replace("#","");
+                st = Common.RightRemove(m.Value, "\"");
+                st = Common.LeftRemove(st, "#").Replace("#", "").ToLower();
 
-                string pattern = "id=\"" + st + "\"|name=\"" + st + "\"";
-                MatchCollection matchs = Regex.Matches(_fileContent.ToString(), pattern, RegexOptions.IgnoreCase);
-                if (matchs.Count > 0 && !refList.Contains(st))
-                {
-                    refList.Add(st);
-                }
+            if (sourceList.Contains(st)) continue;
+                sourceList.Add(st);
             }
-            return refList;
+
+            string pattern = "id.*?>";
+            MatchCollection m2 = Regex.Matches(_fileContent.ToString(), pattern);
+            foreach (Match m in m2)
+            {
+                st = Common.LeftRemove(m.Value, "=\"");
+                st = Common.LeftString(st, "\"").ToLower();
+
+
+                if (targetList.Contains(st)) continue;
+                targetList.Add(st);
+            }
+
+            pattern = "name.*?>";
+            MatchCollection m3 = Regex.Matches(_fileContent.ToString(), pattern);
+            foreach (Match m in m3)
+            {
+                st = Common.LeftRemove(m.Value, "=\"");
+                st = Common.LeftString(st, "\"").ToLower();
+
+                if (targetList.Contains(st)) continue;
+                targetList.Add(st);
+            }
+
         }
 
         #endregion
