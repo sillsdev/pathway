@@ -870,8 +870,8 @@ namespace SIL.PublishingSolution
                 const string xPath = "//stylePick/defaultSettings/property[@name=\"PrintVia\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
                 string result = childNode.Attributes["value"].Value;
-                if ((result.ToLower() == "word (using openoffice)") || (result.ToLower() == "pdf (using openoffice) "))
-                    result = "OpenOffice";
+                if ((result.ToLower() == "word (using openoffice/libreoffice)") || (result.ToLower() == "pdf (using openoffice/libreoffice) "))
+                    result = "OpenOffice/LibreOffice";
                 List<IExportProcess> backEnd = LoadBackends();
                 foreach (IExportProcess process in backEnd)
                 {
