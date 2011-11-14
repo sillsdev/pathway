@@ -11,7 +11,7 @@ namespace SIL.PublishingSolution
 {
     public class PdftoJpg
     {
-        public string ConvertPdftoJpg(string cssFullFileName,bool fromPreview, string loadType)
+        public string ConvertPdftoJpg(string cssFullFileName, bool fromPreview, string loadType)
         {
             string cssMergeFullFileName;
             if (fromPreview)
@@ -30,9 +30,9 @@ namespace SIL.PublishingSolution
             string xhtmlPreviewFile_fromPath = Path.Combine(PsSupportPathfrom, previewFile);
             if (!File.Exists(xhtmlPreviewFilePath))
             {
-                if(File.Exists(xhtmlPreviewFile_fromPath))
+                if (File.Exists(xhtmlPreviewFile_fromPath))
                 {
-                    File.Copy(xhtmlPreviewFile_fromPath,xhtmlPreviewFilePath);
+                    File.Copy(xhtmlPreviewFile_fromPath, xhtmlPreviewFilePath);
                 }
             }
 
@@ -51,7 +51,7 @@ namespace SIL.PublishingSolution
             ps.DictionaryOutputName = fileName;
             ps.DictionaryPath = Path.GetDirectoryName(xhtmlPreviewFilePath);
             ps.ProjectInputType = loadType;
-         
+
             ExportLibreOffice openOffice = new ExportLibreOffice();
             openOffice.Export(ps);
 
@@ -67,7 +67,7 @@ namespace SIL.PublishingSolution
             {
                 if (stopWatch.Elapsed > timeSpan)
                 {
-                    stopWatch.Stop(); 
+                    stopWatch.Stop();
                     return "";
                 }
                 Application.DoEvents();
@@ -84,31 +84,54 @@ namespace SIL.PublishingSolution
             //ConvertImage(outputPdfFile);
         }
 
-        private void ConvertImage(string filename,string outputFileName)
+        private void ConvertImage(string filename, string outputFileName)
         {
             try
             {
                 //string previewFile = outputFileName;
                 string outputPath = Path.Combine(Path.GetDirectoryName(filename), Path.GetFileNameWithoutExtension(outputFileName)) + ".pdf";
-                File.Copy(filename, outputPath,true);
+                File.Copy(filename, outputPath, true);
                 Common.DeleteFile(filename);
-                PDFConvert converter = new PDFConvert();
+                string osName = Common.GetOsName();
                 string fileExtenstion = ".jpg";
                 bool Converted = false;
-                converter.OutputToMultipleFile = true;
-                converter.FirstPageToConvert = 1;
-                converter.LastPageToConvert = 2;
-                converter.FitPage = false;
-                converter.JPEGQuality = 75;
-                converter.OutputFormat = "jpeg";
                 FileInfo input = new FileInfo(outputPath);
-                string output = string.Format("{0}\\{1}{2}", input.Directory, input.Name, fileExtenstion);
-                //If the output file exist alrady be sure to add a random name at the end until is unique!
-                while (File.Exists(output))
+                if (osName == "Unix")
                 {
-                    output = output.Replace(fileExtenstion, string.Format("{1}{0}", fileExtenstion, DateTime.Now.Ticks));
+                    PDFtoImageConverter converter = new PDFtoImageConverter();
+                    converter.OutputToMultipleFile = true;
+                    converter.FirstPageToConvert = 1;
+                    converter.LastPageToConvert = 2;
+                    converter.FitPage = false;
+                    converter.JPEGQuality = 75;
+                    converter.OutputFormat = "jpeg";
+
+                    string output = string.Format("{0}/{1}{2}", input.Directory, input.Name, fileExtenstion);
+                    //If the output file exist alrady be sure to add a random name at the end until is unique!
+                    while (File.Exists(output))
+                    {
+                        output = output.Replace(fileExtenstion, string.Format("{1}{0}", fileExtenstion, DateTime.Now.Ticks));
+                    }
+                    Converted = converter.Convert(input.FullName, output);
                 }
-                Converted = converter.Convert(input.FullName, output);
+                else
+                {
+                    PDFConvert converter = new PDFConvert();
+                    converter.OutputToMultipleFile = true;
+                    converter.FirstPageToConvert = 1;
+                    converter.LastPageToConvert = 2;
+                    converter.FitPage = false;
+                    converter.JPEGQuality = 75;
+                    converter.OutputFormat = "jpeg";
+
+                    string output = string.Format("{0}/{1}{2}", input.Directory, input.Name, fileExtenstion);
+                    //If the output file exist alrady be sure to add a random name at the end until is unique!
+                    while (File.Exists(output))
+                    {
+                        output = output.Replace(fileExtenstion, string.Format("{1}{0}", fileExtenstion, DateTime.Now.Ticks));
+                    }
+                    Converted = converter.Convert(input.FullName, output);
+                }
             }
             catch (Exception)
             {
