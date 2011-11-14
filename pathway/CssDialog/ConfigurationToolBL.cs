@@ -1837,9 +1837,9 @@ namespace SIL.PublishingSolution
             var currentApprovedBy = grid[AttribApproved, SelectedRowIndex].Value.ToString();
             string type = grid[ColumnType, SelectedRowIndex].Value.ToString();
             PreviousStyleName = GetNewStyleName(cssNames, "copy");
-            if (PreviousStyleName.Length > 100)
+            if (PreviousStyleName.Length > 50)
             {
-                MessageBox.Show("Styles should not be greater than 100 characters.", Caption, MessageBoxButtons.OK,
+                MessageBox.Show("Styles should not be greater than 50 characters.", Caption, MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
                 return false;
             }
