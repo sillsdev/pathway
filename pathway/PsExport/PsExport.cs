@@ -93,13 +93,13 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    fluffedCssFullName = GetFluffedCssFullName(GetRevFullName(outDir), outDir, cssFullName);
+                    fluffedCssFullName = GetFluffedCssFullName(GetRevFullName(outFullName), outDir, cssFullName);
                 }
                 string revFileName = GetRevFullName(outDir);
                 string revCSS = string.Empty;
                 if (revFileName.Length > 0)
                 {
-                    revCSS = GetFluffedCssFullName(GetRevFullName(outDir), outDir, cssFullName);
+                    revCSS = GetFluffedCssFullName(GetRevFullName(outFullName), outDir, cssFullName);
                 }
                 DestinationSetup();
                 if (DataType == "Scripture")
@@ -163,9 +163,9 @@ namespace SIL.PublishingSolution
         /// <returns>Reversal name with path</returns>
         protected static string GetRevFullName(string outDir)
         {
-            string revFullName = Common.PathCombine(outDir, "FlexRev.xhtml");
+            string revFullName = Common.PathCombine(Path.GetDirectoryName(outDir), "FlexRev.xhtml");
             if (!File.Exists(revFullName))
-                revFullName = "";
+                revFullName = outDir;
             else
             {
                 Common.StreamReplaceInFile(revFullName, "<ReversalIndexEntry_Self>", "");
