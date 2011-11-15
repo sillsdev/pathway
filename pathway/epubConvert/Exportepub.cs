@@ -26,6 +26,7 @@
 // See also http://www.openebook.org/2007/ops/OPS_2.0_final_spec.html
 // </remarks>
 // --------------------------------------------------------------------------------------
+//#define TIME_IT 
 
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,7 @@ using epubConvert;
 using epubConvert.Properties;
 using epubValidator;
 using SIL.Tool;
+
 
 namespace SIL.PublishingSolution
 {
@@ -146,11 +148,15 @@ namespace SIL.PublishingSolution
             else
             {
                 // basic setup
+#if (TIME_IT)
                 DateTime dt1 = DateTime.Now;    // time this thing
+#endif
                 var inProcess = new InProcess(0, 9); // create a progress bar with 7 steps (we'll add more below)
                 inProcess.Text = Resources.Exportepub_Export_Exporting__epub_file;
                 inProcess.Show();
                 inProcess.PerformStep();
+                inProcess.ShowStatus = true;
+                inProcess.SetStatus("Preprocessing content");
                 var sb = new StringBuilder();
                 Guid bookId = Guid.NewGuid(); // NOTE: this creates a new ID each time Pathway is run. 
                 string outputFolder = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath); // finished .epub goes here
@@ -173,6 +179,7 @@ namespace SIL.PublishingSolution
                 _langFontDictionary.Keys.CopyTo(langArray, 0);
 
                 // CSS preprocessing
+                inProcess.SetStatus("Preprocessing stylesheet");
                 string tempFolder = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
                 string tempFolderName = Path.GetFileName(tempFolder);
                 var mc = new MergeCss { OutputLocation = tempFolderName };
@@ -217,6 +224,7 @@ namespace SIL.PublishingSolution
                 Common.XsltProgressBar = inProcess.Bar();
 
                 // insert the front matter items as separate files in the output folder
+                inProcess.SetStatus("Adding content");
                 splitFiles.AddRange(preProcessor.InsertFrontMatter(tempFolder, false));
                 foreach(var file in splitFiles)
                 {
@@ -255,12 +263,13 @@ namespace SIL.PublishingSolution
                 // add the total file count (so far) to the progress bar, so it's a little more accurate
                 inProcess.AddToMaximum(splitFiles.Count);
 
+                inProcess.SetStatus("Processing stylesheet information");
                 if (_inputType.ToLower().Equals("dictionary"))
                 {
-                    ContentCssToXhtml(niceNameCSS, splitFiles);
+                    ContentCssToXhtml(niceNameCSS, splitFiles, inProcess);
                     if (projInfo.IsReversalExist)
                     {
-                        ContentCssToXhtml(Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.css"), splitFiles);
+                        ContentCssToXhtml(Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.css"), splitFiles, inProcess);
                     }
                 }
                 // get rid of styles that don't work with .epub
@@ -270,6 +279,7 @@ namespace SIL.PublishingSolution
 
                 foreach (string file in splitFiles)
                 {
+                    inProcess.SetStatus("Converting file to .epub format:" + file);
                     if (File.Exists(file))
                     {
                         Common.XsltProcess(file, xsltFullName, "_.xhtml");
@@ -282,6 +292,7 @@ namespace SIL.PublishingSolution
                 }
 
                 // create the "epub" directory structure and copy over the boilerplate files
+                inProcess.SetStatus("Creating .epub structure");
                 sb.Append(tempFolder);
                 sb.Append(Path.DirectorySeparatorChar);
                 sb.Append("epub");
@@ -301,12 +312,14 @@ namespace SIL.PublishingSolution
                 // extract references file if specified
                 if (References.Contains("End") && _inputType.ToLower().Equals("scripture"))
                 {
+                    inProcess.SetStatus("Creating endnote references file");
                     CreateReferencesFile(contentFolder, preProcessor.ProcessedXhtml);
                     splitFiles.Add(Path.Combine(contentFolder, ReferencesFilename));
                 }
 
                 // -- Font handling --
                 // First, get the list of fonts used in this project
+                inProcess.SetStatus("Processing fonts");
                 BuildFontsList();
                 // Embed fonts if needed
                 if (EmbedFonts)
@@ -335,39 +348,49 @@ namespace SIL.PublishingSolution
                     string substring = Path.GetFileNameWithoutExtension(file).Substring(8);
                     string dest = Common.PathCombine(contentFolder, name + substring.PadLeft(6, '0') + ".xhtml");
                     File.Move(file, dest);
-                    // split the file into smaller pieces if needed (scriptures only for now)
-                    if (_inputType == "scripture")
+                    // split the file into smaller pieces if needed
+                    List<string> files = SplitBook(dest);
+                    if (files.Count > 1)
                     {
-                        List<string> files = SplitBook(dest);
-                        if (files.Count > 1)
-                        {
-                            // file was split out - delete "dest" (it's been replaced)
-                            File.Delete(dest);
-                        }
+                        // file was split out - delete "dest" (it's been replaced)
+                        File.Delete(dest);
                     }
                 }
                 // fix any relative hyperlinks that might have broken when we split the .xhtml up
+#if (TIME_IT)
+                DateTime dtRefStart = DateTime.Now;
+#endif
+                inProcess.SetStatus("Processing hyperlinks");
                 if (_inputType == "scripture" && References.Contains("End"))
                 {
                     UpdateReferenceHyperlinks(contentFolder, inProcess);
                 }
                 FixRelativeHyperlinks(contentFolder, inProcess);
+#if (TIME_IT)
+                TimeSpan tsRefTotal = DateTime.Now - dtRefStart;
+                Debug.WriteLine("Exportepub: time spent fixing reference hyperlinks: " + tsRefTotal);
+#endif
                 inProcess.PerformStep();
 
                 // process and copy over the image files
+                inProcess.SetStatus("Processing images");
                 ProcessImages(tempFolder, contentFolder);
                 inProcess.PerformStep();
 
                 // generate the toc / manifest files
+                inProcess.SetStatus("Generating .epub TOC and manifest");
                 CreateOpf(projInfo, contentFolder, bookId);
                 CreateNcx(projInfo, contentFolder, bookId);
                 inProcess.PerformStep();
 
                 // Done adding content - now zip the whole thing up and name it
+                inProcess.SetStatus("Cleaning up");
                 string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
                 Compress(projInfo.TempOutputFolder, Common.PathCombine(outputFolder, fileName));
+#if (TIME_IT)
                 TimeSpan tsTotal = DateTime.Now - dt1;
                 Debug.WriteLine("Exportepub: time spent in .epub conversion: " + tsTotal);
+#endif
                 inProcess.PerformStep();
                 inProcess.Close();
 
@@ -748,7 +771,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         /// <param name="cssFile">CSS file containing content properties that need to be moved into the XHTML</param>
         /// <param name="xhtmlFiles">List of XHTML files that will get the content characters inserted via our generated XSLT.</param>
-        private void ContentCssToXhtml (string cssFile, List<string> xhtmlFiles)
+        private void ContentCssToXhtml (string cssFile, List<string> xhtmlFiles, InProcess inProcess)
         {
             if (!File.Exists(cssFile)) {return;}
             string xsltFullName = Common.FromRegistry("punct_XHTML.xslt");
@@ -884,6 +907,7 @@ namespace SIL.PublishingSolution
             // final step - run the updated xslt file
             foreach (var xhtmlFile in xhtmlFiles)
             {
+                inProcess.SetStatus("Folding punctuation into XHTML: " + xhtmlFile);
                 Common.XsltProcess(xhtmlFile, tempXslt, Path.GetExtension(xhtmlFile) + ".tmp");
                 // replace the original file
                 if (File.Exists(xhtmlFile))
@@ -1621,45 +1645,57 @@ namespace SIL.PublishingSolution
         /// <returns></returns>
         private string GetBookID (string xhtmlFileName)
         {
-            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
-            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
-            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
-            XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
-            xmlDocument.Load(xmlReader);
-            xmlReader.Close();
-            // should only be one of these after splitting out the chapters.
-            XmlNodeList nodes;
-            if (_inputType.Equals("dictionary"))
+            try
             {
-                nodes = xmlDocument.SelectNodes("//xhtml:div[@class='letter']", namespaceManager);
-            }
-            else
-            {
-                // start out with the book code (e.g., 2CH for 2 Chronicles)
-                nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookCode']", namespaceManager);
-                if (nodes == null || nodes.Count == 0)
+                XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+                XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+                namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+                XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+                XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
+                xmlDocument.Load(xmlReader);
+                xmlReader.Close();
+                // should only be one of these after splitting out the chapters.
+                XmlNodeList nodes;
+                if (_inputType.Equals("dictionary"))
                 {
-                    // no book code - use scrBookName
-                    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
+                    nodes = xmlDocument.SelectNodes("//xhtml:div[@class='letter']", namespaceManager);
                 }
-                if (nodes == null || nodes.Count == 0)
+                else
                 {
-                    // no scrBookName - use Title_Main
-                    nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']/span", namespaceManager);
+                    // start out with the book code (e.g., 2CH for 2 Chronicles)
+                    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookCode']", namespaceManager);
+                    if (nodes == null || nodes.Count == 0)
+                    {
+                        // no book code - use scrBookName
+                        nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
+                    }
+                    if (nodes == null || nodes.Count == 0)
+                    {
+                        // no scrBookName - use Title_Main
+                        nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']/span", namespaceManager);
+                    }
                 }
+                if (nodes != null && nodes.Count > 0)
+                {
+                    var sb = new StringBuilder();
+                    // just in case the name starts with a number, prepend "id"
+                    sb.Append("id");
+                    // remove any whitespace in the node text (the ID can't have it)
+                    sb.Append(new Regex(@"\s*").Replace(nodes[0].InnerText, string.Empty));
+                    return (sb.ToString());
+                }
+                // fall back on just the file name
+                return Path.GetFileName(xhtmlFileName);            
             }
-            if (nodes != null && nodes.Count > 0)
+            catch (Exception ex)
             {
-                var sb = new StringBuilder();
-                // just in case the name starts with a number, prepend "id"
-                sb.Append("id");
-                // remove any whitespace in the node text (the ID can't have it)
-                sb.Append(new Regex(@"\s*").Replace(nodes[0].InnerText, string.Empty));
-                return (sb.ToString());
+                Debug.WriteLine(ex.ToString());
+                if (ex.StackTrace != null)
+                {
+                    Debug.WriteLine(ex.StackTrace);
+                }
+                return Path.GetFileName(xhtmlFileName);
             }
-            // fall back on just the file name
-            return Path.GetFileName(xhtmlFileName);            
         }
 
         /// <summary>
@@ -1753,7 +1789,10 @@ namespace SIL.PublishingSolution
                 if (content.IndexOf("id=\"" + hrefID) == -1)
                 {
                     // not found -- this link is broken
-                    brokenRelativeHrefIds.Add(hrefID);
+                    if (!brokenRelativeHrefIds.Contains(hrefID))
+                    {
+                        brokenRelativeHrefIds.Add(hrefID);
+                    }
                 }
                 start = content.IndexOf(searchText, (start + stop));
                 if (start != -1)
@@ -1778,15 +1817,21 @@ namespace SIL.PublishingSolution
             inProcess.AddToMaximum(files.Length);
             var sbID = new StringBuilder();
             var books = new StringBuilder();
+#if (TIME_IT)
             var startTime = DateTime.Now;
+#endif
             bool bFound = false;
+            int item = 0;
+            var dictHyperlinks = new Dictionary<string, string>();
             foreach (string sourceFile in files)
             {
                 var relativeIDs = FindBrokenRelativeHrefIds(sourceFile);
-                Debug.WriteLine(sourceFile + ": " + relativeIDs.Count + " broken hrefs:");
-                inProcess.AddToMaximum(relativeIDs.Count);
+                item = 0;
+                dictHyperlinks.Clear();
                 foreach (var relativeID in relativeIDs)
                 {
+                    item++;
+                    inProcess.SetStatus(sourceFile + ": updating hyperlinks (" + item + " of " + relativeIDs.Count + ")");
                     // Try 1: Footnotes and cross-references -
                     // Footnotes and cross-references are the most common relative hyperlinks. Before going through the 
                     // trouble of searching through all the files, see if the target ended up in our references file.
@@ -1794,8 +1839,7 @@ namespace SIL.PublishingSolution
                     {
                         if (IsStringInFile(Path.Combine(contentFolder, ReferencesFilename), relativeID))
                         {
-                            Common.StreamReplaceInFile(sourceFile, ("a href=\"#" + relativeID), ("a href=\"" + ReferencesFilename + "#" + relativeID));
-                            inProcess.PerformStep();
+                            dictHyperlinks.Add(relativeID, ReferencesFilename + "#" + relativeID);
                             continue;
                         }
                     }
@@ -1815,10 +1859,9 @@ namespace SIL.PublishingSolution
                     string[] bookFiles = Directory.GetFiles(contentFolder, books.ToString());
                     foreach (var targetBookFile in bookFiles)
                     {
-                        //if (IsStringInFile(targetBookFile, relativeID))
                         if (IsStringInFile(targetBookFile, sbID.ToString()))
                         {
-                            Common.StreamReplaceInFile(sourceFile, ("a href=\"#" + relativeID), ("a href=\"" + Path.GetFileName(targetBookFile) + "#" + relativeID));
+                            dictHyperlinks.Add(relativeID, Path.GetFileName(targetBookFile) + "#" + relativeID);
                             bFound = true;
                             break;
                         }
@@ -1830,9 +1873,8 @@ namespace SIL.PublishingSolution
                         foreach (var targetFile in files)
                         {
                             if (IsStringInFile(targetFile, sbID.ToString()))
-                            //if (IsStringInFile(targetFile, relativeID))
                             {
-                                Common.StreamReplaceInFile(sourceFile, ("a href=\"#" + relativeID), ("a href=\"" + Path.GetFileName(targetFile) + "#" + relativeID));
+                                dictHyperlinks.Add(relativeID, Path.GetFileName(targetFile) + "#" + relativeID);
                                 bFound = true;
                                 break;
                             }
@@ -1843,13 +1885,128 @@ namespace SIL.PublishingSolution
                         // Still not found -- give up
                         Debug.WriteLine(">> Target ID for " + relativeID + " not found - this link is broken!");
                     }
-                    inProcess.PerformStep();
+                }
+                // We've found the targets for all the relative hyperlinks that aren't in the current file
+                // (and possibly some broken ones as well). Now update the targets for the file.
+                if (dictHyperlinks.Count > 0)
+                {
+                    ReplaceAllBrokenHrefs(sourceFile, dictHyperlinks);
                 }
                 // show our progress
                 inProcess.PerformStep();
             }
+#if (TIME_IT)
             TimeSpan tsTotal = DateTime.Now - startTime;
             Debug.WriteLine("Exportepub: time spent in FixRelativeHyperlinks: " + tsTotal);
+#endif
+        }
+
+        private void ReplaceAllBrokenHrefs(string filePath, Dictionary<string, string> dictHyperlinks)
+        {
+            if (!File.Exists(filePath)) return;
+            var reader = new StreamReader(filePath);
+            string content = reader.ReadToEnd();
+            reader.Close();
+            var contentWriter = new StringBuilder();
+            string searchText = "a href=\"#";
+            string newValue;
+            int startIndex = 0;
+            int stopIndex = 0;
+            int nextIndex = 0;
+            bool done = false;
+            while (!done)
+            {
+                nextIndex = content.IndexOf(searchText, startIndex);
+                if (nextIndex >= 0)
+                {
+                    // find the href target
+                    stopIndex = content.IndexOf("\"", nextIndex + searchText.Length);
+                    var target = content.Substring(nextIndex + searchText.Length, stopIndex - (nextIndex + searchText.Length));
+                    // is it in our dictionary?
+                    if (dictHyperlinks.TryGetValue(target, out newValue))
+                    {
+                        // yes - write the corrected text to the output file
+                        contentWriter.Append(content.Substring(startIndex, nextIndex - startIndex));
+                        contentWriter.Append("a href=\"");
+                        contentWriter.Append(newValue);
+                        //contentWriter.Append("\"");
+                    }
+                    else
+                    {
+                        // no - write out the existing text to the output file
+                        contentWriter.Append(content.Substring(startIndex, stopIndex - startIndex));
+                    }
+                    // update startIndex
+                    startIndex = stopIndex;
+                }
+                else
+                {
+                    // no more relative hyperlinks
+                    contentWriter.Append(content.Substring(startIndex, content.Length - startIndex));
+                    done = true;
+                }
+            }
+            var writer = new StreamWriter(filePath);
+            writer.Write(contentWriter);
+            writer.Close();
+
+            /*
+            if (!File.Exists(filePath)) return false;
+            string searchText = "a href=\"#";
+            bool foundString = false;
+            var reader = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, 4080, false);
+            var writer = new FileStream(filePath + ".tmp", FileMode.Create);
+            int next;
+            while ((next = reader.ReadByte()) != -1)
+            {
+                byte b = (byte)next;
+                if (b == searchText[0]) // first char in search text?
+                {
+                    // yes - searchText.Length chars into a buffer and compare them
+                    int len = searchText.Length;
+                    long pos = reader.Position;
+                    byte[] buf = new byte[len];
+                    buf[0] = b;
+                    if (reader.Read(buf, 1, (len - 1)) == -1)
+                    {
+                        // reached the end of file - write out what we hit and jump out of the while loop
+                        //                        writer.Write(new string(buf));
+                        continue;
+                    }
+                    string data = Encoding.UTF8.GetString(buf);
+                    if (String.Compare(searchText, data, true) == 0)
+                    {
+                        // found an instance of our search text - now run to the end of the href target quote
+                        foundString = true;
+                        Byte[] bytes = Encoding.UTF8.GetBytes(replaceText);
+                        writer.Write(bytes, 0, bytes.Length);
+                    }
+                    else
+                    {
+                        // not what we're looking for - just write it out
+                        reader.Position = pos;
+                        writer.WriteByte(b);
+                    }
+                    data = null;
+                }
+                else // not what we're looking for - just write it out
+                {
+                    writer.WriteByte(b);
+                }
+            }
+            reader.Close();
+            reader.Dispose();
+            writer.Close();
+            writer.Dispose();
+            // replace the original file with the new one
+            if (foundString)
+            {
+                // at least one instance of the string was found - replace
+                File.Copy(filePath + ".tmp", filePath, true);
+            }
+            // delete the temp file
+            File.Delete(filePath + ".tmp");
+             */
         }
         #endregion
 
@@ -2033,6 +2190,8 @@ namespace SIL.PublishingSolution
         #region File Processing Methods
         /// <summary>
         /// Returns true if the specified search text string is found in the given file.
+        /// Modified to use the Knuth-Morris-Pratt search algorithm 
+        /// (http://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm)
         /// </summary>
         /// <param name="filePath"></param>
         /// <param name="searchText"></param>
@@ -2041,6 +2200,66 @@ namespace SIL.PublishingSolution
         {
             if (!File.Exists(filePath)) return false;
             var reader = new FileStream(filePath, FileMode.Open);
+            byte[] buffer = new byte[reader.Length];
+            int[] T = new int[searchText.Length];
+            reader.Read(buffer, 0, (int) reader.Length);
+            reader.Close();
+            int j=0, i=2, sub=0;
+            // populate the T table
+            T[0] = -1;
+            T[1] = 0;
+            while (i < searchText.Length)
+            {
+                if (searchText[i-1] == searchText[sub])
+                {
+                    // continued substring
+                    sub++;
+                    T[i] = sub;
+                    i++;
+                }
+                else if (sub > 0)
+                {
+                    // substring stops, fall back to the start
+                    sub = T[sub];
+                }
+                else
+                {
+                    // not in a substring; use the default value
+                    T[i] = 0;
+                    i++;
+                }
+            }
+
+            // the actual search
+            i = 0;
+            while (j+i < buffer.Length)
+            {
+                if (searchText[i] == buffer[j+i])
+                {
+                    if (i == searchText.Length - 1)
+                    {
+                        // match found
+                        return true;
+                    }
+                    i++;
+                }
+                else
+                {
+                    // no match - move to next search pattern
+                    j = j + i - T[i];
+                    if (T[i] > -1)
+                    {
+                        i = T[i];
+                    }
+                    else
+                    {
+                        i = 0;
+                    }
+                }
+            }
+            return false;
+            //////////////////
+            /*
             int next;
             while ((next = reader.ReadByte()) != -1)
             {
@@ -2074,6 +2293,7 @@ namespace SIL.PublishingSolution
             }
             reader.Close();
             return false;
+             */
         }
 
         /// <summary>
@@ -2344,7 +2564,7 @@ namespace SIL.PublishingSolution
             var sb = new StringBuilder();
             while (!done)
             {
-                // look for the next <div class="Section_Head"> after our soft maximum size
+                // look for a good breaking point after our soft maximum size
                 string outFile = Path.Combine(Path.GetDirectoryName(xhtmlFilename), (Path.GetFileNameWithoutExtension(xhtmlFilename) + fileIndex.ToString().PadLeft(2, '0') + ".xhtml"));
                 softMax = startIndex + (int)(maxSize / 2); // UTF-16
                 if (softMax > content.Length)
@@ -2353,7 +2573,16 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    realMax = content.IndexOf("<div class=\"Section_Head", softMax);
+                    if (_inputType == "scripture")
+                    {
+                        // scripture - find the next section head; this will be our break point
+                        realMax = content.IndexOf("<div class=\"Section_Head", softMax);
+                    }
+                    else
+                    {
+                        // dictionary - find the next entry; this will be our break point
+                        realMax = content.IndexOf("<div class=\"entry", softMax);
+                    }
                 }
                 if (realMax == -1)
                 {
@@ -2366,8 +2595,16 @@ namespace SIL.PublishingSolution
                     // no more section heads - just pull in the rest of the content
                     // write out head + substring(startIndex to the end)
                     sb.Append(head);
-                    sb.Append("<body class=\"scrBody\"><div class=\"scrBook\">");
-                    sb.Append(bookcode);
+                    if (_inputType == "scripture")
+                    {
+                        sb.Append("<body class=\"scrBody\"><div class=\"scrBook\">");
+                        sb.Append(bookcode);
+                    }
+                    else
+                    {
+                        sb.Append("<body class=\"dicBody\"><div class=\"letData\">");
+                    }
+
                     sb.AppendLine(content.Substring(startIndex));
                     writer = new StreamWriter(outFile);
                     writer.Write(sb.ToString());
@@ -2387,7 +2624,14 @@ namespace SIL.PublishingSolution
                 {
                     // for the subsequent sections, we need the head + the substring (startIndex to realMax)
                     sb.Append(head);
-                    sb.Append("<body class=\"scrBody\"><div class=\"scrBook\">");
+                    if (_inputType == "scripture")
+                    {
+                        sb.Append("<body class=\"scrBody\"><div class=\"scrBook\">");
+                    }
+                    else
+                    {
+                        sb.Append("<body class=\"dicBody\"><div class=\"letData\">");
+                    }
                     sb.Append(content.Substring(startIndex, (realMax - startIndex)));
                     sb.AppendLine("</div></body></html>"); // close out the xhtml
                 }
@@ -2830,7 +3074,7 @@ namespace SIL.PublishingSolution
                 if (!Path.GetFileNameWithoutExtension(file).EndsWith("_"))
                 {
                     // this is a split file - is it the first one?
-                    if (Path.GetFileNameWithoutExtension(file).EndsWith("1"))
+                    if (Path.GetFileNameWithoutExtension(file).EndsWith("_01"))
                     {
                         // first chunk of a split file
                         if (needsEnd)
