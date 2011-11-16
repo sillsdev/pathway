@@ -123,10 +123,15 @@ padding-right: 5px;
     margin-left: 0;
     padding-left: 0;
 }
+.definition,
+.etymology-form,
+.etymology-gloss,
+.etymology-comment,
 .senses,
 .grammatical-info,
 .entryref-type,
-.variant-type-minor {
+.variant-type-minor,
+.LexEntryType-publishStemComplexFormType-ReverseAbbrPub {
     padding-right: 0.5em;
 }
 .xitem + .xitem,
@@ -134,6 +139,10 @@ padding-right: 5px;
 .LexEntry-publishStemComponentTarget-SummaryDefinitionPub {
     padding-left: 0.5em;
 }
+.definition_L2,
+.pronunciation,
+.pronunciation-minor,
+.etymology-form,
 .sense-variantref-form,
 .semantic-domains, 
 .examples, 
