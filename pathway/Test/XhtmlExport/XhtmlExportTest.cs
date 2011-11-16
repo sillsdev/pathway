@@ -125,11 +125,11 @@ namespace Test.XhtmlExport
         {
             const bool overwrite = true;
             var xhtmlName = project + ".xhtml";
-            var xhtmlInput = _tf.Expected(xhtmlName);
+            var xhtmlInput = _tf.Input(xhtmlName);
             var xhtmlOutput = _tf.SubOutput(project, xhtmlName);
             File.Copy(xhtmlInput, xhtmlOutput, overwrite);
             var cssName = layout + ".css";
-            var cssInput = _tf.Expected(cssName);
+            var cssInput = _tf.Input(cssName);
             var cssOutput = _tf.SubOutput(project, cssName);
             File.Copy(cssInput, cssOutput, overwrite);
             var p1 = new Process();
@@ -286,7 +286,7 @@ namespace Test.XhtmlExport
         [Category("SkipOnTeamCity")]
         public void NkonyaSampleInDesignTest()
         {
-            PathawyB("Nkonya Sample", "Scripture Draft", "Scripture", "InDesign");
+            PathawyB("Nkonya Sample", "Nkonya Sample", "Scripture", "InDesign");
         }
         #endregion Nkonya Sample InDesign
 
