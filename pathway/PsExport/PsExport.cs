@@ -102,6 +102,7 @@ namespace SIL.PublishingSolution
                     revCSS = GetFluffedCssFullName(GetRevFullName(outFullName), outDir, cssFullName);
                 }
                 DestinationSetup();
+                Common.LanguageSettings(mainFullName, fluffedCssFullName);
                 if (DataType == "Scripture")
                     SeExport(mainXhtml, Path.GetFileName(fluffedCssFullName), outDir);
                 else if (DataType == "Dictionary")
