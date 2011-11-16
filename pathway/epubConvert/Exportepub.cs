@@ -961,7 +961,8 @@ namespace SIL.PublishingSolution
                 // we've already transformed the text to include these items in ContentCssToXhtml(); remove them from the css now.
                 if (oneLine.Contains("content:"))
                 {
-                    continue;
+                    if (!oneLine.Contains("counter(sense, disc)"))
+                        continue;
                 }
                 // font family and size are specified elsewhere in the css - remove from the merged part
                 if (oneLine.Contains("font-family") || oneLine.Contains("font-size"))
