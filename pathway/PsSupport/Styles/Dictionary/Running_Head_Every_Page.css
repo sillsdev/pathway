@@ -3,7 +3,6 @@
     @top-left {
            content: string( guideword, first);
            direction: ltr;
-           font-family: "Charis SIL" sans-serif;
            font-weight: bold;
            font-size: 12pt;
            margin-top: 1cm;
@@ -12,7 +11,6 @@
     @top-right {
            content: string( guideword, last);
            direction: ltr;
-           font-family: "Charis SIL" sans-serif;
            font-weight: bold;
            font-size: 12pt;
            margin-top: 1cm;

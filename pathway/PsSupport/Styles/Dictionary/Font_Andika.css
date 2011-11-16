@@ -46,94 +46,94 @@
 .variantref,
 .variantref-entry-type,
 .variantref-form,
-.complexentryform    { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.crossref            { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.crossref > .xitem + .xitem :before { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.crossref-targets            { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.crossref-targets > .xitem + .xitem :before { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.crossref-type            { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.crossref-type > .xitem + .xitem :before { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.crossrefs		   { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.crossreftype        { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.crossreftype :after { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.definition-minor	   { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.definition-sub	   { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.definition          { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.entry-type-abbr-sub { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.entry               { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.entryref-primary-minor { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.entryref-type-minor { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.example-minor	   { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.example-sub	   { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.example             { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
-.example :after      { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.example :before     { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.example > .xitem + .xitem :before { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.grammatical-info	   { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.grammatical-info-minor { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.grammatical-info-sub { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.grammaticalinfo     { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
-.grammaticalinfo :after { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.headword-minor	   { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.headword-sub	   { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.headword            { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.headword :after     { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.headword > .xitem + .xitem :before { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.headwordminor       { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.headwordminor :after { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.headwordminor > .xitem + .xitem :before { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.letHead             { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
-.letter              { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
-.LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.LexEntrypublishStemParaHomographNumber :after { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.LexEntrypublishStemParaHomographNumber {font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.LexEntryRef-publishRootSubEntryType-RootSubEntryType { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.LexEntryType-publishRootMinorEntryType-AbbreviationPub { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.LexEntryType-publishStemMinorEntryType-AbbreviationPub { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.lexref-targets 	   { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.lexref-targets-sub  { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.lexref-type	   { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.lexref-type-sub	   { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.lexreftype          { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.lexreftype :after   { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
-.mainentryref        { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
-.mainentryref > .xitem + .xitem :before { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
-.mainentryrefminor   { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
-.mainentryrefminor > .xitem + .xitem :before { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
-.partofspeech        { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.partofspeech-minor  { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.partofspeech-sub    { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.pictureCaption      { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.primaryrefs-minor   { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.pronunciation-minor { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.pronunciation-sub   { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.pronunciation       { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
-.pronunciationminor  { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
-.pronunciationminor > .xitem + .xitem :before { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
-.revEntry            { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
-.revHeader           { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
-.scientific-name     { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.semantic-domain-abbr-sub { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.semantic-domain-name-sub { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.semantic-domains-sub { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.sense-crossref      { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.sense-crossref-sub  { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.sense               { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
-.sensecomplexentryform { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
-.sensecrossref       { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
-.sensecrossref > .xitem + .xitem :before { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
-.sensemainentryref   { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
-.sensemainentryref > .xitem + .xitem :before { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
-.slot-name           { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.subentry            { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.subentry-type       { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.translation-minor   { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.translation-sub     { font-family: "Andika Basic", sans-serif;  color: rgb(0,0,0); }
-.translation         { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
-.translation :after  { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
-.translation > .xitem + .xitem :before { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
-.variantrefform      { font-family: "Andika Basic", sans-serif; color: rgb(0,0,0); }
+.complexentryform    {color: rgb(0,0,0); }
+.crossref            {color: rgb(0,0,0); }
+.crossref > .xitem + .xitem :before {color: rgb(0,0,0); }
+.crossref-targets            {color: rgb(0,0,0); }
+.crossref-targets > .xitem + .xitem :before {color: rgb(0,0,0); }
+.crossref-type            {color: rgb(0,0,0); }
+.crossref-type > .xitem + .xitem :before {color: rgb(0,0,0); }
+.crossrefs		   {color: rgb(0,0,0); }
+.crossreftype        {color: rgb(0,0,0); }
+.crossreftype :after {color: rgb(0,0,0); }
+.definition-minor	   {color: rgb(0,0,0); }
+.definition-sub	   {color: rgb(0,0,0); }
+.definition          {color: rgb(0,0,0); }
+.entry-type-abbr-sub {color: rgb(0,0,0); }
+.entry               {color: rgb(0,0,0); }
+.entryref-primary-minor {color: rgb(0,0,0); }
+.entryref-type-minor {color: rgb(0,0,0); }
+.example-minor	   {color: rgb(0,0,0); }
+.example-sub	   {color: rgb(0,0,0); }
+.example             {color: rgb(0,0,0); }
+.example :after      {color: rgb(0,0,0); }
+.example :before     {color: rgb(0,0,0); }
+.example > .xitem + .xitem :before {color: rgb(0,0,0); }
+.grammatical-info	   {color: rgb(0,0,0); }
+.grammatical-info-minor {color: rgb(0,0,0); }
+.grammatical-info-sub {color: rgb(0,0,0); }
+.grammaticalinfo     {color: rgb(0,0,0); }
+.grammaticalinfo :after {color: rgb(0,0,0); }
+.headword-minor	   {color: rgb(0,0,0); }
+.headword-sub	   {color: rgb(0,0,0); }
+.headword            {color: rgb(0,0,0); }
+.headword :after     {color: rgb(0,0,0); }
+.headword > .xitem + .xitem :before {color: rgb(0,0,0); }
+.headwordminor       {color: rgb(0,0,0); }
+.headwordminor :after {color: rgb(0,0,0); }
+.headwordminor > .xitem + .xitem :before {color: rgb(0,0,0); }
+.letHead             {color: rgb(0,0,0); }
+.letter              {color: rgb(0,0,0); }
+.LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub {color: rgb(0,0,0); }
+.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub {color: rgb(0,0,0); }
+.LexEntrypublishStemParaHomographNumber :after {color: rgb(0,0,0); }
+.LexEntrypublishStemParaHomographNumber {color: rgb(0,0,0); }
+.LexEntryRef-publishRootSubEntryType-RootSubEntryType {color: rgb(0,0,0); }
+.LexEntryType-publishRootMinorEntryType-AbbreviationPub {color: rgb(0,0,0); }
+.LexEntryType-publishStemMinorEntryType-AbbreviationPub {color: rgb(0,0,0); }
+.lexref-targets 	   {color: rgb(0,0,0); }
+.lexref-targets-sub  {color: rgb(0,0,0); }
+.lexref-type	   {color: rgb(0,0,0); }
+.lexref-type-sub	   {color: rgb(0,0,0); }
+.lexreftype          {color: rgb(0,0,0); }
+.lexreftype :after   {color: rgb(0,0,0); }
+.mainentryref        {color: rgb(0,0,0); }
+.mainentryref > .xitem + .xitem :before {color: rgb(0,0,0); }
+.mainentryrefminor   {color: rgb(0,0,0); }
+.mainentryrefminor > .xitem + .xitem :before {color: rgb(0,0,0); }
+.partofspeech        {color: rgb(0,0,0); }
+.partofspeech-minor  {color: rgb(0,0,0); }
+.partofspeech-sub    {color: rgb(0,0,0); }
+.pictureCaption      {color: rgb(0,0,0); }
+.primaryrefs-minor   {color: rgb(0,0,0); }
+.pronunciation-minor {color: rgb(0,0,0); }
+.pronunciation-sub   {color: rgb(0,0,0); }
+.pronunciation       {color: rgb(0,0,0); }
+.pronunciationminor  {color: rgb(0,0,0); }
+.pronunciationminor > .xitem + .xitem :before {color: rgb(0,0,0); }
+.revEntry            {color: rgb(0,0,0); }
+.revHeader           {color: rgb(0,0,0); }
+.scientific-name     {color: rgb(0,0,0); }
+.semantic-domain-abbr-sub {color: rgb(0,0,0); }
+.semantic-domain-name-sub {color: rgb(0,0,0); }
+.semantic-domains-sub {color: rgb(0,0,0); }
+.sense-crossref      {color: rgb(0,0,0); }
+.sense-crossref-sub  {color: rgb(0,0,0); }
+.sense               {color: rgb(0,0,0); }
+.sensecomplexentryform {color: rgb(0,0,0); }
+.sensecrossref       {color: rgb(0,0,0); }
+.sensecrossref > .xitem + .xitem :before {color: rgb(0,0,0); }
+.sensemainentryref   {color: rgb(0,0,0); }
+.sensemainentryref > .xitem + .xitem :before {color: rgb(0,0,0); }
+.slot-name           {color: rgb(0,0,0); }
+.subentry            {color: rgb(0,0,0); }
+.subentry-type       {color: rgb(0,0,0); }
+.translation-minor   {color: rgb(0,0,0); }
+.translation-sub     {color: rgb(0,0,0); }
+.translation         {color: rgb(0,0,0); }
+.translation :after  {color: rgb(0,0,0); }
+.translation > .xitem + .xitem :before {color: rgb(0,0,0); }
+.variantrefform      {color: rgb(0,0,0); }
 .xhomographnumber { color: rgb(0,0,0); }
 .xlanguagetag     { color: rgb(0,0,0); }
 .xsensenumber     { color: rgb(0,0,0); }

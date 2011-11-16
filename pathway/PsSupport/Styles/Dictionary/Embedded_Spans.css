@@ -1,18 +1,14 @@
 /* Embedded_Spans.css */
 .xitem [lang='tpi'] {
-       font-family: "Charis SIL" serif;
-       font-style: italic;
+font-style: italic;
 }
 .xitem [lang='bzh-fonipa'] {
-       font-family: "Charis SIL" serif;
 }
 
 
 span [lang='bzh'] {
-       font-family: "Charis SIL" serif;
-       font-weight: bold;
+font-weight: bold;
 }
 span [lang='tpi'] {
-       font-family: "Charis SIL" serif;
-       font-style: italic;
+font-style: italic;
 }
