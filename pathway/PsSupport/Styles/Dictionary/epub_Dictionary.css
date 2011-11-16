@@ -119,6 +119,7 @@ padding-right: 5px;
 .revhomographnumber {
     vertical-align: sub;
 }
+.pronunciations,
 .senses {
     margin-left: 0;
     padding-left: 0;
@@ -140,6 +141,7 @@ padding-right: 5px;
     padding-left: 0.5em;
 }
 .definition_L2,
+.pronunciations,
 .sense-complexform-form,
 .pronunciation,
 .pronunciation-minor,

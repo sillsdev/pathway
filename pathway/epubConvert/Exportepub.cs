@@ -907,6 +907,18 @@ namespace SIL.PublishingSolution
             // final step - run the updated xslt file
             foreach (var xhtmlFile in xhtmlFiles)
             {
+                if (cssFile.Contains("FlexRev"))
+                {
+                    // running against reversal index files - skip the main ones
+                    if (xhtmlFile.Contains("PartFile"))
+                        continue;
+                }
+                else
+                {
+                    // running against the main files - skip the reversal index ones
+                    if (xhtmlFile.Contains("RevIndex"))
+                        continue;
+                }
                 inProcess.SetStatus("Folding punctuation into XHTML: " + xhtmlFile);
                 Common.XsltProcess(xhtmlFile, tempXslt, Path.GetExtension(xhtmlFile) + ".tmp");
                 // replace the original file
