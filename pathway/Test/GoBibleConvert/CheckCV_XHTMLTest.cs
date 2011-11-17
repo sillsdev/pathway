@@ -99,7 +99,7 @@ namespace Test.GoBibleConvert
             Restructure(projInfo, inProcess);
             Assert.AreEqual(Path.GetDirectoryName(outputFullName), processFolder);
             string expectedRestructuredFullName = _testFiles.Expected(restructuredFileName);
-            Assert.AreEqual(expectedRestructuredFullName, restructuredFullName);
+            Assert.AreEqual(Path.GetFileName(expectedRestructuredFullName), Path.GetFileName(restructuredFullName));
             mocks.VerifyAllExpectationsHaveBeenMet();
         }
 

@@ -296,8 +296,20 @@ namespace SIL.PublishingSolution
             string temporaryCvFullName = Common.PathCombine(processFolder, cvFileName + ".xhtml");
             string projectPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             restructuredFullName = Path.Combine(projectPath, cvFileName + ".xhtml");
-            if (restructuredFullName != temporaryCvFullName)
-                File.Copy(temporaryCvFullName, restructuredFullName, true);
+
+            // EDB 11/17/11: replaced with block below (remove BOM)
+            //if (restructuredFullName != temporaryCvFullName)
+            //    File.Copy(temporaryCvFullName, restructuredFullName, true);
+
+            // remove the BOM for the GoBibleCreator process (per David Haslam)
+            var utf8WithoutBom = new UTF8Encoding(false);
+            string noBom = Path.Combine(Path.GetDirectoryName(restructuredFullName), "noBom.xhtml");
+            var reader = new StreamReader(temporaryCvFullName);
+            var writer = new StreamWriter(noBom, false, utf8WithoutBom);
+            writer.Write(reader.ReadToEnd());
+            reader.Close();
+            writer.Close();
+            File.Copy(noBom, restructuredFullName, true);
         }
 
         protected int Chapters(string name)
