@@ -722,14 +722,21 @@ namespace SIL.PublishingSolution
         /// <param name="val"></param>
         public static void SetValue(string id, string val)
         {
-            val = Common.DirectoryPathReplaceWithSlash(val);
-            Debug.Assert(Value.ContainsKey(id), "Invalid id: " + id);
-            if (Value[id] == val) return;
-            Value[id] = val;
-            var node = xmlMap.SelectSingleNode(string.Format("stylePick/settings/property[@name=\"{0}\"]", id));
-            Debug.Assert(node != null);
-            var valueAttr = node.Attributes.GetNamedItem("value");
-            valueAttr.Value = val;
+            try
+            {
+                val = Common.DirectoryPathReplaceWithSlash(val);
+                Debug.Assert(Value.ContainsKey(id), "Invalid id: " + id);
+                if (Value[id] == val) return;
+                Value[id] = val;
+                var node = xmlMap.SelectSingleNode(string.Format("stylePick/settings/property[@name=\"{0}\"]", id));
+                Debug.Assert(node != null);
+                var valueAttr = node.Attributes.GetNamedItem("value");
+                valueAttr.Value = val;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unable to set value (name=" + id + ", value=" + val + ")", ex);
+            }
         }
 
         /// <summary>
@@ -739,14 +746,21 @@ namespace SIL.PublishingSolution
         /// <param name="val"></param>
         public static void SetDefaultValue(string id, string val)
         {
-            val = Common.DirectoryPathReplaceWithSlash(val);
-            Debug.Assert(DefaultValue.ContainsKey(id), "Invalid id: " + id);
-            if (DefaultValue[id] == val) return;
-            DefaultValue[id] = val;
-            var node = xmlMap.SelectSingleNode(string.Format("stylePick/defaultSettings/property[@name=\"{0}\"]", id));
-            Debug.Assert(node != null);
-            var valueAttr = node.Attributes.GetNamedItem("value");
-            valueAttr.Value = val;
+            try
+            {
+                val = Common.DirectoryPathReplaceWithSlash(val);
+                Debug.Assert(DefaultValue.ContainsKey(id), "Invalid id: " + id);
+                if (DefaultValue[id] == val) return;
+                DefaultValue[id] = val;
+                var node = xmlMap.SelectSingleNode(string.Format("stylePick/defaultSettings/property[@name=\"{0}\"]", id));
+                Debug.Assert(node != null);
+                var valueAttr = node.Attributes.GetNamedItem("value");
+                valueAttr.Value = val;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unable to set default value (name=" + id + ", value=" + val + ")", ex);
+            }
         }
 
         /// <summary>
@@ -1330,22 +1344,29 @@ namespace SIL.PublishingSolution
         /// <param name="Value">Value to set as Current Value</param>
         public static void UpdateMetadataValue(string Name, string Value)
         {
-            XmlNode node = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/currentValue");
-            var newValue = (Value.Trim().Length > 0) ? Value.Trim() : " ";
-            if (node == null)
+            try
             {
-                // currentValue node doesn't exist yet - create it now
-                XmlNode baseNode = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']");
-                var childNode = xmlMap.CreateNode(XmlNodeType.Element, "currentValue", "");
-                childNode.InnerText = XmlConvert.EncodeName(newValue);
-                baseNode.AppendChild(childNode);
-                Write();
+                XmlNode node = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/currentValue");
+                var newValue = (Value.Trim().Length > 0) ? Value.Trim() : " ";
+                if (node == null)
+                {
+                    // currentValue node doesn't exist yet - create it now
+                    XmlNode baseNode = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']");
+                    var childNode = xmlMap.CreateNode(XmlNodeType.Element, "currentValue", "");
+                    childNode.InnerText = XmlConvert.EncodeName(newValue);
+                    baseNode.AppendChild(childNode);
+                    Write();
+                }
+                else
+                {
+                    // mode is there - just set the value
+                    node.InnerText = XmlConvert.EncodeName(newValue);
+                    Write();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                // mode is there - just set the value
-                node.InnerText = XmlConvert.EncodeName(newValue);
-                Write();
+                throw new Exception("Unable to update Metadata Value (Name=" + Name + ", Value=" + Value + ")", ex);
             }
         }
         #endregion Metadata methods
