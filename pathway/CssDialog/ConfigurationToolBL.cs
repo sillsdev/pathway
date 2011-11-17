@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Text;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -801,13 +802,15 @@ namespace SIL.PublishingSolution
             ParseCSS(path, Param.Value["InputType"]);
             //SetDefaultCSSValue(path, Param.Value["InputType"]);
 
-            double left = Math.Round(double.Parse(MarginLeft), 0);
+            double left = MarginLeft.Length > 0
+                              ? Math.Round(double.Parse(MarginLeft, CultureInfo.GetCultureInfo("en-US")), 0)
+                              : 0;
             cTool.TxtPageInside.Text = left + "pt";
-            double right = Math.Round(double.Parse(MarginRight), 0);
+            double right = MarginRight.Length > 0 ? Math.Round(double.Parse(MarginRight, CultureInfo.GetCultureInfo("en-US")), 0) : 0;
             cTool.TxtPageOutside.Text = right + "pt";
-            double top = Math.Round(double.Parse(MarginTop), 0);
+            double top = MarginTop.Length > 0 ? Math.Round(double.Parse(MarginTop, CultureInfo.GetCultureInfo("en-US")), 0) : 0;
             cTool.TxtPageTop.Text = top + "pt";
-            double bottom = Math.Round(double.Parse(MarginBottom), 0);
+            double bottom = MarginBottom.Length > 0 ? Math.Round(double.Parse(MarginBottom, CultureInfo.GetCultureInfo("en-US")), 0) : 0;
             cTool.TxtPageBottom.Text = bottom + "pt";
 
             cTool.TxtPageGutterWidth.Text = GutterWidth;
