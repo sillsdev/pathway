@@ -45,6 +45,7 @@ namespace SIL.PublishingSolution
                                   };
             var backendPath = Common.ProgInstall;
             var exportType = "OpenOffice/LibreOffice";
+            bool bOutputSpecified = false;
             var files = new List<string>();
             bool bShowDialog = false;
             try
@@ -112,6 +113,7 @@ namespace SIL.PublishingSolution
                         case "-t":
                             //Note: If export type is more than one word, quotes must be used
                             exportType = args[i++];
+                            bOutputSpecified = true;
                             break;
                         case "--input":
                         case "-i":
@@ -137,7 +139,17 @@ namespace SIL.PublishingSolution
                 }
 
                 Common.ProgBase = Common.GetPSApplicationPath();
+                // load settings from the settings file
                 Param.LoadSettings();
+                Param.Value[Param.InputType] = projectInfo.ProjectInputType;
+                Param.LoadSettings();
+                if (bOutputSpecified)
+                {
+                    // the user has specified an output -- update the settings so we export to that output
+                    Param.SetDefaultValue(Param.PrintVia, exportType);
+                    Param.SetValue(Param.PrintVia, exportType);
+                    Param.Write();
+                }
 
                 // if the caller wants to display the Export Through Pathway dialog, do it now.
                 if (bShowDialog)
@@ -329,16 +341,23 @@ namespace SIL.PublishingSolution
 
             // try to find the stylesheet associated with this project (*.sty)
             var tmpFiles = Directory.GetFiles(projInfo.ProjectPath, "*.sty");
-            string styFile;
+            string styFile = null;
             if (tmpFiles.Length == 0)
             {
                 // not here - check in the "gather" subdirectory
                 tmpFiles = Directory.GetFiles(Path.Combine(projInfo.ProjectPath, "gather"), "*.sty");
-                styFile = Path.Combine(Path.Combine(projInfo.ProjectPath, "gather"), tmpFiles[0]);
+                if (tmpFiles.Length > 0)
+                {
+                    styFile = Path.Combine(Path.Combine(projInfo.ProjectPath, "gather"), tmpFiles[0]);
+                }
             }
             else
             {
                 styFile = Path.Combine(projInfo.ProjectPath, tmpFiles[0]);
+            }
+            if (styFile == null)
+            {
+                throw new Exception("USFM style file (*.sty) not found. Please make sure this file is in your project directory.");
             }
             // Work on the USFM data
             // first convert to USX);

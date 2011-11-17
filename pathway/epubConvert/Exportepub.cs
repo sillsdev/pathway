@@ -984,7 +984,7 @@ namespace SIL.PublishingSolution
                 {
                     // match the bracket count until we get back to 0 -- this will mark the end of the css block
                     int bracketCount = 1;
-                    while (bracketCount != 0)
+                    while (bracketCount != 0 && !reader.EndOfStream)
                     {
                         var nextChar = (char)reader.Read();
                         switch (nextChar)
