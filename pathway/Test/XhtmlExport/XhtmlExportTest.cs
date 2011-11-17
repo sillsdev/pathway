@@ -247,7 +247,7 @@ namespace Test.XhtmlExport
         [Category("SkipOnTeamCity")]
         public void NkonyaSampleOpenOfficeTest()
         {
-            PathawyB("Nkonya Sample", "Scripture Draft", "Scripture", "OpenOffice/LibreOffice");
+            PathawyB("Nkonya Sample", "Nkonya Sample", "Scripture", "OpenOffice/LibreOffice");
         }
         #endregion Nkonya Sample Open Office
 
