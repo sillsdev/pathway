@@ -164,7 +164,8 @@ namespace SIL.PublishingSolution
         /// <returns>Reversal name with path</returns>
         protected static string GetRevFullName(string outDir)
         {
-            string revFullName = Common.PathCombine(Path.GetDirectoryName(outDir), "FlexRev.xhtml");
+            //string revFullName = Common.PathCombine(Path.GetDirectoryName(outDir), "FlexRev.xhtml");
+            string revFullName = Common.PathCombine(outDir, "FlexRev.xhtml");
             if (!File.Exists(revFullName))
                 revFullName = outDir;
             else
