@@ -792,13 +792,17 @@ namespace SIL.Tool
         {
             if (!File.Exists(_xhtmlFileNameWithPath)) return;
             // FWR-3903
-            Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "<LexEntryLink_HeadWordRef", "<span class='LexEntryLink_HeadWordRef'");
-            Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "</LexEntryLink_HeadWordRef", "</span");
-            Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "<AStr ws", "<span lang");
-            Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "</AStr", "</span");
-            Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "<Run ws", "<span lang");
-            Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "namedStyle", "class");
-            Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "</Run", "</span");
+            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+            {
+                Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "<LexEntryLink_HeadWordRef",
+                                           "<span class='LexEntryLink_HeadWordRef'");
+                Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "</LexEntryLink_HeadWordRef", "</span");
+                Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "<AStr ws", "<span lang");
+                Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "</AStr", "</span");
+                Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "<Run ws", "<span lang");
+                Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "namedStyle", "class");
+                Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "</Run", "</span");
+            }
             // FWR-3903
 
         }
