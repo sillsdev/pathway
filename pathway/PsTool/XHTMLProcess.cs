@@ -1550,7 +1550,7 @@ namespace SIL.PublishingSolution
                 {
                     if (IdAllClass[ancestor].ContainsKey(fontPointSize))
                     {
-                        fontSize = float.Parse(IdAllClass[ancestor][fontPointSize].Replace("pt", ""));
+                        fontSize = float.Parse(IdAllClass[ancestor][fontPointSize].Replace("pt", ""), CultureInfo.GetCultureInfo("en-US"));
                         break;
                     }
                 }
@@ -1574,7 +1574,7 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    fontSize = float.Parse(currentFontSize.Replace("pt", ""));
+                    fontSize = float.Parse(currentFontSize.Replace("pt", ""), CultureInfo.GetCultureInfo("en-US"));
                 }
             }
 

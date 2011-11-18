@@ -14,6 +14,8 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
+using System.Globalization;
+
 namespace SIL.PublishingSolution
 {
     public class StyleAttribute
@@ -178,7 +180,7 @@ namespace SIL.PublishingSolution
             Name = attributeName;
             if (chars.Length > 0)
             {
-                NumericValue = float.Parse(chars);
+                NumericValue = float.Parse(chars, CultureInfo.GetCultureInfo("en-US"));
             }
             else
             {

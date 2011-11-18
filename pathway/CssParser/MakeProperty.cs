@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 using System.Drawing;
@@ -548,8 +549,8 @@ namespace SIL.PublishingSolution
         private void Size(StyleAttribute styleAttributeInfo)
         {
             string[] parameters = styleAttributeInfo.StringValue.Split(',');
-            _cssProperty["page-width"] = Math.Round(double.Parse(Common.UnitConverter(parameters[0] + parameters[1])),9).ToString();
-            _cssProperty["page-height"] = Math.Round(double.Parse(Common.UnitConverter(parameters[2] + parameters[3])),9).ToString();
+            _cssProperty["page-width"] = Math.Round(double.Parse(Common.UnitConverter(parameters[0] + parameters[1]), CultureInfo.GetCultureInfo("en-US")), 9).ToString(CultureInfo.GetCultureInfo("en-US"));
+            _cssProperty["page-height"] = Math.Round(double.Parse(Common.UnitConverter(parameters[2] + parameters[3]), CultureInfo.GetCultureInfo("en-US")), 9).ToString(CultureInfo.GetCultureInfo("en-US"));
         }
 
         /// <summary>

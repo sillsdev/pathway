@@ -17,6 +17,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace SIL.PublishingSolution
 {
@@ -106,17 +107,17 @@ namespace SIL.PublishingSolution
             float frameHeight = 15f;
             Dictionary<string, string> classValues = _cssProperty[_pageClass];
 
-            float halfWidth = float.Parse(classValues["Page-Width"]) / 2;
-            _x1 = halfWidth - float.Parse(classValues["Margin-Left"]);
+            float halfWidth = float.Parse(classValues["Page-Width"], CultureInfo.GetCultureInfo("en-US")) / 2;
+            _x1 = halfWidth - float.Parse(classValues["Margin-Left"], CultureInfo.GetCultureInfo("en-US"));
 
-            float halfHeight = float.Parse(classValues["Page-Height"]) / 2;
-            yt1 = halfHeight - float.Parse(classValues["Margin-Top"]);
+            float halfHeight = float.Parse(classValues["Page-Height"], CultureInfo.GetCultureInfo("en-US")) / 2;
+            yt1 = halfHeight - float.Parse(classValues["Margin-Top"], CultureInfo.GetCultureInfo("en-US"));
 
-            ytr =yt1 += float.Parse(classValues["Margin-Top"]) / 2;  // 4 inch = place header in 2 inch - Heade to center
+            ytr = yt1 += float.Parse(classValues["Margin-Top"], CultureInfo.GetCultureInfo("en-US")) / 2;  // 4 inch = place header in 2 inch - Heade to center
             yt2 = ybl = yt1 + frameHeight;
 
-            float y = halfHeight - float.Parse(classValues["Margin-Bottom"]);
-            float yb1 = y + float.Parse(classValues["Margin-Bottom"]) / 2;  // 4 inch = place header in 2 inch - Heade to center
+            float y = halfHeight - float.Parse(classValues["Margin-Bottom"], CultureInfo.GetCultureInfo("en-US"));
+            float yb1 = y + float.Parse(classValues["Margin-Bottom"], CultureInfo.GetCultureInfo("en-US")) / 2;  // 4 inch = place header in 2 inch - Heade to center
             float yb2 = yb1 + frameHeight;
 
             float x2 = _x1 - float.Parse(headerFooterWidth);
@@ -326,14 +327,17 @@ namespace SIL.PublishingSolution
 
         private string GetColumnPosition()
         {
-            float colPosition = float.Parse(_cssProperty[_pageClass]["Page-Width"]) - (float.Parse(_cssProperty[_pageClass]["Margin-Top"]) + float.Parse(_cssProperty[_pageClass]["Margin-Right"]));
+            float colPosition = float.Parse(_cssProperty[_pageClass]["Page-Width"], CultureInfo.GetCultureInfo("en-US"))
+                - (float.Parse(_cssProperty[_pageClass]["Margin-Top"], CultureInfo.GetCultureInfo("en-US"))
+                + float.Parse(_cssProperty[_pageClass]["Margin-Right"], CultureInfo.GetCultureInfo("en-US")));
             return colPosition.ToString();
         }
 
         private string GetHeaderFooterWidth()
         {
-            float pageWidthNoMargin = (float.Parse(_cssProperty[_pageClass]["Page-Width"]) -
-                                       (float.Parse(_cssProperty[_pageClass]["Margin-Left"]) + float.Parse(_cssProperty[_pageClass]["Margin-Right"])));
+            float pageWidthNoMargin = (float.Parse(_cssProperty[_pageClass]["Page-Width"], CultureInfo.GetCultureInfo("en-US")) -
+                                       (float.Parse(_cssProperty[_pageClass]["Margin-Left"], CultureInfo.GetCultureInfo("en-US")) +
+                                       float.Parse(_cssProperty[_pageClass]["Margin-Right"], CultureInfo.GetCultureInfo("en-US"))));
             return (pageWidthNoMargin / 3F).ToString();
         }
 
@@ -344,13 +348,13 @@ namespace SIL.PublishingSolution
         {
             Dictionary<string, string> classValues = _cssProperty[_pageClass];
 
-            float halfWidth = float.Parse(classValues["Page-Width"]) / 2;
-            float xPosLeft = halfWidth - float.Parse(classValues["Margin-Left"]);
-            float xPosRight = halfWidth - float.Parse(classValues["Margin-Right"]);
+            float halfWidth = float.Parse(classValues["Page-Width"], CultureInfo.GetCultureInfo("en-US")) / 2;
+            float xPosLeft = halfWidth - float.Parse(classValues["Margin-Left"], CultureInfo.GetCultureInfo("en-US"));
+            float xPosRight = halfWidth - float.Parse(classValues["Margin-Right"], CultureInfo.GetCultureInfo("en-US"));
 
-            float halfHeight = float.Parse(classValues["Page-Height"]) / 2;
-            float yPosTop = halfHeight - float.Parse(classValues["Margin-Top"]);
-            float yPosBottom = halfHeight - float.Parse(classValues["Margin-Bottom"]);
+            float halfHeight = float.Parse(classValues["Page-Height"], CultureInfo.GetCultureInfo("en-US")) / 2;
+            float yPosTop = halfHeight - float.Parse(classValues["Margin-Top"], CultureInfo.GetCultureInfo("en-US"));
+            float yPosBottom = halfHeight - float.Parse(classValues["Margin-Bottom"], CultureInfo.GetCultureInfo("en-US"));
 
             _writer.WriteStartElement("Properties");
             _writer.WriteStartElement("PathGeometry");
@@ -466,8 +470,8 @@ namespace SIL.PublishingSolution
 
         private void CreateMarginPreferenceforMasterPage()
         {
-            float top = float.Parse(_cssProperty[_pageClass]["Margin-Top"]);
-            float bottom = float.Parse(_cssProperty[_pageClass]["Margin-Bottom"]);
+            float top = float.Parse(_cssProperty[_pageClass]["Margin-Top"], CultureInfo.GetCultureInfo("en-US"));
+            float bottom = float.Parse(_cssProperty[_pageClass]["Margin-Bottom"], CultureInfo.GetCultureInfo("en-US"));
 
             _writer.WriteStartElement("MarginPreference");
             _writer.WriteAttributeString("ColumnCount", "1");

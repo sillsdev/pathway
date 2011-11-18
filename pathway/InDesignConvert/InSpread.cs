@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections;
+using System.Globalization;
 using System.IO;
 using System.Collections.Generic;
 
@@ -174,10 +175,12 @@ namespace SIL.PublishingSolution
         {
             _writer.WriteStartElement("PathPointArray");
             Dictionary<string, string> classValues = _idAllClass[_pageClass];
-            float xPos = (float.Parse(classValues["Page-Width"]) -
-                          (float.Parse(classValues["Margin-Left"]) + float.Parse(classValues["Margin-Right"]))) / 2;
-            float yPos = (float.Parse(classValues["Page-Height"]) -
-                          (float.Parse(classValues["Margin-Top"]) + float.Parse(classValues["Margin-Bottom"]))) / 2;
+            float xPos = (float.Parse(classValues["Page-Width"], CultureInfo.GetCultureInfo("en-US")) -
+                          (float.Parse(classValues["Margin-Left"], CultureInfo.GetCultureInfo("en-US")) +
+                          float.Parse(classValues["Margin-Right"], CultureInfo.GetCultureInfo("en-US")))) / 2;
+            float yPos = (float.Parse(classValues["Page-Height"], CultureInfo.GetCultureInfo("en-US")) -
+                          (float.Parse(classValues["Margin-Top"], CultureInfo.GetCultureInfo("en-US")) +
+                          float.Parse(classValues["Margin-Bottom"], CultureInfo.GetCultureInfo("en-US")))) / 2;
             if (_useMasterGrid)
             {
                 yPos = yPos - 35f;
@@ -386,7 +389,7 @@ namespace SIL.PublishingSolution
                         if(_useMasterGrid)
                         {
                             //top = (float.Parse(_idAllClass[_pageClass]["Margin-Top"]) + 35F).ToString();
-                            top = (float.Parse(_idAllClass[_pageClass]["Margin-Top"])).ToString();
+                            top = (float.Parse(_idAllClass[_pageClass]["Margin-Top"], CultureInfo.GetCultureInfo("en-US"))).ToString();
                         }
                         _writer.WriteAttributeString("Top", top);
                         break;
@@ -395,7 +398,7 @@ namespace SIL.PublishingSolution
                         if (_useMasterGrid)
                         {
                             //bottom = (float.Parse(_idAllClass[_pageClass]["Margin-Bottom"]) + 35F).ToString();
-                            bottom = (float.Parse(_idAllClass[_pageClass]["Margin-Bottom"])).ToString();
+                            bottom = (float.Parse(_idAllClass[_pageClass]["Margin-Bottom"], CultureInfo.GetCultureInfo("en-US"))).ToString();
                         }
                         _writer.WriteAttributeString("Bottom", bottom);
                         break;
@@ -412,7 +415,9 @@ namespace SIL.PublishingSolution
                         _writer.WriteAttributeString("TextColumnCount", pageProperty[propertyName]);
                         break;
                     case "Page-Width":
-                        float colPosition = float.Parse(pageProperty[propertyName]) - (float.Parse(pageProperty["Margin-Top"]) + float.Parse(pageProperty["Margin-Right"]));
+                        float colPosition = float.Parse(pageProperty[propertyName], CultureInfo.GetCultureInfo("en-US")) 
+                            - (float.Parse(pageProperty["Margin-Top"], CultureInfo.GetCultureInfo("en-US")) 
+                            + float.Parse(pageProperty["Margin-Right"], CultureInfo.GetCultureInfo("en-US")));
                         _writer.WriteAttributeString("ColumnsPositions", "0 " + colPosition);
                         break;
                 }

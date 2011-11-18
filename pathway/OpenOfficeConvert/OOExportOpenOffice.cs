@@ -17,6 +17,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows.Forms;
 using System.IO;
 using System.Xml;
@@ -886,13 +887,13 @@ namespace SIL.PublishingSolution
                 try
                 {
                     if (cssClass["@page"].ContainsKey("page-width"))
-                        pageWidth = Convert.ToDouble(cssClass["@page"]["page-width"]);
+                        pageWidth = Convert.ToDouble(cssClass["@page"]["page-width"], CultureInfo.GetCultureInfo("en-US"));
 
                     if (cssClass["@page"].ContainsKey("margin-left"))
-                        pageMarginLeft = Convert.ToDouble(cssClass["@page"]["margin-left"]);
+                        pageMarginLeft = Convert.ToDouble(cssClass["@page"]["margin-left"], CultureInfo.GetCultureInfo("en-US"));
 
                     if (cssClass["@page"].ContainsKey("margin-right"))
-                        pageMarginRight = Convert.ToDouble(cssClass["@page"]["margin-right"]);
+                        pageMarginRight = Convert.ToDouble(cssClass["@page"]["margin-right"], CultureInfo.GetCultureInfo("en-US"));
 
                     pageWidth = pageWidth - (pageMarginLeft + pageMarginRight);
                     pictureWidth = Convert.ToInt32(pageWidth);

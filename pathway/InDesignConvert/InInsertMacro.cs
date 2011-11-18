@@ -148,10 +148,10 @@ namespace SIL.PublishingSolution
             {
                 if (pair.Key.ToLower().IndexOf("lethead") >= 0)
                 {
-                    float topValue = float.Parse(Common.UnitConverter(pair.Value[0].ToString() + "pt", "pc"));
-                    float rightValue = float.Parse(Common.UnitConverter(pair.Value[1].ToString() + "pt", "pc"));
-                    float bottomValue = float.Parse(Common.UnitConverter(pair.Value[2].ToString() + "pt", "pc"));
-                    float leftValue = float.Parse(Common.UnitConverter(pair.Value[3].ToString() + "pt", "pc"));
+                    float topValue = float.Parse(Common.UnitConverter(pair.Value[0].ToString() + "pt", "pc"), CultureInfo.GetCultureInfo("en-US"));
+                    float rightValue = float.Parse(Common.UnitConverter(pair.Value[1].ToString() + "pt", "pc"), CultureInfo.GetCultureInfo("en-US"));
+                    float bottomValue = float.Parse(Common.UnitConverter(pair.Value[2].ToString() + "pt", "pc"), CultureInfo.GetCultureInfo("en-US"));
+                    float leftValue = float.Parse(Common.UnitConverter(pair.Value[3].ToString() + "pt", "pc"), CultureInfo.GetCultureInfo("en-US"));
 
                     margin = margin + pair.Key + "\", \"" + topValue + "\", \"" + rightValue + "\", \"" +
                     bottomValue + "\", \"" + leftValue + "\", \"";
