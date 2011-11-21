@@ -124,6 +124,9 @@
 					Key="Software\SIL\Pathway"/>
 				<Registry Root="HKLM" Action="write" Key="Software\SIL\Pathway" Name="PathwayDir"
 					Type="string" Value="[INSTALLDIR]"/>
+				<!-- cf. http://msdn.microsoft.com/en-us/library/aa367992.aspx -->
+				<Registry Root="HKLM" Action="write" Key="Software\SIL\Pathway" Name="WritingSystemStore"
+					Type="string" Value="[CommonAppDataFolder]SIL\WritingSystemStore\"/>
 			</Component>
 		</DirectoryRef>
 	</Product>
