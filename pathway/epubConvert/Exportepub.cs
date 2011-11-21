@@ -1559,12 +1559,12 @@ namespace SIL.PublishingSolution
                     if (langCoun.Length < 2)
                     {
                         // try the language (no country code) (e.g, "en" for "en-US")
-                        wsPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/WritingSystemStore/" + langCoun[0] + ".ldml");
+                        wsPath = Common.PathCombine(Common.GetLDMLPath(), langCoun[0] + ".ldml");
                     }
                     else
                     {
                         // try the whole language expression (e.g., "ggo-Telu-IN")
-                        wsPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/WritingSystemStore/" + language + ".ldml");
+                        wsPath = Common.PathCombine(Common.GetLDMLPath(), language + ".ldml");
                     }
                     if (File.Exists(wsPath))
                     {

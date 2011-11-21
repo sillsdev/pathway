@@ -950,6 +950,23 @@ namespace Test.PsTool
             XmlAssert.AreEqual(expected, actual, "Scripture migration test failed");
         }
 
+        #region LanguageTests
+        [Test]
+        public void GetTextDirection()
+        {
+            string NkonyaCode = "nko";
+            string SenaCode = "seh";
+            string ArabicCode = "ar";
+            string actual = Common.GetTextDirection(NkonyaCode);
+            Assert.AreEqual("ltr", actual);
+            actual = Common.GetTextDirection(SenaCode);
+            Assert.AreEqual("ltr", actual);
+            actual = Common.GetTextDirection(ArabicCode);
+            Assert.AreEqual("rtl", actual);
+        }
+
+       #endregion
+
         #region PathCombine
         ///A test for PathCombine
         ///</summary>
