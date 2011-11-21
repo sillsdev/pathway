@@ -952,6 +952,7 @@ namespace Test.PsTool
 
         #region LanguageTests
         [Test]
+        [Category("SkipOnTeamCity")]
         public void GetTextDirection()
         {
             string NkonyaCode = "nko";
