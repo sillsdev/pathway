@@ -74,6 +74,12 @@
     border-right: medium solid white;
 	width: 20%;
 }
+.col1top {
+    text-align: right;
+    border: medium none white;
+    border-right: medium solid white;
+	width: 20%;
+}
 .col2data {
     text-align: left;
 	width: 35%;

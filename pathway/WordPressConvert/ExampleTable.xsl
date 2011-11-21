@@ -11,7 +11,7 @@
     ################################################################-->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     version="1.0" xmlns:x="http://www.w3.org/1999/xhtml">
-    <xsl:param name="GraphicPath">wp-content/icons/</xsl:param>
+    <xsl:param name="GraphicPath">http://pathway.sil.org/cherokeedemo/wp-content/icons/</xsl:param>
     
     <xsl:output encoding="UTF-8" method="xml" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" 
         doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"/>
@@ -61,7 +61,7 @@
     <xsl:template match="x:div[@class = 'letHead']">
     </xsl:template>
     
-    <!-- We want to remove the letHead and letData level of the hierarchy. -->
+    <!-- We want to remove the letData level of the hierarchy. -->
     <xsl:template match="x:div[@class = 'letData']">
         <xsl:apply-templates select="node()"/>
     </xsl:template>
@@ -154,8 +154,7 @@
                         <!-- xsl:attribute name="width">100%</xsl:attribute -->
                         <xsl:attribute name="style">border:2pt solid red;border-bottom:0;color:red;</xsl:attribute>
                         <xsl:element name="td" namespace="http://www.w3.org/1999/xhtml">
-                            <xsl:attribute name="style">text-align:right;</xsl:attribute>
-                            <xsl:attribute name="class">col1data</xsl:attribute>
+                            <xsl:attribute name="class">col1top</xsl:attribute>
                             <xsl:element name="span" namespace="http://www.w3.org/1999/xhtml">
                                 <xsl:attribute name="class">stemhd</xsl:attribute>
                                 <xsl:text>English entry:</xsl:text>
@@ -178,8 +177,7 @@
                         <!-- xsl:attribute name="width">100%</xsl:attribute -->
                         <xsl:attribute name="style">border:2pt solid red;border-top:0;border-bottom:0;color:red;</xsl:attribute>
                         <xsl:element name="td" namespace="http://www.w3.org/1999/xhtml">
-                            <xsl:attribute name="style">text-align:right;</xsl:attribute>
-                            <xsl:attribute name="class">col1data</xsl:attribute>
+                            <xsl:attribute name="class">col1top</xsl:attribute>
                             <xsl:element name="span" namespace="http://www.w3.org/1999/xhtml">
                                 <xsl:attribute name="class">stemhd</xsl:attribute>
                                 <xsl:text>Cherokee:</xsl:text>
@@ -202,8 +200,7 @@
                         <!-- xsl:attribute name="width">100%</xsl:attribute -->
                         <xsl:attribute name="style">border:2pt solid red;border-top:0;color:red;</xsl:attribute>
                         <xsl:element name="td" namespace="http://www.w3.org/1999/xhtml">
-                            <xsl:attribute name="style">text-align:right;</xsl:attribute>
-                            <xsl:attribute name="class">col1data</xsl:attribute>
+                            <xsl:attribute name="class">col1top</xsl:attribute>
                             <xsl:element name="span" namespace="http://www.w3.org/1999/xhtml">
                                 <xsl:attribute name="class">stemhd</xsl:attribute>
                                 <xsl:text>Stem:</xsl:text>
@@ -249,9 +246,9 @@
                                     <xsl:element name="span" namespace="http://www.w3.org/1999/xhtml">
                                         <xsl:attribute name="class">semantic-domain-name</xsl:attribute>
                                         <xsl:attribute name="lang">
-                                            <xsl:value-of select="x:span/x:span/x:span[@class='LexSense-publishRoot-Semantic--Field']/x:span/@lang"/>
+                                            <xsl:value-of select="x:span/x:span/x:span[@class='LexSense-publishRoot-Semantic--Field']/@lang"/>
                                         </xsl:attribute>
-                                        <xsl:value-of select="x:span/x:span/x:span[@class='LexSense-publishRoot-Semantic--Field']/x:span/text()"/>
+                                        <xsl:value-of select="x:span/x:span/x:span[@class='LexSense-publishRoot-Semantic--Field']//text()"/>
                                     </xsl:element>
                                 </xsl:element>
                             </xsl:element>
@@ -302,22 +299,22 @@
             <xsl:element name="tr" namespace="http://www.w3.org/1999/xhtml">
                 <xsl:element name="td" namespace="http://www.w3.org/1999/xhtml">
                     <xsl:attribute name="class">col1head</xsl:attribute>
-                    <xsl:if test="x:span/x:span[@class='entry-type-abbr-sub']/x:span/text() = 'PRC'">
+                    <xsl:if test="x:span/x:span[@class='entry-type-abbr-sub']//text() = 'PRC'">
                         <xsl:text>Present Continuous</xsl:text>
                     </xsl:if>
-                    <xsl:if test="x:span/x:span[@class='entry-type-abbr-sub']/x:span/text() = 'INC'">
+                    <xsl:if test="x:span/x:span[@class='entry-type-abbr-sub']//text() = 'INC'">
                         <xsl:text>Incompletive</xsl:text>
                     </xsl:if>
-                    <xsl:if test="x:span/x:span[@class='entry-type-abbr-sub']/x:span/text() = 'IMM'">
+                    <xsl:if test="x:span/x:span[@class='entry-type-abbr-sub']//text() = 'IMM'">
                         <xsl:text>Immediate</xsl:text>
                     </xsl:if>
-                    <xsl:if test="x:span/x:span[@class='entry-type-abbr-sub']/x:span/text() = 'CMP'">
+                    <xsl:if test="x:span/x:span[@class='entry-type-abbr-sub']//text() = 'CMP'">
                         <xsl:text>Completive</xsl:text>
                     </xsl:if>
-                    <xsl:if test="x:span/x:span[@class='entry-type-abbr-sub']/x:span/text() = 'DVN'">
+                    <xsl:if test="x:span/x:span[@class='entry-type-abbr-sub']//text() = 'DVN'">
                         <xsl:text>Deverbal Noun</xsl:text>
                     </xsl:if>
-                    <xsl:if test="x:span/x:span[@class='entry-type-abbr-sub']/x:span/text() = 'pl'">
+                    <xsl:if test="x:span/x:span[@class='entry-type-abbr-sub']//text() = 'pl'">
                         <xsl:text>Plural</xsl:text>
                     </xsl:if>
                 </xsl:element>
@@ -341,7 +338,7 @@
             <xsl:element name="tr" namespace="http://www.w3.org/1999/xhtml">
                 <xsl:attribute name="class">
                     <xsl:text>tableRow</xsl:text>
-                    <xsl:value-of select="ancestor-or-self::node()/x:span/x:span[@class='entry-type-abbr-sub']/x:span/text()"/>
+                    <xsl:value-of select="ancestor-or-self::node()/x:span/x:span[@class='entry-type-abbr-sub']//text()"/>
                 </xsl:attribute>
                 <xsl:element name="td" namespace="http://www.w3.org/1999/xhtml">
                     <xsl:attribute name="class">col1data</xsl:attribute>
