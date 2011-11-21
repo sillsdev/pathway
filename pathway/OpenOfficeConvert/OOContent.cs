@@ -1942,15 +1942,21 @@ namespace SIL.PublishingSolution
                 // Setting the Height and Width according css value or the image size
                 if (rectHeight != "0")
                 {
-                    if (rectWidth == "0")
+                    if (rectWidth == "0")        //H=72 W=0
                     {
                         rectWidth = Common.CalcDimension(fromPath, ref rectHeight, 'W');
                     }
 
                 }
-                else if (rectWidth != "0" && rectWidth != "72") // 72 = auto width
+                else if (rectWidth != "0" && rectWidth != "72")         //H=0; W != 0,72 
                 {
                     rectHeight = Common.CalcDimension(fromPath, ref rectWidth, 'H');
+                }
+                else if (rectWidth == "0" && rectHeight == "0")         //H=0; W = 0, 
+                {
+
+                    rectWidth = Convert.ToString(Common.ColumnWidth * .9);
+                    rectHeight =  Common.CalcDimension(fromPath, ref rectWidth, 'H');
                 }
                 else
                 {
