@@ -2,8 +2,8 @@
   <style:style style:name="Sect_columns" style:family="section" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
     <style:section-properties text:dont-balance-text-columns="false" style:editable="false" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0">
       <style:columns fo:column-count="2" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0">
-        <style:column style:rel-width="4.05315*" fo:start-indent="0in" fo:end-indent="0.09842521in" />
-        <style:column style:rel-width="4.05315*" fo:start-indent="0.09842521in" fo:end-indent="0in" />
+        <style:column style:rel-width="2.92815*" fo:start-indent="0in" fo:end-indent="0.09842521in" />
+        <style:column style:rel-width="2.92815*" fo:start-indent="0.09842521in" fo:end-indent="0in" />
       </style:columns>
     </style:section-properties>
   </style:style>
