@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Forms;
 using System.Xml;
+using Microsoft.Win32;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -56,39 +58,43 @@ namespace SIL.PublishingSolution
 		/// ------------------------------------------------------------
 		private void FindStyFile(string database)
         {
-			string ssfFile = database + ".ssf";
-			string ssfFullPath;
-			if (File.Exists("c:\\My Paratext Projects\\" + ssfFile))
-			{
-				ssfFullPath = "c:\\My Paratext Projects\\" + ssfFile;
-			}
-			else if (File.Exists("d:\\My Paratext Projects\\" + ssfFile))
-			{
-				ssfFullPath = "d:\\My Paratext Projects\\" + ssfFile;
-			}
-			else
-			{
-				Debug.WriteLine(ssfFile + " does not exist.");
-				return;
-			}
-			//string ssfFile;
+            string ssfFile = database + ".ssf";
+            string ssfFullPath = string.Empty;
 
-			bool isStylesheet = false;
-			var reader = new XmlTextReader(ssfFullPath) { XmlResolver = null };
-			while (reader.Read())
-			{
-				if (reader.NodeType == XmlNodeType.Element && reader.Name == "StyleSheet") // Is class name null
-				{
-					isStylesheet = true;
-				}
-				else if (reader.NodeType == XmlNodeType.Text && isStylesheet)
-				{
-					ssfFile = reader.Value;
-					break;
-				}
-			}
-			reader.Close();
-			StyFullPath = Common.PathCombine(Path.GetDirectoryName(ssfFullPath), ssfFile);
+            if (Common.GetOsName() == "Windows7")
+            {
+                ssfFullPath = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\ScrChecks\\1.0\\Settings_Directory", "");
+            }
+            else if (Common.GetOsName() == "Windows XP")
+            {
+                ssfFullPath = Common.GetValueFromRegistry("SOFTWARE\\ScrChecks\\1.0\\Settings_Directory", "");
+            }
+
+            ssfFullPath = ssfFullPath + ssfFile;
+           
+            bool isStylesheet = false;
+
+            if(!File.Exists(ssfFullPath))
+            {
+                Debug.WriteLine(ssfFile + " does not exist.");
+                return;
+            }
+
+            var reader = new XmlTextReader(ssfFullPath) { XmlResolver = null };
+            while (reader.Read())
+            {
+                if (reader.NodeType == XmlNodeType.Element && reader.Name == "StyleSheet") // Is class name null
+                {
+                    isStylesheet = true;
+                }
+                else if (reader.NodeType == XmlNodeType.Text && isStylesheet)
+                {
+                    ssfFile = reader.Value;
+                    break;
+                }
+            }
+            reader.Close();
+            StyFullPath = Common.PathCombine(Path.GetDirectoryName(ssfFullPath), ssfFile);
         }
 
 		/// ------------------------------------------------------------------------
