@@ -227,8 +227,8 @@ namespace SIL.PublishingSolution
                     styleName = "CharacterStyle/" + styleName;
                     // Note: GuideWord Character Start Element
                     _writer.WriteStartElement("CharacterStyleRange");
-                    //_writer.WriteAttributeString("AppliedCharacterStyle", styleName);
-                    _writer.WriteAttributeString("AppliedCharacterStyle", PageStyleName);
+                    _writer.WriteAttributeString("AppliedCharacterStyle", styleName);
+                    //_writer.WriteAttributeString("AppliedCharacterStyle", PageStyleName);
                     if (_contentType == "GF")
                     {
                         _writer.WriteAttributeString("PageNumberType", "TextVariable");
