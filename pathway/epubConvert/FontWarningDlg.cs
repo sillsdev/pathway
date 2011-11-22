@@ -83,7 +83,7 @@ namespace epubConvert
             string[] files = FontInternals.GetInstalledFontFiles();
             foreach (var file in files)
             {
-                if (FontInternals.IsSILFont(file))
+                if (FontInternals.IsFreeFont(file))
                 {
                     pfc.AddFontFile(file);
                 }

@@ -261,7 +261,7 @@ namespace SIL.Tool
         {
             if (Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("false")) { return; }
             // open up the appropriate image for processing
-            string strImageFile = Param.GetMetadataValue(Param.CoverPageFilename);
+            string strImageFile = Param.GetMetadataValue(Param.CoverPageFilename).Trim();
             if (strImageFile.Length < 1)
             {
                 // no image file specified -- use the default image in the Graphic directory
