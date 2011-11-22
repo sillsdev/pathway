@@ -516,11 +516,11 @@ namespace SIL.Tool
             return false;
         }
 
-        public static bool IsSILFont (string fontFullName)
+        public static string GetFontCopyright(string fontFullName)
         {
             if (!File.Exists(fontFullName))
             {
-                return false;
+                return string.Empty;
             }
             FileStream fs = new FileStream(fontFullName, FileMode.Open, FileAccess.Read);
             BinaryReader r = new BinaryReader(fs);
@@ -528,7 +528,7 @@ namespace SIL.Tool
 
             //Must be maj =1 minor = 0
             if (ttResult.uMajorVersion != 1 || ttResult.uMinorVersion != 0)
-                return false;
+                return string.Empty;
 
             TT_TABLE_DIRECTORY tbName = new TT_TABLE_DIRECTORY();
             bool bFound = false;
@@ -588,19 +588,71 @@ namespace SIL.Tool
                             break;
                         }
                     }
-                    if (result != "")
-                    {
-                        // we got something out of the CopyrightId slot - does it contain "SIL" or "Summer Institute of Linguistics"?
-                        if (result.Contains("SIL") || result.Contains("Summer Institute of Linguistics"))
-                        {
-                            return true;
-                        }
-                    }
+                    return result;
                 }
                 catch (Exception e)
                 {
                     Debug.WriteLine(e.ToString());
-                    return false;
+                    return string.Empty;
+                }
+            }
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// Returns whether this font is licensed under a freely redistributable license. Currently
+        /// this is a best-effort method, as the copyright string (and name) don't always give us
+        /// a clear picture.
+        /// </summary>
+        /// <param name="fontFullName"></param>
+        /// <returns></returns>
+        public static bool IsFreeFont (string fontFullName)
+        {
+            // try looking at the copyright
+            string copyright = GetFontCopyright(fontFullName);
+            if (copyright.Length > 0)
+            {
+                if (copyright.Contains("SIL") || copyright.Contains("Summer Institute of Linguistics"))
+                {
+                    // SIL fonts
+                    return true;
+                }
+                // GPL / OFL license
+                if (copyright.ToLower().Contains("general public license") || copyright.ToLower().Contains("open font license"))
+                {
+                    return true;
+                }
+                // redistributable Creative Commons licenses
+                if (copyright.ToLower().Contains("cc by-sa") || copyright.ToLower().Contains("cc by ") ||
+                    copyright.ToLower().Contains("cc by-nd") || copyright.ToLower().Contains("cc by-nc") ||
+                    copyright.ToLower().Contains("cc by-nc-sa") || copyright.ToLower().Contains("cc by-nc-nd") ||
+                    copyright.ToLower().Contains("cc0"))
+                {
+                    return true;
+                }
+            }
+
+            // TODO: known free fonts that don't match the copyright string tests above can be tested here by looking for their
+            // font names. This will probably be done on an as-needed basis.
+
+            // can't determine - return false
+            return false;
+        }
+
+        /// <summary>
+        /// Returns whether this font was created by SIL International.
+        /// </summary>
+        /// <param name="fontFullName"></param>
+        /// <returns></returns>
+        public static bool IsSILFont (string fontFullName)
+        {
+            string result = GetFontCopyright(fontFullName);
+            if (result != "")
+            {
+                // we got something out of the CopyrightId slot - does it contain "SIL" or "Summer Institute of Linguistics"?
+                if (result.Contains("SIL") || result.Contains("Summer Institute of Linguistics"))
+                {
+                    return true;
                 }
             }
             return false;

@@ -7,7 +7,7 @@ namespace epubConvert
     public class EmbeddedFont
     {
         private string _name, _filename, _italicFontname, _boldFontname;
-        private bool _serif, _silFont, _hasItalic, _hasBold;
+        private bool _serif, _canRedistribute, _hasItalic, _hasBold;
 		
         /// <summary>
         /// Name of the font file, including the path.
@@ -50,12 +50,12 @@ namespace epubConvert
             protected set { _serif = value; }
         }
         /// <summary>
-        /// Returns whether this font is an SIL font.
+        /// Returns whether this font has a license that allows us to embed it freely. SIL fonts fall under this category.
         /// </summary>
-        public bool SILFont
+        public bool CanRedistribute
         {
-            get { return _silFont; }
-            protected set { _silFont = value; }
+            get { return _canRedistribute; }
+            protected set { _canRedistribute = value; }
         }
         /// <summary>
         /// Returns whether this font family has an Italic font variant installed on this system.
@@ -109,7 +109,7 @@ namespace epubConvert
                 // this font isn't installed
                 return;
             }
-            SILFont = FontInternals.IsSILFont(Filename);
+            CanRedistribute = FontInternals.IsFreeFont(Filename);
         }
     }
 

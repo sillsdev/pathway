@@ -36,7 +36,7 @@ namespace Test.epubConvert
         {
             Assert.IsTrue(FontInternals.IsInstalled("Arial"));
             var arialFont = new EmbeddedFont("Arial");
-            Assert.IsFalse(arialFont.SILFont);
+            Assert.IsFalse(arialFont.CanRedistribute);
             const string fontFilename = "Arial.ttf";
             Assert.IsTrue(fontFilename.ToLower().Equals(Path.GetFileName(arialFont.Filename).ToLower()));
         }
@@ -50,7 +50,7 @@ namespace Test.epubConvert
         {
             Assert.IsTrue(FontInternals.IsInstalled("Abyssinica SIL"));
             var silFont = new EmbeddedFont("Abyssinica SIL");
-            Assert.IsTrue(silFont.SILFont);
+            Assert.IsTrue(silFont.CanRedistribute);
             Assert.IsTrue(silFont.Serif);
         }
 
@@ -63,7 +63,7 @@ namespace Test.epubConvert
         {
             var silFont = new EmbeddedFont("Andika Basic");
             Assert.IsTrue(FontInternals.IsInstalled("Andika Basic"));
-            Assert.IsTrue(silFont.SILFont);
+            Assert.IsTrue(silFont.CanRedistribute);
             Assert.IsFalse(silFont.Serif);
         }
 
@@ -76,7 +76,7 @@ namespace Test.epubConvert
         {
             var silFont = new EmbeddedFont("Charis SIL");
             Assert.IsTrue(FontInternals.IsInstalled("Charis SIL"));
-            Assert.IsTrue(silFont.SILFont);
+            Assert.IsTrue(silFont.CanRedistribute);
             Assert.IsTrue(silFont.Serif);
         }
         /// <summary>
@@ -88,7 +88,7 @@ namespace Test.epubConvert
         {
             var silFont = new EmbeddedFont("Dai Banna SIL Book");
             Assert.IsTrue(FontInternals.IsInstalled("Dai Banna SIL Book"));
-            Assert.IsTrue(silFont.SILFont);
+            Assert.IsTrue(silFont.CanRedistribute);
             Assert.IsTrue(silFont.Serif);
         }
         /// <summary>
@@ -100,7 +100,7 @@ namespace Test.epubConvert
         {
             var silFont = new EmbeddedFont("Doulos SIL");
             Assert.IsTrue(FontInternals.IsInstalled("Doulos SIL"));
-            Assert.IsTrue(silFont.SILFont);
+            Assert.IsTrue(silFont.CanRedistribute);
             Assert.IsTrue(silFont.Serif);
         }
         /// <summary>
@@ -112,7 +112,7 @@ namespace Test.epubConvert
         {
             var silFont = new EmbeddedFont("Ezra SIL");
             Assert.IsTrue(FontInternals.IsInstalled("Ezra SIL"));
-            Assert.IsTrue(silFont.SILFont);
+            Assert.IsTrue(silFont.CanRedistribute);
             Assert.IsTrue(silFont.Serif);
         }
         /// <summary>
@@ -124,7 +124,7 @@ namespace Test.epubConvert
         {
             var silFont = new EmbeddedFont("Galatia SIL");
             Assert.IsTrue(FontInternals.IsInstalled("Galatia SIL"));
-            Assert.IsTrue(silFont.SILFont);
+            Assert.IsTrue(silFont.CanRedistribute);
             Assert.IsTrue(silFont.Serif);
         }
         /// <summary>
@@ -136,8 +136,25 @@ namespace Test.epubConvert
         {
             var silFont = new EmbeddedFont("Gentium");
             Assert.IsTrue(FontInternals.IsInstalled("Gentium"));
-            Assert.IsTrue(silFont.SILFont);
+            Assert.IsTrue(silFont.CanRedistribute);
             Assert.IsTrue(silFont.Serif);
+        }
+        /// <summary>
+        /// Test the Linux Libertine font. This font is not created by SIL, but is redistributable under the
+        /// GPL and OFL licenses. This serif font is used in Wikipedia's logo; you can download it 
+        /// here: http://www.linuxlibertine.org/
+        /// </summary>
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void LibertineTest()
+        {
+            var font = new EmbeddedFont("Linux Libertine");
+            if (FontInternals.IsInstalled("Linux Libertine"))
+            {
+                Assert.IsFalse(FontInternals.IsSILFont(font.Filename));
+                Assert.IsTrue(font.CanRedistribute);
+                Assert.IsTrue(font.Serif);
+            }
         }
         /// <summary>
         /// Test the SIL Scheharazade) font
@@ -148,7 +165,7 @@ namespace Test.epubConvert
         {
             var silFont = new EmbeddedFont("Scheherazade");
             Assert.IsTrue(FontInternals.IsInstalled("Scheherazade"));
-            Assert.IsTrue(silFont.SILFont);
+            Assert.IsTrue(silFont.CanRedistribute);
             Assert.IsTrue(silFont.Serif);
         }
         /// <summary>
@@ -160,7 +177,7 @@ namespace Test.epubConvert
         {
             var silFont = new EmbeddedFont("Sophia Nubian");
             Assert.IsTrue(FontInternals.IsInstalled("Sophia Nubian"));
-            Assert.IsTrue(silFont.SILFont);
+            Assert.IsTrue(silFont.CanRedistribute);
             Assert.IsTrue(silFont.Serif);
         }
     }

@@ -1040,7 +1040,7 @@ namespace SIL.PublishingSolution
             // Build the list of non-SIL fonts in use
             foreach (var embeddedFont in _embeddedFonts)
             {
-                if (!embeddedFont.Value.SILFont)
+                if (!embeddedFont.Value.CanRedistribute)
                 {
                     foreach (var language in _langFontDictionary.Keys)
                     {
