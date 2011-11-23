@@ -13,6 +13,8 @@
 // Test methods of FlexDePlugin
 // </remarks>
 // --------------------------------------------------------------------------------------------
+
+using System.Collections;
 using System.Diagnostics;
 using System.IO;
 using System.Xml;
@@ -143,7 +145,7 @@ namespace Test.GoBibleConvert
             const string collections = "Collections.txt";
             string actualFullName = _testFiles.Output(collections);
             string exepectedFullName = _testFiles.Expected(collections);
-            TextFileAssert.AreEqual(exepectedFullName, actualFullName);
+            TextFileAssert.AreEqualEx(exepectedFullName, actualFullName, new ArrayList {1});
             mocks.VerifyAllExpectationsHaveBeenMet();
         }
 

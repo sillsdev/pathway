@@ -323,12 +323,14 @@ namespace Test.PsTool
         [Test]
         public void CreatePreviewFileTest()
         {
+            Param.LoadSettings();
+            Param.Value[Param.InputType] = "Scripture";
+            Param.LoadSettings();
             string xhtmlFile = GetFileNameWithPath("Preview.xhtml");
             string cssFile = GetFileNameWithPath("Preview.css");
             string outputFileName = "Preview";
-            string expected = GetFileNameWithOutputPath("Preview.html");
+            string expected = GetFileNameWithExpectedPath("Preview.html");
             string actual = Preview.CreatePreviewFile(xhtmlFile, cssFile, outputFileName, true);
-            CopyToOutput(actual, expected);
             TextFileAssert.AreEqual(expected, actual);
         }
 

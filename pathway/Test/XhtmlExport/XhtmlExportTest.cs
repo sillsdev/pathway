@@ -149,10 +149,10 @@ namespace Test.XhtmlExport
             if (p1.Id <= 0)
                 throw new MissingSatelliteAssemblyException(project);
             p1.WaitForExit();
-            if (backend == "OpenOffice")
-                OdtCheck(project, message);
-            else if (backend == "InDesign")
+            if (backend == "InDesign")
                 IdmlCheck(project, message);
+            else
+                OdtCheck(project, message);
         }
 
         private static void IdmlCheck(string project, string message)

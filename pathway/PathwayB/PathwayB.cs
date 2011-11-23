@@ -146,7 +146,7 @@ namespace SIL.PublishingSolution
                 if (bOutputSpecified)
                 {
                     // the user has specified an output -- update the settings so we export to that output
-                    Param.SetDefaultValue(Param.PrintVia, exportType);
+                    //Param.SetDefaultValue(Param.PrintVia, exportType);
                     Param.SetValue(Param.PrintVia, exportType);
                     Param.Write();
                 }
@@ -208,7 +208,6 @@ namespace SIL.PublishingSolution
                         projectInfo.FromPlugin = true;
                         projectInfo.DefaultRevCssFileWithPath = Path.Combine(Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath), "FlexRev.css");
                         projectInfo.DictionaryPath = Path.GetDirectoryName(projectInfo.ProjectPath);
-
                     }
                     else if (projectInfo.ProjectInputType == "Scripture")
                     {
@@ -237,13 +236,13 @@ namespace SIL.PublishingSolution
                     throw new ArgumentException(string.Format("Missing {0}", projectInfo.DefaultCssFileWithPath));
                 projectInfo.DictionaryPath = Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath);
 
-                //if (backendPath.Length == 0)
-                //{
-                //    backendPath = Common.GetPSApplicationPath();
-                //}
-
-                //Common.ProgBase = Common.GetPSApplicationPath();
-                //Param.LoadSettings();
+                if (projectInfo.ProjectInputType.ToLower() == "dictionary")
+                {
+                    Param.SetValue(Param.ReversalIndex, projectInfo.IsReversalExist ? "True" : "False");
+                    Param.SetValue(Param.InputType, projectInfo.ProjectInputType);
+                    //Param.SetValue(Param.OutputPath, projectInfo.DictionaryPath);
+                    Param.Write();
+                }
 
                 var tpe = new PsExport { Destination = exportType, DataType = projectInfo.ProjectInputType };
                 tpe.ProgressBar = null;

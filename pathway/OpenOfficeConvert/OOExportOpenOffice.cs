@@ -631,7 +631,7 @@ namespace SIL.PublishingSolution
                 projInfo.FileToProduce = cssClass["@page"]["-ps-fileproduce"];
             }
 
-            if (projInfo.FromPlugin)
+            if (projInfo.FromPlugin && projInfo.IsReversalExist)
             {
                 dictSecName = CreatePageDictionary(projInfo);
             }
@@ -643,7 +643,7 @@ namespace SIL.PublishingSolution
             dictSecName = SplitXhtmlAsMultiplePart(projInfo, dictSecName);
 
 
-            if (dictSecName.Count > 0)
+            if (dictSecName.Count > 1)
             {
                 GeneratedPdfFileName = dictSecName["Main"];
                 ExportODM(publicationInfo.ProgressBar);

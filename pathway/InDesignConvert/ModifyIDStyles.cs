@@ -292,7 +292,7 @@ namespace SIL.PublishingSolution
                 {
                     string style = "//" + _tagType + "[@Self='" + sourceClassName + "']";
                     XmlNode baselineShift = _root.SelectSingleNode(style, nsmgr);
-                    if (baselineShift != null)
+                    if (baselineShift != null && className.ContainsKey("PointSize"))
                     {
                         var nameElement = (XmlElement)baselineShift;
                         string pointSize = className["PointSize"];

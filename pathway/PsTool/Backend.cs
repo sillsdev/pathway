@@ -43,27 +43,19 @@ namespace SIL.PublishingSolution
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
             foreach (FileInfo fileInfo in directoryInfo.GetFiles("*.dll"))
             {
-                //IExportProcess exportProcess =
-                //    CreateObject(fileInfo.FullName, "SIL.PublisingSoltuion." + Path.GetFileNameWithoutExtension(fileInfo.Name)) as
-                //    IExportProcess;
-                string fileName = string.Empty;
-                if (fileInfo.Name.Contains("Convert"))
-                    fileName = Path.GetFileNameWithoutExtension(fileInfo.Name).Replace("Convert", "");
+                var className = string.Empty;
+                if (fileInfo.Name == "OpenOfficeConvert.dll")
+                    className = "LibreOffice";
+                else if (fileInfo.Name.Contains("Convert"))
+                    className = Path.GetFileNameWithoutExtension(fileInfo.Name).Replace("Convert", "");
                 else if (fileInfo.Name.Contains("Writer"))
-                    fileName = Path.GetFileNameWithoutExtension(fileInfo.Name).Replace("Writer", "");
+                    className = Path.GetFileNameWithoutExtension(fileInfo.Name).Replace("Writer", "");
                 else
                     continue;
-                try
-                {
-                    fileName = "SIL.PublishingSolution.Export" + fileName;
-                    IExportProcess exportProcess = CreateObject(fileInfo.FullName, fileName) as IExportProcess;
+                className = "SIL.PublishingSolution.Export" + className;
+                IExportProcess exportProcess = CreateObject(fileInfo.FullName, className) as IExportProcess;
 
-                    _backend.Add(exportProcess);
-                }
-                catch (Exception)
-                {
-                    continue;
-                }
+                _backend.Add(exportProcess);
             }
         }
 
