@@ -76,7 +76,7 @@
                 <xsl:copy-of select="x:span[@class='headword']"/>
                 <xsl:element name="table" namespace="http://www.w3.org/1999/xhtml">
                     <xsl:attribute name="border">0</xsl:attribute>
-                    <xsl:attribute name="width">100%</xsl:attribute>
+                    <xsl:attribute name="style">width:100%;margin-left:0pt;text-indent:0pt;</xsl:attribute>
                     <!-- xsl:attribute name="valign">top</xsl:attribute -->
                     <xsl:element name="tr" namespace="http://www.w3.org/1999/xhtml">
                         <xsl:element name="td" namespace="http://www.w3.org/1999/xhtml">
