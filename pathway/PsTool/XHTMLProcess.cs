@@ -248,6 +248,10 @@ namespace SIL.PublishingSolution
                 _anchorBookMarkName = Common.RightString(_classNameWithLang, Common.SepTag);
                 _anchorStart = true;
             }
+            else if (_tagType == "table" || _tagType == "th" || _tagType == "tr" || _tagType == "td")
+            {
+                // need to handle styles
+            }
             else
             {
                 if (_reader.Name == "title" || _reader.Name == "style") // skip the node

@@ -206,6 +206,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModifyOOContent.cs" />
     <Compile Include="ModifyOOStyles.cs" />
     <Compile Include="OldStyles.cs">
       <SubType>Code</SubType>

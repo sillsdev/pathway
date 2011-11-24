@@ -74,6 +74,13 @@ namespace SIL.PublishingSolution
         int _autoFootNoteCount;
         private string _sourcePicturePath;
 
+        //Table 
+        List<string> _table = new List<string>();
+        private int _tableCount = 0;
+        private int _tableColumnCount = 0;
+        Dictionary<string, int> _tableColumnModify = new Dictionary<string, int>();
+        private bool _isTableOpen;
+
         // from local
         OldStyles _structStyles;
         //readonly Library _lib = new Library();
@@ -205,6 +212,7 @@ namespace SIL.PublishingSolution
             UpdateRelativeInStylesXML();
             CloseFile(projInfo.TempOutputFolder);
             AlterFrameWithoutCaption(projInfo.TempOutputFolder);
+            ModifyContentXML(projInfo.TempOutputFolder);
 
             return new Dictionary<string, ArrayList>();
         }
@@ -730,6 +738,7 @@ namespace SIL.PublishingSolution
                 }
 
                 ClosePara(false);
+                WriteTable();
 
                 if (_isDropCap)
                 {
@@ -1242,6 +1251,7 @@ namespace SIL.PublishingSolution
             FooterSetup(Common.OutputType.ODT.ToString());
             ResetTitleCounter();
             IsAnchorBookMark();
+            Table();
         }
 
         private void ResetTitleCounter()
@@ -1361,7 +1371,8 @@ namespace SIL.PublishingSolution
             {
                 _writer.WriteEndElement();
             }
-
+            
+            TableClose();
             SectionClose(closeChild);
             //SetHeadwordFalse();  Note: verify &todo in OO td2000 
             ClosefooterNote();
@@ -1372,6 +1383,19 @@ namespace SIL.PublishingSolution
 
             _classNameWithLang = StackPeek(_allStyle);
             _classNameWithLang = Common.LeftString(_classNameWithLang, "_");
+        }
+
+        private void TableClose()
+        {
+            if (_reader.Name == "table" || _reader.Name == "th" || _reader.Name == "tr" || _reader.Name == "td") // end of table,td,tr,th
+            {
+                _writer.WriteEndElement();
+            }
+            else if (_isTableOpen) // After closed the entire table 
+            {
+                _tableColumnModify["table" + _tableCount] = _tableColumnCount;
+                _isTableOpen = false;
+            }
         }
 
         private void PseudoAfter()
@@ -1423,6 +1447,59 @@ namespace SIL.PublishingSolution
             //    string type = _tagType;
             //}
            
+        }
+
+        /// <summary>
+        /// Collects <Table> information
+        /// </summary>
+        private void Table()
+        {
+            if (_tagType == "table")
+            {
+                _table.Add("table:table|table" + ++_tableCount);
+                _table.Add("table:table-column|" + _childName);
+                _isTableOpen = true;
+            }
+            else if (_tagType == "tr" || _tagType == "th")
+            {
+                _table.Add("table:table-row|" + _childName);
+                _tableColumnCount = 0;
+            }
+            else if (_tagType == "td")
+            {
+                _table.Add("table:table-cell|" + _childName);
+                _tableColumnCount++;
+                _isNewParagraph = true;
+            }
+        }
+
+
+        /// <summary>
+        /// Writes <Table> information
+        /// </summary>
+        private void WriteTable()
+        {
+            if (_table.Count > 0)
+            {
+                foreach (string st in _table)
+                {
+                    string[] tag_styleName = st.Split('|');
+                    _writer.WriteStartElement(tag_styleName[0]);
+                    _writer.WriteAttributeString("table:style-name", tag_styleName[1]);
+
+
+                    if (tag_styleName[0] == "table:table")
+                    {
+                        _writer.WriteAttributeString("table:name", tag_styleName[1]);
+                    }
+                    else if (tag_styleName[0] == "table:table-column")
+                    {
+                        _writer.WriteAttributeString("table:number-columns-repeated", "1");
+                        _writer.WriteEndElement();
+                    }
+                }
+                _table.Clear();
+            }
         }
 
         #endregion
@@ -2453,6 +2530,16 @@ namespace SIL.PublishingSolution
             catch
             {
             }
+        }
+
+        /// <summary>
+        /// Closes the opened footnote Content, Chapter No and VerseNo
+        /// </summary>
+        private void ModifyContentXML(string targetPath)
+        {
+            string targetFile = targetPath + "content.xml";
+            ModifyLOContent modifyContentXML = new ModifyLOContent();
+            modifyContentXML.SetTableColumnCount(targetFile, _tableColumnModify);
         }
 
         private void WriteGuidewordValueToVariable(string content)
