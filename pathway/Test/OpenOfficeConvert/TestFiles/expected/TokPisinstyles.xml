@@ -510,7 +510,6 @@
       <style:footer>
         <text:p text:style-name="Footer">
           <text:tab />
-          <text:tab />
           <text:page-number text:select-page="current">4</text:page-number>
         </text:p>
       </style:footer>
