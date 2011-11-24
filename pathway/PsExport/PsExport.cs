@@ -416,7 +416,20 @@ namespace SIL.PublishingSolution
                 projInfo.ProjectName = Path.GetFileNameWithoutExtension(revFull);
             }
             SetExtraProcessingValue(projInfo);
-            Backend.Launch(Destination, projInfo);
+            
+            if (Destination.ToLower() == "pdf (using prince)")  //For Princexml output generating
+            {
+                //Pdf princePdf = new Pdf();
+                //princePdf.Xhtml = projInfo.DefaultXhtmlFileWithPath;
+                //princePdf.Css = projInfo.DefaultXhtmlFileWithPath;
+                //princePdf.Create(Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) + ".pdf");
+                ExportPdf princePdf = new ExportPdf();
+                princePdf.Launch(Destination, projInfo);
+            }
+            else
+            {
+                Backend.Launch(Destination, projInfo);    
+            }
         }
 
         private void SetReverseExistValue(PublicationInformation projInfo)

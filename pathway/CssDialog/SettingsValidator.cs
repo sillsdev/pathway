@@ -693,6 +693,12 @@ namespace SIL.PublishingSolution
                 List<IExportProcess> backEnd = LoadBackends();
                 foreach (IExportProcess process in backEnd)
                 {
+                    if (result.ToLower() == "pdf (using prince)")
+                    {
+                        isExists = true;
+                        break;
+                    }
+
                     if (result.ToLower() == process.ExportType.ToLower())
                     {
                         isExists = true;

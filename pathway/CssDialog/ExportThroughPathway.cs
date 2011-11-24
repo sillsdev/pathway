@@ -310,6 +310,8 @@ namespace SIL.PublishingSolution
 
         private void ExportThroughPathway_Load(object sender, EventArgs e)
         {
+            try
+            {
             if (!Common.isRightFieldworksVersion())
             {
                 MessageBox.Show("Please download and install a Pathway version compatible with your software", "Incompatible Pathway Version", MessageBoxButtons.OK,
@@ -375,6 +377,10 @@ namespace SIL.PublishingSolution
             Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
             Common.HelpProv.SetHelpKeyword(this, _helpTopic);
             Common.databaseName = DatabaseName;
+
+
+            }
+            catch{}
         }
 
         /// <summary>
@@ -580,6 +586,9 @@ namespace SIL.PublishingSolution
                 {
                     ddlLayout.Items.Add(item);
                 }
+
+                GetPrinceIsAvailable();
+
                 ddlLayout.Text = ddlLayout.Items[0].ToString();
             }
             else
@@ -597,6 +606,27 @@ namespace SIL.PublishingSolution
             }
             ddlLayout.SelectedIndex = ddlLayout.FindStringExact(ddlLayout.Text);
         }
+
+        private void GetPrinceIsAvailable()
+        {
+            string princeVersion = string.Empty;
+            if (Common.GetOsName() == "Windows7")
+                princeVersion =
+                    Common.GetValueFromRegistry(
+                        "SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Prince_is1", "DisplayName");
+            else if (Common.GetOsName() == "Windows XP")
+                princeVersion =
+                    Common.GetValueFromRegistry("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Prince_is1",
+                                                "DisplayName");
+            else if (Common.GetOsName().ToUpper() == "UNIX")
+                princeVersion = Common.GetAllUserAppPath(); //To Do
+
+            if (princeVersion != null)
+            {
+                ddlLayout.Items.Add("Pdf (Using Prince)");
+            }
+        }
+
         #endregion LoadAvailFormats
 
         #region Events

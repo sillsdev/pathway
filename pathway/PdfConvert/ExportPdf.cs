@@ -32,7 +32,7 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                return "Pdf (using Prince)";
+                return "Pdf (Using Prince)";
             }
         }
 
