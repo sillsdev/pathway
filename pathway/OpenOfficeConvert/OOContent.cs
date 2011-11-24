@@ -2006,6 +2006,12 @@ namespace SIL.PublishingSolution
                     //img[src='Thomsons-gazelle1.jpg'] 
                     rectHeight = GetPropertyValue(srcFilrLongDesc, "height", rectHeight);
                     rectWidth = GetPropertyValue(srcFilrLongDesc, "width", rectWidth);
+                    if (rectHeight == "0" && rectWidth == "0")
+                    {
+                        clsName = _childName;
+                        rectHeight = GetPropertyValue(clsName, "height", rectHeight);
+                        rectWidth = GetPropertyValue(clsName, "width", rectWidth);
+                    }
                     GetAlignment(ref HoriAlignment, srcFilrLongDesc);
                 }
                 else
