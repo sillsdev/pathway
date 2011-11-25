@@ -38,7 +38,7 @@ namespace SIL.PublishingSolution
         private bool isFileEmpty = true;
         private bool isFileCreated;
         private bool isImage;
-        private bool isHomographNumber =  false;
+        private bool isHomographNumber = false;
         private string imageClass = string.Empty;
         private string _inputPath;
         private ArrayList _textFrameClass = new ArrayList();
@@ -187,7 +187,7 @@ namespace SIL.PublishingSolution
                             EndElement();
                             break;
                         case XmlNodeType.SignificantWhitespace:
-                            if (_reader.Value.Replace(" ","") == "")
+                            if (_reader.Value.Replace(" ", "") == "")
                             {
                                 Write();
                             }
@@ -238,7 +238,7 @@ namespace SIL.PublishingSolution
             if (_doNotInheritClass.Length == 0) return;
 
             string property = "SpaceBefore";
-            if (IdAllClass.ContainsKey(_doNotInheritClass)==false)
+            if (IdAllClass.ContainsKey(_doNotInheritClass) == false)
             {
                 return;
             }
@@ -257,7 +257,7 @@ namespace SIL.PublishingSolution
         {
             if (_doNotInheritProperty.Count == 0) return;
 
-            string className = _doNotInheritProperty.Peek(); 
+            string className = _doNotInheritProperty.Peek();
             string property = "SpaceAfter";
 
             if (closeChildName == className)
@@ -267,7 +267,7 @@ namespace SIL.PublishingSolution
                     string value = IdAllClass[className][property];
                     _newProperty[_previousParagraphName][property] = value;
                 }
-                _doNotInheritProperty.Pop(); 
+                _doNotInheritProperty.Pop();
             }
         }
 
@@ -382,7 +382,7 @@ namespace SIL.PublishingSolution
 
                 _writer.WriteString(content);
                 _writer.WriteEndElement();
-                
+
             }
             AnchorBookMark();
             _writer.WriteEndElement();
@@ -422,7 +422,7 @@ namespace SIL.PublishingSolution
             _writer.WriteString(leftPart);
             _writer.WriteEndElement();
             _writer.WriteEndElement();
-            string replaceLeft = content; 
+            string replaceLeft = content;
             //content.Replace(leftPart, "");
             if (leftPart.Length > 0)
                 replaceLeft = content.Replace(leftPart, "");
@@ -476,21 +476,21 @@ namespace SIL.PublishingSolution
         public bool InsertImage()
         {
             bool inserted = false;
-           if (_imageInsert)
+            if (_imageInsert)
             {
-            //1 inch = 72 PostScript points
-            string alignment = "Center";
-            string wrapSide = "none";
-            string rectHeight = "0";
-            string rectWidth = "0";
-            string srcFile;
-            string wrapMode = "BoundingBoxTextWrap";
-            string HoriAlignment = "LeftAlign";
-            const string HoriRefPoint = "ColumnEdge";
-            string VertAlignment = "CenterAlign";
-            string VertRefPoint = "LineBaseline";
-            string AnchorPoint = "TopLeftAnchor";
- 
+                //1 inch = 72 PostScript points
+                string alignment = "Center";
+                string wrapSide = "none";
+                string rectHeight = "0";
+                string rectWidth = "0";
+                string srcFile;
+                string wrapMode = "BoundingBoxTextWrap";
+                string HoriAlignment = "LeftAlign";
+                const string HoriRefPoint = "ColumnEdge";
+                string VertAlignment = "CenterAlign";
+                string VertRefPoint = "LineBaseline";
+                string AnchorPoint = "TopLeftAnchor";
+
                 isImage = true;
                 inserted = true;
                 string[] cc = _allParagraph.ToArray();
@@ -534,7 +534,7 @@ namespace SIL.PublishingSolution
                         rectHeight = "36";
                     }
                 }
-               rectWidth = rectWidth.Replace("%","");
+                rectWidth = rectWidth.Replace("%", "");
                 double x = double.Parse(rectWidth) / 2;
                 double y = double.Parse(rectHeight) / 2;
 
@@ -555,6 +555,46 @@ namespace SIL.PublishingSolution
                     height = fullimage.Height;
                     width = fullimage.Width;
                 }
+                string imageFloatLeftRightOrCenter = string.Empty;
+                string anchorPoint = string.Empty;
+                string horizontalAlignment = string.Empty;
+                imageFloatLeftRightOrCenter = GetPropertyValue(_imageSrcClass + "Right", "float");
+                
+                if (imageFloatLeftRightOrCenter == string.Empty)
+                {
+                    imageFloatLeftRightOrCenter = GetPropertyValue(_imageSrcClass + "Left", "float");
+                }
+                else if (imageFloatLeftRightOrCenter == string.Empty)
+                {
+                    imageFloatLeftRightOrCenter = GetPropertyValue(_imageSrcClass + "Center", "float");
+                }
+                else if (imageFloatLeftRightOrCenter == string.Empty)
+                {
+                    imageFloatLeftRightOrCenter = GetPropertyValue(_imageSrcClass, "float");
+                }
+                
+                
+                if (imageFloatLeftRightOrCenter.ToLower() == "right")
+                {
+                    anchorPoint = "TopRightAnchor";
+                    horizontalAlignment = "RightAlign";
+                }
+                else if (imageFloatLeftRightOrCenter.ToLower() == "center")
+                {
+                    anchorPoint = "TopCenterAnchor";
+                    horizontalAlignment = "CenterAlign";
+                }
+                else if (imageFloatLeftRightOrCenter.ToLower() == "left")
+                {
+                    anchorPoint = "TopLeftAnchor";
+                    horizontalAlignment = "LeftAlign";
+                }
+                else
+                {
+                    anchorPoint = "TopRightAnchor";
+                    horizontalAlignment = "RightAlign";
+                }
+
                 // Writing the Images
                 _writer.WriteStartElement("Rectangle");
                 _writer.WriteAttributeString("Self", "u1fa");
@@ -633,9 +673,9 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("SpineRelative", "false");
                 _writer.WriteAttributeString("LockPosition", "false");
                 _writer.WriteAttributeString("PinPosition", "false");
-                _writer.WriteAttributeString("AnchorPoint", "TopCenterAnchor");
+                _writer.WriteAttributeString("AnchorPoint", anchorPoint);
                 //CenterAlign, RightAlign , LeftAlign
-                _writer.WriteAttributeString("HorizontalAlignment", "CenterAlign");
+                _writer.WriteAttributeString("HorizontalAlignment", horizontalAlignment);
                 _writer.WriteAttributeString("HorizontalReferencePoint", "ColumnEdge");
                 _writer.WriteAttributeString("VerticalAlignment", "CenterAlign");
                 _writer.WriteAttributeString("VerticalReferencePoint", "LineBaseline");
@@ -783,9 +823,9 @@ namespace SIL.PublishingSolution
             {
                 string stackClass = _allCharacter.Peek();
                 string[] splitedClassName = stackClass.Split('_');
-                
+
                 string[] allClasses = new string[splitedClassName.Length + 1];
-                splitedClassName.CopyTo(allClasses,1);
+                splitedClassName.CopyTo(allClasses, 1);
                 allClasses[0] = _imageSrcClass; // including current Class
                 if (allClasses.Length > 0)
                 {
@@ -797,12 +837,12 @@ namespace SIL.PublishingSolution
                         string wd = string.Empty;
                         ht = GetPropertyValue(clsName, "height");
                         wd = GetPropertyValue(clsName, "width");
-                        if(ht.Length > 0 || wd.Length > 0)
+                        if (ht.Length > 0 || wd.Length > 0)
                         {
-                            if(ht.Length > 0)
-                            height = ht;
+                            if (ht.Length > 0)
+                                height = ht;
 
-                            if(wd.Length>0)
+                            if (wd.Length > 0)
                                 width = wd;
 
                             break;
@@ -946,11 +986,11 @@ namespace SIL.PublishingSolution
                                 wrapMode = "JumpObjectTextWrap";
                                 break;
                         }
-                            wrapSide = GetPropertyValue(clsName, "clear", wrapSide);
-                            if (pos != "left" && wrapSide != "none")
-                            {
-                                break;
-                            }
+                        wrapSide = GetPropertyValue(clsName, "clear", wrapSide);
+                        if (pos != "left" && wrapSide != "none")
+                        {
+                            break;
+                        }
                         return;
                     }
                 }
@@ -994,7 +1034,7 @@ namespace SIL.PublishingSolution
 
         private void SetHeadwordTrue()
         {
-            if(_reader.GetAttribute("class") != null &&_reader.GetAttribute("class").ToLower() == "headword")
+            if (_reader.GetAttribute("class") != null && _reader.GetAttribute("class").ToLower() == "headword")
             {
                 _IsHeadword = true;
                 _headwordStyles = true;
@@ -1255,7 +1295,7 @@ namespace SIL.PublishingSolution
         private void UpdateRelativeInStylesXML()
         {
             ModifyIDStyles modifyIDStyles = new ModifyIDStyles();
-            _textVariables = modifyIDStyles.ModifyStylesXML(_projectPath, _newProperty, _usedStyleName,_languageStyleName,  "", _IsHeadword);
+            _textVariables = modifyIDStyles.ModifyStylesXML(_projectPath, _newProperty, _usedStyleName, _languageStyleName, "", _IsHeadword);
         }
 
         private void CloseFile()

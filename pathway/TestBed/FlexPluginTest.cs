@@ -294,7 +294,7 @@ namespace TestBed
             projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
             projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
             projInfo.DefaultCssFileWithPath = txtCSSInput.Text;
-
+            projInfo.ProjectInputType = radDictionary.Checked ? "Dictionary" : "Scripture";
             //string projectPath = Path.GetDirectoryName(txtInputPath.Text);
             //string xhtmlFileWithPath = txtInputPath.Text;
             //string cssFileWithPath = txtCSSInput.Text;
@@ -656,7 +656,7 @@ namespace TestBed
             projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
             projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
             projInfo.DefaultCssFileWithPath = txtCSSInput.Text;
-
+            projInfo.ProjectInputType = radDictionary.Checked ? "Dictionary" : "Scripture";
             projInfo.ProjectFileWithPath = projInfo.ProjectPath;
             projInfo.DictionaryPath = projInfo.ProjectPath;
             exportXeLaTex.Export(projInfo);
