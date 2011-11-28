@@ -694,10 +694,10 @@ namespace SIL.PublishingSolution
             content = content.Replace("\t", "");
             Char[] charac = content.ToCharArray();
             StringBuilder builder = new StringBuilder();
-            if (charac.Length == 1)
-            {
-                return content;
-            }
+            //if (charac.Length == 1)
+            //{
+            //    return content;
+            //}
             foreach (char var in charac)
             {
                 if (var == ' ' || var == '\b')
