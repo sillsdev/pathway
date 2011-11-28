@@ -555,6 +555,46 @@ namespace SIL.PublishingSolution
                     height = fullimage.Height;
                     width = fullimage.Width;
                 }
+                string imageFloatLeftRightOrCenter = string.Empty;
+                string anchorPoint = string.Empty;
+                string horizontalAlignment = string.Empty;
+                imageFloatLeftRightOrCenter = GetPropertyValue(_imageSrcClass + "Right", "float");
+                
+                if (imageFloatLeftRightOrCenter == string.Empty)
+                {
+                    imageFloatLeftRightOrCenter = GetPropertyValue(_imageSrcClass + "Left", "float");
+                }
+                else if (imageFloatLeftRightOrCenter == string.Empty)
+                {
+                    imageFloatLeftRightOrCenter = GetPropertyValue(_imageSrcClass + "Center", "float");
+                }
+                else if (imageFloatLeftRightOrCenter == string.Empty)
+                {
+                    imageFloatLeftRightOrCenter = GetPropertyValue(_imageSrcClass, "float");
+                }
+                
+                
+                if (imageFloatLeftRightOrCenter.ToLower() == "right")
+                {
+                    anchorPoint = "TopRightAnchor";
+                    horizontalAlignment = "RightAlign";
+                }
+                else if (imageFloatLeftRightOrCenter.ToLower() == "center")
+                {
+                    anchorPoint = "TopCenterAnchor";
+                    horizontalAlignment = "CenterAlign";
+                }
+                else if (imageFloatLeftRightOrCenter.ToLower() == "left")
+                {
+                    anchorPoint = "TopLeftAnchor";
+                    horizontalAlignment = "LeftAlign";
+                }
+                else
+                {
+                    anchorPoint = "TopRightAnchor";
+                    horizontalAlignment = "RightAlign";
+                }
+
                 // Writing the Images
                 _writer.WriteStartElement("Rectangle");
                 _writer.WriteAttributeString("Self", "u1fa");
@@ -633,9 +673,9 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("SpineRelative", "false");
                 _writer.WriteAttributeString("LockPosition", "false");
                 _writer.WriteAttributeString("PinPosition", "false");
-                _writer.WriteAttributeString("AnchorPoint", "TopCenterAnchor");
+                _writer.WriteAttributeString("AnchorPoint", anchorPoint);
                 //CenterAlign, RightAlign , LeftAlign
-                _writer.WriteAttributeString("HorizontalAlignment", "CenterAlign");
+                _writer.WriteAttributeString("HorizontalAlignment", horizontalAlignment);
                 _writer.WriteAttributeString("HorizontalReferencePoint", "ColumnEdge");
                 _writer.WriteAttributeString("VerticalAlignment", "CenterAlign");
                 _writer.WriteAttributeString("VerticalReferencePoint", "LineBaseline");

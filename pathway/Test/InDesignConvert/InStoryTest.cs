@@ -1417,10 +1417,10 @@ namespace Test.InDesignConvert
             XmlAttributeCollection attrb = node.Attributes;
 
             string result = attrb["AnchorPoint"].Value;
-            Assert.AreEqual(result, "TopCenterAnchor", "Float Property failed");
+            Assert.AreEqual(result, "TopRightAnchor", "Float Property failed");
 
             result = attrb["HorizontalAlignment"].Value;
-            Assert.AreEqual(result, "CenterAlign", "Float Property failed");
+            Assert.AreEqual(result, "RightAlign", "Float Property failed");
         }
 
         [Test]
@@ -1630,10 +1630,10 @@ namespace Test.InDesignConvert
             node = nodesList[0];
             attrb = node.Attributes;
             string result = attrb["AnchorPoint"].Value;
-            Assert.AreEqual(result, "TopCenterAnchor", "Case1 ItemTransform Property failed");
+            Assert.AreEqual(result, "TopRightAnchor", "Case1 ItemTransform Property failed");
 
             result = attrb["HorizontalAlignment"].Value;
-            Assert.AreEqual(result, "CenterAlign", "Case1 ItemTransform Property failed");
+            Assert.AreEqual(result, "RightAlign", "Case1 ItemTransform Property failed");
 
             result = attrb["HorizontalReferencePoint"].Value;
             Assert.AreEqual(result, "ColumnEdge", "Case1 ItemTransform Property failed");
@@ -1662,10 +1662,10 @@ namespace Test.InDesignConvert
             node = nodesList[0];
             attrb = node.Attributes;
             string result = attrb["AnchorPoint"].Value;
-            Assert.AreEqual(result, "TopCenterAnchor", "Case1 ItemTransform Property failed");
+            Assert.AreEqual(result, "TopRightAnchor", "Case1 ItemTransform Property failed");
 
             result = attrb["HorizontalAlignment"].Value;
-            Assert.AreEqual(result, "CenterAlign", "Case1 ItemTransform Property failed");
+            Assert.AreEqual(result, "RightAlign", "Case1 ItemTransform Property failed");
 
             result = attrb["HorizontalReferencePoint"].Value;
             Assert.AreEqual(result, "ColumnEdge", "Case1 ItemTransform Property failed");
@@ -2021,7 +2021,7 @@ namespace Test.InDesignConvert
             projInfo.ProjectPath = Path.GetDirectoryName(_inputXHTML);
             projInfo.DefaultXhtmlFileWithPath = _inputXHTML;
             projInfo.DefaultCssFileWithPath = _inputCSS;
-
+            projInfo.ProjectInputType = "Scripture";
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             preProcessor.GetTempFolderPath();
             preProcessor.ImagePreprocess();

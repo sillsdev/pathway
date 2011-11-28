@@ -1457,7 +1457,7 @@
             </GeometryPathType>
           </PathGeometry>
         </Properties>
-        <AnchoredObjectSetting AnchoredPosition="Anchored" SpineRelative="false" LockPosition="false" PinPosition="false" AnchorPoint="TopCenterAnchor" HorizontalAlignment="CenterAlign" HorizontalReferencePoint="ColumnEdge" VerticalAlignment="CenterAlign" VerticalReferencePoint="LineBaseline" AnchorXoffset="0" AnchorYoffset="0" AnchorSpaceAbove="4" />
+        <AnchoredObjectSetting AnchoredPosition="Anchored" SpineRelative="false" LockPosition="false" PinPosition="false" AnchorPoint="TopRightAnchor" HorizontalAlignment="RightAlign" HorizontalReferencePoint="ColumnEdge" VerticalAlignment="CenterAlign" VerticalReferencePoint="LineBaseline" AnchorXoffset="0" AnchorYoffset="0" AnchorSpaceAbove="4" />
         <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="RightSide" TextWrapMode="JumpObjectTextWrap">
           <Properties>
             <TextWrapOffset Top="0" Left="0" Bottom="0" Right="0" />
