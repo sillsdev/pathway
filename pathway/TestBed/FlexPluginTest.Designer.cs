@@ -44,6 +44,7 @@
             this.txtInputPath = new System.Windows.Forms.TextBox();
             this.Btn_InputPath = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnXeLaTex = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.btnXeTex = new System.Windows.Forms.Button();
@@ -63,7 +64,7 @@
             this.btnFileSizeZero = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.btnXeLaTex = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -225,6 +226,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button12);
             this.groupBox1.Controls.Add(this.btnXeLaTex);
             this.groupBox1.Controls.Add(this.button11);
             this.groupBox1.Controls.Add(this.button8);
@@ -246,6 +248,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Export";
             // 
+            // btnXeLaTex
+            // 
+            this.btnXeLaTex.AccessibleName = "BtnFlexTest";
+            this.btnXeLaTex.Location = new System.Drawing.Point(142, 192);
+            this.btnXeLaTex.Name = "btnXeLaTex";
+            this.btnXeLaTex.Size = new System.Drawing.Size(67, 28);
+            this.btnXeLaTex.TabIndex = 62;
+            this.btnXeLaTex.Text = "XeLaTex";
+            this.btnXeLaTex.UseVisualStyleBackColor = true;
+            this.btnXeLaTex.Click += new System.EventHandler(this.btnXeLaTex_Click);
+            // 
             // button11
             // 
             this.button11.AccessibleName = "BtnGoBibleTest";
@@ -256,6 +269,20 @@
             this.button11.Text = "Go Bible";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(0, 0);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.TabIndex = 63;
+            // 
+            // btnXeTex
+            // 
+            this.btnXeTex.Location = new System.Drawing.Point(0, 0);
+            this.btnXeTex.Name = "btnXeTex";
+            this.btnXeTex.Size = new System.Drawing.Size(75, 23);
+            this.btnXeTex.TabIndex = 64;
             // 
             // button7
             // 
@@ -435,16 +462,15 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // btnXeLaTex
+            // button12
             // 
-            this.btnXeLaTex.AccessibleName = "BtnFlexTest";
-            this.btnXeLaTex.Location = new System.Drawing.Point(142, 192);
-            this.btnXeLaTex.Name = "btnXeLaTex";
-            this.btnXeLaTex.Size = new System.Drawing.Size(67, 28);
-            this.btnXeLaTex.TabIndex = 62;
-            this.btnXeLaTex.Text = "XeLaTex";
-            this.btnXeLaTex.UseVisualStyleBackColor = true;
-            this.btnXeLaTex.Click += new System.EventHandler(this.btnXeLaTex_Click);
+            this.button12.Location = new System.Drawing.Point(142, 162);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(112, 23);
+            this.button12.TabIndex = 65;
+            this.button12.Text = "WritingStoreTo CSS";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // FlexPluginTest
             // 
@@ -512,5 +538,6 @@
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button btnFlexTest2;
         private System.Windows.Forms.Button btnXeLaTex;
+        private System.Windows.Forms.Button button12;
     }
 }

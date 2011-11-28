@@ -1,6 +1,6 @@
-// --------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------
 // <copyright file="ContentXML.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright � 2009, SIL International. All Rights Reserved.   
+//      Copyright © 2009, SIL International. All Rights Reserved.   
 //    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
@@ -1013,6 +1013,7 @@ namespace SIL.PublishingSolution
                 else
                 {
                     _verseContent.Append(" <text:span text:style-name=\"" + characterStyle + "\">");
+                    content = content.Replace("-", "‑") + " ";
                 }
             }
 
@@ -1610,6 +1611,7 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("xmlns:xhtml", "http://www.w3.org/1999/xhtml");
             _writer.WriteAttributeString("xmlns:grddl", "http://www.w3.org/2003/g/data-view#");
             _writer.WriteAttributeString("xmlns:field", "urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0");
+            _writer.WriteAttributeString("xmlns:formx","urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0");
             _writer.WriteAttributeString("grddl:transformation", "http://docs.oasis-open.org/office/1.2/xslt/odf2rdf.xsl");
             _writer.WriteStartElement("office:scripts");
             if (_structStyles.IsMacroEnable)

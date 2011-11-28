@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using JWTools;
@@ -661,6 +662,34 @@ namespace TestBed
             projInfo.DictionaryPath = projInfo.ProjectPath;
             exportXeLaTex.Export(projInfo);
         }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            string cc = Environment.GetFolderPath(Environment.SpecialFolder.Programs);
+            string[] filePaths = Directory.GetFiles(@"C:\ProgramData\SIL\WritingSystemStore\", "*.ldml");
+            StringBuilder newProperty = new StringBuilder();
+            Dictionary<string,string> fontList1 = new Dictionary<string, string>();
+            foreach (string filePath in filePaths)
+            {
+                string fileName = Path.GetFileNameWithoutExtension(filePath);
+                XmlDocument xmlDocument = new XmlDocument();
+                xmlDocument.Load(filePath);
+                XmlNode node = xmlDocument.SelectSingleNode("/ldml/special[1]/*[namespace-uri()='urn://palaso.org/ldmlExtensions/v1' and local-name()='defaultFontFamily'][1]/@value");
+                newProperty.AppendLine("div[lang='" + fileName + "']{ font-family: \"" + node.Value + "\";}");
+                newProperty.AppendLine("span[lang='" + fileName + "']{ font-family: \"" + node.Value + "\";}");
+            }
+
+            string path = @"d:\TELanguage.css";
+            if (!File.Exists(path))
+            {
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    sw.Write(newProperty.ToString());
+                }
+            }
+        }
+
+        
 
     }
 }

@@ -15,6 +15,7 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
+using System.Reflection;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
@@ -87,26 +88,38 @@ namespace SIL.PublishingSolution
                 string cssFullName = GetCssFullName(outDir, mainFullName);
                 if (cssFullName == null) return;
                 string fluffedCssFullName;
-                if (Path.GetFileNameWithoutExtension(outFullName) == "main")
-                {
-                    fluffedCssFullName = GetFluffedCssFullName(outFullName, outDir, cssFullName);
-                }
-                else
+                //if (Path.GetFileNameWithoutExtension(outFullName) == "main")
+                //{
+                //    fluffedCssFullName = GetFluffedCssFullName(outFullName, outDir, cssFullName);
+                //}
+                //else
+                //{
+                //    fluffedCssFullName = GetFluffedCssFullName(GetRevFullName(outFullName), outDir, cssFullName);
+                //}
+                string revFileName = string.Empty;
+                if (Path.GetFileNameWithoutExtension(outFullName) == "FlexRev")
                 {
                     fluffedCssFullName = GetFluffedCssFullName(GetRevFullName(outFullName), outDir, cssFullName);
                 }
-                string revFileName = GetRevFullName(outDir);
+                else
+                {
+                    fluffedCssFullName = GetFluffedCssFullName(outFullName, outDir, cssFullName);
+                    revFileName = GetRevFullName(outDir);
+                }
                 string revCSS = string.Empty;
                 if (revFileName.Length > 0)
                 {
-                    revCSS = GetFluffedCssFullName(GetRevFullName(outFullName), outDir, cssFullName);
+                    revCSS = GetFluffedCssFullName(revFileName, outDir, cssFullName);
                 }
                 DestinationSetup();
-                Common.LanguageSettings(mainFullName, fluffedCssFullName);
+                SetDefaultLanguageFont(fluffedCssFullName, mainFullName);
                 if (DataType == "Scripture")
+                {
                     SeExport(mainXhtml, Path.GetFileName(fluffedCssFullName), outDir);
+                }
                 else if (DataType == "Dictionary")
                 {
+                    
                     string revFullName = GetRevFullName(outDir);
                     string gramFullName = MakeXhtml(outDir, "sketch.xml", "XLingPap.xsl", supportPath);
                     DeExport(outFullName, fluffedCssFullName, revFullName, revCSS, gramFullName);
@@ -157,6 +170,23 @@ namespace SIL.PublishingSolution
             }
         }
 
+        private void SetDefaultLanguageFont(string fluffedCssFullName, string mainFullName)
+        {
+            if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe" || DataType == "Dictionary")
+            {
+                Common.LanguageSettings(mainFullName, fluffedCssFullName, DataType == "Dictionary");
+            }
+            else
+            {
+                Common.TeLanguageSettings(fluffedCssFullName);
+            }
+
+            //string[] args = Environment.GetCommandLineArgs();
+            //for (int i = 0; i < args.Length; i++)
+            //{MessageBox.Show(args[i].ToString());}
+        }
+
+
         /// <summary>
         /// Returns reversal name with path (empty string if file doesn't exist)
         /// </summary>
@@ -165,6 +195,10 @@ namespace SIL.PublishingSolution
         protected static string GetRevFullName(string outDir)
         {
             //string revFullName = Common.PathCombine(Path.GetDirectoryName(outDir), "FlexRev.xhtml");
+            if(File.Exists(outDir))
+            {
+                outDir = Path.GetDirectoryName(outDir);
+            }
             string revFullName = Common.PathCombine(outDir, "FlexRev.xhtml");
             if (!File.Exists(revFullName))
                 revFullName = "";
@@ -178,6 +212,25 @@ namespace SIL.PublishingSolution
                 AddHomographAndSenseNumClassNames.Execute(revFullName, revFullName);
             }
             return revFullName;
+
+
+            //string tmpOutDir = outDir;
+            //string fileName = Path.GetFileName(tmpOutDir);
+            //if (fileName.Length > 1)
+            //    tmpOutDir = Path.GetDirectoryName(outDir);
+            //string revFullName = Common.PathCombine(tmpOutDir, "FlexRev.xhtml");
+            //if (!File.Exists(revFullName))
+            //    revFullName = "";
+            //else
+            //{
+            //    Common.StreamReplaceInFile(revFullName, "<ReversalIndexEntry_Self>", "");
+            //    Common.StreamReplaceInFile(revFullName, "</ReversalIndexEntry_Self>", "");
+            //    Common.StreamReplaceInFile(revFullName, "class=\"headword\"", "class=\"headref\"");
+            //    string revCssFullName = revFullName.Substring(0, revFullName.Length - 6) + ".css";
+            //    Common.StreamReplaceInFile(revCssFullName, ".headword", ".headref");
+            //    AddHomographAndSenseNumClassNames.Execute(revFullName, revFullName);
+            //}
+            //return revFullName;
         }
 
         /// <summary>
