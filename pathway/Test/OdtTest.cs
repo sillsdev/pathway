@@ -59,7 +59,7 @@ namespace Test
                     expectCanon.LoadInput(expectDocument);
                     Stream outputStream = (Stream)outputCanon.GetOutput(typeof(Stream));
                     Stream expectStream = (Stream)expectCanon.GetOutput(typeof(Stream));
-                    string errMessage = string.Format("{0}: {1} doesn't match", msg, name);
+                    string errMessage = string.Format("{0}: {1} {2} doesn't match", msg, fi.Name, name);
                     Assert.AreEqual(expectStream.Length, outputStream.Length, errMessage);
                     FileAssert.AreEqual(expectStream, outputStream, errMessage);
                 }
