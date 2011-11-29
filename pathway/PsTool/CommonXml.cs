@@ -167,6 +167,8 @@ namespace SIL.Tool
             return metaName;
         }
 
+
+        private static Dictionary<string, string> _metaDataDic = null;
         /// <summary>
         /// Get MetaData information from DictionaryStyleSettings.xml/ScriptureStyleSettings.xml
         /// </summary>
@@ -186,10 +188,10 @@ namespace SIL.Tool
             metaDataList.Add("Copyright Holder");
             metaDataList.Add("Subject");
 
-            Dictionary<string, string> metaDataDic = new Dictionary<string, string>();
+            _metaDataDic = new Dictionary<string, string>();
             foreach (string meta in metaDataList)
             {
-                metaDataDic[meta] = string.Empty;
+                _metaDataDic[meta] = string.Empty;
             }
 
             string metaData = _projectInputType.ToLower() == "scripture" ? "ScriptureStyleSettings.xml" : "DictionaryStyleSettings.xml";
@@ -199,12 +201,12 @@ namespace SIL.Tool
                 metaDataFull = Path.Combine(Path.Combine(Path.Combine(Path.Combine(GetAllUserAppPath(), "SIL"), "Pathway"), _projectInputType), metaData);
             }
             
-            if (!File.Exists(metaDataFull)) return metaDataDic;
+            if (!File.Exists(metaDataFull)) return _metaDataDic;
 
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(metaDataFull);
             XmlNode root = xmlDocument.DocumentElement;
-            if (root == null) return metaDataDic;
+            if (root == null) return _metaDataDic;
             string xPath = "//Metadata/meta";
             XmlNodeList returnNode = root.SelectNodes(xPath);
 
@@ -213,10 +215,10 @@ namespace SIL.Tool
                 string metaName = node.Attributes[0].Value;
                 if (metaDataList.Contains(metaName))
                 {
-                    metaDataDic[metaName] = node.LastChild.InnerText;
+                    _metaDataDic[metaName] = node.LastChild.InnerText;
                 }
             }
-            return metaDataDic;
+            return _metaDataDic;
         }
 
         /// <summary>
