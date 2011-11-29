@@ -1142,9 +1142,8 @@ namespace Test.PsTool
             string output = GetFileNameWithOutputPath(cssFileName);
             string expected = GetFileNameWithExpectedPath(cssFileName);
             CopyToOutput(sourceCssFile, output);
-            Common.LanguageSettings(sourceXhtmlFile, output, true);
+            Common.LanguageSettings(sourceXhtmlFile, output, true, string.Empty);
             TextFileAssert.AreEqual(expected, output);
-
         }
 
         #endregion

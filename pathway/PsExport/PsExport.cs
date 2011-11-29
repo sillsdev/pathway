@@ -88,14 +88,6 @@ namespace SIL.PublishingSolution
                 string cssFullName = GetCssFullName(outDir, mainFullName);
                 if (cssFullName == null) return;
                 string fluffedCssFullName;
-                //if (Path.GetFileNameWithoutExtension(outFullName) == "main")
-                //{
-                //    fluffedCssFullName = GetFluffedCssFullName(outFullName, outDir, cssFullName);
-                //}
-                //else
-                //{
-                //    fluffedCssFullName = GetFluffedCssFullName(GetRevFullName(outFullName), outDir, cssFullName);
-                //}
                 string revFileName = string.Empty;
                 if (Path.GetFileNameWithoutExtension(outFullName) == "FlexRev")
                 {
@@ -106,13 +98,13 @@ namespace SIL.PublishingSolution
                     fluffedCssFullName = GetFluffedCssFullName(outFullName, outDir, cssFullName);
                     revFileName = GetRevFullName(outDir);
                 }
-                string revCSS = string.Empty;
+                string fluffedRevCssFullName = string.Empty;
                 if (revFileName.Length > 0)
                 {
-                    revCSS = GetFluffedCssFullName(revFileName, outDir, cssFullName);
+                    fluffedRevCssFullName = GetFluffedCssFullName(revFileName, outDir, cssFullName);
                 }
                 DestinationSetup();
-                SetDefaultLanguageFont(fluffedCssFullName, mainFullName);
+                SetDefaultLanguageFont(fluffedCssFullName, mainFullName, fluffedRevCssFullName);
                 if (DataType == "Scripture")
                 {
                     SeExport(mainXhtml, Path.GetFileName(fluffedCssFullName), outDir);
@@ -122,7 +114,7 @@ namespace SIL.PublishingSolution
                     
                     string revFullName = GetRevFullName(outDir);
                     string gramFullName = MakeXhtml(outDir, "sketch.xml", "XLingPap.xsl", supportPath);
-                    DeExport(outFullName, fluffedCssFullName, revFullName, revCSS, gramFullName);
+                    DeExport(outFullName, fluffedCssFullName, revFullName, fluffedRevCssFullName, gramFullName);
                 }
             }
             catch (InvalidStyleSettingsException err)
@@ -170,11 +162,18 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void SetDefaultLanguageFont(string fluffedCssFullName, string mainFullName)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fluffedCssFullName"></param>
+        /// <param name="mainFullName"></param>
+        /// <param name="fluffedCssReversal"></param>
+        private void SetDefaultLanguageFont(string fluffedCssFullName, string mainFullName, string fluffedCssReversal)
         {
-            if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe" || DataType == "Dictionary")
+            string fileName = Path.GetFileName(mainFullName);
+            if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe" || (DataType == "Dictionary" && fileName == "main.xhtml"))
             {
-                Common.LanguageSettings(mainFullName, fluffedCssFullName, DataType == "Dictionary");
+                Common.LanguageSettings(mainFullName, fluffedCssFullName, DataType == "Dictionary", fluffedCssReversal);
             }
             else
             {
