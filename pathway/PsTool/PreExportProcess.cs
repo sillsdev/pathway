@@ -300,7 +300,7 @@ namespace SIL.Tool
             };
             // figure out the dimensions of our rect based on the font info
             Font badgeFont = new Font("Times New Roman", 48);
-            SizeF size = g.MeasureString(strTitle, badgeFont, 640);
+            SizeF size = g.MeasureString(strTitle, badgeFont, (bmp.Width - 20));
             int width = (int)Math.Ceiling(size.Width);
             int height = (int)Math.Ceiling(size.Height);
             // create the bounding rect, centered horizontally on the image
