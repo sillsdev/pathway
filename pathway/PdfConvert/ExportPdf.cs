@@ -28,6 +28,8 @@ namespace SIL.PublishingSolution
         private static string _fullPrincePath;
         private static string _processedXhtml;
 
+        #region Properties
+        #region ExportType
         public string ExportType
         {
             get
@@ -35,16 +37,45 @@ namespace SIL.PublishingSolution
                 return "Pdf (Using Prince)";
             }
         }
+        #endregion ExportType
 
+        #region Handle
         public bool Handle(string inputDataType)
         {
             bool returnValue = false;
-            if (inputDataType.ToLower() == "dictionary" || inputDataType.ToLower() == "scripture")
-            {
-                returnValue = true;
-            }
+            if (RegPrinceKey != null)
+                if (inputDataType.ToLower() == "dictionary" || inputDataType.ToLower() == "scripture")
+                {
+                    returnValue = true;
+                }
             return returnValue;
         }
+        #endregion Handle
+
+        #region RegPrinceKey
+        public static RegistryKey RegPrinceKey
+        {
+            get
+            {
+                RegistryKey regPrinceKey;
+                try
+                {
+                    regPrinceKey =
+                        Registry.LocalMachine.OpenSubKey(@"SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL\Prince_is1");
+                    if (regPrinceKey == null)
+                        regPrinceKey =
+                            Registry.LocalMachine.OpenSubKey(
+                                @"SOFTWARE\Wow6432Node\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL\Prince_is1");
+                }
+                catch (Exception)
+                {
+                    regPrinceKey = null;
+                }
+                return regPrinceKey;
+            }
+        }
+        #endregion RegPrinceKey
+        #endregion Properties
 
         /// <summary>
         /// Entry point for InDesign export
@@ -62,17 +93,7 @@ namespace SIL.PublishingSolution
             bool success;
             try
             {
-                RegistryKey regPrinceKey;
-                try
-                {
-                    regPrinceKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL\Prince_is1");
-                    if (regPrinceKey == null)
-                        regPrinceKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL\Prince_is1");
-                }
-                catch (Exception)
-                {
-                    regPrinceKey = null;
-                }
+                var regPrinceKey = RegPrinceKey;
                 if (regPrinceKey != null)
                 {
                     var curdir = Environment.CurrentDirectory;
@@ -91,8 +112,6 @@ namespace SIL.PublishingSolution
                     preProcessor.SetDropCapInCSS(mergedCSS);
 
                     string xhtmlFileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
-                    //if (!String.IsNullOrEmpty(projInfo.DictionaryOutputName))
-                    //    xhtmlFileName = Path.GetFileNameWithoutExtension(projInfo.DictionaryOutputName); 
                     string defaultCSS = Path.GetFileName(mergedCSS);
                     Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCSS);
                     Object princePath = regPrinceKey.GetValue("InstallLocation");

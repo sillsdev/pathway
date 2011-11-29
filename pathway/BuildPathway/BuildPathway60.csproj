@@ -515,8 +515,8 @@
     <ParatextSupport Include="..\ParatextSupport\$(OutputPath)\ParatextSupport.*" />
     <AllBackend Include="..\InDesignConvert\$(OutputPath)\InDesignConvert.*" />
     <AllBackend Include="..\epubConvert\$(OutputPath)\epubConvert.*" />
+    <AllBackend Include="..\PdfConvert\$(OutputPath)\PdfConvert.*" />
     <TestBackend Include="..\OpenOfficeConvert_OLD\$(OutputPath)\OpenOfficeConvert_OLD.*" />
-    <TestBackend Include="..\PdfConvert\$(OutputPath)\PdfConvert.*" />
     <TestBackend Include="..\WordPressConvert\$(OutputPath)\WordPressConvert.*" />
     <TestBackend Include="..\XeTexConvert\$(OutputPath)\XeTexConvert.*" />
     <TestBackend Include="..\XeLaTexConvert\$(OutputPath)\XeLaTexConvert.*" />
