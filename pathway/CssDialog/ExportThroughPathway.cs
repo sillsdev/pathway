@@ -619,14 +619,19 @@ namespace SIL.PublishingSolution
                     Common.GetValueFromRegistry("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Prince_is1",
                                                 "DisplayName");
             else if (Common.GetOsName().ToUpper() == "UNIX")
-                princeVersion = Common.GetAllUserAppPath(); //To Do
+            {
+                while (Directory.Exists("/usr/lib/prince/bin/"))
+                {
+                    ddlLayout.Items.Add("Pdf (Using Prince)");
+                    break;
+                }
+            }
 
             if (princeVersion != null)
             {
                 ddlLayout.Items.Add("Pdf (Using Prince)");
             }
         }
-
         #endregion LoadAvailFormats
 
         #region Events
@@ -1202,6 +1207,8 @@ namespace SIL.PublishingSolution
                 }
             }
         }
+
+        
 
     }
 }

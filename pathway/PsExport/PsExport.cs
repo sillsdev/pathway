@@ -469,19 +469,29 @@ namespace SIL.PublishingSolution
                 projInfo.ProjectName = Path.GetFileNameWithoutExtension(revFull);
             }
             SetExtraProcessingValue(projInfo);
-            
-            if (Destination.ToLower() == "pdf (using prince)")  //For Princexml output generating
+
+            if (Common.GetOsName().ToUpper() == "UNIX")
             {
-                Pdf princePdf = new Pdf();
-                princePdf.Xhtml = projInfo.DefaultXhtmlFileWithPath;
-                princePdf.Css = projInfo.DefaultXhtmlFileWithPath;
-                princePdf.Create(Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) + ".pdf");
-                //ExportPdf princePdf = new ExportPdf();
-                //princePdf.Launch(Destination, projInfo);
+                if (Destination.ToLower() == "pdf (using prince)")  //For Princexml output generating
+                {
+                    Common.RunCommand("Prince", projInfo.DefaultXhtmlFileWithPath + " " + projInfo.DefaultCssFileWithPath + " " + " -o " + Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) + ".pdf", 1);
+                }
             }
             else
             {
-                Backend.Launch(Destination, projInfo);    
+                if (Destination.ToLower() == "pdf (using prince)") //For Princexml output generating
+                {
+                    Pdf princePdf = new Pdf();
+                    princePdf.Xhtml = projInfo.DefaultXhtmlFileWithPath;
+                    princePdf.Css = projInfo.DefaultCssFileWithPath;
+                    princePdf.Create(Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) + ".pdf");
+                    //ExportPdf princePdf = new ExportPdf();
+                    //princePdf.Launch(Destination, projInfo);
+                }
+                else
+                {
+                    Backend.Launch(Destination, projInfo);
+                }
             }
         }
 
