@@ -72,7 +72,13 @@ namespace SIL.Tool
             _projInfo = projInfo;
             if (Param.Value.Count > 0)
                 _projInfo.ProjectInputType = Param.Value[Param.InputType];
-            FixInvalidXhtml();
+
+            // EDB 11/29/2011: removed method to fix invalid xhtml:
+            // - There was only 1 block of code in there to fix a bug that had been fixed in 7.0.4
+            // - This code gets called A LOT from different exports; the PSExport.Export class is probably
+            //   a better place to put this kind of code cleanup, as it only gets called once, before the
+            //   backends are launched.
+            //FixInvalidXhtml();
         }
         public string ProcessedXhtml
         {
@@ -782,32 +788,7 @@ namespace SIL.Tool
             return _xhtmlFileNameWithPath;
         }
 
-        /// <summary>
-        /// Replaces known bad xhtml emitted by the host applications (FW, PT) with valid xhtml.
-        /// This method is a workaround "holding bin" -- if you come across an error in the xhtml,
-        /// write up the defect and add a temporary workaround here, noting the defect number for tracking.
-        /// Once the defects are fixed, the workaround blocks can be removed from this method.
-        /// </summary>
-        public void FixInvalidXhtml()
-        {
-            if (!File.Exists(_xhtmlFileNameWithPath)) return;
-            // FWR-3903 - fixed in 7.0.4 / 7.1
-            //if (_projInfo.ProjectInputType.ToLower() == "dictionary")
-            //{
-            //    Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "<LexEntryLink_HeadWordRef",
-            //                               "<span class='LexEntryLink_HeadWordRef'");
-            //    Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "</LexEntryLink_HeadWordRef", "</span");
-            //    Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "<AStr ws", "<span lang");
-            //    Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "</AStr", "</span");
-            //    Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "<Run ws", "<span lang");
-            //    Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "namedStyle", "class");
-            //    Common.StreamReplaceInFile(_xhtmlFileNameWithPath, "</Run", "</span");
-            //}
-            // FWR-3903
-
-        }
-
-        public string ReplaceInvalidTagtoSpan(string pattern, string tagType)
+       public string ReplaceInvalidTagtoSpan(string pattern, string tagType)
         {
             string OutputFile = OpenFile();
             try
