@@ -223,6 +223,7 @@ the user's preferences from the Configuration Tool:
     margin-left : 0;
     padding-bottom : 2%;
     padding-top : 2%;
+    line-height:125%;
 }
 .Title_Secondary {
     display: block;
