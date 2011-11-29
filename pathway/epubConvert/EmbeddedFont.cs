@@ -1,5 +1,25 @@
-﻿using System;
-using System.IO;
+﻿// --------------------------------------------------------------------------------------
+// <copyright file="EmbeddedFont.cs" from='2009' to='2011' company='SIL International'>
+//      Copyright © 2010, 2011 SIL International. All Rights Reserved.
+//
+//      Distributable under the terms of specified in the LICENSING.txt file.
+// </copyright>
+// <author>Erik Brommers</author>
+// <email>erik_brommers@sil.org</email>
+// Last reviewed:
+// 
+// <remarks>
+// Embedded Font processing for .epub files
+//
+// .epub files allow you to include fonts for more accurate rendering of non-western
+// code points in e-book readers. This class allows us to keep track of the details of
+// a font -- whether it's freely redistributable, what the font's filename is, whether
+// it has a bold or italic variant -- so that we can build up font lists in the 
+// exportepub class.
+// </remarks>
+// --------------------------------------------------------------------------------------
+
+using System;
 using SIL.Tool;
 
 namespace epubConvert
@@ -50,7 +70,9 @@ namespace epubConvert
             protected set { _serif = value; }
         }
         /// <summary>
-        /// Returns whether this font has a license that allows us to embed it freely. SIL fonts fall under this category.
+        /// Returns whether this font has a license that allows us to embed it freely. SIL fonts fall under this category,
+        /// as do fonts with GPL and OFL licensing. This flag looks at the license agreement embedded in the Copyright
+        /// field of the font itself.
         /// </summary>
         public bool CanRedistribute
         {

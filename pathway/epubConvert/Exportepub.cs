@@ -26,6 +26,8 @@
 // See also http://www.openebook.org/2007/ops/OPS_2.0_final_spec.html
 // </remarks>
 // --------------------------------------------------------------------------------------
+
+// uncomment this to write out performance timings
 //#define TIME_IT 
 
 using System;
