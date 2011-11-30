@@ -242,6 +242,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplyXslt\ApplyXsltTest.cs" />
     <Compile Include="Build\FileComponentsTest.cs" />
     <Compile Include="ConfigurationTool\ConfigurationToolBLTest.cs" />
     <Compile Include="ConfigurationTool\ConfigurationToolTest.cs" />
@@ -968,6 +969,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ApplyXslt\TestFiles\Expected\" />
+    <Folder Include="ApplyXslt\TestFiles\Input\" />
     <Folder Include="Build\TestFiles\Input\Files\ConfigurationTool\epubcheck-1.1\" />
     <Folder Include="Properties\" />
     <Folder Include="PsExport\TestFiles\Input\T5\Pictures\" />
