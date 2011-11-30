@@ -19,10 +19,10 @@
     <xsl:template match="x:a">
         <!-- Anchors must reference a node to be included -->
         <xsl:variable name="myRef">
-            <xsl:value-of select="@href"/>
+            <xsl:value-of select="substring(@href,2)"/>
         </xsl:variable>
         <xsl:choose>
-            <xsl:when test="count(*[@id = $myRef]) &gt; 0">
+            <xsl:when test="count(//*[@id = $myRef]) &gt; 0">
                 <xsl:copy>
                     <xsl:for-each select="@*">
                         <xsl:copy/>
