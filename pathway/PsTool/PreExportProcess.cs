@@ -326,10 +326,10 @@ namespace SIL.Tool
             if (Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("false")) { return string.Empty; }
             var sb = new StringBuilder();
             sb.Append("<div id='TitlePage' class='Title'><h1>");
-            sb.Append(Param.GetMetadataValue(Param.Title));
+            sb.Append(Common.ReplaceSymbolToText(Param.GetMetadataValue(Param.Title)));
             sb.AppendLine("</h1>");
             sb.Append("<p class='Publisher'>");
-            sb.Append(Param.GetMetadataValue(Param.Publisher));
+            sb.Append(Common.ReplaceSymbolToText(Param.GetMetadataValue(Param.Publisher)));
             sb.AppendLine("</p>");
             // logo stuff
             sb.Append("<p class='logo'>");
