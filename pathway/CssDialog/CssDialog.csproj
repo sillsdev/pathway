@@ -311,7 +311,9 @@
     <Compile Include="OrganizationNameDialog.Designer.cs">
       <DependentUpon>OrganizationNameDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pdf.cs" />
+    <Compile Include="Pdf.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PDFtoImageConverter.cs" />
     <Compile Include="PdftoJpg.cs" />
     <Compile Include="PopupForm.cs">

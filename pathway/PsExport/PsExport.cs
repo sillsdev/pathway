@@ -469,29 +469,7 @@ namespace SIL.PublishingSolution
             }
             SetExtraProcessingValue(projInfo);
 
-            if (Common.GetOsName().ToUpper() == "UNIX")
-            {
-                if (Destination.ToLower() == "pdf (using prince)")  //For Princexml output generating
-                {
-                    Common.RunCommand("Prince", projInfo.DefaultXhtmlFileWithPath + " " + projInfo.DefaultCssFileWithPath + " " + " -o " + Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) + ".pdf", 1);
-                }
-            }
-            else
-            {
-                if (Destination.ToLower() == "pdf (using prince)") //For Princexml output generating
-                {
-                    Pdf princePdf = new Pdf();
-                    princePdf.Xhtml = projInfo.DefaultXhtmlFileWithPath;
-                    princePdf.Css = projInfo.DefaultCssFileWithPath;
-                    princePdf.Create(Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) + ".pdf");
-                    //ExportPdf princePdf = new ExportPdf();
-                    //princePdf.Launch(Destination, projInfo);
-                }
-                else
-                {
-                    Backend.Launch(Destination, projInfo);
-                }
-            }
+            Backend.Launch(Destination, projInfo);
         }
 
         private void SetReverseExistValue(PublicationInformation projInfo)

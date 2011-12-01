@@ -55,9 +55,7 @@ namespace SIL.PublishingSolution
                 className = "SIL.PublishingSolution.Export" + className;
                 IExportProcess exportProcess = CreateObject(fileInfo.FullName, className) as IExportProcess;
 
-                //For Prince output, pdfconvert.dll should not allow it now. If the user installed princexml software. It will enable automatically.
-                if (fileInfo.Name.ToLower() != "pdfconvert.dll") 
-                    _backend.Add(exportProcess);
+                _backend.Add(exportProcess);
             }
         }
 
@@ -87,11 +85,6 @@ namespace SIL.PublishingSolution
             {
                 foreach (IExportProcess process in _backend)
                 {
-                    if (type.ToLower() == "pdf (using prince)")
-                    {
-                        return true;
-                    }
-                    
                     if (process.ExportType.ToLower() == "openoffice/libreoffice")
                         type = OpenOfficeClassifier(publicationInformation, type); // Cross checking for OpenOffice
 

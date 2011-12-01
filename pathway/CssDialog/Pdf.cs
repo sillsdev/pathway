@@ -71,6 +71,14 @@ namespace SIL.PublishingSolution
         {
             Debug.Assert(!string.IsNullOrEmpty(Xhtml), "xhtml not set");
             //Debug.Assert(!string.IsNullOrEmpty(Css), "css not set");
+
+            if (Common.GetOsName().ToUpper() == "UNIX")
+            {
+                if (!File.Exists("/usr/bin/Prince"))
+                    throw new MISSINGPRINCE();
+                Common.RunCommand("Prince ", Xhtml + " " + Css + " -o " + outName, 1);
+                return;
+            }
             RegistryKey regPrinceKey;
             try
             {

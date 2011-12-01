@@ -94,7 +94,7 @@ namespace SIL.PublishingSolution
             try
             {
                 var regPrinceKey = RegPrinceKey;
-                if (regPrinceKey != null)
+                if (regPrinceKey != null || Common.GetOsName().ToUpper() == "UNIX")
                 {
                     var curdir = Environment.CurrentDirectory;
                     PreExportProcess preProcessor = new PreExportProcess(projInfo);
@@ -114,12 +114,17 @@ namespace SIL.PublishingSolution
                     string xhtmlFileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
                     string defaultCSS = Path.GetFileName(mergedCSS);
                     Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCSS);
-                    Object princePath = regPrinceKey.GetValue("InstallLocation");
-                    _fullPrincePath = Common.PathCombine((string) princePath, "Engine/Bin/Prince.exe");
-                    var myPrince = new Prince(_fullPrincePath);
-                    myPrince.AddStyleSheet(defaultCSS);
                     _processedXhtml = preProcessor.ProcessedXhtml;
-                    myPrince.Convert(_processedXhtml, xhtmlFileName + ".pdf");
+                    if (Common.GetOsName().ToUpper() != "UNIX")
+                    {
+                        Object princePath = regPrinceKey.GetValue("InstallLocation");
+                        _fullPrincePath = Common.PathCombine((string)princePath, "Engine/Bin/Prince.exe");
+                        var myPrince = new Prince(_fullPrincePath);
+                        myPrince.AddStyleSheet(defaultCSS);
+                        myPrince.Convert(_processedXhtml, xhtmlFileName + ".pdf");
+                    }
+                    else
+                        Common.RunCommand("Prince ", _processedXhtml + " " + defaultCSS + " -o " + xhtmlFileName + ".pdf", 1);
                     if (!Common.Testing)
                         Process.Start(xhtmlFileName + ".pdf");
                     Environment.CurrentDirectory = curdir;

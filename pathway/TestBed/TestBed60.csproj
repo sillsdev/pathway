@@ -284,10 +284,6 @@
       <Project>{E225E5AF-B603-41D1-BB58-E3AAE05C59FD}</Project>
       <Name>OpenOfficeConvert60</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenOfficeConvert_OLD\OpenOfficeConvert_OLD60.csproj">
-      <Project>{82BBBF18-36E9-4C7B-89DE-FCC24A0C80A5}</Project>
-      <Name>OpenOfficeConvert_OLD60</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PsExport\PsExport60.csproj">
       <Project>{DCD48287-7F36-4DBB-94CF-4FF617BF1F78}</Project>
       <Name>PsExport60</Name>
