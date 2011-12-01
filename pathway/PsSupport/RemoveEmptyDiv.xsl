@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- #############################################################
     # Name:        RemoveEmptyDiv.xsl
-    # Purpose:     Filter to remove empty entries
+    # Purpose:     Filter to remove empty entries and subsubentries
     #
     # Author:      Greg Trihus <greg_trihus@sil.org>
     #
@@ -16,7 +16,7 @@
         doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"/>
     
     <!-- Handle entry and letData element-->
-    <xsl:template match="x:div[@class = 'entry']">
+    <xsl:template match="x:div[@class = 'entry' or @class = 'subsubentries']">
         <!-- Entries must have spans to be included -->
         <xsl:if test="count(.//x:span) &gt; 0">
             <xsl:copy>
@@ -29,7 +29,7 @@
     </xsl:template>
 
     <!-- Copy unaffected non-span elements-->
-    <xsl:template match="x:html | x:head | x:body | x:span | x:div[@class != 'entry'] | x:link | x:meta | x:a | x:img | x:title | x:style | comment()">
+    <xsl:template match="x:html | x:head | x:body | x:span | x:div[@class != 'entry' and @class != 'subsubentries'] | x:link | x:meta | x:a | x:img | x:title | x:style | comment()">
         <xsl:copy>
             <xsl:for-each select="@*">
                 <xsl:copy/>
