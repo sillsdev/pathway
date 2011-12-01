@@ -44,6 +44,7 @@
             this.txtInputPath = new System.Windows.Forms.TextBox();
             this.Btn_InputPath = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button12 = new System.Windows.Forms.Button();
             this.btnXeLaTex = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
@@ -64,7 +65,7 @@
             this.btnFileSizeZero = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
+            this.btnDotNet = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -226,6 +227,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnDotNet);
             this.groupBox1.Controls.Add(this.button12);
             this.groupBox1.Controls.Add(this.btnXeLaTex);
             this.groupBox1.Controls.Add(this.button11);
@@ -247,6 +249,16 @@
             this.groupBox1.TabIndex = 51;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Export";
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(142, 162);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(112, 23);
+            this.button12.TabIndex = 65;
+            this.button12.Text = "WritingStoreTo CSS";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // btnXeLaTex
             // 
@@ -462,15 +474,16 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button12
+            // btnDotNet
             // 
-            this.button12.Location = new System.Drawing.Point(142, 162);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(112, 23);
-            this.button12.TabIndex = 65;
-            this.button12.Text = "WritingStoreTo CSS";
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
+            this.btnDotNet.AccessibleName = "BtnFlexTest";
+            this.btnDotNet.Location = new System.Drawing.Point(215, 192);
+            this.btnDotNet.Name = "btnDotNet";
+            this.btnDotNet.Size = new System.Drawing.Size(114, 28);
+            this.btnDotNet.TabIndex = 66;
+            this.btnDotNet.Text = "DotNet 2.0 Installed";
+            this.btnDotNet.UseVisualStyleBackColor = true;
+            this.btnDotNet.Click += new System.EventHandler(this.btnDotNet_Click);
             // 
             // FlexPluginTest
             // 
@@ -539,5 +552,6 @@
         private System.Windows.Forms.Button btnFlexTest2;
         private System.Windows.Forms.Button btnXeLaTex;
         private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button btnDotNet;
     }
 }

@@ -237,7 +237,7 @@ namespace TestBed
             plugin.Export(outputpath);
 
         }
-      
+
         private void BtnFlexTest_Click(object sender, EventArgs e)
         {
             // Lift Test
@@ -315,7 +315,7 @@ namespace TestBed
             var fd = new OpenFileDialog();
             fd.Filter = fileType;
             fd.ShowDialog();
-            
+
             return fd.FileName;
         }
 
@@ -423,9 +423,9 @@ namespace TestBed
             DirectoryInfo[] dirs = directoryInfo.GetDirectories();
             foreach (DirectoryInfo dir in dirs)
             {
-                if (dir.Name == ".svn") 
+                if (dir.Name == ".svn")
                     continue;
-                
+
                 // Process sub directories
                 string destinationDir = Path.Combine(inputPath, dir.Name);
 
@@ -454,14 +454,14 @@ namespace TestBed
 
             string ProjType = "Dictionary";
 
-            if(radScripture.Checked)
+            if (radScripture.Checked)
             {
                 ProjType = "Scripture";
             }
 
-           
+
             projInfo.FinalOutput = "odt";
-            
+
             projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
             projInfo.DictionaryPath = Path.GetDirectoryName(txtInputPath.Text);
             projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
@@ -596,7 +596,7 @@ namespace TestBed
             StyToCSS styToCss = new StyToCSS();
             styToCss.StyFullPath = txtCSSInput.Text;
             string outputCSS = txtCSSInput.Text.Replace(".sty", ".css");
-            styToCss.ConvertStyToCSS("TestBed",outputCSS );
+            styToCss.ConvertStyToCSS("TestBed", outputCSS);
             MessageBox.Show("Exported in " + outputCSS);
 #endif
         }
@@ -668,7 +668,7 @@ namespace TestBed
             string cc = Environment.GetFolderPath(Environment.SpecialFolder.Programs);
             string[] filePaths = Directory.GetFiles(@"C:\ProgramData\SIL\WritingSystemStore\", "*.ldml");
             StringBuilder newProperty = new StringBuilder();
-            Dictionary<string,string> fontList1 = new Dictionary<string, string>();
+            Dictionary<string, string> fontList1 = new Dictionary<string, string>();
             foreach (string filePath in filePaths)
             {
                 string fileName = Path.GetFileNameWithoutExtension(filePath);
@@ -689,7 +689,51 @@ namespace TestBed
             }
         }
 
-        
+        private void btnDotNet_Click(object sender, EventArgs e)
+        {
+            //HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework Setup\NDP\v2.0.50727
+            //HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework\policy\v2.0
 
+            bool isDotnetInstalled = IsDotNet2IsInstalled(@"SOFTWARE\Microsoft\NET Framework Setup\NDP\v2.0.50727", "Version");
+
+            if (isDotnetInstalled)
+            {
+                //Policy directory
+                isDotnetInstalled = IsDotNet2IsInstalled(@"SOFTWARE\Microsoft\.NETFramework\policy\v2.0", "50727");
+            }
+
+            if (isDotnetInstalled)
+            {
+                MessageBox.Show("DotNet 2.0 is installed in this System.");
+            }
+            else
+            {
+                MessageBox.Show("DotNet 2.0 is not installed");
+            }
+        }
+
+        private bool IsDotNet2IsInstalled(string registrySubDirectory, string keyName)
+        {
+            string registryValue = string.Empty;
+            if (Common.GetOsName() == "Windows7")
+                registryValue = Common.GetValueFromRegistry(registrySubDirectory, keyName);
+            else if (Common.GetOsName() == "Windows XP")
+                registryValue = Common.GetValueFromRegistry(registrySubDirectory, keyName);
+            else if (Common.GetOsName().ToUpper() == "UNIX")
+            {
+                System.Security.Principal.WindowsPrincipal p = System.Threading.Thread.CurrentPrincipal as System.Security.Principal.WindowsPrincipal;
+                string userName = p.Identity.Name;
+                while (Directory.Exists("/home/" + userName + "/.winetrickscache/dotnet20/"))
+                {
+                    registryValue = "Exists";
+                    break;
+                }
+            }
+
+            if(registryValue.Length > 0)
+                return true;
+
+            return false;
+        }
     }
 }
