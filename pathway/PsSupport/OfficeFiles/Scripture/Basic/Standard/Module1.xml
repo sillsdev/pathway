@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Oct-25-2011 for TD-2696(FlexRev.odt takes time to open)
+&apos;Changed On Dec-02-2011 for TD-2784(OpenOffice - Table of Content (Create Macro for updating the TOC))
 
 &apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -30,12 +30,16 @@ Dim ProgressValue As Integer
 Dim PageCount as Integer
 Dim CanSave as Boolean
 
+
+
 &apos;This procedure set the dialgue to correct Update References 
 Sub StartDontForget
 
 	TurnOffNonPrintingCharacters() 
 	
 	AlingOverlappingImages()
+	
+	UpdateTOC()
 	
 	If CanSave Then
 		oDoc = ThisComponent 
@@ -48,6 +52,19 @@ Sub StartDontForget
 
 End Sub
 
+&apos;Update the Table of Content
+Sub UpdateTOC
+On Error GoTo MyError:
+   oDoc = ThisComponent
+   oDoc.refresh() 
+   oIndexes = oDoc.getDocumentIndexes() 
+   oIndex = oIndexes.getByName(&quot;Table of Contents1&quot;) 
+   oIndex.update() 
+   &apos;oDoc.store() 
+Exit Sub
+MyError:
+
+End Sub
 
 Function GetBookCodeName2()
 dim myList, count
