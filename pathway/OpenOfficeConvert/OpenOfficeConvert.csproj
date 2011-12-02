@@ -219,6 +219,7 @@
     <Compile Include="OOStyleBase.cs" />
     <Compile Include="OOMapProperty.cs" />
     <Compile Include="OOStyles.cs" />
+    <Compile Include="TableOfContent.cs" />
     <Compile Include="OOUtility.cs">
       <SubType>Code</SubType>
     </Compile>

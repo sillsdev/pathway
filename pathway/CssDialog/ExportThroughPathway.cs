@@ -433,7 +433,7 @@ namespace SIL.PublishingSolution
         {
             // Front Matter tab
             // edb - temporary / remove as exports are implemented
-            if (!ddlLayout.Text.Contains("epub"))
+            if (!ddlLayout.Text.Contains("epub") && !ddlLayout.Text.Contains("OpenOffice/LibreOffice"))
             {
                 tabPage2.Enabled = false;
                 chkCoverImage.Enabled = false;

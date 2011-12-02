@@ -345,7 +345,6 @@
             this.chkTOC.TabIndex = 66;
             this.chkTOC.Text = "Table of Contents";
             this.chkTOC.UseVisualStyleBackColor = true;
-            this.chkTOC.Visible = false;
             // 
             // lnkChooseCopyright
             // 

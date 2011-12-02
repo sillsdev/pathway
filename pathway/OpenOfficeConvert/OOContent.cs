@@ -2367,7 +2367,8 @@ namespace SIL.PublishingSolution
             //_writer.WriteStartElement("text:p");
             //_writer.WriteAttributeString("text:style-name", "P4");
             //_writer.WriteEndElement();
-
+            
+            CallTOC();
 
             //TD-2567 - We avoid below coding for ODM
             if (_projInfo.FileSequence == null || _projInfo.FileSequence.Count == 1)
@@ -2406,6 +2407,31 @@ namespace SIL.PublishingSolution
             //        _writer.WriteEndElement();
             //    }
             //}
+        }
+
+        private void CallTOC()
+        {
+            Param.LoadSettings();
+            string organization;
+            try
+            {
+                // get the organization
+                organization = Param.Value["Organization"];
+            }
+            catch (Exception)
+            {
+                // shouldn't happen (ExportThroughPathway dialog forces the user to select an organization), 
+                // but just in case, specify a default org.
+                organization = "SIL International";
+            }
+            string tableOfContent = Param.GetMetadataValue(Param.TableOfContents, organization) ?? "";
+                // empty string if null / not found
+
+            if (tableOfContent.ToLower() == "true")
+            {
+                TableOfContent toc = new TableOfContent();
+                toc.CreateTOC(_writer, _projInfo.ProjectInputType);
+            }
         }
 
         private void CreateVariable()
