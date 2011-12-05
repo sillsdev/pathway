@@ -411,48 +411,52 @@ namespace SIL.Tool
             //For ParaText Path.
             if (fromPath == string.Empty)
             {
-                string databaseNamePara = databaseName; // "NKOu1"; // todo substitute for database name
-                string key = @"HKEY_LOCAL_MACHINE\SOFTWARE\ScrChecks\1.0\Settings_Directory";
-                object paraPath1 = Registry.GetValue(key, "", "") ?? string.Empty;
-                string paraPath = paraPath1.ToString();
-                string dataPath = PathCombine(paraPath, databaseNamePara);
-                fileName = Path.GetFileName(src); // para + database + fileName
-                string flexPict = PathCombine(dataPath, fileName);
-                if (File.Exists(flexPict))
-                {
-                    fromPath = flexPict;
-                }
-                else
-                {
-                    // Note: In ParaText original files are stored in {any Drive\My Paratext Projects\{project name}\local\figures}
-                    // Note: The converted jpg files are stored under figures folder.
 
-                    // para + database + figures(folder) + fileName
-                    flexPict = PathCombine(dataPath, PathCombine("figures", fileName));
-                    string flexJPGPath = flexPict;
-                    if (Path.GetExtension(flexJPGPath).ToLower() != "jpg") // jpg files need no conversion
+                if (Common.GetOsName().ToLower() != "unix")
+                {
+                    string databaseNamePara = databaseName; // "NKOu1"; // todo substitute for database name
+                    string key = @"HKEY_LOCAL_MACHINE\SOFTWARE\ScrChecks\1.0\Settings_Directory";
+                    object paraPath1 = Registry.GetValue(key, "", "") ?? string.Empty;
+                    string paraPath = paraPath1.ToString();
+                    string dataPath = PathCombine(paraPath, databaseNamePara);
+                    fileName = Path.GetFileName(src); // para + database + fileName
+                    string flexPict = PathCombine(dataPath, fileName);
+                    if (File.Exists(flexPict))
                     {
-                        flexJPGPath = Path.ChangeExtension(flexPict, "jpg");
-                    }
-                    if (File.Exists(flexJPGPath))
-                    {
-                        fromPath = flexJPGPath;
+                        fromPath = flexPict;
                     }
                     else
                     {
-                        // para + database + local(folder) + figures(folder) + fileName
-                        flexPict = PathCombine(dataPath, PathCombine("local", PathCombine("figures", fileName)));
-                        if (File.Exists(flexPict))
+                        // Note: In ParaText original files are stored in {any Drive\My Paratext Projects\{project name}\local\figures}
+                        // Note: The converted jpg files are stored under figures folder.
+
+                        // para + database + figures(folder) + fileName
+                        flexPict = PathCombine(dataPath, PathCombine("figures", fileName));
+                        string flexJPGPath = flexPict;
+                        if (Path.GetExtension(flexJPGPath).ToLower() != "jpg") // jpg files need no conversion
                         {
-                            fromPath = flexPict;
+                            flexJPGPath = Path.ChangeExtension(flexPict, "jpg");
+                        }
+                        if (File.Exists(flexJPGPath))
+                        {
+                            fromPath = flexJPGPath;
                         }
                         else
                         {
-                            // para + database + fileName with exact sourceFolder path
-                            flexPict = PathCombine(dataPath, src);
+                            // para + database + local(folder) + figures(folder) + fileName
+                            flexPict = PathCombine(dataPath, PathCombine("local", PathCombine("figures", fileName)));
                             if (File.Exists(flexPict))
                             {
                                 fromPath = flexPict;
+                            }
+                            else
+                            {
+                                // para + database + fileName with exact sourceFolder path
+                                flexPict = PathCombine(dataPath, src);
+                                if (File.Exists(flexPict))
+                                {
+                                    fromPath = flexPict;
+                                }
                             }
                         }
                     }
