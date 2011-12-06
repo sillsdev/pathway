@@ -10,6 +10,6 @@
 }
 .subentry {
        text-align: justify;
-       margin-left: 18pt;
-       text-indent: -12pt;
+       margin-left: 12pt;
+       display: block;
 }
