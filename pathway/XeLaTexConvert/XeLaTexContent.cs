@@ -977,13 +977,17 @@ namespace SIL.PublishingSolution
                             toPath = Common.ConvertTifftoImage(fileName1, "jpg");
                             if (picFile != null) picFile = picFile.Replace(".tif", ".jpg");
                             if (dest != null) dest = dest.Replace(".tif", ".jpg");
+                            fileName1 = toPath;
+                            toPath = instPath;
                         }
                         if (!string.IsNullOrEmpty(toPath))
+                        {
                             File.Copy(fileName1, Common.PathCombine(toPath, Path.GetFileName(fileName1)), true);
+                        }
                     }
                     else
                     {
-                        if (toPath.IndexOf(".tif") >= 0)
+                        if (picFile.IndexOf(".tif") >= 0)
                         {
                             if (picFile != null) picFile = picFile.Replace(".tif", ".jpg");
                         }
