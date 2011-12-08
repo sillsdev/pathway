@@ -1862,6 +1862,7 @@ namespace SIL.PublishingSolution
                     sbID.Length = 0; // reset the stringbuilder
                     sbID.Append("id=\"");
                     sbID.Append(relativeID);
+                    sbID.Append("\"");
                     bFound = false;
                     // Try 2: localize the search to the split books (e.g., PartFile0002_01, _02, _03 ...)
                     int split = Path.GetFileName(sourceFile).IndexOf("_");
