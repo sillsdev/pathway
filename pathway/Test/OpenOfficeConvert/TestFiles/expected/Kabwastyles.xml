@@ -448,21 +448,30 @@
           <text:span text:style-name="MT1">
             <text:variable-get text:name="Left_Guideword_L" office:value-type="string" />
           </text:span>
-          <text:tab />
         </text:p>
       </style:header>
     </style:master-page>
     <style:master-page style:name="Right_20_Page" style:display-name="Right Page" style:page-layout-name="pm5" style:next-style-name="Left_20_Page">
-      <style:header>
-        <text:p text:style-name="Header">
-          <text:tab />
-          <text:span text:style-name="MT1">
-            <text:variable-get text:name="Right_Guideword_R" office:value-type="string" />
-          </text:span>
-          <text:tab />
-          <text:page-number text:select-page="current">4</text:page-number>
+      <style:footer>
+        <text:p text:style-name="Footer">
+          <draw:frame draw:style-name="Mfr1" draw:name="Frame1" text:anchor-type="paragraph" svg:x="0pt" svg:y="72pt" fo:min-width="135pt" draw:z-index="1">
+            <draw:text-box fo:min-height="14.14pt">
+              <text:p text:style-name="MP1">
+                <text:span text:style-name="MT1">
+                  <text:variable-get text:name="Right_Guideword_R" office:value-type="string" />
+                </text:span>
+              </text:p>
+            </draw:text-box>
+          </draw:frame>
+          <style:header>
+            <text:p text:style-name="Header">
+              <text:tab />
+              <text:tab />
+              <text:page-number text:select-page="current">4</text:page-number>
+            </text:p>
+          </style:header>
         </text:p>
-      </style:header>
+      </style:footer>
     </style:master-page>
   </office:master-styles>
 </office:document-styles>

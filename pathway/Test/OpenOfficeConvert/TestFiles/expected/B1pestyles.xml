@@ -591,7 +591,6 @@
           </text:span>
           <text:tab />
           <text:page-number text:select-page="current">4</text:page-number>
-          <text:tab />
         </text:p>
       </style:header>
     </style:master-page>
@@ -600,12 +599,21 @@
         <text:p text:style-name="Header">
           <text:tab />
           <text:page-number text:select-page="current">4</text:page-number>
-          <text:tab />
-          <text:span text:style-name="MT1">
-            <text:variable-get text:name="Right_Guideword_R" office:value-type="string" />
-          </text:span>
         </text:p>
       </style:header>
+      <style:footer>
+        <text:p text:style-name="Footer">
+          <draw:frame draw:style-name="Mfr1" draw:name="Frame1" text:anchor-type="paragraph" svg:y="36pt" fo:min-width="135pt" draw:z-index="1">
+            <draw:text-box fo:min-height="14.14pt">
+              <text:p text:style-name="MP1">
+                <text:span text:style-name="MT1">
+                  <text:variable-get text:name="Right_Guideword_R" office:value-type="string" />
+                </text:span>
+              </text:p>
+            </draw:text-box>
+          </draw:frame>
+        </text:p>
+      </style:footer>
     </style:master-page>
   </office:master-styles>
 </office:document-styles>
