@@ -32,7 +32,14 @@ namespace SIL.PublishingSolution
 
         private Dictionary<string, string> _langFontDictionary; // languages and font names in use for this export
         protected string _inputType = "dictionary";
-        private string tableOfContent;
+        private bool _tableOfContent;
+        private bool _coverImage;
+        private bool _titleInCoverPage;
+        private bool _copyrightInformation;
+        private bool _includeBookTitleintheImage;
+        private string _copyrightInformationPagePath;
+        private string _coverPageImagePath;
+
         #region Public Functions
         public string ExportType
         {
@@ -85,15 +92,29 @@ namespace SIL.PublishingSolution
                 // but just in case, specify a default org.
                 organization = "SIL International";
             }
-            tableOfContent = Param.GetMetadataValue(Param.TableOfContents, organization) ?? ""; // empty string if null / not found
+            //_tableOfContent = Param.GetMetadataValue(Param.TableOfContents, organization) ?? ""; // empty string if null / not found
+            _coverImage = (Param.GetMetadataValue(Param.CoverPage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CoverPageTitle, organization));
+            _coverPageImagePath = Param.GetMetadataValue(Param.CoverPageFilename, organization);
+
+
+            _titleInCoverPage = (Param.GetMetadataValue(Param.TitlePage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.TitlePage, organization));
+
+
+            _copyrightInformation = (Param.GetMetadataValue(Param.CopyrightPage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CopyrightPage, organization));
+            _copyrightInformationPagePath = Param.GetMetadataValue(Param.CopyrightPageFilename, organization);
+
+            _includeBookTitleintheImage = (Param.GetMetadataValue(Param.CoverPageTitle, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CoverPageTitle, organization));
+
+            _tableOfContent = (Param.GetMetadataValue(Param.TableOfContents, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.TableOfContents, organization));
+
 
             BuildLanguagesList(projInfo.DefaultXhtmlFileWithPath);
-            
+
             string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             //projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
             projInfo.DefaultCssFileWithPath = preProcessor.ProcessedCss;
             projInfo.ProjectPath = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
-            projInfo.DefaultXhtmlFileWithPath = preProcessor.PreserveSpace(); 
+            projInfo.DefaultXhtmlFileWithPath = preProcessor.PreserveSpace();
 
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
@@ -102,7 +123,7 @@ namespace SIL.PublishingSolution
 
             string xeLatexFullFile = Path.Combine(projInfo.ProjectPath, fileName + ".tex");
             StreamWriter xeLatexFile = new StreamWriter(xeLatexFullFile);
-            
+
             Dictionary<string, List<string>> classInlineStyle = new Dictionary<string, List<string>>();
             Dictionary<string, Dictionary<string, string>> xeTexAllClass = new Dictionary<string, Dictionary<string, string>>();
             XeLaTexStyles xeLaTexStyles = new XeLaTexStyles();
@@ -118,7 +139,15 @@ namespace SIL.PublishingSolution
             string include = xeLaTexStyles.PageStyle.ToString();
             ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
             modifyXeLaTexStyles.ProjectType = _inputType;
-            modifyXeLaTexStyles.TocChecked = tableOfContent;
+            modifyXeLaTexStyles.TocChecked = _tableOfContent.ToString();
+
+            modifyXeLaTexStyles.CoverImage = _coverImage.ToString();
+            modifyXeLaTexStyles.TitleInCoverPage = _titleInCoverPage.ToString();
+            modifyXeLaTexStyles.CopyrightInformation = _copyrightInformation.ToString();
+            modifyXeLaTexStyles.IncludeBookTitleintheImage = _includeBookTitleintheImage.ToString();
+            modifyXeLaTexStyles.CopyrightInformationPagePath = _copyrightInformationPagePath;
+            modifyXeLaTexStyles.CoverPageImagePath = _coverPageImagePath;
+
             modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexFullFile, include);
 
             //CallXeTex(Path.GetFileName(xeLatexFullFile));
@@ -152,7 +181,7 @@ namespace SIL.PublishingSolution
                 XeLaTexInstallation.SetXeLaTexFontCount(systemFontList.Length);
             }
         }
-        
+
         public void CallXeLaTex(string xeLatexFullFile, bool openFile, Dictionary<string, string> ImageFilePath)
         {
 
@@ -181,8 +210,8 @@ namespace SIL.PublishingSolution
                 //p1Output = p1.StandardOutput.ReadToEnd();
                 p1Error = p1.StandardError.ReadToEnd();
             }
-            
-            if(Convert.ToBoolean(tableOfContent))
+
+            if (Convert.ToBoolean(_tableOfContent))
             {
                 using (Process p1 = new Process())
                 {
@@ -236,8 +265,8 @@ namespace SIL.PublishingSolution
                 File.Delete(Common.PathCombine(instPath, texNameOnly + ".aux"));
                 File.Delete(dest);
             }
-            catch{}
-            
+            catch { }
+
         }
 
         protected static string CopyProcessResult(string instPath, string texNameOnly, string ext, string userFolder)
@@ -251,7 +280,7 @@ namespace SIL.PublishingSolution
             return logFullName;
         }
 
-        
+
         private void CloseDocument(StreamWriter xeLatexFile)
         {
             xeLatexFile.WriteLine();

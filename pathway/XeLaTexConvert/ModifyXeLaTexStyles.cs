@@ -37,6 +37,14 @@ namespace SIL.PublishingSolution
         string _firstString = string.Empty;
         string _lastString = string.Empty;
         private string _tocChecked = "false";
+        private string _coverImage = "false";
+        private string _titleInCoverPage = "false";
+        private string _copyrightInformation = "false";
+        private string _includeBookTitleintheImage = "false";
+
+        private string _copyrightInformationPagePath;
+        private string _coverPageImagePath;
+
         public string ProjectType
         {
             get { return _projectType; }
@@ -47,6 +55,42 @@ namespace SIL.PublishingSolution
         {
             get { return _tocChecked; }
             set { _tocChecked = value; }
+        }
+
+        public string CoverImage
+        {
+            get { return _coverImage; }
+            set { _coverImage = value; }
+        }
+
+        public string TitleInCoverPage
+        {
+            get { return _titleInCoverPage; }
+            set { _titleInCoverPage = value; }
+        }
+
+        public string CopyrightInformation
+        {
+            get { return _copyrightInformation; }
+            set { _copyrightInformation = value; }
+        }
+
+        public string IncludeBookTitleintheImage
+        {
+            get { return _includeBookTitleintheImage; }
+            set { _includeBookTitleintheImage = value; }
+        }
+
+        public string CopyrightInformationPagePath
+        {
+            get { return _copyrightInformationPagePath; }
+            set { _copyrightInformationPagePath = value; }
+        }
+
+        public string CoverPageImagePath
+        {
+            get { return _coverPageImagePath; }
+            set { _coverPageImagePath = value; }
         }
 
         #endregion
@@ -107,11 +151,17 @@ namespace SIL.PublishingSolution
             if (Convert.ToBoolean(TocChecked))
                 InsertTableOfContent();
 
+            if (Convert.ToBoolean(CoverImage))
+                InsertFrontMatter();
+
             Common.FileInsertText(_xetexFullFile, @"\thispagestyle{empty} ");
             Common.FileInsertText(_xetexFullFile, @"\begin{document} ");
             Common.FileInsertText(_xetexFullFile, _pageStyleFormat);
             //setmainfont{Arial} //Default Font 
             //Common.FileInsertText(_xetexFullFile, @"\usepackage{fancyhdr}");
+            if (Convert.ToBoolean(CoverImage))
+                Common.FileInsertText(_xetexFullFile, @"\usepackage{eso-pic}");
+
             Common.FileInsertText(_xetexFullFile, @"\usepackage{multicol}");
             Common.FileInsertText(_xetexFullFile, @"\usepackage{fancyhdr}");
             Common.FileInsertText(_xetexFullFile, @"\usepackage{fontspec}");
@@ -119,6 +169,7 @@ namespace SIL.PublishingSolution
             Common.FileInsertText(_xetexFullFile, @"\usepackage{graphicx}");
             Common.FileInsertText(_xetexFullFile, @"\usepackage{grffile}");
             Common.FileInsertText(_xetexFullFile, @"\usepackage{float}");
+
             foreach (var package in includePackageList)
             {
                 Common.FileInsertText(_xetexFullFile, package);
@@ -159,6 +210,64 @@ namespace SIL.PublishingSolution
             tableOfContent += "\\tableofcontents \r\n";
             //tableOfContent += "\\pagebreak[2] \r\n";
             tableOfContent += "\\newpage \r\n";
+
+            Common.FileInsertText(_xetexFullFile, tableOfContent);
+        }
+
+        private void InsertFrontMatter()
+        {
+            String tableOfContent = string.Empty;
+
+            string str = XeLaTexInstallation.GetXeLaTexDir();
+            string instPath = Common.PathCombine(str, "bin");
+            instPath = Common.PathCombine(instPath, "win32");
+            string destinctionPath = Common.PathCombine(instPath, Path.GetFileName(CoverPageImagePath));
+
+            if (CoverPageImagePath != destinctionPath)
+                File.Copy(CoverPageImagePath, destinctionPath, true);
+
+            tableOfContent += "\\font\\CoverPageHeading=\"Times New Roman/B\":color=000000 at 22pt \r\n";
+            tableOfContent += "\\color{blue} \r\n";
+            tableOfContent += "\\AddToShipoutPicture*{% \r\n";
+            tableOfContent += "\\put(0,0){\\rule{\\paperwidth}{\\paperheight}}{\\includegraphics[width=\\paperwidth, height=\\paperheight]{" + Path.GetFileName(CoverPageImagePath) + "}}% \r\n";
+            tableOfContent += "} \r\n";
+            tableOfContent += "\\thispagestyle{empty} \r\n";
+
+            if (Convert.ToBoolean(IncludeBookTitleintheImage))
+            {
+                tableOfContent += "\\vskip 60pt \r\n";
+                
+                tableOfContent += "\\begin{center} \r\n";
+                tableOfContent += "\\CoverPageHeading{" + Param.GetMetadataValue(Param.Title) + "} \r\n";
+                tableOfContent += "\\end{center} \r\n";
+            }
+
+            tableOfContent += "\\newpage \r\n";
+
+            if (Convert.ToBoolean(TitleInCoverPage))
+            {
+                tableOfContent += "\\title{" + Param.GetMetadataValue(Param.Title) + "} \r\n";
+                tableOfContent += "\\author{ " + Param.GetMetadataValue(Param.Creator) + "} \r\n";
+                string copyrightContent = Param.GetMetadataValue(Param.CopyrightHolder);
+                //copyrightContent = copyrightContent.Replace("©", "");
+                //tableOfContent += "\\subtitle{ " + copyrightContent + "} \r\n";
+                tableOfContent += "\\maketitle \r\n";
+                tableOfContent += "\\thispagestyle{empty} \r\n";
+                tableOfContent += "\\setcounter{page}{1} \r\n";
+
+                tableOfContent += "\\newpage \r\n";
+            }
+            else
+            {
+                tableOfContent += "\\setcounter{page}{1} \r\n";
+            }
+
+            if (Convert.ToBoolean(CopyrightInformation))
+            {
+                tableOfContent += "Copyright Content \r\n";
+                tableOfContent += "\\thispagestyle{empty} \r\n";
+                tableOfContent += "\\newpage \r\n";
+            }
 
             Common.FileInsertText(_xetexFullFile, tableOfContent);
         }

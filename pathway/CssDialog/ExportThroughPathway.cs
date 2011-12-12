@@ -467,6 +467,25 @@ namespace SIL.PublishingSolution
                 lnkChooseCopyright.Enabled = true;
             }
 
+            if (ddlLayout.Text.ToLower() == "xelatex")
+            {
+                tabPage2.Enabled = true;
+                chkCoverImage.Enabled = true;
+                chkCoverImageTitle.Enabled = true;
+                btnCoverImage.Enabled = true;
+                imgCoverImage.Enabled = true;
+                chkColophon.Enabled = true;
+                rdoCustomCopyright.Enabled = true;
+                rdoStandardCopyright.Enabled = true;
+                txtColophonFile.Enabled = true;
+                btnBrowseColophon.Enabled = true;
+                chkTitlePage.Enabled = true;
+                ddlCopyrightStatement.Enabled = true;
+                lnkChooseCopyright.Enabled = true;
+            }
+            
+            
+
             // Processing Options tab
             chkRunningHeader.Enabled = (FindMedia() == "paper");
             chkOOReduceStyleNames.Enabled = (ddlLayout.Text.Contains("LibreOffice"));
