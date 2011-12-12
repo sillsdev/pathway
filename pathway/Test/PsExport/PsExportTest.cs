@@ -19,9 +19,11 @@ using System;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Xml;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
+using RevHomographNum;
 
 #endregion Using
 
@@ -122,6 +124,15 @@ namespace Test.PsExport
         private static string FileExpect(string fileName)
         {
             return Common.PathCombine(_expectTestPath, fileName);
+        }
+
+        private static string FileCopy(string filename)
+        {
+            var outFullName = Common.PathCombine(_outputBasePath, filename);
+            var inFullName = Common.PathCombine(_inputBasePath, filename);
+            const bool overwrite = true;
+            File.Copy(inFullName, outFullName, overwrite);
+            return outFullName;
         }
         #endregion TestPath
 
@@ -428,5 +439,18 @@ namespace Test.PsExport
             //DeExportTest("T11", "main.xhtml", "A4Setting.css", "LibreOffice", "T11: ODT Export Test");
         }
         #endregion T11
+
+        [Test]
+        public void AddHomographAndSenseNumClassNamesTest()
+        {
+            const string testData = "FlexRev.xhtml";
+            var flexRevFullName = FileCopy(testData);
+            Common.StreamReplaceInFile(flexRevFullName, "class=\"headword\"", "class=\"headref\"");
+            AddHomographAndSenseNumClassNames.Execute(flexRevFullName, flexRevFullName);
+            var actual = new XmlDocument { XmlResolver = null };
+            actual.Load(flexRevFullName);
+            var nodes = actual.SelectNodes("//*[@class='revhomographnumber']");
+            Assert.AreEqual(8, nodes.Count);
+        }
     }
 }
