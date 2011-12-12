@@ -31,7 +31,7 @@ namespace SIL.PublishingSolution
         private Dictionary<string, ArrayList> _spellCheck = new Dictionary<string, ArrayList>();
         private List<string> _languageFont = new List<string>();
         private Dictionary<string, string> fontLangMap = new Dictionary<string, string>();
-
+        private string _defaultFont = "Tahoma";
 
         public ArrayList ModifyStylesXML(string projectPath, Dictionary<string, Dictionary<string, string>> childStyle, List<string> usedStyleName, Dictionary<string, string> languageStyleName, string baseStyle, bool isHeadword, Dictionary<string, string> parentClass)
         {
@@ -272,16 +272,15 @@ namespace SIL.PublishingSolution
                     string lang = Common.LeftString(lg, "_");
                     _lang = lang.Replace(".", "");
                 }
-                if (_lang != string.Empty)
+                if ( ! (_lang == string.Empty || _lang == "en"))
                     if (fontLangMap.ContainsKey(_lang))
                     {
                         string fname = fontLangMap[_lang];
-                        if (!_textProperty.ContainsKey("fo:font-name") || (_textProperty.ContainsKey("fo:font-name") && _textProperty["fo:font-name"] != fname))
+                        if (!_textProperty.ContainsKey("fo:font-family") || (_textProperty.ContainsKey("fo:font-family") && _textProperty["fo:font-family"] != fname))
+                        //if (!_textProperty.ContainsKey("fo:font-family") ||
+                          //(_textProperty.ContainsKey("fo:font-family") && _textProperty["fo:font-family"] == _defaultFont))
                         {
-                            //if (_textProperty.Count == 0)
-                            //    _util.MissingLang = false;
-
-                            _textProperty["fo:font-name"] = fname;
+                            _textProperty["fo:font-family"] = fname;
                             _textProperty["style:font-name-complex"] = fname;
                             if (!_languageFont.Contains(fname))
                                 _languageFont.Add(fname);
