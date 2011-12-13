@@ -808,7 +808,32 @@ namespace SIL.PublishingSolution
                 _writer.WriteStartElement("TextFrame");
                 _writer.WriteAttributeString("Self", "u" + Path.GetFileNameWithoutExtension(fileName1));
                 _writer.WriteStartElement("ParagraphStyleRange");
-                _writer.WriteAttributeString("AppliedParagraphStyle", "ParagraphStyle/" + cc[0]);
+                
+                Stack<string> _dupParagraph;
+                string pictureCaption = string.Empty;
+                _dupParagraph = _allParagraph;
+
+                if (_dupParagraph.Count > 0)
+                {
+                    _dupParagraph.Pop();
+                    if (_dupParagraph.Count > 0)
+                    {
+                        pictureCaption = _dupParagraph.Peek().ToString();
+                        int countCharacter = 0;
+                        countCharacter = pictureCaption.Length;
+                        pictureCaption = pictureCaption.Substring(0, countCharacter - 2);
+                    }
+                }
+
+                if (pictureCaption.ToLower() == "picturecaption")
+                {
+                    _writer.WriteAttributeString("AppliedParagraphStyle", "ParagraphStyle/" + "headword");
+                    _writer.WriteAttributeString("FontStyle", "Regular");
+                }
+                else
+                {
+                    _writer.WriteAttributeString("AppliedParagraphStyle", "ParagraphStyle/" + cc[0]); 
+                }
 
                 _imageInsert = false;
                 _imageSource = string.Empty;
