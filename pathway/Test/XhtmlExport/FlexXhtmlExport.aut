@@ -11,7 +11,7 @@ IFEqual,Backup,,SetEnv,Backup,YCE-Test 2010-11-04 1357.fwbackup
 IfEqual,IncOpt,,SetEnv,IncOpt,c
 IfEqual,InputPath,,SetEnv,InputPath,c:\\svn\\btai\\Tests
 IfEqual,OutputPath,,SetEnv,OutputPath,C:\\svn\\XhtmlData
-;MsgBox, 4, AutoIt Flex XHTML Export, Run Fieldworks and Export %proj% as XHTML. Run?
+;MsgBox, 4, AutoIt Flex XHTML Export, Run Fieldworks and export \"%proj%\" as XHTML. Run?
 ;IfMsgBox, NO, Goto, denied
 
 ifExist,%FW_HOME%\\FieldWorks.exe, Goto, GotHome
@@ -31,9 +31,11 @@ WinWaitActive, %proj% - FieldWorks Language Explorer
 Send, !fe{DOWN 5}{ENTER}
 WinWaitActive, Export to XHTML
 Send, %OutputPath%\\%proj%.xhtml{ENTER}
-WinWaitActive, %proj% - FieldWorks Language Explorer
+WinWaitActive,output
 Send, !{F4}
-WinWaitClose, %proj% - FieldWorks Language Explorer
+WinWaitActive,%proj% - FieldWorks Language Explorer,Lexicon
+Send, !{F4}
+WinWaitClose,%proj% - FieldWorks Language Explorer
 
 denied:
 Exit
