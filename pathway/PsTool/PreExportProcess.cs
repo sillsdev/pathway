@@ -570,9 +570,13 @@ namespace SIL.Tool
                 {
                     // each entry should look something like this:
                     //    <li><a href="#idMRK">Das Evangelium nach Markus</a></li>
-                    sb.Append("<li><a href='#id");
+                    sb.Append("<li><a href='");
                     // remove whitespace
-                    sb.Append(new Regex(@"\s*").Replace(bookId.InnerText, string.Empty));
+                    string indexValue = String.Format("{0:00000}", index + 1);
+                    string fileNameIndex = "PartFile" + indexValue + "_.xhtml";
+
+                    //sb.Append(new Regex(@"\s*").Replace(bookId.InnerText, string.Empty));
+                    sb.Append(new Regex(@"\s*").Replace(fileNameIndex, string.Empty));
                     sb.Append("'>");
                     sb.Append(bookNames[index].InnerText);
                     sb.AppendLine("</a></li>");

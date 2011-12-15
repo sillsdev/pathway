@@ -1729,6 +1729,10 @@ namespace SIL.PublishingSolution
             {
                 return ("Title Page");
             }
+            if (fileNoPath.StartsWith(PreExportProcess.TableOfContentsFilename.Substring(0, 8)))
+            {
+                return ("Table of Content");
+            }
             if (fileNoPath.StartsWith(PreExportProcess.CopyrightPageFilename.Substring(0, 8)))
             {
                 return ("Copyright Information");

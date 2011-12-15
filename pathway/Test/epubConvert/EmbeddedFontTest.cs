@@ -86,8 +86,8 @@ namespace Test.epubConvert
         [Category("SkipOnTeamCity")]
         public void DaiBannaTest()
         {
-            var silFont = new EmbeddedFont("Dai Banna SIL Book");
-            Assert.IsTrue(FontInternals.IsInstalled("Dai Banna SIL Book"));
+            var silFont = new EmbeddedFont("SIL Dai Banna Book");
+            Assert.IsTrue(FontInternals.IsInstalled("SIL Dai Banna Book"));
             Assert.IsTrue(silFont.CanRedistribute);
             Assert.IsTrue(silFont.Serif);
         }

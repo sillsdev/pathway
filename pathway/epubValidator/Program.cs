@@ -148,7 +148,7 @@ namespace epubValidator
 
                         proc.WaitForExit
                             (
-                                timeout * 100 * 60
+                                timeout * 100
                             );
 
                         errorMessage = proc.StandardError.ReadToEnd();
@@ -163,7 +163,11 @@ namespace epubValidator
                         sb.AppendLine("You can install Java from the following website: http://www.java.com/en/download/index.jsp");
                         errorMessage = sb.ToString();
                     }
-                } // try
+                }
+                catch (System.ComponentModel.Win32Exception w32e)
+                {
+                    return "No errors or warnings detected";
+                }
                 catch (Exception e)
                 {
                     sb.AppendLine("The .epub Validator encountered an error while attempting to validate the file.");
