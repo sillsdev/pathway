@@ -746,7 +746,11 @@ namespace SIL.PublishingSolution
 
         private void stylesGrid_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
+            Cursor.Current = Cursors.Hand;
+
+            //stylesGrid.Enabled = false;
             _CToolBL.stylesGrid_RowEnterBL(e);
+            //stylesGrid.Enabled = true;
         }
 
         private void txtName_Enter(object sender, EventArgs e)
@@ -864,7 +868,7 @@ namespace SIL.PublishingSolution
 
         private void EditOthersCSS(object sender, EventArgs e)
         {
-            _CToolBL.SetModifyMode(false);
+            //_CToolBL.SetModifyMode(false);
             _CToolBL.ShowOthersSummaryBL();
         }
 
