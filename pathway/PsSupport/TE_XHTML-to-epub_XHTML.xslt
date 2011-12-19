@@ -22,9 +22,6 @@
 	
 	<!-- the main language of this document -->
 	<xsl:variable name="docLanguage" select="xhtml:html/@lang" />
-	<!--  upper and lower case for XSLT 1.x case modification -->
-	<xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'" />
-	<xsl:variable name="lowercase" select="'abcdefghijklmnopqrstuvwxyz'" />
 	
 	<!--Straight copy for these elements. -->
 	<xsl:template match="xhtml:head | xhtml:title | xhtml:link | xhtml:a | xhtml:table | xhtml:tr | xhtml:td | xhtml:em | xhtml:br | xhtml:ul | xhtml:li">
@@ -57,8 +54,6 @@
 		</xsl:copy>
 	</xsl:template>
 	
-	<!-- FWR -2550 workaround: convert these markers to uppercase (the cross-refs use upper case) -->
-
 	<!-- Special processing for a couple divs -->
 	<xsl:template match="xhtml:div">
 		<xsl:copy>
@@ -244,6 +239,25 @@
 						<xsl:text>[*]</xsl:text>
 					</xsl:element>
 				</xsl:if>
+				<!-- Fwr-2550 & LT-10828 make reference upper case if necessary -->
+				<xsl:if test="@class='scrFootnoteMarker'">
+					<xsl:element name="a">
+						<xsl:attribute name="href">
+							<xsl:variable name="myRef">
+								<xsl:text>#</xsl:text>
+								<xsl:value-of select="following-sibling::node()/@id"/>
+							</xsl:variable>
+							<xsl:choose>
+								<xsl:when test="./xhtml:a/@href != $myRef">
+									<xsl:value-of select="translate(./xhtml:a/@href,'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:value-of select="./xhtml:a/@href"/>
+								</xsl:otherwise>
+							</xsl:choose>
+						</xsl:attribute>
+					</xsl:element>
+				</xsl:if>
 				<!-- if this is a Verse_Number span, add an ID with Book, Chapter and Verse -->
 				<!-- Note that the chapter is found by selecting "previous...[1]" - that selects the first item, counting backwards
 				       (i.e. the previous node). Ugh. -->
@@ -253,7 +267,9 @@
 					<xsl:variable name="verseNum" select="." />
 					<xsl:attribute name="id"><xsl:text>id</xsl:text><xsl:value-of select="../../../../xhtml:span[@class='scrBookCode']"/><xsl:text>_</xsl:text><xsl:value-of select="preceding::xhtml:span[@class='Chapter_Number'][1]"/><xsl:text>_</xsl:text><xsl:value-of select="translate($verseNum, ',', '-')"/></xsl:attribute>
 				</xsl:if>
-				<xsl:apply-templates/>
+				<xsl:if test="@class != 'scrFootnoteMarker'"> <!-- FWR-2550 we handled child above -->
+					<xsl:apply-templates/>
+				</xsl:if>
 			</xsl:copy>
 		</xsl:if>
 	</xsl:template>
