@@ -13,7 +13,7 @@ Func Progress($left, $top)
 	$back = GUICtrlCreateButton("Back", 328, 464, 87, 28)
 	$cancel = GUICtrlCreateButton("Cancel", 432, 464, 87, 28)
 	$confirm = GUICtrlCreateButton("Confirm", 536, 464, 87, 28)
-	$message = GUICtrlCreateLabel("Installation Progress...", 256, 200, 350, 180, $SS_CENTER)
+	$message = GUICtrlCreateLabel("Ready to Install", 256, 200, 350, 180, $SS_CENTER)
 	GUICtrlSetFont($message, 14, 400, 0, "Tahoma")
 	$bar = GUICtrlCreateProgress(265, 272, 350, 28)
 
@@ -29,7 +29,8 @@ Func Progress($left, $top)
 		Case $cancel
 			Exit
 		Case $confirm
-			Progress_OnConfirm("Progress")
+			GUICtrlSetData($message, "Installation Progress...")
+			Progress_OnConfirm("Progress", $bar)
 		Case Else
 			if $msg > 0 Then
 				MsgBox(0, "Unrecognized", "Message=" & $msg)
@@ -43,8 +44,8 @@ Func Progress_OnBack($title, $window)
 	WinSetState($title, "", @SW_SHOW)
 EndFunc
 
-Func Progress_OnConfirm($title)
-	DoInstall()
+Func Progress_OnConfirm($title, $bar)
+	DoInstall($bar)
 	Local $pos
 	$pos = WinGetPos($title)
 	WinSetState($title, "", @SW_HIDE)

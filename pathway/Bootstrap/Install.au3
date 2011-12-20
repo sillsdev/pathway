@@ -1,17 +1,24 @@
 ;Install.au3 - 12/2/2011 greg_trihus@sil.org License: LGPL
 
-Func DoInstall()
+;DoInstall()
+
+Func DoInstall($bar)
 	If not FileExists("wget.exe") Then
 		FileInstall("res\wget.exe", "wget.exe")
 	EndIf
 	InstallDotNetIfNecessary()
+	GUICtrlSetData($bar, 14)
 	if BteVersion() Then
-		InstallPathway("SetupPw7Bte")
+		GUICtrlSetData($bar, 28)
+		InstallPathway("SetupPw7BTE", $bar)
 	Else
-		InstallPathway("SetupPw7Se")
+		GUICtrlSetData($bar, 28)
+		InstallPathway("SetupPw7SE", $bar)
 	EndIf
 	RemoveAllUserFolder()
+	GUICtrlSetData($bar, 84)
 	RemoveLocalFolder()
+	GUICtrlSetData($bar, 100)
 EndFunc
 
 Func BteVersion()
@@ -20,34 +27,49 @@ Func BteVersion()
 	if @error Then
 		$fwFolder = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\SIL\FieldWorks\7.0", "RootCodeDir")
 		if @error Then
+			;MsgBox(4096,"Status","No BTE")
 			return 0
 		Else
 			if not FileExists( $fwFolder & "\TE.EXE" ) Then
+				;MsgBox(4096,"Status","No TE")
 				return 0
 			EndIf
+			;MsgBox(4096,"Status","TE found")
 		Endif
 	Endif
+	;MsgBox(4096,"Status","BTE found")
 	return 1
 EndFunc
 
-Func InstallPathway($name)
+Func InstallPathway($name, $bar)
+	Global $InstallStable, $StableVersionDate
+	If $InstallStable Then
+		$name = $name & $StableVersionDate
+	Endif
+	$name = $name & ".msi"
+	;MsgBox(4096,"Status","Installing " & $name)
 	RemoveOldSetup($name)
+	GUICtrlSetData($bar, 42)
 	GetInstaller($name)
+	GUICtrlSetData($bar, 56)
 	LaunchInstaller($name)
+	GUICtrlSetData($bar, 70)
 EndFunc
 
 Func RemoveOldSetup($name)
 	Local $attrib
 	$attrib = FileGetAttrib($name)
 	if @error = 0 Then
+		;MsgBox(4096,"Status",$name & " found.")
 		if Not StringInStr($attrib, "R") Then
+			;MsgBox(4096,"Status","Old " & $name & " being delted.")
 			FileDelete($name)
 		EndIf
 	Endif
 EndFunc
 
 Func GetInstaller($name)
-	Global $InstallStable, $StableVersionDate
+	Global $InstallStable
 	Local $urlPath
 	if $InstallStable Then
 		$urlPath = 'http://pathway.googlecode.com/files/'
@@ -55,13 +77,15 @@ Func GetInstaller($name)
 		$urlPath = 'http://pathway.sil.org/wp-content/sprint/'
 	EndIf
 	if not FileExists($name) Then
-		RunWait("wget.exe " & $urlPath & $name & $StableVersionDate & ".msi")
+		;MsgBox(4096,"Status","Downloading " & $urlPath & $name)
+		RunWait("wget.exe " & $urlPath & $name)
 	EndIf
 EndFunc
 
 Func LaunchInstaller($name)
 	Sleep( 100 )
-	RunWait(@ComSpec & " /c " & $name & " /passive")
+	;MsgBox(4096,"Status","Launching passive installer " & $name)
+	RunWait(@ComSpec & " /c " & $name)
 EndFunc
 
 Func RemoveAllUserFolder()
@@ -74,7 +98,8 @@ Func RemoveAllUserFolder()
 	$allusers = $allusers & "\SIL\Pathway"
 	;MsgBox(4096, "AllUsersProfile variable is:", $allusers)
 	if FileExists($allusers) Then
-		DirRemove($allusers, true)
+	;MsgBox(4096,"Status","Removing " & $allusers)
+	DirRemove($allusers, true)
 	EndIf
 EndFunc
 
@@ -84,6 +109,7 @@ Func RemoveLocalFolder()
 	$folder = $folder & "\..\SIL\Pathway"
 	;MsgBox(4096, "AllUsersProfile variable is:", $folder)
 	if FileExists($folder) Then
+		;MsgBox(4096,"Status","Removing " & $folder)
 		DirRemove($folder, true)
 	EndIf
 EndFunc
@@ -92,16 +118,20 @@ Func InstallDotNetIfNecessary()
 	Local $DotNet2
 	
 	;See http://msdn.microsoft.com/en-us/library/xhz1cfs8(v=VS.90).aspx
-	$DotNet2 = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework\policy\v2.0", "50727")
+	$DotNet2 = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework\Policy\v2.0", "50727")
 	if @error = 0 Then
+		;MsgBox(4096,"Status","Installing dot net is unnecessary...")
 		return	;Found dot net
 	EndIf
 	if @OSArch = "X86" Then
-		RunWait("wget.exe http://www.microsoft.com/download/en/confirmation.aspx?id=19")
+		;MsgBox(4096,"Status","Installing dot net x86...")
+		RunWait("wget.exe http://pathway.sil.org/wp-content/sprint/dotnetfx.exe")
+		RunWait("dotnetfx.exe /q:a /c:""install /l /q""")
 	Else
-		RunWait("wget.exe http://www.microsoft.com/download/en/confirmation.aspx?id=6523")
+		;MsgBox(4096,"Status","Installing dot net 64...")
+		RunWait("wget.exe http://pathway.sil.org/wp-content/sprint/NetFx64.exe")
+		RunWait("NetFx64.exe /q:a /c:""install /l /q""")
 	EndIf
-	RunWait("dotnetfx.exe /q:a /c:""install /l /q""")
 EndFunc
 
 Func Check4Fw6()
