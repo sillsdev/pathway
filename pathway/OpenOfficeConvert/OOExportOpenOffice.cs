@@ -64,7 +64,7 @@ namespace SIL.PublishingSolution
         string _singleQuote = "'";
         string _comma = ",";
         private bool isMultiLanguageHeader = false;
-        private bool _isFromTestCase = false;
+        private bool _isFromExe = false;
 
   
 
@@ -601,7 +601,7 @@ namespace SIL.PublishingSolution
             Common.OdType = Common.OdtType.OdtChild;
             bool returnValue = false;
             VerboseClass verboseClass = VerboseClass.GetInstance();
-            _isFromTestCase = Common.CheckExecutionPath();
+            _isFromExe = Common.CheckExecutionPath();
 
             //Common.SupportFolder = "";
             //Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
@@ -706,7 +706,7 @@ namespace SIL.PublishingSolution
             preProcessor.InsertKeepWithNextOnStyles(projInfo.DefaultCssFileWithPath);
             isMultiLanguageHeader = preProcessor.GetMultiLanguageHeader();
 
-            if (!_isFromTestCase)
+            if (_isFromExe)
             {
                 //Preprocess for FrontMatter CSS
                 if (Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) != "FlexRev")
@@ -748,7 +748,7 @@ namespace SIL.PublishingSolution
             preProcessor.PreserveSpace();
             //preProcessor.InsertKeepWithNextOnStyles();
 
-            if (!_isFromTestCase)
+            if (_isFromExe)
             {
                 //Preprocess for FrontMatter XHTML
                 if (Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) != "FlexRev")

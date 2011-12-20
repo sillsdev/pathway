@@ -162,7 +162,7 @@ namespace SIL.PublishingSolution
         private int _pageWidth;
 
         Dictionary<string, string> _pageSize = new Dictionary<string, string>();
-        private bool _isFromTestCase = false;
+        private bool _isFromExe = false;
         #endregion
 
         #region Public Variable
@@ -202,7 +202,7 @@ namespace SIL.PublishingSolution
             _structStyles = styleInfo;
             _structStyles.IsMacroEnable = true;
             _pageSize = pageSize;
-            _isFromTestCase = Common.CheckExecutionPath();
+            _isFromExe = Common.CheckExecutionPath();
             string _inputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             InitializeData(projInfo, idAllClass, classFamily, cssClassOrder);
             ProcessProperty();
@@ -1701,7 +1701,7 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
-            if (!_isFromTestCase)
+            if (_isFromExe)
             {
                 // Front Matter
                 _writer.WriteStartElement("style:style");
@@ -2485,7 +2485,7 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
 
             //TD-2567 - We avoid below coding for ODM
-            if (_isFromTestCase && (_projInfo.FileSequence == null || _projInfo.FileSequence.Count == 1))
+            if (!_isFromExe && (_projInfo.FileSequence == null || _projInfo.FileSequence.Count == 1))
             {
                 _writer.WriteStartElement("text:p");
                 _writer.WriteAttributeString("text:style-name", "P4");
