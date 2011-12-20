@@ -610,7 +610,7 @@ namespace SIL.Tool
             bool _coverImage = (Param.GetMetadataValue(Param.CoverPage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CoverPage, organization));
             string _coverPageImagePath = Param.GetMetadataValue(Param.CoverPageFilename, organization);
             bool _includeTitlePage = (Param.GetMetadataValue(Param.TitlePage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.TitlePage, organization));
-            //bool _copyrightInformation = (Param.GetMetadataValue(Param.CopyrightPage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CopyrightPage, organization));
+            bool _copyrightInformation = (Param.GetMetadataValue(Param.CopyrightPage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CopyrightPage, organization));
             string copyRightFilePath = Param.GetMetadataValue(Param.CopyrightPageFilename, organization);
             bool _includeTitleinCoverImage = (Param.GetMetadataValue(Param.CoverPageTitle, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CoverPageTitle, organization));
             if (!File.Exists(inputXhtmlFilePath)) return;
@@ -660,28 +660,29 @@ namespace SIL.Tool
                     titleNode.InnerText = Param.GetMetadataValue(Param.Title);
                 }
 
-                //XmlDocument crdoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
-                //crdoc.Load(copyRightFilePath);
-                //XmlNodeList copyRightFile = crdoc.GetElementsByTagName(tag);
+                XmlDocument crdoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
+                crdoc.Load(copyRightFilePath);
+                XmlNodeList copyRightFile = crdoc.GetElementsByTagName(tag);
                 XmlNodeList mainXhtmlFile = xmldoc.GetElementsByTagName(tag);
 
-                //XmlNode copyRightContentNode = null;
-                //if (_includeTitleinCoverImage)
-                //{
-                //    copyRightContentNode = xmldoc.CreateElement("div");
-                //    XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
-                //    xmlAttribute.Value = "copyright";
-                //    copyRightContentNode.Attributes.Append(xmlAttribute);
-                //    copyRightContentNode.InnerText = copyRightFile[0].InnerText;
-                //}
+                XmlNode copyRightContentNode = null;
+                if (_copyrightInformation)
+                {
+                    copyRightContentNode = xmldoc.CreateElement("div");
+                    XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
+                    xmlAttribute.Value = "copyright";
+                    copyRightContentNode.Attributes.Append(xmlAttribute);
+                    copyRightContentNode.InnerText = copyRightFile[0].InnerText;
+                    //copyRightContentNode.InnerText = copyRightFile[0].InnerText.Replace("\r\n", "\\003C text:line-break/ //U+003E").Replace("\t", "");
+                }
 
-                //if (copyRightFile.Count > 0 && _copyrightInformation)
-                //{
-                //    if (mainXhtmlFile.Count > 0)
-                //    {
-                //        mainXhtmlFile[0].InnerXml = copyRightContentNode.OuterXml + mainXhtmlFile[0].InnerXml;
-                //    }
-                //}
+                if (copyRightFile.Count > 0 && _copyrightInformation)
+                {
+                    if (mainXhtmlFile.Count > 0)
+                    {
+                        mainXhtmlFile[0].InnerXml = copyRightContentNode.OuterXml + mainXhtmlFile[0].InnerXml;
+                    }
+                }
 
                 if (titleNode != null)
                 {

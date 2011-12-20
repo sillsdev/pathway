@@ -1704,15 +1704,15 @@ namespace SIL.PublishingSolution
             if (_isFromExe)
             {
                 // Front Matter
-                _writer.WriteStartElement("style:style");
-                _writer.WriteAttributeString("style:name", "TitlePage");
-                _writer.WriteAttributeString("style:family", "paragraph");
-                _writer.WriteAttributeString("style:parent-style-name", "title");
-                _writer.WriteAttributeString("style:master-page-name", "Title_20_Page");
-                _writer.WriteStartElement("style:paragraph-properties");
-                _writer.WriteAttributeString("fo:break-after", "page");
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
+                //_writer.WriteStartElement("style:style");
+                //_writer.WriteAttributeString("style:name", "TitlePage");
+                //_writer.WriteAttributeString("style:family", "paragraph");
+                //_writer.WriteAttributeString("style:parent-style-name", "title");
+                //_writer.WriteAttributeString("style:master-page-name", "Title_20_Page");
+                //_writer.WriteStartElement("style:paragraph-properties");
+                //_writer.WriteAttributeString("fo:break-after", "page");
+                //_writer.WriteEndElement();
+                //_writer.WriteEndElement();
 
                 _writer.WriteStartElement("style:style");
                 _writer.WriteAttributeString("style:name", "fr11");
