@@ -13,7 +13,7 @@ Func Improve($left, $top)
 	$next = GUICtrlCreateButton("Next", 536, 464, 87, 28)
 	$message = GUICtrlCreateLabel("Would you be willing to help imrpove Pathway? If yes, the program will collect data about your usage of the product in order to determine which features are most helpful.", 256, 24, 350, 400)
 	GUICtrlSetFont($message, 14, 400, 0, "Tahoma")
-	$helpImprove = GUICtrlCreateCheckbox("Yes, I would like to help imrove pathway", 300, 272, 220, 16)
+	$helpImprove = GUICtrlCreateCheckbox("Yes, I would like to help imrove pathway", 300, 272)
 	GUICtrlSetState($helpImprove, $GUI_CHECKED)
 
 	GUISetState(@SW_SHOW)
