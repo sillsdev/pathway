@@ -39,6 +39,12 @@ namespace SIL.PublishingSolution
 {
     public partial class ExportThroughPathway : Form, IExportContents, IScriptureContents
     {
+        #region DdlLayout
+        protected ComboBox DdlLayout
+        {
+            get { return ddlLayout; }
+        }
+        #endregion DdlLayouts
         private static string _publicationName;
         private string _newSaveInFolderPath = string.Empty;
         private static string _helpTopic = string.Empty;
@@ -594,20 +600,18 @@ namespace SIL.PublishingSolution
         #endregion LoadAvailStylesheets
 
         #region LoadAvailFormats
-        private void LoadAvailFormats()
+        protected void LoadAvailFormats()
         {
             string BackendsPath = Common.ProgInstall;
             Backend.Load(BackendsPath);
             ArrayList exportType = Backend.GetExportType(InputType);
+            exportType.Sort();
             if (exportType.Count > 0)
             {
                 foreach (string item in exportType)
                 {
                     ddlLayout.Items.Add(item);
                 }
-
-                GetPrinceIsAvailable();
-
                 ddlLayout.Text = ddlLayout.Items[0].ToString();
             }
             else
@@ -624,32 +628,6 @@ namespace SIL.PublishingSolution
                     LoadAvailFormats();
             }
             ddlLayout.SelectedIndex = ddlLayout.FindStringExact(ddlLayout.Text);
-        }
-
-        private void GetPrinceIsAvailable()
-        {
-            string princeVersion = string.Empty;
-            if (Common.GetOsName() == "Windows7")
-                princeVersion =
-                    Common.GetValueFromRegistry(
-                        "SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Prince_is1", "DisplayName");
-            else if (Common.GetOsName() == "Windows XP")
-                princeVersion =
-                    Common.GetValueFromRegistry("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Prince_is1",
-                                                "DisplayName");
-            else if (Common.GetOsName().ToUpper() == "UNIX")
-            {
-                while (Directory.Exists("/usr/lib/prince/bin/"))
-                {
-                    ddlLayout.Items.Add("Pdf (Using Prince)");
-                    break;
-                }
-            }
-
-            if (princeVersion != null)
-            {
-                ddlLayout.Items.Add("Pdf (Using Prince)");
-            }
         }
         #endregion LoadAvailFormats
 
