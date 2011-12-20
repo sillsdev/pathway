@@ -1114,9 +1114,11 @@ namespace SIL.PublishingSolution
                                 string path = Common.PathCombine(appPath, partialPath);
                                 if (!File.Exists(path))
                                 {
-
-                                    errorTag = methodname + "|" + path;
-                                    return false;
+                                    if (!File.Exists(path.Replace("Styles\\Dictionary", "Copyrights")))
+                                    {
+                                        errorTag = methodname + "|" + path;
+                                        return false;
+                                    }
                                 }
                             }
                     }
