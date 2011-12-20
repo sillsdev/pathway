@@ -171,6 +171,12 @@ namespace SIL.PublishingSolution
             attribute = "style:parent-style-name";
             SetAttribute(parent_Type[0], attribute);
 
+            if (newClassName.IndexOf("cover") == 0 || newClassName.IndexOf("title") == 0 || newClassName.IndexOf("copyright") == 0)
+            {
+                attribute = "master-page-name";
+                SetAttribute("Title_20_Page", attribute);
+            }
+
             //style:family="paragraph" style:parent-style-name="none">
             SetTagProperty(className.Key);
             AddParaTextNode(className, _node, familyType);

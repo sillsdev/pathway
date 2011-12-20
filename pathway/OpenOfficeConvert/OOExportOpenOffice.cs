@@ -64,6 +64,7 @@ namespace SIL.PublishingSolution
         string _singleQuote = "'";
         string _comma = ",";
         private bool isMultiLanguageHeader = false;
+        private bool _isFromTestCase = false;
 
   
 
@@ -600,7 +601,7 @@ namespace SIL.PublishingSolution
             Common.OdType = Common.OdtType.OdtChild;
             bool returnValue = false;
             VerboseClass verboseClass = VerboseClass.GetInstance();
-
+            _isFromTestCase = Common.CheckExecutionPath();
 
             //Common.SupportFolder = "";
             //Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
@@ -705,6 +706,15 @@ namespace SIL.PublishingSolution
             preProcessor.InsertKeepWithNextOnStyles(projInfo.DefaultCssFileWithPath);
             isMultiLanguageHeader = preProcessor.GetMultiLanguageHeader();
 
+            if (!_isFromTestCase)
+            {
+                //Preprocess for FrontMatter CSS
+                if (Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) != "FlexRev")
+                {
+                    preProcessor.InsertLoFrontMatterCssFile(projInfo.DefaultCssFileWithPath);
+                }
+            }
+
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
             cssTree.OutputType = Common.OutputType.ODT; 
@@ -738,12 +748,24 @@ namespace SIL.PublishingSolution
             preProcessor.PreserveSpace();
             //preProcessor.InsertKeepWithNextOnStyles();
 
+            if (!_isFromTestCase)
+            {
+                //Preprocess for FrontMatter XHTML
+                if (Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) != "FlexRev")
+                {
+                    preProcessor.InsertLoFrontMatterContent(preProcessor.ProcessedXhtml);
+                }
+            }
+
+            Dictionary<string, string> pageSize = new Dictionary<string, string>();
+            pageSize["height"] = cssClass["@page"]["page-height"];
+            pageSize["width"] = cssClass["@page"]["page-width"];
 
             projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
             projInfo.TempOutputFolder += Path.DirectorySeparatorChar;
             cXML._multiLanguageHeader = isMultiLanguageHeader;
             cXML.RefFormat = this._refFormat;
-            cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, pageWidth);
+            cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, pageWidth, pageSize);
             PostProcess(projInfo);
 
             if (projInfo.FileSequence != null && projInfo.FileSequence.Count > 1)

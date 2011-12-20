@@ -593,6 +593,135 @@ namespace SIL.Tool
 
         #endregion
 
+        #region LibreOfficeFrontMatter
+        public void InsertLoFrontMatterContent(string inputXhtmlFilePath)
+        {
+            Param.LoadSettings();
+            string organization;
+            try
+            {
+                organization = Param.Value["Organization"];
+            }
+            catch (Exception)
+            {
+                organization = "SIL International";
+            }
+
+            bool _coverImage = (Param.GetMetadataValue(Param.CoverPage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CoverPage, organization));
+            string _coverPageImagePath = Param.GetMetadataValue(Param.CoverPageFilename, organization);
+            bool _includeTitlePage = (Param.GetMetadataValue(Param.TitlePage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.TitlePage, organization));
+            //bool _copyrightInformation = (Param.GetMetadataValue(Param.CopyrightPage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CopyrightPage, organization));
+            string copyRightFilePath = Param.GetMetadataValue(Param.CopyrightPageFilename, organization);
+            bool _includeTitleinCoverImage = (Param.GetMetadataValue(Param.CoverPageTitle, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CoverPageTitle, organization));
+            if (!File.Exists(inputXhtmlFilePath)) return;
+            const string tag = "body";
+
+            try
+            {
+                XmlDocument xmldoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
+                XmlNode coverImageNode = null;
+                XmlNode coverTitleNode = null;
+                xmldoc.Load(inputXhtmlFilePath);
+
+                if (_coverImage)
+                {
+                    coverImageNode = xmldoc.CreateElement("div");
+                    XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
+                    xmlAttribute.Value = "coverImage";
+                    coverImageNode.Attributes.Append(xmlAttribute);
+
+                    XmlNode newNodeImg = xmldoc.CreateElement("img");
+                    xmlAttribute = xmldoc.CreateAttribute("src");
+                    xmlAttribute.Value = _coverPageImagePath;
+                    newNodeImg.Attributes.Append(xmlAttribute);
+
+                    xmlAttribute = xmldoc.CreateAttribute("alt");
+                    xmlAttribute.Value = _coverPageImagePath;
+                    newNodeImg.Attributes.Append(xmlAttribute);
+                    coverImageNode.AppendChild(newNodeImg);
+
+                    if (_includeTitleinCoverImage)
+                    {
+                        coverTitleNode = xmldoc.CreateElement("div");
+                        xmlAttribute = xmldoc.CreateAttribute("class");
+                        xmlAttribute.Value = "cover";
+                        coverTitleNode.Attributes.Append(xmlAttribute);
+                        coverTitleNode.InnerText = Param.GetMetadataValue(Param.Title);
+                    }
+                }
+
+                XmlNode titleNode = null;
+                if (_includeTitlePage)
+                {
+                    titleNode = xmldoc.CreateElement("div");
+                    XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
+                    xmlAttribute.Value = "title";
+                    titleNode.Attributes.Append(xmlAttribute);
+                    titleNode.InnerText = Param.GetMetadataValue(Param.Title);
+                }
+
+                //XmlDocument crdoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
+                //crdoc.Load(copyRightFilePath);
+                //XmlNodeList copyRightFile = crdoc.GetElementsByTagName(tag);
+                XmlNodeList mainXhtmlFile = xmldoc.GetElementsByTagName(tag);
+
+                //XmlNode copyRightContentNode = null;
+                //if (_includeTitleinCoverImage)
+                //{
+                //    copyRightContentNode = xmldoc.CreateElement("div");
+                //    XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
+                //    xmlAttribute.Value = "copyright";
+                //    copyRightContentNode.Attributes.Append(xmlAttribute);
+                //    copyRightContentNode.InnerText = copyRightFile[0].InnerText;
+                //}
+
+                //if (copyRightFile.Count > 0 && _copyrightInformation)
+                //{
+                //    if (mainXhtmlFile.Count > 0)
+                //    {
+                //        mainXhtmlFile[0].InnerXml = copyRightContentNode.OuterXml + mainXhtmlFile[0].InnerXml;
+                //    }
+                //}
+
+                if (titleNode != null)
+                {
+                    mainXhtmlFile[0].InnerXml = titleNode.OuterXml + mainXhtmlFile[0].InnerXml;
+                }
+
+                //if (coverTitleNode != null)
+                //{
+                //    mainXhtmlFile[0].InnerXml = coverTitleNode.OuterXml + mainXhtmlFile[0].InnerXml;
+                //}
+
+                if (coverImageNode != null)
+                {
+                    mainXhtmlFile[0].InnerXml = coverImageNode.OuterXml + mainXhtmlFile[0].InnerXml;
+                }
+
+
+                xmldoc.Save(inputXhtmlFilePath);
+            }
+            catch
+            {
+
+            }
+        }
+
+
+        public void InsertLoFrontMatterCssFile(string inputCssFilePath)
+        {
+            Param.LoadSettings();
+            if (!File.Exists(inputCssFilePath)) return;
+            //string copyRightFilePath = Param.GetMetadataValue(Param.CopyrightPageFilename).ToLower();
+            string text = ".cover{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} " +
+                          ".title{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} " +
+                          ".copyright{text-align: left; font-size:12pt;page-break-after: always;}";
+            Common.FileInsertText(inputCssFilePath, text);
+            //}
+        }
+
+        #endregion
+
         #region XHTML PreProcessor
         /// <summary>
         /// To swap the headword and reversal-form when main.xhtml and FlexRev.xhtml included
