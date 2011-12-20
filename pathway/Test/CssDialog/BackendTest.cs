@@ -46,6 +46,7 @@ namespace Test.CssDialog
         #endregion TearDown
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void GetExportTypeTest()
         {
             ArrayList exportType = Backend.GetExportType("Dictionary");

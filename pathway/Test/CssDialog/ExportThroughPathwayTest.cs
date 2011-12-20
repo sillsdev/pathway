@@ -51,6 +51,7 @@ namespace Test.CssDialog
         #endregion TearDown
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void LoadAvailFormatsTest()
         {
             LoadAvailFormats();
