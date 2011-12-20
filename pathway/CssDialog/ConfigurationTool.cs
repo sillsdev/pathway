@@ -885,19 +885,19 @@ namespace SIL.PublishingSolution
 
         private void txtPageGutterWidth_KeyUp(object sender, KeyEventArgs e)
         {
-            if (!RangeCheck(txtPageGutterWidth.Text))
-            {
-                txtPageGutterWidth.Text = "";
-            }
+            //if (!RangeCheck(txtPageGutterWidth.Text))
+            //{
+            //    txtPageGutterWidth.Text = "";
+            //}
             _CToolBL.SetModifyMode(true);
         }
 
         private void txtPageInside_KeyUp(object sender, KeyEventArgs e)
         {
-            if (!RangeCheck(txtPageInside.Text))
-            {
-                txtPageInside.Text = "";
-            }
+            //if (!RangeCheck(txtPageInside.Text))
+            //{
+            //    txtPageInside.Text = "";
+            //}
             _CToolBL.SetModifyMode(true);
         }
 
@@ -928,28 +928,28 @@ namespace SIL.PublishingSolution
 
         private void txtPageOutside_KeyUp(object sender, KeyEventArgs e)
         {
-            if (!RangeCheck(txtPageOutside.Text))
-            {
-                txtPageOutside.Text = "";
-            }
+            //if (!RangeCheck(txtPageOutside.Text))
+            //{
+            //    txtPageOutside.Text = "";
+            //}
             _CToolBL.SetModifyMode(true);
         }
 
         private void txtPageTop_KeyUp(object sender, KeyEventArgs e)
         {
-            if (!RangeCheck(txtPageTop.Text))
-            {
-                txtPageTop.Text = "";
-            }
+            //if (!RangeCheck(txtPageTop.Text))
+            //{
+            //    txtPageTop.Text = "";
+            //}
             _CToolBL.SetModifyMode(true);
         }
 
         private void txtPageBottom_KeyUp(object sender, KeyEventArgs e)
         {
-            if (!RangeCheck(txtPageBottom.Text))
-            {
-                txtPageBottom.Text = "";
-            }
+            //if (!RangeCheck(txtPageBottom.Text))
+            //{
+            //    txtPageBottom.Text = "";
+            //}
             _CToolBL.SetModifyMode(true);
         }
 
