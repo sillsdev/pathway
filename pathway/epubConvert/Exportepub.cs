@@ -636,22 +636,9 @@ namespace SIL.PublishingSolution
             xsltFullName = tempXslt;
 
             // Modify the local XSLT for the following conditions:
-            // - TE: add code to change the case of anchor GUIDs (this is a workaround for FWR 2550)
             // - Scriptures with a inline footnotes (References == "After Each Section"):
             //   adds the 
-            if (_inputType.ToLower().Equals("scripture") && Application.ProductName.Contains("FieldWorks") ||
-                (Common.Testing && !Application.ProductName.Contains("PathwayB")))
-            {
-                // TE workaround for FWR-2550 -- remove when this defect is fixed
-                const string searchText = "<!-- FWR -2550 workaround: convert these markers to uppercase (the cross-refs use upper case) -->";
-                var sbFWR = new StringBuilder();
-                sbFWR.AppendLine(searchText);
-                sbFWR.AppendLine("<xsl:template match=\"xhtml:a[../@class='scrFootnoteMarker']\" >");
-                sbFWR.AppendLine("<xsl:copy>");
-                sbFWR.AppendLine("<xsl:attribute name=\"href\"><xsl:value-of select=\"translate(@href, $lowercase, $uppercase)\"/></xsl:attribute>");
-                sbFWR.AppendLine("<xsl:apply-templates /></xsl:copy></xsl:template>");
-                Common.StreamReplaceInFile(xsltFullName, searchText, sbFWR.ToString());
-            }
+
             if (_inputType.ToLower().Equals("scripture") && References.Contains("Section"))
             {
                 // add references inline, after each section (first change)

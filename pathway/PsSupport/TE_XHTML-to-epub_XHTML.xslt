@@ -267,7 +267,7 @@
 					<xsl:variable name="verseNum" select="." />
 					<xsl:attribute name="id"><xsl:text>id</xsl:text><xsl:value-of select="../../../../xhtml:span[@class='scrBookCode']"/><xsl:text>_</xsl:text><xsl:value-of select="preceding::xhtml:span[@class='Chapter_Number'][1]"/><xsl:text>_</xsl:text><xsl:value-of select="translate($verseNum, ',', '-')"/></xsl:attribute>
 				</xsl:if>
-				<xsl:if test="@class != 'scrFootnoteMarker'"> <!-- FWR-2550 we handled child above -->
+				<xsl:if test="count(@class) = 0 or @class != 'scrFootnoteMarker'"> <!-- FWR-2550 we handled child above -->
 					<xsl:apply-templates/>
 				</xsl:if>
 			</xsl:copy>

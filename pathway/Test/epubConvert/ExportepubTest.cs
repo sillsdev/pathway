@@ -13,6 +13,8 @@
 // ---------------------------------------------------------------------------------------------
 using System;
 using System.IO;
+using System.Xml;
+using ICSharpCode.SharpZipLib.Zip;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
@@ -105,6 +107,15 @@ namespace Test.epubConvert
             var target = new Exportepub();
             var actual = target.Export(projInfo);
             Assert.IsTrue(actual);
+            var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
+            var zf = new FastZip();
+            zf.ExtractZip(result, FileOutput("main"),".*");
+            var resultDoc = new XmlDocument {XmlResolver = null};
+            resultDoc.Load(FileOutput(Common.DirectoryPathReplace("main/OEBPS/PartFile00001_.xhtml")));
+            var nsmgr = new XmlNamespaceManager(resultDoc.NameTable);
+            nsmgr.AddNamespace("x", "http://www.w3.org/1999/xhtml");
+            var node = resultDoc.SelectSingleNode("//x:span[@class='translation_L2']/x:span[2]/x:span", nsmgr);
+            Assert.AreEqual(node.InnerText, "child of Fatima"); // Fail if content is gone (TD-2814)
         }
 
         [Test]
