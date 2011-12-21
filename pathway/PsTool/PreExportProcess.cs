@@ -672,8 +672,8 @@ namespace SIL.Tool
                     XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
                     xmlAttribute.Value = "copyright";
                     copyRightContentNode.Attributes.Append(xmlAttribute);
-                    copyRightContentNode.InnerText = copyRightFile[0].InnerText;
-                    //copyRightContentNode.InnerText = copyRightFile[0].InnerText.Replace("\r\n", "\\003C text:line-break/ //U+003E").Replace("\t", "");
+                    //copyRightContentNode.InnerText = copyRightFile[0].InnerText;
+                    copyRightContentNode.InnerText = copyRightFile[0].InnerText.Replace("\r\n", " ").Replace("\t", "");
                 }
 
                 if (copyRightFile.Count > 0 && _copyrightInformation)
@@ -681,6 +681,7 @@ namespace SIL.Tool
                     if (mainXhtmlFile.Count > 0)
                     {
                         mainXhtmlFile[0].InnerXml = copyRightContentNode.OuterXml + mainXhtmlFile[0].InnerXml;
+                        _projInfo.IsFrontMatterEnabled = true;
                     }
                 }
 
