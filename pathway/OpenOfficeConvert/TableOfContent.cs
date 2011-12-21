@@ -29,8 +29,6 @@ namespace SIL.PublishingSolution
 {
     public class TableOfContent
     {
-       
-        
         public void CreateTOC(XmlTextWriter _writer, string inputType)
         {
 

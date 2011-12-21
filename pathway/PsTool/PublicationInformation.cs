@@ -67,6 +67,7 @@ namespace SIL.Tool
         public bool JpgPreview = false;
         public string DefaultFontName = "Times New Roman";
         public float DefaultFontSize = 12;
+        private bool _isFrontMatterEnabled = false;
 
         #endregion
 
@@ -242,6 +243,13 @@ namespace SIL.Tool
             get { return _outputExtension; }
             set { _outputExtension = value; }
         }
+
+        public bool IsFrontMatterEnabled
+        {
+            get { return _isFrontMatterEnabled; }
+            set { _isFrontMatterEnabled = value; }
+        }
+
         #endregion
 
 

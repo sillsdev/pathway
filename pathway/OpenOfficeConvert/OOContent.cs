@@ -1703,17 +1703,6 @@ namespace SIL.PublishingSolution
 
             if (_isFromExe)
             {
-                // Front Matter
-                //_writer.WriteStartElement("style:style");
-                //_writer.WriteAttributeString("style:name", "TitlePage");
-                //_writer.WriteAttributeString("style:family", "paragraph");
-                //_writer.WriteAttributeString("style:parent-style-name", "title");
-                //_writer.WriteAttributeString("style:master-page-name", "Title_20_Page");
-                //_writer.WriteStartElement("style:paragraph-properties");
-                //_writer.WriteAttributeString("fo:break-after", "page");
-                //_writer.WriteEndElement();
-                //_writer.WriteEndElement();
-
                 _writer.WriteStartElement("style:style");
                 _writer.WriteAttributeString("style:name", "fr11");
                 _writer.WriteAttributeString("style:family", "graphic");
@@ -2313,6 +2302,9 @@ namespace SIL.PublishingSolution
                     if (rectHeight.IndexOf("%") == -1)
                         height = rectHeight + imgWUnit;
                     _frameCount++;
+
+                    _writer.WriteStartElement("text:p");
+                    _writer.WriteAttributeString("text:style-name", "Standard");
                     _writer.WriteStartElement("draw:frame");
                     _writer.WriteAttributeString("draw:style-name", "fr11");
                     _writer.WriteAttributeString("draw:name", strFrameCount);
@@ -2325,6 +2317,7 @@ namespace SIL.PublishingSolution
                     _writer.WriteAttributeString("xlink:show", "embed");
                     _writer.WriteAttributeString("xlink:actuatet", "onLoad");
                     _writer.WriteAttributeString("xlink:href", "Pictures/" + fileName);
+                    _writer.WriteEndElement();
                     _writer.WriteEndElement();
                     _imageInsert = false;
                     _imageSource = string.Empty;
@@ -2485,7 +2478,7 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
 
             //TD-2567 - We avoid below coding for ODM
-            if (!_isFromExe && (_projInfo.FileSequence == null || _projInfo.FileSequence.Count == 1))
+            if (_projInfo.IsFrontMatterEnabled == false && (_projInfo.FileSequence == null || _projInfo.FileSequence.Count == 1))
             {
                 _writer.WriteStartElement("text:p");
                 _writer.WriteAttributeString("text:style-name", "P4");

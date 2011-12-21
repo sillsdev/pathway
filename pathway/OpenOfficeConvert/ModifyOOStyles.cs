@@ -172,7 +172,11 @@ namespace SIL.PublishingSolution
             SetAttribute(parent_Type[0], attribute);
 
             attribute = "master-page-name";
-            if (newClassName.IndexOf("cover") == 0 || newClassName.IndexOf("title") == 0)
+            if (newClassName.IndexOf("coverImage") == 0)
+            {
+                SetAttribute("Cover_20_Page", attribute);
+            }
+            if (newClassName.IndexOf("title") == 0)
             {
                 SetAttribute("Title_20_Page", attribute);
             }

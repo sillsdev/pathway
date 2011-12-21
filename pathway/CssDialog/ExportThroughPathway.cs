@@ -459,7 +459,7 @@ namespace SIL.PublishingSolution
             {
                 tabPage2.Enabled = true;
                 chkTitlePage.Enabled = true;
-                chkCoverImage.Enabled = (ddlLayout.Text.Contains("epub"));
+                chkCoverImage.Enabled = (ddlLayout.Text.Contains("epub") || ddlLayout.Text.Contains("OpenOffice/LibreOffice"));
                 chkCoverImageTitle.Enabled = (chkCoverImage.Enabled && chkCoverImage.Checked);
                 btnCoverImage.Enabled = chkCoverImageTitle.Enabled;
                 imgCoverImage.Enabled = chkCoverImageTitle.Enabled;

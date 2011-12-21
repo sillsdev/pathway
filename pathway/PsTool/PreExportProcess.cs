@@ -687,19 +687,20 @@ namespace SIL.Tool
                 if (titleNode != null)
                 {
                     mainXhtmlFile[0].InnerXml = titleNode.OuterXml + mainXhtmlFile[0].InnerXml;
+                    _projInfo.IsFrontMatterEnabled = true;
                 }
 
-                //if (coverTitleNode != null)
-                //{
-                //    mainXhtmlFile[0].InnerXml = coverTitleNode.OuterXml + mainXhtmlFile[0].InnerXml;
-                //}
+                if (coverTitleNode != null)
+                {
+                    mainXhtmlFile[0].InnerXml = coverTitleNode.OuterXml + mainXhtmlFile[0].InnerXml;
+                    _projInfo.IsFrontMatterEnabled = true;
+                }
 
                 if (coverImageNode != null)
                 {
                     mainXhtmlFile[0].InnerXml = coverImageNode.OuterXml + mainXhtmlFile[0].InnerXml;
+                    _projInfo.IsFrontMatterEnabled = true;
                 }
-
-
                 xmldoc.Save(inputXhtmlFilePath);
             }
             catch

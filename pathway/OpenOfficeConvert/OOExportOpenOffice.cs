@@ -643,6 +643,13 @@ namespace SIL.PublishingSolution
 
             dictSecName = SplitXhtmlAsMultiplePart(projInfo, dictSecName);
 
+            if (_isFromExe)
+            {
+                PreExportProcess preProcessor = new PreExportProcess(projInfo);
+                //Preprocess XHTML & CSS for FrontMatter
+                preProcessor.InsertLoFrontMatterCssFile(projInfo.DefaultCssFileWithPath);
+                preProcessor.InsertLoFrontMatterContent(projInfo.DefaultXhtmlFileWithPath);
+            }
 
             if (dictSecName.Count > 1)
             {
@@ -706,14 +713,14 @@ namespace SIL.PublishingSolution
             preProcessor.InsertKeepWithNextOnStyles(projInfo.DefaultCssFileWithPath);
             isMultiLanguageHeader = preProcessor.GetMultiLanguageHeader();
 
-            if (_isFromExe)
-            {
-                //Preprocess for FrontMatter CSS
-                if (Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) != "FlexRev")
-                {
-                    preProcessor.InsertLoFrontMatterCssFile(projInfo.DefaultCssFileWithPath);
-                }
-            }
+            //if (_isFromExe)
+            //{
+            //    //Preprocess for FrontMatter CSS
+            //    if (Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) != "FlexRev")
+            //    {
+            //        preProcessor.InsertLoFrontMatterCssFile(projInfo.DefaultCssFileWithPath);
+            //    }
+            //}
 
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
@@ -748,14 +755,14 @@ namespace SIL.PublishingSolution
             preProcessor.PreserveSpace();
             //preProcessor.InsertKeepWithNextOnStyles();
 
-            if (_isFromExe)
-            {
-                //Preprocess for FrontMatter XHTML
-                if (Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) != "FlexRev")
-                {
-                    preProcessor.InsertLoFrontMatterContent(preProcessor.ProcessedXhtml);
-                }
-            }
+            //if (_isFromExe)
+            //{
+            //    //Preprocess for FrontMatter XHTML
+            //    if (Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) != "FlexRev")
+            //    {
+            //        preProcessor.InsertLoFrontMatterContent(preProcessor.ProcessedXhtml);
+            //    }
+            //}
 
             Dictionary<string, string> pageSize = new Dictionary<string, string>();
             pageSize["height"] = cssClass["@page"]["page-height"];
