@@ -44,6 +44,7 @@
 			<RegistrySearch Id="FindFwInstallDir80" Key="SOFTWARE\SIL\FieldWorks\8.0"
 				Name="RootCodeDir" Root="HKLM" Type="directory"/>
 		</Property>
+		<Property Id="ALLUSERS"><![CDATA[1]]></Property>
 		
 		<CustomAction Id="PreventDowngrading" Error="Newer version already installed." />
 		

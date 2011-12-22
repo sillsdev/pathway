@@ -24,9 +24,11 @@ Func Welcome()
 		$msg = GUIGetMsg()
 		Select
 		Case $msg = $GUI_EVENT_CLOSE
-			Exit
+			GUIDelete($welcome)
+			ExitLoop
 		Case $msg = $cancel
-			Exit
+			GUIDelete($welcome)
+			ExitLoop
 		Case $msg = $next
 			Welcome_OnNext("Welcome")
 		EndSelect

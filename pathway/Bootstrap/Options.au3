@@ -1,8 +1,9 @@
 ;Options.au3 - 12/2/2011 greg_trihus@sil.org License: LGPL
-#include "Progress.au3"
+#include "Install.au3"
+#include "Complete.au3"
 
 Func Options($left, $top)
-	Local $stable, $latest, $message, $options, $sil, $pathway, $line, $back, $cancel, $next, $msg
+	Local $stable, $latest, $message, $options, $sil, $pathway, $line, $back, $cancel, $install, $msg
 	
 	$options = GUICreate("Options", 660, 550, $left, $top, 1)
 	$sil = GUICtrlCreatePic("sil.jpg", 8, 40, 224, 191, $SS_CENTERIMAGE)
@@ -10,12 +11,12 @@ Func Options($left, $top)
 	$line = GUICtrlCreateGraphic(20, 444, 600, 2, $SS_BLACKFRAME)
 	$back = GUICtrlCreateButton("Back", 328, 464, 87, 28)
 	$cancel = GUICtrlCreateButton("Cancel", 432, 464, 87, 28)
-	$next = GUICtrlCreateButton("Next", 536, 464, 87, 28)
-	$message = GUICtrlCreateLabel("You can get the stable version or the latest version. Which version of Pathway would you like to install?", 256, 24, 350, 180)
+	$install = GUICtrlCreateButton("Install", 536, 464, 87, 28)
+	$message = GUICtrlCreateLabel("You can get the stable version or the latest version. Which version of Pathway would you like to install?", 256, 24, 350, 140)
 	GUICtrlSetFont($message, 14, 400, 0, "Tahoma")
-	GUICtrlCreateGroup("Pathway Version Option", 344, 272, 160, 80)
-	$stable = GUICtrlCreateRadio("Stable", 384, 296, 64, 16)
-	$latest = GUICtrlCreateRadio("Latest", 384, 320, 64, 16)
+	GUICtrlCreateGroup("Pathway Version Option", 344, 220, 160, 80)
+	$stable = GUICtrlCreateRadio("Stable", 384, 244, 64, 16)
+	$latest = GUICtrlCreateRadio("Latest", 384, 268, 64, 16)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 	GUICtrlSetState($stable, $GUI_CHECKED)
 
@@ -24,14 +25,16 @@ Func Options($left, $top)
 		$msg = GUIGetMsg()
 		Switch $msg
 		Case $GUI_EVENT_CLOSE
-			Exit
+			GUIDelete($options)
+			ExitLoop
 		Case $back
 			Options_OnBack("License", $options)
 			ExitLoop
 		Case $cancel
-			Exit
-		Case $next
-			Options_OnNext("Options", $stable)
+			GUIDelete($options)
+			ExitLoop
+		Case $install
+			Options_OnInstall("Options", $stable)
 		Case $stable, $latest
 		Case Else
 			if $msg > 0 Then
@@ -46,11 +49,14 @@ Func Options_OnBack($title, $window)
 	WinSetState($title, "", @SW_SHOW)
 EndFunc
 
-Func Options_OnNext($title, $stable)
-	Local $pos
+Func Options_OnInstall($title, $stable)
 	Global $InstallStable
+	$InstallStable = (BitAND(GUICtrlRead($stable), $GUI_CHECKED) <> 0)
+	Local $bar
+	$bar = GUICtrlCreateProgress(265, 360, 350, 28)
+	DoInstall($bar)
+	Local $pos
 	$pos = WinGetPos($title)
 	WinSetState($title, "", @SW_HIDE)
-	$InstallStable = (BitAND(GUICtrlRead($stable), $GUI_CHECKED) <> 0)
-	Progress($pos[0], $pos[1])
+	Complete($pos[0], $pos[1])
 EndFunc

@@ -11,9 +11,9 @@ Func Improve($left, $top)
 	$back = GUICtrlCreateButton("Back", 328, 464, 87, 28)
 	$cancel = GUICtrlCreateButton("Cancel", 432, 464, 87, 28)
 	$next = GUICtrlCreateButton("Next", 536, 464, 87, 28)
-	$message = GUICtrlCreateLabel("Would you be willing to help imrpove Pathway? If yes, the program will collect data about your usage of the product in order to determine which features are most helpful.", 256, 24, 350, 400)
+	$message = GUICtrlCreateLabel("Would you be willing to help improve Pathway? If yes, the program will collect data about your usage of the product in order to determine which features are most helpful.", 256, 24, 350, 400)
 	GUICtrlSetFont($message, 14, 400, 0, "Tahoma")
-	$helpImprove = GUICtrlCreateCheckbox("Yes, I would like to help imrove pathway", 300, 272)
+	$helpImprove = GUICtrlCreateCheckbox("Yes, I would like to help improve pathway", 300, 272)
 	GUICtrlSetState($helpImprove, $GUI_CHECKED)
 
 	GUISetState(@SW_SHOW)
@@ -21,12 +21,14 @@ Func Improve($left, $top)
 		$msg = GUIGetMsg()
 		Switch $msg
 		Case $GUI_EVENT_CLOSE
-			Exit
+			GUIDelete($improve)
+			ExitLoop
 		Case $back
 			Improve_OnBack("Welcome", $improve)
 			ExitLoop
 		Case $cancel
-			Exit
+			GUIDelete($improve)
+			ExitLoop
 		Case $next
 			Improve_OnNext("Improve")
 		Case $helpImprove - 1

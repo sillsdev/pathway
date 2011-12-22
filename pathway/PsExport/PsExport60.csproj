@@ -295,6 +295,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddHomographAndSenseNumClassNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PsExport604.cs" />
   </ItemGroup>

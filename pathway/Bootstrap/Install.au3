@@ -7,28 +7,30 @@ Func DoInstall($bar)
 		FileInstall("res\wget.exe", "wget.exe")
 	EndIf
 	InstallDotNetIfNecessary()
-	GUICtrlSetData($bar, 14)
+	GUICtrlSetData($bar, 10)
 	if BteVersion() Then
-		GUICtrlSetData($bar, 28)
-		InstallPathway("SetupPw7BTE", $bar)
+		GUICtrlSetData($bar, 20)
+		InstallPathway("SetupPw7BTE")
 	Else
-		GUICtrlSetData($bar, 28)
-		InstallPathway("SetupPw7SE", $bar)
+		GUICtrlSetData($bar, 20)
+		InstallPathway("SetupPw7SE")
 	EndIf
+	GUICtrlSetData($bar, 30)
 	InstallJavaIfNecessary()
-	GUICtrlSetData($bar, 77)
+	GUICtrlSetData($bar, 40)
 	InstallLibreOfficeIfNecessary()
-	GUICtrlSetData($bar, 84)
+	GUICtrlSetData($bar, 50)
 	InstallPrinceXmlIfNecessary()
-	GUICtrlSetData($bar, 87)
-	InstallXeLaTeXIfNecessary()
-	GUICtrlSetData($bar, 90)
+	GUICtrlSetData($bar, 60)
 	InstallPdfReaderIfNecessary()
-	GUICtrlSetData($bar, 93)
+	GUICtrlSetData($bar, 70)
+	InstallXeLaTeXIfNecessary()
+	GUICtrlSetData($bar, 80)
 	RemoveAllUserFolder()
-	GUICtrlSetData($bar, 96)
+	GUICtrlSetData($bar, 90)
 	RemoveLocalFolder()
 	GUICtrlSetData($bar, 100)
+	FileDelete("wget.exe")
 EndFunc
 
 Func BteVersion()
@@ -51,31 +53,16 @@ Func BteVersion()
 	return 1
 EndFunc
 
-Func InstallPathway($name, $bar)
+Func InstallPathway($name)
 	Global $InstallStable, $StableVersionDate
 	If $InstallStable Then
 		$name = $name & $StableVersionDate
 	Endif
 	$name = $name & ".msi"
 	;MsgBox(4096,"Status","Installing " & $name)
-	RemoveOldSetup($name)
-	GUICtrlSetData($bar, 42)
+	CleanUp($name)
 	GetInstaller($name)
-	GUICtrlSetData($bar, 56)
 	LaunchInstaller($name)
-	GUICtrlSetData($bar, 70)
-EndFunc
-
-Func RemoveOldSetup($name)
-	Local $attrib
-	$attrib = FileGetAttrib($name)
-	if @error = 0 Then
-		;MsgBox(4096,"Status",$name & " found.")
-		if Not StringInStr($attrib, "R") Then
-			;MsgBox(4096,"Status","Old " & $name & " being delted.")
-			FileDelete($name)
-		EndIf
-	Endif
 EndFunc
 
 Func GetInstaller($name)
@@ -96,6 +83,7 @@ Func LaunchInstaller($name)
 	Sleep( 100 )
 	;MsgBox(4096,"Status","Launching passive installer " & $name)
 	RunWait(@ComSpec & " /c " & $name)
+	CleanUp($name)
 EndFunc
 
 Func RemoveAllUserFolder()
@@ -135,12 +123,14 @@ Func InstallDotNetIfNecessary()
 	EndIf
 	if @OSArch = "X86" Then
 		;MsgBox(4096,"Status","Installing dot net x86...")
-		RunWait("wget.exe http://pathway.sil.org/wp-content/sprint/dotnetfx.exe")
+		GetFromUrl("dotnetfx.exe", "http://pathway.sil.org/wp-content/sprint/dotnetfx.exe")
 		RunWait("dotnetfx.exe /q:a /c:""install /l /q""")
+		CleanUp("dotnetfx.exe")
 	Else
 		;MsgBox(4096,"Status","Installing dot net 64...")
-		RunWait("wget.exe http://pathway.sil.org/wp-content/sprint/NetFx64.exe")
+		GetFromUrl("NetFx64.exe", "http://pathway.sil.org/wp-content/sprint/NetFx64.exe")
 		RunWait("NetFx64.exe /q:a /c:""install /l /q""")
+		CleanUp("NetFx64.exe")
 	EndIf
 EndFunc
 
@@ -155,9 +145,18 @@ Func InstallJavaIfNecessary()
 			return ;Already installed
 		EndIf
 	EndIf
-	if MsgBox(35,"No Java","Java is used by the Epub validator among other things. It is not installed in your computer. Would you like to install Java?") = 6 Then
-		LaunchSite("http://java.com/en/download/index.jsp")
-	EndIf
+	;if MsgBox(35,"No Java","Java is used by the Epub validator among other things. It is not installed in your computer. Would you like to install Java?") = 6 Then
+	;	LaunchSite("http://java.com/en/download/index.jsp")
+	;EndIf
+	if @OSArch = "X86" Then
+		GetFromUrl("jre-6u30-windows-i586-s.exe", "http://pathway.sil.org/wp-content/sprint/jre-6u30-windows-i586-s.exe")
+		RunWait("jre-6u30-windows-i586-s.exe /s /v/qn""ALL IEXPLORER=1 MOZILLA=1 REBOOT=Suppress""")
+		CleanUp("jre-6u30-windows-i586-s.exe")
+	Else
+		GetFromUrl("jre-6u30-windows-x64.exe", "http://pathway.sil.org/wp-content/sprint/jre-6u30-windows-x64.exe")
+		RunWait("jre-6u30-windows-x64.exe /s /v/qn""ALL IEXPLORER=1 MOZILLA=1 REBOOT=Suppress""")
+		CleanUp("jre-6u30-windows-x64.exe")
+	Endif
 EndFunc
 
 Func InstallLibreOfficeIfNecessary()
@@ -170,9 +169,12 @@ Func InstallLibreOfficeIfNecessary()
 			return ;Already installed
 		EndIf
 	EndIf
-	if MsgBox(35,"No Libre Office","Libre Office is one of the main output destinations. It is not installed in your computer. Would you like to install Libre Office?") = 6 Then
-		LaunchSite("http://www.libreoffice.org/download/")
-	EndIf
+	;if MsgBox(35,"No Libre Office","Libre Office is one of the main output destinations. It is not installed in your computer. Would you like to install Libre Office?") = 6 Then
+	;	LaunchSite("http://www.libreoffice.org/download/")
+	;EndIf
+	GetFromUrl("LibO_3.4.4_Win_x86_install_multi.exe", "http://download.documentfoundation.org/libreoffice/stable/3.4.4/win/x86/LibO_3.4.4_Win_x86_install_multi.exe")
+	RunWait("LibO_3.4.4_Win_x86_install_multi.exe")
+	CleanUp("LibO_3.4.4_Win_x86_install_multi.exe")
 EndFunc
 
 Func InstallPrinceXmlIfNecessary()
@@ -187,9 +189,30 @@ Func InstallPrinceXmlIfNecessary()
 			return ;Already installed
 		EndIf
 	EndIf
-	if MsgBox(35,"No PrinceXml","PrinceXml is used to create new previews and is one of the output destinations. It is not installed in your computer. Would you like to install PrinceXml?") = 6 Then
-		LaunchSite("http://www.princexml.com/download/")
+	;if MsgBox(35,"No PrinceXml","PrinceXml is used to create new previews and is one of the output destinations. It is not installed in your computer. Would you like to install PrinceXml?") = 6 Then
+	;	LaunchSite("http://www.princexml.com/download/")
+	;EndIf
+	GetFromUrl("prince-8.0-setup.exe", "http://www.princexml.com/download/prince-8.0-setup.exe")
+	RunWait("prince-8.0-setup.exe")
+	CleanUp("prince-8.0-setup.exe")
+EndFunc
+
+Func InstallPdfReaderIfNecessary()
+	Local $ver, $cmd
+	$ver = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Classes\.pdf", "")
+	if @error = 0 Then
+		;MsgBox(4096,"Status","Libre Office version " & $ver)
+		$cmd = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Classes\" & $ver & "\shell\open\command", "")
+		if @error = 0 Then
+			return ;Already installed
+		EndIf
 	EndIf
+	;if MsgBox(35,"No Pdf Reader","The Pdf Reader displays Pdf results after they are produced by various destinations. None installed in your computer. Would you like to install a Pdf Reader?") = 6 Then
+	;	LaunchSite("http://get.adobe.com/reader/")
+	;EndIf
+	GetFromUrl("FoxitReader513.1201_enu_Setup.exe", "http://cdn01.foxitsoftware.com/pub/foxit/reader/desktop/win/5.x/5.1/enu/FoxitReader513.1201_enu_Setup.exe")
+	RunWait("FoxitReader513.1201_enu_Setup.exe")
+	CleanUp("FoxitReader513.1201_enu_Setup.exe")
 EndFunc
 
 Func InstallXeLaTeXIfNecessary()
@@ -213,18 +236,19 @@ Func InstallXeLaTeXIfNecessary()
 	EndIf
 EndFunc
 
-Func InstallPdfReaderIfNecessary()
-	Local $ver, $cmd
-	$ver = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Classes\.pdf", "")
+Func GetFromUrl($name, $url)
+	Local $attrib
+	$attrib = FileGetAttrib($name)
 	if @error = 0 Then
-		;MsgBox(4096,"Status","Libre Office version " & $ver)
-		$cmd = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Classes\" & $ver & "\shell\open\command", "")
-		if @error = 0 Then
-			return ;Already installed
+		;MsgBox(4096,"Status",$name & " found.")
+		if Not StringInStr($attrib, "R") Then
+			;MsgBox(4096,"Status","Old " & $name & " being delted.")
+			FileDelete($name)
 		EndIf
-	EndIf
-	if MsgBox(35,"No Pdf Reader","The Pdf Reader displays Pdf results after they are produced by various destinations. None installed in your computer. Would you like to install a Pdf Reader?") = 6 Then
-		LaunchSite("http://get.adobe.com/reader/")
+	Endif
+	if not FileExists($name) Then
+		;MsgBox(4096,"Status","Downloading " & $urlPath & $name)
+		RunWait("wget.exe " & $url)
 	EndIf
 EndFunc
 

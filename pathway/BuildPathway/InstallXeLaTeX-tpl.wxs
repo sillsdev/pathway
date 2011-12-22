@@ -38,6 +38,8 @@
 		<InstallUISequence>
 			<Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
 		</InstallUISequence>
+
+		<Property Id="ALLUSERS"><![CDATA[1]]></Property>
 		
 		<FragmentRef Id='pathwayUI'/>
 		<FragmentRef Id='FilesFragment'/>

@@ -7,6 +7,8 @@ Opt('MustDeclareVars', 1)
 
 DoUI()
 
+Exit 
+
 Func DoUI()
 	If not FileExists("sil.jpg") Then
 		FileInstall("res\sil.jpg", "sil.jpg")
@@ -17,5 +19,25 @@ Func DoUI()
 	If not FileExists("License.rtf") Then
 		FileInstall("res\License.rtf", "License.rtf")
 	EndIf
-	Welcome()
+	If FileExists("License.rtf") Then
+		Welcome()
+	Else
+		MsgBox(4096, "Priviledge error", "Please rerun the bootstrap program with Administrative priviledges.")
+	Endif
+	CleanUp("sil.jpg")
+	CleanUp("PWIcon1.jpg")
+	CleanUp("License.rtf")
 EndFunc
+
+Func CleanUp($name)
+	Local $attrib
+	$attrib = FileGetAttrib($name)
+	if @error = 0 Then
+		;MsgBox(4096,"Status",$name & " found.")
+		if Not StringInStr($attrib, "R") Then
+			;MsgBox(4096,"Status","Old " & $name & " being delted.")
+			FileDelete($name)
+		EndIf
+	Endif
+EndFunc
+

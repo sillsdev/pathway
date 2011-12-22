@@ -17,10 +17,11 @@ Func License($left, $top)
     $richText = _GUICtrlRichEdit_Create($license, "License", 256, 24, 350, 380, _
             BitOR($ES_MULTILINE, $WS_VSCROLL, $ES_AUTOVSCROLL))
 	_GuiCtrlRichEdit_SetText($richText, "")
-	_GUICtrlRichEdit_StreamFromFile($richText, @ScriptDir & "\License.rtf")
+	;_GUICtrlRichEdit_StreamFromFile($richText, @ScriptDir & "\License.rtf")
+	_GUICtrlRichEdit_StreamFromFile($richText, "License.rtf")
 	_GuiCtrlRichEdit_GotoCharPos($richText, 1)
 
-	$acceptLicense = GUICtrlCreateCheckbox("Yes, I accept the terms of the license", 264, 416, 272, 16)
+	$acceptLicense = GUICtrlCreateCheckbox("Yes, I accept the terms of the license", 264, 416, 340, 28)
 	GUICtrlSetState($acceptLicense, $GUI_UNCHECKED)
 	GUICtrlSetFont($acceptLicense, 10, 400, 0, "Tahoma")
 	GUICtrlSetState($next, $GUI_DISABLE)
@@ -31,12 +32,14 @@ Func License($left, $top)
 		$msg = GUIGetMsg()
 		Switch $msg
 		Case $GUI_EVENT_CLOSE
-			Exit
+			GUIDelete($license)
+			ExitLoop
 		Case $back
 			License_OnBack("Improve", $license)
 			ExitLoop
 		Case $cancel
-			Exit
+			GUIDelete($license)
+			ExitLoop
 		Case $next
 			License_OnNext("License")
 		Case $acceptLicense -1
