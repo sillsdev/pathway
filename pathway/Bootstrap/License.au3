@@ -4,6 +4,7 @@
 #include "Options.au3"
 
 Func License($left, $top)
+	Global $closeUp
 	Local $acceptLicense, $richText, $license, $sil, $pathway, $line, $back, $cancel, $next, $msg
 	
 	$license = GUICreate("License", 660, 550, $left, $top)
@@ -28,17 +29,13 @@ Func License($left, $top)
 	;MsgBox(0, "Controls", "AcceptLicense=" & $acceptLicense & " Next=" & $next)
 
 	GUISetState(@SW_SHOW)
-	While 1
+	While $closeUp == False
 		$msg = GUIGetMsg()
 		Switch $msg
-		Case $GUI_EVENT_CLOSE
-			GUIDelete($license)
-			ExitLoop
+		Case $GUI_EVENT_CLOSE, $cancel
+			$closeUp = True
 		Case $back
-			License_OnBack("Improve", $license)
-			ExitLoop
-		Case $cancel
-			GUIDelete($license)
+			WinSetState("Improve", "", @SW_SHOW)
 			ExitLoop
 		Case $next
 			License_OnNext("License")
@@ -52,11 +49,7 @@ Func License($left, $top)
 			EndIf
 		EndSwitch
 	Wend
-EndFunc
-
-Func License_OnBack($title, $window)
-	GUIDelete($window)
-	WinSetState($title, "", @SW_SHOW)
+	GUIDelete($license)
 EndFunc
 
 Func License_OnNext($title)

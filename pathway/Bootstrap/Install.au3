@@ -37,7 +37,13 @@ Func BteVersion()
 	Local $fwFolder
 	RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\ScrChecks\1.0\Settings_Directory","")
 	if @error Then
+		RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\ScrChecks\1.0\Settings_Directory","")
+	EndIf
+	if @error Then
 		$fwFolder = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\SIL\FieldWorks\7.0", "RootCodeDir")
+		if @error Then
+			$fwFolder = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\FieldWorks\7.0", "RootCodeDir")
+		EndIf
 		if @error Then
 			;MsgBox(4096,"Status","No BTE")
 			return 0
@@ -180,7 +186,7 @@ EndFunc
 Func InstallPrinceXmlIfNecessary()
 	Local $path
 	$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Prince_is1", "InstallLocation")
-	if @error <> 0 Then
+	if @error Then
 		$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Prince_is1", "InstallLocation")
 	EndIf
 	if @error = 0 Then
@@ -219,7 +225,7 @@ Func InstallXeLaTeXIfNecessary()
 	Global $InstallStable
 	Local $path, $SaveGlobal
 	$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\SIL\PathwayXeLaTeX", "XeLaTexDir")
-	if @error <> 0 Then
+	if @error Then
 		$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\PathwayXeLaTeX", "XeLaTexDir")
 	EndIf
 	if @error = 0 Then

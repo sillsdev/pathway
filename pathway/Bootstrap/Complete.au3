@@ -1,6 +1,7 @@
 ;Complete.au3 - 12/2/2011 greg_trihus@sil.org License: LGPL
 
 Func Complete($left, $top)
+	Global $closeUp
 	Local $helpComplete, $message, $complete, $sil, $pathway, $line, $back, $cancel, $finish, $msg
 	
 	$complete = GUICreate("Complete", 660, 550, $left, $top, 1)
@@ -14,33 +15,19 @@ Func Complete($left, $top)
 	GUICtrlSetFont($message, 14, 400, 0, "Tahoma")
 
 	GUISetState(@SW_SHOW)
-	While 1
+	While $closeUp == False
 		$msg = GUIGetMsg()
 		Switch $msg
-		Case $GUI_EVENT_CLOSE
-			GUIDelete($complete)
-			ExitLoop
+		Case $GUI_EVENT_CLOSE, $cancel, $finish
+			$closeUp = True
 		Case $back
-			Complete_OnBack("Options", $complete)
+			WinSetState("Options", "", @SW_SHOW)
 			ExitLoop
-		Case $cancel
-			GUIDelete($complete)
-			ExitLoop
-		Case $finish
-			Complete_OnFinish("Complete")
 		Case Else
 			if $msg > 0 Then
 				MsgBox(0, "Unrecognized", "Message=" & $msg)
 			EndIf
 		EndSwitch
 	Wend
-EndFunc
-
-Func Complete_OnBack($title, $window)
-	GUIDelete($window)
-	WinSetState($title, "", @SW_SHOW)
-EndFunc
-
-Func Complete_OnFinish($title)
-	Exit
+	GUIDelete($complete)
 EndFunc

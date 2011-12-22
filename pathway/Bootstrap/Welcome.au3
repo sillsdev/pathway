@@ -5,6 +5,7 @@
 #include "Improve.au3"
 
 Func Welcome()
+	Global $closeUp = False
 	Local $welcome, $line, $sil, $pathway, $back, $next, $cancel, $message, $msg
 	
 	Opt("GUIResizeMode", 1)
@@ -20,19 +21,21 @@ Func Welcome()
 	GUICtrlSetFont($message, 14, 400, 0, "Tahoma")
 
 	GUISetState(@SW_SHOW)
-	While 1
+	While $closeUp == False
 		$msg = GUIGetMsg()
-		Select
-		Case $msg = $GUI_EVENT_CLOSE
-			GUIDelete($welcome)
-			ExitLoop
-		Case $msg = $cancel
-			GUIDelete($welcome)
-			ExitLoop
-		Case $msg = $next
+		Switch $msg
+		Case $GUI_EVENT_CLOSE, $cancel
+			$closeUp = True
+		Case $next
 			Welcome_OnNext("Welcome")
-		EndSelect
+		Case Else
+			if $msg > 0 Then
+				MsgBox(0, "Unrecognized", "Message=" & $msg)
+			EndIf
+		EndSwitch
+		
 	Wend
+	GUIDelete($welcome)
 EndFunc
 
 Func Welcome_OnNext($title)

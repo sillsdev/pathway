@@ -3,6 +3,7 @@
 #include "Complete.au3"
 
 Func Options($left, $top)
+	Global $closeUp
 	Local $stable, $latest, $message, $options, $sil, $pathway, $line, $back, $cancel, $install, $msg
 	
 	$options = GUICreate("Options", 660, 550, $left, $top, 1)
@@ -21,17 +22,13 @@ Func Options($left, $top)
 	GUICtrlSetState($stable, $GUI_CHECKED)
 
 	GUISetState(@SW_SHOW)
-	While 1
+	While $closeUp == False
 		$msg = GUIGetMsg()
 		Switch $msg
-		Case $GUI_EVENT_CLOSE
-			GUIDelete($options)
-			ExitLoop
+		Case $GUI_EVENT_CLOSE, $cancel
+			$closeUp = True
 		Case $back
-			Options_OnBack("License", $options)
-			ExitLoop
-		Case $cancel
-			GUIDelete($options)
+			WinSetState("License", "", @SW_SHOW)
 			ExitLoop
 		Case $install
 			Options_OnInstall("Options", $stable)
@@ -42,11 +39,7 @@ Func Options($left, $top)
 			EndIf
 		EndSwitch
 	Wend
-EndFunc
-
-Func Options_OnBack($title, $window)
-	GUIDelete($window)
-	WinSetState($title, "", @SW_SHOW)
+	GUIDelete($options)
 EndFunc
 
 Func Options_OnInstall($title, $stable)

@@ -2,6 +2,7 @@
 #include "License.au3"
 
 Func Improve($left, $top)
+	Global $closeUp
 	Local $helpImprove, $message, $improve, $sil, $pathway, $line, $back, $cancel, $next, $msg
 	
 	$improve = GUICreate("Improve", 660, 550, $left, $top, 1)
@@ -17,17 +18,13 @@ Func Improve($left, $top)
 	GUICtrlSetState($helpImprove, $GUI_CHECKED)
 
 	GUISetState(@SW_SHOW)
-	While 1
+	While $closeUp == False
 		$msg = GUIGetMsg()
 		Switch $msg
-		Case $GUI_EVENT_CLOSE
-			GUIDelete($improve)
-			ExitLoop
+		Case $GUI_EVENT_CLOSE, $cancel
+			$closeUp = True
 		Case $back
-			Improve_OnBack("Welcome", $improve)
-			ExitLoop
-		Case $cancel
-			GUIDelete($improve)
+			WinSetState("Welcome", "", @SW_SHOW)
 			ExitLoop
 		Case $next
 			Improve_OnNext("Improve")
@@ -39,11 +36,7 @@ Func Improve($left, $top)
 			EndIf
 		EndSwitch
 	Wend
-EndFunc
-
-Func Improve_OnBack($title, $window)
-	GUIDelete($window)
-	WinSetState($title, "", @SW_SHOW)
+	GUIDelete($improve)
 EndFunc
 
 Func Improve_OnNext($title)
