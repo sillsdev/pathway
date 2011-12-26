@@ -628,7 +628,7 @@
               <draw:text-box fo:min-height="0in">
                 <draw:frame draw:style-name="Graphics0" draw:name="Graphics0" text:anchor-type="paragraph" svg:width="342pt" svg:height="220.784810126582pt">
                   <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/lion.tif" />
-                  <svg:desc>C:/My Paratext Projects/Bgt-U1/Figures/HK00046b.tif</svg:desc>
+                  <svg:title>lion.tif</svg:title>
                 </draw:frame>
                 <text:p text:style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
                   <text:span text:style-name="span_pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">Satan ke vaghagna na laion ke nguru</text:span>

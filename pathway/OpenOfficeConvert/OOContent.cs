@@ -2240,9 +2240,10 @@ namespace SIL.PublishingSolution
                     _writer.WriteAttributeString("xlink:actuatet", "onLoad");
                     _writer.WriteAttributeString("xlink:href", "Pictures/" + fileName);
                     _writer.WriteEndElement();
-                    _writer.WriteStartElement("svg:desc");
-                    _writer.WriteString(altText);
-
+                    //_writer.WriteStartElement("svg:desc");
+                    //_writer.WriteString(altText);
+                    _writer.WriteStartElement("svg:title");
+                    _writer.WriteString(fileName);
                     _writer.WriteEndElement();
                     _writer.WriteEndElement();
 
