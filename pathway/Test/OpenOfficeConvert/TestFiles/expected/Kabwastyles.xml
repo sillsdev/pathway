@@ -454,7 +454,7 @@
     <style:master-page style:name="Right_20_Page" style:display-name="Right Page" style:page-layout-name="pm5" style:next-style-name="Left_20_Page">
       <style:footer>
         <text:p text:style-name="Footer">
-          <draw:frame draw:style-name="Mfr1" draw:name="Frame1" text:anchor-type="paragraph" svg:y="72pt" fo:min-width="135pt" draw:z-index="1">
+          <draw:frame draw:style-name="Mfr1" draw:name="Frame1" text:anchor-type="paragraph" svg:y="71.25pt" fo:min-width="135pt" draw:z-index="1">
             <draw:text-box fo:min-height="14.14pt">
               <text:p text:style-name="MP1">
                 <text:span text:style-name="MT1">
