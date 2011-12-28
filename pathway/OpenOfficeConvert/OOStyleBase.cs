@@ -443,7 +443,7 @@ namespace SIL.PublishingSolution
         /// <param name="targetFile">content.xml</param>
         /// <returns> </returns>
         /// -------------------------------------------------------------------------------------------
-        protected void CreateODTStyles(string targetFile)
+        protected void CreateODTStyles(string targetFile, Dictionary<string, Dictionary<string, string>> _cssProperty)
         {
             try
             {
@@ -502,6 +502,15 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("style:font-adornments", "Regular");
                 _writer.WriteAttributeString("style:font-pitch", "variable");
                 _writer.WriteEndElement();
+
+                //TD-2815
+                _writer.WriteStartElement("style:font-face");
+                string headerFontName = Common.GetHeaderFontName(_cssProperty);
+                _writer.WriteAttributeString("style:name", headerFontName);
+                _writer.WriteAttributeString("svg:font-family", "'" + headerFontName + "'");
+                _writer.WriteAttributeString("style:font-pitch", "variable");
+                _writer.WriteEndElement();
+
 
                 //TD-2566
                 //<style:font-face style:name="Gautami1" svg:font-family="Gautami" style:font-pitch="variable"/>
@@ -612,8 +621,15 @@ namespace SIL.PublishingSolution
                 _writer.WriteStartElement("style:style");
                 _writer.WriteAttributeString("style:name", "Header");
                 _writer.WriteAttributeString("style:family", "paragraph");
-                _writer.WriteAttributeString("style:parent-style-name", "Standard");
+                _writer.WriteAttributeString("style:parent-style-name", "Standard");//Standard
                 _writer.WriteAttributeString("style:class", "extra");
+
+                ////<style:text-properties style:font-name="Charis SIL Compact1" fo:font-weight="bold"/>
+                //_writer.WriteStartElement("style:text-properties");
+                //_writer.WriteAttributeString("style:font-name", "Charis SIL Compact");
+                //_writer.WriteAttributeString("fo:font-weight", "bold");
+                //_writer.WriteEndElement();
+
                 _writer.WriteEndElement();
             }
             catch (Exception ex)
