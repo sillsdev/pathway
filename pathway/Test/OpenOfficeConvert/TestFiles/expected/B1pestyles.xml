@@ -364,7 +364,7 @@
     </style:default-style>
     <style:style style:name="Standard" style:family="paragraph" style:class="text" />
     <style:style style:name="Header" style:family="paragraph" style:parent-style-name="headerFontStyleName" style:next-style-name="Text_20_body" style:class="text">
-      <style:paragraph-properties fo:margin-top="0.0005in" fo:margin-bottom="0.0835in" fo:keep-with-next="always" fo:border-bottom="1pt solid #000000" text:number-lines="false" text:line-number="0">
+      <style:paragraph-properties fo:margin-top="0.0005in" fo:margin-bottom="0.0835in" fo:padding-bottom="0.0499in" fo:keep-with-next="always" fo:border-bottom="1pt solid #000000" text:number-lines="false" text:line-number="0">
         <style:tab-stops>
           <style:tab-stop style:position="2.625in" style:type="center" />
           <style:tab-stop style:position="5.25in" style:type="right" />
