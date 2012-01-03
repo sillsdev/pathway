@@ -218,20 +218,25 @@ namespace SIL.PublishingSolution
         {
             String tableOfContent = string.Empty;
 
-            string str = XeLaTexInstallation.GetXeLaTexDir();
-            string instPath = Common.PathCombine(str, "bin");
+            string xeLaTexInstallationPath = XeLaTexInstallation.GetXeLaTexDir();
+            string instPath = Common.PathCombine(xeLaTexInstallationPath, "bin");
             instPath = Common.PathCombine(instPath, "win32");
             string destinctionPath = Common.PathCombine(instPath, Path.GetFileName(CoverPageImagePath));
 
-            if (CoverPageImagePath != destinctionPath)
-                File.Copy(CoverPageImagePath, destinctionPath, true);
+            if (CoverPageImagePath.Trim() != "")
+            {
+                if (CoverPageImagePath != destinctionPath)
+                    File.Copy(CoverPageImagePath, destinctionPath, true);
 
-            tableOfContent += "\\font\\CoverPageHeading=\"Times New Roman/B\":color=000000 at 22pt \r\n";
-            tableOfContent += "\\color{blue} \r\n";
-            tableOfContent += "\\AddToShipoutPicture*{% \r\n";
-            tableOfContent += "\\put(0,0){\\rule{\\paperwidth}{\\paperheight}}{\\includegraphics[width=\\paperwidth, height=\\paperheight]{" + Path.GetFileName(CoverPageImagePath) + "}}% \r\n";
-            tableOfContent += "} \r\n";
-            tableOfContent += "\\thispagestyle{empty} \r\n";
+                tableOfContent += "\\font\\CoverPageHeading=\"Times New Roman/B\":color=000000 at 22pt \r\n";
+                tableOfContent += "\\color{blue} \r\n";
+                tableOfContent += "\\AddToShipoutPicture*{% \r\n";
+                tableOfContent +=
+                    "\\put(0,0){\\rule{\\paperwidth}{\\paperheight}}{\\includegraphics[width=\\paperwidth, height=\\paperheight]{" +
+                    Path.GetFileName(CoverPageImagePath) + "}}% \r\n";
+                tableOfContent += "} \r\n";
+                tableOfContent += "\\thispagestyle{empty} \r\n";
+            }
 
             if (Convert.ToBoolean(IncludeBookTitleintheImage))
             {

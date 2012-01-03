@@ -697,33 +697,40 @@ namespace SIL.PublishingSolution
             {
                 string ConcatContent = string.Empty;
                 string origContent = content;
-                if (origContent.IndexOf("counter") >= 0 
-                    && origContent.IndexOf("|") >= 0)
+                if (origContent != null)
                 {
-                    string[] y = origContent.Split('|');
-
-                    foreach (string var in y)
+                    if (origContent.IndexOf("counter") >= 0
+                        && origContent.IndexOf("|") >= 0)
                     {
-                        if (var.IndexOf("counter") >= 0)
+                        string[] y = origContent.Split('|');
+
+                        foreach (string var in y)
                         {
-                            int srtPos = var.IndexOf('(');
-                            int endPos = var.IndexOf(')');
-                            string var1 = var.Substring(srtPos + 1, endPos - srtPos - 1);
-                            if (ContentCounter.ContainsKey(var1))
+                            if (var.IndexOf("counter") >= 0)
                             {
-                                ConcatContent = ConcatContent + ContentCounter[var1];
+                                int srtPos = var.IndexOf('(');
+                                int endPos = var.IndexOf(')');
+                                string var1 = var.Substring(srtPos + 1, endPos - srtPos - 1);
+                                if (ContentCounter.ContainsKey(var1))
+                                {
+                                    ConcatContent = ConcatContent + ContentCounter[var1];
+                                }
+                                else
+                                {
+                                    ConcatContent = ConcatContent + "0";
+                                }
                             }
                             else
                             {
-                                ConcatContent = ConcatContent + "0";
+                                ConcatContent = ConcatContent + var.Replace('\'', ' ');
                             }
                         }
-                        else
-                        {
-                            ConcatContent = ConcatContent + var.Replace('\'', ' ');
-                        }
+                        content = ConcatContent;
                     }
-                    content = ConcatContent;
+                }
+                else
+                {
+                    content = string.Empty;
                 }
                 return content;
             }
