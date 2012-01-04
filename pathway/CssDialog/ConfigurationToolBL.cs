@@ -318,9 +318,9 @@ namespace SIL.PublishingSolution
                 string key = "page-width";
                 string key1 = "page-height";
                 string width = GetValue(task, key, "612");
-                width = Math.Round(double.Parse(width)).ToString();
+                width = Math.Round(double.Parse(width, CultureInfo.GetCultureInfo("en-US"))).ToString();
                 string height = GetValue(task, key1, "792");
-                height = Math.Round(double.Parse(height)).ToString();
+                height = Math.Round(double.Parse(height, CultureInfo.GetCultureInfo("en-US"))).ToString();
                 string pageSize = PageSize1(width, height);
                 return pageSize;
             }

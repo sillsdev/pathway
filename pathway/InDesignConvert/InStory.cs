@@ -535,8 +535,8 @@ namespace SIL.PublishingSolution
                     }
                 }
                 rectWidth = rectWidth.Replace("%", "");
-                double x = double.Parse(rectWidth) / 2;
-                double y = double.Parse(rectHeight) / 2;
+                double x = double.Parse(rectWidth, CultureInfo.GetCultureInfo("en-US")) / 2;
+                double y = double.Parse(rectHeight, CultureInfo.GetCultureInfo("en-US")) / 2;
 
                 string xPlus = x.ToString();
                 string xMinus = "-" + xPlus;

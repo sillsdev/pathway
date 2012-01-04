@@ -152,7 +152,7 @@ namespace SIL.PublishingSolution
                 if (className.IndexOf("SectColumnWidth_") >= 0)
                 {
                     colWidth = IdAllClass[className]["ColumnWidth"];
-                    Common.ColumnWidth = double.Parse(colWidth);
+                    Common.ColumnWidth = double.Parse(colWidth, CultureInfo.GetCultureInfo("en-US"));
                 }
 
                 searchKey = "visibility";
@@ -945,8 +945,8 @@ namespace SIL.PublishingSolution
                     }
                 }
 
-                double x = double.Parse(rectWidth) / 2;
-                double y = double.Parse(rectHeight) / 2;
+                double x = double.Parse(rectWidth, CultureInfo.GetCultureInfo("en-US")) / 2;
+                double y = double.Parse(rectHeight, CultureInfo.GetCultureInfo("en-US")) / 2;
 
                 string xPlus = x.ToString();
                 string xMinus = "-" + xPlus;

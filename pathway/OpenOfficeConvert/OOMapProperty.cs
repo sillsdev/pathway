@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -980,10 +981,10 @@ namespace SIL.PublishingSolution
                 string colorStr = attributeStringValue.Substring(startIndex, endIndex - startIndex);
                 string[] rgbValues = colorStr.Split(',');
 
-                double C = double.Parse(rgbValues[0]);
-                double M = double.Parse(rgbValues[1]);
-                double Y = double.Parse(rgbValues[2]);
-                double K = double.Parse(rgbValues[3]);
+                double C = double.Parse(rgbValues[0], CultureInfo.GetCultureInfo("en-US"));
+                double M = double.Parse(rgbValues[1], CultureInfo.GetCultureInfo("en-US"));
+                double Y = double.Parse(rgbValues[2], CultureInfo.GetCultureInfo("en-US"));
+                double K = double.Parse(rgbValues[3], CultureInfo.GetCultureInfo("en-US"));
 
                 double R = C * (1.0 - K) + K;
                 double G = M * (1.0 - K) + K;
