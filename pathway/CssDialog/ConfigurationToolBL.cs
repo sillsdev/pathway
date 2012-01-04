@@ -3731,7 +3731,7 @@ namespace SIL.PublishingSolution
         public void ShowPreview(int page)
         {
             string preview;
-            if(!File.Exists(PreviewFileName1))
+            if(!File.Exists(PreviewFileName1) || _screenMode == ScreenMode.Modify)
             {
                 CreatePreviewFile();
                 cTool.PicPreview.Visible = false;
