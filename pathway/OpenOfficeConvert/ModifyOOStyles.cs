@@ -763,6 +763,7 @@ namespace SIL.PublishingSolution
                     SetAttribute("from-left", "style:horizontal-pos");
                     SetAttribute("paragraph","style:horizontal-rel");
                 }
+                SetAttributeNS("fo:margin-left", "fo", "5.7pt");
             }
             _styleXMLdoc.Save(styleFilePath);
         }
