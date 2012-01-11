@@ -299,12 +299,13 @@ namespace SIL.PublishingSolution
                         string point2 = Common.LeftString(pointSize, ".");
                         int pt = int.Parse(point2);
                         //int baseshift = pt - 12;
-                        int baseshift = pt * 2 / 3;
-                        int point = pt * 2/3;
-                        nameElement.SetAttribute("BaselineShift", "-" + baseshift);
-                        nameElement.SetAttribute("PointSize", "-" + point);
+                        int baseshift = 0;// pt * 2 / 3;
+                        //int point = pt * 2/3;
+                        nameElement.SetAttribute("BaselineShift", baseshift.ToString());
+
+                        //nameElement.SetAttribute("BaselineShift", "-" + baseshift);
+                        //nameElement.SetAttribute("PointSize", "-" + point);
                     }
-                
                 }
             }
         }

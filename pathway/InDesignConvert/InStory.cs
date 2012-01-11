@@ -140,7 +140,7 @@ namespace SIL.PublishingSolution
 
                 // Footnote process 
                 searchKey = "display";
-                if (IdAllClass[className].ContainsKey(searchKey) && className.IndexOf("..footnote") > 0)
+            if (IdAllClass[className].ContainsKey(searchKey) && className.IndexOf("..footnote") > 0)
                 {
                     string footnoteClsName = Common.LeftString(className, "..");
                     if (IdAllClass[footnoteClsName][searchKey] == "footnote" || IdAllClass[footnoteClsName][searchKey] == "prince-footnote")
