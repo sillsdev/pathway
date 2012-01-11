@@ -106,7 +106,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/ChapterNumber_1" Name="ChapterNumber_1" Imported="false" NextStyle="CharacterStyle/ChapterNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="-13" FontStyle="Bold" BaselineShift="-13" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/ChapterNumber_1" Name="ChapterNumber_1" Imported="false" NextStyle="CharacterStyle/ChapterNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="20" FontStyle="Bold" BaselineShift="0" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -266,7 +266,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/ChapterNumber_2" Name="ChapterNumber_2" Imported="false" NextStyle="CharacterStyle/ChapterNumber_2" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="-13" FontStyle="Bold" BaselineShift="-13" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/ChapterNumber_2" Name="ChapterNumber_2" Imported="false" NextStyle="CharacterStyle/ChapterNumber_2" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="20" FontStyle="Bold" BaselineShift="0" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -434,7 +434,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/ChapterNumber_3" Name="ChapterNumber_3" Imported="false" NextStyle="CharacterStyle/ChapterNumber_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="-13" FontStyle="Bold" BaselineShift="-13" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/ChapterNumber_3" Name="ChapterNumber_3" Imported="false" NextStyle="CharacterStyle/ChapterNumber_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="20" FontStyle="Bold" BaselineShift="0" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -642,7 +642,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/ChapterNumber_4" Name="ChapterNumber_4" Imported="false" NextStyle="CharacterStyle/ChapterNumber_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="-13" FontStyle="Bold" BaselineShift="-13" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/ChapterNumber_4" Name="ChapterNumber_4" Imported="false" NextStyle="CharacterStyle/ChapterNumber_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="20" FontStyle="Bold" BaselineShift="0" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -834,7 +834,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/ChapterNumber_5" Name="ChapterNumber_5" Imported="false" NextStyle="CharacterStyle/ChapterNumber_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="-13" FontStyle="Bold" BaselineShift="-13" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/ChapterNumber_5" Name="ChapterNumber_5" Imported="false" NextStyle="CharacterStyle/ChapterNumber_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="20" FontStyle="Bold" BaselineShift="0" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>

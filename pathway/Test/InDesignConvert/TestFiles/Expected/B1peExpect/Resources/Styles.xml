@@ -130,7 +130,7 @@
         <Leading type="unit">10</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/ChapterNumber_1" Name="ChapterNumber_1" Imported="false" NextStyle="CharacterStyle/ChapterNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="-14" FontStyle="Bold" BaselineShift="-14" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
+    <CharacterStyle Self="CharacterStyle/ChapterNumber_1" Name="ChapterNumber_1" Imported="false" NextStyle="CharacterStyle/ChapterNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="22" FontStyle="Bold" BaselineShift="0" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -394,7 +394,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/ChapterNumber_2" Name="ChapterNumber_2" Imported="false" NextStyle="CharacterStyle/ChapterNumber_2" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="-14" FontStyle="Bold" BaselineShift="-14" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
+    <CharacterStyle Self="CharacterStyle/ChapterNumber_2" Name="ChapterNumber_2" Imported="false" NextStyle="CharacterStyle/ChapterNumber_2" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="22" FontStyle="Bold" BaselineShift="0" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
