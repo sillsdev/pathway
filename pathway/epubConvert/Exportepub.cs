@@ -417,6 +417,7 @@ namespace SIL.PublishingSolution
                     var validationDialog = new ValidationDialog();
                     validationDialog.FileName = outputPathWithFileName;
                     validationDialog.ShowDialog();
+                    Process.Start(outputPathWithFileName);
                 }
             }
                 
