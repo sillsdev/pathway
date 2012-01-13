@@ -11,7 +11,7 @@ Func Complete($left, $top)
 	$back = GUICtrlCreateButton("Back", 328, 464, 87, 28)
 	$cancel = GUICtrlCreateButton("Cancel", 432, 464, 87, 28)
 	$finish = GUICtrlCreateButton("Finish", 536, 464, 87, 28)
-	$message = GUICtrlCreateLabel("Congradulations! The process is Complete!", 256, 24, 350, 400, $SS_CENTER)
+	$message = GUICtrlCreateLabel("Congratulations! The process is Complete!", 256, 24, 350, 400, $SS_CENTER)
 	GUICtrlSetFont($message, 14, 400, 0, "Tahoma")
 
 	GUISetState(@SW_SHOW)
