@@ -49,17 +49,17 @@ Func BteVersion()
 		EndIf
 		if @error Then
 			;MsgBox(4096,"Status","No BTE")
-			return 0
+			return False
 		Else
 			if not FileExists( $fwFolder & "\TE.EXE" ) Then
 				;MsgBox(4096,"Status","No TE")
-				return 0
+				return False
 			EndIf
 			;MsgBox(4096,"Status","TE found")
 		Endif
 	Endif
 	;MsgBox(4096,"Status","BTE found")
-	return 1
+	return True
 EndFunc
 
 Func InstallPathway($name)
@@ -86,10 +86,10 @@ Func GetInstaller($name)
 		;MsgBox(4096,"Status","Downloading " & $urlPath & $name)
 		RunWait("wget.exe " & $urlPath & $name)
 	EndIf
+	Sleep( 500 )
 EndFunc
 
 Func LaunchInstaller($name)
-	Sleep( 100 )
 	;MsgBox(4096,"Status","Launching passive installer " & $name)
 	RunWait(@ComSpec & " /c " & $name)
 	CleanUp($name)
@@ -131,7 +131,7 @@ Func InstallDotNetIfNecessary()
 	
 	;See http://msdn.microsoft.com/en-us/library/xhz1cfs8(v=VS.90).aspx
 	$DotNet2 = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework\Policy\v2.0", "50727")
-	if @error = 0 Then
+	if not @error Then
 		;MsgBox(4096,"Status","Installing dot net is unnecessary...")
 		return	;Found dot net
 	EndIf
@@ -154,7 +154,7 @@ Func InstallVersions()
 	Local $attrib, $name
 	$name = "PathwayBootstrap.ini"
 	$attrib = FileGetAttrib($name)
-	if @error = 0 Then
+	if not @error Then
 		;MsgBox(4096,"Status",$name & " found.")
 		if Not StringInStr($attrib, "R") Then
 			;MsgBox(4096,"Status","Old " & $name & " being deleted.")
@@ -168,10 +168,10 @@ Func InstallVersions()
 EndFunc
 
 Func InstallJavaIfNecessary()
-	Local $ver, $path, $latest
+	Local $ver, $path, $latest, $pkg
 	;See http://stackoverflow.com/questions/2951804/how-to-check-java-installation-from-batch-script
 	$ver = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft\Java Runtime Environment", "CurrentVersion")
-	if @error = 0 Then
+	if not @error Then
 		;MsgBox(4096,"Status","Java version " & $ver)
 		$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft\Java Runtime Environment\" & $ver, "JavaHome")
 		if FileExists( $path & "\bin\java.exe") Then
@@ -183,42 +183,59 @@ Func InstallJavaIfNecessary()
 	;EndIf
 	$latest = IniRead("PathwayBootstrap.Ini", "Versions", "Java", "6u30")
 	if @OSArch = "X86" Then
-		GetFromUrl("jre-" & $latest & "-windows-i586-s.exe", "http://pathway.sil.org/wp-content/sprint/jre-" & $latest & "-windows-i586-s.exe")
-		RunWait("jre-" & $latest & "-windows-i586-s.exe /s /v/qn""ALL IEXPLORER=1 MOZILLA=1 REBOOT=Suppress""")
-		CleanUp("jre-" & $latest & "-windows-i586-s.exe")
+		$pkg = "jre-" & $latest & "-windows-i586-s.exe"
 	Else
-		GetFromUrl("jre-" & $latest & "-windows-x64.exe", "http://pathway.sil.org/wp-content/sprint/jre-" & $latest & "-windows-x64.exe")
-		RunWait("jre-" & $latest & "-windows-x64.exe /s /v/qn""ALL IEXPLORER=1 MOZILLA=1 REBOOT=Suppress""")
-		CleanUp("jre-" & $latest & "-windows-x64.exe")
+		$pkg = "jre-" & $latest & "-windows-x64.exe"
 	Endif
+	GetFromUrl($pkg, "http://pathway.sil.org/wp-content/sprint/" & $pkg)
+	RunWait($pkg & " /s /v/qn""ALL IEXPLORER=1 MOZILLA=1 REBOOT=Suppress""")
+	CleanUp($pkg)
 EndFunc
 
 Func InstallLibreOfficeIfNecessary()
-	Local $ver, $cmd, $latest
-	$ver = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Classes\opendocument.WriterDocument\CurVer", "")
-	if @error = 0 Then
-		;MsgBox(4096,"Status","Libre Office version " & $ver)
-		$cmd = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Classes\" & $ver & "\shell\open\command", "")
-		if StringInStr($cmd, "swriter.exe") > 0 Then
-			return ;Already installed
-		EndIf
-	EndIf
+	Local $latest, $pkg, $major, $installerTitle
+	;RemoveFolderMatching(@DesktopDir, "LibreOffice * Installation Files")
+	if IsAssociation(".odt") Then
+		return
+	Endif
 	;if MsgBox(35,"No Libre Office","Libre Office is one of the main output destinations. It is not installed in your computer. Would you like to install Libre Office?") = 6 Then
 	;	LaunchSite("http://www.libreoffice.org/download/")
 	;EndIf
 	$latest = IniRead("PathwayBootstrap.Ini", "Versions", "LibreOffice", "3.4.3")
-	GetFromUrl("LibO_" & $latest & "_Win_x86_install_multi.exe", "http://download.documentfoundation.org/libreoffice/stable/" & $latest & "/win/x86/LibO_" & $latest & "_Win_x86_install_multi.exe")
-	RunWait("LibO_" & $latest & "_Win_x86_install_multi.exe")
-	CleanUp("LibO_" & $latest & "_Win_x86_install_multi.exe")
+	$pkg = "LibO_" & $latest & "_Win_x86_install_multi.exe"
+	GetFromUrl($pkg, "http://download.documentfoundation.org/libreoffice/stable/" & $latest & "/win/x86/" & $pkg)
+	RunWait(@ComSpec & " /c " & $pkg)  ;LibreOffice installer won't run as a sub task from a non-admin main task in Win7
+	;RunWait($pkg)
+	if not @error Then
+		$major = MajorPart($latest)
+		$installerTitle = "LibreOffice " & $major & " - Installation Wizard"
+		;MsgBox(4096,"Status","Title is " & $installerTitle)
+		WinWaitActive($installerTitle)
+		While WinExists($installerTitle)
+			Sleep( 2000 )
+		WEnd
+	EndIf
+	CleanUp($pkg)
+	RemoveFolderMatching(@DesktopDir, "LibreOffice * Installation Files")
+EndFunc
+
+Func MajorPart($latest)
+	Local $endPart2
+	$endPart2 = StringInStr($latest, ".", 0, 2)
+	if not @error Then
+		Return StringMid($latest, 1, $endPart2 - 1)
+	Else
+		Return $latest
+	EndIf
 EndFunc
 
 Func InstallPrinceXmlIfNecessary()
-	Local $path, $latest
+	Local $path, $latest, $pkg
 	$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Prince_is1", "InstallLocation")
 	if @error Then
 		$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Prince_is1", "InstallLocation")
 	EndIf
-	if @error = 0 Then
+	if not @error Then
 		;MsgBox(4096,"Status","PrinceXml path " & $path)
 		if FileExists( $path & "Prince.exe") Then
 			return ;Already installed
@@ -228,47 +245,40 @@ Func InstallPrinceXmlIfNecessary()
 	;	LaunchSite("http://www.princexml.com/download/")
 	;EndIf
 	$latest = IniRead("PathwayBootstrap.Ini", "Versions", "Prince", "8.0")
-	GetFromUrl("prince-" & $latest & "-setup.exe", "http://www.princexml.com/download/prince-" & $latest & "-setup.exe")
-	RunWait("prince-" & $latest & "-setup.exe")
-	CleanUp("prince-" & $latest & "-setup.exe")
+	$pkg = "prince-" & $latest & "-setup.exe"
+	GetFromUrl($pkg, "http://www.princexml.com/download/" & $pkg)
+	RunWait($pkg)
+	CleanUp($pkg)
 EndFunc
 
 Func InstallPdfReaderIfNecessary()
-	Local $ver, $cmd, $latest
-	$ver = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Classes\.pdf", "")
-	if @error = 0 Then
-		;MsgBox(4096,"Status","Libre Office version " & $ver)
-		$cmd = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Classes\" & $ver & "\shell\open\command", "")
-		if @error = 0 Then
-			return ;Already installed
-		EndIf
-	EndIf
+	Local $latest, $pkg
+	if IsAssociation(".pdf") Then
+		Return
+	Endif
 	;if MsgBox(35,"No Pdf Reader","The Pdf Reader displays Pdf results after they are produced by various destinations. None installed in your computer. Would you like to install a Pdf Reader?") = 6 Then
 	;	LaunchSite("http://get.adobe.com/reader/")
 	;EndIf
 	$latest = IniRead("PathwayBootstrap.Ini", "Versions", "FoxitReader", "513.1201")
-	GetFromUrl("FoxitReader" & $latest & "_enu_Setup.exe", "http://cdn01.foxitsoftware.com/pub/foxit/reader/desktop/win/5.x/5.1/enu/FoxitReader" & $latest & "_enu_Setup.exe")
-	RunWait("FoxitReader" & $latest & "_enu_Setup.exe")
-	CleanUp("FoxitReader" & $latest & "_enu_Setup.exe")
+	$pkg = "FoxitReader" & $latest & "_enu_Setup.exe"
+	GetFromUrl($pkg, "http://cdn01.foxitsoftware.com/pub/foxit/reader/desktop/win/5.x/5.1/enu/" & $pkg)
+	RunWait($pkg)
+	CleanUp($pkg)
 EndFunc
 
 Func InstallEpubReaderIfNecessary()
-	Local $ver, $cmd, $viewer, $latest
-	$ver = RegRead("HKEY_CURRENT_USER\Software\Classes\.epub", "")
-	if @error = 0 Then
-		;MsgBox(4096,"Status","Libre Office version " & $ver)
-		$cmd = RegRead("HKEY_CURRENT_USER\SOFTWARE\Classes\" & $ver & "\shell\open\command", "")
-		if @error = 0 Then
-			return ;Already installed
-		EndIf
-	EndIf
+	Local $ver, $cmd, $viewer, $latest, $pkg
+	if IsAssociation(".epub") Then
+		Return
+	Endif
 	;if MsgBox(35,"No Pdf Reader","The Pdf Reader displays Pdf results after they are produced by various destinations. None installed in your computer. Would you like to install a Pdf Reader?") = 6 Then
 	;	LaunchSite("http://get.adobe.com/reader/")
 	;EndIf
 	$latest = IniRead("PathwayBootstrap.Ini", "Versions", "Calibre", "0.8.31")
-	GetFromUrl("calibre-" & $latest & ".msi", "http://downloads.sourceforge.net/project/calibre/0.8.31/calibre-" & $latest & ".msi")
-	RunWait(@ComSpec & " /c calibre-" & $latest & ".msi")  ;.msi files must be launched from command processor
-	CleanUp("calibre-" & $latest & ".msi")
+	$pkg = "calibre-" & $latest & ".msi"
+	GetFromUrl($pkg, "http://downloads.sourceforge.net/project/calibre/" & $latest & "/" & $pkg)
+	RunWait(@ComSpec & " /c " & $pkg)  ;.msi files must be launched from command processor
+	CleanUp($pkg)
 	if @OSArch = "X86" Then
 		$viewer = "C:\Program Files\Calibre2\ebook-viewer.exe"
 	Else
@@ -290,7 +300,7 @@ Func InstallXeLaTeXIfNecessary()
 	if @error Then
 		$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\PathwayXeLaTeX", "XeLaTexDir")
 	EndIf
-	if @error = 0 Then
+	if not @error Then
 		;MsgBox(4096,"Status","XeLaTeX path " & $path)
 		if FileExists( $path & "bin\win32\xelatex.exe") Then
 			$ver = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\SIL\PathwayXeLaTeX", "XeLaTexVer")
@@ -311,10 +321,35 @@ Func InstallXeLaTeXIfNecessary()
 	EndIf
 EndFunc
 
+Func IsAssociation($ext)
+	Local $ver, $cmd, $endPath, $serverApp
+	$ver = RegRead("HKEY_CURRENT_USER\SOFTWARE\Classes\" & $ext, "")
+	if @error Then
+		$ver = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Classes\" & $ext, "")
+	EndIf
+	if not @error Then
+		;MsgBox(4096,"Status","Designator " & $ver)
+		$cmd = RegRead("HKEY_CURRENT_USER\SOFTWARE\Classes\" & $ver & "\shell\open\command", "")
+		if @error Then
+			$cmd = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Classes\" & $ver & "\shell\open\command", "")
+		Endif
+		;MsgBox(4096,"Status","Command " & $cmd)
+		$endPath = StringInStr($cmd, """", 0, 2)
+		if $endPath > 0 Then
+			$serverApp = StringMid($cmd, 2, $endPath - 2)
+			;MsgBox(4096,"Status","Server Application " & $serverApp)
+			if FileExists($serverApp) Then
+				return True ; Already Installed
+			EndIf
+		EndIf
+	EndIf
+	return False
+EndFunc
+
 Func GetFromUrl($name, $url)
 	Local $attrib
 	$attrib = FileGetAttrib($name)
-	if @error = 0 Then
+	if not @error Then
 		;MsgBox(4096,"Status",$name & " found.")
 		if Not StringInStr($attrib, "R") Then
 			;MsgBox(4096,"Status","Old " & $name & " being delted.")
@@ -325,13 +360,34 @@ Func GetFromUrl($name, $url)
 		;MsgBox(4096,"Status","Downloading " & $urlPath & $name)
 		RunWait("wget.exe " & $url)
 	EndIf
+	Sleep( 500 )
+EndFunc
+
+Func RemoveFolderMatching($location, $pattern)
+	Local $search, $installFolder
+	$search = FileFindFirstFile($location & "\" & $pattern)
+	;MsgBox(4096,"Status","$search is " & $search & " pattern is " & $pattern)
+	if $search >= 0 Then
+		;While not @error
+			$installFolder = FileFindNextFile( $search)
+			;MsgBox(4096,"Status","Folder is " & $installFolder)
+		;	if StringInStr($installFolder, $filter) Then
+		;		ExitLoop
+		;	EndIf
+		;WEnd
+		;MsgBox(4096,"Status","Result Folder is " & $installFolder)
+		if not @error Then
+			DirRemove($location & "\" & $installFolder, True)
+		EndIf
+		FileClose($search)
+	EndIf
 EndFunc
 
 Func LaunchSite($url)
 	Local $http, $cmd
 	;See http://stackoverflow.com/questions/5501349/open-website-in-the-users-default-browser-without-letting-them-launch-anything
 	$http = RegRead("HKEY_CURRENT_USER\Software\Classes\http\shell\open\command", "")
-	if @error = 0 Then
+	if not @error Then
 		$cmd = StringReplace($http, "%1", $url)
 	Else
 		$http = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Classes\HTTP\shell\open\command", "")

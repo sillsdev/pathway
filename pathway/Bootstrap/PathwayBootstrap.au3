@@ -27,12 +27,16 @@ Func DoUI()
 	CleanUp("sil.jpg")
 	CleanUp("PWIcon1.jpg")
 	CleanUp("License.rtf")
+	CleanUp("PathwayBootstrap.ini")
 EndFunc
 
 Func CleanUp($name)
+	if @error Then
+		Return
+	EndIf
 	Local $attrib
 	$attrib = FileGetAttrib($name)
-	if @error = 0 Then
+	if not @error Then
 		;MsgBox(4096,"Status",$name & " found.")
 		if Not StringInStr($attrib, "R") Then
 			;MsgBox(4096,"Status","Old " & $name & " being delted.")
