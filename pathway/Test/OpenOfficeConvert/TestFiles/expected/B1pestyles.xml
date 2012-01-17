@@ -600,6 +600,10 @@
         <text:p text:style-name="Header">
           <text:tab />
           <text:page-number text:select-page="current">4</text:page-number>
+          <text:tab />
+          <text:span text:style-name="MT1">
+            <text:variable-get text:name="Left_Guideword_L" office:value-type="string" />
+          </text:span>
         </text:p>
       </style:header>
       <style:footer>
