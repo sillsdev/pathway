@@ -1,7 +1,9 @@
 ;PathwayBootstrap.au3 - 12/2/2011 greg_trihus@sil.org License: LGPL
 #include "Welcome.au3"
 
-Global $StableVersionDate = '-0.7.1-2011-04-12'
+;Global $StableVersionDate = '-0.7.1-2011-04-12'
+Global $StableVersionDate = ''
+Global $LatestSuffix = 'Testing'
 
 Opt('MustDeclareVars', 1)
 

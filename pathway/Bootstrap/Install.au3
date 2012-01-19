@@ -66,6 +66,8 @@ Func InstallPathway($name)
 	Global $InstallStable, $StableVersionDate
 	If $InstallStable Then
 		$name = $name & $StableVersionDate
+	Else
+		$name = $name & $LatestSuffix
 	Endif
 	$name = $name & ".msi"
 	;MsgBox(4096,"Status","Installing " & $name)
@@ -78,7 +80,8 @@ Func GetInstaller($name)
 	Global $InstallStable
 	Local $urlPath
 	if $InstallStable Then
-		$urlPath = 'http://pathway.googlecode.com/files/'
+		;$urlPath = 'http://pathway.googlecode.com/files/'
+		$urlPath = 'http://pathway.sil.org/wp-content/sprint/'
 	Else
 		$urlPath = 'http://pathway.sil.org/wp-content/sprint/'
 	EndIf
