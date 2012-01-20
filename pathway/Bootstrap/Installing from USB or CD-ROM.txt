@@ -1,0 +1,24 @@
+The bootstrap program looks for particular versions of the various installers. If those versions are present in the same folder as the bootstrap program and marked as read only, then the bootstrap program will use the local copies instead of going to the Internet to look for them. This was to allow Pathway to be installed from a USB key or CD-Rom on machines which are not connected to the Internet. 
+
+This is the list I used during testing:
+calibre-0.8.31.msi
+dotnetfx.exe
+FoxitReader43_enu_Setup.exe
+jre-6u30-windows-i586-s.exe
+LibO_3.4.3_Win_x86_install_multi.exe
+PathwayBootstrap.ini
+prince-7.1-setup.exe
+SetupPw7Bte.msi
+SetupPw7Se.msi
+SetupXeLaTeXTesting.msi
+
+The ini file has this content:
+[Versions]
+Java=6u30
+LibreOffice=3.4.3
+Prince=7.1
+FoxitReader=43
+Calibre=0.8.31
+
+The ini file is used to substitute version numbers in the installer names. This way you could replace an installer the bootstrap wanted to install with a newer one or older one by changing the version number in the ini file (and of course making sure the ini file existed in the same folder as PathwayBootstrap.exe and was marked as read only)
+
