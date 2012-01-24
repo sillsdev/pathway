@@ -197,13 +197,15 @@ EndFunc
 
 Func InstallLibreOfficeIfNecessary()
 	Local $latest, $pkg, $major, $installerTitle
-	;RemoveFolderMatching(@DesktopDir, "LibreOffice * Installation Files")
 	if IsAssociation(".odt") Then
-		return
+		Return
 	Endif
-	;if MsgBox(35,"No Libre Office","Libre Office is one of the main output destinations. It is not installed in your computer. Would you like to install Libre Office?") = 6 Then
-	;	LaunchSite("http://www.libreoffice.org/download/")
-	;EndIf
+	if MsgBox(35,"No Libre Office","Libre Office is one of the main output destinations. It is not installed in your computer. Would you like to install Libre Office?") = 6 Then
+		;LaunchSite("http://www.libreoffice.org/download/")
+		MsgBox(4096,"Status","LibreOffice will take some time. Please be patient while LibreOffice is installed.")
+	Else
+		Return
+	EndIf
 	$latest = IniRead("PathwayBootstrap.Ini", "Versions", "LibreOffice", "3.4.3")
 	$pkg = "LibO_" & $latest & "_Win_x86_install_multi.exe"
 	GetFromUrl($pkg, "http://download.documentfoundation.org/libreoffice/stable/" & $latest & "/win/x86/" & $pkg)
