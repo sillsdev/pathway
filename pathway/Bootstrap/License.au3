@@ -45,7 +45,7 @@ Func License($left, $top)
 			License_OnAcceptLicense($acceptLicense +1, $next)
 		Case Else
 			if $msg > 0 Then
-				MsgBox(0, "Unrecognized", "Message=" & $msg)
+				;MsgBox(0, "Unrecognized", "Message=" & $msg)
 			EndIf
 		EndSwitch
 	Wend

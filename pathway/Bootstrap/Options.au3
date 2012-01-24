@@ -35,7 +35,7 @@ Func Options($left, $top)
 		Case $stable, $latest
 		Case Else
 			if $msg > 0 Then
-				MsgBox(0, "Unrecognized", "Message=" & $msg)
+				;MsgBox(0, "Unrecognized", "Message=" & $msg)
 			EndIf
 		EndSwitch
 	Wend

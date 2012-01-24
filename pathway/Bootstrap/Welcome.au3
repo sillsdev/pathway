@@ -30,7 +30,7 @@ Func Welcome()
 			Welcome_OnNext("Welcome")
 		Case Else
 			if $msg > 0 Then
-				MsgBox(0, "Unrecognized", "Message=" & $msg)
+				;MsgBox(0, "Unrecognized", "Message=" & $msg)
 			EndIf
 		EndSwitch
 		
