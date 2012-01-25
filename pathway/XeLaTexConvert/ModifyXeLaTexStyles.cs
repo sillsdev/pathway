@@ -44,6 +44,10 @@ namespace SIL.PublishingSolution
 
         private string _copyrightInformationPagePath;
         private string _coverPageImagePath;
+        private bool _xelatexDocumentOpenClosedRequired = false;
+        private bool _copyrightTexCreated = false;
+        private string _copyrightTexFilename = string.Empty;
+        private bool _reversalIndexTexCreated = false;
 
         public string ProjectType
         {
@@ -93,6 +97,30 @@ namespace SIL.PublishingSolution
             set { _coverPageImagePath = value; }
         }
 
+        public bool CopyrightTexCreated
+        {
+            get { return _copyrightTexCreated; }
+            set { _copyrightTexCreated = value; }
+        }
+
+        public bool ReversalIndexTexCreated
+        {
+            get { return _reversalIndexTexCreated; }
+            set { _reversalIndexTexCreated = value; }
+        }
+
+        public string CopyrightTexFilename
+        {
+            get { return _copyrightTexFilename; }
+            set { _copyrightTexFilename = value; }
+        }
+
+        public bool XelatexDocumentOpenClosedRequired
+        {
+            get { return _xelatexDocumentOpenClosedRequired; }
+            set { _xelatexDocumentOpenClosedRequired = value; }
+        }
+
         #endregion
 
         public void ModifyStylesXML(string projectPath, StreamWriter xetexFile, Dictionary<string, Dictionary<string, string>> newProperty,
@@ -122,6 +150,13 @@ namespace SIL.PublishingSolution
 
         private void MapProperty()
         {
+
+            if (Convert.ToBoolean(TocChecked))
+                InsertTableOfContent();
+
+            if (Convert.ToBoolean(CoverImage))
+                InsertFrontMatter();
+
             string xeLaTexProperty = "";
             List<string> includePackageList = new List<string>();
             foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _cssClass)
@@ -148,35 +183,32 @@ namespace SIL.PublishingSolution
             //%\setstretch{1.1}
             //Common.FileInsertText(_xetexFullFile, @"\setstretch{1.1} ");
 
-            if (Convert.ToBoolean(TocChecked))
-                InsertTableOfContent();
-
-            if (Convert.ToBoolean(CoverImage))
-                InsertFrontMatter();
-
-            Common.FileInsertText(_xetexFullFile, @"\thispagestyle{empty} ");
-            Common.FileInsertText(_xetexFullFile, @"\begin{document} ");
-            Common.FileInsertText(_xetexFullFile, _pageStyleFormat);
-            //setmainfont{Arial} //Default Font 
-            //Common.FileInsertText(_xetexFullFile, @"\usepackage{fancyhdr}");
-            if (Convert.ToBoolean(CoverImage))
-                Common.FileInsertText(_xetexFullFile, @"\usepackage{eso-pic}");
-
-            Common.FileInsertText(_xetexFullFile, @"\usepackage{multicol}");
-            Common.FileInsertText(_xetexFullFile, @"\usepackage{fancyhdr}");
-            Common.FileInsertText(_xetexFullFile, @"\usepackage{fontspec}");
-            Common.FileInsertText(_xetexFullFile, @"\usepackage{amssymb}");
-            Common.FileInsertText(_xetexFullFile, @"\usepackage{graphicx}");
-            Common.FileInsertText(_xetexFullFile, @"\usepackage{grffile}");
-            Common.FileInsertText(_xetexFullFile, @"\usepackage{float}");
-
-            foreach (var package in includePackageList)
+            
+            if (!XelatexDocumentOpenClosedRequired)
             {
-                Common.FileInsertText(_xetexFullFile, package);
-            }
-            Common.FileInsertText(_xetexFullFile, @"\documentclass{article} ");
-            //Common.FileInsertText(_xetexFullFile, @"\documentclass[10pt,psfig,letterpaper,twocolumn]{article} ");
+                Common.FileInsertText(_xetexFullFile, @"\thispagestyle{empty} ");
+                Common.FileInsertText(_xetexFullFile, @"\begin{document} ");
+                Common.FileInsertText(_xetexFullFile, _pageStyleFormat);
+                //setmainfont{Arial} //Default Font 
+                //Common.FileInsertText(_xetexFullFile, @"\usepackage{fancyhdr}");
+                if (Convert.ToBoolean(CoverImage))
+                    Common.FileInsertText(_xetexFullFile, @"\usepackage{eso-pic}");
 
+                Common.FileInsertText(_xetexFullFile, @"\usepackage{multicol}");
+                Common.FileInsertText(_xetexFullFile, @"\usepackage{fancyhdr}");
+                Common.FileInsertText(_xetexFullFile, @"\usepackage{fontspec}");
+                Common.FileInsertText(_xetexFullFile, @"\usepackage{amssymb}");
+                Common.FileInsertText(_xetexFullFile, @"\usepackage{graphicx}");
+                Common.FileInsertText(_xetexFullFile, @"\usepackage{grffile}");
+                Common.FileInsertText(_xetexFullFile, @"\usepackage{float}");
+
+                foreach (var package in includePackageList)
+                {
+                    Common.FileInsertText(_xetexFullFile, package);
+                }
+                Common.FileInsertText(_xetexFullFile, @"\documentclass{article} ");
+                //Common.FileInsertText(_xetexFullFile, @"\documentclass[10pt,psfig,letterpaper,twocolumn]{article} ");
+            }
         }
 
         private void InsertTableOfContent()
@@ -269,7 +301,7 @@ namespace SIL.PublishingSolution
 
             if (Convert.ToBoolean(CopyrightInformation))
             {
-                tableOfContent += "Copyright Content \r\n";
+                tableOfContent += "\\input{" + CopyrightTexFilename + "} \r\n";
                 tableOfContent += "\\thispagestyle{empty} \r\n";
                 tableOfContent += "\\newpage \r\n";
             }

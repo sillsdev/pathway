@@ -39,7 +39,10 @@ namespace SIL.PublishingSolution
         private bool _includeBookTitleintheImage;
         private string _copyrightInformationPagePath;
         private string _coverPageImagePath;
-
+        private bool _xelatexDocumentOpenClosedRequired = false;
+        private bool _copyrightTexCreated = false;
+        private string _copyrightTexFileName = string.Empty;
+        private bool _reversalIndexTexCreated = false;
         #region Public Functions
         public string ExportType
         {
@@ -72,13 +75,7 @@ namespace SIL.PublishingSolution
             _langFontDictionary = new Dictionary<string, string>();
 
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
-            //preProcessor.GetTempFolderPath();
-            //preProcessor.PreserveSpace();
-            //preProcessor.ImagePreprocess();
-            //preProcessor.ReplaceInvalidTagtoSpan();
-            //preProcessor.InsertHiddenChapterNumber();
-            //preProcessor.InsertHiddenVerseNumber();
-            //preProcessor.GetDefinitionLanguage();
+           
             Param.LoadSettings();
             string organization;
             try
@@ -133,7 +130,7 @@ namespace SIL.PublishingSolution
             Dictionary<string, List<string>> classInlineText = xeLaTexStyles._classInlineText;
             xeLaTexContent.TocEndingPage = preProcessor.GetDictionaryLetterCount();
             Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText);
-
+            
             CloseDocument(xeLatexFile);
 
             string include = xeLaTexStyles.PageStyle.ToString();
@@ -148,8 +145,16 @@ namespace SIL.PublishingSolution
             modifyXeLaTexStyles.CopyrightInformationPagePath = _copyrightInformationPagePath;
             modifyXeLaTexStyles.CoverPageImagePath = _coverPageImagePath;
 
+            if(ExportCopyright(projInfo))
+            {
+                _copyrightTexCreated = true;
+                modifyXeLaTexStyles.CopyrightTexCreated = true;
+                modifyXeLaTexStyles.CopyrightTexFilename = Path.GetFileName(_copyrightTexFileName);
+            }
+            modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = false;
+            _xelatexDocumentOpenClosedRequired = false;
             modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexFullFile, include);
-
+            
             //CallXeTex(Path.GetFileName(xeLatexFullFile));
             Dictionary<string, string> imgPath = new Dictionary<string, string>();
             if (newProperty.ContainsKey("ImagePath"))
@@ -159,6 +164,65 @@ namespace SIL.PublishingSolution
             UpdateXeLaTexFontCacheIfNecessary();
             CallXeLaTex(xeLatexFullFile, true, imgPath);
             return true;
+        }
+
+        public bool ExportCopyright(PublicationInformation projInfo)
+        {
+
+            string copyRightFilePath = Param.GetMetadataValue(Param.CopyrightPageFilename);
+
+            // **    string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+            if (File.Exists(copyRightFilePath))
+            {
+                return false;
+            }
+            
+            projInfo.DefaultXhtmlFileWithPath = copyRightFilePath;
+            string filepath = Path.GetFullPath(copyRightFilePath);
+
+            Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
+            CssTree cssTree = new CssTree();
+            cssTree.OutputType = Common.OutputType.XELATEX;
+            cssClass = cssTree.CreateCssProperty(Path.Combine(filepath, "copy.css"), true);
+            string fileNameXhtml = Path.GetFileNameWithoutExtension(copyRightFilePath);
+            string xeLatexCopyrightFile = Path.Combine(projInfo.ProjectPath, fileNameXhtml + ".tex");
+            _copyrightTexFileName = xeLatexCopyrightFile;
+
+
+            StreamWriter xeLatexFile = new StreamWriter(xeLatexCopyrightFile);
+            Dictionary<string, List<string>> classInlineStyle = new Dictionary<string, List<string>>();
+            Dictionary<string, Dictionary<string, string>> xeTexAllClass = new Dictionary<string, Dictionary<string, string>>();
+            XeLaTexStyles xeLaTexStyles = new XeLaTexStyles();
+            classInlineStyle = xeLaTexStyles.CreateXeTexStyles(projInfo.ProjectPath, xeLatexFile, cssClass);
+
+            XeLaTexContent xeLaTexContent = new XeLaTexContent();
+            Dictionary<string, List<string>> classInlineText = xeLaTexStyles._classInlineText;
+            Dictionary<string, Dictionary<string, string>> newProperty = xeLaTexContent.CreateContent(projInfo, cssClass, xeLatexFile, classInlineStyle, cssTree.SpecificityClass, cssTree.CssClassOrder, classInlineText);
+            
+            _xelatexDocumentOpenClosedRequired = true;          //Don't change the place.
+            CloseDocument(xeLatexFile);
+            string include = xeLaTexStyles.PageStyle.ToString();
+            ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
+            modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = true;
+            modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexCopyrightFile, include);
+
+            return true;
+        }
+
+        public bool ExportReversalIndex(PublicationInformation projInfo)
+        {
+            
+            if (projInfo.IsReversalExist)
+            {
+                //string mergedCSS = projInfo.DefaultCssFileWithPath + "FlexRev.css");
+               
+                //var revFile = Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
+                //// (note that the rev file uses a "FlexRev.css", not "main.css"
+                //Common.SetDefaultCSS(revFile, defaultCSS);
+
+            }
+
+             return true;
         }
 
         protected void UpdateXeLaTexFontCacheIfNecessary()
@@ -192,6 +256,12 @@ namespace SIL.PublishingSolution
             string originalDirectory = Directory.GetCurrentDirectory();
             string dest = Common.PathCombine(instPath, Path.GetFileName(xeLatexFullFile));
             File.Copy(xeLatexFullFile, dest, true);
+
+            if (_copyrightTexCreated)
+            {
+                string copyrightDest = Common.PathCombine(instPath, Path.GetFileName(_copyrightTexFileName));
+                File.Copy(_copyrightTexFileName, copyrightDest, true);
+            }
 
             Directory.SetCurrentDirectory(instPath);
             const string name = "xelatex.exe";
@@ -280,15 +350,17 @@ namespace SIL.PublishingSolution
             return logFullName;
         }
 
-
         private void CloseDocument(StreamWriter xeLatexFile)
         {
-            xeLatexFile.WriteLine();
-            xeLatexFile.WriteLine(@"\end{document}");
+            if (!_xelatexDocumentOpenClosedRequired)
+            {
+                xeLatexFile.WriteLine();
+                xeLatexFile.WriteLine(@"\end{document}");
+            }
+
             xeLatexFile.Flush();
             xeLatexFile.Close();
         }
-
 
         private void Launch(string ldmlFullName)
         {
