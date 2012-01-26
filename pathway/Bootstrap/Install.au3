@@ -300,6 +300,10 @@ EndFunc
 
 Func InstallXeLaTeXIfNecessary()
 	Global $InstallStable
+	if $InstallStable Then
+		Return
+	Endif
+	
 	Local $path, $SaveGlobal, $ver, $latest
 	$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\SIL\PathwayXeLaTeX", "XeLaTexDir")
 	if @error Then
@@ -319,10 +323,8 @@ Func InstallXeLaTeXIfNecessary()
 		EndIf
 	EndIf
 	if MsgBox(35,"No XeLaTeX","XeLaTeX is one of the output destinations (similar to a typesetting system). It is not installed in your computer. Would you like to install XeLaTeX?") = 6 Then
-		$SaveGlobal = $InstallStable
-		$InstallStable = False
-		InstallPathway("SetupXeLaTeXTesting")
-		$InstallStable = $SaveGlobal
+		;InstallPathway("SetupXeLaTeXTesting")
+		InstallPathway("SetupXeLaTeX")
 	EndIf
 EndFunc
 
