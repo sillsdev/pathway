@@ -75,7 +75,8 @@ namespace SIL.PublishingSolution
             _langFontDictionary = new Dictionary<string, string>();
 
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
-           
+           // preProcessor.GetTempFolderPath();
+            preProcessor.XelatexImagePreprocess();
             Param.LoadSettings();
             string organization;
             try

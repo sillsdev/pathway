@@ -25,6 +25,7 @@ using System.Xml;
 using System.Drawing;
 using System.IO;
 using SIL.Tool;
+using System.Net;
 
 #endregion Using
 
@@ -906,12 +907,21 @@ namespace SIL.PublishingSolution
                 string[] cc = _allParagraph.ToArray();
                 imageClass = cc[1];
                 srcFile = _imageSource.ToLower();
-                string fileName = "file:" + Common.GetPictureFromPath(srcFile, "", _inputPath);
-                string fileName1 = Common.GetPictureFromPath(srcFile, "", _inputPath);
+
+                string fromPath = Common.GetPictureFromPath(srcFile, "", _inputPath);
+                string clsName = _allStyle.Peek();
                 if (IdAllClass.ContainsKey(cc[0]))
                 {
                     rectHeight = GetPropertyValue(srcFile, "height", rectHeight);
                     rectWidth = GetPropertyValue(srcFile, "width", rectWidth);
+
+                    if (rectHeight == "0" && rectWidth == "0")
+                    {
+                        clsName = _childName;
+                        rectHeight = GetPropertyValue(clsName, "height", rectHeight);
+                        rectWidth = GetPropertyValue(clsName, "width", rectWidth);
+                    }
+
                     GetAlignment(alignment, ref HoriAlignment, ref AnchorPoint, srcFile);
                 }
                 else
@@ -924,26 +934,60 @@ namespace SIL.PublishingSolution
                 // Setting the Height and Width according css value or the image size
                 if (rectHeight != "0")
                 {
-                    if (rectWidth == "0")
+                    if (rectWidth == "0") //H=72 W=0
                     {
-                        rectWidth = Common.CalcDimension(fileName1, ref rectHeight, 'W');
+                        rectWidth = Common.CalcDimension(fromPath, ref rectHeight, 'W');
                     }
+
                 }
-                else if (rectWidth != "0")
+                else if (rectWidth != "0" && rectWidth != "72") //H=0; W != 0,72 
                 {
-                    rectHeight = Common.CalcDimension(fileName1, ref rectWidth, 'H');
+                    rectHeight = Common.CalcDimension(fromPath, ref rectWidth, 'H');
+                }
+                else if (rectWidth == "0" && rectHeight == "0") //H=0; W = 0, 
+                {
+
+                    rectWidth = Convert.ToString(Common.ColumnWidth * .9);
+                    rectHeight = Common.CalcDimension(fromPath, ref rectWidth, 'H');
                 }
                 else
                 {
-                    //Default value is 72 However the line draws 36pt in X-axis and 36pt in y-axis.
-                    //rectHeight = "36";
-                    rectWidth = "36"; // fixed the width as 1 in;
-                    rectHeight = Common.CalcDimension(fileName1, ref rectWidth, 'H');
-                    if (rectHeight == "0")
-                    {
-                        rectHeight = "36";
-                    }
+                    //Default value is 72 
+                    rectHeight = "72"; // fixed the width as 1 in = 72pt;
+                    rectWidth = Common.CalcDimension(fromPath, ref rectHeight, 'W');
                 }
+                if (rectWidth == "0")
+                {
+                    rectWidth = "72";
+                }
+                if (rectHeight == "0")
+                {
+                    rectHeight = "72";
+                }
+
+
+                //if (rectHeight != "0")
+                //{
+                //    if (rectWidth == "0")
+                //    {
+                //        rectWidth = Common.CalcDimension(fileName1, ref rectHeight, 'W');
+                //    }
+                //}
+                //else if (rectWidth != "0")
+                //{
+                //    rectHeight = Common.CalcDimension(fileName1, ref rectWidth, 'H');
+                //}
+                //else
+                //{
+                //    //Default value is 72 However the line draws 36pt in X-axis and 36pt in y-axis.
+                //    //rectHeight = "36";
+                //    rectWidth = "36"; // fixed the width as 1 in;
+                //    rectHeight = Common.CalcDimension(fileName1, ref rectWidth, 'H');
+                //    if (rectHeight == "0")
+                //    {
+                //        rectHeight = "36";
+                //    }
+                //}
 
                 double x = double.Parse(rectWidth, CultureInfo.GetCultureInfo("en-US")) / 2;
                 double y = double.Parse(rectHeight, CultureInfo.GetCultureInfo("en-US")) / 2;
@@ -954,15 +998,15 @@ namespace SIL.PublishingSolution
                 string yPlus = y.ToString();
                 string yMinus = "-" + yPlus;
 
-                int height = 72; //1 in
-                int width = 72; // 1 in
+                int height = Convert.ToInt32(y); //1 in
+                int width = Convert.ToInt32(x); // 1 in
 
                 string picFile = string.Empty;
                 //TODO Make it function 
                 //To get Image details
-                if (File.Exists(fileName1))
+                if (File.Exists(fromPath))
                 {
-                    picFile = Path.GetFileName(fileName1);
+                    picFile = Path.GetFileName(fromPath);
                     string toPath = Path.Combine(_inputPath, picFile);
                     string str = XeLaTexInstallation.GetXeLaTexDir();
                     string instPath = Common.PathCombine(str, "bin");
@@ -972,17 +1016,17 @@ namespace SIL.PublishingSolution
 
                     if (!File.Exists(dest))
                     {
-                        if (fileName1.IndexOf(".tif") >= 0)
+                        if (fromPath.IndexOf(".tif") >= 0)
                         {
-                            toPath = Common.ConvertTifftoImage(fileName1, "jpg");
+                            toPath = Common.ConvertTifftoImage(fromPath, "jpg");
                             if (picFile != null) picFile = picFile.Replace(".tif", ".jpg");
                             if (dest != null) dest = dest.Replace(".tif", ".jpg");
-                            fileName1 = toPath;
+                            fromPath = toPath;
                             toPath = instPath;
                         }
                         if (!string.IsNullOrEmpty(toPath))
                         {
-                            File.Copy(fileName1, Common.PathCombine(toPath, Path.GetFileName(fileName1)), true);
+                            File.Copy(fromPath, Common.PathCombine(toPath, Path.GetFileName(fromPath)), true);
                         }
                     }
                     else
@@ -1001,7 +1045,7 @@ namespace SIL.PublishingSolution
                     //width = fullimage.Width;
                 }
 
-                WriteImage(picFile);
+                WriteImage(picFile, height, width);
 
                 _imageInsert = false;
                 _imageSource = string.Empty;
@@ -1010,7 +1054,7 @@ namespace SIL.PublishingSolution
             return inserted;
         }
 
-        private void WriteImage(string picFile)
+        private void WriteImage(string picFile,int height, int width)
         {
 
             isImage = true;
@@ -1023,7 +1067,7 @@ namespace SIL.PublishingSolution
                 string p2 = @"\begin{center}";
                 //string p3 = @"{\includegraphics[natwidth=2bp,natheight=2bp, width=1bp]{" + picFile + "}} ";
                 //string p3 = @"\includegraphics[width=1in,height=1in,%keepaspectratio]{" + picFile + "} ";
-                string p3 = @"\includegraphics[angle=0,width=52mm]{" + picFile + "} ";
+                string p3 = @"\includegraphics[angle=0,width=" + width + "mm,height=" + height + "mm]{" + picFile + "} ";
                 string p4 = @"\caption{}";
                 //string p3 = @"{\includegraphics[natwidth=1bp,natheight=1bp, width=150bp]{" + picFile + "}} ";                
                 string p5 = @"\end{center}";

@@ -770,6 +770,84 @@ namespace SIL.Tool
         }
 
         /// <summary>
+        /// FileOpen used for Preprocessing temp File For Xelatex
+        /// </summary>
+        public string XelatexImagePreprocess()
+        {
+            
+            //Temp folder and file copy 
+            //string tempFolder1 = tempFolder;
+            string sourcePicturePath = Path.GetDirectoryName(_baseXhtmlFileNameWithPath);
+            string tempFile = _baseXhtmlFileNameWithPath;
+            string metaname = Common.GetBaseValue(tempFile);
+            if (metaname.Length == 0)
+            {
+                metaname = Common.GetMetaValue(tempFile);
+            }
+            string str = XeLaTexInstallation.GetXeLaTexDir();
+
+            string instPath = Common.PathCombine(str, "bin");
+            instPath = Common.PathCombine(instPath, "win32");
+            
+            if (!File.Exists(tempFile)) return string.Empty;
+            var xmldoc = new XmlDocument();
+            // xml image copy
+            try
+            {
+                xmldoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
+                xmldoc.Load(tempFile);
+
+                const string tag = "img";
+                XmlNodeList nodeList = xmldoc.GetElementsByTagName(tag);
+                if (nodeList.Count > 0)
+                {
+                    var counter = 1;
+                    foreach (XmlNode item in nodeList)
+                    {
+                        var name = item.Attributes.GetNamedItem("src");
+                        if (name != null)
+                        {
+                            var src = name.Value;
+                            if (src.Length > 0)
+                            {
+                                string fromFileName = Common.GetPictureFromPath(src, metaname, sourcePicturePath);
+                                
+                                if (File.Exists(fromFileName))
+                                {
+                                    string ext = Path.GetExtension(fromFileName);
+                                    string toFileName = Common.PathCombine(sourcePicturePath, counter + ext);
+                                    File.Delete(Common.PathCombine(instPath, counter.ToString() + ".jpg"));
+                                    File.Copy(fromFileName, toFileName, true);
+
+                                    XmlAttribute xa = xmldoc.CreateAttribute("longdesc");
+                                    xa.Value = name.Value;
+                                    item.Attributes.Append(xa);
+
+                                    name.Value = counter + ext;
+
+                                }
+                            }
+                        }
+                        counter++;
+                    }
+                }
+                try
+                {
+                    //ParagraphVerserSetUp(xmldoc); // TODO - Seperate it from this method.
+                }
+                catch (Exception ex)
+                {
+                    Console.Write(ex.Message);
+                }
+                xmldoc.Save(tempFile);
+            }
+            catch
+            {
+            }
+            return tempFile;
+        }
+
+        /// <summary>
         /// FileOpen used for Preprocessing temp File
         /// </summary>
         public string ImagePreprocess()
