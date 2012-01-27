@@ -130,7 +130,7 @@ Func RemoveLocalFolder()
 EndFunc
 
 Func InstallDotNetIfNecessary()
-	Local $DotNet2
+	Local $DotNet2, $name
 	
 	;See http://msdn.microsoft.com/en-us/library/xhz1cfs8(v=VS.90).aspx
 	$DotNet2 = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework\Policy\v2.0", "50727")
@@ -140,17 +140,20 @@ Func InstallDotNetIfNecessary()
 	EndIf
 	if @OSArch = "X86" Then
 		;MsgBox(4096,"Status","Installing dot net x86...")
-		GetFromUrl("dotnetfx.exe", "http://pathway.sil.org/wp-content/sprint/dotnetfx.exe")
-		;RunWait("dotnetfx.exe /q:a /c:""install /l /q""")
-		RunWait("dotnetfx.exe")
-		CleanUp("dotnetfx.exe")
+		$name = "dotnetfx.exe"
 	Else
 		;MsgBox(4096,"Status","Installing dot net 64...")
-		GetFromUrl("NetFx64.exe", "http://pathway.sil.org/wp-content/sprint/NetFx64.exe")
-		;RunWait("NetFx64.exe /q:a /c:""install /l /q""")
-		RunWait("NetFx64.exe")
-		CleanUp("NetFx64.exe")
+		$name = "NetFx64.exe"
 	EndIf
+	GetFromUrl($name, "http://pathway.sil.org/wp-content/sprint/" & $name)
+	;RunWait("dotnetfx.exe /q:a /c:""install /l /q""")
+	if FileExists($name) Then
+		RunWait($name)
+		CleanUp($name)
+	Else
+		MsgBox(4096,"Status","Please install dot net 2.0")
+		LaunchSite("http://search.microsoft.com/en-us/results.aspx?form=MSHOME&setlang=en-us&q=dot%20net%202.0")
+	Endif
 EndFunc
 
 Func InstallVersions()
@@ -191,8 +194,13 @@ Func InstallJavaIfNecessary()
 		$pkg = "jre-" & $latest & "-windows-x64.exe"
 	Endif
 	GetFromUrl($pkg, "http://pathway.sil.org/wp-content/sprint/" & $pkg)
-	RunWait($pkg & " /s /v/qn""ALL IEXPLORER=1 MOZILLA=1 REBOOT=Suppress""")
-	CleanUp($pkg)
+	if FileExists($pkg) Then
+		RunWait($pkg & " /s /v/qn""ALL IEXPLORER=1 MOZILLA=1 REBOOT=Suppress""")
+		CleanUp($pkg)
+	Else
+		MsgBox(4096,"Status","Please install the Java run time Environment (jre)")
+		LaunchSite("http://java.com/en/download/index.jsp")
+	EndIf
 EndFunc
 
 Func InstallLibreOfficeIfNecessary()
@@ -200,28 +208,32 @@ Func InstallLibreOfficeIfNecessary()
 	if IsAssociation(".odt") Then
 		Return
 	Endif
-	if MsgBox(35,"No Libre Office","Libre Office is one of the main output destinations. It is not installed in your computer. Would you like to install Libre Office?") = 6 Then
+	;if MsgBox(35,"No Libre Office","Libre Office is one of the main output destinations. It is not installed in your computer. Would you like to install Libre Office?") = 6 Then
 		;LaunchSite("http://www.libreoffice.org/download/")
-		MsgBox(4096,"Status","LibreOffice will take some time. Please be patient while LibreOffice is installed.")
-	Else
-		Return
-	EndIf
+		;MsgBox(4096,"Status","LibreOffice will take some time. Please be patient while LibreOffice is installed.")
+	;Else
+		;Return
+	;EndIf
 	$latest = IniRead("PathwayBootstrap.Ini", "Versions", "LibreOffice", "3.4.3")
 	$pkg = "LibO_" & $latest & "_Win_x86_install_multi.exe"
 	GetFromUrl($pkg, "http://download.documentfoundation.org/libreoffice/stable/" & $latest & "/win/x86/" & $pkg)
-	RunWait(@ComSpec & " /c " & $pkg)  ;LibreOffice installer won't run as a sub task from a non-admin main task in Win7
-	;RunWait($pkg)
-	if not @error Then
-		$major = MajorPart($latest)
-		$installerTitle = "LibreOffice " & $major & " - Installation Wizard"
-		;MsgBox(4096,"Status","Title is " & $installerTitle)
-		WinWaitActive($installerTitle)
-		While WinExists($installerTitle)
-			Sleep( 2000 )
-		WEnd
+	If FileExists($pkg) Then
+		RunWait(@ComSpec & " /c " & $pkg)  ;LibreOffice installer won't run as a sub task from a non-admin main task in Win7
+		if not @error Then
+			$major = MajorPart($latest)
+			$installerTitle = "LibreOffice " & $major & " - Installation Wizard"
+			;MsgBox(4096,"Status","Title is " & $installerTitle)
+			WinWaitActive($installerTitle)
+			While WinExists($installerTitle)
+				Sleep( 2000 )
+			WEnd
+		EndIf
+		CleanUp($pkg)
+		RemoveFolderMatching(@DesktopDir, "LibreOffice * Installation Files")
+	Else
+		MsgBox(4096,"Status","Please install LibreOffice.")
+		LaunchSite("http://www.libreoffice.org/download/")
 	EndIf
-	CleanUp($pkg)
-	RemoveFolderMatching(@DesktopDir, "LibreOffice * Installation Files")
 EndFunc
 
 Func MajorPart($latest)
@@ -252,8 +264,13 @@ Func InstallPrinceXmlIfNecessary()
 	$latest = IniRead("PathwayBootstrap.Ini", "Versions", "Prince", "8.0")
 	$pkg = "prince-" & $latest & "-setup.exe"
 	GetFromUrl($pkg, "http://www.princexml.com/download/" & $pkg)
-	RunWait($pkg)
-	CleanUp($pkg)
+	if FileExists($pkg) Then
+		RunWait($pkg)
+		CleanUp($pkg)
+	Else
+		MsgBox(4096,"Status","Plese install PrinceXml ")
+		LaunchSite("http://www.princexml.com/download/")
+	Endif
 EndFunc
 
 Func InstallPdfReaderIfNecessary()
@@ -267,8 +284,13 @@ Func InstallPdfReaderIfNecessary()
 	$latest = IniRead("PathwayBootstrap.Ini", "Versions", "FoxitReader", "513.1201")
 	$pkg = "FoxitReader" & $latest & "_enu_Setup.exe"
 	GetFromUrl($pkg, "http://cdn01.foxitsoftware.com/pub/foxit/reader/desktop/win/5.x/5.1/enu/" & $pkg)
-	RunWait($pkg)
-	CleanUp($pkg)
+	If FileExists($pkg) Then
+		RunWait($pkg)
+		CleanUp($pkg)
+	Else
+		MsgBox(4096,"Status","Please Install a Pdf Reader")
+		LaunchSite("http://get.adobe.com/reader/")
+	EndIf
 EndFunc
 
 Func InstallEpubReaderIfNecessary()
@@ -282,8 +304,13 @@ Func InstallEpubReaderIfNecessary()
 	$latest = IniRead("PathwayBootstrap.Ini", "Versions", "Calibre", "0.8.31")
 	$pkg = "calibre-" & $latest & ".msi"
 	GetFromUrl($pkg, "http://downloads.sourceforge.net/project/calibre/" & $latest & "/" & $pkg)
-	RunWait(@ComSpec & " /c " & $pkg)  ;.msi files must be launched from command processor
-	CleanUp($pkg)
+	if FileExists($pkg) Then
+		RunWait(@ComSpec & " /c " & $pkg)  ;.msi files must be launched from command processor
+		CleanUp($pkg)
+	Else
+		MsgBox(4096,"Status","Please install Calibre for epub (e-book) display")
+		LaunchSite("http://sourceforge.net/projects/calibre/files/latest/download")
+	EndIf
 	if @OSArch = "X86" Then
 		$viewer = "C:\Program Files\Calibre2\ebook-viewer.exe"
 	Else
