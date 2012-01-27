@@ -154,13 +154,98 @@ function main()
 	d = new Date();
 	times=times + "\n" + d;
 
-			
+	TOC();		
 	SaveDocument();
 
 
 	//alert(times);
 	alert("Finished");
 }
+
+function TOC()
+{
+	try
+	{	
+	  CreateTOCStyle();
+	  PlaceTOC();
+	}
+	catch(myError)
+	{
+		
+	}	  
+}
+
+function PlaceTOC()
+{
+	try
+	{	
+		  myDocument  = app.documents[app.documents.length-1]
+		  myTOCStyle = myDocument.tocStyles.itemByName("TOC");
+		  myMasterSpread = myDocument.masterSpreads.item("F-FirstPage");
+		  myTocPage = myDocument.pages.add(LocationOptions.AT_BEGINNING, myMasterSpread);
+		  myIndexFrame = myDocument.textFrames.lastItem();
+		  myBounds = myIndexFrame.geometricBounds;
+		  myX1 = myBounds[1];
+		  myY1 = myBounds[0];
+		  if(isEmptyPage(myDocument.pages[0]))
+		  {
+			myDocument.pages[0].remove();
+		  }
+		  myDocument.createTOC(myTOCStyle, true, undefined, [myX1, myY1]);
+	}
+	catch(myError)
+	{
+		myDocument.createTOC(myTOCStyle, true, undefined, [myX1, myY1]);
+	}		
+}
+
+function CreateTOCStyle()
+{
+
+	var myDocument = app.documents.item(0);
+	//If the TOC Style "myToc" does not already exist, create it.
+	// Importent: Try and Catch 
+	try{//For Existing
+		myTocStyle = myDocument.tocStyles.item("TOC");
+		myTocStyle.name;
+	}//For New
+	catch (myError){
+			myTocStyle = myDocument.tocStyles.add();
+			myTocStyle.name = "TOC";
+			myTocStyleEntry =  myTocStyle.tocStyleEntries.add();
+			myTocStyleEntry =  myTocStyle.tocStyleEntries.add();
+	}
+	//myTocStyleEntry =  myTocStyle.tocStyleEntries.add();
+	//Set Properties for TOC Style
+	with(myTocStyle){
+		createBookmarks = true;
+		includeBookDocuments = true;
+		//label = "myLabel";
+		title = "Contents";
+		//Set Properties for TOC Style
+		tocStyleEntries[0].name = "TitleMain_1";
+		tocStyleEntries[0].separator = "^y";
+		tocStyleEntries[0].formatStyle = "[Same Style]";
+		tocStyleEntries[0].level = 1;
+		
+		try{
+		tocStyleEntries[1].name = "TitleMain_2";
+		tocStyleEntries[1].separator = "^y";
+		tocStyleEntries[1].formatStyle = "[Same Style]";
+		tocStyleEntries[1].level = 1;
+		}
+	catch (myError)
+	{
+		tocStyleEntries[1].name = "TitleMain";
+		tocStyleEntries[1].separator = "^y";
+		tocStyleEntries[1].formatStyle = "[Same Style]";
+		tocStyleEntries[1].level = 1;
+		}
+// Enter more Properties
+		}
+	//myTocStyle.tocStyleEntries.name = "TitleMain_1";
+	}
+
 
 function SaveDocument()
 {
