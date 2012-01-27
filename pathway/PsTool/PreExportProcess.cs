@@ -1459,6 +1459,7 @@ namespace SIL.Tool
 
         public void GetReferenceList(List<string> sourceList, List<string> targetList)
         {
+            string OutputFile = OpenFile();
             Dictionary<string, string> dicMatch = new Dictionary<string, string>();
             MatchCollection m1 = Regex.Matches(_fileContent.ToString(), "<a\\shref.*?>");
             string st;
