@@ -1503,6 +1503,53 @@ namespace SIL.Tool
             }
         }
 
+        public void GetReferenceList(List<string> sourceList, List<string> targetList)
+        {
+            XmlTextReader _reader = new XmlTextReader(_xhtmlFileNameWithPath)
+                                        {
+                                            XmlResolver = null,
+                                            WhitespaceHandling = WhitespaceHandling.Significant
+                                        };
+            while (_reader.Read())
+            {
+                if (_reader.NodeType == XmlNodeType.Element)
+                {
+                    // bool found = Regex.IsMatch(_reader.ToString(), "<a\\shref.*?>");
+                    string st;
+                    if (_reader.Name == "a")
+                    {
+                        string href = _reader.GetAttribute("href");
+                        if (href != null)
+                        {
+                            st = href.Replace("#", "").ToLower();
+                            if (sourceList.Contains(st)) continue;
+                            sourceList.Add(st);
+                            continue;
+                        }
+                    }
+                    if (_reader.Name == "div" || _reader.Name == "span" || _reader.Name == "a")
+                    {
+
+                        string id = _reader.GetAttribute("id");
+                        if (id != null)
+                        {
+                            if (targetList.Contains(id.ToLower())) continue;
+                            targetList.Add(id.ToLower());
+                            continue;
+                        }
+
+                        string name = _reader.GetAttribute("name");
+                        if (name != null)
+                        {
+                            if (targetList.Contains(name.ToLower())) continue;
+                            targetList.Add(name.ToLower());
+                            continue;
+                        }
+                    }
+                }
+            }
+        }
+
         //public ArrayList GetReferenceList()
         //{
         //    ArrayList refList = new ArrayList();
@@ -1535,8 +1582,83 @@ namespace SIL.Tool
         //    return refList;
         //}
 
-        public void GetReferenceList(List<string> sourceList, List<string> targetList)
+        public void GetReferenceList1(List<string> sourceList, List<string> targetList)
         {
+            XmlDocument xdoc = new XmlDocument();
+            xdoc.Load(_xhtmlFileNameWithPath);
+            const string searchTag = "a";
+            var anchorList = xdoc.GetElementsByTagName(searchTag);
+            if (anchorList.Count > 1)
+            {
+                foreach (XmlNode anchorNode in anchorList)
+                {
+                    if (anchorNode.Attributes != null)
+                    {
+                        XmlAttribute attrib = anchorNode.Attributes["href"];
+                        if (attrib != null)
+                        {
+                            string anchorID = attrib.Value.Replace("#", "");
+                            if (sourceList.Contains(anchorID)) continue;
+                            sourceList.Add(anchorID);
+                        }
+                    }
+                }
+            }
+
+
+            string query;
+            foreach (string anchorRef in sourceList)
+            {
+                XmlElement anchorId = xdoc.GetElementById(anchorRef);
+                if (anchorId != null)
+                {
+                    //string anchorref = anchorId.GetAttribute("id");
+                    if (targetList.Contains(anchorRef)) continue;
+                    targetList.Add(anchorRef);
+                }
+
+
+                query = string.Format("//*[@name='{0}']", anchorId);
+                XmlElement ancName = (XmlElement)xdoc.SelectSingleNode(query);
+                if (ancName != null)
+                {
+                    if (targetList.Contains(anchorRef)) continue;
+                    targetList.Add(anchorRef);
+                }
+
+            }
+
+
+
+            string id = "u1_000";
+            query = string.Format("//*[@id='{0}']", id);
+            XmlElement el = (XmlElement)xdoc.SelectSingleNode(query);
+
+
+            //foreach (string anchorRef in sourceList)
+            //{
+            //    var anchorId = xdoc.GetElementById(anchorRef);
+            //    if (anchorId != null)
+            //    {
+            //        string anchorref = anchorId.GetAttribute("id");
+            //        if (targetList.Contains(anchorref)) continue;
+            //        targetList.Add(anchorref);
+            //    }
+            //}
+
+           
+
+
+
+
+
+
+
+
+
+
+
+
             string OutputFile = OpenFile();
             Dictionary<string, string> dicMatch = new Dictionary<string, string>();
             MatchCollection m1 = Regex.Matches(_fileContent.ToString(), "<a\\shref.*?>");
@@ -1546,7 +1668,7 @@ namespace SIL.Tool
                 st = Common.RightRemove(m.Value, "\"");
                 st = Common.LeftRemove(st, "#").Replace("#", "").ToLower();
 
-            if (sourceList.Contains(st)) continue;
+                if (sourceList.Contains(st)) continue;
                 sourceList.Add(st);
             }
 
