@@ -1101,10 +1101,147 @@ namespace SIL.Tool
             return OutputFile;
         }
 
+
+        /// <summary>
+        /// Modify <body> tag as <body xml:space="preserve">
+        /// </summary>
+        public string PreserveSpace_temp()
+        {
+            string fileDir = Path.GetDirectoryName(_xhtmlFileNameWithPath);
+            string fileName = "Preserve" + Path.GetFileName(_xhtmlFileNameWithPath);
+            string newfile = Path.Combine(fileDir, fileName);
+
+            File.Copy(_xhtmlFileNameWithPath, newfile);
+
+            XmlDocument _styleXMLdoc = new XmlDocument();
+            _styleXMLdoc.Load(newfile);
+            var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
+            nsmgr.AddNamespace("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
+            //office:font-face-decls
+            // if new stylename exists
+            XmlElement root = _styleXMLdoc.DocumentElement;
+            string style = "//body";
+            if (root != null)
+            {
+                XmlNode node = root.SelectSingleNode(style, nsmgr); // work
+                if (node == null)
+                {
+                    return _xhtmlFileNameWithPath;
+                }
+                XmlAttribute attribute = _styleXMLdoc.CreateAttribute("xml:space");
+                attribute.Value = "preserve";
+                node.Attributes.Append(attribute);
+            }
+            _styleXMLdoc.Save(newfile);
+            _xhtmlFileNameWithPath = newfile;
+            return _xhtmlFileNameWithPath;
+        }
+
         /// <summary>
         /// Modify <body> tag as <body xml:space="preserve">
         /// </summary>
         public string PreserveSpace()
+        {
+            XmlTextReader reader = new XmlTextReader(_xhtmlFileNameWithPath)
+            {
+                XmlResolver = null,
+                WhitespaceHandling = WhitespaceHandling.Significant
+            };
+
+            string fileDir = Path.GetDirectoryName(_xhtmlFileNameWithPath);
+            string fileName = "Preserve" + Path.GetFileName(_xhtmlFileNameWithPath);
+            string Newfile = Path.Combine(fileDir, fileName);
+
+            XmlTextWriter writer = new XmlTextWriter(Newfile, null);
+
+            while (reader.Read())
+            {
+                switch (reader.NodeType)
+                {
+
+                    case XmlNodeType.Element:
+
+                        writer.WriteStartElement(reader.Prefix, reader.LocalName, reader.NamespaceURI);
+                        if (reader.Name == "body")
+                        {
+                            writer.WriteAttributeString("xml:space", "preserve");
+                        }
+                        writer.WriteAttributes(reader, true);
+
+                        if (reader.IsEmptyElement)
+                        {
+
+                            writer.WriteEndElement();
+
+                        }
+
+                        break;
+
+                    case XmlNodeType.Text:
+
+                        writer.WriteString(reader.Value);
+
+                        break;
+
+                    case XmlNodeType.Whitespace:
+
+                    case XmlNodeType.SignificantWhitespace:
+
+                        writer.WriteWhitespace(reader.Value);
+
+                        break;
+
+                    case XmlNodeType.CDATA:
+
+                        writer.WriteCData(reader.Value);
+
+                        break;
+
+                    case XmlNodeType.EntityReference:
+
+                        writer.WriteEntityRef(reader.Name);
+
+                        break;
+
+                    case XmlNodeType.XmlDeclaration:
+
+                    case XmlNodeType.ProcessingInstruction:
+
+                        writer.WriteProcessingInstruction(reader.Name, reader.Value);
+
+                        break;
+
+                    case XmlNodeType.DocumentType:
+
+                        writer.WriteDocType(reader.Name, reader.GetAttribute("PUBLIC"), reader.GetAttribute("SYSTEM"), reader.Value);
+
+                        break;
+
+                    case XmlNodeType.Comment:
+
+                        writer.WriteComment(reader.Value);
+
+                        break;
+
+                    case XmlNodeType.EndElement:
+
+                        writer.WriteFullEndElement();
+
+                        break;
+
+                }
+            }
+            writer.Close();
+            reader.Close();
+            _xhtmlFileNameWithPath = Newfile;
+            return _xhtmlFileNameWithPath;
+        }
+
+
+        /// <summary>
+        /// Modify <body> tag as <body xml:space="preserve">
+        /// </summary>
+        public string PreserveSpace_old()
         {
             FileStream fs = new FileStream(_xhtmlFileNameWithPath, FileMode.Open);
             StreamReader stream = new StreamReader(fs);
