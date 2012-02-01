@@ -3196,7 +3196,12 @@ namespace SIL.PublishingSolution
                     string textString;
                     sb.Append(name);
                     sb.Append("#");
-                    XmlNode val = node.Attributes["id"];
+                    XmlNode val = null;
+                    if (node.Attributes != null && node.Attributes["id"] != null)
+                    {
+                        val = node.Attributes["id"];
+                    }
+                    //XmlNode val = node.Attributes["id"];
                     if (val != null)
                         sb.Append(val.Value);
                     //sb.Append(node.Attributes["id"].Value);
@@ -3248,11 +3253,11 @@ namespace SIL.PublishingSolution
                                     continue;
                                 }
                                 playOrder++;
-                                textString = childNode.FirstChild.FirstChild.InnerText;
-
+                                if (childNode.HasChildNodes && childNode.FirstChild != null && childNode.FirstChild.FirstChild != null)
+                                    textString = childNode.FirstChild.FirstChild.InnerText;
                                 sb.Append(name);
                                 sb.Append("#");
-                                if (childNode.Attributes != null)
+                                if (childNode.Attributes != null && childNode.Attributes["id"] != null)
                                 {
                                     sb.Append(childNode.Attributes["id"].Value);
                                 }
