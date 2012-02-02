@@ -53,25 +53,34 @@ namespace SIL.PublishingSolution
             ps.ProjectInputType = loadType;
 
             ExportLibreOffice openOffice = new ExportLibreOffice();
+
+            ps.IsOpenOutput = false;
             openOffice.Export(ps);
+            //Common.OpenOutput(fileName);
+
+            using (Process proc = Process.Start("swriter.exe", ps.DictionaryOutputName))
+            {
+                proc.WaitForExit();
+            }
+
 
             //Pdf pdf = new Pdf(xhtmlPreviewFilePath, cssMergeFullFileName);
             //pdf.Create(outputPdfFile);
             //string outputPdfFile = Path.Combine(ps.DictionaryPath, Path.GetFileNameWithoutExtension(fileName) + ".pdf");
             string outputPdfFile = Path.Combine(ps.DictionaryPath, Path.GetFileNameWithoutExtension(openOffice.GeneratedPdfFileName) + ".pdf");
 
-            Stopwatch stopWatch = new Stopwatch();
-            stopWatch.Start();
-            TimeSpan timeSpan = new TimeSpan(0, 2, 0); // 2 mins
-            while (!File.Exists(outputPdfFile))
-            {
-                if (stopWatch.Elapsed > timeSpan)
-                {
-                    stopWatch.Stop();
-                    return "";
-                }
-                Application.DoEvents();
-            }
+            //Stopwatch stopWatch = new Stopwatch();
+            //stopWatch.Start();
+            //TimeSpan timeSpan = new TimeSpan(0, 2, 0); // 2 mins
+            //while (!File.Exists(outputPdfFile))
+            //{
+            //    if (stopWatch.Elapsed > timeSpan)
+            //    {
+            //        stopWatch.Stop();
+            //        return "";
+            //    }
+            //    Application.DoEvents();
+            //}
             //MessageBox.Show(stopWatch.Elapsed.ToString());
             ConvertImage(outputPdfFile, fileName);
             return ps.ProjectName;

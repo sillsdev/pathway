@@ -788,6 +788,7 @@ namespace SIL.PublishingSolution
             string fileNameNoPath = outputFileName + "." + projInfo.OutputExtension;
             mODT.CreateZip(projInfo.TempOutputFolder, fileNameNoPath, verboseClass.ErrorCount);
 
+            projInfo.DictionaryOutputName = fileNameNoPath;
             try
             {
                 if (File.Exists(fileNameNoPath))

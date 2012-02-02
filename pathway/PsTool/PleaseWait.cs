@@ -12,7 +12,7 @@ namespace SIL.Tool
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            this.Opacity = this.Opacity - 0.01;
+            this.Opacity = this.Opacity - 0.1;
             if (this.Opacity < 0.5)
             {
                 this.Close();
