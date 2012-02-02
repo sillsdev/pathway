@@ -2206,66 +2206,107 @@ namespace SIL.PublishingSolution
         /// <returns></returns>
         private bool IsStringInFile(string filePath, string searchText)
         {
-            if (!File.Exists(filePath)) return false;
-            var reader = new FileStream(filePath, FileMode.Open);
-            byte[] buffer = new byte[reader.Length];
-            int[] T = new int[searchText.Length];
-            reader.Read(buffer, 0, (int) reader.Length);
-            reader.Close();
-            int j=0, i=2, sub=0;
-            // populate the T table
-            T[0] = -1;
-            T[1] = 0;
-            while (i < searchText.Length)
-            {
-                if (searchText[i-1] == searchText[sub])
-                {
-                    // continued substring
-                    sub++;
-                    T[i] = sub;
-                    i++;
-                }
-                else if (sub > 0)
-                {
-                    // substring stops, fall back to the start
-                    sub = T[sub];
-                }
-                else
-                {
-                    // not in a substring; use the default value
-                    T[i] = 0;
-                    i++;
-                }
-            }
 
-            // the actual search
-            i = 0;
-            while (j+i < buffer.Length)
+            try
             {
-                if (searchText[i] == buffer[j+i])
+                XmlTextReader _reader = new XmlTextReader(filePath)
                 {
-                    if (i == searchText.Length - 1)
-                    {
-                        // match found
-                        return true;
-                    }
-                    i++;
-                }
-                else
+                    XmlResolver = null,
+                    WhitespaceHandling = WhitespaceHandling.Significant
+                };
+                while (_reader.Read())
                 {
-                    // no match - move to next search pattern
-                    j = j + i - T[i];
-                    if (T[i] > -1)
+                    if (_reader.NodeType == XmlNodeType.Element)
                     {
-                        i = T[i];
-                    }
-                    else
-                    {
-                        i = 0;
+                        // bool found = Regex.IsMatch(_reader.ToString(), "<a\\shref.*?>");
+                        string idString = searchText.Replace("id=\"", "").Replace("\"", "");
+                        if (_reader.Name == "div" || _reader.Name == "span")
+                        {
+
+                            string id = _reader.GetAttribute("id");
+                            if (id == idString)
+                            {
+                                _reader.Close();
+                                return true;
+                            }
+                        }
                     }
                 }
+                _reader.Close();
+                return false;
             }
-            return false;
+            catch (Exception)
+            {
+                return false;
+            }
+            //try
+            //{
+
+            //if (!File.Exists(filePath)) return false;
+            //var reader = new FileStream(filePath, FileMode.Open);
+            //byte[] buffer = new byte[reader.Length];
+            //int[] T = new int[searchText.Length];
+            //reader.Read(buffer, 0, (int) reader.Length);
+            //reader.Close();
+            //int j=0, i=2, sub=0;
+            //// populate the T table
+            //T[0] = -1;
+            //T[1] = 0;
+            //while (i < searchText.Length)
+            //{
+            //    if (searchText[i-1] == searchText[sub])
+            //    {
+            //        // continued substring
+            //        sub++;
+            //        T[i] = sub;
+            //        i++;
+            //    }
+            //    else if (sub > 0)
+            //    {
+            //        // substring stops, fall back to the start
+            //        sub = T[sub];
+            //    }
+            //    else
+            //    {
+            //        // not in a substring; use the default value
+            //        T[i] = 0;
+            //        i++;
+            //    }
+            //}
+
+            //// the actual search
+            //i = 0;
+            //while (j+i < buffer.Length)
+            //{
+            //    if (searchText[i] == buffer[j+i])
+            //    {
+            //        if (i == searchText.Length - 1)
+            //        {
+            //            // match found
+            //            return true;
+            //        }
+            //        i++;
+            //    }
+            //    else
+            //    {
+            //        // no match - move to next search pattern
+            //        j = j + i - T[i];
+            //        if (T[i] > -1)
+            //        {
+            //            i = T[i];
+            //        }
+            //        else
+            //        {
+            //            i = 0;
+            //        }
+            //    }
+            //}
+
+            //}
+            //catch
+            //{ }
+
+           // return false;
             //////////////////
             /*
             int next;
