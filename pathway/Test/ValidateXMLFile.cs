@@ -629,6 +629,7 @@ namespace Test
                 nsmgr.AddNamespace("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
                 nsmgr.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
                 nsmgr.AddNamespace("draw", "urn:oasis:names:tc:opendocument:xmlns:drawing:1.0");
+                nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
                 
             }
             return doc;

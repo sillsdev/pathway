@@ -79,7 +79,7 @@
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 2 </text:span>Abraham em i papa bilong Aisak</text:span>
           <text:span text:style-name="scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-ref text:reference-format="text" text:ref-name="f7be51147-aa97-40a2-ba86-4df84849e9f9">a</text:reference-ref>
+            <text:a xlink:type="simple" xlink:href="#f7be51147-aa97-40a2-ba86-4df84849e9f9">a</text:a>
           </text:span>
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">. Na Aisak em i papa bilong Jekop. Na Jekop em i papa bilong Juda wantaim ol brata bilong en. ‡ </text:span>
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -91,7 +91,7 @@
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">6 </text:span>Na †  Jesi em i papa bilong King Devit</text:span>
           <text:span text:style-name="scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-ref text:reference-format="text" text:ref-name="fa94a4499-63d2-4b83-a49e-56f8cf6f92c9">b</text:reference-ref>
+            <text:a xlink:type="simple" xlink:href="#fa94a4499-63d2-4b83-a49e-56f8cf6f92c9">b</text:a>
           </text:span>
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">.</text:span>
         </text:p>
@@ -140,12 +140,14 @@
         </text:p>
         <text:p text:style-name="NoteGeneralParagraph_scrSection_scrBook_scrBody">
           <text:span text:style-name="scrFootnoteMarker_NoteGeneralParagraph_scrSection_scrBook_scrBody">
-            <text:reference-mark text:name="f7be51147-aa97-40a2-ba86-4df84849e9f9" />a</text:span>
+            <text:bookmark-start text:name="f7be51147-aa97-40a2-ba86-4df84849e9f9" />
+            <text:bookmark-end text:name="f7be51147-aa97-40a2-ba86-4df84849e9f9" />a</text:span>
           <text:span text:style-name="span_.tpi_NoteGeneralParagraph_scrSection_scrBook_scrBody">add footnote</text:span>
         </text:p>
         <text:p text:style-name="NoteGeneralParagraph_scrSection_scrBook_scrBody">
           <text:span text:style-name="scrFootnoteMarker_NoteGeneralParagraph_scrSection_scrBook_scrBody">
-            <text:reference-mark text:name="fa94a4499-63d2-4b83-a49e-56f8cf6f92c9" />b</text:span>
+            <text:bookmark-start text:name="fa94a4499-63d2-4b83-a49e-56f8cf6f92c9" />
+            <text:bookmark-end text:name="fa94a4499-63d2-4b83-a49e-56f8cf6f92c9" />b</text:span>
           <text:span text:style-name="span_.tpi_NoteGeneralParagraph_scrSection_scrBook_scrBody">footnotem1 long hia</text:span>
         </text:p>
         <text:p text:style-name="SectionHead_scrSection_scrBook_scrBody">
@@ -235,7 +237,7 @@
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 13 </text:span>Ol saveman i go pinis, na ensel bilong Bikpela i kamap long Josep long driman. Ensel i tok olsem, “Yu kirap na kisim pikinini wantaim mama bilong en, na yu ranawe i go long Isip.</text:span>
           <text:span text:style-name="scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-ref text:reference-format="text" text:ref-name="f06c1ac15-935c-4ff4-99f9-257a5372c48a">c</text:reference-ref>
+            <text:a xlink:type="simple" xlink:href="#f06c1ac15-935c-4ff4-99f9-257a5372c48a">c</text:a>
           </text:span>
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody"> Na yu mas i stap long Isip inap long taim mi givim tok gen long yu, long wanem, Herot i laik painim pikinini na kilim em i dai.” </text:span>
           <text:span text:style-name="span_.tpi_Paragraph_scrSection_scrBook_scrBody">
@@ -245,7 +247,8 @@
         </text:p>
         <text:p text:style-name="NoteGeneralParagraph_scrSection_scrBook_scrBody">
           <text:span text:style-name="scrFootnoteMarker_NoteGeneralParagraph_scrSection_scrBook_scrBody">
-            <text:reference-mark text:name="f06c1ac15-935c-4ff4-99f9-257a5372c48a" />c</text:span>
+            <text:bookmark-start text:name="f06c1ac15-935c-4ff4-99f9-257a5372c48a" />
+            <text:bookmark-end text:name="f06c1ac15-935c-4ff4-99f9-257a5372c48a" />c</text:span>
           <text:span text:style-name="span_.tpi_NoteGeneralParagraph_scrSection_scrBook_scrBody">footnotem long hia</text:span>
         </text:p>
         <text:p text:style-name="SectionHead_scrSection_scrBook_scrBody">

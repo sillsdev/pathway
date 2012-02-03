@@ -1066,6 +1066,68 @@ namespace SIL.PublishingSolution
         private bool AnchorBookMark(bool pseudo)
         {
             if (pseudo) return false;
+
+            bool isAnchorTagOpen = false;
+
+            if (_anchorWrite)
+            {
+                string status = _anchorBookMarkName.Substring(0, 4);
+
+                if (status == "href")
+                {
+                    //string hrefValueWOHash = Common.RightString(_anchorBookMarkName, "#"); // _anchor[_anchor.Count - 1].ToString();
+                    string anchorName = _anchorBookMarkName.Replace("href", "");
+                    _writer.WriteStartElement("text:a");
+                    _writer.WriteAttributeString("xlink:type", "simple");
+                    _writer.WriteAttributeString("xlink:href", anchorName.ToLower());
+                    //<text:a xlink:type="simple" xlink:href="#hvo9749">
+                    //_writer.WriteString(data);
+                    //_writer.WriteEndElement(); // for Anchor Ends
+                    //StackPop(_referenceCloseStyleStack);
+                    isAnchorTagOpen = true;
+                }
+                else if (status == "name")
+                {
+                    string anchorName = _anchorBookMarkName.Replace("name", "");
+
+                    _writer.WriteStartElement("text:bookmark-start");
+                    _writer.WriteAttributeString("text:name", anchorName.ToLower());
+                    _writer.WriteEndElement();
+                    _writer.WriteStartElement("text:bookmark-end");
+                    _writer.WriteAttributeString("text:name", anchorName.ToLower());
+                    _writer.WriteEndElement();
+                     //<text:bookmark-end text:name="hvo9749"/>
+                    //<text:bookmark-start text:name="hvo9749"/>
+                    //StackPop(_referenceCloseStyleStack);
+                    //_referenceCloseStyle = string.Empty;
+                }
+
+                _anchorBookMarkName = string.Empty;
+                _anchorIdValue = string.Empty;
+                _anchor.Clear();
+                _anchorWrite = false;
+            }
+            else if (_anchorIdValue.Length > 0 && _sourceList.Contains(_anchorIdValue.Replace("#", "").ToLower()) && _targetList.Contains(_anchorIdValue.Replace("#", "").ToLower())) //search in source for writing target
+            {
+                _writer.WriteStartElement("text:bookmark-start");
+                _writer.WriteAttributeString("text:name", _anchorIdValue.ToLower());
+                _writer.WriteEndElement();
+                _writer.WriteStartElement("text:bookmark-end");
+                _writer.WriteAttributeString("text:name", _anchorIdValue.ToLower());
+                _writer.WriteEndElement();
+                _anchorIdValue = string.Empty;
+                //StackPop(_referenceCloseStyleStack);
+                //_referenceCloseStyle = string.Empty;
+            }
+
+
+
+            return isAnchorTagOpen;
+        }
+
+        private bool AnchorBookMark_old(bool pseudo)
+        {
+            if (pseudo) return false;
             
             bool isAnchorTagOpen = false;
             

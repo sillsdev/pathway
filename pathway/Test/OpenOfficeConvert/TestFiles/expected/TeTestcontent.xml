@@ -73,7 +73,7 @@
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 1 </text:span>Cette histoire se passe au tempsoù les juges gouvernent le peuple d'Israël. À ce moment-là, il y a une famine dans le pays. Alors Élimélek, un homme du village de Bethléem,</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody"> dans la région de Juda, part avec sa femme et ses deux fils. Ils vont dans la région de Moab</text:span>
           <text:span text:style-name="scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-ref text:reference-format="text" text:ref-name="f42f5853c-9e2c-433a-9494-5ca12930fd38">Test fghgf </text:reference-ref>
+            <text:a xlink:type="simple" xlink:href="#f42f5853c-9e2c-433a-9494-5ca12930fd38">Test fghgf </text:a>
           </text:span>
           <text:note text:id="ftn1" text:note-class="footnote">
             <text:note-citation text:label="a ">a </text:note-citation>
@@ -88,7 +88,8 @@
             </text:note-body>
           </text:note>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-mark text:name="f42f5853c-9e2c-433a-9494-5ca12930fd38" />. </text:span>
+            <text:bookmark-start text:name="f42f5853c-9e2c-433a-9494-5ca12930fd38" />
+            <text:bookmark-end text:name="f42f5853c-9e2c-433a-9494-5ca12930fd38" />. </text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">2 </text:span>Sa femme s'appelle Noémi,et ses fils s'appellent Malon et Kilion. Ils sont du clan d'Éfrata. Ils arrivent donc dans le pays de Moabet s'installent là. </text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
@@ -117,7 +118,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">11 </text:span>Mais Noémi leur dit: “Rentrez dans votre famille, mes filles. Pourquoi est-ce que vous voulez venir avec moi? Est-ce que je peux encore avoir des filsqui pourraient se marier avec vous</text:span>
           <text:span text:style-name="scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-ref text:reference-format="text" text:ref-name="f3ed97a6e-dbd4-472a-a467-fd17c8ced75a">Test hkh </text:reference-ref>
+            <text:a xlink:type="simple" xlink:href="#f3ed97a6e-dbd4-472a-a467-fd17c8ced75a">Test hkh </text:a>
           </text:span>
           <text:note text:id="ftn2" text:note-class="footnote">
             <text:note-citation text:label="b ">b </text:note-citation>
@@ -129,7 +130,8 @@
             </text:note-body>
           </text:note>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-mark text:name="f3ed97a6e-dbd4-472a-a467-fd17c8ced75a" />? Non! Je suis trop vieille pour cela. </text:span>
+            <text:bookmark-start text:name="f3ed97a6e-dbd4-472a-a467-fd17c8ced75a" />
+            <text:bookmark-end text:name="f3ed97a6e-dbd4-472a-a467-fd17c8ced75a" />? Non! Je suis trop vieille pour cela. </text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">12 </text:span>Rentrez chez vous, mes filles. Oui, partez. Je suis trop vieille pour me remarier. Bien sûr, je pourrais dire: ‘Il y a encore de l'espoir pour moi. Oui, cette nuit même, je vais avoir un mariqui va me donner des fils.’ </text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
@@ -192,7 +194,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">2 </text:span>Un jour, Ruth la Moabite dit à Noémi: “Laisse-moi aller dans les champs. Je ramasserai les épis derrière quelqu'un</text:span>
           <text:span text:style-name="scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-ref text:reference-format="text" text:ref-name="f10469e95-c350-43ed-8441-181aec42ee4e">Test hbjkh </text:reference-ref>
+            <text:a xlink:type="simple" xlink:href="#f10469e95-c350-43ed-8441-181aec42ee4e">Test hbjkh </text:a>
           </text:span>
           <text:note text:id="ftn3" text:note-class="footnote">
             <text:note-citation text:label="c ">c </text:note-citation>
@@ -204,7 +206,8 @@
             </text:note-body>
           </text:note>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-mark text:name="f10469e95-c350-43ed-8441-181aec42ee4e" />qui sera bon envers moi en me permettant de le faire.” Noémi répond: “Vas-y, ma fille.” </text:span>
+            <text:bookmark-start text:name="f10469e95-c350-43ed-8441-181aec42ee4e" />
+            <text:bookmark-end text:name="f10469e95-c350-43ed-8441-181aec42ee4e" />qui sera bon envers moi en me permettant de le faire.” Noémi répond: “Vas-y, ma fille.” </text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">3 </text:span>Ruth part et elle va dans un champ, pour ramasser les épis derrière ceux qui récoltent. Par chance, le champ où elle vaest celui de Booz, de la famille d'Élimélek.</text:span>
         </text:p>
@@ -266,7 +269,7 @@
           <text:span text:style-name="NameOfGod_Paragraph_scrSection_scrBook_scrBody">Seigneur</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody"> continue à nous montrer sa bonté. Il est bon pour nous les vivants,comme il est bon pour les morts. Qu'il bénisse cet homme!” Puis Noémi ajoute: “Booz est un homme de notre famille proche. Il est l'un de ceux qui ont la responsabilité de prendre soin de nous</text:span>
           <text:span text:style-name="scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-ref text:reference-format="text" text:ref-name="f66fb170f-1f1d-418b-86d8-171477728299">Test SSSS </text:reference-ref>
+            <text:a xlink:type="simple" xlink:href="#f66fb170f-1f1d-418b-86d8-171477728299">Test SSSS </text:a>
           </text:span>
           <text:note text:id="ftn4" text:note-class="footnote">
             <text:note-citation text:label="d ">d </text:note-citation>
@@ -278,7 +281,8 @@
             </text:note-body>
           </text:note>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-mark text:name="f66fb170f-1f1d-418b-86d8-171477728299" />.” </text:span>
+            <text:bookmark-start text:name="f66fb170f-1f1d-418b-86d8-171477728299" />
+            <text:bookmark-end text:name="f66fb170f-1f1d-418b-86d8-171477728299" />.” </text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">21 </text:span>Ruth la Moabite dit encore: “Booz m'a dit aussi: ‘Continue à ramasser les épisderrière mes serviteurs jusqu'à la fin de la récolte.’ ” </text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
@@ -313,7 +317,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">4 </text:span>Quand Booz se couchera,regarde l'endroit où il est. Ensuite, approche-toi, écarte un peu sa couvertureet couche-toi à ses pieds</text:span>
           <text:span text:style-name="scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-ref text:reference-format="text" text:ref-name="fae3f9f55-e5fc-4bd8-a7f0-8714c4a8b1aa">Test VVV </text:reference-ref>
+            <text:a xlink:type="simple" xlink:href="#fae3f9f55-e5fc-4bd8-a7f0-8714c4a8b1aa">Test VVV </text:a>
           </text:span>
           <text:note text:id="ftn5" text:note-class="footnote">
             <text:note-citation text:label="e ">e </text:note-citation>
@@ -325,7 +329,8 @@
             </text:note-body>
           </text:note>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-mark text:name="fae3f9f55-e5fc-4bd8-a7f0-8714c4a8b1aa" />. Après cela, il te dira lui-mêmece que tu dois faire.” </text:span>
+            <text:bookmark-start text:name="fae3f9f55-e5fc-4bd8-a7f0-8714c4a8b1aa" />
+            <text:bookmark-end text:name="fae3f9f55-e5fc-4bd8-a7f0-8714c4a8b1aa" />. Après cela, il te dira lui-mêmece que tu dois faire.” </text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">5 </text:span>Ruth répond: “Je ferai tout ce que tu m'as dit.”</text:span>
         </text:p>
@@ -341,7 +346,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">9 </text:span>Il dit: “Qui est-ce?” Elle répond: “C'est moi, Ruth.Protège-moi. En effet, tu es un proche parentet tu as la responsabilité de prendre soin de moi</text:span>
           <text:span text:style-name="scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-ref text:reference-format="text" text:ref-name="f2fec492c-dfce-42b9-a37a-d1a899d1509e">Test JJJ </text:reference-ref>
+            <text:a xlink:type="simple" xlink:href="#f2fec492c-dfce-42b9-a37a-d1a899d1509e">Test JJJ </text:a>
           </text:span>
           <text:note text:id="ftn6" text:note-class="footnote">
             <text:note-citation text:label="f ">f </text:note-citation>
@@ -353,7 +358,8 @@
             </text:note-body>
           </text:note>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-mark text:name="f2fec492c-dfce-42b9-a37a-d1a899d1509e" />.” </text:span>
+            <text:bookmark-start text:name="f2fec492c-dfce-42b9-a37a-d1a899d1509e" />
+            <text:bookmark-end text:name="f2fec492c-dfce-42b9-a37a-d1a899d1509e" />.” </text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">10 </text:span>Booz répond: “Que le </text:span>
           <text:span text:style-name="NameOfGod_Paragraph_scrSection_scrBook_scrBody">Seigneur</text:span>
@@ -409,7 +415,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody"> 5 </text:span>Booz dit: “Si tu achètes le champ à Noémi,tu dois aussi prendre pour femme Ruth la Moabite. Ainsi, la propriété du champ restera dans la famille de son mari mort</text:span>
           <text:span text:style-name="scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-ref text:reference-format="text" text:ref-name="f7e15ff75-fafd-44d2-910d-8b55c4b9165d">Test HHH </text:reference-ref>
+            <text:a xlink:type="simple" xlink:href="#f7e15ff75-fafd-44d2-910d-8b55c4b9165d">Test HHH </text:a>
           </text:span>
           <text:note text:id="ftn7" text:note-class="footnote">
             <text:note-citation text:label="g ">g </text:note-citation>
@@ -421,7 +427,8 @@
             </text:note-body>
           </text:note>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-mark text:name="f7e15ff75-fafd-44d2-910d-8b55c4b9165d" />.” </text:span>
+            <text:bookmark-start text:name="f7e15ff75-fafd-44d2-910d-8b55c4b9165d" />
+            <text:bookmark-end text:name="f7e15ff75-fafd-44d2-910d-8b55c4b9165d" />.” </text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">6 </text:span>L'homme répond: “Dans ce cas, je ne peux pas. En effet, je risque de diminuer ma propriété. Donc, prends pour toi le droit de racheter. Moi, je ne peux pas.”</text:span>
         </text:p>
@@ -513,7 +520,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">2 </text:span>“Debout, va à Ninive</text:span>
           <text:span text:style-name="scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-ref text:reference-format="text" text:ref-name="fd21ac77e-abcc-40b7-9dfb-b49f8ae05d4e">Test BBB </text:reference-ref>
+            <text:a xlink:type="simple" xlink:href="#fd21ac77e-abcc-40b7-9dfb-b49f8ae05d4e">Test BBB </text:a>
           </text:span>
           <text:note text:id="ftn8" text:note-class="footnote">
             <text:note-citation text:label="a ">a </text:note-citation>
@@ -528,7 +535,8 @@
             </text:note-body>
           </text:note>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-mark text:name="fd21ac77e-abcc-40b7-9dfb-b49f8ae05d4e" />, la grande ville. Tu menaceras ses habitants en disant: ‘Le </text:span>
+            <text:bookmark-start text:name="fd21ac77e-abcc-40b7-9dfb-b49f8ae05d4e" />
+            <text:bookmark-end text:name="fd21ac77e-abcc-40b7-9dfb-b49f8ae05d4e" />, la grande ville. Tu menaceras ses habitants en disant: ‘Le </text:span>
           <text:span text:style-name="NameOfGod_Paragraph_scrSection_scrBook_scrBody">Seigneur</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody"> en a assez de voir vos actions mauvaises.’ ”</text:span>
         </text:p>
@@ -538,7 +546,7 @@
           <text:span text:style-name="NameOfGod_Paragraph_scrSection_scrBook_scrBody">Seigneur</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">. Il arrive à Jaffa</text:span>
           <text:span text:style-name="scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-ref text:reference-format="text" text:ref-name="f2a33867f-7bba-4f5b-a903-64fb65cce4e6">Test MMM </text:reference-ref>
+            <text:a xlink:type="simple" xlink:href="#f2a33867f-7bba-4f5b-a903-64fb65cce4e6">Test MMM </text:a>
           </text:span>
           <text:note text:id="ftn9" text:note-class="footnote">
             <text:note-citation text:label="b ">b </text:note-citation>
@@ -553,7 +561,8 @@
             </text:note-body>
           </text:note>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-mark text:name="f2a33867f-7bba-4f5b-a903-64fb65cce4e6" />. Là, il trouve un bateau qui part </text:span>
+            <text:bookmark-start text:name="f2a33867f-7bba-4f5b-a903-64fb65cce4e6" />
+            <text:bookmark-end text:name="f2a33867f-7bba-4f5b-a903-64fb65cce4e6" />. Là, il trouve un bateau qui part </text:span>
           <text:span text:style-name="Foreign_Paragraph_scrSection_scrBook_scrBody">pour Tarsis. Il paie</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody"> son voyage. Puis il monte dans le bateau, pour aller avec les marins à Tarsis, loin du </text:span>
           <text:span text:style-name="NameOfGod_Paragraph_scrSection_scrBook_scrBody">Seigneur</text:span>
@@ -788,7 +797,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">2 </text:span>“Debout! Va à Ninive</text:span>
           <text:span text:style-name="scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-ref text:reference-format="text" text:ref-name="fdf032e3c-bf35-4286-8f5e-0f4f81378a6b">TGet hjhj </text:reference-ref>
+            <text:a xlink:type="simple" xlink:href="#fdf032e3c-bf35-4286-8f5e-0f4f81378a6b">TGet hjhj </text:a>
           </text:span>
           <text:note text:id="ftn10" text:note-class="footnote">
             <text:note-citation text:label="c ">c </text:note-citation>
@@ -800,7 +809,8 @@
             </text:note-body>
           </text:note>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-mark text:name="fdf032e3c-bf35-4286-8f5e-0f4f81378a6b" />, la grande ville. Annonce-lui le message que je te donne.” </text:span>
+            <text:bookmark-start text:name="fdf032e3c-bf35-4286-8f5e-0f4f81378a6b" />
+            <text:bookmark-end text:name="fdf032e3c-bf35-4286-8f5e-0f4f81378a6b" />, la grande ville. Annonce-lui le message que je te donne.” </text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">3 </text:span>Alors Jonas se lève. Il part, mais cette fois, il va à Ninive, comme le </text:span>
           <text:span text:style-name="NameOfGod_Paragraph_scrSection_scrBook_scrBody">Seigneur</text:span>
@@ -814,7 +824,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">7 </text:span>Puis le roi et ses ministres donnent cet ordre: “Criez dans la ville ces paroles: ‘Il est interdit aux habitants et aux bêtes, bo!eufs, moutons et chèvres, de manger et de boire</text:span>
           <text:span text:style-name="scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-ref text:reference-format="text" text:ref-name="f22b21ff6-a0e6-4861-843b-474f349d0548">Test 888 </text:reference-ref>
+            <text:a xlink:type="simple" xlink:href="#f22b21ff6-a0e6-4861-843b-474f349d0548">Test 888 </text:a>
           </text:span>
           <text:note text:id="ftn11" text:note-class="footnote">
             <text:note-citation text:label="d ">d </text:note-citation>
@@ -826,7 +836,8 @@
             </text:note-body>
           </text:note>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-mark text:name="f22b21ff6-a0e6-4861-843b-474f349d0548" />! </text:span>
+            <text:bookmark-start text:name="f22b21ff6-a0e6-4861-843b-474f349d0548" />
+            <text:bookmark-end text:name="f22b21ff6-a0e6-4861-843b-474f349d0548" />! </text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">8 </text:span>Tout le monde doit mettre des habits de deuil, les gens et les bêtes! Chacun doit crier vers Dieu de toutes ses forces. Chacun doit abandonner sa mauvaise conduite et arrêter les actions violentes qu'il fait! </text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
@@ -857,7 +868,7 @@
           <text:span text:style-name="NameOfGod_Paragraph_scrSection_scrBook_scrBody">Seigneur</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">, je le savais bien quand j'étais encore dans mon pays. C'est pourquoi je me suis dépêché de fuir à Tarsis</text:span>
           <text:span text:style-name="scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-ref text:reference-format="text" text:ref-name="fafd17d11-5330-4e85-9969-4c501f0315db">Test jjj </text:reference-ref>
+            <text:a xlink:type="simple" xlink:href="#fafd17d11-5330-4e85-9969-4c501f0315db">Test jjj </text:a>
           </text:span>
           <text:note text:id="ftn12" text:note-class="footnote">
             <text:note-citation text:label="e ">e </text:note-citation>
@@ -869,7 +880,8 @@
             </text:note-body>
           </text:note>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-mark text:name="fafd17d11-5330-4e85-9969-4c501f0315db" />. Je le savais bien, tu es plein de tendresse et de pitié, patient, plein d'amour, et tu regrettes tes menaces. </text:span>
+            <text:bookmark-start text:name="fafd17d11-5330-4e85-9969-4c501f0315db" />
+            <text:bookmark-end text:name="fafd17d11-5330-4e85-9969-4c501f0315db" />. Je le savais bien, tu es plein de tendresse et de pitié, patient, plein d'amour, et tu regrettes tes menaces. </text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">3 </text:span>Maintenant, </text:span>
           <text:span text:style-name="NameOfGod_Paragraph_scrSection_scrBook_scrBody">Seigneur</text:span>
@@ -925,7 +937,7 @@
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">3 </text:span>A vous grâce et paix, de la part de Dieu notre Père et du </text:span>
           <text:span text:style-name="NameOfGod_Paragraph_scrSection_scrBook_scrBody">Seigneur Jésus Christ</text:span>
           <text:span text:style-name="scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-ref text:reference-format="text" text:ref-name="f3cd531d6-a3b3-42e9-83c8-689f76b55de4">Test dfgfd </text:reference-ref>
+            <text:a xlink:type="simple" xlink:href="#f3cd531d6-a3b3-42e9-83c8-689f76b55de4">Test dfgfd </text:a>
           </text:span>
           <text:note text:id="ftn13" text:note-class="footnote">
             <text:note-citation text:label="a ">a </text:note-citation>
@@ -937,7 +949,8 @@
             </text:note-body>
           </text:note>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-mark text:name="f3cd531d6-a3b3-42e9-83c8-689f76b55de4" />.</text:span>
+            <text:bookmark-start text:name="f3cd531d6-a3b3-42e9-83c8-689f76b55de4" />
+            <text:bookmark-end text:name="f3cd531d6-a3b3-42e9-83c8-689f76b55de4" />.</text:span>
         </text:p>
         <text:p text:style-name="SectionHead_scrSection_scrBook_scrBody">
           <text:span text:style-name="span_.x-kal_SectionHead_scrSection_scrBook_scrBody">L'amour et de la foi de Philemon</text:span>
@@ -952,7 +965,7 @@
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
             <text:span text:style-name="VerseNumber_Paragraph_scrSection_scrBook_scrBody">6 </text:span>Que ta participation à la foi soit efficace</text:span>
           <text:span text:style-name="scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-ref text:reference-format="text" text:ref-name="fd2ca65c1-2249-450c-b8cd-356c94c60226">Testvbn </text:reference-ref>
+            <text:a xlink:type="simple" xlink:href="#fd2ca65c1-2249-450c-b8cd-356c94c60226">Testvbn </text:a>
           </text:span>
           <text:note text:id="ftn14" text:note-class="footnote">
             <text:note-citation text:label="b ">b </text:note-citation>
@@ -964,7 +977,8 @@
             </text:note-body>
           </text:note>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">
-            <text:reference-mark text:name="fd2ca65c1-2249-450c-b8cd-356c94c60226" />: fais donc connaître tout le bien que nous pouvons accomplir pour la cause du </text:span>
+            <text:bookmark-start text:name="fd2ca65c1-2249-450c-b8cd-356c94c60226" />
+            <text:bookmark-end text:name="fd2ca65c1-2249-450c-b8cd-356c94c60226" />: fais donc connaître tout le bien que nous pouvons accomplir pour la cause du </text:span>
           <text:span text:style-name="NameOfGod_Paragraph_scrSection_scrBook_scrBody">Christ</text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">. </text:span>
           <text:span text:style-name="span_.x-kal_Paragraph_scrSection_scrBook_scrBody">

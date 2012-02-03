@@ -812,6 +812,7 @@ namespace SIL.PublishingSolution
             finally
             {
                 projInfo.DefaultXhtmlFileWithPath = defaultXhtml;
+                projInfo.DictionaryOutputName = null;
                 if (preProcessor != null)
                 {
                     Common.DeleteDirectory(preProcessor.GetCreatedTempFolderPath);

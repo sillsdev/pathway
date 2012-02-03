@@ -135,7 +135,8 @@
               </text:note-body>
             </text:note>
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
-              <text:reference-mark text:name="f7ba33092-b30d-451d-b1af-b5719418562b" /> Ma nimiu na vaututuni ke nagho vano tagna na gol ke boi mono thovohaliu. Gi keda talu heta nimiu na vaututuni leghugna ke govu na komi papara, a God keda veletokeghamu me ghaghana boheghamu tagna na maghavu a Jisas Krais keda tabiru mai.</text:span>
+              <text:bookmark-start text:name="f7ba33092-b30d-451d-b1af-b5719418562b" />
+              <text:bookmark-end text:name="f7ba33092-b30d-451d-b1af-b5719418562b" /> Ma nimiu na vaututuni ke nagho vano tagna na gol ke boi mono thovohaliu. Gi keda talu heta nimiu na vaututuni leghugna ke govu na komi papara, a God keda veletokeghamu me ghaghana boheghamu tagna na maghavu a Jisas Krais keda tabiru mai.</text:span>
           </text:p>
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -173,7 +174,8 @@
             </text:note>
           </text:p>
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
-            <text:reference-mark text:name="fdf091ef0-3e60-493d-a403-f543d7981e23" />
+            <text:bookmark-start text:name="fdf091ef0-3e60-493d-a403-f543d7981e23" />
+            <text:bookmark-end text:name="fdf091ef0-3e60-493d-a403-f543d7981e23" />
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody"> 17 </text:span>A God, koti kiloagna a Tamamiu kori vido koti tarai, imanea ke boi thevu tagna ahai kori vido ke fatera na komi tinoni eigna na komi fata kena eia. Na vunegna iangeni, oti ghaghana bohea a God kori vido koti mono tadia na komi meleha ke boi na pukuni melehamiu. </text:span>
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -218,7 +220,8 @@
           </text:p>
           <text:p text:style-name="ParagraphContinuation_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_ParagraphContinuation_scrSection_columns_scrBook_scrBody">
-              <text:reference-mark text:name="f1e5a7ae1-c9f1-4883-98ea-cf1d0b476d4e" />Ma na haghore iangeni, na Rorongo ke Toke kena titionoa ghohi itamiu.</text:span>
+              <text:bookmark-start text:name="f1e5a7ae1-c9f1-4883-98ea-cf1d0b476d4e" />
+              <text:bookmark-end text:name="f1e5a7ae1-c9f1-4883-98ea-cf1d0b476d4e" />Ma na haghore iangeni, na Rorongo ke Toke kena titionoa ghohi itamiu.</text:span>
           </text:p>
           <text:p text:style-name="SectionHeadMajor_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_SectionHeadMajor_scrSection_columns_scrBook_scrBody">A Krais Na Naghoi Ghahira</text:span>
@@ -254,7 +257,8 @@
               </text:note-body>
             </text:note>
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
-              <text:reference-mark text:name="f5b0eba9d-b90d-456b-9d9c-152c9d5ed0e8" /> Na ghahira iangeni, na komi tinoni kena bosi magnahaghinia, kari a God ke vahia me toatogha ke nagho vano. </text:span>
+              <text:bookmark-start text:name="f5b0eba9d-b90d-456b-9d9c-152c9d5ed0e8" />
+              <text:bookmark-end text:name="f5b0eba9d-b90d-456b-9d9c-152c9d5ed0e8" /> Na ghahira iangeni, na komi tinoni kena bosi magnahaghinia, kari a God ke vahia me toatogha ke nagho vano. </text:span>
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">5 </text:span>Ighamu koti hatia na havi mathangani, koti vaghagna na komi ghahira a God ke hatia bali agutua nigna na vathe. Na vathe iangeni hiri, ighamu koti leghua a God. Na Tarunga ke Tabu ke agutua na vathe iangeni itamiu. Ighamu koti hatia na havi mathangani, a God ke eighamu eigna kotida nigna na booi pris bali agutu vania. Ma na vunegna na hava ke eia a Jisas Krais, imanea keda totogo eidia na komi fata koti eia vania. </text:span>
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -280,7 +284,8 @@
             </text:note>
           </text:p>
           <text:p text:style-name="ParagraphContinuation_scrSection_columns_scrBook_scrBody">
-            <text:reference-mark text:name="f97a912ed-9b5e-4f71-b8bf-7853dd31e237" />
+            <text:bookmark-start text:name="f97a912ed-9b5e-4f71-b8bf-7853dd31e237" />
+            <text:bookmark-end text:name="f97a912ed-9b5e-4f71-b8bf-7853dd31e237" />
             <text:span text:style-name="span_ParagraphContinuation_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_ParagraphContinuation_scrSection_columns_scrBook_scrBody"> 7 </text:span>Tamiu ighamu koti vaututunia, a God ke ghaghana boheghamu. Keana na fata ke dika keda padara arahai kena boi vaututunia, eigna</text:span>
           </text:p>
@@ -301,7 +306,8 @@
             </text:note>
           </text:p>
           <text:p text:style-name="ParagraphContinuation_scrSection_columns_scrBook_scrBody">
-            <text:reference-mark text:name="fd9f0c8d8-cecf-48a1-9d75-1ebf00ca1197" />
+            <text:bookmark-start text:name="fd9f0c8d8-cecf-48a1-9d75-1ebf00ca1197" />
+            <text:bookmark-end text:name="fd9f0c8d8-cecf-48a1-9d75-1ebf00ca1197" />
             <text:span text:style-name="span_ParagraphContinuation_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_ParagraphContinuation_scrSection_columns_scrBook_scrBody"> 8 </text:span>Na komi Rioriso ke Tabu kena velea mua,</text:span>
           </text:p>
@@ -320,7 +326,8 @@
           </text:p>
           <text:p text:style-name="ParagraphContinuation_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_ParagraphContinuation_scrSection_columns_scrBook_scrBody">
-              <text:reference-mark text:name="fd431d2a5-9c7b-4942-b93a-a9515070eac1" />Imarea kena sikili eigna kena boi leghua na haghoregna a God. Na sikili kena eia ke leghua nigna na vanohehe a God eidia.</text:span>
+              <text:bookmark-start text:name="fd431d2a5-9c7b-4942-b93a-a9515070eac1" />
+              <text:bookmark-end text:name="fd431d2a5-9c7b-4942-b93a-a9515070eac1" />Imarea kena sikili eigna kena boi leghua na haghoregna a God. Na sikili kena eia ke leghua nigna na vanohehe a God eidia.</text:span>
           </text:p>
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -351,7 +358,8 @@
               </text:note-body>
             </text:note>
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
-              <text:reference-mark text:name="fd09cf77e-71d7-4ec8-a193-f3ee594c17a3" /> eigna imanea ke vunaghi pungusira na komi tinoni gougovu. </text:span>
+              <text:bookmark-start text:name="fd09cf77e-71d7-4ec8-a193-f3ee594c17a3" />
+              <text:bookmark-end text:name="fd09cf77e-71d7-4ec8-a193-f3ee594c17a3" /> eigna imanea ke vunaghi pungusira na komi tinoni gougovu. </text:span>
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">14 </text:span>Moti leghua mua na haghoredia na komi primia eigna na king ke vahira bali vaparara arahai kena eia na komi fata ke dika mena kilothabara arahai kena leghua na puhi ke jino. </text:span>
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -378,7 +386,8 @@
               </text:note-body>
             </text:note>
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
-              <text:reference-mark text:name="f3d72e7a7-431d-4bfb-9023-72c6e17b9574" /> oti leghua na haghoredia na komi vunaghimiu moti ghaghana bohera hahali. Kekeha vunaghimiu ke toke mena eia vanighamu na komi puhi ke toke. Keana kekeha kena eia na hava ke dika itamiu. Oti leghura gougovu vamua. </text:span>
+              <text:bookmark-start text:name="f3d72e7a7-431d-4bfb-9023-72c6e17b9574" />
+              <text:bookmark-end text:name="f3d72e7a7-431d-4bfb-9023-72c6e17b9574" /> oti leghua na haghoredia na komi vunaghimiu moti ghaghana bohera hahali. Kekeha vunaghimiu ke toke mena eia vanighamu na komi puhi ke toke. Keana kekeha kena eia na hava ke dika itamiu. Oti leghura gougovu vamua. </text:span>
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody">19 </text:span>Kekeha maghavu na komi vunaghimiu, toke kotida boi eia sa fata ke dika, imarea kena vaparaghamu. Gi kotida ghathapaku eigna koti togha hahalia a God kori vido kena vaparaghamu, a God keda totogo eimiu. </text:span>
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -466,7 +475,8 @@
           </text:p>
           <text:p text:style-name="SectionHeadMajor_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_SectionHeadMajor_scrSection_columns_scrBook_scrBody">
-              <text:reference-mark text:name="f53b1680d-8b8f-439b-9ea2-453a43eca719" />Ighita Katida Sasaa Na Papara Kori Vido Kati Eia Na Hava Ke Toke</text:span>
+              <text:bookmark-start text:name="f53b1680d-8b8f-439b-9ea2-453a43eca719" />
+              <text:bookmark-end text:name="f53b1680d-8b8f-439b-9ea2-453a43eca719" />Ighita Katida Sasaa Na Papara Kori Vido Kati Eia Na Hava Ke Toke</text:span>
           </text:p>
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
@@ -571,7 +581,8 @@
             </text:note>
           </text:p>
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
-            <text:reference-mark text:name="fc1d7c22a-20dd-48c5-9031-fc150482477b" />
+            <text:bookmark-start text:name="fc1d7c22a-20dd-48c5-9031-fc150482477b" />
+            <text:bookmark-end text:name="fc1d7c22a-20dd-48c5-9031-fc150482477b" />
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody"> 19 </text:span>Gi ighamu kotida papara leghuagna nigna na vanohehe a God, saghoi soto na eiagna na komi fata ke toke, moti lubatia na havimiu kori limagna a God, eigna imanea ke vavuhaghamu me ei hahalia na hava ke velea keda eia.</text:span>
           </text:p>
@@ -617,7 +628,8 @@
             </text:note>
           </text:p>
           <text:p text:style-name="ParagraphContinuation_scrSection_columns_scrBook_scrBody">
-            <text:reference-mark text:name="f8e617e9c-8bc3-4091-9ca7-75917b7c2229" />
+            <text:bookmark-start text:name="f8e617e9c-8bc3-4091-9ca7-75917b7c2229" />
+            <text:bookmark-end text:name="f8e617e9c-8bc3-4091-9ca7-75917b7c2229" />
             <text:span text:style-name="span_ParagraphContinuation_scrSection_columns_scrBook_scrBody">
               <text:span text:style-name="VerseNumber_ParagraphContinuation_scrSection_columns_scrBook_scrBody"> 6 </text:span>Oti sasaa na mono taluleghu saragna na mana ke hutu nigna a God. Gi kotida eia iangeni, imanea keda vahaihadighamu kori maghavu ke vahia. </text:span>
             <text:span text:style-name="span_ParagraphContinuation_scrSection_columns_scrBook_scrBody">
@@ -674,7 +686,8 @@
               </text:note-body>
             </text:note>
             <text:span text:style-name="span_Paragraph_scrSection_columns_scrBook_scrBody">
-              <text:reference-mark text:name="f76f7340b-9db4-4240-b198-cc95bb9af371" /> kori dotho. Inau ku tarai gi a God keda heghamu ighamu koti mono haidu toetoke duagna a Krais na soleana kori havimiu.</text:span>
+              <text:bookmark-start text:name="f76f7340b-9db4-4240-b198-cc95bb9af371" />
+              <text:bookmark-end text:name="f76f7340b-9db4-4240-b198-cc95bb9af371" /> kori dotho. Inau ku tarai gi a God keda heghamu ighamu koti mono haidu toetoke duagna a Krais na soleana kori havimiu.</text:span>
           </text:p>
         </text:section>
       </text:section>
