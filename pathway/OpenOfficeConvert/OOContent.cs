@@ -987,17 +987,17 @@ namespace SIL.PublishingSolution
 
                 if (_imageClass.Length > 0 && _imageClass.IndexOf("cover") != 0)
                 {
-                    //if (!_isNewParagraph && !_forcedPara)
-                    bool a = _isNewParagraph;
-                    bool b = _isParagraphClosed;
-                    if (_isParagraphClosed && !_forcedPara)
-                    {
-                        _writer.WriteStartElement("text:p");
-                        _writer.WriteAttributeString("text:style-name", "ForcedDiv");
-                        _util.CreateStyleHyphenate(_styleFilePath, "ForcedDiv");
-                        _forcedPara = true;
-                        _imageParaForCaption = true;
-                    }
+                    ////if (!_isNewParagraph && !_forcedPara)
+                    //bool a = _isNewParagraph;
+                    //bool b = _isParagraphClosed;
+                    //if (_isParagraphClosed && !_forcedPara)
+                    //{
+                    //    _writer.WriteStartElement("text:p");
+                    //    _writer.WriteAttributeString("text:style-name", "ForcedDiv");
+                    //    _util.CreateStyleHyphenate(_styleFilePath, "ForcedDiv");
+                    //    _forcedPara = true;
+                    //    _imageParaForCaption = true;
+                    //}
                 }
                 //Todo force para if span comes without para
                 //else if (!_isNewParagraph)
