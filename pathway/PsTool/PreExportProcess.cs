@@ -17,6 +17,7 @@ namespace SIL.Tool
     {
         string ProcessedXhtml { get; }
         string ProcessedCss { get; }
+        
         string GetCreatedTempFolderPath { get; }
         /// <summary>
         /// To swap the headword and reversal-form when main.xhtml and FlexRev.xhtml included
@@ -54,6 +55,7 @@ namespace SIL.Tool
         private StringBuilder _fileContent = new StringBuilder();
         bool isNodeFound = false;
         XmlNode returnNode = null;
+        private string _skipChapterInformation = null;
 
         public const string CoverPageFilename = "File0Cvr.xhtml";
         public const string TitlePageFilename = "File1Ttl.xhtml";
@@ -93,6 +95,12 @@ namespace SIL.Tool
         public string GetCreatedTempFolderPath
         {
             get { return tempFolder; }
+        }
+
+        public string SkipChapterInformation
+        {
+            get { return _skipChapterInformation; }
+            set { _skipChapterInformation = value; }
         }
 
         #region Front Matter
@@ -510,12 +518,13 @@ namespace SIL.Tool
             return sb.ToString();
         }
 
-        private string TableOfContents ()
+        private string TableOfContents()
         {
             // sanity checks
             if (Param.GetMetadataValue(Param.TableOfContents).ToLower().Equals("false")) { return string.Empty; }
             if (!File.Exists(_xhtmlFileNameWithPath)) return string.Empty; // can't obtain list of books / letters
             // load the xhtml file we're working with
+            
             XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
@@ -579,7 +588,56 @@ namespace SIL.Tool
                     sb.Append(new Regex(@"\s*").Replace(fileNameIndex, string.Empty));
                     sb.Append("'>");
                     sb.Append(bookNames[index].InnerText);
-                    sb.AppendLine("</a></li>");
+                    sb.AppendLine("</a>");
+
+                    if (SkipChapterInformation != null)
+                    {
+                        bool skipChapter = SkipChapterInformation.StartsWith("1");
+
+                        if (!skipChapter)
+                        {
+                            XmlNodeList chapterSectionIDs;
+                            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+                            {
+                                // for dictionaries, the letter is used both for the ID and name
+                                chapterSectionIDs = xmlDocument.SelectNodes("//xhtml:div[@class='Section_Head']",
+                                                                            namespaceManager);
+                            }
+                            else
+                            {
+                                // for scripture, scrBookCode contains the preferred ID while the Title_Main contains the preferred / localized name
+                                // 1. Book ID: start out with the book code (e.g., 2CH for 2 Chronicles)
+                                chapterSectionIDs = xmlDocument.SelectNodes("//xhtml:span[@class='Section_Head']",
+                                                                            namespaceManager);
+                                if (chapterSectionIDs == null || chapterSectionIDs.Count == 0)
+                                {
+                                    // no book code - try scrBookName
+                                    chapterSectionIDs = xmlDocument.SelectNodes("//xhtml:div[@class='Section_Head']",
+                                                                                namespaceManager);
+                                }
+                            }
+
+                            if (chapterSectionIDs != null && chapterSectionIDs.Count > 0)
+                            {
+                                sb.AppendLine("<ul>");
+                                foreach (XmlNode chapterSectionID in chapterSectionIDs)
+                                {
+                                    sb.Append("<li><a href='");
+                                    // remove whitespace
+                                    string indexValues = String.Format("{0:00000}", index + 1);
+                                    string fileNameIndexs = "PartFile" + indexValues + "_.xhtml#" +
+                                                            chapterSectionID.Attributes["id"].Value;
+                                    sb.Append(new Regex(@"\s*").Replace(fileNameIndexs, string.Empty));
+                                    sb.Append("'>");
+                                    sb.Append(chapterSectionID.InnerText);
+                                    sb.AppendLine("</a>");
+                                    sb.AppendLine("</li>");
+                                }
+                                sb.AppendLine("</ul>");
+                            }
+                        }
+                    }
+                    sb.AppendLine("</li>");
                     index++;
                 }
             }
@@ -709,7 +767,6 @@ namespace SIL.Tool
 
             }
         }
-
 
         public void InsertLoFrontMatterCssFile(string inputCssFilePath)
         {
@@ -1273,6 +1330,57 @@ namespace SIL.Tool
             fs2.Close();
 
             _xhtmlFileNameWithPath = Newfile;
+            return _xhtmlFileNameWithPath;
+        }
+
+        public string InsertSectionHeadID()
+        {
+            var xDoc = new XmlDocument { XmlResolver = null };
+            xDoc.Load(_xhtmlFileNameWithPath);
+            XmlNodeList nodeList = xDoc.GetElementsByTagName("span");
+            if (nodeList.Count > 0)
+            {
+                XmlNode newNode = null;
+                int counter = nodeList.Count + 1;
+                for (int i = 0; i < counter; i++)
+                {
+                    XmlNode o = nodeList[i];
+                    if (o == null || o.Attributes["class"] == null)
+                        continue;
+                    string a = o.Attributes["class"].Value;
+                    if (a.ToLower().IndexOf("section_head") >= 0)
+                    {
+                        //newNode = o.Clone();
+                        XmlAttribute attribute = xDoc.CreateAttribute("id");
+                        attribute.Value = "id_" + o.Attributes["class"].Value + i.ToString();
+                        //o.Attributes["class"].Value = "hide_" + o.Attributes["class"].Value + i.ToString();
+                        o.Attributes.Append(attribute);
+                    }
+                }
+            }
+
+            nodeList = xDoc.GetElementsByTagName("div");
+
+            if (nodeList.Count > 0)
+            {
+                XmlNode newNode = null;
+                int counter = nodeList.Count + 1;
+                for (int i = 0; i < counter; i++)
+                {
+                    XmlNode o = nodeList[i];
+                    if (o == null || o.Attributes["class"] == null)
+                        continue;
+                    string a = o.Attributes["class"].Value;
+                    if (a.ToLower().IndexOf("section_head") >= 0)
+                    {
+                        XmlAttribute attribute = xDoc.CreateAttribute("id");
+                        attribute.Value = "id_" + o.Attributes["class"].Value + i.ToString();
+                        o.Attributes.Append(attribute);
+                    }
+                }
+            }
+
+            xDoc.Save(_xhtmlFileNameWithPath);
             return _xhtmlFileNameWithPath;
         }
 

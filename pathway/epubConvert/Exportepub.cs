@@ -188,6 +188,7 @@ namespace SIL.PublishingSolution
                 string mergedCSS = mc.Make(projInfo.DefaultCssFileWithPath, "book.css");
                 preProcessor.ReplaceStringInCss(mergedCSS);
                 preProcessor.SetDropCapInCSS(mergedCSS);
+                preProcessor.InsertSectionHeadID();
                 string defaultCSS = Path.GetFileName(mergedCSS);
                 // rename the CSS file to something readable
                 string niceNameCSS = Path.Combine(tempFolder, "book.css");
@@ -227,6 +228,7 @@ namespace SIL.PublishingSolution
 
                 // insert the front matter items as separate files in the output folder
                 inProcess.SetStatus("Adding content");
+                preProcessor.SkipChapterInformation = TocLevel;
                 splitFiles.AddRange(preProcessor.InsertFrontMatter(tempFolder, false));
                 foreach(var file in splitFiles)
                 {
@@ -3226,7 +3228,14 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                nodes = xmlDocument.SelectNodes("//xhtml:span[@class='Chapter_Number']", namespaceManager);
+                // for scripture, scrBookCode contains the preferred ID while the Title_Main contains the preferred / localized name
+                // 1. Book ID: start out with the book code (e.g., 2CH for 2 Chronicles)
+                nodes = xmlDocument.SelectNodes("//xhtml:span[@class='Section_Head']", namespaceManager);
+
+                if(nodes.Count == 0)
+                {
+                    nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Section_Head']", namespaceManager);
+                }
             }
             if (nodes != null && nodes.Count > 0)
             {
@@ -3234,7 +3243,7 @@ namespace SIL.PublishingSolution
                 string name = Path.GetFileName(xhtmlFileName);
                 foreach (XmlNode node in nodes)
                 {
-                    string textString;
+                    string textString = string.Empty;
                     sb.Append(name);
                     sb.Append("#");
                     XmlNode val = null;
@@ -3261,20 +3270,27 @@ namespace SIL.PublishingSolution
                     }
                     else
                     {
-                        // for scriptures, we'll keep a running chapter number count for the label
-                        textString = chapnum.ToString();
-                        chapnum++;
+                        if (node.Attributes != null && node.Attributes["id"] != null)
+                        {
+                            // for scriptures, we'll keep a running chapter number count for the label
+                            textString = node.FirstChild.InnerText;
+                        }
                     }
-                    // write out the node
-                    ncx.WriteStartElement("navPoint");
-                    ncx.WriteAttributeString("id", "dtb:uid");
-                    ncx.WriteAttributeString("playOrder", playOrder.ToString());
-                    ncx.WriteStartElement("navLabel");
-                    ncx.WriteElementString("text", textString);
-                    ncx.WriteEndElement(); // navlabel
-                    ncx.WriteStartElement("content");
-                    ncx.WriteAttributeString("src", sb.ToString());
-                    ncx.WriteEndElement(); // meta
+
+                    if (textString.Trim().Length > 0)
+                    {
+                        // write out the node
+                        ncx.WriteStartElement("navPoint");
+                        ncx.WriteAttributeString("id", "dtb:uid");
+                        ncx.WriteAttributeString("playOrder", playOrder.ToString());
+                        ncx.WriteStartElement("navLabel");
+                        ncx.WriteElementString("text", textString);
+                        ncx.WriteEndElement(); // navlabel
+                        ncx.WriteStartElement("content");
+                        ncx.WriteAttributeString("src", sb.ToString());
+                        ncx.WriteEndElement(); // meta
+                    }
+
                     // If this is a dictionary with TOC level 3, gather the senses for this entry
                     if (_inputType.Equals("dictionary") && TocLevel.StartsWith("3"))
                     {
