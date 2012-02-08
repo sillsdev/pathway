@@ -1182,7 +1182,7 @@ namespace SIL.PublishingSolution
                 {
                     string name = Path.GetFileName(file);
                     string dest = Common.PathCombine(destFolder, name);
-                    File.Copy(file, dest);
+                    File.Copy(file, dest, true);
                 }
 
                 string[] folders = Directory.GetDirectories(sourceFolder);

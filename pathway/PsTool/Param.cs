@@ -1255,8 +1255,12 @@ namespace SIL.PublishingSolution
             string organization;
             try
             {
+                organization = "";
                 // get the organization
-                organization = Value["Organization"];
+                if (Value.ContainsKey("Organization"))
+                {
+                    organization = Value["Organization"];
+                }
             }
             catch (Exception)
             {

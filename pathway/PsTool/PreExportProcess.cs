@@ -91,7 +91,7 @@ namespace SIL.Tool
             get { return _cssFileNameWithPath; }
         }
 
-        string tempFolder = Common.PathCombine(Path.GetTempPath(), "Preprocess12");
+        string tempFolder = Common.PathCombine(Path.GetTempPath(), "Preprocess");
         public string GetCreatedTempFolderPath
         {
             get { return tempFolder; }
@@ -658,7 +658,9 @@ namespace SIL.Tool
             string organization;
             try
             {
-                organization = Param.Value["Organization"];
+                organization = Param.Value.ContainsKey("Organization")
+                                   ? Param.Value["Organization"]
+                                   : "SIL International";
             }
             catch (Exception)
             {
@@ -718,30 +720,36 @@ namespace SIL.Tool
                     titleNode.InnerText = Param.GetMetadataValue(Param.Title);
                 }
 
-                XmlDocument crdoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
-                crdoc.Load(copyRightFilePath);
-                XmlNodeList copyRightFile = crdoc.GetElementsByTagName(tag);
                 XmlNodeList mainXhtmlFile = xmldoc.GetElementsByTagName(tag);
-
-                XmlNode copyRightContentNode = null;
-                if (_copyrightInformation)
+                if (File.Exists(copyRightFilePath))
                 {
-                    copyRightContentNode = xmldoc.CreateElement("div");
-                    XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
-                    xmlAttribute.Value = "copyright";
-                    copyRightContentNode.Attributes.Append(xmlAttribute);
-                    //copyRightContentNode.InnerText = copyRightFile[0].InnerText;
-                    copyRightContentNode.InnerText = copyRightFile[0].InnerText.Replace("\r\n", " ").Replace("\t", "");
-                }
+                    XmlDocument crdoc = new XmlDocument {XmlResolver = null, PreserveWhitespace = true};
+                    crdoc.Load(copyRightFilePath);
+                    XmlNodeList copyRightFile = crdoc.GetElementsByTagName(tag);
 
-                if (copyRightFile.Count > 0 && _copyrightInformation)
-                {
-                    if (mainXhtmlFile.Count > 0)
+
+                    XmlNode copyRightContentNode = null;
+                    if (_copyrightInformation)
                     {
-                        mainXhtmlFile[0].InnerXml = copyRightContentNode.OuterXml + mainXhtmlFile[0].InnerXml;
-                        _projInfo.IsFrontMatterEnabled = true;
+                        copyRightContentNode = xmldoc.CreateElement("div");
+                        XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
+                        xmlAttribute.Value = "copyright";
+                        copyRightContentNode.Attributes.Append(xmlAttribute);
+                        //copyRightContentNode.InnerText = copyRightFile[0].InnerText;
+                        copyRightContentNode.InnerText = copyRightFile[0].InnerText.Replace("\r\n", " ").Replace("\t",
+                                                                                                                 "");
+                    }
+
+                    if (copyRightFile.Count > 0 && _copyrightInformation)
+                    {
+                        if (mainXhtmlFile.Count > 0)
+                        {
+                            mainXhtmlFile[0].InnerXml = copyRightContentNode.OuterXml + mainXhtmlFile[0].InnerXml;
+                            _projInfo.IsFrontMatterEnabled = true;
+                        }
                     }
                 }
+
 
                 if (titleNode != null)
                 {

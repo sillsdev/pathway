@@ -2602,8 +2602,12 @@ namespace SIL.PublishingSolution
             string organization;
             try
             {
+                organization = "SIL International";
                 // get the organization
-                organization = Param.Value["Organization"];
+                if (Param.Value.ContainsKey("Organization"))
+                {
+                    organization = Param.Value["Organization"];
+                }
             }
             catch (Exception)
             {

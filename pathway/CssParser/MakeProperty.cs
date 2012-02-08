@@ -622,6 +622,7 @@ namespace SIL.PublishingSolution
                 case "-ps-includeverseinheaderreferences-string":
                 case "ps-nonconsecutivereferenceseparator-string":
                 case "-ps-nonconsecutivereferenceseparator-string":
+                case "prince-hyphenate-patterns":
                     _cssProperty[styleAttributeInfo.Name] = value;
                     break;
 
