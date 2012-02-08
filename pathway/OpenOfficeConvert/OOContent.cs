@@ -1458,12 +1458,21 @@ namespace SIL.PublishingSolution
             if (_reader.Name == "table" || _reader.Name == "th" || _reader.Name == "tr" || _reader.Name == "td") // end of table,td,tr,th
             {
                 _writer.WriteEndElement();
+                 if (_reader.Name == "table")
+                 {
+                     _tableColumnModify["table" + _tableCount] = _tableColumnCount;
+                     _isTableOpen = false;
+                 }
             }
-            else if (_isTableOpen) // After closed the entire table 
-            {
-                _tableColumnModify["table" + _tableCount] = _tableColumnCount;
-                _isTableOpen = false;
-            }
+            //if (_reader.Name == "table" || _reader.Name == "th" || _reader.Name == "tr" || _reader.Name == "td") // end of table,td,tr,th
+            //{
+            //    _writer.WriteEndElement();
+            //}
+            //else if (_isTableOpen) // After closed the entire table 
+            //{
+            //    _tableColumnModify["table" + _tableCount] = _tableColumnCount;
+            //    _isTableOpen = false;
+            //}
         }
 
         private void PseudoAfter()
