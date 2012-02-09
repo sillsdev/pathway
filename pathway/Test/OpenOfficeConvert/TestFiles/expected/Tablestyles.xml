@@ -24,7 +24,8 @@
     <style:font-face style:name="Mangal" svg:font-family="'Mangal'" style:font-pitch="variable" />
   </office:font-face-decls>
   <office:styles>
-    <style:style style:name="t1_body" style:family="paragraph" style:parent-style-name="body">
+    <style:style style:name="body" style:family="paragraph" style:parent-style-name="" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="t1_body" style:family="paragraph" style:parent-style-name="body">
       <style:paragraph-properties fo:text-align="left" />
       <style:text-properties fo:font-size="12pt" style:font-size-complex="12pt" fo:color="#ff0000" />
     </style:style>

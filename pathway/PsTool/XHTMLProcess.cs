@@ -189,6 +189,8 @@ namespace SIL.PublishingSolution
 
         protected void StartElementBase(bool isHeadword)
         {
+            string[] divTypeList = new[] { "div", "ol", "ul", "li", "p", "body", "h1", "h2", "h3", "h4", "h5", "h6" };
+            _divType = new List<string>(divTypeList);
 
             ClassInfo classInfo = new ClassInfo();
             _classNameWithLang = GetTagInfo();
@@ -206,8 +208,6 @@ namespace SIL.PublishingSolution
             GetHeadwordStyles(isHeadword);
             _allStyleInfo.Push(classInfo);
 
-            string[] divTypeList = new[] { "div", "ol", "ul", "li", "p", "body", "h1", "h2", "h3", "h4", "h5", "h6" };
-            _divType = new List<string>(divTypeList);
             if (_divType.Contains(_tagType))
             {
                 _paragraphName = _childName;
@@ -899,7 +899,7 @@ namespace SIL.PublishingSolution
 
         private string FindStyleName()
         {
-            if (_allStyle.Count == 0) return _classNameWithLang;
+           // if (_allStyle.Count == 0) return _classNameWithLang;
 
             //string styleName = _precedeClassAttrib.ClassName + _classNameWithLang + Common.SepParent + StackPeek(_allStyle);
             string styleName = _precedeClassAttrib.ClassName + _tagType + _classNameWithLang + Common.SepParent + StackPeek(_allStyle);
@@ -1006,7 +1006,7 @@ namespace SIL.PublishingSolution
         {
             if (_outputType != Common.OutputType.IDML)
             {
-                //if(_parentStyleName == "body") return styleName;
+                if (_parentStyleName.Trim().Length == 0) return styleName;
 
                 string newStyleName = styleName + Common.SepParent + _parentStyleName;
                 return newStyleName;
