@@ -17,7 +17,7 @@ namespace SIL.Tool
     {
         string ProcessedXhtml { get; }
         string ProcessedCss { get; }
-        
+
         string GetCreatedTempFolderPath { get; }
         /// <summary>
         /// To swap the headword and reversal-form when main.xhtml and FlexRev.xhtml included
@@ -524,7 +524,7 @@ namespace SIL.Tool
             if (Param.GetMetadataValue(Param.TableOfContents).ToLower().Equals("false")) { return string.Empty; }
             if (!File.Exists(_xhtmlFileNameWithPath)) return string.Empty; // can't obtain list of books / letters
             // load the xhtml file we're working with
-            
+
             XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
@@ -839,7 +839,7 @@ namespace SIL.Tool
         /// </summary>
         public string XelatexImagePreprocess()
         {
-            
+
             //Temp folder and file copy 
             //string tempFolder1 = tempFolder;
             string sourcePicturePath = Path.GetDirectoryName(_baseXhtmlFileNameWithPath);
@@ -853,7 +853,7 @@ namespace SIL.Tool
 
             string instPath = Common.PathCombine(str, "bin");
             instPath = Common.PathCombine(instPath, "win32");
-            
+
             if (!File.Exists(tempFile)) return string.Empty;
             var xmldoc = new XmlDocument();
             // xml image copy
@@ -876,7 +876,7 @@ namespace SIL.Tool
                             if (src.Length > 0)
                             {
                                 string fromFileName = Common.GetPictureFromPath(src, metaname, sourcePicturePath);
-                                
+
                                 if (File.Exists(fromFileName))
                                 {
                                     string ext = Path.GetExtension(fromFileName);
@@ -1045,7 +1045,6 @@ namespace SIL.Tool
                                     _fileContent.Replace(matchText, replaceText);
                                 }
                             }
-
                         }
                     }
                 }
@@ -1067,7 +1066,7 @@ namespace SIL.Tool
             return _xhtmlFileNameWithPath;
         }
 
-       public string ReplaceInvalidTagtoSpan(string pattern, string tagType)
+        public string ReplaceInvalidTagtoSpan(string pattern, string tagType)
         {
             string OutputFile = OpenFile();
             try
@@ -1084,7 +1083,6 @@ namespace SIL.Tool
                     writer.Write(_fileContent);
                     writer.Close();
                 }
-
             }
             catch
             {
@@ -1341,6 +1339,106 @@ namespace SIL.Tool
             return _xhtmlFileNameWithPath;
         }
 
+        public string GoBibleRearrangeVerseNumbers(string fileName)
+        {
+            var xDoc = new XmlDocument { XmlResolver = null };
+            xDoc.Load(fileName);
+            XmlNodeList nodeList = xDoc.GetElementsByTagName("div");
+            XmlNode nodeContent = xDoc.CreateElement("div");
+            bool isNewNode = false;
+            if (nodeList.Count > 0)
+            {
+                XmlNode newNode = null;
+                int counter = nodeList.Count + 1;
+                string alpha = string.Empty;
+                for (int i = 0; i < counter; i++)
+                {
+                    XmlNode o = nodeList[i];
+                    if (o == null || o.Attributes["class"] == null)
+                        continue;
+                    string a = o.Attributes["class"].Value;
+                    bool b = o.Attributes["title"] != null;
+                    if (a.ToLower().IndexOf("verse") >= 0 && b)
+                    {
+                        string[] num = new string[] { };
+                        string currVerse = string.Empty;
+                        
+                        if (o.Attributes["title"].Value.Contains("-"))
+                        {
+                            num = o.Attributes["title"].Value.Split('-');
+                            o.Attributes["title"].Value = num[1];
+                        }
+                        else
+                        {
+                            currVerse = o.Attributes["title"].Value;
+                            if (currVerse.Length > 0)
+                            {
+                                if (Common.IsAlpha(currVerse.Substring(currVerse.Length - 1, 1)))
+                                {
+                                    alpha = o.Attributes["title"].Value.Substring(0, currVerse.Length - 1);
+                                    nodeContent.AppendChild(o.FirstChild.CloneNode(true));
+                                    o.InnerText = string.Empty;
+                                    o.ParentNode.RemoveChild(o);
+                                    isNewNode = true;
+                                    i--;
+                                    counter--;
+                                }
+                                else if (isNewNode)
+                                {
+                                    XmlNode alphaNode = xDoc.CreateElement("div");
+                                    XmlAttribute xmlAttribute = xDoc.CreateAttribute("class");
+                                    xmlAttribute.Value = "verse";
+                                    alphaNode.Attributes.Append(xmlAttribute);
+
+                                    xmlAttribute = xDoc.CreateAttribute("title");
+                                    xmlAttribute.Value = alpha;
+                                    alphaNode.Attributes.Append(xmlAttribute);
+
+                                    alphaNode.InnerXml = nodeContent.InnerXml;
+                                    o.ParentNode.InsertBefore(alphaNode, o);
+                                    //o.ParentNode.ReplaceChild(alphaNode, o.PreviousSibling);
+
+                                    isNewNode = false;
+                                }
+                            }
+                        }
+
+
+                        if (num.Length > 1)
+                        {
+                            int titleValue = 0;
+
+                            titleValue = Convert.ToInt32(num[1]) - Convert.ToInt32(num[0]);
+                            int startNumValue = Convert.ToInt32(num[0]);
+                            for (int j = 1; j <= titleValue; j++)
+                            {
+                                XmlNode emptyNode = xDoc.CreateElement("div");
+                                XmlAttribute xmlAttribute = xDoc.CreateAttribute("class");
+                                xmlAttribute.Value = "verse";
+                                emptyNode.Attributes.Append(xmlAttribute);
+
+                                xmlAttribute = xDoc.CreateAttribute("title");
+                                xmlAttribute.Value = startNumValue.ToString();
+                                emptyNode.Attributes.Append(xmlAttribute);
+
+                                emptyNode.InnerXml = "<span xml:lang='zxx'><br />" + Common.UnicodeConversion(" ") +
+                                                     "<br /></span>";
+                                //emptyNode.InnerText = "<span xml:lang='zxx'>doss<br><br>sam</span>";
+                                //o.InnerText = "&nbsp;";
+                                o.ParentNode.InsertBefore(emptyNode, o);
+
+                                startNumValue++;
+                            }
+                        }
+                    }
+                }
+            }
+
+            xDoc.Save(fileName);
+            return fileName;
+        }
+
+
         public string InsertSectionHeadID()
         {
             var xDoc = new XmlDocument { XmlResolver = null };
@@ -1565,7 +1663,7 @@ namespace SIL.Tool
             return isFound;
         }
 
-        
+
 
         /// <summary>
         /// For dictionary data, returns the language code for the definitions
@@ -1725,7 +1823,7 @@ namespace SIL.Tool
         {
             try
             {
-                var xDoc = new XmlDocument {XmlResolver = null};
+                var xDoc = new XmlDocument { XmlResolver = null };
                 xDoc.Load(_xhtmlFileNameWithPath);
                 XmlNodeList nodeList = xDoc.GetElementsByTagName("meta");
                 if (nodeList.Count > 0)
@@ -1858,7 +1956,6 @@ namespace SIL.Tool
                 }
             }
 
-
             string query;
             foreach (string anchorRef in sourceList)
             {
@@ -1881,13 +1978,9 @@ namespace SIL.Tool
 
             }
 
-
-
             string id = "u1_000";
             query = string.Format("//*[@id='{0}']", id);
             XmlElement el = (XmlElement)xdoc.SelectSingleNode(query);
-
-
             //foreach (string anchorRef in sourceList)
             //{
             //    var anchorId = xdoc.GetElementById(anchorRef);
@@ -1898,20 +1991,6 @@ namespace SIL.Tool
             //        targetList.Add(anchorref);
             //    }
             //}
-
-           
-
-
-
-
-
-
-
-
-
-
-
-
             string OutputFile = OpenFile();
             Dictionary<string, string> dicMatch = new Dictionary<string, string>();
             MatchCollection m1 = Regex.Matches(_fileContent.ToString(), "<a\\shref.*?>");

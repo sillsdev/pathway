@@ -300,6 +300,11 @@ namespace SIL.PublishingSolution
             // EDB 11/17/11: replaced with block below (remove BOM)
             //if (restructuredFullName != temporaryCvFullName)
             //    File.Copy(temporaryCvFullName, restructuredFullName, true);
+            PreExportProcess preProcessor = new PreExportProcess(projInfo);
+
+            preProcessor.GoBibleRearrangeVerseNumbers(restructuredFullName);
+
+
 
             // remove the BOM for the GoBibleCreator process (per David Haslam)
             var utf8WithoutBom = new UTF8Encoding(false);

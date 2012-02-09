@@ -53,6 +53,38 @@ namespace Test.PsTool
         }
 
         /// <summary>
+        ///A test for GoBibleRearrangeVerseNumbers
+        ///</summary>
+        [Test]
+        public void GoBibleRearrangeVerseNumbersTest()
+        {
+            string filename = "GoBibleRearrangeVerseNumbers.xhtml";
+            string input = GetFileNameWithPath(filename);
+            PublicationInformation projInfo = new PublicationInformation();
+            projInfo.DefaultXhtmlFileWithPath = input;
+            preExportProcess = new PreExportProcess(projInfo);
+            string expected = GetFileNameWithExpectedPath(filename);
+            string output = preExportProcess.GoBibleRearrangeVerseNumbers(projInfo.DefaultXhtmlFileWithPath);
+            XmlAssert.AreEqual(expected, output, "");
+        }
+
+        /// <summary>
+        ///A test for GoBibleRearrangeVerseAlphaNumericTest
+        ///</summary>
+        [Test]
+        public void GoBibleRearrangeVerseAlphaNumericTest()
+        {
+            string filename = "GoBibleRearrangeVerseAlphaNumeric.xhtml";
+            string input = GetFileNameWithPath(filename);
+            PublicationInformation projInfo = new PublicationInformation();
+            projInfo.DefaultXhtmlFileWithPath = input;
+            preExportProcess = new PreExportProcess(projInfo);
+            string expected = GetFileNameWithExpectedPath(filename);
+            string output = preExportProcess.GoBibleRearrangeVerseNumbers(projInfo.DefaultXhtmlFileWithPath);
+            XmlAssert.AreEqual(expected, output, "");
+        }
+
+        /// <summary>
         ///A test for ParagraphVerserSetUp
         ///</summary>
         [Test]
