@@ -1,0 +1,12 @@
+.cover{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} .title{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} .copyright{text-align: left; font-size:12pt;page-break-after: always;}
+body {
+color: red;
+}.Section_Head {
+page-break-after:avoid;
+}
+.Chapter_Number {
+page-break-after:avoid;
+}
+.Parallel_Passage_Reference {
+page-break-after:avoid;
+}
