@@ -47,7 +47,8 @@ namespace SIL.PublishingSolution
         private bool _xelatexDocumentOpenClosedRequired = false;
         private bool _copyrightTexCreated = false;
         private string _copyrightTexFilename = string.Empty;
-        private bool _reversalIndexTexCreated = false;
+        private string _reversalIndexTexFilename = string.Empty;
+        private bool _reversalIndexExist = false;
 
         public string ProjectType
         {
@@ -103,10 +104,16 @@ namespace SIL.PublishingSolution
             set { _copyrightTexCreated = value; }
         }
 
-        public bool ReversalIndexTexCreated
+        public bool ReversalIndexExist
         {
-            get { return _reversalIndexTexCreated; }
-            set { _reversalIndexTexCreated = value; }
+            get { return _reversalIndexExist; }
+            set { _reversalIndexExist = value; }
+        }
+
+        public string ReversalIndexTexFilename
+        {
+            get { return _reversalIndexTexFilename; }
+            set { _reversalIndexTexFilename = value; }
         }
 
         public string CopyrightTexFilename
@@ -150,7 +157,7 @@ namespace SIL.PublishingSolution
 
         private void MapProperty()
         {
-
+            
             if (Convert.ToBoolean(TocChecked))
                 InsertTableOfContent();
 
@@ -307,6 +314,20 @@ namespace SIL.PublishingSolution
             }
 
             Common.FileInsertText(_xetexFullFile, tableOfContent);
+        }
+
+        private void InsertReversalIndex()
+        {
+            String ReversalIndexContent = string.Empty;
+
+            if (ReversalIndexExist)
+            {
+                ReversalIndexContent += "\\input{" + ReversalIndexTexFilename + "} \r\n";
+                ReversalIndexContent += "\\thispagestyle{empty} \r\n";
+                ReversalIndexContent += "\\newpage \r\n";
+            }
+
+            Common.FileInsertText(_xetexFullFile, ReversalIndexContent);
         }
 
         private string RemoveBody(string paraStyle)
