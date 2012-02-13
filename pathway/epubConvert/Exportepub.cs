@@ -3273,7 +3273,10 @@ namespace SIL.PublishingSolution
                         if (node.Attributes != null && node.Attributes["id"] != null)
                         {
                             // for scriptures, we'll keep a running chapter number count for the label
-                            textString = node.FirstChild.InnerText;
+                            //textString = node.FirstChild.InnerText;
+                            textString = node.HasChildNodes && node.FirstChild.InnerText.Length > 1
+                                             ? node.FirstChild.InnerText
+                                             : string.Empty;
                         }
                     }
 
@@ -3289,6 +3292,7 @@ namespace SIL.PublishingSolution
                         ncx.WriteStartElement("content");
                         ncx.WriteAttributeString("src", sb.ToString());
                         ncx.WriteEndElement(); // meta
+                        //ncx.WriteEndElement(); // meta
                     }
 
                     // If this is a dictionary with TOC level 3, gather the senses for this entry
@@ -3334,7 +3338,10 @@ namespace SIL.PublishingSolution
                             }
                         }
                     }
-                    ncx.WriteEndElement(); // navPoint
+                    if (textString.Trim().Length > 0)
+                    {
+                        ncx.WriteEndElement(); // navPoint
+                    }
                     // reset the stringbuilder
                     sb.Length = 0;
                     playOrder++;
