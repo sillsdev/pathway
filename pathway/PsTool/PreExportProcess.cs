@@ -116,10 +116,10 @@ namespace SIL.Tool
             try
             {
                 // add the front matter pages to the temp folder as needed
-                if (Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("true") ||
-                    Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true") ||
-                    Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("true") ||
-                    Param.GetMetadataValue(Param.TableOfContents).ToLower().Equals("true"))
+                if ((Param.GetMetadataValue(Param.CopyrightPage) != null && Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("true")) ||
+                    (Param.GetMetadataValue(Param.CoverPage) != null && Param.GetMetadataValue(Param.CoverPage).ToLower().Equals("true")) ||
+                    (Param.GetMetadataValue(Param.TitlePage) != null && Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("true")) ||
+                    (Param.GetMetadataValue(Param.TableOfContents) != null && Param.GetMetadataValue(Param.TableOfContents).ToLower().Equals("true")))
                 {
                     // at least one front matter item selected
                     var sbPreamble = new StringBuilder();

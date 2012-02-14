@@ -199,11 +199,10 @@ namespace SIL.PublishingSolution
                 string copyRightFilePath = Param.GetMetadataValue(Param.CopyrightPageFilename);
 
                 // **    string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
-                if (!File.Exists(copyRightFilePath))
+                if (copyRightFilePath.Trim().Length <= 0 && !File.Exists(copyRightFilePath))
                 {
-                    return false;
+                return false;
                 }
-
                 projInfo.DefaultXhtmlFileWithPath = copyRightFilePath;
                 string filepath = Path.GetFullPath(copyRightFilePath);
 
