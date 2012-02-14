@@ -1,0 +1,219 @@
+.cover{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} .title{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} .copyright{text-align: left; font-size:12pt;page-break-after: always;}
+
+body
+{
+    direction: rtl;
+}
+
+.dicBody {
+
+}
+.letHead {
+    column-count: 1;
+    clear: both;
+}
+.letter {
+    text-align: center;
+    width: 100%;
+    margin-top: 18pt;
+    margin-bottom: 18pt;
+    direction: rtl;
+    font-family: "Scheherazade Graphite Alpha", serif;	/* default Serif font */
+    font-weight: bold;
+    font-size: 24pt;
+}
+.letData {
+    column-count: 2;   -moz-column-count: 2;
+    column-gap: 1.5em; -moz-column-gap: 1.5em;
+    column-fill: balance;
+    text-align: right;
+}
+.entry {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: 10pt;	/* inherited */
+    padding-left: 9pt;
+    text-indent: -36pt;
+    margin-left: 36pt;
+    padding-bottom: 2pt;
+    padding-top: 1pt;
+    counter-reset: sense;
+}
+.xhomographnumber {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: 55%;
+    font-weight: bold;
+    vertical-align: sub;
+}
+.sense {
+    font-weight: normal;
+}
+.xsensenumber {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+}
+.xitem {
+    /* placeholder for adding list separators */
+}
+
+.definition {
+    /* lang = 'en' */
+}
+.definition:after { content: " " }
+.definition>.xitem + .xitem:before { content: " " }
+.example {
+    /* lang = 'ur' */
+    /* explicit FieldWorks style = 'Dictionary-Vernacular' */
+    font-family: "Scheherazade Graphite Alpha", serif;	/* default Serif font */
+    font-size: 10pt;	/* cascaded environment */
+    font-style: italic;
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.example:after { content: " " }
+.example>.xitem + .xitem:before { content: " " }
+.examples {
+}
+.examples:after { content: " " }
+.examples>.xitem + .xitem:before { content: "  " }
+.grammatical-info {
+    /* explicit FieldWorks style = 'Dictionary-Contrasting' */
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: 10pt;	/* cascaded environment */
+    font-style: italic;
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.grammatical-info:after { content: " " }
+.headword {
+    /* lang = 'ur' */
+    /* explicit FieldWorks style = 'Dictionary-Headword' */
+    font-family: "Scheherazade Graphite Alpha", serif;	/* default Serif font */
+    font-size: 10pt;	/* cascaded environment */
+    font-weight: bold;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    string-set: guideword content();
+}
+.headword:after { content: "  " }
+.headword>.xitem + .xitem:before { content: " " }
+.headword-minor {
+    /* lang = 'ur' */
+    /* explicit FieldWorks style = 'Dictionary-Headword' */
+    font-family: "Scheherazade Graphite Alpha", serif;	/* default Serif font */
+    font-size: 10pt;	/* cascaded environment */
+    font-weight: bold;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    string-set: guideword content();
+}
+.headword-minor:after { content: "  " }
+.headword-minor>.xitem + .xitem:before { content: " " }
+.LexEntry-publishRootMinorPrimaryTarget-HeadWordRef {
+    /* lang = 'ur' */
+    /* explicit FieldWorks style = 'Dictionary-CrossReferences' */
+    font-family: "Scheherazade Graphite Alpha", serif;	/* default Serif font */
+    font-size: 10pt;	/* cascaded environment */
+    font-weight: bold;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    string-set: guideword content();
+}
+.LexEntry-publishRootMinorPrimaryTarget-HeadWordRef>.xitem + .xitem:before { content: " " }
+.LexEntryType-publishRootMinorEntryType-AbbreviationPub {
+    /* lang = 'en' */
+}
+.LexEntryType-publishRootMinorEntryType-AbbreviationPub:after { content: " " }
+.LexEntryType-publishRootVariantType-ReverseAbbrPub {
+    /* lang = 'en' */
+}
+.LexEntryType-publishRootVariantType-ReverseAbbrPub:after { content: " " }
+.lexref-targets {
+}
+.lexref-targets>.xitem + .xitem:before { content: ", " }
+.lexref-type {
+    /* lang = 'en' */
+    /* explicit FieldWorks style = 'Dictionary-Contrasting' */
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: 10pt;	/* cascaded environment */
+    font-style: italic;
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.lexref-type:after { content: ": " }
+.partofspeech {
+    /* lang = 'en' */
+}
+.partofspeech:after { content: " " }
+.primaryrefs-minor {
+}
+.primaryrefs-minor:after { content: " " }
+.primaryrefs-minor>.xitem + .xitem:before { content: ", " }
+.relations {
+}
+.relations:after { content: ". " }
+.relations>.xitem + .xitem:before { content: "; " }
+.sense-crossref {
+    /* lang = 'ur' */
+    /* explicit FieldWorks style = 'Dictionary-CrossReferences' */
+    font-family: "Scheherazade Graphite Alpha", serif;	/* default Serif font */
+    font-size: 10pt;	/* cascaded environment */
+    font-weight: bold;
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.sense-crossref>.xitem + .xitem:before { content: " " }
+.senses {
+}
+.senses:after { content: " " }
+.senses>.sense + .sense:before { content: "  " }
+.slot-name {
+    /* lang = 'en' */
+}
+.slots {
+}
+.slots:before { content: ": " }
+.slots>.xitem + .xitem:before { content: ", " }
+.translation {
+    /* lang = 'en' */
+}
+.translation:after { content: " " }
+.translation>.xitem + .xitem:before { content: " " }
+.translations {
+}
+.variant-primary-minor {
+}
+.variant-primary-minor:before { content: " " }
+.variant-primary-minor>.xitem + .xitem:before { content: ", " }
+.variantref-entry-type {
+}
+.variantref-entry-type:after { content: " " }
+.variantref-entry-type>.xitem + .xitem:before { content: ", " }
+.variantref-form {
+    /* lang = 'ur' */
+    /* cascaded environment FieldWorks style = 'Dictionary-Normal' */
+    font-family: "Scheherazade Graphite Alpha", serif;	/* default Serif font */
+    font-size: 10pt;	/* cascaded environment */
+    padding-left: 9pt;
+    text-indent: -36pt;
+    margin-left: 36pt;
+    padding-bottom: 2pt;
+    padding-top: 1pt;
+}
+.variantref-form>.xitem + .xitem:before { content: ", " }
+.variantrefs {
+}
+.variantrefs:before { content: "(" }
+.variantrefs:after { content: ") " }
+.variantrefs>.xitem + .xitem:before { content: "; " }
+.variant-type-minor {
+}
+.variant-type-minor:after { content: " " }
+.variant-type-minor>.xitem + .xitem:before { content: ", " }
+.xsensenumber:after { content: ") " }.Section_Head {
+page-break-after:avoid;
+}
+.Chapter_Number {
+page-break-after:avoid;
+}
+.Parallel_Passage_Reference {
+page-break-after:avoid;
+}
