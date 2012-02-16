@@ -15,6 +15,7 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Diagnostics;
@@ -66,7 +67,12 @@ namespace SIL.PublishingSolution
             Debug.Assert(DataType == "Scripture" || DataType == "Dictionary", "DataType must be Scripture or Dictionary");
             Debug.Assert(outFullName.IndexOf(Path.DirectorySeparatorChar) >= 0, "full path for output must be given");
             try
+
             {
+                //get xsltFile from ExportThroughPathway.cs
+                if (DataType == "Dictionary")
+                    XsltPreProcess(outFullName);
+
                 string supportPath = GetSupportPath();
 				Backend.Load(Common.ProgInstall);
                 LoadProgramSettings(supportPath);
@@ -77,6 +83,7 @@ namespace SIL.PublishingSolution
                 SubProcess.BeforeProcess(outFullName);
 
                 var mainXhtml = Path.GetFileNameWithoutExtension(outFullName) + ".xhtml";
+                //var mainXhtml = Path.GetFileNameWithoutExtension(outFullName) + "_cv.xhtml";
                 var mainFullName = Common.PathCombine(outDir, mainXhtml);
                 Debug.Assert(mainFullName.IndexOf(Path.DirectorySeparatorChar) >= 0, "Path for input file missing");
                 if (string.IsNullOrEmpty(mainFullName) || !File.Exists(mainFullName))
@@ -159,6 +166,42 @@ namespace SIL.PublishingSolution
                 //var msg = new[] { ex.ToString() };
                 //LocDB.Message("defErrMsg", ex.ToString(), msg, LocDB.MessageTypes.Warning, LocDB.MessageDefault.First);
                 return;
+            }
+        }
+
+        /// <summary>
+        /// Preprocess the xhtml file using xsl file.
+        /// </summary>
+        /// <param name="outFullName">input xhtml file</param>
+        private void XsltPreProcess(string outFullName)
+        {
+            List<string> xsltFile = new List<string>();
+            if (Param.Value.ContainsKey(Param.RemoveEmptyDiv) && Param.Value[Param.RemoveEmptyDiv] == "True")
+            {
+                xsltFile.Add("Remove Hyperlinks.xsl");
+            }
+            if (Param.Value.ContainsKey(Param.RemoveHyperlink) && Param.Value[Param.RemoveHyperlink] == "True")
+            {
+                xsltFile.Add("Remove Empty Divs.xsl");
+            }
+
+            for (int i = 0; i < xsltFile.Count; i++)
+            {
+                var mainCvXhtml = Common.PathCombine(Path.GetDirectoryName(outFullName),
+                                                     Path.GetFileNameWithoutExtension(outFullName) +
+                                                     "_cv.xhtml");
+                string xsltFullName = Common.PathCombine(Common.GetApplicationPath(), "Preprocessing\\" + xsltFile[i]);
+                Common.XsltProcess(outFullName, xsltFullName, "_cv.xhtml");
+                if (i == 0)
+                {
+                    var mainCpyFile = Common.PathCombine(Path.GetDirectoryName(outFullName),
+                                                         Path.GetFileNameWithoutExtension(outFullName) +
+                                                         "0.xhtml");
+                    File.Copy(outFullName, mainCpyFile, true);
+                }
+                File.Copy(mainCvXhtml, outFullName, true);
+
+                File.Delete(mainCvXhtml);
             }
         }
 
