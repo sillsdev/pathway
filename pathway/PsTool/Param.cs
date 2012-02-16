@@ -75,6 +75,8 @@ namespace SIL.PublishingSolution
         public const string PrintVia = "PrintVia";
         public const string ConfigureDictionary = "ConfigureDictionary";
         public const string ReversalIndex = "ReversalIndexes";
+        public const string RemoveEmptyDiv = "RemoveEmptyDiv";
+        public const string RemoveHyperlink = "RemoveHyperlink";
         public const string GrammarSketch = "GrammerSketch";
         public const string LayoutSelected = "LayoutSelected";
         public const string ExtraProcessing = "ExtraProcessing";
