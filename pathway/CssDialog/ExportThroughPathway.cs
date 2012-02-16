@@ -28,6 +28,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
@@ -51,6 +52,7 @@ namespace SIL.PublishingSolution
         public bool _fromPlugIn;
         private static string _media = "paper";
         private SettingsHelper _settingsHelper;
+        public List<string> XsltFile = new List<string>();
 
         public ExportThroughPathway()
         {
@@ -384,10 +386,25 @@ namespace SIL.PublishingSolution
             Common.HelpProv.SetHelpKeyword(this, _helpTopic);
             Common.databaseName = DatabaseName;
 
-
+                PopulateFilesFromPreprocessingFolder();
             }
             catch{}
         }
+
+
+        private void PopulateFilesFromPreprocessingFolder()
+        {
+            string xsltFullName = Common.PathCombine(Common.GetApplicationPath(), "Preprocessing\\");// + xsltFile[0]
+            string[] filePaths = Directory.GetFiles(xsltFullName, "*.xsl");
+            foreach (var filePath in filePaths)
+            {
+                chkLbPreprocess.Items.Add(Path.GetFileNameWithoutExtension(filePath), false);
+            }
+        }
+
+        //<property name="ReversalIndexes" value="False" />
+        //<property name="RemoveEmptyDiv" value="false" />
+
 
         /// <summary>
         /// Attempts to pull in values from the Settings helper (either from the .ldml or
@@ -665,6 +682,20 @@ namespace SIL.PublishingSolution
                 _settingsHelper.ClearValues();
                 Close();
             }
+
+            foreach (string chkBoxName in chkLbPreprocess.CheckedItems)
+            {
+                    Param.LoadSettings();
+                    if (chkBoxName == "Remove Hyperlinks")
+                    {
+                        Param.SetValue(Param.RemoveHyperlink, "True");
+                    }
+                    else if (chkBoxName == "Remove Empty Divs")
+                    {
+                        Param.SetValue(Param.RemoveEmptyDiv, "True");
+                    }
+                    Param.Write();
+           }
         }
 
         #endregion Events
@@ -842,11 +873,36 @@ namespace SIL.PublishingSolution
                 Param.SetValue(Param.ReversalIndex, dlg.ExportReversal.ToString());
                 Param.SetValue(Param.GrammarSketch, dlg.ExportGrammar.ToString());
             }
+
             Param.SetValue(Param.ExtraProcessing, dlg.RunningHeader.ToString());
             Param.SetValue(Param.Media, _media);
             Param.SetValue(Param.PublicationLocation, dlg.OutputFolder);
             Param.Write();
+
+            
+
+
+
             return success;
+        }
+
+        /// <summary>
+        /// Preprocess the xhtml file to replace image names, and link to the merged css file.
+        /// </summary>
+        /// <param name="projInfo">information about input data</param>
+        /// <returns>path name to processed xthml file</returns>
+        private string GetProcessedXhtml(PublicationInformation projInfo)
+        {
+
+
+
+            var result = projInfo.DefaultXhtmlFileWithPath;
+
+            result = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath),
+                                              ".xhtml");//collectionName + ".xhtml"
+            File.Copy(projInfo.DefaultXhtmlFileWithPath, result, true);
+
+            return result;
         }
 
         private static void SaveDefaultProperty(ExportThroughPathway dlg)

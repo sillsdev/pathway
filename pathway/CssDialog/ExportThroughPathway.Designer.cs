@@ -67,6 +67,7 @@
             this.btnCoverImage = new System.Windows.Forms.Button();
             this.imgCoverImage = new System.Windows.Forms.PictureBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.grpInclude = new System.Windows.Forms.GroupBox();
             this.chkConfiguredDictionary = new System.Windows.Forms.CheckBox();
             this.chkReversalIndexes = new System.Windows.Forms.CheckBox();
@@ -78,11 +79,13 @@
             this.label8 = new System.Windows.Forms.Label();
             this.BtnBrwsLayout = new System.Windows.Forms.Button();
             this.btnMoreLessOptions = new System.Windows.Forms.Button();
+            this.chkLbPreprocess = new System.Windows.Forms.CheckedListBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgCoverImage)).BeginInit();
             this.tabPage3.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.grpInclude.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -489,6 +492,7 @@
             // tabPage3
             // 
             this.tabPage3.AutoScroll = true;
+            this.tabPage3.Controls.Add(this.groupBox1);
             this.tabPage3.Controls.Add(this.grpInclude);
             this.tabPage3.Controls.Add(this.chkOOReduceStyleNames);
             this.tabPage3.Controls.Add(this.chkRunningHeader);
@@ -501,6 +505,16 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Processing Options";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.chkLbPreprocess);
+            this.groupBox1.Location = new System.Drawing.Point(8, 155);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(336, 69);
+            this.groupBox1.TabIndex = 31;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Preprocessing Transformation:";
             // 
             // grpInclude
             // 
@@ -621,6 +635,14 @@
             this.btnMoreLessOptions.UseVisualStyleBackColor = true;
             this.btnMoreLessOptions.Click += new System.EventHandler(this.btnMoreLessOptions_Click);
             // 
+            // chkLbPreprocess
+            // 
+            this.chkLbPreprocess.FormattingEnabled = true;
+            this.chkLbPreprocess.Location = new System.Drawing.Point(10, 19);
+            this.chkLbPreprocess.Name = "chkLbPreprocess";
+            this.chkLbPreprocess.Size = new System.Drawing.Size(159, 34);
+            this.chkLbPreprocess.TabIndex = 0;
+            // 
             // ExportThroughPathway
             // 
             this.AcceptButton = this.btnOK;
@@ -654,6 +676,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.imgCoverImage)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.grpInclude.ResumeLayout(false);
             this.grpInclude.PerformLayout();
             this.ResumeLayout(false);
@@ -712,5 +735,7 @@
         private System.Windows.Forms.LinkLabel lnkChooseCopyright;
         private System.Windows.Forms.GroupBox grpInclude;
         private System.Windows.Forms.CheckBox chkTOC;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckedListBox chkLbPreprocess;
     }
 }
