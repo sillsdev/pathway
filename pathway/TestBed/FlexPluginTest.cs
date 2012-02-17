@@ -17,15 +17,24 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
+using System.Net;
+using System.Net.Sockets;
+using System.Reflection;
 using System.Text;
+using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using System.Xml;
 using JWTools;
+using Microsoft.Win32;
+using MySql.Data.MySqlClient;
 using SIL.PublishingSolution;
 using SIL.PublishingSolution.Sort;
 using SIL.Tool;
 using SIL.Tool.Localization;
+using System.Data.Common;
+using System.Data;
 using Test;
 
 namespace TestBed
@@ -388,7 +397,7 @@ namespace TestBed
             MessageBox.Show("Completed for " + fileNames.Count + " files");
             int fileCount = 1;
             using (TextWriter streamWriter =
-                        new StreamWriter("c:\\filenamesWithZeroBytes.txt"))
+                new StreamWriter("c:\\filenamesWithZeroBytes.txt"))
             {
                 foreach (string fileName in fileNames)
                 {
@@ -572,7 +581,8 @@ namespace TestBed
             if (!Directory.Exists(localizationPath))
             {
                 Directory.CreateDirectory(localizationPath);
-                File.Copy(Common.FromRegistry(@"Loc/" + LocDB.BaseName), Common.PathCombine(localizationPath, LocDB.BaseName));
+                File.Copy(Common.FromRegistry(@"Loc/" + LocDB.BaseName),
+                          Common.PathCombine(localizationPath, LocDB.BaseName));
             }
             LocDB.Initialize(folderPath);
         }
@@ -674,7 +684,9 @@ namespace TestBed
                 string fileName = Path.GetFileNameWithoutExtension(filePath);
                 XmlDocument xmlDocument = new XmlDocument();
                 xmlDocument.Load(filePath);
-                XmlNode node = xmlDocument.SelectSingleNode("/ldml/special[1]/*[namespace-uri()='urn://palaso.org/ldmlExtensions/v1' and local-name()='defaultFontFamily'][1]/@value");
+                XmlNode node =
+                    xmlDocument.SelectSingleNode(
+                        "/ldml/special[1]/*[namespace-uri()='urn://palaso.org/ldmlExtensions/v1' and local-name()='defaultFontFamily'][1]/@value");
                 newProperty.AppendLine("div[lang='" + fileName + "']{ font-family: \"" + node.Value + "\";}");
                 newProperty.AppendLine("span[lang='" + fileName + "']{ font-family: \"" + node.Value + "\";}");
             }
@@ -694,7 +706,8 @@ namespace TestBed
             //HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework Setup\NDP\v2.0.50727
             //HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework\policy\v2.0
 
-            bool isDotnetInstalled = IsDotNet2IsInstalled(@"SOFTWARE\Microsoft\NET Framework Setup\NDP\v2.0.50727", "Version");
+            bool isDotnetInstalled = IsDotNet2IsInstalled(@"SOFTWARE\Microsoft\NET Framework Setup\NDP\v2.0.50727",
+                                                          "Version");
 
             if (isDotnetInstalled)
             {
@@ -721,7 +734,8 @@ namespace TestBed
                 registryValue = Common.GetValueFromRegistry(registrySubDirectory, keyName);
             else if (Common.GetOsName().ToUpper() == "UNIX")
             {
-                System.Security.Principal.WindowsPrincipal p = System.Threading.Thread.CurrentPrincipal as System.Security.Principal.WindowsPrincipal;
+                System.Security.Principal.WindowsPrincipal p =
+                    System.Threading.Thread.CurrentPrincipal as System.Security.Principal.WindowsPrincipal;
                 string userName = p.Identity.Name;
                 while (Directory.Exists("/home/" + userName + "/.winetrickscache/dotnet20/"))
                 {
@@ -730,10 +744,395 @@ namespace TestBed
                 }
             }
 
-            if(registryValue.Length > 0)
+            if (registryValue.Length > 0)
                 return true;
 
             return false;
         }
+
+        private void SetToPHP(string UserSystemGuid, string OSNameVersion, string OSServicePack, string UserSystemName, string UserIPAddress, 
+            string PathwayVersion, string JavaVersion, string TEVersion, string LibraofficeVersion, string Prince, string XelatexVersion,
+            string IndesignVersion, string WeSay, string Bloom, string FontLists, string BrowserList, string GeoLocation, string Language, string FrameworkVersion)
+        {
+
+            // this is what we are sending
+            string post_data = "foo=bar&baz=oof";
+
+            // this is where we will send it
+            //string uri = "http://myphpapps.com.cws10.my-hosting-panel.com/configdb.php?firstname=ram&lastname=ar&age=25";
+            string uri = "http://myphpapps.com.cws10.my-hosting-panel.com/configdb.php" + "?UserSystemGuid=" +
+                         UserSystemGuid +
+                         "&OSNameVersion=" + OSNameVersion + "&OSServicePack=" + OSServicePack +
+                         "&UserSystemName=" + UserSystemName + "&UserIPAddress=" + UserIPAddress + "&PathwayVersion=" +
+                         PathwayVersion + "&JavaVersion=" + JavaVersion + "&TEVersion=" + TEVersion + "&LibraofficeVersion=" + LibraofficeVersion +
+                         "&Prince=" + Prince + "&XelatexVersion=" + XelatexVersion + "&IndesignVersion=" + IndesignVersion + "&WeSay=" + WeSay +
+                         "&Bloom=" + Bloom + "&FontLists=" + FontLists + "&BrowserList=" + BrowserList + "&GeoLocation=" + GeoLocation +
+                         "&Language=" + Language + "&FrameworkVersion=" + FrameworkVersion + "";
+
+            // create a request
+            HttpWebRequest request = (HttpWebRequest)
+                                     WebRequest.Create(uri);
+            request.KeepAlive = false;
+            request.ProtocolVersion = HttpVersion.Version10;
+            request.Method = "POST";
+
+            // turn our request string into a byte stream
+            byte[] postBytes = Encoding.ASCII.GetBytes(post_data);
+
+            // this is important - make sure you specify type this way
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = postBytes.Length;
+            Stream requestStream = request.GetRequestStream();
+
+            // now send it
+            requestStream.Write(postBytes, 0, postBytes.Length);
+            requestStream.Close();
+
+            // grab te response and print it out to the console along with the status code
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            Console.WriteLine(new StreamReader(response.GetResponseStream()).ReadToEnd());
+            Console.WriteLine(response.StatusCode);
+
+
+        }
+
+        private void btnGetSoftwareData_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                string UserSystemGuid = string.Empty; //200
+                string OSName = string.Empty; //100
+                string OSNameVersion = string.Empty;
+                string OSServicePack = string.Empty;
+                string UserSystemName = string.Empty; //100
+                string UserIPAddress = string.Empty; //100
+                string PathwayVersion = string.Empty; //45
+                string TEVersion = string.Empty; //45
+                string JavaVersion = string.Empty; //45
+                string LibraofficeVersion = string.Empty; //45
+                string Prince = string.Empty; //45
+                string XelatexVersion = string.Empty; //45
+                string IndesignVersion = string.Empty; //45
+                string WeSay = string.Empty; //45
+                string Bloom = string.Empty; //45
+                string FontLists = string.Empty; //500
+                string BrowserList = string.Empty; //200
+                string GeoLocation = string.Empty; //100
+                string Language = string.Empty; //45
+                string FrameworkVersion = string.Empty; //100
+
+                UserSystemGuid = Guid.NewGuid().ToString();
+                OSNameVersion = GetOsName() + " - " + GetOsVersion();
+                OSName = GetOsName();
+                OSServicePack = GetOsVersion();
+                UserSystemName = Environment.MachineName;
+
+                IPHostEntry ip = Dns.GetHostEntry(Dns.GetHostName());
+                foreach (IPAddress ipAddress in ip.AddressList)
+                {
+                    if (ipAddress.AddressFamily == AddressFamily.InterNetwork)
+                    {
+                        UserIPAddress = ipAddress.ToString();
+                    }
+                }
+
+                /* Pathway Version  */
+
+                string appName = Assembly.GetAssembly(this.GetType()).Location;
+                AssemblyName assemblyName = AssemblyName.GetAssemblyName(appName);
+                PathwayVersion = assemblyName.Version.ToString();
+
+                /* Java Version  */
+
+                if (OSName == "Windows7")
+                {
+                    JavaVersion =
+                        Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\JavaSoft\\Java Runtime Environment",
+                                                    "CurrentVersion");
+                }
+                else if (OSName == "Windows XP")
+                {
+                    JavaVersion = Common.GetValueFromRegistry("SOFTWARE\\JavaSoft\\Java Runtime Environment",
+                                                              "CurrentVersion");
+                }
+
+                if (OSName == "Windows7")
+                {
+                    XelatexVersion = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\SIL\\PathwayXeLaTeX",
+                                                                 "XeLaTexVer");
+                }
+                else if (OSName == "Windows XP")
+                {
+                    XelatexVersion = Common.GetValueFromRegistry("SOFTWARE\\SIL\\PathwayXeLaTeX",
+                                                                 "XeLaTexVer");
+                }
+
+                if (OSName == "Windows7")
+                {
+                    LibraofficeVersion =
+                        Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\LibreOffice\\UNO\\InstallPath",
+                                                    "");
+                }
+                else if (OSName == "Windows XP")
+                {
+                    LibraofficeVersion = Common.GetValueFromRegistry("SOFTWARE\\SIL\\PathwayXeLaTeX",
+                                                                     "");
+                }
+
+                Language = CultureInfo.CurrentCulture.EnglishName;
+                GeoLocation = Language.Substring(Language.IndexOf('(') + 1,
+                                                 Language.LastIndexOf(')') - Language.IndexOf('(') - 1);
+
+                if (OSName == "Windows7")
+                {
+                    BrowserList = "IE Version " +
+                                  Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\Microsoft\\Internet Explorer",
+                                                              "Version");
+                }
+                else if (OSName == "Windows XP")
+                {
+                    BrowserList = "IE Version " +
+                                  Common.GetValueFromRegistry("SOFTWARE\\Microsoft\\Internet Explorer", "Version");
+                }
+
+                if (OSName == "Windows7")
+                {
+                    RegistryKey installed_versions =
+                        Registry.LocalMachine.OpenSubKey(@"SOFTWARE\\Wow6432Node\\Microsoft\\NET Framework Setup\\NDP");
+                    string[] version_names = installed_versions.GetSubKeyNames();
+                    FrameworkVersion =
+                        Convert.ToDouble(version_names[version_names.Length - 1].Remove(0, 1),
+                                         CultureInfo.InvariantCulture)
+                            .ToString();
+                }
+                else if (OSName == "Windows XP")
+                {
+                    RegistryKey installed_versions =
+                        Registry.LocalMachine.OpenSubKey(@"SOFTWARE\\Microsoft\\NET Framework Setup\\NDP");
+                    string[] version_names = installed_versions.GetSubKeyNames();
+                    FrameworkVersion =
+                        Convert.ToDouble(version_names[version_names.Length - 1].Remove(0, 1),
+                                         CultureInfo.InvariantCulture)
+                            .ToString();
+
+                }
+
+                SetToPHP(UserSystemGuid, OSName, OSServicePack, UserSystemName, UserIPAddress, PathwayVersion,
+                         JavaVersion, TEVersion, LibraofficeVersion, Prince, XelatexVersion, IndesignVersion, WeSay,
+                         Bloom, FontLists, BrowserList, GeoLocation, Language, FrameworkVersion);
+
+            }catch{}
+        }
+
+        public string GetOsName()
+        {
+            OperatingSystem osInfo = Environment.OSVersion;
+
+            switch (osInfo.Platform)
+            {
+                case System.PlatformID.Win32NT:
+                    switch (osInfo.Version.Major)
+                    {
+                        case 3:
+                            return "Windows NT 3.51";
+                            break;
+                        case 4:
+                            return "Windows NT 4.0";
+                            break;
+                        case 5:
+                            if (osInfo.Version.Minor == 0)
+                                return "Windows 2000";
+                            else
+                                return "Windows XP";
+                            break;
+                        case 6:
+                            if (osInfo.Version.Minor == 1)
+                                return "Windows7";
+                            break;
+                    }
+                    break;
+
+            }
+            return osInfo.Platform.ToString();
+        }
+
+        public string GetOsVersion()
+        {
+            OperatingSystem osInfo = Environment.OSVersion;
+
+            return osInfo.VersionString;
+        }
+
+        private void TestDataInsertToDB()
+        {
+            string error_Message;
+            string connectionString = "Server=localhost;Database=pathwayusers;Uid=root;Pwd=123456;";
+            using (MySqlConnection con1 = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    string storedprocedurename = "spAddNewTable";
+                    MySqlCommand command = con1.CreateCommand(); //new MySqlCommand(sqlCommand, con1);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = storedprocedurename;
+                    command.Parameters.Add(new MySqlParameter("newtablevalue", MySqlDbType.VarChar, 45)).Value =
+                        "Pathway";
+                    command.CommandTimeout = 500;
+                    con1.Open();
+
+                    command.ExecuteNonQuery();
+                }
+                catch (MySql.Data.MySqlClient.MySqlException ex)
+                {
+                    switch (ex.Number)
+                    {
+                        case 0:
+                            error_Message = "Cannot connect to server.  Contact administrator";
+                            break;
+                        case 1045:
+                            error_Message = "Invalid username/password, please try again";
+                            break;
+                    }
+                }
+                catch (Exception ex1)
+                {
+                    error_Message = ex1.Message.ToString();
+                }
+                finally
+                {
+                    con1.Close();
+                }
+            }
+        }
+
+        private void UserDataInsertToDB()
+        {
+            string error_Message;
+            string connectionString =
+                "Server=12.177.127.237;port=3306;Database=pathwayusers;Uid=PathwayBootstrap;Pwd=mKs24SzJDPebRNWj;Protocol=socket;";
+
+            using (MySqlConnection con1 = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    string storedprocedurename = "spAddNewTable";
+                    MySqlCommand command = con1.CreateCommand(); //new MySqlCommand(sqlCommand, con1);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = storedprocedurename;
+                    command.Parameters.Add(new MySqlParameter("newtablevalue", MySqlDbType.VarChar, 45)).Value =
+                        "Samdoss";
+                    command.CommandTimeout = 500;
+                    con1.Open();
+
+                    command.ExecuteNonQuery();
+                }
+                catch (MySql.Data.MySqlClient.MySqlException ex)
+                {
+                    switch (ex.Number)
+                    {
+                        case 0:
+                            error_Message = "Cannot connect to server.  Contact administrator";
+                            break;
+                        case 1045:
+                            error_Message = "Invalid username/password, please try again";
+                            break;
+                    }
+                }
+                catch (Exception ex1)
+                {
+                    error_Message = ex1.Message.ToString();
+                }
+                finally
+                {
+                    con1.Close();
+                }
+            }
+        }
+
+        private static string GetUserDataFromRegistry(string subKey, string keyName)
+        {
+            // Opening the registry key
+
+            RegistryKey rk = Registry.LocalMachine;
+            // Open a subKey as read-only
+
+            RegistryKey sk1 = rk.OpenSubKey(subKey);
+            // If the RegistrySubKey doesn't exist -> (null)
+
+            if (sk1 == null)
+            {
+                return null;
+            }
+            else
+            {
+                try
+                {
+                    // If the RegistryKey exists I get its value
+                    return (string)sk1.GetValue(keyName.ToUpper());
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+            }
+        }
+
+        private string GetGeoLocationByIP(string strIPAddress)
+        {
+
+            //Create a WebRequest
+            WebRequest rssReq = WebRequest.Create("http://freegeoip.appspot.com/xml/" + strIPAddress);
+
+            //Create a Proxy
+            WebProxy px = new WebProxy("http://freegeoip.appspot.com/xml/" + strIPAddress, true);
+
+            //Assign the proxy to the WebRequest
+            rssReq.Proxy = px;
+
+            //Set the timeout in Seconds for the WebRequest
+            rssReq.Timeout = 2000;
+
+
+
+            //Get the WebResponse
+
+            WebResponse rep = rssReq.GetResponse();
+
+            //Read the Response in a XMLTextReader
+
+            XmlTextReader xtr = new XmlTextReader(rep.GetResponseStream());
+
+            //Create a new DataSet
+
+            DataSet ds = new DataSet();
+
+            //Read the Response into the DataSet
+            //<Status>true</Status>
+            //<Ip>72.14.247.141</Ip>
+            //<CountryCode>US</CountryCode>
+            //<CountryName>United States</CountryName>
+            //<RegionCode>CA</RegionCode>
+            //<RegionName>California</RegionName>
+            //<City>Mountain View</City>
+            //<ZipCode>94043</ZipCode>
+            //<Latitude>37.4192</Latitude>
+            //<Longitude>-122.057</Longitude>
+
+            ds.ReadXml(xtr);
+            DataTable dt = ds.Tables[0];
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+
+                if (dt.Rows[0]["Status"].ToString().Equals("true", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    return dt.Rows[0]["CountryCode"].ToString();
+
+                }
+            }
+            return String.Empty;
+        }
+
     }
 }
