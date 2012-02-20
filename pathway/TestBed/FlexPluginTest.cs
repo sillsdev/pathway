@@ -756,7 +756,7 @@ namespace TestBed
         {
 
             // this is what we are sending
-            string post_data = "foo=bar&baz=oof";
+            string post_data = "&FrameworkVersionsss=sdf";
 
             // this is where we will send it
             //string uri = "http://myphpapps.com.cws10.my-hosting-panel.com/configdb.php?firstname=ram&lastname=ar&age=25";
@@ -870,10 +870,17 @@ namespace TestBed
                 if (OSName == "Windows7")
                 {
                     PathwayVersion = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\SIL\\Pathway", "PathwayDir");
+                    PathwayVersion = Common.RightRemove(PathwayVersion, "\\");
+
+                    PathwayVersion = Common.LeftRemove(PathwayVersion, "SIL\\");
+
                 }
                 else if (OSName == "Windows XP")
                 {
                     PathwayVersion = Common.GetValueFromRegistry("SOFTWARE\\SIL\\Pathway", "PathwayDir");
+                    PathwayVersion = Common.RightRemove(PathwayVersion, "\\");
+
+                    PathwayVersion = Common.LeftRemove(PathwayVersion, "SIL\\");
                 }
 
                 if (OSName == "Windows7")
