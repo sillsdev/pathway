@@ -750,7 +750,7 @@ namespace TestBed
             return false;
         }
 
-        private void SetToPHP(string UserSystemGuid, string OSNameVersion, string OSServicePack, string UserSystemName, string UserIPAddress, 
+        private void SetToPHP(string UserSystemGuid, string OSNameVersion, string OSServicePack, string UserSystemName, string UserIPAddress,
             string PathwayVersion, string JavaVersion, string TEVersion, string LibraofficeVersion, string Prince, string XelatexVersion,
             string IndesignVersion, string WeSay, string Bloom, string FontLists, string BrowserList, string GeoLocation, string Language, string FrameworkVersion)
         {
@@ -821,6 +821,7 @@ namespace TestBed
                 string GeoLocation = string.Empty; //100
                 string Language = string.Empty; //45
                 string FrameworkVersion = string.Empty; //100
+                string Paratext = string.Empty;
 
                 UserSystemGuid = Guid.NewGuid().ToString();
                 OSNameVersion = GetOsName() + " - " + GetOsVersion();
@@ -859,13 +860,20 @@ namespace TestBed
 
                 if (OSName == "Windows7")
                 {
-                    XelatexVersion = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\SIL\\PathwayXeLaTeX",
-                                                                 "XeLaTexVer");
+                    XelatexVersion = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\SIL\\PathwayXeLaTeX", "XeLaTexVer");
                 }
                 else if (OSName == "Windows XP")
                 {
-                    XelatexVersion = Common.GetValueFromRegistry("SOFTWARE\\SIL\\PathwayXeLaTeX",
-                                                                 "XeLaTexVer");
+                    XelatexVersion = Common.GetValueFromRegistry("SOFTWARE\\SIL\\PathwayXeLaTeX", "XeLaTexVer");
+                }
+
+                if (OSName == "Windows7")
+                {
+                    PathwayVersion = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\SIL\\Pathway", "PathwayDir");
+                }
+                else if (OSName == "Windows XP")
+                {
+                    PathwayVersion = Common.GetValueFromRegistry("SOFTWARE\\SIL\\Pathway", "PathwayDir");
                 }
 
                 if (OSName == "Windows7")
@@ -880,51 +888,138 @@ namespace TestBed
                                                                      "");
                 }
 
+                if (OSName == "Windows7")
+                {
+                    Paratext = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\ScrChecks\\1.0\\Program_Files_Directory_Ptw7", "");
+                }
+                else if (OSName == "Windows XP")
+                {
+                    Paratext = Common.GetValueFromRegistry("SOFTWARE\\ScrChecks\\1.0\\Program_Files_Directory_Ptw7", "");
+                }
+
+                if (OSName == "Windows7")
+                {
+                    TEVersion = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\SIL\\FieldWorks\\7.0", "RootCodeDir");
+
+                    TEVersion = Common.RightRemove(TEVersion, "\\");
+
+                    TEVersion = Common.LeftRemove(TEVersion, "SIL\\");
+
+                }
+                else if (OSName == "Windows XP")
+                {
+                    TEVersion = Common.GetValueFromRegistry("SOFTWARE\\SIL\\FieldWorks\\7.0", "RootCodeDir");
+
+                    TEVersion = Common.RightRemove(TEVersion, "\\");
+
+                    TEVersion = Common.LeftRemove(TEVersion, "SIL\\");
+                }
+
+                if (OSName == "Windows7")
+                {
+                    Prince = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Prince_is1", "DisplayName");
+                    
+                }
+                else if (OSName == "Windows XP")
+                {
+                    Prince = Common.GetValueFromRegistry("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Prince_is1", "DisplayName");
+                }
+
+                if (OSName == "Windows7")
+                {
+                    IndesignVersion = Common.GetValueFromRegistry("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\InDesign.exe", "Path");
+                    IndesignVersion = Common.LeftRemove(IndesignVersion, "Adobe\\");
+                }
+                else if (OSName == "Windows XP")
+                {
+                    IndesignVersion = Common.GetValueFromRegistry("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\InDesign.exe", "Path");
+                    IndesignVersion = Common.LeftRemove(IndesignVersion, "Adobe\\");
+                }
+
+
                 Language = CultureInfo.CurrentCulture.EnglishName;
                 GeoLocation = Language.Substring(Language.IndexOf('(') + 1,
                                                  Language.LastIndexOf(')') - Language.IndexOf('(') - 1);
 
                 if (OSName == "Windows7")
                 {
-                    BrowserList = "IE Version " +
-                                  Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\Microsoft\\Internet Explorer",
-                                                              "Version");
+                    BrowserList = GetValueFromRegistryHTTPCLASSROOT("http\\shell\\open\\command", "");
+
+                    BrowserList = Common.RightRemove(BrowserList,".exe");
+
+                    BrowserList = Common.LeftRemove(BrowserList, "\\");
+
+                    //if(BrowserList.Contains("Chrome"))
+                    //{
+                    //    BrowserList = "Default Browser";
+                    //    BrowserList = BrowserList + " - " +  GetValueFromRegistryHTTPCurrentUser("Software\\Google\\Update\\Clients\\{8A69D345-D564-463c-AFF1-A69D9E530F96}", "name");
+                    //    BrowserList = BrowserList + " - " + GetValueFromRegistryHTTPCurrentUser("Software\\Google\\Update\\Clients\\{8A69D345-D564-463c-AFF1-A69D9E530F96}", "pv");
+                    //}
+                    //else
+                    //{
+                    //    BrowserList = "";
+                    //}
+
+                    //BrowserList = BrowserList + ", IE Version " +
+                    //              Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\Microsoft\\Internet Explorer",
+                    //                                          "Version");
                 }
                 else if (OSName == "Windows XP")
                 {
-                    BrowserList = "IE Version " +
-                                  Common.GetValueFromRegistry("SOFTWARE\\Microsoft\\Internet Explorer", "Version");
+                    BrowserList = GetValueFromRegistryHTTPCLASSROOT("http\\shell\\open\\command", "");
+                    BrowserList = Common.RightRemove(BrowserList, ".exe");
+
+                    BrowserList = Common.LeftRemove(BrowserList, "\\");
+                    //if (BrowserList.Contains("Chrome"))
+                    //{
+                    //    BrowserList = "Default Browser";
+                    //    BrowserList = BrowserList + " - " + GetValueFromRegistryHTTPCurrentUser("Software\\Google\\Update\\Clients\\{8A69D345-D564-463c-AFF1-A69D9E530F96}", "name");
+                    //    BrowserList = BrowserList + " - " + GetValueFromRegistryHTTPCurrentUser("Software\\Google\\Update\\Clients\\{8A69D345-D564-463c-AFF1-A69D9E530F96}", "pv");
+                    //}
+                    //else
+                    //{
+                    //    BrowserList = "";
+                    //}
+
+                    //BrowserList = BrowserList + ", IE Version " +
+                    //              Common.GetValueFromRegistry("SOFTWARE\\Microsoft\\Internet Explorer", "Version");
                 }
 
                 if (OSName == "Windows7")
                 {
-                    RegistryKey installed_versions =
+                    RegistryKey installedVersions =
                         Registry.LocalMachine.OpenSubKey(@"SOFTWARE\\Wow6432Node\\Microsoft\\NET Framework Setup\\NDP");
-                    string[] version_names = installed_versions.GetSubKeyNames();
-                    FrameworkVersion =
-                        Convert.ToDouble(version_names[version_names.Length - 1].Remove(0, 1),
-                                         CultureInfo.InvariantCulture)
-                            .ToString();
+                    if (installedVersions != null)
+                    {
+                        string[] versionNames = installedVersions.GetSubKeyNames();
+                        FrameworkVersion =
+                            Convert.ToDouble(versionNames[versionNames.Length - 1].Remove(0, 1),
+                                             CultureInfo.InvariantCulture)
+                                .ToString(CultureInfo.InvariantCulture);
+                    }
                 }
                 else if (OSName == "Windows XP")
                 {
-                    RegistryKey installed_versions =
+                    RegistryKey installedVersions =
                         Registry.LocalMachine.OpenSubKey(@"SOFTWARE\\Microsoft\\NET Framework Setup\\NDP");
-                    string[] version_names = installed_versions.GetSubKeyNames();
-                    FrameworkVersion =
-                        Convert.ToDouble(version_names[version_names.Length - 1].Remove(0, 1),
-                                         CultureInfo.InvariantCulture)
-                            .ToString();
-
+                    if (installedVersions != null)
+                    {
+                        string[] versionNames = installedVersions.GetSubKeyNames();
+                        FrameworkVersion =
+                            Convert.ToDouble(versionNames[versionNames.Length - 1].Remove(0, 1),
+                                             CultureInfo.InvariantCulture)
+                                .ToString(CultureInfo.InvariantCulture);
+                    }
                 }
 
                 SetToPHP(UserSystemGuid, OSName, OSServicePack, UserSystemName, UserIPAddress, PathwayVersion,
                          JavaVersion, TEVersion, LibraofficeVersion, Prince, XelatexVersion, IndesignVersion, WeSay,
                          Bloom, FontLists, BrowserList, GeoLocation, Language, FrameworkVersion);
 
-            }catch{}
+            }
+            catch { }
         }
-
+      
         public string GetOsName()
         {
             OperatingSystem osInfo = Environment.OSVersion;
@@ -1055,6 +1150,62 @@ namespace TestBed
             // Opening the registry key
 
             RegistryKey rk = Registry.LocalMachine;
+            // Open a subKey as read-only
+
+            RegistryKey sk1 = rk.OpenSubKey(subKey);
+            // If the RegistrySubKey doesn't exist -> (null)
+
+            if (sk1 == null)
+            {
+                return null;
+            }
+            else
+            {
+                try
+                {
+                    // If the RegistryKey exists I get its value
+                    return (string)sk1.GetValue(keyName.ToUpper());
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+            }
+        }
+
+        private static string GetValueFromRegistryHTTPCurrentUser(string subKey, string keyName)
+        {
+            // Opening the registry key
+
+            RegistryKey rk = Registry.CurrentUser;
+            // Open a subKey as read-only
+
+            RegistryKey sk1 = rk.OpenSubKey(subKey);
+            // If the RegistrySubKey doesn't exist -> (null)
+
+            if (sk1 == null)
+            {
+                return null;
+            }
+            else
+            {
+                try
+                {
+                    // If the RegistryKey exists I get its value
+                    return (string)sk1.GetValue(keyName.ToUpper());
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+            }
+        }
+
+        private static string GetValueFromRegistryHTTPCLASSROOT(string subKey, string keyName)
+        {
+            // Opening the registry key
+
+            RegistryKey rk = Registry.ClassesRoot;
             // Open a subKey as read-only
 
             RegistryKey sk1 = rk.OpenSubKey(subKey);
