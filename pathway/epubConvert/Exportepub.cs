@@ -1626,11 +1626,11 @@ namespace SIL.PublishingSolution
             }
             // now go check to see if we're working on scripture or dictionary data
             nodes = xmlDocument.SelectNodes("//xhtml:span[@class='headword']", namespaceManager);
-            if (nodes.Count == 0)
+            if (nodes != null && nodes.Count == 0)
             {
                 // not in this file - this might be scripture?
                 nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
-                if (nodes.Count > 0)
+                if (nodes != null && nodes.Count > 0)
                     _inputType = "scripture";
             }
             else
@@ -1711,19 +1711,19 @@ namespace SIL.PublishingSolution
         private string GetBookName(string xhtmlFileName)
         {
             var fileNoPath = Path.GetFileName(xhtmlFileName);
-            if (fileNoPath.StartsWith(PreExportProcess.CoverPageFilename.Substring(0, 8)))
+            if (fileNoPath != null && fileNoPath.StartsWith(PreExportProcess.CoverPageFilename.Substring(0, 8)))
             {
                 return ("Cover Page");
             }
-            if (fileNoPath.StartsWith(PreExportProcess.TitlePageFilename.Substring(0, 8)))
+            if (fileNoPath != null && fileNoPath.StartsWith(PreExportProcess.TitlePageFilename.Substring(0, 8)))
             {
                 return ("Title Page");
             }
-            if (fileNoPath.StartsWith(PreExportProcess.TableOfContentsFilename.Substring(0, 8)))
+            if (fileNoPath != null && fileNoPath.StartsWith(PreExportProcess.TableOfContentsFilename.Substring(0, 8)))
             {
                 return ("Table of Content");
             }
-            if (fileNoPath.StartsWith(PreExportProcess.CopyrightPageFilename.Substring(0, 8)))
+            if (fileNoPath != null && fileNoPath.StartsWith(PreExportProcess.CopyrightPageFilename.Substring(0, 8)))
             {
                 return ("Copyright Information");
             }
@@ -2049,19 +2049,21 @@ namespace SIL.PublishingSolution
                         {
                             // need to scale image
                             var img = ResizeImage(image);
-                            switch (Path.GetExtension(file).ToLower())
-                            {
-                                case ".jpg":
-                                case ".jpeg":
-                                    img.Save(dest, System.Drawing.Imaging.ImageFormat.Jpeg);
-                                    break;
-                                case ".gif":
-                                    img.Save(dest, System.Drawing.Imaging.ImageFormat.Gif);
-                                    break;
-                                default:
-                                    img.Save(dest, System.Drawing.Imaging.ImageFormat.Png);
-                                    break;
-                            }
+                            var extension = Path.GetExtension(file);
+                            if (extension != null)
+                                switch (extension.ToLower())
+                                {
+                                    case ".jpg":
+                                    case ".jpeg":
+                                        img.Save(dest, System.Drawing.Imaging.ImageFormat.Jpeg);
+                                        break;
+                                    case ".gif":
+                                        img.Save(dest, System.Drawing.Imaging.ImageFormat.Gif);
+                                        break;
+                                    default:
+                                        img.Save(dest, System.Drawing.Imaging.ImageFormat.Png);
+                                        break;
+                                }
                         }
                         else
                         {
@@ -3232,7 +3234,7 @@ namespace SIL.PublishingSolution
                 // 1. Book ID: start out with the book code (e.g., 2CH for 2 Chronicles)
                 nodes = xmlDocument.SelectNodes("//xhtml:span[@class='Section_Head']", namespaceManager);
 
-                if(nodes.Count == 0)
+                if(nodes != null && nodes.Count == 0)
                 {
                     nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Section_Head']", namespaceManager);
                 }
