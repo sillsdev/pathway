@@ -44,6 +44,7 @@
             this.txtInputPath = new System.Windows.Forms.TextBox();
             this.Btn_InputPath = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnGetSoftwareData = new System.Windows.Forms.Button();
             this.btnDotNet = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.btnXeLaTex = new System.Windows.Forms.Button();
@@ -66,7 +67,6 @@
             this.btnFileSizeZero = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.btnGetSoftwareData = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -251,6 +251,17 @@
             this.groupBox1.TabIndex = 51;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Export";
+            // 
+            // btnGetSoftwareData
+            // 
+            this.btnGetSoftwareData.AccessibleName = "BtnFlexTest";
+            this.btnGetSoftwareData.Location = new System.Drawing.Point(260, 160);
+            this.btnGetSoftwareData.Name = "btnGetSoftwareData";
+            this.btnGetSoftwareData.Size = new System.Drawing.Size(95, 28);
+            this.btnGetSoftwareData.TabIndex = 67;
+            this.btnGetSoftwareData.Text = "Soft Data";
+            this.btnGetSoftwareData.UseVisualStyleBackColor = true;
+            this.btnGetSoftwareData.Click += new System.EventHandler(this.btnGetSoftwareData_Click);
             // 
             // btnDotNet
             // 
@@ -486,17 +497,6 @@
             this.button2.Text = "&View Tree";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // btnGetSoftwareData
-            // 
-            this.btnGetSoftwareData.AccessibleName = "BtnFlexTest";
-            this.btnGetSoftwareData.Location = new System.Drawing.Point(260, 160);
-            this.btnGetSoftwareData.Name = "btnGetSoftwareData";
-            this.btnGetSoftwareData.Size = new System.Drawing.Size(95, 28);
-            this.btnGetSoftwareData.TabIndex = 67;
-            this.btnGetSoftwareData.Text = "Soft Data";
-            this.btnGetSoftwareData.UseVisualStyleBackColor = true;
-            this.btnGetSoftwareData.Click += new System.EventHandler(this.btnGetSoftwareData_Click);
             // 
             // FlexPluginTest
             // 
