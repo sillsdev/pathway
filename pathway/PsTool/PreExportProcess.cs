@@ -673,6 +673,7 @@ namespace SIL.Tool
             bool _copyrightInformation = (Param.GetMetadataValue(Param.CopyrightPage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CopyrightPage, organization));
             string copyRightFilePath = Param.GetMetadataValue(Param.CopyrightPageFilename, organization);
             bool _includeTitleinCoverImage = (Param.GetMetadataValue(Param.CoverPageTitle, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CoverPageTitle, organization));
+            bool _includeTOCPage = (Param.GetMetadataValue(Param.TableOfContents, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.TableOfContents, organization));
             if (!File.Exists(inputXhtmlFilePath)) return;
             const string tag = "body";
 
@@ -682,8 +683,69 @@ namespace SIL.Tool
                 XmlNode coverImageNode = null;
                 XmlNode coverTitleNode = null;
                 xmldoc.Load(inputXhtmlFilePath);
+                XmlNodeList mainXhtmlFile = xmldoc.GetElementsByTagName(tag);
 
-                if (_coverImage)
+
+                XmlNode tocNode = null;
+                if (_includeTOCPage)
+                {
+                    tocNode = xmldoc.CreateElement("div");
+                    XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
+                    xmlAttribute.Value = "tableofcontents";
+                    tocNode.Attributes.Append(xmlAttribute);
+                    tocNode.InnerText = Param.GetMetadataValue(Param.TableOfContents);
+                }
+
+                if (tocNode != null)
+                {
+                    mainXhtmlFile[0].InnerXml = tocNode.OuterXml + mainXhtmlFile[0].InnerXml;
+                    _projInfo.IsFrontMatterEnabled = true;
+                }
+                
+                if (File.Exists(copyRightFilePath))
+                {
+                    XmlDocument crdoc = new XmlDocument {XmlResolver = null, PreserveWhitespace = true};
+                    crdoc.Load(copyRightFilePath);
+                    XmlNodeList copyRightFile = crdoc.GetElementsByTagName(tag);
+
+
+                    XmlNode copyRightContentNode = null;
+                    if (_copyrightInformation)
+                    {
+                        copyRightContentNode = xmldoc.CreateElement("div");
+                        XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
+                        xmlAttribute.Value = "copyright";
+                        copyRightContentNode.Attributes.Append(xmlAttribute);
+                        //copyRightContentNode.InnerText = copyRightFile[0].InnerText;
+                        copyRightContentNode.InnerText = copyRightFile[0].InnerText.Replace("\r\n", " ").Replace("\t",
+                                                                                                                 "");
+                    }
+
+                    if (copyRightFile.Count > 0 && _copyrightInformation)
+                    {
+                        mainXhtmlFile[0].InnerXml = copyRightContentNode.OuterXml + mainXhtmlFile[0].InnerXml;
+                        _projInfo.IsFrontMatterEnabled = true;
+                    }
+                }
+
+
+                XmlNode titleNode = null;
+                if (_includeTitlePage)
+                {
+                    titleNode = xmldoc.CreateElement("div");
+                    XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
+                    xmlAttribute.Value = "title";
+                    titleNode.Attributes.Append(xmlAttribute);
+                    titleNode.InnerText = Param.GetMetadataValue(Param.Title);
+                }
+
+                if (titleNode != null)
+                {
+                    mainXhtmlFile[0].InnerXml = titleNode.OuterXml + mainXhtmlFile[0].InnerXml;
+                    _projInfo.IsFrontMatterEnabled = true;
+                }
+
+                if (_coverImage && File.Exists(_coverPageImagePath))
                 {
                     coverImageNode = xmldoc.CreateElement("div");
                     XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
@@ -708,53 +770,6 @@ namespace SIL.Tool
                         coverTitleNode.Attributes.Append(xmlAttribute);
                         coverTitleNode.InnerText = Param.GetMetadataValue(Param.Title);
                     }
-                }
-
-                XmlNode titleNode = null;
-                if (_includeTitlePage)
-                {
-                    titleNode = xmldoc.CreateElement("div");
-                    XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
-                    xmlAttribute.Value = "title";
-                    titleNode.Attributes.Append(xmlAttribute);
-                    titleNode.InnerText = Param.GetMetadataValue(Param.Title);
-                }
-
-                XmlNodeList mainXhtmlFile = xmldoc.GetElementsByTagName(tag);
-                if (File.Exists(copyRightFilePath))
-                {
-                    XmlDocument crdoc = new XmlDocument {XmlResolver = null, PreserveWhitespace = true};
-                    crdoc.Load(copyRightFilePath);
-                    XmlNodeList copyRightFile = crdoc.GetElementsByTagName(tag);
-
-
-                    XmlNode copyRightContentNode = null;
-                    if (_copyrightInformation)
-                    {
-                        copyRightContentNode = xmldoc.CreateElement("div");
-                        XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
-                        xmlAttribute.Value = "copyright";
-                        copyRightContentNode.Attributes.Append(xmlAttribute);
-                        //copyRightContentNode.InnerText = copyRightFile[0].InnerText;
-                        copyRightContentNode.InnerText = copyRightFile[0].InnerText.Replace("\r\n", " ").Replace("\t",
-                                                                                                                 "");
-                    }
-
-                    if (copyRightFile.Count > 0 && _copyrightInformation)
-                    {
-                        if (mainXhtmlFile.Count > 0)
-                        {
-                            mainXhtmlFile[0].InnerXml = copyRightContentNode.OuterXml + mainXhtmlFile[0].InnerXml;
-                            _projInfo.IsFrontMatterEnabled = true;
-                        }
-                    }
-                }
-
-
-                if (titleNode != null)
-                {
-                    mainXhtmlFile[0].InnerXml = titleNode.OuterXml + mainXhtmlFile[0].InnerXml;
-                    _projInfo.IsFrontMatterEnabled = true;
                 }
 
                 if (coverTitleNode != null)
@@ -783,7 +798,7 @@ namespace SIL.Tool
             //string copyRightFilePath = Param.GetMetadataValue(Param.CopyrightPageFilename).ToLower();
             string text = ".cover{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} " +
                           ".title{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} " +
-                          ".copyright{text-align: left; font-size:12pt;page-break-after: always;}";
+                          ".copyright{text-align: left; font-size:12pt;page-break-after: always;.tableofcontents{text-align: left; font-size:12pt;page-break-after: always;}";
             Common.FileInsertText(inputCssFilePath, text);
             //}
         }

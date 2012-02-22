@@ -33,7 +33,7 @@ namespace SIL.PublishingSolution
         {
 
             _writer.WriteStartElement("text:table-of-content");
-            _writer.WriteAttributeString("text:style-name", "Sect3");
+            _writer.WriteAttributeString("text:style-name", "toc_revAppendix");
             _writer.WriteAttributeString("text:protected", "true");
             _writer.WriteAttributeString("text:name", "Table of Contents1");
 

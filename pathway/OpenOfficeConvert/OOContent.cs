@@ -729,6 +729,15 @@ namespace SIL.PublishingSolution
             //{
             //    InsertWhiteSpace();
             //}
+            if (_childName.ToLower().Contains("tableofcontents"))
+            {
+                CallTOC();
+                _writer.WriteStartElement("text:p");
+                _writer.WriteAttributeString("text:style-name", "P4");
+                _writer.WriteEndElement();
+                return;
+            }
+
             if (_isDisplayNone)
             {
                 CollectFootNoteChapterVerse(ReplaceString(_reader.Value), Common.OutputType.ODT.ToString());
@@ -2556,14 +2565,6 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("text:style-name", "P4");
                 _writer.WriteEndElement();
             }
-
-            ////Front Matter
-            //_writer.WriteStartElement("text:p");
-            //_writer.WriteAttributeString("text:style-name", "TitlePage");
-            //_writer.WriteEndElement();
-
-            CallTOC();
-
 
             //if (_fileType == "odm" && _odtFiles != null)  // ODM - ODT files
             //{

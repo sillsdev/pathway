@@ -172,7 +172,7 @@ namespace SIL.PublishingSolution
             SetAttribute(parent_Type[0], attribute);
 
             attribute = "master-page-name";
-            if (newClassName.IndexOf("coverImage") == 0)
+            if (newClassName.ToLower().IndexOf("coverimage") == 0)
             {
                 SetAttribute("Cover_20_Page", attribute);
             }
@@ -183,6 +183,10 @@ namespace SIL.PublishingSolution
             else if (newClassName.IndexOf("copyright") == 0)
             {
                 SetAttribute("CopyRight_20_Page", attribute);
+            }
+            else if (newClassName.IndexOf("tableofcontents") == 0)
+            {
+                SetAttribute("TOC_20_Page", attribute);
             }
 
             //style:family="paragraph" style:parent-style-name="none">
