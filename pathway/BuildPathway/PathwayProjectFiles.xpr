@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
+<project version="13.2">
     <meta>
-        <filters directoryPatterns="" filePatterns=""
-            positiveFilePatterns="" showHiddenFiles="false"/>
+        <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
         <options/>
     </meta>
     <projectTree name="PathwayProjectFiles.xpr">
@@ -19,8 +18,7 @@
         <file name="../LiftPrepare/LiftPrepare.csproj"/>
         <file name="../LogosConvert/LogosConvert.csproj"/>
         <file name="../OpenOfficeConvert/OpenOfficeConvert.csproj"/>
-        <file
-            name="../OpenOfficeConvert_OLD/OpenOfficeConvert_OLD.csproj"/>
+        <file name="../OpenOfficeConvert_OLD/OpenOfficeConvert_OLD.csproj"/>
         <file name="../ParatextSupport/ParatextSupport.csproj"/>
         <file name="../PathwayB/PathwayB.csproj"/>
         <file name="../PdfConvert/PdfConvert.csproj"/>
@@ -31,8 +29,5 @@
         <file name="../Test/Test.csproj"/>
         <file name="../TestBed/TestBed.csproj"/>
         <file name="../WordPressConvert/WordPressConvert.csproj"/>
-        <file name="../XeTex/XeTex.csproj"/>
-        <file name="../XeTeXConvert/XeTeXConvert.csproj"/>
-        <file name="../YouVersionConvert/YouVersionConvert.csproj"/>
     </projectTree>
 </project>
