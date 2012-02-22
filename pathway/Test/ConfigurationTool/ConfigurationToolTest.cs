@@ -542,6 +542,7 @@ namespace Test.UIConfigurationToolTest
         }
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void GetUserInformationTest()
         {
             UserInformation userInfo = new UserInformation();
