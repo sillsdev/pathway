@@ -540,6 +540,34 @@ namespace Test.UIConfigurationToolTest
             }
             Assert.IsTrue(result, "Grid Column order is not proper");
         }
+
+        [Test]
+        public void GetUserInformationTest()
+        {
+            UserInformation userInfo = new UserInformation();
+            userInfo.GetUserInformation();
+
+            Assert.IsNotNullOrEmpty(userInfo.OSName);
+            Assert.IsNotNullOrEmpty(userInfo.UserSystemGuid);
+            Assert.IsNotNullOrEmpty(userInfo.OSServicePack);
+            Assert.IsNotNullOrEmpty(userInfo.UserSystemName);
+            Assert.IsNotNullOrEmpty(userInfo.Language);
+            //Assert.IsNotNullOrEmpty(userInfo.FontLists);
+            Assert.IsNotNullOrEmpty(userInfo.SystemCountry);
+            Assert.IsNotNullOrEmpty(userInfo.UserIpAddress);
+            Assert.IsNotNullOrEmpty(userInfo.JavaVersion);
+            Assert.IsNotNullOrEmpty(userInfo.XelatexVersion);
+            Assert.IsNotNullOrEmpty(userInfo.PathwayVersion);
+            Assert.IsNotNullOrEmpty(userInfo.LibraofficeVersion);
+            Assert.IsNotNullOrEmpty(userInfo.Paratext);
+            Assert.IsNotNullOrEmpty(userInfo.TEVersion);
+            Assert.IsNotNullOrEmpty(userInfo.Prince);
+            Assert.IsNotNullOrEmpty(userInfo.IndesignVersion);
+            Assert.IsNotNullOrEmpty(userInfo.BrowserList);
+            Assert.IsNotNullOrEmpty(userInfo.FrameworkVersion);
+            Assert.IsNotNullOrEmpty(userInfo.GeoLocation);
+        }
+
         #endregion
 
         #region Methods

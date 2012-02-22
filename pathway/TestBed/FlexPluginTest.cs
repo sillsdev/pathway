@@ -752,8 +752,8 @@ namespace TestBed
 
         private void btnGetSoftwareData_Click(object sender, EventArgs e)
         {
-            //UserInformation userInformation = new UserInformation();
-            //userInformation.GetUserInformation();
+            UserInformation userInformation = new UserInformation();
+            userInformation.GetUserInformation();
         }
     }
 }

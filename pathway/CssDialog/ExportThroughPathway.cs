@@ -661,6 +661,13 @@ namespace SIL.PublishingSolution
             {
                 Directory.CreateDirectory(OutputFolder);
                 Directory.Delete(OutputFolder);
+
+                bool sendUsageData = false;
+                if (sendUsageData)
+                {
+                    UserInformation user = new UserInformation();
+                    user.GetUserInformation();
+                }
             }
             catch (Exception)
             {
