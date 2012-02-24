@@ -2389,7 +2389,14 @@ namespace SIL.PublishingSolution
                     _writer.WriteStartElement("draw:frame");
                     _writer.WriteAttributeString("draw:style-name", "fr11");
                     _writer.WriteAttributeString("draw:name", strFrameCount);
-                    _writer.WriteAttributeString("text:anchor-type", "page");
+                    if (_projInfo.DefaultRevCssFileWithPath != null && _projInfo.DefaultRevCssFileWithPath.Trim().Length > 0)
+                    {
+                        _writer.WriteAttributeString("text:anchor-type", "paragraph");
+                    }
+                    else
+                    {
+                        _writer.WriteAttributeString("text:anchor-type", "page");
+                    }
                     _writer.WriteAttributeString("svg:width", width);
                     _writer.WriteAttributeString("svg:height", height);
 

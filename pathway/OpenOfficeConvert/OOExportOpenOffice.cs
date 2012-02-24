@@ -706,11 +706,18 @@ namespace SIL.PublishingSolution
                 }
             }
 
+            string cssFile = projInfo.DefaultCssFileWithPath;
+            //var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(defaultXhtml);
+            //if(fileNameWithoutExtension != null && fileNameWithoutExtension.ToLower() == "flexrev")
+            //{
+            //    cssFile = projInfo.DefaultRevCssFileWithPath;
+            //}
+
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             preProcessor.GetTempFolderPath();
             preProcessor.GetfigureNode();
             preProcessor.GetDefaultLanguage(projInfo);
-            preProcessor.InsertKeepWithNextOnStyles(projInfo.DefaultCssFileWithPath);
+            preProcessor.InsertKeepWithNextOnStyles(cssFile);
             isMultiLanguageHeader = preProcessor.GetMultiLanguageHeader();
 
             //if (_isFromExe)
@@ -724,8 +731,8 @@ namespace SIL.PublishingSolution
 
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
-            cssTree.OutputType = Common.OutputType.ODT; 
-            cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
+            cssTree.OutputType = Common.OutputType.ODT;
+            cssClass = cssTree.CreateCssProperty(cssFile, true);
             int pageWidth = GetPictureWidth(cssClass);
             // BEGIN Generate Styles.Xml File
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
