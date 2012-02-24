@@ -350,6 +350,7 @@
     <Copy SourceFiles="@(Icons)" DestinationFiles="@(Icons->'Files\ConfigurationTool\Icons\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Graphic)" DestinationFiles="@(Graphic->'Files\ConfigurationTool\Graphic\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Loc)" DestinationFiles="@(Loc->'Files\ConfigurationTool\Loc\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Preprocessing)" DestinationFiles="@(Preprocessing->'Files\ConfigurationTool\Preprocessing\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(DicSamples)" DestinationFiles="@(DicSamples->'Files\ConfigurationTool\Samples\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(ScrSamples)" DestinationFiles="@(ScrSamples->'Files\ConfigurationTool\Samples\Scripture\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(MiscSupport)" DestinationFolder="Files\ConfigurationTool\" />
@@ -409,6 +410,7 @@
     <Icons Include="..\PsSupport\Icons\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Graphic Include="..\PsSupport\Graphic\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <Loc Include="..\PsSupport\Loc\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <Preprocessing Include="..\PsSupport\Preprocessing\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <DicSamples Include="..\PsSupport\Samples\Dictionary\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <ScrSamples Include="..\PsSupport\Samples\Scripture\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <MiscSupport Include="..\PsSupport\FileGuids.xml;..\PsSupport\GenericFont.xml" />
