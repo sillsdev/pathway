@@ -38,8 +38,7 @@ Sub StartDontForget
 	TurnOffNonPrintingCharacters() 
 	
 	AlingOverlappingImages()
-	
-	SetImageToCoverPage()
+
 	UpdateTOC()
 	
 	If CanSave Then
@@ -50,7 +49,8 @@ Sub StartDontForget
 	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; And Len(Trim(OutputFormat)) &gt; 0 Then
 		ExportToDOC_PDF
 	End IF
-
+	SetImageToCoverPage()
+	SetImageToCoverPage()
 End Sub
 
 &apos;Update the Table of Content
