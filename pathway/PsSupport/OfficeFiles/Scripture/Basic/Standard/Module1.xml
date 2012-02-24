@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Dec-02-2011 for TD-2784(OpenOffice - Table of Content (Create Macro for updating the TOC))
+&apos;Changed On Feb-24-2012 for TD-2858(OpenOffice: Align Cover Page Image to &quot;Anchor to Page&quot;)
 
 &apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -39,6 +39,7 @@ Sub StartDontForget
 	
 	AlingOverlappingImages()
 	
+	SetImageToCoverPage()
 	UpdateTOC()
 	
 	If CanSave Then
@@ -60,10 +61,27 @@ On Error GoTo MyError:
    oIndexes = oDoc.getDocumentIndexes() 
    oIndex = oIndexes.getByName(&quot;Table of Contents1&quot;) 
    oIndex.update() 
-   &apos;oDoc.store() 
 Exit Sub
 MyError:
 
+End Sub
+
+&apos;This procedure Update TOC
+Sub UpdateTOC1() 
+oIndexes = ThisComponent.getDocumentIndexes() 
+
+For n = 0 To oIndexes.Count - 1 
+   oIndexes.getByIndex(n).update() 
+Next n 
+
+End Sub
+
+&apos;This procedure align Cover page Image
+Sub SetImageToCoverPage
+	if ThisComponent.getDrawPage().GetCount &gt; 0 Then
+		oGraphic  = ThisComponent.getDrawPage().getByIndex(0)
+		oGraphic.AnchorType = com.sun.star.text.TextContentAnchorType.AT_PAGE
+	End If
 End Sub
 
 Function GetBookCodeName2()

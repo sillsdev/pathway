@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Oct-25-2011 for TD-2696(FlexRev.odt takes time to open)
+&apos;Changed On Feb-24-2012 for TD-2858(OpenOffice: Align Cover Page Image to &quot;Anchor to Page&quot;)
 
 &apos;Define the values to Constant Variables for First Guide word, Last Guide word ,Headword Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -24,12 +24,17 @@ Dim ProgressValue As Integer
 Dim PageCount as Integer
 Dim CanSave as Boolean
 
+
+
 Sub StartDontForget
 	TurnOffNonPrintingCharacters() 
 	
 	AlingOverlappingImages()
 	
 	HideODMVariable()
+	
+	SetImageToCoverPage()
+	UpdateTOC()
 	
 	If CanSave Then
 		oDoc = ThisComponent 
@@ -39,6 +44,38 @@ Sub StartDontForget
 	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; And Len(Trim(OutputFormat)) &gt; 0 Then
 		ExportToDOC_PDF
 	End IF
+End Sub
+
+
+&apos;Update the Table of Content
+Sub UpdateTOC
+On Error GoTo MyError:
+   oDoc = ThisComponent
+   oDoc.refresh() 
+   oIndexes = oDoc.getDocumentIndexes() 
+   oIndex = oIndexes.getByName(&quot;Table of Contents1&quot;) 
+   oIndex.update() 
+Exit Sub
+MyError:
+
+End Sub
+
+&apos;This procedure Update TOC
+Sub UpdateTOC1() 
+oIndexes = ThisComponent.getDocumentIndexes() 
+
+For n = 0 To oIndexes.Count - 1 
+   oIndexes.getByIndex(n).update() 
+Next n 
+
+End Sub
+
+&apos;This procedure align Cover page Image
+Sub SetImageToCoverPage
+	if ThisComponent.getDrawPage().GetCount &gt; 0 Then
+		oGraphic  = ThisComponent.getDrawPage().getByIndex(0)
+		oGraphic.AnchorType = com.sun.star.text.TextContentAnchorType.AT_PAGE
+	End If
 End Sub
 
 Sub HideODMVariable
