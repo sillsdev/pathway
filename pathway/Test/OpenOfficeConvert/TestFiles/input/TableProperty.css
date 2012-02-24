@@ -2,6 +2,7 @@
 table
 {
 font-weight: bold;
+border: 1px solid black;
 }
 
 td{
@@ -15,6 +16,7 @@ font-size: 20pt;
 .tdstyle
 {
 color: red;
+
 }
 
 .thstyle
