@@ -189,7 +189,7 @@ namespace SIL.PublishingSolution
 
         protected void StartElementBase(bool isHeadword)
         {
-            string[] divTypeList = new[] { "div", "ol", "ul", "li", "p", "body", "h1", "h2", "h3", "h4", "h5", "h6" };
+            string[] divTypeList = new[] { "div", "ol", "ul", "li", "p", "body", "h1", "h2", "h3", "h4", "h5", "h6", "table", "tr", "td", "th" };
             _divType = new List<string>(divTypeList);
 
             ClassInfo classInfo = new ClassInfo();
@@ -248,10 +248,10 @@ namespace SIL.PublishingSolution
                 _anchorBookMarkName = Common.RightString(_classNameWithLang, Common.SepTag);
                 _anchorStart = true;
             }
-            else if (_tagType == "table" || _tagType == "th" || _tagType == "tr" || _tagType == "td")
-            {
-                // need to handle styles
-            }
+            //else if (_tagType == "table" || _tagType == "th" || _tagType == "tr" || _tagType == "td")
+            //{
+            //    // need to handle styles
+            //}
             else
             {
                 if (_reader.Name == "title" || _reader.Name == "style") // skip the node

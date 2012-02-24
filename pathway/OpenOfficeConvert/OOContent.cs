@@ -1546,12 +1546,12 @@ namespace SIL.PublishingSolution
                 _table.Add("table:table-column|" + _childName);
                 _isTableOpen = true;
             }
-            else if (_tagType == "tr" || _tagType == "th")
+            else if (_tagType == "tr")
             {
                 _table.Add("table:table-row|" + _childName);
                 _tableColumnCount = 0;
             }
-            else if (_tagType == "td")
+            else if (_tagType == "td" || _tagType == "th")
             {
                 _table.Add("table:table-cell|" + _childName);
                 _tableColumnCount++;

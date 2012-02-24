@@ -312,6 +312,26 @@ namespace Test.OpenOfficeConvert
         }
 
         ///<summary>
+        ///TD-662 (Rudimentary table formatting)
+        /// <summary>
+        /// </summary>      
+        [Test]
+        public void TableProperty()
+        {
+            const string file = "TableProperty";
+            string input = FileInput(file + ".css");
+            string output = FileOutput(file + "styles.xml");
+            GetCssClass(input, output);
+
+            _validate = new ValidateXMLFile(output);
+            _validate.ClassName = "thstyle";
+            _validate.ClassProperty.Add("fo:color", "#0000ff");
+
+            returnValue = _validate.ValidateNodeAttributesNS(false);
+            Assert.IsTrue(returnValue, "Table property failed in Styles.xml");
+        }
+
+        ///<summary>
         ///TD42 font-style: normal; syntax in Styles.xml
         /// <summary>
         /// </summary>      
