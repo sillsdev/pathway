@@ -36,6 +36,7 @@ var isBorderBottomExists, borderClass,times="";
 var letterParagraphStyle, letterPushMargin=0, constantLetterParagraphStyle="letter_lethead_dicbody";
 var activePageNumber=0;
 var startEvent =0;
+var frontMatterItemCount = 0;
 //Delete Menu if it has been created already
 	try
 	{
@@ -160,7 +161,8 @@ function partialMacro()
 
 function main()
 {
-	
+//$.level = 1; 
+//debugger;
 
 /*	
 	startEvent=startEvent + 1;
@@ -252,12 +254,25 @@ function PlaceTOC()
 			myDocument.pages[0].remove();
 		  }
 		  myDocument.createTOC(myTOCStyle, true, undefined, [myX1, myY1]);
+		  Move();
 	}
 	catch(myError)
 	{
 		myDocument.createTOC(myTOCStyle, true, undefined, [myX1, myY1]);
+		Move();
 	}		
 }
+
+function Move()
+{
+	var myDocument = app.documents.item(0);
+	myPage = myDocument.pages.item(0);//stories
+	myStory = myPage.textFrames.item(0);
+    myDocument.pages.add(1650812527,myDocument.pages.item(frontMatterItemCount));//befo =1650812527, afte = 1634104421
+	//alert(myStory.contents)
+     MoveFrame(myStory, 3, frontMatterItemCount);
+	}
+
 
 function CreateTOCStyle()
 {
@@ -373,6 +388,55 @@ function ShowPicture()
 	}
 }		
 
+// Set full page height for Front Matter Frames
+function FrontMatter()
+{
+	var myFrames=new Array();
+	//var myDocument = app.documents.item(0);
+	var myDocument  = app.documents[app.documents.length-1]
+	myPage = myDocument.pages.item(0);
+	marginBottom =  myPage.marginPreferences.bottom;
+	marginTop = myPage.marginPreferences.top;
+	marginLeft = myPage.marginPreferences.left;
+	pageHeight = myDocument.documentPreferences.pageHeight - marginBottom;
+	pageWidth= myDocument.documentPreferences.pageWidth;
+	var paraStyleName="";
+	myPage = myDocument.pages.item(0);//stories
+	for(var myStoryCounter=myPage.textFrames.length-1; myStoryCounter >= 0; myStoryCounter--)
+	//for(var myStoryCounter=0; myStoryCounter <= myFrames.length-1;myStoryCounter++)
+	{
+		myStory = myPage.textFrames.item(myStoryCounter);//stories, 
+		//myStory.label  = "FM";
+		//alert( myStory.contents + "         " + myStory.paragraphs[0].appliedParagraphStyle.name.substring(0,5).toLowerCase());
+		//alert(myStory.contents);
+		//if(myStory.contents.length > 0)
+			//paraStyleName = myStory.paragraphs[0].appliedParagraphStyle.name.substring(0,5).toLowerCase();
+		try {
+			paraStyleName = myStory.paragraphs[0].appliedParagraphStyle.name.substring(0,5).toLowerCase();
+			}
+		catch(myError)
+		{
+			}			
+		if(paraStyleName == "cover" || paraStyleName == "title" || paraStyleName == "copyr")
+		{
+			myStory.label  = "FM";
+			frameBounds = myStory.geometricBounds;
+			//frameBounds[1]  = 3;
+			if(paraStyleName == "copyr")
+			{
+				//alert("coryr      " + pageWidth + "  left   " + marginLeft + "    start     " + frameBounds[1]);
+				myStory.geometricBounds=[marginTop,marginLeft, pageHeight ,pageWidth - marginLeft];//pageWidth - marginLeft
+				return;
+			}
+			else
+			{
+				//alert("cover,title      " + pageWidth + "  left   " + marginLeft + "    start     " + frameBounds[1]);
+				myStory.geometricBounds=[marginTop,marginLeft, pageHeight ,pageWidth - marginLeft];//pageWidth + marginLeft
+			}
+		}
+	}
+}
+
 //This method moves frame one by one to all pages
 function PlaceFrames()
 {
@@ -405,6 +469,9 @@ function PlaceFrames()
 
     DrawPictureCaption();
 	//return 0;
+	
+	FrontMatter();
+		
 	d1 = new Date();
 	times1=times1 + "\n" + d1;
 	
@@ -418,6 +485,17 @@ function PlaceFrames()
 	{
 		goNewPage = false;
 		myStory = myFrames[myStoryCounter];
+		
+		if(myStory.label == "FM")
+		{
+			frontMatterItemCount++;
+			MoveFrame(myStory, marginTop, curPageNo);
+			AddNewPage(curPageNo + 1);
+			curPageNo = curPageNo + 1;
+			currentMarginTop = marginTop;
+		}
+		else
+		{		
 		//alert(myStory.contents);
 		frameType = GetFrameType(myStory);
 		minHeight = GetMinHeight(frameType);
@@ -447,7 +525,7 @@ function PlaceFrames()
 		
 		frameBounds = myStory.geometricBounds;
 		currentMarginTop = currentMarginTop + (frameBounds[2] - frameBounds[0]);
-
+		}// for Front Matter
          //myStory.geometricBounds = [frameBounds[0], myPage.marginPreferences.left , frameBounds[2], pageWidth - myPage.marginPreferences.left]; //(pageWidth - marginLeft)
 	    /* if(myStory.overflows &&   (pageHeight - currentMarginTop) > 3)
 		 {
@@ -745,7 +823,7 @@ function ReArrange()
 {
 	var myPage, myStory, myPageLength,arrayIndex =activePageNumber,mystr,startIndex=0;
 	//myDocument.pages.add();	
-			
+	myDocument.pages[frontMatterItemCount].remove();		
 	for(var myPageCounter=activePageNumber; myPageCounter < myDocument.pages.length;myPageCounter++)
 	{
 		myPage = myDocument.pages.item(myPageCounter);//stories
@@ -1000,8 +1078,11 @@ function isEmptyPage(page)
 //This method makes grouping TextFrame with Lines all TextFrames
 function Grouping()
 {
+	try
+	{
 		var myStory, firstParagraphStyle;
 		var storyLength = myDocument.textFrames.length-1;	
+		//debugger;
 		for(; storyLength >= 0 ; storyLength--)
 		{
 			myStory = myDocument.textFrames[storyLength];
@@ -1025,6 +1106,11 @@ function Grouping()
 		    }
 
 		}
+	}
+	catch(myError)
+	{
+
+	}		
 }
 
 //This method deletes Lines after UnGrouping

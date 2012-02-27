@@ -31,11 +31,15 @@ var isBorderBottomExists, borderClass,times="";
 var letterParagraphStyle, letterPushMargin=0, constantLetterParagraphStyle="letter_lethead_dicbody";
 var activePageNumber=0;
 var startEvent =1;
+var frontMatterItemCount = 0;
 
 main();
 //var mystr = GetDocumentType();
 //alert(mystr);
 //alert(mystr.indexof("scrBook"))
+
+//This method returns Document Type (Dictionary or Scripture)
+
 
 //This method returns Document Type (Dictionary or Scripture)
 function GetDocumentType()
@@ -89,9 +93,11 @@ function partialMacro()
 	}
 }
 
+
 function main()
 {
-	
+//$.level = 1; 
+//debugger;
 
 /*	
 	startEvent=startEvent + 1;
@@ -109,22 +115,17 @@ function main()
 	d = new Date();
 	times=times + "\n" + d;
 	
-
 	times="\n" + times + "\nCheckBorder";
 	times=times + "\n" + d;
 	CheckBorder();
 	d = new Date();	
 	times=times + "\n" + d;
-	
 
-	
 	times="\n" + times + "\nUngrouping";
 	times=times + "\n" + d;
 	Ungrouping();
 	d = new Date();
 	times=times + "\n" + d;
-	
-
 /*
 	times="\n" + times + "\nMoveToFirstPage";
 	times=times + "\n" + d;
@@ -138,7 +139,7 @@ function main()
 	d = new Date();
 	times=times + "\n" + d;
 	
-
+	
 
 	times="\n" + times + "\nOptionals";
 	times=times + "\n" + d;
@@ -146,20 +147,16 @@ function main()
 	d = new Date();
 	times=times + "\n" + d;
 
-
-			
 	times="\n" + times + "\nGrouping";
 	times=times + "\n" + d;
 	Grouping();//Should be always as Last function
 	d = new Date();
 	times=times + "\n" + d;
-
-	TOC();		
+	TOC();
 	SaveDocument();
 
 
 	//alert(times);
-	alert("Finished");
 }
 
 function TOC()
@@ -192,12 +189,25 @@ function PlaceTOC()
 			myDocument.pages[0].remove();
 		  }
 		  myDocument.createTOC(myTOCStyle, true, undefined, [myX1, myY1]);
+		  Move();
 	}
 	catch(myError)
 	{
 		myDocument.createTOC(myTOCStyle, true, undefined, [myX1, myY1]);
+		Move();
 	}		
 }
+
+function Move()
+{
+	var myDocument = app.documents.item(0);
+	myPage = myDocument.pages.item(0);//stories
+	myStory = myPage.textFrames.item(0);
+    myDocument.pages.add(1650812527,myDocument.pages.item(frontMatterItemCount));//befo =1650812527, afte = 1634104421
+	//alert(myStory.contents)
+     MoveFrame(myStory, 3, frontMatterItemCount);
+	}
+
 
 function CreateTOCStyle()
 {
@@ -252,7 +262,7 @@ function SaveDocument()
 	try
 	{
 		if(myDocument.modified == true){
-			//myDocument.save(new File("/c/myTestDocument.indd"));
+			myDocument.save(new File("/c/myTestDocument.indd"));
 		}
 	}
 	catch(myError)
@@ -294,7 +304,6 @@ function Settings()
 function ShowPicture()
 {
 	var myStory,pageHeight;
-	alert("ShowPicture");
 	for(var myStoryCounter=activePageNumber; myStoryCounter <= myFrames.length-1;myStoryCounter++)
 	{
 			myStory = myFrames[myStoryCounter];
@@ -314,6 +323,55 @@ function ShowPicture()
 	}
 }		
 
+// Set full page height for Front Matter Frames
+function FrontMatter()
+{
+	var myFrames=new Array();
+	//var myDocument = app.documents.item(0);
+	var myDocument  = app.documents[app.documents.length-1]
+	myPage = myDocument.pages.item(0);
+	marginBottom =  myPage.marginPreferences.bottom;
+	marginTop = myPage.marginPreferences.top;
+	marginLeft = myPage.marginPreferences.left;
+	pageHeight = myDocument.documentPreferences.pageHeight - marginBottom;
+	pageWidth= myDocument.documentPreferences.pageWidth;
+	var paraStyleName="";
+	myPage = myDocument.pages.item(0);//stories
+	for(var myStoryCounter=myPage.textFrames.length-1; myStoryCounter >= 0; myStoryCounter--)
+	//for(var myStoryCounter=0; myStoryCounter <= myFrames.length-1;myStoryCounter++)
+	{
+		myStory = myPage.textFrames.item(myStoryCounter);//stories, 
+		//myStory.label  = "FM";
+		//alert( myStory.contents + "         " + myStory.paragraphs[0].appliedParagraphStyle.name.substring(0,5).toLowerCase());
+		//alert(myStory.contents);
+		//if(myStory.contents.length > 0)
+			//paraStyleName = myStory.paragraphs[0].appliedParagraphStyle.name.substring(0,5).toLowerCase();
+		try {
+			paraStyleName = myStory.paragraphs[0].appliedParagraphStyle.name.substring(0,5).toLowerCase();
+			}
+		catch(myError)
+		{
+			}			
+		if(paraStyleName == "cover" || paraStyleName == "title" || paraStyleName == "copyr")
+		{
+			myStory.label  = "FM";
+			frameBounds = myStory.geometricBounds;
+			//frameBounds[1]  = 3;
+			if(paraStyleName == "copyr")
+			{
+				//alert("coryr      " + pageWidth + "  left   " + marginLeft + "    start     " + frameBounds[1]);
+				myStory.geometricBounds=[marginTop,marginLeft, pageHeight ,pageWidth - marginLeft];//pageWidth - marginLeft
+				return;
+			}
+			else
+			{
+				//alert("cover,title      " + pageWidth + "  left   " + marginLeft + "    start     " + frameBounds[1]);
+				myStory.geometricBounds=[marginTop,marginLeft, pageHeight ,pageWidth - marginLeft];//pageWidth + marginLeft
+			}
+		}
+	}
+}
+
 //This method moves frame one by one to all pages
 function PlaceFrames()
 {
@@ -326,9 +384,6 @@ function PlaceFrames()
 	SetMasterPageForFirstPage();
 
 	DeleteEmptyPages();
-	
-
-	
 	//MoveToFirstPage();
 	var myStory, myPage, frameBounds,pageBounds, frameType, frameHeight, minHeight, firstParagraphStyle;// = myDocument.stories.item(0); 
      var prePageNo=1;
@@ -348,10 +403,10 @@ function PlaceFrames()
 	currentMarginTop = marginTop;
 
     DrawPictureCaption();
-	
-
-		
 	//return 0;
+	
+	FrontMatter();
+		
 	d1 = new Date();
 	times1=times1 + "\n" + d1;
 	
@@ -361,12 +416,21 @@ function PlaceFrames()
 
 	curPageNo = activePageNumber;	
     
-
 	for(var myStoryCounter=activePageNumber; myStoryCounter <= myFrames.length-1;myStoryCounter++)
 	{
-
 		goNewPage = false;
 		myStory = myFrames[myStoryCounter];
+		
+		if(myStory.label == "FM")
+		{
+			frontMatterItemCount++;
+			MoveFrame(myStory, marginTop, curPageNo);
+			AddNewPage(curPageNo + 1);
+			curPageNo = curPageNo + 1;
+			currentMarginTop = marginTop;
+		}
+		else
+		{		
 		//alert(myStory.contents);
 		frameType = GetFrameType(myStory);
 		minHeight = GetMinHeight(frameType);
@@ -396,7 +460,7 @@ function PlaceFrames()
 		
 		frameBounds = myStory.geometricBounds;
 		currentMarginTop = currentMarginTop + (frameBounds[2] - frameBounds[0]);
-
+		}// for Front Matter
          //myStory.geometricBounds = [frameBounds[0], myPage.marginPreferences.left , frameBounds[2], pageWidth - myPage.marginPreferences.left]; //(pageWidth - marginLeft)
 	    /* if(myStory.overflows &&   (pageHeight - currentMarginTop) > 3)
 		 {
@@ -510,7 +574,7 @@ function GetFirstParagraphStyle(myStory)
 		//elements = myStory.paragraphs[0].appliedParagraphStyle.name.toLowerCase().split("_");
 		//alert(elements[elements.length-1]);
 		//return elements[elements.length-1];
- 		return myStory.paragraphs[0].appliedParagraphStyle.name.toLowerCase();
+		return myStory.paragraphs[0].appliedParagraphStyle.name.toLowerCase();
 	}
 	catch(myError)
 	{
@@ -694,7 +758,7 @@ function ReArrange()
 {
 	var myPage, myStory, myPageLength,arrayIndex =activePageNumber,mystr,startIndex=0;
 	//myDocument.pages.add();	
-			
+	myDocument.pages[frontMatterItemCount].remove();		
 	for(var myPageCounter=activePageNumber; myPageCounter < myDocument.pages.length;myPageCounter++)
 	{
 		myPage = myDocument.pages.item(myPageCounter);//stories
@@ -860,7 +924,6 @@ function FitFrameToPage(myStory)
 			{
 				frameLeft = marginLeft;
 				frameWidth = pageWidth - marginRight;
-				
 			}
 		    else
 			{
@@ -911,61 +974,6 @@ function FitFrameToPage(myStory)
 	}	
 }
 
-//This method fit the Frame to it's content size (in Height)
-function FitFrameToPage100(myStory)
-{
-	try
-	{
-		var fitFrameBound, frameHeight, myStoryHeight, frameLeft, frameWidth;
-		fitFrameBound = myStory.geometricBounds; 
-		myStoryHeight = fitFrameBound[2] -  fitFrameBound[0];
-
-
-		if(myDocument.documentPreferences.facingPages)
-		{
-			if((curPageNo % 2) == 0 && curPageNo > 0)//For Right Page and Not First page
-			{
-				frameLeft = marginLeft + pageWidth;
-				frameWidth = (pageWidth * 2) - marginRight;
-			}
-			else if((curPageNo % 2) == 0 && curPageNo == 0)//For Right Page and First page
-			{
-				frameLeft = marginLeft;
-				frameWidth = pageWidth - marginRight;
-			}
-		    else
-			{
-				frameLeft = marginRight;//For Mirror Page Left is Right
-				frameWidth = pageWidth - marginLeft;
-			}
-		}
-		else
-		{
-				frameLeft = marginLeft;
-				frameWidth = pageWidth - marginRight;		
-		}
-		//if(myStoryHeight >= pageHeight  || fitFrameBound[2]  >= pageHeight)
-		if(fitFrameBound[2]  >= pageHeight)
-		{
-			frameHeight = pageHeight;
-		}	
-		else
-		{
-			 frameHeight = fitFrameBound[2];
-		}
-	    //alert("currentMarginTop " + currentMarginTop + " frameLeft " + frameLeft  + " frameHeight " + frameHeight   + " frameWidth " + frameWidth)
-		myStory.geometricBounds=[currentMarginTop,frameLeft , frameHeight ,frameWidth];
-		 if(!myStory.overflows && myStory.nextTextFrame == null)
-		{
-			//alert(myStory.contents);
-			BalancedColumns(myStory);
-		}
-	}
-	catch(myError)
-	{
-
-	}	
-}
 
 //Delete the empty pages
 function DeleteEmptyPages()
@@ -1005,6 +1013,8 @@ function isEmptyPage(page)
 //This method makes grouping TextFrame with Lines all TextFrames
 function Grouping()
 {
+	try
+	{
 		var myStory, firstParagraphStyle;
 		var storyLength = myDocument.textFrames.length-1;	
 		//debugger;
@@ -1031,13 +1041,18 @@ function Grouping()
 		    }
 
 		}
+	}
+	catch(myError)
+	{
+
+	}		
 }
 
 //This method deletes Lines after UnGrouping
 function DeleteLines()
 {
 		var myLine;
-		var LineLength = myDocument.graphicLines.length -1;	
+		var LineLength = myDocument.graphicLines.length -1;		
 		for(; LineLength >= 0 ; LineLength--)
 		{
 			myLine = myDocument.graphicLines[LineLength];
@@ -1073,12 +1088,12 @@ function Ungrouping()
 				//MoveToFirstPageAndCollectAllFrame();
 				//alert("Would you like to run the macro in case changes have been made that require the header to be updated?");
 				CollectAllFrame();
-				//debugger;
-				//ShowPicture();
+				ShowPicture();
 			}
 		}
 		catch(myError)
 		{
+			//alert("U");
 			//myLine.strokeWeight = "1pt";
 		}		
 
@@ -1252,7 +1267,6 @@ function DrawPictureCaption()
 	var pictures = myDocument.allGraphics;
 try
 {
-	//alert(pictures.length);
 	if(pictures.length > 0)
 	{
 		for(var count = 0; count < pictures.length; count++)
@@ -1261,8 +1275,7 @@ try
 			//alert(picture.parent.name);	
 			//if(picture.parent.name  > activePageNumber)
 			//{
-
-//debugger;
+				
 				if(picture.parent.allPageItems.length > 0)
 				{
 					caption = picture.parent.textFrames[0];
@@ -1271,21 +1284,17 @@ try
 					{
 						
 						gbPicture = picture.geometricBounds;
-						//gbPicture.geometricBounds = [gbPicture[2] , gbPicture[1], gbPicture[2] , gbPicture[3]+5];
-						//gbPicture = picture.geometricBounds;
 						gbContainer = picture.parent.geometricBounds;
 						 pictureHeight = gbPicture[2] - gbPicture[0];
-						 //debugger;
 						caption.geometricBounds = [gbPicture[2] + 0.1, gbPicture[1], gbPicture[2] + 1, gbPicture[3]];
 						FitSingleFrameToContent(caption);
-						
 						gbCaption = caption.geometricBounds;
 						captionHeight = gbCaption[2] - gbCaption[0];
 						parentHeight = (pictureHeight + captionHeight);// + 0.5;//captionHeightUnit
 						if(gbContainer[1]==gbContainer[3])
 						gbContainer[3] += 0.5;
 						//alert(gbContainer[0] + "\n" + gbContainer[1] + "\n" +  gbContainer[0] + parentHeight + "\n" +  gbContainer[3])
-						picture.parent.geometricBounds = [gbContainer[0], gbContainer[1], gbContainer[0] + parentHeight , gbCaption[3]];//gbContainer[3] +5
+						picture.parent.geometricBounds = [gbContainer[0], gbContainer[1], gbContainer[0] + parentHeight ,  gbCaption[3]];//gbContainer[3] +5
 					}
 				 }
 			//}
@@ -1307,8 +1316,6 @@ function FitSingleFrameToContent(myStory)
 		var fixedFrameBound, fitFrameBound;
 		fixedFrameBound = myStory.geometricBounds; 
 		//alert(myStory.contents)
-		//debugger;
-		//alert(fixedFrameBound[2] * 2);
 		for(unit=1;unit<=fixedFrameBound[2] * 2;unit++)
 		{
 			fitFrameBound = myStory.geometricBounds; 			
@@ -1442,4 +1449,60 @@ function GetLastParagraphLetter(myPage)
 	{
 		return "  ";
 	}
+}
+
+//This method fit the Frame to it's content size (in Height)
+function FitFrameToPage100(myStory)
+{
+	try
+	{
+		var fitFrameBound, frameHeight, myStoryHeight, frameLeft, frameWidth;
+		fitFrameBound = myStory.geometricBounds; 
+		myStoryHeight = fitFrameBound[2] -  fitFrameBound[0];
+
+
+		if(myDocument.documentPreferences.facingPages)
+		{
+			if((curPageNo % 2) == 0 && curPageNo > 0)//For Right Page and Not First page
+			{
+				frameLeft = marginLeft + pageWidth;
+				frameWidth = (pageWidth * 2) - marginRight;
+			}
+			else if((curPageNo % 2) == 0 && curPageNo == 0)//For Right Page and First page
+			{
+				frameLeft = marginLeft;
+				frameWidth = pageWidth - marginRight;
+			}
+		    else
+			{
+				frameLeft = marginRight;//For Mirror Page Left is Right
+				frameWidth = pageWidth - marginLeft;
+			}
+		}
+		else
+		{
+				frameLeft = marginLeft;
+				frameWidth = pageWidth - marginRight;		
+		}
+		//if(myStoryHeight >= pageHeight  || fitFrameBound[2]  >= pageHeight)
+		if(fitFrameBound[2]  >= pageHeight)
+		{
+			frameHeight = pageHeight;
+		}	
+		else
+		{
+			 frameHeight = fitFrameBound[2];
+		}
+	    //alert("currentMarginTop " + currentMarginTop + " frameLeft " + frameLeft  + " frameHeight " + frameHeight   + " frameWidth " + frameWidth)
+		myStory.geometricBounds=[currentMarginTop,frameLeft , frameHeight ,frameWidth];
+		 if(!myStory.overflows && myStory.nextTextFrame == null)
+		{
+			//alert(myStory.contents);
+			BalancedColumns(myStory);
+		}
+	}
+	catch(myError)
+	{
+
+	}	
 }

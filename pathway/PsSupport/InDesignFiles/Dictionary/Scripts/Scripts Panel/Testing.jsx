@@ -13,10 +13,14 @@ var letterParagraphStyle, letterPushMargin=0, constantLetterParagraphStyle="lett
 var activePageNumber=0;
 var startEvent =1;
 
- $.level = 1; 
+$.level = 1; 
+debugger;
+myDocument = app.documents.item(0);
+myDocument.pages.add(1634104421,myDocument.pages.item(2));
 
+//Move();
 //Work();
-TOC();
+//TOC();
   //TocNew();
 //toc();
 //Test();
@@ -25,8 +29,74 @@ TOC();
 //var mystr = GetDocumentType();
 //alert(mystr);
 //alert(mystr.indexof("scrBook"))
+//	var myDocument = app.activeDocument;
 
+function Move()
+{
+	
+	
+	myPage = myDocument.pages.item(0);//stories
+	myStory = myPage.textFrames.item(myPage.textFrames.length-1)
 
+	//alert(myStory.contents)
+     MoveFrame(myStory, 3, 3);
+	}
+
+//Move Frame to given position
+function MoveFrame(myStory, currentMarginTop, pageNo)
+{
+	//alert(currentMarginTop);
+	myPage = myDocument.pages.item(pageNo);
+	marginLeft = 3;//myPage.marginPreferences.left;
+	marginRight = 3;// myPage.marginPreferences.right;
+		
+	myStory.move(myDocument.pages[pageNo]);	
+	if(myDocument.documentPreferences.facingPages)
+	{
+		if((pageNo % 2) == 0 && pageNo > 0)//For Right Page and Not First page
+		{
+			//alert(pageWidth);
+			myStory.move([40, currentMarginTop]);
+		}
+		else
+		{
+			//alert(marginTop, pageHeight);
+			myStory.move([marginLeft, currentMarginTop]);
+		}
+	}
+	else
+	{
+		myStory.move([marginLeft, currentMarginTop]);
+	}
+		
+}
+
+function FrontMatter()
+{
+	//alert("hai");
+	var myFrames=new Array();
+	var myDocument = app.documents.item(0);
+	//var myDocument  = app.documents[app.documents.length-1]
+	myPage = myDocument.pages.item(0);
+	marginBottom =  myPage.marginPreferences.bottom;
+	marginTop = myPage.marginPreferences.top;
+	pageHeight = myDocument.documentPreferences.pageHeight - marginBottom;
+	var paraStyleName="";
+	myPage = myDocument.pages.item(0);//stories
+	for(var myStoryCounter=myPage.textFrames.length-1; myStoryCounter >= 0; myStoryCounter--)
+	//for(var myStoryCounter=0; myStoryCounter <= myFrames.length-1;myStoryCounter++)
+	{
+		myStory = myPage.textFrames.item(myStoryCounter);//stories, 
+		paraStyleName = myStory.paragraphs[0].appliedParagraphStyle.name.substring(0,5).toLowerCase();
+		if(paraStyleName == "cover" || paraStyleName == "title" || paraStyleName == "copyr")
+		{
+			frameBounds = myStory.geometricBounds;
+			myStory.geometricBounds=[marginTop,frameBounds[1] , pageHeight ,frameBounds[3]];
+			if(paraStyleName == "copyr")
+				return;
+		}
+	}
+}
 function TOC()
 {
 	try
@@ -111,7 +181,7 @@ function CreateTOCStyle()
 	//myTocStyle.tocStyleEntries.name = "TitleMain_1";
 	}
 
-function Work()
+function Work1()
 {
 	var myDocument = app.activeDocument;
 alert(myDocument.tocStyles[1].tocStyleEntries[0].formatStyle);
