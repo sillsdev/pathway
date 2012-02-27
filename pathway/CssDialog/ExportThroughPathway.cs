@@ -456,7 +456,7 @@ namespace SIL.PublishingSolution
         {
             // Front Matter tab
             // edb - temporary / remove as exports are implemented
-            if (!ddlLayout.Text.Contains("epub") && !ddlLayout.Text.Contains("OpenOffice/LibreOffice"))
+            if (!ddlLayout.Text.Contains("epub") && !ddlLayout.Text.Contains("OpenOffice/LibreOffice") && !ddlLayout.Text.Contains("InDesign") && !ddlLayout.Text.Contains("XeLaTex"))
             {
                 tabPage2.Enabled = false;
                 chkCoverImage.Enabled = false;
@@ -476,7 +476,7 @@ namespace SIL.PublishingSolution
             {
                 tabPage2.Enabled = true;
                 chkTitlePage.Enabled = true;
-                chkCoverImage.Enabled = (ddlLayout.Text.Contains("epub") || ddlLayout.Text.Contains("OpenOffice/LibreOffice"));
+                chkCoverImage.Enabled = (ddlLayout.Text.Contains("epub") || ddlLayout.Text.Contains("OpenOffice/LibreOffice") || ddlLayout.Text.Contains("InDesign") || ddlLayout.Text.Contains("XeLaTex"));
                 chkCoverImageTitle.Enabled = (chkCoverImage.Enabled && chkCoverImage.Checked);
                 btnCoverImage.Enabled = chkCoverImageTitle.Enabled;
                 imgCoverImage.Enabled = chkCoverImageTitle.Enabled;
@@ -490,24 +490,24 @@ namespace SIL.PublishingSolution
                 lnkChooseCopyright.Enabled = true;
             }
 
-            if (ddlLayout.Text.ToLower() == "xelatex")
-            {
-                tabPage2.Enabled = true;
-                chkCoverImage.Enabled = true;
-                chkCoverImageTitle.Enabled = true;
-                btnCoverImage.Enabled = true;
-                imgCoverImage.Enabled = true;
-                chkColophon.Enabled = true;
-                rdoCustomCopyright.Enabled = true;
-                rdoStandardCopyright.Enabled = true;
-                txtColophonFile.Enabled = true;
-                btnBrowseColophon.Enabled = true;
-                chkTitlePage.Enabled = true;
-                ddlCopyrightStatement.Enabled = true;
-                lnkChooseCopyright.Enabled = true;
-            }
-            
-            
+            //if (ddlLayout.Text.ToLower() == "xelatex")
+            //{
+            //    tabPage2.Enabled = true;
+            //    chkCoverImage.Enabled = true;
+            //    chkCoverImageTitle.Enabled = true;
+            //    btnCoverImage.Enabled = true;
+            //    imgCoverImage.Enabled = true;
+            //    chkColophon.Enabled = true;
+            //    rdoCustomCopyright.Enabled = true;
+            //    rdoStandardCopyright.Enabled = true;
+            //    txtColophonFile.Enabled = true;
+            //    btnBrowseColophon.Enabled = true;
+            //    chkTitlePage.Enabled = true;
+            //    ddlCopyrightStatement.Enabled = true;
+            //    lnkChooseCopyright.Enabled = true;
+            //}
+
+
 
             // Processing Options tab
             chkRunningHeader.Enabled = (FindMedia() == "paper");
