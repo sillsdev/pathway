@@ -1044,7 +1044,7 @@ namespace SIL.PublishingSolution
                 {
                     isColumnCount = int.Parse(IdAllClass[_classNameWithLang]["TextColumnCount"]) > 1;
                 }
-                if (isPageBreak || isColumnCount)
+                if (isPageBreak || isColumnCount || _classNameWithLang.ToLower() == "cover" || _classNameWithLang.ToLower() == "title" || _classNameWithLang.ToLower() == "copyright")
                 {
                     if (!isFileEmpty)
                     {
