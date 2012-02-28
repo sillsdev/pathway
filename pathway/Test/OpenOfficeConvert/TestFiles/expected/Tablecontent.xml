@@ -45,18 +45,18 @@
         <table:table-column table:style-name="table_t2_t1_body" table:number-columns-repeated="2" />
         <table:table-row table:style-name="tr_table_t2_t1_body">
           <table:table-cell table:style-name="td_tr_table_t2_t1_body">
-            <text:p text:style-name="t2_t1_body">row 1, cell 1</text:p>
+            <text:p text:style-name="td_tr_table_t2_t1_body">row 1, cell 1</text:p>
           </table:table-cell>
           <table:table-cell table:style-name="td_tr_table_t2_t1_body">
-            <text:p text:style-name="t2_t1_body">row 1, cell 2</text:p>
+            <text:p text:style-name="td_tr_table_t2_t1_body">row 1, cell 2</text:p>
           </table:table-cell>
         </table:table-row>
         <table:table-row table:style-name="tr_table_t2_t1_body">
           <table:table-cell table:style-name="td_tr_table_t2_t1_body">
-            <text:p text:style-name="t2_t1_body">row 2, cell 1</text:p>
+            <text:p text:style-name="td_tr_table_t2_t1_body">row 2, cell 1</text:p>
           </table:table-cell>
           <table:table-cell table:style-name="td_tr_table_t2_t1_body">
-            <text:p text:style-name="t2_t1_body">row 2, cell 2</text:p>
+            <text:p text:style-name="td_tr_table_t2_t1_body">row 2, cell 2</text:p>
           </table:table-cell>
         </table:table-row>
       </table:table>

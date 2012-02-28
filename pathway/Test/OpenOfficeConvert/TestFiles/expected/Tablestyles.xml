@@ -33,6 +33,9 @@
       <style:paragraph-properties fo:text-align="left" />
       <style:text-properties fo:color="#0000ff" />
     </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="table_t2_t1_body" style:family="paragraph" style:parent-style-name="t2_t1_body" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="tr_table_t2_t1_body" style:family="paragraph" style:parent-style-name="table_t2_t1_body" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="td_tr_table_t2_t1_body" style:family="paragraph" style:parent-style-name="tr_table_t2_t1_body" />
     <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="hide" style:family="paragraph" style:parent-style-name="Heading_20_9" style:class="text">
       <style:text-properties text:display="true" />
