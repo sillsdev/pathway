@@ -108,6 +108,9 @@ namespace SIL.PublishingSolution
                     case "page-break-before":
                         PageBreakBefore(property.Value);
                         break;
+                    case "page-break-after":
+                        PageBreakBefore(property.Value);
+                        break;
                     case "text-transform":
                         TextTransform(property.Value);
                         break;
@@ -383,6 +386,14 @@ namespace SIL.PublishingSolution
                 return;
             }
             _IDProperty["PageBreakBefore"] = propertyValue;
+        }
+        public void PageBreakAfter(string propertyValue)
+        {
+            if (propertyValue == string.Empty)
+            {
+                return;
+            }
+            _IDProperty["PageBreakAfter"] = propertyValue;
         }
         public void PaddingLeft(string propertyValue)
         {

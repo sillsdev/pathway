@@ -1040,11 +1040,15 @@ namespace SIL.PublishingSolution
                 {
                     isPageBreak = IdAllClass[_classNameWithLang]["PageBreakBefore"] == "always";
                 }
+                else if (IdAllClass[_classNameWithLang].ContainsKey("PageBreakAfter"))
+                {
+                    isPageBreak = IdAllClass[_classNameWithLang]["PageBreakAfter"] == "always";
+                }
                 if (IdAllClass[_classNameWithLang].ContainsKey("TextColumnCount"))
                 {
                     isColumnCount = int.Parse(IdAllClass[_classNameWithLang]["TextColumnCount"]) > 1;
                 }
-                if (isPageBreak || isColumnCount)// || _classNameWithLang.ToLower() == "cover" || _classNameWithLang.ToLower() == "title" || _classNameWithLang.ToLower() == "copyright")
+                if (isPageBreak || isColumnCount || _classNameWithLang.ToLower() == "cover" || _classNameWithLang.ToLower() == "title" || _classNameWithLang.ToLower() == "copyright")
                 {
                     if (!isFileEmpty)
                     {
