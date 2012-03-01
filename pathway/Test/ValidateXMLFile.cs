@@ -688,6 +688,20 @@ namespace Test
                 }
                 match = value == content;
             }
+            else
+            {
+                FileNameWithPath = Common.PathCombine(outputStory, "Story_2.xml"); 
+                node = Common.GetXmlNode(FileNameWithPath, XPath);
+                if (node != null)
+                {
+                    string value = string.Empty;
+                    if (node.HasChildNodes)
+                    {
+                        value = node.ChildNodes[0].InnerText;
+                    }
+                    match = value == content;
+                }
+            }
             ClassProperty.Clear();
             return match;
         }
