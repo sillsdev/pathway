@@ -13,11 +13,13 @@ var letterParagraphStyle, letterPushMargin=0, constantLetterParagraphStyle="lett
 var activePageNumber=0;
 var startEvent =1;
 
-$.level = 1; 
-debugger;
-myDocument = app.documents.item(0);
-myDocument.pages.add(1634104421,myDocument.pages.item(2));
+//$.level = 1; 
+//debugger;
 
+myDocument = app.documents.item(0);
+//myDocument.pages.add(1634104421,myDocument.pages.item(2));
+
+FrontMatter();
 //Move();
 //Work();
 //TOC();
@@ -33,14 +35,12 @@ myDocument.pages.add(1634104421,myDocument.pages.item(2));
 
 function Move()
 {
-	
-	
 	myPage = myDocument.pages.item(0);//stories
 	myStory = myPage.textFrames.item(myPage.textFrames.length-1)
 
 	//alert(myStory.contents)
      MoveFrame(myStory, 3, 3);
-	}
+}
 
 //Move Frame to given position
 function MoveFrame(myStory, currentMarginTop, pageNo)
@@ -71,32 +71,55 @@ function MoveFrame(myStory, currentMarginTop, pageNo)
 		
 }
 
+// Set full page height for Front Matter Frames
 function FrontMatter()
 {
-	//alert("hai");
 	var myFrames=new Array();
-	var myDocument = app.documents.item(0);
-	//var myDocument  = app.documents[app.documents.length-1]
+	//var myDocument = app.documents.item(0);
+	var myDocument  = app.documents[app.documents.length-1]
 	myPage = myDocument.pages.item(0);
 	marginBottom =  myPage.marginPreferences.bottom;
 	marginTop = myPage.marginPreferences.top;
+	marginLeft = myPage.marginPreferences.left;
 	pageHeight = myDocument.documentPreferences.pageHeight - marginBottom;
+	pageWidth= myDocument.documentPreferences.pageWidth;
 	var paraStyleName="";
 	myPage = myDocument.pages.item(0);//stories
 	for(var myStoryCounter=myPage.textFrames.length-1; myStoryCounter >= 0; myStoryCounter--)
 	//for(var myStoryCounter=0; myStoryCounter <= myFrames.length-1;myStoryCounter++)
 	{
 		myStory = myPage.textFrames.item(myStoryCounter);//stories, 
-		paraStyleName = myStory.paragraphs[0].appliedParagraphStyle.name.substring(0,5).toLowerCase();
+		//myStory.label  = "FM";
+		//alert( myStory.contents + "         " + myStory.paragraphs[0].appliedParagraphStyle.name.substring(0,5).toLowerCase());
+		//alert(myStory.contents);
+		//if(myStory.contents.length > 0)
+			//paraStyleName = myStory.paragraphs[0].appliedParagraphStyle.name.substring(0,5).toLowerCase();
+		try {
+			paraStyleName = myStory.paragraphs[0].appliedParagraphStyle.name.substring(0,5).toLowerCase();
+			}
+		catch(myError)
+		{
+			}			
 		if(paraStyleName == "cover" || paraStyleName == "title" || paraStyleName == "copyr")
 		{
+			myStory.label  = "FM";
 			frameBounds = myStory.geometricBounds;
-			myStory.geometricBounds=[marginTop,frameBounds[1] , pageHeight ,frameBounds[3]];
+			//frameBounds[1]  = 3;
 			if(paraStyleName == "copyr")
+			{
+				//alert("coryr      " + pageWidth + "  left   " + marginLeft + "    start     " + frameBounds[1]);
+				myStory.geometricBounds=[marginTop,marginLeft, pageHeight ,pageWidth - marginLeft];//pageWidth - marginLeft
 				return;
+			}
+			else
+			{
+				//alert("cover,title      " + pageWidth + "  left   " + marginLeft + "    start     " + frameBounds[1]);
+				myStory.geometricBounds=[marginTop,marginLeft, pageHeight ,pageWidth - marginLeft];//pageWidth + marginLeft
+			}
 		}
 	}
 }
+
 function TOC()
 {
 	try

@@ -37,6 +37,7 @@ var letterParagraphStyle, letterPushMargin=0, constantLetterParagraphStyle="lett
 var activePageNumber=0;
 var startEvent =0;
 var frontMatterItemCount = 0;
+var coverStory, titleStory, copyStory;
 //Delete Menu if it has been created already
 	try
 	{
@@ -169,8 +170,8 @@ function main()
 	if(startEvent>1) //for other than Startup Event
 		myDocument  = app.activeDocument;
 */
-	myDocument  = app.documents[app.documents.length-1]
-
+	myDocument  = app.documents[app.documents.length-1];
+	FrontMatter();
 			
 	var d = new Date();
 
@@ -391,7 +392,11 @@ function ShowPicture()
 // Set full page height for Front Matter Frames
 function FrontMatter()
 {
-	var myFrames=new Array();
+	
+//$.level = 1; 
+//debugger;
+
+	//var myFrames=new Array();
 	//var myDocument = app.documents.item(0);
 	var myDocument  = app.documents[app.documents.length-1]
 	myPage = myDocument.pages.item(0);
@@ -401,9 +406,12 @@ function FrontMatter()
 	pageHeight = myDocument.documentPreferences.pageHeight - marginBottom;
 	pageWidth= myDocument.documentPreferences.pageWidth;
 	var paraStyleName="";
-	myPage = myDocument.pages.item(0);//stories
-	for(var myStoryCounter=myPage.textFrames.length-1; myStoryCounter >= 0; myStoryCounter--)
-	//for(var myStoryCounter=0; myStoryCounter <= myFrames.length-1;myStoryCounter++)
+	//myPage = myDocument.pages.item(0);//stories
+	//alert(myPage.textFrames.length);
+		//for(var myStoryCounter=activePageNumber; myStoryCounter <= myFrames.length-1;myStoryCounter++)
+    
+	for(var myStoryCounter=myPage.textFrames.length-1; myStoryCounter >= 0; myStoryCounter--)		
+	//for(var myStoryCounter=0; myStoryCounter <= myPage.textFrames.length-1; myStoryCounter++)
 	{
 		myStory = myPage.textFrames.item(myStoryCounter);//stories, 
 		//myStory.label  = "FM";
@@ -411,19 +419,33 @@ function FrontMatter()
 		//alert(myStory.contents);
 		//if(myStory.contents.length > 0)
 			//paraStyleName = myStory.paragraphs[0].appliedParagraphStyle.name.substring(0,5).toLowerCase();
+			
 		try {
+			 //alert(myStory.cornerRadius + " " + myStory.paragraphs[0].appliedParagraphStyle.name);
 			paraStyleName = myStory.paragraphs[0].appliedParagraphStyle.name.substring(0,5).toLowerCase();
 			}
 		catch(myError)
 		{
 			}			
-		if(paraStyleName == "cover" || paraStyleName == "title" || paraStyleName == "copyr")
+		if((paraStyleName == "cover" || paraStyleName == "title" || paraStyleName == "copyr") )//&& myStory.cornerRadius == 1
 		{
-			myStory.label  = "FM";
+			frontMatterItemCount++;
+			//myStory.label  = "FM";
+			myStory.cornerRadius = 2;
+			//alert(myStory.index + "   " + myStory.id + "    " + myStory.contents);
 			frameBounds = myStory.geometricBounds;
 			//frameBounds[1]  = 3;
+			
+			//coverStory, titleStory, copyStory;
+			if(paraStyleName == "cover")
+				coverStory = myStory;
+				
+			if(paraStyleName == "title")
+				titleStory = myStory;				
+			
 			if(paraStyleName == "copyr")
 			{
+				copyStory = myStory;
 				//alert("coryr      " + pageWidth + "  left   " + marginLeft + "    start     " + frameBounds[1]);
 				myStory.geometricBounds=[marginTop,marginLeft, pageHeight ,pageWidth - marginLeft];//pageWidth - marginLeft
 				return;
@@ -470,7 +492,7 @@ function PlaceFrames()
     DrawPictureCaption();
 	//return 0;
 	
-	FrontMatter();
+	//FrontMatter();
 		
 	d1 = new Date();
 	times1=times1 + "\n" + d1;
@@ -481,18 +503,26 @@ function PlaceFrames()
 
 	curPageNo = activePageNumber;	
     
+	//$.level = 1; 
+//debugger;
+	
 	for(var myStoryCounter=activePageNumber; myStoryCounter <= myFrames.length-1;myStoryCounter++)
 	{
 		goNewPage = false;
 		myStory = myFrames[myStoryCounter];
-		
-		if(myStory.label == "FM")
+		//alert(myStory.cornerRadius + " " + myStory.contents);
+		//myStory.cornerRadius = 2;
+		if(myStory.cornerRadius== 2)
 		{
-			frontMatterItemCount++;
+			//alert(myStory.contents + " " + curPageNo);
+			
 			MoveFrame(myStory, marginTop, curPageNo);
-			AddNewPage(curPageNo + 1);
+			//if(myStoryCounter!=activePageNumber)
+				AddNewPage(curPageNo + 1);
 			curPageNo = curPageNo + 1;
 			currentMarginTop = marginTop;
+			//frontMatterItemCount++;
+			//alert(" currentMarginTop  " + currentMarginTop + "\n marginTop = " + marginTop);
 		}
 		else
 		{		
@@ -517,10 +547,12 @@ function PlaceFrames()
 			AddNewPage(curPageNo + 1);
 			curPageNo = curPageNo + 1;
 			currentMarginTop = marginTop;
+			//alert(" currentMarginTop  " + currentMarginTop + "\n marginTop = " + marginTop);
 		}	
 			
 		MoveFrame(myStory, currentMarginTop, curPageNo);
 
+		//alert(" currentMarginTop  " + currentMarginTop + "\n marginTop = " + marginTop);
 		FitFrameToPage(myStory);
 		
 		frameBounds = myStory.geometricBounds;
@@ -544,11 +576,13 @@ function PlaceFrames()
 			//myStory.geometricBounds = [frameBounds[0], myPage.marginPreferences.left , frameBounds[2], pageWidth - myPage.marginPreferences.left]; //(pageWidth - marginLeft)
 			
 		}
-
-		if(firstParagraphStyle == letterParagraphStyle)//"lethead_dicbody"
+		if(myStory.cornerRadius!= 2)
 		{
-			currentMarginTop += parseFloat(margin[3]);
-		}
+			if(firstParagraphStyle == letterParagraphStyle)//"lethead_dicbody"
+			{
+				currentMarginTop += parseFloat(margin[3]);
+			}
+	     }
 
 	}
 
@@ -823,7 +857,7 @@ function ReArrange()
 {
 	var myPage, myStory, myPageLength,arrayIndex =activePageNumber,mystr,startIndex=0;
 	//myDocument.pages.add();	
-	myDocument.pages[frontMatterItemCount].remove();		
+	//myDocument.pages[frontMatterItemCount].remove();		
 	for(var myPageCounter=activePageNumber; myPageCounter < myDocument.pages.length;myPageCounter++)
 	{
 		myPage = myDocument.pages.item(myPageCounter);//stories
@@ -832,8 +866,13 @@ function ReArrange()
 		for(var myStoryCounter=myPage.textFrames.length-1; myStoryCounter >= 0; myStoryCounter--)
 		{
 			myStory = myPage.textFrames.item(myStoryCounter);//stories, 
-			myStory.fit(FitOptions.frameToContent);
-		
+			if(myStory.cornerRadius == 1)
+				myStory.fit(FitOptions.frameToContent);
+		    else
+			{
+					//alert(myStory.contents + "   " + arrayIndex);
+					//myFrames[arrayIndex] = myStory;
+			}
 			myFrames[arrayIndex] = myStory;
 			//alert(myFrames.length + "\n" + myFrames[arrayIndex].contents);
 			arrayIndex = arrayIndex + 1;
@@ -844,7 +883,22 @@ function ReArrange()
 			//alert("yes");
 		}	
 	}
+	ReArrangeForFrontMatter();
 }
+
+function ReArrangeForFrontMatter()
+{
+	//$.level = 1; 
+//debugger;
+//alert(coverStory.contents + "   " + titleStory.contents + "    " + copyStory.contents);
+	if(frontMatterItemCount>0)
+	{
+		myFrames[0] = coverStory;
+		myFrames[1] = titleStory;
+		myFrames[2] = copyStory;
+	}
+}
+
 
 //This method Re-arranges index in Array
 function ResetIndex(startIndex,arrayIndex)
@@ -969,6 +1023,7 @@ function FitFrameToPage(myStory)
 {
 	try
 	{
+		//alert(myStory.contents);	
 		myPage = myDocument.pages.item(curPageNo);
 	
 		marginLeft = myPage.marginPreferences.left;
@@ -977,7 +1032,7 @@ function FitFrameToPage(myStory)
 		var fitFrameBound, frameHeight, myStoryHeight, frameLeft, frameWidth;
 		fitFrameBound = myStory.geometricBounds; 
 		myStoryHeight = fitFrameBound[2] -  fitFrameBound[0];
-
+//alert(myStory.contents);	
 		if(myDocument.documentPreferences.facingPages)
 		{
 			if((curPageNo % 2) == 0 && curPageNo > 0)//For Right Page and Not First page
@@ -1012,7 +1067,7 @@ function FitFrameToPage(myStory)
 		}*/
 	
 		
-		
+		//alert(myStory.contents);	
 		if( fitFrameBound[2] > pageHeight)
 			frameHeight = pageHeight;
 		else
@@ -1022,11 +1077,11 @@ function FitFrameToPage(myStory)
 			//alert(myStory.contents,frameHeight + "   " + myStoryHeight);
 			
 	    //alert("currentMarginTop " + currentMarginTop + " frameLeft " + frameLeft  + " frameHeight " + frameHeight   + " frameWidth " + frameWidth)
-						//alert("current Top " + currentMarginTop + "\nPageHeight " + pageHeight);
+		//alert("current Top " + currentMarginTop + "\nPageHeight " + pageHeight + "\ncurrent Left " + frameLeft + "\nPageWidth " + frameWidth);
 		myStory.geometricBounds=[currentMarginTop,frameLeft , frameHeight ,frameWidth];
 
 
-			
+		//alert(myStory.contents);	
 		 if(!myStory.overflows && myStory.nextTextFrame == null)
 		{
 			//alert(myStory.contents);
