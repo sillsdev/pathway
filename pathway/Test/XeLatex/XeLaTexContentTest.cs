@@ -247,7 +247,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontWeightBoldRegular()  // TD-2330()
@@ -258,7 +258,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void FontBoldItalicTest()  // TD-2188()
@@ -630,7 +630,17 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void LanguageTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "Lang";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void LetterspaceTest()
@@ -733,7 +743,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void ReplaceStringTest()
@@ -744,7 +754,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void VerticalAlignTest()
@@ -765,7 +775,7 @@ namespace Test.XeLatex
             FileCompare(file);
         }
 
-        [Ignore]
+        
         [Test]
         [Category("SkipOnTeamCity")]
         public void HashSymbolTest()
@@ -792,6 +802,7 @@ namespace Test.XeLatex
         [Category("SkipOnTeamCity")]
         public void VisibilityCensorPackageTest()
         {
+
             const string testFileName = "VisibilityPackage";
             var inputname = testFileName + ".tex";
             var xeLatexFullFile = FileOutput(inputname);

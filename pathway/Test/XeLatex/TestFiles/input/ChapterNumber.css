@@ -1,24 +1,3 @@
-@page {
-    -ps-positionchapternumbers-string: "Drop Capital";
-    -ps-IncludeVersenumber-string: "True";
-    -ps-IncludeVerseInHeaderReferences-string:"yes";
-    ps-NonConsecutiveReferenceSeparator-string:",";
-}
-
-.Alternate_Reading {
-    font-style: italic;
-    display: inline;
-    display: footnote;
-    display: prince-footnote;
-    position: footnote;
-    list-style-position: inside;
-}
-
-.Chapter_Head {
-    padding-top:21pt;
-    padding-bottom:21pt;
-}
-
 .Chapter_Number {
     font-weight: bolder;
     vertical-align: top;
@@ -29,127 +8,12 @@
     string-set: chapter content() ":";
 }
 
-.crossHYPHENReference::footnote-call {
-    font-style:Italic;
-}
-
-
-.Emphasis {
-    font-style: italic;	/* cascaded environment */
-    text-indent: 0pt;
-    margin-left: 0pt;
-}
-.Inscription {
-    font-weight: bold;	/* cascaded environment */
-    font-style: normal;	/* cascaded environment */
-    text-align: center;
-    text-indent: 0pt;
-    margin-left: 0pt;
-    padding-bottom: 0pt;
-    padding-top: 0pt;
-    margin-top: 12pt;
-    margin-bottom:6pt;
-}
-.Inscription_Paragraph {
-    text-indent: .2in;
-    margin-left: 0pt;
-}
-.Intro_List_Item1 {
-    text-indent: -18pt;
-    margin-left: 36pt;
-}
-.Intro_Paragraph {
-    text-indent: .2in;
-    margin-left: 0pt;
-}
-.Intro_Section_Head {
-    font-weight: bold;	/* cascaded environment */
-    font-style: normal;	/* cascaded environment */
-    text-align: left;
-    text-indent: 0pt;
-    margin-left: 0pt;
-    margin-top: 3pt;
-    margin-bottom: 3pt;
-}
-.REVERSE_SOLIDUSCitation_Line1, .Line1 {
-    text-align: left;
-    margin-left: 24pt;
-    text-indent: -12pt;
-    padding-left: 0pt;
-}
-.REVERSE_SOLIDUSCitation_Line2, .Line2 {
-    text-align: left;
-    margin-left: 24pt;
-    text-indent: -6pt;
-    padding-left: 0pt;
-}
-.REVERSE_SOLIDUSCitation_Line3, .Line3 {
-    text-align: left;
-    margin-left: 24pt;
-    text-indent: 0pt;
-    padding-left: 0pt;
-}
-.Note_CrossHYPHENReference_Paragraph {
-    text-indent: 0pt;
-    margin-left: 0pt;
-    display: inline;
-    display: footnote;
-    display: prince-footnote;
-    position: footnote;
-    list-style-position: inside;
-}
-.Note_CrossHYPHENReference_Paragraph::footnote-call {
-    color: purple;
-    content: attr(title);
-    vertical-align: super;
-    line-height: none;
-}
-.Note_CrossHYPHENReference_Paragraph::footnote-marker {
-    font-weight: bold;
-    content: string(chapter) string(verse) ' ';
-    /* content: string(footnoteMarker); font-size: 6pt; vertical-align: super; color: purple; */
-    text-align: left;
-}
-.Endnote_General_Paragraph,
-.Note_General_Paragraph {
-    text-indent: 0pt;
-    margin-left: 0pt;
-    display: inline;
-    display: footnote;
-    display: prince-footnote;
-    position: footnote;
-    list-style-position: inside;
-}
-.Endnote_General_Paragraph::footnote-call,
-.Note_General_Paragraph::footnote-call {
-    color: purple;
-    content: attr(title);
-    vertical-align: super;
-    vertical-align: top;
-    line-height: none;
-}
-/*.Note_General_Paragraph::footnote-marker {
-    font-weight: bold;
-    content: string(chapter) string(verse) ' ';
-    /* content: string(footnoteMarker); font-size: 6pt; vertical-align: super; color: purple;
-    text-align: left;
-} */
-.Note_Target_Reference::footnote-marker {
-    font-weight: bold;
-}
-.Endnote_General_Paragraph::footnote-call,
-.Note_General_Paragraph::footnote-call {
-    color: purple;
-    content: attr(title);
-    vertical-align: super;
-    vertical-align: top;
-    line-height: none;
-}
 .scrFootnoteMarker {
 }
 .Paragraph {
     text-indent: 12pt;
     margin-left: 0pt;
+	
 }
 .Paragraph_Continuation {
     text-indent: 0pt;
@@ -157,19 +21,6 @@
 }
 .Paragraph1 {
     margin-left: 0pt;
-}
-
-.parallel_passage_reference,  .Parallel_Passage_Reference {
-    font-style: italic;
-    text-align: center;
-    text-indent: 0pt;
-    margin-left: 0pt;
-    margin-top: 0pt;
-    margin-bottom: 3pt;
-}
-
-.rem {
-    display: none;
 }
 
 .scrBody {
@@ -393,13 +244,4 @@ span.reference :after {
 }
 .columns {
        column-rule: solid 1pt #808080;
-}
-/* First Page Bottom Center.css */
-@page :first {
-    @top-left      { content: ''; }
-    @top-center    { content: ''; }
-    @top-right     { content: ''; }
-    @bottom-left   { content: ''; }
-    @bottom-center { content: counter(page); }
-    @bottom-right  { content: ''; }
 }

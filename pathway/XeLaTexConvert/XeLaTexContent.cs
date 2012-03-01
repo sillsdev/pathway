@@ -286,10 +286,10 @@ namespace SIL.PublishingSolution
                 //    ListType[className] = IdAllClass[className][searchKey];
                 //}
             }
-
+            
             //if (Common.ColumnWidth == 0.0)
             //{
-            //    Common.ColumnWidth = _pageWidth;
+            //    Common.ColumnWidth = 148;
             //}
         }
 
@@ -905,7 +905,10 @@ namespace SIL.PublishingSolution
                 isImage = true;
                 inserted = true;
                 string[] cc = _allParagraph.ToArray();
-                imageClass = cc[1];
+                
+                if(cc.Length < 1)
+                    imageClass = cc[1];
+
                 srcFile = _imageSource.ToLower();
 
                 string fromPath = Common.GetPictureFromPath(srcFile, "", _inputPath);

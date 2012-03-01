@@ -1,6 +1,8 @@
 \documentclass{article} 
-\usepackage{mdframed,xcolor}
+\usepackage{multicol}
+\usepackage{changepage}
 \usepackage{float}
+\usepackage{grffile}
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{fontspec}
@@ -9,129 +11,46 @@
 
 \begin{document} 
 \thispagestyle{empty} 
-\font\FocusedMcbLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody="Charis SIL/B":color=000000 at 10pt
-\font\EmphasizedTextLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody="Charis SIL/I":color=000000 at 10pt
-\font\mcbLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody="Charis SIL/B":color=000000 at 10pt
-\font\spanLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\LexSensepublishRootSocioLinguisticsNotePubafterentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\LexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\xitemxitemexamplesbeforeexamplessensebsensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\spantranslationtranslationsxitemexamplessensebsensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\translationaftertranslationsxitemexamplessensebsensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\translationtranslationsxitemexamplessensebsensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\translationsxitemexamplessensebsensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\FocusedMcbexamplexitemexamplessensebsensesentryletDatadicBody="Charis SIL/B":color=000000 at 9pt
-\font\mcbexamplexitemexamplessensebsensesentryletDatadicBody="Charis SIL/B":color=000000 at 9pt
-\font\exampleafterxitemexamplessensebsensesentryletDatadicBody="Charis SIL/B":color=000000 at 9pt
-\font\examplebeforexitemexamplessensebsensesentryletDatadicBody="Charis SIL/B":color=000000 at 9pt
-\font\examplexitemexamplessensebsensesentryletDatadicBody="Charis SIL/B":color=000000 at 9pt
-\font\xitemexamplessensebsensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\EmphasizedTexttranslationtranslationsexamplessensesensesentryletDatadicBody="Charis SIL/I":color=000000 at 10pt
-\font\spantranslationtranslationsexamplessensesensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\translationaftertranslationsexamplessensesensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\translationtranslationsexamplessensesensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\translationsexamplessensesensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\FocusedMcbexampleexamplessensesensesentryletDatadicBody="Charis SIL/B":color=000000 at 9pt
-\font\mcbexampleexamplessensesensesentryletDatadicBody="Charis SIL/B":color=000000 at 9pt
-\font\exampleafterexamplessensesensesentryletDatadicBody="Charis SIL/B":color=000000 at 9pt
-\font\examplebeforeexamplessensesensesentryletDatadicBody="Charis SIL/B":color=000000 at 9pt
-\font\exampleexamplessensesensesentryletDatadicBody="Charis SIL/B":color=000000 at 9pt
-\font\examplesaftersensesensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\examplessensesensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\spandefinitionsensesensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\definitionaftersensesensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\definitionsensesensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\spanpartofspeechgrammaticalinfosensesensesentryletDatadicBody="Charis SIL/I":color=000000 at 10pt
-\font\partofspeechaftergrammaticalinfosensesensesentryletDatadicBody="Charis SIL/I":color=000000 at 10pt
-\font\partofspeechgrammaticalinfosensesensesentryletDatadicBody="Charis SIL/I":color=000000 at 10pt
-\font\grammaticalinfoaftersensesensesentryletDatadicBody="Charis SIL/I":color=000000 at 10pt
-\font\grammaticalinfosensesensesentryletDatadicBody="Charis SIL/I":color=000000 at 10pt
-\font\LexSensepublishRootFiniteFormaftersensesensesentryletDatadicBody="Charis SIL/B":color=000000 at 10pt
-\font\LexSensepublishRootFiniteFormbeforesensesensesentryletDatadicBody="Charis SIL/B":color=000000 at 10pt
-\font\LexSensepublishRootFiniteFormsensesensesentryletDatadicBody="Charis SIL/B":color=000000 at 10pt
-\font\xsensenumbersensebeforesensesensesentryletDatadicBody="Arial/B":color=000000 at 9pt
-\font\xsensenumbersensesensesentryletDatadicBody="Charis SIL/B":color=000000 at 9pt
-\font\sensesensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\EmphasizedTexttranslationtranslationsexamplessensebsensesentryletDatadicBody="Charis SIL/I":color=000000 at 10pt
-\font\spantranslationtranslationsexamplessensebsensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\translationaftertranslationsexamplessensebsensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\translationtranslationsexamplessensebsensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\translationsexamplessensebsensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\FocusedMcbexampleexamplessensebsensesentryletDatadicBody="Charis SIL/B":color=000000 at 9pt
-\font\mcbexampleexamplessensebsensesentryletDatadicBody="Charis SIL/B":color=000000 at 9pt
-\font\exampleafterexamplessensebsensesentryletDatadicBody="Charis SIL/B":color=000000 at 9pt
-\font\examplebeforeexamplessensebsensesentryletDatadicBody="Charis SIL/B":color=000000 at 9pt
-\font\exampleexamplessensebsensesentryletDatadicBody="Charis SIL/B":color=000000 at 9pt
-\font\examplesaftersensebsensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\examplessensebsensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\spandefinitionsensebsensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\definitionaftersensebsensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\definitionsensebsensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\spanpartofspeechgrammaticalinfosensebsensesentryletDatadicBody="Charis SIL/I":color=000000 at 10pt
-\font\partofspeechaftergrammaticalinfosensebsensesentryletDatadicBody="Charis SIL/I":color=000000 at 10pt
-\font\partofspeechgrammaticalinfosensebsensesentryletDatadicBody="Charis SIL/I":color=000000 at 10pt
-\font\grammaticalinfoaftersensebsensesentryletDatadicBody="Charis SIL/I":color=000000 at 10pt
-\font\grammaticalinfosensebsensesentryletDatadicBody="Charis SIL/I":color=000000 at 10pt
-\font\LexSensepublishRootFiniteFormaftersensebsensesentryletDatadicBody="Charis SIL/B":color=000000 at 10pt
-\font\LexSensepublishRootFiniteFormbeforesensebsensesentryletDatadicBody="Charis SIL/B":color=000000 at 10pt
-\font\LexSensepublishRootFiniteFormsensebsensesentryletDatadicBody="Charis SIL/B":color=000000 at 10pt
-\font\sensebsensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\sensesafterentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\sensesbeforeentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\sensesentryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\LexEntrypublishRootParaDialectVariantEntryentryletDatadicBody="Charis SIL/B":color=000000 at 10pt
-\font\headwordafterentryletDatadicBody="Charis SIL/B":color=000000 at 10pt
-\font\headwordentryletDatadicBody="Charis SIL/B":color=000000 at 10pt
-\font\entryletDatadicBody="Charis SIL":color=000000 at 10pt
-\font\letDatadicBody="Charis SIL":color=000000 at 10pt
-\font\lettersletterletHeaddicBody="Charis SIL/B":color=000000 at 14pt
-\font\letterletHeaddicBody="Charis SIL/B":color=000000 at 14pt
-\font\letHeaddicBody="Charis SIL":color=000000 at 14pt
-\font\xsensenumbersensebefore="Arial/B":color=000000 at 9pt
-\font\xitemxitemsensemainentryrefbefore="Charis SIL":color=000000 at 10pt
-\font\xitemxitemsensecrossrefbefore="Charis SIL":color=000000 at 9pt
-\font\xitemxitempronunciationminorbefore="Charis SIL":color=000000 at 10pt
-\font\xitemxitemmainentryrefminorbefore="Charis SIL":color=000000 at 10pt
-\font\xitemxitemmainentryrefbefore="Charis SIL":color=000000 at 10pt
-\font\xitemxitemheadwordminorbefore="Charis SIL":color=000000 at 10pt
-\font\xitemxitemcrossreftypebefore="Charis SIL":color=000000 at 10pt
-\font\xitemxitemcrossreftargetsbefore="Charis SIL":color=000000 at 10pt
-\font\xitemxitemcrossrefbefore="Charis SIL":color=000000 at 10pt
-\font\xitemtpi="Times New Roman" at 12pt
-\font\xitemxitemtranslationsubbefore="Charis SIL":color=000000 at 10pt
-\font\xitemxitemtranslationbefore="Charis SIL":color=000000 at 10pt
-\font\sensesensesubsensesbefore="Charis SIL":color=000000 at 10pt
-\font\sensesensesensessubbefore="Charis SIL":color=000000 at 10pt
-\font\sensesensesensesbefore="Charis SIL":color=000000 at 10pt
-\font\xitemxitempartofspeechbefore="Charis SIL":color=000000 at 10pt
-\font\xitemxitemLexSensepublishRootSocioLinguisticsNotePubbefore="Charis SIL":color=000000 at 12pt
-\font\xitemxitemheadwordsubbefore="Charis SIL/B":color=000000 at 10pt
-\font\xitemxitemheadwordbefore="Charis SIL/B":color=000000 at 10pt
-\font\xitemxitemexamplesubbefore="Charis SIL/B":color=000000 at 9pt
-\font\xitemxitemexamplessubbefore="Charis SIL":color=000000 at 12pt
-\font\xitemxitemexamplesbefore="Charis SIL":color=000000 at 12pt
-\font\xitemxitemexamplebefore="Charis SIL/B":color=000000 at 9pt
-\font\xitemxitemdefinitionsubbefore="Charis SIL":color=000000 at 10pt
-\font\xitemxitemdefinitionbefore="Charis SIL":color=000000 at 10pt
+\font\letternormalbolditalicunderlineletternormalbolditalicunderlineletHeaddicBody="Times New Roman/BI" at 24pt
+\font\letternormalbolditalicunderlineletHeaddicBody="Times New Roman/BI" at 24pt
+\font\letternormalunderlineletternormalunderlineletHeaddicBody="Times New Roman" at 24pt
+\font\letternormalunderlineletHeaddicBody="Times New Roman" at 24pt
+\font\letternormalbolditalicletternormalbolditalicletHeaddicBody="Times New Roman/BI" at 24pt
+\font\letternormalbolditalicletHeaddicBody="Times New Roman/BI" at 24pt
+\font\letternormalitalicletternormalitalicletHeaddicBody="Times New Roman/I" at 24pt
+\font\letternormalitalicletHeaddicBody="Times New Roman/I" at 24pt
+\font\letternormalboldletternormalboldletHeaddicBody="Times New Roman/B" at 24pt
+\font\letternormalboldletHeaddicBody="Times New Roman/B" at 24pt
+\font\letternormalletternormalletHeaddicBody="Times New Roman" at 24pt
+\font\letternormalletHeaddicBody="Times New Roman" at 24pt
+\font\letterbolditalicunderlineletterbolditalicunderlineletHeaddicBody="Times New Roman/BI" at 24pt
+\font\letterbolditalicunderlineletHeaddicBody="Times New Roman/BI" at 24pt
+\font\letterbolditalicletterbolditalicletHeaddicBody="Times New Roman/BI" at 24pt
+\font\letterbolditalicletHeaddicBody="Times New Roman/BI" at 24pt
+\font\letteritalicletteritalicletHeaddicBody="Times New Roman/I" at 24pt
+\font\letteritalicletHeaddicBody="Times New Roman/I" at 24pt
+\font\letterboldletterboldletHeaddicBody="Times New Roman/B" at 6.6pt
+\font\letterboldletHeaddicBody="Times New Roman/B" at 6.6pt
+\font\letHeaddicBody="Times New Roman" at 12pt
 
-\centerline{\topskip 18pt{\lettersletterletHeaddicBody{A a }}}
-\setlength{\columnsep}{12pt}\setlength\columnseprule{0.4pt}\begin{multicols}{2}
-\markboth{agantsi }{agantsi }\headwordentryletDatadicBody{agantsi }\headwordafterentryletDatadicBody{}\LexEntrypublishRootParaDialectVariantEntryentryletDatadicBody{oagantsi }\sensesbeforeentryletDatadicBody{}\LexSensepublishRootFiniteFormbeforesensebsensesentryletDatadicBody{{}\LexSensepublishRootFiniteFormsensebsensesentryletDatadicBody{yoakero }\LexSensepublishRootFiniteFormaftersensebsensesentryletDatadicBody{} }\spanpartofspeechgrammaticalinfosensebsensesentryletDatadicBody{vt. }\partofspeechaftergrammaticalinfosensebsensesentryletDatadicBody{}\grammaticalinfoaftersensebsensesentryletDatadicBody{}\spandefinitionsensebsensesentryletDatadicBody{mover. }\definitionaftersensebsensesentryletDatadicBody{}\examplebeforeexamplessensebsensesentryletDatadicBody{}\mcbexampleexamplessensebsensesentryletDatadicBody{Noatake inkenishiku noneapaakeri osheto tera inkakintyokite }\underbar{\FocusedMcbexampleexamplessensebsensesentryletDatadicBody{yoanakero }}\mcbexampleexamplessensebsensesentryletDatadicBody{inchatoshi ikantanakero shige shige shige. }\exampleafterexamplessensebsensesentryletDatadicBody{}\spantranslationtranslationsexamplessensebsensesentryletDatadicBody{Me fui al monte y vi a unos maquisapas que no eran ariscos, sino que seguían moviendo las ramas sacudiéndolas }\EmphasizedTexttranslationtranslationsexamplessensebsensesentryletDatadicBody{shige shige shige }\spantranslationtranslationsexamplessensebsensesentryletDatadicBody{. }\translationaftertranslationsexamplessensebsensesentryletDatadicBody{}\examplesaftersensebsensesentryletDatadicBody{}
+\letterboldletterboldletHeaddicBody{A a - Bold font size 55%}
 
-\xsensenumbersensebeforesensesensesentryletDatadicBody{|| }\LexSensepublishRootFiniteFormbeforesensesensesentryletDatadicBody{{}\LexSensepublishRootFiniteFormsensesensesentryletDatadicBody{yóaka }\LexSensepublishRootFiniteFormaftersensesensesentryletDatadicBody{} }\spanpartofspeechgrammaticalinfosensesensesentryletDatadicBody{vr. }\partofspeechaftergrammaticalinfosensesensesentryletDatadicBody{}\grammaticalinfoaftersensesensesentryletDatadicBody{}\spandefinitionsensesensesentryletDatadicBody{moverse. }\definitionaftersensesensesentryletDatadicBody{}\examplebeforeexamplessensesensesentryletDatadicBody{}\mcbexampleexamplessensesensesentryletDatadicBody{Ogatyo ikenake }\underbar{\FocusedMcbexampleexamplessensesensesentryletDatadicBody{yoanaka }}\mcbexampleexamplessensesensesentryletDatadicBody{otyomiani omotiaku. }\exampleafterexamplessensesensesentryletDatadicBody{}\spantranslationtranslationsexamplessensesensesentryletDatadicBody{Allí mismo el bebé ( }\EmphasizedTexttranslationtranslationsexamplessensesensesentryletDatadicBody{lit. }\spantranslationtranslationsexamplessensesensesentryletDatadicBody{su pequeño) se movió en su barriga. }\translationaftertranslationsexamplessensesensesentryletDatadicBody{}\examplesaftersensesensesentryletDatadicBody{}
-\sensesafterentryletDatadicBody{}
-\markboth{agantsi }{agantsi }\headwordentryletDatadicBody{áiño }\headwordafterentryletDatadicBody{}\sensesbeforeentryletDatadicBody{}\spanpartofspeechgrammaticalinfosensebsensesentryletDatadicBody{ve.an. }\partofspeechaftergrammaticalinfosensebsensesentryletDatadicBody{}\grammaticalinfoaftersensebsensesentryletDatadicBody{}\spandefinitionsensebsensesentryletDatadicBody{haber, existir, estar; estar vivo/a. }\definitionaftersensebsensesentryletDatadicBody{}
+\letteritalicletteritalicletHeaddicBody{A a - italic}
 
-\examplebeforexitemexamplessensebsensesentryletDatadicBody{}\mcbexamplexitemexamplessensebsensesentryletDatadicBody{¿Anta }\underbar{\FocusedMcbexamplexitemexamplessensebsensesentryletDatadicBody{aiño }}\mcbexamplexitemexamplessensebsensesentryletDatadicBody{tovaini matsigenka pitimira? }\exampleafterxitemexamplessensebsensesentryletDatadicBody{}\spantranslationtranslationsxitemexamplessensebsensesentryletDatadicBody{¿Hay mucha gente en tu tierra? }\translationaftertranslationsxitemexamplessensebsensesentryletDatadicBody{}
+\letterbolditalicletterbolditalicletHeaddicBody{A a - bold italic}
 
-\xitemxitemexamplesbeforeexamplessensebsensesentryletDatadicBody{}\examplebeforexitemexamplessensebsensesentryletDatadicBody{}\mcbexamplexitemexamplessensebsensesentryletDatadicBody{¿Yogari piri }\underbar{\FocusedMcbexamplexitemexamplessensebsensesentryletDatadicBody{aiño }}\mcbexamplexitemexamplessensebsensesentryletDatadicBody{? }\exampleafterxitemexamplessensebsensesentryletDatadicBody{}\spantranslationtranslationsxitemexamplessensebsensesentryletDatadicBody{¿Tu papá está?/¿Cómo está tu papá? }\translationaftertranslationsxitemexamplessensebsensesentryletDatadicBody{}
+\underbar{\letterbolditalicunderlineletterbolditalicunderlineletHeaddicBody{A a - bold italic underline}}
 
-\xitemxitemexamplesbeforeexamplessensebsensesentryletDatadicBody{}\examplebeforexitemexamplessensebsensesentryletDatadicBody{}\mcbexamplexitemexamplessensebsensesentryletDatadicBody{Chapi omechotake pirento onti opaniroanintake, paniro kamankitsi, yogari irapitene }\underbar{\FocusedMcbexamplexitemexamplessensebsensesentryletDatadicBody{aiño }}\mcbexamplexitemexamplessensebsensesentryletDatadicBody{. }\exampleafterxitemexamplessensebsensesentryletDatadicBody{}\spantranslationtranslationsxitemexamplessensebsensesentryletDatadicBody{Ayer dio a luz mi hermana y fueron mellizos: uno de ellos ha muerto; el otro está vivo. }\translationaftertranslationsxitemexamplessensebsensesentryletDatadicBody{}
-\examplesaftersensebsensesentryletDatadicBody{}\sensesafterentryletDatadicBody{}
-\leftskip 2pt{\parindent -8pt{\spanLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{• Cuando se usa }}}\mcbLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{aiño }\leftskip 2pt{\parindent -8pt{\spanLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{seguido por un sustantivo con prefijo posesivo de primera o segunda persona, es el equivalente de usar el verbo }}}\EmphasizedTextLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{tener }\leftskip 2pt{\parindent -8pt{\spanLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{. }}}\mcbLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{¿ }\underbar{\FocusedMcbLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{Aiño }}\mcbLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{pigitsokitsite? }\leftskip 2pt{\parindent -8pt{\spanLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{¿Tienes huevos?/¿Tienes un huevo ( }}}\EmphasizedTextLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{lit. }\leftskip 2pt{\parindent -8pt{\spanLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{hay tu huevo)? }}}\leftskip 2pt{\parindent -8pt{\LexSensepublishRootSocioLinguisticsNotePubafterentryletDatadicBody{}}}
+\letternormalletternormalletHeaddicBody{A a - Normal 24pt}
 
-\leftskip 2pt{\parindent -8pt{\spanLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{• }}}\mcbLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{¿Aiñovi? }\EmphasizedTextLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{¿Estás tú? }\leftskip 2pt{\parindent -8pt{\spanLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{es un saludo muy común de parte de una persona que llega a cierta casa o pueblo. (Algunos emplean la forma }}}\mcbLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{aiñompi }\leftskip 2pt{\parindent -8pt{\spanLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{.) La contestación es }}}\mcbLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{Aiñona. }\EmphasizedTextLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{Estoy. }\leftskip 2pt{\parindent -8pt{\LexSensepublishRootSocioLinguisticsNotePubafterentryletDatadicBody{}}}
+\letternormalboldletternormalboldletHeaddicBody{A a - Normal 24pt bold}
 
-\leftskip 2pt{\parindent -8pt{\spanLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{• Se agrega uno o más de los sufijos como }}}\mcbLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{-kya }\EmphasizedTextLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{todavía }\leftskip 2pt{\parindent -8pt{\spanLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{, }}}\mcbLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{-rika }\EmphasizedTextLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{indef. }\leftskip 2pt{\parindent -8pt{\spanLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{y }}}\mcbLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{-ra }\EmphasizedTextLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{subord. }\leftskip 2pt{\parindent -8pt{\spanLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{, para incluir estas ideas en el verbo mismo. }}}\mcbLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{Aiño }\underbar{\FocusedMcbLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{kya }}\mcbLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{na. }\leftskip 2pt{\parindent -8pt{\spanLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{Todavía estoy aquí./Todavía estoy bien. }}}\mcbLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{Aiño }\underbar{\FocusedMcbLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{kyanara }}\mcbLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{notimaveta aka, ikisavintsavageitakena. }\leftskip 2pt{\parindent -8pt{\spanLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{Cuando todavía vivía aquí, me aborrecían. }}}\mcbLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{Aiño }\underbar{\FocusedMcbLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{rikara }}\mcbLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{ogarikara ikañotaka. }\leftskip 2pt{\parindent -8pt{\spanLexSensepublishRootSocioLinguisticsNotePubentryletDatadicBody{Tal vez él haya sobrevivido y esté bien. }}}\leftskip 2pt{\parindent -8pt{\LexSensepublishRootSocioLinguisticsNotePubafterentryletDatadicBody{}}}
-\end{multicols}
+\letternormalitalicletternormalitalicletHeaddicBody{A a - Normal Italic}
+
+\letternormalbolditalicletternormalbolditalicletHeaddicBody{A a - Normal bold italic}
+
+\underbar{\letternormalunderlineletternormalunderlineletHeaddicBody{A a - Normal underline}}
+
+\underbar{\letternormalbolditalicunderlineletternormalbolditalicunderlineletHeaddicBody{A a - Normal bold italic underline}}
+
 \end{document}

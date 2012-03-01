@@ -1,0 +1,12 @@
+.entry {
+    color: rgb(0,0,255);
+}
+
+
+.xitem[lang='en'] {
+    font-size: 20pt;
+}
+
+.xitem[lang='pt'] {
+    font-size: 30pt;
+}
