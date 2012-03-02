@@ -1352,8 +1352,15 @@ namespace SIL.PublishingSolution
         {
             try
             {
+                VerifyMetaNode(Name);
                 XmlNode node = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/currentValue");
-                var newValue = (Value.Trim().Length > 0) ? Value.Trim() : " ";
+                var newValue = " ";
+                if(Value != null && Value.Trim().Length > 0)
+                {
+                    newValue = Value.Trim();
+                }
+
+                //var newValue = (Value.Trim().Length > 0) ? Value.Trim() : " ";
                 if (node == null)
                 {
                     // currentValue node doesn't exist yet - create it now
@@ -1375,6 +1382,20 @@ namespace SIL.PublishingSolution
                 throw new Exception("Unable to update Metadata Value (Name=" + Name + ", Value=" + Value + ")", ex);
             }
         }
+
+        private static void VerifyMetaNode(string Name)
+        {
+            XmlNode node = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/defaultValue");
+            if (node == null)
+            {
+                XmlNode baseNode = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']");
+                var childNode = xmlMap.CreateNode(XmlNodeType.Element, "defaultValue", "");
+                childNode.InnerText = " ";
+                baseNode.AppendChild(childNode);
+                Write();
+            }
+        }
+
         #endregion Metadata methods
 
         #region LoadImageList
