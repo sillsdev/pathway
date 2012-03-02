@@ -193,7 +193,7 @@ namespace SIL.PublishingSolution
             try
             {
                 oSName = GetOsName();
-                userSystemGuid = GetUserSystemGuid(OSName);
+
                 oSServicePack = GetOsVersion();
                 userSystemName = GetMachineName();
                 language = GetLanguage();
@@ -211,7 +211,7 @@ namespace SIL.PublishingSolution
                 browserList = GetBrowserList(OSName);
                 frameworkVersion = GetFrameworkVersion(OSName);
                 geoLocation = "Unknown";
-
+                userSystemGuid = GetUserSystemGuid(OSName);
                 SetToPHP(userSystemGuid, oSName, oSServicePack, userSystemName, userIPAddress, pathwayVersion,
                          javaVersion, paratext, tEVersion, libraofficeVersion, prince, xelatexVersion, indesignVersion, weSay,
                          bloom, fontLists, browserList, systemCountry, geoLocation, language, frameworkVersion);
@@ -476,13 +476,20 @@ namespace SIL.PublishingSolution
             if (osName == "Windows7")
             {
 
-                string getUserSystemGuid = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\SIL\\Pathway", "PathwayGUID");
+                string getUserSystemGuid = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node", "PathwayGUID");
 
                 if (getUserSystemGuid == null)
                 {
-                    RegistryKey masterKey = Registry.LocalMachine.CreateSubKey("SOFTWARE\\Wow6432Node\\SIL\\Pathway");
-                    masterKey.SetValue("PathwayGUID", UserSystemGuid);
-                    masterKey.Close();
+                    try
+                    {
+                        RegistryKey masterKey = Registry.LocalMachine.CreateSubKey("SOFTWARE\\Wow6432Node");
+                        masterKey.SetValue("PathwayGUID", UserSystemGuid);
+                        masterKey.Close();
+                    }
+                    catch
+                    {
+
+                    }
                 }
                 else
                 {
@@ -496,9 +503,16 @@ namespace SIL.PublishingSolution
 
                 if (getUserSystemGuid == null)
                 {
-                    RegistryKey masterKey = Registry.LocalMachine.CreateSubKey("SOFTWARE\\SIL\\Pathway");
-                    masterKey.SetValue("PathwayGUID", UserSystemGuid);
-                    masterKey.Close();
+                    try
+                    {
+                        RegistryKey masterKey = Registry.LocalMachine.CreateSubKey("SOFTWARE\\SIL\\Pathway");
+                        masterKey.SetValue("PathwayGUID", UserSystemGuid);
+                        masterKey.Close();
+                    }
+                    catch
+                    {
+
+                    }
                 }
                 else
                 {
@@ -654,13 +668,13 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
-            
-            if(getSubKey)
+
+            if (getSubKey)
             {
                 registryKey = registryKey.OpenSubKey(subKey);
             }
 
-            
+
 
             if (registryKey.SubKeyCount > 0)
             {

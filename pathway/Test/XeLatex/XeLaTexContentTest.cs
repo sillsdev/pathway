@@ -445,7 +445,17 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
-        
+
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void PictureCaptionTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "PictureWidth";
+            ExportProcess(file);
+            FileCompare(file);
+        }
+
         [Test]
         [Category("SkipOnTeamCity")]
         public void ImageBaseTest()

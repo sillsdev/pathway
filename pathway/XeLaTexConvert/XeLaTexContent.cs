@@ -968,6 +968,15 @@ namespace SIL.PublishingSolution
                     rectHeight = "72";
                 }
 
+                if (rectWidth.IndexOf("%") != -1)
+                {
+                    rectWidth = "72";
+                }
+
+                if (rectHeight.IndexOf("%") != -1)
+                {
+                    rectHeight = "72";
+                }
 
                 //if (rectHeight != "0")
                 //{
