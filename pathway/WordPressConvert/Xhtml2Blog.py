@@ -17,6 +17,10 @@ from lxml import etree
 
 modules ={}
 
+navTpl = '''<table style="border:medium none white;width:100%%;"><tr><td>%s</td><td style="text-align:right;">%s</td></tr></table>'''
+lfArrowTpl = '''<a href="?p=%d"><img src="%s/wp-content/icons/ArrowLeft.png" width="32" height="32" border="0" alt="&lt;&#x2014;" /></a>'''
+rtArrowTpl = '''<a href="?p=%d"><img src="%s/wp-content/icons/ArrowRight.png" width="32" height="32" border="0" alt="&#x2014;&gt;" /></a>'''
+
 def FixSpace(s):
     """Replace incorrectly converted spaces in string s"""
     return s.replace(u'\ufffd', '')
@@ -136,10 +140,10 @@ class TermTable:
         self.database = database
         self.prefix = prefix
         self.outpath = outpath
-        self.initn = 5
+        self.initn = 20
         self.n = self.initn
-        self.term = {'Uncategorized':1, 'Main':3, 'Language':4}
-        self.slug = {1:'uncategorized', 3:'main', 4:'language'}
+        self.term = {'Main':14, 'Language':15}
+        self.slug = {14:'main', 15:'language'}
         self.firsttoc = ''
         self.toc = []
         self.tocPageCount = []
@@ -301,7 +305,7 @@ class TermTable:
         self.EndQuery()
     def DelTermQuery(self):
         """Write query to delete previous wordpress terms"""
-        self.file.write('DELETE FROM `%s`.`%sterms` ;\n' % (self.database, self.prefix))
+        self.file.write('DELETE FROM `%s`.`%sterms` WHERE `%sterms`.`term_id` > 13;\n' % (self.database, self.prefix, self.prefix))
     def NewTermQuery(self):
         """Write beginning of query to insert new terms"""
         insql = "INSERT INTO `%sterms` (`term_id`, `name`, `slug`, `term_group`) VALUES\n" % self.prefix
@@ -309,7 +313,7 @@ class TermTable:
         self.cont = ''
     def DelRelQuery(self):
         """Write query to delete relationships of posts to term taxonomies"""
-        self.file.write('DELETE FROM `%s`.`%sterm_relationships` WHERE `%sterm_relationships`.`term_taxonomy_id` > 4;\n' % (self.database, self.prefix, self.prefix))
+        self.file.write('DELETE FROM `%s`.`%sterm_relationships` WHERE `%sterm_relationships`.`term_taxonomy_id` > 15;\n' % (self.database, self.prefix, self.prefix))
     def NewRelQuery(self):
         """Write beginning of query to insert new relationships of posts to term taxonomies"""
         insql = "INSERT INTO `%sterm_relationships` (`object_id`, `term_taxonomy_id`, `term_order`) VALUES\n" % self.prefix
@@ -317,7 +321,7 @@ class TermTable:
         self.cont = ''
     def DelTaxQuery(self):
         """Write query to delete term taxonomies"""
-        self.file.write('DELETE FROM `%s`.`%sterm_taxonomy` WHERE `%sterm_taxonomy`.`term_id` > 4;\n' % (self.database, self.prefix, self.prefix))
+        self.file.write('DELETE FROM `%s`.`%sterm_taxonomy` WHERE `%sterm_taxonomy`.`term_id` > 15;\n' % (self.database, self.prefix, self.prefix))
     def NewTaxQuery(self):
         """Write beginning of query to insert new term taxonomies"""
         insql = "INSERT INTO `%sterm_taxonomy` (`term_taxonomy_id`, `term_id`, `taxonomy`, `description`, `parent`, `count`) VALUES\n" % self.prefix
@@ -391,6 +395,7 @@ class Xhtml2Blog:
     
     Convert dictionary xhtml to a blog site
     
+    \t-a, --arrows\t\tadd toc and arrows to entries
     \t-e, --email=\t\temail address for response
     \t-m, --media-root=\turl to root of site
     \t-w, --wordpress\t\ttoggle whether wordpress sql input generated
@@ -402,7 +407,7 @@ class Xhtml2Blog:
     \t-d, --table-prefix=\ttable prefix (normally wp_)
     \t-i, --include-example=\tText which must be contained in example
     """
-    def __init__(self, xhtml, url, wordpress=True, site=False, folders=False, postIndex=85, taxonomyIndex=10, database='wordpress', prefix='wp_', includeExample=''):
+    def __init__(self, xhtml, url, wordpress=True, site=False, folders=False, arrows=False, postIndex=85, taxonomyIndex=10, database='wordpress', prefix='wp_', includeExample=''):
         self.namesinuse = {}
         root = etree.parse(xhtml)
         outpath = os.path.dirname(xhtml)
@@ -425,9 +430,11 @@ class Xhtml2Blog:
                 fullName = self.FindItem(thislanguage, './@content')
                 termTable.AddLanguage(slug, fullName)
             stemLanguage = ''
-            termTable.AddToc(self.FindAll(root, '//*[@class="def"]//text()'))
-            termTable.AddToc(self.FindAll(root, '//*[@class="headword"]/text()'))
+            if arrows:
+                termTable.AddToc(self.FindAll(root, '//*[@class="def"]//text()'))
+                termTable.AddToc(self.FindAll(root, '//*[@class="headword"]/text()'))
         for e in range(len(entries),0,-1):
+            nav = ''
             entry = entries[e-1]
             if includeExample != "" and not self.IsTextInNode(entry, includeExample):
                 continue
@@ -459,10 +466,20 @@ class Xhtml2Blog:
                 translation = self.FindItem(thisentry, '//*[@class="tran"]//text()')
                 if translation != '':
                     multiLingualSearch.Add(idx, definitionLanguage, multiLingualSearch.ExampleRelevance, translation)
-                
-                termTable.AddTocItem(idx, stem)
-                if citation != '':
-                    termTable.AddTocItem(idx, citation)
+
+                if arrows:
+                    termTable.AddTocItem(idx, stem)
+                    if e > 0:
+                        navlf = lfArrowTpl % (idx-1, url)
+                    else:
+                        navlf = ''
+                    if e < len(entries) -1:
+                        navrt = rtArrowTpl % (idx+1, url)
+                    else:
+                        navrt = ''
+                    nav = navTpl % (navlf, navrt)
+                    if citation != '':
+                        termTable.AddTocItem(idx, citation)
                 termTable.AddTerm(idx, partofspeech, partofspeech, -2)
                 cats = self.FindAll(thisentry, '//*[@class="semantic-domains"]/x:span/text()')
                 for cat in cats:
@@ -475,7 +492,7 @@ class Xhtml2Blog:
                     if linkIdx >= 0:
                         anchor.attrib['href'] = '?p=%d' % (linkIdx + postIndex)
             actualCount += 1
-            outdata = etree.tostring(thisentry).encode('utf-8').replace('&#65533;','')
+            outdata = nav + etree.tostring(thisentry).encode('utf-8').replace('&#65533;','')
             outname = self.UniqueName(self.SanitizeName(stem)) + ".htm"
             if wordpress:
                 postFile.Write(idx, outname, outdata, stem, citation)
@@ -551,10 +568,10 @@ def Usage():
     sys.exit(2)
 
 if __name__ == '__main__':
-    longopt = ['--wordpress', '--site', '--folders', '--url',
+    longopt = ['--wordpress', '--site', '--folders', '--arrows', '--url',
     '--post-index=', '--taxonomy-index=', '--database=', '--table-prefix=', '--include-example=']
     try:
-        optlist, args = getopt.getopt(sys.argv[1:], 'wsfu:t:p:n:d:i:', longopt)
+        optlist, args = getopt.getopt(sys.argv[1:], 'wsfau:t:p:n:d:i:', longopt)
     except getopt.GetoptError:
         Usage()
     xhtml = ''
@@ -563,14 +580,17 @@ if __name__ == '__main__':
     #xhtml = etree.parse('C:/Users/Trihus.DALLAS/Documents/Publications/Cherokee Sample Subentries/Dictionary/FieldworksStyles_2010-06-18_0339/main.xhtml')
     #xhtml = 'C:/Users/Trihus.DALLAS/Documents/Publications/Cherokee/Dictionary/FieldWorksStyles_2010-08-19_0251/main.xhtml'
     #xhtml = 'C:/Users/Trihus.DALLAS/Documents/Publications/Cherokee/Dictionary/FieldWorksStyles_2010-08-26_1117/main.xhtml'
-    url = 'http://www.cherokeenationfoundation.org/dictionary'
+    #url = 'http://www.cherokeenationfoundation.org/dictionary'
+    url = 'http://localhost/wordpress'
     wordpress = True
     site = False
     folders = False
+    arrows = False
     postIndex = 20
-    taxonomyIndex = 10
+    taxonomyIndex = 20
     #database = 'cnec-wp'
-    database = 'cherokee_wordpress'
+    #database = 'cherokee_wordpress'
+    database = 'wordpress'
     prefix = 'wp_'
     user = False
     includeExample = ''
@@ -581,6 +601,8 @@ if __name__ == '__main__':
             site = not site
         elif o in ("-f", "--folders"):
             folders = not folders
+        elif o in ("-a", "--arrows"):
+            arrows = not arrows
         elif o in ("-p", "--post-index"):
             postIndex = int(a)
         elif o in ("-t", "--taxonomy-index"):
@@ -593,10 +615,11 @@ if __name__ == '__main__':
             prefix = a
         elif o in ("-i", "--include-example"):
             includeExample = a
-    if len(args):
-        xhtml = args[0]
+    if not len(args):
+        Usage()
+    xhtml = args[0]
     if xhtml == '':
         Usage()
-    x = Xhtml2Blog(xhtml, url=url, wordpress=wordpress, site=site, folders=folders, 
+    x = Xhtml2Blog(xhtml, url=url, wordpress=wordpress, site=site, folders=folders, arrows=arrows,
     postIndex=postIndex, taxonomyIndex=taxonomyIndex,
     database=database, prefix=prefix, includeExample=includeExample)
