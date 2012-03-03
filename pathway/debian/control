@@ -1,0 +1,17 @@
+Source: pathway
+Section: Miscellaneous
+Priority: extra
+Maintainer: Greg Trihus <greg_trihus@sil.org>
+Build-Depends: debhelper (>= 7), autotools-dev
+Standards-Version: 3.8.3
+Homepage: http://pathway.sil.org
+
+Package: pathway
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, default-jre-headless, mono-runtime
+Recommends: openoffice.org-writer, prince, calibre, evince
+Description: Prepare language data (Fieldworks & Paratext) for publication
+ Pathway appears as a menu item in Fieldworks and Paratext. PathwayB also
+ allows it to run from the Terminal. It takes language data frequently
+ presented in XHTML & CSS format and converts it to one of several destin-
+ ations: LibreOffice (Open Office), E-Book (.epub), Pdf, etc.

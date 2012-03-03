@@ -4,7 +4,7 @@
  xsi:schemaLocation="http://nant.sf.net/release/0.91-alpha1/nant.xsd pathwayNant.xsd"
  name="Pathway"
  default="debug">
-    <property name="nant.settings.currentframework" value="net-3.5" />
+    <property name="nant.settings.currentframework" value="net-3.5" if="${platform::is-win32()}"/>
     <property name="Platform" value="x86"/>
     <property name="WixNs" value="http://schemas.microsoft.com/wix/2003/01/wi"/>
    

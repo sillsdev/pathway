@@ -1,0 +1,56 @@
+pathway (1.0.6.1928-1) unstable; urgency=high
+
+  * 1.0.6.1928 daily build
+    - Libre Office: TD-2841 Add Pre-process list
+    - Indesign and Xelatex: TD-2806: Try / catch is used for missing images
+    - Libre Office: TD-2758: Direction code for table: Create Table
+  * 1.0.6.1919 release
+    - Common TD-2826 Memory Error exporting to Pathway
+    - ConfigurationTool TD-2677 Crash, clicking on different "Stylesheet" while previewing another
+    - Epub TD-2791 code refracted - modified Filestream to XmlTextReader
+    - Epub TD-2834 Error message box is appear when click "OK" on "Font Copyright Warning" dialog box.
+    - Epub TD-2837 Links for chapters not created even when selected in Configuration tool.
+    - Epub TD-2844 Null Reference
+    - GoBible TD-2037 problem handling verses like \v 9-10 or \v9a \v9b
+    - LibreOffice TD-2758 <body> node style handled
+    - LibreOffice TD-2782 Root-basedump missing linked references, as seen by series of commas
+    - LibreOffice TD-2787 lexical relations not displayed.
+    - LibreOffice TD-2798 Page number is overlap on text line when macro running.
+    - LibreOffice TD-2806 Try / catch is used for missing images
+    - LibreOffice TD-2818 out of memory
+    - LibreOffice TD-2838 Extra line added above picture caption
+    - XeLaTeX TD-2830 Reversal Index
+  * 1.0.5.1894 release
+    - Bootstrap: Documentation on installing from USB
+    - Bootstrap: download latest sprint (1.0.4.1875) as stable and the testing version as the latest.
+    - Bootstrap: Install LibreOffice on Win7
+    - Bootstrap: fix XeLaTeX install (TD-2832)
+    - Bootstrap: remove unrecognized message errors (TD-2832)
+    - Bootstrap: updated LibreOffice version numbers. (TD-2833)
+    - Bootstrap: warn user that LibreOffice will take time to install (TD-2833)
+    - Epub: Launch viewer installed by bootstrap program
+    - InDesign: Create Table of Contents (TD-2828)
+    - OpenOffice: Right guideword height problem in Malayalam Script (TD-2825)
+    - OpenOffice: Memory Error exporting to Pathway (TD-2826)
+    - XeLaTeX: handle full path on picture (TD-2308)
+    - XeLaTeX: front matter - Copyright Page (TD-2829)
+
+  * 1.0.4.1875 release
+    - Bootstrap: Add installer icon
+    - Bootstrap: Fix BTE test to work for XP as well as Win7
+    - Bootstrap: use clean up and close up logic to remove temporary files and all windows. 
+    - InDesign: Empty footnotes (TD-2817)
+    - OpenOffice: guideword box (TD-2631)
+    - OpenOffice: Page number is overlap on text line when macro running. (TD-2798)
+    - OpenOffice: Read error when re-opening file (TD-2807)
+    - OpenOffice: Space between text and pictures (TD-2808)
+    - OpenOffice: Guideword box problem (TD-2815)
+    - OpenOffice: Header font (TD-2815)
+    - OpenOffice: Font problem of header (TD-2819)
+    - OpenOffice: Right guideword height problem in Malayalam Script (TD-2825)
+    - UI: French Locale: Crash in Configuration Tool when clicking on Properties tab (TD-2752)
+    - UI: Page Size is not get changed after clicking the preview button in Custom Style sheet-->Pathway (TD-2803)
+    - Xelatex: Export crash (TD-2820)
+
+ -- Greg Trihus <greg_trihus@sil.org>  Thu, 2 Feb 2012 14:24:26 -0600
+

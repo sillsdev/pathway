@@ -1,0 +1,102 @@
+publishingsolution for Debian
+-----------------------------
+
+ConfigurationTool is part of ﻿Pathway 1.0.4
+January 11, 2012 
+
+Prerequisites
+LibreOffice 3.4.4 or later is preferred (http://www.libreoffice.org/download/).
+In Libre Office, use Tools, Options, Security, Macro Security to set the security level to medium.
+In Libre Office, use Tools, Options, Languages and set CTL font support of you are in a region with right-to-left writing systems (use Asian if you need those writing systems). See help for more explanation.
+PDF reader (either Adobe http://get.adobe.com/reader/ or FoxIt http://www.foxitsoftware.com/downloads/index.php)
+The Java JDK (http://www.oracle.com/technetwork/java/javase/downloads) is required for some outputs (e-book validation for example).
+
+For your information
+Pathway is an export option in Fieldworks or ParaTExt on the File menu.
+Pathway is an experimental Feature in the FieldWorks Translation Editor. To enable it, go to the Tools ->Options ->Advanced and select Pathway Exports.
+
+Process Notes
+In Fieldworks, use Tools -> Configure Dictionary to set the fonts, sizes, styles, characters before and after fields, and field order. From the Lexicon view of the Lexicon, make sure the data is sorted by the headword field and that any filters have been applied so the data that appears in the dictionary view is actually the data you want to print.
+In the Translation Editor, use File: Properties: Name to set the name that appears in the book header or in the Go Bible book selection screen (It should not be so long that it won’t fit easily on one line of a cell phone.)
+The conversion allows the user to customize the process. It looks for a folder called ‘Process’ that is a sibling of where the exported file will be. In that folder it looks for a batch file called BeforePwConvert.bat. This file is passed the name of the file exported from Flex. The user can write a script to be executed on the file as long as the result remains valid XHTML, the conversion will process it.
+For InDesign, the program also looks for AfterPwConvert.bat in the same Process sibling folder. It will be executed after the program has generated all the xml files but before they are compressed into an IDML file. The AfterPwConvert can modify the xml files contained in the %tmp%\InDesign\Dictionary folder tree. When the batch file completes, these xml files will be compressed into the IDML file. The content is contained in %tmp%\InDesign\Dictionary\stories and the styles are contained in %tmp%\InDesign\Dictionary\Resources\styles.xml
+
+Work arounds
+It is possible to put the guide words into the header in multiple writing systems. Create a separate field with the headword and position it after the normal headword. Set the writing system so that it looks correct in the Language Explorer preview. Then after exporting, Press F11 and click on the second icon in the style dialog tool bar. This is the one that displays the list of character styles. Now click into the second headword and make. The style name for this headword will be highlighted in the style dialog. Right click on it and choose Modify. Then change the name so that it begins with “headword_”
+In Word, you can create a header using the StyleRef field code. StyleRef is covered in the Word help file.
+If the line spacing varies and you would like to lock it down, you can use the –ps-fixed-line-height property to specify the line height.
+If the embedded spans feature is selected, the snippet may need to be edited to change the language codes to those valid for your project.
+Try breaking long documents into pieces (by letters or every two letters). 
+We have provided a check box to allow the styles to be “hard coded” rather than using the style sheet. Generally this is undesirable but if Libre Office is crashing, checking this box may prevent the crash.
+When exporting to Pathway from Paratext, any introductory text that occurs before an introductory section heading marker (\is#) will be lost in the conversion process. To address this issue, place an introductory section heading marker (\is#) immediately after any major title lines. For example:
+\h Luke
+\toc1 The Gospel according to Luke
+\toc2 Luke
+\mt2 The Gospel
+\mt3 according to
+\mt1 LUKE
+\is Introduction
+\ip This is an introduction paragraph for \bk The Gospel according to LUKE\bk*.
+
+Known issues
+Fieldworks TE should be set to single column before export. Pathway will break into multiple columns.
+Fieldworks Flex filters don’t affect reversal section.
+Libre Office will not allow dashed borders
+Libre Office cannot balance double column text when footnotes are on the bottom of the page.
+Libre Office has a different list of styles for character styles and paragraph styles. Different kinds of syles (paragraph, character, page, section, etc.) are selected on the tool bar. Word puts all the styles in one list. 
+The ability to add extra space between words (the css word-spacing feature) does not exist in Libre Office.
+
+Recent Changes
+1/11/2012 Improve bootstrap with icon, epub, clean up, and version checks; Open Office/Libre Office: fix guide word box, page number overlap, spaces around pictures, header fonts; Configuration tool: Fix French locale crash, preview page size; InDesign: fix empty footnotes; XeLaTex: fix export crash
+12/22/2011 Add Bootstrap for installer, Open office: front matter, guide words, page numbers, Complex Text Layout and subentries, E-book: links, preview, InDesign: captions, XeLaTeX: tif images, Configuration Tool: units, sort destinations
+12/1/2011 Add tables, sanitize rights fields, enable PrinceXml export if Prince is installed. Fix bugs related to missing information, crashes related to locked files, spacing, display on Chrome, boxes in headers, page numbers, pictures, root based dictionary export, and writing system processing.
+11/17/2011 Fix style merging, adjust default copyrights, allow punctuation in organization name, fix out of memory error, fix user interface crashes, move settings folder to user's profile, add styles to reversal homograph and sense numbers, optimize gigantic E-Book conversion, Remove BOM from Go Bible, Use font name from Xhtml meta tag (especially for non-Latin cases)
+11/2/2011 Update command line interface to handle dictionary with reversal and accept input from USFM. Bug fixes related to stable release. Adjust spacing between words, fields and lines.
+10/21/2011 Bug fixes: Configuration tool, Epub, Libre Office, ParaTExt, crashing. 
+10/4/2011 Remember ConfigurationTool settings, Libre Office centered page numbers and corrected guidewords, Linux simulated install, Paratext USX format update, Webonary synonyms & homograph numbers, XeLaTeX padding, indenting, emphasized text, and make pictures appear.
+9/20/2011 Configuration Tool, Epub, Go Bible, Libre Office exports working on Linux (pre-alpha stage: we are still working out permissions and have no package installer), Localization and Semantic Domain linking added to Webonary, XeLaTeX install updated to also include Paratext Draft printer, Libre Office space before punctuation, and keep sub-entry with main entry, Unused destinations removed from Pathway
+8/23/2011 Libre office: guideword formatting, missing spaces, picture formatting, first page; Epub: separate notes; Go Bible: character formatting; Web: complex sub-entries, variant forms, custom fields, example sentences
+8/10/2011 Fix Words of Christ and interaction with BlueTooth wizard, Libre Office guide word bugs, Webonary Charis font and image conversion, XeLaTeX font: family, size, style, weight, super & subscript.
+7/26/2011 Epub: comma in verse #, reversal index, title page, table of contents, style sheets, Go Bible handle Scripture with pictures, adjust organization choices in SE version, add hard spaces, bug fixes, XeLaTeX on XP in trial version
+7/5/2011 use css for epubs, detect if Libre Office not installed, InDesign macro doesn’t affect PublishingAssistant documents, Webonary plug-in and sub-site completed, hard space after verse number
+6/21/2011 Libre Office to Libre Office, Guide Words in two languages, 15pt base font (esp. for non roman), E-pub punctuation, Keep-with-next on Scripture headers, YouVersion poetry, Update license, logo, help and E-pub validation
+6/8/2011 Add space to Go Bible spelling, update help, Add license, readme, help, and student manual to menu, add help button to ConfigurationTool, Add boiler plate SIL licenses and copyrights to Epub, Implement font fall back for Unicode code point ranges
+5/26/2011 replace PrintVia dialog with ExportToPathway dialog, update headers to user variables for dictionaries, update help files
+5/10/2011 add meta data to Libre Office, InDesign, Epub and Go Bible, update reports to use new web site, reset footnote callers at new book.
+4/12/2011 add parenthesis around picture caption, add ability to accept multiple books from Paratext export, update help files for new web site, YouVersion mobile offline format, adjust homograph number size, add page numbers in style sheet, bug fixes
+3/22/2011fix footnote refs, picture captions, verse # size, epub configuration items, macro headers, \b marker, minor entry bullets
+3/1/2011 fix InDesign & Libre Office footnote & Scripture header formatting. Add YouVersion output. Scale images and provide multi-level TOC in Epub. Update help files. Fix export of main & reversal together.
+2/15/2011 multiple level epub dictionaries, allow book codes in Scripture headers, fix columns in Paratext, cross references, reversal headers, some meta data label changes.
+2/3/2011 paper properties bug, abbreviations in scripture header, picture box, epub progress bar & memory uses, InDesign text placement and macro installation errors, reversal headers, change tool tip, footnote rule length, superscript font size, zero length files removed from installer, use left & right pages, import Paratext pictures
+1/19/2011 superscript verses, can run macros later, pictures in pdf, epub content going to browser, epub validation adeed, removed Word output (simple export from Libre Office is inadequate)
+1/5/2011 Gondwana data export and other bugs
+12/23/2010 Paratext convert includes pictures and styles, Epub embeds fonts, adds cover and splits large files, InDesign included for Scripture, Libre Office macro progress bar & bug fixes, fix send button
+12/1/2010 generate email for Logos output (w/Scripture only), Go Bible work with Paratext, progress bar while Libre Office macro runs, styles for Paratext output, enlarge footnote text, orient user to intellectual property issues, various bug fixes
+11/16/2010 allow page # at bottom of page, adjust tool tips, preview as tab in ConfigurationTool, handle Gondwana, create global ids for logos publications, add font support to epub, check for duplicate book names in Go Bible and fix icon, 
+11/3/2010 Fix book name disappearing, Set layouts based on backend choice, fix font size of first paragraph, fix irregular line spacing, Unhide document after macro even if error, fix resource permission error, turn off non-printing characters before pagination, fix lost styles, add footnotes to preview (page 2).
+10/20/2010 macro handle empty document, preview pages even for custom style sheets, remove extra spaces around punctuation and before entries with pictures, reversal margins corrected, edit style sheet in preview can only be activated once, style names can start with numbers, various bugs in Configuration Tool interface
+10/5/2010 style names reduced and simplified in Libre Office, Indic scripts work with Libre Office 3.3 beta, vertical divider line, bugs related to setting configuration parameters
+9/28/2010 Update installer for Win7 64-bit, fix bug causing re-opened file to be different, create corporate release build, use spelling dictionary from Flex, fix picture placement, fix validation error when both 6.0.4 & 7.0 versions installed, fix descender chopping, InDesign bug on Flex export fixed, 
+9/11/2010 update WordPress, Logos Libronix alpha, suspend auto save during macro, quote marks in before and after text, update application style description to include Paratext
+8/24/2010 Pdf for 64-bit, Spurious margin errors, Fw 6.0.4 & 6.9 version co=exist, InDesign header multiple writing systems, Macro bugs, Change term: Plug-in -> Utility, Spurious settings file error, styles before text.
+8/10/2010 column gap error adjusted, picture location corrected, macro speed up, simplify styles list, layout dialog help, other small bugs.
+7/17/2010 macro bug fix & improvements, page margin validation, Unique layout names, short cut keys & tab order, Hide Approved by for custom, text file compare for linux, Validate save path, Copy & Edit error fix, Remove maximize box & disable resize, add unicode-bidi, Update installer scripts, Paratext support, Link PrintVia to Configuration Tool, Handle multiple pictures float to top, Produce one document per book
+7/5/2010 cosmetic changes, copy style, check before rerunning macros, Go Bible bug fixes, Wordpress output alpha XeTeX handle rtl dictionaries, improve Go Bible performance, Improve Pathway - Flex compatiblity test, latest version of ANTLR, update documentation
+6/18/2010 output to Word and Pdf via Libre Office. Go Bible Properties. InDesign file saved. Split dictionary into files by letter. Format Reversal using Flex styles. Monolingual rtl for XeTeX. Verse styles
+6/4/2010 properties for Go Bible, Verse style bug, InDesign macro from current page forward, Start with shift down to reset, check version compatibility with Flex, remove InDesign macro on exit, simplify InDesign style namesInDesign major language hyphenation
+5/24/2010 Add Other category, PrintVia selection limits stylesheet options, InDesign footnotes, InDesign Picture Caption bug, migrate styleSettings.xml, fix picture path bug, XeTeX font support
+5/7/2010 Fix Pictures and Captions. Build for Fieldworks 6.0.4. Vertical justification, bug fixes
+4/27/2010 Add Go Bible backend
+4/23/2010 Page size & margins in InDesign, add extra processing to InDesign
+4/12/2010 Handle picture overlap, validate settings file, right to left style sheet, verse 1, chapter 0, preview button, homograph # in header, XeTeX output, updated help, add tutorial
+3/24/2010 fix decender cut-off by forcing background color to transparent
+3/19/2010 check for old settings, fix InDesign crash from FW, stablize
+3/12/2010 Pathway 0.5.5 improved UI
+3/5/2010 Pathway 0.5.4 improve display properties, add help
+2/26/2010 Pathway 0.5.3 refine style sheets, configuration tool ui fixes, fix macro for OO3.2 InDesign refs.
+2/19/2010 Pathway 0.5.2 update style sheets, retain column widths, fix SE buttons
+2/12/2010 Pathway 0.5.1 (version number lowered since it is a new user interface). Undo / redo.
+2/2/2010 Pathway 2.0 created from PublishingSolution 1.5.19
+
+
+ -- Greg Trihus <greg_trihus@sil.org>  Thu, 19 Jan 2012 15:32:24 -0600

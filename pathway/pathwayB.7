@@ -1,0 +1,107 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH PATHWAY 7 "January 30, 2012"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+pathway \- Prepare language data (Fieldworks & Paratext) for publication
+.SH SYNOPSIS
+.B ConfigurationTool
+.RI [ options ] " files" ...
+.br
+.B pathwayB
+.RI [ options ] " files" ...
+.SH DESCRIPTION
+.B Pathway
+appears as an export option in \fBFieldworks Language Explorer\fP, \fBFieldWorks Translation Editor\fP
+and \fBParatext\fP. \fBPathwayB\fP also allows it to run from the Terminal. It takes language data frequently
+presented in XHTML & CSS format and converts it to one of several destinations: LibreOffice (Open Office), 
+E-Book (.epub), Pdf, etc. The \fBConfigurationTool\fP allows the user to set the default options and style sheets
+for \fBPathway\fP.
+.PP
+.\" TeX users may be more comfortable with the \fB<whatever>\fP and
+.\" \fI<whatever>\fP escape sequences to invode bold face and italics,
+.\" respectively.
+.SH OPTIONS
+These programs follow the usual GNU command line syntax, with long
+options starting with two dashes (`-').
+A summary of options is included below.
+.TP
+.B \-i, \-\-input
+(required) type of content. Can be one of:
+.br
+.B Dictionary
+\t Dictionary content.
+.br
+.B Scripture
+\t Scripture content.
+.TP
+.B \-if, \-\-inputformat
+(required) content input format. Can be one of:
+.br
+.B usfm
+Unified Standard Format Marker content.
+.br
+.B usx
+USX content from Paratext 7.x.
+.br
+.B xhtml
+XHTML from FieldWorks (FLEX or TE).
+.br
+.B ptb
+Paratext bundle from Paratext 7.3.
+.TP
+.B \-d, \-\-directory
+(required) full path name to the content
+.TP
+.B \-f, \-\-files {<file>[, <file>] | *}
+(required) files to process, or * for all files in the directory specified by the -d flag
+.TP
+.B \-t, \-\-target <format>
+(required) desired output format. Can be one of:
+.br
+\fBE-Book (\.epub)\fP \.epub format.
+.br
+\fBGo Bible\fP Go Bible .jar format.
+.br
+\fBLogos Alpha\fP Libronix format.
+.br
+\fBPDF (using OpenOffice/LibreOffice)\fP \.pdf format.
+.br
+\fBPDF (using Prince)\fP \.pdf format.
+.br
+\fBInDesign\fP \.idml format.
+.br
+\fBOpenOffice/LibreOffice\fP \.odt format.
+.br
+\fBXeLaTex\fP \.tex format.
+.TP
+.B \-c, \-\-css
+style sheet file name (required for xhtml only)
+.TP
+.B \-s, \-\-showdialog
+Show the Export Through Pathway dialog, and take the values for the target format, style, etc. from the user's input on the dialog.
+.TP
+.B \-l, \-\-launch
+launch resulting output in target back end.
+.TP
+.B \-n, \-\-name
+[main] Project name
+.SH AUTHOR
+pathway was written by <greg_trihus@sil.org> (and others).
+.PP
+This manual page was written by Greg Trihus <greg_trihus@sil.org>,
+for the Debian project (and may be used by others).
+.br

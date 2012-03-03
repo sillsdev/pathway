@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <UsingTask TaskName="UpdateReadme" AssemblyFile="BuildTasks.dll" />
   <UsingTask TaskName="UpdateVersion" AssemblyFile="BuildTasks.dll" />
   <UsingTask TaskName="ZeroCheck" AssemblyFile="BuildTasks.dll" />
@@ -14,7 +14,6 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BuildPathway</RootNamespace>
     <AssemblyName>BuildPathway</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -235,6 +234,10 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Checking|AnyCPU'">
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <OutputPath>bin\Checking</OutputPath>
+    <DebugType>none</DebugType>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConfigurationTool\ConfigurationTool.csproj">
@@ -308,12 +311,12 @@
     <None Include="ReadMePw.rtf" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="BuildTasks, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="BuildTasks, Version=1.0.6.1920, Culture=neutral, PublicKeyToken=null">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\BuildTasks.dll</HintPath>
+      <HintPath>BuildTasks.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets. -->
   <Target Name="Build">
@@ -325,7 +328,7 @@
     <UpdateReadme Readme="$(ProjectDir)ReadMePw.rtf" License="$(ProjectDir)License.rtf" Template="$(ProjectDir)UserInterface-tpl.wxs" />
     <ZeroCheck />
     <FileComponents FilesTemplate="Files$(ConfTag)-tpl.wxs" FeaturesTemplate="Features$(ConfTag)-tpl.wxs" />
-    <Copy SourceFiles="@(WixSoftware)" DestinationFiles="@(WixSoftware->'Wix\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(WixSoftware)" DestinationFiles="@(WixSoftware-&gt;'Wix\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Exec Command="candle -nologo Features.wxs" WorkingDirectory="Wix" />
     <Exec Command="candle -nologo Install$(ConfTag)$(Edition).wxs " WorkingDirectory="Wix" />
     <Exec Command="candle -nologo UserInterface.wxs" WorkingDirectory="Wix" />
@@ -365,29 +368,28 @@
     <Copy SourceFiles="@(BteSettings)" DestinationFolder="Files\ConfigurationTool\" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(AllPreview)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(BtePreview)" DestinationFolder="Files\ConfigurationTool\" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles->'Files\ConfigurationTool\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="@(copyrightFiles->'Files\ConfigurationTool\Copyrights\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles->'Files\ConfigurationTool\epub\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'Files\ConfigurationTool\epubcheck-1.2\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles->'Files\ConfigurationTool\GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles->'Files\ConfigurationTool\InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(LiftFiles)" DestinationFiles="@(LiftFiles->'Files\ConfigurationTool\LiftSupport\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles-&gt;'Files\ConfigurationTool\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="@(copyrightFiles-&gt;'Files\ConfigurationTool\Copyrights\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles-&gt;'Files\ConfigurationTool\epub\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck-&gt;'Files\ConfigurationTool\epubcheck-1.2\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles-&gt;'Files\ConfigurationTool\GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles-&gt;'Files\ConfigurationTool\InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(LiftFiles)" DestinationFiles="@(LiftFiles-&gt;'Files\ConfigurationTool\LiftSupport\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(AllTransform)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(BteTransform)" DestinationFolder="Files\ConfigurationTool\" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(WordpressFiles)" DestinationFiles="@(WordpressFiles->'Files\ConfigurationTool\Wordpress\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
-    <Copy SourceFiles="@(XeTexExe)" DestinationFiles="@(XeTexExe->'Files\ConfigurationTool\xetexExe\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
-    <Copy SourceFiles="@(XetexFiles)" DestinationFiles="@(XetexFiles->'Files\ConfigurationTool\xetexPathway\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
+    <Copy SourceFiles="@(WordpressFiles)" DestinationFiles="@(WordpressFiles-&gt;'Files\ConfigurationTool\Wordpress\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
+    <Copy SourceFiles="@(XeTexExe)" DestinationFiles="@(XeTexExe-&gt;'Files\ConfigurationTool\xetexExe\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
+    <Copy SourceFiles="@(XetexFiles)" DestinationFiles="@(XetexFiles-&gt;'Files\ConfigurationTool\xetexPathway\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
   </Target>
   <Target Name="AfterBuild">
   </Target>
   <Target Name="Clean">
+    <Delete Files="@(AllFiles)" />
+    <!-- RemoveDir Directories="@(AllFileDirs)"/ -->
     <RemoveDir Directories="Files" />
-    <RemoveDir Directories="$(OutputPath)" />
+    <!-- RemoveDir Directories="$(OutputPath)" / -->
   </Target>
-  
   <ItemGroup>
-    <ConfigurationTool Include="..\ConfigurationTool\$(OutputPath)\*.*" />
-    <Plugin Include="..\PsExport\$(OutputPath)\*.*" />
     <GhostScript Include="..\ThirdParty\gsdll32.dll" />
     <EpubCheck Include="..\ThirdParty\epubcheck-1.2\**\*.*" Exclude="..\ThirdParty\**\.svn\**\*.*" />
     <Icu Include="..\LiftPrepare\Lib\PalasoLib\icudt40.dll;..\LiftPrepare\Lib\PalasoLib\icuin40.dll;..\LiftPrepare\Lib\PalasoLib\icuuc40.dll;" />
@@ -427,53 +429,81 @@
     <BteSettings Include="..\PsSupport\ScriptureStyleSettings.xml" />
     <AllPreview Include="..\PsSupport\DictionaryPreview.xhtml" />
     <BtePreview Include="..\PsSupport\ScripturePreview.xhtml" />
-    <OfficeFiles Include="..\PsSupport\OfficeFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <copyrightFiles Include="..\PsSupport\Copyrights\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <epubFiles Include="..\PsSupport\epub\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <AllBackend Include="..\epubValidator\$(OutputPath)\epubValidator.*" />
-    <GoBibleFiles Include="..\PsSupport\GoBible\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <InDesignFiles Include="..\PsSupport\InDesignFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <LiftFiles Include="..\PsSupport\LiftSupport\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <AllTransform Include="..\PsSupport\pxhtml2xpw-dict.xsl" />
     <AllTransform Include="..\PsSupport\punct_XHTML.xslt" />
     <AllTransform Include="..\PsSupport\TE_XHTML-to-epub_XHTML.xslt" />
-    <BteTransform Include="..\PsSupport\*.xslt" />
     <BteTransform Include="..\PsSupport\pxhtml2xpw-scr.xsl" />
-    <WordpressFiles Include="..\PsSupport\Icons\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <XeTexExe Include="..\XeTex\xetexExe\**\*.*" Exclude="..\XeTex\xetexExe\**\.svn\**\*.*" />
-    <XetexFiles Include="..\PsSupport\xetexPathway\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
-    <WixSoftware Include="WixSoftware\**\*.*" Exclude="WixSoftware\**\.svn\**\*.*" />
-    <UsfmConvert Include="..\ThirdParty\ParatextShared.dll;..\ThirdParty\NetLoc.dll" />
+    <AllFiles Include="Files\%2A%2A\%2A.%2A" />
+    <AllFileDirs Include="Files\%2A%2A" />
+    <ConfigurationTool Include="..\ConfigurationTool\%24%28OutputPath%29\%2A.%2A" />
+    <Plugin Include="..\PsExport\%24%28OutputPath%29\%2A.%2A" />
+    <EpubCheck Include="..\ThirdParty\epubcheck-1.2\%2A%2A\%2A.%2A" />
+    <Icu Include="..\LiftPrepare\lib\PalasoLib\icudt40.dll%3B..\LiftPrepare\Lib\PalasoLib\icuin40.dll%3B..\LiftPrepare\Lib\PalasoLib\icuuc40.dll%3B" />
+    <BatchProcess Include="..\PathwayB\%24%28OutputPath%29\PathwayB.%2A" />
+    <LiftPrepare Include="..\LiftPrepare\%24%28OutputPath%29\LiftPrepare.%2A" />
+    <ParatextSupport Include="..\ParatextSupport\%24%28OutputPath%29\ParatextSupport.%2A" />
+    <AllBackend Include="..\InDesignConvert\%24%28OutputPath%29\InDesignConvert.%2A" />
+    <AllBackend Include="..\epubConvert\%24%28OutputPath%29\epubConvert.%2A" />
+    <AllBackend Include="..\PdfConvert\%24%28OutputPath%29\PdfConvert.%2A" />
+    <TestBackend Include="..\OpenOfficeConvert_OLD\%24%28OutputPath%29\OpenOfficeConvert_OLD.%2A" />
+    <TestBackend Include="..\WordPressConvert\%24%28OutputPath%29\WordPressConvert.%2A" />
+    <TestBackend Include="..\XeTexConvert\%24%28OutputPath%29\XeTexConvert.%2A" />
+    <TestBackend Include="..\XeLaTexConvert\%24%28OutputPath%29\XeLaTexWriter.%2A" />
+    <TestBackend Include="..\XeTex\%24%28OutputPath%29\XeTexWriter.%2A" />
+    <BteBackend Include="..\GoBibleConvert\%24%28OutputPath%29\GoBibleConvert.%2A" />
+    <BteBackend Include="..\LogosConvert\%24%28OutputPath%29\LogosConvert.%2A" />
+    <DicStyles Include="..\PsSupport\Styles\Dictionary\%2A%2A\%2A.%2A" />
+    <ScrStyles Include="..\PsSupport\Styles\Scripture\%2A%2A\%2A.%2A" />
+    <Hyphenation Include="..\PsSupport\Hyphenation_Languages\%2A%2A\%2A.%2A" />
+    <Icons Include="..\PsSupport\Icons\%2A%2A\%2A.%2A" />
+    <Graphic Include="..\PsSupport\Graphic\%2A%2A\%2A.%2A" />
+    <Loc Include="..\PsSupport\Loc\%2A%2A\%2A.%2A" />
+    <DicSamples Include="..\PsSupport\Samples\Dictionary\%2A%2A\%2A.%2A" />
+    <ScrSamples Include="..\PsSupport\Samples\Scripture\%2A%2A\%2A.%2A" />
+    <MiscSupport Include="..\PsSupport\FileGuids.xml%3B..\PsSupport\GenericFont.xml" />
+    <OfficeFiles Include="..\PsSupport\OfficeFiles\%2A%2A\%2A.%2A" />
+    <copyrightFiles Include="..\PsSupport\Copyrights\%2A%2A\%2A.%2A" />
+    <epubFiles Include="..\PsSupport\epub\%2A%2A\%2A.%2A" />
+    <AllBackend Include="..\epubValidator\%24%28OutputPath%29\epubValidator.%2A" />
+    <GoBibleFiles Include="..\PsSupport\GoBible\%2A%2A\%2A.%2A" />
+    <InDesignFiles Include="..\PsSupport\InDesignFiles\%2A%2A\%2A.%2A" />
+    <LiftFiles Include="..\PsSupport\LiftSupport\%2A%2A\%2A.%2A" />
+    <BteTransform Include="..\PsSupport\%2A.xslt" />
+    <WordpressFiles Include="..\PsSupport\Icons\%2A%2A\%2A.%2A" />
+    <XeTexExe Include="..\XeTex\xetexExe\%2A%2A\%2A.%2A" />
+    <XetexFiles Include="..\PsSupport\xetexPathway\%2A%2A\%2A.%2A" />
+    <WixSoftware Include="WixSoftware\%2A%2A\%2A.%2A" />
+    <UsfmConvert Include="..\ThirdParty\ParatextShared.dll%3B..\ThirdParty\NetLoc.dll" />
   </ItemGroup>
   <Target Name="XeLaTexBeforeBuild">
-    <Copy SourceFiles="@(XeLaTexTexmf)" DestinationFiles="@(XeLaTexTexmf->'Files\pwtex\texmf\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(XeLaTexConfig)" DestinationFiles="@(XeLaTexConfig->'Files\pwtex\texmf-config\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(XeLaTexDist)" DestinationFiles="@(XeLaTexDist->'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(XeLaTexVar)" DestinationFiles="@(XeLaTexVar->'Files\pwtex\texmf-var\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(XeLaTexBin)" DestinationFiles="@(XeLaTexBin->'Files\pwtex\bin\win32\%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexTexmf)" DestinationFiles="@(XeLaTexTexmf-&gt;'Files\pwtex\texmf\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexConfig)" DestinationFiles="@(XeLaTexConfig-&gt;'Files\pwtex\texmf-config\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexDist)" DestinationFiles="@(XeLaTexDist-&gt;'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexVar)" DestinationFiles="@(XeLaTexVar-&gt;'Files\pwtex\texmf-var\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexBin)" DestinationFiles="@(XeLaTexBin-&gt;'Files\pwtex\bin\win32\%(Filename)%(Extension)')" />
     <MakeDir Directories="Files\pwtex\temp" />
     <Exec Command="echo This file is a place holder&gt;Files\pwtex\temp\readme.txt" />
     <Delete Files="@(XeLaTexCache)" />
-    <Copy SourceFiles="@(Paratexmf)" DestinationFiles="@(Paratexmf->'Files\pwtex\texmf\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Paratexmf)" DestinationFiles="@(Paratexmf-&gt;'Files\pwtex\texmf\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Exec Command="mktexlsr ..\..\texmf" WorkingDirectory="Files\pwtex\bin\win32" />
     <Exec Command="mktexlsr ..\..\texmf-var" WorkingDirectory="Files\pwtex\bin\win32" />
   </Target>
   <ItemGroup>
-    <XeLaTexExe Include="..\XeLaTexConvert\XeLaTexExe\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\**\.svn\**\*.*" />
-    <XeLaTexTexmf Include="..\XeLaTexConvert\XeLaTexExe\texmf\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\texmf\**\.svn\**\*.*" />
-    <XeLaTexConfig Include="..\XeLaTexConvert\XeLaTexExe\texmf-config\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\texmf-config\**\.svn\**\*.*" />
-    <XeLaTexDist Include="..\XeLaTexConvert\XeLaTexExe\texmf-dist\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\texmf-dist\**\.svn\**\*.*" />
-    <XeLaTexVar Include="..\XeLaTexConvert\XeLaTexExe\texmf-var\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\texmf-var\**\.svn\**\*.*" />
-    <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-cache.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-cat.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-list.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-match.exe" />
-    <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\icudt*.dll" />
-    <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\kpathsea*.dll" />
     <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\mktexlsr.exe" />
     <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\teckit_compile.exe" />
-    <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\tex.dll;..\XeLaTexConvert\XeLaTexExe\bin\win32\tex.exe" />
     <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\xdvipdfmx.exe" />
-    <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\xetex.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\xelatex.exe" />
-    <XeLaTexCache Include="..\XeLaTexConvert\XeLaTexExe\texmf-var\fonts\cache\*.cache-3" />
-    <Paratexmf Include="..\XeLaTexConvert\Paratexmf\**\*.*" Exclude="..\XeLaTexConvert\Paratexmf\**\.svn\**\**" />
+    <XeLaTexExe Include="..\XeLaTexConvert\XeLaTexExe\%2A%2A\%2A.%2A" />
+    <XeLaTexTexmf Include="..\XeLaTexConvert\XeLaTexExe\texmf\%2A%2A\%2A.%2A" />
+    <XeLaTexConfig Include="..\XeLaTexConvert\XeLaTexExe\texmf-config\%2A%2A\%2A.%2A" />
+    <XeLaTexDist Include="..\XeLaTexConvert\XeLaTexExe\texmf-dist\%2A%2A\%2A.%2A" />
+    <XeLaTexVar Include="..\XeLaTexConvert\XeLaTexExe\texmf-var\%2A%2A\%2A.%2A" />
+    <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-cache.exe%3B..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-cat.exe%3B..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-list.exe%3B..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-match.exe" />
+    <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\icudt%2A.dll" />
+    <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\kpathsea%2A.dll" />
+    <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\tex.dll%3B..\XeLaTexConvert\XeLaTexExe\bin\win32\tex.exe" />
+    <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\xetex.exe%3B..\XeLaTexConvert\XeLaTexExe\bin\win32\xelatex.exe" />
+    <XeLaTexCache Include="..\XeLaTexConvert\XeLaTexExe\texmf-var\fonts\cache\%2A.cache-3" />
+    <Paratexmf Include="..\XeLaTexConvert\Paratexmf\%2A%2A\%2A.%2A" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

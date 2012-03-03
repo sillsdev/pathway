@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,7 +10,6 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Test</RootNamespace>
     <AssemblyName>Test</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -535,7 +534,6 @@
     <None Include="PsTool\TestFiles\Expected\ImagePreProcess.xhtml" />
     <None Include="PsTool\TestFiles\Expected\Language.xhtml" />
     <None Include="PsTool\TestFiles\Expected\ParaChapBorder.xhtml" />
-    <None Include="PsTool\TestFiles\InputFiles\DefaultCSS.xhtml" />
     <None Include="PsTool\TestFiles\InputFiles\Dictionary1.de" />
     <None Include="PsTool\TestFiles\InputFiles\FileInsert.xhtml" />
     <None Include="PsTool\TestFiles\InputFiles\FlexRev" />
@@ -554,6 +552,7 @@
     <None Include="PsTool\TestFiles\output\ParaChapBorder.xhtml" />
     <None Include="PsTool\TestFiles\output\Preview.xhtml" />
     <None Include="PsTool\TestFiles\output\test.xhtml" />
+    <None Include="PsTool\TestFiles\InputFiles\DefaultCss.xhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="OpenOfficeConvert\TestFiles\expected\AncestorChildTestContent.xml" />
@@ -824,7 +823,6 @@
     <Content Include="OpenOfficeConvert\TestFiles\input\Pictures\2.jpg" />
     <Content Include="OpenOfficeConvert\TestFiles\input\Pictures\Ax1.jpg" />
     <Content Include="OpenOfficeConvert\TestFiles\input\Pictures\Flea1.jpg" />
-    <Content Include="OpenOfficeConvert\TestFiles\input\Pictures\LeftIndexMacro1.jpg" />
     <Content Include="OpenOfficeConvert\TestFiles\input\Pictures\lion.tif" />
     <Content Include="OpenOfficeConvert\TestFiles\input\Pictures\Thomsons-gazelle1.jpg" />
     <Content Include="OpenOfficeConvert\TestFiles\input\PictureWidth.css" />
@@ -964,6 +962,7 @@
     <Content Include="PsTool\TestFiles\output\MergedCss.css" />
     <Content Include="PsTool\TestFiles\output\MergedLayout_02.css" />
     <Content Include="PsTool\TestFiles\output\Preview.html" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Pictures\leftindexmacro1.jpg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="LiftPrepare\LiftPrepareTester.resx">
@@ -1003,7 +1002,6 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
