@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <UsingTask TaskName="UpdateReadme" AssemblyFile="BuildTasks.dll" />
   <UsingTask TaskName="UpdateVersion" AssemblyFile="BuildTasks.dll" />
   <UsingTask TaskName="ZeroCheck" AssemblyFile="BuildTasks.dll" />
@@ -17,8 +17,9 @@
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation />
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -34,6 +35,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -328,7 +330,7 @@
     <UpdateReadme Readme="$(ProjectDir)ReadMePw.rtf" License="$(ProjectDir)License.rtf" Template="$(ProjectDir)UserInterface-tpl.wxs" />
     <ZeroCheck />
     <FileComponents FilesTemplate="Files$(ConfTag)-tpl.wxs" FeaturesTemplate="Features$(ConfTag)-tpl.wxs" />
-    <Copy SourceFiles="@(WixSoftware)" DestinationFiles="@(WixSoftware-&gt;'Wix\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(WixSoftware)" DestinationFiles="@(WixSoftware->'Wix\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Exec Command="candle -nologo Features.wxs" WorkingDirectory="Wix" />
     <Exec Command="candle -nologo Install$(ConfTag)$(Edition).wxs " WorkingDirectory="Wix" />
     <Exec Command="candle -nologo UserInterface.wxs" WorkingDirectory="Wix" />
@@ -368,18 +370,18 @@
     <Copy SourceFiles="@(BteSettings)" DestinationFolder="Files\ConfigurationTool\" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(AllPreview)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(BtePreview)" DestinationFolder="Files\ConfigurationTool\" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles-&gt;'Files\ConfigurationTool\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="@(copyrightFiles-&gt;'Files\ConfigurationTool\Copyrights\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles-&gt;'Files\ConfigurationTool\epub\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck-&gt;'Files\ConfigurationTool\epubcheck-1.2\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles-&gt;'Files\ConfigurationTool\GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles-&gt;'Files\ConfigurationTool\InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(LiftFiles)" DestinationFiles="@(LiftFiles-&gt;'Files\ConfigurationTool\LiftSupport\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles->'Files\ConfigurationTool\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="@(copyrightFiles->'Files\ConfigurationTool\Copyrights\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles->'Files\ConfigurationTool\epub\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'Files\ConfigurationTool\epubcheck-1.2\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles->'Files\ConfigurationTool\GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles->'Files\ConfigurationTool\InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(LiftFiles)" DestinationFiles="@(LiftFiles->'Files\ConfigurationTool\LiftSupport\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(AllTransform)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(BteTransform)" DestinationFolder="Files\ConfigurationTool\" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(WordpressFiles)" DestinationFiles="@(WordpressFiles-&gt;'Files\ConfigurationTool\Wordpress\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
-    <Copy SourceFiles="@(XeTexExe)" DestinationFiles="@(XeTexExe-&gt;'Files\ConfigurationTool\xetexExe\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
-    <Copy SourceFiles="@(XetexFiles)" DestinationFiles="@(XetexFiles-&gt;'Files\ConfigurationTool\xetexPathway\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
+    <Copy SourceFiles="@(WordpressFiles)" DestinationFiles="@(WordpressFiles->'Files\ConfigurationTool\Wordpress\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
+    <Copy SourceFiles="@(XeTexExe)" DestinationFiles="@(XeTexExe->'Files\ConfigurationTool\xetexExe\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
+    <Copy SourceFiles="@(XetexFiles)" DestinationFiles="@(XetexFiles->'Files\ConfigurationTool\xetexPathway\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
   </Target>
   <Target Name="AfterBuild">
   </Target>
@@ -476,15 +478,15 @@
     <UsfmConvert Include="..\ThirdParty\ParatextShared.dll%3B..\ThirdParty\NetLoc.dll" />
   </ItemGroup>
   <Target Name="XeLaTexBeforeBuild">
-    <Copy SourceFiles="@(XeLaTexTexmf)" DestinationFiles="@(XeLaTexTexmf-&gt;'Files\pwtex\texmf\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(XeLaTexConfig)" DestinationFiles="@(XeLaTexConfig-&gt;'Files\pwtex\texmf-config\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(XeLaTexDist)" DestinationFiles="@(XeLaTexDist-&gt;'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(XeLaTexVar)" DestinationFiles="@(XeLaTexVar-&gt;'Files\pwtex\texmf-var\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(XeLaTexBin)" DestinationFiles="@(XeLaTexBin-&gt;'Files\pwtex\bin\win32\%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexTexmf)" DestinationFiles="@(XeLaTexTexmf->'Files\pwtex\texmf\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexConfig)" DestinationFiles="@(XeLaTexConfig->'Files\pwtex\texmf-config\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexDist)" DestinationFiles="@(XeLaTexDist->'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexVar)" DestinationFiles="@(XeLaTexVar->'Files\pwtex\texmf-var\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexBin)" DestinationFiles="@(XeLaTexBin->'Files\pwtex\bin\win32\%(Filename)%(Extension)')" />
     <MakeDir Directories="Files\pwtex\temp" />
     <Exec Command="echo This file is a place holder&gt;Files\pwtex\temp\readme.txt" />
     <Delete Files="@(XeLaTexCache)" />
-    <Copy SourceFiles="@(Paratexmf)" DestinationFiles="@(Paratexmf-&gt;'Files\pwtex\texmf\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Paratexmf)" DestinationFiles="@(Paratexmf->'Files\pwtex\texmf\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Exec Command="mktexlsr ..\..\texmf" WorkingDirectory="Files\pwtex\bin\win32" />
     <Exec Command="mktexlsr ..\..\texmf-var" WorkingDirectory="Files\pwtex\bin\win32" />
   </Target>

@@ -4,4 +4,14 @@
     <StartArguments>-IN in.xhtml -XSL RemoveEmptyDiv.xsl -OUT out.xhtml</StartArguments>
     <StartWorkingDirectory>C:\svn\pathway\ApplyXslt\bin\Debug</StartWorkingDirectory>
   </PropertyGroup>
+  <PropertyGroup>
+    <PublishUrlHistory />
+    <InstallUrlHistory />
+    <SupportUrlHistory />
+    <UpdateUrlHistory />
+    <BootstrapperUrlHistory />
+    <ErrorReportUrlHistory />
+    <FallbackCulture>en-US</FallbackCulture>
+    <VerifyUploadedFiles>false</VerifyUploadedFiles>
+  </PropertyGroup>
 </Project>
