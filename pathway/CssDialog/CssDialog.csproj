@@ -323,7 +323,9 @@
       <DependentUpon>PopupForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Preview.cs" />
-    <Compile Include="PreviewConfig.cs" />
+    <Compile Include="PreviewConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PreviewConfig.designer.cs">
       <DependentUpon>PreviewConfig.cs</DependentUpon>
     </Compile>

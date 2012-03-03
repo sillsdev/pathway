@@ -503,7 +503,6 @@
     <None Include="OpenOfficeConvert\TestFiles\input\VisibilityTest.pdf" />
     <None Include="OpenOfficeConvert\TestFiles\input\VisibilityTest.xhtml" />
     <None Include="OpenOfficeConvert\TestFiles\input\whitespace.xhtml" />
-    <None Include="PostTestBuild.bat" />
     <None Include="PsExport\TestFiles\Expect\T10\main.odm" />
     <None Include="PsExport\TestFiles\Expect\T10\PartFile1.odt" />
     <None Include="PsExport\TestFiles\Expect\T10\PartFile2.odt" />
@@ -1009,10 +1008,16 @@
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
   -->
+  <Target Name="AfterBuild">
+    <Copy SourceFiles="@(Palaso)" DestinationFolder="$(OutputPath)" />
+    <Copy SourceFiles="@(EpubCheck)" DestinationFolder="$(OutputPath)epubcheck-1.2\" />
+  </Target>
+  <ItemGroup>
+    <EpubCheck Include="..\ThirdParty\epubcheck-1.2\**\*.*" Exclude="..\ThirdParty\**\.svn\**\*.*" />
+    <Palaso Include="..\LiftPrepare\Lib\PalasoLib\icu*40.dll" />
+  </ItemGroup>
   <PropertyGroup>
-    <PostBuildEvent>call $(ProjectDir)PostTestBuild.bat</PostBuildEvent>
+    <PostBuildEvent />
   </PropertyGroup>
 </Project>
