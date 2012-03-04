@@ -353,7 +353,7 @@
     </Compile>
     <Compile Include="ScriptureContents1.cs">
       <SubType>Form</SubType>
-    </Compile>D
+    </Compile>
     <Compile Include="ScriptureContents1.designer.cs">
       <DependentUpon>ScriptureContents1.cs</DependentUpon>
     </Compile>
