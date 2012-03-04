@@ -392,6 +392,8 @@
     <!-- RemoveDir Directories="$(OutputPath)" / -->
   </Target>
   <ItemGroup>
+    <ConfigurationTool Include="..\ConfigurationTool\$(OutputPath)\*.*" />
+    <Plugin Include="..\PsExport\$(OutputPath)\*.*" />
     <GhostScript Include="..\ThirdParty\gsdll32.dll" />
     <EpubCheck Include="..\ThirdParty\epubcheck-1.2\**\*.*" Exclude="..\ThirdParty\**\.svn\**\*.*" />
     <Icu Include="..\LiftPrepare\Lib\PalasoLib\icudt40.dll;..\LiftPrepare\Lib\PalasoLib\icuin40.dll;..\LiftPrepare\Lib\PalasoLib\icuuc40.dll;" />
@@ -431,51 +433,23 @@
     <BteSettings Include="..\PsSupport\ScriptureStyleSettings.xml" />
     <AllPreview Include="..\PsSupport\DictionaryPreview.xhtml" />
     <BtePreview Include="..\PsSupport\ScripturePreview.xhtml" />
+    <OfficeFiles Include="..\PsSupport\OfficeFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <copyrightFiles Include="..\PsSupport\Copyrights\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <epubFiles Include="..\PsSupport\epub\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <AllBackend Include="..\epubValidator\$(OutputPath)\epubValidator.*" />
+    <GoBibleFiles Include="..\PsSupport\GoBible\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <InDesignFiles Include="..\PsSupport\InDesignFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <LiftFiles Include="..\PsSupport\LiftSupport\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
     <AllTransform Include="..\PsSupport\pxhtml2xpw-dict.xsl" />
     <AllTransform Include="..\PsSupport\punct_XHTML.xslt" />
     <AllTransform Include="..\PsSupport\TE_XHTML-to-epub_XHTML.xslt" />
+    <BteTransform Include="..\PsSupport\*.xslt" />
     <BteTransform Include="..\PsSupport\pxhtml2xpw-scr.xsl" />
-    <AllFiles Include="Files\%2A%2A\%2A.%2A" />
-    <AllFileDirs Include="Files\%2A%2A" />
-    <ConfigurationTool Include="..\ConfigurationTool\%24%28OutputPath%29\%2A.%2A" />
-    <Plugin Include="..\PsExport\%24%28OutputPath%29\%2A.%2A" />
-    <EpubCheck Include="..\ThirdParty\epubcheck-1.2\%2A%2A\%2A.%2A" />
-    <Icu Include="..\LiftPrepare\lib\PalasoLib\icudt40.dll%3B..\LiftPrepare\Lib\PalasoLib\icuin40.dll%3B..\LiftPrepare\Lib\PalasoLib\icuuc40.dll%3B" />
-    <BatchProcess Include="..\PathwayB\%24%28OutputPath%29\PathwayB.%2A" />
-    <LiftPrepare Include="..\LiftPrepare\%24%28OutputPath%29\LiftPrepare.%2A" />
-    <ParatextSupport Include="..\ParatextSupport\%24%28OutputPath%29\ParatextSupport.%2A" />
-    <AllBackend Include="..\InDesignConvert\%24%28OutputPath%29\InDesignConvert.%2A" />
-    <AllBackend Include="..\epubConvert\%24%28OutputPath%29\epubConvert.%2A" />
-    <AllBackend Include="..\PdfConvert\%24%28OutputPath%29\PdfConvert.%2A" />
-    <TestBackend Include="..\OpenOfficeConvert_OLD\%24%28OutputPath%29\OpenOfficeConvert_OLD.%2A" />
-    <TestBackend Include="..\WordPressConvert\%24%28OutputPath%29\WordPressConvert.%2A" />
-    <TestBackend Include="..\XeTexConvert\%24%28OutputPath%29\XeTexConvert.%2A" />
-    <TestBackend Include="..\XeLaTexConvert\%24%28OutputPath%29\XeLaTexWriter.%2A" />
-    <TestBackend Include="..\XeTex\%24%28OutputPath%29\XeTexWriter.%2A" />
-    <BteBackend Include="..\GoBibleConvert\%24%28OutputPath%29\GoBibleConvert.%2A" />
-    <BteBackend Include="..\LogosConvert\%24%28OutputPath%29\LogosConvert.%2A" />
-    <DicStyles Include="..\PsSupport\Styles\Dictionary\%2A%2A\%2A.%2A" />
-    <ScrStyles Include="..\PsSupport\Styles\Scripture\%2A%2A\%2A.%2A" />
-    <Hyphenation Include="..\PsSupport\Hyphenation_Languages\%2A%2A\%2A.%2A" />
-    <Icons Include="..\PsSupport\Icons\%2A%2A\%2A.%2A" />
-    <Graphic Include="..\PsSupport\Graphic\%2A%2A\%2A.%2A" />
-    <Loc Include="..\PsSupport\Loc\%2A%2A\%2A.%2A" />
-    <DicSamples Include="..\PsSupport\Samples\Dictionary\%2A%2A\%2A.%2A" />
-    <ScrSamples Include="..\PsSupport\Samples\Scripture\%2A%2A\%2A.%2A" />
-    <MiscSupport Include="..\PsSupport\FileGuids.xml%3B..\PsSupport\GenericFont.xml" />
-    <OfficeFiles Include="..\PsSupport\OfficeFiles\%2A%2A\%2A.%2A" />
-    <copyrightFiles Include="..\PsSupport\Copyrights\%2A%2A\%2A.%2A" />
-    <epubFiles Include="..\PsSupport\epub\%2A%2A\%2A.%2A" />
-    <AllBackend Include="..\epubValidator\%24%28OutputPath%29\epubValidator.%2A" />
-    <GoBibleFiles Include="..\PsSupport\GoBible\%2A%2A\%2A.%2A" />
-    <InDesignFiles Include="..\PsSupport\InDesignFiles\%2A%2A\%2A.%2A" />
-    <LiftFiles Include="..\PsSupport\LiftSupport\%2A%2A\%2A.%2A" />
-    <BteTransform Include="..\PsSupport\%2A.xslt" />
-    <WordpressFiles Include="..\PsSupport\Icons\%2A%2A\%2A.%2A" />
-    <XeTexExe Include="..\XeTex\xetexExe\%2A%2A\%2A.%2A" />
-    <XetexFiles Include="..\PsSupport\xetexPathway\%2A%2A\%2A.%2A" />
-    <WixSoftware Include="WixSoftware\%2A%2A\%2A.%2A" />
-    <UsfmConvert Include="..\ThirdParty\ParatextShared.dll%3B..\ThirdParty\NetLoc.dll" />
+    <WordpressFiles Include="..\PsSupport\Icons\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <XeTexExe Include="..\XeTex\xetexExe\**\*.*" Exclude="..\XeTex\xetexExe\**\.svn\**\*.*" />
+    <XetexFiles Include="..\PsSupport\xetexPathway\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <WixSoftware Include="WixSoftware\**\*.*" Exclude="WixSoftware\**\.svn\**\*.*" />
+    <UsfmConvert Include="..\ThirdParty\ParatextShared.dll;..\ThirdParty\NetLoc.dll" />
   </ItemGroup>
   <Target Name="XeLaTexBeforeBuild">
     <Copy SourceFiles="@(XeLaTexTexmf)" DestinationFiles="@(XeLaTexTexmf->'Files\pwtex\texmf\%(RecursiveDir)%(Filename)%(Extension)')" />
@@ -491,21 +465,21 @@
     <Exec Command="mktexlsr ..\..\texmf-var" WorkingDirectory="Files\pwtex\bin\win32" />
   </Target>
   <ItemGroup>
+    <XeLaTexExe Include="..\XeLaTexConvert\XeLaTexExe\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\**\.svn\**\*.*" />
+    <XeLaTexTexmf Include="..\XeLaTexConvert\XeLaTexExe\texmf\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\texmf\**\.svn\**\*.*" />
+    <XeLaTexConfig Include="..\XeLaTexConvert\XeLaTexExe\texmf-config\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\texmf-config\**\.svn\**\*.*" />
+    <XeLaTexDist Include="..\XeLaTexConvert\XeLaTexExe\texmf-dist\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\texmf-dist\**\.svn\**\*.*" />
+    <XeLaTexVar Include="..\XeLaTexConvert\XeLaTexExe\texmf-var\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\texmf-var\**\.svn\**\*.*" />
+    <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-cache.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-cat.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-list.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-match.exe" />
+    <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\icudt*.dll" />
+    <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\kpathsea*.dll" />
     <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\mktexlsr.exe" />
     <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\teckit_compile.exe" />
+    <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\tex.dll;..\XeLaTexConvert\XeLaTexExe\bin\win32\tex.exe" />
     <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\xdvipdfmx.exe" />
-    <XeLaTexExe Include="..\XeLaTexConvert\XeLaTexExe\%2A%2A\%2A.%2A" />
-    <XeLaTexTexmf Include="..\XeLaTexConvert\XeLaTexExe\texmf\%2A%2A\%2A.%2A" />
-    <XeLaTexConfig Include="..\XeLaTexConvert\XeLaTexExe\texmf-config\%2A%2A\%2A.%2A" />
-    <XeLaTexDist Include="..\XeLaTexConvert\XeLaTexExe\texmf-dist\%2A%2A\%2A.%2A" />
-    <XeLaTexVar Include="..\XeLaTexConvert\XeLaTexExe\texmf-var\%2A%2A\%2A.%2A" />
-    <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-cache.exe%3B..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-cat.exe%3B..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-list.exe%3B..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-match.exe" />
-    <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\icudt%2A.dll" />
-    <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\kpathsea%2A.dll" />
-    <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\tex.dll%3B..\XeLaTexConvert\XeLaTexExe\bin\win32\tex.exe" />
-    <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\xetex.exe%3B..\XeLaTexConvert\XeLaTexExe\bin\win32\xelatex.exe" />
-    <XeLaTexCache Include="..\XeLaTexConvert\XeLaTexExe\texmf-var\fonts\cache\%2A.cache-3" />
-    <Paratexmf Include="..\XeLaTexConvert\Paratexmf\%2A%2A\%2A.%2A" />
+    <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\xetex.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\xelatex.exe" />
+    <XeLaTexCache Include="..\XeLaTexConvert\XeLaTexExe\texmf-var\fonts\cache\*.cache-3" />
+    <Paratexmf Include="..\XeLaTexConvert\Paratexmf\**\*.*" Exclude="..\XeLaTexConvert\Paratexmf\**\.svn\**\**" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
