@@ -129,15 +129,25 @@ Func RemoveLocalFolder()
 	EndIf
 EndFunc
 
-Func InstallDotNetIfNecessary()
-	Local $DotNet2, $name
+Func DotNetInstalled()
+	Local $DotNet2
 	
 	;See http://msdn.microsoft.com/en-us/library/xhz1cfs8(v=VS.90).aspx
 	$DotNet2 = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework\Policy\v2.0", "50727")
 	if not @error Then
 		;MsgBox(4096,"Status","Installing dot net is unnecessary...")
-		return	;Found dot net
+		Return True
 	EndIf
+	Return False
+EndFunc
+
+Func InstallDotNetIfNecessary()
+	Global $INS_DotNet
+	Local $name
+	
+	if Not $INS_DotNet Then
+		Return
+	Endif
 	if @OSArch = "X86" Then
 		;MsgBox(4096,"Status","Installing dot net x86...")
 		$name = "dotnetfx.exe"
@@ -173,16 +183,27 @@ Func InstallVersions()
 	EndIf
 EndFunc
 
-Func InstallJavaIfNecessary()
-	Local $ver, $path, $latest, $pkg
+Func JavaInstalled()
+	Local $ver, $path
+	
 	;See http://stackoverflow.com/questions/2951804/how-to-check-java-installation-from-batch-script
 	$ver = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft\Java Runtime Environment", "CurrentVersion")
 	if not @error Then
 		;MsgBox(4096,"Status","Java version " & $ver)
 		$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft\Java Runtime Environment\" & $ver, "JavaHome")
 		if FileExists( $path & "\bin\java.exe") Then
-			return ;Already installed
+			return True
 		EndIf
+	EndIf
+	Return False
+EndFunc
+
+Func InstallJavaIfNecessary()
+	Global $INS_Java
+	Local $latest, $pkg
+	
+	if Not $INS_Java Then
+		Return
 	EndIf
 	;if MsgBox(35,"No Java","Java is used by the Epub validator among other things. It is not installed in your computer. Would you like to install Java?") = 6 Then
 	;	LaunchSite("http://java.com/en/download/index.jsp")
@@ -203,9 +224,15 @@ Func InstallJavaIfNecessary()
 	EndIf
 EndFunc
 
+Func OfficeInstalled()
+	Return IsAssociation(".odt")
+EndFunc
+
 Func InstallLibreOfficeIfNecessary()
+	Global $INS_Office
 	Local $latest, $pkg, $major, $installerTitle
-	if IsAssociation(".odt") Then
+
+	if Not $INS_Office Then
 		Return
 	Endif
 	;if MsgBox(35,"No Libre Office","Libre Office is one of the main output destinations. It is not installed in your computer. Would you like to install Libre Office?") = 6 Then
@@ -246,8 +273,9 @@ Func MajorPart($latest)
 	EndIf
 EndFunc
 
-Func InstallPrinceXmlIfNecessary()
-	Local $path, $latest, $pkg
+Func PrinceInstalled()
+	Local $path
+	
 	$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Prince_is1", "InstallLocation")
 	if @error Then
 		$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Prince_is1", "InstallLocation")
@@ -255,8 +283,18 @@ Func InstallPrinceXmlIfNecessary()
 	if not @error Then
 		;MsgBox(4096,"Status","PrinceXml path " & $path)
 		if FileExists( $path & "Prince.exe") Then
-			return ;Already installed
+			return True
 		EndIf
+	EndIf
+	Return False
+EndFunc
+
+Func InstallPrinceXmlIfNecessary()
+	Global $INS_Prince
+	Local $latest, $pkg
+
+	if Not $INS_Prince Then
+		Return
 	EndIf
 	;if MsgBox(35,"No PrinceXml","PrinceXml is used to create new previews and is one of the output destinations. It is not installed in your computer. Would you like to install PrinceXml?") = 6 Then
 	;	LaunchSite("http://www.princexml.com/download/")
@@ -273,9 +311,15 @@ Func InstallPrinceXmlIfNecessary()
 	Endif
 EndFunc
 
+Func PdfInstalled()
+	Return IsAssociation(".pdf") 
+EndFunc
+
 Func InstallPdfReaderIfNecessary()
+	Global $INS_Pdf
 	Local $latest, $pkg
-	if IsAssociation(".pdf") Then
+
+	if Not $INS_Pdf Then
 		Return
 	Endif
 	;if MsgBox(35,"No Pdf Reader","The Pdf Reader displays Pdf results after they are produced by various destinations. None installed in your computer. Would you like to install a Pdf Reader?") = 6 Then
@@ -293,9 +337,15 @@ Func InstallPdfReaderIfNecessary()
 	EndIf
 EndFunc
 
+Func EpubInstalled()
+	Return IsAssociation(".epub") 
+EndFunc
+
 Func InstallEpubReaderIfNecessary()
-	Local $ver, $cmd, $viewer, $latest, $pkg
-	if IsAssociation(".epub") Then
+	Global $INS_Epub
+	Local $viewer, $latest, $pkg
+	
+	if Not $INS_Epub Then
 		Return
 	Endif
 	;if MsgBox(35,"No Pdf Reader","The Pdf Reader displays Pdf results after they are produced by various destinations. None installed in your computer. Would you like to install a Pdf Reader?") = 6 Then
@@ -325,13 +375,8 @@ Func InstallEpubReaderIfNecessary()
 	EndIf
 EndFunc
 
-Func InstallXeLaTeXIfNecessary()
-	Global $InstallStable
-	if $InstallStable Then
-		Return
-	Endif
-	
-	Local $path, $SaveGlobal, $ver, $latest
+Func XeLaTexInstalled()
+	Local $path, $ver, $latest
 	$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\SIL\PathwayXeLaTeX", "XeLaTexDir")
 	if @error Then
 		$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\PathwayXeLaTeX", "XeLaTexDir")
@@ -345,14 +390,20 @@ Func InstallXeLaTeXIfNecessary()
 			EndIf
 			$latest = IniRead("PathwayBootstrap.Ini", "Versions", "XeLaTex", "1.4")
 			if $ver = $latest Then
-				return ;Already installed
+				Return True
 			EndIf
 		EndIf
 	EndIf
-	if MsgBox(35,"No XeLaTeX","XeLaTeX is one of the output destinations (similar to a typesetting system). It is not installed in your computer. Would you like to install XeLaTeX?") = 6 Then
-		;InstallPathway("SetupXeLaTeXTesting")
-		InstallPathway("SetupXeLaTeX")
-	EndIf
+	Return False
+EndFunc
+
+Func InstallXeLaTeXIfNecessary()
+	Global $InstallStable, $INS_XeLaTex
+	
+	if $InstallStable or Not $INS_XeLaTex Then
+		Return
+	Endif
+	InstallPathway("SetupXeLaTeX")
 EndFunc
 
 Func IsAssociation($ext)

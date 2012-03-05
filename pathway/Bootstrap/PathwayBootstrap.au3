@@ -4,6 +4,8 @@
 ;Global $StableVersionDate = '-0.7.1-2011-04-12'
 Global $StableVersionDate = ''
 Global $LatestSuffix = 'Testing'
+Global $DEL_Installer = True
+Global $Bootstrap_version = "Version 1.1"
 
 Opt('MustDeclareVars', 1)
 
@@ -12,6 +14,8 @@ DoUI()
 Exit 
 
 Func DoUI()
+	Global $DEL_Installer
+	
 	If not FileExists("sil.jpg") Then
 		FileInstall("res\sil.jpg", "sil.jpg")
 	EndIf
@@ -26,6 +30,7 @@ Func DoUI()
 	Else
 		MsgBox(4096, "Priviledge error", "Please rerun the bootstrap program with Administrative priviledges.")
 	Endif
+	$DEL_Installer = True
 	CleanUp("sil.jpg")
 	CleanUp("PWIcon1.jpg")
 	CleanUp("License.rtf")
@@ -33,7 +38,7 @@ Func DoUI()
 EndFunc
 
 Func CleanUp($name)
-	if @error Then
+	if @error or Not $DEL_Installer Then
 		Return
 	EndIf
 	Local $attrib

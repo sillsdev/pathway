@@ -6,7 +6,8 @@
 
 Func Welcome()
 	Global $closeUp = False
-	Local $welcome, $line, $sil, $pathway, $back, $next, $cancel, $message, $msg
+	Global $Bootstrap_version
+	Local $welcome, $line, $sil, $pathway, $back, $next, $cancel, $message, $version, $msg
 	
 	Opt("GUIResizeMode", 1)
 	
@@ -19,6 +20,8 @@ Func Welcome()
 
 	$message = GUICtrlCreateLabel("Welcome and thank you for choosing to install Pathway. Pathway will add additional printing and exporting capabilities.", 256, 24, 350, 400)
 	GUICtrlSetFont($message, 14, 400, 0, "Tahoma")
+
+	$version = GUICtrlCreateLabel($Bootstrap_version, 0, 0, 350, 28)
 
 	GUISetState(@SW_SHOW)
 	While $closeUp == False

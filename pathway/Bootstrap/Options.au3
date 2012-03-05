@@ -1,15 +1,24 @@
 ;Options.au3 - 12/2/2011 greg_trihus@sil.org License: LGPL
+#include "Advanced.au3"
 #include "Install.au3"
 #include "Complete.au3"
 
 Func Options($left, $top)
 	Global $closeUp
-	Local $stable, $latest, $message, $options, $sil, $pathway, $line, $back, $cancel, $install, $msg
+	Global $INS_DotNet = Not DotNetInstalled()
+	Global $INS_Java = Not JavaInstalled()
+	Global $INS_Office = Not OfficeInstalled()
+	Global $INS_Epub = Not EpubInstalled()
+	Global $INS_Pdf = Not PdfInstalled()
+	Global $INS_Prince = Not PrinceInstalled()
+	Global $INS_XeLaTex = Not XeLaTexInstalled()
+	Local $stable, $latest, $message, $options, $sil, $pathway, $line, $back, $advanced, $cancel, $install, $msg
 	
 	$options = GUICreate("Options", 660, 550, $left, $top, 1)
 	$sil = GUICtrlCreatePic("sil.jpg", 8, 40, 224, 191, $SS_CENTERIMAGE)
 	$pathway = GUICtrlCreatePic("PWIcon1.jpg", 40, 272, 146, 152, $SS_CENTERIMAGE)
 	$line = GUICtrlCreateGraphic(20, 444, 600, 2, $SS_BLACKFRAME)
+	$advanced = GUICtrlCreateButton("Advanced", 224, 464, 87, 28)
 	$back = GUICtrlCreateButton("Back", 328, 464, 87, 28)
 	$cancel = GUICtrlCreateButton("Cancel", 432, 464, 87, 28)
 	$install = GUICtrlCreateButton("Install", 536, 464, 87, 28)
@@ -30,6 +39,8 @@ Func Options($left, $top)
 		Case $back
 			WinSetState("License", "", @SW_SHOW)
 			ExitLoop
+		Case $advanced
+			Options_OnAdvanced("Options")
 		Case $install
 			Options_OnInstall("Options", $stable)
 		Case $stable, $latest
@@ -41,6 +52,14 @@ Func Options($left, $top)
 	Wend
 	GUIDelete($options)
 EndFunc
+
+Func Options_OnAdvanced($title)
+	Local $pos
+	$pos = WinGetPos($title)
+	WinSetState($title, "", @SW_HIDE)
+	Advanced($pos[0], $pos[1])
+EndFunc
+
 
 Func Options_OnInstall($title, $stable)
 	Global $InstallStable
