@@ -395,10 +395,15 @@ namespace SIL.PublishingSolution
         private void PopulateFilesFromPreprocessingFolder()
         {
             string xsltFullName = Common.PathCombine(Common.GetApplicationPath(), "Preprocessing\\");// + xsltFile[0]
-            string[] filePaths = Directory.GetFiles(xsltFullName, "*.xsl");
-            foreach (var filePath in filePaths)
+
+            if (Directory.Exists(xsltFullName))
             {
-                chkLbPreprocess.Items.Add(Path.GetFileNameWithoutExtension(filePath), false);
+                string[] filePaths = Directory.GetFiles(xsltFullName, "*.xsl");
+
+                foreach (var filePath in filePaths)
+                {
+                    chkLbPreprocess.Items.Add(Path.GetFileNameWithoutExtension(filePath), false);
+                }
             }
         }
 
