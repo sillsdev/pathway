@@ -3296,6 +3296,10 @@ namespace SIL.PublishingSolution
                         ncx.WriteEndElement(); // meta
                         //ncx.WriteEndElement(); // meta
                     }
+                    else
+                    {
+                        playOrder--;
+                    }
 
                     // If this is a dictionary with TOC level 3, gather the senses for this entry
                     if (_inputType.Equals("dictionary") && TocLevel.StartsWith("3"))

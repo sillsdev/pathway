@@ -399,6 +399,8 @@ namespace SIL.PublishingSolution
             if (Directory.Exists(xsltFullName))
             {
                 string[] filePaths = Directory.GetFiles(xsltFullName, "*.xsl");
+                
+                // In case the xsl file name change and updated in the psexport.cs file XsltPreProcess
 
                 foreach (var filePath in filePaths)
                 {

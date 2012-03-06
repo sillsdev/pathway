@@ -178,11 +178,11 @@ namespace SIL.PublishingSolution
             List<string> xsltFile = new List<string>();
             if (Param.Value.ContainsKey(Param.RemoveEmptyDiv) && Param.Value[Param.RemoveEmptyDiv] == "True")
             {
-                xsltFile.Add("Remove Hyperlinks.xsl");
+                xsltFile.Add("Filter Broken Links.xsl");
             }
             if (Param.Value.ContainsKey(Param.RemoveHyperlink) && Param.Value[Param.RemoveHyperlink] == "True")
             {
-                xsltFile.Add("Remove Empty Divs.xsl");
+                xsltFile.Add("Filter Empty Entries.xsl");
             }
 
             for (int i = 0; i < xsltFile.Count; i++)
