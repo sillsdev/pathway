@@ -846,7 +846,7 @@ namespace SIL.Tool
 
             searchText = "class=\"([\\\\]*\\w+)[*]";
             replaceText = "class = \"$1ASTERISK";
-            Common.ReplaceInFile(_xhtmlFileNameWithPath, searchText, replaceText);
+            Common.ReplaceInCssFile(_xhtmlFileNameWithPath, searchText, replaceText);
         }
 
         /// <summary>
@@ -946,7 +946,8 @@ namespace SIL.Tool
             }
 
             // Removal of html tag namespace and other formats.
-            Common.ReplaceInFile(tempFile, @"<html\b[^>]*>", "<html>");
+            //Common.ReplaceInCssFile(tempFile, @"<html\b[^>]*>", "<html>");
+            Common.ReplaceInXhtmlFile(tempFile);
             if (!File.Exists(tempFile)) return string.Empty;
             var xmldoc = new XmlDocument();
             // xml image copy

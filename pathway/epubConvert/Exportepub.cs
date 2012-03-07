@@ -1528,7 +1528,7 @@ namespace SIL.PublishingSolution
                     sb.Append("padding-left: 5pt; padding-right: ");
                 }
                 sb.Append((ChapterNumbers == "Drop Cap") ? "4%;" : "5pt;");
-                Common.ReplaceInFile(cssFile, ".Chapter_Number {", sb.ToString());
+                Common.ReplaceInCssFile(cssFile, ".Chapter_Number {", sb.ToString());
             }
         }
 
