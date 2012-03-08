@@ -23,8 +23,8 @@
         <property name="PrintVia" value="OpenOffice/LibreOffice"/>
         <property name="ConfigureDictionary" value="True"/>
         <property name="ReversalIndexes" value="True"/>
-		<property name="RemoveEmptyDiv" value="False" />
-        <property name="RemoveHyperlink" value="False" />		
+		<property name="FilterEmptyEntries" value="False" />
+        <property name="FilterBrokenLinks" value="False" />		
         <property name="GrammerSketch" value="False"/>
         <property name="LayoutSelected" value="Draft"/>
         <property name="ExtraProcessing" value="True"/>

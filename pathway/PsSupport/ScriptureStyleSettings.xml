@@ -19,6 +19,8 @@
     <property name="MissingIcon" value="Graphic/missing.png" />
     <property name="Help" value="PsDoc.chm" />
     <property name="PrintVia" value="OpenOffice/LibreOffice" />
+	<property name="FilterEmptyEntries" value="False" />
+    <property name="FilterBrokenLinks" value="False" />	
 	<property name="LayoutSelected" value="C5 Cols ApplicationStyles" />
     <property name="ExtraProcessing" value="True" />
     <property name="Media" value="mobile" />
