@@ -176,13 +176,13 @@ namespace SIL.PublishingSolution
         private void XsltPreProcess(string outFullName)
         {
             List<string> xsltFile = new List<string>();
-            if (Param.Value.ContainsKey(Param.RemoveEmptyDiv) && Param.Value[Param.RemoveEmptyDiv] == "True")
+            if (Param.Value.ContainsKey(Param.FilterEmptyEntries) && Param.Value[Param.FilterEmptyEntries] == "True")
+            {
+                xsltFile.Add("Filter Empty Entries");
+            }
+            if (Param.Value.ContainsKey(Param.FilterBrokenLinks) && Param.Value[Param.FilterBrokenLinks] == "True")
             {
                 xsltFile.Add("Filter Broken Links.xsl");
-            }
-            if (Param.Value.ContainsKey(Param.RemoveHyperlink) && Param.Value[Param.RemoveHyperlink] == "True")
-            {
-                xsltFile.Add("Filter Empty Entries.xsl");
             }
 
             for (int i = 0; i < xsltFile.Count; i++)
