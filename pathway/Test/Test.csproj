@@ -1011,10 +1011,10 @@
   -->
   <Target Name="AfterBuild">
     <Copy SourceFiles="@(Palaso)" DestinationFolder="$(OutputPath)" />
-    <Copy SourceFiles="@(EpubCheck)" DestinationFolder="$(OutputPath)epubcheck-1.2\" />
+    <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles->'$(OutputPath)\epubcheck-1.2\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
   <ItemGroup>
-    <EpubCheck Include="..\ThirdParty\epubcheck-1.2\**\*.*" Exclude="..\ThirdParty\**\.svn\**\*.*" />
+    <epubFiles Include="..\ThirdParty\epubcheck-1.2\**\*.*" Exclude="..\ThirdParty\**\.svn\**\*.*" />
     <Palaso Include="..\LiftPrepare\Lib\PalasoLib\icu*40.dll" />
   </ItemGroup>
   <PropertyGroup>
