@@ -974,7 +974,6 @@
   <ItemGroup>
     <Folder Include="ApplyXslt\TestFiles\Expected\" />
     <Folder Include="ApplyXslt\TestFiles\Input\" />
-    <Folder Include="Build\TestFiles\Input\Files\ConfigurationTool\epubcheck-1.1\" />
     <Folder Include="Properties\" />
     <Folder Include="PsExport\TestFiles\Input\T5\Pictures\" />
     <Folder Include="PsExport\TestFiles\Input\T6\Pictures\" />
@@ -1006,16 +1005,113 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+         -->
+<Target Name="BeforeBuild">
+    <Copy SourceFiles="@(ConfigurationTool)" DestinationFolder="$(OutputPath)\" />
+    <Copy SourceFiles="@(Plugin)" DestinationFolder="$(OutputPath)\" />
+    <Copy SourceFiles="@(GhostScript)" DestinationFolder="$(OutputPath)\" />
+    <Copy SourceFiles="@(Icu)" DestinationFolder="$(OutputPath)\" />
+    <Copy SourceFiles="@(BatchProcess)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" />
+    <Copy SourceFiles="@(LiftPrepare)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" />
+    <Copy SourceFiles="@(ParatextSupport)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" />
+    <Copy SourceFiles="@(AllBackend)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" />
+    <Copy SourceFiles="@(BteBackend)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(TestBackend)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" Condition=" '$(Status)' == 'Testing' " />
+    <!-- Copy SourceFiles="@(UsfmConvert)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " / -->
+    <Copy SourceFiles="@(DicStyles)" DestinationFiles="@(DicStyles->'$(OutputPath)\Styles\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(ScrStyles)" DestinationFiles="@(ScrStyles->'$(OutputPath)\Styles\Scripture\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(Hyphenation)" DestinationFiles="@(Hyphenation->'$(OutputPath)\Hyphenation_Languages\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Icons)" DestinationFiles="@(Icons->'$(OutputPath)\Icons\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Graphic)" DestinationFiles="@(Graphic->'$(OutputPath)\Graphic\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Loc)" DestinationFiles="@(Loc->'$(OutputPath)\Loc\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Preprocessing)" DestinationFiles="@(Preprocessing->'$(OutputPath)\Preprocessing\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(DicSamples)" DestinationFiles="@(DicSamples->'$(OutputPath)\Samples\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(ScrSamples)" DestinationFiles="@(ScrSamples->'$(OutputPath)\Samples\Scripture\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(MiscSupport)" DestinationFolder="$(OutputPath)\" />
+    <Copy SourceFiles="@(FwVersion)" DestinationFolder="$(OutputPath)\" />
+    <Copy SourceFiles="@(BteHelpFile)" DestinationFolder="$(OutputPath)\Help" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(SeHelpFile)" DestinationFolder="$(OutputPath)\Help" Condition=" '$(Edition)' == 'SE' " />
+    <Copy SourceFiles="@(BteStudent)" DestinationFolder="Files\ConfigurationTool" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(SeStudent)" DestinationFolder="Files\ConfigurationTool" Condition=" '$(Edition)' == 'SE' " />
+    <Copy SourceFiles="@(Readme)" DestinationFolder="Files\ConfigurationTool" />
+    <Copy SourceFiles="@(License)" DestinationFolder="Files\ConfigurationTool" />
+    <Copy SourceFiles="@(AllSettings)" DestinationFolder="$(OutputPath)\" />
+    <Copy SourceFiles="@(BteSettings)" DestinationFolder="$(OutputPath)\" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(AllPreview)" DestinationFolder="$(OutputPath)\" />
+    <Copy SourceFiles="@(BtePreview)" DestinationFolder="$(OutputPath)\" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles->'$(OutputPath)\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="@(copyrightFiles->'$(OutputPath)\Copyrights\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles->'$(OutputPath)\epub\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'$(OutputPath)\epubcheck-1.2\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles->'$(OutputPath)\GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles->'$(OutputPath)\InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(LiftFiles)" DestinationFiles="@(LiftFiles->'$(OutputPath)\LiftSupport\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(AllTransform)" DestinationFolder="$(OutputPath)\" />
+    <Copy SourceFiles="@(BteTransform)" DestinationFolder="$(OutputPath)\" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(WordpressFiles)" DestinationFiles="@(WordpressFiles->'$(OutputPath)\Wordpress\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
+    <Copy SourceFiles="@(XeTexExe)" DestinationFiles="@(XeTexExe->'$(OutputPath)\xetexExe\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
+    <Copy SourceFiles="@(XetexFiles)" DestinationFiles="@(XetexFiles->'$(OutputPath)\xetexPathway\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
   </Target>
-  -->
-  <Target Name="AfterBuild">
-    <Copy SourceFiles="@(Palaso)" DestinationFolder="$(OutputPath)" />
-    <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles->'$(OutputPath)\epubcheck-1.2\%(RecursiveDir)%(Filename)%(Extension)')" />
-  </Target>
+  <Target Name="AfterBuild"/>
   <ItemGroup>
-    <epubFiles Include="..\ThirdParty\epubcheck-1.2\**\*.*" Exclude="..\ThirdParty\**\.svn\**\*.*" />
-    <Palaso Include="..\LiftPrepare\Lib\PalasoLib\icu*40.dll" />
+    <ConfigurationTool Include="..\ConfigurationTool\$(OutputPath)\*.*" />
+    <Plugin Include="..\PsExport\$(OutputPath)\*.*" />
+    <GhostScript Include="..\ThirdParty\gsdll32.dll" />
+    <EpubCheck Include="..\ThirdParty\epubcheck-1.2\**\*.*" Exclude="..\ThirdParty\**\.svn\**\*.*" />
+    <Icu Include="..\LiftPrepare\Lib\PalasoLib\icudt40.dll;..\LiftPrepare\Lib\PalasoLib\icuin40.dll;..\LiftPrepare\Lib\PalasoLib\icuuc40.dll;" />
+    <BatchProcess Include="..\PathwayB\$(OutputPath)\PathwayB.*" />
+    <LiftPrepare Include="..\LiftPrepare\$(OutputPath)\LiftPrepare.*" />
+    <ParatextSupport Include="..\ParatextSupport\$(OutputPath)\ParatextSupport.*" />
+    <AllBackend Include="..\InDesignConvert\$(OutputPath)\InDesignConvert.*" />
+    <AllBackend Include="..\epubConvert\$(OutputPath)\epubConvert.*" />
+    <AllBackend Include="..\PdfConvert\$(OutputPath)\PdfConvert.*" />
+    <TestBackend Include="..\OpenOfficeConvert_OLD\$(OutputPath)\OpenOfficeConvert_OLD.*" />
+    <TestBackend Include="..\WordPressConvert\$(OutputPath)\WordPressConvert.*" />
+    <TestBackend Include="..\XeTexConvert\$(OutputPath)\XeTexConvert.*" />
+    <TestBackend Include="..\XeLaTexConvert\$(OutputPath)\XeLaTexWriter.*" />
+    <TestBackend Include="..\XeTex\$(OutputPath)\XeTexWriter.*" />
+    <BteBackend Include="..\GoBibleConvert\$(OutputPath)\GoBibleConvert.*" />
+    <BteBackend Include="..\LogosConvert\$(OutputPath)\LogosConvert.*" />
+    <DicStyles Include="..\PsSupport\Styles\Dictionary\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <ScrStyles Include="..\PsSupport\Styles\Scripture\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <Hyphenation Include="..\PsSupport\Hyphenation_Languages\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <Icons Include="..\PsSupport\Icons\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <Graphic Include="..\PsSupport\Graphic\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <Loc Include="..\PsSupport\Loc\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <Preprocessing Include="..\PsSupport\Preprocessing\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <DicSamples Include="..\PsSupport\Samples\Dictionary\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <ScrSamples Include="..\PsSupport\Samples\Scripture\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <MiscSupport Include="..\PsSupport\FileGuids.xml;..\PsSupport\GenericFont.xml" />
+    <FwVersion Include="..\BuildPathway\FieldworksVersions.txt" />
+    <BteHelpFile Include="..\BuildPathway\Pathway_Configuration_Tool_BTE.chm" />
+    <SeHelpFile Include="..\BuildPathway\Pathway_Configuration_Tool_SE.chm" />
+    <BteStudent Include="..\BuildPathway\Pathway_Student_Manual_BTE.doc" />
+    <SeStudent Include="..\BuildPathway\Pathway_Student_Manual_SE.doc" />
+    <License Include="..\BuildPathway\License.rtf" />
+    <Readme Include="..\BuildPathway\ReadMePw.rtf" />
+    <AllSettings Include="..\PsSupport\DictionaryStyleSettings.xml" />
+    <AllSettings Include="..\PsSupport\StyleSettings.xml" />
+    <AllSettings Include="..\PsSupport\StyleSettings.xsd" />
+    <BteSettings Include="..\PsSupport\ScriptureStyleSettings.xml" />
+    <AllPreview Include="..\PsSupport\DictionaryPreview.xhtml" />
+    <BtePreview Include="..\PsSupport\ScripturePreview.xhtml" />
+    <OfficeFiles Include="..\PsSupport\OfficeFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <copyrightFiles Include="..\PsSupport\Copyrights\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <epubFiles Include="..\PsSupport\epub\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <AllBackend Include="..\epubValidator\$(OutputPath)\epubValidator.*" />
+    <GoBibleFiles Include="..\PsSupport\GoBible\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <InDesignFiles Include="..\PsSupport\InDesignFiles\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <LiftFiles Include="..\PsSupport\LiftSupport\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <AllTransform Include="..\PsSupport\pxhtml2xpw-dict.xsl" />
+    <AllTransform Include="..\PsSupport\punct_XHTML.xslt" />
+    <AllTransform Include="..\PsSupport\TE_XHTML-to-epub_XHTML.xslt" />
+    <BteTransform Include="..\PsSupport\*.xslt" />
+    <BteTransform Include="..\PsSupport\pxhtml2xpw-scr.xsl" />
+    <WordpressFiles Include="..\PsSupport\Icons\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <XeTexExe Include="..\XeTex\xetexExe\**\*.*" Exclude="..\XeTex\xetexExe\**\.svn\**\*.*" />
+    <XetexFiles Include="..\PsSupport\xetexPathway\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />
+    <WixSoftware Include="..\BuildPathway\WixSoftware\**\*.*" Exclude="WixSoftware\**\.svn\**\*.*" />
+    <UsfmConvert Include="..\ThirdParty\ParatextShared.dll;..\ThirdParty\NetLoc.dll" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent />

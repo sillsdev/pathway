@@ -58,9 +58,10 @@ namespace Test.PsExport
             Common.DeleteDirectory(_outputBasePath);
             Directory.CreateDirectory(_outputBasePath);
             // Set application base for test
-            DoBatch("ConfigurationTool", "postBuild.bat", "Debug");
-            Common.ProgInstall = Environment.CurrentDirectory.Replace("Test", "ConfigurationTool");
-            FolderTree.Copy(Common.PathCombine(testPath, "../../../PsSupport/OfficeFiles"),Path.Combine(Common.ProgInstall,"OfficeFiles"));
+            //DoBatch("ConfigurationTool", "postBuild.bat", "Debug");
+            //Common.ProgInstall = Environment.CurrentDirectory.Replace("Test", "ConfigurationTool");
+            Common.ProgInstall = Environment.CurrentDirectory;
+            //FolderTree.Copy(Common.PathCombine(testPath, "../../../PsSupport/OfficeFiles"),Path.Combine(Common.ProgInstall,"OfficeFiles"));
             Backend.Load(Common.ProgInstall);
         }
 

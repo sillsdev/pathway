@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
+<project version="13.2">
     <meta>
-        <filters directoryPatterns="" filePatterns=""
-            positiveFilePatterns="" showHiddenFiles="false"/>
+        <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
         <options/>
     </meta>
     <projectTree name="PathwayProjectFiles60.xpr">
@@ -25,8 +24,5 @@
         <file name="../Test/Test60.csproj"/>
         <file name="../TestBed/TestBed60.csproj"/>
         <file name="../WordPressConvert/WordPressConvert60.csproj"/>
-        <file name="../XeTex/XeTex60.csproj"/>
-        <file name="../XeTeXConvert/XeTeXConvert60.csproj"/>
-        <file name="../YouVersionConvert/YouVersionConvert60.csproj"/>
     </projectTree>
 </project>

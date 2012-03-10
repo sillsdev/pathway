@@ -57,7 +57,7 @@ namespace Test.XeLatex
             _projInfo.ProjectPath = _testFolderPath;
             _cssProperty = new Dictionary<string, Dictionary<string, string>>();
             Common.SupportFolder = "";
-            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
+            //Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
             //Common.CopyOfficeFolder(_expectedPath, _outputPath);
         }
 
