@@ -222,6 +222,30 @@
     <Optimize>false</Optimize>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayYouVersion|AnyCPU' ">
+    <OutputPath>bin\PathwayYouVersion\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Edition />
+    <ProductName>Pathway YouVersion</ProductName>
+    <ConfTag>YouVersion</ConfTag>
+    <Status>Testing</Status>
+    <DebugType>none</DebugType>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayYouVersion|x86' ">
+    <OutputPath>bin\x86\PathwayYouVersion\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <Edition />
+    <ProductName>Pathway YouVersion</ProductName>
+    <ConfTag>YouVersion</ConfTag>
+    <Status>Testing</Status>
+    <DebugType>none</DebugType>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Checking|x86' ">
     <OutputPath>bin\x86\xmlMarkup\</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
@@ -322,8 +346,9 @@
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets. -->
   <Target Name="Build">
-    <CallTarget Targets="BeforeBuild" Condition=" '$(ConfTag)' != 'XeLaTeX' " />
+    <CallTarget Targets="BeforeBuild" Condition=" '$(ConfTag)' != 'XeLaTeX' and '$(ConfTag)' != 'YouVersion' " />
     <CallTarget Targets="XeLaTeXBeforeBuild" Condition=" '$(ConfTag)' == 'XeLaTeX' " />
+    <CallTarget Targets="YouVersionBeforeBuild" Condition=" '$(ConfTag)' == 'YouVersion' " />
     <Message Text="BUILD_NUMBER: $(BUILD_NUMBER)" Importance="high" />
     <RemoveDir Directories="Wix" />
     <UpdateVersion Product="$(ProductName) " Version="1.0.6" BuildVersion="$(BUILD_NUMBER)" HelpFile="Pathway_Configuration_Tool_$(Edition).chm" Template="$(ProjectDir)Install$(ConfTag)$(Edition)-tpl.wxs" />
@@ -407,6 +432,7 @@
     <TestBackend Include="..\WordPressConvert\$(OutputPath)\WordPressConvert.*" />
     <TestBackend Include="..\XeTexConvert\$(OutputPath)\XeTexConvert.*" />
     <TestBackend Include="..\XeLaTexConvert\$(OutputPath)\XeLaTexWriter.*" />
+    <TestBackend Include="..\YouVersionConvert\$(OutputPath)\YouVersionWriter.*" />
     <TestBackend Include="..\XeTex\$(OutputPath)\XeTexWriter.*" />
     <BteBackend Include="..\GoBibleConvert\$(OutputPath)\GoBibleConvert.*" />
     <BteBackend Include="..\LogosConvert\$(OutputPath)\LogosConvert.*" />
@@ -480,6 +506,12 @@
     <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\xetex.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\xelatex.exe" />
     <XeLaTexCache Include="..\XeLaTexConvert\XeLaTexExe\texmf-var\fonts\cache\*.cache-3" />
     <Paratexmf Include="..\XeLaTexConvert\Paratexmf\**\*.*" Exclude="..\XeLaTexConvert\Paratexmf\**\.svn\**\**" />
+  </ItemGroup>
+  <Target Name="YouVersionBeforeBuild">
+    <Copy SourceFiles="@(YouVersion)" DestinationFiles="@(YouVersion->'Files\PwYouVersion\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+  <ItemGroup>
+    <YouVersion Include="..\YouVersionConvert\PwYouVer\**\*.*" Exclude="..\YouVersionConvert\PwYouVer\**\.svn\**\*.*" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
