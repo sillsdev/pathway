@@ -279,6 +279,7 @@
     <Compile Include="Substitution.cs" />
     <Compile Include="UseReport.cs" />
     <Compile Include="XHTMLProcess.cs" />
+    <Compile Include="YouVersionInstallation.cs" />
     <Compile Include="ZipFolder.cs" />
   </ItemGroup>
   <ItemGroup>
