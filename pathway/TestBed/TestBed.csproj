@@ -324,6 +324,10 @@
       <Project>{65D64C80-2AA4-4BD0-AC87-B4C2B3720012}</Project>
       <Name>XeLaTexConvert</Name>
     </ProjectReference>
+    <ProjectReference Include="..\YouVersionConvert\YouVersionConvert.csproj">
+      <Project>{600EDBC5-513C-4501-960A-F8A9D023F6A3}</Project>
+      <Name>YouVersionConvert</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

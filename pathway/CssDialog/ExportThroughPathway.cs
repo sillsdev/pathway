@@ -685,22 +685,30 @@ namespace SIL.PublishingSolution
                 return;
             }
 
-            // attempt to save the properties - if it doesn't work, leave the dialog open
-            if (SaveProperty(this))
-            {
-                DialogResult = DialogResult.Yes;
-                if (Text.Contains("Default"))
-                    SaveDefaultProperty(this);
-                _publicationName = Path.GetFileName(OutputFolder);
-                OutputFolder = Path.GetDirectoryName(OutputFolder);
-                DictionaryName = _publicationName;
-                Common.TimeStarted = DateTime.Now;
-                _settingsHelper.ClearValues();
-                Close();
-            }
+            //if (Format == "You Version")
+            //{
+            //    YouVersionDialog youVersionDlg = new YouVersionDialog();
+            //    youVersionDlg.ShowDialog();
+            //    this.Close();
+            //}
+            //else
+            //{
+                // attempt to save the properties - if it doesn't work, leave the dialog open
+                if (SaveProperty(this))
+                {
+                    DialogResult = DialogResult.Yes;
+                    if (Text.Contains("Default"))
+                        SaveDefaultProperty(this);
+                    _publicationName = Path.GetFileName(OutputFolder);
+                    OutputFolder = Path.GetDirectoryName(OutputFolder);
+                    DictionaryName = _publicationName;
+                    Common.TimeStarted = DateTime.Now;
+                    _settingsHelper.ClearValues();
+                    Close();
+                }
 
-            foreach (string chkBoxName in chkLbPreprocess.CheckedItems)
-            {
+                foreach (string chkBoxName in chkLbPreprocess.CheckedItems)
+                {
                     Param.LoadSettings();
                     if (chkBoxName == "Filter Broken Links")
                     {
@@ -711,7 +719,8 @@ namespace SIL.PublishingSolution
                         Param.SetValue(Param.FilterEmptyEntries, "True");
                     }
                     Param.Write();
-           }
+                }
+            //}
         }
 
         #endregion Events

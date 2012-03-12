@@ -67,6 +67,7 @@
             this.btnFileSizeZero = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.btnYouVersion = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -228,6 +229,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnYouVersion);
             this.groupBox1.Controls.Add(this.btnGetSoftwareData);
             this.groupBox1.Controls.Add(this.btnDotNet);
             this.groupBox1.Controls.Add(this.button12);
@@ -247,10 +249,11 @@
             this.groupBox1.Controls.Add(this.InDesign);
             this.groupBox1.Location = new System.Drawing.Point(26, 247);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(583, 226);
+            this.groupBox1.Size = new System.Drawing.Size(583, 270);
             this.groupBox1.TabIndex = 51;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Export";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // btnGetSoftwareData
             // 
@@ -266,7 +269,7 @@
             // btnDotNet
             // 
             this.btnDotNet.AccessibleName = "BtnFlexTest";
-            this.btnDotNet.Location = new System.Drawing.Point(215, 192);
+            this.btnDotNet.Location = new System.Drawing.Point(434, 162);
             this.btnDotNet.Name = "btnDotNet";
             this.btnDotNet.Size = new System.Drawing.Size(114, 28);
             this.btnDotNet.TabIndex = 66;
@@ -287,9 +290,9 @@
             // btnXeLaTex
             // 
             this.btnXeLaTex.AccessibleName = "BtnFlexTest";
-            this.btnXeLaTex.Location = new System.Drawing.Point(142, 192);
+            this.btnXeLaTex.Location = new System.Drawing.Point(124, 126);
             this.btnXeLaTex.Name = "btnXeLaTex";
-            this.btnXeLaTex.Size = new System.Drawing.Size(67, 28);
+            this.btnXeLaTex.Size = new System.Drawing.Size(78, 28);
             this.btnXeLaTex.TabIndex = 62;
             this.btnXeLaTex.Text = "XeLaTex";
             this.btnXeLaTex.UseVisualStyleBackColor = true;
@@ -298,9 +301,9 @@
             // button11
             // 
             this.button11.AccessibleName = "BtnGoBibleTest";
-            this.button11.Location = new System.Drawing.Point(40, 193);
+            this.button11.Location = new System.Drawing.Point(296, 126);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(95, 28);
+            this.button11.Size = new System.Drawing.Size(78, 28);
             this.button11.TabIndex = 61;
             this.button11.Text = "Go Bible";
             this.button11.UseVisualStyleBackColor = true;
@@ -334,9 +337,9 @@
             // btnParaText
             // 
             this.btnParaText.AccessibleName = "BtnFlexTest";
-            this.btnParaText.Location = new System.Drawing.Point(141, 128);
+            this.btnParaText.Location = new System.Drawing.Point(386, 128);
             this.btnParaText.Name = "btnParaText";
-            this.btnParaText.Size = new System.Drawing.Size(68, 28);
+            this.btnParaText.Size = new System.Drawing.Size(78, 28);
             this.btnParaText.TabIndex = 57;
             this.btnParaText.Text = "&ParaText";
             this.btnParaText.UseVisualStyleBackColor = true;
@@ -345,7 +348,7 @@
             // button6
             // 
             this.button6.AccessibleName = "BtnLogos";
-            this.button6.Location = new System.Drawing.Point(221, 128);
+            this.button6.Location = new System.Drawing.Point(360, 158);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(68, 28);
             this.button6.TabIndex = 56;
@@ -358,7 +361,7 @@
             this.chkPage.AutoSize = true;
             this.chkPage.Checked = true;
             this.chkPage.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPage.Location = new System.Drawing.Point(393, 193);
+            this.chkPage.Location = new System.Drawing.Point(418, 204);
             this.chkPage.Name = "chkPage";
             this.chkPage.Size = new System.Drawing.Size(118, 17);
             this.chkPage.TabIndex = 55;
@@ -369,7 +372,7 @@
             // 
             this.panel3.Controls.Add(this.radDictionary);
             this.panel3.Controls.Add(this.radScripture);
-            this.panel3.Location = new System.Drawing.Point(364, 162);
+            this.panel3.Location = new System.Drawing.Point(389, 231);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(174, 25);
             this.panel3.TabIndex = 54;
@@ -399,7 +402,7 @@
             // button5
             // 
             this.button5.AccessibleName = "BtnFlexTest";
-            this.button5.Location = new System.Drawing.Point(305, 128);
+            this.button5.Location = new System.Drawing.Point(142, 193);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(68, 28);
             this.button5.TabIndex = 53;
@@ -412,7 +415,7 @@
             this.button4.AccessibleName = "BtnFlexTest";
             this.button4.Location = new System.Drawing.Point(40, 128);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(95, 28);
+            this.button4.Size = new System.Drawing.Size(78, 28);
             this.button4.TabIndex = 52;
             this.button4.Text = "&New OpenOffice";
             this.button4.UseVisualStyleBackColor = true;
@@ -421,7 +424,7 @@
             // button1
             // 
             this.button1.AccessibleName = "BtnFlexTest";
-            this.button1.Location = new System.Drawing.Point(379, 128);
+            this.button1.Location = new System.Drawing.Point(41, 193);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(91, 28);
             this.button1.TabIndex = 51;
@@ -498,13 +501,24 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // btnYouVersion
+            // 
+            this.btnYouVersion.AccessibleName = "BtnGoBibleTest";
+            this.btnYouVersion.Location = new System.Drawing.Point(207, 126);
+            this.btnYouVersion.Name = "btnYouVersion";
+            this.btnYouVersion.Size = new System.Drawing.Size(78, 28);
+            this.btnYouVersion.TabIndex = 68;
+            this.btnYouVersion.Text = "You Version";
+            this.btnYouVersion.UseVisualStyleBackColor = true;
+            this.btnYouVersion.Click += new System.EventHandler(this.btnYouVersion_Click);
+            // 
             // FlexPluginTest
             // 
             this.AcceptButton = this.button1;
             this.AccessibleName = "FlexPluginTest";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(646, 497);
+            this.ClientSize = new System.Drawing.Size(646, 532);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
@@ -567,5 +581,6 @@
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button btnDotNet;
         private System.Windows.Forms.Button btnGetSoftwareData;
+        private System.Windows.Forms.Button btnYouVersion;
     }
 }

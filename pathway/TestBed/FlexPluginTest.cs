@@ -315,7 +315,7 @@ namespace TestBed
 
         private void Btn_InputPath_Click(object sender, EventArgs e)
         {
-            txtInputPath.Text = GetFilePath("XHTML Files|*.xhtml|XML Files|*.xml|Tex|*.tex");
+            txtInputPath.Text = GetFilePath("XHTML Files|*.xhtml|XML Files|*.xml|Tex|*.tex|Zip Files|*.zip");
             txtCSSInput.Text = Path.ChangeExtension(txtInputPath.Text, "css");
         }
 
@@ -754,6 +754,30 @@ namespace TestBed
         {
             UserInformation userInformation = new UserInformation();
             userInformation.GetUserInformation();
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnYouVersion_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(txtInputPath.Text))
+            {
+                MessageBox.Show("Please enter the valid XHTML path");
+                return;
+            }
+
+            ExportYouVersion exportYouVersion = new ExportYouVersion();
+            PublicationInformation projInfo = new PublicationInformation();
+
+            projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
+            projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
+            projInfo.ProjectInputType = radDictionary.Checked ? "Dictionary" : "Scripture";
+            projInfo.ProjectFileWithPath = projInfo.ProjectPath;
+            projInfo.DictionaryPath = projInfo.ProjectPath;
+            exportYouVersion.Export(projInfo);
         }
     }
 }
