@@ -752,8 +752,7 @@ namespace TestBed
 
         private void btnGetSoftwareData_Click(object sender, EventArgs e)
         {
-            UserInformation userInformation = new UserInformation();
-            userInformation.GetUserInformation();
+           Process.Start("http://myphpapps.com.cws10.my-hosting-panel.com/getdata.php");
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)

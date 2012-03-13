@@ -670,19 +670,20 @@ namespace SIL.PublishingSolution
             {
                 Directory.CreateDirectory(OutputFolder);
                 Directory.Delete(OutputFolder);
-
-                bool sendUsageData = false;
-                if (sendUsageData)
-                {
-                    UserInformation user = new UserInformation();
-                    user.GetUserInformation();
-                }
             }
             catch (Exception)
             {
                 MessageBox.Show("Please select a folder for which you have creation permission", "Pathway", MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
                 return;
+            }
+
+            string sendUsageData = Common.GetValueFromRegistryFromCurrentUser("Software\\SIL\\Pathway", "HelpImprove");
+
+            if (sendUsageData != null && sendUsageData == "Yes")
+            {
+                UserInformation user = new UserInformation();
+                user.GetUserInformation(true);
             }
 
             //if (Format == "You Version")

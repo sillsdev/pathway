@@ -188,7 +188,7 @@ namespace SIL.PublishingSolution
 
         #region Methods
 
-        public void GetUserInformation()
+        public void GetUserInformation(bool sendUserInfo)
         {
             try
             {
@@ -212,10 +212,13 @@ namespace SIL.PublishingSolution
                 frameworkVersion = GetFrameworkVersion(OSName);
                 geoLocation = "Unknown";
                 userSystemGuid = GetUserSystemGuid(OSName);
-                SetToPHP(userSystemGuid, oSName, oSServicePack, userSystemName, userIPAddress, pathwayVersion,
-                         javaVersion, paratext, tEVersion, libraofficeVersion, prince, xelatexVersion, indesignVersion, weSay,
-                         bloom, fontLists, browserList, systemCountry, geoLocation, language, frameworkVersion);
-
+                if (sendUserInfo)
+                {
+                    SetToPHP(userSystemGuid, oSName, oSServicePack, userSystemName, userIPAddress, pathwayVersion,
+                             javaVersion, paratext, tEVersion, libraofficeVersion, prince, xelatexVersion,
+                             indesignVersion, weSay,
+                             bloom, fontLists, browserList, systemCountry, geoLocation, language, frameworkVersion);
+                }
             }
             catch { }
         }

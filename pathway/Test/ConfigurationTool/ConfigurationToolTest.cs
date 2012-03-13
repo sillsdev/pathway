@@ -546,7 +546,7 @@ namespace Test.UIConfigurationToolTest
         public void GetUserInformationTest()
         {
             UserInformation userInfo = new UserInformation();
-            userInfo.GetUserInformation();
+            userInfo.GetUserInformation(false);
 
             Assert.IsNotNullOrEmpty(userInfo.OSName);
             Assert.IsNotNullOrEmpty(userInfo.UserSystemGuid);
