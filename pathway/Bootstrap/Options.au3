@@ -32,7 +32,7 @@ Func Options($left, $top)
 	$latest = GUICtrlCreateRadio("Latest", 384, 268, 64, 16)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 	GUICtrlSetState($stable, $GUI_CHECKED)
-	$note = GUICtrlCreateLabel("NOTE: Bootstrap will install " & $INS_Num & " support program(s) amounting to " & $INS_Size & "MB. (See Advanced button for details.)", 256, 350, 350, 90)
+	$note = GUICtrlCreateLabel("NOTE: Bootstrap will install " & $INS_Num & " support program(s) amounting to " & $INS_Size & "MB. (See Advanced button for details.)", 256, 400, 350, 40)
 	GUICtrlSetFont($note, 8.5, 400, 0, "Tahoma")
 
 	GUISetState(@SW_SHOW)
