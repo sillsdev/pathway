@@ -397,6 +397,12 @@
       <DependentUpon>ConfigureTasks.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInformation.cs" />
+    <Compile Include="YouVersionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YouVersionDialog.Designer.cs">
+      <DependentUpon>YouVersionDialog.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AboutPw.resx">
@@ -411,7 +417,6 @@
       <DependentUpon>ConfigurationTool.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-
     <EmbeddedResource Include="ConfigureStylesheetDialog.resx">
       <DependentUpon>ConfigureStylesheetDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -504,6 +509,9 @@
       <DependentUpon>ConfigureTasks.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="YouVersionDialog.resx">
+      <DependentUpon>YouVersionDialog.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Settings.settings">
@@ -524,6 +532,10 @@
     <ProjectReference Include="..\PsTool\PsTool.csproj">
       <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
       <Name>PsTool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YouVersionConvert\YouVersionConvert.csproj">
+      <Project>{600EDBC5-513C-4501-960A-F8A9D023F6A3}</Project>
+      <Name>YouVersionConvert</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

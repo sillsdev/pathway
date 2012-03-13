@@ -91,7 +91,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtInputBundle);
             this.Controls.Add(this.btnBrowse);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "YouVersionDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Enter Digital Library Bundle";
             this.Load += new System.EventHandler(this.YouVersionDialog_Load);
             this.ResumeLayout(false);

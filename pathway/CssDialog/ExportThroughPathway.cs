@@ -686,14 +686,14 @@ namespace SIL.PublishingSolution
                 user.GetUserInformation(true);
             }
 
-            //if (Format == "You Version")
-            //{
-            //    YouVersionDialog youVersionDlg = new YouVersionDialog();
-            //    youVersionDlg.ShowDialog();
-            //    this.Close();
-            //}
-            //else
-            //{
+            if (Format == "YouVersion")
+            {
+                YouVersionDialog youVersionDlg = new YouVersionDialog();
+                youVersionDlg.ShowDialog();
+                this.Close();
+            }
+            else
+            {
                 // attempt to save the properties - if it doesn't work, leave the dialog open
                 if (SaveProperty(this))
                 {
@@ -721,7 +721,7 @@ namespace SIL.PublishingSolution
                     }
                     Param.Write();
                 }
-            //}
+            }
         }
 
         #endregion Events
