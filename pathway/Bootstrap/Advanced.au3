@@ -4,8 +4,8 @@
 
 Func Advanced($left, $top)
 	Global $closeUp
-	Global $INS_DotNet, $INS_Java, $INS_Office, $INS_Epub, $INS_Pdf, $INS_Prince, $INS_XeLaTex, $DEL_Installer
-	Local $message, $size, $dotnet, $java, $office, $epub, $pdf, $prince, $xelatex, $delIns, $advanced, $sil, $pathway, $line, $close, $cancel, $msg
+	Global $INS_DotNet, $INS_Java, $INS_Office, $INS_Epub, $INS_Pdf, $INS_Prince, $INS_XeLaTex, $INS_YouVersion, $DEL_Installer
+	Local $message, $size, $dotnet, $java, $office, $epub, $pdf, $prince, $xelatex, $youversion, $delIns, $advanced, $sil, $pathway, $line, $close, $cancel, $msg
 	
 	$advanced = GUICreate("License", 660, 550, $left, $top)
 	$sil = GUICtrlCreatePic("sil.jpg", 8, 40, 224, 191, $SS_CENTERIMAGE)
@@ -27,6 +27,7 @@ Func Advanced($left, $top)
 	$pdf = GUICtrlCreateCheckbox("PDF reader - 13.8MB", 264, 270, 340, 28)
 	$prince = GUICtrlCreateCheckbox("PrinceXML (XHTML to PDF) - 4.0MB", 264, 300, 340, 28)
 	$xelatex = GUICtrlCreateCheckbox("XeLaTeX (typesetting) - 32.4MB", 264, 330, 340, 28)
+	$youversion = GUICtrlCreateCheckbox("YouVersion (web pages) - 20.4MB", 264, 360, 340, 28)
 	$delIns = GUICtrlCreateCheckbox("Delete installers after using them", 264, 416, 340, 28)
 
 GUICtrlSetState($dotnet, $GUI_DISABLE)
@@ -37,6 +38,7 @@ GUICtrlSetState($dotnet, $GUI_DISABLE)
 	Advanced_SetDefault($INS_Pdf, $pdf)
 	Advanced_SetDefault($INS_Prince, $prince)
 	Advanced_SetDefault($INS_XeLaTex, $xelatex)
+	Advanced_SetDefault($INS_YouVersion, $youversion)
 	Advanced_SetDefault(True, $delins)
 	;MsgBox(0, "Controls", "AcceptLicense=" & $acceptLicense & " Next=" & $next)
 
@@ -54,6 +56,7 @@ GUICtrlSetState($dotnet, $GUI_DISABLE)
 			$INS_Pdf = Advanced_State($pdf)
 			$INS_Prince = Advanced_State($prince)
 			$INS_XeLaTex = Advanced_State($xelatex)
+			$INS_YouVersion = Advanced_State($youversion)
 			$DEL_Installer = Advanced_State($delins)
 			WinSetState("Options", "", @SW_SHOW)
 			ExitLoop

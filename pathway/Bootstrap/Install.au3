@@ -29,6 +29,8 @@ Func DoInstall($bar)
 	GUICtrlSetData($bar, 70)
 	InstallXeLaTeXIfNecessary()
 	GUICtrlSetData($bar, 80)
+	InstallYouVersionIfNecessary()
+	GUICtrlSetData($bar, 85)
 	RemoveAllUserFolder()
 	GUICtrlSetData($bar, 90)
 	RemoveLocalFolder()
@@ -404,6 +406,37 @@ Func InstallXeLaTeXIfNecessary()
 		Return
 	Endif
 	InstallPathway("SetupXeLaTeX")
+EndFunc
+
+Func YouVersionInstalled()
+	Local $path, $ver, $latest
+	$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\SIL\PathwayYouVersion", "YouVersionDir")
+	if @error Then
+		$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\PathwayYouVersion", "YouVersionDir")
+	EndIf
+	if not @error Then
+		;MsgBox(4096,"Status","XeLaTeX path " & $path)
+		if FileExists( $path & "cygwin\bin\bash.exe") Then
+			$ver = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\SIL\PathwayYouVersion", "YouVersionVer")
+			if @error Then
+				$ver = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\PathwayYouVersion", "YouVersionVer")
+			EndIf
+			$latest = IniRead("PathwayBootstrap.Ini", "Versions", "YouVersion", "1.0")
+			if $ver = $latest Then
+				Return True
+			EndIf
+		EndIf
+	EndIf
+	Return False
+EndFunc
+
+Func InstallYouVersionIfNecessary()
+	Global $InstallStable, $INS_YouVersion
+	
+	if $InstallStable or Not $INS_YouVersion Then
+		Return
+	Endif
+	InstallPathway("SetupYouVersionTesting")
 EndFunc
 
 Func IsAssociation($ext)

@@ -12,6 +12,7 @@ Func Options($left, $top)
 	Global $INS_Pdf = Not PdfInstalled()
 	Global $INS_Prince = Not PrinceInstalled()
 	Global $INS_XeLaTex = Not XeLaTexInstalled()
+	Global $INS_YouVersion = Not YouVersionInstalled()
 	Local $stable, $latest, $message, $options, $sil, $pathway, $line, $back, $advanced, $cancel, $install, $msg
 	
 	$options = GUICreate("Options", 660, 550, $left, $top, 1)
