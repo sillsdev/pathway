@@ -4,7 +4,7 @@
 
 Func Advanced($left, $top)
 	Global $closeUp
-	Global $INS_DotNet, $INS_Java, $INS_Office, $INS_Epub, $INS_Pdf, $INS_Prince, $INS_XeLaTex, $INS_YouVersion, $DEL_Installer
+	Global $INS_Num, $INS_Size, $INS_DotNet, $INS_Java, $INS_Office, $INS_Epub, $INS_Pdf, $INS_Prince, $INS_XeLaTex, $INS_YouVersion, $DEL_Installer
 	Local $message, $size, $dotnet, $java, $office, $epub, $pdf, $prince, $xelatex, $youversion, $delIns, $advanced, $sil, $pathway, $line, $close, $cancel, $msg
 	
 	$advanced = GUICreate("License", 660, 550, $left, $top)
@@ -15,12 +15,7 @@ Func Advanced($left, $top)
 	$close = GUICtrlCreateButton("Close", 536, 464, 87, 28)
 	$message = GUICtrlCreateLabel("After analyzing what is available in your computer, Pathway bootstrap will download and install the following applications.", 256, 24, 350, 124)
 	GUICtrlSetFont($message, 14, 400, 0, "Tahoma")
-	if @OSArch = "X86" Then
-		$size = "22.4MB"
-	Else
-		$size = "45.2MB"
-	EndIf
-	$dotnet = GUICtrlCreateCheckbox("Microsoft Dotnet 2.0 - " & $size, 264, 150, 340, 28)
+	$dotnet = GUICtrlCreateCheckbox("Microsoft Dotnet 2.0 - " & DotNetSize() & "MB", 264, 150, 340, 28)
 	$java = GUICtrlCreateCheckbox("Java runtime (Go Bible, Epub) - 16.4MB", 264, 180, 340, 28)
 	$office = GUICtrlCreateCheckbox("Libre Office - 190MB", 264, 210, 340, 28)
 	$epub = GUICtrlCreateCheckbox("Epub (e-book reader) - 43.2MB", 264, 240, 340, 28)
@@ -30,7 +25,7 @@ Func Advanced($left, $top)
 	$youversion = GUICtrlCreateCheckbox("YouVersion (web pages) - 20.4MB", 264, 360, 340, 28)
 	$delIns = GUICtrlCreateCheckbox("Delete installers after using them", 264, 416, 340, 28)
 
-GUICtrlSetState($dotnet, $GUI_DISABLE)
+	GUICtrlSetState($dotnet, $GUI_DISABLE)
 	Advanced_SetDefault($INS_DotNet, $dotnet)
 	Advanced_SetDefault($INS_Java, $java)
 	Advanced_SetDefault($INS_Office, $office)
@@ -49,15 +44,17 @@ GUICtrlSetState($dotnet, $GUI_DISABLE)
 		Case $GUI_EVENT_CLOSE, $cancel
 			$closeUp = True
 		Case $close
-			$INS_DotNet = Advanced_State($dotnet)
-			$INS_Java = Advanced_State($java)
-			$INS_Office = Advanced_State($office)
-			$INS_Epub = Advanced_State($epub)
-			$INS_Pdf = Advanced_State($pdf)
-			$INS_Prince = Advanced_State($prince)
-			$INS_XeLaTex = Advanced_State($xelatex)
-			$INS_YouVersion = Advanced_State($youversion)
-			$DEL_Installer = Advanced_State($delins)
+			$INS_Num = 0
+			$INS_Size = 0
+			$INS_DotNet = Advanced_State($dotnet, DotNetSize())
+			$INS_Java = Advanced_State($java, 16.4)
+			$INS_Office = Advanced_State($office, 190.0)
+			$INS_Epub = Advanced_State($epub, 43.2)
+			$INS_Pdf = Advanced_State($pdf, 13.8)
+			$INS_Prince = Advanced_State($prince, 4.0)
+			$INS_XeLaTex = Advanced_State($xelatex, 32.4)
+			$INS_YouVersion = Advanced_State($youversion, 20.4)
+			$DEL_Installer = Advanced_State($delins, 0)
 			WinSetState("Options", "", @SW_SHOW)
 			ExitLoop
 		Case Else
@@ -78,11 +75,24 @@ Func Advanced_SetDefault($value, $control)
 	GUICtrlSetFont($control, 10, 400, 0, "Tahoma")
 EndFunc	
 
-Func Advanced_State($control)
+Func Advanced_State($control, $size)
+	Global $INS_Num, $INS_Size
 	;MsgBox(0, "Report", "Control=" & $control & " value=" & GUICtrlRead($control) & " checked=" & $GUI_CHECKED & " unchecked=" & $GUI_UNCHECKED)
 	if BitAND(GUICtrlRead($control), $GUI_CHECKED) Then
+		if $size > 0 Then
+			$INS_Num = $INS_Num + 1
+			$INS_Size = $INS_Size + $size
+		EndIf
 		Return True
 	Else
 		Return False
+	EndIf
+EndFunc
+
+Func DotNetSize()
+	if @OSArch = "X86" Then
+		Return 22.4
+	Else
+		Return 45.2
 	EndIf
 EndFunc

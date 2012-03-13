@@ -15,7 +15,11 @@ Func Improve($left, $top)
 	$message = GUICtrlCreateLabel("Would you be willing to help improve Pathway? If yes, the program will collect data about your usage of the product in order to determine which features are most helpful.", 256, 24, 350, 400)
 	GUICtrlSetFont($message, 14, 400, 0, "Tahoma")
 	$helpImprove = GUICtrlCreateCheckbox("Yes, I would like to help improve pathway", 300, 272)
-	GUICtrlSetState($helpImprove, $GUI_CHECKED)
+	if Get_Help_Improve() Then
+		GUICtrlSetState($helpImprove, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($helpImprove, $GUI_UNCHECKED)
+	EndIf
 
 	GUISetState(@SW_SHOW)
 	While $closeUp == False
@@ -51,7 +55,21 @@ Func Improve_OnHelpImprove($control)
 	;MsgBox(0, "Report", "Control=" & $control & " value=" & GUICtrlRead($control) & " checked=" & $GUI_CHECKED & " unchecked=" & $GUI_UNCHECKED)
 	if BitAND(GUICtrlRead($control), $GUI_CHECKED) Then
 		GUICtrlSetState($control, $GUI_UNCHECKED)
+		RegWrite("HKEY_CURRENT_USER\SOFTWARE\SIL\Pathway", "HelpImprove","REG_SZ", "No")
 	Else
 		GUICtrlSetState($control, $GUI_CHECKED)
+		RegWrite("HKEY_CURRENT_USER\SOFTWARE\SIL\Pathway", "HelpImprove","REG_SZ", "Yes")
 	EndIf
+EndFunc
+
+Func Get_Help_Improve()
+	Local $helpImprove
+	$helpImprove = RegRead("HKEY_CURRENT_USER\SOFTWARE\Wow6432Node\SIL\Pathway","HelpImprove")
+	if @error Then
+		$helpImprove = RegRead("HKEY_CURRENT_USER\SOFTWARE\SIL\Pathway","HelpImprove")
+	EndIf
+	if @error Then
+		RegWrite("HKEY_CURRENT_USER\SOFTWARE\SIL\Pathway", "HelpImprove","REG_SZ", "Yes")
+	EndIf
+	Return $helpImprove == "Yes"
 EndFunc

@@ -131,7 +131,8 @@ Func RemoveLocalFolder()
 	EndIf
 EndFunc
 
-Func DotNetInstalled()
+Func DotNetInstalled($size)
+	Global $INS_Num, $INS_Size
 	Local $DotNet2
 	
 	;See http://msdn.microsoft.com/en-us/library/xhz1cfs8(v=VS.90).aspx
@@ -140,6 +141,8 @@ Func DotNetInstalled()
 		;MsgBox(4096,"Status","Installing dot net is unnecessary...")
 		Return True
 	EndIf
+	$INS_Num = $INS_Num + 1
+	$INS_Size = $INS_Size + $size
 	Return False
 EndFunc
 
@@ -185,7 +188,8 @@ Func InstallVersions()
 	EndIf
 EndFunc
 
-Func JavaInstalled()
+Func JavaInstalled($size)
+	Global $INS_Num, $INS_Size
 	Local $ver, $path
 	
 	;See http://stackoverflow.com/questions/2951804/how-to-check-java-installation-from-batch-script
@@ -197,6 +201,8 @@ Func JavaInstalled()
 			return True
 		EndIf
 	EndIf
+	$INS_Num = $INS_Num + 1
+	$INS_Size = $INS_Size + $size
 	Return False
 EndFunc
 
@@ -226,8 +232,15 @@ Func InstallJavaIfNecessary()
 	EndIf
 EndFunc
 
-Func OfficeInstalled()
-	Return IsAssociation(".odt")
+Func OfficeInstalled($size)
+	Global $INS_Num, $INS_Size
+	
+	If IsAssociation(".odt") Then
+		Return True
+	EndIf
+	$INS_Num = $INS_Num + 1
+	$INS_Size = $INS_Size + $size
+	Return False
 EndFunc
 
 Func InstallLibreOfficeIfNecessary()
@@ -275,7 +288,8 @@ Func MajorPart($latest)
 	EndIf
 EndFunc
 
-Func PrinceInstalled()
+Func PrinceInstalled($size)
+	Global $INS_Num, $INS_Size
 	Local $path
 	
 	$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Prince_is1", "InstallLocation")
@@ -288,6 +302,8 @@ Func PrinceInstalled()
 			return True
 		EndIf
 	EndIf
+	$INS_Num = $INS_Num + 1
+	$INS_Size = $INS_Size + $size
 	Return False
 EndFunc
 
@@ -313,8 +329,15 @@ Func InstallPrinceXmlIfNecessary()
 	Endif
 EndFunc
 
-Func PdfInstalled()
-	Return IsAssociation(".pdf") 
+Func PdfInstalled($size)
+	Global $INS_Num, $INS_Size
+	
+	If IsAssociation(".pdf") Then
+		Return True
+	EndIf
+	$INS_Num = $INS_Num + 1
+	$INS_Size = $INS_Size + $size
+	Return False
 EndFunc
 
 Func InstallPdfReaderIfNecessary()
@@ -339,8 +362,15 @@ Func InstallPdfReaderIfNecessary()
 	EndIf
 EndFunc
 
-Func EpubInstalled()
-	Return IsAssociation(".epub") 
+Func EpubInstalled($size)
+	Global $INS_Num, $INS_Size
+	
+	If IsAssociation(".epub") Then
+		Return True
+	EndIf
+	$INS_Num = $INS_Num + 1
+	$INS_Size = $INS_Size + $size
+	Return False
 EndFunc
 
 Func InstallEpubReaderIfNecessary()
@@ -377,8 +407,10 @@ Func InstallEpubReaderIfNecessary()
 	EndIf
 EndFunc
 
-Func XeLaTexInstalled()
+Func XeLaTexInstalled($size)
+	Global $INS_Num, $INS_Size
 	Local $path, $ver, $latest
+	
 	$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\SIL\PathwayXeLaTeX", "XeLaTexDir")
 	if @error Then
 		$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\PathwayXeLaTeX", "XeLaTexDir")
@@ -396,6 +428,8 @@ Func XeLaTexInstalled()
 			EndIf
 		EndIf
 	EndIf
+	$INS_Num = $INS_Num + 1
+	$INS_Size = $INS_Size + $size
 	Return False
 EndFunc
 
@@ -408,8 +442,10 @@ Func InstallXeLaTeXIfNecessary()
 	InstallPathway("SetupXeLaTeX")
 EndFunc
 
-Func YouVersionInstalled()
+Func YouVersionInstalled($size)
+	Global $INS_Num, $INS_Size
 	Local $path, $ver, $latest
+	
 	$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\SIL\PathwayYouVersion", "YouVersionDir")
 	if @error Then
 		$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\PathwayYouVersion", "YouVersionDir")
@@ -427,6 +463,8 @@ Func YouVersionInstalled()
 			EndIf
 		EndIf
 	EndIf
+	$INS_Num = $INS_Num + 1
+	$INS_Size = $INS_Size + $size
 	Return False
 EndFunc
 

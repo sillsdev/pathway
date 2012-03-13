@@ -5,15 +5,17 @@
 
 Func Options($left, $top)
 	Global $closeUp
-	Global $INS_DotNet = Not DotNetInstalled()
-	Global $INS_Java = Not JavaInstalled()
-	Global $INS_Office = Not OfficeInstalled()
-	Global $INS_Epub = Not EpubInstalled()
-	Global $INS_Pdf = Not PdfInstalled()
-	Global $INS_Prince = Not PrinceInstalled()
-	Global $INS_XeLaTex = Not XeLaTexInstalled()
-	Global $INS_YouVersion = Not YouVersionInstalled()
-	Local $stable, $latest, $message, $options, $sil, $pathway, $line, $back, $advanced, $cancel, $install, $msg
+	Global $INS_Num = 0
+	Global $INS_Size = 0
+	Global $INS_DotNet = Not DotNetInstalled(DotNetSize())
+	Global $INS_Java = Not JavaInstalled(16.4)
+	Global $INS_Office = Not OfficeInstalled(190.0)
+	Global $INS_Epub = Not EpubInstalled(43.2)
+	Global $INS_Pdf = Not PdfInstalled(13.8)
+	Global $INS_Prince = Not PrinceInstalled(4.0)
+	Global $INS_XeLaTex = Not XeLaTexInstalled(32.4)
+	Global $INS_YouVersion = Not YouVersionInstalled(20.4)
+	Local $stable, $latest, $message, $options, $sil, $pathway, $line, $back, $advanced, $cancel, $install, $msg, $note
 	
 	$options = GUICreate("Options", 660, 550, $left, $top, 1)
 	$sil = GUICtrlCreatePic("sil.jpg", 8, 40, 224, 191, $SS_CENTERIMAGE)
@@ -30,6 +32,8 @@ Func Options($left, $top)
 	$latest = GUICtrlCreateRadio("Latest", 384, 268, 64, 16)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 	GUICtrlSetState($stable, $GUI_CHECKED)
+	$note = GUICtrlCreateLabel("NOTE: Bootstrap will install " & $INS_Num & " support program(s) amounting to " & $INS_Size & "MB. (See Advanced button for details.)", 256, 350, 350, 90)
+	GUICtrlSetFont($note, 8.5, 400, 0, "Tahoma")
 
 	GUISetState(@SW_SHOW)
 	While $closeUp == False
@@ -42,6 +46,7 @@ Func Options($left, $top)
 			ExitLoop
 		Case $advanced
 			Options_OnAdvanced("Options")
+			GUICtrlSetData($note, "NOTE: Bootstrap will install " & $INS_Num & " support program(s) amounting to " & $INS_Size & "MB. (See Advanced button for details.)")
 		Case $install
 			Options_OnInstall("Options", $stable)
 		Case $stable, $latest
