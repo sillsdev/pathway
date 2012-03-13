@@ -686,14 +686,8 @@ namespace SIL.PublishingSolution
                 user.GetUserInformation(true);
             }
 
-            if (Format == "YouVersion")
-            {
-                YouVersionDialog youVersionDlg = new YouVersionDialog();
-                youVersionDlg.ShowDialog();
-                this.Close();
-            }
-            else
-            {
+            //if (Format != "YouVersion")
+            //{
                 // attempt to save the properties - if it doesn't work, leave the dialog open
                 if (SaveProperty(this))
                 {
@@ -705,7 +699,6 @@ namespace SIL.PublishingSolution
                     DictionaryName = _publicationName;
                     Common.TimeStarted = DateTime.Now;
                     _settingsHelper.ClearValues();
-                    Close();
                 }
 
                 foreach (string chkBoxName in chkLbPreprocess.CheckedItems)
@@ -721,7 +714,8 @@ namespace SIL.PublishingSolution
                     }
                     Param.Write();
                 }
-            }
+            //}
+            this.Close();
         }
 
         #endregion Events

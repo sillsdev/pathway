@@ -22,6 +22,7 @@ xcopy %base2%\PdfConvert\%cfg2%\PdfConvert.* . /y
 xcopy %base2%\WordPressConvert\%cfg2%\WordPressConvert.* . /y
 xcopy %base2%\XeTeXConvert\%cfg2%\XeTeXConvert.* . /y
 xcopy %base2%\XeLaTeXConvert\%cfg2%\XeLaTeXWriter.* . /y
+xcopy %base2%\YouVersionConvert\%cfg2%\YouVersionConvert.* . /y
 xcopy %base2%\XeTex\%cfg2%\XeTexWriter.* . /y
 xcopy %base2%\XeTex\xetexExe .\xetexExe /i /s /q /y
 if "%1" == "ReleaseSE" goto nogobible
