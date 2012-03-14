@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="14">
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="15">
   <settings>
     <property name="InputPath" value="" />
     <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Dictionary" />
@@ -225,21 +225,21 @@
       <style name="OneColumn" file="LayoutOneCol.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg" shown="Yes">
         <description>5.25x8.25in - 1 Col - Left aligned - Charis 11 on 13</description>
       </style>
-      <style name="TwoColumn" file="LayoutTwoCol.css" approvedBy="GPS" previewfile1="TwoColumn_LayoutTwoCol p1.jpg" previewfile2="TwoColumn_LayoutTwoCol p2.jpg">
+      <style name="TwoColumn" file="LayoutTwoCol.css" approvedBy="GPS" previewfile1="TwoColumn_LayoutTwoCol p1.jpg" previewfile2="TwoColumn_LayoutTwoCol p2.jpg" shown="Yes">
         <description>5.25x8.25in - 2 Col - Left aligned - Charis 9 on 11</description>
       </style>
-      <style name="LikeBuangPNG" file="Layout_04.css" approvedBy="GPS" previewfile1="Pacific_Layout_04 p1.jpg" previewfile2="Pacific_Layout_04 p2.jpg">
+      <style name="LikeBuangPNG" file="Layout_04.css" approvedBy="GPS" previewfile1="Pacific_Layout_04 p1.jpg" previewfile2="Pacific_Layout_04 p2.jpg" shown="Yes">
         <description>Double column 9/13pt C5 with one column, sense paragraphs, example callouts,
           writing system separator, embedded spans marked according to writing system, mirrored
           headers and rule lines.</description>
       </style>
-      <style name="FieldWorksStyles" file="Layout_12.css" approvedBy="GPS" previewfile1="Fieldworks_Layout_12 P1.jpg" previewfile2="Fieldworks_Layout_12 P2.jpg">
+      <style name="FieldWorksStyles" file="Layout_12.css" approvedBy="GPS" previewfile1="Fieldworks_Layout_12 P1.jpg" previewfile2="Fieldworks_Layout_12 P2.jpg" shown="Yes">
         <description>C5 ruled double column with Flex formatting</description>
       </style>
-      <style name="FieldWorksArabicBased" file="Layout_13.css" approvedBy="GPS" previewfile1="FieldworksArabicBased_Layout_13 p1.jpg" previewfile2="FieldworksArabicBased_Layout_13 p2.jpg">
+      <style name="FieldWorksArabicBased" file="Layout_13.css" approvedBy="GPS" previewfile1="FieldworksArabicBased_Layout_13 p1.jpg" previewfile2="FieldworksArabicBased_Layout_13 p2.jpg" shown="Yes">
         <description>C5 ruled double column with Flex formatting for Arabic based font</description>
       </style>
-      <style name="Draft" file="Layout_01.css" approvedBy="GPS" previewfile1="Draft_Layout_01 p1.jpg" previewfile2="Draft_Layout_01 p2.jpg">
+      <style name="Draft" file="Layout_01.css" approvedBy="GPS" previewfile1="Draft_Layout_01 p1.jpg" previewfile2="Draft_Layout_01 p2.jpg" shown="Yes">
         <description>Single column draft 12/24pt A4</description>
       </style>
       <!-- style name="GPS11J11" file="GPS11J11.css" approvedBy="GPS">
@@ -319,17 +319,17 @@
     </style -->
     </paper>
     <mobile>
-      <style name="Go Bible" file="GoBible.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg">
+      <style name="Go Bible" file="GoBible.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg" shown="Yes">
         <description>Text only, no section heads or cross references</description>
       </style>
     </mobile>
     <web>
-      <style name="OneColumnWeb" file="LayoutOneCol.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg">
+      <style name="OneColumnWeb" file="LayoutOneCol.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg" shown="Yes">
         <description>5.25x8.25in - 1 Col - Left aligned - Charis 11 on 15</description>
       </style>
     </web>
     <others>
-      <style name="EBook (epub)" file="epub.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg">
+      <style name="EBook (epub)" file="epub.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg" shown="Yes">
         <description>1 column flowed text, left aligned, default font for each writing system</description>
         <styleProperty name="CoverImage" value="cover.png"/>
         <styleProperty name="TOCLevel" value="2 - Letter and Entry"/>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="14">
+    xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="15">
     <settings>
         <property name="InputPath" value="%(AppData)s/SIL/Pathway"/>
         <property name="OutputPath" value="%(AppData)s/SIL/Pathway"/>
@@ -61,22 +61,22 @@
     </roles>
     <styles>
         <paper>
-            <style name="Draft" file="Layout_01.css">
+            <style name="Draft" file="Layout_01.css"  shown="Yes">
                 <description> Single column draft 11pt A4 with drop capital </description>
             </style>
         </paper>
         <mobile>
-            <style name="Go Bible" file="GoBible.css" approvedBy="GPS">
+            <style name="Go Bible" file="GoBible.css" approvedBy="GPS"  shown="Yes">
                 <description>Text only, no section heads or cross references</description>
             </style>
         </mobile>
         <web>
-            <style name="GPS11J11" file="GPS11J11.css" approvedBy="GPS">
+            <style name="GPS11J11" file="GPS11J11.css" approvedBy="GPS"  shown="Yes">
                 <description>5.25x8.25in - 1 Col - Justified - Charis 11 on 13</description>
             </style>
         </web>
         <others>
-            <style name="EBook (epub)" file="epub.css" approvedBy="GPS">
+            <style name="EBook (epub)" file="epub.css" approvedBy="GPS"  shown="Yes">
                 <description>1 column flowed text, left aligned, 13pt font</description>
             </style>
         </others>

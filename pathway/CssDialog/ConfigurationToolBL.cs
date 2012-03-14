@@ -1197,7 +1197,12 @@ namespace SIL.PublishingSolution
             cTool.TabDisplay.Enabled = IsEnable;
             cTool.TabMobile.Enabled = IsEnable;
             cTool.TabOthers.Enabled = IsEnable;
-            cTool.TabInfo.Enabled = IsEnable;
+            //cTool.TabInfo.Enabled = IsEnable;
+            cTool.TxtName.Enabled = IsEnable;
+            cTool.TxtDesc.Enabled = IsEnable;
+            cTool.TxtComment.Enabled = IsEnable;
+            cTool.TxtApproved.Enabled = IsEnable;
+            cTool.ChkAvailable.Enabled = true;
         }
 
         protected void setDefaultInputType()

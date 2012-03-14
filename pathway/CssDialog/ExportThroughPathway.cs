@@ -572,7 +572,8 @@ namespace SIL.PublishingSolution
 
         private void ShownValidation()
         {
-            string xPathLayouts = "//styles/" + _media + "/style[@approvedBy='GPS' or @shown='Yes']";
+            //string xPathLayouts = "//styles/" + _media + "/style[@approvedBy='GPS' or @shown='Yes']";
+            string xPathLayouts = "//styles/" + _media + "/style[@shown='Yes']";
             XmlNodeList stylenames = Param.GetItems(xPathLayouts);
             foreach (XmlNode stylename in stylenames)
             {
