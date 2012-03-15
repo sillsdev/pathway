@@ -90,7 +90,7 @@
     <Edition>BTE</Edition>
     <ProductName>Pathway $(Edition)</ProductName>
     <ConfTag>Pw7</ConfTag>
-    <Status/>
+    <Status></Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|AnyCPU' ">
@@ -104,7 +104,7 @@
     <Edition>SE</Edition>
     <ProductName>Pathway $(Edition)</ProductName>
     <ConfTag>Pw7</ConfTag>
-    <Status/>
+    <Status></Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwCtx|AnyCPU' ">
@@ -173,6 +173,7 @@
     <Edition>BTE</Edition>
     <ProductName>Pathway $(Edition)</ProductName>
     <ConfTag>Pw7</ConfTag>
+    <Status></Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|x86' ">
@@ -186,6 +187,7 @@
     <Edition>SE</Edition>
     <ProductName>Pathway $(Edition)</ProductName>
     <ConfTag>Pw7</ConfTag>
+    <Status></Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwCtx|x86' ">
@@ -362,7 +364,8 @@
     <Exec Command="candle -nologo Install$(ConfTag)$(Edition).wxs " WorkingDirectory="Wix" />
     <Exec Command="candle -nologo UserInterface.wxs" WorkingDirectory="Wix" />
     <Exec Command="candle -nologo Files.wxs -sw1044" WorkingDirectory="Wix" />
-    <Exec Command="light -nologo wixca.wixlib Features.wixobj Install$(ConfTag)$(Edition).wixobj Files.wixobj UserInterface.wixobj -out Setup$(ConfTag)$(Edition)$(Status).msi" WorkingDirectory="Wix" />
+    <Exec Command="light -nologo wixca.wixlib Features.wixobj Install$(ConfTag)$(Edition).wixobj Files.wixobj UserInterface.wixobj -out Setup$(ConfTag)$(Edition)$(Status)-$(BUILD_NUMBER).msi" WorkingDirectory="Wix" />
+    <Copy SourceFiles=".\Wix\Setup$(ConfTag)$(Edition)$(Status)-$(BUILD_NUMBER).msi" DestinationFolder="..\Sprint"/>
   </Target>
   <Target Name="BeforeBuild">
     <Copy SourceFiles="@(ConfigurationTool)" DestinationFolder="Files\ConfigurationTool\" />

@@ -83,12 +83,12 @@ Func GetInstaller($name)
 	Local $urlPath
 	if $InstallStable Then
 		;$urlPath = 'http://pathway.googlecode.com/files/'
-		$urlPath = 'http://pathway.sil.org/wp-content/sprint/'
+		$urlPath = 'http://pathway.sil.org/wp-content/stable/'
 	Else
-		$urlPath = 'http://pathway.sil.org/wp-content/sprint/'
+		$urlPath = 'http://pathway.googlecode.com/files/'
 	EndIf
 	if not FileExists($name) Then
-		;MsgBox(4096,"Status","Downloading " & $urlPath & $name)
+		MsgBox(4096,"Status","Downloading " & $urlPath & $name)
 		RunWait("wget.exe " & $urlPath & $name)
 	EndIf
 	Sleep( 500 )
@@ -256,13 +256,18 @@ Func InstallLibreOfficeIfNecessary()
 	;Else
 		;Return
 	;EndIf
-	$latest = IniRead("PathwayBootstrap.Ini", "Versions", "LibreOffice", "3.4.3")
-	$pkg = "LibO_" & $latest & "_Win_x86_install_multi.exe"
-	GetFromUrl($pkg, "http://download.documentfoundation.org/libreoffice/stable/" & $latest & "/win/x86/" & $pkg)
+	;$latest = IniRead("PathwayBootstrap.Ini", "Versions", "LibreOffice", "3.4.3")
+	$latest = StringSplit(IniRead("PathwayBootstrap.Ini", "Versions", "LibreOffice", "3.4.3,6263"), ",")
+	$pkg = "LibO_" & $latest[1] & "_Win_x86_install_multi.exe"
+	If $latest[0] = "1" Then
+		GetFromUrl($pkg, "http://download.documentfoundation.org/libreoffice/stable/" & $latest & "/win/x86/" & $pkg)
+	Else
+		GetFromUrl($pkg, "http://www.oldapps.com/libreoffice.php?app=" & $latest[2])
+	EndIf
 	If FileExists($pkg) Then
 		RunWait(@ComSpec & " /c " & $pkg)  ;LibreOffice installer won't run as a sub task from a non-admin main task in Win7
 		if not @error Then
-			$major = MajorPart($latest)
+			$major = MajorPart($latest[1])
 			$installerTitle = "LibreOffice " & $major & " - Installation Wizard"
 			;MsgBox(4096,"Status","Title is " & $installerTitle)
 			WinWaitActive($installerTitle)
@@ -352,7 +357,7 @@ Func InstallPdfReaderIfNecessary()
 	;EndIf
 	$latest = IniRead("PathwayBootstrap.Ini", "Versions", "FoxitReader", "513.1201")
 	$pkg = "FoxitReader" & $latest & "_enu_Setup.exe"
-	GetFromUrl($pkg, "http://cdn01.foxitsoftware.com/pub/foxit/reader/desktop/win/5.x/5.1/enu/" & $pkg)
+	GetFromUrl($pkg, "http://cdn04.foxitsoftware.com/pub/foxit/reader/desktop/win/5.x/5.1/enu/" & $pkg)
 	If FileExists($pkg) Then
 		RunWait($pkg)
 		CleanUp($pkg)
@@ -439,7 +444,10 @@ Func InstallXeLaTeXIfNecessary()
 	if $InstallStable or Not $INS_XeLaTex Then
 		Return
 	Endif
-	InstallPathway("SetupXeLaTeX")
+	Local $name = "SetupXeLaTeXTesting-1.0.2-1.4.msi"
+	CleanUp($name)
+	GetInstaller($name)
+	LaunchInstaller($name)
 EndFunc
 
 Func YouVersionInstalled($size)
@@ -474,7 +482,10 @@ Func InstallYouVersionIfNecessary()
 	if $InstallStable or Not $INS_YouVersion Then
 		Return
 	Endif
-	InstallPathway("SetupYouVersionTesting")
+	Local $name = "SetupYouVersionTesting-1.1.0.2018.msi"
+	CleanUp($name)
+	GetInstaller($name)
+	LaunchInstaller($name)
 EndFunc
 
 Func IsAssociation($ext)
@@ -513,7 +524,7 @@ Func GetFromUrl($name, $url)
 		EndIf
 	Endif
 	if not FileExists($name) Then
-		;MsgBox(4096,"Status","Downloading " & $urlPath & $name)
+		;MsgBox(4096,"Status","Downloading " & $url)
 		RunWait("wget.exe " & $url)
 	EndIf
 	Sleep( 500 )
