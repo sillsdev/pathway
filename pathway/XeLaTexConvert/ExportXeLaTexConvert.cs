@@ -404,6 +404,13 @@ namespace SIL.PublishingSolution
                 File.Delete(Common.PathCombine(instPath, texNameOnly + ".log"));
                 File.Delete(Common.PathCombine(instPath, texNameOnly + ".pdf"));
                 File.Delete(Common.PathCombine(instPath, texNameOnly + ".aux"));
+
+                string[] picList = Directory.GetFiles(instPath, "*.jpg");
+                foreach (string picturefile in picList)
+                {
+                    File.Delete(picturefile);
+                }
+
                 File.Delete(dest);
             }
             catch { }

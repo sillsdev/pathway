@@ -66,8 +66,9 @@ namespace SIL.PublishingSolution
                         MarginTop(propertyValue);
                         break;
                     //case "margin-bottom":
-                    //    MarginBottom(propertyValue);
-                    //    break;
+                    //case "class-margin-bottom":
+                        //MarginBottom(propertyValue);
+                        //break;
                     case "font-family":
                         FontFamily(propertyValue);
                         break;

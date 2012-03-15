@@ -208,7 +208,7 @@ namespace SIL.PublishingSolution
                 Common.FileInsertText(_xetexFullFile, @"\usepackage{graphicx}");
                 Common.FileInsertText(_xetexFullFile, @"\usepackage{grffile}");
                 Common.FileInsertText(_xetexFullFile, @"\usepackage{float}");
-
+                
                 foreach (var package in includePackageList)
                 {
                     Common.FileInsertText(_xetexFullFile, package);
@@ -245,7 +245,8 @@ namespace SIL.PublishingSolution
                 tableOfContent += "\r\n";
                 tableOfContent += "\\newpage \r\n";
             }
-
+            
+            tableOfContent += "\\thispagestyle{empty} \r\n";
             tableOfContent += "\\tableofcontents \r\n";
             //tableOfContent += "\\pagebreak[2] \r\n";
             tableOfContent += "\\newpage \r\n";
@@ -268,7 +269,7 @@ namespace SIL.PublishingSolution
                     File.Copy(CoverPageImagePath, destinctionPath, true);
 
                 tableOfContent += "\\font\\CoverPageHeading=\"Times New Roman/B\":color=000000 at 22pt \r\n";
-                tableOfContent += "\\color{blue} \r\n";
+                tableOfContent += "\\color{black} \r\n";
                 tableOfContent += "\\AddToShipoutPicture*{% \r\n";
                 tableOfContent +=
                     "\\put(0,0){\\rule{\\paperwidth}{\\paperheight}}{\\includegraphics[width=\\paperwidth, height=\\paperheight]{" +
