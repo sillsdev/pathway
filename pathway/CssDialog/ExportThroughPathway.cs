@@ -728,6 +728,7 @@ namespace SIL.PublishingSolution
             Format = Param.DefaultValue[Param.PrintVia];
             Style = Param.DefaultValue[Param.LayoutSelected];
             // publication info tab
+            Param.DatabaseName = DatabaseName;
             if (Title.Trim().Length < 1)
             {
                 Title = Param.GetMetadataValue(Param.Title, Organization);

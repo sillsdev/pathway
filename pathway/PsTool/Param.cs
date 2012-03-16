@@ -83,6 +83,7 @@ namespace SIL.PublishingSolution
         public const string Media = "Media";
         // TD-2344: Publication Information (15 Dublin Core metadata elements: http://dublincore.org/documents/dces/)
         public const string Title = "Title";
+        public static string DatabaseName = "DatabaseName";
         public const string Creator = "Creator";
         public const string Publisher = "Publisher";
         public const string Description = "Description";
@@ -1319,6 +1320,21 @@ namespace SIL.PublishingSolution
         public static string GetMetadataValue(string Name, string Organization)
         {
             XmlNode node;
+            if (Name.ToLower() == "title")
+            {
+                try
+                {
+                    node = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/defaultValue");
+                    string lastSavedDatabase = node.InnerText;
+                    if(lastSavedDatabase != DatabaseName)
+                    {
+                        return null;
+                    }
+                }
+                catch
+                {
+                }
+            }
             try
             {
                 node = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/currentValue");
@@ -1353,6 +1369,17 @@ namespace SIL.PublishingSolution
             try
             {
                 VerifyMetaNode(Name);
+
+                if(Name.ToLower() == "title")
+                {
+                    XmlNode ndeDefault = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/defaultValue");
+                    if(ndeDefault != null && Common.databaseName.Length > 0)
+                    {
+                        ndeDefault.InnerText = Common.databaseName;
+                        Write();
+                    }
+                }
+
                 XmlNode node = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/currentValue");
                 var newValue = " ";
                 if(Value != null && Value.Trim().Length > 0)
