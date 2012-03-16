@@ -453,7 +453,8 @@ EndFunc
 Func YouVersionInstalled($size)
 	Global $INS_Num, $INS_Size
 	Local $path, $ver, $latest
-	
+
+	return True
 	$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\SIL\PathwayYouVersion", "YouVersionDir")
 	if @error Then
 		$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\PathwayYouVersion", "YouVersionDir")
@@ -479,6 +480,7 @@ EndFunc
 Func InstallYouVersionIfNecessary()
 	Global $InstallStable, $INS_YouVersion
 	
+	Return
 	if $InstallStable or Not $INS_YouVersion Then
 		Return
 	Endif
