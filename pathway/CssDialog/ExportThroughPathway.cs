@@ -358,7 +358,7 @@ namespace SIL.PublishingSolution
             if (Organization == "") 
             {
                 // no organization set yet -- display the Select Organization dialog
-                var dlg = new SelectOrganizationDialog();
+                var dlg = new SelectOrganizationDialog(InputType);
                 if (Text.Contains("Set Defaults"))
                 {
                     // if we're setting defaults, provide a clue as to what they're setting the defaults for

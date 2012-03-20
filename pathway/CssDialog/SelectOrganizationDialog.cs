@@ -11,6 +11,7 @@ namespace SIL.PublishingSolution
         private static string _helpTopic = string.Empty;
         private XmlNodeList _organizations;
         private bool _showAllOrgs = false;
+        private string _inputType;
 
         public string Organization
         {
@@ -18,8 +19,9 @@ namespace SIL.PublishingSolution
             set { ddlOrganization.Text = value; }
         }
 
-        public SelectOrganizationDialog()
+        public SelectOrganizationDialog(string inputType)
         {
+            _inputType = inputType;
             InitializeComponent();
             _helpTopic = "User_Interface/Dialog_boxes/Select_Your_Organization_dialog_box.htm";
         }
@@ -57,11 +59,12 @@ namespace SIL.PublishingSolution
             _showAllOrgs = (File.Exists(Common.FromRegistry("ScriptureStyleSettings.xml")));
             // Load User Interface Collection Parameters
             Param.LoadSettings();
+            string inputType = Param.InputType;
             _organizations = Param.GetItems("//stylePick/Organizations/Organization");
             foreach (var org in _organizations)
             {
                 var node = (XmlNode)org;
-                if ((_showAllOrgs == false) && (node.FirstChild.Value.Contains("Bible")))
+                if ((_inputType == "Dictionary") && (node.FirstChild.Value.Contains("Bible")))
                 {
                     // UBS, PBT - don't display in SE version
                     continue;
