@@ -815,9 +815,20 @@ namespace SIL.PublishingSolution
             {
                 if (ex.NativeErrorCode == 1155)
                 {
-                    var msg = new[] { "LibreOffice application from http://www.libreoffice.org site.\nAfter downloading and installing Libre Office, please consult release notes about how to change the macro security setting to enable the macro that creates the headers." };
-                    LocDB.Message("errInstallFile", "Please install " + msg, msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
-                    return false;
+                    string installedLocation = string.Empty;
+                    if (File.Exists(fileNameNoPath))
+                    {
+                        installedLocation = fileNameNoPath;
+                        var msg = new[] { "LibreOffice application from http://www.libreoffice.org site.\nAfter downloading and installing Libre Office, please consult release notes about how to change the macro security setting to enable the macro that creates the headers." };
+                        LocDB.Message("errInstallFile", "The output has been save in " + installedLocation + ".", "Please install " + msg, msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
+                        return false;
+                    }
+                    else
+                    {
+                        var msg = new[] { "LibreOffice application from http://www.libreoffice.org site.\nAfter downloading and installing Libre Office, please consult release notes about how to change the macro security setting to enable the macro that creates the headers." };
+                        LocDB.Message("errInstallFile", "Please install " + msg, msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
+                        return false;
+                    }
                 }
             }
             finally

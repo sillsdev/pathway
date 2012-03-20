@@ -17,7 +17,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows.Forms;
 using SIL.Tool;
+using SIL.Tool.Localization;
 
 namespace SIL.PublishingSolution
 {
@@ -127,7 +129,15 @@ namespace SIL.PublishingSolution
             {
                 if (ex.NativeErrorCode == 1155)
                 {
+                    string installedLocation = string.Empty;
 
+                    if (File.Exists(ldmlFullName))
+                    {
+                        installedLocation = ldmlFullName;
+                        
+                        var msg = new[] { "Indesign application." };
+                        LocDB.Message("errInstallFile", "The output has been save in " + installedLocation, "Please install " + msg, msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
+                    }
                 }
             }
         }

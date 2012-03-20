@@ -1740,6 +1740,90 @@ namespace SIL.Tool.Localization
             //return (result == DialogResult.Yes);
             return result;
         }
+
+        public static DialogResult Message(
+            string sID,
+            string sApplicationOpenError,
+            string sDefaultEnglish,
+            string[] vsInsertions,
+            MessageTypes MessageType, MessageDefault msgDefaultButton)
+        {
+            s_sLastMessageID = sID;
+
+            // Retrieve the localized form of the message
+            LocItem item = DB.Messages.Find(sID);
+            if (null == item)
+            {
+                item = new LocItem(sID);
+                item.English = sDefaultEnglish;
+                DB.Messages.AppendItem(item);
+            }
+            string sMessageText = item.AltValue;
+
+
+            // Not Used
+            //MessageBoxButtons.YesNoCancel
+            //MessageBoxIcon.None
+
+
+
+            // Perform the insertions
+            sMessageText = Insert(sMessageText, vsInsertions);
+
+            // Decide which button(s) and which icon to show in the message box
+            MessageBoxButtons buttons = MessageBoxButtons.OK;
+            MessageBoxIcon icon = MessageBoxIcon.Warning;
+            MessageBoxDefaultButton defaultButton = MessageBoxDefaultButton.Button1;
+            switch (msgDefaultButton)
+            {
+                //case MessageDefault.First:
+                //defaultButton = MessageBoxDefaultButton.Button1;
+                //break;
+                case MessageDefault.Second:
+                    defaultButton = MessageBoxDefaultButton.Button2;
+                    break;
+                case MessageDefault.Third:
+                    defaultButton = MessageBoxDefaultButton.Button3;
+                    break;
+
+            }
+
+
+            switch (MessageType)
+            {
+                case MessageTypes.Warning:
+                    buttons = MessageBoxButtons.OK;
+                    icon = MessageBoxIcon.Warning;
+                    break;
+                case MessageTypes.WarningYN:
+                    buttons = MessageBoxButtons.YesNo;
+                    icon = MessageBoxIcon.Warning;
+                    break;
+                case MessageTypes.YN:
+                    buttons = MessageBoxButtons.YesNo;
+                    icon = MessageBoxIcon.Question;
+                    break;
+                case MessageTypes.Info:
+                    buttons = MessageBoxButtons.OK;
+                    icon = MessageBoxIcon.Information;
+                    break;
+                case MessageTypes.Error:
+                    buttons = MessageBoxButtons.OK;
+                    icon = MessageBoxIcon.Error;
+                    break;
+                case MessageTypes.WarningYNC:
+                    buttons = MessageBoxButtons.YesNoCancel;
+                    icon = MessageBoxIcon.Question;
+                    break;
+
+
+            }
+
+            // Finally, we can show the message
+            DialogResult result = MessageBox.Show(Form.ActiveForm, sApplicationOpenError + " \n" + sMessageText, s_AppTitle, buttons, icon, defaultButton);
+            //return (result == DialogResult.Yes);
+            return result;
+        }
         #endregion
         #region SAttr{g/s}: bool SuppressMessages - turns off displaying the msgs (e..g, for testing)
         static public bool SuppressMessages

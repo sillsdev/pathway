@@ -392,13 +392,23 @@ namespace SIL.PublishingSolution
 
             if (openFile && File.Exists(pdfFullName))
             {
-                Common.OpenOutput(pdfFullName);
+                try
+                {
+                    Common.OpenOutput(pdfFullName);
+                }
+                catch (System.ComponentModel.Win32Exception ex)
+                {
+                    if (ex.NativeErrorCode == 1155)
+                    {
+                        if (File.Exists(pdfFullName))
+                        {
+                            string installedLocation = pdfFullName;
+                            MessageBox.Show("The output has been save in " + installedLocation + ".\n Please install the Xelatex application.");
+                        }
+                    }
+                }
+                
             }
-            //MessageBox.Show(pdfFullName, "XeLaTex output");
-            //MessageBox.Show(p1Error, "XeLaTex errors");
-            //MessageBox.Show(string.Format("Review {0} for conversion results.", logFullName), "XeLaTex log");
-            //const bool recursive = true;
-
             try
             {
                 File.Delete(Common.PathCombine(instPath, texNameOnly + ".log"));
@@ -450,22 +460,7 @@ namespace SIL.PublishingSolution
             xeLatexFile.Flush();
             xeLatexFile.Close();
         }
-
-        private void Launch(string ldmlFullName)
-        {
-            try
-            {
-                Common.OpenOutput(ldmlFullName);
-            }
-            catch (System.ComponentModel.Win32Exception ex)
-            {
-                if (ex.NativeErrorCode == 1155)
-                {
-
-                }
-            }
-        }
-
+        
         #region Language Handling
         /// <summary>
         /// Parses the specified file and sets the internal languages list to all the languages found in the file.
