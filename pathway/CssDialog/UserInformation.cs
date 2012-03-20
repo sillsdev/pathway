@@ -190,340 +190,443 @@ namespace SIL.PublishingSolution
 
         public void GetUserInformation(bool sendUserInfo)
         {
-            try
+            if (IsDeveloperInfo())
             {
-                oSName = GetOsName();
-
-                oSServicePack = GetOsVersion();
-                userSystemName = GetMachineName();
-                language = GetLanguage();
-                //fontLists = GetFontLists();
-                systemCountry = GetsystemCountry(Language);
-                userIPAddress = GetUserIpAddress();
-                javaVersion = GetJavaVersion(OSName);
-                xelatexVersion = GetXelatexVersion(OSName);
-                pathwayVersion = GetPathwayVersion(OSName);
-                libraofficeVersion = GetLibraofficeVersion(OSName);
-                paratext = GetParatext(OSName);
-                tEVersion = GetTeVersion(OSName);
-                prince = GetPrince(OSName);
-                indesignVersion = GetIndesignVersion(OSName);
-                browserList = GetBrowserList(OSName);
-                frameworkVersion = GetFrameworkVersion(OSName);
-                geoLocation = "Unknown";
-                userSystemGuid = GetUserSystemGuid(OSName);
-                if (sendUserInfo)
-                {
-                    SetToPHP(userSystemGuid, oSName, oSServicePack, userSystemName, userIPAddress, pathwayVersion,
-                             javaVersion, paratext, tEVersion, libraofficeVersion, prince, xelatexVersion,
-                             indesignVersion, weSay,
-                             bloom, fontLists, browserList, systemCountry, geoLocation, language, frameworkVersion);
-                }
+                return;
             }
-            catch { }
+
+            oSName = GetOsName();
+            oSServicePack = GetOsVersion();
+            userSystemName = GetMachineName();
+            language = GetLanguage();
+            //fontLists = GetFontLists();
+            systemCountry = GetsystemCountry(Language);
+            userIPAddress = GetUserIpAddress();
+            javaVersion = GetJavaVersion(OSName);
+            xelatexVersion = GetXelatexVersion(OSName);
+            pathwayVersion = GetPathwayVersion(OSName);
+            libraofficeVersion = GetLibraofficeVersion(OSName);
+            paratext = GetParatext(OSName);
+            tEVersion = GetTeVersion(OSName);
+            prince = GetPrince(OSName);
+            indesignVersion = GetIndesignVersion(OSName);
+            browserList = GetBrowserList(OSName);
+            frameworkVersion = GetFrameworkVersion(OSName);
+            geoLocation = "Unknown";
+            userSystemGuid = GetUserSystemGuid(OSName);
+            if (sendUserInfo)
+            {
+                SetToPHP(userSystemGuid, oSName, oSServicePack, userSystemName, userIPAddress, pathwayVersion,
+                         javaVersion, paratext, tEVersion, libraofficeVersion, prince, xelatexVersion,
+                         indesignVersion, weSay,
+                         bloom, fontLists, browserList, systemCountry, geoLocation, language, frameworkVersion);
+            }
+
+        }
+
+        private bool IsDeveloperInfo()
+        {
+
+            List<string> developerName = new List<string>();
+            developerName.Add("TRIHUS-1007");
+            developerName.Add("James-PC");
+            developerName.Add("Samdoss-PC");
+            developerName.Add("Karthi-PC");
+            developerName.Add("Sankar-SIL");
+
+            if (developerName.Contains(GetMachineName()))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private static string GetsystemCountry(string Language)
         {
-            string systemCountry;
-            systemCountry = Language.Substring(Language.IndexOf('(') + 1,
-                                             Language.LastIndexOf(')') - Language.IndexOf('(') - 1);
-            return systemCountry;
+            try
+            {
+                string systemCountry;
+                systemCountry = Language.Substring(Language.IndexOf('(') + 1,
+                                                 Language.LastIndexOf(')') - Language.IndexOf('(') - 1);
+                return systemCountry;
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
 
         private static string GetLanguage()
         {
-            string Language;
-            Language = CultureInfo.CurrentCulture.EnglishName;
-            return Language;
+            try
+            {
+                string language = CultureInfo.CurrentCulture.EnglishName;
+                return language;
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
 
         private static string GetFrameworkVersion(string osName)
         {
-            string frameworkVersion = null;
-            if (osName == "Windows7")
+            try
             {
-                RegistryKey installedVersions =
-                    Registry.LocalMachine.OpenSubKey(@"SOFTWARE\\Wow6432Node\\Microsoft\\NET Framework Setup\\NDP");
-                if (installedVersions != null)
+                string frameworkVersion = null;
+                if (osName == "Windows7")
                 {
-                    string[] versionNames = installedVersions.GetSubKeyNames();
-                    frameworkVersion =
-                        Convert.ToDouble(versionNames[versionNames.Length - 1].Remove(0, 1),
-                                         CultureInfo.InvariantCulture)
-                            .ToString(CultureInfo.InvariantCulture);
+                    RegistryKey installedVersions =
+                        Registry.LocalMachine.OpenSubKey(@"SOFTWARE\\Wow6432Node\\Microsoft\\NET Framework Setup\\NDP");
+                    if (installedVersions != null)
+                    {
+                        string[] versionNames = installedVersions.GetSubKeyNames();
+                        frameworkVersion =
+                            Convert.ToDouble(versionNames[versionNames.Length - 1].Remove(0, 1),
+                                             CultureInfo.InvariantCulture)
+                                .ToString(CultureInfo.InvariantCulture);
+                    }
                 }
+                else if (osName == "Windows XP")
+                {
+                    RegistryKey installedVersions =
+                        Registry.LocalMachine.OpenSubKey(@"SOFTWARE\\Microsoft\\NET Framework Setup\\NDP");
+                    if (installedVersions != null)
+                    {
+                        string[] versionNames = installedVersions.GetSubKeyNames();
+                        frameworkVersion =
+                            Convert.ToDouble(versionNames[versionNames.Length - 1].Remove(0, 1),
+                                             CultureInfo.InvariantCulture)
+                                .ToString(CultureInfo.InvariantCulture);
+                    }
+                }
+                return frameworkVersion;
             }
-            else if (osName == "Windows XP")
+            catch
             {
-                RegistryKey installedVersions =
-                    Registry.LocalMachine.OpenSubKey(@"SOFTWARE\\Microsoft\\NET Framework Setup\\NDP");
-                if (installedVersions != null)
-                {
-                    string[] versionNames = installedVersions.GetSubKeyNames();
-                    frameworkVersion =
-                        Convert.ToDouble(versionNames[versionNames.Length - 1].Remove(0, 1),
-                                         CultureInfo.InvariantCulture)
-                            .ToString(CultureInfo.InvariantCulture);
-                }
+                return string.Empty;
             }
-            return frameworkVersion;
         }
 
         private static string GetBrowserList(string osName)
         {
-            string browserList = null;
-            if (osName == "Windows7")
+            try
             {
-                browserList = GetValueFromRegistryHTTPCLASSROOT("http\\shell\\open\\command", "");
-                browserList = Common.RightRemove(browserList, ".exe");
-                browserList = Common.LeftRemove(browserList, "\\");
+                string browserList = null;
+                if (osName == "Windows7")
+                {
+                    browserList = GetValueFromRegistryHTTPCLASSROOT("http\\shell\\open\\command", "");
+                    browserList = Common.RightRemove(browserList, ".exe");
+                    browserList = Common.LeftRemove(browserList, "\\");
+                }
+                else if (osName == "Windows XP")
+                {
+                    browserList = GetValueFromRegistryHTTPCLASSROOT("http\\shell\\open\\command", "");
+                    browserList = Common.RightRemove(browserList, ".exe");
+                    browserList = Common.LeftRemove(browserList, "\\");
+                }
+                return browserList;
             }
-            else if (osName == "Windows XP")
+            catch
             {
-                browserList = GetValueFromRegistryHTTPCLASSROOT("http\\shell\\open\\command", "");
-                browserList = Common.RightRemove(browserList, ".exe");
-                browserList = Common.LeftRemove(browserList, "\\");
+                return string.Empty;
             }
-            return browserList;
         }
 
         private static string GetIndesignVersion(string osName)
         {
-            string indesignVersion = null;
-            if (osName == "Windows7")
+            try
             {
-                indesignVersion =
-                    Common.GetValueFromRegistry("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\InDesign.exe", "Path");
-                indesignVersion = Common.LeftRemove(indesignVersion, "Adobe\\");
+                string indesignVersion = null;
+                if (osName == "Windows7")
+                {
+                    indesignVersion =
+                        Common.GetValueFromRegistry(
+                            "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\InDesign.exe", "Path");
+                    indesignVersion = Common.LeftRemove(indesignVersion, "Adobe\\");
+                }
+                else if (osName == "Windows XP")
+                {
+                    indesignVersion =
+                        Common.GetValueFromRegistry(
+                            "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\InDesign.exe", "Path");
+                    indesignVersion = Common.LeftRemove(indesignVersion, "Adobe\\");
+                }
+                return indesignVersion;
             }
-            else if (osName == "Windows XP")
+            catch
             {
-                indesignVersion =
-                    Common.GetValueFromRegistry("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\InDesign.exe", "Path");
-                indesignVersion = Common.LeftRemove(indesignVersion, "Adobe\\");
+                return string.Empty;
             }
-            return indesignVersion;
         }
 
         private static string GetPrince(string osName)
         {
-            string prince = null;
-            if (osName == "Windows7")
+            try
             {
-                prince =
-                    Common.GetValueFromRegistry(
-                        "SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Prince_is1", "DisplayName");
+                string prince = null;
+                if (osName == "Windows7")
+                {
+                    prince =
+                        Common.GetValueFromRegistry(
+                            "SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Prince_is1", "DisplayName");
+                }
+                else if (osName == "Windows XP")
+                {
+                    prince = Common.GetValueFromRegistry("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Prince_is1",
+                                                         "DisplayName");
+                }
+                return prince;
             }
-            else if (osName == "Windows XP")
+            catch
             {
-                prince = Common.GetValueFromRegistry("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Prince_is1",
-                                                     "DisplayName");
+                return string.Empty;
             }
-            return prince;
         }
 
         private static string GetTeVersion(string osName)
         {
-            string teVersion = null;
-            if (osName == "Windows7")
+            try
             {
-                teVersion = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\SIL\\FieldWorks\\7.0", "RootCodeDir");
-                teVersion = Common.RightRemove(teVersion, "\\");
-                teVersion = Common.LeftRemove(teVersion, "SIL\\");
+                string teVersion = null;
+                if (osName == "Windows7")
+                {
+                    teVersion = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\SIL\\FieldWorks\\7.0", "RootCodeDir");
+                    teVersion = Common.RightRemove(teVersion, "\\");
+                    teVersion = Common.LeftRemove(teVersion, "SIL\\");
+                }
+                else if (osName == "Windows XP")
+                {
+                    teVersion = Common.GetValueFromRegistry("SOFTWARE\\SIL\\FieldWorks\\7.0", "RootCodeDir");
+                    teVersion = Common.RightRemove(teVersion, "\\");
+                    teVersion = Common.LeftRemove(teVersion, "SIL\\");
+                }
+                return teVersion;
             }
-            else if (osName == "Windows XP")
+            catch
             {
-                teVersion = Common.GetValueFromRegistry("SOFTWARE\\SIL\\FieldWorks\\7.0", "RootCodeDir");
-                teVersion = Common.RightRemove(teVersion, "\\");
-                teVersion = Common.LeftRemove(teVersion, "SIL\\");
+                return string.Empty;
             }
-            return teVersion;
         }
 
         private static string GetParatext(string osName)
         {
-            string paratext = null;
-            if (osName == "Windows7")
+            try
             {
-                paratext = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\ScrChecks\\1.0\\Program_Files_Directory_Ptw7", "");
-                paratext = Common.RightRemove(paratext, "\\");
-                paratext = Common.LeftRemove(paratext, "\\");
-                paratext = Common.LeftRemove(paratext, "\\");
-            }
-            else if (osName == "Windows XP")
-            {
-                paratext = Common.GetValueFromRegistry("SOFTWARE\\ScrChecks\\1.0\\Program_Files_Directory_Ptw7", "");
-                paratext = Common.RightRemove(paratext, "\\");
-                paratext = Common.LeftRemove(paratext, "\\");
-                paratext = Common.LeftRemove(paratext, "\\");
-            }
+                string paratext = null;
+                if (osName == "Windows7")
+                {
+                    paratext =
+                        Common.GetValueFromRegistry(
+                            "SOFTWARE\\Wow6432Node\\ScrChecks\\1.0\\Program_Files_Directory_Ptw7", "");
+                    paratext = Common.RightRemove(paratext, "\\");
+                    paratext = Common.LeftRemove(paratext, "\\");
+                    paratext = Common.LeftRemove(paratext, "\\");
+                }
+                else if (osName == "Windows XP")
+                {
+                    paratext = Common.GetValueFromRegistry("SOFTWARE\\ScrChecks\\1.0\\Program_Files_Directory_Ptw7", "");
+                    paratext = Common.RightRemove(paratext, "\\");
+                    paratext = Common.LeftRemove(paratext, "\\");
+                    paratext = Common.LeftRemove(paratext, "\\");
+                }
 
-            return paratext;
+                return paratext;
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
 
         private static string GetLibraofficeVersion(string osName)
         {
-            string libraofficeVersion = null;
-            if (osName == "Windows7")
+            try
             {
-                libraofficeVersion =
-                    Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\LibreOffice\\UNO\\InstallPath",
-                                                "");
+                string libraofficeVersion = null;
+                if (osName == "Windows7")
+                {
+                    libraofficeVersion =
+                        Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\LibreOffice\\UNO\\InstallPath",
+                                                    "");
+                }
+                else if (osName == "Windows XP")
+                {
+                    libraofficeVersion = Common.GetValueFromRegistry("SOFTWARE\\SIL\\PathwayXeLaTeX",
+                                                                     "");
+                }
+                return libraofficeVersion;
+
             }
-            else if (osName == "Windows XP")
+            catch
             {
-                libraofficeVersion = Common.GetValueFromRegistry("SOFTWARE\\SIL\\PathwayXeLaTeX",
-                                                                 "");
+                return string.Empty;
             }
-            return libraofficeVersion;
         }
 
         private static string GetPathwayVersion(string osName)
         {
-            string pathwayVersion = null;
-            /* Pathway Version  */
-            //string appName = Assembly.GetAssembly(this.GetType()).Location;
-            //AssemblyName assemblyName = AssemblyName.GetAssemblyName(appName);
-            //PathwayVersion = assemblyName.Version.ToString();
-
-            // Software / Microsoft / windows/ currentversion / installer / userdata / S-1-5-21-3328216688-2622995857-1421487914-1000 // Products // CA322A0D6F74A404FB17159D2EF6FE48 //  InstallProperties
-
-            if (osName == "Windows7")
+            try
             {
-                pathwayVersion = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\SIL\\Pathway", "PathwayDir");
+                string pathwayVersion = null;
+                /* Pathway Version  */
+                if (osName == "Windows7")
+                {
+                    pathwayVersion = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\SIL\\Pathway", "PathwayDir");
 
-                string appName = pathwayVersion + "CssDialog.dll";
-                if (File.Exists(appName))
-                {
-                    AssemblyName assemblyName = AssemblyName.GetAssemblyName(appName);
-                    pathwayVersion = assemblyName.Version.ToString();
+                    string appName = pathwayVersion + "CssDialog.dll";
+                    if (File.Exists(appName))
+                    {
+                        AssemblyName assemblyName = AssemblyName.GetAssemblyName(appName);
+                        pathwayVersion = assemblyName.Version.ToString();
+                    }
                 }
+                else if (osName == "Windows XP")
+                {
+                    pathwayVersion = Common.GetValueFromRegistry("SOFTWARE\\SIL\\Pathway", "PathwayDir");
+                    string appName = pathwayVersion + "CssDialog.dll";
+                    if (File.Exists(appName))
+                    {
+                        AssemblyName assemblyName = AssemblyName.GetAssemblyName(appName);
+                        pathwayVersion = assemblyName.Version.ToString();
+                    }
+                }
+                return pathwayVersion;
+
             }
-            else if (osName == "Windows XP")
+            catch
             {
-                pathwayVersion = Common.GetValueFromRegistry("SOFTWARE\\SIL\\Pathway", "PathwayDir");
-                string appName = pathwayVersion + "CssDialog.dll";
-                if (File.Exists(appName))
-                {
-                    AssemblyName assemblyName = AssemblyName.GetAssemblyName(appName);
-                    pathwayVersion = assemblyName.Version.ToString();
-                }
+                return string.Empty;
             }
-            return pathwayVersion;
         }
 
         private static string GetXelatexVersion(string osName)
         {
-            string xelatexVersion = null;
-            if (osName == "Windows7")
+            try
             {
-                xelatexVersion = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\SIL\\PathwayXeLaTeX", "XeLaTexVer");
+                string xelatexVersion = null;
+                if (osName == "Windows7")
+                {
+                    xelatexVersion = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\SIL\\PathwayXeLaTeX", "XeLaTexVer");
+                }
+                else if (osName == "Windows XP")
+                {
+                    xelatexVersion = Common.GetValueFromRegistry("SOFTWARE\\SIL\\PathwayXeLaTeX", "XeLaTexVer");
+                }
+                return xelatexVersion;
             }
-            else if (osName == "Windows XP")
+            catch
             {
-                xelatexVersion = Common.GetValueFromRegistry("SOFTWARE\\SIL\\PathwayXeLaTeX", "XeLaTexVer");
+                return string.Empty;
             }
-            return xelatexVersion;
         }
 
         private static string GetJavaVersion(string osName)
         {
-            string javaVersion = string.Empty;
-            /* Java Version  */
-            if (osName == "Windows7")
+            try
             {
-                javaVersion =
-                    Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\JavaSoft\\Java Runtime Environment",
-                                                "CurrentVersion");
+                string javaVersion = string.Empty;
+                /* Java Version  */
+                if (osName == "Windows7")
+                {
+                    javaVersion =
+                        Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\JavaSoft\\Java Runtime Environment",
+                                                    "CurrentVersion");
+                }
+                else if (osName == "Windows XP")
+                {
+                    javaVersion = Common.GetValueFromRegistry("SOFTWARE\\JavaSoft\\Java Runtime Environment",
+                                                              "CurrentVersion");
+                }
+                return javaVersion;
             }
-            else if (osName == "Windows XP")
+            catch
             {
-                javaVersion = Common.GetValueFromRegistry("SOFTWARE\\JavaSoft\\Java Runtime Environment",
-                                                          "CurrentVersion");
+                return string.Empty;
             }
-            return javaVersion;
         }
 
         private static string GetUserIpAddress()
         {
-            string userIpAddress = string.Empty;
-            IPHostEntry ip = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (IPAddress ipAddress in ip.AddressList)
+            try
             {
-                if (ipAddress.AddressFamily == AddressFamily.InterNetwork)
+                string userIpAddress = string.Empty;
+                IPHostEntry ip = Dns.GetHostEntry(Dns.GetHostName());
+                foreach (IPAddress ipAddress in ip.AddressList)
                 {
-                    userIpAddress = ipAddress.ToString();
-                    return userIpAddress;
+                    if (ipAddress.AddressFamily == AddressFamily.InterNetwork)
+                    {
+                        userIpAddress = ipAddress.ToString();
+                        return userIpAddress;
+                    }
                 }
+                return userIpAddress;
             }
-
-            return userIpAddress;
+            catch
+            {
+                return string.Empty;
+            }
         }
 
         private static string GetMachineName()
         {
-            return Environment.MachineName;
-        }
-
-        private string GetOsNameVersion()
-        {
-            return GetOsName() + " - " + GetOsVersion();
+            try
+            {
+                return Environment.MachineName;
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
 
         private static string GetUserSystemGuid(string osName)
         {
-            string UserSystemGuid;
-            UserSystemGuid = Guid.NewGuid().ToString();
-
-            if (osName == "Windows7")
+            try
             {
+                string UserSystemGuid;
+                UserSystemGuid = Guid.NewGuid().ToString();
 
-                string getUserSystemGuid = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node", "PathwayGUID");
-
-                if (getUserSystemGuid == null)
+                if (osName == "Windows7")
                 {
-                    try
+
+                    string getUserSystemGuid = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node", "PathwayGUID");
+
+                    if (getUserSystemGuid == null)
                     {
                         RegistryKey masterKey = Registry.LocalMachine.CreateSubKey("SOFTWARE\\Wow6432Node");
                         masterKey.SetValue("PathwayGUID", UserSystemGuid);
                         masterKey.Close();
                     }
-                    catch
+                    else
                     {
-
+                        UserSystemGuid = getUserSystemGuid;
                     }
-                }
-                else
-                {
-                    UserSystemGuid = getUserSystemGuid;
-                }
 
-            }
-            else if (osName == "Windows XP")
-            {
-                string getUserSystemGuid = Common.GetValueFromRegistry("SOFTWARE\\SIL\\Pathway", "PathwayGUID");
-
-                if (getUserSystemGuid == null)
+                }
+                else if (osName == "Windows XP")
                 {
-                    try
+                    string getUserSystemGuid = Common.GetValueFromRegistry("SOFTWARE\\SIL\\Pathway", "PathwayGUID");
+
+                    if (getUserSystemGuid == null)
                     {
                         RegistryKey masterKey = Registry.LocalMachine.CreateSubKey("SOFTWARE\\SIL\\Pathway");
                         masterKey.SetValue("PathwayGUID", UserSystemGuid);
                         masterKey.Close();
                     }
-                    catch
+                    else
                     {
-
+                        UserSystemGuid = getUserSystemGuid;
                     }
                 }
-                else
-                {
-                    UserSystemGuid = getUserSystemGuid;
-                }
-            }
 
-            return UserSystemGuid;
+                return UserSystemGuid;
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
 
         private static string GetValueFromRegistryHTTPCLASSROOT(string subKey, string keyName)
@@ -569,41 +672,54 @@ namespace SIL.PublishingSolution
 
         public string GetOsName()
         {
-            OperatingSystem osInfo = Environment.OSVersion;
-
-            switch (osInfo.Platform)
+            try
             {
-                case System.PlatformID.Win32NT:
-                    switch (osInfo.Version.Major)
-                    {
-                        case 3:
-                            return "Windows NT 3.51";
-                            break;
-                        case 4:
-                            return "Windows NT 4.0";
-                            break;
-                        case 5:
-                            if (osInfo.Version.Minor == 0)
-                                return "Windows 2000";
-                            else
-                                return "Windows XP";
-                            break;
-                        case 6:
-                            if (osInfo.Version.Minor == 1)
-                                return "Windows7";
-                            break;
-                    }
-                    break;
+                OperatingSystem osInfo = Environment.OSVersion;
+                switch (osInfo.Platform)
+                {
+                    case System.PlatformID.Win32NT:
+                        switch (osInfo.Version.Major)
+                        {
+                            case 3:
+                                return "Windows NT 3.51";
+                                break;
+                            case 4:
+                                return "Windows NT 4.0";
+                                break;
+                            case 5:
+                                if (osInfo.Version.Minor == 0)
+                                    return "Windows 2000";
+                                else
+                                    return "Windows XP";
+                                break;
+                            case 6:
+                                if (osInfo.Version.Minor == 1)
+                                    return "Windows7";
+                                break;
+                        }
+                        break;
+
+                }
+                return osInfo.Platform.ToString();
 
             }
-            return osInfo.Platform.ToString();
+            catch
+            {
+                return string.Empty;
+            }
         }
 
         public string GetOsVersion()
         {
-            OperatingSystem osInfo = Environment.OSVersion;
-
-            return osInfo.VersionString;
+            try
+            {
+                OperatingSystem osInfo = Environment.OSVersion;
+                return osInfo.VersionString;
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
 
         public string SetToPHP(string UserSystemGuid, string OSNameVersion, string OSServicePack, string UserSystemName, string UserIPAddress,
