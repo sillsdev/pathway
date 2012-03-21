@@ -1,0 +1,1 @@
+(RULE (CLASS variant-inflection) PRECEDES (CLASS variant-inflection) (PSEUDO before) (PROPERTY content ', '))

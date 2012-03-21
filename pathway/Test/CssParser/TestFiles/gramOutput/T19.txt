@@ -1,0 +1,1 @@
+(RULE (CLASS letter) (CLASS headword) (PROPERTY string-set guideword content ( )))

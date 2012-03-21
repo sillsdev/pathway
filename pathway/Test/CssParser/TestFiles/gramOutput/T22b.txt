@@ -1,0 +1,1 @@
+(RULE (CLASS pronunciation (ATTRIB lang ATTRIBEQUAL 'en')) PRECEDES (CLASS pronunciation (ATTRIB lang ATTRIBEQUAL 'tpi')) (PSEUDO before) (PROPERTY content ' / '))

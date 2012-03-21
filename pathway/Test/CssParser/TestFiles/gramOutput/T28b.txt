@@ -1,0 +1,1 @@
+(RULE (CLASS headword) (PROPERTY display inline) (PROPERTY position inherit) (PROPERTY top 2 %) (PROPERTY bottom 6 pc) (PROPERTY left 1 in) (PROPERTY float right) (PROPERTY clear right) (PROPERTY direction rtl) (PROPERTY unicode-bidi embed) (PROPERTY overflow visible) (PROPERTY clip rect ( 5 px 40 px 45 px 5 px )))

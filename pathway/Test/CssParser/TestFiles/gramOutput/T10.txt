@@ -1,0 +1,1 @@
+(RULE (CLASS headword) (PSEUDO after) (PROPERTY content " "))

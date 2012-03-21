@@ -1,0 +1,1 @@
+(RULE (CLASS letter) , (CLASS headword) (PROPERTY position relative))
