@@ -178,7 +178,7 @@ namespace SIL.PublishingSolution
             List<string> xsltFile = new List<string>();
             if (Param.Value.ContainsKey(Param.FilterEmptyEntries) && Param.Value[Param.FilterEmptyEntries] == "True")
             {
-                xsltFile.Add("Filter Empty Entries");
+                xsltFile.Add("Filter Empty Entries.xsl");
             }
             if (Param.Value.ContainsKey(Param.FilterBrokenLinks) && Param.Value[Param.FilterBrokenLinks] == "True")
             {
