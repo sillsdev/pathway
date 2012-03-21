@@ -214,7 +214,12 @@ namespace SIL.PublishingSolution
         private void SetDefaultLanguageFont(string fluffedCssFullName, string mainFullName, string fluffedCssReversal)
         {
             string fileName = Path.GetFileName(mainFullName);
-            if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe" || (DataType == "Dictionary" && fileName == "main.xhtml"))
+
+            if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe")
+            {
+                Common.ParaTextFontName(fluffedCssFullName);
+            }
+            if (DataType == "Dictionary" && fileName == "main.xhtml")
             {
                 Common.LanguageSettings(mainFullName, fluffedCssFullName, DataType == "Dictionary", fluffedCssReversal);
             }
