@@ -82,7 +82,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/SectionHead_1" Name="SectionHead_1" Imported="false" NextStyle="CharacterStyle/SectionHead_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="8" clear="both">
+    <CharacterStyle Self="CharacterStyle/SectionHead_1" Name="SectionHead_1" Imported="false" NextStyle="CharacterStyle/SectionHead_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="8" KeepWithNext="2" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -90,7 +90,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_5" Name="span_5" Imported="false" NextStyle="CharacterStyle/span_5" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_5" Name="span_5" Imported="false" NextStyle="CharacterStyle/span_5" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" KeepWithNext="2" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -322,7 +322,7 @@
         <Leading type="unit">8</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/SectionHead_2" Name="SectionHead_2" Imported="false" NextStyle="CharacterStyle/SectionHead_2" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="8" clear="both">
+    <CharacterStyle Self="CharacterStyle/SectionHead_2" Name="SectionHead_2" Imported="false" NextStyle="CharacterStyle/SectionHead_2" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="8" KeepWithNext="2" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -330,7 +330,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_17" Name="span_17" Imported="false" NextStyle="CharacterStyle/span_17" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_17" Name="span_17" Imported="false" NextStyle="CharacterStyle/span_17" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" KeepWithNext="2" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -498,7 +498,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/SectionHead_3" Name="SectionHead_3" Imported="false" NextStyle="CharacterStyle/SectionHead_3" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="8" clear="both">
+    <CharacterStyle Self="CharacterStyle/SectionHead_3" Name="SectionHead_3" Imported="false" NextStyle="CharacterStyle/SectionHead_3" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="8" KeepWithNext="2" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -506,7 +506,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_28" Name="span_28" Imported="false" NextStyle="CharacterStyle/span_28" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_28" Name="span_28" Imported="false" NextStyle="CharacterStyle/span_28" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" KeepWithNext="2" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -705,7 +705,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/SectionHead_1" Name="SectionHead_1" Imported="false" NextStyle="ParagraphStyle/SectionHead_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="8" clear="both">
+    <ParagraphStyle Self="ParagraphStyle/SectionHead_1" Name="SectionHead_1" Imported="false" NextStyle="ParagraphStyle/SectionHead_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="8" KeepWithNext="2" clear="both">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -713,7 +713,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_5" Name="span_5" Imported="false" NextStyle="ParagraphStyle/span_5" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_5" Name="span_5" Imported="false" NextStyle="ParagraphStyle/span_5" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" KeepWithNext="2" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -945,7 +945,7 @@
         <Leading type="unit">8</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/SectionHead_2" Name="SectionHead_2" Imported="false" NextStyle="ParagraphStyle/SectionHead_2" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="8" clear="both">
+    <ParagraphStyle Self="ParagraphStyle/SectionHead_2" Name="SectionHead_2" Imported="false" NextStyle="ParagraphStyle/SectionHead_2" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="8" KeepWithNext="2" clear="both">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -953,7 +953,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_17" Name="span_17" Imported="false" NextStyle="ParagraphStyle/span_17" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_17" Name="span_17" Imported="false" NextStyle="ParagraphStyle/span_17" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" KeepWithNext="2" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1121,7 +1121,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/SectionHead_3" Name="SectionHead_3" Imported="false" NextStyle="ParagraphStyle/SectionHead_3" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="8" clear="both">
+    <ParagraphStyle Self="ParagraphStyle/SectionHead_3" Name="SectionHead_3" Imported="false" NextStyle="ParagraphStyle/SectionHead_3" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" SpaceBefore="8" KeepWithNext="2" clear="both">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1129,7 +1129,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_28" Name="span_28" Imported="false" NextStyle="ParagraphStyle/span_28" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_28" Name="span_28" Imported="false" NextStyle="ParagraphStyle/span_28" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" KeepWithNext="2" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1427,7 +1427,7 @@
         <PreviewColor type="enumeration">Nothing</PreviewColor>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/SectionHead" Name="SectionHead" Imported="false" NextStyle="ParagraphStyle/SectionHead" KeyboardShortcut="0 0" PointSize="20" FontStyle="Bold" Justification="CenterAlign" Leading="20" SpaceAfter="4" SpaceBefore="8">
+    <ParagraphStyle Self="ParagraphStyle/SectionHead" Name="SectionHead" Imported="false" NextStyle="ParagraphStyle/SectionHead" KeyboardShortcut="0 0" PointSize="20" FontStyle="Bold" Justification="CenterAlign" Leading="20" SpaceAfter="4" SpaceBefore="8" KeepWithNext="2">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
