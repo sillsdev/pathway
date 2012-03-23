@@ -269,14 +269,16 @@ namespace SIL.PublishingSolution
                 inProcess.AddToMaximum(splitFiles.Count);
 
                 inProcess.SetStatus("Processing stylesheet information");
-                if (_inputType.ToLower().Equals("dictionary"))
-                {
-                    ContentCssToXhtml(niceNameCSS, splitFiles, inProcess);
-                    if (projInfo.IsReversalExist)
-                    {
-                        ContentCssToXhtml(Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.css"), splitFiles, inProcess);
-                    }
-                }
+
+                //if (_inputType.ToLower().Equals("dictionary"))
+                //{
+                //    ContentCssToXhtml(niceNameCSS, splitFiles, inProcess);
+                //    if (projInfo.IsReversalExist)
+                //    {
+                //        ContentCssToXhtml(Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.css"), splitFiles, inProcess);
+                //    }
+                //}
+
                 // get rid of styles that don't work with .epub
                 RemovePagedStylesFromCss(niceNameCSS);
                 // customize the CSS file based on the settings
