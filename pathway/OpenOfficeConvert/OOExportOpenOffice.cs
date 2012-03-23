@@ -641,6 +641,9 @@ namespace SIL.PublishingSolution
                 dictSecName = GetPageSectionSteps();
             }
 
+            //AfterBeforeProcess afterBeforeProcess = new AfterBeforeProcess();
+            //afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder, 0, null);
+
             dictSecName = SplitXhtmlAsMultiplePart(projInfo, dictSecName);
 
             if (_isFromExe)
