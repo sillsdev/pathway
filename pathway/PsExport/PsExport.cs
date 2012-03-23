@@ -178,7 +178,7 @@ namespace SIL.PublishingSolution
             List<string> xsltFile = new List<string>();
             if (Param.Value.ContainsKey(Param.FilterEmptyEntries) && Param.Value[Param.FilterEmptyEntries] == "True")
             {
-                xsltFile.Add("Filter Empty Entries");
+                xsltFile.Add("Filter Empty Entries.xsl");
             }
             if (Param.Value.ContainsKey(Param.FilterBrokenLinks) && Param.Value[Param.FilterBrokenLinks] == "True")
             {
@@ -214,7 +214,12 @@ namespace SIL.PublishingSolution
         private void SetDefaultLanguageFont(string fluffedCssFullName, string mainFullName, string fluffedCssReversal)
         {
             string fileName = Path.GetFileName(mainFullName);
-            if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe" || (DataType == "Dictionary" && fileName == "main.xhtml"))
+
+            if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe")
+            {
+                Common.ParaTextFontName(fluffedCssFullName);
+            }
+            if (DataType == "Dictionary" && fileName == "main.xhtml")
             {
                 Common.LanguageSettings(mainFullName, fluffedCssFullName, DataType == "Dictionary", fluffedCssReversal);
             }

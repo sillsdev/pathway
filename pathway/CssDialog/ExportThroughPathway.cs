@@ -320,77 +320,77 @@ namespace SIL.PublishingSolution
         {
             try
             {
-            if (!Common.isRightFieldworksVersion())
-            {
-                MessageBox.Show("Please download and install a Pathway version compatible with your software", "Incompatible Pathway Version", MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
-                DialogResult = DialogResult.Cancel;
-                Close();
-            }
-
-            PopulateFilesFromPreprocessingFolder();
-
-            // Load the .ssf or .ldml as appropriate
-            _settingsHelper = new SettingsHelper(DatabaseName);
-            _settingsHelper.LoadValues();
-
-            if (this.Text != "Set Defaults")
-            {
-                // not setting defaults, just opening the dialog:
-                // load the settings file and migrate it if necessary
-                Param.LoadSettings();
-                Param.SetValue(Param.InputType, InputType);
-                Param.LoadSettings();
-                ValidateXMLVersion(Param.SettingPath);
-            }
-            else
-            {
-                // setting defaults: just load the settings file (don't migrate)
-                Param.SetValue(Param.InputType, InputType);
-                Param.LoadSettings();
-                // add the input type (to give a little more information to the user)
-                Text += " - " + InputType;
-            }
-
-            // get the current organization
-            Organization = Param.GetOrganization();
-
-            if (Organization == "") 
-            {
-                // no organization set yet -- display the Select Organization dialog
-                var dlg = new SelectOrganizationDialog(InputType);
-                if (Text.Contains("Set Defaults"))
+                if (!Common.isRightFieldworksVersion())
                 {
-                    // if we're setting defaults, provide a clue as to what they're setting the defaults for
-                    dlg.Text += " - " + InputType;
-                }
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    Organization = dlg.Organization;
-                    PopulateFromSettings();
-                }
-                else
-                {
-                    // User pressed cancel - exit out of the export process altogether
+                    MessageBox.Show("Please download and install a Pathway version compatible with your software", "Incompatible Pathway Version", MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
                     DialogResult = DialogResult.Cancel;
                     Close();
                 }
-            }
-            LoadAvailFormats();
-            LoadAvailStylesheets();
-            IsExpanded = false;
-            ResizeDialog();
-            SetOkStatus();
-            LoadProperty();
-            EnableUIElements();
-            Common.PathwayHelpSetup();
-            Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-            Common.HelpProv.SetHelpKeyword(this, _helpTopic);
-            Common.databaseName = DatabaseName;
 
-                
+                PopulateFilesFromPreprocessingFolder();
+
+                // Load the .ssf or .ldml as appropriate
+                _settingsHelper = new SettingsHelper(DatabaseName);
+                _settingsHelper.LoadValues();
+
+                if (this.Text != "Set Defaults")
+                {
+                    // not setting defaults, just opening the dialog:
+                    // load the settings file and migrate it if necessary
+                    Param.LoadSettings();
+                    Param.SetValue(Param.InputType, InputType);
+                    Param.LoadSettings();
+                    ValidateXMLVersion(Param.SettingPath);
+                }
+                else
+                {
+                    // setting defaults: just load the settings file (don't migrate)
+                    Param.SetValue(Param.InputType, InputType);
+                    Param.LoadSettings();
+                    // add the input type (to give a little more information to the user)
+                    Text += " - " + InputType;
+                }
+
+                // get the current organization
+                Organization = Param.GetOrganization();
+
+                if (Organization == "")
+                {
+                    // no organization set yet -- display the Select Organization dialog
+                    var dlg = new SelectOrganizationDialog(InputType);
+                    if (Text.Contains("Set Defaults"))
+                    {
+                        // if we're setting defaults, provide a clue as to what they're setting the defaults for
+                        dlg.Text += " - " + InputType;
+                    }
+                    if (dlg.ShowDialog() == DialogResult.OK)
+                    {
+                        Organization = dlg.Organization;
+                        PopulateFromSettings();
+                    }
+                    else
+                    {
+                        // User pressed cancel - exit out of the export process altogether
+                        DialogResult = DialogResult.Cancel;
+                        Close();
+                    }
+                }
+                LoadAvailFormats();
+                LoadAvailStylesheets();
+                IsExpanded = false;
+                ResizeDialog();
+                SetOkStatus();
+                LoadProperty();
+                EnableUIElements();
+                Common.PathwayHelpSetup();
+                Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
+                Common.HelpProv.SetHelpKeyword(this, _helpTopic);
+                Common.databaseName = DatabaseName;
+
+
             }
-            catch{}
+            catch { }
         }
 
 
@@ -401,7 +401,7 @@ namespace SIL.PublishingSolution
             if (Directory.Exists(xsltFullName))
             {
                 string[] filePaths = Directory.GetFiles(xsltFullName, "*.xsl");
-                
+
                 // In case the xsl file name change and updated in the psexport.cs file XsltPreProcess
 
                 foreach (var filePath in filePaths)
@@ -689,32 +689,35 @@ namespace SIL.PublishingSolution
 
             //if (Format != "YouVersion")
             //{
-                // attempt to save the properties - if it doesn't work, leave the dialog open
-                if (SaveProperty(this))
-                {
-                    DialogResult = DialogResult.Yes;
-                    if (Text.Contains("Default"))
-                        SaveDefaultProperty(this);
-                    _publicationName = Path.GetFileName(OutputFolder);
-                    OutputFolder = Path.GetDirectoryName(OutputFolder);
-                    DictionaryName = _publicationName;
-                    Common.TimeStarted = DateTime.Now;
-                    _settingsHelper.ClearValues();
-                }
+            // attempt to save the properties - if it doesn't work, leave the dialog open
+            if (SaveProperty(this))
+            {
+                DialogResult = DialogResult.Yes;
+                if (Text.Contains("Default"))
+                    SaveDefaultProperty(this);
+                _publicationName = Path.GetFileName(OutputFolder);
+                OutputFolder = Path.GetDirectoryName(OutputFolder);
+                DictionaryName = _publicationName;
+                Common.TimeStarted = DateTime.Now;
+                _settingsHelper.ClearValues();
+            }
 
-                foreach (string chkBoxName in chkLbPreprocess.CheckedItems)
+            Param.LoadSettings();
+            Param.SetValue(Param.FilterBrokenLinks, "False");
+            Param.SetValue(Param.FilterEmptyEntries, "False");
+
+            foreach (string chkBoxName in chkLbPreprocess.CheckedItems)
+            {
+                if (chkBoxName == "Filter Broken Links")
                 {
-                    Param.LoadSettings();
-                    if (chkBoxName == "Filter Broken Links")
-                    {
-                        Param.SetValue(Param.FilterBrokenLinks, "True");
-                    }
-                    else if (chkBoxName == "Filter Empty Entries")
-                    {
-                        Param.SetValue(Param.FilterEmptyEntries, "True");
-                    }
-                    Param.Write();
+                    Param.SetValue(Param.FilterBrokenLinks, "True");
                 }
+                else if (chkBoxName == "Filter Empty Entries")
+                {
+                    Param.SetValue(Param.FilterEmptyEntries, "True");
+                }
+            }
+            Param.Write();
             //}
             this.Close();
         }
@@ -827,7 +830,7 @@ namespace SIL.PublishingSolution
                 }
                 else if (chkLbPreprocess.Items[i].ToString() == "Filter Empty Entries")
                 {
-                    chkLbPreprocess.SetItemCheckState(i, (Param.GetAttrByName("settings/property",Param.FilterEmptyEntries,"value").ToLower() == "true" ? CheckState.Checked : CheckState.Unchecked));
+                    chkLbPreprocess.SetItemCheckState(i, (Param.GetAttrByName("settings/property", Param.FilterEmptyEntries, "value").ToLower() == "true" ? CheckState.Checked : CheckState.Unchecked));
                 }
             }
         }
@@ -913,7 +916,7 @@ namespace SIL.PublishingSolution
             Param.SetValue(Param.PublicationLocation, dlg.OutputFolder);
             Param.Write();
 
-            
+
 
 
 
@@ -1295,7 +1298,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        
+
 
     }
 }

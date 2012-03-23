@@ -838,6 +838,7 @@ namespace SIL.PublishingSolution
                 _imageInsert = false;
                 _imageSource = string.Empty;
                 _isNewParagraph = false;
+                _isImageParagraphClosed = false;
             }
             return inserted;
         }
@@ -1200,7 +1201,8 @@ namespace SIL.PublishingSolution
                     _allCharacter.Pop();    // retrieving it again.
                     isImage = false;
                     imageClass = "";
-                    _isParagraphClosed = true;
+                    //_isParagraphClosed = true;
+                    _isImageParagraphClosed = true;
 
                 }
             }
@@ -1215,7 +1217,8 @@ namespace SIL.PublishingSolution
 
                     isImage = false;
                     imageClass = "";
-                    _isParagraphClosed = true;
+                    //_isParagraphClosed = true;
+                    _isImageParagraphClosed = true;
                 }
             }
         }

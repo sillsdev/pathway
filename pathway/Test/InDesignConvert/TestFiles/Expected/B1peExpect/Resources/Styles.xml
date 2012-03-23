@@ -1809,7 +1809,7 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/parallelpassagereference" Name="parallelpassagereference" Imported="false" NextStyle="ParagraphStyle/parallelpassagereference" KeyboardShortcut="0 0" PointSize="10">
+    <ParagraphStyle Self="ParagraphStyle/parallelpassagereference" Name="parallelpassagereference" Imported="false" NextStyle="ParagraphStyle/parallelpassagereference" KeyboardShortcut="0 0" PointSize="10" KeepWithNext="2">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
@@ -1875,7 +1875,7 @@
         <PreviewColor type="enumeration">Nothing</PreviewColor>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/SectionHead" Name="SectionHead" Imported="false" NextStyle="ParagraphStyle/SectionHead" KeyboardShortcut="0 0" PointSize="10" Leading="11" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" SpaceBefore="12" SpaceAfter="6">
+    <ParagraphStyle Self="ParagraphStyle/SectionHead" Name="SectionHead" Imported="false" NextStyle="ParagraphStyle/SectionHead" KeyboardShortcut="0 0" PointSize="10" Leading="11" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" SpaceBefore="12" SpaceAfter="6" KeepWithNext="2">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>

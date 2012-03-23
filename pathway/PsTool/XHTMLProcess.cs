@@ -85,6 +85,7 @@ namespace SIL.PublishingSolution
         protected string _closeChildName = string.Empty;
         protected bool _isNewParagraph;
         protected bool _isParagraphClosed = true;
+        protected bool _isImageParagraphClosed = true;
         protected List<string> _divType;
 
         #region Footnote

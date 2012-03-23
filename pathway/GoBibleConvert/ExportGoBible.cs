@@ -55,12 +55,7 @@ namespace SIL.PublishingSolution
 
         public bool Handle(string inputDataType)
         {
-            bool returnValue = false;
-            if (inputDataType.ToLower() == "scripture")
-            {
-                returnValue = true;
-            }
-            return returnValue;
+            return inputDataType.ToLower() == "scripture";
         }
 
         /// <summary>
@@ -110,6 +105,10 @@ namespace SIL.PublishingSolution
                 Cursor.Current = myCursor;
                 inProcess.Close();
                 return false;
+            }
+            else
+            {
+                AfterCollectionProcess(collectionFullName);
             }
             inProcess.PerformStep();
             BuildApplication();
@@ -396,6 +395,26 @@ namespace SIL.PublishingSolution
             }
             textWriter.Close();
             return true;
+        }
+
+        /// <summary>
+        /// do anything that needs to be done after export but before convert
+        /// </summary>
+        public static void AfterCollectionProcess(string outFullName)
+        {
+            const string AfterCollectionProcess = "AfterCollection.bat";
+            string processFolder = GetProcessFolder(outFullName);
+            if (File.Exists(Path.Combine(processFolder, AfterCollectionProcess)))
+                SubProcess.Run(processFolder, AfterCollectionProcess, '"' + outFullName + '"', true);
+        }
+
+        /// <summary>
+        /// return folder name that should contain process if it exists
+        /// </summary>
+        public static string GetProcessFolder(string outFullName)
+        {
+            var folder = Path.GetDirectoryName(outFullName);
+            return Path.Combine(folder, "Process");
         }
 
         private string GetInfo(string metadataValue)
