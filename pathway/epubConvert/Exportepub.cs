@@ -135,6 +135,7 @@ namespace SIL.PublishingSolution
         /// <returns>true if succeeds</returns>
         public bool Export(PublicationInformation projInfo)
         {
+            InsertBeforeAfterInXHTML(projInfo);
             bool success = true;
             _langFontDictionary = new Dictionary<string, string>();
             _embeddedFonts = new Dictionary<string, EmbeddedFont>();
@@ -427,6 +428,21 @@ namespace SIL.PublishingSolution
         }
 
         #region Private Functions
+        #region Handle After Before 
+        /// <summary>
+        /// Inserting After & Before content to XHTML file
+        /// </summary>
+        private void InsertBeforeAfterInXHTML(PublicationInformation projInfo)
+        {
+            Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
+            CssTree cssTree = new CssTree();
+            cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
+
+            AfterBeforeProcess afterBeforeProcess = new AfterBeforeProcess();
+            afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder, 0, null);
+        }
+        #endregion
+
         #region Property persistence
         /// <summary>
         /// Loads the settings file and pulls out the values we look at.
