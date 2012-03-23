@@ -1,1 +1,0 @@
-(RULE (CLASS letter (ATTRIB class HASVALUE 'current')) (PROPERTY background-color #aa0000))

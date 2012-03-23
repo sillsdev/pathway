@@ -1,1 +1,0 @@
-(PAGE (REGION top-left (PROPERTY content string ( guideword first )) (PROPERTY margin-top 1 em) (PROPERTY border-bottom dashed .5 pt #aa0000) (PROPERTY border .5 pt) (PROPERTY border .5 pt .5 pt) (PROPERTY border .5 pt .5 pt .5 pt) (PROPERTY border .5 pt .5 pt .5 pt .5 pt) (PROPERTY margin-bottom 1 em) (PROPERTY vertical-align bottom)))

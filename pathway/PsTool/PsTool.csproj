@@ -236,6 +236,8 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AfterBeforeProcess.cs" />
+    <Compile Include="AfterBeforeXHTMLProcess.cs" />
     <Compile Include="Backend.cs" />
     <Compile Include="ClassInfo.cs" />
     <Compile Include="Common.cs">
