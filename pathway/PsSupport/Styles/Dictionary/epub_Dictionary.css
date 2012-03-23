@@ -140,7 +140,7 @@ padding-right: 5px;
 .variantref-form-sub,
 .LexSense-publishStemComponentTarget-GlossPub,
 .LexEntry-publishStemComponentTarget-SummaryDefinitionPub {
-    padding-left: 0.5em;
+    /*padding-left: 0.5em;*/
 }
 .variantref-form-sub,
 .definition_L2,
