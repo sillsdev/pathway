@@ -112,7 +112,7 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("NextStyle", "ParagraphStyle/" + cssClass.Key);
                 _writer.WriteAttributeString("KeyboardShortcut", "0 0");
                 _IDProperty = mapProperty.IDProperty(cssClass.Value);
-                InsertKeepWithNextForSectionHead(cssClass);
+                InsertKeepWithSectionForSectionHead(cssClass);
                 SuperscriptSubscriptIncreaseFontSize(false);
                 DeleteRelativeInFootnote(cssClass);
                 PositionProperty();
@@ -161,7 +161,7 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement(); //End RootParagraphStyleGroup
         }
 
-        private void InsertKeepWithNextForSectionHead(KeyValuePair<string, Dictionary<string, string>> cssClass)
+        private void InsertKeepWithSectionForSectionHead(KeyValuePair<string, Dictionary<string, string>> cssClass)
         {
             if (cssClass.Key.ToLower() == "sectionhead" || cssClass.Key.ToLower() == "parallelpassagereference")
             {

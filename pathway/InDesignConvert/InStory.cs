@@ -1113,10 +1113,6 @@ namespace SIL.PublishingSolution
                 }
                 mystyle["DropCapCharacters"] = _chapterNo.Length.ToString();
                 mystyle["DropCapLines"] = lines; // No of Lines.
-                if (IdAllClass[classNameWOLang].ContainsKey("PointSize"))
-                {
-                    mystyle["BaselineShift"] = IdAllClass[classNameWOLang]["PointSize"];
-                }
                 _paragraphName = classNameWOLang + _chapterNo.Length.ToString();
                 _newProperty[_paragraphName] = mystyle;
                 _dropCapStyle = _paragraphName;
