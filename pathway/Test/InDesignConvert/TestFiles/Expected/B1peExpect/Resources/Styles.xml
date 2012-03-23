@@ -138,7 +138,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/ChapterNumber1" Name="ChapterNumber1" Imported="false" NextStyle="CharacterStyle/ChapterNumber1" KeyboardShortcut="0 0" DropCapCharacters="1" DropCapLines="2">
+    <CharacterStyle Self="CharacterStyle/ChapterNumber1" Name="ChapterNumber1" Imported="false" NextStyle="CharacterStyle/ChapterNumber1" KeyboardShortcut="0 0" DropCapCharacters="1" DropCapLines="2" BaselineShift="200%">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -955,7 +955,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/ChapterNumber1" Name="ChapterNumber1" Imported="false" NextStyle="ParagraphStyle/ChapterNumber1" KeyboardShortcut="0 0" DropCapCharacters="1" DropCapLines="2">
+    <ParagraphStyle Self="ParagraphStyle/ChapterNumber1" Name="ChapterNumber1" Imported="false" NextStyle="ParagraphStyle/ChapterNumber1" KeyboardShortcut="0 0" DropCapCharacters="1" DropCapLines="2" BaselineShift="200%">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
