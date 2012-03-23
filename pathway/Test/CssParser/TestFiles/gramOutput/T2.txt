@@ -1,1 +1,0 @@
-(RULE (CLASS entry) (PROPERTY display block) (PROPERTY margin-top 0 cm) (PROPERTY margin-bottom 0 cm) (PROPERTY margin-left 2 pc) (PROPERTY text-indent -2 pc))

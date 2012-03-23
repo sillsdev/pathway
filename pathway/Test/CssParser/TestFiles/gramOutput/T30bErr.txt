@@ -1,3 +1,0 @@
-line 2:13 mismatched input ';' expecting ':'
-line 2:15 mismatched input '2' expecting '}'
-line 2:18 no viable alternative at input ';'

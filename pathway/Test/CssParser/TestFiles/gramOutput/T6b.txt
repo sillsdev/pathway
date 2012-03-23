@@ -1,1 +1,0 @@
-(RULE (CLASS pronunciation (ATTRIB lang ATTRIBEQUAL 'en_UK') (ATTRIB class HASVALUE 'first-of-type')) (PSEUDO before) (PROPERTY content "/\a3"))
