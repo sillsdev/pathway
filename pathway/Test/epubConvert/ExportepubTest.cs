@@ -115,7 +115,7 @@ namespace Test.epubConvert
             var nsmgr = new XmlNamespaceManager(resultDoc.NameTable);
             nsmgr.AddNamespace("x", "http://www.w3.org/1999/xhtml");
             var node = resultDoc.SelectSingleNode("//x:span[@class='translation_L2']/x:span[2]/x:span", nsmgr);
-            Assert.AreEqual(node.InnerText, "child of Fatima"); // Fail if content is gone (TD-2814)
+            Assert.AreEqual(node.InnerText.Trim(), "child of Fatima"); // Fail if content is gone (TD-2814)
         }
 
         [Test]
