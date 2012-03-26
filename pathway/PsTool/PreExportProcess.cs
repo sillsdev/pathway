@@ -292,7 +292,7 @@ namespace SIL.Tool
             img.Save(dest, System.Drawing.Imaging.ImageFormat.Png);
             // if we don't want a title, we're done
             if (Param.GetMetadataValue(Param.CoverPageTitle).ToLower().Equals("false") ||
-                Param.GetMetadataValue(Param.Title).Trim().Length < 1)
+                (Param.GetMetadataValue(Param.Title) != null && Param.GetMetadataValue(Param.Title).Trim().Length < 1))
             {
                 // nothing else to do -- return
                 return;
