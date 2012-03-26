@@ -518,7 +518,7 @@ function PlaceFrames()
 			
 			MoveFrame(myStory, marginTop, curPageNo);
 			//if(myStoryCounter!=activePageNumber)
-				AddNewPage(curPageNo + 1);
+			AddNewPage(curPageNo + 1);
 			curPageNo = curPageNo + 1;
 			currentMarginTop = marginTop;
 			//frontMatterItemCount++;
@@ -805,7 +805,7 @@ function SetOverflowsPages(myStory,frameBounds)
 function BalancedColumns(myStory)
 {
 	try
-	{
+	{ 
 						//debugger;	
 		if(myStory.footnotes.length == 0)
 		{
@@ -943,7 +943,8 @@ function CollectAllFrame()
 		for(var myStoryCounter=myPage.textFrames.length-1; myStoryCounter >= 0; myStoryCounter--)
 		{
 			myStory = myPage.textFrames.item(myStoryCounter);//stories
-			myStory.fit(FitOptions.frameToContent);
+			if(myStory.cornerRadius== 1)
+				myStory.fit(FitOptions.frameToContent);
 		
 			myFrames[arrayIndex] = myStory;
 			arrayIndex = arrayIndex + 1;
@@ -1078,6 +1079,7 @@ function FitFrameToPage(myStory)
 			
 	    //alert("currentMarginTop " + currentMarginTop + " frameLeft " + frameLeft  + " frameHeight " + frameHeight   + " frameWidth " + frameWidth)
 		//alert("current Top " + currentMarginTop + "\nPageHeight " + pageHeight + "\ncurrent Left " + frameLeft + "\nPageWidth " + frameWidth);
+	
 		myStory.geometricBounds=[currentMarginTop,frameLeft , frameHeight ,frameWidth];
 
 
@@ -1435,7 +1437,7 @@ function FitSingleFrameToContent(myStory)
 	{	
 		var fixedFrameBound, fitFrameBound;
 		fixedFrameBound = myStory.geometricBounds; 
-		//alert(myStory.contents)
+
 		for(unit=1;unit<=fixedFrameBound[2] * 2;unit++)
 		{
 			fitFrameBound = myStory.geometricBounds; 			

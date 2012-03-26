@@ -436,6 +436,10 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void InsertBeforeAfterInXHTML(PublicationInformation projInfo)
         {
+            if (projInfo == null) return;
+            if(projInfo.DefaultXhtmlFileWithPath == null || projInfo.DefaultCssFileWithPath == null) return;
+            if (projInfo.DefaultXhtmlFileWithPath.Trim().Length == 0 || projInfo.DefaultCssFileWithPath.Trim().Length == 0) return;
+
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
