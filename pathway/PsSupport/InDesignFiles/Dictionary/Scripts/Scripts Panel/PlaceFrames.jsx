@@ -877,7 +877,9 @@ function CollectAllFrame()
 		for(var myStoryCounter=myPage.textFrames.length-1; myStoryCounter >= 0; myStoryCounter--)
 		{
 			myStory = myPage.textFrames.item(myStoryCounter);//stories
-			myStory.fit(FitOptions.frameToContent);
+			
+			if(myStory.cornerRadius== 1)
+				myStory.fit(FitOptions.frameToContent);
 		
 			myFrames[arrayIndex] = myStory;
 			arrayIndex = arrayIndex + 1;
@@ -1012,6 +1014,8 @@ function FitFrameToPage(myStory)
 			
 	    //alert("currentMarginTop " + currentMarginTop + " frameLeft " + frameLeft  + " frameHeight " + frameHeight   + " frameWidth " + frameWidth)
 		//alert("current Top " + currentMarginTop + "\nPageHeight " + pageHeight + "\ncurrent Left " + frameLeft + "\nPageWidth " + frameWidth);
+		
+		if(myStory.cornerRadius!= 2)
 		myStory.geometricBounds=[currentMarginTop,frameLeft , frameHeight ,frameWidth];
 
 
