@@ -479,12 +479,7 @@
 .pronunciation > .xitem + .xitem :before {
         content: " ";
 }
-.pronunciation:after  {
-        content: "]";
-}
-.pronunciation:before {
-        content: "[";
-}
+
 .pronunciationminor :after  {
         content: "]";
 }
