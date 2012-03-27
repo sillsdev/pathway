@@ -133,7 +133,7 @@ namespace SIL.PublishingSolution
 
             switch (word)
             {
-                case "\\Marker":
+                case "\\Name":
                     CreateClass(line);
                     break;
                 case "\\FontSize":
