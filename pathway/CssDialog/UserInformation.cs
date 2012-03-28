@@ -232,7 +232,7 @@ namespace SIL.PublishingSolution
             developerName.Add("James-PC");
             developerName.Add("Samdoss-PC");
             developerName.Add("Karthi-PC");
-            developerName.Add("Sankar-SIL");
+            developerName.Add("SANKAR-SIL");
 
             if (developerName.Contains(GetMachineName()))
             {
