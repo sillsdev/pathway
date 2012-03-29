@@ -1,0 +1,9 @@
+
+E:\svn\Pathway\pathway\PsSupport\WordPress>BlogExport.exe "E:\svn\Pathway\pathway\Test\WordPressConvert\TestFiles\output\main.xhtml" 
+20 entries
+Traceback (most recent call last):
+  File "blogExport.py", line 593, in <module>
+    database=database, prefix=prefix, user=user, includeExample=includeExample)
+  File "blogExport.py", line 375, in __init__
+    subentrytext += subentrytpl % map
+KeyError: 'Form'
