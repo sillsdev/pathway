@@ -1647,11 +1647,13 @@ namespace SIL.PublishingSolution
                 }
             }
             // now go check to see if we're working on scripture or dictionary data
-            nodes = xmlDocument.SelectNodes("//xhtml:span[@class='headword']", namespaceManager);
+            //nodes = xmlDocument.SelectNodes("//xhtml:span[@class='headword']", namespaceManager);
+            nodes = xmlDocument.SelectNodes("//span[@class='headword']", namespaceManager);
             if (nodes != null && nodes.Count == 0)
             {
                 // not in this file - this might be scripture?
-                nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
+                //nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
+                nodes = xmlDocument.SelectNodes("//span[@class='scrBookName']", namespaceManager);
                 if (nodes != null && nodes.Count > 0)
                     _inputType = "scripture";
             }
