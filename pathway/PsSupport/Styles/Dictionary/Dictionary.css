@@ -505,9 +505,7 @@
 .pronunciations-sub > .xitem + .xitem :before {
         content: ", ";
 }
-.pronunciations :after {
-        content: " ";
-}
+
 .pronunciations { }
 .pronunciations > .xitem + .xitem :before {
         content: ", ";
