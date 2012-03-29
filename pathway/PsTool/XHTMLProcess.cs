@@ -546,66 +546,6 @@ namespace SIL.PublishingSolution
                 _isParagraphClosed = true;
                 _forcedPara = false;
             }
-
-            //if (_allParagraph.Count > 0 && !_isParagraphClosed) // Is Para Exist
-            //{
-            //    if (_outputType == Common.OutputType.XETEX)
-            //    {
-            //        _xetexFile.WriteLine();
-            //    }
-            //    else
-            //    {
-            //        if (_outputType == Common.OutputType.IDML)
-            //        {
-            //            _writer.WriteRaw("<Br/>");
-            //        }
-
-            //        if (_outputType == Common.OutputType.ODT)
-            //        {
-            //            if (_imageClass.Length > 0 && !_textWritten)
-            //            {
-            //                _overWriteParagraph = true;
-            //            }
-            //            else
-            //            {
-            //                _writer.WriteEndElement();
-            //                _textWritten = false;
-            //            }
-            //        }
-            //        else
-            //        {
-            //            _writer.WriteEndElement();
-            //        }
-            //    }
-            //    _isNewParagraph = true;
-            //    _isParagraphClosed = true;
-
-            //    if (_outputType == Common.OutputType.ODT)
-            //    {
-            //        if (_overWriteParagraph)
-            //        {
-            //            _isNewParagraph = false;
-            //            _isParagraphClosed = false;
-            //            //_overWriteParagraph = false;
-            //        }
-            //    }
-            //    //if (_outputType == Common.OutputType.ODT && (_reader.Name == "ul" || _reader.Name == "ol"))
-            //    //{
-            //    //    _writer.WriteEndElement();
-            //    //}
-            //    //if (_outputType == Common.OutputType.ODT && (_reader.Name == "li"))
-            //    //{
-            //    //    _writer.WriteEndElement();
-            //    //}
-
-            //}
-            //if(_forcedPara)
-            //{
-            //    _writer.WriteEndElement();
-            //    _isNewParagraph = true;
-            //    _isParagraphClosed = true;
-            //    _forcedPara = false;
-            //}
         }
 
         protected string ModifiedContent(string content, string paragraphName, string characterName)
