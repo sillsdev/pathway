@@ -61,6 +61,8 @@
             <text:p text:style-name="pictureCaption_pictureRight_entry_letData_dicBody">caption</text:p>
           </draw:text-box>
         </draw:frame>
+      </text:p>
+      <text:p text:style-name="entry_letData_dicBody">
         <draw:frame draw:style-name="Graphics1" draw:name="Graphics1" text:anchor-type="paragraph" svg:width="292.5pt" svg:height="72pt" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0">
           <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/tulip tree flower.jpg" xmlns:xlink="http://www.w3.org/1999/xlink" />
           <svg:title>tulip tree flower.jpg</svg:title>
