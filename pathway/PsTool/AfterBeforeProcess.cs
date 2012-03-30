@@ -155,6 +155,8 @@ namespace SIL.PublishingSolution
         private int _titleCounter=1;
         private int _pageWidth;
 
+        private string _originalXHTML = string.Empty;
+
         Dictionary<string, string> _pageSize = new Dictionary<string, string>();
         private bool _isFromExe = false;
         #endregion
@@ -189,7 +191,9 @@ namespace SIL.PublishingSolution
         public void RemoveAfterBefore(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder, int pageWidth, Dictionary<string, string> pageSize)
         {
             InitializeData(projInfo, idAllClass, classFamily, cssClassOrder);
-            OpenXhtmlFile(projInfo.DefaultXhtmlFileWithPath); //reader
+            string tempFile = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", "_1.xhtml");
+            File.Move(projInfo.DefaultXhtmlFileWithPath, tempFile);
+            OpenXhtmlFile(tempFile); //reader
             CreateFile(projInfo); //writer
             InsertBeforeAfter();
         }
@@ -730,7 +734,7 @@ namespace SIL.PublishingSolution
 
         private void CreateFile(PublicationInformation projInfo)
         {
-            projInfo.DefaultXhtmlFileWithPath = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", "_1.xhtml");
+            
             _writer = new XmlTextWriter(projInfo.DefaultXhtmlFileWithPath, null);
         }
     }
