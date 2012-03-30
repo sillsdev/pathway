@@ -414,7 +414,7 @@ namespace SIL.PublishingSolution
                     var validationResults = epubValidator.Program.ValidateFile(outputPathWithFileName);
                     Debug.WriteLine("Exportepub: validation results: " + validationResults);
                     // we've succeeded if epubcheck returns no errors
-                    success = (validationResults.Contains("No errors or warnings detected"));
+                    //success = (validationResults.Contains("No errors or warnings detected"));
                 }
                 else
                 {
@@ -3077,6 +3077,208 @@ namespace SIL.PublishingSolution
         /// <param name="contentFolder">the content folder (../OEBPS)</param>
         /// <param name="bookId">Unique identifier for the book we're creating</param>
         private void CreateNcx(PublicationInformation projInfo, string contentFolder, Guid bookId)
+        {
+            // toc.ncx
+            XmlWriter ncx = XmlWriter.Create(Common.PathCombine(contentFolder, "toc.ncx"));
+            ncx.WriteStartDocument();
+            ncx.WriteStartElement("ncx", "http://www.daisy.org/z3986/2005/ncx/");
+            ncx.WriteAttributeString("version", "2005-1");
+            ncx.WriteStartElement("head");
+            ncx.WriteStartElement("meta");
+            ncx.WriteAttributeString("name", "dtb:uid");
+            ncx.WriteAttributeString("content", bookId.ToString());
+            ncx.WriteEndElement(); // meta
+            ncx.WriteStartElement("meta");
+            ncx.WriteAttributeString("name", "epub-creator");
+            ncx.WriteAttributeString("content", Common.GetProductName());
+            ncx.WriteEndElement(); // meta
+            ncx.WriteStartElement("meta");
+            ncx.WriteAttributeString("name", "dtb:depth");
+            ncx.WriteAttributeString("content", "1");
+            ncx.WriteEndElement(); // meta
+            ncx.WriteStartElement("meta");
+            ncx.WriteAttributeString("name", "dtb:totalPageCount");
+            ncx.WriteAttributeString("content", "0"); // TODO: (is this possible?)
+            ncx.WriteEndElement(); // meta
+            ncx.WriteStartElement("meta");
+            ncx.WriteAttributeString("name", "dtb:maxPageNumber");
+            ncx.WriteAttributeString("content", "0"); // TODO: is this info available?
+            ncx.WriteEndElement(); // meta
+            ncx.WriteEndElement(); // head
+            ncx.WriteStartElement("docTitle");
+            ncx.WriteElementString("text", projInfo.ProjectName);
+            ncx.WriteEndElement(); // docTitle
+            ncx.WriteStartElement("navMap");
+            // individual navpoint elements (one for each xhtml)
+            string[] files = Directory.GetFiles(contentFolder, "*.xhtml");
+            bool RevIndex = false;
+            bool isMainOpen = false;
+            bool isMainSubOpen = false;
+            bool isRevOpen = false;
+            bool isRevSubOpen = false;
+            bool isScriptureSubOpen = false;
+            int index = 1;
+            int chapNum = 1;
+            bool needsEnd = false;
+            bool skipChapterInfo = TocLevel.StartsWith("1");
+            string scripFileName = string.Empty;
+            foreach (string file in files)
+            {
+                string name = Path.GetFileName(file);
+                string bookName = GetBookName(file);
+                if(name.IndexOf("File") == 0 && name.IndexOf("TOC") == -1)
+                {
+                    WriteNavPoint(ncx, index.ToString(), bookName, name);
+                    // chapters within the books (nested as a subhead)
+                    chapNum = 1;
+                    if (!skipChapterInfo)
+                    {
+                        WriteChapterLinks(file, ref index, ncx, ref chapNum);
+                    }
+                    // end the book's navPoint element
+                    ncx.WriteEndElement(); // navPoint
+                }
+                else
+                {
+                    if(name.IndexOf("TOC") != -1)
+                    {
+                        WriteNavPoint(ncx, index.ToString(), bookName, name);
+                    }
+                    if(_inputType.ToLower() == "dictionary")
+                    {
+                        if (name.Contains("PartFile"))
+                        {
+                            if (!isMainOpen)
+                            {
+                                WriteNavPoint(ncx, "_" + index.ToString(), "Main", "_" + name);
+                                isMainOpen = true;
+                            }
+                            if (Path.GetFileNameWithoutExtension(file).EndsWith("_") || Path.GetFileNameWithoutExtension(file).EndsWith("_01"))
+                            {
+                                if (isMainSubOpen)
+                                {
+                                    ncx.WriteEndElement(); // navPoint
+                                }
+                                WriteNavPoint(ncx, index.ToString(), bookName, name);
+                                chapNum = 1;
+                                isMainSubOpen = true;
+                            }
+                            if (!skipChapterInfo)
+                            {
+                                WriteChapterLinks(file, ref index, ncx, ref chapNum);
+                            }
+                            //ncx.WriteEndElement(); // navPoint
+                        }
+                        else if (name.Contains("RevIndex"))
+                        {
+                            if (isMainOpen)
+                            {
+                                ncx.WriteEndElement(); // navPoint Main value
+                                ncx.WriteEndElement(); // navPoint Main
+                                isMainSubOpen = false;
+                                isMainOpen = false;
+                            }
+                            if (Path.GetFileNameWithoutExtension(file).EndsWith("_") || Path.GetFileNameWithoutExtension(file).EndsWith("_01"))
+                            {
+                                if (isRevSubOpen)
+                                {
+                                    ncx.WriteEndElement(); // navPoint
+                                }
+                                if (!isRevOpen)
+                                {
+                                    WriteNavPoint(ncx, "_" + index.ToString(), "Reversal Index", "_" + name);
+                                    isRevOpen = true;
+                                }
+                                WriteNavPoint(ncx, index.ToString(), bookName, name);
+                                chapNum = 1;
+                                isRevSubOpen = true;
+                            }
+                            if (!skipChapterInfo)
+                            {
+                                WriteChapterLinks(file, ref index, ncx, ref chapNum);
+                            }
+                            //ncx.WriteEndElement(); // navPoint
+
+                        }
+                    }
+                    else
+                    {
+                        if (name.IndexOf("TOC") == -1 && (Path.GetFileNameWithoutExtension(file).EndsWith("_") || Path.GetFileNameWithoutExtension(file).EndsWith("_01")))
+                        {
+                            if (isScriptureSubOpen)
+                            {
+                                ncx.WriteEndElement(); // navPoint
+                            }
+                            bookName = GetBookName(file);
+                            ncx.WriteStartElement("navPoint");
+                            ncx.WriteAttributeString("id", "dtb:uid");
+                            ncx.WriteAttributeString("playOrder", index.ToString());
+                            ncx.WriteStartElement("navLabel");
+                            ncx.WriteElementString("text", bookName);
+                            ncx.WriteEndElement(); // navlabel
+                            ncx.WriteStartElement("content");
+                            ncx.WriteAttributeString("src", name);
+                            ncx.WriteEndElement(); // meta
+                            index++;
+                            // chapters within the books (nested as a subhead)
+                            chapNum = 1;
+                            if (!skipChapterInfo)
+                            {
+                                WriteChapterLinks(file, ref index, ncx, ref chapNum);
+                            }
+                            isScriptureSubOpen = true;
+                        }
+                        else
+                        {
+                            if (!skipChapterInfo)
+                            {
+                                WriteChapterLinks(file, ref index, ncx, ref chapNum);
+                            }
+                        }
+                    }
+                    
+                }
+                index++;
+            }
+            if (isRevOpen && _inputType.ToLower() == "dictionary")
+            {
+                // end the book's navPoint element
+                ncx.WriteEndElement(); // navPoint Rev value
+                ncx.WriteEndElement(); // navPoint Rev
+                isRevOpen = false;
+            }
+            if (isScriptureSubOpen)
+            {
+                ncx.WriteEndElement(); // navPoint
+            }
+            ncx.WriteEndElement(); // navPoint TOC
+            ncx.WriteEndElement(); // navmap
+            ncx.WriteEndElement(); // ncx
+            ncx.WriteEndDocument();
+            ncx.Close();
+
+        }
+
+        private void WriteNavPoint(XmlWriter ncx, string index, string text, string name)
+        {
+            ncx.WriteStartElement("navPoint");
+            ncx.WriteAttributeString("id", "dtb:uid");
+            ncx.WriteAttributeString("playOrder", index);
+            ncx.WriteStartElement("navLabel");
+            ncx.WriteElementString("text", text);
+            ncx.WriteEndElement(); // navlabel
+            ncx.WriteStartElement("content");
+            ncx.WriteAttributeString("src", name);
+            ncx.WriteEndElement(); // meta
+        }
+
+        /// <summary>
+        /// Creates the table of contents file used by .epub readers (toc.ncx).
+        /// </summary>
+        /// <param name="projInfo">project information</param>
+        /// <param name="contentFolder">the content folder (../OEBPS)</param>
+        /// <param name="bookId">Unique identifier for the book we're creating</param>
+        private void CreateNcx_old(PublicationInformation projInfo, string contentFolder, Guid bookId)
         {
             // toc.ncx
             XmlWriter ncx = XmlWriter.Create(Common.PathCombine(contentFolder, "toc.ncx"));

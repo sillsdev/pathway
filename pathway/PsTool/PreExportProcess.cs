@@ -50,6 +50,7 @@ namespace SIL.Tool
     {
         private string _xhtmlFileNameWithPath;
         private string _cssFileNameWithPath;
+        private string _xhtmlRevFileNameWithPath;
         private string _baseXhtmlFileNameWithPath;
         private PublicationInformation _projInfo;
         private StringBuilder _fileContent = new StringBuilder();
@@ -71,6 +72,7 @@ namespace SIL.Tool
             _xhtmlFileNameWithPath = projInfo.DefaultXhtmlFileWithPath;
             _baseXhtmlFileNameWithPath = projInfo.DefaultXhtmlFileWithPath;
             _cssFileNameWithPath = projInfo.DefaultCssFileWithPath;
+            _xhtmlRevFileNameWithPath = string.Empty;
             _projInfo = projInfo;
             if (Param.Value.Count > 0)
                 _projInfo.ProjectInputType = Param.Value[Param.InputType];
@@ -520,6 +522,10 @@ namespace SIL.Tool
 
         private string TableOfContents()
         {
+            //Reversal XHTML file
+            if (_xhtmlFileNameWithPath != null)
+                _xhtmlRevFileNameWithPath = Path.Combine(Path.GetDirectoryName(_xhtmlFileNameWithPath),"FlexRev.xhtml");
+
             // sanity checks
             if (Param.GetMetadataValue(Param.TableOfContents).ToLower().Equals("false")) { return string.Empty; }
             if (!File.Exists(_xhtmlFileNameWithPath)) return string.Empty; // can't obtain list of books / letters
@@ -534,7 +540,11 @@ namespace SIL.Tool
             xmlReader.Close();
             var sb = new StringBuilder();
             sb.AppendLine("<!-- Contents page -->");
-            sb.AppendLine("<div id='TOCPage' class='Contents'><h1>Contents</h1>");
+            sb.AppendLine("<div id='TOCPage' class='Contents'>");
+            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+            {
+                sb.AppendLine("<h1>Table of Contents</h1><h2>Main</h2>");
+            }
             // collect book names
             sb.AppendLine("<ul>");
             XmlNodeList bookIDs, bookNames;
@@ -641,9 +651,55 @@ namespace SIL.Tool
                     index++;
                 }
             }
+            sb.AppendLine("</ul>");
+
+
+            if (File.Exists(_xhtmlRevFileNameWithPath))
+            {
+                //Reversal Code here starts
+                //XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+                //XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+                //namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+                //XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+                xmlReader = XmlReader.Create(_xhtmlRevFileNameWithPath, xmlReaderSettings);
+                xmlDocument.Load(xmlReader);
+                xmlReader.Close();
+                sb.AppendLine("<h2>Reversal Index</h2>");
+                sb.AppendLine("<ul>");
+                XmlNodeList revBookIDs = null, revBookNames = null;
+                if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+                {
+                    // for dictionaries, the letter is used both for the ID and name
+                    revBookIDs = xmlDocument.SelectNodes("//xhtml:div[@class='letter']", namespaceManager);
+                    revBookNames = revBookIDs;
+                }
+                if (revBookIDs != null && revBookIDs.Count > 0)
+                {
+                    int index = 0;
+                    foreach (XmlNode revBookId in revBookIDs)
+                    {
+                        // each entry should look something like this:
+                        //    <li><a href="#idMRK">Das Evangelium nach Markus</a></li>
+                        sb.Append("<li><a href='");
+                        // remove whitespace
+                        string indexValue = String.Format("{0:00000}", index + 1);
+                        string fileNameIndex = "RevIndex" + indexValue + "_.xhtml";
+
+                        //sb.Append(new Regex(@"\s*").Replace(bookId.InnerText, string.Empty));
+                        sb.Append(new Regex(@"\s*").Replace(fileNameIndex, string.Empty));
+                        sb.Append("'>");
+                        sb.Append(revBookNames[index].InnerText);
+                        sb.AppendLine("</a>");
+                        sb.AppendLine("</li>");
+                        index++;
+                    }
+                }
+                //Reversal Code here ends
+                sb.AppendLine("</ul>");
+            }
 
             // close out
-            sb.AppendLine("</ul>");
+            //sb.AppendLine("</ul>");
             sb.AppendLine("</div>");
 
             return sb.ToString();
@@ -1019,10 +1075,18 @@ namespace SIL.Tool
             }
             Directory.CreateDirectory(tempFolder);
 
+            if (_xhtmlFileNameWithPath != null)
+                _xhtmlRevFileNameWithPath = Path.Combine(Path.GetDirectoryName(_xhtmlFileNameWithPath), "FlexRev.xhtml");
+
+            string tempRevFile = Common.PathCombine(tempFolder, Path.GetFileName(_xhtmlRevFileNameWithPath));
+
             //Note - copies the xhtml and css files to temp folder
             string tempFile = Common.PathCombine(tempFolder, Path.GetFileName(_xhtmlFileNameWithPath));
             File.Copy(Common.DirectoryPathReplace(_xhtmlFileNameWithPath), tempFile, true);
             _xhtmlFileNameWithPath = tempFile;
+
+            if (File.Exists(_xhtmlRevFileNameWithPath))
+                File.Copy(_xhtmlRevFileNameWithPath, tempRevFile, true);
 
             tempFile = Common.PathCombine(tempFolder, Path.GetFileName(_cssFileNameWithPath));
             if (File.Exists(_cssFileNameWithPath))
