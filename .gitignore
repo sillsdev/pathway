@@ -65,6 +65,7 @@ pathway/WordPressConvert/bin/*
 pathway/WordPressConvert/obj/*
 pathway/XeLaTexConvert/bin/*
 pathway/XeLaTexConvert/obj/*
+pathway/XeLaTexConvert/XeLaTexExe
 pathway/YouVersionConvert/bin/*
 pathway/YouVersionConvert/obj/*
 pathway/epubConvert/bin/*
