@@ -202,11 +202,10 @@ function Move()
 	var myDocument = app.documents.item(0);
 	myPage = myDocument.pages.item(0);//stories
 	myStory = myPage.textFrames.item(0);
-    myDocument.pages.add(1650812527,myDocument.pages.item(frontMatterItemCount));//befo =1650812527, afte = 1634104421
+    myDocument.pages.add(1650812527,myDocument.pages.item(frontMatterItemCount + 3));//befo =1650812527, afte = 1634104421
 	//alert(myStory.contents)
-     MoveFrame(myStory, 3, frontMatterItemCount);
-	}
-
+     MoveFrame(myStory, 3, frontMatterItemCount + 3);
+}
 
 function CreateTOCStyle()
 {
@@ -452,7 +451,8 @@ function PlaceFrames()
 			MoveFrame(myStory, marginTop, curPageNo);
 			//if(myStoryCounter!=activePageNumber)
 				AddNewPage(curPageNo + 1);
-			curPageNo = curPageNo + 1;
+				AddNewPage(curPageNo + 1);
+			curPageNo = curPageNo + 2;
 			currentMarginTop = marginTop;
 			//frontMatterItemCount++;
 			//alert(" currentMarginTop  " + currentMarginTop + "\n marginTop = " + marginTop);
@@ -562,10 +562,11 @@ myDocument.pages.item(0).appliedMaster = myDocument.masterSpreads.item("F-FirstP
 //This method adds new page and assign Master Spread
 function AddNewPage(pageNo)
 {
-	//Empty Page is already there, we need not add the new page
-	if(pageNo != myDocument.pages.length)
-	return;
-	//alert(pageNo + "\t" + myDocument.pages.length);
+	//I commented below 3 lines for Odd pages for Front Matter TD-2877(Front matter order and page type)
+	//////Empty Page is already there, we need not add the new page 
+	////if(pageNo != myDocument.pages.length)
+	////return;
+
 	myDocument.pages.add();
 	try
 	{
@@ -877,7 +878,9 @@ function CollectAllFrame()
 		for(var myStoryCounter=myPage.textFrames.length-1; myStoryCounter >= 0; myStoryCounter--)
 		{
 			myStory = myPage.textFrames.item(myStoryCounter);//stories
-			myStory.fit(FitOptions.frameToContent);
+			
+			if(myStory.cornerRadius== 1)
+				myStory.fit(FitOptions.frameToContent);
 		
 			myFrames[arrayIndex] = myStory;
 			arrayIndex = arrayIndex + 1;
@@ -1012,6 +1015,8 @@ function FitFrameToPage(myStory)
 			
 	    //alert("currentMarginTop " + currentMarginTop + " frameLeft " + frameLeft  + " frameHeight " + frameHeight   + " frameWidth " + frameWidth)
 		//alert("current Top " + currentMarginTop + "\nPageHeight " + pageHeight + "\ncurrent Left " + frameLeft + "\nPageWidth " + frameWidth);
+		
+		if(myStory.cornerRadius!= 2)
 		myStory.geometricBounds=[currentMarginTop,frameLeft , frameHeight ,frameWidth];
 
 

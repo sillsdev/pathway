@@ -36,6 +36,7 @@ namespace SIL.PublishingSolution
         XeLaTexMapProperty mapProperty = new XeLaTexMapProperty();
         string _firstString = string.Empty;
         string _lastString = string.Empty;
+        private string _headWordStyleName = string.Empty;
         private string _tocChecked = "false";
         private string _coverImage = "false";
         private string _titleInCoverPage = "false";
@@ -151,6 +152,7 @@ namespace SIL.PublishingSolution
             {
                 _firstString = newProperty["TableofContent"]["first"];
                 _lastString = newProperty["TableofContent"]["last"];
+                _headWordStyleName = newProperty["TableofContent"]["stylename"];
                 newProperty.Remove("TableofContent");
             }
         }
@@ -195,12 +197,17 @@ namespace SIL.PublishingSolution
             {
                 Common.FileInsertText(_xetexFullFile, @"\thispagestyle{empty} ");
                 Common.FileInsertText(_xetexFullFile, @"\begin{document} ");
+
+
+
                 Common.FileInsertText(_xetexFullFile, _pageStyleFormat);
                 //setmainfont{Arial} //Default Font 
                 //Common.FileInsertText(_xetexFullFile, @"\usepackage{fancyhdr}");
                 if (Convert.ToBoolean(CoverImage))
                     Common.FileInsertText(_xetexFullFile, @"\usepackage{eso-pic}");
 
+                Common.FileInsertText(_xetexFullFile, @"\usepackage[margin=2cm,includeheadfoot]{geometry}");
+                Common.FileInsertText(_xetexFullFile, @"\usepackage{calc}");
                 Common.FileInsertText(_xetexFullFile, @"\usepackage{multicol}");
                 Common.FileInsertText(_xetexFullFile, @"\usepackage{fancyhdr}");
                 Common.FileInsertText(_xetexFullFile, @"\usepackage{fontspec}");
@@ -213,7 +220,10 @@ namespace SIL.PublishingSolution
                 {
                     Common.FileInsertText(_xetexFullFile, package);
                 }
-                Common.FileInsertText(_xetexFullFile, @"\documentclass{article} ");
+                //Common.FileInsertText(_xetexFullFile, @"\documentclass{article} ");
+                Common.FileInsertText(_xetexFullFile, @"\documentclass[a4paper]{article} ");
+                
+
                 //Common.FileInsertText(_xetexFullFile, @"\documentclass[10pt,psfig,letterpaper,twocolumn]{article} ");
             }
         }
@@ -236,11 +246,12 @@ namespace SIL.PublishingSolution
             if (_projectType.ToLower() == "dictionary")
             {
                 if (_firstString != null)
-                    tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} Words  " +
-                                      _firstString.ToUpper() + " - " + _lastString.ToUpper() + "}{\\pageref{" +
-                                      "first_page" + _firstString + "}--\\pageref{" + "last_page" + _lastString +
-                                      "}}{}} ";
+                {
+                    tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} Words  " + _firstString.ToUpper() + " - " + _lastString.ToUpper() + "}{\\pageref{" + "first_page" + _firstString + "}--\\pageref{" + "last_page" + _lastString + "}}{}} ";
 
+                    //For other Font style apply the below line
+                    //tableOfContent += @"\addtocontents{toc}{\contentsline {section}{\numberline{} Words  " + "\\" + _headWordStyleName + " " + _firstString.ToUpper() + " - " + "\\" + _headWordStyleName + " " + _lastString.ToUpper() + "}{\\pageref{" + "first_page" + _firstString + "}--\\pageref{" + "last_page" + _lastString + "}}{}} ";
+                }
 
                 tableOfContent += "\r\n";
                 tableOfContent += "\\newpage \r\n";
@@ -250,7 +261,7 @@ namespace SIL.PublishingSolution
             tableOfContent += "\\tableofcontents \r\n";
             //tableOfContent += "\\pagebreak[2] \r\n";
             tableOfContent += "\\newpage \r\n";
-
+            tableOfContent += "\\setcounter{page}{1} \r\n";
             Common.FileInsertText(_xetexFullFile, tableOfContent);
         }
 

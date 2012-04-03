@@ -39,7 +39,7 @@ namespace SIL.PublishingSolution
         private int _hyperLinkNo = 0;
         private bool isFileEmpty = true;
         private bool isFileCreated;
-        private bool isImage;
+        private bool isImageAvailable;
         private bool isHomographNumber = false;
         private string columnCount = string.Empty;
         private string imageClass = string.Empty;
@@ -77,7 +77,7 @@ namespace SIL.PublishingSolution
         public bool _dictionaryEnding = false;
         private string _tocStartingPage;
         private string _tocEndingPage;
-
+        private string _tocStyleName;
         private Dictionary<string, string> _toc = new Dictionary<string, string>();
 
         #endregion
@@ -94,6 +94,12 @@ namespace SIL.PublishingSolution
         {
             get { return _tocEndingPage; }
             set { _tocEndingPage = value; }
+        }
+
+        public string TocStyleName
+        {
+            get { return _tocStyleName; }
+            set { _tocStyleName = value; }
         }
 
         #endregion
@@ -126,6 +132,7 @@ namespace SIL.PublishingSolution
         {
             _toc.Add("first", TocStartingPage);
             _toc.Add("last", TocEndingPage);
+            _toc.Add("stylename", TocStyleName);
             _newProperty.Add("TableofContent", _toc);
         }
 
@@ -771,8 +778,8 @@ namespace SIL.PublishingSolution
 
                         //string hangparaFormat = "\\hangpara{" + "36pt" + "}{" + "1" + "}";
                         //_xetexFile.Write(hangparaFormat);
-
-                        string headerFormat = "\\markboth{" + _headerContent + "}{" + _headerContent + "}";
+                        _tocStyleName = mergedParaStyle;
+                        string headerFormat = "\\markboth{ \\" + mergedParaStyle + " " + _headerContent + "}{ \\" + mergedParaStyle + " " + _headerContent + "}";
                         _xetexFile.Write(headerFormat);
                         _headerContent = content;
                     }
@@ -902,7 +909,7 @@ namespace SIL.PublishingSolution
                 string VertRefPoint = "LineBaseline";
                 string AnchorPoint = "TopLeftAnchor";
 
-                isImage = true;
+                isImageAvailable = true;
                 inserted = true;
                 string[] cc = _allParagraph.ToArray();
                 
@@ -1068,22 +1075,18 @@ namespace SIL.PublishingSolution
 
         private void WriteImage(string picFile,int height, int width)
         {
-
-            isImage = true;
-
             if (!string.IsNullOrEmpty(picFile))
             {
-                _xetexFile.WriteLine("");
+                isImageAvailable = true;
 
+                _xetexFile.WriteLine("\r\n");
+                
                 string p1 = @"\begin{wrapfigure}";
                 string p2 = @"\begin{center}";
                 //string p3 = @"{\includegraphics[natwidth=2bp,natheight=2bp, width=1bp]{" + picFile + "}} ";
                 //string p3 = @"\includegraphics[width=1in,height=1in,%keepaspectratio]{" + picFile + "} ";
                 string p3 = @"\includegraphics[angle=0,width=" + width + "mm,height=" + height + "mm]{" + picFile + "} ";
-                string p4 = @"\caption{}";
-                //string p3 = @"{\includegraphics[natwidth=1bp,natheight=1bp, width=150bp]{" + picFile + "}} ";                
-                string p5 = @"\end{center}";
-                string p6 = @"\end{wrapfigure}";
+                
 
                 //string p1 = @"\begin{figure*}[ht!] ";
                 //string p2 = @"\centering ";
@@ -1108,10 +1111,14 @@ namespace SIL.PublishingSolution
                 _xetexFile.WriteLine(p1);
                 _xetexFile.WriteLine(p2);
                 _xetexFile.WriteLine(p3);
+                string p4 = @"\caption{}";
+                //string p3 = @"{\includegraphics[natwidth=1bp,natheight=1bp, width=150bp]{" + picFile + "}} ";                
+                string p5 = @"\end{center}";
+                string p6 = @"\end{wrapfigure}";
                 _xetexFile.WriteLine(p4);
                 _xetexFile.WriteLine(p5);
                 _xetexFile.WriteLine(p6);
-                _xetexFile.WriteLine("");
+                _xetexFile.WriteLine("\r\n");
             }
         }
 
@@ -1388,10 +1395,10 @@ namespace SIL.PublishingSolution
                                 txtAlignStart = "\\begin{" + Common.RightString(property, " ") + "}";
                                 txtAlignEnd = "\\end{" + Common.RightString(property, " ") + "}";
 
-                                if (isImage)
+                                if (isImageAvailable)
                                 {
-                                    txtAlignEnd = txtAlignEnd + " \\item ";
-                                    isImage = false;
+                                    txtAlignEnd = txtAlignEnd + " ";
+                                    isImageAvailable = false;
                                 }
                             }
                             else
@@ -1406,7 +1413,7 @@ namespace SIL.PublishingSolution
                             {
 
                                 //propertyValue = "text-indent hanglist} " + "[" + hangParaValue + "pt]";
-                                txtAlignStart = "\\begin" + Common.RightString(property, " ") + " \\item ";
+                                txtAlignStart = "\r\n \\begin" + Common.RightString(property, " ") + " \\item ";
                                 txtAlignEnd = "\\end{hanglist} ";
 
                                 //txtAlignStart = "\\begin{hanglist}" + "[12pt] \\item ";
@@ -1691,7 +1698,7 @@ namespace SIL.PublishingSolution
                 {
                     _allCharacter.Push(_imageClass); // temporarily storing to get width and position
                     _allCharacter.Pop();    // retrieving it again.
-                    isImage = false;
+                    isImageAvailable = false;
                     imageClass = "";
                     _isParagraphClosed = true;
 
@@ -1701,7 +1708,7 @@ namespace SIL.PublishingSolution
             {
                 if (imageClass.Length > 0 && _closeChildName == imageClass)
                 {
-                    isImage = false;
+                    isImageAvailable = false;
                     imageClass = "";
                     _isParagraphClosed = true;
                 }

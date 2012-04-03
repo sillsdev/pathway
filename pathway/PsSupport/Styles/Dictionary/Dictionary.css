@@ -479,12 +479,7 @@
 .pronunciation > .xitem + .xitem :before {
         content: " ";
 }
-.pronunciation:after  {
-        content: "]";
-}
-.pronunciation:before {
-        content: "[";
-}
+
 .pronunciationminor :after  {
         content: "]";
 }
@@ -510,9 +505,7 @@
 .pronunciations-sub > .xitem + .xitem :before {
         content: ", ";
 }
-.pronunciations :after {
-        content: " ";
-}
+
 .pronunciations { }
 .pronunciations > .xitem + .xitem :before {
         content: ", ";

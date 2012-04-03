@@ -1390,6 +1390,7 @@ namespace SIL.PublishingSolution
 
         public override void CreateSectionClass(string readerValue)
         {
+            ClosePara(false);
             string sectionName = string.Empty;
             readerValue = Common.LeftString(readerValue, "_");
             if (_sectionName.Contains(readerValue))

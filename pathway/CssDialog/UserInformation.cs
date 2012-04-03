@@ -229,10 +229,10 @@ namespace SIL.PublishingSolution
 
             List<string> developerName = new List<string>();
             developerName.Add("TRIHUS-1007");
-            developerName.Add("James-PC");
-            developerName.Add("Samdoss-PC");
-            developerName.Add("Karthi-PC");
-            developerName.Add("Sankar-SIL");
+            developerName.Add("JAMES-PC");
+            developerName.Add("SAMDOSS-PC");
+            developerName.Add("KARTHI-PC");
+            developerName.Add("SANKAR-SIL");
 
             if (developerName.Contains(GetMachineName()))
             {
