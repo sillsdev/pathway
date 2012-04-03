@@ -92,7 +92,7 @@ namespace SIL.PublishingSolution
                 organization = "SIL International";
             }
             //_tableOfContent = Param.GetMetadataValue(Param.TableOfContents, organization) ?? ""; // empty string if null / not found
-            _coverImage = (Param.GetMetadataValue(Param.CoverPage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CoverPageTitle, organization));
+            _coverImage = (Param.GetMetadataValue(Param.CoverPage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CoverPage, organization));
             _coverPageImagePath = Param.GetMetadataValue(Param.CoverPageFilename, organization);
 
 
