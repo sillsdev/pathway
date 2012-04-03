@@ -1,4 +1,4 @@
-\documentclass{article} 
+\documentclass[a4paper]{article} 
 \usepackage{multicol}
 \usepackage{texthanglist}
 \usepackage{changepage}
@@ -9,6 +9,8 @@
 \usepackage{fontspec}
 \usepackage{fancyhdr}
 \usepackage{multicol}
+\usepackage{calc}
+\usepackage[margin=2cm,includeheadfoot]{geometry}
 
 \begin{document} 
 \thispagestyle{empty} 
@@ -41,12 +43,14 @@
 \font\xitemxitemheadwordbefore="Times New Roman/B":color=000000 at 12pt
 \font\xitembzhfonipa="Times New Roman":color=000000 at 12pt
 \font\xitemtpi="Times New Roman":color=000000 at 12pt
-\begin{adjustwidth}{1pt}{0pt}{2pt}{9pt}\begin{hanglist}[36pt] \item \end{hanglist} \end{adjustwidth} 
+\begin{adjustwidth}{1pt}{0pt}{2pt}{9pt}
+ \begin{hanglist}[36pt] \item \end{hanglist} \end{adjustwidth} 
 \letterletHeaddicBody{A a}
  \label{first_pageA} 
 \setlength{\columnsep}{1em} 
 \setlength\columnseprule{0.4pt} 
-\begin{multicols}{2}{\raggedright} \begin{adjustwidth}{1pt}{0pt}{2pt}{9pt}\begin{hanglist}[36pt] \item 
-\markboth{abuhek}{abuhek}\headwordentryletDatadicBody{abuhek}\markboth{abuhek}{abuhek}\headwordafterentryletDatadicBody{ }\xlanguagetagexampleexamplesentryletDatadicBody{Bua }\exampleexamplesentryletDatadicBody{Avëh devesi abuhek vu maluh}\exampleafterexamplesentryletDatadicBody{ }\xlanguagetagtranslationtranslationsexamplesentryletDatadicBody{Eng }\translationtranslationsexamplesentryletDatadicBody{The women roasted `pitpit' for the men}\lexreftypexitemrelationstranslationsexamplesentryletDatadicBody{Spec}\sensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{daġoraa}\xsensenumbersensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{$^{ 2}$}\sensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{ḳuuḳ}\xhomographnumbersensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{$_{2}$}\sensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{matav}\sensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{mav}\sensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{meḳu}\sensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{non}\sensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{pelumeng}\sensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{ta}\xhomographnumbersensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{$_{2}$}\sensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{viihus}\xhomographnumbersensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{$_{2}$}\examplesafterentryletDatadicBody{ }\end{hanglist} \end{adjustwidth} 
+\begin{multicols}{2}{\raggedright} \begin{adjustwidth}{1pt}{0pt}{2pt}{9pt}
+ \begin{hanglist}[36pt] \item 
+\markboth{ \headwordentryletDatadicBody abuhek}{ \headwordentryletDatadicBody abuhek}\headwordentryletDatadicBody{abuhek}\markboth{ \headwordafterentryletDatadicBody abuhek}{ \headwordafterentryletDatadicBody abuhek}\headwordafterentryletDatadicBody{ }\xlanguagetagexampleexamplesentryletDatadicBody{Bua }\exampleexamplesentryletDatadicBody{Avëh devesi abuhek vu maluh}\exampleafterexamplesentryletDatadicBody{ }\xlanguagetagtranslationtranslationsexamplesentryletDatadicBody{Eng }\translationtranslationsexamplesentryletDatadicBody{The women roasted `pitpit' for the men}\lexreftypexitemrelationstranslationsexamplesentryletDatadicBody{Spec}\sensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{daġoraa}\xsensenumbersensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{$^{ 2}$}\sensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{ḳuuḳ}\xhomographnumbersensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{$_{2}$}\sensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{matav}\sensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{mav}\sensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{meḳu}\sensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{non}\sensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{pelumeng}\sensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{ta}\xhomographnumbersensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{$_{2}$}\sensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{viihus}\xhomographnumbersensecrossrefxitemlexreftargetsxitemrelationstranslationsexamplesentryletDatadicBody{$_{2}$}\examplesafterentryletDatadicBody{ }\end{hanglist} \end{adjustwidth} 
  \end{multicols}
 \end{document}
