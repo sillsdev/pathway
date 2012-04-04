@@ -178,8 +178,8 @@
       <HintPath>.\BuildPathway\BuildTasks.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
-  <!--Import Project="C:\Windows\Microsoft.NET\Framework64\v2.0.50727\Microsoft.CSharp.targets"/-->
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" Condition=" '$(MSBuildToolsPath)' != '' "/>
+  <Import Project="C:\Windows\Microsoft.NET\Framework64\v2.0.50727\Microsoft.CSharp.targets" Condition=" '$(MSBuildToolsPath)' == '' "/>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets. -->
   <Target Name="MyTest">
@@ -285,7 +285,7 @@
     <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
       Properties="Configuration=PwCtx;Platform=x86"/>
   </Target>
-  <Target Name="PathwayXeLaTeX" DependsOnTargets="Install-tl LocalPw-tl">
+  <Target Name="PathwayXeLaTeX" DependsOnTargets="Install-tl;LocalPw-tl">
     <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
       Properties="Configuration=PathwayXeLaTeX;Platform=x86"/>
   </Target>
