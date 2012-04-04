@@ -3253,7 +3253,7 @@ namespace SIL.PublishingSolution
             }
             ncx.WriteEndElement(); // navPoint TOC
             ncx.WriteEndElement(); // navmap
-            ncx.WriteEndElement(); // ncx
+            //ncx.WriteEndElement(); // ncx
             ncx.WriteEndDocument();
             ncx.Close();
 

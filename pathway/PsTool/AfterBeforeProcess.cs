@@ -192,7 +192,8 @@ namespace SIL.PublishingSolution
         {
             InitializeData(projInfo, idAllClass, classFamily, cssClassOrder);
             string tempFile = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", "_1.xhtml");
-            File.Move(projInfo.DefaultXhtmlFileWithPath, tempFile);
+            File.Copy(projInfo.DefaultXhtmlFileWithPath, tempFile,true);
+            projInfo.DefaultCssFileWithPath = tempFile;
             OpenXhtmlFile(tempFile); //reader
             CreateFile(projInfo); //writer
             InsertBeforeAfter();
