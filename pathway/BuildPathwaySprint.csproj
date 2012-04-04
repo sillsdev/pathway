@@ -355,7 +355,7 @@
     <tlbin Include="XeLaTexConvert\TexLive\**\install-tl-advanced.bat"/>
     <rdir Include="XeLaTexConvert\XeLaTexExe"/>
   </ItemGroup>
-  <Target Name="LocalPw-tl">
+  <Target Name="LocalPw-tl" DependsOnTargets="Install-tl">
     <MSBuild.ExtensionPack.Framework.TextString TaskAction="Replace" OldString="@(tlbin)" OldValue="\install-tl-advanced.bat" NewValue="">
       <Output PropertyName="out" TaskParameter="NewString"/>
     </MSBuild.ExtensionPack.Framework.TextString>
