@@ -347,23 +347,33 @@
     <Dll604 Include=".\PsExport\Dllstable\*.dll"/>
   </ItemGroup>
   <Target Name="Install-tl">
-    <MakeDir Directories="XeLaTexConvert\TexLive" />
-    <MSBuild.ExtensionPack.Web.WebClient TaskAction="DownloadFile" Url="http://mirror.ctan.org/systems/texlive/tlnet/install-tl.zip" FileName="XeLaTexConvert\TexLive\install-tl.zip"/>
-    <MSBuild.ExtensionPack.Compression.Zip TaskAction="Extract" ExtractPath="XeLaTexConvert\TexLive" ZipFileName="XeLaTexConvert\TexLive\install-tl.zip"/>
+    <ConvertToAbsolutePath Paths="XeLaTexConvert\TexLive">
+      <Output PropertyName="idir" TaskParameter="AbsolutePaths"/>
+    </ConvertToAbsolutePath>
+    <Message Text="idir: $(idir)" Importance="high" />
+    <MakeDir Directories="$(idir)" />
+    <MSBuild.ExtensionPack.Web.WebClient TaskAction="DownloadFile" Url="http://mirror.ctan.org/systems/texlive/tlnet/install-tl.zip" FileName="$(idir)\install-tl.zip"/>
+    <MSBuild.ExtensionPack.Compression.Zip TaskAction="Extract" ExtractPath="$(idir)" ZipFileName="$(idir)\install-tl.zip"/>
   </Target>
   <ItemGroup>
     <tlbin Include="XeLaTexConvert\TexLive\**\install-tl-advanced.bat"/>
     <rdir Include="XeLaTexConvert\XeLaTexExe"/>
   </ItemGroup>
-  <Target Name="LocalPw-tl" DependsOnTargets="Install-tl">
-    <MSBuild.ExtensionPack.Framework.TextString TaskAction="Replace" OldString="@(tlbin)" OldValue="\install-tl-advanced.bat" NewValue="">
+  <Target Name="LocalPw-tl">
+    <Message Text="tlbin: @(tlbin)" Importance="high" />
+    <Message Text="rdir: @(rdir)" Importance="high" />
+    <ConvertToAbsolutePath Paths="@(tlbin)">
+      <Output PropertyName="fbin" TaskParameter="AbsolutePaths"/>
+    </ConvertToAbsolutePath>
+    <Message Text="fbin: $(fbin)" Importance="high" />
+    <MSBuild.ExtensionPack.Framework.TextString TaskAction="Replace" OldString="$(fbin)" OldValue="\install-tl-advanced.bat" NewValue="">
       <Output PropertyName="out" TaskParameter="NewString"/>
     </MSBuild.ExtensionPack.Framework.TextString>
-    <!--Message Text="Out: $(out)\tlpw.profile" Importance="high" /-->
+    <Message Text="Out: $(out)\tlpw.profile" Importance="high" />
     <ConvertToAbsolutePath Paths="@(rdir)">
       <Output PropertyName="idir" TaskParameter="AbsolutePaths"/>
     </ConvertToAbsolutePath>
-    <!--Message Text="idir: $(idir)" Importance="high" /-->
+    <Message Text="idir: $(idir)" Importance="high" />
     <WriteLinesToFile File="$(out)\tlpw.profile" Overwrite="true" Lines="
 # texlive.profile written on Tue Sep 13 10:00:58 2011 UTC
 # It will NOT be updated and reflects only the
