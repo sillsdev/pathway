@@ -1146,6 +1146,28 @@ namespace Test.PsTool
             TextFileAssert.AreEqual(expected, output);
         }
 
+        /// <summary>
+        ///A test for XML settings file migration
+        ///</summary>
+        [Test]
+        public void XmlMigrationTest()
+        {
+            string inputBackUpFile = Common.PathCombine(_inputBasePath, "BackUpFile.xml");
+            string inputNnewFile = Common.PathCombine(_inputBasePath, "NewSettings.xml");
+
+            string outputBackUpFile = Common.PathCombine(_outputBasePath, "BackUpFile.xml");
+            string outputNewFile = Common.PathCombine(_outputBasePath, "NewSettings.xml");
+
+            string expectedNewFile = Common.PathCombine(_expectBasePath, "NewSettings.xml");
+
+            File.Copy(inputBackUpFile, outputBackUpFile, true);
+            File.Copy(inputNnewFile, outputNewFile, true);
+
+            Common.MigrateCustomSheet(outputBackUpFile, outputNewFile);
+
+            FileAssert.AreEqual(expectedNewFile, outputNewFile, "Configuration Tool - Migration Test failed");
+        }
+
         #endregion
 
         #region SaveInFolderTests
