@@ -2,6 +2,11 @@
 <Project ToolsVersion="3.5" DefaultTargets="Build"
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <UsingTask TaskName="UpdateAssemblies" AssemblyFile="BuildPathway/BuildTasks.dll"/>
+  <!-- Extension pack from http://msbuildextensionpack.codeplex.com/ -->
+  <!-- Documentation at: http://www.msbuildextensionpack.com/help/4.0.3.0/index.html (also in extension pack) -->
+  <UsingTask TaskName="MSBuild.ExtensionPack.Compression.Zip" AssemblyFile="BuildPathway/MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.Web.WebClient" AssemblyFile="BuildPathway/MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.Framework.TextString" AssemblyFile="BuildPathway/MSBuild.ExtensionPack.dll" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -173,9 +178,13 @@
       <HintPath>.\BuildPathway\BuildTasks.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+  <!-- Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/ -->
+  <Import Project="C:\Windows\Microsoft.NET\Framework64\v2.0.50727\Microsoft.CSharp.targets"/>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets. -->
+  <Target Name="MyTest">
+    <Message Text="Path: $(MSBuildToolsPath)" Importance="high" />
+  </Target>
   <Target Name="Build">
     <CallTarget Targets="Clean"/>
     <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>
@@ -276,7 +285,7 @@
     <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
       Properties="Configuration=PwCtx;Platform=x86"/>
   </Target>
-  <Target Name="PathwayXeLaTeX">
+  <Target Name="PathwayXeLaTeX" DependsOnTargets="Install-tl LocalPw-tl">
     <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
       Properties="Configuration=PathwayXeLaTeX;Platform=x86"/>
   </Target>
@@ -337,4 +346,111 @@
     <Dll605 Include=".\PsExport\Dlls605\*.dll"/>
     <Dll604 Include=".\PsExport\Dllstable\*.dll"/>
   </ItemGroup>
+  <Target Name="Install-tl">
+    <MakeDir Directories="C:\tl" />
+    <MSBuild.ExtensionPack.Web.WebClient TaskAction="DownloadFile" Url="http://mirror.ctan.org/systems/texlive/tlnet/install-tl.zip" FileName="C:\tl\install-tl.zip"/>
+    <MSBuild.ExtensionPack.Compression.Zip TaskAction="Extract" ExtractPath="C:\tl" ZipFileName="C:\tl\install-tl.zip"/>
+  </Target>
+  <ItemGroup>
+    <tlbin Include="C:\tl\**\install-tl-advanced.bat"/>
+    <rdir Include="XeLaTexConvert\XeLaTexExe"/>
+  </ItemGroup>
+  <Target Name="LocalPw-tl">
+    <MSBuild.ExtensionPack.Framework.TextString TaskAction="Substring" OldString="@(tlbin)" StartIndex="0" Count="25">
+      <Output PropertyName="out" TaskParameter="NewString"/>
+    </MSBuild.ExtensionPack.Framework.TextString>
+    <!--Message Text="Out: $(out)\tlpw.profile" Importance="high" /-->
+    <ConvertToAbsolutePath Paths="@(rdir)">
+      <Output PropertyName="idir" TaskParameter="AbsolutePaths"/>
+    </ConvertToAbsolutePath>
+    <!--Message Text="idir: $(idir)" Importance="high" /-->
+    <WriteLinesToFile File="$(out)\tlpw.profile" Overwrite="true" Lines="
+# texlive.profile written on Tue Sep 13 10:00:58 2011 UTC
+# It will NOT be updated and reflects only the
+# installation profile at installation time.
+selected_scheme scheme-custom
+TEXDIR $(idir)
+TEXMFCONFIG $TEXMFSYSCONFIG
+TEXMFHOME $TEXMFLOCAL
+TEXMFLOCAL $(idir)/texmf-local
+TEXMFSYSCONFIG $(idir)/texmf-config
+TEXMFSYSVAR $(idir)/texmf-var
+TEXMFVAR $TEXMFSYSVAR
+binary_win32 1
+collection-basic 1
+collection-langenglish 1
+in_place 0
+option_autobackup 1
+option_backupdir tlpkg/backups
+option_desktop_integration 0
+option_doc 0
+option_file_assocs 0
+option_fmt 1
+option_letter 1
+option_path 0
+option_post_code 1
+option_src 0
+option_sys_bin /usr/local/bin
+option_sys_info /usr/local/info
+option_sys_man /usr/local/man
+option_w32_multi_user 0
+option_write18_restricted 1
+portable 1
+" />
+    <RemoveDir Directories="@(idir)"/>
+    <Exec Command="echo y| install-tl-advanced -profile tlpw.profile" WorkingDirectory="$(out)"/>
+    <Exec Command="tlmgr install latex l3kernel l3packages etoolbox" WorkingDirectory="$(idir)\bin\win32"/>
+    <Exec Command="tlmgr install lm fontspec euenc tipa xkeyval xunicode" WorkingDirectory="$(idir)\bin\win32"/>
+    <Exec Command="tlmgr install fancyhdr float graphics hanging mdframed oberdiek" WorkingDirectory="$(idir)\bin\win32"/>
+    <Exec Command="tlmgr install setspace tools xcolor eso-pic geometry" WorkingDirectory="$(idir)\bin\win32"/>
+    <Exec Command="tlmgr install xetex xetex-def" WorkingDirectory="$(idir)\bin\win32"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-zh-latn-pinyin.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-uk.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-tr.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-tk.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-te.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-as.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-ta.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-sv.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-sl.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-bg.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-sa.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-ro.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-pa.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-bn.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-or.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-mul-ethi.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-mr.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-mn-cyrl.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-ml.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-lv.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-lt.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-cop.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-lo.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-la.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-kn.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-kmr.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-it.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-is.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-hy.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-cy.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-hu.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-hr.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-hi.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-da.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-gu.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-grc.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-gl.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-de-1901.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-fr.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-fi.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-eu.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-de-1996.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-et.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-es.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-eo.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-de-ch-1901.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-el-polyton.hyp.txt"/>
+    <Copy SourceFiles="$(idir)\..\empty-hyph.txt" DestinationFiles="$(idir)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-el-monoton.hyp.txt"/>
+  </Target>
 </Project>
