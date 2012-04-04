@@ -178,8 +178,8 @@
       <HintPath>.\BuildPathway\BuildTasks.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <!-- Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/ -->
-  <Import Project="C:\Windows\Microsoft.NET\Framework64\v2.0.50727\Microsoft.CSharp.targets"/>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+  <!--Import Project="C:\Windows\Microsoft.NET\Framework64\v2.0.50727\Microsoft.CSharp.targets"/-->
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets. -->
   <Target Name="MyTest">
