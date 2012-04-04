@@ -351,9 +351,12 @@
       <Output PropertyName="idir" TaskParameter="AbsolutePaths"/>
     </ConvertToAbsolutePath>
     <Message Text="idir: $(idir)" Importance="high" />
+    <RemoveDir Directories="$(idir)"/>
     <MakeDir Directories="$(idir)" />
     <MSBuild.ExtensionPack.Web.WebClient TaskAction="DownloadFile" Url="http://mirror.ctan.org/systems/texlive/tlnet/install-tl.zip" FileName="$(idir)\install-tl.zip"/>
+    <Exec Command="dir $(idir)"/>
     <MSBuild.ExtensionPack.Compression.Zip TaskAction="Extract" ExtractPath="$(idir)" ZipFileName="$(idir)\install-tl.zip"/>
+    <Exec Command="dir $(idir)"/>
   </Target>
   <ItemGroup>
     <tlbin Include="XeLaTexConvert\TexLive\**\install-tl-advanced.bat"/>
