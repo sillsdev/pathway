@@ -347,16 +347,16 @@
     <Dll604 Include=".\PsExport\Dllstable\*.dll"/>
   </ItemGroup>
   <Target Name="Install-tl">
-    <MakeDir Directories="C:\tl" />
-    <MSBuild.ExtensionPack.Web.WebClient TaskAction="DownloadFile" Url="http://mirror.ctan.org/systems/texlive/tlnet/install-tl.zip" FileName="C:\tl\install-tl.zip"/>
-    <MSBuild.ExtensionPack.Compression.Zip TaskAction="Extract" ExtractPath="C:\tl" ZipFileName="C:\tl\install-tl.zip"/>
+    <MakeDir Directories="XeLaTexConvert\TexLive" />
+    <MSBuild.ExtensionPack.Web.WebClient TaskAction="DownloadFile" Url="http://mirror.ctan.org/systems/texlive/tlnet/install-tl.zip" FileName="XeLaTexConvert\TexLive\install-tl.zip"/>
+    <MSBuild.ExtensionPack.Compression.Zip TaskAction="Extract" ExtractPath="XeLaTexConvert\TexLive" ZipFileName="XeLaTexConvert\TexLive\install-tl.zip"/>
   </Target>
   <ItemGroup>
-    <tlbin Include="C:\tl\**\install-tl-advanced.bat"/>
+    <tlbin Include="XeLaTexConvert\TexLive\**\install-tl-advanced.bat"/>
     <rdir Include="XeLaTexConvert\XeLaTexExe"/>
   </ItemGroup>
   <Target Name="LocalPw-tl">
-    <MSBuild.ExtensionPack.Framework.TextString TaskAction="Substring" OldString="@(tlbin)" StartIndex="0" Count="25">
+    <MSBuild.ExtensionPack.Framework.TextString TaskAction="Replace" OldString="@(tlbin)" OldValue="\install-tl-advanced.bat" NewValue="">
       <Output PropertyName="out" TaskParameter="NewString"/>
     </MSBuild.ExtensionPack.Framework.TextString>
     <!--Message Text="Out: $(out)\tlpw.profile" Importance="high" /-->
