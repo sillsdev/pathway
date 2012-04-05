@@ -41,6 +41,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Xsl;
 using epubConvert;
 using epubConvert.Properties;
 using epubValidator;
@@ -70,6 +71,7 @@ namespace SIL.PublishingSolution
         protected static ProgressBar _pb;
         private Dictionary<string, EmbeddedFont> _embeddedFonts;  // font information for this export
         private Dictionary<string, string> _langFontDictionary; // languages and font names in use for this export
+        private XslCompiledTransform m_fixPlayOrder = new XslCompiledTransform();
 
 //        protected static PostscriptLanguage _postscriptLanguage = new PostscriptLanguage();
         protected string _inputType = "dictionary";
@@ -135,6 +137,9 @@ namespace SIL.PublishingSolution
         /// <returns>true if succeeds</returns>
         public bool Export(PublicationInformation projInfo)
         {
+            m_fixPlayOrder.Load(XmlReader.Create(
+                Assembly.GetExecutingAssembly().GetManifestResourceStream(
+                "epubConvert.fixPlayorder.xsl")));
             InsertBeforeAfterInXHTML(projInfo);
             bool success = true;
             _langFontDictionary = new Dictionary<string, string>();
@@ -185,8 +190,10 @@ namespace SIL.PublishingSolution
                 inProcess.SetStatus("Preprocessing stylesheet");
                 string tempFolder = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
                 string tempFolderName = Path.GetFileName(tempFolder);
+                string cssFolder = Path.GetDirectoryName(projInfo.DefaultCssFileWithPath);
+                string cssFullPath = Common.PathCombine(cssFolder, "epub.css");
                 var mc = new MergeCss { OutputLocation = tempFolderName };
-                string mergedCSS = mc.Make(projInfo.DefaultCssFileWithPath, "book.css");
+                string mergedCSS = mc.Make(cssFullPath, "book.css");
                 preProcessor.ReplaceStringInCss(mergedCSS);
                 preProcessor.SetDropCapInCSS(mergedCSS);
                 preProcessor.InsertSectionHeadID();
@@ -1550,7 +1557,7 @@ namespace SIL.PublishingSolution
                     sb.Append("padding-left: 5pt; padding-right: ");
                 }
                 sb.Append((ChapterNumbers == "Drop Cap") ? "4%;" : "5pt;");
-                Common.ReplaceInCssFile(cssFile, ".Chapter_Number {", sb.ToString());
+                Common.StreamReplaceInFile(cssFile, ".Chapter_Number {", sb.ToString());
             }
         }
 
@@ -3150,8 +3157,8 @@ namespace SIL.PublishingSolution
                         {
                             if (!isMainOpen)
                             {
-                                WriteNavPoint(ncx, "_" + index.ToString(), "Main", "_" + name);
-                                isMainOpen = true;
+                                //WriteNavPoint(ncx, "_" + index.ToString(), "Main", "_" + name);
+                                //isMainOpen = true;
                             }
                             if (Path.GetFileNameWithoutExtension(file).EndsWith("_") || Path.GetFileNameWithoutExtension(file).EndsWith("_01"))
                             {
@@ -3186,8 +3193,8 @@ namespace SIL.PublishingSolution
                                 }
                                 if (!isRevOpen)
                                 {
-                                    WriteNavPoint(ncx, "_" + index.ToString(), "Reversal Index", "_" + name);
-                                    isRevOpen = true;
+                                    //WriteNavPoint(ncx, "_" + index.ToString(), "Reversal Index", "_" + name);
+                                    //isRevOpen = true;
                                 }
                                 WriteNavPoint(ncx, index.ToString(), bookName, name);
                                 chapNum = 1;
@@ -3256,7 +3263,22 @@ namespace SIL.PublishingSolution
             //ncx.WriteEndElement(); // ncx
             ncx.WriteEndDocument();
             ncx.Close();
+            AdjustPlayOrder(contentFolder);
+        }
 
+        private void AdjustPlayOrder(string contentFolder)
+        {
+            File.Copy(Common.PathCombine(contentFolder, "toc.ncx"), Common.PathCombine(contentFolder, "toc-1.ncx"));
+
+            // Renumber all PlayOrder attributes in order with no gaps.
+            XmlTextReader reader = new XmlTextReader(Common.PathCombine(contentFolder, "toc-1.ncx")) { XmlResolver = null };
+            FileStream ncxFile = new FileStream(Common.PathCombine(contentFolder, "toc.ncx"), FileMode.Create);
+            XmlWriter ncxw = XmlWriter.Create(ncxFile, m_fixPlayOrder.OutputSettings);
+            m_fixPlayOrder.Transform(reader, null, ncxw, null);
+            ncxFile.Close();
+            reader.Close();
+
+            File.Delete(Common.PathCombine(contentFolder, "toc-1.ncx"));
         }
 
         private void WriteNavPoint(XmlWriter ncx, string index, string text, string name)
