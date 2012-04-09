@@ -651,6 +651,9 @@ namespace SIL.PublishingSolution
                         case XmlNodeType.SignificantWhitespace:
                             InsertWhiteSpace();
                             break;
+                        case XmlNodeType.EntityReference:
+                            IncludeWhiteSpace();
+                            break;
 
                     }
                 }
@@ -677,16 +680,35 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void InsertWhiteSpace()
+        private void IncludeWhiteSpace()
         {
+            if (_reader.Value != "")
+            {
+                return;
+            }
+
             string data = SignificantSpace(_reader.Value);
             //_writer.WriteString(data);
-            if (!_isWhiteSpace && !_pseudoSingleSpace)
+            if (!_significant && !_pseudoSingleSpace)
             {
                 _writer.WriteStartElement("text:s");
                 _writer.WriteAttributeString("text:c", "1");
                 _writer.WriteEndElement();
-                _isWhiteSpace = true;
+                _significant = true;
+                //_writer.WriteString(" ");
+            }
+        }
+
+        private void InsertWhiteSpace()
+        {
+            string data = SignificantSpace(_reader.Value);
+            //_writer.WriteString(data);
+            if (!_significant && !_pseudoSingleSpace)
+            {
+                _writer.WriteStartElement("text:s");
+                _writer.WriteAttributeString("text:c", "1");
+                _writer.WriteEndElement();
+                _significant = true;
                 //_writer.WriteString(" ");
             }
         }
@@ -792,6 +814,7 @@ namespace SIL.PublishingSolution
         private void WriteText()
         {
             string content = _reader.Value;
+
             content = ReplaceString(content);
             if (CollectFootNoteChapterVerse(content, Common.OutputType.ODT.ToString())) return;
             if (_isPictureDisplayNone)
@@ -806,10 +829,10 @@ namespace SIL.PublishingSolution
             //}
 
             // Psuedo Before
-            foreach (ClassInfo psuedoBefore in _psuedoBefore)
-            {
-                WriteCharacterStyle(psuedoBefore.Content, psuedoBefore.StyleName, true);
-            }
+            //foreach (ClassInfo psuedoBefore in _psuedoBefore)
+            //{
+            //    WriteCharacterStyle(psuedoBefore.Content, psuedoBefore.StyleName, true);
+            //}
 
             // Text Write
             if (_characterName == null)
@@ -817,18 +840,19 @@ namespace SIL.PublishingSolution
                 _characterName = StackPeekCharStyle(_allCharacter);
             }
             //content = whiteSpacePre(content);
-            bool contains = false;
-            if (_psuedoContainsStyle != null)
-            {
-                if (content.IndexOf(_psuedoContainsStyle.Contains) > -1)
-                {
-                    content = _psuedoContainsStyle.Content;
-                    _characterName = _psuedoContainsStyle.StyleName;
-                    contains = true;
-                }
-            }
+            //bool contains = false;
+            //if (_psuedoContainsStyle != null)
+            //{
+            //    if (content.IndexOf(_psuedoContainsStyle.Contains) > -1)
+            //    {
+            //        content = _psuedoContainsStyle.Content;
+            //        _characterName = _psuedoContainsStyle.StyleName;
+            //        contains = true;
+            //    }
+            //}
             string modifiedContent = ModifiedContent(content, _previousParagraphName, _characterName);
-            WriteCharacterStyle(modifiedContent, _characterName, contains);
+            //WriteCharacterStyle(modifiedContent, _characterName, contains);
+            WriteCharacterStyle(modifiedContent, _characterName);
             if (_isDropCap) // until the next paragraph
             {
                 _isDropCap = false;
@@ -903,7 +927,7 @@ namespace SIL.PublishingSolution
             return result;
         }
 
-        private void whiteSpacePre(string content, bool pseudo)
+        private void whiteSpacePre(string content)
         {
             //string whiteSpacePre = GetPropertyValue(_classNameWithLang, "white-space", string.Empty);
             string whiteSpacePre = GetPropertyValue(_classNameWithLang, "white-space", content);
@@ -933,21 +957,21 @@ namespace SIL.PublishingSolution
                     //    _writer.WriteEndElement();
                     //}
                 }
-                else if (pseudo)
-                {
-                    if (content == " " && _pseudoSingleSpace == false && _isWhiteSpace == false)
-                    {
-                        _writer.WriteStartElement("text:s");
-                        _writer.WriteAttributeString("text:c", "1");
-                        _writer.WriteEndElement();
-                        _pseudoSingleSpace = true;
-                        _isWhiteSpace = true;
-                    }
-                    else if (content.Trim().Length > 0)
-                    {
-                        _writer.WriteRaw(content);
-                    }
-                }
+                //else if (pseudo)
+                //{
+                //    if (content == " " && _pseudoSingleSpace == false && _isWhiteSpace == false)
+                //    {
+                //        _writer.WriteStartElement("text:s");
+                //        _writer.WriteAttributeString("text:c", "1");
+                //        _writer.WriteEndElement();
+                //        _pseudoSingleSpace = true;
+                //        _isWhiteSpace = true;
+                //    }
+                //    else if (content.Trim().Length > 0)
+                //    {
+                //        _writer.WriteRaw(content);
+                //    }
+                //}
                 else if (_isVerseNumberContent)
                 {
                     _verseContent.Append(content);
@@ -975,7 +999,8 @@ namespace SIL.PublishingSolution
             return valueOfProperty;
         }
 
-        private void WriteCharacterStyle(string content, string characterStyle, bool pseudo)
+        //private void WriteCharacterStyle(string content, string characterStyle, bool pseudo)
+        private void WriteCharacterStyle(string content, string characterStyle)
         {
             _isVerseNumberContent = characterStyle.ToLower().IndexOf("versenumber") == 0;
                 
@@ -984,7 +1009,8 @@ namespace SIL.PublishingSolution
             {
                 _imageTextAvailable = true;
             }
-            if ((_tagType == "span" || _tagType == "a" || pseudo) && characterStyle != "none" || (_tagType == "img" && _imageInserted)) //span start
+            //if ((_tagType == "span" || _tagType == "a" || pseudo) && characterStyle != "none" || (_tagType == "img" && _imageInserted)) //span start
+            if ((_tagType == "span" || _tagType == "a") && characterStyle != "none" || (_tagType == "img" && _imageInserted)) //span start
             {
                 if (isFootnote)
                 {
@@ -1042,9 +1068,10 @@ namespace SIL.PublishingSolution
             //if (_anchorStart)
             //    _anchorText = content;
 
-            bool isAnchorTagOpen = AnchorBookMark(pseudo);
+            //bool isAnchorTagOpen = AnchorBookMark(pseudo);
+            bool isAnchorTagOpen = AnchorBookMark();
             content = WriteCounter(content);
-            whiteSpacePre(content, pseudo); // TODO -2000 - SignificantSpace() - IN OO convert
+            whiteSpacePre(content); // TODO -2000 - SignificantSpace() - IN OO convert
             LanguageFontCheck(content,_childName);
 
             if (isAnchorTagOpen)
@@ -1053,8 +1080,8 @@ namespace SIL.PublishingSolution
             }
 
 
-            if ((_tagType == "span" || _tagType == "a" || pseudo) && characterStyle != "none" || (_tagType == "img" && _imageInserted))  // span end
-            //if ((_tagType == "span" || pseudo) && characterStyle != "none" || (_tagType == "img" && _imageInserted))  // span end
+            //if ((_tagType == "span" || _tagType == "a" || pseudo) && characterStyle != "none" || (_tagType == "img" && _imageInserted))  // span end
+            if ((_tagType == "span" || _tagType == "a") && characterStyle != "none" || (_tagType == "img" && _imageInserted))  // span end
             {
                 if(_isVerseNumberContent == false)
                 {
@@ -1072,9 +1099,10 @@ namespace SIL.PublishingSolution
 
         }
 
-        private bool AnchorBookMark(bool pseudo)
+        //private bool AnchorBookMark(bool pseudo)
+        private bool AnchorBookMark()
         {
-            if (pseudo) return false;
+            //if (pseudo) return false;
 
             bool isAnchorTagOpen = false;
 
@@ -1171,7 +1199,8 @@ namespace SIL.PublishingSolution
                 _anchor.Clear();
                 _anchorWrite = false;
             }
-            else if (_anchorIdValue.Length > 0 && _sourceList.Contains(_anchorIdValue.Replace("#", "").ToLower()) && _targetList.Contains(_anchorIdValue.Replace("#", "").ToLower())) //search in source for writing target
+            else if (_anchorIdValue.Length > 0 && _sourceList.Contains(_anchorIdValue.Replace("#", "").ToLower()) && 
+                _targetList.Contains(_anchorIdValue.Replace("#", "").ToLower())) //search in source for writing target
             {
                 _writer.WriteStartElement("text:reference-mark");
                 _writer.WriteAttributeString("text:name", _anchorIdValue.ToLower());
@@ -1455,7 +1484,7 @@ namespace SIL.PublishingSolution
             //SetHeadwordFalse();  Note: verify &todo in OO td2000 
             ClosefooterNote();
             bool isImageEnd = EndElementForImage();
-            PseudoAfter();
+            //PseudoAfter();
             EndElementBase(isImageEnd); //Note: base class
             ColumnClass();
 
@@ -1485,18 +1514,18 @@ namespace SIL.PublishingSolution
             //}
         }
 
-        private void PseudoAfter()
-        {
-            if (_psuedoAfter.Count > 0)
-            {
-                if (_psuedoAfter.ContainsKey(_closeChildName))
-                {
-                    ClassInfo classInfo = _psuedoAfter[_closeChildName];
-                    WriteCharacterStyle(classInfo.Content, classInfo.StyleName, true);
-                    _psuedoAfter.Remove(_closeChildName);
-                }
-            }
-        }
+        //private void PseudoAfter()
+        //{
+        //    if (_psuedoAfter.Count > 0)
+        //    {
+        //        if (_psuedoAfter.ContainsKey(_closeChildName))
+        //        {
+        //            ClassInfo classInfo = _psuedoAfter[_closeChildName];
+        //            WriteCharacterStyle(classInfo.Content, classInfo.StyleName, true);
+        //            _psuedoAfter.Remove(_closeChildName);
+        //        }
+        //    }
+        //}
 
         private void ColumnClass()
         {
@@ -2101,6 +2130,9 @@ namespace SIL.PublishingSolution
                     imageClass = cc[0]; //cc[1];
                     srcFile = _imageSource;
                     string srcFilrLongDesc = _imageLongDesc;
+
+                    //string srcFilrLongDesc = _imageSrcClass;
+                    
                     //string fileName = "file:" + Common.GetPictureFromPath(srcFile, "", _sourcePicturePath);
                     string fromPath = Common.GetPictureFromPath(srcFile, _metaValue, _sourcePicturePath);
                     string fileName = Path.GetFileName(srcFile);
@@ -2679,7 +2711,8 @@ namespace SIL.PublishingSolution
             //footnoteClass = "footnote_p.first_section_div.scriptureText_scrBody";
             if (_closeChildName.Length > 0 && _closeChildName == footnoteClass)
             {
-                WriteCharacterStyle(footnoteContent.ToString(), footnoteClass, false);
+                //WriteCharacterStyle(footnoteContent.ToString(), footnoteClass, false);
+                WriteCharacterStyle(footnoteContent.ToString(), footnoteClass);
                 isFootnote = false;
                 footnoteContent.Remove(0, footnoteContent.Length);
             }

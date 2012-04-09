@@ -627,7 +627,8 @@ namespace SIL.PublishingSolution
             _parentPrecedeClassAttrib = GetParentPrecede();
             ArrayList multiClassList = MultiClassCombination(_className);
 
-            float ancestorFontSize = FindAncestorFontSize();
+            //float ancestorFontSize = FindAncestorFontSize();
+            float ancestorFontSize = 12.00F;
             _parentStyleName = StackPeek(_allStyle);
 
             string styleName = MatchCssStyle(ancestorFontSize, "null", multiClassList);
@@ -1187,54 +1188,31 @@ namespace SIL.PublishingSolution
         }
 
 
-        private float FindAncestorFontSize()
-        {
-            // TODO find from the current style ex: font-size:20pt; line-height: 1em;
-            string[] ancestorStyleName = _allStyle.ToArray();
-            float fontSize = _projInfo.DefaultFontSize;
+        //private float FindAncestorFontSize()
+        //{
+        //    // TODO find from the current style ex: font-size:20pt; line-height: 1em;
+        //    string[] ancestorStyleName = _allStyle.ToArray();
+        //    float fontSize = _projInfo.DefaultFontSize;
 
-            string fontPointSize = "font-size";
-            if (_outputType == Common.OutputType.IDML)
-                fontPointSize = "PointSize";
+        //    string fontPointSize = "font-size";
+        //    if (_outputType == Common.OutputType.IDML)
+        //        fontPointSize = "PointSize";
 
-            // Search in ancestor class
-            foreach (string ancestor in ancestorStyleName)
-            {
-                if (IdAllClass.ContainsKey(ancestor))
-                {
-                    if (IdAllClass[ancestor].ContainsKey(fontPointSize))
-                    {
-                        fontSize = float.Parse(IdAllClass[ancestor][fontPointSize].Replace("pt", ""), CultureInfo.GetCultureInfo("en-US"));
-                        break;
-                    }
-                }
-            }
-
-            // Search in current class
-            //if (IdAllClass.ContainsKey(_classNameWithLang) && IdAllClass[_classNameWithLang].ContainsKey(fontPointSize))
-            //{
-
-            //    string currentFontSize = IdAllClass[_classNameWithLang][fontPointSize];
-            //    if (currentFontSize.IndexOf("%") > 0)
-            //    {
-            //        float value = float.Parse(currentFontSize.Replace("%", ""));
-            //        fontSize = fontSize * value / 100;
-            //        IdAllClass[_classNameWithLang][fontPointSize] = fontSize.ToString();
-            //    }
-            //    else if (currentFontSize == "larger" || currentFontSize == "smaller")
-            //    {
-            //        fontSize = Common.GetLargerSmaller(fontSize, currentFontSize);
-            //        IdAllClass[_classNameWithLang][fontPointSize] = fontSize.ToString();
-            //    }
-            //    else
-            //    {
-            //        fontSize = float.Parse(currentFontSize.Replace("pt", ""), CultureInfo.GetCultureInfo("en-US"));
-            //    }
-            //}
-            fontSize = 12;
-
-            return fontSize;
-        }
+        //    // Search in ancestor class
+        //    foreach (string ancestor in ancestorStyleName)
+        //    {
+        //        if (IdAllClass.ContainsKey(ancestor))
+        //        {
+        //            if (IdAllClass[ancestor].ContainsKey(fontPointSize))
+        //            {
+        //                fontSize = float.Parse(IdAllClass[ancestor][fontPointSize].Replace("pt", ""), CultureInfo.GetCultureInfo("en-US"));
+        //                break;
+        //            }
+        //        }
+        //    }
+        //    fontSize = 12;
+        //    return fontSize;
+        //}
 
         protected string StackPeek(Stack<string> stack)
         {

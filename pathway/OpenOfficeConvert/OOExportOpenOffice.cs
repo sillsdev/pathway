@@ -783,6 +783,10 @@ namespace SIL.PublishingSolution
             pageSize["width"] = cssClass["@page"]["page-width"];
 
             projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
+
+            AfterBeforeProcess afterBeforeProcess = new AfterBeforeProcess();
+            afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
+
             projInfo.TempOutputFolder += Path.DirectorySeparatorChar;
             cXML._multiLanguageHeader = isMultiLanguageHeader;
             cXML.RefFormat = this._refFormat;
