@@ -71,8 +71,8 @@ namespace SIL.PublishingSolution
         protected static ProgressBar _pb;
         private Dictionary<string, EmbeddedFont> _embeddedFonts;  // font information for this export
         private Dictionary<string, string> _langFontDictionary; // languages and font names in use for this export
-        private XslCompiledTransform m_fixPlayOrder = new XslCompiledTransform();
-        private XslCompiledTransform m_addRevId = new XslCompiledTransform();
+        private readonly XslCompiledTransform _fixPlayOrder = new XslCompiledTransform();
+        private readonly XslCompiledTransform _addRevId = new XslCompiledTransform();
 
 //        protected static PostscriptLanguage _postscriptLanguage = new PostscriptLanguage();
         protected string _inputType = "dictionary";
@@ -123,11 +123,7 @@ namespace SIL.PublishingSolution
         /// <returns>true if this export process handles the specified data type</returns>
         public bool Handle(string inputDataType)
         {
-            bool returnValue = false;
-            if (inputDataType.ToLower() == "dictionary" || inputDataType.ToLower() == "scripture")
-            {
-                returnValue = true;
-            }
+            var returnValue = inputDataType.ToLower() == "dictionary" || inputDataType.ToLower() == "scripture";
             return returnValue;
         }
 
@@ -138,10 +134,10 @@ namespace SIL.PublishingSolution
         /// <returns>true if succeeds</returns>
         public bool Export(PublicationInformation projInfo)
         {
-            m_fixPlayOrder.Load(XmlReader.Create(
+            _fixPlayOrder.Load(XmlReader.Create(
                 Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 "epubConvert.fixPlayorder.xsl")));
-            m_addRevId.Load(XmlReader.Create(
+            _addRevId.Load(XmlReader.Create(
                 Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 "epubConvert.addRevId.xsl")));
             InsertBeforeAfterInXHTML(projInfo);
@@ -291,7 +287,7 @@ namespace SIL.PublishingSolution
                                                        langArray[0], Common.GetTextDirection(langArray[0])));
                     }
 
-                    ApplyXslt(revFile, m_addRevId);
+                    ApplyXslt(revFile, _addRevId);
                     // now split out the html as needed
                     List<string> fileNameWithPath = new List<string>();
                     fileNameWithPath = Common.SplitXhtmlFile(revFile, "letHead", "RevIndex", true);
@@ -477,7 +473,7 @@ namespace SIL.PublishingSolution
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
 
             AfterBeforeProcess afterBeforeProcess = new AfterBeforeProcess();
-            afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
+            afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder, 0, null);
         }
         #endregion
 
@@ -3306,7 +3302,7 @@ namespace SIL.PublishingSolution
             //ncx.WriteEndElement(); // ncx
             ncx.WriteEndDocument();
             ncx.Close();
-            ApplyXslt(tocFullPath, m_fixPlayOrder);
+            ApplyXslt(tocFullPath, _fixPlayOrder);
         }
 
         private void ApplyXslt(string fileFullPath, XslCompiledTransform xslt)
