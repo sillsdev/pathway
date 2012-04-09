@@ -427,7 +427,7 @@ Func XeLaTexInstalled($size)
 			if @error Then
 				$ver = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\PathwayXeLaTeX", "XeLaTexVer")
 			EndIf
-			$latest = IniRead("PathwayBootstrap.Ini", "Versions", "XeLaTex", "1.4")
+			$latest = IniRead("PathwayBootstrap.Ini", "Versions", "XeLaTex", "1.5")
 			if $ver = $latest Then
 				Return True
 			EndIf
@@ -444,7 +444,7 @@ Func InstallXeLaTeXIfNecessary()
 	if $InstallStable or Not $INS_XeLaTex Then
 		Return
 	Endif
-	Local $name = "SetupXeLaTeXTesting-1.0.2-1.4.msi"
+	Local $name = "SetupXeLaTeXTesting-1.5.msi"
 	CleanUp($name)
 	GetInstaller($name)
 	LaunchInstaller($name)

@@ -41,6 +41,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Xsl;
 using epubConvert;
 using epubConvert.Properties;
 using epubValidator;
@@ -70,6 +71,8 @@ namespace SIL.PublishingSolution
         protected static ProgressBar _pb;
         private Dictionary<string, EmbeddedFont> _embeddedFonts;  // font information for this export
         private Dictionary<string, string> _langFontDictionary; // languages and font names in use for this export
+        private XslCompiledTransform m_fixPlayOrder = new XslCompiledTransform();
+        private XslCompiledTransform m_addRevId = new XslCompiledTransform();
 
 //        protected static PostscriptLanguage _postscriptLanguage = new PostscriptLanguage();
         protected string _inputType = "dictionary";
@@ -135,6 +138,12 @@ namespace SIL.PublishingSolution
         /// <returns>true if succeeds</returns>
         public bool Export(PublicationInformation projInfo)
         {
+            m_fixPlayOrder.Load(XmlReader.Create(
+                Assembly.GetExecutingAssembly().GetManifestResourceStream(
+                "epubConvert.fixPlayorder.xsl")));
+            m_addRevId.Load(XmlReader.Create(
+                Assembly.GetExecutingAssembly().GetManifestResourceStream(
+                "epubConvert.addRevId.xsl")));
             InsertBeforeAfterInXHTML(projInfo);
             bool success = true;
             _langFontDictionary = new Dictionary<string, string>();
@@ -185,8 +194,10 @@ namespace SIL.PublishingSolution
                 inProcess.SetStatus("Preprocessing stylesheet");
                 string tempFolder = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
                 string tempFolderName = Path.GetFileName(tempFolder);
+                string cssFolder = Path.GetDirectoryName(projInfo.DefaultCssFileWithPath);
+                string cssFullPath = Common.PathCombine(cssFolder, "epub.css");
                 var mc = new MergeCss { OutputLocation = tempFolderName };
-                string mergedCSS = mc.Make(projInfo.DefaultCssFileWithPath, "book.css");
+                string mergedCSS = mc.Make(cssFullPath, "book.css");
                 preProcessor.ReplaceStringInCss(mergedCSS);
                 preProcessor.SetDropCapInCSS(mergedCSS);
                 preProcessor.InsertSectionHeadID();
@@ -260,6 +271,7 @@ namespace SIL.PublishingSolution
                     Common.StreamReplaceInFile(revFile, "<ReversalIndexEntry_Self", "<span class='ReversalIndexEntry_Self'");
                     Common.StreamReplaceInFile(revFile, "</ReversalIndexEntry_Self", "</span");
                     Common.StreamReplaceInFile(revFile, "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"utf-8\" lang=\"utf-8\"", string.Format("<html  xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'", langArray[0], Common.GetTextDirection(langArray[0])));
+                    ApplyXslt(revFile, m_addRevId);
                     // now split out the html as needed
                     List<string> fileNameWithPath = new List<string>();
                     fileNameWithPath = Common.SplitXhtmlFile(revFile, "letHead", "RevIndex", true);
@@ -1550,7 +1562,7 @@ namespace SIL.PublishingSolution
                     sb.Append("padding-left: 5pt; padding-right: ");
                 }
                 sb.Append((ChapterNumbers == "Drop Cap") ? "4%;" : "5pt;");
-                Common.ReplaceInCssFile(cssFile, ".Chapter_Number {", sb.ToString());
+                Common.StreamReplaceInFile(cssFile, ".Chapter_Number {", sb.ToString());
             }
         }
 
@@ -3079,7 +3091,8 @@ namespace SIL.PublishingSolution
         private void CreateNcx(PublicationInformation projInfo, string contentFolder, Guid bookId)
         {
             // toc.ncx
-            XmlWriter ncx = XmlWriter.Create(Common.PathCombine(contentFolder, "toc.ncx"));
+            string tocFullPath = Common.PathCombine(contentFolder, "toc.ncx");
+            XmlWriter ncx = XmlWriter.Create(tocFullPath);
             ncx.WriteStartDocument();
             ncx.WriteStartElement("ncx", "http://www.daisy.org/z3986/2005/ncx/");
             ncx.WriteAttributeString("version", "2005-1");
@@ -3150,8 +3163,8 @@ namespace SIL.PublishingSolution
                         {
                             if (!isMainOpen)
                             {
-                                WriteNavPoint(ncx, "_" + index.ToString(), "Main", "_" + name);
-                                isMainOpen = true;
+                                //WriteNavPoint(ncx, "_" + index.ToString(), "Main", "_" + name);
+                                //isMainOpen = true;
                             }
                             if (Path.GetFileNameWithoutExtension(file).EndsWith("_") || Path.GetFileNameWithoutExtension(file).EndsWith("_01"))
                             {
@@ -3171,6 +3184,11 @@ namespace SIL.PublishingSolution
                         }
                         else if (name.Contains("RevIndex"))
                         {
+                            if (isMainSubOpen)
+                            {
+                                ncx.WriteEndElement(); // navPoint
+                                isMainSubOpen = false;
+                            }
                             if (isMainOpen)
                             {
                                 ncx.WriteEndElement(); // navPoint Main value
@@ -3184,11 +3202,11 @@ namespace SIL.PublishingSolution
                                 {
                                     ncx.WriteEndElement(); // navPoint
                                 }
-                                if (!isRevOpen)
-                                {
-                                    WriteNavPoint(ncx, "_" + index.ToString(), "Reversal Index", "_" + name);
-                                    isRevOpen = true;
-                                }
+                                //if (!isRevOpen)
+                                //{
+                                //    WriteNavPoint(ncx, "_" + index.ToString(), "Reversal Index", "_" + name);
+                                //    isRevOpen = true;
+                                //}
                                 WriteNavPoint(ncx, index.ToString(), bookName, name);
                                 chapNum = 1;
                                 isRevSubOpen = true;
@@ -3240,6 +3258,10 @@ namespace SIL.PublishingSolution
                 }
                 index++;
             }
+            if (isRevSubOpen)
+            {
+                ncx.WriteEndElement(); // navPoint Rev value
+            }
             if (isRevOpen && _inputType.ToLower() == "dictionary")
             {
                 // end the book's navPoint element
@@ -3253,10 +3275,28 @@ namespace SIL.PublishingSolution
             }
             ncx.WriteEndElement(); // navPoint TOC
             ncx.WriteEndElement(); // navmap
-            ncx.WriteEndElement(); // ncx
+            //ncx.WriteEndElement(); // ncx
             ncx.WriteEndDocument();
             ncx.Close();
+            ApplyXslt(tocFullPath, m_fixPlayOrder);
+        }
 
+        private void ApplyXslt(string fileFullPath, XslCompiledTransform xslt)
+        {
+            var folder = Path.GetDirectoryName(fileFullPath);
+            var name = Path.GetFileNameWithoutExtension(fileFullPath);
+            var tempFullName = Path.Combine(folder, name) + "-1.xml";
+            File.Copy(fileFullPath, tempFullName);
+
+            // Renumber all PlayOrder attributes in order with no gaps.
+            XmlTextReader reader = new XmlTextReader(tempFullName) { XmlResolver = null };
+            FileStream xmlFile = new FileStream(fileFullPath, FileMode.Create);
+            XmlWriter writer = XmlWriter.Create(xmlFile, xslt.OutputSettings);
+            xslt.Transform(reader, null, writer, null);
+            xmlFile.Close();
+            reader.Close();
+
+            File.Delete(tempFullName);
         }
 
         private void WriteNavPoint(XmlWriter ncx, string index, string text, string name)
@@ -3445,14 +3485,14 @@ namespace SIL.PublishingSolution
             XmlNodeList nodes;
             if (_inputType.Equals("dictionary"))
             {
-                if (xhtmlFileName.Contains("RevIndex"))
-                {
-                    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='ReversalIndexEntry_Self']", namespaceManager);
-                }
-                else
-                {
+                //if (xhtmlFileName.Contains("RevIndex"))
+                //{
+                //    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='ReversalIndexEntry_Self']", namespaceManager);
+                //}
+                //else
+                //{
                     nodes = xmlDocument.SelectNodes("//xhtml:div[@class='entry']", namespaceManager);
-                }
+                //}
             }
             else
             {

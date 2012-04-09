@@ -2,9 +2,9 @@
 <Wix xmlns='http://schemas.microsoft.com/wix/2003/01/wi'>
 	<?define Version="%(PwVer)s"?>
 	<?define UpgradeCode="474DE565-D67B-4042-9012-40A4663B0AE1"?>
-	<?define XeLaTexVersion="1.4"?>
+	<?define XeLaTexVersion="1.5"?>
 	<Product UpgradeCode="$(var.UpgradeCode)" Id="????????-????-????-????-????????????"
-		Name='Pathway XeLaTeX %(PwVer)s-$(var.XeLaTexVersion)' Language='1033' Version='$(var.Version)-$(var.XeLaTexVersion)' Manufacturer='SIL International'>
+		Name='Pathway XeLaTeX $(var.XeLaTexVersion)' Language='1033' Version='$(var.XeLaTexVersion)' Manufacturer='SIL International'>
 		<Package Id='????????-????-????-????-????????????' Manufacturer='SIL International' InstallerVersion='200' Compressed='yes' />
 		<Condition Message="You need to be an administrator to install this product.">Privileged</Condition>
 		<Condition Message="[ProductName] will only run on Windows 2000 or better. You cannot intall it on this machine.">
@@ -13,13 +13,13 @@
 
 		<Upgrade Id="$(var.UpgradeCode)">
 			<!--  Detext any newer version of this product -->
-			<UpgradeVersion Minimum="$(var.Version)"
+			<UpgradeVersion Minimum="$(var.XeLaTexVersion)"
 				IncludeMinimum="no"
 				OnlyDetect="yes"
 				Language="1033"
 				Property="NEWPRODUCTFOUND" />
 			<!--  Detect and remove any older version of this product -->
-			<UpgradeVersion Maximum="$(var.Version)"
+			<UpgradeVersion Maximum="$(var.XeLaTexVersion)"
 				IncludeMaximum="yes"
 				OnlyDetect="no"
 				Language="1033"
