@@ -3162,7 +3162,7 @@ namespace SIL.PublishingSolution
             {
                 string name = Path.GetFileName(file);
                 string bookName = GetBookName(file);
-                if(name.IndexOf("File") == 0 && name.IndexOf("TOC") == -1)
+                if (name.IndexOf("File") == 0 && name.IndexOf("TOC") == -1)
                 {
                     WriteNavPoint(ncx, index.ToString(), bookName, name);
                     index++;
@@ -3177,12 +3177,12 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    if(name.IndexOf("TOC") != -1)
+                    if (name.IndexOf("TOC") != -1)
                     {
                         WriteNavPoint(ncx, index.ToString(), bookName, name);
                         index++;
                     }
-                    if(_inputType.ToLower() == "dictionary")
+                    if (_inputType.ToLower() == "dictionary")
                     {
                         if (name.Contains("PartFile"))
                         {
@@ -3192,7 +3192,8 @@ namespace SIL.PublishingSolution
                                 //index++;
                                 isMainOpen = true;
                             }
-                            if (Path.GetFileNameWithoutExtension(file).EndsWith("_") || Path.GetFileNameWithoutExtension(file).EndsWith("_01"))
+                            if (Path.GetFileNameWithoutExtension(file).EndsWith("_") ||
+                                Path.GetFileNameWithoutExtension(file).EndsWith("_01"))
                             {
                                 if (isMainSubOpen)
                                 {
@@ -3218,7 +3219,8 @@ namespace SIL.PublishingSolution
                                 isMainSubOpen = false;
                                 isMainOpen = false;
                             }
-                            if (Path.GetFileNameWithoutExtension(file).EndsWith("_") || Path.GetFileNameWithoutExtension(file).EndsWith("_01"))
+                            if (Path.GetFileNameWithoutExtension(file).EndsWith("_") ||
+                                Path.GetFileNameWithoutExtension(file).EndsWith("_01"))
                             {
                                 if (isRevSubOpen)
                                 {
@@ -3226,7 +3228,7 @@ namespace SIL.PublishingSolution
                                 }
                                 if (!isRevOpen)
                                 {
-                                    //WriteNavPoint(ncx, index.ToString(), "Reversal Index", name + "#");
+                                    //WriteNavPoint(ncx, index.ToString(), "Reversal Index", name);
                                     //index++;
                                     isRevOpen = true;
                                 }
@@ -3244,7 +3246,9 @@ namespace SIL.PublishingSolution
                     }
                     else
                     {
-                        if (name.IndexOf("TOC") == -1 && (Path.GetFileNameWithoutExtension(file).EndsWith("_") || Path.GetFileNameWithoutExtension(file).EndsWith("_01")))
+                        if (name.IndexOf("TOC") == -1 &&
+                            (Path.GetFileNameWithoutExtension(file).EndsWith("_") ||
+                             Path.GetFileNameWithoutExtension(file).EndsWith("_01")))
                         {
                             if (isScriptureSubOpen)
                             {
@@ -3277,15 +3281,14 @@ namespace SIL.PublishingSolution
                             }
                         }
                     }
-                    
+
                 }
-                
+
             }
             if (isRevOpen && _inputType.ToLower() == "dictionary")
             {
                 // end the book's navPoint element
                 ncx.WriteEndElement(); // navPoint Rev value
-                ncx.WriteEndElement(); // navPoint Rev
                 isRevOpen = false;
             }
             if (isScriptureSubOpen)
