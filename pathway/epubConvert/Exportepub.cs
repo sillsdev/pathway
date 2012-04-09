@@ -229,7 +229,14 @@ namespace SIL.PublishingSolution
                 // (The unprocessed html works fine, but doesn't have the updated links to the image files in it, 
                 // so we can't use it.)
                 // TODO: remove this line when TE provides valid XHTML output.
-                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html", string.Format("<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'", langArray[0], Common.GetTextDirection(langArray[0])));
+
+                if (langArray.Length > 0)
+                {
+                    Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html",
+                                               string.Format(
+                                                   "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'",
+                                                   langArray[0], Common.GetTextDirection(langArray[0])));
+                }
                 // end EDB 10/22/2010
                 inProcess.PerformStep();
 
@@ -270,7 +277,15 @@ namespace SIL.PublishingSolution
                     // EDB 10/29/2010 FWR-2697 - remove when fixed in FLEx
                     Common.StreamReplaceInFile(revFile, "<ReversalIndexEntry_Self", "<span class='ReversalIndexEntry_Self'");
                     Common.StreamReplaceInFile(revFile, "</ReversalIndexEntry_Self", "</span");
-                    Common.StreamReplaceInFile(revFile, "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"utf-8\" lang=\"utf-8\"", string.Format("<html  xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'", langArray[0], Common.GetTextDirection(langArray[0])));
+                    if (langArray.Length > 0)
+                    {
+                        Common.StreamReplaceInFile(revFile,
+                                                   "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"utf-8\" lang=\"utf-8\"",
+                                                   string.Format(
+                                                       "<html  xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'",
+                                                       langArray[0], Common.GetTextDirection(langArray[0])));
+                    }
+
                     ApplyXslt(revFile, m_addRevId);
                     // now split out the html as needed
                     List<string> fileNameWithPath = new List<string>();
@@ -2869,10 +2884,18 @@ namespace SIL.PublishingSolution
                 opf.WriteElementString("dc", "format", null, Format);
             if (Source.Length > 0)
                 opf.WriteElementString("dc", "source", null, Source);
+            
+            if(_langFontDictionary.Count == 0)
+            {
+                opf.WriteElementString("dc", "language", null, "en");
+            }
+
             foreach (var lang in _langFontDictionary.Keys)
             {
                 opf.WriteElementString("dc", "language", null, lang);
             }
+
+
             if (Coverage.Length > 0)
                 opf.WriteElementString("dc", "coverage", null, Coverage);
             if (Rights.Length > 0)
@@ -3142,6 +3165,7 @@ namespace SIL.PublishingSolution
                 if(name.IndexOf("File") == 0 && name.IndexOf("TOC") == -1)
                 {
                     WriteNavPoint(ncx, index.ToString(), bookName, name);
+                    index++;
                     // chapters within the books (nested as a subhead)
                     chapNum = 1;
                     if (!skipChapterInfo)
@@ -3156,6 +3180,7 @@ namespace SIL.PublishingSolution
                     if(name.IndexOf("TOC") != -1)
                     {
                         WriteNavPoint(ncx, index.ToString(), bookName, name);
+                        index++;
                     }
                     if(_inputType.ToLower() == "dictionary")
                     {
@@ -3163,8 +3188,9 @@ namespace SIL.PublishingSolution
                         {
                             if (!isMainOpen)
                             {
-                                //WriteNavPoint(ncx, "_" + index.ToString(), "Main", "_" + name);
-                                //isMainOpen = true;
+                                //WriteNavPoint(ncx, index.ToString(), "Main", name);
+                                //index++;
+                                isMainOpen = true;
                             }
                             if (Path.GetFileNameWithoutExtension(file).EndsWith("_") || Path.GetFileNameWithoutExtension(file).EndsWith("_01"))
                             {
@@ -3173,6 +3199,7 @@ namespace SIL.PublishingSolution
                                     ncx.WriteEndElement(); // navPoint
                                 }
                                 WriteNavPoint(ncx, index.ToString(), bookName, name);
+                                index++;
                                 chapNum = 1;
                                 isMainSubOpen = true;
                             }
@@ -3184,11 +3211,6 @@ namespace SIL.PublishingSolution
                         }
                         else if (name.Contains("RevIndex"))
                         {
-                            if (isMainSubOpen)
-                            {
-                                ncx.WriteEndElement(); // navPoint
-                                isMainSubOpen = false;
-                            }
                             if (isMainOpen)
                             {
                                 ncx.WriteEndElement(); // navPoint Main value
@@ -3202,12 +3224,14 @@ namespace SIL.PublishingSolution
                                 {
                                     ncx.WriteEndElement(); // navPoint
                                 }
-                                //if (!isRevOpen)
-                                //{
-                                //    WriteNavPoint(ncx, "_" + index.ToString(), "Reversal Index", "_" + name);
-                                //    isRevOpen = true;
-                                //}
+                                if (!isRevOpen)
+                                {
+                                    //WriteNavPoint(ncx, index.ToString(), "Reversal Index", name + "#");
+                                    //index++;
+                                    isRevOpen = true;
+                                }
                                 WriteNavPoint(ncx, index.ToString(), bookName, name);
+                                index++;
                                 chapNum = 1;
                                 isRevSubOpen = true;
                             }
@@ -3216,7 +3240,6 @@ namespace SIL.PublishingSolution
                                 WriteChapterLinks(file, ref index, ncx, ref chapNum);
                             }
                             //ncx.WriteEndElement(); // navPoint
-
                         }
                     }
                     else
@@ -3256,11 +3279,7 @@ namespace SIL.PublishingSolution
                     }
                     
                 }
-                index++;
-            }
-            if (isRevSubOpen)
-            {
-                ncx.WriteEndElement(); // navPoint Rev value
+                
             }
             if (isRevOpen && _inputType.ToLower() == "dictionary")
             {
@@ -3311,7 +3330,7 @@ namespace SIL.PublishingSolution
             ncx.WriteAttributeString("src", name);
             ncx.WriteEndElement(); // meta
         }
-
+       
         /// <summary>
         /// Creates the table of contents file used by .epub readers (toc.ncx).
         /// </summary>
@@ -3485,14 +3504,14 @@ namespace SIL.PublishingSolution
             XmlNodeList nodes;
             if (_inputType.Equals("dictionary"))
             {
-                //if (xhtmlFileName.Contains("RevIndex"))
-                //{
-                //    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='ReversalIndexEntry_Self']", namespaceManager);
-                //}
-                //else
-                //{
+                if (xhtmlFileName.Contains("RevIndex"))
+                {
+                    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='ReversalIndexEntry_Self']", namespaceManager);
+                }
+                else
+                {
                     nodes = xmlDocument.SelectNodes("//xhtml:div[@class='entry']", namespaceManager);
-                //}
+                }
             }
             else
             {
@@ -3561,11 +3580,8 @@ namespace SIL.PublishingSolution
                         ncx.WriteAttributeString("src", sb.ToString());
                         ncx.WriteEndElement(); // meta
                         //ncx.WriteEndElement(); // meta
-                    }
-                    else
-                    {
-                        playOrder--;
-                    }
+                        playOrder++;
+                    }                   
 
                     // If this is a dictionary with TOC level 3, gather the senses for this entry
                     if (_inputType.Equals("dictionary") && TocLevel.StartsWith("3"))
@@ -3585,7 +3601,7 @@ namespace SIL.PublishingSolution
                                     // This entry doesn't have any information - skip it
                                     continue;
                                 }
-                                playOrder++;
+                                
                                 if (childNode.HasChildNodes && childNode.FirstChild != null && childNode.FirstChild.FirstChild != null)
                                     textString = childNode.FirstChild.FirstChild.InnerText;
                                 sb.Append(name);
@@ -3607,6 +3623,7 @@ namespace SIL.PublishingSolution
                                 ncx.WriteEndElement(); // navPoint
                                 // reset the stringbuilder
                                 sb.Length = 0;
+                                playOrder++;
                             }
                         }
                     }
@@ -3616,9 +3633,9 @@ namespace SIL.PublishingSolution
                     }
                     // reset the stringbuilder
                     sb.Length = 0;
-                    playOrder++;
+                    
                 }
-            }
+            }            
         }
 
         #endregion

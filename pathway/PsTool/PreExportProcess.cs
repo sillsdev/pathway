@@ -541,118 +541,130 @@ namespace SIL.Tool
             var sb = new StringBuilder();
             sb.AppendLine("<!-- Contents page -->");
             sb.AppendLine("<div id='TOCPage' class='Contents'>");
-            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
-            {
-                sb.AppendLine("<h1>Table of Contents</h1><h2>Main</h2>");
-            }
-            // collect book names
-            sb.AppendLine("<ul>");
-            XmlNodeList bookIDs, bookNames;
-            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
-            {
-                // for dictionaries, the letter is used both for the ID and name
-                bookIDs = xmlDocument.SelectNodes("//xhtml:div[@class='letter']", namespaceManager);
-                bookNames = bookIDs;
-            }
-            else
-            {
-                // for scripture, scrBookCode contains the preferred ID while the Title_Main contains the preferred / localized name
-                // 1. Book ID: start out with the book code (e.g., 2CH for 2 Chronicles)
-                bookIDs = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookCode']", namespaceManager);
-                if (bookIDs == null || bookIDs.Count == 0)
-                {
-                    // no book code - try scrBookName
-                    bookIDs = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
-                }
-                if (bookIDs == null || bookIDs.Count == 0)
-                {
-                    // no scrBookName - try Title_Main
-                    bookIDs = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']/span", namespaceManager);
-                }
-                // 2. Book Name: start out with Title_Main
-                bookNames = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']/span", namespaceManager);
-                if (bookNames == null || bookNames.Count == 0)
-                {
-                    // nothing there - check on the scrBookName span
-                    bookNames = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
-                }
-                if (bookNames == null || bookNames.Count == 0)
-                {
-                    // nothing there - check on the scrBookCode span
-                    bookNames = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookCode']", namespaceManager);
-                }
-            }
-            if (bookIDs != null && bookIDs.Count > 0)
-            {
-                int index = 0;
-                foreach (XmlNode bookId in bookIDs)
-                {
-                    // each entry should look something like this:
-                    //    <li><a href="#idMRK">Das Evangelium nach Markus</a></li>
-                    sb.Append("<li><a href='");
-                    // remove whitespace
-                    string indexValue = String.Format("{0:00000}", index + 1);
-                    string fileNameIndex = "PartFile" + indexValue + "_.xhtml";
 
-                    //sb.Append(new Regex(@"\s*").Replace(bookId.InnerText, string.Empty));
-                    sb.Append(new Regex(@"\s*").Replace(fileNameIndex, string.Empty));
-                    sb.Append("'>");
-                    sb.Append(bookNames[index].InnerText);
-                    sb.AppendLine("</a>");
-
-                    if (SkipChapterInformation != null)
+            if (_xhtmlFileNameWithPath.Contains("main"))
+            {
+                if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+                {
+                    sb.AppendLine("<h1>Table of Contents</h1><h2>Main</h2>");
+                }
+                // collect book names
+                
+                XmlNodeList bookIDs, bookNames;
+                if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+                {
+                    // for dictionaries, the letter is used both for the ID and name
+                    bookIDs = xmlDocument.SelectNodes("//xhtml:div[@class='letter']", namespaceManager);
+                    bookNames = bookIDs;
+                }
+                else
+                {
+                    // for scripture, scrBookCode contains the preferred ID while the Title_Main contains the preferred / localized name
+                    // 1. Book ID: start out with the book code (e.g., 2CH for 2 Chronicles)
+                    bookIDs = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookCode']", namespaceManager);
+                    if (bookIDs == null || bookIDs.Count == 0)
                     {
-                        bool skipChapter = SkipChapterInformation.StartsWith("1");
+                        // no book code - try scrBookName
+                        bookIDs = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
+                    }
+                    if (bookIDs == null || bookIDs.Count == 0)
+                    {
+                        // no scrBookName - try Title_Main
+                        bookIDs = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']/span", namespaceManager);
+                    }
+                    // 2. Book Name: start out with Title_Main
+                    bookNames = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']/span", namespaceManager);
+                    if (bookNames == null || bookNames.Count == 0)
+                    {
+                        // nothing there - check on the scrBookName span
+                        bookNames = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
+                    }
+                    if (bookNames == null || bookNames.Count == 0)
+                    {
+                        // nothing there - check on the scrBookCode span
+                        bookNames = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookCode']", namespaceManager);
+                    }
+                }
+                if (bookIDs != null && bookIDs.Count > 0)
+                {
+                    int index = 0;
+                    sb.AppendLine("<ul>");
+                    foreach (XmlNode bookId in bookIDs)
+                    {
+                        // each entry should look something like this:
+                        //    <li><a href="#idMRK">Das Evangelium nach Markus</a></li>
+                        sb.Append("<li><a href='");
+                        // remove whitespace
+                        string indexValue = String.Format("{0:00000}", index + 1);
+                        string fileNameIndex = "PartFile" + indexValue + "_.xhtml";
 
-                        if (!skipChapter)
+                        //sb.Append(new Regex(@"\s*").Replace(bookId.InnerText, string.Empty));
+                        sb.Append(new Regex(@"\s*").Replace(fileNameIndex, string.Empty));
+                        sb.Append("'>");
+                        sb.Append(bookNames[index].InnerText);
+                        sb.AppendLine("</a>");
+
+                        if (SkipChapterInformation != null)
                         {
-                            XmlNodeList chapterSectionIDs;
-                            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+                            bool skipChapter = SkipChapterInformation.StartsWith("1");
+
+                            if (!skipChapter)
                             {
-                                // for dictionaries, the letter is used both for the ID and name
-                                chapterSectionIDs = xmlDocument.SelectNodes("//xhtml:div[@class='Section_Head']",
-                                                                            namespaceManager);
-                            }
-                            else
-                            {
-                                // for scripture, scrBookCode contains the preferred ID while the Title_Main contains the preferred / localized name
-                                // 1. Book ID: start out with the book code (e.g., 2CH for 2 Chronicles)
-                                chapterSectionIDs = xmlDocument.SelectNodes("//xhtml:span[@class='Section_Head']",
-                                                                            namespaceManager);
-                                if (chapterSectionIDs == null || chapterSectionIDs.Count == 0)
+                                XmlNodeList chapterSectionIDs;
+                                if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                                 {
-                                    // no book code - try scrBookName
+                                    // for dictionaries, the letter is used both for the ID and name
                                     chapterSectionIDs = xmlDocument.SelectNodes("//xhtml:div[@class='Section_Head']",
                                                                                 namespaceManager);
                                 }
-                            }
-
-                            if (chapterSectionIDs != null && chapterSectionIDs.Count > 0)
-                            {
-                                sb.AppendLine("<ul>");
-                                foreach (XmlNode chapterSectionID in chapterSectionIDs)
+                                else
                                 {
-                                    sb.Append("<li><a href='");
-                                    // remove whitespace
-                                    string indexValues = String.Format("{0:00000}", index + 1);
-                                    string fileNameIndexs = "PartFile" + indexValues + "_.xhtml#" +
-                                                            chapterSectionID.Attributes["id"].Value;
-                                    sb.Append(new Regex(@"\s*").Replace(fileNameIndexs, string.Empty));
-                                    sb.Append("'>");
-                                    sb.Append(chapterSectionID.InnerText);
-                                    sb.AppendLine("</a>");
-                                    sb.AppendLine("</li>");
+                                    // for scripture, scrBookCode contains the preferred ID while the Title_Main contains the preferred / localized name
+                                    // 1. Book ID: start out with the book code (e.g., 2CH for 2 Chronicles)
+                                    chapterSectionIDs = xmlDocument.SelectNodes("//xhtml:span[@class='Section_Head']",
+                                                                                namespaceManager);
+                                    if (chapterSectionIDs == null || chapterSectionIDs.Count == 0)
+                                    {
+                                        // no book code - try scrBookName
+                                        chapterSectionIDs = xmlDocument.SelectNodes("//xhtml:div[@class='Section_Head']",
+                                                                                    namespaceManager);
+                                    }
                                 }
-                                sb.AppendLine("</ul>");
+
+                                if (chapterSectionIDs != null && chapterSectionIDs.Count > 0)
+                                {
+                                    sb.AppendLine("<ul>");
+                                    foreach (XmlNode chapterSectionID in chapterSectionIDs)
+                                    {
+                                        sb.Append("<li><a href='");
+                                        // remove whitespace
+                                        string indexValues = String.Format("{0:00000}", index + 1);
+                                        string fileNameIndexs = "PartFile" + indexValues + "_.xhtml#" +
+                                                                chapterSectionID.Attributes["id"].Value;
+                                        sb.Append(new Regex(@"\s*").Replace(fileNameIndexs, string.Empty));
+                                        sb.Append("'>");
+                                        sb.Append(chapterSectionID.InnerText);
+                                        sb.AppendLine("</a>");
+                                        sb.AppendLine("</li>");
+                                    }
+                                    sb.AppendLine("</ul>");
+                                }
                             }
                         }
+                        sb.AppendLine("</li>");
+                        index++;
                     }
-                    sb.AppendLine("</li>");
-                    index++;
+                    sb.AppendLine("</ul>");
+                }
+                
+            }
+            else
+            {
+                if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+                {
+                    sb.AppendLine("<h1>Table of Contents</h1>");
                 }
             }
-            sb.AppendLine("</ul>");
-
 
             if (File.Exists(_xhtmlRevFileNameWithPath))
             {
@@ -664,8 +676,8 @@ namespace SIL.Tool
                 xmlReader = XmlReader.Create(_xhtmlRevFileNameWithPath, xmlReaderSettings);
                 xmlDocument.Load(xmlReader);
                 xmlReader.Close();
-                sb.AppendLine("<h2>Reversal Index</h2>");
-                sb.AppendLine("<ul>");
+                
+                
                 XmlNodeList revBookIDs = null, revBookNames = null;
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
@@ -676,6 +688,8 @@ namespace SIL.Tool
                 if (revBookIDs != null && revBookIDs.Count > 0)
                 {
                     int index = 0;
+                    sb.AppendLine("<h2>Reversal Index</h2>");
+                    sb.AppendLine("<ul>");
                     foreach (XmlNode revBookId in revBookIDs)
                     {
                         // each entry should look something like this:
@@ -693,9 +707,9 @@ namespace SIL.Tool
                         sb.AppendLine("</li>");
                         index++;
                     }
+                    sb.AppendLine("</ul>");
                 }
                 //Reversal Code here ends
-                sb.AppendLine("</ul>");
             }
 
             // close out

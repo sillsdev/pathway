@@ -190,11 +190,6 @@ namespace SIL.PublishingSolution
 
         public void GetUserInformation(bool sendUserInfo)
         {
-            if (IsDeveloperInfo())
-            {
-                return;
-            }
-
             oSName = GetOsName();
             oSServicePack = GetOsVersion();
             userSystemName = GetMachineName();
@@ -214,6 +209,12 @@ namespace SIL.PublishingSolution
             frameworkVersion = GetFrameworkVersion(OSName);
             geoLocation = "Unknown";
             userSystemGuid = GetUserSystemGuid(OSName);
+
+            if (IsDeveloperInfo())
+            {
+                return;
+            }
+
             if (sendUserInfo)
             {
                 SetToPHP(userSystemGuid, oSName, oSServicePack, userSystemName, userIPAddress, pathwayVersion,
