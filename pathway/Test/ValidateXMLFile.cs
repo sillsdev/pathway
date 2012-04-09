@@ -197,7 +197,7 @@ namespace Test
                         propertyValue = att.Value;
                         if (propertyValue != ClassProperty[ns + ":" + key])
                         {
-                            match = false;
+                            match = DecimalTest(propertyValue, ClassProperty[ns + ":" + key]);
                             break;
                         }
                     }
@@ -205,6 +205,19 @@ namespace Test
             }
 
             ClassProperty.Clear();
+            return match;
+        }
+
+        private bool DecimalTest(string actual, string expected)
+        {
+            bool match = false;
+            if (actual.Length == 9 && actual.IndexOf(".") > 0 && actual.IndexOf("*") > 0)
+            {
+                if (actual.Substring(0, 7) == expected.Substring(0, 7))
+                {
+                    match = true;
+                }
+            }
             return match;
         }
 

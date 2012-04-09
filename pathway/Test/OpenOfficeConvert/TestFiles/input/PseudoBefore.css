@@ -1,3 +1,11 @@
+.letData
+{ 
+color: red;
+ }
+.letHead
+{ 
+color: blue;
+ }
 .letData:before 
 { 
 content: ": ";
