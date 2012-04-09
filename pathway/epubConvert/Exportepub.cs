@@ -284,6 +284,11 @@ namespace SIL.PublishingSolution
                                                    string.Format(
                                                        "<html  xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'",
                                                        langArray[0], Common.GetTextDirection(langArray[0])));
+                        Common.StreamReplaceInFile(revFile,
+                                                   "<html>",
+                                                   string.Format(
+                                                       "<html  xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'>",
+                                                       langArray[0], Common.GetTextDirection(langArray[0])));
                     }
 
                     ApplyXslt(revFile, m_addRevId);
@@ -3214,7 +3219,7 @@ namespace SIL.PublishingSolution
                         {
                             if (isMainOpen)
                             {
-                                ncx.WriteEndElement(); // navPoint Main value
+                                //ncx.WriteEndElement(); // navPoint Main value
                                 ncx.WriteEndElement(); // navPoint Main
                                 isMainSubOpen = false;
                                 isMainOpen = false;
@@ -3288,7 +3293,8 @@ namespace SIL.PublishingSolution
             if (isRevOpen && _inputType.ToLower() == "dictionary")
             {
                 // end the book's navPoint element
-                ncx.WriteEndElement(); // navPoint Rev value
+                //ncx.WriteEndElement(); // navPoint Rev value
+                ncx.WriteEndElement(); // navPoint TOC
                 isRevOpen = false;
             }
             if (isScriptureSubOpen)
@@ -3507,14 +3513,7 @@ namespace SIL.PublishingSolution
             XmlNodeList nodes;
             if (_inputType.Equals("dictionary"))
             {
-                if (xhtmlFileName.Contains("RevIndex"))
-                {
-                    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='ReversalIndexEntry_Self']", namespaceManager);
-                }
-                else
-                {
-                    nodes = xmlDocument.SelectNodes("//xhtml:div[@class='entry']", namespaceManager);
-                }
+                nodes = xmlDocument.SelectNodes("//xhtml:div[@class='entry']", namespaceManager);
             }
             else
             {
