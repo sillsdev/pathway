@@ -174,7 +174,8 @@ namespace SIL.PublishingSolution
                 inProcess.PerformStep();
                 //_postscriptLanguage.SaveCache();
                 // XHTML preprocessing
-                 preProcessor.GetTempFolderPath();
+                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "&nbsp;", "&#x2007;");
+                preProcessor.GetTempFolderPath();
                 preProcessor.ImagePreprocess();
                 preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
                 if (projInfo.SwapHeadword)
@@ -231,6 +232,10 @@ namespace SIL.PublishingSolution
                     Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html",
                                                string.Format(
                                                    "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'",
+                                                   langArray[0], Common.GetTextDirection(langArray[0])));
+                    Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html>",
+                                               string.Format(
+                                                   "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'>",
                                                    langArray[0], Common.GetTextDirection(langArray[0])));
                 }
                 // end EDB 10/22/2010
