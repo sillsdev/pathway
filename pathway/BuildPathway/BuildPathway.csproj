@@ -474,6 +474,7 @@
     <AllTransform Include="..\PsSupport\pxhtml2xpw-dict.xsl" />
     <AllTransform Include="..\PsSupport\punct_XHTML.xslt" />
     <AllTransform Include="..\PsSupport\TE_XHTML-to-epub_XHTML.xslt" />
+    <AllTransform Include="..\PsSupport\addDicTocHeads.xsl" />
     <BteTransform Include="..\PsSupport\*.xslt" />
     <BteTransform Include="..\PsSupport\pxhtml2xpw-scr.xsl" />
     <WordpressFiles Include="..\PsSupport\Icons\**\*.*" Exclude="..\PsSupport\**\.svn\**\*.*" />

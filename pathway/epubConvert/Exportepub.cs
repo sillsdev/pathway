@@ -73,6 +73,7 @@ namespace SIL.PublishingSolution
         private Dictionary<string, string> _langFontDictionary; // languages and font names in use for this export
         private readonly XslCompiledTransform _fixPlayOrder = new XslCompiledTransform();
         private readonly XslCompiledTransform _addRevId = new XslCompiledTransform();
+        private readonly XslCompiledTransform _addDicTocHeads = new XslCompiledTransform();
 
 //        protected static PostscriptLanguage _postscriptLanguage = new PostscriptLanguage();
         protected string _inputType = "dictionary";
@@ -140,6 +141,7 @@ namespace SIL.PublishingSolution
             _addRevId.Load(XmlReader.Create(
                 Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 "epubConvert.addRevId.xsl")));
+            _addDicTocHeads.Load(XmlReader.Create(UsersXsl("addDicTocHeads.xsl")));
             InsertBeforeAfterInXHTML(projInfo);
             bool success = true;
             _langFontDictionary = new Dictionary<string, string>();
@@ -460,6 +462,14 @@ namespace SIL.PublishingSolution
             }
                 
             return success;
+        }
+
+        private string UsersXsl(string xslName)
+        {
+            var myPath = Path.Combine(Common.GetAllUserPath(), xslName);
+            if (File.Exists(myPath))
+                return myPath;
+            return Common.FromRegistry(xslName);
         }
 
         #region Private Functions
@@ -3308,6 +3318,10 @@ namespace SIL.PublishingSolution
             ncx.WriteEndDocument();
             ncx.Close();
             ApplyXslt(tocFullPath, _fixPlayOrder);
+            if (_inputType.ToLower() == "dictionary")
+            {
+                ApplyXslt(tocFullPath, _addDicTocHeads);
+            }
         }
 
         private void ApplyXslt(string fileFullPath, XslCompiledTransform xslt)
