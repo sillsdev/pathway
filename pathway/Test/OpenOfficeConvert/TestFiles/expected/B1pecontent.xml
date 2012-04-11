@@ -54,6 +54,7 @@
       <text:p text:style-name="P4" />
       <text:section text:style-name="Sect_scrBook" text:name="Sect_scrBook">
         <text:p text:style-name="scrBook_scrBody">
+          <text:s text:c="1" />
           <text:span text:style-name="scrBookName_scrBook_scrBody">Pita </text:span>
         </text:p>
         <text:p text:style-name="TitleMain_scrBook_scrBody">

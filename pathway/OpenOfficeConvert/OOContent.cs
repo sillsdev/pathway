@@ -850,6 +850,22 @@ namespace SIL.PublishingSolution
             //        contains = true;
             //    }
             //}
+
+            // Ignore display : "none"; 
+            if (IdAllClass.ContainsKey(_characterName) && IdAllClass[_characterName].ContainsKey("display"))
+            {
+                if (IdAllClass[_characterName]["display"] == "none")
+                {
+                    if (!_significant)
+                    {
+                        _writer.WriteStartElement("text:s");
+                        _writer.WriteAttributeString("text:c", "1");
+                        _writer.WriteEndElement();
+                        _significant = true;
+                    }
+                }
+            }
+
             string modifiedContent = ModifiedContent(content, _previousParagraphName, _characterName);
             //WriteCharacterStyle(modifiedContent, _characterName, contains);
             WriteCharacterStyle(modifiedContent, _characterName);
