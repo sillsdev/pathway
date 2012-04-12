@@ -17,19 +17,23 @@
 <ol>
   <li>Make sure Debug build works and tests pass</li>
   <li>Make sure CorporateBTE7 build works and install it and run through at least one test pass</li>
-  <li>Find the svn <a href="http://code.google.com/p/pathway/source/browse/pathway/ConfigurationTool/Properties/AssemblyInfo.cs" target="_blank">checkin number</a> of the last sprint</li>
-  <li>Copy issues from svn log into a text file and process with SprintIssues.py. Then edit to create a list of issues for the post and to update the readme file.</li>
+  <li>Find the last sprint <a href="http://code.google.com/p/pathway/source/browse/pathway/ConfigurationTool/Properties/AssemblyInfo.cs" target="_blank">date</a></li>
+  <li>Use git gui to find this change item and then use git bash <code>git log 1e24079d0996.. >sprint.txt</code> (where 1e24079d0996 is replaced with the sha1 of the change).</li>
+  <li>Use <code>git log --until="today" |grep ^commit |wc</code> to get issues in git db and add 88 for those in btai</li>
+  <li>Drop sprint.txt onto SprintIssues.py. Then edit to create a list of issues for the post and to update the readme file.</li>
   <li>Update the BuildPathway/ReadmePw.rtf file with the new version # and list of changes</li>
   <li>Update BuildPathway/BuildPathway.csproj and BuildPathway60.csproj with new version #</li>
+  <li><code>PathwaySprint.bat 1.1.1.2124</code> where 1.1.1.2124 is replaced by current version number</li>
+  <li>Rename Sprint folder and move to Releases folder as a subfolder (ex. Sprint-1.1.1.2124)</li>
+  <li>Uninstall any old versions and install SetupPw7BTE-1.1.1.2124.msi and make sure default export works.</li>
+  <li>Make sure Firefox is the default browser and <a href="http://code.google.com/p/pathway/downloads/list">downloads page</a> is displayed. Use <a href="file:///C:/Users/Trihus.DALLAS/Documents/work/Outsourcing/Engagement/pathway-sil-org/Upload2Google.au3"><code>Upload2Google</code></a></li>
+  <li>Edit the PathwayBootstrap.au3 so the GetInstaller will point to the right URL location. Change it's version number and compile.</li>
+  <li>Change the first page of <a href="http://pathway.sil.org/wp-admin/edit.php?post_type=page" target="_blank">pathway.sil.org</a> to reference this new bootstrap program google code link.</li>
   <li>Update the version number in Team city <a href="http://build.palaso.org/admin/editBuild.html?id=buildType:bt75" target="_blank">daily</a> and <a href="http://build.palaso.org/admin/editBuild.html?id=buildType:bt84" target="_blank">sprint</a> build configuration</li>
   <li><a href="http://build.palaso.org/project.html?projectId=project18" target="_blank">Launch Team City</a> Sprint Build</li>
-  <li>Examine the <a href="http://build.palaso.org/viewType.html?buildTypeId=bt84&tab=buildTypeStatusDiv" target=_blank">artifacts</a>. Edit the URLs on the pathway.sil.org sprint download page so they will download the artifacts.</li>
-  <li>Edit the Pathway Bootstrap install.au3 so the GetInstaller will point to the right URL location. Change it's version number and compile.</li>
-  <li>Load to <a href="http://code.google.com/p/pathway/downloads/list" target="_blank">Google code downloads</a>.</li>
-  <li>Change the first page of <a href="http://pathway.sil.org/wp-admin/edit.php?post_type=page" target="_blank">pathway.sil.org</a> to reference this new bootstrap program google code link.</li>
   <li><a href="http://pathway.sil.org/wp-admin/post-new.php?post_type=post" target="_blank">Add a post</a> to pathway.sil.org web site with the list of changes and a link to the sprint build page.</li>
   <li>Mark the post of the last step category as "Release" so it is picked up by lingtransoft.info</li>
-  <!--li>Save download statistics from <a href="http://pathway.sil.org/wp-admin/tools.php?page=simple-download-monitor.php" target="_blank">Download monitor and reset statistics</a></li-->
+  <li>Save download statistics from <a href="http://pathway.sil.org/wp-admin/tools.php?page=simple-download-monitor.php" target="_blank">Download monitor and reset statistics</a></li>
   <li>Update <a href="http://lingtransoft.info" target="_blank">lingtransoft.info</a></li>
   <li>Jira update: add completed issues to sprint, move uncompleted to new sprint, mark sprint as released</li>
 </ol>
@@ -39,7 +43,7 @@
 <ol>
 <li>Use Visual Studio to do a Debug build of Pathway. This creates BuildTasks.dll</li>
 <li>From the command prompt at the root of your local copy of the svn type:<br/>
-<code>PathwaySprint</code></br>
+<code>PathwaySprint</code><br/>
 This command sets up the path so that msbuild for dot net 3.5 is used.</li>
 <li>Then type:<br/>
 <code>msbuild BuildPathwaySprint.csproj /p:BUILD_NUMBER=x.x.x.x</code><br/>
@@ -47,7 +51,8 @@ where x.x.x.x is replaced with the version number (0.7.5.1289 for example).</li>
 <li>Use ftp to transfer the .msi files in the sprint folder to the wp-content/sprint folder on the web site.<br/>
 (The latest sprint build page on the site currently points to these download packages.)</li>
 <li>Update http://pathway.sil.org/download/latest-sprint-downloads/ with the latest version number and date</li>
-<hr />
+</ol>
+<hr/>
 <p><small>Created on ... June 22, 2011</small></p>
 </body>
 </html>
