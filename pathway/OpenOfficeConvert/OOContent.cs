@@ -2865,7 +2865,86 @@ namespace SIL.PublishingSolution
             modifyContentXML.SetTableColumnCount(targetFile, _tableColumnModify);
         }
 
+
         private void WriteGuidewordValueToVariable(string content)
+        {
+            //TD-2580
+            string bookname = _strBook;
+            //if(_classNameWithLang.IndexOf("headword") == 0 || _classNameWithLang.IndexOf("reversalform") == 0 && _previousParagraphName.IndexOf("entry_") == 0 || _previousParagraphName.IndexOf("div_pictureCaption") == 0)
+            // _classNameWithLang.ToLower().IndexOf("chapternumber") == 0) && (_previousParagraphName.IndexOf("entry_") == 0           )
+
+            //if ((_classNameWithLang.IndexOf("headword") == 0 || _classNameWithLang.IndexOf("reversalform") == 0
+            //     || _classNameWithLang.ToLower().IndexOf("chapternumber") == 0) && (_previousParagraphName.ToLower().IndexOf("paragraph") == 00))
+            if (((_classNameWithLang.IndexOf("headword") == 0 || _classNameWithLang.IndexOf("reversalform") == 0) && (_previousParagraphName.IndexOf("entry_") == 0 || _previousParagraphName.IndexOf("div_pictureCaption") == 0)) ||
+             (_classNameWithLang.ToLower().IndexOf("chapternumber") == 0 && (_previousParagraphName.ToLower().IndexOf("paragraph") == 0)))
+            {
+
+                string chapterNo = content;
+
+                if (_strBook.Length > 0)
+                    content = _strBook + chapterNo;
+
+                _writer.WriteStartElement("text:span");
+                _writer.WriteAttributeString("text:style-name", _classNameWithLang);
+                _writer.WriteStartElement("text:variable-set");
+                _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+                _writer.WriteAttributeString("text:display", "none");
+                _writer.WriteAttributeString("text:formula", "ooow: " + content);
+                _writer.WriteAttributeString("office:value-type", "string");
+                //_writer.WriteAttributeString("office:string-value", " " + content);//TD-2688
+                _writer.WriteAttributeString("office:string-value", content);
+                _writer.WriteEndElement();
+                _writer.WriteEndElement();
+
+                _writer.WriteStartElement("text:span");
+                _writer.WriteAttributeString("text:style-name", _classNameWithLang);
+                _writer.WriteStartElement("text:variable-set");
+                _writer.WriteAttributeString("text:name", "Right_Guideword_R");
+                _writer.WriteAttributeString("text:display", "none");
+                _writer.WriteAttributeString("text:formula", "ooow: " + content);
+                _writer.WriteAttributeString("office:value-type", "string");
+                //_writer.WriteAttributeString("office:string-value", " " + content);
+                _writer.WriteAttributeString("office:string-value", content);
+                _writer.WriteEndElement();
+                _writer.WriteEndElement();
+
+                if (_multiLanguageHeader)
+                {
+                    if (_strBook2ndBook.Length > 0)
+                        content = _strBook2ndBook + chapterNo;
+
+                    _writer.WriteStartElement("text:span");
+                    _writer.WriteAttributeString("text:style-name", _classNameWithLang);
+                    _writer.WriteStartElement("text:variable-set");
+                    _writer.WriteAttributeString("text:name", "Left_Guideword_R");
+                    _writer.WriteAttributeString("text:display", "none");
+                    _writer.WriteAttributeString("text:formula", "ooow: " + content);
+                    _writer.WriteAttributeString("office:value-type", "string");
+                    //_writer.WriteAttributeString("office:string-value", " " + content);
+                    _writer.WriteAttributeString("office:string-value", content);
+                    _writer.WriteEndElement();
+                    _writer.WriteEndElement();
+
+                    _writer.WriteStartElement("text:span");
+                    _writer.WriteAttributeString("text:style-name", _classNameWithLang);
+                    _writer.WriteStartElement("text:variable-set");
+                    _writer.WriteAttributeString("text:name", "Right_Guideword_L");
+                    _writer.WriteAttributeString("text:display", "none");
+                    _writer.WriteAttributeString("text:formula", "ooow: " + content);
+                    _writer.WriteAttributeString("office:value-type", "string");
+                    //_writer.WriteAttributeString("office:string-value", " " + content);
+                    _writer.WriteAttributeString("office:string-value", content);
+                    _writer.WriteEndElement();
+                    _writer.WriteEndElement();
+                }
+
+                _writer.WriteStartElement("text:span");
+                _writer.WriteEndElement();
+                //_writer.WriteRaw(" ");
+                LanguageFontCheck(content, "headerFontStyleName");
+            }
+        }
+        private void WriteGuidewordValueToVariable1(string content)
         {
             if(((_classNameWithLang.IndexOf("headword_") == 0 || _classNameWithLang.IndexOf("reversalform") == 0) && (_previousParagraphName.IndexOf("entry_") == 0 || _previousParagraphName.IndexOf("div_pictureCaption") == 0)) ||
              (_classNameWithLang.ToLower().IndexOf("chapternumber") == 0 && (_previousParagraphName.ToLower().IndexOf("paragraph") == 0)))
