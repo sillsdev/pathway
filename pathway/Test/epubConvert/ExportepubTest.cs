@@ -121,7 +121,7 @@ namespace Test.epubConvert
         [Test]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
-        public void ExportScripturePassTest()
+        public void AExportScripturePassTest()
         {
             const string XhtmlName = "Scripture Draft.xhtml";
             const string CssName = "Scripture Draft.css";

@@ -19,7 +19,9 @@ var startEvent =1;
 myDocument = app.documents.item(0);
 //myDocument.pages.add(1634104421,myDocument.pages.item(2));
 
-FrontMatter();
+
+
+//FrontMatter();
 //Move();
 //Work();
 //TOC();
@@ -32,6 +34,79 @@ FrontMatter();
 //alert(mystr);
 //alert(mystr.indexof("scrBook"))
 //	var myDocument = app.activeDocument;
+//alert(app.documents[0].pages.count());
+
+//frontMatterItemCount
+
+//if(myDocument.sections.count()==1)
+//PageNumber();
+//PageNumber();
+
+var frontMatterItemCount = 1;
+CreatePageNumberStyles();
+function CreatePageNumberStyles()
+{
+	myDocument  = app.documents[app.documents.length-1];
+	try
+	{
+		if (frontMatterItemCount > 0 && myDocument.sections.count() == 1)
+		{
+			myDocument.sections.item(0).name = "";
+			myDocument.sections.item(0).pageNumberStyle = 1297247605;
+			myDocument.sections.item(0).continueNumbering = false;
+			myDocument.sections.item(0).includeSectionPrefix = false;
+			myDocument.sections.item(0).pageNumberStart = 1;
+			myDocument.sections.item(0).marker = "";
+			myDocument.sections.item(0).pageStart = app.documents[0].pages[1];
+			myDocument.sections.item(0).sectionPrefix = "";
+		}
+		if (app.documents[0].pages.count() > 6 && myDocument.sections.count() == 1)
+		{
+			myDocument.sections.add();
+			myDocument.sections.item(1).name = "";
+			myDocument.sections.item(1).pageNumberStyle = 1298231906;
+			myDocument.sections.item(1).continueNumbering = false;
+			myDocument.sections.item(1).includeSectionPrefix = false;
+			myDocument.sections.item(1).pageNumberStart = 1;
+			myDocument.sections.item(1).marker = "";
+			myDocument.sections.item(1).pageStart = app.documents[0].pages[7];
+			myDocument.sections.item(1).sectionPrefix = "";
+		}
+	}
+	catch(myError)
+	{
+	}
+}
+
+function PageNumber()
+{
+	
+	  //<Section Self="u9f" Length="7" Name="" PageNumberStyle="UpperRoman" ContinueNumbering="false"
+    //IncludeSectionPrefix="false" PageNumberStart="1" Marker="" PageStart="u862" SectionPrefix=""/>
+	//myDocument.sections.item(0).id = 1;
+	//myDocument.sections.item(0).length = 7;
+	myDocument.sections.item(0).name = "";
+	myDocument.sections.item(0).pageNumberStyle = 1297247605;
+	myDocument.sections.item(0).continueNumbering = false;
+	myDocument.sections.item(0).includeSectionPrefix = false;
+	myDocument.sections.item(0).pageNumberStart = 1;
+	myDocument.sections.item(0).marker = "";
+	myDocument.sections.item(0).pageStart = app.documents[0].pages[1];
+	myDocument.sections.item(0).sectionPrefix = "";
+	
+	myDocument.sections.add();
+	myDocument.sections.item(1).name = "";
+	myDocument.sections.item(1).pageNumberStyle = 1298231906;
+	myDocument.sections.item(1).continueNumbering = false;
+	myDocument.sections.item(1).includeSectionPrefix = false;
+	myDocument.sections.item(1).pageNumberStart = 1;
+	myDocument.sections.item(1).marker = "";
+	myDocument.sections.item(1).pageStart = app.documents[0].pages[7];
+	myDocument.sections.item(1).sectionPrefix = "";
+	
+	
+alert("completed");
+}
 
 function Move()
 {

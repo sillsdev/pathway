@@ -152,10 +152,46 @@ function main()
 	d = new Date();
 	times=times + "\n" + d;
 	TOC();
+	CreatePageNumberStyles();
 	SaveDocument();
 
 
 	//alert(times);
+}
+
+//This mothod creates two sections for two Page Number Styles (Roman and Arabic)
+function CreatePageNumberStyles()
+{
+	myDocument  = app.documents[app.documents.length-1];
+	try
+	{
+		if (frontMatterItemCount > 0 && myDocument.sections.count() == 1)
+		{
+			myDocument.sections.item(0).name = "";
+			myDocument.sections.item(0).pageNumberStyle = 1297247605;
+			myDocument.sections.item(0).continueNumbering = false;
+			myDocument.sections.item(0).includeSectionPrefix = false;
+			myDocument.sections.item(0).pageNumberStart = 1;
+			myDocument.sections.item(0).marker = "";
+			myDocument.sections.item(0).pageStart = app.documents[0].pages[1];
+			myDocument.sections.item(0).sectionPrefix = "";
+		}
+		if (app.documents[0].pages.count() > 6 && myDocument.sections.count() == 1)
+		{
+			myDocument.sections.add();
+			myDocument.sections.item(1).name = "";
+			myDocument.sections.item(1).pageNumberStyle = 1298231906;
+			myDocument.sections.item(1).continueNumbering = false;
+			myDocument.sections.item(1).includeSectionPrefix = false;
+			myDocument.sections.item(1).pageNumberStart = 1;
+			myDocument.sections.item(1).marker = "";
+			myDocument.sections.item(1).pageStart = app.documents[0].pages[7];
+			myDocument.sections.item(1).sectionPrefix = "";
+		}
+	}
+	catch(myError)
+	{
+	}
 }
 
 function TOC()
