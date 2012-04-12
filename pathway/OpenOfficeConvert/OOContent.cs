@@ -163,6 +163,9 @@ namespace SIL.PublishingSolution
 
         Dictionary<string, string> _pageSize = new Dictionary<string, string>();
         private bool _isFromExe = false;
+
+        List<string> _headwordVariable = new List<string>();
+        private int _headwordIndex = 0;
         #endregion
 
         #region Public Variable
@@ -170,6 +173,7 @@ namespace SIL.PublishingSolution
         public string RefFormat = "Genesis 1";
         public bool IsMirrorPage;
         public string _ChapterNo = "1";
+        public bool IsFirstEntry; 
         public LOContent()
         {
             _outputType = Common.OutputType.ODT;
@@ -227,7 +231,13 @@ namespace SIL.PublishingSolution
             PreExportProcess preProcessor = new PreExportProcess(_projInfo);
             //preProcessor.ReplaceInvalidTagtoSpan("CmPicture-publishStemPile-ThumbnailPub", "div");
             preProcessor.GetReferenceList(_sourceList, _targetList);
-
+            if (1 > 1) //This feature will be enabled when UI given for TD-2912
+            {
+                if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+                {
+                    _headwordVariable = preProcessor.PrepareCurrentNextHeadwordPair();
+                }
+            }
         }
 
         private void PreprocessAnchor(string xhtmlFile)
@@ -782,6 +792,35 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
+                    if (1 > 1) //This feature will be enabled when UI given for TD-2912
+                    {
+                        if (_previousParagraphName != null && _previousParagraphName.IndexOf("entry") == 0 &&
+                            _childName.IndexOf("letHead") == -1)
+                        {
+                            //<text:p text:style-name="block_5f_p">
+                            //    <text:soft-page-break/>
+                            //    <text:span text:style-name="headword_5f_entry_5f_letData_5f_dicBody"
+                            //        >abaá</text:span>
+                            //</text:p> 
+                            //Insert Fixed Height Hidden Paragraph for TD-2912
+                            //if (_childName.IndexOf("letHead") == -1)
+                            //{
+                            _writer.WriteStartElement("text:p");
+                            _writer.WriteAttributeString("text:style-name", "block_5f_p");
+                            _writer.WriteStartElement("text:soft-page-break");
+                            _writer.WriteEndElement();
+                            _writer.WriteStartElement("text:span");
+                            _writer.WriteAttributeString("text:style-name", "headword_5f_entry_5f_letData_5f_dicBody");
+
+                            _writer.WriteValue(_headwordVariable[_headwordIndex]); // + 1
+                            _writer.WriteEndElement();
+
+                            _writer.WriteEndElement();
+                            // }
+                        }
+                    }
+
+
                     // Note: Paragraph Start Element
                     _writer.WriteStartElement("text:p");
                     _writer.WriteAttributeString("text:style-name", _paragraphName); //_divClass
@@ -1452,6 +1491,7 @@ namespace SIL.PublishingSolution
                 _writer.WriteStartElement("text:section");
                 _writer.WriteAttributeString("text:style-name", sectionName);
                 _writer.WriteAttributeString("text:name", sectionName);
+                IsFirstEntry = true;
             }
         }
 
@@ -2827,16 +2867,33 @@ namespace SIL.PublishingSolution
 
         private void WriteGuidewordValueToVariable(string content)
         {
-            //TD-2580
-            string bookname = _strBook;
-            //if(_classNameWithLang.IndexOf("headword") == 0 || _classNameWithLang.IndexOf("reversalform") == 0 && _previousParagraphName.IndexOf("entry_") == 0 || _previousParagraphName.IndexOf("div_pictureCaption") == 0)
-            // _classNameWithLang.ToLower().IndexOf("chapternumber") == 0) && (_previousParagraphName.IndexOf("entry_") == 0           )
-
-            //if ((_classNameWithLang.IndexOf("headword") == 0 || _classNameWithLang.IndexOf("reversalform") == 0
-            //     || _classNameWithLang.ToLower().IndexOf("chapternumber") == 0) && (_previousParagraphName.ToLower().IndexOf("paragraph") == 00))
-            if(((_classNameWithLang.IndexOf("headword") == 0 || _classNameWithLang.IndexOf("reversalform") == 0) && (_previousParagraphName.IndexOf("entry_") == 0 || _previousParagraphName.IndexOf("div_pictureCaption") == 0)) ||
+            if(((_classNameWithLang.IndexOf("headword_") == 0 || _classNameWithLang.IndexOf("reversalform") == 0) && (_previousParagraphName.IndexOf("entry_") == 0 || _previousParagraphName.IndexOf("div_pictureCaption") == 0)) ||
              (_classNameWithLang.ToLower().IndexOf("chapternumber") == 0 && (_previousParagraphName.ToLower().IndexOf("paragraph") == 0)))
             {
+
+                //TD-2580
+                string bookname = _strBook;
+
+                string leftHeadword = content;
+
+                if (1 > 1) //This feature will be enabled when UI given for TD-2912
+                {
+                    if (_classNameWithLang.IndexOf("headword") >= 0)
+                    {
+                        if (_headwordVariable.Count - 1 > _headwordIndex + 1)
+                        {
+                            if (IsFirstEntry)
+                            {
+                                leftHeadword = _headwordVariable[_headwordIndex];
+                                ++_headwordIndex;
+                                IsFirstEntry = false;
+                            }
+                            else
+                                leftHeadword = _headwordVariable[++_headwordIndex];
+                        }
+
+                    }
+                }
 
                 string chapterNo = content;
 
@@ -2848,10 +2905,10 @@ namespace SIL.PublishingSolution
                 _writer.WriteStartElement("text:variable-set");
                 _writer.WriteAttributeString("text:name", "Left_Guideword_L");
                 _writer.WriteAttributeString("text:display", "none");
-                _writer.WriteAttributeString("text:formula", "ooow: " + content);
+                _writer.WriteAttributeString("text:formula", "ooow: " + leftHeadword);
                 _writer.WriteAttributeString("office:value-type", "string");
                 //_writer.WriteAttributeString("office:string-value", " " + content);//TD-2688
-                _writer.WriteAttributeString("office:string-value", content);
+                _writer.WriteAttributeString("office:string-value", leftHeadword);
                 _writer.WriteEndElement();
                 _writer.WriteEndElement();
                 
@@ -2877,10 +2934,10 @@ namespace SIL.PublishingSolution
                     _writer.WriteStartElement("text:variable-set");
                     _writer.WriteAttributeString("text:name", "Left_Guideword_R");
                     _writer.WriteAttributeString("text:display", "none");
-                    _writer.WriteAttributeString("text:formula", "ooow: " + content);
+                    _writer.WriteAttributeString("text:formula", "ooow: " + leftHeadword);
                     _writer.WriteAttributeString("office:value-type", "string");
                     //_writer.WriteAttributeString("office:string-value", " " + content);
-                    _writer.WriteAttributeString("office:string-value", content);
+                    _writer.WriteAttributeString("office:string-value", leftHeadword);
                     _writer.WriteEndElement();
                     _writer.WriteEndElement();
                 

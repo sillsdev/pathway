@@ -1110,6 +1110,38 @@ namespace SIL.Tool
             AddProductVersionToCSS();
         }
 
+        public List<string> PrepareCurrentNextHeadwordPair()
+        {
+            bool isHeadword = false;
+            List<string> headerVariable = new List<string>();
+            XmlTextReader _reader = new XmlTextReader(_xhtmlFileNameWithPath)
+                {
+                    XmlResolver = null,
+                    WhitespaceHandling = WhitespaceHandling.Significant
+                };
+                while (_reader.Read())
+                {
+                    if (_reader.NodeType == XmlNodeType.Element)
+                    {
+                        if (_reader.Name == "div" || _reader.Name == "span")
+                        {
+                            string name = _reader.GetAttribute("class");
+                            if (name != null && name.ToLower() == "headword")
+                            {
+                                isHeadword = true;
+                            }
+                        }
+                    }
+                    else if (isHeadword && _reader.NodeType == XmlNodeType.Text)
+                    {
+                        headerVariable.Add(_reader.Value);
+                        isHeadword = false;
+                    }
+
+                }
+            return headerVariable;
+        }
+
         public string InsertEmptyXHomographNumber(IDictionary<string, Dictionary<string, string>> cssClass)
         {
             if (cssClass.ContainsKey("xhomographnumber"))
