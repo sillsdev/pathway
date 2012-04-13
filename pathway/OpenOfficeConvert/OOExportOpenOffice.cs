@@ -603,6 +603,8 @@ namespace SIL.PublishingSolution
             VerboseClass verboseClass = VerboseClass.GetInstance();
             _isFromExe = Common.CheckExecutionPath();
 
+            Common.DeleteDirectoryWildCard(Path.GetTempPath(), "SilPathwaytmp*"); 
+			
             //Common.SupportFolder = "";
             //Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
             string strFromOfficeFolder = Common.FromRegistry("OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
