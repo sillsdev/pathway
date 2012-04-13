@@ -687,6 +687,11 @@ namespace SIL.PublishingSolution
                 user.GetUserInformation(true);
             }
 
+            if (!File.Exists(CoverPageImagePath))
+            {
+                CoverPageImagePath = Common.PathCombine(Common.GetApplicationPath(), "Graphic\\cover.png");
+            }
+
             //if (Format != "YouVersion")
             //{
             // attempt to save the properties - if it doesn't work, leave the dialog open

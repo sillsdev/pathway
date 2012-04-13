@@ -838,12 +838,18 @@ namespace SIL.Tool
                     newNodeImg.Attributes.Append(xmlAttribute);
                     coverImageNode.AppendChild(newNodeImg);
 
+                    coverTitleNode = xmldoc.CreateElement("div");
+                    xmlAttribute = xmldoc.CreateAttribute("class");
+                    xmlAttribute.Value = "cover";
+                    coverTitleNode.Attributes.Append(xmlAttribute);
+                    coverTitleNode.InnerText = " ";
+
                     if (_includeTitleinCoverImage)
                     {
-                        coverTitleNode = xmldoc.CreateElement("div");
-                        xmlAttribute = xmldoc.CreateAttribute("class");
-                        xmlAttribute.Value = "cover";
-                        coverTitleNode.Attributes.Append(xmlAttribute);
+                        //coverTitleNode = xmldoc.CreateElement("div");
+                        //xmlAttribute = xmldoc.CreateAttribute("class");
+                        ////xmlAttribute.Value = "cover";
+                        ////coverTitleNode.Attributes.Append(xmlAttribute);
                         coverTitleNode.InnerText = Param.GetMetadataValue(Param.Title);
                     }
 
