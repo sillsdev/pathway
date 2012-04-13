@@ -1,5 +1,6 @@
 
 *.suo
+*.chw
 *.msi
 *.user
 *.cache
