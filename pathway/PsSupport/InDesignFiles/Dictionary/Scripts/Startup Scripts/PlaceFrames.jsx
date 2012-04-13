@@ -243,7 +243,7 @@ function CreatePageNumberStyles()
 			myDocument.sections.item(0).pageStart = app.documents[0].pages[1];
 			myDocument.sections.item(0).sectionPrefix = "";
 		}
-		if (app.documents[0].pages.count() > 6 && myDocument.sections.count() == 1)
+		if (app.documents[0].pages.count() > 5 && myDocument.sections.count() == 1)
 		{
 			myDocument.sections.add();
 			myDocument.sections.item(1).name = "";
@@ -252,7 +252,7 @@ function CreatePageNumberStyles()
 			myDocument.sections.item(1).includeSectionPrefix = false;
 			myDocument.sections.item(1).pageNumberStart = 1;
 			myDocument.sections.item(1).marker = "";
-			myDocument.sections.item(1).pageStart = app.documents[0].pages[7];
+			myDocument.sections.item(1).pageStart = app.documents[0].pages[6];
 			myDocument.sections.item(1).sectionPrefix = "";
 		}
 	}
@@ -305,9 +305,9 @@ function Move()
 	var myDocument = app.documents.item(0);
 	myPage = myDocument.pages.item(0);//stories
 	myStory = myPage.textFrames.item(0);
-    myDocument.pages.add(1650812527,myDocument.pages.item(frontMatterItemCount + 3));//befo =1650812527, afte = 1634104421
+    myDocument.pages.add(1650812527,myDocument.pages.item(frontMatterItemCount + 1));//befo =1650812527, afte = 1634104421
 	//alert(myStory.contents)
-     MoveFrame(myStory, 3, frontMatterItemCount + 3);
+     MoveFrame(myStory, 3, frontMatterItemCount + 1);
 	}
 
 
@@ -467,21 +467,25 @@ function FrontMatter()
 		{
 			frontMatterItemCount++;
 			//myStory.label  = "FM";
-			myStory.cornerRadius = 2;
+			myStory.cornerRadius = 3;
 			//alert(myStory.index + "   " + myStory.id + "    " + myStory.contents);
 			frameBounds = myStory.geometricBounds;
 			//frameBounds[1]  = 3;
 			
 			//coverStory, titleStory, copyStory;
 			if(paraStyleName == "cover")
+			{
+				//myStory.cornerRadius = 2;
 				coverStory = myStory;
 				
+			}	
 			if(paraStyleName == "title")
 				titleStory = myStory;				
 			
 			if(paraStyleName == "copyr")
 			{
 				copyStory = myStory;
+				//myStory.cornerRadius = 2;
 				//alert("coryr      " + pageWidth + "  left   " + marginLeft + "    start     " + frameBounds[1]);
 				myStory.geometricBounds=[marginTop,marginLeft, pageHeight ,pageWidth - marginLeft];//pageWidth - marginLeft
 				return;
@@ -501,7 +505,7 @@ function PlaceFrames()
 	//try
 	//{
 	var d1 = new Date();
-	
+	var FrontMatterNo = 0;
 	times1="Header";
 	times1=times1 + "\n" + d1;
 	SetMasterPageForFirstPage();
@@ -548,22 +552,41 @@ function PlaceFrames()
 		myStory = myFrames[myStoryCounter];
 		//alert(myStory.cornerRadius + " " + myStory.contents);
 		//myStory.cornerRadius = 2;
-		if(myStory.cornerRadius== 2)
+		/*if(myStory.cornerRadius== 2)
 		{
-			//alert(myStory.contents + " " + curPageNo);
-			
 			MoveFrame(myStory, marginTop, curPageNo);
-			//if(myStoryCounter!=activePageNumber)
 			AddNewPage(curPageNo + 1);
 			AddNewPage(curPageNo + 1);
 			curPageNo = curPageNo + 2;
 			currentMarginTop = marginTop;
-			//frontMatterItemCount++;
-			//alert(" currentMarginTop  " + currentMarginTop + "\n marginTop = " + marginTop);
-		}
+			FrontMatterNo ++;
+		}*/
+		if(myStory.cornerRadius== 3)
+		{
+			MoveFrame(myStory, marginTop, curPageNo);
+			if(FrontMatterNo == 0)
+			{
+				AddNewPage(curPageNo + 1);
+				AddNewPage(curPageNo + 1);
+				curPageNo = curPageNo + 2;
+			}
+			else
+			{
+				AddNewPage(curPageNo + 1);
+				curPageNo = curPageNo + 1;
+			}			
+			currentMarginTop = marginTop;
+			FrontMatterNo ++;
+		}	
 		else
 		{		
 		//alert(myStory.contents);
+		if(FrontMatterNo == frontMatterItemCount)
+		{
+			AddNewPage(curPageNo + 1);
+			curPageNo = curPageNo + 1;
+			FrontMatterNo ++;
+		}
 		frameType = GetFrameType(myStory);
 		minHeight = GetMinHeight(frameType);
 		firstParagraphStyle = GetFirstParagraphStyle(myStory)
