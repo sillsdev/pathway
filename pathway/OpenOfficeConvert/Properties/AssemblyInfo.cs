@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("EC Group")]
 [assembly: AssemblyProduct("LibreOfficeConvert")]
-[assembly: AssemblyCopyright("Copyright © EC Group 2010")]
+[assembly: AssemblyCopyright("Copyright © 2012 SIL International")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

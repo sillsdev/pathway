@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("sudyk")]
 [assembly: AssemblyProduct("PdfConvert")]
-[assembly: AssemblyCopyright("Copyright © sudyk 2009")]
+[assembly: AssemblyCopyright("Copyright ©  2012 SIL International")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
