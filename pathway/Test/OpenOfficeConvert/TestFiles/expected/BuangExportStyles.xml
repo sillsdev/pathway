@@ -324,129 +324,42 @@
       <style:paragraph-properties fo:background-color="#FFFFFF" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-weight="700" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
-    <style:style style:name="headword..after" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-weight="700" fo:color="#000000" fo:background-color="#FFFFFF" />
-    </style:style>
-    <style:style style:name="xitem-xitem_headword..before" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-weight="700" fo:color="#000000" fo:background-color="#FFFFFF" />
-    </style:style>
-    <style:style style:name="pronunciations..after" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="xitem-xitem_pronunciations..before" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="pronunciation" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:background-color="#FFFFFF" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:color="#000000" fo:background-color="#FFFFFF" />
-    </style:style>
-    <style:style style:name="pronunciation..before" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:color="#000000" fo:background-color="#FFFFFF" />
-    </style:style>
-    <style:style style:name="pronunciation..after" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:color="#000000" fo:background-color="#FFFFFF" />
-    </style:style>
-    <style:style style:name="xitem-xitem_pronunciation..before" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:color="#000000" fo:background-color="#FFFFFF" />
-    </style:style>
-    <style:style style:name="sense-sense_senses..before" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-weight="400" />
     </style:style>
     <style:style style:name="grammaticalinfo" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:background-color="#FFFFFF" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-style="italic" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
-    <style:style style:name="grammaticalinfo..after" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-style="italic" fo:color="#000000" fo:background-color="#FFFFFF" />
-    </style:style>
-    <style:style style:name="partofspeech..after" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="definition..after" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="xitem-xitem_definition..before" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="examples..after" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="xitem-xitem_examples..before" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="example" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:background-color="#FFFFFF" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-style="italic" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
-    <style:style style:name="example..after" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-style="italic" fo:color="#000000" fo:background-color="#FFFFFF" />
-    </style:style>
-    <style:style style:name="xitem-xitem_example..before" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-style="italic" fo:color="#000000" fo:background-color="#FFFFFF" />
-    </style:style>
-    <style:style style:name="translation..after" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="xitem-xitem_translation..before" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="slots..before" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="xitem-xitem_slots..before" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="semanticdomains..before" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="semanticdomains..after" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="xitem-xitem_semanticdomains..before" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="semanticdomainabbr..after" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="complexformrefs..after" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="xitem-xitem_complexformrefs..before" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="complexentrytype..after" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="complexentryform" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:background-color="#FFFFFF" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
-    <style:style style:name="primaryrefs..before" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="primaryrefs..after" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="xitem-xitem_primaryrefs..before" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="entrytypeabbr..after" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="mainentryref" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:background-color="#FFFFFF" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-weight="700" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
-    <style:style style:name="xitem-xitem_mainentryref..before" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-weight="700" fo:color="#000000" fo:background-color="#FFFFFF" />
-    </style:style>
-    <style:style style:name="relations..after" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="xitem-xitem_relations..before" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="lexreftype" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:background-color="#FFFFFF" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-style="italic" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
-    <style:style style:name="lexreftype..after" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-style="italic" fo:color="#000000" fo:background-color="#FFFFFF" />
-    </style:style>
-    <style:style style:name="xitem-xitem_lexreftargets..before" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="sensecrossref" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:background-color="#FFFFFF" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-weight="700" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
-    <style:style style:name="xitem-xitem_sensecrossref..before" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-weight="700" fo:color="#000000" fo:background-color="#FFFFFF" />
-    </style:style>
-    <style:style style:name="scientificname..after" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="crossrefs..after" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="xitem-xitem_crossrefs..before" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="crossreftype" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:background-color="#FFFFFF" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-style="italic" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
-    <style:style style:name="crossreftype..after" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-style="italic" fo:color="#000000" fo:background-color="#FFFFFF" />
-    </style:style>
-    <style:style style:name="xitem-xitem_crossreftargets..before" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="crossref" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:background-color="#FFFFFF" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-weight="700" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
-    <style:style style:name="xitem-xitem_crossref..before" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-weight="700" fo:color="#000000" fo:background-color="#FFFFFF" />
-    </style:style>
-    <style:style style:name="sensecomplexformrefs..after" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="xitem-xitem_sensecomplexformrefs..before" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="sensecomplexentrytype..after" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="sensecomplexentryform" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:background-color="#FFFFFF" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:color="#000000" fo:background-color="#FFFFFF" />
@@ -455,70 +368,23 @@
       <style:paragraph-properties fo:background-color="#FFFFFF" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-weight="700" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
-    <style:style style:name="xitem-xitem_sensemainentryref..before" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-weight="700" fo:color="#000000" fo:background-color="#FFFFFF" />
-    </style:style>
     <style:style style:name="headwordminor" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:background-color="#FFFFFF" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-weight="700" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
-    <style:style style:name="headwordminor..after" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-weight="700" fo:color="#000000" fo:background-color="#FFFFFF" />
-    </style:style>
-    <style:style style:name="xitem-xitem_headwordminor..before" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-weight="700" fo:color="#000000" fo:background-color="#FFFFFF" />
-    </style:style>
-    <style:style style:name="pronunciationsminor..after" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="xitem-xitem_pronunciationsminor..before" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="pronunciationminor" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:background-color="#FFFFFF" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
-    <style:style style:name="pronunciationminor..before" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:color="#000000" fo:background-color="#FFFFFF" />
-    </style:style>
-    <style:style style:name="pronunciationminor..after" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:color="#000000" fo:background-color="#FFFFFF" />
-    </style:style>
-    <style:style style:name="xitem-xitem_pronunciationminor..before" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:color="#000000" fo:background-color="#FFFFFF" />
-    </style:style>
-    <style:style style:name="primaryrefsminor..after" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="xitem-xitem_primaryrefsminor..before" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="entrytypeabbrminor..after" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="mainentryrefminor" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:background-color="#FFFFFF" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-weight="700" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
-    <style:style style:name="xitem-xitem_mainentryrefminor..before" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:font-weight="700" fo:color="#000000" fo:background-color="#FFFFFF" />
-    </style:style>
-    <style:style style:name="variantrefs..before" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="variantrefs..after" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="xitem-xitem_variantrefs..before" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="variantrefentrytype..after" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="variantrefform" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:background-color="#FFFFFF" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
-    <style:style style:name="minorentrycondition..after" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="variantrefcondition..after" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="translationL2" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:color="#000000" fo:background-color="#FFFFFF" />
-    </style:style>
-    <style:style style:name="translationL2..after" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="#FFFFFF" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:color="#000000" fo:background-color="#FFFFFF" />
-    </style:style>
-    <style:style style:name="xitem-xitem_translationL2..before" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:background-color="#FFFFFF" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
