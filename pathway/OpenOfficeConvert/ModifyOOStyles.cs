@@ -179,6 +179,7 @@ namespace SIL.PublishingSolution
             if (newClassName.IndexOf("title") == 0)
             {
                 SetAttribute("Title_20_Page", attribute);
+                className.Value.Add("page-number", "1");
             }
             else if (newClassName.IndexOf("copyright") == 0)
             {

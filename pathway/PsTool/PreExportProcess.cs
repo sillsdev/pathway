@@ -756,6 +756,12 @@ namespace SIL.Tool
                 XmlNodeList mainXhtmlFile = xmldoc.GetElementsByTagName(tag);
 
 
+                XmlNode dummyNode = null;
+                dummyNode = xmldoc.CreateElement("div");
+                XmlAttribute xmlDAttribute = xmldoc.CreateAttribute("class");
+                xmlDAttribute.Value = "dummypage";
+                dummyNode.Attributes.Append(xmlDAttribute);
+
                 XmlNode tocNode = null;
                 if (_includeTOCPage)
                 {
@@ -768,7 +774,7 @@ namespace SIL.Tool
 
                 if (tocNode != null)
                 {
-                    mainXhtmlFile[0].InnerXml = tocNode.OuterXml + mainXhtmlFile[0].InnerXml;
+                    mainXhtmlFile[0].InnerXml = tocNode.OuterXml + dummyNode.OuterXml + mainXhtmlFile[0].InnerXml;
                     _projInfo.IsFrontMatterEnabled = true;
                 }
                 
@@ -840,17 +846,19 @@ namespace SIL.Tool
                         coverTitleNode.Attributes.Append(xmlAttribute);
                         coverTitleNode.InnerText = Param.GetMetadataValue(Param.Title);
                     }
+
+                    
                 }
 
                 if (coverTitleNode != null)
                 {
-                    mainXhtmlFile[0].InnerXml = coverTitleNode.OuterXml + mainXhtmlFile[0].InnerXml;
+                    mainXhtmlFile[0].InnerXml = coverTitleNode.OuterXml + dummyNode.OuterXml + mainXhtmlFile[0].InnerXml;
                     _projInfo.IsFrontMatterEnabled = true;
                 }
 
                 if (coverImageNode != null)
                 {
-                    mainXhtmlFile[0].InnerXml = coverImageNode.OuterXml + mainXhtmlFile[0].InnerXml;
+                    mainXhtmlFile[0].InnerXml = coverImageNode.OuterXml + dummyNode.OuterXml + mainXhtmlFile[0].InnerXml;
                     _projInfo.IsFrontMatterEnabled = true;
                 }
                 xmldoc.Save(inputXhtmlFilePath);
@@ -868,6 +876,7 @@ namespace SIL.Tool
             //string copyRightFilePath = Param.GetMetadataValue(Param.CopyrightPageFilename).ToLower();
             string text = ".cover{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} " +
                           ".title{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} " +
+                          ".dummypage{page-break-after: always;} " +
                           ".copyright{text-align: left; font-size:12pt;page-break-after: always;.tableofcontents{text-align: left; font-size:12pt;page-break-after: always;}";
             Common.FileInsertText(inputCssFilePath, text);
             //}
