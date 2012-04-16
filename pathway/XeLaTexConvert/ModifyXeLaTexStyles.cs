@@ -195,7 +195,9 @@ namespace SIL.PublishingSolution
             
             if (!XelatexDocumentOpenClosedRequired)
             {
-                Common.FileInsertText(_xetexFullFile, @"\thispagestyle{empty} ");
+                //Common.FileInsertText(_xetexFullFile, @"\thispagestyle{empty} ");
+                Common.FileInsertText(_xetexFullFile, @"\pagestyle{plain} ");
+                
                 Common.FileInsertText(_xetexFullFile, @"\begin{document} ");
 
 
@@ -256,12 +258,14 @@ namespace SIL.PublishingSolution
                 tableOfContent += "\r\n";
                 tableOfContent += "\\newpage \r\n";
             }
-            
-            tableOfContent += "\\thispagestyle{empty} \r\n";
+
+            //tableOfContent += "\\thispagestyle{empty} \r\n";
+            tableOfContent += "\\pagestyle{plain} \r\n";
             tableOfContent += "\\tableofcontents \r\n";
             //tableOfContent += "\\pagebreak[2] \r\n";
             tableOfContent += "\\newpage \r\n";
             tableOfContent += "\\setcounter{page}{1} \r\n";
+            tableOfContent += "\\pagenumbering{arabic}  \r\n";
             Common.FileInsertText(_xetexFullFile, tableOfContent);
         }
 
@@ -279,7 +283,6 @@ namespace SIL.PublishingSolution
                 if (CoverPageImagePath != destinctionPath)
                     File.Copy(CoverPageImagePath, destinctionPath, true);
 
-                tableOfContent += "\\font\\CoverPageHeading=\"Times New Roman/B\":color=000000 at 22pt \r\n";
                 tableOfContent += "\\color{black} \r\n";
                 tableOfContent += "\\AddToShipoutPicture*{% \r\n";
                 tableOfContent +=
@@ -291,14 +294,17 @@ namespace SIL.PublishingSolution
 
             if (Convert.ToBoolean(IncludeBookTitleintheImage))
             {
+                tableOfContent += "\\font\\CoverPageHeading=\"Times New Roman/B\":color=000000 at 22pt \r\n";
                 tableOfContent += "\\vskip 60pt \r\n";
-                
                 tableOfContent += "\\begin{center} \r\n";
                 tableOfContent += "\\CoverPageHeading{" + Param.GetMetadataValue(Param.Title) + "} \r\n";
                 tableOfContent += "\\end{center} \r\n";
             }
 
             tableOfContent += "\\newpage \r\n";
+            tableOfContent += "\\newpage \r\n";
+            tableOfContent += "\\thispagestyle{empty} \r\n";
+            tableOfContent += "\\mbox{} \r\n";
 
             if (Convert.ToBoolean(TitleInCoverPage))
             {
@@ -309,20 +315,27 @@ namespace SIL.PublishingSolution
                 //tableOfContent += "\\subtitle{ " + copyrightContent + "} \r\n";
                 tableOfContent += "\\maketitle \r\n";
                 tableOfContent += "\\thispagestyle{empty} \r\n";
-                tableOfContent += "\\setcounter{page}{1} \r\n";
 
                 tableOfContent += "\\newpage \r\n";
+                tableOfContent += "\\newpage \r\n";
+                //tableOfContent += "\\thispagestyle{empty} \r\n";
+                tableOfContent += "\\mbox{} \r\n";
+
             }
-            else
-            {
-                tableOfContent += "\\setcounter{page}{1} \r\n";
-            }
+           
 
             if (Convert.ToBoolean(CopyrightInformation))
             {
+                tableOfContent += "\\setcounter{page}{1} \r\n";
+                tableOfContent += "\\pagenumbering{roman}  \r\n";
+
                 tableOfContent += "\\input{" + CopyrightTexFilename + "} \r\n";
-                tableOfContent += "\\thispagestyle{empty} \r\n";
+                //tableOfContent += "\\thispagestyle{empty} \r\n";
+                tableOfContent += "\\pagestyle{plain} \r\n";
                 tableOfContent += "\\newpage \r\n";
+                tableOfContent += "\\newpage \r\n";
+                tableOfContent += "\\thispagestyle{empty} \r\n";
+                tableOfContent += "\\mbox{} \r\n";
             }
 
             Common.FileInsertText(_xetexFullFile, tableOfContent);
@@ -335,7 +348,8 @@ namespace SIL.PublishingSolution
             if (ReversalIndexExist)
             {
                 ReversalIndexContent += "\\input{" + ReversalIndexTexFilename + "} \r\n";
-                ReversalIndexContent += "\\thispagestyle{empty} \r\n";
+                //tableOfContent += "\\thispagestyle{empty} \r\n";
+                ReversalIndexContent += "\\pagestyle{plain} \r\n";
                 ReversalIndexContent += "\\newpage \r\n";
             }
 

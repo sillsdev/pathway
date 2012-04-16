@@ -386,9 +386,10 @@ namespace SIL.PublishingSolution
                 Common.PathwayHelpSetup();
                 Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
                 Common.HelpProv.SetHelpKeyword(this, _helpTopic);
-                Common.databaseName = DatabaseName;
-
-
+                if (AppDomain.CurrentDomain.FriendlyName.ToLower().IndexOf("configurationtool") == -1)
+                {
+                    Common.databaseName = DatabaseName;
+                }
             }
             catch { }
         }
