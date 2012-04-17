@@ -8068,13 +8068,6 @@
         </text:p>
         <text:p text:style-name="entry_letData_dicBody">
           <text:span text:style-name="headwordminor_entry_letData_dicBody">alu</text:span>
-          <text:span text:style-name="headwordminor_.bzh">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: alu" office:value-type="string" office:string-value="alu" />
-          </text:span>
-          <text:span text:style-name="headwordminor_.bzh">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: alu" office:value-type="string" office:string-value="alu" />
-          </text:span>
-          <text:span />
           <text:s text:c="1" />
           <text:span text:style-name="pronunciationminor_pronunciationsminor_entry_letData_dicBody">[a.ˈl̪u]</text:span>
           <text:s text:c="1" />
@@ -13662,13 +13655,6 @@
         </text:p>
         <text:p text:style-name="entry_letData_dicBody">
           <text:span text:style-name="headwordminor_entry_letData_dicBody">ayoo</text:span>
-          <text:span text:style-name="headwordminor_.bzh">
-            <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: ayoo" office:value-type="string" office:string-value="ayoo" />
-          </text:span>
-          <text:span text:style-name="headwordminor_.bzh">
-            <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: ayoo" office:value-type="string" office:string-value="ayoo" />
-          </text:span>
-          <text:span />
           <text:s text:c="1" />
           <text:span text:style-name="pronunciationminor_pronunciationsminor_entry_letData_dicBody">[a.ˈyoː]</text:span>
           <text:s text:c="1" />
