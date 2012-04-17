@@ -231,13 +231,13 @@ namespace SIL.PublishingSolution
             PreExportProcess preProcessor = new PreExportProcess(_projInfo);
             //preProcessor.ReplaceInvalidTagtoSpan("CmPicture-publishStemPile-ThumbnailPub", "div");
             preProcessor.GetReferenceList(_sourceList, _targetList);
-            if (1 > 1) //This feature will be enabled when UI given for TD-2912
-            {
+            //if (1 > 1) //This feature will be enabled when UI given for TD-2912
+            //{
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
                     _headwordVariable = preProcessor.PrepareCurrentNextHeadwordPair();
                 }
-            }
+            //}
         }
 
         private void PreprocessAnchor(string xhtmlFile)
@@ -792,7 +792,9 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    if (1 > 1) //This feature will be enabled when UI given for TD-2912
+                    //if (1 > 1) //This feature will be enabled when UI given for TD-2912
+                    //{
+                    if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                     {
                         if (_previousParagraphName != null && _previousParagraphName.IndexOf("entry") == 0 &&
                             _childName.IndexOf("letHead") == -1)
@@ -819,6 +821,7 @@ namespace SIL.PublishingSolution
                             // }
                         }
                     }
+                    //}
 
 
                     // Note: Paragraph Start Element
@@ -2866,7 +2869,7 @@ namespace SIL.PublishingSolution
         }
 
 
-        private void WriteGuidewordValueToVariable(string content)
+        private void WriteGuidewordValueToVariable2(string content)
         {
             //TD-2580
             string bookname = _strBook;
@@ -2944,19 +2947,18 @@ namespace SIL.PublishingSolution
                 LanguageFontCheck(content, "headerFontStyleName");
             }
         }
-        private void WriteGuidewordValueToVariable1(string content)
+        private void WriteGuidewordValueToVariable(string content)
         {
+            //TD-2580
+            //string bookname = _strBook;
             if(((_classNameWithLang.IndexOf("headword_") == 0 || _classNameWithLang.IndexOf("reversalform") == 0) && (_previousParagraphName.IndexOf("entry_") == 0 || _previousParagraphName.IndexOf("div_pictureCaption") == 0)) ||
              (_classNameWithLang.ToLower().IndexOf("chapternumber") == 0 && (_previousParagraphName.ToLower().IndexOf("paragraph") == 0)))
             {
 
-                //TD-2580
-                string bookname = _strBook;
-
                 string leftHeadword = content;
 
-                if (1 > 1) //This feature will be enabled when UI given for TD-2912
-                {
+                //if (1 > 1) //This feature will be enabled when UI given for TD-2912
+                //{
                     if (_classNameWithLang.IndexOf("headword") >= 0)
                     {
                         if (_headwordVariable.Count - 1 > _headwordIndex + 1)
@@ -2972,13 +2974,15 @@ namespace SIL.PublishingSolution
                         }
 
                     }
-                }
+                //}
 
                 string chapterNo = content;
 
                 if (_strBook.Length > 0)
+                {
                     content = _strBook + chapterNo;
-
+                    leftHeadword = content;
+                }
                 _writer.WriteStartElement("text:span");
                 _writer.WriteAttributeString("text:style-name", _classNameWithLang);
                 _writer.WriteStartElement("text:variable-set");
@@ -3006,8 +3010,10 @@ namespace SIL.PublishingSolution
                 if (_multiLanguageHeader)
                 {
                     if (_strBook2ndBook.Length > 0)
+                    {
                         content = _strBook2ndBook + chapterNo;
-
+                        leftHeadword = content;
+                    }
                     _writer.WriteStartElement("text:span");
                     _writer.WriteAttributeString("text:style-name", _classNameWithLang);
                     _writer.WriteStartElement("text:variable-set");
