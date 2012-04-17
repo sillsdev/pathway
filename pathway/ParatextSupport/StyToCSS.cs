@@ -212,7 +212,9 @@ namespace SIL.PublishingSolution
             int end = (iSecondSpace > start) ? iSecondSpace : line.Length;
             string className = line.Substring(start, end - start);
 
-            string mapClassName = className;
+		    className = RemoveMultiClass(className);
+
+		    string mapClassName = className;
             if (_mapClassName.ContainsKey(className))
                 mapClassName = _mapClassName[className];
 
@@ -220,7 +222,22 @@ namespace SIL.PublishingSolution
             _styleInfo[mapClassName] = _cssProp;
         }
 
-		/// ------------------------------------------------------------
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="className"></param>
+        /// <returns></returns>
+	    private string RemoveMultiClass(string className)
+	    {
+	        int pos = className.IndexOf("...", 1);
+	        if (pos > 0)
+	        {
+	            className = className.Substring(0, pos);
+	        }
+	        return className;
+	    }
+
+	    /// ------------------------------------------------------------
 		/// <summary>
 		/// Gets the value from a line in the sty file.
 		/// </summary>
