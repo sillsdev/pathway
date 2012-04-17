@@ -69,7 +69,7 @@ div.scriptureText{columns:2;
   hyphenate-after: 3; 
   hyphenate-lines: 1; 
   widows:2;
-  ophans:2;
+  orphans:2;
 }
 
 oxes, oxesText, chapter, section, title, sectionHead {
