@@ -804,17 +804,20 @@ namespace SIL.PublishingSolution
                             //Insert Fixed Height Hidden Paragraph for TD-2912
                             //if (_childName.IndexOf("letHead") == -1)
                             //{
-                            _writer.WriteStartElement("text:p");
-                            _writer.WriteAttributeString("text:style-name", "block_5f_p");
-                            _writer.WriteStartElement("text:soft-page-break");
-                            _writer.WriteEndElement();
-                            _writer.WriteStartElement("text:span");
-                            _writer.WriteAttributeString("text:style-name", "headword_5f_entry_5f_letData_5f_dicBody");
+                            if (_headwordIndex < _headwordVariable.Count)
+                            {
+                                _writer.WriteStartElement("text:p");
+                                _writer.WriteAttributeString("text:style-name", "block_5f_p");
+                                _writer.WriteStartElement("text:soft-page-break");
+                                _writer.WriteEndElement();
+                                _writer.WriteStartElement("text:span");
+                                _writer.WriteAttributeString("text:style-name", "headword_5f_entry_5f_letData_5f_dicBody");
 
-                            _writer.WriteValue(_headwordVariable[_headwordIndex]); // + 1
-                            _writer.WriteEndElement();
+                                _writer.WriteValue(_headwordVariable[_headwordIndex]); // + 1
+                                _writer.WriteEndElement();
 
-                            _writer.WriteEndElement();
+                                _writer.WriteEndElement();
+                            }
                             // }
                         }
                     }
