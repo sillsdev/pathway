@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Feb-24-2012 for TD-2858(OpenOffice: Align Cover Page Image to &quot;Anchor to Page&quot;)
+&apos;Changed On Apr-18-2012 for TD-2937(Picture appears in the margin)
 
 &apos;Define the values to Constant Variables for First Guide word, Last Guide word ,Headword Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -43,8 +43,11 @@ Sub StartDontForget
 	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; And Len(Trim(OutputFormat)) &gt; 0 Then
 		ExportToDOC_PDF
 	End IF
-	SetImageToCoverPage()
-	SetImageToCoverPage()
+	
+	&apos;SetImageToCoverPage()
+	If IsCoverImageInserted = &quot;true&quot; Then
+		SetImageToCoverPage()
+	End If
 End Sub
 
 
@@ -74,10 +77,28 @@ End Sub
 &apos;This procedure align Cover page Image
 Sub SetImageToCoverPage
 	if ThisComponent.getDrawPage().GetCount &gt; 0 Then
-		oGraphic  = ThisComponent.getDrawPage().getByIndex(0)
+		oGraphic  = ThisComponent.getDrawPage().getByIndex(ThisComponent.getDrawPage().GetCount -1)
 		oGraphic.AnchorType = com.sun.star.text.TextContentAnchorType.AT_PAGE
 	End If
 End Sub
+
+Sub Test1
+
+	if ThisComponent.getDrawPage().GetCount &gt; 0 Then
+		oGraphic  = ThisComponent.getDrawPage().getByIndex(ThisComponent.getDrawPage().GetCount -1)
+		oGraphic.AnchorType = com.sun.star.text.TextContentAnchorType.AT_PAGE
+	End If
+	Exit Sub
+dim oMainform 
+oGraphics = Thiscomponent.GraphicObjects
+Msgbox oGraphics.count
+  For i = 0 To oGraphics.getCount() -1 step 1 
+  	oGraphic = oGraphics.getByIndex(i)
+  	if oGraphics.count - 1 = i Then
+	  	oGraphic.AnchorType = com.sun.star.text.TextContentAnchorType.AT_PAGE
+  	End If
+  Next 	
+End sub
 
 Sub HideODMVariable
 PageCount = TotalPages
