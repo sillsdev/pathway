@@ -398,6 +398,7 @@ namespace SIL.PublishingSolution
         private void PopulateFilesFromPreprocessingFolder()
         {
             string xsltFullName = Common.PathCombine(Common.GetApplicationPath(), "Preprocessing\\");// + xsltFile[0]
+            xsltFullName = Common.PathCombine(xsltFullName, InputType + "\\"); //TD-2871 - separate dictionary and Scripture xslt
 
             if (Directory.Exists(xsltFullName))
             {
@@ -709,20 +710,15 @@ namespace SIL.PublishingSolution
             }
 
             Param.LoadSettings();
-            Param.SetValue(Param.FilterBrokenLinks, "False");
-            Param.SetValue(Param.FilterEmptyEntries, "False");
-
+            
+            var preprocessing = string.Empty;
             foreach (string chkBoxName in chkLbPreprocess.CheckedItems)
             {
-                if (chkBoxName == "Filter Broken Links")
-                {
-                    Param.SetValue(Param.FilterBrokenLinks, "True");
-                }
-                else if (chkBoxName == "Filter Empty Entries")
-                {
-                    Param.SetValue(Param.FilterEmptyEntries, "True");
-                }
+                if (preprocessing.Length > 0)
+                    preprocessing += ",";
+                preprocessing += chkBoxName;
             }
+            Param.SetValue(Param.Preprocessing, preprocessing);
             Param.Write();
             //}
             this.Close();
@@ -828,16 +824,10 @@ namespace SIL.PublishingSolution
             Media = Param.DefaultValue[Param.Media];
 
             //Fillup XSLT Processing Checkboxes
+            var preprocess = Param.Value[Param.Preprocessing];
             for (int i = 0; i < chkLbPreprocess.Items.Count; i++)
             {
-                if (chkLbPreprocess.Items[i].ToString() == "Filter Broken Links")
-                {
-                    chkLbPreprocess.SetItemCheckState(i, (Param.GetAttrByName("settings/property", Param.FilterBrokenLinks, "value").ToLower() == "true" ? CheckState.Checked : CheckState.Unchecked));
-                }
-                else if (chkLbPreprocess.Items[i].ToString() == "Filter Empty Entries")
-                {
-                    chkLbPreprocess.SetItemCheckState(i, (Param.GetAttrByName("settings/property", Param.FilterEmptyEntries, "value").ToLower() == "true" ? CheckState.Checked : CheckState.Unchecked));
-                }
+                chkLbPreprocess.SetItemCheckState(i,preprocess.Contains(chkLbPreprocess.Items[i].ToString())? CheckState.Checked : CheckState.Unchecked);
             }
         }
 

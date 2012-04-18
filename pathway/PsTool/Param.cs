@@ -75,8 +75,7 @@ namespace SIL.PublishingSolution
         public const string PrintVia = "PrintVia";
         public const string ConfigureDictionary = "ConfigureDictionary";
         public const string ReversalIndex = "ReversalIndexes";
-        public const string FilterEmptyEntries = "FilterEmptyEntries";
-        public const string FilterBrokenLinks = "FilterBrokenLinks";
+        public const string Preprocessing = "Preprocessing";
         public const string GrammarSketch = "GrammerSketch";
         public const string LayoutSelected = "LayoutSelected";
         public const string ExtraProcessing = "ExtraProcessing";
@@ -719,7 +718,7 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// 
+        /// Sets a Parameter value
         /// </summary>
         /// <param name="id"></param>
         /// <param name="val"></param>
@@ -732,7 +731,7 @@ namespace SIL.PublishingSolution
                 if (Value[id] == val) return;
                 Value[id] = val;
                 var node = xmlMap.SelectSingleNode(string.Format("stylePick/settings/property[@name=\"{0}\"]", id));
-                Debug.Assert(node != null);
+                Debug.Assert(node != null && node.Attributes != null);
                 var valueAttr = node.Attributes.GetNamedItem("value");
                 valueAttr.Value = val;
             }

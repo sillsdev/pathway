@@ -15,7 +15,6 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Diagnostics;
@@ -70,8 +69,7 @@ namespace SIL.PublishingSolution
 
             {
                 //get xsltFile from ExportThroughPathway.cs
-                if (DataType == "Dictionary")
-                    XsltPreProcess(outFullName);
+                XsltPreProcess(outFullName);
 
                 string supportPath = GetSupportPath();
 				Backend.Load(Common.ProgInstall);
@@ -173,36 +171,34 @@ namespace SIL.PublishingSolution
         /// Preprocess the xhtml file using xsl file.
         /// </summary>
         /// <param name="outFullName">input xhtml file</param>
-        private void XsltPreProcess(string outFullName)
+        protected void XsltPreProcess(string outFullName)
         {
-            List<string> xsltFile = new List<string>();
-            if (Param.Value.ContainsKey(Param.FilterEmptyEntries) && Param.Value[Param.FilterEmptyEntries] == "True")
+            if (!Param.Value.ContainsKey(Param.Preprocessing)) return;
+            var preprocessing = Param.Value[Param.Preprocessing];
+            if (preprocessing == string.Empty) return;
+            var preProcessList = preprocessing.Split(",".ToCharArray());
+            var curInput = AdjustNameExt(outFullName, "_.xhtml");
+            File.Copy(outFullName, curInput, true);
+            for (int i = 0; i < preProcessList.Length; i++)
             {
-                xsltFile.Add("Filter Empty Entries.xsl");
+                string xsltFullName =
+                    Common.PathCombine(
+                        Common.PathCombine(
+                            Common.PathCombine(Common.GetApplicationPath(), "Preprocessing"), 
+                            DataType),
+                        preProcessList[i] + ".xsl");
+                string resultExtention = string.Format("{0}.xhtml", i);
+                Common.XsltProcess(curInput, xsltFullName, resultExtention);
+                curInput = AdjustNameExt(curInput, resultExtention);
             }
-            if (Param.Value.ContainsKey(Param.FilterBrokenLinks) && Param.Value[Param.FilterBrokenLinks] == "True")
-            {
-                xsltFile.Add("Filter Broken Links.xsl");
-            }
+            File.Copy(curInput, outFullName, true);
+            File.Delete(curInput);
+        }
 
-            for (int i = 0; i < xsltFile.Count; i++)
-            {
-                var mainCvXhtml = Common.PathCombine(Path.GetDirectoryName(outFullName),
-                                                     Path.GetFileNameWithoutExtension(outFullName) +
-                                                     "_cv.xhtml");
-                string xsltFullName = Common.PathCombine(Common.GetApplicationPath(), "Preprocessing\\" + xsltFile[i]);
-                Common.XsltProcess(outFullName, xsltFullName, "_cv.xhtml");
-                if (i == 0)
-                {
-                    var mainCpyFile = Common.PathCombine(Path.GetDirectoryName(outFullName),
-                                                         Path.GetFileNameWithoutExtension(outFullName) +
-                                                         "0.xhtml");
-                    File.Copy(outFullName, mainCpyFile, true);
-                }
-                File.Copy(mainCvXhtml, outFullName, true);
-
-                File.Delete(mainCvXhtml);
-            }
+        private static string AdjustNameExt(string fullName, string extension)
+        {
+            return Common.PathCombine(Path.GetDirectoryName(fullName),
+                                      Path.GetFileNameWithoutExtension(fullName) + extension);
         }
 
         /// <summary>
