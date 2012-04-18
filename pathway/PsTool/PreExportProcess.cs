@@ -726,6 +726,7 @@ namespace SIL.Tool
         {
             Param.LoadSettings();
             string organization;
+            string frontMatterCSSStyle = string.Empty;
             try
             {
                 organization = Param.Value.ContainsKey("Organization")
@@ -801,6 +802,8 @@ namespace SIL.Tool
                     {
                         mainXhtmlFile[0].InnerXml = copyRightContentNode.OuterXml + mainXhtmlFile[0].InnerXml;
                         _projInfo.IsFrontMatterEnabled = true;
+
+                        frontMatterCSSStyle = ".copyright{text-align: left; font-size:12pt;page-break-after: always;.tableofcontents{text-align: left; font-size:12pt;page-break-after: always;} ";
                     }
                 }
 
@@ -819,6 +822,8 @@ namespace SIL.Tool
                 {
                     mainXhtmlFile[0].InnerXml = titleNode.OuterXml + mainXhtmlFile[0].InnerXml;
                     _projInfo.IsFrontMatterEnabled = true;
+
+                    frontMatterCSSStyle = frontMatterCSSStyle + ".title{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} ";
                 }
 
                 if (_coverImage && File.Exists(_coverPageImagePath))
@@ -846,20 +851,16 @@ namespace SIL.Tool
 
                     if (_includeTitleinCoverImage)
                     {
-                        //coverTitleNode = xmldoc.CreateElement("div");
-                        //xmlAttribute = xmldoc.CreateAttribute("class");
-                        ////xmlAttribute.Value = "cover";
-                        ////coverTitleNode.Attributes.Append(xmlAttribute);
                         coverTitleNode.InnerText = Param.GetMetadataValue(Param.Title);
                     }
-
-                    
                 }
 
                 if (coverTitleNode != null)
                 {
                     mainXhtmlFile[0].InnerXml = coverTitleNode.OuterXml + dummyNode.OuterXml + mainXhtmlFile[0].InnerXml;
                     _projInfo.IsFrontMatterEnabled = true;
+
+                    frontMatterCSSStyle = frontMatterCSSStyle + ".cover{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} ";
                 }
 
                 if (coverImageNode != null)
@@ -868,6 +869,10 @@ namespace SIL.Tool
                     _projInfo.IsFrontMatterEnabled = true;
                 }
                 xmldoc.Save(inputXhtmlFilePath);
+
+                frontMatterCSSStyle = frontMatterCSSStyle + ".dummypage{page-break-after: always;} ";
+                
+                InsertLoFrontMatterCssFile(_projInfo.DefaultCssFileWithPath, frontMatterCSSStyle);
             }
             catch
             {
@@ -875,18 +880,25 @@ namespace SIL.Tool
             }
         }
 
-        public void InsertLoFrontMatterCssFile(string inputCssFilePath)
+        public void InsertLoFrontMatterCssFile(string inputCssFilePath, string frontMatterCSSStyle)
         {
             Param.LoadSettings();
             if (!File.Exists(inputCssFilePath)) return;
-            //string copyRightFilePath = Param.GetMetadataValue(Param.CopyrightPageFilename).ToLower();
-            string text = ".cover{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} " +
-                          ".title{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} " +
-                          ".dummypage{page-break-after: always;} " +
-                          ".copyright{text-align: left; font-size:12pt;page-break-after: always;.tableofcontents{text-align: left; font-size:12pt;page-break-after: always;}";
-            Common.FileInsertText(inputCssFilePath, text);
-            //}
+            Common.FileInsertText(inputCssFilePath, frontMatterCSSStyle);
         }
+
+        //public void InsertLoFrontMatterCssFile(string inputCssFilePath)
+        //{
+        //    Param.LoadSettings();
+        //    if (!File.Exists(inputCssFilePath)) return;
+        //    //string copyRightFilePath = Param.GetMetadataValue(Param.CopyrightPageFilename).ToLower();
+        //    string text = ".cover{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} " +
+        //                  ".title{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} " +
+        //                  ".dummypage{page-break-after: always;} " +
+        //                  ".copyright{text-align: left; font-size:12pt;page-break-after: always;.tableofcontents{text-align: left; font-size:12pt;page-break-after: always;}";
+        //    Common.FileInsertText(inputCssFilePath, text);
+        //    //}
+        //}
 
         #endregion
 
