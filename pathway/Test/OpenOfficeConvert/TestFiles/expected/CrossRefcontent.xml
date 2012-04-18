@@ -54,7 +54,7 @@
           <text:bookmark-start text:name="nema3" />
           <text:bookmark-end text:name="nema3" />nema3 text</text:span>
         <text:span text:style-name="headword_.bzh">
-          <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: nema1 text" office:value-type="string" office:string-value="nema1 text" />
+          <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: nema3 text" office:value-type="string" office:string-value="nema3 text" />
         </text:span>
         <text:span text:style-name="headword_.bzh">
           <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: nema3 text" office:value-type="string" office:string-value="nema3 text" />
@@ -64,7 +64,7 @@
           <text:bookmark-start text:name="nema1" />
           <text:bookmark-end text:name="nema1" />nema1 text</text:span>
         <text:span text:style-name="headword_.bzh">
-          <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: nema2 text" office:value-type="string" office:string-value="nema2 text" />
+          <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: nema1 text" office:value-type="string" office:string-value="nema1 text" />
         </text:span>
         <text:span text:style-name="headword_.bzh">
           <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: nema1 text" office:value-type="string" office:string-value="nema1 text" />
