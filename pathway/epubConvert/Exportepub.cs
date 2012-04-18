@@ -1312,9 +1312,9 @@ namespace SIL.PublishingSolution
                     sb.AppendLine(" font-style : normal;");
                     sb.AppendLine(" font-variant : normal;");
                     sb.AppendLine(" font-size : all;");
-                    sb.Append(" src : url(");
+                    sb.Append(" src : url('");
                     sb.Append(Path.GetFileName(embeddedFont.Filename));
-                    sb.AppendLine(");");
+                    sb.AppendLine("');");
                     sb.AppendLine("}");
                     // if we're also embedding the font variants (bold, italic), reference them now
                     if (IncludeFontVariants)
@@ -1330,9 +1330,9 @@ namespace SIL.PublishingSolution
                             sb.AppendLine(" font-style : italic;");
                             sb.AppendLine(" font-variant : normal;");
                             sb.AppendLine(" font-size : all;");
-                            sb.Append(" src : url(");
+                            sb.Append(" src : url('");
                             sb.Append(Path.GetFileName(embeddedFont.ItalicFilename));
-                            sb.AppendLine(");");
+                            sb.AppendLine("');");
                             sb.AppendLine("}");
                         }
                         // Bold version
@@ -1346,9 +1346,9 @@ namespace SIL.PublishingSolution
                             sb.AppendLine(" font-style : normal;");
                             sb.AppendLine(" font-variant : normal;");
                             sb.AppendLine(" font-size : all;");
-                            sb.Append(" src : url(");
+                            sb.Append(" src : url('");
                             sb.Append(Path.GetFileName(embeddedFont.BoldFilename));
-                            sb.AppendLine(");");
+                            sb.AppendLine("');");
                             sb.AppendLine("}");
                         }
                     }

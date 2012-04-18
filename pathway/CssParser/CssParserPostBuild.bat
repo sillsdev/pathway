@@ -1,3 +1,5 @@
+set base=.
+if exist %base%\csst3.g goto anyCpu
 set base=..\..
 if exist %base%\csst3.g goto anyCpu
 set base=..\..\..
