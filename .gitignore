@@ -24,6 +24,7 @@ pathway/CssDialog/bin/*
 pathway/CssDialog/obj/*
 pathway/CssParser/bin/*
 pathway/CssParser/obj/*
+pathway/CssParser/Output
 pathway/GoBibleConvert/bin/*
 pathway/GoBibleConvert/obj/*
 pathway/InDesignConvert/bin/*
