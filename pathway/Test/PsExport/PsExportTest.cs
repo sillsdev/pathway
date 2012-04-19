@@ -50,6 +50,9 @@ namespace Test.PsExport
         [TestFixtureSetUp]
         protected void SetUp()
         {
+            Common.ProgInstall = Environment.CurrentDirectory;
+            Common.SupportFolder = "../PsSupport";
+            Common.ProgBase = Common.ProgInstall;
             Common.Testing = true;
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/PsExport/TestFiles");
             _inputBasePath = Common.PathCombine(testPath, "Input");
@@ -60,7 +63,7 @@ namespace Test.PsExport
             // Set application base for test
             //DoBatch("ConfigurationTool", "postBuild.bat", "Debug");
             //Common.ProgInstall = Environment.CurrentDirectory.Replace("Test", "ConfigurationTool");
-            Common.ProgInstall = Environment.CurrentDirectory;
+            //Common.ProgInstall = Environment.CurrentDirectory;
             //FolderTree.Copy(Common.PathCombine(testPath, "../../../PsSupport/OfficeFiles"),Path.Combine(Common.ProgInstall,"OfficeFiles"));
             Backend.Load(Common.ProgInstall);
         }
