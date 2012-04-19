@@ -710,15 +710,17 @@ namespace SIL.PublishingSolution
             }
 
             Param.LoadSettings();
-            
-            var preprocessing = string.Empty;
-            foreach (string chkBoxName in chkLbPreprocess.CheckedItems)
+            if (Param.Value.ContainsKey(Param.Preprocessing))
             {
-                if (preprocessing.Length > 0)
-                    preprocessing += ",";
-                preprocessing += chkBoxName;
+                var preprocessing = string.Empty;
+                foreach (string chkBoxName in chkLbPreprocess.CheckedItems)
+                {
+                    if (preprocessing.Length > 0)
+                        preprocessing += ",";
+                    preprocessing += chkBoxName;
+                }
+                Param.SetValue(Param.Preprocessing, preprocessing);
             }
-            Param.SetValue(Param.Preprocessing, preprocessing);
             Param.Write();
             //}
             this.Close();
@@ -824,7 +826,7 @@ namespace SIL.PublishingSolution
             Media = Param.DefaultValue[Param.Media];
 
             //Fillup XSLT Processing Checkboxes
-            var preprocess = Param.Value[Param.Preprocessing];
+            var preprocess = Param.Value.ContainsKey(Param.Preprocessing)? Param.Value[Param.Preprocessing]: string.Empty;
             for (int i = 0; i < chkLbPreprocess.Items.Count; i++)
             {
                 chkLbPreprocess.SetItemCheckState(i,preprocess.Contains(chkLbPreprocess.Items[i].ToString())? CheckState.Checked : CheckState.Unchecked);
