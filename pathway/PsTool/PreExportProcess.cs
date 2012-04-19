@@ -753,7 +753,9 @@ namespace SIL.Tool
                 XmlDocument xmldoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
                 XmlNode coverImageNode = null;
                 XmlNode coverTitleNode = null;
-                xmldoc.Load(inputXhtmlFilePath);
+                FileStream fs = File.OpenRead(inputXhtmlFilePath);
+                xmldoc.Load(fs);
+                fs.Close();
                 XmlNodeList mainXhtmlFile = xmldoc.GetElementsByTagName(tag);
 
 
