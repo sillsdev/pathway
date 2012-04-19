@@ -16,6 +16,7 @@
 
 using System;
 using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
@@ -191,6 +192,8 @@ namespace SIL.PublishingSolution
                 Common.XsltProcess(curInput, xsltFullName, resultExtention);
                 curInput = AdjustNameExt(curInput, resultExtention);
             }
+            while (!File.Exists(curInput))
+                Thread.Sleep(300);
             File.Copy(curInput, outFullName, true);
             File.Delete(curInput);
         }
