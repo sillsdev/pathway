@@ -147,6 +147,9 @@ namespace Test.PsExport
 
         private static string TestDataSetup(string test, string data)
         {
+            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../PsSupport");
+            Common.SupportFolder = "";
+            Common.ProgBase = Common.ProgInstall;
             TestPathSetup(test);
             if (Directory.Exists(_outputTestPath))
                 Directory.Delete(_outputTestPath, true);
@@ -494,7 +497,7 @@ namespace Test.PsExport
             XsltPreProcess(infile);
             var files = Directory.GetFiles(_outputTestPath, "*.*");
             Assert.AreEqual(2, files.Length);
-            FileAssert.AreEqual(Path.Combine(_expectTestPath, data), infile);
+            XmlAssert.AreEqual(Path.Combine(_expectTestPath, data), infile, "Empty Entries Preprocess produced different results");
         }
 
         [Test]
@@ -507,7 +510,7 @@ namespace Test.PsExport
             XsltPreProcess(infile);
             var files = Directory.GetFiles(_outputTestPath, "*.*");
             Assert.AreEqual(3, files.Length);
-            FileAssert.AreEqual(Path.Combine(_expectTestPath, data), infile);
+            XmlAssert.AreEqual(Path.Combine(_expectTestPath, data), infile, "Preprocess produced different results");
         }
     }
 }
