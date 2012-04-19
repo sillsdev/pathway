@@ -45,13 +45,6 @@
       <text:p text:style-name="letter_letHead_dicBody">A a</text:p>
       <text:p text:style-name="entry_letData_dicBody">
         <text:span text:style-name="headword_.bss-fonipa_entry_letData_dicBody">a-</text:span>
-        <text:span text:style-name="headword_.bss-fonipa">
-          <text:variable-set text:name="Left_Guideword_L" text:display="none" text:formula="ooow: a-" office:value-type="string" office:string-value="a-" />
-        </text:span>
-        <text:span text:style-name="headword_.bss-fonipa">
-          <text:variable-set text:name="Right_Guideword_R" text:display="none" text:formula="ooow: a-" office:value-type="string" office:string-value="a-" />
-        </text:span>
-        <text:span />
         <text:span text:style-name="xhomographnumber_headword_.bss-fonipa_entry_letData_dicBody">1</text:span>
       </text:p>
       <text:p text:style-name="entry_letData_dicBody">

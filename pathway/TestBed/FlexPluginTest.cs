@@ -470,7 +470,7 @@ namespace TestBed
 
 
             projInfo.FinalOutput = "odt";
-
+            projInfo.ProjectInputType = ProjType;
             projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
             projInfo.DictionaryPath = Path.GetDirectoryName(txtInputPath.Text);
             projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
