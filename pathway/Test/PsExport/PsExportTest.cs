@@ -497,7 +497,7 @@ namespace Test.PsExport
             XsltPreProcess(infile);
             var files = Directory.GetFiles(_outputTestPath, "*.*");
             Assert.AreEqual(2, files.Length);
-            FileAssert.AreEqual(Path.Combine(_expectTestPath, data), infile);
+            XmlAssert.AreEqual(Path.Combine(_expectTestPath, data), infile, "Empty Entries Preprocess produced different results");
         }
 
         [Test]
@@ -510,7 +510,7 @@ namespace Test.PsExport
             XsltPreProcess(infile);
             var files = Directory.GetFiles(_outputTestPath, "*.*");
             Assert.AreEqual(3, files.Length);
-            FileAssert.AreEqual(Path.Combine(_expectTestPath, data), infile);
+            XmlAssert.AreEqual(Path.Combine(_expectTestPath, data), infile, "Preprocess produced different results");
         }
     }
 }

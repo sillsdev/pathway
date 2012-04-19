@@ -189,7 +189,6 @@ namespace SIL.PublishingSolution
                             DataType),
                         preProcessList[i] + ".xsl");
                 Debug.Print("xsltFullName: {0}", xsltFullName);
-                Console.Write(string.Format("xsltFullName: {0}", xsltFullName));
                 string resultExtention = string.Format("{0}.xhtml", i);
                 Common.XsltProcess(curInput, xsltFullName, resultExtention);
                 curInput = AdjustNameExt(curInput, resultExtention);
