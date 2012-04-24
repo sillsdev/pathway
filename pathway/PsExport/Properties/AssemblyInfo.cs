@@ -11,7 +11,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SIL International")]
 [assembly: AssemblyProduct("Pathway")]
-[assembly: AssemblyCopyright("Copyright © 2008 SIL International")]
+[assembly: AssemblyCopyright("Copyright © 2012 SIL International")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,6 +32,6 @@ using System.Resources;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("1.1.0.2018")]
-[assembly: AssemblyFileVersion("1.1.0.2018")]
+[assembly: AssemblyVersion("1.1.2.2137")]
+[assembly: AssemblyFileVersion("1.1.2.2137")]
 [assembly: NeutralResourcesLanguageAttribute("")]

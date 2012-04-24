@@ -71,8 +71,9 @@ namespace SIL.PublishingSolution
         protected static ProgressBar _pb;
         private Dictionary<string, EmbeddedFont> _embeddedFonts;  // font information for this export
         private Dictionary<string, string> _langFontDictionary; // languages and font names in use for this export
-        private XslCompiledTransform m_fixPlayOrder = new XslCompiledTransform();
-        private XslCompiledTransform m_addRevId = new XslCompiledTransform();
+        private readonly XslCompiledTransform _fixPlayOrder = new XslCompiledTransform();
+        private readonly XslCompiledTransform _addRevId = new XslCompiledTransform();
+        private readonly XslCompiledTransform _addDicTocHeads = new XslCompiledTransform();
 
 //        protected static PostscriptLanguage _postscriptLanguage = new PostscriptLanguage();
         protected string _inputType = "dictionary";
@@ -123,11 +124,7 @@ namespace SIL.PublishingSolution
         /// <returns>true if this export process handles the specified data type</returns>
         public bool Handle(string inputDataType)
         {
-            bool returnValue = false;
-            if (inputDataType.ToLower() == "dictionary" || inputDataType.ToLower() == "scripture")
-            {
-                returnValue = true;
-            }
+            var returnValue = inputDataType.ToLower() == "dictionary" || inputDataType.ToLower() == "scripture";
             return returnValue;
         }
 
@@ -138,12 +135,13 @@ namespace SIL.PublishingSolution
         /// <returns>true if succeeds</returns>
         public bool Export(PublicationInformation projInfo)
         {
-            m_fixPlayOrder.Load(XmlReader.Create(
+            _fixPlayOrder.Load(XmlReader.Create(
                 Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 "epubConvert.fixPlayorder.xsl")));
-            m_addRevId.Load(XmlReader.Create(
+            _addRevId.Load(XmlReader.Create(
                 Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 "epubConvert.addRevId.xsl")));
+            _addDicTocHeads.Load(XmlReader.Create(UsersXsl("addDicTocHeads.xsl")));
             InsertBeforeAfterInXHTML(projInfo);
             bool success = true;
             _langFontDictionary = new Dictionary<string, string>();
@@ -178,7 +176,8 @@ namespace SIL.PublishingSolution
                 inProcess.PerformStep();
                 //_postscriptLanguage.SaveCache();
                 // XHTML preprocessing
-                 preProcessor.GetTempFolderPath();
+                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "&nbsp;", "&#x2007;");
+                preProcessor.GetTempFolderPath();
                 preProcessor.ImagePreprocess();
                 preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
                 if (projInfo.SwapHeadword)
@@ -229,7 +228,18 @@ namespace SIL.PublishingSolution
                 // (The unprocessed html works fine, but doesn't have the updated links to the image files in it, 
                 // so we can't use it.)
                 // TODO: remove this line when TE provides valid XHTML output.
-                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html", string.Format("<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'", langArray[0], Common.GetTextDirection(langArray[0])));
+
+                if (langArray.Length > 0)
+                {
+                    Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html",
+                                               string.Format(
+                                                   "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'",
+                                                   langArray[0], Common.GetTextDirection(langArray[0])));
+                    Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html>",
+                                               string.Format(
+                                                   "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'>",
+                                                   langArray[0], Common.GetTextDirection(langArray[0])));
+                }
                 // end EDB 10/22/2010
                 inProcess.PerformStep();
 
@@ -270,8 +280,21 @@ namespace SIL.PublishingSolution
                     // EDB 10/29/2010 FWR-2697 - remove when fixed in FLEx
                     Common.StreamReplaceInFile(revFile, "<ReversalIndexEntry_Self", "<span class='ReversalIndexEntry_Self'");
                     Common.StreamReplaceInFile(revFile, "</ReversalIndexEntry_Self", "</span");
-                    Common.StreamReplaceInFile(revFile, "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"utf-8\" lang=\"utf-8\"", string.Format("<html  xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'", langArray[0], Common.GetTextDirection(langArray[0])));
-                    ApplyXslt(revFile, m_addRevId);
+                    if (langArray.Length > 0)
+                    {
+                        Common.StreamReplaceInFile(revFile,
+                                                   "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"utf-8\" lang=\"utf-8\"",
+                                                   string.Format(
+                                                       "<html  xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'",
+                                                       langArray[0], Common.GetTextDirection(langArray[0])));
+                        Common.StreamReplaceInFile(revFile,
+                                                   "<html>",
+                                                   string.Format(
+                                                       "<html  xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'>",
+                                                       langArray[0], Common.GetTextDirection(langArray[0])));
+                    }
+
+                    ApplyXslt(revFile, _addRevId);
                     // now split out the html as needed
                     List<string> fileNameWithPath = new List<string>();
                     fileNameWithPath = Common.SplitXhtmlFile(revFile, "letHead", "RevIndex", true);
@@ -441,6 +464,14 @@ namespace SIL.PublishingSolution
             return success;
         }
 
+        private string UsersXsl(string xslName)
+        {
+            var myPath = Path.Combine(Common.GetAllUserPath(), xslName);
+            if (File.Exists(myPath))
+                return myPath;
+            return Common.FromRegistry(xslName);
+        }
+
         #region Private Functions
         #region Handle After Before 
         /// <summary>
@@ -457,7 +488,7 @@ namespace SIL.PublishingSolution
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
 
             AfterBeforeProcess afterBeforeProcess = new AfterBeforeProcess();
-            afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder, 0, null);
+            afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
         }
         #endregion
 
@@ -1281,9 +1312,9 @@ namespace SIL.PublishingSolution
                     sb.AppendLine(" font-style : normal;");
                     sb.AppendLine(" font-variant : normal;");
                     sb.AppendLine(" font-size : all;");
-                    sb.Append(" src : url(");
+                    sb.Append(" src : url('");
                     sb.Append(Path.GetFileName(embeddedFont.Filename));
-                    sb.AppendLine(");");
+                    sb.AppendLine("');");
                     sb.AppendLine("}");
                     // if we're also embedding the font variants (bold, italic), reference them now
                     if (IncludeFontVariants)
@@ -1299,9 +1330,9 @@ namespace SIL.PublishingSolution
                             sb.AppendLine(" font-style : italic;");
                             sb.AppendLine(" font-variant : normal;");
                             sb.AppendLine(" font-size : all;");
-                            sb.Append(" src : url(");
+                            sb.Append(" src : url('");
                             sb.Append(Path.GetFileName(embeddedFont.ItalicFilename));
-                            sb.AppendLine(");");
+                            sb.AppendLine("');");
                             sb.AppendLine("}");
                         }
                         // Bold version
@@ -1315,9 +1346,9 @@ namespace SIL.PublishingSolution
                             sb.AppendLine(" font-style : normal;");
                             sb.AppendLine(" font-variant : normal;");
                             sb.AppendLine(" font-size : all;");
-                            sb.Append(" src : url(");
+                            sb.Append(" src : url('");
                             sb.Append(Path.GetFileName(embeddedFont.BoldFilename));
-                            sb.AppendLine(");");
+                            sb.AppendLine("');");
                             sb.AppendLine("}");
                         }
                     }
@@ -2869,10 +2900,18 @@ namespace SIL.PublishingSolution
                 opf.WriteElementString("dc", "format", null, Format);
             if (Source.Length > 0)
                 opf.WriteElementString("dc", "source", null, Source);
+            
+            if(_langFontDictionary.Count == 0)
+            {
+                opf.WriteElementString("dc", "language", null, "en");
+            }
+
             foreach (var lang in _langFontDictionary.Keys)
             {
                 opf.WriteElementString("dc", "language", null, lang);
             }
+
+
             if (Coverage.Length > 0)
                 opf.WriteElementString("dc", "coverage", null, Coverage);
             if (Rights.Length > 0)
@@ -3139,9 +3178,10 @@ namespace SIL.PublishingSolution
             {
                 string name = Path.GetFileName(file);
                 string bookName = GetBookName(file);
-                if(name.IndexOf("File") == 0 && name.IndexOf("TOC") == -1)
+                if (name.IndexOf("File") == 0 && name.IndexOf("TOC") == -1)
                 {
                     WriteNavPoint(ncx, index.ToString(), bookName, name);
+                    index++;
                     // chapters within the books (nested as a subhead)
                     chapNum = 1;
                     if (!skipChapterInfo)
@@ -3153,26 +3193,30 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    if(name.IndexOf("TOC") != -1)
+                    if (name.IndexOf("TOC") != -1)
                     {
                         WriteNavPoint(ncx, index.ToString(), bookName, name);
+                        index++;
                     }
-                    if(_inputType.ToLower() == "dictionary")
+                    if (_inputType.ToLower() == "dictionary")
                     {
                         if (name.Contains("PartFile"))
                         {
                             if (!isMainOpen)
                             {
-                                //WriteNavPoint(ncx, "_" + index.ToString(), "Main", "_" + name);
-                                //isMainOpen = true;
+                                //WriteNavPoint(ncx, index.ToString(), "Main", name);
+                                //index++;
+                                isMainOpen = true;
                             }
-                            if (Path.GetFileNameWithoutExtension(file).EndsWith("_") || Path.GetFileNameWithoutExtension(file).EndsWith("_01"))
+                            if (Path.GetFileNameWithoutExtension(file).EndsWith("_") ||
+                                Path.GetFileNameWithoutExtension(file).EndsWith("_01"))
                             {
                                 if (isMainSubOpen)
                                 {
                                     ncx.WriteEndElement(); // navPoint
                                 }
                                 WriteNavPoint(ncx, index.ToString(), bookName, name);
+                                index++;
                                 chapNum = 1;
                                 isMainSubOpen = true;
                             }
@@ -3184,30 +3228,28 @@ namespace SIL.PublishingSolution
                         }
                         else if (name.Contains("RevIndex"))
                         {
-                            if (isMainSubOpen)
-                            {
-                                ncx.WriteEndElement(); // navPoint
-                                isMainSubOpen = false;
-                            }
                             if (isMainOpen)
                             {
-                                ncx.WriteEndElement(); // navPoint Main value
+                                //ncx.WriteEndElement(); // navPoint Main value
                                 ncx.WriteEndElement(); // navPoint Main
                                 isMainSubOpen = false;
                                 isMainOpen = false;
                             }
-                            if (Path.GetFileNameWithoutExtension(file).EndsWith("_") || Path.GetFileNameWithoutExtension(file).EndsWith("_01"))
+                            if (Path.GetFileNameWithoutExtension(file).EndsWith("_") ||
+                                Path.GetFileNameWithoutExtension(file).EndsWith("_01"))
                             {
                                 if (isRevSubOpen)
                                 {
                                     ncx.WriteEndElement(); // navPoint
                                 }
-                                //if (!isRevOpen)
-                                //{
-                                //    WriteNavPoint(ncx, "_" + index.ToString(), "Reversal Index", "_" + name);
-                                //    isRevOpen = true;
-                                //}
+                                if (!isRevOpen)
+                                {
+                                    //WriteNavPoint(ncx, index.ToString(), "Reversal Index", name);
+                                    //index++;
+                                    isRevOpen = true;
+                                }
                                 WriteNavPoint(ncx, index.ToString(), bookName, name);
+                                index++;
                                 chapNum = 1;
                                 isRevSubOpen = true;
                             }
@@ -3216,12 +3258,13 @@ namespace SIL.PublishingSolution
                                 WriteChapterLinks(file, ref index, ncx, ref chapNum);
                             }
                             //ncx.WriteEndElement(); // navPoint
-
                         }
                     }
                     else
                     {
-                        if (name.IndexOf("TOC") == -1 && (Path.GetFileNameWithoutExtension(file).EndsWith("_") || Path.GetFileNameWithoutExtension(file).EndsWith("_01")))
+                        if (name.IndexOf("TOC") == -1 &&
+                            (Path.GetFileNameWithoutExtension(file).EndsWith("_") ||
+                             Path.GetFileNameWithoutExtension(file).EndsWith("_01")))
                         {
                             if (isScriptureSubOpen)
                             {
@@ -3254,19 +3297,15 @@ namespace SIL.PublishingSolution
                             }
                         }
                     }
-                    
+
                 }
-                index++;
-            }
-            if (isRevSubOpen)
-            {
-                ncx.WriteEndElement(); // navPoint Rev value
+
             }
             if (isRevOpen && _inputType.ToLower() == "dictionary")
             {
                 // end the book's navPoint element
-                ncx.WriteEndElement(); // navPoint Rev value
-                ncx.WriteEndElement(); // navPoint Rev
+                //ncx.WriteEndElement(); // navPoint Rev value
+                ncx.WriteEndElement(); // navPoint TOC
                 isRevOpen = false;
             }
             if (isScriptureSubOpen)
@@ -3278,7 +3317,11 @@ namespace SIL.PublishingSolution
             //ncx.WriteEndElement(); // ncx
             ncx.WriteEndDocument();
             ncx.Close();
-            ApplyXslt(tocFullPath, m_fixPlayOrder);
+            ApplyXslt(tocFullPath, _fixPlayOrder);
+            if (_inputType.ToLower() == "dictionary")
+            {
+                ApplyXslt(tocFullPath, _addDicTocHeads);
+            }
         }
 
         private void ApplyXslt(string fileFullPath, XslCompiledTransform xslt)
@@ -3311,7 +3354,7 @@ namespace SIL.PublishingSolution
             ncx.WriteAttributeString("src", name);
             ncx.WriteEndElement(); // meta
         }
-
+       
         /// <summary>
         /// Creates the table of contents file used by .epub readers (toc.ncx).
         /// </summary>
@@ -3485,14 +3528,7 @@ namespace SIL.PublishingSolution
             XmlNodeList nodes;
             if (_inputType.Equals("dictionary"))
             {
-                //if (xhtmlFileName.Contains("RevIndex"))
-                //{
-                //    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='ReversalIndexEntry_Self']", namespaceManager);
-                //}
-                //else
-                //{
-                    nodes = xmlDocument.SelectNodes("//xhtml:div[@class='entry']", namespaceManager);
-                //}
+                nodes = xmlDocument.SelectNodes("//xhtml:div[@class='entry']", namespaceManager);
             }
             else
             {
@@ -3561,11 +3597,8 @@ namespace SIL.PublishingSolution
                         ncx.WriteAttributeString("src", sb.ToString());
                         ncx.WriteEndElement(); // meta
                         //ncx.WriteEndElement(); // meta
-                    }
-                    else
-                    {
-                        playOrder--;
-                    }
+                        playOrder++;
+                    }                   
 
                     // If this is a dictionary with TOC level 3, gather the senses for this entry
                     if (_inputType.Equals("dictionary") && TocLevel.StartsWith("3"))
@@ -3585,7 +3618,7 @@ namespace SIL.PublishingSolution
                                     // This entry doesn't have any information - skip it
                                     continue;
                                 }
-                                playOrder++;
+                                
                                 if (childNode.HasChildNodes && childNode.FirstChild != null && childNode.FirstChild.FirstChild != null)
                                     textString = childNode.FirstChild.FirstChild.InnerText;
                                 sb.Append(name);
@@ -3607,6 +3640,7 @@ namespace SIL.PublishingSolution
                                 ncx.WriteEndElement(); // navPoint
                                 // reset the stringbuilder
                                 sb.Length = 0;
+                                playOrder++;
                             }
                         }
                     }
@@ -3616,9 +3650,9 @@ namespace SIL.PublishingSolution
                     }
                     // reset the stringbuilder
                     sb.Length = 0;
-                    playOrder++;
+                    
                 }
-            }
+            }            
         }
 
         #endregion

@@ -22,6 +22,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Win32;
 using SIL.Tool;
@@ -190,18 +191,10 @@ namespace SIL.PublishingSolution
 
         public void GetUserInformation(bool sendUserInfo)
         {
-            if (IsDeveloperInfo())
-            {
-                return;
-            }
-
             oSName = GetOsName();
             oSServicePack = GetOsVersion();
-            userSystemName = GetMachineName();
             language = GetLanguage();
-            //fontLists = GetFontLists();
             systemCountry = GetsystemCountry(Language);
-            userIPAddress = GetUserIpAddress();
             javaVersion = GetJavaVersion(OSName);
             xelatexVersion = GetXelatexVersion(OSName);
             pathwayVersion = GetPathwayVersion(OSName);
@@ -214,12 +207,16 @@ namespace SIL.PublishingSolution
             frameworkVersion = GetFrameworkVersion(OSName);
             geoLocation = "Unknown";
             userSystemGuid = GetUserSystemGuid(OSName);
+
+            if (IsDeveloperInfo())
+            {
+                return;
+            }
+
             if (sendUserInfo)
             {
-                SetToPHP(userSystemGuid, oSName, oSServicePack, userSystemName, userIPAddress, pathwayVersion,
-                         javaVersion, paratext, tEVersion, libraofficeVersion, prince, xelatexVersion,
-                         indesignVersion, weSay,
-                         bloom, fontLists, browserList, systemCountry, geoLocation, language, frameworkVersion);
+                SetToPHP(userSystemGuid, oSName, oSServicePack, pathwayVersion,javaVersion, paratext, tEVersion, libraofficeVersion, prince, xelatexVersion,
+                         indesignVersion, weSay,bloom, fontLists, browserList, systemCountry, geoLocation, language, frameworkVersion);
             }
 
         }
@@ -581,46 +578,63 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private static string GetUserSystemGuid(string osName)
+        private string GetUserSystemGuid(string osName)
         {
             try
             {
                 string UserSystemGuid;
-                UserSystemGuid = Guid.NewGuid().ToString();
-
-                if (osName == "Windows7")
+                UserSystemGuid = GetUserEncryptedCustomGUID();
+                try
                 {
-
-                    string getUserSystemGuid = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node", "PathwayGUID");
-
-                    if (getUserSystemGuid == null)
+                    if (osName == "Windows7")
                     {
-                        RegistryKey masterKey = Registry.LocalMachine.CreateSubKey("SOFTWARE\\Wow6432Node");
-                        masterKey.SetValue("PathwayGUID", UserSystemGuid);
-                        masterKey.Close();
+
+                        string getUserSystemGuid = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\SIL\\Pathway",
+                                                                               "PathwayGUID");
+
+                        if (getUserSystemGuid == null)
+                        {
+                            RegistryKey masterKey =
+                                Registry.LocalMachine.CreateSubKey("SOFTWARE\\Wow6432Node\\SIL\\Pathway");
+                            masterKey.SetValue("PathwayGUID", UserSystemGuid);
+                            masterKey.Close();
+                        }
+                        else
+                        {
+                            UserSystemGuid = getUserSystemGuid;
+                        }
+
+                    }
+                    else if (osName == "Windows XP")
+                    {
+                        string getUserSystemGuid = Common.GetValueFromRegistry("SOFTWARE\\SIL\\Pathway", "PathwayGUID");
+
+                        if (getUserSystemGuid == null)
+                        {
+                            RegistryKey masterKey = Registry.LocalMachine.CreateSubKey("SOFTWARE\\SIL\\Pathway");
+                            masterKey.SetValue("PathwayGUID", UserSystemGuid);
+                            masterKey.Close();
+                        }
+                        else
+                        {
+                            UserSystemGuid = getUserSystemGuid;
+                        }
                     }
                     else
                     {
-                        UserSystemGuid = getUserSystemGuid;
+                        string getUserSystemGuid = Common.GetValueFromRegistry("SOFTWARE\\SIL\\Pathway", "PathwayGUID");
+                        if (getUserSystemGuid == null)
+                        {
+                            RegistryKey masterKey = Registry.LocalMachine.CreateSubKey("SOFTWARE\\SIL\\Pathway");
+                            masterKey.SetValue("PathwayGUID", UserSystemGuid);
+                            masterKey.Close();
+                        }
+                        else
+                        {
+                            UserSystemGuid = getUserSystemGuid;
+                        }
                     }
-
-                }
-                else if (osName == "Windows XP")
-                {
-                    string getUserSystemGuid = Common.GetValueFromRegistry("SOFTWARE\\SIL\\Pathway", "PathwayGUID");
-
-                    if (getUserSystemGuid == null)
-                    {
-                        RegistryKey masterKey = Registry.LocalMachine.CreateSubKey("SOFTWARE\\SIL\\Pathway");
-                        masterKey.SetValue("PathwayGUID", UserSystemGuid);
-                        masterKey.Close();
-                    }
-                    else
-                    {
-                        UserSystemGuid = getUserSystemGuid;
-                    }
-                }
-
+                }catch {}
                 return UserSystemGuid;
             }
             catch
@@ -722,17 +736,14 @@ namespace SIL.PublishingSolution
             }
         }
 
-        public string SetToPHP(string UserSystemGuid, string OSNameVersion, string OSServicePack, string UserSystemName, string UserIPAddress,
-            string PathwayVersion, string JavaVersion, string ParatextVersion, string TEVersion, string LibraofficeVersion, string Prince, string XelatexVersion,
+        public string SetToPHP(string UserSystemGuid, string OSNameVersion, string OSServicePack, string PathwayVersion, string JavaVersion, string ParatextVersion, string TEVersion, string LibraofficeVersion, string Prince, string XelatexVersion,
             string IndesignVersion, string WeSay, string Bloom, string FontLists, string BrowserList, string SystemCountry, string GeoLocation, string Language, string FrameworkVersion)
         {
             string uri = string.Empty;
             // This is where we will send it
             uri = "http://myphpapps.com.cws10.my-hosting-panel.com/configdb.php" + "?UserSystemGuid=" +
                              UserSystemGuid + "&OSNameVersion=" + OSNameVersion + "&OSServicePack=" + OSServicePack +
-                             "&UserSystemName=" + UserSystemName + "&UserIPAddress=" + UserIPAddress +
-                             "&PathwayVersion=" +
-                             PathwayVersion + "&JavaVersion=" + JavaVersion + "&ParatextVersion=" + ParatextVersion +
+                             "&PathwayVersion=" + PathwayVersion + "&JavaVersion=" + JavaVersion + "&ParatextVersion=" + ParatextVersion +
                              "&TEVersion=" + TEVersion + "&LibraofficeVersion=" + LibraofficeVersion +
                              "&Prince=" + Prince + "&XelatexVersion=" + XelatexVersion + "&IndesignVersion=" +
                              IndesignVersion + "&WeSay=" + WeSay +
@@ -773,6 +784,76 @@ namespace SIL.PublishingSolution
             catch { }
 
             return uri;
+        }
+
+
+        public string GetUserEncryptedCustomGUID()
+        {
+            string getUserData = string.Empty;
+            string uri = string.Empty;
+            // This is where we will send it
+            uri = "http://myphpapps.com.cws10.my-hosting-panel.com/getUserIP.php" + "?UserSystemGuid=" + UserSystemGuid + "";
+            try
+            {
+                // This is what we are sending sample, don't remove or change
+                string post_data = "&FrameworkVersionsss=sdf";
+                // create a request
+                HttpWebRequest request = (HttpWebRequest)
+                                         WebRequest.Create(uri);
+                request.KeepAlive = false;
+                request.ProtocolVersion = HttpVersion.Version10;
+                request.Method = "POST";
+
+                // turn our request string into a byte stream
+                byte[] postBytes = Encoding.ASCII.GetBytes(post_data);
+
+                // this is important - make sure you specify type this way
+                request.ContentType = "application/x-www-form-urlencoded";
+                request.ContentLength = postBytes.Length;
+                Stream requestStream = request.GetRequestStream();
+
+                // now send it
+                requestStream.Write(postBytes, 0, postBytes.Length);
+                requestStream.Close();
+
+                // grab te response and print it out to the console along with the status code
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+              
+                var consoleString = (new StreamReader(response.GetResponseStream()).ReadToEnd());
+                var consoleStatusString = (response.StatusCode);
+
+                string getIpValue = consoleString;
+                getIpValue = Common.RightRemove(getIpValue, "IP");
+                getIpValue = Common.LeftRemove(getIpValue, "IP");
+                userSystemName = GetMachineName();
+                getUserData = userSystemName + "$" + getIpValue;
+                getUserData = CalculateSHA1(getUserData, Encoding.UTF8);
+            }
+            catch { }
+
+            return getUserData;
+        }
+
+        /// <summary>
+        /// Calculates SHA1 hash
+        /// </summary>
+        /// <param name="text">input string</param>
+        /// <param name="enc">Character encoding</param>
+        /// <returns>SHA1 hash</returns>
+        public static string CalculateSHA1(string text, Encoding enc)
+        {
+            // Convert the input string to a byte array
+            byte[] buffer = enc.GetBytes(text);
+
+            // In doing your test, you won't want to re-initialize like this every time you test a
+            // string.
+            SHA1CryptoServiceProvider cryptoTransformSHA1 = new SHA1CryptoServiceProvider();
+
+            // The replace won't be necessary for your tests so long as you are consistent in what
+            // you compare.    
+            string hash = BitConverter.ToString(cryptoTransformSHA1.ComputeHash(buffer)).Replace("-", "");
+
+            return hash;
         }
 
         private static void Search_For_Registry_Value(RegistryKey registryKey, string subKey, string search, bool getSubKey)

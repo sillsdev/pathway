@@ -1060,6 +1060,13 @@ namespace SIL.PublishingSolution
                     _columnClass.Add(_childName);
                 }
             }
+            else if (_classNameWithLang.ToLower() == "cover")
+            {
+                CreateFile();
+                _textFrameClass.Add(_childName);
+                _columnClass.Add(_childName);
+            }
+
         }
 
         private void SetHeadwordTrue()

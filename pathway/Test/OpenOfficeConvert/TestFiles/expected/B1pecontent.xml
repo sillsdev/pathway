@@ -19,6 +19,9 @@
     <style:style style:name="P4" style:family="paragraph" style:parent-style-name="hide" style:master-page-name="First_20_Page">
       <style:paragraph-properties style:page-number="auto" />
     </style:style>
+    <style:style style:name="fr11" style:family="graphic" style:parent-style-name="Graphics">
+      <style:graphic-properties style:run-through="background" style:wrap="run-through" style:number-wrapped-paragraphs="no-limit" style:horizontal-pos="center" style:horizontal-rel="paragraph" fo:clip="rect(0pt, 0pt, 0pt, 0pt)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" />
+    </style:style>
     <style:style style:name="P2" style:family="paragraph" style:parent-style-name="Frame_20_contents">
       <style:paragraph-properties fo:text-align="end" style:justify-single-word="false" />
     </style:style>
@@ -54,6 +57,7 @@
       <text:p text:style-name="P4" />
       <text:section text:style-name="Sect_scrBook" text:name="Sect_scrBook">
         <text:p text:style-name="scrBook_scrBody">
+          <text:s text:c="1" />
           <text:span text:style-name="scrBookName_scrBook_scrBody">Pita </text:span>
         </text:p>
         <text:p text:style-name="TitleMain_scrBook_scrBody">
@@ -636,9 +640,9 @@
               <text:span text:style-name="VerseNumber_ParagraphContinuation_scrSection_columns_scrBook_scrBody">7 </text:span>Kori vido ke horuhaihadi na ghaghanamiu eigna sa fata, oti vaututunia a God keda hatheghamu, eigna imanea ke toghaghamu me reireghighamu.</text:span>
           </text:p>
           <text:p text:style-name="Paragraph_scrSection_columns_scrBook_scrBody">
-            <draw:frame draw:style-name="Graphics0" draw:name="Graphics0" text:anchor-type="page" draw:z-index="1" svg:width="342pt" svg:height="220.784810126582pt">
+            <draw:frame draw:style-name="Graphics0" draw:name="Graphics0" text:anchor-type="page" draw:z-index="1" svg:width="342pt" svg:height="72pt">
               <draw:text-box fo:min-height="0in">
-                <draw:frame draw:style-name="Graphics0" draw:name="Graphics0" text:anchor-type="paragraph" svg:width="342pt" svg:height="220.784810126582pt">
+                <draw:frame draw:style-name="Graphics0" draw:name="Graphics0" text:anchor-type="paragraph" svg:width="342pt" svg:height="72pt">
                   <draw:image xlink:type="simple" xlink:show="embed" xlink:actuatet="onLoad" xlink:href="Pictures/lion.tif" />
                   <svg:title>lion.tif</svg:title>
                 </draw:frame>

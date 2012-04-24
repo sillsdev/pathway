@@ -551,11 +551,9 @@ namespace Test.UIConfigurationToolTest
             Assert.IsNotNullOrEmpty(userInfo.OSName);
             Assert.IsNotNullOrEmpty(userInfo.UserSystemGuid);
             Assert.IsNotNullOrEmpty(userInfo.OSServicePack);
-            Assert.IsNotNullOrEmpty(userInfo.UserSystemName);
             Assert.IsNotNullOrEmpty(userInfo.Language);
             //Assert.IsNotNullOrEmpty(userInfo.FontLists);
             Assert.IsNotNullOrEmpty(userInfo.SystemCountry);
-            Assert.IsNotNullOrEmpty(userInfo.UserIpAddress);
             Assert.IsNotNullOrEmpty(userInfo.JavaVersion);
             Assert.IsNotNullOrEmpty(userInfo.XelatexVersion);
             Assert.IsNotNullOrEmpty(userInfo.PathwayVersion);

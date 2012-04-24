@@ -470,7 +470,7 @@ namespace TestBed
 
 
             projInfo.FinalOutput = "odt";
-
+            projInfo.ProjectInputType = ProjType;
             projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
             projInfo.DictionaryPath = Path.GetDirectoryName(txtInputPath.Text);
             projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
@@ -777,6 +777,19 @@ namespace TestBed
             projInfo.ProjectFileWithPath = projInfo.ProjectPath;
             projInfo.DictionaryPath = projInfo.ProjectPath;
             exportYouVersion.Export(projInfo);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(txtInputPath.Text))
+            {
+                MessageBox.Show("Please enter the valid XHTML path");
+                return;
+            }
+
+            XhtmlToHtml xhtmlToHtml = new XhtmlToHtml();
+            xhtmlToHtml.Convert(txtInputPath.Text);
+            MessageBox.Show("Exported.");
         }
     }
 }

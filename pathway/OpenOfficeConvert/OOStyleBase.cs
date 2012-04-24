@@ -213,6 +213,7 @@ namespace SIL.PublishingSolution
                 _allParagraphProperty.Add("keep-with-next", "fo:");
                 _allParagraphProperty.Add("keep-together", "fo:");
                 _allParagraphProperty.Add("float", "fo:"); //TD-416
+                _allParagraphProperty.Add("page-number", "style:");
 
                 //_allTextProperty = new Dictionary<string, string>();
                 _allTextProperty.Add("font-weight", "fo:");

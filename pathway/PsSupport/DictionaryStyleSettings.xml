@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="15">
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="16">
   <settings>
     <property name="InputPath" value="" />
     <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Dictionary" />
@@ -21,8 +21,7 @@
     <property name="PrintVia" value="OpenOffice/LibreOffice" />
     <property name="ConfigureDictionary" value="True" />
     <property name="ReversalIndexes" value="True" />
-	<property name="FilterEmptyEntries" value="False" />
-    <property name="FilterBrokenLinks" value="False" />
+	<property name="Preprocessing" value="" />
     <property name="GrammerSketch" value="False" />
 	<property name="LayoutSelected" value="FieldWorksStyles" />
     <property name="ExtraProcessing" value="True" />
@@ -35,6 +34,7 @@
     <property name="GrammerSketch" value="False" />
     <property name="LayoutSelected" value="FieldWorksStyles" />
     <property name="ExtraProcessing" value="True" />
+        <property name="Preprocessing" value="" />		
     <property name="PublicationLocation" value="$(Documents)s/$(Base)s/$(CurrentProject)s/Dictionary/$(StyleSheet)s_$(DateTime)s" />
     <property name="Media" value="paper" />
   </defaultSettings>
@@ -395,10 +395,10 @@
       <defaultValue></defaultValue>
     </meta>
     <meta name="Copyright Holder" outputTypes="all">
-      <organizationDefault organizationName="SIL_x0020_International" Locked="false">_x00A9__x0020_2011_x0020_SIL_x0020_International._x0020_All_x0020_Rights_x0020_Reserved.</organizationDefault>
-      <organizationDefault organizationName="United_x0020_Bible_x0020_Societies" Locked="false">_x00A9__x0020_2011_x0020_United_x0020_Bible_x0020_Societies._x0020_All_x0020_Rights_x0020_Reserved.</organizationDefault>
-      <organizationDefault organizationName="Pioneer_x0020_Bible_x0020_Translators" Locked="false">_x00A9__x0020_2011_x0020_Pioneer_x0020_Bible_x0020_Translators._x0020_All_x0020_Rights_x0020_Reserved.</organizationDefault>
-      <defaultValue>_x00A9__x0020_2011._x0020_All_x0020_Rights_x0020_Reserved.</defaultValue>
+      <organizationDefault organizationName="SIL_x0020_International" Locked="false">_x00A9__x0020_2012_x0020_SIL_x0020_International._x0020_All_x0020_Rights_x0020_Reserved.</organizationDefault>
+      <organizationDefault organizationName="United_x0020_Bible_x0020_Societies" Locked="false">_x00A9__x0020_2012_x0020_United_x0020_Bible_x0020_Societies._x0020_All_x0020_Rights_x0020_Reserved.</organizationDefault>
+      <organizationDefault organizationName="Pioneer_x0020_Bible_x0020_Translators" Locked="false">_x00A9__x0020_2012_x0020_Pioneer_x0020_Bible_x0020_Translators._x0020_All_x0020_Rights_x0020_Reserved.</organizationDefault>
+      <defaultValue>_x00A9__x0020_2012._x0020_All_x0020_Rights_x0020_Reserved.</defaultValue>
     </meta>
     <meta name="Type" outputTypes="all">
       <defaultValue></defaultValue>

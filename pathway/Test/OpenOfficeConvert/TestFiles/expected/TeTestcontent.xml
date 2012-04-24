@@ -19,6 +19,9 @@
     <style:style style:name="P4" style:family="paragraph" style:parent-style-name="hide" style:master-page-name="First_20_Page">
       <style:paragraph-properties style:page-number="auto" />
     </style:style>
+    <style:style style:name="fr11" style:family="graphic" style:parent-style-name="Graphics">
+      <style:graphic-properties style:run-through="background" style:wrap="run-through" style:number-wrapped-paragraphs="no-limit" style:horizontal-pos="center" style:horizontal-rel="paragraph" fo:clip="rect(0pt, 0pt, 0pt, 0pt)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" />
+    </style:style>
     <style:style style:name="P2" style:family="paragraph" style:parent-style-name="Frame_20_contents">
       <style:paragraph-properties fo:text-align="end" style:justify-single-word="false" />
     </style:style>
@@ -46,6 +49,7 @@
       <text:p text:style-name="P4" />
       <text:section text:style-name="Sect_scrBook" text:name="Sect_scrBook">
         <text:p text:style-name="scrBook_scrBody">
+          <text:s text:c="1" />
           <text:span text:style-name="scrBookName_scrBook_scrBody">Ruth </text:span>
         </text:p>
         <text:p text:style-name="TitleMain_scrBook_scrBody">
@@ -489,6 +493,7 @@
       </text:section>
       <text:section text:style-name="Sect_scrBook" text:name="Sect_scrBook">
         <text:p text:style-name="scrBook_scrBody">
+          <text:s text:c="1" />
           <text:span text:style-name="scrBookName_scrBook_scrBody">Jonas </text:span>
         </text:p>
         <text:p text:style-name="TitleMain_scrBook_scrBody">
@@ -912,6 +917,7 @@
       </text:section>
       <text:section text:style-name="Sect_scrBook" text:name="Sect_scrBook">
         <text:p text:style-name="scrBook_scrBody">
+          <text:s text:c="1" />
           <text:span text:style-name="scrBookName_scrBook_scrBody">*** </text:span>
         </text:p>
         <text:p text:style-name="TitleMain_scrBook_scrBody">

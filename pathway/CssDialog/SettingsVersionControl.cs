@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using System.Data;
@@ -110,6 +111,11 @@ namespace SIL.PublishingSolution
                     if (int.Parse(projSettingsVerNum) < 14)
                     {
                         Version14(GetDirectoryPath(settingsPath, appPath));
+                        Param.LoadSettings();
+                    }
+                    if (int.Parse(projSchemaVersion) < 16)
+                    {
+                        Version16(GetDirectoryPath(settingsPath, appPath));
                         Param.LoadSettings();
                     }
                     //Version2(GetDirectoryPath(settingsPath, appPath), appSettingsPath, projSchemaVersion);
@@ -340,6 +346,50 @@ namespace SIL.PublishingSolution
                 }
             }
             destDoc.Save(destSettingsFile);
+        }
+
+        /// <summary>
+        /// Update to change made in version 15 of the XML. Filter parameters replaced by Preprocessing parameter.
+        /// </summary>
+        /// <param name="destSettingsFile"></param>
+        private void Version16(string destSettingsFile)
+        {
+            if (!File.Exists(destSettingsFile)) { return; }
+            var destDoc = new XmlDocument { XmlResolver = null };
+            destDoc.Load(destSettingsFile);
+            XmlElement root = destDoc.DocumentElement;
+            if (root != null)
+            {
+                root.SetAttribute("version", "16");
+                const string settingsPath = "//stylePick/setting";
+                XmlNode settingsNode = root.SelectSingleNode(settingsPath);
+                if (settingsNode != null)
+                {
+                    var preprocessingNode = destDoc.CreateElement("property");
+                    var nameAttr = destDoc.CreateAttribute("name");
+                    nameAttr.Value = "Preprocessing";
+                    preprocessingNode.Attributes.Append(nameAttr);
+                    var valueAttr = destDoc.CreateAttribute("value");
+                    valueAttr.Value = string.Empty;
+                    preprocessingNode.Attributes.Append(valueAttr);
+                    settingsNode.AppendChild(preprocessingNode);
+                }
+                const string emptyFilterPath = "//stylePick/setting/property[@name=\"FilterEmptyEntries\"]";
+                XmlNode emptyFilterNode = root.SelectSingleNode(emptyFilterPath);
+                if (emptyFilterNode != null)
+                {
+                    Debug.Assert(emptyFilterNode.ParentNode != null);
+                    emptyFilterNode.ParentNode.RemoveChild(emptyFilterNode);
+                }
+                const string brokenFilterPath = "//stylePick/setting/property[@name=\"FilterBrokenLinks\"]";
+                XmlNode brokenFilterNode = root.SelectSingleNode(brokenFilterPath);
+                if (brokenFilterNode != null)
+                {
+                    Debug.Assert(brokenFilterNode.ParentNode != null);
+                    brokenFilterNode.ParentNode.RemoveChild(brokenFilterNode);
+                }
+
+            }
         }
 
         /// <summary>

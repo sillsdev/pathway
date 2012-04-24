@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Feb-24-2012 for TD-2858(OpenOffice: Align Cover Page Image to &quot;Anchor to Page&quot;)
+&apos;Changed On Feb-24-2012 for TD-2858,2937(OpenOffice: Align Cover Page Image to &quot;Anchor to Page&quot;)
 
 &apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -49,8 +49,10 @@ Sub StartDontForget
 	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; And Len(Trim(OutputFormat)) &gt; 0 Then
 		ExportToDOC_PDF
 	End IF
-	SetImageToCoverPage()
-	SetImageToCoverPage()
+	&apos;SetImageToCoverPage()
+	If IsCoverImageInserted = &quot;true&quot; And Right(Trim(ThisComponent.Title),4) = &quot;.odm&quot; Then
+		SetImageToCoverPage()
+	End If
 End Sub
 
 &apos;Update the Table of Content
