@@ -45,7 +45,7 @@ Sub StartDontForget
 	End IF
 	
 	&apos;SetImageToCoverPage()
-	If IsCoverImageInserted = &quot;true&quot; Then
+	If IsCoverImageInserted = &quot;true&quot; And Right(Trim(ThisComponent.Title),4) = &quot;.odm&quot; Then
 		SetImageToCoverPage()
 	End If
 End Sub
