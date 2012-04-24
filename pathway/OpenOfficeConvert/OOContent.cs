@@ -794,7 +794,7 @@ namespace SIL.PublishingSolution
                     if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                     {
                         if (_previousParagraphName != null && _previousParagraphName.IndexOf("entry") == 0 &&
-                            _childName.IndexOf("letHead") == -1)
+                            (_childName.IndexOf("letHead") == -1 && _childName.IndexOf("pictureCaption") == -1))
                         {
                             //<text:p text:style-name="block_5f_p">
                             //    <text:soft-page-break/>
