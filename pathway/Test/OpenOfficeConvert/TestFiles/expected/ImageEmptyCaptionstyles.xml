@@ -353,10 +353,17 @@
         <style:header-footer-properties fo:margin-bottom="0.0pt" fo:min-height="0.0pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:footer-style>
     </style:page-layout>
+    <style:page-layout style:name="pm12">
+      <style:page-layout-properties fo:page-height="792pt" fo:page-width="612pt" fo:margin-left="56.7pt" fo:margin-right="56.7pt" fo:margin-top="56.7pt" fo:margin-bottom="56.7pt" />
+    </style:page-layout>
+    <style:page-layout style:name="pm13">
+      <style:page-layout-properties fo:page-height="792pt" fo:page-width="612pt" fo:margin-left="56.7pt" fo:margin-right="56.7pt" fo:margin-top="56.7pt" fo:margin-bottom="56.7pt" />
+    </style:page-layout>
   </office:automatic-styles>
   <office:master-styles>
     <style:master-page style:name="Standard" style:page-layout-name="pm1" />
     <style:master-page style:name="Cover_20_Page" style:display-name="Cover Page" style:next-style-name="First_20_Page" style:page-layout-name="pm1" />
+    <style:master-page style:name="Dummy_20_Page" style:display-name="Dummy Page" style:next-style-name="First_20_Page" style:page-layout-name="pm12" />
     <style:master-page style:name="Title_20_Page" style:display-name="Title Page" style:next-style-name="First_20_Page" style:page-layout-name="pm6">
       <style:footer>
         <text:p text:style-name="Footer">
@@ -381,6 +388,7 @@
         </text:p>
       </style:footer>
     </style:master-page>
+    <style:master-page style:name="Dummy1_20_Page" style:display-name="Dummy1 Page" style:next-style-name="First_20_Page" style:page-layout-name="pm13" />
     <style:master-page style:name="First_20_Page" style:display-name="First Page" style:next-style-name="XHTML" style:page-layout-name="pm3" />
     <style:master-page style:name="XHTML" style:page-layout-name="pm2" style:next-style-name="XHTML" />
   </office:master-styles>

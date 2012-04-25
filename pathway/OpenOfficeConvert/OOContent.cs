@@ -762,9 +762,9 @@ namespace SIL.PublishingSolution
             if (_childName.ToLower().Contains("tableofcontents"))
             {
                 CallTOC();
-                _writer.WriteStartElement("text:p");
-                _writer.WriteAttributeString("text:style-name", "P4");
-                _writer.WriteEndElement();
+                //_writer.WriteStartElement("text:p");
+                //_writer.WriteAttributeString("text:style-name", "P4");
+                //_writer.WriteEndElement();
                 return;
             }
 
