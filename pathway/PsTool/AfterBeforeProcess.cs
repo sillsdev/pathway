@@ -235,8 +235,7 @@ namespace SIL.PublishingSolution
             _displayBlock = new Dictionary<string, string>();
             _cssClassOrder = cssClassOrder;
             //_classFamily = new Dictionary<string, ArrayList>();
-            _projInfo = projInfo;
-
+            
             _sourcePicturePath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             _projectPath = projInfo.TempOutputFolder;
 
