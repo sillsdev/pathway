@@ -20,6 +20,7 @@ using System.Diagnostics;
 using System.IO;
 using JWTools;
 using SIL.FieldWorks.Common.FwUtils;
+using RevHomographNum;
 using SIL.Tool;
 using SIL.Tool.Localization;
 
@@ -30,7 +31,6 @@ namespace SIL.PublishingSolution
     /// </summary>
     public class PsExport: IExporter
     {
-        private const bool _Wait = true;
         public bool _fromNUnit = false;
 
         #region Properties
@@ -66,6 +66,9 @@ namespace SIL.PublishingSolution
             Debug.Assert(outFullName.IndexOf(Path.DirectorySeparatorChar) >= 0, "full path for output must be given");
             try
             {
+                //get xsltFile from ExportThroughPathway.cs
+                XsltPreProcess(outFullName);
+
                 string supportPath = GetSupportPath();
 				Backend.Load(Common.ProgInstall);
                 LoadProgramSettings(supportPath);
@@ -86,43 +89,143 @@ namespace SIL.PublishingSolution
                 }
                 string cssFullName = GetCssFullName(outDir, mainFullName);
                 if (cssFullName == null) return;
-                string fluffedCssFullName = GetFluffedCssFullName(outFullName, outDir, cssFullName);
-                string revFileName = GetRevFullName(outDir);
-                string revCSS = string.Empty;
+                string fluffedCssFullName;
+                string revFileName = string.Empty;
+                if (Path.GetFileNameWithoutExtension(outFullName) == "FlexRev")
+                {
+                    fluffedCssFullName = GetFluffedCssFullName(GetRevFullName(outFullName), outDir, cssFullName);
+                }
+                else
+                {
+                    fluffedCssFullName = GetFluffedCssFullName(outFullName, outDir, cssFullName);
+                    revFileName = GetRevFullName(outDir);
+                }
+                string fluffedRevCssFullName = string.Empty;
                 if (revFileName.Length > 0)
                 {
-                    revCSS = GetFluffedCssFullName(GetRevFullName(outDir), outDir, cssFullName);
+                    fluffedRevCssFullName = GetFluffedCssFullName(revFileName, outDir, cssFullName);
                 }
                 DestinationSetup();
+                SetDefaultLanguageFont(fluffedCssFullName, mainFullName, fluffedRevCssFullName);
                 if (DataType == "Scripture")
+                {
                     SeExport(mainXhtml, Path.GetFileName(fluffedCssFullName), outDir);
+                }
                 else if (DataType == "Dictionary")
                 {
                     string revFullName = GetRevFullName(outDir);
                     string gramFullName = MakeXhtml(outDir, "sketch.xml", "XLingPap.xsl", supportPath);
-                    DeExport(outFullName, fluffedCssFullName, revFullName, revCSS, gramFullName);
+                    DeExport(outFullName, fluffedCssFullName, revFullName, fluffedRevCssFullName, gramFullName);
                 }
             }
             catch (InvalidStyleSettingsException err)
             {
-                MessageBox.Show(string.Format(err.ToString(), err.FullFilePath), "Pathway Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (_fromNUnit)
+                {
+                    Console.WriteLine(string.Format(err.ToString(), err.FullFilePath), "Pathway Export");
+                }
+                else
+                {
+                    MessageBox.Show(string.Format(err.ToString(), err.FullFilePath), "Pathway Export",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 //var msg = new[] { err.FullFilePath };
                 //LocDB.Message("errNotValidXml", err.ToString(), msg, LocDB.MessageTypes.Warning, LocDB.MessageDefault.First);
                 return;
             }
             catch (UnauthorizedAccessException err)
             {
-                var msg = new[] { "Sorry! You might not have permission to use this resource." };
-                LocDB.Message("errUnauthorized", err.ToString(), msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
+                if (_fromNUnit)
+                {
+                    Console.WriteLine(string.Format(err.ToString(), "Sorry! You might not have permission to use this resource."));
+                }
+                else
+                {
+                    MessageBox.Show(string.Format(err.ToString(), "Sorry! You might not have permission to use this resource."), @"Pathway Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                //var msg = new[] { "Sorry! You might not have permission to use this resource." };
+                //LocDB.Message("errUnauthorized", err.ToString(), msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
                 return;
             }
             catch (Exception ex)
             {
-                var msg = new[] { ex.ToString() };
-                LocDB.Message("defErrMsg", ex.ToString(), msg, LocDB.MessageTypes.Warning, LocDB.MessageDefault.First);
+                if (_fromNUnit)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+                else
+                {
+                    MessageBox.Show(ex.ToString(), @"Pathway Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                //var msg = new[] { ex.ToString() };
+                //LocDB.Message("defErrMsg", ex.ToString(), msg, LocDB.MessageTypes.Warning, LocDB.MessageDefault.First);
                 return;
             }
         }
+
+        /// <summary>
+        /// Preprocess the xhtml file using xsl file.
+        /// </summary>
+        /// <param name="outFullName">input xhtml file</param>
+        protected void XsltPreProcess(string outFullName)
+        {
+            if (!Param.Value.ContainsKey(Param.Preprocessing)) return;
+            var preprocessing = Param.Value[Param.Preprocessing];
+            if (preprocessing == string.Empty) return;
+            var preProcessList = preprocessing.Split(",".ToCharArray());
+            var curInput = AdjustNameExt(outFullName, "_.xhtml");
+            File.Copy(outFullName, curInput, true);
+            for (int i = 0; i < preProcessList.Length; i++)
+            {
+                string xsltFullName =
+                    Common.PathCombine(
+                        Common.PathCombine(
+                            Common.PathCombine(Common.GetPSApplicationPath(), "Preprocessing"),
+                            DataType),
+                        preProcessList[i] + ".xsl");
+                Debug.Print("xsltFullName: {0}", xsltFullName);
+                string resultExtention = string.Format("{0}.xhtml", i);
+                Common.XsltProcess(curInput, xsltFullName, resultExtention);
+                curInput = AdjustNameExt(curInput, resultExtention);
+            }
+            File.Copy(curInput, outFullName, true);
+            File.Delete(curInput);
+        }
+
+        private static string AdjustNameExt(string fullName, string extension)
+        {
+            return Common.PathCombine(Path.GetDirectoryName(fullName),
+                                      Path.GetFileNameWithoutExtension(fullName) + extension);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fluffedCssFullName"></param>
+        /// <param name="mainFullName"></param>
+        /// <param name="fluffedCssReversal"></param>
+        private void SetDefaultLanguageFont(string fluffedCssFullName, string mainFullName, string fluffedCssReversal)
+        {
+            string fileName = Path.GetFileName(mainFullName);
+
+            if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe")
+            {
+                Common.ParaTextFontName(fluffedCssFullName);
+            }
+            if (DataType == "Dictionary" && fileName == "main.xhtml")
+            {
+                Common.LanguageSettings(mainFullName, fluffedCssFullName, DataType == "Dictionary", fluffedCssReversal);
+            }
+            else
+            {
+                Common.TeLanguageSettings(fluffedCssFullName);
+            }
+
+            //string[] args = Environment.GetCommandLineArgs();
+            //for (int i = 0; i < args.Length; i++)
+            //{MessageBox.Show(args[i].ToString());}
+        }
+
 
         /// <summary>
         /// Returns reversal name with path (empty string if file doesn't exist)
@@ -131,6 +234,11 @@ namespace SIL.PublishingSolution
         /// <returns>Reversal name with path</returns>
         protected static string GetRevFullName(string outDir)
         {
+            //string revFullName = Common.PathCombine(Path.GetDirectoryName(outDir), "FlexRev.xhtml");
+            if(File.Exists(outDir))
+            {
+                outDir = Path.GetDirectoryName(outDir);
+            }
             string revFullName = Common.PathCombine(outDir, "FlexRev.xhtml");
             if (!File.Exists(revFullName))
                 revFullName = "";
@@ -141,6 +249,7 @@ namespace SIL.PublishingSolution
                 Common.StreamReplaceInFile(revFullName, "class=\"headword\"", "class=\"headref\"");
                 string revCssFullName = revFullName.Substring(0, revFullName.Length - 6) + ".css";
                 Common.StreamReplaceInFile(revCssFullName, ".headword", ".headref");
+                AddHomographAndSenseNumClassNames.Execute(revFullName, revFullName);
             }
             return revFullName;
         }
