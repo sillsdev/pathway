@@ -1484,8 +1484,8 @@ namespace SIL.PublishingSolution
                 default:
                     // web, paper
                     //cTool.TabControl1.TabPages.Add(tabDisplay);
-                    cTool.TabControl1.TabPages.Insert(1, tabDisplay);
-                    cTool.TabControl1.TabPages.Insert(2, tabpreview);
+                    cTool.TabControl1.TabPages.Add(tabDisplay);
+                    cTool.TabControl1.TabPages.Add(tabpreview);
                     ShowCssSummary();
                     break;
             }
