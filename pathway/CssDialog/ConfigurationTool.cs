@@ -616,6 +616,41 @@ namespace SIL.PublishingSolution
             get { return picPreview; }
         }
 
+        public TextBox TxtFtpAddress
+        {
+            get { return txtFtpFileLocation; }
+        }
+
+        public TextBox TxtFtpUsername
+        {
+            get { return txtFtpUsername; }
+        }
+
+        public TextBox TxtFtpPassword
+        {
+            get { return txtFtpPassword; }
+        }
+
+        public TextBox TxtSqlServerName
+        {
+            get { return txtSqlServerName; }
+        }
+
+        public TextBox TxtSqlDBName
+        {
+            get { return txtSqlDBName; }
+        }
+
+        public TextBox TxtSqlUsername
+        {
+            get { return txtSqlUsername; }
+        }
+
+        public TextBox TxtSqlPassword
+        {
+            get { return txtSqlPassword; }
+        }
+
         //private System.Windows.Forms.TableLayoutPanel TLPanelOuter;
         //private System.Windows.Forms.TableLayoutPanel TLPanel1;
         //private System.Windows.Forms.TableLayoutPanel TLPanel2;
@@ -773,8 +808,8 @@ namespace SIL.PublishingSolution
 
         private void btnWeb_Click(object sender, EventArgs e)
         {
-            //_CToolBL.MediaType = "web";
-            //_CToolBL.SideBar();
+            _CToolBL.MediaType = "web";
+            _CToolBL.SideBar();
         }
 
         private void btnOthers_Click(object sender, EventArgs e)
@@ -1142,6 +1177,41 @@ namespace SIL.PublishingSolution
         private void toolStripSplitButton1_ButtonClick(object sender, EventArgs e)
         {
             _CToolBL.HelpButton_Clicked();
+        }
+
+        private void txtFtpFileLocation_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtFtpFileLocation_ValidatedBL(sender, e);
+        }
+
+        private void txtFtpUsername_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtFtpUsername_ValidatedBL(sender, e);
+        }
+
+        private void txtFtpPassword_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtFtpPassword_ValidatedBL(sender, e);
+        }
+
+        private void txtSqlServerName_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtSqlServerName_ValidatedBL(sender, e);
+        }
+
+        private void txtSqlDBName_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtSqlDBName_ValidatedBL(sender, e);
+        }
+
+        private void txtSqlUsername_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtSqlUsername_ValidatedBL(sender, e);
+        }
+
+        private void txtSqlPassword_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtSqlPassword_ValidatedBL(sender, e);
         }
      }
 }

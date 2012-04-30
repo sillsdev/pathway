@@ -45,6 +45,14 @@ namespace SIL.PublishingSolution
         public string AttribPreviewFile1 = "previewfile1";
         public string AttribPreviewFile2 = "previewfile2";
 
+        public string AttrFtpAddrs = "ftpaddress";
+        public string AttrFtpUid = "ftpuserid";
+        public string AttrFtpPwd = "ftppwd";
+        public string AttrDbSerName = "dbservername";
+        public string AttrDbName = "dbname";
+        public string AttrDbUid = "dbuserid";
+        public string AttrDbPwd = "dbpwd";
+ 
         public string inputTypeBL = "Dictionary";
 
         public string ElementDesc = "description";
@@ -119,6 +127,8 @@ namespace SIL.PublishingSolution
         TabPage tabDisplay = new TabPage();
         TabPage tabmob = new TabPage();
         TabPage tabothers = new TabPage();
+        TabPage tabweb = new TabPage();
+        TabPage tabpreview = new TabPage();
         protected TraceSwitch _traceOn = new TraceSwitch("General", "Trace level for application");
         private ConfigurationTool cTool;
         Dictionary<string, string> pageDict = new Dictionary<string, string>();
@@ -593,11 +603,11 @@ namespace SIL.PublishingSolution
                 cTool.BtnMobile.BackColor = _selectedColor;
                 cTool.BtnMobile.FlatAppearance.BorderSize = 1;
             }
-            //else if (MediaType == "web")
-            //{
-            //    cTool.BtnWeb.BackColor = _selectedColor;
-            //    cTool.BtnWeb.FlatAppearance.BorderSize = 1;
-            //}
+            else if (MediaType == "web")
+            {
+                cTool.BtnWeb.BackColor = _selectedColor;
+                cTool.BtnWeb.FlatAppearance.BorderSize = 1;
+            }
             else if (MediaType == "others")
             {
                 cTool.BtnOthers.BackColor = _selectedColor;
@@ -607,6 +617,45 @@ namespace SIL.PublishingSolution
 
         public void WriteCss()
         {
+            if (MediaType.ToLower() == "web" || IsPropertyModified() == true)
+            {
+                XmlNodeList baseNodeList = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
+                HashUtilities hashUtil = new HashUtilities();
+                hashUtil.Key = "%:#@?,*&";
+
+                foreach (XmlNode baseNode in baseNodeList)
+                {
+                    string attribName = baseNode.Attributes["name"].Value.ToLower();
+                    switch (attribName)
+                    {
+                        case "ftpaddress":
+                            baseNode.Attributes["value"].Value = cTool.TxtFtpAddress.Text;
+                            break;
+                        case "ftpuserid":
+                            baseNode.Attributes["value"].Value = cTool.TxtFtpUsername.Text;
+                            break;
+                        case "ftppwd":
+                            baseNode.Attributes["value"].Value = hashUtil.Encrypt(cTool.TxtFtpPassword.Text);
+                            break;
+                        case "dbservername":
+                            baseNode.Attributes["value"].Value = cTool.TxtSqlServerName.Text;
+                            break;
+                        case "dbname":
+                            baseNode.Attributes["value"].Value = cTool.TxtSqlDBName.Text;
+                            break;
+                        case "dbuserid":
+                            baseNode.Attributes["value"].Value = cTool.TxtSqlUsername.Text;
+                            break;
+                        case "dbpwd":
+                            baseNode.Attributes["value"].Value = hashUtil.Encrypt(cTool.TxtSqlPassword.Text);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                Param.Write();
+            }
+
             //if ((_screenMode != ScreenMode.Modify) || (FileType.ToLower() == "standard")) return;
             if (IsPropertyModified() == false || (FileType.ToLower() == "standard")) return;
             StreamWriter writeCss = null;
@@ -917,6 +966,48 @@ namespace SIL.PublishingSolution
                         }
                     }
                     SetOthersSummary(null, null);
+                }
+                else if (MediaType.ToLower() == "web")
+                {
+                    XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
+                    HashUtilities hashUtil = new HashUtilities();
+                    hashUtil.Key = "%:#@?,*&";
+
+                    // show/hide web UI controls based on the input type
+                    SetWebUIControls(inputTypeBL == "Dictionary");
+
+                    foreach (XmlNode VARIABLE in baseNode1)
+                    {
+                        string attribName = VARIABLE.Attributes["name"].Value.ToLower();
+                        string attribValue = VARIABLE.Attributes["value"].Value;
+                        switch (attribName)
+                        {
+                            case "ftpaddress":
+                                cTool.TxtFtpAddress.Text = attribValue;
+                                break;
+                            case "ftpuserid":
+                                cTool.TxtFtpUsername.Text = attribValue;
+                                break;
+                            case "ftppwd":
+                                cTool.TxtFtpPassword.Text = hashUtil.Decrypt(attribValue);
+                                break;
+                            case "dbservername":
+                                cTool.TxtSqlServerName.Text = attribValue;
+                                break;
+                            case "dbname":
+                                cTool.TxtSqlDBName.Text = attribValue;
+                                break;
+                            case "dbuserid":
+                                cTool.TxtSqlUsername.Text = attribValue;
+                                break;
+                            case "dbpwd":
+                                cTool.TxtSqlPassword.Text = hashUtil.Decrypt(attribValue);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    SetWebSummary(null, null);
                 }
                 else
                 {
@@ -1247,8 +1338,9 @@ namespace SIL.PublishingSolution
                 SetPropertyTab();
                 //_redoundo.Reset();
             }
-            catch
+            catch(Exception ex)
             {
+                Console.Write(ex.Message);
             }
         }
 
@@ -1261,12 +1353,15 @@ namespace SIL.PublishingSolution
             //    return;
 
             cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages[1]);
+            if (cTool.TabControl1.TabPages.ContainsKey("tabPreview"))
+                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPreview"]);
             //cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabdisplay"]);
             switch (MediaType)
             {
                 case "mobile":
                     //cTool.TabControl1.TabPages.Add(tabmob);
                     cTool.TabControl1.TabPages.Insert(1, tabmob);
+                    cTool.TabControl1.TabPages.Insert(2, tabpreview);
 
                     XmlNodeList baseNode1 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
                     foreach (XmlNode VARIABLE in baseNode1)
@@ -1287,6 +1382,7 @@ namespace SIL.PublishingSolution
                 case "others":
                     //cTool.TabControl1.TabPages.Add(tabothers);
                     cTool.TabControl1.TabPages.Insert(1, tabothers);
+                    cTool.TabControl1.TabPages.Insert(2, tabpreview);
 
                     XmlNodeList baseNode = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
                     // show/hide chapter numbers and references UI
@@ -1342,10 +1438,54 @@ namespace SIL.PublishingSolution
                     }
                     SetOthersSummary(null, null);
                     break;
+                case "web":
+                    HashUtilities hashUtil = new HashUtilities();
+                    hashUtil.Key = "%:#@?,*&";
+                    //cTool.TabControl1.TabPages.Add(tabothers);
+                    cTool.TabControl1.TabPages.Insert(1, tabweb);
+
+                    XmlNodeList baseNode2 = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
+                    // show/hide chapter numbers and references UI
+                    SetEpubUIControls(inputTypeBL == "Scripture");
+
+                    foreach (XmlNode VARIABLE in baseNode2)
+                    {
+                        string attribName = VARIABLE.Attributes["name"].Value.ToLower();
+                        string attribValue = VARIABLE.Attributes["value"].Value;
+                        switch (attribName)
+                        {
+                            case "ftpaddress":
+                                cTool.TxtFtpAddress.Text = attribValue;
+                                break;
+                            case "ftpuserid":
+                                cTool.TxtFtpUsername.Text = attribValue;
+                                break;
+                            case "ftppwd":
+                                cTool.TxtFtpPassword.Text = hashUtil.Decrypt(attribValue);
+                                break;
+                            case "dbservername":
+                                cTool.TxtSqlServerName.Text = attribValue;
+                                break;
+                            case "dbname":
+                                cTool.TxtSqlDBName.Text = attribValue;
+                                break;
+                            case "dbuserid":
+                                cTool.TxtSqlUsername.Text = attribValue;
+                                break;
+                            case "dbpwd":
+                                cTool.TxtSqlPassword.Text = hashUtil.Decrypt(attribValue);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    SetWebSummary(null, null);
+                    break;
                 default:
                     // web, paper
                     //cTool.TabControl1.TabPages.Add(tabDisplay);
-                    cTool.TabControl1.TabPages.Insert(1, tabDisplay);
+                    cTool.TabControl1.TabPages.Add(tabDisplay);
+                    cTool.TabControl1.TabPages.Add(tabpreview);
                     ShowCssSummary();
                     break;
             }
@@ -1374,6 +1514,23 @@ namespace SIL.PublishingSolution
             cTool.LblNonSILFont.Top = cTool.DdlNonSILFont.Top + 3;
             cTool.DdlDefaultFont.Top = cTool.DdlNonSILFont.Bottom + 6;
             cTool.LblDefaultFont.Top = cTool.DdlDefaultFont.Top + 3;
+        }
+
+        /// <summary>
+        /// Helper method to show or hide elements on the epub properties tab based on
+        /// whether or not the user is editing a scripture stylesheet.
+        /// </summary>
+        /// <param name="showScriptureControls"></param>
+        private void SetWebUIControls(bool showScriptureControls)
+        {
+            // show/hide chapter numbers and references UI
+            cTool.TxtFtpAddress.Visible = showScriptureControls;
+            cTool.TxtFtpUsername.Visible = showScriptureControls;
+            cTool.TxtFtpPassword.Visible = showScriptureControls;
+            cTool.TxtSqlServerName.Visible = showScriptureControls;
+            cTool.TxtSqlDBName.Visible = showScriptureControls;
+            cTool.TxtSqlUsername.Visible = showScriptureControls;
+            cTool.TxtSqlPassword.Visible = showScriptureControls;
         }
 
         //Note - Check This
@@ -1873,6 +2030,17 @@ namespace SIL.PublishingSolution
                     Param.GetItems("//styles/" + MediaType + "/style[@name='" +
                                    grid[AttribName, SelectedRowIndex].Value + "']/styleProperty");
                 foreach (XmlNode stylePropertyNode in mobileBaseNode)
+                {
+                    baseNode.AppendChild(stylePropertyNode.Clone());
+                }
+            }
+            //web
+            if (inputTypeBL.ToLower() == "scripture" && MediaType.ToLower() == "web")
+            {
+                XmlNodeList webBaseNode =
+                    Param.GetItems("//styles/" + MediaType + "/style[@name='" +
+                                   grid[AttribName, SelectedRowIndex].Value + "']/styleProperty");
+                foreach (XmlNode stylePropertyNode in webBaseNode)
                 {
                     baseNode.AppendChild(stylePropertyNode.Clone());
                 }
@@ -2518,6 +2686,14 @@ namespace SIL.PublishingSolution
             sb.Append("% Line Height, Alignment: ");
             sb.Append(cTool.DdlDefaultAlignment.SelectedItem.ToString());
 
+            cTool.TxtCss.Text = sb.ToString();
+        }
+
+        public void ShowWebSummaryBL()
+        {
+            var sb = new StringBuilder();
+            sb.Append(cTool.TxtName.Text);
+            sb.Append(", ");
             cTool.TxtCss.Text = sb.ToString();
         }
 
@@ -3253,6 +3429,7 @@ namespace SIL.PublishingSolution
                 ClearPropertyTab(cTool.TabDisplay);
                 ClearPropertyTab(tabmob);
                 ClearPropertyTab(tabothers);
+                ClearPropertyTab(tabweb);
                 PopulateFeatureSheet(); //For TD-1194 // Load Default Values
                 SetPreviousLayoutSelect(cTool.StylesGrid);
                 SetSideBar();
@@ -3362,6 +3539,11 @@ namespace SIL.PublishingSolution
         private void SetOthersSummary(object sender, EventArgs e)
         {
             ShowOthersSummaryBL();
+        }
+
+        private void SetWebSummary(object sender, EventArgs e)
+        {
+            ShowWebSummaryBL();
         }
 
         public void txtPageInside_ValidatedBL(object sender, EventArgs e)
@@ -3507,16 +3689,18 @@ namespace SIL.PublishingSolution
 
 
             tabDisplay = cTool.TabControl1.TabPages["tabdisplay"];
-
+            tabpreview = cTool.TabControl1.TabPages["tabPreview"];
             if (cTool.TabControl1.TabPages.Count > 2)
             {
                 //tabmob = cTool.TabControl1.TabPages[2];
                 //tabothers = cTool.TabControl1.TabPages[3];
                 tabmob = cTool.TabControl1.TabPages["tabmobile"];
                 tabothers = cTool.TabControl1.TabPages["tabothers"];
+                tabweb = cTool.TabControl1.TabPages["tabweb"];
 
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabmobile"]);
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabothers"]);
+                cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabweb"]);
                 cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages["tabPicture"]);
             }
             //_redoundo = new UndoRedo(cTool.TsUndo, cTool.TsRedo);
@@ -3553,7 +3737,7 @@ namespace SIL.PublishingSolution
             SetFocusToName();
 
             //For the task TD-1481
-            cTool.BtnWeb.Enabled = false;
+            //cTool.BtnWeb.Enabled = true;
             cTool.BtnOthers.Enabled = true;
 
             _screenMode = ScreenMode.View;
@@ -3595,6 +3779,90 @@ namespace SIL.PublishingSolution
             }
             catch { }
         }
+
+        public void txtFtpFileLocation_ValidatedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                //WriteAttrib(AttrFtpAddrs, sender);
+                //EnableToolStripButtons(true);
+
+            }
+            catch { }
+        }
+
+        public void txtFtpUsername_ValidatedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                //WriteAttrib(AttrFtpUid, sender);
+                //EnableToolStripButtons(true);
+
+            }
+            catch { }
+        }
+
+        public void txtFtpPassword_ValidatedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                //WriteAttrib(AttrFtpPwd, sender);
+                //EnableToolStripButtons(true);
+
+            }
+            catch { }
+        }
+
+        public void txtSqlServerName_ValidatedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                //WriteAttrib(AttrDbSerName, sender);
+                //EnableToolStripButtons(true);
+
+            }
+            catch { }
+        }
+
+        public void txtSqlDBName_ValidatedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                //WriteAttrib(AttrDbName, sender);
+                //EnableToolStripButtons(true);
+
+            }
+            catch { }
+        }
+
+        public void txtSqlUsername_ValidatedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                //WriteAttrib(AttrDbUid, sender);
+                //EnableToolStripButtons(true);
+
+            }
+            catch { }
+        }
+
+        public void txtSqlPassword_ValidatedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                //WriteAttrib(AttrDbPwd, sender);
+                //EnableToolStripButtons(true);
+
+            }
+            catch { }
+        }
+
+
+
+
+
+
+
 
         public void HelpButton_Clicked()
         {

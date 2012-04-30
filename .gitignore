@@ -6,6 +6,7 @@
 *.cache
 *.StyleCop
 pathway/_*
+pathway/Releases
 
 pathway/ApplyXslt/bin/*
 pathway/ApplyXslt/obj/*

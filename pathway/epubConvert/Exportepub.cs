@@ -216,6 +216,7 @@ namespace SIL.PublishingSolution
                 defaultCSS = Path.GetFileName(niceNameCSS);
                 Common.SetDefaultCSS(projInfo.DefaultXhtmlFileWithPath, defaultCSS);
                 Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCSS);
+                
                 // pull in the style settings
                 LoadPropertiesFromSettings();
 
@@ -293,7 +294,7 @@ namespace SIL.PublishingSolution
                                                        "<html  xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'>",
                                                        langArray[0], Common.GetTextDirection(langArray[0])));
                     }
-
+                    //MessageBox.Show("applyxslt 1 ");
                     ApplyXslt(revFile, _addRevId);
                     // now split out the html as needed
                     List<string> fileNameWithPath = new List<string>();
@@ -302,18 +303,7 @@ namespace SIL.PublishingSolution
                 }
                 // add the total file count (so far) to the progress bar, so it's a little more accurate
                 inProcess.AddToMaximum(splitFiles.Count);
-
                 inProcess.SetStatus("Processing stylesheet information");
-
-                //if (_inputType.ToLower().Equals("dictionary"))
-                //{
-                //    ContentCssToXhtml(niceNameCSS, splitFiles, inProcess);
-                //    if (projInfo.IsReversalExist)
-                //    {
-                //        ContentCssToXhtml(Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.css"), splitFiles, inProcess);
-                //    }
-                //}
-
                 // get rid of styles that don't work with .epub
                 RemovePagedStylesFromCss(niceNameCSS);
                 // customize the CSS file based on the settings
@@ -489,6 +479,17 @@ namespace SIL.PublishingSolution
 
             AfterBeforeProcess afterBeforeProcess = new AfterBeforeProcess();
             afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
+
+            if (projInfo.IsReversalExist)
+            {
+                cssClass = cssTree.CreateCssProperty(projInfo.DefaultRevCssFileWithPath, true);
+                string originalDefaultXhtmlFileName = projInfo.DefaultXhtmlFileWithPath;
+                projInfo.DefaultXhtmlFileWithPath = Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
+                AfterBeforeProcess afterBeforeProcessReversal = new AfterBeforeProcess();
+                afterBeforeProcessReversal.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
+                Common.StreamReplaceInFile(projInfo.DefaultXhtmlFileWithPath, "&nbsp;", "&#x2007;");
+                projInfo.DefaultXhtmlFileWithPath = originalDefaultXhtmlFileName;
+            }
         }
         #endregion
 

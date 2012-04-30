@@ -762,9 +762,9 @@ namespace SIL.PublishingSolution
             if (_childName.ToLower().Contains("tableofcontents"))
             {
                 CallTOC();
-                _writer.WriteStartElement("text:p");
-                _writer.WriteAttributeString("text:style-name", "P4");
-                _writer.WriteEndElement();
+                //_writer.WriteStartElement("text:p");
+                //_writer.WriteAttributeString("text:style-name", "P4");
+                //_writer.WriteEndElement();
                 return;
             }
 
@@ -2953,7 +2953,7 @@ namespace SIL.PublishingSolution
             {
                 if ((_classNameWithLang.IndexOf("headword_") == 0 || _classNameWithLang.IndexOf("reversalform") == 0)
                     && (_previousParagraphName.IndexOf("entry_") == 0 || _previousParagraphName.IndexOf("div_pictureCaption") == 0
-                    || _previousParagraphName.IndexOf("picture") > 0))
+                    || _previousParagraphName.IndexOf("picture") >= 0))
                 {
                     fillHeadword = true;
                 }

@@ -652,7 +652,6 @@ namespace SIL.PublishingSolution
             {
                 PreExportProcess preProcessor = new PreExportProcess(projInfo);
                 //Preprocess XHTML & CSS for FrontMatter
-                //preProcessor.InsertLoFrontMatterCssFile(projInfo.DefaultCssFileWithPath);
                 preProcessor.InsertLoFrontMatterContent(projInfo.DefaultXhtmlFileWithPath);
             }
 
