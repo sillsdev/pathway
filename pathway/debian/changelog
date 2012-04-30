@@ -1,6 +1,76 @@
-pathway (1.0.6.1928-1) unstable; urgency=high
+pathway (1.1.2.2205-0) unstable; urgency=high
 
-  * 1.0.6.1928 daily build
+  * 1.1.2.2205 sprint release
+    - CSS Parser: TD-2906 pdf using prince doesn't use BeforePwConvert
+    - Common Code: Sankar TD-2897 Include 'Wycliffe Bible Translators' in SelectOrganizationDialog for Scripture (ParaTExt and TE)
+    - Common Code: TD-2646 out of memory  
+    - Common Code: TD-2841 Add Pre-process list 
+    - Common Code: TD-2868 Preprocessing Transformation check box selection
+    - Common Code: TD-2921 Fix error which Four style copies created
+    - Common Code: TD-2939 Update dates on copyrights and licenses
+    - InDesign: TD-2847  InDesign - Front Matter 
+    - InDesign: TD-2860 InDesign: Implement Image in Cover page 
+    - InDesign: TD-2877 Front matter order and page type 
+    - InDesign: TD-2891 Chapter number placed too high 
+    - InDesign: TD-2893 Section break at bottom of column
+    - InDesign: TD-2895 Title page is blank 
+    - InDesign: TD-2931 Write macro to create two sections for two Page number style 
+    - InDesign: TD-2940 InDesign: Change order of the Front Matter Elements 
+    - InDesign: TD-2941 Creation date and Modify date should be calculated
+    - InDesign: TD-2943 InDesign default export of Buang crashes 
+    - Installer: Samdoss TD-2767 Add data collection about user's installation
+    - Installer: TD-2875 Update registry when user accepts data collection  Code added to update database.
+    - Installer: TD-2875, TD-2880 record desire to help improve  and report how many megabytes will be downloaded.
+    - Installer: TD-2880 move message down below progress bar.
+    - Open Office Writer: Samdoss TD-2879 will pathway run without LibreOffice.
+    - Open Office Writer: TD-2758 Create Table in LibreOffice 
+    - Open Office Writer: TD-2806 Try / catch is used for missing images  
+    - Open Office Writer: TD-2853 Open Office - front matter - Insert Table of contents 
+    - Open Office Writer: TD-2854 Open Office - front matter - Include in Mirror page  
+    - Open Office Writer: TD-2856 Reversal different when separate and when exported with the main dictionary 
+    - Open Office Writer: TD-2858 OpenOffice: Align Cover Page Image to "Anchor to Page" 
+    - Open Office Writer: TD-2865 Crash when using Pathway from TE or Paratext 
+    - Open Office Writer: TD-2866 reversal output has doubled the phonetic brackets 
+    - Open Office Writer: TD-2872 Start Content on page 1 
+    - Open Office Writer: TD-2876 Front matter order and page type 
+    - Open Office Writer: TD-2883 Fix header when page number on outside 
+    - Open Office Writer: TD-2889 Page number bottom half missing 
+    - Open Office Writer: TD-2899 LibreOffice - Move punctuation to xhtml
+    - Open Office Writer: TD-2912 headers contain first entry on page 
+    - Open Office Writer: TD-2913 Fix Paratext export to LIbreOffice: Rectangles in place of some letters 
+    - Open Office Writer: TD-2935 Cover does not appear even though it is checked by default 
+    - Open Office Writer: TD-2936 before styles still appear in Libre Office
+    - Open Office Writer: TD-2937 Picture appears in the margin 
+    - Open Office Writer: TD-2944 Bughotu Scripture unformatted
+    - Open Office Writer: TD-2947 Root based missing headers TD-2949 headers missing from output 
+    - Open Office Writer: TD-2948 Pictures missing from output 
+    - Open Office Writer: TD-2965 Buang left guide words out of sync when pictures present 
+    - Open Office Writer: TD-662 Rudimentary table formatting 
+    - Paratext Plugin: TD-2881 Use Paratext style names
+    - Paratext Plugin: TD-2882 Get font for zxx writing system TD-2882 Get font for zxx writing system 
+    - Paratext Plugin: TD-2910 Empty Verses cause Paratext export to fail
+    - Smart Device: TD-2811 Include a set of links for Reversal Index "Contents"  
+    - Smart Device: TD-2903 Spacing problem in Root-Based view (supercedes TD-2855, TD-2779, et al.)
+    - Smart Device: TD-2914 BM2 Paratext export to Epub has validation errors and the ebook is empty.
+    - Smart Device: TD-2926 Crash (content not captured) and then error trying to export ONLY reversals index to epub (or LibreOffice)
+    - Smart Device: TD-2946 Font-face rule requires quotes around source 
+    - Smart Device: TD-2957 Gondwana epub export has formatting issues
+    - User Interface: TD-2857 Update installer to include preprocessing xslt files
+    - User Interface: TD-2861 Confusing option in Preprocessing Transformation box and how to explain it 
+    - User Interface: TD-2871 fix pre-process not applied Allow separate preprocess for dictionary and scripture.
+    - User Interface: TD-2873 Reset title when the project is changed  
+    - User Interface: TD-2874 Available option should be enabled for standard style sheets 
+    - User Interface: TD-2898 Pathway Installation Path Problem
+    - User Interface: TD-2938 Title erased unnecessarily 
+    - User Interface: Update Processing Options tab per TD-2861.
+    - Web: TD-2951 web posting user interface 
+    - Web: Version number changed for Task TD-2951
+    - XeTeX: TD-2080 Picture captions mission 
+    - XeTeX: TD-2311 .xitem[lang='en'] 
+    - XeTeX: TD-2884 XeLaTeX gives the word Content for left and right header 
+    - XeTeX: TD-2907 xelatex has formatting issues when punctuation included
+    - XeTeX: TD-2934 Xetex: Apply Roman Page Number for Front Matter, Arabic for Contant Page
+    - XeTeX: TD-2945 69 XeLaTeX unit test failures  * 1.0.6.1928 daily build
     - Libre Office: TD-2841 Add Pre-process list
     - Indesign and Xelatex: TD-2806: Try / catch is used for missing images
     - Libre Office: TD-2758: Direction code for table: Create Table

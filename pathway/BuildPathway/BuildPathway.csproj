@@ -422,6 +422,8 @@
     <!-- RemoveDir Directories="$(OutputPath)" / -->
   </Target>
   <ItemGroup>
+    <AllFiles Include="Files\**\*.*" />
+    <AllFileDirs Include="Files\**" />
     <ConfigurationTool Include="..\ConfigurationTool\$(OutputPath)\*.*" />
     <Plugin Include="..\PsExport\$(OutputPath)\*.*" />
     <GhostScript Include="..\ThirdParty\gsdll32.dll" />
