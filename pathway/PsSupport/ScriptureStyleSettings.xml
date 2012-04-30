@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="15">
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="17">
   <settings>
     <property name="InputPath" value="%(AppData)s/SIL/Pathway" />
     <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Scripture" />
@@ -19,8 +19,7 @@
     <property name="MissingIcon" value="Graphic/missing.png" />
     <property name="Help" value="PsDoc.chm" />
     <property name="PrintVia" value="OpenOffice/LibreOffice" />
-	<property name="FilterEmptyEntries" value="False" />
-    <property name="FilterBrokenLinks" value="False" />	
+	<property name="Preprocessing" value="" />
 	<property name="LayoutSelected" value="C5 Cols ApplicationStyles" />
     <property name="ExtraProcessing" value="True" />
     <property name="Media" value="mobile" />
@@ -29,6 +28,7 @@
     <property name="PrintVia" value="OpenOffice/LibreOffice" />
     <property name="LayoutSelected" value="C5 Cols ApplicationStyles" />
     <property name="ExtraProcessing" value="True" />
+    <property name="Preprocessing" value="" />		
     <property name="PublicationLocation" value="$(Documents)s/$(Base)s/$(CurrentProject)s/Scripture/$(StyleSheet)s_$(DateTime)s" />
     <property name="Media" value="paper" />
   </defaultSettings>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="15">
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="17">
   <settings>
     <property name="InputPath" value="" />
     <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Dictionary" />
@@ -21,8 +21,7 @@
     <property name="PrintVia" value="OpenOffice/LibreOffice" />
     <property name="ConfigureDictionary" value="True" />
     <property name="ReversalIndexes" value="True" />
-	<property name="FilterEmptyEntries" value="False" />
-    <property name="FilterBrokenLinks" value="False" />
+	<property name="Preprocessing" value="" />
     <property name="GrammerSketch" value="False" />
 	<property name="LayoutSelected" value="FieldWorksStyles" />
     <property name="ExtraProcessing" value="True" />
@@ -35,6 +34,7 @@
     <property name="GrammerSketch" value="False" />
     <property name="LayoutSelected" value="FieldWorksStyles" />
     <property name="ExtraProcessing" value="True" />
+        <property name="Preprocessing" value="" />		
     <property name="PublicationLocation" value="$(Documents)s/$(Base)s/$(CurrentProject)s/Dictionary/$(StyleSheet)s_$(DateTime)s" />
     <property name="Media" value="paper" />
   </defaultSettings>
@@ -324,8 +324,15 @@
       </style>
     </mobile>
     <web>
-      <style name="OneColumnWeb" file="LayoutOneCol.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg" shown="Yes">
-        <description>5.25x8.25in - 1 Col - Left aligned - Charis 11 on 15</description>
+      <style name="OneWeb" file="OneWeb.css"  shown="Yes" type="Custom">
+        <description>FTP Property Settings</description>
+		<styleProperty name="ftpaddress" value="" />
+        <styleProperty name="ftpuserid" value="" />
+        <styleProperty name="ftppwd" value="" />
+        <styleProperty name="dbservername" value="" />
+        <styleProperty name="dbname" value="" />
+        <styleProperty name="dbuserid" value="" />
+        <styleProperty name="dbpwd" value="" />
       </style>
     </web>
     <others>

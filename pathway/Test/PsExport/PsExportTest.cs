@@ -135,6 +135,28 @@ namespace Test.PsExport
             File.Copy(inFullName, outFullName, overwrite);
             return outFullName;
         }
+
+        private static string FileTestCopy(string filename)
+        {
+            var outFullName = Common.PathCombine(_outputTestPath, filename);
+            var inFullName = Common.PathCombine(_inputTestPath, filename);
+            const bool overwrite = true;
+            File.Copy(inFullName, outFullName, overwrite);
+            return outFullName;
+        }
+
+        private static string TestDataSetup(string test, string data)
+        {
+            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../PsSupport");
+            Common.SupportFolder = "";
+            Common.ProgBase = Common.ProgInstall;
+            TestPathSetup(test);
+            if (Directory.Exists(_outputTestPath))
+                Directory.Delete(_outputTestPath, true);
+            Directory.CreateDirectory(_outputTestPath);
+            var infile = FileTestCopy(data);
+            return infile;
+        }
         #endregion TestPath
 
         #region AcquireUserSettings Common
@@ -452,6 +474,43 @@ namespace Test.PsExport
             actual.Load(flexRevFullName);
             var nodes = actual.SelectNodes("//*[@class='revhomographnumber']");
             Assert.AreEqual(8, nodes.Count);
+        }
+
+        [Test]
+        public void XsltPreProcess0Test()
+        {
+            DataType = "Dictionary";
+            var infile = TestDataSetup("Pre0", "predict.xhtml");
+            Param.Value["Preprocessing"] = string.Empty;
+            XsltPreProcess(infile);
+            var files = Directory.GetFiles(_outputTestPath, "*.*");
+            Assert.AreEqual(1, files.Length);
+        }
+
+        [Test]
+        public void XsltPreProcess1Test()
+        {
+            DataType = "Dictionary";
+            const string  data = "predict.xhtml";
+            var infile = TestDataSetup("Pre1", data);
+            Param.Value["Preprocessing"] = "Filter Empty Entries";
+            XsltPreProcess(infile);
+            var files = Directory.GetFiles(_outputTestPath, "*.*");
+            Assert.AreEqual(2, files.Length);
+            XmlAssert.AreEqual(Path.Combine(_expectTestPath, data), infile, "Empty Entries Preprocess produced different results");
+        }
+
+        [Test]
+        public void XsltPreProcess2Test()
+        {
+            DataType = "Dictionary";
+            const string data = "predict.xhtml";
+            var infile = TestDataSetup("Pre2", data);
+            Param.Value["Preprocessing"] = "Filter Empty Entries,Fix Duplicate ids";
+            XsltPreProcess(infile);
+            var files = Directory.GetFiles(_outputTestPath, "*.*");
+            Assert.AreEqual(3, files.Length);
+            XmlAssert.AreEqual(Path.Combine(_expectTestPath, data), infile, "Preprocess produced different results");
         }
     }
 }

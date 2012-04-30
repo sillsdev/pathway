@@ -96,6 +96,9 @@ namespace SIL.PublishingSolution
             InDesignMap inDesignMap = new InDesignMap();
             inDesignMap.CreateIDDesignMap(projInfo.TempOutputFolder, StyleName["ColumnClass"].Count, masterPageNames, StyleName["TextVariables"], StyleName["CrossRef"], projInfo.ProjectInputType);
 
+            InMetaData inMetaData = new InMetaData();
+            inMetaData.SetDateTimeinMetaDataXML(projInfo.TempOutputFolder);
+
             InPreferences inPreferences = new InPreferences();
             inPreferences.CreateIDPreferences(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), idAllClass);
 

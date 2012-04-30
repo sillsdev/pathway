@@ -762,9 +762,9 @@ namespace SIL.PublishingSolution
             if (_childName.ToLower().Contains("tableofcontents"))
             {
                 CallTOC();
-                _writer.WriteStartElement("text:p");
-                _writer.WriteAttributeString("text:style-name", "P4");
-                _writer.WriteEndElement();
+                //_writer.WriteStartElement("text:p");
+                //_writer.WriteAttributeString("text:style-name", "P4");
+                //_writer.WriteEndElement();
                 return;
             }
 
@@ -794,7 +794,7 @@ namespace SIL.PublishingSolution
                     if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                     {
                         if (_previousParagraphName != null && _previousParagraphName.IndexOf("entry") == 0 &&
-                            _childName.IndexOf("letHead") == -1)
+                            (_childName.IndexOf("letHead") == -1 && _childName.IndexOf("pictureCaption") == -1))
                         {
                             //<text:p text:style-name="block_5f_p">
                             //    <text:soft-page-break/>
@@ -804,17 +804,20 @@ namespace SIL.PublishingSolution
                             //Insert Fixed Height Hidden Paragraph for TD-2912
                             //if (_childName.IndexOf("letHead") == -1)
                             //{
-                            _writer.WriteStartElement("text:p");
-                            _writer.WriteAttributeString("text:style-name", "block_5f_p");
-                            _writer.WriteStartElement("text:soft-page-break");
-                            _writer.WriteEndElement();
-                            _writer.WriteStartElement("text:span");
-                            _writer.WriteAttributeString("text:style-name", "headword_5f_entry_5f_letData_5f_dicBody");
+                            if (_headwordIndex < _headwordVariable.Count)
+                            {
+                                _writer.WriteStartElement("text:p");
+                                _writer.WriteAttributeString("text:style-name", "block_5f_p");
+                                _writer.WriteStartElement("text:soft-page-break");
+                                _writer.WriteEndElement();
+                                _writer.WriteStartElement("text:span");
+                                _writer.WriteAttributeString("text:style-name", "headword_5f_entry_5f_letData_5f_dicBody");
 
-                            _writer.WriteValue(_headwordVariable[_headwordIndex]); // + 1
-                            _writer.WriteEndElement();
+                                _writer.WriteValue(_headwordVariable[_headwordIndex]); // + 1
+                                _writer.WriteEndElement();
 
-                            _writer.WriteEndElement();
+                                _writer.WriteEndElement();
+                            }
                             // }
                         }
                     }
@@ -2945,8 +2948,28 @@ namespace SIL.PublishingSolution
         }
         private void WriteGuidewordValueToVariable(string content)
         {
-            if(((_classNameWithLang.IndexOf("headword_") == 0 || _classNameWithLang.IndexOf("reversalform") == 0) && (_previousParagraphName.IndexOf("entry_") == 0 || _previousParagraphName.IndexOf("div_pictureCaption") == 0)) ||
-             (_classNameWithLang.ToLower().IndexOf("chapternumber") == 0 && (_previousParagraphName.ToLower().IndexOf("paragraph") == 0)))
+            bool fillHeadword = false;
+            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+            {
+                if ((_classNameWithLang.IndexOf("headword_") == 0 || _classNameWithLang.IndexOf("reversalform") == 0)
+                    && (_previousParagraphName.IndexOf("entry_") == 0 || _previousParagraphName.IndexOf("div_pictureCaption") == 0
+                    || _previousParagraphName.IndexOf("picture") >= 0))
+                {
+                    fillHeadword = true;
+                }
+            }
+            else if (_projInfo.ProjectInputType.ToLower() == "scripture")
+            {
+                if (_classNameWithLang.ToLower().IndexOf("chapternumber") == 0 && (_previousParagraphName.ToLower().IndexOf("paragraph") == 0))
+                {
+                    fillHeadword = true;
+                }
+            }
+
+
+            //if (((_classNameWithLang.IndexOf("headword_") == 0 || _classNameWithLang.IndexOf("reversalform") == 0) && (_previousParagraphName.IndexOf("entry_") == 0 || _previousParagraphName.IndexOf("div_pictureCaption") == 0)) ||
+            // (_classNameWithLang.ToLower().IndexOf("chapternumber") == 0 && (_previousParagraphName.ToLower().IndexOf("paragraph") == 0)))
+            if(fillHeadword)
             {
                 //Insert leftGuideword for TD-2912
                 string leftHeadword = content;

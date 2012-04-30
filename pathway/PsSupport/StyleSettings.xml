@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="15">
+    xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="17">
     <settings>
         <property name="InputPath" value="%(AppData)s/SIL/Pathway"/>
         <property name="OutputPath" value="%(AppData)s/SIL/Pathway"/>
@@ -23,8 +23,7 @@
         <property name="PrintVia" value="OpenOffice/LibreOffice"/>
         <property name="ConfigureDictionary" value="True"/>
         <property name="ReversalIndexes" value="True"/>
-		<property name="FilterEmptyEntries" value="False" />
-        <property name="FilterBrokenLinks" value="False" />		
+        <property name="Preprocessing" value="" />		
         <property name="GrammerSketch" value="False"/>
         <property name="LayoutSelected" value="Draft"/>
         <property name="ExtraProcessing" value="True"/>
@@ -36,6 +35,7 @@
         <property name="GrammerSketch" value="False"/>
         <property name="LayoutSelected" value="Draft"/>
         <property name="ExtraProcessing" value="True"/>
+        <property name="Preprocessing" value="" />		
         <property name="PublicationLocation"
             value="%(Documents)s/Publications/%(CurrentProject)s/Dictionary"/>
     </defaultSettings>

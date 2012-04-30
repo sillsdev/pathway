@@ -22,6 +22,7 @@
     <style:font-face style:name="Tunga" svg:font-family="'Tunga'" style:font-pitch="variable" />
     <style:font-face style:name="Kartika" svg:font-family="'Kartika'" style:font-pitch="variable" />
     <style:font-face style:name="Mangal" svg:font-family="'Mangal'" style:font-pitch="variable" />
+    <style:font-face style:name="Khmer Busra Bunong" svg:font-family="'Khmer Busra Bunong'" style:font-pitch="variable" />
   </office:font-face-decls>
   <office:styles>
     <style:style style:name="scrBody" style:family="paragraph" style:parent-style-name="" />
@@ -417,6 +418,16 @@
         <style:header-footer-properties fo:margin-bottom="0.0pt" svg:height="14.21pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:footer-style>
     </style:page-layout>
+    <style:page-layout style:name="pm6">
+      <style:page-layout-properties fo:margin-top="72pt" fo:margin-right="72pt" fo:margin-bottom="72pt" fo:margin-left="72pt" fo:page-height="792pt" fo:page-width="612pt">
+        <style:background-image />
+        <style:footnote-sep style:width="0.0071in" style:line-style="solid" style:distance-before-sep="30%" style:distance-after-sep="30%" style:color="#000000" style:adjustment="centre" style:rel-width="100%" />
+      </style:page-layout-properties>
+      <style:header-style />
+      <style:footer-style>
+        <style:header-footer-properties fo:margin-bottom="0.0pt" fo:min-height="0.0pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
+      </style:footer-style>
+    </style:page-layout>
     <style:page-layout style:name="pm4" style:page-usage="mirrored">
       <style:page-layout-properties fo:margin-top="72pt" fo:margin-right="72pt" fo:margin-bottom="72pt" fo:margin-left="72pt" fo:page-height="792pt" fo:page-width="612pt">
         <style:background-image />
@@ -441,9 +452,42 @@
         <style:header-footer-properties fo:margin-bottom="0.0pt" fo:min-height="0.0pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:footer-style>
     </style:page-layout>
+    <style:page-layout style:name="pm12">
+      <style:page-layout-properties fo:margin-top="72pt" fo:margin-right="72pt" fo:margin-bottom="72pt" fo:margin-left="72pt" fo:page-height="792pt" fo:page-width="612pt" />
+    </style:page-layout>
+    <style:page-layout style:name="pm13">
+      <style:page-layout-properties fo:margin-top="72pt" fo:margin-right="72pt" fo:margin-bottom="72pt" fo:margin-left="72pt" fo:page-height="792pt" fo:page-width="612pt" />
+    </style:page-layout>
   </office:automatic-styles>
   <office:master-styles>
     <style:master-page style:name="Standard" style:page-layout-name="pm1" />
+    <style:master-page style:name="Cover_20_Page" style:display-name="Cover Page" style:next-style-name="First_20_Page" style:page-layout-name="pm1" />
+    <style:master-page style:name="Dummy_20_Page" style:display-name="Dummy Page" style:next-style-name="First_20_Page" style:page-layout-name="pm12" />
+    <style:master-page style:name="Title_20_Page" style:display-name="Title Page" style:next-style-name="First_20_Page" style:page-layout-name="pm6">
+      <style:footer>
+        <text:p text:style-name="Footer">
+          <text:tab />
+          <text:page-number style:num-format="i" text:select-page="current">xv</text:page-number>
+        </text:p>
+      </style:footer>
+    </style:master-page>
+    <style:master-page style:name="CopyRight_20_Page" style:display-name="CopyRight Page" style:next-style-name="First_20_Page" style:page-layout-name="pm2">
+      <style:footer>
+        <text:p text:style-name="Footer">
+          <text:tab />
+          <text:page-number style:num-format="i" text:select-page="current">xv</text:page-number>
+        </text:p>
+      </style:footer>
+    </style:master-page>
+    <style:master-page style:name="TOC_20_Page" style:display-name="TableofContents Page" style:next-style-name="First_20_Page" style:page-layout-name="pm7">
+      <style:footer>
+        <text:p text:style-name="Footer">
+          <text:tab />
+          <text:page-number style:num-format="i" text:select-page="current">xv</text:page-number>
+        </text:p>
+      </style:footer>
+    </style:master-page>
+    <style:master-page style:name="Dummy1_20_Page" style:display-name="Dummy1 Page" style:next-style-name="First_20_Page" style:page-layout-name="pm13" />
     <style:master-page style:name="First_20_Page" style:display-name="First Page" style:next-style-name="Left_20_Page" style:page-layout-name="pm3">
       <style:footer>
         <text:p text:style-name="Footer">

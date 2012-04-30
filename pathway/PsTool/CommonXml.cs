@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Xsl;
@@ -1109,6 +1110,7 @@ namespace SIL.Tool
             {
 
                 SplitXhtmlFileAdjacent(_reader, writers, bookSplitterClass, adjacentClass);
+                _reader.Close();
 
                 XmlWriter writerClose;
                 foreach (KeyValuePair<string, XmlWriter> pair in writers)

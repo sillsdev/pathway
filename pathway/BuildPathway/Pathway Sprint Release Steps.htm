@@ -17,10 +17,11 @@
 <ol>
   <li>Make sure Debug build works and tests pass</li>
   <li>Make sure CorporateBTE7 build works and install it and run through at least one test pass</li>
-  <li>Find the last sprint <a href="http://code.google.com/p/pathway/source/browse/pathway/ConfigurationTool/Properties/AssemblyInfo.cs" target="_blank">date</a></li>
-  <li>Use git gui to find this change item and then use git bash <code>git log 1e24079d0996.. >sprint.txt</code> (where 1e24079d0996 is replaced with the sha1 of the change).</li>
+  <li>Find the last sprint <a href="http://code.google.com/p/pathway/source/browse/pathway/ConfigurationTool/Properties/AssemblyInfo.cs" target="_blank">hash</a></li>
+  <li>Use git bash <code>git log 1e24079d0996.. >sprint-1.1.1.txt</code> (where 1e24079d0996 is replaced with the hash of the change and 1.1.1 is the version).</li>
   <li>Use <code>git log --until="today" |grep ^commit |wc</code> to get issues in git db and add 88 for those in btai</li>
-  <li>Drop sprint.txt onto SprintIssues.py. Then edit to create a list of issues for the post and to update the readme file.</li>
+  <li>Create the corresponding sprint-1.1.1.xml by exporting the Jira rss xml feed of issues updated since last sprint release date.</li>
+  <li>Drop sprint-1.1.1.txt onto SprintIssues.py. Then edit sprint-1.1.1.htm to create a list of issues for the post and to update the readme file.</li>
   <li>Update the BuildPathway/ReadmePw.rtf file with the new version # and list of changes</li>
   <li>Update BuildPathway/BuildPathway.csproj and BuildPathway60.csproj with new version #</li>
   <li><code>PathwaySprint.bat 1.1.1.2124</code> where 1.1.1.2124 is replaced by current version number</li>
@@ -34,8 +35,10 @@
   <li><a href="http://pathway.sil.org/wp-admin/post-new.php?post_type=post" target="_blank">Add a post</a> to pathway.sil.org web site with the list of changes and a link to the sprint build page.</li>
   <li>Mark the post of the last step category as "Release" so it is picked up by lingtransoft.info</li>
   <li>Save download statistics from <a href="http://pathway.sil.org/wp-admin/tools.php?page=simple-download-monitor.php" target="_blank">Download monitor and reset statistics</a></li>
+  <li>Update the link at the bottom of <a href="http://pathway.sil.org/download/latest-sprint-downloads/" target="_blank">the latest downloads</a> to point to the artifacts on Team city of the <a href="http://build.palaso.org/viewType.html?buildTypeId=bt84&tab=buildTypeStatusDiv" target="_blank">latest sprint</a>.</li>
   <li>Update <a href="http://lingtransoft.info" target="_blank">lingtransoft.info</a></li>
   <li>Jira update: add completed issues to sprint, move uncompleted to new sprint, mark sprint as released</li>
+  <li>Inform <a href="mailto:richard_young@wycliffe.org">Richard Young</a> (LangTran) of the new build</li>
 </ol>
 
 <p>Instead of launching the Team city build, you can also build locally and post to the pathway.sil.org web site.</p>

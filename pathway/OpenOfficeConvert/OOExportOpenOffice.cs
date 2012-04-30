@@ -652,7 +652,6 @@ namespace SIL.PublishingSolution
             {
                 PreExportProcess preProcessor = new PreExportProcess(projInfo);
                 //Preprocess XHTML & CSS for FrontMatter
-                preProcessor.InsertLoFrontMatterCssFile(projInfo.DefaultCssFileWithPath);
                 preProcessor.InsertLoFrontMatterContent(projInfo.DefaultXhtmlFileWithPath);
             }
 
@@ -752,8 +751,12 @@ namespace SIL.PublishingSolution
             //To set Constent variables for User Desire
             string fname = Common.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             string macroFileName = Common.PathCombine(projInfo.DictionaryPath, fname);
+            string isCoverImageInserted = "false";
+            if (idAllClass.ContainsKey("cover"))
+                isCoverImageInserted = "true";
+
             _refFormat = GetReferenceFormat(idAllClass, _refFormat);
-            IncludeTextinMacro(strMacroPath, _refFormat, macroFileName, projInfo.IsExtraProcessing);
+            IncludeTextinMacro(strMacroPath, _refFormat, macroFileName, projInfo.IsExtraProcessing, isCoverImageInserted);
 
             // BEGIN Generate Meta.Xml File
             var metaXML = new LOMetaXML(projInfo.ProjectInputType);
@@ -1154,7 +1157,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private static void IncludeTextinMacro(string strMacroPath, string ReferenceFormat, string saveAsPath, bool runMacroFirstTime)
+        private static void IncludeTextinMacro(string strMacroPath, string ReferenceFormat, string saveAsPath, bool runMacroFirstTime, string isCoverImageInserted)
         {
             var xmldoc = new XmlDocument { XmlResolver = null };
             xmldoc.Load(strMacroPath);
@@ -1169,6 +1172,7 @@ namespace SIL.PublishingSolution
             }
             if (ele != null)
             {
+                
                 string seperator = "\n";
                 string line1 = string.Empty;
                 if (publicationInfo.ProjectInputType.ToLower() == "scripture")
@@ -1181,7 +1185,8 @@ namespace SIL.PublishingSolution
                                "\nConst FilePath = \"" + saveAsPath + "\"" + "\nConst IsPreview = \"" +
                                publicationInfo.JpgPreview + "\"";
                 string line3 = "\nConst RunMacroFirstTime = \"" + runMacroFirstTime + "\"";
-                string combined = line1 + line2 + line3 + seperator;
+                string line4 = "\nConst IsCoverImageInserted = \"" + isCoverImageInserted + "\"";
+                string combined = line1 + line2 + line3 + line4 + seperator;
 
                 ele.InnerText = combined + ele.InnerText;
             }
