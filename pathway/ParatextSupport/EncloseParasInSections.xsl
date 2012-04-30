@@ -18,13 +18,31 @@
 	<xsl:strip-space elements="*"/>
 	
 	<!-- Create intro and Scripture structure within the book. -->
+	<!-- Determine whether paragraphs and headers are introductions from their class name. -->
+	<!-- Determine whether tables belong to the introduction or body from their relative location to paragraphs and headers. -->
 	<xsl:template match="xhtml:div[@class='scrBook']">
 		<xsl:copy>
 			<xsl:copy-of select="@*"/>
-			<xsl:copy-of select="*[not(self::xhtml:h1 or self::xhtml:p)]"/>
-			<xsl:apply-templates select="*[self::xhtml:h1 or self::xhtml:p][starts-with(@class, 'Intro_')]"/>
+			<xsl:copy-of select="*[not(self::xhtml:h1 or self::xhtml:p or self::xhtml:table)]"/>
+			
+			<!-- Take all paragraphs and headers with class names beginning with 'Intro_' and 
+				intro tables which are considered as introduction material if: 
+				* Following elements are introductory paragraphs/headings OR
+				* Preceding elements are introductory paragraphs/headings AND are none are non-introductory -->
+			<xsl:apply-templates select="*[((self::xhtml:h1 or self::xhtml:p) and starts-with(@class, 'Intro_')) or 
+				(self::xhtml:table and (following-sibling::*[self::xhtml:h1 or self::xhtml:p][starts-with(@class, 'Intro_')] or 
+				(preceding-sibling::*[self::xhtml:h1 or self::xhtml:p][starts-with(@class, 'Intro_')]) and 
+				not (preceding-sibling::*[self::xhtml:h1 or self::xhtml:p][not(starts-with(@class, 'Intro_'))])))]"/>
+			
 			<div class="columns" xmlns="http://www.w3.org/1999/xhtml">
-				<xsl:apply-templates select="*[self::xhtml:h1 or self::xhtml:p][not(starts-with(@class, 'Intro_'))]"/>
+				<!-- Inside the body division, take all paragraphs and headers with class names not beginning with 'Intro_' and
+					tables which are considered as Scripture body material if:
+					* Preceding elements are not introductory paragraphs/headings OR
+					* There are no preceding introductory paragraphs/headings AND no following are introductory paragraphs/headings -->
+				<xsl:apply-templates select="*[((self::xhtml:h1 or self::xhtml:p) and not(starts-with(@class, 'Intro_'))) or
+					(self::xhtml:table and (preceding-sibling::*[self::xhtml:h1 or self::xhtml:p][not(starts-with(@class, 'Intro_'))] or
+					(not(preceding-sibling::*[self::xhtml:h1 or self::xhtml:p][starts-with(@class, 'Intro_')]) and
+					not(following-sibling::*[self::xhtml:h1 or self::xhtml:p][starts-with(@class, 'Intro_')]))))]"/>
 			</div>
 		</xsl:copy>
 	</xsl:template>

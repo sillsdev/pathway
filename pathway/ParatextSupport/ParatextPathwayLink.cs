@@ -268,19 +268,19 @@ namespace SIL.PublishingSolution
 
 			// Step 1. Separate books into their own elements for subsequent processing.
 			StringBuilder separatedBooks = new StringBuilder();
-			XmlWriter htmlw05 = XmlWriter.Create(separatedBooks, m_usxToXhtml.OutputSettings);
-			m_separateIntoBooks.Transform(XmlReader.Create(new StringReader(usx)), null, htmlw05, null);
+			XmlWriter htmlw1 = XmlWriter.Create(separatedBooks, m_usxToXhtml.OutputSettings);
+			m_separateIntoBooks.Transform(XmlReader.Create(new StringReader(usx)), null, htmlw1, null);
 
 			// Step 2. Remove line breaks for next step (to prevent creation of empty spans).
 			StringBuilder cleanUsx = new StringBuilder();
-			XmlWriter htmlw0 = XmlWriter.Create(cleanUsx, m_cleanUsx.OutputSettings);
-			m_cleanUsx.Transform(XmlReader.Create(new StringReader(separatedBooks.ToString())), null, htmlw0, null);
+			XmlWriter htmlw2 = XmlWriter.Create(cleanUsx, m_cleanUsx.OutputSettings);
+			m_cleanUsx.Transform(XmlReader.Create(new StringReader(separatedBooks.ToString())), null, htmlw2, null);
 
 			// Step 3. Convert the SFMs to styles recognized by Pathway. Also, change the structure of the 
 			//       following elements to Pathway's format: book title, chapters, figures, footnotes.
 			StringBuilder html = new StringBuilder();
-			XmlWriter htmlw = XmlWriter.Create(html, m_usxToXhtml.OutputSettings);
-			m_usxToXhtml.Transform(XmlReader.Create(new StringReader(cleanUsx.ToString())), args, htmlw, null);
+			XmlWriter htmlw3 = XmlWriter.Create(html, m_usxToXhtml.OutputSettings);
+			m_usxToXhtml.Transform(XmlReader.Create(new StringReader(cleanUsx.ToString())), args, htmlw3, null);
 
 			XmlReaderSettings settings = new XmlReaderSettings();
 			settings.ProhibitDtd = false;
