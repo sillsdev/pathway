@@ -1,11 +1,11 @@
 prefix=/usr
-bindst=~/svn/pathway/bin
-binsrc=~/svn/pathway
+bindst=~/git/pathway/pathway/bin
+binsrc=~/git/pathway/pathway
 builddir=bin/x86/Release7BTE
-BUILD_NUMBER=1.0.6.1964
+BUILD_NUMBER=1.1.2.2205
 
 build:
-	xbuild /target:ReBuild /property:Configuration=Release7BTE\;Platform=x86\;BUILD_NUMBER=$(BUILD_NUMBER) PublishingSolution.sln
+	xbuild /target:ReBuild /property:Configuration=Release7BTE\;Platform=x86\;BUILD_NUMBER=$(BUILD_NUMBER) PathwayLinux.sln
 	rm -r -f $(bindst)
 	mkdir $(bindst)
 	mkdir $(bindst)/Copyrights
@@ -40,7 +40,6 @@ build:
 	cp $(binsrc)/PsTool/$(builddir)/* $(bindst)
 	cp $(binsrc)/WordPressConvert/$(builddir)/* $(bindst)
 	cp $(binsrc)/XeLaTexConvert/$(builddir)/* $(bindst)
-	rm $(bindst)/.svn*
 	#chmod 777 $(bindst)/*
 	#chmod 777 $(bindst)/*StyleSettings.*
 	#chmod 777 $(bindst)/Copyrights/*
@@ -74,7 +73,6 @@ install:
 	gawk 'BEGIN {print "<values><value name=\"PathwayDir\" type=\"string\">$(prefix)/lib/pathway/</value><value name=\"WritingSystemStore\" type=\"string\">~/.local/share/SIL/WritingSystemStore/</value></values>"}' >debian/pathway-etc/values.xml
 	sudo mkdir -p $(DESTDIR)/etc/pathway
 	sudo cp -r debian/pathway-etc/. $(DESTDIR)/etc/pathway
-	sudo rm -rf $(DESTDIR)/etc/pathway/.svn*
 
 binary:
 	exit 0
@@ -83,6 +81,8 @@ clean:
 	nant clean
 	sudo rm -rf $(DESTDIR)$(prefix)/lib/pathway
 	sudo rm -rf $(DESTDIR)$(prefix)/share/doc/pathway
+	sudo rm -rf $(DESTDIR)$(prefix)/share/man/man7/pathwayB.*
+	sudo rm -rf $(DESTDIR)$(prefix)/share/man/man7/ConfigurationTool.*
 	sudo rm -rf $(DESTDIR)$(prefix)/bin/pathwayB $(DESTDIR)$(prefix)/bin/ConfigurationTool
 	xdg-desktop-menu uninstall /etc/pathway/sil-ConfigurationTool.desktop
 	sudo rm -rf $(DESTDIR)/etc/pathway
