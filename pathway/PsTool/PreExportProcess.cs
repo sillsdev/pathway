@@ -721,6 +721,196 @@ namespace SIL.Tool
 
         #endregion
 
+        #region InDesign Front Matter
+        public void InsertInDesignFrontMatterContent(string inputXhtmlFilePath)
+        {
+            Param.LoadSettings();
+            string organization;
+            string frontMatterXHTMLContent = string.Empty;
+            string frontMatterCSSStyle = string.Empty;
+            try
+            {
+                organization = Param.Value.ContainsKey("Organization")
+                                   ? Param.Value["Organization"]
+                                   : "SIL International";
+            }
+            catch (Exception)
+            {
+                organization = "SIL International";
+            }
+
+            bool _coverImage = (Param.GetMetadataValue(Param.CoverPage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CoverPage, organization));
+            string _coverPageImagePath = Param.GetMetadataValue(Param.CoverPageFilename, organization);
+            bool _includeTitlePage = (Param.GetMetadataValue(Param.TitlePage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.TitlePage, organization));
+            bool _copyrightInformation = (Param.GetMetadataValue(Param.CopyrightPage, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CopyrightPage, organization));
+            string copyRightFilePath = Param.GetMetadataValue(Param.CopyrightPageFilename, organization);
+            bool _includeTitleinCoverImage = (Param.GetMetadataValue(Param.CoverPageTitle, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.CoverPageTitle, organization));
+            //bool _includeTOCPage = (Param.GetMetadataValue(Param.TableOfContents, organization) == null) ? false : Boolean.Parse(Param.GetMetadataValue(Param.TableOfContents, organization));
+            if (!File.Exists(inputXhtmlFilePath)) return;
+            const string tag = "body";
+
+            try
+            {
+                XmlDocument xmldoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
+                XmlNode coverImageNode = null;
+                XmlNode coverTitleNode = null;
+                FileStream fs = File.OpenRead(inputXhtmlFilePath);
+                xmldoc.Load(fs);
+                fs.Close();
+                XmlNodeList mainXhtmlFile = xmldoc.GetElementsByTagName(tag);
+
+
+                //XmlNode dummyNode = null;
+                //dummyNode = xmldoc.CreateElement("div");
+                XmlAttribute xmlDAttribute = xmldoc.CreateAttribute("class");
+                //xmlDAttribute.Value = "dummypage";
+                //dummyNode.Attributes.Append(xmlDAttribute);
+
+                XmlNode pNode = null;
+                pNode = xmldoc.CreateElement("div");
+                xmlDAttribute = xmldoc.CreateAttribute("class");
+                xmlDAttribute.Value = "P4";
+                pNode.Attributes.Append(xmlDAttribute);
+
+                //COVER IMAGE
+                if (_coverImage && File.Exists(_coverPageImagePath))
+                {
+                    coverImageNode = xmldoc.CreateElement("div");
+                    XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
+                    xmlAttribute.Value = "coverImage";
+                    coverImageNode.Attributes.Append(xmlAttribute);
+
+                    XmlNode newNodeImg = xmldoc.CreateElement("img");
+                    xmlAttribute = xmldoc.CreateAttribute("src");
+                    xmlAttribute.Value = _coverPageImagePath;
+                    newNodeImg.Attributes.Append(xmlAttribute);
+
+                    xmlAttribute = xmldoc.CreateAttribute("alt");
+                    xmlAttribute.Value = _coverPageImagePath;
+                    newNodeImg.Attributes.Append(xmlAttribute);
+                    coverImageNode.AppendChild(newNodeImg);
+
+                    coverTitleNode = xmldoc.CreateElement("div");
+                    xmlAttribute = xmldoc.CreateAttribute("class");
+                    xmlAttribute.Value = "cover";
+                    coverTitleNode.Attributes.Append(xmlAttribute);
+                    coverTitleNode.InnerText = " ";
+
+                    if (_includeTitleinCoverImage)
+                    {
+                        coverTitleNode.InnerText = Param.GetMetadataValue(Param.Title);
+                    }
+                }
+                //COVER TITLE
+                if (coverTitleNode != null)
+                {
+                    frontMatterXHTMLContent = coverTitleNode.OuterXml;
+                    _projInfo.IsFrontMatterEnabled = true;
+                    frontMatterCSSStyle = frontMatterCSSStyle + ".cover{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} ";
+                }
+                //END OF COVER TITLE
+                if (coverImageNode != null)
+                {
+                    //frontMatterXHTMLContent = coverImageNode.OuterXml + frontMatterXHTMLContent + dummyNode.OuterXml;
+                    frontMatterXHTMLContent = coverImageNode.OuterXml + frontMatterXHTMLContent;
+                    _projInfo.IsFrontMatterEnabled = true;
+                }
+                //END OF COVER IMAGE
+                //TITLE
+                XmlNode titleNode = null;
+                if (_includeTitlePage)
+                {
+                    titleNode = xmldoc.CreateElement("div");
+                    XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
+                    xmlAttribute.Value = "title";
+                    titleNode.Attributes.Append(xmlAttribute);
+                    titleNode.InnerText = Param.GetMetadataValue(Param.Title);
+                }
+
+                if (titleNode != null)
+                {
+                    frontMatterXHTMLContent = frontMatterXHTMLContent + titleNode.OuterXml;
+                    //if (_includeTOCPage)
+                    //{
+                    //    frontMatterXHTMLContent = frontMatterXHTMLContent + dummyNode.OuterXml;
+                    //    frontMatterXHTMLContent = frontMatterXHTMLContent + dummyNode.OuterXml;
+                    //}
+                    _projInfo.IsFrontMatterEnabled = true;
+                    frontMatterCSSStyle = frontMatterCSSStyle + ".title{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} ";
+                }
+                //END OF TITLE
+                //COPYRIGHT 
+                if (File.Exists(copyRightFilePath))
+                {
+                    XmlDocument crdoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
+                    crdoc.Load(copyRightFilePath);
+                    XmlNodeList copyRightFile = crdoc.GetElementsByTagName(tag);
+
+
+                    XmlNode copyRightContentNode = null;
+                    if (_copyrightInformation)
+                    {
+                        copyRightContentNode = xmldoc.CreateElement("div");
+                        XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
+                        xmlAttribute.Value = "copyright";
+                        copyRightContentNode.Attributes.Append(xmlAttribute);
+                        copyRightContentNode.InnerText = copyRightFile[0].InnerText.Replace("\r\n", " ").Replace("\t", "");
+                    }
+
+                    if (copyRightFile.Count > 0 && _copyrightInformation)
+                    {
+                        frontMatterXHTMLContent = frontMatterXHTMLContent + copyRightContentNode.OuterXml;
+                        _projInfo.IsFrontMatterEnabled = true;
+
+                        //frontMatterCSSStyle = frontMatterCSSStyle + ".copyright{text-align: left; font-size:12pt;page-break-after: always;.tableofcontents{text-align: left; font-size:12pt;page-break-after: always;} ";
+                        frontMatterCSSStyle = frontMatterCSSStyle + ".copyright{text-align: left; font-size:12pt;page-break-after: always;";
+                    }
+                }
+                //END OF COPYRIGHT 
+                //TABLE OF CONTENTS
+                ////XmlNode tocNode = null;
+                ////if (_includeTOCPage)
+                ////{
+                ////    tocNode = xmldoc.CreateElement("div");
+                ////    XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
+                ////    xmlAttribute.Value = "tableofcontents";
+                ////    tocNode.Attributes.Append(xmlAttribute);
+                ////    tocNode.InnerText = Param.GetMetadataValue(Param.TableOfContents);
+                ////}
+
+                ////if (tocNode != null)
+                ////{
+                ////    //mainXhtmlFile[0].InnerXml = tocNode.OuterXml + dummyNode.OuterXml + mainXhtmlFile[0].InnerXml;
+                ////    //frontMatterXHTMLContent = frontMatterXHTMLContent + tocNode.OuterXml + dummyNode.OuterXml;
+                ////    frontMatterXHTMLContent = frontMatterXHTMLContent + tocNode.OuterXml;
+                ////    _projInfo.IsFrontMatterEnabled = true;
+                ////}
+                //END OF TABLE OF CONTENTS
+
+                mainXhtmlFile[0].InnerXml = frontMatterXHTMLContent + pNode.OuterXml + mainXhtmlFile[0].InnerXml;
+
+                xmldoc.Save(inputXhtmlFilePath);
+
+                //if (frontMatterCSSStyle.Trim().Length > 0)
+                //    frontMatterCSSStyle = frontMatterCSSStyle + ".dummypage{page-break-after: always;} ";
+
+                InsertInDesignFrontMatterCssFile(_projInfo.DefaultCssFileWithPath, frontMatterCSSStyle);
+            }
+            catch
+            {
+
+            }
+        }
+
+        public void InsertInDesignFrontMatterCssFile(string inputCssFilePath, string frontMatterCSSStyle)
+        {
+            Param.LoadSettings();
+            if (!File.Exists(inputCssFilePath)) return;
+            Common.FileInsertText(inputCssFilePath, frontMatterCSSStyle);
+        }
+
+        #endregion InDesign Front Matter
+
         #region LibreOfficeFrontMatter
         public void InsertLoFrontMatterContent(string inputXhtmlFilePath)
         {

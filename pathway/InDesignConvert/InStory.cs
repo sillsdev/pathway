@@ -357,7 +357,7 @@ namespace SIL.PublishingSolution
 
         private void WriteCharacterStyle(string content, string characterStyle)
         {
-            _imageInserted = InsertImage();
+            //_imageInserted = InsertImage();
             SetHomographNumber(false);
             _writer.WriteStartElement("CharacterStyleRange");
 
@@ -1060,8 +1060,12 @@ namespace SIL.PublishingSolution
                     _columnClass.Add(_childName);
                 }
             }
-            else if (_classNameWithLang.ToLower() == "cover")
+            else if (_classNameWithLang.ToLower() == "cover" || _classNameWithLang.ToLower() == "title" || _classNameWithLang.ToLower() == "copyright")
             {
+                if (!isFileEmpty)
+                {
+                    CloseFile();
+                }
                 CreateFile();
                 _textFrameClass.Add(_childName);
                 _columnClass.Add(_childName);
@@ -1205,10 +1209,10 @@ namespace SIL.PublishingSolution
                 if (_closeChildName == _imageClass) // Without Caption
                 {
                     _allCharacter.Push(_imageClass); // temporarily storing to get width and position
-                    _imageInserted = InsertImage();
-                    _writer.WriteEndElement(); // for ParagraphStyle
-                    _writer.WriteEndElement(); // for Textframe
-                    _writer.WriteEndElement(); // for rectangle
+                    //_imageInserted = InsertImage();
+                    //_writer.WriteEndElement(); // for ParagraphStyle
+                    //_writer.WriteEndElement(); // for Textframe
+                    //_writer.WriteEndElement(); // for rectangle
                     _allCharacter.Pop();    // retrieving it again.
                     isImage = false;
                     imageClass = "";
