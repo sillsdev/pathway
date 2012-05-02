@@ -357,7 +357,7 @@ namespace SIL.PublishingSolution
 
         private void WriteCharacterStyle(string content, string characterStyle)
         {
-            //_imageInserted = InsertImage();
+            _imageInserted = InsertImage();
             SetHomographNumber(false);
             _writer.WriteStartElement("CharacterStyleRange");
 
@@ -1126,7 +1126,17 @@ namespace SIL.PublishingSolution
                 mystyle["DropCapLines"] = lines; // No of Lines.
                 if (IdAllClass[classNameWOLang].ContainsKey("PointSize"))
                 {
-                    mystyle["BaselineShift"] = IdAllClass[classNameWOLang]["PointSize"];
+                    string className = classNameWOLang + "_" + _chapterNo.Length.ToString();
+                    if (IdAllClass.ContainsKey("Paragraph") && IdAllClass["Paragraph"].ContainsKey("PointSize"))
+                    {
+                        mystyle["BaselineShift"] = IdAllClass["Paragraph"]["PointSize"];
+                    }
+                    else
+                    {
+                        mystyle["BaselineShift"] = IdAllClass[classNameWOLang]["PointSize"];
+                    }
+                    //mystyle["BaselineShift"] = IdAllClass[classNameWOLang]["PointSize"];
+                    
                 }
                 _paragraphName = classNameWOLang + _chapterNo.Length.ToString();
                 _newProperty[_paragraphName] = mystyle;
@@ -1209,10 +1219,10 @@ namespace SIL.PublishingSolution
                 if (_closeChildName == _imageClass) // Without Caption
                 {
                     _allCharacter.Push(_imageClass); // temporarily storing to get width and position
-                    //_imageInserted = InsertImage();
-                    //_writer.WriteEndElement(); // for ParagraphStyle
-                    //_writer.WriteEndElement(); // for Textframe
-                    //_writer.WriteEndElement(); // for rectangle
+                    _imageInserted = InsertImage();
+                    _writer.WriteEndElement(); // for ParagraphStyle
+                    _writer.WriteEndElement(); // for Textframe
+                    _writer.WriteEndElement(); // for rectangle
                     _allCharacter.Pop();    // retrieving it again.
                     isImage = false;
                     imageClass = "";

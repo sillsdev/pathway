@@ -975,28 +975,28 @@ namespace Test.InDesignConvert
             string styleName = "span_1";
             _expected.Add(styleName, "span Tag - Red");
             XPath = "//ParagraphStyleRange/CharacterStyleRange[1][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
-            bool result = StoryXmlNodeTest(false);
+            bool result = StoryXmlNodeTestForTag(false);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
             styleName = "span_.en_1";
             _expected.Add(styleName, " span Header with lang - Orange");
             XPath = "//ParagraphStyleRange/CharacterStyleRange[2][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
-            result = StoryXmlNodeTest(false);
+            result = StoryXmlNodeTestForTag(false);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
             styleName = "span.header_1";
             _expected.Add(styleName, " span Header - Blue");
             XPath = "//ParagraphStyleRange/CharacterStyleRange[3][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
-            result = StoryXmlNodeTest(false);
+            result = StoryXmlNodeTestForTag(false);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
             styleName = "span.header_.en_1";
             _expected.Add(styleName, " span Header with lang - Green");
             XPath = "//ParagraphStyleRange/CharacterStyleRange[4][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
-            result = StoryXmlNodeTest(false);
+            result = StoryXmlNodeTestForTag(false);
             Assert.IsTrue(result, styleName + " test Failed");
 
         }
@@ -2288,7 +2288,7 @@ namespace Test.InDesignConvert
             projInfo.DefaultXhtmlFileWithPath = _inputXHTML;
             _storyXML.CreateStory(projInfo, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
             XPath = "//ParagraphStyleRange[@AppliedParagraphStyle = \"ParagraphStyle/letter_2\"]/CharacterStyleRange";
-            string _fileNameWithPath = Common.PathCombine(_outputStory, "Story_3.xml");
+            string _fileNameWithPath = Common.PathCombine(_outputStory, "Story_4.xml");
             XmlNodeList nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, XPath);
             XmlNode node = nodesList[0];
             XmlAttributeCollection attrb = node.Attributes;
@@ -2312,7 +2312,7 @@ namespace Test.InDesignConvert
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
             _storyXML.CreateStory(projInfo, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
 
-            XmlNodeList nodesList = Common.GetXmlNodeListInDesignNamespace(Common.PathCombine(_outputStory, "Story_1.xml"), XPath);
+            XmlNodeList nodesList = Common.GetXmlNodeListInDesignNamespace(Common.PathCombine(_outputStory, "Story_2.xml"), XPath);
             XmlNode node = nodesList[0];
             Assert.IsTrue(node != null, _inputCSS + " test Failed");
         }
@@ -2353,6 +2353,24 @@ namespace Test.InDesignConvert
             }
             return result;
         }
+
+        private bool StoryXmlNodeTestForTag(bool checkAttribute)
+        {
+            //ExportProcess();
+
+            FileNameWithPath = Common.PathCombine(_outputStory, "Story_2.xml");
+            bool result;
+            if (checkAttribute)
+            {
+                result = ValidateNodeAttribute();
+            }
+            else
+            {
+                result = ValidateNodeValue();
+            }
+            return result;
+        }
+
         private void ExportProcess()
         {
             _cssProperty.Clear(); 
