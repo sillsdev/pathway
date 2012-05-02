@@ -40,7 +40,7 @@ namespace SIL.Tool
             {
                 _hostProgram = HostProgram.FieldWorks;
             }
-            else if (executablePath.Contains("Paratext 7"))
+            else if (executablePath.Contains("Paratext"))
             {
                 _hostProgram = HostProgram.Paratext;
             }

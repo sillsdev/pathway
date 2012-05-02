@@ -211,13 +211,17 @@
     <Compile Include="StyToCSS.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="EncloseParasInSections.xsl" />
+    <EmbeddedResource Include="EncloseParasInSections.xsl">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="XML_without_line_breaks.xsl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="UsfxToXhtml.xsl" />
+    <EmbeddedResource Include="UsfxToXhtml.xsl">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CssDialog\CssDialog.csproj">

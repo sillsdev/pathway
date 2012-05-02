@@ -10,7 +10,7 @@
     
     <xsl:template match = "usfm|usx">
         <xsl:copy>
-            <xsl:apply-templates select = "@*|node()"/>
+            <xsl:apply-templates select = "*|node()"/>
         </xsl:copy>
     </xsl:template>
     

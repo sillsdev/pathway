@@ -459,6 +459,54 @@
 		</xsl:choose>
 	</xsl:template>
 
+	<!-- Convert USX tables to XHTML format -->
+	<xsl:template match="table">
+		<xsl:choose>
+			<xsl:when test="@style">
+				<table style="{@style}" xmlns="http://www.w3.org/1999/xhtml">				
+					<xsl:apply-templates/>
+				</table>
+			</xsl:when>
+			<xsl:otherwise>
+				<table xmlns="http://www.w3.org/1999/xhtml">
+					<xsl:apply-templates/>
+				</table>
+			</xsl:otherwise>
+		</xsl:choose>
+		
+	</xsl:template>
+	
+	<xsl:template match="row">
+		<tr style="{@style}" xmlns="http://www.w3.org/1999/xhtml">
+			<xsl:apply-templates/>
+		</tr>
+	</xsl:template>
+	
+	<xsl:template match="cell">
+		<xsl:choose>
+			<xsl:when test="@style = 'th1' or @style = 'th2' or @style = 'th3' or @style = 'th4' or @style = 'th5'">
+				<th style="{@style}" xmlns="http://www.w3.org/1999/xhtml">
+					<xsl:apply-templates/>
+				</th>
+			</xsl:when>
+			<xsl:when test="@style = 'thr1' or @style = 'thr2' or @style = 'thr3' or @style = 'thr4' or @style = 'thr5'">
+				<th style="{@style}" align="right" xmlns="http://www.w3.org/1999/xhtml">
+					<xsl:apply-templates/>
+				</th>
+			</xsl:when>
+			<xsl:when test="@style = 'tc1' or @style = 'tc2' or @style = 'tc3' or @style = 'tc4' or @style = 'tc5'">
+				<td style="{@style}" xmlns="http://www.w3.org/1999/xhtml">
+					<xsl:apply-templates/>
+				</td>
+			</xsl:when>
+			<xsl:when test="@style = 'tcr1' or @style = 'tcr2' or @style = 'tcr3' or @style = 'tcr4' or @style = 'tcr5'">
+				<td style="{@style}" align="right" xmlns="http://www.w3.org/1999/xhtml">
+					<xsl:apply-templates/>
+				</td>
+			</xsl:when>
+		</xsl:choose>
+	</xsl:template>
+	
 	<!-- Handle figure element -->
 	<xsl:template match="figure">
 		<xsl:variable name="bookCode">
@@ -517,6 +565,11 @@
 		</span>
 	</xsl:template>
 
+	<!-- Handle optional break  -->
+	<xsl:template match="optbreak">
+		<xsl:text>&#8204;</xsl:text>
+	</xsl:template>
+	
 	<!-- Enclose text that can occur under <body> that is not yet within a writing system. -->
 	<xsl:template match="usfm/text()|usx/text()">
 		<span lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
@@ -728,6 +781,7 @@
 	<!-- Remove chapter numbers from the top level. -->
 	<xsl:template match="chapter"/>
 	
+	<!-- Handle verses within paragraphs -->
 	<xsl:template match="verse">
 		<span class="Verse_Number" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
 			<xsl:value-of select="@number"/>
