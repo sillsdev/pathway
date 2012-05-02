@@ -695,9 +695,10 @@ namespace SIL.PublishingSolution
                 return;
             }
 
+            bool whiteSpaceExist = _significant;
             string data = SignificantSpace(_reader.Value);
             //_writer.WriteString(data);
-            if (!_significant && !_pseudoSingleSpace)
+            if (!whiteSpaceExist && !_pseudoSingleSpace)
             {
                 _writer.WriteStartElement("text:s");
                 _writer.WriteAttributeString("text:c", "1");
@@ -709,9 +710,10 @@ namespace SIL.PublishingSolution
 
         private void InsertWhiteSpace()
         {
+            bool whiteSpaceExist = _significant;
             string data = SignificantSpace(_reader.Value);
             //_writer.WriteString(data);
-            if (!_significant && !_pseudoSingleSpace)
+            if (!whiteSpaceExist && !_pseudoSingleSpace)
             {
                 _writer.WriteStartElement("text:s");
                 _writer.WriteAttributeString("text:c", "1");

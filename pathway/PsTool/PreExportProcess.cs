@@ -1133,13 +1133,15 @@ namespace SIL.Tool
         /// </summary>
         public void ReplaceSlashToREVERSE_SOLIDUS()
         {
-            string searchText = "class=\"\\\\";
-            string replaceText = "class=\"REVERSESOLIDUS";
-            Common.StreamReplaceInFile(_xhtmlFileNameWithPath, searchText, replaceText);
+            return; 
+            
+            //string searchText = "class=\"\\\\";
+            //string replaceText = "class=\"REVERSESOLIDUS";
+            //Common.StreamReplaceInFile(_xhtmlFileNameWithPath, searchText, replaceText);
 
-            searchText = "class=\"([\\\\]*\\w+)[*]";
-            replaceText = "class = \"$1ASTERISK";
-            Common.ReplaceInCssFile(_xhtmlFileNameWithPath, searchText, replaceText);
+            //searchText = "class=\"([\\\\]*\\w+)[*]";
+            //replaceText = "class = \"$1ASTERISK";
+            //Common.ReplaceInCssFile(_xhtmlFileNameWithPath, searchText, replaceText);
         }
 
         /// <summary>
@@ -1240,7 +1242,8 @@ namespace SIL.Tool
 
             // Removal of html tag namespace and other formats.
             //Common.ReplaceInCssFile(tempFile, @"<html\b[^>]*>", "<html>");
-            Common.ReplaceInXhtmlFile(tempFile);
+
+            //Common.ReplaceInXhtmlFile(tempFile);
             if (!File.Exists(tempFile)) return string.Empty;
             var xmldoc = new XmlDocument();
             // xml image copy
@@ -1552,7 +1555,7 @@ namespace SIL.Tool
         /// <summary>
         /// Modify <body> tag as <body xml:space="preserve">
         /// </summary>
-        public string PreserveSpace()
+        public string RewriteXhtml()
         {
             XmlTextReader reader = new XmlTextReader(_xhtmlFileNameWithPath)
             {
@@ -1651,9 +1654,10 @@ namespace SIL.Tool
 
 
         /// <summary>
-        /// Modify <body> tag as <body xml:space="preserve">
+        /// 1. Modify <html  xmlns="http://www.w3.org/1999/xhtml"> tag as <html>
+        /// 2. Modify <body> tag as <body xml:space="preserve">
         /// </summary>
-        public string PreserveSpace_old()
+        public string PreserveSpace()
         {
             FileStream fs = new FileStream(_xhtmlFileNameWithPath, FileMode.Open);
             StreamReader stream = new StreamReader(fs);
@@ -1671,7 +1675,12 @@ namespace SIL.Tool
             {
                 if (replace)
                 {
-                    if (line.IndexOf("<body") >= 0)
+                    if (line.IndexOf("<html") >= 0)
+                    {
+                        int pos = line.IndexOf(">");
+                        line = "<html" + line.Substring(pos);
+                    }
+                    else if (line.IndexOf("<body") >= 0)
                     {
                         //line = line.Replace(">", @" xml:space=""preserve"">");
                         line = line.Replace("<body", @" <body xml:space=""preserve""  ");
