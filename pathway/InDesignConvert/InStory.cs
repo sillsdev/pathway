@@ -1060,8 +1060,12 @@ namespace SIL.PublishingSolution
                     _columnClass.Add(_childName);
                 }
             }
-            else if (_classNameWithLang.ToLower() == "cover")
+            else if (_classNameWithLang.ToLower() == "cover" || _classNameWithLang.ToLower() == "title" || _classNameWithLang.ToLower() == "copyright")
             {
+                if (!isFileEmpty)
+                {
+                    CloseFile();
+                }
                 CreateFile();
                 _textFrameClass.Add(_childName);
                 _columnClass.Add(_childName);
@@ -1122,7 +1126,17 @@ namespace SIL.PublishingSolution
                 mystyle["DropCapLines"] = lines; // No of Lines.
                 if (IdAllClass[classNameWOLang].ContainsKey("PointSize"))
                 {
-                    mystyle["BaselineShift"] = IdAllClass[classNameWOLang]["PointSize"];
+                    string className = classNameWOLang + "_" + _chapterNo.Length.ToString();
+                    if (IdAllClass.ContainsKey("Paragraph") && IdAllClass["Paragraph"].ContainsKey("PointSize"))
+                    {
+                        mystyle["BaselineShift"] = IdAllClass["Paragraph"]["PointSize"];
+                    }
+                    else
+                    {
+                        mystyle["BaselineShift"] = IdAllClass[classNameWOLang]["PointSize"];
+                    }
+                    //mystyle["BaselineShift"] = IdAllClass[classNameWOLang]["PointSize"];
+                    
                 }
                 _paragraphName = classNameWOLang + _chapterNo.Length.ToString();
                 _newProperty[_paragraphName] = mystyle;
