@@ -1,64 +1,25 @@
+ifndef prefix
 prefix=/usr
-bindst=~/git/pathway/pathway/bin
+endif
+ifndef binsrc
 binsrc=~/git/pathway/pathway
-builddir=bin/x86/Release7BTE
+endif
+ifndef bindst
+bindst=$(binsrc)/bin
+endif
+ifndef target
+target=Release7BTE
+endif
+ifndef BUILD_NUMBER
 BUILD_NUMBER=1.1.2.2205
+endif
 
 build:
-	xbuild /target:ReBuild /property:Configuration=Release7BTE\;Platform=x86\;BUILD_NUMBER=$(BUILD_NUMBER) PathwayLinux.sln
+	#xbuild /target:ReBuild /property:Configuration=$(target)\;Platform=x86\;BUILD_NUMBER=$(BUILD_NUMBER)\;OS=Linux PublishingSolution.sln
+	xbuild /target:$(target) /property:BUILD_NUMBER=$(BUILD_NUMBER)\;OS=Linux BuildPathwaySprint.csproj
 	rm -r -f $(bindst)
 	mkdir $(bindst)
-	mkdir $(bindst)/Copyrights
-	mkdir $(bindst)/epub
-	mkdir -p $(bindst)/epubcheck-1.2/lib
-	mkdir $(bindst)/GoBible
-	mkdir $(bindst)/Graphic
-	mkdir $(bindst)/Help
-	mkdir $(bindst)/Hypenation_Languages
-	mkdir $(bindst)/Icons
-	mkdir $(bindst)/InDesignFiles
-	mkdir $(bindst)/LiftSupport
-	mkdir $(bindst)/Loc
-	mkdir $(bindst)/OfficeFiles
-	mkdir $(bindst)/Samples
-	mkdir $(bindst)/Styles
-	cp -r $(binsrc)/ConfigurationTool/$(builddir)/* $(bindst)
-	cp $(binsrc)/CssDialog/$(builddir)/* $(bindst)
-	cp $(binsrc)/CssParser/$(builddir)/* $(bindst)
-	cp $(binsrc)/epubConvert/$(builddir)/* $(bindst)
-	cp $(binsrc)/epubValidator/$(builddir)/* $(bindst)
-	cp -r $(binsrc)/ThirdParty/epubcheck-1.2/* $(bindst)
-	cp $(binsrc)/GoBibleConvert/$(builddir)/* $(bindst)
-	cp $(binsrc)/InDesignConvert/$(builddir)/* $(bindst)
-	cp $(binsrc)/LiftPrepare/$(builddir)/* $(bindst)
-	cp $(binsrc)/LogosConvert/$(builddir)/* $(bindst)
-	cp $(binsrc)/OpenOfficeConvert/$(builddir)/* $(bindst)
-	cp $(binsrc)/ParatextSupport/$(builddir)/* $(bindst)
-	cp $(binsrc)/PathwayB/$(builddir)/* $(bindst)
-	cp $(binsrc)/PsExport/$(builddir)/* $(bindst)
-	cp -r $(binsrc)/PsSupport/* $(bindst)
-	cp $(binsrc)/PsTool/$(builddir)/* $(bindst)
-	cp $(binsrc)/WordPressConvert/$(builddir)/* $(bindst)
-	cp $(binsrc)/XeLaTexConvert/$(builddir)/* $(bindst)
-	#chmod 777 $(bindst)/*
-	#chmod 777 $(bindst)/*StyleSettings.*
-	#chmod 777 $(bindst)/Copyrights/*
-	#chmod -R 777 $(bindst)/epub/*
-	#chmod -R 777 $(bindst)/epubcheck-1.2/*
-	#chmod 777 $(bindst)/GoBible/*
-	#chmod 777 $(bindst)/GoBible/GoBibleCore/*
-	#chmod 777 $(bindst)/Graphic/*
-	#chmod 777 $(bindst)/Icons/*
-	#chmod 777 $(bindst)/Samples/*
-	#chmod 777 $(bindst)/Samples/Dictionary/*
-	#chmod 777 $(bindst)/Samples/Scripture/*
-	#chmod 777 $(bindst)/Styles/*
-	#chmod 777 $(bindst)/Styles/Dictionary/*
-	#chmod 777 $(bindst)/Styles/Scripture/*
-	#chmod 777 $(bindst)/Template/*
-	#chmod 777 $(bindst)/Template/Dictionary/*
-	#chmod 777 $(bindst)/Template/Scripture/*
-
+	cp -r $(binsrc)/BuildPathway/Files/ConfigurationTool/* $(bindst)
 
 install:
 	sudo mkdir -p $(DESTDIR)$(prefix)/lib/pathway
@@ -90,9 +51,9 @@ clean:
 	rm -rf debian/pathway-etc/values.xml
 
 clean-build:
-	sudo rm -rf debian/pathway
-	rm -f debian/*.log *.log debian/*.debhelper debian/*.substvars
-	rm -f ../*.dsc ../pathway_*.tar.gz ../pathway_*.build
+	sudo rm -rf debian/pathway bin
+	rm -f debian/*.log *.log debian/*.debhelper debian/*.substvars debian/files
+	rm -f ../*.dsc ../pathway_*.tar.gz ../pathway_*.build ../pathway_*.diff.gz
 	rm -f ../*.changes ../pathway*.deb
 
 

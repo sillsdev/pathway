@@ -7,6 +7,7 @@
   <UsingTask TaskName="MSBuild.ExtensionPack.Compression.Zip" AssemblyFile="BuildPathway/MSBuild.ExtensionPack.dll" />
   <UsingTask TaskName="MSBuild.ExtensionPack.Web.WebClient" AssemblyFile="BuildPathway/MSBuild.ExtensionPack.dll" />
   <UsingTask TaskName="MSBuild.ExtensionPack.Framework.TextString" AssemblyFile="BuildPathway/MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.Folder" AssemblyFile="MSBuild.ExtensionPack.dll" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -240,7 +241,7 @@
   <Target Name="BeforeBuild"/>
   <Target Name="AfterBuild"/>
   <Target Name="Clean">
-    <RemoveDir Directories="Sprint"/>
+    <CallTarget Targets="RemoveSprint"/>
     <Delete Files="@(Binaries"/>
     <Delete Files="@(Objects)"/>
     <Delete Files="@(StagedFiles)"/>
@@ -263,6 +264,10 @@
     <TestOutput Include="**\TestFiles\output\**"/>
     <Installer Include=".\BuildPathway\Wix\*.msi"/>
   </ItemGroup>
+  <Target Name="RemoveSprint">
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="Sprint" Condition="Exists(Sprint)"/>
+    <RemoveDir Directories="Sprint" Condition="Exists(Sprint)"/>
+  </Target>
   <Target Name="Corporate7BTE">
     <Message Text="Status: $(Status)" Importance="high" />
     <MSBuild Projects="PublishingSolution.sln" Targets="Build"

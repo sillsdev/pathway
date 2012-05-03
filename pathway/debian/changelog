@@ -1,4 +1,4 @@
-pathway (1.1.2.2205-0) unstable; urgency=high
+pathway (1.1.2.2205-1) unstable; urgency=high
 
   * 1.1.2.2205 sprint release
     - CSS Parser: TD-2906 pdf using prince doesn't use BeforePwConvert

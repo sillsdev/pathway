@@ -4,6 +4,9 @@
   <UsingTask TaskName="UpdateVersion" AssemblyFile="BuildTasks.dll" />
   <UsingTask TaskName="ZeroCheck" AssemblyFile="BuildTasks.dll" />
   <UsingTask TaskName="FileComponents" AssemblyFile="BuildTasks.dll" />
+  <!-- Extension pack from http://msbuildextensionpack.codeplex.com/ -->
+  <!-- Documentation at: http://www.msbuildextensionpack.com/help/4.0.3.0/index.html (also in extension pack) -->
+  <UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.Folder" AssemblyFile="MSBuild.ExtensionPack.dll" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -354,6 +357,9 @@
     <CallTarget Targets="XeLaTeXBeforeBuild" Condition=" '$(ConfTag)' == 'XeLaTeX' " />
     <CallTarget Targets="YouVersionBeforeBuild" Condition=" '$(ConfTag)' == 'YouVersion' " />
     <Message Text="BUILD_NUMBER: $(BUILD_NUMBER)" Importance="high" />
+    <CallTarget Targets="Wix" Condition="$(OS) != 'Linux'"/>
+  </Target>
+  <Target Name="Wix">
     <RemoveDir Directories="Wix" />
     <UpdateVersion Product="$(ProductName) " Version="1.1.2" BuildVersion="$(BUILD_NUMBER)" HelpFile="Pathway_Configuration_Tool_$(Edition).chm" Template="$(ProjectDir)Install$(ConfTag)$(Edition)-tpl.wxs" />
     <UpdateReadme Readme="$(ProjectDir)ReadMePw.rtf" License="$(ProjectDir)License.rtf" Template="$(ProjectDir)UserInterface-tpl.wxs" />
@@ -416,10 +422,10 @@
   <Target Name="AfterBuild">
   </Target>
   <Target Name="Clean">
-    <Delete Files="@(AllFiles)" />
+    <!-- Delete Files="@(AllFiles)" / -->
     <!-- RemoveDir Directories="@(AllFileDirs)"/ -->
-    <RemoveDir Directories="Files" />
-    <!-- RemoveDir Directories="$(OutputPath)" / -->
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="Files" Condition="Exists(Files)"/>
+    <RemoveDir Directories="Files" Condition="Exists(Files)"/>
   </Target>
   <ItemGroup>
     <AllFiles Include="Files\**\*.*" />
