@@ -303,6 +303,7 @@
     <Compile Include="XHTMLProcess.cs" />
     <Compile Include="YouVersionInstallation.cs" />
     <Compile Include="ZipFolder.cs" />
+    <Compile Include="ZipUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Localization\Localizer.resx">

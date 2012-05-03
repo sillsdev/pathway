@@ -77,6 +77,9 @@ namespace SIL.PublishingSolution
                     if (dialogResult == DialogResult.Yes)
                         SubProcess.Run(processFolder, @"""WordPress site setup.txt""");
                 }
+
+                WebonaryFileTransfer webonaryFtp = new WebonaryFileTransfer();
+                webonaryFtp.ShowDialog();
             }
             catch (Exception)
             {
