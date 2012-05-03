@@ -74,14 +74,7 @@ namespace SIL.Tool
             _cssFileNameWithPath = projInfo.DefaultCssFileWithPath;
             _xhtmlRevFileNameWithPath = string.Empty;
             _projInfo = projInfo;
-
-            //string executablePath = Path.GetDirectoryName(Application.ExecutablePath);
-            //bool isFromExe = executablePath.ToLower().Contains("fieldworks 7") || executablePath.ToLower().Contains("paratext 7") || executablePath.ToLower().Contains("testbed");
-
-            //if (Param.Value.Count > 0 && isFromExe)
-            //    _projInfo.ProjectInputType = Param.Value[Param.InputType];
-
-            if (Param.Value.Count > 0 && _projInfo.ProjectInputType.Trim().Length == 0)
+            if (Param.Value.Count > 0)
                 _projInfo.ProjectInputType = Param.Value[Param.InputType];
 
             // EDB 11/29/2011: removed method to fix invalid xhtml:
@@ -2716,42 +2709,6 @@ namespace SIL.Tool
             }
             return lastLetterString;
         }
-
-        public List<string> GetImageList()
-        {
-            List<string> imageList = null;
-            if (!File.Exists(_projInfo.DefaultXhtmlFileWithPath)) return imageList;
-            var xmldoc = new XmlDocument();
-            try
-            {
-                xmldoc = new XmlDocument {XmlResolver = null, PreserveWhitespace = true};
-                xmldoc.Load(_projInfo.DefaultXhtmlFileWithPath);
-
-                const string tag = "img";
-                XmlNodeList nodeList = xmldoc.GetElementsByTagName(tag);
-                if (nodeList.Count > 0)
-                {
-                    foreach (XmlNode item in nodeList)
-                    {
-                        if (item.Attributes != null)
-                        {
-                            var name = item.Attributes.GetNamedItem("src");
-                            if (name != null && name.Value.Length > 0)
-                            {
-                                imageList.Add(name.Value);
-                            }
-                        }
-                    }
-                }
-
-            }
-            catch
-            {
-                
-            }
-            return imageList;
-        }
-
 
 
         #endregion
