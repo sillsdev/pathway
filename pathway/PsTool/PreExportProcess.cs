@@ -75,10 +75,13 @@ namespace SIL.Tool
             _xhtmlRevFileNameWithPath = string.Empty;
             _projInfo = projInfo;
 
-            string executablePath = Path.GetDirectoryName(Application.ExecutablePath);
-            bool isFromExe = executablePath.ToLower().Contains("fieldworks 7") || executablePath.ToLower().Contains("paratext 7") || executablePath.ToLower().Contains("testbed");
+            //string executablePath = Path.GetDirectoryName(Application.ExecutablePath);
+            //bool isFromExe = executablePath.ToLower().Contains("fieldworks 7") || executablePath.ToLower().Contains("paratext 7") || executablePath.ToLower().Contains("testbed");
 
-            if (Param.Value.Count > 0 && isFromExe)
+            //if (Param.Value.Count > 0 && isFromExe)
+            //    _projInfo.ProjectInputType = Param.Value[Param.InputType];
+
+            if (Param.Value.Count > 0 && _projInfo.ProjectInputType.Trim().Length == 0)
                 _projInfo.ProjectInputType = Param.Value[Param.InputType];
 
             // EDB 11/29/2011: removed method to fix invalid xhtml:
