@@ -74,7 +74,11 @@ namespace SIL.Tool
             _cssFileNameWithPath = projInfo.DefaultCssFileWithPath;
             _xhtmlRevFileNameWithPath = string.Empty;
             _projInfo = projInfo;
-            if (Param.Value.Count > 0)
+
+            string executablePath = Path.GetDirectoryName(Application.ExecutablePath);
+            bool isFromNUnit = executablePath.Contains("ReSharper") || executablePath.Contains("NUnit");
+
+            if (Param.Value.Count > 0 && !isFromNUnit)
                 _projInfo.ProjectInputType = Param.Value[Param.InputType];
 
             // EDB 11/29/2011: removed method to fix invalid xhtml:
