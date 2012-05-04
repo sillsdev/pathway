@@ -7,7 +7,7 @@
   <UsingTask TaskName="MSBuild.ExtensionPack.Compression.Zip" AssemblyFile="BuildPathway/MSBuild.ExtensionPack.dll" />
   <UsingTask TaskName="MSBuild.ExtensionPack.Web.WebClient" AssemblyFile="BuildPathway/MSBuild.ExtensionPack.dll" />
   <UsingTask TaskName="MSBuild.ExtensionPack.Framework.TextString" AssemblyFile="BuildPathway/MSBuild.ExtensionPack.dll" />
-  <UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.Folder" AssemblyFile="MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.Folder" AssemblyFile="BuildPathway/MSBuild.ExtensionPack.dll" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -242,31 +242,49 @@
   <Target Name="AfterBuild"/>
   <Target Name="Clean">
     <CallTarget Targets="RemoveSprint"/>
-    <Delete Files="@(Binaries"/>
-    <Delete Files="@(Objects)"/>
-    <Delete Files="@(StagedFiles)"/>
-    <Delete Files="@(MyInstaller)"/>
-    <Delete Files="@(wpBinaries)"/>
-    <Delete Files="@(wpDist)"/>
-    <Delete Files="@(TxExBinaries)"/>
-    <Delete Files="@(TxExDist)"/>
-    <Delete Files="@(TestOutput)"/>
+    <!-- See: http://en.csharp-online.net/MSBuild:_By_Example%E2%80%94Understanding_the_Difference_between_@_and_%25 and http://en.csharp-online.net/MSBuild:_By_Example%E2%80%94Introducing_Well-Known_Metadata -->
+    <!-- See also: http://stackoverflow.com/questions/1502410/msbuild-passing-parameters-to-calltarget -->
+    <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="folder=%(PathwayProjects.Identity)" Targets="RemoveBinaries" />
+    <CallTarget Targets="RemoveBuild"/>
+    <CallTarget Targets="RemovePythonBinaries"/>
+    <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="folder=%(PathwayTests.Identity)" Targets="RemoveTestResults" />
   </Target>
   <ItemGroup>
-    <Binaries Include="*\bin\**"/>
-    <Objects Include="*\obj\**"/>
-    <StagedFiles Include="BuildPathway\Files\**"/>
-    <MyInstaller Include="BuildPathway\Wix\**"/>
-    <wpBinaries Include="WordPressConvert\build\**"/>
-    <wpDist Include="WordPressConvert\dist\**"/>
-    <TxExBinaries Include="PwTxEx\build\**"/>
-    <TxExDist Include="PwTxEx\dist\**"/>
     <TestOutput Include="**\TestFiles\output\**"/>
-    <Installer Include=".\BuildPathway\Wix\*.msi"/>
+    <PathwayProjects Include="ApplyXslt;BookletBuilder;BuildPathway;BuildTasks;ConfigurationTool;CssDialog;CssParser;epubConvert;epubValidator;GoBibleConvert;InDesignConvert;LiftPrepare;LogosConvert;OpenOfficeConvert;OpenOfficeConvert_OLD;ParatextSupport;PathwayB;PdfConvert;PsExport;PsTool;PublishingSolutionExe;TestBed;Test;WordPressConvert;XeLaTexConvert;YouVersionConvert" />
+    <PathwayTests Include="ApplyXslt;Build;ConfigurationTool;CssDialog;CssParser;epubConvert;GoBibleConvert;InDesignConvert;LiftPrepare;LogosConvert;OpenOfficeConvert;OpenOfficeConvert_OLD;PathwayB;PsExport;PsTool;PublishingSolutionExeUi;WordPressConvert;XeLatex;XhtmlExport"/>
   </ItemGroup>
   <Target Name="RemoveSprint">
     <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="Sprint" Condition="Exists(Sprint)"/>
     <RemoveDir Directories="Sprint" Condition="Exists(Sprint)"/>
+  </Target>
+  <Target Name="RemoveFolder">
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="$(folder)" Condition="Exists($(folder))"/>
+    <RemoveDir Directories="$(folder)" Condition="Exists($(folder))"/>
+  </Target>
+  <Target Name="RemoveBinaries">
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="$(folder)\bin" Condition="Exists('$(folder)\bin')"/>
+    <RemoveDir Directories="$(folder)\bin" Condition="Exists('$(folder)\bin')"/>
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="$(folder)\obj" Condition="Exists('$(folder)\obj')"/>
+    <RemoveDir Directories="$(folder)\obj" Condition="Exists('$(folder)\obj')"/>
+  </Target>
+  <Target Name="RemoveBuild">
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="BuildPathway\Files" Condition="Exists('BuildPathway\Files')"/>
+    <RemoveDir Directories="BuildPathway\Files" Condition="Exists('BuildPathway\Files')"/>
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="$BuildPathway\Wix" Condition="Exists('BuildPathway\Wix')"/>
+    <RemoveDir Directories="BuildPathway\Wix" Condition="Exists('BuildPathway\Wix')"/>
+  </Target>
+  <Target Name="RemovePythonBinaries">
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="WordPressConvert\build" Condition="Exists('WordPressConvert\build')"/>
+    <RemoveDir Directories="WordPressConvert\build" Condition="Exists('WordPressConvert\build')"/>
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="WordPressConvert\dist" Condition="Exists('WordPressConvert\dist')"/>
+    <RemoveDir Directories="WordPressConvert\dist" Condition="Exists('WordPressConvert\dist')"/>
+  </Target>
+  <Target Name="RemoveTestResults">
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="Test\$(folder)\TestFiles\output" Condition="Exists('Test\$(folder)\TestFiles\output')"/>
+    <RemoveDir Directories="Test\$(folder)\TestFiles\output" Condition="Exists('Test\$(folder)\TestFiles\output')"/>
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="Test\$(folder)\TestFiles\Output" Condition="Exists('Test\$(folder)\TestFiles\Output')"/>
+    <RemoveDir Directories="Test\$(folder)\TestFiles\Output" Condition="Exists('Test\$(folder)\TestFiles\Ooutput')"/>
   </Target>
   <Target Name="Corporate7BTE">
     <Message Text="Status: $(Status)" Importance="high" />

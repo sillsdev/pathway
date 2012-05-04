@@ -39,7 +39,7 @@ binary:
 	exit 0
 
 clean:
-	nant clean
+	xbuild /target:Clean BuildPathwaySprint.csproj
 	sudo rm -rf $(DESTDIR)$(prefix)/lib/pathway
 	sudo rm -rf $(DESTDIR)$(prefix)/share/doc/pathway
 	sudo rm -rf $(DESTDIR)$(prefix)/share/man/man7/pathwayB.*
