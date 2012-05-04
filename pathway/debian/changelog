@@ -2,10 +2,10 @@ pathway (1.1.2.2205-1) unstable; urgency=high
 
   * 1.1.2.2205 sprint release
     - CSS Parser: TD-2906 pdf using prince doesn't use BeforePwConvert
-    - Common Code: Sankar TD-2897 Include 'Wycliffe Bible Translators' in SelectOrganizationDialog for Scripture (ParaTExt and TE)
+    - Common Code: TD-2897 Include Wycliffe Bible Translators
     - Common Code: TD-2646 out of memory  
     - Common Code: TD-2841 Add Pre-process list 
-    - Common Code: TD-2868 Preprocessing Transformation check box selection
+    - Common Code: TD-2868 Preprocessing Transformation check box
     - Common Code: TD-2921 Fix error which Four style copies created
     - Common Code: TD-2939 Update dates on copyrights and licenses
     - InDesign: TD-2847  InDesign - Front Matter 
@@ -14,52 +14,52 @@ pathway (1.1.2.2205-1) unstable; urgency=high
     - InDesign: TD-2891 Chapter number placed too high 
     - InDesign: TD-2893 Section break at bottom of column
     - InDesign: TD-2895 Title page is blank 
-    - InDesign: TD-2931 Write macro to create two sections for two Page number style 
-    - InDesign: TD-2940 InDesign: Change order of the Front Matter Elements 
+    - InDesign: TD-2931 macro for two sections for two Page number style 
+    - InDesign: TD-2940 InDesign: Change order of the Front Matter
     - InDesign: TD-2941 Creation date and Modify date should be calculated
     - InDesign: TD-2943 InDesign default export of Buang crashes 
-    - Installer: Samdoss TD-2767 Add data collection about user's installation
-    - Installer: TD-2875 Update registry when user accepts data collection  Code added to update database.
-    - Installer: TD-2875, TD-2880 record desire to help improve  and report how many megabytes will be downloaded.
+    - Installer: TD-2767 Add data collection about user's installation
+    - Installer: TD-2875 store user accepting data collection
+    - Installer: TD-2875, TD-2880 record desire to help improve, report sz
     - Installer: TD-2880 move message down below progress bar.
-    - Open Office Writer: Samdoss TD-2879 will pathway run without LibreOffice.
+    - Open Office Writer: TD-2879 will pathway run without LibreOffice.
     - Open Office Writer: TD-2758 Create Table in LibreOffice 
     - Open Office Writer: TD-2806 Try / catch is used for missing images  
-    - Open Office Writer: TD-2853 Open Office - front matter - Insert Table of contents 
-    - Open Office Writer: TD-2854 Open Office - front matter - Include in Mirror page  
-    - Open Office Writer: TD-2856 Reversal different when separate and when exported with the main dictionary 
-    - Open Office Writer: TD-2858 OpenOffice: Align Cover Page Image to "Anchor to Page" 
-    - Open Office Writer: TD-2865 Crash when using Pathway from TE or Paratext 
-    - Open Office Writer: TD-2866 reversal output has doubled the phonetic brackets 
+    - Open Office Writer: TD-2853 front matter - Insert Table of contents 
+    - Open Office Writer: TD-2854 front matter - Include in Mirror page  
+    - Open Office Writer: TD-2856 Make reversal consistent
+    - Open Office Writer: TD-2858 Align Cover Page Image to Page
+    - Open Office Writer: TD-2866 remove doubled the brackets in reversal
     - Open Office Writer: TD-2872 Start Content on page 1 
     - Open Office Writer: TD-2876 Front matter order and page type 
     - Open Office Writer: TD-2883 Fix header when page number on outside 
     - Open Office Writer: TD-2889 Page number bottom half missing 
     - Open Office Writer: TD-2899 LibreOffice - Move punctuation to xhtml
     - Open Office Writer: TD-2912 headers contain first entry on page 
-    - Open Office Writer: TD-2913 Fix Paratext export to LIbreOffice: Rectangles in place of some letters 
-    - Open Office Writer: TD-2935 Cover does not appear even though it is checked by default 
-    - Open Office Writer: TD-2936 before styles still appear in Libre Office
+    - Open Office Writer: TD-2913 Fix rectangles in Paratext 
+    - Open Office Writer: TD-2935 Cover to appear when checked by default 
+    - Open Office Writer: TD-2936 before styles still appear 
     - Open Office Writer: TD-2937 Picture appears in the margin 
     - Open Office Writer: TD-2944 Bughotu Scripture unformatted
-    - Open Office Writer: TD-2947 Root based missing headers TD-2949 headers missing from output 
+    - Open Office Writer: TD-2947 Root based missing headers 
+    - Open Office Writer: TD-2949 headers missing from output 
     - Open Office Writer: TD-2948 Pictures missing from output 
-    - Open Office Writer: TD-2965 Buang left guide words out of sync when pictures present 
+    - Open Office Writer: TD-2965 Buang left guide words out of sync 
     - Open Office Writer: TD-662 Rudimentary table formatting 
     - Paratext Plugin: TD-2881 Use Paratext style names
-    - Paratext Plugin: TD-2882 Get font for zxx writing system TD-2882 Get font for zxx writing system 
+    - Paratext Plugin: TD-2882 Get font for zxx writing system 
     - Paratext Plugin: TD-2910 Empty Verses cause Paratext export to fail
-    - Smart Device: TD-2811 Include a set of links for Reversal Index "Contents"  
-    - Smart Device: TD-2903 Spacing problem in Root-Based view (supercedes TD-2855, TD-2779, et al.)
-    - Smart Device: TD-2914 BM2 Paratext export to Epub has validation errors and the ebook is empty.
-    - Smart Device: TD-2926 Crash (content not captured) and then error trying to export ONLY reversals index to epub (or LibreOffice)
+    - Smart Device: TD-2811 Include links for Reversal Index "Contents"  
+    - Smart Device: TD-2903 Spacing problem in Root-Based view 
+    - Smart Device: TD-2914 BM2 Paratext export to Epub has errors
+    - Smart Device: TD-2926 error trying to export ONLY reversals index
     - Smart Device: TD-2946 Font-face rule requires quotes around source 
     - Smart Device: TD-2957 Gondwana epub export has formatting issues
-    - User Interface: TD-2857 Update installer to include preprocessing xslt files
-    - User Interface: TD-2861 Confusing option in Preprocessing Transformation box and how to explain it 
-    - User Interface: TD-2871 fix pre-process not applied Allow separate preprocess for dictionary and scripture.
+    - User Interface: TD-2857 include preprocessing xslt files
+    - User Interface: TD-2861 claify Preprocessing option Transformation 
+    - User Interface: TD-2871 fix pre-process not applied/ separate Scrip
     - User Interface: TD-2873 Reset title when the project is changed  
-    - User Interface: TD-2874 Available option should be enabled for standard style sheets 
+    - User Interface: TD-2874 Available option enabled for standard styles 
     - User Interface: TD-2898 Pathway Installation Path Problem
     - User Interface: TD-2938 Title erased unnecessarily 
     - User Interface: Update Processing Options tab per TD-2861.
@@ -67,40 +67,38 @@ pathway (1.1.2.2205-1) unstable; urgency=high
     - Web: Version number changed for Task TD-2951
     - XeTeX: TD-2080 Picture captions mission 
     - XeTeX: TD-2311 .xitem[lang='en'] 
-    - XeTeX: TD-2884 XeLaTeX gives the word Content for left and right header 
-    - XeTeX: TD-2907 xelatex has formatting issues when punctuation included
-    - XeTeX: TD-2934 Xetex: Apply Roman Page Number for Front Matter, Arabic for Contant Page
-    - XeTeX: TD-2945 69 XeLaTeX unit test failures  * 1.0.6.1928 daily build
+    - XeTeX: TD-2884 word Content for left and right header 
+    - XeTeX: TD-2907 formatting issues when punctuation included
+    - XeTeX: TD-2934 Apply Roman/Arabic Page Number 
+    - XeTeX: TD-2945 unit test failures  * 1.0.6.1928 daily build
     - Libre Office: TD-2841 Add Pre-process list
-    - Indesign and Xelatex: TD-2806: Try / catch is used for missing images
-    - Libre Office: TD-2758: Direction code for table: Create Table
-  * 1.0.6.1919 release
+    - Indesign and Xelatex: TD-2806: no Try / catch for missing images
+    - Libre Office: TD-2758: Direction code for table 
     - Common TD-2826 Memory Error exporting to Pathway
-    - ConfigurationTool TD-2677 Crash, clicking on different "Stylesheet" while previewing another
+    - ConfigurationTool TD-2677 Crash, clicking on different "Stylesheet" 
     - Epub TD-2791 code refracted - modified Filestream to XmlTextReader
-    - Epub TD-2834 Error message box is appear when click "OK" on "Font Copyright Warning" dialog box.
-    - Epub TD-2837 Links for chapters not created even when selected in Configuration tool.
+    - Epub TD-2834 Error when click "OK" on "Font Copyright Warning"
+    - Epub TD-2837 Links for chapters not created even when selected 
     - Epub TD-2844 Null Reference
     - GoBible TD-2037 problem handling verses like \v 9-10 or \v9a \v9b
     - LibreOffice TD-2758 <body> node style handled
-    - LibreOffice TD-2782 Root-basedump missing linked references, as seen by series of commas
+    - LibreOffice TD-2782 Root-base dump missing linked references 
     - LibreOffice TD-2787 lexical relations not displayed.
-    - LibreOffice TD-2798 Page number is overlap on text line when macro running.
+    - LibreOffice TD-2798 Page number is overlap on text line 
     - LibreOffice TD-2806 Try / catch is used for missing images
     - LibreOffice TD-2818 out of memory
     - LibreOffice TD-2838 Extra line added above picture caption
     - XeLaTeX TD-2830 Reversal Index
   * 1.0.5.1894 release
     - Bootstrap: Documentation on installing from USB
-    - Bootstrap: download latest sprint (1.0.4.1875) as stable and the testing version as the latest.
     - Bootstrap: Install LibreOffice on Win7
     - Bootstrap: fix XeLaTeX install (TD-2832)
     - Bootstrap: remove unrecognized message errors (TD-2832)
     - Bootstrap: updated LibreOffice version numbers. (TD-2833)
-    - Bootstrap: warn user that LibreOffice will take time to install (TD-2833)
+    - Bootstrap: warn user that install takes time (TD-2833)
     - Epub: Launch viewer installed by bootstrap program
     - InDesign: Create Table of Contents (TD-2828)
-    - OpenOffice: Right guideword height problem in Malayalam Script (TD-2825)
+    - OpenOffice: Right guideword height in Malayalam Script (TD-2825)
     - OpenOffice: Memory Error exporting to Pathway (TD-2826)
     - XeLaTeX: handle full path on picture (TD-2308)
     - XeLaTeX: front matter - Copyright Page (TD-2829)
@@ -108,18 +106,18 @@ pathway (1.1.2.2205-1) unstable; urgency=high
   * 1.0.4.1875 release
     - Bootstrap: Add installer icon
     - Bootstrap: Fix BTE test to work for XP as well as Win7
-    - Bootstrap: use clean up and close up logic to remove temporary files and all windows. 
+    - Bootstrap: use clean up and close up logic to remove temporary files
     - InDesign: Empty footnotes (TD-2817)
     - OpenOffice: guideword box (TD-2631)
-    - OpenOffice: Page number is overlap on text line when macro running. (TD-2798)
+    - OpenOffice: Page number overlaps text in macro running. (TD-2798)
     - OpenOffice: Read error when re-opening file (TD-2807)
     - OpenOffice: Space between text and pictures (TD-2808)
     - OpenOffice: Guideword box problem (TD-2815)
     - OpenOffice: Header font (TD-2815)
     - OpenOffice: Font problem of header (TD-2819)
-    - OpenOffice: Right guideword height problem in Malayalam Script (TD-2825)
-    - UI: French Locale: Crash in Configuration Tool when clicking on Properties tab (TD-2752)
-    - UI: Page Size is not get changed after clicking the preview button in Custom Style sheet-->Pathway (TD-2803)
+    - OpenOffice: Right guideword height in Malayalam Script (TD-2825)
+    - UI: French Locale: Crash in Configuration Tool (TD-2752)
+    - UI: Size is not changed in preview on Custom Style sheet (TD-2803)
     - Xelatex: Export crash (TD-2820)
 
  -- Greg Trihus <greg_trihus@sil.org>  Thu, 2 Feb 2012 14:24:26 -0600
