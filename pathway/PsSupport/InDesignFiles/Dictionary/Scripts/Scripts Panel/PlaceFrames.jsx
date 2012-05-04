@@ -14,10 +14,10 @@ var margin=new Array("letHead", "1.5", "4.5", "1.666667", "4.5");//
 // Created By:   James Prabu 
 // Created On: Sep 10 2009   
 // Modified By:  James Prabu                        
-// Modified On:  May 17 2011 
-// Task Number : TD-2347(hk00166b.tif picture missing)
+// Modified On:  May 04 2012 
+// Task Number : TD-2984(InDesign: Change Macro to format FrontMatter Elements based on User Selection)
 // <remarks> 
-// Picture Caption Height, Width enlarged based on it's caption
+// Format the FrontMatter based on User Selection
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -513,13 +513,14 @@ function PlaceFrames()
 		}	
 		else
 		{		
-		//alert(myStory.contents);
-		if(FrontMatterNo == frontMatterItemCount)
+		//alert(FrontMatterNo + " = " + frontMatterItemCount);
+		/*
+		if(FrontMatterNo == frontMatterItemCount && frontMatterItemCount > 8)
 		{
 			AddNewPage(curPageNo + 1);
 			curPageNo = curPageNo + 1;
 			FrontMatterNo ++;
-		}
+		}*/
 		frameType = GetFrameType(myStory);
 		minHeight = GetMinHeight(frameType);
 		firstParagraphStyle = GetFirstParagraphStyle(myStory)
