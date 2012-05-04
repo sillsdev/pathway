@@ -1,4 +1,6 @@
-﻿namespace SIL.PublishingSolution
+﻿using System.Windows.Forms;
+
+namespace SIL.PublishingSolution
 {
     partial class ConfigurationTool
     {
@@ -136,6 +138,18 @@
             this.lblPct = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabWeb = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtWebFtpFldrNme = new System.Windows.Forms.TextBox();
+            this.txtWebEmailID = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txtWebAdminSiteNme = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtWebAdminPwd = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtWebAdminUsrNme = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txtWebUrl = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtFtpPassword = new System.Windows.Forms.TextBox();
             this.lblTargetFileLocation = new System.Windows.Forms.Label();
@@ -186,6 +200,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblType = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label19 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.stylesGrid)).BeginInit();
             this.toolStripMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -199,6 +214,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabWeb.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPreview.SuspendLayout();
@@ -423,7 +439,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(292, 449);
+            this.tabControl1.Size = new System.Drawing.Size(292, 501);
             this.tabControl1.TabIndex = 6;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -444,7 +460,7 @@
             this.tabInfo.Location = new System.Drawing.Point(4, 22);
             this.tabInfo.Name = "tabInfo";
             this.tabInfo.Padding = new System.Windows.Forms.Padding(3);
-            this.tabInfo.Size = new System.Drawing.Size(284, 423);
+            this.tabInfo.Size = new System.Drawing.Size(284, 475);
             this.tabInfo.TabIndex = 0;
             this.tabInfo.Text = "Info";
             this.tabInfo.UseVisualStyleBackColor = true;
@@ -617,7 +633,7 @@
             this.tabDisplay.Location = new System.Drawing.Point(4, 22);
             this.tabDisplay.Name = "tabDisplay";
             this.tabDisplay.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDisplay.Size = new System.Drawing.Size(284, 423);
+            this.tabDisplay.Size = new System.Drawing.Size(284, 475);
             this.tabDisplay.TabIndex = 1;
             this.tabDisplay.Text = "Properties";
             this.tabDisplay.UseVisualStyleBackColor = true;
@@ -1043,7 +1059,7 @@
             this.tabMobile.Location = new System.Drawing.Point(4, 22);
             this.tabMobile.Name = "tabMobile";
             this.tabMobile.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMobile.Size = new System.Drawing.Size(284, 423);
+            this.tabMobile.Size = new System.Drawing.Size(284, 475);
             this.tabMobile.TabIndex = 2;
             this.tabMobile.Text = "Properties";
             this.tabMobile.UseVisualStyleBackColor = true;
@@ -1193,7 +1209,7 @@
             this.tabOthers.Controls.Add(this.pictureBox1);
             this.tabOthers.Location = new System.Drawing.Point(4, 22);
             this.tabOthers.Name = "tabOthers";
-            this.tabOthers.Size = new System.Drawing.Size(284, 423);
+            this.tabOthers.Size = new System.Drawing.Size(284, 475);
             this.tabOthers.TabIndex = 3;
             this.tabOthers.Text = "Properties";
             this.tabOthers.UseVisualStyleBackColor = true;
@@ -1524,14 +1540,130 @@
             // 
             // tabWeb
             // 
+            this.tabWeb.Controls.Add(this.groupBox3);
             this.tabWeb.Controls.Add(this.groupBox2);
             this.tabWeb.Controls.Add(this.groupBox1);
             this.tabWeb.Location = new System.Drawing.Point(4, 22);
             this.tabWeb.Name = "tabWeb";
-            this.tabWeb.Size = new System.Drawing.Size(284, 423);
+            this.tabWeb.Size = new System.Drawing.Size(284, 475);
             this.tabWeb.TabIndex = 6;
             this.tabWeb.Text = "Properties";
             this.tabWeb.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label19);
+            this.groupBox3.Controls.Add(this.txtWebFtpFldrNme);
+            this.groupBox3.Controls.Add(this.txtWebEmailID);
+            this.groupBox3.Controls.Add(this.label18);
+            this.groupBox3.Controls.Add(this.txtWebAdminSiteNme);
+            this.groupBox3.Controls.Add(this.label14);
+            this.groupBox3.Controls.Add(this.txtWebAdminPwd);
+            this.groupBox3.Controls.Add(this.label15);
+            this.groupBox3.Controls.Add(this.txtWebAdminUsrNme);
+            this.groupBox3.Controls.Add(this.label16);
+            this.groupBox3.Controls.Add(this.txtWebUrl);
+            this.groupBox3.Controls.Add(this.label17);
+            this.groupBox3.Location = new System.Drawing.Point(10, 281);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(264, 187);
+            this.groupBox3.TabIndex = 32;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Website Details";
+            // 
+            // txtWebFtpFldrNme
+            // 
+            this.txtWebFtpFldrNme.Location = new System.Drawing.Point(96, 160);
+            this.txtWebFtpFldrNme.MaxLength = 50;
+            this.txtWebFtpFldrNme.Name = "txtWebFtpFldrNme";
+            this.txtWebFtpFldrNme.Size = new System.Drawing.Size(133, 20);
+            this.txtWebFtpFldrNme.TabIndex = 25;
+            // 
+            // txtWebEmailID
+            // 
+            this.txtWebEmailID.Location = new System.Drawing.Point(97, 133);
+            this.txtWebEmailID.MaxLength = 50;
+            this.txtWebEmailID.Name = "txtWebEmailID";
+            this.txtWebEmailID.Size = new System.Drawing.Size(133, 20);
+            this.txtWebEmailID.TabIndex = 23;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(7, 136);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(46, 13);
+            this.label18.TabIndex = 24;
+            this.label18.Text = "Email ID";
+            // 
+            // txtWebAdminSiteNme
+            // 
+            this.txtWebAdminSiteNme.Location = new System.Drawing.Point(95, 107);
+            this.txtWebAdminSiteNme.MaxLength = 50;
+            this.txtWebAdminSiteNme.Name = "txtWebAdminSiteNme";
+            this.txtWebAdminSiteNme.Size = new System.Drawing.Size(133, 20);
+            this.txtWebAdminSiteNme.TabIndex = 3;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(7, 110);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(56, 13);
+            this.label14.TabIndex = 22;
+            this.label14.Text = "Site Name";
+            // 
+            // txtWebAdminPwd
+            // 
+            this.txtWebAdminPwd.Location = new System.Drawing.Point(95, 81);
+            this.txtWebAdminPwd.MaxLength = 25;
+            this.txtWebAdminPwd.Name = "txtWebAdminPwd";
+            this.txtWebAdminPwd.PasswordChar = '*';
+            this.txtWebAdminPwd.Size = new System.Drawing.Size(133, 20);
+            this.txtWebAdminPwd.TabIndex = 2;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(8, 84);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(85, 13);
+            this.label15.TabIndex = 20;
+            this.label15.Text = "Admin Password";
+            // 
+            // txtWebAdminUsrNme
+            // 
+            this.txtWebAdminUsrNme.Location = new System.Drawing.Point(95, 55);
+            this.txtWebAdminUsrNme.MaxLength = 25;
+            this.txtWebAdminUsrNme.Name = "txtWebAdminUsrNme";
+            this.txtWebAdminUsrNme.Size = new System.Drawing.Size(133, 20);
+            this.txtWebAdminUsrNme.TabIndex = 1;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(8, 57);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(87, 13);
+            this.label16.TabIndex = 18;
+            this.label16.Text = "Admin Username";
+            // 
+            // txtWebUrl
+            // 
+            this.txtWebUrl.Location = new System.Drawing.Point(12, 30);
+            this.txtWebUrl.MaxLength = 100;
+            this.txtWebUrl.Name = "txtWebUrl";
+            this.txtWebUrl.Size = new System.Drawing.Size(242, 20);
+            this.txtWebUrl.TabIndex = 0;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(9, 14);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(60, 13);
+            this.label17.TabIndex = 16;
+            this.label17.Text = "Website url";
             // 
             // groupBox2
             // 
@@ -1541,27 +1673,26 @@
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.txtFtpUsername);
-            this.groupBox2.Location = new System.Drawing.Point(12, 19);
+            this.groupBox2.Location = new System.Drawing.Point(12, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(264, 135);
+            this.groupBox2.Size = new System.Drawing.Size(264, 123);
             this.groupBox2.TabIndex = 31;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "FTP Details";
             // 
             // txtFtpPassword
             // 
-            this.txtFtpPassword.Location = new System.Drawing.Point(95, 95);
+            this.txtFtpPassword.Location = new System.Drawing.Point(95, 85);
             this.txtFtpPassword.MaxLength = 50;
             this.txtFtpPassword.Name = "txtFtpPassword";
             this.txtFtpPassword.PasswordChar = '*';
             this.txtFtpPassword.Size = new System.Drawing.Size(133, 20);
             this.txtFtpPassword.TabIndex = 2;
-            this.txtFtpPassword.Validated += new System.EventHandler(this.txtFtpPassword_Validated);
             // 
             // lblTargetFileLocation
             // 
             this.lblTargetFileLocation.AutoSize = true;
-            this.lblTargetFileLocation.Location = new System.Drawing.Point(9, 27);
+            this.lblTargetFileLocation.Location = new System.Drawing.Point(9, 17);
             this.lblTargetFileLocation.Name = "lblTargetFileLocation";
             this.lblTargetFileLocation.Size = new System.Drawing.Size(193, 13);
             this.lblTargetFileLocation.TabIndex = 23;
@@ -1569,17 +1700,16 @@
             // 
             // txtFtpFileLocation
             // 
-            this.txtFtpFileLocation.Location = new System.Drawing.Point(12, 43);
+            this.txtFtpFileLocation.Location = new System.Drawing.Point(12, 34);
             this.txtFtpFileLocation.MaxLength = 500;
             this.txtFtpFileLocation.Name = "txtFtpFileLocation";
             this.txtFtpFileLocation.Size = new System.Drawing.Size(244, 20);
             this.txtFtpFileLocation.TabIndex = 0;
-            this.txtFtpFileLocation.Validated += new System.EventHandler(this.txtFtpFileLocation_Validated);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 98);
+            this.label3.Location = new System.Drawing.Point(11, 88);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(76, 13);
             this.label3.TabIndex = 27;
@@ -1588,7 +1718,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(11, 72);
+            this.label6.Location = new System.Drawing.Point(11, 64);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(78, 13);
             this.label6.TabIndex = 25;
@@ -1596,12 +1726,11 @@
             // 
             // txtFtpUsername
             // 
-            this.txtFtpUsername.Location = new System.Drawing.Point(95, 69);
+            this.txtFtpUsername.Location = new System.Drawing.Point(95, 61);
             this.txtFtpUsername.MaxLength = 1000;
             this.txtFtpUsername.Name = "txtFtpUsername";
             this.txtFtpUsername.Size = new System.Drawing.Size(133, 20);
             this.txtFtpUsername.TabIndex = 1;
-            this.txtFtpUsername.Validated += new System.EventHandler(this.txtFtpUsername_Validated);
             // 
             // groupBox1
             // 
@@ -1613,27 +1742,26 @@
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.txtSqlServerName);
             this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Location = new System.Drawing.Point(12, 174);
+            this.groupBox1.Location = new System.Drawing.Point(12, 136);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(264, 169);
+            this.groupBox1.Size = new System.Drawing.Size(264, 138);
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "MySql Database Details";
             // 
             // txtSqlPassword
             // 
-            this.txtSqlPassword.Location = new System.Drawing.Point(95, 125);
+            this.txtSqlPassword.Location = new System.Drawing.Point(95, 110);
             this.txtSqlPassword.MaxLength = 50;
             this.txtSqlPassword.Name = "txtSqlPassword";
             this.txtSqlPassword.PasswordChar = '*';
             this.txtSqlPassword.Size = new System.Drawing.Size(133, 20);
             this.txtSqlPassword.TabIndex = 3;
-            this.txtSqlPassword.Validated += new System.EventHandler(this.txtSqlPassword_Validated);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(11, 128);
+            this.label10.Location = new System.Drawing.Point(11, 113);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(53, 13);
             this.label10.TabIndex = 22;
@@ -1641,17 +1769,16 @@
             // 
             // txtSqlUsername
             // 
-            this.txtSqlUsername.Location = new System.Drawing.Point(95, 99);
+            this.txtSqlUsername.Location = new System.Drawing.Point(95, 84);
             this.txtSqlUsername.MaxLength = 25;
             this.txtSqlUsername.Name = "txtSqlUsername";
             this.txtSqlUsername.Size = new System.Drawing.Size(133, 20);
             this.txtSqlUsername.TabIndex = 2;
-            this.txtSqlUsername.Validated += new System.EventHandler(this.txtSqlUsername_Validated);
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(9, 102);
+            this.label11.Location = new System.Drawing.Point(9, 87);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(60, 13);
             this.label11.TabIndex = 20;
@@ -1659,17 +1786,16 @@
             // 
             // txtSqlDBName
             // 
-            this.txtSqlDBName.Location = new System.Drawing.Point(95, 73);
+            this.txtSqlDBName.Location = new System.Drawing.Point(95, 58);
             this.txtSqlDBName.MaxLength = 25;
             this.txtSqlDBName.Name = "txtSqlDBName";
             this.txtSqlDBName.Size = new System.Drawing.Size(133, 20);
             this.txtSqlDBName.TabIndex = 1;
-            this.txtSqlDBName.Validated += new System.EventHandler(this.txtSqlDBName_Validated);
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(9, 75);
+            this.label12.Location = new System.Drawing.Point(9, 60);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(84, 13);
             this.label12.TabIndex = 18;
@@ -1677,17 +1803,16 @@
             // 
             // txtSqlServerName
             // 
-            this.txtSqlServerName.Location = new System.Drawing.Point(12, 46);
+            this.txtSqlServerName.Location = new System.Drawing.Point(12, 33);
             this.txtSqlServerName.MaxLength = 100;
             this.txtSqlServerName.Name = "txtSqlServerName";
             this.txtSqlServerName.Size = new System.Drawing.Size(242, 20);
             this.txtSqlServerName.TabIndex = 0;
-            this.txtSqlServerName.Validated += new System.EventHandler(this.txtSqlServerName_Validated);
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(9, 30);
+            this.label13.Location = new System.Drawing.Point(9, 16);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(161, 13);
             this.label13.TabIndex = 16;
@@ -1701,7 +1826,7 @@
             this.tabPreview.Controls.Add(this.picPreview);
             this.tabPreview.Location = new System.Drawing.Point(4, 22);
             this.tabPreview.Name = "tabPreview";
-            this.tabPreview.Size = new System.Drawing.Size(284, 423);
+            this.tabPreview.Size = new System.Drawing.Size(284, 475);
             this.tabPreview.TabIndex = 4;
             this.tabPreview.Text = "Preview";
             this.tabPreview.UseVisualStyleBackColor = true;
@@ -1747,7 +1872,7 @@
             this.tabPicture.Controls.Add(this.GrpPicture);
             this.tabPicture.Location = new System.Drawing.Point(4, 22);
             this.tabPicture.Name = "tabPicture";
-            this.tabPicture.Size = new System.Drawing.Size(284, 423);
+            this.tabPicture.Size = new System.Drawing.Size(284, 475);
             this.tabPicture.TabIndex = 5;
             this.tabPicture.Text = "Pictures";
             this.tabPicture.UseVisualStyleBackColor = true;
@@ -1933,7 +2058,7 @@
             this.TLPanelOuter.RowCount = 2;
             this.TLPanelOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             this.TLPanelOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TLPanelOuter.Size = new System.Drawing.Size(954, 530);
+            this.TLPanelOuter.Size = new System.Drawing.Size(954, 582);
             this.TLPanelOuter.TabIndex = 19;
             // 
             // TLPanel1
@@ -2079,7 +2204,7 @@
             this.TLPanel2.RowCount = 1;
             this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 498F));
-            this.TLPanel2.Size = new System.Drawing.Size(542, 498);
+            this.TLPanel2.Size = new System.Drawing.Size(542, 550);
             this.TLPanel2.TabIndex = 1;
             // 
             // TLPanel3
@@ -2095,7 +2220,7 @@
             this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
             this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 175F));
             this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TLPanel3.Size = new System.Drawing.Size(304, 498);
+            this.TLPanel3.Size = new System.Drawing.Size(304, 550);
             this.TLPanel3.TabIndex = 2;
             // 
             // panel3
@@ -2105,7 +2230,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 44);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(298, 451);
+            this.panel3.Size = new System.Drawing.Size(298, 503);
             this.panel3.TabIndex = 20;
             // 
             // lblType
@@ -2121,11 +2246,20 @@
             this.lblType.Text = "Dictionary";
             this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(9, 163);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(85, 13);
+            this.label19.TabIndex = 26;
+            this.label19.Text = "Ftp Folder Name";
+            // 
             // ConfigurationTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(954, 582);
+            this.ClientSize = new System.Drawing.Size(954, 634);
             this.Controls.Add(this.TLPanelOuter);
             this.Controls.Add(this.toolStripMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -2153,6 +2287,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabWeb.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -2335,5 +2471,18 @@
         private System.Windows.Forms.TextBox txtSqlServerName;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TabPage tabWeb;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox txtWebAdminSiteNme;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox txtWebAdminPwd;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox txtWebAdminUsrNme;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox txtWebUrl;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox txtWebEmailID;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox txtWebFtpFldrNme;
+        private Label label19;
     }
 }

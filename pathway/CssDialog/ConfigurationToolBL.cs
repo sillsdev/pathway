@@ -649,6 +649,24 @@ namespace SIL.PublishingSolution
                         case "dbpwd":
                             baseNode.Attributes["value"].Value = hashUtil.Encrypt(cTool.TxtSqlPassword.Text);
                             break;
+                        case "weburl":
+                            baseNode.Attributes["value"].Value = cTool.TxtWebUrl.Text;
+                            break;
+                        case "webadminusrnme":
+                            baseNode.Attributes["value"].Value = cTool.TxtWebAdminUsrNme.Text;
+                            break;
+                        case "webadminpwd":
+                            baseNode.Attributes["value"].Value = hashUtil.Encrypt(cTool.TxtWebAdminPwd.Text);
+                            break;
+                        case "webadminsitenme":
+                            baseNode.Attributes["value"].Value = cTool.TxtWebAdminSiteNme.Text;
+                            break;
+                        case "webemailid":
+                            baseNode.Attributes["value"].Value = cTool.TxtWebEmailId.Text;
+                            break;
+                        case "webftpfldrnme":
+                            baseNode.Attributes["value"].Value = cTool.TxtWebFtpFldrNme.Text;
+                            break;
                         default:
                             break;
                     }
@@ -1002,6 +1020,24 @@ namespace SIL.PublishingSolution
                                 break;
                             case "dbpwd":
                                 cTool.TxtSqlPassword.Text = hashUtil.Decrypt(attribValue);
+                                break;
+                            case "weburl":
+                                cTool.TxtWebUrl.Text = attribValue;
+                                break;
+                            case "webadminusrnme":
+                                cTool.TxtWebAdminUsrNme.Text = attribValue;
+                                break;
+                            case "webadminpwd":
+                                cTool.TxtWebAdminPwd.Text = hashUtil.Decrypt(attribValue);
+                                break;
+                            case "webadminsitenme":
+                                cTool.TxtWebAdminSiteNme.Text = attribValue;
+                                break;
+                            case "webemailid":
+                                cTool.TxtWebEmailId.Text = attribValue;
+                                break;
+                            case "webftpfldrnme":
+                                cTool.TxtWebFtpFldrNme.Text = attribValue;
                                 break;
                             default:
                                 break;
@@ -1474,6 +1510,24 @@ namespace SIL.PublishingSolution
                                 break;
                             case "dbpwd":
                                 cTool.TxtSqlPassword.Text = hashUtil.Decrypt(attribValue);
+                                break;
+                            case "weburl":
+                                cTool.TxtWebUrl.Text = attribValue;
+                                break;
+                            case "webadminusrnme":
+                                cTool.TxtWebAdminUsrNme.Text = attribValue;
+                                break;
+                            case "webadminpwd":
+                                cTool.TxtWebAdminPwd.Text = hashUtil.Decrypt(attribValue);
+                                break;
+                            case "webadminsitenme":
+                                cTool.TxtWebAdminSiteNme.Text = attribValue;
+                                break;
+                            case "webemailid":
+                                cTool.TxtWebEmailId.Text = attribValue;
+                                break;
+                            case "webftpfldrnme":
+                                cTool.TxtWebFtpFldrNme.Text = attribValue;
                                 break;
                             default:
                                 break;
@@ -3779,90 +3833,6 @@ namespace SIL.PublishingSolution
             }
             catch { }
         }
-
-        public void txtFtpFileLocation_ValidatedBL(object sender, EventArgs e)
-        {
-            try
-            {
-                //WriteAttrib(AttrFtpAddrs, sender);
-                //EnableToolStripButtons(true);
-
-            }
-            catch { }
-        }
-
-        public void txtFtpUsername_ValidatedBL(object sender, EventArgs e)
-        {
-            try
-            {
-                //WriteAttrib(AttrFtpUid, sender);
-                //EnableToolStripButtons(true);
-
-            }
-            catch { }
-        }
-
-        public void txtFtpPassword_ValidatedBL(object sender, EventArgs e)
-        {
-            try
-            {
-                //WriteAttrib(AttrFtpPwd, sender);
-                //EnableToolStripButtons(true);
-
-            }
-            catch { }
-        }
-
-        public void txtSqlServerName_ValidatedBL(object sender, EventArgs e)
-        {
-            try
-            {
-                //WriteAttrib(AttrDbSerName, sender);
-                //EnableToolStripButtons(true);
-
-            }
-            catch { }
-        }
-
-        public void txtSqlDBName_ValidatedBL(object sender, EventArgs e)
-        {
-            try
-            {
-                //WriteAttrib(AttrDbName, sender);
-                //EnableToolStripButtons(true);
-
-            }
-            catch { }
-        }
-
-        public void txtSqlUsername_ValidatedBL(object sender, EventArgs e)
-        {
-            try
-            {
-                //WriteAttrib(AttrDbUid, sender);
-                //EnableToolStripButtons(true);
-
-            }
-            catch { }
-        }
-
-        public void txtSqlPassword_ValidatedBL(object sender, EventArgs e)
-        {
-            try
-            {
-                //WriteAttrib(AttrDbPwd, sender);
-                //EnableToolStripButtons(true);
-
-            }
-            catch { }
-        }
-
-
-
-
-
-
-
 
         public void HelpButton_Clicked()
         {

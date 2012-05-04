@@ -1105,6 +1105,10 @@ namespace SIL.PublishingSolution
             {
                 media = "others";
             }
+            else if (backend == "wordpress alpha")
+            {
+                media = "web";
+            }
             else
             {
                 media = "paper";

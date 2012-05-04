@@ -651,6 +651,36 @@ namespace SIL.PublishingSolution
             get { return txtSqlPassword; }
         }
 
+        public TextBox TxtWebUrl
+        {
+            get { return txtWebUrl; }
+        }
+
+        public TextBox TxtWebAdminUsrNme
+        {
+            get { return txtWebAdminUsrNme; }
+        }
+
+        public TextBox TxtWebAdminPwd
+        {
+            get { return txtWebAdminPwd; }
+        }
+
+        public TextBox TxtWebAdminSiteNme
+        {
+            get { return txtWebAdminSiteNme; }
+        }
+
+        public TextBox TxtWebEmailId
+        {
+            get { return txtWebEmailID; }
+        }
+
+        public TextBox TxtWebFtpFldrNme
+        {
+            get { return txtWebFtpFldrNme; }
+        }
+
         //private System.Windows.Forms.TableLayoutPanel TLPanelOuter;
         //private System.Windows.Forms.TableLayoutPanel TLPanel1;
         //private System.Windows.Forms.TableLayoutPanel TLPanel2;
@@ -1179,39 +1209,5 @@ namespace SIL.PublishingSolution
             _CToolBL.HelpButton_Clicked();
         }
 
-        private void txtFtpFileLocation_Validated(object sender, EventArgs e)
-        {
-            _CToolBL.txtFtpFileLocation_ValidatedBL(sender, e);
-        }
-
-        private void txtFtpUsername_Validated(object sender, EventArgs e)
-        {
-            _CToolBL.txtFtpUsername_ValidatedBL(sender, e);
-        }
-
-        private void txtFtpPassword_Validated(object sender, EventArgs e)
-        {
-            _CToolBL.txtFtpPassword_ValidatedBL(sender, e);
-        }
-
-        private void txtSqlServerName_Validated(object sender, EventArgs e)
-        {
-            _CToolBL.txtSqlServerName_ValidatedBL(sender, e);
-        }
-
-        private void txtSqlDBName_Validated(object sender, EventArgs e)
-        {
-            _CToolBL.txtSqlDBName_ValidatedBL(sender, e);
-        }
-
-        private void txtSqlUsername_Validated(object sender, EventArgs e)
-        {
-            _CToolBL.txtSqlUsername_ValidatedBL(sender, e);
-        }
-
-        private void txtSqlPassword_Validated(object sender, EventArgs e)
-        {
-            _CToolBL.txtSqlPassword_ValidatedBL(sender, e);
-        }
      }
 }

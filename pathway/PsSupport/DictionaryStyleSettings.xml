@@ -333,6 +333,12 @@
         <styleProperty name="dbname" value="" />
         <styleProperty name="dbuserid" value="" />
         <styleProperty name="dbpwd" value="" />
+		<styleProperty name="weburl" value="" />
+        <styleProperty name="webadminusrnme" value="" />
+        <styleProperty name="webadminpwd" value="" />
+        <styleProperty name="webadminsiteNme" value="" />
+        <styleProperty name="webemailid" value="" />
+        <styleProperty name="webftpfldrnme" value="" />
       </style>
     </web>
     <others>
