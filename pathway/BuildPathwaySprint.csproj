@@ -244,10 +244,10 @@
     <CallTarget Targets="RemoveSprint"/>
     <!-- See: http://en.csharp-online.net/MSBuild:_By_Example%E2%80%94Understanding_the_Difference_between_@_and_%25 and http://en.csharp-online.net/MSBuild:_By_Example%E2%80%94Introducing_Well-Known_Metadata -->
     <!-- See also: http://stackoverflow.com/questions/1502410/msbuild-passing-parameters-to-calltarget -->
-    <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="folder=%(PathwayProjects.Identity)" Targets="RemoveBinaries" />
+    <CallTarget Targets="RemoveBinaries"/>
     <CallTarget Targets="RemoveBuild"/>
     <CallTarget Targets="RemovePythonBinaries"/>
-    <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="folder=%(PathwayTests.Identity)" Targets="RemoveTestResults" />
+    <CallTarget Targets="RemoveTestResults"/>
   </Target>
   <ItemGroup>
     <TestOutput Include="**\TestFiles\output\**"/>
@@ -263,10 +263,10 @@
     <RemoveDir Directories="$(folder)" Condition="Exists($(folder))"/>
   </Target>
   <Target Name="RemoveBinaries">
-    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="$(folder)\bin" Condition="Exists('$(folder)\bin')"/>
-    <RemoveDir Directories="$(folder)\bin" Condition="Exists('$(folder)\bin')"/>
-    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="$(folder)\obj" Condition="Exists('$(folder)\obj')"/>
-    <RemoveDir Directories="$(folder)\obj" Condition="Exists('$(folder)\obj')"/>
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="%(PathwayProjects.Identity)\bin" Condition="Exists('%(PathwayProjects.Identity)\bin')"/>
+    <RemoveDir Directories="%(PathwayProjects.Identity)\bin" Condition="Exists('%(PathwayProjects.Identity)\bin')"/>
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="%(PathwayProjects.Identity)\obj" Condition="Exists('%(PathwayProjects.Identity)\obj')"/>
+    <RemoveDir Directories="%(PathwayProjects.Identity)\obj" Condition="Exists('%(PathwayProjects.Identity)\obj')"/>
   </Target>
   <Target Name="RemoveBuild">
     <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="BuildPathway\Files" Condition="Exists('BuildPathway\Files')"/>
@@ -281,10 +281,10 @@
     <RemoveDir Directories="WordPressConvert\dist" Condition="Exists('WordPressConvert\dist')"/>
   </Target>
   <Target Name="RemoveTestResults">
-    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="Test\$(folder)\TestFiles\output" Condition="Exists('Test\$(folder)\TestFiles\output')"/>
-    <RemoveDir Directories="Test\$(folder)\TestFiles\output" Condition="Exists('Test\$(folder)\TestFiles\output')"/>
-    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="Test\$(folder)\TestFiles\Output" Condition="Exists('Test\$(folder)\TestFiles\Output')"/>
-    <RemoveDir Directories="Test\$(folder)\TestFiles\Output" Condition="Exists('Test\$(folder)\TestFiles\Ooutput')"/>
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="Test\%(PathwayTests.Identity)\TestFiles\output" Condition="Exists('Test\%(PathwayTests.Identity)\TestFiles\output')"/>
+    <RemoveDir Directories="Test\%(PathwayTests.Identity)\TestFiles\output" Condition="Exists('Test\%(PathwayTests.Identity)\TestFiles\output')"/>
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="Test\%(PathwayTests.Identity)\TestFiles\Output" Condition="Exists('Test\%(PathwayTests.Identity)\TestFiles\Output')"/>
+    <RemoveDir Directories="Test\%(PathwayTests.Identity)\TestFiles\Output" Condition="Exists('Test\%(PathwayTests.Identity)\TestFiles\Output')"/>
   </Target>
   <Target Name="Corporate7BTE">
     <Message Text="Status: $(Status)" Importance="high" />
