@@ -369,23 +369,82 @@
     <Dll605 Include=".\PsExport\Dlls605\*.dll"/>
     <Dll604 Include=".\PsExport\Dllstable\*.dll"/>
   </ItemGroup>
+  <Target Name="TestGet">
+    <!-- Condition="$(OS) != 'Linux'" -->
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="XeLaTexConvert" Match="TexLive">
+            <Output TaskParameter="Folders" ItemName="FoundFolders"/>
+    </MSBuild.ExtensionPack.FileSystem.Folder>
+    <Message Text="%(FoundFolders.Identity)"/>
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="DeleteAll" Path="XeLaTexConvert" Match="TexLive"/>
+
+  </Target>
   <Target Name="Install-tl">
-    <ConvertToAbsolutePath Paths="XeLaTexConvert\TexLive">
-      <Output PropertyName="idir" TaskParameter="AbsolutePaths"/>
-    </ConvertToAbsolutePath>
-    <Message Text="idir: $(idir)" Importance="high" />
-    <RemoveDir Directories="$(idir)"/>
-    <MakeDir Directories="$(idir)" />
-    <MSBuild.ExtensionPack.Web.WebClient TaskAction="DownloadFile" Url="http://mirror.ctan.org/systems/texlive/tlnet/install-tl.zip" FileName="$(idir)\install-tl.zip"/>
-    <Exec Command="dir $(idir)"/>
-    <MSBuild.ExtensionPack.Compression.Zip TaskAction="Extract" ExtractPath="$(idir)" ZipFileName="$(idir)\install-tl.zip"/>
-    <Exec Command="dir $(idir)\*.bat /s"/>
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="DeleteAll" Path="XeLaTexConvert" Match="TexLive"/>
+    <MakeDir Directories="XeLaTexConvert\TexLive" />
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="XeLaTexConvert" Match="TexLive">
+      <Output TaskParameter="Folders" ItemName="idir"/>
+    </MSBuild.ExtensionPack.FileSystem.Folder>
+    <Message Text="idir: %(idir.Identity)" Importance="high" />
+
+    <CallTarget Targets="TL-Win" Condition="$(OS) != 'Linux'"/>
+    <CallTarget Targets="TL-Linux" Condition="$(OS) == 'Linux'"/>
+  </Target>
+  <Target Name="TL-Win">
+    <MSBuild.ExtensionPack.Web.WebClient TaskAction="DownloadFile" Url="http://mirror.ctan.org/systems/texlive/tlnet/install-tl.zip" FileName="%(idir.Identity)\install-tl.zip"/>
+    <Exec Command="dir %(idir.Identity)"/>
+    <MSBuild.ExtensionPack.Compression.Zip TaskAction="Extract" ExtractPath="%(idir.Identity)" ZipFileName="%(idir.Identity)\install-tl.zip"/>
+    <Exec Command="dir %(idir.Identity)\*.bat /s"/>
+  </Target>
+  <Target Name="TL-Linux">
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="DeleteAll" Path="/usr/local" Match="texlive"/>
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="DeleteAll" Path="~" Match=".texlive2011"/>
+    <MSBuild.ExtensionPack.Web.WebClient TaskAction="DownloadFile" Url="http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz" FileName="%(idir.Identity)\install-tl-unx.tar.gz"/>
+    <Exec Command="tar -xzf install-tl-unx.tar.gz" WorkingDirectory="%(idir.Identity)"/>
+  </Target>
+
+  <Target Name="LocalPw-tl">
+    <CallTarget Targets="LocalPw-tl-win" Condition="$(OS) != 'Linux'"/>
+    <CallTarget Targets="LocalPw-tl-Linux" Condition="$(OS) == 'Linux'"/>
+  </Target>
+  <Target Name="LocalPw-tl-Linux">
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="XeLaTexConvert/TexLive" Match="install-tl-*">
+      <Output TaskParameter="Folders" ItemName="wdir"/>
+    </MSBuild.ExtensionPack.FileSystem.Folder>
+    <Message Text="wdir: %(wdir.Identity)" Importance="high" />
+
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="DeleteAll" Path="XeLaTexConvert" Match="XeLaTexExe"/>
+    <MakeDir Directories="XeLaTexConvert\XeLaTexExe" />
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="XeLaTexConvert" Match="XeLaTexExe">
+      <Output TaskParameter="Folders" ItemName="idir"/>
+    </MSBuild.ExtensionPack.FileSystem.Folder>
+    <Message Text="idir: %(idir.Identity)" Importance="high" />
+
+    <MSBuild.ExtensionPack.Framework.TextString TaskAction="Replace" OldString="cd @WDIR@; export TEXLIVE_INSTALL_PREFIX=@IDIR@; echo i|./install-tl -scheme=scheme-minimal -portable" OldValue="@WDIR@" NewValue="%(wdir.Identity)">
+      <Output PropertyName="cmd1" TaskParameter="NewString"/>
+    </MSBuild.ExtensionPack.Framework.TextString>
+    <MSBuild.ExtensionPack.Framework.TextString TaskAction="Replace" OldString="$(cmd1)" OldValue="@IDIR@" NewValue="%(idir.Identity)">
+      <Output PropertyName="cmd2" TaskParameter="NewString"/>
+    </MSBuild.ExtensionPack.Framework.TextString>
+    <Message Text="Out: $(cmd2)" Importance="high" />
+
+    <Exec Command="$(cmd2)"/>
+
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="%(idir.Identity)/bin" Match="i386-linux">
+      <Output TaskParameter="Folders" ItemName="bdir"/>
+    </MSBuild.ExtensionPack.FileSystem.Folder>
+
+    <Exec Command="cd %(bdir.Identity); ./tlmgr install latex l3kernel l3packages etoolbox"/>
+    <Exec Command="cd %(bdir.Identity); ./tlmgr install lm fontspec euenc tipa xkeyval xunicode"/>
+    <Exec Command="cd %(bdir.Identity); ./tlmgr install fancyhdr float graphics hanging mdframed oberdiek"/>
+    <Exec Command="cd %(bdir.Identity); ./tlmgr install setspace tools xcolor eso-pic geometry"/>
+    <Exec Command="cd %(bdir.Identity); ./tlmgr install xetex xetex-def"/>
+    <Exec Command="cd %(bdir.Identity); ./tlmgr paper letter"/>
   </Target>
   <ItemGroup>
     <tlbin Include="XeLaTexConvert\TexLive\**\install-tl-advanced.bat"/>
     <rdir Include="XeLaTexConvert\XeLaTexExe"/>
   </ItemGroup>
-  <Target Name="LocalPw-tl">
+  <Target Name="LocalPw-tl-win">
     <Message Text="tlbin: @(tlbin)" Importance="high" />
     <Message Text="rdir: @(rdir)" Importance="high" />
     <ConvertToAbsolutePath Paths="@(tlbin)">
