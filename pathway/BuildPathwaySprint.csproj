@@ -271,7 +271,7 @@
   <Target Name="RemoveBuild">
     <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="BuildPathway\Files" Condition="Exists('BuildPathway\Files')"/>
     <RemoveDir Directories="BuildPathway\Files" Condition="Exists('BuildPathway\Files')"/>
-    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="$BuildPathway\Wix" Condition="Exists('BuildPathway\Wix')"/>
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="BuildPathway\Wix" Condition="Exists('BuildPathway\Wix')"/>
     <RemoveDir Directories="BuildPathway\Wix" Condition="Exists('BuildPathway\Wix')"/>
   </Target>
   <Target Name="RemovePythonBinaries">
@@ -390,6 +390,11 @@
     <CallTarget Targets="TL-Linux" Condition="$(OS) == 'Linux'"/>
   </Target>
   <Target Name="TL-Win">
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="XeLaTexConvert" Match="TexLive">
+      <Output TaskParameter="Folders" ItemName="idir"/>
+    </MSBuild.ExtensionPack.FileSystem.Folder>
+    <Message Text="idir: %(idir.Identity)" Importance="high" />
+
     <MSBuild.ExtensionPack.Web.WebClient TaskAction="DownloadFile" Url="http://mirror.ctan.org/systems/texlive/tlnet/install-tl.zip" FileName="%(idir.Identity)\install-tl.zip"/>
     <Exec Command="dir %(idir.Identity)"/>
     <MSBuild.ExtensionPack.Compression.Zip TaskAction="Extract" ExtractPath="%(idir.Identity)" ZipFileName="%(idir.Identity)\install-tl.zip"/>
