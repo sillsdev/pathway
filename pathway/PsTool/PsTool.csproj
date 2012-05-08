@@ -237,6 +237,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AfterBeforeProcess.cs" />
+    <Compile Include="AfterBeforeProcessEpub.cs" />
     <Compile Include="AfterBeforeXHTMLProcess.cs" />
     <Compile Include="Backend.cs" />
     <Compile Include="ClassInfo.cs" />

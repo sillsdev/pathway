@@ -477,7 +477,7 @@ namespace SIL.PublishingSolution
             CssTree cssTree = new CssTree();
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
 
-            AfterBeforeProcess afterBeforeProcess = new AfterBeforeProcess();
+            AfterBeforeProcessEpub afterBeforeProcess = new AfterBeforeProcessEpub();
             afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
             if (projInfo.IsReversalExist)
@@ -485,7 +485,7 @@ namespace SIL.PublishingSolution
                 cssClass = cssTree.CreateCssProperty(projInfo.DefaultRevCssFileWithPath, true);
                 string originalDefaultXhtmlFileName = projInfo.DefaultXhtmlFileWithPath;
                 projInfo.DefaultXhtmlFileWithPath = Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
-                AfterBeforeProcess afterBeforeProcessReversal = new AfterBeforeProcess();
+                AfterBeforeProcessEpub afterBeforeProcessReversal = new AfterBeforeProcessEpub();
                 afterBeforeProcessReversal.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
                 Common.StreamReplaceInFile(projInfo.DefaultXhtmlFileWithPath, "&nbsp;", "&#x2007;");
                 projInfo.DefaultXhtmlFileWithPath = originalDefaultXhtmlFileName;
