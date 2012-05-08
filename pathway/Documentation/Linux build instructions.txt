@@ -26,6 +26,9 @@ You can also change -etarget=Daily (this updates the build # in all the Assembly
 If you put it in another location, you will need to add
 -ebinsrc=~/git1/pathway/pathway
 replacing git1 with the folder you have used.
+For 64-bit build the 
+-ePlatform=Any\ CPU
+parameter should be given to the build.
 
 INSTALLING
 ----------

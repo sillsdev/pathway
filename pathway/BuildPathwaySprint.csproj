@@ -17,7 +17,7 @@
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Any CPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -29,7 +29,7 @@
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|Any CPU' ">
     <OutputPath>bin\Release7BTE\</OutputPath>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -41,7 +41,7 @@
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|Any CPU' ">
     <OutputPath>bin\Release7SE\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
@@ -53,7 +53,7 @@
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|Any CPU' ">
     <OutputPath>bin\Corporate7BTE\</OutputPath>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -65,7 +65,7 @@
     <ConfTag>Pw7</ConfTag>
     <Status></Status>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|Any CPU' ">
     <OutputPath>bin\Corporate7SE\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
@@ -77,7 +77,7 @@
     <ConfTag>Pw7</ConfTag>
     <Status></Status>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwCtx|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwCtx|Any CPU' ">
     <OutputPath>bin\PwCtx\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Edition>BTE</Edition>
@@ -151,7 +151,7 @@
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|Any CPU' ">
     <OutputPath>bin\PathwayXeLaTeX\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Status>Testing</Status>
@@ -161,7 +161,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <Status>Testing</Status>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayYouVersion|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayYouVersion|Any CPU' ">
     <OutputPath>bin\PathwayYouVersion\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Status>Testing</Status>
@@ -172,7 +172,6 @@
     <Status>Testing</Status>
   </PropertyGroup>
   
-
   <ItemGroup>
     <Reference Include="BuildTasks, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -289,80 +288,80 @@
   <Target Name="Corporate7BTE">
     <Message Text="Status: $(Status)" Importance="high" />
     <MSBuild Projects="PublishingSolution.sln" Targets="Build"
-      Properties="Configuration=Corporate7BTE;Platform=x86"/>
+      Properties="Configuration=Corporate7BTE;Platform=$(Platform)"/>
     <Message Text="Status: $(Status)" Importance="high" />
   </Target>
   <Target Name="Corporate7SE">
     <MSBuild Projects="PublishingSolution.sln" Targets="Build"
-      Properties="Configuration=Corporate7SE;Platform=x86"/>
+      Properties="Configuration=Corporate7SE;Platform=$(Platform)"/>
   </Target>
   <Target Name="Release7BTE">
     <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
-      Properties="Configuration=Release7BTE;Platform=x86"/>
+      Properties="Configuration=Release7BTE;Platform=$(Platform)"/>
   </Target>
   <Target Name="Release7SE">
     <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
-      Properties="Configuration=Release7SE;Platform=x86"/>
+      Properties="Configuration=Release7SE;Platform=$(Platform)"/>
   </Target>
   <Target Name="PwCtx">
     <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
-      Properties="Configuration=PwCtx;Platform=x86"/>
+      Properties="Configuration=PwCtx;Platform=$(Platform)"/>
   </Target>
   <Target Name="PathwayXeLaTeX" DependsOnTargets="Install-tl;LocalPw-tl">
     <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
-      Properties="Configuration=PathwayXeLaTeX;Platform=x86"/>
+      Properties="Configuration=PathwayXeLaTeX;Platform=$(Platform)"/>
   </Target>
   <Target Name="PathwayYouVersion">
     <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
-      Properties="Configuration=PathwayYouVersion;Platform=x86"/>
+      Properties="Configuration=PathwayYouVersion;Platform=$(Platform)"/>
   </Target>
   <Target Name="Checking">
     <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
-      Properties="Configuration=Checking;Platform=x86"/>
+      Properties="Configuration=Checking;Platform=$(Platform)"/>
   </Target>
   <Target Name="CorporateBTE">
     <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
-      Properties="Configuration=CorporateBTE;Platform=x86"/>
+      Properties="Configuration=CorporateBTE;Platform=$(Platform)"/>
   </Target>
   <Target Name="CorporateSE">
     <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
-      Properties="Configuration=CorporateSE;Platform=x86"/>
+      Properties="Configuration=CorporateSE;Platform=$(Platform)"/>
   </Target>
   <Target Name="CorporateBTE604">
     <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
-      Properties="Configuration=CorporateBTE604;Platform=x86"/>
+      Properties="Configuration=CorporateBTE604;Platform=$(Platform)"/>
   </Target>
   <Target Name="CorporateSE604">
     <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
-      Properties="Configuration=CorporateSE604;Platform=x86"/>
+      Properties="Configuration=CorporateSE604;Platform=$(Platform)"/>
   </Target>
   <Target Name="CorporateBTE605">
     <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
-      Properties="Configuration=CorporateBTE605;Platform=x86"/>
+      Properties="Configuration=CorporateBTE605;Platform=$(Platform)"/>
   </Target>
   <Target Name="CorporateSE605">
     <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
-      Properties="Configuration=CorporateSE605;Platform=x86"/>
+      Properties="Configuration=CorporateSE605;Platform=$(Platform)"/>
   </Target>
   <Target Name="CorporateBTE606">
     <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
-      Properties="Configuration=CorporateBTE606;Platform=x86"/>
+      Properties="Configuration=CorporateBTE606;Platform=$(Platform)"/>
   </Target>
   <Target Name="CorporateSE606">
     <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
-      Properties="Configuration=CorporateSE606;Platform=x86"/>
+      Properties="Configuration=CorporateSE606;Platform=$(Platform)"/>
   </Target>
   <Target Name="ReleaseBTE">
     <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
-      Properties="Configuration=ReleaseBTE;Platform=x86"/>
+      Properties="Configuration=ReleaseBTE;Platform=$(Platform)"/>
   </Target>
   <Target Name="ReleaseBTE604">
     <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
-      Properties="Configuration=ReleaseBTE604;Platform=x86"/>
+      Properties="Configuration=ReleaseBTE604;Platform=$(Platform)"/>
   </Target>
   <Target Name="ReleaseBTE606">
     <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
-      Properties="Configuration=ReleaseBTE606;Platform=x86"/>
+      Properties="Configuration=ReleaseBTE606;Platform=$(Platform)"/>
   </Target>
   <ItemGroup>
     <Dll606 Include=".\PsExport\Dlls606\*.dll"/>

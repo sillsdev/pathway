@@ -13,10 +13,13 @@ endif
 ifndef BUILD_NUMBER
 BUILD_NUMBER=1.1.2.2205
 endif
+ifndef Platform
+Platform=x86
+endif
 
 build:
 	#xbuild /target:ReBuild /property:Configuration=$(target)\;Platform=x86\;BUILD_NUMBER=$(BUILD_NUMBER)\;OS=Linux PublishingSolution.sln
-	xbuild /target:$(target) /property:BUILD_NUMBER=$(BUILD_NUMBER)\;OS=Linux BuildPathwaySprint.csproj
+	xbuild /target:$(target) /property:BUILD_NUMBER=$(BUILD_NUMBER)\;Platform=$(Platform)\;OS=Linux BuildPathwaySprint.csproj
 	rm -r -f $(bindst)
 	mkdir $(bindst)
 	cp -r $(binsrc)/BuildPathway/Files/ConfigurationTool/* $(bindst)
