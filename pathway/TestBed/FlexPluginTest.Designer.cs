@@ -68,6 +68,8 @@
             this.btnFileSizeZero = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.btnWordPress = new System.Windows.Forms.Button();
+            this.pbWordPress = new System.Windows.Forms.ProgressBar();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -230,6 +232,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.pbWordPress);
+            this.groupBox1.Controls.Add(this.btnWordPress);
             this.groupBox1.Controls.Add(this.btnYouVersion);
             this.groupBox1.Controls.Add(this.btnGetSoftwareData);
             this.groupBox1.Controls.Add(this.btnDotNet);
@@ -519,6 +523,25 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // btnWordPress
+            // 
+            this.btnWordPress.AccessibleName = "BtnWordPress";
+            this.btnWordPress.BackColor = System.Drawing.Color.Plum;
+            this.btnWordPress.Location = new System.Drawing.Point(259, 158);
+            this.btnWordPress.Name = "btnWordPress";
+            this.btnWordPress.Size = new System.Drawing.Size(95, 28);
+            this.btnWordPress.TabIndex = 69;
+            this.btnWordPress.Text = "Word Press";
+            this.btnWordPress.UseVisualStyleBackColor = false;
+            this.btnWordPress.Click += new System.EventHandler(this.btnWordPress_Click);
+            // 
+            // pbWordPress
+            // 
+            this.pbWordPress.Location = new System.Drawing.Point(216, 200);
+            this.pbWordPress.Name = "pbWordPress";
+            this.pbWordPress.Size = new System.Drawing.Size(196, 21);
+            this.pbWordPress.TabIndex = 70;
+            // 
             // FlexPluginTest
             // 
             this.AcceptButton = this.button1;
@@ -589,5 +612,7 @@
         private System.Windows.Forms.Button btnDotNet;
         private System.Windows.Forms.Button btnGetSoftwareData;
         private System.Windows.Forms.Button btnYouVersion;
+        private System.Windows.Forms.Button btnWordPress;
+        private System.Windows.Forms.ProgressBar pbWordPress;
     }
 }

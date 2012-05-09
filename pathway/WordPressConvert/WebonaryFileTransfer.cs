@@ -35,6 +35,12 @@ namespace SIL.PublishingSolution
 
         #region Private Event(s)
 
+        private void WebonaryFileTransfer_Load(object sender, EventArgs e)
+        {
+            GetFtpandMysql();
+            ProceedFileTransfer();
+        }
+
         private void btnClose_Click(object sender, EventArgs e)
         {
             Close();
@@ -52,6 +58,48 @@ namespace SIL.PublishingSolution
             if (result == DialogResult.OK)
             {
                 this.txtSourceFileLocation.Text = directoryDialog.SelectedPath;
+            }
+        }
+
+        private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            progressBar.Value = e.ProgressPercentage;
+        }
+
+        private void Completed(object sender, AsyncCompletedEventArgs e)
+        {
+            try
+            {
+                //PublicationInformation projInfo = new PublicationInformation();
+                //projInfo.ProjectInputType = "Dictionary";
+                //string dictionaryDirectoryPath = Path.Combine(Path.Combine(Path.Combine(Common.GetAllUserAppPath(), "SIL"), "Pathway"), projInfo.ProjectInputType);
+                //string webonaryZipFile = Path.Combine(dictionaryDirectoryPath, "PathwayWebonary.zip");
+                //ZipUtil.UnZipFiles(webonaryZipFile, Path.Combine(dictionaryDirectoryPath, "Wordpress"), "", false);
+                //StartedFileTransferToFTPLocation();
+
+            }
+            catch (System.ComponentModel.Win32Exception ex)
+            {
+                if (ex.NativeErrorCode == 530)
+                {
+
+                }
+            }
+            catch (WebException ex)
+            {
+                if (ex.Message == "The remote server returned an error: (530) Not logged in.")
+                {
+                    MessageBox.Show("FTP Username and Password are invalid, Please verify in the configuration tool in web property tab.", "Pathway", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("FTP settings are invalid, Please verify in the configuration tool in web property tab.", "Pathway", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                this.Close();
             }
         }
 
@@ -188,15 +236,7 @@ namespace SIL.PublishingSolution
 
             //  MessageBox.Show("Upload complete");
         }
-
-        #endregion
-
-        private void WebonaryFileTransfer_Load(object sender, EventArgs e)
-        {
-            GetFtpandMysql();
-            ProceedFileTransfer();
-        }
-
+        
         private void GetFtpandMysql()
         {
             Param.LoadSettings();
@@ -233,10 +273,30 @@ namespace SIL.PublishingSolution
                     case "dbpwd":
                         txtSqlPassword.Text = hashUtil.Decrypt(attribValue);
                         break;
+                    case "weburl":
+                        txtWebUrl.Text = attribValue;
+                        break;
+                    case "webadminusrnme":
+                        txtWebAdminUsrNme.Text = attribValue;
+                        break;
+                    case "webadminpwd":
+                        txtWebAdminPwd.Text = hashUtil.Decrypt(attribValue);
+                        break;
+                    case "webadminsitenme":
+                        txtWebAdminSiteNme.Text = attribValue;
+                        break;
+                    case "webemailid":
+                        txtWebEmailID.Text = attribValue;
+                        break;
+                    case "webftpfldrnme":
+                        txtWebFtpFldrNme.Text = attribValue;
+                        break;
                     default:
                         break;
                 }
             }
+
+            lblStatus.Text = "Processing Wordpress installation.";
         }
 
         private void ProceedFileTransfer()
@@ -250,19 +310,28 @@ namespace SIL.PublishingSolution
                 string[] filePaths = Directory.GetFiles(dictionaryDirectoryPath, "*.zip");
                 string webonaryZipFile = Path.Combine(dictionaryDirectoryPath, "PathwayWebonary.zip");
                 txtSourceFileLocation.Text = Path.Combine(dictionaryDirectoryPath, "Wordpress\\");
-                if (filePaths.Length > 0)
+
+                if (!File.Exists(webonaryZipFile))
                 {
-                    ZipUtil.UnZipFiles(webonaryZipFile, Path.Combine(dictionaryDirectoryPath, "Wordpress"), "", false);
-                    StartedFileTransferToFTPLocation();
-                }
-                else
-                {
+                    lblStatus.Text = "Downloading the Wordpress installer.";
                     WebClient webClient = new WebClient();
                     webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
                     webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
                     webClient.DownloadFileAsync(new Uri("http://pathway.sil.org/wp-content/sprint/PathwayWebonary-0.5.zip"), webonaryZipFile);
                 }
 
+                string renameDirectory = txtSourceFileLocation.Text;
+                DirectoryInfo di = new DirectoryInfo(renameDirectory);
+                di.Delete(true);
+
+                ZipUtil.UnZipFiles(webonaryZipFile, Path.Combine(dictionaryDirectoryPath, "Wordpress"), "", false);
+
+                di = new DirectoryInfo(Common.PathCombine(renameDirectory, "Webonary"));
+                di.MoveTo(Common.PathCombine(renameDirectory, txtWebFtpFldrNme.Text));
+
+                lblStatus.Text = "Started moving the files to FTP Location.";
+
+                StartedFileTransferToFTPLocation();
             }
             catch (System.ComponentModel.Win32Exception ex)
             {
@@ -292,18 +361,48 @@ namespace SIL.PublishingSolution
         private void StartedFileTransferToFTPLocation()
         {
             GetDirectoryFileCount(txtSourceFileLocation.Text);
-            SetPHPConfigFile(Path.Combine(txtSourceFileLocation.Text, "Webonary"));
+            SetPHPConfigFile(Path.Combine(txtSourceFileLocation.Text, txtWebFtpFldrNme.Text));
             StartBackgroundWork();
             progressBar.Value = 2;
+
+            //Step-3 Automated the PHP wordpress page setup for Administrative username and password
+            string getPHPSetupFileNamewithLocation = Directory.GetCurrentDirectory();
+            getPHPSetupFileNamewithLocation = Path.Combine(getPHPSetupFileNamewithLocation, "Wordpress\\setup_wp.php");
+            string movingPHPSetupFileLocation = Path.Combine(txtSourceFileLocation.Text, txtWebFtpFldrNme.Text);
+            movingPHPSetupFileLocation = Path.Combine(movingPHPSetupFileLocation, "wp-admin\\setup_wp.php");
+            File.Copy(getPHPSetupFileNamewithLocation, movingPHPSetupFileLocation, true);
+            
             ftpUpload();
+
+            lblStatus.Text = "Finished the installation Process";
+
+            SettingMysqlDatabase();
+            
             progressBar.Value = 100;
-            ////MessageBox.Show("Transfer Completed");
-            string address = txtTargetFileLocation.Text;
+
+            string address = txtWebUrl.Text;
             address = address.Replace("ftp", "http");
-            using (Process.Start(address + "Webonary/" + "index.php"))
+            address = Common.PathCombine(address, txtWebFtpFldrNme.Text);
+            using (Process.Start(address + "/"))
             {
 
             }
+            this.Close();
+        }
+
+        private void SettingMysqlDatabase()
+        {
+            WebonaryMysqlDatabaseTransfer webonaryMysql = new WebonaryMysqlDatabaseTransfer();
+
+            webonaryMysql.CreateDatabase("CreateUser-Db.sql", txtSqlUsername.Text, txtSqlPassword.Text, txtSqlServerName.Text, "3306", txtSqlDBName.Text);
+
+            webonaryMysql.InstallWordPressPHPPage(txtTargetFileLocation.Text, txtWebFtpFldrNme.Text, txtWebAdminSiteNme.Text, txtWebAdminUsrNme.Text, txtWebAdminPwd.Text, txtWebEmailID.Text, "1");
+
+            webonaryMysql.Drop2reset("drop2reset.sql", txtSqlUsername.Text, txtSqlPassword.Text, txtSqlServerName.Text, "3306", txtSqlDBName.Text);
+            
+            webonaryMysql.EmptyWebonary("EmptyWebonary.sql", txtSqlUsername.Text, txtSqlPassword.Text, txtSqlServerName.Text, "3306", txtSqlDBName.Text, txtTargetFileLocation.Text, txtWebFtpFldrNme.Text);
+
+            webonaryMysql.Data("data.sql", txtSqlUsername.Text, txtSqlPassword.Text, txtSqlServerName.Text, "3306", txtSqlDBName.Text, txtTargetFileLocation.Text, txtWebFtpFldrNme.Text);
         }
 
         private void SetPHPConfigFile(string fileLocation)
@@ -383,8 +482,7 @@ namespace SIL.PublishingSolution
             fs.Close();
             fs2.Close();
         }
-
-
+        
         private string GetAuthenticationUniqueKeysandSalts()
         {
             string getUserData = string.Empty;
@@ -427,47 +525,6 @@ namespace SIL.PublishingSolution
             return getUserData;
         }
 
-
-        private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            progressBar.Value = e.ProgressPercentage;
-        }
-
-        private void Completed(object sender, AsyncCompletedEventArgs e)
-        {
-            try
-            {
-                PublicationInformation projInfo = new PublicationInformation();
-                projInfo.ProjectInputType = "Dictionary";
-                string dictionaryDirectoryPath = Path.Combine(Path.Combine(Path.Combine(Common.GetAllUserAppPath(), "SIL"), "Pathway"), projInfo.ProjectInputType);
-                string webonaryZipFile = Path.Combine(dictionaryDirectoryPath, "PathwayWebonary.zip");
-                ZipUtil.UnZipFiles(webonaryZipFile, Path.Combine(dictionaryDirectoryPath, "Wordpress"), "", false);
-                StartedFileTransferToFTPLocation();
-
-            }
-            catch (System.ComponentModel.Win32Exception ex)
-            {
-                if (ex.NativeErrorCode == 530)
-                {
-
-                }
-            }
-            catch (WebException ex)
-            {
-                if (ex.Message == "The remote server returned an error: (530) Not logged in.")
-                {
-                    MessageBox.Show("FTP Username and Password are invalid, Please verify in the configuration tool in web property tab.", "Pathway", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("FTP settings are invalid, Please verify in the configuration tool in web property tab.", "Pathway", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                this.Close();
-            }
-        }
+        #endregion
     }
 }

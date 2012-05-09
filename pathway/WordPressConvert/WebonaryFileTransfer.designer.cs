@@ -51,8 +51,24 @@
             this.txtSqlServerName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.txtWebFtpFldrNme = new System.Windows.Forms.TextBox();
+            this.txtWebEmailID = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txtWebAdminSiteNme = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtWebAdminPwd = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtWebAdminUsrNme = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txtWebUrl = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lblStatus = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtSourceFileLocation
@@ -75,7 +91,7 @@
             // 
             // btnTransfer
             // 
-            this.btnTransfer.Location = new System.Drawing.Point(363, 129);
+            this.btnTransfer.Location = new System.Drawing.Point(363, 183);
             this.btnTransfer.Name = "btnTransfer";
             this.btnTransfer.Size = new System.Drawing.Size(97, 30);
             this.btnTransfer.TabIndex = 4;
@@ -85,7 +101,8 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(466, 129);
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnClose.Location = new System.Drawing.Point(466, 183);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(97, 30);
             this.btnClose.TabIndex = 5;
@@ -263,12 +280,156 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "FTP Details";
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label19);
+            this.groupBox3.Controls.Add(this.txtWebFtpFldrNme);
+            this.groupBox3.Controls.Add(this.txtWebEmailID);
+            this.groupBox3.Controls.Add(this.label18);
+            this.groupBox3.Controls.Add(this.txtWebAdminSiteNme);
+            this.groupBox3.Controls.Add(this.label14);
+            this.groupBox3.Controls.Add(this.txtWebAdminPwd);
+            this.groupBox3.Controls.Add(this.label15);
+            this.groupBox3.Controls.Add(this.txtWebAdminUsrNme);
+            this.groupBox3.Controls.Add(this.label16);
+            this.groupBox3.Controls.Add(this.txtWebUrl);
+            this.groupBox3.Controls.Add(this.label17);
+            this.groupBox3.Location = new System.Drawing.Point(600, 232);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(312, 250);
+            this.groupBox3.TabIndex = 33;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Website Details";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(17, 170);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(85, 13);
+            this.label19.TabIndex = 26;
+            this.label19.Text = "Ftp Folder Name";
+            // 
+            // txtWebFtpFldrNme
+            // 
+            this.txtWebFtpFldrNme.Location = new System.Drawing.Point(104, 167);
+            this.txtWebFtpFldrNme.MaxLength = 50;
+            this.txtWebFtpFldrNme.Name = "txtWebFtpFldrNme";
+            this.txtWebFtpFldrNme.Size = new System.Drawing.Size(170, 20);
+            this.txtWebFtpFldrNme.TabIndex = 25;
+            // 
+            // txtWebEmailID
+            // 
+            this.txtWebEmailID.Location = new System.Drawing.Point(105, 140);
+            this.txtWebEmailID.MaxLength = 50;
+            this.txtWebEmailID.Name = "txtWebEmailID";
+            this.txtWebEmailID.Size = new System.Drawing.Size(169, 20);
+            this.txtWebEmailID.TabIndex = 23;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(15, 143);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(46, 13);
+            this.label18.TabIndex = 24;
+            this.label18.Text = "Email ID";
+            // 
+            // txtWebAdminSiteNme
+            // 
+            this.txtWebAdminSiteNme.Location = new System.Drawing.Point(103, 114);
+            this.txtWebAdminSiteNme.MaxLength = 50;
+            this.txtWebAdminSiteNme.Name = "txtWebAdminSiteNme";
+            this.txtWebAdminSiteNme.Size = new System.Drawing.Size(171, 20);
+            this.txtWebAdminSiteNme.TabIndex = 3;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(15, 117);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(56, 13);
+            this.label14.TabIndex = 22;
+            this.label14.Text = "Site Name";
+            // 
+            // txtWebAdminPwd
+            // 
+            this.txtWebAdminPwd.Location = new System.Drawing.Point(103, 88);
+            this.txtWebAdminPwd.MaxLength = 25;
+            this.txtWebAdminPwd.Name = "txtWebAdminPwd";
+            this.txtWebAdminPwd.PasswordChar = '*';
+            this.txtWebAdminPwd.Size = new System.Drawing.Size(171, 20);
+            this.txtWebAdminPwd.TabIndex = 2;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(16, 91);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(85, 13);
+            this.label15.TabIndex = 20;
+            this.label15.Text = "Admin Password";
+            // 
+            // txtWebAdminUsrNme
+            // 
+            this.txtWebAdminUsrNme.Location = new System.Drawing.Point(103, 62);
+            this.txtWebAdminUsrNme.MaxLength = 25;
+            this.txtWebAdminUsrNme.Name = "txtWebAdminUsrNme";
+            this.txtWebAdminUsrNme.Size = new System.Drawing.Size(171, 20);
+            this.txtWebAdminUsrNme.TabIndex = 1;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(16, 64);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(87, 13);
+            this.label16.TabIndex = 18;
+            this.label16.Text = "Admin Username";
+            // 
+            // txtWebUrl
+            // 
+            this.txtWebUrl.Location = new System.Drawing.Point(103, 38);
+            this.txtWebUrl.MaxLength = 100;
+            this.txtWebUrl.Name = "txtWebUrl";
+            this.txtWebUrl.Size = new System.Drawing.Size(172, 20);
+            this.txtWebUrl.TabIndex = 0;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(17, 41);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(60, 13);
+            this.label17.TabIndex = 16;
+            this.label17.Text = "Website url";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 65);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(70, 13);
+            this.label7.TabIndex = 34;
+            this.label7.Text = "Please wait...";
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(12, 88);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(0, 13);
+            this.lblStatus.TabIndex = 35;
+            // 
             // WebonaryFileTransfer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(584, 519);
+            this.ClientSize = new System.Drawing.Size(588, 120);
+            this.Controls.Add(this.lblStatus);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.progressBar);
@@ -289,6 +450,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -319,5 +482,20 @@
         private System.Windows.Forms.TextBox txtSqlServerName;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox txtWebFtpFldrNme;
+        private System.Windows.Forms.TextBox txtWebEmailID;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox txtWebAdminSiteNme;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox txtWebAdminPwd;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox txtWebAdminUsrNme;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox txtWebUrl;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblStatus;
     }
 }
