@@ -143,6 +143,7 @@ namespace SIL.PublishingSolution
             getCreateDatabaseFile = Common.PathCombine(getCreateDatabaseFile, "wordpress");
             getCreateDatabaseFile = Common.PathCombine(getCreateDatabaseFile, fileName);
             ModifyDatabasenameInCreateDbSqlFile(getCreateDatabaseFile, databaseName);
+            getCreateDatabaseFile = getCreateDatabaseFile.Replace(".sql", "1.sql");
             RunScript(getCreateDatabaseFile, userName, password, hostAddress, port, databaseName);
         }
 
@@ -152,6 +153,7 @@ namespace SIL.PublishingSolution
             getCreateDatabaseFile = Common.PathCombine(getCreateDatabaseFile, "wordpress");
             getCreateDatabaseFile = Common.PathCombine(getCreateDatabaseFile, fileName);
             ModifyDatabasenameInDataDbSqlFile(getCreateDatabaseFile, databaseName, websiteAddress, directoryName);
+            getCreateDatabaseFile = getCreateDatabaseFile.Replace(".sql", "1.sql");
             RunScript(getCreateDatabaseFile, userName, password, hostAddress, port, databaseName);
         }
 
@@ -169,12 +171,13 @@ namespace SIL.PublishingSolution
             getCreateDatabaseFile = Common.PathCombine(getCreateDatabaseFile, "wordpress");
             getCreateDatabaseFile = Common.PathCombine(getCreateDatabaseFile, fileName);
             ModifyDatabasenameInEmptyWebonaryDbSqlFile(getCreateDatabaseFile, databaseName, websiteAddress, directoryName);
+            getCreateDatabaseFile = getCreateDatabaseFile.Replace(".sql", "1.sql");
             RunScript(getCreateDatabaseFile, userName, password, hostAddress, port, databaseName);
         }
 
         private void ModifyDatabasenameInCreateDbSqlFile(string fileLocation, string databaseName)
         {
-            string configFile = Common.PathCombine(fileLocation, "CreateUser-Db.sql");
+            string configFile = fileLocation;
             if (!File.Exists(configFile))
             {
                 return;
@@ -182,8 +185,14 @@ namespace SIL.PublishingSolution
 
             FileStream fs = new FileStream(configFile, FileMode.Open);
             StreamReader stream = new StreamReader(fs);
+            string configFile2 = configFile.Replace(".sql", "1.sql");
 
-            var fs2 = new FileStream(configFile, FileMode.Create, FileAccess.Write);
+            if(File.Exists(configFile2))
+            {
+                File.Delete(configFile2);
+            }
+
+            var fs2 = new FileStream(configFile2, FileMode.Create, FileAccess.Write);
             var sw2 = new StreamWriter(fs2);
             string line;
             while ((line = stream.ReadLine()) != null)
@@ -219,7 +228,7 @@ namespace SIL.PublishingSolution
 
         private void ModifyDatabasenameInEmptyWebonaryDbSqlFile(string fileLocation, string databaseName, string websiteAddress, string directoryName)
         {
-            string configFile = Common.PathCombine(fileLocation, "EmptyWebonary.sql");
+            string configFile = fileLocation;
             if (!File.Exists(configFile))
             {
                 return;
@@ -228,7 +237,13 @@ namespace SIL.PublishingSolution
             FileStream fs = new FileStream(configFile, FileMode.Open);
             StreamReader stream = new StreamReader(fs);
 
-            var fs2 = new FileStream(configFile, FileMode.Create, FileAccess.Write);
+            string configFile2 = configFile.Replace(".sql", "1.sql");
+            if (File.Exists(configFile2))
+            {
+                File.Delete(configFile2);
+            }
+
+            var fs2 = new FileStream(configFile2, FileMode.Create, FileAccess.Write);
             var sw2 = new StreamWriter(fs2);
             string line;
             while ((line = stream.ReadLine()) != null)
@@ -236,14 +251,14 @@ namespace SIL.PublishingSolution
 
                 if (line.IndexOf("http://localhost/wordpress") >= 0)
                 {
-                    if(websiteAddress.Substring(websiteAddress.Length-1, websiteAddress.Length) == "/")
-                    {
+                    //if(websiteAddress.Substring(websiteAddress.Length-2, websiteAddress.Length-1) == "/")
+                    //{
                         line = line.Replace("http://localhost/wordpress", websiteAddress + "/" + directoryName);
-                    }
-                    else
-                    {
-                        line = line.Replace("http://localhost/wordpress", websiteAddress + directoryName);
-                    }
+                    //}
+                    //else
+                    //{
+                    //    line = line.Replace("http://localhost/wordpress", websiteAddress + directoryName);
+                    //}
                 }
                 if (line.IndexOf("FROM `wordpress`.") >= 0)
                 {
@@ -258,7 +273,7 @@ namespace SIL.PublishingSolution
 
         private void ModifyDatabasenameInDataDbSqlFile(string fileLocation, string databaseName, string websiteAddress, string directoryName)
         {
-            string configFile = Common.PathCombine(fileLocation, "Data.sql");
+            string configFile = fileLocation;
             if (!File.Exists(configFile))
             {
                 return;
@@ -267,7 +282,14 @@ namespace SIL.PublishingSolution
             FileStream fs = new FileStream(configFile, FileMode.Open);
             StreamReader stream = new StreamReader(fs);
 
-            var fs2 = new FileStream(configFile, FileMode.Create, FileAccess.Write);
+            string configFile2 = configFile.Replace(".sql", "1.sql");
+
+            if (File.Exists(configFile2))
+            {
+                File.Delete(configFile2);
+            }
+
+            var fs2 = new FileStream(configFile2, FileMode.Create, FileAccess.Write);
             var sw2 = new StreamWriter(fs2);
             string line;
             while ((line = stream.ReadLine()) != null)
@@ -275,14 +297,14 @@ namespace SIL.PublishingSolution
 
                 if (line.IndexOf("http://localhost/wordpress") >= 0)
                 {
-                    if (websiteAddress.Substring(websiteAddress.Length - 1, websiteAddress.Length) == "/")
-                    {
+                    //if (websiteAddress.Substring(websiteAddress.Length - 1, websiteAddress.Length) == "/")
+                    //{
                         line = line.Replace("http://localhost/wordpress", websiteAddress + "/" + directoryName);
-                    }
-                    else
-                    {
-                        line = line.Replace("http://localhost/wordpress", websiteAddress + directoryName);
-                    }
+                    //}
+                    //else
+                    //{
+                    //    line = line.Replace("http://localhost/wordpress", websiteAddress + directoryName);
+                    //}
                 }
                 if (line.IndexOf("FROM `wordpress`.") >= 0)
                 {
