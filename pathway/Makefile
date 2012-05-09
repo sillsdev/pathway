@@ -19,7 +19,7 @@ endif
 
 build:
 	#xbuild /target:ReBuild /property:Configuration=$(target)\;Platform=x86\;BUILD_NUMBER=$(BUILD_NUMBER)\;OS=Linux PublishingSolution.sln
-	xbuild /target:$(target) /property:BUILD_NUMBER=$(BUILD_NUMBER)\;Platform=$(Platform)\;OS=Linux BuildPathwaySprint.csproj
+	xbuild /target:$(target) /property:BUILD_NUMBER=$(BUILD_NUMBER)\;Platform='$(Platform)'\;OS=Linux BuildPathwaySprint.csproj
 	rm -r -f $(bindst)
 	mkdir $(bindst)
 	cp -r $(binsrc)/BuildPathway/Files/ConfigurationTool/* $(bindst)
@@ -49,7 +49,7 @@ clean:
 	sudo rm -rf $(DESTDIR)$(prefix)/share/man/man7/pathwayB.*
 	sudo rm -rf $(DESTDIR)$(prefix)/share/man/man7/ConfigurationTool.*
 	sudo rm -rf $(DESTDIR)$(prefix)/bin/pathwayB $(DESTDIR)$(prefix)/bin/ConfigurationTool
-	xdg-desktop-menu uninstall /etc/pathway/sil-ConfigurationTool.desktop
+	-xdg-desktop-menu uninstall /etc/pathway/sil-ConfigurationTool.desktop
 	sudo rm -rf $(DESTDIR)/etc/pathway
 	rm -rf ~/.mono/registry/CurrentUser/software/sil/pathway
 	rm -rf debian/pathway-etc/values.xml
