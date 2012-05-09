@@ -1,7 +1,7 @@
 SETTING UP GIT CLIENT
 ---------------------
 In order to make git work on Linux, I had to use
-sudo apt-get install git git-gui gitk
+sudo apt-get -y install git git-gui gitk
 This installs the git client.
 Then you can create a .netrc file in your home folder as described on the google code site.
 Then you can use the command on the google code site to clone a copy of the repo.
@@ -14,7 +14,7 @@ and cloned the pathway repo there.
 SETTING UP BUILD SYSTEM
 -----------------------
 To set up Linux for building packages, I used:
-sudo apt-get install devscripts autotools-dev mono-xbuild gawk
+sudo apt-get -y install devscripts autotools-dev mono-complete gawk
 
 BUILDING PATHWAY
 ----------------
