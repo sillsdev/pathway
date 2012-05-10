@@ -556,6 +556,8 @@ portable 1
     <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-et.hyp.txt"/>
     <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-es.hyp.txt"/>
     <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-eo.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-fur.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-rm.hyp.txt"/>
     <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-de-ch-1901.hyp.txt"/>
     <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-el-polyton.hyp.txt"/>
     <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-el-monoton.hyp.txt"/>
