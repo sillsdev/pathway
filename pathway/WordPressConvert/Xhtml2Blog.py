@@ -488,9 +488,11 @@ class Xhtml2Blog:
                 anchors = self.FindAll(thisentry, '//x:a')
                 for anchor in anchors:
                     linkId = anchor.attrib['href'][1:]
-                    linkIdx = ids.index(linkId)
-                    if linkIdx >= 0:
+                    try:
+                        linkIdx = ids.index(linkId)
                         anchor.attrib['href'] = '?p=%d' % (linkIdx + postIndex)
+                    except:
+                        anchor.attrib['href'] = '?p=%d' % idx
             actualCount += 1
             outdata = nav + etree.tostring(thisentry).encode('utf-8').replace('&#65533;','')
             outname = self.UniqueName(self.SanitizeName(stem)) + ".htm"

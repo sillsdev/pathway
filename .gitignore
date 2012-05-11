@@ -76,6 +76,8 @@ pathway/WordPress/bin/*
 pathway/WordPress/obj/*
 pathway/WordPressConvert/bin/*
 pathway/WordPressConvert/obj/*
+pathway/WordPressConvert/build/*
+pathway/WordPressConvert/dist/*
 pathway/XeLaTexConvert/bin/*
 pathway/XeLaTexConvert/obj/*
 pathway/XeLaTexConvert/XeLaTexExe
