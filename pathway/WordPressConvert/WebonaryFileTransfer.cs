@@ -21,6 +21,7 @@ namespace SIL.PublishingSolution
 
         private int _totalFiles = 1;
         private int _filesCount = 1;
+        public string XhtmlPath;
 
         #endregion
 
@@ -40,6 +41,113 @@ namespace SIL.PublishingSolution
             GetFtpandMysql();
             ProceedFileTransfer();
         }
+
+        private void MoveAudioandPictureFile(string renameDirectory)
+        {
+            string imageAudioRootPath = GetImageRootDirectory();
+            string ftpFolderPath = Common.PathCombine(renameDirectory, txtWebFtpFldrNme.Text);
+            string ftpPictureFolder = Common.PathCombine(ftpFolderPath, "Pictures");
+
+            Directory.CreateDirectory(ftpPictureFolder);
+            List<string> imageList = new List<string>();
+            if (!File.Exists(XhtmlPath)) return;
+
+            var xmldoc = new XmlDocument();
+            try
+            {
+                xmldoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
+                xmldoc.Load(XhtmlPath);
+                string tag = "img";
+                XmlNodeList nodeList = xmldoc.GetElementsByTagName(tag);
+                if (nodeList.Count > 0)
+                {
+                    try
+                    {
+                        foreach (XmlNode item in nodeList)
+                        {
+                            if (item.Attributes != null)
+                            {
+                                var name = item.Attributes.GetNamedItem("src");
+                                if (name != null && name.Value.Length > 0)
+                                {
+
+                                    string imageFullPath = Common.PathCombine(imageAudioRootPath, name.Value);
+                                    if (File.Exists(imageFullPath))
+                                    {
+                                        File.Copy(imageFullPath, Common.PathCombine(ftpPictureFolder, Path.GetFileName(imageFullPath)), true);
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                    catch(Exception ex){}
+                }
+
+                tag = "span";
+                nodeList = xmldoc.GetElementsByTagName(tag);
+                if (nodeList.Count > 0)
+                {
+                    try
+                    {
+                        foreach (XmlNode item in nodeList)
+                        {
+                            if (item.Attributes != null && item.Attributes["lang"] != null)
+                            {
+                                string name = item.Attributes["lang"].Value;
+                                if (name != null && name.IndexOf("-audio") > 0)
+                                {
+                                    string audioFile = item.InnerText;
+                                    string audioFullPath = Common.PathCombine(Common.PathCombine(imageAudioRootPath, "AudioVisual"),audioFile);
+                                    if (File.Exists(audioFullPath))
+                                    {
+                                        File.Copy(audioFullPath, Common.PathCombine(ftpFolderPath, Path.GetFileName(audioFullPath)), true);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch(Exception ex){}
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        private string GetImageRootDirectory()
+        {
+            string imageRootPath = string.Empty;
+            if (!File.Exists(XhtmlPath)) return imageRootPath;
+            XmlDocument xdoc = new XmlDocument { XmlResolver = null };
+            xdoc.Load(XhtmlPath);
+            XmlNodeList metaNodes = xdoc.GetElementsByTagName("meta");
+            if(metaNodes != null && metaNodes.Count > 0)
+            {
+                try
+                {
+                    foreach (XmlNode metaNode in metaNodes)
+                    {
+                        if (metaNode.Attributes["name"].Value == "linkedFilesRootDir")
+                        {
+                            imageRootPath = metaNode.Attributes["content"].Value;
+                            break;
+                        }
+                    }
+                }
+                catch
+                {
+
+                    return string.Empty;
+                }
+                return imageRootPath;
+            }
+
+
+
+            return imageRootPath;
+        }
+
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -236,7 +344,7 @@ namespace SIL.PublishingSolution
 
             //  MessageBox.Show("Upload complete");
         }
-        
+
         private void GetFtpandMysql()
         {
             Param.LoadSettings();
@@ -322,14 +430,18 @@ namespace SIL.PublishingSolution
 
                 string renameDirectory = txtSourceFileLocation.Text;
                 DirectoryInfo di = new DirectoryInfo(renameDirectory);
-                di.Delete(true);
+                if (di.Exists)
+                    di.Delete(true);
 
                 ZipUtil.UnZipFiles(webonaryZipFile, Path.Combine(dictionaryDirectoryPath, "Wordpress"), "", false);
 
                 di = new DirectoryInfo(Common.PathCombine(renameDirectory, "Webonary"));
                 di.MoveTo(Common.PathCombine(renameDirectory, txtWebFtpFldrNme.Text));
 
+                MoveAudioandPictureFile(renameDirectory);
+
                 lblStatus.Text = "Started moving the files to FTP Location.";
+
 
                 StartedFileTransferToFTPLocation();
             }
@@ -371,13 +483,13 @@ namespace SIL.PublishingSolution
             string movingPHPSetupFileLocation = Path.Combine(txtSourceFileLocation.Text, txtWebFtpFldrNme.Text);
             movingPHPSetupFileLocation = Path.Combine(movingPHPSetupFileLocation, "wp-admin\\setup_wp.php");
             File.Copy(getPHPSetupFileNamewithLocation, movingPHPSetupFileLocation, true);
-            
+
             ftpUpload();
 
             lblStatus.Text = "Finished the installation Process";
 
             SettingMysqlDatabase();
-            
+
             progressBar.Value = 100;
 
             string address = txtWebUrl.Text;
@@ -396,13 +508,13 @@ namespace SIL.PublishingSolution
 
             webonaryMysql.CreateDatabase("CreateUser-Db.sql", txtSqlUsername.Text, txtSqlPassword.Text, txtSqlServerName.Text, "3306", txtSqlDBName.Text);
 
-            webonaryMysql.InstallWordPressPHPPage(txtTargetFileLocation.Text, txtWebFtpFldrNme.Text, txtWebAdminSiteNme.Text, txtWebAdminUsrNme.Text, txtWebAdminPwd.Text, txtWebEmailID.Text, "1");
+            webonaryMysql.InstallWordPressPHPPage(txtWebUrl.Text, txtWebFtpFldrNme.Text, txtWebAdminSiteNme.Text, txtWebAdminUsrNme.Text, txtWebAdminPwd.Text, txtWebEmailID.Text, "1");
 
             webonaryMysql.Drop2reset("drop2reset.sql", txtSqlUsername.Text, txtSqlPassword.Text, txtSqlServerName.Text, "3306", txtSqlDBName.Text);
-            
-            webonaryMysql.EmptyWebonary("EmptyWebonary.sql", txtSqlUsername.Text, txtSqlPassword.Text, txtSqlServerName.Text, "3306", txtSqlDBName.Text, txtTargetFileLocation.Text, txtWebFtpFldrNme.Text);
 
-            webonaryMysql.Data("data.sql", txtSqlUsername.Text, txtSqlPassword.Text, txtSqlServerName.Text, "3306", txtSqlDBName.Text, txtTargetFileLocation.Text, txtWebFtpFldrNme.Text);
+            webonaryMysql.EmptyWebonary("EmptyWebonary.sql", txtSqlUsername.Text, txtSqlPassword.Text, txtSqlServerName.Text, "3306", txtSqlDBName.Text, txtWebUrl.Text, txtWebFtpFldrNme.Text);
+
+            webonaryMysql.Data("data.sql", txtSqlUsername.Text, txtSqlPassword.Text, txtSqlServerName.Text, "3306", txtSqlDBName.Text, txtWebUrl.Text, txtWebFtpFldrNme.Text);
         }
 
         private void SetPHPConfigFile(string fileLocation)
@@ -413,7 +525,7 @@ namespace SIL.PublishingSolution
             {
                 return;
             }
-            
+
             FileStream fs = new FileStream(tempConfigFile, FileMode.Open);
             StreamReader stream = new StreamReader(fs);
 
@@ -429,7 +541,7 @@ namespace SIL.PublishingSolution
 
                 if (line.IndexOf("define('DB_NAME', 'database_name_here');") >= 0)
                 {
-                    line = line.Replace("define('DB_NAME', 'database_name_here');", "define('DB_NAME', '"+ txtSqlDBName.Text + "');");
+                    line = line.Replace("define('DB_NAME', 'database_name_here');", "define('DB_NAME', '" + txtSqlDBName.Text + "');");
                 }
                 if (line.IndexOf("define('DB_USER', 'username_here');") >= 0)
                 {
@@ -470,7 +582,7 @@ namespace SIL.PublishingSolution
                 if (line.IndexOf("define('LOGGED_IN_SALT',   'put your unique phrase here');") >= 0)
                 {
                     line = line.Replace("define('LOGGED_IN_SALT',   'put your unique phrase here');", keyAndSalt[6]);
-                } 
+                }
                 if (line.IndexOf("define('NONCE_SALT',       'put your unique phrase here');") >= 0)
                 {
                     line = line.Replace("define('NONCE_SALT',       'put your unique phrase here');", keyAndSalt[7]);
@@ -482,7 +594,7 @@ namespace SIL.PublishingSolution
             fs.Close();
             fs2.Close();
         }
-        
+
         private string GetAuthenticationUniqueKeysandSalts()
         {
             string getUserData = string.Empty;
