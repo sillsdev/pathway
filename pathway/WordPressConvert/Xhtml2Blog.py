@@ -20,6 +20,7 @@ modules ={}
 navTpl = '''<table style="border:medium none white;width:100%%;"><tr><td>%s</td><td style="text-align:right;">%s</td></tr></table>'''
 lfArrowTpl = '''<a href="?p=%d"><img src="%s/wp-content/icons/ArrowLeft.png" width="32" height="32" border="0" alt="&lt;&#x2014;" /></a>'''
 rtArrowTpl = '''<a href="?p=%d"><img src="%s/wp-content/icons/ArrowRight.png" width="32" height="32" border="0" alt="&#x2014;&gt;" /></a>'''
+audioTpl = '''[audio src="AudioVisual/%s" options="controls"]'''
 
 def FixSpace(s):
     """Replace incorrectly converted spaces in string s"""
@@ -415,6 +416,7 @@ class Xhtml2Blog:
             outpath = '.'
         entries = self.FindAll(root, '//x:div[@class="entry"]')
         ids = self.FindAll(root, '//x:div[@class="entry"]/@id')
+        audioWs = []
         print len(entries), "entries"
         actualCount = 0
         if site:
@@ -428,7 +430,10 @@ class Xhtml2Blog:
                 thislanguage = self.JustNode(language)
                 slug = self.FindItem(thislanguage, './@name')
                 fullName = self.FindItem(thislanguage, './@content')
-                termTable.AddLanguage(slug, fullName)
+                if slug[-6:] == '-audio':
+                    audioWs.append(slug)
+                else:
+                    termTable.AddLanguage(slug, fullName)
             stemLanguage = ''
             if arrows:
                 termTable.AddToc(self.FindAll(root, '//*[@class="def"]//text()'))
@@ -493,6 +498,11 @@ class Xhtml2Blog:
                         anchor.attrib['href'] = '?p=%d' % (linkIdx + postIndex)
                     except:
                         anchor.attrib['href'] = '?p=%d' % idx
+                for ws in audioWs:
+                    audio = self.FindAll(thisentry, '//*[@lang="%s"]' % ws)
+                    for elem in audio:
+                        if len(elem.getchildren()) == 0:
+                            elem.text = audioTpl % os.path.splitext(elem.text)[0].strip().replace(' ', '%20')
             actualCount += 1
             outdata = nav + etree.tostring(thisentry).encode('utf-8').replace('&#65533;','')
             outname = self.UniqueName(self.SanitizeName(stem)) + ".htm"
