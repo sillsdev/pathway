@@ -79,6 +79,7 @@ namespace SIL.PublishingSolution
                 }
 
                 WebonaryFileTransfer webonaryFtp = new WebonaryFileTransfer();
+                webonaryFtp.XhtmlPath = projInfo.DefaultXhtmlFileWithPath;
                 webonaryFtp.ShowDialog();
             }
             catch (Exception)
@@ -87,6 +88,7 @@ namespace SIL.PublishingSolution
             }
             return true;
         }
+
         #endregion bool Export(PublicationInformation projInfo)
     }
 }
