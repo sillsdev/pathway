@@ -43,6 +43,13 @@ namespace SIL.Tool
                     Common.SupportFolder = "";
                     return (string)regObj;
                 }
+                if (Path.PathSeparator == '/') //Test for Linux (see: http://www.mono-project.com/FAQ:_Technical)
+                {
+                    const string myPathwayDir = "/usr/lib/pathway";
+                    RegistryAccess.SetStringRegistryValue("PathwayDir", myPathwayDir);
+                    Common.SupportFolder = "";
+                    return myPathwayDir;
+                }
                 if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.CompanyKeyLocalMachine,
                     "Pathway", "PathwayDir", out regObj))
                 {
