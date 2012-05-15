@@ -34,7 +34,7 @@ install:
 	sudo chmod 777 $(DESTDIR)$(prefix)/share/python-support
 	sudo mkdir -p $(DESTDIR)$(prefix)/share/doc/pathway
 	sudo chmod 777 $(DESTDIR)$(prefix)/share/doc/pathway
-	gawk 'BEGIN {print "<values><value name=\"PathwayDir\" type=\"string\">$(prefix)/lib/pathway/</value><value name=\"WritingSystemStore\" type=\"string\">~/.local/share/SIL/WritingSystemStore/</value></values>"}' >debian/pathway-etc/values.xml
+	python -c 'print "<values><value name=\"PathwayDir\" type=\"string\">/usr/lib/pathway/</value><value name=\"WritingSystemStore\" type=\"string\">~/.local/share/SIL/WritingSystemStore/</value></values>"' >debian/pathway-etc/values.xml
 	sudo mkdir -p $(DESTDIR)/etc/pathway
 	sudo cp -r debian/pathway-etc/. $(DESTDIR)/etc/pathway
 

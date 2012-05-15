@@ -13,7 +13,7 @@ pathway/Releases
 pathway/bin
 pathway/debian/files
 pathway/debian/pathway-etc/values.xml
-pathway/debian/pathway*
+pathway/debian/pathway/*
 pathway_*
 
 pathway/ApplyXslt/bin/*

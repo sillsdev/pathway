@@ -1,5 +1,19 @@
-pathway (1.1.2.2205-1) unstable; urgency=high
+pathway (1.1.2.2254-1) unstable; urgency=high
 
+  * 1.1.2.2254 sprint
+    - InDesign: TD-2984 Change Macro to format FrontMatter Elements 
+    - Installer: Allow Platform to be set to Any CPU for 64-bit build.
+    - Open Office Writer: TD-2950 square box chars in reversal entries 
+    - Paratext: TD-2980 Support embedded character styles from Paratext's USX 2.0
+    - Smart Device: TD-2982 Extra space space 
+    - Web: convert sound files into short codes for html5 degradeable
+    - Web: TD-2887 load the pictures and sound files
+    - Web: TD-2952 and TD-2954 ftp site transfer, send data to mysql database
+    - Web: TD-2952 ftp site transfer 
+    - Web: TD-2954 send data to mysql database
+    - Web: TD-2955 script the site initialization
+    - Web: TD-2959 load the pictures and sound files 
+    - XeTeX: TD-2968 Headers missing in XeLaTex for root based dictionaries
   * 1.1.2.2205 sprint release
     - CSS Parser: TD-2906 pdf using prince doesn't use BeforePwConvert
     - Common Code: TD-2897 Include Wycliffe Bible Translators
