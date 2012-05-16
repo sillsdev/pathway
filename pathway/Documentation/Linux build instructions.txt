@@ -14,7 +14,7 @@ and cloned the pathway repo there.
 SETTING UP BUILD SYSTEM
 -----------------------
 To set up Linux for building packages, I used:
-sudo apt-get -y install devscripts autotools-dev mono-complete gawk
+sudo apt-get -y install devscripts debhelper autotools-dev mono-complete
 
 BUILDING PATHWAY
 ----------------
