@@ -62,6 +62,9 @@ namespace SIL.PublishingSolution
             try
             {
                 var xhtml = projInfo.DefaultXhtmlFileWithPath;
+                PreExportProcess preProcessor = new PreExportProcess(projInfo);
+                preProcessor.InsertFolderNameForAudioFilesinXhtml();
+
                 const string prog = "WordPress.bat";
                 var processFolder = Common.PathCombine(Common.GetAllUserPath(), "WordPress");
                 if (!Directory.Exists(processFolder))

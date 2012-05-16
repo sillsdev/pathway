@@ -797,13 +797,13 @@ namespace TestBed
         {
             WebonaryMysqlDatabaseTransfer webonaryMysql = new WebonaryMysqlDatabaseTransfer();
 
-            webonaryMysql.CreateDatabase("CreateUser-Db.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306", "");
+            webonaryMysql.CreateDatabase("CreateUser-Db.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306", "samdoss");
 
             webonaryMysql.InstallWordPressPHPPage("http://pathwaywebonary.com.cws10.my-hosting-panel.com", "webonary", "Sam Wordpress", "Samdoss", "arthur", "samdoss@live.com", "1");
             
             webonaryMysql.Drop2reset("drop2reset.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306", "sym147_webonary");
 
-            webonaryMysql.EmptyWebonary("EmptyWebonary.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306", "sym147_webonary", "http://pathwaywebonary.com.cws10.my-hosting-panel.com", "webonary");
+            webonaryMysql.EmptyWebonary("EmptyWebonary.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306", "sym147_webonary", "http://pathwaywebonary.com.cws10.my-hosting-panel.com", "webonary", "Webonary Site");
 
             webonaryMysql.Data("data.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306", "sym147_webonary", "http://pathwaywebonary.com.cws10.my-hosting-panel.com", "webonary");
         }

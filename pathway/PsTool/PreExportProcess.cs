@@ -2576,73 +2576,7 @@ namespace SIL.Tool
             }
 
         }
-
-
-        public List<string> GetImageandAudioFiles(string xhtmlPath)
-        {
-            PublicationInformation projI = new PublicationInformation();
-            projI.DefaultXhtmlFileWithPath = xhtmlPath;
-
-            List<string> imageList = new List<string>();
-
-            if (!File.Exists(projI.DefaultXhtmlFileWithPath)) return imageList;
-
-            var xmldoc = new XmlDocument();
-
-            try
-            {
-                xmldoc = new XmlDocument {XmlResolver = null, PreserveWhitespace = true};
-                xmldoc.Load(projI.DefaultXhtmlFileWithPath);
-                string tag = "img";
-                XmlNodeList nodeList = xmldoc.GetElementsByTagName(tag);
-                if (nodeList.Count > 0)
-                {
-                    foreach (XmlNode item in nodeList)
-                    {
-                        if (item.Attributes != null)
-                        {
-                            var name = item.Attributes.GetNamedItem("src");
-                            if (name != null && name.Value.Length > 0)
-                            {
-                                imageList.Add(name.Value);
-                            }
-
-                        }
-                    }
-                }
-                tag = "span";
-                nodeList = xmldoc.GetElementsByTagName(tag);
-                if (nodeList.Count > 0)
-                {
-                    foreach (XmlNode item in nodeList)
-                    {
-                        if (item.Attributes != null && item.Attributes["lang"] != null)
-                        {
-                            string name = item.Attributes["lang"].Value;
-                            if (name != null && name.IndexOf("-audio") > 0)
-                            {
-                                string audioFile = "AudioVisual/" + item.InnerText;
-                                if (!imageList.Contains(audioFile))
-                                    imageList.Add(audioFile);
-                            }
-
-                        }
-
-                    }
-
-                }
-
-
-            }
-            catch(Exception ex)
-            {
-            }
-            return imageList;
-
-        }
-
-
-
+        
         #endregion
 
         #region XML PreProcessor
@@ -2776,6 +2710,26 @@ namespace SIL.Tool
             return lastLetterString;
         }
 
+        public void InsertFolderNameForAudioFilesinXhtml()
+        {
+            try
+            {
+                XmlDocument xdoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
+                XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xdoc.NameTable);
+                namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+                xdoc.Load(_xhtmlFileNameWithPath);
+                string xPath = "//xhtml:span[@lang='fr-Zxxx-x-audio']";
+                XmlNodeList chapterSectionIDs = xdoc.SelectNodes(xPath, namespaceManager);
+                if (chapterSectionIDs == null) return;
+                for (int i = 0; i < chapterSectionIDs.Count - 1; i++)
+                {
+                    chapterSectionIDs[i].InnerText = "AudioVisual/" + chapterSectionIDs[i].InnerText.Trim();
+                }
+                xdoc.Save(_xhtmlFileNameWithPath);
+            }
+            catch { }
+
+        }
 
         #endregion
 

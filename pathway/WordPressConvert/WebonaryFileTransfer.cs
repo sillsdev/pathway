@@ -47,8 +47,10 @@ namespace SIL.PublishingSolution
             string imageAudioRootPath = GetImageRootDirectory();
             string ftpFolderPath = Common.PathCombine(renameDirectory, txtWebFtpFldrNme.Text);
             string ftpPictureFolder = Common.PathCombine(ftpFolderPath, "Pictures");
-
+            string ftpAudioFolder = Common.PathCombine(ftpFolderPath, "AudioVisual");
             Directory.CreateDirectory(ftpPictureFolder);
+            Directory.CreateDirectory(ftpAudioFolder);
+
             List<string> imageList = new List<string>();
             if (!File.Exists(XhtmlPath)) return;
 
@@ -81,7 +83,7 @@ namespace SIL.PublishingSolution
                             }
                         }
                     }
-                    catch(Exception ex){}
+                    catch (Exception ex) { }
                 }
 
                 tag = "span";
@@ -98,16 +100,16 @@ namespace SIL.PublishingSolution
                                 if (name != null && name.IndexOf("-audio") > 0)
                                 {
                                     string audioFile = item.InnerText;
-                                    string audioFullPath = Common.PathCombine(Common.PathCombine(imageAudioRootPath, "AudioVisual"),audioFile);
+                                    string audioFullPath = Common.PathCombine(imageAudioRootPath, audioFile);
                                     if (File.Exists(audioFullPath))
                                     {
-                                        File.Copy(audioFullPath, Common.PathCombine(ftpFolderPath, Path.GetFileName(audioFullPath)), true);
+                                        File.Copy(audioFullPath, Common.PathCombine(ftpAudioFolder, Path.GetFileName(audioFullPath)), true);
                                     }
                                 }
                             }
                         }
                     }
-                    catch(Exception ex){}
+                    catch (Exception ex) { }
                 }
             }
             catch (Exception ex)
@@ -122,7 +124,7 @@ namespace SIL.PublishingSolution
             XmlDocument xdoc = new XmlDocument { XmlResolver = null };
             xdoc.Load(XhtmlPath);
             XmlNodeList metaNodes = xdoc.GetElementsByTagName("meta");
-            if(metaNodes != null && metaNodes.Count > 0)
+            if (metaNodes != null && metaNodes.Count > 0)
             {
                 try
                 {
@@ -146,17 +148,6 @@ namespace SIL.PublishingSolution
 
 
             return imageRootPath;
-        }
-
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void btnTransfer_Click(object sender, EventArgs e)
-        {
-            StartedFileTransferToFTPLocation();
         }
 
         private void btnPickFile_Click(object sender, EventArgs e)
@@ -253,10 +244,9 @@ namespace SIL.PublishingSolution
 
         private void ftpUpload()
         {
-
             string[] directoryLocalfiles;
             directoryLocalfiles = Directory.GetFiles(txtSourceFileLocation.Text);
-
+            string targetFileLocation = Path.Combine(txtTargetFileLocation.Text, txtWebFtpFldrNme.Text);
             if (directoryLocalfiles.Length > 0)
             {
                 foreach (string fileName in directoryLocalfiles)
@@ -264,7 +254,11 @@ namespace SIL.PublishingSolution
                     FileInfo f2 = new FileInfo(fileName);
                     Int64 fileLength = f2.Length;
                     progressBar.Value = Convert.ToInt32(_filesCount++ * 100 / _totalFiles);
-                    fileupload(fileName, txtTargetFileLocation.Text, txtUsername.Text, txtPassword.Text);
+
+                    if (!CheckFileAlreadyExists(fileName, targetFileLocation, txtUsername.Text, txtPassword.Text))
+                    {
+                        UploadFileToFtpLocation(fileName, targetFileLocation, txtUsername.Text, txtPassword.Text);
+                    }
                 }
             }
 
@@ -274,12 +268,7 @@ namespace SIL.PublishingSolution
             foreach (string directoryName in directories)
             {
                 string subDirectory = Common.LeftRemove(directoryName, txtSourceFileLocation.Text);
-
-                //DirectoryInfo di = new DirectoryInfo(directoryName + "\\");
-
-                createDirectoryToUpload(txtTargetFileLocation.Text + subDirectory, txtUsername.Text,
-                                        txtPassword.Text);
-
+                CreateFTPDirectoryToUpload(txtTargetFileLocation.Text + subDirectory, txtUsername.Text, txtPassword.Text);
                 string filePath = txtSourceFileLocation.Text + subDirectory;
                 string[] files;
                 files = Directory.GetFiles(filePath);
@@ -289,24 +278,66 @@ namespace SIL.PublishingSolution
                     FileInfo f2 = new FileInfo(fileName);
                     Int64 fileLength = f2.Length;
                     progressBar.Value = Convert.ToInt32(_filesCount++ * 100 / _totalFiles);
-                    fileupload(fileName, txtTargetFileLocation.Text + subDirectory, txtUsername.Text,
-                               txtPassword.Text);
+                    if (!CheckFileAlreadyExists(fileName, targetFileLocation, txtUsername.Text, txtPassword.Text))
+                    {
+                        UploadFileToFtpLocation(fileName, targetFileLocation, txtUsername.Text, txtPassword.Text);
+                    }
                 }
             }
         }
 
-        private void createDirectoryToUpload(string ftpLocation, string userName, string password)
+        //private void createDirectoryToUpload(string ftpLocation, string userName, string password)
+        //{
+        //    WebRequest request = WebRequest.Create(ftpLocation);
+        //    request.Method = WebRequestMethods.Ftp.MakeDirectory;
+        //    request.Credentials = new NetworkCredential(userName, password);
+        //    using (var resp = (FtpWebResponse)request.GetResponse())
+        //    {
+        //        Console.WriteLine(resp.StatusCode);
+        //    }
+        //}
+
+        private bool CreateFTPDirectoryToUpload(string ftpLocation, string userName, string password)
         {
-            WebRequest request = WebRequest.Create(ftpLocation);
-            request.Method = WebRequestMethods.Ftp.MakeDirectory;
-            request.Credentials = new NetworkCredential(userName, password);
-            using (var resp = (FtpWebResponse)request.GetResponse())
+            try
             {
-                Console.WriteLine(resp.StatusCode);
+                //create the directory
+                FtpWebRequest requestDir = (FtpWebRequest)FtpWebRequest.Create(new Uri(ftpLocation));
+                requestDir.Method = WebRequestMethods.Ftp.MakeDirectory;
+                requestDir.UsePassive = true;
+                requestDir.UseBinary = true;
+                requestDir.KeepAlive = false;
+                //requestDir.UseDefaultCredentials = true;
+                requestDir.Credentials = new NetworkCredential(userName, password);
+                requestDir.Proxy = WebRequest.DefaultWebProxy;
+                requestDir.Proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
+
+                FtpWebResponse response = (FtpWebResponse)requestDir.GetResponse();
+                Stream ftpStream = response.GetResponseStream();
+
+                ftpStream.Close();
+                response.Close();
+
+                return true;
+            }
+            catch (WebException ex)
+            {
+                FtpWebResponse response = (FtpWebResponse)ex.Response;
+                if ((response.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable) || (((int)response.StatusCode) == 521))
+                {
+                    response.Close();
+                    return true;
+                }
+                else
+                {
+                    response.Close();
+                    return false;
+                }
             }
         }
 
-        private void fileupload(string uploadDirectoryFiles, string ftpLocation, string userName, string password)
+
+        private bool CheckFileAlreadyExists(string uploadDirectoryFiles, string ftpLocation, string userName, string password)
         {
             //Get a FileInfo object for the file that will
             // be uploaded.
@@ -314,12 +345,34 @@ namespace SIL.PublishingSolution
 
             //Get a new FtpWebRequest object.
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpLocation + "/" + toUpload.Name);
-
             //Method will be UploadFile.
-            request.Method = WebRequestMethods.Ftp.UploadFile;
-
+            request.Method = WebRequestMethods.Ftp.GetFileSize;
             //Set our credentials.
             request.Credentials = new NetworkCredential(userName, password);
+            if (CheckIsFileExists(request))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            //  MessageBox.Show("Upload complete");
+        }
+
+        private void UploadFileToFtpLocation(string uploadDirectoryFiles, string ftpLocation, string userName, string password)
+        {
+            //Get a FileInfo object for the file that will
+            // be uploaded.
+            FileInfo toUpload = new FileInfo(uploadDirectoryFiles);
+
+            //Get a new FtpWebRequest object.
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpLocation + "/" + toUpload.Name);
+            //Method will be UploadFile.
+            request.Method = WebRequestMethods.Ftp.UploadFile;
+            //Set our credentials.
+            request.Credentials = new NetworkCredential(userName, password);
+
 
             //Setup a stream for the request and a stream for
             // the file we'll be uploading.
@@ -341,8 +394,29 @@ namespace SIL.PublishingSolution
             //Close the streams.
             file.Close();
             ftpStream.Close();
-
             //  MessageBox.Show("Upload complete");
+        }
+
+        private bool CheckIsFileExists(FtpWebRequest request)
+        {
+            try
+            {
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                return true;
+            }
+            catch (WebException ex)
+            {
+                FtpWebResponse response = (FtpWebResponse)ex.Response;
+                if (response.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+                {
+                    
+                    return false;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
         private void GetFtpandMysql()
@@ -512,7 +586,7 @@ namespace SIL.PublishingSolution
 
             webonaryMysql.Drop2reset("drop2reset.sql", txtSqlUsername.Text, txtSqlPassword.Text, txtSqlServerName.Text, "3306", txtSqlDBName.Text);
 
-            webonaryMysql.EmptyWebonary("EmptyWebonary.sql", txtSqlUsername.Text, txtSqlPassword.Text, txtSqlServerName.Text, "3306", txtSqlDBName.Text, txtWebUrl.Text, txtWebFtpFldrNme.Text);
+            webonaryMysql.EmptyWebonary("EmptyWebonary.sql", txtSqlUsername.Text, txtSqlPassword.Text, txtSqlServerName.Text, "3306", txtSqlDBName.Text, txtWebUrl.Text, txtWebFtpFldrNme.Text, txtWebAdminSiteNme.Text);
 
             webonaryMysql.Data("data.sql", txtSqlUsername.Text, txtSqlPassword.Text, txtSqlServerName.Text, "3306", txtSqlDBName.Text, txtWebUrl.Text, txtWebFtpFldrNme.Text);
         }

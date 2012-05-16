@@ -165,12 +165,12 @@ namespace SIL.PublishingSolution
             RunScript(getCreateDatabaseFile, userName, password, hostAddress, port, databaseName);
         }
         
-        public void EmptyWebonary(string fileName, string userName, string password, string hostAddress, string port, string databaseName, string websiteAddress, string directoryName)
+        public void EmptyWebonary(string fileName, string userName, string password, string hostAddress, string port, string databaseName, string websiteAddress, string directoryName, string websiteTitle)
         {
             string getCreateDatabaseFile = Common.GetApplicationPath();
             getCreateDatabaseFile = Common.PathCombine(getCreateDatabaseFile, "wordpress");
             getCreateDatabaseFile = Common.PathCombine(getCreateDatabaseFile, fileName);
-            ModifyDatabasenameInEmptyWebonaryDbSqlFile(getCreateDatabaseFile, databaseName, websiteAddress, directoryName);
+            ModifyDatabasenameInEmptyWebonaryDbSqlFile(getCreateDatabaseFile, databaseName, websiteAddress, directoryName, websiteTitle);
             getCreateDatabaseFile = getCreateDatabaseFile.Replace(".sql", "1.sql");
             RunScript(getCreateDatabaseFile, userName, password, hostAddress, port, databaseName);
         }
@@ -226,7 +226,7 @@ namespace SIL.PublishingSolution
         }
 
 
-        private void ModifyDatabasenameInEmptyWebonaryDbSqlFile(string fileLocation, string databaseName, string websiteAddress, string directoryName)
+        private void ModifyDatabasenameInEmptyWebonaryDbSqlFile(string fileLocation, string databaseName, string websiteAddress, string directoryName,string websiteTitle)
         {
             string configFile = fileLocation;
             if (!File.Exists(configFile))
@@ -264,6 +264,18 @@ namespace SIL.PublishingSolution
                 {
                     line = line.Replace("FROM `wordpress`.", "FROM `" + databaseName + "`.");
                 }
+
+                if (line.IndexOf("'blogname', 'Webonary', 'yes')") >= 0)
+                {
+                    line = line.Replace("'blogname', 'Webonary', 'yes')", "'blogname', '" + websiteTitle + "', 'yes')");
+                }
+
+                if (line.IndexOf("'Online Dictionary', 'site-title', 0)") >= 0)
+                {
+                    line = line.Replace("'Online Dictionary', 'site-title', 0)", "'Online Dictionary', '" + websiteTitle + "', 0)");
+                }
+
+                
                 sw2.WriteLine(line);
             }
             sw2.Close();
@@ -309,6 +321,11 @@ namespace SIL.PublishingSolution
                 if (line.IndexOf("FROM `wordpress`.") >= 0)
                 {
                     line = line.Replace("FROM `wordpress`.", "FROM `" + databaseName + "`.");
+                }
+
+                if (line.IndexOf("AudioVisual/") >= 0)
+                {
+                  //  line = line.Replace("AudioVisual/", websiteAddress + "/" + directoryName + "/" + "AudioVisual/");
                 }
 
                 sw2.WriteLine(line);

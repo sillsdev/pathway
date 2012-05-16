@@ -97,7 +97,6 @@
             this.btnTransfer.TabIndex = 4;
             this.btnTransfer.Text = "Proceed";
             this.btnTransfer.UseVisualStyleBackColor = true;
-            this.btnTransfer.Click += new System.EventHandler(this.btnTransfer_Click);
             // 
             // btnClose
             // 
@@ -108,7 +107,6 @@
             this.btnClose.TabIndex = 5;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnPickFile
             // 
@@ -426,7 +424,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(588, 120);
+            this.ClientSize = new System.Drawing.Size(574, 120);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.groupBox3);
@@ -442,6 +440,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "WebonaryFileTransfer";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WordPress Export";
             this.TopMost = true;
