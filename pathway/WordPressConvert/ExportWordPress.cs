@@ -53,6 +53,8 @@ namespace SIL.PublishingSolution
         }
         #endregion bool Handle(string inputDataType)
 
+        public bool skipForNUnitTest = false;
+
         #region bool Export(PublicationInformation projInfo)
         /// <summary>
         /// Entry point for WordPress converter
@@ -66,7 +68,6 @@ namespace SIL.PublishingSolution
                 var xhtml = projInfo.DefaultXhtmlFileWithPath;
                 PreExportProcess preProcessor = new PreExportProcess(projInfo);
                 preProcessor.InsertFolderNameForAudioFilesinXhtml();
-
                 InsertBeforeAfterInXHTML(projInfo);
 
                 const string prog = "WordPress.bat";
@@ -85,9 +86,12 @@ namespace SIL.PublishingSolution
                         SubProcess.Run(processFolder, @"""WordPress site setup.txt""");
                 }
 
-                WebonaryFileTransfer webonaryFtp = new WebonaryFileTransfer();
-                webonaryFtp.projInfo = projInfo;
-                webonaryFtp.ShowDialog();
+                if (!skipForNUnitTest)
+                {
+                    WebonaryFileTransfer webonaryFtp = new WebonaryFileTransfer();
+                    webonaryFtp.projInfo = projInfo;
+                    webonaryFtp.ShowDialog();
+                }
             }
             catch (Exception ex)
             {

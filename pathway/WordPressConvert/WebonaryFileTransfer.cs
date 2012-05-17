@@ -169,13 +169,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                //PublicationInformation projInfo = new PublicationInformation();
-                //projInfo.ProjectInputType = "Dictionary";
-                //string dictionaryDirectoryPath = Path.Combine(Path.Combine(Path.Combine(Common.GetAllUserAppPath(), "SIL"), "Pathway"), projInfo.ProjectInputType);
-                //string webonaryZipFile = Path.Combine(dictionaryDirectoryPath, "PathwayWebonary.zip");
-                //ZipUtil.UnZipFiles(webonaryZipFile, Path.Combine(dictionaryDirectoryPath, "Wordpress"), "", false);
-                //StartedFileTransferToFTPLocation();
-
+                FtpProcessing();
             }
             catch (System.ComponentModel.Win32Exception ex)
             {
@@ -200,6 +194,39 @@ namespace SIL.PublishingSolution
             {
                 this.Close();
             }
+        }
+
+        private void FtpProcessing()
+        {
+            string dictionaryDirectoryPath =
+                Path.Combine(Path.Combine(Path.Combine(Common.GetAllUserAppPath(), "SIL"), "Pathway"), projInfo.ProjectInputType);
+            //string[] filePaths = Directory.GetFiles(dictionaryDirectoryPath, "*.zip");
+            txtSourceFileLocation.Text = Path.Combine(dictionaryDirectoryPath, "Wordpress\\");
+            string webonaryZipFile = Path.Combine(dictionaryDirectoryPath, "PathwayWebonary.zip");
+            string renameDirectory = txtSourceFileLocation.Text;
+            DirectoryInfo di = new DirectoryInfo(renameDirectory);
+            if (di.Exists)
+                di.Delete(true);
+
+            if (File.Exists(webonaryZipFile))
+            {
+                ZipUtil.UnZipFiles(webonaryZipFile, Path.Combine(dictionaryDirectoryPath, "Wordpress"), "", false);
+            }
+            di = new DirectoryInfo(Common.PathCombine(renameDirectory, "Webonary"));
+
+            if (txtWebFtpFldrNme.Text.Trim() == "")
+                txtWebFtpFldrNme.Text = "WordPressWebonary";
+
+            di.MoveTo(Common.PathCombine(renameDirectory, txtWebFtpFldrNme.Text));
+
+            MoveAudioandPictureFile(renameDirectory);
+
+            //Move the Custom.css file to wp-content\themes\webonary-zeedisplay folder
+            CopyCustomCssToFtp(renameDirectory);
+
+            lblStatus.Text = "Started moving the files to FTP Location.";
+
+            StartedFileTransferToFTPLocation();
         }
 
         #endregion
@@ -343,7 +370,6 @@ namespace SIL.PublishingSolution
                 }
             }
         }
-
 
         private bool CheckFileAlreadyExists(string uploadDirectoryFiles, string ftpLocation, string userName, string password)
         {
@@ -497,29 +523,21 @@ namespace SIL.PublishingSolution
 
                 string dictionaryDirectoryPath = Path.Combine(Path.Combine(Path.Combine(Common.GetAllUserAppPath(), "SIL"), "Pathway"), projInfo.ProjectInputType);
                 //string[] filePaths = Directory.GetFiles(dictionaryDirectoryPath, "*.zip");
-                string webonaryZipFile = Path.Combine(dictionaryDirectoryPath, "PathwayWebonary.zip");
                 txtSourceFileLocation.Text = Path.Combine(dictionaryDirectoryPath, "Wordpress\\");
-
-                DownloadWordpressWebonaryZipfile(webonaryZipFile);
-
-                string renameDirectory = txtSourceFileLocation.Text;
-                DirectoryInfo di = new DirectoryInfo(renameDirectory);
-                if (di.Exists)
-                    di.Delete(true);
-
-                ZipUtil.UnZipFiles(webonaryZipFile, Path.Combine(dictionaryDirectoryPath, "Wordpress"), "", false);
-
-                di = new DirectoryInfo(Common.PathCombine(renameDirectory, "Webonary"));
-                di.MoveTo(Common.PathCombine(renameDirectory, txtWebFtpFldrNme.Text));
-
-                MoveAudioandPictureFile(renameDirectory);
-
-                //Move the Custom.css file to wp-content\themes\webonary-zeedisplay folder
-                CopyCustomCssToFtp(renameDirectory);
-
-                lblStatus.Text = "Started moving the files to FTP Location.";
-
-                StartedFileTransferToFTPLocation();
+                string webonaryZipFile = Path.Combine(dictionaryDirectoryPath, "PathwayWebonary.zip");
+                if (!File.Exists(webonaryZipFile))
+                {
+                    lblStatus.Text = "Downloading the Wordpress installer.";
+                    WebClient webClient = new WebClient();
+                    webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
+                    webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
+                    webClient.DownloadFileAsync(new Uri("http://pathway.sil.org/wp-content/sprint/PathwayWebonary-0.5.zip"),
+                                                webonaryZipFile);
+                }
+                else
+                {
+                    FtpProcessing();
+                }
             }
             catch (System.ComponentModel.Win32Exception ex)
             {
@@ -543,19 +561,6 @@ namespace SIL.PublishingSolution
             catch (Exception ex)
             {
                 this.Close();
-            }
-        }
-
-        private void DownloadWordpressWebonaryZipfile(string webonaryZipFile)
-        {
-            if (!File.Exists(webonaryZipFile))
-            {
-                lblStatus.Text = "Downloading the Wordpress installer.";
-                WebClient webClient = new WebClient();
-                webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
-                webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
-                webClient.DownloadFileAsync(new Uri("http://pathway.sil.org/wp-content/sprint/PathwayWebonary-0.5.zip"),
-                                            webonaryZipFile);
             }
         }
 

@@ -96,6 +96,7 @@ namespace Test.WordPressConvert
             const string CssName = "main.css";
             PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
             var target = new ExportWordPress();
+            target.skipForNUnitTest = true;
             var actual = target.Export(projInfo);
             Assert.IsTrue(actual);
             const string dataSql = "data.sql";
