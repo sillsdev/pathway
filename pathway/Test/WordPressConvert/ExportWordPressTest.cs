@@ -89,7 +89,9 @@ namespace Test.WordPressConvert
         /// <summary>
         ///A test for Export
         ///</summary>
+        [Ignore]
         [Test]
+        [Category("SkipOnTeamCity")]
         public void ExportPassTest()
         {
             const string XhtmlName = "main.xhtml";
