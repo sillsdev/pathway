@@ -79,6 +79,7 @@
             this.txtSourceFileLocation.Size = new System.Drawing.Size(520, 20);
             this.txtSourceFileLocation.TabIndex = 3;
             this.txtSourceFileLocation.Text = "E:\\";
+            this.txtSourceFileLocation.UseWaitCursor = true;
             // 
             // lblSourceFileLocation
             // 
@@ -88,6 +89,7 @@
             this.lblSourceFileLocation.Size = new System.Drawing.Size(104, 13);
             this.lblSourceFileLocation.TabIndex = 2;
             this.lblSourceFileLocation.Text = "Source File Location";
+            this.lblSourceFileLocation.UseWaitCursor = true;
             // 
             // btnTransfer
             // 
@@ -97,6 +99,7 @@
             this.btnTransfer.TabIndex = 4;
             this.btnTransfer.Text = "Proceed";
             this.btnTransfer.UseVisualStyleBackColor = true;
+            this.btnTransfer.UseWaitCursor = true;
             // 
             // btnClose
             // 
@@ -107,6 +110,7 @@
             this.btnClose.TabIndex = 5;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.UseWaitCursor = true;
             // 
             // btnPickFile
             // 
@@ -116,6 +120,7 @@
             this.btnPickFile.TabIndex = 10;
             this.btnPickFile.Text = "...";
             this.btnPickFile.UseVisualStyleBackColor = true;
+            this.btnPickFile.UseWaitCursor = true;
             this.btnPickFile.Click += new System.EventHandler(this.btnPickFile_Click);
             // 
             // progressBar
@@ -124,6 +129,7 @@
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(551, 23);
             this.progressBar.TabIndex = 11;
+            this.progressBar.UseWaitCursor = true;
             // 
             // txtPassword
             // 
@@ -133,6 +139,7 @@
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(158, 20);
             this.txtPassword.TabIndex = 28;
+            this.txtPassword.UseWaitCursor = true;
             // 
             // label2
             // 
@@ -142,6 +149,7 @@
             this.label2.Size = new System.Drawing.Size(76, 13);
             this.label2.TabIndex = 27;
             this.label2.Text = "FTP Password";
+            this.label2.UseWaitCursor = true;
             // 
             // txtUsername
             // 
@@ -150,6 +158,7 @@
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(158, 20);
             this.txtUsername.TabIndex = 26;
+            this.txtUsername.UseWaitCursor = true;
             // 
             // label1
             // 
@@ -159,6 +168,7 @@
             this.label1.Size = new System.Drawing.Size(78, 13);
             this.label1.TabIndex = 25;
             this.label1.Text = "FTP Username";
+            this.label1.UseWaitCursor = true;
             // 
             // txtTargetFileLocation
             // 
@@ -167,6 +177,7 @@
             this.txtTargetFileLocation.Name = "txtTargetFileLocation";
             this.txtTargetFileLocation.Size = new System.Drawing.Size(521, 20);
             this.txtTargetFileLocation.TabIndex = 24;
+            this.txtTargetFileLocation.UseWaitCursor = true;
             // 
             // lblTargetFileLocation
             // 
@@ -176,6 +187,7 @@
             this.lblTargetFileLocation.Size = new System.Drawing.Size(251, 13);
             this.lblTargetFileLocation.TabIndex = 23;
             this.lblTargetFileLocation.Text = "FTP Address / Server IP (ex : ftp://ip address/path)";
+            this.lblTargetFileLocation.UseWaitCursor = true;
             // 
             // groupBox1
             // 
@@ -193,6 +205,7 @@
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "MySql Database Details";
+            this.groupBox1.UseWaitCursor = true;
             // 
             // txtSqlPassword
             // 
@@ -202,6 +215,7 @@
             this.txtSqlPassword.PasswordChar = '*';
             this.txtSqlPassword.Size = new System.Drawing.Size(100, 20);
             this.txtSqlPassword.TabIndex = 23;
+            this.txtSqlPassword.UseWaitCursor = true;
             // 
             // label5
             // 
@@ -211,6 +225,7 @@
             this.label5.Size = new System.Drawing.Size(53, 13);
             this.label5.TabIndex = 22;
             this.label5.Text = "Password";
+            this.label5.UseWaitCursor = true;
             // 
             // txtSqlUsername
             // 
@@ -219,6 +234,7 @@
             this.txtSqlUsername.Name = "txtSqlUsername";
             this.txtSqlUsername.Size = new System.Drawing.Size(111, 20);
             this.txtSqlUsername.TabIndex = 21;
+            this.txtSqlUsername.UseWaitCursor = true;
             // 
             // label6
             // 
@@ -228,6 +244,7 @@
             this.label6.Size = new System.Drawing.Size(60, 13);
             this.label6.TabIndex = 20;
             this.label6.Text = "User Name";
+            this.label6.UseWaitCursor = true;
             // 
             // txtSqlDBName
             // 
@@ -236,6 +253,7 @@
             this.txtSqlDBName.Name = "txtSqlDBName";
             this.txtSqlDBName.Size = new System.Drawing.Size(120, 20);
             this.txtSqlDBName.TabIndex = 19;
+            this.txtSqlDBName.UseWaitCursor = true;
             // 
             // label3
             // 
@@ -245,6 +263,7 @@
             this.label3.Size = new System.Drawing.Size(84, 13);
             this.label3.TabIndex = 18;
             this.label3.Text = "Database Name";
+            this.label3.UseWaitCursor = true;
             // 
             // txtSqlServerName
             // 
@@ -253,6 +272,7 @@
             this.txtSqlServerName.Name = "txtSqlServerName";
             this.txtSqlServerName.Size = new System.Drawing.Size(158, 20);
             this.txtSqlServerName.TabIndex = 17;
+            this.txtSqlServerName.UseWaitCursor = true;
             // 
             // label4
             // 
@@ -262,6 +282,7 @@
             this.label4.Size = new System.Drawing.Size(164, 13);
             this.label4.TabIndex = 16;
             this.label4.Text = "My Sql Server name / IP Address";
+            this.label4.UseWaitCursor = true;
             // 
             // groupBox2
             // 
@@ -277,6 +298,7 @@
             this.groupBox2.TabIndex = 29;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "FTP Details";
+            this.groupBox2.UseWaitCursor = true;
             // 
             // groupBox3
             // 
@@ -298,6 +320,7 @@
             this.groupBox3.TabIndex = 33;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Website Details";
+            this.groupBox3.UseWaitCursor = true;
             // 
             // label19
             // 
@@ -307,6 +330,7 @@
             this.label19.Size = new System.Drawing.Size(85, 13);
             this.label19.TabIndex = 26;
             this.label19.Text = "Ftp Folder Name";
+            this.label19.UseWaitCursor = true;
             // 
             // txtWebFtpFldrNme
             // 
@@ -315,6 +339,7 @@
             this.txtWebFtpFldrNme.Name = "txtWebFtpFldrNme";
             this.txtWebFtpFldrNme.Size = new System.Drawing.Size(170, 20);
             this.txtWebFtpFldrNme.TabIndex = 25;
+            this.txtWebFtpFldrNme.UseWaitCursor = true;
             // 
             // txtWebEmailID
             // 
@@ -323,6 +348,7 @@
             this.txtWebEmailID.Name = "txtWebEmailID";
             this.txtWebEmailID.Size = new System.Drawing.Size(169, 20);
             this.txtWebEmailID.TabIndex = 23;
+            this.txtWebEmailID.UseWaitCursor = true;
             // 
             // label18
             // 
@@ -332,6 +358,7 @@
             this.label18.Size = new System.Drawing.Size(46, 13);
             this.label18.TabIndex = 24;
             this.label18.Text = "Email ID";
+            this.label18.UseWaitCursor = true;
             // 
             // txtWebAdminSiteNme
             // 
@@ -340,6 +367,7 @@
             this.txtWebAdminSiteNme.Name = "txtWebAdminSiteNme";
             this.txtWebAdminSiteNme.Size = new System.Drawing.Size(171, 20);
             this.txtWebAdminSiteNme.TabIndex = 3;
+            this.txtWebAdminSiteNme.UseWaitCursor = true;
             // 
             // label14
             // 
@@ -349,6 +377,7 @@
             this.label14.Size = new System.Drawing.Size(56, 13);
             this.label14.TabIndex = 22;
             this.label14.Text = "Site Name";
+            this.label14.UseWaitCursor = true;
             // 
             // txtWebAdminPwd
             // 
@@ -358,6 +387,7 @@
             this.txtWebAdminPwd.PasswordChar = '*';
             this.txtWebAdminPwd.Size = new System.Drawing.Size(171, 20);
             this.txtWebAdminPwd.TabIndex = 2;
+            this.txtWebAdminPwd.UseWaitCursor = true;
             // 
             // label15
             // 
@@ -367,6 +397,7 @@
             this.label15.Size = new System.Drawing.Size(85, 13);
             this.label15.TabIndex = 20;
             this.label15.Text = "Admin Password";
+            this.label15.UseWaitCursor = true;
             // 
             // txtWebAdminUsrNme
             // 
@@ -375,6 +406,7 @@
             this.txtWebAdminUsrNme.Name = "txtWebAdminUsrNme";
             this.txtWebAdminUsrNme.Size = new System.Drawing.Size(171, 20);
             this.txtWebAdminUsrNme.TabIndex = 1;
+            this.txtWebAdminUsrNme.UseWaitCursor = true;
             // 
             // label16
             // 
@@ -384,6 +416,7 @@
             this.label16.Size = new System.Drawing.Size(87, 13);
             this.label16.TabIndex = 18;
             this.label16.Text = "Admin Username";
+            this.label16.UseWaitCursor = true;
             // 
             // txtWebUrl
             // 
@@ -392,6 +425,7 @@
             this.txtWebUrl.Name = "txtWebUrl";
             this.txtWebUrl.Size = new System.Drawing.Size(172, 20);
             this.txtWebUrl.TabIndex = 0;
+            this.txtWebUrl.UseWaitCursor = true;
             // 
             // label17
             // 
@@ -401,6 +435,7 @@
             this.label17.Size = new System.Drawing.Size(60, 13);
             this.label17.TabIndex = 16;
             this.label17.Text = "Website url";
+            this.label17.UseWaitCursor = true;
             // 
             // label7
             // 
@@ -410,6 +445,7 @@
             this.label7.Size = new System.Drawing.Size(70, 13);
             this.label7.TabIndex = 34;
             this.label7.Text = "Please wait...";
+            this.label7.UseWaitCursor = true;
             // 
             // lblStatus
             // 
@@ -418,6 +454,7 @@
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(0, 13);
             this.lblStatus.TabIndex = 35;
+            this.lblStatus.UseWaitCursor = true;
             // 
             // WebonaryFileTransfer
             // 
@@ -425,6 +462,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(574, 120);
+            this.ControlBox = false;
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.groupBox3);
@@ -436,14 +474,14 @@
             this.Controls.Add(this.btnTransfer);
             this.Controls.Add(this.txtSourceFileLocation);
             this.Controls.Add(this.lblSourceFileLocation);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "WebonaryFileTransfer";
-            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WordPress Export";
             this.TopMost = true;
+            this.UseWaitCursor = true;
             this.Load += new System.EventHandler(this.WebonaryFileTransfer_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

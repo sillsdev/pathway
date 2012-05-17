@@ -21,7 +21,7 @@ namespace SIL.PublishingSolution
 
         private int _totalFiles = 1;
         private int _filesCount = 1;
-        public string XhtmlPath;
+        public PublicationInformation projInfo;
 
         #endregion
 
@@ -52,13 +52,13 @@ namespace SIL.PublishingSolution
             Directory.CreateDirectory(ftpAudioFolder);
 
             List<string> imageList = new List<string>();
-            if (!File.Exists(XhtmlPath)) return;
+            if (!File.Exists(projInfo.DefaultXhtmlFileWithPath)) return;
 
             var xmldoc = new XmlDocument();
             try
             {
                 xmldoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
-                xmldoc.Load(XhtmlPath);
+                xmldoc.Load(projInfo.DefaultXhtmlFileWithPath);
                 string tag = "img";
                 XmlNodeList nodeList = xmldoc.GetElementsByTagName(tag);
                 if (nodeList.Count > 0)
@@ -120,9 +120,9 @@ namespace SIL.PublishingSolution
         private string GetImageRootDirectory()
         {
             string imageRootPath = string.Empty;
-            if (!File.Exists(XhtmlPath)) return imageRootPath;
+            if (!File.Exists(projInfo.DefaultXhtmlFileWithPath)) return imageRootPath;
             XmlDocument xdoc = new XmlDocument { XmlResolver = null };
-            xdoc.Load(XhtmlPath);
+            xdoc.Load(projInfo.DefaultXhtmlFileWithPath);
             XmlNodeList metaNodes = xdoc.GetElementsByTagName("meta");
             if (metaNodes != null && metaNodes.Count > 0)
             {
@@ -242,7 +242,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void ftpUpload()
+        private void WordPressFileTransfertoFtpUpload()
         {
             string[] directoryLocalfiles;
             directoryLocalfiles = Directory.GetFiles(txtSourceFileLocation.Text);
@@ -255,7 +255,7 @@ namespace SIL.PublishingSolution
                     Int64 fileLength = f2.Length;
                     progressBar.Value = Convert.ToInt32(_filesCount++ * 100 / _totalFiles);
 
-                    if (!CheckFileAlreadyExists(fileName, targetFileLocation, txtUsername.Text, txtPassword.Text))
+                    if(!CheckFileAlreadyExists(fileName, targetFileLocation, txtUsername.Text, txtPassword.Text))
                     {
                         UploadFileToFtpLocation(fileName, targetFileLocation, txtUsername.Text, txtPassword.Text);
                     }
@@ -278,9 +278,17 @@ namespace SIL.PublishingSolution
                     FileInfo f2 = new FileInfo(fileName);
                     Int64 fileLength = f2.Length;
                     progressBar.Value = Convert.ToInt32(_filesCount++ * 100 / _totalFiles);
-                    if (!CheckFileAlreadyExists(fileName, targetFileLocation, txtUsername.Text, txtPassword.Text))
+
+                    if(fileName.IndexOf(".css") > 0)
                     {
                         UploadFileToFtpLocation(fileName, targetFileLocation, txtUsername.Text, txtPassword.Text);
+                    }
+                    else
+                    {
+                        if (!CheckFileAlreadyExists(fileName, targetFileLocation, txtUsername.Text, txtPassword.Text))
+                        {
+                            UploadFileToFtpLocation(fileName, targetFileLocation, txtUsername.Text, txtPassword.Text);
+                        }    
                     }
                 }
             }
@@ -485,22 +493,14 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                PublicationInformation projInfo = new PublicationInformation();
                 projInfo.ProjectInputType = "Dictionary";
 
                 string dictionaryDirectoryPath = Path.Combine(Path.Combine(Path.Combine(Common.GetAllUserAppPath(), "SIL"), "Pathway"), projInfo.ProjectInputType);
-                string[] filePaths = Directory.GetFiles(dictionaryDirectoryPath, "*.zip");
+                //string[] filePaths = Directory.GetFiles(dictionaryDirectoryPath, "*.zip");
                 string webonaryZipFile = Path.Combine(dictionaryDirectoryPath, "PathwayWebonary.zip");
                 txtSourceFileLocation.Text = Path.Combine(dictionaryDirectoryPath, "Wordpress\\");
 
-                if (!File.Exists(webonaryZipFile))
-                {
-                    lblStatus.Text = "Downloading the Wordpress installer.";
-                    WebClient webClient = new WebClient();
-                    webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
-                    webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
-                    webClient.DownloadFileAsync(new Uri("http://pathway.sil.org/wp-content/sprint/PathwayWebonary-0.5.zip"), webonaryZipFile);
-                }
+                DownloadWordpressWebonaryZipfile(webonaryZipFile);
 
                 string renameDirectory = txtSourceFileLocation.Text;
                 DirectoryInfo di = new DirectoryInfo(renameDirectory);
@@ -514,8 +514,10 @@ namespace SIL.PublishingSolution
 
                 MoveAudioandPictureFile(renameDirectory);
 
-                lblStatus.Text = "Started moving the files to FTP Location.";
+                //Move the Custom.css file to wp-content\themes\webonary-zeedisplay folder
+                CopyCustomCssToFtp(renameDirectory);
 
+                lblStatus.Text = "Started moving the files to FTP Location.";
 
                 StartedFileTransferToFTPLocation();
             }
@@ -544,6 +546,29 @@ namespace SIL.PublishingSolution
             }
         }
 
+        private void DownloadWordpressWebonaryZipfile(string webonaryZipFile)
+        {
+            if (!File.Exists(webonaryZipFile))
+            {
+                lblStatus.Text = "Downloading the Wordpress installer.";
+                WebClient webClient = new WebClient();
+                webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
+                webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
+                webClient.DownloadFileAsync(new Uri("http://pathway.sil.org/wp-content/sprint/PathwayWebonary-0.5.zip"),
+                                            webonaryZipFile);
+            }
+        }
+
+        private void CopyCustomCssToFtp(string renameDirectory)
+        {
+            //Move the Custom.css file to wp-content\themes\webonary-zeedisplay folder
+            string sourceCssFile = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".css");
+            string destCssFile = Common.PathCombine(renameDirectory, txtWebFtpFldrNme.Text);
+            destCssFile = Common.PathCombine(destCssFile, "wp-content\\themes\\webonary-zeedisplay\\Custom.css");
+
+            File.Copy(sourceCssFile, destCssFile, true);
+        }
+
         private void StartedFileTransferToFTPLocation()
         {
             GetDirectoryFileCount(txtSourceFileLocation.Text);
@@ -552,15 +577,15 @@ namespace SIL.PublishingSolution
             progressBar.Value = 2;
 
             //Step-3 Automated the PHP wordpress page setup for Administrative username and password
-            string getPHPSetupFileNamewithLocation = Directory.GetCurrentDirectory();
-            getPHPSetupFileNamewithLocation = Path.Combine(getPHPSetupFileNamewithLocation, "Wordpress\\setup_wp.php");
-            string movingPHPSetupFileLocation = Path.Combine(txtSourceFileLocation.Text, txtWebFtpFldrNme.Text);
-            movingPHPSetupFileLocation = Path.Combine(movingPHPSetupFileLocation, "wp-admin\\setup_wp.php");
-            File.Copy(getPHPSetupFileNamewithLocation, movingPHPSetupFileLocation, true);
+            string getPhpSetupFileNamewithLocation = Directory.GetCurrentDirectory();
+            getPhpSetupFileNamewithLocation = Path.Combine(getPhpSetupFileNamewithLocation, "Wordpress\\setup_wp.php");
+            string movingPhpSetupFileLocation = Path.Combine(txtSourceFileLocation.Text, txtWebFtpFldrNme.Text);
+            movingPhpSetupFileLocation = Path.Combine(movingPhpSetupFileLocation, "wp-admin\\setup_wp.php");
+            File.Copy(getPhpSetupFileNamewithLocation, movingPhpSetupFileLocation, true);
 
-            ftpUpload();
+  //          WordPressFileTransfertoFtpUpload();
 
-            lblStatus.Text = "Finished the installation Process";
+            lblStatus.Text = "Completed the installation Process";
 
             SettingMysqlDatabase();
 
