@@ -17,6 +17,8 @@ namespace SIL.PublishingSolution
 {
     public class WebonaryMysqlDatabaseTransfer
     {
+        public PublicationInformation projInfo;
+
         public bool RunScript(string fileName, string userName, string password, string hostAddress, string port, string databaseName)
         {
             using (StreamReader reader = new StreamReader(fileName))
@@ -142,19 +144,23 @@ namespace SIL.PublishingSolution
             string getCreateDatabaseFile = Common.GetApplicationPath();
             getCreateDatabaseFile = Common.PathCombine(getCreateDatabaseFile, "wordpress");
             getCreateDatabaseFile = Common.PathCombine(getCreateDatabaseFile, fileName);
-            ModifyDatabasenameInCreateDbSqlFile(getCreateDatabaseFile, databaseName);
-            getCreateDatabaseFile = getCreateDatabaseFile.Replace(".sql", "1.sql");
-            RunScript(getCreateDatabaseFile, userName, password, hostAddress, port, databaseName);
+            string mysqlScriptFileName = Common.PathCombine(projInfo.ProjectPath, fileName);
+            File.Copy(getCreateDatabaseFile, mysqlScriptFileName, true);
+            ModifyDatabasenameInCreateDbSqlFile(mysqlScriptFileName, databaseName);
+            mysqlScriptFileName = mysqlScriptFileName.Replace(".sql", "1.sql");
+            RunScript(mysqlScriptFileName, userName, password, hostAddress, port, databaseName);
         }
 
         public void Data(string fileName, string userName, string password, string hostAddress, string port, string databaseName, string websiteAddress, string directoryName)
         {
-            string getCreateDatabaseFile = Common.GetApplicationPath();
-            getCreateDatabaseFile = Common.PathCombine(getCreateDatabaseFile, "wordpress");
-            getCreateDatabaseFile = Common.PathCombine(getCreateDatabaseFile, fileName);
-            ModifyDatabasenameInDataDbSqlFile(getCreateDatabaseFile, databaseName, websiteAddress, directoryName);
-            getCreateDatabaseFile = getCreateDatabaseFile.Replace(".sql", "1.sql");
-            RunScript(getCreateDatabaseFile, userName, password, hostAddress, port, databaseName);
+            //string getCreateDatabaseFile = Common.GetApplicationPath();
+            //getCreateDatabaseFile = Common.PathCombine(getCreateDatabaseFile, "wordpress");
+            //getCreateDatabaseFile = Common.PathCombine(getCreateDatabaseFile, fileName);
+            string mysqlScriptFileName = Common.PathCombine(projInfo.ProjectPath, fileName);
+            //File.Copy(getCreateDatabaseFile, mysqlScriptFileName, true);
+            ModifyDatabasenameInDataDbSqlFile(mysqlScriptFileName, databaseName, websiteAddress, directoryName);
+            mysqlScriptFileName = mysqlScriptFileName.Replace(".sql", "1.sql");
+            RunScript(mysqlScriptFileName, userName, password, hostAddress, port, databaseName);
         }
 
         public void Drop2reset(string fileName, string userName, string password, string hostAddress, string port, string databaseName)
@@ -162,17 +168,21 @@ namespace SIL.PublishingSolution
             string getCreateDatabaseFile = Common.GetApplicationPath();
             getCreateDatabaseFile = Common.PathCombine(getCreateDatabaseFile, "wordpress");
             getCreateDatabaseFile = Common.PathCombine(getCreateDatabaseFile, fileName);
-            RunScript(getCreateDatabaseFile, userName, password, hostAddress, port, databaseName);
+            string mysqlScriptFileName = Common.PathCombine(projInfo.ProjectPath, fileName);
+            File.Copy(getCreateDatabaseFile, mysqlScriptFileName, true);
+            RunScript(mysqlScriptFileName, userName, password, hostAddress, port, databaseName);
         }
-        
+
         public void EmptyWebonary(string fileName, string userName, string password, string hostAddress, string port, string databaseName, string websiteAddress, string directoryName, string websiteTitle)
         {
             string getCreateDatabaseFile = Common.GetApplicationPath();
             getCreateDatabaseFile = Common.PathCombine(getCreateDatabaseFile, "wordpress");
             getCreateDatabaseFile = Common.PathCombine(getCreateDatabaseFile, fileName);
-            ModifyDatabasenameInEmptyWebonaryDbSqlFile(getCreateDatabaseFile, databaseName, websiteAddress, directoryName, websiteTitle);
-            getCreateDatabaseFile = getCreateDatabaseFile.Replace(".sql", "1.sql");
-            RunScript(getCreateDatabaseFile, userName, password, hostAddress, port, databaseName);
+            string mysqlScriptFileName = Common.PathCombine(projInfo.ProjectPath, fileName);
+            File.Copy(getCreateDatabaseFile, mysqlScriptFileName, true);
+            ModifyDatabasenameInEmptyWebonaryDbSqlFile(mysqlScriptFileName, databaseName, websiteAddress, directoryName, websiteTitle);
+            mysqlScriptFileName = mysqlScriptFileName.Replace(".sql", "1.sql");
+            RunScript(mysqlScriptFileName, userName, password, hostAddress, port, databaseName);
         }
 
         private void ModifyDatabasenameInCreateDbSqlFile(string fileLocation, string databaseName)
@@ -187,7 +197,7 @@ namespace SIL.PublishingSolution
             StreamReader stream = new StreamReader(fs);
             string configFile2 = configFile.Replace(".sql", "1.sql");
 
-            if(File.Exists(configFile2))
+            if (File.Exists(configFile2))
             {
                 File.Delete(configFile2);
             }
@@ -226,7 +236,7 @@ namespace SIL.PublishingSolution
         }
 
 
-        private void ModifyDatabasenameInEmptyWebonaryDbSqlFile(string fileLocation, string databaseName, string websiteAddress, string directoryName,string websiteTitle)
+        private void ModifyDatabasenameInEmptyWebonaryDbSqlFile(string fileLocation, string databaseName, string websiteAddress, string directoryName, string websiteTitle)
         {
             string configFile = fileLocation;
             if (!File.Exists(configFile))
@@ -253,7 +263,7 @@ namespace SIL.PublishingSolution
                 {
                     //if(websiteAddress.Substring(websiteAddress.Length-2, websiteAddress.Length-1) == "/")
                     //{
-                        line = line.Replace("http://localhost/wordpress", websiteAddress + "/" + directoryName);
+                    line = line.Replace("http://localhost/wordpress", websiteAddress + "/" + directoryName);
                     //}
                     //else
                     //{
@@ -275,7 +285,7 @@ namespace SIL.PublishingSolution
                     line = line.Replace("'Online Dictionary', 'site-title', 0)", "'Online Dictionary', '" + websiteTitle + "', 0)");
                 }
 
-                
+
                 sw2.WriteLine(line);
             }
             sw2.Close();
@@ -311,7 +321,7 @@ namespace SIL.PublishingSolution
                 {
                     //if (websiteAddress.Substring(websiteAddress.Length - 1, websiteAddress.Length) == "/")
                     //{
-                        line = line.Replace("http://localhost/wordpress", websiteAddress + "/" + directoryName);
+                    line = line.Replace("http://localhost/wordpress", websiteAddress + "/" + directoryName);
                     //}
                     //else
                     //{
@@ -325,7 +335,7 @@ namespace SIL.PublishingSolution
 
                 if (line.IndexOf("AudioVisual/") >= 0)
                 {
-                  //  line = line.Replace("AudioVisual/", websiteAddress + "/" + directoryName + "/" + "AudioVisual/");
+                    //  line = line.Replace("AudioVisual/", websiteAddress + "/" + directoryName + "/" + "AudioVisual/");
                 }
 
                 sw2.WriteLine(line);

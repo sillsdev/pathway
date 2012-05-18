@@ -819,7 +819,7 @@ namespace TestBed
             xhtmlToSqlData.XhtmlToBlog();
 
             WebonaryMysqlDatabaseTransfer webonaryMysql = new WebonaryMysqlDatabaseTransfer();
-
+            webonaryMysql.projInfo = projInfo;
             webonaryMysql.CreateDatabase("CreateUser-Db.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306", "samdoss");
 
             webonaryMysql.InstallWordPressPHPPage("http://pathwaywebonary.com.cws10.my-hosting-panel.com", "samdoss123", "Sam Wordpress", "Samdoss", "arthur", "samdoss@live.com", "1");

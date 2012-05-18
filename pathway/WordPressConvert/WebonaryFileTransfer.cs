@@ -582,13 +582,13 @@ namespace SIL.PublishingSolution
             progressBar.Value = 2;
 
             //Step-3 Automated the PHP wordpress page setup for Administrative username and password
-            string getPhpSetupFileNamewithLocation = Directory.GetCurrentDirectory();
+            string getPhpSetupFileNamewithLocation = Common.GetApplicationPath();
             getPhpSetupFileNamewithLocation = Path.Combine(getPhpSetupFileNamewithLocation, "Wordpress\\setup_wp.php");
             string movingPhpSetupFileLocation = Path.Combine(txtSourceFileLocation.Text, txtWebFtpFldrNme.Text);
             movingPhpSetupFileLocation = Path.Combine(movingPhpSetupFileLocation, "wp-admin\\setup_wp.php");
             File.Copy(getPhpSetupFileNamewithLocation, movingPhpSetupFileLocation, true);
 
-  //          WordPressFileTransfertoFtpUpload();
+            WordPressFileTransfertoFtpUpload();
 
             lblStatus.Text = "Completed the installation Process";
 
@@ -609,7 +609,7 @@ namespace SIL.PublishingSolution
         private void SettingMysqlDatabase()
         {
             WebonaryMysqlDatabaseTransfer webonaryMysql = new WebonaryMysqlDatabaseTransfer();
-
+            webonaryMysql.projInfo = projInfo;
             webonaryMysql.CreateDatabase("CreateUser-Db.sql", txtSqlUsername.Text, txtSqlPassword.Text, txtSqlServerName.Text, "3306", txtSqlDBName.Text);
 
             webonaryMysql.InstallWordPressPHPPage(txtWebUrl.Text, txtWebFtpFldrNme.Text, txtWebAdminSiteNme.Text, txtWebAdminUsrNme.Text, txtWebAdminPwd.Text, txtWebEmailID.Text, "1");
