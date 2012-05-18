@@ -222,6 +222,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExportXhtmlToSqlData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExportWordPress.cs" />
     <Compile Include="WebonaryFileTransfer.cs">
