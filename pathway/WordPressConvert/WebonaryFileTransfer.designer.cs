@@ -66,6 +66,7 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.bwWebonaryFileTransfer = new System.ComponentModel.BackgroundWorker();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -456,6 +457,12 @@
             this.lblStatus.TabIndex = 35;
             this.lblStatus.UseWaitCursor = true;
             // 
+            // bwWebonaryFileTransfer
+            // 
+            this.bwWebonaryFileTransfer.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwWebonaryFileTransfer_DoWork);
+            this.bwWebonaryFileTransfer.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bwWebonaryFileTransfer_ProgressChanged);
+            this.bwWebonaryFileTransfer.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwWebonaryFileTransfer_RunWorkerCompleted);
+            // 
             // WebonaryFileTransfer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -534,5 +541,6 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblStatus;
+        private System.ComponentModel.BackgroundWorker bwWebonaryFileTransfer;
     }
 }

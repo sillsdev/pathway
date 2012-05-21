@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Apr-18-2012 for Picture TD-2937( Picture appears in the margin )
+&apos;Changed On May-21-2012 for TD-2989(Export to PDF produces BASIC error)
 
 &apos;Define the values to Constant Variables for First Guide word, Last Guide word ,Headword Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -27,6 +27,7 @@ Dim CanSave as Boolean
 
 
 Sub StartDontForget
+On Error GoTo MyError:
 	TurnOffNonPrintingCharacters() 
 	
 	AlingOverlappingImages()
@@ -48,6 +49,8 @@ Sub StartDontForget
 	If IsCoverImageInserted = &quot;true&quot; And Right(Trim(ThisComponent.Title),4) = &quot;.odm&quot; Then
 		SetImageToCoverPage()
 	End If
+Exit Sub
+MyError:	
 End Sub
 
 
@@ -353,7 +356,7 @@ End Function
 &apos;This procedure exports Odt file into Word/PDF based on the OutputFormat in given FilePath
 Sub ExportToDOC_PDF
 &apos;stardesktop.terminate 
-
+On Error GoTo MyError:
 	Dim FilePathWithName,filterType as string
 	Dim oSvc as Object
    	oDoc = ThisComponent 
@@ -366,14 +369,19 @@ Sub ExportToDOC_PDF
 	else
 		filterType = &quot;writer_pdf_Export&quot;
 	End If 
+	&apos;msgbox(&quot;start&quot;)
    	oDoc.storeToURL(fileURL, Array(MakePropertyValue(&quot;FilterName&quot;,filterType)) 
-
+	&apos;msgbox(&quot;end&quot;)
 	If Lcase(IsPreview) = &quot;false&quot; Then
 		oSvc = createUnoService(&quot;com.sun.star.system.SystemShellExecute&quot;) 
 		oSvc.execute(FilePathWithName, &quot;&quot;, 0) 
 	End If
-	
+		&apos;msgbox(&quot;dispose&quot;)
 	oDoc.dispose()
+			&apos;msgbox(&quot;disposeEnd&quot;)
+Exit Sub
+MyError:
+&apos;msgbox(&quot;hi&quot;)
 End Sub
 
 &apos;This function sets the Property Value as Word or PDF
