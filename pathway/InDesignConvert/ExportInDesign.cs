@@ -54,7 +54,9 @@ namespace SIL.PublishingSolution
             preProcessor.GetTempFolderPath();
             preProcessor.PreserveSpace();
             preProcessor.ImagePreprocess();
-            preProcessor.InsertFrontMatter(preProcessor.GetCreatedTempFolderPath, true);
+            //preProcessor.InsertFrontMatter(preProcessor.GetCreatedTempFolderPath, true);
+            preProcessor.InsertInDesignFrontMatterContent(projInfo.DefaultXhtmlFileWithPath);
+
             preProcessor.ReplaceInvalidTagtoSpan("_AllComplexFormEntryBackRefs|LexEntryRef_PrimaryLexemes", "span");
             preProcessor.InsertHiddenChapterNumber();
             preProcessor.InsertHiddenVerseNumber();
@@ -95,6 +97,9 @@ namespace SIL.PublishingSolution
 
             InDesignMap inDesignMap = new InDesignMap();
             inDesignMap.CreateIDDesignMap(projInfo.TempOutputFolder, StyleName["ColumnClass"].Count, masterPageNames, StyleName["TextVariables"], StyleName["CrossRef"], projInfo.ProjectInputType);
+
+            InMetaData inMetaData = new InMetaData();
+            inMetaData.SetDateTimeinMetaDataXML(projInfo.TempOutputFolder);
 
             InPreferences inPreferences = new InPreferences();
             inPreferences.CreateIDPreferences(Common.PathCombine(projInfo.TempOutputFolder, "Resources"), idAllClass);

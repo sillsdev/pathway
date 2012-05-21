@@ -89,16 +89,37 @@ namespace Test.WordPressConvert
         /// <summary>
         ///A test for Export
         ///</summary>
+        [Ignore]
         [Test]
+        [Category("SkipOnTeamCity")]
         public void ExportPassTest()
         {
             const string XhtmlName = "main.xhtml";
             const string CssName = "main.css";
             PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
             var target = new ExportWordPress();
+            target.skipForNUnitTest = true;
             var actual = target.Export(projInfo);
             Assert.IsTrue(actual);
             const string dataSql = "data.sql";
+            Assert.AreEqual("", IsEqualAllButTime(FileExpected(dataSql), FileOutput(dataSql)));
+        }
+
+        /// <summary>
+        ///Godwana Mysql Data Export
+        ///</summary>
+        [Test]
+        public void ExportGodwanaMysqlTest()
+        {
+            const string XhtmlName = "GodwanaMysql.xhtml";
+            const string CssName = "GodwanaMysql.css";
+            PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
+            projInfo.ProjectPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+            ExportXhtmlToSqlData xhtmlToSqlData = new ExportXhtmlToSqlData();
+            xhtmlToSqlData._projInfo = projInfo;
+            xhtmlToSqlData.MysqlDataFileName = "GodwanaMysql.sql";
+            xhtmlToSqlData.XhtmlToBlog();
+            const string dataSql = "GodwanaMysql.sql";
             Assert.AreEqual("", IsEqualAllButTime(FileExpected(dataSql), FileOutput(dataSql)));
         }
 

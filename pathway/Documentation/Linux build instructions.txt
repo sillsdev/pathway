@@ -1,0 +1,37 @@
+SETTING UP GIT CLIENT
+---------------------
+In order to make git work on Linux, I had to use
+sudo apt-get -y install git git-gui gitk
+This installs the git client.
+Then you can create a .netrc file in your home folder as described on the google code site.
+Then you can use the command on the google code site to clone a copy of the repo.
+For my machine I created a folder called git
+mkdir git
+and then
+cd git
+and cloned the pathway repo there.
+
+SETTING UP BUILD SYSTEM
+-----------------------
+To set up Linux for building packages, I used:
+sudo apt-get -y install devscripts debhelper autotools-dev mono-complete
+
+BUILDING PATHWAY
+----------------
+Once this is all setup, the command to build the package is:
+debuild -eBUILD_NUMBER=1.1.2.2205 -etarget=Daily -i -us -uc -b
+It should be executed in the ~/git/pathway/pathway folder (or whereever the PublishingSolution.sln file is located).
+You will replace the build number with the appropriate # for the build you are making.
+You can also change -etarget=Daily (this updates the build # in all the AssemblyInfo.cs files as well as building Release7BTE). You can use Release7SE, Corporate7BTE or Corporate7SE to build these other packages.
+If you put it in another location, you will need to add
+-ebinsrc=~/git1/pathway/pathway
+replacing git1 with the folder you have used.
+For 64-bit build the 
+-ePlatform=Any\ CPU
+parameter should be given to the build.
+
+INSTALLING
+----------
+The .deb package will be built in the ~git/pathway folder (the parent of the one that executed the debuild command.
+If you launch this file (double click on it), you can install Pathway.
+If you are running it on a machine that has had Pathway before, you may want to remove ~/.local/share/SIL/pathway so that it resets the setting files to the latest ones.

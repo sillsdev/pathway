@@ -652,7 +652,6 @@ namespace SIL.PublishingSolution
             {
                 PreExportProcess preProcessor = new PreExportProcess(projInfo);
                 //Preprocess XHTML & CSS for FrontMatter
-                //preProcessor.InsertLoFrontMatterCssFile(projInfo.DefaultCssFileWithPath);
                 preProcessor.InsertLoFrontMatterContent(projInfo.DefaultXhtmlFileWithPath);
             }
 
@@ -742,6 +741,15 @@ namespace SIL.PublishingSolution
             CssTree cssTree = new CssTree();
             cssTree.OutputType = Common.OutputType.ODT;
             cssClass = cssTree.CreateCssProperty(cssFile, true);
+
+            if (projInfo.IsReversalExist)
+            {
+                if (cssClass.ContainsKey("headref") && cssClass["headref"].ContainsKey("font-family"))
+                {
+                    cssClass["headref"].Remove("font-family");
+                }
+            }
+
             int pageWidth = GetPictureWidth(cssClass);
             // BEGIN Generate Styles.Xml File
             Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();

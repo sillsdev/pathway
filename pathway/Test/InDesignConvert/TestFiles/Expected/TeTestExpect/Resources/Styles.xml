@@ -98,94 +98,6 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/ChapterNumber_1" Name="ChapterNumber_1" Imported="false" NextStyle="CharacterStyle/ChapterNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="24" FontStyle="Bold" BaselineShift="0" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/ChapterNumber1" Name="ChapterNumber1" Imported="false" NextStyle="CharacterStyle/ChapterNumber1" KeyboardShortcut="0 0" DropCapCharacters="1" DropCapLines="2" BaselineShift="200%">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/hideChapterNumber" Name="hideChapterNumber" Imported="false" NextStyle="CharacterStyle/hideChapterNumber" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/hideVerseNumber1" Name="hideVerseNumber1" Imported="false" NextStyle="CharacterStyle/hideVerseNumber1" KeyboardShortcut="0 0" PointSize="0.1" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/PWHide_1" Name="PWHide_1" Imported="false" NextStyle="CharacterStyle/PWHide_1" KeyboardShortcut="0 0" PointSize="0.1" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_6" Name="span_6" Imported="false" NextStyle="CharacterStyle/span_6" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_7" Name="span_7" Imported="false" NextStyle="CharacterStyle/span_7" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_9" Name="span_9" Imported="false" NextStyle="CharacterStyle/span_9" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/hideVerseNumber" Name="hideVerseNumber" Imported="false" NextStyle="CharacterStyle/hideVerseNumber" KeyboardShortcut="0 0" PointSize="0.1" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_1" Name="VerseNumber_1" Imported="false" NextStyle="CharacterStyle/VerseNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_10" Name="span_10" Imported="false" NextStyle="CharacterStyle/span_10" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
     <CharacterStyle Self="CharacterStyle/Paragraph_1" Name="Paragraph_1" Imported="false" NextStyle="CharacterStyle/Paragraph_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
@@ -194,7 +106,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_2" Name="VerseNumber_2" Imported="false" NextStyle="CharacterStyle/VerseNumber_2" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/ChapterNumber_1" Name="ChapterNumber_1" Imported="false" NextStyle="CharacterStyle/ChapterNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="20" FontStyle="Bold" BaselineShift="0" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -202,7 +114,71 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_11" Name="span_11" Imported="false" NextStyle="CharacterStyle/span_11" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/ChapterNumber1" Name="ChapterNumber1" Imported="false" NextStyle="CharacterStyle/ChapterNumber1" KeyboardShortcut="0 0" DropCapCharacters="1" DropCapLines="2" BaselineShift="10">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/hideChapterNumber" Name="hideChapterNumber" Imported="false" NextStyle="CharacterStyle/hideChapterNumber" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="unit">0.1</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/hideVerseNumber" Name="hideVerseNumber" Imported="false" NextStyle="CharacterStyle/hideVerseNumber" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/PWHide_1" Name="PWHide_1" Imported="false" NextStyle="CharacterStyle/PWHide_1" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/span_6" Name="span_6" Imported="false" NextStyle="CharacterStyle/span_6" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/span_7" Name="span_7" Imported="false" NextStyle="CharacterStyle/span_7" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/span_9" Name="span_9" Imported="false" NextStyle="CharacterStyle/span_9" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/VerseNumber_1" Name="VerseNumber_1" Imported="false" NextStyle="CharacterStyle/VerseNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/span_10" Name="span_10" Imported="false" NextStyle="CharacterStyle/span_10" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -218,15 +194,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_12" Name="span_12" Imported="false" NextStyle="CharacterStyle/span_12" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_14" Name="span_14" Imported="false" NextStyle="CharacterStyle/span_14" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_11" Name="span_11" Imported="false" NextStyle="CharacterStyle/span_11" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -242,7 +210,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_3" Name="VerseNumber_3" Imported="false" NextStyle="CharacterStyle/VerseNumber_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumber_2" Name="VerseNumber_2" Imported="false" NextStyle="CharacterStyle/VerseNumber_2" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -250,7 +218,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_15" Name="span_15" Imported="false" NextStyle="CharacterStyle/span_15" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_13" Name="span_13" Imported="false" NextStyle="CharacterStyle/span_13" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -266,7 +234,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_16" Name="span_16" Imported="false" NextStyle="CharacterStyle/span_16" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_14" Name="span_14" Imported="false" NextStyle="CharacterStyle/span_14" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -274,7 +242,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_17" Name="span_17" Imported="false" NextStyle="CharacterStyle/span_17" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_15" Name="span_15" Imported="false" NextStyle="CharacterStyle/span_15" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -290,7 +258,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_18" Name="span_18" Imported="false" NextStyle="CharacterStyle/span_18" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_16" Name="span_16" Imported="false" NextStyle="CharacterStyle/span_16" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -298,7 +266,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/ChapterNumber_2" Name="ChapterNumber_2" Imported="false" NextStyle="CharacterStyle/ChapterNumber_2" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="24" FontStyle="Bold" BaselineShift="0" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/ChapterNumber_2" Name="ChapterNumber_2" Imported="false" NextStyle="CharacterStyle/ChapterNumber_2" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="20" FontStyle="Bold" BaselineShift="0" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -314,7 +282,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_4" Name="VerseNumber_4" Imported="false" NextStyle="CharacterStyle/VerseNumber_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumber_3" Name="VerseNumber_3" Imported="false" NextStyle="CharacterStyle/VerseNumber_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -322,7 +290,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_20" Name="span_20" Imported="false" NextStyle="CharacterStyle/span_20" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_18" Name="span_18" Imported="false" NextStyle="CharacterStyle/span_18" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -338,7 +306,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_21" Name="span_21" Imported="false" NextStyle="CharacterStyle/span_21" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_19" Name="span_19" Imported="false" NextStyle="CharacterStyle/span_19" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -354,6 +322,14 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/span_20" Name="span_20" Imported="false" NextStyle="CharacterStyle/span_20" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
     <CharacterStyle Self="CharacterStyle/span_22" Name="span_22" Imported="false" NextStyle="CharacterStyle/span_22" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
@@ -362,15 +338,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_24" Name="span_24" Imported="false" NextStyle="CharacterStyle/span_24" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/Emphasis_3" Name="Emphasis_3" Imported="false" NextStyle="CharacterStyle/Emphasis_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Italic" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/Emphasis_3" Name="Emphasis_3" Imported="false" NextStyle="CharacterStyle/Emphasis_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -378,23 +346,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_25" Name="span_25" Imported="false" NextStyle="CharacterStyle/span_25" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/Emphasis_4" Name="Emphasis_4" Imported="false" NextStyle="CharacterStyle/Emphasis_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_29" Name="span_29" Imported="false" NextStyle="CharacterStyle/span_29" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_23" Name="span_23" Imported="false" NextStyle="CharacterStyle/span_23" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -426,7 +378,7 @@
         <Leading type="unit">24</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_30" Name="span_30" Imported="false" NextStyle="CharacterStyle/span_30" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_27" Name="span_27" Imported="false" NextStyle="CharacterStyle/span_27" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -442,7 +394,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_31" Name="span_31" Imported="false" NextStyle="CharacterStyle/span_31" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="9" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" KeepWithNext="2" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_28" Name="span_28" Imported="false" NextStyle="CharacterStyle/span_28" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="9" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" KeepWithNext="2" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -450,111 +402,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/pictureCaption_1" Name="pictureCaption_1" Imported="false" NextStyle="CharacterStyle/pictureCaption_1" KeyboardShortcut="0 0" float="center" RightIndent="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_32" Name="span_32" Imported="false" NextStyle="CharacterStyle/span_32" KeyboardShortcut="0 0" float="center" RightIndent="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/Emphasis_5" Name="Emphasis_5" Imported="false" NextStyle="CharacterStyle/Emphasis_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Italic" FirstLineIndent="0" LeftIndent="0" float="center" RightIndent="2" Justification="CenterAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_33" Name="span_33" Imported="false" NextStyle="CharacterStyle/span_33" KeyboardShortcut="0 0" float="center" RightIndent="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/ChapterNumber_3" Name="ChapterNumber_3" Imported="false" NextStyle="CharacterStyle/ChapterNumber_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="24" FontStyle="Bold" BaselineShift="0" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/PWHide_2" Name="PWHide_2" Imported="false" NextStyle="CharacterStyle/PWHide_2" KeyboardShortcut="0 0" PointSize="0.1" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_34" Name="span_34" Imported="false" NextStyle="CharacterStyle/span_34" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/NameOfGod_4" Name="NameOfGod_4" Imported="false" NextStyle="CharacterStyle/NameOfGod_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Bold Italic" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_35" Name="span_35" Imported="false" NextStyle="CharacterStyle/span_35" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_36" Name="span_36" Imported="false" NextStyle="CharacterStyle/span_36" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_5" Name="VerseNumber_5" Imported="false" NextStyle="CharacterStyle/VerseNumber_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_37" Name="span_37" Imported="false" NextStyle="CharacterStyle/span_37" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_40" Name="span_40" Imported="false" NextStyle="CharacterStyle/span_40" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/Paragraph_4" Name="Paragraph_4" Imported="false" NextStyle="CharacterStyle/Paragraph_4" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/pictureCaption_1" Name="pictureCaption_1" Imported="false" NextStyle="CharacterStyle/pictureCaption_1" KeyboardShortcut="0 0" float="center" RightIndent="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" AppliedFont="Charis SIL" PointSize="10" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -562,15 +410,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_6" Name="VerseNumber_6" Imported="false" NextStyle="CharacterStyle/VerseNumber_6" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_41" Name="span_41" Imported="false" NextStyle="CharacterStyle/span_41" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_29" Name="span_29" Imported="false" NextStyle="CharacterStyle/span_29" KeyboardShortcut="0 0" float="center" RightIndent="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" AppliedFont="Charis SIL" PointSize="10" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -578,7 +418,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/NameOfGod_5" Name="NameOfGod_5" Imported="false" NextStyle="CharacterStyle/NameOfGod_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Bold Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/Emphasis_4" Name="Emphasis_4" Imported="false" NextStyle="CharacterStyle/Emphasis_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Italic" FirstLineIndent="0" LeftIndent="0" float="center" RightIndent="2" Justification="CenterAlign" PointSize="10" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -586,7 +426,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_42" Name="span_42" Imported="false" NextStyle="CharacterStyle/span_42" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_30" Name="span_30" Imported="false" NextStyle="CharacterStyle/span_30" KeyboardShortcut="0 0" float="center" RightIndent="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" AppliedFont="Charis SIL" PointSize="10" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -594,15 +434,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_44" Name="span_44" Imported="false" NextStyle="CharacterStyle/span_44" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/Foreign_1" Name="Foreign_1" Imported="false" NextStyle="CharacterStyle/Foreign_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/ChapterNumber_3" Name="ChapterNumber_3" Imported="false" NextStyle="CharacterStyle/ChapterNumber_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="20" FontStyle="Bold" BaselineShift="0" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -610,7 +442,63 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_45" Name="span_45" Imported="false" NextStyle="CharacterStyle/span_45" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/PWHide_2" Name="PWHide_2" Imported="false" NextStyle="CharacterStyle/PWHide_2" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/span_31" Name="span_31" Imported="false" NextStyle="CharacterStyle/span_31" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/NameOfGod_4" Name="NameOfGod_4" Imported="false" NextStyle="CharacterStyle/NameOfGod_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Bold Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/span_32" Name="span_32" Imported="false" NextStyle="CharacterStyle/span_32" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/span_33" Name="span_33" Imported="false" NextStyle="CharacterStyle/span_33" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/VerseNumber_4" Name="VerseNumber_4" Imported="false" NextStyle="CharacterStyle/VerseNumber_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/span_34" Name="span_34" Imported="false" NextStyle="CharacterStyle/span_34" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/span_37" Name="span_37" Imported="false" NextStyle="CharacterStyle/span_37" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -626,7 +514,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_7" Name="VerseNumber_7" Imported="false" NextStyle="CharacterStyle/VerseNumber_7" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumber_5" Name="VerseNumber_5" Imported="false" NextStyle="CharacterStyle/VerseNumber_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -634,7 +522,71 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_46" Name="span_46" Imported="false" NextStyle="CharacterStyle/span_46" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_38" Name="span_38" Imported="false" NextStyle="CharacterStyle/span_38" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/NameOfGod_5" Name="NameOfGod_5" Imported="false" NextStyle="CharacterStyle/NameOfGod_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Bold Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/span_39" Name="span_39" Imported="false" NextStyle="CharacterStyle/span_39" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/span_41" Name="span_41" Imported="false" NextStyle="CharacterStyle/span_41" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/Foreign_1" Name="Foreign_1" Imported="false" NextStyle="CharacterStyle/Foreign_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/span_42" Name="span_42" Imported="false" NextStyle="CharacterStyle/span_42" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/Paragraph_6" Name="Paragraph_6" Imported="false" NextStyle="CharacterStyle/Paragraph_6" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/VerseNumber_6" Name="VerseNumber_6" Imported="false" NextStyle="CharacterStyle/VerseNumber_6" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/span_43" Name="span_43" Imported="false" NextStyle="CharacterStyle/span_43" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -650,7 +602,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_47" Name="span_47" Imported="false" NextStyle="CharacterStyle/span_47" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_44" Name="span_44" Imported="false" NextStyle="CharacterStyle/span_44" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -658,7 +610,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/Emphasis_6" Name="Emphasis_6" Imported="false" NextStyle="CharacterStyle/Emphasis_6" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/Emphasis_5" Name="Emphasis_5" Imported="false" NextStyle="CharacterStyle/Emphasis_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -666,7 +618,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_48" Name="span_48" Imported="false" NextStyle="CharacterStyle/span_48" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_45" Name="span_45" Imported="false" NextStyle="CharacterStyle/span_45" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -682,7 +634,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_49" Name="span_49" Imported="false" NextStyle="CharacterStyle/span_49" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="9" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" KeepWithNext="2" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_46" Name="span_46" Imported="false" NextStyle="CharacterStyle/span_46" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="9" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" KeepWithNext="2" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -690,7 +642,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/ChapterNumber_4" Name="ChapterNumber_4" Imported="false" NextStyle="CharacterStyle/ChapterNumber_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="24" FontStyle="Bold" BaselineShift="0" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/ChapterNumber_4" Name="ChapterNumber_4" Imported="false" NextStyle="CharacterStyle/ChapterNumber_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="20" FontStyle="Bold" BaselineShift="0" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -698,7 +650,23 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/PWHide_3" Name="PWHide_3" Imported="false" NextStyle="CharacterStyle/PWHide_3" KeyboardShortcut="0 0" PointSize="0.1" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper">
+    <CharacterStyle Self="CharacterStyle/PWHide_3" Name="PWHide_3" Imported="false" NextStyle="CharacterStyle/PWHide_3" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/span_47" Name="span_47" Imported="false" NextStyle="CharacterStyle/span_47" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/NameOfGod_7" Name="NameOfGod_7" Imported="false" NextStyle="CharacterStyle/NameOfGod_7" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Bold Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -706,7 +674,15 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_50" Name="span_50" Imported="false" NextStyle="CharacterStyle/span_50" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_48" Name="span_48" Imported="false" NextStyle="CharacterStyle/span_48" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/VerseNumber_7" Name="VerseNumber_7" Imported="false" NextStyle="CharacterStyle/VerseNumber_7" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -714,34 +690,10 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/NameOfGod_7" Name="NameOfGod_7" Imported="false" NextStyle="CharacterStyle/NameOfGod_7" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Bold Italic" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_49" Name="span_49" Imported="false" NextStyle="CharacterStyle/span_49" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_51" Name="span_51" Imported="false" NextStyle="CharacterStyle/span_51" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_8" Name="VerseNumber_8" Imported="false" NextStyle="CharacterStyle/VerseNumber_8" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_52" Name="span_52" Imported="false" NextStyle="CharacterStyle/span_52" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
         <Leading type="enumeration">Auto</Leading>
       </Properties>
@@ -754,7 +706,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_53" Name="span_53" Imported="false" NextStyle="CharacterStyle/span_53" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" Justification="LeftAlign" FirstLineIndent="-36" LeftIndent="0" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_50" Name="span_50" Imported="false" NextStyle="CharacterStyle/span_50" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" Justification="LeftAlign" FirstLineIndent="-36" LeftIndent="0" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -770,7 +722,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_54" Name="span_54" Imported="false" NextStyle="CharacterStyle/span_54" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" Justification="LeftAlign" FirstLineIndent="-36" LeftIndent="0" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_51" Name="span_51" Imported="false" NextStyle="CharacterStyle/span_51" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" Justification="LeftAlign" FirstLineIndent="-36" LeftIndent="0" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -786,7 +738,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_55" Name="span_55" Imported="false" NextStyle="CharacterStyle/span_55" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" Justification="LeftAlign" FirstLineIndent="-36" LeftIndent="0" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_52" Name="span_52" Imported="false" NextStyle="CharacterStyle/span_52" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" Justification="LeftAlign" FirstLineIndent="-36" LeftIndent="0" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -794,7 +746,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_9" Name="VerseNumber_9" Imported="false" NextStyle="CharacterStyle/VerseNumber_9" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumber_8" Name="VerseNumber_8" Imported="false" NextStyle="CharacterStyle/VerseNumber_8" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -802,7 +754,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_56" Name="span_56" Imported="false" NextStyle="CharacterStyle/span_56" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" Justification="LeftAlign" FirstLineIndent="-36" LeftIndent="0" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_53" Name="span_53" Imported="false" NextStyle="CharacterStyle/span_53" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" Justification="LeftAlign" FirstLineIndent="-36" LeftIndent="0" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -810,7 +762,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/Emphasis_7" Name="Emphasis_7" Imported="false" NextStyle="CharacterStyle/Emphasis_7" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/Emphasis_6" Name="Emphasis_6" Imported="false" NextStyle="CharacterStyle/Emphasis_6" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -834,7 +786,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_10" Name="VerseNumber_10" Imported="false" NextStyle="CharacterStyle/VerseNumber_10" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumber_9" Name="VerseNumber_9" Imported="false" NextStyle="CharacterStyle/VerseNumber_9" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -842,7 +794,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_57" Name="span_57" Imported="false" NextStyle="CharacterStyle/span_57" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_54" Name="span_54" Imported="false" NextStyle="CharacterStyle/span_54" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -858,7 +810,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_58" Name="span_58" Imported="false" NextStyle="CharacterStyle/span_58" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_55" Name="span_55" Imported="false" NextStyle="CharacterStyle/span_55" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -874,7 +826,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_59" Name="span_59" Imported="false" NextStyle="CharacterStyle/span_59" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="9" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" KeepWithNext="2" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_56" Name="span_56" Imported="false" NextStyle="CharacterStyle/span_56" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="9" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" KeepWithNext="2" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -882,7 +834,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/ChapterNumber_5" Name="ChapterNumber_5" Imported="false" NextStyle="CharacterStyle/ChapterNumber_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="24" FontStyle="Bold" BaselineShift="0" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/ChapterNumber_5" Name="ChapterNumber_5" Imported="false" NextStyle="CharacterStyle/ChapterNumber_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="20" FontStyle="Bold" BaselineShift="0" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -890,63 +842,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/PWHide_4" Name="PWHide_4" Imported="false" NextStyle="CharacterStyle/PWHide_4" KeyboardShortcut="0 0" PointSize="0.1" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_60" Name="span_60" Imported="false" NextStyle="CharacterStyle/span_60" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/NameOfGod_11" Name="NameOfGod_11" Imported="false" NextStyle="CharacterStyle/NameOfGod_11" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Bold Italic" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_61" Name="span_61" Imported="false" NextStyle="CharacterStyle/span_61" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_11" Name="VerseNumber_11" Imported="false" NextStyle="CharacterStyle/VerseNumber_11" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_62" Name="span_62" Imported="false" NextStyle="CharacterStyle/span_62" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_64" Name="span_64" Imported="false" NextStyle="CharacterStyle/span_64" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/Paragraph_6" Name="Paragraph_6" Imported="false" NextStyle="CharacterStyle/Paragraph_6" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/PWHide_4" Name="PWHide_4" Imported="false" NextStyle="CharacterStyle/PWHide_4" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -954,7 +850,15 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_12" Name="VerseNumber_12" Imported="false" NextStyle="CharacterStyle/VerseNumber_12" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_57" Name="span_57" Imported="false" NextStyle="CharacterStyle/span_57" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/NameOfGod_11" Name="NameOfGod_11" Imported="false" NextStyle="CharacterStyle/NameOfGod_11" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Bold Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -962,7 +866,55 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_66" Name="span_66" Imported="false" NextStyle="CharacterStyle/span_66" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_58" Name="span_58" Imported="false" NextStyle="CharacterStyle/span_58" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/VerseNumber_10" Name="VerseNumber_10" Imported="false" NextStyle="CharacterStyle/VerseNumber_10" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/span_59" Name="span_59" Imported="false" NextStyle="CharacterStyle/span_59" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/span_61" Name="span_61" Imported="false" NextStyle="CharacterStyle/span_61" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/Paragraph_9" Name="Paragraph_9" Imported="false" NextStyle="CharacterStyle/Paragraph_9" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/VerseNumber_11" Name="VerseNumber_11" Imported="false" NextStyle="CharacterStyle/VerseNumber_11" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/span_63" Name="span_63" Imported="false" NextStyle="CharacterStyle/span_63" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -978,7 +930,7 @@
         <Leading type="unit">11</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_68" Name="span_68" Imported="false" NextStyle="CharacterStyle/span_68" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="8" FontStyle="Bold" Justification="LeftAlign" FirstLineIndent="0" LeftIndent="0" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_65" Name="span_65" Imported="false" NextStyle="CharacterStyle/span_65" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="8" FontStyle="Bold" Justification="LeftAlign" FirstLineIndent="0" LeftIndent="0" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -994,7 +946,7 @@
         <Leading type="unit">11</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_69" Name="span_69" Imported="false" NextStyle="CharacterStyle/span_69" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="9" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_66" Name="span_66" Imported="false" NextStyle="CharacterStyle/span_66" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="9" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1010,7 +962,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_70" Name="span_70" Imported="false" NextStyle="CharacterStyle/span_70" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="9" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" KeepWithNext="2" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_67" Name="span_67" Imported="false" NextStyle="CharacterStyle/span_67" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="9" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" KeepWithNext="2" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1018,7 +970,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/Paragraph_7" Name="Paragraph_7" Imported="false" NextStyle="CharacterStyle/Paragraph_7" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/Paragraph_10" Name="Paragraph_10" Imported="false" NextStyle="CharacterStyle/Paragraph_10" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1034,7 +986,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_71" Name="span_71" Imported="false" NextStyle="CharacterStyle/span_71" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_68" Name="span_68" Imported="false" NextStyle="CharacterStyle/span_68" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1050,7 +1002,39 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/span_69" Name="span_69" Imported="false" NextStyle="CharacterStyle/span_69" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/VerseNumber_12" Name="VerseNumber_12" Imported="false" NextStyle="CharacterStyle/VerseNumber_12" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/span_70" Name="span_70" Imported="false" NextStyle="CharacterStyle/span_70" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
     <CharacterStyle Self="CharacterStyle/span_72" Name="span_72" Imported="false" NextStyle="CharacterStyle/span_72" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/Paragraph_11" Name="Paragraph_11" Imported="false" NextStyle="CharacterStyle/Paragraph_11" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1066,39 +1050,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_73" Name="span_73" Imported="false" NextStyle="CharacterStyle/span_73" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_75" Name="span_75" Imported="false" NextStyle="CharacterStyle/span_75" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/Paragraph_8" Name="Paragraph_8" Imported="false" NextStyle="CharacterStyle/Paragraph_8" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_14" Name="VerseNumber_14" Imported="false" NextStyle="CharacterStyle/VerseNumber_14" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/span_77" Name="span_77" Imported="false" NextStyle="CharacterStyle/span_77" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/span_74" Name="span_74" Imported="false" NextStyle="CharacterStyle/span_74" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1270,94 +1222,6 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/ChapterNumber_1" Name="ChapterNumber_1" Imported="false" NextStyle="ParagraphStyle/ChapterNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="24" FontStyle="Bold" BaselineShift="6" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/ChapterNumber1" Name="ChapterNumber1" Imported="false" NextStyle="ParagraphStyle/ChapterNumber1" KeyboardShortcut="0 0" DropCapCharacters="1" DropCapLines="2" BaselineShift="200%">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/hideChapterNumber" Name="hideChapterNumber" Imported="false" NextStyle="ParagraphStyle/hideChapterNumber" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">0.1</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/hideVerseNumber1" Name="hideVerseNumber1" Imported="false" NextStyle="ParagraphStyle/hideVerseNumber1" KeyboardShortcut="0 0" PointSize="0.1" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/PWHide_1" Name="PWHide_1" Imported="false" NextStyle="ParagraphStyle/PWHide_1" KeyboardShortcut="0 0" PointSize="0.1" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_6" Name="span_6" Imported="false" NextStyle="ParagraphStyle/span_6" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_7" Name="span_7" Imported="false" NextStyle="ParagraphStyle/span_7" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_9" Name="span_9" Imported="false" NextStyle="ParagraphStyle/span_9" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/hideVerseNumber" Name="hideVerseNumber" Imported="false" NextStyle="ParagraphStyle/hideVerseNumber" KeyboardShortcut="0 0" PointSize="0.1" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_1" Name="VerseNumber_1" Imported="false" NextStyle="ParagraphStyle/VerseNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_10" Name="span_10" Imported="false" NextStyle="ParagraphStyle/span_10" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
     <ParagraphStyle Self="ParagraphStyle/Paragraph_1" Name="Paragraph_1" Imported="false" NextStyle="ParagraphStyle/Paragraph_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
@@ -1366,7 +1230,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_2" Name="VerseNumber_2" Imported="false" NextStyle="ParagraphStyle/VerseNumber_2" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/ChapterNumber_1" Name="ChapterNumber_1" Imported="false" NextStyle="ParagraphStyle/ChapterNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="20" FontStyle="Bold" BaselineShift="5" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1374,7 +1238,71 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_11" Name="span_11" Imported="false" NextStyle="ParagraphStyle/span_11" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/ChapterNumber1" Name="ChapterNumber1" Imported="false" NextStyle="ParagraphStyle/ChapterNumber1" KeyboardShortcut="0 0" DropCapCharacters="1" DropCapLines="2" BaselineShift="10">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/hideChapterNumber" Name="hideChapterNumber" Imported="false" NextStyle="ParagraphStyle/hideChapterNumber" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="unit">0.1</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/hideVerseNumber" Name="hideVerseNumber" Imported="false" NextStyle="ParagraphStyle/hideVerseNumber" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/PWHide_1" Name="PWHide_1" Imported="false" NextStyle="ParagraphStyle/PWHide_1" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/span_6" Name="span_6" Imported="false" NextStyle="ParagraphStyle/span_6" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/span_7" Name="span_7" Imported="false" NextStyle="ParagraphStyle/span_7" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/span_9" Name="span_9" Imported="false" NextStyle="ParagraphStyle/span_9" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_1" Name="VerseNumber_1" Imported="false" NextStyle="ParagraphStyle/VerseNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/span_10" Name="span_10" Imported="false" NextStyle="ParagraphStyle/span_10" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1390,15 +1318,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_12" Name="span_12" Imported="false" NextStyle="ParagraphStyle/span_12" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_14" Name="span_14" Imported="false" NextStyle="ParagraphStyle/span_14" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_11" Name="span_11" Imported="false" NextStyle="ParagraphStyle/span_11" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1414,7 +1334,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_3" Name="VerseNumber_3" Imported="false" NextStyle="ParagraphStyle/VerseNumber_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_2" Name="VerseNumber_2" Imported="false" NextStyle="ParagraphStyle/VerseNumber_2" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1422,7 +1342,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_15" Name="span_15" Imported="false" NextStyle="ParagraphStyle/span_15" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_13" Name="span_13" Imported="false" NextStyle="ParagraphStyle/span_13" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1438,7 +1358,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_16" Name="span_16" Imported="false" NextStyle="ParagraphStyle/span_16" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_14" Name="span_14" Imported="false" NextStyle="ParagraphStyle/span_14" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1446,7 +1366,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_17" Name="span_17" Imported="false" NextStyle="ParagraphStyle/span_17" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_15" Name="span_15" Imported="false" NextStyle="ParagraphStyle/span_15" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1462,7 +1382,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_18" Name="span_18" Imported="false" NextStyle="ParagraphStyle/span_18" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_16" Name="span_16" Imported="false" NextStyle="ParagraphStyle/span_16" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1470,7 +1390,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/ChapterNumber_2" Name="ChapterNumber_2" Imported="false" NextStyle="ParagraphStyle/ChapterNumber_2" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="24" FontStyle="Bold" BaselineShift="6" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/ChapterNumber_2" Name="ChapterNumber_2" Imported="false" NextStyle="ParagraphStyle/ChapterNumber_2" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="20" FontStyle="Bold" BaselineShift="5" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1486,7 +1406,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_4" Name="VerseNumber_4" Imported="false" NextStyle="ParagraphStyle/VerseNumber_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_3" Name="VerseNumber_3" Imported="false" NextStyle="ParagraphStyle/VerseNumber_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1494,7 +1414,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_20" Name="span_20" Imported="false" NextStyle="ParagraphStyle/span_20" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_18" Name="span_18" Imported="false" NextStyle="ParagraphStyle/span_18" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1510,7 +1430,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_21" Name="span_21" Imported="false" NextStyle="ParagraphStyle/span_21" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_19" Name="span_19" Imported="false" NextStyle="ParagraphStyle/span_19" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1526,6 +1446,14 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/span_20" Name="span_20" Imported="false" NextStyle="ParagraphStyle/span_20" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
     <ParagraphStyle Self="ParagraphStyle/span_22" Name="span_22" Imported="false" NextStyle="ParagraphStyle/span_22" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
@@ -1534,15 +1462,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_24" Name="span_24" Imported="false" NextStyle="ParagraphStyle/span_24" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/Emphasis_3" Name="Emphasis_3" Imported="false" NextStyle="ParagraphStyle/Emphasis_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Italic" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/Emphasis_3" Name="Emphasis_3" Imported="false" NextStyle="ParagraphStyle/Emphasis_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1550,23 +1470,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_25" Name="span_25" Imported="false" NextStyle="ParagraphStyle/span_25" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/Emphasis_4" Name="Emphasis_4" Imported="false" NextStyle="ParagraphStyle/Emphasis_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_29" Name="span_29" Imported="false" NextStyle="ParagraphStyle/span_29" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_23" Name="span_23" Imported="false" NextStyle="ParagraphStyle/span_23" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1598,7 +1502,7 @@
         <Leading type="unit">24</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_30" Name="span_30" Imported="false" NextStyle="ParagraphStyle/span_30" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_27" Name="span_27" Imported="false" NextStyle="ParagraphStyle/span_27" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="20" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1614,7 +1518,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_31" Name="span_31" Imported="false" NextStyle="ParagraphStyle/span_31" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="9" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" KeepWithNext="2" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_28" Name="span_28" Imported="false" NextStyle="ParagraphStyle/span_28" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="9" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" KeepWithNext="2" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1622,111 +1526,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/pictureCaption_1" Name="pictureCaption_1" Imported="false" NextStyle="ParagraphStyle/pictureCaption_1" KeyboardShortcut="0 0" float="center" RightIndent="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_32" Name="span_32" Imported="false" NextStyle="ParagraphStyle/span_32" KeyboardShortcut="0 0" float="center" RightIndent="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/Emphasis_5" Name="Emphasis_5" Imported="false" NextStyle="ParagraphStyle/Emphasis_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Italic" FirstLineIndent="0" LeftIndent="0" float="center" RightIndent="2" Justification="CenterAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_33" Name="span_33" Imported="false" NextStyle="ParagraphStyle/span_33" KeyboardShortcut="0 0" float="center" RightIndent="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/ChapterNumber_3" Name="ChapterNumber_3" Imported="false" NextStyle="ParagraphStyle/ChapterNumber_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="24" FontStyle="Bold" BaselineShift="6" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/PWHide_2" Name="PWHide_2" Imported="false" NextStyle="ParagraphStyle/PWHide_2" KeyboardShortcut="0 0" PointSize="0.1" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_34" Name="span_34" Imported="false" NextStyle="ParagraphStyle/span_34" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/NameOfGod_4" Name="NameOfGod_4" Imported="false" NextStyle="ParagraphStyle/NameOfGod_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Bold Italic" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_35" Name="span_35" Imported="false" NextStyle="ParagraphStyle/span_35" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_36" Name="span_36" Imported="false" NextStyle="ParagraphStyle/span_36" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_5" Name="VerseNumber_5" Imported="false" NextStyle="ParagraphStyle/VerseNumber_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_37" Name="span_37" Imported="false" NextStyle="ParagraphStyle/span_37" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_40" Name="span_40" Imported="false" NextStyle="ParagraphStyle/span_40" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/Paragraph_4" Name="Paragraph_4" Imported="false" NextStyle="ParagraphStyle/Paragraph_4" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <ParagraphStyle Self="ParagraphStyle/pictureCaption_1" Name="pictureCaption_1" Imported="false" NextStyle="ParagraphStyle/pictureCaption_1" KeyboardShortcut="0 0" float="center" RightIndent="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" AppliedFont="Charis SIL" PointSize="10" clear="both">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1734,15 +1534,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_6" Name="VerseNumber_6" Imported="false" NextStyle="ParagraphStyle/VerseNumber_6" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_41" Name="span_41" Imported="false" NextStyle="ParagraphStyle/span_41" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_29" Name="span_29" Imported="false" NextStyle="ParagraphStyle/span_29" KeyboardShortcut="0 0" float="center" RightIndent="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" AppliedFont="Charis SIL" PointSize="10" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1750,7 +1542,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/NameOfGod_5" Name="NameOfGod_5" Imported="false" NextStyle="ParagraphStyle/NameOfGod_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Bold Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/Emphasis_4" Name="Emphasis_4" Imported="false" NextStyle="ParagraphStyle/Emphasis_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Italic" FirstLineIndent="0" LeftIndent="0" float="center" RightIndent="2" Justification="CenterAlign" PointSize="10" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1758,7 +1550,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_42" Name="span_42" Imported="false" NextStyle="ParagraphStyle/span_42" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_30" Name="span_30" Imported="false" NextStyle="ParagraphStyle/span_30" KeyboardShortcut="0 0" float="center" RightIndent="2" LeftIndent="2" FirstLineIndent="0" Justification="CenterAlign" AppliedFont="Charis SIL" PointSize="10" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1766,15 +1558,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_44" Name="span_44" Imported="false" NextStyle="ParagraphStyle/span_44" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/Foreign_1" Name="Foreign_1" Imported="false" NextStyle="ParagraphStyle/Foreign_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/ChapterNumber_3" Name="ChapterNumber_3" Imported="false" NextStyle="ParagraphStyle/ChapterNumber_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="20" FontStyle="Bold" BaselineShift="5" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1782,7 +1566,63 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_45" Name="span_45" Imported="false" NextStyle="ParagraphStyle/span_45" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/PWHide_2" Name="PWHide_2" Imported="false" NextStyle="ParagraphStyle/PWHide_2" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/span_31" Name="span_31" Imported="false" NextStyle="ParagraphStyle/span_31" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/NameOfGod_4" Name="NameOfGod_4" Imported="false" NextStyle="ParagraphStyle/NameOfGod_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Bold Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/span_32" Name="span_32" Imported="false" NextStyle="ParagraphStyle/span_32" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/span_33" Name="span_33" Imported="false" NextStyle="ParagraphStyle/span_33" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_4" Name="VerseNumber_4" Imported="false" NextStyle="ParagraphStyle/VerseNumber_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/span_34" Name="span_34" Imported="false" NextStyle="ParagraphStyle/span_34" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/span_37" Name="span_37" Imported="false" NextStyle="ParagraphStyle/span_37" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1798,7 +1638,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_7" Name="VerseNumber_7" Imported="false" NextStyle="ParagraphStyle/VerseNumber_7" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_5" Name="VerseNumber_5" Imported="false" NextStyle="ParagraphStyle/VerseNumber_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1806,7 +1646,71 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_46" Name="span_46" Imported="false" NextStyle="ParagraphStyle/span_46" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_38" Name="span_38" Imported="false" NextStyle="ParagraphStyle/span_38" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/NameOfGod_5" Name="NameOfGod_5" Imported="false" NextStyle="ParagraphStyle/NameOfGod_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Bold Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/span_39" Name="span_39" Imported="false" NextStyle="ParagraphStyle/span_39" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/span_41" Name="span_41" Imported="false" NextStyle="ParagraphStyle/span_41" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/Foreign_1" Name="Foreign_1" Imported="false" NextStyle="ParagraphStyle/Foreign_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/span_42" Name="span_42" Imported="false" NextStyle="ParagraphStyle/span_42" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/Paragraph_6" Name="Paragraph_6" Imported="false" NextStyle="ParagraphStyle/Paragraph_6" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_6" Name="VerseNumber_6" Imported="false" NextStyle="ParagraphStyle/VerseNumber_6" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/span_43" Name="span_43" Imported="false" NextStyle="ParagraphStyle/span_43" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1822,7 +1726,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_47" Name="span_47" Imported="false" NextStyle="ParagraphStyle/span_47" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_44" Name="span_44" Imported="false" NextStyle="ParagraphStyle/span_44" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1830,7 +1734,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/Emphasis_6" Name="Emphasis_6" Imported="false" NextStyle="ParagraphStyle/Emphasis_6" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/Emphasis_5" Name="Emphasis_5" Imported="false" NextStyle="ParagraphStyle/Emphasis_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1838,7 +1742,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_48" Name="span_48" Imported="false" NextStyle="ParagraphStyle/span_48" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_45" Name="span_45" Imported="false" NextStyle="ParagraphStyle/span_45" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1854,7 +1758,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_49" Name="span_49" Imported="false" NextStyle="ParagraphStyle/span_49" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="9" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" KeepWithNext="2" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_46" Name="span_46" Imported="false" NextStyle="ParagraphStyle/span_46" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="9" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" KeepWithNext="2" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1862,7 +1766,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/ChapterNumber_4" Name="ChapterNumber_4" Imported="false" NextStyle="ParagraphStyle/ChapterNumber_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="24" FontStyle="Bold" BaselineShift="6" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/ChapterNumber_4" Name="ChapterNumber_4" Imported="false" NextStyle="ParagraphStyle/ChapterNumber_4" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="20" FontStyle="Bold" BaselineShift="5" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1870,7 +1774,23 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/PWHide_3" Name="PWHide_3" Imported="false" NextStyle="ParagraphStyle/PWHide_3" KeyboardShortcut="0 0" PointSize="0.1" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/PWHide_3" Name="PWHide_3" Imported="false" NextStyle="ParagraphStyle/PWHide_3" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/span_47" Name="span_47" Imported="false" NextStyle="ParagraphStyle/span_47" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/NameOfGod_7" Name="NameOfGod_7" Imported="false" NextStyle="ParagraphStyle/NameOfGod_7" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Bold Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1878,7 +1798,15 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_50" Name="span_50" Imported="false" NextStyle="ParagraphStyle/span_50" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_48" Name="span_48" Imported="false" NextStyle="ParagraphStyle/span_48" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_7" Name="VerseNumber_7" Imported="false" NextStyle="ParagraphStyle/VerseNumber_7" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1886,34 +1814,10 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/NameOfGod_7" Name="NameOfGod_7" Imported="false" NextStyle="ParagraphStyle/NameOfGod_7" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Bold Italic" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_49" Name="span_49" Imported="false" NextStyle="ParagraphStyle/span_49" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_51" Name="span_51" Imported="false" NextStyle="ParagraphStyle/span_51" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_8" Name="VerseNumber_8" Imported="false" NextStyle="ParagraphStyle/VerseNumber_8" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_52" Name="span_52" Imported="false" NextStyle="ParagraphStyle/span_52" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
         <Leading type="enumeration">Auto</Leading>
       </Properties>
@@ -1926,7 +1830,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_53" Name="span_53" Imported="false" NextStyle="ParagraphStyle/span_53" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" Justification="LeftAlign" FirstLineIndent="-36" LeftIndent="0" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_50" Name="span_50" Imported="false" NextStyle="ParagraphStyle/span_50" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" Justification="LeftAlign" FirstLineIndent="-36" LeftIndent="0" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1942,7 +1846,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_54" Name="span_54" Imported="false" NextStyle="ParagraphStyle/span_54" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" Justification="LeftAlign" FirstLineIndent="-36" LeftIndent="0" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_51" Name="span_51" Imported="false" NextStyle="ParagraphStyle/span_51" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" Justification="LeftAlign" FirstLineIndent="-36" LeftIndent="0" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1958,7 +1862,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_55" Name="span_55" Imported="false" NextStyle="ParagraphStyle/span_55" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" Justification="LeftAlign" FirstLineIndent="-36" LeftIndent="0" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_52" Name="span_52" Imported="false" NextStyle="ParagraphStyle/span_52" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" Justification="LeftAlign" FirstLineIndent="-36" LeftIndent="0" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1966,7 +1870,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_9" Name="VerseNumber_9" Imported="false" NextStyle="ParagraphStyle/VerseNumber_9" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_8" Name="VerseNumber_8" Imported="false" NextStyle="ParagraphStyle/VerseNumber_8" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1974,7 +1878,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_56" Name="span_56" Imported="false" NextStyle="ParagraphStyle/span_56" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" Justification="LeftAlign" FirstLineIndent="-36" LeftIndent="0" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_53" Name="span_53" Imported="false" NextStyle="ParagraphStyle/span_53" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" Justification="LeftAlign" FirstLineIndent="-36" LeftIndent="0" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -1982,7 +1886,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/Emphasis_7" Name="Emphasis_7" Imported="false" NextStyle="ParagraphStyle/Emphasis_7" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/Emphasis_6" Name="Emphasis_6" Imported="false" NextStyle="ParagraphStyle/Emphasis_6" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -2006,7 +1910,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_10" Name="VerseNumber_10" Imported="false" NextStyle="ParagraphStyle/VerseNumber_10" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_9" Name="VerseNumber_9" Imported="false" NextStyle="ParagraphStyle/VerseNumber_9" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -2014,7 +1918,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_57" Name="span_57" Imported="false" NextStyle="ParagraphStyle/span_57" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_54" Name="span_54" Imported="false" NextStyle="ParagraphStyle/span_54" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -2030,7 +1934,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_58" Name="span_58" Imported="false" NextStyle="ParagraphStyle/span_58" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_55" Name="span_55" Imported="false" NextStyle="ParagraphStyle/span_55" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -2046,7 +1950,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_59" Name="span_59" Imported="false" NextStyle="ParagraphStyle/span_59" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="9" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" KeepWithNext="2" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_56" Name="span_56" Imported="false" NextStyle="ParagraphStyle/span_56" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="9" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" KeepWithNext="2" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -2054,7 +1958,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/ChapterNumber_5" Name="ChapterNumber_5" Imported="false" NextStyle="ParagraphStyle/ChapterNumber_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="24" FontStyle="Bold" BaselineShift="6" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/ChapterNumber_5" Name="ChapterNumber_5" Imported="false" NextStyle="ParagraphStyle/ChapterNumber_5" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="20" FontStyle="Bold" BaselineShift="5" FirstLineIndent="0" LeftIndent="0" float="left" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -2062,63 +1966,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/PWHide_4" Name="PWHide_4" Imported="false" NextStyle="ParagraphStyle/PWHide_4" KeyboardShortcut="0 0" PointSize="0.1" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_60" Name="span_60" Imported="false" NextStyle="ParagraphStyle/span_60" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/NameOfGod_11" Name="NameOfGod_11" Imported="false" NextStyle="ParagraphStyle/NameOfGod_11" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Bold Italic" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_61" Name="span_61" Imported="false" NextStyle="ParagraphStyle/span_61" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_11" Name="VerseNumber_11" Imported="false" NextStyle="ParagraphStyle/VerseNumber_11" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_62" Name="span_62" Imported="false" NextStyle="ParagraphStyle/span_62" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_64" Name="span_64" Imported="false" NextStyle="ParagraphStyle/span_64" KeyboardShortcut="0 0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/Paragraph_6" Name="Paragraph_6" Imported="false" NextStyle="ParagraphStyle/Paragraph_6" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <ParagraphStyle Self="ParagraphStyle/PWHide_4" Name="PWHide_4" Imported="false" NextStyle="ParagraphStyle/PWHide_4" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -2126,7 +1974,15 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_12" Name="VerseNumber_12" Imported="false" NextStyle="ParagraphStyle/VerseNumber_12" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_57" Name="span_57" Imported="false" NextStyle="ParagraphStyle/span_57" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/NameOfGod_11" Name="NameOfGod_11" Imported="false" NextStyle="ParagraphStyle/NameOfGod_11" KeyboardShortcut="0 0" AppliedFont="Times New Roman" FontStyle="Bold Italic" FirstLineIndent="0" LeftIndent="0" PointSize="10" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -2134,7 +1990,55 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_66" Name="span_66" Imported="false" NextStyle="ParagraphStyle/span_66" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_58" Name="span_58" Imported="false" NextStyle="ParagraphStyle/span_58" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_10" Name="VerseNumber_10" Imported="false" NextStyle="ParagraphStyle/VerseNumber_10" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/span_59" Name="span_59" Imported="false" NextStyle="ParagraphStyle/span_59" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/span_61" Name="span_61" Imported="false" NextStyle="ParagraphStyle/span_61" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/Paragraph_9" Name="Paragraph_9" Imported="false" NextStyle="ParagraphStyle/Paragraph_9" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_11" Name="VerseNumber_11" Imported="false" NextStyle="ParagraphStyle/VerseNumber_11" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/span_63" Name="span_63" Imported="false" NextStyle="ParagraphStyle/span_63" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -2150,7 +2054,7 @@
         <Leading type="unit">11</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_68" Name="span_68" Imported="false" NextStyle="ParagraphStyle/span_68" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="8" FontStyle="Bold" Justification="LeftAlign" FirstLineIndent="0" LeftIndent="0" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_65" Name="span_65" Imported="false" NextStyle="ParagraphStyle/span_65" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="8" FontStyle="Bold" Justification="LeftAlign" FirstLineIndent="0" LeftIndent="0" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -2166,7 +2070,7 @@
         <Leading type="unit">11</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_69" Name="span_69" Imported="false" NextStyle="ParagraphStyle/span_69" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="9" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_66" Name="span_66" Imported="false" NextStyle="ParagraphStyle/span_66" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="9" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -2182,7 +2086,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_70" Name="span_70" Imported="false" NextStyle="ParagraphStyle/span_70" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="9" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" KeepWithNext="2" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_67" Name="span_67" Imported="false" NextStyle="ParagraphStyle/span_67" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="9" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" KeepWithNext="2" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -2190,7 +2094,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/Paragraph_7" Name="Paragraph_7" Imported="false" NextStyle="ParagraphStyle/Paragraph_7" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
+    <ParagraphStyle Self="ParagraphStyle/Paragraph_10" Name="Paragraph_10" Imported="false" NextStyle="ParagraphStyle/Paragraph_10" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -2206,7 +2110,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_71" Name="span_71" Imported="false" NextStyle="ParagraphStyle/span_71" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_68" Name="span_68" Imported="false" NextStyle="ParagraphStyle/span_68" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -2222,7 +2126,39 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/span_69" Name="span_69" Imported="false" NextStyle="ParagraphStyle/span_69" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_12" Name="VerseNumber_12" Imported="false" NextStyle="ParagraphStyle/VerseNumber_12" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/span_70" Name="span_70" Imported="false" NextStyle="ParagraphStyle/span_70" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
     <ParagraphStyle Self="ParagraphStyle/span_72" Name="span_72" Imported="false" NextStyle="ParagraphStyle/span_72" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/Paragraph_11" Name="Paragraph_11" Imported="false" NextStyle="ParagraphStyle/Paragraph_11" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -2238,39 +2174,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_73" Name="span_73" Imported="false" NextStyle="ParagraphStyle/span_73" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_75" Name="span_75" Imported="false" NextStyle="ParagraphStyle/span_75" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/Paragraph_8" Name="Paragraph_8" Imported="false" NextStyle="ParagraphStyle/Paragraph_8" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_14" Name="VerseNumber_14" Imported="false" NextStyle="ParagraphStyle/VerseNumber_14" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="10" Position="Superscript" FirstLineIndent="0" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/span_77" Name="span_77" Imported="false" NextStyle="ParagraphStyle/span_77" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/span_74" Name="span_74" Imported="false" NextStyle="ParagraphStyle/span_74" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>

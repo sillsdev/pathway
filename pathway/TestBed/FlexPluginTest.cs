@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -752,7 +753,7 @@ namespace TestBed
 
         private void btnGetSoftwareData_Click(object sender, EventArgs e)
         {
-           Process.Start("http://myphpapps.com.cws10.my-hosting-panel.com/getdata.php");
+            Process.Start("http://myphpapps.com.cws10.my-hosting-panel.com/getdata.php");
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -790,6 +791,46 @@ namespace TestBed
             XhtmlToHtml xhtmlToHtml = new XhtmlToHtml();
             xhtmlToHtml.Convert(txtInputPath.Text);
             MessageBox.Show("Exported.");
+        }
+
+        private void btnWordPress_Click(object sender, EventArgs e)
+        {
+
+            if (!File.Exists(txtInputPath.Text))
+            {
+                MessageBox.Show("Please enter the valid XHTML path");
+                return;
+            }
+
+            PublicationInformation projInfo = new PublicationInformation();
+
+            projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
+            projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
+            projInfo.ProjectInputType = radDictionary.Checked ? "Dictionary" : "Scripture";
+            projInfo.ProjectFileWithPath = projInfo.ProjectPath;
+            projInfo.DictionaryPath = projInfo.ProjectPath;
+
+            //ExportWordPress XhtmlToBlog = new ExportWordPress();
+            //XhtmlToBlog.Export(projInfo);
+            //MessageBox.Show("Xhtml has been Exported.");
+
+            ExportXhtmlToSqlData xhtmlToSqlData = new ExportXhtmlToSqlData();
+            xhtmlToSqlData._projInfo = projInfo;
+            xhtmlToSqlData.XhtmlToBlog();
+
+            WebonaryMysqlDatabaseTransfer webonaryMysql = new WebonaryMysqlDatabaseTransfer();
+            webonaryMysql.projInfo = projInfo;
+            webonaryMysql.CreateDatabase("CreateUser-Db.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306", "samdoss");
+
+            webonaryMysql.InstallWordPressPHPPage("http://pathwaywebonary.com.cws10.my-hosting-panel.com", "samdoss123", "Sam Wordpress", "Samdoss", "arthur", "samdoss@live.com", "1");
+            
+            webonaryMysql.Drop2reset("drop2reset.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306", "sym147_webonary");
+
+            webonaryMysql.EmptyWebonary("EmptyWebonary.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306", "sym147_webonary", "http://pathwaywebonary.com.cws10.my-hosting-panel.com", "samdoss123", "Webonary Site");
+
+            webonaryMysql.Data("data.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306", "sym147_webonary", "http://pathwaywebonary.com.cws10.my-hosting-panel.com", "samdoss123");
+
+            MessageBox.Show("Data Exported to Wordpress.");
         }
     }
 }

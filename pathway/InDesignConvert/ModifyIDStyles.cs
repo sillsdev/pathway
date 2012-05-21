@@ -288,7 +288,8 @@ namespace SIL.PublishingSolution
         {
             if (className.ContainsKey("BaselineShift"))
             {
-                if (sourceClassName.IndexOf("CharacterStyle/ChapterNumber") >= 0) //if (sourceClassName.IndexOf("ParagraphStyle/ChapterNumber") >= 0 || sourceClassName.IndexOf("CharacterStyle/ChapterNumber") >= 0)
+                if (sourceClassName.IndexOf("CharacterStyle/ChapterNumber") >= 0) 
+                //if (sourceClassName.IndexOf("ParagraphStyle/ChapterNumber") >= 0 || sourceClassName.IndexOf("CharacterStyle/ChapterNumber") >= 0)
                 {
                     string style = "//" + _tagType + "[@Self='" + sourceClassName + "']";
                     XmlNode baselineShift = _root.SelectSingleNode(style, nsmgr);

@@ -459,6 +459,54 @@
 		</xsl:choose>
 	</xsl:template>
 
+	<!-- Convert USX tables to XHTML format -->
+	<xsl:template match="table">
+		<xsl:choose>
+			<xsl:when test="@style">
+				<table style="{@style}" xmlns="http://www.w3.org/1999/xhtml">				
+					<xsl:apply-templates/>
+				</table>
+			</xsl:when>
+			<xsl:otherwise>
+				<table xmlns="http://www.w3.org/1999/xhtml">
+					<xsl:apply-templates/>
+				</table>
+			</xsl:otherwise>
+		</xsl:choose>
+		
+	</xsl:template>
+	
+	<xsl:template match="row">
+		<tr style="{@style}" xmlns="http://www.w3.org/1999/xhtml">
+			<xsl:apply-templates/>
+		</tr>
+	</xsl:template>
+	
+	<xsl:template match="cell">
+		<xsl:choose>
+			<xsl:when test="@style = 'th1' or @style = 'th2' or @style = 'th3' or @style = 'th4' or @style = 'th5'">
+				<th style="{@style}" xmlns="http://www.w3.org/1999/xhtml">
+					<xsl:apply-templates/>
+				</th>
+			</xsl:when>
+			<xsl:when test="@style = 'thr1' or @style = 'thr2' or @style = 'thr3' or @style = 'thr4' or @style = 'thr5'">
+				<th style="{@style}" align="right" xmlns="http://www.w3.org/1999/xhtml">
+					<xsl:apply-templates/>
+				</th>
+			</xsl:when>
+			<xsl:when test="@style = 'tc1' or @style = 'tc2' or @style = 'tc3' or @style = 'tc4' or @style = 'tc5'">
+				<td style="{@style}" xmlns="http://www.w3.org/1999/xhtml">
+					<xsl:apply-templates/>
+				</td>
+			</xsl:when>
+			<xsl:when test="@style = 'tcr1' or @style = 'tcr2' or @style = 'tcr3' or @style = 'tcr4' or @style = 'tcr5'">
+				<td style="{@style}" align="right" xmlns="http://www.w3.org/1999/xhtml">
+					<xsl:apply-templates/>
+				</td>
+			</xsl:when>
+		</xsl:choose>
+	</xsl:template>
+	
 	<!-- Handle figure element -->
 	<xsl:template match="figure">
 		<xsl:variable name="bookCode">
@@ -517,6 +565,11 @@
 		</span>
 	</xsl:template>
 
+	<!-- Handle optional break  -->
+	<xsl:template match="optbreak">
+		<xsl:text>&#8204;</xsl:text>
+	</xsl:template>
+	
 	<!-- Enclose text that can occur under <body> that is not yet within a writing system. -->
 	<xsl:template match="usfm/text()|usx/text()">
 		<span lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
@@ -558,72 +611,72 @@
 			-->
 			<xsl:when test="@style = 'bk'">
 				<span class="Book_Title_In_Text" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
+					<xsl:apply-templates/>
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'em' or @style = 'it'">
 				<span class="Emphasis" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
+					<xsl:apply-templates/>
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'tl'">
 				<span class="Foreign" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
+					<xsl:apply-templates/>
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'sig'">
 				<span class="Hand" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
+					<xsl:apply-templates/>
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'sc'">
 				<span class="Inscription" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
+					<xsl:apply-templates/>
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'imt2'">
 				<span class="Intro_Title_Secondary" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
+					<xsl:apply-templates/>
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'imt3'">
 				<span class="Intro_Title_Tertiary" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
+					<xsl:apply-templates/>
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'k'">
 				<span class="Key_Word" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
+					<xsl:apply-templates/>
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'nd'">
 				<span class="Name_Of_God" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
+					<xsl:apply-templates/>
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'ord'">
 				<span class="Ordinal_Number_Ending" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
+					<xsl:apply-templates/>
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'qt'">
 				<span class="Quoted_Text" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
+					<xsl:apply-templates/>
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'w'">
 				<span class="See_In_Glossary" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
+					<xsl:apply-templates/>
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'add'">
 				<span class="Supplied" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
+					<xsl:apply-templates/>
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'uw'">
 				<span class="Untranslated_Word" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
+					<xsl:apply-templates/>
 				</span>
 			</xsl:when>
 
@@ -636,34 +689,34 @@
 			<!-- Footnote character styles -->
 			<xsl:when test="@style = 'ft' or @style = 'xt'">
 				<span lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
+					<xsl:apply-templates/>
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'fm'">
 				<span class="Note_Marker" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
+					<xsl:apply-templates/>
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'fr' or @style = 'xo'">
 				<span class="Note_Target_Reference" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
+					<xsl:apply-templates/>
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'fk' or @style = 'xk'">
 				<span class="Referenced_Text" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
+					<xsl:apply-templates/>
 				</span>
 			</xsl:when>
 			<xsl:when test="@style = 'fq' or @style = 'fqa' or @style = 'xq'">
 				<span class="Alternate_Reading" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
+					<xsl:apply-templates/>
 				</span>
 			</xsl:when>
 
 			<!-- Character style does not have a mapping to Translation Editor style so use SFM as the style. -->
 			<xsl:otherwise>
 				<span class="{@style}" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:value-of select="."/>
+					<xsl:apply-templates/>
 				</span>
 			</xsl:otherwise>
 		</xsl:choose>
@@ -728,6 +781,7 @@
 	<!-- Remove chapter numbers from the top level. -->
 	<xsl:template match="chapter"/>
 	
+	<!-- Handle verses within paragraphs -->
 	<xsl:template match="verse">
 		<span class="Verse_Number" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
 			<xsl:value-of select="@number"/>

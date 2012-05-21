@@ -616,6 +616,71 @@ namespace SIL.PublishingSolution
             get { return picPreview; }
         }
 
+        public TextBox TxtFtpAddress
+        {
+            get { return txtFtpFileLocation; }
+        }
+
+        public TextBox TxtFtpUsername
+        {
+            get { return txtFtpUsername; }
+        }
+
+        public TextBox TxtFtpPassword
+        {
+            get { return txtFtpPassword; }
+        }
+
+        public TextBox TxtSqlServerName
+        {
+            get { return txtSqlServerName; }
+        }
+
+        public TextBox TxtSqlDBName
+        {
+            get { return txtSqlDBName; }
+        }
+
+        public TextBox TxtSqlUsername
+        {
+            get { return txtSqlUsername; }
+        }
+
+        public TextBox TxtSqlPassword
+        {
+            get { return txtSqlPassword; }
+        }
+
+        public TextBox TxtWebUrl
+        {
+            get { return txtWebUrl; }
+        }
+
+        public TextBox TxtWebAdminUsrNme
+        {
+            get { return txtWebAdminUsrNme; }
+        }
+
+        public TextBox TxtWebAdminPwd
+        {
+            get { return txtWebAdminPwd; }
+        }
+
+        public TextBox TxtWebAdminSiteNme
+        {
+            get { return txtWebAdminSiteNme; }
+        }
+
+        public TextBox TxtWebEmailId
+        {
+            get { return txtWebEmailID; }
+        }
+
+        public TextBox TxtWebFtpFldrNme
+        {
+            get { return txtWebFtpFldrNme; }
+        }
+
         //private System.Windows.Forms.TableLayoutPanel TLPanelOuter;
         //private System.Windows.Forms.TableLayoutPanel TLPanel1;
         //private System.Windows.Forms.TableLayoutPanel TLPanel2;
@@ -773,8 +838,8 @@ namespace SIL.PublishingSolution
 
         private void btnWeb_Click(object sender, EventArgs e)
         {
-            //_CToolBL.MediaType = "web";
-            //_CToolBL.SideBar();
+            _CToolBL.MediaType = "web";
+            _CToolBL.SideBar();
         }
 
         private void btnOthers_Click(object sender, EventArgs e)
@@ -1143,5 +1208,6 @@ namespace SIL.PublishingSolution
         {
             _CToolBL.HelpButton_Clicked();
         }
+
      }
 }

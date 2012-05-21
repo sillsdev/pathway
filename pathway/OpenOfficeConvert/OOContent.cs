@@ -695,9 +695,10 @@ namespace SIL.PublishingSolution
                 return;
             }
 
+            bool whiteSpaceExist = _significant;
             string data = SignificantSpace(_reader.Value);
             //_writer.WriteString(data);
-            if (!_significant && !_pseudoSingleSpace)
+            if (!whiteSpaceExist && !_pseudoSingleSpace)
             {
                 _writer.WriteStartElement("text:s");
                 _writer.WriteAttributeString("text:c", "1");
@@ -709,9 +710,10 @@ namespace SIL.PublishingSolution
 
         private void InsertWhiteSpace()
         {
+            bool whiteSpaceExist = _significant;
             string data = SignificantSpace(_reader.Value);
             //_writer.WriteString(data);
-            if (!_significant && !_pseudoSingleSpace)
+            if (!whiteSpaceExist && !_pseudoSingleSpace)
             {
                 _writer.WriteStartElement("text:s");
                 _writer.WriteAttributeString("text:c", "1");
@@ -762,9 +764,9 @@ namespace SIL.PublishingSolution
             if (_childName.ToLower().Contains("tableofcontents"))
             {
                 CallTOC();
-                _writer.WriteStartElement("text:p");
-                _writer.WriteAttributeString("text:style-name", "P4");
-                _writer.WriteEndElement();
+                //_writer.WriteStartElement("text:p");
+                //_writer.WriteAttributeString("text:style-name", "P4");
+                //_writer.WriteEndElement();
                 return;
             }
 
@@ -794,7 +796,7 @@ namespace SIL.PublishingSolution
                     if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                     {
                         if (_previousParagraphName != null && _previousParagraphName.IndexOf("entry") == 0 &&
-                            _childName.IndexOf("letHead") == -1)
+                            (_childName.IndexOf("letHead") == -1 && _childName.IndexOf("pictureCaption") == -1))
                         {
                             //<text:p text:style-name="block_5f_p">
                             //    <text:soft-page-break/>
@@ -2953,7 +2955,7 @@ namespace SIL.PublishingSolution
             {
                 if ((_classNameWithLang.IndexOf("headword_") == 0 || _classNameWithLang.IndexOf("reversalform") == 0)
                     && (_previousParagraphName.IndexOf("entry_") == 0 || _previousParagraphName.IndexOf("div_pictureCaption") == 0
-                    || _previousParagraphName.IndexOf("picture") > 0))
+                    || _previousParagraphName.IndexOf("picture") >= 0))
                 {
                     fillHeadword = true;
                 }

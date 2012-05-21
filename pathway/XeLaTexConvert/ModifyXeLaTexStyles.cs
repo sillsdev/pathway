@@ -159,7 +159,8 @@ namespace SIL.PublishingSolution
 
         private void MapProperty()
         {
-            
+            Common.FileInsertText(_xetexFullFile, @"\pagestyle{fancy} ");
+
             if (Convert.ToBoolean(TocChecked))
                 InsertTableOfContent();
 

@@ -26,10 +26,11 @@ namespace SIL.Tool
     public class RegistryAccess
     {
         private const string SOFTWARE_KEY = "Software";
-        
+
         /// <summary>ProductName - Name of program for registry</summary>
-        private static string _productName = Application.ProductName;
-        
+        //private static string _productName = Application.ProductName;
+        private static string _productName = "Pathway";
+
         public static string ProductName
         {
             set
@@ -81,7 +82,7 @@ namespace SIL.Tool
         {
             RegistryKey rkCompany;
             RegistryKey rkApplication;
-            RegistryKey rkFieldWorks;
+            //RegistryKey rkFieldWorks;
 
             // The generic Company Name is SIL International, but in the registry we want this
             // to use SIL. If we want to keep a generic approach, we probably need another member
@@ -98,10 +99,11 @@ namespace SIL.Tool
             }
             if (rkCompany != null)
             {
-                rkFieldWorks = rkCompany.OpenSubKey("FieldWorks", false);
-                if (rkFieldWorks != null)
-                {
-                    rkApplication = rkFieldWorks.OpenSubKey(ProductName, false);
+                //rkFieldWorks = rkCompany.OpenSubKey("FieldWorks", false);
+                //if (rkFieldWorks != null)
+                //{
+                //    rkApplication = rkFieldWorks.OpenSubKey(ProductName, false);
+                    rkApplication = rkCompany.OpenSubKey(ProductName, false);
                     if (rkApplication != null)
                     {
                         foreach (string sKey in rkApplication.GetValueNames())
@@ -112,7 +114,7 @@ namespace SIL.Tool
                             }
                         }
                     }
-                }
+                //}
             }
             return defaultValue;
         }
@@ -145,7 +147,7 @@ namespace SIL.Tool
         {
             RegistryKey rkSoftware;
             RegistryKey rkCompany;
-            RegistryKey rkFieldWorks;
+            //RegistryKey rkFieldWorks;
             RegistryKey rkApplication;
 
             rkSoftware = Registry.CurrentUser.OpenSubKey(SOFTWARE_KEY, true);
@@ -163,15 +165,16 @@ namespace SIL.Tool
             }
             if (rkCompany != null)
             {
-                rkFieldWorks = rkCompany.CreateSubKey("FieldWorks");
-                if (rkFieldWorks != null)
-                {
-                    rkApplication = rkFieldWorks.CreateSubKey(ProductName);
+                //rkFieldWorks = rkCompany.CreateSubKey("FieldWorks");
+                //if (rkFieldWorks != null)
+                //{
+                //    rkApplication = rkFieldWorks.CreateSubKey(ProductName);
+                    rkApplication = rkCompany.CreateSubKey(ProductName);
                     if (rkApplication != null)
                     {
                         rkApplication.SetValue(key, val);
                     }
-                }
+                //}
             }
 
         }

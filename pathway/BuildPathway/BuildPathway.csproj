@@ -4,6 +4,9 @@
   <UsingTask TaskName="UpdateVersion" AssemblyFile="BuildTasks.dll" />
   <UsingTask TaskName="ZeroCheck" AssemblyFile="BuildTasks.dll" />
   <UsingTask TaskName="FileComponents" AssemblyFile="BuildTasks.dll" />
+  <!-- Extension pack from http://msbuildextensionpack.codeplex.com/ -->
+  <!-- Documentation at: http://www.msbuildextensionpack.com/help/4.0.3.0/index.html (also in extension pack) -->
+  <UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.Folder" AssemblyFile="MSBuild.ExtensionPack.dll" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -354,6 +357,9 @@
     <CallTarget Targets="XeLaTeXBeforeBuild" Condition=" '$(ConfTag)' == 'XeLaTeX' " />
     <CallTarget Targets="YouVersionBeforeBuild" Condition=" '$(ConfTag)' == 'YouVersion' " />
     <Message Text="BUILD_NUMBER: $(BUILD_NUMBER)" Importance="high" />
+    <CallTarget Targets="Wix" Condition="$(OS) != 'Linux'"/>
+  </Target>
+  <Target Name="Wix">
     <RemoveDir Directories="Wix" />
     <UpdateVersion Product="$(ProductName) " Version="1.1.2" BuildVersion="$(BUILD_NUMBER)" HelpFile="Pathway_Configuration_Tool_$(Edition).chm" Template="$(ProjectDir)Install$(ConfTag)$(Edition)-tpl.wxs" />
     <UpdateReadme Readme="$(ProjectDir)ReadMePw.rtf" License="$(ProjectDir)License.rtf" Template="$(ProjectDir)UserInterface-tpl.wxs" />
@@ -416,12 +422,14 @@
   <Target Name="AfterBuild">
   </Target>
   <Target Name="Clean">
-    <Delete Files="@(AllFiles)" />
+    <!-- Delete Files="@(AllFiles)" / -->
     <!-- RemoveDir Directories="@(AllFileDirs)"/ -->
-    <RemoveDir Directories="Files" />
-    <!-- RemoveDir Directories="$(OutputPath)" / -->
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="Files" Condition="Exists(Files)"/>
+    <RemoveDir Directories="Files" Condition="Exists(Files)"/>
   </Target>
   <ItemGroup>
+    <AllFiles Include="Files\**\*.*" />
+    <AllFileDirs Include="Files\**" />
     <ConfigurationTool Include="..\ConfigurationTool\$(OutputPath)\*.*" />
     <Plugin Include="..\PsExport\$(OutputPath)\*.*" />
     <GhostScript Include="..\ThirdParty\gsdll32.dll" />
@@ -488,13 +496,19 @@
     <Copy SourceFiles="@(XeLaTexConfig)" DestinationFiles="@(XeLaTexConfig->'Files\pwtex\texmf-config\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(XeLaTexDist)" DestinationFiles="@(XeLaTexDist->'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(XeLaTexVar)" DestinationFiles="@(XeLaTexVar->'Files\pwtex\texmf-var\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(XeLaTexBin)" DestinationFiles="@(XeLaTexBin->'Files\pwtex\bin\win32\%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexBin)" DestinationFiles="@(XeLaTexBin->'Files\pwtex\bin\win32\%(Filename)%(Extension)')" Condition="$(OS) != 'Linux'" />
+    <Copy SourceFiles="@(XeLaTexLinBin)" DestinationFiles="@(XeLaTexLinBin->'Files\pwtex\bin\i386-linux\%(Filename)%(Extension)')" Condition="$(OS) == 'Linux'" />
     <MakeDir Directories="Files\pwtex\temp" />
     <Exec Command="echo This file is a place holder&gt;Files\pwtex\temp\readme.txt" />
     <Delete Files="@(XeLaTexCache)" />
     <Copy SourceFiles="@(Paratexmf)" DestinationFiles="@(Paratexmf->'Files\pwtex\texmf\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Exec Command="mktexlsr ..\..\texmf" WorkingDirectory="Files\pwtex\bin\win32" />
-    <Exec Command="mktexlsr ..\..\texmf-var" WorkingDirectory="Files\pwtex\bin\win32" />
+    <Exec Command="mktexlsr ..\..\texmf" WorkingDirectory="Files\pwtex\bin\win32" Condition="$(OS) != 'Linux'" />
+    <Exec Command="mktexlsr ..\..\texmf-var" WorkingDirectory="Files\pwtex\bin\win32" Condition="$(OS) != 'Linux'" />
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="..\XeLaTexConvert/XeLaTexExe/bin" Match="i386-linux">
+      <Output TaskParameter="Folders" ItemName="bdir"/>
+    </MSBuild.ExtensionPack.FileSystem.Folder>
+    <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf" Condition="$(OS) == 'Linux'" />
+    <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf-var" Condition="$(OS) == 'Linux'" />
   </Target>
   <ItemGroup>
     <XeLaTexExe Include="..\XeLaTexConvert\XeLaTexExe\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\**\.svn\**\*.*" />
@@ -510,6 +524,12 @@
     <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\tex.dll;..\XeLaTexConvert\XeLaTexExe\bin\win32\tex.exe" />
     <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\xdvipdfmx.exe" />
     <XeLaTexBin Include="..\XeLaTexConvert\XeLaTexExe\bin\win32\xetex.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\xelatex.exe" />
+    <XeLaTexLinBin Include="..\XeLaTexConvert\XeLaTexExe\bin\i386-linux\kpse*" />
+    <XeLaTexLinBin Include="..\XeLaTexConvert\XeLaTexExe\bin\i386-linux\xdvipdf*" />
+    <XeLaTexLinBin Include="..\XeLaTexConvert\XeLaTexExe\bin\i386-linux\xe*" />
+    <XeLaTexLinBin Include="..\XeLaTexConvert\XeLaTexExe\bin\i386-linux\tec*" />
+    <XeLaTexLinBin Include="..\XeLaTexConvert\XeLaTexExe\bin\i386-linux\tex" />
+    <XeLaTexLinBin Include="..\XeLaTexConvert\XeLaTexExe\bin\i386-linux\mk*" />
     <XeLaTexCache Include="..\XeLaTexConvert\XeLaTexExe\texmf-var\fonts\cache\*.cache-3" />
     <Paratexmf Include="..\XeLaTexConvert\Paratexmf\**\*.*" Exclude="..\XeLaTexConvert\Paratexmf\**\.svn\**\**" />
   </ItemGroup>

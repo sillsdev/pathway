@@ -40,6 +40,9 @@
         <language name="hi">
             <font>Mangal</font>
         </language>
+		<language name="cmo">
+            <font>Khmer Busra Bunong</font>
+        </language>
     </font-language-mapping>
 
 <font-language-unicode-map>
@@ -72,6 +75,9 @@
         </UnicodeMap>
         <UnicodeMap Language="Thai" From="0xE00" To="0xE7F">
             <font>Mangal</font>
+        </UnicodeMap>
+	<UnicodeMap Language="Khmer" From="0x1780" To="0x17FF">
+            <font>Khmer Busra Bunong</font>
         </UnicodeMap>
     </font-language-unicode-map>
 

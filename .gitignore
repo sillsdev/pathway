@@ -5,7 +5,16 @@
 *.user
 *.cache
 *.StyleCop
+*.pidb
+*.resources
+*.userprefs
 pathway/_*
+pathway/Releases
+pathway/bin
+pathway/debian/files
+pathway/debian/pathway-etc/values.xml
+pathway/debian/pathway/*
+pathway_*
 
 pathway/ApplyXslt/bin/*
 pathway/ApplyXslt/obj/*
@@ -67,6 +76,8 @@ pathway/WordPress/bin/*
 pathway/WordPress/obj/*
 pathway/WordPressConvert/bin/*
 pathway/WordPressConvert/obj/*
+pathway/WordPressConvert/build/*
+pathway/WordPressConvert/dist/*
 pathway/XeLaTexConvert/bin/*
 pathway/XeLaTexConvert/obj/*
 pathway/XeLaTexConvert/XeLaTexExe
@@ -81,7 +92,7 @@ pathway/Test/ApplyXslt/TestFiles/output/*
 pathway/Test/Build/TestFiles/output/*
 pathway/Test/ConfigurationTool/TestFiles/output/*
 pathway/Test/CssDialog/TestFiles/output/*
-pathway/Test/CssParser/TestFiles/gramOutput/*
+pathway/Test/CssParser/TestFiles/gramOutput/T*
 pathway/Test/GoBibleConvert/TestFiles/output/*
 pathway/Test/InDesignConvert/TestFiles/output/*
 pathway/Test/LiftPrepare/TestFiles/output/*

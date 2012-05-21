@@ -237,6 +237,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AfterBeforeProcess.cs" />
+    <Compile Include="AfterBeforeProcessEpub.cs" />
     <Compile Include="AfterBeforeXHTMLProcess.cs" />
     <Compile Include="Backend.cs" />
     <Compile Include="ClassInfo.cs" />
@@ -246,6 +247,7 @@
     <Compile Include="CommonXml.cs" />
     <Compile Include="FontInternals.cs">
     </Compile>
+    <Compile Include="HashUtilities.cs" />
     <Compile Include="Param.cs" />
     <Compile Include="PathPart.cs" />
     <Compile Include="PathwayPath.cs" />
@@ -302,6 +304,7 @@
     <Compile Include="XHTMLProcess.cs" />
     <Compile Include="YouVersionInstallation.cs" />
     <Compile Include="ZipFolder.cs" />
+    <Compile Include="ZipUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Localization\Localizer.resx">

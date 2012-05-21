@@ -14,10 +14,9 @@ var indexTab = false;
 // Created By:   James Prabu 
 // Created On: Sep 10 2009   
 // Modified By:  James Prabu                        
-// Modified On:  June 27 2011 
-// Task Number : TD-2510(InDesign startup script causing problems for Publishing Assistant) (changes in function())
+// Task Number : TD-2984(InDesign: Change Macro to format FrontMatter Elements based on User Selection)
 // <remarks> 
-// Startup Macro should work for Pathway Document only 
+// Format the FrontMatter based on User Selection
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -580,13 +579,14 @@ function PlaceFrames()
 		}	
 		else
 		{		
-		//alert(myStory.contents);
-		if(FrontMatterNo == frontMatterItemCount)
+		//alert(FrontMatterNo + " = " + frontMatterItemCount);
+		/*
+		if(FrontMatterNo == frontMatterItemCount && frontMatterItemCount > 8)
 		{
 			AddNewPage(curPageNo + 1);
 			curPageNo = curPageNo + 1;
 			FrontMatterNo ++;
-		}
+		}*/
 		frameType = GetFrameType(myStory);
 		minHeight = GetMinHeight(frameType);
 		firstParagraphStyle = GetFirstParagraphStyle(myStory)

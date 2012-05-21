@@ -167,10 +167,10 @@ namespace SIL.PublishingSolution
             _writer.WriteString(createDate);
             _writer.WriteEndElement();
             _writer.WriteStartElement("xmp:MetadataDate");
-            _writer.WriteString("2011-04-28T14:46:34+05:30");
+            _writer.WriteString(DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz"));
             _writer.WriteEndElement();
             _writer.WriteStartElement("xmp:ModifyDate");
-            _writer.WriteString("2011-04-28T14:46:34+05:30");
+            _writer.WriteString(DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz"));
             _writer.WriteEndElement();
             _writer.WriteStartElement("xmp:CreatorTool");
             _writer.WriteString(assemblyVersion);
@@ -197,7 +197,7 @@ namespace SIL.PublishingSolution
             _writer.WriteString("xmp.iid:DF3268787771E01190B8BB7186BCAEA5");
             _writer.WriteEndElement();
             _writer.WriteStartElement("stEvt:when");
-            _writer.WriteString("2011-04-28T14:46:34+05:30");
+            _writer.WriteString(DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz"));
             _writer.WriteEndElement();
             _writer.WriteStartElement("stEvt:softwareAgent");
             _writer.WriteString("Adobe InDesign 6.0");

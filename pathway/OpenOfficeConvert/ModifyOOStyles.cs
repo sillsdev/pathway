@@ -189,6 +189,10 @@ namespace SIL.PublishingSolution
             {
                 SetAttribute("TOC_20_Page", attribute);
             }
+            else if (newClassName.IndexOf("dummypage") == 0)
+            {
+                SetAttribute("Dummy_20_Page", attribute);
+            }
 
             //style:family="paragraph" style:parent-style-name="none">
             SetTagProperty(className.Key);
