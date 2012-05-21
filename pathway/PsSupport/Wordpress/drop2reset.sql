@@ -1,0 +1,1 @@
+DROP TABLE `sil_multilingual_search`, `wp_commentmeta`, `wp_comments`, `wp_links`, `wp_options`, `wp_postmeta`, `wp_posts`, `wp_terms`, `wp_term_relationships`, `wp_term_taxonomy`;

@@ -639,6 +639,10 @@ namespace SIL.PublishingSolution
             {
                 foreach (string item in exportType)
                 {
+                    if (item.Trim().ToLower() == "WordPress Alpha" && !IsWebDataFilled())
+                    {
+                        break;
+                    }
                     ddlLayout.Items.Add(item);
                 }
                 ddlLayout.Text = ddlLayout.Items[0].ToString();
@@ -659,6 +663,42 @@ namespace SIL.PublishingSolution
             ddlLayout.SelectedIndex = ddlLayout.FindStringExact(ddlLayout.Text);
         }
         #endregion LoadAvailFormats
+
+        private bool IsWebDataFilled()
+        {
+            Param.LoadSettings();
+            XmlNodeList baseNode1 = Param.GetItems("//styles/" + Media + "/style[@name='" + Style + "']/styleProperty");
+            
+            foreach (XmlNode VARIABLE in baseNode1)
+            {
+                string attribName = VARIABLE.Attributes["name"].Value.ToLower();
+                string attribValue = VARIABLE.Attributes["value"].Value;
+                switch (attribName)
+                {
+                    case "ftpaddress":
+                    case "ftpuserid":
+                    case "ftppwd":
+                    case "dbservername":
+                    case "dbname":
+                    case "dbuserid":
+                    case "dbpwd":
+                    case "weburl":
+                    case "webadminusrnme":
+                    case "webadminpwd":
+                    case "webadminsitenme":
+                    case "webemailid":
+                    case "webftpfldrnme":
+                        if (attribValue.Trim().Length == 0)
+                        {
+                            return false;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return true;
+        }
 
         #region Events
         private void btnCancel_Click(object sender, EventArgs e)
@@ -1086,11 +1126,12 @@ namespace SIL.PublishingSolution
         private void ddlLayout_SelectedIndexChanged(object sender, EventArgs e)
         {
             _media = FindMedia();
-
             LoadAvailStylesheets();
             EnableUIElements();
             SetOkStatus();
         }
+
+
 
         private string FindMedia()
         {
