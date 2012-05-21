@@ -139,6 +139,7 @@ namespace SIL.PublishingSolution
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabWeb = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.txtWebFtpFldrNme = new System.Windows.Forms.TextBox();
             this.txtWebEmailID = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
@@ -200,7 +201,6 @@ namespace SIL.PublishingSolution
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblType = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label19 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.stylesGrid)).BeginInit();
             this.toolStripMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -1571,20 +1571,29 @@ namespace SIL.PublishingSolution
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Website Details";
             // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(9, 163);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(85, 13);
+            this.label19.TabIndex = 26;
+            this.label19.Text = "Ftp Folder Name";
+            // 
             // txtWebFtpFldrNme
             // 
-            this.txtWebFtpFldrNme.Location = new System.Drawing.Point(96, 160);
+            this.txtWebFtpFldrNme.Location = new System.Drawing.Point(101, 160);
             this.txtWebFtpFldrNme.MaxLength = 50;
             this.txtWebFtpFldrNme.Name = "txtWebFtpFldrNme";
-            this.txtWebFtpFldrNme.Size = new System.Drawing.Size(133, 20);
+            this.txtWebFtpFldrNme.Size = new System.Drawing.Size(153, 20);
             this.txtWebFtpFldrNme.TabIndex = 25;
             // 
             // txtWebEmailID
             // 
-            this.txtWebEmailID.Location = new System.Drawing.Point(97, 133);
+            this.txtWebEmailID.Location = new System.Drawing.Point(101, 133);
             this.txtWebEmailID.MaxLength = 50;
             this.txtWebEmailID.Name = "txtWebEmailID";
-            this.txtWebEmailID.Size = new System.Drawing.Size(133, 20);
+            this.txtWebEmailID.Size = new System.Drawing.Size(153, 20);
             this.txtWebEmailID.TabIndex = 23;
             // 
             // label18
@@ -1598,10 +1607,10 @@ namespace SIL.PublishingSolution
             // 
             // txtWebAdminSiteNme
             // 
-            this.txtWebAdminSiteNme.Location = new System.Drawing.Point(95, 107);
+            this.txtWebAdminSiteNme.Location = new System.Drawing.Point(101, 107);
             this.txtWebAdminSiteNme.MaxLength = 50;
             this.txtWebAdminSiteNme.Name = "txtWebAdminSiteNme";
-            this.txtWebAdminSiteNme.Size = new System.Drawing.Size(133, 20);
+            this.txtWebAdminSiteNme.Size = new System.Drawing.Size(153, 20);
             this.txtWebAdminSiteNme.TabIndex = 3;
             // 
             // label14
@@ -1615,11 +1624,11 @@ namespace SIL.PublishingSolution
             // 
             // txtWebAdminPwd
             // 
-            this.txtWebAdminPwd.Location = new System.Drawing.Point(95, 81);
+            this.txtWebAdminPwd.Location = new System.Drawing.Point(101, 81);
             this.txtWebAdminPwd.MaxLength = 25;
             this.txtWebAdminPwd.Name = "txtWebAdminPwd";
             this.txtWebAdminPwd.PasswordChar = '*';
-            this.txtWebAdminPwd.Size = new System.Drawing.Size(133, 20);
+            this.txtWebAdminPwd.Size = new System.Drawing.Size(153, 20);
             this.txtWebAdminPwd.TabIndex = 2;
             // 
             // label15
@@ -1633,10 +1642,10 @@ namespace SIL.PublishingSolution
             // 
             // txtWebAdminUsrNme
             // 
-            this.txtWebAdminUsrNme.Location = new System.Drawing.Point(95, 55);
+            this.txtWebAdminUsrNme.Location = new System.Drawing.Point(101, 55);
             this.txtWebAdminUsrNme.MaxLength = 25;
             this.txtWebAdminUsrNme.Name = "txtWebAdminUsrNme";
-            this.txtWebAdminUsrNme.Size = new System.Drawing.Size(133, 20);
+            this.txtWebAdminUsrNme.Size = new System.Drawing.Size(153, 20);
             this.txtWebAdminUsrNme.TabIndex = 1;
             // 
             // label16
@@ -1682,11 +1691,11 @@ namespace SIL.PublishingSolution
             // 
             // txtFtpPassword
             // 
-            this.txtFtpPassword.Location = new System.Drawing.Point(95, 85);
+            this.txtFtpPassword.Location = new System.Drawing.Point(95, 87);
             this.txtFtpPassword.MaxLength = 50;
             this.txtFtpPassword.Name = "txtFtpPassword";
             this.txtFtpPassword.PasswordChar = '*';
-            this.txtFtpPassword.Size = new System.Drawing.Size(133, 20);
+            this.txtFtpPassword.Size = new System.Drawing.Size(157, 20);
             this.txtFtpPassword.TabIndex = 2;
             // 
             // lblTargetFileLocation
@@ -1703,13 +1712,13 @@ namespace SIL.PublishingSolution
             this.txtFtpFileLocation.Location = new System.Drawing.Point(12, 34);
             this.txtFtpFileLocation.MaxLength = 500;
             this.txtFtpFileLocation.Name = "txtFtpFileLocation";
-            this.txtFtpFileLocation.Size = new System.Drawing.Size(244, 20);
+            this.txtFtpFileLocation.Size = new System.Drawing.Size(240, 20);
             this.txtFtpFileLocation.TabIndex = 0;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 88);
+            this.label3.Location = new System.Drawing.Point(11, 90);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(76, 13);
             this.label3.TabIndex = 27;
@@ -1729,7 +1738,7 @@ namespace SIL.PublishingSolution
             this.txtFtpUsername.Location = new System.Drawing.Point(95, 61);
             this.txtFtpUsername.MaxLength = 1000;
             this.txtFtpUsername.Name = "txtFtpUsername";
-            this.txtFtpUsername.Size = new System.Drawing.Size(133, 20);
+            this.txtFtpUsername.Size = new System.Drawing.Size(157, 20);
             this.txtFtpUsername.TabIndex = 1;
             // 
             // groupBox1
@@ -1755,7 +1764,7 @@ namespace SIL.PublishingSolution
             this.txtSqlPassword.MaxLength = 50;
             this.txtSqlPassword.Name = "txtSqlPassword";
             this.txtSqlPassword.PasswordChar = '*';
-            this.txtSqlPassword.Size = new System.Drawing.Size(133, 20);
+            this.txtSqlPassword.Size = new System.Drawing.Size(157, 20);
             this.txtSqlPassword.TabIndex = 3;
             // 
             // label10
@@ -1772,7 +1781,7 @@ namespace SIL.PublishingSolution
             this.txtSqlUsername.Location = new System.Drawing.Point(95, 84);
             this.txtSqlUsername.MaxLength = 25;
             this.txtSqlUsername.Name = "txtSqlUsername";
-            this.txtSqlUsername.Size = new System.Drawing.Size(133, 20);
+            this.txtSqlUsername.Size = new System.Drawing.Size(157, 20);
             this.txtSqlUsername.TabIndex = 2;
             // 
             // label11
@@ -1789,7 +1798,7 @@ namespace SIL.PublishingSolution
             this.txtSqlDBName.Location = new System.Drawing.Point(95, 58);
             this.txtSqlDBName.MaxLength = 25;
             this.txtSqlDBName.Name = "txtSqlDBName";
-            this.txtSqlDBName.Size = new System.Drawing.Size(133, 20);
+            this.txtSqlDBName.Size = new System.Drawing.Size(157, 20);
             this.txtSqlDBName.TabIndex = 1;
             // 
             // label12
@@ -1806,7 +1815,7 @@ namespace SIL.PublishingSolution
             this.txtSqlServerName.Location = new System.Drawing.Point(12, 33);
             this.txtSqlServerName.MaxLength = 100;
             this.txtSqlServerName.Name = "txtSqlServerName";
-            this.txtSqlServerName.Size = new System.Drawing.Size(242, 20);
+            this.txtSqlServerName.Size = new System.Drawing.Size(240, 20);
             this.txtSqlServerName.TabIndex = 0;
             // 
             // label13
@@ -2245,15 +2254,6 @@ namespace SIL.PublishingSolution
             this.lblType.TabIndex = 19;
             this.lblType.Text = "Dictionary";
             this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(9, 163);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(85, 13);
-            this.label19.TabIndex = 26;
-            this.label19.Text = "Ftp Folder Name";
             // 
             // ConfigurationTool
             // 

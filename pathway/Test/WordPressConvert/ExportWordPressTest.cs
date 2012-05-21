@@ -105,6 +105,24 @@ namespace Test.WordPressConvert
             Assert.AreEqual("", IsEqualAllButTime(FileExpected(dataSql), FileOutput(dataSql)));
         }
 
+        /// <summary>
+        ///Godwana Mysql Data Export
+        ///</summary>
+        [Test]
+        public void ExportGodwanaMysqlTest()
+        {
+            const string XhtmlName = "GodwanaMysql.xhtml";
+            const string CssName = "GodwanaMysql.css";
+            PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
+            projInfo.ProjectPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+            ExportXhtmlToSqlData xhtmlToSqlData = new ExportXhtmlToSqlData();
+            xhtmlToSqlData._projInfo = projInfo;
+            xhtmlToSqlData.MysqlDataFileName = "GodwanaMysql.sql";
+            xhtmlToSqlData.XhtmlToBlog();
+            const string dataSql = "GodwanaMysql.sql";
+            Assert.AreEqual("", IsEqualAllButTime(FileExpected(dataSql), FileOutput(dataSql)));
+        }
+
         private static string IsEqualAllButTime(string fileExpectedName, string fileOutputName)
         {
             const string pat = @"\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d";
