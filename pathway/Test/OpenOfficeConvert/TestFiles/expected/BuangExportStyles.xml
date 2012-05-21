@@ -155,7 +155,7 @@
       <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xhomographnumber_sensecrossref_xitem_lexreftargets_xitem_relations_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sensecrossref_xitem_lexreftargets_xitem_relations_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="12pt" style:font-size-complex="12pt" style:text-position="sub 55%" fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="13.2pt" style:font-size-complex="13.2pt" style:text-position="sub 55%" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensecrossref_lexreftargets_xitem_relations_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="lexreftargets_xitem_relations_sense_senses_entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" style:font-size-complex="12pt" fo:font-weight="700" style:font-weight-complex="700" fo:color="#000000" fo:language="none" fo:country="none" />
@@ -182,7 +182,7 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" style:font-size-complex="12pt" fo:font-weight="700" style:font-weight-complex="700" fo:color="#000000" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xhomographnumber_crossref_xitem_crossreftargets_crossrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="crossref_xitem_crossreftargets_crossrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="12pt" style:font-size-complex="12pt" style:text-position="sub 55%" fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="13.2pt" style:font-size-complex="13.2pt" style:text-position="sub 55%" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_lexreftargets_relations_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="lexreftargets_relations_sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensecrossref_xitem_lexreftargets_relations_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_lexreftargets_relations_sense_senses_entry_letData_dicBody">
@@ -192,7 +192,7 @@
       <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xhomographnumber_sensecrossref_xitem_lexreftargets_relations_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sensecrossref_xitem_lexreftargets_relations_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="12pt" style:font-size-complex="12pt" style:text-position="sub 55%" fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="13.2pt" style:font-size-complex="13.2pt" style:text-position="sub 55%" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensecomplexformrefs_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensecomplexentrytype_sensecomplexformrefs_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sensecomplexformrefs_sense_senses_entry_letData_dicBody" />
@@ -233,22 +233,22 @@
       <style:text-properties fo:font-size="8pt" style:font-size-complex="8pt" fo:color="#2F60FF" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xhomographnumber_headword_entry_letData_dicBody" style:family="text" style:parent-style-name="headword_entry_letData_dicBody">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="12pt" style:font-size-complex="12pt" style:text-position="sub 55%" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="13.2pt" style:font-size-complex="13.2pt" style:text-position="sub 55%" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xhomographnumber_mainentryref_primaryrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="mainentryref_primaryrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="12pt" style:font-size-complex="12pt" style:text-position="sub 55%" fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="13.2pt" style:font-size-complex="13.2pt" style:text-position="sub 55%" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="mainentryref_xitem_primaryrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_primaryrefs_entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" style:font-size-complex="12pt" fo:font-weight="700" style:font-weight-complex="700" fo:color="#000000" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xhomographnumber_mainentryref_xitem_primaryrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="mainentryref_xitem_primaryrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="12pt" style:font-size-complex="12pt" style:text-position="sub 55%" fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="13.2pt" style:font-size-complex="13.2pt" style:text-position="sub 55%" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xhomographnumber_sensemainentryref_primaryrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="sensemainentryref_primaryrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="12pt" style:font-size-complex="12pt" style:text-position="sub 55%" fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="13.2pt" style:font-size-complex="13.2pt" style:text-position="sub 55%" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xhomographnumber_crossref_crossreftargets_crossrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="crossref_crossreftargets_crossrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="12pt" style:font-size-complex="12pt" style:text-position="sub 55%" fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="13.2pt" style:font-size-complex="13.2pt" style:text-position="sub 55%" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headwordminor_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" style:font-size-complex="12pt" fo:font-weight="700" style:font-weight-complex="700" fo:color="#000000" fo:language="none" fo:country="none" />
@@ -270,10 +270,10 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" style:font-size-complex="12pt" fo:color="#000000" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xhomographnumber_variantrefform_variantrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="variantrefform_variantrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="12pt" style:font-size-complex="12pt" style:text-position="sub 55%" fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="13.2pt" style:font-size-complex="13.2pt" style:text-position="sub 55%" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xhomographnumber_complexentryform_xitem_complexformrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="complexentryform_xitem_complexformrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="12pt" style:font-size-complex="12pt" style:text-position="sub 55%" fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="13.2pt" style:font-size-complex="13.2pt" style:text-position="sub 55%" fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xsensenumber_sensecrossref_lexreftargets_xitem_relations_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sensecrossref_lexreftargets_xitem_relations_sense_senses_entry_letData_dicBody">
       <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:language="en" fo:country="US" />
@@ -302,7 +302,7 @@
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="12pt" fo:color="#000000" fo:background-color="#FFFFFF" />
     </style:style>
     <style:style style:name="xhomographnumber" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-weight="700" fo:font-size="100%" style:text-position="sub 55%" />
+      <style:text-properties fo:font-weight="700" fo:font-size="110%" style:text-position="sub 55%" />
     </style:style>
     <style:style style:name="sense" style:family="paragraph" style:parent-style-name="none">
       <style:text-properties fo:font-weight="400" />

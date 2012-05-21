@@ -387,37 +387,39 @@ namespace SIL.PublishingSolution
         /// </summary>
         public void SuperSub()
         {
-            //if (_IDProperty.ContainsKey("font-size"))
-            //{
-            //    string propertyValue = _IDProperty["font-size"];
-                
-            //    if (propertyValue.IndexOf("pt")>0)
-            //    {
-            //        int value = int.Parse(propertyValue.Replace("pt", ""));
-            //        value = (int)(value * 1);
-            //        _IDProperty["font-size"] = value + "pt";
-            //    }
-            //    else if (propertyValue.IndexOf("%")>0)
-            //    {
-            //        int value = int.Parse(propertyValue.Replace("%", ""));
-            //        value = (int)(value * 1);
-            //        _IDProperty["font-size"] = value + "%";
-            //    }
-            //    else if (propertyValue == "smaller")
-            //    {
-            //        _IDProperty["font-size"] = "75%";
-            //    }
-            //    else if (propertyValue == "larger")
-            //    {
-            //        _IDProperty["font-size"] = "100%";
-            //    }
-            //}
+            if (_IDProperty.ContainsKey("font-size"))
+            {
+                string propertyValue = _IDProperty["font-size"];
 
-            //else
-            //{
-            //    _IDProperty["font-size"] = "100%";
-            //}
-            _IDProperty["font-size"] = "100%";
+                if (propertyValue.IndexOf("pt") > 0)
+                {
+                    int value = int.Parse(propertyValue.Replace("pt", ""));
+                    if (value < 10)
+                    {
+                        value = (int) (value*2);
+                    }
+                    _IDProperty["font-size"] = value + "pt";
+                }
+                else if (propertyValue.IndexOf("%") > 0)
+                {
+                    int value = int.Parse(propertyValue.Replace("%", ""));
+                    value = (int)(value * 2);
+                    _IDProperty["font-size"] = value + "%";
+                }
+                else if (propertyValue == "smaller")
+                {
+                    _IDProperty["font-size"] = "75%";
+                }
+                else if (propertyValue == "larger")
+                {
+                    _IDProperty["font-size"] = "100%";
+                }
+            }
+            else
+            {
+                _IDProperty["font-size"] = "200%";
+            }
+            //_IDProperty["font-size"] = "100%";
         }
 
         public void TextTransform(string propertyValue)
