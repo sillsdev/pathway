@@ -31,7 +31,7 @@ namespace SIL.PublishingSolution
         private string _taxonomyValue = string.Empty;
         private string _relationshipValue = string.Empty;
         private string _searchValue = string.Empty;
-        
+        public string MysqlDataFileName = string.Empty;
 
         #region Methods
 
@@ -73,6 +73,11 @@ namespace SIL.PublishingSolution
 
         private string SetSemiColon(string Query)
         {
+            if(Query.Trim() == string.Empty)
+            {
+                return ";\n";
+            }
+
             Query = Query.Substring(0, Query.Length - 2);
             Query += ";\n";
             return Query;
@@ -102,7 +107,7 @@ namespace SIL.PublishingSolution
             searchTable += @"INSERT INTO `sil_multilingual_search` (`post_id`, `language_code`, `relevance`, `search_strings`) VALUES " + "\n";
             searchTable += SetSemiColon(_searchValue);
 
-            _textWriter = new StreamWriter(_projInfo.ProjectPath + @"\data.sql");
+            _textWriter = new StreamWriter(_projInfo.ProjectPath + @"\" + MysqlDataFileName);
             _textWriter.WriteLine(postTable);
             _textWriter.WriteLine(termTable);
             _textWriter.WriteLine(texonomyTable);

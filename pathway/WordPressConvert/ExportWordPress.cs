@@ -89,6 +89,7 @@ namespace SIL.PublishingSolution
 
                 ExportXhtmlToSqlData xhtmlToSqlData = new ExportXhtmlToSqlData();
                 xhtmlToSqlData._projInfo = projInfo;
+                xhtmlToSqlData.MysqlDataFileName = "data.sql";
                 xhtmlToSqlData.XhtmlToBlog();
 
                 if (!skipForNUnitTest)
