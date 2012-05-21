@@ -99,7 +99,7 @@ namespace SIL.PublishingSolution
                                 string name = item.Attributes["lang"].Value;
                                 if (name != null && name.IndexOf("-audio") > 0)
                                 {
-                                    string audioFile = item.InnerText;
+                                    string audioFile = item.InnerText.Trim();
                                     string audioFullPath = Common.PathCombine(imageAudioRootPath, audioFile);
                                     if (File.Exists(audioFullPath))
                                     {
@@ -217,7 +217,10 @@ namespace SIL.PublishingSolution
             if (txtWebFtpFldrNme.Text.Trim() == "")
                 txtWebFtpFldrNme.Text = "WordPressWebonary";
 
-            di.MoveTo(Common.PathCombine(renameDirectory, txtWebFtpFldrNme.Text));
+            if (txtWebFtpFldrNme.Text.ToLower().Trim() != "webonary")
+            {
+                di.MoveTo(Common.PathCombine(renameDirectory, txtWebFtpFldrNme.Text));
+            }
 
             MoveAudioandPictureFile(renameDirectory);
 
@@ -273,7 +276,13 @@ namespace SIL.PublishingSolution
         {
             string[] directoryLocalfiles;
             directoryLocalfiles = Directory.GetFiles(txtSourceFileLocation.Text);
-            string targetFileLocation = Path.Combine(txtTargetFileLocation.Text, txtWebFtpFldrNme.Text);
+            string targetFileLocation = string.Empty;
+            string targetPath = txtTargetFileLocation.Text;
+            if (targetPath.Substring(targetPath.Length - 1, 1) != "/")
+            {
+                txtTargetFileLocation.Text = txtTargetFileLocation.Text + "/";
+            }
+            targetFileLocation = Path.Combine(txtTargetFileLocation.Text, txtWebFtpFldrNme.Text);   
             if (directoryLocalfiles.Length > 0)
             {
                 foreach (string fileName in directoryLocalfiles)
@@ -742,5 +751,21 @@ namespace SIL.PublishingSolution
         }
 
         #endregion
+
+        private void bwWebonaryFileTransfer_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+        }
+
+        private void bwWebonaryFileTransfer_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+
+        }
+
+        private void bwWebonaryFileTransfer_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+        }
+        
     }
 }
