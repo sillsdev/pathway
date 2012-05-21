@@ -639,9 +639,9 @@ namespace SIL.PublishingSolution
             {
                 foreach (string item in exportType)
                 {
-                    if (item.Trim().ToLower() == "WordPress Alpha" && !IsWebDataFilled())
+                    if (item.Trim().ToLower() == "wordpress alpha" && !IsWebDataFilled())
                     {
-                        break;
+                        continue;
                     }
                     ddlLayout.Items.Add(item);
                 }
@@ -667,7 +667,7 @@ namespace SIL.PublishingSolution
         private bool IsWebDataFilled()
         {
             Param.LoadSettings();
-            XmlNodeList baseNode1 = Param.GetItems("//styles/" + Media + "/style[@name='" + Style + "']/styleProperty");
+            XmlNodeList baseNode1 = Param.GetItems("//styles/" + "web" + "/style[@name='" + "OneWeb" + "']/styleProperty");
             
             foreach (XmlNode VARIABLE in baseNode1)
             {
