@@ -19,6 +19,82 @@ namespace SIL.PublishingSolution
     {
         public PublicationInformation projInfo;
 
+        public bool RunScriptForCreateDatabase(string fileName, string userName, string password, string hostAddress, string port, string databaseName)
+        {
+            using (StreamReader reader = new StreamReader(fileName))
+            {
+                MySqlCommand command;
+                // Create a connection string without passing a database 
+                string ConnectionString = string.Format("Uid={0};Pwd={1};Server={2};Port={3}",
+                userName, password, hostAddress, port);
+
+                MySqlConnection Connection = new MySqlConnection(ConnectionString);
+                Connection.Open();
+                try
+                {
+                    string line = "";
+                    string l;
+                    while (true)
+                    {
+                        // Clear line if its been used already 
+                        if (line.EndsWith(";"))
+                            line = "";
+
+                        l = reader.ReadLine();
+
+                        // is this eof? 
+                        if (l == null) break;
+                        // Trim off rubbish at end 
+                        l = l.TrimEnd();
+                        // Don't call if it's empty 
+                        if (l == "") continue;
+                        // If it's a comment dont call 
+                        if (l.StartsWith("--")) continue;
+
+                        // Add l to line 
+                        line += l;
+                        // Test for end of line character and continue reading if needed 
+                        if (!line.EndsWith(";")) continue;
+
+                        // mysql generated files start and end with series of commented out 
+                        // lines. 
+                        // These are not true comment out but are parsed by mysql to determine 
+                        // the version number. If version higher than current version then they're 
+                        // not run. So we need to remove the comment marks and pass the command 
+                        // in. Im using mysql 5, so all valid 
+                        if (line.StartsWith("/*!"))
+                        {
+                            if (line.EndsWith("*/;"))
+                            {
+                                int start = line.IndexOf(" ");
+                                if (start == -1)
+                                    continue;
+                                line = line.Substring(start + 1);
+                                line = line.Remove(line.Length - 4) + ";";
+
+                            }
+                            else continue;
+                        }//if (line.StartsWith("/*!")) 
+                        
+                        // Now we have a full line, run it in mysql 
+                        command = new MySqlCommand(line, Connection);
+                        command.ExecuteNonQuery();
+                    }// while true 
+                }
+                catch (MySqlException ex)
+                {
+
+                }
+                finally
+                {
+                    Connection.Close();
+                }
+            }// using 
+
+            return true;
+        }// function
+
+
         public bool RunScript(string fileName, string userName, string password, string hostAddress, string port, string databaseName)
         {
             using (StreamReader reader = new StreamReader(fileName))
@@ -148,7 +224,7 @@ namespace SIL.PublishingSolution
             File.Copy(getCreateDatabaseFile, mysqlScriptFileName, true);
             ModifyDatabasenameInCreateDbSqlFile(mysqlScriptFileName, databaseName);
             mysqlScriptFileName = mysqlScriptFileName.Replace(".sql", "1.sql");
-            RunScript(mysqlScriptFileName, userName, password, hostAddress, port, databaseName);
+            RunScriptForCreateDatabase(mysqlScriptFileName, userName, password, hostAddress, port, databaseName);
         }
 
         public void Data(string fileName, string userName, string password, string hostAddress, string port, string databaseName, string websiteAddress, string directoryName)
