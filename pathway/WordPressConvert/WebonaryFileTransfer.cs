@@ -182,11 +182,11 @@ namespace SIL.PublishingSolution
             {
                 if (ex.Message == "The remote server returned an error: (530) Not logged in.")
                 {
-                    MessageBox.Show("FTP Username and Password are invalid, Please verify in the configuration tool in web property tab.", "Pathway", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Error getting response : Connection failed. Please retry.", "Pathway", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show("FTP settings are invalid, Please verify in the configuration tool in web property tab.", "Pathway", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("FTP Username and Password are invalid, Please verify in the configuration tool in web property tab.", "Pathway", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 this.Close();
             }
@@ -385,63 +385,74 @@ namespace SIL.PublishingSolution
 
         private bool CheckFileAlreadyExists(string uploadDirectoryFiles, string ftpLocation, string userName, string password)
         {
-            //Get a FileInfo object for the file that will
-            // be uploaded.
-            FileInfo toUpload = new FileInfo(uploadDirectoryFiles);
-
-            //Get a new FtpWebRequest object.
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpLocation + "/" + toUpload.Name);
-            //Method will be UploadFile.
-            request.Method = WebRequestMethods.Ftp.GetFileSize;
-            //Set our credentials.
-            request.Credentials = new NetworkCredential(userName, password);
-            if (CheckIsFileExists(request))
+            try
             {
-                return true;
-            }
-            else
+                //Get a FileInfo object for the file that will
+                // be uploaded.
+                FileInfo toUpload = new FileInfo(uploadDirectoryFiles);
+
+                //Get a new FtpWebRequest object.
+                FtpWebRequest request = (FtpWebRequest) WebRequest.Create(ftpLocation + "/" + toUpload.Name);
+                //Method will be UploadFile.
+                request.Method = WebRequestMethods.Ftp.GetFileSize;
+                //Set our credentials.
+                request.Credentials = new NetworkCredential(userName, password);
+                if (CheckIsFileExists(request))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                //  MessageBox.Show("Upload complete");
+            }catch
             {
                 return false;
             }
-            //  MessageBox.Show("Upload complete");
         }
 
         private void UploadFileToFtpLocation(string uploadDirectoryFiles, string ftpLocation, string userName, string password)
         {
-            //Get a FileInfo object for the file that will
-            // be uploaded.
-            FileInfo toUpload = new FileInfo(uploadDirectoryFiles);
-
-
-            //Get a new FtpWebRequest object.
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpLocation + "/" + toUpload.Name);
-            //Method will be UploadFile.
-            request.Method = WebRequestMethods.Ftp.UploadFile;
-            //Set our credentials.
-            request.Credentials = new NetworkCredential(userName, password);
-
-
-            //Setup a stream for the request and a stream for
-            // the file we'll be uploading.
-            Stream ftpStream = request.GetRequestStream();
-            FileStream file = System.IO.File.OpenRead(uploadDirectoryFiles);
-
-            //Setup variables we'll use to read the file.
-            int length = 1024;
-            byte[] buffer = new byte[length];
-            int bytesRead = 0;
-
-            //Write the file to the request stream.
-            do
+            try
             {
-                bytesRead = file.Read(buffer, 0, length);
-                ftpStream.Write(buffer, 0, bytesRead);
-            } while (bytesRead != 0);
+                //Get a FileInfo object for the file that will
+                // be uploaded.
+                FileInfo toUpload = new FileInfo(uploadDirectoryFiles);
 
-            //Close the streams.
-            file.Close();
-            ftpStream.Close();
-            //  MessageBox.Show("Upload complete");
+
+                //Get a new FtpWebRequest object.
+                FtpWebRequest request = (FtpWebRequest) WebRequest.Create(ftpLocation + "/" + toUpload.Name);
+                //Method will be UploadFile.
+                request.Method = WebRequestMethods.Ftp.UploadFile;
+                //Set our credentials.
+                request.Credentials = new NetworkCredential(userName, password);
+                request.Timeout = 600000;
+
+                //Setup a stream for the request and a stream for
+                // the file we'll be uploading.
+                Stream ftpStream = request.GetRequestStream();
+                FileStream file = System.IO.File.OpenRead(uploadDirectoryFiles);
+
+                //Setup variables we'll use to read the file.
+                int length = 1024;
+                byte[] buffer = new byte[length];
+                int bytesRead = 0;
+
+                //Write the file to the request stream.
+                do
+                {
+                    bytesRead = file.Read(buffer, 0, length);
+                    ftpStream.Write(buffer, 0, bytesRead);
+                } while (bytesRead != 0);
+
+                //Close the streams.
+                file.Close();
+                ftpStream.Close();
+                //  MessageBox.Show("Upload complete");
+            }catch
+            {
+            }
         }
 
         private bool CheckIsFileExists(FtpWebRequest request)
