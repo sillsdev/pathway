@@ -443,6 +443,7 @@
     <AllBackend Include="..\PdfConvert\$(OutputPath)\PdfConvert.*" />
     <TestBackend Include="..\OpenOfficeConvert_OLD\$(OutputPath)\OpenOfficeConvert_OLD.*" />
     <TestBackend Include="..\WordPressConvert\$(OutputPath)\WordPressConvert.*" />
+    <TestBackend Include="..\WordPressConvert\$(OutputPath)\MySql*.dll" />
     <TestBackend Include="..\XeTexConvert\$(OutputPath)\XeTexConvert.*" />
     <TestBackend Include="..\XeLaTexConvert\$(OutputPath)\XeLaTexWriter.*" />
     <TestBackend Include="..\YouVersionConvert\$(OutputPath)\YouVersionWriter.*" />

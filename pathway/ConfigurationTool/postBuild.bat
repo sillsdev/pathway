@@ -20,6 +20,7 @@ if "%1" == "CorporateSE" goto nogobible
 if "%1" == "Corporate7SE" goto nogobible
 xcopy %base2%\PdfConvert\%cfg2%\PdfConvert.* . /y
 xcopy %base2%\WordPressConvert\%cfg2%\WordPressConvert.* . /y
+xcopy %base2%\WordPressConvert\%cfg2%\MySql*.dll . /y
 xcopy %base2%\XeTeXConvert\%cfg2%\XeTeXConvert.* . /y
 xcopy %base2%\XeLaTeXConvert\%cfg2%\XeLaTeXWriter.* . /y
 xcopy %base2%\YouVersionConvert\%cfg2%\YouVersionConvert.* . /y
