@@ -301,10 +301,13 @@ namespace SIL.PublishingSolution
             //Directory Creating in FTP
             string[] directories = Directory.GetDirectories(txtSourceFileLocation.Text, "*.*",
                                                             SearchOption.AllDirectories);
+
+            targetFileLocation = txtTargetFileLocation.Text;
             foreach (string directoryName in directories)
             {
                 string subDirectory = Common.LeftRemove(directoryName, txtSourceFileLocation.Text);
-                CreateFTPDirectoryToUpload(txtTargetFileLocation.Text + subDirectory, txtUsername.Text, txtPassword.Text);
+                targetFileLocation = Path.Combine(txtTargetFileLocation.Text, subDirectory);
+                CreateFTPDirectoryToUpload(targetFileLocation, txtUsername.Text, txtPassword.Text);
                 string filePath = txtSourceFileLocation.Text + subDirectory;
                 string[] files;
                 files = Directory.GetFiles(filePath);
@@ -408,6 +411,7 @@ namespace SIL.PublishingSolution
             //Get a FileInfo object for the file that will
             // be uploaded.
             FileInfo toUpload = new FileInfo(uploadDirectoryFiles);
+
 
             //Get a new FtpWebRequest object.
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpLocation + "/" + toUpload.Name);

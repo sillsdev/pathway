@@ -1586,7 +1586,7 @@ namespace SIL.PublishingSolution
             this.txtWebFtpFldrNme.MaxLength = 50;
             this.txtWebFtpFldrNme.Name = "txtWebFtpFldrNme";
             this.txtWebFtpFldrNme.Size = new System.Drawing.Size(153, 20);
-            this.txtWebFtpFldrNme.TabIndex = 25;
+            this.txtWebFtpFldrNme.TabIndex = 5;
             // 
             // txtWebEmailID
             // 
@@ -1594,7 +1594,7 @@ namespace SIL.PublishingSolution
             this.txtWebEmailID.MaxLength = 50;
             this.txtWebEmailID.Name = "txtWebEmailID";
             this.txtWebEmailID.Size = new System.Drawing.Size(153, 20);
-            this.txtWebEmailID.TabIndex = 23;
+            this.txtWebEmailID.TabIndex = 4;
             // 
             // label18
             // 

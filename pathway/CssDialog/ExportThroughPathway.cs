@@ -677,11 +677,9 @@ namespace SIL.PublishingSolution
                 {
                     case "ftpaddress":
                     case "ftpuserid":
-                    case "ftppwd":
                     case "dbservername":
                     case "dbname":
                     case "dbuserid":
-                    case "dbpwd":
                     case "weburl":
                     case "webadminusrnme":
                     case "webadminpwd":
