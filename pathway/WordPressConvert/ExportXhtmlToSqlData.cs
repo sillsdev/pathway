@@ -152,7 +152,7 @@ namespace SIL.PublishingSolution
                     }
                     letHead = node.FirstChild.InnerText;
                 }
-                else if (className.ToLower() == "entry")
+                else if (className.ToLower() == "entry" || className.ToLower() == "minorentry")
                 {
                     XmlDocument xdocEntry = new XmlDocument { XmlResolver = null };
                     xdocEntry.LoadXml("<?xml version=\"1.0\" encoding=\"utf-8\"?>"
@@ -162,7 +162,7 @@ namespace SIL.PublishingSolution
                     {
                         if (spanNode.Attributes["class"] != null)
                         {
-                            if (spanNode.Attributes["class"].Value.ToLower() == "headword")
+                            if (spanNode.Attributes["class"].Value.ToLower() == "headword" || spanNode.Attributes["class"].Value.ToLower() == "headword-minor")
                             {
                                 headword = spanNode.InnerText;
                                 InsertPosts(node.OuterXml.Replace("'", "''"), headword);

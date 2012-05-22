@@ -815,6 +815,7 @@ namespace TestBed
             //MessageBox.Show("Xhtml has been Exported.");
 
             ExportXhtmlToSqlData xhtmlToSqlData = new ExportXhtmlToSqlData();
+            xhtmlToSqlData.MysqlDataFileName = "data.sql";
             xhtmlToSqlData._projInfo = projInfo;
             xhtmlToSqlData.XhtmlToBlog();
 
