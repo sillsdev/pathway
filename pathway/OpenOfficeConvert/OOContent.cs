@@ -1853,10 +1853,12 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("style:name", "Scheherazade Graphite Alpha");
             _writer.WriteAttributeString("svg:font-family", "'Scheherazade Graphite Alpha'");
             _writer.WriteEndElement();
+            
             _writer.WriteStartElement("style:font-face");
             _writer.WriteAttributeString("style:name", "Latha");
             _writer.WriteAttributeString("svg:font-family", "'Latha'");
             _writer.WriteEndElement();
+
             _writer.WriteEndElement();
 
             //office:automatic-styles - Sections and Columns area

@@ -38,13 +38,14 @@ namespace SIL.PublishingSolution
             LoadAllProperty();
             LoadSpellCheck();
             CreateFontLanguageMap();
+            
             _childStyle = childStyle;
             _projectPath = projectPath;
             _isHeadword = isHeadword;
             _languageStyleName = languageStyleName;
             _parentClass = parentClass;
             string styleFilePath = OpenIDStyles(); //todo change name
-
+            SetHeaderFontName(styleFilePath);
             //nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
             //nsmgr.AddNamespace("idPkg", "http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging");
             nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
@@ -72,6 +73,30 @@ namespace SIL.PublishingSolution
 
             return _textVariables;
         }
+
+        public void SetHeaderFontName(string styleFilePath)
+        {
+            if (styleFilePath.ToLower().IndexOf("dictionary") > 0)
+                 return;
+            
+            _styleXMLdoc = new XmlDocument();
+            _styleXMLdoc.Load(styleFilePath);
+            var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
+            nsmgr.AddNamespace("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
+            nsmgr.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+            string xPath = "//style:style[@style:name='MT1']/style:text-properties";
+            XmlNode hdrtextPropNode = _styleXMLdoc.SelectSingleNode(xPath, nsmgr);
+            if(hdrtextPropNode != null)
+            {
+                if(_childStyle.ContainsKey("scrBookName_scrBook_scrBody"))
+                {
+                    if (_childStyle["scrBookName_scrBook_scrBody"].ContainsKey("font-family"))
+                        hdrtextPropNode.Attributes["style:font-name-complex"].Value =
+                            _childStyle["scrBookName_scrBook_scrBody"]["font-family"];
+                }
+            }
+        }
+
         public void AddFontDeclarative(string styleFilePath, List<string> font)
         {
             if (font.Count == 0) return;
