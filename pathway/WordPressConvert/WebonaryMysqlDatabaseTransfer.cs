@@ -75,10 +75,15 @@ namespace SIL.PublishingSolution
                             }
                             else continue;
                         }//if (line.StartsWith("/*!")) 
-                        
+                        try
+                        {
                         // Now we have a full line, run it in mysql 
                         command = new MySqlCommand(line, Connection);
                         command.ExecuteNonQuery();
+                        }
+                        catch
+                        {
+                        }
                     }// while true 
                 }
                 catch (MySqlException ex)
@@ -154,8 +159,15 @@ namespace SIL.PublishingSolution
 
                         line = "USE " + databaseName + "; " + line;
                         // Now we have a full line, run it in mysql 
-                        command = new MySqlCommand(line, Connection);
-                        command.ExecuteNonQuery();
+                        try
+                        {
+                            // Now we have a full line, run it in mysql 
+                            command = new MySqlCommand(line, Connection);
+                            command.ExecuteNonQuery();
+                        }
+                        catch
+                        {
+                        }
                     }// while true 
                 }
                 catch (MySqlException ex)
