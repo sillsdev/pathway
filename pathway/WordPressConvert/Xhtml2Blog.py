@@ -397,9 +397,8 @@ class Xhtml2Blog:
     Convert dictionary xhtml to a blog site
     
     \t-a, --arrows\t\tadd toc and arrows to entries
-    \t-e, --email=\t\temail address for response
-    \t-m, --media-root=\turl to root of site
     \t-w, --wordpress\t\ttoggle whether wordpress sql input generated
+    \t-u, --url=\t\tsite url
     \t-s, --site\t\ttoggle whether html web site files generated
     \t-f, --folders\t\ttoggle whether html files are put in folders
     \t-n, --database=\tdatabase name
@@ -580,8 +579,8 @@ def Usage():
     sys.exit(2)
 
 if __name__ == '__main__':
-    longopt = ['--wordpress', '--site', '--folders', '--arrows', '--url',
-    '--post-index=', '--taxonomy-index=', '--database=', '--table-prefix=', '--include-example=']
+    longopt = ['wordpress', 'site', 'folders', 'arrows', 'url=', 'taxonomy-index=', 
+    'post-index=', 'database=', 'table-prefix=', 'include-example=']
     try:
         optlist, args = getopt.getopt(sys.argv[1:], 'wsfau:t:p:n:d:i:', longopt)
     except getopt.GetoptError:
@@ -632,6 +631,8 @@ if __name__ == '__main__':
     xhtml = args[0]
     if xhtml == '':
         Usage()
+    if xhtml[:1] == '"':
+        xhtml = xhtml[1:-1]
     x = Xhtml2Blog(xhtml, url=url, wordpress=wordpress, site=site, folders=folders, arrows=arrows,
     postIndex=postIndex, taxonomyIndex=taxonomyIndex,
     database=database, prefix=prefix, includeExample=includeExample)

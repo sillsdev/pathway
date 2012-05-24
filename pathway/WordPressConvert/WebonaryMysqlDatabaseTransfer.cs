@@ -224,7 +224,14 @@ namespace SIL.PublishingSolution
             File.Copy(getCreateDatabaseFile, mysqlScriptFileName, true);
             ModifyDatabasenameInCreateDbSqlFile(mysqlScriptFileName, databaseName);
             mysqlScriptFileName = mysqlScriptFileName.Replace(".sql", "1.sql");
-            RunScriptForCreateDatabase(mysqlScriptFileName, userName, password, hostAddress, port, databaseName);
+            try
+            {
+                RunScriptForCreateDatabase(mysqlScriptFileName, userName, password, hostAddress, port, databaseName);
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+            }
         }
 
         public void Data(string fileName, string userName, string password, string hostAddress, string port, string databaseName, string websiteAddress, string directoryName)

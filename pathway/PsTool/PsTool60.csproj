@@ -306,6 +306,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AfterBeforeProcess.cs" />
+    <Compile Include="AfterBeforeProcessEpub.cs" />
     <Compile Include="AfterBeforeXHTMLProcess.cs" />
     <Compile Include="Backend.cs" />
     <Compile Include="ClassInfo.cs" />
@@ -370,6 +371,7 @@
     <Compile Include="UseReport.cs" />
     <Compile Include="XHTMLProcess.cs" />
     <Compile Include="ZipFolder.cs" />
+    <Compile Include="ZipUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Localization\Localizer.resx">

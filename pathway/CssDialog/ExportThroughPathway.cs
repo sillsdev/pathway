@@ -639,7 +639,7 @@ namespace SIL.PublishingSolution
             {
                 foreach (string item in exportType)
                 {
-                    if (item.Trim().ToLower() == "wordpress alpha" && !IsWebDataFilled())
+                    if (item.Trim().ToLower() == "webonary" && !IsWebDataFilled())
                     {
                         continue;
                     }
@@ -1033,7 +1033,7 @@ namespace SIL.PublishingSolution
                 case "Pdf (using Prince)":
                     value = "application/pdf";
                     break;
-                case "WordPress Alpha":
+                case "Webonary":
                     // not sure about this -- using html
                     value = "text/html";
                     break;
@@ -1144,7 +1144,7 @@ namespace SIL.PublishingSolution
             {
                 media = "others";
             }
-            else if (backend == "wordpress alpha")
+            else if (backend == "webonary")
             {
                 media = "web";
             }

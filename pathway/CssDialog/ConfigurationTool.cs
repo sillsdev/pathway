@@ -1208,6 +1208,5 @@ namespace SIL.PublishingSolution
         {
             _CToolBL.HelpButton_Clicked();
         }
-
      }
 }

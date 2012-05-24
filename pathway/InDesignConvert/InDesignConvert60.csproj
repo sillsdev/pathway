@@ -301,6 +301,7 @@
     <Compile Include="InMapProperty.cs" />
     <Compile Include="InMasterSpread.cs" />
     <Compile Include="InMasterSpreadBase.cs" />
+    <Compile Include="InMetaData.cs" />
     <Compile Include="InPreferences.cs" />
     <Compile Include="InPreferencesBase.cs" />
     <Compile Include="InSpread.cs" />

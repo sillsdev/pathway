@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using System.Xml;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -30,7 +31,7 @@ namespace SIL.PublishingSolution
         {
             get
             {
-                return "WordPress Alpha";
+                return "Webonary";
             }
         }
         #endregion property string ExportType
@@ -54,6 +55,12 @@ namespace SIL.PublishingSolution
         #endregion bool Handle(string inputDataType)
 
         public bool skipForNUnitTest = false;
+        
+        #region Private class variables
+        private string _DbName;
+        private string _WebUrl;
+        private string _WebFtpFldrNme;
+        #endregion Private class variables
 
         #region bool Export(PublicationInformation projInfo)
         /// <summary>
@@ -68,16 +75,17 @@ namespace SIL.PublishingSolution
                 var xhtml = projInfo.DefaultXhtmlFileWithPath;
                 PreExportProcess preProcessor = new PreExportProcess(projInfo);
                 projInfo.ProjectPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
-                preProcessor.InsertFolderNameForAudioFilesinXhtml();
-                InsertBeforeAfterInXHTML(projInfo);
-                
-                //const string prog = "WordPress.bat";
-                //var processFolder = Common.PathCombine(Common.GetAllUserPath(), "WordPress");
-                //if (!Directory.Exists(processFolder))
-                //    processFolder = Common.FromRegistry("WordPress");
-                //var progFullPath = Common.PathCombine(processFolder, prog);
-                //var args = string.Format(@"""{0}""", xhtml);
-                //SubProcess.Run(processFolder, progFullPath, args, true);
+                //preProcessor.InsertFolderNameForAudioFilesinXhtml();
+                //InsertBeforeAfterInXHTML(projInfo);
+
+                const string prog = "WordPress.bat";
+                GetParameters();
+                var processFolder = Common.PathCombine(Common.GetAllUserPath(), "WordPress");
+                if (!Directory.Exists(processFolder))
+                    processFolder = Common.FromRegistry("WordPress");
+                var progFullPath = Common.PathCombine(processFolder, prog);
+                var args = string.Format("-u{0} -n{1} \"{2}\"", _WebUrl + '/' + _WebFtpFldrNme, _DbName, xhtml);
+                SubProcess.Run(processFolder, progFullPath, args, true);
                 //if (projInfo.IsOpenOutput)
                 //{
                 //    string dataResult = Common.PathCombine(Path.GetDirectoryName(xhtml), "data.sql");
@@ -87,10 +95,10 @@ namespace SIL.PublishingSolution
                 //        SubProcess.Run(processFolder, @"""WordPress site setup.txt""");
                 //}
 
-                ExportXhtmlToSqlData xhtmlToSqlData = new ExportXhtmlToSqlData();
-                xhtmlToSqlData._projInfo = projInfo;
-                xhtmlToSqlData.MysqlDataFileName = "data.sql";
-                xhtmlToSqlData.XhtmlToBlog();
+                //ExportXhtmlToSqlData xhtmlToSqlData = new ExportXhtmlToSqlData();
+                //xhtmlToSqlData._projInfo = projInfo;
+                //xhtmlToSqlData.MysqlDataFileName = "data.sql";
+                //xhtmlToSqlData.XhtmlToBlog();
 
                 if (!skipForNUnitTest)
                 {
@@ -109,6 +117,38 @@ namespace SIL.PublishingSolution
         #endregion bool Export(PublicationInformation projInfo)
 
         #region Private Functions
+
+        #region void GetParameters()
+        /// <summary>
+        /// Loads values needed to create data for site from Settings file
+        /// </summary>
+        private void GetParameters()
+        {
+            Param.LoadSettings();
+            XmlNodeList baseNode1 = Param.GetItems("//styles/web/style[@name='" + "OneWeb" + "']/styleProperty");
+
+            foreach (XmlNode VARIABLE in baseNode1)
+            {
+                string attribName = VARIABLE.Attributes["name"].Value.ToLower();
+                string attribValue = VARIABLE.Attributes["value"].Value;
+                switch (attribName)
+                {
+                    case "dbname":
+                        _DbName = attribValue;
+                        break;
+                    case "weburl":
+                        _WebUrl = attribValue;
+                        break;
+                    case "webftpfldrnme":
+                        _WebFtpFldrNme = attribValue;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        #endregion void GetParameters()
+        
         #region Handle After Before
         /// <summary>
         /// Inserting After & Before content to XHTML file
@@ -150,7 +190,8 @@ namespace SIL.PublishingSolution
             //}
         }
         #endregion
-
+        
+        #region void RemovePagedStylesFromCss(string cssFile)
         /// <summary>
         /// Removes stylings that don't work with e-book readers from the specified .css file.
         /// </summary>
@@ -237,6 +278,7 @@ namespace SIL.PublishingSolution
             }
             File.Move(cssFile + ".tmp", cssFile);
         }
+        #endregion void RemovePagedStylesFromCss(string cssFile)
 
         #endregion Private Functions
 

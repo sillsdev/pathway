@@ -55,7 +55,7 @@ namespace Test.WordPressConvert
         {
             var target = new ExportWordPress();
             var actual = target.ExportType;
-            Assert.AreEqual("WordPress Alpha", actual);
+            Assert.AreEqual("Webonary", actual);
         }
 
         [Test]

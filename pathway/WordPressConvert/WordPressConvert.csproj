@@ -241,8 +241,8 @@
     <None Include="WordPressBuild.bat" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="blogExport.py" />
     <Content Include="setup.py" />
+    <Content Include="Xhtml2Blog.py" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
