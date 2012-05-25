@@ -19,37 +19,77 @@ Copyright:
 
     <Copyright (C) 2007-2012 SIL International>
 
-License:
+License: LGPL-3
+ Pathway prepares language data (Fieldworks & Paratext) for publication
+ Copyright (C) 2007-2012 SIL International
 
-    LGPL
+ The user is allowed to use all of the programs, data, and documentation 
+ included with this Product.
 
-The Ubuntu packaging is: Copyright (C) 2012 Greg Trihus <greg_trihus@sil.org>
-and is licensed under the LGPL version 3, see `/usr/share/common-licenses/LGPL'.
+ The user may
+ > install and use any or all Product Elements included in the Product, 
+   as specified in the individual Terms of Use or License for each Product 
+   Element.
+ > copy the Product, provided that such copies contain all the original 
+   Product's contents and proprietary notices. The user may collect a 
+   reimbursement for the costs of producing the copy, but you may not 
+   charge a licensing fee for the Product.
+ > permit other individuals to use the Product under the terms listed above.
 
-The epubcheck was originally developed by Adobe.
-It is licensed under New BSD, see `http://www.opensource.org/licenses/bsd-license.php'.
+ The user may not
+ > extract portions of a Product Element not permitted by the Terms of Use 
+   or Licenses for the Product Element.
+ > sell licenses for the Product.
+ > place the Product or any Product Element on the Internet or any other 
+   public access network.
+ > include the Product or any Product Element in any other collection or 
+   other product.
+ > remove any proprietary notices on the Product or on any Product Element.
 
-The Prince is Copyright (C) 2002-2011 YesLogic Pty. Ltd.
-It is commercial software, see `http://www.princexml.com/license/' but the wrapper included with Pathway is redistributable.
+X-Comment: The product license is included in /usr/lib/pathway/License.rtf and
+ On Debian GNU/Linux systems, the complete text of the GNU Lesser General Public 
+ License can be found in the /usr/share/common-licenses/LGPL-3 file.
 
-The SharpZipLib is Copyright (C) 2000-2010 IC#SharpCode. All rights reserved.
-It is licensed under GPL (modified), see `http://www.icsharpcode.net/OpenSource/SharpZipLib/'.
+ The Ubuntu packaging is: Copyright (C) 2012 Greg Trihus <greg_trihus@sil.org>
+ and is licensed under the LGPL version 3, see `/usr/share/common-licenses/LGPL'.
 
-The GPL GhostScript 8.71 is Copyright (C) 2010 Artifex Software, Inc.  All rights reserved.
-It is licensed under GPL, see `http://pages.cs.wisc.edu/~ghost/doc/GPL/index.htm'.
+ The epubcheck was originally developed by Adobe.
+ It is licensed under New BSD, see `http://www.opensource.org/licenses/bsd-license.php'.
 
-The PdfToImage is Copyright (C) 2008-2009 Lord TaGoH
-It is licensed under CPOL, see `http://www.codeproject.com/info/cpol10.aspx'.
+ The Prince is Copyright (C) 2002-2011 YesLogic Pty. Ltd.
+ It is commercial software, see `http://www.princexml.com/license/' but the wrapper 
+ included with Pathway is redistributable.
 
-The ICU is Copyright (c) 1995-2011 International Business Machines Corporation and others
-It is licensed under ICU License, see `http://source.icu-project.org/repos/icu/icu/trunk/license.html'.
+ The SharpZipLib is Copyright (C) 2000-2010 IC#SharpCode. All rights reserved.
+ It is licensed under GPL (modified), see `http://www.icsharpcode.net/OpenSource/SharpZipLib/'.
 
-The Antlr 3 is Copyright (c) 2010 Terence Parr. All rights reserved.
-It is licensed under BSD, see `http://www.antlr.org/license.html'.
-Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ The GPL GhostScript 8.71 is Copyright (C) 2010 Artifex Software, Inc.  All rights reserved.
+ It is licensed under GPL, see `http://pages.cs.wisc.edu/~ghost/doc/GPL/index.htm'.
 
-Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
-Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
-Neither the name of the author nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ The PdfToImage is Copyright (C) 2008-2009 Lord TaGoH
+ It is licensed under CPOL, see `http://www.codeproject.com/info/cpol10.aspx'.
+
+ The ICU is Copyright (c) 1995-2011 International Business Machines Corporation and others
+ It is licensed under ICU License, see `http://source.icu-project.org/repos/icu/icu/trunk/license.html'.
+
+ The Antlr 3 is Copyright (c) 2010 Terence Parr. All rights reserved.
+ It is licensed under BSD, see `http://www.antlr.org/license.html'.
+ Redistribution and use in source and binary forms, with or without modification, 
+ are permitted provided that the following conditions are met:
+
+ Redistributions of source code must retain the above copyright notice, this list
+ of conditions and the following disclaimer.
+ Redistributions in binary form must reproduce the above copyright notice, this list
+ of conditions and the following disclaimer in the documentation and/or other materials
+ provided with the distribution.
+ Neither the name of the author nor the names of its contributors may be used to endorse
+ or promote products derived from this software without specific prior written permission.
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+ OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+ AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 

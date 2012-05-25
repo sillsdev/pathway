@@ -75,30 +75,30 @@ namespace SIL.PublishingSolution
                 var xhtml = projInfo.DefaultXhtmlFileWithPath;
                 PreExportProcess preProcessor = new PreExportProcess(projInfo);
                 projInfo.ProjectPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
-                //preProcessor.InsertFolderNameForAudioFilesinXhtml();
-                //InsertBeforeAfterInXHTML(projInfo);
+                preProcessor.InsertFolderNameForAudioFilesinXhtml();
+                InsertBeforeAfterInXHTML(projInfo);
 
-                const string prog = "WordPress.bat";
-                GetParameters();
-                var processFolder = Common.PathCombine(Common.GetAllUserPath(), "WordPress");
-                if (!Directory.Exists(processFolder))
-                    processFolder = Common.FromRegistry("WordPress");
-                var progFullPath = Common.PathCombine(processFolder, prog);
-                var args = string.Format("-u{0} -n{1} \"{2}\"", _WebUrl + '/' + _WebFtpFldrNme, _DbName, xhtml);
-                SubProcess.Run(processFolder, progFullPath, args, true);
-                //if (projInfo.IsOpenOutput)
-                //{
-                //    string dataResult = Common.PathCombine(Path.GetDirectoryName(xhtml), "data.sql");
-                //    string msg = string.Format("Please import the file {0} to your WordPress MySql database. Would you like more details?", dataResult);
-                //    DialogResult dialogResult = MessageBox.Show(msg, "WordPress Export", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                //    if (dialogResult == DialogResult.Yes)
-                //        SubProcess.Run(processFolder, @"""WordPress site setup.txt""");
-                //}
+                //const string prog = "WordPress.bat";
+                //GetParameters();
+                //var processFolder = Common.PathCombine(Common.GetAllUserPath(), "WordPress");
+                //if (!Directory.Exists(processFolder))
+                //    processFolder = Common.FromRegistry("WordPress");
+                //var progFullPath = Common.PathCombine(processFolder, prog);
+                //var args = string.Format("-u{0} -n{1} \"{2}\"", _WebUrl + '/' + _WebFtpFldrNme, _DbName, xhtml);
+                //SubProcess.Run(processFolder, progFullPath, args, true);
+                ////if (projInfo.IsOpenOutput)
+                ////{
+                ////    string dataResult = Common.PathCombine(Path.GetDirectoryName(xhtml), "data.sql");
+                ////    string msg = string.Format("Please import the file {0} to your WordPress MySql database. Would you like more details?", dataResult);
+                ////    DialogResult dialogResult = MessageBox.Show(msg, "WordPress Export", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                ////    if (dialogResult == DialogResult.Yes)
+                ////        SubProcess.Run(processFolder, @"""WordPress site setup.txt""");
+                ////}
 
-                //ExportXhtmlToSqlData xhtmlToSqlData = new ExportXhtmlToSqlData();
-                //xhtmlToSqlData._projInfo = projInfo;
-                //xhtmlToSqlData.MysqlDataFileName = "data.sql";
-                //xhtmlToSqlData.XhtmlToBlog();
+                ExportXhtmlToSqlData xhtmlToSqlData = new ExportXhtmlToSqlData();
+                xhtmlToSqlData._projInfo = projInfo;
+                xhtmlToSqlData.MysqlDataFileName = "data.sql";
+                xhtmlToSqlData.XhtmlToBlog();
 
                 if (!skipForNUnitTest)
                 {

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <UsingTask TaskName="MSBuild.ExtensionPack.Compression.Zip" AssemblyFile="MSBuild.ExtensionPack.dll" />
   <UsingTask TaskName="UpdateReadme" AssemblyFile="BuildTasks.dll" />
   <UsingTask TaskName="UpdateVersion" AssemblyFile="BuildTasks.dll" />
   <UsingTask TaskName="ZeroCheck" AssemblyFile="BuildTasks.dll" />
@@ -356,6 +357,7 @@
     <CallTarget Targets="BeforeBuild" Condition=" '$(ConfTag)' != 'XeLaTeX' and '$(ConfTag)' != 'YouVersion' " />
     <CallTarget Targets="XeLaTeXBeforeBuild" Condition=" '$(ConfTag)' == 'XeLaTeX' " />
     <CallTarget Targets="YouVersionBeforeBuild" Condition=" '$(ConfTag)' == 'YouVersion' " />
+    <CallTarget Targets="WebonaryBeforeBuild" Condition="$(OS) != 'Linux'" />
     <Message Text="BUILD_NUMBER: $(BUILD_NUMBER)" Importance="high" />
     <CallTarget Targets="Wix" Condition="$(OS) != 'Linux'"/>
   </Target>
@@ -534,6 +536,13 @@
     <XeLaTexCache Include="..\XeLaTexConvert\XeLaTexExe\texmf-var\fonts\cache\*.cache-3" />
     <Paratexmf Include="..\XeLaTexConvert\Paratexmf\**\*.*" Exclude="..\XeLaTexConvert\Paratexmf\**\.svn\**\**" />
   </ItemGroup>
+  <Target Name="WebonaryBeforeBuild">
+    <MSBuild.ExtensionPack.Compression.Zip TaskAction="Extract" ExtractPath="Files\ConfigurationTool\Lame" ZipFileName="..\ThirdParty\lame3.99.5.zip" Condition=" '$(Status)' == 'Testing' " />
+    <Delete Files="Files\ConfigurationTool\Lame\images\CVS\Entries.Extra.Old" />
+    <Delete Files="Files\ConfigurationTool\Lame\images\CVS\Entries.Old" />
+    <Delete Files="Files\ConfigurationTool\Lame\styles\CVS\Entries.Extra.Old" />
+    <Delete Files="Files\ConfigurationTool\Lame\styles\CVS\Entries.Old" />
+  </Target>
   <Target Name="YouVersionBeforeBuild">
     <Copy SourceFiles="@(YouVersion)" DestinationFiles="@(YouVersion->'Files\PwYouVersion\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>

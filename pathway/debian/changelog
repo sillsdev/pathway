@@ -1,10 +1,36 @@
-pathway (1.1.2.2254-1) unstable; urgency=high
+pathway (1.1.3.2300-1) unstable; urgency=high
 
+  * 1.1.3.2300 sprint
+    - Common: TD-2971 updated font list in GenericFont.xml
+    - Paratext: TD-2980 Support embedded character styles
+    - Installer: Update documentation for Linux 12.04 build
+    - Installer: Sets CurrentUser registry value on Linux
+    - Open Office Writer: TD-2972 Verse numbers way too small 
+    - Open Office Writer: TD-2989 Export to PDF produces BASIC error 
+    - Open Office Writer: TD-2998 Header shows wrong headword 
+    - Open Office Writer: Add two options for removing letter headers.
+    - Web: TD-2887 automate webonary creation
+    - Web: TD-2953 - Testcase added Create mysql queries
+    - Web: TD-2958 Load the exported css
+    - Web: TD-2996 Insert 'AudioVIsual' before the audio file name in xhtml file
+    - Web: TD-3000 Insert MySQL Query for Multi Entries 
+    - Web: TD-3002 OneWeb.css missing from Styles/Dictionary folder
+    - Web: TD-3003 Crash on empty password
+    - Web: TD-3005 setup_wp.php in wrong location
+    - Web: TD-3008 enable in ExportThroughPathway when parameters were entered
+    - Web: TD-3009 When ftp://localhost is used as the address, files not transfered.
+    - Web: TD-3011 Unable to load query to MySql database
+    - Web: TD-3013 Handle minor-entry for mysql queries 
+    - Web: Install Lame mp3 converter folder on Windows
+    - Web: Update build and install to include MySql third party tools.
+    - Web: TD-3006 Only 3 of the audio files copy
+    - Web: TD-3007 Fix crash when user puts ftp folder name as "webonary"
+    - Web: Started adding topics
   * 1.1.2.2254 sprint
     - InDesign: TD-2984 Change Macro to format FrontMatter Elements 
     - Installer: Allow Platform to be set to Any CPU for 64-bit build.
     - Open Office Writer: TD-2950 square box chars in reversal entries 
-    - Paratext: TD-2980 Support embedded character styles from Paratext's USX 2.0
+    - Paratext: TD-2980 Embedded character styles from Paratext's USX 2.0
     - Smart Device: TD-2982 Extra space space 
     - Web: convert sound files into short codes for html5 degradeable
     - Web: TD-2887 load the pictures and sound files
