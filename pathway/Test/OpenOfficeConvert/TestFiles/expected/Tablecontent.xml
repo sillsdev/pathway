@@ -41,7 +41,6 @@
         <text:sequence-decl text:display-outline-level="0" text:name="Text" />
         <text:sequence-decl text:display-outline-level="0" text:name="Drawing" />
       </text:sequence-decls>
-      <text:p text:style-name="P4" />
       <text:p text:style-name="t1_body">T1 class</text:p>
       <text:p text:style-name="t2_t1_body">Sample</text:p>
       <table:table table:style-name="table1" table:name="table1">

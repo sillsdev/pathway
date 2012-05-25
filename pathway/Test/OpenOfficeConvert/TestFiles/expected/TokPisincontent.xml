@@ -46,7 +46,6 @@
         <text:sequence-decl text:display-outline-level="0" text:name="Text" />
         <text:sequence-decl text:display-outline-level="0" text:name="Drawing" />
       </text:sequence-decls>
-      <text:p text:style-name="P4" />
       <text:section text:style-name="Sect_scrBook" text:name="Sect_scrBook">
         <text:p text:style-name="scrBook_scrBody">
           <text:span text:style-name="scrBookName_scrBook_scrBody">Matthew </text:span>

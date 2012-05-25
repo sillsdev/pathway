@@ -41,7 +41,6 @@
         <text:sequence-decl text:display-outline-level="0" text:name="Text" />
         <text:sequence-decl text:display-outline-level="0" text:name="Drawing" />
       </text:sequence-decls>
-      <text:p text:style-name="P4" />
       <text:p text:style-name="letter_letHead_dicBody">K k</text:p>
       <text:p text:style-name="entry_letData_dicBody">
         <text:span text:style-name="link_entry_letData_dicBody">

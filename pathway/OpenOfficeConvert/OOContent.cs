@@ -2660,13 +2660,13 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
-            //TD-2567 - We avoid below coding for ODM
-            if (_projInfo.IsFrontMatterEnabled == false && (_projInfo.FileSequence == null || _projInfo.FileSequence.Count == 1))
-            {
-                _writer.WriteStartElement("text:p");
-                _writer.WriteAttributeString("text:style-name", "P4");
-                _writer.WriteEndElement();
-            }
+            //TD-3012(Crash when letter headers are removed) I commented TD-2567, because ODM works fine without below code
+            //if (_projInfo.IsFrontMatterEnabled == false && (_projInfo.FileSequence == null || _projInfo.FileSequence.Count == 1))
+            //{
+            //    _writer.WriteStartElement("text:p");
+            //    _writer.WriteAttributeString("text:style-name", "P4");
+            //    _writer.WriteEndElement();
+            //}//Comment End TD-3012
 
             //if (_fileType == "odm" && _odtFiles != null)  // ODM - ODT files
             //{
