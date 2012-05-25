@@ -31,12 +31,22 @@ install:
 	sudo cp PathwayB.sh $(DESTDIR)$(prefix)/bin/pathwayB
 	sudo cp ConfigurationTool.sh $(DESTDIR)$(prefix)/bin/ConfigurationTool
 	sudo mkdir -p $(DESTDIR)$(prefix)/share/python-support
-	sudo chmod 755 $(DESTDIR)$(prefix)/share/python-support
+	sudo chmod 777 $(DESTDIR)$(prefix)/share/python-support
 	sudo mkdir -p $(DESTDIR)$(prefix)/share/doc/pathway
-	sudo chmod 755 $(DESTDIR)$(prefix)/share/doc/pathway
-	#python -c 'print "<values><value name=\"PathwayDir\" type=\"string\">/usr/lib/pathway/</value><value name=\"WritingSystemStore\" type=\"string\">~/.local/share/SIL/WritingSystemStore/</value></values>"' >debian/pathway-etc/values.xml
-	sudo mkdir -p $(DESTDIR)/etc/pathway
-	sudo cp -r debian/pathway-etc/. $(DESTDIR)/etc/pathway
+	sudo chmod 777 $(DESTDIR)$(prefix)/share/doc/pathway
+	sudo mkdir -p $(DESTDIR)$(prefix)/share/pathway
+	sudo chmod 777 $(DESTDIR)$(prefix)/share/pathway
+	sudo cp -r debian/WritePathwayKeys.cs $(DESTDIR)$(prefix)/share/pathway/WritePathwayKeys.cs
+	sudo mkdir -p $(DESTDIR)$(prefix)/share/applications
+	sudo chmod 777 $(DESTDIR)$(prefix)/share/applications
+	sudo cp debian/*.desktop $(DESTDIR)$(prefix)/share/applications
+	sudo mkdir -p $(DESTDIR)$(prefix)/share/pixmaps
+	sudo chmod 777 $(DESTDIR)$(prefix)/share/pixmaps
+	sudo cp debian/*.png $(DESTDIR)$(prefix)/share/pixmaps
+	sudo cp debian/*.xpm $(DESTDIR)$(prefix)/share/pixmaps
+	sudo mkdir -p $(DESTDIR)$(prefix)/share/man/man7
+	sudo chmod 777 $(DESTDIR)$(prefix)/share/man/man7
+	sudo gzip -c debian/pathwayB.7.manpages >$(DESTDIR)$(prefix)/share/man/man7/pathwayB.7.gz
 
 binary:
 	exit 0
@@ -52,7 +62,6 @@ clean:
 	-xdg-desktop-menu uninstall /etc/pathway/sil-ConfigurationTool.desktop
 	sudo rm -rf $(DESTDIR)/etc/pathway
 	-rm -rf ~/.mono/registry/CurrentUser/software/sil/pathway
-	-rm -rf debian/pathway-etc/values.xml
 
 clean-build:
 	sudo rm -rf debian/pathway bin

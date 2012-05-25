@@ -8,7 +8,7 @@ Homepage: http://pathway.sil.org
 
 Package: pathway
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, default-jre-headless, mono-runtime
+Depends: default-jre-headless, mono-runtime, lame
 Recommends: openoffice.org-writer, prince, calibre, evince
 Description: Prepare language data (Fieldworks & Paratext) for publication
  Pathway appears as a menu item in Fieldworks and Paratext. PathwayB also
