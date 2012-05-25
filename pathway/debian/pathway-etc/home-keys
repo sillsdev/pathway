@@ -1,0 +1,9 @@
+for user in /home/*; do
+	echo "# Setting up User Pathway key for $user"
+        MY_KEY=${user}/.mono/registry/CurrentUser/software/sil/pathway
+        mkdir -p "${MY_KEY}"
+	chmod gu+w "${MY_KEY}"
+	cp "/etc/pathway/values.xml" "${MY_KEY}"
+	chmod gu+w "${MY_KEY}/values.xml"
+done
+

@@ -37,10 +37,12 @@ esac
 #DEBHELPER#
 
 #export >/etc/pathway/settings
-mkdir -p ${PWD}/.mono/registry/CurrentUser/software/sil/pathway
-chmod 777 ${PWD}/.mono/registry/CurrentUser/software/sil/pathway
-cp /etc/pathway/values.xml ${PWD}/.mono/registry/CurrentUser/software/sil/pathway
-chmod 777 ${PWD}/.mono/registry/CurrentUser/software/sil/pathway/values.xml
+#mkdir -p ${PWD}/.mono/registry/CurrentUser/software/sil/pathway
+#chmod 777 ${PWD}/.mono/registry/CurrentUser/software/sil/pathway
+#cp /etc/pathway/values.xml ${PWD}/.mono/registry/CurrentUser/software/sil/pathway
+#chmod 777 ${PWD}/.mono/registry/CurrentUser/software/sil/pathway/values.xml
+/etc/pathway/WritePathwayKeys.cs
+/etc/pathway/home-keys
 xdg-desktop-menu install /etc/pathway/sil-ConfigurationTool.desktop
 xdg-icon-resource install --size 22 /etc/pathway/pathwayConfigurationTool22.png sil-pathwayConfigurationTool
 xdg-icon-resource install --size 64 /etc/pathway/pathwayConfigurationTool64.png sil-pathwayConfigurationTool
