@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 #-----------------------------------------------------------------------------
 # Name:        incPunc.py
 # Purpose:     move punctuation from css to xhtml, simplify css
@@ -9,7 +10,6 @@
 # Copyright:   (c) 2012 SIL International
 # Licence:     <LPGL>
 #-----------------------------------------------------------------------------
-#!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 #Boa:PyApp:main
 
@@ -70,8 +70,8 @@ def IncludePunct(fullname, page=True):
                     elem.text = before[cls] + elem.text
                 else:
                     elem.text = before[cls]
+            children = elem.getchildren()
             if between.has_key(cls):
-                children = elem.getchildren()
                 if len(children) > 0:
                     first = children[0]
                     if first.attrib.has_key('class'):
@@ -83,10 +83,17 @@ def IncludePunct(fullname, page=True):
                                 else:
                                     child.text = between[cls]
             if after.has_key(cls):
-                if elem.tail != None:
-                    elem.tail = elem.tail + after[cls]
+                if len(children) > 0:
+                    last = children[-1]
+                    if last.tail != None:
+                        last.tail += after[cls]
+                    else:
+                        last.tail = after[cls]
                 else:
-                    elem.tail = after[cls]
+                    if elem.text != None:
+                        elem.text += after[cls]
+                    else:
+                        elem.text = after[cls]
     outname = xhtml
     outdata = etree.tostring(root, encoding='utf-8', xml_declaration=True)
     f = open(outname,'w')
@@ -135,4 +142,8 @@ if __name__ == '__main__':
             page = not page
     if len(args) != 1:
         Usage()
-    IncludePunct(args[0], page=page)
+    if args[0][:1] == '"':
+        fullname = args[0][1:-1]
+    else:
+        fullname = args[0]
+    IncludePunct(fullname, page=page)
