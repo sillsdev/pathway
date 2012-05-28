@@ -384,26 +384,22 @@ namespace SIL.PublishingSolution
 
         /// <summary>
         /// Superscript and Subscript
+        /// make 6pt to 9pt (1.5 times) if <10pt
+        /// make 100% to 150% (1.5 times) if <=100%
         /// </summary>
         public void SuperSub()
         {
-            if (_IDProperty.ContainsKey("font-size"))
+            if (_cssProperty.ContainsKey("font-size"))
             {
-                string propertyValue = _IDProperty["font-size"];
+                string propertyValue = _cssProperty["font-size"];
 
-                if (propertyValue.IndexOf("pt") > 0)
-                {
-                    int value = int.Parse(propertyValue.Replace("pt", ""));
-                    if (value < 10)
-                    {
-                        value = (int) (value*2);
-                    }
-                    _IDProperty["font-size"] = value + "pt";
-                }
-                else if (propertyValue.IndexOf("%") > 0)
+                if (propertyValue.IndexOf("%") > 0)
                 {
                     int value = int.Parse(propertyValue.Replace("%", ""));
-                    value = (int)(value * 2);
+                    if (value <= 100)
+                    {
+                        value = (int)(value * 1.5);
+                    }
                     _IDProperty["font-size"] = value + "%";
                 }
                 else if (propertyValue == "smaller")
@@ -414,12 +410,20 @@ namespace SIL.PublishingSolution
                 {
                     _IDProperty["font-size"] = "100%";
                 }
+                else
+                {
+                    int value = int.Parse(propertyValue.Replace("pt", ""));
+                    if (value < 10)
+                    {
+                        value = (int) (value*1.5);
+                    }
+                    _IDProperty["font-size"] = value + "pt";
+                }
             }
             else
             {
-                _IDProperty["font-size"] = "200%";
+                _IDProperty["font-size"] = "150%";
             }
-            //_IDProperty["font-size"] = "100%";
         }
 
         public void TextTransform(string propertyValue)
@@ -731,6 +735,11 @@ namespace SIL.PublishingSolution
 
         public void FontSize(string propertyValue)
         {
+            if (_cssProperty.ContainsKey("vertical-align"))
+            {
+                return;
+            }
+
             if (_dictFontSize.ContainsKey(propertyValue))
             {
                 propertyValue = _dictFontSize[propertyValue];
