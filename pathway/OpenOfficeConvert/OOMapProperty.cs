@@ -735,7 +735,7 @@ namespace SIL.PublishingSolution
 
         public void FontSize(string propertyValue)
         {
-            if (_cssProperty.ContainsKey("vertical-align"))
+            if (_IDProperty.ContainsKey("text-position"))
             {
                 return;
             }
