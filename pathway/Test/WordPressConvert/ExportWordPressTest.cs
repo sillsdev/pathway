@@ -123,6 +123,28 @@ namespace Test.WordPressConvert
             Assert.AreEqual("", IsEqualAllButTime(FileExpected(dataSql), FileOutput(dataSql)));
         }
 
+        /// <summary>
+        ///Convert Audio file formats (wav to mp3)
+        ///</summary>
+        [Test]
+        public void AudioFileConversion()
+        {
+            string[] directoryLocalfiles;
+            string _inputAudioPath = Path.Combine(_inputPath, "AudioFiles");
+            string _outputAudioPath = Path.Combine(_outputPath, "AudioFiles");
+            directoryLocalfiles = Directory.GetFiles(_inputAudioPath);
+            if (!Directory.Exists(_outputAudioPath))
+                Directory.CreateDirectory(_outputAudioPath);
+            foreach (string directoryLocalfile in directoryLocalfiles)
+            {
+                File.Copy(directoryLocalfile, Common.PathCombine(_outputAudioPath, Path.GetFileName(directoryLocalfile)), true);
+            }
+            ConvertAudioFiletoMP3 audioFiletoMp3 = new ConvertAudioFiletoMP3();
+            audioFiletoMp3.ConvertWavtoMP3Format(_outputAudioPath);
+            directoryLocalfiles = Directory.GetFiles(_outputAudioPath);
+            Assert.AreEqual(directoryLocalfiles.Length, 2, "Audio file conversion process failed");
+        }
+
         private static string IsEqualAllButTime(string fileExpectedName, string fileOutputName)
         {
             const string pat = @"\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d";
