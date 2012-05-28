@@ -7,7 +7,15 @@ namespace SIL.PublishingSolution
 {
     public class ExportXhtmlToSqlData
     {
+        #region public class variables
+
         public PublicationInformation _projInfo;
+        public string MysqlDataFileName = string.Empty;
+
+        #endregion public class variables
+
+        #region Private class variables
+
         private int _nodeCount;
         private TextWriter _textWriter;
 
@@ -31,7 +39,8 @@ namespace SIL.PublishingSolution
         private string _taxonomyValue = string.Empty;
         private string _relationshipValue = string.Empty;
         private string _searchValue = string.Empty;
-        public string MysqlDataFileName = string.Empty;
+
+        #endregion Private class variables
 
         #region Methods
 

@@ -54,8 +54,12 @@ namespace SIL.PublishingSolution
         }
         #endregion bool Handle(string inputDataType)
 
+        #region public class variables
+
         public bool skipForNUnitTest = false;
-        
+
+        #endregion public class variables
+
         #region Private class variables
         private string _DbName;
         private string _WebUrl;
@@ -281,7 +285,6 @@ namespace SIL.PublishingSolution
         #endregion void RemovePagedStylesFromCss(string cssFile)
 
         #endregion Private Functions
-
-
+        
     }
 }

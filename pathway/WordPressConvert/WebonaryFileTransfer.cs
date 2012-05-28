@@ -42,17 +42,20 @@ namespace SIL.PublishingSolution
             ProceedFileTransfer();
         }
 
-        private void MoveAudioandPictureFile(string renameDirectory)
+        private string MoveAudioandPictureFile(string sourceDirectory)
         {
+            bool fileExists = false;
             string imageAudioRootPath = GetImageRootDirectory();
-            string ftpFolderPath = Common.PathCombine(renameDirectory, txtWebFtpFldrNme.Text);
+            string ftpFolderPath = Common.PathCombine(sourceDirectory, txtWebFtpFldrNme.Text);
             string ftpPictureFolder = Common.PathCombine(ftpFolderPath, "Pictures");
             string ftpAudioFolder = Common.PathCombine(ftpFolderPath, "AudioVisual");
             Directory.CreateDirectory(ftpPictureFolder);
             Directory.CreateDirectory(ftpAudioFolder);
 
             List<string> imageList = new List<string>();
-            if (!File.Exists(projInfo.DefaultXhtmlFileWithPath)) return;
+
+            if (!File.Exists(projInfo.DefaultXhtmlFileWithPath)) 
+                return string.Empty;
 
             var xmldoc = new XmlDocument();
             try
@@ -104,6 +107,7 @@ namespace SIL.PublishingSolution
                                     if (File.Exists(audioFullPath))
                                     {
                                         File.Copy(audioFullPath, Common.PathCombine(ftpAudioFolder, Path.GetFileName(audioFullPath)), true);
+                                        fileExists = true;
                                     }
                                 }
                             }
@@ -114,6 +118,15 @@ namespace SIL.PublishingSolution
             }
             catch (Exception ex)
             {
+            }
+
+            if (fileExists)
+            {
+                return ftpAudioFolder;
+            }
+            else
+            {
+                return string.Empty;
             }
         }
 
@@ -203,8 +216,8 @@ namespace SIL.PublishingSolution
             //string[] filePaths = Directory.GetFiles(dictionaryDirectoryPath, "*.zip");
             txtSourceFileLocation.Text = Path.Combine(dictionaryDirectoryPath, "Wordpress\\");
             string webonaryZipFile = Path.Combine(dictionaryDirectoryPath, "PathwayWebonary.zip");
-            string renameDirectory = txtSourceFileLocation.Text;
-            DirectoryInfo di = new DirectoryInfo(renameDirectory);
+            string sourceDirectory = txtSourceFileLocation.Text;
+            DirectoryInfo di = new DirectoryInfo(sourceDirectory);
             if (di.Exists)
                 di.Delete(true);
 
@@ -212,20 +225,27 @@ namespace SIL.PublishingSolution
             {
                 ZipUtil.UnZipFiles(webonaryZipFile, Path.Combine(dictionaryDirectoryPath, "Wordpress"), "", false);
             }
-            di = new DirectoryInfo(Common.PathCombine(renameDirectory, "Webonary"));
+            di = new DirectoryInfo(Common.PathCombine(sourceDirectory, "Webonary"));
 
             if (txtWebFtpFldrNme.Text.Trim() == "")
                 txtWebFtpFldrNme.Text = "WordPressWebonary";
 
             if (txtWebFtpFldrNme.Text.ToLower().Trim() != "webonary")
             {
-                di.MoveTo(Common.PathCombine(renameDirectory, txtWebFtpFldrNme.Text));
+                di.MoveTo(Common.PathCombine(sourceDirectory, txtWebFtpFldrNme.Text));
             }
 
-            MoveAudioandPictureFile(renameDirectory);
+            string audioFilePath = MoveAudioandPictureFile(sourceDirectory);
+
+            if (audioFilePath != string.Empty)
+            {
+                ConvertAudioFiletoMP3 convertAudio = new ConvertAudioFiletoMP3();
+                convertAudio.projInfo = projInfo;
+                convertAudio.ConvertWavtoMP3Format(audioFilePath);
+            }
 
             //Move the Custom.css file to wp-content\themes\webonary-zeedisplay folder
-            CopyCustomCssToFtp(renameDirectory);
+            CopyCustomCssToFtp(sourceDirectory);
 
             lblStatus.Text = "Started moving the files to FTP Location.";
 
