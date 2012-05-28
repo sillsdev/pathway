@@ -126,7 +126,9 @@ namespace Test.WordPressConvert
         /// <summary>
         ///Convert Audio file formats (wav to mp3)
         ///</summary>
+        [Ignore]
         [Test]
+        [Category("SkipOnTeamCity")]
         public void AudioFileConversion()
         {
             string[] directoryLocalfiles;
