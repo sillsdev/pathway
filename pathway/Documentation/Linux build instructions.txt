@@ -2,7 +2,7 @@ SETTING UP GIT CLIENT
 ---------------------
 In order to make git work on Linux, I had to use
 sudo apt-get -y install git git-gui gitk
-This installs the git client.
+This installs the git client. (Note that on Lucid git-arch must be used instead of git.)
 Then you can create a .netrc file in your home folder as described on the google code site.
 Then you can use the command on the google code site to clone a copy of the repo.
 For my machine I created a folder called git
@@ -18,6 +18,8 @@ sudo apt-get -y install devscripts debhelper autotools-dev mono-complete
 
 BUILDING PATHWAY
 ----------------
+If the packages has already been installed it can be removed with
+make clean clean-build
 Once this is all setup, the command to build the package is:
 debuild -eBUILD_NUMBER=1.1.2.2205 -etarget=Daily -i -us -uc -b
 It should be executed in the ~/git/pathway/pathway folder (or whereever the PublishingSolution.sln file is located).
@@ -34,4 +36,6 @@ INSTALLING
 ----------
 The .deb package will be built in the ~git/pathway folder (the parent of the one that executed the debuild command.
 If you launch this file (double click on it), you can install Pathway.
-If you are running it on a machine that has had Pathway before, you may want to remove ~/.local/share/SIL/pathway so that it resets the setting files to the latest ones.
+After installing Pathway, create the CurrentUser registry key by typing:
+ConfigurationTool
+at the terminal prompt (CTRL-ALT-T).

@@ -46,11 +46,11 @@ def IncludePunct(fullname, page=True):
     for cls,val in befPat.findall(data):
         before[cls] = val.decode('utf-8')
 ##    print 'before:',before
-    # match lines like: .complexformrefs>.xitem + .xitem:before { content: " " }
-    betPat = re.compile('\n\.([-a-zA-Z]+)\>\.xitem\s\+\s\.xitem\:before\s{\scontent:\s"([^"]*)')
+    # match lines like: .senses>.sense + .sense:before { content: "; " }
+    betPat = re.compile('\n\.([-a-zA-Z]+)\>\.([-a-zA-Z]+)\s\+\s\.\\2\:before\s{\scontent:\s"([^"]*)')
     between = {}
-    for cls,val in betPat.findall(data):
-        between[cls] = val.decode('utf-8')
+    for cls,child, val in betPat.findall(data):
+        between[cls] = (child, val.decode('utf-8'))
 ##    print 'between:',between
     # match lines like: .variant-primary-minor:after { content: " " }
     aftPat = re.compile('\n\.([-a-zA-Z]+)\:after\s{\scontent:\s"([^"]*)')
@@ -76,12 +76,13 @@ def IncludePunct(fullname, page=True):
                     first = children[0]
                     if first.attrib.has_key('class'):
                         firstcls = first.attrib['class']
-                        if firstcls == 'xitem':
+                        mchild, mval = between[cls]
+                        if firstcls == mchild:
                             for child in children[1:]:
                                 if child.text != None:
-                                    child.text = between[cls] + child.text
+                                    child.text = mval + child.text
                                 else:
-                                    child.text = between[cls]
+                                    child.text = mval
             if after.has_key(cls):
                 if len(children) > 0:
                     last = children[-1]
@@ -109,7 +110,8 @@ def IncludePunct(fullname, page=True):
     spanTag = '{%s}span' % XHTML_NAMESPACE
     firstDecl = False
     for line in data.split('\n'):
-        if line.find(':before') == -1 and line.find(':after') == -1:
+        mline = '\n' + line
+        if befPat.match(mline) == None and betPat.match(mline) == None and aftPat.match(mline) == None:
             mDecl = declPat.match(line)
             if mDecl:
                 firstDecl = True
@@ -119,7 +121,8 @@ def IncludePunct(fullname, page=True):
             elif isSpan:
                 mProp = propPat.match(line)
                 if mProp:
-                    if mProp.group(1) in ['padding-left', 'text-indent', 'margin-left', 'padding-bottom', 'padding-top']:
+                    if mProp.group(1) in ['padding-left', 'text-indent', 
+                    'margin-left', 'padding-bottom', 'padding-top']:
                         continue
             if firstDecl or page:
                 f.write(line + '\n')

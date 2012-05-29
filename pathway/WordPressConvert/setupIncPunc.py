@@ -11,7 +11,7 @@ class Target:
     def __init__(self, **kw):
         self.__dict__.update(kw)
         # for the versioninfo resources
-        self.version = "0.1.0"
+        self.version = "0.3.0"
         self.company_name = "SIL International"
         self.copyright = "2012 Greg Trihus"
         self.name = "Move punctuation from css to xhtml"
