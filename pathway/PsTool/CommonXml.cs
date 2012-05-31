@@ -595,7 +595,8 @@ namespace SIL.Tool
         /// <returns></returns>
         public static XmlNode GetXmlNode(string xmlFileNameWithPath, string xPath)
         {
-            var xmlDoc = new XmlDocument { XmlResolver = null };
+            XmlDocument xmlDoc = Common.DeclareXMLDocument();
+            
             xmlFileNameWithPath = DirectoryPathReplace(xmlFileNameWithPath);
             if (!File.Exists(xmlFileNameWithPath))
             {

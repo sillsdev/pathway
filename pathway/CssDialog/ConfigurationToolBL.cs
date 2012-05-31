@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.Globalization;
 using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
@@ -1870,9 +1871,10 @@ namespace SIL.PublishingSolution
                 xmlPath = Path.Combine(settingPath, "StyleSettings.xml");
             }
             if (!File.Exists(xmlPath)) return inputType;
-            XmlDocument xmlDoc = new XmlDocument { XmlResolver = null };
-            xmlDoc.Load(xmlPath);
 
+            XmlDocument xmlDoc = Common.DeclareXMLDocument();
+            xmlDoc.Load(xmlPath);
+            
             string xPath = "//settings/property[@name='InputType']";
 
             var node = xmlDoc.SelectSingleNode(xPath);
