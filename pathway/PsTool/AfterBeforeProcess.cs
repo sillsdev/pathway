@@ -431,7 +431,8 @@ namespace SIL.PublishingSolution
             // Psuedo Before
             foreach (ClassInfo psuedoBefore in _psuedoBefore)
             {
-                _writer.WriteString(psuedoBefore.Content);
+                string beforeContent = ReplaceLineBreakSymbol(psuedoBefore.Content);
+                _writer.WriteString(beforeContent);
             }
 
             //// Psuedo Before
@@ -556,7 +557,8 @@ namespace SIL.PublishingSolution
                     }
                     else
                     {
-                        _writer.WriteString(classInfo.Content);
+                        string afterContent = ReplaceLineBreakSymbol(classInfo.Content);
+                        _writer.WriteString(afterContent);
                     }
                     _psuedoAfter.Remove(_closeChildName);
                 }
@@ -567,6 +569,20 @@ namespace SIL.PublishingSolution
         {
             
             _writer = new XmlTextWriter(projInfo.DefaultXhtmlFileWithPath, null);
+        }
+
+        private string ReplaceLineBreakSymbol(string content)
+        {
+            if (_outputType == Common.OutputType.ODT || _outputType == Common.OutputType.ODT)
+            {
+                string uniCode = Common.ConvertStringToUnicode(content);
+                if (uniCode.IndexOf("2028") > 0)
+                {
+                    return "<text:line-break/>";
+                }
+            }
+            return content;
+
         }
     }
 }

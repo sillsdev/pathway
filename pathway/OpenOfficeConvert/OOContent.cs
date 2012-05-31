@@ -1039,7 +1039,15 @@ namespace SIL.PublishingSolution
                 {
                     _pseudoSingleSpace = false;
                     _isWhiteSpace = false;
-                    _writer.WriteString(content);
+                    if (content.IndexOf(@"text:line-break/") >= 0)
+                    {
+                        _writer.WriteRaw(content);
+                    }
+                    else
+                    {
+                        _writer.WriteString(content);
+                    }
+                    
                     if(content.LastIndexOf(" ") == content.Length - 1)
                     {
                         _pseudoSingleSpace = true;

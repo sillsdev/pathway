@@ -1,0 +1,104 @@
+.cover{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} .dummypage{page-break-after: always;} 
+.cover{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;} .dummypage{page-break-after: always;} 
+div[lang='en']{ font-family: "Times New Roman";}
+span[lang='en']{ font-family: "Times New Roman";}
+div[lang='tpi']{ font-family: "Times New Roman";}
+span[lang='tpi']{ font-family: "Times New Roman";}
+div[lang='kup']{ font-family: "Charis SIL";}
+span[lang='kup']{ font-family: "Charis SIL";}
+
+.dicBody {
+}
+
+.entry {
+    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-size: 12pt;	/* inherited */
+    padding-left: 9pt;
+    border-style: solid;
+    border-top-width: 0pt;
+    border-bottom-width: 0pt;
+    border-left-width: 0pt;
+    border-right-width: 0pt;
+    text-indent: -22.677pt;
+    margin-left: 22.677pt;
+    padding-bottom: 2pt;
+    padding-top: 1pt;
+    counter-reset: sense;
+}
+
+.definition {
+    /* lang = 'en' */
+}
+.definition:before { content: " " }
+.definition:after { content: " " }
+.example {
+    /* lang = 'kup' */
+    /* explicit FieldWorks style = 'Dictionary-Vernacular' */
+    font-family: "Charis SIL", serif;	/* default Serif font */
+    font-size: 12pt;	/* cascaded environment */
+    font-style: italic;
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.example:before { content: " " }
+.example:after { content: " " }
+.example>.xitem + .xitem:before { content: " " }
+.examples {
+}
+.examples:after { content: " " }
+.examples>.xitem + .xitem:before { content: "  " }
+.headword {
+    /* lang = 'kup' */
+    /* explicit FieldWorks style = 'Dictionary-Headword' */
+    font-family: "Charis SIL", serif;	/* default Serif font */
+    font-size: 12pt;	/* cascaded environment */
+    font-weight: bold;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    string-set: guideword content();
+}
+.headword:after { content: "  " }
+.headword>.xitem + .xitem:before { content: " " }
+.translation {
+    /* lang = 'en' */
+}
+.translation:before { content: " " }
+.translation:after { content: " " }
+.translation>.xitem + .xitem:before { content: " " }
+
+
+.letData {
+       column-count: 2; -moz-column-count: 2;
+       column-gap: 12pt; -moz-column-gap: 12pt;
+       column-fill: balance;
+}
+
+
+.letData {
+       column-rule: solid 1pt #808080;
+}
+.letHead {
+       border-bottom: .5pt solid #808080;
+       margin: 18pt 9pt;
+       /* padding-bottom: 36pt; */
+       /* padding-top: 36pt; */
+}
+
+.Section_Head {
+page-break-after:avoid;
+}
+.Chapter_Number {
+page-break-after:avoid;
+}
+.Parallel_Passage_Reference {
+page-break-after:avoid;
+}
+.Section_Head {
+page-break-after:avoid;
+}
+.Chapter_Number {
+page-break-after:avoid;
+}
+.Parallel_Passage_Reference {
+page-break-after:avoid;
+}
