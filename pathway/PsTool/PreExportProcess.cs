@@ -2721,9 +2721,9 @@ namespace SIL.Tool
                 string xPath = "//xhtml:span[@lang='fr-Zxxx-x-audio']";
                 XmlNodeList chapterSectionIDs = xdoc.SelectNodes(xPath, namespaceManager);
                 if (chapterSectionIDs == null) return;
-                for (int i = 0; i < chapterSectionIDs.Count - 1; i++)
+                for (int i = 0; i < chapterSectionIDs.Count; i++)
                 {
-                    chapterSectionIDs[i].InnerText = "AudioVisual/" + chapterSectionIDs[i].InnerText.Trim();
+                    chapterSectionIDs[i].InnerText = "[audio src = \"" + chapterSectionIDs[i].InnerText.Trim().Replace(" ", "%20") + "\" options=\"controls\"]";
                 }
                 xdoc.Save(_xhtmlFileNameWithPath);
             }

@@ -810,6 +810,9 @@ namespace TestBed
             projInfo.ProjectFileWithPath = projInfo.ProjectPath;
             projInfo.DictionaryPath = projInfo.ProjectPath;
 
+            ExportWordPress exportWS = new ExportWordPress();
+            exportWS.Export(projInfo);
+
             //ExportWordPress XhtmlToBlog = new ExportWordPress();
             //XhtmlToBlog.Export(projInfo);
             //MessageBox.Show("Xhtml has been Exported.");
