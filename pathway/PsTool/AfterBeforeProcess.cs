@@ -573,6 +573,8 @@ namespace SIL.PublishingSolution
 
         private string ReplaceLineBreakSymbol(string content)
         {
+            if (content == null) return string.Empty;
+
             if (_outputType == Common.OutputType.ODT || _outputType == Common.OutputType.ODT)
             {
                 string uniCode = Common.ConvertStringToUnicode(content);
