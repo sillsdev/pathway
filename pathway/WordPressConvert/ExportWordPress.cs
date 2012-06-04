@@ -80,7 +80,7 @@ namespace SIL.PublishingSolution
                 GetWebonaryDetailsFromXml();
                 PreExportProcess preProcessor = new PreExportProcess(projInfo);
                 projInfo.ProjectPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
-                preProcessor.InsertFolderNameForAudioFilesinXhtml(_webFtpFldrNme);
+                preProcessor.InsertFolderNameForAudioFilesinXhtml();
                 InsertBeforeAfterInXHTML(projInfo);
 
                 //const string prog = "WordPress.bat";
