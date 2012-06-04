@@ -61,9 +61,9 @@ namespace SIL.PublishingSolution
         #endregion public class variables
 
         #region Private class variables
-        private string _DbName;
-        private string _WebUrl;
-        private string _WebFtpFldrNme;
+        private string _dbName;
+        private string _webUrl;
+        private string _webFtpFldrNme;
         #endregion Private class variables
 
         #region bool Export(PublicationInformation projInfo)
@@ -77,9 +77,10 @@ namespace SIL.PublishingSolution
             try
             {
                 var xhtml = projInfo.DefaultXhtmlFileWithPath;
+                GetWebonaryDetailsFromXml();
                 PreExportProcess preProcessor = new PreExportProcess(projInfo);
                 projInfo.ProjectPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
-                preProcessor.InsertFolderNameForAudioFilesinXhtml();
+                preProcessor.InsertFolderNameForAudioFilesinXhtml(_webFtpFldrNme);
                 InsertBeforeAfterInXHTML(projInfo);
 
                 //const string prog = "WordPress.bat";
@@ -121,37 +122,6 @@ namespace SIL.PublishingSolution
         #endregion bool Export(PublicationInformation projInfo)
 
         #region Private Functions
-
-        #region void GetParameters()
-        /// <summary>
-        /// Loads values needed to create data for site from Settings file
-        /// </summary>
-        private void GetParameters()
-        {
-            Param.LoadSettings();
-            XmlNodeList baseNode1 = Param.GetItems("//styles/web/style[@name='" + "OneWeb" + "']/styleProperty");
-
-            foreach (XmlNode VARIABLE in baseNode1)
-            {
-                string attribName = VARIABLE.Attributes["name"].Value.ToLower();
-                string attribValue = VARIABLE.Attributes["value"].Value;
-                switch (attribName)
-                {
-                    case "dbname":
-                        _DbName = attribValue;
-                        break;
-                    case "weburl":
-                        _WebUrl = attribValue;
-                        break;
-                    case "webftpfldrnme":
-                        _WebFtpFldrNme = attribValue;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-        #endregion void GetParameters()
         
         #region Handle After Before
         /// <summary>
@@ -283,6 +253,30 @@ namespace SIL.PublishingSolution
             File.Move(cssFile + ".tmp", cssFile);
         }
         #endregion void RemovePagedStylesFromCss(string cssFile)
+
+        private void GetWebonaryDetailsFromXml()
+        {
+            Param.LoadSettings();
+            XmlNodeList baseNode1 = Param.GetItems("//styles/web/style[@name='" + "OneWeb" + "']/styleProperty");
+            HashUtilities hashUtil = new HashUtilities();
+            hashUtil.Key = "%:#@?,*&";
+
+            // show/hide web UI controls based on the input type
+
+            foreach (XmlNode VARIABLE in baseNode1)
+            {
+                string attribName = VARIABLE.Attributes["name"].Value.ToLower();
+                string attribValue = VARIABLE.Attributes["value"].Value;
+                switch (attribName)
+                {
+                    case "webftpfldrnme":
+                        _webFtpFldrNme = attribValue;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
 
         #endregion Private Functions
         

@@ -103,7 +103,11 @@ namespace SIL.PublishingSolution
                                 if (name != null && name.IndexOf("-audio") > 0)
                                 {
                                     string audioFile = item.InnerText.Trim();
-                                    string audioFullPath = Common.PathCombine(imageAudioRootPath, audioFile);
+                                    audioFile = Common.RightRemove(audioFile, "\" o");
+                                    audioFile = Common.LeftRemove(audioFile, "AudioVisual/");
+                                    audioFile = audioFile.Replace("%20", " ");                                    
+                                    string audioPath = Common.PathCombine(imageAudioRootPath, "AudioVisual");
+                                    string audioFullPath = Common.PathCombine(audioPath, audioFile);
                                     if (File.Exists(audioFullPath))
                                     {
                                         File.Copy(audioFullPath, Common.PathCombine(ftpAudioFolder, Path.GetFileName(audioFullPath)), true);

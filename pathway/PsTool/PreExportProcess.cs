@@ -2716,7 +2716,7 @@ namespace SIL.Tool
                 if (chapterSectionIDs == null) return;
                 for (int i = 0; i < chapterSectionIDs.Count; i++)
                 {
-                    chapterSectionIDs[i].InnerText = "[audio src = \"" + chapterSectionIDs[i].InnerText.Trim().Replace(" ", "%20") + "\" options=\"controls\"]";
+                    chapterSectionIDs[i].InnerText = "[audio src = \"" + "AudioVisual/" + chapterSectionIDs[i].InnerText.Trim().Replace(" ", "%20") + "\" options=\"controls\"]";
                 }
                 xdoc.Save(_xhtmlFileNameWithPath);
             }
