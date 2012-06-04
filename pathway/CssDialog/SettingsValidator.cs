@@ -748,8 +748,13 @@ namespace SIL.PublishingSolution
                 const string methodname = "ConfigureDictionary";
                 const string xPath = "//stylePick/settings/property[@name=\"ConfigureDictionary\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
-                if (childNode.Attributes["value"] == null) return false;
+                
+                if (childNode == null)
+                    return false;
+                               
+                
                 string result = childNode.Attributes["value"].Value;
+
                 if (!boolValue.Contains(result))
                 {
                     errorTag = methodname;
