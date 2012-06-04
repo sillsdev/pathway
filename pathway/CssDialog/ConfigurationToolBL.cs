@@ -1872,7 +1872,7 @@ namespace SIL.PublishingSolution
             }
             if (!File.Exists(xmlPath)) return inputType;
 
-            XmlDocument xmlDoc = Common.DeclareXMLDocument();
+            XmlDocument xmlDoc = Common.DeclareXMLDocument(false);
             xmlDoc.Load(xmlPath);
             
             string xPath = "//settings/property[@name='InputType']";

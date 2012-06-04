@@ -168,11 +168,12 @@ namespace SIL.PublishingSolution
         protected void OpenXhtmlFile(string xhtmlFileWithPath)
         {
             _psuedoBeforeStyle = _psuedoAfterStyle = _psuedoContainsStyle = null;
-            _reader = new XmlTextReader(xhtmlFileWithPath)
-                          {
-                              XmlResolver = null,
-                              WhitespaceHandling = WhitespaceHandling.Significant
-                          };
+            //_reader = new XmlTextReader(xhtmlFileWithPath)
+                          //{
+                              //XmlResolver = null,
+                              //WhitespaceHandling = WhitespaceHandling.Significant
+                          //};
+	     _reader = Common.DeclareXmlTextReader(xhtmlFileWithPath, true);
         }
 
         protected bool IsEmptyNode()

@@ -1168,7 +1168,8 @@ namespace SIL.PublishingSolution
 
         private static void IncludeTextinMacro(string strMacroPath, string ReferenceFormat, string saveAsPath, bool runMacroFirstTime, string isCoverImageInserted)
         {
-            var xmldoc = new XmlDocument { XmlResolver = null };
+            //var xmldoc = new XmlDocument { XmlResolver = null };
+	    var xmldoc = Common.DeclareXMLDocument(false);
             xmldoc.Load(strMacroPath);
             XmlElement ele = xmldoc.DocumentElement;
             string autoMacro = "False";

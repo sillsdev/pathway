@@ -128,7 +128,8 @@ namespace SIL.Tool
         {
             if (!File.Exists(fileName)) return string.Empty;
             string metaName = string.Empty;
-            var reader = new XmlTextReader(fileName) { XmlResolver = null, WhitespaceHandling = WhitespaceHandling.Significant };
+            //var reader = new XmlTextReader(fileName) { XmlResolver = null, WhitespaceHandling = WhitespaceHandling.Significant };
+	    XmlTextReader reader = Common.DeclareXmlTextReader(fileName, true);
             while (reader.Read())
             {
                 if (reader.IsEmptyElement)
@@ -595,7 +596,7 @@ namespace SIL.Tool
         /// <returns></returns>
         public static XmlNode GetXmlNode(string xmlFileNameWithPath, string xPath)
         {
-            XmlDocument xmlDoc = Common.DeclareXMLDocument();
+            XmlDocument xmlDoc = Common.DeclareXMLDocument(false);
             
             xmlFileNameWithPath = DirectoryPathReplace(xmlFileNameWithPath);
             if (!File.Exists(xmlFileNameWithPath))

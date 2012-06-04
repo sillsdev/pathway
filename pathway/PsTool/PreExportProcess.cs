@@ -531,7 +531,7 @@ namespace SIL.Tool
             if (!File.Exists(_xhtmlFileNameWithPath)) return string.Empty; // can't obtain list of books / letters
             // load the xhtml file we're working with
 
-            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
@@ -751,7 +751,7 @@ namespace SIL.Tool
 
             try
             {
-                XmlDocument xmldoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
+                XmlDocument xmldoc = Common.DeclareXMLDocument(true);
                 XmlNode coverImageNode = null;
                 XmlNode coverTitleNode = null;
                 FileStream fs = File.OpenRead(inputXhtmlFilePath);
@@ -842,7 +842,7 @@ namespace SIL.Tool
                 //COPYRIGHT 
                 if (File.Exists(copyRightFilePath))
                 {
-                    XmlDocument crdoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
+                    XmlDocument crdoc = Common.DeclareXMLDocument(true);
                     crdoc.Load(copyRightFilePath);
                     XmlNodeList copyRightFile = crdoc.GetElementsByTagName(tag);
 
@@ -941,7 +941,7 @@ namespace SIL.Tool
 
             try
             {
-                XmlDocument xmldoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
+                XmlDocument xmldoc = Common.DeclareXMLDocument(true);
                 XmlNode coverImageNode = null;
                 XmlNode coverTitleNode = null;
                 FileStream fs = File.OpenRead(inputXhtmlFilePath);
@@ -1030,7 +1030,7 @@ namespace SIL.Tool
                 //COPYRIGHT 
                 if (File.Exists(copyRightFilePath))
                 {
-                    XmlDocument crdoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
+                    XmlDocument crdoc = Common.DeclareXMLDocument(true);
                     crdoc.Load(copyRightFilePath);
                     XmlNodeList copyRightFile = crdoc.GetElementsByTagName(tag);
 
@@ -1119,7 +1119,7 @@ namespace SIL.Tool
 
             try
             {
-                XmlDocument xmldoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
+                XmlDocument xmldoc = Common.DeclareXMLDocument(true);
                 XmlNode coverImageNode = null;
                 XmlNode coverTitleNode = null;
                 FileStream fs = File.OpenRead(inputXhtmlFilePath);
@@ -1159,7 +1159,7 @@ namespace SIL.Tool
                 
                 if (File.Exists(copyRightFilePath))
                 {
-                    XmlDocument crdoc = new XmlDocument {XmlResolver = null, PreserveWhitespace = true};
+                    XmlDocument crdoc = Common.DeclareXMLDocument(true);
                     crdoc.Load(copyRightFilePath);
                     XmlNodeList copyRightFile = crdoc.GetElementsByTagName(tag);
 
@@ -1359,7 +1359,7 @@ namespace SIL.Tool
             // xml image copy
             try
             {
-                xmldoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
+                xmldoc = Common.DeclareXMLDocument(true);
                 xmldoc.Load(tempFile);
 
                 const string tag = "img";
@@ -1439,7 +1439,8 @@ namespace SIL.Tool
             // xml image copy
             try
             {
-                xmldoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
+                //xmldoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
+                xmldoc = Common.DeclareXMLDocument(true);
                 xmldoc.Load(tempFile);
 
                 const string tag = "img";
@@ -1530,11 +1531,12 @@ namespace SIL.Tool
         {
             bool isHeadword = false;
             List<string> headerVariable = new List<string>();
-            XmlTextReader _reader = new XmlTextReader(_xhtmlFileNameWithPath)
-                {
-                    XmlResolver = null,
-                    WhitespaceHandling = WhitespaceHandling.Significant
-                };
+            //XmlTextReader _reader = new XmlTextReader(_xhtmlFileNameWithPath)
+                //{
+                    //XmlResolver = null,
+                    //WhitespaceHandling = WhitespaceHandling.Significant
+                //};
+               XmlTextReader _reader = Common.DeclareXmlTextReader(_xhtmlFileNameWithPath, true);
                 while (_reader.Read())
                 {
                     if (_reader.NodeType == XmlNodeType.Element)
@@ -1642,7 +1644,7 @@ namespace SIL.Tool
             try
             {
                 const string tag = "a";
-                var xDoc = new XmlDocument { XmlResolver = null };
+                XmlDocument xDoc = Common.DeclareXMLDocument(false);
                 xDoc.Load(sourceFile);
                 XmlNodeList nodeList = xDoc.GetElementsByTagName(tag);
                 if (nodeList.Count > 0)
@@ -1747,12 +1749,7 @@ namespace SIL.Tool
         /// </summary>
         public string RewriteXhtml()
         {
-            XmlTextReader reader = new XmlTextReader(_xhtmlFileNameWithPath)
-            {
-                XmlResolver = null,
-                WhitespaceHandling = WhitespaceHandling.Significant
-            };
-
+            XmlTextReader reader = Common.DeclareXmlTextReader(_xhtmlFileNameWithPath, true);
             string fileDir = Path.GetDirectoryName(_xhtmlFileNameWithPath);
             string fileName = "Preserve" + Path.GetFileName(_xhtmlFileNameWithPath);
             string Newfile = Path.Combine(fileDir, fileName);
@@ -1889,7 +1886,7 @@ namespace SIL.Tool
 
         public string GoBibleRearrangeVerseNumbers(string fileName)
         {
-            var xDoc = new XmlDocument { XmlResolver = null };
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
             xDoc.Load(fileName);
             XmlNodeList nodeList = xDoc.GetElementsByTagName("div");
             XmlNode nodeContent = xDoc.CreateElement("div");
@@ -1989,7 +1986,7 @@ namespace SIL.Tool
 
         public string InsertSectionHeadID()
         {
-            var xDoc = new XmlDocument { XmlResolver = null };
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
             xDoc.Load(_xhtmlFileNameWithPath);
             XmlNodeList nodeList = xDoc.GetElementsByTagName("span");
             if (nodeList.Count > 0)
@@ -2040,7 +2037,7 @@ namespace SIL.Tool
 
         public string InsertHiddenChapterNumber()
         {
-            var xDoc = new XmlDocument { XmlResolver = null };
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
             xDoc.Load(_xhtmlFileNameWithPath);
             XmlNodeList nodeList = xDoc.GetElementsByTagName("span");
             if (nodeList.Count > 0)
@@ -2077,7 +2074,7 @@ namespace SIL.Tool
 
         public string InsertHiddenVerseNumber()
         {
-            var xDoc = new XmlDocument { XmlResolver = null };
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
             xDoc.Load(_xhtmlFileNameWithPath);
             XmlNodeList nodeList = xDoc.GetElementsByTagName("span");
             if (nodeList.Count > 0)
@@ -2121,7 +2118,7 @@ namespace SIL.Tool
         /// <returns></returns>
         public string GetLanguageCode()
         {
-            var xDoc = new XmlDocument { XmlResolver = null };
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
             xDoc.Load(_xhtmlFileNameWithPath);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
@@ -2178,7 +2175,7 @@ namespace SIL.Tool
         public bool GetMultiLanguageHeader()
         {
             bool isFound = false;
-            var xDoc = new XmlDocument { XmlResolver = null };
+            var xDoc = Common.DeclareXMLDocument(false);
             xDoc.Load(_xhtmlFileNameWithPath);
             XmlNodeList nodeList = xDoc.GetElementsByTagName("div");
             if (nodeList.Count > 0)
@@ -2219,7 +2216,7 @@ namespace SIL.Tool
         /// <returns></returns>
         public string GetDefinitionLanguage()
         {
-            var xDoc = new XmlDocument { XmlResolver = null };
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
             xDoc.Load(_xhtmlFileNameWithPath);
             XmlNodeList nodeList = xDoc.GetElementsByTagName("div");
             if (nodeList.Count > 0)
@@ -2265,7 +2262,7 @@ namespace SIL.Tool
         {
             try
             {
-                var xDoc = new XmlDocument { XmlResolver = null };
+                XmlDocument xDoc = Common.DeclareXMLDocument(false);
                 xDoc.Load(_xhtmlFileNameWithPath);
                 XmlNodeList nodeList = xDoc.GetElementsByTagName("figure");
                 if (nodeList.Count > 0)
@@ -2371,7 +2368,7 @@ namespace SIL.Tool
         {
             try
             {
-                var xDoc = new XmlDocument { XmlResolver = null };
+		        var xDoc = Common.DeclareXMLDocument(false);
                 xDoc.Load(_xhtmlFileNameWithPath);
                 XmlNodeList nodeList = xDoc.GetElementsByTagName("meta");
                 if (nodeList.Count > 0)
@@ -2404,11 +2401,7 @@ namespace SIL.Tool
 
         public void GetReferenceList(List<string> sourceList, List<string> targetList)
         {
-            XmlTextReader _reader = new XmlTextReader(_xhtmlFileNameWithPath)
-                                        {
-                                            XmlResolver = null,
-                                            WhitespaceHandling = WhitespaceHandling.Significant
-                                        };
+            XmlTextReader _reader = Common.DeclareXmlTextReader(_xhtmlFileNameWithPath, true);
             while (_reader.Read())
             {
                 if (_reader.NodeType == XmlNodeType.Element)
@@ -2691,7 +2684,7 @@ namespace SIL.Tool
         public string GetDictionaryLetterCount()
         {
             string lastLetterString = string.Empty;
-            var xDoc = new XmlDocument { XmlResolver = null };
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
             xDoc.Load(_xhtmlFileNameWithPath);
             XmlNodeList nodeList = xDoc.GetElementsByTagName("div");
             if (nodeList.Count > 0)
@@ -2714,7 +2707,7 @@ namespace SIL.Tool
         {
             try
             {
-                XmlDocument xdoc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
+                XmlDocument xdoc = Common.DeclareXMLDocument(true);
                 XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xdoc.NameTable);
                 namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
                 xdoc.Load(_xhtmlFileNameWithPath);

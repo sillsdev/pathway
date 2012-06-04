@@ -558,7 +558,8 @@ namespace SIL.PublishingSolution
             if (_xmldoc == null)
             {
                 File.Copy(sourceFile, _tempFile, true);
-                _xmldoc = new XmlDocument { XmlResolver = null };
+                //_xmldoc = new XmlDocument { XmlResolver = null };
+		_xmldoc = Common.DeclareXMLDocument(false);
                 _xmldoc.Load(_tempFile);
             }
         }
@@ -608,11 +609,12 @@ namespace SIL.PublishingSolution
             //DateTime startTime = DateTime.Now;
             try
             {
-                _reader = new XmlTextReader(Sourcefile)
-                              {
-                                  XmlResolver = null,
-                                  WhitespaceHandling = WhitespaceHandling.Significant
-                              };
+                //_reader = new XmlTextReader(Sourcefile)
+                              //{
+                                  //XmlResolver = null,
+                                  //WhitespaceHandling = WhitespaceHandling.Significant
+                              //};
+                _reader = Common.DeclareXmlTextReader(Sourcefile, true);
                 //CreateBody();
                 bool headXML = true;
                 while (_reader.Read())

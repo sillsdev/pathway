@@ -275,12 +275,12 @@ namespace SIL.Tool
 
         private void OpenFile(string filePath)
         {
-            _reader = new XmlTextReader(filePath)
-                                       {
-                                           XmlResolver = null,
-                                           WhitespaceHandling = WhitespaceHandling.Significant
-                                       };
-
+            //_reader = new XmlTextReader(filePath)
+            //                           {
+            //                               XmlResolver = null,
+            //                               WhitespaceHandling = WhitespaceHandling.Significant
+            //                           };
+            XmlTextReader _reader = Common.DeclareXmlTextReader(filePath, true);
             _fileDir = Path.GetDirectoryName(filePath);
         }
     }

@@ -1110,7 +1110,8 @@ namespace SIL.PublishingSolution
         public void GraphicContentChange(string contentFilePath,ArrayList graphicNames)
         {
             if(graphicNames.Count == 0) return;
-            var doc = new XmlDocument { PreserveWhitespace = true, XmlResolver = null };
+            //var doc = new XmlDocument { PreserveWhitespace = true, XmlResolver = null };
+	      XmlDocument doc = Common.DeclareXMLDocument(true);
            
             string file;
             if (!Common.Testing)
