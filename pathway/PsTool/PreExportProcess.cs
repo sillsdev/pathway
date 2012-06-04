@@ -1862,10 +1862,11 @@ namespace SIL.Tool
             {
                 if (replace)
                 {
-                    if (line.IndexOf("<html") >= 0)
+                    int htmlNodeStart = line.IndexOf("<html");
+                    if (htmlNodeStart >= 0)
                     {
-                        int pos = line.IndexOf(">");
-                        line = "<html" + line.Substring(pos);
+                        int htmlNodeEnd = line.IndexOf(">", htmlNodeStart);
+                        line = "<html" + line.Substring(htmlNodeEnd);
                     }
                     else if (line.IndexOf("<body") >= 0)
                     {
