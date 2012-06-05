@@ -130,6 +130,7 @@ namespace SIL.PublishingSolution
             string xhtmlFile = _projInfo.DefaultXhtmlFileWithPath;
             string headword = string.Empty;
             string letHead = string.Empty;
+            string strPost = string.Empty;
             int letDataCount = 0;
             XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
             xmlDocument.Load(xhtmlFile);
@@ -159,7 +160,7 @@ namespace SIL.PublishingSolution
                         InsertLetter(letHead, headword, letDataCount);
                         letDataCount = 0;
                     }
-                    letHead = node.FirstChild.InnerText;
+                    letHead = node.FirstChild.InnerText.Trim();
                 }
                 else if (className.ToLower() == "entry" || className.ToLower() == "minorentry")
                 {
@@ -173,11 +174,12 @@ namespace SIL.PublishingSolution
                         {
                             if (spanNode.Attributes["class"].Value.ToLower() == "headword" || spanNode.Attributes["class"].Value.ToLower() == "headword-minor")
                             {
-                                headword = spanNode.InnerText;
-                                InsertPosts(node.OuterXml.Replace("'", "''"), headword);
+                                headword = spanNode.InnerText.Trim();
+                                InsertPosts(node.OuterXml.Trim().Replace("'", "''"), headword);
                                 _intPost += 1;
                                 letDataCount += 1;
                             }
+
                             else if (spanNode.Attributes["class"].Value.ToLower() == "partofspeech")
                             {
                                 SetPartOfSpeechCount(spanNode.InnerText.Trim().ToLower());
@@ -185,7 +187,7 @@ namespace SIL.PublishingSolution
                             else if (spanNode.Attributes["class"].Value.ToLower() == "definition")
                             {
                                 _intSearch += 1;
-                                _searchValue += "(" + (_intSearch) + ", 'en', 50,'" + spanNode.InnerText.Replace("'", "''") + "')," + "\n";
+                                _searchValue += "(" + (_intSearch) + ", 'en', 50,'" + spanNode.InnerText.Trim().Replace("'", "''") + "')," + "\n";
                                 _searchValue += "(" + (_intSearch) + ", 'ggo-Telu-IN', 70,'" + headword + "')," + "\n";
                             }
                         }
@@ -193,6 +195,7 @@ namespace SIL.PublishingSolution
                 }
             }
             InsertLetter(letHead, headword, letDataCount);
+            xmlDocument.Save(xhtmlFile);
         }
 
         private void InsertLetter(string letHead, string headword, int letDataCount)
@@ -205,7 +208,6 @@ namespace SIL.PublishingSolution
             _termValue += "(" + _intTerm + ",'" + headword + " - " + headword + "','" + headword + " - " + headword + "',0)," + "\n";
             _taxonomyValue += "(" + _intTerm + "," + _intTerm + ",'category',''," + (_intTerm - 1) + "," + letDataCount + ")," + "\n";
 
-
             for (int counter = 0; counter < letDataCount; counter++)
             {
                 _relationshipValue += "(" + (_relationId + counter) + "," + (_intTerm - 1) + ",0)," + "\n";
@@ -214,7 +216,6 @@ namespace SIL.PublishingSolution
             }
             _relationId += letDataCount;
             _intTerm += 1;
-
         }
 
         private void SetPartOfSpeechCount(string partOfSpeech)
@@ -267,7 +268,7 @@ namespace SIL.PublishingSolution
             string post_type = "post";
             string post_mime_type = "";
             int comment_count = 0;
-            _postValue += "(" + ID + "," + post_author + ",'" + post_date + "','" + post_date_gmt + "','" + post_content + "','" +
+            _postValue += "(" + ID + "," + post_author + ",'" + post_date + "','" + post_date_gmt + "','" + post_content.Replace(" "," ") + "','" +
                 post_title + "','" + post_excerpt + "','" + post_status + "','" + comment_status + "','" + ping_status + "','" + post_password +
                 "','" + post_name + "','" + to_ping + "','" + pinged + "','" + post_modified + "','" + post_modified_gmt + "','" +
                 post_content_filtered + "'," + post_parent + ",'" + guid + "'," + menu_order + ",'" + post_type + "','" +
