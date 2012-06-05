@@ -154,7 +154,7 @@ namespace SIL.PublishingSolution
         private bool _isEmptyTitleExist;
         private int _titleCounter=1;
         private int _pageWidth;
-
+        private bool IsEmptyElement = false;
         private string _originalXHTML = string.Empty;
 
         Dictionary<string, string> _pageSize = new Dictionary<string, string>();
@@ -298,7 +298,10 @@ namespace SIL.PublishingSolution
             bool headXML = true;
             while (_reader.Read())
             {
-
+                if (_reader.IsEmptyElement)
+                {
+                        IsEmptyElement = true;
+                }
                 switch (_reader.NodeType)
                 {
 
@@ -490,9 +493,7 @@ namespace SIL.PublishingSolution
             }
             return result;
         }
-
-
-        
+ 
 
         /// <summary>
         /// 
@@ -500,8 +501,12 @@ namespace SIL.PublishingSolution
         /// <param name="targetPath"></param>
         private void StartElement()
         {
-            StartElementBase(_IsHeadword);
-            Psuedo();
+            if (!IsEmptyElement)
+            {
+                StartElementBase(_IsHeadword);
+                Psuedo();
+            }
+            IsEmptyElement = false;
         }
 
         private void Psuedo()
