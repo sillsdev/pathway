@@ -589,7 +589,13 @@ namespace SIL.PublishingSolution
                 //string[] filePaths = Directory.GetFiles(dictionaryDirectoryPath, "*.zip");
                 txtSourceFileLocation.Text = Path.Combine(dictionaryDirectoryPath, "Wordpress\\");
                 string webonaryZipFile = Path.Combine(dictionaryDirectoryPath, "PathwayWebonary.zip");
-                if (!File.Exists(webonaryZipFile))
+                long size = 0;
+                if(File.Exists(webonaryZipFile))
+                {
+                    size = new FileInfo(webonaryZipFile).Length / 1024;
+                }
+
+                if (!File.Exists(webonaryZipFile) || size < 1024)
                 {
                     lblStatus.Text = "Downloading the Wordpress installer.";
                     WebClient webClient = new WebClient();
