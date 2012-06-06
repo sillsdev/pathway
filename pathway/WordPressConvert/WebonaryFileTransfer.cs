@@ -541,15 +541,31 @@ namespace SIL.PublishingSolution
                         txtWebUrl.Text = attribValue;
                         break;
                     case "webadminusrnme":
+                        if(attribValue.Trim().Length == 0)
+                        {
+                            attribValue = "webuser";
+                        }
                         txtWebAdminUsrNme.Text = attribValue;
                         break;
                     case "webadminpwd":
+                        if (attribValue.Trim().Length == 0)
+                        {
+                            attribValue = "webpassword";
+                        }
                         txtWebAdminPwd.Text = hashUtil.Decrypt(attribValue);
                         break;
                     case "webadminsitenme":
+                        if (attribValue.Trim().Length == 0)
+                        {
+                            attribValue = "Webonary Site";
+                        }
                         txtWebAdminSiteNme.Text = attribValue;
                         break;
                     case "webemailid":
+                        if (attribValue.Trim().Length == 0)
+                        {
+                            attribValue = "admin@sil.org";
+                        }
                         txtWebEmailID.Text = attribValue;
                         break;
                     case "webftpfldrnme":
@@ -647,10 +663,7 @@ namespace SIL.PublishingSolution
             string address = txtWebUrl.Text;
             address = address.Replace("ftp", "http");
             address = Common.PathCombine(address, txtWebFtpFldrNme.Text);
-            using (Process.Start(address + "/"))
-            {
-
-            }
+            Process.Start(address + "/");
             this.Close();
         }
 
