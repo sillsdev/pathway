@@ -666,10 +666,13 @@ namespace SIL.PublishingSolution
 
             progressBar.Value = 100;
 
-            string address = txtWebUrl.Text;
-            address = address.Replace("ftp", "http");
-            address = Common.PathCombine(address, txtWebFtpFldrNme.Text);
-            Process.Start(address + "/");
+            try
+            {
+                string address = txtWebUrl.Text;
+                address = address.Replace("ftp", "http");
+                address = Common.PathCombine(address, txtWebFtpFldrNme.Text);
+                Process.Start(address + "/");
+            }catch{}
             this.Close();
         }
 
