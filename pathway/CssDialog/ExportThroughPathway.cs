@@ -718,14 +718,8 @@ namespace SIL.PublishingSolution
                 MessageBoxIcon.Error);
                 return;
             }
-
-            string sendUsageData = Common.GetValueFromRegistryFromCurrentUser("Software\\SIL\\Pathway", "HelpImprove");
-
-            if (sendUsageData != null && sendUsageData == "Yes")
-            {
-                UserInformation user = new UserInformation();
-                user.GetUserInformation(true);
-            }
+            
+            ProcessSendingHelpImprove();
 
             if (!File.Exists(CoverPageImagePath))
             {
@@ -762,6 +756,19 @@ namespace SIL.PublishingSolution
             Param.Write();
             //}
             this.Close();
+        }
+
+        private static void ProcessSendingHelpImprove()
+        {
+            string getApplicationPath = Common.GetApplicationPath();
+            string helpImproveCommand = Path.Combine(getApplicationPath, "HelpImprove.exe");
+            string registryPath = "Software\\SIL\\Pathway";
+
+            if (Common.GetOsName().ToLower() == "windows7")
+                registryPath = "Software\\Wow6432Node\\SIL\\Pathway";
+
+            if (File.Exists(helpImproveCommand))
+                Common.RunCommand(helpImproveCommand, string.Format("{0} {1} {2}", "204.93.172.30", registryPath, "HelpImprove"), 0);
         }
 
         #endregion Events
