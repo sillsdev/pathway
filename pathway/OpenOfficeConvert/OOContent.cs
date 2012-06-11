@@ -1466,6 +1466,8 @@ namespace SIL.PublishingSolution
                 {
                     string attrName = footCallSymb.Substring(footCallSymb.IndexOf('(') + 1, footCallSymb.Length - footCallSymb.IndexOf('(') - 2);
                     footCallSymb = _reader.GetAttribute(attrName);
+                    if (footCallSymb.Trim().Length == 0)
+                        footCallSymb = "*";
                 }
             }
         }
