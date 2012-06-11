@@ -1,4 +1,9 @@
-﻿.letData, .revData   { font-size: 12pt; }
+﻿body
+{
+  font-size: 12pt;
+}
+
+.letData, .revData   { font-size: 12pt; }
 .CmPossibility-publishDomainTypeForReversal-AbbreviationPub,
 .CmPossibility-publishDomainTypeForReversal-NamePub,
 .CmPossibility-publishSenseTypeForReversal-AbbreviationPub,

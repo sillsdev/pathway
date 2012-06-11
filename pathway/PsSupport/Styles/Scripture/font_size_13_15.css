@@ -1,3 +1,8 @@
+body
+{
+  font-size: 13pt;
+}
+
 .columns {
     font-size: 13pt;	/* cascaded environment */
     line-height: 15pt;
