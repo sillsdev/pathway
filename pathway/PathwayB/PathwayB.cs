@@ -51,7 +51,6 @@ namespace SIL.PublishingSolution
             try
             {
                 int i = 0;
-                int fileNum = 0;
                 if (args.Length == 0)
                 {
                     Usage();
@@ -344,10 +343,13 @@ namespace SIL.PublishingSolution
             if (tmpFiles.Length == 0)
             {
                 // not here - check in the "gather" subdirectory
-                tmpFiles = Directory.GetFiles(Path.Combine(projInfo.ProjectPath, "gather"), "*.sty");
-                if (tmpFiles.Length > 0)
+                if (Directory.Exists(Path.Combine(projInfo.ProjectPath, "gather"))) // edb 3/30/12 - make sure gather subdirectory exists
                 {
-                    styFile = Path.Combine(Path.Combine(projInfo.ProjectPath, "gather"), tmpFiles[0]);
+                    tmpFiles = Directory.GetFiles(Path.Combine(projInfo.ProjectPath, "gather"), "*.sty");
+                    if (tmpFiles.Length > 0)
+                    {
+                        styFile = Path.Combine(Path.Combine(projInfo.ProjectPath, "gather"), tmpFiles[0]);
+                    }
                 }
             }
             else
@@ -356,7 +358,11 @@ namespace SIL.PublishingSolution
             }
             if (styFile == null)
             {
-                throw new Exception("USFM style file (*.sty) not found. Please make sure this file is in your project directory.");
+                // edb 3/30/12 - no usfm stylesheet (*.sty) found - use the default.sty file
+                string defaultStyPath = Common.FromRegistry("default.sty");
+                var targetStyPath = Path.Combine(projInfo.ProjectPath, "default.sty");
+                File.Copy(defaultStyPath, targetStyPath, true);
+                styFile = targetStyPath;
             }
             // Work on the USFM data
             // first convert to USX);
@@ -396,32 +402,79 @@ namespace SIL.PublishingSolution
                         // Convert to USX. Uses reflection to find the ParatextShared DLL (dynamically loaded).
                         try
                         {
+                            // dynamically load the ParatextShared DLL
                             var asmLoc = ParatextInstallDir();
-                            Assembly asm = Assembly.LoadFrom(Path.Combine((asmLoc.Length == 0 ? PathwayPath.GetPathwayDir() : asmLoc), "ParatextShared.dll"));
-                            //Assembly asm = Assembly.LoadFrom(Path.Combine(PathwayPath.GetPathwayDir(), "ParatextShared.dll"));
-                            // new ScrStylesheet(styFile)
-                            Type tScrStylesheet = asm.GetType("Paratext.ScrStylesheet");
-                            Object oScrStylesheet = null;
-                            if (tScrStylesheet != null)
-                            {
-                                Object[] args = new object[1];
-                                args[0] = styFile;
-                                oScrStylesheet = Activator.CreateInstance(tScrStylesheet, args);
-                            }
-                            // UsfmToUsx.Convert
+                            //Assembly asm = Assembly.LoadFrom(Path.Combine((asmLoc.Length == 0 ? PathwayPath.GetPathwayDir() : asmLoc), "ParatextShared.dll"));
+                            Assembly asm = Assembly.Load("ParatextShared, Version=7.3.0.0, Culture=neutral, PublicKeyToken=null");
+
+                            // Try to load the UsfmToUsx class. Thie will tell us if we're using the older API (PT 7.1).
                             Type tUsfmToUsx = asm.GetType("Paratext.UsfmToUsx");
                             if (tUsfmToUsx != null)
                             {
+                                // -- OLDER API --
+                                // For PT 7.1, we're making the following calls dynamically:
+                                // UsfmToUsx converter = new UsfmToUsx(xmlw, usfm, new ScrStylesheet(styFile), false);
+                                // converter.Convert();
+
+                                // new ScrStylesheet(styFile)
+                                Type tScrStylesheet = asm.GetType("Paratext.ScrStylesheet");
+                                Object oScrStylesheet = null;
+                                if (tScrStylesheet != null)
+                                {
+                                    Object[] args2 = new object[1];
+                                    args2[0] = styFile;
+                                    oScrStylesheet = Activator.CreateInstance(tScrStylesheet, args2);
+                                }
+                                // new UsfmToUsx
                                 Object[] args = new object[4];
                                 args[0] = xmlw;
                                 args[1] = usfm;
                                 args[2] = oScrStylesheet;
                                 args[3] = false;
                                 Object oClass = Activator.CreateInstance(tUsfmToUsx, args);
+                                // UsfmToUsx.Convert
                                 Object oResult = tUsfmToUsx.InvokeMember("Convert", BindingFlags.Default | BindingFlags.InvokeMethod, null, oClass, null);
                             }
+                            else
+                            {
+                                // -- NEWER API --
+                                // PT 7.2 uses the UsfmToXml class for conversions
+                                Type tUsfmToXml = asm.GetType("Paratext.UsfmToXml");
+                                if (tUsfmToXml != null)
+                                {
+                                    // For PT 7.2, we're making the following calls dynamically:
+                                    //Paratext.ScrTextCollection.Initialize();
+                                    //Paratext.ScrText scrtext = Paratext.ScrTextCollection.Get("T4T");
+                                    //Paratext.UsfmToXml converter = new Paratext.UsfmToXml(xmlw, usfm, scrtext, false);
+                                    //converter.Convert();
+
+                                    // ScrTextCollection.Initialize()
+                                    Type tScrTextCollection = asm.GetType("Paratext.ScrTextCollection");
+                                    tScrTextCollection.InvokeMember("Initialize", BindingFlags.InvokeMethod | BindingFlags.Static | BindingFlags.Public, null, null, null);
+                                    Object oScrText = null;
+                                    if (tScrTextCollection != null)
+                                    {
+                                        // ScrTextCollection.Get(...)
+                                        Object[] args2 = new object[1];
+                                        args2[0] = projInfo.ProjectName;
+                                        oScrText = tScrTextCollection.InvokeMember("Get", BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static, null, null, args2);
+                                    }
+                                    Object[] args = new object[4];
+                                    args[0] = xmlw;
+                                    args[1] = usfm;
+                                    args[2] = oScrText;
+                                    args[3] = false;
+                                    // UsfmToXml oConverter = new Paratext.UsfmToXml(...)
+                                    Object oConverter = Activator.CreateInstance(tUsfmToXml, args);
+                                    // oConverter.Convert()
+                                    Object oResult = tUsfmToXml.InvokeMember("Convert", BindingFlags.Default | BindingFlags.InvokeMethod, null, oConverter, null);
+                                }
+                            }
+
+                            // flush the results to the xml writer
+                            xmlw.Flush();
                         }
-                        catch (FileNotFoundException ex)
+                        catch (FileNotFoundException)
                         {
                             throw new ArgumentException("USFM output depends on ParatextShared.DLL and NetLoc.DLL. Please make sure these libraries are in the Pathway installation directory.");
                         }
@@ -431,16 +484,19 @@ namespace SIL.PublishingSolution
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine(ex);
+                            throw new ArgumentException("Unable to convert USFM document. Details: " + ex.Message + " / " + ex.StackTrace);
                         }
-                        // this code can replace the entire block above, if we want to directly link instead of dynamically loading the
-                        // ParatextShared dll.
-                        //UsfmToUsx converter = new UsfmToUsx(xmlw, usfm, new ScrStylesheet(styFile), false);
-                        //converter.Convert();
-                        xmlw.Flush();
                     }
-                    docs.Add(doc);
+                    // If we got anything, add it to the list.
+                    if (doc.HasChildNodes)
+                    {
+                        docs.Add(doc);
+                    }
                 }
+            }
+            if (docs.Count == 0)
+            {
+                throw new Exception("Unable to convert USFM documents to Pathway's internal XHTML format.");
             }
 
             try
@@ -483,7 +539,7 @@ namespace SIL.PublishingSolution
                         ("CombineUsxDocs", BindingFlags.Default | BindingFlags.InvokeMethod, null, oPPL, argsCombine);
                     if (string.IsNullOrEmpty(scrBooksDoc.InnerText))
                     {
-                        throw new Exception("No content found to convert.");
+                        throw new Exception("Internal error: unable to combine Usx documents.");
                     }
                     Object[] argsConvert = new object[2];
                     argsConvert[0] = scrBooksDoc.InnerXml;
@@ -492,7 +548,7 @@ namespace SIL.PublishingSolution
                 }
                 projInfo.DefaultXhtmlFileWithPath = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml");
             }
-            catch (FileNotFoundException ex)
+            catch (FileNotFoundException)
             {
                 throw new ArgumentException("USFM output depends on ParatextSupport.DLL. Please make sure this library is in the Pathway installation directory.");
             }
@@ -604,7 +660,7 @@ namespace SIL.PublishingSolution
                 projInfo.DefaultXhtmlFileWithPath = Path.Combine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml");
 
             }
-            catch (FileNotFoundException ex)
+            catch (FileNotFoundException)
             {
                 throw new ArgumentException("USFM output depends on ParatextSupport.DLL. Please make sure this library is in the Pathway installation directory.");
             }
