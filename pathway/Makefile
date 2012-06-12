@@ -8,7 +8,7 @@ ifndef bindst
 bindst=$(binsrc)/bin
 endif
 ifndef target
-target=Release7BTE
+target=Daily
 endif
 ifndef BUILD_NUMBER
 BUILD_NUMBER=1.1.2.2205
