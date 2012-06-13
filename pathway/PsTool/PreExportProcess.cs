@@ -83,6 +83,12 @@ namespace SIL.Tool
             //   a better place to put this kind of code cleanup, as it only gets called once, before the
             //   backends are launched.
             //FixInvalidXhtml();
+
+            if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe")
+            {
+                HandleTildeSymbolReplace(projInfo.DefaultXhtmlFileWithPath);
+            }
+
         }
         public string ProcessedXhtml
         {
@@ -266,6 +272,21 @@ namespace SIL.Tool
             sb.AppendLine("<div id='CoverPage' class='Cover'><img src='cover.png' alt='Cover image'/></div>");
             sb.AppendLine("<div class='Blank'></div>");
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// Task to replace tilde symbol to no-break space when the output produced from Paratext
+        /// </summary>
+        /// <param name="xhtmlFileName">Input XHTML file</param>
+        private void HandleTildeSymbolReplace(string xhtmlFileName)
+        {
+            if (!File.Exists(xhtmlFileName))
+            {
+                return;
+            }
+            const string searchText = "~";
+            const string replaceText = " "; // space for no-breaking word
+            Common.StreamReplaceInFile(_xhtmlFileNameWithPath, searchText, replaceText);
         }
 
         /// <summary>
