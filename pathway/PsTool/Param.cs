@@ -728,7 +728,6 @@ namespace SIL.PublishingSolution
             {
                 val = Common.DirectoryPathReplaceWithSlash(val);
                 Debug.Assert(Value.ContainsKey(id), "Invalid id: " + id);
-                if (Value[id] == val) return;
                 Value[id] = val;
                 var node = xmlMap.SelectSingleNode(string.Format("stylePick/settings/property[@name=\"{0}\"]", id));
                 Debug.Assert(node != null && node.Attributes != null);
