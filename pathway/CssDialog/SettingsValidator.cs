@@ -48,6 +48,7 @@ namespace SIL.PublishingSolution
         {
             StyleSettings, DictionaryStyleSettings, ScriptureStyleSettings
         }
+        private string fileNamewithPath = string.Empty;
         private static bool _fromPlugin;
         private string currentValidatingFileName = string.Empty;
         private bool isCopySettingsFile = false;
@@ -93,12 +94,12 @@ namespace SIL.PublishingSolution
 
             if (inputtype == Common.ProjectType.Dictionary.ToString())
             {
-                string fileNamewithPath = Path.Combine(allUsersPathWithoutFileName, FileName.DictionaryStyleSettings + ".xml");
+                fileNamewithPath = Path.Combine(allUsersPathWithoutFileName, FileName.DictionaryStyleSettings + ".xml");
                 if (File.Exists(fileNamewithPath)) ProcessDictionarySettingFile(fileNamewithPath, inputtype);
             }
             else
             {
-                string fileNamewithPath = Path.Combine(allUsersPathWithoutFileName, FileName.ScriptureStyleSettings + ".xml");
+                fileNamewithPath = Path.Combine(allUsersPathWithoutFileName, FileName.ScriptureStyleSettings + ".xml");
                 if (File.Exists(fileNamewithPath)) ProcessScriptureSettingFile(fileNamewithPath, inputtype);
             }
             return isProcessSucess;
@@ -748,17 +749,19 @@ namespace SIL.PublishingSolution
                 const string methodname = "ConfigureDictionary";
                 const string xPath = "//stylePick/settings/property[@name=\"ConfigureDictionary\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
-                
-                if (childNode == null)
-                    return false;
-                               
-                
-                string result = childNode.Attributes["value"].Value;
 
-                if (!boolValue.Contains(result))
-                {
-                    errorTag = methodname;
+                if (childNode == null && fileNamewithPath.ToLower().IndexOf("dictionary") > 0)
                     return false;
+
+                if (childNode != null)
+                {
+                    string result = childNode.Attributes["value"].Value;
+
+                    if (!boolValue.Contains(result))
+                    {
+                        errorTag = methodname;
+                        return false;
+                    }
                 }
             }
             catch { }

@@ -117,6 +117,7 @@ namespace SIL.PublishingSolution
         protected string _styleName;
         protected string _previousStyleName;
         protected string _fileProduce = "One";
+        protected bool _fixedLineHeight = false;
         protected string _tocLevel = "2 - Book and Chapter";
         protected string _embedFonts = "Yes";
         protected string _includeFontVariants = "Yes";
@@ -435,6 +436,21 @@ namespace SIL.PublishingSolution
                 return file.Replace("\"", "");
             }
         }
+
+        public bool FixedLineHeight
+        {
+            get
+            {
+                string task = "@page";
+                string key = "-ps-fixed-line-height";
+                if (_cssClass.ContainsKey("@page") && _cssClass[task].ContainsKey(key))
+                {
+                    return Convert.ToBoolean(_cssClass["@page"][key]);
+                }
+                return false;
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -618,7 +634,7 @@ namespace SIL.PublishingSolution
 
         public void WriteCss()
         {
-            if (MediaType.ToLower() == "web" || IsPropertyModified() == true)
+            if (MediaType.ToLower() == "web" && IsPropertyModified() == true)
             {
                 XmlNodeList baseNodeList = Param.GetItems("//styles/" + MediaType + "/style[@name='" + StyleName + "']/styleProperty");
                 HashUtilities hashUtil = new HashUtilities();
@@ -774,6 +790,7 @@ namespace SIL.PublishingSolution
                     value["margin-bottom"] = cTool.TxtPageBottom.Text;
                     value["margin-left"] = cTool.TxtPageInside.Text;
                     value["-ps-fileproduce"] = "\"" + _fileProduce + "\"";
+                    value["-ps-fixed-line-height"] = "\"" + _fixedLineHeight + "\"";
                     WriteCssClass(writeCss, "page", value);
                 }
                 // write out the changes
@@ -899,6 +916,7 @@ namespace SIL.PublishingSolution
             cTool.DdlPageColumn.SelectedItem = ColumnCount;
             cTool.DdlFontSize.SelectedItem = FontSize;
             cTool.DdlLeading.SelectedItem = Leading;
+            cTool.ChkFixedLineHeight.Checked = FixedLineHeight;
             cTool.DdlPicture.SelectedItem = Picture;
             cTool.DdlJustified.SelectedItem = JustifyUI;
             cTool.DdlPagePageSize.SelectedItem = PageSize;
@@ -3129,8 +3147,12 @@ namespace SIL.PublishingSolution
             {
                 if (control.GetType().Name == "Label") continue;
 
+                if (control.GetType().Name == "CheckBox")
+                {
+                    propertyModified = true;
+                    //break;
+                }
                 string val = control.Text;
-
                 if (_propertyValue[i++] != val)
                 {
                     propertyModified = true;
@@ -3386,7 +3408,6 @@ namespace SIL.PublishingSolution
             try
             {
                 UpdateGrid(cTool.ChkAvailable, cTool.StylesGrid);
-
             }
             catch { }
             // NOTE - Pending
@@ -3410,12 +3431,32 @@ namespace SIL.PublishingSolution
             {
                 WriteAttrib(AttribShown, sender);
                 EnableToolStripButtons(true);
-
             }
             catch { }
             // _redoundo.Set(Common.Action.Edit, StyleName, "chkAvailable", PreviousValue, cTool.cTool.ChkAvailable.Checked.ToString());
             //PreviousValue = cTool.ChkAvailable.Checked.ToString();
         }
+
+        public void chkFixedLineHeight_ValidatedBL(object sender)
+        {
+            try
+            {
+                WriteAttrib(AttribShown, sender);
+                EnableToolStripButtons(true);
+            }
+            catch { }
+        }
+
+        public void chkFixedLineHeight_CheckedChangedBL()
+        {
+            try
+            {
+                _fixedLineHeight = cTool.ChkFixedLineHeight.Checked;
+            }
+            catch { }
+        }
+
+        
 
         public void txtDesc_ValidatedBL(object sender)
         {
@@ -3689,7 +3730,7 @@ namespace SIL.PublishingSolution
                 ShowStyleInGrid(cTool.StylesGrid, _cssNames);
                 SelectRow(cTool.StylesGrid, NewStyleName);
                 WriteCss();
-                cTool.TabControl1.SelectedIndex = 0;
+                cTool.TabControl1.SelectedIndex = 0; 
                 
                 cTool.PicPreview.Visible = false;
                 cTool.BtnPrevious.Visible = false;

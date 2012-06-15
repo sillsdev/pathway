@@ -15,7 +15,7 @@ namespace SIL.PublishingSolution
         readonly Dictionary<string, string> _dictFontSize = new Dictionary<string, string>();
         readonly ArrayList _arrUnits = new ArrayList();
         private string _propertyKey = string.Empty;
-
+        private bool _isFixedLineHeightEnable = false;
         public OOMapProperty()
         {
             CreateColor();
@@ -24,10 +24,11 @@ namespace SIL.PublishingSolution
         }
 
         //TextInfo _titleCase = CultureInfo.CurrentCulture.TextInfo;
-        public Dictionary<string, string> IDProperty(Dictionary<string, string> cssProperty)
+        public Dictionary<string, string> IDProperty(Dictionary<string, string> cssProperty, bool isFixedLineHeightEnable)
         {
             _IDProperty.Clear();
             _cssProperty = cssProperty;
+            _isFixedLineHeightEnable = isFixedLineHeightEnable;
             foreach (KeyValuePair<string, string> property in cssProperty)
             {
                 // Null or Empty or inherited property - skip the property
@@ -146,7 +147,7 @@ namespace SIL.PublishingSolution
                     case "vertical-align":
                         VerticalAlign(property.Value);
                         break;
-                    case "-ps-fixed-line-height":
+                    //case "-ps-fixed-line-height":
                     case "line-height":
                         LineHeight(property.Value);
                         break;
@@ -337,8 +338,11 @@ namespace SIL.PublishingSolution
         }
 
         public void LineHeight(string propertyValue)
-        {
+          {
             _propertyKey = "line-spacing";
+            if (_isFixedLineHeightEnable)
+                _propertyKey = "line-height";
+
             if (propertyValue.IndexOf("%") > 0)
             {
                 _IDProperty[_propertyKey] = propertyValue; // refer xhtmlprocess.AssignProperty()

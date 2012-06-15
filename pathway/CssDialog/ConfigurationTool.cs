@@ -681,6 +681,10 @@ namespace SIL.PublishingSolution
             get { return txtWebFtpFldrNme; }
         }
 
+        public CheckBox ChkFixedLineHeight
+        {
+            get { return chkFixedLineHeight; }
+        }
         //private System.Windows.Forms.TableLayoutPanel TLPanelOuter;
         //private System.Windows.Forms.TableLayoutPanel TLPanel1;
         //private System.Windows.Forms.TableLayoutPanel TLPanel2;
@@ -1207,6 +1211,12 @@ namespace SIL.PublishingSolution
         private void toolStripSplitButton1_ButtonClick(object sender, EventArgs e)
         {
             _CToolBL.HelpButton_Clicked();
+        }
+
+        private void chkFixedLineHeight_CheckStateChanged(object sender, EventArgs e)
+        {
+            EditCSS(sender, e);
+            _CToolBL.chkFixedLineHeight_CheckedChangedBL();
         }
      }
 }

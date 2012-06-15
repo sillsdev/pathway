@@ -311,8 +311,10 @@ namespace SIL.PublishingSolution
                     ColumnGap(styleAttributeInfo);
                     break;
                 case "line-height":
-                case "-ps-fixed-line-height":
                     LineHeight(styleAttributeInfo);
+                    break;
+                case "-ps-fixed-line-height":
+                    FixedLineHeight(styleAttributeInfo);
                     break;
                 case "counter-increment":
                     CounterIncrement(styleAttributeInfo);
@@ -356,6 +358,11 @@ namespace SIL.PublishingSolution
         private void LineHeight(StyleAttribute styleAttributeInfo)
         {
             ValidateLineHeight(styleAttributeInfo);
+        }
+
+         private void FixedLineHeight(StyleAttribute styleAttributeInfo)
+        {
+            ValidateFixedLineHeight(styleAttributeInfo);
         }
 
         private void BorderMethod2(StyleAttribute styleAttributeInfo)
@@ -456,6 +463,12 @@ namespace SIL.PublishingSolution
                 attrValue = Common.UnitConverter(attrValue);
             }
             _cssProperty[styleAttributeInfo.Name] = attrValue;
+        }
+
+        private void ValidateFixedLineHeight(StyleAttribute styleAttributeInfo)
+        {
+            string attrValue = DeleteSeperator(styleAttributeInfo.StringValue);
+           _cssProperty[styleAttributeInfo.Name] = attrValue;
         }
 
         private void TextAlign(StyleAttribute styleAttributeInfo)

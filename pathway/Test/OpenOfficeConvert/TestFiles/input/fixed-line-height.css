@@ -1,11 +1,13 @@
 @page {
    size: 8.5in 11in;
+   -ps-fixed-line-height: "True";
 }
 .body {
 }
 .section {
 }
 .entry {
+   line-height: 14pt;
    -ps-fixed-line-height: 14pt;
 }
 .headword :after {

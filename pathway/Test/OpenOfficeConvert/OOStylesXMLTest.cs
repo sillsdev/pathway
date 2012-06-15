@@ -1284,7 +1284,7 @@ namespace Test.OpenOfficeConvert
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "entry";
-            _validate.ClassProperty.Add("style:line-spacing", "14pt");
+            _validate.ClassProperty.Add("fo:line-height", "14pt");
             returnValue = _validate.ValidateNodeAttributesNS(true);
             Assert.IsTrue(returnValue);
 
