@@ -723,6 +723,7 @@ namespace SIL.PublishingSolution
 
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             preProcessor.GetTempFolderPath();
+            preProcessor.PreserveSpace();
             preProcessor.GetfigureNode();
             preProcessor.GetDefaultLanguage(projInfo);
             preProcessor.InsertKeepWithNextOnStyles(cssFile);
@@ -780,7 +781,7 @@ namespace SIL.PublishingSolution
             preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
             if (projInfo.SwapHeadword)
                 preProcessor.SwapHeadWordAndReversalForm();
-            preProcessor.PreserveSpace();
+            
             //preProcessor.InsertKeepWithNextOnStyles();
 
             //if (_isFromExe)

@@ -1887,16 +1887,25 @@ namespace SIL.Tool
                     if (htmlNodeStart >= 0)
                     {
                         int htmlNodeEnd = line.IndexOf(">", htmlNodeStart);
-                        line = "<html" + line.Substring(htmlNodeEnd);
+                        string line1 = "<?xml version=\"1.0\" encoding=\"utf-8\"?> ";
+                        line = line1 + "<html" + line.Substring(htmlNodeEnd);
+                        sw2.WriteLine(line);
                     }
                     else if (line.IndexOf("<body") >= 0)
                     {
                         //line = line.Replace(">", @" xml:space=""preserve"">");
                         line = line.Replace("<body", @" <body xml:space=""preserve""  ");
+                        sw2.WriteLine(line);
                         replace = false;
                     }
+                    
                 }
-                sw2.WriteLine(line);
+                else
+                {
+
+                    sw2.WriteLine(line);
+                }
+                
             }
             sw2.Close();
             fs.Close();
