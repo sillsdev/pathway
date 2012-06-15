@@ -65,9 +65,7 @@ namespace SIL.PublishingSolution
         string _comma = ",";
         private bool isMultiLanguageHeader = false;
         private bool _isFromExe = false;
-
-  
-
+        private bool _isFirstODT = true;
 
         private void SplitFile(PublicationInformation publicationInformation)
         {
@@ -647,14 +645,7 @@ namespace SIL.PublishingSolution
             //afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder, 0, null);
 
             dictSecName = SplitXhtmlAsMultiplePart(projInfo, dictSecName);
-
-            if (_isFromExe)
-            {
-                PreExportProcess preProcessor = new PreExportProcess(projInfo);
-                //Preprocess XHTML & CSS for FrontMatter
-                preProcessor.InsertLoFrontMatterContent(projInfo.DefaultXhtmlFileWithPath);
-            }
-
+            
             if (dictSecName.Count > 1)
             {
                 GeneratedPdfFileName = dictSecName["Main"];
@@ -667,6 +658,17 @@ namespace SIL.PublishingSolution
             }
             
             return returnValue;
+        }
+
+        private void InsertFrontMatter(PublicationInformation projInfo)
+        {
+            if (_isFromExe && _isFirstODT)
+            {
+                PreExportProcess preProcessor = new PreExportProcess(projInfo);
+                //Preprocess XHTML & CSS for FrontMatter
+                preProcessor.InsertLoFrontMatterContent(projInfo.DefaultXhtmlFileWithPath);
+                _isFirstODT = false;
+            }
         }
 
         /// <summary>
@@ -723,7 +725,8 @@ namespace SIL.PublishingSolution
 
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
             preProcessor.GetTempFolderPath();
-            preProcessor.PreserveSpace();
+            projInfo.DefaultXhtmlFileWithPath = preProcessor.PreserveSpace();
+            InsertFrontMatter(projInfo);
             preProcessor.GetfigureNode();
             preProcessor.GetDefaultLanguage(projInfo);
             preProcessor.InsertKeepWithNextOnStyles(cssFile);
