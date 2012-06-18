@@ -76,23 +76,44 @@ namespace SIL.PublishingSolution
 
         public void SetHeaderFontName(string styleFilePath)
         {
+            //headword_entry_letData_dicBody
+
             if (styleFilePath.ToLower().IndexOf("dictionary") > 0)
-                 return;
-            
-            _styleXMLdoc = new XmlDocument();
-            _styleXMLdoc.Load(styleFilePath);
-            var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
-            nsmgr.AddNamespace("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
-            nsmgr.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
-            string xPath = "//style:style[@style:name='MT1']/style:text-properties";
-            XmlNode hdrtextPropNode = _styleXMLdoc.SelectSingleNode(xPath, nsmgr);
-            if(hdrtextPropNode != null)
             {
-                if(_childStyle.ContainsKey("scrBookName_scrBook_scrBody"))
+                _styleXMLdoc = new XmlDocument();
+                _styleXMLdoc.Load(styleFilePath);
+                var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
+                nsmgr.AddNamespace("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
+                nsmgr.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+                string xPath = "//style:style[@style:name='MT1']/style:text-properties";
+                XmlNode hdrtextPropNode = _styleXMLdoc.SelectSingleNode(xPath, nsmgr);
+                if (hdrtextPropNode != null)
                 {
-                    if (_childStyle["scrBookName_scrBook_scrBody"].ContainsKey("font-family"))
-                        hdrtextPropNode.Attributes["style:font-name-complex"].Value =
-                            _childStyle["scrBookName_scrBook_scrBody"]["font-family"];
+                    if (_childStyle.ContainsKey("headword_entry_letData_dicBody"))
+                    {
+                        if (_childStyle["headword_entry_letData_dicBody"].ContainsKey("font-family"))
+                            hdrtextPropNode.Attributes["style:font-name-complex"].Value =
+                                _childStyle["headword_entry_letData_dicBody"]["font-family"];
+                    }
+                }
+            }
+            else
+            {
+                _styleXMLdoc = new XmlDocument();
+                _styleXMLdoc.Load(styleFilePath);
+                var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
+                nsmgr.AddNamespace("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
+                nsmgr.AddNamespace("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+                string xPath = "//style:style[@style:name='MT1']/style:text-properties";
+                XmlNode hdrtextPropNode = _styleXMLdoc.SelectSingleNode(xPath, nsmgr);
+                if (hdrtextPropNode != null)
+                {
+                    if (_childStyle.ContainsKey("scrBookName_scrBook_scrBody"))
+                    {
+                        if (_childStyle["scrBookName_scrBook_scrBody"].ContainsKey("font-family"))
+                            hdrtextPropNode.Attributes["style:font-name-complex"].Value =
+                                _childStyle["scrBookName_scrBook_scrBody"]["font-family"];
+                    }
                 }
             }
         }
