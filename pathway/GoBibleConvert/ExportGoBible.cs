@@ -93,7 +93,22 @@ namespace SIL.PublishingSolution
             if (!BookDataNested(projInfo))
                 NestBookData(projInfo);
             inProcess.PerformStep();
-            Restructure(projInfo, inProcess);
+            var books = new ExportedBooks(projInfo);
+            if (books.Length == 1)
+            {
+                Restructure(projInfo, inProcess);
+            }
+            else
+            {
+                var rememberDefaultXhtml = projInfo.DefaultXhtmlFileWithPath;
+                for (int i = 0; i < books.Length; i++)
+                {
+                    books.MakeBook(i);
+                    Restructure(books.ProjInfo(i), inProcess);
+                    projInfo.DefaultXhtmlFileWithPath = rememberDefaultXhtml;
+                }
+                restructuredFullName = books.Combine();
+            }
             inProcess.PerformStep();
             if (!CreateCollection())
             {
@@ -302,8 +317,6 @@ namespace SIL.PublishingSolution
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
 
             preProcessor.GoBibleRearrangeVerseNumbers(restructuredFullName);
-
-
 
             // remove the BOM for the GoBibleCreator process (per David Haslam)
             var utf8WithoutBom = new UTF8Encoding(false);

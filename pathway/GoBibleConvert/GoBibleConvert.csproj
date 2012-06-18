@@ -211,6 +211,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExportedBooks.cs" />
     <Compile Include="ExportGoBible.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
