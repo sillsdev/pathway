@@ -1890,6 +1890,52 @@ namespace SIL.Tool
                         string line1 = "<?xml version=\"1.0\" encoding=\"utf-8\"?> ";
                         line = line1 + "<html" + line.Substring(htmlNodeEnd);
                         sw2.WriteLine(line);
+                        replace = false;
+                    }
+                }
+                else
+                {
+                    if (line.IndexOf("<body") >= 0)
+                    {
+                        //line = line.Replace(">", @" xml:space=""preserve"">");
+                        line = line.Replace("<body", @" <body xml:space=""preserve""  ");
+                    }
+                    sw2.WriteLine(line);
+                }
+            }
+            sw2.Close();
+            fs.Close();
+            fs2.Close();
+
+            _xhtmlFileNameWithPath = Newfile;
+            return _xhtmlFileNameWithPath;
+        }
+
+        public string PreserveSpace1()
+        {
+            FileStream fs = new FileStream(_xhtmlFileNameWithPath, FileMode.Open);
+            StreamReader stream = new StreamReader(fs);
+
+            string fileDir = Path.GetDirectoryName(_xhtmlFileNameWithPath);
+            string fileName = "Preserve" + Path.GetFileName(_xhtmlFileNameWithPath);
+            string Newfile = Path.Combine(fileDir, fileName);
+
+            var fs2 = new FileStream(Newfile, FileMode.Create, FileAccess.Write);
+            var sw2 = new StreamWriter(fs2);
+            string line;
+
+            bool replace = true;
+            while ((line = stream.ReadLine()) != null)
+            {
+                if (replace)
+                {
+                    int htmlNodeStart = line.IndexOf("<html");
+                    if (htmlNodeStart >= 0)
+                    {
+                        int htmlNodeEnd = line.IndexOf(">", htmlNodeStart);
+                        string line1 = "<?xml version=\"1.0\" encoding=\"utf-8\"?> ";
+                        line = line1 + "<html" + line.Substring(htmlNodeEnd);
+                        sw2.WriteLine(line);
                     }
                     else if (line.IndexOf("<body") >= 0)
                     {
