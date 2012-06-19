@@ -827,7 +827,7 @@ namespace TestBed
             webonaryMysql.CreateDatabase("CreateUser-Db.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306", "samdoss");
 
             webonaryMysql.InstallWordPressPHPPage("http://pathwaywebonary.com.cws10.my-hosting-panel.com", "samdoss123", "Sam Wordpress", "Samdoss", "arthur", "samdoss@live.com", "1");
-            
+
             webonaryMysql.Drop2reset("drop2reset.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306", "sym147_webonary");
 
             webonaryMysql.EmptyWebonary("EmptyWebonary.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306", "sym147_webonary", "http://pathwaywebonary.com.cws10.my-hosting-panel.com", "samdoss123", "Webonary Site");
@@ -835,6 +835,71 @@ namespace TestBed
             webonaryMysql.Data("data.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306", "sym147_webonary", "http://pathwaywebonary.com.cws10.my-hosting-panel.com", "samdoss123");
 
             MessageBox.Show("Data Exported to Wordpress.");
+        }
+
+        private void btnEpub_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(txtInputPath.Text))
+            {
+                MessageBox.Show("Please enter the valid XHTML path");
+                return;
+            }
+
+            if (!File.Exists(txtCSSInput.Text))
+            {
+                MessageBox.Show("Please enter the valid CSS path");
+                return;
+            }
+
+            Exportepub epub = new Exportepub();
+            PublicationInformation projInfo = new PublicationInformation();
+
+            string ProjType = "Dictionary";
+
+            if (radScripture.Checked)
+            {
+                ProjType = "Scripture";
+            }
+
+
+            projInfo.FinalOutput = "epub";
+            projInfo.ProjectInputType = ProjType;
+            projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
+            projInfo.DictionaryPath = Path.GetDirectoryName(txtInputPath.Text);
+            projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
+            projInfo.DefaultCssFileWithPath = txtCSSInput.Text;
+            projInfo.ProgressBar = new ProgressBar();
+            projInfo.DictionaryOutputName = "test";
+            
+            ProjType = Common.GetProjectType(projInfo.DefaultXhtmlFileWithPath);
+            projInfo.ProjectInputType = ProjType;
+
+            //Param.LoadSettings();
+            //Param.Value[Param.InputType] = projInfo.ProjectInputType;
+            //Param.LoadSettings();
+            //// the user has specified an output -- update the settings so we export to that output
+            ////Param.SetDefaultValue(Param.PrintVia, exportType);
+            //Param.SetValue(Param.PrintVia, "E-Book (.epub)");
+            //Param.Write();
+
+
+            //var tpe = new PsExport { Destination = "E-Book (.epub)", DataType = projInfo.ProjectInputType };
+            //tpe.ProgressBar = null;
+            //tpe.Export(projInfo.DefaultXhtmlFileWithPath);
+
+            
+            projInfo.IsReversalExist = true;
+            projInfo.IsLexiconSectionExist = true;
+            projInfo.ProjectInputType = "Dictionary";
+
+            string getDirectoryName = Path.GetFullPath(projInfo.DefaultXhtmlFileWithPath);
+            projInfo.DefaultRevCssFileWithPath = Path.Combine(getDirectoryName, "flexrev.css");
+
+            projInfo.ProjectName = "EBook (epub)_" + DateTime.Now.Date.ToShortDateString() + "_" +
+                                   DateTime.Now.Date.ToShortTimeString();
+
+            Exportepub epubConvert = new Exportepub();
+            epubConvert.Export(projInfo);
         }
     }
 }

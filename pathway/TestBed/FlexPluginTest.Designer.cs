@@ -44,6 +44,8 @@
             this.txtInputPath = new System.Windows.Forms.TextBox();
             this.Btn_InputPath = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pbWordPress = new System.Windows.Forms.ProgressBar();
+            this.btnWordPress = new System.Windows.Forms.Button();
             this.btnYouVersion = new System.Windows.Forms.Button();
             this.btnGetSoftwareData = new System.Windows.Forms.Button();
             this.btnDotNet = new System.Windows.Forms.Button();
@@ -68,8 +70,7 @@
             this.btnFileSizeZero = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.btnWordPress = new System.Windows.Forms.Button();
-            this.pbWordPress = new System.Windows.Forms.ProgressBar();
+            this.btnEpub = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -232,6 +233,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnEpub);
             this.groupBox1.Controls.Add(this.pbWordPress);
             this.groupBox1.Controls.Add(this.btnWordPress);
             this.groupBox1.Controls.Add(this.btnYouVersion);
@@ -259,6 +261,25 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Export";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // pbWordPress
+            // 
+            this.pbWordPress.Location = new System.Drawing.Point(216, 200);
+            this.pbWordPress.Name = "pbWordPress";
+            this.pbWordPress.Size = new System.Drawing.Size(196, 21);
+            this.pbWordPress.TabIndex = 70;
+            // 
+            // btnWordPress
+            // 
+            this.btnWordPress.AccessibleName = "BtnWordPress";
+            this.btnWordPress.BackColor = System.Drawing.Color.Plum;
+            this.btnWordPress.Location = new System.Drawing.Point(259, 158);
+            this.btnWordPress.Name = "btnWordPress";
+            this.btnWordPress.Size = new System.Drawing.Size(95, 28);
+            this.btnWordPress.TabIndex = 69;
+            this.btnWordPress.Text = "Word Press";
+            this.btnWordPress.UseVisualStyleBackColor = false;
+            this.btnWordPress.Click += new System.EventHandler(this.btnWordPress_Click);
             // 
             // btnYouVersion
             // 
@@ -523,24 +544,17 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // btnWordPress
+            // btnEpub
             // 
-            this.btnWordPress.AccessibleName = "BtnWordPress";
-            this.btnWordPress.BackColor = System.Drawing.Color.Plum;
-            this.btnWordPress.Location = new System.Drawing.Point(259, 158);
-            this.btnWordPress.Name = "btnWordPress";
-            this.btnWordPress.Size = new System.Drawing.Size(95, 28);
-            this.btnWordPress.TabIndex = 69;
-            this.btnWordPress.Text = "Word Press";
-            this.btnWordPress.UseVisualStyleBackColor = false;
-            this.btnWordPress.Click += new System.EventHandler(this.btnWordPress_Click);
-            // 
-            // pbWordPress
-            // 
-            this.pbWordPress.Location = new System.Drawing.Point(216, 200);
-            this.pbWordPress.Name = "pbWordPress";
-            this.pbWordPress.Size = new System.Drawing.Size(196, 21);
-            this.pbWordPress.TabIndex = 70;
+            this.btnEpub.AccessibleName = "BtnFlexTest";
+            this.btnEpub.BackColor = System.Drawing.Color.Pink;
+            this.btnEpub.Location = new System.Drawing.Point(142, 234);
+            this.btnEpub.Name = "btnEpub";
+            this.btnEpub.Size = new System.Drawing.Size(95, 28);
+            this.btnEpub.TabIndex = 71;
+            this.btnEpub.Text = "Epub";
+            this.btnEpub.UseVisualStyleBackColor = false;
+            this.btnEpub.Click += new System.EventHandler(this.btnEpub_Click);
             // 
             // FlexPluginTest
             // 
@@ -614,5 +628,6 @@
         private System.Windows.Forms.Button btnYouVersion;
         private System.Windows.Forms.Button btnWordPress;
         private System.Windows.Forms.ProgressBar pbWordPress;
+        private System.Windows.Forms.Button btnEpub;
     }
 }
