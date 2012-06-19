@@ -1074,15 +1074,7 @@ namespace SIL.PublishingSolution
 
         private void btnHelp_Click(object sender, EventArgs e)
         {
-            if (sender.GetType() == typeof(Button))
-            {
-                _helpTopic = (Text.Contains("Set Defaults"))
-                                 ? "User_Interface/Dialog_boxes/Set_Defaults_dialog_box.htm"
-                                 : "User_Interface/Dialog_boxes/Export_Through_Pathway_dialog_box.htm";
-            }
-            Common.PathwayHelpSetup();
-            Common.HelpProv.SetHelpNavigator(this, HelpNavigator.Topic);
-            Common.HelpProv.SetHelpKeyword(this, _helpTopic);
+            SetTabbedHelpTopic();
             SendKeys.Send("{F1}");
         }
 
@@ -1167,6 +1159,7 @@ namespace SIL.PublishingSolution
             // expand / collapse the dialog (Toggle)
             IsExpanded = !IsExpanded;
             ResizeDialog();
+            SetTabbedHelpTopic();
         }
 
         private void ddlStyle_SelectedIndexChanged(object sender, EventArgs e)
@@ -1346,7 +1339,31 @@ namespace SIL.PublishingSolution
             }
         }
 
+        private void SetTabbedHelpTopic()
+        {
+            if (!IsExpanded)
+                _helpTopic = (Text.Contains("Set Defaults"))
+                                ? "User_Interface/Dialog_boxes/Set_Defaults_dialog_box.htm"
+                                : "User_Interface/Dialog_boxes/Export_Through_Pathway_dialog_box.htm";
+            else
+                switch (tabControl1.SelectedIndex)
+                {
+                    case 0:
+                        _helpTopic = "User_Interface/Dialog_boxes/Publication_Info_tab.htm";
+                        break;
+                    case 1:
+                        _helpTopic = "User_Interface/Dialog_boxes/Front_Matter_tab.htm";
+                        break;
+                    case 2:
+                        _helpTopic = "User_Interface/Dialog_boxes/Processing_Options_tab.htm";
+                        break;
+                }
+            Common.HelpProv.SetHelpKeyword(this, _helpTopic);
+        }
 
-
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetTabbedHelpTopic();
+        }
     }
 }
