@@ -29,6 +29,7 @@ namespace SIL.PublishingSolution
         public TraceSwitch _traceOnBL = new TraceSwitch("General", "Trace level for application");
         private List<string> _infoValue = new List<string>();
         private List<string> _propertyValue = new List<string>();
+        private List<string> _groupPropertyValue = new List<string>();
         #endregion
 
         #region Public Variable
@@ -707,112 +708,113 @@ namespace SIL.PublishingSolution
             //string attribValue = Common.GetTextValue(sender, out file1);
             //if (PreviousValue == attribValue) return;
 
-            try
-            {
-                string path = Param.Value["UserSheetPath"]; // all user path
-                string file = Common.PathCombine(path, FileName);
-                string importStatement;
-
-                //Reading the existing file for 1st Line (@import statement)
-                var sr = new StreamReader(file);
-                while ((importStatement = sr.ReadLine()) != null)
+            if (MediaType.ToLower() != "web")
+                try
                 {
-                    if (importStatement.Contains("@import"))
+                    string path = Param.Value["UserSheetPath"]; // all user path
+                    string file = Common.PathCombine(path, FileName);
+                    string importStatement;
+
+                    //Reading the existing file for 1st Line (@import statement)
+                    var sr = new StreamReader(file);
+                    while ((importStatement = sr.ReadLine()) != null)
                     {
-                        break;
+                        if (importStatement.Contains("@import"))
+                        {
+                            break;
+                        }
                     }
+                    sr.Close();
+
+                    //Start Writing the Changes
+                    writeCss = new StreamWriter(file);
+                    if (!string.IsNullOrEmpty(importStatement))
+                        writeCss.WriteLine(importStatement);
+
+                    // changes for paper media
+                    if (MediaType == "paper")
+                    {
+                        var value = new Dictionary<string, string>();
+                        string attribute = "Justified";
+                        string key = cTool.DdlJustified.Text;
+                        WriteAtImport(writeCss, attribute, key);
+
+                        attribute = "VerticalJustify";
+                        key = cTool.DdlVerticalJustify.Text;
+                        WriteAtImport(writeCss, attribute, key);
+
+                        attribute = "Page Size";
+                        key = cTool.DdlPagePageSize.Text;
+                        WriteAtImport(writeCss, attribute, key);
+
+                        attribute = "Columns";
+                        key = cTool.DdlPageColumn.Text;
+                        WriteAtImport(writeCss, attribute, key);
+
+                        attribute = "Font Size";
+                        key = cTool.DdlFontSize.Text;
+                        WriteAtImport(writeCss, attribute, key);
+
+                        attribute = "Leading";
+                        key = cTool.DdlLeading.Text;
+                        WriteAtImport(writeCss, attribute, key);
+
+                        attribute = "Pictures";
+                        key = cTool.DdlPicture.Text;
+                        WriteAtImport(writeCss, attribute, key);
+
+                        attribute = "Running Head";
+                        key = cTool.DdlRunningHead.Text;
+                        WriteAtImport(writeCss, attribute, key);
+
+                        attribute = "Page Number";
+                        key = cTool.DdlPageNumber.Text;
+                        WriteAtImport(writeCss, attribute, key);
+
+                        attribute = "Rules";
+                        key = cTool.DdlRules.Text;
+                        WriteAtImport(writeCss, attribute, key);
+
+                        attribute = "Sense";
+                        key = cTool.DdlSense.Text;
+                        WriteAtImport(writeCss, attribute, key);
+
+                        //Writing TextBox Values into Css
+                        if (cTool.TxtPageGutterWidth.Text.Length > 0)
+                        {
+                            value["column-gap"] = cTool.TxtPageGutterWidth.Text;
+                            WriteCssClass(writeCss, "letData", value);
+                        }
+
+                        value.Clear();
+                        value["margin-top"] = cTool.TxtPageTop.Text;
+                        value["margin-right"] = cTool.TxtPageOutside.Text;
+                        value["margin-bottom"] = cTool.TxtPageBottom.Text;
+                        value["margin-left"] = cTool.TxtPageInside.Text;
+                        value["-ps-fileproduce"] = "\"" + _fileProduce + "\"";
+                        value["-ps-fixed-line-height"] = "\"" + _fixedLineHeight + "\"";
+                        WriteCssClass(writeCss, "page", value);
+                    }
+                    // write out the changes
+                    writeCss.Flush();
+                    writeCss.Close();
+
+
+                    PreviewFileName1 = "";
+                    PreviewFileName2 = "";
+                    cTool.StylesGrid[PreviewFile1, SelectedRowIndex].Value = PreviewFileName1;
+                    cTool.StylesGrid[PreviewFile2, SelectedRowIndex].Value = PreviewFileName2;
+                    XmlNode baseNode = Param.GetItem("//styles/" + MediaType + "/style[@name='" + StyleName + "']");
+                    Param.SetAttrValue(baseNode, "previewfile1", PreviewFileName1);
+                    Param.SetAttrValue(baseNode, "previewfile2", PreviewFileName1);
+                    Param.Write();
+
                 }
-                sr.Close();
-
-                //Start Writing the Changes
-                writeCss = new StreamWriter(file);
-                if (!string.IsNullOrEmpty(importStatement))
-                    writeCss.WriteLine(importStatement);
-
-                // changes for paper media
-                if (MediaType == "paper")
+                catch (Exception ex)
                 {
-                    var value = new Dictionary<string, string>();
-                    string attribute = "Justified";
-                    string key = cTool.DdlJustified.Text;
-                    WriteAtImport(writeCss, attribute, key);
-
-                    attribute = "VerticalJustify";
-                    key = cTool.DdlVerticalJustify.Text;
-                    WriteAtImport(writeCss, attribute, key);
-
-                    attribute = "Page Size";
-                    key = cTool.DdlPagePageSize.Text;
-                    WriteAtImport(writeCss, attribute, key);
-
-                    attribute = "Columns";
-                    key = cTool.DdlPageColumn.Text;
-                    WriteAtImport(writeCss, attribute, key);
-
-                    attribute = "Font Size";
-                    key = cTool.DdlFontSize.Text;
-                    WriteAtImport(writeCss, attribute, key);
-
-                    attribute = "Leading";
-                    key = cTool.DdlLeading.Text;
-                    WriteAtImport(writeCss, attribute, key);
-
-                    attribute = "Pictures";
-                    key = cTool.DdlPicture.Text;
-                    WriteAtImport(writeCss, attribute, key);
-
-                    attribute = "Running Head";
-                    key = cTool.DdlRunningHead.Text;
-                    WriteAtImport(writeCss, attribute, key);
-
-                    attribute = "Page Number";
-                    key = cTool.DdlPageNumber.Text;
-                    WriteAtImport(writeCss, attribute, key);
-
-                    attribute = "Rules";
-                    key = cTool.DdlRules.Text;
-                    WriteAtImport(writeCss, attribute, key);
-
-                    attribute = "Sense";
-                    key = cTool.DdlSense.Text;
-                    WriteAtImport(writeCss, attribute, key);
-
-                    //Writing TextBox Values into Css
-                    if (cTool.TxtPageGutterWidth.Text.Length > 0)
-                    {
-                        value["column-gap"] = cTool.TxtPageGutterWidth.Text;
-                        WriteCssClass(writeCss, "letData", value);
-                    }
-
-                    value.Clear();
-                    value["margin-top"] = cTool.TxtPageTop.Text;
-                    value["margin-right"] = cTool.TxtPageOutside.Text;
-                    value["margin-bottom"] = cTool.TxtPageBottom.Text;
-                    value["margin-left"] = cTool.TxtPageInside.Text;
-                    value["-ps-fileproduce"] = "\"" + _fileProduce + "\"";
-                    value["-ps-fixed-line-height"] = "\"" + _fixedLineHeight + "\"";
-                    WriteCssClass(writeCss, "page", value);
+                    MessageBox.Show("Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '" + ex.Message + "'", _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                    //writeCss.Close();
                 }
-                // write out the changes
-                writeCss.Flush();
-                writeCss.Close();
-
-
-                PreviewFileName1 = "";
-                PreviewFileName2 = "";
-                cTool.StylesGrid[PreviewFile1, SelectedRowIndex].Value = PreviewFileName1;
-                cTool.StylesGrid[PreviewFile2, SelectedRowIndex].Value = PreviewFileName2;
-                XmlNode baseNode = Param.GetItem("//styles/" + MediaType + "/style[@name='" + StyleName + "']");
-                Param.SetAttrValue(baseNode, "previewfile1", PreviewFileName1);
-                Param.SetAttrValue(baseNode, "previewfile2", PreviewFileName1);
-                Param.Write();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '" + ex.Message + "'", _caption, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-                //writeCss.Close();
-            }
             _screenMode = ScreenMode.Edit;
         }
 
@@ -1129,10 +1131,19 @@ namespace SIL.PublishingSolution
         {
             Control.ControlCollection ctls = cTool.TabControl1.TabPages[1].Controls;
             _propertyValue.Clear();
+            _groupPropertyValue.Clear();
             foreach (Control control in ctls)
             {
                 if (control.GetType().Name == "Label")
                     continue;
+
+                if (control.GetType().Name == "GroupBox")
+                {
+                    foreach (Control subControl in control.Controls)
+                    {
+                        _groupPropertyValue.Add(subControl.Text);
+                    }
+                }
 
                 string val = control.Text;
                 _propertyValue.Add(val);
@@ -3137,15 +3148,28 @@ namespace SIL.PublishingSolution
         /// <returns></returns>
         private bool IsPropertyModified()
         {
-            if (_propertyValue.Count == 0)
+            if (_propertyValue.Count == 0 && _groupPropertyValue.Count == 0)
                 return false;
 
             bool propertyModified = false;
             int i = 0;
+            int g = 0;
             Control.ControlCollection ctls = cTool.TabControl1.TabPages[1].Controls;
             foreach (Control control in ctls)
             {
                 if (control.GetType().Name == "Label") continue;
+
+                if (control.GetType().Name == "GroupBox")
+                {
+                    foreach (Control subControl in control.Controls)
+                    {
+                        string subValue = subControl.Text;
+                        if (_groupPropertyValue[g++] != subValue)
+                        {
+                            return true;
+                        }
+                    }
+                }
 
                 if (control.GetType().Name == "CheckBox")
                 {
