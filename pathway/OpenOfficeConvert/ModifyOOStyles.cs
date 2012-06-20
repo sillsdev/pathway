@@ -33,7 +33,8 @@ namespace SIL.PublishingSolution
         private Dictionary<string, string> fontLangMap = new Dictionary<string, string>();
         private string _defaultFont = "Tahoma";
 
-        public ArrayList ModifyStylesXML(string projectPath, Dictionary<string, Dictionary<string, string>> childStyle, List<string> usedStyleName, Dictionary<string, string> languageStyleName, string baseStyle, bool isHeadword, Dictionary<string, string> parentClass)
+
+        public ArrayList ModifyStylesXML(string projectPath, Dictionary<string, Dictionary<string, string>> childStyle, List<string> usedStyleName, Dictionary<string, string> languageStyleName, string baseStyle, bool isHeadword, Dictionary<string, string> parentClass, string odmMTFont)
         {
             LoadAllProperty();
             LoadSpellCheck();
@@ -45,7 +46,7 @@ namespace SIL.PublishingSolution
             _languageStyleName = languageStyleName;
             _parentClass = parentClass;
             string styleFilePath = OpenIDStyles(); //todo change name
-            SetHeaderFontName(styleFilePath);
+            SetHeaderFontName(styleFilePath, odmMTFont);
             //nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
             //nsmgr.AddNamespace("idPkg", "http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging");
             nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);
@@ -74,7 +75,7 @@ namespace SIL.PublishingSolution
             return _textVariables;
         }
 
-        public void SetHeaderFontName(string styleFilePath)
+        public void SetHeaderFontName(string styleFilePath, string odmMTFont)
         {
             //headword_entry_letData_dicBody
 
@@ -89,11 +90,18 @@ namespace SIL.PublishingSolution
                 XmlNode hdrtextPropNode = _styleXMLdoc.SelectSingleNode(xPath, nsmgr);
                 if (hdrtextPropNode != null)
                 {
+                    if (_childStyle.Count == 0)
+                    {
+                        hdrtextPropNode.Attributes["style:font-name-complex"].Value = odmMTFont;
+                        return;
+                    }
                     if (_childStyle.ContainsKey("headword_entry_letData_dicBody"))
                     {
                         if (_childStyle["headword_entry_letData_dicBody"].ContainsKey("font-family"))
+                        {
                             hdrtextPropNode.Attributes["style:font-name-complex"].Value =
                                 _childStyle["headword_entry_letData_dicBody"]["font-family"];
+                        }
                     }
                 }
             }

@@ -68,6 +68,7 @@ namespace SIL.Tool
         public string DefaultFontName = "Times New Roman";
         public float DefaultFontSize = 12;
         private bool _isFrontMatterEnabled = false;
+        public string _headerFontName = "GenericFont";
 
         #endregion
 
@@ -248,6 +249,12 @@ namespace SIL.Tool
         {
             get { return _isFrontMatterEnabled; }
             set { _isFrontMatterEnabled = value; }
+        }
+
+        public string HeaderFontName
+        {
+            get { return _headerFontName; }
+            set { _headerFontName = value; }
         }
 
         #endregion

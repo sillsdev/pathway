@@ -12,7 +12,7 @@ namespace SIL.PublishingSolution
     public class LOStyleBase
     {
         #region protected Variable
-        protected PublicationInformation _projInfo;
+        protected PublicationInformation _projInfo = new PublicationInformation();
         protected XmlTextWriter _writer;
         public OldStyles _styleName = new OldStyles();
         protected Dictionary<string, string> _allParagraphProperty;

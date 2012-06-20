@@ -173,7 +173,8 @@ namespace SIL.PublishingSolution
         public string RefFormat = "Genesis 1";
         public bool IsMirrorPage;
         public string _ChapterNo = "1";
-        public bool IsFirstEntry; 
+        public bool IsFirstEntry;
+
         public LOContent()
         {
             _outputType = Common.OutputType.ODT;
@@ -2779,7 +2780,7 @@ namespace SIL.PublishingSolution
         private void UpdateRelativeInStylesXML()
         {
             ModifyLOStyles modifyIDStyles = new ModifyLOStyles();
-            _textVariables = modifyIDStyles.ModifyStylesXML(_projectPath, _newProperty, _usedStyleName, _languageStyleName, "", _IsHeadword, ParentClass);
+            _textVariables = modifyIDStyles.ModifyStylesXML(_projectPath, _newProperty, _usedStyleName, _languageStyleName, "", _IsHeadword, ParentClass, _projInfo.HeaderFontName);
         }
 
         

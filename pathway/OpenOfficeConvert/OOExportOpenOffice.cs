@@ -808,6 +808,9 @@ namespace SIL.PublishingSolution
             projInfo.TempOutputFolder += Path.DirectorySeparatorChar;
             cXML._multiLanguageHeader = isMultiLanguageHeader;
             cXML.RefFormat = this._refFormat;
+
+            SetHeaderFontName(projInfo, idAllClass);
+
             cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, pageWidth, pageSize);
             PostProcess(projInfo);
 
@@ -870,6 +873,17 @@ namespace SIL.PublishingSolution
                 }
             }
             return returnValue;
+        }
+
+        private static void SetHeaderFontName(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass)
+        {
+            if (projInfo.ProjectInputType == "Dictionary")
+            {
+                if (idAllClass.ContainsKey("headword") && idAllClass["headword"].ContainsKey("font-family"))
+                {
+                    projInfo.HeaderFontName = idAllClass["headword"]["font-family"];
+                }
+            }
         }
 
         private static void PostProcess(PublicationInformation projInfo)
