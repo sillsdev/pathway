@@ -12,6 +12,7 @@
         <file name="../CssParser/CssParser60.csproj"/>
         <file name="../epubConvert/epubConvert60.csproj"/>
         <file name="../GoBibleConvert/GoBibleConvert60.csproj"/>
+        <file name="../HelpImprove/HelpImprove60.csproj"/>
         <file name="../InDesignConvert/InDesignConvert60.csproj"/>
         <file name="../LiftPrepare/LiftPrepare60.csproj"/>
         <file name="../LogosConvert/LogosConvert60.csproj"/>

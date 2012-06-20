@@ -14,6 +14,7 @@
         <file name="../epubConvert/epubConvert.csproj"/>
         <file name="../epubValidator/epubValidator.csproj"/>
         <file name="../GoBibleConvert/GoBibleConvert.csproj"/>
+        <file name="../HelpImprove/HelpImprove.csproj"/>
         <file name="../InDesignConvert/InDesignConvert.csproj"/>
         <file name="../LiftPrepare/LiftPrepare.csproj"/>
         <file name="../LogosConvert/LogosConvert.csproj"/>

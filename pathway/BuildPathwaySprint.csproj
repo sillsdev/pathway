@@ -189,9 +189,9 @@
     <CallTarget Targets="Clean"/>
     <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>
     <CallTarget Targets="Corporate7BTE"/>
-    <CallTarget Targets="Corporate7SE"/>
     <CallTarget Targets="Release7BTE"/>
     <CallTarget Targets="Release7SE"/>
+    <CallTarget Targets="Corporate7SE"/>
     <!-- CallTarget Targets="PwCtx"/ -->
     <Copy SourceFiles="@(Dll604)" DestinationFiles=".\PsExport\Dlls601\%(Filename)%(Extension)"
       OverwriteReadOnlyFiles="true"/>
@@ -211,8 +211,11 @@
   <Target Name="Build7">
     <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>
     <CallTarget Targets="Corporate7BTE"/>
+    <CallTarget Targets="Clean"/>
     <CallTarget Targets="Corporate7SE"/>
+    <CallTarget Targets="Clean"/>
     <CallTarget Targets="Release7BTE"/>
+    <CallTarget Targets="Clean"/>
     <CallTarget Targets="Release7SE"/>
   </Target>
   <Target Name="Build60">
@@ -250,7 +253,7 @@
   </Target>
   <ItemGroup>
     <TestOutput Include="**\TestFiles\output\**"/>
-    <PathwayProjects Include="ApplyXslt;BookletBuilder;BuildPathway;BuildTasks;ConfigurationTool;CssDialog;CssParser;epubConvert;epubValidator;GoBibleConvert;InDesignConvert;LiftPrepare;LogosConvert;OpenOfficeConvert;OpenOfficeConvert_OLD;ParatextSupport;PathwayB;PdfConvert;PsExport;PsTool;PublishingSolutionExe;TestBed;Test;WordPressConvert;XeLaTexConvert;YouVersionConvert" />
+    <PathwayProjects Include="ApplyXslt;BookletBuilder;BuildPathway;BuildTasks;ConfigurationTool;CssDialog;CssParser;epubConvert;epubValidator;GoBibleConvert;HelpImprove;InDesignConvert;LiftPrepare;LogosConvert;OpenOfficeConvert;OpenOfficeConvert_OLD;ParatextSupport;PathwayB;PdfConvert;PsExport;PsTool;PublishingSolutionExe;TestBed;Test;WordPressConvert;XeLaTexConvert;YouVersionConvert" />
     <PathwayTests Include="ApplyXslt;Build;ConfigurationTool;CssDialog;CssParser;epubConvert;GoBibleConvert;InDesignConvert;LiftPrepare;LogosConvert;OpenOfficeConvert;OpenOfficeConvert_OLD;PathwayB;PsExport;PsTool;PublishingSolutionExeUi;WordPressConvert;XeLatex;XhtmlExport"/>
   </ItemGroup>
   <Target Name="RemoveSprint">

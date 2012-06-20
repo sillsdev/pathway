@@ -7,6 +7,7 @@ set cfg2=bin\x86\%1
 xcopy %base2%\ThirdParty\gsdll32.dll . /y
 xcopy %base2%\ThirdParty\epubcheck-1.2\* .\epubcheck-1.2  /i /s /q /y
 xcopy %base2%\LiftPrepare\Lib\PalasoLib\*.dll . /y
+xcopy %base2%\HelpImprove\%cfg2%\HelpImprove.* . /y
 xcopy %base2%\PathwayB\%cfg2%\PathwayB.* . /y
 xcopy %base2%\OpenOfficeWriter\%cfg2%\OpenOfficeWriter.* . /y
 xcopy %base2%\OpenOfficeConvert_OLD\%cfg2%\OpenOfficeConvert_OLD.* . /y
