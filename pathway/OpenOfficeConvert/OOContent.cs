@@ -80,6 +80,7 @@ namespace SIL.PublishingSolution
         private int _tableColumnCount = 0;
         Dictionary<string, int> _tableColumnModify = new Dictionary<string, int>();
         private bool _isTableOpen;
+        private bool _hasImgCloseTag;
 
         // from local
         OldStyles _structStyles;
@@ -630,9 +631,19 @@ namespace SIL.PublishingSolution
                             continue;
                         }
                     }
+
+                    if (_reader.Name == "img")
+                    {
+                        _hasImgCloseTag = true;
+                    }
+                   // _hasImgCloseTag = _imageInsert; 
                     if (_reader.IsEmptyElement)
                     {
-                        if (_reader.Name != "img")
+                        if (_reader.Name == "img")
+                        {
+                            _hasImgCloseTag = false;
+                        }
+                        else
                         {
                             if (_reader.Name == "a")
                             {
@@ -1543,7 +1554,14 @@ namespace SIL.PublishingSolution
             }
 
             _characterName = null;
-            _closeChildName = StackPop(_allStyle);
+            if (_hasImgCloseTag && _imageInserted)
+            {
+                _hasImgCloseTag = false;
+            }
+            else
+            {
+                _closeChildName = StackPop(_allStyle);
+            }
             if (_closeChildName == string.Empty) return;
             string closeChild = Common.LeftString(_closeChildName, "_");
 
@@ -2974,6 +2992,7 @@ namespace SIL.PublishingSolution
             bool fillHeadword = false;
             if (_projInfo.ProjectInputType.ToLower() == "dictionary")
             {
+                if (_previousParagraphName == null) _previousParagraphName = string.Empty;  
                 if ((_classNameWithLang.IndexOf("headword_") == 0 || _classNameWithLang.IndexOf("reversalform") == 0)
                     && (_previousParagraphName.IndexOf("entry_") == 0 || _previousParagraphName.IndexOf("div_pictureCaption") == 0
                     || _previousParagraphName.IndexOf("picture") >= 0))
