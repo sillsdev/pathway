@@ -1,6 +1,50 @@
-pathway (1.1.3.2300-4) unstable; urgency=high
+pathway (1.1.4.2367-1) unstable; urgency=high
 
-  * 1.1.3.2300 sprint
+  * 1.1.4.2367 sprint
+    - Go Bible will process each book separately and combine</li>
+    - Help: Added new preprocessing options to topic.</li>
+    - Help: Improved Index related to Web topics.</li>
+    - Help: Simplifying lengthy topics.</li>
+    - Help: Use different help topics for each tab</li>
+    - Linux: TD-2990 ConfigurationTool crash on start up</li>
+    - Linux: TD-2991 fix default export for Linux 12.04 </li>
+    - Linux: Performace fix</li>
+    - Linux: Update Linux build instructions.</li>
+    - Linux: Simplify build by setting default to Daily</li>
+    - Linux: changes for Ubuntu 12.04 packaging</li>
+    - Linux: Update for 64-bit</li>
+    - Linux: XMLResolver issue fixed.</li>
+    - Linux: record Ubunutu build dependancies in control</li>
+    - Linux: remove dependency on /usr/bin/csharp</li>
+    - Open Office: TD-2908 keep line separator character </li>
+    - Open Office: TD-2956 paragraph spacing is not even </li>
+    - Open Office: TD-2966 Sense Paragraphs </li>
+    - Open Office: TD-2973 Footnote callers are way too small</li>
+    - Open Office: TD-2974 Reduce Footnote and cross-reference line spacing</li>
+    - Open Office: TD-2976 Use * instead of 3 digit footnote caller</li>
+    - Open Office: TD-2978 Style font sizes relative to base size</li>
+    - Open Office: TD-2987 Pictures missing</li>
+    - Open Office: TD-2988 column blank and switch from double to single</li>
+    - Open Office: TD-2993 Exporting only reversal fails to find writing system</li>
+    - Open Office: TD-2998 Header shows wrong headword </li>
+    - Open Office: TD-3012 Crash when letter headers are removed </li>
+    - Open Office: TD-3027 Reversal export takes too long.</li>
+    - Open Office: TD-3033 Enable removing of letter dividers</li>
+    - Open Office: Fix picture Read-Err</li>
+    - Open Office: TD-3038 Gondwana sample export shows header in wrong font </li>
+    - Open Office: PreserveSpace() HTML tag position fix</li>
+    - Open Office: Updated include punctuation</li>
+    - Paratext plug-in: TD-2961 Integrate new Paratext support changes</li>
+    - Paratext plug-in: TD-3031 Support tilde as non-breaking space in Paratext Import. </li>
+    - User Interface: TD-3023 Launch thread to save usage data</li>
+    - User Interface: Help Improve in About Pathway box.</li>
+    - Web: TD-3017 Enable Audio File Transfer</li>
+    - Web: TD-3014 Wordpress prepare crashes on virtual machine</li>
+    - Web: TD-3019 Use audio short code</li>
+    - Web: TD-3020 Convert audio to .mp3</li>
+    - Web: TD-3025 Download gives zero byte PathwayWebonary.zip</li>
+    - Web: Install Lame to convert .wav to .mp3 on Windows</li>
+    - Web: Convert xhtml data to data.sql</li>  * 1.1.3.2300 sprint
     - Common: TD-2971 updated font list in GenericFont.xml
     - Paratext: TD-2980 Support embedded character styles
     - Installer: Update documentation for Linux 12.04 build
