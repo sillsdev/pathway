@@ -221,6 +221,9 @@
 					<xsl:copy/>
 				</xsl:for-each>
 				<xsl:attribute name="xml:lang"><xsl:value-of select="@lang"/></xsl:attribute>
+				<xsl:if test="count(preceding-sibling::*) = 0">
+					<xsl:text> </xsl:text>
+				</xsl:if>
 				<xsl:apply-templates/>
 			</xsl:copy>
 		</xsl:if>
