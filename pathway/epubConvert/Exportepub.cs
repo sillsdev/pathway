@@ -72,6 +72,7 @@ namespace SIL.PublishingSolution
         private Dictionary<string, EmbeddedFont> _embeddedFonts;  // font information for this export
         private Dictionary<string, string> _langFontDictionary; // languages and font names in use for this export
         private readonly XslCompiledTransform _fixPlayOrder = new XslCompiledTransform();
+        private readonly XslCompiledTransform _noXmlSpace = new XslCompiledTransform();
         private readonly XslCompiledTransform _addRevId = new XslCompiledTransform();
         private readonly XslCompiledTransform _addDicTocHeads = new XslCompiledTransform();
         private string currentChapterNumber = string.Empty;
@@ -140,6 +141,9 @@ namespace SIL.PublishingSolution
             _fixPlayOrder.Load(XmlReader.Create(
                 Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 "epubConvert.fixPlayorder.xsl")));
+            _noXmlSpace.Load(XmlReader.Create(
+                Assembly.GetExecutingAssembly().GetManifestResourceStream(
+                "epubConvert.noXmlSpace.xsl")));
             _addRevId.Load(XmlReader.Create(
                 Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 "epubConvert.addRevId.xsl")));
@@ -298,6 +302,7 @@ namespace SIL.PublishingSolution
                     }
                     //MessageBox.Show("applyxslt 1 ");
                     ApplyXslt(revFile, _addRevId);
+                    ApplyXslt(revFile, _noXmlSpace);
                     // now split out the html as needed
                     List<string> fileNameWithPath = new List<string>();
                     fileNameWithPath = Common.SplitXhtmlFile(revFile, "letHead", "RevIndex", true);
