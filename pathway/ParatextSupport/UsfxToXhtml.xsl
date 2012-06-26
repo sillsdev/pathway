@@ -707,7 +707,12 @@
 					<xsl:apply-templates/>
 				</span>
 			</xsl:when>
-			<xsl:when test="@style = 'fq' or @style = 'fqa' or @style = 'xq'">
+      <xsl:when test="@style = 'fq' or @style = 'xq'">
+        <span class="Quoted_Text" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
+          <xsl:apply-templates/>
+        </span>
+      </xsl:when>
+      <xsl:when test="@style = 'fqa'">
 				<span class="Alternate_Reading" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</span>

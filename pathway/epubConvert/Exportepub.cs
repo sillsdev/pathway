@@ -61,7 +61,7 @@ namespace SIL.PublishingSolution
         CancelExport
     }
 
-    public class Exportepub : IExportProcess 
+    public class Exportepub : IExportProcess
     {
 
         protected string processFolder;
@@ -72,10 +72,13 @@ namespace SIL.PublishingSolution
         private Dictionary<string, EmbeddedFont> _embeddedFonts;  // font information for this export
         private Dictionary<string, string> _langFontDictionary; // languages and font names in use for this export
         private readonly XslCompiledTransform _fixPlayOrder = new XslCompiledTransform();
+        private readonly XslCompiledTransform _noXmlSpace = new XslCompiledTransform();
         private readonly XslCompiledTransform _addRevId = new XslCompiledTransform();
         private readonly XslCompiledTransform _addDicTocHeads = new XslCompiledTransform();
+        private string currentChapterNumber = string.Empty;
 
-//        protected static PostscriptLanguage _postscriptLanguage = new PostscriptLanguage();
+
+        //        protected static PostscriptLanguage _postscriptLanguage = new PostscriptLanguage();
         protected string _inputType = "dictionary";
 
         public const string ReferencesFilename = "zzReferences.xhtml";
@@ -138,6 +141,9 @@ namespace SIL.PublishingSolution
             _fixPlayOrder.Load(XmlReader.Create(
                 Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 "epubConvert.fixPlayorder.xsl")));
+            _noXmlSpace.Load(XmlReader.Create(
+                Assembly.GetExecutingAssembly().GetManifestResourceStream(
+                "epubConvert.noXmlSpace.xsl")));
             _addRevId.Load(XmlReader.Create(
                 Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 "epubConvert.addRevId.xsl")));
@@ -216,7 +222,7 @@ namespace SIL.PublishingSolution
                 defaultCSS = Path.GetFileName(niceNameCSS);
                 Common.SetDefaultCSS(projInfo.DefaultXhtmlFileWithPath, defaultCSS);
                 Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCSS);
-                
+
                 // pull in the style settings
                 LoadPropertiesFromSettings();
 
@@ -253,12 +259,12 @@ namespace SIL.PublishingSolution
                 inProcess.SetStatus("Adding content");
                 preProcessor.SkipChapterInformation = TocLevel;
                 splitFiles.AddRange(preProcessor.InsertFrontMatter(tempFolder, false));
-                foreach(var file in splitFiles)
+                foreach (var file in splitFiles)
                 {
                     Common.SetDefaultCSS(file, defaultCSS);
                 }
 
-                if ((_inputType.ToLower().Equals("dictionary") && projInfo.IsLexiconSectionExist)  ||
+                if ((_inputType.ToLower().Equals("dictionary") && projInfo.IsLexiconSectionExist) ||
                     (_inputType.ToLower().Equals("scripture")))
                 {
                     if (projInfo.FileToProduce.ToLower() != "one")
@@ -296,6 +302,7 @@ namespace SIL.PublishingSolution
                     }
                     //MessageBox.Show("applyxslt 1 ");
                     ApplyXslt(revFile, _addRevId);
+                    ApplyXslt(revFile, _noXmlSpace);
                     // now split out the html as needed
                     List<string> fileNameWithPath = new List<string>();
                     fileNameWithPath = Common.SplitXhtmlFile(revFile, "letHead", "RevIndex", true);
@@ -450,7 +457,7 @@ namespace SIL.PublishingSolution
                     Process.Start(outputPathWithFileName);
                 }
             }
-                
+
             return success;
         }
 
@@ -463,14 +470,14 @@ namespace SIL.PublishingSolution
         }
 
         #region Private Functions
-        #region Handle After Before 
+        #region Handle After Before
         /// <summary>
         /// Inserting After & Before content to XHTML file
         /// </summary>
         private void InsertBeforeAfterInXHTML(PublicationInformation projInfo)
         {
             if (projInfo == null) return;
-            if(projInfo.DefaultXhtmlFileWithPath == null || projInfo.DefaultCssFileWithPath == null) return;
+            if (projInfo.DefaultXhtmlFileWithPath == null || projInfo.DefaultCssFileWithPath == null) return;
             if (projInfo.DefaultXhtmlFileWithPath.Trim().Length == 0 || projInfo.DefaultCssFileWithPath.Trim().Length == 0) return;
 
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
@@ -829,11 +836,11 @@ namespace SIL.PublishingSolution
         /// </summary>
         /// <param name="cssFile">CSS file containing content properties that need to be moved into the XHTML</param>
         /// <param name="xhtmlFiles">List of XHTML files that will get the content characters inserted via our generated XSLT.</param>
-        private void ContentCssToXhtml (string cssFile, List<string> xhtmlFiles, InProcess inProcess)
+        private void ContentCssToXhtml(string cssFile, List<string> xhtmlFiles, InProcess inProcess)
         {
-            if (!File.Exists(cssFile)) {return;}
+            if (!File.Exists(cssFile)) { return; }
             string xsltFullName = Common.FromRegistry("punct_XHTML.xslt");
-            if (!File.Exists(xsltFullName)) {return;}
+            if (!File.Exists(xsltFullName)) { return; }
             var tempXslt = Path.Combine(Path.GetTempPath(), Path.GetFileName(xsltFullName));
             File.Copy(xsltFullName, tempXslt, true);
 
@@ -993,9 +1000,9 @@ namespace SIL.PublishingSolution
         /// Removes stylings that don't work with e-book readers from the specified .css file.
         /// </summary>
         /// <param name="cssFile"></param>
-        private void RemovePagedStylesFromCss (string cssFile)
+        private void RemovePagedStylesFromCss(string cssFile)
         {
-            if (!File.Exists(cssFile)) {return;}
+            if (!File.Exists(cssFile)) { return; }
             // open the file
             var reader = new StreamReader(cssFile);
             var writer = new StreamWriter(cssFile + ".tmp");
@@ -1278,7 +1285,7 @@ namespace SIL.PublishingSolution
         /// - Sets the font-family for the body:lang selector to the referenced font
         /// </summary>
         /// <param name="cssFile"></param>
-        private void ReferenceFonts (string cssFile)
+        private void ReferenceFonts(string cssFile)
         {
             if (!File.Exists(cssFile)) return;
             // read in the CSS file
@@ -1716,7 +1723,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         /// <param name="xhtmlFileName"></param>
         /// <returns></returns>
-        private string GetBookID (string xhtmlFileName)
+        private string GetBookID(string xhtmlFileName)
         {
             try
             {
@@ -1758,7 +1765,7 @@ namespace SIL.PublishingSolution
                     return (sb.ToString());
                 }
                 // fall back on just the file name
-                return Path.GetFileName(xhtmlFileName);            
+                return Path.GetFileName(xhtmlFileName);
             }
             catch (Exception ex)
             {
@@ -1888,7 +1895,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         /// <param name="contentFolder">Folder containing the xhtml to be parsed</param>
         /// <param name="inProcess">progress bar (this is a potentially long-running process)</param>
-        private void FixRelativeHyperlinks (string contentFolder, InProcess inProcess)
+        private void FixRelativeHyperlinks(string contentFolder, InProcess inProcess)
         {
             string[] files = Directory.GetFiles(contentFolder, "PartFile*.xhtml");
             inProcess.AddToMaximum(files.Length);
@@ -2198,7 +2205,7 @@ namespace SIL.PublishingSolution
         /// the old versions.
         /// </summary>
         /// <param name="contentFolder">OEBPS folder containing all the xhtml files we need to clean up</param>
-        private void CleanupImageReferences (string contentFolder)
+        private void CleanupImageReferences(string contentFolder)
         {
             string[] files = Directory.GetFiles(contentFolder, "*.xhtml");
             foreach (string file in files)
@@ -2210,7 +2217,7 @@ namespace SIL.PublishingSolution
                 Int32 next;
                 while ((next = reader.Read()) != -1)
                 {
-                    char b = (char) next;
+                    char b = (char)next;
                     if (b == '.') // found a period - is it a filename extension that we need to change?
                     {
                         // copy the period and the next 3 characters into a string
@@ -2234,7 +2241,7 @@ namespace SIL.PublishingSolution
                                 // yes, but this could be either ".tif" or ".tiff" -
                                 // find out which one by peeking at the next character
                                 int nextchar = reader.Peek();
-                                if (((char) nextchar) == 'f')
+                                if (((char)nextchar) == 'f')
                                 {
                                     // ".tiff" case
                                     reader.Read(); // move the reader up one position (consume the "f")
@@ -2378,7 +2385,7 @@ namespace SIL.PublishingSolution
             //catch
             //{ }
 
-           // return false;
+            // return false;
             //////////////////
             /*
             int next;
@@ -2427,7 +2434,7 @@ namespace SIL.PublishingSolution
         {
             var outFilename = Path.Combine(contentFolder, ReferencesFilename);
             var hrefs = FindBrokenRelativeHrefIds(outFilename);
-            inProcess.AddToMaximum(hrefs.Count + 1); 
+            inProcess.AddToMaximum(hrefs.Count + 1);
             var reader = new StreamReader(outFilename);
             var content = new StringBuilder();
             content.Append(reader.ReadToEnd());
@@ -2516,7 +2523,7 @@ namespace SIL.PublishingSolution
                     {
                         outFile.Write(footnoteNode.Attributes["id"].Value);
                     }
-                    catch(NullReferenceException e)
+                    catch (NullReferenceException e)
                     {
                         Debug.WriteLine(e);
                     }
@@ -2891,18 +2898,18 @@ namespace SIL.PublishingSolution
                 opf.WriteElementString("dc", "publisher", null, Publisher);
             opf.WriteStartElement("dc", "contributor", null); // authoring program as a "contributor", e.g.:
             opf.WriteAttributeString("opf", "role", null, "bkp");
-                // <dc:contributor opf:role="bkp">FieldWorks 7</dc:contributor>
+            // <dc:contributor opf:role="bkp">FieldWorks 7</dc:contributor>
             opf.WriteValue(Common.GetProductName());
             opf.WriteEndElement();
             opf.WriteElementString("dc", "date", null, DateTime.Today.ToString("yyyy-MM-dd"));
-                // .epub standard date format (http://www.idpf.org/2007/opf/OPF_2.0_final_spec.html#Section2.2.7)
+            // .epub standard date format (http://www.idpf.org/2007/opf/OPF_2.0_final_spec.html#Section2.2.7)
             opf.WriteElementString("dc", "type", null, "Text"); // 
             if (Format.Length > 0)
                 opf.WriteElementString("dc", "format", null, Format);
             if (Source.Length > 0)
                 opf.WriteElementString("dc", "source", null, Source);
-            
-            if(_langFontDictionary.Count == 0)
+
+            if (_langFontDictionary.Count == 0)
             {
                 opf.WriteElementString("dc", "language", null, "en");
             }
@@ -2952,7 +2959,7 @@ namespace SIL.PublishingSolution
                     opf.WriteStartElement("item"); // item (charis embedded font)
                     opf.WriteAttributeString("id", "epub.embedded.font" + fontNum);
                     opf.WriteAttributeString("href", Path.GetFileName(embeddedFont.Filename));
-                    opf.WriteAttributeString("media-type", "font/opentype/"); 
+                    opf.WriteAttributeString("media-type", "font/opentype/");
                     opf.WriteEndElement(); // item
                     fontNum++;
                     if (IncludeFontVariants)
@@ -2982,7 +2989,7 @@ namespace SIL.PublishingSolution
             }
             // now add the xhtml files to the manifest
             string[] files = Directory.GetFiles(contentFolder);
-            foreach (string file in files) 
+            foreach (string file in files)
             {
                 // iterate through the file set and add <item> elements for each xhtml file
                 string name = Path.GetFileName(file);
@@ -3001,7 +3008,7 @@ namespace SIL.PublishingSolution
                         continue;
                     }
                     // if we can, write out the "user friendly" book name in the TOC
-                    string fileId = GetBookID(file); 
+                    string fileId = GetBookID(file);
                     opf.WriteStartElement("item");
                     if (_inputType == "dictionary")
                     {
@@ -3073,7 +3080,7 @@ namespace SIL.PublishingSolution
                 string name = Path.GetFileName(file);
                 if (name.EndsWith(".xhtml"))
                 {
-                    string fileId = GetBookID(file); 
+                    string fileId = GetBookID(file);
                     opf.WriteStartElement("itemref"); // item (stylesheet)
                     if (_inputType == "dictionary")
                     {
@@ -3355,7 +3362,7 @@ namespace SIL.PublishingSolution
             ncx.WriteAttributeString("src", name);
             ncx.WriteEndElement(); // meta
         }
-       
+
         /// <summary>
         /// Creates the table of contents file used by .epub readers (toc.ncx).
         /// </summary>
@@ -3527,6 +3534,10 @@ namespace SIL.PublishingSolution
             xmlDocument.Load(xmlReader);
             xmlReader.Close();
             XmlNodeList nodes;
+            bool isSectionHead = false, isChapterNumber = false, isVerseNumber = false;
+            string sectionHeadRef = string.Empty;
+            string sectionHead = string.Empty, fromChapterNumber = string.Empty, firstVerseNumber = string.Empty, lastVerseNumber = string.Empty;
+            string formatString = string.Empty;
             if (_inputType.Equals("dictionary"))
             {
                 nodes = xmlDocument.SelectNodes("//xhtml:div[@class='entry']", namespaceManager);
@@ -3535,13 +3546,15 @@ namespace SIL.PublishingSolution
             {
                 // for scripture, scrBookCode contains the preferred ID while the Title_Main contains the preferred / localized name
                 // 1. Book ID: start out with the book code (e.g., 2CH for 2 Chronicles)
-                nodes = xmlDocument.SelectNodes("//xhtml:span[@class='Section_Head']", namespaceManager);
+                //nodes = xmlDocument.SelectNodes("//xhtml:span[@class='Section_Head']", namespaceManager);
 
-                if(nodes != null && nodes.Count == 0)
-                {
-                    nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Section_Head']", namespaceManager);
-                }
+                //if(nodes != null && nodes.Count == 0)
+                //{
+                //    nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Section_Head']", namespaceManager);
+                //}
+                nodes = xmlDocument.SelectNodes("//xhtml:div[@class='scrBook']", namespaceManager);
             }
+
             if (nodes != null && nodes.Count > 0)
             {
                 var sb = new StringBuilder();
@@ -3549,20 +3562,20 @@ namespace SIL.PublishingSolution
                 foreach (XmlNode node in nodes)
                 {
                     string textString = string.Empty;
-                    sb.Append(name);
-                    sb.Append("#");
-                    XmlNode val = null;
-                    if (node.Attributes != null && node.Attributes["id"] != null)
-                    {
-                        val = node.Attributes["id"];
-                    }
-                    //XmlNode val = node.Attributes["id"];
-                    if (val != null)
-                        sb.Append(val.Value);
-                    //sb.Append(node.Attributes["id"].Value);
-
                     if (_inputType.Equals("dictionary"))
                     {
+                        sb.Append(name);
+                        sb.Append("#");
+                        XmlNode val = null;
+                        if (node.Attributes != null && node.Attributes["id"] != null)
+                        {
+                            val = node.Attributes["id"];
+                        }
+                        //XmlNode val = node.Attributes["id"];
+                        if (val != null)
+                            sb.Append(val.Value);
+                        //sb.Append(node.Attributes["id"].Value);
+
                         // for a dictionary, the headword / headword-minor is the label
                         if (!node.HasChildNodes)
                         {
@@ -3572,88 +3585,186 @@ namespace SIL.PublishingSolution
                             continue;
                         }
                         textString = node.FirstChild.InnerText;
+
+                        //else
+                        //{
+                        //    if (node.Attributes != null && node.Attributes["id"] != null)
+                        //    {
+                        //        // for scriptures, we'll keep a running chapter number count for the label
+                        //        //textString = node.FirstChild.InnerText;
+                        //        textString = node.HasChildNodes && node.FirstChild.InnerText.Length > 1
+                        //                         ? node.FirstChild.InnerText
+                        //                         : string.Empty;
+                        //    }
+                        //}
+
+                        if (textString.Trim().Length > 0)
+                        {
+                            // write out the node
+                            ncx.WriteStartElement("navPoint");
+                            ncx.WriteAttributeString("id", "dtb:uid");
+                            ncx.WriteAttributeString("playOrder", playOrder.ToString());
+                            ncx.WriteStartElement("navLabel");
+                            ncx.WriteElementString("text", textString);
+                            ncx.WriteEndElement(); // navlabel
+                            ncx.WriteStartElement("content");
+                            ncx.WriteAttributeString("src", sb.ToString());
+                            ncx.WriteEndElement(); // meta
+                            //ncx.WriteEndElement(); // meta
+                            playOrder++;
+                        }
+
+                        // If this is a dictionary with TOC level 3, gather the senses for this entry
+                        if (_inputType.Equals("dictionary") && TocLevel.StartsWith("3"))
+                        {
+                            // see if there are any senses to add to this entry
+                            XmlNodeList childNodes = node.SelectNodes(".//xhtml:span[@class='sense']", namespaceManager);
+                            if (childNodes != null)
+                            {
+                                sb.Length = 0;
+                                foreach (XmlNode childNode in childNodes)
+                                {
+                                    // for a dictionary, the grammatical-info//partofspeech//span is the label
+                                    if (!childNode.HasChildNodes)
+                                    {
+                                        // reset the stringbuilder
+                                        sb.Length = 0;
+                                        // This entry doesn't have any information - skip it
+                                        continue;
+                                    }
+
+                                    if (childNode.HasChildNodes && childNode.FirstChild != null && childNode.FirstChild.FirstChild != null)
+                                        textString = childNode.FirstChild.FirstChild.InnerText;
+                                    sb.Append(name);
+                                    sb.Append("#");
+                                    if (childNode.Attributes != null && childNode.Attributes["id"] != null)
+                                    {
+                                        sb.Append(childNode.Attributes["id"].Value);
+                                    }
+                                    // write out the node
+                                    ncx.WriteStartElement("navPoint");
+                                    ncx.WriteAttributeString("id", "dtb:uid");
+                                    ncx.WriteAttributeString("playOrder", playOrder.ToString());
+                                    ncx.WriteStartElement("navLabel");
+                                    ncx.WriteElementString("text", textString);
+                                    ncx.WriteEndElement(); // navlabel
+                                    ncx.WriteStartElement("content");
+                                    ncx.WriteAttributeString("src", sb.ToString());
+                                    ncx.WriteEndElement(); // meta
+                                    ncx.WriteEndElement(); // navPoint
+                                    // reset the stringbuilder
+                                    sb.Length = 0;
+                                    playOrder++;
+                                }
+                            }
+                        }
+                        if (textString.Trim().Length > 0)
+                        {
+                            ncx.WriteEndElement(); // navPoint
+                        }
                     }
                     else
                     {
-                        if (node.Attributes != null && node.Attributes["id"] != null)
+                        using (XmlReader reader = XmlReader.Create(new StringReader(node.OuterXml)))
                         {
-                            // for scriptures, we'll keep a running chapter number count for the label
-                            //textString = node.FirstChild.InnerText;
-                            textString = node.HasChildNodes && node.FirstChild.InnerText.Length > 1
-                                             ? node.FirstChild.InnerText
-                                             : string.Empty;
-                        }
-                    }
-
-                    if (textString.Trim().Length > 0)
-                    {
-                        // write out the node
-                        ncx.WriteStartElement("navPoint");
-                        ncx.WriteAttributeString("id", "dtb:uid");
-                        ncx.WriteAttributeString("playOrder", playOrder.ToString());
-                        ncx.WriteStartElement("navLabel");
-                        ncx.WriteElementString("text", textString);
-                        ncx.WriteEndElement(); // navlabel
-                        ncx.WriteStartElement("content");
-                        ncx.WriteAttributeString("src", sb.ToString());
-                        ncx.WriteEndElement(); // meta
-                        //ncx.WriteEndElement(); // meta
-                        playOrder++;
-                    }                   
-
-                    // If this is a dictionary with TOC level 3, gather the senses for this entry
-                    if (_inputType.Equals("dictionary") && TocLevel.StartsWith("3"))
-                    {
-                        // see if there are any senses to add to this entry
-                        XmlNodeList childNodes = node.SelectNodes(".//xhtml:span[@class='sense']", namespaceManager);
-                        if (childNodes != null)
-                        {
-                            sb.Length = 0;
-                            foreach (XmlNode childNode in childNodes)
+                            // Parse the file and display each of the nodes.
+                            while (reader.Read())
                             {
-                                // for a dictionary, the grammatical-info//partofspeech//span is the label
-                                if (!childNode.HasChildNodes)
+                                switch (reader.NodeType)
                                 {
-                                    // reset the stringbuilder
-                                    sb.Length = 0;
-                                    // This entry doesn't have any information - skip it
-                                    continue;
+                                    case XmlNodeType.Element:
+                                        string className = reader.GetAttribute("class");
+                                        if (className == "Section_Head")
+                                        {
+                                            if (fromChapterNumber == currentChapterNumber)
+                                            {
+                                                textString = textString + "-" + lastVerseNumber + ")";
+                                            }
+                                            else
+                                            {
+                                                textString = textString + "-" + currentChapterNumber + ":" +
+                                                               lastVerseNumber + ")";
+                                            }
+                                            if (textString.Trim().Length > 4)
+                                            {
+                                                // write out the node
+                                                ncx.WriteStartElement("navPoint");
+                                                ncx.WriteAttributeString("id", "dtb:uid");
+                                                ncx.WriteAttributeString("playOrder", playOrder.ToString());
+                                                ncx.WriteStartElement("navLabel");
+                                                ncx.WriteElementString("text", textString);
+                                                ncx.WriteEndElement(); // navlabel
+                                                ncx.WriteStartElement("content");
+                                                ncx.WriteAttributeString("src", sb.ToString());
+                                                ncx.WriteEndElement(); // meta
+                                                //ncx.WriteEndElement(); // meta
+                                                //ncx.WriteEndElement(); // navPoint
+                                                playOrder++;
+                                                sb.Length = 0;
+                                            }
+                                            if (reader.GetAttribute("id") != null)
+                                            {
+                                                sb.Append(name);
+                                                sb.Append("#");
+                                                sb.Append(reader.GetAttribute("id"));
+                                            }
+                                            if (textString.Trim().Length > 4)
+                                            {
+                                                ncx.WriteEndElement(); // navPoint
+                                            }
+                                            textString = string.Empty;
+                                            firstVerseNumber = string.Empty;
+                                            isSectionHead = true;
+                                        }
+                                        else if (className == "Chapter_Number")
+                                        {
+                                            isChapterNumber = true;
+                                        }
+                                        else if (className != null && className.IndexOf("Verse_Number") == 0)
+                                        {
+                                            isVerseNumber = true;
+                                        }
+                                        break;
+                                    case XmlNodeType.Text:
+                                        if (isSectionHead)
+                                        {
+                                            sectionHead = reader.Value;
+                                            isSectionHead = false;
+                                        }
+                                        if (isChapterNumber)
+                                        {
+                                            currentChapterNumber = reader.Value;
+                                            isChapterNumber = false;
+                                        }
+                                        if (isVerseNumber)
+                                        {
+                                            if (firstVerseNumber.Trim().Length == 0 && sectionHead.Length > 0)
+                                            {
+                                                firstVerseNumber = reader.Value;
+                                                fromChapterNumber = currentChapterNumber;
+                                                textString = sectionHead + "(" + currentChapterNumber + ":" + firstVerseNumber;
+                                            }
+                                            lastVerseNumber = reader.Value;
+                                            isVerseNumber = false;
+                                        }
+                                        break;
+                                    case XmlNodeType.XmlDeclaration:
+                                    case XmlNodeType.ProcessingInstruction:
+                                        break;
+                                    case XmlNodeType.Comment:
+                                        break;
+                                    case XmlNodeType.EndElement:
+                                        break;
+                                    default:
+                                        break;
                                 }
-                                
-                                if (childNode.HasChildNodes && childNode.FirstChild != null && childNode.FirstChild.FirstChild != null)
-                                    textString = childNode.FirstChild.FirstChild.InnerText;
-                                sb.Append(name);
-                                sb.Append("#");
-                                if (childNode.Attributes != null && childNode.Attributes["id"] != null)
-                                {
-                                    sb.Append(childNode.Attributes["id"].Value);
-                                }
-                                // write out the node
-                                ncx.WriteStartElement("navPoint");
-                                ncx.WriteAttributeString("id", "dtb:uid");
-                                ncx.WriteAttributeString("playOrder", playOrder.ToString());
-                                ncx.WriteStartElement("navLabel");
-                                ncx.WriteElementString("text", textString);
-                                ncx.WriteEndElement(); // navlabel
-                                ncx.WriteStartElement("content");
-                                ncx.WriteAttributeString("src", sb.ToString());
-                                ncx.WriteEndElement(); // meta
-                                ncx.WriteEndElement(); // navPoint
-                                // reset the stringbuilder
-                                sb.Length = 0;
-                                playOrder++;
                             }
                         }
                     }
-                    if (textString.Trim().Length > 0)
-                    {
-                        ncx.WriteEndElement(); // navPoint
-                    }
                     // reset the stringbuilder
                     sb.Length = 0;
-                    
                 }
-            }            
+            }
         }
 
         #endregion
