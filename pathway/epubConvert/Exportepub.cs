@@ -3467,7 +3467,7 @@ namespace SIL.PublishingSolution
                         index++;
                         // chapters within the books (nested as a subhead)
                         chapNum = 1;
-                        if (!skipChapterInfo)
+                        if (!skipChapterInfo)//If Book and Section selected
                         {
                             WriteChapterLinks(file, ref index, ncx, ref chapNum);
                         }
@@ -3544,14 +3544,6 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                // for scripture, scrBookCode contains the preferred ID while the Title_Main contains the preferred / localized name
-                // 1. Book ID: start out with the book code (e.g., 2CH for 2 Chronicles)
-                //nodes = xmlDocument.SelectNodes("//xhtml:span[@class='Section_Head']", namespaceManager);
-
-                //if(nodes != null && nodes.Count == 0)
-                //{
-                //    nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Section_Head']", namespaceManager);
-                //}
                 nodes = xmlDocument.SelectNodes("//xhtml:div[@class='scrBook']", namespaceManager);
             }
 
@@ -3585,18 +3577,6 @@ namespace SIL.PublishingSolution
                             continue;
                         }
                         textString = node.FirstChild.InnerText;
-
-                        //else
-                        //{
-                        //    if (node.Attributes != null && node.Attributes["id"] != null)
-                        //    {
-                        //        // for scriptures, we'll keep a running chapter number count for the label
-                        //        //textString = node.FirstChild.InnerText;
-                        //        textString = node.HasChildNodes && node.FirstChild.InnerText.Length > 1
-                        //                         ? node.FirstChild.InnerText
-                        //                         : string.Empty;
-                        //    }
-                        //}
 
                         if (textString.Trim().Length > 0)
                         {
