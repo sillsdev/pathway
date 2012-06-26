@@ -77,27 +77,21 @@ namespace SIL.Tool
             {
                 return string.Empty;
             }
+
             // Paratext (or PathwayB)
             if (_hostProgram == HostProgram.Paratext || _hostProgram == HostProgram.PathwayB)
             {
                 // (Note that PathwayB _might_ have a project file we can poke at - no guarantee)
+                object paraTextprojectPath;
                 string ssfFile = database + ".ssf";
-                const string ptProjectDir = "My Paratext Projects";
-                var sb = new StringBuilder();
-                // quick test - check the C drive
-                if (File.Exists(Path.Combine("c:\\My Paratext Projects", ssfFile)))
+                if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.ParatextKey,
+                   "Settings_Directory", "", out paraTextprojectPath))
                 {
-                    return Path.Combine("c:\\My Paratext Projects", ssfFile);
-                }
-                // not on C drive - iterate through logical drives until we find it           
-                foreach (var logicalDrive in Directory.GetLogicalDrives())
-                {
-                    sb.Length = 0; // clean out the stringbuilder
-                    sb.Append(Path.Combine(logicalDrive, ptProjectDir));
-                    if (File.Exists(Path.Combine(sb.ToString(), ssfFile)))
-                    {
-                        return (Path.Combine(sb.ToString(), ssfFile));
-                    }
+                    string settingFilePath = Path.Combine((string) paraTextprojectPath, ssfFile);
+                    if (File.Exists(settingFilePath))
+                        return settingFilePath;
+                    else
+                        return string.Empty;
                 }
                 // not found on logical drives. 
                 Debug.WriteLine(ssfFile + " does not exist.");
