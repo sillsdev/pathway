@@ -729,17 +729,19 @@ namespace SIL.PublishingSolution
             //if (Format != "YouVersion")
             //{
             // attempt to save the properties - if it doesn't work, leave the dialog open
-            if (SaveProperty(this))
+            if (!SaveProperty(this))
             {
-                DialogResult = DialogResult.Yes;
-                if (Text.Contains("Default"))
-                    SaveDefaultProperty(this);
-                _publicationName = Path.GetFileName(OutputFolder);
-                OutputFolder = Path.GetDirectoryName(OutputFolder);
-                DictionaryName = _publicationName;
-                Common.TimeStarted = DateTime.Now;
-                _settingsHelper.ClearValues();
+                return;
             }
+
+            DialogResult = DialogResult.Yes;
+            if (Text.Contains("Default"))
+                SaveDefaultProperty(this);
+            _publicationName = Path.GetFileName(OutputFolder);
+            OutputFolder = Path.GetDirectoryName(OutputFolder);
+            DictionaryName = _publicationName;
+            Common.TimeStarted = DateTime.Now;
+            _settingsHelper.ClearValues();
 
             Param.LoadSettings();
             if (Param.Value.ContainsKey(Param.Preprocessing))
