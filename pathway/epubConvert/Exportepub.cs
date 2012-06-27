@@ -73,6 +73,7 @@ namespace SIL.PublishingSolution
         private Dictionary<string, string> _langFontDictionary; // languages and font names in use for this export
         private readonly XslCompiledTransform _fixPlayOrder = new XslCompiledTransform();
         private readonly XslCompiledTransform _addRevId = new XslCompiledTransform();
+        private readonly XslCompiledTransform _noXmlSpace = new XslCompiledTransform();
         private readonly XslCompiledTransform _addDicTocHeads = new XslCompiledTransform();
         private string currentChapterNumber = string.Empty;
 
@@ -137,12 +138,15 @@ namespace SIL.PublishingSolution
         /// <returns>true if succeeds</returns>
         public bool Export(PublicationInformation projInfo)
         {
-            _fixPlayOrder.Load(XmlReader.Create(
-                Assembly.GetExecutingAssembly().GetManifestResourceStream(
-                "epubConvert.fixPlayorder.xsl")));
-            _addRevId.Load(XmlReader.Create(
-                Assembly.GetExecutingAssembly().GetManifestResourceStream(
-                "epubConvert.addRevId.xsl")));
+            var fixPlayorderStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("epubConvert.fixPlayorder.xsl");
+            Debug.Assert(fixPlayorderStream != null);
+            _fixPlayOrder.Load(XmlReader.Create(fixPlayorderStream));
+            var addRevIdStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("epubConvert.addRevId.xsl");
+            Debug.Assert(addRevIdStream != null);
+            _addRevId.Load(XmlReader.Create(addRevIdStream));
+            var noXmlSpaceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("epubConvert.noXmlSpace.xsl");
+            Debug.Assert(noXmlSpaceStream != null);
+            _noXmlSpace.Load(XmlReader.Create(noXmlSpaceStream));
             _addDicTocHeads.Load(XmlReader.Create(UsersXsl("addDicTocHeads.xsl")));
             InsertBeforeAfterInXHTML(projInfo);
             bool success = true;
@@ -242,6 +246,10 @@ namespace SIL.PublishingSolution
                                                string.Format(
                                                    "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'>",
                                                    langArray[0], Common.GetTextDirection(langArray[0])));
+                }
+                if (Path.GetFileName(preProcessor.ProcessedXhtml).ToLower() == "flexrev.xhtml")
+                {
+                    ApplyXslt(preProcessor.ProcessedXhtml, _noXmlSpace);
                 }
                 // end EDB 10/22/2010
                 inProcess.PerformStep();
