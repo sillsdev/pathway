@@ -206,9 +206,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DBLMetadata.cs" />
     <Compile Include="ParatextPathwayLink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StyToCSS.cs" />
+    <Compile Include="StyToXML.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="EncloseParasInSections.xsl">

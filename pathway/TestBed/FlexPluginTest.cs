@@ -901,5 +901,27 @@ namespace TestBed
             Exportepub epubConvert = new Exportepub();
             epubConvert.Export(projInfo);
         }
+
+        private void btnSty2XML_Click(object sender, EventArgs e)
+        {
+#if !Not7
+            StyToXML styToCss = new StyToXML();
+            styToCss.StyFullPath = txtCSSInput.Text;
+            string outputCSS = txtCSSInput.Text.Replace(".sty", ".XML");
+            styToCss.ConvertStyToXML("TestBed", outputCSS);
+            MessageBox.Show("Exported in " + outputCSS);
+#endif
+        }
+
+        private void btnDBL_Metadata_Click(object sender, EventArgs e)
+        {
+#if !Not7
+            DBLMetadata dblMetadata = new DBLMetadata();
+            dblMetadata.StyFullPath = txtCSSInput.Text;
+            string outputCSS = Path.Combine(Path.GetDirectoryName(txtCSSInput.Text),  "metadata.XML");
+            dblMetadata.CreateMetadata("TestBed", outputCSS);
+            MessageBox.Show("Exported in " + outputCSS);
+#endif
+        }
     }
 }
