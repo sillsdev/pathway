@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -84,14 +85,38 @@ namespace SIL.Tool
                 // (Note that PathwayB _might_ have a project file we can poke at - no guarantee)
                 object paraTextprojectPath;
                 string ssfFile = database + ".ssf";
-                if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.ParatextKey,
-                   "Settings_Directory", "", out paraTextprojectPath))
+                if (Common.UnixVersionCheck())
                 {
-                    string settingFilePath = Path.Combine((string) paraTextprojectPath, ssfFile);
-                    if (File.Exists(settingFilePath))
-                        return settingFilePath;
-                    else
-                        return string.Empty;
+                    var windowsIdentity = System.Security.Principal.WindowsIdentity.GetCurrent();
+                    if (windowsIdentity != null)
+                    {
+                        string userName = windowsIdentity.Name;
+                        string registryPath = "/home/" + userName + "/.config/paratext/registry/LocalMachine/software/scrchecks/1.0/settings_directory/";
+                        while (Directory.Exists(registryPath))
+                        {
+                            if (File.Exists(Common.PathCombine(registryPath, "values.xml")))
+                            {
+                                XmlDocument doc = new XmlDocument();
+                                doc.Load(Common.PathCombine(registryPath, "values.xml"));
+                                paraTextprojectPath = doc.InnerText;
+                                Environment.SetEnvironmentVariable("ParatextProjPath", paraTextprojectPath.ToString());
+                                return Common.PathCombine(paraTextprojectPath.ToString(), ssfFile);
+                            }
+                            //string ParatextProjectPath = Environment.GetEnvironmentVariable("ParatextProjPath");
+                        }
+                    }
+                }
+                else
+                {
+                    if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.ParatextKey,
+                                                          "Settings_Directory", "", out paraTextprojectPath))
+                    {
+                        string settingFilePath = Path.Combine((string) paraTextprojectPath, ssfFile);
+                        if (File.Exists(settingFilePath))
+                            return settingFilePath;
+                        else
+                            return string.Empty;
+                    }
                 }
                 // not found on logical drives. 
                 Debug.WriteLine(ssfFile + " does not exist.");
