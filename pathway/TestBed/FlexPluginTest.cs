@@ -1083,9 +1083,6 @@ namespace TestBed
             epubConvert.Export(projInfo);
         }
 
-<<<<<<< HEAD
-
-=======
         private void btnSty2XML_Click(object sender, EventArgs e)
         {
 #if !Not7
@@ -1107,6 +1104,5 @@ namespace TestBed
             MessageBox.Show("Exported in " + outputCSS);
 #endif
         }
->>>>>>> 94a858d40796b441d07ba7e9e60d18663344ad1a
     }
 }
