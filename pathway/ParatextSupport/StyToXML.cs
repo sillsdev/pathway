@@ -208,6 +208,9 @@ namespace SIL.PublishingSolution
                     string val = LineSpace(value);
                     _cssProp["line-height"] = val;
                     break;
+                case "\\TextProperties":
+                    TextProperties(line);
+                    break;
             }
         }
 
@@ -241,17 +244,42 @@ namespace SIL.PublishingSolution
 	        _writer.WriteStartDocument();
 	        _writer.WriteStartElement("stylesheet");
 
+            string fontName = Common.ParaTextFontName(string.Empty);
+            string fontSize = Common.ParaTextFontSize();
+            
 	        _writer.WriteStartElement("property");
 	        _writer.WriteAttributeString("name", "font-family");
-	        _writer.WriteString("Charis SIL");
+            _writer.WriteString(fontName);
 	        _writer.WriteEndElement();
 
 	        _writer.WriteStartElement("property");
 	        _writer.WriteAttributeString("name", "font-size");
 	        _writer.WriteAttributeString("unit", "pt");
-	        _writer.WriteString("14");
+            _writer.WriteString(fontSize);
 	        _writer.WriteEndElement();
 	    }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="className"></param>
+        /// <returns></returns>
+        private void TextProperties(string line)
+        {
+            string verseText = "false";
+            if (line.IndexOf(" vernacular") >= 0)
+            {
+                verseText = "true";
+            }
+
+            string publishable = "true";
+            if (line.IndexOf("nonpublishable") >= 0 )
+            {
+                publishable = "false";
+            }
+            _cssProp["versetext"] = verseText;
+            _cssProp["publishable"] = publishable;
+        }
 
 	    /// <summary>
         /// 
@@ -303,22 +331,27 @@ namespace SIL.PublishingSolution
             {
                 _writer.WriteStartElement("style");
                 _writer.WriteAttributeString("id", cssClass.Key);
-                _writer.WriteAttributeString("publishable", "true");
-                _writer.WriteAttributeString("versetext", "true");
+                SetTextProperties(cssClass);
+
                 foreach (KeyValuePair<string, string> property in cssClass.Value)
                 {
-                    if (cssClass.Key == "\\Name" || cssClass.Key == "\\Description")
+                    if (cssClass.Key == "publishable" || cssClass.Key == "versetext")
+                    {
+                        continue;
+                    }
+                    else if (cssClass.Key == "\\Name" || cssClass.Key == "\\Description")
                     {
                         _writer.WriteStartElement(cssClass.Key);
                         _writer.WriteString(property.Value);
                         _writer.WriteEndElement();
-                        continue;
                     }
-
-                    _writer.WriteStartElement("property");
-                    _writer.WriteAttributeString("name", property.Key);
-                    _writer.WriteString(property.Value);
-                    _writer.WriteEndElement();
+                    else
+                    {
+                        _writer.WriteStartElement("property");
+                        _writer.WriteAttributeString("name", property.Key);
+                        _writer.WriteString(property.Value);
+                        _writer.WriteEndElement();
+                    }
                 }
                 _writer.WriteEndElement();
 
@@ -329,7 +362,28 @@ namespace SIL.PublishingSolution
 		    _writer.Close();
 		}
 
-            /// <summary>
+	    private void SetTextProperties(KeyValuePair<string, Dictionary<string, string>> cssClass)
+	    {
+	        if (cssClass.Value.ContainsKey("publishable"))
+	        {
+	            _writer.WriteAttributeString("publishable", cssClass.Value["publishable"]);
+	        }
+	        else
+	        {
+	            _writer.WriteAttributeString("publishable", "true");
+	        }
+
+	        if (cssClass.Value.ContainsKey("versetext"))
+	        {
+	            _writer.WriteAttributeString("versetext", cssClass.Value["versetext"]);
+	        }
+	        else
+	        {
+	            _writer.WriteAttributeString("versetext", "false");
+	        }
+	    }
+
+	    /// <summary>
             /// Convert paratext unit to css unit
             /// </summary>
             /// <param name="value">0/1/2</param>
