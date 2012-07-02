@@ -1,3 +1,3 @@
-sudo apt-get -y install devscripts debhelper autotools-dev mono-complete
+fakeroot apt-get -y install devscripts debhelper autotools-dev mono-complete
 debuild -eBUILD_NUMBER=%1 -i -us -uc -b
 
