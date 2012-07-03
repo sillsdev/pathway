@@ -554,11 +554,11 @@ namespace SIL.PublishingSolution
                 if (_psuedoAfter.ContainsKey(_closeChildName))
                 {
                     ClassInfo classInfo = _psuedoAfter[_closeChildName];
-                    if (classInfo.Content.Trim().Length == 0)
+                    if (classInfo.Content == null || classInfo.Content.Trim().Length == 0)
                     {
-                            _writer.WriteStartElement("span");
-                            _writer.WriteRaw("&nbsp;");
-                            _writer.WriteEndElement();
+                        _writer.WriteStartElement("span");
+                        _writer.WriteRaw("&nbsp;");
+                        _writer.WriteEndElement();
                     }
                     else
                     {
