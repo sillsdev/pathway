@@ -17,7 +17,7 @@ using Microsoft.Win32;
 
 namespace SIL.Tool
 {
-	class RegistryHelperLite
+    public class RegistryHelperLite
 	{
 		/// ------------------------------------------------------------------------------------
 		/// <summary>

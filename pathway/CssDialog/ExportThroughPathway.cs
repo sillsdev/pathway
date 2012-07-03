@@ -709,6 +709,9 @@ namespace SIL.PublishingSolution
         {
             try
             {
+                if (InputType == "Scripture")
+                    OutputFolder = OutputFolder + "\\";
+
                 Directory.CreateDirectory(OutputFolder);
                 Directory.Delete(OutputFolder);
             }
@@ -737,7 +740,8 @@ namespace SIL.PublishingSolution
             DialogResult = DialogResult.Yes;
             if (Text.Contains("Default"))
                 SaveDefaultProperty(this);
-            _publicationName = Path.GetFileName(OutputFolder);
+
+            //_publicationName = Path.GetFileName(OutputFolder);
             OutputFolder = Path.GetDirectoryName(OutputFolder);
             DictionaryName = _publicationName;
             Common.TimeStarted = DateTime.Now;
