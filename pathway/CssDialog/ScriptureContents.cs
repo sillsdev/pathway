@@ -27,6 +27,8 @@ namespace SIL.PublishingSolution
     {
         private static IScriptureContents _realClass;
 
+        public string Format = null;
+
         public ScriptureContents()
         {
             //Common.SupportFolder = "PathwaySupport";
@@ -94,6 +96,7 @@ namespace SIL.PublishingSolution
             System.Windows.Forms.DialogResult dialogResult = _realClass.ShowDialog();
             if (dialogResult != DialogResult.Cancel)
             {
+                Format = ((ExportThroughPathway) _realClass).Format;
                 DirectoryInfo directoryInfo = new DirectoryInfo(_realClass.OutputLocationPath);
                 directoryInfo.Create();
             }
