@@ -28,6 +28,8 @@ pathway/BuildPathway/Files/*
 pathway/BuildPathway/Wix/*
 pathway/BuildTasks/bin/*
 pathway/BuildTasks/obj/*
+pathway/CadreBibleConvert/bin/*
+pathway/CadreBibleConvert/obj/*
 pathway/ConfigurationTool/bin/*
 pathway/ConfigurationTool/obj/*
 pathway/CssDialog/bin/*
