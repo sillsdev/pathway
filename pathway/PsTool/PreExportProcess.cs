@@ -1512,6 +1512,53 @@ namespace SIL.Tool
             return tempFile;
         }
 
+        /// <summary>
+        /// For dictionary data, returns the language code for the definitions
+        /// </summary>
+        /// <returns></returns>
+        public void PrepareBookNameAndChapterCount()
+        {
+            XmlDocument xdoc = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xdoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xdoc.Load(ProcessedXhtml);
+            //XmlNode bookNode1 = xdoc.DocumentElement;
+            string xPath = "//xhtml:div[@class='scrBook']";
+            //XmlNodeList scrBookList = bookNode1.SelectNodes(xPath, namespaceManager);
+            XmlNodeList scrBookList = xdoc.SelectNodes(xPath, namespaceManager);
+            if (scrBookList == null) return;
+            foreach (XmlNode scrBookNode in scrBookList)
+            {
+                xPath = ".//xhtml:span[@class='scrBookName']";
+                XmlNode bookNode = scrBookNode.SelectSingleNode(xPath, namespaceManager);
+
+                xPath = ".//xhtml:span[@class='Chapter_Number']";
+                XmlNodeList chapterNodeList = scrBookNode.SelectNodes(xPath, namespaceManager);
+
+                foreach (XmlNode chapterNode in chapterNodeList)
+                {
+                    string chapterNumber = chapterNode.InnerText;
+                    XmlAttribute attribute = xdoc.CreateAttribute("id");
+                    attribute.Value = "id_" + bookNode.InnerText + "_" + "Chapter" + chapterNumber;
+                    chapterNode.Attributes.Append(attribute);
+                }
+
+                //xPath = ".//xhtml:div[@class='Section_Head']";
+                //XmlNodeList sectionHeadList = scrBookNode.SelectNodes(xPath, namespaceManager);
+
+                //foreach (XmlNode chapterNode in chapterNodeList)
+                //{
+                //    XmlNode nodeContent = xdoc.CreateElement("a", xdoc.DocumentElement.NamespaceURI);
+                //    XmlAttribute attribute = xdoc.CreateAttribute("href");
+                //    attribute.Value = "filename#id_" + bookNode.InnerText + "_Chapter" + chapterNode.InnerText;
+                //    nodeContent.Attributes.Append(attribute);
+                //    nodeContent.InnerText = chapterNode.InnerText + " ";
+                //    sectionHeadList[0].ParentNode.InsertBefore(nodeContent, sectionHeadList[0]);
+                //}
+            }
+            xdoc.Save(ProcessedXhtml);
+        }
+
         public void GetTempFolderPath()
         {
             if (Directory.Exists(tempFolder))

@@ -98,6 +98,7 @@
 			</xsl:element>
 			<xsl:element name="div">
 				<xsl:attribute name="class"><xsl:text>Chapter_Number</xsl:text></xsl:attribute>
+				<xsl:attribute name="id"><xsl:value-of select=".//xhtml:span[@class='Chapter_Number']/@id"/></xsl:attribute>
 				<xsl:value-of select="descendant::xhtml:span[@class='Chapter_Number']"/>
 			</xsl:element>
 			<xsl:element name="div">
@@ -120,6 +121,7 @@
 		<xsl:if test="(count(descendant::xhtml:span[@class='Chapter_Number'])) > 0">
 			<xsl:element name="div">
 				<xsl:attribute name="class"><xsl:text>Chapter_Number</xsl:text></xsl:attribute>
+				<xsl:attribute name="id"><xsl:value-of select=".//xhtml:span[@class='Chapter_Number']/@id"/></xsl:attribute>
 				<xsl:value-of select="descendant::xhtml:span[@class='Chapter_Number']"/>
 			</xsl:element>
 		</xsl:if>

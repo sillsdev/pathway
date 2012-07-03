@@ -148,7 +148,7 @@ namespace SIL.PublishingSolution
             Debug.Assert(noXmlSpaceStream != null);
             _noXmlSpace.Load(XmlReader.Create(noXmlSpaceStream));
             _addDicTocHeads.Load(XmlReader.Create(UsersXsl("addDicTocHeads.xsl")));
-            InsertBeforeAfterInXHTML(projInfo);
+            //InsertBeforeAfterInXHTML(projInfo);
             bool success = true;
             _langFontDictionary = new Dictionary<string, string>();
             _embeddedFonts = new Dictionary<string, EmbeddedFont>();
@@ -238,21 +238,53 @@ namespace SIL.PublishingSolution
 
                 if (langArray.Length > 0)
                 {
-                    Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html",
-                                               string.Format(
-                                                   "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'",
-                                                   langArray[0], Common.GetTextDirection(langArray[0])));
-                    Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html>",
-                                               string.Format(
-                                                   "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'>",
-                                                   langArray[0], Common.GetTextDirection(langArray[0])));
+                    XmlDocument xdoc = Common.DeclareXMLDocument(true);
+                    XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xdoc.NameTable);
+                    namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+                    xdoc.Load(preProcessor.ProcessedXhtml);
+                    //XmlNode bookNode1 = xdoc.DocumentElement;
+                    string xPath = "//xhtml:div[@class='scrBook']";
+                    XmlNodeList node = xdoc.GetElementsByTagName("html", "http://www.w3.org/1999/xhtml");
+                    if(node[0].Attributes["lang"] != null)
+                    {
+                        node[0].Attributes["lang"].Value = langArray[0];
+                    }
+                    else
+                    {
+                        XmlAttribute attr = xdoc.CreateAttribute("lang");
+                        attr.Value = langArray[0];
+                        xdoc.DocumentElement.SetAttributeNode(attr);
+                    }
+
+                    if (node[0].Attributes["dir"] != null)
+                    {
+                        node[0].Attributes["dir"].Value = Common.GetTextDirection(langArray[0]);
+                    }
+                    else
+                    {
+                        XmlAttribute attr = xdoc.CreateAttribute("dir");
+                        attr.Value = Common.GetTextDirection(langArray[0]);
+                        xdoc.DocumentElement.SetAttributeNode(attr);
+                    }
+                    xdoc.Save(preProcessor.ProcessedXhtml);
+                    //Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html",
+                    //                           string.Format(
+                    //                               "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'",
+                    //                               langArray[0], Common.GetTextDirection(langArray[0])));
+                    //Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html>",
+                    //                           string.Format(
+                    //                               "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'>",
+                    //                               langArray[0], Common.GetTextDirection(langArray[0])));
                 }
+
                 if (Path.GetFileName(preProcessor.ProcessedXhtml).ToLower() == "flexrev.xhtml")
                 {
                     ApplyXslt(preProcessor.ProcessedXhtml, _noXmlSpace);
                 }
                 // end EDB 10/22/2010
                 inProcess.PerformStep();
+
+                preProcessor.PrepareBookNameAndChapterCount();
 
                 // split the .XHTML into multiple files, as specified by the user
                 List<string> htmlFiles = new List<string>();
@@ -402,12 +434,15 @@ namespace SIL.PublishingSolution
 #if (TIME_IT)
                 DateTime dtRefStart = DateTime.Now;
 #endif
+                InsertChapterLinkBelowBookName(contentFolder);
+
                 inProcess.SetStatus("Processing hyperlinks");
                 if (_inputType == "scripture" && References.Contains("End"))
                 {
                     UpdateReferenceHyperlinks(contentFolder, inProcess);
                 }
                 FixRelativeHyperlinks(contentFolder, inProcess);
+                
 #if (TIME_IT)
                 TimeSpan tsRefTotal = DateTime.Now - dtRefStart;
                 Debug.WriteLine("Exportepub: time spent fixing reference hyperlinks: " + tsRefTotal);
@@ -822,6 +857,9 @@ namespace SIL.PublishingSolution
                 {
                     sb.AppendLine("24pt;");
                 }
+                //sb.AppendLine(".scrBookCode {"); //Hide Bookcode
+                //sb.Append("display: none; }");
+
                 Common.StreamReplaceInFile(cssFile, ".Chapter_Number {", sb.ToString());
             }
             // DefaultAlignment - several spots in the css file
@@ -1701,13 +1739,13 @@ namespace SIL.PublishingSolution
                 }
             }
             // now go check to see if we're working on scripture or dictionary data
-            //nodes = xmlDocument.SelectNodes("//xhtml:span[@class='headword']", namespaceManager);
-            nodes = xmlDocument.SelectNodes("//span[@class='headword']", namespaceManager);
+            nodes = xmlDocument.SelectNodes("//xhtml:span[@class='headword']", namespaceManager);
+            //nodes = xmlDocument.SelectNodes("//span[@class='headword']", namespaceManager);
             if (nodes != null && nodes.Count == 0)
             {
                 // not in this file - this might be scripture?
-                //nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
-                nodes = xmlDocument.SelectNodes("//span[@class='scrBookName']", namespaceManager);
+                nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
+                //nodes = xmlDocument.SelectNodes("//span[@class='scrBookName']", namespaceManager);
                 if (nodes != null && nodes.Count > 0)
                     _inputType = "scripture";
             }
@@ -1980,6 +2018,11 @@ namespace SIL.PublishingSolution
                 {
                     ReplaceAllBrokenHrefs(sourceFile, dictHyperlinks);
                 }
+
+                //Find & replcae the filename of the target chapter number
+
+
+
                 // show our progress
                 inProcess.PerformStep();
             }
@@ -3748,6 +3791,70 @@ namespace SIL.PublishingSolution
                     sb.Length = 0;
                 }
             }
+        }
+
+        private void InsertChapterLinkBelowBookName(string contentFolder)
+        {
+            string[] files = Directory.GetFiles(contentFolder, "PartFile*.xhtml");
+            List<string> chapterIdList = new List<string>();
+            string fileName = string.Empty;
+            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            foreach (string sourceFile in files)
+            {
+                if(!File.Exists(sourceFile)) return;
+                fileName = Path.GetFileName(sourceFile);
+                XmlReader xmlReader = XmlReader.Create(sourceFile, xmlReaderSettings);
+                xmlDocument.Load(xmlReader);
+                xmlReader.Close();
+                if (_inputType.Equals("scripture"))
+                {
+                    XmlNodeList nodes = xmlDocument.SelectNodes(".//xhtml:div[@class='Chapter_Number']", namespaceManager);
+                    foreach (XmlNode chapterNode in nodes)
+                    {
+                        string value = fileName + "#" + chapterNode.Attributes["id"].Value;
+                        if (!chapterIdList.Contains(value))
+                            chapterIdList.Add(value);
+                    }
+                }
+            }
+            foreach (string sourceFile in files)
+            {
+                fileName = Path.GetFileNameWithoutExtension(sourceFile);
+                if (fileName.LastIndexOf("_01") == fileName.Length - 3 || fileName.LastIndexOf("_") == fileName.Length - 1)
+                {
+                    string[] valueList1 = Path.GetFileNameWithoutExtension(sourceFile).Split('_');
+                    XmlReader xmlReader = XmlReader.Create(sourceFile, xmlReaderSettings);
+                    xmlDocument.Load(xmlReader);
+                    xmlReader.Close();
+                    const string xPath = ".//xhtml:div[@class='Section_Head']";
+                    XmlNodeList nodes = xmlDocument.SelectNodes(xPath, namespaceManager);
+
+                    foreach (string VARIABLE in chapterIdList)
+                    {
+                        string[] valueList = VARIABLE.Split('_');
+                        if (valueList[0] != valueList1[0])
+                            continue;
+
+                        XmlNode nodeContent = xmlDocument.CreateElement("a", xmlDocument.DocumentElement.NamespaceURI);
+                        XmlAttribute attribute = xmlDocument.CreateAttribute("href");
+                        attribute.Value = VARIABLE;
+                        nodeContent.Attributes.Append(attribute);
+                        nodeContent.InnerText = GetChapterNumber(VARIABLE);
+                        nodes[0].ParentNode.InsertBefore(nodeContent, nodes[0]);
+                    }
+
+                    xmlDocument.Save(sourceFile);
+                }
+            }
+        }
+
+        private string GetChapterNumber(string value)
+        {
+            string[] valueList = value.Split('_');
+            return valueList[valueList.Length - 1].ToLower().Replace("chapter", "");
         }
 
         #endregion

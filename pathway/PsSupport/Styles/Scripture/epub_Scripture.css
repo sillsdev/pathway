@@ -167,7 +167,7 @@ the user's preferences from the Configuration Tool:
     clear: both;
 }
 /* hidden items */
-.rem, .scrBookName, .Verse_Number1, .scrBookCode {
+.rem, .Verse_Number1, .scrBookCode {
     display : none;
     visibility: hidden;
 }
