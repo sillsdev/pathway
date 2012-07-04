@@ -277,17 +277,30 @@ namespace SIL.PublishingSolution
                 paratextProjectLocation = (string)paraTextprojectPath;
                 paratextProjectLocation = Path.Combine(paratextProjectLocation, m_projectName);
                 paratextProjectLocation = Path.Combine(paratextProjectLocation, "gather");
-                string[] vrsfiles = Directory.GetFiles(paratextProjectLocation, "*.vrs");
-                for (int i = 0; i < vrsfiles.Length; i++)
+
+                string vrsFileName = "eng";
+                string ldsFileName = "*"; //project file name associate file.
+
+                if (!Directory.Exists(paratextProjectLocation))
                 {
-                    File.Copy(vrsfiles[i], vrsFileDest);
+                    paratextProjectLocation = (string)paraTextprojectPath;
+                }
+                string ssfFileName = Path.Combine(paratextProjectLocation, Common.databaseName + ".ssf");
+                XmlDocument xmlDoc = Common.DeclareXMLDocument(false);
+                xmlDoc.Load(ssfFileName);
+                string xPath = "//Language";
+                XmlNode list = xmlDoc.SelectSingleNode(xPath);
+                if (list != null)
+                {
+                    ldsFileName = list.InnerText;
                 }
 
-                string[] ldsfiles = Directory.GetFiles(paratextProjectLocation, "*.lds");
-                for (int i = 0; i < ldsfiles.Length; i++)
-                {
-                    File.Copy(ldsfiles[i], ldsFileDest);
-                }
+                if (File.Exists(Path.Combine(paratextProjectLocation, vrsFileName + ".vrs")))
+                    File.Copy(Path.Combine(paratextProjectLocation, vrsFileName + ".vrs"), vrsFileDest);
+
+                if (File.Exists(Path.Combine(paratextProjectLocation, ldsFileName + ".lds")))
+                    File.Copy(Path.Combine(paratextProjectLocation, ldsFileName + ".lds"), ldsFileDest);
+
             }
 
             m_outputLocationPath = Path.Combine(m_outputLocationPath, "usx");
@@ -313,7 +326,7 @@ namespace SIL.PublishingSolution
                 {
                     foreach (XmlNode xmlNode in list)
                     {
-                        bookName = xmlNode.Attributes["id"].Value;
+                        if (xmlNode.Attributes != null) bookName = xmlNode.Attributes["id"].Value;
                     }
                 }
 
