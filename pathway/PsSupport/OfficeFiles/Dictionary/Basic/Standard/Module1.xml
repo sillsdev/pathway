@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On May-21-2012 for TD-2989(Export to PDF produces BASIC error)
+&apos;Changed On July-05-2012 for TD-3058(LibreOffice 3.5 crashes on Pathway export of Gondwana OneColumn)
 
 &apos;Define the values to Constant Variables for First Guide word, Last Guide word ,Headword Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -32,7 +32,9 @@ On Error GoTo MyError:
 	
 	AlingOverlappingImages()
 	
-	HideODMVariable()
+	If  Right(Trim(ThisComponent.Title),4) = &quot;.odm&quot; Then
+		HideODMVariable()
+	End If
 
 	UpdateTOC()
 	

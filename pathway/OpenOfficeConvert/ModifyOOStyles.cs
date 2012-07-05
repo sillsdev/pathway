@@ -95,12 +95,20 @@ namespace SIL.PublishingSolution
                         hdrtextPropNode.Attributes["style:font-name-complex"].Value = odmMTFont;
                         return;
                     }
-                    if (_childStyle.ContainsKey("headword_entry_letData_dicBody"))
+                    if (_childStyle.ContainsKey("headword_entry_letData_dicBody") )
                     {
                         if (_childStyle["headword_entry_letData_dicBody"].ContainsKey("font-family"))
                         {
                             hdrtextPropNode.Attributes["style:font-name-complex"].Value =
                                 _childStyle["headword_entry_letData_dicBody"]["font-family"];
+                        }
+                    }
+                    else if(_childStyle.ContainsKey("headword_entry_letData_body")) 
+                    {
+                        if (_childStyle["headword_entry_letData_body"].ContainsKey("font-family"))
+                        {
+                            hdrtextPropNode.Attributes["style:font-name-complex"].Value =
+                                _childStyle["headword_entry_letData_body"]["font-family"];
                         }
                     }
                 }
@@ -121,6 +129,12 @@ namespace SIL.PublishingSolution
                         if (_childStyle["scrBookName_scrBook_scrBody"].ContainsKey("font-family"))
                             hdrtextPropNode.Attributes["style:font-name-complex"].Value =
                                 _childStyle["scrBookName_scrBook_scrBody"]["font-family"];
+                    }
+                    else if (_childStyle.ContainsKey("headword_entry_letData_body"))
+                    {
+                        if (_childStyle["headword_entry_letData_body"].ContainsKey("font-family"))
+                            hdrtextPropNode.Attributes["style:font-name-complex"].Value =
+                                _childStyle["headword_entry_letData_body"]["font-family"];
                     }
                 }
             }
