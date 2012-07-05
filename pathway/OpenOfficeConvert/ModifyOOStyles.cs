@@ -113,7 +113,7 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
-            else
+            else//Scripture
             {
                 _styleXMLdoc = new XmlDocument();
                 _styleXMLdoc.Load(styleFilePath);
@@ -129,12 +129,6 @@ namespace SIL.PublishingSolution
                         if (_childStyle["scrBookName_scrBook_scrBody"].ContainsKey("font-family"))
                             hdrtextPropNode.Attributes["style:font-name-complex"].Value =
                                 _childStyle["scrBookName_scrBook_scrBody"]["font-family"];
-                    }
-                    else if (_childStyle.ContainsKey("headword_entry_letData_body"))
-                    {
-                        if (_childStyle["headword_entry_letData_body"].ContainsKey("font-family"))
-                            hdrtextPropNode.Attributes["style:font-name-complex"].Value =
-                                _childStyle["headword_entry_letData_body"]["font-family"];
                     }
                 }
             }
