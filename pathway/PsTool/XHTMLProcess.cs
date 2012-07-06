@@ -653,6 +653,7 @@ namespace SIL.PublishingSolution
                                 int srtPos = var.IndexOf('(');
                                 int endPos = var.IndexOf(')');
                                 string var1 = var.Substring(srtPos + 1, endPos - srtPos - 1);
+                                string var2 = var1.Replace("decimal", "");
                                 if (ContentCounter.ContainsKey(var1))
                                 {
                                     ConcatContent = ConcatContent + ContentCounter[var1];
@@ -660,6 +661,10 @@ namespace SIL.PublishingSolution
                                 else if (var1 == "sensedisc")
                                 {
                                     ConcatContent = ConcatContent + "•";
+                                }
+                                else if (ContentCounter.ContainsKey(var2))
+                                {
+                                    ConcatContent = ConcatContent + ContentCounter[var2];
                                 }
                                 else
                                 {
