@@ -148,13 +148,11 @@ namespace SIL.PublishingSolution
             Debug.Assert(noXmlSpaceStream != null);
             _noXmlSpace.Load(XmlReader.Create(noXmlSpaceStream));
             _addDicTocHeads.Load(XmlReader.Create(UsersXsl("addDicTocHeads.xsl")));
-            //InsertBeforeAfterInXHTML(projInfo);
-            bool success = true;
-            _langFontDictionary = new Dictionary<string, string>();
-            _embeddedFonts = new Dictionary<string, EmbeddedFont>();
+
             var myCursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
             var curdir = Environment.CurrentDirectory;
+            bool success = true;
             if (projInfo == null)
             {
                 // missing some vital information - error out
@@ -163,10 +161,23 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                // basic setup
+
 #if (TIME_IT)
                 DateTime dt1 = DateTime.Now;    // time this thing
 #endif
+                // basic setup
+                PreExportProcess preProcessor = new PreExportProcess(projInfo);
+                if (Common.UnixVersionCheck())
+                {
+                    AfterBeforeProcessEpub epubProcess = new AfterBeforeProcessEpub();
+                    epubProcess.PreserveSpace(projInfo.DefaultXhtmlFileWithPath);
+                }
+
+                InsertBeforeAfterInXHTML(projInfo);
+
+                _langFontDictionary = new Dictionary<string, string>();
+                _embeddedFonts = new Dictionary<string, EmbeddedFont>();
+
                 var inProcess = new InProcess(0, 9); // create a progress bar with 7 steps (we'll add more below)
                 inProcess.Text = Resources.Exportepub_Export_Exporting__epub_file;
                 inProcess.Show();
@@ -176,7 +187,7 @@ namespace SIL.PublishingSolution
                 var sb = new StringBuilder();
                 Guid bookId = Guid.NewGuid(); // NOTE: this creates a new ID each time Pathway is run. 
                 string outputFolder = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath); // finished .epub goes here
-                PreExportProcess preProcessor = new PreExportProcess(projInfo);
+
                 Environment.CurrentDirectory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
                 Common.SetProgressBarValue(projInfo.ProgressBar, projInfo.DefaultXhtmlFileWithPath);
                 inProcess.PerformStep();
@@ -238,43 +249,44 @@ namespace SIL.PublishingSolution
 
                 if (langArray.Length > 0)
                 {
-                    XmlDocument xdoc = Common.DeclareXMLDocument(true);
-                    XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xdoc.NameTable);
-                    namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-                    xdoc.Load(preProcessor.ProcessedXhtml);
-                    //XmlNode bookNode1 = xdoc.DocumentElement;
-                    string xPath = "//xhtml:div[@class='scrBook']";
-                    XmlNodeList node = xdoc.GetElementsByTagName("html", "http://www.w3.org/1999/xhtml");
-                    if(node[0].Attributes["lang"] != null)
-                    {
-                        node[0].Attributes["lang"].Value = langArray[0];
-                    }
-                    else
-                    {
-                        XmlAttribute attr = xdoc.CreateAttribute("lang");
-                        attr.Value = langArray[0];
-                        xdoc.DocumentElement.SetAttributeNode(attr);
-                    }
+                    //XmlDocument xdoc = Common.DeclareXMLDocument(true);
+                    //XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xdoc.NameTable);
+                    //namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+                    //xdoc.Load(preProcessor.ProcessedXhtml);
+                    ////XmlNode bookNode1 = xdoc.DocumentElement;
+                    //string xPath = "//xhtml:div[@class='scrBook']";
+                    //XmlNodeList node = xdoc.GetElementsByTagName("html", "http://www.w3.org/1999/xhtml");
 
-                    if (node[0].Attributes["dir"] != null)
-                    {
-                        node[0].Attributes["dir"].Value = Common.GetTextDirection(langArray[0]);
-                    }
-                    else
-                    {
-                        XmlAttribute attr = xdoc.CreateAttribute("dir");
-                        attr.Value = Common.GetTextDirection(langArray[0]);
-                        xdoc.DocumentElement.SetAttributeNode(attr);
-                    }
-                    xdoc.Save(preProcessor.ProcessedXhtml);
-                    //Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html",
-                    //                           string.Format(
-                    //                               "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'",
-                    //                               langArray[0], Common.GetTextDirection(langArray[0])));
-                    //Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html>",
-                    //                           string.Format(
-                    //                               "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'>",
-                    //                               langArray[0], Common.GetTextDirection(langArray[0])));
+                    //if (node[0].Attributes.Count > 0 && node[0].Attributes["lang"] != null)
+                    //{
+                    //    node[0].Attributes["lang"].Value = langArray[0];
+                    //}
+                    //else
+                    //{
+                    //    XmlAttribute attr = xdoc.CreateAttribute("lang");
+                    //    attr.Value = langArray[0];
+                    //    xdoc.DocumentElement.SetAttributeNode(attr);
+                    //}
+
+                    //if (node[0].Attributes.Count > 0 && node[0].Attributes["dir"] != null)
+                    //{
+                    //    node[0].Attributes["dir"].Value = Common.GetTextDirection(langArray[0]);
+                    //}
+                    //else
+                    //{
+                    //    XmlAttribute attr = xdoc.CreateAttribute("dir");
+                    //    attr.Value = Common.GetTextDirection(langArray[0]);
+                    //    xdoc.DocumentElement.SetAttributeNode(attr);
+                    //}
+                    //xdoc.Save(preProcessor.ProcessedXhtml);
+                    Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html",
+                                               string.Format(
+                                                   "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'",
+                                                   langArray[0], Common.GetTextDirection(langArray[0])));
+                    Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html>",
+                                               string.Format(
+                                                   "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'>",
+                                                   langArray[0], Common.GetTextDirection(langArray[0])));
                 }
 
                 if (Path.GetFileName(preProcessor.ProcessedXhtml).ToLower() == "flexrev.xhtml")
@@ -442,7 +454,7 @@ namespace SIL.PublishingSolution
                     UpdateReferenceHyperlinks(contentFolder, inProcess);
                 }
                 FixRelativeHyperlinks(contentFolder, inProcess);
-                
+
 #if (TIME_IT)
                 TimeSpan tsRefTotal = DateTime.Now - dtRefStart;
                 Debug.WriteLine("Exportepub: time spent fixing reference hyperlinks: " + tsRefTotal);
@@ -857,9 +869,6 @@ namespace SIL.PublishingSolution
                 {
                     sb.AppendLine("24pt;");
                 }
-                //sb.AppendLine(".scrBookCode {"); //Hide Bookcode
-                //sb.Append("display: none; }");
-
                 Common.StreamReplaceInFile(cssFile, ".Chapter_Number {", sb.ToString());
             }
             // DefaultAlignment - several spots in the css file
@@ -1435,53 +1444,55 @@ namespace SIL.PublishingSolution
                     if (IncludeFontVariants)
                     {
                         // Italic version
-                        if (embeddedFont.HasItalic)
-                        {
-                            sb.Append(".partofspeech, .example, .grammatical-info, .lexref-type, ");
-                            sb.Append(".parallel_passage_reference, .Parallel_Passage_Reference, ");
-                            sb.AppendLine(".Emphasis, .pictureCaption, .Section_Range_Paragraph {");
-                            sb.Append("font-family: 'i_");
-                            sb.Append(language.Value);
-                            sb.Append("', ");
-                            if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
+                        if (embeddedFont != null)
+                            if (embeddedFont.HasItalic)
                             {
-                                sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
+                                sb.Append(".partofspeech, .example, .grammatical-info, .lexref-type, ");
+                                sb.Append(".parallel_passage_reference, .Parallel_Passage_Reference, ");
+                                sb.AppendLine(".Emphasis, .pictureCaption, .Section_Range_Paragraph {");
+                                sb.Append("font-family: 'i_");
+                                sb.Append(language.Value);
+                                sb.Append("', ");
+                                if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
+                                {
+                                    sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
+                                }
+                                else
+                                {
+                                    // fall back on a serif font if we can't find it (shouldn't happen)
+                                    sb.AppendLine("Times, serif;");
+                                }
+                                sb.AppendLine("}");
                             }
-                            else
-                            {
-                                // fall back on a serif font if we can't find it (shouldn't happen)
-                                sb.AppendLine("Times, serif;");
-                            }
-                            sb.AppendLine("}");
-                        }
                         // Bold version
-                        if (embeddedFont.HasBold)
-                        {
-                            sb.Append(
-                                ".headword, .headword-minor, .LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub, ");
-                            sb.Append(".LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub, .xsensenumber");
-                            sb.Append(
-                                ".complexform-form, .crossref, .LexEntry-publishStemComponentTarget-MLHeadWordPub, ");
-                            sb.Append(
-                                ".LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub, .LexSense-publishStemComponentTarget-OwnerOutlinePub, ");
-                            sb.Append(".LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub, .sense-crossref, ");
-                            sb.Append(".crossref-headword, .reversal-form, ");
-                            sb.Append(".Alternate_Reading, .Section_Head, .Section_Head_Minor, ");
-                            sb.AppendLine(".Inscription, .Intro_Section_Head, .Section_Head_Major, .iot {");
-                            sb.Append("font-family: 'b_");
-                            sb.Append(language.Value);
-                            sb.Append("', ");
-                            if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
+                        if (embeddedFont != null)
+                            if (embeddedFont.HasBold)
                             {
-                                sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
+                                sb.Append(
+                                    ".headword, .headword-minor, .LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub, ");
+                                sb.Append(".LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub, .xsensenumber");
+                                sb.Append(
+                                    ".complexform-form, .crossref, .LexEntry-publishStemComponentTarget-MLHeadWordPub, ");
+                                sb.Append(
+                                    ".LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub, .LexSense-publishStemComponentTarget-OwnerOutlinePub, ");
+                                sb.Append(".LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub, .sense-crossref, ");
+                                sb.Append(".crossref-headword, .reversal-form, ");
+                                sb.Append(".Alternate_Reading, .Section_Head, .Section_Head_Minor, ");
+                                sb.AppendLine(".Inscription, .Intro_Section_Head, .Section_Head_Major, .iot {");
+                                sb.Append("font-family: 'b_");
+                                sb.Append(language.Value);
+                                sb.Append("', ");
+                                if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
+                                {
+                                    sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
+                                }
+                                else
+                                {
+                                    // fall back on a serif font if we can't find it (shouldn't happen)
+                                    sb.AppendLine("Times, serif;");
+                                }
+                                sb.AppendLine("}");
                             }
-                            else
-                            {
-                                // fall back on a serif font if we can't find it (shouldn't happen)
-                                sb.AppendLine("Times, serif;");
-                            }
-                            sb.AppendLine("}");
-                        }
                     }
                     // finished processing - clear the flag
                     firstLang = false;
@@ -1512,105 +1523,107 @@ namespace SIL.PublishingSolution
                 if (IncludeFontVariants)
                 {
                     // italic version
-                    if (embeddedFont.HasItalic)
-                    {
-                        // dictionary
-                        sb.Append(".partofspeech:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .example:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .grammatical-info:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .lexref-type:lang(");
-                        sb.Append(language.Key);
-                        // scripture
-                        sb.Append("), .parallel_passage_reference:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .Parallel_Passage_Reference:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .Emphasis:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .pictureCaption:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .Section_Range_Paragraph:lang(");
-                        sb.Append(language.Key);
-                        sb.AppendLine(") {");
-                        sb.Append("font-family: 'i_");
-                        sb.Append(language.Value);
-                        sb.Append("', ");
-                        if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
+                    if (embeddedFont != null)
+                        if (embeddedFont.HasItalic)
                         {
-                            sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
+                            // dictionary
+                            sb.Append(".partofspeech:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .example:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .grammatical-info:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .lexref-type:lang(");
+                            sb.Append(language.Key);
+                            // scripture
+                            sb.Append("), .parallel_passage_reference:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .Parallel_Passage_Reference:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .Emphasis:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .pictureCaption:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .Section_Range_Paragraph:lang(");
+                            sb.Append(language.Key);
+                            sb.AppendLine(") {");
+                            sb.Append("font-family: 'i_");
+                            sb.Append(language.Value);
+                            sb.Append("', ");
+                            if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
+                            {
+                                sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
+                            }
+                            else
+                            {
+                                // fall back on a serif font if we can't find it (shouldn't happen)
+                                sb.AppendLine("Times, serif;");
+                            }
+                            sb.AppendLine("}");
                         }
-                        else
-                        {
-                            // fall back on a serif font if we can't find it (shouldn't happen)
-                            sb.AppendLine("Times, serif;");
-                        }
-                        sb.AppendLine("}");
-                    }
                     // bold version
-                    if (embeddedFont.HasBold)
-                    {
-                        // dictionary
-                        sb.Append(".headword:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .headword-minor:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .xsensenumber:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .complexform-form:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .crossref:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .LexEntry-publishStemComponentTarget-MLHeadWordPub:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .LexSense-publishStemComponentTarget-OwnerOutlinePub:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .sense-crossref:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .crossref-headword:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .reversal-form:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .Alternate_Reading:lang(");
-                        // scripture
-                        sb.Append(language.Key);
-                        sb.Append("), .Section_Head:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .Section_Head_Minor:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .Inscription:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .Intro_Section_Head:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .Section_Head_Major:lang(");
-                        sb.Append(language.Key);
-                        sb.Append("), .iot:lang(");
-                        sb.Append(language.Key);
-                        sb.AppendLine(") {");
-                        sb.Append("font-family: 'b_");
-                        sb.Append(language.Value);
-                        sb.Append("', ");
-                        if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
+                    if (embeddedFont != null)
+                        if (embeddedFont.HasBold)
                         {
-                            sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
+                            // dictionary
+                            sb.Append(".headword:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .headword-minor:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .xsensenumber:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .complexform-form:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .crossref:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .LexEntry-publishStemComponentTarget-MLHeadWordPub:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .LexSense-publishStemComponentTarget-OwnerOutlinePub:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .sense-crossref:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .crossref-headword:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .reversal-form:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .Alternate_Reading:lang(");
+                            // scripture
+                            sb.Append(language.Key);
+                            sb.Append("), .Section_Head:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .Section_Head_Minor:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .Inscription:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .Intro_Section_Head:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .Section_Head_Major:lang(");
+                            sb.Append(language.Key);
+                            sb.Append("), .iot:lang(");
+                            sb.Append(language.Key);
+                            sb.AppendLine(") {");
+                            sb.Append("font-family: 'b_");
+                            sb.Append(language.Value);
+                            sb.Append("', ");
+                            if (_embeddedFonts.TryGetValue(language.Value, out embeddedFont))
+                            {
+                                sb.AppendLine((embeddedFont.Serif) ? "Times, serif;" : "Arial, sans-serif;");
+                            }
+                            else
+                            {
+                                // fall back on a serif font if we can't find it (shouldn't happen)
+                                sb.AppendLine("Times, serif;");
+                            }
+                            sb.AppendLine("}");
                         }
-                        else
-                        {
-                            // fall back on a serif font if we can't find it (shouldn't happen)
-                            sb.AppendLine("Times, serif;");
-                        }
-                        sb.AppendLine("}");
-                    }
                 }
             }
             sb.AppendLine("/* end auto-generated font info */");
@@ -3386,7 +3399,7 @@ namespace SIL.PublishingSolution
             File.Copy(fileFullPath, tempFullName);
 
             // Renumber all PlayOrder attributes in order with no gaps.
-            XmlTextReader reader = new XmlTextReader(tempFullName) { XmlResolver = null };
+            XmlTextReader reader = Common.DeclareXmlTextReader(tempFullName, false);
             FileStream xmlFile = new FileStream(fileFullPath, FileMode.Create);
             XmlWriter writer = XmlWriter.Create(xmlFile, xslt.OutputSettings);
             xslt.Transform(reader, null, writer, null);
@@ -3804,7 +3817,7 @@ namespace SIL.PublishingSolution
             XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
             foreach (string sourceFile in files)
             {
-                if(!File.Exists(sourceFile)) return;
+                if (!File.Exists(sourceFile)) return;
                 fileName = Path.GetFileName(sourceFile);
                 XmlReader xmlReader = XmlReader.Create(sourceFile, xmlReaderSettings);
                 xmlDocument.Load(xmlReader);

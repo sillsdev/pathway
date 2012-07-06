@@ -2309,6 +2309,7 @@ namespace SIL.PublishingSolution
             {
                 if (grid.Rows[i].Cells[ColumnName].Value.ToString() == sheet)
                 {
+					grid.ClearSelection();
                     grid.Rows[i].Selected = true;
                     SelectedRowIndex = i;
                     result = true;

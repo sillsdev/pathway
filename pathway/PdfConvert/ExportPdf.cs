@@ -94,7 +94,7 @@ namespace SIL.PublishingSolution
             try
             {
                 var regPrinceKey = RegPrinceKey;
-                if (regPrinceKey != null || Common.GetOsName().ToUpper() == "UNIX")
+                if (regPrinceKey != null || Common.UnixVersionCheck())
                 {
                     var curdir = Environment.CurrentDirectory;
                     PreExportProcess preProcessor = new PreExportProcess(projInfo);
@@ -115,7 +115,7 @@ namespace SIL.PublishingSolution
                     string defaultCSS = Path.GetFileName(mergedCSS);
                     Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCSS);
                     _processedXhtml = preProcessor.ProcessedXhtml;
-                    if (Common.GetOsName().ToUpper() != "UNIX")
+                    if (Common.UnixVersionCheck())
                     {
                         Object princePath = regPrinceKey.GetValue("InstallLocation");
                         _fullPrincePath = Common.PathCombine((string)princePath, "Engine/Bin/Prince.exe");

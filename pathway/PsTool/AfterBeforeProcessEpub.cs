@@ -152,7 +152,7 @@ namespace SIL.PublishingSolution
         private bool _isPictureDisplayNone = false;
         
         private bool _isEmptyTitleExist;
-        private int _titleCounter=1;
+        private int _titleCounter = 1;
         private int _pageWidth;
 
         private string _originalXHTML = string.Empty;
@@ -202,8 +202,8 @@ namespace SIL.PublishingSolution
             string sourceFile = "";
             //if (projInfo.FinalOutput == "epub")
             //{
-                sourceFile = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", "_1.xhtml");
-                File.Copy(projInfo.DefaultXhtmlFileWithPath, sourceFile,true);
+            sourceFile = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", "_1.xhtml");
+            File.Copy(projInfo.DefaultXhtmlFileWithPath, sourceFile, true);
             //}
             //else if (projInfo.FinalOutput == "odt" || projInfo.FinalOutput == "idml")
             //{
@@ -235,7 +235,7 @@ namespace SIL.PublishingSolution
             _displayBlock = new Dictionary<string, string>();
             _cssClassOrder = cssClassOrder;
             //_classFamily = new Dictionary<string, ArrayList>();
-            
+
             _sourcePicturePath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             _projectPath = projInfo.TempOutputFolder;
 
@@ -649,6 +649,76 @@ namespace SIL.PublishingSolution
         {
             
             _writer = new XmlTextWriter(projInfo.DefaultXhtmlFileWithPath, null);
+        }
+
+        /// <summary>
+        /// 1. Modify <html  xmlns="http://www.w3.org/1999/xhtml"> tag as <html>
+        /// 2. Modify <body> tag as <body xml:space="preserve">
+        /// </summary>
+        public string PreserveSpace(string xhtmlFileNameWithPath)
+        {
+            FileStream fs = new FileStream(xhtmlFileNameWithPath, FileMode.Open);
+            StreamReader stream = new StreamReader(fs);
+
+            string fileDir = Path.GetDirectoryName(xhtmlFileNameWithPath);
+            string fileName = "Preserve" + Path.GetFileName(xhtmlFileNameWithPath);
+            string Newfile = Path.Combine(fileDir, fileName);
+
+            var fs2 = new FileStream(Newfile, FileMode.Create, FileAccess.Write);
+            var sw2 = new StreamWriter(fs2);
+            string line;
+            bool headStart = false;
+            bool replace = true;
+            while ((line = stream.ReadLine()) != null)
+            {
+                if (replace)
+                {
+                    int htmlNodeStart = line.IndexOf("<html");
+                    if (htmlNodeStart >= 0)
+                    {
+                        int htmlNodeEnd = line.IndexOf(">", htmlNodeStart);
+                        string line1 = "<?xml version=\"1.0\" encoding=\"utf-8\"?> <!DOCTYPE html[]>";
+                        line = line1 + "<html" + line.Substring(htmlNodeEnd);
+                        sw2.WriteLine(line);
+                    }
+                    else if (line.IndexOf("<body") >= 0)
+                    {
+                        //line = line.Replace(">", @" xml:space=""preserve"">");
+                        line = line.Replace("<body", @" <body xml:space=""preserve""  ");
+                        sw2.WriteLine(line);
+                        replace = false;
+                    }
+                    else if (line.IndexOf("<head") >= 0)
+                    {
+                        headStart = true;
+                    }
+
+                    if (headStart)
+                    {
+                        if (line.IndexOf("</head") >= 0)
+                        {
+                            headStart = false;
+                        }
+                        sw2.WriteLine(line);
+                    }
+                }
+                else
+                {
+
+                    sw2.WriteLine(line);
+                }
+
+            }
+            stream.Close();
+            sw2.Close();
+            fs.Close();
+            fs2.Close();
+
+
+            File.Move(xhtmlFileNameWithPath, xhtmlFileNameWithPath.Replace(".", "_File."));
+            File.Move(Newfile, Newfile.Replace("Preserve", ""));
+            File.Delete(Newfile);
+            return xhtmlFileNameWithPath;
         }
     }
 }

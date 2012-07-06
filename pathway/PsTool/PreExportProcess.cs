@@ -131,7 +131,17 @@ namespace SIL.Tool
                 {
                     // at least one front matter item selected
                     var sbPreamble = new StringBuilder();
-                    sbPreamble.Append("<?xml version='1.0' encoding='utf-8'?><!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'[]>");
+
+                    if (Common.UnixVersionCheck())
+                    {
+                        sbPreamble.Append("<?xml version='1.0' encoding='utf-8'?><!DOCTYPE html[]>");
+                    }
+                    else
+                    {
+                        sbPreamble.Append("<?xml version='1.0' encoding='utf-8'?><!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'[]>");
+                    }
+
+
                     sbPreamble.Append("<html xmlns='http://www.w3.org/1999/xhtml'><head><title>");
                     sbPreamble.Append(_projInfo.ProjectName);
                     sbPreamble.Append("</title><link rel='stylesheet' href='");
@@ -545,7 +555,7 @@ namespace SIL.Tool
         {
             //Reversal XHTML file
             if (_xhtmlFileNameWithPath != null)
-                _xhtmlRevFileNameWithPath = Path.Combine(Path.GetDirectoryName(_xhtmlFileNameWithPath),"FlexRev.xhtml");
+                _xhtmlRevFileNameWithPath = Path.Combine(Path.GetDirectoryName(_xhtmlFileNameWithPath), "FlexRev.xhtml");
 
             // sanity checks
             if (Param.GetMetadataValue(Param.TableOfContents).ToLower().Equals("false")) { return string.Empty; }
@@ -570,7 +580,7 @@ namespace SIL.Tool
                     sb.AppendLine("<h1>Table of Contents</h1><h2>Main</h2>");
                 }
                 // collect book names
-                
+
                 XmlNodeList bookIDs, bookNames;
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
@@ -677,7 +687,7 @@ namespace SIL.Tool
                     }
                     sb.AppendLine("</ul>");
                 }
-                
+
             }
             else
             {
@@ -697,8 +707,6 @@ namespace SIL.Tool
                 xmlReader = XmlReader.Create(_xhtmlRevFileNameWithPath, xmlReaderSettings);
                 xmlDocument.Load(xmlReader);
                 xmlReader.Close();
-                
-                
                 XmlNodeList revBookIDs = null, revBookNames = null;
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
@@ -1177,7 +1185,7 @@ namespace SIL.Tool
                     frontMatterXHTMLContent = tocNode.OuterXml + dummyNode.OuterXml;
                     _projInfo.IsFrontMatterEnabled = true;
                 }
-                
+
                 if (File.Exists(copyRightFilePath))
                 {
                     XmlDocument crdoc = Common.DeclareXMLDocument(true);
@@ -1344,8 +1352,8 @@ namespace SIL.Tool
         /// </summary>
         public void ReplaceSlashToREVERSE_SOLIDUS()
         {
-            return; 
-            
+            return;
+
             //string searchText = "class=\"\\\\";
             //string replaceText = "class=\"REVERSESOLIDUS";
             //Common.StreamReplaceInFile(_xhtmlFileNameWithPath, searchText, replaceText);
@@ -1991,14 +1999,14 @@ namespace SIL.Tool
                         sw2.WriteLine(line);
                         replace = false;
                     }
-                    
+
                 }
                 else
                 {
 
                     sw2.WriteLine(line);
                 }
-                
+
             }
             sw2.Close();
             fs.Close();
@@ -2031,7 +2039,7 @@ namespace SIL.Tool
                     {
                         string[] num = new string[] { };
                         string currVerse = string.Empty;
-                        
+
                         if (o.Attributes["title"].Value.Contains("-"))
                         {
                             num = o.Attributes["title"].Value.Split('-');
@@ -2492,7 +2500,7 @@ namespace SIL.Tool
         {
             try
             {
-		        var xDoc = Common.DeclareXMLDocument(false);
+                var xDoc = Common.DeclareXMLDocument(false);
                 xDoc.Load(_xhtmlFileNameWithPath);
                 XmlNodeList nodeList = xDoc.GetElementsByTagName("meta");
                 if (nodeList.Count > 0)
@@ -2693,7 +2701,7 @@ namespace SIL.Tool
             }
 
         }
-        
+
         #endregion
 
         #region XML PreProcessor

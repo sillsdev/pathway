@@ -914,7 +914,7 @@ namespace TestBed
                 registryValue = Common.GetValueFromRegistry(registrySubDirectory, keyName);
             else if (Common.GetOsName() == "Windows XP")
                 registryValue = Common.GetValueFromRegistry(registrySubDirectory, keyName);
-            else if (Common.GetOsName().ToUpper() == "UNIX")
+            else if (Common.UnixVersionCheck())
             {
                 System.Security.Principal.WindowsPrincipal p =
                     System.Threading.Thread.CurrentPrincipal as System.Security.Principal.WindowsPrincipal;

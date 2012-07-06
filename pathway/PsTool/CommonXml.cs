@@ -129,7 +129,7 @@ namespace SIL.Tool
             if (!File.Exists(fileName)) return string.Empty;
             string metaName = string.Empty;
             //var reader = new XmlTextReader(fileName) { XmlResolver = null, WhitespaceHandling = WhitespaceHandling.Significant };
-	    XmlTextReader reader = Common.DeclareXmlTextReader(fileName, true);
+            XmlTextReader reader = Common.DeclareXmlTextReader(fileName, true);
             while (reader.Read())
             {
                 if (reader.IsEmptyElement)
@@ -197,12 +197,12 @@ namespace SIL.Tool
             }
 
             string metaData = _projectInputType.ToLower() == "scripture" ? "ScriptureStyleSettings.xml" : "DictionaryStyleSettings.xml";
-            
+
             if (metaDataFull == string.Empty)
             {
                 metaDataFull = Path.Combine(Path.Combine(Path.Combine(Path.Combine(GetAllUserAppPath(), "SIL"), "Pathway"), _projectInputType), metaData);
             }
-            
+
             if (!File.Exists(metaDataFull)) return _metaDataDic;
 
             XmlDocument xmlDocument = new XmlDocument();
@@ -414,7 +414,7 @@ namespace SIL.Tool
             if (fromPath == string.Empty)
             {
 
-                if (Common.GetOsName().ToLower() != "unix")
+                if (!Common.UnixVersionCheck())
                 {
                     string databaseNamePara = databaseName; // "NKOu1"; // todo substitute for database name
                     string key = @"HKEY_LOCAL_MACHINE\SOFTWARE\ScrChecks\1.0\Settings_Directory";
@@ -540,7 +540,7 @@ namespace SIL.Tool
             {
                 return;
             }
-            var xmldoc = new XmlDocument { XmlResolver = null };
+            var xmldoc = Common.DeclareXMLDocument(false);
             xmldoc.Load(xhtmlFile);
             XmlNodeList headnodes = xmldoc.GetElementsByTagName("head");
             XmlNode headnode = headnodes[0];
@@ -597,7 +597,7 @@ namespace SIL.Tool
         public static XmlNode GetXmlNode(string xmlFileNameWithPath, string xPath)
         {
             XmlDocument xmlDoc = Common.DeclareXMLDocument(false);
-            
+
             xmlFileNameWithPath = DirectoryPathReplace(xmlFileNameWithPath);
             if (!File.Exists(xmlFileNameWithPath))
             {
@@ -1074,12 +1074,7 @@ namespace SIL.Tool
 
             try
             {
-                _reader = new XmlTextReader(xhtmlFileWithPath)
-                {
-                    XmlResolver = null,
-                    WhitespaceHandling = WhitespaceHandling.Significant
-                };
-
+                _reader = Common.DeclareXmlTextReader(xhtmlFileWithPath, false);
             }
             catch (Exception ex)
             {

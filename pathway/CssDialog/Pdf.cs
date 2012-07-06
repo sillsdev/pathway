@@ -72,7 +72,7 @@ namespace SIL.PublishingSolution
             Debug.Assert(!string.IsNullOrEmpty(Xhtml), "xhtml not set");
             //Debug.Assert(!string.IsNullOrEmpty(Css), "css not set");
 
-            if (Common.GetOsName().ToUpper() == "UNIX")
+            if (Common.UnixVersionCheck())
             {
                 if (!File.Exists("/usr/bin/Prince"))
                     throw new MISSINGPRINCE();

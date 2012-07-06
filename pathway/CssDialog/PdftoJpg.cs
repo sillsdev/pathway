@@ -105,7 +105,7 @@ namespace SIL.PublishingSolution
                 string fileExtenstion = ".jpg";
                 bool Converted = false;
                 FileInfo input = new FileInfo(outputPath);
-                if (osName == "Unix")
+                if (Common.UnixVersionCheck())
                 {
                     PDFtoImageConverter converter = new PDFtoImageConverter();
                     converter.OutputToMultipleFile = true;

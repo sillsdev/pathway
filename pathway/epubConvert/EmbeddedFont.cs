@@ -28,7 +28,7 @@ namespace epubConvert
     {
         private string _name, _filename, _italicFontname, _boldFontname;
         private bool _serif, _canRedistribute, _hasItalic, _hasBold;
-		
+
         /// <summary>
         /// Name of the font file, including the path.
         /// </summary>
@@ -58,7 +58,7 @@ namespace epubConvert
         /// </summary>
         public string BoldFilename
         {
-            get { return _boldFontname;  }
+            get { return _boldFontname; }
             protected set { _boldFontname = value; }
         }
         /// <summary>
@@ -85,7 +85,7 @@ namespace epubConvert
         public bool HasItalic
         {
             get { return _hasItalic; }
-            protected set { _hasItalic = value;  }
+            protected set { _hasItalic = value; }
         }
         /// <summary>
         /// Returns whether this font family has a Bold font family font installed on this system.
@@ -115,13 +115,13 @@ namespace epubConvert
             if (name == null)
             {
                 throw new ArgumentNullException();
-            }             
+            }
             Name = name;
             // edb 12/9/2010 BUGBUG:
             // need a way to query the font for its generic serif/sans-serif characteristics
             // this works for SIL fonts only because there's currently one sans-serif font (Andika)
-            Serif = (name.Contains("Andika")? false: true);
-			Filename = FontInternals.GetFontFileName(name, "normal");
+            Serif = (name.Contains("Andika") ? false : true);
+            Filename = FontInternals.GetFontFileName(name, "normal");
             ItalicFilename = FontInternals.GetFontFileName(name, "Italic");
             HasItalic = (ItalicFilename == null) ? false : true;
             BoldFilename = FontInternals.GetFontFileName(name, "Bold");
