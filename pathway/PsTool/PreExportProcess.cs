@@ -700,10 +700,6 @@ namespace SIL.Tool
             if (File.Exists(_xhtmlRevFileNameWithPath))
             {
                 //Reversal Code here starts
-                xmlDocument = Common.DeclareXMLDocument(false);
-                namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
-                namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-                xmlReaderSettings = Common.DeclareXmlReaderSettings(false);
                 xmlReader = XmlReader.Create(_xhtmlRevFileNameWithPath, xmlReaderSettings);
                 xmlDocument.Load(xmlReader);
                 xmlReader.Close();
