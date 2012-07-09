@@ -290,10 +290,7 @@ namespace SIL.PublishingSolution
                                                    langArray[0], Common.GetTextDirection(langArray[0])));
                 }
 
-                if (Path.GetFileName(preProcessor.ProcessedXhtml).ToLower() == "flexrev.xhtml")
-                {
-                    ApplyXslt(preProcessor.ProcessedXhtml, _noXmlSpace);
-                }
+                ApplyXslt(preProcessor.ProcessedXhtml, _noXmlSpace);
                 // end EDB 10/22/2010
                 inProcess.PerformStep();
 
