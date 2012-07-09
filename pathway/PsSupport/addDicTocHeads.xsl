@@ -26,7 +26,7 @@
         <xsl:param name="subCopy" select="No"/>
         <xsl:choose>
             <!-- Test for beginning of main section -->
-            <xsl:when test="ncx:content[@src='PartFile00001_.xhtml']">
+            <xsl:when test="ncx:content[@src='PartFile00001_.xhtml'] | ncx:content[@src='PartFile00001_01.xhtml']">
                 <xsl:copy>
                     <xsl:apply-templates select="@*"/>
                     <xsl:element name="navLabel" namespace="http://www.daisy.org/z3986/2005/ncx/">
@@ -50,7 +50,7 @@
             </xsl:when>
             
             <!-- Test for beginning of reversal section -->
-            <xsl:when test="ncx:content[@src='RevIndex00001_.xhtml']">
+            <xsl:when test="ncx:content[@src='RevIndex00001_.xhtml'] | ncx:content[@src='RevIndex00001_01.xhtml']">
                 <xsl:copy>
                     <xsl:apply-templates select="@*"/>
                     <xsl:element name="navLabel" namespace="http://www.daisy.org/z3986/2005/ncx/">
