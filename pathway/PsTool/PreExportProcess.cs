@@ -700,10 +700,10 @@ namespace SIL.Tool
             if (File.Exists(_xhtmlRevFileNameWithPath))
             {
                 //Reversal Code here starts
-                //XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
-                //XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
-                //namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-                //XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+                xmlDocument = Common.DeclareXMLDocument(false);
+                namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+                namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+                xmlReaderSettings = Common.DeclareXmlReaderSettings(false);
                 xmlReader = XmlReader.Create(_xhtmlRevFileNameWithPath, xmlReaderSettings);
                 xmlDocument.Load(xmlReader);
                 xmlReader.Close();
@@ -711,7 +711,7 @@ namespace SIL.Tool
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
                     // for dictionaries, the letter is used both for the ID and name
-                    revBookIDs = xmlDocument.SelectNodes("//xhtml:div[@class='letter']", namespaceManager);
+                    revBookIDs = xmlDocument.SelectNodes("//div[@class='letter']", namespaceManager);
                     revBookNames = revBookIDs;
                 }
                 if (revBookIDs != null && revBookIDs.Count > 0)

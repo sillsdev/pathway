@@ -169,6 +169,7 @@ namespace SIL.PublishingSolution
                 PreExportProcess preProcessor = new PreExportProcess(projInfo);
                 if (Common.UnixVersionCheck())
                 {
+                    
                     AfterBeforeProcessEpub epubProcess = new AfterBeforeProcessEpub();
                     epubProcess.PreserveSpace(projInfo.DefaultXhtmlFileWithPath);
                 }
