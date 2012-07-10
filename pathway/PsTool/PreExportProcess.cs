@@ -367,10 +367,16 @@ namespace SIL.Tool
             if (Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("false")) { return string.Empty; }
             var sb = new StringBuilder();
             sb.Append("<div id='TitlePage' class='Title'><h1>");
-            sb.Append(Common.ReplaceSymbolToText(Param.GetMetadataValue(Param.Title)));
+
+            if (Param.GetMetadataValue(Param.Title) != null)
+                sb.Append(Common.ReplaceSymbolToText(Param.GetMetadataValue(Param.Title)));
+
             sb.AppendLine("</h1>");
             sb.Append("<p class='Publisher'>");
-            sb.Append(Common.ReplaceSymbolToText(Param.GetMetadataValue(Param.Publisher)));
+
+            if (Param.GetMetadataValue(Param.Publisher) != null)
+                sb.Append(Common.ReplaceSymbolToText(Param.GetMetadataValue(Param.Publisher)));
+
             sb.AppendLine("</p>");
             // logo stuff
             sb.Append("<p class='logo'>");
@@ -573,7 +579,7 @@ namespace SIL.Tool
             sb.AppendLine("<!-- Contents page -->");
             sb.AppendLine("<div id='TOCPage' class='Contents'>");
 
-            if (_xhtmlFileNameWithPath.Contains("main"))
+            if (_xhtmlFileNameWithPath.ToLower().Contains("main"))
             {
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
@@ -1604,31 +1610,31 @@ namespace SIL.Tool
             bool isHeadword = false;
             List<string> headerVariable = new List<string>();
             //XmlTextReader _reader = new XmlTextReader(_xhtmlFileNameWithPath)
-                //{
-                    //XmlResolver = null,
-                    //WhitespaceHandling = WhitespaceHandling.Significant
-                //};
-               XmlTextReader _reader = Common.DeclareXmlTextReader(_xhtmlFileNameWithPath, true);
-                while (_reader.Read())
+            //{
+            //XmlResolver = null,
+            //WhitespaceHandling = WhitespaceHandling.Significant
+            //};
+            XmlTextReader _reader = Common.DeclareXmlTextReader(_xhtmlFileNameWithPath, true);
+            while (_reader.Read())
+            {
+                if (_reader.NodeType == XmlNodeType.Element)
                 {
-                    if (_reader.NodeType == XmlNodeType.Element)
+                    if (_reader.Name == "div" || _reader.Name == "span")
                     {
-                        if (_reader.Name == "div" || _reader.Name == "span")
+                        string name = _reader.GetAttribute("class");
+                        if (name != null && name.ToLower() == "headword")
                         {
-                            string name = _reader.GetAttribute("class");
-                            if (name != null && name.ToLower() == "headword")
-                            {
-                                isHeadword = true;
-                            }
+                            isHeadword = true;
                         }
                     }
-                    else if (isHeadword && _reader.NodeType == XmlNodeType.Text)
-                    {
-                        headerVariable.Add(_reader.Value);
-                        isHeadword = false;
-                    }
-
                 }
+                else if (isHeadword && _reader.NodeType == XmlNodeType.Text)
+                {
+                    headerVariable.Add(_reader.Value);
+                    isHeadword = false;
+                }
+
+            }
             return headerVariable;
         }
 

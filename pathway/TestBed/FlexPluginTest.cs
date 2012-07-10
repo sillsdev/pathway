@@ -1031,9 +1031,33 @@ namespace TestBed
                 MessageBox.Show("Please enter the valid CSS path");
                 return;
             }
+            PublicationInformation projInfo = new PublicationInformation();
+
+            string xhtmlFileName = txtInputPath.Text;
+            string cssFileName = txtCSSInput.Text;
+
+            projInfo.DefaultXhtmlFileWithPath = xhtmlFileName;
+            projInfo.DefaultCssFileWithPath = cssFileName;
+
+            string inputHtmlFileName = xhtmlFileName;
+            inputHtmlFileName = Path.GetFileName(inputHtmlFileName);
+            if(!inputHtmlFileName.ToLower().Contains("main"))
+            {
+                File.Copy(xhtmlFileName, xhtmlFileName.Replace(".", "main."));
+                xhtmlFileName = xhtmlFileName.Replace(".", "main.");
+                projInfo.DefaultXhtmlFileWithPath = xhtmlFileName;
+            }
+
+            string inputCssFileName = cssFileName;
+            inputCssFileName = Path.GetFileName(inputCssFileName);
+            if (!inputCssFileName.ToLower().Contains("main"))
+            {
+                File.Copy(cssFileName, cssFileName.Replace(".css", "main.css"));
+                cssFileName = cssFileName.Replace(".css", "main.css");
+                projInfo.DefaultCssFileWithPath = cssFileName;
+            }
 
             Exportepub epub = new Exportepub();
-            PublicationInformation projInfo = new PublicationInformation();
 
             string ProjType = "Dictionary";
 
@@ -1045,10 +1069,9 @@ namespace TestBed
 
             projInfo.FinalOutput = "epub";
             projInfo.ProjectInputType = ProjType;
-            projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
-            projInfo.DictionaryPath = Path.GetDirectoryName(txtInputPath.Text);
-            projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
-            projInfo.DefaultCssFileWithPath = txtCSSInput.Text;
+            projInfo.ProjectPath = Path.GetDirectoryName(xhtmlFileName);
+            projInfo.DictionaryPath = Path.GetDirectoryName(xhtmlFileName);
+            
             projInfo.ProgressBar = new ProgressBar();
             projInfo.DictionaryOutputName = "test";
             
@@ -1071,7 +1094,7 @@ namespace TestBed
             
             projInfo.IsReversalExist = false;
             projInfo.IsLexiconSectionExist = true;
-            projInfo.ProjectInputType = "Scripture";
+            
 
             string getDirectoryName = Path.GetFullPath(projInfo.DefaultXhtmlFileWithPath);
             projInfo.DefaultRevCssFileWithPath = Path.Combine(getDirectoryName, "flexrev.css");
@@ -1080,6 +1103,7 @@ namespace TestBed
                                    DateTime.Now.Date.ToShortTimeString();
 
             Exportepub epubConvert = new Exportepub();
+            epubConvert.TocLevel = "1";
             epubConvert.Export(projInfo);
         }
 
