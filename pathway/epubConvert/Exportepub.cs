@@ -3382,11 +3382,33 @@ namespace SIL.PublishingSolution
             //ncx.WriteEndElement(); // ncx
             ncx.WriteEndDocument();
             ncx.Close();
-            ApplyXslt(tocFullPath, _fixPlayOrder);
             if (_inputType.ToLower() == "dictionary")
             {
                 ApplyXslt(tocFullPath, _addDicTocHeads);
             }
+            FixPlayOrder(tocFullPath);
+            //ApplyXslt(tocFullPath, _fixPlayOrder);
+        }
+
+        private void FixPlayOrder(string tocFullPath)
+        {
+            // Renumber all PlayOrder attributes in order with no gaps.
+            XmlTextReader reader = Common.DeclareXmlTextReader(tocFullPath, false);
+            var tocDoc = new XmlDocument();
+            tocDoc.Load(reader);
+            reader.Close();
+            var nodes = tocDoc.SelectNodes("//@playOrder");
+            Debug.Assert(nodes != null);
+            int n = 1;
+            foreach (XmlAttribute node in nodes)
+            {
+                node.InnerText = n.ToString();
+                n += 1;
+            }
+            FileStream xmlFile = new FileStream(tocFullPath, FileMode.Create);
+            XmlWriter writer = XmlWriter.Create(xmlFile);
+            tocDoc.Save(writer);
+            xmlFile.Close();
         }
 
         private void ApplyXslt(string fileFullPath, XslCompiledTransform xslt)
@@ -3396,7 +3418,6 @@ namespace SIL.PublishingSolution
             var tempFullName = Path.Combine(folder, name) + "-1.xml";
             File.Copy(fileFullPath, tempFullName);
 
-            // Renumber all PlayOrder attributes in order with no gaps.
             XmlTextReader reader = Common.DeclareXmlTextReader(tempFullName, false);
             FileStream xmlFile = new FileStream(fileFullPath, FileMode.Create);
             XmlWriter writer = XmlWriter.Create(xmlFile, xslt.OutputSettings);
@@ -3700,7 +3721,7 @@ namespace SIL.PublishingSolution
                             ncx.WriteEndElement(); // navPoint
                         }
                     }
-                    else
+                    else // Scripture
                     {
                         using (XmlReader reader = XmlReader.Create(new StringReader(node.OuterXml)))
                         {
