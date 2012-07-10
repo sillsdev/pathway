@@ -326,7 +326,17 @@ namespace SIL.PublishingSolution
                 {
                     foreach (XmlNode xmlNode in list)
                     {
-                        if (xmlNode.Attributes != null) bookName = xmlNode.Attributes["id"].Value;
+                        if (xmlNode.Attributes != null)
+                        {
+                            try
+                            {
+                                bookName = xmlNode.Attributes["id"].Value;
+                            }
+                            catch (NullReferenceException)
+                            {
+                                bookName = xmlNode.Attributes["code"].Value;
+                            }
+                        }
                     }
                 }
 
