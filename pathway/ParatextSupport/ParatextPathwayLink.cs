@@ -267,7 +267,7 @@ namespace SIL.PublishingSolution
         public void ExportUSXRawToUSX(List<XmlDocument> usxBooksToExport)
         {
             string vrsFileDest = Path.Combine(m_outputLocationPath, "versification.vrs");
-            string ldsFileDest = Path.Combine(m_outputLocationPath, "English.LDS");
+            string ldsFileDest = Path.Combine(m_outputLocationPath, "English.lds");
             
             string paratextProjectLocation = string.Empty;
             object paraTextprojectPath;
@@ -303,7 +303,7 @@ namespace SIL.PublishingSolution
 
             }
 
-            m_outputLocationPath = Path.Combine(m_outputLocationPath, "usx");
+            m_outputLocationPath = Path.Combine(m_outputLocationPath, "USX");
             if (!Directory.Exists(m_outputLocationPath))
                 Directory.CreateDirectory(m_outputLocationPath);
 
@@ -362,8 +362,8 @@ namespace SIL.PublishingSolution
                 m_usxToXhtml.Transform(XmlReader.Create(new StringReader(cleanUsx.ToString())), args, htmlw3, null);
                 
                 cleanUsx = cleanUsx.Replace("utf-16", "utf-8");
-                cleanUsx = cleanUsx.Replace("<usfm>", "<usx>");
-                cleanUsx = cleanUsx.Replace("</usfm>", "</usx>");
+                cleanUsx = cleanUsx.Replace("<usfm>", "<USX>");
+                cleanUsx = cleanUsx.Replace("</usfm>", "</USX>");
                 
                 string bookFileName = Path.Combine(m_outputLocationPath, bookName + ".usx");
                 XmlDocument doc = new XmlDocument();

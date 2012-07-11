@@ -151,6 +151,7 @@ namespace SIL.PublishingSolution
 
             if (grid.RowCount > 0)
             {
+                grid.ClearSelection();
                 grid.Rows[selectedRowId].Selected = true;
                 grid_RowEnter(sender, null);
             }

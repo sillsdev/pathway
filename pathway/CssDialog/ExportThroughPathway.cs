@@ -1118,6 +1118,12 @@ namespace SIL.PublishingSolution
                 string pathwayPath = (fullPathwayPath.StartsWith("file"))
                                          ? fullPathwayPath.Substring(6)
                                          : fullPathwayPath;
+
+                if(Common.UnixVersionCheck())
+                {
+                    return true;
+                }
+
                 if (File.Exists(Path.Combine(pathwayPath, "ConfigurationTool.exe")))
                 {
                     return true;
