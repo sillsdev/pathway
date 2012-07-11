@@ -1124,7 +1124,7 @@ namespace TestBed
             DBLMetadata dblMetadata = new DBLMetadata();
             dblMetadata.StyFullPath = txtCSSInput.Text;
             string outputCSS = Path.Combine(Path.GetDirectoryName(txtCSSInput.Text),  "metadata.XML");
-            dblMetadata.CreateMetadata("TestBed", outputCSS,"TestBed");
+            dblMetadata.CreateMetadata("TestBed", outputCSS);
             MessageBox.Show("Exported in " + outputCSS);
 #endif
         }
