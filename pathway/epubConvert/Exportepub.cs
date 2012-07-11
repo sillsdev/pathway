@@ -212,7 +212,14 @@ namespace SIL.PublishingSolution
                 string tempFolder = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
                 string tempFolderName = Path.GetFileName(tempFolder);
                 string cssFolder = Path.GetDirectoryName(projInfo.DefaultCssFileWithPath);
+
+
                 string cssFullPath = Common.PathCombine(cssFolder, "epub.css");
+                if(!File.Exists(cssFullPath))
+                {
+                    cssFullPath = projInfo.DefaultCssFileWithPath;
+                }
+
                 var mc = new MergeCss { OutputLocation = tempFolderName };
                 string mergedCSS = mc.Make(cssFullPath, "book.css");
                 preProcessor.ReplaceStringInCss(mergedCSS);

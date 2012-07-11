@@ -1096,7 +1096,7 @@ namespace TestBed
             projInfo.IsLexiconSectionExist = true;
             
 
-            string getDirectoryName = Path.GetFullPath(projInfo.DefaultXhtmlFileWithPath);
+            string getDirectoryName = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             projInfo.DefaultRevCssFileWithPath = Path.Combine(getDirectoryName, "flexrev.css");
 
             projInfo.ProjectName = "EBook (epub)_" + DateTime.Now.Date.ToShortDateString() + "_" +

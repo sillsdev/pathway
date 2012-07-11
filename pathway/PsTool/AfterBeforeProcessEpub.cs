@@ -662,23 +662,27 @@ namespace SIL.PublishingSolution
             string fileDir = Path.GetDirectoryName(xhtmlFileNameWithPath);
             string fileName = "Preserve" + Path.GetFileName(xhtmlFileNameWithPath);
             string Newfile = Path.Combine(fileDir, fileName);
-
+            bool continueProcess = false;
             var fs2 = new FileStream(Newfile, FileMode.Create, FileAccess.Write);
             var sw2 = new StreamWriter(fs2);
             string line;
             while ((line = stream.ReadLine()) != null)
             {
-                int htmlNodeStart = line.IndexOf("<html");
-                if (htmlNodeStart >= 0)
+                if(continueProcess)
                 {
-                    int htmlNodeEnd = line.IndexOf(">", htmlNodeStart);
-                    string line1 = "<?xml version=\"1.0\" encoding=\"utf-8\"?> <!DOCTYPE html[]>";
-                    line = line1 + "<html" + line.Substring(htmlNodeEnd);
                     sw2.WriteLine(line);
                 }
                 else
                 {
-                    sw2.WriteLine(line);
+                    int htmlNodeStart = line.IndexOf("<html");
+                    if (htmlNodeStart >= 0)
+                    {
+                        int htmlNodeEnd = line.IndexOf(">", htmlNodeStart);
+                        string line1 = "<?xml version=\"1.0\" encoding=\"utf-8\"?> <!DOCTYPE html[]>";
+                        line = line1 + "<html" + line.Substring(htmlNodeEnd);
+                        sw2.WriteLine(line);
+                        continueProcess = true;
+                    }    
                 }
             }
             stream.Close();
