@@ -1135,6 +1135,170 @@ namespace SIL.Tool
         /// <param name="bookSplitterClass"></param>
         static void SplitXhtmlFileAdjacent(XmlReader reader, Dictionary<string, XmlWriter> writers, string bookSplitterClass, bool adjacentClass)
         {
+            int srcCount = 0;
+            bool isLetData = false;
+            XmlWriter writer;
+
+            if (reader == null)
+            {
+                throw new ArgumentNullException("reader");
+            }
+            //if (writer == null)
+            //{
+            //    throw new ArgumentNullException("writer");
+            //}
+            while (reader.Read())
+            {
+            srcWritten:
+                switch (reader.NodeType)
+                {
+                    case XmlNodeType.Element:
+                        string prefix = reader.Prefix;
+                        string localName = reader.LocalName;
+                        string nameSpace = reader.NamespaceURI;
+                        string className = string.Empty;
+                        className = reader.GetAttribute("class") ?? "";
+                        if (className == "letData" && !isLetData)
+                        {
+                            isLetData = true;
+                        }
+                        if (className.ToLower() == bookSplitterClass)
+                        {
+                            isLetData = false;
+                            srcCount++;
+                            string f1 = reader.ReadOuterXml();  // current node - Ex: LetHead
+
+                            string f2 = string.Empty;
+                            if (adjacentClass)
+                            {
+                                f2 = reader.ReadOuterXml();  // Adjacent node - Ex: LetData
+                                f1 += f2;
+                            }
+
+                            int writerCount1 = 1;
+                            foreach (KeyValuePair<string, XmlWriter> pair in writers)
+                            {
+                                if (srcCount == writerCount1)
+                                {
+                                    writer = pair.Value;
+                                    writer.WriteRaw(f1);
+                                }
+                                writerCount1++;
+                            }
+                            goto srcWritten;  // Note - The reader already points to next node.
+                            // Note - so need of reading again. start process the node.
+                        }
+                        int writerCount2 = 1;
+                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
+                        {
+                            if (!isLetData || writerCount2 == srcCount)
+                            {
+                                writer = pair.Value;
+                                writer.WriteStartElement(prefix, localName, nameSpace);
+                                writer.WriteAttributes(reader, true);
+                                if (reader.IsEmptyElement)
+                                {
+                                    writer.WriteEndElement();
+                                }
+                            }
+                            writerCount2++;
+                        }
+                        break;
+                    case XmlNodeType.Text:
+                        int writerCount3 = 1;
+                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
+                        {
+                            if (!isLetData || writerCount3 == srcCount)
+                            {
+                                writer = pair.Value;
+                                writer.WriteString(reader.Value);
+                            }
+                            writerCount3++;
+                        }
+                        break;
+                    case XmlNodeType.Whitespace:
+                    case XmlNodeType.SignificantWhitespace:
+                        int writerCount4 = 1;
+                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
+                        {
+                            if (!isLetData || writerCount4 == srcCount)
+                            {
+                                writer = pair.Value;
+                                writer.WriteWhitespace(reader.Value);
+                            }
+                            writerCount4++;
+                        }
+                        break;
+                    case XmlNodeType.CDATA:
+                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
+                        {
+                            writer = pair.Value;
+                            writer.WriteCData(reader.Value);
+                        }
+                        break;
+                    case XmlNodeType.EntityReference:
+                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
+                        {
+                            writer = pair.Value;
+                            writer.WriteEntityRef(reader.Name);
+                        }
+                        break;
+                    case XmlNodeType.XmlDeclaration:
+                    case XmlNodeType.ProcessingInstruction:
+                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
+                        {
+                            writer = pair.Value;
+                            writer.WriteProcessingInstruction(reader.Name, reader.Value);
+                        }
+                        break;
+                    case XmlNodeType.DocumentType:
+                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
+                        {
+                            writer = pair.Value;
+                            writer.WriteDocType(reader.Name, reader.GetAttribute("PUBLIC"),
+                                                reader.GetAttribute("SYSTEM"), reader.Value);
+                        }
+                        break;
+                    case XmlNodeType.Comment:
+                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
+                        {
+                            writer = pair.Value;
+                            writer.WriteComment(reader.Value);
+                        }
+                        break;
+                    case XmlNodeType.EndElement:
+                        int writerCount5 = 1;
+                        foreach (KeyValuePair<string, XmlWriter> pair in writers)
+                        {
+                            if (!isLetData || writerCount5 == srcCount)
+                            {
+                                try
+                                {
+                                    writer = pair.Value;
+                                    writer.WriteFullEndElement();
+                                }
+                                catch
+                                {
+                                    return;
+                                }
+                            }
+                            writerCount5++;
+                        }
+                        
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// From the one xmlreader multiple xmlwriter are ued to split the class
+        /// using dictionary
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writers"></param>
+        /// <param name="bookSplitterClass"></param>
+        static void SplitXhtmlFileAdjacent_Old(XmlReader reader, Dictionary<string, XmlWriter> writers, string bookSplitterClass, bool adjacentClass)
+        {
 
             int srcCount = 0;
             XmlWriter writer;
