@@ -1758,11 +1758,20 @@ namespace SIL.PublishingSolution
             }
             // now go check to see if we're working on scripture or dictionary data
             nodes = xmlDocument.SelectNodes("//xhtml:span[@class='headword']", namespaceManager);
+
+            if (nodes == null || nodes.Count == 0)
+            {
+                nodes = xmlDocument.SelectNodes("//span[@class='headword']", namespaceManager);
+            }
             //nodes = xmlDocument.SelectNodes("//span[@class='headword']", namespaceManager);
             if (nodes != null && nodes.Count == 0)
             {
                 // not in this file - this might be scripture?
                 nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
+                if (nodes == null || nodes.Count == 0)
+                {
+                    nodes = xmlDocument.SelectNodes("//span[@class='scrBookName']", namespaceManager);
+                }
                 //nodes = xmlDocument.SelectNodes("//span[@class='scrBookName']", namespaceManager);
                 if (nodes != null && nodes.Count > 0)
                     _inputType = "scripture";
@@ -3853,9 +3862,12 @@ namespace SIL.PublishingSolution
                     XmlNodeList nodes = xmlDocument.SelectNodes(".//xhtml:div[@class='Chapter_Number']", namespaceManager);
                     foreach (XmlNode chapterNode in nodes)
                     {
-                        string value = fileName + "#" + chapterNode.Attributes["id"].Value;
-                        if (!chapterIdList.Contains(value))
-                            chapterIdList.Add(value);
+                        if (chapterNode.Attributes.Count > 0 && chapterNode.Attributes["id"] != null)
+                        {
+                            string value = fileName + "#" + chapterNode.Attributes["id"].Value;
+                            if (!chapterIdList.Contains(value))
+                                chapterIdList.Add(value);
+                        }
                     }
                 }
             }
