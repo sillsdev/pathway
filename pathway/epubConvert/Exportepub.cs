@@ -3398,12 +3398,12 @@ namespace SIL.PublishingSolution
             //ncx.WriteEndElement(); // ncx
             ncx.WriteEndDocument();
             ncx.Close();
+            FixPlayOrder(tocFullPath);
+            //ApplyXslt(tocFullPath, _fixPlayOrder);
             if (_inputType.ToLower() == "dictionary")
             {
                 ApplyXslt(tocFullPath, _addDicTocHeads);
             }
-            FixPlayOrder(tocFullPath);
-            //ApplyXslt(tocFullPath, _fixPlayOrder);
         }
 
         private void FixPlayOrder(string tocFullPath)
