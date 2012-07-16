@@ -521,7 +521,7 @@
     <AllBackend Include="..\PdfConvert\$(OutputPath)\PdfConvert.*" />
     <TestBackend Include="..\OpenOfficeConvert_OLD\$(OutputPath)\OpenOfficeConvert_OLD.*" />
     <TestBackend Include="..\WordPressConvert\$(OutputPath)\WordPressConvert.*" />
-    <TestBackend Include="..\CadreBibleConvert\$(OutputPath)\CadreBibleConvert.*" />
+    <!-- TestBackend Include="..\CadreBibleConvert\$(OutputPath)\CadreBibleConvert.*" / -->
     <TestBackend Include="..\XeTexConvert\$(OutputPath)\XeTexConvert.*" />
     <TestBackend Include="..\XeLaTexConvert\$(OutputPath)\XeLaTexConvert.*" />
     <TestBackend Include="..\XeTex\$(OutputPath)\XeTexWriter.*" />

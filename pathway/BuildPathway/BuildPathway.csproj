@@ -450,7 +450,7 @@
     <TestBackend Include="..\XeTexConvert\$(OutputPath)\XeTexConvert.*" />
     <TestBackend Include="..\XeLaTexConvert\$(OutputPath)\XeLaTexWriter.*" />
     <TestBackend Include="..\YouVersionConvert\$(OutputPath)\YouVersionWriter.*" />
-    <TestBackend Include="..\CadreBibleConvert\$(OutputPath)\CadreBibleConvert.*" />
+    <!-- TestBackend Include="..\CadreBibleConvert\$(OutputPath)\CadreBibleConvert.*" / -->
     <TestBackend Include="..\XeTex\$(OutputPath)\XeTexWriter.*" />
     <BteBackend Include="..\GoBibleConvert\$(OutputPath)\GoBibleConvert.*" />
     <BteBackend Include="..\LogosConvert\$(OutputPath)\LogosConvert.*" />
