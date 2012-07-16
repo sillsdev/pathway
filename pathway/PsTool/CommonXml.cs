@@ -144,13 +144,21 @@ namespace SIL.Tool
                                 if (reader.GetAttribute("content") != null)
                                 {
                                     metaName = reader.GetAttribute("content");
-                                    if (metaName.IndexOf("file://") >= 0)  // from the file access
+                                    if (Common.UnixVersionCheck())
+                                    {
+                                        metaName = Common.GetAllUserAppPath();
+                                        metaName = Common.RightRemove(metaName, "sil");
+                                        metaName = Path.Combine(metaName, "fieldworks");
+                                        //metaName = Path.Combine(metaName, "Projects");
+                                    }
+                                    else if (metaName.IndexOf("file://") >= 0)  // from the file access
                                     {
                                         const int designatorLength = 7;
                                         metaName = metaName.Substring(designatorLength, metaName.Length - designatorLength);
                                     }
                                     break;
                                 }
+
                             }
                         }
                     }
@@ -265,7 +273,7 @@ namespace SIL.Tool
             string baseValue = string.Empty;
             try
             {
-                var doc = new XmlDocument { XmlResolver = null, PreserveWhitespace = true };
+                var doc = Common.DeclareXMLDocument(true);
                 if (!File.Exists(fileName)) return string.Empty;
                 doc.Load(fileName);
                 XmlElement root = doc.DocumentElement;
