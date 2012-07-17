@@ -47,6 +47,8 @@ namespace SIL.PublishingSolution
 			sbFile.Append(Path.DirectorySeparatorChar);
 			sbFile.Append("Pathway");
 			sbFile.Append(Path.DirectorySeparatorChar);
+            sbFile.Append("Dictionary");
+            sbFile.Append(Path.DirectorySeparatorChar);
 			sbFile.Append(Path.GetFileName(appPath));
             string allUserPath = sbFile.ToString();
             if (File.Exists(allUserPath))
@@ -118,6 +120,12 @@ namespace SIL.PublishingSolution
                         Version16(GetDirectoryPath(settingsPath, appPath));
                         Param.LoadSettings();
                     }
+                    if (projSettingsVerNum == "17")
+                    {
+                        Version17(GetDirectoryPath(settingsPath, appPath), projSchemaVersion);
+                        Param.LoadSettings();
+                    }
+
                     //Version2(GetDirectoryPath(settingsPath, appPath), appSettingsPath, projSchemaVersion);
                     string usrPath = GetDirectoryPath(settingsPath, appPath);
                     string insPath = Common.PathCombine(Path.GetDirectoryName(installerPath), Path.GetFileName(usrPath));
@@ -393,6 +401,43 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
+        /// Method to update the changed made in version 1
+        /// </summary>
+        /// <param name="path">Settings file path</param>
+        /// <param name="versionNumber">Updating version number</param>
+        /// <returns>Nothing</returns>
+        public void Version17(string path, string versionNumber)
+        {
+            if (!File.Exists(path)) { return; }
+
+            var xdoc = new XmlDocument { XmlResolver = null };
+            xdoc.Load(path);
+            XmlElement root = xdoc.DocumentElement;
+            if (root != null)
+            {
+                string sPath = "//stylePick/styles/web/style";
+                root.SetAttribute("version", versionNumber);
+                XmlNode searchNode = root.SelectSingleNode(sPath);
+                if (searchNode != null && searchNode.ChildNodes.Count != 0)
+                {                    
+                    XmlNodeList allNodes = root.SelectNodes(sPath);
+                    if (allNodes != null && allNodes.Count > 0)
+                    {
+                        if (searchNode.InnerXml.Contains("ftpaddress"))
+                        {
+                            if (!searchNode.InnerXml.Contains("webadmin"))
+                            {
+                                XmlDocumentFragment docFrag = InsertDefaultTagVersion17(xdoc);
+                                searchNode.AppendChild(docFrag);
+                            }
+                        }
+                    }
+                }
+            }
+            xdoc.Save(path);
+        }
+
+        /// <summary>
         /// Method to update the changed made in version 2
         /// </summary>
         /// <param name="oldFile">Old version file</param>
@@ -524,6 +569,26 @@ namespace SIL.PublishingSolution
                 <description>5.25x8.25in - 1 Col - Justified - Charis 11 on 13</description>
             </style>
             </others>
+           ";
+            XmlDocumentFragment docFrag = xdoc.CreateDocumentFragment();
+            docFrag.InnerXml = toInsert;
+            return docFrag;
+        }
+
+        /// <summary>
+        /// To insert the xml default tag part into the alluser's XML file.
+        /// </summary>
+        /// <param name="xdoc">XMLDocument object</param>
+        /// <returns>XmlDocumentFragment to attach in XMLFile</returns>
+        private static XmlDocumentFragment InsertDefaultTagVersion17(XmlDocument xdoc)
+        {
+            const string toInsert = @"
+            <styleProperty name=""weburl"" value="""" />
+            <styleProperty name=""webadminusrnme"" value="""" />
+            <styleProperty name=""webadminpwd"" value="""" />
+            <styleProperty name=""webadminsiteNme"" value="""" />
+            <styleProperty name=""webemailid"" value="""" />
+            <styleProperty name=""webftpfldrnme"" value="""" />
            ";
             XmlDocumentFragment docFrag = xdoc.CreateDocumentFragment();
             docFrag.InnerXml = toInsert;
