@@ -1218,5 +1218,15 @@ namespace SIL.PublishingSolution
             EditCSS(sender, e);
             _CToolBL.chkFixedLineHeight_CheckedChangedBL();
         }
+
+        private void txtFtpFileLocation_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtFtpFileLocation_ValidatedBL(sender,e);
+        }
+
+        private void txtWebUrl_Validated(object sender, EventArgs e)
+        {
+            _CToolBL.txtWebUrl_ValidatedBL(sender, e);
+        }
      }
 }

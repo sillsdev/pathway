@@ -10,6 +10,7 @@ using System.IO;
 using System.Net;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using SIL.Tool;
@@ -54,7 +55,7 @@ namespace SIL.PublishingSolution
         public string AttrDbName = "dbname";
         public string AttrDbUid = "dbuserid";
         public string AttrDbPwd = "dbpwd";
- 
+
         public string inputTypeBL = "Dictionary";
 
         public string ElementDesc = "description";
@@ -655,7 +656,7 @@ namespace SIL.PublishingSolution
                         case "ftppwd":
                             if (cTool.TxtFtpPassword.Text.Trim().Length > 0)
                             {
-                                baseNode.Attributes["value"].Value = hashUtil.Encrypt(cTool.TxtFtpPassword.Text);    
+                                baseNode.Attributes["value"].Value = hashUtil.Encrypt(cTool.TxtFtpPassword.Text);
                             }
                             break;
                         case "dbservername":
@@ -1422,7 +1423,7 @@ namespace SIL.PublishingSolution
                 SetPropertyTab();
                 //_redoundo.Reset();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.Write(ex.Message);
             }
@@ -1903,7 +1904,7 @@ namespace SIL.PublishingSolution
 
             XmlDocument xmlDoc = Common.DeclareXMLDocument(false);
             xmlDoc.Load(xmlPath);
-            
+
             string xPath = "//settings/property[@name='InputType']";
 
             var node = xmlDoc.SelectSingleNode(xPath);
@@ -2309,7 +2310,7 @@ namespace SIL.PublishingSolution
             {
                 if (grid.Rows[i].Cells[ColumnName].Value.ToString() == sheet)
                 {
-					grid.ClearSelection();
+                    grid.ClearSelection();
                     grid.Rows[i].Selected = true;
                     SelectedRowIndex = i;
                     result = true;
@@ -2328,11 +2329,11 @@ namespace SIL.PublishingSolution
             if (Param.Value.ContainsKey(Param.LayoutSelected))
             {
                 lastLayout = StyleEXE.Length == 0 ? Param.Value[Param.LayoutSelected] : StyleEXE;
-                	
-	            if(lastLayout.Trim().Length == 0)
-	            {
-                    lastLayout = Param.Value[Param.LayoutSelected];	
-	            }
+
+                if (lastLayout.Trim().Length == 0)
+                {
+                    lastLayout = Param.Value[Param.LayoutSelected];
+                }
 
                 if (SelectRow(grid, lastLayout))
                 {
@@ -2566,7 +2567,7 @@ namespace SIL.PublishingSolution
 
             }
 
-            if(grid.SelectedRows.Count <= 0 && Common.IsUnixOS())
+            if (grid.SelectedRows.Count <= 0 && Common.IsUnixOS())
             {
                 Param.LoadSettings();
                 SetPreviousLayoutSelect(grid);
@@ -3149,7 +3150,7 @@ namespace SIL.PublishingSolution
                     PreviewFileName2 = Common.PathCombine(stylenamePath, Path.GetFileName(PreviewFileName2));
                 }
             }
-            catch{}
+            catch { }
         }
 
         /// <summary>
@@ -3491,7 +3492,7 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
-        
+
 
         public void txtDesc_ValidatedBL(object sender)
         {
@@ -3765,8 +3766,8 @@ namespace SIL.PublishingSolution
                 ShowStyleInGrid(cTool.StylesGrid, _cssNames);
                 SelectRow(cTool.StylesGrid, NewStyleName);
                 WriteCss();
-                cTool.TabControl1.SelectedIndex = 0; 
-                
+                cTool.TabControl1.SelectedIndex = 0;
+
                 cTool.PicPreview.Visible = false;
                 cTool.BtnPrevious.Visible = false;
                 cTool.BtnNext.Visible = false;
@@ -4004,7 +4005,8 @@ namespace SIL.PublishingSolution
                     MessageBox.Show("Please select a style sheet to delete", _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            catch {
+            catch
+            {
                 _screenMode = ScreenMode.Edit;
                 ShowInfoValue();
             }
@@ -4079,16 +4081,16 @@ namespace SIL.PublishingSolution
         public void ShowPreview(int page)
         {
             string preview;
-            if(!File.Exists(PreviewFileName1) || _screenMode == ScreenMode.Modify)
+            if (!File.Exists(PreviewFileName1) || _screenMode == ScreenMode.Modify)
             {
                 CreatePreviewFile();
                 cTool.PicPreview.Visible = false;
-                
+
                 //cTool.BtnPrevious.Visible = true;
                 //cTool.BtnNext.Visible = true;
             }
             cTool.PicPreview.SizeMode = PictureBoxSizeMode.StretchImage;
-            if(File.Exists(PreviewFileName1))
+            if (File.Exists(PreviewFileName1))
             {
                 cTool.BtnPrevious.Visible = true;
                 cTool.BtnNext.Visible = true;
@@ -4125,6 +4127,61 @@ namespace SIL.PublishingSolution
                 cTool.BtnNext.Visible = false;
             }
         }
+
+        public void txtFtpFileLocation_ValidatedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                bool result = false;
+                if (cTool.TxtFtpAddress.Text.Trim() != string.Empty)
+                {
+                    result = Regex.IsMatch(cTool.TxtFtpAddress.Text, @"^(ftp)://?");
+                    if (!result)
+                    {
+                        _errProvider = Common._errProvider;
+                        _errProvider.SetError(cTool.TxtFtpAddress, "Ftp address is not valid entry.");
+                        cTool.TxtFtpAddress.Focus();
+                    }
+                    else
+                    {
+                        _errProvider.SetError(cTool.TxtFtpAddress, "");
+                    }
+                }
+                else
+                {
+                    _errProvider.SetError(cTool.TxtFtpAddress, "");
+                }
+            }
+            catch { }
+        }
+
+        public void txtWebUrl_ValidatedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                bool result = false;
+                if (cTool.TxtWebUrl.Text.Trim() != string.Empty)
+                {
+                    result = Regex.IsMatch(cTool.TxtWebUrl.Text, @"^(http|https)://?");
+                    if (!result)
+                    {
+                        _errProvider = Common._errProvider;
+                        _errProvider.SetError(cTool.TxtWebUrl, "Website URL address is not valid entry.");
+                        cTool.TxtWebUrl.Focus();
+                    }
+                    else
+                    {
+                        _errProvider.SetError(cTool.TxtWebUrl, "");
+                    }
+                }
+                else
+                {
+                    _errProvider.SetError(cTool.TxtWebUrl, "");
+                }
+            }
+            catch { }
+        }
+        
 
         #endregion
     }
