@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="17">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="18">
   <xs:element name="stylePick">
     <xs:complexType>
       <xs:sequence>
@@ -149,6 +149,7 @@
         <xs:element ref="organizationDefault" minOccurs="0" maxOccurs="unbounded"/>
         <xs:element name="defaultValue" type="xs:string" />
         <xs:element name="currentValue" type="xs:string" minOccurs="0" />
+        <xs:element name="PreviousProjectName" type="xs:string" minOccurs="0" />
       </xs:sequence>
       <xs:attribute name="name" type="xs:string" />
       <xs:attribute name="outputTypes" type="xs:string" />
