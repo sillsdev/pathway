@@ -1318,21 +1318,6 @@ namespace SIL.PublishingSolution
         public static string GetMetadataValue(string Name, string Organization)
         {
             XmlNode node;
-            if (Name.ToLower() == "title")
-            {
-                try
-                {
-                    node = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/defaultValue");
-                    string lastSavedDatabase = node.InnerText;
-                    if(lastSavedDatabase != DatabaseName)
-                    {
-                        return null;
-                    }
-                }
-                catch
-                {
-                }
-            }
             try
             {
                 node = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/currentValue");
@@ -1368,16 +1353,6 @@ namespace SIL.PublishingSolution
             {
                 VerifyMetaNode(Name);
 
-                if(Name.ToLower() == "title")
-                {
-                    XmlNode ndeDefault = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/defaultValue");
-                    if(ndeDefault != null && Common.databaseName.Length > 0)
-                    {
-                        ndeDefault.InnerText = Common.databaseName;
-                        Write();
-                    }
-                }
-
                 XmlNode node = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/currentValue");
                 var newValue = " ";
                 if(Value != null && Value.Trim().Length > 0)
@@ -1405,6 +1380,93 @@ namespace SIL.PublishingSolution
             catch (Exception ex)
             {
                 throw new Exception("Unable to update Metadata Value (Name=" + Name + ", Value=" + Value + ")", ex);
+            }
+        }
+
+        /// <summary>
+        /// Returns the value of the Title Metadata element:
+        /// - if there is a current value, this method returns that value first
+        /// - if not, it will fall back on the default for the organization
+        /// </summary>
+        /// <param name="name">meta name to retrieve</param>
+        /// <param name="organization">user's publishing organization (SIL, etc.)</param>
+        /// <param name="isConfigurationTool">method calling from ConfigurationTool/Not </param>
+        /// <returns></returns>
+        public static string GetTitleMetadataValue(string name, string organization, bool isConfigurationTool)
+        {
+            XmlNode node;
+            try
+            {
+                if (isConfigurationTool)
+                {
+                    node = GetItem("//stylePick/Metadata/meta[@name='" + name + "']/defaultValue");
+                }
+                else
+                {
+                    node = GetItem("//stylePick/Metadata/meta[@name='" + name + "']/PreviousProjectName");
+                    string lastSavedDatabase = node.InnerText;
+                    if (lastSavedDatabase != DatabaseName)
+                    {
+                        node = GetItem("//stylePick/Metadata/meta[@name='" + name + "']/defaultValue");
+                    }
+                    else
+                    {
+                        node = GetItem("//stylePick/Metadata/meta[@name='" + name + "']/currentValue");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                // Exception (key not found?) - bail out with a null value
+                Debug.WriteLine(e.ToString());
+                return null;
+            }
+            return (node == null) ? null : (XmlConvert.DecodeName(node.InnerText.Trim()));
+        }
+
+        /// <summary>
+        /// Update the title Value in settings file:
+        /// - if there is a current value, this method returns that value first
+        /// - if not, it will fall back on the default for the organization
+        /// - If assigns the project name value for validation.
+        /// </summary>
+        /// <param name="name">Name of metadata element to update</param>
+        /// <param name="value">Value to set as Current Value</param>
+        /// <param name="isConfigurationTool">Method calling from ConfigurationTool or Not </param>
+        public static void UpdateTitleMetadataValue(string name, string value, bool isConfigurationTool)
+        {
+            try
+            {
+                XmlNode node;
+                VerifyMetaNode(name);
+                if (isConfigurationTool)
+                {
+                    node = GetItem("//stylePick/Metadata/meta[@name='" + name + "']/defaultValue");
+                    if (node != null)
+                    {
+                        node.InnerText = value;
+                        Write();
+                    }
+                }
+                else
+                {
+                    node = GetItem("//stylePick/Metadata/meta[@name='" + name + "']/currentValue");
+                    if (node != null)
+                    {
+                        node.InnerText = XmlConvert.EncodeName(value);
+                        Write();
+                    }
+                    XmlNode projNode = GetItem("//stylePick/Metadata/meta[@name='" + name + "']/PreviousProjectName");
+                    if (projNode != null)
+                    {
+                        projNode.InnerText = Common.databaseName;
+                        Write();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unable to update Metadata Value (Name=" + name + ", Value=" + value + ")", ex);
             }
         }
 

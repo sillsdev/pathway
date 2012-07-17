@@ -53,6 +53,8 @@ namespace SIL.PublishingSolution
         private static string _media = "paper";
         private SettingsHelper _settingsHelper;
         public List<string> XsltFile = new List<string>();
+        public static bool isFromConfigurationTool = false;
+
 
         public ExportThroughPathway()
         {
@@ -350,6 +352,7 @@ namespace SIL.PublishingSolution
                     Param.LoadSettings();
                     // add the input type (to give a little more information to the user)
                     Text += " - " + InputType;
+                    isFromConfigurationTool = true;
                 }
 
                 // get the current organization
@@ -787,10 +790,11 @@ namespace SIL.PublishingSolution
             Style = Param.DefaultValue[Param.LayoutSelected];
             // publication info tab
             Param.DatabaseName = DatabaseName;
-            if (Title.Trim().Length < 1)
-            {
-                Title = Param.GetMetadataValue(Param.Title, Organization);
-            }
+            Title = Param.GetTitleMetadataValue(Param.Title, Organization, isFromConfigurationTool);
+            //if (Title.Trim().Length < 1)
+            //{
+            //    Title = Param.GetMetadataValue(Param.Title, Organization);
+            //}
             Description = Param.GetMetadataValue(Param.Description, Organization);
             Creator = Param.GetMetadataValue(Param.Creator, Organization);
             Publisher = Param.GetMetadataValue(Param.Publisher, Organization);
@@ -894,7 +898,7 @@ namespace SIL.PublishingSolution
             Param.SetValue(Param.PrintVia, dlg.Format);
             Param.SetValue(Param.LayoutSelected, dlg.Style);
             // Publication Information tab
-            Param.UpdateMetadataValue(Param.Title, dlg.Title);
+            Param.UpdateTitleMetadataValue(Param.Title, dlg.Title, isFromConfigurationTool);
             Param.UpdateMetadataValue(Param.Description, dlg.Description);
             Param.UpdateMetadataValue(Param.Creator, dlg.Creator);
             Param.UpdateMetadataValue(Param.Publisher, dlg.Publisher);

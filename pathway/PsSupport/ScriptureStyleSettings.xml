@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="17">
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="18">
   <settings>
     <property name="InputPath" value="%(AppData)s/SIL/Pathway" />
     <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Scripture" />
@@ -360,12 +360,14 @@
   <Organizations>
     <Organization>SIL International</Organization>
     <Organization>United Bible Societies</Organization>
-	<Organization>Wycliffe Bible Translators</Organization>
+	  <Organization>Wycliffe Bible Translators</Organization>
     <Organization>Pioneer Bible Translators</Organization>
   </Organizations>
   <Metadata>
     <meta name="Title" outputTypes="all">
       <defaultValue></defaultValue>
+      <currentValue></currentValue>
+      <PreviousProjectName></PreviousProjectName>
     </meta>
     <meta name="Creator" outputTypes="all">
       <defaultValue></defaultValue>
