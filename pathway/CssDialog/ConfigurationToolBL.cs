@@ -2566,6 +2566,16 @@ namespace SIL.PublishingSolution
 
             }
 
+            if(grid.SelectedRows.Count <= 0 && Common.IsUnixOS())
+            {
+                Param.LoadSettings();
+                SetPreviousLayoutSelect(grid);
+                if (grid.SelectedRows.Count == 0 || grid.SelectedRows.Count == -1)
+                {
+                    grid.ClearSelection();
+                    grid.Rows[0].Selected = true;
+                }
+            }
         }
 
         public bool CopyCustomStyleToSend(string folderPath)
