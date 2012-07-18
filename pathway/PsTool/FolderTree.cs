@@ -30,6 +30,12 @@ namespace SIL.Tool
         {
             if (!Directory.Exists(dst))
                 Directory.CreateDirectory(dst);
+
+            if(Common.UnixVersionCheck())
+            {
+                src = src.Replace("Test/../LiftPrepare/lib", "LiftPrepare/Lib");
+            }
+
             var di = new DirectoryInfo(src);
             foreach (FileInfo fileInfo in di.GetFiles())
             {
