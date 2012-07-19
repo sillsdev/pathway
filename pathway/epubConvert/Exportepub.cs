@@ -1482,7 +1482,8 @@ namespace SIL.PublishingSolution
                                     ".LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub, .LexSense-publishStemComponentTarget-OwnerOutlinePub, ");
                                 sb.Append(".LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub, .sense-crossref, ");
                                 sb.Append(".crossref-headword, .reversal-form, ");
-                                sb.Append(".Alternate_Reading, .Section_Head, .Section_Head_Minor, ");
+                                //sb.Append(".Alternate_Reading, .Section_Head, .Section_Head_Minor, ");
+                                sb.Append(".Alternate_Reading, .Section_Head_Minor, ");
                                 sb.AppendLine(".Inscription, .Intro_Section_Head, .Section_Head_Major, .iot {");
                                 sb.Append("font-family: 'b_");
                                 sb.Append(language.Value);
