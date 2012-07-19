@@ -85,7 +85,7 @@
 .letData {
         column-count: 2;
         column-fill: balance;
-        column-gap: 1.5em;
+        column-gap: 18pt;
         column-rule: solid 1pt #aa0000;
         text-align: left;
 }
@@ -185,7 +185,7 @@
 .revData {
         column-count: 1;
         column-fill: balance;
-        column-gap: 1.5em;
+        column-gap: 18pt;
         column-rule: none;
         text-align: left;
 }

@@ -168,7 +168,7 @@ namespace Test.UIConfigurationToolBLTest
             actual = cTool.DdlPageColumn.Text;
             Assert.AreEqual("1", actual, "Grid page column Test Failes");
             actual = cTool.TxtPageGutterWidth.Text;
-            Assert.AreEqual("150%", actual, "Grid page gutter width Test Failes");
+            Assert.AreEqual("18pt", actual, "Grid page gutter width Test Failes");
             actual = cTool.DdlJustified.Text;
             Assert.AreEqual("No", actual, "Grid justify Test Failes");
             actual = cTool.DdlVerticalJustify.Text;
@@ -232,7 +232,7 @@ namespace Test.UIConfigurationToolBLTest
             actual = cTool.DdlPageColumn.Text;
             Assert.AreEqual("1", actual, "GridRowValueTest Test Failes");
             actual = cTool.TxtPageGutterWidth.Text;
-            Assert.AreEqual("150%", actual, "GridRowValueTest Test Failes");
+            Assert.AreEqual("18pt", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlJustified.Text;
             Assert.AreEqual("No", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlVerticalJustify.Text;
