@@ -502,18 +502,24 @@
     <Copy SourceFiles="@(XeLaTexDist)" DestinationFiles="@(XeLaTexDist->'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(XeLaTexVar)" DestinationFiles="@(XeLaTexVar->'Files\pwtex\texmf-var\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(XeLaTexBin)" DestinationFiles="@(XeLaTexBin->'Files\pwtex\bin\win32\%(Filename)%(Extension)')" Condition="$(OS) != 'Linux'" />
-    <Copy SourceFiles="@(XeLaTexLinBin)" DestinationFiles="@(XeLaTexLinBin->'Files\pwtex\bin\i386-linux\%(Filename)%(Extension)')" Condition="$(OS) == 'Linux'" />
+    <Copy SourceFiles="@(XeLaTexLinBin)" DestinationFiles="@(XeLaTexLinBin->'Files\pwtex\bin\i386-linux\%(Filename)%(Extension)')" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
+    <Copy SourceFiles="@(XeLaTexLinBin64)" DestinationFiles="@(XeLaTexLinBin64->'Files\pwtex\bin\x86_64-linux\%(Filename)%(Extension)')" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
     <MakeDir Directories="Files\pwtex\temp" />
     <Exec Command="echo This file is a place holder&gt;Files\pwtex\temp\readme.txt" />
     <Delete Files="@(XeLaTexCache)" />
     <Copy SourceFiles="@(Paratexmf)" DestinationFiles="@(Paratexmf->'Files\pwtex\texmf\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Exec Command="mktexlsr ..\..\texmf" WorkingDirectory="Files\pwtex\bin\win32" Condition="$(OS) != 'Linux'" />
     <Exec Command="mktexlsr ..\..\texmf-var" WorkingDirectory="Files\pwtex\bin\win32" Condition="$(OS) != 'Linux'" />
-    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="..\XeLaTexConvert/XeLaTexExe/bin" Match="i386-linux">
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="..\XeLaTexConvert/XeLaTexExe/bin" Match="i386-linux" Condition="$(Platform) == 'x86'" >
       <Output TaskParameter="Folders" ItemName="bdir"/>
     </MSBuild.ExtensionPack.FileSystem.Folder>
-    <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf" Condition="$(OS) == 'Linux'" />
-    <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf-var" Condition="$(OS) == 'Linux'" />
+    <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
+    <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf-var" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="..\XeLaTexConvert/XeLaTexExe/bin" Match="x86_64-linux" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" >
+      <Output TaskParameter="Folders" ItemName="bdir"/>
+    </MSBuild.ExtensionPack.FileSystem.Folder>
+    <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
+    <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf-var" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
   </Target>
   <ItemGroup>
     <XeLaTexExe Include="..\XeLaTexConvert\XeLaTexExe\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\**\.svn\**\*.*" />
@@ -535,6 +541,13 @@
     <XeLaTexLinBin Include="..\XeLaTexConvert\XeLaTexExe\bin\i386-linux\tec*" />
     <XeLaTexLinBin Include="..\XeLaTexConvert\XeLaTexExe\bin\i386-linux\tex" />
     <XeLaTexLinBin Include="..\XeLaTexConvert\XeLaTexExe\bin\i386-linux\mk*" />
+
+    <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\kpse*" />
+    <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\xdvipdf*" />
+    <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\xe*" />
+    <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\tec*" />
+    <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\tex" />
+    <XeLaTexLinBin64 Include="..\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\mk*" />
     <XeLaTexCache Include="..\XeLaTexConvert\XeLaTexExe\texmf-var\fonts\cache\*.cache-3" />
     <Paratexmf Include="..\XeLaTexConvert\Paratexmf\**\*.*" Exclude="..\XeLaTexConvert\Paratexmf\**\.svn\**\**" />
   </ItemGroup>
