@@ -217,7 +217,7 @@ namespace SIL.PublishingSolution
             {
                 Common.ParaTextFontName(fluffedCssFullName);
             }
-            if (DataType == "Dictionary" && fileName == "main.xhtml")
+            else if (DataType == "Dictionary" && fileName == "main.xhtml")
             {
                 Common.LanguageSettings(mainFullName, fluffedCssFullName, DataType == "Dictionary", fluffedCssReversal);
             }
