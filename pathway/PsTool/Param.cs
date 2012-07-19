@@ -1395,6 +1395,7 @@ namespace SIL.PublishingSolution
         public static string GetTitleMetadataValue(string name, string organization, bool isConfigurationTool)
         {
             XmlNode node;
+            string lastSavedDatabase = string.Empty;
             try
             {
                 if (isConfigurationTool)
@@ -1404,7 +1405,9 @@ namespace SIL.PublishingSolution
                 else
                 {
                     node = GetItem("//stylePick/Metadata/meta[@name='" + name + "']/PreviousProjectName");
-                    string lastSavedDatabase = node.InnerText;
+                    if (node != null)
+                        lastSavedDatabase = node.InnerText;
+
                     if (lastSavedDatabase != DatabaseName)
                     {
                         node = GetItem("//stylePick/Metadata/meta[@name='" + name + "']/defaultValue");
