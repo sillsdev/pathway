@@ -185,31 +185,47 @@ namespace SIL.PublishingSolution
                 {
                     Common.FileInsertText(_xetexFullFile, xeLaTexProperty);
                     //_xetexFile.WriteLine(xeTexProperty);
-                }
+                }                
             }
+            
             //%\singlespacing
             //\onehalfspacing
             //%\doublespacing
             //%\setstretch{1.1}
-            //Common.FileInsertText(_xetexFullFile, @"\setstretch{1.1} ");
-
-            
+            //Common.FileInsertText(_xetexFullFile, @"\setstretch{1.1} ");            
             if (!XelatexDocumentOpenClosedRequired)
             {
+                double pageMargin = 0;
+                if (_cssClass.ContainsKey("@page"))
+                {
+                    Dictionary<string, string> cssProp = _cssClass["@page"];
+                    foreach (KeyValuePair<string, string> para in cssProp)
+                    {
+                        if (para.Key == "margin-top")
+                        {
+                            pageMargin = Convert.ToDouble(para.Value);
+                            break;
+                        }
+                    }
+                }
                 //Common.FileInsertText(_xetexFullFile, @"\thispagestyle{empty} ");
-                Common.FileInsertText(_xetexFullFile, @"\pagestyle{plain} ");
-                
+                Common.FileInsertText(_xetexFullFile, @"\pagestyle{plain} ");                
                 Common.FileInsertText(_xetexFullFile, @"\begin{document} ");
-
-
-
                 Common.FileInsertText(_xetexFullFile, _pageStyleFormat);
                 //setmainfont{Arial} //Default Font 
                 //Common.FileInsertText(_xetexFullFile, @"\usepackage{fancyhdr}");
                 if (Convert.ToBoolean(CoverImage))
                     Common.FileInsertText(_xetexFullFile, @"\usepackage{eso-pic}");
+                if (pageMargin == 0)
+                {
+                    Common.FileInsertText(_xetexFullFile, @"\usepackage[margin=2cm,includeheadfoot]{geometry}");
+                }
+                else
+                {
+                    int cmMarginValue = Convert.ToInt32(pageMargin * 2.54 / 96);
+                    Common.FileInsertText(_xetexFullFile, @"\usepackage[margin="+ cmMarginValue +"cm,includeheadfoot]{geometry}");
+                }
 
-                Common.FileInsertText(_xetexFullFile, @"\usepackage[margin=2cm,includeheadfoot]{geometry}");
                 Common.FileInsertText(_xetexFullFile, @"\usepackage{calc}");
                 Common.FileInsertText(_xetexFullFile, @"\usepackage{multicol}");
                 Common.FileInsertText(_xetexFullFile, @"\usepackage{fancyhdr}");
@@ -225,8 +241,6 @@ namespace SIL.PublishingSolution
                 }
                 //Common.FileInsertText(_xetexFullFile, @"\documentclass{article} ");
                 Common.FileInsertText(_xetexFullFile, @"\documentclass[a4paper]{article} ");
-                
-
                 //Common.FileInsertText(_xetexFullFile, @"\documentclass[10pt,psfig,letterpaper,twocolumn]{article} ");
             }
         }
