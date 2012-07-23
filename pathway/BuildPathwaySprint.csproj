@@ -398,10 +398,18 @@
     <Exec Command="dir %(InstallerDir.Identity)\*.bat /s"/>
   </Target>
   <Target Name="TlGetUnxInstaller">
-    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="DeleteAll" Path="/usr/local" Match="texlive"/>
-    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="DeleteAll" Path="~" Match=".texlive2011"/>
-    <MSBuild.ExtensionPack.Web.WebClient TaskAction="DownloadFile" Url="%(repo.Identity)/install-tl-unx.tar.gz" FileName="%(InstallerDir.Identity)\install-tl-unx.tar.gz"/>
-    <Exec Command="tar -xzf install-tl-unx.tar.gz" WorkingDirectory="%(InstallerDir.Identity)"/>
+    <!--MSBuild.ExtensionPack.FileSystem.Folder TaskAction="DeleteAll" Path="/usr/local" Match="texlive"/ -->
+    <!-- MSBuild.ExtensionPack.FileSystem.Folder TaskAction="DeleteAll" Path="~" Match=".texlive2011"/ -->
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="XeLaTexConvert" Match="TexLive">
+      <Output TaskParameter="Folders" ItemName="InstallerWorkDir"/>
+    </MSBuild.ExtensionPack.FileSystem.Folder>
+    <Message Text="InstallerWorkDir: %(InstallerWorkDir.Identity)" Importance="high" />
+    <MSBuild.ExtensionPack.Framework.TextString TaskAction="Replace" OldString="@InstallerWorkDir@/install-tl-unx.tar.gz" OldValue="@InstallerWorkDir@" NewValue="%(InstallerWorkDir.Identity)">
+      <Output PropertyName="ArchiveName" TaskParameter="NewString"/>
+    </MSBuild.ExtensionPack.Framework.TextString>
+    <Message Text="ArchiveName: $(ArchiveName)" Importance="high" />
+    <MSBuild.ExtensionPack.Web.WebClient TaskAction="DownloadFile" Url="http://ftp.math.purdue.edu/mirrors/ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz" FileName="$(ArchiveName)"/>
+    <Exec Command="tar -xzf install-tl-unx.tar.gz" WorkingDirectory="%(InstallerWorkDir.Identity)"/>
   </Target>
 
   <Target Name="TlInstall">
@@ -439,7 +447,7 @@
     <MSBuild.ExtensionPack.Framework.TextString TaskAction="Replace" OldString="cd @TlExeBinDir@" OldValue="@TlExeBinDir@" NewValue="%(TlExeBinDir.Identity)">
       <Output PropertyName="cmd3" TaskParameter="NewString"/>
     </MSBuild.ExtensionPack.Framework.TextString>
-    <Exec Command="$(cmd3); %(modules.Identity)"/>
+    <Exec Command="$(cmd3);./tlmgr install %(modules.Identity)"/>
   </Target>
   <ItemGroup>
     <modules Include="latex l3kernel l3packages etoolbox"/>
