@@ -217,7 +217,7 @@
 				<xsl:if test="@lang != '' and @lang !=docLanguage">
 					<xsl:attribute name="xml:lang"><xsl:value-of select="@lang"/></xsl:attribute>
 				</xsl:if>
-				<xsl:for-each select="@*[not(local-name() = 'lang' )]">
+				<xsl:for-each select="@*">
 					<xsl:copy/>
 				</xsl:for-each>
 				<!-- if this is a reversal index entry (for a dictionary), add an ID -->

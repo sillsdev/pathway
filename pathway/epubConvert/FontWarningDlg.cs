@@ -78,7 +78,8 @@ namespace epubConvert
         /// <returns></returns>
         public bool UseFontAnyway()
         {
-            return (!rdoEmbedFont.Visible) ? false : rdoEmbedFont.Checked;
+            //return (!rdoEmbedFont.Visible) ? false : rdoEmbedFont.Checked;
+            return (!rdoEmbedFont.Checked) ? false : true;
         }
 
         // variables
