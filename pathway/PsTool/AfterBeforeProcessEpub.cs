@@ -630,9 +630,9 @@ namespace SIL.PublishingSolution
                     {
                         if (!_significant)
                         {
-                            _writer.WriteStartElement("span");
-                            _writer.WriteRaw("&nbsp;");
-                            _writer.WriteEndElement();
+                            //_writer.WriteStartElement("span");
+                            //_writer.WriteRaw("&nbsp;");
+                            //_writer.WriteEndElement();
                             _significant = true;
                         }
                     }
