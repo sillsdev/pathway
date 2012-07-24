@@ -1,0 +1,15 @@
+Source: pathway-xelatex
+Section: Miscellaneous
+Priority: extra
+Maintainer: Greg Trihus <greg_trihus@sil.org>
+Build-Depends: debhelper (>= 7), autotools-dev, devscripts
+Standards-Version: 3.8.3
+Homepage: http://pathway.sil.org
+
+Package: pathway-xelatex
+Architecture: any
+Description: Prepare language data (Fieldworks & Paratext) for TeX publishing
+ Pathway appears as a menu item in Fieldworks and Paratext. PathwayB also
+ allows it to run from the Terminal. It takes language data frequently
+ presented in XHTML & CSS format and converts it to a TeX file and then launches
+ this application to create the Pdf file with XeLaTeX.
