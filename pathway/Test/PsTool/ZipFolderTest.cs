@@ -32,7 +32,7 @@ namespace Test.PsTool
         [TestFixtureSetUp]
         protected void SetUp()
         {
-            sourceFolder = PathPart.Bin(Environment.CurrentDirectory, "/PsTool/TestFiles/inputFiles");
+            sourceFolder = PathPart.Bin(Environment.CurrentDirectory, "/PsTool/TestFiles/InputFiles");
             TargetFolderWithFileName = PathPart.Bin(Environment.CurrentDirectory, "/PsTool/TestFiles/output");
             if (Directory.Exists(TargetFolderWithFileName))
                 Directory.Delete(TargetFolderWithFileName, true);

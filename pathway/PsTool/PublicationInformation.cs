@@ -311,7 +311,7 @@ namespace SIL.Tool
                 projFile.WriteEndElement(); // Project End
                 projFile.Close();
             }
-            _DeXml.XmlResolver = null;
+            _DeXml.XmlResolver = new XmlUrlResolver();
             _DeXml.Load(_projectFileWithPath);
             _dictExplorer = dictionaryExplorer;
             AddInitialFiles();
@@ -320,7 +320,7 @@ namespace SIL.Tool
         public void LoadProjectFile(string projFile)
         {
             ProjectFileWithPath = projFile;
-            _DeXml.XmlResolver = null;
+            _DeXml.XmlResolver = new XmlUrlResolver();
             _DeXml.Load(projFile);
         }
 
@@ -329,7 +329,7 @@ namespace SIL.Tool
         /// </summary>
         private void UpdateProjectFile()
         {
-            _DeXml.XmlResolver = null;
+            _DeXml.XmlResolver = new XmlUrlResolver();
             _DeXml.Load(_projectFileWithPath);
             XmlElement root = GetRootNode();
             const string xPath = "/Project/SolutionExplorer";

@@ -46,7 +46,14 @@ namespace Test.PsTool
         public void GetPathwayDirTest()
         {
             string actual = PathwayPath.GetPathwayDir();
-            Assert.IsTrue(actual.Replace(" (x86)", "").Substring(1) == @":\Program Files\SIL\Pathway7\" || actual.Contains("ReSharper") || actual.Contains("NUnit"));
+            if (Common.IsUnixOS())
+            {
+                Assert.IsTrue(actual.Substring(1) == @"usr/lib/pathway" || actual.Contains("ReSharper") || actual.Contains("NUnit"));
+            }
+            else
+            {
+                Assert.IsTrue(actual.Replace(" (x86)", "").Substring(1) == @":\Program Files\SIL\Pathway7\" || actual.Contains("ReSharper") || actual.Contains("NUnit"));
+            }
         }
     }
 }

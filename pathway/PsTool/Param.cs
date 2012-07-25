@@ -151,7 +151,7 @@ namespace SIL.PublishingSolution
         public static Dictionary<string, string> DefaultValue = new Dictionary<string, string>();
         public static Dictionary<string, string> StyleFile = new Dictionary<string, string>();
         public static Dictionary<string, Dictionary<string, string>> featureList = new Dictionary<string, Dictionary<string, string>>();
-        public static readonly XmlDocument xmlMap = new XmlDocument { XmlResolver = null };
+        public static readonly XmlDocument xmlMap = Common.DeclareXMLDocument(false);
         private static int _selectedIndex = 1;
         private static int _UnSelectedIndex = 2;
         private static string _configureType = string.Empty;
@@ -435,7 +435,7 @@ namespace SIL.PublishingSolution
         /// </summary>
         public static void SetFontNameSize()
         {
-            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
             xmlDocument.Load(UiSettingPath);
             XmlNode root = xmlDocument.DocumentElement;
             Debug.Assert(root != null);

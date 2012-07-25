@@ -43,9 +43,9 @@ namespace Test.PsTool
         [SetUp]
         protected void SetUp()
         {
-            _doc = new XmlDocument { XmlResolver = null };
+            _doc = Common.DeclareXMLDocument(false);
             _target = new PublicationInformation();
-            actualDocument = new XmlDocument{ XmlResolver =  null};
+            actualDocument = Common.DeclareXMLDocument(false);
             LoadInputDocument("Dictionary1.de");
             var outputPath = Common.PathCombine(GetTestPath(), "Output");
             if (Directory.Exists(outputPath))
@@ -163,7 +163,7 @@ namespace Test.PsTool
         {
             string projFile = GetFileNameWithPath("Test.xhtml");
             _target.LoadProjectFile(projFile);
-            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
             xmlDocument.Load(projFile);
             Assert.AreEqual(xmlDocument.InnerXml, _target.ProjectDeXML.InnerXml);
         }

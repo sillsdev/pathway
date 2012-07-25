@@ -18,6 +18,7 @@ using System.IO;
 using System.Security.Cryptography.Xml;
 using System.Xml;
 using NUnit.Framework;
+using SIL.Tool;
 
 namespace Test
 {
@@ -31,15 +32,15 @@ namespace Test
         /// <param name="msg">message to display if mismatch</param>
         public static void AreEqual(string expectPath, string outputPath, string msg)
         {
-            XmlDocument outputDocument = new XmlDocument { XmlResolver = null };
+            XmlDocument outputDocument = Common.DeclareXMLDocument(false);
             outputDocument.Load(outputPath);
-            XmlDocument expectDocument = new XmlDocument { XmlResolver = null };
+            XmlDocument expectDocument = Common.DeclareXMLDocument(false);
             expectDocument.Load(expectPath);
             XmlDsigC14NTransform outputCanon = new XmlDsigC14NTransform();
-            outputCanon.Resolver = null;
+            outputCanon.Resolver = new XmlUrlResolver();
             outputCanon.LoadInput(outputDocument);
             XmlDsigC14NTransform expectCanon = new XmlDsigC14NTransform();
-            expectCanon.Resolver = null;
+            expectCanon.Resolver = new XmlUrlResolver();
             expectCanon.LoadInput(expectDocument);
             Stream outputStream = (Stream)outputCanon.GetOutput(typeof(Stream));
             Stream expectStream = (Stream)expectCanon.GetOutput(typeof(Stream));
@@ -48,7 +49,7 @@ namespace Test
 
         public static void Ignore(string path, string xpath, Dictionary<string, string> nameSpaces)
         {
-            XmlDocument xmlDocument = new XmlDocument{XmlResolver = null};
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
             XmlNamespaceManager ns = new XmlNamespaceManager(xmlDocument.NameTable);
             if (nameSpaces != null)
                 foreach (string key in nameSpaces.Keys)

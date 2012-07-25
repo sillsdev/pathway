@@ -90,7 +90,7 @@ namespace Test.PsTool
         [Test]
         public void ParagraphVerserSetUpTest()
         {
-            XmlDocument xmldoc = new XmlDocument { XmlResolver = null };
+            XmlDocument xmldoc = Common.DeclareXMLDocument(false);
             string fileName = "ParaChapBorder.xhtml";
             string input = GetFileNameWithPath(fileName);
             string output = GetFileNameWithOutputPath(fileName);
