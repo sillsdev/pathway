@@ -1934,7 +1934,7 @@ namespace SIL.PublishingSolution
                 File.Copy(xmlPath.Replace(".xml", ".xsd"), allUserXmlPath.Replace(".xml", ".xsd"), true);
             }
 
-            XmlDocument xmlDoc = new XmlDocument { XmlResolver = null };
+            XmlDocument xmlDoc = Common.DeclareXMLDocument(false);
             xmlDoc.Load(allUserXmlPath);
             string xPath = "//settings/property[@name='InputType']";
 

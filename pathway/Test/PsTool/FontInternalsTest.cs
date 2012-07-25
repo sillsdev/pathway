@@ -110,6 +110,10 @@ namespace Test.PsTool
             string style = "Regular";
             string actual = FontInternals.GetFontFileName(familyName, style);
             string expected = "DoulosSILR.ttf";
+            if (Common.IsUnixOS())
+            {
+                expected = "DoulosSIL-R.ttf";
+            }
             Assert.AreEqual(expected, Path.GetFileName(actual));
         }
 

@@ -153,11 +153,6 @@ namespace SIL.PublishingSolution
 
             try
             {
-                //reader = new XmlTextReader(xhtmlFile)
-                //{
-                //    XmlResolver = null,
-                //    WhitespaceHandling = WhitespaceHandling.None
-                //};
                 reader = Common.DeclareXmlTextReader(xhtmlFile, true);
                 writer.WriteStartDocument();
                 int lineCount = 0;

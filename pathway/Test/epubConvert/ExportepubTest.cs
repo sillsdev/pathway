@@ -110,7 +110,7 @@ namespace Test.epubConvert
             var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
             var zf = new FastZip();
             zf.ExtractZip(result, FileOutput("main"),".*");
-            var resultDoc = new XmlDocument {XmlResolver = null};
+            var resultDoc = Common.DeclareXMLDocument(false);
             resultDoc.Load(FileOutput(Common.DirectoryPathReplace("main/OEBPS/PartFile00001_.xhtml")));
             var nsmgr = new XmlNamespaceManager(resultDoc.NameTable);
             nsmgr.AddNamespace("x", "http://www.w3.org/1999/xhtml");

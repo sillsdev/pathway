@@ -1693,7 +1693,7 @@ namespace SIL.PublishingSolution
                     }
                     if (File.Exists(wsPath))
                     {
-                        var ldml = new XmlDocument { XmlResolver = null };
+                        var ldml = Common.DeclareXMLDocument(false);
                         ldml.Load(wsPath);
                         var nsmgr = new XmlNamespaceManager(ldml.NameTable);
                         nsmgr.AddNamespace("palaso", "urn://palaso.org/ldmlExtensions/v1");
@@ -1728,10 +1728,10 @@ namespace SIL.PublishingSolution
         /// <param name="xhtmlFileName">File name to parse</param>
         private void BuildLanguagesList(string xhtmlFileName)
         {
-            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            XmlReaderSettings xmlReaderSettings = Common.DeclareXmlReaderSettings(true);
             XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
             xmlDocument.Load(xmlReader);
             xmlReader.Close();
@@ -1796,10 +1796,10 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+                XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
                 XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
                 namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-                XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+                XmlReaderSettings xmlReaderSettings = Common.DeclareXmlReaderSettings(false);
                 XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
                 xmlDocument.Load(xmlReader);
                 xmlReader.Close();
@@ -1871,10 +1871,10 @@ namespace SIL.PublishingSolution
             {
                 return ("Copyright Information");
             }
-            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            XmlReaderSettings xmlReaderSettings = Common.DeclareXmlReaderSettings(false);
             XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
             xmlDocument.Load(xmlReader);
             xmlReader.Close();
@@ -2362,11 +2362,12 @@ namespace SIL.PublishingSolution
 
             try
             {
-                XmlTextReader _reader = new XmlTextReader(filePath)
-                {
-                    XmlResolver = null,
-                    WhitespaceHandling = WhitespaceHandling.Significant
-                };
+                //XmlTextReader _reader = new XmlTextReader(filePath)
+                //{
+                //    XmlResolver = null,
+                //    WhitespaceHandling = WhitespaceHandling.Significant
+                //};
+                XmlTextReader _reader = Common.DeclareXmlTextReader(filePath, true);
                 while (_reader.Read())
                 {
                     if (_reader.NodeType == XmlNodeType.Element)
@@ -2560,10 +2561,10 @@ namespace SIL.PublishingSolution
             // sanity check - return if the references are to be left in the text
             if (References.Contains("Section")) { return; }
             // collect all cross-references and footnotes in the content file
-            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            XmlReaderSettings xmlReaderSettings = Common.DeclareXmlReaderSettings(false);
             XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
             xmlDocument.Load(xmlReader);
             xmlReader.Close();
@@ -3621,10 +3622,10 @@ namespace SIL.PublishingSolution
         /// <returns>List of url strings</returns>
         private void WriteChapterLinks(string xhtmlFileName, ref int playOrder, XmlWriter ncx, ref int chapnum)
         {
-            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            XmlReaderSettings xmlReaderSettings = Common.DeclareXmlReaderSettings(false);
             XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
             xmlDocument.Load(xmlReader);
             xmlReader.Close();
@@ -3856,10 +3857,10 @@ namespace SIL.PublishingSolution
             string[] files = Directory.GetFiles(contentFolder, "PartFile*.xhtml");
             List<string> chapterIdList = new List<string>();
             string fileName = string.Empty;
-            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            XmlReaderSettings xmlReaderSettings = Common.DeclareXmlReaderSettings(false);
             foreach (string sourceFile in files)
             {
                 if (!File.Exists(sourceFile)) return;
