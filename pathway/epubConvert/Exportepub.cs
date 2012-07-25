@@ -3671,7 +3671,16 @@ namespace SIL.PublishingSolution
                             // This entry doesn't have any information - skip it
                             continue;
                         }
-                        textString = node.FirstChild.InnerText;
+                        const string headwordXPath = ".//xhtml:span[@class='headword']";
+                        XmlNode headwordNode = node.SelectSingleNode(headwordXPath, namespaceManager);
+                        if (headwordNode != null)
+                        {
+                            textString = headwordNode.InnerText;
+                        }
+                        else
+                        {
+                            textString = node.FirstChild.InnerText;
+                        }
 
                         if (textString.Trim().Length > 0)
                         {
