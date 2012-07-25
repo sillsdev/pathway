@@ -43,7 +43,7 @@ at the terminal prompt (CTRL-ALT-T).
 SETTING UP PATHWAY XELATEX
 --------------------------
 cd ~/git/pathway/pathway/XeLaTexConvert
-make tlinstall
+make tlsetup
 
 BUILDING PATHWAY XELATEX
 ------------------------
