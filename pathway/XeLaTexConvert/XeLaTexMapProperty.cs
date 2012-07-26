@@ -65,10 +65,10 @@ namespace SIL.PublishingSolution
                     case "class-margin-top":
                         MarginTop(propertyValue);
                         break;
-                    //case "margin-bottom":
-                    //case "class-margin-bottom":
-                        //MarginBottom(propertyValue);
-                        //break;
+                    case "margin-bottom":
+                    case "class-margin-bottom":
+                        MarginBottom(propertyValue);
+                        break;
                     case "font-family":
                         FontFamily(propertyValue);
                         break;
