@@ -2120,7 +2120,7 @@ namespace SIL.Tool
 
         public string InsertSectionHeadID()
         {
-            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlDocument xDoc = Common.DeclareXMLDocument(true);
             xDoc.Load(_xhtmlFileNameWithPath);
             XmlNodeList nodeList = xDoc.GetElementsByTagName("span");
             if (nodeList.Count > 0)

@@ -3411,7 +3411,7 @@ namespace SIL.PublishingSolution
         private void FixPlayOrder(string tocFullPath)
         {
             // Renumber all PlayOrder attributes in order with no gaps.
-            XmlTextReader reader = Common.DeclareXmlTextReader(tocFullPath, false);
+            XmlTextReader reader = Common.DeclareXmlTextReader(tocFullPath, true);
             var tocDoc = new XmlDocument();
             tocDoc.Load(reader);
             reader.Close();
@@ -3436,7 +3436,7 @@ namespace SIL.PublishingSolution
             var tempFullName = Path.Combine(folder, name) + "-1.xml";
             File.Copy(fileFullPath, tempFullName);
 
-            XmlTextReader reader = Common.DeclareXmlTextReader(tempFullName, false);
+            XmlTextReader reader = Common.DeclareXmlTextReader(tempFullName, true);
             FileStream xmlFile = new FileStream(fileFullPath, FileMode.Create);
             XmlWriter writer = XmlWriter.Create(xmlFile, xslt.OutputSettings);
             xslt.Transform(reader, null, writer, null);
@@ -3622,7 +3622,7 @@ namespace SIL.PublishingSolution
         /// <returns>List of url strings</returns>
         private void WriteChapterLinks(string xhtmlFileName, ref int playOrder, XmlWriter ncx, ref int chapnum)
         {
-            XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             XmlReaderSettings xmlReaderSettings = Common.DeclareXmlReaderSettings(false);
@@ -3857,7 +3857,7 @@ namespace SIL.PublishingSolution
             string[] files = Directory.GetFiles(contentFolder, "PartFile*.xhtml");
             List<string> chapterIdList = new List<string>();
             string fileName = string.Empty;
-            XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             XmlReaderSettings xmlReaderSettings = Common.DeclareXmlReaderSettings(false);
