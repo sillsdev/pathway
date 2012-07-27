@@ -3919,6 +3919,9 @@ namespace SIL.PublishingSolution
                         nodeContent.Attributes.Append(attribute);
                         nodeContent.InnerText = GetChapterNumber(VARIABLE);
                         nodes[0].ParentNode.InsertBefore(nodeContent, nodes[0]);
+                        XmlNode spaceNode = xmlDocument.CreateElement("span", xmlDocument.DocumentElement.NamespaceURI);
+                        spaceNode.InnerText = " ";
+                        nodes[0].ParentNode.InsertBefore(spaceNode, nodes[0]);
                     }
 
                     xmlDocument.Save(sourceFile);
