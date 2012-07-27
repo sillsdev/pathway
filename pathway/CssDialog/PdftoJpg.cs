@@ -67,7 +67,7 @@ namespace SIL.PublishingSolution
             //Pdf pdf = new Pdf(xhtmlPreviewFilePath, cssMergeFullFileName);
             //pdf.Create(outputPdfFile);
             //string outputPdfFile = Path.Combine(ps.DictionaryPath, Path.GetFileNameWithoutExtension(fileName) + ".pdf");
-            string outputPdfFile = Path.Combine(ps.DictionaryPath, Path.GetFileNameWithoutExtension(openOffice.GeneratedPdfFileName) + ".pdf");
+            string outputPdfFile = Path.Combine(ps.DictionaryPath, "Preserve" + Path.GetFileNameWithoutExtension(openOffice.GeneratedPdfFileName) + ".pdf");
 
             //Stopwatch stopWatch = new Stopwatch();
             //stopWatch.Start();
@@ -132,8 +132,8 @@ namespace SIL.PublishingSolution
                     converter.FitPage = false;
                     converter.JPEGQuality = 75;
                     converter.OutputFormat = "jpeg";
-
-                    string output = string.Format("{0}/{1}{2}", input.Directory, input.Name, fileExtenstion);
+                    
+                    string output = string.Format("{0}\\{1}{2}", input.Directory, input.Name, fileExtenstion);
                     //If the output file exist alrady be sure to add a random name at the end until is unique!
                     while (File.Exists(output))
                     {
@@ -142,9 +142,8 @@ namespace SIL.PublishingSolution
                     Converted = converter.Convert(input.FullName, output);
                 }
             }
-            catch (Exception)
+            catch
             {
-                throw;
             }
         }
     }
