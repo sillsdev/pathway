@@ -1744,7 +1744,7 @@ namespace SIL.PublishingSolution
             XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            XmlReaderSettings xmlReaderSettings = Common.DeclareXmlReaderSettings(false);
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
             XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
             xmlDocument.Load(xmlReader);
             xmlReader.Close();
@@ -1812,7 +1812,7 @@ namespace SIL.PublishingSolution
                 XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
                 XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
                 namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-                XmlReaderSettings xmlReaderSettings = Common.DeclareXmlReaderSettings(false);
+                XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
                 XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
                 xmlDocument.Load(xmlReader);
                 xmlReader.Close();
@@ -1887,7 +1887,7 @@ namespace SIL.PublishingSolution
             XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            XmlReaderSettings xmlReaderSettings = Common.DeclareXmlReaderSettings(false);
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
             XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
             xmlDocument.Load(xmlReader);
             xmlReader.Close();
@@ -2577,7 +2577,7 @@ namespace SIL.PublishingSolution
             XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            XmlReaderSettings xmlReaderSettings = Common.DeclareXmlReaderSettings(false);
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
             XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
             xmlDocument.Load(xmlReader);
             xmlReader.Close();
@@ -3638,7 +3638,7 @@ namespace SIL.PublishingSolution
             XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            XmlReaderSettings xmlReaderSettings = Common.DeclareXmlReaderSettings(false);
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
             XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
             xmlDocument.Load(xmlReader);
             xmlReader.Close();
@@ -3873,7 +3873,7 @@ namespace SIL.PublishingSolution
             XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            XmlReaderSettings xmlReaderSettings = Common.DeclareXmlReaderSettings(false);
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };//Common.DeclareXmlReaderSettings(false);
             foreach (string sourceFile in files)
             {
                 if (!File.Exists(sourceFile)) return;
