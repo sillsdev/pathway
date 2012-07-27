@@ -506,9 +506,9 @@ namespace SIL.PublishingSolution
                 else
                 {
                     MessageBox.Show(Resources.ExportCallingEpubValidator, Resources.ExportComplete, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    var validationDialog = new ValidationDialog();
-                    validationDialog.FileName = outputPathWithFileName;
-                    validationDialog.ShowDialog();
+                    //var validationDialog = new ValidationDialog();
+                    //validationDialog.FileName = outputPathWithFileName;
+                    //validationDialog.ShowDialog();
                     Process.Start(outputPathWithFileName);
                 }
             }
