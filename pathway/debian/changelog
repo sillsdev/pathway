@@ -1,5 +1,30 @@
-pathway (1.1.5.2445-1) unstable; urgency=high
+pathway (1.1.5.2485-1) unstable; urgency=high
 
+  * Sprint 1.1.6.2485
+    - Common Code: TD-3077 don't require writing system store for direction. </li>
+    - Common Code: TD-3077 don't require writing system store for font name.</li>
+    - Common Code: Remove CadreBible from Pathway build</li>
+    - Common Code: adjust files for 64-bit package.</li>
+    - Help: TD-2630 Added republishing statement.</li>
+    - Linux build: TD-3072 Pictures are not shown in EPub for Linux</li>
+    - Linux build: TD-3075 Fix Linux test fails </li>
+    - EBook: TD-2760 Section Head style missing</li>
+    - EBook: TD-2904(&amp;03) New spacing between words often is underlined</li>
+    - EBook: TD-2905 Book Title set as default not remembered</li>
+    - EBook: TD-3021 Red exclamation mark next to Column Gap</li>
+    - EBook: TD-3032 Picture caption appears as headword</li>
+    - EBook: TD-3070 EBook export terrilbly slow - remove validator</li>
+    - EBook: TD-3073 reversal epub contains box chars </li>
+    - EBook: TD-3078 Remove gaps in Ebook export</li>
+    - EBook: Add spaces between chapter number</li>
+    - EBook: Picture missing on Linux</li>
+    - Stylesheet: TD-3048 crash exporting with custom style sheet.</li>
+    - UI: TD-3026 allow setting the Half Letter Page Size</li>
+    - UI: Fix print preview error. </li>
+    - Web: TD-3057 Upload failed but no error given</li>
+    - XeLaTeX: TD-1610 XeLaTex difference output with different styles.</li>
+    - XeLaTeX: TD-2057 margin-bottom on paragraph</li>
+    - XeLaTeX: Update TexLive Linux install process for Linux 32 &amp; 64 bit</li>
   * 1.1.5.2445 spint
     - CadreBible: TD-2911 Create the DBL bundle
     - CadreBible: TD-3059 accomodate different between versions of USX export
