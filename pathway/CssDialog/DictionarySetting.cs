@@ -420,7 +420,7 @@ namespace SIL.PublishingSolution
                 Dictionary<string, string> arrLang = new Dictionary<string, string>();
                 //MessageBox.Show("LoadLanguages file=" + xhtml);
                 XmlTextReader rdr = new XmlTextReader(_xhtml);
-                rdr.XmlResolver = null;
+                rdr.XmlResolver = new XmlUrlResolver();
                 string language;
                 while (rdr.Read())
                 {

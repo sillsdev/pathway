@@ -633,7 +633,7 @@ namespace Test
             XmlDocument doc = null;
             if (File.Exists(FileNameWithPath))
             {
-                doc = new XmlDocument {XmlResolver = null};
+                doc = Common.DeclareXMLDocument(false);
                 doc.LoadXml(FileData.Get(FileNameWithPath));
 
                 nsmgr = new XmlNamespaceManager(doc.NameTable);

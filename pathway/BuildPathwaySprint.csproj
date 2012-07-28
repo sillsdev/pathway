@@ -441,7 +441,7 @@
     <CallTarget Targets="TlUnxPkgInstall"/>
   </Target>
   <Target Name="TlUnxPkgInstall">
-    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="XeLaTexConvert\XeLaTexExe\bin" Match="i386-linux">
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="XeLaTexConvert\XeLaTexExe\bin" Match="i386-linux|x86_64-linux">
       <Output TaskParameter="Folders" ItemName="TlExeBinDir"/>
     </MSBuild.ExtensionPack.FileSystem.Folder>
     <MSBuild.ExtensionPack.Framework.TextString TaskAction="Replace" OldString="cd @TlExeBinDir@" OldValue="@TlExeBinDir@" NewValue="%(TlExeBinDir.Identity)">

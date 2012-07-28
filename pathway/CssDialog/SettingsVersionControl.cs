@@ -215,7 +215,7 @@ namespace SIL.PublishingSolution
         {
             if (!File.Exists(path)) { return; }
 
-            var xdoc = new XmlDocument { XmlResolver = null };
+            var xdoc = Common.DeclareXMLDocument(false);
             xdoc.Load(path);
             XmlElement root = xdoc.DocumentElement;
             if (root != null)
@@ -261,12 +261,12 @@ namespace SIL.PublishingSolution
         {
             // load the source settings file (the one in Program Files) that has the <metadata> block
             if (!File.Exists(srcSettingsFile)) { return; }
-            var srcDoc = new XmlDocument {XmlResolver = null};
+            var srcDoc = Common.DeclareXMLDocument(false);
             srcDoc.Load(srcSettingsFile);
             if (srcDoc.DocumentElement == null) {return;} // make sure we have something to copy over
             // load the destination settings file (the one in ProgramData) that is missing the <metadata> block);
             if (!File.Exists(destSettingsFile)) { return; }
-            var destDoc = new XmlDocument { XmlResolver = null };
+            var destDoc = Common.DeclareXMLDocument(false);
             destDoc.Load(destSettingsFile);
             XmlElement root = destDoc.DocumentElement;
             if (root != null)
@@ -301,7 +301,7 @@ namespace SIL.PublishingSolution
         {
             // load the destination settings file (the one in ProgramData) that is missing the <meta> block for the TOC);
             if (!File.Exists(destSettingsFile)) { return; }
-            var destDoc = new XmlDocument { XmlResolver = null };
+            var destDoc = Common.DeclareXMLDocument(false);
             destDoc.Load(destSettingsFile);
             XmlElement root = destDoc.DocumentElement;
             if (root != null)
@@ -332,7 +332,7 @@ namespace SIL.PublishingSolution
         {
             // load the destination settings file (the one in ProgramData) that is missing the <meta> block for the TOC);
             if (!File.Exists(destSettingsFile)) { return; }
-            var destDoc = new XmlDocument { XmlResolver = null };
+            var destDoc = Common.DeclareXMLDocument(false);
             destDoc.Load(destSettingsFile);
             XmlElement root = destDoc.DocumentElement;
             if (root != null)
@@ -369,7 +369,7 @@ namespace SIL.PublishingSolution
         private void Version16(string destSettingsFile)
         {
             if (!File.Exists(destSettingsFile)) { return; }
-            var destDoc = new XmlDocument { XmlResolver = null };
+            var destDoc = Common.DeclareXMLDocument(false);
             destDoc.Load(destSettingsFile);
             XmlElement root = destDoc.DocumentElement;
             if (root != null)
@@ -416,7 +416,7 @@ namespace SIL.PublishingSolution
         {
             if (!File.Exists(path)) { return; }
 
-            var xdoc = new XmlDocument { XmlResolver = null };
+            var xdoc = Common.DeclareXMLDocument(false);
             xdoc.Load(path);
             XmlElement root = xdoc.DocumentElement;
             if (root != null)
@@ -453,7 +453,7 @@ namespace SIL.PublishingSolution
         {
             if (!File.Exists(path)) { return; }
 
-            var xdoc = new XmlDocument { XmlResolver = null };
+            var xdoc = Common.DeclareXMLDocument(false);
             xdoc.Load(path);
             XmlElement root = xdoc.DocumentElement;
             if (root != null)

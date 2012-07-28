@@ -862,7 +862,7 @@ namespace SIL.PublishingSolution
             finally
             {
                 projInfo.DefaultXhtmlFileWithPath = defaultXhtml;
-                projInfo.DictionaryOutputName = null;
+                //projInfo.DictionaryOutputName = null;
                 if (preProcessor != null)
                 {
                     Common.DeleteDirectory(preProcessor.GetCreatedTempFolderPath);
@@ -1186,8 +1186,7 @@ namespace SIL.PublishingSolution
 
         private static void IncludeTextinMacro(string strMacroPath, string ReferenceFormat, string saveAsPath, bool runMacroFirstTime, string isCoverImageInserted)
         {
-            //var xmldoc = new XmlDocument { XmlResolver = null };
-	    var xmldoc = Common.DeclareXMLDocument(false);
+    	    var xmldoc = Common.DeclareXMLDocument(false);
             xmldoc.Load(strMacroPath);
             XmlElement ele = xmldoc.DocumentElement;
             string autoMacro = "False";

@@ -718,8 +718,7 @@ namespace SIL.PublishingSolution
         public void CreateGraphicsStyle(string styleFilePath, string makeClassName, string parentName, string position, string side)
         {
             const string className = "Graphics";
-            //_styleXMLdoc = new XmlDocument { XmlResolver = null };
-	    _styleXMLdoc = Common.DeclareXMLDocument(false);
+	        _styleXMLdoc = Common.DeclareXMLDocument(false);
             _styleXMLdoc.Load(styleFilePath);
 
             var nsmgr = new XmlNamespaceManager(_styleXMLdoc.NameTable);

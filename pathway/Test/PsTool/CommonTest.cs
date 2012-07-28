@@ -51,7 +51,7 @@ namespace Test.PsTool
         {
             _doc = new XmlDocument();
             _target = new PublicationInformation();
-            actualDocument = new XmlDocument { XmlResolver = null };
+            actualDocument = Common.DeclareXMLDocument(false);
             LoadInputDocument("Dictionary1.de");
             _allUserPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             Common.SupportFolder = "";

@@ -470,7 +470,7 @@ namespace Test.PsExport
             var flexRevFullName = FileCopy(testData);
             Common.StreamReplaceInFile(flexRevFullName, "class=\"headword\"", "class=\"headref\"");
             AddHomographAndSenseNumClassNames.Execute(flexRevFullName, flexRevFullName);
-            var actual = new XmlDocument { XmlResolver = null };
+            var actual = Common.DeclareXMLDocument(false);
             actual.Load(flexRevFullName);
             var nodes = actual.SelectNodes("//*[@class='revhomographnumber']");
             Assert.AreEqual(8, nodes.Count);

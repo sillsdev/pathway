@@ -548,7 +548,7 @@ namespace SIL.Tool
             {
                 return;
             }
-            var xmldoc = Common.DeclareXMLDocument(false);
+            var xmldoc = Common.DeclareXMLDocument(true);
             xmldoc.Load(xhtmlFile);
             XmlNodeList headnodes = xmldoc.GetElementsByTagName("head");
             XmlNode headnode = headnodes[0];
@@ -1082,7 +1082,7 @@ namespace SIL.Tool
 
             try
             {
-                _reader = Common.DeclareXmlTextReader(xhtmlFileWithPath, false);
+                _reader = Common.DeclareXmlTextReader(xhtmlFileWithPath, true);
             }
             catch (Exception ex)
             {

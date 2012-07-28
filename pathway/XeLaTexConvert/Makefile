@@ -54,8 +54,8 @@ binary:
 	exit 0
 
 tlsetup:
-	xbuild /target:TlGetInstaller /property:BUILD_NUMBER=$(BUILD_NUMBER)\;Platform='$(Platform)'\;OS=Linux ../BuildPathwaySprint.csproj
-	xbuild /target:TlInstall /property:BUILD_NUMBER=$(BUILD_NUMBER)\;Platform='$(Platform)'\;OS=Linux ../BuildPathwaySprint.csproj
+	xbuild /target:TlGetInstaller /property:OS=Linux ../BuildPathwaySprint.csproj
+	xbuild /target:TlInstall /property:OS=Linux ../BuildPathwaySprint.csproj
 
 clean:
 	xbuild /target:Clean ../BuildPathwaySprint.csproj

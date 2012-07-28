@@ -41,16 +41,16 @@ namespace Test
                     string outputEntry = new StreamReader(outFl.GetInputStream(outFl.GetEntry(zipEntry.Name).ZipFileIndex)).ReadToEnd();
                     string expectEntry = new StreamReader(expFl.GetInputStream(expFl.GetEntry(zipEntry.Name).ZipFileIndex)).ReadToEnd();
                     XmlDocument outputDocument = new XmlDocument();
-                    outputDocument.XmlResolver = null;
+                    outputDocument.XmlResolver = new XmlUrlResolver();
                     outputDocument.LoadXml(outputEntry);
                     XmlDocument expectDocument = new XmlDocument();
-                    expectDocument.XmlResolver = null;
+                    expectDocument.XmlResolver = new XmlUrlResolver();
                     expectDocument.LoadXml(expectEntry);
                     XmlDsigC14NTransform outputCanon = new XmlDsigC14NTransform();
-                    outputCanon.Resolver = null;
+                    outputCanon.Resolver = new XmlUrlResolver();
                     outputCanon.LoadInput(outputDocument);
                     XmlDsigC14NTransform expectCanon = new XmlDsigC14NTransform();
-                    expectCanon.Resolver = null;
+                    expectCanon.Resolver = new XmlUrlResolver();
                     expectCanon.LoadInput(expectDocument);
                     Stream outputStream = (Stream)outputCanon.GetOutput(typeof(Stream));
                     Stream expectStream = (Stream)expectCanon.GetOutput(typeof(Stream));
@@ -83,7 +83,7 @@ namespace Test
             reader.Close();
             idmlFile.Close();
             var xmlDocument = new XmlDocument();
-            xmlDocument.XmlResolver = null;
+            xmlDocument.XmlResolver = new XmlUrlResolver();
             xmlDocument.LoadXml(text);
             return xmlDocument;
         }
