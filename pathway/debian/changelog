@@ -1,4 +1,4 @@
-pathway (1.1.5.2485-1) unstable; urgency=high
+pathway (1.1.6.2485-1) unstable; urgency=high
 
   * Sprint 1.1.6.2485
     - Common Code: TD-3077 don't require writing system store for direction. </li>
