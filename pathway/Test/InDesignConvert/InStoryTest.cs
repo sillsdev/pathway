@@ -45,7 +45,7 @@ namespace Test.InDesignConvert
             _testFolderPath = PathPart.Bin(Environment.CurrentDirectory, "/InDesignConvert/TestFiles");
             ClassProperty = _expected;  //Note: All Reference address initialized here
             _outputPath = Common.PathCombine(_testFolderPath, "output");
-            _expectedPath = Common.PathCombine(_testFolderPath, "expected");
+            _expectedPath = Common.PathCombine(_testFolderPath, "Expected");
             _expectedPath = Common.PathCombine(_expectedPath, "BuangExpect");
             _outputStyles = Common.PathCombine(_outputPath, "Resources");
             _outputStory = Common.PathCombine(_outputPath, "Stories");

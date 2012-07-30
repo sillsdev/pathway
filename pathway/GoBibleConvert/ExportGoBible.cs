@@ -354,7 +354,7 @@ namespace SIL.PublishingSolution
             var red = "false";
             var sbInfo = new StringBuilder();
             var info = "Bible text exported from FieldWorks Translation Editor.";
-			var iconFullName = Common.FromRegistry(Common.PathCombine("GoBible/GoBibleCore/Icon", "Icon.png"));
+			var iconFullName = Common.FromRegistry(Common.PathCombine("GoBible/GoBibleCore/icon", "Icon.png"));
 
             // Load User Interface Collection Parameters
             Param.LoadSettings();

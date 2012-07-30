@@ -61,8 +61,13 @@ namespace Test.epubConvert
         [Category("SkipOnTeamCity")]
         public void AndikaTest()
         {
-            var silFont = new EmbeddedFont("Andika Basic");
-            Assert.IsTrue(FontInternals.IsInstalled("Andika Basic"));
+            string fontName = "Andika Basic";
+            if(Common.IsUnixOS())
+            {
+                fontName = "Andika";
+            }
+            var silFont = new EmbeddedFont(fontName);
+            Assert.IsTrue(FontInternals.IsInstalled(fontName));
             Assert.IsTrue(silFont.CanRedistribute);
             Assert.IsFalse(silFont.Serif);
         }
@@ -86,9 +91,17 @@ namespace Test.epubConvert
         [Category("SkipOnTeamCity")]
         public void DaiBannaTest()
         {
-            var silFont = new EmbeddedFont("SIL Dai Banna Book");
-            Assert.IsTrue(FontInternals.IsInstalled("SIL Dai Banna Book"));
-            Assert.IsTrue(silFont.CanRedistribute);
+            string fontName = "SIL Dai Banna Book";
+            if (Common.IsUnixOS())
+            {
+                fontName = "dai-banna";
+            }
+            var silFont = new EmbeddedFont(fontName);
+            if (!Common.IsUnixOS())
+            {
+                Assert.IsTrue(FontInternals.IsInstalled(fontName));
+                Assert.IsTrue(silFont.CanRedistribute);
+            }
             Assert.IsTrue(silFont.Serif);
         }
         /// <summary>
@@ -134,9 +147,17 @@ namespace Test.epubConvert
         [Category("SkipOnTeamCity")]
         public void GentiumTest()
         {
-            var silFont = new EmbeddedFont("Gentium");
-            Assert.IsTrue(FontInternals.IsInstalled("Gentium"));
-            Assert.IsTrue(silFont.CanRedistribute);
+            string fontName = "Gentium";
+            if (Common.IsUnixOS())
+            {
+                fontName = "Gentiumbasic";
+            }
+            var silFont = new EmbeddedFont(fontName);
+            if(!Common.IsUnixOS())
+            {
+                Assert.IsTrue(FontInternals.IsInstalled(fontName));
+                Assert.IsTrue(silFont.CanRedistribute);
+            }
             Assert.IsTrue(silFont.Serif);
         }
         /// <summary>

@@ -955,15 +955,17 @@ namespace Test.PsTool
         [Category("SkipOnTeamCity")]
         public void GetTextDirection()
         {
+            string expected = "ltr";
             string NkonyaCode = "nko";  //Used in Nkonya dataset
             string SenaCode = "seh";    //Used in Sena dataset
             string UrduCode = "ur";     //Used in TestABS dataset
             string actual = Common.GetTextDirection(NkonyaCode);
-            Assert.AreEqual("ltr", actual);
+            Assert.AreEqual(expected, actual);
             actual = Common.GetTextDirection(SenaCode);
-            Assert.AreEqual("ltr", actual);
+            Assert.AreEqual(expected, actual);
             actual = Common.GetTextDirection(UrduCode);
-            Assert.AreEqual("rtl", actual);
+            if(!Common.IsUnixOS()){ expected = "rtl";}
+            Assert.AreEqual(expected, actual);
         }
 
        #endregion

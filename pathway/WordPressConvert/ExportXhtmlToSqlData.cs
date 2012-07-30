@@ -116,7 +116,8 @@ namespace SIL.PublishingSolution
             searchTable += @"INSERT INTO `sil_multilingual_search` (`post_id`, `language_code`, `relevance`, `search_strings`) VALUES " + "\n";
             searchTable += SetSemiColon(_searchValue);
 
-            _textWriter = new StreamWriter(_projInfo.ProjectPath + @"\" + MysqlDataFileName);
+            //_textWriter = new StreamWriter(_projInfo.ProjectPath + @"\" + MysqlDataFileName);
+            _textWriter = new StreamWriter(Common.PathCombine(_projInfo.ProjectPath, MysqlDataFileName));
             _textWriter.WriteLine(postTable);
             _textWriter.WriteLine(termTable);
             _textWriter.WriteLine(texonomyTable);
@@ -132,7 +133,7 @@ namespace SIL.PublishingSolution
             string letHead = string.Empty;
             string strPost = string.Empty;
             int letDataCount = 0;
-            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
             xmlDocument.Load(xhtmlFile);
             XmlNodeList xmlNL = xmlDocument.GetElementsByTagName("div");
 
@@ -282,7 +283,7 @@ namespace SIL.PublishingSolution
             string lastAttribute = string.Empty;
 
             string xhtmlFile = _projInfo.DefaultXhtmlFileWithPath;
-            XmlDocument xmlDocument = new XmlDocument { XmlResolver = null };
+            XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
             xmlDocument.Load(xhtmlFile);
             XmlNodeList xmlNL = xmlDocument.GetElementsByTagName("meta");
 

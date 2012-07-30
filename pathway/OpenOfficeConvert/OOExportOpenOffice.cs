@@ -114,7 +114,7 @@ namespace SIL.PublishingSolution
             string entryFilterXpath = "true()";
             string senseFilterXpath = "true()";
             string languageFilterXpath = "true()";
-            string liftSupportPath = Path.Combine(Common.GetPSApplicationPath(), "liftSupport");
+            string liftSupportPath = Path.Combine(Common.GetPSApplicationPath(), "LiftSupport");
 
             string inputFile = pubInfo.DefaultXhtmlFileWithPath;
             string xhtmlFile = inputFile;

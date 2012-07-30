@@ -35,6 +35,10 @@ namespace Test.PsTool
         {
             string fileName = GetFileNameWithPath("Test.xhtml");
             string _expected = @"C:\FieldWorks";
+            if(Common.IsUnixOS())
+            {
+                _expected = Common.PathCombine(Common.GetAllUserAppPath(), "fieldworks");
+            }
             string actual = Common.GetMetaValue(fileName);
             Assert.AreEqual(_expected, actual);
         }

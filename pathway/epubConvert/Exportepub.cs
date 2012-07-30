@@ -1304,7 +1304,7 @@ namespace SIL.PublishingSolution
                 if (IncludeFontVariants)
                 {
                     // italic
-                    if (embeddedFont.HasItalic && embeddedFont.ItalicFilename != embeddedFont.Filename)
+                    if (embeddedFont.HasItalic && embeddedFont.ItalicFilename.Trim().Length > 0 && embeddedFont.ItalicFilename != embeddedFont.Filename)
                     {
                         dest = Common.PathCombine(contentFolder, Path.GetFileName(embeddedFont.ItalicFilename));
                         if (!File.Exists(dest))
@@ -1313,7 +1313,7 @@ namespace SIL.PublishingSolution
                         }
                     }
                     // bold
-                    if (embeddedFont.HasBold && embeddedFont.BoldFilename != embeddedFont.Filename)
+                    if (embeddedFont.HasBold && embeddedFont.BoldFilename.Trim().Length > 0 && embeddedFont.BoldFilename != embeddedFont.Filename)
                     {
                         dest = Common.PathCombine(contentFolder, Path.GetFileName(embeddedFont.BoldFilename));
                         if (!File.Exists(dest))

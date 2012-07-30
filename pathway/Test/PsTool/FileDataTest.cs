@@ -31,7 +31,7 @@ namespace Test.PsTool
         [TestFixtureSetUp]
         protected void SetUp()
         {
-            sourceFolder = PathPart.Bin(Environment.CurrentDirectory, "/PsTool/TestFiles/inputFiles");
+            sourceFolder = PathPart.Bin(Environment.CurrentDirectory, "/PsTool/TestFiles/InputFiles");
             Common.Testing = true;
         }
         #endregion Setup
