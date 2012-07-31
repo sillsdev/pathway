@@ -1,0 +1,73 @@
+UI-About: О программе
+UI-Add-Bookmark: Добавить закладку
+UI-All: Все
+UI-Back: Назад
+UI-Bold: Жирный
+UI-Book: Книга
+UI-Bookmarks: Закладки
+UI-Books-Of-Moses: Книги Моисеевы
+UI-Books: Книги
+UI-Cancel: Отмена
+UI-Change: Изменить
+UI-Chapter: Глава
+UI-Delete-Bookmark-Alert: Удалить выбранную закладку?
+UI-Delete-Bookmark: Удалить закладку
+UI-Delete: Удалить
+UI-Error: Ошибка
+UI-Exit: Выход
+UI-Font-Size: Размер шрифта
+UI-Font-Style: Стиль шрифта
+UI-Found: Найдено
+UI-From-Book: от книги
+UI-Full-Screen: Полноэкранный режим
+UI-Gospels: Евангелия
+UI-Goto: Перейти
+UI-Historical: Исторические
+UI-History: История
+UI-Large: Крупный
+UI-Loading: Загрузка
+UI-Major-Prophets: Большие Пророки
+UI-Medium: Средний
+UI-Message-Too-Large-To-Be-Sent: Слишком длинное сообщение для отправки
+UI-Minor-Prophets: Малые Пророки
+UI-New-Testament: Новый Завет
+UI-Of: из
+UI-Off: Выкл.
+UI-OK: Готово
+UI-Old-Testament: Ветхий Завет
+UI-On: Вкл.
+UI-Other-Letters: Прочие Послания
+UI-Pauls-Letters: Послания ап.Павла
+UI-Phone-Number: Тел. номер
+UI-Plain: Обычный
+UI-Please-Wait: Подождите пожалуйста
+UI-Poetic: Поэтические
+UI-Preferences: Настройки
+UI-Results: Результаты
+UI-Reverse-Characters: Инверсные символы
+UI-Reverse-Colours: Инверсные цвета
+UI-Save: Сохранить
+UI-Search-Results: Результаты поиска
+UI-Search-Text: Текст поиска
+UI-Search: Поиск
+UI-Searching: Поиск
+UI-Select-Verses-To-Send: Выберите стихи на отправку
+UI-Select: Выбрать
+UI-Send-MMS: Послать MMS
+UI-Send-SMS: Послать SMS
+UI-Send-Verses: Послать стихи
+UI-Send: Послать
+UI-Small: Мелкий
+UI-Stop: Остановить
+UI-Theme-Blue: Синяя
+UI-Theme-Computer: Компьютер
+UI-Theme-Floral: Цветочная
+UI-Theme-Natural: Естественная
+UI-Theme-Paper: Бумага
+UI-Theme-Sunshine: Солнечная
+UI-Theme: Тема
+UI-Themes: Темы
+UI-To-Book: до книги
+UI-To: до
+UI-Verse-Does-Not-Exist: Стих не существует
+UI-View: Просмотр

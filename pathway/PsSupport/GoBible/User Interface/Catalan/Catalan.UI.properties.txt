@@ -1,0 +1,73 @@
+UI-About: Quant a
+UI-Add-Bookmark: Afegeix marcador
+UI-All: Tots
+UI-Back: Enrere
+UI-Bold: Negreta
+UI-Book: Llibre
+UI-Bookmarks: Marcadors
+UI-Books-Of-Moses: Pentateuc
+UI-Books: Llibres
+UI-Cancel: Cancel·la
+UI-Change: Canvia
+UI-Chapter: Capítol
+UI-Delete-Bookmark-Alert: Esborrar marcador seleccionat?
+UI-Delete-Bookmark: Esborra marcador
+UI-Delete: Esborra
+UI-Error: Error
+UI-Exit: Surt
+UI-Font-Size: Mida de lletra
+UI-Font-Style: Estil de lletra
+UI-Found: Trobat(s)
+UI-From-Book: Del llibre de
+UI-Full-Screen: Pantalla completa
+UI-Gospels: Evangelis
+UI-Goto: Anar a
+UI-Historical: Històrics
+UI-History: Historial
+UI-Large: Gran
+UI-Loading: Carregant
+UI-Major-Prophets: Profetes majors
+UI-Medium: Mitjana
+UI-Message-Too-Large-To-Be-Sent: Missatge massa gran per a ser enviat
+UI-Minor-Prophets: Profetes menors
+UI-New-Testament: Nou Testament
+UI-Of: de
+UI-Off: Desactivat
+UI-OK: D'acord
+UI-Old-Testament: Antic Testament
+UI-On: Activat
+UI-Other-Letters: Altres cartes
+UI-Pauls-Letters: Cartes de Pau
+UI-Phone-Number: Número de telèfon
+UI-Plain: Normal
+UI-Please-Wait: Esperi...
+UI-Poetic: Poètics
+UI-Preferences: Preferències
+UI-Results: Resultats
+UI-Reverse-Characters: Escriptura inversa
+UI-Reverse-Colours: Invertir colors
+UI-Save: Desa
+UI-Search-Results: Resultats de cerca
+UI-Search-Text: Cercar text
+UI-Search: Cerca
+UI-Searching: Cercant
+UI-Select-Verses-To-Send: Selecciona versos a enviar
+UI-Select: Selecciona
+UI-Send-MMS: Envia MMS
+UI-Send-SMS: Envia SMS
+UI-Send-Verses: Envia versets
+UI-Send: Envia
+UI-Small: Petita
+UI-Stop: Atura
+UI-Theme-Blue: Blau
+UI-Theme-Computer: Ordinador
+UI-Theme-Floral: Floral
+UI-Theme-Natural: Natural
+UI-Theme-Paper: Paper
+UI-Theme-Sunshine: Sol
+UI-Theme: Tema
+UI-Themes: Temes
+UI-To-Book: Al llibre de
+UI-To: al
+UI-Verse-Does-Not-Exist: Verset inexistent
+UI-View: Mostra

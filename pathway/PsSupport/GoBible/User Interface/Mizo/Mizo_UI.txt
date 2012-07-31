@@ -1,0 +1,73 @@
+UI-About: Keimahni
+UI-Add-Bookmark: Chhinchhiah Belhna
+UI-All: A vaiin
+UI-Back: Kirna
+UI-Bold: Hraw
+UI-Book: Lehkhabu
+UI-Bookmarks: Chhinchhiahte
+UI-Books: Lehkhabute
+UI-Books-Of-Moses: Mosia Lehkhabute
+UI-Cancel: Sutna
+UI-Change: Thlak rawh
+UI-Chapter: Bung
+UI-Delete: Paih rawh
+UI-Delete-Bookmark: Chhinchhiah Paihna
+UI-Delete-Bookmark-Alert: I paih duh maw?
+UI-Error: Dik lo
+UI-Exit: Chhuahna
+UI-Font-Size: Hawrawp lenzawng
+UI-Font-Style: Hawrawp zia
+UI-Found: Hmuh zat
+UI-From-Book: From Book
+UI-Full-Screen: Hmai pum
+UI-Gospels: Chanchintha
+UI-Goto: Chang thlanna
+UI-Historical: Chanchin Ziahna
+UI-History: History
+UI-Large: Lian
+UI-Loading: Inhawng mek
+UI-Major-Prophets: Zawlnei Liante
+UI-Medium: Pangngai
+UI-Message-Too-Large-To-Be-Sent: Thu thawn tur a lian lutuk
+UI-Minor-Prophets: Zawlnei Tete
+UI-New-Testament: Thuthlung Thar
+UI-Of: of
+UI-Off: Off
+UI-OK: Aw le
+UI-Old-Testament: Thuthlung Hlui
+UI-On: On
+UI-Other-Letters: Lehkhathawn Dangte
+UI-Pauls-Letters: Paula Lehkhathawnte
+UI-Phone-Number: Phone Nambar
+UI-Plain: Pangngai
+UI-Please-Wait: Lo nghak lawk
+UI-Poetic: Hlate
+UI-Preferences: Duhthlanna
+UI-Results: Zawn Hmuhte
+UI-Reverse-Characters: Hawrawp thlakthlengna
+UI-Reverse-Colours: Rawng thlakthlengna
+UI-Save: Save
+UI-Search: Zawnawlna
+UI-Searching: Zawng mek
+UI-Search-Results: Zawn Hmuhte
+UI-Search-Text: Thumal Zawn Tur
+UI-Select: Thlang rawh
+UI-Select-Verses-To-Send: Thawn tur chang thlanna
+UI-Send: Thawn rawh
+UI-Send-MMS: MMS Thawnna
+UI-Send-SMS: SMS Thawnna
+UI-Send-Verses: Chang Thawnna
+UI-Small: Te
+UI-Stop: Tihtawpna
+UI-Theme: Theme
+UI-Theme-Blue: Pawl
+UI-Theme-Computer: Khawlthluaknei
+UI-Theme-Floral: Pangpar
+UI-Theme-Natural: Khuarel
+UI-Theme-Paper: Lehkha
+UI-Themes: Themes
+UI-Theme-Sunshine: Ni eng
+UI-To: atanga
+UI-To-Book: To Book
+UI-Verse-Does-Not-Exist: Hemi chang hi a awm lo
+UI-View: En rawh

@@ -1,0 +1,73 @@
+UI-About: Мәлімет
+UI-Add-Bookmark: Бетбелгісін Қосшы!
+UI-All: Бәрі
+UI-Back: Кәрі     
+UI-Bold: Жуан
+UI-Book: Kітап
+UI-Bookmarks: Бетбелгілер
+UI-Books-Of-Moses: Мұсаның Кітаптары 
+UI-Books: Кітаптар
+UI-Cancel: Болдырмашы
+UI-Change: Өзгертші
+UI-Chapter: Тарау
+UI-Delete-Bookmark-Alert: Назарыңызға! Бетбелгісін Жойайын?
+UI-Delete-Bookmark: Бетбелгісін Жойшы!
+UI-Delete: Жойшы!
+UI-Error: Қате
+UI-Exit: Шықшы
+UI-Font-Size: Әріп өлшемі
+UI-Font-Style: Әріп мəнері
+UI-Found: Тапқан
+UI-From-Book: Кітаптан
+UI-Full-Screen: Толық бейнебетке
+UI-Gospels: Инжіл
+UI-Goto: Өту
+UI-Historical: Тарихи Кітаптар
+UI-History: Тарих
+UI-Large: Үлкен
+UI-Loading: Жүктеп жатыр
+UI-Major-Prophets: Ұзын Пайғамбарлық Жазбалары
+UI-Medium: Орташа
+UI-Message-Too-Large-To-Be-Sent: Қате! Жіберейтін Хабарлама Тым Үлкен!
+UI-Minor-Prophets: Қысқа Пайғамбарлық Жазбалары
+UI-New-Testament: Жаңа Келісім
+UI-Of: ниң -і
+UI-Off: Өшірші
+UI-OK: Мақұл
+UI-Old-Testament: Көне Келісім
+UI-On: Қосшы
+UI-Other-Letters: Басқа Елшілер Жазған Хаттар
+UI-Pauls-Letters: Пауылдың Хаттары
+UI-Phone-Number: Телефонның Номері
+UI-Plain: Кəдімгі Мəтін
+UI-Please-Wait: Күте Тұрыңызшы
+UI-Poetic: Өлең Кітаптар
+UI-Preferences: Бапталымдар
+UI-Results: Нәтижелер
+UI-Reverse-Characters: Әріптердің Бағыты Кері болсын
+UI-Reverse-Colours: Түстердің орыны алмасын 
+UI-Save: Сақтасын
+UI-Search-Results: Іздеу Нәтижелері 
+UI-Search-Text:  Мәтін Іздесін
+UI-Search: Іздеу
+UI-Searching: Іздеу жүргізіп жатыр
+UI-Select-Verses-To-Send: Жіберілейтін аяттарын таңдасын 
+UI-Select: Таңдашы
+UI-Send-MMS: MMS Жібер
+UI-Send-SMS: SMS Жібер
+UI-Send-Verses: Аяттар жібер 
+UI-Send: Жібер
+UI-Small: Кішкентай
+UI-Stop: Доғар
+UI-Theme-Blue: Көк Темасы
+UI-Theme-Computer: Компьютерлік Тема 
+UI-Theme-Floral: Гүлдер Темасы
+UI-Theme-Natural: Табиғи Темасы
+UI-Theme-Paper: Қағаз Темасы
+UI-Theme-Sunshine: Күннің Сәулесі 
+UI-Theme: Темасы
+UI-Themes: Темалар
+UI-To-Book: Кітапқа
+UI-To: Сілтемеге дейін
+UI-Verse-Does-Not-Exist: Мынандай аят жоқ!
+UI-View: Қарау

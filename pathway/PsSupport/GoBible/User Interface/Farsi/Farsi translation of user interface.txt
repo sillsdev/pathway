@@ -1,0 +1,74 @@
+// Farsi translation of user interface
+UI-About: درباره
+UI-Add-Bookmark: حفظ کن
+UI-All: در کل
+UI-Back: عقب
+UI-Bold: برجسته
+UI-Book: کتاب
+UI-Bookmarks: نشان لای کتاب
+UI-Books-Of-Moses: تورات
+UI-Books:کتابها
+UI-Cancel: انصراف
+UI-Change: عوض
+UI-Chapter: فصل
+UI-Delete-Bookmark-Alert: نشان لای کتاب پاک کن
+UI-Delete-Bookmark: نشان لای کتاب پاک کن
+UI-Delete: پاک کن
+UI-Error:اشتباه  
+UI-Exit:   خروج
+UI-Font-Size: اندازه  فونت
+UI-Font-Style: انتخاب فونت
+UI-Found: شد  پیدا
+UI-From-Book: از کتاب
+UI-Full-Screen: نمایش کامل
+UI-Gospels: انجیلها
+UI-Goto: برو به  
+UI-Historical:تاریخی 
+UI-History: تاریخ
+UI-Large: بزرگ
+UI-Loading: بارگیری
+UI-Major-Prophets: انبیاء بزرگ
+UI-Medium:متوسط 
+UI-Message-Too-Large-To-Be-Sent:  برای ارسال بزرگ است SMS 
+UI-Minor-Prophets: انبیاء کوچک
+UI-New-Testament: عهد جدید
+UI-Of: از 
+UI-Off: خاموش
+UI-OK: قبول
+UI-Old-Testament: عهد عتیق
+UI-On: روشن
+UI-Other-Letters: نامەهای دیگر
+UI-Pauls-Letters: نامه‌های پولس
+UI-Phone-Number: شماره تلفن
+UI-Plain: عادی
+UI-Please-Wait: صبر کن
+UI-Poetic: شعری
+UI-Preferences: انتخابها
+UI-Results:  نتیجه ها
+UI-Reverse-Characters: حروف قبلی
+UI-Reverse-Colours: رنگهای قبلی
+UI-Save: ذخیره
+UI-Search-Results: نتیجه جستجو
+UI-Search-Text: جستجو
+UI-Search: جستجو
+UI-Searching: جستجو کردن
+UI-Select-Verses-To-Send: انتخاب آیات برای ارسال
+UI-Select: انتخاب
+UI-Send-MMS: فرستادن MMS
+UI-Send-SMS: فرستادن SMS
+UI-Send-Verses: فرستادن آیات
+UI-Send: فرستادن
+UI-Small: کوچک
+UI-Stop: انصراف
+UI-Theme-Blue: آبی 
+UI-Theme-Computer: کامپیوتر
+UI-Theme-Floral: گلدار
+UI-Theme-Natural: طبیعی
+UI-Theme-Paper: کاغذ
+UI-Theme-Sunshine: روشن
+UI-Theme: رنگ
+UI-Themes: رنگ‌ها
+UI-To-Book: به کتاب
+UI-To: به
+UI-Verse-Does-Not-Exist: این آیه وجود ندارد
+UI-View: نمایش

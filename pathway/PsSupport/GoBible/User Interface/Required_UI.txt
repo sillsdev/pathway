@@ -1,0 +1,56 @@
+Afrikaans
+Albanian
+Amharic
+Azeri Cyrillic
+Azeri Latin
+Basque
+Belarusian
+Breton
+Bulgarian
+Burmese
+Catalan
+Chamorro
+Coptic
+Danish
+Esperanto
+Estonian
+Georgian
+Hebrew (modern)
+Icelandic
+Indonesian
+Kabyle
+Kazakh
+Kekchi
+Khmer
+Kyrgyz
+Latvian
+Lithuanian
+Macedonian
+Malagasy
+Manx
+Maori
+Nepali
+Norwegian
+Polish
+Potawotami
+Romani
+Serbian Cyrillic
+Serbian Latin
+Shuar
+Slovakian
+Slovenian
+Swahili
+Tagalog
+Tajik Cyrillic
+Tamajaq
+Thai
+Turkmen Cyrillic
+Turkmen Latin
+Ukrainian
+Uma
+Uzbek Cyrillic
+Uzbek Latin
+Vietnamese
+Welsh
+Wolof
+Xhosa

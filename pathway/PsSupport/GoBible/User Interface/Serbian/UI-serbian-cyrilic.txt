@@ -1,0 +1,73 @@
+UI-About: О програму
+UI-Add-Bookmark: Додај маркер
+UI-All: Све
+UI-Back: Назад
+UI-Bold: Мастан
+UI-Book: Књига
+UI-Bookmarks: Маркери
+UI-Books-Of-Moses: Петокњижје
+UI-Books: Књиге
+UI-Cancel: Поништи
+UI-Change: Промени
+UI-Chapter: Глава
+UI-Delete-Bookmark-Alert: Избрисати означени маркер?
+UI-Delete-Bookmark: Избрисати маркер
+UI-Delete: Избриши
+UI-Error: Грешка
+UI-Exit: Излаз
+UI-Font-Size: Величина слова
+UI-Font-Style: Облик слова
+UI-Found: Нађено
+UI-From-Book: Од Књиге
+UI-Full-Screen: Цео екран
+UI-Gospels: Јеванђеља
+UI-Goto: Иди на
+UI-Historical: Историјске
+UI-History: Погледано
+UI-Large: Велика
+UI-Loading: Очитавање
+UI-Major-Prophets: Велики пророци
+UI-Medium: Средња
+UI-Message-Too-Large-To-Be-Sent: Порука је превелика за слање
+UI-Minor-Prophets: Мали пророци
+UI-New-Testament: Нови Завет
+UI-Of: од
+UI-Off: Искључи
+UI-OK: У реду
+UI-Old-Testament: Стари Завет
+UI-On: Укључи
+UI-Other-Letters: Остале посланице
+UI-Pauls-Letters: Павлове посланице
+UI-Phone-Number: Број телефона
+UI-Plain: Обичан
+UI-Please-Wait: Молимо сачекајте
+UI-Poetic: Поетске
+UI-Preferences: Подешавања
+UI-Results: Резултати
+UI-Reverse-Characters: Пиши речи уназад
+UI-Reverse-Colours: Изокрени боје
+UI-Save: Сачувај
+UI-Search-Results: Резултати претраге
+UI-Search-Text: Тражи текст
+UI-Search: Тражи
+UI-Searching: Претраживање
+UI-Select-Verses-To-Send: Изабери стихове ѕа слање
+UI-Select: Изабери
+UI-Send-MMS: Пошаљи MMS
+UI-Send-SMS: Пошаљи SMS
+UI-Send-Verses: Пошаљи стихове
+UI-Send: Пошаљи
+UI-Small: Мала
+UI-Stop: Заустави
+UI-Theme-Blue: Плава тема
+UI-Theme-Computer: Рачунар тема
+UI-Theme-Floral: Цвеће тема
+UI-Theme-Natural: Природа тема
+UI-Theme-Paper: Хартија тема
+UI-Theme-Sunshine: Сунчев сјај тема
+UI-Theme: Тема
+UI-Themes: Теме
+UI-To-Book: До Књиге
+UI-To: до
+UI-Verse-Does-Not-Exist: Стих не постоји
+UI-View: Погледај

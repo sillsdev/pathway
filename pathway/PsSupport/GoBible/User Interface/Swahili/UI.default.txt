@@ -1,0 +1,73 @@
+UI-About: Kuhusu
+UI-Add-Bookmark: Ongeza Alamisho
+UI-All: Vyote
+UI-Back: Nyuma
+UI-Bold: Chagina
+UI-Book: Kitabu
+UI-Bookmarks: Maalamisho
+UI-Books-Of-Moses: Vitabu vya Musa
+UI-Books: Vitabu
+UI-Cancel: Kataa
+UI-Change: Badilisha
+UI-Chapter: Sura
+UI-Delete-Bookmark-Alert: Unataka kufuta Alamisho teuli?
+UI-Delete-Bookmark: Futa Alamisho
+UI-Delete: Futa
+UI-Error: Tatizo
+UI-Exit: Ondoka
+UI-Font-Size: Ukubwa wa maandishi
+UI-Font-Style: Aina ya maandishi
+UI-Found: Imepatikana
+UI-From-Book: Kutoka kitabu
+UI-Full-Screen: Kurasa nzima
+UI-Gospels: Injili
+UI-Goto: Nenda
+UI-Historical: Kihistoria
+UI-History: Historia
+UI-Large: Kubwa
+UI-Loading: Loading
+UI-Major-Prophets: Manabii Wakubwa
+UI-Medium: Wastani
+UI-Message-Too-Large-To-Be-Sent: Ujumbe mkubwa sana kutuma
+UI-Minor-Prophets: Manabii Wadogo
+UI-New-Testament: Agano Jipya
+UI-Of: ya
+UI-Off: Zima
+UI-OK: Sawa
+UI-Old-Testament: Agano la Kale
+UI-On: Washa
+UI-Other-Letters: Barua zingine
+UI-Pauls-Letters: Barua za Paulo
+UI-Phone-Number: Namba ya Simu
+UI-Plain: Bayana
+UI-Please-Wait: Tafadhali subiri
+UI-Poetic: Kishairi
+UI-Preferences: Mapendeleo
+UI-Results: Majibu
+UI-Reverse-Characters: Herufi Kinyume
+UI-Reverse-Colours: Rangi Kinyume
+UI-Save: Hifadhi
+UI-Search-Results: Tafuta Majibu
+UI-Search-Text: Tafuta Neno
+UI-Search: Tafuta
+UI-Searching: Inatafuta
+UI-Select-Verses-To-Send: Chagua Aya Za Kutuma
+UI-Select: Chagua
+UI-Send-MMS: Tuma MMS
+UI-Send-SMS: Tuma SMS
+UI-Send-Verses: Tuma Aya
+UI-Send: Tuma
+UI-Small: Ndogo
+UI-Stop: Simama
+UI-Theme-Blue: Bluu
+UI-Theme-Computer: Kompyuta
+UI-Theme-Floral: Maua
+UI-Theme-Natural: Asilia
+UI-Theme-Paper: Karatasi
+UI-Theme-Sunshine: Mwangaza wa Jua
+UI-Theme: Muonekano
+UI-Themes: Mionekano
+UI-To-Book: Kwenda Kitabu
+UI-To: kwenda
+UI-Verse-Does-Not-Exist: Aya hiyo haipo
+UI-View: Angalia

@@ -1,0 +1,73 @@
+UI-About: Информация
+UI-Add-Bookmark: Закладка
+UI-All: Все
+UI-Back: Возврат 
+UI-Bold: Полужирный шрифт
+UI-Book: Книга
+UI-Bookmarks: Закладки
+UI-Books-Of-Moses: Книги Моисея 
+UI-Books: Книги 
+UI-Cancel: Отменить
+UI-Change: Изменить
+UI-Chapter: Глава
+UI-Delete-Bookmark-Alert: Внимание! Стереть Закладку?
+UI-Delete-Bookmark: Стереть Закладку
+UI-Delete: Стереть
+UI-Error: Ошибка
+UI-Exit: Выход
+UI-Font-Size: Размер Шрифта
+UI-Font-Style: Стиль Шрифта
+UI-Found: Найдено
+UI-From-Book: От Книги
+UI-Full-Screen: На Весь Экран
+UI-Gospels: Евангелия
+UI-Goto: Перейти На
+UI-Historical: Исторические Книги
+UI-History: История
+UI-Large: Крупный
+UI-Loading: Загрузка
+UI-Major-Prophets: Большие Пророки
+UI-Medium: Средний
+UI-Message-Too-Large-To-Be-Sent: Ошибка с Отправлением - Слишком Большое Сообщение
+UI-Minor-Prophets: Малые Пророки
+UI-New-Testament: Новый Завет
+UI-Of: из
+UI-Off: Отключить
+UI-OK: OK
+UI-Old-Testament: Ветхий Завет
+UI-On: Включить
+UI-Other-Letters: Послания Других Апостолов
+UI-Pauls-Letters: Послания Павла
+UI-Phone-Number: Номер Телефона 
+UI-Plain: Стандартный
+UI-Please-Wait: Пожайлуста Ждите
+UI-Poetic: Поэтические Книги
+UI-Preferences: Настройки
+UI-Results: Результаты
+UI-Reverse-Characters: Обратное Направление Текста
+UI-Reverse-Colours: Обратные Цвета 
+UI-Save: Сохранить
+UI-Search-Results: Результаты Поиска
+UI-Search-Text: Поиск Стиха
+UI-Search: Поиск
+UI-Searching: Идет Поиск
+UI-Select-Verses-To-Send: Выделить Стихи this seems to be missing the ‘to send’ part. it would be Выделить Стихи для отправления
+UI-Select: Выделить
+UI-Send-MMS: Послать MMS
+UI-Send-SMS: Послать SMS
+UI-Send-Verses: Послать Стихи 
+UI-Send: Послать
+UI-Small: Мелкий
+UI-Stop: Стоп
+UI-Theme-Blue: Тема Синева
+UI-Theme-Computer: Тема Компьютер
+UI-Theme-Floral: Тема Цветы
+UI-Theme-Natural: Тема Природы
+UI-Theme-Paper: Тема Бумага
+UI-Theme-Sunshine: Солнечный Свет 
+UI-Theme: Тема
+UI-Themes: Темы
+UI-To-Book: В Книгу
+UI-To:  Для Отсылки
+UI-Verse-Does-Not-Exist: Такого Стиха Не Существует
+UI-View: Просмотреть

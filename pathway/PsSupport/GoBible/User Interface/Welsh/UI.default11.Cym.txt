@@ -1,0 +1,73 @@
+UI-About:  Am
+UI-Add-Bookmark: Rhoi Nod Llyfr
+UI-All: Y Cwbl
+UI-Back: Yn ôl
+UI-Bold: Trwm
+UI-Book: Llyfr
+UI-Bookmarks: Nodau Llyfr
+UI-Books-Of-Moses: Llyfrau Moses
+UI-Books: Llyfrau
+UI-Cancel: Canslo
+UI-Change: Newid
+UI-Chapter: Pennod
+UI-Delete-Bookmark-Alert: Dileu Nod Llyfr?
+UI-Delete-Bookmark: Dileu Nod Llyfr
+UI-Delete: Dileu
+UI-Error: Gwall
+UI-Exit: Allanu
+UI-Font-Size: Maint Ffont
+UI-Font-Style: Arddull Ffont
+UI-Found: Canfuwyd
+UI-From-Book: O Lyfr
+UI-Full-Screen: Sgrîn lawn
+UI-Gospels: Efengylau
+UI-Goto: Ewch i
+UI-Historical: Hanesyddol
+UI-History: Hanes
+UI-Large: Mawr
+UI-Loading: Llwytho
+UI-Major-Prophets: Proffwydi Mawr
+UI-Medium: Canolig
+UI-Message-Too-Large-To-Be-Sent: Neges rhy fawr i'w hanfon
+UI-Minor-Prophets: Proffwydi Bach
+UI-New-Testament: Testament Newydd
+UI-Of: o
+UI-Off: i ffwrdd
+UI-OK: Iawn
+UI-Old-Testament: Hen Destament
+UI-On: Ymlaen
+UI-Other-Letters: Llythyrau eraill
+UI-Pauls-Letters: Llythyrau Paul
+UI-Phone-Number: Rhif Ffôn
+UI-Plain: Plaen
+UI-Please-Wait: Arhoswch
+UI-Poetic: Barddoniaeth
+UI-Preferences: Dewision
+UI-Results: Canlyniadau
+UI-Reverse-Characters: Cildroi Llythrennau
+UI-Reverse-Colours: Cildroi Lliwiau
+UI-Save: Cadw
+UI-Search-Results: Canlyniadau Chwiliad
+UI-Search-Text: Chwilio Testun
+UI-Search: Chwilio
+UI-Searching: Wrthi'n Chwilio
+UI-Select-Verses-To-Send: Dewis adnodau i'w hanfon
+UI-Select: Dewis
+UI-Send-MMS: Anfon MMS
+UI-Send-SMS: Anfon SMS
+UI-Send-Verses: Anfon Adnodau
+UI-Send: Anfon
+UI-Small: Bach
+UI-Stop: Stopio
+UI-Theme-Blue: Glas
+UI-Theme-Computer: Cyfrifiadur
+UI-Theme-Floral: Blodeuog
+UI-Theme-Natural: Naturiol
+UI-Theme-Paper: Papur
+UI-Theme-Sunshine: Heulwen
+UI-Theme: Thema
+UI-Themes: Themâu
+UI-To-Book: i Lyfr
+UI-To: i
+UI-Verse-Does-Not-Exist: Adnod ddim yn bodoli
+UI-View: Gweld
