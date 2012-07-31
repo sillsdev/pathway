@@ -209,6 +209,7 @@
     <Compile Include="ParatextPathwayLink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StyToCSS.cs" />
+    <Compile Include="UsxToSFM.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="EncloseParasInSections.xsl">
