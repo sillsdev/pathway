@@ -76,6 +76,10 @@ namespace SIL.PublishingSolution
             _langFontDictionary = new Dictionary<string, string>();
 
             PreExportProcess preProcessor = new PreExportProcess(projInfo);
+            if (Common.IsUnixOS())
+            {
+                Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath);
+            }
             // preProcessor.GetTempFolderPath();
             preProcessor.XelatexImagePreprocess();
             Param.LoadSettings();
@@ -201,7 +205,7 @@ namespace SIL.PublishingSolution
                 // **    string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
                 if (copyRightFilePath.Trim().Length <= 0 && !File.Exists(copyRightFilePath))
                 {
-                return false;
+                    return false;
                 }
                 projInfo.DefaultXhtmlFileWithPath = copyRightFilePath;
                 string filepath = Path.GetFullPath(copyRightFilePath);
@@ -298,8 +302,11 @@ namespace SIL.PublishingSolution
                 using (var p2 = new Process())
                 {
                     var xelatexPath = XeLaTexInstallation.GetXeLaTexDir();
-                    xelatexPath = Path.Combine(xelatexPath, "bin");
-                    xelatexPath = Path.Combine(xelatexPath, "win32");
+                    if (!Common.IsUnixOS())
+                    {
+                        xelatexPath = Path.Combine(xelatexPath, "bin");
+                        xelatexPath = Path.Combine(xelatexPath, "win32");
+                    }
                     p2.StartInfo.WorkingDirectory = xelatexPath;
                     p2.StartInfo.FileName = "fc-cache";
                     p2.StartInfo.Arguments = "-v -r";
@@ -313,42 +320,55 @@ namespace SIL.PublishingSolution
         public void CallXeLaTex(string xeLatexFullFile, bool openFile, Dictionary<string, string> ImageFilePath)
         {
 
-            string str = XeLaTexInstallation.GetXeLaTexDir();
+            string xeLaTexInstallationPath = XeLaTexInstallation.GetXeLaTexDir();
+            string name = "xelatex.exe";
+            string arguments = "-interaction=batchmode \"" + Path.GetFileName(xeLatexFullFile) + "\"";
+            if (Common.IsUnixOS())
+            {
+                xeLaTexInstallationPath = Path.GetDirectoryName(xeLatexFullFile);
+                name = "xelatex";
+                arguments = "-interaction=batchmode \"" + xeLatexFullFile + "\"";
+            }
+            else
+            {
+                xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "bin");
+                xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "win32");
+            }
 
-            string instPath = Common.PathCombine(str, "bin");
-            instPath = Common.PathCombine(instPath, "win32");
+
             string originalDirectory = Directory.GetCurrentDirectory();
-            string dest = Common.PathCombine(instPath, Path.GetFileName(xeLatexFullFile));
-            File.Copy(xeLatexFullFile, dest, true);
+            string dest = Common.PathCombine(xeLaTexInstallationPath, Path.GetFileName(xeLatexFullFile));
+
+            if (xeLatexFullFile != dest)
+                File.Copy(xeLatexFullFile, dest, true);
 
             if (_copyrightTexCreated)
             {
-                string copyrightDest = Common.PathCombine(instPath, Path.GetFileName(_copyrightTexFileName));
-                File.Copy(_copyrightTexFileName, copyrightDest, true);
+                string copyrightDest = Common.PathCombine(xeLaTexInstallationPath, Path.GetFileName(_copyrightTexFileName));
+                if (_copyrightTexFileName != copyrightDest)
+                    File.Copy(_copyrightTexFileName, copyrightDest, true);
             }
 
             if (_reversalIndexTexCreated)
             {
-                string copyrightDest = Common.PathCombine(instPath, Path.GetFileName(_reversalIndexTexFileName));
-                File.Copy(_reversalIndexTexFileName, copyrightDest, true);
+                string copyrightDest = Common.PathCombine(xeLaTexInstallationPath, Path.GetFileName(_reversalIndexTexFileName));
+                if (_reversalIndexTexFileName != copyrightDest)
+                    File.Copy(_reversalIndexTexFileName, copyrightDest, true);
             }
 
+            Directory.SetCurrentDirectory(xeLaTexInstallationPath);
 
-            Directory.SetCurrentDirectory(instPath);
-            const string name = "xelatex.exe";
-            //string p1Output = string.Empty;
             string p1Error = string.Empty;
             using (Process p1 = new Process())
             {
                 p1.StartInfo.FileName = name;
                 if (xeLatexFullFile != null)
-                    p1.StartInfo.Arguments = "-interaction=batchmode \"" + Path.GetFileName(xeLatexFullFile) + "\"";
+                    p1.StartInfo.Arguments = arguments;
                 p1.StartInfo.RedirectStandardOutput = true;
                 p1.StartInfo.RedirectStandardError = p1.StartInfo.RedirectStandardOutput;
                 p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
                 p1.Start();
                 p1.WaitForExit();
-                //p1Output = p1.StandardOutput.ReadToEnd();
                 p1Error = p1.StandardError.ReadToEnd();
             }
 
@@ -358,7 +378,7 @@ namespace SIL.PublishingSolution
                 {
                     p1.StartInfo.FileName = name;
                     if (xeLatexFullFile != null)
-                        p1.StartInfo.Arguments = "-interaction=batchmode \"" + Path.GetFileName(xeLatexFullFile) + "\"";
+                        p1.StartInfo.Arguments = arguments;
                     p1.StartInfo.RedirectStandardOutput = true;
                     p1.StartInfo.RedirectStandardError = p1.StartInfo.RedirectStandardOutput;
                     p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
@@ -372,7 +392,7 @@ namespace SIL.PublishingSolution
                 {
                     p1.StartInfo.FileName = name;
                     if (xeLatexFullFile != null)
-                        p1.StartInfo.Arguments = "-interaction=batchmode \"" + Path.GetFileName(xeLatexFullFile) + "\"";
+                        p1.StartInfo.Arguments = arguments;
                     p1.StartInfo.RedirectStandardOutput = true;
                     p1.StartInfo.RedirectStandardError = p1.StartInfo.RedirectStandardOutput;
                     p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
@@ -383,48 +403,68 @@ namespace SIL.PublishingSolution
                 }
 
             }
-
-            Directory.SetCurrentDirectory(originalDirectory);
+            string pdfFullName = string.Empty;
             string texNameOnly = Path.GetFileNameWithoutExtension(xeLatexFullFile);
             string userFolder = Path.GetDirectoryName(xeLatexFullFile);
-            string logFullName = CopyProcessResult(instPath, texNameOnly, ".log", userFolder);
-            string pdfFullName = CopyProcessResult(instPath, texNameOnly, ".pdf", userFolder);
 
-            if (openFile && File.Exists(pdfFullName))
+            if (Common.IsUnixOS())
             {
-                try
+                if (userFolder != null) 
+                    pdfFullName = Path.Combine(userFolder, texNameOnly + ".pdf");
+
+                if (File.Exists(pdfFullName))
                 {
-                    Common.OpenOutput(pdfFullName);
-                }
-                catch (System.ComponentModel.Win32Exception ex)
-                {
-                    if (ex.NativeErrorCode == 1155)
+                    try
                     {
-                        if (File.Exists(pdfFullName))
+                        Common.OpenOutput(pdfFullName);
+                    }
+                    catch { }
+                }
+            }
+            else
+            {
+                Directory.SetCurrentDirectory(originalDirectory);
+                pdfFullName = CopyProcessResult(xeLaTexInstallationPath, texNameOnly, ".pdf", userFolder);
+                string logFullName = CopyProcessResult(xeLaTexInstallationPath, texNameOnly, ".log", userFolder);
+
+                if (openFile && File.Exists(pdfFullName))
+                {
+                    try
+                    {
+                        Common.OpenOutput(pdfFullName);
+                    }
+                    catch (System.ComponentModel.Win32Exception ex)
+                    {
+                        if (ex.NativeErrorCode == 1155)
                         {
-                            string installedLocation = pdfFullName;
-                            MessageBox.Show("The output has been save in " + installedLocation + ".\n Please install the Xelatex application.");
+                            if (File.Exists(pdfFullName))
+                            {
+                                string installedLocation = pdfFullName;
+                                MessageBox.Show("The output has been save in " + installedLocation +
+                                                ".\n Please install the Xelatex application.");
+                            }
                         }
                     }
-                }
-                
-            }
-            try
-            {
-                File.Delete(Common.PathCombine(instPath, texNameOnly + ".log"));
-                File.Delete(Common.PathCombine(instPath, texNameOnly + ".pdf"));
-                File.Delete(Common.PathCombine(instPath, texNameOnly + ".aux"));
 
-                string[] picList = Directory.GetFiles(instPath, "*.jpg");
-                foreach (string picturefile in picList)
+                }
+                try
                 {
-                    File.Delete(picturefile);
+                    File.Delete(Common.PathCombine(xeLaTexInstallationPath, texNameOnly + ".log"));
+                    File.Delete(Common.PathCombine(xeLaTexInstallationPath, texNameOnly + ".pdf"));
+                    File.Delete(Common.PathCombine(xeLaTexInstallationPath, texNameOnly + ".aux"));
+
+                    string[] picList = Directory.GetFiles(xeLaTexInstallationPath, "*.jpg");
+                    foreach (string picturefile in picList)
+                    {
+                        File.Delete(picturefile);
+                    }
+
+                    File.Delete(dest);
                 }
-
-                File.Delete(dest);
+                catch
+                {
+                }
             }
-            catch { }
-
         }
 
         protected static string CopyProcessResult(string instPath, string texNameOnly, string ext, string userFolder)
@@ -460,7 +500,7 @@ namespace SIL.PublishingSolution
             xeLatexFile.Flush();
             xeLatexFile.Close();
         }
-        
+
         #region Language Handling
         /// <summary>
         /// Parses the specified file and sets the internal languages list to all the languages found in the file.

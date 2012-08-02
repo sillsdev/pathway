@@ -1380,10 +1380,17 @@ namespace SIL.Tool
             {
                 metaname = Common.GetMetaValue(tempFile);
             }
-            string str = XeLaTexInstallation.GetXeLaTexDir();
+            string installedDirectory = XeLaTexInstallation.GetXeLaTexDir();
 
-            string instPath = Common.PathCombine(str, "bin");
-            instPath = Common.PathCombine(instPath, "win32");
+            if (Common.IsUnixOS())
+            {
+                installedDirectory = sourcePicturePath;
+            }
+            else
+            {
+                installedDirectory = Common.PathCombine(installedDirectory, "bin");
+                installedDirectory = Common.PathCombine(installedDirectory, "win32");
+            }
 
             if (!File.Exists(tempFile)) return string.Empty;
             var xmldoc = new XmlDocument();
@@ -1412,7 +1419,7 @@ namespace SIL.Tool
                                 {
                                     string ext = Path.GetExtension(fromFileName);
                                     string toFileName = Common.PathCombine(sourcePicturePath, counter + ext);
-                                    File.Delete(Common.PathCombine(instPath, counter.ToString() + ".jpg"));
+                                    File.Delete(Common.PathCombine(installedDirectory, counter.ToString() + ".jpg"));
                                     File.Copy(fromFileName, toFileName, true);
 
                                     XmlAttribute xa = xmldoc.CreateAttribute("longdesc");

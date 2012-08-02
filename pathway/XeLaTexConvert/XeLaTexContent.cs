@@ -1027,21 +1027,32 @@ namespace SIL.PublishingSolution
                 {
                     picFile = Path.GetFileName(fromPath);
                     string toPath = Path.Combine(_inputPath, picFile);
-                    string str = XeLaTexInstallation.GetXeLaTexDir();
-                    string instPath = Common.PathCombine(str, "bin");
-                    instPath = Common.PathCombine(instPath, "win32");
-                    toPath = instPath;
-                    string dest = Common.PathCombine(instPath, Path.GetFileName(picFile));
+                    string installedDirectory = XeLaTexInstallation.GetXeLaTexDir();
+                    string destination = string.Empty;
 
-                    if (!File.Exists(dest))
+                    if (Common.IsUnixOS())
+                    {
+                        toPath = _inputPath;
+                        destination = Common.PathCombine(_inputPath, Path.GetFileName(picFile));
+                        installedDirectory = _inputPath;
+                    }
+                    else
+                    {
+                        installedDirectory = Common.PathCombine(installedDirectory, "bin");
+                        installedDirectory = Common.PathCombine(installedDirectory, "win32");
+                        toPath = installedDirectory;
+                        destination = Common.PathCombine(installedDirectory, Path.GetFileName(picFile));
+                    }
+                    
+                    if (!File.Exists(destination))
                     {
                         if (fromPath.IndexOf(".tif") >= 0)
                         {
                             toPath = Common.ConvertTifftoImage(fromPath, "jpg");
                             if (picFile != null) picFile = picFile.Replace(".tif", ".jpg");
-                            if (dest != null) dest = dest.Replace(".tif", ".jpg");
+                            if (destination != null) destination = destination.Replace(".tif", ".jpg");
                             fromPath = toPath;
-                            toPath = instPath;
+                            toPath = installedDirectory;
                         }
                         if (!string.IsNullOrEmpty(toPath))
                         {

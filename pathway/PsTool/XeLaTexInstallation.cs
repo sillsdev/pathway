@@ -34,13 +34,26 @@ namespace SIL.Tool
         /// ------------------------------------------------------------------------------------
         public static string GetXeLaTexDir()
         {
-            object regObj;
-            if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.CompanyKeyLocalMachine,
-                                                  "PathwayXeLaTeX", "XeLaTexDir", out regObj))
+            string pathwayXeLaTeXPath = string.Empty;
+            string osName = Common.GetOsName();
+            if (osName == "Windows7")
             {
-                return (string)regObj;
+                pathwayXeLaTeXPath =
+                   Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\SIL\\PathwayXeLaTeX",
+                                               "XeLaTexDir");
             }
-            return "";
+            else if (osName == "Windows XP")
+            {
+                pathwayXeLaTeXPath = Common.GetValueFromRegistry("SOFTWARE\\SIL\\PathwayXeLaTeX", "XeLaTexDir");
+            }
+            else if (Common.IsUnixOS())
+            {
+                if (Common.ReadingCommandPromptOutputValue("uname", "-m").IndexOf("i686") >= 0)
+                   pathwayXeLaTeXPath = "/usr/lib/pwtex/bin/i386-bin";
+                else if (Common.ReadingCommandPromptOutputValue("uname", "-m").IndexOf("x86_64") >= 0)
+                    pathwayXeLaTeXPath = "/usr/lib/pwtex/bin/x86_64-linux";
+            }
+            return pathwayXeLaTeXPath;
         }
 
         /// ------------------------------------------------------------------------------------

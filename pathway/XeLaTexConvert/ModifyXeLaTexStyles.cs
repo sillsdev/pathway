@@ -289,9 +289,17 @@ namespace SIL.PublishingSolution
             String tableOfContent = string.Empty;
 
             string xeLaTexInstallationPath = XeLaTexInstallation.GetXeLaTexDir();
-            string instPath = Common.PathCombine(xeLaTexInstallationPath, "bin");
-            instPath = Common.PathCombine(instPath, "win32");
-            string destinctionPath = Common.PathCombine(instPath, Path.GetFileName(CoverPageImagePath));
+
+            if (Common.IsUnixOS())
+            {
+                xeLaTexInstallationPath = Path.GetDirectoryName(_xetexFullFile);
+            }
+            else
+            {
+                xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "bin");
+                xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "win32");
+            }
+            string destinctionPath = Common.PathCombine(xeLaTexInstallationPath, Path.GetFileName(CoverPageImagePath));
 
             if (CoverPageImagePath.Trim() != "")
             {
