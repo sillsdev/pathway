@@ -330,6 +330,14 @@ namespace SIL.PublishingSolution
                     }
                 }
 
+                foreach (string file in splitFiles)
+                {
+                    if(Path.GetFileNameWithoutExtension(file).IndexOf(@"PartFile") == 0)
+                    {
+                        RemoveNoteTargetReference(file);
+                    }
+                }
+
                 // If we are working with a dictionary and have a reversal index, process it now)
                 if (projInfo.IsReversalExist)
                 {
@@ -514,6 +522,32 @@ namespace SIL.PublishingSolution
             }
 
             return success;
+        }
+
+        private void RemoveNoteTargetReference(string fileName)
+        {
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            xDoc.Load(fileName);
+            XmlElement elmRoot = xDoc.DocumentElement;
+            //const string xPath = "//xhtml:span[@class='Note_General_Paragraph']|//xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']";
+            const string xPath = "//xhtml:span[@class='Note_Target_Reference']";
+            if (elmRoot != null)
+            {
+                XmlNodeList referenceNode = elmRoot.SelectNodes(xPath, namespaceManager);
+                if (referenceNode != null && referenceNode.Count > 0)
+                {
+                    for (int i = 0; i < referenceNode.Count; i++)
+                    {
+                        //referenceNode[i].RemoveChild(referenceNode[i].FirstChild);
+                        var parentNode = referenceNode[i].ParentNode;
+                        if (parentNode != null)
+                            parentNode.RemoveChild(referenceNode[i]);
+                    }
+                }
+            }
+            xDoc.Save(fileName);
         }
 
         private string UsersXsl(string xslName)
@@ -3907,21 +3941,26 @@ namespace SIL.PublishingSolution
                     const string xPath = ".//xhtml:div[@class='Section_Head']";
                     XmlNodeList nodes = xmlDocument.SelectNodes(xPath, namespaceManager);
 
-                    foreach (string VARIABLE in chapterIdList)
+                    if (nodes.Count > 0)
                     {
-                        string[] valueList = VARIABLE.Split('_');
-                        if (valueList[0] != valueList1[0])
-                            continue;
+                        foreach (string VARIABLE in chapterIdList)
+                        {
+                            string[] valueList = VARIABLE.Split('_');
+                            if (valueList[0] != valueList1[0])
+                                continue;
 
-                        XmlNode nodeContent = xmlDocument.CreateElement("a", xmlDocument.DocumentElement.NamespaceURI);
-                        XmlAttribute attribute = xmlDocument.CreateAttribute("href");
-                        attribute.Value = VARIABLE;
-                        nodeContent.Attributes.Append(attribute);
-                        nodeContent.InnerText = GetChapterNumber(VARIABLE);
-                        nodes[0].ParentNode.InsertBefore(nodeContent, nodes[0]);
-                        XmlNode spaceNode = xmlDocument.CreateElement("span", xmlDocument.DocumentElement.NamespaceURI);
-                        spaceNode.InnerText = " ";
-                        nodes[0].ParentNode.InsertBefore(spaceNode, nodes[0]);
+                            XmlNode nodeContent = xmlDocument.CreateElement("a",
+                                                                            xmlDocument.DocumentElement.NamespaceURI);
+                            XmlAttribute attribute = xmlDocument.CreateAttribute("href");
+                            attribute.Value = VARIABLE;
+                            nodeContent.Attributes.Append(attribute);
+                            nodeContent.InnerText = GetChapterNumber(VARIABLE);
+                            nodes[0].ParentNode.InsertBefore(nodeContent, nodes[0]);
+                            XmlNode spaceNode = xmlDocument.CreateElement("span",
+                                                                          xmlDocument.DocumentElement.NamespaceURI);
+                            spaceNode.InnerText = " ";
+                            nodes[0].ParentNode.InsertBefore(spaceNode, nodes[0]);
+                        }
                     }
 
                     xmlDocument.Save(sourceFile);
