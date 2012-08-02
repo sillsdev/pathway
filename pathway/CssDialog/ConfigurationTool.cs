@@ -480,6 +480,11 @@ namespace SIL.PublishingSolution
             get { return ddlFiles; }
         }
 
+        public ComboBox DdlLanguage
+        {
+            get { return ddlLanguage; }
+        }
+
         public ComboBox DdlTocLevel
         {
             get { return ddlTocLevel; }
@@ -1025,6 +1030,12 @@ namespace SIL.PublishingSolution
         private void ddlFiles_SelectedIndexChanged(object sender, EventArgs e)
         {
             _CToolBL.ddlFiles_SelectedIndexChangedBL(sender, e);
+            EditMobileCSS(sender, e);
+        }
+
+        private void ddlLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _CToolBL.ddlLanguage_SelectedIndexChangedBL(sender, e);
             EditMobileCSS(sender, e);
         }
 

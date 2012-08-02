@@ -212,6 +212,9 @@
     <Reference Include="PdfToImage, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\ThirdParty\PdfToImage.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq">
+      <HintPath>C:\Program Files\Reference Assemblies\Microsoft\Framework\v3.5\System.Xml.Linq.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AboutPw.cs">
