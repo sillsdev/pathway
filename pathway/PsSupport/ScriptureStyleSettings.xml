@@ -304,6 +304,7 @@
         <styleProperty name="Information" value="DRAFT Bible text." />
         <styleProperty name="Copyright" value="© 2011 Wycliffe Bible Translators, Inc." />
         <styleProperty name="Icon" value="Icon.png" />
+		<styleProperty name="Language" value="English" />
       </style>
     </mobile>
     <web>

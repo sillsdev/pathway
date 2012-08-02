@@ -96,6 +96,8 @@ namespace SIL.PublishingSolution
             this.ddlPagePageSize = new System.Windows.Forms.ComboBox();
             this.lblPagePageSize = new System.Windows.Forms.Label();
             this.tabMobile = new System.Windows.Forms.TabPage();
+            this.ddlLanguage = new System.Windows.Forms.ComboBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.lblMobileOptionsSection = new System.Windows.Forms.Label();
             this.lblGoBibleDescription = new System.Windows.Forms.Label();
             this.btnBrowse = new System.Windows.Forms.Button();
@@ -460,7 +462,7 @@ namespace SIL.PublishingSolution
             this.tabInfo.Controls.Add(this.lblName);
             this.tabInfo.Location = new System.Drawing.Point(4, 22);
             this.tabInfo.Name = "tabInfo";
-            this.tabInfo.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabInfo.Padding = new System.Windows.Forms.Padding(3);
             this.tabInfo.Size = new System.Drawing.Size(284, 477);
             this.tabInfo.TabIndex = 0;
             this.tabInfo.Text = "Info";
@@ -634,7 +636,7 @@ namespace SIL.PublishingSolution
             this.tabDisplay.Controls.Add(this.lblPagePageSize);
             this.tabDisplay.Location = new System.Drawing.Point(4, 22);
             this.tabDisplay.Name = "tabDisplay";
-            this.tabDisplay.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabDisplay.Padding = new System.Windows.Forms.Padding(3);
             this.tabDisplay.Size = new System.Drawing.Size(284, 477);
             this.tabDisplay.TabIndex = 1;
             this.tabDisplay.Text = "Properties";
@@ -1059,6 +1061,8 @@ namespace SIL.PublishingSolution
             // tabMobile
             // 
             this.tabMobile.AutoScroll = true;
+            this.tabMobile.Controls.Add(this.ddlLanguage);
+            this.tabMobile.Controls.Add(this.label20);
             this.tabMobile.Controls.Add(this.lblMobileOptionsSection);
             this.tabMobile.Controls.Add(this.lblGoBibleDescription);
             this.tabMobile.Controls.Add(this.btnBrowse);
@@ -1071,11 +1075,34 @@ namespace SIL.PublishingSolution
             this.tabMobile.Controls.Add(this.mobileIcon);
             this.tabMobile.Location = new System.Drawing.Point(4, 22);
             this.tabMobile.Name = "tabMobile";
-            this.tabMobile.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabMobile.Padding = new System.Windows.Forms.Padding(3);
             this.tabMobile.Size = new System.Drawing.Size(284, 477);
             this.tabMobile.TabIndex = 2;
             this.tabMobile.Text = "Properties";
             this.tabMobile.UseVisualStyleBackColor = true;
+            // 
+            // ddlLanguage
+            // 
+            this.ddlLanguage.AccessibleName = "";
+            this.ddlLanguage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddlLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlLanguage.FormattingEnabled = true;
+            this.ddlLanguage.Location = new System.Drawing.Point(112, 162);
+            this.ddlLanguage.Name = "ddlLanguage";
+            this.ddlLanguage.Size = new System.Drawing.Size(156, 21);
+            this.ddlLanguage.TabIndex = 70;
+            this.ddlLanguage.SelectedIndexChanged += new System.EventHandler(this.ddlLanguage_SelectedIndexChanged);
+            // 
+            // label20
+            // 
+            this.label20.AccessibleName = "lblLanguage";
+            this.label20.Location = new System.Drawing.Point(19, 164);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(87, 15);
+            this.label20.TabIndex = 69;
+            this.label20.Text = "Language";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblMobileOptionsSection
             // 
@@ -1850,7 +1877,7 @@ namespace SIL.PublishingSolution
             this.tabPreview.Controls.Add(this.picPreview);
             this.tabPreview.Location = new System.Drawing.Point(4, 22);
             this.tabPreview.Name = "tabPreview";
-            this.tabPreview.Size = new System.Drawing.Size(284, 483);
+            this.tabPreview.Size = new System.Drawing.Size(284, 477);
             this.tabPreview.TabIndex = 4;
             this.tabPreview.Text = "Preview";
             this.tabPreview.UseVisualStyleBackColor = true;
@@ -1896,7 +1923,7 @@ namespace SIL.PublishingSolution
             this.tabPicture.Controls.Add(this.GrpPicture);
             this.tabPicture.Location = new System.Drawing.Point(4, 22);
             this.tabPicture.Name = "tabPicture";
-            this.tabPicture.Size = new System.Drawing.Size(284, 483);
+            this.tabPicture.Size = new System.Drawing.Size(284, 477);
             this.tabPicture.TabIndex = 5;
             this.tabPicture.Text = "Pictures";
             this.tabPicture.UseVisualStyleBackColor = true;
@@ -1906,7 +1933,7 @@ namespace SIL.PublishingSolution
             this.ChkDontPicture.AutoSize = true;
             this.ChkDontPicture.Location = new System.Drawing.Point(16, 13);
             this.ChkDontPicture.Name = "ChkDontPicture";
-            this.ChkDontPicture.Size = new System.Drawing.Size(101, 14);
+            this.ChkDontPicture.Size = new System.Drawing.Size(135, 17);
             this.ChkDontPicture.TabIndex = 5;
             this.ChkDontPicture.Text = "Do not include pictures";
             this.ChkDontPicture.UseVisualStyleBackColor = true;
@@ -1957,7 +1984,7 @@ namespace SIL.PublishingSolution
             this.RadSingleColumn.AutoSize = true;
             this.RadSingleColumn.Location = new System.Drawing.Point(52, 98);
             this.RadSingleColumn.Name = "RadSingleColumn";
-            this.RadSingleColumn.Size = new System.Drawing.Size(69, 14);
+            this.RadSingleColumn.Size = new System.Drawing.Size(92, 17);
             this.RadSingleColumn.TabIndex = 5;
             this.RadSingleColumn.TabStop = true;
             this.RadSingleColumn.Text = "Single Column";
@@ -1968,7 +1995,7 @@ namespace SIL.PublishingSolution
             this.RadEntirePage.AutoSize = true;
             this.RadEntirePage.Location = new System.Drawing.Point(52, 118);
             this.RadEntirePage.Name = "RadEntirePage";
-            this.RadEntirePage.Size = new System.Drawing.Size(60, 14);
+            this.RadEntirePage.Size = new System.Drawing.Size(80, 17);
             this.RadEntirePage.TabIndex = 4;
             this.RadEntirePage.TabStop = true;
             this.RadEntirePage.Text = "Entire Page";
@@ -1980,7 +2007,7 @@ namespace SIL.PublishingSolution
             this.RadWidthIf.Checked = true;
             this.RadWidthIf.Location = new System.Drawing.Point(52, 53);
             this.RadWidthIf.Name = "RadWidthIf";
-            this.RadWidthIf.Size = new System.Drawing.Size(149, 14);
+            this.RadWidthIf.Size = new System.Drawing.Size(199, 17);
             this.RadWidthIf.TabIndex = 3;
             this.RadWidthIf.TabStop = true;
             this.RadWidthIf.Text = "Use this width if a width not specified";
@@ -1991,7 +2018,7 @@ namespace SIL.PublishingSolution
             this.RadWidthAll.AutoSize = true;
             this.RadWidthAll.Location = new System.Drawing.Point(52, 76);
             this.RadWidthAll.Name = "RadWidthAll";
-            this.RadWidthAll.Size = new System.Drawing.Size(119, 14);
+            this.RadWidthAll.Size = new System.Drawing.Size(159, 17);
             this.RadWidthAll.TabIndex = 2;
             this.RadWidthAll.TabStop = true;
             this.RadWidthAll.Text = "Use this width for all pictures";
@@ -2500,5 +2527,7 @@ namespace SIL.PublishingSolution
         private System.Windows.Forms.TextBox txtWebFtpFldrNme;
         private Label label19;
         private CheckBox chkFixedLineHeight;
+        private ComboBox ddlLanguage;
+        private Label label20;
     }
 }

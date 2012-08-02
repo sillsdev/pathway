@@ -15,6 +15,8 @@ using System.Windows.Forms;
 using System.Xml;
 using SIL.Tool;
 
+using System.Xml.Linq;
+
 
 namespace SIL.PublishingSolution
 {
@@ -167,6 +169,7 @@ namespace SIL.PublishingSolution
             pageDict.Add("@page-bottom-right", "Bottom Right Margin");
             pageDict.Add("@page-bottom-left", "Bottom Left Margin");
             pageDict.Add("@page-bottom-center", "Bottom Center");
+
         }
 
         //public void SetDefaultCSSValue(string cssPath, string loadType)
@@ -954,6 +957,10 @@ namespace SIL.PublishingSolution
                         {
                             cTool.DdlRedLetter.SelectedItem = attribValue;
                         }
+                        else if (attribName.ToLower() == "language")
+                        {
+                            cTool.DdlLanguage.SelectedItem = attribValue;
+                        }
                     }
                     SetMobileSummary(null, null);
                 }
@@ -1151,6 +1158,26 @@ namespace SIL.PublishingSolution
             }
         }
 
+        private void LoadData()
+        {
+            XmlDocument xDoc = Common.DeclareXMLDocument(false);
+            string executablePath = Common.GetApplicationPath();
+            executablePath = Common.PathCombine(executablePath, @"GoBible\Localizations\Languages.xml");
+            if (!File.Exists(executablePath)) return;
+            xDoc.Load(executablePath);
+            string XPath = "//Languages/language";
+            XmlNodeList languageList = xDoc.SelectNodes(XPath);
+
+            if (languageList.Count > 0)
+            {
+                foreach (XmlNode language in languageList)
+                {
+                    cTool.DdlLanguage.Items.Add(language.InnerText);
+                }
+                cTool.DdlLanguage.Sorted = true;
+            }
+        }        
+        
         ///// <summary>
         ///// If the value of margins are invalid at load time, the values are shown in red color(TD-1331).
         ///// </summary>
@@ -1168,6 +1195,12 @@ namespace SIL.PublishingSolution
         /// </summary>
         protected void PopulateFeatureSheet()
         {
+
+            if (inputTypeBL.ToLower() == "scripture")
+            {
+                LoadData();
+            }
+
             Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationTool: PopulateFeatureSheet");
             // populate the font drop-down if needed
             if (cTool.DdlDefaultFont.Items.Count == 0)
@@ -1258,6 +1291,11 @@ namespace SIL.PublishingSolution
                                 if (!cTool.DdlFileProduceDict.Items.Contains(ctn.Text))
                                     cTool.DdlFileProduceDict.Items.Add(ctn.Text);
                                 break;
+
+                            //case "Languages":
+                            //    if (!cTool.DdlLanguage.Items.Contains(ctn.Text))
+                            //        cTool.DdlLanguage.Items.Add(ctn.Text);
+                            //    break;
 
                             case "RedLetter":
                                 if (!cTool.DdlRedLetter.Items.Contains(ctn.Text))
@@ -1460,6 +1498,10 @@ namespace SIL.PublishingSolution
                         else if (attribName.ToLower() == "redletter")
                         {
                             cTool.DdlRedLetter.SelectedItem = attribValue;
+                        }
+                        else if (attribName.ToLower() == "language")
+                        {
+                            cTool.DdlLanguage.SelectedItem = attribValue;
                         }
                     }
                     SetMobileSummary(null, null);
@@ -2934,6 +2976,17 @@ namespace SIL.PublishingSolution
             {
                 _fileProduce = cTool.DdlFiles.Text;
                 Param.UpdateMobileAtrrib("FileProduced", cTool.DdlFiles.Text, StyleName);
+                SetMobileSummary(sender, e);
+            }
+            catch { }
+        }
+
+        public void ddlLanguage_SelectedIndexChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                _fileProduce = cTool.DdlLanguage.Text;
+                Param.UpdateMobileAtrrib("Language", cTool.DdlLanguage.Text, StyleName);
                 SetMobileSummary(sender, e);
             }
             catch { }
