@@ -1,0 +1,73 @@
+UI-About: Om
+UI-Add-Bookmark: Legg til bokmerke
+UI-All: Alle
+UI-Back: Tilbake
+UI-Bold: Feit
+UI-Book: Bok
+UI-Bookmarks: Bokmerker
+UI-Books-Of-Moses: Mosebøkene
+UI-Books: Bøker
+UI-Cancel: Avbryt
+UI-Change: Endre
+UI-Chapter: Kapittel
+UI-Delete-Bookmark-Alert: Slette valde bokmerke?
+UI-Delete-Bookmark: Slett bokmerke
+UI-Delete: Slette
+UI-Error: Feil
+UI-Exit: Avslutt
+UI-Font-Size: Skriftstorleik
+UI-Font-Style: Skriftstil
+UI-Found: Funne
+UI-From-Book: Fra bok
+UI-Full-Screen: Fullskjerm
+UI-Gospels: Evangelia
+UI-Goto: Gå til
+UI-Historical: Historiske bøker
+UI-History: Historikk
+UI-Large: Stor
+UI-Loading: Lastar
+UI-Major-Prophets: Store profetar
+UI-Medium: Medium
+UI-Message-Too-Large-To-Be-Sent: Meldinga er for stor til å sendast
+UI-Minor-Prophets: Mindre profetar
+UI-New-Testament: Det nye testamentet
+UI-OK: OK
+UI-Of: av
+UI-Off: Av
+UI-Old-Testament: Det gamle testamentet
+UI-On: På
+UI-Other-Letters: Andre brev
+UI-Pauls-Letters: Paulus sine brev
+UI-Phone-Number: Telefonnummer
+UI-Plain: Normal
+UI-Please-Wait: Vennlegst vent
+UI-Poetic: Poetiske bøker
+UI-Preferences: Innstillingar
+UI-Results: Resultat
+UI-Reverse-Characters: Reversere teikn
+UI-Reverse-Colours: Reversere fargar
+UI-Save: Lagre
+UI-Search-Results: Søkeresultat
+UI-Search-Text: Søk tekst
+UI-Search: Søk
+UI-Searching: Søkjer
+UI-Select-Verses-To-Send: Vel vers for å sende
+UI-Select: Vel
+UI-Send-MMS: Send MMS
+UI-Send-SMS: Send SMS
+UI-Send-Verses: Send vers
+UI-Send: Send
+UI-Small: Liten
+UI-Stop: Stopp
+UI-Theme-Blue: Blå
+UI-Theme-Computer: Datamaskin
+UI-Theme-Floral: Blomar
+UI-Theme-Natural: Naturleg
+UI-Theme-Paper: Papir
+UI-Theme-Sunshine: Solskin
+UI-Theme: Stildrakt
+UI-Themes: Stildrakter
+UI-To-Book: Til Bok
+UI-To: til
+UI-Verse-Does-Not-Exist: Verset finst ikkje
+UI-View: Vis

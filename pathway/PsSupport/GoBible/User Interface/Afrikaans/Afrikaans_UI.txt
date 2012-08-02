@@ -1,0 +1,73 @@
+UI-About: Omtrent
+UI-Add-Bookmark: Nuwe Boekmerk
+UI-All: Almal
+UI-Back: Terug
+UI-Bold: Vetdruk
+UI-Book: Boek
+UI-Bookmarks: Boekemerke
+UI-Books-Of-Moses: Boeke van Moses
+UI-Books: Boeke
+UI-Cancel: Kanselleer
+UI-Change: Verander
+UI-Chapter: Hoofstuk
+UI-Delete-Bookmark-Alert: Verwyder gekoose boekmerk?
+UI-Delete-Bookmark: Verwyder Boekmerk
+UI-Delete: Verwyder
+UI-Error: Fout
+UI-Exit: Gaan Uit
+UI-Font-Size: Skrif Groote
+UI-Font-Style: Skrif Styl
+UI-Found: Gevind
+UI-From-Book: Van Boek
+UI-Full-Screen: Volle Skerm
+UI-Gospels: Gospels
+UI-Goto: Gaan na
+UI-Historical: Geskiedkundig
+UI-History: Geskiedenis
+UI-Large: Groot
+UI-Loading: Laai
+UI-Major-Prophets: Groot Profete
+UI-Medium: Medium
+UI-Message-Too-Large-To-Be-Sent: Boodskap te lank om te stuur
+UI-Minor-Prophets: Klein Profete
+UI-New-Testament: Nuwe Testament
+UI-Of: Af
+UI-Off: Af
+UI-OK: Reg
+UI-Old-Testament: Ou Testament
+UI-On: Aan
+UI-Other-Letters: Ander Briewe
+UI-Pauls-Letters: Paulus se Briewe
+UI-Phone-Number: Telefoon nomer
+UI-Plain: Gewoon
+UI-Please-Wait: Wag asseblief
+UI-Poetic: Poësie
+UI-Preferences: Voorkeure
+UI-Results: Resultate
+UI-Reverse-Characters: Teenoorgestelde Karakters
+UI-Reverse-Colours: Teenoorgestelde Kleure
+UI-Save: Berg
+UI-Search-Results: Soek Resultate
+UI-Search-Text: Soek Teks
+UI-Search: Soek
+UI-Searching: Soek
+UI-Select-Verses-To-Send: Kies vers om te stuur
+UI-Select: Kies
+UI-Send-MMS: Stuur MMS
+UI-Send-SMS: Stuur SMS
+UI-Send-Verses: Stuur Versies
+UI-Send: Stuur
+UI-Small: Klein
+UI-Stop: Stop
+UI-Theme-Blue: Blou
+UI-Theme-Computer: Rekenaar
+UI-Theme-Floral: Floral
+UI-Theme-Natural: Natuurlik
+UI-Theme-Paper: Papier
+UI-Theme-Sunshine: Sonskyn
+UI-Theme: Tema
+UI-Themes: Temas
+UI-To-Book: Tot Boek
+UI-To: Tot
+UI-Verse-Does-Not-Exist: Vers bestaan nie
+UI-View: Besigtig

@@ -1,0 +1,73 @@
+UI-About: Мәлімет
+UI-Add-Bookmark: Бетбелгісін қос
+UI-All: Бәрі
+UI-Back: Кәрі     
+UI-Bold: Жуан
+UI-Book: Kітап
+UI-Bookmarks: Бетбелгілер
+UI-Books-Of-Moses: Мұсаның кітаптары 
+UI-Books: Кітаптар
+UI-Cancel: Болдырма
+UI-Change: Өзгерт
+UI-Chapter: Тарау
+UI-Delete-Bookmark-Alert: Назарыңызға! Бетбелгіні жояйын ба?
+UI-Delete-Bookmark: Бетбелгіні жой
+UI-Delete: Жой
+UI-Error: Қате
+UI-Exit: Шық
+UI-Font-Size: Әріп өлшемі
+UI-Font-Style: Әріп мəнері
+UI-Found: Табылды
+UI-From-Book: Кітаптан
+UI-Full-Screen: Толық экран
+UI-Gospels: Ізгі хабарлар
+UI-Goto: Өт
+UI-Historical: Тарихи кітаптар
+UI-History: Тарих
+UI-Large: Үлкен
+UI-Loading: Жүктеліп жатыр
+UI-Major-Prophets: Ұзын пайғамбарлық жазбалар
+UI-Medium: Орташа
+UI-Message-Too-Large-To-Be-Sent: Қате! Жіберетін хабарлама тым үлкен!
+UI-Minor-Prophets: Қысқа пайғамбарлық жазбалар
+UI-New-Testament: Жаңа келісім
+UI-Of: ниң -і
+UI-Off: Өшір
+UI-OK: Мақұл
+UI-Old-Testament: Көне келісім
+UI-On: Қос
+UI-Other-Letters: Жалпыға арналған хаттар
+UI-Pauls-Letters: Пауылдың хаттары
+UI-Phone-Number: Телефон номері
+UI-Plain: Жай мəтін
+UI-Please-Wait: Күтіңіз
+UI-Poetic: Өлең кітаптар
+UI-Preferences: Бапталымдар
+UI-Results: Нәтижелер
+UI-Reverse-Characters: Әріптердің бағыты кері болсын
+UI-Reverse-Colours: Түстердің орынын алмастыр
+UI-Save: Сақта
+UI-Search-Results: Іздеу нәтижелері 
+UI-Search-Text:  Мәтін ізде
+UI-Search: Ізде
+UI-Searching: Іздеу жүріп жатыр
+UI-Select-Verses-To-Send: Жіберілетін аяттарды таңда
+UI-Select: Таңда
+UI-Send-MMS: MMS жібер
+UI-Send-SMS: SMS жібер
+UI-Send-Verses: Аяттарды жібер 
+UI-Send: Жібер
+UI-Small: Кішкентай
+UI-Stop: Тоқтат
+UI-Theme-Blue: Көк тема
+UI-Theme-Computer: Компьютерлік тема 
+UI-Theme-Floral: Гүлдер темасы
+UI-Theme-Natural: Табиғи тема
+UI-Theme-Paper: Қағаз темасы
+UI-Theme-Sunshine: Күннің сәулесі
+UI-Theme: Тема
+UI-Themes: Темалар
+UI-To-Book: Кітапқа
+UI-To: Сілтемеге дейін
+UI-Verse-Does-Not-Exist: Бұндай аят жоқ!
+UI-View: Қара

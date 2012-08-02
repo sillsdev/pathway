@@ -1,0 +1,73 @@
+UI-About: बारेमा
+UI-Add-Bookmark: थप किताब चिन्ह
+UI-All: सबै
+UI-Back: पछि
+UI-Bold: गाढा
+UI-Book: किताब
+UI-Bookmarks: किताब चिन्हहरु
+UI-Books: किताबहरु
+UI-Books-Of-Moses: मोशाको किताब
+UI-Cancel: रद्द गर्नुहोस्
+UI-Change: परिवर्तन
+UI-Chapter: पाठ
+UI-Delete: मेटाउनु
+UI-Delete-Bookmark: चिन्ह मेटाउनु
+UI-Delete-Bookmark-Alert: चैन गरिएको चिन्ह मेटाउनु ?
+UI-Error: गल्ति
+UI-Exit: निकास
+UI-Font-Size: अक्षरको आकार
+UI-Font-Style: अक्षरको ढाचाँ
+UI-Found: पायो
+UI-From-Book: किताब बाट 
+UI-Full-Screen: पूरा स्क्‍रिन
+UI-Gospels: Gospels
+UI-Goto: जानु
+UI-Historical: एतिहासिक
+UI-History: ईतिहाँस
+UI-Large: ठूलो
+UI-Loading: सुरु हुदै छ
+UI-Major-Prophets: महत्वपूर्ण अगमवाणिहरु
+UI-Medium: माध्यम
+UI-Message-Too-Large-To-Be-Sent: खबर पठाउन धेरै लामो भयो
+UI-Minor-Prophets: सामान्य अगमवाणिहरु
+UI-New-Testament: नयाँ करार
+UI-Of: of
+UI-Off: नराख्‍नु
+UI-OK: हुन्छ
+UI-Old-Testament: पुरानो करार
+UI-On: राख्‍नु
+UI-Other-Letters: अरु चिठ्ठीहरु
+UI-Pauls-Letters: पत्रुसको चिठ्ठीहरु
+UI-Phone-Number: फोन नमबर
+UI-Plain: सादा
+UI-Please-Wait: कृपया एक छिन पर्खनुस्
+UI-Poetic: कवितात्मक
+UI-Preferences: प्राथमिकता
+UI-Results: नतिजा
+UI-Reverse-Characters: उल्टो 
+UI-Reverse-Colours: उल्टो रङगहरु
+UI-Save: सुरक्षित राख्‍नु
+UI-Search: खोजी
+UI-Searching: खोज्दै छ
+UI-Search-Results: खोजको नतिजा 
+UI-Search-Text: शब्दको खोजी
+UI-Select: छान
+UI-Select-Verses-To-Send: पठाउनका लागि पद्य छान, बाट
+UI-Send: पठाऊ
+UI-Send-MMS: MMS पठाउ
+UI-Send-SMS: SMS पठाउ
+UI-Send-Verses: पद्य पठाऊ
+UI-Small: सानो
+UI-Stop: रोक्‍नुस्
+UI-Theme: सार
+UI-Theme-Blue: निलो
+UI-Theme-Computer: कम्पूटर
+UI-Theme-Floral: फूलहरु
+UI-Theme-Natural: प्राकृतिक
+UI-Theme-Paper: सादा पाना
+UI-Themes: सारहरु
+UI-Theme-Sunshine: घमाइलो
+UI-To: सम्म
+UI-To-Book: आरक्षण
+UI-Verse-Does-Not-Exist: Verse does not exist
+UI-View: देखाउ

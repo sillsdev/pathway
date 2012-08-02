@@ -1,0 +1,73 @@
+UI-About: O programu
+UI-Add-Bookmark: Dodaj marker
+UI-All: Sve
+UI-Back: Nazad
+UI-Bold: Mastan
+UI-Book: Knjiga
+UI-Bookmarks: Markeri
+UI-Books-Of-Moses: Petoknjižje
+UI-Books: Knjiga
+UI-Cancel: Poništi
+UI-Change: Promeni
+UI-Chapter: Glava
+UI-Delete-Bookmark-Alert: Izbrisati označeni marker?
+UI-Delete-Bookmark: Izbrisati marker
+UI-Delete: Izbriši
+UI-Error: Greška
+UI-Exit: Izlaz
+UI-Font-Size: Veličina slova
+UI-Font-Style: Oblik slova
+UI-Found: Nađeno
+UI-From-Book: Od Knjige
+UI-Full-Screen: Ceo ekran
+UI-Gospels: Jevanđelja
+UI-Goto: Idi na
+UI-Historical: Istorijske
+UI-History: Pogledano
+UI-Large: Velika
+UI-Loading: Očitavanje
+UI-Major-Prophets: Veliki Proroci
+UI-Medium: Srednja
+UI-Message-Too-Large-To-Be-Sent: Poruka je prevelika za slanje
+UI-Minor-Prophets: Mali proroci
+UI-New-Testament: Novi Zavet
+UI-Of: od
+UI-Off: Isključi
+UI-OK: U redu
+UI-Old-Testament: Stari Zavet
+UI-On: Uključi
+UI-Other-Letters: Ostale poslanice
+UI-Pauls-Letters: Pavlove poslanice
+UI-Phone-Number: Broj telefona
+UI-Plain: Običan
+UI-Please-Wait: Molimo sačekajte
+UI-Poetic: Poetske
+UI-Preferences: Podešavanja
+UI-Results: Rezultati
+UI-Reverse-Characters: Piši reči unazad
+UI-Reverse-Colours: Izokreni boje
+UI-Save: Sačuvaj
+UI-Search-Results: Rezultati pretrage
+UI-Search-Text: Traži tekst
+UI-Search: Traži
+UI-Searching: Pretraživanje
+UI-Select-Verses-To-Send: Izaberi stihove za slanje
+UI-Select: Izaberi
+UI-Send-MMS: Pošalji MMS
+UI-Send-SMS: Pošalji SMS
+UI-Send-Verses: Pošalji stihove
+UI-Send: Pošalji
+UI-Small: Mala
+UI-Stop: Zaustavi
+UI-Theme-Blue: Plava tema
+UI-Theme-Computer: Računar tema
+UI-Theme-Floral: Cveće tema
+UI-Theme-Natural: Priroda tema
+UI-Theme-Paper: Hartija tema
+UI-Theme-Sunshine: Sunčev sjaj tema
+UI-Theme: Tema
+UI-Themes: Teme
+UI-To-Book: Do Knjige
+UI-To: do
+UI-Verse-Does-Not-Exist: Stih ne postoji
+UI-View: Pogledaj

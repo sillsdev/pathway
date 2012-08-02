@@ -1,0 +1,74 @@
+UI-About: Hakkında
+UI-Add-Bookmark: Sayfayı İşaretle
+UI-All: Hepsi
+UI-Back: Geri
+UI-Bold: Kalın
+UI-Book: Kitap
+UI-Bookmarks: Sayfa İşaretleri
+UI-Books-Of-Moses: Musa’nın Kitapları
+UI-Books: Kitaplar
+UI-Cancel: İptal
+UI-Change: Değiştir
+UI-Chapter: Bölüm
+UI-Delete-Bookmark-Alert: Seçilen sayfa işaretini silecek misin?
+UI-Delete-Bookmark: Sayfa İşaretini Sil
+UI-Delete: Sil
+UI-Error: Hata
+UI-Exit: Çıkış
+UI-Font-Size: Font büyüklüğü
+UI-Font-Style: Font stili
+UI-Found: Bulundu
+UI-From-Book: Kitaptan
+UI-Full-Screen: Tam ekran
+UI-Gospels: Müjdeler
+UI-Goto: Git
+UI-Historical: Tarihi
+UI-History: Geçmiş
+UI-Large: Büyük
+UI-Loading: Yüklüyor
+UI-Major-Prophets: Büyük Peygamberler
+UI-Medium: Orta
+UI-Message-Too-Large-To-Be-Sent: Yollanacak mesaj çok büyük
+UI-Minor-Prophets: Küçük Peygamberler
+UI-New-Testament: Yeni Ahit
+// UI-Of: in 
+UI-Of: / 
+UI-Off: Kapalı
+UI-OK: OK
+UI-Old-Testament: Eski Ahit
+UI-On: Açık
+UI-Other-Letters: Diğer Mektuplar
+UI-Pauls-Letters: Pavlus’un Mektupları
+UI-Phone-Number: Telefon Numarası
+UI-Plain: Normal
+UI-Please-Wait: Lütfen Bekleyin
+UI-Poetic: Şiirsel
+UI-Preferences: Tercihler
+UI-Results: Sonuçlar
+UI-Reverse-Characters: Ters Karakterler
+UI-Reverse-Colours: Ters Renkler
+UI-Save: Kaydet
+UI-Search-Results: Sonuçları Ara
+UI-Search-Text: Ayet Ara
+UI-Search: Ara
+UI-Searching: Arıyor
+UI-Select-Verses-To-Send: Seçilen ayetleri yolla
+UI-Select: Seç
+UI-Send-MMS: MMS Gönder
+UI-Send-SMS: SMS Gönder
+UI-Send-Verses: Ayetleri Yolla
+UI-Send: Gönder
+UI-Small: Küçük
+UI-Stop: Dur
+UI-Theme-Blue: Mavi
+UI-Theme-Computer: Bilgisayar
+UI-Theme-Floral: Çiçeksi
+UI-Theme-Natural: Doğal
+UI-Theme-Paper: Kağıt
+UI-Theme-Sunshine: Güneş ışığı
+UI-Theme: Tema
+UI-Themes: Temalar
+UI-To-Book: Kitaba
+UI-To: ..ye
+UI-Verse-Does-Not-Exist: Ayet mevcut değil
+UI-View: Gözat

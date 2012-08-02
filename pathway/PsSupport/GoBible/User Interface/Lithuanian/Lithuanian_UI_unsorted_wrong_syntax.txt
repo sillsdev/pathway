@@ -1,0 +1,73 @@
+Go to - Eiti į
+Cancel - Atšaukti
+Preferences - Nustatymai
+History - Istorija
+OK - Gerai
+Search - Jieškoti
+Search Results - Pajieškos Rezultatai
+Add Bookmark - Pridėti Žymą
+Bookmarks - Žymos
+Exit - Baigti darbą
+Send - Išsiųsti
+Send SMS - Išsiųsti SMS
+Send MMS - Išsiųsti MMS
+About - Apie
+Loading - Įkėlimas
+Save - Išsaugoti
+Font size - Šrifto dydis
+Small - Mažas
+Medium - Vidutinis
+Large - Didelis
+Font style - Šrifto stilius
+Plain - Grynasis (not sure about meaning of this word)
+Bold - Pusjuodis
+Full screen - Pilnas ekranas
+On - Įjungti (about action), Įjungta (about status)
+Off - Išjungti (about action), Išjungta (about status)
+Theme - Apipavidalinimas
+Themes - Apipavidalinimai
+Paper - Popierius
+Computer - Kompiuteris
+Floral - Florinis
+Natural - Naturalus
+Blue - Mėlynas
+Sunshine - Saulės šviesa
+Change - Pakeisti
+Select - Pasirinkti
+Reverse Colours - Keisti spalvas
+Reverse Characters - Keisti ženklus
+Book - Knyga
+Books - Knygos
+All - Viskas
+New Testament - Naujas Testamentas
+Old Testament - Senas Testamentas
+Gospels - Evangelijos
+Paul's Letters - Pauliaus Laiškai
+Other Letters - Kiti Laiškai
+Books of Moses - Mozės knygos
+Historical - Istorinis
+Poetic - Poetinis
+Major Prophets - Didieji Pranašai
+Minor Prophets - Mažesni Pranašai
+Chapter - Skyrius
+Search Text - Jieškoti Teksto
+From Book - Nuo Knygos
+To Book - Iki Knygos
+Stop - Sustabdyti
+Searching - Pajieška
+Found - Rasta
+Please wait - Prašau palaukti
+Results - Rezultatai
+View - Rodymas
+Delete Bookmark - Ištrinti Žymą
+Delete the selected bookmark? - Ištrinti pasirinktą žymą?
+Delete - Ištrinti
+Send Verses - Siųsti Eilutes
+Back - Atgal
+to - Į
+Select verses to send - Išrinkti eilutes siuntimui
+Error - Klaida
+Message too large to be sent - Žynutė per ilga siuntimui
+Verse does not exist - Eilutė neegzistuoja
+Phone Number - Telefono numeris
+of - Iš 

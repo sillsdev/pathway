@@ -1,0 +1,73 @@
+UI-About: Tentang
+UI-Add-Bookmark: Tambahkan penanda
+UI-All: Semua
+UI-Back: Kembali
+UI-Bold: Tebal
+UI-Book: Kitab
+UI-Bookmarks: Penanda
+UI-Books-Of-Moses: Buku-buku Musa
+UI-Books: Kitab-kitab
+UI-Cancel: Batal
+UI-Change: Ubah
+UI-Chapter: Pasal
+UI-Delete-Bookmark-Alert: Hapus semua penanda terpilih?
+UI-Delete-Bookmark: Hapus penanda
+UI-Delete: Hapus
+UI-Error: Error
+UI-Exit: Keluar
+UI-Font-Size: Ukuran huruf
+UI-Font-Style: Gaya huruf
+UI-Found: ditemukan
+UI-From-Book: Dari Kitab
+UI-Full-Screen: Layar penuh
+UI-Gospels: Injil
+UI-Goto: Tuju ke
+UI-Historical: Kesejarahan
+UI-History: Sejarah
+UI-Large: Besar
+UI-Loading: Sedang memuat
+UI-Major-Prophets: Nabi-nabi Besar
+UI-Medium: Sedang
+UI-Message-Too-Large-To-Be-Sent: Pesan terlalu besar untuk dapat dikirim
+UI-Minor-Prophets: Nabi-nabi Kecil
+UI-New-Testament: Perjanjian Baru
+UI-Of: dari
+UI-Off: Off
+UI-OK: OK
+UI-Old-Testament: Perjanjian Lama
+UI-On: On
+UI-Other-Letters: Surat-surat Lain
+UI-Pauls-Letters: Surat-surat Paulus
+UI-Phone-Number: Nomor Telepon
+UI-Plain: Normal
+UI-Please-Wait: Mohon tunggu
+UI-Poetic: Puisi
+UI-Preferences: Preferensi
+UI-Results: Hasil
+UI-Reverse-Characters: Balik karakter
+UI-Reverse-Colours: Balik warna
+UI-Save: Simpan
+UI-Search-Results: Hasil pencarian
+UI-Search-Text: Cari Teks
+UI-Search: Cari
+UI-Searching: Sedang mencari
+UI-Select-Verses-To-Send: Pilih ayat untuk dikirim
+UI-Select: Pilih
+UI-Send-MMS: Kirim MMS
+UI-Send-SMS: Kirim SMS
+UI-Send-Verses: Kirimkan ayat
+UI-Send: Kirim
+UI-Small: Kecil
+UI-Stop: Berhenti
+UI-Theme-Blue: Biru
+UI-Theme-Computer: Komputer
+UI-Theme-Floral: Bunga
+UI-Theme-Natural: Natural
+UI-Theme-Paper: Kertas
+UI-Theme-Sunshine: Sinar mentari
+UI-Theme: Tema
+UI-Themes: Tema-tema
+UI-To-Book: Sampai Kitab
+UI-To: Ke
+UI-Verse-Does-Not-Exist: Ayat tidak ada
+UI-View: Tampilkan

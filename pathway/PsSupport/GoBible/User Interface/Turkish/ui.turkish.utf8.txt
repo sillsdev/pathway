@@ -1,0 +1,72 @@
+UI-Goto: Git
+UI-Cancel: Vazgeç
+UI-Preferences: Tercihler
+UI-History: Geçmis
+UI-OK: Tamam
+UI-Search: Ara/arama
+UI-Search-Results: Arama sonuçlari
+UI-Add-Bookmark: Yer imi ekle
+UI-Bookmarks: Yer imi
+UI-Exit: Çik/çikis
+UI-Send: Gönder
+UI-Send-SMS: SMS gönder
+UI-Send-MMS: MMS gönder
+UI-About: Ile ilgili
+UI-Loading: Yükleniyor
+UI-Save: Kaydet
+UI-Font-Size: Yazi tipi boyutu 
+UI-Small: Küçük
+UI-Medium: Orta
+UI-Large: Büyük
+UI-Font-Style: Yazi tipi stili
+UI-Plain: Düz
+UI-Bold: Koyu
+UI-Full-Screen: Ekrani kapla
+UI-On: Açik
+UI-Off: Kapali
+UI-Theme: Tema
+UI-Themes: Temalar
+UI-Theme-Paper: Kagit
+UI-Theme-Computer: Bilgisayar
+UI-Theme-Floral: Floral
+UI-Theme-Natural: Dogal
+UI-Theme-Blue: Mavi
+UI-Theme-Sunshine: Günes isigi
+UI-Change: Degistir
+UI-Select: Seç
+UI-Reverse-Colours: Karsit renkler
+UI-Reverse-Characters: Karsit karakterler
+UI-Book: Kitap
+UI-Books: Kitaplar
+UI-All: Tümü
+UI-New-Testament: Yeni Antlasma
+UI-Old-Testament: Eski Antlasma
+UI-Gospels: Yeni Antlasma'nin ilk dört kitabi
+UI-Pauls-Letters: Pavlus'un mektuplari
+UI-Other-Letters: Diger mektuplar
+UI-Books-Of-Moses: Musa'nin yazdigi kitaplar
+UI-Historical: Tarihsel
+UI-Poetic: Siirsel
+UI-Major-Prophets: Uzun Peygamberlikler
+UI-Minor-Prophets: Kisa Peygamberlikler
+UI-Chapter: Bölüm
+UI-Search-Text: Metni ara
+UI-From-Book: Kitaptan
+UI-To-Book: Kitaba
+UI-Stop: Durdur
+UI-Searching: Ariyor
+UI-Found: Bulundu
+UI-Please-Wait: Lütfen bekleyiniz
+UI-Results: Sonuçlar
+UI-View: Göster/görüntüle
+UI-Delete-Bookmark: Yer imi sil
+UI-Delete-Bookmark-Alert: Seçilen yer imi silinsin mi?
+UI-Delete: Sil
+UI-Send-Verses: Ayetleri gönder
+UI-Back: Geri
+UI-To: dön
+UI-Select-Verses-To-Send: Gönderilecek ayetleri seç
+UI-Error: Hata
+UI-Message-Too-Large-To-Be-Sent: Ileti gönderilemeyecek kadar büyük
+UI-Verse-Does-Not-Exist: Böyle bir ayet yok 
+UI-Phone-Number: Telefon numarasi
