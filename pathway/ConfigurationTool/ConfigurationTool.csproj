@@ -211,9 +211,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdParty\PdfToImage.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq">
-      <HintPath>C:\Program Files\Reference Assemblies\Microsoft\Framework\v3.5\System.Xml.Linq.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
