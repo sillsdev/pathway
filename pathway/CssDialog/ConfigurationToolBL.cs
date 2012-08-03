@@ -15,9 +15,6 @@ using System.Windows.Forms;
 using System.Xml;
 using SIL.Tool;
 
-using System.Xml.Linq;
-
-
 namespace SIL.PublishingSolution
 {
     public class ConfigurationToolBL
