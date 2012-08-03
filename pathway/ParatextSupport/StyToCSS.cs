@@ -220,6 +220,8 @@ namespace SIL.PublishingSolution
 
             _cssProp = new Dictionary<string, string>();
             _styleInfo[mapClassName] = _cssProp;
+            if (mapClassName.ToLower() == "scrbookname" || mapClassName.ToLower() == "scrbookcode")
+                _cssProp["display"] = "none";
         }
 
         /// <summary>
