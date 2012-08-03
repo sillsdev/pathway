@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using Microsoft.Win32;
@@ -11,11 +12,14 @@ namespace SIL.PublishingSolution
 {
     public class UsxToSFM
     {
-        protected Stack<string> _allStyle = new Stack<string>();
+        #region Private Variable
+
+        private Stack<string> _allStyle = new Stack<string>();
+        private Stack<string> _alltagName = new Stack<string>();
 
         private string _usxFullPath, _sfmFullPath;
 
-        protected XmlTextReader _reader;
+        private XmlTextReader _reader;
         private TextWriter _sfmFile;
 
         private Dictionary<string, Dictionary<string, string>> _styleInfo =
@@ -24,12 +28,19 @@ namespace SIL.PublishingSolution
         private Dictionary<string, string> _cssProp;
         private Dictionary<string, string> _mapClassName = new Dictionary<string, string>();
 
-        private string _tagName, _style, _number, _code;
+        private string _tagName, _style, _number, _code, _caller, _content;
+        private string _parentTagName = string.Empty,_parentStyleName = string.Empty;
+
+        private string _desc, _file, _size, _loc, _copy, _ref;
+        private bool _significant, _isEmptyNode, _isParaWritten;
 
         private const string Space = " ";
+        private const string Bar = "|";
 
         private bool _isclassNameExist;
         private List<string> _xhtmlAttribute = new List<string>();
+        
+        #endregion
 
         /// <summary>
         /// Entry method to convert USX to SFM
@@ -40,9 +51,8 @@ namespace SIL.PublishingSolution
             _usxFullPath = usxFullPath;
             _sfmFullPath = sfmFullPath;
             OpenFile();
-            MapClassName();
+            //MapClassName();
             ProcessUsx();
-            //WriteCSS();
         }
 
         /// ------------------------------------------------------------------------
@@ -58,7 +68,7 @@ namespace SIL.PublishingSolution
                 {
                     if (_reader.IsEmptyElement)
                     {
-                        continue;
+                        _isEmptyNode = true;
                     }
                     switch (_reader.NodeType)
                     {
@@ -87,15 +97,36 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void WriteElement()
         {
+            _content = SignificantSpace(_reader.Value);
             if (_tagName == "book")
             {
                 Book();
             }
-            else if (_tagName == "para" || _tagName == "para")
+            else if (_tagName == "para")
             {
                 Para();
+                _isParaWritten = true;
             }
-
+            else if (_tagName == "char")
+            {
+                Char();
+            }
+            else if (_tagName == "chapter")
+            {
+                Chapter();
+            }
+            else if (_tagName == "verse")
+            {
+                Verse();
+            }
+            else if (_tagName == "figure")
+            {
+                Figure();
+            }
+            else if (_style == string.Empty)
+            {
+                Content();
+            }
         }
 
         /// <summary>
@@ -104,43 +135,240 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void Book()
         {
-            string content = _reader.Value;
-            string line = "\\" + _style + Space + _code + Space + content;
+            string line = "\\" + _style + Space + _code + Space + _content;
             _sfmFile.WriteLine(line);
 
         }
 
+
         /// <summary>
-        /// input: <para style="imt">Kata-Kata Partama</para>
+        /// input:  <figure style="fig" desc="Map" file="Ruth.pdf" size="col" loc="" copy="" ref="RUT 1.0">Israel</figure>
+        /// output: \imt Kata-Kata Partama
+        /// </summary>
+        private void Content()
+        {
+            string line = _content + Space;
+            _sfmFile.Write(line);
+        }
+
+
+        /// <summary>
+        /// input:  <figure style="fig" desc="Map" file="Ruth.pdf" size="col" loc="" copy="" ref="RUT 1.0">Israel</figure>
         /// output: \imt Kata-Kata Partama
         /// </summary>
         private void Para()
         {
-            string content = _reader.Value;
-            string line = "\\" + _style + Space + content;
-            _sfmFile.WriteLine(line);
-
+            string prefix = string.Empty;
+            if (_style != string.Empty)
+            {
+                prefix = "\\" + _style + Space;
+            }
+            string line = prefix + _content + EndText();
+            _sfmFile.Write(line);
         }
 
         /// <summary>
-        /// Write content
+        /// input:  <verse number="1" style="v" />abc </verse>
+        /// output: \v 1 abc
+        /// </summary>
+        private void Verse()
+        {
+            string line;
+            if (_isParaWritten ==false)
+            {
+                line = "\\" + _parentStyleName;
+                _sfmFile.WriteLine(line);
+                _isParaWritten = true;
+            }
+
+            line = "\\" + _style + Space + _number + Space + _content + EndText();
+            _sfmFile.WriteLine(line);
+        }
+
+        /// <summary>
+        /// input:  <figure style="fig" desc="Map" file="Ruth.pdf" size="col" loc="" copy="" ref="RUT 1.0">Israel</figure>
+        /// output: \fig Map|Ruth.pdf|col|||Israel|RUT 1.0\fig*
+        /// </summary>
+        private void Chapter()
+        {
+            string line = "\\" + _style + Space + _number;
+            _sfmFile.Write(line);
+        }
+
+        /// <summary>
+        /// input:  <figure style="fig" desc="Map" file="Ruth.pdf" size="col" loc="" copy="" ref="RUT 1.0">Israel</figure>
+        /// output: \fig Map|Ruth.pdf|col|||Israel|RUT 1.0\fig*
+        /// </summary>
+        private void Figure()
+        {
+            string line = "\\" + _style + Space + _desc + Bar + _file + Bar + _size + Bar + _loc + Bar + _copy + Bar + _content + Bar + _ref + EndText();
+            _sfmFile.Write(line);
+        }
+
+       
+        /// <summary>
+        /// input:  
+        /// output: 
+        /// </summary>
+        private void Char()
+        {
+            string prefix = string.Empty;
+            if (_style != string.Empty)
+            {
+                prefix = "\\" + _style + Space;
+            }
+
+            if (_parentTagName == "note")
+            {
+                string line = prefix + _content;
+                _sfmFile.Write(line);
+            }
+            else
+            {
+                string line = prefix + _content + EndText();
+                _sfmFile.Write(line);
+            }
+        }
+
+        private string EndText()
+        {
+            string endText=string.Empty;
+            if (_tagName == "char" || _tagName == "figure" || _tagName == "note")
+            {
+                endText = "\\" + StackPeek(_allStyle) + "*";
+            }
+
+            return endText;
+        }
+
+        /// <summary>
+        /// Clear Stack entry
         /// </summary>
         private void EndElement()
         {
-            StackPop(_allStyle);
-            //if nested write with *
-            //todo
+            string style=  StackPop(_allStyle);
+            string tag = StackPop(_alltagName);
+
+            if (tag == "para")
+            {
+                _sfmFile.WriteLine();
+            }
+            else if (tag == "note")
+            {
+                string line = "\\" + style + "*";
+                _sfmFile.Write(line);
+            }
+
+            //_style = StackPeek(_allStyle);
+            _style = string.Empty;
+            _tagName = StackPeek(_alltagName);
         }
 
         /// <summary>
         /// Collect Tag Information
         /// </summary>
-        protected void StartElement()
+        private void StartElement()
         {
             _xhtmlAttribute.Clear();
             _isclassNameExist = false;
+            _number = string.Empty;  
+
+            _parentStyleName = StackPeek(_allStyle);
+            _parentTagName = StackPeek(_alltagName);
+
             _style = _tagName = _reader.Name;
 
+            if (_tagName == "figure")
+            {
+                WriteStyle(_parentStyleName);
+                _sfmFile.Write(Space);
+                GetFigure();
+            }
+            else // other nodes
+            {
+                if (_reader.HasAttributes)
+                {
+                    while (_reader.MoveToNextAttribute())
+                    {
+                        if (_reader.Name == "style")
+                        {
+                            _isclassNameExist = true;
+                            _style = _reader.Value;
+                        }
+                        else if (_reader.Name == "number")
+                        {
+                            _number = _reader.Value;
+                        }
+                        else if (_reader.Name == "code")
+                        {
+                            _code = _reader.Value;
+                        }
+                        else if (_reader.Name == "caller")
+                        {
+                            _caller = _reader.Value;
+                        }
+                    }
+                }
+            }
+            //Para();
+            Note();
+
+            if (_isEmptyNode)
+            {
+                if (_tagName != "verse")
+                {
+                    WriteStyle(_style);
+                    if (_tagName == "char")
+                    {
+                        _sfmFile.Write(Space);
+                    }
+                    else
+                    {
+                        _sfmFile.WriteLine();
+                    }
+                }
+                _isEmptyNode = false;
+            }
+            else
+            {
+                 if (_tagName == "para")
+                 {
+                     _isParaWritten = false;
+                 }
+
+                _allStyle.Push(_style);
+                _alltagName.Push(_tagName);
+            }
+        }
+
+        private void WriteStyle(string style)
+        {
+            string prefix = string.Empty;
+            if (style != string.Empty)
+            {
+                prefix = "\\" + style;
+                if(_number != string.Empty)
+                {
+                    prefix += Space + _number;
+                }
+            }
+            _sfmFile.Write(prefix);
+        }
+
+        /// <summary>
+        /// Collect Figure Tag Information
+        /// <figure style="fig" desc="Map of Israel and Moab during the time of Naomi and Ruth"
+        /// file="Ruth-CS4_BW_ver2.pdf" size="col" loc="" copy="" ref="RUT 1.0">
+        /// </summary>
+        private void GetFigure()
+        {
+
+            _desc = string.Empty;
+            _file = string.Empty;
+            _size = string.Empty;
+            _loc = string.Empty;
+            _copy = string.Empty;
+            _ref = string.Empty;
             if (_reader.HasAttributes)
             {
                 while (_reader.MoveToNextAttribute())
@@ -150,223 +378,64 @@ namespace SIL.PublishingSolution
                         _isclassNameExist = true;
                         _style = _reader.Value;
                     }
-                    else if (_reader.Name == "number")
+                    else if (_reader.Name == "desc")
                     {
-                        _number = _reader.Value;
+                        _desc = _reader.Value;
                     }
-                    else if (_reader.Name == "code")
+                    else if (_reader.Name == "file")
                     {
-                        _code = _reader.Value;
+                        _file = _reader.Value;
+                    }
+                    else if (_reader.Name == "size")
+                    {
+                        _size = _reader.Value;
+                    }
+                    else if (_reader.Name == "loc")
+                    {
+                        _loc = _reader.Value;
+                    }
+                    else if (_reader.Name == "copy")
+                    {
+                        _copy = _reader.Value;
+                    }
+                    else if (_reader.Name == "ref")
+                    {
+                        _ref = _reader.Value;
                     }
                 }
             }
-
-            if (_tagName == "figure")
-            {
-                //todo
-            }
-            else if (_tagName == "note")
-            {
-                //todo
-            }
-
-            _allStyle.Push(_style);
-        }
-
-        protected void CreateBook()
-        {
-
-        }
-
-        /// ------------------------------------------------------------
-        /// <summary>
-        /// Parses a line in an Paratext sty file.
-        /// </summary>
-        /// <param name="line">The line in a Paratext sty file.</param>
-        /// ------------------------------------------------------------
-        private void ParseLine(string line)
-        {
-            string value;
-            string word = Common.LeftString(line, " ");
-
-            switch (word)
-            {
-                case "\\Name":
-                    CreateClass(line);
-                    break;
-                case "\\FontSize":
-                    value = PropertyValue(line);
-                    _cssProp["font-size"] = value + "pt";
-                    break;
-                case "\\Color":
-                    value = PropertyValue(line);
-                    string strHex = String.Format("{0:x2}", Convert.ToUInt32(value));
-                    _cssProp["color"] = "#" + strHex;
-                    break;
-                case "\\Justification":
-                case "\\JustificationType": // ??
-                    value = PropertyValue(line);
-                    _cssProp["text-align"] = value;
-                    break;
-                case "\\SpaceBefore":
-                    value = PropertyValue(line);
-                    _cssProp["padding-top"] = value + "pt";
-                    break;
-                case "\\SpaceAfter":
-                    value = PropertyValue(line);
-                    _cssProp["padding-bottom"] = value + "pt";
-                    break;
-                case "\\LeftMargin":
-                    value = PropertyValue(line);
-                    _cssProp["margin-left"] = value + "pt";
-                    break;
-                case "\\RightMargin":
-                    value = PropertyValue(line);
-                    _cssProp["margin-right"] = value + "pt";
-                    break;
-                case "\\FirstLineIndent":
-                    value = PropertyValue(line);
-                    value = Common.LeftString(value, "#").Trim();
-                    _cssProp["text-indent"] = value + "pt";
-                    break;
-                case "\\Fontname":
-                    value = PropertyValue(line);
-                    _cssProp["font-name"] = value;
-                    break;
-                case "\\Italic":
-                    _cssProp["font-style"] = "italic";
-                    break;
-                case "\\Bold":
-                    _cssProp["font-weight"] = "bold";
-                    break;
-                case "\\Superscript":
-                    _cssProp["vertical-align"] = "super";
-                    break;
-                case "\\Subscript":
-                    _cssProp["vertical-align"] = "sub";
-                    break;
-                case "\\Underline":
-                    _cssProp["text-decoration"] = "underline";
-                    break;
-                case "\\LineSpacing":
-                    value = PropertyValue(line);
-                    string val = LineSpace(value);
-                    _cssProp["line-height"] = val;
-                    break;
-            }
-        }
-
-        /// ------------------------------------------------------------
-        /// <summary>
-        /// Creates CSS style from the \Marker line.
-        /// </summary>
-        /// <param name="line">A line from the sty file which should
-        /// contain the name of the style.</param>
-        /// ------------------------------------------------------------
-        private void CreateClass(string line)
-        {
-            int start = line.IndexOf(" ") + 1;
-            int iSecondSpace = line.IndexOf(" ", start);
-            int end = (iSecondSpace > start) ? iSecondSpace : line.Length;
-            string className = line.Substring(start, end - start);
-
-            className = RemoveMultiClass(className);
-
-            string mapClassName = className;
-            if (_mapClassName.ContainsKey(className))
-                mapClassName = _mapClassName[className];
-
-            _cssProp = new Dictionary<string, string>();
-            _styleInfo[mapClassName] = _cssProp;
         }
 
         /// <summary>
-        /// 
+        /// input: 
+        /// <note caller="+" style="f">
+        /// <char style="fr" closed="false">1.1-2 </char>
+        /// <char style="ft" closed="false">‘hakim’.</char>
+        /// </note>
+        /// output: 
+        /// \f + 
+        /// \fr 1.1-2 
+        /// \ft ‘hakim’.
+        /// \f*
         /// </summary>
-        /// <param name="className"></param>
-        /// <returns></returns>
-        private string RemoveMultiClass(string className)
+        private void Note()
         {
-            int pos = className.IndexOf("...", 1);
-            if (pos > 0)
+            if (_tagName == "note")
             {
-                className = className.Substring(0, pos);
+                string line = "\\" + _style + Space + _caller + Space;
+                _sfmFile.Write(line);
             }
-            return className;
         }
 
-        /// ------------------------------------------------------------
-        /// <summary>
-        /// Gets the value from a line in the sty file.
-        /// </summary>
-        /// <param name="line">A line from the sty file which should
-        /// contain property values for a style.</param>
-        /// <returns></returns>
-        /// ------------------------------------------------------------
-        private string PropertyValue(string line)
-        {
-            string propertyVal;
-            try
-            {
-                propertyVal = Common.RightString(line, " ").ToLower();
-            }
-            catch (Exception)
-            {
-                propertyVal = string.Empty;
-            }
-
-            return propertyVal;
-        }
-
-        /// ------------------------------------------------------------
-        /// <summary>
-        /// Writes the Cascading Style Sheet given properties determined
-        /// from the Paratext sty file.
-        /// </summary>
-        /// ------------------------------------------------------------
-        public void WriteCSS()
-        {
-            TextWriter cssFile = new StreamWriter(_usxFullPath);
-
-            foreach (KeyValuePair<string, Dictionary<string, string>> cssClass in _styleInfo)
-            {
-                if (cssClass.Key != "\\Name")
-                {
-                    cssFile.WriteLine("." + cssClass.Key);
-                    cssFile.WriteLine("{");
-                    foreach (KeyValuePair<string, string> property in cssClass.Value)
-                    {
-                        cssFile.WriteLine(property.Key + ": " + property.Value + ";");
-                    }
-                    cssFile.WriteLine("}");
-                    cssFile.WriteLine();
-                }
-            }
-            cssFile.Close();
-        }
-
-        /// <summary>
-        /// Convert paratext unit to css unit
-        /// </summary>
-        /// <param name="value">0/1/2</param>
-        /// <returns>100%/150%/200%</returns>
-        private string LineSpace(string value)
-        {
-            string result = string.Empty;
-            if (value == "0")
-            {
-                result = "100%";
-            }
-            else if (value == "1")
-            {
-                result = "150%";
-            }
-            else if (value == "2")
-            {
-                result = "200%";
-            }
-            return result;
-        }
+        ///// <summary>
+        ///// Write Para Tag Information
+        ///// </summary>
+        //private void Para()
+        //{
+        //    string line = "\\" + _style + Space;
+        //    _sfmFile.Write(line);
+        //    _tagName = "others";
+        //}
 
         private void MapClassName()
         {
@@ -392,12 +461,56 @@ namespace SIL.PublishingSolution
             _mapClassName["sc"] = "Inscription";
         }
 
+        private string SignificantSpace(string content)
+        {
+            if (content == null) return "";
+            //string content = _reader.Value;
+            content = content.Replace("\r\n", "");
+            content = content.Replace("\n", "");
+            content = content.Replace("\t", "");
+            Char[] charac = content.ToCharArray();
+            StringBuilder builder = new StringBuilder();
+            //if (charac.Length == 1)
+            //{
+            //    return content;
+            //}
+            foreach (char var in charac)
+            {
+                if (var == ' ' || var == '\b')
+                {
+                    if (_significant)
+                    {
+                        continue;
+                    }
+                    _significant = true;
+                }
+                else
+                {
+                    _significant = false;
+                }
+                builder.Append(var);
+            }
+            content = builder.ToString();
+            return content;
+            //_writer.WriteString(content);
+        }
+
         private string StackPop(Stack<string> stack)
         {
             string result = string.Empty;
             if (stack.Count > 0)
             {
                 result = stack.Pop();
+            }
+            return result;
+        }
+
+        private string StackPeek(Stack<string> stack)
+        {
+            string result = string.Empty;
+            if (stack.Count > 0)
+            {
+                result = stack.Peek();
             }
             return result;
         }
