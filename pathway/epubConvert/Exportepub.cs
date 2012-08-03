@@ -76,7 +76,7 @@ namespace SIL.PublishingSolution
         private readonly XslCompiledTransform _noXmlSpace = new XslCompiledTransform();
         private readonly XslCompiledTransform _addDicTocHeads = new XslCompiledTransform();
         private string currentChapterNumber = string.Empty;
-
+        private bool isIncludeImage = true;
 
         //        protected static PostscriptLanguage _postscriptLanguage = new PostscriptLanguage();
         protected string _inputType = "dictionary";
@@ -173,6 +173,8 @@ namespace SIL.PublishingSolution
                     AfterBeforeProcessEpub epubProcess = new AfterBeforeProcessEpub();
                     epubProcess.PreserveSpace(projInfo.DefaultXhtmlFileWithPath);
                 }
+
+                isIncludeImage = GetIncludeImageStatus(projInfo.DefaultXhtmlFileWithPath);
 
                 InsertBeforeAfterInXHTML(projInfo);
 
@@ -332,9 +334,10 @@ namespace SIL.PublishingSolution
 
                 foreach (string file in splitFiles)
                 {
-                    if(Path.GetFileNameWithoutExtension(file).IndexOf(@"PartFile") == 0)
+                    string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
+                    if(fileNameWithoutExtension != null && fileNameWithoutExtension.IndexOf(@"PartFile") == 0)
                     {
-                        RemoveNoteTargetReference(file);
+                        RemoveNodeInXhtmlFile(file);
                     }
                 }
 
@@ -524,15 +527,34 @@ namespace SIL.PublishingSolution
             return success;
         }
 
-        private void RemoveNoteTargetReference(string fileName)
+        private bool GetIncludeImageStatus(string fileName)
         {
+            try
+            {
+                Param.LoadSettings();
+                XmlDocument xDoc = Common.DeclareXMLDocument(false);
+                string path = Param.SettingOutputPath;
+                //path = @"C:\Users\Karthi\AppData\Local\SIL\Pathway\Scripture\ScriptureStyleSettings.xml";
+                xDoc.Load(path);
+                string xPath = "//stylePick/styles/others/style[@name='" + Path.GetFileNameWithoutExtension(fileName) + "']/styleProperty[@name='IncludeImage']/@value";
+                //string xPath = "//stylePick/styles/others/style[@name='" + "Copy of EBook (epub)" + "']/styleProperty[@name='IncludeImage']/@value";
+                XmlNode includeImageNode = xDoc.SelectSingleNode(xPath);
+                if (includeImageNode!= null && includeImageNode.InnerText == "No")
+                    isIncludeImage = false;
+            }
+            catch {}
+            return isIncludeImage;
+        }
+
+        private void RemoveNodeInXhtmlFile(string fileName)
+        {
+            //Removed NoteTargetReference tag from XHTML file
             XmlDocument xDoc = Common.DeclareXMLDocument(false);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             xDoc.Load(fileName);
             XmlElement elmRoot = xDoc.DocumentElement;
-            //const string xPath = "//xhtml:span[@class='Note_General_Paragraph']|//xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']";
-            const string xPath = "//xhtml:span[@class='Note_Target_Reference']";
+            string xPath = "//xhtml:span[@class='Note_Target_Reference']";
             if (elmRoot != null)
             {
                 XmlNodeList referenceNode = elmRoot.SelectNodes(xPath, namespaceManager);
@@ -544,6 +566,41 @@ namespace SIL.PublishingSolution
                         var parentNode = referenceNode[i].ParentNode;
                         if (parentNode != null)
                             parentNode.RemoveChild(referenceNode[i]);
+                    }
+                }
+            }
+
+            //If includeImage is false, removes the img -> parent tag
+            if (isIncludeImage == false)
+            {
+                xPath = "//xhtml:div[@class='pictureCaption']";
+                if (elmRoot != null)
+                {
+                    XmlNodeList pictCaptionNode = elmRoot.SelectNodes(xPath, namespaceManager);
+                    if (pictCaptionNode != null && pictCaptionNode.Count > 0)
+                    {
+                        for (int i = 0; i < pictCaptionNode.Count; i++)
+                        {
+                            //referenceNode[i].RemoveChild(referenceNode[i].FirstChild);
+                            var parentNode = pictCaptionNode[i].ParentNode;
+                            if (parentNode != null)
+                                parentNode.RemoveChild(pictCaptionNode[i]);
+                        }
+                    }
+                }
+
+                if (elmRoot != null && isIncludeImage == false)
+                {
+                    XmlNodeList imgNodes = elmRoot.GetElementsByTagName("img");
+                    if (imgNodes.Count > 0)
+                    {
+                        for (int i = 0; i < imgNodes.Count; i++)
+                        {
+                            //referenceNode[i].RemoveChild(referenceNode[i].FirstChild);
+                            var parentNode = imgNodes[i].ParentNode;
+                            if (parentNode != null)
+                                parentNode.RemoveChild(imgNodes[i]);
+                        }
                     }
                 }
             }

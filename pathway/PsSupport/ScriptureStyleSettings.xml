@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="19">
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="20">
   <settings>
     <property name="InputPath" value="%(AppData)s/SIL/Pathway" />
     <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Scripture" />
@@ -338,6 +338,7 @@
         <styleProperty name="Contributor" value=" " />
         <styleProperty name="Relation" value=" " />
         <styleProperty name="Coverage" value=" " />
+		<styleProperty name="IncludeImage" value="Yes" />
         <styleProperty name="Information" value="DRAFT Bible text." />
         <styleProperty name="Copyright" value="© 2011 Wycliffe Bible Translators, Inc." />
       </style>

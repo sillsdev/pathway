@@ -109,6 +109,7 @@ namespace SIL.PublishingSolution
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.mobileIcon = new System.Windows.Forms.PictureBox();
             this.tabOthers = new System.Windows.Forms.TabPage();
+            this.chkIncludeImage = new System.Windows.Forms.CheckBox();
             this.ddlReferences = new System.Windows.Forms.ComboBox();
             this.lblReferences = new System.Windows.Forms.Label();
             this.picFonts = new System.Windows.Forms.PictureBox();
@@ -1216,6 +1217,7 @@ namespace SIL.PublishingSolution
             // tabOthers
             // 
             this.tabOthers.AutoScroll = true;
+            this.tabOthers.Controls.Add(this.chkIncludeImage);
             this.tabOthers.Controls.Add(this.ddlReferences);
             this.tabOthers.Controls.Add(this.lblReferences);
             this.tabOthers.Controls.Add(this.picFonts);
@@ -1254,13 +1256,24 @@ namespace SIL.PublishingSolution
             this.tabOthers.Text = "Properties";
             this.tabOthers.UseVisualStyleBackColor = true;
             // 
+            // chkIncludeImage
+            // 
+            this.chkIncludeImage.AutoSize = true;
+            this.chkIncludeImage.Location = new System.Drawing.Point(51, 159);
+            this.chkIncludeImage.Name = "chkIncludeImage";
+            this.chkIncludeImage.Size = new System.Drawing.Size(93, 17);
+            this.chkIncludeImage.TabIndex = 39;
+            this.chkIncludeImage.Text = "Include Image";
+            this.chkIncludeImage.UseVisualStyleBackColor = true;
+            this.chkIncludeImage.CheckedChanged += new System.EventHandler(this.chkIncludeImage_CheckedChanged);
+            // 
             // ddlReferences
             // 
             this.ddlReferences.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlReferences.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlReferences.FormattingEnabled = true;
-            this.ddlReferences.Location = new System.Drawing.Point(147, 237);
+            this.ddlReferences.Location = new System.Drawing.Point(147, 264);
             this.ddlReferences.Name = "ddlReferences";
             this.ddlReferences.Size = new System.Drawing.Size(121, 21);
             this.ddlReferences.TabIndex = 14;
@@ -1269,7 +1282,7 @@ namespace SIL.PublishingSolution
             // lblReferences
             // 
             this.lblReferences.AutoSize = true;
-            this.lblReferences.Location = new System.Drawing.Point(48, 240);
+            this.lblReferences.Location = new System.Drawing.Point(48, 267);
             this.lblReferences.Name = "lblReferences";
             this.lblReferences.Size = new System.Drawing.Size(87, 13);
             this.lblReferences.TabIndex = 13;
@@ -1279,7 +1292,7 @@ namespace SIL.PublishingSolution
             // 
             this.picFonts.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picFonts.BackgroundImage")));
             this.picFonts.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picFonts.Location = new System.Drawing.Point(7, 291);
+            this.picFonts.Location = new System.Drawing.Point(7, 318);
             this.picFonts.Name = "picFonts";
             this.picFonts.Size = new System.Drawing.Size(32, 29);
             this.picFonts.TabIndex = 38;
@@ -1301,7 +1314,7 @@ namespace SIL.PublishingSolution
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlNonSILFont.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlNonSILFont.FormattingEnabled = true;
-            this.ddlNonSILFont.Location = new System.Drawing.Point(138, 364);
+            this.ddlNonSILFont.Location = new System.Drawing.Point(138, 391);
             this.ddlNonSILFont.Name = "ddlNonSILFont";
             this.ddlNonSILFont.Size = new System.Drawing.Size(130, 21);
             this.ddlNonSILFont.TabIndex = 20;
@@ -1313,7 +1326,7 @@ namespace SIL.PublishingSolution
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblEpubFontsSection.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.lblEpubFontsSection.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEpubFontsSection.Location = new System.Drawing.Point(7, 265);
+            this.lblEpubFontsSection.Location = new System.Drawing.Point(7, 292);
             this.lblEpubFontsSection.Name = "lblEpubFontsSection";
             this.lblEpubFontsSection.Size = new System.Drawing.Size(261, 23);
             this.lblEpubFontsSection.TabIndex = 36;
@@ -1326,7 +1339,7 @@ namespace SIL.PublishingSolution
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlMissingFont.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlMissingFont.FormattingEnabled = true;
-            this.ddlMissingFont.Location = new System.Drawing.Point(138, 337);
+            this.ddlMissingFont.Location = new System.Drawing.Point(138, 364);
             this.ddlMissingFont.Name = "ddlMissingFont";
             this.ddlMissingFont.Size = new System.Drawing.Size(130, 21);
             this.ddlMissingFont.TabIndex = 18;
@@ -1347,7 +1360,7 @@ namespace SIL.PublishingSolution
             // lblNonSILFont
             // 
             this.lblNonSILFont.AutoSize = true;
-            this.lblNonSILFont.Location = new System.Drawing.Point(48, 367);
+            this.lblNonSILFont.Location = new System.Drawing.Point(48, 394);
             this.lblNonSILFont.Name = "lblNonSILFont";
             this.lblNonSILFont.Size = new System.Drawing.Size(87, 13);
             this.lblNonSILFont.TabIndex = 19;
@@ -1369,7 +1382,7 @@ namespace SIL.PublishingSolution
             // lblMissingFont
             // 
             this.lblMissingFont.AutoSize = true;
-            this.lblMissingFont.Location = new System.Drawing.Point(48, 340);
+            this.lblMissingFont.Location = new System.Drawing.Point(48, 367);
             this.lblMissingFont.Name = "lblMissingFont";
             this.lblMissingFont.Size = new System.Drawing.Size(84, 13);
             this.lblMissingFont.TabIndex = 17;
@@ -1390,7 +1403,7 @@ namespace SIL.PublishingSolution
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlDefaultFont.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlDefaultFont.FormattingEnabled = true;
-            this.ddlDefaultFont.Location = new System.Drawing.Point(138, 391);
+            this.ddlDefaultFont.Location = new System.Drawing.Point(138, 418);
             this.ddlDefaultFont.Name = "ddlDefaultFont";
             this.ddlDefaultFont.Size = new System.Drawing.Size(130, 21);
             this.ddlDefaultFont.TabIndex = 22;
@@ -1399,7 +1412,7 @@ namespace SIL.PublishingSolution
             // lblDefaultFont
             // 
             this.lblDefaultFont.AutoSize = true;
-            this.lblDefaultFont.Location = new System.Drawing.Point(48, 394);
+            this.lblDefaultFont.Location = new System.Drawing.Point(48, 421);
             this.lblDefaultFont.Name = "lblDefaultFont";
             this.lblDefaultFont.Size = new System.Drawing.Size(74, 13);
             this.lblDefaultFont.TabIndex = 21;
@@ -1408,7 +1421,7 @@ namespace SIL.PublishingSolution
             // lblPx
             // 
             this.lblPx.AutoSize = true;
-            this.lblPx.Location = new System.Drawing.Point(219, 160);
+            this.lblPx.Location = new System.Drawing.Point(238, 183);
             this.lblPx.Name = "lblPx";
             this.lblPx.Size = new System.Drawing.Size(18, 13);
             this.lblPx.TabIndex = 35;
@@ -1419,7 +1432,7 @@ namespace SIL.PublishingSolution
             this.chkIncludeFontVariants.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chkIncludeFontVariants.AutoSize = true;
-            this.chkIncludeFontVariants.Location = new System.Drawing.Point(51, 314);
+            this.chkIncludeFontVariants.Location = new System.Drawing.Point(51, 341);
             this.chkIncludeFontVariants.Name = "chkIncludeFontVariants";
             this.chkIncludeFontVariants.Size = new System.Drawing.Size(147, 17);
             this.chkIncludeFontVariants.TabIndex = 16;
@@ -1442,7 +1455,7 @@ namespace SIL.PublishingSolution
             this.chkEmbedFonts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chkEmbedFonts.AutoSize = true;
-            this.chkEmbedFonts.Location = new System.Drawing.Point(51, 291);
+            this.chkEmbedFonts.Location = new System.Drawing.Point(51, 318);
             this.chkEmbedFonts.Name = "chkEmbedFonts";
             this.chkEmbedFonts.Size = new System.Drawing.Size(151, 17);
             this.chkEmbedFonts.TabIndex = 15;
@@ -1452,7 +1465,7 @@ namespace SIL.PublishingSolution
             // 
             // txtMaxImageWidth
             // 
-            this.txtMaxImageWidth.Location = new System.Drawing.Point(168, 157);
+            this.txtMaxImageWidth.Location = new System.Drawing.Point(187, 183);
             this.txtMaxImageWidth.MaxLength = 4;
             this.txtMaxImageWidth.Name = "txtMaxImageWidth";
             this.txtMaxImageWidth.Size = new System.Drawing.Size(45, 20);
@@ -1465,7 +1478,7 @@ namespace SIL.PublishingSolution
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlTocLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlTocLevel.FormattingEnabled = true;
-            this.ddlTocLevel.Location = new System.Drawing.Point(118, 183);
+            this.ddlTocLevel.Location = new System.Drawing.Point(118, 210);
             this.ddlTocLevel.Name = "ddlTocLevel";
             this.ddlTocLevel.Size = new System.Drawing.Size(150, 21);
             this.ddlTocLevel.TabIndex = 10;
@@ -1474,7 +1487,7 @@ namespace SIL.PublishingSolution
             // lblTocLevel
             // 
             this.lblTocLevel.AutoSize = true;
-            this.lblTocLevel.Location = new System.Drawing.Point(48, 186);
+            this.lblTocLevel.Location = new System.Drawing.Point(48, 213);
             this.lblTocLevel.Name = "lblTocLevel";
             this.lblTocLevel.Size = new System.Drawing.Size(61, 13);
             this.lblTocLevel.TabIndex = 9;
@@ -1493,7 +1506,7 @@ namespace SIL.PublishingSolution
             // lblMaxImageWidth
             // 
             this.lblMaxImageWidth.AutoSize = true;
-            this.lblMaxImageWidth.Location = new System.Drawing.Point(48, 160);
+            this.lblMaxImageWidth.Location = new System.Drawing.Point(67, 186);
             this.lblMaxImageWidth.Name = "lblMaxImageWidth";
             this.lblMaxImageWidth.Size = new System.Drawing.Size(117, 13);
             this.lblMaxImageWidth.TabIndex = 7;
@@ -1534,7 +1547,7 @@ namespace SIL.PublishingSolution
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ddlChapterNumbers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlChapterNumbers.FormattingEnabled = true;
-            this.ddlChapterNumbers.Location = new System.Drawing.Point(147, 210);
+            this.ddlChapterNumbers.Location = new System.Drawing.Point(147, 237);
             this.ddlChapterNumbers.Name = "ddlChapterNumbers";
             this.ddlChapterNumbers.Size = new System.Drawing.Size(121, 21);
             this.ddlChapterNumbers.TabIndex = 12;
@@ -1552,7 +1565,7 @@ namespace SIL.PublishingSolution
             // lblChapterNumbers
             // 
             this.lblChapterNumbers.AutoSize = true;
-            this.lblChapterNumbers.Location = new System.Drawing.Point(48, 213);
+            this.lblChapterNumbers.Location = new System.Drawing.Point(48, 240);
             this.lblChapterNumbers.Name = "lblChapterNumbers";
             this.lblChapterNumbers.Size = new System.Drawing.Size(92, 13);
             this.lblChapterNumbers.TabIndex = 11;
@@ -2529,5 +2542,6 @@ namespace SIL.PublishingSolution
         private CheckBox chkFixedLineHeight;
         private ComboBox ddlLanguage;
         private Label label20;
+        private CheckBox chkIncludeImage;
     }
 }

@@ -119,6 +119,7 @@ namespace SIL.PublishingSolution
         protected string _previousStyleName;
         protected string _fileProduce = "One";
         protected bool _fixedLineHeight = false;
+        protected bool _includeImage = true;
         protected string _tocLevel = "2 - Book and Chapter";
         protected string _embedFonts = "Yes";
         protected string _includeFontVariants = "Yes";
@@ -980,9 +981,13 @@ namespace SIL.PublishingSolution
                                 cTool.DdlDefaultFont.Enabled = bEnabled;
                                 cTool.DdlMissingFont.Enabled = bEnabled;
                                 cTool.DdlNonSILFont.Enabled = bEnabled;
+                                cTool.ChkIncludeImage.Checked = (attribValue == "Yes") ? true : false;
                                 break;
                             case "includefontvariants":
                                 cTool.ChkIncludeFontVariants.Checked = (attribValue == "Yes") ? true : false;
+                                break;
+                            case "includeimage":
+                                cTool.ChkIncludeImage.Checked = (attribValue == "Yes") ? true : false;
                                 break;
                             case "maximagewidth":
                                 cTool.TxtMaxImageWidth.Text = attribValue;
@@ -1528,6 +1533,9 @@ namespace SIL.PublishingSolution
                                 break;
                             case "includefontvariants":
                                 cTool.ChkIncludeFontVariants.Checked = (attribValue == "Yes") ? true : false;
+                                break;
+                            case "includeimage":
+                                cTool.ChkIncludeImage.Checked = (attribValue == "Yes") ? true : false;
                                 break;
                             case "maximagewidth":
                                 cTool.TxtMaxImageWidth.Text = attribValue;
@@ -3542,6 +3550,19 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
+        public void chkIncludeImage_CheckedChangedBL(object sender, EventArgs e)
+        {
+            try
+            {
+                _includeImage = cTool.ChkIncludeImage.Checked;
+                cTool.LblMaxImageWidth.Enabled = _includeImage;
+                cTool.TxtMaxImageWidth.Enabled = _includeImage;
+                cTool.LblPx.Enabled = _includeImage;
+                Param.UpdateOthersAtrrib("IncludeImage", cTool.ChkIncludeImage.Checked ? "Yes" : "No", StyleName);
+                SetOthersSummary(sender, e);
+            }
+            catch { }
+        }
 
 
         public void txtDesc_ValidatedBL(object sender)

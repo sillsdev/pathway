@@ -606,6 +606,11 @@ namespace SIL.PublishingSolution
             get { return lblMaxImageWidth; }
         }
 
+        public Label LblPx
+        {
+            get { return lblPx; }
+        }
+
         public CheckBox ChkEmbedFonts
         {
             get { return chkEmbedFonts; }
@@ -689,6 +694,11 @@ namespace SIL.PublishingSolution
         public CheckBox ChkFixedLineHeight
         {
             get { return chkFixedLineHeight; }
+        }
+
+        public CheckBox ChkIncludeImage
+        {
+            get { return chkIncludeImage; }
         }
         //private System.Windows.Forms.TableLayoutPanel TLPanelOuter;
         //private System.Windows.Forms.TableLayoutPanel TLPanel1;
@@ -1238,6 +1248,12 @@ namespace SIL.PublishingSolution
         private void txtWebUrl_Validated(object sender, EventArgs e)
         {
             _CToolBL.txtWebUrl_ValidatedBL(sender, e);
+        }
+
+        private void chkIncludeImage_CheckedChanged(object sender, EventArgs e)
+        {
+            EditCSS(sender, e);
+            _CToolBL.chkIncludeImage_CheckedChangedBL(sender, e);
         }
      }
 }
