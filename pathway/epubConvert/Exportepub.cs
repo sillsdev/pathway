@@ -3995,11 +3995,12 @@ namespace SIL.PublishingSolution
                     XmlReader xmlReader = XmlReader.Create(sourceFile, xmlReaderSettings);
                     xmlDocument.Load(xmlReader);
                     xmlReader.Close();
-                    const string xPath = ".//xhtml:div[@class='Section_Head']";
+                    const string xPath = ".//xhtml:div[@class='Title_Main']";
                     XmlNodeList nodes = xmlDocument.SelectNodes(xPath, namespaceManager);
 
                     if (nodes.Count > 0)
                     {
+                        var next = nodes[0].NextSibling;
                         foreach (string VARIABLE in chapterIdList)
                         {
                             string[] valueList = VARIABLE.Split('_');
@@ -4012,11 +4013,11 @@ namespace SIL.PublishingSolution
                             attribute.Value = VARIABLE;
                             nodeContent.Attributes.Append(attribute);
                             nodeContent.InnerText = GetChapterNumber(VARIABLE);
-                            nodes[0].ParentNode.InsertBefore(nodeContent, nodes[0]);
+                            next.ParentNode.InsertBefore(nodeContent, next);
                             XmlNode spaceNode = xmlDocument.CreateElement("span",
                                                                           xmlDocument.DocumentElement.NamespaceURI);
                             spaceNode.InnerText = " ";
-                            nodes[0].ParentNode.InsertBefore(spaceNode, nodes[0]);
+                            next.ParentNode.InsertBefore(spaceNode, next);
                         }
                     }
 

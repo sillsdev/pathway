@@ -209,14 +209,12 @@
     <CallTarget Targets="ReleaseBTE606"/>
   </Target>
   <Target Name="Build7">
+    <CallTarget Targets="Clean"/>
     <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>
     <CallTarget Targets="Corporate7BTE"/>
-    <CallTarget Targets="Clean"/>
-    <CallTarget Targets="Corporate7SE"/>
-    <CallTarget Targets="Clean"/>
     <CallTarget Targets="Release7BTE"/>
-    <CallTarget Targets="Clean"/>
     <CallTarget Targets="Release7SE"/>
+    <CallTarget Targets="Corporate7SE"/>
   </Target>
   <Target Name="Build60">
     <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>

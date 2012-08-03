@@ -37,10 +37,10 @@ namespace Test
             XmlDocument expectDocument = Common.DeclareXMLDocument(false);
             expectDocument.Load(expectPath);
             XmlDsigC14NTransform outputCanon = new XmlDsigC14NTransform();
-            outputCanon.Resolver = new XmlUrlResolver();
+            outputCanon.Resolver = null;
             outputCanon.LoadInput(outputDocument);
             XmlDsigC14NTransform expectCanon = new XmlDsigC14NTransform();
-            expectCanon.Resolver = new XmlUrlResolver();
+            expectCanon.Resolver = null;
             expectCanon.LoadInput(expectDocument);
             Stream outputStream = (Stream)outputCanon.GetOutput(typeof(Stream));
             Stream expectStream = (Stream)expectCanon.GetOutput(typeof(Stream));
