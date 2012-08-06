@@ -3387,10 +3387,11 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                if (_screenMode == ScreenMode.Modify) // Add
+                if (_screenMode == ScreenMode.Modify || _screenMode == ScreenMode.Edit) // Add or Edit
                 {
                     WriteCss();
                 }
+
                 _screenMode = ScreenMode.View;
                 SelectedRowIndex = e.RowIndex;
                 ShowInfoValue();
