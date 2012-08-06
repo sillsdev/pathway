@@ -466,7 +466,7 @@ namespace SIL.PublishingSolution
             {
                 //bool whiteSpaceExist = _significant;
                 //string content1 = SignificantSpace(psuedoBefore.Content);
-                if (psuedoBefore.Content.Trim().Length == 0)
+                if (psuedoBefore.Content!= null  && psuedoBefore.Content.Trim().Length == 0)
                 {
                     if (!_significant)
                     {
@@ -626,7 +626,7 @@ namespace SIL.PublishingSolution
                 if (_psuedoAfter.ContainsKey(_closeChildName))
                 {
                     ClassInfo classInfo = _psuedoAfter[_closeChildName];
-                    if (classInfo.Content.Trim().Length == 0)
+                    if (classInfo.Content!= null && classInfo.Content.Trim().Length == 0)
                     {
                         if (!_significant)
                         {

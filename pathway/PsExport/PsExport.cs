@@ -34,6 +34,7 @@ namespace SIL.PublishingSolution
     {
         private const bool _Wait = true;
         public bool _fromNUnit = false;
+        private string _selectedCssFromTemplate = string.Empty;
 
         #region Properties
         /// <summary>Gets or sets Output format (ODT, PDF, INX, TeX, HTM, PDB, etc.)</summary>
@@ -93,6 +94,7 @@ namespace SIL.PublishingSolution
                 }
                 string cssFullName = GetCssFullName(outDir, mainFullName);
                 if (cssFullName == null) return;
+                _selectedCssFromTemplate = Path.GetFileNameWithoutExtension(cssFullName);
                 string fluffedCssFullName;
                 string revFileName = string.Empty;
                 if (Path.GetFileNameWithoutExtension(outFullName) == "FlexRev")
@@ -497,6 +499,7 @@ namespace SIL.PublishingSolution
             projInfo.ProjectInputType = "Dictionary";
             projInfo.DictionaryPath = Path.GetDirectoryName(lexiconFull);
             projInfo.ProjectName = Path.GetFileNameWithoutExtension(lexiconFull);
+            projInfo.SelectedTemplateStyle = _selectedCssFromTemplate;
             //if (lexiconFull == revFull || lexiconFull == gramFull)
             //    projInfo.IsLexiconSectionExist = false;
 
@@ -564,6 +567,7 @@ namespace SIL.PublishingSolution
             projInfo.ProjectInputType = "Scripture";
             projInfo.FromPlugin = true;
             projInfo.DictionaryPath = outPath;
+            projInfo.SelectedTemplateStyle = _selectedCssFromTemplate;
             if (mainSection)
             {
                 projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outPath, mainXhtml);

@@ -132,6 +132,11 @@ namespace SIL.PublishingSolution
                         Param.LoadSettings();
                     }
 
+                    if (projSettingsVerNum == "19")
+                    {
+                        Version19(GetDirectoryPath(settingsPath, appPath), projSchemaVersion);
+                        Param.LoadSettings();
+                    }
                     //Version2(GetDirectoryPath(settingsPath, appPath), appSettingsPath, projSchemaVersion);
                     string usrPath = GetDirectoryPath(settingsPath, appPath);
                     string insPath = Common.PathCombine(Path.GetDirectoryName(installerPath), Path.GetFileName(usrPath));
@@ -474,6 +479,36 @@ namespace SIL.PublishingSolution
             xdoc.Save(path);
         }
 
+        /// <summary>
+        /// Method to update the changed made in version 20
+        /// </summary>
+        /// <param name="path">Settings file path</param>
+        /// <param name="versionNumber">Updating version number</param>
+        /// <returns>Nothing</returns>
+        public void Version19(string path, string versionNumber)
+        {
+            if (!File.Exists(path)) { return; }
+
+            var xdoc = Common.DeclareXMLDocument(false);
+            xdoc.Load(path);
+            XmlElement root = xdoc.DocumentElement;
+            if (root != null)
+            {
+                string sPath = "//stylePick/styles/others/style";
+                root.SetAttribute("version", versionNumber);
+                XmlNodeList searchNode = root.SelectNodes(sPath);
+                if (searchNode != null && searchNode.Count != 0)
+                {
+                    foreach (XmlNode styleNode in searchNode)
+                    {
+                        XmlDocumentFragment docFrag = InsertDefaultTagVersion19(xdoc);
+                        styleNode.AppendChild(docFrag);
+                    }
+                }
+            }
+            xdoc.Save(path);
+        }
+
 
         /// <summary>
         /// Method to update the changed made in version 2
@@ -641,6 +676,19 @@ namespace SIL.PublishingSolution
         private static XmlDocumentFragment InsertDefaultTagVersion18(XmlDocument xdoc)
         {
             const string toInsert = @"<PreviousProjectName></PreviousProjectName>";
+            XmlDocumentFragment docFrag = xdoc.CreateDocumentFragment();
+            docFrag.InnerXml = toInsert;
+            return docFrag;
+        }
+
+        /// <summary>
+        /// To insert the xml default tag part into the alluser's XML file.
+        /// </summary>
+        /// <param name="xdoc">XMLDocument object</param>
+        /// <returns>XmlDocumentFragment to attach in XMLFile</returns>
+        private static XmlDocumentFragment InsertDefaultTagVersion19(XmlDocument xdoc)
+        {
+            const string toInsert = "<styleProperty name=\"IncludeImage\" value=\"Yes\" />";
             XmlDocumentFragment docFrag = xdoc.CreateDocumentFragment();
             docFrag.InnerXml = toInsert;
             return docFrag;
