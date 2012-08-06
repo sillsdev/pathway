@@ -20,7 +20,7 @@ namespace SIL.PublishingSolution
         private string _usxFullPath, _sfmFullPath;
 
         private XmlTextReader _reader;
-        private TextWriter _sfmFile;
+        private StreamWriter _sfmFile;
 
         private Dictionary<string, Dictionary<string, string>> _styleInfo =
             new Dictionary<string, Dictionary<string, string>>();
@@ -180,9 +180,13 @@ namespace SIL.PublishingSolution
                 _sfmFile.WriteLine(line);
                 _isParaWritten = true;
             }
+            else
+            {
+                _sfmFile.WriteLine();
+            }
 
-            line = "\\" + _style + Space + _number + Space + _content + EndText();
-            _sfmFile.WriteLine(line);
+            line = "\\" + _style + Space + _number + Space + _content.Trim() + EndText();
+            _sfmFile.Write(line);
         }
 
         /// <summary>
@@ -215,7 +219,7 @@ namespace SIL.PublishingSolution
             string prefix = string.Empty;
             if (_style != string.Empty)
             {
-                prefix = "\\" + _style + Space;
+                prefix = Space + "\\" + _style + Space;
             }
 
             if (_parentTagName == "note")
@@ -249,7 +253,7 @@ namespace SIL.PublishingSolution
             string style=  StackPop(_allStyle);
             string tag = StackPop(_alltagName);
 
-            if (tag == "para")
+            if (tag == "para" || tag == "verse")
             {
                 _sfmFile.WriteLine();
             }
