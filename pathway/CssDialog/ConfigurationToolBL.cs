@@ -659,6 +659,10 @@ namespace SIL.PublishingSolution
                             {
                                 baseNode.Attributes["value"].Value = hashUtil.Encrypt(cTool.TxtFtpPassword.Text);
                             }
+                            else
+                            {
+                                baseNode.Attributes["value"].Value = "";
+                            }
                             break;
                         case "dbservername":
                             baseNode.Attributes["value"].Value = cTool.TxtSqlServerName.Text;
@@ -674,6 +678,10 @@ namespace SIL.PublishingSolution
                             {
                                 baseNode.Attributes["value"].Value = hashUtil.Encrypt(cTool.TxtSqlPassword.Text);
                             }
+                            else
+                            {
+                                baseNode.Attributes["value"].Value = "";
+                            }
                             break;
                         case "weburl":
                             baseNode.Attributes["value"].Value = cTool.TxtWebUrl.Text;
@@ -685,6 +693,10 @@ namespace SIL.PublishingSolution
                             if (cTool.TxtWebAdminPwd.Text.Trim().Length > 0)
                             {
                                 baseNode.Attributes["value"].Value = hashUtil.Encrypt(cTool.TxtWebAdminPwd.Text);
+                            }
+                            else
+                            {
+                                baseNode.Attributes["value"].Value = "";
                             }
                             break;
                         case "webadminsitenme":
@@ -1051,6 +1063,10 @@ namespace SIL.PublishingSolution
                                 {
                                     cTool.TxtFtpPassword.Text = hashUtil.Decrypt(attribValue);
                                 }
+                                else
+                                {
+                                    cTool.TxtFtpPassword.Text = "";
+                                }
                                 break;
                             case "dbservername":
                                 cTool.TxtSqlServerName.Text = attribValue;
@@ -1066,6 +1082,10 @@ namespace SIL.PublishingSolution
                                 {
                                     cTool.TxtSqlPassword.Text = hashUtil.Decrypt(attribValue);
                                 }
+                                else
+                                {
+                                    cTool.TxtSqlPassword.Text = "";
+                                }
                                 break;
                             case "weburl":
                                 cTool.TxtWebUrl.Text = attribValue;
@@ -1077,6 +1097,10 @@ namespace SIL.PublishingSolution
                                 if (attribValue.Trim().Length > 0)
                                 {
                                     cTool.TxtWebAdminPwd.Text = hashUtil.Decrypt(attribValue);
+                                }
+                                else
+                                {
+                                    cTool.TxtWebAdminPwd.Text = "";
                                 }
                                 break;
                             case "webadminsitenme":
