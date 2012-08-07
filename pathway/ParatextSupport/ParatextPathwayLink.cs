@@ -240,7 +240,7 @@ namespace SIL.PublishingSolution
         {
             Debug.Assert(usxBooksToExport != null && usxBooksToExport.Count > 0);
 
-            if (m_format == "CadreBible" || m_format == "GoBible")
+            if (m_format == "CadreBible" || m_format == "Go Bible")
                 ExportUSXRawToUSX(usxBooksToExport);
 
             XmlDocument allBooks = usxBooksToExport[0];
@@ -372,6 +372,14 @@ namespace SIL.PublishingSolution
                 txtWriter.WriteRaw(cleanUsx.ToString());
                 doc.Save(txtWriter);
                 txtWriter.Close();
+
+                if (m_format == "Go Bible")
+                {
+                    UsxToSFM usxToSfm = new UsxToSFM();
+                    string targetFile = bookFileName.Replace(".usx", ".sfm");
+                    usxToSfm.ConvertUsxToSFM(bookFileName, targetFile);
+                }
+                
             }
         }
 
