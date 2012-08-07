@@ -146,7 +146,7 @@ namespace Test.PsTool
             string expected = GetFileNameWithExpectedPath(fileName);
             CopyToOutput(input, output);
             Common.SetDefaultCSS(output, defaultCSS);
-            TextFileAssert.AreEqual(expected, output);
+            XmlAssert.AreEqual(expected, output, "Copied files are not equal");
         }
 
         /// <summary>
