@@ -69,6 +69,7 @@ namespace SIL.Tool
         public float DefaultFontSize = 12;
         private bool _isFrontMatterEnabled = false;
         public string _headerFontName = "GenericFont";
+        public string _selectedTemplateStyle = string.Empty;
 
         #endregion
 
@@ -255,6 +256,12 @@ namespace SIL.Tool
         {
             get { return _headerFontName; }
             set { _headerFontName = value; }
+        }
+
+        public string SelectedTemplateStyle
+        {
+            get { return _selectedTemplateStyle; }
+            set { _selectedTemplateStyle = value; }
         }
 
         #endregion

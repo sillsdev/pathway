@@ -208,7 +208,7 @@ namespace Test.XhtmlExport
         [Category("SkipOnTeamCity")]
         public void NkonyaSampleExportTest()
         {
-            FieldWorksXhtmlExport("Te", "Nkonya Sample", "Nkonya Sample 2011-02-10 1347.fwbackup", "Export changed");
+            FieldWorksXhtmlExport("Te", "Nkonya Sample", "Nkonya Sample 2011-02-10 1347.fwbackup", "Export changed", "c");
         }
         #endregion Nkonya Sample
 

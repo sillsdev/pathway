@@ -174,7 +174,7 @@ namespace SIL.PublishingSolution
                     epubProcess.PreserveSpace(projInfo.DefaultXhtmlFileWithPath);
                 }
 
-                isIncludeImage = GetIncludeImageStatus(projInfo.DefaultXhtmlFileWithPath);
+                isIncludeImage = GetIncludeImageStatus(projInfo.SelectedTemplateStyle);
 
                 InsertBeforeAfterInXHTML(projInfo);
 
@@ -527,16 +527,16 @@ namespace SIL.PublishingSolution
             return success;
         }
 
-        private bool GetIncludeImageStatus(string fileName)
+        private bool GetIncludeImageStatus(string cssFileName)
         {
             try
             {
+                if (cssFileName.Trim().Length == 0){return true;}
                 Param.LoadSettings();
                 XmlDocument xDoc = Common.DeclareXMLDocument(false);
                 string path = Param.SettingOutputPath;
-                //path = @"C:\Users\Karthi\AppData\Local\SIL\Pathway\Scripture\ScriptureStyleSettings.xml";
                 xDoc.Load(path);
-                string xPath = "//stylePick/styles/others/style[@name='" + Path.GetFileNameWithoutExtension(fileName) + "']/styleProperty[@name='IncludeImage']/@value";
+                string xPath = "//stylePick/styles/others/style[@name='" + cssFileName + "']/styleProperty[@name='IncludeImage']/@value";
                 //string xPath = "//stylePick/styles/others/style[@name='" + "Copy of EBook (epub)" + "']/styleProperty[@name='IncludeImage']/@value";
                 XmlNode includeImageNode = xDoc.SelectSingleNode(xPath);
                 if (includeImageNode!= null && includeImageNode.InnerText == "No")

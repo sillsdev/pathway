@@ -1261,9 +1261,9 @@ namespace SIL.PublishingSolution
             this.chkIncludeImage.AutoSize = true;
             this.chkIncludeImage.Location = new System.Drawing.Point(51, 159);
             this.chkIncludeImage.Name = "chkIncludeImage";
-            this.chkIncludeImage.Size = new System.Drawing.Size(93, 17);
+            this.chkIncludeImage.Size = new System.Drawing.Size(98, 17);
             this.chkIncludeImage.TabIndex = 39;
-            this.chkIncludeImage.Text = "Include Image";
+            this.chkIncludeImage.Text = "Include Images";
             this.chkIncludeImage.UseVisualStyleBackColor = true;
             this.chkIncludeImage.CheckedChanged += new System.EventHandler(this.chkIncludeImage_CheckedChanged);
             // 
