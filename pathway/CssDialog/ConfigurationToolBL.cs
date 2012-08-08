@@ -3620,7 +3620,8 @@ namespace SIL.PublishingSolution
                     return;
                 }
                 string styleName = cTool.TxtName.Text;
-                FileName = cTool.TxtName.Text + ".css";
+                //FileName = GetCssFileName(cTool.TxtName.Text);
+                FileName = cTool.StylesGrid[ColumnFile, SelectedRowIndex].Value.ToString();
                 cTool.StylesGrid[ColumnFile, SelectedRowIndex].Value = FileName;
 
                 if (_screenMode == ScreenMode.New) // Add
