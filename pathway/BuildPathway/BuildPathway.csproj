@@ -357,7 +357,7 @@
     <CallTarget Targets="BeforeBuild" Condition=" '$(ConfTag)' != 'XeLaTeX' and '$(ConfTag)' != 'YouVersion' " />
     <CallTarget Targets="XeLaTeXBeforeBuild" Condition=" '$(ConfTag)' == 'XeLaTeX' " />
     <CallTarget Targets="YouVersionBeforeBuild" Condition=" '$(ConfTag)' == 'YouVersion' " />
-    <CallTarget Targets="WebonaryBeforeBuild" Condition="$(OS) != 'Linux'" />
+    <CallTarget Targets="WebonaryBeforeBuild" Condition="$(OS) != 'Linux' and '$(ConfTag)' != 'XeLaTeX' and '$(ConfTag)' != 'YouVersion'" />
     <Message Text="BUILD_NUMBER: $(BUILD_NUMBER)" Importance="high" />
     <CallTarget Targets="Wix" Condition="$(OS) != 'Linux'"/>
   </Target>
@@ -510,16 +510,19 @@
     <Copy SourceFiles="@(Paratexmf)" DestinationFiles="@(Paratexmf->'Files\pwtex\texmf\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Exec Command="mktexlsr ..\..\texmf" WorkingDirectory="Files\pwtex\bin\win32" Condition="$(OS) != 'Linux'" />
     <Exec Command="mktexlsr ..\..\texmf-var" WorkingDirectory="Files\pwtex\bin\win32" Condition="$(OS) != 'Linux'" />
+    <Exec Command="mktexlsr ..\..\texmf-dist" WorkingDirectory="Files\pwtex\bin\win32" Condition="$(OS) != 'Linux'" />
     <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="..\XeLaTexConvert/XeLaTexExe/bin" Match="i386-linux" Condition="$(Platform) == 'x86'" >
       <Output TaskParameter="Folders" ItemName="bdir"/>
     </MSBuild.ExtensionPack.FileSystem.Folder>
     <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
     <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf-var" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
+    <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf-dist" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
     <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="..\XeLaTexConvert/XeLaTexExe/bin" Match="x86_64-linux" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" >
       <Output TaskParameter="Folders" ItemName="bdir"/>
     </MSBuild.ExtensionPack.FileSystem.Folder>
     <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
     <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf-var" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
+    <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf-dist" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
   </Target>
   <ItemGroup>
     <XeLaTexExe Include="..\XeLaTexConvert\XeLaTexExe\**\*.*" Exclude="..\XeLaTexConvert\XeLaTexExe\**\.svn\**\*.*" />
