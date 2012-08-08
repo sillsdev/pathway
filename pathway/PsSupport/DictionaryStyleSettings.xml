@@ -189,6 +189,18 @@
       <option name="Non-Commercial No Derivatives" file="CC-by-nc-nd.xhtml"/>
       <option name="Intended for Sale" file="Selling.xhtml"/>
     </feature>
+    <feature name="Lic_SIL_x0020_International">
+      <option name="Draft" file="SIL_Draft.xhtml"/>
+      <option name="Non-Commercial Share Alike" file="SIL_CC-by-nc-sa.xhtml"/>
+      <option name="Non-Commercial No Derivatives" file="SIL_CC-by-nc-nd.xhtml"/>
+      <option name="Intended for Sale" file="SIL_Selling.xhtml"/>
+    </feature>
+    <feature name="Lic_Wycliffe_x0020_Inc.">
+      <option name="Draft" file="WBT_Draft.xhtml"/>
+      <option name="Non-Commercial Share Alike" file="WBT_CC-by-nc-sa.xhtml"/>
+      <option name="Non-Commercial No Derivatives" file="WBT_CC-by-nc-nd.xhtml"/>
+      <option name="Intended for Sale" file="WBT_Selling.xhtml"/>
+    </feature>
     <feature name="Lic_United Bible Societies">
       <option name="Draft" file="UBS_Draft.xhtml"/>
     </feature>
@@ -349,7 +361,7 @@
         <styleProperty name="AddColophonPage" value="Yes" />
         <styleProperty name="BaseFontSize" value="13" />
         <styleProperty name="DefaultLineHeight" value="125" />
-        <styleProperty name="DefaultAlignment" value="Justify" />
+        <styleProperty name="DefaultAlignment" value="Left" />
         <styleProperty name="ChapterNumbers" value="Drop Cap" />
         <styleProperty name="MaxImageWidth" value="600" />
         <styleProperty name="EmbedFonts" value="Yes"/>

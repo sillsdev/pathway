@@ -393,6 +393,10 @@ namespace SIL.Tool
                     sb.Append("<img src='WBT_H_RGB_red.png' alt='Wycliffe Logo'/>");
                 }
             }
+            else if (Param.GetOrganization().StartsWith("Wycliffe"))
+            {
+                sb.Append("<img src='WBT_H_RGB_red.png' alt='Wycliffe Logo'/>");
+            }
             sb.AppendLine("</p>");
             sb.AppendLine("</div>");
             return sb.ToString();
@@ -425,6 +429,10 @@ namespace SIL.Tool
                 {
                     File.Copy(Path.Combine(strCopyrightFolder, "WBT_H_RGB_red.png"), Path.Combine(outputFolder, "WBT_H_RGB_red.png"), true);
                 }
+            }
+            else if (Param.GetOrganization().StartsWith("Wycliffe"))
+            {
+                File.Copy(Path.Combine(strCopyrightFolder, "WBT_H_RGB_red.png"), Path.Combine(outputFolder, "WBT_H_RGB_red.png"), true);
             }
             File.Copy(Path.Combine(strCopyrightFolder, "Copy.css"), Path.Combine(outputFolder, "Copy.css"), true);
         }
@@ -523,11 +531,16 @@ namespace SIL.Tool
                 var languageName = Common.GetLanguageName(languageCode);
                 sb.Append("<h1>About this document</h1>");
                 sb.Append("<p>This document contains data written in ");
-                sb.Append(languageName.Length > 0 ? languageName : languageCode);
-                sb.Append(". For more information about this language, visit <a href='http://www.ethnologue.com/show_language.asp?code=");
+                if (languageName.Length > 0)
+                {
+                    sb.Append(languageName);
+                }
+                sb.Append("[");
                 sb.Append(languageCode);
+                sb.Append("]. For more information about this language, visit <a href='http://www.ethnologue.com/show_language.asp?code=");
+                sb.Append(languageCode.Substring(0,3));
                 sb.Append("'>http://www.ethnologue.com/show_language.asp?code=");
-                sb.Append(languageCode);
+                sb.Append(languageCode.Substring(0,3));
                 sb.Append("</a>.</p>  ");
             }
             return sb.ToString();

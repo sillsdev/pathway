@@ -151,12 +151,12 @@
     <value>No SIL Fonts Found</value>
   </data>
   <data name="ExportCallingEpubValidator" xml:space="preserve">
-    <value>Export to .epub has completed successfully. Pathway will now launch the .epub validation tool to verify the contents of the document.</value>
+    <value>Export to .epub has completed successfully.</value>
   </data>
   <data name="ExportComplete" xml:space="preserve">
     <value>Export Complete</value>
   </data>
-	<data name="Exportepub_Export_Exporting__epub_file">
-		<value xml:space="preserve">Exporting .epub file</value>
-	</data>
+  <data name="Exportepub_Export_Exporting__epub_file" xml:space="preserve">
+    <value>Exporting .epub file</value>
+  </data>
 </root>
