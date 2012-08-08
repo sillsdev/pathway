@@ -150,6 +150,8 @@
 .Paragraph {
     text-indent: 12pt;
     margin-left: 0pt;
+	orphans: 2;
+    widows:2;
 }
 .Paragraph_Continuation {
     text-indent: 0pt;
@@ -157,6 +159,8 @@
 }
 .Paragraph1 {
     margin-left: 0pt;
+	orphans: 2;
+    widows:2;
 }
 
 .parallel_passage_reference,  .Parallel_Passage_Reference {
