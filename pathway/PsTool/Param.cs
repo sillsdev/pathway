@@ -230,11 +230,17 @@ namespace SIL.PublishingSolution
 				xmlReaderSettings.ValidationType = ValidationType.Schema;
 				var resolver = new XmlUrlResolver();
 				resolver.Credentials = System.Net.CredentialCache.DefaultCredentials;
-				xmlReaderSettings.XmlResolver = resolver;
-				xmlReaderSettings.ValidationEventHandler += new ValidationEventHandler (ValidationCallBack);
+                if (Common.IsUnixOS())
+                {
+                    xmlReaderSettings.XmlResolver = resolver;
+                }
+                else
+                {
+                    xmlReaderSettings.XmlResolver = null;
+                }
+			    xmlReaderSettings.ValidationEventHandler += new ValidationEventHandler (ValidationCallBack);
 	            _validateXmlSuccess = true;
 	            var reader = XmlReader.Create(path, xmlReaderSettings);
-	
 				xmlMap.Load(reader);
 	            reader.Close();
 	            if (!_validateXmlSuccess)
