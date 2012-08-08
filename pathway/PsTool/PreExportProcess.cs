@@ -1304,6 +1304,58 @@ namespace SIL.Tool
             Common.FileInsertText(inputCssFilePath, frontMatterCSSStyle);
         }
 
+
+        /// <summary>
+        /// This method to include the dummy Title_secondary if the Title_Main don't have this node. So it helps to
+        /// produce output with Tile_Main starts on first line.
+        /// </summary>
+        /// <param name="inputXhtmlFilePath">Input XHTML file</param>
+        public void InsertDummyTitleSecondary(string inputXhtmlFilePath)
+        {
+            if(_projInfo.ProjectInputType.ToLower() != "scripture") return;
+            XmlDocument xmldoc = Common.DeclareXMLDocument(true);
+            XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmldoc.NameTable);
+            namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            FileStream fs = File.OpenRead(inputXhtmlFilePath);
+            xmldoc.Load(fs);
+            fs.Close();
+            XmlNodeList titleMainNodeList = xmldoc.SelectNodes("//div[@class='Title_Main']", namespaceManager);
+            if (titleMainNodeList != null && titleMainNodeList.Count > 0)
+            {
+                for (int i = 0; i < titleMainNodeList.Count; i++)
+                {
+                    XmlNode node = titleMainNodeList[i];
+                    if(node.ChildNodes.Count > 0)
+                    {
+                        bool isTitleSecExists = false;
+                        XmlNodeList spanList = node.SelectNodes(".//span", namespaceManager);
+                        for (int j = 0; j < spanList.Count; j++)
+                        {
+                            var xmlAttributeCollection = spanList[j].Attributes;
+                            if (xmlAttributeCollection != null && xmlAttributeCollection["class"] != null && xmlAttributeCollection["class"].Value.ToLower() == "title_secondary")
+                            {
+                                isTitleSecExists = true;
+                            }
+                        }
+                        if(isTitleSecExists == false)
+                        {
+                            XmlNode newNodeSpan = xmldoc.CreateElement("span");
+                            XmlAttribute xmlAttribute = xmldoc.CreateAttribute("class");
+                            xmlAttribute.Value = "Title_Secondary";
+                            newNodeSpan.InnerText = " ";
+                            newNodeSpan.Attributes.Append(xmlAttribute);
+
+                            node.InsertBefore(newNodeSpan, node.FirstChild);
+                        }
+
+                    }
+                }
+
+            }
+            xmldoc.Save(inputXhtmlFilePath);
+        }
+
+
         //public void InsertLoFrontMatterCssFile(string inputCssFilePath)
         //{
         //    Param.LoadSettings();
