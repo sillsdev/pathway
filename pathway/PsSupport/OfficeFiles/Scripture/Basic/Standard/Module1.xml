@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
-<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">
-&apos;Changed On Feb-24-2012 for TD-2858,2937(OpenOffice: Align Cover Page Image to &quot;Anchor to Page&quot;)
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">&apos;Changed On Aug-08-2012 for TD-3098(BASIC runtime error on Scripture preview)
 
 &apos;Define the values to Constant Variables for Reference Hidden Paragraph Style
 Const FIRSTGUIDESTYLE = &quot;GuideL&quot;
@@ -34,7 +33,7 @@ Dim CanSave as Boolean
 
 &apos;This procedure set the dialgue to correct Update References 
 Sub StartDontForget
-
+On Error GoTo MyError:
 	TurnOffNonPrintingCharacters() 
 	
 	AlingOverlappingImages()
@@ -53,7 +52,10 @@ Sub StartDontForget
 	If IsCoverImageInserted = &quot;true&quot; And Right(Trim(ThisComponent.Title),4) = &quot;.odm&quot; Then
 		SetImageToCoverPage()
 	End If
+	Exit Sub
+MyError:
 End Sub
+
 
 &apos;Update the Table of Content
 Sub UpdateTOC
@@ -375,7 +377,7 @@ End Function
 &apos;This procedure exports Odt file into Word/PDF based on the OutputFormat in given FilePath
 Sub ExportToDOC_PDF
 &apos;stardesktop.terminate 
-&apos;On Error GoTo MyError:
+On Error GoTo MyError:
 	Dim FilePathWithName,filterType as string
 	Dim oSvc as Object
    	oDoc = ThisComponent 
@@ -394,13 +396,17 @@ Sub ExportToDOC_PDF
 		oSvc = createUnoService(&quot;com.sun.star.system.SystemShellExecute&quot;) 
 		oSvc.execute(FilePathWithName, &quot;&quot;, 0) 
 	End If
-	
+
+	&apos;msgbox(&quot;dispose&quot;)
 	oDoc.dispose()
+	&apos;msgbox(&quot;disposeEnd&quot;)
 	&apos;wait 5000 
-&apos;Exit Sub
-&apos;MyError:
-	&apos;msgbox &quot;Same file has been opened already&quot; , 0 + 64,  &quot;File Error&quot;	
+Exit Sub
+MyError:
+&apos;	msgbox &quot;Same file has been opened already&quot; , 0 + 64,  &quot;File Error&quot;	
 End Sub
+
+
 &apos;This function sets the Property Value as Word or PDF
 Function MakePropertyValue( Optional cName As String, Optional uValue ) As com.sun.star.beans.PropertyValue 
    Dim oPropertyValue As New com.sun.star.beans.PropertyValue 
