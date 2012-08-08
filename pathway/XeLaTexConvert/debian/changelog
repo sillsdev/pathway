@@ -1,5 +1,7 @@
-pathway-xelatex (1.5.0.2463-1) unstable; urgency=high
+pathway-xelatex (1.6.0.2528-1) unstable; urgency=high
 
+  * 1.6.0.2528 spint
+    - Update to TexLive 2012
   * 1.5.0.2463 spint
     - First release of XeLaTex for Pathway on Linux
 
