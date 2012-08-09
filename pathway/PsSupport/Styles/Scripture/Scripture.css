@@ -248,6 +248,7 @@ span {
 }
 .Title_Secondary {
     display: block;
+	page-break-before: always;
 }
 .Verse_Number {
     font-size:6pt;
