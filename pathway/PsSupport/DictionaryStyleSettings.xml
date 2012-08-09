@@ -423,10 +423,10 @@
       <defaultValue></defaultValue>
     </meta>
     <meta name="Copyright Holder" outputTypes="all">
-      <organizationDefault organizationName="SIL_x0020_International" Locked="false">_x00A9__x0020_2012_x0020_SIL_x0020_International._x0020_All_x0020_Rights_x0020_Reserved.</organizationDefault>
+      <organizationDefault organizationName="SIL_x0020_International" Locked="false">_x00A9__x0020_2012_x0020_SIL_x0020_International.</organizationDefault>
       <organizationDefault organizationName="United_x0020_Bible_x0020_Societies" Locked="false">_x00A9__x0020_2012_x0020_United_x0020_Bible_x0020_Societies._x0020_All_x0020_Rights_x0020_Reserved.</organizationDefault>
       <organizationDefault organizationName="Pioneer_x0020_Bible_x0020_Translators" Locked="false">_x00A9__x0020_2012_x0020_Pioneer_x0020_Bible_x0020_Translators._x0020_All_x0020_Rights_x0020_Reserved.</organizationDefault>
-      <defaultValue>_x00A9__x0020_2012._x0020_All_x0020_Rights_x0020_Reserved.</defaultValue>
+      <defaultValue>_x00A9__x0020_2012_x0020_._x0020_All_x0020_Rights_x0020_Reserved.</defaultValue>
     </meta>
     <meta name="Type" outputTypes="all">
       <defaultValue></defaultValue>

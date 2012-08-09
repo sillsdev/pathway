@@ -529,7 +529,7 @@ namespace SIL.Tool
             if (languageCode.Length > 0)
             {
                 var languageName = Common.GetLanguageName(languageCode);
-                sb.Append("<h1>About this document</h1>");
+                sb.Append("<p><em>About this document</em></p>");
                 sb.Append("<p>This document contains data written in ");
                 if (languageName.Length > 0)
                 {
