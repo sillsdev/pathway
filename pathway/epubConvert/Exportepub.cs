@@ -176,7 +176,7 @@ namespace SIL.PublishingSolution
 
                 isIncludeImage = GetIncludeImageStatus(projInfo.SelectedTemplateStyle);
 
-                InsertBeforeAfterInXHTML(projInfo);
+                //InsertBeforeAfterInXHTML(projInfo);
 
                 _langFontDictionary = new Dictionary<string, string>();
                 _embeddedFonts = new Dictionary<string, EmbeddedFont>();
@@ -257,47 +257,17 @@ namespace SIL.PublishingSolution
                 // so we can't use it.)
                 // TODO: remove this line when TE provides valid XHTML output.
 
-                if (langArray.Length > 0)
-                {
-                    //XmlDocument xdoc = Common.DeclareXMLDocument(true);
-                    //XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xdoc.NameTable);
-                    //namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-                    //xdoc.Load(preProcessor.ProcessedXhtml);
-                    ////XmlNode bookNode1 = xdoc.DocumentElement;
-                    //string xPath = "//xhtml:div[@class='scrBook']";
-                    //XmlNodeList node = xdoc.GetElementsByTagName("html", "http://www.w3.org/1999/xhtml");
-
-                    //if (node[0].Attributes.Count > 0 && node[0].Attributes["lang"] != null)
-                    //{
-                    //    node[0].Attributes["lang"].Value = langArray[0];
-                    //}
-                    //else
-                    //{
-                    //    XmlAttribute attr = xdoc.CreateAttribute("lang");
-                    //    attr.Value = langArray[0];
-                    //    xdoc.DocumentElement.SetAttributeNode(attr);
-                    //}
-
-                    //if (node[0].Attributes.Count > 0 && node[0].Attributes["dir"] != null)
-                    //{
-                    //    node[0].Attributes["dir"].Value = Common.GetTextDirection(langArray[0]);
-                    //}
-                    //else
-                    //{
-                    //    XmlAttribute attr = xdoc.CreateAttribute("dir");
-                    //    attr.Value = Common.GetTextDirection(langArray[0]);
-                    //    xdoc.DocumentElement.SetAttributeNode(attr);
-                    //}
-                    //xdoc.Save(preProcessor.ProcessedXhtml);
-                    Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html",
-                                               string.Format(
-                                                   "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'",
-                                                   langArray[0], Common.GetTextDirection(langArray[0])));
-                    Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html>",
-                                               string.Format(
-                                                   "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'>",
-                                                   langArray[0], Common.GetTextDirection(langArray[0])));
-                }
+                //if (langArray.Length > 0)
+                //{
+                //    Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html",
+                //                               string.Format(
+                //                                   "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'",
+                //                                   langArray[0], Common.GetTextDirection(langArray[0])));
+                //    Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html>",
+                //                               string.Format(
+                //                                   "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'>",
+                //                                   langArray[0], Common.GetTextDirection(langArray[0])));
+                //}
 
                 ApplyXslt(preProcessor.ProcessedXhtml, _noXmlSpace);
                 // end EDB 10/22/2010

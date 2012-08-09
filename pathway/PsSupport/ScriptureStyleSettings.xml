@@ -169,11 +169,17 @@
       <option name="Non-Commercial No Derivatives" file="CC-by-nc-nd.xhtml"/>
       <option name="Intended for Sale" file="Selling.xhtml"/>
     </feature>
-    <feature name="Lic_SIL International">
+    <feature name="Lic_SIL_x0020_International">
       <option name="Draft" file="SIL_Draft.xhtml"/>
       <option name="Non-Commercial Share Alike" file="SIL_CC-by-nc-sa.xhtml"/>
       <option name="Non-Commercial No Derivatives" file="SIL_CC-by-nc-nd.xhtml"/>
       <option name="Intended for Sale" file="SIL_Selling.xhtml"/>
+    </feature>
+    <feature name="Lic_Wycliffe_x0020_Inc.">
+      <option name="Draft" file="WBT_Draft.xhtml"/>
+      <option name="Non-Commercial Share Alike" file="WBT_CC-by-nc-sa.xhtml"/>
+      <option name="Non-Commercial No Derivatives" file="WBT_CC-by-nc-nd.xhtml"/>
+      <option name="Intended for Sale" file="WBT_Selling.xhtml"/>
     </feature>
     <feature name="Lic_United Bible Societies">
       <option name="Draft" file="UBS_Draft.xhtml"/>
@@ -302,7 +308,7 @@
         <styleProperty name="FileProduced" value="One" />
         <styleProperty name="RedLetter" value="No" />
         <styleProperty name="Information" value="DRAFT Bible text." />
-        <styleProperty name="Copyright" value="© 2011 Wycliffe Bible Translators, Inc." />
+        <styleProperty name="Copyright" value="© 2012 Wycliffe Inc." />
         <styleProperty name="Icon" value="Icon.png" />
 		<styleProperty name="Language" value="English" />
       </style>
@@ -316,11 +322,11 @@
       <style name="EBook (epub)" file="epub.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p2.jpg" shown="Yes">
         <description>1 column flowed text, for use in e-books</description>
         <styleProperty name="CoverImage" value="cover.png"/>
-        <styleProperty name="TOCLevel" value="2 - Book and Chapter"/>
+        <styleProperty name="TOCLevel" value="1 - Book Only"/>
         <styleProperty name="AddColophonPage" value="Yes" />
         <styleProperty name="BaseFontSize" value="13" />
         <styleProperty name="DefaultLineHeight" value="125" />
-        <styleProperty name="DefaultAlignment" value="Justify" />
+        <styleProperty name="DefaultAlignment" value="Left" />
         <styleProperty name="ChapterNumbers" value="Drop Cap" />
         <styleProperty name="References" value="After Each Section" />
         <styleProperty name="MaxImageWidth" value="600" />
@@ -340,7 +346,7 @@
         <styleProperty name="Coverage" value=" " />
 		<styleProperty name="IncludeImage" value="Yes" />
         <styleProperty name="Information" value="DRAFT Bible text." />
-        <styleProperty name="Copyright" value="© 2011 Wycliffe Bible Translators, Inc." />
+        <styleProperty name="Copyright" value="© 2012 Wycliffe Inc." />
       </style>
     </others>
   </styles>
@@ -362,7 +368,7 @@
   <Organizations>
     <Organization>SIL International</Organization>
     <Organization>United Bible Societies</Organization>
-	  <Organization>Wycliffe Bible Translators</Organization>
+	  <Organization>Wycliffe Inc.</Organization>
     <Organization>Pioneer Bible Translators</Organization>
   </Organizations>
   <Metadata>
@@ -375,7 +381,7 @@
       <defaultValue></defaultValue>
     </meta>
     <meta name="Publisher" outputTypes="all">
-      <organizationDefault organizationName="SIL_x0020_International" Locked="false">Wycliffe_x0020_Bible_x0020_Translators,_x0020_Inc.</organizationDefault>
+      <organizationDefault organizationName="SIL_x0020_International" Locked="false">Wycliffe_x0020_Inc.</organizationDefault>
       <organizationDefault organizationName="United_x0020_Bible_x0020_Societies" Locked="false">United_x0020_Bible_x0020_Societies</organizationDefault>
       <organizationDefault organizationName="Pioneer_x0020_Bible_x0020_Translators" Locked="false">Pioneer_x0020_Bible_x0020_Translators</organizationDefault>
       <defaultValue></defaultValue>
@@ -384,10 +390,11 @@
       <defaultValue></defaultValue>
     </meta>
     <meta name="Copyright Holder" outputTypes="all">
-      <organizationDefault organizationName="SIL_x0020_International" Locked="false">_x00A9__x0020_2012_x0020_Wycliffe_x0020_Bible_x0020_Translators,_x0020_Inc._x0020_All_x0020_Rights_x0020_Reserved.</organizationDefault>
+      <organizationDefault organizationName="SIL_x0020_International" Locked="false">_x00A9__x0020_2012_x0020_Wycliffe_x0020_Inc.</organizationDefault>
+      <organizationDefault organizationName="Wycliffe_x0020_Inc." Locked="false">_x00A9__x0020_2012_x0020_Wycliffe_x0020_Inc.</organizationDefault>
       <organizationDefault organizationName="United_x0020_Bible_x0020_Societies" Locked="false">_x00A9__x0020_2012_x0020_United_x0020_Bible_x0020_Societies._x0020_All_x0020_Rights_x0020_Reserved.</organizationDefault>
       <organizationDefault organizationName="Pioneer_x0020_Bible_x0020_Translators" Locked="false">_x00A9__x0020_2012_x0020_Pioneer_x0020_Bible_x0020_Translators._x0020_All_x0020_Rights_x0020_Reserved.</organizationDefault>
-      <defaultValue>_x00A9__x0020_2012._x0020_All_x0020_Rights_x0020_Reserved.</defaultValue>
+      <defaultValue>_x00A9__x0020_2012_x0020_._x0020_All_x0020_Rights_x0020_Reserved.</defaultValue>
     </meta>
     <meta name="Type" outputTypes="all">
       <defaultValue></defaultValue>
