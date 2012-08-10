@@ -104,10 +104,6 @@ namespace SIL.PublishingSolution
                 Dictionary<string, string> mobilefeature = Param.GetItemsAsDictionary("//stylePick/styles/mobile/style[@name='" + layout + "']/styleProperty");
                 string languageSelection = string.Empty;
 
-                if (mobilefeature.ContainsKey("RedLetter") && mobilefeature["RedLetter"] == "Yes")
-                {
-                    
-                }
                 if (mobilefeature.ContainsKey("Language") && mobilefeature["Language"] != null)
                 {
                     languageSelection = mobilefeature["Language"].ToString();
@@ -122,13 +118,60 @@ namespace SIL.PublishingSolution
 
                 goBibleCreatorPath = Path.Combine(goBibleCreatorPath, "ui.properties");
 
-                File.Copy(filePaths[0], goBibleCreatorPath, true);
+                if (File.Exists(filePaths[0]))
+                    File.Copy(filePaths[0], goBibleCreatorPath, true);
 
                 BuildApplication();
                 success = true;
                 inProcess.PerformStep();
                 inProcess.Close();
                 Cursor.Current = myCursor;
+
+                string jadFile = Path.Combine(processFolder, GetInfo(Param.Title) + ".jad");
+
+                if (File.Exists(jadFile))
+                {
+                    // Failed to send the .jar to a bluetooth device. Tell the user to do it manually.
+                    string msg = string.Format("Please copy the file {0} to your phone", jadFile);
+                    MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                if (File.Exists(Path.Combine(exportGoBiblePath, _iconFile)))
+                {
+                    File.Delete(Path.Combine(exportGoBiblePath, _iconFile));
+                }
+
+                var outputFiles = Directory.GetFiles(processFolder);
+                foreach (var outputFile in outputFiles)
+                {
+                    try
+                    {
+                        // Did we modify this file during our export? If so, delete it
+                        if (outputFile.EndsWith(".xhtml"))
+                        {
+                            File.Delete(outputFile);
+                        }
+                        if (outputFile.EndsWith(".css"))
+                        {
+                            File.Delete(outputFile);
+                        }
+                        if (outputFile.EndsWith(".tmp"))
+                        {
+                            File.Delete(outputFile);
+                        }
+                        // delete the Scripture.de / Dictionary.de file as well
+                        if (outputFile.EndsWith(".de"))
+                        {
+                            File.Delete(outputFile);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        // problem with this file - just continue with the next one
+                        continue;
+                    }
+
+                }
             }
             catch (Exception ex)
             {
