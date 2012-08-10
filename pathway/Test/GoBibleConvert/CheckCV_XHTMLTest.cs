@@ -49,7 +49,7 @@ namespace Test.GoBibleConvert
         ///A test for XhtmlCheck
         ///</summary>
         [Test]
-        [Ignore("Hangs Team City")]
+        [Category("SkipOnTeamCity")]
         public void XhtmlCheck()
         {
             const string fileName = "1pe.xhtml";
@@ -79,7 +79,7 @@ namespace Test.GoBibleConvert
         }
 
         [Test]
-        [Ignore("Hangs Team City")]
+        [Category("SkipOnTeamCity")]
         public void RestructureTest()
         {
             const string fileName = "1pe.xhtml";
@@ -106,6 +106,7 @@ namespace Test.GoBibleConvert
         }
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void CreateCollectionTest()
         {
             const string fileName = "1pe_cv.xhtml";
@@ -208,6 +209,7 @@ namespace Test.GoBibleConvert
         }
 
         [Test]
+        [Category("SkipOnTeamCity")]
         public void ChaptersTest()
         {
             const string fileName = "1pe.xhtml";
@@ -221,6 +223,7 @@ namespace Test.GoBibleConvert
         ///A test for DuplicateBooks 
         ///</summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void IsDuplicateBooksTest()
         {
             XmlDocument xmlDocument = new XmlDocument();
@@ -234,6 +237,7 @@ namespace Test.GoBibleConvert
         ///A test for DuplicateBooks is false
         ///</summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void NotIsDuplicateBooksTest()
         {
             XmlDocument xmlDocument = new XmlDocument();
@@ -247,6 +251,7 @@ namespace Test.GoBibleConvert
         /// Test if project name can be estracted from PublicationInformation
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void GetProjectNameTest()
         {
             const string fileName = "1pe.xhtml";
@@ -262,6 +267,7 @@ namespace Test.GoBibleConvert
         /// Test if project name can be estracted from PublicationInformation
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void GetBookCode1Test()
         {
             const string fileName = "1pe.xhtml";
@@ -277,6 +283,7 @@ namespace Test.GoBibleConvert
         /// Test if project name can be estracted from PublicationInformation
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void GetCollectionNameTest()
         {
             const string origFileName = "1pe.xhtml";
@@ -291,6 +298,7 @@ namespace Test.GoBibleConvert
         /// Test if project name can be estracted from PublicationInformation
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void GetCollectionName2Test()
         {
             const string origFileName = "luke.xhtml";
@@ -305,6 +313,7 @@ namespace Test.GoBibleConvert
         /// Test when book data is not nested under book tag.
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void BookDataNestedFalseTest()
         {
             const string origFileName = "luke.xhtml";
@@ -319,6 +328,7 @@ namespace Test.GoBibleConvert
         /// Test when book data is nested under book tag.
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void BookDataNestedTrueTest()
         {
             const string origFileName = "1pe.xhtml";
@@ -333,6 +343,7 @@ namespace Test.GoBibleConvert
         /// Nest book data under div with scrBook class.
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void NestBookDataTest()
         {
             const string origFileName = "luke.xhtml";
