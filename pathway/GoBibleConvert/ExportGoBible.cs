@@ -96,8 +96,39 @@ namespace SIL.PublishingSolution
                 if (iconDirectory != exportGoBiblePath)
                     File.Copy(iconFullName, Path.Combine(exportGoBiblePath, _iconFile), overwrite);
 
+
+                Param.LoadSettings();
+                Param.SetValue(Param.InputType, "Scripture");
+                Param.LoadSettings();
+                string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
+                Dictionary<string, string> mobilefeature = Param.GetItemsAsDictionary("//stylePick/styles/mobile/style[@name='" + layout + "']/styleProperty");
+                string languageSelection = string.Empty;
+
+                if (mobilefeature.ContainsKey("RedLetter") && mobilefeature["RedLetter"] == "Yes")
+                {
+                    
+                }
+                if (mobilefeature.ContainsKey("Language") && mobilefeature["Language"] != null)
+                {
+                    languageSelection = mobilefeature["Language"].ToString();
+                }
+
+                string goBibleFullPath = Common.FromRegistry("GoBible");
+                string goBibleCreatorPath = Path.Combine(goBibleFullPath, "GoBibleCore");
+
+                string languageLocationPath = Path.Combine(goBibleFullPath, "User Interface");
+                languageLocationPath = Path.Combine(languageLocationPath, languageSelection);
+                string[] filePaths = Directory.GetFiles(languageLocationPath, "*.properties");
+
+                goBibleCreatorPath = Path.Combine(goBibleCreatorPath, "ui.properties");
+
+                File.Copy(filePaths[0], goBibleCreatorPath, true);
+
                 BuildApplication();
                 success = true;
+                inProcess.PerformStep();
+                inProcess.Close();
+                Cursor.Current = myCursor;
             }
             catch (Exception ex)
             {
