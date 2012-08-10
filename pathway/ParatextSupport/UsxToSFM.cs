@@ -137,7 +137,6 @@ namespace SIL.PublishingSolution
         {
             string line = "\\" + _style + Space + _code + Space + _content;
             _sfmFile.WriteLine(line);
-
         }
 
 
@@ -164,6 +163,10 @@ namespace SIL.PublishingSolution
                 prefix = "\\" + _style + Space;
             }
             string line = prefix + _content + EndText();
+
+            if (_style == "h")
+                Common.BookNameCollection.Add(_content);
+
             _sfmFile.Write(line);
         }
 

@@ -31,7 +31,7 @@ namespace Test.GoBibleConvert
     ///This is a test class for CheckCV_XHTMLTest
     ///</summary>
     [TestFixture]
-    public class CheckCV_XHTMLTest : ExportGoBible
+    public class CheckCV_XHTMLTest : OneExportGoBible
     {
         private readonly Mockery mocks = new Mockery();
         #region Setup
