@@ -165,8 +165,10 @@ namespace SIL.PublishingSolution
             string line = prefix + _content + EndText();
 
             if (_style == "h")
-                Common.BookNameCollection.Add(_content);
-
+            {
+                if (Common.BookNameCollection.Contains(_content) == false)
+                    Common.BookNameCollection.Add(_content);
+            }
             _sfmFile.Write(line);
         }
 
