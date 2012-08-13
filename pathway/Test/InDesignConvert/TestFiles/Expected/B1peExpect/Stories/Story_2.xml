@@ -1444,21 +1444,21 @@
         <Content>Kori vido ke horuhaihadi na ghaghanamiu eigna sa fata, oti vaututunia a God keda hatheghamu, eigna imanea ke toghaghamu me reireghighamu.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/pictureCaption_1">
-      <Rectangle Self="u1fa" StoryTitle="$ID/" ContentType="GraphicType" StrokeWeight="0" StrokeColor="Swatch/None" GradientFillStart="0 0" GradientFillLength="0" GradientFillAngle="0" GradientStrokeStart="0 0" GradientStrokeLength="0" GradientStrokeAngle="0" Locked="false" LocalDisplaySetting="Default" GradientFillHiliteLength="0" GradientFillHiliteAngle="0" GradientStrokeHiliteLength="0" GradientStrokeHiliteAngle="0" AppliedObjectStyle="ObjectStyle/$ID/[Normal Graphics Frame]" ItemTransform="1 0 0 1 18 -18">
+      <Rectangle Self="u1fa" StoryTitle="$ID/" ContentType="GraphicType" StrokeWeight="0" StrokeColor="Swatch/None" GradientFillStart="0 0" GradientFillLength="0" GradientFillAngle="0" GradientStrokeStart="0 0" GradientStrokeLength="0" GradientStrokeAngle="0" Locked="false" LocalDisplaySetting="Default" GradientFillHiliteLength="0" GradientFillHiliteAngle="0" GradientStrokeHiliteLength="0" GradientStrokeHiliteAngle="0" AppliedObjectStyle="ObjectStyle/$ID/[Normal Graphics Frame]" ItemTransform="1 0 0 1 171 -0">
         <Properties>
           <PathGeometry>
             <GeometryPathType PathOpen="false">
               <PathPointArray>
-                <PathPointType Anchor="-18 -18" LeftDirection="-18 -18" RightDirection="-18 -18" />
-                <PathPointType Anchor="-18 18" LeftDirection="-18 18" RightDirection="-18 18" />
-                <PathPointType Anchor="18 18" LeftDirection="18 18" RightDirection="18 18" />
-                <PathPointType Anchor="18 -18" LeftDirection="18 -18" RightDirection="18 -18" />
+                <PathPointType Anchor="-171 -0" LeftDirection="-171 -0" RightDirection="-171 -0" />
+                <PathPointType Anchor="-171 0" LeftDirection="-171 0" RightDirection="-171 0" />
+                <PathPointType Anchor="171 0" LeftDirection="171 0" RightDirection="171 0" />
+                <PathPointType Anchor="171 -0" LeftDirection="171 -0" RightDirection="171 -0" />
               </PathPointArray>
             </GeometryPathType>
           </PathGeometry>
         </Properties>
         <AnchoredObjectSetting AnchoredPosition="Anchored" SpineRelative="false" LockPosition="false" PinPosition="false" AnchorPoint="TopRightAnchor" HorizontalAlignment="RightAlign" HorizontalReferencePoint="ColumnEdge" VerticalAlignment="CenterAlign" VerticalReferencePoint="LineBaseline" AnchorXoffset="0" AnchorYoffset="0" AnchorSpaceAbove="4" />
-        <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="RightSide" TextWrapMode="JumpObjectTextWrap">
+        <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="none" TextWrapMode="BoundingBoxTextWrap">
           <Properties>
             <TextWrapOffset Top="0" Left="0" Bottom="0" Right="0" />
           </Properties>
@@ -1466,7 +1466,7 @@
         </TextWrapPreference>
         <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
         <FrameFittingOption LeftCrop="0" TopCrop="0" RightCrop="0" BottomCrop="0" FittingOnEmptyFrame="ContentToFrame" FittingAlignment="CenterAnchor" />
-        <Image Self="u222" Space="$ID/#Links_RGB" ActualPpi="36 36" EffectivePpi="72 72" ImageRenderingIntent="UseColorSettings" LocalDisplaySetting="Default" ImageTypeName="$ID/JPEG" AppliedObjectStyle="ObjectStyle/$ID/[None]" ItemTransform="0.5 0 0 0.5 -18 -18">
+        <Image Self="u222" Space="$ID/#Links_RGB" ActualPpi="342 0" EffectivePpi="72 72" ImageRenderingIntent="UseColorSettings" LocalDisplaySetting="Default" ImageTypeName="$ID/JPEG" AppliedObjectStyle="ObjectStyle/$ID/[None]" ItemTransform="4.75 0 0 0 -171 -0">
           <Properties>
             <Profile type="string">$ID/None</Profile>
             <GraphicBounds Left="0" Top="0" Right="72" Bottom="72" />

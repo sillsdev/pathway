@@ -51,6 +51,7 @@ namespace Test.GoBibleConvert
         ///Compare files
         /// </summary>      
         [Test]
+        [Category("SkipOnTeamCity")]
         public void Book()
         {
             const string file = "book";
@@ -68,6 +69,7 @@ namespace Test.GoBibleConvert
         ///Compare files
         /// </summary>      
         [Test]
+        [Category("SkipOnTeamCity")]
         public void chapter()
         {
             const string file = "chapter";
@@ -85,6 +87,7 @@ namespace Test.GoBibleConvert
         ///Compare files
         /// </summary>      
         [Test]
+        [Category("SkipOnTeamCity")]
         public void figure()
         {
             const string file = "figure";
@@ -102,6 +105,7 @@ namespace Test.GoBibleConvert
         ///Compare files
         /// </summary>      
         [Test]
+        [Category("SkipOnTeamCity")]
         public void note()
         {
             const string file = "note";
@@ -119,6 +123,7 @@ namespace Test.GoBibleConvert
         ///Compare files
         /// </summary>      
         [Test]
+        [Category("SkipOnTeamCity")]
         public void note_figure()
         {
             const string file = "note_figure";
@@ -136,6 +141,7 @@ namespace Test.GoBibleConvert
         ///Compare files
         /// </summary>      
         [Test]
+        [Category("SkipOnTeamCity")]
         public void para()
         {
             const string file = "para";
@@ -153,6 +159,7 @@ namespace Test.GoBibleConvert
         ///Compare files
         /// </summary>      
         [Test]
+        [Category("SkipOnTeamCity")]
         public void para_char()
         {
             const string file = "para_char";
@@ -170,6 +177,7 @@ namespace Test.GoBibleConvert
         ///Compare files
         /// </summary>      
         [Test]
+        [Category("SkipOnTeamCity")]
         public void para_empty()
         {
             const string file = "para_empty";
@@ -187,6 +195,7 @@ namespace Test.GoBibleConvert
         ///Compare files
         /// </summary>      
         [Test]
+        [Category("SkipOnTeamCity")]
         public void verse()
         {
             const string file = "verse";
@@ -204,6 +213,7 @@ namespace Test.GoBibleConvert
         ///FULL file compare
         /// </summary>      
         [Test]
+        [Category("SkipOnTeamCity")]
         public void rut()
         {
             const string file = "rut";

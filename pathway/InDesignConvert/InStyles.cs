@@ -159,6 +159,53 @@ namespace SIL.PublishingSolution
                 _writer.WriteEndElement();
             }
             _writer.WriteEndElement(); //End RootParagraphStyleGroup
+            CalcColumnWidth();
+        }
+
+        private void CalcColumnWidth()
+        {
+            try
+            {
+                if (_cssProperty.ContainsKey("columns") && _cssProperty["columns"].ContainsKey("column-count"))
+                {
+                    string columnCount = _cssProperty["columns"]["column-count"];
+                    string pageWidth = _cssProperty["@page"]["page-width"];
+                    string pageLeftMargins = _cssProperty["@page"]["margin-left"];
+                    string pageRightMargins = _cssProperty["@page"]["margin-right"];
+                    string columnGap = "20";
+                    if (columnCount == "1")
+                    {
+                        columnGap = "3";
+                        Common.ColumnWidth = (Convert.ToDouble(pageWidth) -
+                                             (Convert.ToDouble(pageLeftMargins) + Convert.ToDouble(columnGap) +
+                                               Convert.ToDouble(pageRightMargins)));
+                    }
+                    else if (columnCount == "2")
+                    {
+                        
+                        //if (_cssProperty["columns"].ContainsKey("column-gap"))
+                        //{
+                        //    columnGap = _cssProperty["columns"]["column-gap"];
+                        //}
+                        Common.ColumnWidth = ((Convert.ToDouble(pageWidth)/2) -
+                                              (Convert.ToDouble(pageLeftMargins) + Convert.ToDouble(columnGap) +
+                                               Convert.ToDouble(pageRightMargins)));
+                    }
+                    else
+                    {
+                        columnGap = "3";
+                        if (_cssProperty["columns"].ContainsKey("column-gap"))
+                            columnGap = _cssProperty["@page"]["column-gap"];
+
+                        Common.ColumnWidth = (Convert.ToDouble(pageWidth) -
+                                              (Convert.ToDouble(pageLeftMargins) + Convert.ToDouble(columnGap) +
+                                               Convert.ToDouble(pageRightMargins)));
+                    }
+                }
+            }
+            catch
+            {
+            }
         }
 
         private void InsertKeepWithNextForSectionHead(KeyValuePair<string, Dictionary<string, string>> cssClass)
