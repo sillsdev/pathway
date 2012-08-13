@@ -1196,6 +1196,7 @@ namespace SIL.PublishingSolution
 
             if (languageList.Count > 0)
             {
+                cTool.DdlLanguage.Items.Clear();
                 foreach (XmlNode language in languageList)
                 {
                     cTool.DdlLanguage.Items.Add(language.InnerText);
