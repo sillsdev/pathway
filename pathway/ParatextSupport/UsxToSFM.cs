@@ -210,8 +210,64 @@ namespace SIL.PublishingSolution
                 _sfmFile.WriteLine();
             }
 
-            line = "\\" + _style + Space + _number + Space + _content.Trim() + EndText();
-            _sfmFile.Write(line);
+            bool isWritten = HandleBridgeVerseNumbers(_number);
+
+            if (!isWritten)
+            {
+                line = "\\" + _style + Space + _number + Space + _content.Trim() + EndText();
+                _sfmFile.Write(line);
+            }
+        }
+
+        private bool HandleBridgeVerseNumbers(string verseNumber)
+        {
+            bool isWritten = false;
+            StringBuilder sb = new StringBuilder();
+            string[] bridgeVerses = verseNumber.Split('-');
+            if (bridgeVerses.Length == 2)
+            {
+                int verseFrom = int.Parse(bridgeVerses[0]);
+
+                if (Common.IsAlphanumeric(bridgeVerses[1]))
+                {
+                    if (bridgeVerses[1].IndexOf("a") > 0)
+                    {
+                        int verseAlpha = Common.GetNumberFromAlphaNumeric(bridgeVerses[1]);
+                        for (int cntVal = verseFrom; cntVal < verseAlpha; cntVal++)
+                        {
+                            sb.AppendLine("\\" + _style + Space + cntVal + Space + "..." + EndText());
+                        }
+                        sb.AppendLine("\\" + _style + Space + verseAlpha + Space + _content.Trim() + EndText());
+                        _sfmFile.Write(sb.ToString());
+                    }
+                }
+                else
+                {
+                    int verseAlpha = int.Parse(bridgeVerses[1]);
+                    for (int cntVal = verseFrom; cntVal < verseAlpha; cntVal++)
+                    {
+                        sb.AppendLine("\\" + _style + Space + cntVal + Space + "..." + EndText());
+                    }
+                    sb.AppendLine("\\" + _style + Space + verseAlpha + Space + _content.Trim() + EndText());
+                    _sfmFile.Write(sb.ToString());
+                }
+                isWritten = true;
+            }
+            else if (bridgeVerses.Length == 1 && Common.IsAlphanumeric(bridgeVerses[0]))
+            {
+                if (bridgeVerses[0].IndexOf("a") > 0)
+                {
+                    int verseAlpha = Common.GetNumberFromAlphaNumeric(bridgeVerses[0]);
+                    sb.AppendLine("\\" + _style + Space + verseAlpha + Space + _content.Trim() + EndText());
+                }
+                else
+                {
+                    sb.AppendLine(_content.Trim() + EndText());
+                }
+                _sfmFile.Write(sb.ToString());
+                isWritten = true;
+            }
+            return isWritten;
         }
 
         /// <summary>
