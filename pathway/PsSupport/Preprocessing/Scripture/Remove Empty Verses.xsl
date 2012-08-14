@@ -14,6 +14,19 @@
         </xsl:copy>
     </xsl:template>
     
-    <xsl:template match="//x:body/x:div/x:span[@class='Verse_Number']"/>
-        
+    <!--xsl:template match="//x:body/x:div/x:span[@class='Verse_Number']"/-->
+    <xsl:template match="*[@class='Verse_Number']">
+        <xsl:variable name="next" select="following-sibling::*[1]"/>
+        <xsl:if test="local-name($next) = 'span'">
+            <xsl:if test="not($next[@class])">
+                <xsl:copy>
+                    <xsl:for-each select="@*">
+                        <xsl:copy/>
+                    </xsl:for-each>
+                    <xsl:apply-templates/>
+                </xsl:copy>
+            </xsl:if>
+        </xsl:if>
+    </xsl:template>
+    
 </xsl:stylesheet>
