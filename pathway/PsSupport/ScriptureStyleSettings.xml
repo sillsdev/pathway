@@ -137,7 +137,7 @@
     </feature>
     <feature name="TOCLevel">
       <option name="1 - Book Only" file="Empty.css" />
-      <option name="2 - Book and Chapter" file="Empty.css" />
+      <option name="2 - Book and Section" file="Empty.css" />
     </feature>
     <feature name="MissingFont">
       <option name="Use Fallback Font" file="Empty.css" />

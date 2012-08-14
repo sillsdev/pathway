@@ -29,7 +29,7 @@
 	</xsl:template>
 
 	<xsl:template match="usfm|usx">
-		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="utf-8" lang="utf-8">
+		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="utf-8">
 			<head>
 				<title/>
 				<link rel="stylesheet" href="{$projName}.css" type="text/css"/>

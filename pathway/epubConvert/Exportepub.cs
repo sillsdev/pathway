@@ -268,6 +268,10 @@ namespace SIL.PublishingSolution
                                                string.Format(
                                                    "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'>",
                                                    langArray[0], Common.GetTextDirection(langArray[0])));
+                    // The TE export outputs both xml:lang and lang parameters
+                    if (projInfo.ProjectInputType.ToLower() == "scripture")
+                        Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "xml:lang=\"utf-8\" lang=\"utf-8\"", "xml:lang=\"utf-8\"");
+                    Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, " lang=\"", " xml:lang=\"");
                 }
 
                 ApplyXslt(preProcessor.ProcessedXhtml, _noXmlSpace);
@@ -334,6 +338,7 @@ namespace SIL.PublishingSolution
                                                    string.Format(
                                                        "<html  xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'>",
                                                        langArray[0], Common.GetTextDirection(langArray[0])));
+                        Common.StreamReplaceInFile(revFile, " lang=\"", " xml:lang=\"");
                     }
                     //MessageBox.Show("applyxslt 1 ");
                     ApplyXslt(revFile, _addRevId);      // also removes xml:space="preserve" attributes
@@ -3476,7 +3481,6 @@ namespace SIL.PublishingSolution
             ncx.WriteEndDocument();
             ncx.Close();
             FixPlayOrder(tocFullPath);
-            //ApplyXslt(tocFullPath, _fixPlayOrder);
             if (_inputType.ToLower() == "dictionary")
             {
                 ApplyXslt(tocFullPath, _addDicTocHeads);
