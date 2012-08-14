@@ -49,6 +49,7 @@ namespace Test.GoBibleConvert
         ///A test for XhtmlCheck
         ///</summary>
         [Test]
+        [Ignore]
         [Category("SkipOnTeamCity")]
         public void XhtmlCheck()
         {
@@ -79,6 +80,7 @@ namespace Test.GoBibleConvert
         }
 
         [Test]
+        [Ignore]
         [Category("SkipOnTeamCity")]
         public void RestructureTest()
         {
@@ -106,6 +108,7 @@ namespace Test.GoBibleConvert
         }
 
         [Test]
+        [Ignore]
         [Category("SkipOnTeamCity")]
         public void CreateCollectionTest()
         {
@@ -151,6 +154,7 @@ namespace Test.GoBibleConvert
         }
 
         [Test]
+        [Ignore]
         [Category("SkipOnTeamCity")]
         public void BuildApplicationTest()
         {
@@ -178,6 +182,7 @@ namespace Test.GoBibleConvert
         }
 
         [Test]
+        [Ignore]
         [Category("SkipOnTeamCity")]
         public void BuildApplication2Test()
         {

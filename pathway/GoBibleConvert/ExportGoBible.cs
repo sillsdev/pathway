@@ -202,7 +202,7 @@ namespace SIL.PublishingSolution
                 sw.WriteLine("MIDlet-Info-URL: http://wap.mygbdomain.org");
                 sw.WriteLine("Codepage: UTF-8");
                 sw.WriteLine("RedLettering: false");
-                sw.WriteLine(@"USFM-TitleTag: \h");
+                sw.WriteLine(@"USFM-TitleTag: \" + Common.BookNameTag);
                 sw.WriteLine("Collection: " + GetInfo(Param.Title));
 
                 string sfmFiles = Path.Combine(exportGoBiblePath, "SFM");

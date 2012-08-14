@@ -227,5 +227,41 @@ namespace Test.GoBibleConvert
             FileAssert.AreEqual(expected, output, file + " test fails");
         }
 
+
+        ///<summary>
+        ///FULL file compare
+        /// </summary>      
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void ACCNT()
+        {
+            const string file = "ACCNT";
+
+            string input = Common.PathCombine(_inputPath, file + ".usx");
+            string output = Common.PathCombine(_outputPath, file + ".sfm");
+            string expected = Common.PathCombine(_expectedPath, file + ".sfm");
+
+            _usxToSfm.ConvertUsxToSFM(input, output);
+
+            FileAssert.AreEqual(expected, output, file + " test fails");
+        }
+
+        ///<summary>
+        ///FULL file compare
+        /// </summary>      
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void BM2()
+        {
+            const string file = "BM2";
+
+            string input = Common.PathCombine(_inputPath, file + ".usx");
+            string output = Common.PathCombine(_outputPath, file + ".sfm");
+            string expected = Common.PathCombine(_expectedPath, file + ".sfm");
+
+            _usxToSfm.ConvertUsxToSFM(input, output);
+
+            FileAssert.AreEqual(expected, output, file + " test fails");
+        }
     }
 }
