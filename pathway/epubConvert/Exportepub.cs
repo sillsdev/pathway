@@ -176,7 +176,8 @@ namespace SIL.PublishingSolution
 
                 isIncludeImage = GetIncludeImageStatus(projInfo.SelectedTemplateStyle);
 
-                //InsertBeforeAfterInXHTML(projInfo);
+                if (projInfo.ProjectInputType.ToLower() == "dictionary")
+                    InsertBeforeAfterInXHTML(projInfo);
 
                 _langFontDictionary = new Dictionary<string, string>();
                 _embeddedFonts = new Dictionary<string, EmbeddedFont>();
@@ -257,17 +258,17 @@ namespace SIL.PublishingSolution
                 // so we can't use it.)
                 // TODO: remove this line when TE provides valid XHTML output.
 
-                //if (langArray.Length > 0)
-                //{
-                //    Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html",
-                //                               string.Format(
-                //                                   "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'",
-                //                                   langArray[0], Common.GetTextDirection(langArray[0])));
-                //    Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html>",
-                //                               string.Format(
-                //                                   "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'>",
-                //                                   langArray[0], Common.GetTextDirection(langArray[0])));
-                //}
+                if (langArray.Length > 0)
+                {
+                    //Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html",
+                    //                           string.Format(
+                    //                               "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'",
+                    //                               langArray[0], Common.GetTextDirection(langArray[0])));
+                    Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "<html>",
+                                               string.Format(
+                                                   "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='{0}' dir='{1}'>",
+                                                   langArray[0], Common.GetTextDirection(langArray[0])));
+                }
 
                 ApplyXslt(preProcessor.ProcessedXhtml, _noXmlSpace);
                 // end EDB 10/22/2010
