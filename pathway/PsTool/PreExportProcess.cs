@@ -1707,6 +1707,7 @@ namespace SIL.Tool
                 }
 
             }
+            _reader.Close();
             return headerVariable;
         }
 
@@ -2650,6 +2651,7 @@ namespace SIL.Tool
                     }
                 }
             }
+            _reader.Close();
         }
 
         //public ArrayList GetReferenceList()
