@@ -2346,7 +2346,11 @@ namespace SIL.Tool
                     var atts = node.Attributes;
                     if (atts != null)
                     {
-                        return (atts["lang"].Value);
+                        if(atts["lang"] != null)
+                            return (atts["lang"].Value);
+                        else if(atts["xml:lang"] != null)
+                            return (atts["xml:lang"].Value);
+
                     }
                 }
             }
