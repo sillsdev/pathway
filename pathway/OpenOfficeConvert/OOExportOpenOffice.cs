@@ -707,7 +707,8 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    outputFileName = Common.PathCombine(outputPath, projInfo.DictionaryOutputName);
+                    string inputFileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
+                    outputFileName = Common.PathCombine(outputPath, inputFileName);
                     Common.OdType = Common.OdtType.OdtNoMaster; // to all the Page property process
                 }
             }
