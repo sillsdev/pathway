@@ -712,11 +712,12 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                if (InputType == "Scripture")
+                int outputFolderLength = OutputFolder.Length;
+                if(OutputFolder.Substring(outputFolderLength-2, 2) != "\\")
                     OutputFolder = OutputFolder + "\\";
 
-                Directory.CreateDirectory(OutputFolder);
-                Directory.Delete(OutputFolder);
+                if(!Directory.Exists(OutputFolder))
+                    Directory.CreateDirectory(OutputFolder);
             }
             catch (Exception)
             {
@@ -743,10 +744,9 @@ namespace SIL.PublishingSolution
             DialogResult = DialogResult.Yes;
             if (Text.Contains("Default"))
                 SaveDefaultProperty(this);
-
-            //_publicationName = Path.GetFileName(OutputFolder);
+            
             OutputFolder = Path.GetDirectoryName(OutputFolder);
-            DictionaryName = _publicationName;
+            DictionaryName = OutputFolder;
             Common.TimeStarted = DateTime.Now;
             _settingsHelper.ClearValues();
 
