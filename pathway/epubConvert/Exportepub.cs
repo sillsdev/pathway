@@ -197,7 +197,7 @@ namespace SIL.PublishingSolution
                 inProcess.PerformStep();
                 //_postscriptLanguage.SaveCache();
                 // XHTML preprocessing
-                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "&nbsp;", "&#x2007;");
+                Common.StreamReplaceInFile(preProcessor.ProcessedXhtml, "&nbsp;", Common.NonBreakingSpace);
                 preProcessor.GetTempFolderPath();
                 preProcessor.ImagePreprocess();
                 preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
@@ -616,7 +616,7 @@ namespace SIL.PublishingSolution
                 projInfo.DefaultXhtmlFileWithPath = Path.Combine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
                 AfterBeforeProcessEpub afterBeforeProcessReversal = new AfterBeforeProcessEpub();
                 afterBeforeProcessReversal.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
-                Common.StreamReplaceInFile(projInfo.DefaultXhtmlFileWithPath, "&nbsp;", "&#x2007;");
+                Common.StreamReplaceInFile(projInfo.DefaultXhtmlFileWithPath, "&nbsp;", Common.NonBreakingSpace);
                 projInfo.DefaultXhtmlFileWithPath = originalDefaultXhtmlFileName;
             }
         }

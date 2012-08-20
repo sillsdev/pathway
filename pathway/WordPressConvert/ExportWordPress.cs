@@ -149,7 +149,7 @@ namespace SIL.PublishingSolution
             AfterBeforeProcessEpub afterBeforeProcess = new AfterBeforeProcessEpub();
             afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
-            Common.StreamReplaceInFile(projInfo.DefaultXhtmlFileWithPath, "&nbsp;", "&#x2007;");
+            Common.StreamReplaceInFile(projInfo.DefaultXhtmlFileWithPath, "&nbsp;", Common.NonBreakingSpace);
 
             RemovePagedStylesFromCss(cssFilePath);
             //if (projInfo.IsReversalExist)
