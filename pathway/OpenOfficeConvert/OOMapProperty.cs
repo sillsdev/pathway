@@ -426,7 +426,7 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                _IDProperty["font-size"] = "150%";
+                _IDProperty["font-size"] = "75%";
             }
         }
 
