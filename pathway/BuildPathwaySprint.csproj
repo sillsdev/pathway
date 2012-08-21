@@ -171,6 +171,47 @@
     <PlatformTarget>x86</PlatformTarget>
     <Status>Testing</Status>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Coporate7EPUB|AnyCPU'">
+    <OutputPath>bin\Coporate7EPUB\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Edition>EPUB</Edition>
+    <ProductName>Pathway $(Edition)</ProductName>
+    <ConfTag>Pw7</ConfTag>
+    <Status/>
+    <CodeAnalysisLogFile>bin\Corporate7BTE\BuildPathway.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Coporate7EPUB|x86'">
+    <OutputPath>bin\x86\Coporate7EPUB\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>EPUB</Edition>
+    <ProductName>Pathway $(Edition)</ProductName>
+    <ConfTag>Pw7</ConfTag>
+    <Status/>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisLogFile>bin\x86\Corporate7BTE\BuildPathway.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
   
   <ItemGroup>
     <Reference Include="BuildTasks, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
@@ -185,7 +226,7 @@
   <Target Name="MyTest">
     <Message Text="Path: $(MSBuildToolsPath)" Importance="high" />
   </Target>
-  <Target Name="Build">
+  <Target Name="BuildAll">
     <CallTarget Targets="Clean"/>
     <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>
     <CallTarget Targets="Corporate7BTE"/>
@@ -208,7 +249,7 @@
     <CallTarget Targets="CorporateSE606"/>
     <CallTarget Targets="ReleaseBTE606"/>
   </Target>
-  <Target Name="Build7">
+  <Target Name="Build">
     <CallTarget Targets="Clean"/>
     <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>
     <CallTarget Targets="Corporate7BTE"/>
@@ -290,6 +331,12 @@
     <Message Text="Status: $(Status)" Importance="high" />
     <MSBuild Projects="PublishingSolution.sln" Targets="Build"
       Properties="Configuration=Corporate7BTE;Platform=$(Platform)"/>
+    <Message Text="Status: $(Status)" Importance="high" />
+  </Target>
+  <Target Name="Corporate7EPUB">
+    <Message Text="Status: $(Status)" Importance="high" />
+    <MSBuild Projects="PublishingSolution.sln" Targets="Build"
+      Properties="Configuration=Corporate7EPUB;Platform=$(Platform)"/>
     <Message Text="Status: $(Status)" Importance="high" />
   </Target>
   <Target Name="Corporate7SE">

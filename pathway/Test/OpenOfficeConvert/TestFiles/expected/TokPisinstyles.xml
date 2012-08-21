@@ -111,7 +111,7 @@
       <style:text-properties fo:language="none" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumberAlternate_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="27pt" style:font-size-complex="27pt" style:text-position="super 55%" fo:language="none" fo:country="none" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="13.5pt" style:font-size-complex="13.5pt" style:text-position="super 55%" fo:language="none" fo:country="none" />
     </style:style>
     <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="hide" style:family="paragraph" style:parent-style-name="Heading_20_9" style:class="text">
@@ -194,7 +194,7 @@
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="75%" style:text-position="super 55%" />
     </style:style>
     <style:style style:name="VerseNumberAlternate" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="150%" style:text-position="super 55%" />
+      <style:text-properties fo:font-family="Times New Roman" fo:font-size="75%" style:text-position="super 55%" />
     </style:style>
     <style:style style:name="h1" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:padding-top="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
