@@ -4024,7 +4024,7 @@ namespace SIL.PublishingSolution
                         cTool.tsDelete_Click(sender, null);
                     }
                 }
-                else if (e.KeyCode == Keys.F1)
+                else if (e.KeyCode == Keys.F1 && !Common.IsUnixOS())
                 {
                     CallHelp();
                 }
@@ -4046,9 +4046,19 @@ namespace SIL.PublishingSolution
         private void CallHelp()
         {
             Common.PathwayHelpSetup();
-            Common.HelpProv.SetHelpNavigator(cTool, HelpNavigator.Topic);
-            Common.HelpProv.SetHelpKeyword(cTool, "Overview.htm");
-            SendKeys.Send("{F1}");
+            if (Common.IsUnixOS())
+            {
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = "chmsee";
+                startInfo.Arguments = Common.HelpProv.HelpNamespace;
+                Process.Start(startInfo);
+            }
+            else
+            {
+                Common.HelpProv.SetHelpNavigator(cTool, HelpNavigator.Topic);
+                Common.HelpProv.SetHelpKeyword(cTool, "Overview.htm");
+                SendKeys.Send("{F1}");
+            }
         }
 
         public void AboutDialog()
