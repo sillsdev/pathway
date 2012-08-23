@@ -712,9 +712,12 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                int outputFolderLength = OutputFolder.Length;
-                if(OutputFolder.Substring(outputFolderLength-2, 2) != "\\")
-                    OutputFolder = OutputFolder + "\\";
+                if (!Common.IsUnixOS())
+                {
+                    int outputFolderLength = OutputFolder.Length;
+                    if (OutputFolder.Substring(outputFolderLength - 2, 2) != "\\")
+                        OutputFolder = OutputFolder + "\\";
+                }
 
                 if(!Directory.Exists(OutputFolder))
                     Directory.CreateDirectory(OutputFolder);
@@ -745,7 +748,11 @@ namespace SIL.PublishingSolution
             if (Text.Contains("Default"))
                 SaveDefaultProperty(this);
             
-            OutputFolder = Path.GetDirectoryName(OutputFolder);
+            if(!Common.IsUnixOS())
+            {
+                OutputFolder = Path.GetDirectoryName(OutputFolder);
+            }
+
             DictionaryName = OutputFolder;
             Common.TimeStarted = DateTime.Now;
             _settingsHelper.ClearValues();
