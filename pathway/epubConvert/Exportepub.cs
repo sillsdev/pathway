@@ -1367,30 +1367,35 @@ namespace SIL.PublishingSolution
                     continue;
                 }
                 string dest = Common.PathCombine(contentFolder, Path.GetFileName(embeddedFont.Filename));
-                File.Copy(embeddedFont.Filename, dest, true);
-                if (IncludeFontVariants)
+                if (embeddedFont.Filename.ToString() != string.Empty && File.Exists(embeddedFont.Filename))
                 {
-                    // italic
-                    if (embeddedFont.HasItalic && embeddedFont.ItalicFilename.Trim().Length > 0 && embeddedFont.ItalicFilename != embeddedFont.Filename)
+                    File.Copy(embeddedFont.Filename, dest, true);
+                    
+                    if (IncludeFontVariants)
                     {
-                        dest = Common.PathCombine(contentFolder, Path.GetFileName(embeddedFont.ItalicFilename));
-                        if (!File.Exists(dest))
+                        // italic
+                        if (embeddedFont.HasItalic && embeddedFont.ItalicFilename.Trim().Length > 0 &&
+                            embeddedFont.ItalicFilename != embeddedFont.Filename)
                         {
-                            File.Copy(embeddedFont.ItalicFilename, dest, true);
+                            dest = Common.PathCombine(contentFolder, Path.GetFileName(embeddedFont.ItalicFilename));
+                            if (!File.Exists(dest))
+                            {
+                                File.Copy(embeddedFont.ItalicFilename, dest, true);
+                            }
                         }
-                    }
-                    // bold
-                    if (embeddedFont.HasBold && embeddedFont.BoldFilename.Trim().Length > 0 && embeddedFont.BoldFilename != embeddedFont.Filename)
-                    {
-                        dest = Common.PathCombine(contentFolder, Path.GetFileName(embeddedFont.BoldFilename));
-                        if (!File.Exists(dest))
+                        // bold
+                        if (embeddedFont.HasBold && embeddedFont.BoldFilename.Trim().Length > 0 &&
+                            embeddedFont.BoldFilename != embeddedFont.Filename)
                         {
-                            File.Copy(embeddedFont.BoldFilename,
-                                      dest, true);
+                            dest = Common.PathCombine(contentFolder, Path.GetFileName(embeddedFont.BoldFilename));
+                            if (!File.Exists(dest))
+                            {
+                                File.Copy(embeddedFont.BoldFilename,
+                                          dest, true);
+                            }
                         }
                     }
                 }
-
             }
             // clean up
             if (nonSILFonts.Count > 0)

@@ -77,108 +77,179 @@ namespace SIL.PublishingSolution
         public bool Export(PublicationInformation projInfo)
         {
             bool success;
+            var inProcess = new InProcess(0, 6);
             try
             {
                 var curdir = Environment.CurrentDirectory;
                 var myCursor = Cursor.Current;
                 Cursor.Current = Cursors.WaitCursor;
-                var inProcess = new InProcess(0, 6);
+                
                 inProcess.Show();
                 inProcess.PerformStep();
-                string exportGoBiblePath = string.Empty;
-                exportGoBiblePath = Path.GetDirectoryName(projInfo.DefaultCssFileWithPath);
-                processFolder = exportGoBiblePath;
-                CreateCollectionsTextFile(exportGoBiblePath);
+                string exportGoBibleInputPath = string.Empty;
+                exportGoBibleInputPath = Path.GetDirectoryName(projInfo.DefaultCssFileWithPath);
+                processFolder = exportGoBibleInputPath;
+                CreateCollectionsTextFile(exportGoBibleInputPath);
                 var iconFullName = Common.FromRegistry(Common.PathCombine("GoBible/GoBibleCore", "Icon.png"));
                 var iconDirectory = Path.GetDirectoryName(iconFullName);
                 _iconFile = Path.GetFileName(iconFullName);
                 const bool overwrite = true;
-                if (iconDirectory != exportGoBiblePath)
-                    File.Copy(iconFullName, Path.Combine(exportGoBiblePath, _iconFile), overwrite);
-
-
+                if (iconDirectory != exportGoBibleInputPath)
+                    File.Copy(iconFullName, Path.Combine(exportGoBibleInputPath, _iconFile), overwrite);
+                
                 Param.LoadSettings();
                 Param.SetValue(Param.InputType, "Scripture");
                 Param.LoadSettings();
                 string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
                 Dictionary<string, string> mobilefeature = Param.GetItemsAsDictionary("//stylePick/styles/mobile/style[@name='" + layout + "']/styleProperty");
                 string languageSelection = string.Empty;
-
+                inProcess.PerformStep();
                 if (mobilefeature.ContainsKey("Language") && mobilefeature["Language"] != null)
                 {
                     languageSelection = mobilefeature["Language"].ToString();
                 }
 
                 string goBibleFullPath = Common.FromRegistry("GoBible");
-                string goBibleCreatorPath = Path.Combine(goBibleFullPath, "GoBibleCore");
 
+                string tempGoBibleCreatorPath = GoBibleCreatorTempDirectory(goBibleFullPath);
+
+                string goBibleCreatorPath = Path.Combine(tempGoBibleCreatorPath, "GoBibleCore");
+                inProcess.PerformStep();
                 string languageLocationPath = Path.Combine(goBibleFullPath, "User Interface");
                 languageLocationPath = Path.Combine(languageLocationPath, languageSelection);
                 string[] filePaths = Directory.GetFiles(languageLocationPath, "*.properties");
-
                 goBibleCreatorPath = Path.Combine(goBibleCreatorPath, "ui.properties");
 
-                if (File.Exists(filePaths[0]))
-                    File.Copy(filePaths[0], goBibleCreatorPath, true);
+                UIPropertiesCopyToTempFolder(goBibleCreatorPath, filePaths);
 
-                BuildApplication();
+                BuildApplication(tempGoBibleCreatorPath);
                 success = true;
                 inProcess.PerformStep();
                 inProcess.Close();
                 Cursor.Current = myCursor;
+                inProcess.PerformStep();
+                string jarFile = Path.Combine(processFolder, GetInfo(Param.Title) + ".jar");
 
-                string jadFile = Path.Combine(processFolder, GetInfo(Param.Title) + ".jad");
-
-                if (File.Exists(jadFile))
+                if (File.Exists(jarFile))
                 {
                     // Failed to send the .jar to a bluetooth device. Tell the user to do it manually.
-                    string msg = string.Format("Please copy the file {0} to your phone", jadFile);
+                    string msg = string.Format("Please copy the file {0} to your phone", jarFile);
                     MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
-                if (File.Exists(Path.Combine(exportGoBiblePath, _iconFile)))
+                else
                 {
-                    File.Delete(Path.Combine(exportGoBiblePath, _iconFile));
+                    MessageBox.Show("Failed Exporting GoBible Process.", "Go Bible Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                var outputFiles = Directory.GetFiles(processFolder);
-                foreach (var outputFile in outputFiles)
-                {
-                    try
-                    {
-                        // Did we modify this file during our export? If so, delete it
-                        if (outputFile.EndsWith(".xhtml"))
-                        {
-                            File.Delete(outputFile);
-                        }
-                        if (outputFile.EndsWith(".css"))
-                        {
-                            File.Delete(outputFile);
-                        }
-                        if (outputFile.EndsWith(".tmp"))
-                        {
-                            File.Delete(outputFile);
-                        }
-                        // delete the Scripture.de / Dictionary.de file as well
-                        if (outputFile.EndsWith(".de"))
-                        {
-                            File.Delete(outputFile);
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        // problem with this file - just continue with the next one
-                        continue;
-                    }
-
-                }
+                DeleteTempFiles(exportGoBibleInputPath);
+                Common.DeleteDirectory(tempGoBibleCreatorPath);
             }
             catch (Exception ex)
             {
                 var msg = ex.Message;
                 success = false;
+                inProcess.PerformStep();
+                inProcess.Close();
             }
             return success;
+        }
+
+        private static void UIPropertiesCopyToTempFolder(string goBibleCreatorPath, string[] filePaths)
+        {
+            try
+            {
+                if (File.Exists(filePaths[0]))
+                    File.Copy(filePaths[0], goBibleCreatorPath, true);
+            }
+            catch
+            {
+            }
+        }
+
+        private void DeleteTempFiles(string exportGoBibleInputPath)
+        {
+            if (File.Exists(Path.Combine(exportGoBibleInputPath, _iconFile)))
+            {
+                File.Delete(Path.Combine(exportGoBibleInputPath, _iconFile));
+            }
+
+            var outputFiles = Directory.GetFiles(processFolder);
+            foreach (var outputFile in outputFiles)
+            {
+                try
+                {
+                    // Did we modify this file during our export? If so, delete it
+                    if (outputFile.EndsWith(".xhtml"))
+                    {
+                        File.Delete(outputFile);
+                    }
+                    if (outputFile.EndsWith(".css"))
+                    {
+                        File.Delete(outputFile);
+                    }
+                    if (outputFile.EndsWith(".tmp"))
+                    {
+                        File.Delete(outputFile);
+                    }
+                    // delete the Scripture.de / Dictionary.de file as well
+                    if (outputFile.EndsWith(".de"))
+                    {
+                        File.Delete(outputFile);
+                    }
+                }
+                catch (Exception)
+                {
+                    // problem with this file - just continue with the next one
+                    continue;
+                }
+            }
+        }
+
+        private string GoBibleCreatorTempDirectory(string goBibleFullPath)
+        {
+            var goBibleDirectoryName = Path.GetFileNameWithoutExtension(goBibleFullPath);
+            var tempFolder = Path.GetTempPath();
+            var folder = Path.Combine(tempFolder, goBibleDirectoryName);
+            if (Directory.Exists(folder))
+                Directory.Delete(folder, true);
+
+            CopyGoBibleCreatorFolderToTemp(goBibleFullPath, folder);
+
+            return folder;
+        }
+
+        private void CopyGoBibleCreatorFolderToTemp(string sourceFolder, string destFolder)
+        {
+            if (Directory.Exists(destFolder))
+            {
+                Common.DeleteDirectory(destFolder);
+            }
+            Directory.CreateDirectory(destFolder);
+            string[] files = Directory.GetFiles(sourceFolder);
+            try
+            {
+                foreach (string file in files)
+                {
+                    string name = Path.GetFileName(file);
+                    string dest = Common.PathCombine(destFolder, name);
+                    File.Copy(file, dest);
+                }
+
+                string[] folders = Directory.GetDirectories(sourceFolder);
+                foreach (string folder in folders)
+                {
+                    string name = Path.GetFileName(folder);
+                    string dest = Common.PathCombine(destFolder, name);
+                    if (name != "User Interface")
+                    {
+                        CopyGoBibleCreatorFolderToTemp(folder, dest);
+                    }
+                }
+            }
+            catch
+            {
+                
+            }
         }
 
         private void CreateCollectionsTextFile(string exportGoBiblePath)
@@ -268,12 +339,11 @@ namespace SIL.PublishingSolution
             return DuplicateBooks.Count > 0;
         }
 
-        protected void BuildApplication()
+        protected void BuildApplication(string goBibleCreatorPath)
         {
             const string Creator = "GoBibleCreator.jar";
             const string prog = "java";
-            var creatorPath = Common.PathCombine("GoBible", Creator);
-            var creatorFullPath = Common.FromRegistry(creatorPath);
+            var creatorFullPath = Path.Combine(goBibleCreatorPath, Creator);
             var progFolder = SubProcess.GetLocation(prog);
             var progFullName = Common.PathCombine(progFolder, prog);
             if (progFullName.EndsWith(".exe"))
