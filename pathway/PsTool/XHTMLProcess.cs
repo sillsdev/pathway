@@ -715,7 +715,15 @@ namespace SIL.PublishingSolution
                 StringBuilder footnoteFormat = new StringBuilder();
                 if (outputType == Common.OutputType.ODT.ToString())
                 {
-                    footnoteFormat.Append("<text:span text:style-name=\"" + _characterName + "\">" + Common.ReplaceSymbolToText(content) + "</text:span>");
+                    if (_characterName.IndexOf("NoteTargetReference") == 0 && footnoteContent.Length > 0)
+                    {
+                        footnoteFormat.Append(Common.ReplaceSymbolToText(content) + "</text:span>");
+                    }
+                    else
+                    {
+                        footnoteFormat.Append("<text:span text:style-name=\"" + _characterName + "\">" + Common.ReplaceSymbolToText(content) + "</text:span>");
+                    }
+                    //footnoteFormat.Append("<text:span text:style-name=\"" + _characterName + "\">" + Common.ReplaceSymbolToText(content) + "</text:span>");
                 }
                 else if (outputType == Common.OutputType.XETEX.ToString())
                 {
@@ -816,7 +824,16 @@ namespace SIL.PublishingSolution
                     }
                     if (outputType == Common.OutputType.ODT.ToString())
                     {
-                        footnoteContent.Append("<text:span text:style-name=\"" + footerMarkerClassName + "\">" + footnoteText + "</text:span>");
+                        if (!IdAllClass.ContainsKey("NoteTargetReference"))
+                        {
+                            footnoteContent.Append("<text:span text:style-name=\"" + footerMarkerClassName + "\">" + footnoteText + "</text:span>");
+                        }
+                        else
+                        {
+                            footnoteContent.Append("<text:span text:style-name=\"" + footerMarkerClassName + "\">");
+                        }
+                        //footnoteContent.Append("<text:span text:style-name=\"" + footerMarkerClassName + "\">" + footnoteText + "</text:span>");
+                        
                     }
                     else
                     {
